@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Solid background gradient so the icon is fully maskable -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#6366f1"/>
+      <stop offset="1" stop-color="#10b981"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" fill="url(#bg)"/>
+  <!-- "Wand" stylized — a circle (wand head) + diagonal line (wand body) -->
+  <g transform="translate(256 256) rotate(-45)">
+    <!-- wand body -->
+    <rect x="-14" y="-150" width="28" height="280" rx="14" fill="#ffffff"/>
+    <!-- wand head (rounded square with sparkle) -->
+    <rect x="-50" y="-220" width="100" height="100" rx="22" fill="#ffffff"/>
+    <!-- inner spark -->
+    <g transform="translate(0 -170)" fill="#6366f1">
+      <path d="M0,-26 L8,-8 L26,0 L8,8 L0,26 L-8,8 L-26,0 L-8,-8 Z"/>
+    </g>
+    <!-- tip sparkles -->
+    <circle cx="0" cy="170" r="6" fill="#ffffff" opacity="0.9"/>
+    <circle cx="-30" cy="180" r="4" fill="#ffffff" opacity="0.7"/>
+    <circle cx="30" cy="180" r="4" fill="#ffffff" opacity="0.7"/>
+  </g>
+</svg>

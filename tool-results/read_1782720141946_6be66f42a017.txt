@@ -1,0 +1,912 @@
+     1→'use client'
+     2→
+     3→import * as React from 'react'
+     4→import Link from 'next/link'
+     5→import { Search, Sparkles, Github, Wand2, Heart, Star, ChevronLeft, ChevronRight, Shuffle, Package, Keyboard, ArrowDownUp, Loader2 } from 'lucide-react'
+     6→import { toast } from 'sonner'
+     7→import { Input } from '@/components/ui/input'
+     8→import { Button } from '@/components/ui/button'
+     9→import { Badge } from '@/components/ui/badge'
+    10→import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+    11→import { ThemeToggle } from '@/components/theme-toggle'
+    12→import { ReducedMotionToggle } from '@/components/reduced-motion-toggle'
+    13→import { UserMenu } from '@/components/user-menu'
+    14→import { EffectCard } from '@/components/effect-card'
+    15→import { BundleDrawer } from '@/components/bundle-drawer'
+    16→import { CopyHistoryDropdown } from '@/components/copy-history-dropdown'
+    17→import { RecentlyViewedRail } from '@/components/recently-viewed-rail'
+    18→import { CommandPalette, useCommandPalette } from '@/components/command-palette'
+    19→import { ShortcutsHelpButton, useShortcutsHelp } from '@/components/shortcuts-help'
+    20→import { useFavorites } from '@/hooks/use-favorites'
+    21→import { useBundle } from '@/hooks/use-bundle'
+    22→import { CATEGORIES, EFFECTS, type EffectCategory, type Effect } from '@/lib/effects'
+    23→import { cn } from '@/lib/utils'
+    24→
+    25→type Filter = 'All' | 'Featured' | 'Favorites' | EffectCategory
+    26→type Sort = 'default' | 'az' | 'za' | 'featured'
+    27→
+    28→const PAGE_SIZE = 24
+    29→
+    30→/**
+    31→ * Validate that a string is a recognized filter value. Used when reading
+    32→ * the `?filter=` query param so we don't accept arbitrary input.
+    33→ */
+    34→function parseFilter(value: string | null): Filter | null {
+    35→  if (!value) return null
+    36→  if (value === 'All' || value === 'Featured' || value === 'Favorites') return value
+    37→  if ((CATEGORIES as string[]).includes(value)) return value as EffectCategory
+    38→  return null
+    39→}
+    40→
+    41→/**
+    42→ * Validate the `?sort=` query param. Only the 4 known sort modes are accepted;
+    43→ * anything else falls back to 'default'.
+    44→ */
+    45→function parseSort(value: string | null): Sort {
+    46→  if (value === 'az' || value === 'za' || value === 'featured') return value
+    47→  return 'default'
+    48→}
+    49→
+    50→export default function Home() {
+    51→  const [query, setQuery] = React.useState('')
+    52→  // Initial filter is set from ?filter= on first client mount (see below).
+    53→  const [filter, setFilter] = React.useState<Filter>('All')
+    54→  const [sort, setSort] = React.useState<Sort>('default')
+    55→  const [page, setPage] = React.useState(1)
+    56→  const [isRolling, setIsRolling] = React.useState(false)
+    57→  const [showSweep, setShowSweep] = React.useState(false)
+    58→  const [popKey, setPopKey] = React.useState(0)
+    59→  const [bundleOpen, setBundleOpen] = React.useState(false)
+    60→  const { favorites } = useFavorites()
+    61→  const { count: bundleCount } = useBundle()
+    62→  const { open: openShortcuts } = useShortcutsHelp()
+    63→  const { open: openCommandPalette } = useCommandPalette()
+    64→  const searchInputRef = React.useRef<HTMLInputElement>(null)
+    65→  const gridTopRef = React.useRef<HTMLDivElement>(null)
+    66→  const rollTimerRef = React.useRef<ReturnType<typeof setInterval> | null>(null)
+    67→  // Ref indirection so the global keyboard / event listeners (mounted once
+    68→  // with [] deps) always call the latest `surprise` function instead of a
+    69→  // stale closure from first render.
+    70→  const surpriseRef = React.useRef<() => void>(() => {})
+    71→
+    72→  /* ---------------- AI search mode ----------------
+    73→   * When aiMode is ON, the search bar switches from substring matching
+    74→   * to natural-language semantic search via /api/ai/search. The client
+    75→   * pre-filters the catalog down to a candidate pool (substring match
+    76→   * across name + tags + category + description, capped at 80) and
+    77→   * sends that pool + the query to the API. The LLM ranks the
+    78→   * candidates and returns a JSON array of IDs; we display those
+    79→   * effects in ranked order, ignoring the normal sort + pagination.
+    80→   */
+    81→  const [aiMode, setAiMode] = React.useState(false)
+    82→  const [aiLoading, setAiLoading] = React.useState(false)
+    83→  const [aiRankedIds, setAiRankedIds] = React.useState<string[] | null>(null)
+    84→  const aiRequestIdRef = React.useRef(0)
+    85→
+    86→  // On first client mount, read ?filter=, ?q=, and ?sort= from the URL so
+    87→  // deep-links from the detail page's "Browse all in category" button land on
+    88→  // the right tab, and so shared search URLs work. We use this instead of
+    89→  // useSearchParams() to avoid the Suspense boundary requirement that hook
+    90→  // imposes during static rendering.
+    91→  React.useEffect(() => {
+    92→    if (typeof window === 'undefined') return
+    93→    const params = new URLSearchParams(window.location.search)
+    94→    const f = parseFilter(params.get('filter'))
+    95→    if (f && f !== 'All') setFilter(f)
+    96→    const q = params.get('q')
+    97→    if (q) setQuery(q)
+    98→    const s = parseSort(params.get('sort'))
+    99→    if (s !== 'default') setSort(s)
+   100→  }, [])
+   101→
+   102→  // Keep the URL in sync with the filter, query, and sort, so the user can
+   103→  // share / bookmark a particular view (e.g. /library?filter=Buttons&q=neon&sort=az).
+   104→  React.useEffect(() => {
+   105→    if (typeof window === 'undefined') return
+   106→    const params = new URLSearchParams(window.location.search)
+   107→    if (filter === 'All') {
+   108→      params.delete('filter')
+   109→    } else {
+   110→      params.set('filter', filter)
+   111→    }
+   112→    const trimmed = query.trim()
+   113→    if (trimmed) {
+   114→      params.set('q', trimmed)
+   115→    } else {
+   116→      params.delete('q')
+   117→    }
+   118→    if (sort === 'default') {
+   119→      params.delete('sort')
+   120→    } else {
+   121→      params.set('sort', sort)
+   122→    }
+   123→    const qs = params.toString()
+   124→    const url = qs ? `/library?${qs}` : '/library'
+   125→    window.history.replaceState(null, '', url)
+   126→  }, [filter, query, sort])
+   127→
+   128→  // Global keyboard shortcuts on the home page:
+   129→  //   /  → focus the search input
+   130→  //   b  → open the bundle drawer
+   131→  //   ?  → open the shortcuts help dialog
+   132→  // We ignore keypresses while the user is typing in any input/textarea,
+   133→  // or while a meta/ctrl/alt modifier is held (so we don't hijack browser
+   134→  // shortcuts like cmd+b).
+   135→  React.useEffect(() => {
+   136→    function isTypingTarget(t: EventTarget | null): boolean {
+   137→      if (!(t instanceof HTMLElement)) return false
+   138→      const tag = t.tagName
+   139→      return tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || t.isContentEditable
+   140→    }
+   141→    function onKey(e: KeyboardEvent) {
+   142→      // Cmd+K / Ctrl+K → open command palette (handled by the palette itself,
+   143→      // but we also intercept here so it doesn't conflict with the `/` shortcut).
+   144→      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+   145→        e.preventDefault()
+   146→        openCommandPalette()
+   147→        return
+   148→      }
+   149→      if (e.metaKey || e.ctrlKey || e.altKey) return
+   150→      if (isTypingTarget(e.target)) {
+   151→        // Allow Escape to blur the search input.
+   152→        if (e.key === 'Escape' && document.activeElement === searchInputRef.current) {
+   153→          searchInputRef.current?.blur()
+   154→        }
+   155→        return
+   156→      }
+   157→      if (e.key === '/') {
+   158→        e.preventDefault()
+   159→        searchInputRef.current?.focus()
+   160→        searchInputRef.current?.select()
+   161→      } else if (e.key.toLowerCase() === 'b') {
+   162→        e.preventDefault()
+   163→        // Toggle the drawer so `b` works as both "open" and "close".
+   164→        setBundleOpen((v) => !v)
+   165→      }
+   166→    }
+   167→    // Listen for events from the command palette's action items.
+   168→    function onOpenBundle() {
+   169→      setBundleOpen(true)
+   170→    }
+   171→    function onSurpriseMe() {
+   172→      // Use the ref so we always invoke the latest `surprise` callback.
+   173→      surpriseRef.current()
+   174→    }
+   175→    window.addEventListener('keydown', onKey)
+   176→    window.addEventListener('hoverlab:open-bundle', onOpenBundle)
+   177→    window.addEventListener('hoverlab:surprise-me', onSurpriseMe)
+   178→    return () => {
+   179→      window.removeEventListener('keydown', onKey)
+   180→      window.removeEventListener('hoverlab:open-bundle', onOpenBundle)
+   181→      window.removeEventListener('hoverlab:surprise-me', onSurpriseMe)
+   182→    }
+   183→    // eslint-disable-next-line react-hooks/exhaustive-deps
+   184→  }, [])
+   185→
+   186→  const filtered = React.useMemo(() => {
+   187→    const q = query.trim().toLowerCase()
+   188→    const matched = EFFECTS.filter((e) => {
+   189→      const matchesCategory =
+   190→        filter === 'All' ||
+   191→        filter === 'Favorites' ||
+   192→        filter === 'Featured' ||
+   193→        e.category === filter
+   194→      const matchesFavorites =
+   195→        filter !== 'Favorites' || favorites.has(e.id)
+   196→      const matchesFeatured =
+   197→        filter !== 'Featured' || e.featured === true
+   198→      const matchesQuery =
+   199→        !q ||
+   200→        e.name.toLowerCase().includes(q) ||
+   201→        e.description.toLowerCase().includes(q) ||
+   202→        e.id.toLowerCase().includes(q) ||
+   203→        e.category.toLowerCase().includes(q) ||
+   204→        (e.tags ?? []).some((t) => t.toLowerCase().includes(q))
+   205→      return matchesCategory && matchesFavorites && matchesFeatured && matchesQuery
+   206→    })
+   207→
+   208→    // Apply sort. 'default' preserves the original EFFECTS order (which is
+   209→    // grouped by category in the source file — a deliberate curation choice).
+   210→    if (sort === 'az') {
+   211→      matched.sort((a, b) => a.name.localeCompare(b.name))
+   212→    } else if (sort === 'za') {
+   213→      matched.sort((a, b) => b.name.localeCompare(a.name))
+   214→    } else if (sort === 'featured') {
+   215→      // Featured effects first, then the rest in default order.
+   216→      matched.sort((a, b) => {
+   217→        const af = a.featured ? 0 : 1
+   218→        const bf = b.featured ? 0 : 1
+   219→        if (af !== bf) return af - bf
+   220→        return 0
+   221→      })
+   222→    }
+   223→    return matched
+   224→  }, [query, filter, sort, favorites])
+   225→
+   226→  // Reset to first page whenever the filter / query / sort / favorites change.
+   227→  React.useEffect(() => {
+   228→    setPage(1)
+   229→  }, [query, filter, sort, favorites])
+   230→
+   231→  /* ---------------- AI search fetch ----------------
+   232→   * When AI mode is ON and the user types, debounce 400ms then call
+   233→   * /api/ai/search with the query + a client-side candidate pool.
+   234→   * Race-condition guard: each request gets an incrementing ID; only
+   235→   * the response matching the latest ID is applied to state.
+   236→   */
+   237→  React.useEffect(() => {
+   238→    if (!aiMode) {
+   239→      setAiRankedIds(null)
+   240→      setAiLoading(false)
+   241→      return
+   242→    }
+   243→    const q = query.trim()
+   244→    if (!q) {
+   245→      setAiRankedIds(null)
+   246→      setAiLoading(false)
+   247→      return
+   248→    }
+   249→
+   250→    setAiLoading(true)
+   251→    const requestId = ++aiRequestIdRef.current
+   252→    const timer = setTimeout(async () => {
+   253→      // Build a candidate pool: substring match across name, id, category,
+   254→      // description, tags — same fields the normal search uses. Cap at 80
+   255→      // to keep the LLM prompt bounded.
+   256→      const ql = q.toLowerCase()
+   257→      const candidates = EFFECTS.filter(
+   258→        (e) =>
+   259→          e.name.toLowerCase().includes(ql) ||
+   260→          e.id.toLowerCase().includes(ql) ||
+   261→          e.category.toLowerCase().includes(ql) ||
+   262→          e.description.toLowerCase().includes(ql) ||
+   263→          (e.tags ?? []).some((t) => t.toLowerCase().includes(ql)),
+   264→      )
+   265→        .slice(0, 80)
+   266→        .map((e) => ({
+   267→          id: e.id,
+   268→          name: e.name,
+   269→          category: e.category,
+   270→          description: e.description,
+   271→        }))
+   272→
+   273→      // If no substring candidates, send the full pool of featured effects
+   274→      // as a fallback so the LLM still has something semantic to work with.
+   275→      const pool =
+   276→        candidates.length > 0
+   277→          ? candidates
+   278→          : EFFECTS.filter((e) => e.featured)
+   279→              .slice(0, 80)
+   280→              .map((e) => ({
+   281→                id: e.id,
+   282→                name: e.name,
+   283→                category: e.category,
+   284→                description: e.description,
+   285→              }))
+   286→
+   287→      try {
+   288→        const res = await fetch('/api/ai/search', {
+   289→          method: 'POST',
+   290→          headers: { 'Content-Type': 'application/json' },
+   291→          body: JSON.stringify({ query: q, candidates: pool }),
+   292→        })
+   293→        if (!res.ok) {
+   294→          throw new Error(`HTTP ${res.status}`)
+   295→        }
+   296→        const data = (await res.json()) as { ids?: string[] }
+   297→        // Only apply if this is still the latest request.
+   298→        if (requestId === aiRequestIdRef.current) {
+   299→          setAiRankedIds(Array.isArray(data.ids) ? data.ids : [])
+   300→          setAiLoading(false)
+   301→        }
+   302→      } catch (err) {
+   303→        console.error('[ai-search] fetch failed:', err)
+   304→        if (requestId === aiRequestIdRef.current) {
+   305→          setAiRankedIds([])
+   306→          setAiLoading(false)
+   307→          toast.error('AI search failed', {
+   308→            description: 'Falling back to regular search — try again.',
+   309→          })
+   310→        }
+   311→      }
+   312→    }, 400)
+   313→
+   314→    return () => clearTimeout(timer)
+   315→  }, [aiMode, query])
+   316→
+   317→  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE))
+   318→  const safePage = Math.min(page, totalPages)
+   319→  const pageStart = (safePage - 1) * PAGE_SIZE
+   320→  const pageEnd = Math.min(pageStart + PAGE_SIZE, filtered.length)
+   321→  const paged = filtered.slice(pageStart, pageEnd)
+   322→
+   323→  /* ---------------- AI-mode display list ----------------
+   324→   * When AI mode is ON and we have ranked IDs, build the display list
+   325→   * by mapping IDs back to effects in ranked order. Effects that the
+   326→   * LLM returned but no longer exist (shouldn't happen — we filter
+   327→   * server-side — but defensive) are dropped. Pagination is disabled
+   328→   * in AI mode (the LLM returns at most 20, so one page is enough).
+   329→   */
+   330→  const aiDisplay: Effect[] | null = React.useMemo(() => {
+   331→    if (!aiMode || !aiRankedIds || aiRankedIds.length === 0) return null
+   332→    const byId = new Map(EFFECTS.map((e) => [e.id, e]))
+   333→    const out: Effect[] = []
+   334→    for (const id of aiRankedIds) {
+   335→      const e = byId.get(id)
+   336→      if (e) out.push(e)
+   337→    }
+   338→    return out.length > 0 ? out : null
+   339→  }, [aiMode, aiRankedIds])
+   340→
+   341→  const displayList = aiDisplay ?? paged
+   342→  const displayTotal = aiDisplay ? aiDisplay.length : filtered.length
+   343→
+   344→  /**
+   345→   * Slot-machine "Surprise me":
+   346→   *  1. Fire a color sweep across the screen.
+   347→   *  2. Rapidly cycle through random pages (~6 cycles over ~600ms).
+   348→   *  3. Land on a final random page (different from the start when possible).
+   349→   *  4. Pop-in the grid + celebratory toast with the page number.
+   350→   */
+   351→  const surprise = React.useCallback(() => {
+   352→    if (filtered.length === 0) return
+   353→    // Don't restart if already rolling.
+   354→    if (isRolling) return
+   355→
+   356→    const tp = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE))
+   357→    const startPage = safePage
+   358→
+   359→    // Fire the sweep overlay.
+   360→    setShowSweep(true)
+   361→    window.setTimeout(() => setShowSweep(false), 900)
+   362→
+   363→    setIsRolling(true)
+   364→
+   365→    // Quick page cycling for the slot-machine feel.
+   366→    const cycles = 6
+   367→    const intervalMs = 90
+   368→    let cycle = 0
+   369→    rollTimerRef.current = setInterval(() => {
+   370→      cycle += 1
+   371→      if (cycle >= cycles) {
+   372→        // Land on a final random page (avoid the start page when possible).
+   373→        if (rollTimerRef.current) {
+   374→          clearInterval(rollTimerRef.current)
+   375→          rollTimerRef.current = null
+   376→        }
+   377→        let final = Math.floor(Math.random() * tp) + 1
+   378→        if (tp > 1 && final === startPage) {
+   379→          final = (final % tp) + 1
+   380→        }
+   381→        setPage(final)
+   382→        setIsRolling(false)
+   383→        // Trigger pop-in animation by re-keying the grid wrapper.
+   384→        setPopKey((k) => k + 1)
+   385→        // Defer scroll until after the page state has rendered.
+   386→        requestAnimationFrame(() => {
+   387→          gridTopRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+   388→        })
+   389→        // Celebratory toast.
+   390→        toast.success('✨ Surprise!', {
+   391→          description: `Landed on page ${final} of ${tp} — ${filtered.length.toLocaleString()} effects to explore.`,
+   392→          duration: 2400,
+   393→        })
+   394→        return
+   395→      }
+   396→      // Mid-roll: jump to a random page each cycle.
+   397→      const r = Math.floor(Math.random() * tp) + 1
+   398→      setPage(r)
+   399→    }, intervalMs)
+   400→  }, [filtered.length, isRolling, safePage])
+   401→
+   402→  // Keep the ref in sync so the global event listener always calls the
+   403→  // latest version of `surprise`.
+   404→  React.useEffect(() => {
+   405→    surpriseRef.current = surprise
+   406→  }, [surprise])
+   407→
+   408→  // Clean up the interval on unmount.
+   409→  React.useEffect(() => {
+   410→    return () => {
+   411→      if (rollTimerRef.current) clearInterval(rollTimerRef.current)
+   412→    }
+   413→  }, [])
+   414→
+   415→  // Build a compact list of page numbers to show in the pagination control.
+   416→  const pageNumbers = React.useMemo(() => {
+   417→    const pages: (number | '…')[] = []
+   418→    const add = (n: number | '…') => pages.push(n)
+   419→    if (totalPages <= 7) {
+   420→      for (let i = 1; i <= totalPages; i++) add(i)
+   421→    } else {
+   422→      add(1)
+   423→      if (safePage > 3) add('…')
+   424→      const start = Math.max(2, safePage - 1)
+   425→      const end = Math.min(totalPages - 1, safePage + 1)
+   426→      for (let i = start; i <= end; i++) add(i)
+   427→      if (safePage < totalPages - 2) add('…')
+   428→      add(totalPages)
+   429→    }
+   430→    return pages
+   431→  }, [safePage, totalPages])
+   432→
+   433→  return (
+   434→    <div className="relative flex min-h-screen flex-col">
+   435→      {/* Surprise-me color sweep overlay (rendered only while rolling) */}
+   436→      {showSweep ? <div className="fx-surprise-sweep" aria-hidden="true" /> : null}
+   437→
+   438→      {/* Decorative background */}
+   439→      <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+   440→        <div className="absolute -top-32 left-1/4 h-72 w-72 rounded-full bg-primary/20 blur-3xl" />
+   441→        <div className="absolute -top-20 right-1/4 h-72 w-72 rounded-full bg-rose-500/20 blur-3xl" />
+   442→        <div className="absolute top-40 left-1/3 h-72 w-72 rounded-full bg-amber-500/10 blur-3xl" />
+   443→      </div>
+   444→
+   445→      {/* Header */}
+   446→      <header className="sticky top-0 z-40 border-b border-border/40 bg-background/70 backdrop-blur-xl">
+   447→        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
+   448→          <div className="flex items-center gap-2.5">
+   449→            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-emerald-600 text-white shadow-lg shadow-primary/30">
+   450→              <Wand2 className="h-5 w-5" />
+   451→            </div>
+   452→            <div className="flex flex-col leading-tight">
+   453→              <span className="text-base font-bold tracking-tight">Hoverlab</span>
+   454→              <span className="text-[11px] text-muted-foreground">
+   455→                A living CSS effects library
+   456→              </span>
+   457→            </div>
+   458→          </div>
+   459→
+   460→          <div className="flex items-center gap-2">
+   461→            <Button
+   462→              variant="ghost"
+   463→              size="sm"
+   464→              className="hidden gap-1.5 sm:inline-flex"
+   465→              asChild
+   466→            >
+   467→              <Link href="/playground">
+   468→                <Sparkles className="h-4 w-4" /> Playground
+   469→              </Link>
+   470→            </Button>
+   471→            <Button
+   472→              variant="outline"
+   473→              size="sm"
+   474→              onClick={openCommandPalette}
+   475→              className="hidden h-9 gap-2 rounded-full border-border/60 bg-background/60 px-3 text-xs text-muted-foreground shadow-sm sm:inline-flex"
+   476→              aria-label="Open command palette (Cmd+K)"
+   477→              title="Open command palette (Cmd+K)"
+   478→            >
+   479→              <Search className="h-3.5 w-3.5" />
+   480→              <span>Quick find</span>
+   481→              <kbd className="ml-1 rounded border border-border bg-muted px-1 py-0.5 font-mono text-[10px] font-semibold">
+   482→                ⌘K
+   483→              </kbd>
+   484→            </Button>
+   485→            <Button
+   486→              variant="ghost"
+   487→              size="icon"
+   488→              className="h-9 w-9 sm:hidden"
+   489→              onClick={openCommandPalette}
+   490→              aria-label="Open command palette"
+   491→              title="Open command palette (Cmd+K)"
+   492→            >
+   493→              <Search className="h-4 w-4" />
+   494→            </Button>
+   495→            <Button
+   496→              variant="ghost"
+   497→              size="icon"
+   498→              className="h-9 w-9"
+   499→              onClick={openShortcuts}
+   500→              aria-label="Keyboard shortcuts"
+   501→              title="Keyboard shortcuts (?)"
+   502→            >
+   503→              <Keyboard className="h-4 w-4" />
+   504→            </Button>
+   505→            <Button
+   506→              variant="ghost"
+   507→              size="icon"
+   508→              className="relative h-9 w-9"
+   509→              onClick={() => setBundleOpen(true)}
+   510→              aria-label={`Open bundle (${bundleCount} item${bundleCount === 1 ? '' : 's'})`}
+   511→              title="Open bundle"
+   512→            >
+   513→              <Package className="h-4 w-4" />
+   514→              {bundleCount > 0 ? (
+   515→                <Badge
+   516→                  className="absolute -right-1 -top-1 h-4 min-w-4 justify-center rounded-full px-1 text-[9px] font-semibold"
+   517→                >
+   518→                  {bundleCount}
+   519→                </Badge>
+   520→              ) : null}
+   521→            </Button>
+   522→            <CopyHistoryDropdown />
+   523→            <Button
+   524→              variant="ghost"
+   525→              size="sm"
+   526→              className="hidden gap-1.5 sm:inline-flex"
+   527→              asChild
+   528→            >
+   529→              <a
+   530→                href="https://github.com"
+   531→                target="_blank"
+   532→                rel="noreferrer noopener"
+   533→              >
+   534→                <Github className="h-4 w-4" /> GitHub
+   535→              </a>
+   536→            </Button>
+   537→            <UserMenu />
+   538→            <ThemeToggle />
+   539→            <ReducedMotionToggle />
+   540→          </div>
+   541→        </div>
+   542→      </header>
+   543→
+   544→      {/* Hero */}
+   545→      <section className="mx-auto w-full max-w-7xl px-4 pb-6 pt-12 sm:px-6 sm:pt-16 lg:px-8 lg:pt-20">
+   546→        <div className="mx-auto max-w-3xl text-center">
+   547→          <div className="mb-4 inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-background/60 px-3 py-1 text-xs text-muted-foreground backdrop-blur">
+   548→            <Sparkles className="h-3.5 w-3.5 text-primary" />
+   549→            {EFFECTS.length.toLocaleString()} effects · {CATEGORIES.length} categories · zero dependencies
+   550→          </div>
+   551→          <h1 className="text-balance bg-gradient-to-br from-foreground to-foreground/60 bg-clip-text text-4xl font-extrabold tracking-tight text-transparent sm:text-5xl lg:text-6xl">
+   552→            {EFFECTS.length.toLocaleString()}+ CSS effects,<br className="hidden sm:inline" /> ready to copy.
+   553→          </h1>
+   554→          <p className="mt-5 text-pretty text-base text-muted-foreground sm:text-lg">
+   555→            A curated library of pure-CSS effects with live demos and
+   556→            copy-ready code. Buttons, loaders, cards, text, backgrounds,
+   557→            navigation, dividers, badges and more — no JavaScript, no
+   558→            frameworks, just CSS.
+   559→          </p>
+   560→        </div>
+   561→
+   562→        {/* Search + Surprise me */}
+   563→        <div className="mx-auto mt-8 flex max-w-2xl items-center gap-2">
+   564→          <div className="relative flex-1">
+   565→            <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+   566→            <Input
+   567→              ref={searchInputRef}
+   568→              value={query}
+   569→              onChange={(e) => setQuery(e.target.value)}
+   570→              placeholder={
+   571→                aiMode
+   572→                  ? 'Describe what you want… e.g. "button that pulses red"'
+   573→                  : 'Search by name, category, tag, or keyword…'
+   574→              }
+   575→              className={cn(
+   576→                'h-12 rounded-full border-border/60 bg-background/70 pl-11 pr-12 text-base shadow-sm backdrop-blur',
+   577→                aiMode && 'border-primary/50 ring-1 ring-primary/20',
+   578→              )}
+   579→            />
+   580→            {/* AI mode toggle button inside the search input (right side) */}
+   581→            <button
+   582→              type="button"
+   583→              onClick={() => {
+   584→                setAiMode((v) => !v)
+   585→                // Focus the input so the user can immediately type their
+   586→                // natural-language query after enabling AI mode.
+   587→                setTimeout(() => searchInputRef.current?.focus(), 0)
+   588→              }}
+   589→              aria-pressed={aiMode}
+   590→              aria-label={aiMode ? 'Disable AI search' : 'Enable AI search'}
+   591→              title={
+   592→                aiMode
+   593→                  ? 'AI search ON — click to disable'
+   594→                  : 'Enable AI search (natural language)'
+   595→              }
+   596→              className={cn(
+   597→                'absolute right-2 top-1/2 inline-flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full transition-all',
+   598→                aiMode
+   599→                  ? 'bg-primary text-primary-foreground shadow-sm'
+   600→                  : 'text-muted-foreground hover:bg-muted hover:text-foreground',
+   601→              )}
+   602→            >
+   603→              <Sparkles className="h-4 w-4" />
+   604→            </button>
+   605→          </div>
+   606→          <Button
+   607→            type="button"
+   608→            size="sm"
+   609→            onClick={surprise}
+   610→            disabled={isRolling || filtered.length === 0}
+   611→            className={cn(
+   612→              'h-12 gap-1.5 rounded-full px-4 shadow-sm transition-colors',
+   613→              isRolling && 'fx-surprise-shake',
+   614→            )}
+   615→            title="Jump to a random page"
+   616→          >
+   617→            <Shuffle className="h-4 w-4" />
+   618→            <span className="hidden sm:inline">
+   619→              {isRolling ? 'Rolling…' : 'Surprise me'}
+   620→            </span>
+   621→          </Button>
+   622→        </div>
+   623→
+   624→        {/* Filter chips */}
+   625→        <div className="mt-6 flex flex-wrap items-center justify-center gap-2">
+   626→          <CategoryChip
+   627→            label="All"
+   628→            count={EFFECTS.length}
+   629→            active={filter === 'All'}
+   630→            onClick={() => setFilter('All')}
+   631→          />
+   632→          <CategoryChip
+   633→            label="Featured"
+   634→            count={EFFECTS.filter((e) => e.featured).length}
+   635→            active={filter === 'Featured'}
+   636→            onClick={() => setFilter('Featured')}
+   637→            icon={<Star className="h-3 w-3" />}
+   638→          />
+   639→          <CategoryChip
+   640→            label="Favorites"
+   641→            count={favorites.size}
+   642→            active={filter === 'Favorites'}
+   643→            onClick={() => setFilter('Favorites')}
+   644→            icon={<Heart className="h-3 w-3" />}
+   645→          />
+   646→          {CATEGORIES.map((c) => {
+   647→            const count = EFFECTS.filter((e) => e.category === c).length
+   648→            return (
+   649→              <CategoryChip
+   650→                key={c}
+   651→                label={c}
+   652→                count={count}
+   653→                active={filter === c}
+   654→                onClick={() => setFilter(c)}
+   655→              />
+   656→            )
+   657→          })}
+   658→        </div>
+   659→      </section>
+   660→
+   661→      {/* Effect grid */}
+   662→      <main className="mx-auto w-full max-w-7xl flex-1 px-4 pb-16 pt-4 sm:px-6 lg:px-8">
+   663→        {/* Recently-viewed rail — only shown when not actively filtering or
+   664→            searching, so it doesn't compete with focused result sets. */}
+   665→        {filter === 'All' && !query.trim() ? <RecentlyViewedRail /> : null}
+   666→
+   667→        {displayTotal === 0 && !aiLoading ? (
+   668→          <div className="mx-auto mt-16 max-w-md text-center">
+   669→            <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-muted">
+   670→              {aiMode ? (
+   671→                <Sparkles className="h-5 w-5 text-primary" />
+   672→              ) : filter === 'Favorites' ? (
+   673→                <Heart className="h-5 w-5 text-muted-foreground" />
+   674→              ) : filter === 'Featured' ? (
+   675→                <Star className="h-5 w-5 text-muted-foreground" />
+   676→              ) : (
+   677→                <Search className="h-5 w-5 text-muted-foreground" />
+   678→              )}
+   679→            </div>
+   680→            <h3 className="text-lg font-semibold">
+   681→              {aiMode
+   682→                ? 'No AI matches'
+   683→                : filter === 'Favorites'
+   684→                  ? 'No favorites yet'
+   685→                  : filter === 'Featured'
+   686→                    ? 'No featured effects match'
+   687→                    : 'No effects found'}
+   688→            </h3>
+   689→            <p className="mt-1 text-sm text-muted-foreground">
+   690→              {aiMode
+   691→                ? 'Try rephrasing your query, or toggle AI search off to use keyword matching.'
+   692→                : filter === 'Favorites'
+   693→                  ? 'Tap the heart on any effect to save it here for quick access.'
+   694→                  : filter === 'Featured'
+   695→                    ? 'Try a different keyword or clear the search.'
+   696→                    : 'Try a different keyword or clear the filter to see all effects.'}
+   697→            </p>
+   698→            <Button
+   699→              variant="outline"
+   700→              size="sm"
+   701→              className="mt-4"
+   702→              onClick={() => {
+   703→                setQuery('')
+   704→                setFilter('All')
+   705→              }}
+   706→            >
+   707→              Reset
+   708→            </Button>
+   709→          </div>
+   710→        ) : (
+   711→          <>
+   712→            {/* AI mode banner — shown when AI search is active */}
+   713→            {aiMode && query.trim() ? (
+   714→              <div className="mb-5 flex items-center gap-2 rounded-xl border border-primary/30 bg-primary/5 px-4 py-2.5 text-sm">
+   715→                {aiLoading ? (
+   716→                  <Loader2 className="h-4 w-4 animate-spin text-primary" />
+   717→                ) : (
+   718→                  <Sparkles className="h-4 w-4 text-primary" />
+   719→                )}
+   720→                <span className="text-foreground">
+   721→                  {aiLoading
+   722→                    ? 'Asking the AI to rank matches…'
+   723→                    : `AI-ranked results (${displayTotal.toLocaleString()})`}
+   724→                </span>
+   725→                <span className="hidden text-xs text-muted-foreground sm:inline">
+   726→                  — semantic relevance, not just keywords
+   727→                </span>
+   728→              </div>
+   729→            ) : null}
+   730→
+   731→            {/* Result meta + sort control (hidden in AI mode — sort is semantic) */}
+   732→            {!(aiMode && query.trim()) ? (
+   733→              <div ref={gridTopRef} className="mb-5 flex flex-wrap items-center gap-3 scroll-mt-20">
+   734→                <h2 className="text-xl font-bold tracking-tight">
+   735→                  {filter === 'All' ? 'All effects' : filter}
+   736→                </h2>
+   737→                <span className="rounded-full bg-muted px-2 py-0.5 text-xs font-medium text-muted-foreground">
+   738→                  {displayTotal.toLocaleString()}
+   739→                </span>
+   740→                <div className="h-px flex-1 bg-border/60" />
+   741→                <span className="hidden text-xs text-muted-foreground sm:inline">
+   742→                  Showing {pageStart + 1}–{pageEnd} of {filtered.length.toLocaleString()}
+   743→                </span>
+   744→                <Select value={sort} onValueChange={(v) => setSort(v as Sort)}>
+   745→                  <SelectTrigger
+   746→                    className="h-8 w-[150px] gap-1.5 rounded-full border-border/60 bg-background/70 text-xs shadow-sm"
+   747→                    aria-label="Sort effects"
+   748→                  >
+   749→                    <ArrowDownUp className="h-3.5 w-3.5 text-muted-foreground" />
+   750→                    <SelectValue />
+   751→                  </SelectTrigger>
+   752→                  <SelectContent>
+   753→                    <SelectItem value="default">Curated order</SelectItem>
+   754→                    <SelectItem value="featured">Featured first</SelectItem>
+   755→                    <SelectItem value="az">Name A → Z</SelectItem>
+   756→                    <SelectItem value="za">Name Z → A</SelectItem>
+   757→                  </SelectContent>
+   758→                </Select>
+   759→              </div>
+   760→            ) : null}
+   761→
+   762→            <div
+   763→              key={popKey}
+   764→              className={cn(
+   765→                'fx-surprise-grid grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3',
+   766→                isRolling && 'fx-surprise-rolling',
+   767→                !isRolling && popKey > 0 && 'fx-surprise-pop',
+   768→              )}
+   769→            >
+   770→              {displayList.map((effect) => (
+   771→                <EffectCard key={effect.id} effect={effect} />
+   772→              ))}
+   773→            </div>
+   774→
+   775→            {/* Pagination — hidden in AI mode (results are already ≤20) */}
+   776→            {!aiMode && totalPages > 1 ? (
+   777→              <div className="mt-10 flex flex-col items-center gap-3">
+   778→                <div className="flex items-center gap-1">
+   779→                  <PagerButton
+   780→                    onClick={() => setPage((p) => Math.max(1, p - 1))}
+   781→                    disabled={safePage <= 1}
+   782→                    aria-label="Previous page"
+   783→                  >
+   784→                    <ChevronLeft className="h-4 w-4" />
+   785→                  </PagerButton>
+   786→                  {pageNumbers.map((n, idx) =>
+   787→                    n === '…' ? (
+   788→                      <span
+   789→                        key={`ellipsis-${idx}`}
+   790→                        className="px-2 text-sm text-muted-foreground"
+   791→                      >
+   792→                        …
+   793→                      </span>
+   794→                    ) : (
+   795→                      <PagerButton
+   796→                        key={n}
+   797→                        onClick={() => setPage(n)}
+   798→                        active={n === safePage}
+   799→                        aria-label={`Page ${n}`}
+   800→                      >
+   801→                        {n}
+   802→                      </PagerButton>
+   803→                    ),
+   804→                  )}
+   805→                  <PagerButton
+   806→                    onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+   807→                    disabled={safePage >= totalPages}
+   808→                    aria-label="Next page"
+   809→                  >
+   810→                    <ChevronRight className="h-4 w-4" />
+   811→                  </PagerButton>
+   812→                </div>
+   813→                <p className="text-xs text-muted-foreground">
+   814→                  Page {safePage} of {totalPages}
+   815→                </p>
+   816→              </div>
+   817→            ) : null}
+   818→          </>
+   819→        )}
+   820→      </main>
+   821→
+   822→      {/* Footer */}
+   823→      <footer className="border-t border-border/40 bg-background/60 backdrop-blur">
+   824→        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-4 py-6 text-sm text-muted-foreground sm:flex-row sm:px-6 lg:px-8">
+   825→          <p>
+   826→            Built with pure CSS · {EFFECTS.length.toLocaleString()} effects across {CATEGORIES.length} categories
+   827→          </p>
+   828→          <p className="font-mono text-xs">
+   829→            Click <kbd className="rounded border border-border bg-muted px-1.5 py-0.5 text-[10px]">Copy</kbd> on any code block to grab the source.
+   830→          </p>
+   831→        </div>
+   832→      </footer>
+   833→
+   834→      {/* Slide-out bundle drawer */}
+   835→      <BundleDrawer open={bundleOpen} onOpenChange={setBundleOpen} />
+   836→
+   837→      {/* Global shortcuts help dialog (?) */}
+   838→      <ShortcutsHelpButton />
+   839→
+   840→      {/* Cmd+K command palette */}
+   841→      <CommandPalette />
+   842→    </div>
+   843→  )
+   844→}
+   845→
+   846→function CategoryChip({
+   847→  label,
+   848→  count,
+   849→  active,
+   850→  onClick,
+   851→  icon,
+   852→}: {
+   853→  label: string
+   854→  count: number
+   855→  active: boolean
+   856→  onClick: () => void
+   857→  icon?: React.ReactNode
+   858→}) {
+   859→  return (
+   860→    <button
+   861→      onClick={onClick}
+   862→      className={cn(
+   863→        'inline-flex items-center gap-1.5 rounded-full border px-3.5 py-1.5 text-sm font-medium transition-all',
+   864→        active
+   865→          ? 'border-primary bg-primary text-primary-foreground shadow-sm shadow-primary/30'
+   866→          : 'border-border/60 bg-background/60 text-muted-foreground hover:border-primary/40 hover:text-foreground',
+   867→      )}
+   868→    >
+   869→      {icon}
+   870→      {label}
+   871→      <span
+   872→        className={cn(
+   873→          'rounded-full px-1.5 py-0.5 text-[10px] font-semibold',
+   874→          active ? 'bg-primary-foreground/20' : 'bg-muted',
+   875→        )}
+   876→      >
+   877→        {count}
+   878→      </span>
+   879→    </button>
+   880→  )
+   881→}
+   882→
+   883→function PagerButton({
+   884→  children,
+   885→  onClick,
+   886→  active,
+   887→  disabled,
+   888→  ...rest
+   889→}: {
+   890→  children: React.ReactNode
+   891→  onClick: () => void
+   892→  active?: boolean
+   893→  disabled?: boolean
+   894→} & React.AriaAttributes) {
+   895→  return (
+   896→    <button
+   897→      onClick={onClick}
+   898→      disabled={disabled}
+   899→      className={cn(
+   900→        'inline-flex h-9 min-w-9 items-center justify-center rounded-md border px-3 text-sm font-medium transition-colors',
+   901→        active
+   902→          ? 'border-primary bg-primary text-primary-foreground'
+   903→          : 'border-border/60 bg-background/60 text-muted-foreground hover:border-primary/40 hover:text-foreground',
+   904→        disabled && 'cursor-not-allowed opacity-40 hover:border-border/60 hover:text-muted-foreground',
+   905→      )}
+   906→      {...rest}
+   907→    >
+   908→      {children}
+   909→    </button>
+   910→  )
+   911→}
+   912→

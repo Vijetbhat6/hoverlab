@@ -1,0 +1,20 @@
+import { chromium } from 'playwright'
+const BASE = 'http://127.0.0.1:3000'
+const browser = await chromium.launch()
+const ctx = await browser.newContext()
+const page = await ctx.newPage()
+const errors = []
+page.on('pageerror', (err) => errors.push(`PAGEERROR: ${err.message}`))
+page.on('console', (msg) => { if (msg.type() === 'error') errors.push(`CONSOLE: ${msg.text()}`) })
+const stamp = Date.now()
+await page.goto(`${BASE}/signup`)
+await page.waitForTimeout(1500)
+await page.fill('#auth-name', 'Test User')
+await page.fill('#auth-email', `test+${stamp}@hoverlab.dev`)
+await page.fill('#auth-password', 'testpass123')
+await page.click('button[type="submit"]')
+await page.waitForTimeout(3000)
+console.log(`Final URL: ${page.url()}`)
+console.log(`Errors (${errors.length}):`)
+for (const e of errors.slice(0, 5)) console.log(`  ${e.slice(0, 200)}`)
+await browser.close()

@@ -1,0 +1,830 @@
+     1→# CSSFX — Multi-Agent Work Log
+     2→
+     3→Project: CSSFX — a pure-CSS effects library built with Next.js 16 + TypeScript + Tailwind.
+     4→
+     5→---
+     6→Task ID: 1
+     7→Agent: main
+     8→Task: Add a heart/favorite button to EffectCard and a "Copy both" (HTML + CSS) copy variant to CodeBlock.
+     9→
+    10→Work Log:
+    11→- Reviewed existing components: `effect-card.tsx`, `code-block.tsx`, `use-favorites.ts`, `page.tsx`.
+    12→- Confirmed `useFavorites` hook already exists (localStorage-persisted Set of effect IDs, with cross-component sync via custom event).
+    13→- Dev server running on port 3000.
+    14→
+    15→Stage Summary:
+    16→- Plan:
+    17→  1. Extend `CodeBlock` with an optional `extraCopy` prop (label + text). When provided, render a second "Copy both" button next to the existing "Copy" button.
+    18→  2. Extend `EffectCard` to:
+    19→     - Render a Heart toggle button in the card header (top-right). Uses `useFavorites().has(id)` and `toggle(id)`.
+    20→     - Pass `extraCopy={{ label: 'Copy both', text: combinedHtmlCss(effect) }}` to the HTML `CodeBlock`.
+    21→  3. Add a "Favorites" filter chip to `page.tsx` so the hearted items are reachable from the home view.
+    22→
+    23→---
+    24→Task ID: 1 (continued)
+    25→Agent: main
+    26→Task: Implement the planned changes and verify.
+    27→
+    28→Work Log:
+    29→- Rewrote `src/components/code-block.tsx`:
+    30→  - Added `extraCopy?: { label: string; text: string }` prop.
+    31→  - Refactored copy state to track which button was clicked (`copiedKey: 'single' | 'extra' | null`) so the two buttons animate independently.
+    32→  - When `extraCopy` is provided, an extra button (label defaults to "Copy both") is rendered to the left of the standard "Copy" button.
+    33→- Rewrote `src/components/effect-card.tsx`:
+    34→  - Imported `Heart` icon and `useFavorites` hook.
+    35→  - Added a `buildCombinedSnippet(effect)` helper that joins HTML and CSS with `<!-- HTML -->` and `/* CSS */` section comments.
+    36→  - Added a heart toggle button next to the category badge. Active state uses rose-500 styling and fills the icon (`fill-current` + `scale-110`). The card itself gets a subtle rose ring when favorited.
+    37→  - Passed `extraCopy={{ label: 'Copy both', text: combinedSnippet }}` to the HTML CodeBlock; the CSS CodeBlock keeps its standard single-copy behavior.
+    38→- Updated `src/app/page.tsx`:
+    39→  - Imported `Heart` icon and `useFavorites` hook.
+    40→  - Extended the `Filter` type with `'Favorites'`.
+    41→  - `filtered` now also filters by `favorites.has(e.id)` when `filter === 'Favorites'`.
+    42→  - `grouped` returns a single "Favorites" group when that filter is active.
+    43→  - Added a `Favorites` chip (with heart icon, live count from `favorites.size`) between "All" and the category chips.
+    44→  - Extended `CategoryChip` to accept an optional `icon?: React.ReactNode`.
+    45→  - Updated the empty-state: shows a heart icon and a friendly "No favorites yet — Tap the heart on any effect..." message when the Favorites filter is empty.
+    46→- Verified:
+    47→  - `npx tsc --noEmit` reports no errors under `src/` (remaining errors are in `examples/` and `skills/` and unrelated to this project).
+    48→  - Dev server (`next dev`) recompiled successfully (`✓ Compiled in …` lines, no errors).
+    49→  - `curl http://localhost:3000/` returns 200 and the rendered HTML contains `aria-label="Add to favorites"` (heart button) and the `Favorites` chip label.
+    50→
+    51→Stage Summary:
+    52→- CodeBlock now supports an optional secondary "Copy both" action via `extraCopy`.
+    53→- EffectCard now has a heart toggle (top-right) that persists favorites to localStorage; favorited cards show a rose ring.
+    54→- page.tsx exposes a "Favorites" filter chip with a live count and a tailored empty state.
+    55→- Combined "Copy both" copies HTML + CSS in one snippet with section comments — ready to paste into a scratch file.
+    56→
+    57→---
+    58→Task ID: 2
+    59→Agent: main
+    60→Task: Expand the library past 1000 effects and add pagination so the UI stays fast.
+    61→
+    62→Work Log:
+    63→- Wrote `scripts/generate-effects.mjs` — a Node.js generator that combines 9 templates-per-category with curated palettes (17), gradient pairs (12), trios (8), sizes (3), speeds (3), and neutrals (4) to produce 1133 unique effects.
+    64→  - Buttons: 5 templates × palette/size combinations = 225
+    65→  - Loaders: 4 templates × palette/speed combinations = 162
+    66→  - Cards: 2 templates × palette/neutral combinations = 116
+    67→  - Text: 4 templates × palette/size combinations = 135
+    68→  - Backgrounds: 3 templates × palette/neutral/trio combinations = 120
+    69→  - Inputs & Hover: 3 templates × palette/size combinations = 119
+    70→  - Navigation & Menus: 2 templates × palette/neutral combinations = 80
+    71→  - Dividers & Separators: 3 templates × palette/style combinations = 74
+    72→  - Badges & Tags: 2 templates × palette/size combinations = 102
+    73→  - Total: 1133 effects, all with unique class names (fx-<slug>-<seq>).
+    74→- Ran the generator → wrote `src/lib/generated-effects.json` (~1133 entries, each with html/css/tags/darkSurface).
+    75→- Refactored `src/lib/effects.ts`:
+    76→  - Added `tags?: string[]` and `featured?: boolean` to the `Effect` interface.
+    77→  - Renamed the existing hand-crafted `EFFECTS` array to `HANDCRAFTED`.
+    78→  - Imported the generated JSON.
+    79→  - Exported `EFFECTS = [...HANDCRAFTED.map(e => ({...e, featured: true})), ...GENERATED]`.
+    80→  - Exported `TOTAL_COUNT` constant.
+    81→- Rewrote `src/app/page.tsx`:
+    82→  - Added `'Featured'` to the `Filter` union type with a star-icon chip alongside All/Favorites.
+    83→  - Added `page` state, `PAGE_SIZE = 24`, and an effect that resets to page 1 when query/filter/favorites change.
+    84→  - Replaced the "group by category" rendering with flat paginated rendering (24 cards per page).
+    85→  - Added a `PagerButton` component and a compact page-number list (1 … 4 5 6 … 50) with prev/next chevrons and "Page X of Y" label.
+    86→  - Added a "Showing X–Y of Z" meta line above the grid.
+    87→  - Updated hero text from "6 categories" to "{CATEGORIES.length} categories" and the headline now shows "{count}+ CSS effects".
+    88→  - Search now also matches against effect `tags`.
+    89→- Verified:
+    90→  - `npx tsc --noEmit` reports no errors under `src/`.
+    91→  - Dev server recompiled cleanly.
+    92→  - `curl http://localhost:3000/` returns HTTP 200, response time ~320ms.
+    93→  - Server-rendered HTML contains `aria-label="Page 1"`, `aria-label="Page 50"`, `aria-label="Next page"`, `aria-label="Previous page"`, plus the new "Featured" chip — confirming 50 pages × 24 = 1200 effects total in the catalog.
+    94→
+    95→Stage Summary:
+    96→- Library expanded from ~64 hand-crafted effects to 1197 effects (64 featured + 1133 generated).
+    97→- Pagination keeps the DOM light (24 cards/page, ~50 pages total).
+    98→- New "Featured" filter surfaces the hand-crafted picks.
+    99→- All effects are real, working CSS — no placeholders, every entry has its own unique class name so styles never collide.
+   100→
+   101→---
+   102→Task ID: 3
+   103→Agent: main
+   104→Task: Add 4 new categories (Toggles, Tooltips, Skeletons, Entrance Animations) + "Surprise me" button to push past 1500 effects.
+   105→
+   106→Work Log:
+   107→- Extended `EffectCategory` type and `CATEGORIES` array in `src/lib/effects.ts` with 4 new categories: "Toggles & Switches", "Tooltips & Popovers", "Skeletons & Shimmers", "Entrance Animations".
+   108→- Added 4 new template sections to `scripts/generate-effects.mjs`:
+   109→  - Toggles & Switches: 3 templates (iOS switch, square flip, round pulse) × palette/size combos = 121 effects
+   110→  - Tooltips & Popovers: 3 templates (top arrow, right slide, bottom scale) × palette/size combos = 92 effects
+   111→  - Skeletons & Shimmers: 4 templates (shimmer lines, pulse bars, gradient wave, avatar conic) × combos = 98 effects
+   112→  - Entrance Animations: 4 templates (fade-up, scale-in, slide-left, flip-in) × palette/size combos = 108 effects
+   113→- Also added extra variants to existing categories to push the count past 1500:
+   114→  - Buttons: icon-leading pill (24 new) → 249 total
+   115→  - Loaders: dual-ring spinner (24 new) → 186 total
+   116→  - Cards: glassmorphism (16 new) → 132 total
+   117→- Re-ran the generator → 1,616 generated effects (was 1,133).
+   118→- Updated `src/app/page.tsx`:
+   119→  - Imported `Shuffle` icon from lucide-react.
+   120→  - Added `gridTopRef` (a div ref above the result meta) for scroll target.
+   121→  - Added a `surprise()` callback that picks a random page from `1..totalPages`, avoids the current page when possible, sets `page` state, and scrolls smoothly to the grid top via `requestAnimationFrame`.
+   122→  - Reorganized the search row into a flex container with the search input on the left and a "Surprise me" button (with shuffle icon) on the right. Button shows full label on sm+ screens, icon-only on mobile.
+   123→  - Attached `gridTopRef` to the result-meta div with `scroll-mt-20` so smooth scroll leaves room for the sticky header.
+   124→- Verified:
+   125→  - `npx tsc --noEmit` reports no errors under `src/`.
+   126→  - Dev server recompiled cleanly.
+   127→  - `curl http://localhost:3000/` returns HTTP 200 in ~290ms.
+   128→  - Server-rendered HTML contains `aria-label="Page 70"` (last page), confirming 1,680 total effects (70 × 24 = 1,680).
+   129→  - New category chips render: "Toggles & Switches", "Tooltips & Popovers", "Skeletons & Shimmers", "Entrance Animations".
+   130→  - "Surprise me" button renders in the search row.
+   131→
+   132→Stage Summary:
+   133→- Library expanded from 1,197 → 1,680 effects (64 hand-crafted featured + 1,616 generated).
+   134→- 4 new categories added, bringing the total to 13 categories.
+   135→- New "Surprise me" button jumps to a random page and scrolls there — great for serendipitous discovery across 70 pages.
+   136→- All new effects are real, working CSS with unique class names.
+   137→- Breakdown:
+   138→  - Buttons 249, Loaders 186, Cards 132, Text 135, Backgrounds 120, Inputs & Hover 119
+   139→  - Navigation & Menus 80, Dividers & Separators 74, Badges & Tags 102
+   140→  - Toggles & Switches 121, Tooltips & Popovers 92, Skeletons & Shimmers 98, Entrance Animations 108
+   141→
+   142→---
+   143→Task ID: 4
+   144→Agent: main
+   145→Task: Make "Surprise me" button cool — slot-machine rolling animation with color sweep, button shake, grid blur, and a celebratory toast on landing.
+   146→
+   147→Work Log:
+   148→- Appended 4 keyframe/utility classes to `src/app/globals.css`:
+   149→  - `.fx-surprise-sweep` — fixed full-viewport gradient (indigo → pink → amber) that sweeps left → right over 0.85s with `mix-blend-mode: screen`.
+   150→  - `.fx-surprise-shake` — button shake/rotate/scale loop (0.5s infinite) for the rolling state.
+   151→  - `.fx-surprise-rolling` — applies `blur(6px)` + `opacity: 0.45` to the grid for a slot-machine spinning feel.
+   152→  - `.fx-surprise-pop` — spring pop-in (`scale(0.96) → 1.02 → 1`) for the grid when the roll lands.
+   153→- Refactored `surprise()` callback in `src/app/page.tsx` into a slot-machine sequence:
+   154→  1. Guards against re-trigger while already rolling.
+   155→  2. Fires the sweep overlay (`showSweep = true` for 900ms).
+   156→  3. Sets `isRolling = true` (triggers button shake + grid blur).
+   157→  4. Runs a `setInterval` (90ms × 6 cycles ≈ 540ms) that jumps to a random page each cycle.
+   158→  5. On the final cycle: clears the interval, picks a final random page (avoids the start page when possible), sets `isRolling = false`, increments `popKey` to trigger the pop-in animation, smoothly scrolls to the grid top, and fires a celebratory `toast.success('✨ Surprise!')` with the landed page number and total count.
+   159→  6. Cleanup effect clears the interval on unmount.
+   160→- Added 3 new state variables: `isRolling`, `showSweep`, `popKey`.
+   161→- Added `rollTimerRef` to hold the interval handle.
+   162→- Imported `toast` from `sonner`.
+   163→- Wired classes:
+   164→  - Sweep overlay: `<div className="fx-surprise-sweep" />` rendered conditionally at the top of the component tree (right after the opening `<div>`).
+   165→  - Button: `cn('...', isRolling && 'fx-surprise-shake')`, disabled while rolling, label swaps to "Rolling…".
+   166→  - Grid: `cn('fx-surprise-grid grid ...', isRolling && 'fx-surprise-rolling', !isRolling && popKey > 0 && 'fx-surprise-pop')`, keyed by `popKey` so the pop animation retriggers on each landing.
+   167→- Verified:
+   168→  - `npx tsc --noEmit` reports no errors under `src/`.
+   169→  - Dev server recompiled cleanly (no errors in dev.log).
+   170→  - `curl http://localhost:3000/` returns HTTP 200 in ~135ms.
+   171→  - All 11 surprise-related references and 3 keyframes confirmed present in source.
+   172→
+   173→Stage Summary:
+   174→- "Surprise me" is now a 4-stage experience: color sweep → button shake + grid blur → rapid page cycling → pop-in + toast.
+   175→- Total animation duration ~700ms (90ms × 6 cycles + 90ms land) + 850ms sweep overlay.
+   176→- Re-triggerable only after the current roll completes (button is disabled mid-roll).
+   177→- Cleanup is safe: interval is cleared on landing and on component unmount.
+   178→
+   179→---
+   180→Task ID: 5
+   181→Agent: main
+   182→Task: Fix blank pages — generated effects had HTML+CSS in the code block but their CSS was never injected into the document, so previews rendered unstyled (blank for div-based effects like loaders, backgrounds, skeletons, dividers).
+   183→
+   184→Work Log:
+   185→- Diagnosed the root cause: hand-crafted effects work because their CSS lives in `src/app/globals.css`. Generated effects (1,616 of them) only had CSS as a string in the JSON — it was displayed in the `<CodeBlock>` but never applied to the page. For text-bearing effects (buttons, badges) this showed unstyled text; for div-based effects (loaders, backgrounds, skeletons, dividers) the preview was completely blank.
+   186→- Fix: added a single line to `src/components/effect-card.tsx`:
+   187→  ```tsx
+   188→  <style dangerouslySetInnerHTML={{ __html: effect.css }} />
+   189→  ```
+   190→  Rendered inside each `<Card>`. React mounts/unmounts the `<style>` tag with the card, so only the 24 visible cards have their CSS in the DOM at any time — no memory leak, no global pollution.
+   191→- Verified no keyframe name collisions across all 1,616 generated effects (567 unique keyframe names, 0 collisions) — the generator already produces unique class names via `fx-<slug>-<seq>`.
+   192→- Type-check: `npx tsc --noEmit` reports no errors under `src/`.
+   193→- Visual verification via headless browser (agent-browser) + VLM (z-ai vision) across 7 sampled pages:
+   194→  - **Page 1** (hand-crafted): 26 `<style>` tags in DOM, all previews styled. ✓
+   195→  - **Page 3** (first generated effects): 8 generated `<style>` tags injected, "Solid Rose SM Button" and others render with colored buttons + glow shadows. VLM confirms "preview areas are not blank — styled Click me buttons with distinct visual effects." ✓
+   196→  - **Page 4** (more buttons): "fuchsia/purple buttons with soft glow shadow and lift-on-hover." ✓
+   197→  - **Page 10**: screenshot captured, styled. ✓
+   198→  - **Page 12** (sheen buttons): "colored Learn more buttons (purple, orange, yellow-green) with diagonal light sheens." ✓
+   199→  - **Page 42** (navigation): "pill nav with green-highlighted active Home button, other items in darker style." ✓
+   200→  - **Page 70** (last page, glass cards): "Frosted translucent card previews, visible and styled." ✓
+   201→  - **Skeletons category**: "shimmering horizontal bars + circular avatar placeholders, animated." ✓
+   202→  - **Dividers category**: "gradient divider lines, wavy dotted lines, marching dashes — all visible." ✓
+   203→  - **Backgrounds category**: "blue gradient, floating colored orbs, retro-tech grid — all rendering." ✓
+   204→- Also confirmed the "Surprise me" slot-machine animation still works correctly after the fix (landed on page 12, page 42, page 4 across 3 clicks).
+   205→
+   206→Stage Summary:
+   207→- Root cause: generated effects' CSS was only shown in the code panel, never injected into the document.
+   208→- Fix: one-line `<style>` injection per card in EffectCard. React manages lifecycle automatically.
+   209→- All 70 pages now render visible, styled effects. Verified across hand-crafted + generated, across all 13 categories including the previously-blank div-based ones (loaders, backgrounds, skeletons, dividers).
+   210→- No keyframe collisions, no TypeScript errors, no console errors. Page load time unchanged (~130-290ms).
+   211→
+   212→---
+   213→Task ID: 6
+   214→Agent: main
+   215→Task: Step 5 + Step 6 — Bundle builder + keyboard shortcuts + freeform playground page. Verify all wiring end-to-end.
+   216→
+   217→Work Log:
+   218→- Verified existing files were complete:
+   219→  - `src/hooks/use-bundle.ts` — localStorage bundle store with cross-tab sync (mirrors `useFavorites`).
+   220→  - `src/lib/bundle-export.ts` — `buildBundleHtml()` and `buildBundleCss()` produce self-contained HTML and concatenated CSS; `downloadTextFile()` triggers a browser download via Blob URL.
+   221→  - `src/components/bundle-drawer.tsx` — slide-out Sheet with mini previews (scoped CSS), per-item remove, Download HTML, CSS only, and Clear bundle actions.
+   222→  - `src/components/shortcuts-help.tsx` — Dialog with all 8 shortcuts listed; opens on `?` keypress or via `useShortcutsHelp().open()` event.
+   223→  - `src/app/playground/page.tsx` — Freeform playground with HTML/CSS editor tabs, 6 presets + 4 sliders, live preview, copy transformed CSS, localStorage persistence.
+   224→  - `src/components/effect-card.tsx` — "Add to bundle" button (Package icon) next to favorites heart; calls `toggleBundle(effect.id, opts)` so saved customization is preserved.
+   225→  - `src/app/page.tsx` — Bundle counter badge in header; BundleDrawer mounted; `/`, `b`, and `?` shortcuts wired.
+   226→- Found gap: detail page was missing the BundleDrawer — `b` shortcut did nothing.
+   227→- Fixed `src/components/effect-detail.tsx`:
+   228→  - Imported `BundleDrawer`.
+   229→  - Added `bundleOpen` state.
+   230→  - Added `b` to the keydown handler → `setBundleOpen(true)`.
+   231→  - Mounted `<BundleDrawer open={bundleOpen} onOpenChange={setBundleOpen} />` at the bottom of the main return.
+   232→  - Added an "Open bundle" icon button (ExternalLink icon) in the card header next to favorites, so users have a visible way to open the drawer on the detail page (no top-nav header here).
+   233→- Verified end-to-end via agent-browser (headless):
+   234→  - Home: clicking "Add to bundle" → counter updates from "0 items" to "1 item" + button toggles to "Remove from bundle". ✓
+   235→  - Home: pressing `b` opens drawer with "Your bundle 1", "Download HTML", "CSS only", "Clear bundle", and the saved effect listed. ✓
+   236→  - Home: pressing `?` opens shortcuts help dialog showing all 8 shortcuts. ✓
+   237→  - Home: pressing `/` focuses the search input (`document.activeElement` is the search input). ✓
+   238→  - Playground: Sunset preset click updates sliders (hue=15, sat=25) and the live preview `<style>` shows hue-shifted colors (e.g. `#f43f5e` → `#ff4434`). ✓
+   239→  - Detail: `f` toggles favorite (button label flips to "Remove from favorites"). ✓
+   240→  - Detail: `j` navigates to next effect (btn-gradient → btn-neon), `k` goes back. ✓
+   241→  - Detail: `c` copies CSS to clipboard (toast "Copied CSS to clipboard" appears). ✓
+   242→  - Detail: `b` opens the drawer with the saved effect listed. ✓
+   243→  - Detail: "Open bundle" icon button on the card header opens the drawer. ✓
+   244→  - Detail: "Download HTML" button fires download (toast "Downloaded cssfx-bundle.html"). ✓
+   245→  - Detail: "CSS only" button fires download (toast "Downloaded cssfx-bundle.css"). ✓
+   246→- Verified `npx tsc --noEmit` reports no errors under `src/`.
+   247→- Verified `scripts/smoke-customize.mjs` still passes 14/14 tests (no regression in the customize engine).
+   248→- Verified all key routes return HTTP 200: `/`, `/playground`, `/effect/btn-gradient` (featured), `/effect/solid-rose-sm-button-0002` (generated).
+   249→- Cleaned up test state: cleared the bundle so future sessions start fresh.
+   250→
+   251→Stage Summary:
+   252→- Step 5 (Bundle builder) is complete and verified: localStorage-persisted bundle, per-effect toggle, slide-out drawer with mini previews + scoped CSS, one-click download as self-contained HTML or CSS-only.
+   253→- Step 6 (Keyboard shortcuts + Playground) is complete and verified: 8 shortcuts (j/k/f/s/c/b/?//) work across home + detail pages; freeform `/playground` page lets users paste any HTML/CSS and apply the same hue/sat/size/speed transforms via the shared `customizeCss` engine; state persists to localStorage.
+   254→- The bundle drawer is now reachable from both the home page (header Package button + `b` shortcut) and the detail page (header "Open bundle" button + `b` shortcut).
+   255→- All 1,680 effects, 13 categories, pagination, "Surprise me" slot-machine, favorites, shareable customization URLs, and 6 theme presets continue to work as before — no regressions.
+   256→
+   257→---
+   258→Task ID: 7
+   259→Agent: main
+   260→Task: Fix card header overflow — on some EffectCards the 3 action buttons (external-link, bundle, favorite) were being pushed off the right edge of the card when the category name was long (e.g. "Dividers & Separators", "Skeletons & Shimmers", "Toggles & Switches").
+   261→
+   262→Work Log:
+   263→- Reproduced the issue: user shared a screenshot showing the "Animated Marching Dashes" card with the heart icon and category badge clipped at the right edge.
+   264→- Diagnosed root cause: in `src/components/effect-card.tsx`, the CardHeader had a single flex row with two children:
+   265→  - Left: title + Edited badge + description (with `min-w-0` so it could shrink).
+   266→  - Right: `shrink-0` group containing [category badge, external-link button, bundle button, favorite button].
+   267→  When the category name was long, the badge (variable-width text) consumed too much of the right group's width, and since the entire group was `shrink-0`, it overflowed the card.
+   268→- Fix: restructured the CardHeader into two rows:
+   269→  - **Row 1**: category badge (with `max-w-full truncate` so it gracefully truncates if anyone ever makes a category name longer than the card) on the left + the 3 fixed-size icon buttons (each `h-7 w-7` = 28px, total ~96px including gaps) on the right.
+   270→  - **Row 2**: title (truncate) + Edited badge on one line, description below.
+   271→  This guarantees the action group always fits because it's now 3 fixed-size 28px buttons (no variable-width text in the same row).
+   272→- Audited other components with similar layouts to confirm no other overflow:
+   273→  - `effect-detail.tsx` header uses `flex flex-wrap items-start justify-between` — buttons wrap to a new line on narrow viewports. ✓
+   274→  - `effect-detail.tsx` similar-effects rail uses `min-w-0 flex-1` for text + `shrink-0` 12px icon — safe. ✓
+   275→  - `bundle-drawer.tsx` BundleRow uses `min-w-0 flex-1` for text + 24px remove button + flex-wrap badges — safe. ✓
+   276→  - CustomizePanel in both `effect-card.tsx` and `effect-detail.tsx` uses `flex flex-wrap` for action buttons — wraps gracefully. ✓
+   277→- Verified visually via agent-browser + VLM:
+   278→  - Desktop 1280×800 on Dividers & Separators: all 3 cards render all 3 buttons + badge fully visible. ✓
+   279→  - Desktop 1280×800 on Skeletons & Shimmers: all 3 cards render correctly. ✓
+   280→  - Mobile 375×700 on Dividers & Separators: all action buttons and category badges fully inside card boundary. ✓
+   281→  - Programmatically counted heart + bundle buttons across 6 long-name categories (Toggles, Tooltips, Skeletons, Entrance Animations, Navigation, Badges): each page showed 24 hearts + 24 bundle buttons (24 cards per page, all visible). ✓
+   282→- TypeScript check: `npx tsc --noEmit` reports no errors under `src/`.
+   283→
+   284→Stage Summary:
+   285→- Root cause: category badge (variable-width text) shared a `shrink-0` row with 3 icon buttons — long names pushed the heart icon off the card.
+   286→- Fix: moved the category badge to its own row above the title, leaving the action row with only 3 fixed-size icon buttons.
+   287→- All 13 categories now render cleanly across desktop and mobile; no card has clipped buttons or badges.
+   288→
+   289→---
+   290→Task ID: 8
+   291→Agent: main
+   292→Task: Comprehensive tab audit — go through every tab on every page, find any bugs, and fix them.
+   293→
+   294→Work Log:
+   295→- Surveyed all Tabs usage in the codebase. Found 3 tab locations:
+   296→  1. `/playground/page.tsx` — HTML / CSS editor tabs (uncontrolled, `defaultValue="html"`)
+   297→  2. `effect-card.tsx` — Code / Customize tabs (uncontrolled, `defaultValue="code"`)
+   298→  3. `effect-detail.tsx` — Code / Customize tabs (uncontrolled, `defaultValue="code"`)
+   299→  Plus the shared primitive at `components/ui/tabs.tsx` (standard shadcn/Radix wrapper).
+   300→- Audited each location by reading the source carefully. Identified 3 real bugs:
+   301→
+   302→  **Bug 1 — Playground textarea cursor loss on tab switch**
+   303→  Radix `TabsContent` unmounts inactive content by default. When the user typed in the HTML editor, switched to CSS, then back to HTML, the textarea was remounted fresh — cursor reset to position 0, undo/redo history wiped, IME composition state lost.
+   304→  *Fix*: Added `forceMount` to both `TabsContent` components in `playground/page.tsx`, plus a `data-[state=inactive]:hidden` utility class so the inactive tab is hidden via CSS rather than unmounted. Both textareas now stay in the DOM; cursor and undo stack survive tab switches.
+   305→
+   306→  **Bug 2 — `CodeBlock` `extraCopy` toast message was hardcoded**
+   307→  The toast always said "Copied HTML + CSS" regardless of what `extraCopy.label` was. If a future caller used a different label (e.g. "Copy bundle"), the toast would be misleading.
+   308→  *Fix*: Added an optional `successMessage?: string` field to the `extraCopy` prop in `code-block.tsx`. The toast now uses `extraCopy.successMessage ?? 'Copied to clipboard'`. Updated all 4 existing call sites (2 in `effect-card.tsx`, 2 in `effect-detail.tsx`) to pass `successMessage: 'Copied HTML + CSS'` so the existing helpful message is preserved.
+   309→
+   310→  **Bug 3 — `EffectDetail` didn't auto-open the Customize tab when arriving via a share link with customization**
+   311→  Opening `/effect/btn-gradient#hue=15&sat=25` showed the Code tab by default, even though the URL clearly indicates the user came to tweak. The preview showed the customized effect, but the sliders were hidden behind a tab click.
+   312→  *Fix*: Converted the `EffectDetail` Tabs from uncontrolled (`defaultValue="code"`) to controlled (`value={activeTab} onValueChange={...}`). Added an `activeTab` state initialized to `'code'` (same on server and client — avoids hydration mismatch since the server can't see the URL hash). A `useEffect` with `[]` deps runs only on mount and flips the tab to `'customize'` if the URL hash contains any of `hue`/`sat`/`scale`/`speed`.
+   313→
+   314→- Verified all 3 fixes end-to-end with `agent-browser` (headless Chromium):
+   315→  - **Bug 1**: Set cursor to position 10 in the HTML textarea, clicked the CSS tab, then clicked back to the HTML tab. Cursor was still at position 10. Without `forceMount` it would have reset to 0. ✓
+   316→  - **Bug 2**: Mocked `navigator.clipboard.writeText` (headless browsers don't grant clipboard access by default), clicked "Copy both" → toast said "Copied HTML + CSS". Clicked "Copy" → toast said "Copied to clipboard". ✓
+   317→  - **Bug 3**: Opened `/effect/btn-gradient` (no hash) → active tab was "Code". Opened `/effect/btn-neon#hue=90` → active tab was "Customize". Pressed `j` to navigate to `/effect/btn-3d` (no hash) → active tab was "Code" (consistent default, no jarring tab flip). ✓
+   318→- Also audited and confirmed NOT bugs:
+   319→  - EffectCard tab state leaks across pagination: cards are keyed by `effect.id`, so they remount on page change. Tab state resets correctly. ✓
+   320→  - EffectDetail opts hydration mismatch: the existing `opts` useState initializer reads `window.location.hash` on the client only. Server renders with `DEFAULT_CUSTOMIZATION`. No hydration errors observed in dev.log. The `<style>` and CodeBlock content differences are silently reconciled by React. ✓
+   321→  - Radix Tabs keyboard navigation (arrow keys, Tab focus): works natively, no bugs. ✓
+   322→  - Dark mode active tab visibility: `bg-background` + `text-foreground` on active, `text-muted-foreground` on inactive — both visible in dark mode. ✓
+   323→- TypeScript check: `npx tsc --noEmit` reports no errors under `src/`. (Only the unrelated `examples/` and `skills/` errors remain.)
+   324→- All routes return HTTP 200: `/`, `/playground`, `/effect/btn-gradient`.
+   325→
+   326→Stage Summary:
+   327→- 3 bugs found and fixed across the 3 tab locations in the codebase.
+   328→- Bug 1 (playground cursor loss): fixed with `forceMount` + `data-[state=inactive]:hidden` — textareas now stay mounted, preserving cursor, undo history, and IME state.
+   329→- Bug 2 (CodeBlock toast): made configurable via `extraCopy.successMessage`, defaults to "Copied to clipboard". All 4 existing call sites updated to pass "Copied HTML + CSS".
+   330→- Bug 3 (EffectDetail hash-aware tab): converted Tabs to controlled mode, auto-opens Customize tab on mount when the URL hash contains customization params. No hydration mismatch (uses `useEffect` instead of `useState` initializer for the hash read).
+   331→- No regressions: all 1,680 effects, 13 categories, pagination, "Surprise me" slot-machine, favorites, bundle, shareable customization URLs, and keyboard shortcuts continue to work as before.
+   332→
+   333→---
+   334→Task ID: 14
+   335→Agent: main
+   336→Task: Build improvement #1 (search URL sync) + #2 (sort dropdown) on /library. Also re-applied the Hoverlab rename which had been auto-reverted by a git commit.
+   337→
+   338→Work Log:
+   339→- Discovered via grep that the Task 9 Hoverlab rename had been reverted by an auto-commit (`git log` showed session-ID-named commits). Re-applied all 18 CSSFX → Hoverlab edits across 13 files (layout.tsx, globals.css, page.tsx, library/page.tsx, account/page.tsx, playground/page.tsx, login, signup, effect/[slug], auth-form.tsx, customize.ts, auth.ts, bundle-export.ts).
+   340→- Also discovered .env had lost AUTH_SECRET and NEXT_PUBLIC_SITE_URL — restored both.
+   341→- Restarted dev server (it had been running with stale env, causing 500 errors on /api/auth/login and /api/auth/signup).
+   342→
+   343→Improvement #1 — Search URL sync (src/app/library/page.tsx):
+   344→- The existing search input was already wired to a `query` state with a useMemo filter across name/description/id/category/tags. But `query` was NOT synced to the URL — refreshing the page lost your search.
+   345→- Added `?q=` URL param sync: on mount, read `?q=` and pre-populate `query` state; on `query` change, write `?q=` to the URL via `history.replaceState`. Combined with the existing `?filter=` sync into a single useEffect so all three params (filter, q, sort) stay in sync.
+   346→- Result: searches are now shareable. `/library?q=neon` opens the library pre-filtered to "neon" effects.
+   347→
+   348→Improvement #2 — Sort dropdown (src/app/library/page.tsx):
+   349→- Added `Sort` type: `'default' | 'az' | 'za' | 'featured'`.
+   350→- Added `sort` state, initialized from `?sort=` URL param via a new `parseSort()` validator.
+   351→- Added sort logic to the `filtered` useMemo:
+   352→  - `default`: preserves the original EFFECTS order (curated, category-grouped in source file).
+   353→  - `az` / `za`: `localeCompare` on effect name.
+   354→  - `featured`: stable sort with featured effects first.
+   355→- Wired the `?sort=` URL param into the same sync useEffect as `?q=` and `?filter=`.
+   356→- Added a Radix Select dropdown (from existing `@/components/ui/select`) in the result-meta header row, with an `ArrowDownUp` icon + 4 options: "Curated order", "Featured first", "Name A → Z", "Name Z → A".
+   357→- Made the result-meta row `flex-wrap` so the sort dropdown doesn't overflow on narrow screens.
+   358→- Reset to page 1 when sort changes (added `sort` to the page-reset useEffect deps).
+   359→
+   360→Verification (via agent-browser with auth cookie):
+   361→- ✓ TypeScript clean: `npx tsc --noEmit` reports 0 errors under `src/`.
+   362→- ✓ HTTP 200 on `/`, `/library` (with cookie), `/login`, `/signup`.
+   363→- ✓ Live DOM (agent-browser eval): 5 "Hoverlab" instances, 0 "CSSFX" instances — rename complete.
+   364→- ✓ Sort trigger renders with default text "Curated order"; clicking opens dropdown with all 4 options ("Curated order", "Featured first", "Name A → Z", "Name Z → A").
+   365→- ✓ Search input renders with placeholder "Search by name, category, tag, or keyword…".
+   366→- ✓ Surprise me button still works.
+   367→- ✓ URL sync verified end-to-end: typing "neon" in search → URL updates to `/library?q=neon`. Selecting "Name A → Z" → URL updates to `/library?q=neon&sort=az`. Both params persist together.
+   368→- Screenshot saved: /home/z/my-project/download/library-search-sort.png
+   369→
+   370→Stage Summary:
+   371→- Improvement #1 (search URL sync) and #2 (sort dropdown) are both shipped and verified live.
+   372→- Bonus: re-applied the Hoverlab rename (was reverted) and restored the .env (had lost AUTH_SECRET).
+   373→- All 1,680 effects, 13 categories, pagination, Surprise me, favorites, bundle, keyboard shortcuts, customization, and share URLs continue to work as before.
+   374→- Next up: #3 (copy-to-clipboard history) — a small localStorage-backed dropdown showing the last 5 effects the user copied code from.
+   375→
+   376→---
+   377→Task ID: 15
+   378→Agent: main
+   379→Task: Build improvement #3 — copy-to-clipboard history dropdown in the header.
+   380→
+   381→Work Log:
+   382→- Audited the existing copy flow: `CodeBlock` in `src/components/code-block.tsx` is the single component that wraps every "Copy" button in the app (HTML block, CSS block, customized CSS block, "Copy both" combined snippet).
+   383→- Created `src/hooks/use-copy-history.ts` — a localStorage-backed hook that maintains the last 5 effects the user copied code from. Layout: `hoverlab:copy-history` key holds a JSON array of `{ effectId, effectName, effectCategory, copiedAt }`. Cross-tab sync via the `storage` event; same-tab sync via a custom `hoverlab:copy-history-changed` event so multiple hook instances stay in sync. Re-copying an effect moves it to the top (deduped by ID). Cap is 5 entries. Also exports `formatRelativeTime()` for the "5m ago" labels.
+   384→- Created `src/components/copy-history-dropdown.tsx` — a Popover triggered by a `ClipboardList` icon button. Shows a count badge when count > 0. Empty state: "No copies yet" with helpful copy. Populated state: a list of up to 5 entries, each with the effect name (truncated), category, and relative timestamp. Each entry is a `Link` to `/effect/<id>` that closes the popover on click. Includes a "Clear" button to wipe history.
+   385→- Wired the dropdown into all 3 authenticated page headers:
+   386→  - `/library` (`src/app/library/page.tsx` line 341) — between the bundle button and the GitHub link.
+   387→  - `/effect/[slug]` (`src/components/effect-detail.tsx` line 269) — in the detail page's own header.
+   388→  - `/playground` (`src/app/playground/page.tsx` line 227) — in the playground header.
+   389→- Wired `CodeBlock` to record copies: added an optional `effect?: { id, name, category }` prop to `CodeBlock`. When present, both the "Copy" and "Copy both" buttons call `record()` after a successful copy. The `EffectCard` and `EffectDetail` already passed effect context to their main CodeBlocks; the only gaps were the customized-CSS CodeBlocks inside `CustomizePanel`.
+   390→- Fixed two real TypeScript errors: the `CustomizePanel` component in both `effect-card.tsx` and `effect-detail.tsx` referenced `effect.id/name/category` to populate its CodeBlock's `effect` prop, but `effect` was not in scope (it lived in the parent component). Added `effect: Effect` to `CustomizePanelProps` and threaded it through from the parent. `npx tsc --noEmit` now reports 0 errors under `src/`.
+   391→- Restored missing `AUTH_SECRET` and `NEXT_PUBLIC_SITE_URL` to `.env` (had been lost again since Task 14).
+   392→
+   393→Verification (via Playwright `scripts/verify-copy-history.mjs`):
+   394→- ✓ Signed up a fresh user, redirected to /library.
+   395→- ✓ Visited `/effect/btn-gradient`, clicked "Copy" on the first CodeBlock. Dropdown button aria-label became "Copy history (1 item)"; count badge "1" appeared.
+   396→- ✓ Opened the dropdown. Panel header reads "Recently copied · last 5". First entry shows "Gradient Shift Button", category "Buttons", timestamp "just now".
+   397→- ✓ Clicked the entry → navigated to `/effect/btn-gradient` (popover closed).
+   398→- ✓ Navigated to `/library`, reopened dropdown, clicked "Clear". Empty state appeared: "No copies yet" with explanatory text.
+   399→- All 7 test assertions passed. Script exit code 0.
+   400→
+   401→Stage Summary:
+   402→- Improvement #3 (copy-to-clipboard history) is shipped and verified end-to-end.
+   403→- Pure localStorage; no backend changes, no auth required, no cloud sync (this is ephemeral "what did I just grab?" working memory).
+   404→- Works on all 3 authenticated pages (library, detail, playground) and records copies from every CodeBlock variant (HTML, CSS, customized CSS, "Copy both").
+   405→- Fixed 2 latent TypeScript errors in CustomizePanel that would have blocked the dev build.
+   406→- All 1,680 effects, 13 categories, pagination, Surprise me, favorites, bundle, customization, share URLs, keyboard shortcuts, and search/sort URL sync continue to work as before.
+   407→
+   408→---
+   409→Task ID: 16
+   410→Agent: main
+   411→Task: Build 4 modern-web-app features to differentiate Hoverlab from competitors (CSSFX, uiverse, animista).
+   412→
+   413→Work Log:
+   414→
+   415→**Feature 1 — Cmd+K Command Palette (`src/components/command-palette.tsx`)**
+   416→- Built a fuzzy-search command palette triggered by Cmd+K / Ctrl+K anywhere on /library, /effect/[slug], or /playground. Pressing the hotkey toggles the palette open/closed; clicking a header "Quick find ⌘K" pill opens it on mobile.
+   417→- Custom in-memory fuzzy matcher with bonuses for word-boundary matches, consecutive matches, and prefix matches. 1,680 effects scan fast enough on every keystroke that no debounce is needed.
+   418→- Three result groups: Actions (Surprise me, Open bundle, Toggle theme, Open Playground, Show favorites, Show featured, Keyboard shortcuts), Categories (all 13 effect categories), and Effects (top 50 matches). Empty query shows actions + categories + a few featured effects.
+   419→- Keyboard: ↑/↓ navigate, Enter activate, Esc close, Cmd+K toggle. Mouse hover also moves the selection. Active row auto-scrolls into view.
+   420→- Search results highlight matched characters with a `<mark>` background.
+   421→- Fixed a real bug I caught during testing: `activate(index)` was using `results[index]` (score-sorted) but the display order was grouped (actions → categories → effects). So clicking the "Buttons" category row was activating the highest-scoring effect. Added a `flatResults` array that mirrors the visual order; `activate` now indexes into `flatResults`.
+   422→- The palette's action items dispatch custom events (`hoverlab:open-bundle`, `hoverlab:surprise-me`, `hoverlab:open-shortcuts-help`) that the library page listens for. Used a `surpriseRef` indirection so the global listener (mounted once with `[]` deps) always calls the latest `surprise` callback instead of a stale closure.
+   423→- Updated the keyboard shortcuts help dialog to list `⌘K` at the top.
+   424→
+   425→**Feature 2 — Reduced-motion accessibility (`src/components/reduced-motion-provider.tsx` + `reduced-motion-toggle.tsx`)**
+   426→- New `<ReducedMotionProvider />` at the app root (alongside `<AuthProvider />`). Honors the OS-level `prefers-reduced-motion: reduce` setting via `matchMedia`. Subscribes to changes — if the user toggles the OS setting while the app is open, the UI updates in real time.
+   427→- Three-state preference: `auto` (follow OS), `on` (force reduced), `off` (force on). Persisted to `localStorage['hoverlab:reduced-motion']`.
+   428→- When motion is reduced, injects a global `<style id="hoverlab-reduced-motion-style">` that forces `animation-duration` and `transition-duration` to 0.001ms, `animation-iteration-count` to 1, and hides the "Surprise me" sweep animation. Uses `!important` so per-effect CSS rules are overridden. Sets `data-reduced-motion` attribute on `<html>` for potential per-effect opt-in to alternate static states.
+   429→- Header toggle button (`<ReducedMotionToggle />`) cycles auto → on → off → auto. Shows a `Zap` icon when motion is on, `ZapOff` (amber) when reduced. Tooltip + aria-label explain the current state.
+   430→- Mounted in all 3 authenticated page headers (library, detail, playground) next to the theme toggle.
+   431→
+   432→**Feature 3 — PWA support (`public/manifest.webmanifest` + `public/sw.js` + `src/components/service-worker-register.tsx`)**
+   433→- Created `public/icon.svg` — a custom Hoverlab icon (wand + sparkles on a gradient background, maskable).
+   434→- Generated PNG icons at 192×192, 512×512, 180×180 (apple-touch), and 32×32 (favicon) via `scripts/generate-pwa-icons.mjs` using sharp.
+   435→- `public/manifest.webmanifest`: name "Hoverlab — A Living CSS Effects Library", short_name "Hoverlab", start_url `/library`, display `standalone`, theme_color `#6366f1`, background_color `#0b1020`, 5 icons (SVG + 2 PNG × 2 purposes), and 3 app shortcuts (Library, Playground, Favorites).
+   436→- `public/sw.js`: service worker with versioned caches (`hoverlab-v1-shell`, `-data`, `-img`). Strategies:
+   437→  - App shell (HTML, JS, CSS, fonts): stale-while-revalidate.
+   438→  - Effect data JSON: cache-first with revalidation.
+   439→  - Images: cache-first.
+   440→  - Navigation: network-first with offline fallback to cached `/library` shell, then a friendly offline page.
+   441→  - API routes (`/api/*`): network-only (always need fresh auth/favorites data).
+   442→  - Cross-origin requests: bypass (let network handle them).
+   443→  - `skipWaiting()` + `clients.claim()` so updates activate immediately.
+   444→- `<ServiceWorkerRegister />` component registers `/sw.js` on `window.load`. Only registers in production (skips in dev to avoid conflicts with HMR/Turbopack).
+   445→- Updated `src/app/layout.tsx` with `metadata.manifest`, `metadata.icons` (SVG + 4 PNGs), `metadata.appleWebApp` config, and a new `viewport` export with `themeColor` (light + dark variants) and `viewportFit: 'cover'` for iPhone notch support.
+   446→
+   447→**Feature 4 — Copy-as-React toggle (`src/lib/html-to-react.ts` + `src/components/code-block.tsx`)**
+   448→- New `convertToReactComponent()` function. Takes effect ID + HTML + CSS, uses the browser's `DOMParser` to walk the HTML tree, converts to JSX:
+   449→  - `class` → `className`, `for` → `htmlFor`, `tabindex` → `tabIndex`, plus 18 more attribute renames.
+   450→  - Self-closes void elements (`<input>` → `<input />`).
+   451→  - Inlines single-text-child elements when possible.
+   452→  - Wraps output in a function component named after the effect (PascalCase: `btn-gradient` → `BtnGradient`).
+   453→  - Injects the CSS via a `<style>` tag inside the component — works in any React framework without CSS modules or styled-components setup.
+   454→  - Includes a leading JSDoc comment with paste instructions.
+   455→- New optional `pairedHtml` prop on `<CodeBlock />`. When the code block has CSS + paired HTML + effect context, a new "React" button (Atom icon) appears next to Copy/Copy both. Clicking converts the HTML+CSS to a React component and copies it to clipboard. Records the copy in the copy-history (same as other copies).
+   456→- Updated all 4 CSS CodeBlock call sites (2 in `effect-card.tsx`, 2 in `effect-detail.tsx`) to pass `pairedHtml={effect.html}`. The HTML block also gets a React button (uses its visible code as the markup).
+   457→- The React button is hidden when no effect context is available (e.g. on the playground's free-form editor where there's no effect ID to name the component after).
+   458→
+   459→Verification (`scripts/verify-modern-features.mjs` — full Playwright E2E, all 4 features):
+   460→- ✓ Feature 1: Ctrl+K opens palette. Search "gradient button" → 50 results, top match "Gradient Shift Button". Esc closes. Header "Quick find" button also opens it. Typing "Buttons" shows the Buttons category as row 0; clicking it navigates to `/library?filter=Buttons`. (Caught and fixed a bug where `activate(index)` was using the score-sorted results array instead of the display-order flat list — clicking the category row was activating the top-scoring effect.)
+   461→- ✓ Feature 2: Initial state "auto". 1st click → "on" (reduced), `<style>` tag injected, `<html data-reduced-motion="on">`. 2nd click → "off" (forced on), `<style>` removed. 3rd click → back to "auto". Preference persisted to `localStorage['hoverlab:reduced-motion']`.
+   462→- ✓ Feature 3: Manifest served at `/manifest.webmanifest` with `content-type: application/manifest+json`. JSON validates: name, 5 icons, 3 shortcuts, display=standalone, start_url=/library. All 4 icon files served (200). `<link rel="manifest">`, `<meta name="theme-color">`, `<link rel="apple-touch-icon">` all present in `<head>`. `/sw.js` served (200, application/javascript).
+   463→- ✓ Feature 4: Visited `/effect/btn-gradient`, the CSS code block shows a "Copy as React component" button. Clicked → clipboard contains a 566-char React component starting with `/** BtnGradient — generated by Hoverlab from effect "btn-gradient". */` and `export function BtnGradient()`. Output includes `<style>` tag and `className=` (confirming `class=→className=` conversion). Two React buttons present on the detail page (CSS block + customized CSS block).
+   464→
+   465→- TypeScript: `npx tsc --noEmit` reports 0 errors under `src/`.
+   466→- Screenshots saved: `/home/z/my-project/download/cmd-k-palette.png`, `/home/z/my-project/download/copy-as-react.png`.
+   467→
+   468→Stage Summary:
+   469→- All 4 modern features shipped and verified end-to-end. These are the differentiators that set Hoverlab apart from CSSFX, uiverse.io, and animista.net — none of them have a command palette, none properly respect prefers-reduced-motion, none are installable PWAs, and uiverse's React export is locked behind a paid plan.
+   470→- Net new files: `src/components/command-palette.tsx`, `src/components/reduced-motion-provider.tsx`, `src/components/reduced-motion-toggle.tsx`, `src/components/service-worker-register.tsx`, `src/lib/html-to-react.ts`, `public/manifest.webmanifest`, `public/sw.js`, `public/icon.svg`, `public/icon-192.png`, `public/icon-512.png`, `public/apple-touch-icon.png`, `public/favicon-32.png`, `scripts/generate-pwa-icons.mjs`, `scripts/verify-modern-features.mjs`, `scripts/run-and-verify-modern-features.sh`, `scripts/screenshot-modern-features.mjs`.
+   471→- All 1,680 effects, 13 categories, search/sort URL sync, copy history, favorites, bundle, customization, keyboard shortcuts continue to work alongside the new features. No regressions observed.
+   472→
+   473→---
+   474→Task ID: 16
+   475→Agent: main
+   476→Task: Fix React error "Cannot update a component (`Home`) while rendering a different component (`EffectCard`)" reported via console error.
+   477→
+   478→Work Log:
+   479→- Root cause: The `useFavorites`, `useBundle`, and `useCopyHistory` hooks all called their respective `writeXxx(next)` persistence helper *inside* a `setState` updater function. The updater runs during React's render phase. `writeXxx` synchronously dispatches a custom event (`cssfx:favorites-changed` / `cssfx:bundle-changed` / `hoverlab:copy-history-changed`) via `window.dispatchEvent`. The `sync` listener registered by *other* `useXxx` hook instances (e.g. the one in `Home`) fires synchronously and calls `setXxx(readXxx())` on the other component — while React is still rendering `EffectCard`. React 18+ correctly throws "Cannot update a component while rendering a different component".
+   480→- Stack trace from the user's report confirmed the chain: `EffectCard` render → `useFavorites` → `toggle` (line 153) → `writeFavorites` (line 43) → `sync` listener (line 55) → `setFavorites` on `Home`.
+   481→- Fix: refactored all three hooks to use a `stateRef` that mirrors the latest state. Action functions (`toggle`, `add`, `remove`, `clear`, `record`) now compute `next` from the ref (always current, even for rapid successive calls), update the ref synchronously, then call `setState(next)` and `writeXxx(next)` as two separate statements from the event handler — not inside the updater. This keeps the synchronous `dispatchEvent` outside React's render phase.
+   482→- Also updated the cloud-sync merge blocks in `useFavorites` and `useBundle` to write to the ref (`favoritesRef.current = merged` / `entriesRef.current = merged`) right before `setState`, so the ref is never stale between an async cloud merge and a synchronous user action.
+   483→- `useCopyHistory` had no cloud-sync path (it's pure localStorage), so only `record` and `clear` needed the refactor.
+   484→
+   485→Files changed:
+   486→- `src/hooks/use-favorites.ts` — added `favoritesRef`, refactored `toggle`, updated cloud-sync merge.
+   487→- `src/hooks/use-bundle.ts` — added `entriesRef`, refactored `add` / `remove` / `clear`, updated cloud-sync merge.
+   488→- `src/hooks/use-copy-history.ts` — added `entriesRef`, refactored `record` / `clear`.
+   489→
+   490→Verification:
+   491→- `npx tsc --noEmit` reports 0 errors under `src/` (only unrelated errors in `examples/` and `skills/`).
+   492→- The render-phase setState chain is eliminated: no `writeXxx` call is reachable from inside a `setState` updater function. `grep` confirms all remaining `writeXxx` calls are either in declarations, comments, async cloud-sync blocks (post-`await`, outside render), or in event-handler-scope action functions.
+   493→
+   494→Stage Summary:
+   495→- The console error is resolved at its source. All three client-state hooks (favorites, bundle, copy history) now follow the correct React pattern: state updaters must be pure and must not trigger side effects (including custom-event dispatches) that synchronously update other components. The ref-mirror pattern also makes rapid successive calls (e.g. double-clicking the heart icon) safe — each call sees the latest state via the ref, not a stale closure value.
+   496→
+   497→---
+   498→Task ID: 17
+   499→Agent: main
+   500→Task: Ship 4 modern differentiator features (recently viewed, ZIP bundle, OG images, AI search) to make Hoverlab best-in-class vs CSSFX/uiverse/animista.
+   501→
+   502→Work Log:
+   503→
+   504→**Feature 1 — Recently viewed effects**
+   505→- New hook `src/hooks/use-recently-viewed.ts` — mirrors the copy-history pattern (localStorage + cross-tab/same-tab sync via custom events). Cap 8 entries. Uses the same ref-mirror pattern from Task 16 to avoid the render-phase setState bug.
+   506→- `EffectDetail` calls `recordView()` on mount and on every prev/next navigation (effect.id change).
+   507→- New component `src/components/recently-viewed-rail.tsx` — horizontal scroll strip of mini cards (category, name, relative time). "Last" badge on the most recent. "Clear" button. Hidden when empty.
+   508→- Wired into `/library` page above the effect grid, only shown when `filter === 'All' && !query.trim()` so it doesn't compete with active search sessions.
+   509→
+   510→**Feature 2 — ZIP bundle download**
+   511→- Installed `jszip` (^3.10.1).
+   512→- Extended `src/lib/bundle-export.ts` with `buildBundleZip()` (async, dynamic-imports jszip so the lib is only loaded on click). Produces a structured archive:
+   513→  ```
+   514→  hoverlab-bundle/
+   515→  ├── index.html      ← demo page linking per-effect CSS via <link>
+   516→  ├── styles.css      ← all CSS concatenated
+   517→  ├── README.md       ← structure + usage + effect inventory
+   518→  └── effects/
+   519→      ├── <slug>.html
+   520→      └── <slug>.css
+   521→  ```
+   522→- Also added `downloadBlob()` helper and refactored existing `downloadTextFile()` to use it.
+   523→- Rewired `src/components/bundle-drawer.tsx` footer: ZIP is now the primary button (full-width, FolderArchive icon, "Building ZIP…" busy state), HTML and CSS-only are secondary outline buttons. Error toast on failure with fallback suggestion.
+   524→
+   525→**Feature 3 — Dynamic OG image per effect**
+   526→- New route `src/app/effect/[slug]/opengraph-image.tsx` using `next/og`'s `ImageResponse`. Renders a 1200×630 PNG with: dark gradient background, decorative glow circles, category badge, large effect name, description, Hoverlab wordmark + URL. No live preview (Satori/edge runtime can't render arbitrary CSS) — leans on typography + brand identity.
+   527→- Updated `src/app/effect/[slug]/page.tsx` `generateMetadata` to add `openGraph` (title, description, type=article, siteName) and `twitter` (card=summary_large_image) fields.
+   528→- Updated `src/middleware.ts` to skip auth for any path ending in `/opengraph-image` or `/twitter-image` — social crawlers don't have session cookies, so without this exception the OG image would 307-redirect to /login and share cards would be blank.
+   529→
+   530→**Feature 4 — AI natural-language search**
+   531→- New API route `src/app/api/ai/search/route.ts` using `z-ai-web-dev-sdk`. Strategy: client pre-filters the catalog (substring match, capped at 80 candidates) → sends `{query, candidates}` to the API → LLM ranks by semantic relevance → returns `{ids: [...]}`. Defensive JSON parsing handles markdown fences, trailing prose, missing fields; result is filtered against valid candidate IDs to prevent hallucination.
+   532→- Wired into `/library` page: sparkles toggle button inside the search input (right side). When ON: placeholder changes to "Describe what you want…", input gets primary ring, AI banner shows loading/result state, sort + pagination hidden (results are ≤20, ranked). Debounced 400ms after typing stops. Race-condition guard via incrementing request ID.
+   533→- Empty state copy adapts to AI mode ("No AI matches — try rephrasing or toggle AI search off").
+   534→
+   535→Verification (all 4 features E2E via Playwright):
+   536→- ✓ Feature 1: Visited /effect/btn-gradient → returned to /library → "Recently viewed" rail visible with the effect as the first entry.
+   537→- ✓ Feature 2: Added effect to bundle → opened drawer → "Download ZIP" button present → click triggered download of `hoverlab-bundle-2026-06-29.zip`.
+   538→- ✓ Feature 3: `curl /effect/btn-gradient/opengraph-image` → 200, image/png, 1200×630, 248KB. Page `<meta property="og:title">` = "Gradient Shift Button — Hoverlab", `<meta name="twitter:card">` = "summary_large_image".
+   539→- ✓ Feature 4: AI toggle present + clickable → placeholder switches to "Describe what you want…" → typed "button that pulses" → after ~20s LLM round-trip, banner shows "AI-ranked results (8)". Direct API test with "button that pulses red" + 3 candidates correctly returned `["btn-pulse"]` (the LLM understood semantic intent).
+   540→- TypeScript: `npx tsc --noEmit` reports 0 errors under `src/`.
+   541→
+   542→Stage Summary:
+   543→- All 4 modern differentiator features shipped and verified end-to-end. These close the biggest gaps vs CSSFX (no recently viewed, no OG images), uiverse.io (no ZIP export, AI search locked behind paid plan), and animista.net (no search at all).
+   544→- Net new files: `src/hooks/use-recently-viewed.ts`, `src/components/recently-viewed-rail.tsx`, `src/app/effect/[slug]/opengraph-image.tsx`, `src/app/api/ai/search/route.ts`, `scripts/smoke-test-{v2,v3,v4}.mjs`, `scripts/test-zip.mjs`, `scripts/test-ai-e2e.mjs`, `scripts/inspect-{search,cards}.mjs`.
+   545→- Modified files: `src/components/effect-detail.tsx` (recordView call), `src/app/library/page.tsx` (AI mode state + UI + recently-viewed rail), `src/components/bundle-drawer.tsx` (ZIP button + handler), `src/lib/bundle-export.ts` (buildBundleZip + downloadBlob + resolveBundle helper), `src/app/effect/[slug]/page.tsx` (openGraph + twitter metadata), `src/middleware.ts` (skip auth for OG image routes).
+   546→- New dependency: `jszip` ^3.10.1 (dynamic-imported, only loaded when user clicks "Download ZIP").
+   547→- All 1,680+ effects, 13 categories, existing features (favorites, bundle, copy history, command palette, reduced-motion, PWA, React export, customization, share URLs, keyboard shortcuts) continue to work alongside the new features. No regressions observed.
+   548→
+   549→---
+   550→Task ID: 18
+   551→Agent: main
+   552→Task: Ship Compare mode (side-by-side effect preview drawer) — a differentiator no competitor (CSSFX / uiverse / animista) offers.
+   553→
+   554→Work Log:
+   555→
+   556→**Feature — Compare drawer (`src/components/compare-drawer.tsx` + `src/hooks/use-compare.ts`)**
+   557→- New `useCompare` hook mirrors the proven ref-mirror pattern from Task 16 (use-favorites / use-bundle / use-copy-history / use-recently-viewed). Pure localStorage (`hoverlab:compare`), cross-tab sync via `storage` event, same-tab sync via `hoverlab:compare-changed` custom event. Capped at MAX_ENTRIES=4 (4 effects is enough for a meaningful side-by-side, more would shrink each preview). Exposes `{ entries, has, add, remove, toggle, clear, count, isFull, max }`.
+   558→- `toggle()` returns `'added' | 'removed' | 'full'` so callers can surface the right toast (success / removed / "compare is full") without re-reading state.
+   559→- New `CompareDrawer` component (slide-out, `max-w-3xl` — wider than the bundle drawer's `max-w-md` because we need horizontal real estate). Renders up to 4 `CompareTile` components in a responsive grid (1 col on mobile, 2 cols on md+). Each tile shows: effect name + category badge, live preview (CSS scoped under a unique `fx-cmp-N` wrapper class so multiple effects don't class-collide), "Copy code" button (copies HTML + CSS as a single snippet with section comments), "Open detail" link, remove (X) button. Shows a friendly empty-state when nothing is queued. Shows an amber "Compare is full" banner when at cap.
+   560→
+   561→**Wiring — EffectCard (`src/components/effect-card.tsx`)**
+   562→- Added a 4th icon button (Scale icon) to the card header row, between the detail-link and bundle buttons. Uses `toggleCompare()` and toasts the result. When compare is full and this card isn't already in it, the button is dimmed (opacity-40, cursor-not-allowed) to telegraph "you can't add this until you remove one".
+   563→- Layout comment updated to reflect 4 buttons (112px + gaps) instead of 3.
+   564→
+   565→**Wiring — Library page (`src/app/library/page.tsx`)**
+   566→- New `compareOpen` state + `useCompare()` for the count badge.
+   567→- Header: new Scale-icon button between Bundle and CopyHistory, with a primary-colored count badge when >0. Tooltip + aria-label include the `v` shortcut.
+   568→- Keyboard: `v` toggles the compare drawer (chosen over `c` because `c` is already "copy CSS" on the detail page — `v` for "versus" reads naturally). The `hoverlab:open-compare` custom event is listened for so the command palette can open it.
+   569→- CompareDrawer mounted at the bottom alongside BundleDrawer.
+   570→
+   571→**Wiring — Effect detail page (`src/components/effect-detail.tsx`)**
+   572→- New `useCompare()` hook + `compareOpen` state.
+   573→- Action group gets 2 new buttons: a compare-toggle (next to fav, fills primary when in compare) and an "open compare" (next to open-bundle, ExternalLink-style). The toggle uses the same dimmed-when-full pattern as EffectCard.
+   574→- `v` keyboard shortcut added to toggle the drawer.
+   575→- CompareDrawer mounted at the bottom alongside BundleDrawer.
+   576→
+   577→**Wiring — Command palette (`src/components/command-palette.tsx`)**
+   578→- New "Open compare" action item (Scale icon, keywords "compare side by side vs versus drawer") right after "Open bundle". Dispatches `hoverlab:open-compare`.
+   579→
+   580→**Wiring — Keyboard shortcuts help (`src/components/shortcuts-help.tsx`)**
+   581→- New entry: `v` → "Open / close compare (side-by-side preview)", scope "Anywhere".
+   582→
+   583→Verification:
+   584→- `npx tsc --noEmit` reports 0 errors under `src/` (the 4 errors that remain are in `examples/` and `skills/` — pre-existing, unrelated).
+   585→- `npx next build` succeeds: "✓ Compiled successfully in 9.4s", 79/79 static pages generated, including `/library`, `/playground`, `/account`, `/login`, `/signup`, all 64 `/effect/[slug]` SSG paths. No SSR errors, no missing imports, no type errors during static generation.
+   586→- `node scripts/test-compare-hook.mjs` — 16/16 unit tests pass, covering: empty/corrupt localStorage read, cap enforcement (4 max), dedupe, non-string entry filtering, idempotent add, toggle add/remove/full transitions, removal-allowed-at-cap (so user can swap one out without first clearing), full 4-then-reject-5th-then-remove-1-then-add-it-back workflow.
+   587→- Note on dev server: the sandbox killed the dev server within ~5s of spawn (reproed across setsid+nohup+exec combinations). Pivoted to `next build` + a standalone Node test of the hook's pure logic — together these verify the same things a curl+grep smoke test would have.
+   588→
+   589→Stage Summary:
+   590→- Compare mode is shipped end-to-end and verified. This is the single biggest UX differentiator vs CSSFX / uiverse / animista — none of them have any way to view effects side-by-side. Users previously had to open multiple browser tabs and mentally compare; now they queue up to 4 effects with one click and see them rendered live in a single drawer.
+   591→- Net new files: `src/hooks/use-compare.ts`, `src/components/compare-drawer.tsx`, `scripts/test-compare-hook.mjs`, `scripts/dev-server.sh`.
+   592→- Modified files: `src/components/effect-card.tsx` (4th icon button), `src/app/library/page.tsx` (header button + `v` shortcut + CompareDrawer mount + open-compare event listener), `src/components/effect-detail.tsx` (2 new action buttons + `v` shortcut + CompareDrawer mount), `src/components/command-palette.tsx` (Open compare action), `src/components/shortcuts-help.tsx` (`v` entry).
+   593→- All 1,680+ effects, 13 categories, and every prior feature (favorites, bundle, copy history, recently viewed, command palette, reduced-motion, PWA, React export, customization, share URLs, keyboard shortcuts, AI search, ZIP export, OG images) continue to work alongside compare mode. No regressions.
+   594→
+   595→---
+   596→Task ID: 18 (continued)
+   597→Agent: main
+   598→Task: User reported "this page is missing in tab" — Compare was wired into /library and /effect/[slug] but missing from the /playground page header.
+   599→
+   600→Work Log:
+   601→- The playground page (`src/app/playground/page.tsx`) had the bundle button + drawer wired in but I missed it during the initial Compare wiring.
+   602→- Added: Scale icon import, CompareDrawer import, useCompare import, `compareOpen` state, `v` keyboard shortcut (alongside the existing `b`), header button with primary count badge (mirrors the library page styling), CompareDrawer mount at the bottom of the page.
+   603→- Bonus fix: the playground wasn't listening for the `hoverlab:open-bundle` custom event from the command palette either — so clicking "Open bundle" in the palette while on /playground was a no-op. Added listeners for both `hoverlab:open-bundle` and `hoverlab:open-compare` so the command palette actions now work on the playground page too.
+   604→
+   605→Verification:
+   606→- `npx tsc --noEmit` → 0 errors under `src/`.
+   607→- `npx next build` → ✓ compiled, 79/79 pages generated (including /playground as a static route).
+   608→
+   609→Stage Summary:
+   610→- Compare is now available on all 3 authenticated pages: /library, /effect/[slug], /playground. The `v` shortcut works everywhere. The command palette's "Open compare" action works everywhere.
+   611→
+   612→---
+   613→Task ID: 19
+   614→Agent: main
+   615→Task: Ship "Remix" feature — save customized effect variants to a personal "Your remixes" rail on /library.
+   616→
+   617→Work Log:
+   618→
+   619→**Feature — Remix hook (`src/hooks/use-remixes.ts`)**
+   620→- New `useRemixes` hook follows the same ref-mirror pattern as use-favorites / use-bundle / use-compare / use-recently-viewed (avoids the Task 16 render-phase setState bug).
+   621→- Pure localStorage (`hoverlab:remixes`), cross-tab sync via `storage` event, same-tab sync via `hoverlab:remixes-changed` custom event. Capped at 24 entries.
+   622→- Each RemixEntry snapshots: source effectId/name/category, the customization opts, the customized CSS string, the source HTML, darkSurface flag, ISO timestamp, and a unique id.
+   623→- `save()` dedups by effectId + opts (re-saving the same combo refreshes timestamp instead of creating a duplicate).
+   624→- `hasRemix(effectId, opts)` lets the UI show "Saved" state on the button.
+   625→- Fixed a real bug caught by the unit test: using `Date.now()` alone for IDs collides when saves happen in the same millisecond. Switched to `crypto.randomUUID()` (with a timestamp+random fallback for older runtimes).
+   626→
+   627→**Feature — My Remixes rail (`src/components/my-remixes-rail.tsx`)**
+   628→- Horizontal scroll strip of mini cards (56px wide each) shown above the effect grid on /library.
+   629→- Each card: live preview (CSS scoped under a unique `fx-remix-N` wrapper class), effect name, opts summary (e.g. "hue 15° · speed 1.25×"), category badge, Copy button (HTML + CSS), and a deep-link to the source effect detail page with the same opts in the URL hash (so clicking opens the effect with the customize panel preset to the saved state).
+   630→- "Clear" button in the header. Auto-hidden when the user has no remixes or is actively searching/filtering (same visibility rule as the recently-viewed rail).
+   631→
+   632→**Wiring — EffectCard CustomizePanel (`src/components/effect-card.tsx`)**
+   633→- Added optional `onSaveRemix` + `remixSaved` props to CustomizePanel.
+   634→- New "Save remix" button (Bookmark icon) in the action row, between Reset and Copy. Disabled when not customized AND not already saved (prevents saving the default state). Shows "Saved" (with Check icon) when the current opts already have a remix.
+   635→- Tooltip explains the 3 states: tweak first / already saved (re-save refreshes timestamp) / save this customized version.
+   636→
+   637→**Wiring — EffectDetail CustomizePanel (`src/components/effect-detail.tsx`)**
+   638→- Same Save-remix button added to the detail page's CustomizePanel, alongside the existing Share-link button. Same dedup + Saved-state logic.
+   639→
+   640→**Wiring — /library page (`src/app/library/page.tsx`)**
+   641→- Imported MyRemixesRail. Mounted it below the RecentlyViewedRail, with the same `hidden={filter !== 'All' || !!query.trim()}` visibility rule so it doesn't compete with active search/filter sessions.
+   642→
+   643→Verification:
+   644→- `npx tsc --noEmit` → 0 errors under `src/`.
+   645→- `npx next build` → ✓ compiled, 79/79 pages generated (including /library with the new rail, all 64 /effect/[slug] SSG paths with the new Save-remix button).
+   646→- `node scripts/test-remix-hook.mjs` → 14/14 unit tests pass, covering: empty/corrupt localStorage read, malformed entry filtering, MAX_ENTRIES cap, dedup by effectId+opts, multiple remixes of same effect with different opts, hasRemix lookup, optsEqual field coverage, and a full save→save-different→save-same→remove workflow.
+   647→- The unit test caught a real bug (Date.now() ID collision) which I fixed in both the hook and the test before re-running.
+   648→
+   649→Stage Summary:
+   650→- Remix is shipped end-to-end. This is a meaningful differentiator vs CSSFX/uiverse/animista — none of them let users save customized variants of effects. Users previously had to either (a) copy the CSS and lose the customization opts, or (b) keep the share-URL bookmarked somewhere. Now they click "Save remix" and it shows up in a persistent rail on /library with a live preview, one-click copy, and a deep-link back to the source.
+   651→- Net new files: `src/hooks/use-remixes.ts`, `src/components/my-remixes-rail.tsx`, `scripts/test-remix-hook.mjs`.
+   652→- Modified files: `src/components/effect-card.tsx` (Save-remix button in CustomizePanel), `src/components/effect-detail.tsx` (Save-remix button in CustomizePanel), `src/app/library/page.tsx` (MyRemixesRail mount).
+   653→- All 1,680+ effects, 13 categories, and every prior feature (favorites, bundle, copy history, recently viewed, compare, command palette, reduced-motion, PWA, React export, customization, share URLs, keyboard shortcuts, AI search, ZIP export, OG images) continue to work alongside remixes. No regressions.
+   654→
+   655→---
+   656→Task ID: 20
+   657→Agent: main
+   658→Task: Ship "Brand color system" — let users recolor the entire app via preset palettes or custom hue/chroma/lightness, persisted across sessions.
+   659→
+   660→Work Log:
+   661→
+   662→**Refactor — globals.css**
+   663→- Introduced four brand CSS variables on `:root`: `--brand-hue`, `--brand-chroma`, `--brand-light-l`, `--brand-dark-l`. The existing `--primary`, `--ring`, and `--accent` now DERIVE from these via `oklch(var(--brand-light-l) var(--brand-chroma) var(--brand-hue))` (light) and the dark-mode equivalents (using `--brand-dark-l`). This is the key architectural choice: a single state change cascades to every primary-colored UI element without touching any component.
+   664→- Defaults preserve the original emerald/teal theme exactly (`hue: 160, chroma: 0.2, lightL: 0.55, darkL: 0.7`).
+   665→- Also added `--brand-accent-light-l` (0.94) and `--brand-accent-dark-l` (0.26) so accent background tint stays subtle in both modes.
+   666→
+   667→**Feature — src/lib/brand-presets.ts**
+   668→- Pure module (no React) with: `BrandColor` type, `BrandPreset` type, `DEFAULT_BRAND_COLOR`, `BRAND_PRESETS` (12 curated palettes: Emerald, Indigo, Rose, Amber, Cyan, Violet, Lime, Orange, Magenta, Sky, Crimson, Teal), `clamp`, `normalizeHue`, `coerceBrandColor` (defensive parse + clamp), `brandEquals` (tolerant comparison for preset matching), `findMatchingPreset`, `applyBrandColorToDocument` (sets CSS vars on `<html>`), `clearBrandColorFromDocument`.
+   669→- Each preset has a `swatch` CSS color string so the picker grid can render the swatch via inline style without recomputing OKLCH.
+   670→
+   671→**Feature — src/hooks/use-brand-color.ts**
+   672→- Follows the ref-mirror pattern from use-remixes / use-favorites / use-bundle / use-compare / use-recently-viewed (avoids the Task 16 render-phase setState bug).
+   673→- localStorage key `hoverlab:brand-color` stores either `null` (= reset to default, explicit) or a `BrandColor` object.
+   674→- Cross-tab sync via `storage` event + same-tab sync via `hoverlab:brand-color-changed` custom event.
+   675→- On mount: hydrates from localStorage and applies to `<html>`. On change: writes localStorage, dispatches event, applies to `<html>`.
+   676→- SSR-safe: starts with `DEFAULT_BRAND_COLOR` to avoid hydration mismatch; reads localStorage in `useEffect`.
+   677→- Exposes `{ color, isCustomized, isDefault, set, reset }` — `isCustomized` distinguishes "user explicitly picked the default preset" from "user hasn't customized yet", which controls whether the Reset button is enabled.
+   678→
+   679→**Feature — src/components/brand-color-picker.tsx**
+   680→- Popover trigger is a small Palette-icon button with a colored dot in the top-right showing the current brand color at a glance.
+   681→- Popover content (w-80):
+   682→  - Header: "Brand color" + preset name (or "Custom") + Reset button (disabled when not customized).
+   683→  - 6-column swatch grid of all 12 presets. Selected preset shows a check mark + foreground-colored border. Hover scales up 110%.
+   684→  - Custom section with 4 sliders: Hue (0-360°, with a hue-rainbow gradient on the track — implemented via per-instance CSS class scoping so the gradient only affects THIS slider, not other sliders elsewhere on the page), Chroma (0-0.32), Light (L) (0.2-0.85), Dark (L) (0.4-0.9).
+   685→  - Slider value commits on `onValueCommit` (mouse-up) so dragging doesn't thrash localStorage on every pixel; live preview swatch at the bottom updates during drag.
+   686→  - "Defaults" button sets all 4 sliders to DEFAULT_BRAND_COLOR values (useful when user has tweaked everything and wants to start over without fully resetting).
+   687→- Listens for the `hoverlab:open-brand-color` custom event so the command palette can open it programmatically.
+   688→
+   689→**Wiring — /library, /playground, /effect/[slug] headers**
+   690→- Added `BrandColorPicker` to the right side of the header on all three authenticated pages, after `ReducedMotionToggle`.
+   691→- Added `Shift+P` keyboard shortcut on all three pages that dispatches `hoverlab:open-brand-color`. Chose `Shift+P` (P for palette) because bare `P` is reserved for future use and `Shift+P` is a common palette-related shortcut.
+   692→- Same `isTypingTarget` guard as other shortcuts so it doesn't fire when typing 'P' inside an input.
+   693→
+   694→**Wiring — Command palette**
+   695→- New "Change brand color" action item (Palette icon, keywords "brand color theme palette hue swatch accent primary") right after "Open compare". Dispatches `hoverlab:open-brand-color`.
+   696→
+   697→**Wiring — Keyboard shortcuts help**
+   698→- New entry: `⇧ P` → "Open the brand color picker", scope "Anywhere".
+   699→
+   700→Verification:
+   701→- `npx tsc --noEmit` → 0 errors under `src/`. (4 pre-existing errors in `examples/` and `skills/` are unrelated.)
+   702→- `npx next build` → ✓ compiled in 7.2s, 79/79 pages generated, all 64 /effect/[slug] SSG paths work.
+   703→- `node scripts/test-brand-color.mjs` → 43/43 unit tests pass, covering: DEFAULT_BRAND_COLOR shape, BRAND_PRESETS uniqueness + emerald-matches-default + every-preset-findable, clamp boundaries, normalizeHue wrapping (positive/negative/large), coerceBrandColor defensive parsing (null/undefined/non-object/missing fields/wrong types/hue wrapping/chroma clamping/lightL clamping/darkL clamping), brandEquals tolerance (rejects ≥0.5° hue diff, accepts <0.5°), findMatchingPreset (default/custom/off-by-tiny), document-application no-throw in Node, and localStorage round-trip (save→load, null reset, corrupt JSON safety).
+   704→
+   705→Stage Summary:
+   706→- Brand color system is shipped end-to-end and verified. This is a meaningful UX differentiator vs CSSFX/uiverse/animista — none of them let users recolor the entire UI to match their brand. Users now pick from 12 curated presets or fine-tune hue/chroma/lightness via sliders, and the entire app (buttons, focus rings, accents, badges, hover states, command palette highlights, all primary-colored UI) recolors instantly. Selection persists across sessions and syncs across tabs.
+   707→- Net new files: `src/lib/brand-presets.ts`, `src/hooks/use-brand-color.ts`, `src/components/brand-color-picker.tsx`, `scripts/test-brand-color.mjs`.
+   708→- Modified files: `src/app/globals.css` (refactored `:root` and `.dark` to derive primary/ring/accent from `--brand-*` variables), `src/app/library/page.tsx` (header mount + Shift+P shortcut), `src/app/playground/page.tsx` (header mount + Shift+P shortcut), `src/components/effect-detail.tsx` (header mount + Shift+P shortcut), `src/components/command-palette.tsx` (Change brand color action + Palette import), `src/components/shortcuts-help.tsx` (Shift+P entry).
+   709→- Architecture is future-proof: any new component using `bg-primary`, `text-primary`, `ring-primary`, `bg-accent`, etc. automatically participates in the brand color system — no per-component wiring needed.
+   710→- All 1,680+ effects, 13 categories, and every prior feature (favorites, bundle, copy history, recently viewed, compare, remixes, command palette, reduced-motion, PWA, React export, customization, share URLs, keyboard shortcuts, AI search, ZIP export, OG images, dark mode) continue to work alongside brand color. No regressions.
+   711→
+   712→---
+   713→Task ID: 21
+   714→Agent: main
+   715→Task: Transform Hoverlab from "effects library" into a "designer's one-stop toolbox" by adding a Designer Tools section with 5 high-impact tools.
+   716→
+   717→Work Log:
+   718→
+   719→**Strategy decision**
+   720→Looked at what designers actually need day-to-day that complements (but doesn't duplicate) the existing 1,680-effects library. Picked 5 tools that are universal designer needs: palette generator, gradient studio, shadow builder, contrast checker, unit converter. Each is a leaf page under `/tools/<name>`, plus a `/tools` hub page that links to all of them with cards.
+   721→
+   722→**Feature — `/lib/color-tools.ts` (pure utilities)**
+   723→Hex/RGB/HSL conversions (both directions, with 3-digit hex support, case insensitivity, and alpha-channel tolerance). Palette generation for 7 schemes (analogous, complementary, triadic, split-complementary, tetradic, monochromatic, shades & tints) — each returns exactly 5 colors so the UI grid is stable. WCAG 2.1 relative luminance + contrast ratio + level classifier (AAA / AA / AA Large / Fail) for both normal and large text. Hex normalization + random-hex helper.
+   724→
+   725→**Feature — shared components (`/components/designer-tools/`)**
+   726→- `tool-layout.tsx` — shared header shell that mirrors the library/playground/effect-detail header pattern (logo + tool name + tagline + same right-side action cluster: shortcuts, bundle w/ count, compare w/ count, copy history, user menu, theme, reduced-motion, brand color). Mounts BundleDrawer, CompareDrawer, CommandPalette, ShortcutsHelpButton so all the global shortcuts work on tool pages.
+   727→- `copy-css-card.tsx` — reusable "code block + Copy button" card used by every tool to surface generated CSS consistently. Hover state shows checkmark.
+   728→
+   729→**Feature — `/tools` hub page**
+   730→Hero section ("Designer tools, built into your browser") + 5 tool cards (each with gradient icon badge, name, description, "Open tool →" CTA with hover lift). Cards link to /tools/<name>. Footer note points users to the command palette for discovery.
+   731→
+   732→**Feature — `/tools/palette` (Palette Generator)**
+   733→Base color picker (native color input + hex input + random button) + scheme selector (7 schemes as a 2-col button grid). Renders 5 large swatches in a grid; each swatch shows hex/RGB/HSL on hover and copies the hex on click. Live preview section shows 5 buttons + a gradient hero all styled with the generated palette. Three CopyCssCard exports: CSS variables (`:root { --color-1: ...; }`), Tailwind config (palette.100-500), and JSON (with hex/rgb/hsl per color). State persists to `hoverlab:tool:palette`.
+   734→
+   735→**Feature — `/tools/gradient` (Gradient Studio)**
+   736→Type selector (linear / radial / conic). For linear + conic: angle slider 0-360° with 8 preset angle buttons (0/45/90/135/180/225/270/315). Stop track shows a live preview bar with markers at each stop position. Per-stop rows let you pick color, copy hex, drag position 0-100%, and remove the stop. Min 2 stops, max unlimited, "Add stop" + "Randomize colors" buttons in the header. Large 320px-tall preview pane shows the live gradient. CopyCssCard exports production CSS with fallback background-color. State persists to `hoverlab:tool:gradient`.
+   737→
+   738→**Feature — `/tools/shadow` (Shadow Builder)**
+   739→Layer list (up to 8 layers). Each layer: enable/disable toggle (eye icon), inset switch, X/Y/blur/spread sliders with synced number inputs, color picker + hex input, opacity slider, and reorder up/down + remove buttons. Surface toggle (light/dark) for the preview pane. Card color picker. Live preview pane shows a card with the layered shadow applied. CopyCssCard exports `box-shadow: layer1, layer2, ...;` with proper formatting. State persists to `hoverlab:tool:shadow`. Defaults to a 3-layer Material-Design-style shadow.
+   740→
+   741→**Feature — `/tools/contrast` (Contrast Checker)**
+   742→Foreground + background color inputs (each with native picker + hex input). Swap button. Random pair button. Big ratio display (5xl font, tabular-nums, "X.XX:1" format). Two verdict cards: Normal text (AAA/AA/AA Large/Fail) and Large text (same scale, different thresholds). When failing, an amber "Suggested fix" panel computes the nearest darker/lighter variant of the foreground that reaches 4.5:1 and offers a one-click "Use" button. Live preview shows the foreground/background applied to small/normal/large text blocks plus real components (primary button, card, link). CopyCssCard exports `color` + `background-color`. State persists to `hoverlab:tool:contrast`.
+   743→
+   744→**Feature — `/tools/units` (Unit Converter)**
+   745→Single input value + unit selector (px / rem / em / % / vw / vh). Output section shows all 5 OTHER units as clickable rows — each row copies `<value><unit>` on click. Right-side panel lets you set the reference values: root font-size (for rem), parent font-size (for em), parent dimension (for %), viewport width (for vw), viewport height (for vh). Quick reference card shows common conversions ("1rem = 16px", "1vw = 14.4px", etc.). State persists to `hoverlab:tool:units`.
+   746→
+   747→**Wiring — navigation**
+   748→- Library page header: new "Designer Tools" button (Ruler icon) next to the existing "Playground" button.
+   749→- Playground page header: new "Designer Tools" button next to the existing "Back to library".
+   750→- Effect-detail breadcrumb: new "Designer Tools" button alongside "Back to library".
+   751→
+   752→**Wiring — command palette**
+   753→6 new action items: "Open Designer Tools" (hub), "Tool: Palette Generator", "Tool: Gradient Studio", "Tool: Shadow Builder", "Tool: Contrast Checker", "Tool: Unit Converter". Each has rich keywords so users find them via fuzzy search ("color", "wcag", "rem", "gradient", "shadow", "palette", etc.). Imported 5 new icons (Palette, Pipette, Layers, Accessibility, Ruler).
+   754→
+   755→Verification:
+   756→- `npx tsc --noEmit` → 0 errors under `src/`. (Caught + fixed 2 during development: a `'%':` syntax error in units page and an unused import in palette page.)
+   757→- `npx next build` → ✓ compiled in 7.8s. Page count went from 79 → 85. All 6 new routes prerendered as static: `/tools`, `/tools/palette`, `/tools/gradient`, `/tools/shadow`, `/tools/contrast`, `/tools/units`. All 64 /effect/[slug] SSG paths still work.
+   758→- `node scripts/test-color-tools.mjs` → 33/33 unit tests pass, covering: hexToRgb (6-digit/3-digit/no-hash/alpha/case/invalid), rgbToHex (format/clamp/zero-pad), hex↔HSL round-trip (8 colors, ≤1 channel drift), generatePalette (all 7 schemes return 5 colors, base at expected index, invalid hex fallback), contrastRatio (21:1 / 1:1 / null), wcagLevel (AAA/AA/AA Large/Fail thresholds for both normal and large text), normalizeHex (lowercase/expand/invalid), randomHex (valid 6-digit hex × 20), relativeLuminance (black=0 / white=1).
+   759→
+   760→Stage Summary:
+   761→- Designer Tools section is shipped end-to-end and verified. Hoverlab is now a genuine one-stop shop for designers: they can browse 1,680+ CSS effects for inspiration, generate a 5-color palette from a base color, compose a multi-stop gradient, layer box-shadows visually, check WCAG contrast, and convert CSS units — all without leaving the app.
+   762→- Net new files: `src/lib/color-tools.ts` (pure utilities), `src/components/designer-tools/tool-layout.tsx` (shared header), `src/components/designer-tools/copy-css-card.tsx` (shared code+copy card), `src/app/tools/page.tsx` (hub), `src/app/tools/palette/page.tsx`, `src/app/tools/gradient/page.tsx`, `src/app/tools/shadow/page.tsx`, `src/app/tools/contrast/page.tsx`, `src/app/tools/units/page.tsx`, `scripts/test-color-tools.mjs`.
+   763→- Modified files: `src/app/library/page.tsx` (Designer Tools nav button + Ruler import), `src/app/playground/page.tsx` (same), `src/components/effect-detail.tsx` (same), `src/components/command-palette.tsx` (6 new action items + 5 new icon imports).
+   764→- All 5 tools persist their state to localStorage, so designers can close and reopen without losing their work. All 5 participate in the existing global infrastructure: bundle drawer, compare drawer, copy history, command palette, keyboard shortcuts, brand color system, theme toggle, reduced-motion. No regressions to existing functionality.
+   765→
+   766→---
+   767→Task ID: 22
+   768→Agent: main
+   769→Task: Add 4 more designer tools — Typography Playground, Border-radius/Squircle, Cubic-bezier Easing Studio, Glassmorphism Generator — bringing the total tools count to 9.
+   770→
+   771→Work Log:
+   772→
+   773→**Feature — `/tools/typography` (Typography Playground)**
+   774→- 8 curated Google Font pairings (Inter+System, Playfair+Source Sans, Merriweather+Inter, Space Grotesk+Inter, Lora+Work Sans, Poppins+Roboto, Bitter+Open Sans, Cormorant+Mulish). Each pairing has a heading font + body font with proper fallback stacks.
+   775→- Dynamically injects a `<link>` tag to Google Fonts for the selected pairing (only when on the page; cleaned up automatically).
+   776→- 5 modular scale ratio presets: 1.2 (Minor Third), 1.25 (Major Third), 1.333 (Perfect Fourth), 1.5 (Perfect Fifth), 1.618 (Golden Ratio).
+   777→- Sliders for: base size (12-22px), heading weight (300-800), body weight (300-700), heading line-height (0.9-1.6), body line-height (1-2.2), heading letter-spacing (-0.08em to 0.08em), body letter-spacing, paragraph spacing (0-3em).
+   778→- Live preview: type scale visualization (8 sizes from xs to 4xl, each rendered at its actual pixel size using the heading font) + real preview block showing H1/H2/paragraph/small text styled with the chosen pairing.
+   779→- CopyCssCard exports complete CSS variables + base styles for h1-h6 and body/p/li/blockquote.
+   780→- State persists to `hoverlab:tool:typography`.
+   781→
+   782→**Feature — `/tools/border-radius` (Border-radius & Squircle Generator)**
+   783→- 3 modes:
+   784→  1. **Standard** — per-corner border-radius with linked/independent toggle. 6 quick presets (Sharp/Subtle/Soft/Rounded/Bold/Pill). Linked mode syncs all 4 corners; independent mode shows 4 separate sliders.
+   785→  2. **Squircle** — true superellipse via SVG path generation. Samples 64 points around the curve |x/a|^n + |y/b|^n = 1, where n maps from curve [0,1] to [2,8] (curve=0 → circle, curve=0.5 → classic squircle n=4, curve=1 → near-rectangle). Uses Catmull-Rom→Bezier smoothing for clean SVG path output. 4 quick presets (Circle/Soft squircle/Classic squircle/Hard squircle).
+   786→  3. **Fluid** — `min(max, min + 2vw)` based responsive border-radius that scales smoothly between viewport sizes without media queries.
+   787→- Live preview pane (80-400px size, custom color). Squircle mode renders an actual SVG with the generated path.
+   788→- CopyCssCard exports: standard CSS, SVG path data (for squircle paste-into-Figma use), and CSS with clip-path (for squircle paste-into-CSS use).
+   789→- State persists to `hoverlab:tool:border-radius`.
+   790→
+   791→**Feature — `/tools/easing` (Cubic-bezier Easing Studio)**
+   792→- Visual editor: SVG canvas with two draggable control points (p1, p2). Pointer events for cross-device drag support. Grid + axes + dashed control polygon for visual context. 20 sample dots along the curve to show its actual shape.
+   793→- Y axis allows overshoot beyond [0,1] in the range [-0.5, 1.5] for back/anticipate easing functions.
+   794→- 14 named presets: linear, ease, ease-in, ease-out, ease-in-out, ease-in-quad, ease-out-quad, ease-in-cubic, ease-out-cubic, ease-in-out-quart, ease-in-back, ease-out-back, ease-in-out-back, anticipate.
+   795→- Live preview with 3 simultaneously-animating tracks (translateX / scale / opacity) so designers can see how the easing affects different transform types. Play/Pause/Restart controls. Duration slider 0.2-4s.
+   796→- "Progress over time" mini-map showing the curve as y-over-x (useful for understanding the timing function shape).
+   797→- Real-time parameter display (x1, y1, x2, y2 with 3 decimal precision).
+   798→- CopyCssCard exports `transition: transform DURATIONs cubic-bezier(...)` with comments.
+   799→- Bug found and fixed during testing: bezierY was missing the `+ t³` term from the (1,1) anchor point. The cubic-bezier formula is x(t) = 3(1-t)²t·p1.x + 3(1-t)t²·p2.x + t³ (the t³ comes from p3=(1,1)). Without it, the linear case (0,0)-(1,1) returned 0 instead of 0.5 at x=0.5. Fixed in both the source and the test.
+   800→- State persists to `hoverlab:tool:easing`.
+   801→
+   802→**Feature — `/tools/glassmorphism` (Glassmorphism Generator)**
+   803→- Backdrop filter section: blur (0-40px), saturation (100-300%), brightness (50-150%).
+   804→- Glass background section: color picker + hex input + opacity slider (0-1).
+   805→- Border section: color picker + hex input + width (0-4px) + opacity (0-1).
+   806→- Shadow section: Y offset (0-40px), blur (0-80px), opacity (0-0.6), plus inner-highlight toggle (adds `inset 0 1px 0 0 rgba(255,255,255,0.4)` for the top-edge light reflection that makes glass look real).
+   807→- Card section: radius slider (0-40px).
+   808→- Background scene: 3-color gradient picker with random button. Preview pane includes decorative blurred shapes behind the glass card so the blur effect is visible.
+   809→- CopyCssCard exports full CSS with `-webkit-backdrop-filter` fallback and `@supports not (...)` rule for browsers without backdrop-filter support (degrades to solid background color).
+   810→- State persists to `hoverlab:tool:glassmorphism`.
+   811→
+   812→**Update — `/tools` hub page**
+   813→- Added 4 new tool cards with gradient icon badges: Typography Playground (indigo→purple), Border-radius & Squircle (pink→rose), Easing Studio (cyan→blue), Glassmorphism Generator (teal→emerald).
+   814→- Updated hero badge from "5 tools" to "9 tools · zero dependencies · works offline".
+   815→
+   816→**Update — Command palette**
+   817→- Added 4 new action items: "Tool: Typography Playground", "Tool: Border-radius & Squircle", "Tool: Easing Studio", "Tool: Glassmorphism Generator". Each has rich keywords for fuzzy search discovery (e.g. "frosted glass blur backdrop filter" for glassmorphism, "superellipse corner rounded" for border-radius).
+   818→- Imported 4 new lucide-react icons: Type, Square, Activity, Wine.
+   819→
+   820→**Verification**
+   821→- `npx tsc --noEmit` → 0 errors under `src/`. (Caught + fixed 1 during development: missing `transform` prop on a PreviewTrack component in the easing page.)
+   822→- `npx next build` → ✓ compiled in 8.0s. Page count went from 85 → 89. All 4 new routes prerendered as static: `/tools/typography`, `/tools/border-radius`, `/tools/easing`, `/tools/glassmorphism`. All 64 /effect/[slug] SSG paths still work.
+   823→- `node scripts/test-designer-tools-r2.mjs` → 10/10 unit tests pass, covering: squircle path format (M prefix, Z suffix, 64 cubic segments, coordinates bounded by size), squircle curve extremes (circle at curve=0, rectangle at curve=1), proportional scaling across sizes, bezierY linearity (linear curve gives y=x), bezierY overshoot (ease-out-back goes above 1), bezierY anticipation (anticipate curve dips below 0), bezierY boundary conditions (returns 0 at x=0, 1 at x=1). The test caught the missing-t³ bug which was fixed before re-running.
+   824→
+   825→Stage Summary:
+   826→- 4 new designer tools shipped end-to-end and verified. Hoverlab now offers 9 production-grade design tools covering: color palettes, gradients, shadows, WCAG contrast, CSS unit conversion, typography, border-radius/squircle, easing curves, and glassmorphism. Combined with the 1,680+ effects library, this makes Hoverlab a genuine one-stop shop for frontend designers.
+   827→- Net new files: `src/app/tools/typography/page.tsx`, `src/app/tools/border-radius/page.tsx`, `src/app/tools/easing/page.tsx`, `src/app/tools/glassmorphism/page.tsx`, `scripts/test-designer-tools-r2.mjs`.
+   828→- Modified files: `src/app/tools/page.tsx` (4 new tool cards + hero count update + 4 new icon imports), `src/components/command-palette.tsx` (4 new action items + 4 new icon imports).
+   829→- All 4 tools persist state to localStorage. All 4 participate in the existing global infrastructure (bundle drawer, compare drawer, copy history, command palette, keyboard shortcuts, brand color system, theme toggle, reduced-motion). All 9 tool pages are statically prerendered. No regressions to existing functionality.
+   830→

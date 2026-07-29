@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Hoverlab Apple touch icon — flat solid tile with wand + spark, no transparency.
+     Apple requires opaque icons with built-in rounded corners handled by iOS. -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="0" width="180" height="180" fill="url(#g)"/>
+  <g fill="#ffffff">
+    <!-- Wand rod -->
+    <rect x="42" y="115" width="73" height="15" rx="7.5"
+          transform="rotate(-45 78.5 122.5)"/>
+    <!-- Main 4-point spark -->
+    <path d="M130 34 L137 56 L159 63 L137 70 L130 92 L123 70 L101 63 L123 56 Z"/>
+    <!-- Small companion spark -->
+    <path d="M101 95 L104.5 106 L115.5 109.5 L104.5 113 L101 124 L97.5 113 L86.5 109.5 L97.5 106 Z" opacity="0.92"/>
+  </g>
+</svg>

@@ -1,0 +1,744 @@
+     1→'use client'
+     2→
+     3→import * as React from 'react'
+     4→import Link from 'next/link'
+     5→import {
+     6→  ArrowLeft,
+     7→  ChevronLeft,
+     8→  ChevronRight,
+     9→  Code2,
+    10→  Heart,
+    11→  Package,
+    12→  Check,
+    13→  Link2,
+    14→  RotateCcw,
+    15→  Sparkles,
+    16→  ExternalLink,
+    17→} from 'lucide-react'
+    18→import { toast } from 'sonner'
+    19→import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
+    20→import { Card, CardContent, CardHeader } from '@/components/ui/card'
+    21→import { Badge } from '@/components/ui/badge'
+    22→import { Button } from '@/components/ui/button'
+    23→import { Slider } from '@/components/ui/slider'
+    24→import { CodeBlock } from '@/components/code-block'
+    25→import { BundleDrawer } from '@/components/bundle-drawer'
+    26→import { useFavorites } from '@/hooks/use-favorites'
+    27→import { useBundle } from '@/hooks/use-bundle'
+    28→import {
+    29→  customizeCss,
+    30→  DEFAULT_CUSTOMIZATION,
+    31→  hashToOpts,
+    32→  matchingPreset,
+    33→  optsToHash,
+    34→  parseHash,
+    35→  PRESETS,
+    36→  type CustomizationOptions,
+    37→  type Preset,
+    38→} from '@/lib/customize'
+    39→import { cn } from '@/lib/utils'
+    40→import type { Effect } from '@/lib/effects'
+    41→
+    42→interface EffectDetailProps {
+    43→  effect: Effect
+    44→  /** Up to 6 similar effects (same category, excluding `effect`). */
+    45→  similar: Effect[]
+    46→  /** Previous effect in the catalog (for prev/next nav). Null if at start. */
+    47→  prev?: Effect | null
+    48→  /** Next effect in the catalog (for prev/next nav). Null if at end. */
+    49→  next?: Effect | null
+    50→}
+    51→
+    52→/**
+    53→ * Full-page detail view for a single effect.
+    54→ *
+    55→ * - Large live preview (always visible, customizable in real time)
+    56→ * - Customize tab with hue / size / speed sliders
+    57→ * - Code tab with HTML + CSS (and "Copy both")
+    58→ * - Similar-effects rail (same category)
+    59→ * - Prev / next navigation across the catalog
+    60→ * - Favorite heart toggle (synced with the grid via localStorage events)
+    61→ */
+    62→export function EffectDetail({ effect, similar, prev, next }: EffectDetailProps) {
+    63→  const surfaceDark = effect.darkSurface
+    64→  const previewRef = React.useRef<HTMLDivElement>(null)
+    65→  const { has, toggle } = useFavorites()
+    66→  const isFav = has(effect.id)
+    67→  const { has: hasBundle, toggle: toggleBundle } = useBundle()
+    68→  const inBundle = hasBundle(effect.id)
+    69→  const [bundleOpen, setBundleOpen] = React.useState(false)
+    70→
+    71→  /* Customization state -----------------------------------------------
+    72→   * Initialize from the URL hash on first mount, so a shared link
+    73→   * (e.g. /effect/btn-gradient#hue=15&sat=25) restores the exact
+    74→   * customized view. When the user navigates to a different effect
+    75→   * via prev/next, we re-read the hash for that URL too.
+    76→   */
+    77→  const [opts, setOpts] = React.useState<CustomizationOptions>(() =>
+    78→    typeof window === 'undefined'
+    79→      ? DEFAULT_CUSTOMIZATION
+    80→      : hashToOpts(parseHash(window.location.hash)),
+    81→  )
+    82→  // Flag used to suppress the very first hash-write effect (so we don't
+    83→  // re-write the hash that the user just landed on, which would trigger
+    84→  // an unnecessary history entry).
+    85→  const skipHashWriteRef = React.useRef(true)
+    86→
+    87→  React.useEffect(() => {
+    88→    // When effect.id changes (prev/next navigation via internal Link),
+    89→    // re-read the hash because Next.js client-side navigation does NOT
+    90→    // re-mount this component — it just updates props.
+    91→    const next = hashToOpts(parseHash(window.location.hash))
+    92→    setOpts(next)
+    93→    skipHashWriteRef.current = true
+    94→  }, [effect.id])
+    95→
+    96→  // Write opts to the URL hash whenever they change (except on the very
+    97→  // first run after a navigation, to avoid a redundant history entry).
+    98→  React.useEffect(() => {
+    99→    if (skipHashWriteRef.current) {
+   100→      skipHashWriteRef.current = false
+   101→      return
+   102→    }
+   103→    const hash = optsToHash(opts)
+   104→    const target = hash ? `#${hash}` : ''
+   105→    if (window.location.hash !== target) {
+   106→      window.history.replaceState(null, '', window.location.pathname + window.location.search + target)
+   107→    }
+   108→  }, [opts])
+   109→
+   110→  // Listen for hashchange events (back/forward, manual URL edits) and
+   111→  // sync opts from the URL. This makes the share-link round-trip work.
+   112→  React.useEffect(() => {
+   113→    const onHashChange = () => {
+   114→      const next = hashToOpts(parseHash(window.location.hash))
+   115→      skipHashWriteRef.current = true
+   116→      setOpts(next)
+   117→    }
+   118→    window.addEventListener('hashchange', onHashChange)
+   119→    return () => window.removeEventListener('hashchange', onHashChange)
+   120→  }, [])
+   121→
+   122→  const customizedCss = React.useMemo(
+   123→    () => customizeCss(effect.css, opts),
+   124→    [effect.css, opts],
+   125→  )
+   126→  const isCustomized = customizedCss !== effect.css
+   127→  const activePreset = matchingPreset(opts)
+   128→
+   129→  // Detail-page keyboard shortcuts:
+   130→  //   j / →  → next effect
+   131→  //   k / ←  → previous effect
+   132→  //   f      → toggle favorite
+   133→  //   s      → toggle bundle (saves current customization)
+   134→  //   c      → copy current (customized) CSS
+   135→  //   b      → open the bundle drawer
+   136→  //   Esc    → close any open dialog (handled by Radix)
+   137→  // We rely on Next.js <Link> for prev/next so client-side navigation
+   138→  // preserves state. Pressing j/k triggers a click on the corresponding
+   139→  // link element via ref.
+   140→  const prevLinkRef = React.useRef<HTMLAnchorElement>(null)
+   141→  const nextLinkRef = React.useRef<HTMLAnchorElement>(null)
+   142→
+   143→  React.useEffect(() => {
+   144→    function isTypingTarget(t: EventTarget | null): boolean {
+   145→      if (!(t instanceof HTMLElement)) return false
+   146→      const tag = t.tagName
+   147→      return tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || t.isContentEditable
+   148→    }
+   149→    function onKey(e: KeyboardEvent) {
+   150→      if (e.metaKey || e.ctrlKey || e.altKey) return
+   151→      if (isTypingTarget(e.target)) return
+   152→      const key = e.key.toLowerCase()
+   153→      if (key === 'j' || e.key === 'ArrowRight') {
+   154→        e.preventDefault()
+   155→        nextLinkRef.current?.click()
+   156→      } else if (key === 'k' || e.key === 'ArrowLeft') {
+   157→        e.preventDefault()
+   158→        prevLinkRef.current?.click()
+   159→      } else if (key === 'f') {
+   160→        e.preventDefault()
+   161→        toggle(effect.id)
+   162→      } else if (key === 's') {
+   163→        e.preventDefault()
+   164→        toggleBundle(effect.id, opts)
+   165→      } else if (key === 'c') {
+   166→        e.preventDefault()
+   167→        navigator.clipboard
+   168→          .writeText(customizedCss)
+   169→          .then(() => toast.success('Copied CSS to clipboard'))
+   170→          .catch(() => toast.error('Copy failed — please copy manually'))
+   171→      } else if (key === 'b') {
+   172→        e.preventDefault()
+   173→        // Toggle the drawer so `b` works as both "open" and "close".
+   174→        setBundleOpen((v) => !v)
+   175→      }
+   176→    }
+   177→    window.addEventListener('keydown', onKey)
+   178→    return () => window.removeEventListener('keydown', onKey)
+   179→  }, [effect.id, opts, customizedCss, toggle, toggleBundle])
+   180→
+   181→  // Spotlight support: track cursor and set --fx-x / --fx-y CSS vars.
+   182→  React.useEffect(() => {
+   183→    const root = previewRef.current
+   184→    if (!root) return
+   185→    const target = root.querySelector<HTMLElement>('[data-spotlight]')
+   186→    if (!target) return
+   187→    const handler = (e: MouseEvent) => {
+   188→      const rect = target.getBoundingClientRect()
+   189→      target.style.setProperty('--fx-x', `${e.clientX - rect.left}px`)
+   190→      target.style.setProperty('--fx-y', `${e.clientY - rect.top}px`)
+   191→    }
+   192→    target.addEventListener('mousemove', handler)
+   193→    return () => target.removeEventListener('mousemove', handler)
+   194→  }, [effect.id])
+   195→
+   196→  const combinedSnippet = React.useMemo(
+   197→    () =>
+   198→      [
+   199→        '<!-- HTML -->',
+   200→        effect.html.trim(),
+   201→        '',
+   202→        '/* CSS */',
+   203→        customizedCss.trim(),
+   204→      ].join('\n'),
+   205→    [effect.html, customizedCss],
+   206→  )
+   207→
+   208→  async function copyShareLink() {
+   209→    const hash = optsToHash(opts)
+   210→    const url = hash
+   211→      ? `${window.location.origin}${window.location.pathname}#${hash}`
+   212→      : window.location.href
+   213→    try {
+   214→      await navigator.clipboard.writeText(url)
+   215→      toast.success('Shareable link copied', {
+   216→        description: hash
+   217→          ? 'Includes your customization — anyone opening it sees the same tweak.'
+   218→          : 'Link copied (no customization applied yet).',
+   219→        duration: 2400,
+   220→      })
+   221→    } catch {
+   222→      toast.error('Could not copy link — please copy from the address bar.')
+   223→    }
+   224→  }
+   225→
+   226→  return (
+   227→    <div className="mx-auto w-full max-w-7xl px-4 pb-16 pt-6 sm:px-6 lg:px-8">
+   228→      {/* Breadcrumb / back */}
+   229→      <div className="mb-5 flex items-center justify-between gap-3">
+   230→        <Button asChild variant="ghost" size="sm" className="gap-1.5">
+   231→          <Link href="/">
+   232→            <ArrowLeft className="h-4 w-4" /> Back to library
+   233→          </Link>
+   234→        </Button>
+   235→        <div className="flex items-center gap-2 text-xs text-muted-foreground">
+   236→          <span className="font-mono">{effect.id}</span>
+   237→          {isCustomized ? (
+   238→            <span className="inline-flex items-center gap-0.5 rounded-full bg-primary/10 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-primary">
+   239→              <Sparkles className="h-2.5 w-2.5" /> Edited
+   240→            </span>
+   241→          ) : null}
+   242→        </div>
+   243→      </div>
+   244→
+   245→      <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_320px]">
+   246→        {/* Main column */}
+   247→        <div className="space-y-6">
+   248→          <Card className="overflow-hidden border-border/60 bg-card/80 backdrop-blur">
+   249→            <CardHeader className="gap-2 pb-3">
+   250→              <div className="flex flex-wrap items-start justify-between gap-3">
+   251→                <div className="min-w-0">
+   252→                  <div className="flex flex-wrap items-center gap-2">
+   253→                    <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
+   254→                      {effect.name}
+   255→                    </h1>
+   256→                    {effect.featured ? (
+   257→                      <Badge className="bg-amber-500/15 text-amber-600 hover:bg-amber-500/15">
+   258→                        Featured
+   259→                      </Badge>
+   260→                    ) : null}
+   261→                  </div>
+   262→                  <p className="mt-1.5 max-w-2xl text-sm text-muted-foreground">
+   263→                    {effect.description}
+   264→                  </p>
+   265→                  <div className="mt-2 flex flex-wrap items-center gap-1.5">
+   266→                    <Badge variant="secondary" className="font-mono text-[10px] uppercase tracking-wider">
+   267→                      {effect.category}
+   268→                    </Badge>
+   269→                    {(effect.tags ?? []).map((t) => (
+   270→                      <Badge key={t} variant="outline" className="font-mono text-[10px] uppercase tracking-wider">
+   271→                        {t}
+   272→                      </Badge>
+   273→                    ))}
+   274→                  </div>
+   275→                </div>
+   276→                <button
+   277→                  type="button"
+   278→                  onClick={() => toggleBundle(effect.id, opts)}
+   279→                  aria-pressed={inBundle}
+   280→                  aria-label={inBundle ? 'Remove from bundle' : 'Add to bundle'}
+   281→                  title={inBundle ? 'Remove from bundle' : 'Add to bundle'}
+   282→                  className={cn(
+   283→                    'inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border transition-all',
+   284→                    inBundle
+   285→                      ? 'border-primary/50 bg-primary/10 text-primary hover:bg-primary/20'
+   286→                      : 'border-border/60 bg-background/60 text-muted-foreground hover:border-primary/40 hover:text-primary',
+   287→                  )}
+   288→                >
+   289→                  {inBundle ? (
+   290→                    <Check className="h-4 w-4" />
+   291→                  ) : (
+   292→                    <Package className="h-4 w-4" />
+   293→                  )}
+   294→                </button>
+   295→                <button
+   296→                  type="button"
+   297→                  onClick={() => toggle(effect.id)}
+   298→                  aria-pressed={isFav}
+   299→                  aria-label={isFav ? 'Remove from favorites' : 'Add to favorites'}
+   300→                  title={isFav ? 'Remove from favorites' : 'Add to favorites'}
+   301→                  className={cn(
+   302→                    'inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border transition-all',
+   303→                    isFav
+   304→                      ? 'border-rose-400/50 bg-rose-500/10 text-rose-500 hover:bg-rose-500/20'
+   305→                      : 'border-border/60 bg-background/60 text-muted-foreground hover:border-rose-400/40 hover:text-rose-500',
+   306→                  )}
+   307→                >
+   308→                  <Heart
+   309→                    className={cn(
+   310→                      'h-4 w-4 transition-all',
+   311→                      isFav && 'scale-110 fill-current',
+   312→                    )}
+   313→                  />
+   314→                </button>
+   315→                <button
+   316→                  type="button"
+   317→                  onClick={() => setBundleOpen(true)}
+   318→                  aria-label="Open bundle"
+   319→                  title="Open bundle (b)"
+   320→                  className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-border/60 bg-background/60 text-muted-foreground transition-all hover:border-primary/40 hover:text-primary"
+   321→                >
+   322→                  <ExternalLink className="h-4 w-4" />
+   323→                </button>
+   324→              </div>
+   325→            </CardHeader>
+   326→
+   327→            <CardContent className="space-y-4 pt-0">
+   328→              {/* Large live preview */}
+   329→              <div
+   330→                ref={previewRef}
+   331→                className={cn(
+   332→                  'relative flex min-h-[320px] items-center justify-center overflow-hidden rounded-xl border border-border/50 p-8 sm:min-h-[400px]',
+   333→                  surfaceDark ? 'bg-slate-950' : effect.previewClass ?? 'bg-muted/30',
+   334→                  isCustomized && 'ring-1 ring-primary/20',
+   335→                )}
+   336→                dangerouslySetInnerHTML={{ __html: effect.html }}
+   337→              />
+   338→              {/* Inject this effect's CSS into the document */}
+   339→              <style dangerouslySetInnerHTML={{ __html: customizedCss }} />
+   340→
+   341→              {/* Tabs: Code | Customize */}
+   342→              <Tabs defaultValue="code" className="w-full">
+   343→                <TabsList className="grid w-full grid-cols-2">
+   344→                  <TabsTrigger value="code" className="gap-1.5">
+   345→                    <Code2 className="h-3.5 w-3.5" /> Code
+   346→                  </TabsTrigger>
+   347→                  <TabsTrigger value="customize" className="gap-1.5">
+   348→                    <Sparkles className="h-3.5 w-3.5" /> Customize
+   349→                  </TabsTrigger>
+   350→                </TabsList>
+   351→
+   352→                <TabsContent value="code" className="mt-3 space-y-3">
+   353→                  <CodeBlock
+   354→                    code={effect.html}
+   355→                    filename="markup.html"
+   356→                    language="html"
+   357→                    extraCopy={{ label: 'Copy both', text: combinedSnippet }}
+   358→                  />
+   359→                  <CodeBlock code={effect.css} filename="styles.css" language="css" />
+   360→                </TabsContent>
+   361→
+   362→                <TabsContent value="customize" className="mt-3 space-y-4">
+   363→                  <CustomizePanel
+   364→                    opts={opts}
+   365→                    onChange={setOpts}
+   366→                    onReset={() => setOpts(DEFAULT_CUSTOMIZATION)}
+   367→                    onPreset={(p) => setOpts({ ...p.opts })}
+   368→                    activePreset={activePreset}
+   369→                    isCustomized={isCustomized}
+   370→                    customizedCss={customizedCss}
+   371→                    combinedSnippet={combinedSnippet}
+   372→                    onCopyShareLink={copyShareLink}
+   373→                  />
+   374→                </TabsContent>
+   375→              </Tabs>
+   376→            </CardContent>
+   377→          </Card>
+   378→
+   379→          {/* Prev / next navigation */}
+   380→          <nav className="grid grid-cols-2 gap-3">
+   381→            {prev ? (
+   382→              <Link
+   383→                ref={prevLinkRef}
+   384→                href={`/effect/${prev.id}`}
+   385→                className="group flex items-center gap-3 rounded-lg border border-border/60 bg-card/60 p-3 transition-all hover:border-primary/40 hover:bg-card"
+   386→              >
+   387→                <ChevronLeft className="h-5 w-5 shrink-0 text-muted-foreground transition-colors group-hover:text-primary" />
+   388→                <div className="min-w-0">
+   389→                  <div className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">
+   390→                    Previous
+   391→                  </div>
+   392→                  <div className="truncate text-sm font-semibold">{prev.name}</div>
+   393→                </div>
+   394→              </Link>
+   395→            ) : (
+   396→              <div className="rounded-lg border border-dashed border-border/40 p-3 opacity-50">
+   397→                <div className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">
+   398→                  Previous
+   399→                </div>
+   400→                <div className="text-sm text-muted-foreground">Start of catalog</div>
+   401→              </div>
+   402→            )}
+   403→            {next ? (
+   404→              <Link
+   405→                ref={nextLinkRef}
+   406→                href={`/effect/${next.id}`}
+   407→                className="group flex items-center justify-end gap-3 rounded-lg border border-border/60 bg-card/60 p-3 text-right transition-all hover:border-primary/40 hover:bg-card"
+   408→              >
+   409→                <div className="min-w-0">
+   410→                  <div className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">
+   411→                    Next
+   412→                  </div>
+   413→                  <div className="truncate text-sm font-semibold">{next.name}</div>
+   414→                </div>
+   415→                <ChevronRight className="h-5 w-5 shrink-0 text-muted-foreground transition-colors group-hover:text-primary" />
+   416→              </Link>
+   417→            ) : (
+   418→              <div className="rounded-lg border border-dashed border-border/40 p-3 text-right opacity-50">
+   419→                <div className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">
+   420→                  Next
+   421→                </div>
+   422→                <div className="text-sm text-muted-foreground">End of catalog</div>
+   423→              </div>
+   424→            )}
+   425→          </nav>
+   426→        </div>
+   427→
+   428→        {/* Sidebar: similar effects */}
+   429→        <aside className="space-y-4 lg:sticky lg:top-20 lg:self-start">
+   430→          <div className="rounded-lg border border-border/60 bg-card/60 p-4">
+   431→            <div className="mb-3 flex items-center justify-between">
+   432→              <h2 className="text-sm font-semibold tracking-tight">Similar effects</h2>
+   433→              <Badge variant="outline" className="text-[10px]">
+   434→                {effect.category}
+   435→              </Badge>
+   436→            </div>
+   437→            {similar.length === 0 ? (
+   438→              <p className="text-xs text-muted-foreground">
+   439→                No other effects in this category yet.
+   440→              </p>
+   441→            ) : (
+   442→              <ul className="space-y-2">
+   443→                {similar.map((s) => (
+   444→                  <li key={s.id}>
+   445→                    <Link
+   446→                      href={`/effect/${s.id}`}
+   447→                      className="group flex items-center gap-3 rounded-md p-2 transition-colors hover:bg-muted/60"
+   448→                    >
+   449→                      <SimilarPreview effect={s} />
+   450→                      <div className="min-w-0 flex-1">
+   451→                        <div className="truncate text-sm font-medium group-hover:text-primary">
+   452→                          {s.name}
+   453→                        </div>
+   454→                        <div className="truncate text-[11px] text-muted-foreground">
+   455→                          {s.description}
+   456→                        </div>
+   457→                      </div>
+   458→                      <ExternalLink className="h-3 w-3 shrink-0 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
+   459→                    </Link>
+   460→                  </li>
+   461→                ))}
+   462→              </ul>
+   463→            )}
+   464→            <Button asChild variant="outline" size="sm" className="mt-3 w-full">
+   465→              <Link href={`/?filter=${encodeURIComponent(effect.category)}`}>
+   466→                Browse all {effect.category.toLowerCase()}
+   467→              </Link>
+   468→            </Button>
+   469→          </div>
+   470→        </aside>
+   471→      </div>
+   472→
+   473→      {/* Slide-out bundle drawer (opened via 'b' shortcut or the bundle button) */}
+   474→      <BundleDrawer open={bundleOpen} onOpenChange={setBundleOpen} />
+   475→    </div>
+   476→  )
+   477→}
+   478→
+   479→/* ============================================================
+   480→ *  Mini preview for the similar-effects rail.
+   481→ *  Injects the effect's CSS scoped under a unique wrapper class
+   482→ *  so multiple similar effects can render side by side.
+   483→ * ========================================================== */
+   484→
+   485→let previewSeq = 0
+   486→
+   487→function SimilarPreview({ effect }: { effect: Effect }) {
+   488→  const [wrapId] = React.useState(() => `fx-preview-${++previewSeq}`)
+   489→  // Scope the CSS by prefixing every selector with our wrapper class.
+   490→  // Cheap & cheerful — works for the simple class-based selectors we generate.
+   491→  const scopedCss = React.useMemo(() => {
+   492→    // Replace each selector group `selector1, selector2 {` with
+   493→    // `.wrapId selector1, .wrapId selector2 {`
+   494→    return effect.css.replace(/(^|\})\s*([^{}]+)\{/g, (_m, brace, selectors) => {
+   495→      const scoped = selectors
+   496→        .split(',')
+   497→        .map((s: string) => `.${wrapId} ${s.trim()}`)
+   498→        .join(', ')
+   499→      return `${brace} ${scoped} {`
+   500→    })
+   501→  }, [effect.css, wrapId])
+   502→
+   503→  return (
+   504→    <div
+   505→      className={cn(
+   506→        'flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-md border border-border/40',
+   507→        effect.darkSurface ? 'bg-slate-950' : 'bg-muted/40',
+   508→      )}
+   509→    >
+   510→      <style dangerouslySetInnerHTML={{ __html: scopedCss }} />
+   511→      <div
+   512→        className={wrapId}
+   513→        style={{ transform: 'scale(0.45)', transformOrigin: 'center' }}
+   514→        dangerouslySetInnerHTML={{ __html: effect.html }}
+   515→      />
+   516→    </div>
+   517→  )
+   518→}
+   519→
+   520→/* ============================================================
+   521→ *  Customize panel — preset chips + 4 sliders + reset + share + copy
+   522→ * ========================================================== */
+   523→
+   524→interface CustomizePanelProps {
+   525→  opts: CustomizationOptions
+   526→  onChange: (opts: CustomizationOptions) => void
+   527→  onReset: () => void
+   528→  onPreset: (preset: Preset) => void
+   529→  activePreset: Preset | null
+   530→  isCustomized: boolean
+   531→  customizedCss: string
+   532→  combinedSnippet: string
+   533→  onCopyShareLink: () => void
+   534→}
+   535→
+   536→function CustomizePanel({
+   537→  opts,
+   538→  onChange,
+   539→  onReset,
+   540→  onPreset,
+   541→  activePreset,
+   542→  isCustomized,
+   543→  customizedCss,
+   544→  combinedSnippet,
+   545→  onCopyShareLink,
+   546→}: CustomizePanelProps) {
+   547→  const [copiedLink, setCopiedLink] = React.useState(false)
+   548→
+   549→  // Reset the "copied" indicator on the share button after a short delay.
+   550→  // We don't trigger this here — the parent's onCopyShareLink fires the
+   551→  // toast. We just flip the icon back after 1.6s when the button is hit.
+   552→  React.useEffect(() => {
+   553→    if (!copiedLink) return
+   554→    const t = window.setTimeout(() => setCopiedLink(false), 1600)
+   555→    return () => window.clearTimeout(t)
+   556→  }, [copiedLink])
+   557→
+   558→  function handleShareClick() {
+   559→    onCopyShareLink()
+   560→    setCopiedLink(true)
+   561→  }
+   562→
+   563→  return (
+   564→    <div className="space-y-4 rounded-lg border border-border/60 bg-muted/20 p-3">
+   565→      <p className="text-xs text-muted-foreground">
+   566→        Slide to transform the live preview. The customized CSS is reflected
+   567→        in real time — copy it, or share the link to lock in your tweak.
+   568→      </p>
+   569→
+   570→      {/* Presets */}
+   571→      <div className="space-y-2">
+   572→        <div className="flex items-center justify-between">
+   573→          <label className="text-xs font-semibold text-foreground">Presets</label>
+   574→          {activePreset ? (
+   575→            <span className="text-[11px] font-medium text-primary">{activePreset.name}</span>
+   576→          ) : null}
+   577→        </div>
+   578→        <div className="flex flex-wrap gap-1.5">
+   579→          {PRESETS.map((p) => {
+   580→            const isActive = activePreset?.id === p.id
+   581→            return (
+   582→              <button
+   583→                key={p.id}
+   584→                type="button"
+   585→                onClick={() => onPreset(p)}
+   586→                title={p.description}
+   587→                className={cn(
+   588→                  'inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[11px] font-medium transition-all',
+   589→                  isActive
+   590→                    ? 'border-primary bg-primary/10 text-primary'
+   591→                    : 'border-border/60 bg-background/60 text-muted-foreground hover:border-primary/40 hover:text-foreground',
+   592→                )}
+   593→              >
+   594→                <span
+   595→                  className="h-2.5 w-2.5 rounded-full border border-black/10"
+   596→                  style={{ backgroundColor: p.swatch }}
+   597→                  aria-hidden="true"
+   598→                />
+   599→                {p.name}
+   600→              </button>
+   601→            )
+   602→          })}
+   603→        </div>
+   604→      </div>
+   605→
+   606→      <div className="h-px bg-border/40" />
+   607→
+   608→      {/* Sliders */}
+   609→      <SliderRow
+   610→        label="Hue"
+   611→        value={opts.hue}
+   612→        min={-180}
+   613→        max={180}
+   614→        step={5}
+   615→        unit="°"
+   616→        onChange={(v) => onChange({ ...opts, hue: v })}
+   617→        description="Rotate every color around the wheel."
+   618→      />
+   619→
+   620→      <SliderRow
+   621→        label="Saturation"
+   622→        value={opts.saturation}
+   623→        min={-100}
+   624→        max={100}
+   625→        step={5}
+   626→        unit="%"
+   627→        format={(v) => `${v > 0 ? '+' : ''}${v}%`}
+   628→        onChange={(v) => onChange({ ...opts, saturation: v })}
+   629→        description="Boost or mute color intensity. -100 = grayscale."
+   630→      />
+   631→
+   632→      <SliderRow
+   633→        label="Size"
+   634→        value={opts.scale}
+   635→        min={0.5}
+   636→        max={1.5}
+   637→        step={0.05}
+   638→        unit="×"
+   639→        format={(v) => `${v.toFixed(2)}×`}
+   640→        onChange={(v) => onChange({ ...opts, scale: v })}
+   641→        description="Scale every px/rem dimension."
+   642→      />
+   643→
+   644→      <SliderRow
+   645→        label="Speed"
+   646→        value={opts.speed}
+   647→        min={0.25}
+   648→        max={3}
+   649→        step={0.25}
+   650→        unit="×"
+   651→        format={(v) => `${v.toFixed(2)}×`}
+   652→        onChange={(v) => onChange({ ...opts, speed: v })}
+   653→        description="Multiply every animation duration."
+   654→      />
+   655→
+   656→      {/* Action buttons */}
+   657→      <div className="flex flex-wrap items-center gap-2 pt-1">
+   658→        <Button
+   659→          size="sm"
+   660→          variant="outline"
+   661→          onClick={onReset}
+   662→          disabled={!isCustomized}
+   663→          className="h-8 gap-1.5"
+   664→        >
+   665→          <RotateCcw className="h-3.5 w-3.5" /> Reset
+   666→        </Button>
+   667→        <Button
+   668→          size="sm"
+   669→          variant={isCustomized ? 'default' : 'outline'}
+   670→          onClick={handleShareClick}
+   671→          className="h-8 gap-1.5"
+   672→        >
+   673→          {copiedLink ? (
+   674→            <>
+   675→              <Check className="h-3.5 w-3.5" /> Copied
+   676→            </>
+   677→          ) : (
+   678→            <>
+   679→              <Link2 className="h-3.5 w-3.5" /> Share link
+   680→            </>
+   681→          )}
+   682→        </Button>
+   683→        <CodeBlock
+   684→          code={customizedCss}
+   685→          filename="customized.css"
+   686→          language="css"
+   687→          extraCopy={{ label: 'Copy both', text: combinedSnippet }}
+   688→        />
+   689→      </div>
+   690→    </div>
+   691→  )
+   692→}
+   693→
+   694→/* ============================================================
+   695→ *  SliderRow — label + value badge + slider
+   696→ * ========================================================== */
+   697→
+   698→interface SliderRowProps {
+   699→  label: string
+   700→  value: number
+   701→  min: number
+   702→  max: number
+   703→  step: number
+   704→  unit: string
+   705→  format?: (v: number) => string
+   706→  description?: string
+   707→  onChange: (v: number) => void
+   708→}
+   709→
+   710→function SliderRow({
+   711→  label,
+   712→  value,
+   713→  min,
+   714→  max,
+   715→  step,
+   716→  unit,
+   717→  format,
+   718→  description,
+   719→  onChange,
+   720→}: SliderRowProps) {
+   721→  const display = format ? format(value) : `${value}${unit}`
+   722→  return (
+   723→    <div className="space-y-1.5">
+   724→      <div className="flex items-center justify-between">
+   725→        <label className="text-xs font-semibold text-foreground">{label}</label>
+   726→        <span className="rounded-md bg-background px-1.5 py-0.5 font-mono text-[11px] text-muted-foreground tabular-nums">
+   727→          {display}
+   728→        </span>
+   729→      </div>
+   730→      <Slider
+   731→        value={[value]}
+   732→        min={min}
+   733→        max={max}
+   734→        step={step}
+   735→        onValueChange={(arr) => arr[0] !== undefined && onChange(arr[0])}
+   736→        className="w-full"
+   737→      />
+   738→      {description ? (
+   739→        <p className="text-[11px] text-muted-foreground/80">{description}</p>
+   740→      ) : null}
+   741→    </div>
+   742→  )
+   743→}
+   744→

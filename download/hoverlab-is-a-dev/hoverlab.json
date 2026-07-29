@@ -1,0 +1,10 @@
+{
+  "description": "Hoverlab — A living CSS effects library. Curated, open-source collection of pure-CSS effects (buttons, loaders, cards, text, backgrounds, navigation, dividers, badges) with live demos and copy-ready code.",
+  "owner": {
+    "username": "REPLACE_WITH_YOUR_GITHUB_USERNAME",
+    "email": "REPLACE_WITH_YOUR_EMAIL@example.com"
+  },
+  "records": {
+    "CNAME": "REPLACE_WITH_YOUR_DEPLOYED_HOST.vercel.app"
+  }
+}

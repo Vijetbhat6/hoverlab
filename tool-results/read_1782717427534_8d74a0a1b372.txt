@@ -1,0 +1,2002 @@
+     1→import GENERATED_RAW from "./generated-effects.json";
+     2→
+     3→export type EffectCategory =
+     4→  | "Buttons"
+     5→  | "Loaders"
+     6→  | "Cards"
+     7→  | "Text"
+     8→  | "Backgrounds"
+     9→  | "Inputs & Hover"
+    10→  | "Navigation & Menus"
+    11→  | "Dividers & Separators"
+    12→  | "Badges & Tags"
+    13→  | "Toggles & Switches"
+    14→  | "Tooltips & Popovers"
+    15→  | "Skeletons & Shimmers"
+    16→  | "Entrance Animations";
+    17→
+    18→export interface Effect {
+    19→  id: string;
+    20→  name: string;
+    21→  category: EffectCategory;
+    22→  description: string;
+    23→  /** Markup needed for the live preview (use the same class names as in CSS). */
+    24→  html: string;
+    25→  /** The CSS source the user can copy. */
+    26→  css: string;
+    27→  /** Tailwind class to center / pad the preview area per effect. */
+    28→  previewClass?: string;
+    29→  /** Render the preview with a dark surface (some effects only look right on dark). */
+    30→  darkSurface?: boolean;
+    31→  /** Style tags for filtering / discovery. */
+    32→  tags?: string[];
+    33→  /** True for curated / hand-picked effects (shown when "Featured" filter is on). */
+    34→  featured?: boolean;
+    35→}
+    36→
+    37→export const CATEGORIES: EffectCategory[] = [
+    38→  "Buttons",
+    39→  "Loaders",
+    40→  "Cards",
+    41→  "Text",
+    42→  "Backgrounds",
+    43→  "Inputs & Hover",
+    44→  "Navigation & Menus",
+    45→  "Dividers & Separators",
+    46→  "Badges & Tags",
+    47→  "Toggles & Switches",
+    48→  "Tooltips & Popovers",
+    49→  "Skeletons & Shimmers",
+    50→  "Entrance Animations",
+    51→];
+    52→
+    53→/* ============================================================
+    54→ *  Hand-curated effects (featured)
+    55→ * ==========================================================
+    56→ * These are the original, hand-crafted demos. They are marked
+    57→ * `featured: true` so the "Featured" filter surfaces them.
+    58→ */
+    59→
+    60→const HANDCRAFTED: Effect[] = [
+    61→  /* ---------------- BUTTONS ---------------- */
+    62→  {
+    63→    id: "btn-gradient",
+    64→    name: "Gradient Shift Button",
+    65→    category: "Buttons",
+    66→    description:
+    67→      "A button whose multi-color gradient slides across on hover, paired with a soft drop shadow that intensifies.",
+    68→    html: `<button class="fx-btn-gradient">Get Started</button>`,
+    69→    css: `.fx-btn-gradient {
+    70→  position: relative;
+    71→  padding: 0.75rem 1.75rem;
+    72→  border: none;
+    73→  border-radius: 0.625rem;
+    74→  font-weight: 600;
+    75→  font-size: 0.95rem;
+    76→  color: #fff;
+    77→  cursor: pointer;
+    78→  background: linear-gradient(120deg, #f43f5e, #f59e0b, #10b981, #6366f1);
+    79→  background-size: 300% 300%;
+    80→  background-position: 0% 50%;
+    81→  transition: background-position 0.6s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    82→  box-shadow: 0 6px 18px -6px rgba(244, 63, 94, 0.5);
+    83→}
+    84→.fx-btn-gradient:hover {
+    85→  background-position: 100% 50%;
+    86→  transform: translateY(-2px);
+    87→  box-shadow: 0 12px 28px -8px rgba(99, 102, 241, 0.55);
+    88→}
+    89→.fx-btn-gradient:active { transform: translateY(0); }`,
+    90→  },
+    91→  {
+    92→    id: "btn-neon",
+    93→    name: "Neon Glow Button",
+    94→    category: "Buttons",
+    95→    description:
+    96→      "A bordered button with a soft cyan halo that fully ignites into a glowing pill on hover.",
+    97→    html: `<button class="fx-btn-neon">Activate</button>`,
+    98→    css: `.fx-btn-neon {
+    99→  position: relative;
+   100→  padding: 0.75rem 1.75rem;
+   101→  border: 2px solid #22d3ee;
+   102→  border-radius: 0.625rem;
+   103→  background: transparent;
+   104→  color: #22d3ee;
+   105→  font-weight: 600;
+   106→  font-size: 0.95rem;
+   107→  cursor: pointer;
+   108→  text-transform: uppercase;
+   109→  letter-spacing: 0.08em;
+   110→  transition: color 0.25s ease, box-shadow 0.3s ease;
+   111→  box-shadow: 0 0 6px rgba(34, 211, 238, 0.4), inset 0 0 6px rgba(34, 211, 238, 0.2);
+   112→}
+   113→.fx-btn-neon:hover {
+   114→  color: #0b0f1a;
+   115→  background: #22d3ee;
+   116→  box-shadow: 0 0 14px rgba(34, 211, 238, 0.9), 0 0 32px rgba(34, 211, 238, 0.6);
+   117→}`,
+   118→    darkSurface: true,
+   119→  },
+   120→  {
+   121→    id: "btn-3d",
+   122→    name: "3D Push Button",
+   123→    category: "Buttons",
+   124→    description:
+   125→      "A chunky button with a solid drop-shadow base that compresses when pressed for a satisfying tactile feel.",
+   126→    html: `<button class="fx-btn-3d">Press Me</button>`,
+   127→    css: `.fx-btn-3d {
+   128→  position: relative;
+   129→  padding: 0.75rem 1.75rem;
+   130→  border: none;
+   131→  border-radius: 0.5rem;
+   132→  font-weight: 700;
+   133→  font-size: 0.95rem;
+   134→  color: #fff;
+   135→  cursor: pointer;
+   136→  background: #ec4899;
+   137→  box-shadow: 0 6px 0 #9d174d, 0 8px 14px rgba(0, 0, 0, 0.25);
+   138→  transition: transform 0.1s ease, box-shadow 0.1s ease;
+   139→}
+   140→.fx-btn-3d:hover { background: #f472b6; }
+   141→.fx-btn-3d:active {
+   142→  transform: translateY(6px);
+   143→  box-shadow: 0 0 0 #9d174d, 0 0 4px rgba(0, 0, 0, 0.25);
+   144→}`,
+   145→  },
+   146→  {
+   147→    id: "btn-slide",
+   148→    name: "Slide Fill Button",
+   149→    category: "Buttons",
+   150→    description:
+   151→      "A ghost button that fills from left to right with a solid color on hover, with the text color flipping in sync.",
+   152→    html: `<button class="fx-btn-slide">Continue</button>`,
+   153→    css: `.fx-btn-slide {
+   154→  position: relative;
+   155→  isolation: isolate;
+   156→  padding: 0.75rem 1.75rem;
+   157→  border: 2px solid #10b981;
+   158→  border-radius: 0.625rem;
+   159→  background: transparent;
+   160→  color: #10b981;
+   161→  font-weight: 600;
+   162→  font-size: 0.95rem;
+   163→  cursor: pointer;
+   164→  overflow: hidden;
+   165→  transition: color 0.3s ease;
+   166→}
+   167→.fx-btn-slide::before {
+   168→  content: '';
+   169→  position: absolute;
+   170→  inset: 0;
+   171→  background: #10b981;
+   172→  transform: translateX(-101%);
+   173→  transition: transform 0.35s cubic-bezier(0.65, 0, 0.35, 1);
+   174→  z-index: -1;
+   175→}
+   176→.fx-btn-slide:hover { color: #fff; }
+   177→.fx-btn-slide:hover::before { transform: translateX(0); }`,
+   178→  },
+   179→  {
+   180→    id: "btn-border-draw",
+   181→    name: "Border Draw Button",
+   182→    category: "Buttons",
+   183→    description:
+   184→      "Minimal text button whose top and bottom borders sweep in from opposite directions on hover.",
+   185→    html: `<button class="fx-btn-border-draw">Discover</button>`,
+   186→    css: `.fx-btn-border-draw {
+   187→  position: relative;
+   188→  padding: 0.75rem 1.75rem;
+   189→  border: none;
+   190→  background: transparent;
+   191→  color: #f59e0b;
+   192→  font-weight: 600;
+   193→  font-size: 0.95rem;
+   194→  cursor: pointer;
+   195→  transition: color 0.3s ease;
+   196→}
+   197→.fx-btn-border-draw::before,
+   198→.fx-btn-border-draw::after {
+   199→  content: '';
+   200→  position: absolute;
+   201→  width: 100%;
+   202→  height: 2px;
+   203→  background: #f59e0b;
+   204→  transform: scaleX(0);
+   205→  transition: transform 0.4s ease;
+   206→}
+   207→.fx-btn-border-draw::before { top: 0; left: 0; transform-origin: left; }
+   208→.fx-btn-border-draw::after { bottom: 0; right: 0; transform-origin: right; }
+   209→.fx-btn-border-draw:hover::before,
+   210→.fx-btn-border-draw:hover::after { transform: scaleX(1); }
+   211→.fx-btn-border-draw:hover { color: #fbbf24; }`,
+   212→  },
+   213→  {
+   214→    id: "btn-pulse",
+   215→    name: "Pulse Ring Button",
+   216→    category: "Buttons",
+   217→    description:
+   218→      "A pill button with two concentric rings that continuously pulse outward, calling attention without motion noise.",
+   219→    html: `<button class="fx-btn-pulse">Subscribe</button>`,
+   220→    css: `.fx-btn-pulse {
+   221→  position: relative;
+   222→  padding: 0.75rem 1.75rem;
+   223→  border: none;
+   224→  border-radius: 999px;
+   225→  background: #6366f1;
+   226→  color: #fff;
+   227→  font-weight: 600;
+   228→  font-size: 0.95rem;
+   229→  cursor: pointer;
+   230→  transition: transform 0.2s ease;
+   231→}
+   232→.fx-btn-pulse::before,
+   233→.fx-btn-pulse::after {
+   234→  content: '';
+   235→  position: absolute;
+   236→  inset: 0;
+   237→  border-radius: 999px;
+   238→  border: 2px solid #6366f1;
+   239→  animation: fx-pulse-ring 2s ease-out infinite;
+   240→}
+   241→.fx-btn-pulse::after { animation-delay: 1s; }
+   242→.fx-btn-pulse:hover { transform: scale(1.05); }
+   243→@keyframes fx-pulse-ring {
+   244→  0%   { transform: scale(1);   opacity: 0.8; }
+   245→  100% { transform: scale(1.6); opacity: 0; }
+   246→}`,
+   247→  },
+   248→
+   249→  /* ---------------- LOADERS ---------------- */
+   250→  {
+   251→    id: "loader-spinner",
+   252→    name: "Classic Spinner",
+   253→    category: "Loaders",
+   254→    description:
+   255→      "The timeless rotating-border spinner, refined with a subtle base ring for depth.",
+   256→    html: `<div class="fx-loader-spinner"></div>`,
+   257→    css: `.fx-loader-spinner {
+   258→  width: 48px;
+   259→  height: 48px;
+   260→  border: 4px solid rgba(99, 102, 241, 0.2);
+   261→  border-top-color: #6366f1;
+   262→  border-radius: 50%;
+   263→  animation: fx-spin 0.9s linear infinite;
+   264→}
+   265→@keyframes fx-spin { to { transform: rotate(360deg); } }`,
+   266→  },
+   267→  {
+   268→    id: "loader-dots",
+   269→    name: "Three Dots Bounce",
+   270→    category: "Loaders",
+   271→    description:
+   272→      "Three colored dots that bounce in a staggered rhythm, perfect for inline status indicators.",
+   273→    html: `<div class="fx-loader-dots"><span></span><span></span><span></span></div>`,
+   274→    css: `.fx-loader-dots { display: flex; gap: 0.5rem; }
+   275→.fx-loader-dots span {
+   276→  width: 14px;
+   277→  height: 14px;
+   278→  border-radius: 50%;
+   279→  background: #f43f5e;
+   280→  animation: fx-dots-bounce 1.2s ease-in-out infinite;
+   281→}
+   282→.fx-loader-dots span:nth-child(2) { animation-delay: 0.15s; background: #f59e0b; }
+   283→.fx-loader-dots span:nth-child(3) { animation-delay: 0.3s; background: #10b981; }
+   284→@keyframes fx-dots-bounce {
+   285→  0%, 80%, 100% { transform: translateY(0); opacity: 0.5; }
+   286→  40%           { transform: translateY(-14px); opacity: 1; }
+   287→}`,
+   288→  },
+   289→  {
+   290→    id: "loader-pulse-ring",
+   291→    name: "Pulse Ring Loader",
+   292→    category: "Loaders",
+   293→    description:
+   294→      "Two concentric rings expand and fade in alternation, creating a sonar-like pulse.",
+   295→    html: `<div class="fx-loader-pulse-ring"></div>`,
+   296→    css: `.fx-loader-pulse-ring {
+   297→  position: relative;
+   298→  width: 50px;
+   299→  height: 50px;
+   300→}
+   301→.fx-loader-pulse-ring::before,
+   302→.fx-loader-pulse-ring::after {
+   303→  content: '';
+   304→  position: absolute;
+   305→  inset: 0;
+   306→  border-radius: 50%;
+   307→  background: #22d3ee;
+   308→  animation: fx-pulse-r 1.8s ease-out infinite;
+   309→}
+   310→.fx-loader-pulse-ring::after { animation-delay: 0.9s; }
+   311→@keyframes fx-pulse-r {
+   312→  0%   { transform: scale(0);   opacity: 1; }
+   313→  100% { transform: scale(1.2); opacity: 0; }
+   314→}`,
+   315→  },
+   316→  {
+   317→    id: "loader-square",
+   318→    name: "Square Wave",
+   319→    category: "Loaders",
+   320→    description:
+   321→      "A single square that rotates and morphs its border-radius in a hypnotic wave pattern.",
+   322→    html: `<div class="fx-loader-square"></div>`,
+   323→    css: `.fx-loader-square {
+   324→  width: 44px;
+   325→  height: 44px;
+   326→  background: #ec4899;
+   327→  border-radius: 6px;
+   328→  animation: fx-square 1.4s ease-in-out infinite;
+   329→}
+   330→@keyframes fx-square {
+   331→  0%, 40%, 100% { transform: rotate(0deg) scale(1); border-radius: 6px; }
+   332→  20%           { transform: rotate(45deg) scale(0.7); border-radius: 50%; }
+   333→  60%           { transform: rotate(-45deg) scale(1.1); border-radius: 12px; }
+   334→}`,
+   335→  },
+   336→  {
+   337→    id: "loader-skeleton",
+   338→    name: "Skeleton Shimmer",
+   339→    category: "Loaders",
+   340→    description:
+   341→      "Two stacked placeholder bars with a soft sweeping highlight that signals content is on its way.",
+   342→    html: `<div class="fx-loader-skeleton"></div>
+   343→<div class="fx-loader-skeleton"></div>`,
+   344→    css: `.fx-loader-skeleton {
+   345→  width: 100%;
+   346→  max-width: 240px;
+   347→  height: 14px;
+   348→  border-radius: 6px;
+   349→  background: linear-gradient(90deg,
+   350→    rgba(148, 163, 184, 0.15) 25%,
+   351→    rgba(148, 163, 184, 0.35) 50%,
+   352→    rgba(148, 163, 184, 0.15) 75%);
+   353→  background-size: 200% 100%;
+   354→  animation: fx-shimmer 1.5s infinite;
+   355→}
+   356→.fx-loader-skeleton + .fx-loader-skeleton { margin-top: 8px; height: 10px; width: 80%; }
+   357→@keyframes fx-shimmer {
+   358→  0%   { background-position: 200% 0; }
+   359→  100% { background-position: -200% 0; }
+   360→}`,
+   361→    darkSurface: true,
+   362→  },
+   363→
+   364→  /* ---------------- CARDS ---------------- */
+   365→  {
+   366→    id: "card-lift",
+   367→    name: "Hover Lift Card",
+   368→    category: "Cards",
+   369→    description:
+   370→      "A gradient card that rises on hover with an intensifying colored shadow for a tactile floating effect.",
+   371→    html: `<div class="fx-card-lift">
+   372→  <h4 style="margin:0;font-size:1.05rem;font-weight:700;">Emerald Plan</h4>
+   373→  <p style="margin:0.35rem 0 0;font-size:0.85rem;opacity:0.9;">Hover to lift</p>
+   374→</div>`,
+   375→    css: `.fx-card-lift {
+   376→  width: 220px;
+   377→  padding: 1.5rem;
+   378→  border-radius: 0.875rem;
+   379→  background: linear-gradient(135deg, #10b981, #059669);
+   380→  color: #fff;
+   381→  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+   382→  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s ease;
+   383→  cursor: pointer;
+   384→}
+   385→.fx-card-lift:hover {
+   386→  transform: translateY(-10px);
+   387→  box-shadow: 0 22px 40px -12px rgba(16, 185, 129, 0.55);
+   388→}`,
+   389→  },
+   390→  {
+   391→    id: "card-glass",
+   392→    name: "Glassmorphism Card",
+   393→    category: "Cards",
+   394→    description:
+   395→      "A frosted glass card with backdrop blur sitting over a colorful gradient plate — the classic iOS-style material.",
+   396→    html: `<div class="fx-card-glass">
+   397→  <h4 style="margin:0;font-size:1.05rem;font-weight:700;">Frosted</h4>
+   398→  <p style="margin:0.35rem 0 0;font-size:0.85rem;opacity:0.9;">Blur + transparency</p>
+   399→</div>`,
+   400→    css: `.fx-card-glass {
+   401→  position: relative;
+   402→  width: 240px;
+   403→  padding: 1.5rem;
+   404→  border-radius: 1rem;
+   405→  background: rgba(255, 255, 255, 0.12);
+   406→  backdrop-filter: blur(14px) saturate(180%);
+   407→  -webkit-backdrop-filter: blur(14px) saturate(180%);
+   408→  border: 1px solid rgba(255, 255, 255, 0.25);
+   409→  color: #fff;
+   410→  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+   411→}
+   412→.fx-card-glass::before {
+   413→  content: '';
+   414→  position: absolute;
+   415→  inset: 0;
+   416→  border-radius: 1rem;
+   417→  background:
+   418→    radial-gradient(circle at 20% 20%, rgba(244, 63, 94, 0.55), transparent 50%),
+   419→    radial-gradient(circle at 80% 60%, rgba(99, 102, 241, 0.55), transparent 50%),
+   420→    linear-gradient(135deg, #1f2937, #111827);
+   421→  z-index: -1;
+   422→}`,
+   423→    darkSurface: true,
+   424→  },
+   425→  {
+   426→    id: "card-neu",
+   427→    name: "Neumorphism Card",
+   428→    category: "Cards",
+   429→    description:
+   430→      "A soft extruded card with dual light/dark shadows that invert into an inset on hover for a pressed feel.",
+   431→    html: `<div class="fx-card-neu">
+   432→  <h4 style="margin:0;font-size:1.05rem;font-weight:700;">Soft UI</h4>
+   433→  <p style="margin:0.35rem 0 0;font-size:0.85rem;">Hover to press</p>
+   434→</div>`,
+   435→    css: `.fx-card-neu {
+   436→  width: 220px;
+   437→  padding: 1.75rem;
+   438→  border-radius: 1.25rem;
+   439→  background: #e0e5ec;
+   440→  color: #475569;
+   441→  box-shadow: 10px 10px 24px #b8bbc0, -10px -10px 24px #ffffff;
+   442→  transition: box-shadow 0.3s ease;
+   443→}
+   444→.fx-card-neu:hover {
+   445→  box-shadow: inset 6px 6px 14px #b8bbc0, inset -6px -6px 14px #ffffff;
+   446→}`,
+   447→    previewClass: "bg-[#e0e5ec]",
+   448→  },
+   449→  {
+   450→    id: "card-spotlight",
+   451→    name: "Spotlight Card",
+   452→    category: "Cards",
+   453→    description:
+   454→      "A dark card where a cyan spotlight follows the cursor, revealing the surface only where you point. (Move your mouse over it.)",
+   455→    html: `<div class="fx-card-spotlight" data-spotlight>
+   456→  <h4 style="margin:0;font-size:1.05rem;font-weight:700;">Spotlight</h4>
+   457→  <p style="margin:0.35rem 0 0;font-size:0.85rem;opacity:0.85;">Move your cursor</p>
+   458→</div>`,
+   459→    css: `.fx-card-spotlight {
+   460→  position: relative;
+   461→  width: 240px;
+   462→  padding: 1.5rem;
+   463→  border-radius: 0.875rem;
+   464→  background: #1e293b;
+   465→  color: #f1f5f9;
+   466→  overflow: hidden;
+   467→  transition: transform 0.3s ease;
+   468→}
+   469→.fx-card-spotlight::before {
+   470→  content: '';
+   471→  position: absolute;
+   472→  inset: 0;
+   473→  background: radial-gradient(circle at var(--fx-x, 50%) var(--fx-y, 50%),
+   474→    rgba(34, 211, 238, 0.35), transparent 60%);
+   475→  opacity: 0;
+   476→  transition: opacity 0.3s ease;
+   477→  pointer-events: none;
+   478→}
+   479→.fx-card-spotlight:hover::before { opacity: 1; }
+   480→
+   481→// JS hook — track cursor position on the card:
+   482→//   const card = document.querySelector('.fx-card-spotlight');
+   483→//   card.addEventListener('mousemove', e => {
+   484→//     const rect = card.getBoundingClientRect();
+   485→//     card.style.setProperty('--fx-x', (e.clientX - rect.left) + 'px');
+   486→//     card.style.setProperty('--fx-y', (e.clientY - rect.top) + 'px');
+   487→//   });`,
+   488→    darkSurface: true,
+   489→  },
+   490→  {
+   491→    id: "card-flip",
+   492→    name: "3D Flip Card",
+   493→    category: "Cards",
+   494→    description:
+   495→      "A card that rotates 180° on the Y axis when hovered, revealing a different face on the back.",
+   496→    html: `<div class="fx-flip-card">
+   497→  <div class="fx-flip-card-inner">
+   498→    <div class="fx-flip-card-face fx-flip-card-front">Front</div>
+   499→    <div class="fx-flip-card-face fx-flip-card-back">Back</div>
+   500→  </div>
+   501→</div>`,
+   502→    css: `.fx-flip-card {
+   503→  perspective: 1000px;
+   504→  width: 220px;
+   505→  height: 140px;
+   506→}
+   507→.fx-flip-card-inner {
+   508→  position: relative;
+   509→  width: 100%;
+   510→  height: 100%;
+   511→  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+   512→  transform-style: preserve-3d;
+   513→}
+   514→.fx-flip-card:hover .fx-flip-card-inner { transform: rotateY(180deg); }
+   515→.fx-flip-card-face {
+   516→  position: absolute;
+   517→  inset: 0;
+   518→  border-radius: 0.875rem;
+   519→  display: flex;
+   520→  align-items: center;
+   521→  justify-content: center;
+   522→  font-weight: 600;
+   523→  -webkit-backface-visibility: hidden;
+   524→  backface-visibility: hidden;
+   525→}
+   526→.fx-flip-card-front { background: linear-gradient(135deg, #f59e0b, #f43f5e); color: #fff; }
+   527→.fx-flip-card-back  { background: linear-gradient(135deg, #6366f1, #06b6d4); color: #fff; transform: rotateY(180deg); }`,
+   528→  },
+   529→
+   530→  /* ---------------- TEXT ---------------- */
+   531→  {
+   532→    id: "text-gradient",
+   533→    name: "Animated Gradient Text",
+   534→    category: "Text",
+   535→    description:
+   536→      "Bold heading text filled with a flowing five-color gradient that scrolls continuously.",
+   537→    html: `<h2 class="fx-text-gradient">Living Colors</h2>`,
+   538→    css: `.fx-text-gradient {
+   539→  font-size: 2rem;
+   540→  font-weight: 800;
+   541→  background: linear-gradient(90deg, #f43f5e, #f59e0b, #10b981, #6366f1, #f43f5e);
+   542→  background-size: 200% auto;
+   543→  -webkit-background-clip: text;
+   544→  background-clip: text;
+   545→  color: transparent;
+   546→  -webkit-text-fill-color: transparent;
+   547→  animation: fx-gradient-flow 4s linear infinite;
+   548→}
+   549→@keyframes fx-gradient-flow {
+   550→  to { background-position: 200% center; }
+   551→}`,
+   552→  },
+   553→  {
+   554→    id: "text-glitch",
+   555→    name: "Glitch Text",
+   556→    category: "Text",
+   557→    description:
+   558→      "Cyberpunk-style distorted text with two clip-pathed colored ghosts that shift independently.",
+   559→    html: `<h2 class="fx-text-glitch" data-text="GLITCH">GLITCH</h2>`,
+   560→    css: `.fx-text-glitch {
+   561→  position: relative;
+   562→  font-size: 2.25rem;
+   563→  font-weight: 800;
+   564→  color: #fff;
+   565→  letter-spacing: 0.04em;
+   566→}
+   567→.fx-text-glitch::before,
+   568→.fx-text-glitch::after {
+   569→  content: attr(data-text);
+   570→  position: absolute;
+   571→  inset: 0;
+   572→  pointer-events: none;
+   573→}
+   574→.fx-text-glitch::before {
+   575→  color: #ec4899;
+   576→  animation: fx-glitch-1 2.5s infinite linear alternate-reverse;
+   577→  clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+   578→}
+   579→.fx-text-glitch::after {
+   580→  color: #22d3ee;
+   581→  animation: fx-glitch-2 1.8s infinite linear alternate-reverse;
+   582→  clip-path: polygon(0 60%, 100% 60%, 100% 100%, 0 100%);
+   583→}
+   584→@keyframes fx-glitch-1 {
+   585→  0%   { transform: translate(0); }
+   586→  20%  { transform: translate(-3px, 2px); }
+   587→  40%  { transform: translate(-2px, -2px); }
+   588→  60%  { transform: translate(3px, 1px); }
+   589→  80%  { transform: translate(2px, -1px); }
+   590→  100% { transform: translate(0); }
+   591→}
+   592→@keyframes fx-glitch-2 {
+   593→  0%   { transform: translate(0); }
+   594→  20%  { transform: translate(2px, -2px); }
+   595→  40%  { transform: translate(3px, 2px); }
+   596→  60%  { transform: translate(-2px, -1px); }
+   597→  80%  { transform: translate(-3px, 1px); }
+   598→  100% { transform: translate(0); }
+   599→}`,
+   600→    darkSurface: true,
+   601→  },
+   602→  {
+   603→    id: "text-typewriter",
+   604→    name: "Typewriter",
+   605→    category: "Text",
+   606→    description:
+   607→      "Mono-spaced text that types itself out character by character with a blinking caret, then re-types.",
+   608→    html: `<div class="fx-text-typewriter">console.log('hi');</div>`,
+   609→    css: `.fx-text-typewriter {
+   610→  font-family: monospace;
+   611→  font-size: 1.25rem;
+   612→  color: #10b981;
+   613→  overflow: hidden;
+   614→  white-space: nowrap;
+   615→  border-right: 3px solid #10b981;
+   616→  width: 0;
+   617→  animation: fx-type 4s steps(22, end) infinite alternate,
+   618→             fx-caret 0.7s step-end infinite;
+   619→}
+   620→@keyframes fx-type {
+   621→  0%        { width: 0; }
+   622→  40%, 60%  { width: 14ch; }
+   623→  100%      { width: 0; }
+   624→}
+   625→@keyframes fx-caret { 50% { border-color: transparent; } }`,
+   626→    darkSurface: true,
+   627→  },
+   628→  {
+   629→    id: "text-neon",
+   630→    name: "Neon Glow Text",
+   631→    category: "Text",
+   632→    description:
+   633→      "White text surrounded by layered cyan shadows that flicker like an old neon sign.",
+   634→    html: `<h2 class="fx-text-neon">NEON</h2>`,
+   635→    css: `.fx-text-neon {
+   636→  font-size: 2.25rem;
+   637→  font-weight: 800;
+   638→  color: #fff;
+   639→  text-shadow:
+   640→    0 0 5px #fff,
+   641→    0 0 10px #fff,
+   642→    0 0 20px #22d3ee,
+   643→    0 0 40px #22d3ee,
+   644→    0 0 80px #22d3ee;
+   645→  animation: fx-neon-flicker 3s infinite alternate;
+   646→}
+   647→@keyframes fx-neon-flicker {
+   648→  0%, 18%, 22%, 25%, 53%, 57%, 100% {
+   649→    text-shadow:
+   650→      0 0 5px #fff, 0 0 10px #fff,
+   651→      0 0 20px #22d3ee, 0 0 40px #22d3ee, 0 0 80px #22d3ee;
+   652→  }
+   653→  20%, 24%, 55% { text-shadow: none; }
+   654→}`,
+   655→    darkSurface: true,
+   656→  },
+   657→  {
+   658→    id: "text-shimmer",
+   659→    name: "Shimmer Text",
+   660→    category: "Text",
+   661→    description:
+   662→      "Subtle slate text with a bright gold highlight band that sweeps across continuously.",
+   663→    html: `<h2 class="fx-text-shimmer">Loading gold…</h2>`,
+   664→    css: `.fx-text-shimmer {
+   665→  font-size: 2rem;
+   666→  font-weight: 800;
+   667→  background: linear-gradient(90deg, #475569 0%, #475569 40%, #fbbf24 50%, #475569 60%, #475569 100%);
+   668→  background-size: 200% 100%;
+   669→  -webkit-background-clip: text;
+   670→  background-clip: text;
+   671→  color: transparent;
+   672→  -webkit-text-fill-color: transparent;
+   673→  animation: fx-text-shimmer 2.5s linear infinite;
+   674→}
+   675→@keyframes fx-text-shimmer {
+   676→  0%   { background-position: 200% 0; }
+   677→  100% { background-position: -200% 0; }
+   678→}`,
+   679→  },
+   680→
+   681→  /* ---------------- BACKGROUNDS ---------------- */
+   682→  {
+   683→    id: "bg-gradient",
+   684→    name: "Animated Gradient",
+   685→    category: "Backgrounds",
+   686→    description:
+   687→      "A four-color gradient that slowly pans its position to create a continuously morphing backdrop.",
+   688→    html: `<div class="fx-bg-gradient"></div>`,
+   689→    css: `.fx-bg-gradient {
+   690→  width: 100%;
+   691→  height: 100%;
+   692→  min-height: 180px;
+   693→  border-radius: 0.75rem;
+   694→  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+   695→  background-size: 400% 400%;
+   696→  animation: fx-bg-gradient 14s ease infinite;
+   697→}
+   698→@keyframes fx-bg-gradient {
+   699→  0%   { background-position: 0% 50%; }
+   700→  50%  { background-position: 100% 50%; }
+   701→  100% { background-position: 0% 50%; }
+   702→}`,
+   703→    previewClass: "p-0",
+   704→  },
+   705→  {
+   706→    id: "bg-orbs",
+   707→    name: "Floating Orbs",
+   708→    category: "Backgrounds",
+   709→    description:
+   710→      "Three blurred colored orbs drifting on a dark surface — great for hero section backdrops.",
+   711→    html: `<div class="fx-bg-orbs"><span></span></div>`,
+   712→    css: `.fx-bg-orbs {
+   713→  position: relative;
+   714→  width: 100%;
+   715→  height: 100%;
+   716→  min-height: 180px;
+   717→  border-radius: 0.75rem;
+   718→  background: #0f172a;
+   719→  overflow: hidden;
+   720→}
+   721→.fx-bg-orbs::before,
+   722→.fx-bg-orbs::after,
+   723→.fx-bg-orbs span {
+   724→  content: '';
+   725→  position: absolute;
+   726→  border-radius: 50%;
+   727→  filter: blur(8px);
+   728→  opacity: 0.7;
+   729→}
+   730→.fx-bg-orbs::before {
+   731→  width: 90px; height: 90px;
+   732→  background: #f43f5e;
+   733→  top: 20%; left: 15%;
+   734→  animation: fx-float 8s ease-in-out infinite;
+   735→}
+   736→.fx-bg-orbs::after {
+   737→  width: 70px; height: 70px;
+   738→  background: #22d3ee;
+   739→  top: 50%; right: 20%;
+   740→  animation: fx-float 11s ease-in-out infinite reverse;
+   741→}
+   742→.fx-bg-orbs span {
+   743→  width: 60px; height: 60px;
+   744→  background: #f59e0b;
+   745→  bottom: 15%; left: 50%;
+   746→  animation: fx-float 9s ease-in-out 1s infinite;
+   747→}
+   748→@keyframes fx-float {
+   749→  0%, 100% { transform: translate(0, 0) scale(1); }
+   750→  33%      { transform: translate(20px, -25px) scale(1.1); }
+   751→  66%      { transform: translate(-15px, 15px) scale(0.95); }
+   752→}`,
+   753→    previewClass: "p-0",
+   754→  },
+   755→  {
+   756→    id: "bg-grid",
+   757→    name: "Animated Grid",
+   758→    category: "Backgrounds",
+   759→    description:
+   760→      "A retro-tech glowing grid that pans diagonally over a radial vignette — Tron meets synthwave.",
+   761→    html: `<div class="fx-bg-grid"></div>`,
+   762→    css: `.fx-bg-grid {
+   763→  width: 100%;
+   764→  height: 100%;
+   765→  min-height: 180px;
+   766→  border-radius: 0.75rem;
+   767→  background:
+   768→    linear-gradient(rgba(99, 102, 241, 0.5) 1px, transparent 1px),
+   769→    linear-gradient(90deg, rgba(99, 102, 241, 0.5) 1px, transparent 1px),
+   770→    radial-gradient(circle at center, #1e1b4b 0%, #0b1020 100%);
+   771→  background-size: 32px 32px, 32px 32px, 100% 100%;
+   772→  animation: fx-grid-pan 8s linear infinite;
+   773→}
+   774→@keyframes fx-grid-pan {
+   775→  0%   { background-position: 0 0, 0 0, 0 0; }
+   776→  100% { background-position: 32px 32px, 32px 32px, 0 0; }
+   777→}`,
+   778→    previewClass: "p-0",
+   779→  },
+   780→  {
+   781→    id: "bg-mesh",
+   782→    name: "Mesh Gradient",
+   783→    category: "Backgrounds",
+   784→    description:
+   785→      "A multi-point radial gradient mesh that gently shifts position, producing a soft aurora of color.",
+   786→    html: `<div class="fx-bg-mesh"></div>`,
+   787→    css: `.fx-bg-mesh {
+   788→  width: 100%;
+   789→  height: 100%;
+   790→  min-height: 180px;
+   791→  border-radius: 0.75rem;
+   792→  background-color: #0f172a;
+   793→  background-image:
+   794→    radial-gradient(at 27% 37%, hsla(215, 98%, 61%, 0.7) 0px, transparent 50%),
+   795→    radial-gradient(at 97% 21%, hsla(125, 98%, 72%, 0.7) 0px, transparent 50%),
+   796→    radial-gradient(at 52% 99%, hsla(354, 98%, 61%, 0.7) 0px, transparent 50%),
+   797→    radial-gradient(at 10% 29%, hsla(256, 96%, 67%, 0.7) 0px, transparent 50%),
+   798→    radial-gradient(at 97% 96%, hsla(38, 60%, 74%, 0.7) 0px, transparent 50%),
+   799→    radial-gradient(at 33% 50%, hsla(222, 67%, 73%, 0.7) 0px, transparent 50%),
+   800→    radial-gradient(at 79% 53%, hsla(343, 68%, 79%, 0.7) 0px, transparent 50%);
+   801→  background-size: 200% 200%;
+   802→  animation: fx-mesh-shift 12s ease-in-out infinite;
+   803→}
+   804→@keyframes fx-mesh-shift {
+   805→  0%, 100% { background-position: 0% 0%; }
+   806→  50%      { background-position: 100% 100%; }
+   807→}`,
+   808→    previewClass: "p-0",
+   809→  },
+   810→
+   811→  /* ---------------- INPUTS & HOVER ---------------- */
+   812→  {
+   813→    id: "input-float",
+   814→    name: "Floating Label Input",
+   815→    category: "Inputs & Hover",
+   816→    description:
+   817→      "A label that starts centered and gracefully floats up to the corner when the field is focused or filled.",
+   818→    html: `<div class="fx-input-float">
+   819→  <input type="text" placeholder=" " id="fx-input-float-field" />
+   820→  <label for="fx-input-float-field">Your email</label>
+   821→</div>`,
+   822→    css: `.fx-input-float {
+   823→  position: relative;
+   824→  width: 100%;
+   825→  max-width: 260px;
+   826→}
+   827→.fx-input-float input {
+   828→  width: 100%;
+   829→  padding: 1.1rem 0.75rem 0.5rem;
+   830→  border: 1px solid #cbd5e1;
+   831→  border-radius: 0.5rem;
+   832→  background: transparent;
+   833→  color: inherit;
+   834→  font-size: 0.95rem;
+   835→  outline: none;
+   836→  transition: border-color 0.25s ease;
+   837→}
+   838→.fx-input-float input:focus { border-color: #10b981; }
+   839→.fx-input-float label {
+   840→  position: absolute;
+   841→  left: 0.75rem;
+   842→  top: 50%;
+   843→  transform: translateY(-50%);
+   844→  color: #94a3b8;
+   845→  pointer-events: none;
+   846→  transition: all 0.2s ease;
+   847→  font-size: 0.95rem;
+   848→}
+   849→.fx-input-float input:focus + label,
+   850→.fx-input-float input:not(:placeholder-shown) + label {
+   851→  top: 0.25rem;
+   852→  transform: translateY(0);
+   853→  font-size: 0.72rem;
+   854→  color: #10b981;
+   855→}`,
+   856→  },
+   857→  {
+   858→    id: "input-underline",
+   859→    name: "Underline Grow Input",
+   860→    category: "Inputs & Hover",
+   861→    description:
+   862→      "Minimalist input whose bottom border grows in from the left on focus for an elegant material reveal.",
+   863→    html: `<div class="fx-input-underline">
+   864→  <input type="text" placeholder="Search…" />
+   865→</div>`,
+   866→    css: `.fx-input-underline {
+   867→  position: relative;
+   868→  width: 100%;
+   869→  max-width: 260px;
+   870→}
+   871→.fx-input-underline input {
+   872→  width: 100%;
+   873→  padding: 0.6rem 0.25rem;
+   874→  border: none;
+   875→  border-bottom: 2px solid #cbd5e1;
+   876→  background: transparent;
+   877→  color: inherit;
+   878→  font-size: 1rem;
+   879→  outline: none;
+   880→}
+   881→.fx-input-underline::after {
+   882→  content: '';
+   883→  position: absolute;
+   884→  left: 0;
+   885→  bottom: 0;
+   886→  width: 100%;
+   887→  height: 2px;
+   888→  background: #6366f1;
+   889→  transform: scaleX(0);
+   890→  transform-origin: left;
+   891→  transition: transform 0.35s ease;
+   892→}
+   893→.fx-input-underline:focus-within::after { transform: scaleX(1); }`,
+   894→  },
+   895→  {
+   896→    id: "hover-zoom",
+   897→    name: "Image Zoom Hover",
+   898→    category: "Inputs & Hover",
+   899→    description:
+   900→      "A framed visual that smoothly zooms in on hover while the overlay text stays sharp — common in image galleries.",
+   901→    html: `<div class="fx-hover-zoom">
+   902→  <div class="fx-hover-zoom-bg"></div>
+   903→  <div class="fx-hover-zoom-label">Explore</div>
+   904→</div>`,
+   905→    css: `.fx-hover-zoom {
+   906→  position: relative;
+   907→  width: 220px;
+   908→  height: 150px;
+   909→  border-radius: 0.75rem;
+   910→  overflow: hidden;
+   911→  cursor: pointer;
+   912→}
+   913→.fx-hover-zoom-bg {
+   914→  position: absolute;
+   915→  inset: 0;
+   916→  background:
+   917→    linear-gradient(135deg, rgba(99, 102, 241, 0.7), rgba(236, 72, 153, 0.7)),
+   918→    repeating-linear-gradient(45deg, #1e293b 0 10px, #334155 10px 20px);
+   919→  transition: transform 0.55s cubic-bezier(0.2, 0.8, 0.2, 1);
+   920→}
+   921→.fx-hover-zoom:hover .fx-hover-zoom-bg { transform: scale(1.18); }
+   922→.fx-hover-zoom-label {
+   923→  position: absolute;
+   924→  inset: 0;
+   925→  display: flex;
+   926→  align-items: center;
+   927→  justify-content: center;
+   928→  color: #fff;
+   929→  font-weight: 700;
+   930→  letter-spacing: 0.05em;
+   931→  text-transform: uppercase;
+   932→  z-index: 1;
+   933→}`,
+   934→  },
+   935→  {
+   936→    id: "link-underline",
+   937→    name: "Underline Reveal Link",
+   938→    category: "Inputs & Hover",
+   939→    description:
+   940→      "A link whose underline wipes in from left to right on hover and wipes out the same way on leave.",
+   941→    html: `<a class="fx-link-underline">Read the docs →</a>`,
+   942→    css: `.fx-link-underline {
+   943→  position: relative;
+   944→  font-size: 1.05rem;
+   945→  font-weight: 600;
+   946→  color: #f59e0b;
+   947→  text-decoration: none;
+   948→  cursor: pointer;
+   949→  padding-bottom: 4px;
+   950→}
+   951→.fx-link-underline::after {
+   952→  content: '';
+   953→  position: absolute;
+   954→  left: 0;
+   955→  bottom: 0;
+   956→  width: 100%;
+   957→  height: 2px;
+   958→  background: #f59e0b;
+   959→  transform: scaleX(0);
+   960→  transform-origin: right;
+   961→  transition: transform 0.4s ease;
+   962→}
+   963→.fx-link-underline:hover::after {
+   964→  transform: scaleX(1);
+   965→  transform-origin: left;
+   966→}`,
+   967→  },
+   968→  {
+   969→    id: "hover-icon",
+   970→    name: "Icon Bounce Hover",
+   971→    category: "Inputs & Hover",
+   972→    description:
+   973→      "A pill chip whose arrow shoots up and to the right on hover, while the surface fills with color.",
+   974→    html: `<a class="fx-hover-icon">
+   975→  Learn more
+   976→  <span class="fx-hover-icon-arrow">→</span>
+   977→</a>`,
+   978→    css: `.fx-hover-icon {
+   979→  display: inline-flex;
+   980→  align-items: center;
+   981→  gap: 0.6rem;
+   982→  padding: 0.6rem 1.25rem;
+   983→  border-radius: 999px;
+   984→  background: #f3f4f6;
+   985→  color: #475569;
+   986→  font-weight: 600;
+   987→  cursor: pointer;
+   988→  transition: background 0.3s ease, color 0.3s ease;
+   989→}
+   990→.fx-hover-icon .fx-hover-icon-arrow {
+   991→  display: inline-block;
+   992→  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+   993→}
+   994→.fx-hover-icon:hover {
+   995→  background: #10b981;
+   996→  color: #fff;
+   997→}
+   998→.fx-hover-icon:hover .fx-hover-icon-arrow {
+   999→  transform: translateX(6px) rotate(-45deg);
+  1000→}`,
+  1001→  },
+  1002→
+  1003→  /* ============ ROUND 2 — BONUS EFFECTS ============ */
+  1004→
+  1005→  /* ---- Buttons ---- */
+  1006→  {
+  1007→    id: "btn-liquid",
+  1008→    name: "Liquid Wave Button",
+  1009→    category: "Buttons",
+  1010→    description:
+  1011→      "A teal wave rises from the bottom and floods the button on hover, with the text color flipping to white.",
+  1012→    html: `<button class="fx-btn-liquid">Dive in</button>`,
+  1013→    css: `.fx-btn-liquid {
+  1014→  position: relative;
+  1015→  isolation: isolate;
+  1016→  padding: 0.85rem 2rem;
+  1017→  border: none;
+  1018→  border-radius: 0.625rem;
+  1019→  background: transparent;
+  1020→  color: #0f766e;
+  1021→  font-weight: 700;
+  1022→  font-size: 0.95rem;
+  1023→  cursor: pointer;
+  1024→  overflow: hidden;
+  1025→  transition: color 0.4s ease 0.1s;
+  1026→}
+  1027→.fx-btn-liquid::before {
+  1028→  content: '';
+  1029→  position: absolute;
+  1030→  left: 0;
+  1031→  bottom: -100%;
+  1032→  width: 100%;
+  1033→  height: 200%;
+  1034→  background: #14b8a6;
+  1035→  border-radius: 50% 50% 0 0;
+  1036→  transition: bottom 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+  1037→  z-index: -1;
+  1038→}
+  1039→.fx-btn-liquid:hover { color: #fff; }
+  1040→.fx-btn-liquid:hover::before { bottom: 0; border-radius: 0; }`,
+  1041→  },
+  1042→  {
+  1043→    id: "btn-beam",
+  1044→    name: "Border Beam Button",
+  1045→    category: "Buttons",
+  1046→    description:
+  1047→      "A dark button surrounded by a rotating conic-gradient beam that traces its border like a comet.",
+  1048→    html: `<button class="fx-btn-beam">Launch</button>`,
+  1049→    css: `.fx-btn-beam {
+  1050→  position: relative;
+  1051→  padding: 0.8rem 1.9rem;
+  1052→  border: none;
+  1053→  border-radius: 0.625rem;
+  1054→  background: #0f172a;
+  1055→  color: #f8fafc;
+  1056→  font-weight: 600;
+  1057→  font-size: 0.95rem;
+  1058→  cursor: pointer;
+  1059→  isolation: isolate;
+  1060→  overflow: hidden;
+  1061→}
+  1062→.fx-btn-beam::before {
+  1063→  content: '';
+  1064→  position: absolute;
+  1065→  inset: -2px;
+  1066→  border-radius: inherit;
+  1067→  background: conic-gradient(from 0deg, transparent 0%, #22d3ee 12%, #818cf8 25%, transparent 40%);
+  1068→  animation: fx-beam-spin 3s linear infinite;
+  1069→  z-index: -2;
+  1070→}
+  1071→.fx-btn-beam::after {
+  1072→  content: '';
+  1073→  position: absolute;
+  1074→  inset: 2px;
+  1075→  border-radius: calc(0.625rem - 2px);
+  1076→  background: #0f172a;
+  1077→  z-index: -1;
+  1078→}
+  1079→@keyframes fx-beam-spin { to { transform: rotate(360deg); } }`,
+  1080→    darkSurface: true,
+  1081→  },
+  1082→  {
+  1083→    id: "btn-glow-trail",
+  1084→    name: "Glow Trail Button",
+  1085→    category: "Buttons",
+  1086→    description:
+  1087→      "A deep-indigo button that ignites layered indigo glows on hover for an electric, almost magnetic presence.",
+  1088→    html: `<button class="fx-btn-glow-trail">Engage</button>`,
+  1089→    css: `.fx-btn-glow-trail {
+  1090→  position: relative;
+  1091→  padding: 0.8rem 1.9rem;
+  1092→  border: 1px solid #6366f1;
+  1093→  border-radius: 0.625rem;
+  1094→  background: #1e1b4b;
+  1095→  color: #c7d2fe;
+  1096→  font-weight: 600;
+  1097→  font-size: 0.95rem;
+  1098→  cursor: pointer;
+  1099→  transition: color 0.25s ease, border-color 0.25s ease;
+  1100→}
+  1101→.fx-btn-glow-trail:hover {
+  1102→  color: #fff;
+  1103→  border-color: #a5b4fc;
+  1104→  box-shadow:
+  1105→    0 0 12px rgba(99, 102, 241, 0.6),
+  1106→    0 0 24px rgba(99, 102, 241, 0.35),
+  1107→    inset 0 0 12px rgba(99, 102, 241, 0.25);
+  1108→}`,
+  1109→    darkSurface: true,
+  1110→  },
+  1111→  {
+  1112→    id: "btn-icon-slide",
+  1113→    name: "Icon Slide Button",
+  1114→    category: "Buttons",
+  1115→    description:
+  1116→      "A warm amber button whose trailing arrow nudges right on hover, suggesting forward motion.",
+  1117→    html: `<button class="fx-btn-icon-slide">
+  1118→  Continue
+  1119→  <span class="fx-btn-icon-slide-icon">→</span>
+  1120→</button>`,
+  1121→    css: `.fx-btn-icon-slide {
+  1122→  display: inline-flex;
+  1123→  align-items: center;
+  1124→  gap: 0.6rem;
+  1125→  padding: 0.75rem 1.6rem;
+  1126→  border: none;
+  1127→  border-radius: 0.625rem;
+  1128→  background: #f59e0b;
+  1129→  color: #1f2937;
+  1130→  font-weight: 700;
+  1131→  font-size: 0.95rem;
+  1132→  cursor: pointer;
+  1133→  overflow: hidden;
+  1134→  transition: background 0.25s ease;
+  1135→}
+  1136→.fx-btn-icon-slide-icon {
+  1137→  display: inline-flex;
+  1138→  align-items: center;
+  1139→  justify-content: center;
+  1140→  width: 1.1rem;
+  1141→  height: 1.1rem;
+  1142→  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+  1143→}
+  1144→.fx-btn-icon-slide:hover .fx-btn-icon-slide-icon {
+  1145→  transform: translateX(4px);
+  1146→}
+  1147→.fx-btn-icon-slide:hover { background: #fbbf24; }`,
+  1148→  },
+  1149→
+  1150→  /* ---- Loaders ---- */
+  1151→  {
+  1152→    id: "loader-bar",
+  1153→    name: "Indeterminate Bar",
+  1154→    category: "Loaders",
+  1155→    description:
+  1156→      "A slim pill track with a colored segment that slides endlessly from left to right — perfect for progress feedback.",
+  1157→    html: `<div class="fx-loader-bar"></div>`,
+  1158→    css: `.fx-loader-bar {
+  1159→  position: relative;
+  1160→  width: 220px;
+  1161→  height: 6px;
+  1162→  border-radius: 999px;
+  1163→  background: rgba(99, 102, 241, 0.18);
+  1164→  overflow: hidden;
+  1165→}
+  1166→.fx-loader-bar::before {
+  1167→  content: '';
+  1168→  position: absolute;
+  1169→  top: 0;
+  1170→  left: 0;
+  1171→  width: 40%;
+  1172→  height: 100%;
+  1173→  border-radius: inherit;
+  1174→  background: linear-gradient(90deg, #6366f1, #ec4899);
+  1175→  animation: fx-bar-slide 1.4s ease-in-out infinite;
+  1176→}
+  1177→@keyframes fx-bar-slide {
+  1178→  0%   { left: -40%; }
+  1179→  100% { left: 100%; }
+  1180→}`,
+  1181→  },
+  1182→  {
+  1183→    id: "loader-orbit",
+  1184→    name: "Orbit Loader",
+  1185→    category: "Loaders",
+  1186→    description:
+  1187→      "Three colored dots circle a central point at staggered phases, like electrons tracing an orbit.",
+  1188→    html: `<div class="fx-loader-orbit"><span></span><span></span><span></span></div>`,
+  1189→    css: `.fx-loader-orbit {
+  1190→  position: relative;
+  1191→  width: 56px;
+  1192→  height: 56px;
+  1193→}
+  1194→.fx-loader-orbit span {
+  1195→  position: absolute;
+  1196→  top: 50%;
+  1197→  left: 50%;
+  1198→  width: 10px;
+  1199→  height: 10px;
+  1200→  margin: -5px;
+  1201→  border-radius: 50%;
+  1202→  background: #f43f5e;
+  1203→  transform-origin: 5px 5px;
+  1204→  animation: fx-orbit-rot 1.6s linear infinite;
+  1205→}
+  1206→.fx-loader-orbit span:nth-child(1) { background: #6366f1; animation-delay: 0s; }
+  1207→.fx-loader-orbit span:nth-child(2) { background: #f59e0b; animation-delay: -0.53s; }
+  1208→.fx-loader-orbit span:nth-child(3) { background: #10b981; animation-delay: -1.06s; }
+  1209→@keyframes fx-orbit-rot {
+  1210→  0%   { transform: rotate(0deg) translateX(22px) rotate(0deg); }
+  1211→  100% { transform: rotate(360deg) translateX(22px) rotate(-360deg); }
+  1212→}`,
+  1213→  },
+  1214→  {
+  1215→    id: "loader-wave",
+  1216→    name: "Liquid Wave Loader",
+  1217→    category: "Loaders",
+  1218→    description:
+  1219→      "Two counter-rotating waves slosh inside a circular vessel, creating a hypnotic liquid-fill illusion.",
+  1220→    html: `<div class="fx-loader-wave"></div>`,
+  1221→    css: `.fx-loader-wave {
+  1222→  position: relative;
+  1223→  width: 56px;
+  1224→  height: 56px;
+  1225→  border-radius: 50%;
+  1226→  border: 2px solid rgba(34, 211, 238, 0.25);
+  1227→  overflow: hidden;
+  1228→  background: transparent;
+  1229→}
+  1230→.fx-loader-wave::before,
+  1231→.fx-loader-wave::after {
+  1232→  content: '';
+  1233→  position: absolute;
+  1234→  left: 50%;
+  1235→  bottom: -10%;
+  1236→  width: 200%;
+  1237→  height: 200%;
+  1238→  background: rgba(34, 211, 238, 0.55);
+  1239→  border-radius: 42%;
+  1240→  transform: translateX(-50%) rotate(0deg);
+  1241→  animation: fx-wave 4s linear infinite;
+  1242→}
+  1243→.fx-loader-wave::after {
+  1244→  background: rgba(34, 211, 238, 0.35);
+  1245→  border-radius: 46%;
+  1246→  animation-duration: 6s;
+  1247→  animation-direction: reverse;
+  1248→}
+  1249→@keyframes fx-wave {
+  1250→  0%   { transform: translateX(-50%) rotate(0deg); }
+  1251→  100% { transform: translateX(-50%) rotate(360deg); }
+  1252→}`,
+  1253→    darkSurface: true,
+  1254→  },
+  1255→
+  1256→  /* ---- Cards ---- */
+  1257→  {
+  1258→    id: "card-grad-border",
+  1259→    name: "Gradient Border Card",
+  1260→    category: "Cards",
+  1261→    description:
+  1262→      "A dark card framed by an animated four-color gradient ring that continuously morphs via a mask trick.",
+  1263→    html: `<div class="fx-card-grad-border">
+  1264→  <h4 style="margin:0;font-size:1.05rem;font-weight:700;">Holographic</h4>
+  1265→  <p style="margin:0.35rem 0 0;font-size:0.85rem;opacity:0.85;">Animated border ring</p>
+  1266→</div>`,
+  1267→    css: `.fx-card-grad-border {
+  1268→  position: relative;
+  1269→  width: 240px;
+  1270→  padding: 1.5rem;
+  1271→  border-radius: 0.875rem;
+  1272→  background: #0f172a;
+  1273→  color: #f1f5f9;
+  1274→  isolation: isolate;
+  1275→}
+  1276→.fx-card-grad-border::before {
+  1277→  content: '';
+  1278→  position: absolute;
+  1279→  inset: 0;
+  1280→  border-radius: inherit;
+  1281→  padding: 2px;
+  1282→  background: linear-gradient(135deg, #f43f5e, #f59e0b, #10b981, #6366f1);
+  1283→  background-size: 300% 300%;
+  1284→  animation: fx-grad-border 5s ease infinite;
+  1285→  -webkit-mask:
+  1286→    linear-gradient(#fff 0 0) content-box,
+  1287→    linear-gradient(#fff 0 0);
+  1288→  -webkit-mask-composite: xor;
+  1289→          mask-composite: exclude;
+  1290→  z-index: -1;
+  1291→}
+  1292→@keyframes fx-grad-border {
+  1293→  0%, 100% { background-position: 0% 50%; }
+  1294→  50%      { background-position: 100% 50%; }
+  1295→}`,
+  1296→    darkSurface: true,
+  1297→  },
+  1298→  {
+  1299→    id: "card-tilt",
+  1300→    name: "3D Tilt Card",
+  1301→    category: "Cards",
+  1302→    description:
+  1303→      "A violet gradient card that tilts in 3D space on hover, with title and subtitle lifted at different depths.",
+  1304→    html: `<div class="fx-card-tilt">
+  1305→  <h4 class="fx-card-tilt-title">Perspective</h4>
+  1306→  <p class="fx-card-tilt-sub">Hover for parallax tilt</p>
+  1307→</div>`,
+  1308→    css: `.fx-card-tilt {
+  1309→  width: 220px;
+  1310→  padding: 1.5rem;
+  1311→  border-radius: 0.875rem;
+  1312→  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  1313→  color: #fff;
+  1314→  box-shadow: 0 14px 30px -10px rgba(99, 102, 241, 0.55);
+  1315→  transform-style: preserve-3d;
+  1316→  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s ease;
+  1317→  cursor: pointer;
+  1318→}
+  1319→.fx-card-tilt:hover {
+  1320→  transform: perspective(800px) rotateX(8deg) rotateY(-8deg) translateZ(8px);
+  1321→  box-shadow: -10px 18px 36px -12px rgba(99, 102, 241, 0.65);
+  1322→}
+  1323→.fx-card-tilt-title {
+  1324→  transform: translateZ(40px);
+  1325→  font-size: 1.1rem;
+  1326→  font-weight: 700;
+  1327→  margin: 0;
+  1328→}
+  1329→.fx-card-tilt-sub {
+  1330→  transform: translateZ(20px);
+  1331→  margin: 0.35rem 0 0;
+  1332→  font-size: 0.85rem;
+  1333→  opacity: 0.9;
+  1334→}`,
+  1335→  },
+  1336→  {
+  1337→    id: "card-glow",
+  1338→    name: "Glow Pulse Card",
+  1339→    category: "Cards",
+  1340→    description:
+  1341→      "An indigo card that breathes — its outer glow softly expands and contracts on a steady loop, calling attention without motion noise.",
+  1342→    html: `<div class="fx-card-glow">
+  1343→  <h4 style="margin:0;font-size:1.05rem;font-weight:700;">Breathing</h4>
+  1344→  <p style="margin:0.35rem 0 0;font-size:0.85rem;opacity:0.85;">Always-on glow loop</p>
+  1345→</div>`,
+  1346→    css: `.fx-card-glow {
+  1347→  position: relative;
+  1348→  width: 220px;
+  1349→  padding: 1.5rem;
+  1350→  border-radius: 0.875rem;
+  1351→  background: #1e1b4b;
+  1352→  color: #e0e7ff;
+  1353→  border: 1px solid rgba(99, 102, 241, 0.4);
+  1354→  box-shadow: 0 0 0 rgba(99, 102, 241, 0);
+  1355→  transition: box-shadow 0.4s ease, transform 0.4s ease;
+  1356→  animation: fx-glow-pulse 2.6s ease-in-out infinite;
+  1357→}
+  1358→@keyframes fx-glow-pulse {
+  1359→  0%, 100% { box-shadow: 0 0 8px rgba(99, 102, 241, 0.4), 0 0 20px rgba(99, 102, 241, 0.15); }
+  1360→  50%      { box-shadow: 0 0 18px rgba(99, 102, 241, 0.8), 0 0 40px rgba(99, 102, 241, 0.4); }
+  1361→}`,
+  1362→    darkSurface: true,
+  1363→  },
+  1364→
+  1365→  /* ---- Text ---- */
+  1366→  {
+  1367→    id: "text-3d",
+  1368→    name: "3D Layered Text",
+  1369→    category: "Text",
+  1370→    description:
+  1371→      "Bold white text built up from six magenta shadow layers, creating a chunky retro 3D extrusion that lifts on hover.",
+  1372→    html: `<h2 class="fx-text-3d">DEPTH</h2>`,
+  1373→    css: `.fx-text-3d {
+  1374→  font-size: 2.5rem;
+  1375→  font-weight: 900;
+  1376→  color: #fff;
+  1377→  letter-spacing: 0.02em;
+  1378→  text-shadow:
+  1379→    1px 1px 0 #c026d3,
+  1380→    2px 2px 0 #a21caf,
+  1381→    3px 3px 0 #86198f,
+  1382→    4px 4px 0 #701a75,
+  1383→    5px 5px 0 #4a044e,
+  1384→    6px 6px 8px rgba(0, 0, 0, 0.4);
+  1385→  transition: transform 0.3s ease;
+  1386→}
+  1387→.fx-text-3d:hover { transform: translate(-2px, -2px); }`,
+  1388→    darkSurface: true,
+  1389→  },
+  1390→  {
+  1391→    id: "text-wave",
+  1392→    name: "Wave Bounce Text",
+  1393→    category: "Text",
+  1394→    description:
+  1395→      "Each letter bounces up and down with a staggered delay, producing a rolling wave across the word.",
+  1396→    html: `<h2 class="fx-text-wave">
+  1397→  <span style="animation-delay:0s">W</span><span style="animation-delay:.1s">a</span><span style="animation-delay:.2s">v</span><span style="animation-delay:.3s">e</span>
+  1398→</h2>`,
+  1399→    css: `.fx-text-wave {
+  1400→  font-size: 2rem;
+  1401→  font-weight: 800;
+  1402→  color: #10b981;
+  1403→  display: inline-flex;
+  1404→}
+  1405→.fx-text-wave span {
+  1406→  display: inline-block;
+  1407→  animation: fx-wave-bounce 1.6s ease-in-out infinite;
+  1408→}
+  1409→@keyframes fx-wave-bounce {
+  1410→  0%, 100% { transform: translateY(0); }
+  1411→  50%      { transform: translateY(-10px); }
+  1412→}`,
+  1413→  },
+  1414→  {
+  1415→    id: "text-reveal",
+  1416→    name: "Reveal Mask Text",
+  1417→    category: "Text",
+  1418→    description:
+  1419→      "Text filled with a multi-color gradient that pans across the letters and pauses, then sweeps back to repeat.",
+  1420→    html: `<h2 class="fx-text-reveal">REVEAL</h2>`,
+  1421→    css: `.fx-text-reveal {
+  1422→  position: relative;
+  1423→  font-size: 2.5rem;
+  1424→  font-weight: 800;
+  1425→  color: transparent;
+  1426→  background: linear-gradient(90deg, #f43f5e 0%, #f59e0b 50%, #10b981 100%);
+  1427→  -webkit-background-clip: text;
+  1428→  background-clip: text;
+  1429→  background-size: 200% 100%;
+  1430→  -webkit-text-fill-color: transparent;
+  1431→  background-position: -200% 0;
+  1432→  animation: fx-reveal-pan 3s ease-in-out infinite;
+  1433→}
+  1434→@keyframes fx-reveal-pan {
+  1435→  0%        { background-position: -200% 0; }
+  1436→  60%, 100% { background-position: 200% 0; }
+  1437→}`,
+  1438→  },
+  1439→
+  1440→  /* ---- Backgrounds ---- */
+  1441→  {
+  1442→    id: "bg-aurora",
+  1443→    name: "Aurora Background",
+  1444→    category: "Backgrounds",
+  1445→    description:
+  1446→      "Two large blurred radial blobs drift independently across a near-black canvas, evoking northern lights.",
+  1447→    html: `<div class="fx-bg-aurora"></div>`,
+  1448→    css: `.fx-bg-aurora {
+  1449→  position: relative;
+  1450→  width: 100%;
+  1451→  height: 100%;
+  1452→  min-height: 180px;
+  1453→  border-radius: 0.75rem;
+  1454→  background: #020617;
+  1455→  overflow: hidden;
+  1456→}
+  1457→.fx-bg-aurora::before,
+  1458→.fx-bg-aurora::after {
+  1459→  content: '';
+  1460→  position: absolute;
+  1461→  width: 60%;
+  1462→  height: 80%;
+  1463→  border-radius: 50%;
+  1464→  filter: blur(40px);
+  1465→  opacity: 0.7;
+  1466→}
+  1467→.fx-bg-aurora::before {
+  1468→  top: -20%;
+  1469→  left: -10%;
+  1470→  background: radial-gradient(circle, #22d3ee, transparent 70%);
+  1471→  animation: fx-aurora-a 10s ease-in-out infinite alternate;
+  1472→}
+  1473→.fx-bg-aurora::after {
+  1474→  bottom: -20%;
+  1475→  right: -10%;
+  1476→  background: radial-gradient(circle, #c026d3, transparent 70%);
+  1477→  animation: fx-aurora-b 12s ease-in-out infinite alternate;
+  1478→}
+  1479→@keyframes fx-aurora-a {
+  1480→  0%   { transform: translate(0, 0) scale(1); }
+  1481→  100% { transform: translate(30%, 20%) scale(1.3); }
+  1482→}
+  1483→@keyframes fx-aurora-b {
+  1484→  0%   { transform: translate(0, 0) scale(1.1); }
+  1485→  100% { transform: translate(-25%, -15%) scale(0.9); }
+  1486→}`,
+  1487→    previewClass: "p-0",
+  1488→  },
+  1489→  {
+  1490→    id: "bg-stars",
+  1491→    name: "Starfield Background",
+  1492→    category: "Backgrounds",
+  1493→    description:
+  1494→      "A repeating pattern of multi-color stars on a deep navy gradient that gently twinkles in opacity.",
+  1495→    html: `<div class="fx-bg-stars"></div>`,
+  1496→    css: `.fx-bg-stars {
+  1497→  position: relative;
+  1498→  width: 100%;
+  1499→  height: 100%;
+  1500→  min-height: 180px;
+  1501→  border-radius: 0.75rem;
+  1502→  background:
+  1503→    radial-gradient(2px 2px at 20px 30px, #fff, transparent),
+  1504→    radial-gradient(1px 1px at 80px 90px, #fff, transparent),
+  1505→    radial-gradient(1.5px 1.5px at 140px 50px, #93c5fd, transparent),
+  1506→    radial-gradient(1px 1px at 200px 120px, #fff, transparent),
+  1507→    radial-gradient(2px 2px at 260px 30px, #fde68a, transparent),
+  1508→    radial-gradient(1px 1px at 320px 100px, #fff, transparent),
+  1509→    linear-gradient(180deg, #0b1020, #1e1b4b);
+  1510→  background-repeat: repeat;
+  1511→  background-size: 360px 180px, 360px 180px, 360px 180px, 360px 180px, 360px 180px, 360px 180px, 100% 100%;
+  1512→  animation: fx-stars-twinkle 4s ease-in-out infinite alternate;
+  1513→}
+  1514→@keyframes fx-stars-twinkle {
+  1515→  0%   { opacity: 0.7; }
+  1516→  100% { opacity: 1; }
+  1517→}`,
+  1518→    previewClass: "p-0",
+  1519→  },
+  1520→  {
+  1521→    id: "bg-conic",
+  1522→    name: "Spinning Conic Gradient",
+  1523→    category: "Backgrounds",
+  1524→    description:
+  1525→      "A saturated conic wheel of seven colors that rotates continuously — striking as a hero panel backdrop.",
+  1526→    html: `<div class="fx-bg-conic"></div>`,
+  1527→    css: `.fx-bg-conic {
+  1528→  width: 100%;
+  1529→  height: 100%;
+  1530→  min-height: 180px;
+  1531→  border-radius: 0.75rem;
+  1532→  background: conic-gradient(from 0deg at 50% 50%,
+  1533→    #f43f5e, #f59e0b, #facc15, #10b981, #06b6d4, #6366f1, #ec4899, #f43f5e);
+  1534→  animation: fx-conic-rot 8s linear infinite;
+  1535→  filter: saturate(1.1);
+  1536→}
+  1537→@keyframes fx-conic-rot { to { transform: rotate(360deg); } }`,
+  1538→    previewClass: "p-0",
+  1539→  },
+  1540→
+  1541→  /* ---- Inputs & Hover ---- */
+  1542→  {
+  1543→    id: "toggle-ios",
+  1544→    name: "iOS Toggle Switch",
+  1545→    category: "Inputs & Hover",
+  1546→    description:
+  1547→      "A pure-CSS iOS-style toggle with a hidden checkbox, smooth slide, and accessible focus ring.",
+  1548→    html: `<label class="fx-toggle">
+  1549→  <input type="checkbox" />
+  1550→  <span class="fx-toggle-slider"></span>
+  1551→</label>`,
+  1552→    css: `.fx-toggle {
+  1553→  position: relative;
+  1554→  display: inline-block;
+  1555→  width: 52px;
+  1556→  height: 30px;
+  1557→}
+  1558→.fx-toggle input {
+  1559→  opacity: 0;
+  1560→  width: 0;
+  1561→  height: 0;
+  1562→}
+  1563→.fx-toggle-slider {
+  1564→  position: absolute;
+  1565→  inset: 0;
+  1566→  cursor: pointer;
+  1567→  background: #cbd5e1;
+  1568→  border-radius: 999px;
+  1569→  transition: background 0.3s ease;
+  1570→}
+  1571→.fx-toggle-slider::before {
+  1572→  content: '';
+  1573→  position: absolute;
+  1574→  height: 22px;
+  1575→  width: 22px;
+  1576→  left: 4px;
+  1577→  bottom: 4px;
+  1578→  background: #fff;
+  1579→  border-radius: 50%;
+  1580→  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  1581→  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  1582→}
+  1583→.fx-toggle input:checked + .fx-toggle-slider { background: #10b981; }
+  1584→.fx-toggle input:checked + .fx-toggle-slider::before { transform: translateX(22px); }
+  1585→.fx-toggle input:focus-visible + .fx-toggle-slider {
+  1586→  outline: 2px solid #10b981;
+  1587→  outline-offset: 2px;
+  1588→}`,
+  1589→  },
+  1590→  {
+  1591→    id: "check-custom",
+  1592→    name: "Custom Checkbox",
+  1593→    category: "Inputs & Hover",
+  1594→    description:
+  1595→      "A native checkbox restyled with appearance:none — fills with indigo and draws an animated checkmark when checked.",
+  1596→    html: `<label class="fx-check">
+  1597→  <input type="checkbox" />
+  1598→  Accept terms
+  1599→</label>`,
+  1600→    css: `.fx-check {
+  1601→  display: inline-flex;
+  1602→  align-items: center;
+  1603→  gap: 0.6rem;
+  1604→  cursor: pointer;
+  1605→  user-select: none;
+  1606→  font-size: 0.95rem;
+  1607→  color: #475569;
+  1608→}
+  1609→.fx-check input {
+  1610→  appearance: none;
+  1611→  -webkit-appearance: none;
+  1612→  width: 22px;
+  1613→  height: 22px;
+  1614→  border: 2px solid #cbd5e1;
+  1615→  border-radius: 6px;
+  1616→  background: transparent;
+  1617→  cursor: pointer;
+  1618→  position: relative;
+  1619→  transition: background 0.2s ease, border-color 0.2s ease;
+  1620→}
+  1621→.fx-check input:checked {
+  1622→  background: #6366f1;
+  1623→  border-color: #6366f1;
+  1624→}
+  1625→.fx-check input:checked::after {
+  1626→  content: '';
+  1627→  position: absolute;
+  1628→  left: 6px;
+  1629→  top: 2px;
+  1630→  width: 6px;
+  1631→  height: 11px;
+  1632→  border: solid #fff;
+  1633→  border-width: 0 2.5px 2.5px 0;
+  1634→  transform: rotate(45deg);
+  1635→}`,
+  1636→  },
+  1637→  {
+  1638→    id: "tooltip-hover",
+  1639→    name: "Tooltip on Hover",
+  1640→    category: "Inputs & Hover",
+  1641→    description:
+  1642→      "A dark chip that reveals a small floating tooltip with an arrow above it on hover, using only pseudo-elements.",
+  1643→    html: `<span class="fx-tooltip" data-tip="Helpful tip!">Hover me</span>`,
+  1644→    css: `.fx-tooltip {
+  1645→  position: relative;
+  1646→  display: inline-block;
+  1647→  padding: 0.5rem 1rem;
+  1648→  border-radius: 0.5rem;
+  1649→  background: #1e293b;
+  1650→  color: #f1f5f9;
+  1651→  font-size: 0.9rem;
+  1652→  cursor: help;
+  1653→}
+  1654→.fx-tooltip::after {
+  1655→  content: attr(data-tip);
+  1656→  position: absolute;
+  1657→  bottom: calc(100% + 8px);
+  1658→  left: 50%;
+  1659→  transform: translateX(-50%) translateY(6px);
+  1660→  background: #0f172a;
+  1661→  color: #f8fafc;
+  1662→  padding: 0.4rem 0.7rem;
+  1663→  border-radius: 0.375rem;
+  1664→  font-size: 0.78rem;
+  1665→  white-space: nowrap;
+  1666→  opacity: 0;
+  1667→  pointer-events: none;
+  1668→  transition: opacity 0.2s ease, transform 0.2s ease;
+  1669→  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  1670→}
+  1671→.fx-tooltip::before {
+  1672→  content: '';
+  1673→  position: absolute;
+  1674→  bottom: 100%;
+  1675→  left: 50%;
+  1676→  transform: translateX(-50%) translateY(6px);
+  1677→  border: 5px solid transparent;
+  1678→  border-top-color: #0f172a;
+  1679→  opacity: 0;
+  1680→  transition: opacity 0.2s ease, transform 0.2s ease;
+  1681→}
+  1682→.fx-tooltip:hover::after,
+  1683→.fx-tooltip:hover::before {
+  1684→  opacity: 1;
+  1685→  transform: translateX(-50%) translateY(0);
+  1686→}`,
+  1687→  },
+  1688→
+  1689→  /* ============ ROUND 3 — NAVIGATION, DIVIDERS, BADGES, BONUS ============ */
+  1690→
+  1691→  /* ---- Navigation & Menus ---- */
+  1692→  {
+  1693→    id: "nav-hamburger",
+  1694→    name: "Animated Hamburger",
+  1695→    category: "Navigation & Menus",
+  1696→    description:
+  1697→      "Pure-CSS hamburger menu using the checkbox hack — three lines morph into an X with no JavaScript.",
+  1698→    html: `<label class="fx-hamburger">
+  1699→  <input type="checkbox" />
+  1700→  <div class="fx-hamburger-lines">
+  1701→    <span></span><span></span><span></span>
+  1702→  </div>
+  1703→</label>`,
+  1704→    css: `.fx-hamburger { display: inline-block; cursor: pointer; }
+  1705→.fx-hamburger input {
+  1706→  position: absolute;
+  1707→  opacity: 0;
+  1708→  width: 0;
+  1709→  height: 0;
+  1710→}
+  1711→.fx-hamburger-lines {
+  1712→  position: relative;
+  1713→  width: 36px;
+  1714→  height: 24px;
+  1715→  display: flex;
+  1716→  flex-direction: column;
+  1717→  justify-content: space-between;
+  1718→}
+  1719→.fx-hamburger-lines span {
+  1720→  display: block;
+  1721→  height: 3px;
+  1722→  width: 100%;
+  1723→  background: #f59e0b;
+  1724→  border-radius: 2px;
+  1725→  transition: transform 0.3s ease, opacity 0.2s ease;
+  1726→  transform-origin: center;
+  1727→}
+  1728→.fx-hamburger input:checked + .fx-hamburger-lines span:nth-child(1) {
+  1729→  transform: translateY(10.5px) rotate(45deg);
+  1730→}
+  1731→.fx-hamburger input:checked + .fx-hamburger-lines span:nth-child(2) {
+  1732→  opacity: 0;
+  1733→}
+  1734→.fx-hamburger input:checked + .fx-hamburger-lines span:nth-child(3) {
+  1735→  transform: translateY(-10.5px) rotate(-45deg);
+  1736→}`,
+  1737→  },
+  1738→  {
+  1739→    id: "nav-pill-tabs",
+  1740→    name: "Pill Tab Switcher",
+  1741→    category: "Navigation & Menus",
+  1742→    description:
+  1743→      "A segmented pill tab control with a floating indigo indicator that snaps to the selected option via :has().",
+  1744→    html: `<div class="fx-tabs-pill">
+  1745→  <label><input type="radio" name="fx-pill" checked />Day</label>
+  1746→  <label><input type="radio" name="fx-pill" />Week</label>
+  1747→  <label><input type="radio" name="fx-pill" />Month</label>
+  1748→</div>`,
+  1749→    css: `.fx-tabs-pill {
+  1750→  display: inline-flex;
+  1751→  padding: 4px;
+  1752→  border-radius: 999px;
+  1753→  background: #e2e8f0;
+  1754→}
+  1755→.fx-tabs-pill label {
+  1756→  position: relative;
+  1757→  padding: 0.45rem 1.1rem;
+  1758→  font-size: 0.85rem;
+  1759→  font-weight: 600;
+  1760→  color: #64748b;
+  1761→  cursor: pointer;
+  1762→  border-radius: 999px;
+  1763→  transition: color 0.25s ease;
+  1764→  z-index: 1;
+  1765→}
+  1766→.fx-tabs-pill input { display: none; }
+  1767→.fx-tabs-pill label:has(input:checked) { color: #fff; }
+  1768→.fx-tabs-pill label:has(input:checked)::before {
+  1769→  content: '';
+  1770→  position: absolute;
+  1771→  inset: 0;
+  1772→  border-radius: inherit;
+  1773→  background: #6366f1;
+  1774→  z-index: -1;
+  1775→  box-shadow: 0 4px 10px -2px rgba(99, 102, 241, 0.5);
+  1776→}`,
+  1777→    previewClass: "bg-[#e2e8f0]",
+  1778→  },
+  1779→  {
+  1780→    id: "nav-dropdown",
+  1781→    name: "Hover Dropdown Menu",
+  1782→    category: "Navigation & Menus",
+  1783→    description:
+  1784→      "A native <details>-based dropdown that animates open, with arrow rotation and hover-highlighted menu items.",
+  1785→    html: `<details class="fx-dropdown">
+  1786→  <summary class="fx-dropdown-summary">Account</summary>
+  1787→  <ul class="fx-dropdown-menu">
+  1788→    <li><a href="#">Profile</a></li>
+  1789→    <li><a href="#">Settings</a></li>
+  1790→    <li><a href="#">Sign out</a></li>
+  1791→  </ul>
+  1792→</details>`,
+  1793→    css: `.fx-dropdown {
+  1794→  position: relative;
+  1795→  display: inline-block;
+  1796→}
+  1797→.fx-dropdown-summary {
+  1798→  list-style: none;
+  1799→  cursor: pointer;
+  1800→  padding: 0.55rem 1.1rem;
+  1801→  border-radius: 0.5rem;
+  1802→  background: #1e293b;
+  1803→  color: #f1f5f9;
+  1804→  font-size: 0.9rem;
+  1805→  font-weight: 500;
+  1806→  display: inline-flex;
+  1807→  align-items: center;
+  1808→  gap: 0.5rem;
+  1809→}
+  1810→.fx-dropdown-summary::-webkit-details-marker { display: none; }
+  1811→.fx-dropdown-summary::after {
+  1812→  content: '▾';
+  1813→  font-size: 0.75rem;
+  1814→  transition: transform 0.25s ease;
+  1815→}
+  1816→.fx-dropdown[open] .fx-dropdown-summary::after { transform: rotate(180deg); }
+  1817→.fx-dropdown-menu {
+  1818→  position: absolute;
+  1819→  top: calc(100% + 6px);
+  1820→  left: 0;
+  1821→  min-width: 160px;
+  1822→  padding: 0.35rem;
+  1823→  border-radius: 0.5rem;
+  1824→  background: #0f172a;
+  1825→  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+  1826→  list-style: none;
+  1827→  margin: 0;
+  1828→  animation: fx-dropdown-in 0.2s ease;
+  1829→}
+  1830→@keyframes fx-dropdown-in {
+  1831→  from { opacity: 0; transform: translateY(-4px); }
+  1832→  to   { opacity: 1; transform: translateY(0); }
+  1833→}
+  1834→.fx-dropdown-menu li a {
+  1835→  display: block;
+  1836→  padding: 0.45rem 0.7rem;
+  1837→  border-radius: 0.375rem;
+  1838→  color: #cbd5e1;
+  1839→  font-size: 0.85rem;
+  1840→  text-decoration: none;
+  1841→  transition: background 0.15s ease, color 0.15s ease;
+  1842→}
+  1843→.fx-dropdown-menu li a:hover {
+  1844→  background: rgba(99, 102, 241, 0.18);
+  1845→  color: #fff;
+  1846→}`,
+  1847→    darkSurface: true,
+  1848→  },
+  1849→  {
+  1850→    id: "nav-breadcrumb",
+  1851→    name: "Breadcrumb Trail",
+  1852→    category: "Navigation & Menus",
+  1853→    description:
+  1854→      "A breadcrumb trail with chevron separators that nudge forward on hover, and a bolded current page.",
+  1855→    html: `<ul class="fx-breadcrumb">
+  1856→  <li><a href="#">Home</a></li>
+  1857→  <li><a href="#">Library</a></li>
+  1858→  <li>Effects</li>
+  1859→</ul>`,
+  1860→    css: `.fx-breadcrumb {
+  1861→  display: inline-flex;
+  1862→  align-items: center;
+  1863→  list-style: none;
+  1864→  margin: 0;
+  1865→  padding: 0;
+  1866→  font-size: 0.85rem;
+  1867→}
+  1868→.fx-breadcrumb li {
+  1869→  display: inline-flex;
+  1870→  align-items: center;
+  1871→  color: #64748b;
+  1872→}
+  1873→.fx-breadcrumb li:not(:last-child)::after {
+  1874→  content: '';
+  1875→  display: inline-block;
+  1876→  width: 7px;
+  1877→  height: 7px;
+  1878→  border-top: 2px solid #cbd5e1;
+  1879→  border-right: 2px solid #cbd5e1;
+  1880→  transform: rotate(45deg);
+  1881→  margin: 0 0.6rem;
+  1882→  transition: transform 0.25s ease;
+  1883→}
+  1884→.fx-breadcrumb li:hover:not(:last-child)::after {
+  1885→  transform: rotate(45deg) translate(2px, -2px);
+  1886→}
+  1887→.fx-breadcrumb li a {
+  1888→  color: #475569;
+  1889→  text-decoration: none;
+  1890→  transition: color 0.2s ease;
+  1891→}
+  1892→.fx-breadcrumb li a:hover { color: #6366f1; }
+  1893→.fx-breadcrumb li:last-child { color: #0f172a; font-weight: 600; }
+  1894→.dark .fx-breadcrumb li:last-child { color: #f1f5f9; }`,
+  1895→  },
+  1896→
+  1897→  /* ---- Dividers & Separators ---- */
+  1898→  {
+  1899→    id: "divider-gradient",
+  1900→    name: "Gradient Divider",
+  1901→    category: "Dividers & Separators",
+  1902→    description:
+  1903→      "A horizontal hairline that fades in from both ends with an indigo-to-pink gradient — elegant for section breaks.",
+  1904→    html: `<div class="fx-divider-gradient-wrap"><p class="fx-pre">Section One</p><hr class="fx-divider-gradient" /><p class="fx-post">Section Two</p></div>`,
+  1905→    css: `.fx-divider-gradient-wrap {
+  1906→  display: flex; flex-direction: column; gap: 0.6rem;
+  1907→  width: 100%; max-width: 280px;
+  1908→  color: #cbd5e1; font-family: system-ui, sans-serif;
+  1909→}
+  1910→.fx-divider-gradient-wrap .fx-pre {
+  1911→  margin: 0; font-size: 0.85rem; font-weight: 700; color: #f1f5f9;
+  1912→}
+  1913→.fx-divider-gradient-wrap .fx-post {
+  1914→  margin: 0; font-size: 0.78rem; color: #94a3b8;
+  1915→}
+  1916→.fx-divider-gradient {
+  1917→  width: 100%;
+  1918→  height: 2px;
+  1919→  background: linear-gradient(90deg, transparent, #6366f1, #ec4899, transparent);
+  1920→  border: none;
+  1921→  border-radius: 2px;
+  1922→}`,
+  1923→  },
+  1924→  {
+  1925→    id: "divider-wave",
+  1926→    name: "Wavy Dotted Divider",
+  1927→    category: "Dividers & Separators",
+  1928→    description:
+  1929→      "A row of evenly-spaced amber dots forming a soft wavy line — playful and lightweight.",
+  1930→    html: `<div class="fx-divider-wave-wrap"><span class="fx-wlbl">Notes</span><div class="fx-divider-wave"></div><span class="fx-wmeta">end</span></div>`,
+  1931→    css: `.fx-divider-wave-wrap {
+  1932→  display: flex; align-items: center; gap: 0.75rem;
+  1933→  width: 100%; max-width: 280px;
+  1934→  color: #cbd5e1; font-family: system-ui, sans-serif;
+  1935→}
+  1936→.fx-divider-wave-wrap .fx-wlbl {
+  1937→  font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
+  1938→  color: #f59e0b; white-space: nowrap;
+  1939→}
+  1940→.fx-divider-wave-wrap .fx-wmeta {
+  1941→  font-size: 0.7rem; color: #64748b; white-space: nowrap;
+  1942→}
+  1943→.fx-divider-wave {
+  1944→  flex: 1; height: 14px;
+  1945→  background-image: radial-gradient(circle at 7px 7px, #f59e0b 1.5px, transparent 2px);
+  1946→  background-size: 14px 14px;
+  1947→  background-repeat: repeat-x;
+  1948→  background-position: 0 50%;
+  1949→}`,
+  1950→  },
+  1951→  {
+  1952→    id: "divider-dashes",
+  1953→    name: "Animated Marching Dashes",
+  1954→    category: "Dividers & Separators",
+  1955→    description:
+  1956→      "A green dashed line whose segments appear to march continuously to the right via background-position animation.",
+  1957→    html: `<div class="fx-divider-dashes-wrap"><span class="fx-dlbl">Loading</span><div class="fx-divider-dashes"></div><span class="fx-dmeta">streaming</span></div>`,
+  1958→    css: `.fx-divider-dashes-wrap {
+  1959→  display: flex; align-items: center; gap: 0.75rem;
+  1960→  width: 100%; max-width: 280px;
+  1961→  color: #cbd5e1; font-family: system-ui, sans-serif;
+  1962→}
+  1963→.fx-divider-dashes-wrap .fx-dlbl {
+  1964→  font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
+  1965→  color: #10b981; white-space: nowrap;
+  1966→}
+  1967→.fx-divider-dashes-wrap .fx-dmeta {
+  1968→  font-size: 0.7rem; color: #64748b; white-space: nowrap;
+  1969→}
+  1970→.fx-divider-dashes {
+  1971→  flex: 1; height: 2px;
+  1972→  background-image: linear-gradient(90deg, #10b981 50%, transparent 50%);
+  1973→  background-size: 14px 2px;
+  1974→  background-repeat: repeat-x;
+  1975→  animation: fx-dash-march 1s linear infinite;
+  1976→}
+  1977→@keyframes fx-dash-march {
+  1978→  to { background-position: 28px 0; }
+  1979→}`,
+  1980→  },
+  1981→
+  1982→  /* ---- Badges & Tags ---- */
+  1983→  {
+  1984→    id: "badge-pulse",
+  1985→    name: "Notification Pulse Badge",
+  1986→    category: "Badges & Tags",
+  1987→    description:
+  1988→      "A pink badge with a cyan corner dot that emits an expanding ring continuously, signaling a live notification.",
+  1989→    html: `<span class="fx-badge-pulse">New</span>`,
+  1990→    css: `.fx-badge-pulse {
+  1991→  position: relative;
+  1992→  display: inline-flex;
+  1993→  align-items: center;
+  1994→  justify-content: center;
+  1995→  padding: 0.45rem 1rem;
+  1996→  background: #ec4899;
+  1997→  color: #fff;
+  1998→  font-weight: 600;
+  1999→  font-size: 0.85rem;
+  2000→  border-radius: 0.5rem;
+
+[showing lines 1-2000 of 2219; use offset=2001 with limit to continue reading]
