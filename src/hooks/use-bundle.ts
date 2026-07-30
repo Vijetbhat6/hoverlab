@@ -10,6 +10,7 @@
  */
 
 import * as React from 'react'
+import { track } from '@/lib/analytics'
 import { useAuth } from '@/components/auth-provider'
 
 /**
@@ -202,6 +203,7 @@ export function useBundle() {
     entriesRef.current = next // keep ref in sync for rapid successive calls
     setEntries(next)
     writeBundle(next)
+    track('bundle_add', { effect_id: effectId, bundle_size: next.length })
   }, [])
 
   const remove = React.useCallback((effectId: string) => {
@@ -209,6 +211,7 @@ export function useBundle() {
     entriesRef.current = next
     setEntries(next)
     writeBundle(next)
+    track('bundle_remove', { effect_id: effectId, bundle_size: next.length })
   }, [])
 
   const toggle = React.useCallback(

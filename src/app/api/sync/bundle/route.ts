@@ -13,6 +13,7 @@
 import { NextResponse } from 'next/server'
 import { db } from '@/lib/db'
 import { getCurrentUser } from '@/lib/session'
+import { getEntitlements, bundleLimit } from '@/lib/billing/entitlements'
 
 export const runtime = 'nodejs'
 
@@ -119,7 +120,25 @@ export async function PUT(req: Request) {
     byId.set(entry.effectId, entry)
     if (byId.size >= MAX_BUNDLE) break
   }
-  const clean = [...byId.values()]
+  let clean = [...byId.values()]
+
+  /* ---------------- Plan limit ----------------
+   * "Unlimited bundle size" is what Pro is sold on, so the free cap has
+   * to be real — enforced here rather than in the client, which a user
+   * can trivially edit. Over-cap syncs are truncated to the newest
+   * entries rather than rejected outright: the alternative is a user
+   * silently losing their whole cloud bundle because they added an 11th
+   * effect offline.
+   */
+  const ent = await getEntitlements(user.id)
+  const limit = bundleLimit(ent)
+  let truncated = false
+  if (clean.length > limit) {
+    clean = [...clean]
+      .sort((a, b) => Date.parse(b.addedAt) - Date.parse(a.addedAt))
+      .slice(0, limit)
+    truncated = true
+  }
 
   await db.$transaction([
     db.userBundleEntry.deleteMany({ where: { userId: user.id } }),
@@ -133,5 +152,10 @@ export async function PUT(req: Request) {
     }),
   ])
 
-  return NextResponse.json({ entries: clean })
+  return NextResponse.json({
+    entries: clean,
+    // The client surfaces an upgrade prompt when this comes back true.
+    truncated,
+    limit: Number.isFinite(limit) ? limit : null,
+  })
 }

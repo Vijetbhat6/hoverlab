@@ -19,6 +19,7 @@ import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { Loader2, Wand2, Github } from 'lucide-react'
 import { toast } from 'sonner'
+import { track } from '@/lib/analytics'
 
 import { useAuth } from '@/components/auth-provider'
 import { Button } from '@/components/ui/button'
@@ -57,9 +58,11 @@ export function AuthForm({ mode }: { mode: Mode }) {
     try {
       if (isSignup) {
         await signup(email, password, name.trim() || undefined)
+        track('signup_completed', { method: 'email' })
         toast.success('Account created. Your work is now saved to your account.')
       } else {
         await login(email, password)
+        track('login_completed', { method: 'email' })
         toast.success('Welcome back!')
       }
       const redirect = params.get('redirect') || '/library'

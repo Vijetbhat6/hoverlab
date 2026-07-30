@@ -1,33 +1,40 @@
 'use client'
 
 /**
- * <PricingTiers> — 3-tier pricing comparison (Free / Pro / Team).
+ * <PricingTiers> — 3-tier pricing (Free / Pro / Team), all purchasable.
  *
- * Hoverlab is currently 100% free, but showing tiers sets expectations
- * for future Pro features and signals ambition. Pro/Team are marked
- * "Coming soon" — call-to-action is "Get notified" instead of "Buy".
+ * These tiers used to advertise prices with "coming soon" CTAs pointing
+ * at a newsletter box — a product that couldn't be bought. Each paid tier
+ * now opens a real Polar checkout.
  *
- * Middle (Pro) tier is highlighted as "Most popular" with a gradient
- * border + top glow via .fx-pricing-popular.
+ * The two paid plans are deliberately different shapes:
+ *   Pro  — ONE-TIME $59. Individual devs won't subscribe for CSS snippets
+ *          they can get free elsewhere, but this market does pay once to
+ *          own the source outright (cf. Tailwind Plus, Magic UI Pro).
+ *   Team — $24 per seat / month. Seats and shared state are what companies
+ *          actually pay recurring money for.
  *
- * Free tier CTA → /signup (works today)
- * Pro/Team CTA → email signup form (newsletter)
+ * A tier whose POLAR_PRODUCT_ID_* env var is unset falls back to the
+ * waitlist CTA rather than rendering a buy button that would dead-end.
  */
 
 import * as React from 'react'
 import Link from 'next/link'
-import { Check, Sparkles, ArrowRight } from 'lucide-react'
+import { Check, Sparkles, ArrowRight, Loader2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Reveal } from '@/components/reveal'
+import { useCheckout } from '@/hooks/use-checkout'
+import { track } from '@/lib/analytics'
+import { PLANS, formatPrice, isPurchasable, type PlanId } from '@/lib/billing/plans'
 
 interface Tier {
+  id: PlanId
   name: string
   price: string
   period: string
   tagline: string
   cta: string
-  ctaHref: string
   ctaVariant: 'default' | 'outline' | 'ghost'
   popular?: boolean
   badge?: string
@@ -36,76 +43,149 @@ interface Tier {
 
 const TIERS: Tier[] = [
   {
+    id: 'free',
     name: 'Free',
     price: '$0',
     period: 'forever',
     tagline: 'For individuals exploring, learning, and shipping side projects.',
     cta: 'Get started',
-    ctaHref: '/signup',
     ctaVariant: 'outline',
     features: [
-      'All 40+ effects, all categories',
+      'All 1,600+ effects, all 13 categories',
       'Live customization sliders',
       'Save favorites (sync across devices)',
       'Bundle up to 10 effects',
-      'Export bundles as CSS',
+      'Export bundles as CSS, HTML, or ZIP',
       'PWA — installable, offline-ready',
     ],
   },
   {
+    id: 'pro',
     name: 'Pro',
-    price: '$8',
-    period: '/month',
+    price: formatPrice(PLANS.pro.priceCents),
+    period: 'once — yours forever',
     tagline: 'For developers shipping client work and commercial products.',
-    cta: 'Get notified at launch',
-    ctaHref: '#newsletter',
+    cta: 'Buy Pro',
     ctaVariant: 'default',
     popular: true,
-    badge: 'Most popular',
+    badge: 'One-time payment',
     features: [
       'Everything in Free',
       'Unlimited bundle size',
+      'Every export format (Vue, Svelte, Tailwind)',
       'Custom brand color presets',
       'Private effect collections',
-      'Per-team theming',
-      'Priority email support',
       'Commercial license pre-cleared',
+      'All future updates included',
     ],
   },
   {
+    id: 'team',
     name: 'Team',
-    price: '$24',
-    period: '/month',
+    price: formatPrice(PLANS.team.priceCents),
+    period: '/seat /month',
     tagline: 'For design systems teams standardizing effects across products.',
-    cta: 'Get notified at launch',
-    ctaHref: '#newsletter',
+    cta: 'Start Team plan',
     ctaVariant: 'outline',
     features: [
-      'Everything in Pro',
-      'Up to 10 team members',
+      'Everything in Pro, for every seat',
       'Shared brand color library',
-      'Shared bundle exports',
-      'Audit log of changes',
-      'SSO (Google, GitHub)',
-      'Dedicated Slack channel',
+      'Shared collections and bundles',
+      'Workspace-wide theming',
+      'Seat management',
+      'Priority email support',
     ],
   },
 ]
 
-export function PricingTiers() {
+/**
+ * Call-to-action for one tier.
+ *
+ * Free links to signup. Paid tiers open Polar checkout — unless their
+ * product id is missing from the environment, in which case they fall
+ * back to the waitlist rather than showing a buy button that would fail
+ * at the API with a 503.
+ */
+function TierCta({
+  tier,
+  busy,
+  onBuy,
+}: {
+  tier: Tier
+  busy: boolean
+  onBuy: () => void
+}) {
+  if (tier.id === 'free') {
+    return (
+      <Button variant={tier.ctaVariant} className="mb-6 w-full" size="lg" asChild>
+        <Link href="/signup">
+          {tier.cta}
+          <ArrowRight className="ml-1.5 h-4 w-4" />
+        </Link>
+      </Button>
+    )
+  }
+
+  if (!isPurchasable(PLANS[tier.id])) {
+    return (
+      <Button variant="outline" className="mb-6 w-full" size="lg" asChild>
+        <Link href="#newsletter">
+          Join the waitlist
+          <ArrowRight className="ml-1.5 h-4 w-4" />
+        </Link>
+      </Button>
+    )
+  }
+
   return (
-    <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
+    <Button
+      variant={tier.ctaVariant}
+      className="mb-6 w-full"
+      size="lg"
+      onClick={onBuy}
+      disabled={busy}
+    >
+      {busy ? (
+        <>
+          <Loader2 className="mr-1.5 h-4 w-4 animate-spin" />
+          Starting checkout…
+        </>
+      ) : (
+        <>
+          {tier.cta}
+          <ArrowRight className="ml-1.5 h-4 w-4" />
+        </>
+      )}
+    </Button>
+  )
+}
+
+export function PricingTiers() {
+  const { startCheckout, pendingPlan } = useCheckout()
+
+  // Entry point of the revenue funnel — paired with checkout_started and
+  // purchase_completed, this is what makes the drop-off measurable.
+  React.useEffect(() => {
+    track('pricing_viewed', {})
+  }, [])
+
+  return (
+    <section
+      id="pricing"
+      className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8"
+    >
       <Reveal className="mx-auto mb-12 max-w-2xl text-center">
         <div className="mb-4 inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-background/60 px-3 py-1 text-xs text-muted-foreground">
           <Sparkles className="h-3.5 w-3.5 text-primary" />
           Simple, honest pricing
         </div>
         <h2 className="text-balance text-3xl font-bold tracking-tight sm:text-4xl">
-          Free today. Pro when you grow.
+          Free forever. Pro once. Team by the seat.
         </h2>
         <p className="mt-3 text-muted-foreground">
-          Everything is free right now — Pro and Team tiers are coming soon.
-          Existing free features will stay free, forever.
+          Browsing, customizing, and copying every effect stays free — that
+          part never moves behind a login. Pro is a single payment you own
+          for good; Team adds shared brand tokens and seats.
         </p>
       </Reveal>
 
@@ -139,17 +219,11 @@ export function PricingTiers() {
             </div>
             <p className="mb-6 text-sm text-muted-foreground">{tier.tagline}</p>
 
-            <Button
-              variant={tier.ctaVariant}
-              className="mb-6 w-full"
-              size="lg"
-              asChild
-            >
-              <Link href={tier.ctaHref}>
-                {tier.cta}
-                <ArrowRight className="ml-1.5 h-4 w-4" />
-              </Link>
-            </Button>
+            <TierCta
+              tier={tier}
+              busy={pendingPlan === tier.id}
+              onBuy={() => startCheckout(tier.id)}
+            />
 
             <ul className="mt-auto space-y-2.5">
               {tier.features.map((f, j) => (

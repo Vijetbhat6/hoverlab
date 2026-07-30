@@ -241,6 +241,8 @@ export function EffectCard({ effect }: EffectCardProps) {
               filename="markup.html"
               language="html"
               effect={{ id: effect.id, name: effect.name, category: effect.category }}
+              surface="card"
+              isCustomized={isCustomized}
               extraCopy={{ label: 'Copy both', text: combinedSnippet, successMessage: 'Copied HTML + CSS' }}
             />
             <CodeBlock
@@ -248,6 +250,8 @@ export function EffectCard({ effect }: EffectCardProps) {
               filename="styles.css"
               language="css"
               effect={{ id: effect.id, name: effect.name, category: effect.category }}
+              surface="card"
+              isCustomized={isCustomized}
               pairedHtml={effect.html}
             />
           </TabsContent>
@@ -410,6 +414,8 @@ function CustomizePanel({
           filename="customized.css"
           language="css"
           effect={{ id: effect.id, name: effect.name, category: effect.category }}
+          surface="card"
+          isCustomized={isCustomized}
           pairedHtml={effect.html}
           extraCopy={{ label: 'Copy both', text: combinedSnippet, successMessage: 'Copied HTML + CSS' }}
         />

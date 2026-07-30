@@ -1,0 +1,40 @@
+{
+  "name": "hoverlab",
+  "version": "0.1.0",
+  "description": "Install CSS effects from the Hoverlab catalog straight into your project — and expose them to your editor's AI agent over MCP.",
+  "keywords": [
+    "css",
+    "animation",
+    "hover",
+    "ui",
+    "components",
+    "tailwind",
+    "react",
+    "vue",
+    "svelte",
+    "mcp",
+    "model-context-protocol"
+  ],
+  "homepage": "https://hoverlab.dev",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "hoverlab": "./bin/hoverlab.mjs"
+  },
+  "exports": {
+    ".": "./src/index.mjs"
+  },
+  "files": [
+    "bin",
+    "src",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=18.17"
+  },
+  "//": "Intentionally dependency-free. `npx hoverlab add btn-gradient` should be one round-trip to npm and one to the API — every dependency added here is latency a user feels before they get their effect.",
+  "dependencies": {},
+  "scripts": {
+    "test": "node --test"
+  }
+}

@@ -23,6 +23,7 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Slider } from '@/components/ui/slider'
 import { CodeBlock } from '@/components/code-block'
+import { FrameworkExportPanel } from '@/components/framework-export-panel'
 import { BundleDrawer } from '@/components/bundle-drawer'
 import { CompareDrawer } from '@/components/compare-drawer'
 import { CopyHistoryDropdown } from '@/components/copy-history-dropdown'
@@ -34,6 +35,7 @@ import { useFavorites } from '@/hooks/use-favorites'
 import { useBundle } from '@/hooks/use-bundle'
 import { useCompare } from '@/hooks/use-compare'
 import { useRecentlyViewed } from '@/hooks/use-recently-viewed'
+import { track } from '@/lib/analytics'
 import {
   customizeCss,
   DEFAULT_CUSTOMIZATION,
@@ -89,7 +91,14 @@ export function EffectDetail({ effect, similar, prev, next }: EffectDetailProps)
       name: effect.name,
       category: effect.category,
     })
-  }, [effect.id, effect.name, effect.category, recordView])
+    // Views pair with effect_copied to give a per-effect view→copy rate,
+    // which is the ranking signal for what to curate and what to cut.
+    track('effect_viewed', {
+      effect_id: effect.id,
+      category: effect.category,
+      featured: effect.featured === true,
+    })
+  }, [effect.id, effect.name, effect.category, effect.featured, recordView])
 
   /* Active tab state ---------------------------------------------------
    * We control the Tabs (value + onValueChange) instead of using
@@ -173,6 +182,29 @@ export function EffectDetail({ effect, similar, prev, next }: EffectDetailProps)
   )
   const isCustomized = customizedCss !== effect.css
   const activePreset = matchingPreset(opts)
+
+  /* Record customization once the user settles on a value.
+   *
+   * `effect_customized` was declared in the event map but never fired, so
+   * the question it exists to answer — is the customizer worth building on,
+   * or do people just copy the defaults? — had no data behind it. The
+   * 600ms debounce matters: these are sliders, and firing per frame would
+   * bury the signal under hundreds of intermediate events. Resetting back
+   * to the defaults is deliberately not recorded; only real customizations
+   * count. */
+  React.useEffect(() => {
+    if (!isCustomized) return
+    const timer = setTimeout(() => {
+      track('effect_customized', {
+        effect_id: effect.id,
+        hue: opts.hue,
+        saturation: opts.saturation,
+        scale: opts.scale,
+        speed: opts.speed,
+      })
+    }, 600)
+    return () => clearTimeout(timer)
+  }, [effect.id, isCustomized, opts.hue, opts.saturation, opts.scale, opts.speed])
 
   // Detail-page keyboard shortcuts:
   //   j / →  → next effect
@@ -446,19 +478,21 @@ export function EffectDetail({ effect, similar, prev, next }: EffectDetailProps)
                 </TabsList>
 
                 <TabsContent value="code" className="mt-3 space-y-3">
-                  <CodeBlock
-                    code={effect.html}
-                    filename="markup.html"
-                    language="html"
-                    effect={{ id: effect.id, name: effect.name, category: effect.category }}
-                    extraCopy={{ label: 'Copy both', text: combinedSnippet, successMessage: 'Copied HTML + CSS' }}
-                  />
-                  <CodeBlock
-                    code={effect.css}
-                    filename="styles.css"
-                    language="css"
-                    effect={{ id: effect.id, name: effect.name, category: effect.category }}
-                    pairedHtml={effect.html}
+                  {/* Framework picker rather than a fixed HTML+CSS pair.
+                      The panel is fed `customizedCss`, so the code always
+                      matches the preview above it — previously the Code tab
+                      showed the original CSS while the preview showed the
+                      customized version. */}
+                  <FrameworkExportPanel
+                    effect={{
+                      id: effect.id,
+                      name: effect.name,
+                      description: effect.description,
+                      category: effect.category,
+                    }}
+                    html={effect.html}
+                    css={customizedCss}
+                    isCustomized={isCustomized}
                   />
                 </TabsContent>
 
@@ -792,6 +826,7 @@ function CustomizePanel({
           filename="customized.css"
           language="css"
           effect={{ id: effect.id, name: effect.name, category: effect.category }}
+                  isCustomized={isCustomized}
           pairedHtml={effect.html}
           extraCopy={{ label: 'Copy both', text: combinedSnippet, successMessage: 'Copied HTML + CSS' }}
         />

@@ -23,6 +23,7 @@ import { useFavorites } from '@/hooks/use-favorites'
 import { useBundle } from '@/hooks/use-bundle'
 import { CATEGORIES, EFFECT_INDEX as EFFECTS, type EffectCategory, type EffectMeta } from '@/lib/effect-index'
 import { useEffectDetails } from '@/hooks/use-effect-details'
+import { track } from '@/lib/analytics'
 import { EffectCardSkeleton } from '@/components/effect-card-skeleton'
 import { cn } from '@/lib/utils'
 
@@ -244,6 +245,18 @@ export default function Home() {
     setPage(1)
   }, [query, filter, sort, favorites])
 
+  /* Track non-AI searches, debounced so a single query isn't recorded once
+   * per keystroke. Queries that return nothing are the useful half of this
+   * data — they're the gaps in the catalog worth filling. */
+  React.useEffect(() => {
+    const q = query.trim()
+    if (!q || aiMode) return
+    const timer = setTimeout(() => {
+      track('search_performed', { query: q, result_count: filtered.length })
+    }, 800)
+    return () => clearTimeout(timer)
+  }, [query, aiMode, filtered.length])
+
   /* ---------------- AI search fetch ----------------
    * When AI mode is ON and the user types, debounce 400ms then call
    * /api/ai/search with the query + a client-side candidate pool.
@@ -265,6 +278,7 @@ export default function Home() {
 
     setAiLoading(true)
     const requestId = ++aiRequestIdRef.current
+    const startedAt = performance.now()
     const timer = setTimeout(async () => {
       // Build a candidate pool: substring match across name, id, category,
       // description, tags — same fields the normal search uses. Cap at 80
@@ -312,8 +326,16 @@ export default function Home() {
         const data = (await res.json()) as { ids?: string[] }
         // Only apply if this is still the latest request.
         if (requestId === aiRequestIdRef.current) {
-          setAiRankedIds(Array.isArray(data.ids) ? data.ids : [])
+          const ids = Array.isArray(data.ids) ? data.ids : []
+          setAiRankedIds(ids)
           setAiLoading(false)
+          // AI search costs an LLM call per query — tracking latency and
+          // hit rate is what tells us whether it earns that cost.
+          track('ai_search_performed', {
+            query: q,
+            result_count: ids.length,
+            ms: Math.round(performance.now() - startedAt),
+          })
         }
       } catch (err) {
         console.error('[ai-search] fetch failed:', err)

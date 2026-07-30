@@ -3,8 +3,15 @@
 import * as React from 'react'
 import { Check, Copy, Atom } from 'lucide-react'
 import { toast } from 'sonner'
+import { track, type AnalyticsEvent } from '@/lib/analytics'
 import { useCopyHistory } from '@/hooks/use-copy-history'
 import { convertToReactComponent } from '@/lib/html-to-react'
+
+/** The `format` property of the `effect_copied` event. */
+type AnalyticsCopyFormat = Extract<
+  AnalyticsEvent,
+  { name: 'effect_copied' }
+>['props']['format']
 
 interface CodeBlockProps {
   code: string
@@ -33,6 +40,25 @@ interface CodeBlockProps {
    */
   pairedHtml?: string
   /**
+   * Where this block is rendered. Recorded on copy so analytics can tell
+   * which surface actually drives copies (grid card vs detail page vs
+   * playground), rather than lumping them together.
+   */
+  surface?: 'card' | 'detail' | 'compare' | 'palette' | 'playground'
+  /** True when the user has altered the effect before copying. */
+  isCustomized?: boolean
+  /**
+   * Override the `format` recorded on copy. The framework export panel
+   * uses this so a copied Vue SFC is reported as `vue` rather than being
+   * inferred from the syntax-highlighting language.
+   */
+  copyFormat?: AnalyticsCopyFormat
+  /**
+   * Hide the "Copy as React" shortcut. Redundant inside the framework
+   * panel, which already offers React as a first-class target.
+   */
+  hideReactButton?: boolean
+  /**
    * Optional extra copy action rendered as a secondary button.
    * Use this to provide a "Copy both" action that copies more than
    * just the visible `code` (e.g. HTML + CSS combined).
@@ -55,6 +81,10 @@ export function CodeBlock({
   filename = 'styles.css',
   effect,
   pairedHtml,
+  surface = 'detail',
+  isCustomized = false,
+  copyFormat,
+  hideReactButton = false,
   extraCopy,
 }: CodeBlockProps) {
   const [copiedKey, setCopiedKey] = React.useState<null | 'single' | 'extra' | 'react'>(null)
@@ -68,6 +98,20 @@ export function CodeBlock({
       // Record in copy history if we have effect context.
       if (effect) {
         record({ id: effect.id, name: effect.name, category: effect.category })
+        // Copies are the single strongest signal of which effects are
+        // actually worth curating — this is the funnel's core event.
+        track('effect_copied', {
+          effect_id: effect.id,
+          category: effect.category,
+          surface,
+          format:
+            key === 'react'
+              ? 'react'
+              : key === 'extra'
+                ? 'both'
+                : (copyFormat ?? (language === 'html' ? 'html' : 'css')),
+          customized: Boolean(isCustomized),
+        })
       }
       setTimeout(() => setCopiedKey((curr) => (curr === key ? null : curr)), 1800)
     } catch {
@@ -99,7 +143,10 @@ export function CodeBlock({
     }
   }
 
-  const showReactButton = Boolean(effect) && (language === 'css' ? Boolean(pairedHtml) : language === 'html')
+  const showReactButton =
+    !hideReactButton &&
+    Boolean(effect) &&
+    (language === 'css' ? Boolean(pairedHtml) : language === 'html')
 
   return (
     <div className="group relative overflow-hidden rounded-lg border border-border/70 bg-[#0b1020] text-slate-100">

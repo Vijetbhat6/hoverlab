@@ -24,10 +24,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Marketing + tool pages. Auth-gated routes (/account, /login, /signup)
   // are deliberately absent — they have nothing to index.
   const staticRoutes: MetadataRoute.Sitemap = [
-    { url: absoluteUrl('/'), changeFrequency: 'weekly', priority: 1 },
-    { url: absoluteUrl('/library'), changeFrequency: 'daily', priority: 0.9 },
-    { url: absoluteUrl('/playground'), changeFrequency: 'monthly', priority: 0.7 },
-    { url: absoluteUrl('/tools'), changeFrequency: 'monthly', priority: 0.8 },
+    { url: absoluteUrl('/'), changeFrequency: 'weekly' as const, priority: 1 },
+    { url: absoluteUrl('/library'), changeFrequency: 'daily' as const, priority: 0.9 },
+    { url: absoluteUrl('/playground'), changeFrequency: 'monthly' as const, priority: 0.7 },
+    { url: absoluteUrl('/tools'), changeFrequency: 'monthly' as const, priority: 0.8 },
     ...[
       'palette',
       'gradient',

@@ -7,6 +7,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { AuthProvider } from "@/components/auth-provider";
 import { ReducedMotionProvider } from "@/components/reduced-motion-provider";
 import { ServiceWorkerRegister } from "@/components/service-worker-register";
+import { AnalyticsProvider } from "@/components/analytics-provider";
 import { Viewport } from "next";
 
 const geistSans = Geist({
@@ -87,14 +88,16 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <AuthProvider>
-            <ReducedMotionProvider>
-              {children}
-              <Toaster />
-              <SonnerToaster position="bottom-right" />
-              <ServiceWorkerRegister />
-            </ReducedMotionProvider>
-          </AuthProvider>
+          <AnalyticsProvider>
+            <AuthProvider>
+              <ReducedMotionProvider>
+                {children}
+                <Toaster />
+                <SonnerToaster position="bottom-right" />
+                <ServiceWorkerRegister />
+              </ReducedMotionProvider>
+            </AuthProvider>
+          </AnalyticsProvider>
         </ThemeProvider>
       </body>
     </html>

@@ -1,4 +1,5 @@
 import { customizeCss } from './customize'
+import { exportEffect, frameworkMeta, type FrameworkId } from './export'
 import type { BundleEntry } from '@/hooks/use-bundle'
 import type { Effect } from './effects'
 
@@ -27,6 +28,20 @@ function resolveBundle(entries: BundleEntry[], effects: Effect[]) {
  */
 function safeFileName(id: string): string {
   return id.replace(/[^a-z0-9-]/gi, '-').replace(/-+/g, '-').toLowerCase()
+}
+
+/**
+ * Sanitize a generated file name for the archive.
+ *
+ * Unlike `safeFileName` (which normalizes an effect *id* into a slug),
+ * this preserves case and the extension: the framework exporters emit
+ * `BtnGradient.tsx` and `BtnGradient.vue`, and lowercasing those would
+ * break the import statements in the generated code. Path separators are
+ * stripped so a file can never escape the `effects/` folder.
+ */
+function safeArchivePath(name: string): string {
+  const base = name.replace(/\\/g, '/').split('/').pop() ?? name
+  return base.replace(/[^A-Za-z0-9._-]/g, '-') || 'effect.txt'
 }
 
 /**
@@ -295,6 +310,7 @@ export function downloadBlob(filename: string, blob: Blob) {
 export async function buildBundleZip(
   entries: BundleEntry[],
   effects: Effect[],
+  framework: FrameworkId = 'css',
 ): Promise<Blob | null> {
   const resolved = resolveBundle(entries, effects)
   if (resolved.length === 0) return null
@@ -303,25 +319,47 @@ export async function buildBundleZip(
   const zip = new JSZip()
   const root = zip.folder('hoverlab-bundle')!
 
-  /* Per-effect files: effects/<slug>.html + effects/<slug>.css */
+  /* Per-effect sources, generated for the chosen framework. With the
+   * default 'css' target this produces the same effects/<slug>.html +
+   * effects/<slug>.css pair the ZIP has always contained; with 'vue' it
+   * produces one SFC per effect, and so on. */
   const effectsDir = root.folder('effects')!
+  const notes = new Set<string>()
   for (const { effect, customizedCss } of resolved) {
-    const slug = safeFileName(effect.id)
-    effectsDir.file(`${slug}.html`, effect.html.trim() + '\n')
-    effectsDir.file(`${slug}.css`, customizedCss.trim() + '\n')
+    const generated = exportEffect(
+      {
+        id: effect.id,
+        name: effect.name,
+        description: effect.description,
+        category: effect.category,
+        html: effect.html,
+        css: customizedCss,
+      },
+      framework,
+    )
+    for (const file of generated.files) {
+      effectsDir.file(safeArchivePath(file.path), file.code.trimEnd() + '\n')
+    }
+    for (const note of generated.notes) notes.add(note)
   }
 
-  /* Concatenated styles.css at the root */
+  /* Concatenated styles.css at the root — still useful as a single drop-in
+   * regardless of the per-effect format. */
   root.file('styles.css', buildBundleCss(entries, effects) + '\n')
 
-  /* Demo index.html — links each effect's CSS, renders each effect's HTML */
-  root.file('index.html', buildZipIndexHtml(resolved))
+  /* Demo index.html. For the CSS target it links each effect's stylesheet,
+   * which doubles as a reference for how the files relate. Other targets
+   * have no such stylesheet to link, so the demo inlines everything
+   * instead of emitting <link> tags that would 404. */
+  root.file(
+    'index.html',
+    framework === 'css'
+      ? buildZipIndexHtml(resolved)
+      : buildBundleHtml(entries, effects),
+  )
 
   /* README.md */
-  root.file(
-    'README.md',
-    buildZipReadme(resolved),
-  )
+  root.file('README.md', buildZipReadme(resolved, framework, [...notes]))
 
   return zip.generateAsync({
     type: 'blob',
@@ -429,11 +467,16 @@ ${cards}
 /**
  * Build a README.md explaining the ZIP's structure and how to use it.
  */
-function buildZipReadme(resolved: ReturnType<typeof resolveBundle>): string {
+function buildZipReadme(
+  resolved: ReturnType<typeof resolveBundle>,
+  framework: FrameworkId = 'css',
+  notes: string[] = [],
+): string {
+  const meta = frameworkMeta(framework)
   const lines: string[] = []
   lines.push('# Hoverlab Bundle', '')
   lines.push(
-    `Generated ${new Date().toISOString().slice(0, 10)} · ${resolved.length} effect${resolved.length === 1 ? '' : 's'}.`,
+    `Generated ${new Date().toISOString().slice(0, 10)} · ${resolved.length} effect${resolved.length === 1 ? '' : 's'} · ${meta.label}.`,
   )
   lines.push('')
   lines.push('## Structure', '')
@@ -442,24 +485,34 @@ function buildZipReadme(resolved: ReturnType<typeof resolveBundle>): string {
   lines.push('├── index.html          # demo page rendering every effect')
   lines.push('├── styles.css          # all CSS concatenated into one file')
   lines.push('├── README.md           # this file')
-  lines.push('└── effects/')
-  for (const { effect } of resolved) {
-    const slug = safeFileName(effect.id)
-    lines.push(`    ├── ${slug}.html     # ${effect.name} (${effect.category})`)
-    lines.push(`    └── ${slug}.css`)
-  }
+  lines.push('└── effects/            # one or more files per effect')
   lines.push('```', '')
   lines.push('## Usage', '')
   lines.push(
     '- **Quick preview:** open `index.html` in any browser. Each effect renders with its customized CSS applied.',
   )
-  lines.push(
-    '- **Copy into your project:** grab the `effects/<slug>.html` markup and the matching `effects/<slug>.css` stylesheet. Link the CSS in your page `<head>` and paste the HTML where you want the effect.',
-  )
+  if (framework === 'css') {
+    lines.push(
+      '- **Copy into your project:** grab the `effects/<slug>.html` markup and the matching `effects/<slug>.css` stylesheet. Link the CSS in your page `<head>` and paste the HTML where you want the effect.',
+    )
+  } else {
+    lines.push(
+      `- **Copy into your project:** each effect is a self-contained ${meta.label} file under \`effects/\`. Drop it in and import it.`,
+    )
+  }
   lines.push(
     "- **One big stylesheet:** if you'd rather have all the CSS in one place, use `styles.css` at the root.",
   )
+  lines.push(
+    `- **Install straight from the CLI:** \`npx hoverlab add <id>${framework === 'css' ? '' : ` --framework ${framework}`}\` fetches any of these without leaving your editor.`,
+  )
   lines.push('')
+
+  if (notes.length) {
+    lines.push(`## Notes for the ${meta.label} target`, '')
+    for (const note of notes) lines.push(`- ${note}`)
+    lines.push('')
+  }
   lines.push('## Effects in this bundle', '')
   for (const { effect, entry } of resolved) {
     const opts = [

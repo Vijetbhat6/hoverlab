@@ -24,6 +24,7 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { useBundle, type BundleEntry } from '@/hooks/use-bundle'
 import { useEffectDetails } from '@/hooks/use-effect-details'
+import { track } from '@/lib/analytics'
 import { customizeCss } from '@/lib/customize'
 import {
   buildBundleCss,
@@ -32,6 +33,7 @@ import {
   downloadTextFile,
   downloadBlob,
 } from '@/lib/bundle-export'
+import { FRAMEWORKS, type FrameworkId } from '@/lib/export'
 import { cn } from '@/lib/utils'
 
 interface BundleDrawerProps {
@@ -48,6 +50,9 @@ interface BundleDrawerProps {
 export function BundleDrawer({ open, onOpenChange }: BundleDrawerProps) {
   const { entries, remove, clear, count } = useBundle()
   const [zipBusy, setZipBusy] = React.useState(false)
+  /* Which framework the ZIP's per-effect sources are generated in. 'css'
+   * keeps the archive byte-identical to what it has always produced. */
+  const [zipFramework, setZipFramework] = React.useState<FrameworkId>('css')
 
   // The client ships metadata only, so a bundle entry's CSS has to be
   // resolved before it can be previewed or exported. Hand-crafted effects
@@ -93,6 +98,7 @@ export function BundleDrawer({ open, onOpenChange }: BundleDrawerProps) {
   function handleDownloadHtml() {
     if (exportBlocked()) return
     const html = buildBundleHtml(entries, catalog)
+    track('bundle_exported', { format: 'html', effect_count: resolved.length })
     downloadTextFile('cssfx-bundle.html', html, 'text/html')
     toast.success('Downloaded cssfx-bundle.html', {
       description: `${resolved.length} effect${resolved.length === 1 ? '' : 's'} — open in any browser.`,
@@ -102,6 +108,7 @@ export function BundleDrawer({ open, onOpenChange }: BundleDrawerProps) {
   function handleDownloadCss() {
     if (exportBlocked()) return
     const css = buildBundleCss(entries, catalog)
+    track('bundle_exported', { format: 'css', effect_count: resolved.length })
     downloadTextFile('cssfx-bundle.css', css, 'text/css')
     toast.success('Downloaded cssfx-bundle.css', {
       description: `${resolved.length} effect${resolved.length === 1 ? '' : 's'} concatenated.`,
@@ -112,15 +119,21 @@ export function BundleDrawer({ open, onOpenChange }: BundleDrawerProps) {
     if (exportBlocked()) return
     setZipBusy(true)
     try {
-      const blob = await buildBundleZip(entries, catalog)
+      const blob = await buildBundleZip(entries, catalog, zipFramework)
       if (!blob) {
         toast.error('Bundle is empty')
         return
       }
+      track('bundle_exported', {
+        format: 'zip',
+        effect_count: resolved.length,
+        framework: zipFramework,
+      })
       const stamp = new Date().toISOString().slice(0, 10)
       downloadBlob(`hoverlab-bundle-${stamp}.zip`, blob)
+      const label = FRAMEWORKS.find((f) => f.id === zipFramework)?.label ?? zipFramework
       toast.success(`Downloaded hoverlab-bundle-${stamp}.zip`, {
-        description: `${resolved.length} effect${resolved.length === 1 ? '' : 's'} · per-effect HTML + CSS + demo index.html + README.`,
+        description: `${resolved.length} effect${resolved.length === 1 ? '' : 's'} as ${label} · demo index.html + README.`,
       })
     } catch (err) {
       console.error('ZIP build failed:', err)
@@ -198,6 +211,29 @@ export function BundleDrawer({ open, onOpenChange }: BundleDrawerProps) {
         {/* Footer actions */}
         {resolved.length > 0 ? (
           <div className="space-y-2 border-t border-border/60 p-4">
+            {/* Which framework the archive's per-effect sources use. Sits
+                above the ZIP button because it changes what that button
+                produces. */}
+            <div className="space-y-1.5">
+              <label
+                htmlFor="bundle-zip-framework"
+                className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground"
+              >
+                Export as
+              </label>
+              <select
+                id="bundle-zip-framework"
+                value={zipFramework}
+                onChange={(e) => setZipFramework(e.target.value as FrameworkId)}
+                className="h-9 w-full rounded-md border border-border/60 bg-background px-2 text-sm outline-none transition-colors focus-visible:border-primary/50"
+              >
+                {FRAMEWORKS.map((meta) => (
+                  <option key={meta.id} value={meta.id}>
+                    {meta.label}
+                  </option>
+                ))}
+              </select>
+            </div>
             {/* Primary: ZIP download (most useful — structured archive) */}
             <Button
               size="sm"

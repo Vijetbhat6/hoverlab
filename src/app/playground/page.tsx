@@ -428,6 +428,7 @@ export default function PlaygroundPage() {
                     code={customizedCss}
                     filename="transformed.css"
                     language="css"
+                    surface="playground"
                   />
                 </div>
               </CardContent>

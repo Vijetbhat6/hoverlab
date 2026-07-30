@@ -10,6 +10,7 @@
  */
 
 import * as React from 'react'
+import { identify, resetIdentity } from '@/lib/analytics'
 
 export interface AuthUser {
   id: string
@@ -108,6 +109,21 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     })
     setUser(null)
   }, [])
+
+  /**
+   * Bind analytics identity to the signed-in user so pre-signup browsing
+   * and post-signup activity stitch into one funnel, and so purchases can
+   * be attributed back to the sessions that led to them. Resetting on
+   * logout stops the next visitor on a shared machine from inheriting it.
+   */
+  React.useEffect(() => {
+    if (loading) return
+    if (user) {
+      identify(user.id, { email: user.email, name: user.name ?? undefined })
+    } else {
+      resetIdentity()
+    }
+  }, [user, loading])
 
   const value = React.useMemo<AuthContextValue>(
     () => ({ user, loading, login, signup, logout, refresh }),

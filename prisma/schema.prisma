@@ -20,6 +20,95 @@ model User {
 
   favorites    UserFavorite[]
   bundleEntries UserBundleEntry[]
+
+  /// Polar customer id, set the first time this user checks out. Lets the
+  /// webhook resolve an incoming order back to a local user even when the
+  /// checkout email differs from the account email.
+  polarCustomerId String? @unique
+
+  /// True once a one-time Pro license has been paid for. One-time, so
+  /// there is no expiry and no renewal state to track — a boolean is the
+  /// whole entitlement.
+  proLicense      Boolean   @default(false)
+  proLicenseAt    DateTime?
+
+  purchases       Purchase[]
+  teamMemberships TeamMember[]
+  ownedTeams      Team[]      @relation("TeamOwner")
+}
+
+/// An immutable record of every paid order, one row per Polar order.
+/// Entitlements are derived state (User.proLicense, Subscription.status);
+/// this is the audit trail they're derived from, and what makes webhook
+/// processing idempotent — a replayed event hits the unique polarOrderId.
+model Purchase {
+  id            String   @id @default(cuid())
+  userId        String
+  /// 'pro' (one-time license) or 'team' (recurring seats).
+  plan          String
+  /// 'one_time' | 'month'
+  interval      String
+  amountCents   Int
+  currency      String   @default("usd")
+  polarOrderId  String   @unique
+  polarCheckoutId String?
+  createdAt     DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+/// A Team workspace — the recurring, per-seat product. Shared brand tokens
+/// and collections hang off this; seats are billed through Polar.
+model Team {
+  id          String   @id @default(cuid())
+  name        String
+  ownerId     String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  /// Polar subscription backing this team's seats. Null while a team
+  /// exists but has no active paid subscription (e.g. after revocation).
+  polarSubscriptionId String? @unique
+  /// Mirrors Polar's subscription status: active | past_due | canceled | revoked.
+  subscriptionStatus  String  @default("inactive")
+  /// Seats paid for. Adding a member beyond this is refused.
+  seats               Int     @default(1)
+  /// End of the paid period. Access is honored until this passes even
+  /// after cancellation, matching what the customer paid for.
+  currentPeriodEnd    DateTime?
+
+  owner   User         @relation("TeamOwner", fields: [ownerId], references: [id], onDelete: Cascade)
+  members TeamMember[]
+
+  @@index([ownerId])
+}
+
+model TeamMember {
+  id       String   @id @default(cuid())
+  teamId   String
+  userId   String
+  /// 'owner' | 'admin' | 'member'
+  role     String   @default("member")
+  joinedAt DateTime @default(now())
+
+  team Team @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([teamId, userId])
+  @@index([userId])
+}
+
+/// Raw webhook receipts, keyed by Polar's event id. Written before the
+/// event is applied, so a redelivery (Polar retries on non-2xx) is
+/// detected and skipped rather than double-applying an entitlement.
+model WebhookEvent {
+  id          String   @id @default(cuid())
+  polarEventId String  @unique
+  type        String
+  payload     String
+  processedAt DateTime @default(now())
 }
 
 model UserFavorite {
