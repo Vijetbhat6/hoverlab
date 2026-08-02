@@ -464,6 +464,26 @@ export default function Home() {
     }
   }, [])
 
+  /**
+   * Change page and bring the top of the grid back into view.
+   *
+   * The pagination control sits *below* the grid, so by the time a user
+   * clicks it they're scrolled to the bottom of the page. Updating `page`
+   * alone swaps the cards out above the viewport and leaves the scroll
+   * position untouched — the new results are off-screen and it reads as
+   * though the button did nothing. Scrolling to `gridTopRef` (which carries
+   * `scroll-mt-20` to clear the sticky header) is what makes the change
+   * visible. The surprise-me roll does the same thing for the same reason.
+   */
+  const goToPage = React.useCallback(
+    (next: number) => {
+      const target = Math.min(Math.max(1, next), totalPages)
+      setPage(target)
+      gridTopRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    },
+    [totalPages],
+  )
+
   // Build a compact list of page numbers to show in the pagination control.
   const pageNumbers = React.useMemo(() => {
     const pages: (number | '…')[] = []
@@ -852,7 +872,7 @@ export default function Home() {
               <div className="mt-10 flex flex-col items-center gap-3">
                 <div className="flex items-center gap-1">
                   <PagerButton
-                    onClick={() => setPage((p) => Math.max(1, p - 1))}
+                    onClick={() => goToPage(safePage - 1)}
                     disabled={safePage <= 1}
                     aria-label="Previous page"
                   >
@@ -869,7 +889,7 @@ export default function Home() {
                     ) : (
                       <PagerButton
                         key={n}
-                        onClick={() => setPage(n)}
+                        onClick={() => goToPage(n)}
                         active={n === safePage}
                         aria-label={`Page ${n}`}
                       >
@@ -878,7 +898,7 @@ export default function Home() {
                     ),
                   )}
                   <PagerButton
-                    onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                    onClick={() => goToPage(safePage + 1)}
                     disabled={safePage >= totalPages}
                     aria-label="Next page"
                   >

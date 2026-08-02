@@ -37,6 +37,9 @@ yarn-error.log*
 /db/*.db
 /db/*.db-journal
 
+# local dev Postgres cluster (npm run db:dev)
+/.pgdata
+
 # vercel
 .vercel
 

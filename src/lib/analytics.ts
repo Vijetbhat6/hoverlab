@@ -54,6 +54,16 @@ export type AnalyticsEvent =
       name: 'effect_customized'
       props: { effect_id: string; hue: number; saturation: number; scale: number; speed: number }
     }
+  /**
+   * The user took the snippet somewhere editable. Which destination wins
+   * decides whether the other integrations are worth keeping.
+   */
+  | {
+      name: 'sandbox_open'
+      props: { effect_id: string; target: 'codepen' | 'jsfiddle' | 'download' }
+    }
+  /** Embed snippet copied — tracks the catalog's reach into other sites. */
+  | { name: 'embed_copied'; props: { effect_id: string } }
   // ---- search ----
   | { name: 'search_performed'; props: { query: string; result_count: number } }
   | { name: 'ai_search_performed'; props: { query: string; result_count: number; ms: number } }

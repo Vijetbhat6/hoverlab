@@ -8,6 +8,8 @@
 import { writeFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { dirname, join } from 'node:path'
+import { generateExtra } from './generate-effects-extra.mjs'
+import { generateExtra2 } from './generate-effects-extra2.mjs'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const OUT_PATH = join(__dirname, '..', 'src', 'lib', 'generated-effects.json')
@@ -1807,6 +1809,16 @@ for (const t of TRIOS) {
     }))
   }
 }
+
+/* ============================================================
+ *  Second wave: the twelve categories added after the original
+ *  thirteen. Split into sibling modules for readability; they
+ *  share this file's tokens, helpers, and id sequence.
+ * ========================================================== */
+
+const extraCtx = { PALETTES, SIZES, SPEEDS, GRADPAIRS, TRIOS, NEUTRALS, cls, mk, add }
+generateExtra(extraCtx)
+generateExtra2(extraCtx)
 
 /* ============================================================
  *  Emit

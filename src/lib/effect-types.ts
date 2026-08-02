@@ -19,7 +19,19 @@ export type EffectCategory =
   | "Toggles & Switches"
   | "Tooltips & Popovers"
   | "Skeletons & Shimmers"
-  | "Entrance Animations";
+  | "Entrance Animations"
+  | "Borders & Outlines"
+  | "Progress & Meters"
+  | "Avatars & Images"
+  | "Modals & Overlays"
+  | "Alerts & Toasts"
+  | "Accordions & Tabs"
+  | "3D & Perspective"
+  | "Glow & Neon"
+  | "Patterns & Textures"
+  | "Masks & Clip Paths"
+  | "Charts & Data"
+  | "Timelines & Steps";
 
 export interface Effect {
   id: string;
@@ -54,4 +66,16 @@ export const CATEGORIES: EffectCategory[] = [
   "Tooltips & Popovers",
   "Skeletons & Shimmers",
   "Entrance Animations",
+  "Borders & Outlines",
+  "Progress & Meters",
+  "Avatars & Images",
+  "Modals & Overlays",
+  "Alerts & Toasts",
+  "Accordions & Tabs",
+  "3D & Perspective",
+  "Glow & Neon",
+  "Patterns & Textures",
+  "Masks & Clip Paths",
+  "Charts & Data",
+  "Timelines & Steps",
 ];
