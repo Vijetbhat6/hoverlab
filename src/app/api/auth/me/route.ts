@@ -8,8 +8,7 @@
 
 import { NextResponse } from 'next/server'
 import { withJsonErrors } from '@/lib/route-errors'
-import { resolveSession } from '@/lib/session'
-import { buildExpiredSessionCookie } from '@/lib/auth'
+import { buildExpiredSessionCookie, resolveSession } from '@/lib/session'
 
 export const runtime = 'nodejs'
 
@@ -23,15 +22,14 @@ async function handleMe() {
   const res = NextResponse.json({ user: null })
 
   if (resolved.status === 'revoked') {
-    // The cookie is cryptographically valid but no longer honored — its user
-    // row is gone (dev database reset, deleted account), or a password reset
-    // revoked it. That state locks people out: proxy.ts trusts the signature
-    // alone, so it treats them as authenticated and bounces every /login
-    // visit to /library, while this route reports them logged out. The header
-    // offers "Sign in", the link goes nowhere, and the only escape is
-    // clearing cookies by hand. Expiring the cookie here turns an
-    // unrecoverable state into a normal logged-out one on the next
-    // navigation.
+    // A cookie is present but no longer honored — expired, revoked by a
+    // password change or sign-out, issued by a different Firebase project,
+    // or its account deleted. That state locks people out: proxy.ts sees a
+    // cookie and treats them as signed in, bouncing every /login visit to
+    // /library, while this route reports them signed out. The header offers
+    // "Sign in", the link goes nowhere, and the only escape is clearing
+    // cookies by hand. Expiring it here turns an unrecoverable state into a
+    // normal signed-out one on the next navigation.
     res.headers.set('Set-Cookie', buildExpiredSessionCookie())
   }
 

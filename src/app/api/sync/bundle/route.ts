@@ -7,29 +7,25 @@
  * BundleEntry shape (matches src/hooks/use-bundle.ts):
  *   { effectId: string, opts: { hue, saturation, scale, speed }, addedAt: ISO string }
  *
- * We store the opts as a JSON string in SQLite (no native JSON column).
+ * Stored as one document per effect under users/{uid}/bundle, keyed by
+ * effect id, with opts as a nested map — Firestore stores structured values
+ * natively, so the JSON-string encoding the Postgres column needed is gone.
  */
 
 import { NextResponse } from 'next/server'
-import { db } from '@/lib/db'
+import { withJsonErrors } from '@/lib/route-errors'
 import { getCurrentUser } from '@/lib/session'
 import { getEntitlements, bundleLimit } from '@/lib/billing/entitlements'
+import {
+  getBundle,
+  replaceBundle,
+  type BundleEntry,
+  type BundleOpts,
+} from '@/lib/firebase/sync'
 
 export const runtime = 'nodejs'
 
 const MAX_BUNDLE = 1000
-
-interface BundleOpts {
-  hue: number
-  saturation: number
-  scale: number
-  speed: number
-}
-interface BundleEntry {
-  effectId: string
-  opts: BundleOpts
-  addedAt: string
-}
 
 function sanitizeOpts(v: unknown): BundleOpts | null {
   if (!v || typeof v !== 'object') return null
@@ -61,37 +57,16 @@ function sanitizeEntry(v: unknown): BundleEntry | null {
   return { effectId, opts, addedAt }
 }
 
-export async function GET() {
+async function handleGet() {
   const user = await getCurrentUser()
   if (!user) {
     return NextResponse.json({ error: 'Unauthorized.' }, { status: 401 })
   }
 
-  const rows = await db.userBundleEntry.findMany({
-    where: { userId: user.id },
-    orderBy: { addedAt: 'desc' },
-  })
-
-  const entries: BundleEntry[] = rows.map((r) => {
-    let opts: BundleOpts = { hue: 0, saturation: 0, scale: 1, speed: 1 }
-    try {
-      const parsed = JSON.parse(r.opts) as unknown
-      const safe = sanitizeOpts(parsed)
-      if (safe) opts = safe
-    } catch {
-      /* leave defaults */
-    }
-    return {
-      effectId: r.effectId,
-      opts,
-      addedAt: r.addedAt.toISOString(),
-    }
-  })
-
-  return NextResponse.json({ entries })
+  return NextResponse.json({ entries: await getBundle(user.id) })
 }
 
-export async function PUT(req: Request) {
+async function handlePut(req: Request) {
   const user = await getCurrentUser()
   if (!user) {
     return NextResponse.json({ error: 'Unauthorized.' }, { status: 401 })
@@ -140,17 +115,8 @@ export async function PUT(req: Request) {
     truncated = true
   }
 
-  await db.$transaction([
-    db.userBundleEntry.deleteMany({ where: { userId: user.id } }),
-    db.userBundleEntry.createMany({
-      data: clean.map((entry) => ({
-        userId: user.id,
-        effectId: entry.effectId,
-        opts: JSON.stringify(entry.opts),
-        addedAt: new Date(entry.addedAt),
-      })),
-    }),
-  ])
+  await replaceBundle(user.id, clean)
+
 
   return NextResponse.json({
     entries: clean,
@@ -159,3 +125,6 @@ export async function PUT(req: Request) {
     limit: Number.isFinite(limit) ? limit : null,
   })
 }
+
+export const GET = withJsonErrors('sync/bundle', handleGet)
+export const PUT = withJsonErrors('sync/bundle', handlePut)

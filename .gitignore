@@ -61,3 +61,10 @@ server.log
 /skills/
 # agent screenshot/verification artifacts
 /tool-results
+
+.vercel
+.env*
+
+# Firebase service account keys — secrets, never commit
+*service-account*.json
+firebase-service-account.json

@@ -3,33 +3,28 @@
  * PUT  /api/sync/favorites  body { favorites: string[] } → { favorites: string[] }
  *
  * Auth required. Replaces the user's entire favorites list on PUT.
- * Favorites are stored as one UserFavorite row per effectId; we use
- * upserts inside a transaction so the operation is atomic.
+ * Stored as one document per effect under users/{uid}/favorites, so the
+ * effect id is the key and syncing the same effect twice cannot duplicate it.
  */
 
 import { NextResponse } from 'next/server'
-import { db } from '@/lib/db'
+import { withJsonErrors } from '@/lib/route-errors'
 import { getCurrentUser } from '@/lib/session'
+import { getFavorites, replaceFavorites } from '@/lib/firebase/sync'
 
 export const runtime = 'nodejs'
 
 const MAX_FAVORITES = 5000
 
-export async function GET() {
+async function handleGet() {
   const user = await getCurrentUser()
   if (!user) {
     return NextResponse.json({ error: 'Unauthorized.' }, { status: 401 })
   }
-
-  const rows = await db.userFavorite.findMany({
-    where: { userId: user.id },
-    select: { effectId: true },
-    orderBy: { createdAt: 'asc' },
-  })
-  return NextResponse.json({ favorites: rows.map((r) => r.effectId) })
+  return NextResponse.json({ favorites: await getFavorites(user.id) })
 }
 
-export async function PUT(req: Request) {
+async function handlePut(req: Request) {
   const user = await getCurrentUser()
   if (!user) {
     return NextResponse.json({ error: 'Unauthorized.' }, { status: 401 })
@@ -63,17 +58,9 @@ export async function PUT(req: Request) {
     if (clean.length >= MAX_FAVORITES) break
   }
 
-  // Wipe + re-insert in a transaction so concurrent reads always see a
-  // consistent state. SQLite serializes writes anyway, but this also
-  // keeps the pruning + insert pair atomic.
-  // (SQLite doesn't support `skipDuplicates` on createMany, but we already
-  // dedupe above so it isn't needed.)
-  await db.$transaction([
-    db.userFavorite.deleteMany({ where: { userId: user.id } }),
-    db.userFavorite.createMany({
-      data: clean.map((effectId) => ({ userId: user.id, effectId })),
-    }),
-  ])
-
+  await replaceFavorites(user.id, clean)
   return NextResponse.json({ favorites: clean })
 }
+
+export const GET = withJsonErrors('sync/favorites', handleGet)
+export const PUT = withJsonErrors('sync/favorites', handlePut)

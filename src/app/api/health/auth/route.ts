@@ -7,24 +7,22 @@
  * The checks exercise the real code paths rather than asserting that
  * variables are non-empty:
  *
- *  - signing actually mints and verifies a token through lib/auth.ts, which
- *    is where a missing AUTH_SECRET throws — the failure that reached users
- *    as "Sign in failed. Please try again."
- *  - schema actually reads the columns added for password reset, so code
- *    deployed against an unmigrated database shows up here instead of as a
- *    500 on /api/auth/me.
+ *  - admin actually initialises the Firebase Admin SDK and asks it for a
+ *    signing-capable client, which is where a malformed or missing service
+ *    account key throws.
+ *  - firestore actually reads a document, so a project with Firestore not
+ *    yet enabled, or rules/credentials that deny access, shows up here
+ *    rather than as a 500 on someone's first sign-in.
  *
  * Deliberately unauthenticated: it is the first thing you want after a
  * deploy, and requiring a session to diagnose broken sessions is a circle.
- * It reports names and statuses only — never a value, a connection string,
- * or any part of a secret.
+ * It reports names and statuses only — never a key, a token, or any part of
+ * a credential.
  */
 
 import { NextResponse } from 'next/server'
-import { db } from '@/lib/db'
-import { createSessionToken, verifySessionToken } from '@/lib/auth'
+import { adminAuth, adminDb, isAdminConfigured } from '@/lib/firebase/admin'
 import { checkEnv, blockingFailures } from '@/lib/env'
-import { isMailConfigured } from '@/lib/mail'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -35,97 +33,97 @@ interface Probe {
   detail: string
 }
 
-/** Mint a token and verify it — the exact path /api/auth/login dies on. */
-async function probeSigning(): Promise<Probe> {
-  try {
-    const token = await createSessionToken({
-      sub: 'health-check',
-      email: 'health@check.invalid',
-      name: null,
-    })
-    const decoded = await verifySessionToken(token)
-    if (!decoded || decoded.sub !== 'health-check') {
-      return {
-        name: 'signing',
-        status: 'failing',
-        detail: 'Tokens are signed but do not verify. AUTH_SECRET may differ between instances.',
-      }
-    }
-    return { name: 'signing', status: 'ok', detail: 'Sessions can be signed and verified.' }
-  } catch (err) {
-    return {
-      name: 'signing',
-      status: 'failing',
-      detail: `Cannot sign sessions: ${err instanceof Error ? err.message : String(err)}`,
-    }
-  }
-}
-
-async function probeDatabase(): Promise<Probe> {
-  try {
-    await db.$queryRaw`SELECT 1`
-    return { name: 'database', status: 'ok', detail: 'Reachable.' }
-  } catch (err) {
-    return {
-      name: 'database',
-      status: 'failing',
-      detail: `Unreachable: ${err instanceof Error ? err.message : String(err)}`,
-    }
-  }
-}
-
 /**
- * Read the columns and tables this build expects. Catches the case where
- * code ships ahead of `prisma db push` — sign-in succeeds, then every
- * session lookup 500s.
+ * Initialise the Admin SDK and confirm it can act on the project.
+ *
+ * listUsers(1) is the cheapest call that genuinely exercises the credential:
+ * it is signed, sent, and authorised. Merely constructing the client would
+ * pass even with a key the project rejects.
  */
-async function probeSchema(): Promise<Probe> {
-  try {
-    await db.user.findFirst({ select: { id: true, sessionsValidFrom: true } })
-    await db.passwordResetToken.findFirst({ select: { id: true } })
-    return { name: 'schema', status: 'ok', detail: 'Database matches this build.' }
-  } catch (err) {
+async function probeAdmin(): Promise<Probe> {
+  if (!isAdminConfigured()) {
     return {
-      name: 'schema',
+      name: 'admin',
       status: 'failing',
       detail:
-        'Database is behind this build — run `prisma db push` (or a migration) against it. ' +
-        `Details: ${err instanceof Error ? err.message.split('\n').pop()?.trim() : String(err)}`,
+        'No Firebase Admin credentials — the server cannot verify sessions. ' +
+        'Set FIREBASE_SERVICE_ACCOUNT.',
     }
   }
+  try {
+    await adminAuth().listUsers(1)
+    return {
+      name: 'admin',
+      status: 'ok',
+      detail: 'Admin SDK authenticated against the project.',
+    }
+  } catch (err) {
+    return {
+      name: 'admin',
+      status: 'failing',
+      detail: `Admin SDK rejected: ${err instanceof Error ? err.message : String(err)}`,
+    }
+  }
+}
+
+/** Read a document, proving Firestore is enabled and reachable. */
+async function probeFirestore(): Promise<Probe> {
+  if (!isAdminConfigured()) {
+    return {
+      name: 'firestore',
+      status: 'failing',
+      detail: 'Not checked — no Admin credentials.',
+    }
+  }
+  try {
+    await adminDb().collection('users').limit(1).get()
+    return { name: 'firestore', status: 'ok', detail: 'Reachable.' }
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err)
+    return {
+      name: 'firestore',
+      status: 'failing',
+      detail:
+        /NOT_FOUND|does not exist/i.test(message)
+          ? 'Firestore is not enabled for this project — create the database in the Firebase console.'
+          : `Unreachable: ${message}`,
+    }
+  }
+}
+
+/** The browser half: without this the form renders but cannot sign in. */
+function probeClientConfig(): Probe {
+  const missing = [
+    'NEXT_PUBLIC_FIREBASE_API_KEY',
+    'NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN',
+    'NEXT_PUBLIC_FIREBASE_PROJECT_ID',
+  ].filter((key) => !process.env[key])
+
+  if (missing.length) {
+    return {
+      name: 'client-config',
+      status: 'failing',
+      detail: `Missing ${missing.join(', ')} — the browser has no project to sign in against.`,
+    }
+  }
+  return { name: 'client-config', status: 'ok', detail: 'Set.' }
 }
 
 export async function GET() {
   const production = process.env.NODE_ENV === 'production'
 
-  const [signing, database, schema] = await Promise.all([
-    probeSigning(),
-    probeDatabase(),
-    probeSchema(),
-  ])
+  const [admin, firestore] = await Promise.all([probeAdmin(), probeFirestore()])
+  const client = probeClientConfig()
 
   // Config checks run even when the probes pass: NEXT_PUBLIC_SITE_URL being
-  // wrong breaks emailed reset links without breaking anything a probe would
-  // notice.
-  const envChecks = checkEnv(process.env, { production })
-  const envFailures = blockingFailures(envChecks)
-  const config: Probe[] = envFailures.map((c) => ({
-    name: `env:${c.key}`,
-    status: 'failing',
-    detail: c.message,
-  }))
+  // wrong breaks canonical URLs without breaking anything a probe notices.
+  const envFailures = blockingFailures(checkEnv(process.env, { production }))
+  const config: Probe[] = envFailures
+    // Already covered, in more detail, by the live probes above.
+    .filter((c) => !/FIREBASE/.test(c.key))
+    .map((c) => ({ name: `env:${c.key}`, status: 'failing' as const, detail: c.message }))
 
-  const mail: Probe = isMailConfigured()
-    ? { name: 'mail', status: 'ok', detail: 'Password reset emails can be delivered.' }
-    : {
-        name: 'mail',
-        status: production ? 'failing' : 'degraded',
-        detail: production
-          ? 'RESEND_API_KEY / EMAIL_FROM are not set — password reset emails are never delivered.'
-          : 'Not configured; reset emails print to the server console in development.',
-      }
-
-  const probes = [signing, database, schema, mail, ...config]
+  const probes = [admin, firestore, client, ...config]
   const ok = !probes.some((p) => p.status === 'failing')
 
   return NextResponse.json(

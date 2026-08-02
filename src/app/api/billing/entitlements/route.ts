@@ -23,6 +23,6 @@ export async function GET() {
     })
   }
 
-  const ent = await getEntitlements(session.sub)
+  const ent = await getEntitlements(session.uid)
   return NextResponse.json({ ...ent, bundleLimit: bundleLimit(ent) })
 }

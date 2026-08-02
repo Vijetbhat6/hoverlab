@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { validateEvent, WebhookVerificationError } from '@polar-sh/sdk/webhooks'
-import { db } from '@/lib/db'
+import { FieldValue, Timestamp } from 'firebase-admin/firestore'
+import { adminDb } from '@/lib/firebase/admin'
 
 /**
  * Polar webhook receiver — the ONLY place entitlements are granted.
@@ -18,10 +19,21 @@ import { db } from '@/lib/db'
  *   subscription.revoked       → access ends now
  *
  * Idempotency: Polar retries on any non-2xx, so the same event can arrive
- * several times. Every event id is recorded in WebhookEvent before being
- * applied; a duplicate short-circuits. Unhandled event types are still
- * acknowledged with 200 — returning an error would make Polar retry an
- * event we will never act on.
+ * several times, and applying one twice means granting a paid license for
+ * free or double-recording an order.
+ *
+ * Firestore has no unique constraints, so uniqueness comes from document
+ * ids — the mechanism that replaced the `@unique` columns this used to rely
+ * on. Every identifier that must not repeat *is* a key:
+ *
+ *   webhookEvents/{eventId}        an event is applied at most once
+ *   purchases/{polarOrderId}       an order is recorded at most once
+ *   teams/{polarSubscriptionId}    a subscription owns exactly one team
+ *   polarCustomers/{customerId}    a Polar customer maps to one account
+ *
+ * Writes use `create()` rather than `set()` wherever a repeat must not
+ * overwrite: create fails with ALREADY_EXISTS, which is precisely the
+ * "already handled" signal, instead of silently clobbering the first write.
  */
 
 export const runtime = 'nodejs'
@@ -41,39 +53,55 @@ interface PolarLike {
   quantity?: number
 }
 
+/** Firestore surfaces "document already exists" as code 6 (ALREADY_EXISTS). */
+function isAlreadyExists(err: unknown): boolean {
+  return Boolean(
+    err && typeof err === 'object' && (err as { code?: unknown }).code === 6,
+  )
+}
+
+async function userExists(uid: string): Promise<boolean> {
+  const snap = await adminDb().collection('users').doc(uid).get()
+  return snap.exists
+}
+
 /**
  * Resolve the local user for an event.
  *
- * `externalCustomerId` (set at checkout) is the reliable path. Metadata
- * `userId` covers checkouts created before that field existed, and email
- * is a last resort for orders created manually in the Polar dashboard.
+ * `externalCustomerId` (set at checkout) is the reliable path. The
+ * polarCustomers mapping catches later events from a customer we have
+ * already linked. Metadata `userId` covers checkouts created before that
+ * field existed, and email is a last resort for orders created manually in
+ * the Polar dashboard.
  */
 async function resolveUserId(data: PolarLike): Promise<string | null> {
   const external = data.customer?.externalId
-  if (typeof external === 'string' && external) {
-    const byExternal = await db.user.findUnique({
-      where: { id: external },
-      select: { id: true },
-    })
-    if (byExternal) return byExternal.id
+  if (typeof external === 'string' && external && (await userExists(external))) {
+    return external
+  }
+
+  const customerId = data.customer?.id ?? data.customerId
+  if (typeof customerId === 'string' && customerId) {
+    const mapping = await adminDb().collection('polarCustomers').doc(customerId).get()
+    const mapped = mapping.exists ? mapping.data()?.userId : null
+    if (typeof mapped === 'string' && mapped && (await userExists(mapped))) {
+      return mapped
+    }
   }
 
   const metaUserId = data.metadata?.userId
-  if (typeof metaUserId === 'string' && metaUserId) {
-    const byMeta = await db.user.findUnique({
-      where: { id: metaUserId },
-      select: { id: true },
-    })
-    if (byMeta) return byMeta.id
+  if (typeof metaUserId === 'string' && metaUserId && (await userExists(metaUserId))) {
+    return metaUserId
   }
 
   const email = data.customer?.email
   if (typeof email === 'string' && email) {
-    const byEmail = await db.user.findUnique({
-      where: { email },
-      select: { id: true },
-    })
-    if (byEmail) return byEmail.id
+    const found = await adminDb()
+      .collection('users')
+      .where('email', '==', email)
+      .limit(1)
+      .get()
+    if (!found.empty) return found.docs[0]!.id
   }
 
   return null
@@ -83,14 +111,17 @@ async function resolveUserId(data: PolarLike): Promise<string | null> {
 async function linkCustomer(userId: string, data: PolarLike): Promise<void> {
   const polarCustomerId = data.customer?.id ?? data.customerId
   if (!polarCustomerId) return
+
+  const db = adminDb()
+  await db.collection('users').doc(userId).update({ polarCustomerId })
+
   try {
-    await db.user.update({
-      where: { id: userId },
-      data: { polarCustomerId },
-    })
-  } catch {
-    // Unique constraint: this Polar customer is already linked to another
-    // local user. Not fatal — entitlement resolution doesn't depend on it.
+    await db.collection('polarCustomers').doc(polarCustomerId).create({ userId })
+  } catch (err) {
+    if (!isAlreadyExists(err)) throw err
+    // This Polar customer is already mapped — to this user (a repeat event)
+    // or to another account. Not fatal either way: entitlement resolution
+    // does not depend on the mapping, it only shortcuts the lookup.
   }
 }
 
@@ -112,10 +143,9 @@ async function handleOrderPaid(data: PolarLike): Promise<void> {
 
   await linkCustomer(userId, data)
 
-  // The unique polarOrderId makes this a no-op on redelivery.
-  await db.purchase.upsert({
-    where: { polarOrderId: orderId },
-    create: {
+  // The order id as document id makes a redelivery a no-op.
+  try {
+    await adminDb().collection('purchases').doc(orderId).create({
       userId,
       plan,
       interval,
@@ -123,15 +153,17 @@ async function handleOrderPaid(data: PolarLike): Promise<void> {
       currency: data.currency ?? 'usd',
       polarOrderId: orderId,
       polarCheckoutId: data.checkoutId ?? null,
-    },
-    update: {},
-  })
+      createdAt: Timestamp.now(),
+    })
+  } catch (err) {
+    if (!isAlreadyExists(err)) throw err
+  }
 
   if (plan === 'pro') {
     // One-time license: no expiry, nothing to renew.
-    await db.user.update({
-      where: { id: userId },
-      data: { proLicense: true, proLicenseAt: new Date() },
+    await adminDb().collection('users').doc(userId).update({
+      proLicense: true,
+      proLicenseAt: Timestamp.now(),
     })
   }
 }
@@ -141,16 +173,17 @@ async function handleOrderRefunded(data: PolarLike): Promise<void> {
   const orderId = data.id
   if (!orderId) return
 
-  const purchase = await db.purchase.findUnique({
-    where: { polarOrderId: orderId },
-    select: { userId: true, plan: true },
-  })
-  if (!purchase) return
+  const snap = await adminDb().collection('purchases').doc(orderId).get()
+  if (!snap.exists) return
+
+  const purchase = snap.data() ?? {}
+  const userId = typeof purchase.userId === 'string' ? purchase.userId : null
+  if (!userId) return
 
   if (purchase.plan === 'pro') {
-    await db.user.update({
-      where: { id: purchase.userId },
-      data: { proLicense: false, proLicenseAt: null },
+    await adminDb().collection('users').doc(userId).update({
+      proLicense: false,
+      proLicenseAt: null,
     })
   }
 }
@@ -158,6 +191,10 @@ async function handleOrderRefunded(data: PolarLike): Promise<void> {
 /**
  * Team subscription lifecycle. Seats and period end are mirrored so
  * `getEntitlements()` can honor a paid-through date after cancellation.
+ *
+ * The team document is keyed by the Polar subscription id, so "find the
+ * team for this subscription" is a direct read and one subscription can
+ * never end up owning two teams.
  */
 async function handleSubscription(data: PolarLike, status: string): Promise<void> {
   const subscriptionId = data.id
@@ -174,18 +211,16 @@ async function handleSubscription(data: PolarLike, status: string): Promise<void
   await linkCustomer(userId, data)
 
   const seats = typeof data.quantity === 'number' && data.quantity > 0 ? data.quantity : 1
-  const currentPeriodEnd = data.currentPeriodEnd ? new Date(data.currentPeriodEnd) : null
+  const currentPeriodEnd = data.currentPeriodEnd
+    ? Timestamp.fromDate(new Date(data.currentPeriodEnd))
+    : null
 
-  const existing = await db.team.findUnique({
-    where: { polarSubscriptionId: subscriptionId },
-    select: { id: true },
-  })
+  const db = adminDb()
+  const teamRef = db.collection('teams').doc(subscriptionId)
+  const existing = await teamRef.get()
 
-  if (existing) {
-    await db.team.update({
-      where: { id: existing.id },
-      data: { subscriptionStatus: status, seats, currentPeriodEnd },
-    })
+  if (existing.exists) {
+    await teamRef.update({ subscriptionStatus: status, seats, currentPeriodEnd })
     return
   }
 
@@ -195,22 +230,27 @@ async function handleSubscription(data: PolarLike, status: string): Promise<void
       ? data.metadata.teamName
       : 'My team'
 
-  const team = await db.team.create({
-    data: {
-      name: teamName,
-      ownerId: userId,
-      polarSubscriptionId: subscriptionId,
-      subscriptionStatus: status,
-      seats,
-      currentPeriodEnd,
-    },
+  const batch = db.batch()
+  batch.set(teamRef, {
+    name: teamName,
+    ownerId: userId,
+    polarSubscriptionId: subscriptionId,
+    subscriptionStatus: status,
+    seats,
+    currentPeriodEnd,
+    createdAt: Timestamp.now(),
   })
-
-  await db.teamMember.upsert({
-    where: { teamId_userId: { teamId: team.id, userId } },
-    create: { teamId: team.id, userId, role: 'owner' },
-    update: { role: 'owner' },
+  batch.set(teamRef.collection('members').doc(userId), {
+    userId,
+    role: 'owner',
+    joinedAt: Timestamp.now(),
   })
+  // Mirrored onto the profile so getEntitlements() resolves membership in a
+  // single read instead of a collection-group query.
+  batch.update(db.collection('users').doc(userId), {
+    teamIds: FieldValue.arrayUnion(teamRef.id),
+  })
+  await batch.commit()
 }
 
 export async function POST(request: Request) {
@@ -251,14 +291,28 @@ export async function POST(request: Request) {
     headers['webhook-id'] ??
     null
 
-  if (eventId) {
-    const seen = await db.webhookEvent.findUnique({
-      where: { polarEventId: eventId },
-      select: { id: true },
-    })
-    if (seen) {
-      // Already applied — acknowledge so Polar stops retrying.
-      return NextResponse.json({ ok: true, duplicate: true })
+  // Claim the event id *before* applying it, with create() so two concurrent
+  // deliveries cannot both win the check. The alternative — check, apply,
+  // then record — leaves a window where a retry arriving mid-handler applies
+  // the same paid order twice.
+  const claimRef = eventId
+    ? adminDb().collection('webhookEvents').doc(encodeURIComponent(eventId))
+    : null
+
+  if (claimRef) {
+    try {
+      await claimRef.create({
+        polarEventId: eventId,
+        type: event.type,
+        payload: raw,
+        receivedAt: Timestamp.now(),
+      })
+    } catch (err) {
+      if (isAlreadyExists(err)) {
+        // Already applied — acknowledge so Polar stops retrying.
+        return NextResponse.json({ ok: true, duplicate: true })
+      }
+      throw err
     }
   }
 
@@ -291,16 +345,13 @@ export async function POST(request: Request) {
         break
     }
 
-    if (eventId) {
-      await db.webhookEvent.create({
-        data: { polarEventId: eventId, type: event.type, payload: raw },
-      })
-    }
-
     return NextResponse.json({ ok: true })
   } catch (err) {
-    // 500 so Polar retries — a transient DB failure shouldn't silently
-    // drop a paid order.
+    // Release the claim so Polar's retry is actually reprocessed rather than
+    // being greeted as a duplicate of an attempt that never completed.
+    if (claimRef) await claimRef.delete().catch(() => {})
+    // 500 so Polar retries — a transient failure shouldn't silently drop a
+    // paid order.
     console.error('[billing/webhook] handler failed:', event.type, err)
     return NextResponse.json({ error: 'Handler failed' }, { status: 500 })
   }

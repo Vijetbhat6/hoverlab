@@ -34,16 +34,45 @@ type Mode = 'login' | 'signup'
 export function AuthForm({ mode }: { mode: Mode }) {
   const router = useRouter()
   const params = useSearchParams()
-  const { login, signup } = useAuth()
+  const { login, signup, resetPassword } = useAuth()
 
   const [name, setName] = React.useState('')
   const [email, setEmail] = React.useState('')
   const [password, setPassword] = React.useState('')
   const [showPw, setShowPw] = React.useState(false)
   const [submitting, setSubmitting] = React.useState(false)
+  const [resetting, setResetting] = React.useState(false)
   const [error, setError] = React.useState<string | null>(null)
 
   const isSignup = mode === 'signup'
+
+  /**
+   * Firebase owns password reset end to end — it sends the email, hosts the
+   * page and expires the link — so this sends to whatever is already typed
+   * in the email field rather than routing to a page of our own.
+   *
+   * The confirmation is identical whether or not the address is registered:
+   * saying "no such account" would turn this button into a way to test which
+   * email addresses have accounts.
+   */
+  async function onForgotPassword() {
+    if (!email.trim()) {
+      setError('Enter your email address first, then choose Forgot password.')
+      return
+    }
+    setError(null)
+    setResetting(true)
+    try {
+      await resetPassword(email)
+      toast.success(
+        'If an account exists for that email, a reset link is on its way.',
+      )
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Something went wrong.')
+    } finally {
+      setResetting(false)
+    }
+  }
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -135,13 +164,15 @@ export function AuthForm({ mode }: { mode: Mode }) {
                 </span>
               ) : (
                 <span className="flex items-center gap-3">
-                  <Link
-                    href="/forgot-password"
-                    className="text-xs text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
+                  <button
+                    type="button"
+                    className="text-xs text-muted-foreground underline-offset-4 hover:text-foreground hover:underline disabled:opacity-60"
+                    onClick={onForgotPassword}
+                    disabled={resetting || submitting}
                     tabIndex={-1}
                   >
-                    Forgot password?
-                  </Link>
+                    {resetting ? 'Sending…' : 'Forgot password?'}
+                  </button>
                   <button
                     type="button"
                     className="text-xs text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"

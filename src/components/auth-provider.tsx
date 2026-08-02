@@ -1,16 +1,30 @@
 'use client'
 
 /**
- * Client-side authentication context.
+ * Client-side authentication context, backed by Firebase Auth.
  *
- * On mount, fetches /api/auth/me to hydrate the session from the cookie.
- * Exposes `login`, `signup`, `logout` actions that hit the corresponding
- * API routes and update state. Persists a "ready" flag so consumers can
- * render a skeleton until the session check completes.
+ * The shape of a sign-in:
+ *   1. Firebase verifies the credentials in the browser and issues an ID token.
+ *   2. That token is posted to /api/auth/session, which exchanges it for an
+ *      httpOnly session cookie (see that route for why the cookie exists).
+ *   3. /api/auth/me is the source of truth for "who am I" from then on, so
+ *      the server decides session validity, not the client SDK.
+ *
+ * Password reset is Firebase's: it owns the email, the token and the
+ * reset page, which is why there is no /forgot-password route in this app
+ * any more.
  */
 
 import * as React from 'react'
+import {
+  createUserWithEmailAndPassword,
+  sendPasswordResetEmail,
+  signInWithEmailAndPassword,
+  signOut,
+  updateProfile,
+} from 'firebase/auth'
 import { identify, resetIdentity } from '@/lib/analytics'
+import { firebaseAuth, isFirebaseConfigured } from '@/lib/firebase/client'
 
 export interface AuthUser {
   id: string
@@ -22,12 +36,10 @@ interface AuthContextValue {
   user: AuthUser | null
   loading: boolean // true during the initial session check
   login: (email: string, password: string) => Promise<void>
-  signup: (
-    email: string,
-    password: string,
-    name?: string,
-  ) => Promise<void>
+  signup: (email: string, password: string, name?: string) => Promise<void>
   logout: () => Promise<void>
+  /** Send a Firebase password reset email. Resolves even if unregistered. */
+  resetPassword: (email: string) => Promise<void>
   /** Manually refresh the session from the server. */
   refresh: () => Promise<void>
 }
@@ -35,49 +47,61 @@ interface AuthContextValue {
 const AuthContext = React.createContext<AuthContextValue | null>(null)
 
 /**
- * POST an auth request and return the user, or throw an error whose message
- * is safe to show verbatim.
+ * Turn a Firebase error code into something worth showing a person.
  *
- * The distinction that matters here is *why* it failed. Every non-success
- * used to collapse into "Sign in failed. Please try again." — the same
- * sentence for a wrong password, a crashed route handler, and an unreachable
- * server. Only the first of those is worth retyping a password over, and the
- * other two look identical to the person doing it. So: a JSON body carries
- * the server's own message, a non-JSON body reports the status code (a route
- * that threw returns an HTML error page, not JSON), and a failed fetch says
- * the server could not be reached.
+ * Firebase's own messages read like "Firebase: Error (auth/invalid-credential)."
+ * Left unmapped they would reach the sign-in form verbatim. Note that
+ * invalid-credential covers both "no such account" and "wrong password" by
+ * design — Firebase declines to say which, and neither do we.
  */
-/**
- * Pull a displayable message out of whatever sits in an `error` field.
- *
- * Our own routes always send a string, but the response is not always ours:
- * an infrastructure layer in front of the app can answer first. Vercel's
- * Deployment Protection, for one, returns
- * `{"error":{"message":"Protected deployment","code":"401"}}` — and
- * `new Error(someObject)` renders as the literal text "[object Object]",
- * which is worse than useless in a banner.
- */
-function readError(error: unknown): string | null {
-  if (typeof error === 'string' && error.trim()) return error
-  if (error && typeof error === 'object') {
-    const message = (error as { message?: unknown }).message
-    if (typeof message === 'string' && message.trim()) return message
+function describeAuthError(error: unknown, fallback: string): string {
+  const code =
+    error && typeof error === 'object' && 'code' in error
+      ? String((error as { code: unknown }).code)
+      : ''
+
+  switch (code) {
+    case 'auth/invalid-credential':
+    case 'auth/invalid-login-credentials':
+    case 'auth/wrong-password':
+    case 'auth/user-not-found':
+      return 'Invalid email or password.'
+    case 'auth/invalid-email':
+      return 'That email address does not look right.'
+    case 'auth/email-already-in-use':
+      return 'An account with that email already exists.'
+    case 'auth/weak-password':
+      return 'Password must be at least 6 characters long.'
+    case 'auth/too-many-requests':
+      return 'Too many attempts. Wait a few minutes and try again.'
+    case 'auth/user-disabled':
+      return 'That account has been disabled.'
+    case 'auth/network-request-failed':
+      return 'Could not reach the authentication service. Check your connection.'
+    case 'auth/operation-not-allowed':
+      return 'Email and password sign-in is not enabled for this project.'
+    default:
+      return error instanceof Error && error.message && !code
+        ? error.message
+        : fallback
   }
-  return null
 }
 
-async function postAuth(
-  path: string,
-  body: unknown,
-  fallback: string,
-): Promise<AuthUser> {
+/**
+ * Exchange a Firebase ID token for the server session cookie.
+ *
+ * Errors here are reported honestly rather than as a credentials problem:
+ * the password was already accepted by Firebase at this point, so anything
+ * that fails now is the server's fault, not the person's.
+ */
+async function exchangeIdToken(idToken: string): Promise<AuthUser> {
   let res: Response
   try {
-    res = await fetch(path, {
+    res = await fetch('/api/auth/session', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'same-origin',
-      body: JSON.stringify(body),
+      body: JSON.stringify({ idToken }),
     })
   } catch {
     throw new Error(
@@ -96,8 +120,22 @@ async function postAuth(
     )
   }
 
-  if (!res.ok || !data.user) throw new Error(readError(data.error) ?? fallback)
+  if (!res.ok || !data.user) {
+    const message =
+      typeof data.error === 'string' && data.error.trim()
+        ? data.error
+        : 'Signed in, but the session could not be created. Please try again.'
+    throw new Error(message)
+  }
   return data.user
+}
+
+function assertConfigured() {
+  if (!isFirebaseConfigured()) {
+    throw new Error(
+      'Sign-in is not configured for this deployment (missing Firebase keys).',
+    )
+  }
 }
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
@@ -128,38 +166,79 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     refresh()
   }, [refresh])
 
-  const login = React.useCallback(
-    async (email: string, password: string) => {
-      setUser(
-        await postAuth(
-          '/api/auth/login',
-          { email, password },
-          'Sign in failed. Please try again.',
-        ),
+  const login = React.useCallback(async (email: string, password: string) => {
+    assertConfigured()
+    let idToken: string
+    try {
+      const credential = await signInWithEmailAndPassword(
+        firebaseAuth(),
+        email.trim(),
+        password,
       )
-    },
-    [],
-  )
+      idToken = await credential.user.getIdToken()
+    } catch (err) {
+      throw new Error(
+        describeAuthError(err, 'Sign in failed. Please try again.'),
+      )
+    }
+    setUser(await exchangeIdToken(idToken))
+  }, [])
 
   const signup = React.useCallback(
     async (email: string, password: string, name?: string) => {
-      setUser(
-        await postAuth(
-          '/api/auth/signup',
-          { email, password, name },
-          'Sign up failed. Please try again.',
-        ),
-      )
+      assertConfigured()
+      let idToken: string
+      try {
+        const credential = await createUserWithEmailAndPassword(
+          firebaseAuth(),
+          email.trim(),
+          password,
+        )
+        if (name) {
+          await updateProfile(credential.user, { displayName: name })
+        }
+        // force-refresh so the token carries the display name just set.
+        idToken = await credential.user.getIdToken(Boolean(name))
+      } catch (err) {
+        throw new Error(
+          describeAuthError(err, 'Sign up failed. Please try again.'),
+        )
+      }
+      setUser(await exchangeIdToken(idToken))
     },
     [],
   )
 
   const logout = React.useCallback(async () => {
+    // Clear the server cookie first: if signOut() succeeded and this failed,
+    // the browser would look signed out while the cookie still authenticated
+    // every server request.
     await fetch('/api/auth/logout', {
       method: 'POST',
       credentials: 'same-origin',
-    })
+    }).catch(() => {})
+    if (isFirebaseConfigured()) {
+      await signOut(firebaseAuth()).catch(() => {})
+    }
     setUser(null)
+  }, [])
+
+  const resetPassword = React.useCallback(async (email: string) => {
+    assertConfigured()
+    try {
+      await sendPasswordResetEmail(firebaseAuth(), email.trim())
+    } catch (err) {
+      const code =
+        err && typeof err === 'object' && 'code' in err
+          ? String((err as { code: unknown }).code)
+          : ''
+      // Never report "no such account": that turns the reset form into a way
+      // to test which email addresses are registered.
+      if (code === 'auth/user-not-found' || code === 'auth/invalid-email') return
+      throw new Error(
+        describeAuthError(err, 'Could not send the reset email. Try again.'),
+      )
+    }
   }, [])
 
   /**
@@ -178,8 +257,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, [user, loading])
 
   const value = React.useMemo<AuthContextValue>(
-    () => ({ user, loading, login, signup, logout, refresh }),
-    [user, loading, login, signup, logout, refresh],
+    () => ({ user, loading, login, signup, logout, resetPassword, refresh }),
+    [user, loading, login, signup, logout, resetPassword, refresh],
   )
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>

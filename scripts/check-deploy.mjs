@@ -118,39 +118,36 @@ if (health.error) {
   }
 }
 
-// 2. Sign-in with credentials that cannot be right. A 401 proves the route
-//    reached the database and answered in JSON; a 5xx or HTML body is the
-//    signature of a misconfigured deployment.
+// 2. The session exchange, with a token that cannot be valid. A 401 proves
+//    the route ran, reached Firebase, and answered in JSON; a 5xx or an HTML
+//    body is the signature of a misconfigured deployment.
 console.log('\nsign-in path:')
-const login = await request('/api/auth/login', {
+const session = await request('/api/auth/session', {
   method: 'POST',
-  body: JSON.stringify({
-    email: 'nobody-health-check@example.invalid',
-    password: 'not-a-real-password',
-  }),
+  body: JSON.stringify({ idToken: 'not-a-real-firebase-id-token' }),
 })
-if (login.error) {
-  record('POST /api/auth/login responds', false, login.error)
+if (session.error) {
+  record('POST /api/auth/session responds', false, session.error)
 } else {
   record(
-    'rejects bad credentials with 401',
-    login.res.status === 401,
-    `got HTTP ${login.res.status}`,
+    'rejects an invalid token with 401',
+    session.res.status === 401,
+    `got HTTP ${session.res.status}`,
   )
   record(
     'answers in JSON, not an HTML error page',
-    login.json !== null,
-    login.json ? '' : `body starts: ${login.body.slice(0, 80)}`,
+    session.json !== null,
+    session.json ? '' : `body starts: ${session.body.slice(0, 80)}`,
   )
   record(
     'the rejection explains itself',
-    typeof login.json?.error === 'string' && login.json.error.length > 0,
-    login.json?.error ?? '(no error field — the client would show a generic fallback)',
+    typeof session.json?.error === 'string' && session.json.error.length > 0,
+    session.json?.error ?? '(no error field — the client would show a generic fallback)',
   )
 }
 
 // 3. Session lookup. 200 with a null user is the correct anonymous answer;
-//    a 500 here means the database is behind the deployed code.
+//    a 500 here means the server cannot reach Firebase at all.
 console.log('\nsession lookup:')
 const me = await request('/api/auth/me')
 if (me.error) {
@@ -160,30 +157,13 @@ if (me.error) {
   record('returns a null user, not an error page', me.json !== null && 'user' in (me.json ?? {}))
 }
 
-// 4. Validation path, which also proves the signup route is not throwing.
-console.log('\nvalidation:')
-const signup = await request('/api/auth/signup', {
-  method: 'POST',
-  body: JSON.stringify({ email: 'not-an-email', password: 'x' }),
-})
-if (signup.error) {
-  record('POST /api/auth/signup responds', false, signup.error)
-} else {
-  record(
-    'rejects invalid input with 400',
-    signup.res.status === 400,
-    `got HTTP ${signup.res.status}`,
-  )
-  record('rejection is JSON', signup.json !== null)
-}
-
 const failed = results.filter((r) => !r.pass)
 console.log(`\n${results.length - failed.length}/${results.length} passed`)
 if (failed.length) {
   console.error(
     '\nThis deployment cannot reliably sign users in. The health output above\n' +
-      'names the cause; the usual one is a missing AUTH_SECRET or DATABASE_URL\n' +
-      'in the deployment environment.',
+      'names the cause; the usual one is missing or malformed Firebase\n' +
+      'credentials in the deployment environment.',
   )
 }
 process.exit(failed.length ? 1 : 0)

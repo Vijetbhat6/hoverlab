@@ -16,7 +16,6 @@
  */
 
 import { NextResponse, type NextRequest } from 'next/server'
-import { verifySessionToken } from '@/lib/auth'
 
 /**
  * Paths that REQUIRE auth. Proxy redirects to /login if no valid session
@@ -62,12 +61,19 @@ export async function proxy(req: NextRequest) {
     return NextResponse.next()
   }
 
-  const token = req.cookies.get('cssfx:session')?.value
-  let isAuthenticated = false
-  if (token) {
-    const session = await verifySessionToken(token)
-    isAuthenticated = !!session
-  }
+  // Presence only, deliberately.
+  //
+  // This runs on the Edge runtime and the Firebase Admin SDK requires
+  // Node.js, so the cookie cannot be verified here — only observed. That is
+  // acceptable because nothing security-relevant is decided in this file:
+  // it chooses which page to route to, and every route that returns account
+  // data verifies the session properly via lib/session.ts on the server.
+  //
+  // The cost is that a stale cookie makes someone look signed in for routing
+  // purposes. /api/auth/me expires exactly those cookies the moment it sees
+  // one, so the state corrects itself on the next navigation rather than
+  // trapping anyone on a redirect loop between /login and /library.
+  const isAuthenticated = Boolean(req.cookies.get('cssfx:session')?.value)
 
   // 1. Protected route + not authenticated → /login?redirect=<original>
   const isProtected = PROTECTED_PREFIXES.some(

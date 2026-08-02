@@ -1,0 +1,20 @@
+# Never upload these to a deployment.
+#
+# The service account key is a secret that bypasses every Firebase security
+# rule, and the deployment does not need the file: FIREBASE_SERVICE_ACCOUNT
+# carries the same JSON as an environment variable there.
+#
+# .env matters for a second reason. It sets FIREBASE_SERVICE_ACCOUNT_FILE,
+# which lib/firebase/admin.ts checks *before* the inline credential — so a
+# deployed .env would send the server looking for a file that isn't there and
+# break auth, even though the correct value was sitting in the environment.
+firebase-service-account.json
+*service-account*.json
+.env
+.env.local
+.env.production
+
+# Local-only artifacts.
+.pgdata
+dev.log
+tool-results
