@@ -1,7 +1,7 @@
 'use client'
 
 import * as React from 'react'
-import { Codepen, FileCode2, Download } from 'lucide-react'
+import { Check, Codepen, Download, FileCode2, Frame } from 'lucide-react'
 import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 import { codepenForm, jsfiddleForm, standaloneHtml, type SandboxForm } from '@/lib/sandbox'
@@ -38,6 +38,7 @@ export function OpenInSandbox({
 }: OpenInSandboxProps) {
   const codepenRef = React.useRef<HTMLFormElement>(null)
   const jsfiddleRef = React.useRef<HTMLFormElement>(null)
+  const [embedCopied, setEmbedCopied] = React.useState(false)
 
   const sourceUrl =
     typeof window === 'undefined' ? undefined : `${window.location.origin}/effect/${effectId}`
@@ -46,7 +47,10 @@ export function OpenInSandbox({
   const pen = codepenForm(input)
   const fiddle = jsfiddleForm(input)
 
-  function submit(ref: React.RefObject<HTMLFormElement | null>, target: string) {
+  function submit(
+    ref: React.RefObject<HTMLFormElement | null>,
+    target: 'codepen' | 'jsfiddle',
+  ) {
     track('sandbox_open', { effect_id: effectId, target })
     ref.current?.submit()
   }
@@ -66,6 +70,28 @@ export function OpenInSandbox({
     toast.success('Downloaded standalone HTML', {
       description: 'Open it in a browser — everything is inline, no build step.',
     })
+  }
+
+  /**
+   * Copy an <iframe> snippet pointing at /embed/<id>. The embed serves the
+   * *catalog* version, not the customized one — a URL can't carry the
+   * customization, and an iframe that silently drifted from what the user
+   * tweaked would be worse than none.
+   */
+  async function copyEmbed() {
+    const origin = typeof window === 'undefined' ? '' : window.location.origin
+    const snippet = `<iframe src="${origin}/embed/${effectId}" title="${name}" width="100%" height="320" style="border:0;border-radius:12px" loading="lazy"></iframe>`
+    try {
+      await navigator.clipboard.writeText(snippet)
+      setEmbedCopied(true)
+      setTimeout(() => setEmbedCopied(false), 1600)
+      track('embed_copied', { effect_id: effectId })
+      toast.success('Embed code copied', {
+        description: 'Paste the iframe into any blog post or docs page.',
+      })
+    } catch {
+      toast.error('Could not copy — your browser blocked clipboard access')
+    }
   }
 
   return (
@@ -92,6 +118,17 @@ export function OpenInSandbox({
       >
         <FileCode2 className="h-3.5 w-3.5" />
         JSFiddle
+      </Button>
+      <Button
+        type="button"
+        variant="outline"
+        size="sm"
+        className="gap-1.5"
+        onClick={copyEmbed}
+        title="Copy an iframe that renders this effect on your own site"
+      >
+        {embedCopied ? <Check className="h-3.5 w-3.5" /> : <Frame className="h-3.5 w-3.5" />}
+        {embedCopied ? 'Copied' : 'Embed'}
       </Button>
       <Button type="button" variant="outline" size="sm" className="gap-1.5" onClick={download}>
         <Download className="h-3.5 w-3.5" />

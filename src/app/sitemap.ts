@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next'
 import { EFFECTS, CATEGORIES } from '@/lib/effects'
+import { categorySlug } from '@/lib/effect-types'
 import { absoluteUrl } from '@/lib/site'
 
 /**
@@ -26,6 +27,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: absoluteUrl('/'), changeFrequency: 'weekly' as const, priority: 1 },
     { url: absoluteUrl('/library'), changeFrequency: 'daily' as const, priority: 0.9 },
+    { url: absoluteUrl('/category'), changeFrequency: 'weekly' as const, priority: 0.9 },
     { url: absoluteUrl('/playground'), changeFrequency: 'monthly' as const, priority: 0.7 },
     { url: absoluteUrl('/tools'), changeFrequency: 'monthly' as const, priority: 0.8 },
     ...[
@@ -46,8 +48,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ].map((entry) => ({ ...entry, lastModified: now }))
 
   // Category landing pages — head terms ("css loaders", "css card hover").
+  //
+  // These point at /category/<slug>, not /library?filter=<name>. The
+  // library is a client-rendered grid behind a query string: a crawler
+  // gets an empty shell, and query-string URLs make weak canonicals. The
+  // hub pages are static HTML with real previews and editorial copy, so
+  // they're what should be indexed for these terms.
   const categoryRoutes: MetadataRoute.Sitemap = CATEGORIES.map((category) => ({
-    url: absoluteUrl(`/library?filter=${encodeURIComponent(category)}`),
+    url: absoluteUrl(`/category/${categorySlug(category)}`),
     lastModified: now,
     changeFrequency: 'weekly',
     priority: 0.8,
