@@ -34,6 +34,72 @@ interface AuthContextValue {
 
 const AuthContext = React.createContext<AuthContextValue | null>(null)
 
+/**
+ * POST an auth request and return the user, or throw an error whose message
+ * is safe to show verbatim.
+ *
+ * The distinction that matters here is *why* it failed. Every non-success
+ * used to collapse into "Sign in failed. Please try again." — the same
+ * sentence for a wrong password, a crashed route handler, and an unreachable
+ * server. Only the first of those is worth retyping a password over, and the
+ * other two look identical to the person doing it. So: a JSON body carries
+ * the server's own message, a non-JSON body reports the status code (a route
+ * that threw returns an HTML error page, not JSON), and a failed fetch says
+ * the server could not be reached.
+ */
+/**
+ * Pull a displayable message out of whatever sits in an `error` field.
+ *
+ * Our own routes always send a string, but the response is not always ours:
+ * an infrastructure layer in front of the app can answer first. Vercel's
+ * Deployment Protection, for one, returns
+ * `{"error":{"message":"Protected deployment","code":"401"}}` — and
+ * `new Error(someObject)` renders as the literal text "[object Object]",
+ * which is worse than useless in a banner.
+ */
+function readError(error: unknown): string | null {
+  if (typeof error === 'string' && error.trim()) return error
+  if (error && typeof error === 'object') {
+    const message = (error as { message?: unknown }).message
+    if (typeof message === 'string' && message.trim()) return message
+  }
+  return null
+}
+
+async function postAuth(
+  path: string,
+  body: unknown,
+  fallback: string,
+): Promise<AuthUser> {
+  let res: Response
+  try {
+    res = await fetch(path, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'same-origin',
+      body: JSON.stringify(body),
+    })
+  } catch {
+    throw new Error(
+      'Could not reach the server. Check your connection and try again.',
+    )
+  }
+
+  const raw = await res.text().catch(() => '')
+  let data: { user?: AuthUser; error?: unknown } = {}
+  try {
+    data = raw ? JSON.parse(raw) : {}
+  } catch {
+    throw new Error(
+      `The server returned an error (HTTP ${res.status}). ` +
+        'This is not your password — check the server logs.',
+    )
+  }
+
+  if (!res.ok || !data.user) throw new Error(readError(data.error) ?? fallback)
+  return data.user
+}
+
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = React.useState<AuthUser | null>(null)
   const [loading, setLoading] = React.useState(true)
@@ -64,40 +130,26 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const login = React.useCallback(
     async (email: string, password: string) => {
-      const res = await fetch('/api/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'same-origin',
-        body: JSON.stringify({ email, password }),
-      })
-      const data = (await res.json().catch(() => ({}))) as {
-        user?: AuthUser
-        error?: string
-      }
-      if (!res.ok || !data.user) {
-        throw new Error(data.error ?? 'Sign in failed. Please try again.')
-      }
-      setUser(data.user)
+      setUser(
+        await postAuth(
+          '/api/auth/login',
+          { email, password },
+          'Sign in failed. Please try again.',
+        ),
+      )
     },
     [],
   )
 
   const signup = React.useCallback(
     async (email: string, password: string, name?: string) => {
-      const res = await fetch('/api/auth/signup', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'same-origin',
-        body: JSON.stringify({ email, password, name }),
-      })
-      const data = (await res.json().catch(() => ({}))) as {
-        user?: AuthUser
-        error?: string
-      }
-      if (!res.ok || !data.user) {
-        throw new Error(data.error ?? 'Sign up failed. Please try again.')
-      }
-      setUser(data.user)
+      setUser(
+        await postAuth(
+          '/api/auth/signup',
+          { email, password, name },
+          'Sign up failed. Please try again.',
+        ),
+      )
     },
     [],
   )

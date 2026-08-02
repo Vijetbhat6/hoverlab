@@ -9,6 +9,7 @@
  */
 
 import { NextResponse } from 'next/server'
+import { withJsonErrors } from '@/lib/route-errors'
 import { db } from '@/lib/db'
 import {
   buildExpiredSessionCookie,
@@ -56,7 +57,7 @@ async function findUsableToken(token: string) {
   return row
 }
 
-export async function GET(req: Request) {
+async function handleValidateToken(req: Request) {
   const token = new URL(req.url).searchParams.get('token') ?? ''
   const { allowed } = rateLimit(`rp:ip:${clientIp(req)}`, LIMIT, WINDOW_MS)
   if (!allowed) {
@@ -68,7 +69,7 @@ export async function GET(req: Request) {
   return NextResponse.json({ valid: Boolean(await findUsableToken(token)) })
 }
 
-export async function POST(req: Request) {
+async function handleResetPassword(req: Request) {
   let body: unknown
   try {
     body = await req.json()
@@ -139,3 +140,6 @@ export async function POST(req: Request) {
   res.headers.set('Set-Cookie', buildExpiredSessionCookie())
   return res
 }
+
+export const GET = withJsonErrors('auth/reset-password', handleValidateToken)
+export const POST = withJsonErrors('auth/reset-password', handleResetPassword)

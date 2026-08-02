@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev -p 3000 2>&1 | tee dev.log",
-    "prebuild": "node scripts/build-effect-index.mjs",
+    "prebuild": "npm run check:env && node scripts/build-effect-index.mjs",
+    "check:env": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/check-env.mjs",
+    "check:deploy": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/check-deploy.mjs",
     "build": "prisma generate && next build",
     "build:index": "node scripts/build-effect-index.mjs",
     "start": "next start -p 3000",

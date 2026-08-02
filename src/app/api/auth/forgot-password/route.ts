@@ -9,6 +9,7 @@
  */
 
 import { NextResponse } from 'next/server'
+import { withJsonErrors } from '@/lib/route-errors'
 import { db } from '@/lib/db'
 import { parseEmail } from '@/lib/auth'
 import { sendMail } from '@/lib/mail'
@@ -66,7 +67,7 @@ function resetOrigin(req: Request): string {
   }
 }
 
-export async function POST(req: Request) {
+async function handleForgotPassword(req: Request) {
   let body: unknown
   try {
     body = await req.json()
@@ -130,3 +131,5 @@ export async function POST(req: Request) {
 
   return NextResponse.json(GENERIC_OK)
 }
+
+export const POST = withJsonErrors('auth/forgot-password', handleForgotPassword)

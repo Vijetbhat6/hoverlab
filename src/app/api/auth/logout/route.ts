@@ -6,12 +6,15 @@
  */
 
 import { NextResponse } from 'next/server'
+import { withJsonErrors } from '@/lib/route-errors'
 import { buildExpiredSessionCookie } from '@/lib/auth'
 
 export const runtime = 'nodejs'
 
-export async function POST() {
+async function handleLogout() {
   const res = NextResponse.json({ message: 'Signed out.' })
   res.headers.set('Set-Cookie', buildExpiredSessionCookie())
   return res
 }
+
+export const POST = withJsonErrors('auth/logout', handleLogout)

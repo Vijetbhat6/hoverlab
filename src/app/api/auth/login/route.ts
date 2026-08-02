@@ -8,6 +8,7 @@
  */
 
 import { NextResponse } from 'next/server'
+import { withJsonErrors } from '@/lib/route-errors'
 import { db } from '@/lib/db'
 import {
   buildSessionCookie,
@@ -18,7 +19,7 @@ import {
 
 export const runtime = 'nodejs'
 
-export async function POST(req: Request) {
+async function handleLogin(req: Request) {
   let body: unknown
   try {
     body = await req.json()
@@ -79,3 +80,5 @@ export async function POST(req: Request) {
   res.headers.set('Set-Cookie', buildSessionCookie(token))
   return res
 }
+
+export const POST = withJsonErrors('auth/login', handleLogin)

@@ -7,12 +7,13 @@
  */
 
 import { NextResponse } from 'next/server'
+import { withJsonErrors } from '@/lib/route-errors'
 import { resolveSession } from '@/lib/session'
 import { buildExpiredSessionCookie } from '@/lib/auth'
 
 export const runtime = 'nodejs'
 
-export async function GET() {
+async function handleMe() {
   const resolved = await resolveSession()
 
   if (resolved.status === 'ok') {
@@ -36,3 +37,5 @@ export async function GET() {
 
   return res
 }
+
+export const GET = withJsonErrors('auth/me', handleMe)
