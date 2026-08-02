@@ -79,3 +79,31 @@ export const CATEGORIES: EffectCategory[] = [
   "Charts & Data",
   "Timelines & Steps",
 ];
+
+/* ------------------------------------------------------------------ *
+ *  Category slugs
+ * ------------------------------------------------------------------ */
+
+/**
+ * URL slug for a category — `"Inputs & Hover"` → `"inputs-hover"`.
+ *
+ * Category names carry `&` and spaces, which are legal but ugly in a path
+ * and force encoding in every link. The slug is derived rather than stored
+ * so adding a category to CATEGORIES is the only edit a new category needs.
+ */
+export function categorySlug(category: EffectCategory): string {
+  return category
+    .toLowerCase()
+    .replace(/&/g, ' ')
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+
+const BY_SLUG = new Map<string, EffectCategory>(
+  CATEGORIES.map((c) => [categorySlug(c), c]),
+);
+
+/** Resolve a URL slug back to its category, or undefined if unknown. */
+export function categoryFromSlug(slug: string): EffectCategory | undefined {
+  return BY_SLUG.get(slug.toLowerCase());
+}

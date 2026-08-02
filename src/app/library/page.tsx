@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import Link from 'next/link'
-import { Search, Sparkles, Github, Wand2, Heart, Star, ChevronLeft, ChevronRight, Shuffle, Package, Keyboard, ArrowDownUp, Loader2, Scale } from 'lucide-react'
+import { Search, Sparkles, Github, Wand2, Heart, Star, ChevronLeft, ChevronRight, Shuffle, Package, Keyboard, ArrowDownUp, Loader2, Scale, Plus, Minus } from 'lucide-react'
 import { toast } from 'sonner'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
@@ -31,6 +31,14 @@ type Filter = 'All' | 'Featured' | 'Favorites' | EffectCategory
 type Sort = 'default' | 'az' | 'za' | 'featured'
 
 const PAGE_SIZE = 24
+
+/**
+ * How many category chips stay visible before the row collapses behind a
+ * "+N more" toggle. The catalog grew to 25 categories; showing all of them
+ * pushed four rows of chips between the search bar and the first effect,
+ * which is the one thing the page exists to show.
+ */
+const VISIBLE_CATEGORY_CHIPS = 8
 
 /**
  * Validate that a string is a recognized filter value. Used when reading
@@ -63,6 +71,7 @@ export default function Home() {
   const [popKey, setPopKey] = React.useState(0)
   const [bundleOpen, setBundleOpen] = React.useState(false)
   const [compareOpen, setCompareOpen] = React.useState(false)
+  const [allCategoriesShown, setAllCategoriesShown] = React.useState(false)
   const { count: compareCount } = useCompare()
   const { favorites } = useFavorites()
   const { count: bundleCount } = useBundle()
@@ -378,6 +387,26 @@ export default function Home() {
 
   const displayList = aiDisplay ?? paged
   const displayTotal = aiDisplay ? aiDisplay.length : filtered.length
+
+  /* ---------------- Category chip row ----------------
+   * Collapsed to the first VISIBLE_CATEGORY_CHIPS by default. The active
+   * category is always appended when it falls outside that window, so
+   * arriving via ?filter=Timelines%20%26%20Steps still shows which filter
+   * is on rather than a row of chips where none is highlighted.
+   */
+  const visibleCategories = React.useMemo(() => {
+    if (allCategoriesShown) return CATEGORIES
+    const head = CATEGORIES.slice(0, VISIBLE_CATEGORY_CHIPS)
+    const isCategoryFilter = (CATEGORIES as string[]).includes(filter)
+    if (isCategoryFilter && !head.includes(filter as EffectCategory)) {
+      return [...head, filter as EffectCategory]
+    }
+    return head
+  }, [allCategoriesShown, filter])
+
+  const hiddenCategoryCount = allCategoriesShown
+    ? 0
+    : CATEGORIES.length - visibleCategories.length
 
   /* ---------------- Lazy markup + CSS for the visible page ----------------
    * The client only holds effect *metadata* (see `@/lib/effect-index`) —
@@ -733,7 +762,7 @@ export default function Home() {
             onClick={() => setFilter('Favorites')}
             icon={<Heart className="h-3 w-3" />}
           />
-          {CATEGORIES.map((c) => {
+          {visibleCategories.map((c) => {
             const count = EFFECTS.filter((e) => e.category === c).length
             return (
               <CategoryChip
@@ -745,6 +774,36 @@ export default function Home() {
               />
             )
           })}
+          {hiddenCategoryCount > 0 ? (
+            <button
+              type="button"
+              onClick={() => setAllCategoriesShown(true)}
+              className="inline-flex items-center gap-1 rounded-full border border-dashed border-border/70 px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground"
+            >
+              <Plus className="h-3 w-3" />
+              {hiddenCategoryCount} more
+            </button>
+          ) : allCategoriesShown ? (
+            <button
+              type="button"
+              onClick={() => setAllCategoriesShown(false)}
+              className="inline-flex items-center gap-1 rounded-full border border-dashed border-border/70 px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground"
+            >
+              <Minus className="h-3 w-3" />
+              Show fewer
+            </button>
+          ) : null}
+        </div>
+
+        {/* Route to the static category hubs. The chips filter this grid;
+            the hubs are the indexable, linkable pages per category. */}
+        <div className="mt-3 text-center">
+          <Link
+            href="/category"
+            className="text-xs text-muted-foreground underline-offset-4 transition-colors hover:text-foreground hover:underline"
+          >
+            Or browse the {CATEGORIES.length} category pages →
+          </Link>
         </div>
       </section>
 

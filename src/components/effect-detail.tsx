@@ -15,6 +15,7 @@ import {
   Sparkles,
   ExternalLink,
   Scale,
+  ShieldCheck,
 } from 'lucide-react'
 import { toast } from 'sonner'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
@@ -24,6 +25,8 @@ import { Button } from '@/components/ui/button'
 import { Slider } from '@/components/ui/slider'
 import { CodeBlock } from '@/components/code-block'
 import { FrameworkExportPanel } from '@/components/framework-export-panel'
+import { OpenInSandbox } from '@/components/open-in-sandbox'
+import { EffectInsightsPanel } from '@/components/effect-insights-panel'
 import { BundleDrawer } from '@/components/bundle-drawer'
 import { CompareDrawer } from '@/components/compare-drawer'
 import { CopyHistoryDropdown } from '@/components/copy-history-dropdown'
@@ -113,7 +116,7 @@ export function EffectDetail({ effect, similar, prev, next }: EffectDetailProps)
    * and flip to 'customize' in a useEffect if the hash has any
    * customization params.
    */
-  const [activeTab, setActiveTab] = React.useState<'code' | 'customize'>('code')
+  const [activeTab, setActiveTab] = React.useState<'code' | 'customize' | 'insights'>('code')
   React.useEffect(() => {
     const parts = parseHash(window.location.hash)
     const hasCustomization =
@@ -467,17 +470,39 @@ export function EffectDetail({ effect, similar, prev, next }: EffectDetailProps)
               {/* Tabs: Code | Customize
                   Controlled so we can auto-open Customize when the user
                   arrives via a share link with #hash customization. */}
-              <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as 'code' | 'customize')} className="w-full">
-                <TabsList className="grid w-full grid-cols-2">
+              <Tabs
+                value={activeTab}
+                onValueChange={(v) => setActiveTab(v as 'code' | 'customize' | 'insights')}
+                className="w-full"
+              >
+                <TabsList className="grid w-full grid-cols-3">
                   <TabsTrigger value="code" className="gap-1.5">
                     <Code2 className="h-3.5 w-3.5" /> Code
                   </TabsTrigger>
                   <TabsTrigger value="customize" className="gap-1.5">
                     <Sparkles className="h-3.5 w-3.5" /> Customize
                   </TabsTrigger>
+                  <TabsTrigger value="insights" className="gap-1.5">
+                    <ShieldCheck className="h-3.5 w-3.5" /> Insights
+                  </TabsTrigger>
                 </TabsList>
 
                 <TabsContent value="code" className="mt-3 space-y-3">
+                  {/* Escape hatches to an editable environment. Fed the
+                      customized CSS, so a pen opened after tweaking the
+                      hue carries the tweak with it. */}
+                  <div className="flex flex-wrap items-center justify-between gap-2 rounded-lg border border-border/60 bg-muted/20 p-2.5">
+                    <span className="pl-1 text-xs text-muted-foreground">Open a live copy in</span>
+                    <OpenInSandbox
+                      effectId={effect.id}
+                      name={effect.name}
+                      description={effect.description}
+                      html={effect.html}
+                      css={customizedCss}
+                      darkSurface={surfaceDark}
+                    />
+                  </div>
+
                   {/* Framework picker rather than a fixed HTML+CSS pair.
                       The panel is fed `customizedCss`, so the code always
                       matches the preview above it — previously the Code tab
@@ -509,6 +534,10 @@ export function EffectDetail({ effect, similar, prev, next }: EffectDetailProps)
                     combinedSnippet={combinedSnippet}
                     onCopyShareLink={copyShareLink}
                   />
+                </TabsContent>
+
+                <TabsContent value="insights" className="mt-3">
+                  <EffectInsightsPanel html={effect.html} css={customizedCss} />
                 </TabsContent>
               </Tabs>
             </CardContent>
