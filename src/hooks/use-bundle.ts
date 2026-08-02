@@ -57,6 +57,56 @@ function writeBundle(next: BundleEntry[]) {
   }
 }
 
+/* ============================================================
+ *  Cloud sync coordinator — module scope, for the same reason as
+ *  use-favorites.ts: useBundle is called once per EffectCard, so
+ *  instance-level refs turned one login into one destructive PUT per
+ *  mounted card. See the comment there for the full story.
+ * ========================================================== */
+
+/** User whose merge has been started (in flight or finished). */
+let syncStartedFor: string | null = null
+/**
+ * User whose merge has *succeeded*. Pushes are gated on this so a fresh
+ * browser can never overwrite the account's saved bundle with its own empty
+ * local one before the server list has been read.
+ */
+let syncReadyFor: string | null = null
+let pushTimer: ReturnType<typeof setTimeout> | null = null
+/** Payload of the last push, to suppress redundant re-sends. */
+let lastPushed: string | null = null
+
+function resetSyncState() {
+  syncStartedFor = null
+  syncReadyFor = null
+  lastPushed = null
+  if (pushTimer) {
+    clearTimeout(pushTimer)
+    pushTimer = null
+  }
+}
+
+function schedulePush(entries: BundleEntry[]) {
+  const body = JSON.stringify({ entries })
+  // Suppress the echo: the merge's localStorage write wakes every mounted
+  // instance, each of which re-runs its push effect with the same list.
+  if (body === lastPushed) return
+
+  if (pushTimer) clearTimeout(pushTimer)
+  pushTimer = setTimeout(() => {
+    pushTimer = null
+    lastPushed = body
+    fetch('/api/sync/bundle', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'same-origin',
+      body,
+    }).catch(() => {
+      lastPushed = null
+    })
+  }, 600)
+}
+
 export function useBundle() {
   const [entries, setEntries] = React.useState<BundleEntry[]>(() => readBundle())
   const { user, loading: authLoading } = useAuth()
@@ -87,25 +137,16 @@ export function useBundle() {
   }, [])
 
   /* ---------------- Cloud sync ---------------- */
-  const syncedForUser = React.useRef<string | null>(null)
-  const mountedRef = React.useRef(false)
-
-  React.useEffect(() => {
-    mountedRef.current = true
-    return () => {
-      mountedRef.current = false
-    }
-  }, [])
-
-  // Initial cloud pull + merge on login transition.
+  // Initial cloud pull + merge on login transition. Coordinator state is
+  // module-level, so the first instance here does the work for all of them.
   React.useEffect(() => {
     if (authLoading) return
     if (!userId) {
-      syncedForUser.current = null
+      resetSyncState()
       return
     }
-    if (syncedForUser.current === userId) return
-    syncedForUser.current = userId
+    if (syncStartedFor === userId) return
+    syncStartedFor = userId
 
     let cancelled = false
     ;(async () => {
@@ -114,7 +155,7 @@ export function useBundle() {
         const res = await fetch('/api/sync/bundle', {
           credentials: 'same-origin',
         })
-        if (!res.ok) return
+        if (!res.ok) throw new Error(`sync/bundle ${res.status}`)
         const data = (await res.json()) as { entries: BundleEntry[] }
         if (cancelled) return
 
@@ -137,6 +178,11 @@ export function useBundle() {
           (a, b) => Date.parse(b.addedAt) - Date.parse(a.addedAt),
         )
 
+        // Mark the merged list as already-sent before the localStorage write
+        // wakes the other instances, so it isn't echoed back as a push.
+        lastPushed = JSON.stringify({ entries: merged })
+        syncReadyFor = userId
+
         writeBundle(merged)
         entriesRef.current = merged // keep ref in sync with the merged list
         setEntries(merged)
@@ -145,10 +191,13 @@ export function useBundle() {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           credentials: 'same-origin',
-          body: JSON.stringify({ entries: merged }),
+          body: lastPushed,
         })
       } catch {
-        /* network errors are non-fatal */
+        // Non-fatal — local data is intact. Roll back the start marker so a
+        // later mount retries, and leave syncReadyFor unset so nothing
+        // pushes over server state we never read.
+        if (syncStartedFor === userId) syncStartedFor = null
       }
     })()
 
@@ -157,24 +206,10 @@ export function useBundle() {
     }
   }, [userId, authLoading])
 
-  // Debounced push on local changes.
-  const pushTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null)
+  // Debounced push on local changes — only once the merge has succeeded.
   React.useEffect(() => {
-    if (!userId) return
-    if (syncedForUser.current !== userId) return
-    if (!mountedRef.current) return
-    if (pushTimer.current) clearTimeout(pushTimer.current)
-    pushTimer.current = setTimeout(() => {
-      fetch('/api/sync/bundle', {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'same-origin',
-        body: JSON.stringify({ entries }),
-      }).catch(() => {})
-    }, 600)
-    return () => {
-      if (pushTimer.current) clearTimeout(pushTimer.current)
-    }
+    if (!userId || syncReadyFor !== userId) return
+    schedulePush(entries)
   }, [entries, userId])
 
   /* ---------------- Local actions ---------------- */

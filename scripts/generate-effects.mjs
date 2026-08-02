@@ -10,6 +10,8 @@ import { fileURLToPath } from 'node:url'
 import { dirname, join } from 'node:path'
 import { generateExtra } from './generate-effects-extra.mjs'
 import { generateExtra2 } from './generate-effects-extra2.mjs'
+import { generateModern } from './generate-effects-modern.mjs'
+import { generateModern2 } from './generate-effects-modern2.mjs'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const OUT_PATH = join(__dirname, '..', 'src', 'lib', 'generated-effects.json')
@@ -1819,6 +1821,16 @@ for (const t of TRIOS) {
 const extraCtx = { PALETTES, SIZES, SPEEDS, GRADPAIRS, TRIOS, NEUTRALS, cls, mk, add }
 generateExtra(extraCtx)
 generateExtra2(extraCtx)
+
+/* ============================================================
+ *  Third wave: new TEMPLATES inside the existing categories —
+ *  the current product-UI vocabulary (gradient rings, grain,
+ *  sheen sweeps, masked grids, bento tiles, command palettes).
+ *  See generate-effects-modern.mjs for the selection criteria.
+ * ========================================================== */
+
+generateModern(extraCtx)
+generateModern2(extraCtx)
 
 /* ============================================================
  *  Emit

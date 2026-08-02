@@ -46,6 +46,65 @@ function writeFavorites(next: Set<string>) {
   }
 }
 
+/* ============================================================
+ *  Cloud sync coordinator — module scope, deliberately.
+ *
+ *  useFavorites is called by every EffectCard, so a /library page has one
+ *  hook instance per card. Holding this state in refs made each instance
+ *  its own independent syncer: a single login fired one merge *and one
+ *  destructive PUT per mounted card* — measured at 102 requests, each a
+ *  delete-everything-then-reinsert transaction, all racing to decide the
+ *  server's list. Hoisting the coordinator out of the component makes it
+ *  exactly one merge and one push no matter how many cards are on screen.
+ * ========================================================== */
+
+/** User whose merge has been started (in flight or finished). */
+let syncStartedFor: string | null = null
+/**
+ * User whose merge has *succeeded*. Pushes are gated on this, not on
+ * `syncStartedFor`: pushing local state before the server's list has been
+ * read and merged is how a fresh browser overwrites everything the account
+ * had saved. If the merge fails, no push is allowed to happen.
+ */
+let syncReadyFor: string | null = null
+let pushTimer: ReturnType<typeof setTimeout> | null = null
+/** Payload of the last push, to suppress redundant re-sends. */
+let lastPushed: string | null = null
+
+function resetSyncState() {
+  syncStartedFor = null
+  syncReadyFor = null
+  lastPushed = null
+  if (pushTimer) {
+    clearTimeout(pushTimer)
+    pushTimer = null
+  }
+}
+
+function schedulePush(list: string[]) {
+  const body = JSON.stringify({ favorites: list })
+  // The merge writes to localStorage, which wakes every mounted instance,
+  // each of which then re-runs its push effect with the same set. Without
+  // this the merge result alone would be echoed back once per card.
+  if (body === lastPushed) return
+
+  if (pushTimer) clearTimeout(pushTimer)
+  pushTimer = setTimeout(() => {
+    pushTimer = null
+    lastPushed = body
+    fetch('/api/sync/favorites', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'same-origin',
+      body,
+    }).catch(() => {
+      // Let the next change retry rather than treating a failed send as
+      // the server's known state.
+      lastPushed = null
+    })
+  }, 600)
+}
+
 export function useFavorites() {
   const [favorites, setFavorites] = React.useState<Set<string>>(() => readFavorites())
   const { user, loading: authLoading } = useAuth()
@@ -76,29 +135,19 @@ export function useFavorites() {
   }, [])
 
   /* ---------------- Cloud sync ---------------- */
-  // Track which user we've already done the initial merge for.
-  const syncedForUser = React.useRef<string | null>(null)
-  // Track whether we've completed the initial mount (so we don't push
-  // the initial state back to the server as a "change").
-  const mountedRef = React.useRef(false)
-
-  React.useEffect(() => {
-    mountedRef.current = true
-    return () => {
-      mountedRef.current = false
-    }
-  }, [])
-
-  // Initial cloud pull + merge on login transition.
+  // Initial cloud pull + merge on login transition. The coordinator state is
+  // module-level, so whichever instance gets here first does the work and
+  // every other instance falls straight through.
   React.useEffect(() => {
     if (authLoading) return
     if (!userId) {
-      // Logged out: reset the tracker so a future re-login re-syncs.
-      syncedForUser.current = null
+      // Logged out: clear the trackers so a future re-login re-syncs, and so
+      // the next account never inherits this one's push state.
+      resetSyncState()
       return
     }
-    if (syncedForUser.current === userId) return
-    syncedForUser.current = userId
+    if (syncStartedFor === userId) return
+    syncStartedFor = userId
 
     let cancelled = false
     ;(async () => {
@@ -107,13 +156,20 @@ export function useFavorites() {
         const res = await fetch('/api/sync/favorites', {
           credentials: 'same-origin',
         })
-        if (!res.ok) return
+        if (!res.ok) throw new Error(`sync/favorites ${res.status}`)
         const data = (await res.json()) as { favorites: string[] }
         if (cancelled) return
 
         const serverSet = new Set<string>(data.favorites ?? [])
         // Union: anything in either local or server is kept.
         const merged = new Set<string>([...serverSet, ...localSet])
+        const list = [...merged]
+
+        // Record the merged set as already-sent before waking the other
+        // instances, so the localStorage write below doesn't bounce straight
+        // back as a redundant push.
+        lastPushed = JSON.stringify({ favorites: list })
+        syncReadyFor = userId
 
         writeFavorites(merged)
         favoritesRef.current = merged // keep ref in sync with the merged set
@@ -124,10 +180,13 @@ export function useFavorites() {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           credentials: 'same-origin',
-          body: JSON.stringify({ favorites: [...merged] }),
+          body: lastPushed,
         })
       } catch {
-        /* network errors are non-fatal — local data is intact */
+        // Network errors are non-fatal — local data is intact. Roll the
+        // start marker back so a later mount retries, and leave syncReadyFor
+        // unset so nothing pushes over server state we never managed to read.
+        if (syncStartedFor === userId) syncStartedFor = null
       }
     })()
 
@@ -136,27 +195,11 @@ export function useFavorites() {
     }
   }, [userId, authLoading])
 
-  // Debounced push on local changes (only after the initial sync has
-  // completed for the current user).
-  const pushTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null)
+  // Debounced push on local changes — only once the initial merge for this
+  // user has actually succeeded.
   React.useEffect(() => {
-    if (!userId) return
-    if (syncedForUser.current !== userId) return
-    // Skip the very first emit (the merge effect above already pushed).
-    if (!mountedRef.current) return
-    if (pushTimer.current) clearTimeout(pushTimer.current)
-    pushTimer.current = setTimeout(() => {
-      const list = [...favorites]
-      fetch('/api/sync/favorites', {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'same-origin',
-        body: JSON.stringify({ favorites: list }),
-      }).catch(() => {})
-    }, 600)
-    return () => {
-      if (pushTimer.current) clearTimeout(pushTimer.current)
-    }
+    if (!userId || syncReadyFor !== userId) return
+    schedulePush([...favorites])
   }, [favorites, userId])
 
   /* ---------------- Local actions ---------------- */

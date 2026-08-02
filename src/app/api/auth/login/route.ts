@@ -12,7 +12,7 @@ import { db } from '@/lib/db'
 import {
   buildSessionCookie,
   createSessionToken,
-  isValidEmail,
+  parseEmail,
   verifyPassword,
 } from '@/lib/auth'
 
@@ -31,7 +31,8 @@ export async function POST(req: Request) {
     password?: unknown
   }
 
-  if (typeof email !== 'string' || !isValidEmail(email)) {
+  const normalizedEmail = parseEmail(email)
+  if (!normalizedEmail) {
     return NextResponse.json(
       { error: 'Invalid email or password.' },
       { status: 401 },
@@ -44,7 +45,6 @@ export async function POST(req: Request) {
     )
   }
 
-  const normalizedEmail = email.trim().toLowerCase()
   const user = await db.user.findUnique({
     where: { email: normalizedEmail },
     select: { id: true, email: true, name: true, passwordHash: true },

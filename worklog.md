@@ -682,3 +682,79 @@ Stage Summary:
 - The catalog now has an indexable surface per category, an escape hatch to an editable
   sandbox, a way to appear on other people's sites, and an answer to the two questions a
   preview can't answer (browser support, motion safety).
+
+---
+Task ID: 20
+Agent: main
+Task: Expand the design vocabulary inside the existing categories — patterns designers
+      actually reach for now, chosen to age well rather than to be current.
+
+Work Log:
+- Two new generators, `scripts/generate-effects-modern.mjs` and
+  `-modern2.mjs`, wired into `generate-effects.mjs` after the first two waves so all
+  four share one id sequence and one palette. 2,440 → 3,349 generated effects
+  (3,413 total). Every category grew; the thinnest is now 61, the widest 331.
+- Selection criterion was *structural, not fashionable*. Each template is built on a
+  technique that solves a real problem and therefore should outlast the trend:
+    · 1px gradient borders via `mask-composite: exclude` — the only approach that keeps
+      border-radius correct on all four corners (replaces border-image / double-background)
+    · inner top highlight (`inset 0 1px 0`) for lit-from-above depth
+    · sheen / beam sweeps instead of pulsing glows — motion that reads as material, not alarm
+    · inline SVG `feTurbulence` grain over gradients — fixes banding on 8-bit displays
+    · radial `mask-image` fades on grids, dot fields and lists — backgrounds that stop
+      competing with the text on them
+    · `background-clip: text` for gradient, shine and hover-fill type
+    · `color-mix()` so a badge's fill and border derive from one base color
+    · `@property` for a genuinely animatable conic angle (beam borders)
+    · spring easing with 1–2px hover lifts, not 3D flips
+
+- 34 new templates (one contact sheet each in tool-results/templates/):
+    Buttons        sheen sweep, gradient ring ghost, glass w/ inner highlight, arrow-slide, loading state
+    Loaders        masked conic ring, equalizer bars, morphing dots
+    Cards          bento metric tile, grain-over-gradient, spotlight hover, featured pricing
+    Text           gradient shine heading, blur-in reveal, hover fill sweep, underline draw link
+    Backgrounds    radial-fade grid, grainy aurora, beam spotlight, floating blur orbs
+    Inputs         focus-ring field, ⌘K search w/ keycap, upload dropzone
+    Navigation     floating glass dock, blurred pill navbar, breadcrumb trail
+    Dividers       labelled fade rule, traveling beam rule
+    Badges         color-mix status pill, removable chip, keycap
+    Toggles        theme toggle, draw-in checkbox (real <input>, :focus-visible)
+    Tooltips       glass tooltip w/ arrow (attr + :focus-within), rich profile hover card
+    Skeletons      composite card skeleton, transform-only wave shimmer
+    Entrance       blur+scale, nth-child stagger, clip-path curtain
+    Borders        hairline gradient ring, @property beam border
+    Progress       route/top progress bar, stacked usage bar w/ legend
+    Avatars        presence indicator, media card w/ scrim + grain
+    Modals         ⌘K command palette, destructive confirm dialog
+    Alerts         depth toast stack, announcement banner
+    Tabs           vertical settings tabs w/ rail, icon view switcher
+    3D             layered card stack, isometric plates
+    Glow           ambient glow card (blurred self-copy), aurora CTA
+    Patterns       animated film grain, radial-fade dot field
+    Masks          ticket notch (mask-composite), fade-edge auto-scroll list
+    Charts         semicircle gauge, grouped columns, analytics trend rows
+    Timelines      deploy timeline w/ pulsing current step, roadmap milestones
+
+- New tooling: `scripts/shot-templates.mjs` builds a contact sheet — one instance per
+  generator template — from the catalog JSON and screenshots it. Reviewing a wave
+  otherwise meant scrolling 25 hubs past every variant already shipped.
+  `scripts/shot-new-categories.mjs` now covers all 25 hubs.
+
+Verification:
+- `node scripts/generate-effects.mjs` → 3,349 effects, 25 categories, no id collisions.
+- `npx tsc --noEmit` → 0 errors under `src/`. `npx eslint src scripts` → clean.
+- `npx next build` → ✓ compiled, 3,413 `/effect/[slug]` pages + 25 hubs.
+- Contact sheets `wave3a` / `wave3b`: all 63 templates render, no page errors.
+  Three defects caught and fixed on review:
+    · `mg-beam` was invisible — a `conic-gradient(at 50% 0%)` on a 200%-sized element put
+      the cone's apex off-canvas. Replaced with a blurred tapering shaft pinned to the top
+      edge, swinging about its own transform-origin.
+    · `mt-fill` resting color (#475569) read as disabled rather than muted → #8b9ab4.
+    · `mg-grid` rules were too faint to see at 0.28 alpha → 0.42, with a slightly wider mask.
+- Insights tab now has real content on these: verified it reports `@property` +
+  `conic-gradient()` on beam borders, `color-mix()` on status badges, `backdrop-filter` on
+  glass buttons, `mask-image` on tickets/grids/conic spinners — each with its support level.
+
+Stage Summary:
+- 3,413 effects across 25 categories. The catalog previously covered the classic
+  vocabulary well and the current product-UI vocabulary barely at all; that gap is closed.

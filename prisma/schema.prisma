@@ -32,9 +32,35 @@ model User {
   proLicense      Boolean   @default(false)
   proLicenseAt    DateTime?
 
+  /// Sessions issued before this instant are rejected. Set on password
+  /// reset so the reset actually revokes access — session JWTs are
+  /// stateless, so without an epoch to compare against, a stolen 30-day
+  /// cookie keeps working after the victim changes their password.
+  sessionsValidFrom DateTime?
+
   purchases       Purchase[]
   teamMemberships TeamMember[]
   ownedTeams      Team[]      @relation("TeamOwner")
+  passwordResets  PasswordResetToken[]
+}
+
+/// A single-use password reset grant.
+///
+/// Only the SHA-256 of the token is stored: the raw value lives in the
+/// emailed link and nowhere else, so a database leak cannot be replayed
+/// into account takeovers. Rows are consumed (usedAt) rather than deleted
+/// so a second click on the same link is distinguishable from a bad token.
+model PasswordResetToken {
+  id        String    @id @default(cuid())
+  userId    String
+  tokenHash String    @unique
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
 }
 
 /// An immutable record of every paid order, one row per Polar order.

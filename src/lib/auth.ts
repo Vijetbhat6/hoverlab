@@ -159,6 +159,35 @@ export function isValidEmail(email: string): boolean {
   return EMAIL_RE.test(email) && email.length <= 254
 }
 
+/**
+ * The canonical stored form of an address: surrounding whitespace removed,
+ * lowercased. This is the shape every `User.email` in the database is
+ * written in, so it is also the only shape a lookup may use.
+ */
+export function normalizeEmail(email: string): string {
+  return email.trim().toLowerCase()
+}
+
+/**
+ * Normalize an untrusted email, then validate. Returns the canonical form,
+ * or null if it isn't a usable address.
+ *
+ * The order matters, and getting it backwards is not a cosmetic bug. EMAIL_RE
+ * rejects any whitespace, so validating the raw string first means an address
+ * that merely arrived with a trailing space — which iOS/Android keyboards and
+ * password managers append routinely, and which every paste from a contacts
+ * app carries — is turned away as malformed. The visible symptom is "Please
+ * enter a valid email address." on an address that is plainly valid at signup,
+ * and "Invalid email or password." on a correct password at login, with the
+ * matching account sitting right there in the database. Every route takes this
+ * one path so the normalize-then-validate order cannot drift apart again.
+ */
+export function parseEmail(input: unknown): string | null {
+  if (typeof input !== 'string') return null
+  const normalized = normalizeEmail(input)
+  return isValidEmail(normalized) ? normalized : null
+}
+
 /** Password must be at least 8 chars, at most 128 chars. */
 export function isValidPassword(password: string): boolean {
   return password.length >= 8 && password.length <= 128
