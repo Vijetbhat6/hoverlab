@@ -750,7 +750,9 @@ export function generateExtra2(ctx) {
 .${c} .area {
   width: 100%;
   height: 100%;
-  background: linear-gradient(180deg, rgba(${rgbOf(g.a)}, 0.55), rgba(${rgbOf(g.b)}, 0.05));
+  /* Opaque at the top edge so the trend line itself reads clearly, then
+     falling away to almost nothing at the baseline. */
+  background: linear-gradient(180deg, ${g.a} 0 3%, rgba(${rgbOf(g.a)}, 0.45) 25%, rgba(${rgbOf(g.b)}, 0.06) 100%);
   clip-path: polygon(
     0 78%, 12% 62%, 24% 70%, 36% 40%, 48% 52%,
     60% 26%, 72% 38%, 84% 14%, 100% 30%,

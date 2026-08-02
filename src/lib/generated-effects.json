@@ -32783,7 +32783,7 @@
     "id": "sunset-pill-tabs-4043",
     "name": "Sunset Pill Tabs",
     "category": "Accordions & Tabs",
-    "description": "Compact pill tab group; the active tab carries a sunset gradient and a matching shadow.",
+    "description": "Compact pill tab group; the active tab carries the sunset gradient and a matching shadow.",
     "html": "<div class=\"fx-tb-pill-sunset-4042\"><a class=\"on\">Day</a><a>Week</a><a>Month</a></div>",
     "css": ".fx-tb-pill-sunset-4042 {\n  display: inline-flex;\n  gap: 0.25rem;\n  padding: 0.25rem;\n  border-radius: 999px;\n  background: rgba(255,255,255,0.06);\n}\n.fx-tb-pill-sunset-4042 a {\n  padding: 0.4rem 0.95rem;\n  font-size: 0.8rem;\n  font-weight: 600;\n  color: #94a3b8;\n  border-radius: 999px;\n  cursor: pointer;\n  transition: color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;\n}\n.fx-tb-pill-sunset-4042 a:hover { color: #e2e8f0; }\n.fx-tb-pill-sunset-4042 a.on {\n  color: #fff;\n  background: linear-gradient(120deg, #f43f5e, #f59e0b);\n  box-shadow: 0 4px 14px rgba(244,63,94, 0.4);\n}",
     "tags": [
@@ -32799,7 +32799,7 @@
     "id": "ocean-pill-tabs-4045",
     "name": "Ocean Pill Tabs",
     "category": "Accordions & Tabs",
-    "description": "Compact pill tab group; the active tab carries a ocean gradient and a matching shadow.",
+    "description": "Compact pill tab group; the active tab carries the ocean gradient and a matching shadow.",
     "html": "<div class=\"fx-tb-pill-ocean-4044\"><a class=\"on\">Day</a><a>Week</a><a>Month</a></div>",
     "css": ".fx-tb-pill-ocean-4044 {\n  display: inline-flex;\n  gap: 0.25rem;\n  padding: 0.25rem;\n  border-radius: 999px;\n  background: rgba(255,255,255,0.06);\n}\n.fx-tb-pill-ocean-4044 a {\n  padding: 0.4rem 0.95rem;\n  font-size: 0.8rem;\n  font-weight: 600;\n  color: #94a3b8;\n  border-radius: 999px;\n  cursor: pointer;\n  transition: color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;\n}\n.fx-tb-pill-ocean-4044 a:hover { color: #e2e8f0; }\n.fx-tb-pill-ocean-4044 a.on {\n  color: #fff;\n  background: linear-gradient(120deg, #0ea5e9, #6366f1);\n  box-shadow: 0 4px 14px rgba(14,165,233, 0.4);\n}",
     "tags": [
@@ -32815,7 +32815,7 @@
     "id": "forest-pill-tabs-4047",
     "name": "Forest Pill Tabs",
     "category": "Accordions & Tabs",
-    "description": "Compact pill tab group; the active tab carries a forest gradient and a matching shadow.",
+    "description": "Compact pill tab group; the active tab carries the forest gradient and a matching shadow.",
     "html": "<div class=\"fx-tb-pill-forest-4046\"><a class=\"on\">Day</a><a>Week</a><a>Month</a></div>",
     "css": ".fx-tb-pill-forest-4046 {\n  display: inline-flex;\n  gap: 0.25rem;\n  padding: 0.25rem;\n  border-radius: 999px;\n  background: rgba(255,255,255,0.06);\n}\n.fx-tb-pill-forest-4046 a {\n  padding: 0.4rem 0.95rem;\n  font-size: 0.8rem;\n  font-weight: 600;\n  color: #94a3b8;\n  border-radius: 999px;\n  cursor: pointer;\n  transition: color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;\n}\n.fx-tb-pill-forest-4046 a:hover { color: #e2e8f0; }\n.fx-tb-pill-forest-4046 a.on {\n  color: #fff;\n  background: linear-gradient(120deg, #10b981, #84cc16);\n  box-shadow: 0 4px 14px rgba(16,185,129, 0.4);\n}",
     "tags": [
@@ -32831,7 +32831,7 @@
     "id": "berry-pill-tabs-4049",
     "name": "Berry Pill Tabs",
     "category": "Accordions & Tabs",
-    "description": "Compact pill tab group; the active tab carries a berry gradient and a matching shadow.",
+    "description": "Compact pill tab group; the active tab carries the berry gradient and a matching shadow.",
     "html": "<div class=\"fx-tb-pill-berry-4048\"><a class=\"on\">Day</a><a>Week</a><a>Month</a></div>",
     "css": ".fx-tb-pill-berry-4048 {\n  display: inline-flex;\n  gap: 0.25rem;\n  padding: 0.25rem;\n  border-radius: 999px;\n  background: rgba(255,255,255,0.06);\n}\n.fx-tb-pill-berry-4048 a {\n  padding: 0.4rem 0.95rem;\n  font-size: 0.8rem;\n  font-weight: 600;\n  color: #94a3b8;\n  border-radius: 999px;\n  cursor: pointer;\n  transition: color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;\n}\n.fx-tb-pill-berry-4048 a:hover { color: #e2e8f0; }\n.fx-tb-pill-berry-4048 a.on {\n  color: #fff;\n  background: linear-gradient(120deg, #d946ef, #8b5cf6);\n  box-shadow: 0 4px 14px rgba(217,70,239, 0.4);\n}",
     "tags": [
@@ -32847,7 +32847,7 @@
     "id": "citrus-pill-tabs-4051",
     "name": "Citrus Pill Tabs",
     "category": "Accordions & Tabs",
-    "description": "Compact pill tab group; the active tab carries a citrus gradient and a matching shadow.",
+    "description": "Compact pill tab group; the active tab carries the citrus gradient and a matching shadow.",
     "html": "<div class=\"fx-tb-pill-citrus-4050\"><a class=\"on\">Day</a><a>Week</a><a>Month</a></div>",
     "css": ".fx-tb-pill-citrus-4050 {\n  display: inline-flex;\n  gap: 0.25rem;\n  padding: 0.25rem;\n  border-radius: 999px;\n  background: rgba(255,255,255,0.06);\n}\n.fx-tb-pill-citrus-4050 a {\n  padding: 0.4rem 0.95rem;\n  font-size: 0.8rem;\n  font-weight: 600;\n  color: #94a3b8;\n  border-radius: 999px;\n  cursor: pointer;\n  transition: color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;\n}\n.fx-tb-pill-citrus-4050 a:hover { color: #e2e8f0; }\n.fx-tb-pill-citrus-4050 a.on {\n  color: #fff;\n  background: linear-gradient(120deg, #f59e0b, #84cc16);\n  box-shadow: 0 4px 14px rgba(245,158,11, 0.4);\n}",
     "tags": [
@@ -32863,7 +32863,7 @@
     "id": "flamingo-pill-tabs-4053",
     "name": "Flamingo Pill Tabs",
     "category": "Accordions & Tabs",
-    "description": "Compact pill tab group; the active tab carries a flamingo gradient and a matching shadow.",
+    "description": "Compact pill tab group; the active tab carries the flamingo gradient and a matching shadow.",
     "html": "<div class=\"fx-tb-pill-flamingo-4052\"><a class=\"on\">Day</a><a>Week</a><a>Month</a></div>",
     "css": ".fx-tb-pill-flamingo-4052 {\n  display: inline-flex;\n  gap: 0.25rem;\n  padding: 0.25rem;\n  border-radius: 999px;\n  background: rgba(255,255,255,0.06);\n}\n.fx-tb-pill-flamingo-4052 a {\n  padding: 0.4rem 0.95rem;\n  font-size: 0.8rem;\n  font-weight: 600;\n  color: #94a3b8;\n  border-radius: 999px;\n  cursor: pointer;\n  transition: color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;\n}\n.fx-tb-pill-flamingo-4052 a:hover { color: #e2e8f0; }\n.fx-tb-pill-flamingo-4052 a.on {\n  color: #fff;\n  background: linear-gradient(120deg, #ec4899, #f43f5e);\n  box-shadow: 0 4px 14px rgba(236,72,153, 0.4);\n}",
     "tags": [
@@ -32879,7 +32879,7 @@
     "id": "mint-pill-tabs-4055",
     "name": "Mint Pill Tabs",
     "category": "Accordions & Tabs",
-    "description": "Compact pill tab group; the active tab carries a mint gradient and a matching shadow.",
+    "description": "Compact pill tab group; the active tab carries the mint gradient and a matching shadow.",
     "html": "<div class=\"fx-tb-pill-mint-4054\"><a class=\"on\">Day</a><a>Week</a><a>Month</a></div>",
     "css": ".fx-tb-pill-mint-4054 {\n  display: inline-flex;\n  gap: 0.25rem;\n  padding: 0.25rem;\n  border-radius: 999px;\n  background: rgba(255,255,255,0.06);\n}\n.fx-tb-pill-mint-4054 a {\n  padding: 0.4rem 0.95rem;\n  font-size: 0.8rem;\n  font-weight: 600;\n  color: #94a3b8;\n  border-radius: 999px;\n  cursor: pointer;\n  transition: color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;\n}\n.fx-tb-pill-mint-4054 a:hover { color: #e2e8f0; }\n.fx-tb-pill-mint-4054 a.on {\n  color: #fff;\n  background: linear-gradient(120deg, #14b8a6, #06b6d4);\n  box-shadow: 0 4px 14px rgba(20,184,166, 0.4);\n}",
     "tags": [
@@ -32895,7 +32895,7 @@
     "id": "twilight-pill-tabs-4057",
     "name": "Twilight Pill Tabs",
     "category": "Accordions & Tabs",
-    "description": "Compact pill tab group; the active tab carries a twilight gradient and a matching shadow.",
+    "description": "Compact pill tab group; the active tab carries the twilight gradient and a matching shadow.",
     "html": "<div class=\"fx-tb-pill-twilight-4056\"><a class=\"on\">Day</a><a>Week</a><a>Month</a></div>",
     "css": ".fx-tb-pill-twilight-4056 {\n  display: inline-flex;\n  gap: 0.25rem;\n  padding: 0.25rem;\n  border-radius: 999px;\n  background: rgba(255,255,255,0.06);\n}\n.fx-tb-pill-twilight-4056 a {\n  padding: 0.4rem 0.95rem;\n  font-size: 0.8rem;\n  font-weight: 600;\n  color: #94a3b8;\n  border-radius: 999px;\n  cursor: pointer;\n  transition: color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;\n}\n.fx-tb-pill-twilight-4056 a:hover { color: #e2e8f0; }\n.fx-tb-pill-twilight-4056 a.on {\n  color: #fff;\n  background: linear-gradient(120deg, #6366f1, #a855f7);\n  box-shadow: 0 4px 14px rgba(99,102,241, 0.4);\n}",
     "tags": [
@@ -32911,7 +32911,7 @@
     "id": "coral-pill-tabs-4059",
     "name": "Coral Pill Tabs",
     "category": "Accordions & Tabs",
-    "description": "Compact pill tab group; the active tab carries a coral gradient and a matching shadow.",
+    "description": "Compact pill tab group; the active tab carries the coral gradient and a matching shadow.",
     "html": "<div class=\"fx-tb-pill-coral-4058\"><a class=\"on\">Day</a><a>Week</a><a>Month</a></div>",
     "css": ".fx-tb-pill-coral-4058 {\n  display: inline-flex;\n  gap: 0.25rem;\n  padding: 0.25rem;\n  border-radius: 999px;\n  background: rgba(255,255,255,0.06);\n}\n.fx-tb-pill-coral-4058 a {\n  padding: 0.4rem 0.95rem;\n  font-size: 0.8rem;\n  font-weight: 600;\n  color: #94a3b8;\n  border-radius: 999px;\n  cursor: pointer;\n  transition: color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;\n}\n.fx-tb-pill-coral-4058 a:hover { color: #e2e8f0; }\n.fx-tb-pill-coral-4058 a.on {\n  color: #fff;\n  background: linear-gradient(120deg, #f97316, #ec4899);\n  box-shadow: 0 4px 14px rgba(249,115,22, 0.4);\n}",
     "tags": [
@@ -32927,7 +32927,7 @@
     "id": "lagoon-pill-tabs-4061",
     "name": "Lagoon Pill Tabs",
     "category": "Accordions & Tabs",
-    "description": "Compact pill tab group; the active tab carries a lagoon gradient and a matching shadow.",
+    "description": "Compact pill tab group; the active tab carries the lagoon gradient and a matching shadow.",
     "html": "<div class=\"fx-tb-pill-lagoon-4060\"><a class=\"on\">Day</a><a>Week</a><a>Month</a></div>",
     "css": ".fx-tb-pill-lagoon-4060 {\n  display: inline-flex;\n  gap: 0.25rem;\n  padding: 0.25rem;\n  border-radius: 999px;\n  background: rgba(255,255,255,0.06);\n}\n.fx-tb-pill-lagoon-4060 a {\n  padding: 0.4rem 0.95rem;\n  font-size: 0.8rem;\n  font-weight: 600;\n  color: #94a3b8;\n  border-radius: 999px;\n  cursor: pointer;\n  transition: color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;\n}\n.fx-tb-pill-lagoon-4060 a:hover { color: #e2e8f0; }\n.fx-tb-pill-lagoon-4060 a.on {\n  color: #fff;\n  background: linear-gradient(120deg, #06b6d4, #14b8a6);\n  box-shadow: 0 4px 14px rgba(6,182,212, 0.4);\n}",
     "tags": [
@@ -32943,7 +32943,7 @@
     "id": "fire-pill-tabs-4063",
     "name": "Fire Pill Tabs",
     "category": "Accordions & Tabs",
-    "description": "Compact pill tab group; the active tab carries a fire gradient and a matching shadow.",
+    "description": "Compact pill tab group; the active tab carries the fire gradient and a matching shadow.",
     "html": "<div class=\"fx-tb-pill-fire-4062\"><a class=\"on\">Day</a><a>Week</a><a>Month</a></div>",
     "css": ".fx-tb-pill-fire-4062 {\n  display: inline-flex;\n  gap: 0.25rem;\n  padding: 0.25rem;\n  border-radius: 999px;\n  background: rgba(255,255,255,0.06);\n}\n.fx-tb-pill-fire-4062 a {\n  padding: 0.4rem 0.95rem;\n  font-size: 0.8rem;\n  font-weight: 600;\n  color: #94a3b8;\n  border-radius: 999px;\n  cursor: pointer;\n  transition: color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;\n}\n.fx-tb-pill-fire-4062 a:hover { color: #e2e8f0; }\n.fx-tb-pill-fire-4062 a.on {\n  color: #fff;\n  background: linear-gradient(120deg, #ef4444, #f59e0b);\n  box-shadow: 0 4px 14px rgba(239,68,68, 0.4);\n}",
     "tags": [
@@ -32959,7 +32959,7 @@
     "id": "galaxy-pill-tabs-4065",
     "name": "Galaxy Pill Tabs",
     "category": "Accordions & Tabs",
-    "description": "Compact pill tab group; the active tab carries a galaxy gradient and a matching shadow.",
+    "description": "Compact pill tab group; the active tab carries the galaxy gradient and a matching shadow.",
     "html": "<div class=\"fx-tb-pill-galaxy-4064\"><a class=\"on\">Day</a><a>Week</a><a>Month</a></div>",
     "css": ".fx-tb-pill-galaxy-4064 {\n  display: inline-flex;\n  gap: 0.25rem;\n  padding: 0.25rem;\n  border-radius: 999px;\n  background: rgba(255,255,255,0.06);\n}\n.fx-tb-pill-galaxy-4064 a {\n  padding: 0.4rem 0.95rem;\n  font-size: 0.8rem;\n  font-weight: 600;\n  color: #94a3b8;\n  border-radius: 999px;\n  cursor: pointer;\n  transition: color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;\n}\n.fx-tb-pill-galaxy-4064 a:hover { color: #e2e8f0; }\n.fx-tb-pill-galaxy-4064 a.on {\n  color: #fff;\n  background: linear-gradient(120deg, #8b5cf6, #ec4899);\n  box-shadow: 0 4px 14px rgba(139,92,246, 0.4);\n}",
     "tags": [
@@ -39267,7 +39267,7 @@
     "category": "Charts & Data",
     "description": "Compact sunset area sparkline shaped entirely by a clip-path polygon.",
     "html": "<div class=\"fx-ch-spark-sunset-4776\"><div class=\"area\"></div></div>",
-    "css": ".fx-ch-spark-sunset-4776 {\n  width: 200px;\n  height: 64px;\n  padding: 0.5rem;\n  border-radius: 0.6rem;\n  background: #0f172a;\n  border: 1px solid rgba(255,255,255,0.07);\n  overflow: hidden;\n}\n.fx-ch-spark-sunset-4776 .area {\n  width: 100%;\n  height: 100%;\n  background: linear-gradient(180deg, rgba(244,63,94, 0.55), rgba(245,158,11, 0.05));\n  clip-path: polygon(\n    0 78%, 12% 62%, 24% 70%, 36% 40%, 48% 52%,\n    60% 26%, 72% 38%, 84% 14%, 100% 30%,\n    100% 100%, 0 100%\n  );\n  animation: fx-ch-spark-sunset-4776-rise 1.1s cubic-bezier(0.16, 1, 0.3, 1) both;\n}\n@keyframes fx-ch-spark-sunset-4776-rise {\n  from { transform: translateY(30%); opacity: 0; }\n}",
+    "css": ".fx-ch-spark-sunset-4776 {\n  width: 200px;\n  height: 64px;\n  padding: 0.5rem;\n  border-radius: 0.6rem;\n  background: #0f172a;\n  border: 1px solid rgba(255,255,255,0.07);\n  overflow: hidden;\n}\n.fx-ch-spark-sunset-4776 .area {\n  width: 100%;\n  height: 100%;\n  /* Opaque at the top edge so the trend line itself reads clearly, then\n     falling away to almost nothing at the baseline. */\n  background: linear-gradient(180deg, #f43f5e 0 3%, rgba(244,63,94, 0.45) 25%, rgba(245,158,11, 0.06) 100%);\n  clip-path: polygon(\n    0 78%, 12% 62%, 24% 70%, 36% 40%, 48% 52%,\n    60% 26%, 72% 38%, 84% 14%, 100% 30%,\n    100% 100%, 0 100%\n  );\n  animation: fx-ch-spark-sunset-4776-rise 1.1s cubic-bezier(0.16, 1, 0.3, 1) both;\n}\n@keyframes fx-ch-spark-sunset-4776-rise {\n  from { transform: translateY(30%); opacity: 0; }\n}",
     "tags": [
       "chart",
       "sparkline",
@@ -39285,7 +39285,7 @@
     "category": "Charts & Data",
     "description": "Compact ocean area sparkline shaped entirely by a clip-path polygon.",
     "html": "<div class=\"fx-ch-spark-ocean-4778\"><div class=\"area\"></div></div>",
-    "css": ".fx-ch-spark-ocean-4778 {\n  width: 200px;\n  height: 64px;\n  padding: 0.5rem;\n  border-radius: 0.6rem;\n  background: #0f172a;\n  border: 1px solid rgba(255,255,255,0.07);\n  overflow: hidden;\n}\n.fx-ch-spark-ocean-4778 .area {\n  width: 100%;\n  height: 100%;\n  background: linear-gradient(180deg, rgba(14,165,233, 0.55), rgba(99,102,241, 0.05));\n  clip-path: polygon(\n    0 78%, 12% 62%, 24% 70%, 36% 40%, 48% 52%,\n    60% 26%, 72% 38%, 84% 14%, 100% 30%,\n    100% 100%, 0 100%\n  );\n  animation: fx-ch-spark-ocean-4778-rise 1.1s cubic-bezier(0.16, 1, 0.3, 1) both;\n}\n@keyframes fx-ch-spark-ocean-4778-rise {\n  from { transform: translateY(30%); opacity: 0; }\n}",
+    "css": ".fx-ch-spark-ocean-4778 {\n  width: 200px;\n  height: 64px;\n  padding: 0.5rem;\n  border-radius: 0.6rem;\n  background: #0f172a;\n  border: 1px solid rgba(255,255,255,0.07);\n  overflow: hidden;\n}\n.fx-ch-spark-ocean-4778 .area {\n  width: 100%;\n  height: 100%;\n  /* Opaque at the top edge so the trend line itself reads clearly, then\n     falling away to almost nothing at the baseline. */\n  background: linear-gradient(180deg, #0ea5e9 0 3%, rgba(14,165,233, 0.45) 25%, rgba(99,102,241, 0.06) 100%);\n  clip-path: polygon(\n    0 78%, 12% 62%, 24% 70%, 36% 40%, 48% 52%,\n    60% 26%, 72% 38%, 84% 14%, 100% 30%,\n    100% 100%, 0 100%\n  );\n  animation: fx-ch-spark-ocean-4778-rise 1.1s cubic-bezier(0.16, 1, 0.3, 1) both;\n}\n@keyframes fx-ch-spark-ocean-4778-rise {\n  from { transform: translateY(30%); opacity: 0; }\n}",
     "tags": [
       "chart",
       "sparkline",
@@ -39303,7 +39303,7 @@
     "category": "Charts & Data",
     "description": "Compact forest area sparkline shaped entirely by a clip-path polygon.",
     "html": "<div class=\"fx-ch-spark-forest-4780\"><div class=\"area\"></div></div>",
-    "css": ".fx-ch-spark-forest-4780 {\n  width: 200px;\n  height: 64px;\n  padding: 0.5rem;\n  border-radius: 0.6rem;\n  background: #0f172a;\n  border: 1px solid rgba(255,255,255,0.07);\n  overflow: hidden;\n}\n.fx-ch-spark-forest-4780 .area {\n  width: 100%;\n  height: 100%;\n  background: linear-gradient(180deg, rgba(16,185,129, 0.55), rgba(132,204,22, 0.05));\n  clip-path: polygon(\n    0 78%, 12% 62%, 24% 70%, 36% 40%, 48% 52%,\n    60% 26%, 72% 38%, 84% 14%, 100% 30%,\n    100% 100%, 0 100%\n  );\n  animation: fx-ch-spark-forest-4780-rise 1.1s cubic-bezier(0.16, 1, 0.3, 1) both;\n}\n@keyframes fx-ch-spark-forest-4780-rise {\n  from { transform: translateY(30%); opacity: 0; }\n}",
+    "css": ".fx-ch-spark-forest-4780 {\n  width: 200px;\n  height: 64px;\n  padding: 0.5rem;\n  border-radius: 0.6rem;\n  background: #0f172a;\n  border: 1px solid rgba(255,255,255,0.07);\n  overflow: hidden;\n}\n.fx-ch-spark-forest-4780 .area {\n  width: 100%;\n  height: 100%;\n  /* Opaque at the top edge so the trend line itself reads clearly, then\n     falling away to almost nothing at the baseline. */\n  background: linear-gradient(180deg, #10b981 0 3%, rgba(16,185,129, 0.45) 25%, rgba(132,204,22, 0.06) 100%);\n  clip-path: polygon(\n    0 78%, 12% 62%, 24% 70%, 36% 40%, 48% 52%,\n    60% 26%, 72% 38%, 84% 14%, 100% 30%,\n    100% 100%, 0 100%\n  );\n  animation: fx-ch-spark-forest-4780-rise 1.1s cubic-bezier(0.16, 1, 0.3, 1) both;\n}\n@keyframes fx-ch-spark-forest-4780-rise {\n  from { transform: translateY(30%); opacity: 0; }\n}",
     "tags": [
       "chart",
       "sparkline",
@@ -39321,7 +39321,7 @@
     "category": "Charts & Data",
     "description": "Compact berry area sparkline shaped entirely by a clip-path polygon.",
     "html": "<div class=\"fx-ch-spark-berry-4782\"><div class=\"area\"></div></div>",
-    "css": ".fx-ch-spark-berry-4782 {\n  width: 200px;\n  height: 64px;\n  padding: 0.5rem;\n  border-radius: 0.6rem;\n  background: #0f172a;\n  border: 1px solid rgba(255,255,255,0.07);\n  overflow: hidden;\n}\n.fx-ch-spark-berry-4782 .area {\n  width: 100%;\n  height: 100%;\n  background: linear-gradient(180deg, rgba(217,70,239, 0.55), rgba(139,92,246, 0.05));\n  clip-path: polygon(\n    0 78%, 12% 62%, 24% 70%, 36% 40%, 48% 52%,\n    60% 26%, 72% 38%, 84% 14%, 100% 30%,\n    100% 100%, 0 100%\n  );\n  animation: fx-ch-spark-berry-4782-rise 1.1s cubic-bezier(0.16, 1, 0.3, 1) both;\n}\n@keyframes fx-ch-spark-berry-4782-rise {\n  from { transform: translateY(30%); opacity: 0; }\n}",
+    "css": ".fx-ch-spark-berry-4782 {\n  width: 200px;\n  height: 64px;\n  padding: 0.5rem;\n  border-radius: 0.6rem;\n  background: #0f172a;\n  border: 1px solid rgba(255,255,255,0.07);\n  overflow: hidden;\n}\n.fx-ch-spark-berry-4782 .area {\n  width: 100%;\n  height: 100%;\n  /* Opaque at the top edge so the trend line itself reads clearly, then\n     falling away to almost nothing at the baseline. */\n  background: linear-gradient(180deg, #d946ef 0 3%, rgba(217,70,239, 0.45) 25%, rgba(139,92,246, 0.06) 100%);\n  clip-path: polygon(\n    0 78%, 12% 62%, 24% 70%, 36% 40%, 48% 52%,\n    60% 26%, 72% 38%, 84% 14%, 100% 30%,\n    100% 100%, 0 100%\n  );\n  animation: fx-ch-spark-berry-4782-rise 1.1s cubic-bezier(0.16, 1, 0.3, 1) both;\n}\n@keyframes fx-ch-spark-berry-4782-rise {\n  from { transform: translateY(30%); opacity: 0; }\n}",
     "tags": [
       "chart",
       "sparkline",
@@ -39339,7 +39339,7 @@
     "category": "Charts & Data",
     "description": "Compact citrus area sparkline shaped entirely by a clip-path polygon.",
     "html": "<div class=\"fx-ch-spark-citrus-4784\"><div class=\"area\"></div></div>",
-    "css": ".fx-ch-spark-citrus-4784 {\n  width: 200px;\n  height: 64px;\n  padding: 0.5rem;\n  border-radius: 0.6rem;\n  background: #0f172a;\n  border: 1px solid rgba(255,255,255,0.07);\n  overflow: hidden;\n}\n.fx-ch-spark-citrus-4784 .area {\n  width: 100%;\n  height: 100%;\n  background: linear-gradient(180deg, rgba(245,158,11, 0.55), rgba(132,204,22, 0.05));\n  clip-path: polygon(\n    0 78%, 12% 62%, 24% 70%, 36% 40%, 48% 52%,\n    60% 26%, 72% 38%, 84% 14%, 100% 30%,\n    100% 100%, 0 100%\n  );\n  animation: fx-ch-spark-citrus-4784-rise 1.1s cubic-bezier(0.16, 1, 0.3, 1) both;\n}\n@keyframes fx-ch-spark-citrus-4784-rise {\n  from { transform: translateY(30%); opacity: 0; }\n}",
+    "css": ".fx-ch-spark-citrus-4784 {\n  width: 200px;\n  height: 64px;\n  padding: 0.5rem;\n  border-radius: 0.6rem;\n  background: #0f172a;\n  border: 1px solid rgba(255,255,255,0.07);\n  overflow: hidden;\n}\n.fx-ch-spark-citrus-4784 .area {\n  width: 100%;\n  height: 100%;\n  /* Opaque at the top edge so the trend line itself reads clearly, then\n     falling away to almost nothing at the baseline. */\n  background: linear-gradient(180deg, #f59e0b 0 3%, rgba(245,158,11, 0.45) 25%, rgba(132,204,22, 0.06) 100%);\n  clip-path: polygon(\n    0 78%, 12% 62%, 24% 70%, 36% 40%, 48% 52%,\n    60% 26%, 72% 38%, 84% 14%, 100% 30%,\n    100% 100%, 0 100%\n  );\n  animation: fx-ch-spark-citrus-4784-rise 1.1s cubic-bezier(0.16, 1, 0.3, 1) both;\n}\n@keyframes fx-ch-spark-citrus-4784-rise {\n  from { transform: translateY(30%); opacity: 0; }\n}",
     "tags": [
       "chart",
       "sparkline",
@@ -39357,7 +39357,7 @@
     "category": "Charts & Data",
     "description": "Compact flamingo area sparkline shaped entirely by a clip-path polygon.",
     "html": "<div class=\"fx-ch-spark-flamingo-4786\"><div class=\"area\"></div></div>",
-    "css": ".fx-ch-spark-flamingo-4786 {\n  width: 200px;\n  height: 64px;\n  padding: 0.5rem;\n  border-radius: 0.6rem;\n  background: #0f172a;\n  border: 1px solid rgba(255,255,255,0.07);\n  overflow: hidden;\n}\n.fx-ch-spark-flamingo-4786 .area {\n  width: 100%;\n  height: 100%;\n  background: linear-gradient(180deg, rgba(236,72,153, 0.55), rgba(244,63,94, 0.05));\n  clip-path: polygon(\n    0 78%, 12% 62%, 24% 70%, 36% 40%, 48% 52%,\n    60% 26%, 72% 38%, 84% 14%, 100% 30%,\n    100% 100%, 0 100%\n  );\n  animation: fx-ch-spark-flamingo-4786-rise 1.1s cubic-bezier(0.16, 1, 0.3, 1) both;\n}\n@keyframes fx-ch-spark-flamingo-4786-rise {\n  from { transform: translateY(30%); opacity: 0; }\n}",
+    "css": ".fx-ch-spark-flamingo-4786 {\n  width: 200px;\n  height: 64px;\n  padding: 0.5rem;\n  border-radius: 0.6rem;\n  background: #0f172a;\n  border: 1px solid rgba(255,255,255,0.07);\n  overflow: hidden;\n}\n.fx-ch-spark-flamingo-4786 .area {\n  width: 100%;\n  height: 100%;\n  /* Opaque at the top edge so the trend line itself reads clearly, then\n     falling away to almost nothing at the baseline. */\n  background: linear-gradient(180deg, #ec4899 0 3%, rgba(236,72,153, 0.45) 25%, rgba(244,63,94, 0.06) 100%);\n  clip-path: polygon(\n    0 78%, 12% 62%, 24% 70%, 36% 40%, 48% 52%,\n    60% 26%, 72% 38%, 84% 14%, 100% 30%,\n    100% 100%, 0 100%\n  );\n  animation: fx-ch-spark-flamingo-4786-rise 1.1s cubic-bezier(0.16, 1, 0.3, 1) both;\n}\n@keyframes fx-ch-spark-flamingo-4786-rise {\n  from { transform: translateY(30%); opacity: 0; }\n}",
     "tags": [
       "chart",
       "sparkline",
@@ -39375,7 +39375,7 @@
     "category": "Charts & Data",
     "description": "Compact mint area sparkline shaped entirely by a clip-path polygon.",
     "html": "<div class=\"fx-ch-spark-mint-4788\"><div class=\"area\"></div></div>",
-    "css": ".fx-ch-spark-mint-4788 {\n  width: 200px;\n  height: 64px;\n  padding: 0.5rem;\n  border-radius: 0.6rem;\n  background: #0f172a;\n  border: 1px solid rgba(255,255,255,0.07);\n  overflow: hidden;\n}\n.fx-ch-spark-mint-4788 .area {\n  width: 100%;\n  height: 100%;\n  background: linear-gradient(180deg, rgba(20,184,166, 0.55), rgba(6,182,212, 0.05));\n  clip-path: polygon(\n    0 78%, 12% 62%, 24% 70%, 36% 40%, 48% 52%,\n    60% 26%, 72% 38%, 84% 14%, 100% 30%,\n    100% 100%, 0 100%\n  );\n  animation: fx-ch-spark-mint-4788-rise 1.1s cubic-bezier(0.16, 1, 0.3, 1) both;\n}\n@keyframes fx-ch-spark-mint-4788-rise {\n  from { transform: translateY(30%); opacity: 0; }\n}",
+    "css": ".fx-ch-spark-mint-4788 {\n  width: 200px;\n  height: 64px;\n  padding: 0.5rem;\n  border-radius: 0.6rem;\n  background: #0f172a;\n  border: 1px solid rgba(255,255,255,0.07);\n  overflow: hidden;\n}\n.fx-ch-spark-mint-4788 .area {\n  width: 100%;\n  height: 100%;\n  /* Opaque at the top edge so the trend line itself reads clearly, then\n     falling away to almost nothing at the baseline. */\n  background: linear-gradient(180deg, #14b8a6 0 3%, rgba(20,184,166, 0.45) 25%, rgba(6,182,212, 0.06) 100%);\n  clip-path: polygon(\n    0 78%, 12% 62%, 24% 70%, 36% 40%, 48% 52%,\n    60% 26%, 72% 38%, 84% 14%, 100% 30%,\n    100% 100%, 0 100%\n  );\n  animation: fx-ch-spark-mint-4788-rise 1.1s cubic-bezier(0.16, 1, 0.3, 1) both;\n}\n@keyframes fx-ch-spark-mint-4788-rise {\n  from { transform: translateY(30%); opacity: 0; }\n}",
     "tags": [
       "chart",
       "sparkline",
@@ -39393,7 +39393,7 @@
     "category": "Charts & Data",
     "description": "Compact twilight area sparkline shaped entirely by a clip-path polygon.",
     "html": "<div class=\"fx-ch-spark-twilight-4790\"><div class=\"area\"></div></div>",
-    "css": ".fx-ch-spark-twilight-4790 {\n  width: 200px;\n  height: 64px;\n  padding: 0.5rem;\n  border-radius: 0.6rem;\n  background: #0f172a;\n  border: 1px solid rgba(255,255,255,0.07);\n  overflow: hidden;\n}\n.fx-ch-spark-twilight-4790 .area {\n  width: 100%;\n  height: 100%;\n  background: linear-gradient(180deg, rgba(99,102,241, 0.55), rgba(168,85,247, 0.05));\n  clip-path: polygon(\n    0 78%, 12% 62%, 24% 70%, 36% 40%, 48% 52%,\n    60% 26%, 72% 38%, 84% 14%, 100% 30%,\n    100% 100%, 0 100%\n  );\n  animation: fx-ch-spark-twilight-4790-rise 1.1s cubic-bezier(0.16, 1, 0.3, 1) both;\n}\n@keyframes fx-ch-spark-twilight-4790-rise {\n  from { transform: translateY(30%); opacity: 0; }\n}",
+    "css": ".fx-ch-spark-twilight-4790 {\n  width: 200px;\n  height: 64px;\n  padding: 0.5rem;\n  border-radius: 0.6rem;\n  background: #0f172a;\n  border: 1px solid rgba(255,255,255,0.07);\n  overflow: hidden;\n}\n.fx-ch-spark-twilight-4790 .area {\n  width: 100%;\n  height: 100%;\n  /* Opaque at the top edge so the trend line itself reads clearly, then\n     falling away to almost nothing at the baseline. */\n  background: linear-gradient(180deg, #6366f1 0 3%, rgba(99,102,241, 0.45) 25%, rgba(168,85,247, 0.06) 100%);\n  clip-path: polygon(\n    0 78%, 12% 62%, 24% 70%, 36% 40%, 48% 52%,\n    60% 26%, 72% 38%, 84% 14%, 100% 30%,\n    100% 100%, 0 100%\n  );\n  animation: fx-ch-spark-twilight-4790-rise 1.1s cubic-bezier(0.16, 1, 0.3, 1) both;\n}\n@keyframes fx-ch-spark-twilight-4790-rise {\n  from { transform: translateY(30%); opacity: 0; }\n}",
     "tags": [
       "chart",
       "sparkline",
@@ -39411,7 +39411,7 @@
     "category": "Charts & Data",
     "description": "Compact coral area sparkline shaped entirely by a clip-path polygon.",
     "html": "<div class=\"fx-ch-spark-coral-4792\"><div class=\"area\"></div></div>",
-    "css": ".fx-ch-spark-coral-4792 {\n  width: 200px;\n  height: 64px;\n  padding: 0.5rem;\n  border-radius: 0.6rem;\n  background: #0f172a;\n  border: 1px solid rgba(255,255,255,0.07);\n  overflow: hidden;\n}\n.fx-ch-spark-coral-4792 .area {\n  width: 100%;\n  height: 100%;\n  background: linear-gradient(180deg, rgba(249,115,22, 0.55), rgba(236,72,153, 0.05));\n  clip-path: polygon(\n    0 78%, 12% 62%, 24% 70%, 36% 40%, 48% 52%,\n    60% 26%, 72% 38%, 84% 14%, 100% 30%,\n    100% 100%, 0 100%\n  );\n  animation: fx-ch-spark-coral-4792-rise 1.1s cubic-bezier(0.16, 1, 0.3, 1) both;\n}\n@keyframes fx-ch-spark-coral-4792-rise {\n  from { transform: translateY(30%); opacity: 0; }\n}",
+    "css": ".fx-ch-spark-coral-4792 {\n  width: 200px;\n  height: 64px;\n  padding: 0.5rem;\n  border-radius: 0.6rem;\n  background: #0f172a;\n  border: 1px solid rgba(255,255,255,0.07);\n  overflow: hidden;\n}\n.fx-ch-spark-coral-4792 .area {\n  width: 100%;\n  height: 100%;\n  /* Opaque at the top edge so the trend line itself reads clearly, then\n     falling away to almost nothing at the baseline. */\n  background: linear-gradient(180deg, #f97316 0 3%, rgba(249,115,22, 0.45) 25%, rgba(236,72,153, 0.06) 100%);\n  clip-path: polygon(\n    0 78%, 12% 62%, 24% 70%, 36% 40%, 48% 52%,\n    60% 26%, 72% 38%, 84% 14%, 100% 30%,\n    100% 100%, 0 100%\n  );\n  animation: fx-ch-spark-coral-4792-rise 1.1s cubic-bezier(0.16, 1, 0.3, 1) both;\n}\n@keyframes fx-ch-spark-coral-4792-rise {\n  from { transform: translateY(30%); opacity: 0; }\n}",
     "tags": [
       "chart",
       "sparkline",
@@ -39429,7 +39429,7 @@
     "category": "Charts & Data",
     "description": "Compact lagoon area sparkline shaped entirely by a clip-path polygon.",
     "html": "<div class=\"fx-ch-spark-lagoon-4794\"><div class=\"area\"></div></div>",
-    "css": ".fx-ch-spark-lagoon-4794 {\n  width: 200px;\n  height: 64px;\n  padding: 0.5rem;\n  border-radius: 0.6rem;\n  background: #0f172a;\n  border: 1px solid rgba(255,255,255,0.07);\n  overflow: hidden;\n}\n.fx-ch-spark-lagoon-4794 .area {\n  width: 100%;\n  height: 100%;\n  background: linear-gradient(180deg, rgba(6,182,212, 0.55), rgba(20,184,166, 0.05));\n  clip-path: polygon(\n    0 78%, 12% 62%, 24% 70%, 36% 40%, 48% 52%,\n    60% 26%, 72% 38%, 84% 14%, 100% 30%,\n    100% 100%, 0 100%\n  );\n  animation: fx-ch-spark-lagoon-4794-rise 1.1s cubic-bezier(0.16, 1, 0.3, 1) both;\n}\n@keyframes fx-ch-spark-lagoon-4794-rise {\n  from { transform: translateY(30%); opacity: 0; }\n}",
+    "css": ".fx-ch-spark-lagoon-4794 {\n  width: 200px;\n  height: 64px;\n  padding: 0.5rem;\n  border-radius: 0.6rem;\n  background: #0f172a;\n  border: 1px solid rgba(255,255,255,0.07);\n  overflow: hidden;\n}\n.fx-ch-spark-lagoon-4794 .area {\n  width: 100%;\n  height: 100%;\n  /* Opaque at the top edge so the trend line itself reads clearly, then\n     falling away to almost nothing at the baseline. */\n  background: linear-gradient(180deg, #06b6d4 0 3%, rgba(6,182,212, 0.45) 25%, rgba(20,184,166, 0.06) 100%);\n  clip-path: polygon(\n    0 78%, 12% 62%, 24% 70%, 36% 40%, 48% 52%,\n    60% 26%, 72% 38%, 84% 14%, 100% 30%,\n    100% 100%, 0 100%\n  );\n  animation: fx-ch-spark-lagoon-4794-rise 1.1s cubic-bezier(0.16, 1, 0.3, 1) both;\n}\n@keyframes fx-ch-spark-lagoon-4794-rise {\n  from { transform: translateY(30%); opacity: 0; }\n}",
     "tags": [
       "chart",
       "sparkline",
@@ -39447,7 +39447,7 @@
     "category": "Charts & Data",
     "description": "Compact fire area sparkline shaped entirely by a clip-path polygon.",
     "html": "<div class=\"fx-ch-spark-fire-4796\"><div class=\"area\"></div></div>",
-    "css": ".fx-ch-spark-fire-4796 {\n  width: 200px;\n  height: 64px;\n  padding: 0.5rem;\n  border-radius: 0.6rem;\n  background: #0f172a;\n  border: 1px solid rgba(255,255,255,0.07);\n  overflow: hidden;\n}\n.fx-ch-spark-fire-4796 .area {\n  width: 100%;\n  height: 100%;\n  background: linear-gradient(180deg, rgba(239,68,68, 0.55), rgba(245,158,11, 0.05));\n  clip-path: polygon(\n    0 78%, 12% 62%, 24% 70%, 36% 40%, 48% 52%,\n    60% 26%, 72% 38%, 84% 14%, 100% 30%,\n    100% 100%, 0 100%\n  );\n  animation: fx-ch-spark-fire-4796-rise 1.1s cubic-bezier(0.16, 1, 0.3, 1) both;\n}\n@keyframes fx-ch-spark-fire-4796-rise {\n  from { transform: translateY(30%); opacity: 0; }\n}",
+    "css": ".fx-ch-spark-fire-4796 {\n  width: 200px;\n  height: 64px;\n  padding: 0.5rem;\n  border-radius: 0.6rem;\n  background: #0f172a;\n  border: 1px solid rgba(255,255,255,0.07);\n  overflow: hidden;\n}\n.fx-ch-spark-fire-4796 .area {\n  width: 100%;\n  height: 100%;\n  /* Opaque at the top edge so the trend line itself reads clearly, then\n     falling away to almost nothing at the baseline. */\n  background: linear-gradient(180deg, #ef4444 0 3%, rgba(239,68,68, 0.45) 25%, rgba(245,158,11, 0.06) 100%);\n  clip-path: polygon(\n    0 78%, 12% 62%, 24% 70%, 36% 40%, 48% 52%,\n    60% 26%, 72% 38%, 84% 14%, 100% 30%,\n    100% 100%, 0 100%\n  );\n  animation: fx-ch-spark-fire-4796-rise 1.1s cubic-bezier(0.16, 1, 0.3, 1) both;\n}\n@keyframes fx-ch-spark-fire-4796-rise {\n  from { transform: translateY(30%); opacity: 0; }\n}",
     "tags": [
       "chart",
       "sparkline",
@@ -39465,7 +39465,7 @@
     "category": "Charts & Data",
     "description": "Compact galaxy area sparkline shaped entirely by a clip-path polygon.",
     "html": "<div class=\"fx-ch-spark-galaxy-4798\"><div class=\"area\"></div></div>",
-    "css": ".fx-ch-spark-galaxy-4798 {\n  width: 200px;\n  height: 64px;\n  padding: 0.5rem;\n  border-radius: 0.6rem;\n  background: #0f172a;\n  border: 1px solid rgba(255,255,255,0.07);\n  overflow: hidden;\n}\n.fx-ch-spark-galaxy-4798 .area {\n  width: 100%;\n  height: 100%;\n  background: linear-gradient(180deg, rgba(139,92,246, 0.55), rgba(236,72,153, 0.05));\n  clip-path: polygon(\n    0 78%, 12% 62%, 24% 70%, 36% 40%, 48% 52%,\n    60% 26%, 72% 38%, 84% 14%, 100% 30%,\n    100% 100%, 0 100%\n  );\n  animation: fx-ch-spark-galaxy-4798-rise 1.1s cubic-bezier(0.16, 1, 0.3, 1) both;\n}\n@keyframes fx-ch-spark-galaxy-4798-rise {\n  from { transform: translateY(30%); opacity: 0; }\n}",
+    "css": ".fx-ch-spark-galaxy-4798 {\n  width: 200px;\n  height: 64px;\n  padding: 0.5rem;\n  border-radius: 0.6rem;\n  background: #0f172a;\n  border: 1px solid rgba(255,255,255,0.07);\n  overflow: hidden;\n}\n.fx-ch-spark-galaxy-4798 .area {\n  width: 100%;\n  height: 100%;\n  /* Opaque at the top edge so the trend line itself reads clearly, then\n     falling away to almost nothing at the baseline. */\n  background: linear-gradient(180deg, #8b5cf6 0 3%, rgba(139,92,246, 0.45) 25%, rgba(236,72,153, 0.06) 100%);\n  clip-path: polygon(\n    0 78%, 12% 62%, 24% 70%, 36% 40%, 48% 52%,\n    60% 26%, 72% 38%, 84% 14%, 100% 30%,\n    100% 100%, 0 100%\n  );\n  animation: fx-ch-spark-galaxy-4798-rise 1.1s cubic-bezier(0.16, 1, 0.3, 1) both;\n}\n@keyframes fx-ch-spark-galaxy-4798-rise {\n  from { transform: translateY(30%); opacity: 0; }\n}",
     "tags": [
       "chart",
       "sparkline",

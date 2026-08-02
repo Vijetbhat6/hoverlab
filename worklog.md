@@ -608,3 +608,77 @@ Verification:
 
 Stage Summary:
 - Compare is now available on all 3 authenticated pages: /library, /effect/[slug], /playground. The `v` shortcut works everywhere. The command palette's "Open compare" action works everywhere.
+
+---
+Task ID: 19
+Agent: main
+Task: Add more effect categories, and the best features the catalog was still missing.
+
+Work Log — new categories (13 → 25, 1,616 → 2,440 generated effects; 2,504 total):
+- Split the second wave of generators into `scripts/generate-effects-extra.mjs` and
+  `scripts/generate-effects-extra2.mjs`. `generate-effects.mjs` (already 1,800 lines) now
+  passes its design tokens and `cls` / `mk` / `add` helpers into both, so all three share
+  one id sequence and one palette set.
+- Twelve new categories, generated as template × palette/gradient/trio the same way the
+  original thirteen were:
+    Borders & Outlines    82  conic rotating border, marching ants, corner brackets, outline-offset glow
+    Progress & Meters     83  striped bar, indeterminate sweep, conic ring, segmented meter, labelled meter
+    Avatars & Images      78  glow ring, spinning conic ring, zoom+caption tile, desaturate reveal, avatar stack
+    Modals & Overlays     61  blur backdrop dialog, bottom sheet, spring dialog, tour spotlight
+    Alerts & Toasts       58  accent alert, gradient toast, countdown toast, live status pill
+    Accordions & Tabs     58  underline tabs, pill tabs, sliding segments, <details> accordion (no JS)
+    3D & Perspective      95  extruded push button, tilt card, flip card, rotating cube, layered depth text
+    Glow & Neon           75  neon text, neon tube box, glow orb, flickering sign
+    Patterns & Textures   66  dot grid, diagonal stripes, checkerboard, graph paper, topographic contours
+    Masks & Clip Paths    61  clip wipe reveal, edge-fade marquee, hexagon tile, morphing blob
+    Charts & Data         66  bar chart, conic donut, sparkline area, KPI stat tile, heat grid
+    Timelines & Steps     41  vertical timeline, checkout stepper, deploy steps
+- `effect-types.ts`: extended the `EffectCategory` union and `CATEGORIES`, and added
+  `categorySlug()` / `categoryFromSlug()` so a new category needs no other edit to get a URL.
+
+Work Log — features:
+1. Category hub pages — `/category` + `/category/[slug]` (25 static pages).
+   The head terms ("css loaders", "css neon text") previously pointed at
+   `/library?filter=Buttons`: a client-rendered grid behind a query string, which a crawler
+   sees as an empty shell. The hubs are static HTML with real server-rendered previews,
+   editorial copy (`src/lib/category-meta.ts`), CollectionPage/ItemList JSON-LD, and dense
+   internal links. `sitemap.ts` now points at these instead of the query-string URLs.
+   Previews are round-robined by generator template (`interleaveByTemplate`) so a hub opens
+   on variety rather than forty recolors of one button.
+2. Open in CodePen / JSFiddle / download .html (`src/lib/sandbox.ts`,
+   `src/components/open-in-sandbox.tsx`). Both sandboxes take their payload as a POSTed form
+   field, so each button submits a real hidden <form> from inside the click handler. Fed the
+   *customized* CSS, so a pen opened after tweaking the hue carries the tweak.
+3. Embeddable previews — `GET /embed/<id>` returns a complete standalone document
+   (route handler, not a page, so it skips the React shell entirely — ~3 KB), with
+   `frame-ancestors *` and a quiet attribution link. "Embed" button copies the iframe
+   snippet. Disallowed in robots.txt so it can't compete with the effect page.
+4. Compatibility + accessibility insights (`src/lib/effect-insights.ts`, new "Insights" tab).
+   Regex analysis of the CSS reports which platform features are in play and how widely
+   they're supported, CSS size/rule/keyframe counts, and accessibility notes — including a
+   generated, effect-scoped `@media (prefers-reduced-motion: reduce)` block that's copyable
+   in one click, so the warning is actionable instead of just a scolding.
+5. Library chip row collapses to 8 categories + "N more" (25 chips otherwise pushed four
+   rows between the search bar and the first effect). The active category is always shown
+   even when it falls outside the window, so `?filter=` deep links still highlight correctly.
+
+Verification:
+- `node scripts/generate-effects.mjs` → 2,440 generated effects, 25 categories, breakdown above.
+- `npx tsc --noEmit` → 0 errors under `src/`. `npx eslint src scripts` → clean.
+- `npx next build` → ✓ compiled, 2,559 static pages including all 25 `/category/[slug]` hubs
+  and 2,504 `/effect/[slug]` pages.
+- `node scripts/shot-new-categories.mjs` → all 13 new routes 200, **no page errors**.
+  First run surfaced a hydration mismatch on every hub: the cards wrapped effect markup in
+  an `<a>`, and effect markup routinely contains buttons, `<details>` and its own anchors —
+  invalid nesting the parser restructures. Fixed by making the card a `<div>` with a
+  stretched link on the title, and hoisting the per-card `<style>` tags into one page-level tag.
+- `node scripts/shot-detail-insights.mjs` → Code tab (sandbox row) and Insights tab render,
+  no page errors. Reduced-motion guard correctly scopes to the effect's own root class.
+- `/embed/<id>` verified by curl: correct document, `content-security-policy: frame-ancestors *`,
+  404 for unknown ids.
+
+Stage Summary:
+- Catalog: 2,504 effects across 25 categories, up from 1,680 across 13.
+- The catalog now has an indexable surface per category, an escape hatch to an editable
+  sandbox, a way to appear on other people's sites, and an answer to the two questions a
+  preview can't answer (browser support, motion safety).

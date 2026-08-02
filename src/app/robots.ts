@@ -12,6 +12,11 @@ import { absoluteUrl } from '@/lib/site'
  *
  * Auth and API routes are disallowed: they're either user-specific or
  * JSON, so indexing them wastes crawl budget on pages that can't rank.
+ *
+ * /embed is disallowed too. Those documents contain the same markup and
+ * CSS as the effect pages with none of the surrounding copy, so indexing
+ * them would compete with the page that should actually rank. They're
+ * meant to be loaded inside someone else's <iframe>, not found in search.
  */
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -19,7 +24,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/api/', '/account', '/login', '/signup'],
+        disallow: ['/api/', '/account', '/login', '/signup', '/embed/'],
       },
     ],
     sitemap: absoluteUrl('/sitemap.xml'),

@@ -75,11 +75,15 @@ export default async function CategoryPage({ params }: PageProps) {
   const all = EFFECTS.filter((e) => e.category === category)
   if (all.length === 0) notFound()
 
-  // Featured (hand-crafted) effects lead — they're the best-looking ones,
-  // and they're also the ones bundled on the client, so they're the most
-  // useful first click.
-  const ordered = [...all].sort((a, b) => Number(b.featured) - Number(a.featured))
-  const shown = ordered.slice(0, PREVIEW_LIMIT)
+  // Featured (hand-crafted) effects lead — they're the best-looking ones
+  // and the ones bundled on the client, so they're the most useful first
+  // click. The generated remainder is round-robined by template so the
+  // page opens on variety instead of forty recolors of one button.
+  const featured = all.filter((e) => e.featured)
+  const shown = [...featured, ...interleaveByTemplate(all.filter((e) => !e.featured))].slice(
+    0,
+    PREVIEW_LIMIT,
+  )
 
   const others = CATEGORIES.filter((c) => c !== category)
 
@@ -149,6 +153,11 @@ export default async function CategoryPage({ params }: PageProps) {
       </section>
 
       <main className="mx-auto w-full max-w-7xl px-4 pb-16 sm:px-6 lg:px-8">
+        {/* Every preview's CSS in one document-level tag. Class names are
+            globally unique per effect (`fx-<slug>-<seq>`), so concatenating
+            them can't collide. */}
+        <style dangerouslySetInnerHTML={{ __html: shown.map((e) => e.css).join('\n') }} />
+
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {shown.map((effect) => (
             <StaticPreviewCard key={effect.id} effect={effect} />
@@ -195,28 +204,75 @@ export default async function CategoryPage({ params }: PageProps) {
 }
 
 /**
- * Server-rendered preview: the effect's own markup plus a <style> tag with
- * its CSS. Class names are globally unique per effect (`fx-<slug>-<seq>`),
- * so dumping every card's CSS into one document can't collide.
+ * Which generator template produced an effect, inferred from its class name.
+ *
+ * Generated classes are `fx-<template>-<variant>-<seq>` — `fx-ch-bars-rose-0001`,
+ * `fx-td-flip-ocean-0042` — so the first two segments identify the template
+ * while the rest is the color/size variant. Effects with no recognizable
+ * class (hand-written ones) each become their own group, which is correct:
+ * they aren't variants of anything.
+ */
+function templateKey(effect: Effect): string {
+  const m = /\.fx-([a-z0-9]+-[a-z0-9]+)/.exec(effect.css)
+  return m ? m[1] : effect.id
+}
+
+/**
+ * Round-robin the list across its templates: one of each, then the second
+ * of each, and so on. A category is generated as template × palette, so
+ * source order groups all 17 colors of one template together — the top of
+ * a hub page would otherwise be a single design repeated in every hue.
+ */
+function interleaveByTemplate(effects: Effect[]): Effect[] {
+  const groups = new Map<string, Effect[]>()
+  for (const e of effects) {
+    const key = templateKey(e)
+    const bucket = groups.get(key)
+    if (bucket) bucket.push(e)
+    else groups.set(key, [e])
+  }
+
+  const buckets = [...groups.values()]
+  const out: Effect[] = []
+  for (let round = 0; out.length < effects.length; round++) {
+    for (const bucket of buckets) {
+      if (round < bucket.length) out.push(bucket[round])
+    }
+  }
+  return out
+}
+
+/**
+ * Server-rendered preview card.
+ *
+ * The card is a plain <div> and the link is a stretched anchor over the
+ * title, rather than an <a> wrapping the whole thing. Effect markup
+ * routinely contains buttons, <details>, and its own anchors — nesting
+ * those inside an <a> is invalid, and the parser restructures the DOM to
+ * fix it, which shows up as a hydration mismatch on every card.
  */
 function StaticPreviewCard({ effect }: { effect: Effect }) {
   return (
-    <Link
-      href={`/effect/${effect.id}`}
-      className="group flex flex-col overflow-hidden rounded-xl border border-border/60 bg-card/60 transition-all hover:border-primary/40 hover:shadow-lg"
-    >
-      <style dangerouslySetInnerHTML={{ __html: effect.css }} />
+    <div className="group relative flex flex-col overflow-hidden rounded-xl border border-border/60 bg-card/60 transition-all hover:border-primary/40 hover:shadow-lg">
       <div
         className={cn(
           'flex min-h-[180px] items-center justify-center overflow-hidden p-6',
           effect.darkSurface ? 'bg-slate-950' : effect.previewClass ?? 'bg-muted/30',
         )}
+        // The preview is decoration; the stretched link below is the real
+        // control, so nothing in here should take focus or be announced.
+        aria-hidden="true"
         dangerouslySetInnerHTML={{ __html: effect.html }}
       />
       <div className="border-t border-border/60 p-3">
         <div className="flex items-center gap-2">
           <h2 className="truncate text-sm font-semibold group-hover:text-primary">
-            {effect.name}
+            <Link
+              href={`/effect/${effect.id}`}
+              className="after:absolute after:inset-0 after:content-['']"
+            >
+              {effect.name}
+            </Link>
           </h2>
           {effect.featured ? (
             <Badge variant="secondary" className="shrink-0 text-[10px]">
@@ -226,6 +282,6 @@ function StaticPreviewCard({ effect }: { effect: Effect }) {
         </div>
         <p className="mt-1 line-clamp-2 text-xs text-muted-foreground">{effect.description}</p>
       </div>
-    </Link>
+    </div>
   )
 }

@@ -63,24 +63,35 @@ export default function CategoryIndexPage() {
       </section>
 
       <main className="mx-auto w-full max-w-7xl px-4 pb-16 sm:px-6 lg:px-8">
+        {/* All hero CSS in one tag — see the note on the [slug] page: the
+            per-effect class names are globally unique, and keeping the
+            <style> outside the cards avoids nesting it inside a link. */}
+        <style dangerouslySetInnerHTML={{ __html: rows.map((r) => r.hero.css).join('\n') }} />
+
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {rows.map(({ category, count, hero }) => (
-            <Link
+            <div
               key={category}
-              href={`/category/${categorySlug(category)}`}
-              className="group flex flex-col overflow-hidden rounded-xl border border-border/60 bg-card/60 transition-all hover:border-primary/40 hover:shadow-lg"
+              className="group relative flex flex-col overflow-hidden rounded-xl border border-border/60 bg-card/60 transition-all hover:border-primary/40 hover:shadow-lg"
             >
-              <style dangerouslySetInnerHTML={{ __html: hero.css }} />
               <div
                 className={cn(
                   'flex min-h-[160px] items-center justify-center overflow-hidden p-6',
                   hero.darkSurface ? 'bg-slate-950' : hero.previewClass ?? 'bg-muted/30',
                 )}
+                aria-hidden="true"
                 dangerouslySetInnerHTML={{ __html: hero.html }}
               />
               <div className="flex flex-1 flex-col border-t border-border/60 p-4">
                 <div className="flex items-center justify-between gap-2">
-                  <h2 className="text-sm font-semibold group-hover:text-primary">{category}</h2>
+                  <h2 className="text-sm font-semibold group-hover:text-primary">
+                    <Link
+                      href={`/category/${categorySlug(category)}`}
+                      className="after:absolute after:inset-0 after:content-['']"
+                    >
+                      {category}
+                    </Link>
+                  </h2>
                   <span className="shrink-0 text-xs tabular-nums text-muted-foreground">
                     {count}
                   </span>
@@ -92,7 +103,7 @@ export default function CategoryIndexPage() {
                   Browse {category} <ArrowRight className="h-3 w-3" />
                 </span>
               </div>
-            </Link>
+            </div>
           ))}
         </div>
       </main>

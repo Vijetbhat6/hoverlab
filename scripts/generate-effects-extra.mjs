@@ -990,7 +990,7 @@ export function generateExtra(ctx) {
     add(mk({
       name: `${g.name} Pill Tabs`,
       category: 'Accordions & Tabs',
-      description: `Compact pill tab group; the active tab carries a ${g.name.toLowerCase()} gradient and a matching shadow.`,
+      description: `Compact pill tab group; the active tab carries the ${g.name.toLowerCase()} gradient and a matching shadow.`,
       html, css,
       tags: ['tabs', 'pill', 'segmented', g.name.toLowerCase()],
     }))
