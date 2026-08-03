@@ -21,6 +21,7 @@
 
 import GENERATED_RAW from "./generated-effects.json";
 import { HANDCRAFTED } from "./effects-handcrafted";
+import { withMotionGuard } from "./effect-insights";
 import type { Effect } from "./effect-types";
 
 export type { Effect, EffectCategory } from "./effect-types";
@@ -29,6 +30,7 @@ export { CATEGORIES } from "./effect-types";
 /* Mark all hand-crafted effects as featured (curated picks). */
 const FEATURED_HANDCRAFTED: Effect[] = HANDCRAFTED.map((e) => ({
   ...e,
+  css: withMotionGuard(e.css),
   featured: true,
 }));
 
@@ -37,7 +39,17 @@ const FEATURED_HANDCRAFTED: Effect[] = HANDCRAFTED.map((e) => ({
  *  scripts/generate-effects.mjs). Re-run that script to
  *  regenerate the catalog.
  * ========================================================== */
-const GENERATED: Effect[] = GENERATED_RAW as Effect[];
+/**
+ * A third of the catalog animates forever, and none of the generated CSS
+ * carries a motion opt-out. Rather than bake one into the JSON — which
+ * would miss the hand-written effects and be lost on the next regenerate —
+ * the guard is applied here, once, as the catalog is assembled. See
+ * `withMotionGuard`.
+ */
+const GENERATED: Effect[] = (GENERATED_RAW as Effect[]).map((e) => ({
+  ...e,
+  css: withMotionGuard(e.css),
+}));
 
 /**
  * Full catalog: hand-crafted (featured) + generated.

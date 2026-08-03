@@ -758,3 +758,107 @@ Verification:
 Stage Summary:
 - 3,413 effects across 25 categories. The catalog previously covered the classic
   vocabulary well and the current product-UI vocabulary barely at all; that gap is closed.
+
+---
+Task ID: 21
+Agent: main
+Task: Ship prefers-reduced-motion guards across the catalog.
+
+Why: audit found 1,141 of 3,413 effects (33%) animate forever, and not one carried a
+motion opt-out — so the Insights tab was flagging a third of the catalog with a warning
+the catalog could simply fix. No competing CSS library ships this.
+
+Work Log:
+- `withMotionGuard(css)` in `src/lib/effect-insights.ts`, applied where the catalog is
+  assembled — `effects.ts` (server: API, CLI, ZIP, category pages, detail pages, embed)
+  and `effect-index.ts` (the 64 bundled hand-crafted effects on the client).
+  Derived at assembly rather than baked into generated-effects.json deliberately: it
+  covers the hand-written effects too, and regenerating the catalog can't drop it.
+- Guarded ONLY effects that loop forever. A 200ms hover transition is not a vestibular
+  hazard and stripping those would make a third of the catalog feel broken for the people
+  opting in. Effects that merely animate on interaction are still *offered* a guard in the
+  Insights tab — they just don't get one imposed.
+- The guard collapses durations rather than setting `animation: none`. Not cosmetic: many
+  effects declare their resting state only in the keyframes — the labelled meter's fill runs
+  `width: 0 → 62%` with no width in the rule at all, so `animation: none` drops the fill
+  along with the motion and it reads 100%. Running once in 1ms lands on the final keyframe.
+
+Verification — `npm run test:motion` (`scripts/test-motion-guard.mts`, new):
+  Renders each effect from the REAL catalog (imports EFFECTS, not the raw JSON, so it
+  exercises exactly what ships) under both motion preferences and compares rendered frames
+  ~900ms apart. no-preference must differ; reduce must match.
+  This caught two defects that a "does the CSS contain @media" assertion would have passed:
+    1. The guard collapsed duration but left `animation-delay` alone. This catalog staggers
+       heavily (equalizer bars, list entrances, timeline nodes, segmented meters), so a
+       reduced-motion user still watched half a second of elements popping in one by one.
+       Fixed by zeroing animation-delay / transition-delay.
+    2. The selector list was `.root, .root *, .root::before, .root::after` — which does NOT
+       match `.root .child::after`, and ping/ripple effects animate precisely there. The
+       Live Status Pill and Presence Avatar shipped a guard that did nothing. Fixed by
+       adding the `.root *::before, .root *::after` arms.
+  Final: 21 passed · 2 inconclusive (loops that look identical at both sample points) · 0 failed.
+- 1,141 of 3,413 guarded; 0 motion warnings remain across the catalog.
+- Server-side CSS 2,880 → 2,953 KB raw (+2.5%, 186 KB gzip — the block is identical
+  across effects so it compresses away). Client payload unchanged: the index carries no CSS.
+- `npx tsc --noEmit` → 0 errors under src/. `npx eslint src scripts` → clean.
+- `npx next build` → ✓ compiled, 3,469 static pages.
+- Insights tab verified on a looping effect: now reports "Honors prefers-reduced-motion"
+  and correctly drops the copy-a-guard prompt.
+- Added `tsx` to devDependencies + `npm run test:motion`, so the test is reproducible
+  rather than an ad-hoc npx invocation.
+
+Stage Summary:
+- A third of the catalog went from "warns about an accessibility problem" to "ships the fix".
+- First real test in the repo. It compares pixels rather than strings, which is why it found
+  two bugs in the guard that looked correct on inspection.
+
+---
+Task ID: 22
+Agent: main
+Task: Stop sampling. Verify the reduced-motion guard exhaustively.
+
+Why: the two bugs found in task 21 were both caught because the offending template
+happened to be in a hand-written list of ~20 families out of ~100. That is luck, not
+coverage — if `al-pulse` hadn't been on the list, the pseudo-element miss would have shipped.
+
+Work Log:
+- `scripts/audit-motion-guard.mts` (new, `npm run audit:motion`) — exhaustive STATIC pass
+  over all 1,141 guarded effects. No browser, so it can afford to check everything. For each
+  rule that declares animation/transition it asks:
+    · is the rule's subject reachable by one of the guard's selector arms?
+    · does the selector use a pseudo-element outside ::before/::after
+      (::placeholder, ::marker, ::-webkit-*) that the arms can't reach?
+    · does the rule set a delay the guard doesn't zero?
+    · does the rule use !important, which would tie with the guard and leave
+      the outcome to source order?
+    · is every fx- class the effect defines present in the guard's selector list?
+
+- It immediately found a third defect, of a kind sampling could not have found:
+  "Animated Marching Dashes" (hand-written) defines FOUR fx- classes, and the animated
+  element carries a different class from the wrapper. `reducedMotionGuard` scoped to
+  `classes[0]`. That happened to work only because the wrapper is both listed first AND a
+  DOM ancestor — reverse either and the guard covers nothing while still reading correctly.
+  Fixed by scoping to every fx- class the effect defines instead of assuming the first is
+  the root. Generated effects have exactly one, so their output is byte-identical to before
+  (6 arms); only the one multi-root effect grows.
+
+- `scripts/test-motion-guard.mts` now DERIVES its sample from the catalog — one guarded
+  effect per template family — instead of a hardcoded list. Coverage went 23 -> 92 families,
+  and a template added later is covered without anyone remembering to add it.
+- Frame sampling went from 2 shots to 3 at uneven gaps (400/700/1100ms). Every previous
+  "inconclusive" was a periodic effect sampled at matching phase; uneven spacing now
+  requires the period to divide both gaps for a false match. Inconclusives 5 -> 3.
+
+Verification:
+- `npm run audit:motion` → 1,141 audited, no coverage gaps.
+- `npm run test:motion` → 89 passed · 3 inconclusive · 0 failed, across every looping
+  template family. Includes the multi-root effect, which now passes behaviorally.
+- `npx tsc --noEmit` → 0 errors under src/. `npx eslint src scripts` → clean.
+- `npx next build` → ✓ compiled, 3,469 static pages.
+
+Stage Summary:
+- Two complementary checks now: static coverage over all 1,141 guarded effects, behavioral
+  frame comparison over all 92 template shapes. The static pass is what found the bug the
+  behavioral one structurally could not.
+- Three defects total in this guard, none of which was visible by reading the CSS. Worth
+  remembering the next time a rule "obviously" does what it says.

@@ -9,9 +9,11 @@
     "check:deploy": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/check-deploy.mjs",
     "build": "next build",
     "build:index": "node scripts/build-effect-index.mjs",
+    "test:motion": "tsx scripts/test-motion-guard.mts",
     "start": "next start -p 3000",
     "lint": "eslint .",
-    "check:deps": "node scripts/check-runtime-deps.mjs"
+    "check:deps": "node scripts/check-runtime-deps.mjs",
+    "audit:motion": "tsx scripts/audit-motion-guard.mts"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",
@@ -92,6 +94,7 @@
     "eslint-config-next": "^16.1.1",
     "playwright": "^1.62.0",
     "tailwindcss": "^4",
+    "tsx": "^4.23.5",
     "tw-animate-css": "^1.3.5",
     "typescript": "^5"
   },

@@ -19,6 +19,7 @@
 
 import GENERATED_INDEX from './generated-effects-index.json'
 import { HANDCRAFTED } from './effects-handcrafted'
+import { withMotionGuard } from './effect-insights'
 import type { Effect, EffectCategory } from './effect-types'
 
 export type { Effect, EffectCategory } from './effect-types'
@@ -115,6 +116,10 @@ export function getEffectMeta(id: string): EffectMeta | undefined {
  */
 export const BUNDLED_EFFECTS: Effect[] = HANDCRAFTED.map((e) => ({
   ...e,
+  // Same motion guard the server-side catalog applies, so a bundled
+  // effect rendered straight from the client matches what /api/effects
+  // would have returned for it. See `withMotionGuard`.
+  css: withMotionGuard(e.css),
   featured: true,
 }))
 

@@ -227,7 +227,8 @@ export function analyzeEffect(css: string, html = ''): EffectInsights {
     accessibility.push({
       severity: 'info',
       title: 'Honors prefers-reduced-motion',
-      detail: 'The CSS already disables its motion for users who request reduced motion.',
+      detail:
+        'For users who ask for less motion, this effect settles straight into its final state instead of animating. The guard is scoped to its own classes, so pasting it changes nothing else on your page.',
     })
   }
 
@@ -302,6 +303,22 @@ export function selectorsIn(css: string): string[] {
  *
  * Returns null when there's nothing to guard — either the effect doesn't
  * animate, or it already ships its own guard.
+ *
+ * Collapses durations rather than setting `animation: none`. That looks
+ * like a detail and isn't: plenty of effects declare their *resting* state
+ * only in the keyframes — a meter whose fill runs `width: 0 → 62%` has no
+ * width in the rule at all. `animation: none` drops the fill along with
+ * the motion and the meter reads 100%. Running the animation once, in
+ * 1ms, lands on the final keyframe instead, so the element ends up exactly
+ * where the motion would have left it.
+ *
+ * Delays are zeroed for the same reason. This catalog staggers heavily —
+ * equalizer bars, list entrances, timeline nodes and segmented meters all
+ * offset each child by 100ms or so. Collapsing only the duration leaves
+ * those delays intact, so a reduced-motion user still watches half a
+ * second of elements popping in one by one. Caught by
+ * scripts/test-motion-guard.mts, which compares rendered frames rather
+ * than trusting the rule to be right.
  */
 export function reducedMotionGuard(css: string): string | null {
   const insights = analyzeEffect(css)
@@ -310,16 +327,68 @@ export function reducedMotionGuard(css: string): string | null {
   const classes = selectorsIn(css)
   if (classes.length === 0) return null
 
-  // The root class is enough: descendants are covered by the `, .root *`
-  // arm, and keeping the selector list short keeps the snippet readable.
-  const root = classes[0]
+  /*
+   * Scope to every `fx-` class the effect defines, not just the first.
+   *
+   * Generated effects have exactly one, so this emits the same six arms it
+   * always did. Hand-written ones don't: "Animated Marching Dashes" has
+   * four, and the animated element carries a different class from the
+   * wrapper. Scoping to `classes[0]` happened to work there only because
+   * the wrapper is listed first AND is a DOM ancestor — reverse either and
+   * the guard silently covers nothing. Enumerating them removes the
+   * assumption rather than restating it.
+   *
+   * The six arms per root matter too: `.root *` does NOT match
+   * `.root .child::after`, and ping/ripple effects animate precisely
+   * there. Missing those two arms shipped a guard that read correctly and
+   * did nothing for the status pill and the presence avatar.
+   */
+  const fxClasses = classes.filter((c) => c.startsWith('fx-'))
+  const roots = fxClasses.length > 0 ? fxClasses : [classes[0]]
+
+  const selectors = roots
+    .flatMap((root) => [
+      `.${root}`,
+      `.${root}::before`,
+      `.${root}::after`,
+      `.${root} *`,
+      `.${root} *::before`,
+      `.${root} *::after`,
+    ])
+    .map((s) => `  ${s}`)
+    .join(',\n')
+
   return `@media (prefers-reduced-motion: reduce) {
-  .${root},
-  .${root} *,
-  .${root}::before,
-  .${root}::after {
-    animation: none !important;
-    transition: none !important;
+${selectors} {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    animation-delay: 0ms !important;
+    transition-duration: 1ms !important;
+    transition-delay: 0ms !important;
   }
 }`
+}
+
+/**
+ * Append a reduced-motion guard to an effect's CSS when it needs one.
+ *
+ * Applied to the whole catalog as it's assembled, so every copy path —
+ * the clipboard, the ZIP, the public API, the CLI, the framework
+ * exporters, the embed route — ships the guard without any of them
+ * knowing about it. Deriving it here rather than baking it into the
+ * generated JSON also means it covers the hand-written effects, and that
+ * regenerating the catalog can't silently drop it.
+ *
+ * Only effects that animate *forever* are guarded. A 200ms hover
+ * transition is not a vestibular hazard, and stripping those would make a
+ * third of the catalog feel broken for the people opting in. Effects that
+ * merely animate on interaction are still offered a guard in the Insights
+ * tab; they just don't get one imposed.
+ */
+export function withMotionGuard(css: string): string {
+  const { hasInfiniteAnimation, respectsReducedMotion } = analyzeEffect(css)
+  if (!hasInfiniteAnimation || respectsReducedMotion) return css
+
+  const guard = reducedMotionGuard(css)
+  return guard ? `${css}\n\n${guard}` : css
 }
