@@ -45,9 +45,28 @@ export interface CheckOptions {
  * identifies the project and is useless without credentials — so reading the
  * public one is not a leak, and it means one variable instead of two.
  */
-function apiKeyPresent(env: Record<string, string | undefined>): boolean {
-  const has = (k: string) => typeof env[k] === 'string' && env[k]!.trim() !== ''
-  return has('FIREBASE_API_KEY') || has('NEXT_PUBLIC_FIREBASE_API_KEY')
+function apiKeyValue(env: Record<string, string | undefined>): string | null {
+  const raw = env.FIREBASE_API_KEY ?? env.NEXT_PUBLIC_FIREBASE_API_KEY
+  return raw && raw.trim() ? raw : null
+}
+
+/**
+ * Check the key's shape, not merely that something is set.
+ *
+ * Google's Web API keys are `AIza` followed by 35 URL-safe characters. The
+ * check that matters is the whitespace one: a key pasted or piped through a
+ * shell picks up a trailing newline with depressing ease, sails through a
+ * presence check, and is then rejected by Google as "API key not valid" —
+ * which surfaces as a failed sign-up and looks nothing like its cause.
+ */
+function apiKeyProblem(raw: string): string | null {
+  if (raw !== raw.trim()) {
+    return 'has leading or trailing whitespace — most likely a newline picked up while being set. Google will reject it.'
+  }
+  if (!/^AIza[0-9A-Za-z_-]{35}$/.test(raw)) {
+    return `does not look like a Firebase Web API key (expected AIza… of 39 characters, got ${raw.length}). Copy it from Project settings → General → Web API key.`
+  }
+  return null
 }
 
 /**
@@ -129,7 +148,8 @@ export function checkEnv(
   // --- Firebase Web API key -------------------------------------------------
   // The server signs people in through Firebase Auth's REST API; without the
   // key it cannot call it, and every sign-in and sign-up fails.
-  if (!apiKeyPresent(env)) {
+  const rawApiKey = apiKeyValue(env)
+  if (!rawApiKey) {
     checks.push({
       key: 'FIREBASE_API_KEY',
       status: 'missing',
@@ -140,12 +160,22 @@ export function checkEnv(
         'FIREBASE_API_KEY or NEXT_PUBLIC_FIREBASE_API_KEY is read).',
     })
   } else {
-    checks.push({
-      key: 'FIREBASE_API_KEY',
-      status: 'ok',
-      level: 'required',
-      message: 'Set.',
-    })
+    const problem = apiKeyProblem(rawApiKey)
+    checks.push(
+      problem
+        ? {
+            key: 'FIREBASE_API_KEY',
+            status: 'invalid',
+            level: 'required',
+            message: `The key ${problem}`,
+          }
+        : {
+            key: 'FIREBASE_API_KEY',
+            status: 'ok',
+            level: 'required',
+            message: 'Set.',
+          },
+    )
   }
 
   // --- Firebase Admin credentials ------------------------------------------

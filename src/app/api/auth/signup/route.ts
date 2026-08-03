@@ -61,12 +61,27 @@ async function handleSignup(req: Request) {
   let result
   try {
     result = await signUpWithPassword(email.trim(), password)
-    if (displayName) await setDisplayName(result.idToken, displayName)
   } catch (err) {
     if (err instanceof FirebaseAuthError) {
       return NextResponse.json({ error: err.message }, { status: err.status })
     }
     throw err
+  }
+
+  // Deliberately not fatal. The account exists from the line above, so
+  // failing here would report "sign up failed" for an account that was
+  // created — and the retry would then fail with "email already exists",
+  // leaving the person stuck with no way forward. A missing display name is
+  // worth far less than that.
+  if (displayName) {
+    try {
+      await setDisplayName(result.idToken, displayName)
+    } catch (err) {
+      console.error(
+        '[auth/signup] account created but display name could not be set:',
+        err instanceof Error ? err.message : err,
+      )
+    }
   }
 
   const profile = await ensureUserProfile(result.localId, {

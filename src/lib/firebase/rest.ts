@@ -35,7 +35,11 @@ function apiKey(): string {
       'FIREBASE_API_KEY is not set — the server cannot reach Firebase Auth.',
     )
   }
-  return key
+  // Trimmed because environment variables collect trailing whitespace with
+  // depressing ease — a newline picked up while being piped into a hosting
+  // provider's CLI travels into the query string and Google answers "API key
+  // not valid", which looks nothing like the cause.
+  return key.trim()
 }
 
 const ENDPOINT = 'https://identitytoolkit.googleapis.com/v1/accounts'
@@ -94,9 +98,36 @@ function describe(code: string): AuthFailure {
           'Email and password sign-in is not enabled for this Firebase project.',
         status: 503,
       }
-    default:
+    case 'ADMIN_ONLY_OPERATION':
       return {
-        message: 'Sign in could not be completed. Please try again.',
+        message:
+          'Creating accounts is disabled for this Firebase project (Authentication ' +
+          '→ Settings → User actions).',
+        status: 503,
+      }
+    case 'PASSWORD_DOES_NOT_MEET_REQUIREMENTS':
+      return {
+        message: 'That password does not meet the project’s password policy.',
+        status: 400,
+      }
+    case 'API key not valid. Please pass a valid API key.':
+    case 'INVALID_API_KEY':
+    case 'API_KEY_INVALID':
+      return {
+        message:
+          'The server’s Firebase API key was rejected. This is a configuration ' +
+          'problem, not your password — check /api/health/auth.',
+        status: 503,
+      }
+    default:
+      // Logged and echoed, because an unrecognised code used to vanish here:
+      // the user saw a generic sentence, the logs said nothing, and the one
+      // piece of information that would have explained the failure — the code
+      // Google actually returned — was discarded. The code is Google's own
+      // identifier, not user data, so it is safe to show.
+      console.error(`[firebase-auth] unmapped error code: ${code || '(empty)'}`)
+      return {
+        message: `Sign-in could not be completed (${bare || 'unknown error'}).`,
         status: 502,
       }
   }
