@@ -118,19 +118,22 @@ if (health.error) {
   }
 }
 
-// 2. The session exchange, with a token that cannot be valid. A 401 proves
+// 2. Sign-in with credentials that cannot be right. A 401 proves
 //    the route ran, reached Firebase, and answered in JSON; a 5xx or an HTML
 //    body is the signature of a misconfigured deployment.
 console.log('\nsign-in path:')
-const session = await request('/api/auth/session', {
+const session = await request('/api/auth/login', {
   method: 'POST',
-  body: JSON.stringify({ idToken: 'not-a-real-firebase-id-token' }),
+  body: JSON.stringify({
+    email: 'nobody-health-check@example.invalid',
+    password: 'not-a-real-password',
+  }),
 })
 if (session.error) {
-  record('POST /api/auth/session responds', false, session.error)
+  record('POST /api/auth/login responds', false, session.error)
 } else {
   record(
-    'rejects an invalid token with 401',
+    'rejects bad credentials with 401',
     session.res.status === 401,
     `got HTTP ${session.res.status}`,
   )

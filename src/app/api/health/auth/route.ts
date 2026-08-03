@@ -91,29 +91,89 @@ async function probeFirestore(): Promise<Probe> {
   }
 }
 
-/** The browser half: without this the form renders but cannot sign in. */
-function probeClientConfig(): Probe {
-  const missing = [
-    'NEXT_PUBLIC_FIREBASE_API_KEY',
-    'NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN',
-    'NEXT_PUBLIC_FIREBASE_PROJECT_ID',
-  ].filter((key) => !process.env[key])
-
-  if (missing.length) {
+/**
+ * Call Firebase Auth's REST API the same way a sign-in does.
+ *
+ * Deliberately with credentials that cannot be right: a 400
+ * INVALID_LOGIN_CREDENTIALS proves the whole path works — the key is valid,
+ * the endpoint is reachable from this server, and email/password sign-in is
+ * enabled. Anything else is the real problem, named.
+ */
+async function probeAuthApi(): Promise<Probe> {
+  const key =
+    process.env.FIREBASE_API_KEY ?? process.env.NEXT_PUBLIC_FIREBASE_API_KEY
+  if (!key) {
     return {
-      name: 'client-config',
+      name: 'auth-api',
       status: 'failing',
-      detail: `Missing ${missing.join(', ')} — the browser has no project to sign in against.`,
+      detail: 'No Firebase Web API key — sign-in and sign-up cannot be attempted.',
     }
   }
-  return { name: 'client-config', status: 'ok', detail: 'Set.' }
+
+  try {
+    const res = await fetch(
+      `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${key}`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: 'health-check@invalid.invalid',
+          password: 'not-a-real-password',
+          returnSecureToken: true,
+        }),
+        cache: 'no-store',
+      },
+    )
+    const data = (await res.json().catch(() => ({}))) as {
+      error?: { message?: string }
+    }
+    const code = data.error?.message ?? ''
+
+    if (/INVALID_LOGIN_CREDENTIALS|EMAIL_NOT_FOUND|INVALID_PASSWORD/.test(code)) {
+      return {
+        name: 'auth-api',
+        status: 'ok',
+        detail: 'Firebase Auth is reachable and the API key is valid.',
+      }
+    }
+    if (/OPERATION_NOT_ALLOWED|PASSWORD_LOGIN_DISABLED/.test(code)) {
+      return {
+        name: 'auth-api',
+        status: 'failing',
+        detail:
+          'Email/Password sign-in is not enabled — turn it on under ' +
+          'Authentication → Sign-in method.',
+      }
+    }
+    if (/API key not valid|API_KEY_INVALID|blocked/i.test(code)) {
+      return {
+        name: 'auth-api',
+        status: 'failing',
+        detail: `Firebase rejected the API key: ${code}`,
+      }
+    }
+    return {
+      name: 'auth-api',
+      status: 'failing',
+      detail: `Unexpected response from Firebase Auth: ${code || res.status}`,
+    }
+  } catch (err) {
+    return {
+      name: 'auth-api',
+      status: 'failing',
+      detail: `Cannot reach Firebase Auth: ${err instanceof Error ? err.message : String(err)}`,
+    }
+  }
 }
 
 export async function GET() {
   const production = process.env.NODE_ENV === 'production'
 
-  const [admin, firestore] = await Promise.all([probeAdmin(), probeFirestore()])
-  const client = probeClientConfig()
+  const [admin, firestore, authApi] = await Promise.all([
+    probeAdmin(),
+    probeFirestore(),
+    probeAuthApi(),
+  ])
 
   // Config checks run even when the probes pass: NEXT_PUBLIC_SITE_URL being
   // wrong breaks canonical URLs without breaking anything a probe notices.
@@ -123,7 +183,7 @@ export async function GET() {
     .filter((c) => !/FIREBASE/.test(c.key))
     .map((c) => ({ name: `env:${c.key}`, status: 'failing' as const, detail: c.message }))
 
-  const probes = [admin, firestore, client, ...config]
+  const probes = [admin, firestore, authApi, ...config]
   const ok = !probes.some((p) => p.status === 'failing')
 
   return NextResponse.json(

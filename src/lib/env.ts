@@ -37,12 +37,18 @@ export interface CheckOptions {
   production: boolean
 }
 
-/** Public client config. Not secret — these identify the project. */
-const CLIENT_KEYS = [
-  'NEXT_PUBLIC_FIREBASE_API_KEY',
-  'NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN',
-  'NEXT_PUBLIC_FIREBASE_PROJECT_ID',
-] as const
+/**
+ * The Web API key, which the *server* uses to call Firebase Auth's REST API.
+ *
+ * Accepted under either name: FIREBASE_API_KEY, or the NEXT_PUBLIC_ copy left
+ * over from when the browser needed it. The key is public by design — it
+ * identifies the project and is useless without credentials — so reading the
+ * public one is not a leak, and it means one variable instead of two.
+ */
+function apiKeyPresent(env: Record<string, string | undefined>): boolean {
+  const has = (k: string) => typeof env[k] === 'string' && env[k]!.trim() !== ''
+  return has('FIREBASE_API_KEY') || has('NEXT_PUBLIC_FIREBASE_API_KEY')
+}
 
 /**
  * Is a service account credential present in any of its accepted forms?
@@ -120,23 +126,22 @@ export function checkEnv(
   const checks: EnvCheck[] = []
   const has = (k: string) => typeof env[k] === 'string' && env[k]!.trim() !== ''
 
-  // --- Firebase client config ---------------------------------------------
-  // Without these the sign-in form renders and then cannot do anything: the
-  // client SDK has no project to talk to.
-  const missingClient = CLIENT_KEYS.filter((k) => !has(k))
-  if (missingClient.length) {
+  // --- Firebase Web API key -------------------------------------------------
+  // The server signs people in through Firebase Auth's REST API; without the
+  // key it cannot call it, and every sign-in and sign-up fails.
+  if (!apiKeyPresent(env)) {
     checks.push({
-      key: missingClient.join(', '),
+      key: 'FIREBASE_API_KEY',
       status: 'missing',
       level: 'required',
       message:
-        'The browser has no Firebase project to sign in against — the sign-in ' +
-        'form will report that sign-in is not configured. Copy these from ' +
-        'Project settings → Your apps → SDK setup and configuration.',
+        'The server cannot call Firebase Auth — sign-in and sign-up both fail. ' +
+        'Copy the Web API key from Project settings → General (either ' +
+        'FIREBASE_API_KEY or NEXT_PUBLIC_FIREBASE_API_KEY is read).',
     })
   } else {
     checks.push({
-      key: 'NEXT_PUBLIC_FIREBASE_*',
+      key: 'FIREBASE_API_KEY',
       status: 'ok',
       level: 'required',
       message: 'Set.',
