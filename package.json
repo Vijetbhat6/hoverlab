@@ -4,13 +4,14 @@
   "private": true,
   "scripts": {
     "dev": "next dev -p 3000 2>&1 | tee dev.log",
-    "prebuild": "npm run check:env && node scripts/build-effect-index.mjs",
+    "prebuild": "npm run check:env && npm run check:deps && node scripts/build-effect-index.mjs",
     "check:env": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/check-env.mjs",
     "check:deploy": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/check-deploy.mjs",
     "build": "next build",
     "build:index": "node scripts/build-effect-index.mjs",
     "start": "next start -p 3000",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "check:deps": "node scripts/check-runtime-deps.mjs"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",
@@ -96,7 +97,8 @@
   },
   "overrides": {
     "sharp": "^0.35.3",
-    "postcss": "^8.5.18"
+    "postcss": "^8.5.18",
+    "jose": "^5.10.0"
   },
   "engines": {
     "node": "24.x"

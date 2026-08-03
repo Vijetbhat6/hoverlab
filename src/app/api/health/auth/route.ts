@@ -190,6 +190,11 @@ export async function GET() {
     {
       ok,
       environment: production ? 'production' : 'development',
+      // Reported because it decided an outage once: firebase-admin loads a
+      // dependency that only require()s successfully on Node 22.12+, so
+      // "which Node is this function actually running?" was the question that
+      // needed answering from outside, and could not be.
+      nodeVersion: process.version,
       checks: probes,
     },
     { status: ok ? 200 : 503 },
