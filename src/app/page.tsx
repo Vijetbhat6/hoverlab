@@ -48,7 +48,8 @@ import { ChangelogTimeline } from '@/components/landing/changelog-timeline'
 import { Roadmap } from '@/components/landing/roadmap'
 import { NewsletterSignup } from '@/components/landing/newsletter-signup'
 import { CommunityBand } from '@/components/landing/community-band'
-import { CATEGORIES, EFFECT_INDEX as EFFECTS } from '@/lib/effect-index'
+import { CATEGORIES } from '@/lib/effect-types'
+import { TOTAL_COUNT, countByCategory } from '@/lib/catalog-stats'
 
 export default function LandingPage() {
   const { user, loading } = useAuth()
@@ -107,7 +108,7 @@ export default function LandingPage() {
         <div className="mx-auto max-w-3xl text-center">
           <div className="mb-5 inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-background/60 px-3 py-1 text-xs text-muted-foreground backdrop-blur">
             <Sparkles className="h-3.5 w-3.5 text-primary" />
-            {EFFECTS.length.toLocaleString('en-US')} effects · {CATEGORIES.length} categories · zero dependencies
+            {TOTAL_COUNT.toLocaleString('en-US')} effects · {CATEGORIES.length} categories · zero dependencies
           </div>
           <h1 className="text-balance bg-gradient-to-br from-foreground via-foreground to-foreground/60 bg-clip-text text-5xl font-extrabold tracking-tight text-transparent sm:text-6xl lg:text-7xl">
             Beautiful CSS effects,
@@ -115,10 +116,10 @@ export default function LandingPage() {
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-pretty text-base text-muted-foreground sm:text-lg lg:text-xl">
             Hoverlab is a curated, open-source library of pure-CSS effects —
-            buttons, loaders, cards, text, backgrounds, navigation, dividers,
-            badges and more. Live demos, copy-ready code, and zero JavaScript
-            required. Sign in to save your favorites and bundle your
-            favorites for export.
+            buttons, loaders, cards, charts, 3D, neon, patterns and {CATEGORIES.length - 7}{' '}
+            more categories. Live demos, copy-ready code, and zero JavaScript
+            required. Sign in to save your favorites and bundle them for
+            export.
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
             {!loading && user ? (
@@ -170,7 +171,7 @@ export default function LandingPage() {
             </p>
           </div>
           <Badge variant="secondary" className="hidden sm:inline-flex">
-            {EFFECTS.length.toLocaleString('en-US')} total effects
+            {TOTAL_COUNT.toLocaleString('en-US')} total effects
           </Badge>
         </Reveal>
         <Reveal delay={80}>
@@ -199,8 +200,8 @@ export default function LandingPage() {
             <Reveal delay={0}>
               <FeatureCard
                 icon={<Layers className="h-5 w-5" />}
-                title={`${EFFECTS.length.toLocaleString('en-US')}+ effects`}
-                description={`Hand-crafted and generated effects across ${CATEGORIES.length} categories — buttons, loaders, cards, text, backgrounds, navigation, dividers, badges, toggles, tooltips, skeletons, and entrance animations.`}
+                title={`${TOTAL_COUNT.toLocaleString('en-US')}+ effects`}
+                description={`Hand-crafted and generated effects across ${CATEGORIES.length} categories — from buttons, loaders and cards to charts, 3D, neon, masks and micro-interactions.`}
               />
             </Reveal>
             <Reveal delay={80}>
@@ -312,7 +313,7 @@ export default function LandingPage() {
           </Reveal>
           <Reveal delay={80} className="flex flex-wrap gap-2">
             {CATEGORIES.map((c) => {
-              const count = EFFECTS.filter((e) => e.category === c).length
+              const count = countByCategory(c)
               return (
                 <Link
                   key={c}

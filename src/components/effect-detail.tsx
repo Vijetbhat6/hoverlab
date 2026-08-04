@@ -315,7 +315,7 @@ export function EffectDetail({ effect, similar, prev, next }: EffectDetailProps)
       {/* Breadcrumb / back */}
       <div className="mb-5 flex items-center justify-between gap-3">
         <Button asChild variant="ghost" size="sm" className="gap-1.5">
-          <Link href="/library">
+          <Link href="/library" prefetch={false}>
             <ArrowLeft className="h-4 w-4" /> Back to library
           </Link>
         </Button>
@@ -629,7 +629,7 @@ export function EffectDetail({ effect, similar, prev, next }: EffectDetailProps)
               </ul>
             )}
             <Button asChild variant="outline" size="sm" className="mt-3 w-full">
-              <Link href={`/library?filter=${encodeURIComponent(effect.category)}`}>
+              <Link href={`/library?filter=${encodeURIComponent(effect.category)}`} prefetch={false}>
                 Browse all {effect.category.toLowerCase()}
               </Link>
             </Button>

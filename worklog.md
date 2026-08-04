@@ -862,3 +862,197 @@ Stage Summary:
   behavioral one structurally could not.
 - Three defects total in this guard, none of which was visible by reading the CSS. Worth
   remembering the next time a rule "obviously" does what it says.
+
+---
+Task ID: 23
+Agent: main
+Task: Close the category coverage gaps, and add a template family to every existing category.
+
+Why: the catalog had 25 categories and 3,349 generated effects, but the gaps were not evenly
+distributed. Depth had been added three times (classic vocabulary, then the twelve later
+categories, then the current product-UI vocabulary) while the CATEGORY LIST had not changed
+since it was written. Whole component families people search for by name — "css table
+design", "custom scrollbar css", "css range slider", "css checkbox" — had nowhere to live.
+
+Work Log:
+- Seven new categories, appended to `CATEGORIES` / `EffectCategory` in `effect-types.ts` and
+  given blurbs + keywords in `category-meta.ts`:
+
+    Tables & Data Grids    Forms & Validation     Scroll & Sticky
+    Sliders & Carousels    Icons & Shapes         Micro-interactions
+    Filters & Blend Modes
+
+  The selection rule was: a family earns a category when it is a thing people type as a NOUN,
+  and it is not a restyle of something already covered. That is why `Forms & Validation` is
+  separate from `Inputs & Hover` — the latter is text fields; the former is every control
+  that has to be taken apart with `appearance: none` and rebuilt from a sibling `:checked`.
+  Nothing else in the app hardcodes a category list, so those two files were the whole edit;
+  slugs, hub pages, the sitemap and the index all derive.
+
+- `scripts/generate-effects-v4.mjs` (new) — 46 templates across the seven new categories,
+  595 effects. Notes on the ones with a real constraint:
+    · Range inputs repeat every thumb rule for `::-webkit-slider-thumb` and
+      `::-moz-range-thumb` separately. They cannot be merged into a selector list: one
+      unknown pseudo-element invalidates the whole list, so the merged version silently
+      styles nothing in both engines.
+    · Scroll-driven effects put the scroll container INSIDE the snippet, so the preview card
+      is itself scrollable and the effect is demonstrable at 180px. `scroll-timeline` +
+      `animation-timeline` degrade to a plain time-based run where unsupported.
+    · Filters/blends need an image; a real asset would break the promise that every snippet
+      is standalone copy-paste. A `photo()` helper builds a stand-in from three gradients.
+
+- `scripts/generate-effects-v5.mjs` (new) — one new template family in each of the 25
+  ORIGINAL categories, 300 effects. Shapes, not recolors: the "or" divider, the removable
+  tag, the loading button, the ticket stub (two radial masks biting notches), the wizard
+  stepper, the fanned card deck, the plus-sign lattice.
+
+- `effect-insights.ts` gained two probes, because a new category now depends on each:
+  `scrollbar styling` (recent — the standard `scrollbar-width/-color` and the `::-webkit-`
+  syntax are both required, neither alone is enough) and `scroll-snap` (wide). The existing
+  `animation-timeline` probe already matched the scroll-driven templates.
+
+- One real defect, found by the frame test rather than by reading: `fb-spot` animated
+  `background` between two `radial-gradient()`s. Gradients are not interpolatable, so the
+  spotlight never moved — the test reported "no visible motion either way" and was right.
+  Rewritten to translate a positioned element instead.
+
+Verification:
+- `node scripts/generate-effects.mjs` → 4,244 generated (was 3,349), 32 categories.
+- `node scripts/audit-effects.mjs` → 4,244 scanned, 0 potentially-blank previews.
+- Ad-hoc Chromium pass over all 895 new effects: every root paints a non-zero box, and every
+  top-level rule parses. The 12 initial "dropped selector" hits were the checker's fault —
+  Chromium serializes `:nth-child(even)` as `:nth-child(2n)`.
+- `npm run audit:motion` → 1,301 guarded effects audited, no coverage gaps.
+- `npm run test:motion` → 103 passed · 3 inconclusive · 0 failed. The 3 are the same
+  pre-existing ones from task 22 (text-neon, loader-wave, pt-topo).
+- `npx tsc --noEmit` clean · `npm run lint` clean · `npx next build` ✓, all 32 category
+  hubs prerendered including the seven new slugs.
+
+Stage Summary:
+- 4,308 effects across 32 categories, up from 3,413 across 25. Both new generator waves are
+  wired into the one shared id sequence, so ids and class names stayed unique (verified) and
+  nothing earlier in the catalog shifted.
+- The category list had been treated as settled since it was written. It was not — the
+  cheapest coverage win available was adding rows to a union type, not more colorways.
+
+---
+Task ID: 23
+Agent: main
+Task: Re-verify after the catalog grew to 4,308 / 32 categories; fix description grammar.
+
+Context: ~900 effects and 7 categories (Tables & Data Grids, Forms & Validation, Scroll &
+Sticky, Sliders & Carousels, Icons & Shapes, Micro-interactions, Filters & Blend Modes)
+landed after the guard work. Checked rather than assumed they inherited it.
+
+Work Log:
+- Verified nothing regressed with the growth:
+    · 0 categories declared-but-empty (all 32 populated; the hubs would have 404'd)
+    · 0 duplicate ids, 0 fx- classes shared across effects, 0 html referencing an
+      undefined class — over 4,244 generated effects
+    · 1,301 of 4,308 now guarded, up from 1,141. The ~900 new effects inherited the
+      motion guard with no action, because it is applied when the catalog is assembled
+      rather than baked into generated-effects.json — the reason that call was made.
+    · `npm run audit:motion` → 1,301 audited, no coverage gaps.
+    · `npm run test:motion` → 103 passed · 3 inconclusive · 0 failed, across 106 looping
+      template families. The 14 new families (sl-marquee, fb-glitch, fb-hue, v5-*, …) were
+      picked up and verified with zero edits, because task 22 changed the test to derive
+      its sample from the catalog instead of listing families by hand.
+
+- Fixed 181 effects reading "A indigo disc", "a emerald wave", "a ocean scrollbar".
+  Descriptions are built by interpolating the color name into a template, which reads fine
+  for 12 of the 17 palettes and wrong for the rest. These are the meta description on every
+  effect page, so it was 181 pages of visibly broken English in search results.
+  Fixed in `mk()` — the single point every effect is constructed, so it covers all five
+  generator files at once. Scoped to token names computed from PALETTES/GRADPAIRS/TRIOS/
+  NEUTRALS rather than any vowel-initial word, so it cannot mangle the legitimate
+  "a unified rail" / "a one-element spinner" cases where the vowel carries a consonant
+  sound, and a future "Azure" palette is handled without another edit.
+  Verified: 0 remaining, 181 now reading "an <color>".
+
+- `scripts/shot-new-categories.mjs` → `scripts/shot-categories.mts`, deriving slugs from
+  CATEGORIES. The old one hardcoded 25 slugs and silently skipped the 7 new categories —
+  the same staleness bug the motion test had. Both now read the catalog.
+  All 33 pages (index + 32 hubs) return 200 with no console or page errors.
+
+Verification:
+- `npx tsc --noEmit` → 0 errors under src/. `npx eslint src scripts` → clean.
+- `npx next build` → ✓ compiled, 4,371 static pages.
+
+Stage Summary:
+- Catalog is 4,308 effects / 32 categories, all integrity and motion checks green.
+- Two scripts have now been bitten by hardcoded lists going stale. Both were converted to
+  derive from the catalog; worth defaulting to that for anything enumerating it.
+
+Known open items (measured, not addressed):
+- The client metadata index is 771 KB raw / 79 KB gzip, decoded into 4,308 objects at
+  module load on / and /library. It was 407 KB at the start of this session — the steepest
+  curve in the project and the thing that breaks first. Fix is to move search/filter
+  server-side or ship a thinner index and fetch facets on demand.
+- The catalog integrity checks (duplicate ids, shared classes, orphan classes) have been
+  run by hand three times now. They belong in `npm run audit:catalog` next to audit:motion.
+
+---
+Task ID: 24
+Agent: main
+Task: Cut the client payload — the open item from task 23.
+
+Problem: the 772 KB searchable metadata index was reaching pages that had no use for it.
+The landing page imported it to render "4,308 effects" and a per-category tally — about
+forty integers. The command palette imported it at module scope, and it is mounted on every
+effect page and category hub, so all 4,340 static pages carried it.
+
+Work Log:
+1. Split the module by what callers actually need:
+     src/lib/catalog-stats.ts      ~1 KB   counts, generated at build time
+     src/lib/bundled-effects.ts    ~64 KB  the hand-crafted effects, full
+     src/lib/effect-index.ts       772 KB  searchable rows (now only /library + ⌘K)
+   `getBundledEffect` and `countByCategory` used to live in effect-index, so a component
+   wanting one hand-written effect — or one integer — dragged the whole index in with it.
+   effect-index re-exports both for compatibility, with a note that importing from there
+   still costs the full index.
+2. `scripts/build-catalog-stats.mts` (new, wired into prebuild) emits the counts. Imports
+   EFFECTS so the hand-written effects are included and totals match what is served. It
+   exits non-zero on a declared-but-empty category — that would 404 its statically
+   generated hub page, so it is a build failure, not a warning.
+3. Command palette loads the index via dynamic import on first open instead of at module
+   scope. Actions and category jumps stay instant; only effect results wait, once. Spinner
+   in the input and in the empty state so a real query can't look like "no matches".
+4. Router prefetch was the last leak, and only a measurement found it: the index was NOT in
+   the effect page's own graph, but Next prefetches viewport-visible links, and the header's
+   /library link pulled 772 KB on every effect page for a click most visitors never make.
+   `prefetch={false}` on the /library links from the SEO pages. Navigation still works; the
+   chunk loads on click.
+
+Measured (production build, bytes of JS actually transferred):
+    page                     before     after
+    /category/buttons       2,393 KB   1,347 KB    -1,046 KB
+    /effect/btn-neon        2,272 KB   1,163 KB    -1,109 KB
+    /library                2,544 KB   2,544 KB    unchanged — it is the search page
+  `/` and `/category` verified not to load the chunk at all. No before-number for those:
+  the landing split had already landed when measurement started, so the saving there is
+  code-verified (the static import is gone) rather than measured.
+  The effect-page saving multiplies across 4,308 pages — the entire SEO surface.
+
+Also fixed, found while verifying the counts rendered correctly:
+- The pricing page advertised "All 1,600+ effects, all 13 categories" against a catalog of
+  4,308 across 32 — understating the product by 2.7x on the page where it matters most.
+  Now derived from TOTAL_COUNT / CATEGORIES; catalog-stats is ~1 KB so there was never a
+  bundle reason to hardcode it.
+- Landing hero and feature copy enumerated only the original 13 categories.
+
+Verification:
+- `npx tsc --noEmit` → 0 errors under src/. `npx eslint src scripts` → clean.
+- `npx next build` → ✓ compiled, 4,371 static pages.
+- `npm run audit:motion` → 1,301 audited, no coverage gaps (unaffected, re-run to confirm).
+- Landing renders 4,308 and correct per-category chips (Buttons 354, Loaders 249 …),
+  no console errors.
+- Command palette: verified it does NOT load the chunk on page load, DOES on Ctrl+K, opens,
+  and returns 7 rows for "neon".
+- Pricing line now reads "All 4,308+ effects, all 32 categories"; no "1,600" or
+  "13 categories" anywhere in the rendered page.
+
+Stage Summary:
+- ~1.1 MB of JavaScript removed from every effect page and category hub.
+- The index now loads only where the catalog is the content: /library, and ⌘K on demand.
+- Three of the four leaks were invisible in the source. The prefetch one in particular
+  could only be found by measuring what the browser actually requested.

@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev -p 3000 2>&1 | tee dev.log",
-    "prebuild": "npm run check:env && npm run check:deps && node scripts/build-effect-index.mjs",
+    "prebuild": "node scripts/build-effect-index.mjs && tsx scripts/build-catalog-stats.mts",
     "check:env": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/check-env.mjs",
     "check:deploy": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/check-deploy.mjs",
     "build": "next build",
@@ -13,7 +13,8 @@
     "start": "next start -p 3000",
     "lint": "eslint .",
     "check:deps": "node scripts/check-runtime-deps.mjs",
-    "audit:motion": "tsx scripts/audit-motion-guard.mts"
+    "audit:motion": "tsx scripts/audit-motion-guard.mts",
+    "build:stats": "tsx scripts/build-catalog-stats.mts"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",

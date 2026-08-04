@@ -1,7 +1,8 @@
 'use client'
 
 import * as React from 'react'
-import { getBundledEffect, type Effect } from '@/lib/effect-index'
+import { getBundledEffect } from '@/lib/bundled-effects'
+import type { Effect } from '@/lib/effect-types'
 
 /**
  * Lazily resolve full effects (markup + CSS) for a set of ids.

@@ -15,7 +15,8 @@
 import * as React from 'react'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
-import { getBundledEffect, type Effect } from '@/lib/effect-index'
+import { getBundledEffect } from '@/lib/bundled-effects'
+import type { Effect } from '@/lib/effect-types'
 import { cn } from '@/lib/utils'
 
 // Pick 4 visually distinct featured effects for the showcase.

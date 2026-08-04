@@ -14,7 +14,8 @@
 
 import * as React from 'react'
 import { Reveal } from '@/components/reveal'
-import { CATEGORIES, EFFECT_INDEX as EFFECTS } from '@/lib/effect-index'
+import { CATEGORIES } from '@/lib/effect-types'
+import { TOTAL_COUNT } from '@/lib/catalog-stats'
 
 interface Stat {
   value: string
@@ -25,7 +26,7 @@ interface Stat {
 function buildStats(): Stat[] {
   return [
     {
-      value: `${EFFECTS.length}+`,
+      value: `${TOTAL_COUNT.toLocaleString('en-US')}+`,
       label: 'Effects',
       caption: 'Hand-crafted, all categories',
     },

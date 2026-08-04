@@ -51,9 +51,11 @@ import {
   Heart,
   Star,
   ArrowRight,
+  Loader2,
   type LucideIcon,
 } from 'lucide-react'
-import { EFFECT_INDEX as EFFECTS, CATEGORIES, type EffectCategory } from '@/lib/effect-index'
+import { CATEGORIES, type EffectCategory } from '@/lib/effect-types'
+import type { EffectMeta } from '@/lib/effect-index'
 import { cn } from '@/lib/utils'
 
 /* ============================================================
@@ -161,6 +163,36 @@ export function useCommandPalette() {
 
 export function CommandPalette() {
   const [open, setOpen] = React.useState(false)
+
+  /**
+   * The searchable catalog, loaded on first open rather than on mount.
+   *
+   * This component is mounted on every effect page and every category hub
+   * — 4,340 static pages — and it used to import EFFECT_INDEX at module
+   * scope. That put 772 KB of metadata into the bundle of every one of
+   * them, to power a dialog that is closed until someone presses ⌘K.
+   *
+   * A dynamic import moves it into its own chunk that loads on demand.
+   * Actions and category jumps stay available immediately; only effect
+   * results wait, and only the first time.
+   */
+  const [effects, setEffects] = React.useState<EffectMeta[]>([])
+  const [loadingIndex, setLoadingIndex] = React.useState(false)
+  const requestedRef = React.useRef(false)
+
+  React.useEffect(() => {
+    if (!open || requestedRef.current) return
+    requestedRef.current = true
+    setLoadingIndex(true)
+    import('@/lib/effect-index')
+      .then((m) => setEffects(m.EFFECT_INDEX))
+      .catch(() => {
+        // Leave the palette usable with actions + categories rather than
+        // failing the whole dialog over a chunk that didn't load.
+        requestedRef.current = false
+      })
+      .finally(() => setLoadingIndex(false))
+  }, [open])
   const [query, setQuery] = React.useState('')
   const [activeIndex, setActiveIndex] = React.useState(0)
   const inputRef = React.useRef<HTMLInputElement>(null)
@@ -333,7 +365,7 @@ export function CommandPalette() {
   /* ----- Build the effect items (cached once — list never changes) ----- */
   const effectItems: BaseItem[] = React.useMemo(
     () =>
-      EFFECTS.map((e) => ({
+      effects.map((e) => ({
         id: `effect:${e.id}`,
         kind: 'effect',
         label: e.name,
@@ -342,7 +374,7 @@ export function CommandPalette() {
         keywords: `${e.category} ${e.id} ${(e.tags ?? []).join(' ')}`,
         run: () => router.push(`/effect/${e.id}`),
       })),
-    [router],
+    [router, effects],
   )
 
   /* ----- Search ----- */
@@ -357,7 +389,7 @@ export function CommandPalette() {
       // Empty query → show actions first, then categories, then a few featured effects.
       const featured = effectItems
         .map((item, i) => ({ item, score: 1, matchedIndices: [] as number[], originalIndex: i }))
-        .filter((x) => EFFECTS[x.originalIndex]?.featured)
+        .filter((x) => effects[x.originalIndex]?.featured)
         .slice(0, 6)
       return [
         ...actions.map((item) => ({ item, score: 2, matchedIndices: [] as number[] })),
@@ -469,6 +501,15 @@ export function CommandPalette() {
             spellCheck={false}
             aria-label="Command palette search"
           />
+          {/* The catalog arrives a beat after the dialog on first open —
+              say so, rather than letting a real query look like it found
+              nothing. */}
+          {loadingIndex ? (
+            <Loader2
+              className="h-4 w-4 shrink-0 animate-spin text-muted-foreground"
+              aria-label="Loading effects"
+            />
+          ) : null}
           <kbd className="hidden shrink-0 rounded border border-border bg-muted px-1.5 py-0.5 font-mono text-[10px] text-muted-foreground sm:inline">
             Esc
           </kbd>
@@ -481,11 +522,20 @@ export function CommandPalette() {
         >
           {results.length === 0 ? (
             <div className="px-4 py-12 text-center">
-              <Search className="mx-auto mb-3 h-8 w-8 text-muted-foreground/40" />
-              <p className="text-sm font-medium">No matches found</p>
-              <p className="mt-1 text-xs text-muted-foreground">
-                Try a different keyword, or browse by category.
-              </p>
+              {loadingIndex ? (
+                <>
+                  <Loader2 className="mx-auto mb-3 h-8 w-8 animate-spin text-muted-foreground/40" />
+                  <p className="text-sm font-medium">Loading effects…</p>
+                </>
+              ) : (
+                <>
+                  <Search className="mx-auto mb-3 h-8 w-8 text-muted-foreground/40" />
+                  <p className="text-sm font-medium">No matches found</p>
+                  <p className="mt-1 text-xs text-muted-foreground">
+                    Try a different keyword, or browse by category.
+                  </p>
+                </>
+              )}
             </div>
           ) : (
             <>

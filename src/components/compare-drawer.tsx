@@ -32,7 +32,7 @@ import {
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { useCompare } from '@/hooks/use-compare'
-import { type Effect } from '@/lib/effect-index'
+import type { Effect } from '@/lib/effect-types'
 import { useEffectDetails } from '@/hooks/use-effect-details'
 import { cn } from '@/lib/utils'
 

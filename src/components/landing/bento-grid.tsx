@@ -17,7 +17,8 @@
 import * as React from 'react'
 import { Copy, Shield, Smartphone, Sparkles, Quote } from 'lucide-react'
 import { Reveal } from '@/components/reveal'
-import { CATEGORIES, EFFECT_INDEX as EFFECTS } from '@/lib/effect-index'
+import { CATEGORIES } from '@/lib/effect-types'
+import { TOTAL_COUNT } from '@/lib/catalog-stats'
 
 export function BentoGrid() {
   return (
@@ -112,7 +113,7 @@ export function BentoGrid() {
               <Shield className="h-4 w-4" />
             </div>
             <div className="fx-stat-pop text-5xl font-extrabold tracking-tight text-foreground">
-              {EFFECTS.length}+
+              {TOTAL_COUNT.toLocaleString('en-US')}+
             </div>
             <div className="mt-1 text-sm font-semibold text-foreground/80">
               Effects ready to ship

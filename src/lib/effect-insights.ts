@@ -116,6 +116,18 @@ const PROBES: FeatureProbe[] = [
     test: /(?:^|[^-])mask(?:-image)?\s*:/m,
   },
   {
+    name: 'scrollbar styling',
+    level: 'recent',
+    note: 'Two syntaxes, both needed: scrollbar-width/-color is the standard, ::-webkit-scrollbar is what Chrome and Safari have shipped for years.',
+    test: /scrollbar-(?:width|color)\s*:|::-webkit-scrollbar/,
+  },
+  {
+    name: 'scroll-snap',
+    level: 'wide',
+    note: 'Locks scrolling to defined stop points. Set scroll-padding too, or the snapped item hides under sticky chrome.',
+    test: /scroll-snap-(?:type|align)\s*:/,
+  },
+  {
     name: 'container queries',
     level: 'recent',
     note: 'Sizes respond to the container, not the viewport. Baseline since 2023.',

@@ -19,7 +19,6 @@
 
 import GENERATED_INDEX from './generated-effects-index.json'
 import { HANDCRAFTED } from './effects-handcrafted'
-import { withMotionGuard } from './effect-insights'
 import type { Effect, EffectCategory } from './effect-types'
 
 export type { Effect, EffectCategory } from './effect-types'
@@ -106,41 +105,19 @@ export function getEffectMeta(id: string): EffectMeta | undefined {
 }
 
 /* ------------------------------------------------------------------ *
- *  Bundled full effects (hand-crafted only)
+ *  Re-exports
  * ------------------------------------------------------------------ */
 
 /**
- * Hand-crafted effects with their markup + CSS, available synchronously
- * on the client. `useEffectDetails()` checks this first and only hits the
- * network for ids that aren't here.
+ * The bundled hand-crafted effects now live in `./bundled-effects`, and
+ * the counts in `./catalog-stats`. Both used to be defined here, which
+ * meant a component wanting one hand-written effect — or a single integer
+ * — imported this module and dragged the 772 KB generated index into its
+ * bundle with it.
+ *
+ * These re-exports keep existing call sites working. Prefer importing
+ * from the narrow modules directly: that is the whole point of the split,
+ * and an import from here costs the full index no matter what you take.
  */
-export const BUNDLED_EFFECTS: Effect[] = HANDCRAFTED.map((e) => ({
-  ...e,
-  // Same motion guard the server-side catalog applies, so a bundled
-  // effect rendered straight from the client matches what /api/effects
-  // would have returned for it. See `withMotionGuard`.
-  css: withMotionGuard(e.css),
-  featured: true,
-}))
-
-const BUNDLED_BY_ID = new Map(BUNDLED_EFFECTS.map((e) => [e.id, e]))
-
-/**
- * Get a full effect synchronously, if it happens to be one of the bundled
- * hand-crafted ones. Returns undefined for generated effects — those must
- * go through `useEffectDetails()` / `/api/effects/batch`.
- */
-export function getBundledEffect(id: string): Effect | undefined {
-  return BUNDLED_BY_ID.get(id)
-}
-
-/**
- * Count effects per category. Used by the landing bento grid and stats
- * band, which previously imported the whole catalog just to call
- * `.filter().length`.
- */
-export function countByCategory(category: EffectCategory): number {
-  let n = 0
-  for (const e of EFFECT_INDEX) if (e.category === category) n++
-  return n
-}
+export { BUNDLED_EFFECTS, getBundledEffect } from './bundled-effects'
+export { countByCategory, FEATURED_COUNT } from './catalog-stats'

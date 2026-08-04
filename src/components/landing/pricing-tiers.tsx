@@ -27,6 +27,8 @@ import { Reveal } from '@/components/reveal'
 import { useCheckout } from '@/hooks/use-checkout'
 import { track } from '@/lib/analytics'
 import { PLANS, formatPrice, isPurchasable, type PlanId } from '@/lib/billing/plans'
+import { TOTAL_COUNT } from '@/lib/catalog-stats'
+import { CATEGORIES } from '@/lib/effect-types'
 
 interface Tier {
   id: PlanId
@@ -51,7 +53,11 @@ const TIERS: Tier[] = [
     cta: 'Get started',
     ctaVariant: 'outline',
     features: [
-      'All 1,600+ effects, all 13 categories',
+      // Derived, not typed out. This line read "All 1,600+ effects, all 13
+      // categories" while the catalog held 4,308 across 32 — understating the
+      // product by 2.7x on the pricing page. @/lib/catalog-stats is ~1 KB, so
+      // there is no bundle reason to hardcode it.
+      `All ${TOTAL_COUNT.toLocaleString('en-US')}+ effects, all ${CATEGORIES.length} categories`,
       'Live customization sliders',
       'Save favorites (sync across devices)',
       'Bundle up to 10 effects',

@@ -117,7 +117,7 @@ export default async function CategoryPage({ params }: PageProps) {
       <header className="border-b border-border/60">
         <div className="mx-auto w-full max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
           <Button asChild variant="ghost" size="sm" className="gap-1.5">
-            <Link href="/library">
+            <Link href="/library" prefetch={false}>
               <ArrowLeft className="h-4 w-4" />
               All effects
             </Link>
@@ -170,7 +170,7 @@ export default async function CategoryPage({ params }: PageProps) {
               Showing {shown.length} of {all.length}. The rest are searchable in the library.
             </p>
             <Button asChild className="mt-3 gap-1.5">
-              <Link href={`/library?filter=${encodeURIComponent(category)}`}>
+              <Link href={`/library?filter=${encodeURIComponent(category)}`} prefetch={false}>
                 Browse all {all.length} {category}
                 <ArrowRight className="h-4 w-4" />
               </Link>

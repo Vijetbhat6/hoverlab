@@ -31,7 +31,14 @@ export type EffectCategory =
   | "Patterns & Textures"
   | "Masks & Clip Paths"
   | "Charts & Data"
-  | "Timelines & Steps";
+  | "Timelines & Steps"
+  | "Tables & Data Grids"
+  | "Forms & Validation"
+  | "Scroll & Sticky"
+  | "Sliders & Carousels"
+  | "Icons & Shapes"
+  | "Micro-interactions"
+  | "Filters & Blend Modes";
 
 export interface Effect {
   id: string;
@@ -78,6 +85,13 @@ export const CATEGORIES: EffectCategory[] = [
   "Masks & Clip Paths",
   "Charts & Data",
   "Timelines & Steps",
+  "Tables & Data Grids",
+  "Forms & Validation",
+  "Scroll & Sticky",
+  "Sliders & Carousels",
+  "Icons & Shapes",
+  "Micro-interactions",
+  "Filters & Blend Modes",
 ];
 
 /* ------------------------------------------------------------------ *

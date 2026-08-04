@@ -146,4 +146,39 @@ export const CATEGORY_META: Record<EffectCategory, CategoryMeta> = {
       'Vertical activity timelines, checkout steppers and pipeline progress rails.',
     keywords: ['css timeline', 'css stepper', 'progress steps css', 'checkout steps ui'],
   },
+  'Tables & Data Grids': {
+    blurb:
+      'Data tables with zebra rows, sticky headers, hover highlights, sortable carets and status cells.',
+    keywords: ['css table design', 'html table styling', 'sticky table header css', 'striped table css'],
+  },
+  'Forms & Validation': {
+    blurb:
+      'Checkboxes, radios, selects, file drop zones, OTP fields and inline error / success states.',
+    keywords: ['css checkbox', 'custom radio button css', 'css select styling', 'form validation css'],
+  },
+  'Scroll & Sticky': {
+    blurb:
+      'Custom scrollbars, scroll-snap rails, reading-progress bars, sticky headers and reveal-on-scroll.',
+    keywords: ['custom scrollbar css', 'scroll snap css', 'scroll progress bar', 'sticky header css'],
+  },
+  'Sliders & Carousels': {
+    blurb:
+      'Range inputs, before/after comparison handles, snap carousels and infinite logo marquees.',
+    keywords: ['css range slider', 'before after slider css', 'css carousel', 'infinite marquee css'],
+  },
+  'Icons & Shapes': {
+    blurb:
+      'Pure-CSS arrows, chevrons, hamburger-to-X toggles, play/pause glyphs, ribbons and speech bubbles.',
+    keywords: ['css icon', 'hamburger menu css', 'css arrow', 'speech bubble css', 'css shapes'],
+  },
+  'Micro-interactions': {
+    blurb:
+      'Ripples, heart bursts, drawn checkmarks, copy-confirm swaps and shake-on-error feedback.',
+    keywords: ['css ripple effect', 'like button animation', 'css checkmark animation', 'micro interaction css'],
+  },
+  'Filters & Blend Modes': {
+    blurb:
+      'Duotone treatments, grayscale-to-color reveals, glitch splits and mix-blend-mode type over imagery.',
+    keywords: ['css duotone', 'mix-blend-mode css', 'css glitch effect', 'css image filter hover'],
+  },
 }
