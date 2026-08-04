@@ -1,0 +1,61 @@
+import { NextResponse } from 'next/server'
+import {
+  PLANS,
+  isPurchasable,
+  priceForRegion,
+  type PlanId,
+} from '@/lib/billing/plans'
+import { regionFromHeaders } from '@/lib/billing/region'
+import { billingEnabled } from '@/lib/billing/polar'
+
+/**
+ * Prices and buyability for the visitor's region.
+ *
+ * GET → { region, plans: { pro: { priceCents, purchasable }, team: {…} } }
+ *
+ * This exists because the pricing UI is a client component and needs two
+ * things the browser cannot work out for itself:
+ *
+ *  1. The region. It comes from an edge geolocation header on the request.
+ *
+ *  2. Whether a plan can actually be bought. `isPurchasable()` tests
+ *     `polarProductId`, which is read from POLAR_PRODUCT_ID_* — server-only
+ *     env vars that are NOT inlined into the client bundle. Called in the
+ *     browser it always returned false, so every tier rendered the waitlist
+ *     CTA and the buy button was unreachable however Polar was configured.
+ *
+ * Response is per-visitor (it varies by IP country), so it must never be
+ * cached by a shared cache.
+ */
+
+export const runtime = 'nodejs'
+export const dynamic = 'force-dynamic'
+
+const PAID_PLANS: PlanId[] = ['pro', 'team']
+
+export async function GET(request: Request) {
+  const region = regionFromHeaders(request.headers)
+
+  // A configured product id is not on its own enough to sell. /api/billing/
+  // checkout refuses with a 503 unless billingEnabled() — which also requires
+  // POLAR_WEBHOOK_SECRET, since without it a payment would succeed at Polar
+  // and never grant anything here. Both conditions have to agree, or the
+  // pricing page offers a buy button that dead-ends.
+  const configured = billingEnabled()
+
+  return NextResponse.json(
+    {
+      region,
+      plans: Object.fromEntries(
+        PAID_PLANS.map((id) => [
+          id,
+          {
+            priceCents: priceForRegion(id, region),
+            purchasable: configured && isPurchasable(PLANS[id]),
+          },
+        ]),
+      ),
+    },
+    { headers: { 'Cache-Control': 'private, no-store' } },
+  )
+}

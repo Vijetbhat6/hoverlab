@@ -147,7 +147,7 @@ export default async function CategoryPage({ params }: PageProps) {
             <Layers className="h-3 w-3" />
             {all.length} effects
           </Badge>
-          <Badge variant="outline">Free &amp; MIT-licensed</Badge>
+          <Badge variant="outline">Free for personal use</Badge>
           <Badge variant="outline">No JavaScript</Badge>
         </div>
       </section>
@@ -218,25 +218,106 @@ function templateKey(effect: Effect): string {
 }
 
 /**
- * Round-robin the list across its templates: one of each, then the second
- * of each, and so on. A category is generated as template × palette, so
- * source order groups all 17 colors of one template together — the top of
- * a hub page would otherwise be a single design repeated in every hue.
+ * The dominant hue of an effect, bucketed into twelve 30° slices.
+ *
+ * Read out of the CSS rather than off the class name: the generators name
+ * their palettes inconsistently (`btn-solid-rose`, `mb-glass-pink`,
+ * `v5-btn-load-sunset`), but all of them emit plain colors. The most
+ * saturated color in the rule is the one the eye reads as "the color of
+ * this button", so that is what we key on. Effects built entirely out of
+ * grays — slate cards, skeleton placeholders — collapse to `neutral`,
+ * which is correct: they have no hue to spread.
  */
-function interleaveByTemplate(effects: Effect[]): Effect[] {
-  const groups = new Map<string, Effect[]>()
-  for (const e of effects) {
-    const key = templateKey(e)
-    const bucket = groups.get(key)
-    if (bucket) bucket.push(e)
-    else groups.set(key, [e])
+function hueKey(effect: Effect): string {
+  let topSat = 0
+  let topHue = 0
+
+  const consider = (r: number, g: number, b: number) => {
+    const max = Math.max(r, g, b)
+    const min = Math.min(r, g, b)
+    const delta = max - min
+    if (delta === 0) return
+    const light = (max + min) / 2
+    const sat = light > 0.5 ? delta / (2 - max - min) : delta / (max + min)
+    if (sat <= topSat) return
+    topSat = sat
+    topHue =
+      60 *
+      (max === r ? (g - b) / delta + (g < b ? 6 : 0) : max === g ? (b - r) / delta + 2 : (r - g) / delta + 4)
   }
 
-  const buckets = [...groups.values()]
+  for (const [, hex] of effect.css.matchAll(/#([a-f\d]{6}|[a-f\d]{3})\b/gi)) {
+    const full = hex.length === 3 ? hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2] : hex
+    consider(
+      parseInt(full.slice(0, 2), 16) / 255,
+      parseInt(full.slice(2, 4), 16) / 255,
+      parseInt(full.slice(4, 6), 16) / 255,
+    )
+  }
+  for (const m of effect.css.matchAll(/rgba?\(\s*(\d+)[\s,]+(\d+)[\s,]+(\d+)/g)) {
+    consider(+m[1] / 255, +m[2] / 255, +m[3] / 255)
+  }
+  // hsl() states its hue outright, so there is nothing to derive — but it
+  // still has to compete on saturation with the hex colors above.
+  for (const m of effect.css.matchAll(/hsla?\(\s*([\d.]+)(?:deg)?[\s,]+([\d.]+)%/g)) {
+    const sat = parseFloat(m[2]) / 100
+    if (sat > topSat) {
+      topSat = sat
+      topHue = parseFloat(m[1])
+    }
+  }
+
+  // Below ~15% saturation the hue is noise — a hairline border on white
+  // reads as gray however the math rounds it.
+  if (topSat < 0.15) return 'neutral'
+  return String(Math.round(((topHue % 360) + 360) % 360 / 30) % 12)
+}
+
+/**
+ * Round-robin the list so that neither the design nor the color repeats
+ * down the page.
+ *
+ * A category is generated as template × palette, and every template lays
+ * its palettes out in the same order. Round-robining templates alone
+ * therefore advances only one of the two axes: round 0 took the *first*
+ * palette out of every template, round 1 the second, and so on — so the
+ * first three rows of /category/buttons were twelve different button
+ * designs that were all rose, then all rose again one size up. The page
+ * looked like the background color was stuck.
+ *
+ * So group twice — by template, then by hue within the template — and
+ * offset the hue by both the round and the template's position. Two
+ * adjacent cards then differ in design *and* in color, and a card differs
+ * from the one a row above it too.
+ */
+function interleaveByTemplate(effects: Effect[]): Effect[] {
+  const groups = new Map<string, Map<string, Effect[]>>()
+  for (const e of effects) {
+    const key = templateKey(e)
+    let byHue = groups.get(key)
+    if (!byHue) groups.set(key, (byHue = new Map()))
+    const hue = hueKey(e)
+    const bucket = byHue.get(hue)
+    if (bucket) bucket.push(e)
+    else byHue.set(hue, [e])
+  }
+
+  // Each template becomes a list of per-hue queues, drained from the front.
+  const buckets = [...groups.values()].map((byHue) => [...byHue.values()])
+
   const out: Effect[] = []
   for (let round = 0; out.length < effects.length; round++) {
-    for (const bucket of buckets) {
-      if (round < bucket.length) out.push(bucket[round])
+    for (let i = 0; i < buckets.length; i++) {
+      const hues = buckets[i]
+      // `round + i` walks the hue forward along the row and again on the
+      // next row; `step` skips hues this template has already exhausted.
+      for (let step = 0; step < hues.length; step++) {
+        const queue = hues[(round + i + step) % hues.length]
+        if (queue.length > 0) {
+          out.push(queue.shift()!)
+          break
+        }
+      }
     }
   }
   return out

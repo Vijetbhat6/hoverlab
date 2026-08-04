@@ -34,11 +34,11 @@ const FAQ_ITEMS: FaqItem[] = [
     q: 'Is Hoverlab really free?',
     a: (
       <>
-        Yes. Every effect, every customization slider, every export is free
-        with no time limit and no credit card. You can sign up, save your
-        favorites, build a bundle, and export the CSS without ever paying.
-        If we ever add a paid tier, the existing free features will stay
-        free — that&apos;s a promise, not a marketing line.
+        Yes, for personal and non-commercial projects. Every effect, every
+        customization slider, favorites, bundles, and CSS/HTML/ZIP export are
+        free with no time limit and no credit card. What a paid plan adds is
+        the right to use the effects commercially, plus unlimited bundle size,
+        the framework export formats, and brand presets.
       </>
     ),
   },
@@ -46,11 +46,11 @@ const FAQ_ITEMS: FaqItem[] = [
     q: 'Can I use these effects in commercial projects?',
     a: (
       <>
-        Absolutely. Every effect is pure CSS released under the MIT license.
-        You can ship it in client projects, paid products, internal tools,
-        or anything else — no attribution required (though it&apos;s
-        appreciated). The only thing you can&apos;t do is sue us, and
-        that&apos;s standard open-source boilerplate.
+        That&apos;s what Pro is for. The free tier covers personal and
+        non-commercial work — learning, side projects, portfolios. A one-time
+        Pro license covers client projects, paid products, and internal tools
+        at a company, with no attribution required and nothing recurring to
+        pay. Buy it once and it stays yours, including future updates.
       </>
     ),
   },

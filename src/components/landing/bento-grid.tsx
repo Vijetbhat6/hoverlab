@@ -7,7 +7,7 @@
  *  - Big tile (2×2): pure-CSS hero with live demo
  *  - Wide tile (2×1): copy-paste workflow snippet
  *  - Tall tile (1×2): big stat
- *  - Small (1×1): MIT license badge
+ *  - Small (1×1): license badge
  *  - Small (1×1): PWA badge
  *  - Wide (2×1): testimonial quote
  *
@@ -126,7 +126,7 @@ export function BentoGrid() {
           </div>
         </Reveal>
 
-        {/* Small tile: MIT (1×1) */}
+        {/* Small tile: license (1×1) */}
         <Reveal
           className="fx-bento-tile flex flex-col justify-between rounded-2xl border border-border/60 bg-card/80 p-5"
           delay={0}
@@ -135,9 +135,9 @@ export function BentoGrid() {
             <Shield className="h-4 w-4" />
           </div>
           <div>
-            <div className="text-base font-bold tracking-tight">MIT</div>
+            <div className="text-base font-bold tracking-tight">Clear license</div>
             <div className="text-xs text-muted-foreground">
-              Licensed, commercial-ready
+              Free for personal use, Pro for commercial
             </div>
           </div>
         </Reveal>

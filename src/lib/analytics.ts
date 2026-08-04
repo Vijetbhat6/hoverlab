@@ -84,6 +84,16 @@ export type AnalyticsEvent =
   | { name: 'login_completed'; props: { method: 'email' } }
   // ---- monetization funnel ----
   | { name: 'pricing_viewed'; props: Record<string, never> }
+  /**
+   * Currency display toggled on the pricing section. Paired with `region`,
+   * this answers whether the rupee view is actually wanted — and by whom.
+   * If visitors outside India routinely switch to INR, the regional default
+   * is wrong; if Indian visitors switch away to USD, the toggle is noise.
+   */
+  | {
+      name: 'pricing_currency_toggled'
+      props: { currency: 'USD' | 'INR'; region: string }
+    }
   | { name: 'checkout_started'; props: { plan: string; interval: 'one_time' | 'month' } }
   | {
       name: 'purchase_completed'

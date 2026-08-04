@@ -1,6 +1,12 @@
 import { NextResponse } from 'next/server'
 import { getPolar, billingEnabled } from '@/lib/billing/polar'
-import { PLANS, parsePlanId, isPurchasable } from '@/lib/billing/plans'
+import {
+  PLANS,
+  parsePlanId,
+  isPurchasable,
+  discountForRegion,
+} from '@/lib/billing/plans'
+import { regionFromHeaders } from '@/lib/billing/region'
 import { getCurrentUser } from '@/lib/session'
 import { absoluteUrl } from '@/lib/site'
 
@@ -67,6 +73,13 @@ export async function POST(request: Request) {
     ? Math.min(Math.max(Number(body.seats) || 1, 1), 500)
     : 1
 
+  // Region comes from the edge geolocation header on THIS request, never
+  // from the client. The pricing UI reads the same header via
+  // /api/billing/pricing, but what it displays has no bearing on what is
+  // charged — the discount is decided here, server-side.
+  const region = regionFromHeaders(request.headers)
+  const discountId = discountForRegion(planId, region)
+
   try {
     const checkout = await getPolar().checkouts.create({
       products: [plan.polarProductId as string],
@@ -74,11 +87,21 @@ export async function POST(request: Request) {
       // Our own user id, echoed back on every webhook for this customer.
       externalCustomerId: user.id,
       successUrl: absoluteUrl('/account?checkout=success'),
+      // Seat count has to reach Polar here. It used to live only in
+      // metadata, so the subscription was created with Polar's default
+      // quantity and the webhook — which reads `data.quantity` — provisioned
+      // one seat no matter how many were bought and paid for.
+      ...(plan.perSeat ? { seats } : {}),
+      ...(discountId ? { discountId } : {}),
+      // A regional price is already a large discount; stacking a public
+      // coupon on top of it is not intended.
+      allowDiscountCodes: !discountId,
       metadata: {
         userId: user.id,
         plan: plan.id,
         interval: plan.interval,
         seats: String(seats),
+        region,
       },
     })
 

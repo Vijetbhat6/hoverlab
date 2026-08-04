@@ -64,6 +64,10 @@ server.log
 
 .vercel
 .env*
+# ...except the template. It holds only placeholders and non-secret defaults,
+# and it is the only record of which variables a deploy actually needs — with
+# it ignored, that documentation existed nowhere in the repo.
+!.env.example
 
 # Firebase service account keys — secrets, never commit
 *service-account*.json

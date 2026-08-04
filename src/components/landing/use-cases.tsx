@@ -57,7 +57,7 @@ const PERSONAS: Persona[] = [
     bullets: [
       'Polished micro-interactions in minutes, not sprints',
       'No design hire required for a launch-ready feel',
-      'MIT-licensed — use it in paid products with no attribution',
+      'Pro covers commercial use — ship it in a paid product, no attribution',
     ],
     accent: 'text-amber-500',
     blob: 'bg-amber-500/20',

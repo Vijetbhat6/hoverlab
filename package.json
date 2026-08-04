@@ -6,6 +6,7 @@
     "dev": "next dev -p 3000 2>&1 | tee dev.log",
     "prebuild": "node scripts/build-effect-index.mjs && tsx scripts/build-catalog-stats.mts",
     "check:env": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/check-env.mjs",
+    "polar:provision": "tsx scripts/provision-polar.mts",
     "check:deploy": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/check-deploy.mjs",
     "build": "next build",
     "build:index": "node scripts/build-effect-index.mjs",

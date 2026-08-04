@@ -77,11 +77,11 @@ const ROWS: Row[] = [
     note: '40+ curated effects — vs unlimited if you write them — vs millions of packages',
   },
   {
-    feature: 'Free for commercial use',
-    hoverlab: 'yes',
+    feature: 'Commercial use',
+    hoverlab: 'partial',
     scratch: 'yes',
     npm: 'partial',
-    note: 'MIT — vs yours — vs check each license',
+    note: 'One-time Pro license — vs yours — vs check each license',
   },
 ]
 
