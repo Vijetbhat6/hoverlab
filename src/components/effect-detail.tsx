@@ -607,23 +607,35 @@ export function EffectDetail({ effect, similar, prev, next }: EffectDetailProps)
               </p>
             ) : (
               <ul className="space-y-2">
+                {/* Stretched anchor over the name rather than a <Link> around
+                    the whole row — the same shape the category cards use, and
+                    for the same reason. 290 effects ship their own <a>, and
+                    others ship <details> or a <form>; nesting any of those
+                    inside an anchor is invalid, so the parser hoists them out
+                    and the server HTML stops matching the client tree. That
+                    was a hydration failure on every Navigation, Accordion and
+                    Inputs effect page, which threw away the whole rail and
+                    re-rendered it on the client. */}
                 {similar.map((s) => (
-                  <li key={s.id}>
-                    <Link
-                      href={`/effect/${s.id}`}
-                      className="group flex items-center gap-3 rounded-md p-2 transition-colors hover:bg-muted/60"
-                    >
-                      <SimilarPreview effect={s} />
-                      <div className="min-w-0 flex-1">
-                        <div className="truncate text-sm font-medium group-hover:text-primary">
+                  <li
+                    key={s.id}
+                    className="group relative flex items-center gap-3 rounded-md p-2 transition-colors hover:bg-muted/60"
+                  >
+                    <SimilarPreview effect={s} />
+                    <div className="min-w-0 flex-1">
+                      <div className="truncate text-sm font-medium group-hover:text-primary">
+                        <Link
+                          href={`/effect/${s.id}`}
+                          className="after:absolute after:inset-0 after:content-['']"
+                        >
                           {s.name}
-                        </div>
-                        <div className="truncate text-[11px] text-muted-foreground">
-                          {s.description}
-                        </div>
+                        </Link>
                       </div>
-                      <ExternalLink className="h-3 w-3 shrink-0 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
-                    </Link>
+                      <div className="truncate text-[11px] text-muted-foreground">
+                        {s.description}
+                      </div>
+                    </div>
+                    <ExternalLink className="h-3 w-3 shrink-0 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
                   </li>
                 ))}
               </ul>
@@ -650,26 +662,72 @@ export function EffectDetail({ effect, similar, prev, next }: EffectDetailProps)
  *  so multiple similar effects can render side by side.
  * ========================================================== */
 
-let previewSeq = 0
+/** Index of the `}` that closes the `{` at `open`. */
+function matchingBrace(css: string, open: number): number {
+  let depth = 0
+  for (let i = open; i < css.length; i++) {
+    if (css[i] === '{') depth++
+    else if (css[i] === '}' && --depth === 0) return i
+  }
+  return css.length
+}
+
+/**
+ * Prefix every rule in `css` with `.wrapper`, so a 40px thumbnail can render
+ * an effect without its styles leaking into the rest of the page.
+ *
+ * At-rules are the whole reason this isn't a regex. Prefixing blindly
+ * produced `.fx-preview-1 @keyframes spin { … }`, which is not a selector —
+ * browsers drop the entire block, so every animated effect in this rail
+ * rendered frozen while still carrying an `animation-name` that pointed at
+ * keyframes that no longer existed. `@keyframes` (and friends) therefore
+ * pass through untouched; their bodies aren't selector lists, and the
+ * generator already namespaces animation names per effect, so they can't
+ * collide. Conditional groups like `@media` keep their condition and get
+ * scoped one level in — which is also what finally lets the reduced-motion
+ * guard reach these previews.
+ */
+function scopeCss(css: string, wrapper: string): string {
+  let out = ''
+  let i = 0
+  while (i < css.length) {
+    const open = css.indexOf('{', i)
+    if (open === -1) break
+    const prelude = css.slice(i, open).trim()
+    const close = matchingBrace(css, open)
+    const body = css.slice(open + 1, close)
+
+    if (/^@(-[a-z]+-)?(keyframes|font-face|counter-style|property)\b/i.test(prelude)) {
+      out += `${prelude} {${body}}\n`
+    } else if (prelude.startsWith('@')) {
+      out += `${prelude} {${scopeCss(body, wrapper)}}\n`
+    } else {
+      const scoped = prelude
+        .split(',')
+        .map((s) => `.${wrapper} ${s.trim()}`)
+        .join(', ')
+      out += `${scoped} {${body}}\n`
+    }
+    i = close + 1
+  }
+  return out
+}
 
 function SimilarPreview({ effect }: { effect: Effect }) {
-  const [wrapId] = React.useState(() => `fx-preview-${++previewSeq}`)
-  // Scope the CSS by prefixing every selector with our wrapper class.
-  // Cheap & cheerful — works for the simple class-based selectors we generate.
-  const scopedCss = React.useMemo(() => {
-    // Replace each selector group `selector1, selector2 {` with
-    // `.wrapId selector1, .wrapId selector2 {`
-    return effect.css.replace(/(^|\})\s*([^{}]+)\{/g, (_m, brace, selectors) => {
-      const scoped = selectors
-        .split(',')
-        .map((s: string) => `.${wrapId} ${s.trim()}`)
-        .join(', ')
-      return `${brace} ${scoped} {`
-    })
-  }, [effect.css, wrapId])
+  // useId, not a module-level counter: the counter kept climbing for the
+  // life of the server process while the browser restarted it at 1, so the
+  // wrapper class React rendered never matched the one it hydrated against
+  // and every effect page logged a hydration mismatch. Colons and
+  // guillemets are legal in an id but not in a class name.
+  const wrapId = `fx-preview-${React.useId().replace(/[^a-zA-Z0-9]/g, '')}`
+  const scopedCss = React.useMemo(() => scopeCss(effect.css, wrapId), [effect.css, wrapId])
 
   return (
+    // `inert` because the thumbnail is decoration: a third of these effects
+    // render a real <button> or <input>, and without it each 40px preview
+    // adds its own tab stops beside the link it sits next to.
     <div
+      inert
       className={cn(
         'flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-md border border-border/40',
         effect.darkSurface ? 'bg-slate-950' : 'bg-muted/40',
