@@ -213,13 +213,29 @@ export function checkEnv(
   // --- NEXT_PUBLIC_SITE_URL ------------------------------------------------
   // Silent in a different way: canonical tags and the sitemap resolve against
   // lib/site.ts's localhost fallback, so every indexed URL points at nothing.
+  // Checkout's return URL is built from the same base, so a wrong value also
+  // strands a paying customer on a dead page the moment they are charged.
   if (!has('NEXT_PUBLIC_SITE_URL')) {
-    checks.push({
-      key: 'NEXT_PUBLIC_SITE_URL',
-      status: 'missing',
-      level: opts.production ? 'required' : 'recommended',
-      message: 'Canonical URLs and the sitemap fall back to http://localhost:3000.',
-    })
+    // On Vercel this is genuinely optional: lib/site.ts falls back to
+    // VERCEL_PROJECT_PRODUCTION_URL, the project's stable production domain.
+    // Reporting that as missing would push someone into pinning a domain by
+    // hand — which is exactly how a value outlives the domain it names.
+    checks.push(
+      has('VERCEL_PROJECT_PRODUCTION_URL')
+        ? {
+            key: 'NEXT_PUBLIC_SITE_URL',
+            status: 'ok',
+            level: 'required',
+            message: `Unset; inheriting https://${env.VERCEL_PROJECT_PRODUCTION_URL}.`,
+          }
+        : {
+            key: 'NEXT_PUBLIC_SITE_URL',
+            status: 'missing',
+            level: opts.production ? 'required' : 'recommended',
+            message:
+              'Canonical URLs and the sitemap fall back to http://localhost:3000.',
+          },
+    )
   } else if (opts.production && isLocalHost(env.NEXT_PUBLIC_SITE_URL!)) {
     checks.push({
       key: 'NEXT_PUBLIC_SITE_URL',
