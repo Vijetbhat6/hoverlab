@@ -23,6 +23,11 @@ import {
   Square,
   Activity,
   Wine,
+  Grid3x3,
+  Zap,
+  Image as ImageIcon,
+  Search,
+  Mail,
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { ThemeToggle } from '@/components/theme-toggle'
@@ -42,6 +47,70 @@ interface ToolDef {
 }
 
 const TOOLS: ToolDef[] = [
+  {
+    href: '/tools/tokens',
+    name: 'Token Generator',
+    description:
+      'Build the CSS custom properties every block in the catalog is styled against — a full light and dark set in the shadcn convention. Colour maths in OKLCH, so one lightness scale works across every hue.',
+    icon: <Palette className="h-6 w-6" />,
+    accent: 'from-indigo-500 to-violet-500',
+  },
+  {
+    href: '/tools/icons',
+    name: 'Icon Browser',
+    description:
+      'Search the icon set every block already uses. Matches on keywords, not just names — "delete" finds Trash2. Click to copy the JSX.',
+    icon: <Grid3x3 className="h-6 w-6" />,
+    accent: 'from-slate-500 to-zinc-500',
+  },
+  {
+    href: '/tools/fonts',
+    name: 'Font Pairings',
+    description:
+      'Six pairs that work, previewed as a heading over a paragraph at real sizes — the only arrangement that tells you whether a pairing holds. Emits next/font, which self-hosts.',
+    icon: <Type className="h-6 w-6" />,
+    accent: 'from-amber-500 to-orange-500',
+  },
+  {
+    href: '/tools/motion',
+    name: 'Motion Presets',
+    description:
+      'Enter, exit and attention animations, each shipping with its prefers-reduced-motion guard already written. Preview what a reduced-motion visitor actually sees.',
+    icon: <Zap className="h-6 w-6" />,
+    accent: 'from-yellow-500 to-amber-500',
+  },
+  {
+    href: '/tools/placeholders',
+    name: 'Placeholders',
+    description:
+      'Placeholder images and initial avatars as SVG data URIs. No third-party request, works offline, and the avatar colour is derived from the name so it is stable everywhere.',
+    icon: <ImageIcon className="h-6 w-6" />,
+    accent: 'from-emerald-500 to-teal-500',
+  },
+  {
+    href: '/tools/favicon',
+    name: 'Favicon Generator',
+    description:
+      'A letter or emoji into an SVG icon plus every PNG size that still matters. Rasterized in your browser from the same SVG — nothing is uploaded.',
+    icon: <Sparkles className="h-6 w-6" />,
+    accent: 'from-fuchsia-500 to-pink-500',
+  },
+  {
+    href: '/tools/meta',
+    name: 'Meta & OG Builder',
+    description:
+      'The tags that get you indexed and the card your link turns into, with length counters and a search-result preview. Emits Next.js Metadata, not stray meta tags.',
+    icon: <Search className="h-6 w-6" />,
+    accent: 'from-sky-500 to-blue-500',
+  },
+  {
+    href: '/tools/email',
+    name: 'Email Templates',
+    description:
+      'Welcome, verify, reset and receipt — as nested tables with inline styles, because Outlook renders through Word. Text/plain version included.',
+    icon: <Mail className="h-6 w-6" />,
+    accent: 'from-rose-500 to-red-500',
+  },
   {
     href: '/tools/palette',
     name: 'Palette Generator',
@@ -154,7 +223,7 @@ export default function ToolsHubPage() {
         <section className="mx-auto mb-12 max-w-3xl text-center">
           <div className="mb-4 inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-background/60 px-3 py-1 text-xs text-muted-foreground backdrop-blur">
             <Sparkles className="h-3.5 w-3.5 text-primary" />
-            9 tools · zero dependencies · works offline
+            {TOOLS.length} tools · zero dependencies · works offline
           </div>
           <h1 className="text-balance bg-gradient-to-br from-foreground to-foreground/60 bg-clip-text text-4xl font-extrabold tracking-tight text-transparent sm:text-5xl lg:text-6xl">
             Designer tools,<br className="hidden sm:inline" /> built into your browser.
