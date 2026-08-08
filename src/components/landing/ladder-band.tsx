@@ -20,6 +20,8 @@ import { Sparkles, Blocks, LayoutTemplate, Rocket, ArrowRight } from 'lucide-rea
 import { Reveal } from '@/components/reveal'
 import { TOTAL_COUNT } from '@/lib/catalog-stats'
 import { BLOCK_COUNT } from '@/lib/blocks/block-index'
+import { PAGE_COUNT } from '@/lib/pages/page-index'
+import { TEMPLATE_COUNT } from '@/lib/templates/template-index'
 
 interface Rung {
   label: string
@@ -49,16 +51,18 @@ const RUNGS: Rung[] = [
   },
   {
     label: 'Pages',
-    count: 'Soon',
+    count: `${PAGE_COUNT}`,
     blurb: 'A finished screen',
     icon: <LayoutTemplate className="h-5 w-5" />,
+    href: '/pages',
     accent: 'text-sky-500',
   },
   {
     label: 'Templates',
-    count: 'Soon',
+    count: `${TEMPLATE_COUNT}`,
     blurb: 'A project you can deploy',
     icon: <Rocket className="h-5 w-5" />,
+    href: '/templates',
     accent: 'text-amber-500',
   },
 ]
@@ -73,7 +77,7 @@ export function LadderBand() {
         <p className="mt-2 text-sm text-muted-foreground">
           Grab a single hover state, drop in an entire pricing section, or
           start from a project that already runs. Each tier is built from the
-          one below it.
+          one below it — and you can drill from any rung down to the next.
         </p>
       </Reveal>
 

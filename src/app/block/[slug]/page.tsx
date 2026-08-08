@@ -21,6 +21,7 @@ import { BlockCard } from '@/components/blocks/block-card'
 import { BLOCKS, getBlock, primaryFile } from '@/lib/blocks/blocks'
 import { blockCategorySlug, GROUP_OF } from '@/lib/blocks/block-types'
 import { blocksInCategory, getBlockMeta } from '@/lib/blocks/block-index'
+import { pagesUsingBlock } from '@/lib/pages/page-index'
 import { absoluteUrl } from '@/lib/site'
 
 /**
@@ -71,6 +72,11 @@ export default async function BlockDetailPage({ params }: PageProps) {
 
   // Siblings for the "more like this" rail, this block excluded.
   const related = blocksInCategory(block.category).filter((b) => b.id !== block.id)
+
+  // The upward half of the drill-down — every page that renders this block.
+  // Derived from the page catalog's `composedOf`, so it stays correct
+  // without this tier knowing anything about pages.
+  const usedIn = pagesUsingBlock(block.id)
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -143,6 +149,45 @@ export default async function BlockDetailPage({ params }: PageProps) {
             whose source is below, not a screenshot of it.
           </p>
         </section>
+
+        {/* ---------------------------------------------------------- *
+         *  Used in — climb the ladder rather than only descending it
+         * ---------------------------------------------------------- */}
+        {usedIn.length > 0 ? (
+          <section className="mt-12">
+            <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+              Used in these pages
+            </h2>
+
+            <ul className="grid gap-3 sm:grid-cols-2">
+              {usedIn.map((p) => (
+                <li key={p.id}>
+                  <Link
+                    href={`/page/${p.id}`}
+                    className="group flex items-center gap-3 rounded-xl border border-border/60 bg-card/60 px-4 py-3 transition-all hover:-translate-y-0.5 hover:border-primary/40"
+                  >
+                    <Layers aria-hidden className="h-4 w-4 shrink-0 text-muted-foreground" />
+                    <span className="min-w-0 flex-1">
+                      <span className="block truncate text-sm font-medium">{p.name}</span>
+                      <span className="block text-xs text-muted-foreground">
+                        {p.composedOf.length} blocks
+                      </span>
+                    </span>
+                    <ArrowRight
+                      aria-hidden
+                      className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5"
+                    />
+                  </Link>
+                </li>
+              ))}
+            </ul>
+
+            <p className="mt-3 text-xs text-muted-foreground">
+              Want the whole screen instead of this one section? Open a page
+              and copy it entire.
+            </p>
+          </section>
+        ) : null}
 
         {/* ---------------------------------------------------------- *
          *  Source

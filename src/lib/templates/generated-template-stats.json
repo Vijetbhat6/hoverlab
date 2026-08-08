@@ -1,0 +1,18 @@
+{
+  "saas-starter": {
+    "lines": 499,
+    "files": 10
+  },
+  "admin-panel": {
+    "lines": 481,
+    "files": 10
+  },
+  "marketing-site": {
+    "lines": 496,
+    "files": 10
+  },
+  "storefront": {
+    "lines": 510,
+    "files": 10
+  }
+}

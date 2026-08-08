@@ -1,0 +1,58 @@
+{
+  "saas-landing-page": {
+    "lines": 87,
+    "files": 1
+  },
+  "pricing-page": {
+    "lines": 94,
+    "files": 1
+  },
+  "dashboard-overview": {
+    "lines": 47,
+    "files": 1
+  },
+  "customers-table-page": {
+    "lines": 37,
+    "files": 1
+  },
+  "settings-account-page": {
+    "lines": 39,
+    "files": 1
+  },
+  "billing-page": {
+    "lines": 44,
+    "files": 1
+  },
+  "login-page": {
+    "lines": 63,
+    "files": 1
+  },
+  "error-404-page": {
+    "lines": 62,
+    "files": 1
+  },
+  "collection-page": {
+    "lines": 68,
+    "files": 1
+  },
+  "product-detail-page": {
+    "lines": 75,
+    "files": 1
+  },
+  "cart-page": {
+    "lines": 42,
+    "files": 1
+  },
+  "checkout-page": {
+    "lines": 57,
+    "files": 1
+  },
+  "order-confirmation-page": {
+    "lines": 56,
+    "files": 1
+  },
+  "account-orders-page": {
+    "lines": 42,
+    "files": 1
+  }
+}

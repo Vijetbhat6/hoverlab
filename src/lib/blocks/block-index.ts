@@ -21,13 +21,13 @@ import {
   type BlockMeta,
 } from './block-types'
 
-const lines = LINE_COUNTS as Record<string, number>
+const stats = LINE_COUNTS as Record<string, { lines: number; files: number }>
 
 /** Every block, as metadata, in catalog order. */
 export const BLOCK_INDEX: BlockMeta[] = BLOCK_CATALOG.map((b) => ({
   ...b,
   level: 'block' as const,
-  lines: lines[b.id] ?? 0,
+  lines: stats[b.id]?.lines ?? 0,
 }))
 
 /** How many blocks exist. Safe to import anywhere — it is one integer. */

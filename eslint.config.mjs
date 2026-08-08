@@ -44,7 +44,12 @@ const eslintConfig = [...nextCoreWebVitals, ...nextTypescript, {
     "no-useless-escape": "off",
   },
 }, {
-  ignores: ["node_modules/**", ".next/**", "out/**", "build/**", "next-env.d.ts", "examples/**", "skills"]
+  // src/lib/templates/files is template scaffolding, not application code:
+  // it is never imported, it is read as text and shipped to users, and its
+  // imports resolve against *their* project rather than this one. Linting
+  // it would report unresolvable paths that are correct where it lands.
+  // Excluded from tsconfig for the same reason.
+  ignores: ["node_modules/**", ".next/**", "out/**", "build/**", "next-env.d.ts", "examples/**", "skills", "src/lib/templates/files/**"]
 }];
 
 export default eslintConfig;

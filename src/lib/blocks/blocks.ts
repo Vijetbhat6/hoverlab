@@ -23,7 +23,7 @@ const sources = GENERATED_SOURCES as Record<string, ArtifactFile[]>
 /**
  * Catalog metadata joined to the inlined source.
  *
- * `scripts/build-block-sources.mjs` fails the build when the two lists
+ * `scripts/build-artifact-sources.mjs` fails the build when the two lists
  * disagree, so the lookup below is total in practice; the `?? []` is a
  * guard against a stale generated file in a dev tree where the script has
  * not been re-run, not an expected case.

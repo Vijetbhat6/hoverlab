@@ -58,8 +58,24 @@ export type ArtifactTier = 'free' | 'pro'
  *  Source files
  * ------------------------------------------------------------------ */
 
-/** A language tag, used for syntax highlighting and export filenames. */
-export type SourceLang = 'tsx' | 'jsx' | 'ts' | 'js' | 'css' | 'html' | 'vue' | 'svelte' | 'json'
+/**
+ * A language tag, used for syntax highlighting and export filenames.
+ *
+ * `md` is here because templates ship documentation as part of the project
+ * — a README and a getting-started guide are files in the tree like any
+ * other, and the file browser has to be able to render them.
+ */
+export type SourceLang =
+  | 'tsx'
+  | 'jsx'
+  | 'ts'
+  | 'js'
+  | 'css'
+  | 'html'
+  | 'vue'
+  | 'svelte'
+  | 'json'
+  | 'md'
 
 /**
  * One file of a multi-file artifact.

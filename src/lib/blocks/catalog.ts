@@ -2,7 +2,7 @@
  * Hand-authored metadata for every block.
  *
  * Source text is NOT here — it lives in `./sources/*.tsx` and is inlined at
- * build time by `scripts/build-block-sources.mjs`. That split is the same
+ * build time by `scripts/build-artifact-sources.mjs`. That split is the same
  * one the effect catalog makes, and for the same reason: the grid needs
  * names and tags to filter on, and shipping several hundred kilobytes of
  * TSX to render a card would undo the work that got `/` down to size.
@@ -525,6 +525,193 @@ export const BLOCK_CATALOG: BlockRecord[] = [
       'Dropzone with per-file progress and a drag counter that fixes the flicker every naive dragleave handler produces.',
     tags: ['upload', 'dropzone', 'drag and drop', 'files', 'progress'],
     previewComponent: 'file-dropzone',
+    deps: ['lucide-react'],
+    featured: true,
+  },
+
+  /* ================================================================ *
+   *  Commerce
+   * ================================================================ *
+   * Money is integer minor units in every block here, formatted through
+   * `Intl.NumberFormat` at the edge. Floats are how `19.99 * 3` becomes
+   * 59.97000000000001 in a cart total, and it is always found in
+   * production rather than in review.
+   *
+   * Product images are Tailwind gradient placeholders, never remote URLs:
+   * a block that fetches from a CDN breaks offline, in a sandbox, and in
+   * the preview on this site. Swap for `next/image` when wiring up.
+   */
+
+  /* ---------------------------- Product Listings ------------------ */
+  {
+    id: 'product-grid',
+    name: 'Product Card Grid',
+    category: 'Product Listings',
+    description:
+      'Responsive product cards with sale badges, ratings and a wishlist button layered above the card link so it stays clickable.',
+    tags: ['products', 'grid', 'shop', 'catalogue', 'cards'],
+    previewComponent: 'product-grid',
+    deps: ['lucide-react'],
+    featured: true,
+    fullBleed: true,
+  },
+  {
+    id: 'product-filter-sidebar',
+    name: 'Faceted Filter Sidebar',
+    category: 'Product Listings',
+    description:
+      'Category, size, colour and price facets as proper fieldsets, with colour swatches that carry their name as well as their hue.',
+    tags: ['filters', 'facets', 'sidebar', 'refine', 'shop'],
+    previewComponent: 'product-filter-sidebar',
+    deps: ['lucide-react'],
+    featured: true,
+  },
+  {
+    id: 'collection-toolbar',
+    name: 'Collection Sort Toolbar',
+    category: 'Product Listings',
+    description:
+      'Result count, sort and density switch — with the count in an aria-live region, since it is the only feedback a filter change gives some users.',
+    tags: ['toolbar', 'sort', 'collection', 'shop', 'results'],
+    previewComponent: 'collection-toolbar',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'product-rail',
+    name: 'Scroll-Snap Product Rail',
+    category: 'Product Listings',
+    description:
+      'A "you might also like" row on native scroll-snap — touch swiping, momentum and keyboard support for free, with no carousel library.',
+    tags: ['carousel', 'rail', 'related', 'scroll snap', 'products'],
+    previewComponent: 'product-rail',
+    deps: [],
+    featured: true,
+    fullBleed: true,
+  },
+
+  /* ---------------------------- Product Detail -------------------- */
+  {
+    id: 'product-gallery',
+    name: 'Product Image Gallery',
+    category: 'Product Detail',
+    description:
+      'Main image with a thumbnail strip built as a real tablist, so arrow keys work and the ratio is fixed to stop the buy box shifting.',
+    tags: ['gallery', 'images', 'product', 'thumbnails', 'tabs'],
+    previewComponent: 'product-gallery',
+    deps: ['lucide-react'],
+    featured: true,
+  },
+  {
+    id: 'product-buy-box',
+    name: 'Variant & Add-to-Cart Box',
+    category: 'Product Detail',
+    description:
+      'Price, variant radiogroup, quantity stepper and add-to-bag — with sold-out sizes disabled and visible rather than hidden.',
+    tags: ['buy box', 'variants', 'add to cart', 'quantity', 'product'],
+    previewComponent: 'product-buy-box',
+    deps: ['lucide-react'],
+    featured: true,
+  },
+  {
+    id: 'product-info-accordion',
+    name: 'Product Details Accordion',
+    category: 'Product Detail',
+    description:
+      'Description, materials, delivery and returns in named <details> elements — no JavaScript, and the copy stays indexable while collapsed.',
+    tags: ['accordion', 'product details', 'specs', 'shipping', 'no-js'],
+    previewComponent: 'product-info-accordion',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'product-review-summary',
+    name: 'Rating Distribution Summary',
+    category: 'Product Detail',
+    description:
+      'Average rating with a clickable histogram — because a 4.3 of forties and fives is a different product from a 4.3 of ones and fives.',
+    tags: ['reviews', 'rating', 'histogram', 'stars', 'product'],
+    previewComponent: 'product-review-summary',
+    deps: ['lucide-react'],
+    featured: true,
+  },
+
+  /* ---------------------------- Cart & Checkout ------------------- */
+  {
+    id: 'cart-drawer',
+    name: 'Slide-Over Cart Drawer',
+    category: 'Cart & Checkout',
+    description:
+      'A basket panel with the dialog mechanics usually missing: focus trap, focus return, Escape to close and a background scroll lock.',
+    tags: ['cart', 'drawer', 'slide over', 'dialog', 'focus trap'],
+    previewComponent: 'cart-drawer',
+    deps: ['lucide-react'],
+    featured: true,
+    fullBleed: true,
+  },
+  {
+    id: 'cart-line-items',
+    name: 'Editable Cart Lines',
+    category: 'Cart & Checkout',
+    description:
+      'Quantity steppers and remove-with-undo, with every total derived rather than stored so the basket can never disagree with itself.',
+    tags: ['cart', 'basket', 'quantity', 'undo', 'line items'],
+    previewComponent: 'cart-line-items',
+    deps: ['lucide-react'],
+    featured: true,
+  },
+  {
+    id: 'checkout-form',
+    name: 'Checkout Address & Payment',
+    category: 'Cart & Checkout',
+    description:
+      'The full autocomplete token set that lets a browser fill eight fields in one tap, plus address labels that follow the selected country.',
+    tags: ['checkout', 'payment', 'address', 'autocomplete', 'form'],
+    previewComponent: 'checkout-form',
+    deps: ['lucide-react'],
+    featured: true,
+  },
+  {
+    id: 'order-summary-panel',
+    name: 'Order Summary With Promo',
+    category: 'Cart & Checkout',
+    description:
+      'Subtotal, discount, delivery and tax all derived from the lines, with the free-delivery nudge driven by the same threshold as the charge.',
+    tags: ['order summary', 'totals', 'promo code', 'checkout', 'tax'],
+    previewComponent: 'order-summary-panel',
+    deps: ['lucide-react'],
+    featured: true,
+  },
+
+  /* ---------------------------- Orders & Reviews ------------------ */
+  {
+    id: 'order-confirmation',
+    name: 'Order Confirmation',
+    category: 'Orders & Reviews',
+    description:
+      'The thank-you screen built to prevent two support emails: a selectable order number and a delivery date range rather than "soon".',
+    tags: ['order confirmation', 'thank you', 'receipt', 'checkout', 'success'],
+    previewComponent: 'order-confirmation',
+    deps: ['lucide-react'],
+    featured: true,
+    fullBleed: true,
+  },
+  {
+    id: 'order-history-list',
+    name: 'Order History',
+    category: 'Orders & Reviews',
+    description:
+      'Past orders with stacked item thumbnails and worded statuses — people recognise what they bought long before the order number.',
+    tags: ['orders', 'history', 'account', 'tracking', 'status'],
+    previewComponent: 'order-history-list',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'review-list',
+    name: 'Customer Reviews',
+    category: 'Orders & Reviews',
+    description:
+      'Sortable reviews with verified-purchase badges, optimistic helpful votes and a real expand control instead of a fade that hides text.',
+    tags: ['reviews', 'ratings', 'verified', 'social proof', 'ugc'],
+    previewComponent: 'review-list',
     deps: ['lucide-react'],
     featured: true,
   },

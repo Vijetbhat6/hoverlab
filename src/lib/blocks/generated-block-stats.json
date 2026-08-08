@@ -1,45 +1,234 @@
 {
-  "stats-band": 51,
-  "logo-cloud": 83,
-  "bento-features": 114,
-  "persona-cards": 145,
-  "code-showcase": 164,
-  "pricing-tiers": 189,
-  "comparison-table": 135,
-  "testimonial-grid": 132,
-  "faq-accordion": 94,
-  "changelog-timeline": 134,
-  "roadmap-columns": 122,
-  "newsletter-signup": 130,
-  "community-band": 100,
-  "auth-login-card": 181,
-  "auth-signup-split": 201,
-  "auth-otp-verify": 184,
-  "auth-forgot-password": 122,
-  "auth-reset-password": 175,
-  "auth-two-factor": 137,
-  "dashboard-shell": 206,
-  "dashboard-stat-cards": 114,
-  "dashboard-activity-feed": 171,
-  "dashboard-page-header": 150,
-  "data-table-sortable": 288,
-  "data-table-toolbar": 176,
-  "data-table-pagination": 180,
-  "data-table-expandable": 204,
-  "settings-nav-layout": 119,
-  "settings-profile-form": 216,
-  "settings-team-members": 196,
-  "settings-api-keys": 226,
-  "settings-danger-zone": 175,
-  "empty-state-cta": 131,
-  "error-state-retry": 131,
-  "not-found-404": 139,
-  "skeleton-list": 88,
-  "metric-sparkline-cards": 142,
-  "bar-chart-panel": 139,
-  "usage-meter-panel": 172,
-  "billing-plan-summary": 151,
-  "invoice-history-table": 166,
-  "command-palette": 255,
-  "file-dropzone": 219
+  "stats-band": {
+    "lines": 51,
+    "files": 1
+  },
+  "logo-cloud": {
+    "lines": 83,
+    "files": 1
+  },
+  "bento-features": {
+    "lines": 114,
+    "files": 1
+  },
+  "persona-cards": {
+    "lines": 145,
+    "files": 1
+  },
+  "code-showcase": {
+    "lines": 164,
+    "files": 1
+  },
+  "pricing-tiers": {
+    "lines": 189,
+    "files": 1
+  },
+  "comparison-table": {
+    "lines": 135,
+    "files": 1
+  },
+  "testimonial-grid": {
+    "lines": 132,
+    "files": 1
+  },
+  "faq-accordion": {
+    "lines": 94,
+    "files": 1
+  },
+  "changelog-timeline": {
+    "lines": 134,
+    "files": 1
+  },
+  "roadmap-columns": {
+    "lines": 122,
+    "files": 1
+  },
+  "newsletter-signup": {
+    "lines": 130,
+    "files": 1
+  },
+  "community-band": {
+    "lines": 100,
+    "files": 1
+  },
+  "auth-login-card": {
+    "lines": 181,
+    "files": 1
+  },
+  "auth-signup-split": {
+    "lines": 201,
+    "files": 1
+  },
+  "auth-otp-verify": {
+    "lines": 184,
+    "files": 1
+  },
+  "auth-forgot-password": {
+    "lines": 122,
+    "files": 1
+  },
+  "auth-reset-password": {
+    "lines": 175,
+    "files": 1
+  },
+  "auth-two-factor": {
+    "lines": 137,
+    "files": 1
+  },
+  "dashboard-shell": {
+    "lines": 206,
+    "files": 1
+  },
+  "dashboard-stat-cards": {
+    "lines": 114,
+    "files": 1
+  },
+  "dashboard-activity-feed": {
+    "lines": 171,
+    "files": 1
+  },
+  "dashboard-page-header": {
+    "lines": 150,
+    "files": 1
+  },
+  "data-table-sortable": {
+    "lines": 288,
+    "files": 1
+  },
+  "data-table-toolbar": {
+    "lines": 176,
+    "files": 1
+  },
+  "data-table-pagination": {
+    "lines": 180,
+    "files": 1
+  },
+  "data-table-expandable": {
+    "lines": 204,
+    "files": 1
+  },
+  "settings-nav-layout": {
+    "lines": 119,
+    "files": 1
+  },
+  "settings-profile-form": {
+    "lines": 216,
+    "files": 1
+  },
+  "settings-team-members": {
+    "lines": 196,
+    "files": 1
+  },
+  "settings-api-keys": {
+    "lines": 226,
+    "files": 1
+  },
+  "settings-danger-zone": {
+    "lines": 175,
+    "files": 1
+  },
+  "empty-state-cta": {
+    "lines": 131,
+    "files": 1
+  },
+  "error-state-retry": {
+    "lines": 131,
+    "files": 1
+  },
+  "not-found-404": {
+    "lines": 139,
+    "files": 1
+  },
+  "skeleton-list": {
+    "lines": 88,
+    "files": 1
+  },
+  "metric-sparkline-cards": {
+    "lines": 142,
+    "files": 1
+  },
+  "bar-chart-panel": {
+    "lines": 139,
+    "files": 1
+  },
+  "usage-meter-panel": {
+    "lines": 172,
+    "files": 1
+  },
+  "billing-plan-summary": {
+    "lines": 151,
+    "files": 1
+  },
+  "invoice-history-table": {
+    "lines": 166,
+    "files": 1
+  },
+  "command-palette": {
+    "lines": 255,
+    "files": 1
+  },
+  "file-dropzone": {
+    "lines": 219,
+    "files": 1
+  },
+  "product-grid": {
+    "lines": 142,
+    "files": 1
+  },
+  "product-filter-sidebar": {
+    "lines": 220,
+    "files": 1
+  },
+  "collection-toolbar": {
+    "lines": 127,
+    "files": 1
+  },
+  "product-rail": {
+    "lines": 118,
+    "files": 1
+  },
+  "product-gallery": {
+    "lines": 111,
+    "files": 1
+  },
+  "product-buy-box": {
+    "lines": 201,
+    "files": 1
+  },
+  "product-info-accordion": {
+    "lines": 124,
+    "files": 1
+  },
+  "product-review-summary": {
+    "lines": 126,
+    "files": 1
+  },
+  "cart-drawer": {
+    "lines": 239,
+    "files": 1
+  },
+  "cart-line-items": {
+    "lines": 197,
+    "files": 1
+  },
+  "checkout-form": {
+    "lines": 255,
+    "files": 1
+  },
+  "order-summary-panel": {
+    "lines": 224,
+    "files": 1
+  },
+  "order-confirmation": {
+    "lines": 209,
+    "files": 1
+  },
+  "order-history-list": {
+    "lines": 195,
+    "files": 1
+  },
+  "review-list": {
+    "lines": 254,
+    "files": 1
+  }
 }

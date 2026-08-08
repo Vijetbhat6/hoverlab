@@ -82,6 +82,25 @@ import { InvoiceHistoryTable } from './sources/invoice-history-table'
 import { CommandPalette } from './sources/command-palette'
 import { FileDropzone } from './sources/file-dropzone'
 
+import { ProductGrid } from './sources/product-grid'
+import { ProductFilterSidebar } from './sources/product-filter-sidebar'
+import { CollectionToolbar } from './sources/collection-toolbar'
+import { ProductRail } from './sources/product-rail'
+
+import { ProductGallery } from './sources/product-gallery'
+import { ProductBuyBox } from './sources/product-buy-box'
+import { ProductInfoAccordion } from './sources/product-info-accordion'
+import { ProductReviewSummary } from './sources/product-review-summary'
+
+import { CartDrawer } from './sources/cart-drawer'
+import { CartLineItems } from './sources/cart-line-items'
+import { CheckoutForm } from './sources/checkout-form'
+import { OrderSummaryPanel } from './sources/order-summary-panel'
+
+import { OrderConfirmation } from './sources/order-confirmation'
+import { OrderHistoryList } from './sources/order-history-list'
+import { ReviewList } from './sources/review-list'
+
 /**
  * Every block renders with no required props — each source defaults its own
  * content. That is what lets an entry below be a bare `<Block />`, and it is
@@ -140,6 +159,25 @@ export const BLOCK_PREVIEWS: Record<string, React.ReactNode> = {
 
   'command-palette': <CommandPalette />,
   'file-dropzone': <FileDropzone />,
+
+  'product-grid': <ProductGrid />,
+  'product-filter-sidebar': <ProductFilterSidebar />,
+  'collection-toolbar': <CollectionToolbar />,
+  'product-rail': <ProductRail />,
+
+  'product-gallery': <ProductGallery />,
+  'product-buy-box': <ProductBuyBox />,
+  'product-info-accordion': <ProductInfoAccordion />,
+  'product-review-summary': <ProductReviewSummary />,
+
+  'cart-drawer': <CartDrawer />,
+  'cart-line-items': <CartLineItems />,
+  'checkout-form': <CheckoutForm />,
+  'order-summary-panel': <OrderSummaryPanel />,
+
+  'order-confirmation': <OrderConfirmation />,
+  'order-history-list': <OrderHistoryList />,
+  'review-list': <ReviewList />,
 }
 
 /** The rendered preview for a block, or undefined if the key is unknown. */
