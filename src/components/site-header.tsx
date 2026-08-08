@@ -49,6 +49,7 @@ const NAV: Array<{ label: string; href: string; match: string[] }> = [
   { label: 'Pages', href: '/pages', match: ['/pages', '/page'] },
   { label: 'Templates', href: '/templates', match: ['/templates', '/template'] },
   { label: 'Tools', href: '/tools', match: ['/tools'] },
+  { label: 'Paths', href: '/paths', match: ['/paths'] },
   { label: 'Docs', href: '/docs', match: ['/docs'] },
 ]
 

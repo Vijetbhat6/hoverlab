@@ -6,6 +6,7 @@ import { BLOCK_INDEX, populatedBlockCategories } from '@/lib/blocks/block-index'
 import { blockCategorySlug } from '@/lib/blocks/block-types'
 import { PAGE_INDEX } from '@/lib/pages/page-index'
 import { TEMPLATE_INDEX } from '@/lib/templates/template-index'
+import { PATHS } from '@/lib/paths/catalog'
 
 /**
  * XML sitemap covering every indexable URL.
@@ -58,6 +59,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Docs. Indexable on purpose: "hoverlab cli", "install tailwind block"
     // are navigational queries people actually type.
     { url: absoluteUrl('/docs'), changeFrequency: 'weekly' as const, priority: 0.8 },
+    // Guided paths — "how to build a landing page" is a head term, and
+    // these are the pages that actually answer it.
+    { url: absoluteUrl('/paths'), changeFrequency: 'weekly' as const, priority: 0.8 },
+    ...PATHS.map((path) => ({
+      url: absoluteUrl(`/paths/${path.slug}`),
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
+    })),
     ...['cli', 'api', 'mcp'].map((slug) => ({
       url: absoluteUrl(`/docs/${slug}`),
       changeFrequency: 'weekly' as const,
