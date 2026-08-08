@@ -49,6 +49,7 @@ const NAV: Array<{ label: string; href: string; match: string[] }> = [
   { label: 'Pages', href: '/pages', match: ['/pages', '/page'] },
   { label: 'Templates', href: '/templates', match: ['/templates', '/template'] },
   { label: 'Tools', href: '/tools', match: ['/tools'] },
+  { label: 'Docs', href: '/docs', match: ['/docs'] },
 ]
 
 /** True when `pathname` is the route itself or something beneath it. */

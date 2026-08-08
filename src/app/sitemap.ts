@@ -55,6 +55,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: absoluteUrl('/templates'), changeFrequency: 'weekly' as const, priority: 0.9 },
     { url: absoluteUrl('/playground'), changeFrequency: 'monthly' as const, priority: 0.7 },
     { url: absoluteUrl('/tools'), changeFrequency: 'monthly' as const, priority: 0.8 },
+    // Docs. Indexable on purpose: "hoverlab cli", "install tailwind block"
+    // are navigational queries people actually type.
+    { url: absoluteUrl('/docs'), changeFrequency: 'weekly' as const, priority: 0.8 },
+    ...['cli', 'api', 'mcp'].map((slug) => ({
+      url: absoluteUrl(`/docs/${slug}`),
+      changeFrequency: 'weekly' as const,
+      priority: 0.7,
+    })),
     ...[
       'palette',
       'gradient',
