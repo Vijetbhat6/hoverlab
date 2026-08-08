@@ -1,11 +1,17 @@
 'use client'
 
 /**
- * Recently-viewed effects hook.
+ * Recently-viewed artifacts hook.
  *
- * Tracks the last N effects the user opened on the detail page, so they can
- * quickly jump back to something they were just looking at. Pure localStorage
- * — no cloud sync (this is ephemeral "working memory", not a saved collection).
+ * Tracks the last N artifacts the user opened on a detail page — effect,
+ * block, page or template — so they can jump back to something they were
+ * just looking at. Pure localStorage — no cloud sync (this is ephemeral
+ * "working memory", not a saved collection).
+ *
+ * Entries written before the ladder existed carry `effectId`/`effectName`
+ * and no level; `normalizeRef` migrates them on read and `levelOf` resolves
+ * the missing level to `'effect'`, so an existing history survives the
+ * widening rather than silently emptying.
  *
  * Distinct from copy-history (which records only when the user *copies* code)
  * and favorites (which is an explicit save). Recently-viewed fires on every
@@ -19,11 +25,13 @@
  */
 
 import * as React from 'react'
+import {
+  normalizeRef,
+  type ArtifactRef,
+  type RecordableArtifact,
+} from '@/lib/artifact-history'
 
-export interface RecentlyViewedEntry {
-  effectId: string
-  effectName: string
-  effectCategory: string
+export interface RecentlyViewedEntry extends ArtifactRef {
   /** ISO timestamp — used for sorting + relative-time display. */
   viewedAt: string
 }
@@ -36,9 +44,17 @@ function readHistory(): RecentlyViewedEntry[] {
   try {
     const raw = window.localStorage.getItem(STORAGE_KEY)
     if (!raw) return []
-    const parsed = JSON.parse(raw) as RecentlyViewedEntry[]
+    const parsed = JSON.parse(raw) as unknown
     if (!Array.isArray(parsed)) return []
-    return parsed.slice(0, MAX_ENTRIES)
+    return parsed
+      .map((entry) => {
+        const ref = normalizeRef(entry)
+        if (!ref) return null
+        const viewedAt = (entry as { viewedAt?: string }).viewedAt
+        return { ...ref, viewedAt: viewedAt ?? new Date(0).toISOString() }
+      })
+      .filter((e): e is RecentlyViewedEntry => e !== null)
+      .slice(0, MAX_ENTRIES)
   } catch {
     return []
   }
@@ -59,9 +75,17 @@ function writeHistory(next: RecentlyViewedEntry[]) {
 }
 
 export function useRecentlyViewed() {
-  const [entries, setEntries] = React.useState<RecentlyViewedEntry[]>(() =>
-    readHistory(),
-  )
+  /**
+   * Starts EMPTY rather than seeded from localStorage.
+   *
+   * Seeding here (`useState(() => readHistory())`) is a hydration bug: the
+   * server has no localStorage, so it renders nothing, while the client's
+   * very first render already has the entries — React sees two different
+   * trees and bails out of hydrating with #418. Reading in the effect below
+   * instead means both sides agree on "empty", and the real list arrives on
+   * the commit after.
+   */
+  const [entries, setEntries] = React.useState<RecentlyViewedEntry[]>([])
 
   // Mirror the latest entries in a ref so that `record` / `clear` can
   // compute the next list without reading stale state, and so we can call
@@ -76,6 +100,8 @@ export function useRecentlyViewed() {
 
   React.useEffect(() => {
     const sync = () => setEntries(readHistory())
+    // Populate on mount — see the note on the initial state above.
+    sync()
     window.addEventListener('storage', sync)
     window.addEventListener('hoverlab:recently-viewed-changed', sync)
     return () => {
@@ -85,19 +111,18 @@ export function useRecentlyViewed() {
   }, [])
 
   const record = React.useCallback(
-    (effect: { id: string; name: string; category: string }) => {
+    (artifact: RecordableArtifact) => {
       // Compute next from the ref (always current), then call setEntries
       // and writeHistory as separate statements — outside any setState
       // updater, so the synchronous dispatchEvent in writeHistory does
       // not fire during React's render phase.
-      const without = entriesRef.current.filter(
-        (e) => e.effectId !== effect.id,
-      )
+      const without = entriesRef.current.filter((e) => e.id !== artifact.id)
       const next = [
         {
-          effectId: effect.id,
-          effectName: effect.name,
-          effectCategory: effect.category,
+          id: artifact.id,
+          name: artifact.name,
+          category: artifact.category,
+          level: artifact.level,
           viewedAt: new Date().toISOString(),
         },
         ...without,

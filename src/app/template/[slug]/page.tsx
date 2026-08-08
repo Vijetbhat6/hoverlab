@@ -38,6 +38,10 @@ import {
 } from '@/lib/templates/templates'
 import { getTemplateMeta } from '@/lib/templates/template-index'
 import { absoluteUrl } from '@/lib/site'
+import {
+  TrackArtifactView,
+  FavoriteArtifactButton,
+} from '@/components/artifact-actions'
 
 export const dynamicParams = false
 
@@ -112,6 +116,26 @@ export default async function TemplateDetailPage({ params }: PageProps) {
             {template.name}
           </h1>
           <p className="mt-3 text-pretty text-muted-foreground">{template.description}</p>
+
+          <div className="mt-5 flex flex-wrap items-center gap-2">
+            <FavoriteArtifactButton
+              artifact={{
+                id: template.id,
+                name: template.name,
+                category: template.category,
+                level: 'template',
+              }}
+            />
+          </div>
+
+          <TrackArtifactView
+            artifact={{
+              id: template.id,
+              name: template.name,
+              category: template.category,
+              level: 'template',
+            }}
+          />
 
           <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-muted-foreground">
             <span className="inline-flex items-center gap-1.5">

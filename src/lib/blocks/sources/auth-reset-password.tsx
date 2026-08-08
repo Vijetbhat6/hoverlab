@@ -164,7 +164,7 @@ export function AuthResetPassword({
             disabled={!canSubmit}
             className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-50"
           >
-            {busy ? <Loader2 aria-hidden className="h-4 w-4 animate-spin" /> : null}
+            {busy ? <Loader2 aria-hidden className="h-4 w-4 animate-spin motion-reduce:[animation-duration:1.6s]" /> : null}
             {busy ? 'Saving' : 'Set new password'}
           </button>
         </form>

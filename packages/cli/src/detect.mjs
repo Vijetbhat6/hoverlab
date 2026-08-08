@@ -95,6 +95,80 @@ export async function detectFramework(cwd = process.cwd()) {
   return { framework: 'css', reason: 'no framework detected', root }
 }
 
+/**
+ * Where a block's or page's file tree should be rooted.
+ *
+ * Blocks arrive with real paths — `components/product-grid.tsx`,
+ * `app/checkout-page.tsx` — because that is the layout every Hoverlab page
+ * source imports against. So the job here is not to pick a folder but to
+ * find the directory those paths are relative to, which is the project root
+ * unless the project uses Next's `src/` convention.
+ *
+ * Getting this wrong is visible immediately (a stray `components/` beside
+ * `src/components/`), which is the good kind of wrong: `--dir` fixes it.
+ */
+export async function detectArtifactRoot(cwd = process.cwd()) {
+  const root = (await findProjectRoot(cwd)) ?? path.resolve(cwd)
+
+  for (const marker of ['src/app', 'src/components', 'src/pages']) {
+    if (await exists(path.join(root, marker))) {
+      return { root: path.join(root, 'src'), reason: `rooted at src/, since the project has ${marker}` }
+    }
+  }
+
+  return { root, reason: 'rooted at the project root' }
+}
+
+/**
+ * Whether this project can compile a React component.
+ *
+ * Blocks and pages are React + Tailwind and ship as written — there is no
+ * Vue port to fall back to. Installing one into a Nuxt app should still
+ * work (the files land, the user knows what they asked for), but it should
+ * say so rather than leave them to discover it at build time.
+ */
+export async function detectReactSupport(cwd = process.cwd()) {
+  const root = await findProjectRoot(cwd)
+  if (!root) return { react: false, reason: 'no package.json found' }
+
+  const pkg = await readPackageJson(root)
+  const deps = {
+    ...(pkg?.dependencies ?? {}),
+    ...(pkg?.devDependencies ?? {}),
+    ...(pkg?.peerDependencies ?? {}),
+  }
+  const has = (name) => Object.prototype.hasOwnProperty.call(deps, name)
+
+  if (has('react') || has('next')) return { react: true, reason: 'react is a dependency' }
+  if (has('vue') || has('nuxt')) return { react: false, reason: 'this project uses Vue' }
+  if (has('svelte') || has('@sveltejs/kit')) {
+    return { react: false, reason: 'this project uses Svelte' }
+  }
+  return { react: false, reason: 'react is not a dependency' }
+}
+
+/**
+ * Which packages from `deps` the project does not already have.
+ *
+ * Used to print an install line worth reading: telling someone to
+ * `npm i lucide-react` when it is already in their package.json is noise
+ * that trains them to skip the notes.
+ */
+export async function missingDeps(deps, cwd = process.cwd()) {
+  if (!deps?.length) return []
+
+  const root = await findProjectRoot(cwd)
+  if (!root) return [...deps]
+
+  const pkg = await readPackageJson(root)
+  const installed = {
+    ...(pkg?.dependencies ?? {}),
+    ...(pkg?.devDependencies ?? {}),
+    ...(pkg?.peerDependencies ?? {}),
+  }
+  return deps.filter((d) => !Object.prototype.hasOwnProperty.call(installed, d))
+}
+
 const COMPONENT_DIRS = [
   'src/components',
   'app/components',

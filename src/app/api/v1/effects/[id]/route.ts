@@ -1,15 +1,9 @@
 import { getEffect } from '@/lib/effects'
 import { siteUrl } from '@/lib/site'
-import { customizeCss, type CustomizationOptions } from '@/lib/customize'
-import { FRAMEWORKS, exportEffect, isFrameworkId } from '@/lib/export'
-import {
-  API_VERSION,
-  DETAIL_CACHE,
-  apiError,
-  apiJson,
-  apiPreflight,
-  toSummary,
-} from '@/lib/api/public'
+import type { CustomizationOptions } from '@/lib/customize'
+import { FRAMEWORKS, isFrameworkId } from '@/lib/export'
+import { buildEffectPayload } from '@/lib/api/artifacts'
+import { DETAIL_CACHE, apiError, apiJson, apiPreflight } from '@/lib/api/public'
 
 /**
  * GET /api/v1/effects/{id} — one effect, in the framework you asked for.
@@ -66,36 +60,9 @@ export async function GET(request: Request, context: RouteContext) {
     speed: readNumber(url, 'speed', 1),
   }
 
-  const css = customizeCss(effect.css, opts)
-  const generated = exportEffect(
-    {
-      id: effect.id,
-      name: effect.name,
-      description: effect.description,
-      category: effect.category,
-      html: effect.html,
-      css,
-    },
-    requested,
-  )
-
-  return apiJson(
-    {
-      version: API_VERSION,
-      effect: {
-        ...toSummary(effect, siteUrl),
-        darkSurface: effect.darkSurface === true,
-        previewClass: effect.previewClass ?? null,
-      },
-      framework: generated.framework,
-      files: generated.files,
-      notes: generated.notes,
-      /** The raw source, so clients can run their own transforms. */
-      source: { html: effect.html, css },
-      customization: opts,
-    },
-    { cache: DETAIL_CACHE },
-  )
+  return apiJson(buildEffectPayload(effect, siteUrl, requested, opts), {
+    cache: DETAIL_CACHE,
+  })
 }
 
 export async function OPTIONS() {

@@ -81,7 +81,7 @@ export function ErrorStateRetry({
         >
           <RefreshCw
             aria-hidden
-            className={`h-4 w-4 ${busy ? 'motion-safe:animate-spin' : ''}`}
+            className={`h-4 w-4 ${busy ? 'motion-safe:animate-spin motion-reduce:[animation-duration:1.6s]' : ''}`}
           />
           {busy ? 'Retrying' : 'Try again'}
         </button>

@@ -1,4 +1,76 @@
 {
+  "hero-split": {
+    "lines": 176,
+    "files": 1
+  },
+  "hero-centered": {
+    "lines": 125,
+    "files": 1
+  },
+  "hero-screenshot": {
+    "lines": 191,
+    "files": 1
+  },
+  "hero-waitlist": {
+    "lines": 159,
+    "files": 1
+  },
+  "navbar-simple": {
+    "lines": 202,
+    "files": 1
+  },
+  "navbar-mega-menu": {
+    "lines": 324,
+    "files": 1
+  },
+  "nav-mobile-drawer": {
+    "lines": 294,
+    "files": 1
+  },
+  "footer-mega": {
+    "lines": 233,
+    "files": 1
+  },
+  "footer-minimal": {
+    "lines": 106,
+    "files": 1
+  },
+  "footer-newsletter": {
+    "lines": 249,
+    "files": 1
+  },
+  "contact-form-split": {
+    "lines": 272,
+    "files": 1
+  },
+  "multi-step-form": {
+    "lines": 366,
+    "files": 1
+  },
+  "confirm-dialog": {
+    "lines": 180,
+    "files": 1
+  },
+  "slide-over-panel": {
+    "lines": 199,
+    "files": 1
+  },
+  "onboarding-checklist": {
+    "lines": 226,
+    "files": 1
+  },
+  "setup-wizard": {
+    "lines": 265,
+    "files": 1
+  },
+  "toast-stack": {
+    "lines": 171,
+    "files": 1
+  },
+  "notification-inbox": {
+    "lines": 255,
+    "files": 1
+  },
   "stats-band": {
     "lines": 51,
     "files": 1

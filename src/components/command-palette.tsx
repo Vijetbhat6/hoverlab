@@ -7,7 +7,9 @@
  * and a fuzzy-search palette slides down from the top of the screen. It lets
  * the user:
  *
- *   - Jump to any of the 1,680 effects by name / id / category / tag.
+ *   - Jump to any artifact — effect, block, page or template — by name, id,
+ *     category or tag. Each level gets its own section, because effects
+ *     outnumber everything else ~50:1 and a merged list buries the rest.
  *   - Trigger quick actions (Surprise me, Open bundle, Toggle theme, Go to
  *     Playground, etc.).
  *   - Filter by category.
@@ -20,8 +22,9 @@
  *
  * Implementation notes:
  *   - Search is a tiny in-memory fuzzy matcher (subsequence + word-boundary
- *     bonus). 1,680 effects is small enough that we can scan them on every
- *     keystroke without a debounce.
+ *     bonus). The catalog is small enough to scan on every keystroke
+ *     without a debounce. `/browse` deliberately ranks differently — see
+ *     the note in `@/lib/browse`.
  *   - The palette is mounted once per page (in the same spots the ShortcutsHelp
  *     button is mounted) so the global key listener is always live.
  *   - We deliberately DON'T use a portal library like cmdk because we already
@@ -52,10 +55,15 @@ import {
   Star,
   ArrowRight,
   Loader2,
+  Blocks,
+  FileText,
+  LayoutTemplate,
+  Layers,
   type LucideIcon,
 } from 'lucide-react'
 import { CATEGORIES, type EffectCategory } from '@/lib/effect-types'
-import type { EffectMeta } from '@/lib/effect-index'
+import type { BrowseHit } from '@/lib/browse'
+import { LEVEL_LABEL, type ArtifactLevel } from '@/lib/artifact-types'
 import { cn } from '@/lib/utils'
 
 /* ============================================================
@@ -115,7 +123,28 @@ function fuzzyMatch(query: string, text: string): FuzzyResult | null {
  *  Item types
  * ========================================================== */
 
-type ItemKind = 'effect' | 'action' | 'category'
+/**
+ * Sections, in render order.
+ *
+ * The four artifact levels are separate kinds rather than one "results"
+ * bucket so that blocks, pages and templates get their own headings. They
+ * are outnumbered ~50:1 by effects, and a single merged list is how they
+ * were invisible here in the first place.
+ */
+type ItemKind = 'action' | 'category' | 'template' | 'page' | 'block' | 'effect'
+
+/** Row icon per level. */
+const LEVEL_ICON: Record<ArtifactLevel, LucideIcon> = {
+  effect: Sparkles,
+  block: Blocks,
+  page: FileText,
+  template: LayoutTemplate,
+}
+
+/** The artifact sections, in render order. Assembly first, atoms last. */
+const ARTIFACT_SECTIONS: Array<{ kind: ItemKind; label: string }> = (
+  ['template', 'page', 'block', 'effect'] as const
+).map((level) => ({ kind: level, label: LEVEL_LABEL[level].many }))
 
 interface BaseItem {
   id: string
@@ -173,10 +202,16 @@ export function CommandPalette() {
    * them, to power a dialog that is closed until someone presses ⌘K.
    *
    * A dynamic import moves it into its own chunk that loads on demand.
-   * Actions and category jumps stay available immediately; only effect
+   * Actions and category jumps stay available immediately; only artifact
    * results wait, and only the first time.
+   *
+   * `@/lib/browse` rather than `@/lib/effect-index`: it is the same effect
+   * metadata plus the 86 records from the three tiers above, already
+   * flattened to one shape. The palette searched effects only, which meant
+   * two thirds of the *hand-authored* catalog could not be found from the
+   * keyboard at all.
    */
-  const [effects, setEffects] = React.useState<EffectMeta[]>([])
+  const [catalog, setCatalog] = React.useState<BrowseHit[]>([])
   const [loadingIndex, setLoadingIndex] = React.useState(false)
   const requestedRef = React.useRef(false)
 
@@ -184,8 +219,8 @@ export function CommandPalette() {
     if (!open || requestedRef.current) return
     requestedRef.current = true
     setLoadingIndex(true)
-    import('@/lib/effect-index')
-      .then((m) => setEffects(m.EFFECT_INDEX))
+    import('@/lib/browse')
+      .then((m) => setCatalog(m.BROWSE_INDEX))
       .catch(() => {
         // Leave the palette usable with actions + categories rather than
         // failing the whole dialog over a chunk that didn't load.
@@ -241,6 +276,15 @@ export function CommandPalette() {
         icon: Sparkles,
         keywords: 'playground editor scratch',
         run: () => router.push('/playground'),
+      },
+      {
+        id: 'action:browse',
+        kind: 'action',
+        label: 'Browse everything',
+        hint: 'Effects, blocks, pages and templates in one place',
+        icon: Layers,
+        keywords: 'browse all everything catalog components',
+        run: () => router.push('/browse'),
       },
       {
         id: 'action:library',
@@ -362,39 +406,47 @@ export function CommandPalette() {
     [router],
   )
 
-  /* ----- Build the effect items (cached once — list never changes) ----- */
-  const effectItems: BaseItem[] = React.useMemo(
+  /* ----- Build the artifact items (cached once — list never changes) ----- */
+  const artifactItems: BaseItem[] = React.useMemo(
     () =>
-      effects.map((e) => ({
-        id: `effect:${e.id}`,
-        kind: 'effect',
-        label: e.name,
-        hint: `${e.category} · ${e.description}`,
-        icon: Sparkles,
-        keywords: `${e.category} ${e.id} ${(e.tags ?? []).join(' ')}`,
-        run: () => router.push(`/effect/${e.id}`),
+      catalog.map((a) => ({
+        id: `${a.level}:${a.id}`,
+        kind: a.level,
+        label: a.name,
+        hint: `${a.category} · ${a.description}`,
+        icon: LEVEL_ICON[a.level],
+        // The level's own name is a keyword, so "footer block" finds the
+        // footer blocks rather than every effect mentioning a footer.
+        keywords: `${a.category} ${a.id} ${a.tags.join(' ')} ${LEVEL_LABEL[a.level].one}`,
+        run: () => router.push(a.href),
       })),
-    [router, effects],
+    [router, catalog],
   )
 
   /* ----- Search ----- */
   const allItems = React.useMemo(
-    () => [...actions, ...categoryItems, ...effectItems],
-    [actions, categoryItems, effectItems],
+    () => [...actions, ...categoryItems, ...artifactItems],
+    [actions, categoryItems, artifactItems],
   )
 
   const results = React.useMemo<ScoredItem[]>(() => {
     const q = query.trim()
     if (!q) {
-      // Empty query → show actions first, then categories, then a few featured effects.
-      const featured = effectItems
-        .map((item, i) => ({ item, score: 1, matchedIndices: [] as number[], originalIndex: i }))
-        .filter((x) => effects[x.originalIndex]?.featured)
-        .slice(0, 6)
+      // Empty query → actions, categories, then a few featured artifacts
+      // taken per level rather than off the top of one list, so the opening
+      // state shows that the catalog has four tiers in it.
+      const featuredPerLevel = (['template', 'page', 'block', 'effect'] as const).flatMap(
+        (level) =>
+          artifactItems
+            .map((item, i) => ({ item, meta: catalog[i] }))
+            .filter((x) => x.meta?.level === level && x.meta.featured)
+            .slice(0, level === 'effect' ? 3 : 2)
+            .map(({ item }) => ({ item, score: 1, matchedIndices: [] as number[] })),
+      )
       return [
         ...actions.map((item) => ({ item, score: 2, matchedIndices: [] as number[] })),
         ...categoryItems.map((item) => ({ item, score: 1.5, matchedIndices: [] as number[] })),
-        ...featured.map(({ item, score, matchedIndices }) => ({ item, score, matchedIndices })),
+        ...featuredPerLevel,
       ]
     }
 
@@ -411,8 +463,20 @@ export function CommandPalette() {
       }
     }
     scored.sort((a, b) => b.score - a.score)
-    return scored.slice(0, 50)
-  }, [query, allItems, actions, categoryItems, effectItems])
+
+    /**
+     * Cap effects, not the result set as a whole.
+     *
+     * A flat `slice(0, 50)` is how the upper tiers stayed invisible: there
+     * are 4,300 effects and 86 everything-else, so a query like "pricing"
+     * fills every slot with effects whose description mentions the word and
+     * drops the pricing block that is the actual answer. Blocks, pages and
+     * templates are few enough that every match can be kept.
+     */
+    const upper = scored.filter((s) => s.item.kind !== 'effect')
+    const effectHits = scored.filter((s) => s.item.kind === 'effect').slice(0, 40)
+    return [...upper, ...effectHits]
+  }, [query, allItems, actions, categoryItems, artifactItems, catalog])
 
   // Clamp activeIndex when results change.
   React.useEffect(() => {
@@ -461,12 +525,18 @@ export function CommandPalette() {
     const g: Record<ItemKind, ScoredItem[]> = {
       action: [],
       category: [],
+      template: [],
+      page: [],
+      block: [],
       effect: [],
     }
     for (const r of results) {
       g[r.item.kind].push(r)
     }
-    const flat = [...g.action, ...g.category, ...g.effect]
+    // Assembly first, atoms last — the same ordering argument as /browse:
+    // the hand-authored tiers are more often what a section-shaped word
+    // means, and they are the ones that lose a flat ranking.
+    const flat = [...g.action, ...g.category, ...g.template, ...g.page, ...g.block, ...g.effect]
     return { groups: g, flatResults: flat }
   }, [results])
 
@@ -481,7 +551,7 @@ export function CommandPalette() {
       >
         <DialogTitle className="sr-only">Command palette</DialogTitle>
         <DialogDescription className="sr-only">
-          Search effects and actions. Use arrow keys to navigate, Enter to
+          Search the whole catalog and actions. Use arrow keys to navigate, Enter to
           select, Esc to close.
         </DialogDescription>
 
@@ -495,7 +565,7 @@ export function CommandPalette() {
               setQuery(e.target.value)
               setActiveIndex(0)
             }}
-            placeholder="Search effects, categories, or actions…"
+            placeholder="Search effects, blocks, pages, templates…"
             className="h-14 flex-1 bg-transparent text-sm outline-none placeholder:text-muted-foreground"
             autoComplete="off"
             spellCheck={false}
@@ -507,7 +577,7 @@ export function CommandPalette() {
           {loadingIndex ? (
             <Loader2
               className="h-4 w-4 shrink-0 animate-spin text-muted-foreground"
-              aria-label="Loading effects"
+              aria-label="Loading catalog"
             />
           ) : null}
           <kbd className="hidden shrink-0 rounded border border-border bg-muted px-1.5 py-0.5 font-mono text-[10px] text-muted-foreground sm:inline">
@@ -575,28 +645,37 @@ export function CommandPalette() {
                 </Group>
               ) : null}
 
-              {groups.effect.length > 0 ? (
-                <Group label={`Effects${groups.effect.length === 50 ? ' · top 50' : ''}`}>
-                  {groups.effect.map((r) => {
-                    const idx = runningIndex++
-                    return (
-                      <PaletteRow
-                        key={r.item.id}
-                        item={r.item}
-                        index={idx}
-                        activeIndex={activeIndex}
-                        onActivate={activate}
-                        onHover={setActiveIndex}
-                        matchedIndices={
-                          r.item.label === r.item.label && query.trim()
-                            ? fuzzyMatch(query.trim(), r.item.label)?.matchedIndices ?? []
-                            : []
-                        }
-                      />
-                    )
-                  })}
-                </Group>
-              ) : null}
+              {ARTIFACT_SECTIONS.map(({ kind, label }) =>
+                groups[kind].length > 0 ? (
+                  <Group
+                    key={kind}
+                    label={
+                      kind === 'effect' && groups.effect.length === 40
+                        ? `${label} · top 40`
+                        : label
+                    }
+                  >
+                    {groups[kind].map((r) => {
+                      const idx = runningIndex++
+                      return (
+                        <PaletteRow
+                          key={r.item.id}
+                          item={r.item}
+                          index={idx}
+                          activeIndex={activeIndex}
+                          onActivate={activate}
+                          onHover={setActiveIndex}
+                          matchedIndices={
+                            query.trim()
+                              ? fuzzyMatch(query.trim(), r.item.label)?.matchedIndices ?? []
+                              : []
+                          }
+                        />
+                      )
+                    })}
+                  </Group>
+                ) : null,
+              )}
             </>
           )}
         </div>

@@ -23,6 +23,10 @@ import { blockCategorySlug, GROUP_OF } from '@/lib/blocks/block-types'
 import { blocksInCategory, getBlockMeta } from '@/lib/blocks/block-index'
 import { pagesUsingBlock } from '@/lib/pages/page-index'
 import { absoluteUrl } from '@/lib/site'
+import {
+  TrackArtifactView,
+  FavoriteArtifactButton,
+} from '@/components/artifact-actions'
 
 /**
  * Every block is pre-rendered. There are thirteen of them and they are the
@@ -107,6 +111,26 @@ export default async function BlockDetailPage({ params }: PageProps) {
           </h1>
           <p className="mt-3 text-pretty text-muted-foreground">{block.description}</p>
 
+          <div className="mt-5 flex flex-wrap items-center gap-2">
+            <FavoriteArtifactButton
+              artifact={{
+                id: block.id,
+                name: block.name,
+                category: block.category,
+                level: 'block',
+              }}
+            />
+          </div>
+
+          <TrackArtifactView
+            artifact={{
+              id: block.id,
+              name: block.name,
+              category: block.category,
+              level: 'block',
+            }}
+          />
+
           <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-muted-foreground">
             <span className="inline-flex items-center gap-1.5">
               <FileCode aria-hidden className="h-4 w-4" />
@@ -115,10 +139,6 @@ export default async function BlockDetailPage({ params }: PageProps) {
             <span className="inline-flex items-center gap-1.5">
               <Package aria-hidden className="h-4 w-4" />
               {block.deps.length === 0 ? 'No dependencies' : block.deps.join(', ')}
-            </span>
-            <span className="inline-flex items-center gap-1.5">
-              <Layers aria-hidden className="h-4 w-4" />
-              {block.tier === 'pro' ? 'Pro' : 'Free'}
             </span>
           </div>
 

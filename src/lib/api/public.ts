@@ -8,6 +8,11 @@
  * needs the same ranking the site uses. Rather than let three clients
  * grow three different notions of search, they all call these routes.
  *
+ * The surface covers every rung of the ladder — `/effects`, `/blocks`,
+ * `/pages`, `/templates` — plus `/artifacts/{id}`, which resolves an id
+ * against all four so `hoverlab add <id>` does not have to know in advance
+ * which tier the user meant.
+ *
  * Design constraints:
  *  - Public and unauthenticated. The catalog is already fully indexed by
  *    search engines; gating it would only break the CLI.
@@ -17,7 +22,8 @@
  */
 
 import { NextResponse } from 'next/server'
-import type { Effect } from '@/lib/effects'
+import type { Artifact, ArtifactLevel, ArtifactTier } from '@/lib/artifact-types'
+import { artifactHref, levelOf, tierOf } from '@/lib/artifact-types'
 
 export const API_VERSION = 'v1'
 
@@ -37,6 +43,18 @@ export const LIST_CACHE = 'public, max-age=300, s-maxage=3600, stale-while-reval
 
 /** A given effect id always resolves to the same CSS — cache forever. */
 export const DETAIL_CACHE = 'public, max-age=3600, s-maxage=31536000, stale-while-revalidate=86400'
+
+/**
+ * Source for a block, page or template. Deliberately *not* `DETAIL_CACHE`.
+ *
+ * An effect id is immutable — the CSS was generated once and will never be
+ * edited. A block is hand-written code that gets fixed: an accessibility
+ * bug found in `data-table-sortable` should reach the next
+ * `hoverlab add data-table-sortable`, not a year later. An hour at the edge
+ * with a day of stale-while-revalidate keeps the route effectively free
+ * without pinning a fixed bug in place.
+ */
+export const ARTIFACT_CACHE = 'public, max-age=300, s-maxage=3600, stale-while-revalidate=86400'
 
 export function apiJson(
   data: unknown,
@@ -72,44 +90,62 @@ export interface SearchParams {
   offset: number
 }
 
-/** Metadata shape returned by list endpoints — no html/css payload. */
-export interface EffectSummary {
+/**
+ * The fields search and summarisation need.
+ *
+ * Every tier satisfies this — `Effect`, `BlockMeta`, `PageMeta` and
+ * `TemplateMeta` all extend `Artifact` — which is the whole reason the
+ * ladder was typed from a common base. One ranking function serves four
+ * catalogs, so `hoverlab search checkout` cannot rank blocks by different
+ * rules than the effect search the CLI was built around.
+ */
+export type SearchableArtifact = Pick<
+  Artifact,
+  'id' | 'name' | 'category' | 'description' | 'tags' | 'featured' | 'level' | 'tier'
+>
+
+/** Metadata shape returned by list endpoints — no source payload. */
+export interface ArtifactSummary {
   id: string
   name: string
+  level: ArtifactLevel
   category: string
   description: string
   tags: string[]
   featured: boolean
+  tier: ArtifactTier
   url: string
 }
 
-export function toSummary(effect: Effect, siteOrigin: string): EffectSummary {
+export function toSummary(artifact: SearchableArtifact, siteOrigin: string): ArtifactSummary {
   return {
-    id: effect.id,
-    name: effect.name,
-    category: effect.category,
-    description: effect.description,
-    tags: effect.tags ?? [],
-    featured: effect.featured === true,
-    url: `${siteOrigin}/effect/${effect.id}`,
+    id: artifact.id,
+    name: artifact.name,
+    level: levelOf(artifact),
+    category: artifact.category,
+    description: artifact.description,
+    tags: artifact.tags ?? [],
+    featured: artifact.featured === true,
+    tier: tierOf(artifact),
+    url: `${siteOrigin.replace(/\/$/, '')}${artifactHref(artifact)}`,
   }
 }
 
 /**
- * Score one effect against one lowercased query token.
+ * Score one artifact against one lowercased query token.
  *
  * The weights encode what a search for "teal glow button" should surface:
  * an exact id wins outright, a name match beats a description match, and a
- * tag match beats a category match because tags are more specific. Effects
+ * tag match beats a category match because tags are more specific. Artifacts
  * matching every token rank above those matching only some, which is
  * handled by the caller requiring a non-zero score per token.
  */
-function scoreToken(effect: Effect, token: string): number {
-  const id = effect.id.toLowerCase()
-  const name = effect.name.toLowerCase()
-  const description = effect.description.toLowerCase()
-  const category = effect.category.toLowerCase()
-  const tags = (effect.tags ?? []).map((t) => t.toLowerCase())
+function scoreToken(artifact: SearchableArtifact, token: string): number {
+  const id = artifact.id.toLowerCase()
+  const name = artifact.name.toLowerCase()
+  const description = artifact.description.toLowerCase()
+  const category = artifact.category.toLowerCase()
+  const tags = (artifact.tags ?? []).map((t) => t.toLowerCase())
 
   if (id === token) return 1000
   let score = 0
@@ -124,48 +160,105 @@ function scoreToken(effect: Effect, token: string): number {
   return score
 }
 
-export interface SearchResult {
-  effects: Effect[]
+export interface SearchResult<T> {
+  items: T[]
   total: number
 }
 
-export function searchEffects(effects: Effect[], params: SearchParams): SearchResult {
+export function searchArtifacts<T extends SearchableArtifact>(
+  artifacts: readonly T[],
+  params: SearchParams,
+): SearchResult<T> {
   const query = (params.q ?? '').trim().toLowerCase()
   const tokens = query ? query.split(/\s+/).filter(Boolean) : []
   const category = params.category?.trim().toLowerCase()
 
-  const candidates: Array<{ effect: Effect; score: number; index: number }> = []
+  const candidates: Array<{ artifact: T; score: number; index: number }> = []
 
-  effects.forEach((effect, index) => {
-    if (category && effect.category.toLowerCase() !== category) return
-    if (params.featured && effect.featured !== true) return
+  artifacts.forEach((artifact, index) => {
+    if (category && artifact.category.toLowerCase() !== category) return
+    if (params.featured && artifact.featured !== true) return
 
     let score = 0
     if (tokens.length) {
       for (const token of tokens) {
-        const tokenScore = scoreToken(effect, token)
+        const tokenScore = scoreToken(artifact, token)
         // Every token must match something — "teal button" should not
         // return every button in the catalog.
         if (tokenScore === 0) return
         score += tokenScore
       }
-      // Featured effects are hand-written and consistently better; nudge
+      // Featured artifacts are hand-written and consistently better; nudge
       // them up without letting the bonus override a real text match.
-      if (effect.featured) score += 5
+      if (artifact.featured) score += 5
     }
 
-    candidates.push({ effect, score, index })
+    candidates.push({ artifact, score, index })
   })
 
   // Stable: equal scores keep the catalog's curated order.
   candidates.sort((a, b) => (b.score - a.score) || (a.index - b.index))
 
   return {
-    effects: candidates
+    items: candidates
       .slice(params.offset, params.offset + params.limit)
-      .map((c) => c.effect),
+      .map((c) => c.artifact),
     total: candidates.length,
   }
+}
+
+/**
+ * The whole body of a list endpoint: validate, paginate, search, summarise.
+ *
+ * `/blocks`, `/pages` and `/templates` are the same route three times over
+ * — the only differences are which catalog they read, which category
+ * vocabulary they validate against, and the handful of per-tier fields
+ * worth carrying on a summary. Sharing the body means a fix to pagination
+ * or to the unknown-category error lands on all of them at once.
+ *
+ * Effects keep their own handler: the response predates this and names its
+ * array `effects`, and the CLI in the wild reads that key.
+ */
+export function artifactListResponse<T extends SearchableArtifact>(options: {
+  url: URL
+  items: readonly T[]
+  categories: readonly string[]
+  siteOrigin: string
+  /** Response key for the result array — `"blocks"`, `"pages"`, … */
+  key: string
+  /** Per-tier fields to carry alongside the shared summary. */
+  extend?: (item: T) => Record<string, unknown>
+}): NextResponse {
+  const { url, items, categories, siteOrigin, key, extend } = options
+  const { limit, offset } = readPagination(url, { limit: 20, maxLimit: 100 })
+
+  const category = url.searchParams.get('category') ?? undefined
+  if (category && !categories.some((c) => c.toLowerCase() === category.toLowerCase())) {
+    return apiError(`Unknown category: ${category}`, 400, { categories })
+  }
+
+  const { items: matched, total } = searchArtifacts(items, {
+    q: url.searchParams.get('q') ?? undefined,
+    category,
+    featured: url.searchParams.get('featured') === 'true',
+    limit,
+    offset,
+  })
+
+  return apiJson(
+    {
+      version: API_VERSION,
+      total,
+      limit,
+      offset,
+      categories,
+      [key]: matched.map((item) => ({
+        ...toSummary(item, siteOrigin),
+        ...(extend ? extend(item) : {}),
+      })),
+    },
+    { cache: LIST_CACHE },
+  )
 }
 
 /** Parse and clamp `limit` / `offset` from a URL. */

@@ -37,11 +37,13 @@ export const PAGE_CATALOG: PageRecord[] = [
     name: 'SaaS Landing Page',
     category: 'Marketing Pages',
     description:
-      'A complete marketing page in the order that actually converts — hook, proof, substance, price, objections, exit. Nine blocks plus a hero.',
+      'A complete marketing page in the order that actually converts — hook, proof, substance, price, objections, exit. Twelve blocks, navbar and footer included.',
     tags: ['landing page', 'saas', 'marketing', 'homepage', 'conversion'],
     previewComponent: 'saas-landing-page',
     deps: ['lucide-react'],
     composedOf: [
+      'navbar-simple',
+      'hero-centered',
       'logo-cloud',
       'bento-features',
       'persona-cards',
@@ -51,6 +53,7 @@ export const PAGE_CATALOG: PageRecord[] = [
       'comparison-table',
       'faq-accordion',
       'community-band',
+      'footer-mega',
     ],
     featured: true,
   },

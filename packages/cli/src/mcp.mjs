@@ -6,6 +6,11 @@
  * makes the catalog something Cursor / Claude Code / Zed can *search and
  * install from* directly, which is distribution rather than a feature.
  *
+ * The tool list is in two halves. `search_catalog` / `install_artifact` /
+ * `init_template` cover all four tiers and are what an agent should reach
+ * for; the four effect-specific tools predate them and stay because they
+ * carry the framework and recolouring knobs the generic ones do not.
+ *
  * The protocol is hand-implemented rather than pulled from the official
  * SDK, deliberately: this package's headline command is
  * `npx hoverlab add btn-gradient`, and every dependency is latency a user
@@ -17,8 +22,17 @@
  * diagnostic goes to stderr, or it corrupts the stream.
  */
 
-import { writeEffectFiles } from './write.mjs'
-import { DEFAULT_ORIGIN, FRAMEWORKS, getEffect, searchEffects } from './api.mjs'
+import { addArtifact, writeEffectFiles } from './write.mjs'
+import { initTemplate } from './scaffold.mjs'
+import {
+  DEFAULT_ORIGIN,
+  FRAMEWORKS,
+  LEVELS,
+  getEffect,
+  searchAll,
+  searchEffects,
+  searchLevel,
+} from './api.mjs'
 
 const SERVER_NAME = 'hoverlab'
 const SERVER_VERSION = '0.1.0'
@@ -145,6 +159,94 @@ const TOOLS = [
       'List the catalog categories with the exact spellings accepted by search_effects. Cheap; call it before guessing a category name.',
     inputSchema: { type: 'object', properties: {}, additionalProperties: false },
   },
+  {
+    name: 'search_catalog',
+    description:
+      'Search the whole Hoverlab catalog across all four tiers at once: effects (a single element — a button hover, a loader), blocks (a complete section — a pricing table, a checkout form, a sortable data table), pages (a composed screen — a full landing page, a product detail page) and templates (a whole runnable Next.js project). Prefer this over search_effects whenever the user is asking for something larger than one element: "build me a pricing page", "I need a checkout form", "scaffold a storefront". Returns metadata only; follow up with install_artifact or init_template.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        query: {
+          type: 'string',
+          description:
+            'Free-text search, e.g. "checkout", "pricing table", "sortable table with filters". Every word must match something, so prefer 2-4 descriptive words.',
+        },
+        level: {
+          type: 'string',
+          enum: LEVELS,
+          description:
+            'Restrict to one tier. Omit to search all four, which is usually right — the user rarely knows which tier holds what they want.',
+        },
+        category: {
+          type: 'string',
+          description: 'Restrict to one category. Requires level. Call list_categories for values.',
+        },
+        featured: { type: 'boolean', description: 'Only the curated, hand-written entries.' },
+        limit: {
+          type: 'integer',
+          description: 'Maximum results per tier, 1-100. Defaults to 10.',
+          minimum: 1,
+          maximum: 100,
+        },
+      },
+      required: ['query'],
+      additionalProperties: false,
+    },
+  },
+  {
+    name: 'install_artifact',
+    description:
+      'Fetch any catalog artifact by id — effect, block or page — and write its files into the user\'s project. Returns the paths written and any packages that still need installing. This is the right tool for "add the pricing section", "use that checkout form", "install btn-gradient". A page brings the blocks it is built from, so the result compiles rather than leaving broken imports. Templates are NOT installable this way: they are whole projects, so use init_template.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        id: { type: 'string', description: 'Artifact id, as returned by search_catalog.' },
+        directory: {
+          type: 'string',
+          description:
+            'Destination root. Blocks and pages keep their own relative paths (components/x.tsx) beneath it. Defaults to the project root, or src/ when the project uses that layout.',
+        },
+        framework: {
+          type: 'string',
+          enum: FRAMEWORKS,
+          description:
+            'Effects only — blocks and pages are React and ship as written. Auto-detected when omitted.',
+        },
+        force: {
+          type: 'boolean',
+          description: 'Overwrite files that already exist. Defaults to false, which fails instead.',
+        },
+      },
+      required: ['id'],
+      additionalProperties: false,
+    },
+  },
+  {
+    name: 'init_template',
+    description:
+      'Scaffold a complete, runnable Next.js project from a template into a new directory — routing, layout, theme tokens, every page and every block it uses. Use this when the user wants to start something rather than add to it: "build me a SaaS starter", "scaffold a storefront". Refuses to write into a non-empty directory unless forced, so it will not overwrite an existing project.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        id: {
+          type: 'string',
+          description:
+            'Template id, as returned by search_catalog with level "template" (e.g. "saas-starter", "storefront").',
+        },
+        directory: {
+          type: 'string',
+          description: 'Destination directory. Defaults to ./<template-id>.',
+        },
+        force: {
+          type: 'boolean',
+          description:
+            'Scaffold into a directory that already has files in it. Defaults to false. Ask the user before setting this.',
+        },
+      },
+      required: ['id'],
+      additionalProperties: false,
+    },
+  },
 ]
 
 /* ------------------------------------------------------------------ *
@@ -257,11 +359,163 @@ async function runListCategories() {
   return ['Catalog categories:', '', ...result.categories.map((c) => `- ${c}`)].join('\n')
 }
 
+/* ---------------------- The other three tiers -------------------- */
+
+/** One search hit, as the two lines a model should read. */
+function describe(item) {
+  const lines = [`- ${item.id}${item.featured ? '  (curated)' : ''} — ${item.name}`]
+  lines.push(`    ${item.category} · ${item.description}`)
+  if (item.composedOf?.length) {
+    lines.push(`    built from: ${item.composedOf.join(', ')}`)
+  }
+  if (item.fileCount) {
+    lines.push(`    ${item.fileCount} files, ${item.routes?.length ?? 0} routes`)
+  }
+  return lines
+}
+
+const LEVEL_BLURB = {
+  effect: 'EFFECTS — one element',
+  block: 'BLOCKS — one complete section',
+  page: 'PAGES — one composed screen',
+  template: 'TEMPLATES — a whole runnable project',
+}
+
+async function runSearchCatalog(args) {
+  const limit = typeof args.limit === 'number' ? args.limit : 10
+  const params = {
+    query: args.query,
+    category: args.category,
+    featured: args.featured === true,
+    limit,
+  }
+
+  if (args.level) {
+    const result = await searchLevel({ ...params, level: args.level })
+    if (!result.items.length) {
+      return `No ${args.level}s matched "${args.query}". Search requires every word to match, so try fewer or broader words.`
+    }
+    return [
+      `${result.total} ${args.level}${result.total === 1 ? '' : 's'} matched "${args.query}":`,
+      '',
+      ...result.items.flatMap(describe),
+      '',
+      args.level === 'template'
+        ? 'Use init_template with one of these ids.'
+        : 'Use install_artifact with one of these ids.',
+    ].join('\n')
+  }
+
+  const { results, total, errors } = await searchAll(params)
+  if (errors.length === results.length) throw errors[0]
+
+  if (total === 0) {
+    return (
+      `Nothing in the catalog matched "${args.query}".\n\n` +
+      'Search requires every word to match, so try fewer or broader words — ' +
+      '"checkout form" rather than "a nice checkout form with address fields".'
+    )
+  }
+
+  const lines = [`${total} match${total === 1 ? '' : 'es'} for "${args.query}":`, '']
+
+  // Assembly first: if a whole page or template answers the request, the
+  // model should see that before it starts stitching blocks together.
+  for (const level of ['template', 'page', 'block', 'effect']) {
+    const result = results.find((r) => r.level === level)
+    if (!result?.items.length) continue
+    lines.push(`${LEVEL_BLURB[level]} (${result.total})`)
+    for (const item of result.items) lines.push(...describe(item))
+    lines.push('')
+  }
+
+  lines.push(
+    'Use install_artifact for an effect, block or page; init_template for a template.',
+  )
+  return lines.join('\n')
+}
+
+async function runInstallArtifact(args) {
+  let written
+  try {
+    written = await addArtifact({
+      id: args.id,
+      framework: args.framework,
+      directory: args.directory,
+      force: args.force === true,
+    })
+  } catch (error) {
+    // The underlying message points at the CLI command, which is the wrong
+    // advice for a client holding the tool that does the same job.
+    if (error.suggestInit) {
+      throw new Error(
+        `${args.id} is a template — a whole project, not a component. ` +
+          `Call init_template with id "${error.suggestInit}" instead.`,
+      )
+    }
+    throw error
+  }
+
+  const lines = [
+    `Installed ${written.artifact.name} (${written.artifact.id}) — ${written.level}.`,
+    written.frameworkReason ? `Resolved from the project: ${written.frameworkReason}.` : null,
+    written.included.length
+      ? `Included the ${written.included.length} blocks it is built from: ${written.included.join(', ')}.`
+      : null,
+    '',
+    'Files written:',
+    ...written.files.map((f) => `- ${f}`),
+  ].filter((line) => line !== null)
+
+  if (written.missingDeps.length) {
+    lines.push('', `Still needed: npm i ${written.missingDeps.join(' ')}`)
+  }
+  if (written.notes?.length) {
+    lines.push('', 'Notes:')
+    for (const note of written.notes) lines.push(`- ${note}`)
+  }
+
+  return lines.join('\n')
+}
+
+async function runInitTemplate(args) {
+  const result = await initTemplate({
+    id: args.id,
+    directory: args.directory,
+    force: args.force === true,
+  })
+
+  const lines = [
+    `Scaffolded ${result.template.name} (${result.template.id}) into ${result.directory}.`,
+    `${result.files.length} files.`,
+    '',
+  ]
+
+  if (result.routes.length) {
+    lines.push('Routes:')
+    for (const route of result.routes) {
+      lines.push(`- ${route.path} → ${route.file} (${route.label})`)
+    }
+    lines.push('')
+  }
+
+  lines.push('Next: npm install, then npm run dev.')
+  if (result.notes?.length) {
+    lines.push('', 'Notes:')
+    for (const note of result.notes) lines.push(`- ${note}`)
+  }
+
+  return lines.join('\n')
+}
+
 const HANDLERS = {
   search_effects: runSearchEffects,
   get_effect: runGetEffect,
   install_effect: runInstallEffect,
   list_categories: runListCategories,
+  search_catalog: runSearchCatalog,
+  install_artifact: runInstallArtifact,
+  init_template: runInitTemplate,
 }
 
 /* ------------------------------------------------------------------ *
@@ -327,10 +581,15 @@ async function handleMessage(message) {
         capabilities: { tools: { listChanged: false } },
         serverInfo: { name: SERVER_NAME, version: SERVER_VERSION },
         instructions:
-          'Search the Hoverlab CSS effect catalog and install effects into the user\'s project. ' +
-          'Start with search_effects to find candidates, then install_effect to write files ' +
-          '(or get_effect to inspect the code first). The effects are plain CSS, so they can be ' +
-          'emitted as React, Vue, Svelte, styled-components, Tailwind utilities, or raw CSS.',
+          'Search the Hoverlab catalog and install from it. The catalog has four tiers: ' +
+          'effects (one element, plain CSS, emittable as React/Vue/Svelte/styled-components/' +
+          'Tailwind/raw CSS), blocks (one complete section, React + Tailwind), pages (one ' +
+          'composed screen) and templates (a whole runnable Next.js project). ' +
+          'Start with search_catalog, which covers all four — the user usually does not know ' +
+          'which tier holds what they asked for. Then install_artifact to write an effect, ' +
+          'block or page into the project, or init_template to scaffold a project. ' +
+          'Reach for a block before hand-writing a section: they are hundreds of lines of ' +
+          'accessible, keyboard-complete React that would take far longer to reproduce.',
       })
       return
     }

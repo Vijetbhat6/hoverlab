@@ -98,7 +98,7 @@ export function NewsletterSignup({
               className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-60"
             >
               {status === 'submitting' ? (
-                <Loader2 aria-hidden className="h-4 w-4 animate-spin" />
+                <Loader2 aria-hidden className="h-4 w-4 animate-spin motion-reduce:[animation-duration:1.6s]" />
               ) : null}
               {status === 'submitting' ? 'Subscribing' : ctaLabel}
             </button>

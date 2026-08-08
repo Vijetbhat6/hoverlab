@@ -16,25 +16,17 @@ import { blockCategorySlug, type BlockMeta } from '@/lib/blocks/block-types'
 export function BlockCard({ block }: { block: BlockMeta }) {
   return (
     <article className="group relative flex flex-col overflow-hidden rounded-2xl border border-border/60 bg-card/60 p-3 transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-lg">
-      <BlockThumbnail componentKey={block.previewComponent} />
+      <BlockThumbnail componentKey={block.previewComponent} height={block.thumbHeight} />
 
       <div className="flex flex-1 flex-col p-3">
-        <div className="flex items-start justify-between gap-3">
-          <h3 className="font-semibold leading-snug tracking-tight">
-            <Link
-              href={`/block/${block.id}`}
-              className="outline-none after:absolute after:inset-0 after:content-[''] focus-visible:underline"
-            >
-              {block.name}
-            </Link>
-          </h3>
-
-          {block.tier === 'pro' ? (
-            <span className="shrink-0 rounded-full bg-primary/15 px-2 py-0.5 text-xs font-semibold text-primary">
-              Pro
-            </span>
-          ) : null}
-        </div>
+        <h3 className="font-semibold leading-snug tracking-tight">
+          <Link
+            href={`/block/${block.id}`}
+            className="outline-none after:absolute after:inset-0 after:content-[''] focus-visible:underline"
+          >
+            {block.name}
+          </Link>
+        </h3>
 
         <p className="mt-1.5 line-clamp-2 text-sm text-muted-foreground">
           {block.description}

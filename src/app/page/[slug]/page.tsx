@@ -24,6 +24,10 @@ import { getBlockMeta } from '@/lib/blocks/block-index'
 import { blockCategorySlug } from '@/lib/blocks/block-types'
 import { templatesUsingPage } from '@/lib/templates/template-index'
 import { absoluteUrl } from '@/lib/site'
+import {
+  TrackArtifactView,
+  FavoriteArtifactButton,
+} from '@/components/artifact-actions'
 
 export const dynamicParams = false
 
@@ -96,6 +100,26 @@ export default async function PageDetailPage({ params }: PageProps) {
             {page.name}
           </h1>
           <p className="mt-3 text-pretty text-muted-foreground">{page.description}</p>
+
+          <div className="mt-5 flex flex-wrap items-center gap-2">
+            <FavoriteArtifactButton
+              artifact={{
+                id: page.id,
+                name: page.name,
+                category: page.category,
+                level: 'page',
+              }}
+            />
+          </div>
+
+          <TrackArtifactView
+            artifact={{
+              id: page.id,
+              name: page.name,
+              category: page.category,
+              level: 'page',
+            }}
+          />
 
           <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-muted-foreground">
             <span className="inline-flex items-center gap-1.5">

@@ -15,11 +15,13 @@
  */
 
 import * as React from 'react'
+import {
+  normalizeRef,
+  type ArtifactRef,
+  type RecordableArtifact,
+} from '@/lib/artifact-history'
 
-export interface CopyHistoryEntry {
-  effectId: string
-  effectName: string
-  effectCategory: string
+export interface CopyHistoryEntry extends ArtifactRef {
   /** ISO timestamp — used for sorting + relative-time display. */
   copiedAt: string
 }
@@ -32,9 +34,19 @@ function readHistory(): CopyHistoryEntry[] {
   try {
     const raw = window.localStorage.getItem(STORAGE_KEY)
     if (!raw) return []
-    const parsed = JSON.parse(raw) as CopyHistoryEntry[]
+    const parsed = JSON.parse(raw) as unknown
     if (!Array.isArray(parsed)) return []
-    return parsed.slice(0, MAX_ENTRIES)
+    // Entries written before the ladder existed use `effect*` field names
+    // and carry no level; normalizeRef migrates them on read.
+    return parsed
+      .map((entry) => {
+        const ref = normalizeRef(entry)
+        if (!ref) return null
+        const copiedAt = (entry as { copiedAt?: string }).copiedAt
+        return { ...ref, copiedAt: copiedAt ?? new Date(0).toISOString() }
+      })
+      .filter((e): e is CopyHistoryEntry => e !== null)
+      .slice(0, MAX_ENTRIES)
   } catch {
     return []
   }
@@ -52,7 +64,17 @@ function writeHistory(next: CopyHistoryEntry[]) {
 }
 
 export function useCopyHistory() {
-  const [entries, setEntries] = React.useState<CopyHistoryEntry[]>(() => readHistory())
+  /**
+   * Starts EMPTY rather than seeded from localStorage.
+   *
+   * Seeding here (`useState(() => readHistory())`) is a hydration bug: the
+   * server has no localStorage, so it renders nothing, while the client's
+   * very first render already has the entries — React sees two different
+   * trees and bails out of hydrating with #418. Reading in the effect below
+   * instead means both sides agree on "empty", and the real list arrives on
+   * the commit after.
+   */
+  const [entries, setEntries] = React.useState<CopyHistoryEntry[]>([])
 
   // Mirror the latest entries in a ref so that `record` / `clear` can
   // compute the next list without reading stale state. Critically, this
@@ -70,6 +92,8 @@ export function useCopyHistory() {
 
   React.useEffect(() => {
     const sync = () => setEntries(readHistory())
+    // Populate on mount — see the note on the initial state above.
+    sync()
     window.addEventListener('storage', sync)
     window.addEventListener('hoverlab:copy-history-changed', sync)
     return () => {
@@ -79,19 +103,20 @@ export function useCopyHistory() {
   }, [])
 
   const record = React.useCallback(
-    (effect: { id: string; name: string; category: string }) => {
+    (artifact: RecordableArtifact) => {
       // Compute next from the ref (always current), then call setEntries
       // and writeHistory as separate statements. This avoids running
       // writeHistory (which dispatches a synchronous custom event) inside
       // the setEntries updater — that updater executes during React's
       // render phase, and the event listener it triggers would call
       // setEntries on other components mid-render.
-      const without = entriesRef.current.filter((e) => e.effectId !== effect.id)
+      const without = entriesRef.current.filter((e) => e.id !== artifact.id)
       const next = [
         {
-          effectId: effect.id,
-          effectName: effect.name,
-          effectCategory: effect.category,
+          id: artifact.id,
+          name: artifact.name,
+          category: artifact.category,
+          level: artifact.level,
           copiedAt: new Date().toISOString(),
         },
         ...without,

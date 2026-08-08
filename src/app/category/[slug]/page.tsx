@@ -5,6 +5,7 @@ import { ArrowLeft, ArrowRight, Layers } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { CommandPalette } from '@/components/command-palette'
+import { EffectStaticCard } from '@/components/effect-static-card'
 import { EFFECTS } from '@/lib/effects'
 import { CATEGORIES, categoryFromSlug, categorySlug, type Effect } from '@/lib/effect-types'
 import { CATEGORY_META } from '@/lib/category-meta'
@@ -160,7 +161,7 @@ export default async function CategoryPage({ params }: PageProps) {
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {shown.map((effect) => (
-            <StaticPreviewCard key={effect.id} effect={effect} />
+            <EffectStaticCard key={effect.id} effect={effect} />
           ))}
         </div>
 
@@ -323,46 +324,3 @@ function interleaveByTemplate(effects: Effect[]): Effect[] {
   return out
 }
 
-/**
- * Server-rendered preview card.
- *
- * The card is a plain <div> and the link is a stretched anchor over the
- * title, rather than an <a> wrapping the whole thing. Effect markup
- * routinely contains buttons, <details>, and its own anchors — nesting
- * those inside an <a> is invalid, and the parser restructures the DOM to
- * fix it, which shows up as a hydration mismatch on every card.
- */
-function StaticPreviewCard({ effect }: { effect: Effect }) {
-  return (
-    <div className="group relative flex flex-col overflow-hidden rounded-xl border border-border/60 bg-card/60 transition-all hover:border-primary/40 hover:shadow-lg">
-      <div
-        className={cn(
-          'flex min-h-[180px] items-center justify-center overflow-hidden p-6',
-          effect.darkSurface ? 'bg-slate-950' : effect.previewClass ?? 'bg-muted/30',
-        )}
-        // The preview is decoration; the stretched link below is the real
-        // control, so nothing in here should take focus or be announced.
-        aria-hidden="true"
-        dangerouslySetInnerHTML={{ __html: effect.html }}
-      />
-      <div className="border-t border-border/60 p-3">
-        <div className="flex items-center gap-2">
-          <h2 className="truncate text-sm font-semibold group-hover:text-primary">
-            <Link
-              href={`/effect/${effect.id}`}
-              className="after:absolute after:inset-0 after:content-['']"
-            >
-              {effect.name}
-            </Link>
-          </h2>
-          {effect.featured ? (
-            <Badge variant="secondary" className="shrink-0 text-[10px]">
-              Featured
-            </Badge>
-          ) : null}
-        </div>
-        <p className="mt-1 line-clamp-2 text-xs text-muted-foreground">{effect.description}</p>
-      </div>
-    </div>
-  )
-}

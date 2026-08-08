@@ -6,7 +6,7 @@ import {
   apiJson,
   apiPreflight,
   readPagination,
-  searchEffects,
+  searchArtifacts,
   toSummary,
 } from '@/lib/api/public'
 
@@ -43,7 +43,7 @@ export async function GET(request: Request) {
     )
   }
 
-  const { effects, total } = searchEffects(EFFECTS, {
+  const { items: effects, total } = searchArtifacts(EFFECTS, {
     q: url.searchParams.get('q') ?? undefined,
     category,
     featured: url.searchParams.get('featured') === 'true',

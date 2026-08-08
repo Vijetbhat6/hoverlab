@@ -17,6 +17,8 @@ import { History, X } from 'lucide-react'
 import { useRecentlyViewed } from '@/hooks/use-recently-viewed'
 import { formatRelativeTime } from '@/hooks/use-copy-history'
 import { cn } from '@/lib/utils'
+import { refHref, refLevel } from '@/lib/artifact-history'
+import { LEVEL_LABEL } from '@/lib/artifact-types'
 
 export function RecentlyViewedRail() {
   const { entries, clear } = useRecentlyViewed()
@@ -53,8 +55,8 @@ export function RecentlyViewedRail() {
         <div className="flex gap-2 overflow-x-auto pb-1 [scrollbar-width:thin]">
           {entries.map((entry, idx) => (
             <Link
-              key={entry.effectId}
-              href={`/effect/${entry.effectId}`}
+              key={entry.id}
+              href={refHref(entry)}
               className={cn(
                 'group flex min-w-[180px] max-w-[220px] flex-1 flex-col gap-1 rounded-xl border border-border/50 bg-background/60 p-3 transition-all',
                 'hover:border-primary/40 hover:bg-background hover:shadow-md',
@@ -63,7 +65,12 @@ export function RecentlyViewedRail() {
             >
               <div className="flex items-center justify-between gap-2">
                 <span className="truncate text-[10px] font-mono uppercase tracking-wider text-muted-foreground">
-                  {entry.effectCategory}
+                  {/* The tier, then the category — "BLOCK · Pricing" reads
+                      as one label and disambiguates a name that exists at
+                      more than one rung. */}
+                  {refLevel(entry) === 'effect'
+                    ? entry.category
+                    : `${LEVEL_LABEL[refLevel(entry)].one} · ${entry.category}`}
                 </span>
                 {idx === 0 ? (
                   <span className="shrink-0 rounded-full bg-primary/10 px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-primary">
@@ -72,7 +79,7 @@ export function RecentlyViewedRail() {
                 ) : null}
               </div>
               <span className="line-clamp-2 text-sm font-medium leading-tight transition-colors group-hover:text-primary">
-                {entry.effectName}
+                {entry.name}
               </span>
               <span className="mt-auto text-[11px] text-muted-foreground/80">
                 {formatRelativeTime(entry.viewedAt)}

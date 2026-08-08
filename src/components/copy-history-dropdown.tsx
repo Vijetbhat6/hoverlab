@@ -23,6 +23,8 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { useCopyHistory, formatRelativeTime } from '@/hooks/use-copy-history'
 import { cn } from '@/lib/utils'
+import { refHref, refLevel } from '@/lib/artifact-history'
+import { LEVEL_LABEL } from '@/lib/artifact-types'
 
 export function CopyHistoryDropdown() {
   const { entries, clear, count } = useCopyHistory()
@@ -77,26 +79,30 @@ export function CopyHistoryDropdown() {
             </div>
             <p className="text-sm font-medium">No copies yet</p>
             <p className="mt-1 text-xs text-muted-foreground">
-              Effects you copy code from will appear here for quick access.
+              Anything you copy code from will appear here for quick access.
             </p>
           </div>
         ) : (
           <ul className="max-h-[320px] overflow-y-auto py-1">
             {entries.map((entry, idx) => (
-              <li key={`${entry.effectId}-${idx}`}>
+              <li key={`${entry.id}-${idx}`}>
                 <Link
-                  href={`/effect/${entry.effectId}`}
+                  href={refHref(entry)}
                   onClick={() => setOpen(false)}
                   className="group flex items-center gap-3 px-3 py-2 transition-colors hover:bg-muted/60"
                 >
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-2">
                       <span className="truncate text-sm font-medium">
-                        {entry.effectName}
+                        {entry.name}
                       </span>
                     </div>
                     <div className="mt-0.5 flex items-center gap-2 text-[11px] text-muted-foreground">
-                      <span className="truncate">{entry.effectCategory}</span>
+                      <span className="truncate">
+                        {refLevel(entry) === 'effect'
+                          ? entry.category
+                          : `${LEVEL_LABEL[refLevel(entry)].one} · ${entry.category}`}
+                      </span>
                       <span aria-hidden="true">·</span>
                       <span className="shrink-0">{formatRelativeTime(entry.copiedAt)}</span>
                     </div>

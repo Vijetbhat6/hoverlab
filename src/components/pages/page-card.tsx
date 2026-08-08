@@ -19,22 +19,14 @@ export function PageCard({ page }: { page: PageMeta }) {
       <PageThumbnail componentKey={page.previewComponent} />
 
       <div className="flex flex-1 flex-col p-3">
-        <div className="flex items-start justify-between gap-3">
-          <h3 className="font-semibold leading-snug tracking-tight">
-            <Link
-              href={`/page/${page.id}`}
-              className="outline-none after:absolute after:inset-0 after:content-[''] focus-visible:underline"
-            >
-              {page.name}
-            </Link>
-          </h3>
-
-          {page.tier === 'pro' ? (
-            <span className="shrink-0 rounded-full bg-primary/15 px-2 py-0.5 text-xs font-semibold text-primary">
-              Pro
-            </span>
-          ) : null}
-        </div>
+        <h3 className="font-semibold leading-snug tracking-tight">
+          <Link
+            href={`/page/${page.id}`}
+            className="outline-none after:absolute after:inset-0 after:content-[''] focus-visible:underline"
+          >
+            {page.name}
+          </Link>
+        </h3>
 
         <p className="mt-1.5 line-clamp-2 text-sm text-muted-foreground">
           {page.description}

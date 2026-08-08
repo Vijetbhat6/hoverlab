@@ -58,11 +58,12 @@ export function ArtifactPreview({
 export function ArtifactThumbnail({
   preview,
   missingKey,
-  height = 'h-64',
+  height,
   className = '',
 }: {
   preview: React.ReactNode | undefined
   missingKey: string
+  /** Crop height. `undefined` — not just absent — falls back to the default. */
   height?: string
   className?: string
 }) {
@@ -70,7 +71,7 @@ export function ArtifactThumbnail({
 
   return (
     <div
-      className={`pointer-events-none relative overflow-hidden rounded-xl border border-border/60 bg-background ${height} ${className}`}
+      className={`pointer-events-none relative overflow-hidden rounded-xl border border-border/60 bg-background ${height ?? 'h-64'} ${className}`}
     >
       <div
         aria-hidden

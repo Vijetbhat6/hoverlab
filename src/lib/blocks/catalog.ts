@@ -28,12 +28,226 @@ export interface BlockRecord {
   deps: string[]
   tier?: ArtifactTier
   featured?: boolean
-  /** Preview needs the full canvas width — true for nearly every section. */
-  fullBleed?: boolean
   darkSurface?: boolean
+  /** Tailwind height class for the card thumbnail. See `Block.thumbHeight`. */
+  thumbHeight?: string
 }
 
 export const BLOCK_CATALOG: BlockRecord[] = [
+  /* ================================================================ *
+   *  Marketing — the blocks a site is built from
+   * ================================================================ */
+
+  /* ---------------------------- Heroes ----------------------------- */
+  {
+    id: 'hero-split',
+    name: 'Split Hero with Product Panel',
+    category: 'Heroes',
+    description:
+      'Copy on the left, a drawn product panel on the right — the default hero for anything with an interface to show, with no image asset to host and no layout shift while it loads.',
+    tags: ['hero', 'split', 'landing', 'above the fold', 'saas'],
+    previewComponent: 'hero-split',
+    deps: ['lucide-react'],
+    featured: true,
+  },
+  {
+    id: 'hero-centered',
+    name: 'Centered Announcement Hero',
+    category: 'Heroes',
+    description:
+      'A linked announcement pill over a large centered headline, dual CTAs and a wordmark strip — the hero for a product with nothing to screenshot yet.',
+    tags: ['hero', 'centered', 'announcement', 'landing', 'gradient'],
+    previewComponent: 'hero-centered',
+    deps: ['lucide-react'],
+    featured: true,
+  },
+  {
+    id: 'hero-screenshot',
+    name: 'Hero with Browser Frame',
+    category: 'Heroes',
+    description:
+      'Centered copy above a screenshot in window chrome, masked at the bottom so a tall image never dictates the height of the fold. Wraps your own img or video.',
+    tags: ['hero', 'screenshot', 'browser', 'mockup', 'landing'],
+    previewComponent: 'hero-screenshot',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'hero-waitlist',
+    name: 'Waitlist Hero with Email Capture',
+    category: 'Heroes',
+    description:
+      'A pre-launch hero whose only ask is an email address, with pending and success states and a signup count that argues for finishing rather than starting.',
+    tags: ['hero', 'waitlist', 'email', 'launch', 'form'],
+    previewComponent: 'hero-waitlist',
+    deps: ['lucide-react'],
+  },
+
+  /* ---------------------------- Navigation ------------------------- */
+  {
+    id: 'navbar-simple',
+    name: 'Responsive Navbar',
+    category: 'Navigation',
+    description:
+      'Brand, links and CTAs with a mobile panel that unmounts when closed — so its links are never tabbable while invisible — plus escape-to-close and focus return.',
+    tags: ['navbar', 'nav', 'header', 'menu', 'responsive'],
+    previewComponent: 'navbar-simple',
+    deps: ['lucide-react'],
+    featured: true,
+    thumbHeight: 'h-24',
+  },
+  {
+    id: 'navbar-mega-menu',
+    name: 'Navbar with Mega Menu',
+    category: 'Navigation',
+    description:
+      'Top-level items that open a described-link panel, opening on hover and focus, closing on escape, outside click and focus leaving the group — and collapsing to an accordion on mobile.',
+    tags: ['navbar', 'mega menu', 'dropdown', 'nav', 'header'],
+    previewComponent: 'navbar-mega-menu',
+    deps: ['lucide-react'],
+    thumbHeight: 'h-24',
+  },
+  {
+    id: 'nav-mobile-drawer',
+    name: 'Mobile Nav Drawer',
+    category: 'Navigation',
+    description:
+      'A slide-in site menu that behaves like a dialog: focus trap, focus restoration, body scroll lock and a transition that drops under prefers-reduced-motion.',
+    tags: ['drawer', 'mobile menu', 'nav', 'dialog', 'focus trap'],
+    previewComponent: 'nav-mobile-drawer',
+    deps: ['lucide-react'],
+    thumbHeight: 'h-24',
+  },
+
+  /* ---------------------------- Footers ---------------------------- */
+  {
+    id: 'footer-mega',
+    name: 'Mega Footer with Link Columns',
+    category: 'Footers',
+    description:
+      'Brand column, four labelled nav columns, socials and a legal bar — the one place every page links to every section. Ships no client JavaScript.',
+    tags: ['footer', 'links', 'sitemap', 'columns', 'seo'],
+    previewComponent: 'footer-mega',
+    deps: ['lucide-react'],
+    featured: true,
+  },
+  {
+    id: 'footer-minimal',
+    name: 'Minimal Footer Bar',
+    category: 'Footers',
+    description:
+      'One row — brand, a handful of links, socials, copyright — for a site where a five-column footer would be whitespace pretending to be structure.',
+    tags: ['footer', 'minimal', 'bar', 'simple', 'links'],
+    previewComponent: 'footer-minimal',
+    deps: ['lucide-react'],
+    thumbHeight: 'h-20',
+  },
+  {
+    id: 'footer-newsletter',
+    name: 'Footer with Newsletter Band',
+    category: 'Footers',
+    description:
+      'A raised email-capture band overlapping a three-column link footer, with the confirmation replacing the field in place rather than navigating away.',
+    tags: ['footer', 'newsletter', 'email', 'cta', 'subscribe'],
+    previewComponent: 'footer-newsletter',
+    deps: ['lucide-react'],
+  },
+
+  /* ---------------------------- Contact & Forms -------------------- */
+  {
+    id: 'contact-form-split',
+    name: 'Split Contact Form',
+    category: 'Contact & Forms',
+    description:
+      'A contact form beside the channels that bypass it — a real address, a support link and a response-time promise, which is what makes a form people cannot see into feel worth filling.',
+    tags: ['contact', 'form', 'email', 'support', 'enquiry'],
+    previewComponent: 'contact-form-split',
+    deps: ['lucide-react'],
+    featured: true,
+  },
+  {
+    id: 'multi-step-form',
+    name: 'Multi-Step Form with Validation',
+    category: 'Contact & Forms',
+    description:
+      'A three-step form where each step validates only its own fields, errors are wired to inputs with aria-describedby, and advancing moves focus to the new heading.',
+    tags: ['form', 'wizard', 'steps', 'validation', 'multi-step'],
+    previewComponent: 'multi-step-form',
+    deps: ['lucide-react'],
+  },
+
+  /* ---------------------------- Modals & Drawers ------------------- */
+  {
+    id: 'confirm-dialog',
+    name: 'Destructive Confirm Dialog',
+    category: 'Modals & Drawers',
+    description:
+      'A type-to-confirm dialog built on native <dialog>, so the focus trap, top layer and escape handling come from the browser. Focus lands on Cancel, and the button says the verb.',
+    tags: ['dialog', 'modal', 'confirm', 'delete', 'destructive'],
+    previewComponent: 'confirm-dialog',
+    deps: ['lucide-react'],
+    featured: true,
+    thumbHeight: 'h-24',
+  },
+  {
+    id: 'slide-over-panel',
+    name: 'Slide-Over Edit Panel',
+    category: 'Modals & Drawers',
+    description:
+      'A side sheet for editing a record without losing the list behind it — native <dialog> for the trapping, a data attribute for the slide, and a sticky footer so Save never scrolls away.',
+    tags: ['drawer', 'sheet', 'slide-over', 'panel', 'dialog'],
+    previewComponent: 'slide-over-panel',
+    deps: ['lucide-react'],
+    thumbHeight: 'h-24',
+  },
+
+  /* ---------------------------- Onboarding ------------------------- */
+  {
+    id: 'onboarding-checklist',
+    name: 'Setup Checklist with Progress',
+    category: 'Onboarding',
+    description:
+      'The get-started card that ships with its first item already ticked, a native <progress> element rather than a div bar, and a dismiss control that appears only once there is nothing left to abandon.',
+    tags: ['onboarding', 'checklist', 'progress', 'activation', 'getting started'],
+    previewComponent: 'onboarding-checklist',
+    deps: ['lucide-react'],
+    featured: true,
+  },
+  {
+    id: 'setup-wizard',
+    name: 'Guided Setup Wizard',
+    category: 'Onboarding',
+    description:
+      'A choice-driven wizard with a persistent side rail, real radio groups in a fieldset so arrow keys work, and visited steps navigable while steps ahead stay out of the tab order.',
+    tags: ['onboarding', 'wizard', 'setup', 'steps', 'radio'],
+    previewComponent: 'setup-wizard',
+    deps: ['lucide-react'],
+  },
+
+  /* ---------------------------- Notifications ---------------------- */
+  {
+    id: 'toast-stack',
+    name: 'Toast Notification Stack',
+    category: 'Notifications',
+    description:
+      'A corner stack whose live region is mounted before any message exists, errors announce assertively, and the auto-dismiss timer pauses on hover and on focus.',
+    tags: ['toast', 'notification', 'snackbar', 'alert', 'live region'],
+    previewComponent: 'toast-stack',
+    deps: ['lucide-react'],
+    featured: true,
+    thumbHeight: 'h-28',
+  },
+  {
+    id: 'notification-inbox',
+    name: 'Notification Inbox Panel',
+    category: 'Notifications',
+    description:
+      'The bell panel: filterable list with read state, the unread count in the accessible name rather than only in a badge, and machine-readable timestamps beside the human ones.',
+    tags: ['notifications', 'inbox', 'bell', 'activity', 'unread'],
+    previewComponent: 'notification-inbox',
+    deps: ['lucide-react'],
+  },
+
+  /* ---------------------------- Sections --------------------------- */
   {
     id: 'stats-band',
     name: 'Hairline Stats Band',
@@ -44,7 +258,6 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     previewComponent: 'stats-band',
     deps: [],
     featured: true,
-    fullBleed: true,
   },
   {
     id: 'logo-cloud',
@@ -56,7 +269,6 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     previewComponent: 'logo-cloud',
     deps: [],
     featured: true,
-    fullBleed: true,
   },
   {
     id: 'bento-features',
@@ -68,7 +280,6 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     previewComponent: 'bento-features',
     deps: ['lucide-react'],
     featured: true,
-    fullBleed: true,
   },
   {
     id: 'persona-cards',
@@ -79,7 +290,6 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     tags: ['personas', 'audience', 'use cases', 'features', 'cards'],
     previewComponent: 'persona-cards',
     deps: ['lucide-react'],
-    fullBleed: true,
   },
   {
     id: 'code-showcase',
@@ -91,7 +301,6 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     previewComponent: 'code-showcase',
     deps: ['lucide-react'],
     featured: true,
-    fullBleed: true,
   },
   {
     id: 'pricing-tiers',
@@ -103,7 +312,6 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     previewComponent: 'pricing-tiers',
     deps: ['lucide-react'],
     featured: true,
-    fullBleed: true,
   },
   {
     id: 'comparison-table',
@@ -114,7 +322,6 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     tags: ['comparison', 'pricing', 'table', 'matrix', 'features'],
     previewComponent: 'comparison-table',
     deps: ['lucide-react'],
-    fullBleed: true,
   },
   {
     id: 'testimonial-grid',
@@ -126,7 +333,6 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     previewComponent: 'testimonial-grid',
     deps: ['lucide-react'],
     featured: true,
-    fullBleed: true,
   },
   {
     id: 'faq-accordion',
@@ -138,7 +344,6 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     previewComponent: 'faq-accordion',
     deps: ['lucide-react'],
     featured: true,
-    fullBleed: true,
   },
   {
     id: 'changelog-timeline',
@@ -149,7 +354,6 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     tags: ['changelog', 'timeline', 'releases', 'updates', 'history'],
     previewComponent: 'changelog-timeline',
     deps: [],
-    fullBleed: true,
   },
   {
     id: 'roadmap-columns',
@@ -160,7 +364,6 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     tags: ['roadmap', 'kanban', 'columns', 'status', 'planning'],
     previewComponent: 'roadmap-columns',
     deps: ['lucide-react'],
-    fullBleed: true,
   },
   {
     id: 'newsletter-signup',
@@ -171,7 +374,6 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     tags: ['newsletter', 'email', 'signup', 'cta', 'form'],
     previewComponent: 'newsletter-signup',
     deps: ['lucide-react'],
-    fullBleed: true,
   },
   {
     id: 'community-band',
@@ -182,7 +384,6 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     tags: ['community', 'cta', 'links', 'social', 'footer'],
     previewComponent: 'community-band',
     deps: ['lucide-react'],
-    fullBleed: true,
   },
 
   /* ================================================================ *
@@ -265,7 +466,6 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     previewComponent: 'dashboard-shell',
     deps: ['lucide-react'],
     featured: true,
-    fullBleed: true,
   },
   {
     id: 'dashboard-stat-cards',
@@ -310,7 +510,6 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     previewComponent: 'data-table-sortable',
     deps: ['lucide-react'],
     featured: true,
-    fullBleed: true,
   },
   {
     id: 'data-table-toolbar',
@@ -342,7 +541,6 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     tags: ['table', 'expandable', 'accordion', 'detail', 'rows'],
     previewComponent: 'data-table-expandable',
     deps: ['lucide-react'],
-    fullBleed: true,
   },
 
   /* ---------------------------- Settings -------------------------- */
@@ -355,7 +553,6 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     tags: ['settings', 'layout', 'sidebar', 'navigation', 'preferences'],
     previewComponent: 'settings-nav-layout',
     deps: ['lucide-react'],
-    fullBleed: true,
   },
   {
     id: 'settings-profile-form',
@@ -432,7 +629,6 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     tags: ['404', 'not found', 'error page', 'search'],
     previewComponent: 'not-found-404',
     deps: ['lucide-react'],
-    fullBleed: true,
   },
   {
     id: 'skeleton-list',
@@ -500,7 +696,6 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     tags: ['invoices', 'billing', 'receipts', 'history', 'table'],
     previewComponent: 'invoice-history-table',
     deps: ['lucide-react'],
-    fullBleed: true,
   },
 
   /* ---------------------- Command & Search ------------------------ */
@@ -553,7 +748,6 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     previewComponent: 'product-grid',
     deps: ['lucide-react'],
     featured: true,
-    fullBleed: true,
   },
   {
     id: 'product-filter-sidebar',
@@ -586,7 +780,6 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     previewComponent: 'product-rail',
     deps: [],
     featured: true,
-    fullBleed: true,
   },
 
   /* ---------------------------- Product Detail -------------------- */
@@ -645,7 +838,6 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     previewComponent: 'cart-drawer',
     deps: ['lucide-react'],
     featured: true,
-    fullBleed: true,
   },
   {
     id: 'cart-line-items',
@@ -692,7 +884,6 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     previewComponent: 'order-confirmation',
     deps: ['lucide-react'],
     featured: true,
-    fullBleed: true,
   },
   {
     id: 'order-history-list',

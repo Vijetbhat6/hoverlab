@@ -157,6 +157,18 @@ export interface Block
    */
   tags: string[]
   deps: string[]
+  /**
+   * Tailwind height class for this block's card thumbnail, overriding the
+   * default crop.
+   *
+   * Almost every block is a section tall enough to fill the default box.
+   * Navbars and footers are not — a 64px bar rendered at the thumbnail's
+   * half scale leaves most of the card empty, which reads as a broken
+   * preview rather than a short component. Kept as data on the block
+   * because the exception is per-block, not per-category: a mega-menu navbar
+   * and a minimal footer are different heights.
+   */
+  thumbHeight?: string
   html?: never
   css?: never
 }

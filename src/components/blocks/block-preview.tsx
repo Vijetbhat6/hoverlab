@@ -18,15 +18,19 @@ export function BlockPreview({ componentKey }: { componentKey: string }) {
 
 export function BlockThumbnail({
   componentKey,
+  height,
   className = '',
 }: {
   componentKey: string
+  /** Crop override for short blocks — see `Block.thumbHeight`. */
+  height?: string
   className?: string
 }) {
   return (
     <ArtifactThumbnail
       preview={getBlockPreview(componentKey)}
       missingKey={componentKey}
+      height={height}
       className={className}
     />
   )

@@ -1,29 +1,75 @@
 # hoverlab
 
-Install CSS effects from the [Hoverlab](https://hoverlab.dev) catalog straight into your project — and expose the catalog to your editor's AI agent over MCP.
-
-The catalog is 1,600+ effects written as plain CSS. Because they aren't coupled to a component framework, the same effect can be handed to you as React, Vue, Svelte, styled-components, Tailwind utilities, or raw CSS.
+Install UI from the [Hoverlab](https://hoverlab.dev) catalog straight into your project — and expose the catalog to your editor's AI agent over MCP.
 
 ```bash
-npx hoverlab search "pulsing teal button"
-npx hoverlab add glow-pulse-teal-sm-button-0332
+npx hoverlab search checkout          # every tier at once
+npx hoverlab add checkout-form        # one section
+npx hoverlab init storefront ./shop   # a whole project
 ```
 
 No install, no config, no dependencies.
+
+## Four tiers
+
+The catalog is a ladder, and the CLI reaches every rung. You type an id; which tier it belongs to is worked out for you.
+
+| Tier | What it is | Install with |
+| --- | --- | --- |
+| **effect** | One element — a button hover, a loader, a skeleton. Plain CSS. | `add` |
+| **block** | One complete section — a pricing table, a checkout form, a sortable data table. React + Tailwind. | `add` |
+| **page** | One composed screen, assembled from blocks. | `add` |
+| **template** | A whole runnable Next.js project — routing, layout, theme tokens, every page. | `init` |
+
+Effects are written as plain CSS, so the same effect can be handed to you as React, Vue, Svelte, styled-components, Tailwind utilities, or raw CSS. Blocks and above are React and ship as written — a machine translation of three hundred lines of hooks and event handlers would be a worse component claiming to be the same one.
+
+Adding a page brings the blocks it is built from, so the result compiles instead of leaving broken imports:
+
+```
+$ npx hoverlab add checkout-page
+✓ Added Checkout (checkout-page) as page
+  → rooted at src/, since the project has src/app
+  includes 2 blocks: checkout-form, order-summary-panel
+  src/app/checkout-page.tsx
+  src/components/checkout-form.tsx
+  src/components/order-summary-panel.tsx
+  ! npm i lucide-react
+```
 
 ## Commands
 
 | Command | What it does |
 | --- | --- |
-| `add <id...>` | Write an effect into your project |
-| `search <words...>` | Search the catalog |
-| `show <id...>` | Print an effect's code without writing files |
-| `categories` | List the catalog categories |
+| `add <id...>` | Write an effect, block or page into your project |
+| `init [template] [dir]` | Scaffold a template into a new directory. With no template, lists them. |
+| `search <words...>` | Search every tier at once (`--level` to narrow) |
+| `show <id...>` | Print an artifact's code without writing files |
+| `categories` | List the categories, per tier |
 | `mcp` | Run the MCP server over stdio |
+
+## Scaffolding a project
+
+```bash
+npx hoverlab init            # list the templates
+npx hoverlab init storefront ./shop
+cd shop && npm install && npm run dev
+```
+
+`init` refuses to write into a directory that already has files in it unless you pass `--force`, so it cannot land on top of an existing project. A directory holding nothing but `.git` counts as empty — `git init` first is a normal thing to do.
+
+## Where files land
+
+| Tier | Destination |
+| --- | --- |
+| effect | A `hoverlab/` folder inside your existing components directory (or styles directory, for CSS output) |
+| block, page | Their own paths — `components/x.tsx`, `app/y.tsx` — rooted at your project, or at `src/` if you use that layout |
+| template | A new directory named after the template, or the one you name |
+
+Those block paths are not a suggestion: every page source imports `@/components/<block-id>`, so flattening them would break the imports. `--dir` overrides the root in all three cases.
 
 ## Framework detection
 
-`add` reads your `package.json` and picks the right output automatically:
+For effects, `add` reads your `package.json` and picks the right output automatically:
 
 | Found | Output |
 | --- | --- |
@@ -40,11 +86,9 @@ Override it with `--framework`:
 npx hoverlab add btn-gradient --framework tailwind
 ```
 
-Files land in a `hoverlab/` folder inside your existing components directory (or styles directory, for CSS output). Override with `--dir`.
-
 ## Customizing on the way in
 
-The same four knobs the website's sliders drive are available as flags, so a recoloured effect can be installed directly rather than copied by hand:
+Effects only. The same four knobs the website's sliders drive are available as flags, so a recoloured effect can be installed directly rather than copied by hand:
 
 ```bash
 npx hoverlab add btn-gradient --hue 40 --sat 15 --scale 1.2 --speed 1.5
@@ -59,7 +103,7 @@ npx hoverlab add btn-gradient --hue 40 --sat 15 --scale 1.2 --speed 1.5
 
 ## Editor integration (MCP)
 
-Register the MCP server and your editor's agent can search and install effects itself — no context-switch to a website.
+Register the MCP server and your editor's agent can search and install from the catalog itself — no context-switch to a website.
 
 **Claude Code**
 
@@ -80,14 +124,17 @@ claude mcp add hoverlab -- npx -y hoverlab mcp
 }
 ```
 
-The server exposes four tools:
+The server exposes seven tools. Three cover the whole catalog:
 
-- **`search_effects`** — free-text search over the catalog, returns metadata
-- **`get_effect`** — one effect as ready-to-paste code in any supported framework
-- **`install_effect`** — fetch and write the files into the project
-- **`list_categories`** — the category vocabulary
+- **`search_catalog`** — free-text search across all four tiers at once
+- **`install_artifact`** — fetch an effect, block or page and write it into the project
+- **`init_template`** — scaffold a whole project from a template
 
-Then just ask: *"find me a shimmering skeleton loader and add it to the project."*
+And four are the original effect-only surface, kept because they carry the framework and recolouring knobs:
+
+- **`search_effects`**, **`get_effect`**, **`install_effect`**, **`list_categories`**
+
+Then just ask: *"find me a shimmering skeleton loader and add it"*, or *"build me a storefront"*.
 
 ## Tailwind output
 
@@ -105,11 +152,23 @@ Every declaration converts — common properties become real utilities, the rest
 ## Programmatic use
 
 ```js
-import { searchEffects, getEffect } from 'hoverlab'
+import { searchAll, searchLevel, getArtifact, addArtifact, initTemplate } from 'hoverlab'
 
-const { effects } = await searchEffects({ query: 'glassmorphism card' })
-const { files } = await getEffect(effects[0].id, { framework: 'react' })
+// Every tier at once
+const { results } = await searchAll({ query: 'checkout' })
+
+// One tier
+const { items } = await searchLevel({ level: 'block', query: 'pricing' })
+
+// One artifact, whichever tier it is on
+const data = await getArtifact('checkout-page', { deep: true })
+
+// Or write it straight to disk
+await addArtifact({ id: 'pricing-tiers' })
+await initTemplate({ id: 'storefront', directory: './shop' })
 ```
+
+The effect-only helpers (`searchEffects`, `getEffect`, `writeEffectFiles`) are still exported unchanged.
 
 ## Configuration
 

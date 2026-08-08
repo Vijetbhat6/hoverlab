@@ -13,6 +13,7 @@ import {
   commandAdd,
   commandCategories,
   commandHelp,
+  commandInit,
   commandSearch,
   commandShow,
 } from '../src/commands.mjs'
@@ -23,7 +24,7 @@ const { version } = require('../package.json')
 
 /** Flags that take a value; everything else is boolean. */
 const VALUE_FLAGS = new Set([
-  'framework', 'dir', 'category', 'limit', 'hue', 'sat', 'scale', 'speed',
+  'framework', 'dir', 'category', 'limit', 'level', 'hue', 'sat', 'scale', 'speed',
 ])
 
 /** Flags parsed as numbers rather than strings. */
@@ -36,6 +37,7 @@ const ALIASES = {
   v: 'version',
   c: 'category',
   n: 'limit',
+  l: 'level',
 }
 
 /**
@@ -120,6 +122,12 @@ async function main() {
     case 'add':
     case 'install':
       await commandAdd(rest, flags)
+      return
+
+    case 'init':
+    case 'create':
+    case 'new':
+      await commandInit(rest, flags)
       return
 
     case 'search':

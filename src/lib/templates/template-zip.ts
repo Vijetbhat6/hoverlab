@@ -13,34 +13,8 @@
 
 import 'server-only'
 
+import { toDiskPath } from './template-files'
 import type { Template } from './template-types'
-
-/**
- * Files whose stored name differs from the name they must have on disk.
- *
- * `.gitignore` cannot be stored under its real name inside this repo — a
- * dotfile there would apply to the directory it sits in and quietly change
- * what git tracks. npm has the same problem when publishing and solves it
- * the same way, so the file is authored as `gitignore` and renamed here.
- */
-const RENAME_ON_EXTRACT: Record<string, string> = {
-  gitignore: '.gitignore',
-}
-
-/**
- * Reject any path that could escape the archive root.
- *
- * Every path here is authored in this repo rather than supplied by a user,
- * so this is belt-and-braces — but a zip is extracted with the user's
- * permissions, and "the inputs are all trusted" is the assumption every
- * path-traversal advisory starts by quoting.
- */
-function safePath(path: string): string | null {
-  const normalized = path.replace(/\\/g, '/')
-  if (normalized.startsWith('/') || normalized.includes('..')) return null
-  if (/^[a-zA-Z]:/.test(normalized)) return null
-  return RENAME_ON_EXTRACT[normalized] ?? normalized
-}
 
 /**
  * Build the zip as a Buffer, ready to hand to a Response.
@@ -64,7 +38,7 @@ export async function buildTemplateZip(template: Template): Promise<Buffer> {
   // "What you get" tree and the download button both advertise, and a
   // user who counts is right to distrust the rest of the page after that.
   for (const file of template.files) {
-    const path = safePath(file.path)
+    const path = toDiskPath(file.path)
     if (!path) continue
     // Trailing newline: a file without one is a diff nobody asked for the
     // first time the user's editor saves it.

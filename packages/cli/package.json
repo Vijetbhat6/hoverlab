@@ -1,15 +1,20 @@
 {
   "name": "hoverlab",
   "version": "0.1.0",
-  "description": "Install CSS effects from the Hoverlab catalog straight into your project — and expose them to your editor's AI agent over MCP.",
+  "description": "Install UI from the Hoverlab catalog — CSS effects, React blocks, whole pages, and scaffoldable project templates — and expose them to your editor's AI agent over MCP.",
   "keywords": [
     "css",
     "animation",
     "hover",
     "ui",
     "components",
+    "blocks",
+    "templates",
+    "scaffold",
+    "boilerplate",
     "tailwind",
     "react",
+    "nextjs",
     "vue",
     "svelte",
     "mcp",
@@ -32,7 +37,7 @@
   "engines": {
     "node": ">=18.17"
   },
-  "//": "Intentionally dependency-free. `npx hoverlab add btn-gradient` should be one round-trip to npm and one to the API — every dependency added here is latency a user feels before they get their effect.",
+  "//": "Intentionally dependency-free. `npx hoverlab add btn-gradient` should be one round-trip to npm and one to the API — every dependency added here is latency a user feels before they get their effect. This is also why `init` reads a template as JSON rather than unzipping the archive the website serves.",
   "dependencies": {},
   "scripts": {
     "test": "node --test"

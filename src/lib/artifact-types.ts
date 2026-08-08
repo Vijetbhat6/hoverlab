@@ -46,11 +46,27 @@ export const LEVEL_LABEL: Record<ArtifactLevel, { one: string; many: string }> =
 }
 
 /**
- * Which plan an artifact needs. Absent means `'free'`.
+ * Which plan an artifact needs. Absent means `'free'` — and today that is
+ * every artifact in the catalog.
  *
- * Kept as data on the artifact rather than derived from its level, because
- * the free/pro line does not fall neatly between tiers — some blocks are
- * free lead-ins and some effects are premium.
+ * This field is part of the published `/api/v1` response shape, so it stays.
+ * What it is *not* is a gate, and the distinction is worth writing down
+ * because a `tier` field reads like one:
+ *
+ * Pro in this product is sold on features, not on catalog access. See
+ * `billing/plans.ts` — the Pro license buys "the full source, the CLI, and a
+ * pre-cleared commercial license" — and `billing/entitlements.ts`, where
+ * `canUseProFeatures` gates bundle size, export formats and the CLI/MCP
+ * token. There is no per-artifact check anywhere, and nothing sets this to
+ * `'pro'`.
+ *
+ * The card and detail-page badges that keyed off this were removed rather
+ * than left rendering a promise nothing keeps. Making per-artifact gating
+ * real is a bigger job than wiring the badge back up: `/api/v1` is
+ * deliberately public and unauthenticated (see `api/public.ts`), and
+ * `/api/templates/{id}/download` is `force-static`, so a website-side check
+ * would be walked around by `hoverlab add <id>` and by the zip URL itself.
+ * Selling individual artifacts means authenticating the API first.
  */
 export type ArtifactTier = 'free' | 'pro'
 
@@ -90,23 +106,6 @@ export interface ArtifactFile {
   lang: SourceLang
   source: string
 }
-
-/**
- * A named alternative — "dark", "compact", "centered".
- *
- * Variants are presentation switches on one artifact, not separate
- * artifacts: they share an id, a page and a set of favorites. Anything that
- * differs structurally enough to deserve its own URL should be its own
- * artifact instead.
- */
-export interface ArtifactVariant {
-  id: string
-  label: string
-  description?: string
-}
-
-/** Frameworks an artifact's source can be emitted for. */
-export type Framework = 'react' | 'vue' | 'svelte' | 'html'
 
 /* ------------------------------------------------------------------ *
  *  The base type
@@ -175,11 +174,6 @@ export interface Artifact {
   /** npm packages the source imports, e.g. `["lucide-react"]`. */
   deps?: string[]
 
-  /** Pre-rendered ports of `files`, when they exist. */
-  frameworks?: Partial<Record<Framework, ArtifactFile[]>>
-
-  variants?: ArtifactVariant[]
-
   /* -- Composition -------------------------------------------------- */
 
   /**
@@ -196,9 +190,6 @@ export interface Artifact {
   /** Preview surface hints, shared by every level. */
   previewClass?: string
   darkSurface?: boolean
-
-  /** Preview needs its full width — sections and pages, not atoms. */
-  fullBleed?: boolean
 }
 
 /* ------------------------------------------------------------------ *

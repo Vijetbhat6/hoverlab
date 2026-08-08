@@ -30,6 +30,31 @@
 
 import type * as React from 'react'
 
+import { HeroSplit } from './sources/hero-split'
+import { HeroCentered } from './sources/hero-centered'
+import { HeroScreenshot } from './sources/hero-screenshot'
+import { HeroWaitlist } from './sources/hero-waitlist'
+
+import { NavbarSimple } from './sources/navbar-simple'
+import { NavbarMegaMenu } from './sources/navbar-mega-menu'
+import { NavMobileDrawer } from './sources/nav-mobile-drawer'
+
+import { FooterMega } from './sources/footer-mega'
+import { FooterMinimal } from './sources/footer-minimal'
+import { FooterNewsletter } from './sources/footer-newsletter'
+
+import { ContactFormSplit } from './sources/contact-form-split'
+import { MultiStepForm } from './sources/multi-step-form'
+
+import { ConfirmDialog } from './sources/confirm-dialog'
+import { SlideOverPanel } from './sources/slide-over-panel'
+
+import { OnboardingChecklist } from './sources/onboarding-checklist'
+import { SetupWizard } from './sources/setup-wizard'
+
+import { ToastStack } from './sources/toast-stack'
+import { NotificationInbox } from './sources/notification-inbox'
+
 import { StatsBand } from './sources/stats-band'
 import { LogoCloud } from './sources/logo-cloud'
 import { BentoFeatures } from './sources/bento-features'
@@ -108,6 +133,31 @@ import { ReviewList } from './sources/review-list'
  * no demo.
  */
 export const BLOCK_PREVIEWS: Record<string, React.ReactNode> = {
+  'hero-split': <HeroSplit />,
+  'hero-centered': <HeroCentered />,
+  'hero-screenshot': <HeroScreenshot />,
+  'hero-waitlist': <HeroWaitlist />,
+
+  'navbar-simple': <NavbarSimple />,
+  'navbar-mega-menu': <NavbarMegaMenu />,
+  'nav-mobile-drawer': <NavMobileDrawer />,
+
+  'footer-mega': <FooterMega />,
+  'footer-minimal': <FooterMinimal />,
+  'footer-newsletter': <FooterNewsletter />,
+
+  'contact-form-split': <ContactFormSplit />,
+  'multi-step-form': <MultiStepForm />,
+
+  'confirm-dialog': <ConfirmDialog />,
+  'slide-over-panel': <SlideOverPanel />,
+
+  'onboarding-checklist': <OnboardingChecklist />,
+  'setup-wizard': <SetupWizard />,
+
+  'toast-stack': <ToastStack />,
+  'notification-inbox': <NotificationInbox />,
+
   'stats-band': <StatsBand />,
   'logo-cloud': <LogoCloud />,
   'bento-features': <BentoFeatures />,

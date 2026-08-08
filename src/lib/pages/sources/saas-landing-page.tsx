@@ -5,6 +5,7 @@
  * you replace every section: hook, then proof, then substance, then price,
  * then objections, then a way to leave that is not the back button.
  *
+ *   navbar          a way around before a reason to stay
  *   hero            what this is, in one line
  *   logo cloud      other people already decided this was fine
  *   features        what it actually does
@@ -15,12 +16,23 @@
  *   comparison      the number, justified
  *   faq             the objections, answered in their own words
  *   community       somewhere to go if the answer is "not yet"
+ *   footer          every other page on the site
  *
  * Every section takes props, so this file is a running order rather than a
  * wall of copy — swap the content without touching the layout.
+ *
+ * The hero used to be hand-rolled here, on the argument that it is the one
+ * section worth writing per-product. That was true about the *copy* and
+ * false about the markup: <HeroCentered> takes every string as a prop, so
+ * the per-product part is the six lines below and the layout is shared with
+ * the rest of the catalog. Keeping a private copy of it meant this page
+ * silently stopped benefiting from fixes to the block.
  */
 
 import * as React from 'react'
+import { NavbarSimple } from '@/lib/blocks/sources/navbar-simple'
+import { HeroCentered } from '@/lib/blocks/sources/hero-centered'
+import { FooterMega } from '@/lib/blocks/sources/footer-mega'
 import { LogoCloud } from '@/lib/blocks/sources/logo-cloud'
 import { BentoFeatures } from '@/lib/blocks/sources/bento-features'
 import { PersonaCards } from '@/lib/blocks/sources/persona-cards'
@@ -33,54 +45,44 @@ import { CommunityBand } from '@/lib/blocks/sources/community-band'
 
 export default function SaasLandingPage() {
   return (
-    <main className="min-h-screen bg-background text-foreground">
-      {/* Hero — the one section worth writing per-product rather than
-          reaching for a block, because it is the only sentence most
-          visitors will read. */}
-      <section className="mx-auto w-full max-w-4xl px-6 pb-8 pt-20 text-center sm:pt-28">
-        <span className="inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-card/60 px-3 py-1 text-xs font-medium text-muted-foreground">
-          Now in public beta
-        </span>
+    <div className="min-h-screen bg-background text-foreground">
+      <NavbarSimple
+        brand="Acme"
+        activeLabel="Product"
+        signInHref="/login"
+        ctaLabel="Start free"
+        ctaHref="/signup"
+      />
 
-        <h1 className="mt-6 text-balance text-5xl font-extrabold tracking-tight sm:text-6xl">
-          Ship the interface you sketched
-        </h1>
+      <main>
+        {/* The only per-product part of the hero is the copy — everything
+            else comes from the block. */}
+        <HeroCentered
+          announcement="Every section of a real product, ready to paste"
+          announcementHref="/changelog"
+          heading="Ship the interface you sketched"
+          subheading="No component library to adopt, no design system to negotiate, no runtime to ship."
+          primaryLabel="Start free"
+          primaryHref="/signup"
+          secondaryLabel="Read the docs"
+          secondaryHref="/docs"
+          logos={[]}
+        />
 
-        <p className="mx-auto mt-5 max-w-2xl text-pretty text-lg text-muted-foreground">
-          Every section of a real product, ready to paste. No component
-          library to adopt, no design system to negotiate, no runtime to
-          ship.
-        </p>
+        {/* The hero's own logo strip is off above, because the next section
+            is a logo cloud — the same proof twice reads as thin. */}
+        <LogoCloud />
+        <BentoFeatures />
+        <PersonaCards />
+        <CodeShowcase />
+        <TestimonialGrid />
+        <PricingTiers />
+        <ComparisonTable />
+        <FaqAccordion />
+        <CommunityBand />
+      </main>
 
-        <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <a
-            href="/signup"
-            className="rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
-          >
-            Start free
-          </a>
-          <a
-            href="/docs"
-            className="rounded-xl border border-border/60 bg-background px-6 py-3 text-sm font-medium transition-colors hover:bg-muted"
-          >
-            Read the docs
-          </a>
-        </div>
-
-        <p className="mt-4 text-xs text-muted-foreground">
-          Free forever tier · No card required
-        </p>
-      </section>
-
-      <LogoCloud />
-      <BentoFeatures />
-      <PersonaCards />
-      <CodeShowcase />
-      <TestimonialGrid />
-      <PricingTiers />
-      <ComparisonTable />
-      <FaqAccordion />
-      <CommunityBand />
-    </main>
+      <FooterMega brand="Acme" />
+    </div>
   )
 }

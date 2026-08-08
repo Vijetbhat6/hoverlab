@@ -156,7 +156,7 @@ export function AuthOtpVerify({
         <p aria-live="polite" className="mt-4 min-h-5 text-sm">
           {busy ? (
             <span className="inline-flex items-center gap-1.5 text-muted-foreground">
-              <Loader2 aria-hidden className="h-4 w-4 animate-spin" />
+              <Loader2 aria-hidden className="h-4 w-4 animate-spin motion-reduce:[animation-duration:1.6s]" />
               Verifying
             </span>
           ) : null}

@@ -16,6 +16,7 @@
     "lint": "eslint .",
     "check:deps": "node scripts/check-runtime-deps.mjs",
     "audit:motion": "tsx scripts/audit-motion-guard.mts",
+    "audit:motion:blocks": "tsx scripts/audit-block-motion.mts",
     "build:stats": "tsx scripts/build-catalog-stats.mts"
   },
   "dependencies": {

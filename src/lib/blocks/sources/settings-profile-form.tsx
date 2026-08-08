@@ -204,7 +204,7 @@ export function SettingsProfileForm({
               disabled={!dirty || overLimit || busy}
               className="inline-flex items-center gap-2 rounded-xl bg-primary px-3.5 py-2 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-50"
             >
-              {busy ? <Loader2 aria-hidden className="h-4 w-4 animate-spin" /> : null}
+              {busy ? <Loader2 aria-hidden className="h-4 w-4 animate-spin motion-reduce:[animation-duration:1.6s]" /> : null}
               Save changes
             </button>
           </div>
