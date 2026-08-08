@@ -32,13 +32,17 @@ import { siteUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "Hoverlab — A Living CSS Effects Library",
+  title: "Hoverlab — CSS Effects, Blocks, Pages and Templates",
   description:
-    "A curated, open-source library of beautiful CSS effects with live demos and copy-ready code. Buttons, loaders, cards, text, backgrounds and more.",
+    "A curated, open-source catalog that goes from a single CSS hover state to a deployable starter project. Live demos, copy-ready source, and a free CLI: npx hoverlab add <id>.",
   keywords: [
     "CSS",
     "CSS effects",
     "animation",
+    "UI blocks",
+    "React components",
+    "landing page templates",
+    "Tailwind",
     "library",
     "frontend",
     "ui",

@@ -24,25 +24,54 @@
  */
 
 import * as React from 'react'
+import type { ArtifactLevel } from '@/lib/artifact-types'
 
 const STORAGE_KEY = 'hoverlab:compare'
 const MAX_ENTRIES = 4
 
-function readCompare(): string[] {
+/**
+ * One queued artifact.
+ *
+ * The list used to be bare id strings, which was enough while everything in
+ * it was an effect. The drawer now has to know what an id *is* before it
+ * can resolve it — an effect resolves through `/api/effects/batch`, a block
+ * through `/api/v1/artifacts/{id}` — and guessing by trying one and falling
+ * back to the other would make every block wait on a failed request.
+ *
+ * `level` absent means `'effect'`, which is exactly what a migrated bare
+ * string means.
+ */
+export interface CompareRef {
+  id: string
+  level?: ArtifactLevel
+  name?: string
+  category?: string
+}
+
+/** Migrate a stored row: a bare string is a pre-ladder effect id. */
+function normalizeRef(raw: unknown): CompareRef | null {
+  if (typeof raw === 'string') return raw ? { id: raw } : null
+  if (!raw || typeof raw !== 'object') return null
+  const ref = raw as CompareRef
+  if (typeof ref.id !== 'string' || !ref.id) return null
+  return { id: ref.id, level: ref.level, name: ref.name, category: ref.category }
+}
+
+function readCompare(): CompareRef[] {
   if (typeof window === 'undefined') return []
   try {
     const raw = window.localStorage.getItem(STORAGE_KEY)
     if (!raw) return []
     const parsed = JSON.parse(raw)
     if (!Array.isArray(parsed)) return []
-    // Coerce to strings, dedupe, cap.
+    // Normalize, dedupe by id, cap.
     const seen = new Set<string>()
-    const out: string[] = []
-    for (const id of parsed) {
-      if (typeof id !== 'string') continue
-      if (seen.has(id)) continue
-      seen.add(id)
-      out.push(id)
+    const out: CompareRef[] = []
+    for (const item of parsed) {
+      const ref = normalizeRef(item)
+      if (!ref || seen.has(ref.id)) continue
+      seen.add(ref.id)
+      out.push(ref)
       if (out.length >= MAX_ENTRIES) break
     }
     return out
@@ -51,7 +80,7 @@ function readCompare(): string[] {
   }
 }
 
-function writeCompare(next: string[]) {
+function writeCompare(next: CompareRef[]) {
   if (typeof window === 'undefined') return
   try {
     window.localStorage.setItem(
@@ -65,7 +94,7 @@ function writeCompare(next: string[]) {
 }
 
 export function useCompare() {
-  const [entries, setEntries] = React.useState<string[]>(() => readCompare())
+  const [entries, setEntries] = React.useState<CompareRef[]>(() => readCompare())
 
   // Mirror the latest entries in a ref so action callbacks can compute
   // the next list without reading stale state, and so we can call
@@ -73,7 +102,7 @@ export function useCompare() {
   // during React's render phase and trigger the
   // "Cannot update a component while rendering a different component"
   // error via the synchronous dispatchEvent inside writeCompare).
-  const entriesRef = React.useRef<string[]>(entries)
+  const entriesRef = React.useRef<CompareRef[]>(entries)
   React.useEffect(() => {
     entriesRef.current = entries
   }, [entries])
@@ -89,7 +118,7 @@ export function useCompare() {
   }, [])
 
   const has = React.useCallback(
-    (id: string) => entriesRef.current.includes(id),
+    (id: string) => entriesRef.current.some((e) => e.id === id),
     [],
   )
 
@@ -98,11 +127,11 @@ export function useCompare() {
    * the list was already full (the caller should toast a "compare is
    * full" message in that case).
    */
-  const add = React.useCallback((id: string): boolean => {
+  const add = React.useCallback((artifact: CompareRef): boolean => {
     const current = entriesRef.current
-    if (current.includes(id)) return true
+    if (current.some((e) => e.id === artifact.id)) return true
     if (current.length >= MAX_ENTRIES) return false
-    const next = [...current, id]
+    const next = [...current, artifact]
     entriesRef.current = next
     setEntries(next)
     writeCompare(next)
@@ -111,8 +140,8 @@ export function useCompare() {
 
   const remove = React.useCallback((id: string) => {
     const current = entriesRef.current
-    if (!current.includes(id)) return
-    const next = current.filter((x) => x !== id)
+    if (!current.some((e) => e.id === id)) return
+    const next = current.filter((x) => x.id !== id)
     entriesRef.current = next
     setEntries(next)
     writeCompare(next)
@@ -124,17 +153,17 @@ export function useCompare() {
    * so the caller can surface a friendly message.
    */
   const toggle = React.useCallback(
-    (id: string): 'added' | 'removed' | 'full' => {
+    (artifact: CompareRef): 'added' | 'removed' | 'full' => {
       const current = entriesRef.current
-      if (current.includes(id)) {
-        const next = current.filter((x) => x !== id)
+      if (current.some((e) => e.id === artifact.id)) {
+        const next = current.filter((x) => x.id !== artifact.id)
         entriesRef.current = next
         setEntries(next)
         writeCompare(next)
         return 'removed'
       }
       if (current.length >= MAX_ENTRIES) return 'full'
-      const next = [...current, id]
+      const next = [...current, artifact]
       entriesRef.current = next
       setEntries(next)
       writeCompare(next)

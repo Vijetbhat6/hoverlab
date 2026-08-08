@@ -3,9 +3,10 @@
 /**
  * <FaqAccordion> — landing page FAQ section.
  *
- * 8 common questions a visitor might have before signing up: pricing,
- * commercial use, framework compatibility, browser support, customization,
- * data ownership, offline support, and contribution.
+ * 11 common questions a visitor might have before signing up: pricing, what
+ * the four tiers are, commercial use, framework compatibility, the CLI,
+ * browser support, customization, data ownership, offline support, and
+ * contribution.
  *
  * Built on the existing Radix-based <Accordion> from src/components/ui.
  * Wrapped in <Reveal> for a subtle fade-in-up on scroll. The first item
@@ -34,23 +35,41 @@ const FAQ_ITEMS: FaqItem[] = [
     q: 'Is Hoverlab really free?',
     a: (
       <>
-        Yes, for personal and non-commercial projects. Every effect, every
-        customization slider, favorites, bundles, and CSS/HTML/ZIP export are
-        free with no time limit and no credit card. What a paid plan adds is
-        the right to use the effects commercially, plus unlimited bundle size,
-        the framework export formats, and brand presets.
+        Yes, for personal and non-commercial projects. The whole catalog —
+        every effect, every block, every page, every template — is free to
+        browse, customize and copy, with no time limit and no credit card.
+        The CLI and the public API are open to everyone too. What a paid plan
+        adds is the right to use any of it commercially, plus unlimited bundle
+        size, the framework export formats, brand presets and private
+        collections.
       </>
     ),
   },
   {
-    q: 'Can I use these effects in commercial projects?',
+    q: "What's the difference between an effect, a block, a page and a template?",
+    a: (
+      <>
+        Scale. An <strong>effect</strong> is one element styled right — a
+        glowing button, a shimmering skeleton — and it&apos;s pure CSS. A{' '}
+        <strong>block</strong> is a whole section, like a pricing table or a
+        navbar. A <strong>page</strong> is a finished screen composed of
+        blocks. A <strong>template</strong> is a multi-page project you can
+        deploy. Each tier is built from the one below it, so you can open a
+        template and drill all the way down to the individual button inside
+        it — or skip straight to the rung you actually need.
+      </>
+    ),
+  },
+  {
+    q: 'Can I use these in commercial projects?',
     a: (
       <>
         That&apos;s what Pro is for. The free tier covers personal and
         non-commercial work — learning, side projects, portfolios. A one-time
         Pro license covers client projects, paid products, and internal tools
-        at a company, with no attribution required and nothing recurring to
-        pay. Buy it once and it stays yours, including future updates.
+        at a company, for anything in the catalog at any tier, with no
+        attribution required and nothing recurring to pay. Buy it once and it
+        stays yours, including future updates.
       </>
     ),
   },
@@ -58,11 +77,35 @@ const FAQ_ITEMS: FaqItem[] = [
     q: 'Do I need React, Vue, or any framework?',
     a: (
       <>
-        No. Every effect is plain HTML + plain CSS. The code we copy to your
-        clipboard drops into a static <code>.html</code> file just as easily
-        as it drops into a React component, a Vue template, an Astro page,
-        or an email signature (well, almost — email clients are still rough).
-        There is no build step and no JavaScript to bundle.
+        For effects, no — every one is plain HTML + plain CSS, with no build
+        step and no JavaScript to bundle. It drops into a static{' '}
+        <code>.html</code> file as easily as into a React component, a Vue
+        template or an Astro page.
+        <br />
+        <br />
+        Blocks, pages and templates are different, and we&apos;d rather say so
+        here than let you find out after copying: they ship as React + Tailwind
+        components in TypeScript, and most import{' '}
+        <code>lucide-react</code> for icons. Every one lists its dependencies
+        on its detail page before you take it.
+      </>
+    ),
+  },
+  {
+    q: 'Is there a CLI?',
+    a: (
+      <>
+        Yes — <code>npx hoverlab add &lt;id&gt;</code> writes any effect,
+        block, page or template straight into your project. It detects your
+        setup (framework, TypeScript, Tailwind, where your components live)
+        and picks sensible paths, and it takes a plain id, so you don&apos;t
+        have to know which tier the thing you want sits on. There&apos;s also
+        an MCP server, so an editor agent can search the catalog and pull
+        source directly.
+        <br />
+        <br />
+        Both are free and need no account or token — the API behind them is
+        public and unauthenticated on purpose.
       </>
     ),
   },

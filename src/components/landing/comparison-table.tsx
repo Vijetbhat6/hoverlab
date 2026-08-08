@@ -4,7 +4,7 @@
  * <ComparisonTable> — Hoverlab vs writing CSS from scratch vs npm packages.
  *
  * 4 columns: feature | Hoverlab | From scratch | npm package
- * 8 rows comparing key dimensions. Hoverlab column highlighted with
+ * 9 rows comparing key dimensions. Hoverlab column highlighted with
  * primary tint background. Check/X marks; partial = "Limited" text.
  *
  * Persuasive but honest — npm packages aren't bad, they're just a
@@ -15,6 +15,10 @@
 import * as React from 'react'
 import { Check, X, Minus } from 'lucide-react'
 import { Reveal } from '@/components/reveal'
+import { TOTAL_COUNT } from '@/lib/catalog-stats'
+import { BLOCK_COUNT } from '@/lib/blocks/block-index'
+import { PAGE_COUNT } from '@/lib/pages/page-index'
+import { TEMPLATE_COUNT } from '@/lib/templates/template-index'
 
 type CellValue = 'yes' | 'no' | 'partial'
 
@@ -70,11 +74,20 @@ const ROWS: Row[] = [
     note: 'prefers-reduced-motion out of the box — vs your responsibility — vs varies',
   },
   {
+    feature: 'Whole sections and pages',
+    hoverlab: 'yes',
+    scratch: 'no',
+    npm: 'partial',
+    note: `${BLOCK_COUNT} blocks, ${PAGE_COUNT} pages, ${TEMPLATE_COUNT} templates — vs assemble each one yourself — vs component kits, if they fit your design`,
+  },
+  {
     feature: 'Ecosystem depth',
     hoverlab: 'partial',
     scratch: 'no',
     npm: 'yes',
-    note: '40+ curated effects — vs unlimited if you write them — vs millions of packages',
+    // Derived. This read "40+ curated effects" against a catalog of 4,308 —
+    // a hundredfold understatement, in the one row where we concede to npm.
+    note: `${TOTAL_COUNT.toLocaleString('en-US')}+ curated effects — vs unlimited if you write them — vs millions of packages`,
   },
   {
     feature: 'Commercial use',
@@ -116,8 +129,8 @@ export function ComparisonTable() {
             How Hoverlab compares
           </h2>
           <p className="mt-3 text-muted-foreground">
-            Three ways to add CSS effects to your project. Hoverlab isn&apos;t
-            always the right answer — but it usually is.
+            Three ways to get UI into your project. Hoverlab isn&apos;t always
+            the right answer — but it usually is.
           </p>
         </Reveal>
 

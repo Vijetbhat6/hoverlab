@@ -26,6 +26,28 @@ interface Release {
 
 const RELEASES: Release[] = [
   {
+    version: 'v3.0.0',
+    date: 'Aug 8, 2026',
+    summary: 'The ladder — blocks, pages, templates and a CLI',
+    changes: [
+      'Added: blocks, pages and deployable templates above the effects catalog',
+      'Added: npx hoverlab add <id> — installs any tier, plus an MCP server',
+      'Added: one search and one nav across all four tiers, and a public /api/v1',
+    ],
+    tag: 'major',
+  },
+  {
+    version: 'v2.5.0',
+    date: 'Aug 4, 2026',
+    summary: 'India regional pricing, charged in rupees',
+    changes: [
+      'Added: regional pricing applied automatically, with a $/₹ display toggle',
+      'Added: rupee checkout — no cross-border fee from your card issuer',
+      'Fixed: two bugs that made checkout unreachable',
+    ],
+    tag: 'minor',
+  },
+  {
     version: 'v2.4.0',
     date: 'Jun 28, 2026',
     summary: 'Bento grid landing revamp + 6 new entrance animations',
@@ -55,28 +77,6 @@ const RELEASES: Release[] = [
       'Added: bundle drawer with drag-to-reorder',
       'Added: cross-device sync for favorites and bundle',
       'Improved: library filters remember your last selection',
-    ],
-    tag: 'minor',
-  },
-  {
-    version: 'v2.2.0',
-    date: 'May 12, 2026',
-    summary: 'Brand color system + 6 preset palettes',
-    changes: [
-      'Added: custom brand hue/chroma/lightness picker',
-      'Added: Sunset, Ocean, Forest, Monochrome, Neon, Pastel presets',
-      'Improved: effect detail page load time by 40%',
-    ],
-    tag: 'minor',
-  },
-  {
-    version: 'v2.1.0',
-    date: 'Apr 24, 2026',
-    summary: 'PWA + offline support',
-    changes: [
-      'Added: service worker caches library shell + your saved effects',
-      'Added: installable from Chrome, Edge, Safari iOS address bar',
-      'Fixed: command palette not closing on Escape in Firefox',
     ],
     tag: 'minor',
   },

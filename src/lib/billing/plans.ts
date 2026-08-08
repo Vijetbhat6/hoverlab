@@ -5,9 +5,18 @@
  * Two products, deliberately different shapes:
  *
  *   Pro   — ONE-TIME license. Individual developers don't subscribe to CSS
- *           snippets they can get free elsewhere; they do pay once to own
- *           the full source, the CLI, and a pre-cleared commercial license.
- *           This is how Tailwind Plus and Magic UI Pro sell.
+ *           snippets they can get free elsewhere; they do pay once for a
+ *           pre-cleared commercial license, unlimited bundles, every export
+ *           format, brand presets and private collections. This is how
+ *           Tailwind Plus and Magic UI Pro sell.
+ *
+ *           Note what is NOT on that list: the catalog itself and the CLI.
+ *           Every artifact is readable and copyable for free, and `/api/v1`
+ *           is public and unauthenticated by design (see `lib/api/public.ts`)
+ *           so `npx hoverlab add` works without an account. Pro is sold on
+ *           features and on the licence to ship, not on access — this comment
+ *           previously said Pro bought "the CLI", which was never true and is
+ *           the kind of claim the pricing page would have inherited.
  *
  *   Team  — RECURRING per-seat. Companies pay for seats and shared state
  *           (brand tokens, shared collections); individuals don't. This is

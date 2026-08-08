@@ -41,6 +41,8 @@ import { absoluteUrl } from '@/lib/site'
 import {
   TrackArtifactView,
   FavoriteArtifactButton,
+  BundleArtifactButton,
+  CompareArtifactButton,
 } from '@/components/artifact-actions'
 
 export const dynamicParams = false
@@ -119,6 +121,22 @@ export default async function TemplateDetailPage({ params }: PageProps) {
 
           <div className="mt-5 flex flex-wrap items-center gap-2">
             <FavoriteArtifactButton
+              artifact={{
+                id: template.id,
+                name: template.name,
+                category: template.category,
+                level: 'template',
+              }}
+            />
+            <BundleArtifactButton
+              artifact={{
+                id: template.id,
+                name: template.name,
+                category: template.category,
+                level: 'template',
+              }}
+            />
+            <CompareArtifactButton
               artifact={{
                 id: template.id,
                 name: template.name,

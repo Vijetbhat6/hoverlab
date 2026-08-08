@@ -38,13 +38,13 @@ const COLUMNS: Column[] = [
     accent: 'text-emerald-500',
     items: [
       {
-        title: 'Effect generator v2',
-        description: 'Generate variations of any effect with one click — different colors, timings, easings.',
+        title: 'Filling out the ladder',
+        description: 'More blocks, pages and templates every week — the upper rungs are the newest part of the catalog.',
         tag: 'In progress',
       },
       {
-        title: 'Vue + Svelte codegen',
-        description: 'Export effects as ready-to-paste Vue SFCs and Svelte components, not just HTML.',
+        title: 'Effect generator v2',
+        description: 'Generate variations of any effect with one click — different colors, timings, easings.',
         tag: 'In progress',
       },
       {
@@ -59,9 +59,9 @@ const COLUMNS: Column[] = [
     accent: 'text-amber-500',
     items: [
       {
-        title: 'Pro tier launch',
-        description: 'Private collections, custom brand presets, and per-team theming. Targeting Q3.',
-        tag: 'Q3 2026',
+        title: 'Team workspaces',
+        description: 'Shared brand tokens and collections across every seat, with per-workspace theming.',
+        tag: 'Q4 2026',
       },
       {
         title: 'Community effects',

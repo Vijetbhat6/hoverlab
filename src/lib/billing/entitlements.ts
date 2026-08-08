@@ -37,7 +37,13 @@ export interface Entitlements {
   hasTeam: boolean
   /** Team id when hasTeam, else null. */
   teamId: string | null
-  /** Unlimited bundle size, all export formats, CLI/MCP token. */
+  /**
+   * Unlimited bundle size, all export formats, brand presets, private
+   * collections, and the licence to ship commercially.
+   *
+   * Not the CLI or MCP server — `/api/v1` is public and unauthenticated, so
+   * there is no token here to gate them with.
+   */
   canUseProFeatures: boolean
   /** Shared brand tokens, shared collections, seat management. */
   canUseTeamFeatures: boolean

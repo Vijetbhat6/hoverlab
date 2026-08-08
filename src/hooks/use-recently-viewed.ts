@@ -116,7 +116,15 @@ export function useRecentlyViewed() {
       // and writeHistory as separate statements — outside any setState
       // updater, so the synchronous dispatchEvent in writeHistory does
       // not fire during React's render phase.
-      const without = entriesRef.current.filter((e) => e.id !== artifact.id)
+      // Base the next list on what is PERSISTED, not on `entriesRef`.
+      //
+      // The ref is populated by an effect, and `record` is itself called
+      // from a mount effect on the detail pages — so on a fresh page load
+      // the ref is still empty when the first record lands, and building
+      // from it would write a one-entry history over the real one. Reading
+      // storage here is also what makes a record correct when another tab
+      // has changed the list since this one mounted.
+      const without = readHistory().filter((e) => e.id !== artifact.id)
       const next = [
         {
           id: artifact.id,

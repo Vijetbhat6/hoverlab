@@ -1,6 +1,7 @@
 'use client'
 
 import posthog from 'posthog-js'
+import type { ArtifactLevel } from '@/lib/artifact-types'
 
 /**
  * Product analytics — a thin, typed wrapper over PostHog.
@@ -68,8 +69,15 @@ export type AnalyticsEvent =
   | { name: 'search_performed'; props: { query: string; result_count: number } }
   | { name: 'ai_search_performed'; props: { query: string; result_count: number; ms: number } }
   // ---- bundle / export ----
-  | { name: 'bundle_add'; props: { effect_id: string; bundle_size: number } }
-  | { name: 'bundle_remove'; props: { effect_id: string; bundle_size: number } }
+  // `artifact_id` rather than `effect_id`: a bundle holds any rung of the
+  // ladder now, and `level` is what makes the funnel answerable — "do people
+  // who bundle a template ever come back" is a different question from the
+  // same about a hover state.
+  | {
+      name: 'bundle_add'
+      props: { artifact_id: string; level: ArtifactLevel; bundle_size: number }
+    }
+  | { name: 'bundle_remove'; props: { artifact_id: string; bundle_size: number } }
   | {
       name: 'bundle_exported'
       props: {

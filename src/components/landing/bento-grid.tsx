@@ -120,8 +120,14 @@ export function BentoGrid() {
             </div>
           </div>
           <div className="mt-6 border-t border-border/60 pt-4">
+            {/*
+              The tail used to enumerate all twelve categories by name. There
+              are {CATEGORIES.length} now, so a hard-coded list reads as the
+              whole taxonomy while naming barely a third of it — the first
+              few plus a count is both shorter and true.
+            */}
             <p className="text-xs leading-relaxed text-muted-foreground">
-              Across <span className="font-semibold text-foreground">{CATEGORIES.length} categories</span> — buttons, loaders, cards, text, backgrounds, navigation, dividers, badges, toggles, tooltips, skeletons, and entrance animations.
+              Across <span className="font-semibold text-foreground">{CATEGORIES.length} categories</span> — buttons, loaders, cards, text, backgrounds, charts, 3D, neon and {CATEGORIES.length - 8} more.
             </p>
           </div>
         </Reveal>

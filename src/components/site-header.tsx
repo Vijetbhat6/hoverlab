@@ -21,13 +21,18 @@
  * Everything else here is static markup.
  */
 
+import * as React from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Wand2 } from 'lucide-react'
+import { Package, Scale, Wand2 } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
 import { ThemeToggle } from '@/components/theme-toggle'
 import { UserMenu } from '@/components/user-menu'
+import { BundleDrawer } from '@/components/bundle-drawer'
+import { CompareDrawer } from '@/components/compare-drawer'
+import { useBundle } from '@/hooks/use-bundle'
+import { useCompare } from '@/hooks/use-compare'
 
 /**
  * The ladder, in rungs, atom → assembly, then the tools that sit beside it.
@@ -53,6 +58,16 @@ function isActive(pathname: string, prefixes: string[]): boolean {
 
 export function SiteHeader() {
   const pathname = usePathname() ?? ''
+
+  const [bundleOpen, setBundleOpen] = React.useState(false)
+  const [compareOpen, setCompareOpen] = React.useState(false)
+  const { count: bundleCount } = useBundle()
+  const { count: compareCount } = useCompare()
+
+  // Counts come from localStorage, so the server render and the first
+  // client render disagree by definition. Held back a tick, as elsewhere.
+  const [mounted, setMounted] = React.useState(false)
+  React.useEffect(() => setMounted(true), [])
 
   return (
     <header className="sticky top-0 z-40 border-b border-border/40 bg-background/70 backdrop-blur-xl">
@@ -98,11 +113,67 @@ export function SiteHeader() {
           })}
         </nav>
 
-        <div className="flex shrink-0 items-center gap-2">
+        <div className="flex shrink-0 items-center gap-1.5">
+          {/* Bundle and compare are reachable from every catalog surface,
+              not just /library. Without these the "Bundle" and "Compare"
+              buttons on a block detail page put something into a drawer
+              with no way to open it from the page you are standing on. */}
+          <TrayButton
+            label="Compare"
+            count={mounted ? compareCount : 0}
+            onClick={() => setCompareOpen(true)}
+          >
+            <Scale aria-hidden className="h-4 w-4" />
+          </TrayButton>
+          <TrayButton
+            label="Bundle"
+            count={mounted ? bundleCount : 0}
+            onClick={() => setBundleOpen(true)}
+          >
+            <Package aria-hidden className="h-4 w-4" />
+          </TrayButton>
           <UserMenu />
           <ThemeToggle />
         </div>
       </div>
+
+      <BundleDrawer open={bundleOpen} onOpenChange={setBundleOpen} />
+      <CompareDrawer open={compareOpen} onOpenChange={setCompareOpen} />
     </header>
+  )
+}
+
+/**
+ * A header tray button with a count badge.
+ *
+ * The badge is suppressed at zero rather than showing "0" — an empty tray
+ * is not news, and a permanent zero trains people to ignore the number.
+ */
+function TrayButton({
+  label,
+  count,
+  onClick,
+  children,
+}: {
+  label: string
+  count: number
+  onClick: () => void
+  children: React.ReactNode
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      title={`${label}${count > 0 ? ` (${count})` : ''}`}
+      aria-label={`Open ${label.toLowerCase()}${count > 0 ? `, ${count} item${count === 1 ? '' : 's'}` : ''}`}
+      className="relative flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+    >
+      {children}
+      {count > 0 ? (
+        <span className="absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-primary px-1 text-[10px] font-bold text-primary-foreground">
+          {count}
+        </span>
+      ) : null}
+    </button>
   )
 }

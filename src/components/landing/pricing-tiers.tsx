@@ -29,7 +29,7 @@
 
 import * as React from 'react'
 import Link from 'next/link'
-import { Check, Sparkles, ArrowRight, Loader2 } from 'lucide-react'
+import { Check, Sparkles, ArrowRight, Loader2, Clock } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
@@ -43,6 +43,27 @@ import { cn } from '@/lib/utils'
 import { PLANS, USD_TO_INR, type PlanId } from '@/lib/billing/plans'
 import { TOTAL_COUNT } from '@/lib/catalog-stats'
 import { CATEGORIES } from '@/lib/effect-types'
+import { BLOCK_COUNT } from '@/lib/blocks/block-index'
+import { PAGE_COUNT } from '@/lib/pages/page-index'
+import { TEMPLATE_COUNT } from '@/lib/templates/template-index'
+
+/**
+ * One line in a tier's feature list.
+ *
+ * A bare string is something the plan delivers today. `{ soon }` is something
+ * sold but not yet built, and it renders visibly marked rather than with the
+ * same green check as everything else.
+ *
+ * That distinction exists because Team needed it. Its four differentiators —
+ * shared brand library, shared collections, workspace theming, seat
+ * management — are advertised on a recurring per-seat plan and none of them
+ * are implemented: `canUseTeamFeatures` in `billing/entitlements.ts` is read
+ * by nothing, there is no team route, and checkout always buys one seat. A
+ * customer can pay $12/seat/month today and receive, functionally, the Pro
+ * feature set. Listing those four with a check mark was the one piece of copy
+ * here that could take money for something that does not exist.
+ */
+type Feature = string | { label: string; soon: true }
 
 interface Tier {
   id: PlanId
@@ -53,7 +74,7 @@ interface Tier {
   ctaVariant: 'default' | 'outline' | 'ghost'
   popular?: boolean
   badge?: string
-  features: string[]
+  features: Feature[]
 }
 
 const TIERS: Tier[] = [
@@ -70,6 +91,12 @@ const TIERS: Tier[] = [
       // product by 2.7x on the pricing page. @/lib/catalog-stats is ~1 KB, so
       // there is no bundle reason to hardcode it.
       `All ${TOTAL_COUNT.toLocaleString('en-US')}+ effects, all ${CATEGORIES.length} categories`,
+      // The other three rungs, named on the pricing page for the first time.
+      // They shipped without ever reaching this list, so a visitor comparing
+      // plans saw a catalog of loose CSS snippets and none of the blocks,
+      // pages or whole starter projects sitting above them.
+      `${BLOCK_COUNT} blocks, ${PAGE_COUNT} pages, ${TEMPLATE_COUNT} templates — full source`,
+      'CLI and public API — npx hoverlab add <id>',
       'Live customization sliders',
       'Save favorites (sync across devices)',
       'Bundle up to 10 effects',
@@ -89,11 +116,15 @@ const TIERS: Tier[] = [
     badge: 'One-time payment',
     features: [
       'Everything in Free',
-      'Commercial use — client work and paid products',
+      // Scoped to the catalog, not to effects: the licence has always covered
+      // whatever you ship, and three of the four rungs did not exist when
+      // this line was written.
+      'Commercial use — every effect, block, page and template',
+      'Client work, paid products, no attribution',
       'Unlimited bundle size',
       'Every export format (Vue, Svelte, Tailwind)',
       'Custom brand color presets',
-      'Private effect collections',
+      'Private collections',
       'All future updates included',
     ],
   },
@@ -101,16 +132,16 @@ const TIERS: Tier[] = [
     id: 'team',
     name: 'Team',
     period: '/seat /month',
-    tagline: 'For design systems teams standardizing effects across products.',
+    tagline: 'For design systems teams standardizing UI across products.',
     cta: 'Start Team plan',
     ctaVariant: 'outline',
     features: [
       'Everything in Pro, for every seat',
-      'Shared brand color library',
-      'Shared collections and bundles',
-      'Workspace-wide theming',
-      'Seat management',
       'Priority email support',
+      { label: 'Shared brand color library', soon: true },
+      { label: 'Shared collections and bundles', soon: true },
+      { label: 'Workspace-wide theming', soon: true },
+      { label: 'Seat management', soon: true },
     ],
   },
 ]
@@ -299,10 +330,11 @@ export function PricingTiers({ className }: { className?: string } = {}) {
           Free forever. Pro once. Team by the seat.
         </h2>
         <p className="mt-3 text-muted-foreground">
-          Browsing, customizing, and copying every effect stays free for
-          personal projects — that part never moves behind a login. Pro is a
-          single payment that covers commercial work for good; Team adds
-          shared brand tokens and seats.
+          Every rung of the ladder — effects, blocks, pages and templates — is
+          free to browse, customize and copy for personal projects, and none
+          of it moves behind a login. Pro is a single payment that covers
+          commercial work for good; Team puts that on a per-seat plan, with
+          shared brand tokens and seat management on the way.
         </p>
 
         {/*
@@ -407,12 +439,37 @@ export function PricingTiers({ className }: { className?: string } = {}) {
             />
 
             <ul className="mt-auto space-y-2.5">
-              {tier.features.map((f, j) => (
-                <li key={j} className="flex items-start gap-2.5 text-sm">
-                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-emerald-500" />
-                  <span className="text-foreground/90">{f}</span>
-                </li>
-              ))}
+              {tier.features.map((f, j) => {
+                const soon = typeof f !== 'string'
+                const label = typeof f === 'string' ? f : f.label
+                return (
+                  <li key={j} className="flex items-start gap-2.5 text-sm">
+                    {soon ? (
+                      <Clock
+                        aria-hidden
+                        className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground"
+                      />
+                    ) : (
+                      <Check
+                        aria-hidden
+                        className="mt-0.5 h-4 w-4 shrink-0 text-emerald-500"
+                      />
+                    )}
+                    <span
+                      className={
+                        soon ? 'text-muted-foreground' : 'text-foreground/90'
+                      }
+                    >
+                      {label}
+                      {soon && (
+                        <span className="ml-1.5 rounded bg-muted px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
+                          Coming
+                        </span>
+                      )}
+                    </span>
+                  </li>
+                )
+              })}
             </ul>
           </Reveal>
         ))}
@@ -424,9 +481,22 @@ export function PricingTiers({ className }: { className?: string } = {}) {
           <code className="rounded bg-muted px-1.5 py-0.5 font-mono">
             prefers-reduced-motion
           </code>{' '}
-          support. Free covers personal and non-commercial projects; shipping
-          an effect in client work or a paid product needs Pro or Team. No
+          support, and the CLI and public API are open to everyone. Free
+          covers personal and non-commercial projects; shipping anything from
+          the catalog in client work or a paid product needs Pro or Team. No
           credit card required for Free.
+        </p>
+        {/*
+          Said before the buy button, not after the charge. Team's shared
+          workspace features are still being built, and a per-seat
+          subscription that quietly bills for them would be indefensible —
+          so the card marks them and this says what a Team seat gets today.
+        */}
+        <p className="mt-2 text-xs text-muted-foreground">
+          Lines marked <span className="font-semibold">Coming</span> are on the
+          roadmap and not available yet. A Team seat today grants the full Pro
+          feature set for every member, plus priority support; the shared
+          workspace features ship later this year.
         </p>
         {rupeeCheckout ? (
           <p className="mt-2 text-xs text-muted-foreground">

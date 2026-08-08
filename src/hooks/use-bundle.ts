@@ -12,35 +12,96 @@
 import * as React from 'react'
 import { track } from '@/lib/analytics'
 import { useAuth } from '@/components/auth-provider'
+import { levelOf, type ArtifactLevel } from '@/lib/artifact-types'
+
+/** Effect customization, captured at the moment of adding. */
+export interface BundleOpts {
+  hue: number
+  saturation: number
+  scale: number
+  speed: number
+}
 
 /**
- * A single entry in the user's bundle. We store the customization opts
- * that were active when the user clicked "Add to bundle" so the exported
- * CSS reflects their tweaks (hue / saturation / size / speed).
+ * A single entry in the user's bundle, at any rung of the ladder.
+ *
+ * Keyed on a bare `id` because ids are unique across all four catalogs —
+ * the same property `artifact-history.ts` and the favorites store rely on.
+ * `level` rides along so the drawer can route and export an entry without
+ * loading a catalog to discover what it is.
+ *
+ * `opts` is effect-only. Hue, saturation, scale and speed are knobs on a
+ * generated stylesheet; a block is hand-written TSX with no equivalent, so
+ * the field is absent rather than filled with meaningless defaults —
+ * `resolveBundle` keys off its presence.
+ *
+ * `name` and `category` are denormalized so the drawer can render a row
+ * before the source has been fetched. Same trade as `ArtifactRef`: a stale
+ * name on a renamed artifact is cheaper than importing a catalog.
  */
 export interface BundleEntry {
-  effectId: string
-  /** Customization opts at the time of add. */
-  opts: {
-    hue: number
-    saturation: number
-    scale: number
-    speed: number
-  }
+  id: string
+  /** Absent means `'effect'` — what makes pre-ladder entries still resolve. */
+  level?: ArtifactLevel
+  name?: string
+  category?: string
+  /** Effect-only customization at the time of add. */
+  opts?: BundleOpts
   /** ISO timestamp — used for sorting (most recently added first). */
   addedAt: string
 }
 
+/** What `add` / `toggle` accept. */
+export interface BundleArtifact {
+  id: string
+  name?: string
+  category?: string
+  level?: ArtifactLevel
+}
+
 const STORAGE_KEY = 'cssfx:bundle'
+
+/** An entry as written before the ladder existed. */
+interface LegacyBundleEntry {
+  effectId?: string
+}
+
+/**
+ * Migrate one stored entry, renaming the legacy `effectId` key.
+ *
+ * Returns null for junk. A bundle is user-curated and worth more than a
+ * history rail, so this is conservative: only an entry with no usable id at
+ * all is dropped.
+ */
+function normalizeEntry(raw: unknown): BundleEntry | null {
+  if (!raw || typeof raw !== 'object') return null
+  const entry = raw as BundleEntry & LegacyBundleEntry
+
+  const id = entry.id ?? entry.effectId
+  if (!id || typeof id !== 'string') return null
+
+  return {
+    id,
+    level: entry.level,
+    name: entry.name,
+    category: entry.category,
+    opts: entry.opts,
+    addedAt: typeof entry.addedAt === 'string' ? entry.addedAt : new Date(0).toISOString(),
+  }
+}
+
+/** Normalize a list from storage or the server, dropping unusable rows. */
+export function normalizeEntries(raw: unknown): BundleEntry[] {
+  if (!Array.isArray(raw)) return []
+  return raw.map(normalizeEntry).filter((e): e is BundleEntry => e !== null)
+}
 
 function readBundle(): BundleEntry[] {
   if (typeof window === 'undefined') return []
   try {
     const raw = window.localStorage.getItem(STORAGE_KEY)
     if (!raw) return []
-    const parsed = JSON.parse(raw) as BundleEntry[]
-    if (!Array.isArray(parsed)) return []
-    return parsed
+    return normalizeEntries(JSON.parse(raw))
   } catch {
     return []
   }
@@ -159,19 +220,22 @@ export function useBundle() {
         const data = (await res.json()) as { entries: BundleEntry[] }
         if (cancelled) return
 
-        const server = Array.isArray(data.entries) ? data.entries : []
+        // Normalized on the way in: the server holds rows written by older
+        // clients under `effectId`, and merging those against migrated local
+        // entries by a key one side does not have would duplicate every one.
+        const server = normalizeEntries(data.entries)
 
-        // Merge by effectId, prefer the most recently added entry.
+        // Merge by id, prefer the most recently added entry.
         const byId = new Map<string, BundleEntry>()
-        for (const e of server) byId.set(e.effectId, e)
+        for (const e of server) byId.set(e.id, e)
         for (const e of local) {
-          const existing = byId.get(e.effectId)
+          const existing = byId.get(e.id)
           if (!existing) {
-            byId.set(e.effectId, e)
+            byId.set(e.id, e)
           } else {
             const t1 = Date.parse(existing.addedAt) || 0
             const t2 = Date.parse(e.addedAt) || 0
-            if (t2 > t1) byId.set(e.effectId, e)
+            if (t2 > t1) byId.set(e.id, e)
           }
         }
         const merged = [...byId.values()].sort(
@@ -214,47 +278,61 @@ export function useBundle() {
 
   /* ---------------- Local actions ---------------- */
   const has = React.useCallback(
-    (effectId: string) => entries.some((e) => e.effectId === effectId),
+    (id: string) => entries.some((e) => e.id === id),
     [entries],
   )
 
   const get = React.useCallback(
-    (effectId: string) => entries.find((e) => e.effectId === effectId),
+    (id: string) => entries.find((e) => e.id === id),
     [entries],
   )
 
-  const add = React.useCallback((effectId: string, opts: BundleEntry['opts']) => {
+  const add = React.useCallback((artifact: BundleArtifact, opts?: BundleOpts) => {
     // Compute next from the ref (always current), then call setEntries
     // and writeBundle as separate statements. This avoids running
     // writeBundle (which dispatches a synchronous custom event) inside
     // the setEntries updater — that updater executes during React's
     // render phase, and the event listener it triggers would call
     // setEntries on other components mid-render.
-    const without = entriesRef.current.filter((e) => e.effectId !== effectId)
-    const next = [
-      { effectId, opts, addedAt: new Date().toISOString() },
+    const without = entriesRef.current.filter((e) => e.id !== artifact.id)
+    const next: BundleEntry[] = [
+      {
+        id: artifact.id,
+        level: artifact.level,
+        name: artifact.name,
+        category: artifact.category,
+        // Only effects carry customization. Storing `undefined` here rather
+        // than a zeroed opts object is what lets the exporter tell "an
+        // effect the user never tweaked" from "not an effect at all".
+        opts,
+        addedAt: new Date().toISOString(),
+      },
       ...without,
     ]
     entriesRef.current = next // keep ref in sync for rapid successive calls
     setEntries(next)
     writeBundle(next)
-    track('bundle_add', { effect_id: effectId, bundle_size: next.length })
+    track('bundle_add', {
+      artifact_id: artifact.id,
+      level: levelOf(artifact),
+      bundle_size: next.length,
+    })
   }, [])
 
-  const remove = React.useCallback((effectId: string) => {
-    const next = entriesRef.current.filter((e) => e.effectId !== effectId)
+  const remove = React.useCallback((id: string) => {
+    const next = entriesRef.current.filter((e) => e.id !== id)
     entriesRef.current = next
     setEntries(next)
     writeBundle(next)
-    track('bundle_remove', { effect_id: effectId, bundle_size: next.length })
+    track('bundle_remove', { artifact_id: id, bundle_size: next.length })
   }, [])
 
   const toggle = React.useCallback(
-    (effectId: string, opts: BundleEntry['opts']) => {
-      if (has(effectId)) {
-        remove(effectId)
+    (artifact: BundleArtifact, opts?: BundleOpts) => {
+      if (has(artifact.id)) {
+        remove(artifact.id)
       } else {
-        add(effectId, opts)
+        add(artifact, opts)
       }
     },
     [has, add, remove],

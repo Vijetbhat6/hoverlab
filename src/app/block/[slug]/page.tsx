@@ -26,6 +26,8 @@ import { absoluteUrl } from '@/lib/site'
 import {
   TrackArtifactView,
   FavoriteArtifactButton,
+  BundleArtifactButton,
+  CompareArtifactButton,
 } from '@/components/artifact-actions'
 
 /**
@@ -113,6 +115,22 @@ export default async function BlockDetailPage({ params }: PageProps) {
 
           <div className="mt-5 flex flex-wrap items-center gap-2">
             <FavoriteArtifactButton
+              artifact={{
+                id: block.id,
+                name: block.name,
+                category: block.category,
+                level: 'block',
+              }}
+            />
+            <BundleArtifactButton
+              artifact={{
+                id: block.id,
+                name: block.name,
+                category: block.category,
+                level: 'block',
+              }}
+            />
+            <CompareArtifactButton
               artifact={{
                 id: block.id,
                 name: block.name,

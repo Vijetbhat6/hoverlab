@@ -16,6 +16,9 @@ import * as React from 'react'
 import { Reveal } from '@/components/reveal'
 import { CATEGORIES } from '@/lib/effect-types'
 import { TOTAL_COUNT } from '@/lib/catalog-stats'
+import { BLOCK_COUNT } from '@/lib/blocks/block-index'
+import { PAGE_COUNT } from '@/lib/pages/page-index'
+import { TEMPLATE_COUNT } from '@/lib/templates/template-index'
 
 interface Stat {
   value: string
@@ -28,17 +31,23 @@ function buildStats(): Stat[] {
     {
       value: `${TOTAL_COUNT.toLocaleString('en-US')}+`,
       label: 'Effects',
-      caption: 'Hand-crafted, all categories',
+      caption: `Hand-crafted, ${CATEGORIES.length} categories`,
     },
     {
-      value: `${CATEGORIES.length}`,
-      label: 'Categories',
-      caption: 'Buttons, loaders, cards, more',
+      /*
+        The upper three rungs, counted together. They existed for three
+        commits without appearing in this band at all, which left the
+        headline proof of the catalog's size describing only its bottom
+        tier.
+      */
+      value: `${BLOCK_COUNT + PAGE_COUNT + TEMPLATE_COUNT}`,
+      label: 'Blocks, pages & templates',
+      caption: 'Real multi-file source',
     },
     {
       value: '0',
       label: 'Dependencies',
-      caption: 'No npm, no supply-chain risk',
+      caption: 'In every effect — pure CSS',
     },
     {
       value: '< 8KB',

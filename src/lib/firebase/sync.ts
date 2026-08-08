@@ -17,6 +17,10 @@
 
 import { adminDb } from '@/lib/firebase/admin'
 import { Timestamp, type Firestore } from 'firebase-admin/firestore'
+import { ARTIFACT_LEVELS, type ArtifactLevel } from '@/lib/artifact-types'
+
+/** Widened for `includes` against untrusted Firestore values. */
+const LEVELS: readonly string[] = ARTIFACT_LEVELS
 
 /**
  * Firestore commits at most 500 operations per batch. Chunk below that so a
@@ -31,14 +35,28 @@ export interface BundleOpts {
   speed: number
 }
 
+/**
+ * One stored bundle row.
+ *
+ * `id` replaced `effectId` when the bundle stopped being effect-only. Rows
+ * written by older clients still carry `effectId` and no `level`, and
+ * `getBundle` migrates them on read — the field is not renamed in place,
+ * because a migration pass over every user's subcollection is a far larger
+ * operation than reading two keys instead of one.
+ */
 export interface BundleEntry {
-  effectId: string
-  opts: BundleOpts
+  id: string
+  /** Absent means `'effect'`, matching `levelOf()` on the client. */
+  level?: ArtifactLevel
+  name?: string
+  category?: string
+  /** Effect-only. Absent for blocks, pages and templates. */
+  opts?: BundleOpts
   addedAt: string
 }
 
-function docId(effectId: string): string {
-  return encodeURIComponent(effectId)
+function docId(id: string): string {
+  return encodeURIComponent(id)
 }
 
 function userDoc(db: Firestore, uid: string) {
@@ -139,26 +157,43 @@ export async function getBundle(uid: string): Promise<BundleEntry[]> {
 
   return snap.docs.flatMap((doc) => {
     const data = doc.data()
-    const effectId = data.effectId
-    if (typeof effectId !== 'string' || !effectId) return []
+    // `?? data.effectId` is the read-side migration for rows written before
+    // the bundle held anything but effects.
+    const id = (data.id ?? data.effectId) as unknown
+    if (typeof id !== 'string' || !id) return []
+
     const addedAt =
       data.addedAt instanceof Timestamp
         ? data.addedAt.toDate().toISOString()
         : new Date(0).toISOString()
-    const opts = (data.opts ?? {}) as Record<string, unknown>
-    const num = (key: string, fallback: number) =>
-      typeof opts[key] === 'number' && Number.isFinite(opts[key])
-        ? (opts[key] as number)
-        : fallback
+
+    const level = LEVELS.includes(data.level) ? (data.level as ArtifactLevel) : undefined
+
+    // Only effects carry customization. A legacy row always has an `opts`
+    // map; a block row has none, and inventing one here would make the
+    // exporter treat it as a tweaked effect.
+    let opts: BundleOpts | undefined
+    if (data.opts && typeof data.opts === 'object') {
+      const raw = data.opts as Record<string, unknown>
+      const num = (key: string, fallback: number) =>
+        typeof raw[key] === 'number' && Number.isFinite(raw[key])
+          ? (raw[key] as number)
+          : fallback
+      opts = {
+        hue: num('hue', 0),
+        saturation: num('saturation', 0),
+        scale: num('scale', 1),
+        speed: num('speed', 1),
+      }
+    }
+
     return [
       {
-        effectId,
-        opts: {
-          hue: num('hue', 0),
-          saturation: num('saturation', 0),
-          scale: num('scale', 1),
-          speed: num('speed', 1),
-        },
+        id,
+        level,
+        name: typeof data.name === 'string' ? data.name : undefined,
+        category: typeof data.category === 'string' ? data.category : undefined,
+        opts,
         addedAt,
       },
     ]
@@ -173,10 +208,15 @@ export async function replaceBundle(
     uid,
     'bundle',
     entries.map((entry) => ({
-      id: docId(entry.effectId),
+      id: docId(entry.id),
+      // Firestore rejects `undefined` values outright, so optional fields
+      // are spread in only when present rather than written as undefined.
       data: {
-        effectId: entry.effectId,
-        opts: entry.opts,
+        id: entry.id,
+        ...(entry.level ? { level: entry.level } : {}),
+        ...(entry.name ? { name: entry.name } : {}),
+        ...(entry.category ? { category: entry.category } : {}),
+        ...(entry.opts ? { opts: entry.opts } : {}),
         addedAt: Timestamp.fromDate(new Date(entry.addedAt)),
       },
     })),

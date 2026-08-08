@@ -31,9 +31,12 @@ import {
 } from '@/components/ui/sheet'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { useCompare } from '@/hooks/use-compare'
+import { useCompare, type CompareRef } from '@/hooks/use-compare'
+import { levelOf, LEVEL_LABEL } from '@/lib/artifact-types'
+import type { ResolvedArtifact } from '@/lib/bundle-export'
 import type { Effect } from '@/lib/effect-types'
 import { useEffectDetails } from '@/hooks/use-effect-details'
+import { useArtifactFiles } from '@/hooks/use-artifact-files'
 import { cn } from '@/lib/utils'
 
 interface CompareDrawerProps {
@@ -44,12 +47,30 @@ interface CompareDrawerProps {
 export function CompareDrawer({ open, onOpenChange }: CompareDrawerProps) {
   const { entries, remove, clear, count, isFull, max } = useCompare()
 
+  // Split by rung. Effects resolve to markup + CSS and render as live
+  // previews; blocks, pages and templates resolve to a file tree and are
+  // compared on their numbers instead — see `ArtifactCompareTile`.
+  const effectRefs = React.useMemo(
+    () => entries.filter((e) => levelOf(e) === 'effect'),
+    [entries],
+  )
+  const artifactRefs = React.useMemo(
+    () => entries.filter((e) => levelOf(e) !== 'effect'),
+    [entries],
+  )
+
   // Resolve IDs → full Effect objects (markup + CSS), which the client
   // doesn't ship for generated effects — see `@/lib/effect-index`.
   // Hand-crafted effects resolve synchronously; the rest are fetched
   // once and cached. IDs missing from the catalog are dropped, so a
   // stale localStorage entry can't break the drawer.
-  const { effects: resolved, loading } = useEffectDetails(entries)
+  const effectIds = React.useMemo(() => effectRefs.map((e) => e.id), [effectRefs])
+  const { effects: resolved, loading: effectsLoading } = useEffectDetails(effectIds)
+
+  const artifactIds = React.useMemo(() => artifactRefs.map((e) => e.id), [artifactRefs])
+  const { artifacts, loading: artifactsLoading } = useArtifactFiles(artifactIds)
+
+  const loading = effectsLoading || artifactsLoading
 
   function handleCopy(effect: Effect) {
     const snippet = [
@@ -95,18 +116,19 @@ export function CompareDrawer({ open, onOpenChange }: CompareDrawerProps) {
               </Badge>
             </SheetTitle>
             <SheetDescription className="mt-1 text-xs">
-              Side-by-side live previews. Pick the one that fits — then copy.
+              Effects side by side as live previews; blocks and above by what
+              they cost you. Pick the one that fits.
             </SheetDescription>
           </div>
         </SheetHeader>
 
         {/* Grid of effect tiles */}
         <div className="fx-no-scrollbar flex-1 overflow-y-auto p-4">
-          {resolved.length === 0 && loading && entries.length > 0 ? (
-            // Queued effects whose CSS is still in flight. Without this the
+          {resolved.length === 0 && artifacts.length === 0 && loading && entries.length > 0 ? (
+            // Queued items whose payload is still in flight. Without this the
             // drawer would flash the "nothing queued" empty state.
             <LoadingState count={entries.length} />
-          ) : resolved.length === 0 ? (
+          ) : resolved.length === 0 && artifacts.length === 0 ? (
             <EmptyState />
           ) : (
             <>
@@ -114,19 +136,27 @@ export function CompareDrawer({ open, onOpenChange }: CompareDrawerProps) {
                 <div className="mb-3 flex items-center gap-2 rounded-lg border border-amber-500/30 bg-amber-500/10 px-3 py-2 text-xs text-amber-700 dark:text-amber-300">
                   <Sparkles className="h-3.5 w-3.5 shrink-0" />
                   <span>
-                    Compare is full ({max}/{max}). Remove an effect to add
-                    another.
+                    Compare is full ({max}/{max}). Remove one to add another.
                   </span>
                 </div>
               ) : null}
               <div
                 className={cn(
                   'grid gap-3',
-                  resolved.length === 1 && 'grid-cols-1',
-                  resolved.length === 2 && 'grid-cols-1 md:grid-cols-2',
-                  resolved.length >= 3 && 'grid-cols-1 md:grid-cols-2',
+                  entries.length === 1 ? 'grid-cols-1' : 'grid-cols-1 md:grid-cols-2',
                 )}
               >
+                {artifactRefs.map((ref) => (
+                  <ArtifactCompareTile
+                    key={ref.id}
+                    refEntry={ref}
+                    resolved={artifacts.find((a) => a.id === ref.id)}
+                    onRemove={() => {
+                      remove(ref.id)
+                      toast.success(`Removed "${ref.name ?? ref.id}" from compare`)
+                    }}
+                  />
+                ))}
                 {resolved.map((effect) => (
                   <CompareTile
                     key={effect.id}
@@ -144,7 +174,7 @@ export function CompareDrawer({ open, onOpenChange }: CompareDrawerProps) {
         </div>
 
         {/* Footer actions */}
-        {resolved.length > 0 ? (
+        {count > 0 ? (
           <div className="space-y-2 border-t border-border/60 p-4">
             <Button
               size="sm"
@@ -161,6 +191,100 @@ export function CompareDrawer({ open, onOpenChange }: CompareDrawerProps) {
         ) : null}
       </SheetContent>
     </Sheet>
+  )
+}
+
+/* ============================================================
+ *  ArtifactCompareTile — a block, page or template
+ * ========================================================== */
+
+/**
+ * A non-effect entry in the compare grid.
+ *
+ * Deliberately numbers rather than a live preview. Rendering one would
+ * mean importing the block registry — every block component and everything
+ * it imports — into the drawer, which is mounted on the library, the
+ * playground and every designer tool.
+ *
+ * It is also the more useful comparison. Two pricing sections both look
+ * like pricing sections; what actually decides between them is how much
+ * code they are and what they drag in, and those are exactly the numbers a
+ * side-by-side is good at.
+ */
+function ArtifactCompareTile({
+  refEntry,
+  resolved,
+  onRemove,
+}: {
+  refEntry: CompareRef
+  /** Absent while the payload is in flight. */
+  resolved?: ResolvedArtifact
+  onRemove: () => void
+}) {
+  const level = levelOf(refEntry)
+  const name = resolved?.name ?? refEntry.name ?? refEntry.id
+
+  const lines = resolved
+    ? resolved.files.reduce((n, f) => n + f.source.split('\n').length, 0)
+    : undefined
+
+  return (
+    <div className="flex flex-col rounded-xl border border-border/60 bg-card/60 p-3">
+      <div className="flex items-start justify-between gap-2">
+        <div className="min-w-0">
+          <div className="flex items-center gap-1.5">
+            <h3 className="truncate text-sm font-semibold">{name}</h3>
+            <Badge variant="secondary" className="shrink-0 text-[10px]">
+              {LEVEL_LABEL[level].one}
+            </Badge>
+          </div>
+          {refEntry.category ? (
+            <p className="mt-0.5 truncate text-xs text-muted-foreground">
+              {refEntry.category}
+            </p>
+          ) : null}
+        </div>
+        <Button
+          variant="ghost"
+          size="icon"
+          className="h-7 w-7 shrink-0 text-muted-foreground hover:text-rose-500"
+          onClick={onRemove}
+          aria-label={`Remove ${name} from compare`}
+        >
+          <X className="h-3.5 w-3.5" />
+        </Button>
+      </div>
+
+      <dl className="mt-3 grid grid-cols-3 gap-2 text-center">
+        <div className="rounded-lg border border-border/60 p-2">
+          <dt className="text-[10px] uppercase tracking-wide text-muted-foreground">Files</dt>
+          <dd className="mt-0.5 text-sm font-bold">{resolved?.files.length ?? '—'}</dd>
+        </div>
+        <div className="rounded-lg border border-border/60 p-2">
+          <dt className="text-[10px] uppercase tracking-wide text-muted-foreground">Lines</dt>
+          <dd className="mt-0.5 text-sm font-bold">{lines ?? '—'}</dd>
+        </div>
+        <div className="rounded-lg border border-border/60 p-2">
+          <dt className="text-[10px] uppercase tracking-wide text-muted-foreground">Deps</dt>
+          <dd className="mt-0.5 text-sm font-bold">{resolved?.deps.length ?? '—'}</dd>
+        </div>
+      </dl>
+
+      {resolved && resolved.deps.length > 0 ? (
+        <p className="mt-2 truncate text-[11px] text-muted-foreground">
+          {resolved.deps.join(', ')}
+        </p>
+      ) : null}
+
+      <div className="mt-3 flex-1" />
+
+      <Button variant="outline" size="sm" className="h-8 w-full gap-1.5 text-xs" asChild>
+        <Link href={`/${level}/${refEntry.id}`}>
+          <ExternalLink className="h-3.5 w-3.5" />
+          Open {LEVEL_LABEL[level].one.toLowerCase()}
+        </Link>
+      </Button>
+    </div>
   )
 }
 

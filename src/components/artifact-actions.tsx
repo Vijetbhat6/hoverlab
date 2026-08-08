@@ -15,9 +15,12 @@
  */
 
 import * as React from 'react'
-import { Heart } from 'lucide-react'
+import { Heart, Package, Scale } from 'lucide-react'
+import { toast } from 'sonner'
 
 import { useFavorites } from '@/hooks/use-favorites'
+import { useBundle } from '@/hooks/use-bundle'
+import { useCompare } from '@/hooks/use-compare'
 import { useRecentlyViewed } from '@/hooks/use-recently-viewed'
 import type { RecordableArtifact } from '@/lib/artifact-history'
 import { LEVEL_LABEL, levelOf } from '@/lib/artifact-types'
@@ -88,6 +91,117 @@ export function FavoriteArtifactButton({
       {isFavorite ? 'Saved' : 'Save'}
       <span className="sr-only">
         {isFavorite ? `Remove this ${noun} from favorites` : `Save this ${noun} to favorites`}
+      </span>
+    </button>
+  )
+}
+
+/**
+ * Bundle toggle for a non-effect artifact.
+ *
+ * No customization opts, unlike the effect button: hue and speed are knobs
+ * on generated CSS, and a block has none. `add` takes them as optional for
+ * exactly this reason — see `BundleEntry`.
+ *
+ * The name and category ride along so the drawer can render the row before
+ * fetching the artifact's files, which is the difference between a bundle
+ * that lists its contents instantly and one that shows four spinners.
+ */
+export function BundleArtifactButton({
+  artifact,
+  className = '',
+}: {
+  artifact: RecordableArtifact
+  className?: string
+}) {
+  const { has, toggle } = useBundle()
+  const [mounted, setMounted] = React.useState(false)
+
+  React.useEffect(() => setMounted(true), [])
+
+  const inBundle = mounted && has(artifact.id)
+  const noun = LEVEL_LABEL[levelOf(artifact)].one.toLowerCase()
+
+  return (
+    <button
+      type="button"
+      onClick={() =>
+        toggle({
+          id: artifact.id,
+          name: artifact.name,
+          category: artifact.category,
+          level: artifact.level,
+        })
+      }
+      aria-pressed={inBundle}
+      className={cn(
+        'inline-flex h-9 items-center gap-1.5 rounded-lg border px-3 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
+        inBundle
+          ? 'border-primary/40 bg-primary/10 text-primary'
+          : 'border-border/60 text-muted-foreground hover:bg-muted hover:text-foreground',
+        className,
+      )}
+    >
+      <Package aria-hidden className="h-4 w-4" />
+      {inBundle ? 'In bundle' : 'Bundle'}
+      <span className="sr-only">
+        {inBundle ? `Remove this ${noun} from the bundle` : `Add this ${noun} to the bundle`}
+      </span>
+    </button>
+  )
+}
+
+/**
+ * Compare toggle for a non-effect artifact.
+ *
+ * The list is capped, so `toggle` can answer `'full'` — surfaced as a toast
+ * rather than silently doing nothing, which is how a capped control usually
+ * reads as broken.
+ */
+export function CompareArtifactButton({
+  artifact,
+  className = '',
+}: {
+  artifact: RecordableArtifact
+  className?: string
+}) {
+  const { has, toggle, max } = useCompare()
+  const [mounted, setMounted] = React.useState(false)
+
+  React.useEffect(() => setMounted(true), [])
+
+  const inCompare = mounted && has(artifact.id)
+  const noun = LEVEL_LABEL[levelOf(artifact)].one.toLowerCase()
+
+  return (
+    <button
+      type="button"
+      onClick={() => {
+        const result = toggle({
+          id: artifact.id,
+          name: artifact.name,
+          category: artifact.category,
+          level: artifact.level,
+        })
+        if (result === 'full') {
+          toast.error(`Compare is full (${max})`, {
+            description: 'Remove something from the compare drawer first.',
+          })
+        }
+      }}
+      aria-pressed={inCompare}
+      className={cn(
+        'inline-flex h-9 items-center gap-1.5 rounded-lg border px-3 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
+        inCompare
+          ? 'border-primary/40 bg-primary/10 text-primary'
+          : 'border-border/60 text-muted-foreground hover:bg-muted hover:text-foreground',
+        className,
+      )}
+    >
+      <Scale aria-hidden className="h-4 w-4" />
+      {inCompare ? 'Comparing' : 'Compare'}
+      <span className="sr-only">
+        {inCompare ? `Remove this ${noun} from compare` : `Add this ${noun} to compare`}
       </span>
     </button>
   )

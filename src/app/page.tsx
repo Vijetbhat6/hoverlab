@@ -20,7 +20,6 @@ import {
   Wand2,
   Sparkles,
   ArrowRight,
-  Heart,
   Package,
   Code2,
   Zap,
@@ -29,6 +28,7 @@ import {
   Layers,
   Palette,
   Copy,
+  Terminal,
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -51,6 +51,18 @@ import { NewsletterSignup } from '@/components/landing/newsletter-signup'
 import { CommunityBand } from '@/components/landing/community-band'
 import { CATEGORIES } from '@/lib/effect-types'
 import { TOTAL_COUNT, countByCategory } from '@/lib/catalog-stats'
+import { BLOCK_COUNT } from '@/lib/blocks/block-index'
+import { PAGE_COUNT } from '@/lib/pages/page-index'
+import { TEMPLATE_COUNT } from '@/lib/templates/template-index'
+
+/** Ladder links for the landing header. Mirrors <SiteHeader>'s nav. */
+const LADDER_NAV = [
+  { label: 'Effects', href: '/library' },
+  { label: 'Blocks', href: '/blocks' },
+  { label: 'Pages', href: '/pages' },
+  { label: 'Templates', href: '/templates' },
+  { label: 'Browse', href: '/browse' },
+]
 
 export default function LandingPage() {
   const { user, loading } = useAuth()
@@ -75,10 +87,29 @@ export default function LandingPage() {
             <div className="flex flex-col leading-tight">
               <span className="text-base font-bold tracking-tight">Hoverlab</span>
               <span className="text-[11px] text-muted-foreground">
-                A living CSS effects library
+                Effects, blocks, pages and templates
               </span>
             </div>
           </div>
+
+          {/*
+            The ladder, reachable from the front door. Every catalog surface
+            gets this from <SiteHeader>, but the landing page carries its own
+            header and had no links to /blocks, /pages or /templates at all —
+            the ladder band further down was the only way in, so anything a
+            visitor didn't scroll to may as well not have shipped.
+          */}
+          <nav
+            aria-label="Catalog"
+            className="hidden items-center gap-1 md:flex"
+          >
+            {LADDER_NAV.map((item) => (
+              <Button key={item.href} variant="ghost" size="sm" asChild>
+                <Link href={item.href}>{item.label}</Link>
+              </Button>
+            ))}
+          </nav>
+
           <div className="flex items-center gap-2">
             <Button
               variant="ghost"
@@ -107,20 +138,32 @@ export default function LandingPage() {
       {/* Hero */}
       <section className="mx-auto w-full max-w-7xl px-4 pb-12 pt-16 sm:px-6 sm:pt-24 lg:px-8 lg:pt-32">
         <div className="mx-auto max-w-3xl text-center">
+          {/*
+            The badge used to read "… · zero dependencies", which was true of
+            a catalog that held nothing but CSS. Blocks and everything above
+            them are React source with real imports, so the claim now belongs
+            to the effects rung alone — where the features grid still makes
+            it. Here the counts do more work anyway: they are the ladder.
+          */}
           <div className="mb-5 inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-background/60 px-3 py-1 text-xs text-muted-foreground backdrop-blur">
             <Sparkles className="h-3.5 w-3.5 text-primary" />
-            {TOTAL_COUNT.toLocaleString('en-US')} effects · {CATEGORIES.length} categories · zero dependencies
+            {TOTAL_COUNT.toLocaleString('en-US')} effects · {BLOCK_COUNT} blocks ·{' '}
+            {PAGE_COUNT} pages · {TEMPLATE_COUNT} templates
           </div>
           <h1 className="text-balance bg-gradient-to-br from-foreground via-foreground to-foreground/60 bg-clip-text text-5xl font-extrabold tracking-tight text-transparent sm:text-6xl lg:text-7xl">
-            Beautiful CSS effects,
+            Beautiful UI,
             <br className="hidden sm:inline" /> ready to copy.
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-pretty text-base text-muted-foreground sm:text-lg lg:text-xl">
-            Hoverlab is a curated, open-source library of pure-CSS effects —
-            buttons, loaders, cards, charts, 3D, neon, patterns and {CATEGORIES.length - 7}{' '}
-            more categories. Live demos, copy-ready code, and zero JavaScript
-            required. Sign in to save your favorites and bundle them for
-            export.
+            Hoverlab is a curated, open-source catalog that starts at a single
+            hover state and goes all the way up to a project you can deploy.
+            Copy one of {TOTAL_COUNT.toLocaleString('en-US')} pure-CSS effects,
+            drop in a finished pricing section, or clone a whole starter — live
+            demos and real source at every rung, with{' '}
+            <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-[0.85em]">
+              npx hoverlab add
+            </code>{' '}
+            if you&apos;d rather stay in the terminal.
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
             {!loading && user ? (
@@ -204,43 +247,43 @@ export default function LandingPage() {
             <Reveal delay={0}>
               <FeatureCard
                 icon={<Layers className="h-5 w-5" />}
-                title={`${TOTAL_COUNT.toLocaleString('en-US')}+ effects`}
-                description={`Hand-crafted and generated effects across ${CATEGORIES.length} categories — from buttons, loaders and cards to charts, 3D, neon, masks and micro-interactions.`}
+                title="Four tiers, one catalog"
+                description={`${TOTAL_COUNT.toLocaleString('en-US')}+ effects across ${CATEGORIES.length} categories, ${BLOCK_COUNT} blocks, ${PAGE_COUNT} pages and ${TEMPLATE_COUNT} deployable templates. Each tier is built from the one below it, so you can drill from a template down to the button inside it.`}
               />
             </Reveal>
             <Reveal delay={80}>
               <FeatureCard
                 icon={<Code2 className="h-5 w-5" />}
-                title="Copy-ready code"
-                description="Every effect ships with its HTML and CSS in one click. No JavaScript, no framework lock-in, no build step. Paste into any project — React, Vue, plain HTML, anything."
+                title="Copy-ready source"
+                description="Effects hand you HTML and CSS in one click. Blocks and above hand you the actual files — components, their imports, and the dependency list — laid out the way they'll sit in your repo."
               />
             </Reveal>
             <Reveal delay={160}>
+              <FeatureCard
+                icon={<Terminal className="h-5 w-5" />}
+                title="Install from the terminal"
+                description="npx hoverlab add <id> writes any effect, block, page or template straight into your project — it detects your setup and picks the right paths. Free, no account, no token. There's an MCP server too, so your editor's agent can search the catalog."
+              />
+            </Reveal>
+            <Reveal delay={0}>
               <FeatureCard
                 icon={<Palette className="h-5 w-5" />}
                 title="Live customization"
                 description="Hue, saturation, scale, and speed sliders let you tune every effect to your brand. Six preset palettes (Sunset, Ocean, Forest, Monochrome, Neon, Pastel) get you started in one click."
               />
             </Reveal>
-            <Reveal delay={0}>
-              <FeatureCard
-                icon={<Heart className="h-5 w-5" />}
-                title="Favorites that follow you"
-                description="Sign in to save effects you love. Your favorites sync to your account and show up on any device — never lose a carefully curated list to a cleared cache again."
-              />
-            </Reveal>
             <Reveal delay={80}>
               <FeatureCard
                 icon={<Package className="h-5 w-5" />}
-                title="Bundle & export"
-                description="Add effects to your bundle with their current customization, then export the whole bundle as one minified CSS file. Build your own design system file in minutes."
+                title="Favorites, bundles & export"
+                description="Save what you love and it syncs to every device you sign in on. Add effects to a bundle with their customization intact, then export the lot as one minified CSS file — or as Vue, Svelte or Tailwind."
               />
             </Reveal>
             <Reveal delay={160}>
               <FeatureCard
                 icon={<Shield className="h-5 w-5" />}
-                title="Pure CSS, zero risk"
-                description="No npm install, no dependency bloat, no supply-chain risk. The CSS is right there — read it, edit it, own it. Perfect for prototypes, production, and learning."
+                title="Pure CSS at the base"
+                description="Every effect is plain HTML and CSS — no npm install, no supply-chain risk, nothing to keep updated. Blocks and above are React components and list their dependencies up front, so you always know what you're taking on."
               />
             </Reveal>
           </div>
@@ -282,16 +325,16 @@ export default function LandingPage() {
             <StepCard
               number="02"
               icon={<Layers className="h-5 w-5" />}
-              title="Browse & customize"
-              description="Filter by category, search by keyword, hit Surprise Me for inspiration. Open any effect to tweak hue, saturation, scale, and speed in real time."
+              title="Pick your rung"
+              description="One search covers all four tiers. Take a single hover state, a finished section, a whole screen, or a starter project — then tune hue, saturation, scale and speed in real time."
             />
           </Reveal>
           <Reveal delay={240}>
             <StepCard
               number="03"
               icon={<Copy className="h-5 w-5" />}
-              title="Copy or bundle"
-              description="Grab a single effect's code with one click, or add several to your bundle and export them together as one CSS file ready to drop into your project."
+              title="Copy, bundle, or install"
+              description="Grab the source with one click, bundle several and export them as one CSS file, or run npx hoverlab add <id> to write it straight into your repo."
             />
           </Reveal>
         </div>
@@ -308,7 +351,7 @@ export default function LandingPage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <Reveal className="mb-10 max-w-2xl">
             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-              {CATEGORIES.length} categories to explore
+              {CATEGORIES.length} effect categories to explore
             </h2>
             <p className="mt-3 text-muted-foreground">
               From micro-interactions to full-page backgrounds, every category
@@ -399,10 +442,10 @@ export default function LandingPage() {
             <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-emerald-600 text-white">
               <Wand2 className="h-4 w-4" />
             </div>
-            <span>Hoverlab — A living CSS effects library</span>
+            <span>Hoverlab — Effects, blocks, pages and templates</span>
           </div>
           <p className="font-mono text-xs">
-            Built with pure CSS · No JavaScript frameworks required
+            npx hoverlab add &lt;id&gt; · Free CLI and public API
           </p>
         </div>
       </footer>

@@ -5,11 +5,16 @@
  * Auth required. Replaces the user's entire bundle on PUT.
  *
  * BundleEntry shape (matches src/hooks/use-bundle.ts):
- *   { effectId: string, opts: { hue, saturation, scale, speed }, addedAt: ISO string }
+ *   { id, level?, name?, category?, opts?, addedAt }
  *
- * Stored as one document per effect under users/{uid}/bundle, keyed by
- * effect id, with opts as a nested map — Firestore stores structured values
- * natively, so the JSON-string encoding the Postgres column needed is gone.
+ * Stored as one document per artifact under users/{uid}/bundle, keyed by
+ * artifact id, with opts as a nested map — Firestore stores structured
+ * values natively, so the JSON-string encoding the Postgres column needed
+ * is gone.
+ *
+ * `opts` is present only for effects. Both this route and `getBundle`
+ * accept the legacy `effectId` key so a client that has not reloaded since
+ * the bundle became artifact-wide does not have its bundle rejected.
  */
 
 import { NextResponse } from 'next/server'
@@ -22,6 +27,7 @@ import {
   type BundleEntry,
   type BundleOpts,
 } from '@/lib/firebase/sync'
+import { ARTIFACT_LEVELS, type ArtifactLevel } from '@/lib/artifact-types'
 
 export const runtime = 'nodejs'
 
@@ -42,19 +48,50 @@ function sanitizeOpts(v: unknown): BundleOpts | null {
   }
 }
 
+/** Trim an untrusted display string, or drop it. */
+function sanitizeText(v: unknown, max = 200): string | undefined {
+  if (typeof v !== 'string') return undefined
+  const trimmed = v.trim().slice(0, max)
+  return trimmed || undefined
+}
+
 function sanitizeEntry(v: unknown): BundleEntry | null {
   if (!v || typeof v !== 'object') return null
   const e = v as Record<string, unknown>
-  const effectId = typeof e.effectId === 'string' ? e.effectId.trim().slice(0, 200) : ''
-  if (!effectId) return null
-  const opts = sanitizeOpts(e.opts)
-  if (!opts) return null
+
+  // `?? e.effectId` accepts payloads from clients running the pre-ladder
+  // bundle. Those are still in the wild in open tabs and service-worker
+  // caches, and rejecting them would silently wipe a bundle on next sync.
+  const id = sanitizeText(e.id ?? e.effectId)
+  if (!id) return null
+
+  const level = ARTIFACT_LEVELS.includes(e.level as ArtifactLevel)
+    ? (e.level as ArtifactLevel)
+    : undefined
+
+  // Absent opts is now valid — it is what every non-effect entry looks
+  // like. Only a *malformed* opts object is a reason to reject the row.
+  let opts: BundleOpts | undefined
+  if (e.opts !== undefined && e.opts !== null) {
+    const parsed = sanitizeOpts(e.opts)
+    if (!parsed) return null
+    opts = parsed
+  }
+
   let addedAt = typeof e.addedAt === 'string' ? e.addedAt : ''
   // Validate ISO string; fall back to now() if invalid.
   if (!addedAt || Number.isNaN(Date.parse(addedAt))) {
     addedAt = new Date().toISOString()
   }
-  return { effectId, opts, addedAt }
+
+  return {
+    id,
+    level,
+    name: sanitizeText(e.name),
+    category: sanitizeText(e.category, 100),
+    opts,
+    addedAt,
+  }
 }
 
 async function handleGet() {
@@ -87,12 +124,12 @@ async function handlePut(req: Request) {
     )
   }
 
-  // Sanitize + dedupe by effectId (last write wins).
+  // Sanitize + dedupe by artifact id (last write wins).
   const byId = new Map<string, BundleEntry>()
   for (const raw of entries) {
     const entry = sanitizeEntry(raw)
     if (!entry) continue
-    byId.set(entry.effectId, entry)
+    byId.set(entry.id, entry)
     if (byId.size >= MAX_BUNDLE) break
   }
   let clean = [...byId.values()]

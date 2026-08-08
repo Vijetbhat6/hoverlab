@@ -1,24 +1,43 @@
-import { customizeCss } from './customize'
+import { customizeCss, DEFAULT_CUSTOMIZATION } from './customize'
 import { exportEffect, frameworkMeta, type FrameworkId } from './export'
+import { levelOf, type ArtifactLevel } from './artifact-types'
 import type { BundleEntry } from '@/hooks/use-bundle'
 import type { Effect } from './effects'
 
 /**
- * Resolve bundle entries against the effect catalog, attaching the
- * customized CSS for each. Effects that no longer exist are dropped.
+ * Resolve the *effect* entries of a bundle against the effect catalog,
+ * attaching the customized CSS for each. Effects that no longer exist are
+ * dropped.
  *
- * Shared by all the export builders below so they all see the same
- * resolved list.
+ * Entries from the upper tiers are skipped here rather than dropped: a
+ * block has no `css` to customize and nothing an HTML or CSS export could
+ * meaningfully contain. They are carried by `resolveArtifacts` instead, and
+ * only the zip builder — the one format that can hold a file tree — takes
+ * both.
+ *
+ * `entry.opts` is absent for anything the user never customized as well as
+ * for everything above `effect`, so the default is applied here rather than
+ * at the call site.
  */
 function resolveBundle(entries: BundleEntry[], effects: Effect[]) {
   return entries
+    .filter((entry) => levelOf(entry) === 'effect')
     .map((entry) => {
-      const effect = effects.find((e) => e.id === entry.effectId)
+      const effect = effects.find((e) => e.id === entry.id)
       if (!effect) return null
-      const customizedCss = customizeCss(effect.css, entry.opts)
+      const customizedCss = customizeCss(effect.css, entry.opts ?? DEFAULT_CUSTOMIZATION)
       return { entry, effect, customizedCss }
     })
     .filter((x): x is NonNullable<typeof x> => x !== null)
+}
+
+/** A block, page or template in the bundle, with its source files. */
+export interface ResolvedArtifact {
+  id: string
+  name: string
+  level: ArtifactLevel
+  files: Array<{ path: string; source: string }>
+  deps: string[]
 }
 
 /**
@@ -59,14 +78,10 @@ export function buildBundleHtml(
   entries: BundleEntry[],
   effects: Effect[],
 ): string {
-  const resolved = entries
-    .map((entry) => {
-      const effect = effects.find((e) => e.id === entry.effectId)
-      if (!effect) return null
-      const customizedCss = customizeCss(effect.css, entry.opts)
-      return { entry, effect, customizedCss }
-    })
-    .filter((x): x is NonNullable<typeof x> => x !== null)
+  // Was an inline copy of `resolveBundle`, which is exactly the drift that
+  // helper exists to prevent — it had to be found and fixed twice when
+  // entries stopped being effect-only.
+  const resolved = resolveBundle(entries, effects)
 
   const cssBlocks = resolved
     .map(({ effect, customizedCss }) =>
@@ -83,11 +98,12 @@ export function buildBundleHtml(
 
   const cards = resolved
     .map(({ effect, entry }) => {
+      const opts = entry.opts ?? DEFAULT_CUSTOMIZATION
       const optsSummary = [
-        entry.opts.hue !== 0 ? `hue: ${entry.opts.hue}°` : null,
-        entry.opts.saturation !== 0 ? `sat: ${entry.opts.saturation}%` : null,
-        entry.opts.scale !== 1 ? `size: ${entry.opts.scale}×` : null,
-        entry.opts.speed !== 1 ? `speed: ${entry.opts.speed}×` : null,
+        opts.hue !== 0 ? `hue: ${opts.hue}°` : null,
+        opts.saturation !== 0 ? `sat: ${opts.saturation}%` : null,
+        opts.scale !== 1 ? `size: ${opts.scale}×` : null,
+        opts.speed !== 1 ? `speed: ${opts.speed}×` : null,
       ]
         .filter(Boolean)
         .join(' · ')
@@ -220,24 +236,19 @@ export function buildBundleCss(
   entries: BundleEntry[],
   effects: Effect[],
 ): string {
-  const resolved = entries
-    .map((entry) => {
-      const effect = effects.find((e) => e.id === entry.effectId)
-      if (!effect) return null
-      const customizedCss = customizeCss(effect.css, entry.opts)
-      return { entry, effect, customizedCss }
-    })
-    .filter((x): x is NonNullable<typeof x> => x !== null)
+  // Third copy of the same resolution, now also shared.
+  const resolved = resolveBundle(entries, effects)
 
   if (resolved.length === 0) return '/* Hoverlab bundle is empty */'
 
   return resolved
     .map(({ effect, entry, customizedCss }) => {
+      const opts = entry.opts ?? DEFAULT_CUSTOMIZATION
       const optsLine = [
-        entry.opts.hue !== 0 ? `hue=${entry.opts.hue}` : null,
-        entry.opts.saturation !== 0 ? `sat=${entry.opts.saturation}` : null,
-        entry.opts.scale !== 1 ? `scale=${entry.opts.scale}` : null,
-        entry.opts.speed !== 1 ? `speed=${entry.opts.speed}` : null,
+        opts.hue !== 0 ? `hue=${opts.hue}` : null,
+        opts.saturation !== 0 ? `sat=${opts.saturation}` : null,
+        opts.scale !== 1 ? `scale=${opts.scale}` : null,
+        opts.speed !== 1 ? `speed=${opts.speed}` : null,
       ]
         .filter(Boolean)
         .join(', ')
@@ -311,9 +322,13 @@ export async function buildBundleZip(
   entries: BundleEntry[],
   effects: Effect[],
   framework: FrameworkId = 'css',
+  artifacts: ResolvedArtifact[] = [],
 ): Promise<Blob | null> {
   const resolved = resolveBundle(entries, effects)
-  if (resolved.length === 0) return null
+  // A bundle of nothing but blocks is a real bundle — the emptiness test
+  // has to consider both halves, or "download" silently does nothing for
+  // anyone who never added an effect.
+  if (resolved.length === 0 && artifacts.length === 0) return null
 
   const JSZip = (await import('jszip')).default
   const zip = new JSZip()
@@ -323,8 +338,24 @@ export async function buildBundleZip(
    * default 'css' target this produces the same effects/<slug>.html +
    * effects/<slug>.css pair the ZIP has always contained; with 'vue' it
    * produces one SFC per effect, and so on. */
-  const effectsDir = root.folder('effects')!
   const notes = new Set<string>()
+
+  /* Blocks, pages and templates keep their own authored file paths under a
+   * folder per level. Unlike effects there is nothing to generate: the
+   * source in the catalog is already the deliverable, and rewriting it for
+   * a "framework" would be wrong — these are React files, and the framework
+   * picker only ever described the effect exporter. */
+  for (const artifact of artifacts) {
+    const dir = root.folder(`${artifact.level}s`)!.folder(safeFileName(artifact.id))!
+    for (const file of artifact.files) {
+      dir.file(safeArchivePath(file.path), file.source.trimEnd() + '\n')
+    }
+    if (artifact.deps.length > 0) {
+      notes.add(`${artifact.name} needs: ${artifact.deps.join(', ')}`)
+    }
+  }
+
+  const effectsDir = root.folder('effects')!
   for (const { effect, customizedCss } of resolved) {
     const generated = exportEffect(
       {
@@ -386,11 +417,12 @@ function buildZipIndexHtml(
 
   const cards = resolved
     .map(({ effect, entry }) => {
+      const opts = entry.opts ?? DEFAULT_CUSTOMIZATION
       const optsSummary = [
-        entry.opts.hue !== 0 ? `hue: ${entry.opts.hue}°` : null,
-        entry.opts.saturation !== 0 ? `sat: ${entry.opts.saturation}%` : null,
-        entry.opts.scale !== 1 ? `size: ${entry.opts.scale}×` : null,
-        entry.opts.speed !== 1 ? `speed: ${entry.opts.speed}×` : null,
+        opts.hue !== 0 ? `hue: ${opts.hue}°` : null,
+        opts.saturation !== 0 ? `sat: ${opts.saturation}%` : null,
+        opts.scale !== 1 ? `size: ${opts.scale}×` : null,
+        opts.speed !== 1 ? `speed: ${opts.speed}×` : null,
       ]
         .filter(Boolean)
         .join(' · ')
@@ -515,16 +547,17 @@ function buildZipReadme(
   }
   lines.push('## Effects in this bundle', '')
   for (const { effect, entry } of resolved) {
-    const opts = [
-      entry.opts.hue !== 0 ? `hue=${entry.opts.hue}°` : null,
-      entry.opts.saturation !== 0 ? `sat=${entry.opts.saturation}%` : null,
-      entry.opts.scale !== 1 ? `size=${entry.opts.scale}×` : null,
-      entry.opts.speed !== 1 ? `speed=${entry.opts.speed}×` : null,
+    const opts = entry.opts ?? DEFAULT_CUSTOMIZATION
+    const summary = [
+      opts.hue !== 0 ? `hue=${opts.hue}°` : null,
+      opts.saturation !== 0 ? `sat=${opts.saturation}%` : null,
+      opts.scale !== 1 ? `size=${opts.scale}×` : null,
+      opts.speed !== 1 ? `speed=${opts.speed}×` : null,
     ]
       .filter(Boolean)
       .join(', ')
     lines.push(
-      `- **${effect.name}** (\`${effect.id}\`) — ${effect.category}${opts ? ` · customized: ${opts}` : ''}`,
+      `- **${effect.name}** (\`${effect.id}\`) — ${effect.category}${summary ? ` · customized: ${summary}` : ''}`,
     )
   }
   lines.push('')

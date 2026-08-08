@@ -244,7 +244,7 @@ export function EffectDetail({ effect, similar, prev, next }: EffectDetailProps)
         toggle(effect.id)
       } else if (key === 's') {
         e.preventDefault()
-        toggleBundle(effect.id, opts)
+        toggleBundle({ id: effect.id, name: effect.name, category: effect.category }, opts)
       } else if (key === 'c') {
         e.preventDefault()
         navigator.clipboard
@@ -366,7 +366,7 @@ export function EffectDetail({ effect, similar, prev, next }: EffectDetailProps)
                 </div>
                 <button
                   type="button"
-                  onClick={() => toggleBundle(effect.id, opts)}
+                  onClick={() => toggleBundle({ id: effect.id, name: effect.name, category: effect.category }, opts)}
                   aria-pressed={inBundle}
                   aria-label={inBundle ? 'Remove from bundle' : 'Add to bundle'}
                   title={inBundle ? 'Remove from bundle' : 'Add to bundle'}
@@ -406,7 +406,7 @@ export function EffectDetail({ effect, similar, prev, next }: EffectDetailProps)
                 <button
                   type="button"
                   onClick={() => {
-                    const result = toggleCompare(effect.id)
+                    const result = toggleCompare({ id: effect.id, name: effect.name, category: effect.category })
                     if (result === 'added') {
                       toast.success(`Added "${effect.name}" to compare`, {
                         description: 'Open the compare drawer (v) to see it side-by-side.',

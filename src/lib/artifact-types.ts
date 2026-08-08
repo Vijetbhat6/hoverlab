@@ -53,12 +53,12 @@ export const LEVEL_LABEL: Record<ArtifactLevel, { one: string; many: string }> =
  * What it is *not* is a gate, and the distinction is worth writing down
  * because a `tier` field reads like one:
  *
- * Pro in this product is sold on features, not on catalog access. See
- * `billing/plans.ts` — the Pro license buys "the full source, the CLI, and a
- * pre-cleared commercial license" — and `billing/entitlements.ts`, where
- * `canUseProFeatures` gates bundle size, export formats and the CLI/MCP
- * token. There is no per-artifact check anywhere, and nothing sets this to
- * `'pro'`.
+ * Pro in this product is sold on features and on the licence to ship, not on
+ * catalog access. See `billing/plans.ts`, and `billing/entitlements.ts` where
+ * `canUseProFeatures` gates bundle size, export formats, brand presets and
+ * private collections. It does NOT gate the CLI or the MCP server: `/api/v1`
+ * takes no credentials at all, so there is no CLI token to withhold. There is
+ * no per-artifact check anywhere, and nothing sets this to `'pro'`.
  *
  * The card and detail-page badges that keyed off this were removed rather
  * than left rendering a promise nothing keeps. Making per-artifact gating

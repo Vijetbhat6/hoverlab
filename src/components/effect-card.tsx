@@ -122,7 +122,7 @@ export function EffectCard({ effect }: EffectCardProps) {
             <button
               type="button"
               onClick={() => {
-                const result = toggleCompare(effect.id)
+                const result = toggleCompare({ id: effect.id, name: effect.name, category: effect.category })
                 if (result === 'added') {
                   toast.success(`Added "${effect.name}" to compare`)
                 } else if (result === 'full') {
@@ -146,7 +146,7 @@ export function EffectCard({ effect }: EffectCardProps) {
             </button>
             <button
               type="button"
-              onClick={() => toggleBundle(effect.id, opts)}
+              onClick={() => toggleBundle({ id: effect.id, name: effect.name, category: effect.category }, opts)}
               aria-pressed={inBundle}
               aria-label={inBundle ? 'Remove from bundle' : 'Add to bundle'}
               title={inBundle ? 'Remove from bundle' : 'Add to bundle'}
