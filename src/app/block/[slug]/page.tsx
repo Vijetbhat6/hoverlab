@@ -17,6 +17,7 @@ import type { Metadata } from 'next'
 import { ArrowLeft, ArrowRight, Package, FileCode, Layers } from 'lucide-react'
 import { CodeBlock } from '@/components/code-block'
 import { BlockPreview } from '@/components/blocks/block-preview'
+import { BlockMarkupPanel } from '@/components/blocks/block-markup-panel'
 import { BlockCard } from '@/components/blocks/block-card'
 import { BLOCKS, getBlock, primaryFile } from '@/lib/blocks/blocks'
 import { blockCategorySlug, GROUP_OF } from '@/lib/blocks/block-types'
@@ -187,6 +188,8 @@ export default async function BlockDetailPage({ params }: PageProps) {
             whose source is below, not a screenshot of it.
           </p>
         </section>
+
+        <BlockMarkupPanel block={block} />
 
         {/* ---------------------------------------------------------- *
          *  Used in — climb the ladder rather than only descending it
