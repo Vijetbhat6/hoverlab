@@ -26,6 +26,15 @@ export interface Plan {
   name: string
   /** Display price in cents. Polar remains the source of truth at checkout. */
   priceCents: number
+  /**
+   * Display price in paise, for checkouts presented in rupees.
+   *
+   * A real second price, not a conversion: Polar does not convert between
+   * currencies, so a product sold in rupees carries an INR price of its own
+   * and this must equal it. Keep in step with the `prices` block in
+   * scripts/provision-polar.mts, which is what writes it to Polar.
+   */
+  priceInrPaise: number
   interval: BillingInterval
   /** Polar product id, from the dashboard. Null for the free plan. */
   polarProductId: string | null
@@ -38,6 +47,7 @@ export const PLANS: Record<PlanId, Plan> = {
     id: 'free',
     name: 'Free',
     priceCents: 0,
+    priceInrPaise: 0,
     interval: 'one_time',
     polarProductId: null,
     perSeat: false,
@@ -49,6 +59,10 @@ export const PLANS: Record<PlanId, Plan> = {
     // outright (Tailwind Plus $299, Magic UI Pro lifetime tiers), while
     // staying an easy solo-developer decision.
     priceCents: 5900,
+    // ₹5,600 — the dollar price at roughly ₹95/$, so the rupee ladder tracks
+    // the dollar one rather than becoming a second pricing strategy to
+    // maintain.
+    priceInrPaise: 560000,
     interval: 'one_time',
     polarProductId: process.env.POLAR_PRODUCT_ID_PRO ?? null,
     perSeat: false,
@@ -65,6 +79,8 @@ export const PLANS: Record<PlanId, Plan> = {
     // team pays ~$720/year against $295 of Pro licenses, a gap the shared
     // workspace can actually justify.
     priceCents: 1200,
+    /** ₹1,150 per seat / month. */
+    priceInrPaise: 115000,
     interval: 'month',
     polarProductId: process.env.POLAR_PRODUCT_ID_TEAM ?? null,
     perSeat: true,
@@ -86,6 +102,18 @@ interface RegionalOverride {
   priceCents: number
   /** Polar discount id that actually produces `priceCents` at checkout. */
   discountId: string | null
+  /** Price after the regional discount, in paise, for rupee checkouts. */
+  priceInrPaise: number
+  /**
+   * Polar discount id that produces `priceInrPaise` at a rupee checkout.
+   *
+   * A separate id, not an oversight: Polar scopes a fixed discount to the
+   * currency it is denominated in, and offering the dollar one on a rupee
+   * checkout fails with "Discount does not exist". Two exact discounts also
+   * beat one shared percentage, which would round ₹5,600 down to something
+   * like ₹1,803.20 instead of a round ₹1,800.
+   */
+  discountIdInr: string | null
 }
 
 /**
@@ -106,17 +134,75 @@ const REGIONAL: Record<Exclude<Region, 'default'>, Partial<Record<PlanId, Region
     pro: {
       priceCents: 1900,
       discountId: process.env.POLAR_DISCOUNT_ID_IN_PRO ?? null,
+      // ₹1,800 — $19 at the same ~₹95/$ the list price uses.
+      priceInrPaise: 180000,
+      discountIdInr: process.env.POLAR_DISCOUNT_ID_IN_PRO_INR ?? null,
     },
     team: {
       priceCents: 500,
       discountId: process.env.POLAR_DISCOUNT_ID_IN_TEAM ?? null,
+      /** ₹475 per seat / month. */
+      priceInrPaise: 47500,
+      discountIdInr: process.env.POLAR_DISCOUNT_ID_IN_TEAM_INR ?? null,
     },
   },
+}
+
+/**
+ * Currency the Polar checkout is presented — and charged — in, per region.
+ *
+ * This is NOT the display toggle on the pricing page. Presentment currency
+ * is what the customer's card is actually billed in, so it follows the
+ * region (an edge geolocation header) and never a client preference: an NRI
+ * reading rupee figures on a US card should still be charged in dollars,
+ * where their card has no foreign-currency markup.
+ *
+ * India gets rupees because dollar checkouts are a real drop-off point
+ * there — the card issuer adds a cross-border fee on top, some cards refuse
+ * foreign-currency charges outright, and a rupee total is simply the number
+ * the buyer can sanity-check against their own budget.
+ *
+ * Polar converts at its own rate at the moment of payment, which is why
+ * every rupee figure we render stays labelled approximate: ours comes from
+ * the pinned USD_TO_INR below and will not match to the rupee.
+ *
+ * null means "present in the product's own currency" (USD) — the behavior
+ * for every other region, unchanged.
+ */
+export type PresentmentCurrency = 'inr'
+
+const REGION_PRESENTMENT: Record<
+  Exclude<Region, 'default'>,
+  PresentmentCurrency
+> = {
+  IN: 'inr',
 }
 
 function overrideFor(planId: PlanId, region: Region): RegionalOverride | null {
   if (region === 'default') return null
   return REGIONAL[region][planId] ?? null
+}
+
+/**
+ * Currency this plan's checkout is presented and charged in for a region.
+ *
+ * Conditional on the regional INR discount being configured, for the same
+ * reason `priceForRegion` is: without it Polar has no way to reach the rupee
+ * price we advertise. Presenting ₹5,600 with no ₹3,800 discount to apply
+ * would charge full list to precisely the buyers the regional price exists
+ * for — the one failure mode here that takes real money under false
+ * pretenses.
+ *
+ * A product with no INR price at all is caught one layer further out: the
+ * checkout route retries in USD when Polar rejects the currency.
+ */
+export function presentmentCurrencyFor(
+  planId: PlanId,
+  region: Region,
+): PresentmentCurrency | null {
+  if (region === 'default') return null
+  const override = overrideFor(planId, region)
+  return override?.discountIdInr ? REGION_PRESENTMENT[region] : null
 }
 
 /**
@@ -132,9 +218,34 @@ export function priceForRegion(planId: PlanId, region: Region): number {
   return override?.discountId ? override.priceCents : PLANS[planId].priceCents
 }
 
-/** Polar discount to apply at checkout, or null to charge list price. */
-export function discountForRegion(planId: PlanId, region: Region): string | null {
-  return overrideFor(planId, region)?.discountId ?? null
+/**
+ * Rupee display price for a plan in a region, in paise.
+ *
+ * Same guard as `priceForRegion`, against the INR discount.
+ */
+export function priceInrForRegion(planId: PlanId, region: Region): number {
+  const override = overrideFor(planId, region)
+  return override?.discountIdInr
+    ? override.priceInrPaise
+    : PLANS[planId].priceInrPaise
+}
+
+/**
+ * Polar discount to apply at checkout, or null to charge list price.
+ *
+ * Takes the presentment currency because a fixed Polar discount belongs to
+ * one currency: passing the dollar discount to a rupee checkout is rejected
+ * outright ("Discount does not exist"), which would have failed the sale for
+ * every Indian buyer.
+ */
+export function discountForRegion(
+  planId: PlanId,
+  region: Region,
+  currency: PresentmentCurrency | null = null,
+): string | null {
+  const override = overrideFor(planId, region)
+  if (!override) return null
+  return currency === 'inr' ? override.discountIdInr : override.discountId
 }
 
 /** Narrow an arbitrary string to a known plan id. */
@@ -151,11 +262,12 @@ export function formatPrice(cents: number): string {
 /**
  * USD → INR reference rate, for DISPLAY ONLY.
  *
- * Polar is the merchant of record and charges in USD. This number never
- * reaches a charge — the amount actually billed is whatever the customer's
- * card network converts at on the day. It exists so the large share of this
- * audience that thinks in rupees can size the price without leaving the page
- * for a converter.
+ * Used ONLY where no real rupee price exists — that is, outside India, where
+ * the checkout is presented in dollars and the customer's card network sets
+ * the conversion. India is charged an actual INR price (`priceInrPaise`),
+ * which is exact and must never be rendered through this constant. It exists
+ * so the large share of this audience that thinks in rupees can size a dollar
+ * price without leaving the page for a converter.
  *
  * Pinned rather than fetched live, deliberately: a live rate would put a
  * network call and a failure mode on the landing page's critical path, and
@@ -178,6 +290,20 @@ export const USD_TO_INR = 96
 export function formatPriceInr(cents: number): string {
   const rupees = Math.round(((cents / 100) * USD_TO_INR) / 10) * 10
   return `₹${rupees.toLocaleString('en-IN')}`
+}
+
+/**
+ * An actual rupee price, e.g. 560000 → "₹5,600".
+ *
+ * Distinct from `formatPriceInr` on purpose. That one converts a dollar
+ * figure and rounds to the nearest ₹10 so it cannot be mistaken for a real
+ * price; this one IS the price the card is charged, so it is exact. Paise
+ * are shown only when non-zero — every price we set is in whole rupees, and
+ * a trailing ".00" on a rupee price reads like a foreign import.
+ */
+export function formatPricePaise(paise: number): string {
+  const rupees = paise / 100
+  return `₹${(Number.isInteger(rupees) ? rupees : Number(rupees.toFixed(2))).toLocaleString('en-IN')}`
 }
 
 /**

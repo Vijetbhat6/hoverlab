@@ -3,6 +3,8 @@ import {
   PLANS,
   isPurchasable,
   priceForRegion,
+  priceInrForRegion,
+  presentmentCurrencyFor,
   type PlanId,
 } from '@/lib/billing/plans'
 import { regionFromHeaders } from '@/lib/billing/region'
@@ -11,9 +13,10 @@ import { billingEnabled } from '@/lib/billing/polar'
 /**
  * Prices and buyability for the visitor's region.
  *
- * GET → { region, plans: { pro: { priceCents, purchasable }, team: {…} } }
+ * GET → { region, plans: { pro: { priceCents, priceInrPaise, chargedInInr,
+ *         purchasable }, team: {…} } }
  *
- * This exists because the pricing UI is a client component and needs two
+ * This exists because the pricing UI is a client component and needs three
  * things the browser cannot work out for itself:
  *
  *  1. The region. It comes from an edge geolocation header on the request.
@@ -23,6 +26,11 @@ import { billingEnabled } from '@/lib/billing/polar'
  *     env vars that are NOT inlined into the client bundle. Called in the
  *     browser it always returned false, so every tier rendered the waitlist
  *     CTA and the buy button was unreachable however Polar was configured.
+ *
+ *  3. Whether the charge itself will be in rupees. India is presented a real
+ *     INR price rather than a conversion of the dollar one — but only once
+ *     the rupee discount exists, so "is this figure exact or an estimate" is
+ *     a server-side fact, and the wording on the page has to follow it.
  *
  * Response is per-visitor (it varies by IP country), so it must never be
  * cached by a shared cache.
@@ -51,6 +59,11 @@ export async function GET(request: Request) {
           id,
           {
             priceCents: priceForRegion(id, region),
+            priceInrPaise: priceInrForRegion(id, region),
+            // True when this plan's checkout will be presented and charged in
+            // rupees, making priceInrPaise the exact amount rather than a
+            // conversion of priceCents.
+            chargedInInr: presentmentCurrencyFor(id, region) === 'inr',
             purchasable: configured && isPurchasable(PLANS[id]),
           },
         ]),

@@ -3,6 +3,8 @@
 /**
  * /account — lightweight account management page.
  *  - Shows the user's email + name (if logged in).
+ *  - Plan and upgrade options, and the landing spot for Polar's
+ *    post-checkout redirect (see <UpgradePanel>).
  *  - "Sign out" button.
  *  - If not logged in, prompts to sign in / sign up.
  */
@@ -16,6 +18,7 @@ import { toast } from 'sonner'
 import { useAuth } from '@/components/auth-provider'
 import { useFavorites } from '@/hooks/use-favorites'
 import { useBundle } from '@/hooks/use-bundle'
+import { UpgradePanel } from '@/components/billing/upgrade-panel'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 
@@ -85,7 +88,9 @@ export default function AccountPage() {
       </div>
 
       <header className="sticky top-0 z-40 border-b border-border/40 bg-background/70 backdrop-blur-xl">
-        <div className="mx-auto flex h-16 max-w-3xl items-center justify-between gap-4 px-4 sm:px-6">
+        {/* Widened from 3xl to fit the three pricing tiers side by side, the
+            way they sit on the landing page. */}
+        <div className="mx-auto flex h-16 max-w-5xl items-center justify-between gap-4 px-4 sm:px-6">
           <Link href="/library" className="flex items-center gap-2.5">
             <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-emerald-600 text-white shadow-lg shadow-primary/30">
               <Wand2 className="h-5 w-5" />
@@ -98,7 +103,7 @@ export default function AccountPage() {
         </div>
       </header>
 
-      <main className="mx-auto max-w-3xl px-4 pb-16 pt-12 sm:px-6">
+      <main className="mx-auto max-w-5xl px-4 pb-16 pt-12 sm:px-6">
         <div className="flex items-center gap-4">
           <div className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-primary to-emerald-600 text-2xl font-bold text-white shadow-lg shadow-primary/30">
             {initial}
@@ -137,6 +142,24 @@ export default function AccountPage() {
             </CardHeader>
           </Card>
         </div>
+
+        {/*
+          UpgradePanel reads the `?checkout=success` return params with
+          useSearchParams(), which Next requires a Suspense boundary for
+          during static rendering.
+        */}
+        <React.Suspense
+          fallback={
+            <Card className="mt-6 border-border/60">
+              <CardHeader>
+                <CardTitle className="text-lg">Plan</CardTitle>
+                <CardDescription>Loading…</CardDescription>
+              </CardHeader>
+            </Card>
+          }
+        >
+          <UpgradePanel />
+        </React.Suspense>
 
         <Card className="mt-6 border-border/60">
           <CardHeader>

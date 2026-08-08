@@ -5,8 +5,14 @@
  *
  *  - Logged out: shows a "Sign in" ghost button that links to /login.
  *  - Logged in: shows an avatar button (first initial of name/email) that
- *    opens a dropdown with the user's email, a link to /account, and a
- *    sign-out action.
+ *    opens a dropdown with the user's email, a link to /account, an upgrade
+ *    link while the account is still free, and a sign-out action.
+ *
+ * The upgrade item is the only in-product entry to checkout that follows a
+ * user around: before it, someone who signed up could only buy by finding
+ * the pricing section on the landing page again. It renders only once
+ * entitlements have loaded, so a paying customer is never briefly told to
+ * upgrade to something they already own.
  *
  * While the AuthProvider is still hydrating on first mount, we render a
  * ghost button skeleton so the header doesn't jump.
@@ -15,10 +21,11 @@
 import * as React from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { LogOut, User as UserIcon, Loader2 } from 'lucide-react'
+import { LogOut, User as UserIcon, Loader2, Sparkles } from 'lucide-react'
 import { toast } from 'sonner'
 
 import { useAuth } from '@/components/auth-provider'
+import { useEntitlements } from '@/hooks/use-entitlements'
 import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
@@ -31,6 +38,7 @@ import {
 
 export function UserMenu() {
   const { user, loading, logout } = useAuth()
+  const { entitlements } = useEntitlements()
   const router = useRouter()
   const [signingOut, setSigningOut] = React.useState(false)
 
@@ -101,6 +109,14 @@ export function UserMenu() {
             Account
           </Link>
         </DropdownMenuItem>
+        {entitlements && !entitlements.canUseProFeatures ? (
+          <DropdownMenuItem asChild>
+            <Link href="/account#billing" className="cursor-pointer">
+              <Sparkles className="mr-2 h-4 w-4 text-primary" />
+              Upgrade
+            </Link>
+          </DropdownMenuItem>
+        ) : null}
         <DropdownMenuSeparator />
         <DropdownMenuItem
           onClick={onLogout}

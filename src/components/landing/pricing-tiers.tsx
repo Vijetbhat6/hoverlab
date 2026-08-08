@@ -10,26 +10,21 @@
  *   Team — $12 per seat / month. Seats and shared state are what companies
  *          actually pay recurring money for.
  *
- * Prices and buyability are fetched from /api/billing/pricing rather than
- * derived here, for two reasons:
+ * Prices, buyability and the display currency all come from usePricing() —
+ * see that hook for why region and purchasability have to come from the
+ * server, and why currency is a display preference only.
  *
- *   Region. India pays a PPP-adjusted price, decided from an edge
- *   geolocation header the browser has no access to.
+ * This is the ONLY pricing UI. /account renders the same section (via
+ * <UpgradePanel>) rather than a second, smaller one of its own: a signed-in
+ * customer comparing plans should see the same three tiers, the same prices
+ * and the same currency toggle they saw before they had an account.
  *
- *   Purchasability. `isPurchasable()` tests `polarProductId`, which comes
- *   from POLAR_PRODUCT_ID_* — server-only env vars that Next does not inline
- *   into the client bundle. Calling it here always returned false, so every
- *   tier fell back to the waitlist CTA and the buy button could never render.
- *
- * What this component displays is advisory. The charge is decided by
- * /api/billing/checkout from the same header, so a visitor who fakes their
- * way to a cheaper-looking page still checks out at list price.
- *
- * The currency toggle changes the currency a price is WRITTEN IN. It does not
- * — and must not — change which price applies. Letting a visitor select their
- * pricing region would either hand the India discount to everyone who clicks
- * it, or show a price the server then refuses to honor. Region comes from the
- * request; currency is a display preference.
+ * What changes when signed in is the CTA, not the layout — a tier the user
+ * already holds says so instead of offering to sell it again. That state
+ * comes from entitlements, and while entitlements are unknown the paid CTAs
+ * are held back: Pro is a one-time license, and offering it to an owner
+ * whose entitlement read merely failed invites a second purchase of
+ * something that cannot be used twice.
  */
 
 import * as React from 'react'
@@ -39,16 +34,13 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
 import { Reveal } from '@/components/reveal'
+import { useAuth } from '@/components/auth-provider'
 import { useCheckout } from '@/hooks/use-checkout'
+import { useEntitlements } from '@/hooks/use-entitlements'
+import { usePricing, type Currency } from '@/hooks/use-pricing'
 import { track } from '@/lib/analytics'
-import {
-  PLANS,
-  formatPrice,
-  formatPriceInr,
-  USD_TO_INR,
-  type PlanId,
-  type Region,
-} from '@/lib/billing/plans'
+import { cn } from '@/lib/utils'
+import { PLANS, USD_TO_INR, type PlanId } from '@/lib/billing/plans'
 import { TOTAL_COUNT } from '@/lib/catalog-stats'
 import { CATEGORIES } from '@/lib/effect-types'
 
@@ -123,16 +115,14 @@ const TIERS: Tier[] = [
   },
 ]
 
-/** Shape of GET /api/billing/pricing. */
-interface PricingResponse {
-  region: Region
-  plans: Record<string, { priceCents: number; purchasable: boolean }>
-}
-
-/** Currency a price is displayed in. Never what it is charged in — see above. */
-type Currency = 'USD' | 'INR'
-
-const CURRENCY_KEY = 'hl:pricing-currency'
+/** What the signed-in user already has, as far as one tier is concerned. */
+type Ownership =
+  /** Anonymous visitor, or entitlements still loading. */
+  | 'unknown'
+  /** Signed in, and this tier is theirs. */
+  | 'owned'
+  /** Signed in, and this tier is still sellable. */
+  | 'available'
 
 /**
  * Call-to-action for one tier.
@@ -141,19 +131,48 @@ const CURRENCY_KEY = 'hl:pricing-currency'
  * disabled rather than guessing. Guessing "buyable" dead-ends at a 503;
  * guessing "waitlist" flashes the wrong CTA at every visitor on a correctly
  * configured deployment.
+ *
+ * Ownership is checked before purchasability, so an existing customer is
+ * never shown a buy button for what they already hold — on either surface
+ * this section renders on.
  */
 function TierCta({
   tier,
   busy,
   purchasable,
+  ownership,
+  signedIn,
   onBuy,
 }: {
   tier: Tier
   busy: boolean
   purchasable: boolean | null
+  ownership: Ownership
+  signedIn: boolean
   onBuy: () => void
 }) {
+  if (ownership === 'owned') {
+    return (
+      <Button variant="outline" className="mb-6 w-full" size="lg" disabled>
+        <Check className="mr-1.5 h-4 w-4" />
+        {tier.id === 'free' ? 'Your current plan' : 'Active on this account'}
+      </Button>
+    )
+  }
+
   if (tier.id === 'free') {
+    // Signed-in visitors already have the free tier; sending them to /signup
+    // would bounce straight back off the proxy's auth redirect.
+    if (signedIn) {
+      return (
+        <Button variant={tier.ctaVariant} className="mb-6 w-full" size="lg" asChild>
+          <Link href="/library">
+            Browse the library
+            <ArrowRight className="ml-1.5 h-4 w-4" />
+          </Link>
+        </Button>
+      )
+    }
     return (
       <Button variant={tier.ctaVariant} className="mb-6 w-full" size="lg" asChild>
         <Link href="/signup">
@@ -164,7 +183,10 @@ function TierCta({
     )
   }
 
-  if (purchasable === null) {
+  // Either the server hasn't said whether this is buyable, or we're signed in
+  // and don't yet know what this account holds. Both resolve on their own in
+  // a moment; neither is worth a checkout we might have to refund.
+  if (purchasable === null || (signedIn && ownership === 'unknown')) {
     return (
       <Button variant={tier.ctaVariant} className="mb-6 w-full" size="lg" disabled>
         {tier.cta}
@@ -175,7 +197,9 @@ function TierCta({
   if (!purchasable) {
     return (
       <Button variant="outline" className="mb-6 w-full" size="lg" asChild>
-        <Link href="#newsletter">
+        {/* Route-qualified, not a bare "#newsletter": this section also
+            renders on /account, where that anchor does not exist. */}
+        <Link href="/#newsletter">
           Join the waitlist
           <ArrowRight className="ml-1.5 h-4 w-4" />
         </Link>
@@ -206,11 +230,26 @@ function TierCta({
   )
 }
 
-export function PricingTiers() {
+/**
+ * @param className Overrides for the section's own padding and width, so
+ *   the same tiers can sit in the narrower /account column. Tier markup is
+ *   never varied by caller — that is the whole point of sharing this.
+ */
+export function PricingTiers({ className }: { className?: string } = {}) {
   const { startCheckout, pendingPlan } = useCheckout()
-  const [pricing, setPricing] = React.useState<PricingResponse | null>(null)
-  // null = the visitor hasn't chosen, so fall back to the regional default.
-  const [currency, setCurrency] = React.useState<Currency | null>(null)
+  const { user } = useAuth()
+  const { entitlements } = useEntitlements()
+  const {
+    region,
+    currency: activeCurrency,
+    chooseCurrency,
+    isDiscounted,
+    headlineFor,
+    listHeadlineFor,
+    secondaryFor,
+    chargedInInr,
+    purchasableFor,
+  } = usePricing()
 
   // Entry point of the revenue funnel — paired with checkout_started and
   // purchase_completed, this is what makes the drop-off measurable.
@@ -218,76 +257,38 @@ export function PricingTiers() {
     track('pricing_viewed', {})
   }, [])
 
-  React.useEffect(() => {
-    let cancelled = false
-    fetch('/api/billing/pricing')
-      .then((res) => (res.ok ? res.json() : null))
-      .then((data: PricingResponse | null) => {
-        if (!cancelled && data) setPricing(data)
-      })
-      .catch(() => {
-        // Leave `pricing` null: list prices stay on screen and the paid CTAs
-        // stay disabled. Better than offering a checkout we can't confirm.
-      })
-    return () => {
-      cancelled = true
-    }
-  }, [])
-
-  // Restore a previous choice. Read on mount rather than in useState's
-  // initializer so the server and first client render agree — reading
-  // localStorage during render would hydrate-mismatch every visitor who has
-  // ever touched the toggle.
-  React.useEffect(() => {
-    try {
-      const stored = window.localStorage.getItem(CURRENCY_KEY)
-      if (stored === 'USD' || stored === 'INR') setCurrency(stored)
-    } catch {
-      // Private mode / storage disabled — the regional default is fine.
-    }
-  }, [])
+  const signedIn = !!user
 
   /**
-   * Explicit choice wins; otherwise default from the region. Someone browsing
-   * from India almost certainly wants to read rupees, and someone elsewhere
-   * almost certainly doesn't — but either can override, which is the point of
-   * the toggle (NRIs, agencies billing abroad, anyone comparing).
+   * True when this visitor's checkout will actually be in rupees.
+   *
+   * Per-plan underneath, but the tiers move together — both are provisioned
+   * by the same script run — and the page-level copy needs one answer.
    */
-  const activeCurrency: Currency =
-    currency ?? (pricing?.region === 'IN' ? 'INR' : 'USD')
+  const rupeeCheckout = chargedInInr('pro') || chargedInInr('team')
 
-  function chooseCurrency(next: Currency) {
-    setCurrency(next)
-    try {
-      window.localStorage.setItem(CURRENCY_KEY, next)
-    } catch {
-      // Not worth surfacing — the toggle still works for this page view.
-    }
-    track('pricing_currency_toggled', {
-      currency: next,
-      region: pricing?.region ?? 'unknown',
-    })
+  /**
+   * Which tiers this account already holds.
+   *
+   * Anonymous visitors are 'unknown' throughout — they are shown the plain
+   * sales CTAs, exactly as before. A Team seat includes everything Pro
+   * grants, so a Team member sees Pro as owned too; buying it separately
+   * would add nothing.
+   */
+  const ownershipFor = (id: PlanId): Ownership => {
+    if (!signedIn || !entitlements) return 'unknown'
+    if (id === 'free') return entitlements.plan === 'free' ? 'owned' : 'available'
+    if (id === 'pro') return entitlements.canUseProFeatures ? 'owned' : 'available'
+    return entitlements.hasTeam ? 'owned' : 'available'
   }
-
-  /** Cents to display — regional price once known, list price until then. */
-  const centsFor = (id: PlanId): number =>
-    pricing?.plans[id]?.priceCents ?? PLANS[id].priceCents
-
-  const isDiscounted = (id: PlanId): boolean =>
-    centsFor(id) < PLANS[id].priceCents
-
-  /** Headline figure, in whichever currency is selected. */
-  const headline = (cents: number): string =>
-    activeCurrency === 'INR' ? formatPriceInr(cents) : formatPrice(cents)
-
-  /** The other currency, shown underneath as the secondary reference. */
-  const secondary = (cents: number): string =>
-    activeCurrency === 'INR' ? formatPrice(cents) : formatPriceInr(cents)
 
   return (
     <section
       id="pricing"
-      className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8"
+      className={cn(
+        'mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8',
+        className,
+      )}
     >
       <Reveal className="mx-auto mb-12 max-w-2xl text-center">
         <div className="mb-4 inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-background/60 px-3 py-1 text-xs text-muted-foreground">
@@ -331,8 +332,12 @@ export function PricingTiers() {
           {activeCurrency === 'INR' && (
             // The one thing a rupee headline could mislead someone about, said
             // at the point of the switch rather than only in the small print.
+            // For a buyer who really is charged in rupees there is nothing to
+            // warn about — the figure above is the figure on the card.
             <p className="text-xs text-muted-foreground">
-              Indicative — you are charged in USD
+              {rupeeCheckout
+                ? 'Charged in rupees — this is the amount, not a conversion'
+                : 'Indicative — you are charged in USD'}
             </p>
           )}
         </div>
@@ -361,14 +366,14 @@ export function PricingTiers() {
             <div className="mb-6">
               <div className="flex items-baseline gap-1">
                 <span className="text-4xl font-extrabold tracking-tight">
-                  {headline(centsFor(tier.id))}
+                  {headlineFor(tier.id)}
                 </span>
                 {/* List price kept visible when a regional discount applies,
                     so the discount is legible as a discount rather than
                     looking like the product is simply cheap. */}
                 {isDiscounted(tier.id) && (
                   <span className="text-lg font-medium text-muted-foreground line-through">
-                    {headline(PLANS[tier.id].priceCents)}
+                    {listHeadlineFor(tier.id)}
                   </span>
                 )}
                 <span className="text-sm text-muted-foreground">
@@ -376,11 +381,17 @@ export function PricingTiers() {
                 </span>
               </div>
               {tier.id !== 'free' && (
-                // The currency not currently selected, as a reference. Only
-                // the rupee side is ever approximate, so only it gets the ≈.
+                /*
+                  The currency not currently selected, as a reference. The ≈
+                  marks whichever side is not the real charge: for a plan sold
+                  in rupees the dollar figure is the conversion, and for every
+                  other plan it is the rupee figure.
+                */
                 <p className="mt-1 text-sm text-muted-foreground">
-                  {activeCurrency === 'INR' ? '' : '≈ '}
-                  {secondary(centsFor(tier.id))}
+                  {(activeCurrency === 'INR') === chargedInInr(tier.id)
+                    ? '≈ '
+                    : ''}
+                  {secondaryFor(tier.id)}
                 </p>
               )}
               <p className="mt-2 text-sm text-muted-foreground">{tier.tagline}</p>
@@ -389,11 +400,9 @@ export function PricingTiers() {
             <TierCta
               tier={tier}
               busy={pendingPlan === tier.id}
-              purchasable={
-                tier.id === 'free'
-                  ? true
-                  : (pricing?.plans[tier.id]?.purchasable ?? null)
-              }
+              purchasable={purchasableFor(tier.id)}
+              ownership={ownershipFor(tier.id)}
+              signedIn={signedIn}
               onBuy={() => startCheckout(tier.id)}
             />
 
@@ -419,7 +428,14 @@ export function PricingTiers() {
           an effect in client work or a paid product needs Pro or Team. No
           credit card required for Free.
         </p>
-        {pricing?.region === 'IN' ? (
+        {rupeeCheckout ? (
+          <p className="mt-2 text-xs text-muted-foreground">
+            Regional pricing for India is applied automatically, and checkout
+            is shown and charged in rupees — the amount above is what reaches
+            your card, with no cross-border currency fee from your issuer. The
+            dollar figures are the reference conversion.
+          </p>
+        ) : region === 'IN' ? (
           <p className="mt-2 text-xs text-muted-foreground">
             Regional pricing for India is applied automatically at checkout.
             Paid plans are still charged in USD — the rupee figures above are

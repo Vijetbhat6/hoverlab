@@ -25,6 +25,20 @@ export function regionFromCountry(country: string | null | undefined): Region {
 
 /** Pricing region for an incoming request. */
 export function regionFromHeaders(headers: Headers): Region {
+  /*
+    Dev-only override. No edge proxy runs locally, so every request resolves
+    to 'default' and the India path — regional discount and a rupee checkout
+    — cannot be exercised end to end without hand-crafting a header, which
+    is impossible for a checkout the browser initiates.
+
+    Guarded on NODE_ENV rather than on the variable alone: a production
+    deployment must not be able to set its way into handing every visitor
+    the regional discount.
+  */
+  if (process.env.NODE_ENV !== 'production' && process.env.DEV_PRICING_REGION) {
+    return regionFromCountry(process.env.DEV_PRICING_REGION)
+  }
+
   return regionFromCountry(
     headers.get('x-vercel-ip-country') ?? headers.get('cf-ipcountry'),
   )

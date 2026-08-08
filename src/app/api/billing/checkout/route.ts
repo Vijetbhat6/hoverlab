@@ -5,6 +5,8 @@ import {
   parsePlanId,
   isPurchasable,
   discountForRegion,
+  presentmentCurrencyFor,
+  type PresentmentCurrency,
 } from '@/lib/billing/plans'
 import { regionFromHeaders } from '@/lib/billing/region'
 import { getCurrentUser } from '@/lib/session'
@@ -78,21 +80,37 @@ export async function POST(request: Request) {
   // /api/billing/pricing, but what it displays has no bearing on what is
   // charged — the discount is decided here, server-side.
   const region = regionFromHeaders(request.headers)
-  const discountId = discountForRegion(planId, region)
+  // Currency the checkout is presented and charged in. Region-derived for
+  // the same reason as the discount: it decides what a customer pays, so it
+  // cannot come from the client.
+  const currency = presentmentCurrencyFor(planId, region)
 
-  try {
-    const checkout = await getPolar().checkouts.create({
+  const create = (presentmentCurrency: PresentmentCurrency | null) => {
+    // The discount has to match the currency being presented — Polar scopes
+    // a fixed discount to its own currency and rejects the mismatch. This is
+    // resolved per attempt so the USD retry below carries the USD discount
+    // rather than dropping the regional price entirely.
+    const discountId = discountForRegion(planId, region, presentmentCurrency)
+
+    return getPolar().checkouts.create({
       products: [plan.polarProductId as string],
       customerEmail: user.email,
       // Our own user id, echoed back on every webhook for this customer.
       externalCustomerId: user.id,
-      successUrl: absoluteUrl('/account?checkout=success'),
+      // Plan and seats ride along so /account can name what was bought and
+      // close the analytics funnel while the webhook is still in flight.
+      // Purely cosmetic — nothing is granted from these, and a user who
+      // edits them changes what a toast says and nothing else.
+      successUrl: absoluteUrl(
+        `/account?checkout=success&plan=${plan.id}&seats=${seats}`,
+      ),
       // Seat count has to reach Polar here. It used to live only in
       // metadata, so the subscription was created with Polar's default
       // quantity and the webhook — which reads `data.quantity` — provisioned
       // one seat no matter how many were bought and paid for.
       ...(plan.perSeat ? { seats } : {}),
       ...(discountId ? { discountId } : {}),
+      ...(presentmentCurrency ? { currency: presentmentCurrency } : {}),
       // A regional price is already a large discount; stacking a public
       // coupon on top of it is not intended.
       allowDiscountCodes: !discountId,
@@ -102,11 +120,36 @@ export async function POST(request: Request) {
         interval: plan.interval,
         seats: String(seats),
         region,
+        presentmentCurrency: presentmentCurrency ?? 'usd',
       },
     })
+  }
 
+  try {
+    const checkout = await create(currency)
     return NextResponse.json({ url: checkout.url })
   } catch (err) {
+    // A presentment currency the Polar organization has not enabled is
+    // rejected at creation. Retry in the product's own currency rather than
+    // failing the sale: a dollar checkout is a worse experience for an
+    // Indian buyer, but it is one they can complete.
+    if (currency) {
+      console.error(
+        `[billing/checkout] checkout in ${currency} failed, retrying in USD:`,
+        err,
+      )
+      try {
+        const checkout = await create(null)
+        return NextResponse.json({ url: checkout.url })
+      } catch (retryErr) {
+        console.error('[billing/checkout] USD retry failed:', retryErr)
+        return NextResponse.json(
+          { error: 'Could not start checkout. Please try again.' },
+          { status: 502 },
+        )
+      }
+    }
+
     console.error('[billing/checkout] Polar checkout creation failed:', err)
     return NextResponse.json(
       { error: 'Could not start checkout. Please try again.' },

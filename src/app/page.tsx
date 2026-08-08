@@ -36,6 +36,7 @@ import { useAuth } from '@/components/auth-provider'
 import { LandingShowcase } from '@/components/landing-showcase'
 import { Reveal } from '@/components/reveal'
 import { StatsBand } from '@/components/landing/stats-band'
+import { LadderBand } from '@/components/landing/ladder-band'
 import { FaqAccordion } from '@/components/landing/faq-accordion'
 import { LogoMarquee } from '@/components/landing/logo-marquee'
 import { BentoGrid } from '@/components/landing/bento-grid'
@@ -154,6 +155,9 @@ export default function LandingPage() {
 
       {/* Stats band */}
       <StatsBand />
+
+      {/* The four tiers — effects up to templates */}
+      <LadderBand />
 
       {/* Logo marquee — works with every stack */}
       <LogoMarquee />
