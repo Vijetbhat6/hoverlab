@@ -56,7 +56,14 @@
   --secondary: oklch(0.96 0.01 90);
   --secondary-foreground: oklch(0.2 0.01 250);
   --muted: oklch(0.96 0.005 90);
-  --muted-foreground: oklch(0.5 0.01 250);
+  /*
+    Was 0.5, which is 4.37:1 on this background — under the 4.5:1
+    WCAG AA floor for normal text, on the colour that carries most
+    of the secondary copy on the site. 0.47 is 4.87:1. Verified with
+    the contrast checker at /tools/contrast, which is the tool this
+    site ships and was failing.
+  */
+  --muted-foreground: oklch(0.47 0.01 250);
   --accent: oklch(0.94 0.02 160);
   --accent-foreground: oklch(0.2 0.01 250);
   --destructive: oklch(0.577 0.245 27.325);
@@ -90,7 +97,15 @@
   --secondary: oklch(0.22 0.012 250);
   --secondary-foreground: oklch(0.97 0.005 90);
   --muted: oklch(0.22 0.012 250);
-  --muted-foreground: oklch(0.65 0.01 250);
+  /*
+    Was 0.65 — 5.95:1 against a flat background, which reads as
+    passing until you remember that the landing, library and account
+    heroes all sit on blurred colour blobs that lift the local
+    background by a good margin. 0.70 is 6.97:1 flat and keeps a
+    usable cushion once the blobs are under it, while staying
+    clearly secondary to --foreground at 0.97.
+  */
+  --muted-foreground: oklch(0.7 0.01 250);
   --accent: oklch(0.26 0.02 160);
   --accent-foreground: oklch(0.97 0.005 90);
   --destructive: oklch(0.704 0.191 22.216);
@@ -118,6 +133,109 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+/* ============================================================
+   TYPE SCALE
+
+   Three heading sizes, and only three. Before this there were
+   eight: the landing page ran 5xl→6xl→7xl with a gradient, the
+   library and tools hubs ran 4xl→5xl→6xl with a gradient, the
+   other five hubs ran 4xl→5xl flat, the detail pages ran 3xl→4xl
+   extrabold, the category pages ran the same sizes at `bold`,
+   /account ran a flat 2xl and the playground ran xl→2xl. Every
+   one of those was a local decision that looked fine on its own
+   page, which is exactly how a site ends up with no scale.
+
+   Sizes are clamp()ed rather than stepped at breakpoints, so a
+   heading grows smoothly instead of jumping two sizes at 640px.
+
+     .type-display — the landing hero. One per site.
+     .type-hub     — a catalog index: /browse, /library, /blocks…
+     .type-page    — an item: one effect, one block, one tool.
+   ============================================================ */
+
+@layer components {
+  .type-display,
+  .type-hub,
+  .type-page {
+    font-weight: 800;
+    text-wrap: balance;
+  }
+
+  .type-display {
+    font-size: clamp(2.75rem, 1.55rem + 4.2vw, 4.5rem);
+    line-height: 1.04;
+    letter-spacing: -0.032em;
+  }
+
+  .type-hub {
+    font-size: clamp(2.25rem, 1.65rem + 2.1vw, 3rem);
+    line-height: 1.1;
+    letter-spacing: -0.026em;
+  }
+
+  .type-page {
+    font-size: clamp(1.75rem, 1.4rem + 1.3vw, 2.25rem);
+    line-height: 1.16;
+    letter-spacing: -0.02em;
+  }
+
+  /*
+    Gradient headings, without the shear.
+
+    `background-clip: text` clips the paint to the glyph box, and a
+    heading set at line-height 1.04 has no room below the baseline —
+    so the descenders of "g", "p" and "y" came off flat. The old
+    landing headline got away with it ("Beautiful UI, ready to
+    copy." has a `y` on the second line, and it was clipped). The
+    fix is room to descend, plus a `to bottom right` ramp that never
+    reaches full transparency, so the tail of a long heading doesn't
+    fade out to nothing.
+  */
+  /*
+     The fade bottoms out at 88%, not 62%.
+
+     At 62% the second line of a two-line hero — "ready to copy." on the
+     landing page — rendered around 40% opacity against a near-black
+     background. It did not read as a gradient; it read as text that had
+     failed to load, on the largest and most important sentence on the site.
+     A gradient heading is a highlight, so the range it travels has to stay
+     inside "clearly legible" at both ends.
+
+     padding-bottom is what stops `background-clip: text` from cropping
+     descenders. `.type-display` sets line-height 1.04, which leaves no room
+     under the baseline, so the "y" in "copy" was being cut off mid-stroke.
+     0.14em was not enough for an 800-weight face at 4.5rem — the descender
+     runs to roughly 0.21em — so this clears it with a little margin.
+  */
+  .text-gradient-heading {
+    background-image: linear-gradient(
+      to bottom right,
+      var(--foreground) 45%,
+      color-mix(in oklab, var(--foreground) 88%, transparent)
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    padding-bottom: 0.24em;
+  }
+
+  /*
+    Long-form body copy.
+
+    `text-muted-foreground` is the right colour for a label, a
+    caption or a count. It is the wrong colour for the three-line
+    paragraph under a hero — at 4.4:1 in the light theme it did not
+    clear WCAG AA for normal text at all, and on the dark theme the
+    decorative blur behind the landing hero lifts the background far
+    enough to eat most of the remaining margin. `--muted-foreground`
+    itself is fixed below; this class is for the paragraphs that
+    should not have been muted in the first place.
+  */
+  .text-body {
+    color: color-mix(in oklab, var(--foreground) 84%, var(--background));
   }
 }
 

@@ -26,7 +26,7 @@ export function DocsTitle({
       <h1 className="mt-2 text-balance text-3xl font-extrabold tracking-tight sm:text-4xl">
         {title}
       </h1>
-      <div className="mt-4 text-pretty text-muted-foreground">{intro}</div>
+      <div className="mt-4 text-pretty text-body">{intro}</div>
     </header>
   )
 }

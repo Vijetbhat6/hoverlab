@@ -92,6 +92,45 @@ export const PATHS: GuidedPath[] = [
   },
 
   {
+    slug: 'waitlist',
+    title: 'Launch a waitlist page',
+    tagline: 'One screen, one field, live in an evening.',
+    description:
+      'The smallest thing worth shipping. A page that explains the idea and collects an email — no accounts, no database decisions, nothing you have to maintain until somebody actually signs up. Start here if the landing page path looks like more than you need today.',
+    duration: '~15 minutes',
+    level: 'Beginner',
+    steps: [
+      {
+        blockId: 'navbar-simple',
+        why: 'A logo and one link. At this stage the nav is there to make the page look like a real product, not to get anyone anywhere.',
+      },
+      {
+        blockId: 'hero-waitlist',
+        why: 'The pitch and the email field in the same view. Every other hero sends people somewhere else; this one is the whole conversion, so it is the only section that has to be right.',
+        alternatives: ['hero-centered'],
+      },
+      {
+        blockId: 'bento-features',
+        why: 'Three or four things it will do. Enough to make signing up feel like a decision rather than a shrug — and no more, because you have not built it yet.',
+        alternatives: ['persona-cards'],
+      },
+      {
+        blockId: 'faq-accordion',
+        why: 'When does it launch, what will it cost, what happens to my email. Three answers here prevent the three emails you would otherwise get.',
+      },
+      {
+        blockId: 'newsletter-signup',
+        why: 'The same ask again, at the bottom, for the people who read the whole page before deciding. Repeating the field costs you nothing and catches the most convinced readers.',
+      },
+      {
+        blockId: 'footer-minimal',
+        why: 'A closing line and a way to contact you. The mega footer is for sites with pages; you have one.',
+      },
+    ],
+    next: 'Point the form at a form service or a single API route. When the list is worth a real site, walk the landing page path — this page becomes its hero.',
+  },
+
+  {
     slug: 'auth-flow',
     title: 'Ship a complete auth flow',
     tagline: 'Every screen a real sign-in needs, including the ones people forget.',
@@ -127,6 +166,150 @@ export const PATHS: GuidedPath[] = [
       },
     ],
     next: 'Wire the forms to your provider. The blocks own their pending and error states; you supply the submit handler.',
+  },
+
+  {
+    slug: 'onboarding',
+    title: 'Onboard a new user',
+    tagline: 'The first ten minutes, from sign-up to first real action.',
+    description:
+      'Most products lose people between "account created" and "did something useful". This is the stretch in between: the questions you have to ask, the checklist that shows progress, and what the app looks like when it is still empty.',
+    duration: '~25 minutes',
+    level: 'Beginner',
+    steps: [
+      {
+        blockId: 'auth-signup-split',
+        why: 'Where onboarding actually starts. Ask for the minimum here — every extra field is someone deciding not to bother.',
+        alternatives: ['auth-login-card'],
+      },
+      {
+        blockId: 'setup-wizard',
+        why: 'The questions you genuinely need answered, one screen at a time. Split into steps because a single long form reads as work, and because a step someone abandons still leaves you the earlier answers.',
+        alternatives: ['multi-step-form'],
+      },
+      {
+        blockId: 'onboarding-checklist',
+        why: 'What is left, visible and crossable. This is the piece that converts a signup into a habit — people finish lists that show how close they are to done.',
+      },
+      {
+        blockId: 'empty-state-cta',
+        why: 'What the app looks like before they have made anything. Treat this as a screen worth designing, not a gap: it is the most-seen view a new account has, and a blank panel reads as broken.',
+      },
+      {
+        blockId: 'toast-stack',
+        why: 'Confirmation that each action worked. Silence after a click is how people end up doing the same thing twice.',
+      },
+      {
+        blockId: 'notification-inbox',
+        why: 'Where the nudges live once the checklist is gone. Optional on day one, and the reason day seven still has a reason to come back.',
+      },
+    ],
+    next: 'Store the checklist state per account so it survives a refresh, then hide the whole flow once every item is done.',
+  },
+
+  {
+    slug: 'states',
+    title: 'Handle the states nobody designs',
+    tagline: 'Loading, empty, error, missing — the four screens that decide whether it feels finished.',
+    description:
+      'Every tutorial builds the version where the data arrives. Real apps spend a surprising amount of time in the other four states, and skipping them is the single clearest difference between a side project and a product. Short path, disproportionate payoff.',
+    duration: '~15 minutes',
+    level: 'Beginner',
+    steps: [
+      {
+        blockId: 'skeleton-list',
+        why: 'What the screen shows while the data is in flight. Shaped like the content it is replacing, so nothing jumps when the real rows land.',
+      },
+      {
+        blockId: 'empty-state-cta',
+        why: 'Zero results, on purpose. The important part is the button — an empty state that only apologises leaves people stuck.',
+      },
+      {
+        blockId: 'error-state-retry',
+        why: 'The request failed. Say so in a sentence and give them the retry button, rather than leaving the skeleton spinning forever.',
+      },
+      {
+        blockId: 'not-found-404',
+        why: 'A URL that no longer resolves — a deleted record, an old link in someone’s email. Every app gets these; most send you to a default page with no way back.',
+      },
+      {
+        blockId: 'toast-stack',
+        why: 'The small confirmations and failures that do not deserve a whole screen. Stacked, so three fast actions do not fight over the same corner.',
+      },
+      {
+        blockId: 'confirm-dialog',
+        why: 'The state before a destructive one. Cheaper to add now than the support conversation about the thing somebody deleted.',
+      },
+    ],
+    next: 'Wire each one to a real request. If you only take two from this list, take the empty state and the error state.',
+  },
+
+  {
+    slug: 'settings',
+    title: 'Build a settings area',
+    tagline: 'Five screens, in the order people go looking for them.',
+    description:
+      'Settings is where a product accumulates screens without anyone deciding to build them. These five cover almost every real account area, and the layout comes first so the rest just drop in.',
+    duration: '~20 minutes',
+    level: 'Beginner',
+    steps: [
+      {
+        blockId: 'settings-nav-layout',
+        why: 'The sidebar and content split that every following step sits inside. Build it first and each new settings screen is a panel rather than a page.',
+      },
+      {
+        blockId: 'settings-profile-form',
+        why: 'Name, avatar, email. The screen people came for, so it is the one the nav lands on by default.',
+      },
+      {
+        blockId: 'settings-team-members',
+        why: 'Invites, roles and removal. The moment a product goes from one user to an account, this is the screen that has to exist.',
+      },
+      {
+        blockId: 'settings-api-keys',
+        why: 'Create, copy once, revoke. Note that the key is shown a single time — that is the behaviour, not an oversight.',
+      },
+      {
+        blockId: 'settings-danger-zone',
+        why: 'Delete the account, leave the team, close the workspace. Last, visually separated, and behind a confirm — which is exactly why it is a section of its own rather than a red button next to Save.',
+        alternatives: ['confirm-dialog'],
+      },
+    ],
+    next: 'Add billing as a sixth panel in the same layout — the billing path picks up from here.',
+  },
+
+  {
+    slug: 'product-updates',
+    title: 'Publish what you shipped',
+    tagline: 'A changelog, a roadmap, and a way to hear about both.',
+    description:
+      'The pages that make a small product look alive. A changelog is the cheapest credibility on a marketing site — it is evidence, not a claim — and it costs one block plus the discipline to write two lines per release.',
+    duration: '~15 minutes',
+    level: 'Beginner',
+    steps: [
+      {
+        blockId: 'changelog-timeline',
+        why: 'Dated entries, newest first. Start it the day you launch: a changelog with three months of history is worth far more than one begun when you finally have something big to announce.',
+      },
+      {
+        blockId: 'roadmap-columns',
+        why: 'Shipped, in progress, considering. Answers "is this abandoned" and "will you build my thing" without you replying to either email.',
+      },
+      {
+        blockId: 'community-band',
+        why: 'Where to argue with the roadmap. A public plan without somewhere to respond to it is just a longer press release.',
+      },
+      {
+        blockId: 'newsletter-signup',
+        why: 'The people who liked an entry enough to want the next one. Put it at the bottom of the changelog, where interest is already proven.',
+      },
+      {
+        blockId: 'footer-mega',
+        why: 'Links these pages from everywhere else. A changelog nothing points at gets read by you and no one else.',
+        alternatives: ['footer-minimal'],
+      },
+    ],
+    next: 'Keep the entries in markdown or a CMS and map them onto the timeline — the block takes a list, so the source is your choice.',
   },
 
   {
@@ -173,6 +356,42 @@ export const PATHS: GuidedPath[] = [
       },
     ],
     next: 'Take the Admin Panel template if you want the routing and layout already wired together.',
+  },
+
+  {
+    slug: 'billing',
+    title: 'Add billing and usage',
+    tagline: 'From the price on the marketing page to the invoice in the account.',
+    description:
+      'Charging money is four screens, and only the first one usually gets built. This is the rest — what plan am I on, how much have I used, where are my receipts, and how do I leave.',
+    duration: '~25 minutes',
+    level: 'Intermediate',
+    steps: [
+      {
+        blockId: 'pricing-tiers',
+        why: 'The public page, because it sets every number the account screens have to agree with. Decide the plans here once rather than in four places.',
+        alternatives: ['comparison-table'],
+      },
+      {
+        blockId: 'billing-plan-summary',
+        why: 'Current plan, renewal date, the upgrade button. The first thing anyone opens billing to check, so it goes at the top with no scrolling.',
+      },
+      {
+        blockId: 'usage-meter-panel',
+        why: 'How much of the plan is spent. This is what makes an upgrade feel like the customer’s idea instead of yours — and what stops the overage invoice being a surprise.',
+        alternatives: ['metric-sparkline-cards'],
+      },
+      {
+        blockId: 'invoice-history-table',
+        why: 'Dated rows with a download on each. Someone’s finance team will ask for a PDF from four months ago, and this is the difference between a link and a support ticket.',
+        alternatives: ['data-table-pagination'],
+      },
+      {
+        blockId: 'settings-danger-zone',
+        why: 'Cancelling, in the open. Hiding it does not keep anyone; it just means they cancel through their bank and dispute the last charge on the way out.',
+      },
+    ],
+    next: 'Wire the plan and usage numbers to your payment provider’s API. The blocks take plain values, so the shape of that data is yours to decide.',
   },
 
   {

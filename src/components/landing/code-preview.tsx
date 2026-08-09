@@ -136,7 +136,7 @@ export function CodePreviewWindow() {
             <h2 className="text-balance text-3xl font-bold tracking-tight sm:text-4xl">
               Five seconds from preview to paste
             </h2>
-            <p className="mt-4 text-pretty text-muted-foreground sm:text-lg">
+            <p className="mt-4 text-pretty text-body sm:text-lg">
               Hover any effect, click <span className="font-semibold text-foreground">Copy</span>,
               and paste straight into your editor. The HTML and CSS arrive
               together, formatted and ready to ship. No build step, no

@@ -17,7 +17,7 @@ import { Square, Copy, Check, Link2, Link2Off } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { Slider } from '@/components/ui/slider'
+import { SliderField } from '@/components/control-field'
 import { CopyCssCard } from '@/components/designer-tools/copy-css-card'
 import { ToolLayout } from '@/components/designer-tools/tool-layout'
 import { cn } from '@/lib/utils'
@@ -267,8 +267,9 @@ export default function BorderRadiusToolPage() {
               </div>
 
               {state.linked ? (
-                <SliderRow
+                <SliderField
                   label="All corners"
+                  description="Rounds every corner together. Unlink above to shape each one on its own."
                   value={state.tl}
                   min={0}
                   max={150}
@@ -278,8 +279,9 @@ export default function BorderRadiusToolPage() {
                 />
               ) : (
                 <div className="space-y-3">
-                  <SliderRow
+                  <SliderField
                     label="Top-left"
+                    description="Radius of the top-left corner only."
                     value={state.tl}
                     min={0}
                     max={150}
@@ -287,8 +289,9 @@ export default function BorderRadiusToolPage() {
                     display={`${state.tl}px`}
                     onChange={(v) => setCorner('tl', v)}
                   />
-                  <SliderRow
+                  <SliderField
                     label="Top-right"
+                    description="Radius of the top-right corner only."
                     value={state.tr}
                     min={0}
                     max={150}
@@ -296,8 +299,9 @@ export default function BorderRadiusToolPage() {
                     display={`${state.tr}px`}
                     onChange={(v) => setCorner('tr', v)}
                   />
-                  <SliderRow
+                  <SliderField
                     label="Bottom-right"
+                    description="Radius of the bottom-right corner only."
                     value={state.br}
                     min={0}
                     max={150}
@@ -305,8 +309,9 @@ export default function BorderRadiusToolPage() {
                     display={`${state.br}px`}
                     onChange={(v) => setCorner('br', v)}
                   />
-                  <SliderRow
+                  <SliderField
                     label="Bottom-left"
+                    description="Radius of the bottom-left corner only."
                     value={state.bl}
                     min={0}
                     max={150}
@@ -346,8 +351,9 @@ export default function BorderRadiusToolPage() {
           {state.mode === 'squircle' && (
             <div className="rounded-lg border border-border bg-card p-5">
               <Label className="mb-3 block text-sm font-medium">Squircle parameters</Label>
-              <SliderRow
+              <SliderField
                 label="Size"
+                description="Width and height of the squircle preview. The curvature is a ratio, so the shape holds as you resize it."
                 value={state.squircleSize}
                 min={80}
                 max={400}
@@ -356,8 +362,9 @@ export default function BorderRadiusToolPage() {
                 onChange={(v) => update({ squircleSize: v })}
               />
               <div className="mt-3">
-                <SliderRow
+                <SliderField
                   label="Curvature"
+                  description="How square the shape stays as it turns the corner. A circle bulges away from its box; a squircle hugs it, which is why icon grids use one."
                   value={state.squircleCurve}
                   min={0}
                   max={1}
@@ -394,8 +401,9 @@ export default function BorderRadiusToolPage() {
           {state.mode === 'fluid' && (
             <div className="rounded-lg border border-border bg-card p-5">
               <Label className="mb-3 block text-sm font-medium">Fluid range</Label>
-              <SliderRow
+              <SliderField
                 label="Min (mobile)"
+                description="The radius at the narrowest viewport. This is the floor — the shape never rounds less than this."
                 value={state.fluidMin}
                 min={0}
                 max={32}
@@ -404,8 +412,9 @@ export default function BorderRadiusToolPage() {
                 onChange={(v) => update({ fluidMin: v })}
               />
               <div className="mt-3">
-                <SliderRow
+                <SliderField
                   label="Max (desktop)"
+                  description="The radius it grows to on a wide screen, and the ceiling it stops at."
                   value={state.fluidMax}
                   min={8}
                   max={80}
@@ -424,8 +433,9 @@ export default function BorderRadiusToolPage() {
           {/* Common: preview size + color */}
           <div className="rounded-lg border border-border bg-card p-5">
             <Label className="mb-3 block text-sm font-medium">Preview</Label>
-            <SliderRow
+            <SliderField
               label="Size"
+              description="Size of the preview box. Radius reads differently at different scales — 16px is a lot on a chip and nothing on a hero card."
               value={state.previewSize}
               min={80}
               max={400}
@@ -454,34 +464,3 @@ export default function BorderRadiusToolPage() {
   )
 }
 
-/* ============================================================
- *  Slider row helper
- * ========================================================== */
-
-interface SliderRowProps {
-  label: string
-  value: number
-  min: number
-  max: number
-  step: number
-  display: string
-  onChange: (v: number) => void
-}
-
-function SliderRow({ label, value, min, max, step, display, onChange }: SliderRowProps) {
-  return (
-    <div>
-      <div className="mb-1.5 flex items-center justify-between">
-        <span className="text-xs text-muted-foreground">{label}</span>
-        <span className="font-mono text-xs tabular-nums">{display}</span>
-      </div>
-      <Slider
-        value={[value]}
-        min={min}
-        max={max}
-        step={step}
-        onValueChange={(arr) => onChange(arr[0])}
-      />
-    </div>
-  )
-}

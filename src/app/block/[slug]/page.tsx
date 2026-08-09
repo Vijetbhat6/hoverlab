@@ -109,10 +109,10 @@ export default async function BlockDetailPage({ params }: PageProps) {
           <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
             {GROUP_OF[block.category]} block
           </span>
-          <h1 className="mt-2 text-balance text-3xl font-extrabold tracking-tight sm:text-4xl">
+          <h1 className="type-page mt-2">
             {block.name}
           </h1>
-          <p className="mt-3 text-pretty text-muted-foreground">{block.description}</p>
+          <p className="mt-3 text-pretty text-body">{block.description}</p>
 
           <div className="mt-5 flex flex-wrap items-center gap-2">
             <FavoriteArtifactButton

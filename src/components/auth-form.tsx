@@ -9,7 +9,8 @@
  *
  * On success:
  *  - Calls the optional onAuthenticated callback (used to trigger data sync).
- *  - Reads the `redirect` query param and navigates there, defaulting to `/`.
+ *  - Reads the `redirect` query param and navigates there, defaulting to
+ *    `/library`.
  *
  * Errors from the API are surfaced inline via the Alert component.
  */
@@ -158,12 +159,12 @@ export function AuthForm({ mode }: { mode: Mode }) {
           <div className="space-y-2">
             <div className="flex items-center justify-between">
               <Label htmlFor="auth-password">Password</Label>
-              {isSignup ? (
-                <span className="text-xs text-muted-foreground">
-                  Min 8 characters
-                </span>
-              ) : (
-                <span className="flex items-center gap-3">
+              <span className="flex items-center gap-3">
+                {isSignup ? (
+                  <span className="text-xs text-muted-foreground">
+                    Min 8 characters
+                  </span>
+                ) : (
                   <button
                     type="button"
                     className="text-xs text-muted-foreground underline-offset-4 hover:text-foreground hover:underline disabled:opacity-60"
@@ -173,20 +174,27 @@ export function AuthForm({ mode }: { mode: Mode }) {
                   >
                     {resetting ? 'Sending…' : 'Forgot password?'}
                   </button>
-                  <button
-                    type="button"
-                    className="text-xs text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
-                    onClick={() => setShowPw((v) => !v)}
-                    tabIndex={-1}
-                  >
-                    {showPw ? 'Hide' : 'Show'}
-                  </button>
-                </span>
-              )}
+                )}
+                {/*
+                  Show/Hide belongs on both forms. Sign-up used to force
+                  `type="text"` unconditionally and render no toggle, so a new
+                  account's password sat in plain sight on screen with no way
+                  to mask it — the one place shoulder-surfing costs the most,
+                  since it is the password being chosen.
+                */}
+                <button
+                  type="button"
+                  className="text-xs text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
+                  onClick={() => setShowPw((v) => !v)}
+                  tabIndex={-1}
+                >
+                  {showPw ? 'Hide' : 'Show'}
+                </button>
+              </span>
             </div>
             <Input
               id="auth-password"
-              type={showPw || isSignup ? 'text' : 'password'}
+              type={showPw ? 'text' : 'password'}
               autoComplete={isSignup ? 'new-password' : 'current-password'}
               placeholder="••••••••"
               value={password}

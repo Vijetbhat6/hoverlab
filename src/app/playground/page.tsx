@@ -1,18 +1,13 @@
 'use client'
 
 import * as React from 'react'
-import Link from 'next/link'
 import {
-  ArrowLeft,
   Sparkles,
   Code2,
   Wand2,
   RotateCcw,
   Copy,
   Check,
-  Keyboard,
-  Package,
-  Scale,
 } from 'lucide-react'
 import { toast } from 'sonner'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
@@ -22,16 +17,7 @@ import { Button } from '@/components/ui/button'
 import { Slider } from '@/components/ui/slider'
 import { Textarea } from '@/components/ui/textarea'
 import { CodeBlock } from '@/components/code-block'
-import { BundleDrawer } from '@/components/bundle-drawer'
-import { CompareDrawer } from '@/components/compare-drawer'
-import { CopyHistoryDropdown } from '@/components/copy-history-dropdown'
-import { ThemeToggle } from '@/components/theme-toggle'
-import { ReducedMotionToggle } from '@/components/reduced-motion-toggle'
-import { UserMenu } from '@/components/user-menu'
-import { ShortcutsHelpButton, useShortcutsHelp } from '@/components/shortcuts-help'
-import { CommandPalette } from '@/components/command-palette'
-import { useBundle } from '@/hooks/use-bundle'
-import { useCompare } from '@/hooks/use-compare'
+import { SiteHeader } from '@/components/site-header'
 import {
   customizeCss,
   DEFAULT_CUSTOMIZATION,
@@ -104,12 +90,6 @@ function saveState(state: PersistedState) {
 }
 
 export default function PlaygroundPage() {
-  const { open: openShortcuts } = useShortcutsHelp()
-  const [bundleOpen, setBundleOpen] = React.useState(false)
-  const { count: bundleCount } = useBundle()
-  const [compareOpen, setCompareOpen] = React.useState(false)
-  const { count: compareCount } = useCompare()
-
   // Initialize from localStorage (if the user has been here before),
   // else fall back to the sample.
   const [html, setHtml] = React.useState<string>(SAMPLE_HTML)
@@ -128,48 +108,6 @@ export default function PlaygroundPage() {
     return () => window.clearTimeout(t)
   }, [html, css])
 
-  // Global keyboard shortcuts on the playground page:
-  //   b  → toggle the bundle drawer (so users can access their bundle
-  //        without leaving the playground)
-  //   ?  → shortcuts help dialog (handled by ShortcutsHelpButton)
-  // We ignore keypresses while typing in any input/textarea (so users
-  // can type 'b' inside the HTML/CSS editors without triggering the
-  // shortcut), and while a meta/ctrl/alt modifier is held.
-  React.useEffect(() => {
-    function isTypingTarget(t: EventTarget | null): boolean {
-      if (!(t instanceof HTMLElement)) return false
-      const tag = t.tagName
-      return tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || t.isContentEditable
-    }
-    function onKey(e: KeyboardEvent) {
-      if (e.metaKey || e.ctrlKey || e.altKey) return
-      if (isTypingTarget(e.target)) return
-      if (e.key.toLowerCase() === 'b') {
-        e.preventDefault()
-        setBundleOpen((v) => !v)
-      } else if (e.key.toLowerCase() === 'v') {
-        e.preventDefault()
-        // Toggle compare drawer (v for "versus").
-        setCompareOpen((v) => !v)
-      }
-    }
-    // Listen for events from the command palette's action items so the
-    // "Open bundle" / "Open compare" actions work on this page too.
-    function onOpenBundle() {
-      setBundleOpen(true)
-    }
-    function onOpenCompare() {
-      setCompareOpen(true)
-    }
-    window.addEventListener('keydown', onKey)
-    window.addEventListener('hoverlab:open-bundle', onOpenBundle)
-    window.addEventListener('hoverlab:open-compare', onOpenCompare)
-    return () => {
-      window.removeEventListener('keydown', onKey)
-      window.removeEventListener('hoverlab:open-bundle', onOpenBundle)
-      window.removeEventListener('hoverlab:open-compare', onOpenCompare)
-    }
-  }, [])
 
   const [opts, setOpts] = React.useState<CustomizationOptions>(DEFAULT_CUSTOMIZATION)
   const customizedCss = React.useMemo(
@@ -209,76 +147,7 @@ export default function PlaygroundPage() {
 
   return (
     <div className="relative flex min-h-screen flex-col">
-      {/* Header (mirrors home page) */}
-      <header className="sticky top-0 z-40 border-b border-border/40 bg-background/70 backdrop-blur-xl">
-        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-2.5">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-emerald-600 text-white shadow-lg shadow-primary/30">
-              <Wand2 className="h-5 w-5" />
-            </div>
-            <div className="flex flex-col leading-tight">
-              <span className="text-base font-bold tracking-tight">Hoverlab Playground</span>
-              <span className="text-[11px] text-muted-foreground">
-                Apply hue / saturation / size / speed to any CSS
-              </span>
-            </div>
-          </div>
-          <div className="flex items-center gap-2">
-            <Button
-              variant="ghost"
-              size="icon"
-              className="h-9 w-9"
-              onClick={openShortcuts}
-              aria-label="Keyboard shortcuts"
-              title="Keyboard shortcuts (?)"
-            >
-              <Keyboard className="h-4 w-4" />
-            </Button>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="relative h-9 w-9"
-              onClick={() => setBundleOpen(true)}
-              aria-label={`Open bundle (${bundleCount} item${bundleCount === 1 ? '' : 's'})`}
-              title="Open bundle (b)"
-            >
-              <Package className="h-4 w-4" />
-              {bundleCount > 0 ? (
-                <Badge className="absolute -right-1 -top-1 h-4 min-w-4 justify-center rounded-full px-1 text-[9px] font-semibold">
-                  {bundleCount}
-                </Badge>
-              ) : null}
-            </Button>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="relative h-9 w-9"
-              onClick={() => setCompareOpen(true)}
-              aria-label={`Open compare (${compareCount} effect${compareCount === 1 ? '' : 's'})`}
-              title="Open compare (v)"
-            >
-              <Scale className="h-4 w-4" />
-              {compareCount > 0 ? (
-                <Badge
-                  variant="secondary"
-                  className="absolute -right-1 -top-1 h-4 min-w-4 justify-center rounded-full bg-primary px-1 text-[9px] font-semibold text-primary-foreground"
-                >
-                  {compareCount}
-                </Badge>
-              ) : null}
-            </Button>
-            <CopyHistoryDropdown />
-            <Button asChild variant="ghost" size="sm" className="gap-1.5">
-              <Link href="/library">
-                <ArrowLeft className="h-4 w-4" /> Back to library
-              </Link>
-            </Button>
-            <UserMenu />
-            <ThemeToggle />
-            <ReducedMotionToggle />
-          </div>
-        </div>
-      </header>
+      <SiteHeader />
 
       <main className="mx-auto w-full max-w-7xl flex-1 px-4 pb-16 pt-6 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_320px]">
@@ -288,7 +157,7 @@ export default function PlaygroundPage() {
               <CardHeader className="gap-2 pb-3">
                 <div className="flex flex-wrap items-start justify-between gap-3">
                   <div>
-                    <h1 className="text-xl font-bold tracking-tight sm:text-2xl">
+                    <h1 className="type-page">
                       Custom CSS playground
                     </h1>
                     <p className="mt-1 max-w-2xl text-sm text-muted-foreground">
@@ -549,12 +418,7 @@ export default function PlaygroundPage() {
         </div>
       </main>
 
-      <ShortcutsHelpButton />
-      <BundleDrawer open={bundleOpen} onOpenChange={setBundleOpen} />
-      <CompareDrawer open={compareOpen} onOpenChange={setCompareOpen} />
-
-      {/* Cmd+K command palette */}
-      <CommandPalette />
+      {/* Drawers, shortcuts dialog and command palette: <SiteHeader />. */}
     </div>
   )
 }

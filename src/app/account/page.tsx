@@ -5,17 +5,18 @@
  *  - Shows the user's email + name (if logged in).
  *  - Plan and upgrade options, and the landing spot for Polar's
  *    post-checkout redirect (see <UpgradePanel>).
- *  - "Sign out" button.
+ *  - "Sign out" button, which returns to the landing page.
  *  - If not logged in, prompts to sign in / sign up.
  */
 
 import * as React from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { Loader2, LogOut, Wand2, Heart, Package } from 'lucide-react'
+import { Loader2, LogOut, Heart, Package } from 'lucide-react'
 import { toast } from 'sonner'
 
 import { useAuth } from '@/components/auth-provider'
+import { SiteHeader } from '@/components/site-header'
 import { useFavorites } from '@/hooks/use-favorites'
 import { useBundle } from '@/hooks/use-bundle'
 import { UpgradePanel } from '@/components/billing/upgrade-panel'
@@ -34,47 +35,71 @@ export default function AccountPage() {
     try {
       await logout()
       toast.success('Signed out.')
-      router.replace('/library')
+      // Back to the landing page. Staying here would just render the
+      // "you're not signed in" card, and /account is the one prefix
+      // proxy.ts still gates, so the redirect would fire anyway.
+      router.replace('/')
+      router.refresh()
     } finally {
       setSigningOut(false)
     }
   }
 
+  /*
+   * Both early returns carry the header too.
+   *
+   * They used to return bare — so /account rendered with no navigation at
+   * all while auth was resolving, and, more to the point, the signed-out
+   * state was a permanently headerless page: a card with three links and no
+   * way to reach the catalog those links are about. "One header everywhere"
+   * has to include the states a page spends most of its time in for a
+   * signed-out visitor, not just the happy path.
+   */
   if (loading) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-background">
-        <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
-      </div>
+      <>
+        <SiteHeader />
+        <div className="flex min-h-[60vh] items-center justify-center bg-background">
+          <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
+          <span className="sr-only">Loading your account…</span>
+        </div>
+      </>
     )
   }
 
   if (!user) {
     return (
-      <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-background px-4">
-        <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-          <div className="absolute -top-32 left-1/4 h-72 w-72 rounded-full bg-primary/20 blur-3xl" />
-          <div className="absolute -top-20 right-1/4 h-72 w-72 rounded-full bg-rose-500/20 blur-3xl" />
+      <>
+        <SiteHeader />
+        {/* No `overflow-hidden` on this wrapper — it would make it the scroll
+            container for the sticky header above. The blobs are clipped by
+            their own wrapper, which already has it. */}
+        <div className="relative flex min-h-[70vh] items-center justify-center bg-background px-4">
+          <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+            <div className="absolute -top-32 left-1/4 h-72 w-72 rounded-full bg-primary/20 blur-3xl" />
+            <div className="absolute -top-20 right-1/4 h-72 w-72 rounded-full bg-rose-500/20 blur-3xl" />
+          </div>
+          <Card className="w-full max-w-md border-border/60 bg-background/80 backdrop-blur-xl">
+            <CardHeader>
+              <CardTitle>You&apos;re not signed in</CardTitle>
+              <CardDescription>
+                Sign in to keep your favorites and bundle safe across devices and sessions.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="flex flex-col gap-2">
+              <Button asChild>
+                <Link href="/login">Sign in</Link>
+              </Button>
+              <Button asChild variant="outline">
+                <Link href="/signup">Create an account</Link>
+              </Button>
+              <Button asChild variant="ghost">
+                <Link href="/browse">Browse without an account</Link>
+              </Button>
+            </CardContent>
+          </Card>
         </div>
-        <Card className="w-full max-w-md border-border/60 bg-background/80 backdrop-blur-xl">
-          <CardHeader>
-            <CardTitle>You&apos;re not signed in</CardTitle>
-            <CardDescription>
-              Sign in to keep your favorites and bundle safe across devices and sessions.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="flex flex-col gap-2">
-            <Button asChild>
-              <Link href="/login">Sign in</Link>
-            </Button>
-            <Button asChild variant="outline">
-              <Link href="/signup">Create an account</Link>
-            </Button>
-            <Button asChild variant="ghost">
-              <Link href="/library">Browse without an account</Link>
-            </Button>
-          </CardContent>
-        </Card>
-      </div>
+      </>
     )
   }
 
@@ -87,21 +112,7 @@ export default function AccountPage() {
         <div className="absolute -top-20 right-1/4 h-72 w-72 rounded-full bg-rose-500/20 blur-3xl" />
       </div>
 
-      <header className="sticky top-0 z-40 border-b border-border/40 bg-background/70 backdrop-blur-xl">
-        {/* Widened from 3xl to fit the three pricing tiers side by side, the
-            way they sit on the landing page. */}
-        <div className="mx-auto flex h-16 max-w-5xl items-center justify-between gap-4 px-4 sm:px-6">
-          <Link href="/library" className="flex items-center gap-2.5">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-emerald-600 text-white shadow-lg shadow-primary/30">
-              <Wand2 className="h-5 w-5" />
-            </div>
-            <span className="text-base font-bold tracking-tight">Hoverlab</span>
-          </Link>
-          <Button asChild variant="ghost" size="sm">
-            <Link href="/library">Back to library</Link>
-          </Button>
-        </div>
-      </header>
+      <SiteHeader />
 
       <main className="mx-auto max-w-5xl px-4 pb-16 pt-12 sm:px-6">
         <div className="flex items-center gap-4">
@@ -109,7 +120,7 @@ export default function AccountPage() {
             {initial}
           </div>
           <div>
-            <h1 className="text-2xl font-bold tracking-tight">
+            <h1 className="type-page">
               {user.name ?? 'Account'}
             </h1>
             <p className="text-sm text-muted-foreground">{user.email}</p>

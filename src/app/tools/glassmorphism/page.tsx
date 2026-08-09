@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 /**
  * Glassmorphism Generator.
@@ -15,8 +15,7 @@ import { Wine, Shuffle } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { Slider } from '@/components/ui/slider'
-import { Switch } from '@/components/ui/switch'
+import { SliderField, ToggleField } from '@/components/control-field'
 import { CopyCssCard } from '@/components/designer-tools/copy-css-card'
 import { ToolLayout } from '@/components/designer-tools/tool-layout'
 import { randomHex } from '@/lib/color-tools'
@@ -229,10 +228,11 @@ export default function GlassmorphismToolPage() {
         {/* Controls */}
         <div className="space-y-5">
           {/* Backdrop filter */}
-          <div className="rounded-lg border border-border bg-card p-5">
-            <Label className="mb-3 block text-sm font-medium">Backdrop filter</Label>
-            <SliderRow
+          <div className="space-y-4 rounded-lg border border-border bg-card p-5">
+            <Label className="block text-sm font-medium">Backdrop filter</Label>
+            <SliderField
               label="Blur"
+              description="How far the backdrop is smeared behind the card. This is the whole effect — at 0 the glass is only a tinted rectangle."
               value={state.blur}
               min={0}
               max={40}
@@ -240,28 +240,26 @@ export default function GlassmorphismToolPage() {
               display={`${state.blur}px`}
               onChange={(v) => update({ blur: v })}
             />
-            <div className="mt-3">
-              <SliderRow
-                label="Saturation"
-                value={state.saturation}
-                min={100}
-                max={300}
-                step={5}
-                display={`${state.saturation}%`}
-                onChange={(v) => update({ saturation: v })}
-              />
-            </div>
-            <div className="mt-3">
-              <SliderRow
-                label="Brightness"
-                value={state.brightness}
-                min={50}
-                max={150}
-                step={5}
-                display={`${state.brightness}%`}
-                onChange={(v) => update({ brightness: v })}
-              />
-            </div>
+            <SliderField
+              label="Saturation"
+              description="Pushes colour back into the blurred backdrop. Blurring averages colours toward grey, so convincing frosted glass usually sits above 100%."
+              value={state.saturation}
+              min={100}
+              max={300}
+              step={5}
+              display={`${state.saturation}%`}
+              onChange={(v) => update({ saturation: v })}
+            />
+            <SliderField
+              label="Brightness"
+              description="Lightens or darkens whatever shows through. Drop it when the glass sits on a pale background and the text on top starts losing contrast."
+              value={state.brightness}
+              min={50}
+              max={150}
+              step={5}
+              display={`${state.brightness}%`}
+              onChange={(v) => update({ brightness: v })}
+            />
           </div>
 
           {/* Background */}
@@ -280,8 +278,9 @@ export default function GlassmorphismToolPage() {
                 className="font-mono text-xs"
               />
             </div>
-            <SliderRow
-              label="Opacity"
+            <SliderField
+              label="Tint opacity"
+              description="How much of the glass colour sits over the blur. Past about 0.3 it stops reading as glass and starts reading as a solid panel."
               value={state.bgOpacity}
               min={0}
               max={1}
@@ -307,8 +306,9 @@ export default function GlassmorphismToolPage() {
                 className="font-mono text-xs"
               />
             </div>
-            <SliderRow
-              label="Width"
+            <SliderField
+              label="Border width"
+              description="A hairline edge is what separates the panel from the page. 1px is usually enough; thicker starts to look like a frame rather than an edge."
               value={state.borderWidth}
               min={0}
               max={4}
@@ -316,24 +316,24 @@ export default function GlassmorphismToolPage() {
               display={`${state.borderWidth}px`}
               onChange={(v) => update({ borderWidth: v })}
             />
-            <div className="mt-3">
-              <SliderRow
-                label="Opacity"
-                value={state.borderOpacity}
-                min={0}
-                max={1}
-                step={0.01}
-                display={state.borderOpacity.toFixed(2)}
-                onChange={(v) => update({ borderOpacity: v })}
-              />
-            </div>
+            <SliderField
+              label="Border opacity"
+              description="How visible that edge is. Real glass catches light unevenly, so a semi-transparent white border reads better than a solid one."
+              value={state.borderOpacity}
+              min={0}
+              max={1}
+              step={0.01}
+              display={state.borderOpacity.toFixed(2)}
+              onChange={(v) => update({ borderOpacity: v })}
+            />
           </div>
 
           {/* Shadow */}
           <div className="rounded-lg border border-border bg-card p-5">
             <Label className="mb-3 block text-sm font-medium">Shadow</Label>
-            <SliderRow
+            <SliderField
               label="Y offset"
+              description="How far the shadow drops below the card. This is what sets the apparent height of the panel above the page."
               value={state.shadowY}
               min={0}
               max={40}
@@ -341,42 +341,40 @@ export default function GlassmorphismToolPage() {
               display={`${state.shadowY}px`}
               onChange={(v) => update({ shadowY: v })}
             />
-            <div className="mt-3">
-              <SliderRow
-                label="Blur"
-                value={state.shadowBlur}
-                min={0}
-                max={80}
-                step={1}
-                display={`${state.shadowBlur}px`}
-                onChange={(v) => update({ shadowBlur: v })}
-              />
-            </div>
-            <div className="mt-3">
-              <SliderRow
-                label="Opacity"
-                value={state.shadowOpacity}
-                min={0}
-                max={0.6}
-                step={0.01}
-                display={state.shadowOpacity.toFixed(2)}
-                onChange={(v) => update({ shadowOpacity: v })}
-              />
-            </div>
-            <div className="mt-4 flex items-center justify-between">
-              <Label className="text-xs text-muted-foreground">Inner highlight (top edge)</Label>
-              <Switch
-                checked={state.innerHighlight}
-                onCheckedChange={(v) => update({ innerHighlight: v })}
-              />
-            </div>
+            <SliderField
+              label="Shadow blur"
+              description="Softness of the shadow edge. Keep it larger than the Y offset — a shadow tighter than its drop reads as a hard outline."
+              value={state.shadowBlur}
+              min={0}
+              max={80}
+              step={1}
+              display={`${state.shadowBlur}px`}
+              onChange={(v) => update({ shadowBlur: v })}
+            />
+            <SliderField
+              label="Shadow opacity"
+              description="Strength of the shadow. Glass sits close to the surface, so this wants to stay low — heavy shadows make it look like plastic."
+              value={state.shadowOpacity}
+              min={0}
+              max={0.6}
+              step={0.01}
+              display={state.shadowOpacity.toFixed(2)}
+              onChange={(v) => update({ shadowOpacity: v })}
+            />
+            <ToggleField
+              label="Inner highlight"
+              description="Adds a bright inset line along the top edge, the way light catches the lip of a real pane. It is the cheapest thing here and does the most."
+              checked={state.innerHighlight}
+              onChange={(v) => update({ innerHighlight: v })}
+            />
           </div>
 
           {/* Card dimensions */}
           <div className="rounded-lg border border-border bg-card p-5">
             <Label className="mb-3 block text-sm font-medium">Card</Label>
-            <SliderRow
-              label="Radius"
+            <SliderField
+              label="Corner radius"
+              description="Rounding on the panel itself. Larger radii read as softer and more physical; 0 gives you a sheet of glass cut square."
               value={state.cardRadius}
               min={0}
               max={40}
@@ -391,34 +389,3 @@ export default function GlassmorphismToolPage() {
   )
 }
 
-/* ============================================================
- *  Slider row helper
- * ========================================================== */
-
-interface SliderRowProps {
-  label: string
-  value: number
-  min: number
-  max: number
-  step: number
-  display: string
-  onChange: (v: number) => void
-}
-
-function SliderRow({ label, value, min, max, step, display, onChange }: SliderRowProps) {
-  return (
-    <div>
-      <div className="mb-1.5 flex items-center justify-between">
-        <span className="text-xs text-muted-foreground">{label}</span>
-        <span className="font-mono text-xs tabular-nums">{display}</span>
-      </div>
-      <Slider
-        value={[value]}
-        min={min}
-        max={max}
-        step={step}
-        onValueChange={(arr) => onChange(arr[0])}
-      />
-    </div>
-  )
-}

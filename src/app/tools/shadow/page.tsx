@@ -345,6 +345,22 @@ function LayerCard({ layer, index, total, onChange, onRemove, onMove }: LayerCar
         </div>
       </div>
 
+      {/*
+        One explainer for the set, rather than a line under each of the five
+        controls. They repeat per layer, and a stacked shadow has three or
+        four layers — the same four sentences printed sixteen times stops
+        being help and becomes wallpaper.
+      */}
+      <p className="mb-3 text-[11px] leading-snug text-muted-foreground">
+        <strong className="font-semibold text-foreground">X / Y</strong> move the
+        shadow — a light source above the element means Y positive, X near zero.{' '}
+        <strong className="font-semibold text-foreground">Blur</strong> softens the
+        edge, and wants to be larger than Y or the shadow reads as an outline.{' '}
+        <strong className="font-semibold text-foreground">Spread</strong> grows or
+        shrinks the shape before blurring; negative values pull it in so only a
+        sliver shows.
+      </p>
+
       <div className="grid grid-cols-2 gap-3">
         <NumberSlider
           label="X"

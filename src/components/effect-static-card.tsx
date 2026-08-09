@@ -2,6 +2,7 @@ import * as React from 'react'
 import Link from 'next/link'
 import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/utils'
+import { PEEK_CLASS } from '@/lib/hover-peek-css'
 import type { Effect } from '@/lib/effects'
 
 /**
@@ -20,16 +21,29 @@ import type { Effect } from '@/lib/effects'
  * fix it, which shows up as a hydration mismatch on every card.
  *
  * The caller is responsible for the CSS: emit one document-level <style>
- * holding every shown effect's `css`. Class names are globally unique per
- * effect (`fx-<slug>-<seq>`), so concatenating them cannot collide, and one
- * tag beats a <style> per card by a wide margin at 24 cards a page.
+ * holding every shown effect's `css`, plus `hoverPeekCssFor(...)` for the
+ * hover-to-play behaviour below. Class names are globally unique per effect
+ * (`fx-<slug>-<seq>`), so concatenating them cannot collide, and one tag
+ * beats a <style> per card by a wide margin at 24 cards a page.
+ *
+ * The card carries `PEEK_CLASS`, which is what lets the effect play its
+ * hover state when the pointer is anywhere on the tile rather than exactly
+ * on a 40px button in the middle of it. See `lib/hover-peek-css`.
  */
 export function EffectStaticCard({ effect }: { effect: Effect }) {
   return (
-    <div className="group relative flex flex-col overflow-hidden rounded-xl border border-border/60 bg-card/60 transition-all hover:border-primary/40 hover:shadow-lg">
+    <div
+      className={cn(
+        PEEK_CLASS,
+        'group relative flex flex-col overflow-hidden rounded-xl border border-border/60 bg-card/60 transition-all hover:border-primary/40 hover:shadow-lg',
+      )}
+    >
       <div
         className={cn(
-          'flex min-h-[180px] items-center justify-center overflow-hidden p-6',
+          // Grows on hover so the played effect has somewhere to go —
+          // several of these translate or scale on hover and were being
+          // clipped by a preview box sized for their resting state.
+          'flex min-h-[180px] items-center justify-center overflow-hidden p-6 transition-[min-height] duration-300 group-hover:min-h-[220px] group-focus-within:min-h-[220px]',
           effect.darkSurface ? 'bg-slate-950' : effect.previewClass ?? 'bg-muted/30',
         )}
         // The preview is decoration; the stretched link below is the real

@@ -185,7 +185,7 @@ export function FaqAccordion() {
           <h2 className="text-balance text-3xl font-bold tracking-tight sm:text-4xl">
             Questions, answered
           </h2>
-          <p className="mx-auto mt-3 max-w-xl text-pretty text-muted-foreground">
+          <p className="mx-auto mt-3 max-w-xl text-pretty text-body">
             Everything you might want to know before signing up. Still
             curious?{' '}
             <Link

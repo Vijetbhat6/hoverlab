@@ -120,7 +120,11 @@ Return the ranked JSON now.`
     const zai = await ZAI.create()
     const completion = await zai.chat.completions.create({
       messages: [
-        { role: 'assistant', content: systemPrompt },
+        // `system`, not `assistant`. Sent as `assistant` these instructions
+        // read as a turn the model already took rather than as its brief, so
+        // the "return ONLY JSON" contract below was advisory at best — which
+        // is what `parseIdsResponse` was left compensating for.
+        { role: 'system', content: systemPrompt },
         { role: 'user', content: userPrompt },
       ],
       thinking: { type: 'disabled' },

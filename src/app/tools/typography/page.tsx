@@ -14,7 +14,7 @@ import { Type, Copy, Check, RefreshCw } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { Slider } from '@/components/ui/slider'
+import { SliderField } from '@/components/control-field'
 import { CopyCssCard } from '@/components/designer-tools/copy-css-card'
 import { ToolLayout } from '@/components/designer-tools/tool-layout'
 import { cn } from '@/lib/utils'
@@ -275,8 +275,9 @@ p + p { margin-top: var(--spacing-paragraph); }`
           {/* Size + scale */}
           <div className="rounded-lg border border-border bg-card p-5">
             <Label className="mb-3 block text-sm font-medium">Size &amp; scale</Label>
-            <SliderRow
+            <SliderField
               label="Base size"
+              description="The size body text renders at. Every other size on the page is derived from this one by the scale ratio below."
               value={state.baseSize}
               min={12}
               max={22}
@@ -309,8 +310,9 @@ p + p { margin-top: var(--spacing-paragraph); }`
           {/* Heading controls */}
           <div className="rounded-lg border border-border bg-card p-5">
             <Label className="mb-3 block text-sm font-medium">Heading</Label>
-            <SliderRow
+            <SliderField
               label="Weight"
+              description="Stroke thickness for headings. Heavier reads as louder; going above 700 on a large display size usually looks worse, not stronger."
               value={state.headingWeight}
               min={300}
               max={800}
@@ -319,8 +321,9 @@ p + p { margin-top: var(--spacing-paragraph); }`
               onChange={(v) => setState((s) => ({ ...s, headingWeight: v }))}
             />
             <div className="mt-3">
-              <SliderRow
+              <SliderField
                 label="Line height"
+                description="Space between wrapped heading lines, as a multiple of the size. Headings are large, so they want less than body text — 1.1 to 1.2 rather than 1.5."
                 value={state.headingLineHeight}
                 min={0.9}
                 max={1.6}
@@ -330,8 +333,9 @@ p + p { margin-top: var(--spacing-paragraph); }`
               />
             </div>
             <div className="mt-3">
-              <SliderRow
+              <SliderField
                 label="Letter spacing"
+                description="Tightens or opens the gaps between letters. Large type looks loose at default tracking, which is why display headings take a small negative value."
                 value={state.headingLetterSpacing}
                 min={-0.08}
                 max={0.08}
@@ -345,8 +349,9 @@ p + p { margin-top: var(--spacing-paragraph); }`
           {/* Body controls */}
           <div className="rounded-lg border border-border bg-card p-5">
             <Label className="mb-3 block text-sm font-medium">Body</Label>
-            <SliderRow
+            <SliderField
               label="Weight"
+              description="Stroke thickness for body copy. 400 is normal; 300 gets fragile on low-density screens and in dark mode."
               value={state.bodyWeight}
               min={300}
               max={700}
@@ -355,8 +360,9 @@ p + p { margin-top: var(--spacing-paragraph); }`
               onChange={(v) => setState((s) => ({ ...s, bodyWeight: v }))}
             />
             <div className="mt-3">
-              <SliderRow
+              <SliderField
                 label="Line height"
+                description="Space between lines of body text, as a multiple of the size. This is the single biggest lever on how readable a paragraph is — 1.5 to 1.7 for long text."
                 value={state.bodyLineHeight}
                 min={1}
                 max={2.2}
@@ -366,8 +372,9 @@ p + p { margin-top: var(--spacing-paragraph); }`
               />
             </div>
             <div className="mt-3">
-              <SliderRow
+              <SliderField
                 label="Letter spacing"
+                description="Letter spacing for body copy. Usually leave it at 0; small text is the only body case that benefits from opening up."
                 value={state.bodyLetterSpacing}
                 min={-0.04}
                 max={0.08}
@@ -377,8 +384,9 @@ p + p { margin-top: var(--spacing-paragraph); }`
               />
             </div>
             <div className="mt-3">
-              <SliderRow
+              <SliderField
                 label="Paragraph spacing"
+                description="Gap between paragraphs, in ems. It needs to beat the line height clearly, or paragraph breaks stop registering as breaks."
                 value={state.paragraphSpacing}
                 min={0}
                 max={3}
@@ -495,34 +503,3 @@ p + p { margin-top: var(--spacing-paragraph); }`
   )
 }
 
-/* ============================================================
- *  Slider row helper
- * ========================================================== */
-
-interface SliderRowProps {
-  label: string
-  value: number
-  min: number
-  max: number
-  step: number
-  display: string
-  onChange: (v: number) => void
-}
-
-function SliderRow({ label, value, min, max, step, display, onChange }: SliderRowProps) {
-  return (
-    <div>
-      <div className="mb-1.5 flex items-center justify-between">
-        <span className="text-xs text-muted-foreground">{label}</span>
-        <span className="font-mono text-xs tabular-nums">{display}</span>
-      </div>
-      <Slider
-        value={[value]}
-        min={min}
-        max={max}
-        step={step}
-        onValueChange={(arr) => onChange(arr[0])}
-      />
-    </div>
-  )
-}

@@ -25,6 +25,8 @@ export interface TemplateRecord {
   tags: string[]
   deps: string[]
   routes: TemplateRoute[]
+  /** Thumbnail override when `routes[0]` is shared with another template. */
+  previewPageId?: string
   tier?: ArtifactTier
   featured?: boolean
 }
@@ -104,6 +106,10 @@ export const TEMPLATE_CATALOG: TemplateRecord[] = [
     tags: ['marketing', 'landing page', 'pricing', 'website', 'launch'],
     deps: ['lucide-react'],
     featured: true,
+    // Shares its landing screen with SaaS Starter, so the pricing page is
+    // what tells the two apart in a grid. See `previewPageId` in
+    // template-types.ts.
+    previewPageId: 'pricing-page',
     routes: [
       { path: '/', pageId: 'saas-landing-page', file: 'app/page.tsx', label: 'Landing' },
       { path: '/pricing', pageId: 'pricing-page', file: 'app/pricing/page.tsx', label: 'Pricing' },

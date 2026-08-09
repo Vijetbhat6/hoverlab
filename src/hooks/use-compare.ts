@@ -94,7 +94,18 @@ function writeCompare(next: CompareRef[]) {
 }
 
 export function useCompare() {
-  const [entries, setEntries] = React.useState<CompareRef[]>(() => readCompare())
+  /**
+   * Starts EMPTY rather than seeded from localStorage.
+   *
+   * Seeding here (`useState(() => readCompare())`) is a hydration bug, the
+   * same one use-copy-history.ts and use-recently-viewed.ts already avoid:
+   * the server has no localStorage so it renders "Compare", while the
+   * client's very first render already has the stored list and renders
+   * "Comparing". React sees two different trees and throws the server HTML
+   * away. Reading in the effect below means both sides agree on "empty",
+   * and the real list arrives on the commit after.
+   */
+  const [entries, setEntries] = React.useState<CompareRef[]>(() => [])
 
   // Mirror the latest entries in a ref so action callbacks can compute
   // the next list without reading stale state, and so we can call
@@ -109,6 +120,8 @@ export function useCompare() {
 
   React.useEffect(() => {
     const sync = () => setEntries(readCompare())
+    // Populate on mount — see the note on the initial state above.
+    sync()
     window.addEventListener('storage', sync)
     window.addEventListener('hoverlab:compare-changed', sync)
     return () => {
@@ -117,9 +130,20 @@ export function useCompare() {
     }
   }, [])
 
+  /**
+   * Reads `entries`, not `entriesRef` — the ref is written by an effect that
+   * runs *after* the render it belongs to, so a `has` that read it was one
+   * render stale for every change this instance did not make itself.
+   * Removing an artifact in the compare drawer left the card's button still
+   * saying "Comparing" until some unrelated re-render corrected it, because
+   * the event listener above re-rendered the card while its ref still held
+   * the old list. `add`/`remove`/`toggle` keep using the ref: they write it
+   * synchronously before calling setEntries, which is what makes rapid
+   * successive clicks correct.
+   */
   const has = React.useCallback(
-    (id: string) => entriesRef.current.some((e) => e.id === id),
-    [],
+    (id: string) => entries.some((e) => e.id === id),
+    [entries],
   )
 
   /**

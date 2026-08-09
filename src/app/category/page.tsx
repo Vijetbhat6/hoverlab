@@ -2,7 +2,6 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { CommandPalette } from '@/components/command-palette'
 import { EFFECTS } from '@/lib/effects'
 import { CATEGORIES, categorySlug, type EffectCategory, type Effect } from '@/lib/effect-types'
 import { CATEGORY_META } from '@/lib/category-meta'
@@ -55,7 +54,7 @@ export default function CategoryIndexPage() {
       </header>
 
       <section className="mx-auto w-full max-w-7xl px-4 pb-8 pt-10 sm:px-6 lg:px-8">
-        <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">Browse by category</h1>
+        <h1 className="type-hub">Browse by category</h1>
         <p className="mt-3 max-w-2xl text-muted-foreground">
           {EFFECTS.length.toLocaleString()} pure-CSS effects across {CATEGORIES.length} categories.
           Every one is copy-paste ready, needs no JavaScript, and is free to use.
@@ -107,8 +106,6 @@ export default function CategoryIndexPage() {
           ))}
         </div>
       </main>
-
-      <CommandPalette />
     </div>
   )
 }

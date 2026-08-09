@@ -20,7 +20,7 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover'
 import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 import { useCopyHistory, formatRelativeTime } from '@/hooks/use-copy-history'
 import { cn } from '@/lib/utils'
 import { refHref, refLevel } from '@/lib/artifact-history'
@@ -32,22 +32,36 @@ export function CopyHistoryDropdown() {
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild>
-        <Button
-          variant="ghost"
-          size="icon"
-          className="relative h-9 w-9"
-          aria-label={`Copy history (${count} item${count === 1 ? '' : 's'})`}
-          title="Recently copied effects"
-        >
-          <ClipboardList className="h-4 w-4" />
-          {count > 0 ? (
-            <Badge className="absolute -right-1 -top-1 h-4 min-w-4 justify-center rounded-full px-1 text-[9px] font-semibold">
-              {count}
-            </Badge>
-          ) : null}
-        </Button>
-      </PopoverTrigger>
+      {/* Matches the Compare and Bundle tray buttons beside it: the word
+          from `xl` up, a real tooltip below that. A clipboard glyph on its
+          own is not distinguishable from "paste" or "copy" — and this
+          button does neither, it lists what you already copied. */}
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <PopoverTrigger asChild>
+            <button
+              type="button"
+              aria-label={
+                count > 0
+                  ? `Copy history, ${count} item${count === 1 ? '' : 's'}`
+                  : 'Copy history, empty'
+              }
+              className="relative flex h-9 items-center gap-1.5 rounded-lg px-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            >
+              <ClipboardList aria-hidden className="h-4 w-4" />
+              <span className="hidden text-sm font-medium xl:inline">History</span>
+              {count > 0 ? (
+                <span className="flex h-4 min-w-4 items-center justify-center rounded-full bg-primary px-1 text-[10px] font-bold text-primary-foreground">
+                  {count}
+                </span>
+              ) : null}
+            </button>
+          </PopoverTrigger>
+        </TooltipTrigger>
+        <TooltipContent side="bottom">
+          Copy history — the last 5 things you copied
+        </TooltipContent>
+      </Tooltip>
       <PopoverContent
         align="end"
         sideOffset={8}

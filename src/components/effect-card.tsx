@@ -10,6 +10,8 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Slider } from '@/components/ui/slider'
 import { CodeBlock } from '@/components/code-block'
+import { IconAction } from '@/components/icon-action'
+import { hoverPeekCss, PEEK_CLASS } from '@/lib/hover-peek-css'
 import { useFavorites } from '@/hooks/use-favorites'
 import { useBundle } from '@/hooks/use-bundle'
 import { useCompare } from '@/hooks/use-compare'
@@ -60,6 +62,10 @@ export function EffectCard({ effect }: EffectCardProps) {
   const isCustomized = customizedCss !== effect.css
   const activePreset = matchingPreset(opts)
 
+  // Recomputed with the customized CSS rather than on every render: this
+  // parses the whole rule list, and 24 cards do it at once on a page change.
+  const peekCss = React.useMemo(() => hoverPeekCss(customizedCss), [customizedCss])
+
   // For the spotlight card: track cursor and set CSS vars.
   React.useEffect(() => {
     const root = previewRef.current
@@ -84,6 +90,7 @@ export function EffectCard({ effect }: EffectCardProps) {
   return (
     <Card
       className={cn(
+        PEEK_CLASS,
         'group relative flex flex-col overflow-hidden border-border/60 bg-card/80 backdrop-blur transition-all duration-300 hover:border-primary/40 hover:shadow-xl hover:shadow-primary/5',
         isFav && 'border-rose-400/60 ring-1 ring-rose-400/30',
         isCustomized && 'border-primary/50 ring-1 ring-primary/20',
@@ -96,13 +103,19 @@ export function EffectCard({ effect }: EffectCardProps) {
         unmounted with the card, so only the 24 visible cards have their
         CSS in the DOM at any time.
       */}
-      <style dangerouslySetInnerHTML={{ __html: customizedCss }} />
+      {/*
+        The effect's CSS, plus the rules that play its hover state when the
+        pointer is anywhere on the card. Derived from `customizedCss`, not
+        `effect.css`, so a card the user has retuned peeks with the tweak
+        applied rather than snapping back to the catalog default.
+      */}
+      <style dangerouslySetInnerHTML={{ __html: `${customizedCss}\n${peekCss}` }} />
       <CardHeader className="gap-1.5 pb-3">
-        {/* Top row: category badge (left) + 4 icon buttons (right).
-            4 fixed-size 28px buttons = 112px + gaps. On the narrowest
-            grid column (~280px at sm breakpoint) the badge still has
-            ~150px before truncating. The badge truncates if the
-            category name is unusually long. */}
+        {/* Top row: category badge (left) + four actions (right).
+            Each action is an <IconAction>, so each one states what it does
+            in a styled tooltip and to a screen reader — where before there
+            were four unlabelled circles and a `title` attribute that only
+            appears on a mouse, after a delay, if you happen to wait. */}
         <div className="flex items-center justify-between gap-2">
           <Badge
             variant="secondary"
@@ -111,16 +124,16 @@ export function EffectCard({ effect }: EffectCardProps) {
             {effect.category}
           </Badge>
           <div className="flex shrink-0 items-center gap-1.5">
-            <Link
+            <IconAction
               href={`/effect/${effect.id}`}
-              aria-label="Open detail page"
-              title="Open detail page"
-              className="inline-flex h-7 w-7 items-center justify-center rounded-full border border-border/60 bg-background/60 text-muted-foreground transition-all hover:border-primary/40 hover:text-primary"
-            >
-              <ExternalLink className="h-3.5 w-3.5" />
-            </Link>
-            <button
-              type="button"
+              label="Open the full page for this effect"
+              icon={<ExternalLink aria-hidden className="h-3.5 w-3.5" />}
+            />
+            <IconAction
+              label={inCompare ? 'Remove from compare' : 'Add to compare'}
+              icon={<Scale aria-hidden className="h-3.5 w-3.5" />}
+              pressed={inCompare}
+              disabled={compareFull && !inCompare}
               onClick={() => {
                 const result = toggleCompare({ id: effect.id, name: effect.name, category: effect.category })
                 if (result === 'added') {
@@ -131,58 +144,31 @@ export function EffectCard({ effect }: EffectCardProps) {
                   })
                 }
               }}
-              aria-pressed={inCompare}
-              aria-label={inCompare ? 'Remove from compare' : 'Add to compare'}
-              title={inCompare ? 'Remove from compare' : 'Add to compare'}
-              className={cn(
-                'inline-flex h-7 w-7 items-center justify-center rounded-full border transition-all',
-                inCompare
-                  ? 'border-primary/50 bg-primary/10 text-primary hover:bg-primary/20'
-                  : 'border-border/60 bg-background/60 text-muted-foreground hover:border-primary/40 hover:text-primary',
-                compareFull && !inCompare && 'opacity-40 cursor-not-allowed hover:border-border/60 hover:text-muted-foreground',
-              )}
-            >
-              <Scale className="h-3.5 w-3.5" />
-            </button>
-            <button
-              type="button"
+            />
+            <IconAction
+              label={inBundle ? 'Remove from bundle' : 'Add to bundle'}
+              icon={
+                inBundle ? (
+                  <Check aria-hidden className="h-3.5 w-3.5" />
+                ) : (
+                  <Package aria-hidden className="h-3.5 w-3.5" />
+                )
+              }
+              pressed={inBundle}
               onClick={() => toggleBundle({ id: effect.id, name: effect.name, category: effect.category }, opts)}
-              aria-pressed={inBundle}
-              aria-label={inBundle ? 'Remove from bundle' : 'Add to bundle'}
-              title={inBundle ? 'Remove from bundle' : 'Add to bundle'}
-              className={cn(
-                'inline-flex h-7 w-7 items-center justify-center rounded-full border transition-all',
-                inBundle
-                  ? 'border-primary/50 bg-primary/10 text-primary hover:bg-primary/20'
-                  : 'border-border/60 bg-background/60 text-muted-foreground hover:border-primary/40 hover:text-primary',
-              )}
-            >
-              {inBundle ? (
-                <Check className="h-3.5 w-3.5" />
-              ) : (
-                <Package className="h-3.5 w-3.5" />
-              )}
-            </button>
-            <button
-              type="button"
+            />
+            <IconAction
+              label={isFav ? 'Remove from favorites' : 'Save to favorites'}
+              tone="rose"
+              icon={
+                <Heart
+                  aria-hidden
+                  className={cn('h-3.5 w-3.5 transition-all', isFav && 'scale-110 fill-current')}
+                />
+              }
+              pressed={isFav}
               onClick={() => toggle(effect.id)}
-              aria-pressed={isFav}
-              aria-label={isFav ? 'Remove from favorites' : 'Add to favorites'}
-              title={isFav ? 'Remove from favorites' : 'Add to favorites'}
-              className={cn(
-                'inline-flex h-7 w-7 items-center justify-center rounded-full border transition-all',
-                isFav
-                  ? 'border-rose-400/50 bg-rose-500/10 text-rose-500 hover:bg-rose-500/20'
-                  : 'border-border/60 bg-background/60 text-muted-foreground hover:border-rose-400/40 hover:text-rose-500',
-              )}
-            >
-              <Heart
-                className={cn(
-                  'h-3.5 w-3.5 transition-all',
-                  isFav && 'scale-110 fill-current',
-                )}
-              />
-            </button>
+            />
           </div>
         </div>
         {/* Title + description: take full width below the badge/buttons row.
@@ -213,11 +199,13 @@ export function EffectCard({ effect }: EffectCardProps) {
       </CardHeader>
 
       <CardContent className="flex-1 pt-0">
-        {/* Always-visible live preview */}
+        {/* Always-visible live preview. Grows on hover, because several of
+            these translate or scale when played and a box sized for the
+            resting state clips them. */}
         <div
           ref={previewRef}
           className={cn(
-            'flex min-h-[180px] items-center justify-center overflow-hidden rounded-lg border border-border/50 p-4',
+            'flex min-h-[180px] items-center justify-center overflow-hidden rounded-lg border border-border/50 p-4 transition-[min-height] duration-300 group-hover:min-h-[224px] group-focus-within:min-h-[224px]',
             surfaceDark ? 'bg-slate-950' : effect.previewClass ?? 'bg-muted/30',
             isCustomized && 'ring-1 ring-primary/20',
           )}

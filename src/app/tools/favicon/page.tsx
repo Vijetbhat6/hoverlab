@@ -226,6 +226,11 @@ export default function FaviconToolPage() {
               step={1}
               className="mt-3"
             />
+            <p className="mt-2 text-xs text-muted-foreground">
+              Rounding on the icon, as a percentage of its size — so it holds
+              at every exported resolution. 50% gives you a circle; most
+              platforms mask the corners themselves anyway.
+            </p>
           </div>
 
           <label className="flex items-center gap-2 text-sm">

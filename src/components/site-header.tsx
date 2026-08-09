@@ -1,56 +1,151 @@
 'use client'
 
 /**
- * SiteHeader — the ladder nav that every catalog page shares.
+ * SiteHeader — the one header. Every surface mounts this and nothing else.
  *
- * Until this existed, the four tiers were only reachable from the landing
- * page's ladder band or from each other's "related" rails. That is fine for
- * someone who arrived at the front door and wrong for how these pages are
- * actually found: /block/pricing-tiers exists because someone searched
- * "react pricing section", and until now landing on it from a search result
- * left no way up to the other 4,000 things this site has.
+ * It used to be one of seven. The landing page, /library, /playground,
+ * /tools, each designer tool, /account and the catalog pages each carried
+ * their own sticky bar, and they disagreed about everything that matters:
+ * the landing page showed five ladder links, /library showed none at all,
+ * /playground offered "Back to library", and the catalog pages were the
+ * only ones that knew there were four rungs. Someone who landed on
+ * /library — the page most of the marketing points at — could not see that
+ * /blocks, /pages or /templates existed. Five headers is not five designs;
+ * it is one design that nobody finished.
  *
- * Deliberately not in the root layout. Six routes — the landing page,
- * /library, /playground, /tools, /account and the designer-tool layout —
- * already carry their own sticky header with surface-specific controls
- * (filter chips, the bundle tray, ⌘K), and mounting this above those would
- * give them two bars. It goes on the catalog surfaces that had none, which
- * is the same set as "pages a crawler can land on cold".
+ * So this is now the whole navigational spine:
  *
- * Client-side only for `usePathname`, which drives the active underline.
- * Everything else here is static markup.
+ *   brand · ladder nav · [page actions] · search · compare · bundle ·
+ *   copy history · preferences · account
+ *
+ * Everything that used to be a bare icon carries a word. Compare, Bundle
+ * and Copy history show their label outright from `xl` and a real tooltip
+ * below that; the preference toggles that were three undecodable icons
+ * (sun, lightning bolt, keyboard) are one labelled menu.
+ *
+ * It also owns what those seven headers each kept a copy of: the bundle and
+ * compare drawers, the command palette, the shortcuts dialog, and the `b` /
+ * `v` shortcuts. Pages open the drawers by dispatching the events in
+ * `lib/tray-events`, which is how the command palette already did it.
  */
 
 import * as React from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Package, Scale, Wand2 } from 'lucide-react'
+import { useTheme } from 'next-themes'
+import {
+  Github,
+  Keyboard,
+  Laptop,
+  Layers,
+  Moon,
+  Package,
+  Scale,
+  Search,
+  Settings2,
+  Sun,
+  Wand2,
+} from 'lucide-react'
 
 import { cn } from '@/lib/utils'
-import { ThemeToggle } from '@/components/theme-toggle'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 import { UserMenu } from '@/components/user-menu'
 import { BundleDrawer } from '@/components/bundle-drawer'
 import { CompareDrawer } from '@/components/compare-drawer'
+import { CommandPalette, useCommandPalette } from '@/components/command-palette'
+import { ShortcutsHelpButton, useShortcutsHelp } from '@/components/shortcuts-help'
+import { CopyHistoryDropdown } from '@/components/copy-history-dropdown'
+import { LadderTour, openLadderTour } from '@/components/ladder-tour'
+import { useReducedMotion } from '@/components/reduced-motion-provider'
 import { useBundle } from '@/hooks/use-bundle'
 import { useCompare } from '@/hooks/use-compare'
+import { SOCIAL } from '@/lib/social'
+import { TRAY_EVENTS, isTypingTarget } from '@/lib/tray-events'
 
 /**
- * The ladder, in rungs, atom → assembly, then the tools that sit beside it.
+ * The ladder, in rungs, atom → assembly, then the surfaces beside it.
  *
  * `match` is a prefix test rather than an equality test so that a detail
  * page highlights its tier — /block/pricing-tiers lights up "Blocks". The
  * singular and plural routes both belong to one tab, which is why each
  * entry carries a list.
+ *
+ * `hint` is the line that says what the rung *is*. It shows in the tooltip,
+ * because "Blocks" and "Pages" mean nothing to someone who has not read the
+ * landing page, and the ladder is the whole differentiator.
+ *
+ * Paths sits second, out of ladder order, and that is deliberate. The rest
+ * of this list is a taxonomy — it assumes you already know whether the thing
+ * you need is an effect or a block, which is exactly what a first-time
+ * visitor does not know. "Build a landing page · 30 min · 8 steps" answers
+ * the question the taxonomy can't, so it goes where someone reading left to
+ * right will actually reach it, not eighth of nine.
  */
-const NAV: Array<{ label: string; href: string; match: string[] }> = [
-  { label: 'Browse', href: '/browse', match: ['/browse'] },
-  { label: 'Effects', href: '/library', match: ['/library', '/effect', '/category'] },
-  { label: 'Blocks', href: '/blocks', match: ['/blocks', '/block'] },
-  { label: 'Pages', href: '/pages', match: ['/pages', '/page'] },
-  { label: 'Templates', href: '/templates', match: ['/templates', '/template'] },
-  { label: 'Tools', href: '/tools', match: ['/tools'] },
-  { label: 'Paths', href: '/paths', match: ['/paths'] },
-  { label: 'Docs', href: '/docs', match: ['/docs'] },
+const NAV: Array<{ label: string; href: string; match: string[]; hint: string }> = [
+  {
+    label: 'Browse',
+    href: '/browse',
+    match: ['/browse'],
+    hint: 'Search everything — all four rungs at once',
+  },
+  {
+    label: 'Paths',
+    href: '/paths',
+    match: ['/paths'],
+    hint: 'Start here — the catalog in the order you would actually build it',
+  },
+  {
+    label: 'Effects',
+    href: '/library',
+    match: ['/library', '/effect', '/category'],
+    hint: 'The atoms — single pure-CSS hover states, loaders and animations',
+  },
+  {
+    label: 'Blocks',
+    href: '/blocks',
+    match: ['/blocks', '/block'],
+    hint: 'The sections — pricing tables, FAQs, navbars, ready to drop in',
+  },
+  {
+    label: 'Pages',
+    href: '/pages',
+    match: ['/pages', '/page'],
+    hint: 'The screens — whole layouts assembled from blocks',
+  },
+  {
+    label: 'Templates',
+    href: '/templates',
+    match: ['/templates', '/template'],
+    hint: 'The projects — deployable starters you can clone',
+  },
+  {
+    label: 'Playground',
+    href: '/playground',
+    match: ['/playground'],
+    hint: 'Paste any HTML and CSS and tune it live',
+  },
+  {
+    label: 'Tools',
+    href: '/tools',
+    match: ['/tools'],
+    hint: 'Palettes, gradients, shadows, contrast and unit conversion',
+  },
+  {
+    label: 'Docs',
+    href: '/docs',
+    match: ['/docs'],
+    hint: 'The CLI, the API, and how the four rungs fit together',
+  },
 ]
 
 /** True when `pathname` is the route itself or something beneath it. */
@@ -58,7 +153,19 @@ function isActive(pathname: string, prefixes: string[]): boolean {
   return prefixes.some((p) => pathname === p || pathname.startsWith(`${p}/`))
 }
 
-export function SiteHeader() {
+export interface SiteHeaderProps {
+  /**
+   * Surface-specific controls, rendered at the head of the tray.
+   *
+   * Deliberately narrow: this is for a control that only makes sense on one
+   * kind of page — the brand-colour picker on the designer tools — not for
+   * re-adding a bespoke nav. Anything a visitor needs on more than one
+   * surface belongs in the shared tray below, not here.
+   */
+  actions?: React.ReactNode
+}
+
+export function SiteHeader({ actions }: SiteHeaderProps) {
   const pathname = usePathname() ?? ''
 
   const [bundleOpen, setBundleOpen] = React.useState(false)
@@ -71,111 +178,351 @@ export function SiteHeader() {
   const [mounted, setMounted] = React.useState(false)
   React.useEffect(() => setMounted(true), [])
 
+  /**
+   * The drawers live here now, so the shortcuts and the cross-page open
+   * events live here too. Six surfaces each carried a copy of this effect;
+   * on the seventh — every catalog page — `b` and `v` did nothing at all,
+   * because the drawers were mounted but nothing listened.
+   */
+  React.useEffect(() => {
+    function onKey(e: KeyboardEvent) {
+      // ⌘K belongs to <CommandPalette>, which binds it itself.
+      if (e.metaKey || e.ctrlKey || e.altKey) return
+      if (isTypingTarget(e.target)) return
+      const key = e.key.toLowerCase()
+      if (key === 'b') {
+        e.preventDefault()
+        setBundleOpen((v) => !v)
+      } else if (key === 'v') {
+        e.preventDefault()
+        setCompareOpen((v) => !v)
+      }
+    }
+    const onOpenBundle = () => setBundleOpen(true)
+    const onOpenCompare = () => setCompareOpen(true)
+
+    window.addEventListener('keydown', onKey)
+    window.addEventListener(TRAY_EVENTS.bundle, onOpenBundle)
+    window.addEventListener(TRAY_EVENTS.compare, onOpenCompare)
+    return () => {
+      window.removeEventListener('keydown', onKey)
+      window.removeEventListener(TRAY_EVENTS.bundle, onOpenBundle)
+      window.removeEventListener(TRAY_EVENTS.compare, onOpenCompare)
+    }
+  }, [])
+
   return (
-    <header className="sticky top-0 z-40 border-b border-border/40 bg-background/70 backdrop-blur-xl">
-      <div className="mx-auto flex h-16 max-w-7xl items-center gap-4 px-4 sm:px-6 lg:px-8">
-        {/* Brand — the way back to the top of the ladder */}
-        <Link href="/" className="flex shrink-0 items-center gap-2.5" aria-label="Hoverlab home">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-emerald-600 text-white shadow-lg shadow-primary/30">
-            <Wand2 className="h-5 w-5" />
+    <>
+      <header className="sticky top-0 z-40 border-b border-border/40 bg-background/70 backdrop-blur-xl">
+        {/*
+          On phones the nav drops to its own full-width row.
+
+          It used to share one 64px line with the brand, search, the trays,
+          preferences and a "Get started" button. Those are all fixed-width,
+          the nav was the only flexible item, so at 390px it was squeezed to
+          93px — one visible word, "Browse", with the other eight items
+          scrolled out of sight behind no scrollbar. A nav nobody can see is
+          worse than the hamburger we avoided, because at least a hamburger
+          announces itself.
+
+          Wrapping costs ~48px of header on mobile and gives the nav the full
+          width to scroll in. Above `sm` there is room for one row and it
+          behaves exactly as before.
+        */}
+        <div className="mx-auto flex min-h-16 max-w-7xl flex-wrap items-center gap-x-3 gap-y-1 px-4 pb-2 sm:h-16 sm:flex-nowrap sm:px-6 sm:pb-0 lg:px-8">
+          {/* Brand — the way back to the top of the ladder */}
+          <Link
+            href="/"
+            className="flex shrink-0 items-center gap-2.5 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            aria-label="Hoverlab home"
+          >
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-emerald-600 text-white shadow-lg shadow-primary/30">
+              <Wand2 className="h-5 w-5" />
+            </div>
+            <span className="hidden text-base font-bold tracking-tight sm:inline">
+              Hoverlab
+            </span>
+          </Link>
+
+          {/* Ladder nav. Scrolls horizontally rather than collapsing into a
+              hamburger — a menu you have to open is a menu a first-time
+              visitor doesn't know is there, and this nav is the product. */}
+          <nav
+            aria-label="Catalog"
+            className="-mx-1 order-last flex w-full min-w-0 items-center gap-0.5 overflow-x-auto px-1 [scrollbar-width:none] sm:order-none sm:w-auto sm:flex-1 [&::-webkit-scrollbar]:hidden"
+          >
+            {NAV.map((item) => {
+              const active = isActive(pathname, item.match)
+              return (
+                <Tooltip key={item.href}>
+                  <TooltipTrigger asChild>
+                    <Link
+                      href={item.href}
+                      aria-current={active ? 'page' : undefined}
+                      className={cn(
+                        'relative shrink-0 rounded-lg px-2.5 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
+                        active
+                          ? 'text-foreground'
+                          : 'text-muted-foreground hover:bg-muted/50 hover:text-foreground',
+                      )}
+                    >
+                      {item.label}
+                      {active && (
+                        <span
+                          aria-hidden
+                          className="absolute inset-x-2.5 -bottom-[1px] h-0.5 rounded-full bg-primary"
+                        />
+                      )}
+                    </Link>
+                  </TooltipTrigger>
+                  <TooltipContent side="bottom" className="max-w-56">
+                    {item.hint}
+                  </TooltipContent>
+                </Tooltip>
+              )
+            })}
+          </nav>
+
+          {/* ml-auto so the controls stay right-aligned on the mobile row,
+              where the nav is no longer between them and the brand. */}
+          <div className="ml-auto flex shrink-0 items-center gap-1 sm:ml-0">
+            {actions}
+
+            <QuickFindButton />
+
+            {/* The block page's "♡ Save · 📦 Bundle · ⚖ Compare" pattern,
+                site-wide: no icon anyone has to decode on its own. */}
+            <TrayButton
+              label="Compare"
+              hint="Put items side by side (v)"
+              count={mounted ? compareCount : 0}
+              onClick={() => setCompareOpen(true)}
+              icon={<Scale aria-hidden className="h-4 w-4" />}
+              hideOnMobile
+            />
+            <TrayButton
+              label="Bundle"
+              hint="Your collection — export it all as one file (b)"
+              count={mounted ? bundleCount : 0}
+              onClick={() => setBundleOpen(true)}
+              icon={<Package aria-hidden className="h-4 w-4" />}
+            />
+
+            {/* Copy history is a power feature and the widest control in
+                this row. It waits for a laptop; the nav does not. */}
+            <span className="hidden lg:inline-flex">
+              <CopyHistoryDropdown />
+            </span>
+            <PreferencesMenu />
+            <UserMenu />
           </div>
-          <span className="hidden text-base font-bold tracking-tight sm:inline">Hoverlab</span>
-        </Link>
-
-        {/* Ladder nav. Scrolls horizontally rather than collapsing into a
-            hamburger — five items fit on a phone, and a menu you have to
-            open is a menu a first-time visitor doesn't know is there. */}
-        <nav
-          aria-label="Catalog"
-          className="-mx-1 flex flex-1 items-center gap-1 overflow-x-auto px-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-        >
-          {NAV.map((item) => {
-            const active = isActive(pathname, item.match)
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                aria-current={active ? 'page' : undefined}
-                className={cn(
-                  'relative shrink-0 rounded-lg px-3 py-2 text-sm font-medium transition-colors',
-                  active
-                    ? 'text-foreground'
-                    : 'text-muted-foreground hover:bg-muted/50 hover:text-foreground',
-                )}
-              >
-                {item.label}
-                {active && (
-                  <span
-                    aria-hidden
-                    className="absolute inset-x-3 -bottom-[1px] h-0.5 rounded-full bg-primary"
-                  />
-                )}
-              </Link>
-            )
-          })}
-        </nav>
-
-        <div className="flex shrink-0 items-center gap-1.5">
-          {/* Bundle and compare are reachable from every catalog surface,
-              not just /library. Without these the "Bundle" and "Compare"
-              buttons on a block detail page put something into a drawer
-              with no way to open it from the page you are standing on. */}
-          <TrayButton
-            label="Compare"
-            count={mounted ? compareCount : 0}
-            onClick={() => setCompareOpen(true)}
-          >
-            <Scale aria-hidden className="h-4 w-4" />
-          </TrayButton>
-          <TrayButton
-            label="Bundle"
-            count={mounted ? bundleCount : 0}
-            onClick={() => setBundleOpen(true)}
-          >
-            <Package aria-hidden className="h-4 w-4" />
-          </TrayButton>
-          <UserMenu />
-          <ThemeToggle />
         </div>
-      </div>
+      </header>
 
       <BundleDrawer open={bundleOpen} onOpenChange={setBundleOpen} />
       <CompareDrawer open={compareOpen} onOpenChange={setCompareOpen} />
-    </header>
+      <CommandPalette />
+      <ShortcutsHelpButton />
+      <LadderTour />
+    </>
   )
 }
 
 /**
- * A header tray button with a count badge.
+ * The ⌘K entry point, spelled out.
+ *
+ * Only /library ever showed this. Every other surface expected you to know
+ * the shortcut, which means every other surface had no search at all for
+ * anyone who didn't.
+ */
+function QuickFindButton() {
+  const { open } = useCommandPalette()
+
+  return (
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <button
+          type="button"
+          onClick={open}
+          aria-label="Search everything"
+          className="flex h-9 items-center gap-2 rounded-full border border-border/60 bg-background/60 px-2.5 text-muted-foreground shadow-sm backdrop-blur transition-colors hover:border-border hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring lg:px-3"
+        >
+          <Search aria-hidden className="h-4 w-4 shrink-0" />
+          {/* Same reasoning as the tray labels: at lg these cost ~60px of a
+              row that could not afford it, which pushed "Docs" — the last
+              nav item — off the end at 1440px. The icon plus its tooltip
+              carries this control; the nav cannot be carried by anything. */}
+          <span className="hidden text-xs 2xl:inline">Search</span>
+          <kbd className="ml-0.5 hidden rounded border border-border bg-muted px-1 py-0.5 font-mono text-[10px] font-semibold 2xl:inline">
+            ⌘K
+          </kbd>
+        </button>
+      </TooltipTrigger>
+      <TooltipContent side="bottom">
+        Search every effect, block, page and template (⌘K)
+      </TooltipContent>
+    </Tooltip>
+  )
+}
+
+/**
+ * A header tray button: icon, a word from `xl` up, a tooltip always.
  *
  * The badge is suppressed at zero rather than showing "0" — an empty tray
  * is not news, and a permanent zero trains people to ignore the number.
  */
 function TrayButton({
   label,
+  hint,
   count,
   onClick,
-  children,
+  icon,
+  hideOnMobile,
 }: {
   label: string
+  hint: string
   count: number
   onClick: () => void
-  children: React.ReactNode
+  icon: React.ReactNode
+  /** Drop below `sm`, where the nav needs the width more than this does. */
+  hideOnMobile?: boolean
 }) {
   return (
-    <button
-      type="button"
-      onClick={onClick}
-      title={`${label}${count > 0 ? ` (${count})` : ''}`}
-      aria-label={`Open ${label.toLowerCase()}${count > 0 ? `, ${count} item${count === 1 ? '' : 's'}` : ''}`}
-      className="relative flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-    >
-      {children}
-      {count > 0 ? (
-        <span className="absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-primary px-1 text-[10px] font-bold text-primary-foreground">
-          {count}
-        </span>
-      ) : null}
-    </button>
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <button
+          type="button"
+          onClick={onClick}
+          aria-label={`${label}${count > 0 ? `, ${count} item${count === 1 ? '' : 's'}` : ', empty'}`}
+          className={cn(
+            'relative flex h-9 items-center gap-1.5 rounded-lg px-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
+            // Compare is a side-by-side view — there is no room to put two
+            // things side by side on a 390px screen, so it is the one tray
+            // that earns its place back only on a wider viewport. Bundle
+            // stays: it is the cart, and it is how you leave with anything.
+            hideOnMobile && 'hidden sm:flex',
+          )}
+        >
+          {icon}
+          {/*
+            Labels return at 2xl, not xl.
+
+            At xl (1280px) they were on at a 1440px viewport, where the row
+            is brand + nine nav items + search + two labelled trays + history
+            + preferences + account + "Get started". That overran the 1216px
+            content box and the nav — the flexible item — absorbed all of it,
+            clipping "Playground" to "Playgrou". The nav is the product; it
+            gets the space, and the labels come back when there is genuinely
+            room at 1536px. The tooltip carries the meaning in between.
+          */}
+          <span className="hidden text-sm font-medium 2xl:inline">{label}</span>
+          {count > 0 ? (
+            <span className="flex h-4 min-w-4 items-center justify-center rounded-full bg-primary px-1 text-[10px] font-bold text-primary-foreground">
+              {count}
+            </span>
+          ) : null}
+        </button>
+      </TooltipTrigger>
+      <TooltipContent side="bottom">{hint}</TooltipContent>
+    </Tooltip>
+  )
+}
+
+/**
+ * Theme, motion and shortcuts — one labelled menu instead of three icons.
+ *
+ * A sun, a lightning bolt and a keyboard in a row is three guesses. Motion
+ * in particular hid three states behind one glyph that cycled, so the only
+ * way to find out what it did was to click it and watch the site change.
+ */
+function PreferencesMenu() {
+  const { theme, setTheme } = useTheme()
+  const { pref: motion, setPref: setMotion, enabled: motionReduced } = useReducedMotion()
+  const { open: openShortcuts } = useShortcutsHelp()
+
+  // next-themes and the motion pref both read localStorage, so neither has
+  // a truthful value until after hydration. Show the neutral default first.
+  const [mounted, setMounted] = React.useState(false)
+  React.useEffect(() => setMounted(true), [])
+
+  return (
+    <DropdownMenu>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <DropdownMenuTrigger asChild>
+            <button
+              type="button"
+              aria-label="Preferences"
+              className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            >
+              <Settings2 aria-hidden className="h-4 w-4" />
+            </button>
+          </DropdownMenuTrigger>
+        </TooltipTrigger>
+        <TooltipContent side="bottom">
+          Preferences — theme, motion, shortcuts
+        </TooltipContent>
+      </Tooltip>
+
+      <DropdownMenuContent align="end" className="w-60">
+        <DropdownMenuLabel className="text-xs font-normal text-muted-foreground">
+          Theme
+        </DropdownMenuLabel>
+        <DropdownMenuRadioGroup
+          value={mounted ? (theme ?? 'system') : 'system'}
+          onValueChange={setTheme}
+        >
+          <DropdownMenuRadioItem value="light" className="cursor-pointer">
+            <Sun className="mr-2 h-4 w-4" /> Light
+          </DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="dark" className="cursor-pointer">
+            <Moon className="mr-2 h-4 w-4" /> Dark
+          </DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="system" className="cursor-pointer">
+            <Laptop className="mr-2 h-4 w-4" /> Match my system
+          </DropdownMenuRadioItem>
+        </DropdownMenuRadioGroup>
+
+        <DropdownMenuSeparator />
+
+        <DropdownMenuLabel className="text-xs font-normal text-muted-foreground">
+          Animation
+          {mounted && motionReduced ? (
+            <span className="ml-1 text-amber-500">· currently reduced</span>
+          ) : null}
+        </DropdownMenuLabel>
+        <DropdownMenuRadioGroup
+          value={mounted ? motion : 'auto'}
+          onValueChange={(v) => setMotion(v as 'auto' | 'on' | 'off')}
+        >
+          <DropdownMenuRadioItem value="auto" className="cursor-pointer">
+            Follow my system
+          </DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="off" className="cursor-pointer">
+            Always animate
+          </DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="on" className="cursor-pointer">
+            Reduce motion
+          </DropdownMenuRadioItem>
+        </DropdownMenuRadioGroup>
+
+        <DropdownMenuSeparator />
+
+        {/* The way back to the tour. Without this, dismissing it once means
+            never seeing the one explanation of what the four rungs are. */}
+        <DropdownMenuItem onClick={openLadderTour} className="cursor-pointer">
+          <Layers className="mr-2 h-4 w-4" /> Replay the intro
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={openShortcuts} className="cursor-pointer">
+          <Keyboard className="mr-2 h-4 w-4" /> Keyboard shortcuts
+          <span className="ml-auto font-mono text-xs text-muted-foreground">?</span>
+        </DropdownMenuItem>
+        <DropdownMenuItem asChild className="cursor-pointer">
+          <a href={SOCIAL.github.href} target="_blank" rel="noreferrer noopener">
+            <Github className="mr-2 h-4 w-4" /> Source on GitHub
+          </a>
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
   )
 }

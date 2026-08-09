@@ -16,6 +16,7 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 import { ArrowRight, Blocks as BlocksIcon, Layers, Sparkles } from 'lucide-react'
 import { BlockCard } from '@/components/blocks/block-card'
+import { TierDefinition } from '@/components/tier-definition'
 import { blockCategorySlug } from '@/lib/blocks/block-types'
 import {
   BLOCK_COUNT,
@@ -62,20 +63,22 @@ export default function BlocksHubPage() {
         {/* ---------------------------------------------------------- *
          *  Header
          * ---------------------------------------------------------- */}
-        <header className="mx-auto max-w-3xl text-center">
+        <TierDefinition tier="block" />
+
+        <header className="mx-auto mt-10 max-w-3xl text-center">
           <span className="inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-card/60 px-3 py-1 text-xs font-medium text-muted-foreground">
             <BlocksIcon aria-hidden className="h-3.5 w-3.5" />
             Blocks
           </span>
 
-          <h1 className="mt-5 text-balance text-4xl font-extrabold tracking-tight sm:text-5xl">
+          <h1 className="type-hub mt-5">
             Whole sections, not just the parts
           </h1>
 
-          <p className="mx-auto mt-4 max-w-2xl text-pretty text-muted-foreground">
-            An effect makes one element look right. A block is the entire
-            section — pricing, FAQ, testimonials, feature grids — laid out,
-            responsive and accessible, ready to paste into your project.
+          <p className="mx-auto mt-4 max-w-2xl text-pretty text-body">
+            Laid out, responsive and accessible, in plain markup and Tailwind
+            classes — paste one into your project and it works, with no
+            component library to install first.
           </p>
 
           <div className="mt-6 flex flex-wrap items-center justify-center gap-3 text-sm text-muted-foreground">

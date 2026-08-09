@@ -225,6 +225,11 @@ export default function TokensToolPage() {
                   'linear-gradient(to right, oklch(0.6 0.2 0), oklch(0.6 0.2 60), oklch(0.6 0.2 120), oklch(0.6 0.2 180), oklch(0.6 0.2 240), oklch(0.6 0.2 300), oklch(0.6 0.2 360))',
               }}
             />
+            <p className="mt-2 text-xs text-muted-foreground">
+              The one colour every token is derived from. Everything else on
+              this page — primary, ring, accent, the tinted greys — is this
+              angle plus a lightness.
+            </p>
           </div>
 
           <div>
@@ -243,6 +248,11 @@ export default function TokensToolPage() {
               step={0.005}
               className="mt-3"
             />
+            <p className="mt-2 text-xs text-muted-foreground">
+              How saturated the brand colour is. OKLCH keeps lightness fixed
+              as this moves, so the contrast of text on your primary button
+              does not drift while you tune it.
+            </p>
           </div>
 
           <div>
@@ -284,6 +294,11 @@ export default function TokensToolPage() {
               step={0.025}
               className="mt-3"
             />
+            <p className="mt-2 text-xs text-muted-foreground">
+              The base radius. Every component derives from it, so this one
+              number is the difference between a sharp interface and a soft
+              one across the whole set.
+            </p>
           </div>
         </div>
 

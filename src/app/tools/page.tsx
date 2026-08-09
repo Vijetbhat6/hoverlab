@@ -18,7 +18,6 @@ import {
   Ruler,
   ArrowRight,
   Sparkles,
-  Wand2,
   Type,
   Square,
   Activity,
@@ -29,14 +28,9 @@ import {
   Search,
   Mail,
 } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { ThemeToggle } from '@/components/theme-toggle'
-import { ReducedMotionToggle } from '@/components/reduced-motion-toggle'
 import { BrandColorPicker } from '@/components/brand-color-picker'
-import { CopyHistoryDropdown } from '@/components/copy-history-dropdown'
-import { UserMenu } from '@/components/user-menu'
-import { CommandPalette, useCommandPalette } from '@/components/command-palette'
-import { ShortcutsHelpButton } from '@/components/shortcuts-help'
+import { SiteHeader } from '@/components/site-header'
+import { useCommandPalette } from '@/components/command-palette'
 
 interface ToolDef {
   href: string
@@ -190,33 +184,7 @@ export default function ToolsHubPage() {
 
   return (
     <div className="relative flex min-h-screen flex-col">
-      <header className="sticky top-0 z-40 border-b border-border/40 bg-background/70 backdrop-blur-xl">
-        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-2.5">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-emerald-600 text-white shadow-lg shadow-primary/30">
-              <Wand2 className="h-5 w-5" />
-            </div>
-            <div className="flex flex-col leading-tight">
-              <span className="text-base font-bold tracking-tight">Designer Tools</span>
-              <span className="text-[11px] text-muted-foreground">
-                Color, gradient, shadow, contrast, units — all in one place
-              </span>
-            </div>
-          </div>
-          <div className="flex items-center gap-2">
-            <Button variant="ghost" size="sm" className="hidden gap-1.5 sm:inline-flex" asChild>
-              <Link href="/library">
-                <Sparkles className="h-4 w-4" /> Effects library
-              </Link>
-            </Button>
-            <CopyHistoryDropdown />
-            <UserMenu />
-            <ThemeToggle />
-            <ReducedMotionToggle />
-            <BrandColorPicker />
-          </div>
-        </div>
-      </header>
+      <SiteHeader actions={<BrandColorPicker />} />
 
       <main className="mx-auto w-full max-w-7xl flex-1 px-4 pb-16 pt-12 sm:px-6 lg:px-8 lg:pt-16">
         {/* Hero */}
@@ -225,10 +193,10 @@ export default function ToolsHubPage() {
             <Sparkles className="h-3.5 w-3.5 text-primary" />
             {TOOLS.length} tools · zero dependencies · works offline
           </div>
-          <h1 className="text-balance bg-gradient-to-br from-foreground to-foreground/60 bg-clip-text text-4xl font-extrabold tracking-tight text-transparent sm:text-5xl lg:text-6xl">
+          <h1 className="type-hub">
             Designer tools,<br className="hidden sm:inline" /> built into your browser.
           </h1>
-          <p className="mt-5 text-pretty text-base text-muted-foreground sm:text-lg">
+          <p className="mt-5 text-pretty text-base text-body sm:text-lg">
             A focused toolkit that complements the effects library: generate palettes,
             compose gradients, layer shadows, check WCAG contrast, and convert CSS units —
             all without leaving Hoverlab.
@@ -275,9 +243,6 @@ export default function ToolsHubPage() {
           </p>
         </section>
       </main>
-
-      <CommandPalette />
-      <ShortcutsHelpButton />
     </div>
   )
 }

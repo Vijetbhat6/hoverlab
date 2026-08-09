@@ -15,6 +15,7 @@ import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 import { BlockCard } from '@/components/blocks/block-card'
+import { TierDefinition } from '@/components/tier-definition'
 import {
   blockCategoryFromSlug,
   blockCategorySlug,
@@ -95,14 +96,19 @@ export default async function BlockCategoryPage({ params }: PageProps) {
           <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
             {GROUP_OF[category]}
           </span>
-          <h1 className="mt-2 text-balance text-4xl font-extrabold tracking-tight sm:text-5xl">
+          <h1 className="type-hub mt-2">
             {category}
           </h1>
-          <p className="mt-4 text-pretty text-muted-foreground">
+          <p className="mt-4 text-pretty text-body">
             {blocks.length} {blocks.length === 1 ? 'block' : 'blocks'} in this
-            category — each one a complete section, rendered live below. Open
-            any of them for the full source and a copy button.
+            category, each rendered live below. Open any of them for the full
+            source and a copy button.
           </p>
+
+          {/* These pages are the site's most common cold landing — someone
+              arrives here from a search for the head term without having
+              seen /blocks, so the definition has to be on this page too. */}
+          <TierDefinition tier="block" className="mt-5" />
         </header>
 
         <div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">

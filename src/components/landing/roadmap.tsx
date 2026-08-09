@@ -17,6 +17,7 @@
 import * as React from 'react'
 import { Zap, Clock, Sparkles, ArrowUpRight } from 'lucide-react'
 import { Reveal } from '@/components/reveal'
+import { SOCIAL } from '@/lib/social'
 
 interface RoadmapItem {
   title: string
@@ -155,7 +156,7 @@ export function Roadmap() {
 
       <Reveal delay={400} className="mt-10 text-center">
         <a
-          href="https://github.com"
+          href={SOCIAL.github.href}
           target="_blank"
           rel="noreferrer noopener"
           className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:gap-2 hover:underline transition-all"

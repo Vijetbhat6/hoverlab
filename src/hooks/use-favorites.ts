@@ -106,7 +106,22 @@ function schedulePush(list: string[]) {
 }
 
 export function useFavorites() {
-  const [favorites, setFavorites] = React.useState<Set<string>>(() => readFavorites())
+  /**
+   * Starts EMPTY rather than seeded from localStorage.
+   *
+   * Seeding here (`useState(() => readFavorites())`) is a hydration bug, the
+   * same one use-copy-history.ts and use-recently-viewed.ts already avoid:
+   * the server has no localStorage so it renders "not favorited", while the
+   * client's very first render already has the stored set. React sees two
+   * different trees, logs a hydration mismatch and throws the server HTML
+   * away to re-render the whole page on the client — for every returning
+   * visitor who has ever favorited anything. Reading in the effect below
+   * means both sides agree on "empty", and the real set arrives on the
+   * commit after.
+   */
+  const [favorites, setFavorites] = React.useState<Set<string>>(() => new Set())
+  /** False until the effect below has read localStorage — see the push effect. */
+  const [hydrated, setHydrated] = React.useState(false)
   const { user, loading: authLoading } = useAuth()
   const userId = user?.id ?? null
 
@@ -126,6 +141,9 @@ export function useFavorites() {
 
   React.useEffect(() => {
     const sync = () => setFavorites(readFavorites())
+    // Populate on mount — see the note on the initial state above.
+    sync()
+    setHydrated(true)
     window.addEventListener('storage', sync)
     window.addEventListener('cssfx:favorites-changed', sync)
     return () => {
@@ -196,11 +214,15 @@ export function useFavorites() {
   }, [userId, authLoading])
 
   // Debounced push on local changes — only once the initial merge for this
-  // user has actually succeeded.
+  // user has actually succeeded, and only once this instance has read
+  // localStorage. Without the `hydrated` gate an instance that mounts after
+  // the merge (a card paginated into view, say) would push its still-empty
+  // starting state and wipe the account's list.
   React.useEffect(() => {
+    if (!hydrated) return
     if (!userId || syncReadyFor !== userId) return
     schedulePush([...favorites])
-  }, [favorites, userId])
+  }, [favorites, userId, hydrated])
 
   /* ---------------- Local actions ---------------- */
   const toggle = React.useCallback((id: string) => {

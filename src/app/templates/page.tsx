@@ -10,6 +10,7 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 import { ArrowRight, Rocket, LayoutTemplate, Blocks } from 'lucide-react'
 import { TemplateCard } from '@/components/templates/template-card'
+import { TierDefinition } from '@/components/tier-definition'
 import {
   TEMPLATE_COUNT,
   TEMPLATE_INDEX,
@@ -53,17 +54,19 @@ export default function TemplatesHubPage() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-        <header className="mx-auto max-w-3xl text-center">
+        <TierDefinition tier="template" />
+
+        <header className="mx-auto mt-10 max-w-3xl text-center">
           <span className="inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-card/60 px-3 py-1 text-xs font-medium text-muted-foreground">
             <Rocket aria-hidden className="h-3.5 w-3.5" />
             Templates
           </span>
 
-          <h1 className="mt-5 text-balance text-4xl font-extrabold tracking-tight sm:text-5xl">
+          <h1 className="type-hub mt-5">
             Projects that already run
           </h1>
 
-          <p className="mx-auto mt-4 max-w-2xl text-pretty text-muted-foreground">
+          <p className="mx-auto mt-4 max-w-2xl text-pretty text-body">
             Not a folder of components — a project. Routing, root layout,
             theme tokens and every screen, arranged so{' '}
             <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-sm">

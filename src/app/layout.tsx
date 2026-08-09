@@ -86,9 +86,20 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${jetbrainsMono.variable} antialiased bg-background text-foreground`}
       >
+        {/*
+          defaultTheme is "system", not "dark".
+
+          `enableSystem` alone does not make the OS preference the default —
+          it only makes "system" a theme the user can choose. With a concrete
+          default of "dark", every first-time visitor whose machine is set to
+          light still got the dark site, and the light palette this codebase
+          maintains in globals.css was unreachable until someone found the
+          toggle. "system" means the first paint matches the rest of their
+          desktop, and an explicit choice still wins and still persists.
+        */}
         <ThemeProvider
           attribute="class"
-          defaultTheme="dark"
+          defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >

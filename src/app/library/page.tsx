@@ -2,30 +2,24 @@
 
 import * as React from 'react'
 import Link from 'next/link'
-import { Search, Sparkles, Github, Wand2, Heart, Star, ChevronLeft, ChevronRight, Shuffle, Package, Keyboard, ArrowDownUp, Loader2, Scale, Plus, Minus } from 'lucide-react'
+import { Search, Sparkles, Heart, Star, ChevronLeft, ChevronRight, Shuffle, ArrowDownUp, Loader2, Plus, Minus } from 'lucide-react'
 import { toast } from 'sonner'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { ThemeToggle } from '@/components/theme-toggle'
-import { ReducedMotionToggle } from '@/components/reduced-motion-toggle'
-import { UserMenu } from '@/components/user-menu'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
+import { SiteHeader } from '@/components/site-header'
 import { EffectCard } from '@/components/effect-card'
-import { BundleDrawer } from '@/components/bundle-drawer'
-import { CompareDrawer } from '@/components/compare-drawer'
-import { useCompare } from '@/hooks/use-compare'
-import { CopyHistoryDropdown } from '@/components/copy-history-dropdown'
+import { TierDefinition } from '@/components/tier-definition'
 import { RecentlyViewedRail } from '@/components/recently-viewed-rail'
-import { CommandPalette, useCommandPalette } from '@/components/command-palette'
-import { ShortcutsHelpButton, useShortcutsHelp } from '@/components/shortcuts-help'
 import { useFavorites } from '@/hooks/use-favorites'
-import { useBundle } from '@/hooks/use-bundle'
 import { CATEGORIES, EFFECT_INDEX as EFFECTS, type EffectCategory, type EffectMeta } from '@/lib/effect-index'
 import { useEffectDetails } from '@/hooks/use-effect-details'
 import { track } from '@/lib/analytics'
 import { EffectCardSkeleton } from '@/components/effect-card-skeleton'
 import { cn } from '@/lib/utils'
+import { isTypingTarget } from '@/lib/tray-events'
 
 type Filter = 'All' | 'Featured' | 'Favorites' | EffectCategory
 type Sort = 'default' | 'az' | 'za' | 'featured'
@@ -69,14 +63,8 @@ export default function Home() {
   const [isRolling, setIsRolling] = React.useState(false)
   const [showSweep, setShowSweep] = React.useState(false)
   const [popKey, setPopKey] = React.useState(0)
-  const [bundleOpen, setBundleOpen] = React.useState(false)
-  const [compareOpen, setCompareOpen] = React.useState(false)
   const [allCategoriesShown, setAllCategoriesShown] = React.useState(false)
-  const { count: compareCount } = useCompare()
   const { favorites } = useFavorites()
-  const { count: bundleCount } = useBundle()
-  const { open: openShortcuts } = useShortcutsHelp()
-  const { open: openCommandPalette } = useCommandPalette()
   const searchInputRef = React.useRef<HTMLInputElement>(null)
   const gridTopRef = React.useRef<HTMLDivElement>(null)
   const rollTimerRef = React.useRef<ReturnType<typeof setInterval> | null>(null)
@@ -141,27 +129,14 @@ export default function Home() {
     window.history.replaceState(null, '', url)
   }, [filter, query, sort])
 
-  // Global keyboard shortcuts on the home page:
-  //   /  → focus the search input
-  //   b  → open the bundle drawer
-  //   ?  → open the shortcuts help dialog
-  // We ignore keypresses while the user is typing in any input/textarea,
-  // or while a meta/ctrl/alt modifier is held (so we don't hijack browser
-  // shortcuts like cmd+b).
+  /**
+   * Shortcuts that only exist on this page: `/` to focus search, and Escape
+   * to leave it. ⌘K, `b` and `v` used to be handled here too; they belong to
+   * <CommandPalette> and <SiteHeader> now, which is what makes them work on
+   * the other eight surfaces rather than just this one.
+   */
   React.useEffect(() => {
-    function isTypingTarget(t: EventTarget | null): boolean {
-      if (!(t instanceof HTMLElement)) return false
-      const tag = t.tagName
-      return tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || t.isContentEditable
-    }
     function onKey(e: KeyboardEvent) {
-      // Cmd+K / Ctrl+K → open command palette (handled by the palette itself,
-      // but we also intercept here so it doesn't conflict with the `/` shortcut).
-      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
-        e.preventDefault()
-        openCommandPalette()
-        return
-      }
       if (e.metaKey || e.ctrlKey || e.altKey) return
       if (isTypingTarget(e.target)) {
         // Allow Escape to blur the search input.
@@ -174,37 +149,16 @@ export default function Home() {
         e.preventDefault()
         searchInputRef.current?.focus()
         searchInputRef.current?.select()
-      } else if (e.key.toLowerCase() === 'b') {
-        e.preventDefault()
-        // Toggle the drawer so `b` works as both "open" and "close".
-        setBundleOpen((v) => !v)
-      } else if (e.key.toLowerCase() === 'v') {
-        e.preventDefault()
-        // Toggle the compare drawer so `v` works as both "open" and "close".
-        // `v` for "versus" — compare side-by-side. Chosen to avoid clashing
-        // with the detail-page `c` shortcut (copy current CSS).
-        setCompareOpen((v) => !v)
       }
-    }
-    // Listen for events from the command palette's action items.
-    function onOpenBundle() {
-      setBundleOpen(true)
-    }
-    function onOpenCompare() {
-      setCompareOpen(true)
     }
     function onSurpriseMe() {
       // Use the ref so we always invoke the latest `surprise` callback.
       surpriseRef.current()
     }
     window.addEventListener('keydown', onKey)
-    window.addEventListener('hoverlab:open-bundle', onOpenBundle)
-    window.addEventListener('hoverlab:open-compare', onOpenCompare)
     window.addEventListener('hoverlab:surprise-me', onSurpriseMe)
     return () => {
       window.removeEventListener('keydown', onKey)
-      window.removeEventListener('hoverlab:open-bundle', onOpenBundle)
-      window.removeEventListener('hoverlab:open-compare', onOpenCompare)
       window.removeEventListener('hoverlab:surprise-me', onSurpriseMe)
     }
   }, [])
@@ -249,10 +203,20 @@ export default function Home() {
     return matched
   }, [query, filter, sort, favorites])
 
-  // Reset to first page whenever the filter / query / sort / favorites change.
+  /*
+   * Reset to the first page whenever the result set changes.
+   *
+   * The favorites dependency is narrowed to the Favorites tab on purpose.
+   * Depending on the whole `favorites` set meant every heart click anywhere
+   * in the grid reset pagination — favorite something on page 7 and the
+   * page you were reading jumped back to page 1. Favoriting only changes
+   * *which* effects match while that tab is the active filter, so that is
+   * the only time it should move anyone.
+   */
+  const favoritesFilterSize = filter === 'Favorites' ? favorites.size : 0
   React.useEffect(() => {
     setPage(1)
-  }, [query, filter, sort, favorites])
+  }, [query, filter, sort, favoritesFilterSize])
 
   /* Track non-AI searches, debounced so a single query isn't recorded once
    * per keystroke. Queries that return nothing are the useful half of this
@@ -543,139 +507,42 @@ export default function Home() {
         <div className="absolute top-40 left-1/3 h-72 w-72 rounded-full bg-amber-500/10 blur-3xl" />
       </div>
 
-      {/* Header */}
-      <header className="sticky top-0 z-40 border-b border-border/40 bg-background/70 backdrop-blur-xl">
-        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-2.5">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-emerald-600 text-white shadow-lg shadow-primary/30">
-              <Wand2 className="h-5 w-5" />
-            </div>
-            <div className="flex flex-col leading-tight">
-              <span className="text-base font-bold tracking-tight">Hoverlab</span>
-              <span className="text-[11px] text-muted-foreground">
-                A living CSS effects library
-              </span>
-            </div>
-          </div>
+      {/* The one header. This page carried its own until now — brand,
+          Quick find and eight bare icons, but not a single link to
+          /blocks, /pages or /templates. The library is where most
+          visitors land, so the rung they arrived on was the only rung
+          they could see. */}
+      <SiteHeader />
 
-          <div className="flex items-center gap-2">
-            <Button
-              variant="ghost"
-              size="sm"
-              className="hidden gap-1.5 sm:inline-flex"
-              asChild
-            >
-              <Link href="/playground">
-                <Sparkles className="h-4 w-4" /> Playground
-              </Link>
-            </Button>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={openCommandPalette}
-              className="hidden h-9 gap-2 rounded-full border-border/60 bg-background/60 px-3 text-xs text-muted-foreground shadow-sm sm:inline-flex"
-              aria-label="Open command palette (Cmd+K)"
-              title="Open command palette (Cmd+K)"
-            >
-              <Search className="h-3.5 w-3.5" />
-              <span>Quick find</span>
-              <kbd className="ml-1 rounded border border-border bg-muted px-1 py-0.5 font-mono text-[10px] font-semibold">
-                ⌘K
-              </kbd>
-            </Button>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="h-9 w-9 sm:hidden"
-              onClick={openCommandPalette}
-              aria-label="Open command palette"
-              title="Open command palette (Cmd+K)"
-            >
-              <Search className="h-4 w-4" />
-            </Button>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="h-9 w-9"
-              onClick={openShortcuts}
-              aria-label="Keyboard shortcuts"
-              title="Keyboard shortcuts (?)"
-            >
-              <Keyboard className="h-4 w-4" />
-            </Button>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="relative h-9 w-9"
-              onClick={() => setBundleOpen(true)}
-              aria-label={`Open bundle (${bundleCount} item${bundleCount === 1 ? '' : 's'})`}
-              title="Open bundle (b)"
-            >
-              <Package className="h-4 w-4" />
-              {bundleCount > 0 ? (
-                <Badge
-                  className="absolute -right-1 -top-1 h-4 min-w-4 justify-center rounded-full px-1 text-[9px] font-semibold"
-                >
-                  {bundleCount}
-                </Badge>
-              ) : null}
-            </Button>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="relative h-9 w-9"
-              onClick={() => setCompareOpen(true)}
-              aria-label={`Open compare (${compareCount} effect${compareCount === 1 ? '' : 's'})`}
-              title="Open compare (v)"
-            >
-              <Scale className="h-4 w-4" />
-              {compareCount > 0 ? (
-                <Badge
-                  variant="secondary"
-                  className="absolute -right-1 -top-1 h-4 min-w-4 justify-center rounded-full bg-primary px-1 text-[9px] font-semibold text-primary-foreground"
-                >
-                  {compareCount}
-                </Badge>
-              ) : null}
-            </Button>
-            <CopyHistoryDropdown />
-            <Button
-              variant="ghost"
-              size="sm"
-              className="hidden gap-1.5 sm:inline-flex"
-              asChild
-            >
-              <a
-                href="https://github.com"
-                target="_blank"
-                rel="noreferrer noopener"
-              >
-                <Github className="h-4 w-4" /> GitHub
-              </a>
-            </Button>
-            <UserMenu />
-            <ThemeToggle />
-            <ReducedMotionToggle />
-          </div>
-        </div>
-      </header>
+      {/*
+        An index header, not a second marketing hero.
 
-      {/* Hero */}
-      <section className="mx-auto w-full max-w-7xl px-4 pb-6 pt-12 sm:px-6 sm:pt-16 lg:px-8 lg:pt-20">
+        This page used to open with the same furniture as the landing page: a
+        pill badge, a two-line display headline and a four-line paragraph,
+        with the tier definition stacked above all of it. Measured at
+        1440×1000, the first effect card started around y=820 — the page that
+        exists to show 4,308 things led with one of them barely on screen.
+        The landing page already makes this pitch to anyone who came through
+        the front door, and everyone else arrived from a search result and
+        wants the search box.
+
+        The definition stays. It is the one thing here a first-time visitor
+        actually needs and the marketing copy never said — what an "effect"
+        is — and it costs one line.
+      */}
+      <section className="mx-auto w-full max-w-7xl px-4 pb-6 pt-8 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-3xl text-center">
-          <div className="mb-4 inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-background/60 px-3 py-1 text-xs text-muted-foreground backdrop-blur">
-            <Sparkles className="h-3.5 w-3.5 text-primary" />
-            {EFFECTS.length.toLocaleString('en-US')} effects · {CATEGORIES.length} categories · zero dependencies
-          </div>
-          <h1 className="text-balance bg-gradient-to-br from-foreground to-foreground/60 bg-clip-text text-4xl font-extrabold tracking-tight text-transparent sm:text-5xl lg:text-6xl">
-            {EFFECTS.length.toLocaleString('en-US')}+ CSS effects,<br className="hidden sm:inline" /> ready to copy.
+          <h1 className="type-hub">
+            {EFFECTS.length.toLocaleString('en-US')} CSS effects
           </h1>
-          <p className="mt-5 text-pretty text-base text-muted-foreground sm:text-lg">
-            A curated library of pure-CSS effects with live demos and
-            copy-ready code. Buttons, loaders, cards, text, backgrounds,
-            navigation, dividers, badges and more — no JavaScript, no
-            frameworks, just CSS.
+          <p className="mx-auto mt-3 max-w-2xl text-pretty text-sm text-body sm:text-base">
+            Live demos and copy-ready code across {CATEGORIES.length}{' '}
+            categories — no JavaScript, no frameworks, no dependencies.
           </p>
+          <TierDefinition
+            tier="effect"
+            className="mx-auto mt-5 max-w-2xl text-left"
+          />
         </div>
 
         {/* Search + Surprise me */}
@@ -696,31 +563,44 @@ export default function Home() {
                 aiMode && 'border-primary/50 ring-1 ring-primary/20',
               )}
             />
-            {/* AI mode toggle button inside the search input (right side) */}
-            <button
-              type="button"
-              onClick={() => {
-                setAiMode((v) => !v)
-                // Focus the input so the user can immediately type their
-                // natural-language query after enabling AI mode.
-                setTimeout(() => searchInputRef.current?.focus(), 0)
-              }}
-              aria-pressed={aiMode}
-              aria-label={aiMode ? 'Disable AI search' : 'Enable AI search'}
-              title={
-                aiMode
-                  ? 'AI search ON — click to disable'
-                  : 'Enable AI search (natural language)'
-              }
-              className={cn(
-                'absolute right-2 top-1/2 inline-flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full transition-all',
-                aiMode
-                  ? 'bg-primary text-primary-foreground shadow-sm'
-                  : 'text-muted-foreground hover:bg-muted hover:text-foreground',
-              )}
-            >
-              <Sparkles className="h-4 w-4" />
-            </button>
+            {/*
+              AI mode toggle, inside the search input.
+
+              This was a bare sparkle in a circle with a `title`. A sparkle
+              is the least specific glyph in the set — it means "new", "AI",
+              "magic" and "featured" elsewhere on this very page — and the
+              control changes what typing into the box *does*. It now says
+              so, and says it again under the field once it is on.
+            */}
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setAiMode((v) => !v)
+                    // Focus the input so the user can immediately type their
+                    // natural-language query after enabling AI mode.
+                    setTimeout(() => searchInputRef.current?.focus(), 0)
+                  }}
+                  aria-pressed={aiMode}
+                  aria-label={aiMode ? 'Turn off AI search' : 'Turn on AI search'}
+                  className={cn(
+                    'absolute right-2 top-1/2 inline-flex h-8 -translate-y-1/2 items-center gap-1.5 rounded-full px-2.5 text-xs font-medium transition-all',
+                    aiMode
+                      ? 'bg-primary text-primary-foreground shadow-sm'
+                      : 'text-muted-foreground hover:bg-muted hover:text-foreground',
+                  )}
+                >
+                  <Sparkles aria-hidden className="h-4 w-4 shrink-0" />
+                  <span className="hidden sm:inline">AI</span>
+                </button>
+              </TooltipTrigger>
+              <TooltipContent side="bottom" className="max-w-64">
+                {aiMode
+                  ? 'AI search is on — describe what you want in plain English and results are ranked by meaning. Click to go back to keyword search.'
+                  : 'Search by describing what you want ("a button that pulses red") instead of matching words in the name.'}
+              </TooltipContent>
+            </Tooltip>
           </div>
           <Button
             type="button"
@@ -741,7 +621,12 @@ export default function Home() {
         </div>
 
         {/* Filter chips */}
-        <div className="mt-6 flex flex-wrap items-center justify-center gap-2">
+        <p className="mt-7 text-center text-xs text-muted-foreground">
+          <span className="font-semibold text-foreground">Filter by category</span>{' '}
+          — narrows the grid below. The number on each chip is how many effects
+          are in it.
+        </p>
+        <div className="mt-3 flex flex-wrap items-center justify-center gap-2">
           <CategoryChip
             label="All"
             count={EFFECTS.length}
@@ -891,16 +776,30 @@ export default function Home() {
                   Showing {pageStart + 1}–{pageEnd} of {filtered.length.toLocaleString('en-US')}
                 </span>
                 <Select value={sort} onValueChange={(v) => setSort(v as Sort)}>
-                  <SelectTrigger
-                    className="h-8 w-[150px] gap-1.5 rounded-full border-border/60 bg-background/70 text-xs shadow-sm"
-                    aria-label="Sort effects"
-                  >
-                    <ArrowDownUp className="h-3.5 w-3.5 text-muted-foreground" />
-                    <SelectValue />
-                  </SelectTrigger>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <SelectTrigger
+                        className="h-8 w-[150px] gap-1.5 rounded-full border-border/60 bg-background/70 text-xs shadow-sm"
+                        aria-label="Sort effects"
+                      >
+                        <ArrowDownUp className="h-3.5 w-3.5 text-muted-foreground" />
+                        <SelectValue />
+                      </SelectTrigger>
+                    </TooltipTrigger>
+                    <TooltipContent side="bottom">Change the order of the grid below</TooltipContent>
+                  </Tooltip>
+                  {/* Each option says what it orders by. "Curated" in
+                      particular meant nothing on its own — it is the
+                      catalog's own hand-set order, not a sort at all. */}
                   <SelectContent>
-                    <SelectItem value="default">Curated order</SelectItem>
-                    <SelectItem value="featured">Featured first</SelectItem>
+                    <SelectItem value="default">
+                      Curated order
+                      <span className="ml-1.5 text-muted-foreground">· as catalogued</span>
+                    </SelectItem>
+                    <SelectItem value="featured">
+                      Featured first
+                      <span className="ml-1.5 text-muted-foreground">· picks on top</span>
+                    </SelectItem>
                     <SelectItem value="az">Name A → Z</SelectItem>
                     <SelectItem value="za">Name Z → A</SelectItem>
                   </SelectContent>
@@ -985,15 +884,9 @@ export default function Home() {
         </div>
       </footer>
 
-      {/* Slide-out bundle drawer */}
-      <BundleDrawer open={bundleOpen} onOpenChange={setBundleOpen} />
-      <CompareDrawer open={compareOpen} onOpenChange={setCompareOpen} />
-
-      {/* Global shortcuts help dialog (?) */}
-      <ShortcutsHelpButton />
-
-      {/* Cmd+K command palette */}
-      <CommandPalette />
+      {/* The bundle and compare drawers, the shortcuts dialog and the
+          command palette are all mounted by <SiteHeader> now — one copy
+          each, on every surface, instead of six copies on six of them. */}
     </div>
   )
 }

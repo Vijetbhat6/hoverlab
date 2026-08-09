@@ -3,10 +3,15 @@
 /**
  * UserMenu — header dropdown for account state.
  *
- *  - Logged out: shows a "Sign in" ghost button that links to /login.
+ *  - Logged out: "Sign in" next to a "Get started" primary button. Those
+ *    two were the landing page's own header CTAs, and they died with it —
+ *    but they are the right pair on every surface, not just the front door:
+ *    a signed-out visitor who arrives on /block/pricing-tiers from a search
+ *    result now gets the same offer as one who arrived at "/".
  *  - Logged in: shows an avatar button (first initial of name/email) that
  *    opens a dropdown with the user's email, a link to /account, an upgrade
- *    link while the account is still free, and a sign-out action.
+ *    link while the account is still free, and a sign-out action. Signing
+ *    out returns to the landing page.
  *
  * The upgrade item is the only in-product entry to checkout that follows a
  * user around: before it, someone who signed up could only buy by finding
@@ -47,6 +52,9 @@ export function UserMenu() {
     try {
       await logout()
       toast.success('Signed out.')
+      // Land back on "/". `replace` rather than `push` so the back button
+      // doesn't return to the page they were signed in on.
+      router.replace('/')
       router.refresh()
     } finally {
       setSigningOut(false)
@@ -68,16 +76,21 @@ export function UserMenu() {
 
   if (!user) {
     return (
-      <Button
-        variant="ghost"
-        size="sm"
-        className="hidden h-9 gap-1.5 sm:inline-flex"
-        asChild
-      >
-        <Link href="/login">
-          <UserIcon className="h-4 w-4" /> Sign in
-        </Link>
-      </Button>
+      <div className="flex items-center gap-1">
+        <Button
+          variant="ghost"
+          size="sm"
+          className="hidden h-9 gap-1.5 sm:inline-flex"
+          asChild
+        >
+          <Link href="/login">
+            <UserIcon className="h-4 w-4" /> Sign in
+          </Link>
+        </Button>
+        <Button size="sm" className="h-9" asChild>
+          <Link href="/signup">Get started</Link>
+        </Button>
+      </div>
     )
   }
 

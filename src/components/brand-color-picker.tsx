@@ -162,6 +162,7 @@ const BrandColorPickerInner = React.forwardRef<
 
           <SliderRow
             label="Hue"
+            description="Where the brand colour sits on the wheel. Everything tinted by it — buttons, focus rings, links — moves with this."
             value={draft.hue}
             min={0}
             max={360}
@@ -174,6 +175,7 @@ const BrandColorPickerInner = React.forwardRef<
 
           <SliderRow
             label="Chroma"
+            description="How vivid the colour is. 0 is grey; past roughly 0.25 many hues fall outside what a standard display can show."
             value={draft.chroma}
             min={0}
             max={0.32}
@@ -185,6 +187,7 @@ const BrandColorPickerInner = React.forwardRef<
 
           <SliderRow
             label="Light (L)"
+            description="Lightness of the brand colour in the light theme. Lower it if white text on your primary button is hard to read."
             value={draft.lightL}
             min={0.2}
             max={0.85}
@@ -196,6 +199,7 @@ const BrandColorPickerInner = React.forwardRef<
 
           <SliderRow
             label="Dark (L)"
+            description="Lightness in the dark theme. It sits higher than the light-theme value on purpose — a colour needs more lightness to read on a dark background."
             value={draft.darkL}
             min={0.4}
             max={0.9}
@@ -239,6 +243,11 @@ export const BrandColorPicker = React.memo(BrandColorPickerInner)
 
 interface SliderRowProps {
   label: string
+  /**
+   * One line on what the control does. Required, matching
+   * <SliderField> — an unexplained slider is what this replaces.
+   */
+  description: string
   value: number
   min: number
   max: number
@@ -254,6 +263,7 @@ let sliderRowInstanceCounter = 0
 
 function SliderRow({
   label,
+  description,
   value,
   min,
   max,
@@ -268,6 +278,7 @@ function SliderRow({
   const [instanceClass] = React.useState(
     () => `brand-slider-${++sliderRowInstanceCounter}`,
   )
+  const descriptionId = `${instanceClass}-description`
 
   return (
     <div className={instanceClass}>
@@ -280,9 +291,14 @@ function SliderRow({
         min={min}
         max={max}
         step={step}
+        aria-label={label}
+        aria-describedby={descriptionId}
         onValueChange={(arr) => onChange(arr[0])}
         onValueCommit={(arr) => onCommit(arr[0])}
       />
+      <p id={descriptionId} className="mt-1 text-[11px] leading-snug text-muted-foreground">
+        {description}
+      </p>
       {trackGradient && (
         <style jsx>{`
           :global(.${instanceClass} [data-slot='slider-track']) {

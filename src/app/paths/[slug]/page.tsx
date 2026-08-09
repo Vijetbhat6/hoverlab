@@ -92,10 +92,10 @@ export default async function PathDetailPage({ params }: PageProps) {
             </span>
           </div>
 
-          <h1 className="mt-3 text-balance text-3xl font-extrabold tracking-tight sm:text-4xl">
+          <h1 className="type-page mt-3">
             {path.title}
           </h1>
-          <p className="mt-3 max-w-2xl text-pretty text-muted-foreground">
+          <p className="mt-3 max-w-2xl text-pretty text-body">
             {path.description}
           </p>
         </header>

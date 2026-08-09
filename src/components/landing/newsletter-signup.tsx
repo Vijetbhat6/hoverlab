@@ -9,7 +9,7 @@
  * Loops) when ready.
  *
  * Promise: "One email when we drop new effects. No spam, ever."
- * Social proof: "Joined by 1,200+ developers"
+ * Two real promises under the field: no spam, unsubscribe anytime.
  */
 
 import * as React from 'react'
@@ -98,7 +98,13 @@ export function NewsletterSignup() {
                 <Check className="h-3.5 w-3.5 text-emerald-500" />
                 Unsubscribe anytime
               </span>
-              <span>Joined by 1,200+ developers</span>
+              {/*
+                "Joined by 1,200+ developers" was here. Nothing counts that
+                number — it was invented, and it sat directly under an email
+                field, which is exactly where a reader is deciding whether to
+                trust us. The two promises either side of it are real and
+                checkable, and they are the ones that do the work.
+              */}
             </div>
           </div>
         </div>

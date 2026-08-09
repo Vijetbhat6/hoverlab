@@ -13,9 +13,9 @@ import { ArrowRight, Compass, Clock, Layers } from 'lucide-react'
 import { PATHS } from '@/lib/paths/catalog'
 import { absoluteUrl } from '@/lib/site'
 
-const TITLE = 'Guided paths — build something end to end — Hoverlab'
+const TITLE = `${PATHS.length} guided paths — build something end to end — Hoverlab`
 const DESCRIPTION =
-  'Ordered routes through the catalog: a landing page in eight blocks, a complete auth flow, a dashboard, a storefront. Each step says why it is where it is.'
+  'Ordered routes through the catalog: a landing page in eight blocks, a waitlist in an evening, a complete auth flow, onboarding, settings, a dashboard, billing, a storefront. Each step says why it is where it is.'
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -46,13 +46,17 @@ export default function PathsHubPage() {
             <Compass aria-hidden className="h-3.5 w-3.5" />
             Guided paths
           </span>
-          <h1 className="mt-5 text-balance text-4xl font-extrabold tracking-tight sm:text-5xl">
+          <h1 className="type-hub mt-5">
             Build the whole thing, in order
           </h1>
-          <p className="mt-4 text-pretty text-muted-foreground">
+          <p className="mt-4 text-pretty text-body">
             A catalog tells you what exists. These tell you what to take and in
             what order — and, at every step, why it goes there rather than
             somewhere else. The ordering is the part worth copying.
+          </p>
+          <p className="mt-4 text-sm text-muted-foreground">
+            {PATHS.length} paths · {PATHS.reduce((n, p) => n + p.steps.length, 0)}{' '}
+            steps · beginner paths first
           </p>
         </header>
 

@@ -10,6 +10,7 @@
  */
 
 import * as React from 'react'
+import { toast } from 'sonner'
 import { track } from '@/lib/analytics'
 import { useAuth } from '@/components/auth-provider'
 import { levelOf, type ArtifactLevel } from '@/lib/artifact-types'
@@ -136,15 +137,66 @@ let syncReadyFor: string | null = null
 let pushTimer: ReturnType<typeof setTimeout> | null = null
 /** Payload of the last push, to suppress redundant re-sends. */
 let lastPushed: string | null = null
+/**
+ * Whether the free-plan cap has already been reported this page load.
+ *
+ * The push is debounced but still fires on every change, so without this a
+ * user at the cap would be told about it again on every add — and the
+ * message is about the account, not about the artifact they just clicked.
+ */
+let capNoticeShown = false
 
 function resetSyncState() {
   syncStartedFor = null
   syncReadyFor = null
   lastPushed = null
+  // Signing out ends the account this notice was about; the next one gets
+  // told about its own cap.
+  capNoticeShown = false
   if (pushTimer) {
     clearTimeout(pushTimer)
     pushTimer = null
   }
+}
+
+/**
+ * Tell the user when the server trimmed their bundle.
+ *
+ * `PUT /api/sync/bundle` caps a free account's saved bundle and answers
+ * `truncated: true` when it drops entries. Nothing read that flag, so the
+ * cap was enforced completely silently: the local bundle kept every entry,
+ * the cloud copy kept the newest ten, and the difference only showed up as
+ * missing artifacts on the user's next device. Saying so is what makes the
+ * limit a plan boundary rather than a data-loss bug.
+ */
+function reportTruncation(res: Response) {
+  res
+    .json()
+    .then((data: { truncated?: boolean; limit?: number | null }) => {
+      if (!data?.truncated || capNoticeShown) return
+      capNoticeShown = true
+      const limit = typeof data.limit === 'number' ? data.limit : null
+      toast.warning(
+        limit
+          ? `Only the newest ${limit} items are saved to your account.`
+          : 'Only your newest bundle items are saved to your account.',
+        {
+          description:
+            'The free plan caps the synced bundle. Everything is still here on ' +
+            'this device — upgrade to Pro to sync all of it.',
+          action: {
+            label: 'Upgrade',
+            onClick: () => {
+              window.location.href = '/account#billing'
+            },
+          },
+        },
+      )
+    })
+    .catch(() => {
+      // A body we can't read says nothing about truncation. Staying quiet is
+      // right: a spurious "we dropped your items" is worse than no notice.
+    })
 }
 
 function schedulePush(entries: BundleEntry[]) {
@@ -162,14 +214,31 @@ function schedulePush(entries: BundleEntry[]) {
       headers: { 'Content-Type': 'application/json' },
       credentials: 'same-origin',
       body,
-    }).catch(() => {
-      lastPushed = null
     })
+      .then(reportTruncation)
+      .catch(() => {
+        lastPushed = null
+      })
   }, 600)
 }
 
 export function useBundle() {
-  const [entries, setEntries] = React.useState<BundleEntry[]>(() => readBundle())
+  /**
+   * Starts EMPTY rather than seeded from localStorage.
+   *
+   * Seeding here (`useState(() => readBundle())`) is a hydration bug, the
+   * same one use-copy-history.ts and use-recently-viewed.ts already avoid:
+   * the server has no localStorage so it renders "Add to bundle" and a zero
+   * count, while the client's very first render already has the stored
+   * entries. React sees two different trees, logs a hydration mismatch and
+   * discards the server HTML to re-render the whole page — for every
+   * returning visitor with anything in their bundle. Reading in the effect
+   * below means both sides agree on "empty", and the real list arrives on
+   * the commit after.
+   */
+  const [entries, setEntries] = React.useState<BundleEntry[]>(() => [])
+  /** False until the effect below has read localStorage — see the push effect. */
+  const [hydrated, setHydrated] = React.useState(false)
   const { user, loading: authLoading } = useAuth()
   const userId = user?.id ?? null
 
@@ -189,6 +258,9 @@ export function useBundle() {
 
   React.useEffect(() => {
     const sync = () => setEntries(readBundle())
+    // Populate on mount — see the note on the initial state above.
+    sync()
+    setHydrated(true)
     window.addEventListener('storage', sync)
     window.addEventListener('cssfx:bundle-changed', sync)
     return () => {
@@ -251,12 +323,17 @@ export function useBundle() {
         entriesRef.current = merged // keep ref in sync with the merged list
         setEntries(merged)
 
-        await fetch('/api/sync/bundle', {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          credentials: 'same-origin',
-          body: lastPushed,
-        })
+        // The merge is the push most likely to exceed a free account's cap —
+        // it is the union of this device's bundle and the account's — so its
+        // response is the one that most needs reporting.
+        reportTruncation(
+          await fetch('/api/sync/bundle', {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'same-origin',
+            body: lastPushed,
+          }),
+        )
       } catch {
         // Non-fatal — local data is intact. Roll back the start marker so a
         // later mount retries, and leave syncReadyFor unset so nothing
@@ -270,11 +347,16 @@ export function useBundle() {
     }
   }, [userId, authLoading])
 
-  // Debounced push on local changes — only once the merge has succeeded.
+  // Debounced push on local changes — only once the merge has succeeded, and
+  // only once this instance has read localStorage. Without the `hydrated`
+  // gate an instance that mounts after the merge (a card paginated into
+  // view, say) would push its still-empty starting state and wipe the
+  // account's bundle.
   React.useEffect(() => {
+    if (!hydrated) return
     if (!userId || syncReadyFor !== userId) return
     schedulePush(entries)
-  }, [entries, userId])
+  }, [entries, userId, hydrated])
 
   /* ---------------- Local actions ---------------- */
   const has = React.useCallback(

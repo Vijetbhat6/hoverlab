@@ -24,8 +24,10 @@
 import * as React from 'react'
 import Link from 'next/link'
 import type { Metadata } from 'next'
-import { Layers, Search, SlidersHorizontal } from 'lucide-react'
+import { Layers, SlidersHorizontal } from 'lucide-react'
 
+import { CatalogSearchForm } from '@/components/catalog-search-form'
+import { hoverPeekCssFor } from '@/lib/hover-peek-css'
 import { BlockCard } from '@/components/blocks/block-card'
 import { PageCard } from '@/components/pages/page-card'
 import { TemplateCard } from '@/components/templates/template-card'
@@ -111,9 +113,15 @@ export default async function BrowsePage({ searchParams }: BrowsePageProps) {
 
   // One <style> for every effect preview on the page. Class names are
   // globally unique per effect, so concatenation cannot collide.
-  const effectCss = shown
+  //
+  // The second half is the hover-to-play CSS: without it, 44% of these
+  // tiles are a still image until you land the pointer on the element
+  // itself. See `lib/hover-peek-css`.
+  const shownEffectCss = shown
     .filter((h) => h.level === 'effect')
     .map((h) => getEffect(h.id)?.css ?? '')
+  const effectCss = [shownEffectCss.join('\n'), hoverPeekCssFor(shownEffectCss)]
+    .filter(Boolean)
     .join('\n')
 
   return (
@@ -124,45 +132,23 @@ export default async function BrowsePage({ searchParams }: BrowsePageProps) {
             <Layers aria-hidden className="h-3.5 w-3.5" />
             Everything
           </span>
-          <h1 className="mt-5 text-balance text-4xl font-extrabold tracking-tight sm:text-5xl">
+          <h1 className="type-hub mt-5">
             Browse the whole catalog
           </h1>
-          <p className="mt-4 text-pretty text-muted-foreground">
+          <p className="mt-4 text-pretty text-body">
             {BROWSE_TOTAL.toLocaleString('en-US')} components across four tiers — a CSS
             hover state, a pricing section, a whole dashboard screen, or a project you can
             clone. One search over all of them.
           </p>
         </header>
 
-        {/* -- Search. A real GET form: works with JS off, and the result
-               is a shareable URL. ------------------------------------- */}
-        <form action="/browse" method="get" className="mx-auto mt-8 flex max-w-xl gap-2">
-          {/* Preserve the active level across a new search. */}
-          {level ? <input type="hidden" name="level" value={level} /> : null}
-          <div className="relative flex-1">
-            <Search
-              aria-hidden
-              className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground"
-            />
-            <label htmlFor="browse-q" className="sr-only">
-              Search the catalog
-            </label>
-            <input
-              id="browse-q"
-              name="q"
-              type="search"
-              defaultValue={q}
-              placeholder="pricing, glassmorphism, dashboard…"
-              className="h-11 w-full rounded-xl border border-border/60 bg-card/60 pl-10 pr-3 text-sm placeholder:text-muted-foreground focus:border-primary/50 focus:outline-none focus:ring-2 focus:ring-ring/30"
-            />
-          </div>
-          <button
-            type="submit"
-            className="h-11 shrink-0 rounded-xl bg-primary px-5 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-          >
-            Search
-          </button>
-        </form>
+        {/* The same form the landing hero now leads with. See
+            <CatalogSearchForm> for why it is a plain GET. */}
+        <CatalogSearchForm
+          defaultValue={q}
+          level={level}
+          className="mx-auto mt-8 max-w-xl"
+        />
 
         {/* -- Level rail ------------------------------------------------ */}
         <nav aria-label="Filter by tier" className="mt-6 flex flex-wrap justify-center gap-2">

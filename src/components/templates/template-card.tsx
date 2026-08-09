@@ -4,6 +4,8 @@
  * The thumbnail is the template's first route — its landing screen for a
  * marketing site, its dashboard for an admin panel. That is the screen
  * someone is deciding about, and it is the one the route table puts first.
+ * A template that shares its first screen with another one overrides this
+ * with `previewPageId`, so no two cards in a grid render the same picture.
  *
  * The three counts are the honest measure of what you get: routes you can
  * visit, pages underneath them, blocks underneath those.
@@ -18,12 +20,13 @@ import type { TemplateMeta } from '@/lib/templates/template-types'
 
 export function TemplateCard({ template }: { template: TemplateMeta }) {
   const first = template.routes[0]
+  const previewPageId = template.previewPageId ?? first?.pageId
 
   return (
     <article className="group relative flex flex-col overflow-hidden rounded-2xl border border-border/60 bg-card/60 p-3 transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-lg">
       <ArtifactThumbnail
-        preview={first ? getPagePreview(first.pageId) : undefined}
-        missingKey={first?.pageId ?? template.id}
+        preview={previewPageId ? getPagePreview(previewPageId) : undefined}
+        missingKey={previewPageId ?? template.id}
         height="h-80"
       />
 

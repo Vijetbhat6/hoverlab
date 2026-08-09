@@ -436,6 +436,10 @@ export default function EasingToolPage() {
                 step={0.05}
                 onValueChange={(arr) => update({ duration: arr[0] })}
               />
+              <p className="mt-1.5 text-[11px] leading-snug text-muted-foreground">
+                How long the demo above takes. It changes the preview only —
+                the curve you copy is independent of duration.
+              </p>
             </div>
           </div>
 

@@ -6,8 +6,11 @@
  *  - Marketing hero: what Hoverlab is, who it's for, what's in the box.
  *  - Live effect showcase (4 featured tiles, no auth required to view).
  *  - Category overview.
- *  - Primary CTA → /signup, secondary → /login.
- *  - If the user is already logged in, the CTA becomes "Open the library →".
+ *  - Primary CTA → /browse, secondary → /signup (or /library when signed in).
+ *
+ * The primary action is deliberately not an auth screen: the catalog is
+ * public, so the front door sends people into it rather than asking them to
+ * register for something they can already do. See the note above the buttons.
  *
  * Authenticated visitors are redirected to /library by middleware, so
  * reaching this page while logged in is rare — but we still handle it
@@ -24,7 +27,6 @@ import {
   Code2,
   Zap,
   Shield,
-  Github,
   Layers,
   Palette,
   Copy,
@@ -33,20 +35,18 @@ import {
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { useAuth } from '@/components/auth-provider'
+import { SiteHeader } from '@/components/site-header'
+import { CatalogSearchForm } from '@/components/catalog-search-form'
 import { LandingShowcase } from '@/components/landing-showcase'
 import { Reveal } from '@/components/reveal'
 import { StatsBand } from '@/components/landing/stats-band'
 import { LadderBand } from '@/components/landing/ladder-band'
 import { FaqAccordion } from '@/components/landing/faq-accordion'
 import { LogoMarquee } from '@/components/landing/logo-marquee'
-import { BentoGrid } from '@/components/landing/bento-grid'
 import { CodePreviewWindow } from '@/components/landing/code-preview'
 import { UseCases } from '@/components/landing/use-cases'
-import { Testimonials } from '@/components/landing/testimonials'
 import { PricingTiers } from '@/components/landing/pricing-tiers'
 import { ComparisonTable } from '@/components/landing/comparison-table'
-import { ChangelogTimeline } from '@/components/landing/changelog-timeline'
-import { Roadmap } from '@/components/landing/roadmap'
 import { NewsletterSignup } from '@/components/landing/newsletter-signup'
 import { CommunityBand } from '@/components/landing/community-band'
 import { CATEGORIES } from '@/lib/effect-types'
@@ -55,20 +55,35 @@ import { BLOCK_COUNT } from '@/lib/blocks/block-index'
 import { PAGE_COUNT } from '@/lib/pages/page-index'
 import { TEMPLATE_COUNT } from '@/lib/templates/template-index'
 
-/** Ladder links for the landing header. Mirrors <SiteHeader>'s nav. */
-const LADDER_NAV = [
-  { label: 'Effects', href: '/library' },
-  { label: 'Blocks', href: '/blocks' },
-  { label: 'Pages', href: '/pages' },
-  { label: 'Templates', href: '/templates' },
-  { label: 'Browse', href: '/browse' },
+/**
+ * The four rungs, as entry points under the hero search.
+ *
+ * Counts come from `catalog-stats` and the three index modules' `*_COUNT`
+ * exports rather than from `lib/browse` — that module builds its flattened
+ * index off `EFFECT_INDEX`, and importing it here would put 772 KB of
+ * metadata into the bundle of the highest-traffic page to render four
+ * numbers.
+ */
+const HERO_TIERS = [
+  { label: 'Effects', href: '/library', count: TOTAL_COUNT },
+  { label: 'Blocks', href: '/blocks', count: BLOCK_COUNT },
+  { label: 'Pages', href: '/pages', count: PAGE_COUNT },
+  { label: 'Templates', href: '/templates', count: TEMPLATE_COUNT },
 ]
 
 export default function LandingPage() {
   const { user, loading } = useAuth()
 
+  /*
+   * No `overflow-hidden` on the wrapper below, unlike every other version of
+   * it. It was containing the decorative blobs — but `overflow: hidden` on an
+   * ancestor also makes that ancestor the scroll container for anything
+   * sticky inside it, and this page's header was inside it. The "sticky"
+   * header on the front door has never actually stuck. The blobs are clipped
+   * by their own wrapper, which already has the property.
+   */
   return (
-    <div className="relative min-h-screen overflow-hidden bg-background text-foreground">
+    <div className="relative min-h-screen bg-background text-foreground">
       {/* Decorative background */}
       <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
         <div className="absolute -top-40 left-1/4 h-96 w-96 rounded-full bg-primary/20 blur-3xl" />
@@ -77,63 +92,13 @@ export default function LandingPage() {
         <div className="absolute bottom-0 right-1/4 h-72 w-72 rounded-full bg-emerald-500/10 blur-3xl" />
       </div>
 
-      {/* Header */}
-      <header className="sticky top-0 z-40 border-b border-border/40 bg-background/70 backdrop-blur-xl">
-        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-2.5">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-emerald-600 text-white shadow-lg shadow-primary/30">
-              <Wand2 className="h-5 w-5" />
-            </div>
-            <div className="flex flex-col leading-tight">
-              <span className="text-base font-bold tracking-tight">Hoverlab</span>
-              <span className="text-[11px] text-muted-foreground">
-                Effects, blocks, pages and templates
-              </span>
-            </div>
-          </div>
-
-          {/*
-            The ladder, reachable from the front door. Every catalog surface
-            gets this from <SiteHeader>, but the landing page carries its own
-            header and had no links to /blocks, /pages or /templates at all —
-            the ladder band further down was the only way in, so anything a
-            visitor didn't scroll to may as well not have shipped.
-          */}
-          <nav
-            aria-label="Catalog"
-            className="hidden items-center gap-1 md:flex"
-          >
-            {LADDER_NAV.map((item) => (
-              <Button key={item.href} variant="ghost" size="sm" asChild>
-                <Link href={item.href}>{item.label}</Link>
-              </Button>
-            ))}
-          </nav>
-
-          <div className="flex items-center gap-2">
-            <Button
-              variant="ghost"
-              size="sm"
-              className="hidden gap-1.5 sm:inline-flex"
-              asChild
-            >
-              <a
-                href="https://github.com"
-                target="_blank"
-                rel="noreferrer noopener"
-              >
-                <Github className="h-4 w-4" /> GitHub
-              </a>
-            </Button>
-            <Button variant="ghost" size="sm" asChild>
-              <Link href="/login">Sign in</Link>
-            </Button>
-            <Button size="sm" asChild>
-              <Link href="/signup">Get started</Link>
-            </Button>
-          </div>
-        </div>
-      </header>
+      {/*
+        The same header as everywhere else. This page used to carry its own,
+        with five ladder links to the catalog's nine surfaces and none of the
+        bundle, compare or search controls — so the front door offered a
+        different, smaller product than the one behind it.
+      */}
+      <SiteHeader />
 
       {/* Hero */}
       <section className="mx-auto w-full max-w-7xl px-4 pb-12 pt-16 sm:px-6 sm:pt-24 lg:px-8 lg:pt-32">
@@ -150,11 +115,11 @@ export default function LandingPage() {
             {TOTAL_COUNT.toLocaleString('en-US')} effects · {BLOCK_COUNT} blocks ·{' '}
             {PAGE_COUNT} pages · {TEMPLATE_COUNT} templates
           </div>
-          <h1 className="text-balance bg-gradient-to-br from-foreground via-foreground to-foreground/60 bg-clip-text text-5xl font-extrabold tracking-tight text-transparent sm:text-6xl lg:text-7xl">
+          <h1 className="type-display text-gradient-heading">
             Beautiful UI,
             <br className="hidden sm:inline" /> ready to copy.
           </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-pretty text-base text-muted-foreground sm:text-lg lg:text-xl">
+          <p className="mx-auto mt-6 max-w-2xl text-pretty text-base text-body sm:text-lg lg:text-xl">
             Hoverlab is a curated, open-source catalog that starts at a single
             hover state and goes all the way up to a project you can deploy.
             Copy one of {TOTAL_COUNT.toLocaleString('en-US')} pure-CSS effects,
@@ -165,33 +130,60 @@ export default function LandingPage() {
             </code>{' '}
             if you&apos;d rather stay in the terminal.
           </p>
+          {/*
+            The front door is a search box, not a signup decision.
+
+            /browse is the best surface on the site — one query ranked across
+            all four rungs — and it was reachable only by noticing a nav item.
+            The hero's job is to hand someone the thing they came for, and
+            what a developer arrives wanting is "do you have a pricing
+            section", not "which of these two auth screens". So the search
+            leads, the tier chips give it a floor for anyone who does not
+            have a word in mind, and the account comes after the catalog has
+            made its case — nothing here needs one. proxy.ts leaves /browse,
+            /library and every detail page public, and copy works signed out.
+          */}
+          <CatalogSearchForm
+            size="lg"
+            label="Search every effect, block, page and template"
+            className="mx-auto mt-9 max-w-2xl"
+          />
+
+          <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
+            {HERO_TIERS.map((tier) => (
+              <Link
+                key={tier.href}
+                href={tier.href}
+                className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-card/60 px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:border-primary/40 hover:bg-card hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              >
+                {tier.label}
+                <span className="text-muted-foreground/70">
+                  {tier.count.toLocaleString('en-US')}
+                </span>
+              </Link>
+            ))}
+          </div>
+
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <Button size="lg" variant="outline" className="h-12 gap-1.5 px-6" asChild>
+              <Link href="/browse">
+                Browse all {(TOTAL_COUNT + BLOCK_COUNT + PAGE_COUNT + TEMPLATE_COUNT).toLocaleString('en-US')} components
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </Button>
             {!loading && user ? (
-              <Button size="lg" className="h-12 gap-1.5 px-6" asChild>
-                <Link href="/library">
-                  Open the library
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
+              <Button size="lg" variant="ghost" className="h-12 gap-1.5 px-6" asChild>
+                <Link href="/library">Open your library</Link>
               </Button>
             ) : (
-              <Button size="lg" className="h-12 gap-1.5 px-6" asChild>
-                <Link href="/signup">
-                  Create your free account
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
+              <Button size="lg" variant="ghost" className="h-12 gap-1.5 px-6" asChild>
+                <Link href="/signup">Create a free account</Link>
               </Button>
             )}
-            <Button
-              size="lg"
-              variant="outline"
-              className="h-12 gap-1.5 px-6"
-              asChild
-            >
-              <Link href="/login">I already have an account</Link>
-            </Button>
           </div>
           <p className="mt-4 text-xs text-muted-foreground">
-            Free forever · No credit card · Your favorites sync across devices
+            No account needed to browse or copy · Sign up only to save
+            favorites and sync them across devices
           </p>
         </div>
       </section>
@@ -290,8 +282,14 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Bento grid — why developers choose Hoverlab */}
-      <BentoGrid />
+      {/*
+        The bento grid used to sit here. It was a second "why developers
+        choose Hoverlab" immediately after the features grid above, making
+        the same six points in a different box shape — and a visitor who has
+        just read them does not read them again, they start scrolling past
+        everything, including the comparison table that follows and is the
+        one section actually arguing against the alternatives.
+      */}
 
       {/* Comparison table — Hoverlab vs alternatives */}
       <ComparisonTable />
@@ -378,17 +376,25 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Testimonials — social proof */}
-      <Testimonials />
+      {/*
+        Three sections came out here.
 
-      {/* Changelog timeline — what's new */}
-      <ChangelogTimeline />
+        Testimonials: six quotes attributed to named people in named cities —
+        "Maya Krishnan, Indie hacker, Berlin" — who do not exist. Invented
+        endorsements are the one thing on this page with real downside: the
+        audience is developers, the names are checkable, and a single person
+        searching one of them turns every other claim on the page into a
+        maybe. Put it back the moment there are real quotes to put in it.
+
+        Changelog and roadmap: both are real and both are worth publishing,
+        but neither belongs on the front door. They answer "what has this
+        project been up to", which is a question you ask after deciding to
+        care — the FAQ below answers the questions people have before that.
+        They belong under /docs.
+      */}
 
       {/* FAQ */}
       <FaqAccordion />
-
-      {/* Roadmap — now / next / later */}
-      <Roadmap />
 
       {/* Final CTA */}
       <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
@@ -401,7 +407,7 @@ export default function LandingPage() {
               <h2 className="text-balance text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl">
                 Ready to make your UI move?
               </h2>
-              <p className="mx-auto mt-4 max-w-xl text-pretty text-muted-foreground sm:text-lg">
+              <p className="mx-auto mt-4 max-w-xl text-pretty text-body sm:text-lg">
                 Create your free account in seconds. Your favorites and bundle
                 will sync across every device you sign in on.
               </p>
@@ -421,8 +427,18 @@ export default function LandingPage() {
                   <Link href="/login">Sign in</Link>
                 </Button>
               </div>
+              {/*
+                "Join 1,200+ developers and designers" was here. Nothing
+                counts that number, so it was a claim we could not stand
+                behind on the last line before the sign-up button — the
+                worst possible place to be caught inventing one. What the
+                catalog actually contains is verifiable and does the same
+                job, so it says that instead.
+              */}
               <p className="mt-6 text-xs text-muted-foreground">
-                Join 1,200+ developers and designers shipping prettier UIs with pure CSS.
+                {TOTAL_COUNT.toLocaleString('en-US')} effects, {BLOCK_COUNT}{' '}
+                blocks, {PAGE_COUNT} pages and {TEMPLATE_COUNT} templates —
+                free, open source, no credit card.
               </p>
             </div>
           </div>

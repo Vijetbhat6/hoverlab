@@ -89,6 +89,19 @@ export interface Template
   tags: string[]
   deps: string[]
   routes: TemplateRoute[]
+  /**
+   * Which page to show as this template's thumbnail, when the first route is
+   * the wrong answer.
+   *
+   * Cards default to `routes[0]`, which is right for most templates: the
+   * screen you land on is the screen you are deciding about. It breaks when
+   * two templates legitimately start from the same page — SaaS Starter and
+   * Marketing Site both open on `saas-landing-page`, so both cards rendered
+   * a pixel-identical thumbnail and the grid looked like it was repeating
+   * itself. Naming a different screen here is how the smaller one shows what
+   * makes it different rather than what it shares.
+   */
+  previewPageId?: string
   /** Page ids, derived from `routes` — the rung immediately below. */
   composedOf: string[]
 }

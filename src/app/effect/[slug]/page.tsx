@@ -1,8 +1,6 @@
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import { EffectDetail } from '@/components/effect-detail'
-import { ShortcutsHelpButton } from '@/components/shortcuts-help'
-import { CommandPalette } from '@/components/command-palette'
 import { EFFECTS, type Effect } from '@/lib/effects'
 
 /**
@@ -98,8 +96,6 @@ export default async function EffectPage({ params }: PageProps) {
   return (
     <>
       <EffectDetail effect={effect} similar={similar} prev={prev} next={next} />
-      <ShortcutsHelpButton />
-      <CommandPalette />
     </>
   )
 }

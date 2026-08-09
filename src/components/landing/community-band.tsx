@@ -14,6 +14,7 @@
 import * as React from 'react'
 import { Github, MessageCircle, Twitter, Star, GitFork, ArrowUpRight } from 'lucide-react'
 import { Reveal } from '@/components/reveal'
+import { SOCIAL } from '@/lib/social'
 
 interface Channel {
   icon: React.ReactNode
@@ -29,28 +30,28 @@ const CHANNELS: Channel[] = [
   {
     icon: <Github className="h-5 w-5" />,
     name: 'GitHub',
-    handle: '/hoverlab/css-effects',
+    handle: SOCIAL.github.handle,
     stat: '4.2k',
     statLabel: 'stars',
-    href: 'https://github.com',
+    href: SOCIAL.github.href,
     accent: 'text-foreground',
   },
   {
     icon: <MessageCircle className="h-5 w-5" />,
     name: 'Discord',
-    handle: '/hoverlab',
+    handle: SOCIAL.discord.handle,
     stat: '890',
     statLabel: 'members',
-    href: 'https://discord.com',
+    href: SOCIAL.discord.href,
     accent: 'text-indigo-500',
   },
   {
     icon: <Twitter className="h-5 w-5" />,
     name: 'X (Twitter)',
-    handle: '@hoverlabcss',
+    handle: SOCIAL.twitter.handle,
     stat: '2.1k',
     statLabel: 'followers',
-    href: 'https://twitter.com',
+    href: SOCIAL.twitter.href,
     accent: 'text-sky-500',
   },
 ]
@@ -125,7 +126,7 @@ export function CommunityBand() {
         {/* Star CTA */}
         <Reveal delay={320} className="mt-8 flex justify-center">
           <a
-            href="https://github.com"
+            href={SOCIAL.github.href}
             target="_blank"
             rel="noreferrer noopener"
             className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-background/80 px-5 py-2.5 text-sm font-semibold transition-all hover:border-primary/40 hover:gap-3"

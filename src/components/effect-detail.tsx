@@ -27,13 +27,6 @@ import { CodeBlock } from '@/components/code-block'
 import { FrameworkExportPanel } from '@/components/framework-export-panel'
 import { OpenInSandbox } from '@/components/open-in-sandbox'
 import { EffectInsightsPanel } from '@/components/effect-insights-panel'
-import { BundleDrawer } from '@/components/bundle-drawer'
-import { CompareDrawer } from '@/components/compare-drawer'
-import { CopyHistoryDropdown } from '@/components/copy-history-dropdown'
-import { CommandPalette } from '@/components/command-palette'
-import { ThemeToggle } from '@/components/theme-toggle'
-import { ReducedMotionToggle } from '@/components/reduced-motion-toggle'
-import { UserMenu } from '@/components/user-menu'
 import { useFavorites } from '@/hooks/use-favorites'
 import { useBundle } from '@/hooks/use-bundle'
 import { useCompare } from '@/hooks/use-compare'
@@ -82,8 +75,6 @@ export function EffectDetail({ effect, similar, prev, next }: EffectDetailProps)
   const inBundle = hasBundle(effect.id)
   const { has: hasCompare, toggle: toggleCompare, isFull: compareFull } = useCompare()
   const inCompare = hasCompare(effect.id)
-  const [bundleOpen, setBundleOpen] = React.useState(false)
-  const [compareOpen, setCompareOpen] = React.useState(false)
 
   // Track this view in the recently-viewed history. Fires on mount and on
   // every prev/next navigation (effect.id change). Skipped during SSR.
@@ -251,15 +242,9 @@ export function EffectDetail({ effect, similar, prev, next }: EffectDetailProps)
           .writeText(customizedCss)
           .then(() => toast.success('Copied CSS to clipboard'))
           .catch(() => toast.error('Copy failed — please copy manually'))
-      } else if (key === 'b') {
-        e.preventDefault()
-        // Toggle the drawer so `b` works as both "open" and "close".
-        setBundleOpen((v) => !v)
-      } else if (key === 'v') {
-        e.preventDefault()
-        // Toggle compare drawer (v for "versus").
-        setCompareOpen((v) => !v)
       }
+      // `b` and `v` are bound globally by <SiteHeader>, which owns the two
+      // drawers now — this page no longer needs its own pair.
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
@@ -319,6 +304,9 @@ export function EffectDetail({ effect, similar, prev, next }: EffectDetailProps)
             <ArrowLeft className="h-4 w-4" /> Back to library
           </Link>
         </Button>
+        {/* The account, theme, motion and copy-history controls used to sit
+            here as well as in the header above — a second, smaller control
+            row a few pixels below the real one. They live in <SiteHeader>. */}
         <div className="flex items-center gap-3 text-xs text-muted-foreground">
           <span className="font-mono">{effect.id}</span>
           {isCustomized ? (
@@ -326,10 +314,6 @@ export function EffectDetail({ effect, similar, prev, next }: EffectDetailProps)
               <Sparkles className="h-2.5 w-2.5" /> Edited
             </span>
           ) : null}
-          <CopyHistoryDropdown />
-          <UserMenu />
-          <ThemeToggle />
-          <ReducedMotionToggle />
         </div>
       </div>
 
@@ -341,9 +325,7 @@ export function EffectDetail({ effect, similar, prev, next }: EffectDetailProps)
               <div className="flex flex-wrap items-start justify-between gap-3">
                 <div className="min-w-0">
                   <div className="flex flex-wrap items-center gap-2">
-                    <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
-                      {effect.name}
-                    </h1>
+                    <h1 className="type-page">{effect.name}</h1>
                     {effect.featured ? (
                       <Badge className="bg-amber-500/15 text-amber-600 hover:bg-amber-500/15">
                         Featured
@@ -364,92 +346,107 @@ export function EffectDetail({ effect, similar, prev, next }: EffectDetailProps)
                     ))}
                   </div>
                 </div>
-                <button
-                  type="button"
-                  onClick={() => toggleBundle({ id: effect.id, name: effect.name, category: effect.category }, opts)}
-                  aria-pressed={inBundle}
-                  aria-label={inBundle ? 'Remove from bundle' : 'Add to bundle'}
-                  title={inBundle ? 'Remove from bundle' : 'Add to bundle'}
-                  className={cn(
-                    'inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border transition-all',
-                    inBundle
-                      ? 'border-primary/50 bg-primary/10 text-primary hover:bg-primary/20'
-                      : 'border-border/60 bg-background/60 text-muted-foreground hover:border-primary/40 hover:text-primary',
-                  )}
-                >
-                  {inBundle ? (
-                    <Check className="h-4 w-4" />
-                  ) : (
-                    <Package className="h-4 w-4" />
-                  )}
-                </button>
-                <button
-                  type="button"
-                  onClick={() => toggle(effect.id)}
-                  aria-pressed={isFav}
-                  aria-label={isFav ? 'Remove from favorites' : 'Add to favorites'}
-                  title={isFav ? 'Remove from favorites' : 'Add to favorites'}
-                  className={cn(
-                    'inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border transition-all',
-                    isFav
-                      ? 'border-rose-400/50 bg-rose-500/10 text-rose-500 hover:bg-rose-500/20'
-                      : 'border-border/60 bg-background/60 text-muted-foreground hover:border-rose-400/40 hover:text-rose-500',
-                  )}
-                >
-                  <Heart
+                {/*
+                  Save · Bundle · Compare, spelled out.
+
+                  This was five circular icon buttons, two of which were the
+                  same scales glyph — one added the effect to compare, the
+                  other opened the compare drawer — and one of which was an
+                  "open in new tab" arrow that opened the bundle drawer. The
+                  two drawer-openers are gone: the header tray does that, with
+                  a count, on every page. What is left is the same
+                  Save / Bundle / Compare trio the block, page and template
+                  detail pages already ship, in the same shape.
+                */}
+                <div className="flex shrink-0 flex-wrap items-center gap-1.5">
+                  <button
+                    type="button"
+                    onClick={() => toggle(effect.id)}
+                    aria-pressed={isFav}
                     className={cn(
-                      'h-4 w-4 transition-all',
-                      isFav && 'scale-110 fill-current',
+                      'inline-flex h-9 items-center gap-1.5 rounded-lg border px-3 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
+                      isFav
+                        ? 'border-rose-500/40 bg-rose-500/10 text-rose-600 dark:text-rose-400'
+                        : 'border-border/60 text-muted-foreground hover:bg-muted hover:text-foreground',
                     )}
-                  />
-                </button>
-                <button
-                  type="button"
-                  onClick={() => {
-                    const result = toggleCompare({ id: effect.id, name: effect.name, category: effect.category })
-                    if (result === 'added') {
-                      toast.success(`Added "${effect.name}" to compare`, {
-                        description: 'Open the compare drawer (v) to see it side-by-side.',
-                      })
-                    } else if (result === 'full') {
-                      toast.error('Compare is full', {
-                        description: 'Remove an effect from compare to add another.',
-                      })
-                    } else {
-                      toast.success(`Removed "${effect.name}" from compare`)
+                  >
+                    <Heart aria-hidden className={cn('h-4 w-4', isFav && 'fill-current')} />
+                    {isFav ? 'Saved' : 'Save'}
+                    <span className="sr-only">
+                      {isFav
+                        ? 'Remove this effect from favorites'
+                        : 'Save this effect to favorites'}
+                    </span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() =>
+                      toggleBundle(
+                        { id: effect.id, name: effect.name, category: effect.category },
+                        opts,
+                      )
                     }
-                  }}
-                  aria-pressed={inCompare}
-                  aria-label={inCompare ? 'Remove from compare' : 'Add to compare'}
-                  title={inCompare ? 'Remove from compare' : 'Add to compare'}
-                  className={cn(
-                    'inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border transition-all',
-                    inCompare
-                      ? 'border-primary/50 bg-primary/10 text-primary hover:bg-primary/20'
-                      : 'border-border/60 bg-background/60 text-muted-foreground hover:border-primary/40 hover:text-primary',
-                    compareFull && !inCompare && 'opacity-40 cursor-not-allowed hover:border-border/60 hover:text-muted-foreground',
-                  )}
-                >
-                  <Scale className="h-4 w-4" />
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setBundleOpen(true)}
-                  aria-label="Open bundle"
-                  title="Open bundle (b)"
-                  className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-border/60 bg-background/60 text-muted-foreground transition-all hover:border-primary/40 hover:text-primary"
-                >
-                  <ExternalLink className="h-4 w-4" />
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setCompareOpen(true)}
-                  aria-label="Open compare"
-                  title="Open compare (v)"
-                  className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-border/60 bg-background/60 text-muted-foreground transition-all hover:border-primary/40 hover:text-primary"
-                >
-                  <Scale className="h-4 w-4" />
-                </button>
+                    aria-pressed={inBundle}
+                    className={cn(
+                      'inline-flex h-9 items-center gap-1.5 rounded-lg border px-3 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
+                      inBundle
+                        ? 'border-primary/40 bg-primary/10 text-primary'
+                        : 'border-border/60 text-muted-foreground hover:bg-muted hover:text-foreground',
+                    )}
+                  >
+                    {inBundle ? (
+                      <Check aria-hidden className="h-4 w-4" />
+                    ) : (
+                      <Package aria-hidden className="h-4 w-4" />
+                    )}
+                    {inBundle ? 'In bundle' : 'Bundle'}
+                    <span className="sr-only">
+                      {inBundle
+                        ? 'Remove this effect from the bundle'
+                        : 'Add this effect to the bundle, with your current tweaks'}
+                    </span>
+                  </button>
+
+                  <button
+                    type="button"
+                    disabled={compareFull && !inCompare}
+                    onClick={() => {
+                      const result = toggleCompare({
+                        id: effect.id,
+                        name: effect.name,
+                        category: effect.category,
+                      })
+                      if (result === 'added') {
+                        toast.success(`Added "${effect.name}" to compare`, {
+                          description: 'Open compare in the header (or press v) to see it side by side.',
+                        })
+                      } else if (result === 'full') {
+                        toast.error('Compare is full', {
+                          description: 'Remove an effect from compare to add another.',
+                        })
+                      } else {
+                        toast.success(`Removed "${effect.name}" from compare`)
+                      }
+                    }}
+                    aria-pressed={inCompare}
+                    className={cn(
+                      'inline-flex h-9 items-center gap-1.5 rounded-lg border px-3 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
+                      inCompare
+                        ? 'border-primary/40 bg-primary/10 text-primary'
+                        : 'border-border/60 text-muted-foreground hover:bg-muted hover:text-foreground',
+                      compareFull && !inCompare && 'cursor-not-allowed opacity-40',
+                    )}
+                  >
+                    <Scale aria-hidden className="h-4 w-4" />
+                    {inCompare ? 'Comparing' : 'Compare'}
+                    <span className="sr-only">
+                      {inCompare
+                        ? 'Remove this effect from compare'
+                        : 'Add this effect to compare'}
+                    </span>
+                  </button>
+                </div>
               </div>
             </CardHeader>
 
@@ -649,9 +646,7 @@ export function EffectDetail({ effect, similar, prev, next }: EffectDetailProps)
         </aside>
       </div>
 
-      {/* Slide-out bundle drawer (opened via 'b' shortcut or the bundle button) */}
-      <BundleDrawer open={bundleOpen} onOpenChange={setBundleOpen} />
-      <CompareDrawer open={compareOpen} onOpenChange={setCompareOpen} />
+      {/* The bundle and compare drawers are mounted by <SiteHeader>. */}
     </div>
   )
 }

@@ -4,8 +4,8 @@ import type { Metadata } from 'next'
 import { ArrowLeft, ArrowRight, Layers } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { CommandPalette } from '@/components/command-palette'
 import { EffectStaticCard } from '@/components/effect-static-card'
+import { hoverPeekCssFor } from '@/lib/hover-peek-css'
 import { EFFECTS } from '@/lib/effects'
 import { CATEGORIES, categoryFromSlug, categorySlug, type Effect } from '@/lib/effect-types'
 import { CATEGORY_META } from '@/lib/category-meta'
@@ -139,7 +139,7 @@ export default async function CategoryPage({ params }: PageProps) {
           <span className="text-foreground">{category}</span>
         </nav>
 
-        <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
+        <h1 className="type-page">
           CSS {category} Effects
         </h1>
         <p className="mt-3 max-w-2xl text-muted-foreground">{meta.blurb}</p>
@@ -157,7 +157,17 @@ export default async function CategoryPage({ params }: PageProps) {
         {/* Every preview's CSS in one document-level tag. Class names are
             globally unique per effect (`fx-<slug>-<seq>`), so concatenating
             them can't collide. */}
-        <style dangerouslySetInnerHTML={{ __html: shown.map((e) => e.css).join('\n') }} />
+        {/* Effect CSS, then the hover-to-play rules derived from it. */}
+        <style
+          dangerouslySetInnerHTML={{
+            __html: [
+              shown.map((e) => e.css).join('\n'),
+              hoverPeekCssFor(shown.map((e) => e.css)),
+            ]
+              .filter(Boolean)
+              .join('\n'),
+          }}
+        />
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {shown.map((effect) => (
@@ -198,8 +208,6 @@ export default async function CategoryPage({ params }: PageProps) {
           </div>
         </section>
       </main>
-
-      <CommandPalette />
     </div>
   )
 }

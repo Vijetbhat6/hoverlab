@@ -98,10 +98,10 @@ export default async function PageDetailPage({ params }: PageProps) {
         </nav>
 
         <header className="mt-6 max-w-3xl">
-          <h1 className="text-balance text-3xl font-extrabold tracking-tight sm:text-4xl">
+          <h1 className="type-page">
             {page.name}
           </h1>
-          <p className="mt-3 text-pretty text-muted-foreground">{page.description}</p>
+          <p className="mt-3 text-pretty text-body">{page.description}</p>
 
           <div className="mt-5 flex flex-wrap items-center gap-2">
             <FavoriteArtifactButton

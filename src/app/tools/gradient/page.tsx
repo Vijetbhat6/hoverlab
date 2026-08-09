@@ -220,6 +220,10 @@ export default function GradientToolPage() {
                   step={1}
                   onValueChange={(arr) => setAngle(arr[0])}
                 />
+                <p className="mt-1.5 text-[11px] leading-snug text-muted-foreground">
+                  Direction the gradient runs. 0° goes bottom to top and the
+                  angle turns clockwise, so 90° runs left to right.
+                </p>
                 {/* Quick angle presets */}
                 <div className="mt-3 flex flex-wrap gap-1.5">
                   {[0, 45, 90, 135, 180, 225, 270, 315].map((a) => (
@@ -307,6 +311,7 @@ function StopRow({ stop, canRemove, onChange, onRemove }: StopRowProps) {
           step={1}
           onValueChange={(arr) => onChange({ position: arr[0] })}
           className="w-32"
+          aria-label={`Position of the ${stop.color} stop, as a percentage along the gradient`}
         />
         <span className="w-10 text-right font-mono text-xs tabular-nums text-muted-foreground">
           {stop.position}%

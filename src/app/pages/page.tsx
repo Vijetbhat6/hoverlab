@@ -14,6 +14,7 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 import { ArrowRight, LayoutTemplate, Blocks as BlocksIcon } from 'lucide-react'
 import { PageCard } from '@/components/pages/page-card'
+import { TierDefinition } from '@/components/tier-definition'
 import {
   PAGE_COUNT,
   PAGE_INDEX,
@@ -59,20 +60,22 @@ export default function PagesHubPage() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-        <header className="mx-auto max-w-3xl text-center">
+        <TierDefinition tier="page" />
+
+        <header className="mx-auto mt-10 max-w-3xl text-center">
           <span className="inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-card/60 px-3 py-1 text-xs font-medium text-muted-foreground">
             <LayoutTemplate aria-hidden className="h-3.5 w-3.5" />
             Pages
           </span>
 
-          <h1 className="mt-5 text-balance text-4xl font-extrabold tracking-tight sm:text-5xl">
+          <h1 className="type-hub mt-5">
             Whole screens, already assembled
           </h1>
 
-          <p className="mx-auto mt-4 max-w-2xl text-pretty text-muted-foreground">
-            A block is one section. A page is the whole screen — the sections
-            in the right order, with the spacing and the hierarchy already
-            decided. Take the page, or open it and take one section.
+          <p className="mx-auto mt-4 max-w-2xl text-pretty text-body">
+            The spacing and the hierarchy are already decided — the part that
+            takes longest and is hardest to judge on your own. Take the whole
+            screen, or open it and take one section out.
           </p>
 
           <div className="mt-6 flex flex-wrap items-center justify-center gap-3 text-sm text-muted-foreground">
