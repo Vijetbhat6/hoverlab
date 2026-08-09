@@ -21,19 +21,51 @@ import { NextResponse, type NextRequest } from 'next/server'
  * Paths that REQUIRE auth. Proxy redirects to /login if no valid session
  * cookie is present.
  *
- * The catalog is deliberately NOT in this list. /library, /effect/* and
- * /playground used to be gated, which meant every crawler hit on all
- * 1,600+ effect pages got a 307 to /login — the pages could never be
- * indexed, and the entire long-tail search surface ("css shimmer skeleton
- * loader", "glassmorphism card hover") was unreachable. That's the traffic
- * uiverse and Animista live on, and it was walled off.
+ * The catalog is gated: browsing it is an account feature, not a public
+ * one. Every hub, category, detail page and the playground bounces an
+ * anonymous visitor to /login?redirect=<original>, so they land back where
+ * they were aiming once they sign in.
  *
- * Browsing, previewing, and copying are public. The account-bound
- * features — synced favorites, synced bundles, billing — still require a
- * session, enforced per-request in the /api/sync/* and /api/account
- * routes rather than at the page level.
+ * This is a deliberate reversal of the earlier decision to open the
+ * catalog for search traffic, and it costs exactly what that decision
+ * bought: crawlers get a 307 on all ~4,300 artifact pages, so the
+ * long-tail surface ("css shimmer skeleton loader", "glassmorphism card
+ * hover") stops being indexable. There is no crawler exemption on
+ * purpose — serving crawlers a page that humans are redirected away from
+ * is cloaking, and Google can deindex a site for it. sitemap.ts and
+ * robots.ts were trimmed to match rather than advertise URLs that all
+ * redirect.
+ *
+ * What stays public: the marketing landing page, /login and /signup, the
+ * docs (they sell the CLI to people who don't have accounts yet) and the
+ * standalone /tools utilities, which are not catalog content.
+ *
+ * Two content paths remain reachable without a session and are NOT closed
+ * by this file: /api/v1/* (the CLI and MCP server's only transport — it
+ * has no key scheme to authenticate against yet) and /embed/<id> (a
+ * cross-site <iframe> never sends a SameSite=Lax cookie, so gating it
+ * would break every existing embed rather than gate it).
  */
-const PROTECTED_PREFIXES = ['/account']
+const PROTECTED_PREFIXES = [
+  '/account',
+  // Catalog hubs and the unified browse surface.
+  '/library',
+  '/browse',
+  '/category',
+  '/blocks',
+  '/pages',
+  '/templates',
+  '/paths',
+  // Per-artifact detail pages. Singular and plural are distinct routes;
+  // the match below is exact-or-with-slash, so '/page' never swallows
+  // '/pages'.
+  '/effect',
+  '/block',
+  '/page',
+  '/template',
+  // The editor.
+  '/playground',
+]
 
 // Paths that should bounce logged-in users away to /library.
 // (Auth pages don't make sense once you're already signed in.)
