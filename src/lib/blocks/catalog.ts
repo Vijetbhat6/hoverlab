@@ -530,6 +530,37 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     deps: ['lucide-react'],
   },
   {
+    id: 'docs-layout',
+    name: 'Three-Column Docs Frame',
+    category: 'Content & Blog',
+    description:
+      'Sidebar, article and on-this-page rail — each column answers a different question, and they collapse on mobile in the order that keeps the article alive.',
+    tags: ['docs', 'documentation', 'sidebar', 'toc', 'layout'],
+    previewComponent: 'docs-layout',
+    deps: ['lucide-react'],
+    featured: true,
+  },
+  {
+    id: 'api-endpoint-card',
+    name: 'API Endpoint Reference',
+    category: 'Content & Blog',
+    description:
+      'Method badge, path, parameter table and a request/response pair kept side by side — an example request whose response is a scroll away gets pasted blind.',
+    tags: ['api', 'reference', 'endpoint', 'rest', 'developer'],
+    previewComponent: 'api-endpoint-card',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'code-tabs-panel',
+    name: 'Package Manager Code Tabs',
+    category: 'Content & Blog',
+    description:
+      'One install command behind npm/pnpm/yarn/bun tabs with a working copy button — every reader uses exactly one package manager, so showing all four wastes three lines.',
+    tags: ['code', 'tabs', 'install', 'copy', 'developer'],
+    previewComponent: 'code-tabs-panel',
+    deps: ['lucide-react'],
+  },
+  {
     id: 'newsletter-signup',
     name: 'Newsletter Capture Band',
     category: 'CTA Sections',

@@ -117,6 +117,27 @@ export const TEMPLATE_CATALOG: TemplateRecord[] = [
     ],
   },
   {
+    id: 'ai-assistant',
+    name: 'AI Assistant',
+    category: 'Full Product',
+    description:
+      'An agent product’s working surface: transcript, reasoning, tool calls and the approval card, with sign-in and settings around it. Wiring a model in is your half.',
+    tags: ['ai', 'assistant', 'agent', 'chat', 'copilot'],
+    deps: ['lucide-react'],
+    featured: true,
+    routes: [
+      { path: '/', pageId: 'ai-assistant-page', file: 'app/page.tsx', label: 'Assistant' },
+      {
+        path: '/settings',
+        pageId: 'settings-account-page',
+        file: 'app/settings/page.tsx',
+        label: 'Settings',
+      },
+      { path: '/login', pageId: 'login-page', file: 'app/login/page.tsx', label: 'Sign in' },
+      { path: '404', pageId: 'error-404-page', file: 'app/not-found.tsx', label: '404' },
+    ],
+  },
+  {
     id: 'content-site',
     name: 'Content Site',
     category: 'Marketing',
@@ -135,6 +156,25 @@ export const TEMPLATE_CATALOG: TemplateRecord[] = [
         label: 'Article',
       },
       { path: '/careers', pageId: 'careers-page', file: 'app/careers/page.tsx', label: 'Careers' },
+      { path: '404', pageId: 'error-404-page', file: 'app/not-found.tsx', label: '404' },
+    ],
+  },
+  {
+    id: 'docs-site',
+    name: 'Docs Site',
+    category: 'Marketing',
+    description:
+      'The three-column docs frame — sidebar, article, on-this-page rail — plus a changelog and a 404. The part of the product a search for an error message should find.',
+    tags: ['docs', 'documentation', 'developer', 'changelog', 'reference'],
+    deps: ['lucide-react'],
+    routes: [
+      { path: '/', pageId: 'docs-page', file: 'app/page.tsx', label: 'Docs' },
+      {
+        path: '/changelog',
+        pageId: 'changelog-page',
+        file: 'app/changelog/page.tsx',
+        label: 'Changelog',
+      },
       { path: '404', pageId: 'error-404-page', file: 'app/not-found.tsx', label: '404' },
     ],
   },

@@ -121,6 +121,34 @@ export const PAGE_CATALOG: PageRecord[] = [
     ],
   },
   {
+    id: 'docs-page',
+    name: 'Documentation Page',
+    category: 'Marketing Pages',
+    description:
+      'The site navbar over the three-column docs frame. In your project this is one catch-all route — the slug picks the article, the frame never changes.',
+    tags: ['docs', 'documentation', 'developer', 'guides', 'reference'],
+    previewComponent: 'docs-page',
+    deps: ['lucide-react'],
+    composedOf: ['navbar-simple', 'docs-layout'],
+    featured: true,
+  },
+  {
+    id: 'changelog-page',
+    name: 'Changelog Page',
+    category: 'Marketing Pages',
+    description:
+      'The release timeline with the site chrome kept on, and the one subscribe form on the site that is not a detour — "tell me when this page changes" is exactly what it promises.',
+    tags: ['changelog', 'releases', 'updates', 'whats new', 'developer'],
+    previewComponent: 'changelog-page',
+    deps: ['lucide-react'],
+    composedOf: [
+      'navbar-simple',
+      'changelog-timeline',
+      'newsletter-signup',
+      'footer-minimal',
+    ],
+  },
+  {
     id: 'dashboard-overview',
     name: 'Dashboard Overview',
     category: 'App Screens',

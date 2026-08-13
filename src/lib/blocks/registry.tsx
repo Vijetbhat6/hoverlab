@@ -85,6 +85,9 @@ import { BlogPostGrid } from './sources/blog-post-grid'
 import { ArticleHeader } from './sources/article-header'
 import { TeamGrid } from './sources/team-grid'
 import { JobListingBoard } from './sources/job-listing-board'
+import { DocsLayout } from './sources/docs-layout'
+import { ApiEndpointCard } from './sources/api-endpoint-card'
+import { CodeTabsPanel } from './sources/code-tabs-panel'
 
 import { AuthLoginCard } from './sources/auth-login-card'
 import { AuthSignupSplit } from './sources/auth-signup-split'
@@ -248,6 +251,9 @@ export const BLOCK_PREVIEWS: Record<string, React.ReactNode> = {
   'article-header': <ArticleHeader />,
   'team-grid': <TeamGrid />,
   'job-listing-board': <JobListingBoard />,
+  'docs-layout': <DocsLayout />,
+  'api-endpoint-card': <ApiEndpointCard />,
+  'code-tabs-panel': <CodeTabsPanel />,
 
   'auth-login-card': <AuthLoginCard />,
   'auth-signup-split': <AuthSignupSplit />,

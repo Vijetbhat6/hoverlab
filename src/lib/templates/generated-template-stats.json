@@ -11,8 +11,16 @@
     "lines": 496,
     "files": 10
   },
+  "ai-assistant": {
+    "lines": 488,
+    "files": 10
+  },
   "content-site": {
     "lines": 504,
+    "files": 10
+  },
+  "docs-site": {
+    "lines": 507,
     "files": 10
   },
   "storefront": {
