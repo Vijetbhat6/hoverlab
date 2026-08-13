@@ -124,9 +124,10 @@ claude mcp add hoverlab -- npx -y hoverlab mcp
 }
 ```
 
-The server exposes seven tools. Three cover the whole catalog:
+The server exposes eight tools. Four cover the whole catalog:
 
 - **`search_catalog`** — free-text search across all four tiers at once
+- **`match_design`** — rank blocks and pages against a described design region (a Figma frame, a screenshot, a spec)
 - **`install_artifact`** — fetch an effect, block or page and write it into the project
 - **`init_template`** — scaffold a whole project from a template
 
@@ -135,6 +136,17 @@ And four are the original effect-only surface, kept because they carry the frame
 - **`search_effects`**, **`get_effect`**, **`install_effect`**, **`list_categories`**
 
 Then just ask: *"find me a shimmering skeleton loader and add it"*, or *"build me a storefront"*.
+
+### Pairing with Figma
+
+Register Figma's Dev Mode MCP server (enable it in the Figma desktop app's preferences) next to Hoverlab's:
+
+```bash
+claude mcp add --transport http figma http://127.0.0.1:3845/mcp
+claude mcp add hoverlab -- npx -y hoverlab mcp
+```
+
+Then select a frame and ask: *"rebuild my selected Figma frame — find the closest Hoverlab blocks, install them, and match my colours and type"*. The agent reads the frame's structure from Figma, calls `match_design` per region — it translates designer vocabulary ("navbar", "modal", "plan cards") and ranks partial matches, where plain search requires every word to hit — installs the winners, and restyles the plain React + Tailwind it installed to the design's tokens. No Figma needed, strictly: a pasted screenshot or a written spec drives `match_design` just as well.
 
 ## Tailwind output
 

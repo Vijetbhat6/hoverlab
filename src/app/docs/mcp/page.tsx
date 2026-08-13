@@ -71,6 +71,7 @@ export default function McpDocsPage() {
           head={['Tool', 'What it does']}
           rows={[
             [<C key="1">search_catalog</C>, 'Search all four tiers at once'],
+            [<C key="1b">match_design</C>, 'Rank blocks and pages against a described design region'],
             [<C key="2">search_effects</C>, 'Search effects specifically'],
             [<C key="3">get_effect</C>, "Read one effect's markup and CSS"],
             [<C key="4">install_effect</C>, 'Write an effect into the project'],
@@ -79,6 +80,45 @@ export default function McpDocsPage() {
             [<C key="7">list_categories</C>, 'List the categories, per tier'],
           ]}
         />
+      </DocsSection>
+
+      <DocsSection id="figma" title="From a Figma design">
+        <p>
+          Register Figma&apos;s own MCP server next to Hoverlab&apos;s and the agent can
+          read a design from one and build it from the other. In the Figma
+          desktop app, enable the Dev Mode MCP server under Preferences, then:
+        </p>
+
+        <Snippet label="terminal">{`claude mcp add --transport http figma http://127.0.0.1:3845/mcp
+claude mcp add hoverlab -- npx -y hoverlab mcp`}</Snippet>
+
+        <p>
+          Select a frame in Figma and ask for it by intent, not by pixel:
+        </p>
+        <ul className="ml-4 list-disc space-y-1.5">
+          <li>
+            &ldquo;Rebuild my selected Figma frame: find the closest Hoverlab
+            blocks, install them, and match my colours and type.&rdquo;
+          </li>
+          <li>
+            &ldquo;This mockup has a nav, a pricing section and a FAQ — install
+            the nearest match for each and restyle them.&rdquo;
+          </li>
+        </ul>
+        <p>
+          Under the hood the agent reads the frame&apos;s structure from Figma,
+          calls <C>match_design</C> once per region — which tolerates designer
+          vocabulary and partial matches where plain search does not — installs
+          the winners, and edits the installed React to the design&apos;s tokens.
+        </p>
+
+        <Callout>
+          No Figma? A pasted screenshot works too: agents read images, and{' '}
+          <C>match_design</C> only needs the structure described to it. And the
+          honest limit runs the other way — a static design shows layout, so it
+          matches blocks and pages. Hover and motion are invisible in a mockup;
+          ask for those in words and the effect tools take over.
+        </Callout>
       </DocsSection>
 
       <DocsSection id="asking" title="Asking for things">

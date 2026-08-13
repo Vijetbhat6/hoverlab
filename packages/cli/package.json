@@ -1,6 +1,6 @@
 {
   "name": "hoverlab",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Install UI from the Hoverlab catalog — CSS effects, React blocks, whole pages, and scaffoldable project templates — and expose them to your editor's AI agent over MCP.",
   "keywords": [
     "css",

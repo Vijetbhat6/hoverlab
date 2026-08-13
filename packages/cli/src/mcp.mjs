@@ -6,10 +6,13 @@
  * makes the catalog something Cursor / Claude Code / Zed can *search and
  * install from* directly, which is distribution rather than a feature.
  *
- * The tool list is in two halves. `search_catalog` / `install_artifact` /
- * `init_template` cover all four tiers and are what an agent should reach
- * for; the four effect-specific tools predate them and stay because they
- * carry the framework and recolouring knobs the generic ones do not.
+ * The tool list is in two halves. `search_catalog` / `match_design` /
+ * `install_artifact` / `init_template` cover all four tiers and are what an
+ * agent should reach for — `match_design` being the entry point when the
+ * request arrives as a design (a Figma frame read over the Figma MCP
+ * server, a screenshot) rather than as words. The four effect-specific
+ * tools predate them and stay because they carry the framework and
+ * recolouring knobs the generic ones do not.
  *
  * The protocol is hand-implemented rather than pulled from the official
  * SDK, deliberately: this package's headline command is
@@ -24,6 +27,7 @@
 
 import { addArtifact, writeEffectFiles } from './write.mjs'
 import { initTemplate } from './scaffold.mjs'
+import { DESIGN_LEVELS, matchDesign } from './design.mjs'
 import {
   DEFAULT_ORIGIN,
   FRAMEWORKS,
@@ -35,7 +39,7 @@ import {
 } from './api.mjs'
 
 const SERVER_NAME = 'hoverlab'
-const SERVER_VERSION = '0.1.0'
+const SERVER_VERSION = '0.2.0'
 
 /**
  * Protocol revisions this server understands. We echo back whichever one
@@ -218,6 +222,41 @@ const TOOLS = [
         },
       },
       required: ['id'],
+      additionalProperties: false,
+    },
+  },
+  {
+    name: 'match_design',
+    description:
+      'Find the catalog artifacts closest to a design the user has shared — a Figma frame (read it first through a Figma/design MCP tool if one is connected), a screenshot, a mockup, or a written spec. Call it once per distinct region of the design, describing what the region is and what is visible in it. Unlike search_catalog, not every word must match: designer vocabulary ("navbar", "modal", "plan cards") is translated to catalog vocabulary, and partial matches rank by how much of the description they cover. Returns ranked blocks and pages with the reasons they matched. Follow up with install_artifact, then restyle the installed code to the design\'s colours, spacing and type — it is plain React + Tailwind, meant to be edited.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        description: {
+          type: 'string',
+          description:
+            'What this region of the design is and how it is arranged, in plain words — e.g. "pricing section, three plan cards side by side, middle card emphasised" or "full sign-in screen with social buttons".',
+        },
+        elements: {
+          type: 'array',
+          items: { type: 'string' },
+          description:
+            'Distinct UI elements visible in the region, each a short phrase — e.g. ["monthly/yearly toggle", "check list", "CTA button"]. These weigh more than description words, so list what you actually see.',
+        },
+        level: {
+          type: 'string',
+          enum: DESIGN_LEVELS,
+          description:
+            'Restrict to one tier: a single section of a screen is a block, a whole screen is a page. Omit to search both, which is usually right.',
+        },
+        limit: {
+          type: 'integer',
+          description: 'Maximum results, 1-20. Defaults to 8.',
+          minimum: 1,
+          maximum: 20,
+        },
+      },
+      required: ['description'],
       additionalProperties: false,
     },
   },
@@ -478,6 +517,48 @@ async function runInstallArtifact(args) {
   return lines.join('\n')
 }
 
+async function runMatchDesign(args) {
+  const { groups, results } = await matchDesign({
+    description: args.description,
+    elements: Array.isArray(args.elements) ? args.elements : [],
+    level: args.level,
+    limit: typeof args.limit === 'number' ? args.limit : 8,
+  })
+
+  const concepts = groups.map((g) => g.token)
+  if (!results.length) {
+    return (
+      `Nothing in the catalog resembles that region (looked for: ${concepts.join(', ')}).\n\n` +
+      'Describe it by function rather than appearance — "checkout form" rather than ' +
+      '"white panel with fields" — or match its parent region instead and build this piece by hand.'
+    )
+  }
+
+  const lines = [
+    `Closest matches for the region (concepts: ${concepts.join(', ')}):`,
+    '',
+  ]
+  for (const { artifact, matched, coverage } of results) {
+    lines.push(
+      `- ${artifact.id}  [${artifact.level}]${artifact.featured ? ' (curated)' : ''} — ${artifact.name}`,
+    )
+    lines.push(`    ${artifact.category} · ${artifact.description}`)
+    lines.push(
+      `    matched ${matched.length}/${groups.length} concepts: ${matched.join(', ')}`,
+    )
+    if (coverage < 0.5) {
+      lines.push('    (partial match — check it against the design before installing)')
+    }
+  }
+  lines.push(
+    '',
+    'Next: install_artifact with the best id, then edit the installed files to match the ' +
+      "design's colours, spacing and type — they are plain React + Tailwind. " +
+      'If the design also implies motion (hovers, loaders), search_effects covers that separately.',
+  )
+  return lines.join('\n')
+}
+
 async function runInitTemplate(args) {
   const result = await initTemplate({
     id: args.id,
@@ -514,6 +595,7 @@ const HANDLERS = {
   install_effect: runInstallEffect,
   list_categories: runListCategories,
   search_catalog: runSearchCatalog,
+  match_design: runMatchDesign,
   install_artifact: runInstallArtifact,
   init_template: runInitTemplate,
 }
@@ -589,7 +671,12 @@ async function handleMessage(message) {
           'which tier holds what they asked for. Then install_artifact to write an effect, ' +
           'block or page into the project, or init_template to scaffold a project. ' +
           'Reach for a block before hand-writing a section: they are hundreds of lines of ' +
-          'accessible, keyboard-complete React that would take far longer to reproduce.',
+          'accessible, keyboard-complete React that would take far longer to reproduce. ' +
+          'When the user shares a design — a Figma frame via a design MCP tool, a screenshot, ' +
+          'a mockup — do not search with literal text from it. Read its structure, then call ' +
+          'match_design once per distinct region; it tolerates designer vocabulary and partial ' +
+          'matches where search_catalog does not. Install the closest match and restyle it to ' +
+          "the design's tokens.",
       })
       return
     }
