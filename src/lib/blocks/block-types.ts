@@ -50,6 +50,17 @@ export type BlockCategory =
   | 'Command & Search'
   | 'File Upload'
   | 'Billing & Usage'
+  /* -- AI: the surfaces an agent product is assembled from ---------- *
+   * Separate from Product on purpose. These are not "a dashboard with
+   * a chatbot bolted on" — a thread, a reasoning trace and an approval
+   * card are their own layout problems, with their own live-region and
+   * focus rules, and grouping them under Product would bury them in a
+   * rail a visitor scans for CRUD. */
+  | 'Agent Chat'
+  | 'Agent Reasoning'
+  | 'Human in the Loop'
+  | 'Retrieval & Context'
+  | 'Inline AI Actions'
   /* -- Commerce ----------------------------------------------------- */
   | 'Product Listings'
   | 'Product Detail'
@@ -81,6 +92,11 @@ export const BLOCK_CATEGORIES: BlockCategory[] = [
   'Command & Search',
   'File Upload',
   'Billing & Usage',
+  'Agent Chat',
+  'Agent Reasoning',
+  'Human in the Loop',
+  'Retrieval & Context',
+  'Inline AI Actions',
   'Product Listings',
   'Product Detail',
   'Cart & Checkout',
@@ -88,13 +104,18 @@ export const BLOCK_CATEGORIES: BlockCategory[] = [
 ]
 
 /**
- * The three audiences the taxonomy serves, used to group the category rail
- * on `/blocks`. A flat list of 28 categories is a wall; three groups of
- * roughly ten is a menu.
+ * The audiences the taxonomy serves, used to group the category rail on
+ * `/blocks`. A flat list of 33 categories is a wall; four groups of roughly
+ * ten is a menu.
  */
-export type BlockGroup = 'Marketing' | 'Product' | 'Commerce'
+export type BlockGroup = 'Marketing' | 'Product' | 'AI Interfaces' | 'Commerce'
 
-export const BLOCK_GROUPS: BlockGroup[] = ['Marketing', 'Product', 'Commerce']
+export const BLOCK_GROUPS: BlockGroup[] = [
+  'Marketing',
+  'Product',
+  'AI Interfaces',
+  'Commerce',
+]
 
 export const GROUP_OF: Record<BlockCategory, BlockGroup> = {
   Heroes: 'Marketing',
@@ -121,6 +142,11 @@ export const GROUP_OF: Record<BlockCategory, BlockGroup> = {
   'Command & Search': 'Product',
   'File Upload': 'Product',
   'Billing & Usage': 'Product',
+  'Agent Chat': 'AI Interfaces',
+  'Agent Reasoning': 'AI Interfaces',
+  'Human in the Loop': 'AI Interfaces',
+  'Retrieval & Context': 'AI Interfaces',
+  'Inline AI Actions': 'AI Interfaces',
   'Product Listings': 'Commerce',
   'Product Detail': 'Commerce',
   'Cart & Checkout': 'Commerce',

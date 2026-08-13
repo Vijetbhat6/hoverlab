@@ -20,6 +20,7 @@
 //
 // Run: npm run build:markup
 
+import { cloneElement, isValidElement } from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { writeFileSync } from 'node:fs'
 import { join, dirname } from 'node:path'
@@ -42,11 +43,22 @@ for (const block of BLOCK_CATALOG) {
     continue
   }
 
+  // The registry renders a few blocks with `embedded` so a grid of live
+  // previews cannot steal scroll or focus from the page hosting it. This
+  // export is the opposite case — it is pasted into a page of its own, and
+  // should carry the real component's `autofocus`. Keyed off the prop
+  // actually being set, so a block that adopts the flag later is covered
+  // without anyone updating a list here.
+  const real =
+    isValidElement<{ embedded?: boolean }>(preview) && 'embedded' in preview.props
+      ? cloneElement(preview, { embedded: false })
+      : preview
+
   try {
     // `renderToStaticMarkup`, not `renderToString`: nothing hydrates this,
     // and the bookkeeping attributes would be noise in something a human
     // is about to paste.
-    markup[block.id] = formatHtml(renderToStaticMarkup(preview))
+    markup[block.id] = formatHtml(renderToStaticMarkup(real))
   } catch (err) {
     // A block that throws on render is a real bug, but it should not take
     // the whole build down over an export format — the block still works

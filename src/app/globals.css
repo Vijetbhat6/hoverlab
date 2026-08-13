@@ -1883,6 +1883,25 @@
 .fx-no-scrollbar::-webkit-scrollbar { display: none; }
 .fx-no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
+/*
+  Code panels are the one place a hidden scrollbar is actively wrong: a block
+  source is 200+ lines cropped to a few hundred pixels, and with no visible
+  track there is nothing telling the reader the rest exists. Slim and tinted
+  for the dark panel rather than the OS default, which is the reason it was
+  hidden in the first place.
+*/
+.fx-code-scroll { scrollbar-width: thin; scrollbar-color: rgb(148 163 184 / 0.35) transparent; }
+.fx-code-scroll::-webkit-scrollbar { width: 10px; height: 10px; }
+.fx-code-scroll::-webkit-scrollbar-track { background: transparent; }
+.fx-code-scroll::-webkit-scrollbar-thumb {
+  background-color: rgb(148 163 184 / 0.3);
+  border: 3px solid transparent;
+  border-radius: 9999px;
+  background-clip: content-box;
+}
+.fx-code-scroll:hover::-webkit-scrollbar-thumb { background-color: rgb(148 163 184 / 0.5); }
+.fx-code-scroll::-webkit-scrollbar-corner { background: transparent; }
+
 /* ============================================================
    SURPRISE ME — slot-machine rolling animation
    ============================================================ */

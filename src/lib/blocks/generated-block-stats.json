@@ -15,6 +15,46 @@
     "lines": 159,
     "files": 1
   },
+  "hero-search": {
+    "lines": 121,
+    "files": 1
+  },
+  "hero-terminal": {
+    "lines": 158,
+    "files": 1
+  },
+  "hero-app-download": {
+    "lines": 161,
+    "files": 1
+  },
+  "hero-testimonial": {
+    "lines": 129,
+    "files": 1
+  },
+  "hero-metrics": {
+    "lines": 129,
+    "files": 1
+  },
+  "hero-editorial": {
+    "lines": 99,
+    "files": 1
+  },
+  "hero-media-overlay": {
+    "lines": 106,
+    "files": 1
+  },
+  "hero-integrations": {
+    "lines": 135,
+    "files": 1
+  },
+  "hero-booking": {
+    "lines": 164,
+    "files": 1
+  },
+  "hero-price-anchor": {
+    "lines": 135,
+    "files": 1
+  },
   "navbar-simple": {
     "lines": 202,
     "files": 1
@@ -24,7 +64,7 @@
     "files": 1
   },
   "nav-mobile-drawer": {
-    "lines": 294,
+    "lines": 301,
     "files": 1
   },
   "footer-mega": {
@@ -91,6 +131,10 @@
     "lines": 164,
     "files": 1
   },
+  "feature-tabs": {
+    "lines": 201,
+    "files": 1
+  },
   "pricing-tiers": {
     "lines": 189,
     "files": 1
@@ -101,6 +145,10 @@
   },
   "testimonial-grid": {
     "lines": 132,
+    "files": 1
+  },
+  "testimonial-spotlight": {
+    "lines": 110,
     "files": 1
   },
   "faq-accordion": {
@@ -115,12 +163,32 @@
     "lines": 122,
     "files": 1
   },
+  "blog-post-grid": {
+    "lines": 188,
+    "files": 1
+  },
+  "article-header": {
+    "lines": 151,
+    "files": 1
+  },
+  "team-grid": {
+    "lines": 164,
+    "files": 1
+  },
+  "job-listing-board": {
+    "lines": 186,
+    "files": 1
+  },
   "newsletter-signup": {
     "lines": 130,
     "files": 1
   },
   "community-band": {
     "lines": 100,
+    "files": 1
+  },
+  "cta-split-panel": {
+    "lines": 103,
     "files": 1
   },
   "auth-login-card": {
@@ -136,7 +204,7 @@
     "files": 1
   },
   "auth-forgot-password": {
-    "lines": 122,
+    "lines": 129,
     "files": 1
   },
   "auth-reset-password": {
@@ -144,7 +212,7 @@
     "files": 1
   },
   "auth-two-factor": {
-    "lines": 137,
+    "lines": 144,
     "files": 1
   },
   "dashboard-shell": {
@@ -161,6 +229,18 @@
   },
   "dashboard-page-header": {
     "lines": 150,
+    "files": 1
+  },
+  "kanban-board": {
+    "lines": 196,
+    "files": 1
+  },
+  "activity-timeline": {
+    "lines": 199,
+    "files": 1
+  },
+  "calendar-month": {
+    "lines": 191,
     "files": 1
   },
   "data-table-sortable": {
@@ -236,11 +316,99 @@
     "files": 1
   },
   "command-palette": {
-    "lines": 255,
+    "lines": 276,
+    "files": 1
+  },
+  "search-results-panel": {
+    "lines": 189,
     "files": 1
   },
   "file-dropzone": {
     "lines": 219,
+    "files": 1
+  },
+  "upload-progress-list": {
+    "lines": 171,
+    "files": 1
+  },
+  "chat-thread-panel": {
+    "lines": 253,
+    "files": 1
+  },
+  "chat-prompt-bar": {
+    "lines": 430,
+    "files": 1
+  },
+  "chat-streaming-answer": {
+    "lines": 277,
+    "files": 1
+  },
+  "chat-empty-state": {
+    "lines": 138,
+    "files": 1
+  },
+  "agent-thinking-trace": {
+    "lines": 247,
+    "files": 1
+  },
+  "agent-tool-calls": {
+    "lines": 251,
+    "files": 1
+  },
+  "agent-task-list": {
+    "lines": 234,
+    "files": 1
+  },
+  "agent-working-indicator": {
+    "lines": 120,
+    "files": 1
+  },
+  "approval-request-card": {
+    "lines": 242,
+    "files": 1
+  },
+  "agent-diff-review": {
+    "lines": 269,
+    "files": 1
+  },
+  "confidence-recommendation": {
+    "lines": 253,
+    "files": 1
+  },
+  "permission-scope-dialog": {
+    "lines": 297,
+    "files": 1
+  },
+  "context-chunk-cards": {
+    "lines": 327,
+    "files": 1
+  },
+  "source-citation-list": {
+    "lines": 212,
+    "files": 1
+  },
+  "knowledge-source-picker": {
+    "lines": 345,
+    "files": 1
+  },
+  "retrieval-empty-state": {
+    "lines": 178,
+    "files": 1
+  },
+  "selection-ai-toolbar": {
+    "lines": 251,
+    "files": 1
+  },
+  "ai-inline-suggestion": {
+    "lines": 206,
+    "files": 1
+  },
+  "ai-inspector-panel": {
+    "lines": 315,
+    "files": 1
+  },
+  "ai-insight-cards": {
+    "lines": 275,
     "files": 1
   },
   "product-grid": {
@@ -276,7 +444,7 @@
     "files": 1
   },
   "cart-drawer": {
-    "lines": 239,
+    "lines": 256,
     "files": 1
   },
   "cart-line-items": {

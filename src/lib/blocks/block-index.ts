@@ -15,6 +15,7 @@ import { BLOCK_CATALOG } from './catalog'
 import LINE_COUNTS from './generated-block-stats.json'
 import {
   BLOCK_CATEGORIES,
+  BLOCK_GROUPS,
   GROUP_OF,
   type BlockCategory,
   type BlockGroup,
@@ -69,9 +70,12 @@ export function populatedByGroup(): Array<{
   categories: Array<{ category: BlockCategory; count: number }>
 }> {
   const populated = populatedBlockCategories()
-  const groups: BlockGroup[] = ['Marketing', 'Product', 'Commerce']
 
-  return groups
+  // `BLOCK_GROUPS`, not a literal list. This was a second copy of the group
+  // order, and adding a fourth group to the taxonomy silently dropped its
+  // categories off the rail — they were populated, grouped, and rendered
+  // nowhere.
+  return BLOCK_GROUPS
     .map((group) => ({
       group,
       categories: populated

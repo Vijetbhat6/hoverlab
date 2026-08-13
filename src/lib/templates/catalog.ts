@@ -117,6 +117,28 @@ export const TEMPLATE_CATALOG: TemplateRecord[] = [
     ],
   },
   {
+    id: 'content-site',
+    name: 'Content Site',
+    category: 'Marketing',
+    description:
+      'A publication that happens to belong to a company: blog index, article, careers and a 404. The site for when the writing is the product — or the marketing.',
+    tags: ['blog', 'content', 'publication', 'careers', 'editorial'],
+    deps: ['lucide-react'],
+    routes: [
+      { path: '/', pageId: 'blog-index-page', file: 'app/page.tsx', label: 'Blog' },
+      {
+        // A real dynamic segment — in your project the page reads `params`,
+        // fetches the post, and passes it down as props.
+        path: '/blog/[slug]',
+        pageId: 'article-page',
+        file: 'app/blog/[slug]/page.tsx',
+        label: 'Article',
+      },
+      { path: '/careers', pageId: 'careers-page', file: 'app/careers/page.tsx', label: 'Careers' },
+      { path: '404', pageId: 'error-404-page', file: 'app/not-found.tsx', label: '404' },
+    ],
+  },
+  {
     id: 'storefront',
     name: 'Storefront',
     category: 'Commerce',

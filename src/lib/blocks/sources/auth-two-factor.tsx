@@ -18,6 +18,12 @@ import { Loader2, Smartphone, KeySquare } from 'lucide-react'
 export interface AuthTwoFactorProps {
   heading?: string
   onVerify?: (value: { code: string; mode: Mode; trustDevice: boolean }) => Promise<void>
+  /**
+   * Render as a demo inside a larger page, which drops the code field's
+   * `autoFocus`. Focusing an input scrolls the browser to it, so a card in
+   * a preview grid would drag the visitor down the page on load.
+   */
+  embedded?: boolean
   className?: string
 }
 
@@ -26,6 +32,7 @@ type Mode = 'app' | 'backup'
 export function AuthTwoFactor({
   heading = 'Two-factor authentication',
   onVerify,
+  embedded = false,
   className = '',
 }: AuthTwoFactorProps) {
   const [mode, setMode] = React.useState<Mode>('app')
@@ -85,7 +92,7 @@ export function AuthTwoFactor({
               // code gets the numeric keypad and the OTP autofill hint.
               inputMode={isApp ? 'numeric' : 'text'}
               autoComplete={isApp ? 'one-time-code' : 'off'}
-              autoFocus
+              autoFocus={!embedded}
               required
               maxLength={expected}
               value={code}

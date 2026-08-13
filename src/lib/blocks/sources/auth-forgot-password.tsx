@@ -21,6 +21,12 @@ export interface AuthForgotPasswordProps {
   subheading?: string
   onSubmit?: (email: string) => Promise<void>
   loginHref?: string
+  /**
+   * Render as a demo inside a larger page, which drops the email field's
+   * `autoFocus`. Focusing an input scrolls the browser to it, so a card in
+   * a preview grid would drag the visitor down the page on load.
+   */
+  embedded?: boolean
   className?: string
 }
 
@@ -29,6 +35,7 @@ export function AuthForgotPassword({
   subheading = 'Enter your email and we will send you a link to set a new one.',
   onSubmit,
   loginHref = '/login',
+  embedded = false,
   className = '',
 }: AuthForgotPasswordProps) {
   const [email, setEmail] = React.useState('')
@@ -87,7 +94,7 @@ export function AuthForgotPassword({
                   id="forgot-email"
                   type="email"
                   required
-                  autoFocus
+                  autoFocus={!embedded}
                   autoComplete="username"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}

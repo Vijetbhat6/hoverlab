@@ -14,6 +14,10 @@ import { generateModern } from './generate-effects-modern.mjs'
 import { generateModern2 } from './generate-effects-modern2.mjs'
 import { generateV4 } from './generate-effects-v4.mjs'
 import { generateV5 } from './generate-effects-v5.mjs'
+import { generateV6 } from './generate-effects-v6.mjs'
+import { generateV7 } from './generate-effects-v7.mjs'
+import { generateV8 } from './generate-effects-v8.mjs'
+import { generateV9 } from './generate-effects-v9.mjs'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const OUT_PATH = join(__dirname, '..', 'src', 'lib', 'generated-effects.json')
@@ -1884,6 +1888,44 @@ generateV4(extraCtx)
  * ========================================================== */
 
 generateV5(extraCtx)
+
+/* ============================================================
+ *  Sixth wave: TWO new template families in every category —
+ *  twenty each, 640 in total. Depth, but as new shapes rather
+ *  than new colorways: Buttons had 198 entries and six shapes
+ *  before this. See generate-effects-v6.mjs.
+ * ========================================================== */
+
+generateV6(extraCtx)
+
+/* ============================================================
+ *  Seventh wave: a second pair of families per category — the
+ *  narrower shapes left after v6 took the obvious ones. Twenty
+ *  more each, 640 in total. See generate-effects-v7.mjs.
+ * ========================================================== */
+
+generateV7(extraCtx)
+
+/* ============================================================
+ *  Eighth wave: a third pair of families per category — the
+ *  composite controls (combobox, speed dial, swipe row) and the
+ *  domain shapes (candlesticks, halftone, ECG) left after v7.
+ *  Twenty more each, 640 in total. See generate-effects-v8.mjs.
+ * ========================================================== */
+
+generateV8(extraCtx)
+
+/* ============================================================
+ *  Ninth wave: a fourth pair of families per category — twenty
+ *  more each, 640 in total. Deliberately run across all 32
+ *  categories rather than weighted toward the ones with room,
+ *  so the shapes range from genuinely missing (radar chart,
+ *  waterfall, grouped-row table, card-number field) to a fourth
+ *  kind of horizontal rule. See generate-effects-v9.mjs, whose
+ *  header says which categories fall where.
+ * ========================================================== */
+
+generateV9(extraCtx)
 
 /* ============================================================
  *  Emit

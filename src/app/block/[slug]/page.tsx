@@ -189,56 +189,22 @@ export default async function BlockDetailPage({ params }: PageProps) {
           </p>
         </section>
 
-        <BlockMarkupPanel block={block} />
-
         {/* ---------------------------------------------------------- *
-         *  Used in — climb the ladder rather than only descending it
-         * ---------------------------------------------------------- */}
-        {usedIn.length > 0 ? (
-          <section className="mt-12">
-            <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
-              Used in these pages
-            </h2>
-
-            <ul className="grid gap-3 sm:grid-cols-2">
-              {usedIn.map((p) => (
-                <li key={p.id}>
-                  <Link
-                    href={`/page/${p.id}`}
-                    className="group flex items-center gap-3 rounded-xl border border-border/60 bg-card/60 px-4 py-3 transition-all hover:-translate-y-0.5 hover:border-primary/40"
-                  >
-                    <Layers aria-hidden className="h-4 w-4 shrink-0 text-muted-foreground" />
-                    <span className="min-w-0 flex-1">
-                      <span className="block truncate text-sm font-medium">{p.name}</span>
-                      <span className="block text-xs text-muted-foreground">
-                        {p.composedOf.length} blocks
-                      </span>
-                    </span>
-                    <ArrowRight
-                      aria-hidden
-                      className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5"
-                    />
-                  </Link>
-                </li>
-              ))}
-            </ul>
-
-            <p className="mt-3 text-xs text-muted-foreground">
-              Want the whole screen instead of this one section? Open a page
-              and copy it entire.
-            </p>
-          </section>
-        ) : null}
-
-        {/* ---------------------------------------------------------- *
-         *  Source
+         *  Source — the reason anyone opened this page, so it sits
+         *  directly under the preview rather than below the non-React
+         *  fallback and the cross-links, as it used to.
          * ---------------------------------------------------------- */}
         {file ? (
           <section className="mt-12">
             <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
               Source
             </h2>
-            <CodeBlock code={file.source} language="tsx" filename={file.path} />
+            <CodeBlock
+              code={file.source}
+              language="tsx"
+              filename={file.path}
+              maxHeightClass="max-h-[560px]"
+            />
 
             <div className="mt-6 grid gap-4 sm:grid-cols-2">
               <div className="rounded-xl border border-border/60 bg-card/60 p-4">
@@ -273,6 +239,47 @@ export default async function BlockDetailPage({ params }: PageProps) {
                 </pre>
               </div>
             </div>
+          </section>
+        ) : null}
+
+        <BlockMarkupPanel block={block} />
+
+        {/* ---------------------------------------------------------- *
+         *  Used in — climb the ladder rather than only descending it
+         * ---------------------------------------------------------- */}
+        {usedIn.length > 0 ? (
+          <section className="mt-12 border-t border-border/60 pt-10">
+            <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+              Used in these pages
+            </h2>
+
+            <ul className="grid gap-3 sm:grid-cols-2">
+              {usedIn.map((p) => (
+                <li key={p.id}>
+                  <Link
+                    href={`/page/${p.id}`}
+                    className="group flex items-center gap-3 rounded-xl border border-border/60 bg-card/60 px-4 py-3 transition-all hover:-translate-y-0.5 hover:border-primary/40"
+                  >
+                    <Layers aria-hidden className="h-4 w-4 shrink-0 text-muted-foreground" />
+                    <span className="min-w-0 flex-1">
+                      <span className="block truncate text-sm font-medium">{p.name}</span>
+                      <span className="block text-xs text-muted-foreground">
+                        {p.composedOf.length} blocks
+                      </span>
+                    </span>
+                    <ArrowRight
+                      aria-hidden
+                      className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5"
+                    />
+                  </Link>
+                </li>
+              ))}
+            </ul>
+
+            <p className="mt-3 text-xs text-muted-foreground">
+              Want the whole screen instead of this one section? Open a page
+              and copy it entire.
+            </p>
           </section>
         ) : null}
 

@@ -81,6 +81,108 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     previewComponent: 'hero-waitlist',
     deps: ['lucide-react'],
   },
+  {
+    id: 'hero-search',
+    name: 'Search-First Hero',
+    category: 'Heroes',
+    description:
+      'A hero whose primary action is a real search form with prefilling suggestion chips — for marketplaces and directories, where sending the visitor below the fold to find the search box is the whole failure.',
+    tags: ['hero', 'search', 'marketplace', 'directory', 'form'],
+    previewComponent: 'hero-search',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'hero-terminal',
+    name: 'Developer Hero with Install Command',
+    category: 'Heroes',
+    description:
+      'A drawn terminal whose install line is real, selectable text with a working copy button and a feature-detected clipboard call — the hero for anything adopted by typing rather than signing up.',
+    tags: ['hero', 'developer', 'terminal', 'cli', 'copy'],
+    previewComponent: 'hero-terminal',
+    deps: ['lucide-react'],
+    featured: true,
+  },
+  {
+    id: 'hero-app-download',
+    name: 'App Download Hero with Phone',
+    category: 'Heroes',
+    description:
+      'A drawn phone beside two store links built as real anchors rather than badge images, so they inherit the theme, need no hosted asset and carry an accessible name that is not a filename.',
+    tags: ['hero', 'mobile', 'app store', 'download', 'mockup'],
+    previewComponent: 'hero-app-download',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'hero-testimonial',
+    name: 'Hero Anchored by a Customer Quote',
+    category: 'Heroes',
+    description:
+      'Pitch on the left, a marked-up figure and blockquote on the right, so the claim and the evidence for it share the fold instead of sitting a scroll apart.',
+    tags: ['hero', 'testimonial', 'social proof', 'quote', 'saas'],
+    previewComponent: 'hero-testimonial',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'hero-metrics',
+    name: 'Hero with Proof Metrics',
+    category: 'Heroes',
+    description:
+      'A centered hero closing on a definition list of scale numbers, with a masked grid wash behind it — for infrastructure and payments, where "how many" is the second question a buyer asks.',
+    tags: ['hero', 'stats', 'metrics', 'infrastructure', 'centered'],
+    previewComponent: 'hero-metrics',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'hero-editorial',
+    name: 'Editorial Masthead Hero',
+    category: 'Heroes',
+    description:
+      'A serif display headline over a 60-character standfirst and a real byline, with one text link and no competing CTAs — the hero for publications and essays, where the writing is the product.',
+    tags: ['hero', 'editorial', 'blog', 'serif', 'minimal'],
+    previewComponent: 'hero-editorial',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'hero-media-overlay',
+    name: 'Full-Bleed Media Hero',
+    category: 'Heroes',
+    description:
+      'Copy over your own image or video, with a graded scrim and deliberately fixed light-on-dark text — because the background is a photograph in both themes, so flipping the copy would break it.',
+    tags: ['hero', 'image', 'video', 'overlay', 'ecommerce'],
+    previewComponent: 'hero-media-overlay',
+    deps: ['lucide-react'],
+    darkSurface: true,
+  },
+  {
+    id: 'hero-integrations',
+    name: 'Integration Wall Hero',
+    category: 'Heroes',
+    description:
+      'A hero whose visual is the connector list itself, marked up as a real list so a visitor can skim it for their own stack — asset-free initials tiles, no third-party marks to license.',
+    tags: ['hero', 'integrations', 'connectors', 'logos', 'data'],
+    previewComponent: 'hero-integrations',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'hero-booking',
+    name: 'Appointment Booking Hero',
+    category: 'Heroes',
+    description:
+      'A day strip built as a radio group rather than buttons, so arrow keys move between dates and sold-out days disable properly — the fold for anything sold by the appointment.',
+    tags: ['hero', 'booking', 'appointment', 'calendar', 'local business'],
+    previewComponent: 'hero-booking',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'hero-price-anchor',
+    name: 'Hero with Inline Price',
+    category: 'Heroes',
+    description:
+      'Names the price above the fold for single-plan and one-time products, with the former price in a real strikethrough element so it is never announced as the current one.',
+    tags: ['hero', 'pricing', 'one-time', 'indie', 'conversion'],
+    previewComponent: 'hero-price-anchor',
+    deps: ['lucide-react'],
+  },
 
   /* ---------------------------- Navigation ------------------------- */
   {
@@ -303,6 +405,17 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     featured: true,
   },
   {
+    id: 'feature-tabs',
+    name: 'Tabbed Feature Showcase',
+    category: 'Feature Sections',
+    description:
+      'Features as a real tablist — arrow keys, roving focus and a drawn product panel per tab — for the section where four features would otherwise fight for one scroll.',
+    tags: ['features', 'tabs', 'showcase', 'interactive', 'product'],
+    previewComponent: 'feature-tabs',
+    deps: ['lucide-react'],
+    featured: true,
+  },
+  {
     id: 'pricing-tiers',
     name: 'Three-Plan Pricing Toggle',
     category: 'Pricing',
@@ -333,6 +446,16 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     previewComponent: 'testimonial-grid',
     deps: ['lucide-react'],
     featured: true,
+  },
+  {
+    id: 'testimonial-spotlight',
+    name: 'Single-Quote Spotlight',
+    category: 'Testimonials',
+    description:
+      'One customer, quoted at length and backed by a stat row — the section for when a single believable story argues better than a wall of five-star fragments.',
+    tags: ['testimonial', 'quote', 'case study', 'stats', 'social proof'],
+    previewComponent: 'testimonial-spotlight',
+    deps: ['lucide-react'],
   },
   {
     id: 'faq-accordion',
@@ -366,6 +489,47 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     deps: ['lucide-react'],
   },
   {
+    id: 'blog-post-grid',
+    name: 'Blog Index Grid',
+    category: 'Content & Blog',
+    description:
+      'A featured post at full width above a card grid, with drawn covers built from tokens — a blog index with no image pipeline and no broken-thumbnail state.',
+    tags: ['blog', 'posts', 'grid', 'featured', 'content'],
+    previewComponent: 'blog-post-grid',
+    deps: ['lucide-react'],
+    featured: true,
+  },
+  {
+    id: 'article-header',
+    name: 'Article Header & Byline',
+    category: 'Content & Blog',
+    description:
+      'Kicker, headline, standfirst, byline and share row, with the opening prose and a pull quote included — the type scale of a post, decided once instead of per-article.',
+    tags: ['article', 'blog post', 'byline', 'typography', 'editorial'],
+    previewComponent: 'article-header',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'team-grid',
+    name: 'Team Grid',
+    category: 'Content & Blog',
+    description:
+      'An about-page team section on initials avatars rather than photos, so shipping it never waits on headshots and there is no broken-image state to design.',
+    tags: ['team', 'about', 'people', 'avatars', 'company'],
+    previewComponent: 'team-grid',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'job-listing-board',
+    name: 'Careers Openings Board',
+    category: 'Content & Blog',
+    description:
+      'Openings grouped by department with location, type and salary on every row — candidates self-select by craft first, and a flat list makes them scan for it.',
+    tags: ['careers', 'jobs', 'hiring', 'openings', 'company'],
+    previewComponent: 'job-listing-board',
+    deps: ['lucide-react'],
+  },
+  {
     id: 'newsletter-signup',
     name: 'Newsletter Capture Band',
     category: 'CTA Sections',
@@ -383,6 +547,16 @@ export const BLOCK_CATALOG: BlockRecord[] = [
       'A closing CTA of three link cards pointing at GitHub, chat and social — somewhere to go for the visitor who is not ready to convert.',
     tags: ['community', 'cta', 'links', 'social', 'footer'],
     previewComponent: 'community-band',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'cta-split-panel',
+    name: 'Closing CTA Panel',
+    category: 'CTA Sections',
+    description:
+      'A rounded gradient panel that restates the offer for the reader who scrolled past everything — heading left, both CTAs right, reassurance points underneath.',
+    tags: ['cta', 'conversion', 'closing', 'gradient', 'panel'],
+    previewComponent: 'cta-split-panel',
     deps: ['lucide-react'],
   },
 
@@ -496,6 +670,38 @@ export const BLOCK_CATALOG: BlockRecord[] = [
       'Breadcrumb, title, action buttons and a counted tab row that sits flush with the bottom rule.',
     tags: ['header', 'breadcrumb', 'tabs', 'toolbar', 'dashboard'],
     previewComponent: 'dashboard-page-header',
+    deps: ['lucide-react'],
+  },
+
+  {
+    id: 'kanban-board',
+    name: 'Kanban Board Columns',
+    category: 'Dashboards',
+    description:
+      'Four columns of prioritised, tagged, assigned task cards with a blocked state — the board as a layout contract, leaving drag behaviour to your own state and library.',
+    tags: ['kanban', 'board', 'tasks', 'project', 'columns'],
+    previewComponent: 'kanban-board',
+    deps: ['lucide-react'],
+    featured: true,
+  },
+  {
+    id: 'activity-timeline',
+    name: 'Audit Log Timeline',
+    category: 'Dashboards',
+    description:
+      'Events grouped by day on a vertical rail, icons varying by type and one entry expanded into a detail card — what keeps forty events scannable instead of forty gray dots.',
+    tags: ['audit log', 'timeline', 'events', 'history', 'activity'],
+    previewComponent: 'activity-timeline',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'calendar-month',
+    name: 'Month Calendar Grid',
+    category: 'Dashboards',
+    description:
+      'A month view where event chips truncate and overflow becomes "+n more", so a busy Tuesday never changes the height of the row it sits in.',
+    tags: ['calendar', 'month', 'events', 'schedule', 'grid'],
+    previewComponent: 'calendar-month',
     deps: ['lucide-react'],
   },
 
@@ -711,6 +917,17 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     featured: true,
   },
 
+  {
+    id: 'search-results-panel',
+    name: 'Grouped Search Results',
+    category: 'Command & Search',
+    description:
+      'Results grouped by section with visible breadcrumb paths and <mark>-highlighted matches — users recognise where a result lives faster than they read its snippet.',
+    tags: ['search', 'results', 'docs', 'filter', 'highlight'],
+    previewComponent: 'search-results-panel',
+    deps: ['lucide-react'],
+  },
+
   /* ---------------------- File Upload ----------------------------- */
   {
     id: 'file-dropzone',
@@ -722,6 +939,270 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     previewComponent: 'file-dropzone',
     deps: ['lucide-react'],
     featured: true,
+  },
+  {
+    id: 'upload-progress-list',
+    name: 'Upload Progress List',
+    category: 'File Upload',
+    description:
+      'The list that follows the dropzone: complete, uploading, queued and failed rows with cancel and retry — because hiding the failure is the classic upload bug.',
+    tags: ['upload', 'progress', 'files', 'retry', 'queue'],
+    previewComponent: 'upload-progress-list',
+    deps: ['lucide-react'],
+  },
+
+  /* ================================================================ *
+   *  AI Interfaces — the surfaces an agent product is assembled from
+   * ================================================================ *
+   * These are not "product blocks with a sparkle icon". Three constraints
+   * run through the whole group and are the reason it is separate:
+   *
+   *  - Live regions are the hard part, not the layout. A thread, a task
+   *    list and a streaming answer all mutate while the user is reading
+   *    them, and the naive `aria-live="assertive"` wrapper turns each one
+   *    into a screen reader talking over its own user. Every block here
+   *    states which region announces what, and why.
+   *  - Consent is a first-class state. Anything that acts on the world —
+   *    approvals, diffs, permission grants — defaults to the least
+   *    powerful option, states the effect in words before the verb, and
+   *    survives the decision on screen so it can be audited.
+   *  - Confidence is never decoration. Scores are `<meter>`, bands are
+   *    written out, and what the model rejected is shown rather than
+   *    hidden, because automation bias is the failure mode these screens
+   *    actually have.
+   *
+   * Motion: everything that streams, spins or shimmers is either gated
+   * behind `motion-safe:` (decorative) or slowed under `motion-reduce:`
+   * (status). A frozen spinner reads as a hung request, which removes the
+   * feedback rather than the discomfort.
+   */
+
+  /* ---------------------------- Agent Chat ------------------------- */
+  {
+    id: 'chat-thread-panel',
+    name: 'Assistant Thread with Composer',
+    category: 'Agent Chat',
+    description:
+      'A scrolling conversation with per-turn actions, announced as a polite log restricted to additions — so a streaming reply is not re-read on every token — and auto-scroll that only pins when the user is already at the bottom.',
+    tags: ['chat', 'thread', 'assistant', 'conversation', 'aria-live'],
+    previewComponent: 'chat-thread-panel',
+    deps: ['lucide-react'],
+    featured: true,
+  },
+  {
+    id: 'chat-prompt-bar',
+    name: 'Composer with @ Sources and / Commands',
+    category: 'Agent Chat',
+    description:
+      'The trigger menus done properly: @ and / open only at a token boundary, the query is derived from the caret so the menu closes itself, and focus never leaves the textarea — the combobox pattern, not a floating div.',
+    tags: ['composer', 'prompt', 'mentions', 'slash commands', 'combobox'],
+    previewComponent: 'chat-prompt-bar',
+    deps: ['lucide-react'],
+    featured: true,
+    // A composer is a bar, not a section — measured at 103px in the card.
+    thumbHeight: 'h-28',
+  },
+  {
+    id: 'chat-streaming-answer',
+    name: 'Streaming Answer with Citations',
+    category: 'Agent Chat',
+    description:
+      'Token-by-token text with linked citations, follow-up chips and a caret that stops the moment the stream does. The status is announced once; the prose is deliberately outside every live region.',
+    tags: ['streaming', 'citations', 'answer', 'typewriter', 'reduced motion'],
+    previewComponent: 'chat-streaming-answer',
+    deps: ['lucide-react'],
+    featured: true,
+  },
+  {
+    id: 'chat-empty-state',
+    name: 'Assistant Starter Screen',
+    category: 'Agent Chat',
+    description:
+      'The blank thread, answered: grouped starter prompts as real lists of buttons, each group labelled, so the highest-leverage screen in an AI product is not a centred logo.',
+    tags: ['empty state', 'starters', 'suggestions', 'onboarding', 'chat'],
+    previewComponent: 'chat-empty-state',
+    deps: ['lucide-react'],
+  },
+
+  /* -------------------------- Agent Reasoning ---------------------- */
+  {
+    id: 'agent-thinking-trace',
+    name: 'Collapsible Thinking Trace',
+    category: 'Agent Reasoning',
+    description:
+      'The "thought for 5s" panel: a native details/summary outside, individually expandable steps inside — buttons rather than nested disclosures, which are announced as a disclosure within a disclosure.',
+    tags: ['reasoning', 'thinking', 'trace', 'steps', 'disclosure'],
+    previewComponent: 'agent-thinking-trace',
+    deps: ['lucide-react'],
+    featured: true,
+    thumbHeight: 'h-48',
+  },
+  {
+    id: 'agent-tool-calls',
+    name: 'Tool Call Chips',
+    category: 'Agent Reasoning',
+    description:
+      'Dense tool invocations that open into their arguments and result, with status carried by icon and word rather than colour, and errors marked as alerts only once the user opens them.',
+    tags: ['tools', 'function calling', 'chips', 'logs', 'status'],
+    previewComponent: 'agent-tool-calls',
+    deps: ['lucide-react'],
+    thumbHeight: 'h-32',
+  },
+  {
+    id: 'agent-task-list',
+    name: 'Live Agent Task List',
+    category: 'Agent Reasoning',
+    description:
+      'Run status as rows — done, running, failed, queued — with native progress elements, per-task retry buttons that name their task, and progress announced from one small status region instead of every row.',
+    tags: ['tasks', 'run status', 'progress', 'queue', 'agent'],
+    previewComponent: 'agent-task-list',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'agent-working-indicator',
+    name: 'Working Indicator with Elapsed Time',
+    category: 'Agent Reasoning',
+    description:
+      'The gap before the first token: a shimmer grid, a phase label that advances as the wait lengthens, and a running counter — which is the only honest answer to "is it stuck". The timer is hidden from the live region on purpose.',
+    tags: ['loading', 'shimmer', 'elapsed', 'pending', 'reduced motion'],
+    previewComponent: 'agent-working-indicator',
+    deps: ['lucide-react'],
+    // The shortest block in the catalog — 66px in the card at the default
+    // crop, which reads as a broken preview rather than a small component.
+    thumbHeight: 'h-20',
+  },
+
+  /* ------------------------ Human in the Loop ---------------------- */
+  {
+    id: 'approval-request-card',
+    name: 'Approval Request with Blast Radius',
+    category: 'Human in the Loop',
+    description:
+      'The agent stops and asks: the effect stated before the verb, choices as radios in a fieldset so picking is separate from committing, no pre-focused Approve, and the decision left on screen afterwards.',
+    tags: ['approval', 'human in the loop', 'consent', 'guardrail', 'agent'],
+    previewComponent: 'approval-request-card',
+    deps: ['lucide-react'],
+    featured: true,
+  },
+  {
+    id: 'agent-diff-review',
+    name: 'Proposed Edits Diff Table',
+    category: 'Human in the Loop',
+    description:
+      'Machine-proposed row edits accepted one at a time, with before and after in real del/ins elements, a tri-state select-all that actually sets indeterminate, and a running count of what will be written.',
+    tags: ['diff', 'review', 'bulk edit', 'accept reject', 'table'],
+    previewComponent: 'agent-diff-review',
+    deps: ['lucide-react'],
+    featured: true,
+  },
+  {
+    id: 'confidence-recommendation',
+    name: 'Recommendation with Confidence Meter',
+    category: 'Human in the Loop',
+    description:
+      'A suggestion scored with a native meter rather than a styled bar, banded in words as well as numbers, and showing what the model rejected — the fastest way a human catches a bad recommendation.',
+    tags: ['recommendation', 'confidence', 'meter', 'suggestion', 'trust'],
+    previewComponent: 'confidence-recommendation',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'permission-scope-dialog',
+    name: 'Agent Permission Scopes',
+    category: 'Human in the Loop',
+    description:
+      'Read and write scopes separated rather than bundled, writes off by default, a required expiry, and switches that are real checkboxes with role="switch" — so the grant is toggleable by keyboard and announced as on or off.',
+    tags: ['permissions', 'scopes', 'consent', 'switch', 'security'],
+    previewComponent: 'permission-scope-dialog',
+    deps: ['lucide-react'],
+  },
+
+  /* ----------------------- Retrieval & Context --------------------- */
+  {
+    id: 'context-chunk-cards',
+    name: 'Retrieved Context Chunks',
+    category: 'Retrieval & Context',
+    description:
+      'The RAG debugging surface: ranked passages with similarity as a meter, matched spans in real mark elements, and filter chips wired as a radiogroup so arrows move between them.',
+    tags: ['rag', 'retrieval', 'chunks', 'embeddings', 'similarity'],
+    previewComponent: 'context-chunk-cards',
+    deps: ['lucide-react'],
+    featured: true,
+  },
+  {
+    id: 'source-citation-list',
+    name: 'Answer Source Citations',
+    category: 'Retrieval & Context',
+    description:
+      'The published footnotes under an answer — ordered list, real cite and time elements, the claim each source supports, and a staleness warning written in words rather than shown as an amber dot.',
+    tags: ['citations', 'sources', 'footnotes', 'provenance', 'trust'],
+    previewComponent: 'source-citation-list',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'knowledge-source-picker',
+    name: 'Knowledge Source Picker',
+    category: 'Retrieval & Context',
+    description:
+      'Choosing what the assistant may read, with indexing state told honestly — a half-indexed source says so rather than showing a green tick — and the footer stating the effect of the selection, not its cardinality.',
+    tags: ['knowledge base', 'sources', 'indexing', 'connectors', 'rag'],
+    previewComponent: 'knowledge-source-picker',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'retrieval-empty-state',
+    name: 'Nothing Found, Answered Honestly',
+    category: 'Retrieval & Context',
+    description:
+      'The refusal screen: says plainly that nothing was found, shows where it looked and the near-misses below threshold, and offers the two real ways out instead of inventing an answer.',
+    tags: ['empty state', 'no results', 'rag', 'refusal', 'honesty'],
+    previewComponent: 'retrieval-empty-state',
+    deps: ['lucide-react'],
+  },
+
+  /* ------------------------ Inline AI Actions ---------------------- */
+  {
+    id: 'selection-ai-toolbar',
+    name: 'Selection Action Toolbar',
+    category: 'Inline AI Actions',
+    description:
+      'Highlight a passage and hand it to the model. Positioned from the range rect relative to its container, raised by selectionchange so Shift-Arrow works, and every button prevents the mousedown that would collapse the selection.',
+    tags: ['selection', 'toolbar', 'rewrite', 'inline ai', 'editor'],
+    previewComponent: 'selection-ai-toolbar',
+    deps: ['lucide-react'],
+    featured: true,
+    thumbHeight: 'h-40',
+  },
+  {
+    id: 'ai-inline-suggestion',
+    name: 'Ghost Text Completion',
+    category: 'Inline AI Actions',
+    description:
+      'Copilot-style completion in a plain textarea: a transparent-caret field over a metric-matched mirror, Tab to accept, Escape that actually sticks, and the suggestion announced rather than left as invisible grey text.',
+    tags: ['autocomplete', 'ghost text', 'completion', 'inline ai', 'textarea'],
+    previewComponent: 'ai-inline-suggestion',
+    deps: ['lucide-react'],
+    thumbHeight: 'h-36',
+  },
+  {
+    id: 'ai-inspector-panel',
+    name: 'Agent-Adjusted Inspector',
+    category: 'Inline AI Actions',
+    description:
+      'The model edits real properties and every change is attributed and reversible — per-property provenance in words, per-property revert, and sliders whose aria-valuetext carries the unit.',
+    tags: ['inspector', 'properties', 'fine-tune', 'provenance', 'undo'],
+    previewComponent: 'ai-inspector-panel',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'ai-insight-cards',
+    name: 'Unprompted Insight Cards',
+    category: 'Inline AI Actions',
+    description:
+      'Findings the agent surfaced on its own, paged one at a time, each stating its magnitude rather than its direction, dismissible, and carrying a sparkline that is also a sentence for anyone who cannot see it.',
+    tags: ['insights', 'sparkline', 'anomaly', 'proactive', 'svg'],
+    previewComponent: 'ai-insight-cards',
+    deps: ['lucide-react'],
+    thumbHeight: 'h-48',
   },
 
   /* ================================================================ *

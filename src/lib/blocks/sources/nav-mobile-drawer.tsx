@@ -54,6 +54,12 @@ export interface NavMobileDrawerProps {
   signInLabel?: string
   signInHref?: string
   showSearch?: boolean
+  /**
+   * Render as a demo inside a larger page. Suppresses the document-level
+   * half of the drawer — background scroll lock, Tab trap, Escape — which
+   * belongs to a real overlay and not to a card in a preview grid.
+   */
+  embedded?: boolean
   className?: string
 }
 
@@ -97,6 +103,7 @@ export function NavMobileDrawer({
   signInLabel = 'Sign in',
   signInHref = '#',
   showSearch = true,
+  embedded = false,
   className = '',
 }: NavMobileDrawerProps) {
   const [open, setOpen] = React.useState(false)
@@ -111,7 +118,7 @@ export function NavMobileDrawer({
 
   // Focus into the panel on open, and lock the page behind it.
   React.useEffect(() => {
-    if (!open) return
+    if (!open || embedded) return
 
     closeRef.current?.focus()
 
@@ -150,7 +157,7 @@ export function NavMobileDrawer({
       document.removeEventListener('keydown', onKeyDown)
       document.body.style.overflow = previousOverflow
     }
-  }, [open, close])
+  }, [open, close, embedded])
 
   return (
     <header

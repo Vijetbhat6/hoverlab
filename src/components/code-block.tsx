@@ -73,6 +73,13 @@ interface CodeBlockProps {
      */
     successMessage?: string
   }
+  /**
+   * Tailwind max-height class for the scroll area. The 280px default suits a
+   * CSS snippet on a card; a whole block or page source is an order of
+   * magnitude longer and deserves a taller window before the reader has to
+   * scroll inside a box that is itself being scrolled.
+   */
+  maxHeightClass?: string
 }
 
 export function CodeBlock({
@@ -86,9 +93,41 @@ export function CodeBlock({
   copyFormat,
   hideReactButton = false,
   extraCopy,
+  maxHeightClass = 'max-h-[280px]',
 }: CodeBlockProps) {
   const [copiedKey, setCopiedKey] = React.useState<null | 'single' | 'extra' | 'react'>(null)
   const { record } = useCopyHistory()
+
+  /*
+   * Whether the code is actually clipped, and whether the reader has reached
+   * the end of it. Drives the bottom fade: a permanent gradient would imply
+   * hidden content under a snippet that fits, and one that never clears would
+   * keep covering the last line after you have scrolled to it.
+   */
+  const preRef = React.useRef<HTMLPreElement>(null)
+  const [clipped, setClipped] = React.useState(false)
+
+  React.useEffect(() => {
+    const el = preRef.current
+    if (!el) return
+
+    const measure = () => {
+      // 2px of slack — sub-pixel line heights leave a scrollHeight a hair
+      // above clientHeight on content that visibly fits.
+      setClipped(el.scrollHeight - el.clientHeight - el.scrollTop > 2)
+    }
+
+    measure()
+    el.addEventListener('scroll', measure, { passive: true })
+
+    const ro = new ResizeObserver(measure)
+    ro.observe(el)
+
+    return () => {
+      el.removeEventListener('scroll', measure)
+      ro.disconnect()
+    }
+  }, [code, maxHeightClass])
 
   async function copyText(text: string, key: 'single' | 'extra' | 'react', successMsg: string) {
     try {
@@ -218,9 +257,25 @@ export function CodeBlock({
           </button>
         </div>
       </div>
-      <pre className="fx-no-scrollbar max-h-[280px] overflow-auto p-4 text-[12.5px] leading-relaxed">
-        <code className={`language-${language} font-mono`}>{code}</code>
-      </pre>
+      <div className="relative">
+        <pre
+          ref={preRef}
+          tabIndex={0}
+          // Focusable so the panel can be scrolled from the keyboard. A
+          // scrollable region that only responds to a wheel is unreachable
+          // for anyone not using one.
+          className={`fx-code-scroll ${maxHeightClass} overflow-auto p-4 text-[12.5px] leading-relaxed outline-none focus-visible:ring-1 focus-visible:ring-inset focus-visible:ring-sky-400/60`}
+        >
+          <code className={`language-${language} font-mono`}>{code}</code>
+        </pre>
+
+        {clipped ? (
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-[#0b1020] to-transparent"
+          />
+        ) : null}
+      </div>
     </div>
   )
 }

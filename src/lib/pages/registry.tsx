@@ -17,7 +17,12 @@ import type * as React from 'react'
 
 import SaasLandingPage from './sources/saas-landing-page'
 import PricingPage from './sources/pricing-page'
+import BlogIndexPage from './sources/blog-index-page'
+import ArticlePage from './sources/article-page'
+import CareersPage from './sources/careers-page'
+import ProjectBoardPage from './sources/project-board-page'
 import DashboardOverview from './sources/dashboard-overview'
+import AiAssistantPage from './sources/ai-assistant-page'
 import CustomersTablePage from './sources/customers-table-page'
 import SettingsAccountPage from './sources/settings-account-page'
 import BillingPage from './sources/billing-page'
@@ -34,7 +39,12 @@ import AccountOrdersPage from './sources/account-orders-page'
 export const PAGE_PREVIEWS: Record<string, React.ReactNode> = {
   'saas-landing-page': <SaasLandingPage />,
   'pricing-page': <PricingPage />,
+  'blog-index-page': <BlogIndexPage />,
+  'article-page': <ArticlePage />,
+  'careers-page': <CareersPage />,
+  'project-board-page': <ProjectBoardPage />,
   'dashboard-overview': <DashboardOverview />,
+  'ai-assistant-page': <AiAssistantPage />,
   'customers-table-page': <CustomersTablePage />,
   'settings-account-page': <SettingsAccountPage />,
   'billing-page': <BillingPage />,

@@ -51,6 +51,7 @@ export function BlockMarkupPanel({ block }: { block: Block }) {
         code={html}
         language="html"
         filename={`${block.id}.html`}
+        maxHeightClass="max-h-[560px]"
       />
 
       <ul className="mt-4 space-y-1.5">

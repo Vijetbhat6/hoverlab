@@ -440,6 +440,63 @@ export const PATHS: GuidedPath[] = [
     ],
     next: 'The Storefront template ships these already routed, with the cart state wired between them.',
   },
+
+  {
+    slug: 'ai-assistant',
+    title: 'Build an AI assistant',
+    tagline: 'From the blank thread to an action the user actually approved.',
+    description:
+      'The screens an agent product is made of, in the order a user meets them. The first half is the conversation; the second half is everything that stops a confident-sounding model from doing damage — which is the half most AI products skip and then retrofit after the first incident.',
+    duration: '~45 minutes',
+    level: 'Intermediate',
+    steps: [
+      {
+        blockId: 'chat-empty-state',
+        why: 'The first screen, and the one that decides whether anyone types anything. A user who does not know what the thing can be asked will ask nothing, so this is where you spend your specificity.',
+      },
+      {
+        blockId: 'chat-prompt-bar',
+        why: 'The composer, before the thread. Everything downstream is shaped by what a user can express here — @ for sources and / for commands are the difference between a search box and an interface.',
+      },
+      {
+        blockId: 'chat-thread-panel',
+        why: 'The conversation itself. Take the live-region and scroll handling from this one verbatim: polite-with-additions and only-pin-when-at-the-bottom are both invisible until they are wrong.',
+      },
+      {
+        blockId: 'chat-streaming-answer',
+        why: 'The reply. Citations belong in the answer rather than under it, and the streaming here is deliberately outside every live region — the usual mistake is a paragraph re-read on every token.',
+      },
+      {
+        blockId: 'agent-working-indicator',
+        why: 'The gap before that first token. Fifteen silent seconds is indistinguishable from a dropped request, and an elapsed counter is the only honest answer to "is it stuck".',
+        alternatives: ['agent-thinking-trace'],
+      },
+      {
+        blockId: 'agent-thinking-trace',
+        why: 'Show the working. This is what converts a plausible answer into a checkable one, and it costs nothing to collapse by default.',
+        alternatives: ['agent-tool-calls'],
+      },
+      {
+        blockId: 'source-citation-list',
+        why: 'Where the claims came from. Add it the moment the assistant states a number — an uncited figure is the fastest way to lose a user permanently.',
+        alternatives: ['context-chunk-cards'],
+      },
+      {
+        blockId: 'retrieval-empty-state',
+        why: 'Before you ship: what it says when it found nothing. A model with no honest refusal path will fill the gap with something plausible, and this screen is the alternative.',
+      },
+      {
+        blockId: 'approval-request-card',
+        why: 'The first time the agent can change something, it has to ask. State the effect before the verb, default to the smallest blast radius, and never pre-focus Approve.',
+        alternatives: ['permission-scope-dialog'],
+      },
+      {
+        blockId: 'agent-diff-review',
+        why: 'For bulk edits, one approval is not consent. Make the row the unit of review and show a running count of what will actually be written.',
+      },
+    ],
+    next: 'The AI Assistant Screen page ships these already composed — transcript down the middle, permissions and insights in the rail. After that: `agent-task-list` if runs outlive the request, and `selection-ai-toolbar` if you have a document surface, since inline actions convert far better than sending people to a chat panel.',
+  },
 ]
 
 /** Look up one path by slug. */

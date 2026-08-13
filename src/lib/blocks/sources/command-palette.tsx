@@ -49,6 +49,14 @@ export interface CommandPaletteProps {
   placeholder?: string
   /** Start open — the default, so the block previews as something visible. */
   defaultOpen?: boolean
+  /**
+   * Render as a demo inside a larger page. Drops the document-level
+   * Ctrl/Cmd-K and Escape binding, which a preview has no business owning —
+   * on a page of previews it would fight the host app for the same keys —
+   * and the search field's `autoFocus`, which would scroll the browser to
+   * this card on load.
+   */
+  embedded?: boolean
   className?: string
 }
 
@@ -65,6 +73,7 @@ export function CommandPalette({
   items = DEFAULT_ITEMS,
   placeholder = 'Type a command or search',
   defaultOpen = true,
+  embedded = false,
   className = '',
 }: CommandPaletteProps) {
   const [open, setOpen] = React.useState(defaultOpen)
@@ -85,12 +94,24 @@ export function CommandPalette({
   }, [query])
 
   // Keep the highlighted row visible without yanking the list around.
+  //
+  // Skipped on the first commit. `scrollIntoView` walks up *every* scrollable
+  // ancestor, the document included, so running it on mount scrolls the whole
+  // page to wherever this palette happens to sit. On mount the highlight is
+  // row 0, which is already in view, so there was never anything to correct.
+  const settled = React.useRef(false)
   React.useEffect(() => {
+    if (!settled.current) {
+      settled.current = true
+      return
+    }
     const node = listRef.current?.querySelector<HTMLElement>('[data-highlighted="true"]')
     node?.scrollIntoView({ block: 'nearest' })
   }, [highlight])
 
   React.useEffect(() => {
+    if (embedded) return
+
     function onKey(event: KeyboardEvent) {
       if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') {
         // Firefox binds Ctrl-K to its search bar unless we take it.
@@ -102,7 +123,7 @@ export function CommandPalette({
     }
     document.addEventListener('keydown', onKey)
     return () => document.removeEventListener('keydown', onKey)
-  }, [])
+  }, [embedded])
 
   function handleKeyDown(event: React.KeyboardEvent) {
     if (results.length === 0) return
@@ -159,7 +180,7 @@ export function CommandPalette({
           <Search aria-hidden className="h-4 w-4 shrink-0 text-muted-foreground" />
 
           <input
-            autoFocus
+            autoFocus={!embedded}
             type="text"
             role="combobox"
             aria-expanded="true"

@@ -36,6 +36,17 @@ export interface CartDrawerProps {
   currency?: string
   locale?: string
   defaultOpen?: boolean
+  /**
+   * Render as a demo inside a larger page rather than as a real overlay.
+   *
+   * An open drawer legitimately owns the document: it locks background
+   * scroll, traps Tab and listens for Escape. A *preview* of one owns
+   * nothing — it is a card in a grid, and a card that sets
+   * `body { overflow: hidden }` freezes the page it is sitting on. Since
+   * this block previews itself open, that lock would otherwise fire on
+   * mount and never be cleaned up.
+   */
+  embedded?: boolean
   className?: string
 }
 
@@ -53,6 +64,7 @@ export function CartDrawer({
   currency = 'GBP',
   locale = 'en-GB',
   defaultOpen = true,
+  embedded = false,
   className = '',
 }: CartDrawerProps) {
   const [open, setOpen] = React.useState(defaultOpen)
@@ -66,6 +78,11 @@ export function CartDrawer({
   // Focus in on open, back to the opener on close, Escape to dismiss, and
   // Tab trapped inside the panel.
   React.useEffect(() => {
+    // Embedded: no scroll lock, no focus trap, no document key handler.
+    // Returning focus to the opener is skipped too — in a grid of previews
+    // that would scroll the visitor's page to this card unprompted.
+    if (embedded) return
+
     if (!open) {
       openerRef.current?.focus()
       return
@@ -117,7 +134,7 @@ export function CartDrawer({
       document.body.style.overflow = previousOverflow
       previous?.focus?.()
     }
-  }, [open])
+  }, [open, embedded])
 
   return (
     <div className={`relative min-h-96 ${className}`}>
