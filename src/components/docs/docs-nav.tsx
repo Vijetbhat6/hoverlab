@@ -17,7 +17,7 @@ const SECTIONS: Array<{ href: string; label: string; blurb: string }> = [
   { href: '/docs', label: 'Overview', blurb: 'What this is and how to install' },
   { href: '/docs/cli', label: 'CLI', blurb: 'npx hoverlab add, init, search' },
   { href: '/docs/api', label: 'API', blurb: 'The public /api/v1 surface' },
-  { href: '/docs/mcp', label: 'MCP', blurb: 'Editor agents' },
+  { href: '/docs/mcp', label: 'MCP', blurb: 'Editor agents & Figma' },
 ]
 
 export function DocsNav() {

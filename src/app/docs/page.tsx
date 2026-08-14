@@ -121,6 +121,24 @@ npx hoverlab init storefront ./shop`}</Snippet>
         </p>
       </DocsSection>
 
+      <DocsSection id="agents" title="Editor agents and Figma">
+        <p>
+          The CLI doubles as an MCP server, so the agent in your editor can
+          search the catalog and write the files itself. Registered next to
+          Figma&apos;s MCP server, it closes the loop from design to code: the
+          agent reads your selected frame from Figma, finds the closest blocks
+          here, installs them and restyles them to your tokens — a screenshot
+          or a written spec works the same way.
+        </p>
+        <p>
+          Setup and prompts in{' '}
+          <Link href="/docs/mcp" className="font-medium text-primary hover:underline">
+            the MCP docs
+          </Link>
+          .
+        </p>
+      </DocsSection>
+
       <DocsSection id="tailwind" title="What blocks assume">
         <p>
           Blocks and pages are styled with Tailwind utilities against semantic

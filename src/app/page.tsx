@@ -50,6 +50,7 @@ import { ComparisonTable } from '@/components/landing/comparison-table'
 import { NewsletterSignup } from '@/components/landing/newsletter-signup'
 import { CommunityBand } from '@/components/landing/community-band'
 import { CATEGORIES } from '@/lib/effect-types'
+import { DESIGNER_TOOLS } from '@/lib/designer-tools'
 import { TOTAL_COUNT, countByCategory } from '@/lib/catalog-stats'
 import { BLOCK_COUNT } from '@/lib/blocks/block-index'
 import { PAGE_COUNT } from '@/lib/pages/page-index'
@@ -254,7 +255,7 @@ export default function LandingPage() {
               <FeatureCard
                 icon={<Terminal className="h-5 w-5" />}
                 title="Install from the terminal"
-                description="npx hoverlab add <id> writes any effect, block, page or template straight into your project — it detects your setup and picks the right paths. Free, no account, no token. There's an MCP server too, so your editor's agent can search the catalog."
+                description="npx hoverlab add <id> writes any effect, block, page or template straight into your project — it detects your setup and picks the right paths. Free, no account, no token. There's an MCP server too, so your editor's agent can search the catalog — or pair it with Figma's and rebuild a selected frame from real blocks."
               />
             </Reveal>
             <Reveal delay={0}>
@@ -374,6 +375,48 @@ export default function LandingPage() {
             })}
           </Reveal>
         </div>
+      </section>
+
+      {/*
+        The designer tools band.
+
+        The tools are the one part of the site that needs no account — the
+        sitemap calls them the only organic entry point while the catalog is
+        gated — and until this section existed the front door never mentioned
+        them. A visitor bouncing off the sign-up wall should leave knowing
+        there are twenty things here they can use right now.
+      */}
+      <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+        <Reveal className="mb-10 flex flex-wrap items-end justify-between gap-4">
+          <div className="max-w-2xl">
+            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+              {DESIGNER_TOOLS.length} free designer tools
+            </h2>
+            <p className="mt-3 text-muted-foreground">
+              Design tokens, palettes, shadows, type scales, WCAG contrast,
+              clip-paths, noise textures and more — every tool runs entirely
+              in your browser. No account, no install, works offline.
+            </p>
+          </div>
+          <Button variant="outline" className="gap-1.5" asChild>
+            <Link href="/tools">
+              Open the tools hub
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </Button>
+        </Reveal>
+        <Reveal delay={80} className="flex flex-wrap gap-2">
+          {DESIGNER_TOOLS.map((tool) => (
+            <Link
+              key={tool.href}
+              href={tool.href}
+              className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-background/60 px-4 py-2 text-sm font-medium text-muted-foreground transition-all hover:border-primary/40 hover:text-foreground"
+            >
+              <tool.icon className="h-3.5 w-3.5 text-primary/80" />
+              {tool.name}
+            </Link>
+          ))}
+        </Reveal>
       </section>
 
       {/*
