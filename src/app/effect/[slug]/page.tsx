@@ -1,7 +1,8 @@
-import { notFound } from 'next/navigation'
+import { notFound, permanentRedirect } from 'next/navigation'
 import type { Metadata } from 'next'
 import { EffectDetail } from '@/components/effect-detail'
 import { EFFECTS, type Effect } from '@/lib/effects'
+import { EFFECT_ID_ALIASES } from '@/lib/effect-aliases'
 
 /**
  * Pre-generate EVERY effect page at build time.
@@ -75,6 +76,18 @@ export default async function EffectPage({ params }: PageProps) {
   const idx = EFFECTS.findIndex((e) => e.id === slug)
 
   if (idx === -1) {
+    /*
+     * Before 404ing, check whether this id was retired by a rename. Two
+     * families moved when their display names turned out to collide with
+     * older ones, and those URLs are the long-tail SEO surface this page
+     * exists to serve — a 404 throws away whatever they had accumulated.
+     * 308 rather than 307 so the move is cached and search engines
+     * transfer ranking to the new id.
+     */
+    const alias = EFFECT_ID_ALIASES[slug]
+    if (alias) {
+      permanentRedirect(`/effect/${alias}`)
+    }
     notFound()
   }
 

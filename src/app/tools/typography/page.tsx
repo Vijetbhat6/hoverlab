@@ -4,101 +4,26 @@
  * Typography Playground tool.
  *
  * Pick a heading font + body font pairing, tune size / weight / line-height
- * / letter-spacing / paragraph-spacing, and preview against real lorem
- * ipsum. Includes a modular type scale generator (1.2 / 1.25 / 1.333 /
- * 1.5 ratios) that outputs Tailwind/CLS-ready CSS variables.
+ * / letter-spacing / paragraph-spacing, and preview against real copy.
+ * Includes a modular type scale generator (1.2 / 1.25 / 1.333 / 1.5 / 1.618
+ * ratios) that outputs Tailwind/CLS-ready CSS variables, and emits the
+ * `next/font/google` version of the chosen pairing, which self-hosts.
+ *
+ * The pairings live in `@/lib/font-pairings` — the union of the old
+ * /tools/fonts list (which now redirects here) and this tool's original
+ * eight, each with the reasoning written down.
  */
 
 import * as React from 'react'
-import { Type, Copy, Check, RefreshCw } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
+import { Type } from 'lucide-react'
 import { Label } from '@/components/ui/label'
 import { SliderField } from '@/components/control-field'
 import { CopyCssCard } from '@/components/designer-tools/copy-css-card'
 import { ToolLayout } from '@/components/designer-tools/tool-layout'
+import { FONT_PAIRINGS, buildNextFont } from '@/lib/font-pairings'
 import { cn } from '@/lib/utils'
 
 const STORAGE_KEY = 'hoverlab:tool:typography'
-
-// Curated Google Font pairings. Each pairing has been chosen so the
-// two fonts feel related but distinct (one for display, one for body).
-interface FontPair {
-  id: string
-  name: string
-  heading: string
-  body: string
-  // CSS font-family stack with fallbacks.
-  headingStack: string
-  bodyStack: string
-}
-
-const FONT_PAIRS: FontPair[] = [
-  {
-    id: 'inter-system',
-    name: 'Inter + System',
-    heading: 'Inter',
-    body: 'System UI',
-    headingStack: 'Inter, system-ui, -apple-system, sans-serif',
-    bodyStack: 'system-ui, -apple-system, Segoe UI, Roboto, sans-serif',
-  },
-  {
-    id: 'playfair-source',
-    name: 'Playfair + Source Sans',
-    heading: 'Playfair Display',
-    body: 'Source Sans 3',
-    headingStack: '"Playfair Display", Georgia, serif',
-    bodyStack: '"Source Sans 3", system-ui, sans-serif',
-  },
-  {
-    id: 'merriweather-inter',
-    name: 'Merriweather + Inter',
-    heading: 'Merriweather',
-    body: 'Inter',
-    headingStack: 'Merriweather, Georgia, serif',
-    bodyStack: 'Inter, system-ui, sans-serif',
-  },
-  {
-    id: 'space-grotesk',
-    name: 'Space Grotesk + Inter',
-    heading: 'Space Grotesk',
-    body: 'Inter',
-    headingStack: '"Space Grotesk", system-ui, sans-serif',
-    bodyStack: 'Inter, system-ui, sans-serif',
-  },
-  {
-    id: 'lora-worksans',
-    name: 'Lora + Work Sans',
-    heading: 'Lora',
-    body: 'Work Sans',
-    headingStack: 'Lora, Georgia, serif',
-    bodyStack: '"Work Sans", system-ui, sans-serif',
-  },
-  {
-    id: 'poppins-roboto',
-    name: 'Poppins + Roboto',
-    heading: 'Poppins',
-    body: 'Roboto',
-    headingStack: 'Poppins, system-ui, sans-serif',
-    bodyStack: 'Roboto, system-ui, sans-serif',
-  },
-  {
-    id: 'bitter-opensans',
-    name: 'Bitter + Open Sans',
-    heading: 'Bitter',
-    body: 'Open Sans',
-    headingStack: 'Bitter, Georgia, serif',
-    bodyStack: '"Open Sans", system-ui, sans-serif',
-  },
-  {
-    id: 'cormorant-mulish',
-    name: 'Cormorant + Mulish',
-    heading: 'Cormorant Garamond',
-    body: 'Mulish',
-    headingStack: '"Cormorant Garamond", Georgia, serif',
-    bodyStack: 'Mulish, system-ui, sans-serif',
-  },
-]
 
 const SCALE_RATIOS = [
   { id: '1.2', label: '1.2 — Minor Third', value: 1.2 },
@@ -164,7 +89,7 @@ export default function TypographyToolPage() {
     }
   }, [state])
 
-  const pair = FONT_PAIRS.find((p) => p.id === state.pairId) ?? FONT_PAIRS[0]
+  const pair = FONT_PAIRINGS.find((p) => p.id === state.pairId) ?? FONT_PAIRINGS[0]!
 
   // Computed type scale.
   const scale = React.useMemo(() => {
@@ -185,8 +110,8 @@ export default function TypographyToolPage() {
 
   const cssOutput = React.useMemo(() => {
     return `:root {
-  --font-heading: ${pair.headingStack};
-  --font-body: ${pair.bodyStack};
+  --font-heading: ${pair.heading.stack};
+  --font-body: ${pair.body.stack};
   --text-base: ${state.baseSize}px;
 
   /* Type scale (ratio ${state.scale}) */
@@ -221,10 +146,11 @@ body, p, li, blockquote {
 p + p { margin-top: var(--spacing-paragraph); }`
   }, [pair, state, scale])
 
-  // Inject Google Fonts <link> for the chosen pairing.
+  // Inject Google Fonts <link> for the chosen pairing. A Set because a
+  // same-family pairing (Inter + Inter) would otherwise request the family
+  // twice, which the fonts API rejects.
   React.useEffect(() => {
-    const families = [pair.heading, pair.body]
-      .filter((f) => f !== 'System UI')
+    const families = [...new Set([pair.heading.family, pair.body.family])]
       .map((f) => `family=${encodeURIComponent(f).replace(/%20/g, '+')}:wght@300;400;500;600;700;800`)
     if (families.length === 0) return
     const href = `https://fonts.googleapis.com/css2?${families.join('&')}&display=swap`
@@ -256,20 +182,25 @@ p + p { margin-top: var(--spacing-paragraph); }`
               onChange={(e) => setState((s) => ({ ...s, pairId: e.target.value }))}
               className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm"
             >
-              {FONT_PAIRS.map((p) => (
+              {FONT_PAIRINGS.map((p) => (
                 <option key={p.id} value={p.id}>
-                  {p.name}
+                  {p.name} · {p.mood}
                 </option>
               ))}
             </select>
             <div className="mt-3 space-y-1 text-xs text-muted-foreground">
               <div>
-                <span className="font-medium text-foreground">Heading:</span> {pair.heading}
+                <span className="font-medium text-foreground">Heading:</span>{' '}
+                {pair.heading.family}
               </div>
               <div>
-                <span className="font-medium text-foreground">Body:</span> {pair.body}
+                <span className="font-medium text-foreground">Body:</span>{' '}
+                {pair.body.family}
               </div>
             </div>
+            <p className="mt-3 rounded-md bg-muted/50 p-3 text-xs leading-relaxed text-muted-foreground">
+              {pair.why}
+            </p>
           </div>
 
           {/* Size + scale */}
@@ -398,6 +329,7 @@ p + p { margin-top: var(--spacing-paragraph); }`
           </div>
 
           <CopyCssCard code={cssOutput} title="CSS variables + base styles" language="css" />
+          <CopyCssCard code={buildNextFont(pair)} title="next/font" language="tsx" />
         </div>
 
         {/* Preview */}
@@ -424,7 +356,7 @@ p + p { margin-top: var(--spacing-paragraph); }`
                     <span
                       className="flex-1 truncate"
                       style={{
-                        fontFamily: pair.headingStack,
+                        fontFamily: pair.heading.stack,
                         fontSize: `${s.size}px`,
                         fontWeight: state.headingWeight,
                         lineHeight: 1.1,
@@ -448,7 +380,7 @@ p + p { margin-top: var(--spacing-paragraph); }`
             <div
               className="p-8"
               style={{
-                fontFamily: pair.bodyStack,
+                fontFamily: pair.body.stack,
                 fontSize: `${state.baseSize}px`,
                 fontWeight: state.bodyWeight,
                 lineHeight: state.bodyLineHeight,
@@ -457,7 +389,7 @@ p + p { margin-top: var(--spacing-paragraph); }`
             >
               <h1
                 style={{
-                  fontFamily: pair.headingStack,
+                  fontFamily: pair.heading.stack,
                   fontSize: `${state.baseSize * Math.pow(state.scale, 4)}px`,
                   fontWeight: state.headingWeight,
                   lineHeight: state.headingLineHeight,
@@ -469,7 +401,7 @@ p + p { margin-top: var(--spacing-paragraph); }`
               </h1>
               <h2
                 style={{
-                  fontFamily: pair.headingStack,
+                  fontFamily: pair.heading.stack,
                   fontSize: `${state.baseSize * Math.pow(state.scale, 2)}px`,
                   fontWeight: state.headingWeight,
                   lineHeight: state.headingLineHeight,

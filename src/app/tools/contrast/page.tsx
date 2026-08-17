@@ -48,6 +48,21 @@ export default function ContrastToolPage() {
     } catch {
       /* ignore */
     }
+
+    // Handoff from the palette tool: ?fg=#hex / ?bg=#hex win over the
+    // restored state. window.location rather than useSearchParams — the hook
+    // would force a Suspense boundary around the whole page for one optional
+    // param. Stripped after applying so a reload keeps later edits.
+    const params = new URLSearchParams(window.location.search)
+    const qFg = params.get('fg')
+    const qBg = params.get('bg')
+    const nFg = qFg ? normalizeHex(qFg) : null
+    const nBg = qBg ? normalizeHex(qBg) : null
+    if (nFg) setFg(nFg)
+    if (nBg) setBg(nBg)
+    if (qFg !== null || qBg !== null) {
+      window.history.replaceState(null, '', window.location.pathname)
+    }
   }, [])
 
   React.useEffect(() => {

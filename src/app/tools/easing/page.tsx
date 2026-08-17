@@ -18,6 +18,7 @@ import { Label } from '@/components/ui/label'
 import { Slider } from '@/components/ui/slider'
 import { CopyCssCard } from '@/components/designer-tools/copy-css-card'
 import { ToolLayout } from '@/components/designer-tools/tool-layout'
+import { readSharedState, ShareLinkButton } from '@/components/designer-tools/share-link'
 import { cn } from '@/lib/utils'
 
 const STORAGE_KEY = 'hoverlab:tool:easing'
@@ -130,6 +131,30 @@ export default function EasingToolPage() {
     } catch {
       /* ignore */
     }
+
+    // A shared link's state wins over whatever this browser had stored.
+    const shared = readSharedState<Partial<EasingState>>()
+    if (shared) {
+      setState((prev) => {
+        const next = { ...prev }
+        if (
+          shared.p1 &&
+          typeof shared.p1.x === 'number' &&
+          typeof shared.p1.y === 'number'
+        ) {
+          next.p1 = { x: shared.p1.x, y: shared.p1.y }
+        }
+        if (
+          shared.p2 &&
+          typeof shared.p2.x === 'number' &&
+          typeof shared.p2.y === 'number'
+        ) {
+          next.p2 = { x: shared.p2.x, y: shared.p2.y }
+        }
+        if (typeof shared.duration === 'number') next.duration = shared.duration
+        return next
+      })
+    }
   }, [])
 
   React.useEffect(() => {
@@ -150,6 +175,17 @@ export default function EasingToolPage() {
   const cssBlock = React.useMemo(() => {
     return `.animated {\n  transition: transform ${state.duration}s ${cssValue};\n  /* or: animation-timing-function: ${cssValue}; */\n}`
   }, [cssValue, state.duration])
+
+  // Approximate the curve as linear() stops: solve y at 16 evenly spaced x
+  // values (positions are implied even, so only the values are emitted).
+  const linearBlock = React.useMemo(() => {
+    const N = 16
+    const values: string[] = []
+    for (let i = 0; i <= N; i++) {
+      values.push(String(Number(bezierY(state.p1, state.p2, i / N).toFixed(3))))
+    }
+    return `.animated {\n  /* linear() also expresses curves cubic-bezier() can't (bounce, multi-segment); browsers without it ignore the line and fall back safely */\n  transition-timing-function: linear(${values.join(', ')});\n}`
+  }, [state.p1, state.p2])
 
   // Pointer drag handlers.
   const onPointerDown = (which: 'p1' | 'p2') => (e: React.PointerEvent) => {
@@ -325,7 +361,10 @@ export default function EasingToolPage() {
           <div className="overflow-hidden rounded-lg border border-border">
             <div className="flex items-center justify-between border-b border-border/60 bg-muted/40 px-4 py-2">
               <span className="text-xs font-medium text-muted-foreground">Live preview</span>
-              <div className="flex gap-1">
+              <div className="flex items-center gap-1">
+                <ShareLinkButton
+                  state={{ p1: state.p1, p2: state.p2, duration: state.duration }}
+                />
                 <Button
                   variant="ghost"
                   size="sm"
@@ -378,6 +417,8 @@ export default function EasingToolPage() {
           </div>
 
           <CopyCssCard code={cssBlock} title="CSS" language="css" />
+
+          <CopyCssCard code={linearBlock} title="linear() easing" language="css" />
         </div>
 
         {/* Right: presets + controls */}

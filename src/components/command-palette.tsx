@@ -12,6 +12,8 @@
  *     outnumber everything else ~50:1 and a merged list buries the rest.
  *   - Trigger quick actions (Surprise me, Open bundle, Toggle theme, Go to
  *     Playground, etc.).
+ *   - Open any designer tool — the /tools hub literally tells users to
+ *     search here, so the registry is indexed too.
  *   - Filter by category.
  *
  * Keyboard:
@@ -62,6 +64,7 @@ import {
   type LucideIcon,
 } from 'lucide-react'
 import { CATEGORIES, type EffectCategory } from '@/lib/effect-types'
+import { DESIGNER_TOOLS } from '@/lib/designer-tools'
 import type { BrowseHit } from '@/lib/browse'
 import { LEVEL_LABEL, type ArtifactLevel } from '@/lib/artifact-types'
 import { cn } from '@/lib/utils'
@@ -131,7 +134,7 @@ function fuzzyMatch(query: string, text: string): FuzzyResult | null {
  * are outnumbered ~50:1 by effects, and a single merged list is how they
  * were invisible here in the first place.
  */
-type ItemKind = 'action' | 'category' | 'template' | 'page' | 'block' | 'effect'
+type ItemKind = 'action' | 'tool' | 'category' | 'template' | 'page' | 'block' | 'effect'
 
 /** Row icon per level. */
 const LEVEL_ICON: Record<ArtifactLevel, LucideIcon> = {
@@ -391,6 +394,22 @@ export function CommandPalette() {
     [router],
   )
 
+  /* ----- Build the designer-tool items ----- */
+  const toolItems: BaseItem[] = React.useMemo(
+    () =>
+      DESIGNER_TOOLS.map((t) => ({
+        id: `tool:${t.href}`,
+        kind: 'tool' as const,
+        label: t.name,
+        hint: t.description,
+        icon: t.icon,
+        // "tool" itself is a keyword so typing "tools" surfaces the section.
+        keywords: `tool ${t.keywords}`,
+        run: () => router.push(t.href),
+      })),
+    [router],
+  )
+
   /* ----- Build the category items ----- */
   const categoryItems: BaseItem[] = React.useMemo(
     () =>
@@ -425,8 +444,8 @@ export function CommandPalette() {
 
   /* ----- Search ----- */
   const allItems = React.useMemo(
-    () => [...actions, ...categoryItems, ...artifactItems],
-    [actions, categoryItems, artifactItems],
+    () => [...actions, ...toolItems, ...categoryItems, ...artifactItems],
+    [actions, toolItems, categoryItems, artifactItems],
   )
 
   const results = React.useMemo<ScoredItem[]>(() => {
@@ -445,6 +464,14 @@ export function CommandPalette() {
       )
       return [
         ...actions.map((item) => ({ item, score: 2, matchedIndices: [] as number[] })),
+        // A few tools so the section is discoverable before anyone types.
+        ...toolItems
+          .filter((item) =>
+            ['/tools/tokens', '/tools/palette', '/tools/contrast', '/tools/shadow'].some(
+              (href) => item.id === `tool:${href}`,
+            ),
+          )
+          .map((item) => ({ item, score: 1.8, matchedIndices: [] as number[] })),
         ...categoryItems.map((item) => ({ item, score: 1.5, matchedIndices: [] as number[] })),
         ...featuredPerLevel,
       ]
@@ -476,7 +503,7 @@ export function CommandPalette() {
     const upper = scored.filter((s) => s.item.kind !== 'effect')
     const effectHits = scored.filter((s) => s.item.kind === 'effect').slice(0, 40)
     return [...upper, ...effectHits]
-  }, [query, allItems, actions, categoryItems, artifactItems, catalog])
+  }, [query, allItems, actions, toolItems, categoryItems, artifactItems, catalog])
 
   // Clamp activeIndex when results change.
   React.useEffect(() => {
@@ -524,6 +551,7 @@ export function CommandPalette() {
   const { groups, flatResults } = React.useMemo(() => {
     const g: Record<ItemKind, ScoredItem[]> = {
       action: [],
+      tool: [],
       category: [],
       template: [],
       page: [],
@@ -536,7 +564,15 @@ export function CommandPalette() {
     // Assembly first, atoms last — the same ordering argument as /browse:
     // the hand-authored tiers are more often what a section-shaped word
     // means, and they are the ones that lose a flat ranking.
-    const flat = [...g.action, ...g.category, ...g.template, ...g.page, ...g.block, ...g.effect]
+    const flat = [
+      ...g.action,
+      ...g.tool,
+      ...g.category,
+      ...g.template,
+      ...g.page,
+      ...g.block,
+      ...g.effect,
+    ]
     return { groups: g, flatResults: flat }
   }, [results])
 
@@ -565,7 +601,7 @@ export function CommandPalette() {
               setQuery(e.target.value)
               setActiveIndex(0)
             }}
-            placeholder="Search effects, blocks, pages, templates…"
+            placeholder="Search effects, blocks, pages, templates, tools…"
             className="h-14 flex-1 bg-transparent text-sm outline-none placeholder:text-muted-foreground"
             autoComplete="off"
             spellCheck={false}
@@ -621,6 +657,29 @@ export function CommandPalette() {
                         activeIndex={activeIndex}
                         onActivate={activate}
                         onHover={setActiveIndex}
+                      />
+                    )
+                  })}
+                </Group>
+              ) : null}
+
+              {groups.tool.length > 0 ? (
+                <Group label="Tools">
+                  {groups.tool.map((r) => {
+                    const idx = runningIndex++
+                    return (
+                      <PaletteRow
+                        key={r.item.id}
+                        item={r.item}
+                        index={idx}
+                        activeIndex={activeIndex}
+                        onActivate={activate}
+                        onHover={setActiveIndex}
+                        matchedIndices={
+                          query.trim()
+                            ? fuzzyMatch(query.trim(), r.item.label)?.matchedIndices ?? []
+                            : []
+                        }
                       />
                     )
                   })}

@@ -16,9 +16,9 @@ import type { Metadata } from 'next'
  * whole segment.
  */
 export const metadata: Metadata = {
-  title: 'Browse 4,300+ CSS Effects — Hoverlab',
+  title: 'Browse 770+ CSS Effects — Hoverlab',
   description:
-    'A curated library of pure-CSS effects with live demos and copy-ready code. Buttons, loaders, cards, text, backgrounds, navigation and more — no JavaScript, no frameworks, just CSS.',
+    'A curated library of distinct pure-CSS effects with live demos and copy-ready code. Buttons, loaders, cards, text, backgrounds, navigation and more — no JavaScript, no frameworks, just CSS.',
   alternates: { canonical: '/library' },
 }
 

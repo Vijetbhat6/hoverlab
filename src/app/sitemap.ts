@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next'
 import { absoluteUrl } from '@/lib/site'
+import { DESIGNER_TOOLS } from '@/lib/designer-tools'
 
 /**
  * XML sitemap covering every indexable URL.
@@ -40,28 +41,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
     // The designer tools are self-contained utilities, not catalog
     // artifacts, so they stay open and stay indexed. With the catalog
-    // gated they are the only organic entry point left.
+    // gated they are the only organic entry point left. Derived from the
+    // registry rather than a second list: a hand-kept copy here is how the
+    // sitemap once carried a redirecting /tools/fonts and missed new tools.
     { url: absoluteUrl('/tools'), changeFrequency: 'monthly' as const, priority: 0.9 },
-    ...[
-      'tokens',
-      'icons',
-      'fonts',
-      'motion',
-      'placeholders',
-      'favicon',
-      'meta',
-      'email',
-      'palette',
-      'gradient',
-      'shadow',
-      'contrast',
-      'units',
-      'typography',
-      'border-radius',
-      'easing',
-      'glassmorphism',
-    ].map((slug) => ({
-      url: absoluteUrl(`/tools/${slug}`),
+    ...DESIGNER_TOOLS.map((tool) => ({
+      url: absoluteUrl(tool.href),
       changeFrequency: 'monthly' as const,
       priority: 0.8,
     })),

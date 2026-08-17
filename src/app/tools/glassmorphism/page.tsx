@@ -23,6 +23,17 @@ import { cn } from '@/lib/utils'
 
 const STORAGE_KEY = 'hoverlab:tool:glassmorphism'
 
+// The value is rendered as an inline style, so only bare gradient functions
+// are accepted — url(...) and anything that could smuggle extra declarations
+// is refused.
+function safeGradient(value: unknown): string | null {
+  if (typeof value !== 'string') return null
+  const v = value.trim()
+  if (!/^(linear|radial|conic)-gradient\(/i.test(v)) return null
+  if (/url\s*\(/i.test(v) || /[;{}<>]/.test(v)) return null
+  return v
+}
+
 interface GlassState {
   blur: number // px
   bgOpacity: number // 0-1
@@ -40,6 +51,8 @@ interface GlassState {
   bgGradient1: string
   bgGradient2: string
   bgGradient3: string
+  /** Full background-image value handed off from the gradient tool; overrides the 3-stop scene. */
+  customBg: string | null
   // card
   cardRadius: number
   cardWidth: number
@@ -62,6 +75,7 @@ const DEFAULT_STATE: GlassState = {
   bgGradient1: '#f43f5e',
   bgGradient2: '#8b5cf6',
   bgGradient3: '#06b6d4',
+  customBg: null,
   cardRadius: 16,
   cardWidth: 320,
   cardHeight: 200,
@@ -75,10 +89,23 @@ export default function GlassmorphismToolPage() {
       const raw = localStorage.getItem(STORAGE_KEY)
       if (raw) {
         const parsed = JSON.parse(raw)
+        // Stored customBg is re-validated — it feeds an inline style.
+        parsed.customBg = safeGradient(parsed.customBg)
         setState((prev) => ({ ...prev, ...parsed }))
       }
     } catch {
       /* ignore */
+    }
+
+    // Handoff from the gradient tool: ?bg=<encoded background-image> wins
+    // over the restored state. window.location rather than useSearchParams —
+    // the hook would force a Suspense boundary around the whole page for one
+    // optional param. Stripped after applying so a reload keeps later edits.
+    const param = new URLSearchParams(window.location.search).get('bg')
+    if (param !== null) {
+      const gradient = safeGradient(param)
+      if (gradient) setState((prev) => ({ ...prev, customBg: gradient }))
+      window.history.replaceState(null, '', window.location.pathname)
     }
   }, [])
 
@@ -152,6 +179,7 @@ export default function GlassmorphismToolPage() {
       bgGradient1: randomHex(),
       bgGradient2: randomHex(),
       bgGradient3: randomHex(),
+      customBg: null,
     })
   }
 
@@ -167,22 +195,29 @@ export default function GlassmorphismToolPage() {
           <div
             className="relative flex min-h-[420px] items-center justify-center overflow-hidden rounded-xl border border-border p-8"
             style={{
-              background: `linear-gradient(135deg, ${state.bgGradient1}, ${state.bgGradient2}, ${state.bgGradient3})`,
+              background:
+                state.customBg ??
+                `linear-gradient(135deg, ${state.bgGradient1}, ${state.bgGradient2}, ${state.bgGradient3})`,
             }}
           >
-            {/* Decorative shapes for visible blur */}
-            <div
-              className="absolute -left-12 top-8 h-40 w-40 rounded-full opacity-70"
-              style={{ background: state.bgGradient1, filter: 'blur(8px)' }}
-            />
-            <div
-              className="absolute -right-8 bottom-12 h-32 w-32 rounded-full opacity-70"
-              style={{ background: state.bgGradient3, filter: 'blur(8px)' }}
-            />
-            <div
-              className="absolute right-1/3 top-4 h-24 w-24 rotate-12 opacity-60"
-              style={{ background: state.bgGradient2, filter: 'blur(6px)' }}
-            />
+            {/* Decorative shapes for visible blur — their colours belong to the
+                3-stop scene, so they hide under a handed-off gradient */}
+            {!state.customBg && (
+              <>
+                <div
+                  className="absolute -left-12 top-8 h-40 w-40 rounded-full opacity-70"
+                  style={{ background: state.bgGradient1, filter: 'blur(8px)' }}
+                />
+                <div
+                  className="absolute -right-8 bottom-12 h-32 w-32 rounded-full opacity-70"
+                  style={{ background: state.bgGradient3, filter: 'blur(8px)' }}
+                />
+                <div
+                  className="absolute right-1/3 top-4 h-24 w-24 rotate-12 opacity-60"
+                  style={{ background: state.bgGradient2, filter: 'blur(6px)' }}
+                />
+              </>
+            )}
 
             {/* The glass card */}
             <div style={cardStyle} className="relative z-10 flex flex-col items-center justify-center gap-2 p-6">
@@ -206,13 +241,28 @@ export default function GlassmorphismToolPage() {
                 <Shuffle className="h-3 w-3" /> Random
               </Button>
             </div>
+            {state.customBg && (
+              <div className="mb-3 flex items-center justify-between gap-3 rounded-md border border-border bg-muted/40 px-3 py-2">
+                <span className="truncate font-mono text-[10px] text-muted-foreground">
+                  {state.customBg}
+                </span>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="h-6 shrink-0 text-xs"
+                  onClick={() => update({ customBg: null })}
+                >
+                  Clear
+                </Button>
+              </div>
+            )}
             <div className="flex items-center gap-2">
               {(['bgGradient1', 'bgGradient2', 'bgGradient3'] as const).map((key) => (
                 <div key={key} className="flex flex-1 flex-col gap-1">
                   <input
                     type="color"
                     value={state[key]}
-                    onChange={(e) => update({ [key]: e.target.value })}
+                    onChange={(e) => update({ [key]: e.target.value, customBg: null })}
                     className="h-10 w-full cursor-pointer rounded border border-border bg-transparent"
                     aria-label={`Gradient ${key.slice(-1)}`}
                   />

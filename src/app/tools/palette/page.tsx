@@ -11,13 +11,15 @@
  */
 
 import * as React from 'react'
-import { Palette, Shuffle, Copy, Check } from 'lucide-react'
+import Link from 'next/link'
+import { Palette, Shuffle, Copy, Check, ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Slider } from '@/components/ui/slider'
 import { CopyCssCard } from '@/components/designer-tools/copy-css-card'
 import { ToolLayout } from '@/components/designer-tools/tool-layout'
+import { readSharedState, ShareLinkButton } from '@/components/designer-tools/share-link'
 import {
   generatePalette,
   hexToHsl,
@@ -65,6 +67,16 @@ export default function PaletteToolPage() {
       }
     } catch {
       /* ignore */
+    }
+
+    // A shared link's state wins over whatever this browser had stored.
+    const shared = readSharedState<PaletteState>()
+    if (shared) {
+      const n = shared.base ? normalizeHex(shared.base) : null
+      if (n) setBase(n)
+      if (shared.scheme && SCHEMES.some((s) => s.id === shared.scheme)) {
+        setScheme(shared.scheme)
+      }
     }
   }, [])
 
@@ -169,9 +181,29 @@ export default function PaletteToolPage() {
               ))}
             </div>
 
+            {/* The base's position varies by scheme (index 0, 1 or 2 —
+                see generatePalette), so compute it rather than claim one. */}
             <div className="mt-5 rounded-md bg-muted/50 p-3 text-xs text-muted-foreground">
               <span className="font-medium text-foreground">{palette.name}</span>{' '}
-              scheme · 5 colors · base at position 3
+              scheme · 5 colors
+              {(() => {
+                const i = palette.colors.findIndex(
+                  (c) => c.toLowerCase() === base.toLowerCase(),
+                )
+                return i >= 0 ? ` · base at position ${i + 1}` : ''
+              })()}
+            </div>
+
+            {/* Handoff: the palette picks the colour, the token generator
+                turns it into the full variable set the catalog runs on. */}
+            <div className="mt-3 flex items-center gap-2">
+              <Button asChild variant="outline" size="sm" className="flex-1 gap-1.5">
+                <Link href={`/tools/tokens?base=${encodeURIComponent(base)}`}>
+                  Build design tokens from this base
+                  <ArrowRight className="h-3.5 w-3.5" />
+                </Link>
+              </Button>
+              <ShareLinkButton state={{ base, scheme }} />
             </div>
           </div>
 
@@ -272,6 +304,14 @@ function SwatchCard({ color, index }: { color: string; index: number }) {
             hsl({Math.round(hsl.h)}, {Math.round(hsl.s)}%, {Math.round(hsl.l)}%)
           </div>
         )}
+        {/* Handoff: is this swatch readable as text? The checker answers
+            properly — against both surfaces, at three sizes. */}
+        <Link
+          href={`/tools/contrast?fg=${encodeURIComponent(color)}`}
+          className="inline-block pt-1 text-[10px] font-medium text-primary underline-offset-2 hover:underline"
+        >
+          Check contrast →
+        </Link>
       </div>
     </div>
   )

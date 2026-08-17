@@ -1137,11 +1137,16 @@ export function generateV5(ctx) {
 .${c}:hover .l1 { transform: rotateX(52deg) rotateZ(45deg) translateZ(48px); }
 .${c}:hover .l2 { transform: rotateX(52deg) rotateZ(45deg) translateZ(24px); }`
     add(mk({
-      name: `${g.name} Isometric Stack`,
+      // Collided with the m3-iso-* family in generate-effects-modern2.mjs
+      // for the six token names GRADPAIRS and TRIOS share (Sunset, Ocean,
+      // Forest, Berry, Fire, Mint). The two are different effects: that one
+      // drifts continuously, this one pulls apart on hover — an exploded
+      // view. Retired ids are aliased in src/lib/effect-aliases.ts.
+      name: `${g.name} Exploded Stack`,
       category: '3D & Perspective',
       description: `Three ${g.name.toLowerCase()} planes laid out isometrically that pull apart in Z on hover.`,
       html, css,
-      tags: ['3d', 'isometric', 'layers', 'perspective', 'stack', g.name.toLowerCase()],
+      tags: ['3d', 'isometric', 'exploded', 'layers', 'perspective', 'stack', g.name.toLowerCase()],
     }))
   }
 
@@ -1396,7 +1401,13 @@ export function generateV5(ctx) {
   50% { box-shadow: inset 0 0 0 2px ${g.a}, 0 0 0 5px rgba(${rgbOf(g.a)}, 0.18); }
 }`
     add(mk({
-      name: `${g.name} Checkout Stepper`,
+      // Named "Checkout Stepper" until it collided with the identically
+      // named tl-step-* family in generate-effects-extra2.mjs — twelve
+      // duplicate display names, one per gradient pair. This one is the
+      // wizard variant (the section header above always said so), so it
+      // takes the name it should have had. Retired ids are aliased in
+      // src/lib/effect-aliases.ts so the old URLs still resolve.
+      name: `${g.name} Wizard Stepper`,
       category: 'Timelines & Steps',
       description: `Four-step wizard with completed ticks, a pulsing current step and ${g.name.toLowerCase()} connector rails.`,
       html, css,

@@ -118,6 +118,91 @@ export function hexToHslCss(hex: string): string {
 }
 
 /* ============================================================
+ *  OKLCH
+ *
+ *  OKLCH does not route through HSL: its whole value is that lightness
+ *  and chroma are perceptually uniform, which HSL destroys. Conversions
+ *  go sRGB → linear-light → OKLab → OKLCH per Björn Ottosson's
+ *  reference matrices (the same ones the CSS Color 4 spec cites).
+ * ========================================================== */
+
+/** OKLCH triple (l: 0-1, c: chroma ≥ 0, h: 0-360 degrees). */
+export interface OKLCH {
+  l: number
+  c: number
+  h: number
+}
+
+function srgbChannelToLinear(c: number): number {
+  const s = c / 255
+  return s <= 0.04045 ? s / 12.92 : Math.pow((s + 0.055) / 1.055, 2.4)
+}
+
+function linearChannelToSrgb(c: number): number {
+  return c <= 0.0031308 ? c * 12.92 : 1.055 * Math.pow(c, 1 / 2.4) - 0.055
+}
+
+/** Convert sRGB to OKLCH. */
+export function rgbToOklch({ r, g, b }: RGB): OKLCH {
+  const lr = srgbChannelToLinear(r)
+  const lg = srgbChannelToLinear(g)
+  const lb = srgbChannelToLinear(b)
+  const l = Math.cbrt(0.4122214708 * lr + 0.5363325363 * lg + 0.0514459929 * lb)
+  const m = Math.cbrt(0.2119034982 * lr + 0.6806995451 * lg + 0.1073969566 * lb)
+  const s = Math.cbrt(0.0883024619 * lr + 0.2817188376 * lg + 0.6299787005 * lb)
+  const L = 0.2104542553 * l + 0.793617785 * m - 0.0040720468 * s
+  const a = 1.9779984951 * l - 2.428592205 * m + 0.4505937099 * s
+  const bb = 0.0259040371 * l + 0.7827717662 * m - 0.808675766 * s
+  const c = Math.sqrt(a * a + bb * bb)
+  let h = (Math.atan2(bb, a) * 180) / Math.PI
+  if (h < 0) h += 360
+  // Hue is undefined at zero chroma; pin it so grays round-trip stably.
+  return { l: L, c, h: c < 1e-6 ? 0 : h }
+}
+
+/** OKLCH → linear-light sRGB, unclamped — channels outside [0,1] mean out of gamut. */
+function oklchToLinearRgb({ l, c, h }: OKLCH): { r: number; g: number; b: number } {
+  const hr = (h * Math.PI) / 180
+  const a = c * Math.cos(hr)
+  const b = c * Math.sin(hr)
+  const l_ = l + 0.3963377774 * a + 0.2158037573 * b
+  const m_ = l - 0.1055613458 * a - 0.0638541728 * b
+  const s_ = l - 0.0894841775 * a - 1.291485548 * b
+  const l3 = l_ * l_ * l_
+  const m3 = m_ * m_ * m_
+  const s3 = s_ * s_ * s_
+  return {
+    r: 4.0767416621 * l3 - 3.3077115913 * m3 + 0.2309699292 * s3,
+    g: -1.2684380046 * l3 + 2.6097574011 * m3 - 0.3413193965 * s3,
+    b: -0.0041960863 * l3 - 0.7034186147 * m3 + 1.707614701 * s3,
+  }
+}
+
+/** True when the OKLCH color fits in the sRGB gamut (small epsilon for rounding). */
+export function oklchInSrgbGamut(oklch: OKLCH): boolean {
+  const { r, g, b } = oklchToLinearRgb(oklch)
+  const eps = 1e-4
+  return (
+    r >= -eps && r <= 1 + eps &&
+    g >= -eps && g <= 1 + eps &&
+    b >= -eps && b <= 1 + eps
+  )
+}
+
+/** Convert OKLCH to sRGB, clamping each channel into gamut. */
+export function oklchToRgb(oklch: OKLCH): RGB {
+  const lin = oklchToLinearRgb(oklch)
+  const to = (v: number) =>
+    Math.round(linearChannelToSrgb(Math.min(1, Math.max(0, v))) * 255)
+  return { r: to(lin.r), g: to(lin.g), b: to(lin.b) }
+}
+
+/** Format OKLCH as a CSS string, e.g. "oklch(0.6280 0.2577 29.23)". */
+export function formatOklch({ l, c, h }: OKLCH): string {
+  return `oklch(${l.toFixed(4)} ${c.toFixed(4)} ${h.toFixed(2)})`
+}
+
+/* ============================================================
  *  Palette generation
  * ========================================================== */
 

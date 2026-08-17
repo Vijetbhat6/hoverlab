@@ -3,14 +3,28 @@
 /**
  * Shadow Builder tool.
  *
- * Layer up to 8 box-shadows with independent x / y / blur / spread /
- * color / opacity / inset controls. Each layer has a colored swatch
- * and a "this layer enabled" toggle. Preview against a card on either
- * a light or dark surface. Output is production CSS.
+ * Layer up to 8 box-shadows or text-shadows with independent x / y / blur /
+ * spread / color / opacity / inset controls. One tool for both because the
+ * mental model is identical — layered offsets of the same silhouette — and
+ * text-shadow is just the subset without spread and inset, so those two
+ * controls disappear in text mode rather than living on a separate page.
+ * Preview against a card (or a headline) on either a light or dark surface.
+ * Output is production CSS.
  */
 
 import * as React from 'react'
-import { Layers, Plus, Trash2, Copy, Eye, EyeOff, Sun, Moon } from 'lucide-react'
+import {
+  Layers,
+  Plus,
+  Trash2,
+  Copy,
+  Eye,
+  EyeOff,
+  Sun,
+  Moon,
+  Square,
+  Type,
+} from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -18,6 +32,7 @@ import { Slider } from '@/components/ui/slider'
 import { Switch } from '@/components/ui/switch'
 import { CopyCssCard } from '@/components/designer-tools/copy-css-card'
 import { ToolLayout } from '@/components/designer-tools/tool-layout'
+import { readSharedState, ShareLinkButton } from '@/components/designer-tools/share-link'
 import { normalizeHex, hexToRgb } from '@/lib/color-tools'
 import { cn } from '@/lib/utils'
 
@@ -78,15 +93,18 @@ function defaultLayers(): ShadowLayer[] {
   ]
 }
 
-function layerToCss(l: ShadowLayer): string {
+type ShadowMode = 'box' | 'text'
+
+function layerToCss(l: ShadowLayer, mode: ShadowMode): string {
   const rgb = hexToRgb(l.color)
   if (!rgb) return ''
+  // text-shadow has no inset or spread — those two are box-only.
   const parts = [
-    l.inset ? 'inset' : '',
+    mode === 'box' && l.inset ? 'inset' : '',
     `${l.x}px`,
     `${l.y}px`,
     `${l.blur}px`,
-    l.spread !== 0 ? `${l.spread}px` : '',
+    mode === 'box' && l.spread !== 0 ? `${l.spread}px` : '',
     `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${l.opacity.toFixed(2)})`,
   ].filter(Boolean)
   return parts.join(' ')
@@ -94,8 +112,12 @@ function layerToCss(l: ShadowLayer): string {
 
 export default function ShadowToolPage() {
   const [layers, setLayers] = React.useState<ShadowLayer[]>(defaultLayers)
+  const [mode, setMode] = React.useState<ShadowMode>('box')
   const [surface, setSurface] = React.useState<'light' | 'dark'>('light')
   const [cardColor, setCardColor] = React.useState('#ffffff')
+  // Separate from cardColor: the card default (white) would make the text
+  // preview invisible on the light surface.
+  const [textColor, setTextColor] = React.useState('#18181b')
 
   // Hydrate.
   React.useEffect(() => {
@@ -109,10 +131,34 @@ export default function ShadowToolPage() {
         if (parsed.surface === 'light' || parsed.surface === 'dark') {
           setSurface(parsed.surface)
         }
+        if (parsed.mode === 'box' || parsed.mode === 'text') {
+          setMode(parsed.mode)
+        }
         if (typeof parsed.cardColor === 'string') setCardColor(parsed.cardColor)
+        if (typeof parsed.textColor === 'string') setTextColor(parsed.textColor)
       }
     } catch {
       /* ignore */
+    }
+
+    // A shared link's state wins over whatever this browser had stored.
+    const shared = readSharedState<{
+      layers?: ShadowLayer[]
+      mode?: ShadowMode
+      surface?: 'light' | 'dark'
+      cardColor?: string
+      textColor?: string
+    }>()
+    if (shared) {
+      if (Array.isArray(shared.layers) && shared.layers.length >= 1) {
+        setLayers(shared.layers)
+      }
+      if (shared.mode === 'box' || shared.mode === 'text') setMode(shared.mode)
+      if (shared.surface === 'light' || shared.surface === 'dark') {
+        setSurface(shared.surface)
+      }
+      if (typeof shared.cardColor === 'string') setCardColor(shared.cardColor)
+      if (typeof shared.textColor === 'string') setTextColor(shared.textColor)
     }
   }, [])
 
@@ -121,25 +167,27 @@ export default function ShadowToolPage() {
     try {
       localStorage.setItem(
         STORAGE_KEY,
-        JSON.stringify({ layers, surface, cardColor }),
+        JSON.stringify({ layers, mode, surface, cardColor, textColor }),
       )
     } catch {
       /* ignore */
     }
-  }, [layers, surface, cardColor])
+  }, [layers, mode, surface, cardColor, textColor])
 
   const cssValue = React.useMemo(() => {
     return layers
       .filter((l) => l.enabled)
-      .map(layerToCss)
+      .map((l) => layerToCss(l, mode))
       .filter(Boolean)
       .join(',\n    ')
-  }, [layers])
+  }, [layers, mode])
 
   const cssBlock = React.useMemo(() => {
-    if (!cssValue) return '.card {\n  box-shadow: none;\n}'
-    return `.card {\n  box-shadow:\n    ${cssValue};\n}`
-  }, [cssValue])
+    const selector = mode === 'box' ? '.card' : '.heading'
+    const property = mode === 'box' ? 'box-shadow' : 'text-shadow'
+    if (!cssValue) return `${selector} {\n  ${property}: none;\n}`
+    return `${selector} {\n  ${property}:\n    ${cssValue};\n}`
+  }, [cssValue, mode])
 
   const updateLayer = (id: string, patch: Partial<ShadowLayer>) => {
     setLayers((arr) => arr.map((l) => (l.id === id ? { ...l, ...patch } : l)))
@@ -178,7 +226,7 @@ export default function ShadowToolPage() {
   return (
     <ToolLayout
       name="Shadow Builder"
-      tagline="Layer up to 8 box-shadows"
+      tagline="Layer up to 8 box-shadows or text-shadows"
       icon={<Layers className="h-5 w-5" />}
     >
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_400px]">
@@ -190,21 +238,52 @@ export default function ShadowToolPage() {
               surface === 'dark' ? 'bg-zinc-900' : 'bg-zinc-100',
             )}
           >
-            <div
-              className="flex h-48 w-72 items-center justify-center rounded-xl text-sm font-medium"
-              style={{
-                backgroundColor: cardColor,
-                color: surface === 'dark' ? '#000' : '#000',
-                boxShadow: cssValue || 'none',
-              }}
-            >
-              Preview card
-            </div>
+            {mode === 'box' ? (
+              <div
+                className="flex h-48 w-72 items-center justify-center rounded-xl text-sm font-medium"
+                style={{
+                  backgroundColor: cardColor,
+                  color: '#000',
+                  boxShadow: cssValue || 'none',
+                }}
+              >
+                Preview card
+              </div>
+            ) : (
+              <span
+                className="select-none text-6xl font-bold tracking-tight sm:text-7xl"
+                style={{
+                  color: textColor,
+                  textShadow: cssValue || 'none',
+                }}
+              >
+                Shadow
+              </span>
+            )}
           </div>
 
-          {/* Surface controls */}
+          {/* Mode + surface controls */}
           <div className="flex flex-wrap items-center gap-3 rounded-lg border border-border bg-card p-4">
-            <Label className="text-sm font-medium">Surface</Label>
+            <Label className="text-sm font-medium">Shadow</Label>
+            <div className="flex gap-1">
+              <Button
+                variant={mode === 'box' ? 'default' : 'outline'}
+                size="sm"
+                className="h-8 gap-1.5"
+                onClick={() => setMode('box')}
+              >
+                <Square className="h-3.5 w-3.5" /> Box
+              </Button>
+              <Button
+                variant={mode === 'text' ? 'default' : 'outline'}
+                size="sm"
+                className="h-8 gap-1.5"
+                onClick={() => setMode('text')}
+              >
+                <Type className="h-3.5 w-3.5" /> Text
+              </Button>
+            </div>
+            <Label className="ml-2 text-sm font-medium">Surface</Label>
             <div className="flex gap-1">
               <Button
                 variant={surface === 'light' ? 'default' : 'outline'}
@@ -224,11 +303,17 @@ export default function ShadowToolPage() {
               </Button>
             </div>
             <div className="ml-auto flex items-center gap-2">
-              <Label className="text-xs text-muted-foreground">Card color</Label>
+              <Label className="text-xs text-muted-foreground">
+                {mode === 'box' ? 'Card color' : 'Text color'}
+              </Label>
               <input
                 type="color"
-                value={cardColor}
-                onChange={(e) => setCardColor(e.target.value)}
+                value={mode === 'box' ? cardColor : textColor}
+                onChange={(e) =>
+                  mode === 'box'
+                    ? setCardColor(e.target.value)
+                    : setTextColor(e.target.value)
+                }
                 className="h-8 w-9 cursor-pointer rounded border border-border bg-transparent"
               />
             </div>
@@ -241,15 +326,18 @@ export default function ShadowToolPage() {
             <Label className="text-sm font-medium">
               Layers ({layers.length}/8)
             </Label>
-            <Button
-              variant="outline"
-              size="sm"
-              className="h-7 gap-1 text-xs"
-              onClick={addLayer}
-              disabled={layers.length >= 8}
-            >
-              <Plus className="h-3 w-3" /> Add layer
-            </Button>
+            <div className="flex items-center gap-1.5">
+              <ShareLinkButton state={{ layers, mode, surface, cardColor, textColor }} />
+              <Button
+                variant="outline"
+                size="sm"
+                className="h-7 gap-1 text-xs"
+                onClick={addLayer}
+                disabled={layers.length >= 8}
+              >
+                <Plus className="h-3 w-3" /> Add layer
+              </Button>
+            </div>
           </div>
 
           <div className="space-y-3">
@@ -257,6 +345,7 @@ export default function ShadowToolPage() {
               <LayerCard
                 key={layer.id}
                 layer={layer}
+                mode={mode}
                 index={i}
                 total={layers.length}
                 onChange={(patch) => updateLayer(layer.id, patch)}
@@ -279,6 +368,7 @@ export default function ShadowToolPage() {
 
 interface LayerCardProps {
   layer: ShadowLayer
+  mode: ShadowMode
   index: number
   total: number
   onChange: (patch: Partial<ShadowLayer>) => void
@@ -286,7 +376,7 @@ interface LayerCardProps {
   onMove: (dir: -1 | 1) => void
 }
 
-function LayerCard({ layer, index, total, onChange, onRemove, onMove }: LayerCardProps) {
+function LayerCard({ layer, mode, index, total, onChange, onRemove, onMove }: LayerCardProps) {
   return (
     <div
       className={cn(
@@ -355,10 +445,15 @@ function LayerCard({ layer, index, total, onChange, onRemove, onMove }: LayerCar
         <strong className="font-semibold text-foreground">X / Y</strong> move the
         shadow — a light source above the element means Y positive, X near zero.{' '}
         <strong className="font-semibold text-foreground">Blur</strong> softens the
-        edge, and wants to be larger than Y or the shadow reads as an outline.{' '}
-        <strong className="font-semibold text-foreground">Spread</strong> grows or
-        shrinks the shape before blurring; negative values pull it in so only a
-        sliver shows.
+        edge, and wants to be larger than Y or the shadow reads as an outline.
+        {mode === 'box' ? (
+          <>
+            {' '}
+            <strong className="font-semibold text-foreground">Spread</strong> grows
+            or shrinks the shape before blurring; negative values pull it in so
+            only a sliver shows.
+          </>
+        ) : null}
       </p>
 
       <div className="grid grid-cols-2 gap-3">
@@ -389,15 +484,17 @@ function LayerCard({ layer, index, total, onChange, onRemove, onMove }: LayerCar
           unit="px"
           onChange={(v) => onChange({ blur: v })}
         />
-        <NumberSlider
-          label="Spread"
-          value={layer.spread}
-          min={-50}
-          max={50}
-          step={1}
-          unit="px"
-          onChange={(v) => onChange({ spread: v })}
-        />
+        {mode === 'box' ? (
+          <NumberSlider
+            label="Spread"
+            value={layer.spread}
+            min={-50}
+            max={50}
+            step={1}
+            unit="px"
+            onChange={(v) => onChange({ spread: v })}
+          />
+        ) : null}
       </div>
 
       <div className="mt-3 flex items-center gap-3">
@@ -416,14 +513,16 @@ function LayerCard({ layer, index, total, onChange, onRemove, onMove }: LayerCar
           }}
           className="h-8 flex-1 font-mono text-xs"
         />
-        <div className="flex items-center gap-1.5">
-          <Label className="text-xs text-muted-foreground">Inset</Label>
-          <Switch
-            checked={layer.inset}
-            onCheckedChange={(v) => onChange({ inset: v })}
-            aria-label="Inset shadow"
-          />
-        </div>
+        {mode === 'box' ? (
+          <div className="flex items-center gap-1.5">
+            <Label className="text-xs text-muted-foreground">Inset</Label>
+            <Switch
+              checked={layer.inset}
+              onCheckedChange={(v) => onChange({ inset: v })}
+              aria-label="Inset shadow"
+            />
+          </div>
+        ) : null}
       </div>
 
       <div className="mt-3">

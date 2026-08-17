@@ -18,9 +18,13 @@ import { generateV6 } from './generate-effects-v6.mjs'
 import { generateV7 } from './generate-effects-v7.mjs'
 import { generateV8 } from './generate-effects-v8.mjs'
 import { generateV9 } from './generate-effects-v9.mjs'
+import { generateV10 } from './generate-effects-v10.mjs'
+import { generateV11 } from './generate-effects-v11.mjs'
+import { generateV12 } from './generate-effects-v12.mjs'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const OUT_PATH = join(__dirname, '..', 'src', 'lib', 'generated-effects.json')
+const ALIASES_PATH = join(__dirname, '..', 'src', 'lib', 'generated-effect-aliases.json')
 
 /* ===== Design tokens ===== */
 
@@ -1928,14 +1932,118 @@ generateV8(extraCtx)
 generateV9(extraCtx)
 
 /* ============================================================
+ *  Tenth wave: a fifth pair of families per category — twenty
+ *  more each, 640 in total. Run wide across all 32 categories
+ *  again by request. The strong entries are the ones the set
+ *  genuinely lacked (bullet chart, treemap, resizable columns,
+ *  signature pad, delivery tracker, split-flap board); six
+ *  categories are now out of distinct shapes and their entries
+ *  are variations. generate-effects-v10.mjs says which is which,
+ *  per family.
+ * ========================================================== */
+
+generateV10(extraCtx)
+
+/* ============================================================
+ *  Eleventh wave: Buttons only, one entry per design — the first
+ *  wave written for the THINNED catalog below, so it stamps no
+ *  colorways at all. See generate-effects-v11.mjs.
+ * ========================================================== */
+
+generateV11(extraCtx)
+
+/* ============================================================
+ *  Twelfth wave: six new designs in every category, one entry
+ *  each — 192 in total, the first wide wave written for the
+ *  thinned catalog. See generate-effects-v12.mjs.
+ * ========================================================== */
+
+generateV12(extraCtx)
+
+/* ============================================================
+ *  Thinning
+ *
+ *  Every wave above stamps each design template across color/size/
+ *  speed tokens — 51 solid buttons that differ only in hue, 12
+ *  colorways of every v6–v10 family. With the Customize panel able
+ *  to re-color and re-size any effect, the variants added scroll
+ *  length, not value: category pages read as walls of the same
+ *  design repeated.
+ *
+ *  This pass runs AFTER all waves so the shared id sequence is
+ *  undisturbed — every wave still generates everything it always
+ *  did, and the ids of surviving effects are byte-identical to what
+ *  shipped. Variants of the same design are grouped by stripping
+ *  the token vocabulary (palettes, gradient pairs, trios, neutrals,
+ *  sizes, speeds) from BOTH the class root and the display name;
+ *  the two keys must agree, which prevents false merges between
+ *  designs that merely share a word with a token. One canonical
+ *  member per family survives (preferring MD size, Norm speed, and
+ *  the Blue/Ocean/Slate colorways); every retired id is written to
+ *  generated-effect-aliases.json mapping it to its survivor, which
+ *  effect-aliases.ts serves as a 308 so all shipped URLs keep
+ *  working and transfer their ranking.
+ *
+ *  Structural variants that differ in more than tokens (stripe
+ *  direction, divider thickness, dash style) keep one survivor per
+ *  structure, since the extra segment stays in the key.
+ * ========================================================== */
+
+const TOKEN_WORDS = new Set([
+  ...[...PALETTES, ...GRADPAIRS, ...TRIOS, ...NEUTRALS].map((t) => t.name.toLowerCase()),
+  ...SIZES.map((s) => s.name.toLowerCase()),
+  ...SPEEDS.map((s) => s.name.toLowerCase()),
+])
+const stripTokens = (s) => s.split('-').filter((w) => w && !TOKEN_WORDS.has(w)).join('-')
+
+function familyOf(e) {
+  const root = (e.html.match(/class="([^" ]+)/) || [])[1] || ''
+  const clsKey = stripTokens(root.replace(/^fx-/, '').replace(/-\d+$/, ''))
+  const nameKey = stripTokens(slug(e.name))
+  return `${e.category}|${clsKey}|${nameKey}`
+}
+
+// Which variant survives: prefer the tokens a first-time visitor
+// should see. Ties fall back to generation order.
+const CANONICAL_WEIGHT = { md: 4, norm: 4, blue: 2, ocean: 2, slate: 1 }
+function canonicalScore(e) {
+  const root = (e.html.match(/class="([^" ]+)/) || [])[1] || ''
+  let score = 0
+  for (const seg of root.toLowerCase().split('-')) score += CANONICAL_WEIGHT[seg] || 0
+  return score
+}
+
+const families = new Map()
+for (const e of effects) {
+  const key = familyOf(e)
+  if (!families.has(key)) families.set(key, [])
+  families.get(key).push(e)
+}
+
+const aliases = {}
+const kept = []
+for (const family of families.values()) {
+  let keep = family[0]
+  for (const e of family) if (canonicalScore(e) > canonicalScore(keep)) keep = e
+  kept.push(keep)
+  for (const e of family) if (e !== keep) aliases[e.id] = keep.id
+}
+// Preserve original generation order (family iteration groups by first occurrence,
+// which matches wave order already, but be explicit).
+const keptSet = new Set(kept)
+const thinned = effects.filter((e) => keptSet.has(e))
+
+/* ============================================================
  *  Emit
  * ========================================================== */
 
-writeFileSync(OUT_PATH, JSON.stringify(effects, null, 2))
-console.log(`Generated ${effects.length} effects -> ${OUT_PATH}`)
+writeFileSync(OUT_PATH, JSON.stringify(thinned, null, 2))
+writeFileSync(ALIASES_PATH, JSON.stringify(aliases, null, 2))
+console.log(`Generated ${effects.length} effects, thinned to ${thinned.length} distinct designs -> ${OUT_PATH}`)
+console.log(`Retired ${Object.keys(aliases).length} colorway/size variants -> ${ALIASES_PATH}`)
 
 // Print breakdown
 const breakdown = {}
-for (const e of effects) breakdown[e.category] = (breakdown[e.category] || 0) + 1
+for (const e of thinned) breakdown[e.category] = (breakdown[e.category] || 0) + 1
 console.log('Breakdown:')
 for (const [k, v] of Object.entries(breakdown)) console.log(`  ${k.padEnd(24)} ${v}`)

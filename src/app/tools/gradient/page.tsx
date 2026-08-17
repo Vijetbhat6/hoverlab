@@ -9,13 +9,16 @@
  */
 
 import * as React from 'react'
-import { Pipette, Plus, Trash2, Shuffle, Copy, Check } from 'lucide-react'
+import Link from 'next/link'
+import { Pipette, Plus, Trash2, Shuffle, Copy, Check, ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Slider } from '@/components/ui/slider'
+import { Switch } from '@/components/ui/switch'
 import { CopyCssCard } from '@/components/designer-tools/copy-css-card'
 import { ToolLayout } from '@/components/designer-tools/tool-layout'
+import { readSharedState, ShareLinkButton } from '@/components/designer-tools/share-link'
 import { normalizeHex, randomHex } from '@/lib/color-tools'
 import { cn } from '@/lib/utils'
 
@@ -34,11 +37,13 @@ interface GradientState {
   type: GradientType
   angle: number
   stops: Stop[]
+  oklch: boolean
 }
 
 const DEFAULT_STATE: GradientState = {
   type: 'linear',
   angle: 135,
+  oklch: false,
   stops: [
     { id: 's1', color: '#f43f5e', position: 0 },
     { id: 's2', color: '#f59e0b', position: 50 },
@@ -55,6 +60,7 @@ export default function GradientToolPage() {
   const [type, setType] = React.useState<GradientType>('linear')
   const [angle, setAngle] = React.useState(135)
   const [stops, setStops] = React.useState<Stop[]>(DEFAULT_STATE.stops)
+  const [oklch, setOklch] = React.useState(false)
 
   // Hydrate.
   React.useEffect(() => {
@@ -66,6 +72,7 @@ export default function GradientToolPage() {
           setType(parsed.type)
         }
         if (typeof parsed.angle === 'number') setAngle(parsed.angle)
+        if (typeof parsed.oklch === 'boolean') setOklch(parsed.oklch)
         if (Array.isArray(parsed.stops) && parsed.stops.length >= 2) {
           const valid = parsed.stops.filter(
             (s: Stop) =>
@@ -77,16 +84,33 @@ export default function GradientToolPage() {
     } catch {
       /* ignore */
     }
+
+    // A shared link's state wins over whatever this browser had stored.
+    const shared = readSharedState<Partial<GradientState>>()
+    if (shared) {
+      if (shared.type && ['linear', 'radial', 'conic'].includes(shared.type)) {
+        setType(shared.type)
+      }
+      if (typeof shared.angle === 'number') setAngle(shared.angle)
+      if (typeof shared.oklch === 'boolean') setOklch(shared.oklch)
+      if (Array.isArray(shared.stops) && shared.stops.length >= 2) {
+        const valid = shared.stops.filter(
+          (s: Stop) =>
+            s && typeof s.id === 'string' && typeof s.color === 'string' && typeof s.position === 'number',
+        )
+        if (valid.length >= 2) setStops(valid)
+      }
+    }
   }, [])
 
   // Persist.
   React.useEffect(() => {
     try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify({ type, angle, stops }))
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({ type, angle, stops, oklch }))
     } catch {
       /* ignore */
     }
-  }, [type, angle, stops])
+  }, [type, angle, stops, oklch])
 
   // Sort stops by position for the CSS output (but keep the user's
   // editing order in the UI).
@@ -99,10 +123,11 @@ export default function GradientToolPage() {
     const stopsStr = sortedStops
       .map((s) => `${s.color} ${s.position}%`)
       .join(', ')
-    if (type === 'linear') return `linear-gradient(${angle}deg, ${stopsStr})`
-    if (type === 'radial') return `radial-gradient(circle, ${stopsStr})`
-    return `conic-gradient(from ${angle}deg, ${stopsStr})`
-  }, [type, angle, sortedStops])
+    const interp = oklch ? ' in oklch' : ''
+    if (type === 'linear') return `linear-gradient(${angle}deg${interp}, ${stopsStr})`
+    if (type === 'radial') return `radial-gradient(circle${interp}, ${stopsStr})`
+    return `conic-gradient(from ${angle}deg${interp}, ${stopsStr})`
+  }, [type, angle, sortedStops, oklch])
 
   const cssBlock = React.useMemo(() => {
     return `.gradient {\n  background: ${cssValue};\n  /* Fallback for older browsers */\n  background-color: ${sortedStops[0]?.color ?? '#000'};\n}`
@@ -145,6 +170,7 @@ export default function GradientToolPage() {
             <div className="mb-2 flex items-center justify-between">
               <Label className="text-sm font-medium">Color stops</Label>
               <div className="flex gap-2">
+                <ShareLinkButton state={{ type, angle, stops, oklch }} />
                 <Button variant="outline" size="sm" className="h-7 gap-1 text-xs" onClick={randomize}>
                   <Shuffle className="h-3 w-3" /> Randomize colors
                 </Button>
@@ -244,9 +270,31 @@ export default function GradientToolPage() {
                 </div>
               </div>
             )}
+
+            <div className="mt-5 flex items-start justify-between gap-3">
+              <div>
+                <Label className="text-sm font-medium">OKLCH interpolation</Label>
+                <p className="mt-1 text-[11px] leading-snug text-muted-foreground">
+                  Blends the stops in oklch, which avoids the grey dead zone
+                  between complementary colors.
+                </p>
+              </div>
+              <Switch
+                checked={oklch}
+                onCheckedChange={setOklch}
+                aria-label="Interpolate in oklch"
+              />
+            </div>
           </div>
 
           <CopyCssCard code={cssBlock} title="CSS" language="css" />
+
+          <Button asChild variant="outline" size="sm" className="w-full gap-1.5">
+            <Link href={`/tools/glassmorphism?bg=${encodeURIComponent(cssValue)}`}>
+              Use as glassmorphism background
+              <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+          </Button>
 
           {/* Tailwind class hint */}
           <div className="rounded-lg border border-border bg-muted/20 p-4 text-xs text-muted-foreground">

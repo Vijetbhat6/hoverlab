@@ -28,6 +28,7 @@ import { Label } from '@/components/ui/label'
 import { Slider } from '@/components/ui/slider'
 import { CopyCssCard } from '@/components/designer-tools/copy-css-card'
 import { ToolLayout } from '@/components/designer-tools/tool-layout'
+import { hexToRgb, normalizeHex, rgbToOklch } from '@/lib/color-tools'
 import { cn } from '@/lib/utils'
 
 const STORAGE_KEY = 'hoverlab:tool:tokens'
@@ -176,6 +177,24 @@ export default function TokensToolPage() {
       if (raw) setState({ ...DEFAULT_STATE, ...(JSON.parse(raw) as Partial<TokenState>) })
     } catch {
       /* private mode — defaults are fine */
+    }
+
+    // Handoff from the palette generator: ?base=#hex seeds hue + saturation.
+    // window.location rather than useSearchParams — the hook would force a
+    // Suspense boundary around the whole page for one optional param.
+    // The param wins over the restored state, then leaves the URL so a
+    // reload keeps whatever the user tunes afterwards.
+    const param = new URLSearchParams(window.location.search).get('base')
+    const hex = param ? normalizeHex(param) : null
+    const rgb = hex ? hexToRgb(hex) : null
+    if (rgb) {
+      const { c, h } = rgbToOklch(rgb)
+      setState((s) => ({
+        ...s,
+        hue: Math.round(((h % 360) + 360) % 360),
+        chroma: Math.min(0.3, Math.round(c * 200) / 200),
+      }))
+      window.history.replaceState(null, '', window.location.pathname)
     }
   }, [])
 

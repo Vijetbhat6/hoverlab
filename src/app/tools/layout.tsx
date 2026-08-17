@@ -1,17 +1,17 @@
 import type { Metadata } from 'next'
 
 /**
- * Metadata for /tools and everything under it. See ../library/layout.tsx.
+ * Metadata for the /tools hub itself. See ../library/layout.tsx.
  *
- * A plain string rather than a `title.template`: 16 of the 17 tool pages
- * define no metadata of their own and inherit this, which is the point,
- * while /tools/meta already sets its own and keeps it untouched. A template
- * would have suffixed that one twice.
+ * Each tool route carries its own metadata via a per-directory layout.tsx
+ * (the pages are client components and cannot export it), with the title
+ * and description drawn from `@/lib/designer-tools`. What is set here is
+ * only what the hub page shows.
  */
 export const metadata: Metadata = {
-  title: 'Designer Tools — Palettes, Gradients, Shadows, Contrast — Hoverlab',
+  title: 'Designer Tools — Tokens, Palettes, Gradients, Contrast & More — Hoverlab',
   description:
-    'A focused toolkit that complements the effects library: generate palettes, compose gradients, layer shadows, check WCAG contrast and convert CSS units. Runs entirely in your browser.',
+    'Twenty free designer tools that run entirely in your browser: design tokens, palettes, color conversion, gradients, shadows, clip-paths, noise textures, type and spacing scales, WCAG contrast checks, favicons, OG tags and email templates.',
 }
 
 export default function ToolsLayout({
