@@ -1970,6 +1970,35 @@
   100% { transform: scale(1); opacity: 1; }
 }
 
+/* ---------- Hero effect wall (landing) ----------
+   The ghosted card wall behind the front-door headline. See
+   components/landing/hero-effect-wall.tsx.
+
+   Two rules, both about not animating decoration at people:
+
+   `.fx-hero-wall-paused` is set by an IntersectionObserver once the wall
+   scrolls out of the viewport. Eighteen live effects painting behind a
+   section nobody is looking at is pure battery cost. `!important` and the
+   descendant selector because the paused state has to beat whatever the
+   catalog's own CSS set on the element it applies to.
+
+   Under reduced motion the wall does not render at all. The effects
+   already carry their own guards — bundled-effects.ts runs every one
+   through withMotionGuard — but a purely decorative layer should not
+   depend on 18 separate snippets each having got that right, and someone
+   who asked for less motion is not asking for a dimmer version of it. */
+
+.fx-hero-wall-paused,
+.fx-hero-wall-paused * {
+  animation-play-state: paused !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fx-hero-wall {
+    display: none;
+  }
+}
+
 /* ---------- Scroll reveal (landing sections) ----------
    Used by <Reveal> component. Hidden by default, .is-visible triggers
    the fade-in-up. Respects prefers-reduced-motion via media query. */
