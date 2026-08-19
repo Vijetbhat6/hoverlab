@@ -18,6 +18,7 @@ import { CATEGORIES, EFFECT_INDEX as EFFECTS, type EffectCategory, type EffectMe
 import { useEffectDetails } from '@/hooks/use-effect-details'
 import { track } from '@/lib/analytics'
 import { EffectCardSkeleton } from '@/components/effect-card-skeleton'
+import { LibraryProTile } from '@/components/library-pro-tile'
 import { cn } from '@/lib/utils'
 import { isTypingTarget } from '@/lib/tray-events'
 
@@ -815,6 +816,18 @@ export default function Home() {
                 !isRolling && popKey > 0 && 'fx-surprise-pop',
               )}
             >
+              {/*
+                The plan, as tile one.
+
+                A marketplace sells its all-access pass from inside the
+                browse grid rather than from a pricing page, and it is
+                right to: the person deep in the catalog is the person
+                the offer is for. First page only — repeating it on page
+                twelve would make it furniture. Not in AI mode either,
+                where the result set is a direct answer to a question and
+                an ad in slot one is an answer to a different one.
+              */}
+              {!aiMode && safePage === 1 ? <LibraryProTile /> : null}
               {displayList.map((meta) => {
                 const effect = getEffect(meta.id)
                 return effect ? (
