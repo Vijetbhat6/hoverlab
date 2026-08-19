@@ -91,7 +91,25 @@ import { TRAY_EVENTS, isTypingTarget } from '@/lib/tray-events'
  * the question the taxonomy can't, so it goes where someone reading left to
  * right will actually reach it, not eighth of nine.
  */
-const NAV: Array<{ label: string; href: string; match: string[]; hint: string }> = [
+/**
+ * `badge` is merchandising, and it is deliberately rationed.
+ *
+ * A marketplace nav carries four items, two of which wear a tiny
+ * high-contrast pill — "All Access 30% OFF", "Forge NEW" — and those
+ * pills are doing the revenue work for the whole header. Hoverlab cannot
+ * cut to four items (the four rungs plus Browse and Paths are the
+ * product's central idea, and a rung nobody can see is a rung nobody
+ * uses), but it can take the half of the pattern that pays.
+ *
+ * Two badges, no more. A third makes all three ordinary.
+ */
+const NAV: Array<{
+  label: string
+  href: string
+  match: string[]
+  hint: string
+  badge?: { text: string; tone: 'new' | 'pro' }
+}> = [
   {
     label: 'Browse',
     href: '/browse',
@@ -139,6 +157,7 @@ const NAV: Array<{ label: string; href: string; match: string[]; hint: string }>
     href: '/tools',
     match: ['/tools'],
     hint: 'Palettes, gradients, shadows, contrast and unit conversion',
+    badge: { text: 'New', tone: 'new' },
   },
   {
     label: 'Docs',
@@ -267,6 +286,18 @@ export function SiteHeader({ actions }: SiteHeaderProps) {
                       )}
                     >
                       {item.label}
+                      {item.badge ? (
+                        <span
+                          className={cn(
+                            'ml-1.5 rounded px-1 py-0.5 align-middle text-[9px] font-bold uppercase leading-none tracking-wider',
+                            item.badge.tone === 'pro'
+                              ? 'bg-primary text-primary-foreground'
+                              : 'bg-amber-500/15 text-amber-600 dark:text-amber-400',
+                          )}
+                        >
+                          {item.badge.text}
+                        </span>
+                      ) : null}
                       {active && (
                         <span
                           aria-hidden
@@ -287,6 +318,28 @@ export function SiteHeader({ actions }: SiteHeaderProps) {
               where the nav is no longer between them and the brand. */}
           <div className="ml-auto flex shrink-0 items-center gap-1 sm:ml-0">
             {actions}
+
+            {/*
+              Pro, priced, next to the account controls.
+
+              It started out as a tenth entry in the ladder nav above and
+              that was measurably wrong: the nav is a horizontal scroller
+              and at 1440 px the tenth item lands past the right edge, so
+              the one link that carries revenue was the one link nobody
+              could see. It is also not a rung — the nav is a taxonomy of
+              what the catalog contains, and a price is not a kind of
+              component. Here it sits with Sign in and Get started, where
+              a price belongs, and where nothing pushes it off-screen.
+            */}
+            <Link
+              href="/#pricing"
+              className="hidden h-9 shrink-0 items-center gap-1.5 rounded-lg px-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted/50 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring md:inline-flex"
+            >
+              Pro
+              <span className="rounded bg-primary px-1 py-0.5 text-[9px] font-bold uppercase leading-none tracking-wider text-primary-foreground">
+                $59
+              </span>
+            </Link>
 
             <QuickFindButton />
 
