@@ -3,6 +3,11 @@ import { validateEvent, WebhookVerificationError } from '@polar-sh/sdk/webhooks'
 import { FieldValue, Timestamp } from 'firebase-admin/firestore'
 import { adminDb } from '@/lib/firebase/admin'
 import { generateInviteCode } from '@/lib/billing/workspace'
+import {
+  addPurchasedCredits,
+  getCreditPack,
+  revokePurchasedCredits,
+} from '@/lib/billing/credits'
 
 /**
  * Polar webhook receiver — the ONLY place entitlements are granted.
@@ -12,9 +17,9 @@ import { generateInviteCode } from '@/lib/billing/workspace'
  * written here, after Polar has signed the event and confirmed payment.
  *
  * Handled events:
- *   order.paid                 → grant Pro license / provision Studio seats
+ *   order.paid                 → grant Pro license / Studio seats / credits
  *   order.refunded             → revoke what that order granted
- *   subscription.active        → Team subscription live (or renewed)
+ *   subscription.active        → Team or Pro+ subscription live (or renewed)
  *   subscription.updated       → seat count / period end changed
  *   subscription.canceled      → keep access until the paid period ends
  *   subscription.revoked       → access ends now
@@ -139,6 +144,8 @@ async function handleOrderPaid(data: PolarLike): Promise<void> {
   const plan = typeof data.metadata?.plan === 'string' ? data.metadata.plan : 'pro'
   const interval =
     typeof data.metadata?.interval === 'string' ? data.metadata.interval : 'one_time'
+  const packId = typeof data.metadata?.pack === 'string' ? data.metadata.pack : null
+  const pack = packId ? getCreditPack(packId) : null
   const orderId = data.id
   if (!orderId) return
 
@@ -154,6 +161,10 @@ async function handleOrderPaid(data: PolarLike): Promise<void> {
       currency: data.currency ?? 'usd',
       polarOrderId: orderId,
       polarCheckoutId: data.checkoutId ?? null,
+      // Recorded so a refund knows what to take back without re-reading
+      // the pack catalog, which may have been re-priced since.
+      packId: pack?.id ?? null,
+      credits: pack?.credits ?? null,
       createdAt: Timestamp.now(),
     })
   } catch (err) {
@@ -170,6 +181,19 @@ async function handleOrderPaid(data: PolarLike): Promise<void> {
 
   if (plan === 'studio') {
     await provisionStudioWorkspace(userId, orderId, data)
+  }
+
+  // A credit pack. `addPurchasedCredits` is keyed by the order id, so a
+  // redelivery cannot grant the same pack twice.
+  if (packId) {
+    if (!pack) {
+      console.error('[billing/webhook] paid order for unknown credit pack', {
+        orderId,
+        packId,
+      })
+      return
+    }
+    await addPurchasedCredits(userId, pack.credits, orderId, pack.id)
   }
 }
 
@@ -253,6 +277,14 @@ async function handleOrderRefunded(data: PolarLike): Promise<void> {
     })
   }
 
+  if (typeof purchase.packId === 'string') {
+    // Refunding a pack takes the credits back, even into the negative:
+    // clamping at zero would let someone spend a pack, refund it, and keep
+    // the work. A negative balance simply means the next purchase pays it
+    // off, which is the honest arithmetic.
+    await revokePurchasedCredits(userId, Number(purchase.credits) || 0)
+  }
+
   if (purchase.plan === 'studio') {
     // The workspace is keyed by this order id. Mark it revoked rather than
     // deleting it: `teamIsLive()` stops recognising the status, every seat
@@ -287,6 +319,24 @@ async function handleSubscription(data: PolarLike, status: string): Promise<void
   }
 
   await linkCustomer(userId, data)
+
+  // Pro+ is a subscription too, and it is NOT a workspace. Without this
+  // branch every Pro+ purchase would create a one-person team, and its
+  // buyer would silently gain the shared-workspace entitlement they did
+  // not pay for.
+  if (data.metadata?.plan === 'plus') {
+    await adminDb()
+      .collection('users')
+      .doc(userId)
+      .update({
+        plusStatus: status,
+        plusPeriodEnd: data.currentPeriodEnd
+          ? Timestamp.fromDate(new Date(data.currentPeriodEnd))
+          : null,
+        plusSubscriptionId: subscriptionId,
+      })
+    return
+  }
 
   const seats = typeof data.quantity === 'number' && data.quantity > 0 ? data.quantity : 1
   const currentPeriodEnd = data.currentPeriodEnd

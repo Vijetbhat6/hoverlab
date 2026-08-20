@@ -35,6 +35,14 @@ export interface Entitlements {
   hasPro: boolean
   /** Seat on a one-time Studio license. Grants Pro, not Team. */
   hasStudio: boolean
+  /**
+   * Active Pro+ subscription — a monthly AI credit allowance.
+   *
+   * Grants no catalog rights at all, which is why it is a separate flag
+   * rather than a rung: a Pro+ subscriber with no licence can generate
+   * variations and still may not ship them commercially.
+   */
+  hasPlus: boolean
   /** Member of a Team with a live subscription. */
   hasTeam: boolean
   /**
@@ -63,6 +71,7 @@ export const FREE_ENTITLEMENTS: Entitlements = {
   plan: 'free',
   hasPro: false,
   hasStudio: false,
+  hasPlus: false,
   hasTeam: false,
   teamId: null,
   canUseProFeatures: false,
@@ -70,12 +79,15 @@ export const FREE_ENTITLEMENTS: Entitlements = {
 }
 
 /**
- * A team subscription counts as live while Polar reports it active, and
- * also while it's past_due or canceled but still inside the period the
- * customer already paid for. Cutting access the instant a card fails
- * would punish users for a billing hiccup they can still fix.
+ * A subscription counts as live while Polar reports it active, and also
+ * while it's past_due or canceled but still inside the period the customer
+ * already paid for. Cutting access the instant a card fails would punish
+ * users for a billing hiccup they can still fix.
+ *
+ * Shared by workspaces and by Pro+, which have the same lifecycle even
+ * though one lives on a team document and the other on a profile.
  */
-function teamIsLive(status: string, currentPeriodEnd: Date | null): boolean {
+function subscriptionIsLive(status: string, currentPeriodEnd: Date | null): boolean {
   if (status === 'active') return true
   // A Studio license is bought outright, so its workspace has no renewal to
   // fail and no period to run out. The webhook writes this status once and
@@ -121,7 +133,7 @@ export async function getEntitlements(
       const t = team.data() ?? {}
       const status =
         typeof t.subscriptionStatus === 'string' ? t.subscriptionStatus : 'inactive'
-      if (!teamIsLive(status, toDateOrNull(t.currentPeriodEnd))) continue
+      if (!subscriptionIsLive(status, toDateOrNull(t.currentPeriodEnd))) continue
 
       // Both kinds of workspace live in `teams`, so which one this is has to
       // be read off the document rather than inferred from membership. An
@@ -141,12 +153,23 @@ export async function getEntitlements(
   const hasTeam = liveTeamId !== null
   const hasStudio = liveStudioId !== null
 
+  // Pro+ is a subscription on the profile rather than a workspace: it seats
+  // exactly one person and shares nothing, so a teams/ document for it
+  // would be a workspace of one.
+  const hasPlus = subscriptionIsLive(
+    typeof data.plusStatus === 'string' ? data.plusStatus : 'inactive',
+    toDateOrNull(data.plusPeriodEnd),
+  )
+
   return {
-    // Team is the higher plan for display purposes, then Studio — which is
-    // a Pro license with company on it.
+    // Team is the higher plan for display, then Studio — a Pro licence with
+    // company on it. Pro+ is deliberately not in this ladder: it is an
+    // add-on, and someone holding it alone is still on the free catalog
+    // licence, so it shows beside the plan rather than instead of it.
     plan: hasTeam ? 'team' : hasStudio ? 'studio' : hasPro ? 'pro' : 'free',
     hasPro,
     hasStudio,
+    hasPlus,
     hasTeam,
     teamId: liveTeamId ?? liveStudioId,
     // A Team seat and a Studio seat both include everything Pro grants.

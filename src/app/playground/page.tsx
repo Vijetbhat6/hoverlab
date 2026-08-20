@@ -18,6 +18,7 @@ import { Slider } from '@/components/ui/slider'
 import { Textarea } from '@/components/ui/textarea'
 import { CodeBlock } from '@/components/code-block'
 import { SiteHeader } from '@/components/site-header'
+import { AiVariantPanel } from '@/components/ai-variant-panel'
 import {
   customizeCss,
   DEFAULT_CUSTOMIZATION,
@@ -304,8 +305,23 @@ export default function PlaygroundPage() {
             </Card>
           </div>
 
-          {/* Sidebar: sliders + presets */}
+          {/* Sidebar: AI, then sliders + presets.
+              AI first because it is the only control here that changes what
+              the component IS — the sliders below transform whatever it
+              already is. */}
           <aside className="space-y-4 lg:sticky lg:top-20 lg:self-start">
+            <AiVariantPanel
+              html={html}
+              css={css}
+              onApply={(variant) => {
+                // Replaces the source, not the transform state: the sliders
+                // stay where the user left them, so a generated variation
+                // arrives wearing the same hue and speed they had set.
+                setHtml(variant.html)
+                setCss(variant.css)
+              }}
+            />
+
             <div className="rounded-lg border border-border/60 bg-card/60 p-4">
               <div className="mb-3 flex items-center justify-between">
                 <h2 className="flex items-center gap-1.5 text-sm font-semibold tracking-tight">

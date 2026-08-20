@@ -21,6 +21,7 @@ import { useFavorites } from '@/hooks/use-favorites'
 import { useBundle } from '@/hooks/use-bundle'
 import { UpgradePanel } from '@/components/billing/upgrade-panel'
 import { WorkspaceCard } from '@/components/billing/workspace-card'
+import { CreditsCard } from '@/components/billing/credits-card'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 
@@ -173,8 +174,12 @@ export default function AccountPage() {
           <UpgradePanel />
         </React.Suspense>
 
+        {/* Under the licence tiers, because Pro+ is an add-on to whichever
+            one you hold rather than a rung of its own. */}
+        <CreditsCard />
+
         {/*
-          Below the plan, because the common case is someone who bought a
+          Then seats, because the common case is someone who bought a
           workspace looking for the code to hand out — and the uncommon case
           is someone redeeming one, who was sent here to do it.
         */}

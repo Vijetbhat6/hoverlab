@@ -16,6 +16,11 @@
  *   Team   — $12 per seat / month. Seats and shared state are what companies
  *            actually pay recurring money for.
  *
+ * Pro+ is sold here too, but as a line of copy under the table rather than
+ * a fifth column. It grants no catalog rights — it is a monthly AI credit
+ * allowance — so giving it a card would make the licence comparison harder
+ * in order to advertise a meter.
+ *
  * Prices, buyability and the display currency all come from usePricing() —
  * see that hook for why region and purchasability have to come from the
  * server, and why currency is a display preference only.
@@ -323,6 +328,9 @@ export function PricingTiers({ className }: { className?: string } = {}) {
   const rupeeCheckout =
     chargedInInr('pro') || chargedInInr('studio') || chargedInInr('team')
 
+  /** Pro+ has no tier card, so its price is read for the add-on line. */
+  const plusPrice = headlineFor('plus')
+
   /**
    * Which tiers this account already holds.
    *
@@ -531,6 +539,25 @@ export function PricingTiers({ className }: { className?: string } = {}) {
           feature set for every member, plus priority support; the shared
           workspace features ship later this year.
         </p>
+        {/*
+          Pro+ deliberately has no column. It grants no catalog rights, so a
+          fifth tier would make the licence decision harder in order to sell
+          a meter — it belongs beside the table, as an add-on to whatever
+          the reader picks.
+        */}
+        <p className="mt-4 text-sm text-muted-foreground">
+          <span className="font-semibold text-foreground">
+            Pro+ — {plusPrice}/month
+          </span>{' '}
+          adds 500 AI credits a month on top of any plan, including Free.
+          Credits are only spent generating new CSS in the{' '}
+          <Link href="/playground" className="font-medium text-primary hover:underline">
+            playground
+          </Link>
+          ; browsing, copying, the CLI and the API are free and unmetered.
+          Everyone gets five free generations a day without it.
+        </p>
+
         {/* The one thing a buyer could reasonably get wrong about the two
             team-shaped plans, said before they pick one. */}
         <p className="mt-2 text-xs text-muted-foreground">

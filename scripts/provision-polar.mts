@@ -11,12 +11,17 @@
  * What it creates, mirroring src/lib/billing/plans.ts:
  *
  *   Hoverlab Pro     one-time, $79 and ₹7,500
+ *   Hoverlab Pro+    recurring monthly, $9 and ₹850
+ *   Hoverlab 500 credits    one-time, $5 and ₹475
+ *   Hoverlab 2,000 credits  one-time, $15 and ₹1,425
  *   Hoverlab Studio  one-time, ten seats, $299 and ₹28,000
  *   Hoverlab Team    recurring monthly, seat-based, $12 and ₹1,150 /seat
  *   India / Pro      $54 off Pro,     duration `once`
+ *   India / Pro+     $6 off Pro+,     duration `forever`
  *   India / Studio   $200 off Studio, duration `once`
  *   India / Team     $7 off Team,     duration `forever`
  *   India / Pro ₹     ₹5,100 off Pro,     duration `once`
+ *   India / Pro+ ₹    ₹560 off Pro+,      duration `forever`
  *   India / Studio ₹  ₹18,500 off Studio, duration `once`
  *   India / Team ₹    ₹675 off Team,      duration `forever`
  *
@@ -93,14 +98,17 @@ const server: 'sandbox' | 'production' =
 const polar = new Polar({ accessToken, server })
 
 const PRO_NAME = 'Hoverlab Pro'
+const PLUS_NAME = 'Hoverlab Pro+'
 const STUDIO_NAME = 'Hoverlab Studio'
 const TEAM_NAME = 'Hoverlab Team'
 const DISCOUNT_PRO_NAME = 'India / Pro'
+const DISCOUNT_PLUS_NAME = 'India / Pro+'
 const DISCOUNT_STUDIO_NAME = 'India / Studio'
 const DISCOUNT_TEAM_NAME = 'India / Team'
 // Separate names so the currency pairs are distinguishable in the dashboard —
 // matching is by name, and two same-named discounts would collide.
 const DISCOUNT_PRO_INR_NAME = 'India / Pro (INR)'
+const DISCOUNT_PLUS_INR_NAME = 'India / Pro+ (INR)'
 const DISCOUNT_STUDIO_INR_NAME = 'India / Studio (INR)'
 const DISCOUNT_TEAM_INR_NAME = 'India / Team (INR)'
 
@@ -189,6 +197,38 @@ async function main() {
       { amountType: 'fixed', priceAmount: 750000, priceCurrency: 'inr' },
     ],
   })
+
+  const plusId = await ensureProduct(PLUS_NAME, 'POLAR_PRODUCT_ID_PLUS', {
+    name: PLUS_NAME,
+    description:
+      'Monthly allowance of 500 AI credits for generating CSS variations. ' +
+      'An add-on to any plan — it grants no catalog rights of its own.',
+    recurringInterval: 'month',
+    prices: [
+      { amountType: 'fixed', priceAmount: 900, priceCurrency: 'usd' },
+      { amountType: 'fixed', priceAmount: 85000, priceCurrency: 'inr' },
+    ],
+  })
+
+  // Credit packs. Deliberately plain one-time products with no discounts:
+  // a $5 purchase does not need a regional price, and the rupee figure is
+  // set on the product rather than reached through a discount, so there is
+  // no way for the advertised and charged amounts to disagree.
+  const packIds: Record<string, string> = {}
+  for (const pack of [
+    { env: 'POLAR_PRODUCT_ID_CREDITS_500', name: 'Hoverlab 500 credits', usd: 500, inr: 47500, credits: 500 },
+    { env: 'POLAR_PRODUCT_ID_CREDITS_2000', name: 'Hoverlab 2,000 credits', usd: 1500, inr: 142500, credits: 2000 },
+  ]) {
+    packIds[pack.env] = await ensureProduct(pack.name, pack.env, {
+      name: pack.name,
+      description: `${pack.credits.toLocaleString('en-US')} AI credits. One-time purchase, never expires.`,
+      recurringInterval: null,
+      prices: [
+        { amountType: 'fixed', priceAmount: pack.usd, priceCurrency: 'usd' },
+        { amountType: 'fixed', priceAmount: pack.inr, priceCurrency: 'inr' },
+      ],
+    })
+  }
 
   const studioId = await ensureProduct(STUDIO_NAME, 'POLAR_PRODUCT_ID_STUDIO', {
     name: STUDIO_NAME,
@@ -414,6 +454,12 @@ async function main() {
     { amountType: 'fixed', priceAmount: 750000, priceCurrency: 'inr' },
   )
   await ensureInrPrice(
+    PLUS_NAME,
+    plusId,
+    { amountType: 'fixed', priceAmount: 900, priceCurrency: 'usd' },
+    { amountType: 'fixed', priceAmount: 85000, priceCurrency: 'inr' },
+  )
+  await ensureInrPrice(
     STUDIO_NAME,
     studioId,
     { amountType: 'fixed', priceAmount: 29900, priceCurrency: 'usd' },
@@ -441,6 +487,9 @@ async function main() {
   )
 
   await ensureDiscount(DISCOUNT_PRO_NAME, 'POLAR_DISCOUNT_ID_IN_PRO', proId, 5400, 'once')
+  // `forever`, like Team's: with `once` an Indian subscriber would pay $3
+  // in month one and $9 from month two, which is a trial, not a price.
+  await ensureDiscount(DISCOUNT_PLUS_NAME, 'POLAR_DISCOUNT_ID_IN_PLUS', plusId, 600, 'forever')
   await ensureDiscount(
     DISCOUNT_STUDIO_NAME,
     'POLAR_DISCOUNT_ID_IN_STUDIO',
@@ -457,6 +506,14 @@ async function main() {
     proId,
     510000,
     'once',
+    'inr',
+  )
+  await ensureDiscount(
+    DISCOUNT_PLUS_INR_NAME,
+    'POLAR_DISCOUNT_ID_IN_PLUS_INR',
+    plusId,
+    56000,
+    'forever',
     'inr',
   )
   await ensureDiscount(

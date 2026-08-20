@@ -18,6 +18,23 @@
  *           previously said Pro bought "the CLI", which was never true and is
  *           the kind of claim the pricing page would have inherited.
  *
+ *   Pro+  — RECURRING monthly, and deliberately NOT a fifth column on the
+ *           pricing grid. It is an add-on: a monthly allowance of AI
+ *           credits on top of whatever licence you hold.
+ *
+ *           This is the answer to the problem the comment below states —
+ *           individuals will not subscribe to static assets. They will pay
+ *           monthly for something that gets consumed, which is why every
+ *           comparable company arrived at credits in the same year (Uiverse
+ *           $4.99 for 500k tokens, 21st.dev $15, Envato's tiers priced by
+ *           credit count, UI8 selling Persona packs). Credits read as fuel;
+ *           a subscription to a catalog reads as rent.
+ *
+ *           Sold as an add-on rather than a tier because it is one: it
+ *           grants no catalog rights Pro does not already grant, and a
+ *           five-column pricing table makes the licence decision harder to
+ *           serve a product that is really a meter.
+ *
  *   Studio — ONE-TIME, ten seats. The same license as Pro, bought once for a
  *           whole team. This exists because the comparable market sells
  *           teams a seat-COUNT license rather than a subscription — Preline
@@ -37,7 +54,7 @@
  * a number here never changes what a customer is billed.
  */
 
-export type PlanId = 'free' | 'pro' | 'studio' | 'team'
+export type PlanId = 'free' | 'pro' | 'plus' | 'studio' | 'team'
 export type BillingInterval = 'one_time' | 'month'
 
 export interface Plan {
@@ -104,6 +121,24 @@ export const PLANS: Record<PlanId, Plan> = {
     priceInrPaise: 750000,
     interval: 'one_time',
     polarProductId: process.env.POLAR_PRODUCT_ID_PRO ?? null,
+    perSeat: false,
+    includedSeats: 1,
+  },
+  plus: {
+    id: 'plus',
+    name: 'Pro+',
+    // $9 per month.
+    //
+    // Under Team's $12/seat so the two are never confused for each other,
+    // and in the band this market has settled on for a credit allowance:
+    // Uiverse asks $4.99 for its metered tier and $19.99 for unlimited,
+    // 21st.dev $15, Magic Patterns $17. Cheap enough to be an impulse on
+    // top of a licence already bought.
+    priceCents: 900,
+    /** ₹850. */
+    priceInrPaise: 85000,
+    interval: 'month',
+    polarProductId: process.env.POLAR_PRODUCT_ID_PLUS ?? null,
     perSeat: false,
     includedSeats: 1,
   },
@@ -195,6 +230,13 @@ const REGIONAL: Record<Exclude<Region, 'default'>, Partial<Record<PlanId, Region
       // ₹2,400 — $25 at the same ~₹95/$ the list price uses.
       priceInrPaise: 240000,
       discountIdInr: process.env.POLAR_DISCOUNT_ID_IN_PRO_INR ?? null,
+    },
+    plus: {
+      priceCents: 300,
+      discountId: process.env.POLAR_DISCOUNT_ID_IN_PLUS ?? null,
+      /** ₹290 per month. */
+      priceInrPaise: 29000,
+      discountIdInr: process.env.POLAR_DISCOUNT_ID_IN_PLUS_INR ?? null,
     },
     studio: {
       priceCents: 9900,
@@ -317,6 +359,7 @@ export function discountForRegion(
 export function parsePlanId(value: unknown): PlanId | null {
   return value === 'free' ||
     value === 'pro' ||
+    value === 'plus' ||
     value === 'studio' ||
     value === 'team'
     ? value

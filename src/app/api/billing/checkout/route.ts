@@ -10,12 +10,63 @@ import {
 } from '@/lib/billing/plans'
 import { regionFromHeaders } from '@/lib/billing/region'
 import { getCurrentUser } from '@/lib/session'
+import { getCreditPack } from '@/lib/billing/credits'
 import { absoluteUrl } from '@/lib/site'
+
+/** The subset of the session user this route needs. */
+type CheckoutUser = { id: string; email: string }
+
+/**
+ * Checkout for a credit top-up.
+ *
+ * Simpler than a plan checkout in every respect: no seats, no regional
+ * discount, no presentment-currency dance. A pack is a small purchase, and
+ * the India price is already set on the Polar product rather than reached
+ * through a discount, so there is nothing here that can advertise one
+ * figure and charge another.
+ */
+async function checkoutPack(user: CheckoutUser, packId: string): Promise<Response> {
+  const pack = getCreditPack(packId)
+  if (!pack) {
+    return NextResponse.json({ error: `Unknown credit pack "${packId}"` }, { status: 400 })
+  }
+  if (!pack.polarProductId) {
+    return NextResponse.json(
+      { error: `${pack.name} is not available yet.` },
+      { status: 503 },
+    )
+  }
+
+  try {
+    const checkout = await getPolar().checkouts.create({
+      products: [pack.polarProductId],
+      customerEmail: user.email,
+      externalCustomerId: user.id,
+      successUrl: absoluteUrl(`/account?checkout=success&pack=${pack.id}`),
+      allowDiscountCodes: true,
+      metadata: {
+        userId: user.id,
+        // `pack`, not `plan`: the webhook branches on this to add credits
+        // rather than to grant an entitlement.
+        pack: pack.id,
+        credits: String(pack.credits),
+      },
+    })
+    return NextResponse.json({ url: checkout.url })
+  } catch (err) {
+    console.error('[billing/checkout] credit pack checkout failed:', err)
+    return NextResponse.json(
+      { error: 'Could not start checkout. Please try again.' },
+      { status: 502 },
+    )
+  }
+}
 
 /**
  * Create a Polar checkout session and return its hosted URL.
  *
- * POST { plan: 'pro' | 'studio' | 'team', seats?: number } → { url }
+ * POST { plan: 'pro' | 'plus' | 'studio' | 'team', seats?: number } → { url }
+ * POST { pack: 'credits-500' | 'credits-2000' }                    → { url }
  *
  * Requires a signed-in user: the webhook needs a local user to attach the
  * resulting entitlement to, and `externalCustomerId` is what lets it find
@@ -46,17 +97,29 @@ export async function POST(request: Request) {
     )
   }
 
-  let body: { plan?: unknown; seats?: unknown }
+  let body: { plan?: unknown; seats?: unknown; pack?: unknown }
   try {
-    body = (await request.json()) as { plan?: unknown; seats?: unknown }
+    body = (await request.json()) as {
+      plan?: unknown
+      seats?: unknown
+      pack?: unknown
+    }
   } catch {
     return NextResponse.json({ error: 'Invalid JSON body' }, { status: 400 })
   }
 
+  // A credit pack is a one-time purchase that grants no entitlement, so it
+  // is not a plan and does not belong in PLANS. It rides this route anyway
+  // because everything else about the checkout — the customer link, the
+  // metadata the webhook reads, the currency retry — is identical, and a
+  // second checkout route would be a second place for that to drift.
+  const packId = typeof body.pack === 'string' ? body.pack : null
+  if (packId) return checkoutPack(user, packId)
+
   const planId = parsePlanId(body.plan)
   if (!planId || planId === 'free') {
     return NextResponse.json(
-      { error: 'plan must be "pro", "studio" or "team"' },
+      { error: 'plan must be "pro", "plus", "studio" or "team"' },
       { status: 400 },
     )
   }
