@@ -14,7 +14,7 @@ import { billingEnabled } from '@/lib/billing/polar'
  * Prices and buyability for the visitor's region.
  *
  * GET → { region, plans: { pro: { priceCents, priceInrPaise, chargedInInr,
- *         purchasable }, team: {…} } }
+ *         purchasable }, studio: {…}, team: {…} } }
  *
  * This exists because the pricing UI is a client component and needs three
  * things the browser cannot work out for itself:
@@ -39,7 +39,7 @@ import { billingEnabled } from '@/lib/billing/polar'
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 
-const PAID_PLANS: PlanId[] = ['pro', 'team']
+const PAID_PLANS: PlanId[] = ['pro', 'studio', 'team']
 
 export async function GET(request: Request) {
   const region = regionFromHeaders(request.headers)

@@ -15,7 +15,7 @@ import { absoluteUrl } from '@/lib/site'
 /**
  * Create a Polar checkout session and return its hosted URL.
  *
- * POST { plan: 'pro' | 'team', seats?: number } → { url }
+ * POST { plan: 'pro' | 'studio' | 'team', seats?: number } → { url }
  *
  * Requires a signed-in user: the webhook needs a local user to attach the
  * resulting entitlement to, and `externalCustomerId` is what lets it find
@@ -56,7 +56,7 @@ export async function POST(request: Request) {
   const planId = parsePlanId(body.plan)
   if (!planId || planId === 'free') {
     return NextResponse.json(
-      { error: 'plan must be "pro" or "team"' },
+      { error: 'plan must be "pro", "studio" or "team"' },
       { status: 400 },
     )
   }
@@ -69,11 +69,14 @@ export async function POST(request: Request) {
     )
   }
 
-  // Seats only apply to the per-seat Team plan. Clamp to a sane range so a
-  // crafted request can't create a 10,000-seat checkout.
+  // A customer picks a seat count only on the per-seat Team plan; clamp it to
+  // a sane range so a crafted request can't create a 10,000-seat checkout.
+  // Studio's ten seats come from the catalog instead — the buyer isn't
+  // choosing a quantity, so accepting one from the body would let a client
+  // ask for a 500-seat Studio at the ten-seat price.
   const seats = plan.perSeat
     ? Math.min(Math.max(Number(body.seats) || 1, 1), 500)
-    : 1
+    : (plan.includedSeats ?? 1)
 
   // Region comes from the edge geolocation header on THIS request, never
   // from the client. The pricing UI reads the same header via

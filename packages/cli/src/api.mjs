@@ -222,3 +222,41 @@ export async function getArtifact(
 export async function getTemplate(id, options = {}) {
   return request(`/api/v1/templates/${encodeURIComponent(id)}`, options)
 }
+
+/* ------------------------------------------------------------------ *
+ *  Skills
+ * ------------------------------------------------------------------ */
+
+/**
+ * List the published agent skills.
+ *
+ * Fetched rather than bundled with this package, for the same reason the
+ * catalog is: a skill teaches an agent what the catalog can do, and a copy
+ * frozen at install time would teach it last quarter's answer.
+ */
+export async function listSkills(options = {}) {
+  const body = await request('/api/v1/skills', options)
+  return body.skills ?? []
+}
+
+/** One skill, including the markdown to write to disk. */
+export async function getSkill(id, options = {}) {
+  return request(`/api/v1/skills/${encodeURIComponent(id)}`, options)
+}
+
+/* ------------------------------------------------------------------ *
+ *  Design DNA
+ * ------------------------------------------------------------------ */
+
+/**
+ * Fetch the Design DNA document for an id (or the literal `catalog`).
+ *
+ * Returns the JSON envelope rather than the raw markdown, because the CLI
+ * wants the title and the token data alongside the file it writes.
+ */
+export async function getDna(id = 'catalog', { brand } = {}, options = {}) {
+  const params = new URLSearchParams()
+  if (brand) params.set('brand', brand)
+  const query = params.toString()
+  return request(`/api/v1/dna/${encodeURIComponent(id)}${query ? `?${query}` : ''}`, options)
+}

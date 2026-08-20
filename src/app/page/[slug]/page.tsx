@@ -29,6 +29,7 @@ import {
   FavoriteArtifactButton,
   BundleArtifactButton,
   CompareArtifactButton,
+  CopyDnaButton,
 } from '@/components/artifact-actions'
 
 export const dynamicParams = false
@@ -128,6 +129,10 @@ export default async function PageDetailPage({ params }: PageProps) {
                 level: 'page',
               }}
             />
+            {/* Aimed at whoever is about to build with an agent rather than
+                paste a component: the tokens, motion and rules, as one
+                pasteable document. */}
+            <CopyDnaButton artifactId={page.id} />
           </div>
 
           <TrackArtifactView

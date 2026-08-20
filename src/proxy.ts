@@ -4,8 +4,8 @@
  *  - Reads the `cssfx:session` cookie. If present + valid, the user is
  *    considered authenticated for routing purposes. (API routes do
  *    their own per-request verification via `getSession()`.)
- *  - Protected routes (/library, /playground, /effect/*, /account):
- *    redirect to /login?redirect=<original> if no valid session.
+ *  - Protected routes (/account, /playground): redirect to
+ *    /login?redirect=<original> if no valid session.
  *  - Auth routes (/, /login, /signup): redirect to /library if the
  *    user is already authenticated — avoids showing the marketing /
  *    login page to logged-in users.
@@ -21,26 +21,36 @@ import { NextResponse, type NextRequest } from 'next/server'
  * Paths that REQUIRE auth. Proxy redirects to /login if no valid session
  * cookie is present.
  *
- * The catalog is gated: browsing it is an account feature, not a public
- * one. Every hub, category, detail page and the playground bounces an
- * anonymous visitor to /login?redirect=<original>, so they land back where
- * they were aiming once they sign in.
+ * The gate sits at the point of work, not at the point of looking. Anyone
+ * — signed in or not — can browse every hub, category and artifact detail
+ * page, read the source and copy it. An account is what you need to keep
+ * things: the editor and everything under /account.
  *
- * This is a deliberate reversal of the earlier decision to open the
- * catalog for search traffic, and it costs exactly what that decision
- * bought: crawlers get a 307 on all ~4,300 artifact pages, so the
- * long-tail surface ("css shimmer skeleton loader", "glassmorphism card
- * hover") stops being indexable. There is no crawler exemption on
- * purpose — serving crawlers a page that humans are redirected away from
- * is cloaking, and Google can deindex a site for it. sitemap.ts and
- * robots.ts were trimmed to match rather than advertise URLs that all
- * redirect.
+ * This reverses the gate-the-catalog experiment, and it reverses it for
+ * the reason that experiment documented but accepted: the catalog's whole
+ * value in search is long-tail ("css shimmer skeleton loader",
+ * "glassmorphism card hover"), and a 307 to /login on all ~1,000 artifact
+ * pages traded that entire surface for an email capture on content
+ * lib/billing/plans.ts already gives away — every artifact is readable and
+ * copyable for free, and /api/v1 is public and unauthenticated by design.
+ * The gate protected nothing that was being sold.
  *
- * What stays public: the marketing landing page, /login and /signup, the
- * docs (they sell the CLI to people who don't have accounts yet) and the
- * standalone /tools utilities, which are not catalog content.
+ * There is still no crawler exemption anywhere in this codebase, and there
+ * should never be one: serving crawlers a page humans are redirected away
+ * from is cloaking. The point of opening the catalog is that the exemption
+ * is no longer something anyone would want — crawler and human now get the
+ * same page. sitemap.ts and robots.ts are restored to match.
  *
- * Two content paths remain reachable without a session and are NOT closed
+ * What remains gated:
+ *  - /account — someone else's data by definition.
+ *  - /playground — the editor. It is where saved state (bundles, brand
+ *    presets, remixes) is produced rather than consumed, so it is the
+ *    honest place to ask for an account. It is also absent from
+ *    sitemap.ts: a signed-out crawler still gets a 307 here, and
+ *    advertising a URL that redirects is the thing this file just stopped
+ *    doing everywhere else.
+ *
+ * Two content paths stay reachable without a session and are NOT governed
  * by this file: /api/v1/* (the CLI and MCP server's only transport — it
  * has no key scheme to authenticate against yet) and /embed/<id> (a
  * cross-site <iframe> never sends a SameSite=Lax cookie, so gating it
@@ -48,21 +58,6 @@ import { NextResponse, type NextRequest } from 'next/server'
  */
 const PROTECTED_PREFIXES = [
   '/account',
-  // Catalog hubs and the unified browse surface.
-  '/library',
-  '/browse',
-  '/category',
-  '/blocks',
-  '/pages',
-  '/templates',
-  '/paths',
-  // Per-artifact detail pages. Singular and plural are distinct routes;
-  // the match below is exact-or-with-slash, so '/page' never swallows
-  // '/pages'.
-  '/effect',
-  '/block',
-  '/page',
-  '/template',
   // The editor.
   '/playground',
 ]

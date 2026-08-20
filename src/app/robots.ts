@@ -5,26 +5,27 @@ import { absoluteUrl } from '@/lib/site'
  * robots.txt, generated so it can reference the sitemap at the correct
  * absolute origin per environment.
  *
- * The catalog is behind auth (see PROTECTED_PREFIXES in proxy.ts), so every
- * catalog path is disallowed here. A crawler that requests one gets a 307
- * to /login and nothing indexable, and letting it discover that ~4,300
- * times over is pure waste — worse, a domain whose crawled pages are mostly
- * redirects to a login screen looks thin. Saying so up front in robots.txt
- * is the honest version of what the gate already enforces.
+ * The catalog is open (see PROTECTED_PREFIXES in proxy.ts), so nothing
+ * under it is disallowed here any more. This file previously blocked every
+ * catalog path because every one of them 307'd to /login; both halves of
+ * that arrangement are gone.
  *
  * There is no Googlebot exemption anywhere in this codebase on purpose:
  * serving crawlers content that humans are bounced away from is cloaking.
+ * With the catalog open the question no longer arises — crawler and human
+ * get the same page.
  *
- * Auth and API routes are disallowed for the older reason: they're either
- * user-specific or JSON, so indexing them can't rank.
+ * What stays disallowed:
+ *  - /api/ — JSON, can't rank.
+ *  - Auth and account routes — user-specific or empty.
+ *  - /playground — still behind auth, so a crawler would only find a
+ *    redirect. Keep this in step with PROTECTED_PREFIXES.
+ *  - /embed/ — those documents contain the same markup and CSS as the
+ *    effect pages with none of the surrounding copy, so indexing them
+ *    would compete with the page that should actually rank. They're meant
+ *    to be loaded inside someone else's <iframe>, not found in search.
  *
- * /embed is disallowed too. Those documents contain the same markup and
- * CSS as the effect pages with none of the surrounding copy, so indexing
- * them would compete with the page that should actually rank. They're
- * meant to be loaded inside someone else's <iframe>, not found in search.
- *
- * What's left crawlable — the landing page, /docs and /tools — is exactly
- * what sitemap.ts lists.
+ * Everything else crawlable is what sitemap.ts enumerates.
  */
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -40,18 +41,7 @@ export default function robots(): MetadataRoute.Robots {
           '/forgot-password',
           '/reset-password',
           '/embed/',
-          // Auth-gated catalog. Keep in sync with PROTECTED_PREFIXES.
-          '/library',
-          '/browse',
-          '/category',
-          '/blocks',
-          '/pages',
-          '/templates',
-          '/paths',
-          '/effect',
-          '/block',
-          '/page',
-          '/template',
+          // Still auth-gated. Keep in sync with PROTECTED_PREFIXES.
           '/playground',
         ],
       },

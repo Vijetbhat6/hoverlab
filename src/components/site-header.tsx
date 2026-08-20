@@ -69,6 +69,7 @@ import { LadderTour, openLadderTour } from '@/components/ladder-tour'
 import { useReducedMotion } from '@/components/reduced-motion-provider'
 import { useBundle } from '@/hooks/use-bundle'
 import { useCompare } from '@/hooks/use-compare'
+import { PLANS, formatPrice } from '@/lib/billing/plans'
 import { SOCIAL } from '@/lib/social'
 import { TRAY_EVENTS, isTypingTarget } from '@/lib/tray-events'
 
@@ -336,8 +337,11 @@ export function SiteHeader({ actions }: SiteHeaderProps) {
               className="hidden h-9 shrink-0 items-center gap-1.5 rounded-lg px-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted/50 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring md:inline-flex"
             >
               Pro
+              {/* Derived, not typed out: this badge sat at $59 in the header
+                  while the pricing page moved to $79, and a header price that
+                  contradicts the pricing page is worse than no header price. */}
               <span className="rounded bg-primary px-1 py-0.5 text-[9px] font-bold uppercase leading-none tracking-wider text-primary-foreground">
-                $59
+                {formatPrice(PLANS.pro.priceCents)}
               </span>
             </Link>
 

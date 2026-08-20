@@ -78,6 +78,10 @@ export default function McpDocsPage() {
             [<C key="5">install_artifact</C>, 'Write a block or page, plus what it is composed of'],
             [<C key="6">init_template</C>, 'Scaffold a whole template'],
             [<C key="7">list_categories</C>, 'List the categories, per tier'],
+            [
+              <C key="8">get_design_dna</C>,
+              'Hand the agent the design system — tokens, shape, motion, rules — before it writes UI of its own',
+            ],
           ]}
         />
       </DocsSection>

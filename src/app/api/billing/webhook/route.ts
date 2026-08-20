@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { validateEvent, WebhookVerificationError } from '@polar-sh/sdk/webhooks'
 import { FieldValue, Timestamp } from 'firebase-admin/firestore'
 import { adminDb } from '@/lib/firebase/admin'
+import { generateInviteCode } from '@/lib/billing/workspace'
 
 /**
  * Polar webhook receiver — the ONLY place entitlements are granted.
@@ -11,7 +12,7 @@ import { adminDb } from '@/lib/firebase/admin'
  * written here, after Polar has signed the event and confirmed payment.
  *
  * Handled events:
- *   order.paid                 → grant Pro license / provision Team seats
+ *   order.paid                 → grant Pro license / provision Studio seats
  *   order.refunded             → revoke what that order granted
  *   subscription.active        → Team subscription live (or renewed)
  *   subscription.updated       → seat count / period end changed
@@ -166,6 +167,71 @@ async function handleOrderPaid(data: PolarLike): Promise<void> {
       proLicenseAt: Timestamp.now(),
     })
   }
+
+  if (plan === 'studio') {
+    await provisionStudioWorkspace(userId, orderId, data)
+  }
+}
+
+/**
+ * Studio — a one-time license covering ten people.
+ *
+ * Provisioned as a workspace rather than as ten Pro licenses, because the
+ * buyer does not know the other nine email addresses at checkout: they buy,
+ * then invite. That is the same shape as a Team subscription, so it reuses
+ * the same `teams/{id}` documents and the same members subcollection, and
+ * differs in exactly two fields — `kind`, which is what stops a Studio seat
+ * unlocking shared brand tokens, and a `lifetime` status, which has no
+ * renewal to fail.
+ *
+ * Keyed by the ORDER id (a subscription-backed team is keyed by the
+ * subscription id), so a redelivered order.paid re-enters this function and
+ * finds the workspace already there instead of creating a second one.
+ */
+async function provisionStudioWorkspace(
+  userId: string,
+  orderId: string,
+  data: PolarLike,
+): Promise<void> {
+  const db = adminDb()
+  const teamRef = db.collection('teams').doc(orderId)
+  if ((await teamRef.get()).exists) return
+
+  const metaSeats = Number(data.metadata?.seats)
+  const seats = Number.isFinite(metaSeats) && metaSeats > 0 ? metaSeats : 10
+
+  const teamName =
+    typeof data.metadata?.teamName === 'string' && data.metadata.teamName
+      ? data.metadata.teamName
+      : 'My studio'
+
+  const batch = db.batch()
+  batch.set(teamRef, {
+    name: teamName,
+    kind: 'studio',
+    ownerId: userId,
+    polarOrderId: orderId,
+    // Not a subscription status, but the field every seat check already
+    // reads. `teamIsLive()` knows this one never expires.
+    subscriptionStatus: 'lifetime',
+    seats,
+    // The buyer takes the first seat; the other nine are claimed with the
+    // code. Without this the license would be ten seats nobody but the
+    // purchaser could ever use.
+    seatsUsed: 1,
+    inviteCode: generateInviteCode(),
+    currentPeriodEnd: null,
+    createdAt: Timestamp.now(),
+  })
+  batch.set(teamRef.collection('members').doc(userId), {
+    userId,
+    role: 'owner',
+    joinedAt: Timestamp.now(),
+  })
+  batch.update(db.collection('users').doc(userId), {
+    teamIds: FieldValue.arrayUnion(teamRef.id),
+  })
+  await batch.commit()
 }
 
 /** order.refunded — take back exactly what the order granted. */
@@ -185,6 +251,18 @@ async function handleOrderRefunded(data: PolarLike): Promise<void> {
       proLicense: false,
       proLicenseAt: null,
     })
+  }
+
+  if (purchase.plan === 'studio') {
+    // The workspace is keyed by this order id. Mark it revoked rather than
+    // deleting it: `teamIsLive()` stops recognising the status, every seat
+    // loses access at once, and the membership records survive in case the
+    // refund was a mistake.
+    await adminDb()
+      .collection('teams')
+      .doc(orderId)
+      .update({ subscriptionStatus: 'revoked' })
+      .catch(() => {})
   }
 }
 
@@ -233,10 +311,13 @@ async function handleSubscription(data: PolarLike, status: string): Promise<void
   const batch = db.batch()
   batch.set(teamRef, {
     name: teamName,
+    kind: 'team',
     ownerId: userId,
     polarSubscriptionId: subscriptionId,
     subscriptionStatus: status,
     seats,
+    seatsUsed: 1,
+    inviteCode: generateInviteCode(),
     currentPeriodEnd,
     createdAt: Timestamp.now(),
   })

@@ -15,7 +15,7 @@
  */
 
 import * as React from 'react'
-import { Heart, Package, Scale } from 'lucide-react'
+import { Dna, Heart, Package, Scale } from 'lucide-react'
 import { toast } from 'sonner'
 
 import { useFavorites } from '@/hooks/use-favorites'
@@ -202,6 +202,71 @@ export function CompareArtifactButton({
       {inCompare ? 'Comparing' : 'Compare'}
       <span className="sr-only">
         {inCompare ? `Remove this ${noun} from compare` : `Add this ${noun} to compare`}
+      </span>
+    </button>
+  )
+}
+
+/**
+ * Copy the Design DNA for this artifact.
+ *
+ * Sits beside Favorite / Bundle / Compare because it is the same kind of
+ * thing — one click, no navigation — but it is the one aimed at somebody
+ * who is going to build with an agent rather than paste a component. The
+ * document it copies is markdown: tokens for both themes, radius, motion,
+ * and the rules that keep generated UI consistent with what the catalog
+ * installs.
+ *
+ * Fetched on click rather than embedded in the page. The document is a few
+ * kilobytes and almost nobody presses this, so shipping it in the HTML of
+ * every detail page would cost every visitor for the few who want it.
+ */
+export function CopyDnaButton({
+  artifactId,
+  className = '',
+}: {
+  artifactId: string
+  className?: string
+}) {
+  const [state, setState] = React.useState<'idle' | 'loading' | 'copied'>('idle')
+
+  async function copy() {
+    if (state === 'loading') return
+    setState('loading')
+    try {
+      const res = await fetch(`/api/v1/dna/${encodeURIComponent(artifactId)}?format=raw`)
+      if (!res.ok) throw new Error(String(res.status))
+      await navigator.clipboard.writeText(await res.text())
+      setState('copied')
+      toast.success('Design DNA copied', {
+        description: 'Paste it into your AI tool before asking it for UI.',
+      })
+      setTimeout(() => setState('idle'), 2000)
+    } catch {
+      setState('idle')
+      toast.error('Could not copy the Design DNA.', {
+        description: 'Fetch it directly at /api/v1/dna/' + artifactId,
+      })
+    }
+  }
+
+  return (
+    <button
+      type="button"
+      onClick={copy}
+      disabled={state === 'loading'}
+      className={cn(
+        'inline-flex h-9 items-center gap-1.5 rounded-lg border px-3 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
+        state === 'copied'
+          ? 'border-primary/40 bg-primary/10 text-primary'
+          : 'border-border/60 text-muted-foreground hover:bg-muted hover:text-foreground',
+        className,
+      )}
+    >
+      <Dna aria-hidden className="h-4 w-4" />
+      {state === 'copied' ? 'Copied' : 'Copy Design DNA'}
+      <span className="sr-only">
+        Copy this artifact&apos;s design tokens and rules as a document for an AI tool
       </span>
     </button>
   )

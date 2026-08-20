@@ -12,8 +12,18 @@
  */
 
 import path from 'node:path'
+import { mkdir, writeFile } from 'node:fs/promises'
 
-import { FRAMEWORKS, LEVELS, getArtifact, searchAll, searchLevel } from './api.mjs'
+import {
+  FRAMEWORKS,
+  LEVELS,
+  getArtifact,
+  getDna,
+  getSkill,
+  listSkills,
+  searchAll,
+  searchLevel,
+} from './api.mjs'
 import { detectFramework } from './detect.mjs'
 import { addArtifact } from './write.mjs'
 import { initTemplate } from './scaffold.mjs'
@@ -387,6 +397,94 @@ export async function commandCategories(_args, flags) {
 }
 
 /* ------------------------------------------------------------------ *
+ *  skill
+ * ------------------------------------------------------------------ */
+
+/**
+ * Where an agent skill goes.
+ *
+ * `.claude/skills/<name>/SKILL.md` is what Claude Code and Claude Desktop
+ * read, and it is a plain markdown file — an agent that keeps its skills
+ * somewhere else can be pointed at the same file, which is why `--dir`
+ * exists rather than a list of per-agent special cases.
+ */
+const SKILLS_DIR = path.join('.claude', 'skills')
+
+export async function commandSkill(args, flags) {
+  const [id] = args
+
+  if (!id) {
+    const skills = await listSkills()
+    if (flags.json) {
+      out(JSON.stringify(skills, null, 2))
+      return
+    }
+    out(bold('Agent skills') + dim(' — free, and they never expire'))
+    out()
+    for (const skill of skills) {
+      out(`  ${cyan(skill.id)}`)
+      out(`    ${skill.description}`)
+      out()
+    }
+    out(dim('Install one with: hoverlab skill hoverlab'))
+    return
+  }
+
+  const skill = await getSkill(id)
+
+  const root = flags.dir ? path.resolve(flags.dir) : path.join(process.cwd(), SKILLS_DIR)
+  const target = path.join(root, skill.id, 'SKILL.md')
+
+  if (flags['dry-run']) {
+    out(`${yellow('would write')} ${displayPath(target)}`)
+    return
+  }
+
+  // Overwriting is the right default here, unlike for catalog files: a
+  // skill is a copy of ours, not something the user has edited, and the
+  // reason to run this again is almost always to pick up a newer one.
+  await mkdir(path.dirname(target), { recursive: true })
+  await writeFile(target, skill.markdown, 'utf8')
+
+  out(`${green('✓')} Installed ${bold(skill.name)}`)
+  out(`  ${displayPath(target)}`)
+  out()
+  out(dim('Restart your agent, or start a new session, for it to load.'))
+}
+
+/* ------------------------------------------------------------------ *
+ *  dna
+ * ------------------------------------------------------------------ */
+
+/**
+ * Print or write a Design DNA document.
+ *
+ * Prints by default rather than writing: the common use is piping it into
+ * a prompt or an agent's context, and a command that silently created a
+ * file for that would be surprising. `--out` writes when a file is wanted.
+ */
+export async function commandDna(args, flags) {
+  const id = args[0] ?? 'catalog'
+  const doc = await getDna(id, { brand: flags.brand })
+
+  if (flags.json) {
+    out(JSON.stringify(doc, null, 2))
+    return
+  }
+
+  if (!flags.out) {
+    out(doc.markdown)
+    return
+  }
+
+  const target = path.resolve(flags.out)
+  await mkdir(path.dirname(target), { recursive: true })
+  await writeFile(target, doc.markdown, 'utf8')
+  out(`${green('✓')} ${doc.title}`)
+  out(`  ${displayPath(target)}`)
+}
+
+/* ------------------------------------------------------------------ *
  *  help
  * ------------------------------------------------------------------ */
 
@@ -407,6 +505,11 @@ ${bold('Commands')}
   search <words...>    Search every tier at once
   show <id...>         Print an artifact's code without writing files
   categories           List the categories, per tier
+  skill [id]           Install an agent skill into .claude/skills.
+                       With no id, lists the ones available.
+  dna [id]             Print the Design DNA for an artifact — the tokens,
+                       shape, motion and rules, ready to paste into an AI
+                       tool. With no id, the whole system.
   mcp                  Run the MCP server over stdio (for editor agents)
   help                 Show this message
 
@@ -424,6 +527,8 @@ ${bold('Options')}
       --limit <n>      Maximum search results per tier (default 20)
       --deep           show: include the blocks a page is built from
       --json           Machine-readable output
+      --brand <id>     dna: apply a brand preset's accent
+      --out <path>     dna: write to a file instead of printing
       --hue <deg>      Effects only — hue rotation, -180 to 180
       --sat <pct>      Effects only — saturation shift, -100 to 100
       --scale <n>      Effects only — px/rem multiplier, 0.5 to 1.5
@@ -444,6 +549,11 @@ ${bold('Where files land')}
   that is what the page sources import against. ${dim('--dir')} overrides both.
 
 ${bold('Editor integration')}
+  Teach your agent the catalog, so it installs the right piece instead of
+  writing a worse one from scratch:
+
+    npx hoverlab skill hoverlab
+
   Register the MCP server so your editor's agent can search and install
   from the catalog directly:
 

@@ -10,14 +10,16 @@ import { cn } from '@/lib/utils'
  *
  * Sticky below the site header on desktop; a horizontally scrolling strip
  * on mobile rather than a collapsed menu, for the same reason the ladder
- * nav is — four links fit, and a menu you have to open is one a first-time
- * reader does not know exists.
+ * nav is — a menu you have to open is one a first-time reader does not
+ * know exists, and a strip that scrolls still shows there is more.
  */
 const SECTIONS: Array<{ href: string; label: string; blurb: string }> = [
   { href: '/docs', label: 'Overview', blurb: 'What this is and how to install' },
   { href: '/docs/cli', label: 'CLI', blurb: 'npx hoverlab add, init, search' },
   { href: '/docs/api', label: 'API', blurb: 'The public /api/v1 surface' },
   { href: '/docs/mcp', label: 'MCP', blurb: 'Editor agents & Figma' },
+  { href: '/docs/dna', label: 'Design DNA', blurb: 'Tokens and rules for AI tools' },
+  { href: '/docs/skills', label: 'Skills', blurb: 'Teach your agent the catalog' },
 ]
 
 export function DocsNav() {

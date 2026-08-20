@@ -29,6 +29,7 @@ import {
   FavoriteArtifactButton,
   BundleArtifactButton,
   CompareArtifactButton,
+  CopyDnaButton,
 } from '@/components/artifact-actions'
 
 /**
@@ -139,6 +140,10 @@ export default async function BlockDetailPage({ params }: PageProps) {
                 level: 'block',
               }}
             />
+            {/* Aimed at whoever is about to build with an agent rather than
+                paste a component: the tokens, motion and rules, as one
+                pasteable document. */}
+            <CopyDnaButton artifactId={block.id} />
           </div>
 
           <TrackArtifactView

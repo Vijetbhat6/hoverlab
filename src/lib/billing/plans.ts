@@ -2,7 +2,7 @@
  * The sellable plan catalog — the single source of truth for what exists,
  * what it costs, and which Polar product backs it.
  *
- * Two products, deliberately different shapes:
+ * Three products, deliberately different shapes:
  *
  *   Pro   — ONE-TIME license. Individual developers don't subscribe to CSS
  *           snippets they can get free elsewhere; they do pay once for a
@@ -18,16 +18,26 @@
  *           previously said Pro bought "the CLI", which was never true and is
  *           the kind of claim the pricing page would have inherited.
  *
+ *   Studio — ONE-TIME, ten seats. The same license as Pro, bought once for a
+ *           whole team. This exists because the comparable market sells
+ *           teams a seat-COUNT license rather than a subscription — Preline
+ *           $459/15 devs, Tailkit $549/10, Aceternity $1,590/10, Tailwind
+ *           Plus for 25 — and a team that priced our $12/seat/month against
+ *           buying Pro n times did the arithmetic and bought Pro n times.
+ *
  *   Team  — RECURRING per-seat. Companies pay for seats and shared state
  *           (brand tokens, shared collections); individuals don't. This is
- *           where recurring revenue actually comes from.
+ *           where recurring revenue actually comes from. Studio does not
+ *           replace it: Studio sells the license, Team sells the shared
+ *           workspace, and a Studio buyer who wants shared brand tokens
+ *           still upgrades.
  *
  * Prices are declared here for display only — Polar is authoritative at
  * checkout, and the webhook records the amount actually charged. Changing
  * a number here never changes what a customer is billed.
  */
 
-export type PlanId = 'free' | 'pro' | 'team'
+export type PlanId = 'free' | 'pro' | 'studio' | 'team'
 export type BillingInterval = 'one_time' | 'month'
 
 export interface Plan {
@@ -47,8 +57,17 @@ export interface Plan {
   interval: BillingInterval
   /** Polar product id, from the dashboard. Null for the free plan. */
   polarProductId: string | null
-  /** Per-seat pricing (Team) vs a single purchase (Pro). */
+  /** Per-seat pricing (Team) vs a single purchase (Pro, Studio). */
   perSeat: boolean
+  /**
+   * Seats a one-time license covers, or null when seats don't apply.
+   *
+   * Distinct from `perSeat`, which asks whether the customer picks a
+   * quantity at checkout. Studio is not per-seat — nobody chooses 7 — but it
+   * does cover ten people, and that number has to be somewhere the webhook
+   * can read it when it provisions the workspace.
+   */
+  includedSeats: number | null
 }
 
 export const PLANS: Record<PlanId, Plan> = {
@@ -60,21 +79,48 @@ export const PLANS: Record<PlanId, Plan> = {
     interval: 'one_time',
     polarProductId: null,
     perSeat: false,
+    includedSeats: null,
   },
   pro: {
     id: 'pro',
     name: 'Pro',
-    // $59 one-time. Sits in the band this market has shown it pays
-    // outright (Tailwind Plus $299, Magic UI Pro lifetime tiers), while
-    // staying an easy solo-developer decision.
-    priceCents: 5900,
-    // ₹5,600 — the dollar price at roughly ₹95/$, so the rupee ladder tracks
+    // $79 one-time.
+    //
+    // Was $59, which was under the floor of every comparable product —
+    // React Bits' entry tier is $99, Shadcnblocks $149, Aceternity and
+    // Magic UI $199, Preline $249, Tailwind Plus and React Bits' top tier
+    // $299 — while Hoverlab ships more surface than any of them (the whole
+    // effect catalog, blocks, pages, runnable templates, the tools, the CLI
+    // and the MCP server). A price that far below the band reads as a
+    // cheaper substitute rather than a better product.
+    //
+    // Deliberately not $99: without a consumable tier to justify it, $79 is
+    // still a decision a solo developer makes without a spreadsheet. Revisit
+    // when Pro+ credits ship.
+    priceCents: 7900,
+    // ₹7,500 — the dollar price at roughly ₹95/$, so the rupee ladder tracks
     // the dollar one rather than becoming a second pricing strategy to
     // maintain.
-    priceInrPaise: 560000,
+    priceInrPaise: 750000,
     interval: 'one_time',
     polarProductId: process.env.POLAR_PRODUCT_ID_PRO ?? null,
     perSeat: false,
+    includedSeats: 1,
+  },
+  studio: {
+    id: 'studio',
+    name: 'Studio',
+    // $299 one-time for ten seats — $29.90 a head, against $79 each buying
+    // Pro individually. Priced under Preline's $459/15 and Tailkit's
+    // $549/10 for the same reason Pro is priced where it is, and far under
+    // Aceternity's $1,590/10.
+    priceCents: 29900,
+    /** ₹28,000. */
+    priceInrPaise: 2800000,
+    interval: 'one_time',
+    polarProductId: process.env.POLAR_PRODUCT_ID_STUDIO ?? null,
+    perSeat: false,
+    includedSeats: 10,
   },
   team: {
     id: 'team',
@@ -93,6 +139,7 @@ export const PLANS: Record<PlanId, Plan> = {
     interval: 'month',
     polarProductId: process.env.POLAR_PRODUCT_ID_TEAM ?? null,
     perSeat: true,
+    includedSeats: null,
   },
 }
 
@@ -128,10 +175,12 @@ interface RegionalOverride {
 /**
  * Region-specific pricing.
  *
- * India: $59 is roughly 15% of a junior Indian developer's monthly take-home
- * — the same burden a ~$1,000 purchase would be to a US developer. The World
+ * India: $79 is roughly 20% of a junior Indian developer's monthly take-home
+ * — the same burden a ~$1,300 purchase would be to a US developer. The World
  * Bank PPP conversion factor for India sits near ₹23 per international dollar
- * against a ~₹96 market rate, which puts honest parity for Pro at $17-20.
+ * against a ~₹96 market rate, which puts honest parity for Pro at $23-27.
+ * Tailwind Plus reaches for the same ratio from the other direction, listing
+ * India at roughly a third of its dollar price.
  *
  * Team is discounted too, but expect it to convert poorly regardless: RBI's
  * e-mandate rules make recurring cross-border card charges unreliable from
@@ -141,11 +190,18 @@ interface RegionalOverride {
 const REGIONAL: Record<Exclude<Region, 'default'>, Partial<Record<PlanId, RegionalOverride>>> = {
   IN: {
     pro: {
-      priceCents: 1900,
+      priceCents: 2500,
       discountId: process.env.POLAR_DISCOUNT_ID_IN_PRO ?? null,
-      // ₹1,800 — $19 at the same ~₹95/$ the list price uses.
-      priceInrPaise: 180000,
+      // ₹2,400 — $25 at the same ~₹95/$ the list price uses.
+      priceInrPaise: 240000,
       discountIdInr: process.env.POLAR_DISCOUNT_ID_IN_PRO_INR ?? null,
+    },
+    studio: {
+      priceCents: 9900,
+      discountId: process.env.POLAR_DISCOUNT_ID_IN_STUDIO ?? null,
+      /** ₹9,500 — $99 at the same ~₹95/$ the list price uses. */
+      priceInrPaise: 950000,
+      discountIdInr: process.env.POLAR_DISCOUNT_ID_IN_STUDIO_INR ?? null,
     },
     team: {
       priceCents: 500,
@@ -259,7 +315,12 @@ export function discountForRegion(
 
 /** Narrow an arbitrary string to a known plan id. */
 export function parsePlanId(value: unknown): PlanId | null {
-  return value === 'free' || value === 'pro' || value === 'team' ? value : null
+  return value === 'free' ||
+    value === 'pro' ||
+    value === 'studio' ||
+    value === 'team'
+    ? value
+    : null
 }
 
 /** Format cents for display, e.g. 5900 → "$59". */

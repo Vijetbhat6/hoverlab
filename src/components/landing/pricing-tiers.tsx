@@ -1,14 +1,20 @@
 'use client'
 
 /**
- * <PricingTiers> — 3-tier pricing (Free / Pro / Team), all purchasable.
+ * <PricingTiers> — 4-tier pricing (Free / Pro / Studio / Team), all
+ * purchasable.
  *
- * The two paid plans are deliberately different shapes:
- *   Pro  — ONE-TIME $59. Individual devs won't subscribe for CSS snippets
- *          they can get free elsewhere, but this market does pay once to
- *          own the source outright (cf. Tailwind Plus, Magic UI Pro).
- *   Team — $12 per seat / month. Seats and shared state are what companies
- *          actually pay recurring money for.
+ * The three paid plans are deliberately different shapes:
+ *   Pro    — ONE-TIME $79. Individual devs won't subscribe for CSS snippets
+ *            they can get free elsewhere, but this market does pay once to
+ *            own the source outright (cf. Tailwind Plus, Magic UI Pro).
+ *   Studio — ONE-TIME $299 for ten seats. The same license bought for a
+ *            whole team, because that is how this market sells to teams
+ *            (Preline $459/15, Tailkit $549/10, Aceternity $1,590/10) — and
+ *            a team that compares a subscription against buying Pro n times
+ *            buys Pro n times.
+ *   Team   — $12 per seat / month. Seats and shared state are what companies
+ *            actually pay recurring money for.
  *
  * Prices, buyability and the display currency all come from usePricing() —
  * see that hook for why region and purchasability have to come from the
@@ -125,6 +131,24 @@ const TIERS: Tier[] = [
       'Every export format (Vue, Svelte, Tailwind)',
       'Custom brand color presets',
       'Private collections',
+      'All future updates included',
+    ],
+  },
+  {
+    id: 'studio',
+    name: 'Studio',
+    period: 'once — 10 seats',
+    tagline: 'For agencies and product teams who all ship from one catalog.',
+    cta: 'Buy Studio',
+    ctaVariant: 'outline',
+    badge: 'One-time payment',
+    features: [
+      'Everything in Pro, for 10 people',
+      // The arithmetic is the pitch, so it is on the card rather than left
+      // for the buyer to do: ten Pro licenses is $790.
+      'Ten seats for the price of under four Pro licenses',
+      'Invite your team with a workspace code',
+      'One invoice, one license, no renewals',
       'All future updates included',
     ],
   },
@@ -296,7 +320,8 @@ export function PricingTiers({ className }: { className?: string } = {}) {
    * Per-plan underneath, but the tiers move together — both are provisioned
    * by the same script run — and the page-level copy needs one answer.
    */
-  const rupeeCheckout = chargedInInr('pro') || chargedInInr('team')
+  const rupeeCheckout =
+    chargedInInr('pro') || chargedInInr('studio') || chargedInInr('team')
 
   /**
    * Which tiers this account already holds.
@@ -310,6 +335,11 @@ export function PricingTiers({ className }: { className?: string } = {}) {
     if (!signedIn || !entitlements) return 'unknown'
     if (id === 'free') return entitlements.plan === 'free' ? 'owned' : 'available'
     if (id === 'pro') return entitlements.canUseProFeatures ? 'owned' : 'available'
+    // Studio and Team are distinct purchases, not rungs: a Studio license
+    // does not include the shared workspace, and a Team subscriber who wants
+    // to stop renewing can still buy Studio. Only the plan you actually hold
+    // reads as owned.
+    if (id === 'studio') return entitlements.hasStudio ? 'owned' : 'available'
     return entitlements.hasTeam ? 'owned' : 'available'
   }
 
@@ -327,14 +357,15 @@ export function PricingTiers({ className }: { className?: string } = {}) {
           Simple, honest pricing
         </div>
         <h2 className="text-balance text-3xl font-bold tracking-tight sm:text-4xl">
-          Free forever. Pro once. Team by the seat.
+          Free forever. Pro once. Studio for ten. Team by the seat.
         </h2>
         <p className="mt-3 text-muted-foreground">
           Every rung of the ladder — effects, blocks, pages and templates — is
           free to browse, customize and copy for personal projects, and none
           of it moves behind a login. Pro is a single payment that covers
-          commercial work for good; Team puts that on a per-seat plan, with
-          shared brand tokens and seat management on the way.
+          commercial work for good, Studio is that same license bought once
+          for ten people, and Team puts it on a per-seat plan with shared
+          brand tokens and seat management on the way.
         </p>
 
         {/*
@@ -375,7 +406,9 @@ export function PricingTiers({ className }: { className?: string } = {}) {
         </div>
       </Reveal>
 
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+      {/* Four tiers: two up at tablet width, four across on desktop. A
+          three-column grid would orphan Team onto its own row. */}
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {TIERS.map((tier, i) => (
           <Reveal
             key={tier.name}
@@ -483,8 +516,8 @@ export function PricingTiers({ className }: { className?: string } = {}) {
           </code>{' '}
           support, and the CLI and public API are open to everyone. Free
           covers personal and non-commercial projects; shipping anything from
-          the catalog in client work or a paid product needs Pro or Team. No
-          credit card required for Free.
+          the catalog in client work or a paid product needs Pro, Studio or
+          Team. No credit card required for Free.
         </p>
         {/*
           Said before the buy button, not after the charge. Team's shared
@@ -497,6 +530,13 @@ export function PricingTiers({ className }: { className?: string } = {}) {
           roadmap and not available yet. A Team seat today grants the full Pro
           feature set for every member, plus priority support; the shared
           workspace features ship later this year.
+        </p>
+        {/* The one thing a buyer could reasonably get wrong about the two
+            team-shaped plans, said before they pick one. */}
+        <p className="mt-2 text-xs text-muted-foreground">
+          Studio is a license, not a workspace: it covers ten people with the
+          full Pro feature set and never renews. The shared brand library and
+          shared collections belong to Team.
         </p>
         {rupeeCheckout ? (
           <p className="mt-2 text-xs text-muted-foreground">

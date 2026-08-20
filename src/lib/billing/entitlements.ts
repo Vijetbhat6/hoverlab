@@ -33,9 +33,18 @@ export interface Entitlements {
   plan: PlanId
   /** Paid one-time Pro license. */
   hasPro: boolean
+  /** Seat on a one-time Studio license. Grants Pro, not Team. */
+  hasStudio: boolean
   /** Member of a Team with a live subscription. */
   hasTeam: boolean
-  /** Team id when hasTeam, else null. */
+  /**
+   * The live workspace this user belongs to — a Team subscription or a
+   * Studio license — else null.
+   *
+   * Both ride the same `teams/{id}` documents because seat management is
+   * identical for the two; what differs is what the seat entitles you to,
+   * which is `hasTeam` versus `hasStudio`, not where the members live.
+   */
   teamId: string | null
   /**
    * Unlimited bundle size, all export formats, brand presets, private
@@ -53,6 +62,7 @@ export interface Entitlements {
 export const FREE_ENTITLEMENTS: Entitlements = {
   plan: 'free',
   hasPro: false,
+  hasStudio: false,
   hasTeam: false,
   teamId: null,
   canUseProFeatures: false,
@@ -67,6 +77,10 @@ export const FREE_ENTITLEMENTS: Entitlements = {
  */
 function teamIsLive(status: string, currentPeriodEnd: Date | null): boolean {
   if (status === 'active') return true
+  // A Studio license is bought outright, so its workspace has no renewal to
+  // fail and no period to run out. The webhook writes this status once and
+  // never revisits it — only a refund takes the seats away.
+  if (status === 'lifetime') return true
   if (status === 'past_due' || status === 'canceled') {
     return currentPeriodEnd !== null && currentPeriodEnd.getTime() > Date.now()
   }
@@ -97,6 +111,7 @@ export async function getEntitlements(
     : []
 
   let liveTeamId: string | null = null
+  let liveStudioId: string | null = null
   if (teamIds.length) {
     // getAll is a single round trip for all of them, not one read per team.
     const teamRefs = teamIds.map((id) => db.collection('teams').doc(id))
@@ -106,23 +121,38 @@ export async function getEntitlements(
       const t = team.data() ?? {}
       const status =
         typeof t.subscriptionStatus === 'string' ? t.subscriptionStatus : 'inactive'
-      if (teamIsLive(status, toDateOrNull(t.currentPeriodEnd))) {
-        liveTeamId = team.id
-        break
+      if (!teamIsLive(status, toDateOrNull(t.currentPeriodEnd))) continue
+
+      // Both kinds of workspace live in `teams`, so which one this is has to
+      // be read off the document rather than inferred from membership. An
+      // older team document has no `kind` at all, and predates Studio — it
+      // is a subscription.
+      if (t.kind === 'studio') {
+        liveStudioId ??= team.id
+      } else {
+        liveTeamId ??= team.id
       }
+      // A subscription outranks a Studio license for display, so keep
+      // looking only while we haven't found one.
+      if (liveTeamId) break
     }
   }
 
   const hasTeam = liveTeamId !== null
+  const hasStudio = liveStudioId !== null
 
   return {
-    // Team is the higher plan for display purposes.
-    plan: hasTeam ? 'team' : hasPro ? 'pro' : 'free',
+    // Team is the higher plan for display purposes, then Studio — which is
+    // a Pro license with company on it.
+    plan: hasTeam ? 'team' : hasStudio ? 'studio' : hasPro ? 'pro' : 'free',
     hasPro,
+    hasStudio,
     hasTeam,
-    teamId: liveTeamId,
-    // A Team seat includes everything Pro grants.
-    canUseProFeatures: hasPro || hasTeam,
+    teamId: liveTeamId ?? liveStudioId,
+    // A Team seat and a Studio seat both include everything Pro grants.
+    canUseProFeatures: hasPro || hasStudio || hasTeam,
+    // Shared brand tokens and shared collections are the subscription's
+    // product. Studio buys the license for ten people, not the workspace.
     canUseTeamFeatures: hasTeam,
   }
 }

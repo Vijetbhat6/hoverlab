@@ -20,6 +20,7 @@ import { SiteHeader } from '@/components/site-header'
 import { useFavorites } from '@/hooks/use-favorites'
 import { useBundle } from '@/hooks/use-bundle'
 import { UpgradePanel } from '@/components/billing/upgrade-panel'
+import { WorkspaceCard } from '@/components/billing/workspace-card'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 
@@ -171,6 +172,13 @@ export default function AccountPage() {
         >
           <UpgradePanel />
         </React.Suspense>
+
+        {/*
+          Below the plan, because the common case is someone who bought a
+          workspace looking for the code to hand out — and the uncommon case
+          is someone redeeming one, who was sent here to do it.
+        */}
+        <WorkspaceCard />
 
         <Card className="mt-6 border-border/60">
           <CardHeader>
