@@ -19,6 +19,7 @@ import {
   LEVELS,
   getArtifact,
   getDna,
+  reportInstall,
   getSkill,
   listSkills,
   searchAll,
@@ -99,6 +100,12 @@ export async function commandAdd(ids, flags) {
         customization,
       })
 
+      // Counted after the files are on disk, and only for a real install:
+      // a dry run is someone deciding, not someone using.
+      if (!result.dryRun) {
+        void reportInstall([result.artifact.id, ...(result.included ?? [])])
+      }
+
       const verb = result.dryRun ? 'Would add' : 'Added'
       const target = result.level === 'effect' ? cyan(result.framework) : cyan(result.level)
       out(
@@ -177,6 +184,8 @@ export async function commandInit(args, flags) {
     out(JSON.stringify(result, null, 2))
     return
   }
+
+  if (!result.dryRun) void reportInstall([result.template.id])
 
   const verb = result.dryRun ? 'Would scaffold' : 'Scaffolded'
   out(

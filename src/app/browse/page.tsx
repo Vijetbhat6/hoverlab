@@ -26,6 +26,7 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 import { Layers, SlidersHorizontal } from 'lucide-react'
 
+import { TrendingRail } from '@/components/trending-rail'
 import { CatalogSearchForm } from '@/components/catalog-search-form'
 import { hoverPeekCssFor } from '@/lib/hover-peek-css'
 import { BlockCard } from '@/components/blocks/block-card'
@@ -168,6 +169,13 @@ export default async function BrowsePage({ searchParams }: BrowsePageProps) {
             />
           ))}
         </nav>
+
+        {/* -- What people actually took ---------------------------------
+            Only on the unsearched view: someone who has typed a query has
+            told us what they want, and a strip of unrelated popular items
+            above their results is an interruption. Renders nothing until
+            the counters have data. */}
+        {!q ? <TrendingRail level={level ?? undefined} className="mt-6" /> : null}
 
         {/* -- Category rail, scoped to the chosen level ----------------- */}
         {level ? (

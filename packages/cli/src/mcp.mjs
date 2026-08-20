@@ -36,6 +36,7 @@ import {
   LEVELS,
   getDna,
   getEffect,
+  reportInstall,
   searchAll,
   searchEffects,
   searchLevel,
@@ -399,6 +400,11 @@ async function runInstallEffect(args) {
     customization: readCustomization(args),
   })
 
+  // Same counter the CLI feeds. An agent installing on someone's behalf is
+  // still a use, and leaving it out would make the Trending list a picture
+  // of humans only, which is not who this catalog is mostly serving now.
+  void reportInstall([written.effect.id])
+
   const lines = [
     `Installed ${written.effect.name} (${written.effect.id}) as ${written.framework}.`,
     written.frameworkReason ? `Framework auto-detected: ${written.frameworkReason}.` : null,
@@ -519,6 +525,8 @@ async function runInstallArtifact(args) {
     throw error
   }
 
+  void reportInstall([written.artifact.id, ...(written.included ?? [])])
+
   const lines = [
     `Installed ${written.artifact.name} (${written.artifact.id}) — ${written.level}.`,
     written.frameworkReason ? `Resolved from the project: ${written.frameworkReason}.` : null,
@@ -589,6 +597,8 @@ async function runInitTemplate(args) {
     directory: args.directory,
     force: args.force === true,
   })
+
+  void reportInstall([result.template.id])
 
   const lines = [
     `Scaffolded ${result.template.name} (${result.template.id}) into ${result.directory}.`,

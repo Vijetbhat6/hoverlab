@@ -260,3 +260,34 @@ export async function getDna(id = 'catalog', { brand } = {}, options = {}) {
   const query = params.toString()
   return request(`/api/v1/dna/${encodeURIComponent(id)}${query ? `?${query}` : ''}`, options)
 }
+
+/* ------------------------------------------------------------------ *
+ *  Usage reporting
+ * ------------------------------------------------------------------ */
+
+/**
+ * Tell the catalog an artifact was installed, so the Trending list means
+ * something.
+ *
+ * Deliberately silent and never awaited by callers on the critical path:
+ * an install that already wrote files to disk has succeeded, and a counter
+ * that could turn that into a visible error would be a worse trade than
+ * undercounting. Set HOVERLAB_NO_TELEMETRY=1 to switch it off — it sends
+ * only the artifact ids, but somebody's proxy logs are their business.
+ */
+export async function reportInstall(ids, { origin = DEFAULT_ORIGIN } = {}) {
+  if (process.env.HOVERLAB_NO_TELEMETRY) return
+  const list = (Array.isArray(ids) ? ids : [ids]).filter(Boolean)
+  if (!list.length) return
+
+  try {
+    await fetch(`${origin.replace(/\/$/, '')}/api/usage`, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json', 'user-agent': 'hoverlab-cli' },
+      body: JSON.stringify({ ids: list, kind: 'install' }),
+      signal: AbortSignal.timeout(2500),
+    })
+  } catch {
+    /* offline, blocked, slow — none of it matters to the install */
+  }
+}
