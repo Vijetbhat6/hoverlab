@@ -62,7 +62,7 @@ const READS_IT = [
   {
     icon: Terminal,
     title: 'Your CLI and your agent',
-    body: 'hoverlab.config.json in the project root. After that, anything you install arrives in your brand rather than in ours.',
+    body: 'hoverlab.config.json in the project root. After that, what you install arrives in your brand: token-styled artifacts exactly, effects hue-rotated to match.',
   },
 ]
 
@@ -122,9 +122,12 @@ export default function DesignSystemPage() {
           </h2>
           <p className="mt-2 text-sm text-muted-foreground">
             With <code className="rounded bg-muted px-1">hoverlab.config.json</code> in
-            your project root, the CLI emits artifacts in your tokens rather than
-            ours. That is the part a tokens file alone does not get you: a design
-            system with nothing built in it is a style guide.
+            your project root, the CLI installs into your brand rather than ours.
+            That is the part a tokens file alone does not get you: a design system
+            with nothing built in it is a style guide. Blocks, pages and templates
+            follow your tokens directly; effects are hand-written CSS, so the CLI
+            hue-rotates them towards your brand — close, and exact if you spend a
+            credit on the AI recolour.
           </p>
           <div className="mt-4 overflow-hidden rounded-xl bg-zinc-950 p-4">
             <pre className="overflow-x-auto font-mono text-sm text-zinc-300">

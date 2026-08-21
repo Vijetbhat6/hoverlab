@@ -380,9 +380,16 @@ resolves to it. Install both or neither.
 npx hoverlab add pricing-tiers
 \`\`\`
 
-With \`hoverlab.config.json\` in the project root, anything you install is
-emitted in these tokens rather than in ours — so the catalog matches your
-product instead of the other way round.
+With \`hoverlab.config.json\` in the project root, the CLI installs into your
+brand rather than ours.
+
+Blocks, pages and templates need nothing from it — they style themselves
+through the tokens above, so they follow \`tokens.css\` the moment you drop it
+in. Effects are the exception: they are hand-written CSS with literal colours
+in them, which is the one rung tokens cannot reach, so the CLI hue-rotates
+them towards your brand. That is an approximation, and a good one for the
+common case of an accent-coloured component. For an exact rewrite of a single
+effect, use the AI recolour on the site.
 ${
   warnings.length
     ? `\n## Note\n\n${warnings.map((w) => `- ${w}`).join('\n')}\n`

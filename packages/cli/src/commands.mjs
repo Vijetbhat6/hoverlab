@@ -28,6 +28,7 @@ import {
 import { detectFramework } from './detect.mjs'
 import { addArtifact } from './write.mjs'
 import { initTemplate } from './scaffold.mjs'
+import { readProjectConfig, brandCustomization } from './config.mjs'
 import {
   CONFIG_FILE,
   clearKey,
@@ -96,6 +97,33 @@ export async function commandAdd(ids, flags) {
   }
 
   const customization = readCustomization(flags)
+
+  /*
+   * The project's brand, when there is a hoverlab.config.json above the
+   * working directory and the caller has not asked for a specific tint.
+   *
+   * Explicit flags win. Someone who typed `--hue 40` is overriding the
+   * project default on purpose, and silently adding the brand rotation on
+   * top would give them neither the number they asked for nor the brand.
+   */
+  const explicitTint = flags.hue !== undefined || flags.sat !== undefined
+  const projectConfig = explicitTint ? null : await readProjectConfig()
+  const brand = projectConfig ? brandCustomization(projectConfig) : null
+
+  if (brand) {
+    customization.hue = brand.hue
+    customization.sat = brand.saturation
+    out(
+      `${dim('Using your project brand')}${
+        brand.name ? ` ${dim(`(${brand.name})`)}` : ''
+      }${dim(` from ${displayPath(projectConfig.path)}`)}`,
+    )
+    // Said once, up front, rather than per artifact. The rotation is an
+    // approximation — see config.mjs — and a user who is going to be
+    // surprised by it should be told before the files land, not after.
+    out(`${dim('  Effects are hue-rotated to match; blocks and above follow your tokens.')}`)
+  }
+
   let failures = 0
 
   for (const id of ids) {
@@ -666,6 +694,13 @@ ${bold('Examples')}
   npx hoverlab add pricing-tiers faq-accordion
   npx hoverlab add checkout-page          ${dim('# page + every block it uses')}
   npx hoverlab init storefront ./shop
+
+${bold('Your brand')}
+  Put a ${cyan('hoverlab.config.json')} in your project root — the design system
+  export at ${dim('hoverlab.dev/design-system')} writes one — and ${dim('add')} tints effects
+  to match it. Blocks, pages and templates need nothing: they style
+  themselves through the tokens in your ${cyan('tokens.css')}. An explicit
+  ${dim('--hue')} or ${dim('--sat')} overrides the project brand.
 
 ${bold('Licences')}
   Everything here is free to install: every effect, every block, every page,
