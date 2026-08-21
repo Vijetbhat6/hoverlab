@@ -19,6 +19,7 @@ import { withJsonErrors } from '@/lib/route-errors'
 import { getCurrentUser } from '@/lib/session'
 import { getEntitlements } from '@/lib/billing/entitlements'
 import { adminDb } from '@/lib/firebase/admin'
+import { Timestamp } from 'firebase-admin/firestore'
 import { PLANS, type PlanId } from '@/lib/billing/plans'
 import { licenseIdFor, updatesUntilFor, type HeldLicense } from '@/lib/license'
 
@@ -80,6 +81,29 @@ async function grantingOrder(
   }
 }
 
+/**
+ * A renewed update window, if this account has one.
+ *
+ * Written by the webhook when a renewal is paid. Preferred over the date
+ * derived from the original purchase, because after a renewal the derived
+ * date is simply stale — it still describes the twelve months that ran
+ * from the first order.
+ *
+ * Returns null on a read failure rather than throwing. The fallback is the
+ * derived date, which is correct for every account that has never renewed
+ * and merely conservative for one that has.
+ */
+async function renewedUntil(userId: string): Promise<string | null> {
+  try {
+    const snap = await adminDb().collection('users').doc(userId).get()
+    const value = snap.data()?.updatesUntil
+    return value instanceof Timestamp ? value.toDate().toISOString() : null
+  } catch (err) {
+    console.error('[billing/license] could not read updatesUntil:', err)
+    return null
+  }
+}
+
 async function handleGet() {
   const user = await getCurrentUser()
   if (!user) {
@@ -104,7 +128,10 @@ async function handleGet() {
   // a Studio seat both carry the commercial licence; the certificate names
   // whichever the account actually holds.
   const plan: PlanId = ent.hasTeam ? 'team' : ent.hasStudio ? 'studio' : 'pro'
-  const order = await grantingOrder(user.id, plan)
+  const [order, renewed] = await Promise.all([
+    grantingOrder(user.id, plan),
+    renewedUntil(user.id),
+  ])
 
   return NextResponse.json({
     ...base,
@@ -120,9 +147,13 @@ async function handleGet() {
      * window, and inventing one from "now" would print a date that moves
      * every time the page is loaded.
      */
-    updatesUntil: order
-      ? updatesUntilFor(order.createdAt, PLANS[plan].updateWindowMonths)
-      : null,
+    // A renewal wins over the derived date; see `renewedUntil`. Falls back
+    // to the original purchase plus the window, and to null when even that
+    // is unavailable — a window with no start is not a window, and
+    // inventing one from "now" would print a date that moved on every load.
+    updatesUntil:
+      renewed ??
+      (order ? updatesUntilFor(order.createdAt, PLANS[plan].updateWindowMonths) : null),
     seats: PLANS[plan].includedSeats,
     // Team is the only recurring licence. Studio and Pro are bought outright,
     // so there is nothing for the certificate to caveat.

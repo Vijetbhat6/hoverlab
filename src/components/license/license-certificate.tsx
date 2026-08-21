@@ -22,6 +22,8 @@ import * as React from 'react'
 import Link from 'next/link'
 import { BadgeCheck, Loader2, Printer } from 'lucide-react'
 
+import { useCheckout } from '@/hooks/use-checkout'
+import { PLANS, renewalFor, formatPrice, type PlanId } from '@/lib/billing/plans'
 import { useAuth } from '@/components/auth-provider'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
@@ -37,8 +39,46 @@ function formatDate(iso: string): string {
   })
 }
 
+/**
+ * Whether to offer a renewal on this certificate, and which one.
+ *
+ * A plain function, not a hook. It reads three fields and does one date
+ * comparison, so memoising it would cost more than it saves — and as a
+ * `useMemo` it sat below the component's early returns for the loading and
+ * signed-out states, which is a hooks-order bug waiting for the first
+ * customer whose licence took a moment to load.
+ *
+ * Offered only inside the last 60 days of the window, or after it has
+ * passed. Offering it on day one would be asking someone who has just paid
+ * to pay again, and a prompt that is permanently on screen is one people
+ * stop seeing long before it is relevant.
+ *
+ * Returns null for Team — a live subscription already includes updates, so
+ * there is nothing to renew — and null when the renewal product has not
+ * been provisioned, so an unconfigured deployment shows no button rather
+ * than a button that dead-ends at a 503.
+ */
+function renewalOffer(
+  license: HeldLicense,
+): { plan: PlanId; overdue: boolean } | null {
+  if (license.kind !== 'commercial' || license.recurring) return null
+  if (!license.updatesUntil) return null
+
+  const plan = renewalFor(license.plan)
+  if (!plan || !PLANS[plan].polarProductId) return null
+
+  const endsAt = new Date(license.updatesUntil).getTime()
+  if (Number.isNaN(endsAt)) return null
+
+  const DAYS_60 = 60 * 24 * 60 * 60 * 1000
+  if (endsAt - Date.now() > DAYS_60) return null
+
+  return { plan, overdue: endsAt < Date.now() }
+}
+
 export function LicenseCertificate({ className }: { className?: string }) {
   const { user, loading: authLoading } = useAuth()
+  const { startCheckout, pendingPlan } = useCheckout()
   const [license, setLicense] = React.useState<HeldLicense | null>(null)
   const [failed, setFailed] = React.useState(false)
 
@@ -98,6 +138,8 @@ export function LicenseCertificate({ className }: { className?: string }) {
 
   const terms = termsFor(license.kind)
   const commercial = license.kind === 'commercial'
+
+  const renewal = renewalOffer(license)
 
   return (
     <Card
@@ -205,6 +247,41 @@ export function LicenseCertificate({ className }: { className?: string }) {
             {formatDate(license.updatesUntil)} stays yours whether or not you
             renew. What a renewal buys is what gets added after that date.
           </p>
+        ) : null}
+
+        {/*
+          The renewal, offered only when it is nearly or actually due.
+
+          A renewal has no card on the pricing page and never will: nobody
+          shops for one, and putting it beside the licences would make the
+          buying decision harder to advertise a top-up. The one context
+          where the word means anything is here, on the certificate of the
+          specific person whose window is running out — so that is the only
+          place it appears.
+        */}
+        {renewal ? (
+          <div className="rounded-lg border border-primary/30 bg-primary/5 p-4 print:hidden">
+            <p className="text-sm font-medium">
+              {renewal.overdue
+                ? 'Your update window has ended.'
+                : 'Your update window ends soon.'}
+            </p>
+            <p className="mt-1 text-xs text-muted-foreground">
+              {renewal.overdue
+                ? 'Everything published before it stays yours. A renewal picks the catalog back up from today.'
+                : 'Renew any time before it ends and the new twelve months are added to what is left — renewing early costs you nothing.'}
+            </p>
+            <Button
+              size="sm"
+              className="mt-3"
+              disabled={pendingPlan === renewal.plan}
+              onClick={() => startCheckout(renewal.plan)}
+            >
+              {pendingPlan === renewal.plan
+                ? 'Starting…'
+                : `Renew for ${formatPrice(PLANS[renewal.plan].priceCents)}`}
+            </Button>
+          </div>
         ) : null}
 
         {license.recurring ? (

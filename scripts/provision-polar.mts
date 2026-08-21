@@ -101,6 +101,8 @@ const PRO_NAME = 'Hoverlab Pro'
 const PLUS_NAME = 'Hoverlab Pro+'
 const STUDIO_NAME = 'Hoverlab Studio'
 const TEAM_NAME = 'Hoverlab Team'
+const RENEWAL_NAME = 'Hoverlab Pro updates renewal'
+const RENEWAL_STUDIO_NAME = 'Hoverlab Studio updates renewal'
 const DISCOUNT_PRO_NAME = 'India / Pro'
 const DISCOUNT_PLUS_NAME = 'India / Pro+'
 const DISCOUNT_STUDIO_NAME = 'India / Studio'
@@ -189,8 +191,9 @@ async function main() {
   const proId = await ensureProduct(PRO_NAME, 'POLAR_PRODUCT_ID_PRO', {
     name: PRO_NAME,
     description:
-      'One-time commercial license for the full Hoverlab effect catalog, ' +
-      'every export format, and all future updates.',
+      'One-time commercial license for the full Hoverlab catalog, every ' +
+      'export format, and twelve months of catalog updates. The license ' +
+      'itself is perpetual — everything you have stays yours.',
     recurringInterval: null,
     prices: [
       { amountType: 'fixed', priceAmount: 7900, priceCurrency: 'usd' },
@@ -242,6 +245,40 @@ async function main() {
     prices: [
       { amountType: 'fixed', priceAmount: 29900, priceCurrency: 'usd' },
       { amountType: 'fixed', priceAmount: 2800000, priceCurrency: 'inr' },
+    ],
+  })
+
+  /*
+   * Renewals. Not licences — each buys another twelve months of catalog
+   * updates on a licence already held, priced at ~40% of the plan it
+   * renews. Two products rather than one because a Studio holder renewing
+   * at the Pro price would be a mispricing bug, not a discount.
+   *
+   * The checkout route refuses a renewal to anyone not holding the matching
+   * licence, so these being live cannot produce an orphaned purchase.
+   */
+  await ensureProduct(RENEWAL_NAME, 'POLAR_PRODUCT_ID_RENEWAL', {
+    name: RENEWAL_NAME,
+    description:
+      'Twelve more months of catalog updates on an existing Hoverlab Pro ' +
+      'license. Not a license on its own — everything you already have ' +
+      'stays yours whether or not you renew.',
+    recurringInterval: null,
+    prices: [
+      { amountType: 'fixed', priceAmount: 3200, priceCurrency: 'usd' },
+      { amountType: 'fixed', priceAmount: 300000, priceCurrency: 'inr' },
+    ],
+  })
+
+  await ensureProduct(RENEWAL_STUDIO_NAME, 'POLAR_PRODUCT_ID_RENEWAL_STUDIO', {
+    name: RENEWAL_STUDIO_NAME,
+    description:
+      'Twelve more months of catalog updates on an existing Hoverlab ' +
+      'Studio license, covering all ten seats.',
+    recurringInterval: null,
+    prices: [
+      { amountType: 'fixed', priceAmount: 12000, priceCurrency: 'usd' },
+      { amountType: 'fixed', priceAmount: 1120000, priceCurrency: 'inr' },
     ],
   })
 

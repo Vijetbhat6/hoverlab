@@ -4,12 +4,15 @@ import {
   PLANS,
   parsePlanId,
   isPurchasable,
+  isRenewal,
+  renewalFor,
   discountForRegion,
   presentmentCurrencyFor,
   type PresentmentCurrency,
 } from '@/lib/billing/plans'
 import { regionFromHeaders } from '@/lib/billing/region'
 import { getCurrentUser } from '@/lib/session'
+import { getEntitlements } from '@/lib/billing/entitlements'
 import { getCreditPack } from '@/lib/billing/credits'
 import { absoluteUrl } from '@/lib/site'
 
@@ -119,9 +122,39 @@ export async function POST(request: Request) {
   const planId = parsePlanId(body.plan)
   if (!planId || planId === 'free') {
     return NextResponse.json(
-      { error: 'plan must be "pro", "plus", "studio" or "team"' },
+      { error: 'plan must be "pro", "plus", "studio", "team" or a renewal' },
       { status: 400 },
     )
+  }
+
+  /*
+   * A renewal extends a licence you already hold, so holding one is a
+   * precondition rather than a nicety. Without this check somebody could
+   * buy "Pro updates renewal" for $32 having never bought Pro — which is
+   * not a licence at any price, and would land as a support ticket asking
+   * why the thing they paid for does nothing.
+   *
+   * Checked against the plan the renewal names, not merely against "has
+   * some licence": a Pro holder must not be able to buy the $32 renewal to
+   * extend a Studio, and a Studio holder buying the Pro renewal would be
+   * paying a tenth of the right price for ten seats.
+   */
+  if (isRenewal(planId)) {
+    const ent = await getEntitlements(user.id)
+    const held = ent.hasTeam ? 'team' : ent.hasStudio ? 'studio' : ent.hasPro ? 'pro' : 'free'
+    if (renewalFor(held) !== planId) {
+      return NextResponse.json(
+        {
+          error:
+            held === 'free'
+              ? 'A renewal extends a licence you already hold. Buy Pro or Studio first.'
+              : held === 'team'
+                ? 'Team includes updates for as long as the subscription is live — there is nothing to renew.'
+                : `That renewal is for a different plan than the one on this account.`,
+        },
+        { status: 409 },
+      )
+    }
   }
 
   const plan = PLANS[planId]

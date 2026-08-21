@@ -49,6 +49,17 @@
  *           Plus for 25 — and a team that priced our $12/seat/month against
  *           buying Pro n times did the arithmetic and bought Pro n times.
  *
+ *   Renewal — ONE-TIME, and not a licence at all. It buys another twelve
+ *           months of catalog updates on a licence already held. Two of
+ *           them, priced off the plan they renew (~40%), because a Studio
+ *           holder renewing at the Pro price would be a mispricing bug
+ *           rather than a discount.
+ *
+ *           These have no card on the pricing page and never will. Nobody
+ *           shops for a renewal; it is offered on /account to the specific
+ *           person whose window is running out, which is the only context
+ *           where the word means anything.
+ *
  *   Team  — RECURRING per-seat. Companies pay for seats and shared state
  *           (brand tokens, shared collections); individuals don't. This is
  *           where recurring revenue actually comes from. Studio does not
@@ -61,7 +72,14 @@
  * a number here never changes what a customer is billed.
  */
 
-export type PlanId = 'free' | 'pro' | 'plus' | 'studio' | 'team'
+export type PlanId =
+  | 'free'
+  | 'pro'
+  | 'plus'
+  | 'studio'
+  | 'team'
+  | 'renewal'
+  | 'renewal-studio'
 export type BillingInterval = 'one_time' | 'month'
 
 export interface Plan {
@@ -215,6 +233,57 @@ export const PLANS: Record<PlanId, Plan> = {
     updateWindowMonths: null,
     includedSeats: null,
   },
+  renewal: {
+    id: 'renewal',
+    name: 'Pro updates renewal',
+    // $32 — roughly 40% of Pro's $79, which is where this market puts a
+    // renewal. It has to be well under the licence price or nobody renews
+    // and everybody just re-buys at a discount sale; it has to be well
+    // above nothing or the update window is theatre.
+    priceCents: 3200,
+    /** ₹3,000 — 40% of Pro's ₹7,500, tracking the dollar ladder. */
+    priceInrPaise: 300000,
+    interval: 'one_time',
+    polarProductId: process.env.POLAR_PRODUCT_ID_RENEWAL ?? null,
+    perSeat: false,
+    // Buys another twelve months. The webhook extends from whichever is
+    // later — today, or the window still running — so renewing early
+    // never costs the customer the time they had left.
+    updateWindowMonths: 12,
+    // Renews a licence; grants no seats of its own.
+    includedSeats: null,
+  },
+  'renewal-studio': {
+    id: 'renewal-studio',
+    name: 'Studio updates renewal',
+    /** $120 — 40% of Studio's $299, same ratio as the Pro renewal. */
+    priceCents: 12000,
+    /** ₹11,200 — 40% of Studio's ₹28,000. */
+    priceInrPaise: 1120000,
+    interval: 'one_time',
+    polarProductId: process.env.POLAR_PRODUCT_ID_RENEWAL_STUDIO ?? null,
+    perSeat: false,
+    updateWindowMonths: 12,
+    includedSeats: null,
+  },
+}
+
+/**
+ * The renewal that extends a given licence, or null when the plan has no
+ * window to renew.
+ *
+ * Subscriptions return null: their updates run with the plan, so selling
+ * them a renewal would be selling something they already have.
+ */
+export function renewalFor(plan: PlanId): PlanId | null {
+  if (plan === 'pro') return 'renewal'
+  if (plan === 'studio') return 'renewal-studio'
+  return null
+}
+
+/** True when this plan is a renewal rather than a licence. */
+export function isRenewal(plan: PlanId): boolean {
+  return plan === 'renewal' || plan === 'renewal-studio'
 }
 
 /**
@@ -400,7 +469,9 @@ export function parsePlanId(value: unknown): PlanId | null {
     value === 'pro' ||
     value === 'plus' ||
     value === 'studio' ||
-    value === 'team'
+    value === 'team' ||
+    value === 'renewal' ||
+    value === 'renewal-studio'
     ? value
     : null
 }

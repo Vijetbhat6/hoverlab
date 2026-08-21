@@ -172,11 +172,17 @@ async function handleOrderPaid(data: PolarLike): Promise<void> {
   }
 
   if (plan === 'pro') {
-    // One-time license: no expiry, nothing to renew.
+    // One-time license. Perpetual, and never revoked by time — what the
+    // twelve-month window bounds is the entitlement to artifacts published
+    // after it, which `updatesUntil` records. See billing/plans.ts.
     await adminDb().collection('users').doc(userId).update({
       proLicense: true,
       proLicenseAt: Timestamp.now(),
     })
+  }
+
+  if (plan === 'renewal' || plan === 'renewal-studio') {
+    await extendUpdateWindow(userId, orderId)
   }
 
   if (plan === 'studio') {
@@ -382,6 +388,52 @@ async function handleSubscription(data: PolarLike, status: string): Promise<void
     teamIds: FieldValue.arrayUnion(teamRef.id),
   })
   await batch.commit()
+}
+
+/**
+ * Push a licence's update window twelve months further out.
+ *
+ * Extends from whichever is LATER — today, or the window still running —
+ * so renewing early never costs the customer the time they had left. The
+ * opposite (always twelve months from today) quietly punishes the people
+ * who renew before they are forced to, which is exactly the wrong
+ * incentive to build in.
+ *
+ * Stored on the profile rather than derived from the renewal order,
+ * because the derivation this replaces reads the ORIGINAL purchase and a
+ * renewal is a different document. `/api/billing/license` prefers this
+ * field when it is present and falls back to the derived date when it is
+ * not, so a licence that has never been renewed is unaffected.
+ *
+ * Idempotent via the order id: a redelivered webhook finds the ledger
+ * entry and returns, exactly like `addPurchasedCredits`. Without that, a
+ * retried delivery would hand out a free extra year.
+ */
+async function extendUpdateWindow(userId: string, orderId: string): Promise<void> {
+  const db = adminDb()
+  const userRef = db.collection('users').doc(userId)
+  const ledgerRef = userRef.collection('renewals').doc(orderId)
+
+  await db.runTransaction(async (tx) => {
+    if ((await tx.get(ledgerRef)).exists) return
+
+    const snap = await tx.get(userRef)
+    const current = snap.data()?.updatesUntil
+    const from =
+      current instanceof Timestamp && current.toDate().getTime() > Date.now()
+        ? current.toDate()
+        : new Date()
+
+    const next = new Date(from)
+    next.setMonth(next.getMonth() + 12)
+
+    tx.set(ledgerRef, {
+      polarOrderId: orderId,
+      extendedTo: Timestamp.fromDate(next),
+      createdAt: Timestamp.now(),
+    })
+    tx.set(userRef, { updatesUntil: Timestamp.fromDate(next) }, { merge: true })
+  })
 }
 
 export async function POST(request: Request) {
