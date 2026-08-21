@@ -108,6 +108,13 @@ export type AnalyticsEvent =
       props: { plan: string; interval: 'one_time' | 'month'; amount_cents: number }
     }
   | { name: 'paywall_hit'; props: { feature: string; plan_required: string } }
+  /*
+   * The design system export. Worth its own event rather than folding into
+   * a generic "export": it is the only Pro feature whose output is derived
+   * per-customer, so how often it is actually used is the clearest signal
+   * available on whether Pro is worth what it costs.
+   */
+  | { name: 'design_system_generated'; props: { name: string } }
 
 /** True once PostHog has been initialized with a real project key. */
 function enabled(): boolean {

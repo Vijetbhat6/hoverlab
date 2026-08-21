@@ -157,6 +157,10 @@ const TIERS: Tier[] = [
       // three of them, so "every" only means something next to a list.
       'Vue, Svelte, styled-components and Tailwind exports',
       'Save your brand colors to your account',
+      // The one Pro feature whose output does not exist until a customer
+      // asks for it. Named on the card because it is the strongest answer
+      // to "why pay for code I can copy".
+      'Export your brand as a design system — CSS, Tailwind, Figma',
       'Private collections, synced across machines',
       // The key is a feature, not plumbing: it is what makes the licence
       // work in CI and in an agent, which is where this audience lives.

@@ -44,6 +44,35 @@
 }
 
 :root {
+  /*
+   * The brand colour, as four numbers rather than three finished colours.
+   *
+   * `applyBrandColorToDocument` sets these on <html>, and --primary, --ring
+   * and --accent are derived from them below. Until this block existed the
+   * hook wrote all four properties and nothing read any of them, so picking
+   * a brand changed a value in the inspector and nothing on screen — which
+   * made "custom brand colours" a Pro feature that did not exist.
+   *
+   * The defaults reproduce the previous literals exactly:
+   *   light primary  oklch(0.55 0.2 160)
+   *   light accent   oklch(0.94 0.02 160)
+   *   dark  primary  oklch(0.7  0.18 160)
+   *   dark  accent   oklch(0.26 0.02 160)
+   * so this is a refactor at the default brand and a feature at any other.
+   */
+  --brand-hue: 160;
+  --brand-chroma: 0.2;
+  --brand-light-l: 0.55;
+  --brand-dark-l: 0.7;
+
+  /*
+   * Accent is the brand at a tenth of its chroma, not a separate colour.
+   * A brand system with an independently chosen accent needs two decisions
+   * from the user and gets contradictory answers; deriving it means one
+   * slider moves the whole surface coherently.
+   */
+  --brand-accent-chroma: calc(var(--brand-chroma) * 0.1);
+
   --radius: 0.75rem;
   --background: oklch(0.99 0.005 90);
   --foreground: oklch(0.15 0.01 250);
@@ -51,7 +80,7 @@
   --card-foreground: oklch(0.15 0.01 250);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.15 0.01 250);
-  --primary: oklch(0.55 0.2 160);
+  --primary: oklch(var(--brand-light-l) var(--brand-chroma) var(--brand-hue));
   --primary-foreground: oklch(0.99 0 0);
   --secondary: oklch(0.96 0.01 90);
   --secondary-foreground: oklch(0.2 0.01 250);
@@ -64,12 +93,12 @@
     site ships and was failing.
   */
   --muted-foreground: oklch(0.47 0.01 250);
-  --accent: oklch(0.94 0.02 160);
+  --accent: oklch(0.94 var(--brand-accent-chroma) var(--brand-hue));
   --accent-foreground: oklch(0.2 0.01 250);
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0.9 0.005 250);
   --input: oklch(0.9 0.005 250);
-  --ring: oklch(0.55 0.2 160);
+  --ring: oklch(var(--brand-light-l) var(--brand-chroma) var(--brand-hue));
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -92,7 +121,7 @@
   --card-foreground: oklch(0.97 0.005 90);
   --popover: oklch(0.17 0.012 250);
   --popover-foreground: oklch(0.97 0.005 90);
-  --primary: oklch(0.7 0.18 160);
+  --primary: oklch(var(--brand-dark-l) calc(var(--brand-chroma) * 0.9) var(--brand-hue));
   --primary-foreground: oklch(0.13 0.01 250);
   --secondary: oklch(0.22 0.012 250);
   --secondary-foreground: oklch(0.97 0.005 90);
@@ -106,12 +135,12 @@
     clearly secondary to --foreground at 0.97.
   */
   --muted-foreground: oklch(0.7 0.01 250);
-  --accent: oklch(0.26 0.02 160);
+  --accent: oklch(0.26 var(--brand-accent-chroma) var(--brand-hue));
   --accent-foreground: oklch(0.97 0.005 90);
   --destructive: oklch(0.704 0.191 22.216);
   --border: oklch(1 0 0 / 12%);
   --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.7 0.18 160);
+  --ring: oklch(var(--brand-dark-l) calc(var(--brand-chroma) * 0.9) var(--brand-hue));
   --chart-1: oklch(0.488 0.243 264.376);
   --chart-2: oklch(0.696 0.17 162.48);
   --chart-3: oklch(0.769 0.188 70.08);

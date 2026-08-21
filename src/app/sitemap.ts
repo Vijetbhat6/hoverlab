@@ -91,6 +91,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // is a query people type, and the answer being a public page rather
     // than a bullet on a pricing card is most of what Pro sells.
     { url: absoluteUrl('/license'), changeFrequency: 'monthly' as const, priority: 0.7 },
+    // The design system export. Indexed for the same reason /license is:
+    // "design tokens from a brand colour" is a query, the page is usable
+    // before anyone pays, and the paywall is on the files rather than on
+    // the palette.
+    { url: absoluteUrl('/design-system'), changeFrequency: 'monthly' as const, priority: 0.8 },
   ].map((entry) => ({ ...entry, lastModified: now }))
 
   // Category landing pages — head terms ("css loaders", "css card hover").
