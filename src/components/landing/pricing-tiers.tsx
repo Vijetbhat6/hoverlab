@@ -196,7 +196,12 @@ const TIERS: Tier[] = [
     features: [
       'Everything in Pro, for every seat',
       'Priority email support',
-      { label: 'Shared brand color library', soon: true },
+      // No longer `soon`. teams/{id}/brandPresets, /api/team/brand-presets
+      // and the shared strip in the brand picker are real; requireTeam
+      // gates it on a live subscription, and Studio deliberately does not
+      // qualify. This was the one of Team's four differentiators worth a
+      // recurring charge, so it is the one that got built.
+      'Shared brand library — one palette, everyone on the workspace',
       { label: 'Shared collections and bundles', soon: true },
       { label: 'Workspace-wide theming', soon: true },
       { label: 'Seat management', soon: true },
@@ -565,8 +570,9 @@ export function PricingTiers({ className }: { className?: string } = {}) {
         <p className="mt-2 text-xs text-muted-foreground">
           Lines marked <span className="font-semibold">Coming</span> are on the
           roadmap and not available yet. A Team seat today grants the full Pro
-          feature set for every member, plus priority support; the shared
-          workspace features ship later this year.
+          feature set for every member, priority support, and the shared brand
+          library; shared collections, workspace theming and seat management
+          ship later this year.
         </p>
         {/*
           Pro+ deliberately has no column. It grants no catalog rights, so a

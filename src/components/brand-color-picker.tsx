@@ -32,7 +32,8 @@ import { Slider } from '@/components/ui/slider'
 import { cn } from '@/lib/utils'
 import { useBrandColor } from '@/hooks/use-brand-color'
 import { useBrandLibrary } from '@/hooks/use-brand-library'
-import { BRAND_LIBRARY_LIMITS, savedBrandSwatch } from '@/lib/brand-library'
+import { useTeamBrandLibrary } from '@/hooks/use-team-brand-library'
+import { BRAND_LIBRARY_LIMITS, savedBrandSwatch, type SavedBrand } from '@/lib/brand-library'
 import { track } from '@/lib/analytics'
 import {
   BRAND_PRESETS,
@@ -52,6 +53,7 @@ const BrandColorPickerInner = React.forwardRef<
 >(function BrandColorPicker({ className }, ref) {
   const { color, set, reset, isCustomized } = useBrandColor()
   const library = useBrandLibrary()
+  const teamLibrary = useTeamBrandLibrary()
   const [open, setOpen] = React.useState(false)
 
   React.useImperativeHandle(ref, () => ({
@@ -176,6 +178,24 @@ const BrandColorPickerInner = React.forwardRef<
           onApply={(next) => commitDraft(next)}
         />
 
+        {/*
+          The shared strip, under the personal one.
+
+          Rendered only for a live Team subscription rather than shown
+          locked to everyone. The personal strip earns its paywall by being
+          a thing any visitor might want; a shared workspace palette is
+          meaningless to someone with no workspace, and a second locked
+          block in the same popover would read as the product nagging.
+        */}
+        {teamLibrary.locked ? null : (
+          <SavedBrands
+            library={teamLibrary}
+            current={color}
+            onApply={(next) => commitDraft(next)}
+            variant="team"
+          />
+        )}
+
         {/* Custom sliders */}
         <div className="mt-4 space-y-3 border-t pt-3">
           <div className="text-xs font-medium text-muted-foreground">Custom</div>
@@ -257,6 +277,29 @@ const BrandColorPickerInner = React.forwardRef<
 
 export const BrandColorPicker = React.memo(BrandColorPickerInner)
 
+/**
+ * What the strip below needs from a library, and nothing more.
+ *
+ * Declared structurally so the personal and the shared library can both be
+ * passed to one component without either hook importing the other. Adding
+ * a member here is a decision to make both libraries provide it.
+ */
+interface BrandLibraryLike {
+  brands: Array<SavedBrand & { createdBy?: string | null }>
+  loading: boolean
+  locked: boolean
+  signedOut: boolean
+  canSave: boolean
+  /**
+   * Returns the saved preset, or null when the name was empty or the
+   * library is full. Narrowed to the one field the strip renders rather
+   * than to SavedBrand, so a library that carries extra fields (the shared
+   * one carries `createdBy`) still satisfies this.
+   */
+  save: (name: string, color: BrandColor) => { name: string } | null
+  remove: (id: string) => void
+}
+
 /* ============================================================
  *  Saved brands — the Pro strip
  * ========================================================== */
@@ -273,11 +316,21 @@ function SavedBrands({
   library,
   current,
   onApply,
+  variant = 'personal',
 }: {
-  library: ReturnType<typeof useBrandLibrary>
+  /*
+   * Structurally typed rather than tied to one hook. The personal and the
+   * team library expose the same six members on purpose, and this strip is
+   * the reason — the UI for "a list of named colours you can apply, save to
+   * and delete from" should not exist twice.
+   */
+  library: BrandLibraryLike
   current: BrandColor
   onApply: (color: BrandColor) => void
+  /** Which library this is. Changes only the copy and the paywall target. */
+  variant?: 'personal' | 'team'
 }) {
+  const team = variant === 'team'
   const [naming, setNaming] = React.useState(false)
   const [draftName, setDraftName] = React.useState('')
 
@@ -290,8 +343,13 @@ function SavedBrands({
    */
   const gated = library.signedOut || library.locked
   React.useEffect(() => {
-    if (gated) track('paywall_hit', { feature: 'brand_library', plan_required: 'pro' })
-  }, [gated])
+    if (gated) {
+      track('paywall_hit', {
+        feature: team ? 'team_brand_library' : 'brand_library',
+        plan_required: team ? 'team' : 'pro',
+      })
+    }
+  }, [gated, team])
 
   if (gated) {
     return (
@@ -305,6 +363,14 @@ function SavedBrands({
                   Sign in
                 </Link>{' '}
                 to name a colour and keep it across machines.
+              </>
+            ) : team ? (
+              <>
+                Agree a palette once and have it appear for everyone on the{' '}
+                <Link href="/#pricing" className="font-medium text-primary hover:underline">
+                  Team plan
+                </Link>
+                . Your own saved colours stay yours either way.
               </>
             ) : (
               <>
@@ -341,7 +407,9 @@ function SavedBrands({
   return (
     <div className="mt-4 space-y-2 border-t pt-3">
       <div className="flex items-center justify-between">
-        <span className="text-xs font-medium text-muted-foreground">Your brands</span>
+        <span className="text-xs font-medium text-muted-foreground">
+          {team ? 'Shared with your team' : 'Your brands'}
+        </span>
         <button
           type="button"
           onClick={() => setNaming((v) => !v)}
@@ -411,7 +479,9 @@ function SavedBrands({
         </ul>
       ) : !naming ? (
         <p className="text-[11px] text-muted-foreground">
-          Nothing saved yet. Tune the sliders below, then name the result.
+          {team
+            ? 'Nothing shared yet. Anything saved here appears for everyone on the workspace.'
+            : 'Nothing saved yet. Tune the sliders below, then name the result.'}
         </p>
       ) : null}
     </div>
