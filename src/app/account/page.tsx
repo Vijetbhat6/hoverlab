@@ -20,6 +20,7 @@ import { SiteHeader } from '@/components/site-header'
 import { useFavorites } from '@/hooks/use-favorites'
 import { useBundle } from '@/hooks/use-bundle'
 import { UpgradePanel } from '@/components/billing/upgrade-panel'
+import { LicenseCertificate } from '@/components/license/license-certificate'
 import { WorkspaceCard } from '@/components/billing/workspace-card'
 import { CreditsCard } from '@/components/billing/credits-card'
 import { Button } from '@/components/ui/button'
@@ -174,8 +175,18 @@ export default function AccountPage() {
           <UpgradePanel />
         </React.Suspense>
 
-        {/* Under the licence tiers, because Pro+ is an add-on to whichever
-            one you hold rather than a rung of its own. */}
+        {/*
+          The certificate, directly under the tiers.
+
+          A customer who has just bought Pro lands here from Polar's redirect,
+          and the first useful thing to show them is the thing they bought —
+          not a credit balance. It is also what they come back for months
+          later, when a client's legal team asks.
+        */}
+        <LicenseCertificate className="mt-6" />
+
+        {/* Under the licence, because Pro+ is an add-on to whichever tier you
+            hold rather than a rung of its own. */}
         <CreditsCard />
 
         {/*

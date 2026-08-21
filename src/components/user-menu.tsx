@@ -26,7 +26,14 @@
 import * as React from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { LogOut, User as UserIcon, Loader2, Sparkles } from 'lucide-react'
+import {
+  LogOut,
+  User as UserIcon,
+  Loader2,
+  Sparkles,
+  FolderOpen,
+  ScrollText,
+} from 'lucide-react'
 import { toast } from 'sonner'
 
 import { useAuth } from '@/components/auth-provider'
@@ -120,6 +127,26 @@ export function UserMenu() {
           <Link href="/account" className="cursor-pointer">
             <UserIcon className="mr-2 h-4 w-4" />
             Account
+          </Link>
+        </DropdownMenuItem>
+        {/*
+          Shown to everyone with an account, not only to Pro.
+
+          The page behind it handles a free account with an upgrade prompt,
+          and a Pro feature that is invisible until you own it is a Pro
+          feature nobody buys — this menu is the only navigation collections
+          have.
+        */}
+        <DropdownMenuItem asChild>
+          <Link href="/collections" className="cursor-pointer">
+            <FolderOpen className="mr-2 h-4 w-4" />
+            Collections
+          </Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem asChild>
+          <Link href="/license" className="cursor-pointer">
+            <ScrollText className="mr-2 h-4 w-4" />
+            Licence
           </Link>
         </DropdownMenuItem>
         {entitlements && !entitlements.canUseProFeatures ? (

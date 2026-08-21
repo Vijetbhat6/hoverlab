@@ -110,6 +110,7 @@ const TIERS: Tier[] = [
       `${BLOCK_COUNT} blocks, ${PAGE_COUNT} pages, ${TEMPLATE_COUNT} templates — full source`,
       'CLI and public API — npx hoverlab add <id>',
       'Live customization sliders',
+      'HTML, CSS and React exports',
       'Save favorites (sync across devices)',
       'Bundle up to 10 effects',
       // The daily cap is named on the card rather than discovered at the
@@ -135,13 +136,20 @@ const TIERS: Tier[] = [
       // Scoped to the catalog, not to effects: the licence has always covered
       // whatever you ship, and three of the four rungs did not exist when
       // this line was written.
-      'Commercial use — every effect, block, page and template',
+      'Commercial licence — every effect, block, page and template',
       'Client work, paid products, no attribution',
+      // The certificate, named on the card. The licence was always the
+      // thing being sold and the buyer received nothing they could show
+      // for it, which is a strange way to sell the one part of this that
+      // copying the source does not get you. See /license.
+      'A dated licence certificate to forward to whoever asks',
       'Unlimited bundle size',
       'Unlimited exports — no daily cap',
-      'Every export format (Vue, Svelte, Tailwind)',
-      'Custom brand color presets',
-      'Private collections',
+      // Named rather than summarised as "every format": the free tier has
+      // three of them, so "every" only means something next to a list.
+      'Vue, Svelte, styled-components and Tailwind exports',
+      'Save your brand colors to your account',
+      'Private collections, synced across machines',
       'All future updates included',
     ],
   },
@@ -562,6 +570,23 @@ export function PricingTiers({ className }: { className?: string } = {}) {
           </Link>
           ; browsing, copying, the CLI and the API are free and unmetered.
           Everyone gets five free generations a day without it.
+        </p>
+
+        {/*
+          The licence, linked before the buy button rather than after it.
+
+          It is the whole answer to the obvious objection — that the code is
+          free to copy, so why pay — and until it had a page, it was a bullet
+          point on a card. Nobody's legal team approves a bullet point.
+        */}
+        <p className="mt-4 text-sm text-muted-foreground">
+          Everything here is free to read, copy and modify under the{' '}
+          <Link href="/license" className="font-medium text-primary hover:underline">
+            free licence
+          </Link>
+          . What Pro, Studio and Team add is the commercial one — permission
+          to ship the result in work you are paid for, with a dated
+          certificate you can forward. Both are written out in full.
         </p>
 
         {/* The one thing a buyer could reasonably get wrong about the two

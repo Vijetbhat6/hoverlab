@@ -2239,3 +2239,36 @@
 .fx-newsletter-input:focus {
   box-shadow: 0 0 0 3px hsl(var(--primary) / 0.2);
 }
+
+/* ---------- Printing the licence certificate ----------
+ *
+ * The certificate is a card in the middle of /account or /license, and the
+ * browser's own print would hand the customer a screenshot of the whole
+ * page — header, upgrade tiers, credit balance and all — as their proof of
+ * licence. `visibility` rather than `display` is what makes this work: it
+ * hides the surrounding boxes while leaving them in flow, so the card does
+ * not have to be re-anchored inside a layout that no longer exists.
+ *
+ * Marked with `data-print-root` rather than a class so it cannot be swept
+ * up by a Tailwind purge or mistaken for a style hook.
+ */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  [data-print-root],
+  [data-print-root] * {
+    visibility: visible;
+  }
+
+  [data-print-root] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    /* Backgrounds and blurs cost ink and read as artifacts on paper. */
+    box-shadow: none;
+    backdrop-filter: none;
+  }
+}

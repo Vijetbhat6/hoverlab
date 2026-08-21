@@ -87,6 +87,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly' as const,
       priority: 0.8,
     })),
+    // The licence. Indexed deliberately: "can I use these in client work"
+    // is a query people type, and the answer being a public page rather
+    // than a bullet on a pricing card is most of what Pro sells.
+    { url: absoluteUrl('/license'), changeFrequency: 'monthly' as const, priority: 0.7 },
   ].map((entry) => ({ ...entry, lastModified: now }))
 
   // Category landing pages — head terms ("css loaders", "css card hover").

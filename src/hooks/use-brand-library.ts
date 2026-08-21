@@ -158,6 +158,26 @@ export function useBrandLibrary(): UseBrandLibrary {
     void load(userId)
   }, [userId, authLoading])
 
+  /*
+   * Re-read after an upgrade.
+   *
+   * The read is cached on `loadedFor`, so an account that was refused with a
+   * 402 stays refused for the life of the tab. That is exactly the tab
+   * someone comes back to from Polar's redirect having just bought Pro — the
+   * checkout flow refreshes entitlements, and without this the feature they
+   * paid for a moment ago still shows them a paywall until a hard reload.
+   *
+   * Only in the locked -> unlocked direction. A lapsed licence should not
+   * yank a half-finished edit out from under someone; the next push fails,
+   * and the next load settles it.
+   */
+  const proNow = entitlements?.canUseProFeatures ?? false
+  React.useEffect(() => {
+    if (!userId || !proNow || !locked) return
+    reset()
+    void load(userId)
+  }, [userId, proNow])
+
   const isLocked = loadedFor
     ? locked
     : entitlements
