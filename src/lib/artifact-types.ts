@@ -46,27 +46,36 @@ export const LEVEL_LABEL: Record<ArtifactLevel, { one: string; many: string }> =
 }
 
 /**
- * Which plan an artifact needs. Absent means `'free'` — and today that is
- * every artifact in the catalog.
+ * Which plan an artifact needs. Absent means `'free'`.
  *
- * This field is part of the published `/api/v1` response shape, so it stays.
- * What it is *not* is a gate, and the distinction is worth writing down
- * because a `tier` field reads like one:
+ * This IS a gate now, and it is enforced in exactly one place in the
+ * catalog: six of the seven templates. Every effect, every block, every
+ * page and `marketing-site` are free at every surface — browse, copy,
+ * `/api/v1`, `hoverlab add` — and that is not expected to change, because
+ * they are the funnel.
  *
- * Pro in this product is sold on features and on the licence to ship, not on
- * catalog access. See `billing/plans.ts`, and `billing/entitlements.ts` where
- * `canUseProFeatures` gates bundle size, export formats, brand presets and
- * private collections. It does NOT gate the CLI or the MCP server: `/api/v1`
- * takes no credentials at all, so there is no CLI token to withhold. There is
- * no per-artifact check anywhere, and nothing sets this to `'pro'`.
+ * This comment used to say the opposite, and the reason it gave was
+ * correct: `/api/v1` took no credentials and `/api/templates/{id}/download`
+ * was `force-static`, so a website-side check would be walked around by the
+ * CLI and by the archive URL. "Selling individual artifacts means
+ * authenticating the API first" was the conclusion, and it is what
+ * `billing/api-key.ts` now does. Both routes resolve a licence, and the
+ * download route is no longer static.
  *
- * The card and detail-page badges that keyed off this were removed rather
- * than left rendering a promise nothing keeps. Making per-artifact gating
- * real is a bigger job than wiring the badge back up: `/api/v1` is
- * deliberately public and unauthenticated (see `api/public.ts`), and
- * `/api/templates/{id}/download` is `force-static`, so a website-side check
- * would be walked around by `hoverlab add <id>` and by the zip URL itself.
- * Selling individual artifacts means authenticating the API first.
+ * Where the check lives:
+ *   lib/api/artifacts.ts                 withholds file bodies, keeps metadata
+ *   api/v1/templates/{id}                resolves a key or a session
+ *   api/v1/artifacts/{id}                same, since it can return a template
+ *   api/templates/{id}/download          402 without a licence
+ *
+ * Note the shape of the gate: an unlicensed caller still gets the name,
+ * category, description, dependency list, route table and file COUNT. What
+ * Pro buys is the source, not the knowledge that it exists — a template
+ * nobody can find is a template nobody buys.
+ *
+ * Everything Pro sold before this is unchanged: `canUseProFeatures` still
+ * gates bundle size, export formats, saved brand presets and private
+ * collections, and the commercial licence is still the substance of it.
  */
 export type ArtifactTier = 'free' | 'pro'
 

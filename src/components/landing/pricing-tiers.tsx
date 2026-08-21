@@ -107,7 +107,12 @@ const TIERS: Tier[] = [
       // They shipped without ever reaching this list, so a visitor comparing
       // plans saw a catalog of loose CSS snippets and none of the blocks,
       // pages or whole starter projects sitting above them.
-      `${BLOCK_COUNT} blocks, ${PAGE_COUNT} pages, ${TEMPLATE_COUNT} templates — full source`,
+      // Split, now that the top rung is not all free. Naming the free
+      // template rather than saying "1 template" matters: the pitch is that
+      // you get a whole runnable project to judge the others by, and a bare
+      // count does not say that.
+      `${BLOCK_COUNT} blocks and ${PAGE_COUNT} pages — full source`,
+      'One complete template, free — the Marketing Site project',
       'CLI and public API — npx hoverlab add <id>',
       'Live customization sliders',
       'HTML, CSS and React exports',
@@ -136,6 +141,9 @@ const TIERS: Tier[] = [
       // Scoped to the catalog, not to effects: the licence has always covered
       // whatever you ship, and three of the four rungs did not exist when
       // this line was written.
+      // First line on the card, because it is the one thing on it that a
+      // free user does not already have. The licence follows it.
+      `All ${TEMPLATE_COUNT} templates — complete, runnable projects`,
       'Commercial licence — every effect, block, page and template',
       'Client work, paid products, no attribution',
       // The certificate, named on the card. The licence was always the
@@ -150,6 +158,9 @@ const TIERS: Tier[] = [
       'Vue, Svelte, styled-components and Tailwind exports',
       'Save your brand colors to your account',
       'Private collections, synced across machines',
+      // The key is a feature, not plumbing: it is what makes the licence
+      // work in CI and in an agent, which is where this audience lives.
+      'A licence key for the CLI, MCP and the API',
       'All future updates included',
     ],
   },

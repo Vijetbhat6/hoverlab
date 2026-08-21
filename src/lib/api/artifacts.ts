@@ -63,6 +63,29 @@ export interface ArtifactPayload {
   notes: string[]
   /** Ids pulled in by `deep`, empty otherwise. */
   included: string[]
+  /**
+   * Present, and true, when the caller is not licensed for this artifact.
+   *
+   * The response still describes the artifact in full — name, category,
+   * dependencies, route table, file COUNT — and carries no file bodies.
+   * That split is the product: what a template is stays public so it can
+   * be searched, linked and evaluated; what a template contains is what
+   * Pro buys.
+   *
+   * Absent rather than `false` on a free artifact, so a client can treat
+   * the key's presence as the signal and every existing consumer of a free
+   * payload sees a byte-identical response.
+   */
+  locked?: true
+  /** How to unlock it. Present only alongside `locked`. */
+  license?: {
+    tier: 'pro'
+    message: string
+    /** Where a human buys it. */
+    url: string
+    /** How a machine authenticates once they have. */
+    hint: string
+  }
 }
 
 /** The shape every file-tier catalog record shares. */
@@ -118,7 +141,7 @@ function notesFor(artifact: FileArtifact): string[] {
 export function buildArtifactPayload(
   artifact: FileArtifact,
   siteOrigin: string,
-  options: { deep?: boolean } = {},
+  options: { deep?: boolean; licensed?: boolean } = {},
 ): ArtifactPayload {
   // `toDiskPath` also rejects anything that could escape the destination
   // directory. Nothing in the catalog does, but this payload's whole
@@ -160,6 +183,18 @@ export function buildArtifactPayload(
 
   const allDeps = [...deps]
 
+  /*
+   * The licence check, applied after the file list is built rather than
+   * before.
+   *
+   * `fileCount` has to stay truthful — "18 files" is part of deciding
+   * whether a template is worth buying — so the tree is assembled and then
+   * the bodies are dropped. Building a locked payload down a separate path
+   * would eventually produce a locked response that disagreed with the
+   * free one about what the artifact is.
+   */
+  const locked = artifact.tier === 'pro' && options.licensed !== true
+
   return {
     version: API_VERSION,
     level: artifact.level,
@@ -170,10 +205,21 @@ export function buildArtifactPayload(
       fileCount: files.length,
       ...(artifact.routes ? { routes: artifact.routes } : {}),
     },
-    files,
+    files: locked ? [] : files,
     deps: allDeps,
     notes: notesFor({ ...artifact, deps: allDeps }),
-    included,
+    included: locked ? [] : included,
+    ...(locked
+      ? {
+          locked: true as const,
+          license: {
+            tier: 'pro' as const,
+            message: `"${artifact.name}" is part of Pro. Its description, dependencies and file list are public; its source needs a licence.`,
+            url: `${siteOrigin}/#pricing`,
+            hint: 'Pass a licence key as `Authorization: Bearer hl_live_…`, or run `npx hoverlab login`. Keys are issued on /account.',
+          },
+        }
+      : {}),
   }
 }
 
@@ -190,8 +236,14 @@ export function artifactDetailResponse(options: {
   level: ArtifactLevel
   siteOrigin: string
   deep?: boolean
+  /**
+   * Whether the caller holds a commercial licence. Defaults to false, so a
+   * route that forgets to resolve one serves the locked payload rather
+   * than the source — the safe direction for a mistake to fail in.
+   */
+  licensed?: boolean
 }): NextResponse {
-  const { id, artifact, level, siteOrigin, deep } = options
+  const { id, artifact, level, siteOrigin, deep, licensed } = options
 
   if (!artifact) {
     return apiError(`No ${level} with id "${id}"`, 404, {
@@ -203,8 +255,17 @@ export function artifactDetailResponse(options: {
     })
   }
 
-  return apiJson(buildArtifactPayload(artifact, siteOrigin, { deep }), {
-    cache: ARTIFACT_CACHE,
+  const payload = buildArtifactPayload(artifact, siteOrigin, { deep, licensed })
+
+  return apiJson(payload, {
+    /*
+     * A licensed response is per-caller and must never reach a shared
+     * cache: one Pro customer's request would otherwise populate the CDN
+     * with the sources and serve them to everybody behind it. The locked
+     * payload is identical for every anonymous caller, so it keeps the
+     * ordinary cache and the free tiers are untouched.
+     */
+    cache: artifact.tier === 'pro' ? 'private, no-store' : ARTIFACT_CACHE,
   })
 }
 

@@ -15,9 +15,12 @@ import {
   commandDna,
   commandHelp,
   commandInit,
+  commandLogin,
+  commandLogout,
   commandSearch,
   commandShow,
   commandSkill,
+  commandWhoami,
 } from '../src/commands.mjs'
 import { FRAMEWORKS } from '../src/api.mjs'
 
@@ -155,6 +158,18 @@ async function main() {
 
     case 'dna':
       await commandDna(rest, flags)
+      return
+
+    case 'login':
+      await commandLogin(rest, flags)
+      return
+
+    case 'logout':
+      await commandLogout(rest, flags)
+      return
+
+    case 'whoami':
+      await commandWhoami(rest, flags)
       return
 
     case 'mcp': {

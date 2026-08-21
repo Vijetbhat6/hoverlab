@@ -233,6 +233,7 @@ export default async function TemplateDetailPage({ params }: PageProps) {
             <TemplateDownloadButton
               templateId={template.id}
               fileCount={template.files.length}
+              tier={template.tier ?? 'free'}
             />
 
             <div className="mt-5 overflow-hidden rounded-xl bg-zinc-950 p-4">

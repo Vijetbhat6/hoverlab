@@ -28,6 +28,15 @@ import {
 import { detectFramework } from './detect.mjs'
 import { addArtifact } from './write.mjs'
 import { initTemplate } from './scaffold.mjs'
+import {
+  CONFIG_FILE,
+  clearKey,
+  keySource,
+  looksLikeKey,
+  maskKey,
+  resolveKey,
+  saveKey,
+} from './auth.mjs'
 
 /* ------------------------------------------------------------------ *
  *  Output helpers
@@ -133,7 +142,11 @@ export async function commandAdd(ids, flags) {
       for (const note of result.notes) out(`  ${yellow('!')} ${dim(note)}`)
     } catch (error) {
       failures++
-      out(`${yellow('✗')} ${id}: ${error.message}`)
+      if (error?.name === 'LicenseError') {
+        printLicenseNotice(error)
+      } else {
+        out(`${yellow('✗')} ${id}: ${error.message}`)
+      }
     }
   }
 
@@ -173,12 +186,25 @@ export async function commandInit(args, flags) {
 
   // `hoverlab init storefront ./shop` reads better than forcing --dir for
   // the one argument this command almost always takes.
-  const result = await initTemplate({
-    id,
-    directory: flags.dir ?? positionalDir,
-    force: flags.force === true,
-    dryRun: flags['dry-run'] === true,
-  })
+  let result
+  try {
+    result = await initTemplate({
+      id,
+      directory: flags.dir ?? positionalDir,
+      force: flags.force === true,
+      dryRun: flags['dry-run'] === true,
+    })
+  } catch (error) {
+    if (error?.name !== 'LicenseError') throw error
+    // Handled rather than rethrown so the offer prints as output, not as a
+    // stderr line the shell colours red. `quiet` keeps the top-level
+    // handler from printing the message a second time, while still exiting
+    // non-zero — a scripted `hoverlab init` must not look like it worked.
+    printLicenseNotice(error)
+    const err = new Error(error.message)
+    err.quiet = true
+    throw err
+  }
 
   if (flags.json) {
     out(JSON.stringify(result, null, 2))
@@ -317,6 +343,21 @@ export async function commandSearch(terms, flags) {
 
 const EVERY_WORD_HINT =
   'Every word has to match, so try fewer or broader terms — "teal glow" rather than "subtle teal glowing button".'
+
+/**
+ * Print a licence refusal as an offer rather than as an error.
+ *
+ * The person reading this asked for something specific and got told no,
+ * which is the highest-intent moment the CLI has. It should end with the
+ * two things they need — where to buy it, and what to run once they have —
+ * and not with a stack trace.
+ */
+function printLicenseNotice(error) {
+  out(`${yellow('✗')} ${error.message}`)
+  if (error.url) out(`  ${dim(error.url)}`)
+  out(`  ${dim('Already bought it?')} ${cyan('npx hoverlab login <key>')}`)
+  out(`  ${dim('Free to try:')} ${cyan('npx hoverlab init marketing-site')}`)
+}
 
 function installHint(level, id) {
   return level === 'template'
@@ -494,6 +535,78 @@ export async function commandDna(args, flags) {
 }
 
 /* ------------------------------------------------------------------ *
+ *  login / logout / whoami
+ * ------------------------------------------------------------------ */
+
+/**
+ * Store a licence key for this machine.
+ *
+ * Takes the key as an argument rather than prompting for it. A prompt
+ * would have to read from a TTY, which rules out the two places this is
+ * most useful — a CI step and a copy-pasted setup line — and the key is
+ * not a password: it is already on the customer's clipboard from
+ * /account.
+ *
+ * Deliberately does NOT verify the key against the API. A network check
+ * here would turn `login` into a command that fails while offline, and the
+ * first real request reports an invalid key perfectly well. What it does
+ * check is the shape, because a pasted email address or a truncated key is
+ * worth catching before it is written to a file the user then forgets
+ * about.
+ */
+export async function commandLogin(args) {
+  const key = args[0] ?? process.env.HOVERLAB_KEY
+
+  if (!key) {
+    out(`${bold('hoverlab login')} — save a licence key for this machine`)
+    out()
+    out('  npx hoverlab login hl_live_xxxxxxxx')
+    out()
+    out(dim('Get one at https://hoverlab.dev/account. Only Pro templates need it —'))
+    out(dim('every effect, block and page works without a key.'))
+    return
+  }
+
+  if (!looksLikeKey(key)) {
+    throw new Error(
+      'That does not look like a Hoverlab key. They start with `hl_live_` and are issued at https://hoverlab.dev/account.',
+    )
+  }
+
+  const file = await saveKey(key)
+  out(`${green('✓')} Saved ${cyan(maskKey(key))}`)
+  out(`  ${dim(displayPath(file))}`)
+  out()
+  out(dim('HOVERLAB_KEY in your environment still wins over this file.'))
+}
+
+export async function commandLogout() {
+  const cleared = await clearKey()
+  out(
+    cleared
+      ? `${green('✓')} Key removed from ${dim(displayPath(CONFIG_FILE))}`
+      : `${dim('No stored key to remove.')}`,
+  )
+  if (process.env.HOVERLAB_KEY) {
+    // Removing the file while the environment still exports a key would
+    // otherwise look like the logout silently failed.
+    out(`  ${yellow('!')} ${dim('HOVERLAB_KEY is still set in this shell — unset it too.')}`)
+  }
+}
+
+export async function commandWhoami() {
+  const key = await resolveKey()
+  if (!key) {
+    out(`${dim('No licence key. Everything free still works —')} ${cyan('hoverlab add btn-gradient')}`)
+    out(`${dim('Pro templates need one:')} ${cyan('hoverlab login <key>')}`)
+    return
+  }
+  const source = await keySource()
+  out(`${green('✓')} ${cyan(maskKey(key))}`)
+  out(`  ${dim(`from ${source === 'HOVERLAB_KEY' ? 'HOVERLAB_KEY' : displayPath(source)}`)}`)
+}
+
+/* ------------------------------------------------------------------ *
  *  help
  * ------------------------------------------------------------------ */
 
@@ -520,6 +633,9 @@ ${bold('Commands')}
                        shape, motion and rules, ready to paste into an AI
                        tool. With no id, the whole system.
   mcp                  Run the MCP server over stdio (for editor agents)
+  login <key>          Save a licence key for this machine
+  logout               Forget the stored key
+  whoami               Show which key is in play, and where it came from
   help                 Show this message
 
 ${bold('Options')}
@@ -550,6 +666,12 @@ ${bold('Examples')}
   npx hoverlab add pricing-tiers faq-accordion
   npx hoverlab add checkout-page          ${dim('# page + every block it uses')}
   npx hoverlab init storefront ./shop
+
+${bold('Licences')}
+  Everything here is free to install: every effect, every block, every page,
+  and the ${cyan('marketing-site')} template. The other templates are part of Pro —
+  ${dim('hoverlab init')} will say so and link the purchase. Once bought, run
+  ${cyan('hoverlab login <key>')} once, or export ${dim('HOVERLAB_KEY')} in CI.
 
 ${bold('Where files land')}
   Effects go into a hoverlab/ folder inside your components or styles

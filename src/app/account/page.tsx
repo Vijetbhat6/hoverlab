@@ -21,6 +21,7 @@ import { useFavorites } from '@/hooks/use-favorites'
 import { useBundle } from '@/hooks/use-bundle'
 import { UpgradePanel } from '@/components/billing/upgrade-panel'
 import { LicenseCertificate } from '@/components/license/license-certificate'
+import { LicenseKeyCard } from '@/components/billing/license-key-card'
 import { WorkspaceCard } from '@/components/billing/workspace-card'
 import { CreditsCard } from '@/components/billing/credits-card'
 import { Button } from '@/components/ui/button'
@@ -184,6 +185,12 @@ export default function AccountPage() {
           later, when a client's legal team asks.
         */}
         <LicenseCertificate className="mt-6" />
+
+        {/* Directly under the certificate, because they are the same fact in
+            two forms: the certificate is the licence a person reads, the key
+            is the licence a machine reads. Renders nothing for a free
+            account — see the component. */}
+        <LicenseKeyCard className="mt-6" />
 
         {/* Under the licence, because Pro+ is an add-on to whichever tier you
             hold rather than a rung of its own. */}

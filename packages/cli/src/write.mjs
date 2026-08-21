@@ -21,7 +21,7 @@ import { mkdir, writeFile, access } from 'node:fs/promises'
 import { constants } from 'node:fs'
 import path from 'node:path'
 
-import { getArtifact, getEffect } from './api.mjs'
+import { getArtifact, getEffect, assertUnlocked } from './api.mjs'
 import {
   detectArtifactRoot,
   detectFramework,
@@ -271,7 +271,9 @@ export async function addArtifact({
     frameworkReason = detected.reason
   }
 
-  const data = await getArtifact(id, { framework: target, customization, deep: true })
+  const data = assertUnlocked(
+    await getArtifact(id, { framework: target, customization, deep: true }),
+  )
 
   if (data.level === 'effect') {
     return emitEffect(data, { directory, force, dryRun, cwd, frameworkReason })

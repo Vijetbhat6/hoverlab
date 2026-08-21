@@ -8,6 +8,8 @@ import {
   resolveArtifact,
 } from '@/lib/api/artifacts'
 import { ARTIFACT_CACHE, DETAIL_CACHE, apiError, apiJson, apiPreflight } from '@/lib/api/public'
+import { getSession } from '@/lib/session'
+import { entitlementsForApiRequest } from '@/lib/billing/api-key'
 
 /**
  * GET /api/v1/artifacts/{id} — one artifact, whichever rung it sits on.
@@ -32,9 +34,16 @@ import { ARTIFACT_CACHE, DETAIL_CACHE, apiError, apiJson, apiPreflight } from '@
  *
  * 404s list the four tiers searched, because "no artifact with id x" is
  * otherwise indistinguishable from "this endpoint only knows about effects".
+ *
+ * Resolves a licence for the same reason `/api/v1/templates/{id}` does:
+ * this route can return a template, and a gate that one of the two paths
+ * to an artifact does not apply is not a gate. Effects, blocks and pages
+ * are unaffected — they have no Pro tier and never consult it.
  */
 
 export const runtime = 'nodejs'
+/* Per-caller once a template can be the answer. See the template route. */
+export const dynamic = 'force-dynamic'
 
 /** Read a numeric query param, falling back when absent or malformed. */
 function readNumber(url: URL, key: string, fallback: number): number {
@@ -57,9 +66,20 @@ export async function GET(request: Request, context: { params: Promise<{ id: str
   }
 
   if (resolved.level !== 'effect') {
-    return apiJson(buildArtifactPayload(resolved.artifact, siteUrl, { deep: readDeep(url) }), {
-      cache: ARTIFACT_CACHE,
-    })
+    const session = await getSession().catch(() => null)
+    const ent = await entitlementsForApiRequest(request, session?.uid ?? null)
+
+    return apiJson(
+      buildArtifactPayload(resolved.artifact, siteUrl, {
+        deep: readDeep(url),
+        licensed: ent.canUseProFeatures,
+      }),
+      {
+        // A per-caller body must not reach a shared cache. Only the Pro
+        // tier varies, so everything else keeps the cache it had.
+        cache: resolved.artifact.tier === 'pro' ? 'private, no-store' : ARTIFACT_CACHE,
+      },
+    )
   }
 
   const requested = url.searchParams.get('framework') ?? 'css'
