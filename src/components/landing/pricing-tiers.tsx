@@ -52,6 +52,7 @@ import { usePricing, type Currency } from '@/hooks/use-pricing'
 import { track } from '@/lib/analytics'
 import { cn } from '@/lib/utils'
 import { PLANS, USD_TO_INR, type PlanId } from '@/lib/billing/plans'
+import { DAILY_EXPORTS } from '@/lib/billing/quota-limits'
 import { TOTAL_COUNT } from '@/lib/catalog-stats'
 import { CATEGORIES } from '@/lib/effect-types'
 import { BLOCK_COUNT } from '@/lib/blocks/block-index'
@@ -111,7 +112,11 @@ const TIERS: Tier[] = [
       'Live customization sliders',
       'Save favorites (sync across devices)',
       'Bundle up to 10 effects',
-      'Export bundles as CSS, HTML, or ZIP',
+      // The daily cap is named on the card rather than discovered at the
+      // download button. A limit a visitor finds out about by hitting it
+      // reads as the product breaking; a limit on the pricing page reads as
+      // the free tier being finite, which is the honest description.
+      `Export bundles as CSS, HTML, or ZIP — ${DAILY_EXPORTS.free} a day`,
       'PWA — installable, offline-ready',
       'Personal and non-commercial projects',
     ],
@@ -133,6 +138,7 @@ const TIERS: Tier[] = [
       'Commercial use — every effect, block, page and template',
       'Client work, paid products, no attribution',
       'Unlimited bundle size',
+      'Unlimited exports — no daily cap',
       'Every export format (Vue, Svelte, Tailwind)',
       'Custom brand color presets',
       'Private collections',

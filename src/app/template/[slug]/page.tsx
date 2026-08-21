@@ -38,6 +38,7 @@ import {
 } from '@/lib/templates/templates'
 import { getTemplateMeta } from '@/lib/templates/template-index'
 import { absoluteUrl } from '@/lib/site'
+import { AddToCollectionButton } from '@/components/collections/add-to-collection'
 import {
   TrackArtifactView,
   FavoriteArtifactButton,

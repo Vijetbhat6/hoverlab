@@ -42,6 +42,7 @@ import {
   type FrameworkId,
 } from '@/lib/export'
 import { useEntitlements } from '@/hooks/use-entitlements'
+import { useExportQuota, type QuotaAction } from '@/hooks/use-export-quota'
 import { cn } from '@/lib/utils'
 
 interface BundleDrawerProps {
@@ -59,6 +60,7 @@ export function BundleDrawer({ open, onOpenChange }: BundleDrawerProps) {
   const { entries, remove, clear, count } = useBundle()
   const { entitlements } = useEntitlements()
   const canUsePro = entitlements?.canUseProFeatures ?? false
+  const { quota, claim } = useExportQuota()
   const [zipBusy, setZipBusy] = React.useState(false)
   /* Which framework the ZIP's per-effect sources are generated in. 'css'
    * keeps the archive byte-identical to what it has always produced. */
@@ -147,6 +149,39 @@ export function BundleDrawer({ open, onOpenChange }: BundleDrawerProps) {
     return false
   }
 
+  /**
+   * Spend one export against the daily meter, and say what to do when
+   * there is none left.
+   *
+   * Runs AFTER the readiness checks and BEFORE the work, so a click that
+   * was going to fail for an empty bundle never costs an export, and a
+   * click that succeeds is always counted. A meter outage lets the export
+   * through — see `claimExport`.
+   */
+  async function meterBlocked(action: QuotaAction): Promise<boolean> {
+    const result = await claim(action)
+    if (result.ok) return false
+
+    track('paywall_hit', {
+      feature: `export_quota:${action}`,
+      plan_required: result.offer === 'signin' ? 'free' : 'pro',
+    })
+
+    toast.error(result.error, {
+      description:
+        result.offer === 'signin'
+          ? `A free account raises it to ${result.quota.signedInLimit ?? 10} a day.`
+          : 'Pro removes the daily limit for good.',
+      action: {
+        label: result.offer === 'signin' ? 'Sign in' : 'See Pro',
+        onClick: () => {
+          window.location.href = result.offer === 'signin' ? '/login' : '/#pricing'
+        },
+      },
+    })
+    return true
+  }
+
   /** Note appended to a flat export's toast when artifacts were skipped. */
   function skippedNote(): string {
     return artifacts.length > 0
@@ -154,8 +189,9 @@ export function BundleDrawer({ open, onOpenChange }: BundleDrawerProps) {
       : ''
   }
 
-  function handleDownloadHtml() {
+  async function handleDownloadHtml() {
     if (flatExportBlocked()) return
+    if (await meterBlocked('bundle-html')) return
     const html = buildBundleHtml(entries, catalog)
     track('bundle_exported', { format: 'html', effect_count: resolved.length })
     downloadTextFile('cssfx-bundle.html', html, 'text/html')
@@ -164,8 +200,9 @@ export function BundleDrawer({ open, onOpenChange }: BundleDrawerProps) {
     })
   }
 
-  function handleDownloadCss() {
+  async function handleDownloadCss() {
     if (flatExportBlocked()) return
+    if (await meterBlocked('bundle-css')) return
     const css = buildBundleCss(entries, catalog)
     track('bundle_exported', { format: 'css', effect_count: resolved.length })
     downloadTextFile('cssfx-bundle.css', css, 'text/css')
@@ -176,6 +213,7 @@ export function BundleDrawer({ open, onOpenChange }: BundleDrawerProps) {
 
   async function handleDownloadZip() {
     if (exportBlocked()) return
+    if (await meterBlocked('bundle-zip')) return
     setZipBusy(true)
     try {
       const blob = await buildBundleZip(entries, catalog, zipFramework, artifacts)
@@ -356,6 +394,30 @@ export function BundleDrawer({ open, onOpenChange }: BundleDrawerProps) {
                 <FileCode className="h-4 w-4" /> CSS only
               </Button>
             </div>
+            {/* The meter, stated before it is met rather than after.
+                Someone who finds out about a daily limit by hitting it
+                reads it as the product breaking; someone who has been
+                watching the number go down reads it as the free tier
+                being finite, which is what it is. Rendered only while
+                there is a limit — a paid licence should see no meter at
+                all, not "unlimited". */}
+            {quota && !quota.unlimited && quota.remaining !== null ? (
+              <p className="text-center text-[11px] text-muted-foreground">
+                {quota.remaining > 0
+                  ? `${quota.remaining} of ${quota.limit} exports left today`
+                  : 'No exports left today'}
+                {' · '}
+                {quota.signedIn ? (
+                  <Link href="/#pricing" className="underline underline-offset-2 hover:text-foreground">
+                    Pro removes the limit
+                  </Link>
+                ) : (
+                  <Link href="/login" className="underline underline-offset-2 hover:text-foreground">
+                    sign in for {quota.signedInLimit ?? 10}
+                  </Link>
+                )}
+              </p>
+            ) : null}
             <Button
               size="sm"
               variant="ghost"

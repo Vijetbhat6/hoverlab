@@ -24,6 +24,7 @@ import { getBlockMeta } from '@/lib/blocks/block-index'
 import { blockCategorySlug } from '@/lib/blocks/block-types'
 import { templatesUsingPage } from '@/lib/templates/template-index'
 import { absoluteUrl } from '@/lib/site'
+import { AddToCollectionButton } from '@/components/collections/add-to-collection'
 import {
   TrackArtifactView,
   FavoriteArtifactButton,

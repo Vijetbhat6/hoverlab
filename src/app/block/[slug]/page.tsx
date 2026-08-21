@@ -24,6 +24,7 @@ import { blockCategorySlug, GROUP_OF } from '@/lib/blocks/block-types'
 import { blocksInCategory, getBlockMeta } from '@/lib/blocks/block-index'
 import { pagesUsingBlock } from '@/lib/pages/page-index'
 import { absoluteUrl } from '@/lib/site'
+import { AddToCollectionButton } from '@/components/collections/add-to-collection'
 import {
   TrackArtifactView,
   FavoriteArtifactButton,

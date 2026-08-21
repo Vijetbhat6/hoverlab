@@ -12,15 +12,13 @@
  * Collections are server-held state, so the check here is the feature: a
  * free account cannot store one, and there is no local mode to fall back to.
  *
- * A free account gets 402, not 403. The distinction matters to the client —
- * 403 reads as "you may never", which would be wrong, and the panel needs to
- * know it should render an upgrade prompt rather than an error.
+ * The gate itself lives in `billing/require-pro.ts`, shared with the saved
+ * brand library — including why a free account gets 402 rather than 403.
  */
 
 import { NextResponse } from 'next/server'
 import { withJsonErrors } from '@/lib/route-errors'
-import { getCurrentUser } from '@/lib/session'
-import { getEntitlements } from '@/lib/billing/entitlements'
+import { requirePro } from '@/lib/billing/require-pro'
 import { getCollections, replaceCollections } from '@/lib/firebase/collections'
 import {
   COLLECTION_LIMITS,
@@ -31,52 +29,15 @@ import {
 
 export const runtime = 'nodejs'
 
-/**
- * Built per call, not hoisted to a module constant: a Response body is a
- * stream that can be read once, so a shared instance would serve an empty
- * body to the second request that hit it.
- */
-function unauthorized() {
-  return NextResponse.json({ error: 'Unauthorized.' }, { status: 401 })
-}
-
-/**
- * Resolve the caller, or the response that should be returned instead.
- *
- * Returned rather than thrown so both handlers share one code path and
- * neither can forget the entitlement half of the check.
- */
-async function requirePro(): Promise<
-  { userId: string } | { response: NextResponse }
-> {
-  const user = await getCurrentUser()
-  if (!user) return { response: unauthorized() }
-
-  const ent = await getEntitlements(user.id)
-  if (!ent.canUseProFeatures) {
-    return {
-      response: NextResponse.json(
-        {
-          error: 'Private collections are part of Pro.',
-          upgrade: '/#pricing',
-        },
-        { status: 402 },
-      ),
-    }
-  }
-
-  return { userId: user.id }
-}
-
 async function handleGet() {
-  const gate = await requirePro()
+  const gate = await requirePro('Private collections')
   if ('response' in gate) return gate.response
 
   return NextResponse.json({ collections: await getCollections(gate.userId) })
 }
 
 async function handlePut(req: Request) {
-  const gate = await requirePro()
+  const gate = await requirePro('Private collections')
   if ('response' in gate) return gate.response
 
   let body: unknown
