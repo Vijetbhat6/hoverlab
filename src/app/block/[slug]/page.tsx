@@ -31,6 +31,8 @@ import {
   CompareArtifactButton,
   CopyDnaButton,
 } from '@/components/artifact-actions'
+import { ArtifactFacts } from '@/components/artifact-facts'
+import { StickyInstallBar } from '@/components/sticky-install-bar'
 
 /**
  * Every block is pre-rendered. There are thirteen of them and they are the
@@ -179,6 +181,22 @@ export default async function BlockDetailPage({ params }: PageProps) {
             </ul>
           ) : null}
         </header>
+
+        {/* What lands in the repo, what it fits, and what you may do with
+            it — the three questions a reader had to infer from the source
+            below before this existed. */}
+        <ArtifactFacts
+          id={block.id}
+          level="block"
+          files={block.files}
+          deps={block.deps}
+        />
+
+        <StickyInstallBar
+          id={block.id}
+          name={block.name}
+          command={`npx hoverlab add ${block.id}`}
+        />
 
         {/* ---------------------------------------------------------- *
          *  Live preview

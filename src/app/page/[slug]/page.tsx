@@ -31,6 +31,8 @@ import {
   CompareArtifactButton,
   CopyDnaButton,
 } from '@/components/artifact-actions'
+import { ArtifactFacts } from '@/components/artifact-facts'
+import { StickyInstallBar } from '@/components/sticky-install-bar'
 
 export const dynamicParams = false
 
@@ -159,6 +161,20 @@ export default async function PageDetailPage({ params }: PageProps) {
             </span>
           </div>
         </header>
+
+        <ArtifactFacts
+          id={page.id}
+          level="page"
+          files={page.files}
+          deps={page.deps}
+          includes={page.composedOf}
+        />
+
+        <StickyInstallBar
+          id={page.id}
+          name={page.name}
+          command={`npx hoverlab add ${page.id}`}
+        />
 
         {/* ---------------------------------------------------------- *
          *  Live preview

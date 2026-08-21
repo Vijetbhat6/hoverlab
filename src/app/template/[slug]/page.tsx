@@ -45,6 +45,8 @@ import {
   CompareArtifactButton,
   CopyDnaButton,
 } from '@/components/artifact-actions'
+import { ArtifactFacts } from '@/components/artifact-facts'
+import { StickyInstallBar } from '@/components/sticky-install-bar'
 
 export const dynamicParams = false
 
@@ -179,6 +181,20 @@ export default async function TemplateDetailPage({ params }: PageProps) {
             </span>
           </div>
         </header>
+
+        <ArtifactFacts
+          id={template.id}
+          level="template"
+          files={projectFiles}
+          deps={template.deps}
+          includes={template.composedOf}
+        />
+
+        <StickyInstallBar
+          id={template.id}
+          name={template.name}
+          command={`npx hoverlab init ${template.id} ./my-app`}
+        />
 
         {/* ---------------------------------------------------------- *
          *  Live preview — every route
