@@ -579,12 +579,11 @@ export function PricingTiers({ className }: { className?: string } = {}) {
             Pro+ — {plusPrice}/month
           </span>{' '}
           adds 500 AI credits a month on top of any plan, including Free.
-          Credits are only spent generating new CSS in the{' '}
-          <Link href="/playground" className="font-medium text-primary hover:underline">
-            playground
-          </Link>
-          ; browsing, copying, the CLI and the API are free and unmetered.
-          Everyone gets five free generations a day without it.
+          Credits buy three things: a variation or an edit of any effect
+          (1 credit), a recolour of one onto your brand (1), and a whole
+          section composed from a brief in your design tokens (3). Browsing,
+          copying, the CLI and the API stay free and unmetered. Everyone
+          gets five free generations a day without it.
         </p>
 
         {/*

@@ -35,6 +35,13 @@
  *           five-column pricing table makes the licence decision harder to
  *           serve a product that is really a meter.
  *
+ *           Credits started out buying one endpoint, which made $9/month a
+ *           subscription to a button. They now buy three actions at
+ *           different prices — vary/edit an effect (1), recolour one onto
+ *           your brand (1), compose a section from a brief (3) — because a
+ *           meter is only worth paying for monthly if it measures
+ *           something used weekly. See `ACTION_COSTS` in ./credits.
+ *
  *   Studio — ONE-TIME, ten seats. The same license as Pro, bought once for a
  *           whole team. This exists because the comparable market sells
  *           teams a seat-COUNT license rather than a subscription — Preline

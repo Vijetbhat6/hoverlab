@@ -58,8 +58,45 @@ export const MONTHLY_ALLOWANCE = {
  */
 export const FREE_DAILY_ACTIONS = 5
 
-/** What one AI action costs. Kept at 1 until an action is expensive enough to differ. */
+/** What one AI action costs, when the caller does not say. */
 export const ACTION_COST = 1
+
+/**
+ * What each AI action costs, in credits.
+ *
+ * Credits were worth one thing when there was one endpoint. Now that they
+ * buy several, a flat price would either overcharge for a recolour or
+ * undercharge for composing a section from a brief — and a meter that
+ * charges the same for a thirty-token edit and a two-thousand-token
+ * generation stops meaning anything to the person watching their balance.
+ *
+ * The numbers track roughly what each call costs us to serve, not what it
+ * is worth to the customer. Pricing by value here would be guessing, and
+ * guessing high is how a credit balance turns into a grievance.
+ *
+ * Only cost-1 actions can draw on the free daily allowance — see
+ * `spendCredits`. That is deliberate: five free composes a day is a
+ * different product from five free recolours, and the free tier is sized
+ * for the cheap one.
+ */
+export const ACTION_COSTS = {
+  /** Edit or vary one component. The original action. */
+  variant: 1,
+  /** Recolour a component to a brand. Same size of call as a variant. */
+  brand: 1,
+  /** Build a section from a brief. Several times the output tokens. */
+  compose: 3,
+} as const
+
+export type AiAction = keyof typeof ACTION_COSTS
+
+export function costOf(action: AiAction): number {
+  return ACTION_COSTS[action]
+}
+
+export function isAiAction(value: unknown): value is AiAction {
+  return typeof value === 'string' && value in ACTION_COSTS
+}
 
 /* ------------------------------------------------------------------ *
  *  Packs

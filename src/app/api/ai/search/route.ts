@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server'
 import ZAI from 'z-ai-web-dev-sdk'
+import { resolveRequestSubject } from '@/lib/billing/request-subject'
+import { consumeQuota, refundQuota, METERS } from '@/lib/billing/quota'
 
 /**
  * AI-powered natural-language effect search.
@@ -24,6 +26,17 @@ import ZAI from 'z-ai-web-dev-sdk'
  * Response:
  *   { ids: string[] }   // ranked effect IDs, most relevant first
  *                     // empty array if the LLM returned nothing usable
+ *
+ * METERED, and it was not. This route takes no credentials, calls a model
+ * on every request and had no limit of any kind, which made it a free
+ * ranking LLM for anyone who found it in the network tab. It now spends
+ * from a daily counter keyed to the session or a hashed IP.
+ *
+ * Metered rather than gated, and on its own counter rather than the export
+ * one, because this is a browse action: someone looking for a button
+ * searches ten times to find it. The limit is a ceiling against abuse, not
+ * a lever on the funnel — see METERS in `billing/quota-limits.ts`. Pro,
+ * Studio, Team and Pro+ have no limit here at all.
  */
 
 export const runtime = 'nodejs'
@@ -57,6 +70,32 @@ export async function POST(request: Request) {
   }
   if (candidatesRaw.length === 0) {
     return NextResponse.json({ ids: [] })
+  }
+
+  /*
+   * Charged after the request is known to be well-formed and before the
+   * model is called. A malformed body must not cost a search, and a search
+   * that reaches the model must always be counted.
+   */
+  const { subject, entitlements } = await resolveRequestSubject(request)
+  const quota = await consumeQuota(subject, entitlements, 'ai-search', 'aiSearch')
+  if (!quota.ok) {
+    return NextResponse.json(
+      {
+        // `ids: []` alongside the error so a client that ignores the status
+        // degrades to ordinary substring search rather than rendering an
+        // empty result set as "nothing matched".
+        ids: [],
+        error:
+          subject.kind === 'user'
+            ? `That's ${quota.state.limit} AI searches for today.`
+            : 'That is the AI search limit for this connection today.',
+        resetsAt: quota.state.resetsAt,
+        offer: subject.kind === 'user' ? 'plus' : 'signin',
+        signedInLimit: METERS.aiSearch.limits.free,
+      },
+      { status: 429, headers: { 'Cache-Control': 'private, no-store' } },
+    )
   }
 
   // Sanitize + cap candidates to keep the prompt bounded.
@@ -135,9 +174,13 @@ Return the ranked JSON now.`
 
     return NextResponse.json({ ids })
   } catch (err) {
+    // The search was charged before the call; an outage on our side must
+    // not spend it. Same order, and the same reasoning, as the credit
+    // spend in /api/ai/variant.
+    await refundQuota(subject, 'aiSearch').catch(() => {})
     console.error('[/api/ai/search] LLM call failed:', err)
     return NextResponse.json(
-      { error: 'AI search is temporarily unavailable' },
+      { ids: [], error: 'AI search is temporarily unavailable' },
       { status: 502 },
     )
   }

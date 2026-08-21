@@ -50,3 +50,39 @@ const QUOTA_ACTIONS = new Set<string>([
 export function isQuotaAction(value: unknown): value is QuotaAction {
   return typeof value === 'string' && QUOTA_ACTIONS.has(value)
 }
+
+/* ------------------------------------------------------------------ *
+ *  Meters
+ * ------------------------------------------------------------------ */
+
+/**
+ * Independent daily counters.
+ *
+ * Two things needed metering and they are not the same thing, so they do
+ * not share a number:
+ *
+ *   exports    bulk takes — a bundle archive, a template zip. The limit
+ *              exists to make the free tier finite. See `./quota`.
+ *   aiSearch   natural-language search. The limit exists because the
+ *              endpoint costs real tokens per call and takes no
+ *              credentials, so without one it is a free ranking model for
+ *              anyone who finds it.
+ *
+ * Folding them into one counter would mean searching for a button spent
+ * part of someone's download allowance, which is incoherent to the person
+ * watching it go down.
+ *
+ * AI search is far more generous than exports because it is a browse
+ * action: it happens ten times while someone looks for one thing, and a
+ * search that runs out mid-session breaks the funnel the whole business
+ * sits on. It is a ceiling against abuse, not a lever.
+ */
+export const METERS = {
+  exports: { prefix: 'e', limits: DAILY_EXPORTS },
+  aiSearch: {
+    prefix: 's',
+    limits: { anonymous: 15, free: 40, paid: Number.POSITIVE_INFINITY },
+  },
+} as const
+
+export type MeterId = keyof typeof METERS

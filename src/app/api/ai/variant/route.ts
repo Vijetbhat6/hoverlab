@@ -2,7 +2,14 @@ import { NextResponse } from 'next/server'
 import ZAI from 'z-ai-web-dev-sdk'
 import { getSession } from '@/lib/session'
 import { getEntitlements, FREE_ENTITLEMENTS } from '@/lib/billing/entitlements'
-import { spendCredits, refundCredits, FREE_DAILY_ACTIONS } from '@/lib/billing/credits'
+import {
+  spendCredits,
+  refundCredits,
+  costOf,
+  FREE_DAILY_ACTIONS,
+} from '@/lib/billing/credits'
+import { coerceBrandColor } from '@/lib/brand-presets'
+import { resolveTokens } from '@/lib/export/design-system'
 import { withJsonErrors } from '@/lib/route-errors'
 
 /**
@@ -14,10 +21,18 @@ import { withJsonErrors } from '@/lib/route-errors'
  * that costs nothing to serve, which is why everything else is free; this
  * one spends tokens per call, so it is the one thing metered.
  *
- * Two modes, and the difference is whether the user has a direction in
- * mind:
+ * Three modes, and the difference is what the user is asking for:
  *   'edit'      apply `prompt` to the given markup and CSS.
  *   'variation' produce a different take on the same component, no prompt.
+ *   'brand'     rewrite the component's colours to a supplied brand.
+ *
+ * 'brand' is the one worth explaining. The catalog is styled through design
+ * tokens, so a block already follows a brand for free — but an *effect* is
+ * hand-written CSS with literal colours in it, which is exactly the rung
+ * tokens cannot reach. Recolouring one by hand means finding every hex,
+ * every rgba shadow and every gradient stop and moving them together
+ * without flattening the design. That is a real task, it is the natural
+ * companion to the design-system export, and it is what credits are for.
  *
  * Order of operations is deliberate: charge, then generate, then refund on
  * failure. Generating first and charging after leaves an endpoint that is
@@ -38,6 +53,8 @@ interface Body {
   css?: unknown
   prompt?: unknown
   mode?: unknown
+  /** `'brand'` mode only — a BrandColor, or a preset id. */
+  brand?: unknown
 }
 
 const SYSTEM_PROMPT = `You are a CSS specialist working inside a component catalog.
@@ -103,7 +120,22 @@ export const POST = withJsonErrors('api/ai/variant', async (request: Request) =>
   const css = typeof body.css === 'string' ? body.css.trim().slice(0, MAX_CSS) : ''
   const html = typeof body.html === 'string' ? body.html.trim().slice(0, MAX_HTML) : ''
   const prompt = typeof body.prompt === 'string' ? body.prompt.trim().slice(0, MAX_PROMPT) : ''
-  const mode = body.mode === 'edit' ? 'edit' : 'variation'
+  const mode =
+    body.mode === 'edit' ? 'edit' : body.mode === 'brand' ? 'brand' : 'variation'
+
+  /*
+   * The brand, resolved server-side into the actual token values rather
+   * than passed to the model as four floats. A model told "hue 265,
+   * chroma 0.2" invents its own interpretation of OKLCH; a model given
+   * `--primary: 265 65% 55%` and the hex beside it has nothing to guess.
+   */
+  const brand = mode === 'brand' ? coerceBrandColor(body.brand) : null
+  if (mode === 'brand' && !brand) {
+    return NextResponse.json(
+      { error: 'Give me a brand colour to work from.' },
+      { status: 400 },
+    )
+  }
 
   if (!css) {
     return NextResponse.json({ error: 'Give me some CSS to work from.' }, { status: 400 })
@@ -116,7 +148,14 @@ export const POST = withJsonErrors('api/ai/variant', async (request: Request) =>
   }
 
   const ent = session ? await getEntitlements(session.uid) : FREE_ENTITLEMENTS
-  const spend = await spendCredits(session.uid, ent)
+  /*
+   * The cost is resolved from the mode, so a new mode cannot be added
+   * without deciding what it charges. `brand` costs the same as a variant
+   * — it is the same size of call — and both stay eligible for the free
+   * daily action, which a cost above 1 would not be.
+   */
+  const cost = costOf(mode === 'brand' ? 'brand' : 'variant')
+  const spend = await spendCredits(session.uid, ent, cost)
 
   if (!spend.ok) {
     return NextResponse.json(
@@ -135,12 +174,40 @@ export const POST = withJsonErrors('api/ai/variant', async (request: Request) =>
     )
   }
 
+  /**
+   * The brand, as the palette the model should actually use.
+   *
+   * Both themes are sent, because the catalog is demoed on light and dark
+   * grounds and a recolour that only holds on one of them is a recolour
+   * that has to be done again. Hex rather than the OKLCH the brand really
+   * is: a model handed "chroma 0.2" invents its own reading of the space,
+   * where a hex is unambiguous.
+   */
+  function brandBriefing(): string {
+    if (!brand) return ''
+    const table = (theme: 'light' | 'dark') =>
+      resolveTokens(brand, theme)
+        .filter((t) => ['primary', 'accent', 'ring'].includes(t.name))
+        .map((t) => `  --${t.name}: ${t.hex}`)
+        .join('\n')
+    return (
+      `The brand palette to move this component onto:\n\n` +
+      `light:\n${table('light')}\n\ndark:\n${table('dark')}\n\n` +
+      `Replace the component's own accent colours with these. Keep its ` +
+      `structure, its timing and its relative contrast exactly as they are - ` +
+      `this is a recolour, not a redesign. Neutral greys, whites and blacks ` +
+      `stay as they are; only the colours carrying identity move.\n\n`
+    )
+  }
+
   const userPrompt =
     mode === 'edit'
       ? `Apply this change: ${prompt}\n\nHTML:\n${html || '(none supplied)'}\n\nCSS:\n${css}`
-      : `Produce a distinctly different variation of this component.${
-          prompt ? ` Lean towards: ${prompt}` : ''
-        }\n\nHTML:\n${html || '(none supplied)'}\n\nCSS:\n${css}`
+      : mode === 'brand'
+        ? `${brandBriefing()}HTML:\n${html || '(none supplied)'}\n\nCSS:\n${css}`
+        : `Produce a distinctly different variation of this component.${
+            prompt ? ` Lean towards: ${prompt}` : ''
+          }\n\nHTML:\n${html || '(none supplied)'}\n\nCSS:\n${css}`
 
   try {
     const zai = await ZAI.create()
@@ -155,7 +222,7 @@ export const POST = withJsonErrors('api/ai/variant', async (request: Request) =>
     const variant = parseVariant(completion.choices[0]?.message?.content ?? '')
     if (!variant) {
       // Unusable output is our failure, not the user's spend.
-      await refundCredits(session.uid, spend.source)
+      await refundCredits(session.uid, spend.source, cost)
       return NextResponse.json(
         { error: 'The model returned something unusable. Try again.' },
         { status: 502 },
@@ -169,7 +236,7 @@ export const POST = withJsonErrors('api/ai/variant', async (request: Request) =>
       spent: { source: spend.source, remaining: spend.remaining },
     })
   } catch (err) {
-    await refundCredits(session.uid, spend.source)
+    await refundCredits(session.uid, spend.source, cost)
     console.error('[/api/ai/variant] LLM call failed:', err)
     return NextResponse.json(
       { error: 'Generation is temporarily unavailable. Your credit was not spent.' },

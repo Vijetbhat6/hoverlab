@@ -2,9 +2,9 @@ import 'server-only'
 import { adminDb } from '@/lib/firebase/admin'
 import { Timestamp } from 'firebase-admin/firestore'
 import type { Entitlements } from './entitlements'
-import { DAILY_EXPORTS, type QuotaAction } from './quota-limits'
+import { DAILY_EXPORTS, METERS, type MeterId, type QuotaAction } from './quota-limits'
 
-export { DAILY_EXPORTS, isQuotaAction, type QuotaAction } from './quota-limits'
+export { DAILY_EXPORTS, METERS, isQuotaAction, type MeterId, type QuotaAction } from './quota-limits'
 
 /**
  * Daily export quota — the meter that makes the free tier run out.
@@ -69,10 +69,22 @@ export interface QuotaState {
   resetsAt: string
 }
 
-/** The daily limit a set of entitlements is worth. */
-export function limitFor(subject: QuotaSubject, ent: Entitlements): number {
-  if (ent.canUseProFeatures) return DAILY_EXPORTS.paid
-  return subject.kind === 'user' ? DAILY_EXPORTS.free : DAILY_EXPORTS.anonymous
+/** The daily limit a set of entitlements is worth on one meter. */
+export function limitFor(
+  subject: QuotaSubject,
+  ent: Entitlements,
+  meter: MeterId = 'exports',
+): number {
+  const limits = METERS[meter].limits
+  /*
+   * Pro+ lifts the AI meters as well as Pro lifting the export one. A
+   * subscriber paying monthly for AI credits who then hit a daily search
+   * cap would be metered twice for the same thing.
+   */
+  const paid =
+    meter === 'exports' ? ent.canUseProFeatures : ent.canUseProFeatures || ent.hasPlus
+  if (paid) return limits.paid
+  return subject.kind === 'user' ? limits.free : limits.anonymous
 }
 
 /** Today's key, in UTC so the reset cannot drift with the caller's clock. */
@@ -88,11 +100,12 @@ function nextReset(now = new Date()): string {
   return next.toISOString()
 }
 
-function docIdFor(subject: QuotaSubject, day: string): string {
-  // Two segments joined by a separator that cannot appear in either: a day
-  // is digits and dashes, and both subject keys are hex. Without that,
-  // `a__b` and `a_​_b` could collide onto one counter.
-  return `${day}__${subject.kind === 'user' ? 'u' : 'a'}_${subject.key}`
+function docIdFor(subject: QuotaSubject, day: string, meter: MeterId): string {
+  // Three segments joined by a separator that cannot appear in any of
+  // them: a day is digits and dashes, the prefixes are single letters, and
+  // both subject keys are hex. The meter prefix is what keeps the counters
+  // independent — without it, searching would spend downloads.
+  return `${day}__${METERS[meter].prefix}${subject.kind === 'user' ? 'u' : 'a'}_${subject.key}`
 }
 
 function unlimitedState(): QuotaState {
@@ -114,12 +127,13 @@ function unlimitedState(): QuotaState {
 export async function peekQuota(
   subject: QuotaSubject,
   ent: Entitlements,
+  meter: MeterId = 'exports',
 ): Promise<QuotaState> {
-  const limit = limitFor(subject, ent)
+  const limit = limitFor(subject, ent, meter)
   if (!Number.isFinite(limit)) return unlimitedState()
 
   const day = todayKey()
-  const snap = await adminDb().collection('quotas').doc(docIdFor(subject, day)).get()
+  const snap = await adminDb().collection('quotas').doc(docIdFor(subject, day, meter)).get()
   const data = snap.data() ?? {}
   const used = data.day === day && typeof data.count === 'number' ? data.count : 0
 
@@ -151,14 +165,15 @@ export type QuotaResult =
 export async function consumeQuota(
   subject: QuotaSubject,
   ent: Entitlements,
-  action: QuotaAction,
+  action: QuotaAction | 'ai-search',
+  meter: MeterId = 'exports',
 ): Promise<QuotaResult> {
-  const limit = limitFor(subject, ent)
+  const limit = limitFor(subject, ent, meter)
   if (!Number.isFinite(limit)) return { ok: true, state: unlimitedState() }
 
   const db = adminDb()
   const day = todayKey()
-  const ref = db.collection('quotas').doc(docIdFor(subject, day))
+  const ref = db.collection('quotas').doc(docIdFor(subject, day, meter))
   const resetsAt = nextReset()
 
   return db.runTransaction(async (tx) => {
@@ -203,10 +218,13 @@ export async function consumeQuota(
  * hand out a free export every time a packaging step errored near the
  * rollover.
  */
-export async function refundQuota(subject: QuotaSubject): Promise<void> {
+export async function refundQuota(
+  subject: QuotaSubject,
+  meter: MeterId = 'exports',
+): Promise<void> {
   const db = adminDb()
   const day = todayKey()
-  const ref = db.collection('quotas').doc(docIdFor(subject, day))
+  const ref = db.collection('quotas').doc(docIdFor(subject, day, meter))
 
   await db.runTransaction(async (tx) => {
     const snap = await tx.get(ref)
