@@ -34,6 +34,7 @@ import { useBundle } from '@/hooks/use-bundle'
 import { useCompare } from '@/hooks/use-compare'
 import { useRecentlyViewed } from '@/hooks/use-recently-viewed'
 import { useCopyHistory } from '@/hooks/use-copy-history'
+import { reportUsage } from '@/lib/report-usage'
 import { analyzeEffect } from '@/lib/effect-insights'
 import { track } from '@/lib/analytics'
 import {
@@ -333,6 +334,10 @@ export function EffectDetail({ effect, similar, prev, next }: EffectDetailProps)
       if (copiedTimer.current) clearTimeout(copiedTimer.current)
       copiedTimer.current = setTimeout(() => setCopied(false), 1600)
       record({ id: effect.id, name: effect.name, category: effect.category })
+      // Same counter the code panes already report to. reportUsage
+      // de-duplicates per artifact per page session, so copying here and
+      // then from a code pane still counts as the one decision it was.
+      reportUsage(effect.id, 'copy')
       toast.success(`Copied "${effect.name}"`, {
         description: isCustomized
           ? 'HTML and CSS, with your tweaks applied.'

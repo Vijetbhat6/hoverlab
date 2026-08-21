@@ -25,15 +25,20 @@
  * needs real per-effect data, not a longer list.
  *
  * Deliberately absent: a "last updated" line, which UI8 carries and this
- * cannot — no artifact in the catalog has a date on it. See the note in
- * lib/effect-index.ts. Also absent: a license summary, because the repo
- * has no LICENSE for catalog content to summarise.
+ * cannot — no artifact in the catalog has a date on it. Also absent: a
+ * license summary, because the repo has no LICENSE for catalog content to
+ * summarise, and inventing terms would be worse than the omission.
+ *
+ * The usage count IS here, having been impossible a few days ago. It
+ * comes from lib/usage.ts via UsageBadge, the same component the upper
+ * tiers use.
  */
 
 import * as React from 'react'
 import Link from 'next/link'
 import { Check, Terminal } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
+import { UsageBadge } from '@/components/usage-badge'
 import { FRAMEWORKS } from '@/lib/export'
 import type { Effect } from '@/lib/effects'
 
@@ -114,6 +119,17 @@ export function EffectSpecCard({ effect }: { effect: Effect }) {
           </li>
         ))}
       </ul>
+
+      {/*
+        The social proof that was missing when the pinned action bar
+        shipped. It is here now because the counter arrived: usage.ts
+        records copies and installs, and UsageBadge renders nothing at all
+        below one, so a new effect shows no line rather than a zero. This
+        is the same component the block, page and template pages use.
+      */}
+      <p className="mt-3 text-[11px] leading-relaxed text-muted-foreground empty:hidden">
+        <UsageBadge id={effect.id} />
+      </p>
 
       <h3 className="mb-2 mt-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
         Works with

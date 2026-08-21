@@ -51,6 +51,7 @@ import { useFavorites } from '@/hooks/use-favorites'
 import { useBundle } from '@/hooks/use-bundle'
 import { useCompare } from '@/hooks/use-compare'
 import { useCopyHistory } from '@/hooks/use-copy-history'
+import { reportUsage } from '@/lib/report-usage'
 import { DEFAULT_CUSTOMIZATION } from '@/lib/customize'
 import { cn } from '@/lib/utils'
 import type { Effect } from '@/lib/effects'
@@ -128,6 +129,11 @@ export function EffectCard({ effect }: EffectCardProps) {
       if (copiedTimer.current) clearTimeout(copiedTimer.current)
       copiedTimer.current = setTimeout(() => setCopied(false), 1600)
       record({ id: effect.id, name: effect.name, category: effect.category })
+      // Feeds the server-side counter that ranks /api/v1/trending. This is
+      // the grid's only copy affordance and likely the most-used one in the
+      // app, so leaving it unreported would rank the catalog by every copy
+      // path except the busiest.
+      reportUsage(effect.id, 'copy')
       toast.success(`Copied "${effect.name}"`, {
         description: 'HTML and CSS are both on your clipboard.',
       })
