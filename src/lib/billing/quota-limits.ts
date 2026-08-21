@@ -83,6 +83,22 @@ export const METERS = {
     prefix: 's',
     limits: { anonymous: 15, free: 40, paid: Number.POSITIVE_INFINITY },
   },
+  /*
+   * Mailing-list signups. A ceiling on list-stuffing, nothing more.
+   *
+   * Its own counter for the same reason the others are separate: joining a
+   * mailing list must not spend someone's downloads. Three a day is far
+   * above what a real person needs — most people submit this form once,
+   * ever — and far below what makes stuffing worth anyone's time.
+   *
+   * Note that `paid` is finite here, unlike every other meter. A licence is
+   * a reason to remove a limit on the product; it is not a reason to let an
+   * account write unlimited rows into a list.
+   */
+  subscribe: {
+    prefix: 'n',
+    limits: { anonymous: 3, free: 5, paid: 5 },
+  },
 } as const
 
 export type MeterId = keyof typeof METERS

@@ -115,6 +115,12 @@ export type AnalyticsEvent =
    * available on whether Pro is worth what it costs.
    */
   | { name: 'design_system_generated'; props: { name: string } }
+  /*
+   * List signups, by where the form was. The point of the list is that it
+   * is the one distribution channel that cannot be re-ranked, so which
+   * surface actually feeds it is worth knowing.
+   */
+  | { name: 'newsletter_subscribed'; props: { source: string } }
 
 /** True once PostHog has been initialized with a real project key. */
 function enabled(): boolean {

@@ -4,28 +4,64 @@
  * <NewsletterSignup> — email capture band with promise + social proof.
  *
  * Sits before the footer. Single email input + subscribe button.
- * Front-end only — form submits to a fake endpoint and shows a
- * success state. Replace with real email service (ConvertKit, Resend,
- * Loops) when ready.
  *
- * Promise: "One email when we drop new effects. No spam, ever."
- * Two real promises under the field: no spam, unsubscribe anytime.
+ * This used to be a `setTimeout` that showed a success tick and threw the
+ * address away — it asked people for something, told them it worked, and
+ * kept nothing. It now POSTs to /api/subscribe and the address is stored.
+ *
+ * Sending is still not wired up: there is no mail provider, so nothing goes
+ * out yet. The copy is written to match — it says what the email will be,
+ * not that one is coming this week — and the addresses are kept so the
+ * first send has a list to go to. See `lib/firebase/subscribers.ts`.
+ *
+ * Two real promises under the field: no spam, unsubscribe anytime. Both are
+ * currently true by construction.
  */
 
 import * as React from 'react'
 import { Mail, Check, ArrowRight, ShieldCheck } from 'lucide-react'
 import { Reveal } from '@/components/reveal'
+import { track } from '@/lib/analytics'
 
 export function NewsletterSignup() {
   const [email, setEmail] = React.useState('')
-  const [status, setStatus] = React.useState<'idle' | 'loading' | 'done'>('idle')
+  const [status, setStatus] = React.useState<'idle' | 'loading' | 'done' | 'error'>(
+    'idle',
+  )
+  const [error, setError] = React.useState('')
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     if (!email || !email.includes('@')) return
     setStatus('loading')
-    // Simulate API call
-    setTimeout(() => setStatus('done'), 800)
+    setError('')
+
+    try {
+      const res = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, source: 'landing' }),
+      })
+
+      if (!res.ok) {
+        const body = (await res.json().catch(() => ({}))) as { error?: string }
+        setError(body.error ?? 'That did not go through. Try again.')
+        setStatus('error')
+        return
+      }
+
+      /*
+       * The route answers 200 whether or not the address was already on the
+       * list, so this state means "you are on the list" rather than "you
+       * were added just now" — which is the only thing the reader cares
+       * about, and the only thing we should tell an anonymous caller.
+       */
+      setStatus('done')
+      track('newsletter_subscribed', { source: 'landing' })
+    } catch {
+      setError('That did not go through. Check your connection.')
+      setStatus('error')
+    }
   }
 
   return (
@@ -88,6 +124,12 @@ export function NewsletterSignup() {
                 </button>
               </form>
             )}
+
+            {status === 'error' ? (
+              <p role="alert" className="mt-3 text-sm text-destructive">
+                {error}
+              </p>
+            ) : null}
 
             <div className="mt-5 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs text-muted-foreground">
               <span className="inline-flex items-center gap-1.5">

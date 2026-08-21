@@ -10,9 +10,10 @@
  * seven templates became Pro — lets a 402 or a 429 become an offer rather
  * than a failed download.
  *
- * The three outcomes are told apart deliberately:
+ * The outcomes are told apart deliberately:
  *
- *   200  the archive. Same as it always was.
+ *   200  the archive, and then the list prompt — the moment a whole project
+ *        lands is the highest-intent moment this site produces.
  *   402  not licensed. The most important response here, because the person
  *        reading it is deciding whether to buy: it names the price of the
  *        thing, links the free template so they can try the shape of it,
@@ -29,11 +30,14 @@ import * as React from 'react'
 import Link from 'next/link'
 import { Download, Loader2, CircleAlert, Lock } from 'lucide-react'
 import { track } from '@/lib/analytics'
+import { NewsletterInline } from '@/components/newsletter-inline'
 
 type State =
   | { kind: 'idle' }
   | { kind: 'working' }
   | { kind: 'error' }
+  /** The archive is on its way down. */
+  | { kind: 'done' }
   | { kind: 'locked'; message: string }
   | { kind: 'metered'; message: string }
 
@@ -95,7 +99,7 @@ export function TemplateDownloadButton({
       document.body.removeChild(anchor)
 
       window.setTimeout(() => URL.revokeObjectURL(url), 1000)
-      setState({ kind: 'idle' })
+      setState({ kind: 'done' })
     } catch {
       setState({ kind: 'error' })
     }
@@ -119,7 +123,11 @@ export function TemplateDownloadButton({
           ) : (
             <Download aria-hidden className="h-4 w-4" />
           )}
-          {state.kind === 'working' ? 'Packaging' : 'Download project'}
+          {state.kind === 'working'
+            ? 'Packaging'
+            : state.kind === 'done'
+              ? 'Download again'
+              : 'Download project'}
         </button>
 
         <span aria-live="polite" className="text-xs text-muted-foreground">
@@ -133,6 +141,17 @@ export function TemplateDownloadButton({
           )}
         </span>
       </div>
+
+      {/*
+        The list prompt, at the moment the project lands rather than on a
+        page nobody scrolls to. Someone who has just taken a whole
+        eight-route project is the most engaged reader this site gets, and
+        "tell me when there are more" is an obviously reasonable thing to
+        ask them. Renders nothing for a signed-in user — see the component.
+      */}
+      {state.kind === 'done' ? (
+        <NewsletterInline source={`template:${templateId}`} />
+      ) : null}
 
       {/*
         The offer, in place, rather than a toast that disappears. Someone

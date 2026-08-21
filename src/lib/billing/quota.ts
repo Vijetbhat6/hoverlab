@@ -84,6 +84,10 @@ export function limitFor(
   const paid =
     meter === 'exports' ? ent.canUseProFeatures : ent.canUseProFeatures || ent.hasPlus
   if (paid) return limits.paid
+  // Falls through to the free/anonymous split below. Note that a meter may
+  // define a finite `paid` — `subscribe` does — in which case the branch
+  // above returns a real limit rather than Infinity, and the counter still
+  // runs.
   return subject.kind === 'user' ? limits.free : limits.anonymous
 }
 
@@ -165,7 +169,7 @@ export type QuotaResult =
 export async function consumeQuota(
   subject: QuotaSubject,
   ent: Entitlements,
-  action: QuotaAction | 'ai-search',
+  action: QuotaAction | 'ai-search' | 'subscribe',
   meter: MeterId = 'exports',
 ): Promise<QuotaResult> {
   const limit = limitFor(subject, ent, meter)
