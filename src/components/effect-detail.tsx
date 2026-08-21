@@ -28,6 +28,7 @@ import { CodeBlock } from '@/components/code-block'
 import { FrameworkExportPanel } from '@/components/framework-export-panel'
 import { OpenInSandbox } from '@/components/open-in-sandbox'
 import { EffectInsightsPanel } from '@/components/effect-insights-panel'
+import { EffectSpecCard } from '@/components/effect-spec-card'
 import { useFavorites } from '@/hooks/use-favorites'
 import { useBundle } from '@/hooks/use-bundle'
 import { useCompare } from '@/hooks/use-compare'
@@ -744,6 +745,10 @@ export function EffectDetail({ effect, similar, prev, next }: EffectDetailProps)
           follows you down the page is a cross-sell rail in the way.
         */}
         <aside className="space-y-4">
+          {/* What's in the box, above the cross-sell — someone deciding
+              whether to take this needs the contents before the neighbours. */}
+          <EffectSpecCard effect={effect} />
+
           <div className="rounded-lg border border-border/60 bg-card/60 p-4">
             <div className="mb-3 flex items-center justify-between">
               <h2 className="text-sm font-semibold tracking-tight">Similar effects</h2>
