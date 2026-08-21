@@ -84,6 +84,27 @@ export interface Plan {
   /** Per-seat pricing (Team) vs a single purchase (Pro, Studio). */
   perSeat: boolean
   /**
+   * Months of catalog updates a purchase includes, or null when updates
+   * run for as long as the subscription does.
+   *
+   * A one-time licence previously included "all future updates" forever,
+   * which is a promise that gets more expensive every week it is kept: the
+   * catalog grows, and every artifact added after a purchase is value
+   * delivered to a past buyer against no revenue. Three years of that is
+   * how a lifetime deal stops paying for the work that sustains it.
+   *
+   * Twelve months is what this market does — Preline, Tailwind Plus and
+   * Untitled UI all sell a perpetual licence with a bounded update window
+   * and a discounted renewal.
+   *
+   * Read this carefully, because it is narrower than it sounds. What
+   * expires is the entitlement to artifacts published AFTER the window,
+   * and nothing else. The licence to ship what you already have is
+   * perpetual and irrevocable, nothing stops working, and nothing checks
+   * this at runtime — see `lib/license.ts`. It is a term, not a lock.
+   */
+  updateWindowMonths: number | null
+  /**
    * Seats a one-time license covers, or null when seats don't apply.
    *
    * Distinct from `perSeat`, which asks whether the customer picks a
@@ -103,6 +124,9 @@ export const PLANS: Record<PlanId, Plan> = {
     interval: 'one_time',
     polarProductId: null,
     perSeat: false,
+    // The free licence covers what is in the catalog whenever you look at
+    // it. There is no purchase for updates to run from.
+    updateWindowMonths: null,
     includedSeats: null,
   },
   pro: {
@@ -129,6 +153,7 @@ export const PLANS: Record<PlanId, Plan> = {
     interval: 'one_time',
     polarProductId: process.env.POLAR_PRODUCT_ID_PRO ?? null,
     perSeat: false,
+    updateWindowMonths: 12,
     includedSeats: 1,
   },
   plus: {
@@ -147,6 +172,9 @@ export const PLANS: Record<PlanId, Plan> = {
     interval: 'month',
     polarProductId: process.env.POLAR_PRODUCT_ID_PLUS ?? null,
     perSeat: false,
+    // A subscription. Credits arrive monthly for as long as it is live;
+    // there is no separate update window to run out.
+    updateWindowMonths: null,
     includedSeats: 1,
   },
   studio: {
@@ -162,6 +190,7 @@ export const PLANS: Record<PlanId, Plan> = {
     interval: 'one_time',
     polarProductId: process.env.POLAR_PRODUCT_ID_STUDIO ?? null,
     perSeat: false,
+    updateWindowMonths: 12,
     includedSeats: 10,
   },
   team: {
@@ -181,6 +210,9 @@ export const PLANS: Record<PlanId, Plan> = {
     interval: 'month',
     polarProductId: process.env.POLAR_PRODUCT_ID_TEAM ?? null,
     perSeat: true,
+    // Updates run with the subscription, which is the point of paying
+    // monthly. Nothing to bound.
+    updateWindowMonths: null,
     includedSeats: null,
   },
 }

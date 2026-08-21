@@ -165,7 +165,11 @@ const TIERS: Tier[] = [
       // The key is a feature, not plumbing: it is what makes the licence
       // work in CI and in an agent, which is where this audience lives.
       'A licence key for the CLI, MCP and the API',
-      'All future updates included',
+      // Was "All future updates included". Bounded, and said on the card
+      // rather than discovered on the certificate — a term a buyer finds
+      // out about after paying is a term that costs more in trust than it
+      // recovers in revenue. See `updateWindowMonths` in billing/plans.ts.
+      'Twelve months of catalog updates — what you have stays yours',
     ],
   },
   {
@@ -183,7 +187,11 @@ const TIERS: Tier[] = [
       'Ten seats for the price of under four Pro licenses',
       'Invite your team with a workspace code',
       'One invoice, one license, no renewals',
-      'All future updates included',
+      // Was "All future updates included". Bounded, and said on the card
+      // rather than discovered on the certificate — a term a buyer finds
+      // out about after paying is a term that costs more in trust than it
+      // recovers in revenue. See `updateWindowMonths` in billing/plans.ts.
+      'Twelve months of catalog updates — what you have stays yours',
     ],
   },
   {

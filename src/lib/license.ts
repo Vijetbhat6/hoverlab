@@ -80,7 +80,14 @@ export const COMMERCIAL_LICENSE: LicenseTerms = {
     'Unlimited commercial projects — client work, paid products, SaaS, internal company tools.',
     'Unlimited end users. There is no seat count on the people who see what you ship.',
     'Perpetual and irrevocable for anything already shipped. A refund or a lapsed subscription never reaches back into work you have delivered.',
-    'All future catalog updates, at no further cost.',
+    // Was "All future catalog updates, at no further cost." That promise
+    // grew more expensive every week it was kept — every artifact added
+    // after a purchase was value delivered against no revenue — and it is
+    // not what the comparable products sell. What did NOT change: the
+    // licence to ship what you already have is still perpetual and
+    // irrevocable, which is the line above this one.
+    'Twelve months of catalog updates from the date of purchase. Everything published in that window is yours permanently, whether or not you renew.',
+    'Subscriptions include updates for as long as they are live — there is no separate window.',
   ],
   restrictions: SHARED_RESTRICTIONS,
 }
@@ -105,6 +112,17 @@ export interface HeldLicense {
   holderEmail: string
   /** ISO 8601, when the licence was granted. Null for the free licence. */
   issuedAt: string | null
+  /**
+   * ISO 8601, the end of the included update window. Null when there is
+   * none to show — the free licence, or a subscription, where updates run
+   * with the plan.
+   *
+   * Nothing enforces this. The catalog is static, public and unauthenticated
+   * below the template rung, and no code path anywhere reads this date. It
+   * is a term of the licence, stated on the certificate so a customer knows
+   * what they bought without having to re-read the licence page.
+   */
+  updatesUntil: string | null
   /** People the licence covers. Null when it is not counted in seats. */
   seats: number | null
   /**
@@ -132,6 +150,27 @@ export function licenseIdFor(plan: PlanId, orderId: string): string {
   const body = (clean + '000000000000').slice(0, 12)
   const groups = [body.slice(0, 4), body.slice(4, 8), body.slice(8, 12)]
   return `HL-${plan.toUpperCase()}-${groups.join('-')}`
+}
+
+/**
+ * End of the included update window, from a purchase date.
+ *
+ * Calendar months rather than 365 days, so a licence bought on 3 March
+ * runs to 3 March — the date a customer would work out themselves, and the
+ * one they will complain about if it disagrees.
+ *
+ * JavaScript rolls 31 January + 12 months to 31 January correctly, and
+ * would roll an impossible date (29 February + 12 months) forward into
+ * March rather than throwing. That is the right direction for the rounding
+ * to go: it errs a day in the customer's favour.
+ */
+export function updatesUntilFor(issuedAt: string, months: number | null): string | null {
+  if (months === null) return null
+  const start = new Date(issuedAt)
+  if (Number.isNaN(start.getTime())) return null
+  const end = new Date(start)
+  end.setMonth(end.getMonth() + months)
+  return end.toISOString()
 }
 
 /** The terms a held licence resolves to. */

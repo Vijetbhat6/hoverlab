@@ -158,7 +158,22 @@ export function LicenseCertificate({ className }: { className?: string }) {
             <Field
               label="Issued"
               value={license.issuedAt ? formatDate(license.issuedAt) : '—'}
-              className="col-span-2"
+            />
+            {/*
+              The update window, beside the issue date rather than buried in
+              the terms list. It is the one field on this certificate that
+              has a deadline attached, so it is the one a customer needs to
+              be able to find without reading.
+            */}
+            <Field
+              label="Updates until"
+              value={
+                license.recurring
+                  ? 'While subscribed'
+                  : license.updatesUntil
+                    ? formatDate(license.updatesUntil)
+                    : '—'
+              }
             />
           </dl>
         ) : (
@@ -175,6 +190,22 @@ export function LicenseCertificate({ className }: { className?: string }) {
 
         <TermList heading="What this licence grants" items={terms.grants} tone="grant" />
         <TermList heading="What it does not cover" items={terms.restrictions} tone="limit" />
+
+        {/*
+          Said plainly, because "updates until" next to a date is exactly
+          the phrasing that makes people think something switches off. The
+          distinction — perpetual licence, bounded update entitlement — is
+          the whole design, and a certificate that leaves it implied
+          generates support mail.
+        */}
+        {commercial && !license.recurring && license.updatesUntil ? (
+          <p className="text-xs text-muted-foreground">
+            Nothing expires. Your licence to ship what you have is permanent,
+            and every artifact published before{' '}
+            {formatDate(license.updatesUntil)} stays yours whether or not you
+            renew. What a renewal buys is what gets added after that date.
+          </p>
+        ) : null}
 
         {license.recurring ? (
           <p className="text-xs text-muted-foreground">

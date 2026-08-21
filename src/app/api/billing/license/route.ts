@@ -20,7 +20,7 @@ import { getCurrentUser } from '@/lib/session'
 import { getEntitlements } from '@/lib/billing/entitlements'
 import { adminDb } from '@/lib/firebase/admin'
 import { PLANS, type PlanId } from '@/lib/billing/plans'
-import { licenseIdFor, type HeldLicense } from '@/lib/license'
+import { licenseIdFor, updatesUntilFor, type HeldLicense } from '@/lib/license'
 
 export const runtime = 'nodejs'
 /** Reads the session cookie and Firestore — never cache it. */
@@ -32,6 +32,7 @@ const ANONYMOUS: Omit<HeldLicense, 'holder' | 'holderEmail'> = {
   planName: 'Free',
   licenseId: null,
   issuedAt: null,
+  updatesUntil: null,
   seats: null,
   recurring: false,
 }
@@ -112,6 +113,16 @@ async function handleGet() {
     planName: PLANS[plan].name,
     licenseId: order ? licenseIdFor(plan, order.orderId) : null,
     issuedAt: order?.createdAt ?? null,
+    /*
+     * Null when the granting order could not be read — the composite index
+     * on `purchases` may be missing, and `grantingOrder` returns null
+     * rather than failing the certificate. A window with no start is not a
+     * window, and inventing one from "now" would print a date that moves
+     * every time the page is loaded.
+     */
+    updatesUntil: order
+      ? updatesUntilFor(order.createdAt, PLANS[plan].updateWindowMonths)
+      : null,
     seats: PLANS[plan].includedSeats,
     // Team is the only recurring licence. Studio and Pro are bought outright,
     // so there is nothing for the certificate to caveat.
