@@ -60,6 +60,11 @@ const PROTECTED_PREFIXES = [
   '/account',
   // The editor.
   '/playground',
+  // Private collections. Server-held, per-account data — the same category
+  // as /account, and the page has nothing to render without a session. The
+  // panel behind it also handles a free signed-in account, so this redirect
+  // only ever catches the signed-out case.
+  '/collections',
 ]
 
 // Paths that should bounce logged-in users away to /library.

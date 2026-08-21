@@ -35,7 +35,13 @@ import {
   downloadTextFile,
   downloadBlob,
 } from '@/lib/bundle-export'
-import { FRAMEWORKS, type FrameworkId } from '@/lib/export'
+import {
+  FRAMEWORKS,
+  frameworkForPlan,
+  isProFramework,
+  type FrameworkId,
+} from '@/lib/export'
+import { useEntitlements } from '@/hooks/use-entitlements'
 import { cn } from '@/lib/utils'
 
 interface BundleDrawerProps {
@@ -51,10 +57,16 @@ interface BundleDrawerProps {
  */
 export function BundleDrawer({ open, onOpenChange }: BundleDrawerProps) {
   const { entries, remove, clear, count } = useBundle()
+  const { entitlements } = useEntitlements()
+  const canUsePro = entitlements?.canUseProFeatures ?? false
   const [zipBusy, setZipBusy] = React.useState(false)
   /* Which framework the ZIP's per-effect sources are generated in. 'css'
    * keeps the archive byte-identical to what it has always produced. */
-  const [zipFramework, setZipFramework] = React.useState<FrameworkId>('css')
+  const [pickedFramework, setPickedFramework] = React.useState<FrameworkId>('css')
+  /* Clamped for the same reason the detail page's picker is: the archive is
+   * built from this value, so a Pro target left selected when the licence
+   * lapsed would keep producing Pro output. See FREE_FRAMEWORK_IDS. */
+  const zipFramework = frameworkForPlan(pickedFramework, canUsePro)
 
   // The client ships metadata only, so a bundle entry's CSS has to be
   // resolved before it can be previewed or exported. Hand-crafted effects
@@ -289,14 +301,30 @@ export function BundleDrawer({ open, onOpenChange }: BundleDrawerProps) {
               <select
                 id="bundle-zip-framework"
                 value={zipFramework}
-                onChange={(e) => setZipFramework(e.target.value as FrameworkId)}
+                onChange={(e) => {
+                  const next = e.target.value as FrameworkId
+                  if (isProFramework(next) && !canUsePro) {
+                    track('paywall_hit', { feature: `bundle_zip:${next}`, plan_required: 'pro' })
+                    toast.info('That export format is part of Pro', {
+                      description: 'ZIPs in HTML, CSS and React stay free.',
+                    })
+                    return
+                  }
+                  setPickedFramework(next)
+                }}
                 className="h-9 w-full rounded-md border border-border/60 bg-background px-2 text-sm outline-none transition-colors focus-visible:border-primary/50"
               >
-                {FRAMEWORKS.map((meta) => (
-                  <option key={meta.id} value={meta.id}>
-                    {meta.label}
-                  </option>
-                ))}
+                {FRAMEWORKS.map((meta) => {
+                  const locked = isProFramework(meta.id) && !canUsePro
+                  return (
+                    /* Listed but marked, not removed. A <select> has no room
+                       for an upsell, so the label carries it — and a format
+                       nobody can see is a format nobody upgrades for. */
+                    <option key={meta.id} value={meta.id}>
+                      {locked ? `${meta.label} — Pro` : meta.label}
+                    </option>
+                  )
+                })}
               </select>
             </div>
             {/* Primary: ZIP download (most useful — structured archive) */}

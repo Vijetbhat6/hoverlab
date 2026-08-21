@@ -48,6 +48,7 @@ import {
   type CustomizationOptions,
   type Preset,
 } from '@/lib/customize'
+import { AddToCollectionButton } from '@/components/collections/add-to-collection'
 import { cn } from '@/lib/utils'
 import type { Effect } from '@/lib/effects'
 
@@ -508,6 +509,17 @@ export function EffectDetail({ effect, similar, prev, next }: EffectDetailProps)
                       : 'Add this effect to compare'}
                   </span>
                 </button>
+
+                {/* Last in the row, because it is the one action here that
+                    is about later rather than now. Copy, save and bundle
+                    all serve the visit; a collection serves the month. */}
+                <AddToCollectionButton
+                  artifact={{
+                    id: effect.id,
+                    name: effect.name,
+                    category: effect.category,
+                  }}
+                />
               </div>
             </div>
           </div>

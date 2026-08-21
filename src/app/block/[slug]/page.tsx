@@ -142,6 +142,16 @@ export default async function BlockDetailPage({ params }: PageProps) {
                 level: 'block',
               }}
             />
+            {/* Last in the row: copy, favorite and bundle all serve this
+                visit, and a collection serves the month after it. */}
+            <AddToCollectionButton
+              artifact={{
+                id: block.id,
+                name: block.name,
+                category: block.category,
+                level: 'block',
+              }}
+            />
             {/* Aimed at whoever is about to build with an agent rather than
                 paste a component: the tokens, motion and rules, as one
                 pasteable document. */}
