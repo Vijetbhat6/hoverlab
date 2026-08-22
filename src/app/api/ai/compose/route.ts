@@ -7,7 +7,6 @@ import {
   refundCredits,
   costOf,
   ACTION_COSTS,
-  FREE_DAILY_ACTIONS,
 } from '@/lib/billing/credits'
 import { coerceBrandColor, DEFAULT_BRAND_COLOR, type BrandColor } from '@/lib/brand-presets'
 import { resolveTokens } from '@/lib/export/design-system'
@@ -134,7 +133,14 @@ export const POST = withJsonErrors('api/ai/compose', async (request: Request) =>
     return NextResponse.json(
       {
         error: 'Sign in to compose a section.',
-        hint: `Composing costs ${ACTION_COSTS.compose} credits. Signing in is free and includes ${FREE_DAILY_ACTIONS} generations a day.`,
+        /*
+         * Deliberately does NOT offer the free daily generations. They only
+         * cover cost-1 actions — `spendCredits` takes the free path only
+         * when cost === ACTION_COST — so composing can never draw on them,
+         * and saying "includes 5 a day" here would promise a free compose
+         * that the very next request refuses.
+         */
+        hint: `Composing costs ${ACTION_COSTS.compose} credits, which the free daily generations do not cover. Pro+ includes 500 a month, and credit packs never expire.`,
       },
       { status: 401 },
     )

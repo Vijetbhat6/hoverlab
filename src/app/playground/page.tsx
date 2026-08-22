@@ -19,6 +19,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { CodeBlock } from '@/components/code-block'
 import { SiteHeader } from '@/components/site-header'
 import { AiVariantPanel } from '@/components/ai-variant-panel'
+import { AiComposePanel } from '@/components/ai-compose-panel'
 import {
   customizeCss,
   DEFAULT_CUSTOMIZATION,
@@ -319,6 +320,20 @@ export default function PlaygroundPage() {
                 // arrives wearing the same hue and speed they had set.
                 setHtml(variant.html)
                 setCss(variant.css)
+              }}
+            />
+
+            {/*
+              Compose sits below Change-it, because the two answer different
+              questions and the order matters: someone who already has
+              something on the canvas wants to alter it, and someone who
+              does not is starting over. Replacing the canvas is the more
+              destructive of the two, so it goes second.
+            */}
+            <AiComposePanel
+              onApply={(section) => {
+                setHtml(section.html)
+                setCss(section.css)
               }}
             />
 

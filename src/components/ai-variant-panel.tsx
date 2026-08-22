@@ -7,6 +7,13 @@
  * sits in the playground because that is where someone already has a
  * component in front of them and a reason to alter it.
  *
+ * Three modes, and the third is the one worth explaining. Blocks and pages
+ * follow a brand for free because they are styled through design tokens;
+ * an effect is hand-written CSS with literal colours in it, which is
+ * exactly the rung tokens cannot reach. "Match my brand" rewrites those
+ * colours. It is the companion to the design-system export — that gives
+ * you the tokens, this moves the one tier the tokens cannot.
+ *
  * Two deliberate choices about how it fails:
  *
  *   The balance is fetched once and updated from the generation response,
@@ -19,11 +26,12 @@
  */
 
 import * as React from 'react'
-import { Loader2, Sparkles, Wand2 } from 'lucide-react'
+import { Loader2, Palette, Sparkles, Wand2 } from 'lucide-react'
 import { toast } from 'sonner'
 
 import { Button } from '@/components/ui/button'
 import { Textarea } from '@/components/ui/textarea'
+import { useBrandColor } from '@/hooks/use-brand-color'
 import { cn } from '@/lib/utils'
 
 interface CreditState {
@@ -33,6 +41,9 @@ interface CreditState {
   freeDaily: number
   signedIn: boolean
 }
+
+/** What the user can ask for. Mirrors the route's `mode`. */
+type Mode = 'edit' | 'variation' | 'brand'
 
 export interface Variant {
   html: string
@@ -52,7 +63,8 @@ export function AiVariantPanel({
   className?: string
 }) {
   const [prompt, setPrompt] = React.useState('')
-  const [busy, setBusy] = React.useState<'edit' | 'variation' | null>(null)
+  const [busy, setBusy] = React.useState<Mode | null>(null)
+  const { color: brand, isCustomized } = useBrandColor()
   const [credits, setCredits] = React.useState<CreditState | null>(null)
   const [blocked, setBlocked] = React.useState<'plus' | 'topup' | 'signin' | null>(null)
 
@@ -72,7 +84,7 @@ export function AiVariantPanel({
     }
   }, [])
 
-  async function generate(mode: 'edit' | 'variation') {
+  async function generate(mode: Mode) {
     if (busy) return
     if (!css.trim()) {
       toast.error('Write some CSS first.')
@@ -85,7 +97,18 @@ export function AiVariantPanel({
       const res = await fetch('/api/ai/variant', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ html, css, prompt, mode }),
+        /*
+         * The brand rides along only in brand mode. Sending it always
+         * would be harmless on the wire and misleading in the code — the
+         * other two modes must not be quietly recolouring anything.
+         */
+        body: JSON.stringify({
+          html,
+          css,
+          prompt,
+          mode,
+          ...(mode === 'brand' ? { brand } : {}),
+        }),
       })
       const data = (await res.json().catch(() => ({}))) as {
         html?: string
@@ -181,7 +204,44 @@ export function AiVariantPanel({
           )}
           Surprise me
         </Button>
+        {/*
+          Offered whether or not a brand has been picked. Someone on the
+          default palette pressing this gets the catalog's own colours back,
+          which is a no-op they have paid a credit for — so the button is
+          disabled until the brand is actually theirs, and the line below
+          says where to set one. A disabled button with a reason converts
+          better than a hidden feature.
+        */}
+        <Button
+          size="sm"
+          variant="outline"
+          onClick={() => generate('brand')}
+          disabled={busy !== null || !isCustomized}
+          title={
+            isCustomized
+              ? 'Rewrite this effect’s colours to your brand'
+              : 'Pick a brand colour first — the palette control in the header'
+          }
+        >
+          {busy === 'brand' ? (
+            <Loader2 aria-hidden className="mr-1.5 h-3.5 w-3.5 animate-spin" />
+          ) : (
+            <Palette aria-hidden className="mr-1.5 h-3.5 w-3.5" />
+          )}
+          Match my brand
+        </Button>
       </div>
+
+      {!isCustomized ? (
+        <p className="mt-2 text-[11px] text-muted-foreground">
+          <span className="font-medium text-foreground">Match my brand</span> needs a
+          brand first — set one from the palette control in the header, or on{' '}
+          <a href="/design-system" className="font-medium text-primary hover:underline">
+            the design system page
+          </a>
+          .
+        </p>
+      ) : null}
 
       {blocked && (
         <p className="mt-3 rounded-lg border border-border/60 bg-muted/50 p-3 text-xs text-muted-foreground">
