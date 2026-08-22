@@ -21,9 +21,10 @@
  *                       `:root`/`.dark` blocks of any Hoverlab template.
  *   tailwind theme      the build. Maps the variables onto class names —
  *                       `bg-primary` is meaningless without it.
- *   figma-variables     the designer. Figma's Variables import format, so
- *                       the palette in the file is the palette in the code
- *                       rather than a screenshot of it.
+ *   tokens.<mode>.json  the designer. W3C DTCG, one file per mode — what
+ *                       Figma's variable import reads, so the palette in
+ *                       the file is the palette in the code rather than a
+ *                       screenshot of it.
  *   hoverlab.config     the agent and the CLI. Machine-readable, so
  *                       `hoverlab add` and an MCP client can emit code in
  *                       the brand without being told the numbers again.
@@ -299,38 +300,71 @@ export default theme
 }
 
 /**
- * Figma's Variables import shape.
+ * One theme as a W3C Design Tokens (DTCG) document.
  *
- * One collection, two modes. Modes rather than two collections because
- * that is what lets a designer flip an entire frame between light and dark
- * from one control — two collections would make every layer a manual
- * re-bind.
+ * This replaced a shape invented here — a `{ name, modes, variables[] }`
+ * object with `valuesByMode` — which read plausibly and which no tool on
+ * earth consumes. It was labelled "Figma's Variables import format" and
+ * was not that; a designer following the README would have got as far as
+ * looking for the import button.
  *
- * Hex rather than channels: Figma has no HSL-channel variable type, and a
- * string variable holding "174 62% 38%" would be a note to a human rather
- * than a colour a rectangle can use.
+ * DTCG is the format that is actually accepted. Every current Figma import
+ * plugin (Variables JSON Import, Tokens Studio, TokensBrücke, styleframe)
+ * reads it, and Figma's own native variable import — announced for
+ * November 2026 against the stable DTCG 1.0 spec — reads it too, by
+ * dragging the file in.
+ *
+ * ONE FILE PER MODE, rather than one file carrying both. DTCG has no
+ * settled syntax for modes, so every tool invented its own and none of
+ * them agree. Figma's native export resolves it the same way this does:
+ * multiple modes come out as a zip with one JSON file per mode. A file
+ * that is unambiguously "the light theme" imports everywhere; a file with
+ * a clever mode syntax imports into whichever tool inspired it.
+ *
+ * Hex rather than the HSL channels the CSS uses. Figma has no
+ * HSL-channel variable type, so "174 62% 38%" would import as a string
+ * variable — a note to a human rather than a colour a rectangle can use.
+ *
+ * The `$value` is a hex string rather than DTCG 1.0's object colour form
+ * (`{ colorSpace, components, alpha }`). That is a deliberate bet on what
+ * is verifiable: hex is what every shipping importer accepts today, and
+ * the object form can only be tested against an importer that does not
+ * exist yet. Revisit when Figma's native import ships and can be tried.
  */
-function buildFigmaVariables(brand: BrandColor, name: string): string {
-  const light = resolveTokens(brand, 'light')
-  const dark = resolveTokens(brand, 'dark')
-  const darkByName = new Map(dark.map((t) => [t.name, t]))
+function buildDtcgTokens(
+  brand: BrandColor,
+  name: string,
+  theme: Theme,
+  radius: string,
+): string {
+  const colors: Record<string, unknown> = { $type: 'color' }
+
+  for (const token of resolveTokens(brand, theme)) {
+    colors[token.name] = {
+      $value: token.hex,
+      // The OKLCH the brand tokens came from, carried across. A designer
+      // asking "where did this green come from" gets an answer inside
+      // Figma rather than having to come back to the export.
+      ...(token.oklch ? { $description: `Brand-derived — ${token.oklch}` } : {}),
+    }
+  }
 
   return `${JSON.stringify(
     {
-      name: `${name} — Hoverlab`,
-      modes: ['Light', 'Dark'],
-      variables: light.map((token) => ({
-        name: `color/${token.name}`,
-        type: 'COLOR',
-        valuesByMode: {
-          Light: token.hex,
-          Dark: darkByName.get(token.name)?.hex ?? token.hex,
-        },
-      })),
+      $description: `${name} — Hoverlab design tokens (${theme})`,
+      // Top-level keys become collection names in the importers that make
+      // collections, so they are named for what they are rather than for
+      // this product.
+      color: colors,
+      radius: {
+        $type: 'dimension',
+        default: { $value: radius },
+      },
     },
     null,
     2,
-  )}\n`
+  )}
+`
 }
 
 /**
@@ -365,7 +399,7 @@ Four files, generated from your brand colour.
 | ---- | ------------- |
 | \`tokens.css\` | the browser — replaces the \`:root\`/\`.dark\` blocks in \`app/globals.css\` |
 | \`tailwind-theme.ts\` | the build — merge \`theme.extend\` into your Tailwind config |
-| \`figma-variables.json\` | Figma — import as Variables, one collection, two modes |
+| \`tokens.light.json\` / \`tokens.dark.json\` | Figma, and any other design-token tool |
 | \`hoverlab.config.json\` | the CLI and MCP server — put it in your project root |
 
 ## The two that are a pair
@@ -373,6 +407,20 @@ Four files, generated from your brand colour.
 \`tokens.css\` and \`tailwind-theme.ts\` do nothing on their own. The first
 declares \`--primary\`; the second is what makes \`bg-primary\` a class that
 resolves to it. Install both or neither.
+
+## Getting the tokens into Figma
+
+The two \`tokens.*.json\` files are [W3C Design Tokens](https://www.designtokens.org/)
+documents — one per mode, which is how Figma itself splits them.
+
+Figma's **native** variable import is announced for November 2026: drag the
+files in, one per mode. Until then any of the community importers read the
+same files — *Variables JSON Import*, *Tokens Studio*, *TokensBrücke*.
+
+Import \`tokens.light.json\` into a collection, then \`tokens.dark.json\` into a
+second mode on that same collection. Importing into an existing collection
+updates the variables rather than duplicating them, so re-exporting after a
+brand change is a re-import, not a cleanup.
 
 ## Then
 
@@ -445,9 +493,14 @@ export function buildDesignSystem(
         code: buildTailwindTheme(name),
       },
       {
-        path: 'figma-variables.json',
+        path: 'tokens.light.json',
         language: 'json',
-        code: buildFigmaVariables(brand, name),
+        code: buildDtcgTokens(brand, name, 'light', radius),
+      },
+      {
+        path: 'tokens.dark.json',
+        language: 'json',
+        code: buildDtcgTokens(brand, name, 'dark', radius),
       },
       {
         path: 'hoverlab.config.json',

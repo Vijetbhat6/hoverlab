@@ -116,6 +116,19 @@ claude mcp add hoverlab -- npx -y hoverlab mcp`}</Snippet>
           the winners, and edits the installed React to the design&apos;s tokens.
         </p>
 
+        <p>
+          Going the other way — code to Figma — is the design system export.
+          It emits your palette as W3C design tokens, one file per mode, which
+          is what Figma&apos;s variable import reads. Do that first and{' '}
+          <C>match_design</C> is matching against a file already in your
+          colours, so &ldquo;match my colours&rdquo; above becomes a check
+          rather than a translation. See{' '}
+          <a href="/design-system" className="font-medium text-primary hover:underline">
+            /design-system
+          </a>
+          .
+        </p>
+
         <Callout>
           No Figma? A pasted screenshot works too: agents read images, and{' '}
           <C>match_design</C> only needs the structure described to it. And the

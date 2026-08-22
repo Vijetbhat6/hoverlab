@@ -17,7 +17,7 @@
  *   Pro           the files.
  *
  * That split follows the rule the rest of the product follows: nothing is
- * taken away from browsing. What Pro buys is the artifact — five files
+ * taken away from browsing. What Pro buys is the artifact — the files
  * derived from a brand nobody else has — not permission to look.
  *
  * The brand applied here is the real one, through `useBrandColor`, so the
@@ -44,7 +44,11 @@ import type { DesignSystemExport } from '@/lib/export/design-system'
 const CONTENTS: Array<{ path: string; blurb: string }> = [
   { path: 'tokens.css', blurb: 'Every colour token in your brand, light and dark.' },
   { path: 'tailwind-theme.ts', blurb: 'Maps them onto class names — bg-primary and the rest.' },
-  { path: 'figma-variables.json', blurb: 'The same palette as Figma Variables, two modes.' },
+  {
+    path: 'tokens.light.json',
+    blurb: 'W3C design tokens — what Figma’s variable import reads.',
+  },
+  { path: 'tokens.dark.json', blurb: 'The same, for dark mode. Figma splits modes by file.' },
   { path: 'hoverlab.config.json', blurb: 'So the CLI installs artifacts already in your brand.' },
   { path: 'README.md', blurb: 'What to do with the four files above.' },
 ]
@@ -192,7 +196,8 @@ export function DesignSystemPanel() {
                     onClick={downloadZip}
                     className="w-full gap-1.5"
                   >
-                    <Download aria-hidden className="h-4 w-4" /> Download all five
+                    <Download aria-hidden className="h-4 w-4" /> Download all{' '}
+                    {result.files.length}
                   </Button>
 
                   <ul className="space-y-1.5">
@@ -247,7 +252,7 @@ export function DesignSystemPanel() {
           ) : (
             <>
               <p className="text-sm text-muted-foreground">
-                Five files, derived from whatever brand you land on:
+                Everything below, derived from whatever brand you land on:
               </p>
               <ul className="space-y-2">
                 {CONTENTS.map((item) => (

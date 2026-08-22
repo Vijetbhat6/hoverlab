@@ -4,7 +4,7 @@
  * A public, indexed page for a Pro feature, which is deliberate. "Design
  * tokens from a brand colour" is a thing people search for, the panel is
  * usable and live for anyone who lands here, and the paywall is on the
- * five files rather than on the palette. Somebody who spends two minutes
+ * the files rather than on the palette. Somebody who spends two minutes
  * dragging a hue slider and watching 835 effects recolour has already had
  * the argument for Pro made to them better than a pricing card could.
  *
@@ -25,7 +25,7 @@ import { TOTAL_COUNT } from '@/lib/catalog-stats'
 
 const TITLE = 'Design system export — your brand, as tokens — Hoverlab'
 const DESCRIPTION =
-  'Pick a brand colour and get the whole token set as files: tokens.css, a Tailwind theme, Figma Variables and a config the CLI reads. Every effect, block and page in the catalog is already styled through those tokens, so the catalog matches your product instead of the other way round.'
+  'Pick a brand colour and get the whole token set as files: tokens.css, a Tailwind theme, W3C design tokens for Figma and a config the CLI reads. Every effect, block and page in the catalog is already styled through those tokens, so the catalog matches your product instead of the other way round.'
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -57,7 +57,7 @@ const READS_IT = [
   {
     icon: Figma,
     title: 'Your Figma file',
-    body: 'The same palette as Variables, one collection with light and dark modes — so the file and the code agree instead of drifting.',
+    body: 'W3C design tokens, one file per mode — the format Figma’s own variable import reads, and every token plugin already does. The file and the code stop drifting.',
   },
   {
     icon: Terminal,
@@ -115,7 +115,32 @@ export default function DesignSystemPage() {
           </div>
         </section>
 
+        {/*
+          The return trip. Someone who has just pushed their palette into
+          Figma is the exact person who then wants to build FROM Figma, and
+          until these two pages linked each other they were two unrelated
+          features that happened to both mention Figma.
+        */}
         <section className="mt-12 rounded-2xl border border-border/60 bg-card/60 p-6">
+          <h2 className="flex items-center gap-2 font-semibold">
+            <Figma aria-hidden className="h-4 w-4 text-primary" />
+            And back the other way
+          </h2>
+          <p className="mt-2 text-sm text-muted-foreground">
+            Once the tokens are in Figma, pair Figma&apos;s MCP server with
+            Hoverlab&apos;s and an agent can read a frame and build it from the
+            catalog — matching against a design that is already in your
+            colours, so there is nothing to translate.
+          </p>
+          <Link
+            href="/docs/mcp#figma"
+            className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline"
+          >
+            Pairing it with Figma <ArrowRight aria-hidden className="h-3.5 w-3.5" />
+          </Link>
+        </section>
+
+        <section className="mt-6 rounded-2xl border border-border/60 bg-card/60 p-6">
           <h2 className="flex items-center gap-2 font-semibold">
             <Blocks aria-hidden className="h-4 w-4 text-primary" />
             Then install something into it
