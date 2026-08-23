@@ -94,6 +94,10 @@ export function NavbarMegaMenu({
   ctaHref = '#',
   className = '',
 }: NavbarMegaMenuProps) {
+  // Per-instance ids. A literal id in a reusable component is a
+  // collision waiting for the second copy on the page — and a <label>
+  // then resolves to whichever input rendered first.
+  const uid = React.useId()
   const [openLabel, setOpenLabel] = React.useState<string | null>(null)
   const [mobileOpen, setMobileOpen] = React.useState(false)
   const groupRef = React.useRef<HTMLDivElement>(null)
@@ -219,7 +223,7 @@ export function NavbarMegaMenu({
             type="button"
             onClick={() => setMobileOpen((v) => !v)}
             aria-expanded={mobileOpen}
-            aria-controls="mega-mobile-panel"
+            aria-controls={`${uid}-mega-mobile-panel`}
             aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
             className="flex h-10 w-10 items-center justify-center rounded-lg border border-border/60 transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring lg:hidden"
           >
@@ -273,7 +277,7 @@ export function NavbarMegaMenu({
       {/* -- Mobile accordion ------------------------------------------ */}
       {mobileOpen ? (
         <div
-          id="mega-mobile-panel"
+          id={`${uid}-mega-mobile-panel`}
           className="max-h-[calc(100vh-4rem)] overflow-y-auto border-t border-border/40 bg-background/95 backdrop-blur-xl lg:hidden"
         >
           <nav aria-label="Main" className="mx-auto w-full max-w-7xl px-4 py-4 sm:px-6">

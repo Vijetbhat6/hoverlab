@@ -49,6 +49,10 @@ export function CheckoutForm({
   onSubmit,
   className = '',
 }: CheckoutFormProps) {
+  // Per-instance ids. A literal id in a reusable component is a
+  // collision waiting for the second copy on the page — and a <label>
+  // then resolves to whichever input rendered first.
+  const uid = React.useId()
   const [country, setCountry] = React.useState(countries[0])
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -64,7 +68,7 @@ export function CheckoutForm({
         <legend className="mb-4 text-lg font-bold tracking-tight">Contact</legend>
 
         <Field
-          id="email"
+          id={`${uid}-email`}
           name="email"
           label="Email"
           type="email"
@@ -80,16 +84,16 @@ export function CheckoutForm({
         <legend className="mb-4 text-lg font-bold tracking-tight">Delivery address</legend>
 
         <div className="grid gap-4 sm:grid-cols-2">
-          <Field id="given-name" name="givenName" label="First name" autoComplete="given-name" required />
-          <Field id="family-name" name="familyName" label="Last name" autoComplete="family-name" required />
+          <Field id={`${uid}-given-name`} name="givenName" label="First name" autoComplete="given-name" required />
+          <Field id={`${uid}-family-name`} name="familyName" label="Last name" autoComplete="family-name" required />
         </div>
 
         <div className="mt-4">
-          <label htmlFor="country" className="mb-1.5 block text-sm font-medium">
+          <label htmlFor={`${uid}-country`} className="mb-1.5 block text-sm font-medium">
             Country
           </label>
           <select
-            id="country"
+            id={`${uid}-country`}
             name="country"
             autoComplete="country"
             value={country.code}
@@ -107,9 +111,9 @@ export function CheckoutForm({
         </div>
 
         <div className="mt-4 space-y-4">
-          <Field id="address-line1" name="addressLine1" label="Address" autoComplete="address-line1" required />
+          <Field id={`${uid}-address-line1`} name="addressLine1" label="Address" autoComplete="address-line1" required />
           <Field
-            id="address-line2"
+            id={`${uid}-address-line2`}
             name="addressLine2"
             label="Apartment, suite, etc."
             autoComplete="address-line2"
@@ -119,17 +123,17 @@ export function CheckoutForm({
 
         {/* Labels follow the selected country, not a US default. */}
         <div className="mt-4 grid gap-4 sm:grid-cols-3">
-          <Field id="city" name="city" label="City" autoComplete="address-level2" required />
+          <Field id={`${uid}-city`} name="city" label="City" autoComplete="address-level2" required />
           {country.regionLabel ? (
             <Field
-              id="region"
+              id={`${uid}-region`}
               name="region"
               label={country.regionLabel}
               autoComplete="address-level1"
             />
           ) : null}
           <Field
-            id="postal-code"
+            id={`${uid}-postal-code`}
             name="postalCode"
             label={country.postalLabel}
             autoComplete="postal-code"
@@ -138,7 +142,7 @@ export function CheckoutForm({
         </div>
 
         <div className="mt-4">
-          <Field id="tel" name="tel" label="Phone" type="tel" autoComplete="tel" optional hint="For delivery questions only." />
+          <Field id={`${uid}-tel`} name="tel" label="Phone" type="tel" autoComplete="tel" optional hint="For delivery questions only." />
         </div>
       </fieldset>
 
@@ -152,7 +156,7 @@ export function CheckoutForm({
 
         <div className="relative">
           <Field
-            id="cc-number"
+            id={`${uid}-cc-number`}
             name="ccNumber"
             label="Card number"
             autoComplete="cc-number"
@@ -170,7 +174,7 @@ export function CheckoutForm({
 
         <div className="mt-4 grid gap-4 sm:grid-cols-2">
           <Field
-            id="cc-exp"
+            id={`${uid}-cc-exp`}
             name="ccExp"
             label="Expiry"
             autoComplete="cc-exp"
@@ -179,7 +183,7 @@ export function CheckoutForm({
             required
           />
           <Field
-            id="cc-csc"
+            id={`${uid}-cc-csc`}
             name="ccCsc"
             label="Security code"
             autoComplete="cc-csc"
@@ -190,7 +194,7 @@ export function CheckoutForm({
         </div>
 
         <Field
-          id="cc-name"
+          id={`${uid}-cc-name`}
           name="ccName"
           label="Name on card"
           autoComplete="cc-name"

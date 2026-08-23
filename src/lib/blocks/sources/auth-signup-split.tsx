@@ -44,6 +44,10 @@ export function AuthSignupSplit({
   loginHref = '/login',
   className = '',
 }: AuthSignupSplitProps) {
+  // Per-instance ids. A literal id in a reusable component is a
+  // collision waiting for the second copy on the page — and a <label>
+  // then resolves to whichever input rendered first.
+  const uid = React.useId()
   const [name, setName] = React.useState('')
   const [email, setEmail] = React.useState('')
   const [password, setPassword] = React.useState('')
@@ -77,11 +81,11 @@ export function AuthSignupSplit({
 
           <form onSubmit={handleSubmit} className="mt-7 space-y-4">
             <div>
-              <label htmlFor="signup-name" className="mb-1.5 block text-sm font-medium">
+              <label htmlFor={`${uid}-signup-name`} className="mb-1.5 block text-sm font-medium">
                 Full name
               </label>
               <input
-                id="signup-name"
+                id={`${uid}-signup-name`}
                 required
                 autoComplete="name"
                 value={name}
@@ -92,11 +96,11 @@ export function AuthSignupSplit({
             </div>
 
             <div>
-              <label htmlFor="signup-email" className="mb-1.5 block text-sm font-medium">
+              <label htmlFor={`${uid}-signup-email`} className="mb-1.5 block text-sm font-medium">
                 Work email
               </label>
               <input
-                id="signup-email"
+                id={`${uid}-signup-email`}
                 type="email"
                 required
                 autoComplete="email"
@@ -108,21 +112,21 @@ export function AuthSignupSplit({
             </div>
 
             <div>
-              <label htmlFor="signup-password" className="mb-1.5 block text-sm font-medium">
+              <label htmlFor={`${uid}-signup-password`} className="mb-1.5 block text-sm font-medium">
                 Password
               </label>
               <input
-                id="signup-password"
+                id={`${uid}-signup-password`}
                 type="password"
                 required
                 autoComplete="new-password"
-                aria-describedby="signup-rules"
+                aria-describedby={`${uid}-signup-rules`}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className="w-full rounded-xl border border-border/60 bg-background px-3.5 py-2.5 text-sm outline-none transition-shadow focus-visible:ring-2 focus-visible:ring-primary"
               />
 
-              <ul id="signup-rules" className="mt-3 space-y-1.5">
+              <ul id={`${uid}-signup-rules`} className="mt-3 space-y-1.5">
                 {RULES.map((rule, i) => (
                   <li
                     key={rule.label}

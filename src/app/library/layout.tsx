@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { TOTAL_COUNT } from '@/lib/catalog-stats'
 
 /**
  * Metadata for /library.
@@ -16,7 +17,13 @@ import type { Metadata } from 'next'
  * whole segment.
  */
 export const metadata: Metadata = {
-  title: 'Browse 770+ CSS Effects — Hoverlab',
+  /*
+    Derived, not typed. This read "770+" while the catalog held 835 —
+    the one count on the site that was a literal, so it was the one that
+    went stale. Every other surface reads TOTAL_COUNT; now so does the
+    title of the biggest one.
+  */
+  title: `Browse ${TOTAL_COUNT}+ CSS Effects — Hoverlab`,
   description:
     'A curated library of distinct pure-CSS effects with live demos and copy-ready code. Buttons, loaders, cards, text, backgrounds, navigation and more — no JavaScript, no frameworks, just CSS.',
   alternates: { canonical: '/library' },

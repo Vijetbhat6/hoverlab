@@ -23,7 +23,7 @@ import { execFileSync } from 'node:child_process'
 
 // Must be `localhost`, not 127.0.0.1: Next dev rejects unlisted origins via
 // allowedDevOrigins, which blocks the client bundle and prevents hydration.
-const BASE = process.env.BASE ?? 'http://localhost:3002'
+const BASE = process.env.BASE ?? 'http://localhost:3007'
 const EMAIL = process.env.EMAIL ?? `uitest-${process.pid}@hoverlab.dev`
 const PASSWORD = process.env.PASSWORD ?? 'testpassword123'
 

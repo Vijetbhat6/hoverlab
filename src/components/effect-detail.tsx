@@ -45,6 +45,46 @@ import {
 } from '@/lib/customize'
 import { cn } from '@/lib/utils'
 import type { Effect } from '@/lib/effects'
+import type { EffectCategory } from '@/lib/effect-types'
+
+/**
+ * How tall the live-preview stage has to be for a given kind of effect.
+ *
+ * Some effects *are* their canvas — a gradient mesh, a noise texture, a
+ * clip-path scene — and reading one at 200px tells you nothing. Most are a
+ * component: a button, a badge, a toggle, a tooltip. One height cannot
+ * serve both, and the flat 320/400px this used to be served the first
+ * group at the cost of the second, which is the larger one.
+ *
+ * Minimums, not fixed heights: anything taller than its floor still grows
+ * the box.
+ */
+const FULL_BLEED: ReadonlySet<string> = new Set<EffectCategory>([
+  'Backgrounds',
+  'Patterns & Textures',
+  'Masks & Clip Paths',
+  '3D & Perspective',
+  'Glow & Neon',
+  'Entrance Animations',
+])
+
+const COMPONENT_SIZED: ReadonlySet<string> = new Set<EffectCategory>([
+  'Buttons',
+  'Badges & Tags',
+  'Toggles & Switches',
+  'Inputs & Hover',
+  'Dividers & Separators',
+  'Tooltips & Popovers',
+  'Text',
+  'Avatars & Images',
+  'Progress & Meters',
+])
+
+function stageMinHeight(category: EffectCategory): string {
+  if (FULL_BLEED.has(category)) return 'min-h-[320px] sm:min-h-[400px]'
+  if (COMPONENT_SIZED.has(category)) return 'min-h-[180px] sm:min-h-[220px]'
+  return 'min-h-[240px] sm:min-h-[300px]'
+}
 
 interface EffectDetailProps {
   effect: Effect
@@ -451,11 +491,27 @@ export function EffectDetail({ effect, similar, prev, next }: EffectDetailProps)
             </CardHeader>
 
             <CardContent className="space-y-4 pt-0">
-              {/* Large live preview */}
+              {/*
+                Large live preview.
+
+                The stage used to be a flat min-h-[320px]/sm:400px for every
+                effect in the catalog, which is the right box for a full-page
+                gradient and roughly 300px of empty room around a hover
+                button — the thing on the page a visitor came to look at,
+                floating in the middle of nothing.
+
+                `STAGE_MIN_H` sizes the box to the kind of effect it holds:
+                the categories that are inherently full-bleed keep the tall
+                stage, component-sized effects get a compact one, and the
+                default sits between the two. Still a *minimum*, so anything
+                taller than its floor grows the box rather than being
+                cropped by it.
+              */}
               <div
                 ref={previewRef}
                 className={cn(
-                  'relative flex min-h-[320px] items-center justify-center overflow-hidden rounded-xl border border-border/50 p-8 sm:min-h-[400px]',
+                  'relative flex items-center justify-center overflow-hidden rounded-xl border border-border/50 p-8',
+                  stageMinHeight(effect.category),
                   surfaceDark ? 'bg-slate-950' : effect.previewClass ?? 'bg-muted/30',
                   isCustomized && 'ring-1 ring-primary/20',
                 )}

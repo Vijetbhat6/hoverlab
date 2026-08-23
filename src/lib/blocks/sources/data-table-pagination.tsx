@@ -57,6 +57,10 @@ export function DataTablePagination({
   onChange,
   className = '',
 }: DataTablePaginationProps) {
+  // Per-instance ids. A literal id in a reusable component is a
+  // collision waiting for the second copy on the page — and a <label>
+  // then resolves to whichever input rendered first.
+  const uid = React.useId()
   const [page, setPage] = React.useState(1)
   const [pageSize, setPageSize] = React.useState(initialPageSize)
 
@@ -89,11 +93,11 @@ export function DataTablePagination({
       className={`flex flex-col items-center justify-between gap-4 border-t border-border/60 px-4 py-3 sm:flex-row ${className}`}
     >
       <div className="flex items-center gap-2 text-sm">
-        <label htmlFor="page-size" className="text-muted-foreground">
+        <label htmlFor={`${uid}-page-size`} className="text-muted-foreground">
           Rows per page
         </label>
         <select
-          id="page-size"
+          id={`${uid}-page-size`}
           value={pageSize}
           onChange={(e) => changeSize(Number(e.target.value))}
           className="rounded-lg border border-border/60 bg-background px-2 py-1 text-sm outline-none focus-visible:ring-2 focus-visible:ring-primary"

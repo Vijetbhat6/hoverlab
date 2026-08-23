@@ -38,10 +38,10 @@ const FAQ_ITEMS: FaqItem[] = [
         Yes, for personal and non-commercial projects. The whole catalog —
         every effect, every block, every page, every template — is free to
         browse, customize and copy, with no time limit and no credit card.
-        The CLI and the public API are open to everyone too. What a paid plan
-        adds is the right to use any of it commercially, plus unlimited bundle
-        size, the framework export formats, brand presets and private
-        collections.
+        The CLI and the public API are open to everyone too — including
+        every export format, which is why no plan charges for them. What a
+        paid plan adds is the right to use any of it commercially, and an
+        unlimited synced bundle.
       </>
     ),
   },

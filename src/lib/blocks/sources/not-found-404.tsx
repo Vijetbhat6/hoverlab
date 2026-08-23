@@ -29,6 +29,12 @@ export interface NotFound404Props {
   searchAction?: string
   links?: SuggestedLink[]
   homeHref?: string
+  /**
+   * Id for the field. A server component cannot call `useId`, so this is
+   * the escape hatch for a page that renders two of these: give the second
+   * one its own id rather than letting both labels resolve to the first.
+   */
+  inputId?: string
   className?: string
 }
 
@@ -43,6 +49,7 @@ export function NotFound404({
   title = 'We could not find that page',
   description = 'The link may be out of date, or the page may have moved. Here are a few ways forward.',
   searchAction = '/search',
+  inputId = 'notfound-search',
   links = DEFAULT_LINKS,
   homeHref = '/',
   className = '',
@@ -66,7 +73,7 @@ export function NotFound404({
       {/* A real GET form — no JavaScript required. */}
       <form action={searchAction} method="get" className="mt-8 flex w-full max-w-md gap-2">
         <div className="relative flex-1">
-          <label htmlFor="notfound-search" className="sr-only">
+          <label htmlFor={inputId} className="sr-only">
             Search the site
           </label>
           <Search
@@ -74,7 +81,7 @@ export function NotFound404({
             className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground"
           />
           <input
-            id="notfound-search"
+            id={inputId}
             name="q"
             type="search"
             placeholder="Search for what you were looking for"

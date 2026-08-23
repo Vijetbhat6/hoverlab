@@ -35,6 +35,10 @@ export function AuthTwoFactor({
   embedded = false,
   className = '',
 }: AuthTwoFactorProps) {
+  // Per-instance ids. A literal id in a reusable component is a
+  // collision waiting for the second copy on the page — and a <label>
+  // then resolves to whichever input rendered first.
+  const uid = React.useId()
   const [mode, setMode] = React.useState<Mode>('app')
   const [code, setCode] = React.useState('')
   const [trustDevice, setTrustDevice] = React.useState(false)
@@ -83,11 +87,11 @@ export function AuthTwoFactor({
 
         <form onSubmit={handleSubmit} className="mt-6 space-y-4">
           <div>
-            <label htmlFor="tfa-code" className="mb-1.5 block text-sm font-medium">
+            <label htmlFor={`${uid}-tfa-code`} className="mb-1.5 block text-sm font-medium">
               {isApp ? 'Authentication code' : 'Backup code'}
             </label>
             <input
-              id="tfa-code"
+              id={`${uid}-tfa-code`}
               // Backup codes contain letters and dashes, so only the app
               // code gets the numeric keypad and the OTP autofill hint.
               inputMode={isApp ? 'numeric' : 'text'}

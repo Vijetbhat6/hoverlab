@@ -79,6 +79,10 @@ export function ContactFormSplit({
   onSubmit,
   className = '',
 }: ContactFormSplitProps) {
+  // Per-instance ids. A literal id in a reusable component is a
+  // collision waiting for the second copy on the page — and a <label>
+  // then resolves to whichever input rendered first.
+  const uid = React.useId()
   const [values, setValues] = React.useState<ContactValues>(EMPTY)
   const [status, setStatus] = React.useState<Status>('idle')
 
@@ -159,7 +163,7 @@ export function ContactFormSplit({
             >
               <div className="grid gap-4 sm:grid-cols-2">
                 <Field
-                  id="contact-name"
+                  id={`${uid}-contact-name`}
                   label="Name"
                   autoComplete="name"
                   required
@@ -167,7 +171,7 @@ export function ContactFormSplit({
                   onChange={(v) => set('name', v)}
                 />
                 <Field
-                  id="contact-email"
+                  id={`${uid}-contact-email`}
                   label="Work email"
                   type="email"
                   autoComplete="email"
@@ -176,14 +180,14 @@ export function ContactFormSplit({
                   onChange={(v) => set('email', v)}
                 />
                 <Field
-                  id="contact-company"
+                  id={`${uid}-contact-company`}
                   label="Company"
                   autoComplete="organization"
                   value={values.company}
                   onChange={(v) => set('company', v)}
                 />
                 <Field
-                  id="contact-subject"
+                  id={`${uid}-contact-subject`}
                   label="Subject"
                   required
                   value={values.subject}
@@ -192,11 +196,11 @@ export function ContactFormSplit({
               </div>
 
               <div className="mt-4">
-                <label htmlFor="contact-message" className="block text-sm font-medium">
+                <label htmlFor={`${uid}-contact-message`} className="block text-sm font-medium">
                   Message
                 </label>
                 <textarea
-                  id="contact-message"
+                  id={`${uid}-contact-message`}
                   required
                   rows={5}
                   value={values.message}

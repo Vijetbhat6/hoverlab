@@ -155,10 +155,33 @@ npx hoverlab init storefront ./shop`}</Snippet>
       </DocsSection>
 
       <DocsSection id="licence" title="Licence">
+        {/*
+          This section used to read: "Everything in the catalog is yours to
+          ship, including in client work and paid products, with no
+          attribution required." That is the exact right Pro is sold on, given
+          away on a docs page — so there was nothing left to buy, and the
+          pricing page (which has always said Free is for personal and
+          non-commercial work) contradicted it. The two now agree, and the
+          document that governs is linked rather than paraphrased.
+        */}
         <p>
-          Everything in the catalog is yours to ship, including in client work
-          and paid products, with no attribution required. Copied code does not
-          phone home and nothing breaks when we deploy.
+          Copy anything you like, from anywhere, with or without an account.
+          Free covers unlimited personal and non-commercial projects, with no
+          attribution required.{' '}
+          <Link href="/pricing" className="font-medium text-primary hover:underline">
+            Pro
+          </Link>{' '}
+          adds commercial use — client work, products you sell, work for an
+          employer — once, for life.
+        </p>
+        <p className="mt-3">
+          The full terms, including the cases people actually ask about, are on
+          the{' '}
+          <Link href="/licence" className="font-medium text-primary hover:underline">
+            licence page
+          </Link>
+          . Whichever tier you are on: copied code does not phone home, and
+          nothing breaks when we deploy.
         </p>
       </DocsSection>
     </>

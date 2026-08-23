@@ -19,19 +19,7 @@
 
 import * as React from 'react'
 import Link from 'next/link'
-import {
-  Wand2,
-  Sparkles,
-  ArrowRight,
-  Package,
-  Code2,
-  Zap,
-  Shield,
-  Layers,
-  Palette,
-  Copy,
-  Terminal,
-} from 'lucide-react'
+import { ArrowRight, Copy, Search, Sparkles, Terminal, Zap } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { useAuth } from '@/components/auth-provider'
@@ -39,19 +27,16 @@ import { SiteHeader } from '@/components/site-header'
 import { CatalogSearchForm } from '@/components/catalog-search-form'
 import { LandingShowcase } from '@/components/landing-showcase'
 import { Reveal } from '@/components/reveal'
-import { StatsBand } from '@/components/landing/stats-band'
+import { SiteFooter } from '@/components/site-footer'
+import { AgentBand } from '@/components/landing/agent-band'
 import { LadderBand } from '@/components/landing/ladder-band'
 import { FaqAccordion } from '@/components/landing/faq-accordion'
-import { LogoMarquee } from '@/components/landing/logo-marquee'
-import { CodePreviewWindow } from '@/components/landing/code-preview'
-import { UseCases } from '@/components/landing/use-cases'
 import { PricingTiers } from '@/components/landing/pricing-tiers'
 import { ComparisonTable } from '@/components/landing/comparison-table'
 import { NewsletterSignup } from '@/components/landing/newsletter-signup'
 import { CommunityBand } from '@/components/landing/community-band'
-import { CATEGORIES } from '@/lib/effect-types'
 import { DESIGNER_TOOLS } from '@/lib/designer-tools'
-import { TOTAL_COUNT, countByCategory } from '@/lib/catalog-stats'
+import { TOTAL_COUNT } from '@/lib/catalog-stats'
 import { BLOCK_COUNT } from '@/lib/blocks/block-index'
 import { PAGE_COUNT } from '@/lib/pages/page-index'
 import { TEMPLATE_COUNT } from '@/lib/templates/template-index'
@@ -100,6 +85,13 @@ export default function LandingPage() {
         different, smaller product than the one behind it.
       */}
       <SiteHeader />
+
+      {/*
+        The landmark the skip link in <SiteHeader> targets. The front door
+        had no <main> at all, so a screen reader had no way to jump the
+        nine-item nav and there was nothing for "Skip to content" to reach.
+      */}
+      <main id="main-content">
 
       {/* Hero */}
       <section className="mx-auto w-full max-w-7xl px-4 pb-12 pt-16 sm:px-6 sm:pt-24 lg:px-8 lg:pt-32">
@@ -165,6 +157,15 @@ export default function LandingPage() {
             ))}
           </div>
 
+          {/*
+            Both buttons go to the catalog.
+
+            The secondary one used to read "Create a free account", four
+            lines above a note saying no account is needed — the first of
+            three places this page argued with itself. A visitor who is not
+            signed in has exactly one useful next step here, and it is not
+            a form.
+          */}
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Button size="lg" variant="outline" className="h-12 gap-1.5 px-6" asChild>
               <Link href="/browse">
@@ -172,15 +173,13 @@ export default function LandingPage() {
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </Button>
-            {!loading && user ? (
-              <Button size="lg" variant="ghost" className="h-12 gap-1.5 px-6" asChild>
-                <Link href="/library">Open your library</Link>
-              </Button>
-            ) : (
-              <Button size="lg" variant="ghost" className="h-12 gap-1.5 px-6" asChild>
-                <Link href="/signup">Create a free account</Link>
-              </Button>
-            )}
+            <Button size="lg" variant="ghost" className="h-12 gap-1.5 px-6" asChild>
+              <Link href={!loading && user ? '/library' : '/tools'}>
+                {!loading && user
+                  ? 'Open your library'
+                  : `Or start with ${DESIGNER_TOOLS.length} free tools`}
+              </Link>
+            </Button>
           </div>
           <p className="mt-4 text-xs text-muted-foreground">
             No account needed to browse or copy · Sign up only to save
@@ -189,14 +188,19 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Stats band */}
-      <StatsBand />
+      {/*
+        <StatsBand> and <LogoMarquee> came out here.
+
+        The stats band was the third rendition of the same four numbers in
+        the first screen: the hero badge counts them, the tier chips under
+        the search count them again, and the ladder below counts them a
+        third time with the same labels. The marquee said "works with your
+        stack" in twenty scrolling wordmarks, which is a claim the CLI
+        section makes concretely a screen later.
+      */}
 
       {/* The four tiers — effects up to templates */}
       <LadderBand />
-
-      {/* Logo marquee — works with every stack */}
-      <LogoMarquee />
 
       {/* Live showcase */}
       <section className="mx-auto w-full max-w-7xl px-4 pb-16 sm:px-6 lg:px-8">
@@ -219,69 +223,25 @@ export default function LandingPage() {
         </Reveal>
       </section>
 
-      {/* Code preview window — from browser to production */}
-      <CodePreviewWindow />
 
-      {/* Features grid */}
-      <section className="border-y border-border/40 bg-background/60 py-16 backdrop-blur">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <Reveal className="mx-auto mb-12 max-w-2xl text-center">
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-              Everything you need to ship
-            </h2>
-            <p className="mt-3 text-muted-foreground">
-              From a single hover button to a full design system. Hoverlab gives
-              you the building blocks, the source code, and a place to save
-              what you love.
-            </p>
-          </Reveal>
+      {/*
+        The six-card features grid used to sit here, and the bento grid
+        before it.
 
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            <Reveal delay={0}>
-              <FeatureCard
-                icon={<Layers className="h-5 w-5" />}
-                title="Four tiers, one catalog"
-                description={`${TOTAL_COUNT.toLocaleString('en-US')}+ effects across ${CATEGORIES.length} categories, ${BLOCK_COUNT} blocks, ${PAGE_COUNT} pages and ${TEMPLATE_COUNT} deployable templates. Each tier is built from the one below it, so you can drill from a template down to the button inside it.`}
-              />
-            </Reveal>
-            <Reveal delay={80}>
-              <FeatureCard
-                icon={<Code2 className="h-5 w-5" />}
-                title="Copy-ready source"
-                description="Effects hand you HTML and CSS in one click. Blocks and above hand you the actual files — components, their imports, and the dependency list — laid out the way they'll sit in your repo."
-              />
-            </Reveal>
-            <Reveal delay={160}>
-              <FeatureCard
-                icon={<Terminal className="h-5 w-5" />}
-                title="Install from the terminal"
-                description="npx hoverlab add <id> writes any effect, block, page or template straight into your project — it detects your setup and picks the right paths. Free, no account, no token. There's an MCP server too, so your editor's agent can search the catalog — or pair it with Figma's and rebuild a selected frame from real blocks."
-              />
-            </Reveal>
-            <Reveal delay={0}>
-              <FeatureCard
-                icon={<Palette className="h-5 w-5" />}
-                title="Live customization"
-                description="Hue, saturation, scale, and speed sliders let you tune every effect to your brand. Six preset palettes (Sunset, Ocean, Forest, Monochrome, Neon, Pastel) get you started in one click."
-              />
-            </Reveal>
-            <Reveal delay={80}>
-              <FeatureCard
-                icon={<Package className="h-5 w-5" />}
-                title="Favorites, bundles & export"
-                description="Save what you love and it syncs to every device you sign in on. Add effects to a bundle with their customization intact, then export the lot as one minified CSS file — or as Vue, Svelte or Tailwind."
-              />
-            </Reveal>
-            <Reveal delay={160}>
-              <FeatureCard
-                icon={<Shield className="h-5 w-5" />}
-                title="Pure CSS at the base"
-                description="Every effect is plain HTML and CSS — no npm install, no supply-chain risk, nothing to keep updated. Blocks and above are React components and list their dependencies up front, so you always know what you're taking on."
-              />
-            </Reveal>
-          </div>
-        </div>
-      </section>
+        Both answered "why this over the alternatives" — and so does the
+        comparison table two sections down, which is the one that answers
+        it with a table rather than with adjectives. A visitor who has just
+        read six cards making that case does not read the table making it
+        again; they start scrolling past everything.
+
+        One card was not making that case, though: "Install from the
+        terminal" carried the CLI, the MCP server and the Figma pairing,
+        which is the only claim on this page no competitor can make. That
+        is now <AgentBand> below, at the size it deserves.
+      */}
+
+      {/* The CLI, the MCP server, and the Figma matcher */}
+      <AgentBand />
 
       {/*
         The bento grid used to sit here. It was a second "why developers
@@ -295,14 +255,26 @@ export default function LandingPage() {
       {/* Comparison table — Hoverlab vs alternatives */}
       <ComparisonTable />
 
-      {/* How it works */}
+      {/*
+        How it works.
+
+        Step 01 used to be "Create your account", six sections below a hero
+        that says no account is needed to browse or copy. Both statements
+        were true of different products, and a visitor reading them in
+        order could not tell which one this is.
+
+        These three are what actually happens: you search, you copy, you
+        install. None of them needs an account, which is the point — the
+        signup ask now lives where it earns itself, on the favourite and
+        bundle controls that genuinely need somewhere to save to.
+      */}
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <Reveal className="mx-auto mb-12 max-w-2xl text-center">
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
             Three steps to your next UI
           </h2>
           <p className="mt-3 text-muted-foreground">
-            No setup, no boilerplate. Sign up, browse, copy.
+            No setup, no boilerplate, no account. Search, copy, install.
           </p>
         </Reveal>
 
@@ -315,67 +287,51 @@ export default function LandingPage() {
           <Reveal delay={0}>
             <StepCard
               number="01"
-              icon={<Sparkles className="h-5 w-5" />}
-              title="Create your account"
-              description="Free forever, just an email and password. Your favorites and bundle are saved to your account from this point on."
+              icon={<Search className="h-5 w-5" />}
+              title="Search"
+              description="One query ranks across all four rungs at once — a hover state, a finished section, a whole screen or a starter project, side by side. Nothing to sign in to."
             />
           </Reveal>
           <Reveal delay={120}>
             <StepCard
               number="02"
-              icon={<Layers className="h-5 w-5" />}
-              title="Pick your rung"
-              description="One search covers all four tiers. Take a single hover state, a finished section, a whole screen, or a starter project — then tune hue, saturation, scale and speed in real time."
+              icon={<Copy className="h-5 w-5" />}
+              title="Copy"
+              description="Effects hand you HTML and CSS in one click. Blocks and above hand you the real files with their imports and dependency list — and you can tune hue, scale and speed before you take it."
             />
           </Reveal>
           <Reveal delay={240}>
             <StepCard
               number="03"
-              icon={<Copy className="h-5 w-5" />}
-              title="Copy, bundle, or install"
-              description="Grab the source with one click, bundle several and export them as one CSS file, or run npx hoverlab add <id> to write it straight into your repo."
+              icon={<Terminal className="h-5 w-5" />}
+              title="Install"
+              description="Or skip the browser entirely: npx hoverlab add <id> writes it straight into your repo, detects your framework, and lists the dependencies you still need."
             />
           </Reveal>
         </div>
       </section>
 
-      {/* Use cases — built for everyone who ships UI */}
-      <UseCases />
+      {/*
+        <UseCases> came out here — a four-card persona grid ("built for
+        everyone who ships UI"). It was the third section in a row making
+        the case for the product rather than showing it, after the agent
+        band and the comparison table, and it was the one making it in the
+        most general terms. Anyone still reading at this point has already
+        decided the product is for them; what they want next is the price.
+      */}
 
       {/* Pricing tiers */}
       <PricingTiers />
 
-      {/* Categories overview */}
-      <section className="border-y border-border/40 bg-background/60 py-16 backdrop-blur">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <Reveal className="mb-10 max-w-2xl">
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-              {CATEGORIES.length} effect categories to explore
-            </h2>
-            <p className="mt-3 text-muted-foreground">
-              From micro-interactions to full-page backgrounds, every category
-              is curated for quality and ready to drop into production.
-            </p>
-          </Reveal>
-          <Reveal delay={80} className="flex flex-wrap gap-2">
-            {CATEGORIES.map((c) => {
-              const count = countByCategory(c)
-              return (
-                <Link
-                  key={c}
-                  href={`/library?filter=${encodeURIComponent(c)}`}
-                  className="group inline-flex items-center gap-2 rounded-full border border-border/60 bg-background/60 px-4 py-2 text-sm font-medium text-muted-foreground transition-all hover:border-primary/40 hover:text-foreground"
-                >
-                  {c}
-                  <span className="rounded-full bg-muted px-1.5 py-0.5 text-[10px] font-semibold text-muted-foreground group-hover:bg-primary/10 group-hover:text-primary">
-                    {count}
-                  </span>
-                </Link>
-              )
-            })}
-          </Reveal>
-        </div>
-      </section>
+      {/*
+        The 32-category chip wall came out here.
+
+        Its real job was internal linking — handing crawlers and scrollers
+        a route into every category hub. The site footer now carries that
+        job on every page rather than on this one, which is both wider
+        reach and less of this page. The categories themselves are one
+        click away from /library and /category.
+      */}
 
       {/*
         The designer tools band.
@@ -450,24 +406,40 @@ export default function LandingPage() {
               <h2 className="text-balance text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl">
                 Ready to make your UI move?
               </h2>
+              {/*
+                The last line of the page used to be "Create your free
+                account in seconds", with Sign up and Sign in as the only
+                two buttons — the third and loudest place this page
+                contradicted its own hero. Someone who has read to the
+                bottom wants the catalog, not a form: the primary button
+                now goes where the hero's does, and the secondary offers
+                the terminal, which needs no account at all.
+
+                Signed-in visitors get their library instead, since the
+                catalog link they already followed once is not news.
+              */}
               <p className="mx-auto mt-4 max-w-xl text-pretty text-body sm:text-lg">
-                Create your free account in seconds. Your favorites and bundle
-                will sync across every device you sign in on.
+                Search {(TOTAL_COUNT + BLOCK_COUNT + PAGE_COUNT + TEMPLATE_COUNT).toLocaleString('en-US')}{' '}
+                components in one query, copy what fits, and keep going. No
+                account, no install, no credit card.
               </p>
               <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
                 <Button size="lg" className="h-12 gap-1.5 px-6" asChild>
-                  <Link href="/signup">
-                    Get started — it&apos;s free
+                  <Link href={!loading && user ? '/library' : '/browse'}>
+                    {!loading && user ? 'Open your library' : 'Browse the catalog'}
                     <ArrowRight className="h-4 w-4" />
                   </Link>
                 </Button>
                 <Button
                   size="lg"
                   variant="ghost"
-                  className="h-12 px-6"
+                  className="h-12 gap-1.5 px-6"
                   asChild
                 >
-                  <Link href="/login">Sign in</Link>
+                  <Link href="/docs/cli">
+                    <Terminal className="h-4 w-4" />
+                    Or install from the terminal
+                  </Link>
                 </Button>
               </div>
               {/*
@@ -494,51 +466,15 @@ export default function LandingPage() {
       {/* Community band — GitHub / Discord / X */}
       <CommunityBand />
 
+      </main>
+
       {/* Footer */}
-      <footer className="border-t border-border/40 bg-background/60 backdrop-blur">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-4 py-6 text-sm text-muted-foreground sm:flex-row sm:px-6 lg:px-8">
-          <div className="flex items-center gap-2">
-            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-emerald-600 text-white">
-              <Wand2 className="h-4 w-4" />
-            </div>
-            <span>Hoverlab — Effects, blocks, pages and templates</span>
-          </div>
-          <p className="font-mono text-xs">
-            npx hoverlab add &lt;id&gt; · Free CLI and public API
-          </p>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   )
 }
 
 /* ---------- sub-components ---------- */
-
-function FeatureCard({
-  icon,
-  title,
-  description,
-}: {
-  icon: React.ReactNode
-  title: string
-  description: string
-}) {
-  return (
-    <div className="group relative h-full overflow-hidden rounded-2xl border border-border/60 bg-card/80 p-6 backdrop-blur transition-all hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5">
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -right-12 -top-12 h-32 w-32 rounded-full bg-primary/0 blur-2xl transition-colors group-hover:bg-primary/10"
-      />
-      <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary transition-transform group-hover:scale-110">
-        {icon}
-      </div>
-      <h3 className="mb-2 text-lg font-semibold tracking-tight">{title}</h3>
-      <p className="text-sm leading-relaxed text-muted-foreground">
-        {description}
-      </p>
-    </div>
-  )
-}
 
 function StepCard({
   number,

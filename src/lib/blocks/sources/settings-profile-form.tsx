@@ -41,6 +41,10 @@ export function SettingsProfileForm({
   bioLimit = 160,
   className = '',
 }: SettingsProfileFormProps) {
+  // Per-instance ids. A literal id in a reusable component is a
+  // collision waiting for the second copy on the page — and a <label>
+  // then resolves to whichever input rendered first.
+  const uid = React.useId()
   const [values, setValues] = React.useState(initial)
   const [busy, setBusy] = React.useState(false)
   const [saved, setSaved] = React.useState(false)
@@ -113,11 +117,11 @@ export function SettingsProfileForm({
 
         <div className="grid gap-5 sm:grid-cols-2">
           <div>
-            <label htmlFor="profile-name" className="mb-1.5 block text-sm font-medium">
+            <label htmlFor={`${uid}-profile-name`} className="mb-1.5 block text-sm font-medium">
               Full name
             </label>
             <input
-              id="profile-name"
+              id={`${uid}-profile-name`}
               autoComplete="name"
               value={values.name}
               onChange={(e) => set('name', e.target.value)}
@@ -126,11 +130,11 @@ export function SettingsProfileForm({
           </div>
 
           <div>
-            <label htmlFor="profile-email" className="mb-1.5 block text-sm font-medium">
+            <label htmlFor={`${uid}-profile-email`} className="mb-1.5 block text-sm font-medium">
               Email
             </label>
             <input
-              id="profile-email"
+              id={`${uid}-profile-email`}
               type="email"
               autoComplete="email"
               value={values.email}
@@ -145,7 +149,7 @@ export function SettingsProfileForm({
 
         <div>
           <div className="mb-1.5 flex items-baseline justify-between">
-            <label htmlFor="profile-bio" className="block text-sm font-medium">
+            <label htmlFor={`${uid}-profile-bio`} className="block text-sm font-medium">
               Bio
             </label>
             <span
@@ -157,7 +161,7 @@ export function SettingsProfileForm({
             </span>
           </div>
           <textarea
-            id="profile-bio"
+            id={`${uid}-profile-bio`}
             rows={3}
             aria-invalid={overLimit}
             value={values.bio}

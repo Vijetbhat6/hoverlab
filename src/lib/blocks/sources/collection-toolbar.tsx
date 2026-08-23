@@ -47,6 +47,10 @@ export function CollectionToolbar({
   onOpenFilters,
   className = '',
 }: CollectionToolbarProps) {
+  // Per-instance ids. A literal id in a reusable component is a
+  // collision waiting for the second copy on the page — and a <label>
+  // then resolves to whichever input rendered first.
+  const uid = React.useId()
   const [density, setDensity] = React.useState<'comfortable' | 'compact'>('comfortable')
 
   function changeDensity(next: 'comfortable' | 'compact') {
@@ -75,12 +79,12 @@ export function CollectionToolbar({
 
       <div className="ml-auto flex items-center gap-3">
         <div className="flex items-center gap-2">
-          <label htmlFor="collection-sort" className="text-sm text-muted-foreground">
+          <label htmlFor={`${uid}-collection-sort`} className="text-sm text-muted-foreground">
             Sort
           </label>
           {/* Native select — better than any custom dropdown here. */}
           <select
-            id="collection-sort"
+            id={`${uid}-collection-sort`}
             onChange={(e) => onSort?.(e.target.value)}
             className="rounded-xl border border-border/60 bg-background px-2.5 py-1.5 text-sm outline-none focus-visible:ring-2 focus-visible:ring-primary"
           >

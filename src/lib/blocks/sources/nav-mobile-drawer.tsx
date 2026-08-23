@@ -106,6 +106,10 @@ export function NavMobileDrawer({
   embedded = false,
   className = '',
 }: NavMobileDrawerProps) {
+  // Per-instance ids. A literal id in a reusable component is a
+  // collision waiting for the second copy on the page — and a <label>
+  // then resolves to whichever input rendered first.
+  const uid = React.useId()
   const [open, setOpen] = React.useState(false)
   const panelRef = React.useRef<HTMLDivElement>(null)
   const triggerRef = React.useRef<HTMLButtonElement>(null)
@@ -203,7 +207,7 @@ export function NavMobileDrawer({
         ref={panelRef}
         role="dialog"
         aria-modal="true"
-        aria-labelledby="drawer-title"
+        aria-labelledby={`${uid}-drawer-title`}
         aria-hidden={!open}
         // `inert` keeps the closed panel out of the tab order without
         // unmounting it — the panel has to stay mounted for the transform
@@ -215,7 +219,7 @@ export function NavMobileDrawer({
         }`}
       >
         <div className="flex h-16 shrink-0 items-center justify-between border-b border-border/60 px-4">
-          <h2 id="drawer-title" className="text-sm font-semibold">
+          <h2 id={`${uid}-drawer-title`} className="text-sm font-semibold">
             {brand} menu
           </h2>
           <button
@@ -236,11 +240,11 @@ export function NavMobileDrawer({
                 aria-hidden
                 className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground"
               />
-              <label htmlFor="drawer-search" className="sr-only">
+              <label htmlFor={`${uid}-drawer-search`} className="sr-only">
                 Search
               </label>
               <input
-                id="drawer-search"
+                id={`${uid}-drawer-search`}
                 type="search"
                 placeholder="Search…"
                 className="h-10 w-full rounded-lg border border-border/60 bg-card/60 pl-9 pr-3 text-sm placeholder:text-muted-foreground focus:border-primary/50 focus:outline-none focus:ring-2 focus:ring-ring/30"

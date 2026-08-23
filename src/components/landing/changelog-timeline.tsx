@@ -15,7 +15,7 @@ import * as React from 'react'
 import { GitCommit, ArrowUpRight } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { Reveal } from '@/components/reveal'
-import { SOCIAL } from '@/lib/social'
+import { SOCIAL, isPlaceholder } from '@/lib/social'
 
 interface Release {
   version: string
@@ -154,6 +154,8 @@ export function ChangelogTimeline() {
         ))}
       </div>
 
+      {/* Hidden while the GitHub URL is unset — see isPlaceholder(). */}
+      {isPlaceholder(SOCIAL.github) ? null : (
       <Reveal delay={300} className="mt-10 text-center">
         <a
           href={SOCIAL.github.href}
@@ -165,6 +167,7 @@ export function ChangelogTimeline() {
           <ArrowUpRight className="h-3.5 w-3.5" />
         </a>
       </Reveal>
+      )}
     </section>
   )
 }

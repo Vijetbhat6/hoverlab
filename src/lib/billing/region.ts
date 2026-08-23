@@ -11,7 +11,7 @@ import type { Region } from './plans'
  *
  * Locally neither header exists, so everything resolves to 'default' — list
  * price. To exercise the India path in dev, send the header by hand:
- *   curl -H 'x-vercel-ip-country: IN' localhost:3002/api/billing/pricing
+ *   curl -H 'x-vercel-ip-country: IN' localhost:3007/api/billing/pricing
  *
  * VPN arbitrage is deliberately not defended against. Enforcing a match
  * between IP country and billing country blocks more legitimate buyers

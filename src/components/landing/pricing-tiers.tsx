@@ -29,6 +29,7 @@
 
 import * as React from 'react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { Check, Sparkles, ArrowRight, Loader2, Clock } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -102,7 +103,10 @@ const TIERS: Tier[] = [
       'Bundle up to 10 effects',
       'Export bundles as CSS, HTML, or ZIP',
       'PWA — installable, offline-ready',
-      'Personal and non-commercial projects',
+      // Links out rather than asserting. This line and the docs used to
+      // disagree about whether free covers commercial work; /licence is now
+      // the one place that answers it.
+      'Personal and non-commercial projects — see the licence',
     ],
   },
   {
@@ -121,11 +125,26 @@ const TIERS: Tier[] = [
       // this line was written.
       'Commercial use — every effect, block, page and template',
       'Client work, paid products, no attribution',
-      'Unlimited bundle size',
-      'Every export format (Vue, Svelte, Tailwind)',
-      'Custom brand color presets',
-      'Private collections',
+      // The one product limit that is a real wall: PUT /api/sync/bundle
+      // caps a free account at ten saved items and says so.
+      'Unlimited bundle size, synced across devices',
+      // Removed from this list rather than fixed:
+      //
+      //   "Every export format (Vue, Svelte, Tailwind)" — every format is
+      //   free and always has been. `/api/v1` is public and unauthenticated
+      //   so `npx hoverlab add --framework vue` works with no account, by
+      //   design (see lib/billing/plans.ts). Gating the website's export
+      //   panel while the CLI hands the same file to anyone would be a wall
+      //   made of paper, and charging for it would be a lie.
+      //
+      //   "Custom brand color presets" — the brand picker recolours this
+      //   site's own chrome on /tools. It is a preference, not a product.
+      //
+      //   "Private collections" — no such feature exists in the codebase.
+      //   It is listed below as `soon`, the same treatment Team's unbuilt
+      //   features already get, instead of with a green check.
       'All future updates included',
+      { label: 'Private collections', soon: true as const },
     ],
   },
   {
@@ -289,6 +308,10 @@ export function PricingTiers({ className }: { className?: string } = {}) {
   }, [])
 
   const signedIn = !!user
+
+  // Rendered on the landing page, on /account and on /pricing itself. Only
+  // the first two have anywhere to send someone.
+  const onPricingPage = usePathname() === '/pricing'
 
   /**
    * True when this visitor's checkout will actually be in rupees.
@@ -475,16 +498,42 @@ export function PricingTiers({ className }: { className?: string } = {}) {
         ))}
       </div>
 
+      {/*
+        The linkable version of this section.
+
+        Pricing lived only here — a band in the middle of two long pages —
+        so there was no URL to paste to a colleague and nothing for "hoverlab
+        pricing" to land on. /pricing renders this exact component, so the
+        pointer is hidden there rather than sending someone to the page they
+        are already reading.
+      */}
+      {onPricingPage ? null : (
+        <Reveal delay={200} className="mt-8 text-center">
+          <Link
+            href="/pricing"
+            className="inline-flex items-center gap-1 text-sm font-medium text-primary transition-all hover:gap-2 hover:underline"
+          >
+            Full pricing page — comparison and FAQ
+            <ArrowRight aria-hidden className="h-3.5 w-3.5" />
+          </Link>
+        </Reveal>
+      )}
+
       <Reveal delay={240} className="mt-8 text-center">
         <p className="text-xs text-muted-foreground">
           Every plan includes PWA install and{' '}
           <code className="rounded bg-muted px-1.5 py-0.5 font-mono">
             prefers-reduced-motion
           </code>{' '}
-          support, and the CLI and public API are open to everyone. Free
-          covers personal and non-commercial projects; shipping anything from
-          the catalog in client work or a paid product needs Pro or Team. No
-          credit card required for Free.
+          support, and the CLI and public API are open to everyone — every
+          export format included. Free covers personal and non-commercial
+          projects; shipping anything from the catalog in client work or a
+          paid product needs Pro or Team. The{' '}
+          <Link href="/licence" className="font-medium text-primary hover:underline">
+            licence
+          </Link>{' '}
+          sets out exactly where that line falls. No credit card required for
+          Free.
         </p>
         {/*
           Said before the buy button, not after the charge. Team's shared

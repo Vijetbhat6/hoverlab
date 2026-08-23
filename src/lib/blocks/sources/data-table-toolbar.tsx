@@ -45,6 +45,10 @@ export function DataTableToolbar({
   onFiltersChange,
   className = '',
 }: DataTableToolbarProps) {
+  // Per-instance ids. A literal id in a reusable component is a
+  // collision waiting for the second copy on the page — and a <label>
+  // then resolves to whichever input rendered first.
+  const uid = React.useId()
   const [term, setTerm] = React.useState('')
   const [filters, setFilters] = React.useState<FilterChip[]>(initialFilters)
   const [view, setView] = React.useState<'list' | 'grid'>('list')
@@ -63,7 +67,7 @@ export function DataTableToolbar({
     <div className={`space-y-3 ${className}`}>
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
         <div className="relative flex-1">
-          <label htmlFor="table-search" className="sr-only">
+          <label htmlFor={`${uid}-table-search`} className="sr-only">
             {placeholder}
           </label>
           <Search
@@ -71,7 +75,7 @@ export function DataTableToolbar({
             className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground"
           />
           <input
-            id="table-search"
+            id={`${uid}-table-search`}
             type="search"
             value={term}
             onChange={(e) => handleSearch(e.target.value)}

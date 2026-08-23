@@ -38,6 +38,10 @@ export function AuthForgotPassword({
   embedded = false,
   className = '',
 }: AuthForgotPasswordProps) {
+  // Per-instance ids. A literal id in a reusable component is a
+  // collision waiting for the second copy on the page — and a <label>
+  // then resolves to whichever input rendered first.
+  const uid = React.useId()
   const [email, setEmail] = React.useState('')
   const [busy, setBusy] = React.useState(false)
   const [sent, setSent] = React.useState(false)
@@ -87,11 +91,11 @@ export function AuthForgotPassword({
 
             <form onSubmit={handleSubmit} className="mt-6 space-y-4">
               <div>
-                <label htmlFor="forgot-email" className="mb-1.5 block text-sm font-medium">
+                <label htmlFor={`${uid}-forgot-email`} className="mb-1.5 block text-sm font-medium">
                   Email
                 </label>
                 <input
-                  id="forgot-email"
+                  id={`${uid}-forgot-email`}
                   type="email"
                   required
                   autoFocus={!embedded}

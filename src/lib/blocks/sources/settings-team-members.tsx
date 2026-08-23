@@ -51,6 +51,10 @@ export function SettingsTeamMembers({
   onInvite,
   className = '',
 }: SettingsTeamMembersProps) {
+  // Per-instance ids. A literal id in a reusable component is a
+  // collision waiting for the second copy on the page — and a <label>
+  // then resolves to whichever input rendered first.
+  const uid = React.useId()
   const [members, setMembers] = React.useState(initialMembers)
   const [inviteEmail, setInviteEmail] = React.useState('')
   const [inviteRole, setInviteRole] = React.useState<Role>('Member')
@@ -79,11 +83,11 @@ export function SettingsTeamMembers({
         </div>
 
         <form onSubmit={handleInvite} className="flex items-center gap-2">
-          <label htmlFor="invite-email" className="sr-only">
+          <label htmlFor={`${uid}-invite-email`} className="sr-only">
             Email to invite
           </label>
           <input
-            id="invite-email"
+            id={`${uid}-invite-email`}
             type="email"
             value={inviteEmail}
             onChange={(e) => setInviteEmail(e.target.value)}
@@ -91,11 +95,11 @@ export function SettingsTeamMembers({
             className="w-48 rounded-xl border border-border/60 bg-background px-3 py-2 text-sm outline-none transition-shadow placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-primary"
           />
 
-          <label htmlFor="invite-role" className="sr-only">
+          <label htmlFor={`${uid}-invite-role`} className="sr-only">
             Role for the invitee
           </label>
           <select
-            id="invite-role"
+            id={`${uid}-invite-role`}
             value={inviteRole}
             onChange={(e) => setInviteRole(e.target.value as Role)}
             className="rounded-xl border border-border/60 bg-background px-2 py-2 text-sm outline-none focus-visible:ring-2 focus-visible:ring-primary"

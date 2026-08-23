@@ -98,6 +98,10 @@ export function OnboardingChecklist({
   onDismiss,
   className = '',
 }: OnboardingChecklistProps) {
+  // Per-instance ids. A literal id in a reusable component is a
+  // collision waiting for the second copy on the page — and a <label>
+  // then resolves to whichever input rendered first.
+  const uid = React.useId()
   const [complete, setComplete] = React.useState<Set<string>>(
     () => new Set(initialComplete ?? (steps[0] ? [steps[0].id] : [])),
   )
@@ -154,7 +158,7 @@ export function OnboardingChecklist({
       {/* Native <progress>: reports its value to assistive tech for free. */}
       <div className="mt-5">
         <div className="flex items-center justify-between text-xs font-medium">
-          <label htmlFor="onboarding-progress" className="text-muted-foreground">
+          <label htmlFor={`${uid}-onboarding-progress`} className="text-muted-foreground">
             Setup progress
           </label>
           <span>
@@ -162,7 +166,7 @@ export function OnboardingChecklist({
           </span>
         </div>
         <progress
-          id="onboarding-progress"
+          id={`${uid}-onboarding-progress`}
           value={done}
           max={steps.length}
           className="mt-2 h-2 w-full overflow-hidden rounded-full [&::-moz-progress-bar]:bg-primary [&::-webkit-progress-bar]:rounded-full [&::-webkit-progress-bar]:bg-muted [&::-webkit-progress-value]:rounded-full [&::-webkit-progress-value]:bg-primary"

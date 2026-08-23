@@ -101,6 +101,10 @@ export function ReviewList({
   locale = 'en-GB',
   className = '',
 }: ReviewListProps) {
+  // Per-instance ids. A literal id in a reusable component is a
+  // collision waiting for the second copy on the page — and a <label>
+  // then resolves to whichever input rendered first.
+  const uid = React.useId()
   const [sort, setSort] = React.useState<SortKey>('helpful')
   const [voted, setVoted] = React.useState<Set<string>>(() => new Set())
   const [expanded, setExpanded] = React.useState<Set<string>>(() => new Set())
@@ -135,18 +139,18 @@ export function ReviewList({
   }
 
   return (
-    <section id="reviews" className={`w-full ${className}`}>
+    <section id={`${uid}-reviews`} className={`w-full ${className}`}>
       <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border/60 pb-4">
         <h2 className="text-lg font-bold tracking-tight">
           {reviews.length} {reviews.length === 1 ? 'review' : 'reviews'}
         </h2>
 
         <div className="flex items-center gap-2">
-          <label htmlFor="review-sort" className="text-sm text-muted-foreground">
+          <label htmlFor={`${uid}-review-sort`} className="text-sm text-muted-foreground">
             Sort
           </label>
           <select
-            id="review-sort"
+            id={`${uid}-review-sort`}
             value={sort}
             onChange={(e) => setSort(e.target.value as SortKey)}
             className="rounded-xl border border-border/60 bg-background px-2.5 py-1.5 text-sm outline-none focus-visible:ring-2 focus-visible:ring-primary"

@@ -74,6 +74,10 @@ export function OrderSummaryPanel({
   onCheckout,
   className = '',
 }: OrderSummaryPanelProps) {
+  // Per-instance ids. A literal id in a reusable component is a
+  // collision waiting for the second copy on the page — and a <label>
+  // then resolves to whichever input rendered first.
+  const uid = React.useId()
   const [entered, setEntered] = React.useState('')
   const [applied, setApplied] = React.useState<Promo | null>(null)
   const [error, setError] = React.useState<string | null>(null)
@@ -128,7 +132,7 @@ export function OrderSummaryPanel({
         </div>
       ) : (
         <form onSubmit={apply} className="mt-4">
-          <label htmlFor="promo-code" className="sr-only">
+          <label htmlFor={`${uid}-promo-code`} className="sr-only">
             Promo code
           </label>
           <div className="flex gap-2">
@@ -138,7 +142,7 @@ export function OrderSummaryPanel({
                 className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground"
               />
               <input
-                id="promo-code"
+                id={`${uid}-promo-code`}
                 value={entered}
                 onChange={(e) => {
                   setEntered(e.target.value)
@@ -146,7 +150,7 @@ export function OrderSummaryPanel({
                 }}
                 placeholder="Promo code"
                 aria-invalid={Boolean(error)}
-                aria-describedby="promo-error"
+                aria-describedby={`${uid}-promo-error`}
                 className="w-full rounded-xl border border-border/60 bg-background py-2 pl-9 pr-3 text-sm outline-none transition-shadow placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-primary"
               />
             </div>
@@ -157,7 +161,7 @@ export function OrderSummaryPanel({
               Apply
             </button>
           </div>
-          <p id="promo-error" aria-live="polite" className="mt-1.5 min-h-4 text-xs text-destructive">
+          <p id={`${uid}-promo-error`} aria-live="polite" className="mt-1.5 min-h-4 text-xs text-destructive">
             {error}
           </p>
         </form>

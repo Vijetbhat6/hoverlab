@@ -1,9 +1,15 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  typescript: {
-    ignoreBuildErrors: true,
-  },
+  /*
+   * `typescript.ignoreBuildErrors` used to be true here.
+   *
+   * Source is clean under `tsc --noEmit`, so nothing was hiding behind it
+   * — which is exactly why it cost nothing to turn off, and exactly why
+   * leaving it on was the risk: the *next* type error would have shipped
+   * silently instead of failing the build. There is no setting to restore
+   * here; the default is to typecheck.
+   */
   reactStrictMode: false,
 
   /**

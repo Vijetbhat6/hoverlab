@@ -16,6 +16,7 @@ import { DESIGNER_TOOLS } from '@/lib/designer-tools'
 import { BrandColorPicker } from '@/components/brand-color-picker'
 import { SiteHeader } from '@/components/site-header'
 import { useCommandPalette } from '@/components/command-palette'
+import { SiteFooter } from '@/components/site-footer'
 
 export default function ToolsHubPage() {
   const { open: openCommandPalette } = useCommandPalette()
@@ -24,7 +25,7 @@ export default function ToolsHubPage() {
     <div className="relative flex min-h-screen flex-col">
       <SiteHeader actions={<BrandColorPicker />} />
 
-      <main className="mx-auto w-full max-w-7xl flex-1 px-4 pb-16 pt-12 sm:px-6 lg:px-8 lg:pt-16">
+      <main id="main-content" className="mx-auto w-full max-w-7xl flex-1 px-4 pb-16 pt-12 sm:px-6 lg:px-8 lg:pt-16">
         {/* Hero */}
         <section className="mx-auto mb-12 max-w-3xl text-center">
           <div className="mb-4 inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-background/60 px-3 py-1 text-xs text-muted-foreground backdrop-blur">
@@ -82,6 +83,7 @@ export default function ToolsHubPage() {
           </p>
         </section>
       </main>
+      <SiteFooter />
     </div>
   )
 }

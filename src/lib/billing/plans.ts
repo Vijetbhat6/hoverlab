@@ -6,9 +6,14 @@
  *
  *   Pro   — ONE-TIME license. Individual developers don't subscribe to CSS
  *           snippets they can get free elsewhere; they do pay once for a
- *           pre-cleared commercial license, unlimited bundles, every export
- *           format, brand presets and private collections. This is how
- *           Tailwind Plus and Magic UI Pro sell.
+ *           pre-cleared commercial license and an unlimited synced bundle.
+ *           This is how Tailwind Plus and Magic UI Pro sell.
+ *
+ *           That list used to be five items long — it also claimed every
+ *           export format, brand presets and private collections. Two of
+ *           those are free by design and the third does not exist, so they
+ *           were removed from every surface rather than left as a pitch the
+ *           code contradicts. The licence at /licence is what Pro sells.
  *
  *           Note what is NOT on that list: the catalog itself and the CLI.
  *           Every artifact is readable and copyable for free, and `/api/v1`

@@ -61,7 +61,7 @@ export default function CategoryIndexPage() {
         </p>
       </section>
 
-      <main className="mx-auto w-full max-w-7xl px-4 pb-16 sm:px-6 lg:px-8">
+      <div className="mx-auto w-full max-w-7xl px-4 pb-16 sm:px-6 lg:px-8">
         {/* All hero CSS in one tag — see the note on the [slug] page: the
             per-effect class names are globally unique, and keeping the
             <style> outside the cards avoids nesting it inside a link. */}
@@ -105,7 +105,7 @@ export default function CategoryIndexPage() {
             </div>
           ))}
         </div>
-      </main>
+      </div>
     </div>
   )
 }

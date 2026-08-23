@@ -19,6 +19,7 @@ import * as React from 'react'
 import { Button } from '@/components/ui/button'
 import { SiteHeader } from '@/components/site-header'
 import { BrandColorPicker } from '@/components/brand-color-picker'
+import { SiteFooter } from '@/components/site-footer'
 import { toast } from 'sonner'
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
@@ -41,7 +42,7 @@ export function ToolLayout({ name, tagline, icon, children }: ToolLayoutProps) {
           is in the shared tray. */}
       <SiteHeader actions={<BrandColorPicker />} />
 
-      <main className="mx-auto w-full max-w-7xl flex-1 px-4 pb-16 pt-6 sm:px-6 lg:px-8">
+      <main id="main-content" className="mx-auto w-full max-w-7xl flex-1 px-4 pb-16 pt-6 sm:px-6 lg:px-8">
         <div className="mb-8">
           <Button
             asChild
@@ -68,6 +69,7 @@ export function ToolLayout({ name, tagline, icon, children }: ToolLayoutProps) {
 
         {children}
       </main>
+      <SiteFooter />
     </div>
   )
 }

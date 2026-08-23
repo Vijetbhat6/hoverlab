@@ -75,10 +75,20 @@ export function ArtifactThumbnail({
     >
       <div
         aria-hidden
+        inert
         className="w-[200%] origin-top-left scale-50"
         // The thumbnail is decoration for the card's own link and title.
         // Exposing a duplicate copy of every heading and button inside it
         // would bury the real navigation in a screen reader's list.
+        //
+        // `inert` is the other half of that. `aria-hidden` removes the
+        // subtree from the accessibility tree but leaves every button,
+        // link and input inside it in the tab order — so a keyboard user
+        // on /blocks was tabbing through 690 controls that announced as
+        // nothing at all, and /pages and /templates had the same problem
+        // at 537 and 223. `pointer-events-none` on the wrapper above
+        // already stops the mouse reaching them; this is the same rule
+        // for the keyboard.
       >
         {preview}
       </div>

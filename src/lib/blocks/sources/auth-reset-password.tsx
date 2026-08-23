@@ -49,6 +49,10 @@ export function AuthResetPassword({
   onSubmit,
   className = '',
 }: AuthResetPasswordProps) {
+  // Per-instance ids. A literal id in a reusable component is a
+  // collision waiting for the second copy on the page — and a <label>
+  // then resolves to whichever input rendered first.
+  const uid = React.useId()
   const [password, setPassword] = React.useState('')
   const [confirm, setConfirm] = React.useState('')
   const [visible, setVisible] = React.useState(false)
@@ -85,12 +89,12 @@ export function AuthResetPassword({
 
         <form onSubmit={handleSubmit} className="mt-6 space-y-4">
           <div>
-            <label htmlFor="reset-password" className="mb-1.5 block text-sm font-medium">
+            <label htmlFor={`${uid}-reset-password`} className="mb-1.5 block text-sm font-medium">
               New password
             </label>
             <div className="relative">
               <input
-                id="reset-password"
+                id={`${uid}-reset-password`}
                 type={visible ? 'text' : 'password'}
                 required
                 autoComplete="new-password"
@@ -132,16 +136,16 @@ export function AuthResetPassword({
           </div>
 
           <div>
-            <label htmlFor="reset-confirm" className="mb-1.5 block text-sm font-medium">
+            <label htmlFor={`${uid}-reset-confirm`} className="mb-1.5 block text-sm font-medium">
               Confirm password
             </label>
             <input
-              id="reset-confirm"
+              id={`${uid}-reset-confirm`}
               type={visible ? 'text' : 'password'}
               required
               autoComplete="new-password"
               aria-invalid={mismatch}
-              aria-describedby="reset-confirm-error"
+              aria-describedby={`${uid}-reset-confirm-error`}
               value={confirm}
               onChange={(e) => setConfirm(e.target.value)}
               className={`w-full rounded-xl border bg-background px-3.5 py-2.5 text-sm outline-none transition-shadow focus-visible:ring-2 ${
@@ -151,7 +155,7 @@ export function AuthResetPassword({
               }`}
             />
             <p
-              id="reset-confirm-error"
+              id={`${uid}-reset-confirm-error`}
               aria-live="polite"
               className="mt-1.5 min-h-4 text-xs text-destructive"
             >

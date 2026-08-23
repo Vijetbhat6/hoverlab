@@ -37,6 +37,10 @@ export function AuthLoginCard({
   forgotHref = '/forgot-password',
   className = '',
 }: AuthLoginCardProps) {
+  // Per-instance ids. A literal id in a reusable component is a
+  // collision waiting for the second copy on the page — and a <label>
+  // then resolves to whichever input rendered first.
+  const uid = React.useId()
   const [email, setEmail] = React.useState('')
   const [password, setPassword] = React.useState('')
   const [visible, setVisible] = React.useState(false)
@@ -98,11 +102,11 @@ export function AuthLoginCard({
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label htmlFor="login-email" className="mb-1.5 block text-sm font-medium">
+            <label htmlFor={`${uid}-login-email`} className="mb-1.5 block text-sm font-medium">
               Email
             </label>
             <input
-              id="login-email"
+              id={`${uid}-login-email`}
               type="email"
               required
               autoComplete="username"
@@ -115,7 +119,7 @@ export function AuthLoginCard({
 
           <div>
             <div className="mb-1.5 flex items-baseline justify-between">
-              <label htmlFor="login-password" className="block text-sm font-medium">
+              <label htmlFor={`${uid}-login-password`} className="block text-sm font-medium">
                 Password
               </label>
               <a
@@ -128,7 +132,7 @@ export function AuthLoginCard({
 
             <div className="relative">
               <input
-                id="login-password"
+                id={`${uid}-login-password`}
                 type={visible ? 'text' : 'password'}
                 required
                 autoComplete="current-password"

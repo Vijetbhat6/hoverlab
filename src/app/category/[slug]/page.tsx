@@ -153,7 +153,7 @@ export default async function CategoryPage({ params }: PageProps) {
         </div>
       </section>
 
-      <main className="mx-auto w-full max-w-7xl px-4 pb-16 sm:px-6 lg:px-8">
+      <div className="mx-auto w-full max-w-7xl px-4 pb-16 sm:px-6 lg:px-8">
         {/* Every preview's CSS in one document-level tag. Class names are
             globally unique per effect (`fx-<slug>-<seq>`), so concatenating
             them can't collide. */}
@@ -207,7 +207,7 @@ export default async function CategoryPage({ params }: PageProps) {
             ))}
           </div>
         </section>
-      </main>
+      </div>
     </div>
   )
 }

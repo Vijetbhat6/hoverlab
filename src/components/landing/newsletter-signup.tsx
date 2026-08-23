@@ -1,31 +1,78 @@
 'use client'
 
 /**
- * <NewsletterSignup> — email capture band with promise + social proof.
+ * <NewsletterSignup> — email capture band.
  *
  * Sits before the footer. Single email input + subscribe button.
- * Front-end only — form submits to a fake endpoint and shows a
- * success state. Replace with real email service (ConvertKit, Resend,
- * Loops) when ready.
  *
- * Promise: "One email when we drop new effects. No spam, ever."
- * Two real promises under the field: no spam, unsubscribe anytime.
+ * The submit handler used to be `setTimeout(() => setStatus('done'), 800)`.
+ * It showed "You're in. Talk soon." and stored nothing — under a heading
+ * promising one email when new effects land, and beside a promise of
+ * one-click unsubscribe, neither of which anything could keep. It also
+ * receives the "Join the waitlist" traffic from any pricing tier that is
+ * not purchasable, so the visitors most worth hearing from were the ones
+ * being dropped.
+ *
+ * It now POSTs to /api/newsletter, which writes to Firestore and records
+ * what was consented to. Two consequences worth keeping:
+ *
+ *   Failure is visible. If the address is not stored, the form says so
+ *   and keeps the field's contents. A success state that does not depend
+ *   on success is the bug this component used to be.
+ *
+ *   The promises under the field stay true. "Unsubscribe anytime" is
+ *   backed by a token issued at signup and a route that honours it.
  */
 
 import * as React from 'react'
-import { Mail, Check, ArrowRight, ShieldCheck } from 'lucide-react'
+import { Mail, Check, ArrowRight, ShieldCheck, AlertCircle } from 'lucide-react'
 import { Reveal } from '@/components/reveal'
 
-export function NewsletterSignup() {
-  const [email, setEmail] = React.useState('')
-  const [status, setStatus] = React.useState<'idle' | 'loading' | 'done'>('idle')
+/** Which surface the signup came from, for knowing what converts. */
+interface NewsletterSignupProps {
+  source?: 'landing' | 'pricing' | 'footer' | 'docs'
+}
 
-  function handleSubmit(e: React.FormEvent) {
+export function NewsletterSignup({ source = 'landing' }: NewsletterSignupProps) {
+  const [email, setEmail] = React.useState('')
+  const [status, setStatus] = React.useState<'idle' | 'loading' | 'done' | 'error'>(
+    'idle',
+  )
+  const [error, setError] = React.useState('')
+
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     if (!email || !email.includes('@')) return
     setStatus('loading')
-    // Simulate API call
-    setTimeout(() => setStatus('done'), 800)
+    setError('')
+
+    try {
+      const res = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, source }),
+      })
+      const data = (await res.json().catch(() => ({}))) as { error?: string }
+
+      if (!res.ok) {
+        // Show the server's sentence when it has one — it says whether the
+        // address was rejected or the list was unreachable, and those call
+        // for different things from the reader.
+        setError(
+          data.error ||
+            'That did not go through. Please try again in a moment.',
+        )
+        setStatus('error')
+        return
+      }
+
+      setStatus('done')
+    } catch {
+      setError(
+        'We could not reach the server, so nothing was saved. Check your connection and try again.',
+      )
+      setStatus('error')
+    }
   }
 
   return (
@@ -75,6 +122,8 @@ export function NewsletterSignup() {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="you@company.com"
                   disabled={status === 'loading'}
+                  aria-invalid={status === 'error'}
+                  aria-describedby={status === 'error' ? 'newsletter-error' : undefined}
                   className="fx-newsletter-input flex-1 rounded-xl border border-border/60 bg-background/80 px-4 py-3 text-sm placeholder:text-muted-foreground/60 focus:border-primary/40 focus:outline-none disabled:opacity-50"
                   aria-label="Email address"
                 />
@@ -88,6 +137,22 @@ export function NewsletterSignup() {
                 </button>
               </form>
             )}
+
+            {/*
+              role="alert" so the failure is announced rather than merely
+              drawn. The field keeps its value, so recovering is one click
+              on Subscribe, not retyping an address.
+            */}
+            {status === 'error' ? (
+              <p
+                id="newsletter-error"
+                role="alert"
+                className="mx-auto mt-3 flex max-w-md items-start gap-2 text-left text-sm text-destructive"
+              >
+                <AlertCircle aria-hidden className="mt-0.5 h-4 w-4 shrink-0" />
+                {error}
+              </p>
+            ) : null}
 
             <div className="mt-5 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs text-muted-foreground">
               <span className="inline-flex items-center gap-1.5">

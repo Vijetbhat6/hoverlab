@@ -114,7 +114,7 @@ export default function AccountPage() {
 
       <SiteHeader />
 
-      <main className="mx-auto max-w-5xl px-4 pb-16 pt-12 sm:px-6">
+      <main id="main-content" className="mx-auto max-w-5xl px-4 pb-16 pt-12 sm:px-6">
         <div className="flex items-center gap-4">
           <div className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-primary to-emerald-600 text-2xl font-bold text-white shadow-lg shadow-primary/30">
             {initial}

@@ -14,8 +14,9 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
-import { ArrowLeft, ArrowRight, Package, FileCode, Layers } from 'lucide-react'
+import { ArrowLeft, ArrowRight, CalendarDays, Package, FileCode, Layers } from 'lucide-react'
 import { CodeBlock } from '@/components/code-block'
+import { JsonLd } from '@/components/json-ld'
 import { BlockPreview } from '@/components/blocks/block-preview'
 import { BlockMarkupPanel } from '@/components/blocks/block-markup-panel'
 import { BlockCard } from '@/components/blocks/block-card'
@@ -24,6 +25,8 @@ import { blockCategorySlug, GROUP_OF } from '@/lib/blocks/block-types'
 import { blocksInCategory, getBlockMeta } from '@/lib/blocks/block-index'
 import { pagesUsingBlock } from '@/lib/pages/page-index'
 import { absoluteUrl } from '@/lib/site'
+import { addedAt, formatAdded } from '@/lib/recency'
+import { artifactBreadcrumbLd, artifactLd } from '@/lib/structured-data'
 import {
   TrackArtifactView,
   FavoriteArtifactButton,
@@ -85,8 +88,31 @@ export default async function BlockDetailPage({ params }: PageProps) {
   // without this tier knowing anything about pages.
   const usedIn = pagesUsingBlock(block.id)
 
+  const added = addedAt('block', block.id)
+
   return (
     <div className="min-h-screen bg-background text-foreground">
+      {/* Structured data — what this page is, and where it sits. See
+          lib/structured-data.ts for why SoftwareSourceCode. */}
+      <JsonLd
+        data={artifactLd({
+          level: 'block',
+          id: block.id,
+          name: block.name,
+          description: block.description,
+          category: block.category,
+          keywords: block.tags,
+          dependencies: block.deps,
+          datePublished: added,
+        })}
+      />
+      <JsonLd
+        data={artifactBreadcrumbLd('block', block.name, {
+          name: block.category,
+          path: `/blocks/${blockCategorySlug(block.category)}`,
+        })}
+      />
+
       <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
         {/* ---------------------------------------------------------- *
          *  Breadcrumb + header
@@ -159,6 +185,16 @@ export default async function BlockDetailPage({ params }: PageProps) {
               <Package aria-hidden className="h-4 w-4" />
               {block.deps.length === 0 ? 'No dependencies' : block.deps.join(', ')}
             </span>
+            {/* When it landed. The catalog had no dates at all until the
+                recency ledger, so "is this maintained?" had no answer
+                anywhere on the site. Rendered only when the ledger knows —
+                see lib/recency.ts. */}
+            {added ? (
+              <span className="inline-flex items-center gap-1.5">
+                <CalendarDays aria-hidden className="h-4 w-4" />
+                Added {formatAdded(added)}
+              </span>
+            ) : null}
           </div>
 
           {block.tags.length > 0 ? (

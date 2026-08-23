@@ -90,6 +90,10 @@ export function MultiStepForm({
   onSubmit,
   className = '',
 }: MultiStepFormProps) {
+  // Per-instance ids. A literal id in a reusable component is a
+  // collision waiting for the second copy on the page — and a <label>
+  // then resolves to whichever input rendered first.
+  const uid = React.useId()
   const [step, setStep] = React.useState(0)
   const [values, setValues] = React.useState<MultiStepValues>(EMPTY)
   const [errors, setErrors] = React.useState<Errors>({})
@@ -199,7 +203,7 @@ export function MultiStepForm({
           {step === 0 ? (
             <>
               <TextField
-                id="ms-name"
+                id={`${uid}-ms-name`}
                 label="Full name"
                 autoComplete="name"
                 value={values.name}
@@ -207,7 +211,7 @@ export function MultiStepForm({
                 onChange={(v) => set('name', v)}
               />
               <TextField
-                id="ms-email"
+                id={`${uid}-ms-email`}
                 label="Work email"
                 type="email"
                 autoComplete="email"
@@ -221,7 +225,7 @@ export function MultiStepForm({
           {step === 1 ? (
             <>
               <TextField
-                id="ms-company"
+                id={`${uid}-ms-company`}
                 label="Company"
                 autoComplete="organization"
                 value={values.company}
@@ -229,11 +233,11 @@ export function MultiStepForm({
                 onChange={(v) => set('company', v)}
               />
               <div>
-                <label htmlFor="ms-size" className="block text-sm font-medium">
+                <label htmlFor={`${uid}-ms-size`} className="block text-sm font-medium">
                   Team size
                 </label>
                 <select
-                  id="ms-size"
+                  id={`${uid}-ms-size`}
                   value={values.teamSize}
                   onChange={(e) => set('teamSize', e.target.value)}
                   className="mt-1.5 h-11 w-full rounded-xl border border-border/60 bg-background/60 px-3 text-sm focus:border-primary/50 focus:outline-none focus:ring-2 focus:ring-ring/30"
@@ -249,11 +253,11 @@ export function MultiStepForm({
           {step === 2 ? (
             <>
               <div>
-                <label htmlFor="ms-usecase" className="block text-sm font-medium">
+                <label htmlFor={`${uid}-ms-usecase`} className="block text-sm font-medium">
                   What will you use this for?
                 </label>
                 <textarea
-                  id="ms-usecase"
+                  id={`${uid}-ms-usecase`}
                   rows={4}
                   value={values.useCase}
                   aria-invalid={errors.useCase ? true : undefined}
@@ -264,13 +268,13 @@ export function MultiStepForm({
                   }`}
                 />
                 {errors.useCase ? (
-                  <p id="ms-usecase-error" className="mt-1.5 text-xs text-destructive">
+                  <p id={`${uid}-ms-usecase-error`} className="mt-1.5 text-xs text-destructive">
                     {errors.useCase}
                   </p>
                 ) : null}
               </div>
               <TextField
-                id="ms-referral"
+                id={`${uid}-ms-referral`}
                 label="How did you hear about us?"
                 optional
                 value={values.referral}

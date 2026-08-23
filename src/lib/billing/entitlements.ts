@@ -38,8 +38,17 @@ export interface Entitlements {
   /** Team id when hasTeam, else null. */
   teamId: string | null
   /**
-   * Unlimited bundle size, all export formats, brand presets, private
-   * collections, and the licence to ship commercially.
+   * An unlimited synced bundle, and the licence to ship commercially.
+   *
+   * That list is shorter than it was, and deliberately: it used to claim
+   * "all export formats, brand presets, private collections" as well. None
+   * of those three could be gated honestly. Export formats are served by
+   * `/api/v1`, which is public and unauthenticated by design, so the CLI
+   * hands every format to anyone — gating the website's panel would be a
+   * wall with a door beside it. Brand presets recolour this site's own
+   * chrome on /tools and are a preference, not a product. Private
+   * collections are not built. What Pro actually sells is the commercial
+   * licence (see /licence) plus the bundle cap this flag lifts.
    *
    * Not the CLI or MCP server — `/api/v1` is public and unauthenticated, so
    * there is no token here to gate them with.

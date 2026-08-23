@@ -66,8 +66,14 @@ function log(...args) {
 const TOOLS = [
   {
     name: 'search_effects',
+    // No effect count in the description, deliberately. The catalog is
+    // served and this package is published, and the two move on different
+    // clocks — a number baked in here was wrong within one release and
+    // stayed wrong, overstating the catalog by nearly 2x. Every search
+    // reply opens with the real total, which is the number that cannot go
+    // stale.
     description:
-      'Search the Hoverlab catalog of 1,600+ hand-tuned CSS effects (buttons, loaders, cards, backgrounds, toggles, skeletons, text and entrance animations). Returns matching effects as metadata — id, name, category, description, tags. Call get_effect or install_effect afterwards to obtain the actual code. Use this whenever the user asks for a UI effect, animation, or interaction style rather than writing the CSS from scratch.',
+      'Search the Hoverlab catalog of hand-tuned CSS effects (buttons, loaders, cards, backgrounds, toggles, skeletons, text and entrance animations). Returns matching effects as metadata — id, name, category, description, tags. Call get_effect or install_effect afterwards to obtain the actual code. Use this whenever the user asks for a UI effect, animation, or interaction style rather than writing the CSS from scratch.',
     inputSchema: {
       type: 'object',
       properties: {
@@ -116,11 +122,28 @@ const TOOLS = [
         },
         hue: {
           type: 'number',
+          minimum: -180,
+          maximum: 180,
           description: 'Hue rotation in degrees, -180 to 180. Use to recolour an effect to match a brand.',
         },
-        sat: { type: 'number', description: 'Saturation shift in percentage points, -100 to 100.' },
-        scale: { type: 'number', description: 'Size multiplier for every px/rem value, 0.5 to 1.5.' },
-        speed: { type: 'number', description: 'Animation speed multiplier, 0.25 to 3.' },
+        sat: {
+          type: 'number',
+          minimum: -100,
+          maximum: 100,
+          description: 'Saturation shift in percentage points, -100 to 100.',
+        },
+        scale: {
+          type: 'number',
+          minimum: 0.5,
+          maximum: 1.5,
+          description: 'Size multiplier for every px/rem value, 0.5 to 1.5.',
+        },
+        speed: {
+          type: 'number',
+          minimum: 0.25,
+          maximum: 3,
+          description: 'Animation speed multiplier, 0.25 to 3.',
+        },
       },
       required: ['id'],
       additionalProperties: false,
@@ -148,10 +171,30 @@ const TOOLS = [
           type: 'boolean',
           description: 'Overwrite files that already exist. Defaults to false, which fails instead.',
         },
-        hue: { type: 'number', description: 'Hue rotation in degrees, -180 to 180.' },
-        sat: { type: 'number', description: 'Saturation shift in percentage points, -100 to 100.' },
-        scale: { type: 'number', description: 'Size multiplier, 0.5 to 1.5.' },
-        speed: { type: 'number', description: 'Animation speed multiplier, 0.25 to 3.' },
+        hue: {
+          type: 'number',
+          minimum: -180,
+          maximum: 180,
+          description: 'Hue rotation in degrees, -180 to 180.',
+        },
+        sat: {
+          type: 'number',
+          minimum: -100,
+          maximum: 100,
+          description: 'Saturation shift in percentage points, -100 to 100.',
+        },
+        scale: {
+          type: 'number',
+          minimum: 0.5,
+          maximum: 1.5,
+          description: 'Size multiplier, 0.5 to 1.5.',
+        },
+        speed: {
+          type: 'number',
+          minimum: 0.25,
+          maximum: 3,
+          description: 'Animation speed multiplier, 0.25 to 3.',
+        },
       },
       required: ['id'],
       additionalProperties: false,
@@ -183,7 +226,8 @@ const TOOLS = [
         },
         category: {
           type: 'string',
-          description: 'Restrict to one category. Requires level. Call list_categories for values.',
+          description:
+            'Restrict to one category. Each tier has its own category vocabulary, so this is normally paired with level — without one, any tier that does not know the category is left out of the results rather than failing the search. Call list_categories for the effect vocabulary.',
         },
         featured: { type: 'boolean', description: 'Only the curated, hand-written entries.' },
         limit: {
@@ -600,6 +644,100 @@ const HANDLERS = {
   init_template: runInitTemplate,
 }
 
+const TOOLS_BY_NAME = new Map(TOOLS.map((tool) => [tool.name, tool]))
+
+/* ------------------------------------------------------------------ *
+ *  Argument checking
+ *
+ *  We publish an inputSchema per tool, and until now nothing enforced it.
+ *  Clients are supposed to validate against it, but a model composing a
+ *  call is the one client guaranteed to get it wrong sometimes, and the
+ *  failure was silent in the worst way: `search_effects` with no `query`
+ *  reached the API with no `q` at all and came back with the entire
+ *  catalog under the heading `835 effects matched "undefined"`. That is a
+ *  confident answer to a question nobody asked, and a model has no way to
+ *  tell it apart from a real result. Checking here, once, means every
+ *  tool fails the same legible way instead of each handler inventing its
+ *  own — and the schema stays the single source of truth, so a rule added
+ *  to a tool definition is enforced without touching this code.
+ * ------------------------------------------------------------------ */
+
+/**
+ * Check a call against the schema we advertised for it.
+ *
+ * Returns a list of human-readable problems, empty when the call is good.
+ * Deliberately narrow: absent required arguments and values outside a
+ * declared enum. Both are mistakes the model can fix from the message.
+ * Unknown extra properties are NOT rejected even though every schema says
+ * `additionalProperties: false` — ignoring a stray argument costs a
+ * slightly wrong limit, while refusing the call costs the whole result.
+ */
+function validateArgs(tool, args) {
+  const schema = tool?.inputSchema
+  if (!schema) return []
+  const properties = schema.properties ?? {}
+  const problems = []
+
+  for (const name of schema.required ?? []) {
+    const value = args[name]
+    const absent =
+      value === undefined ||
+      value === null ||
+      (typeof value === 'string' && value.trim() === '')
+    if (absent) {
+      const hint = properties[name]?.description
+      problems.push(`"${name}" is required${hint ? ` — ${hint}` : ''}`)
+    }
+  }
+
+  for (const [name, prop] of Object.entries(properties)) {
+    const value = args[name]
+    if (value === undefined || value === null) continue
+    if (Array.isArray(prop.enum) && !prop.enum.includes(value)) {
+      problems.push(
+        `"${name}" must be one of: ${prop.enum.join(', ')} — got ${JSON.stringify(value)}`,
+      )
+    }
+  }
+
+  return problems
+}
+
+/**
+ * Bring declared numbers into the range the schema publishes.
+ *
+ * The four recolouring knobs documented their bounds in prose and nothing
+ * anywhere honoured them: `hue: 9999` travelled intact to the renderer.
+ * Clamping rather than rejecting is the right trade for these — a hue a
+ * little past 180 is a model rounding a colour wheel, not a broken call,
+ * and returning the effect at 180 serves the user better than an error
+ * does. Numeric strings are accepted for the same reason: `"30"` is
+ * unambiguous, and refusing it would be pedantry.
+ */
+function coerceArgs(tool, args) {
+  const properties = tool?.inputSchema?.properties
+  if (!properties) return args
+  const out = { ...args }
+
+  for (const [name, prop] of Object.entries(properties)) {
+    if (prop.type !== 'number' && prop.type !== 'integer') continue
+
+    let value = out[name]
+    if (typeof value === 'string' && value.trim() !== '') {
+      const parsed = Number(value)
+      if (Number.isFinite(parsed)) value = parsed
+    }
+    if (typeof value !== 'number' || !Number.isFinite(value)) continue
+
+    if (prop.type === 'integer') value = Math.round(value)
+    if (typeof prop.minimum === 'number') value = Math.max(prop.minimum, value)
+    if (typeof prop.maximum === 'number') value = Math.min(prop.maximum, value)
+    out[name] = value
+  }
+
+  return out
+}
+
 /* ------------------------------------------------------------------ *
  *  JSON-RPC plumbing
  * ------------------------------------------------------------------ */
@@ -635,8 +773,29 @@ async function handleToolCall(id, params) {
     return
   }
 
+  const tool = TOOLS_BY_NAME.get(name)
+  const args = params.arguments ?? {}
+
+  const problems = validateArgs(tool, args)
+  if (problems.length) {
+    // Same shape as a handler failure: something the model can read and
+    // retry, not a protocol error that ends the exchange.
+    sendResult(id, {
+      content: [
+        {
+          type: 'text',
+          text: `${name} was called with arguments it cannot use:\n${problems
+            .map((problem) => `- ${problem}`)
+            .join('\n')}`,
+        },
+      ],
+      isError: true,
+    })
+    return
+  }
+
   try {
-    const text = await handler(params.arguments ?? {})
+    const text = await handler(coerceArgs(tool, args))
     sendResult(id, { content: [{ type: 'text', text }], isError: false })
   } catch (error) {
     // Tool failures are results, not JSON-RPC errors — the model should
@@ -765,4 +924,4 @@ export function startMcpServer() {
   })
 }
 
-export { TOOLS }
+export { TOOLS, coerceArgs, validateArgs }

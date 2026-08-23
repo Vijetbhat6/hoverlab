@@ -29,6 +29,12 @@ export interface HeroSearchProps {
   suggestions?: string[]
   /** Called with the query on submit. Defaults to a no-op. */
   onSearch?: (query: string) => void
+  /**
+   * Id for the field. A server component cannot call `useId`, so this is
+   * the escape hatch for a page that renders two of these: give the second
+   * one its own id rather than letting both labels resolve to the first.
+   */
+  inputId?: string
   className?: string
 }
 
@@ -40,6 +46,7 @@ export function HeroSearch({
   placeholder = 'Search components, patterns, categories…',
   submitLabel = 'Search',
   suggestions = DEFAULT_SUGGESTIONS,
+  inputId = 'hero-search-input',
   onSearch,
   className = '',
 }: HeroSearchProps) {
@@ -71,7 +78,7 @@ export function HeroSearch({
           className="mx-auto mt-9 flex w-full max-w-xl flex-col gap-2 sm:flex-row"
         >
           <div className="relative flex-1">
-            <label htmlFor="hero-search-input" className="sr-only">
+            <label htmlFor={inputId} className="sr-only">
               Search
             </label>
             <Search
@@ -79,7 +86,7 @@ export function HeroSearch({
               className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground"
             />
             <input
-              id="hero-search-input"
+              id={inputId}
               type="search"
               value={query}
               onChange={(e) => setQuery(e.target.value)}

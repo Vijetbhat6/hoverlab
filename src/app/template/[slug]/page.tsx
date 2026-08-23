@@ -18,12 +18,14 @@ import type { Metadata } from 'next'
 import {
   ArrowLeft,
   ArrowRight,
+  CalendarDays,
   Route as RouteIcon,
   FileCode,
   Package,
   Blocks,
   Terminal,
 } from 'lucide-react'
+import { JsonLd } from '@/components/json-ld'
 import { TemplateRouteSwitcher } from '@/components/templates/template-route-switcher'
 import { TemplateFileBrowser } from '@/components/templates/template-file-browser'
 import { TemplateDownloadButton } from '@/components/templates/template-download-button'
@@ -38,6 +40,8 @@ import {
 } from '@/lib/templates/templates'
 import { getTemplateMeta } from '@/lib/templates/template-index'
 import { absoluteUrl } from '@/lib/site'
+import { addedAt, formatAdded } from '@/lib/recency'
+import { artifactBreadcrumbLd, artifactLd } from '@/lib/structured-data'
 import {
   TrackArtifactView,
   FavoriteArtifactButton,
@@ -101,8 +105,26 @@ export default async function TemplateDetailPage({ params }: PageProps) {
     preview: getPagePreview(route.pageId),
   }))
 
+  const added = addedAt('template', template.id)
+
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <JsonLd
+        data={artifactLd({
+          level: 'template',
+          id: template.id,
+          name: template.name,
+          description: template.description,
+          category: template.category,
+          keywords: template.tags,
+          dependencies: template.deps,
+          datePublished: added,
+        })}
+      />
+      <JsonLd
+        data={artifactBreadcrumbLd('template', template.name, { name: template.category })}
+      />
+
       <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
         <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-1.5 text-sm text-muted-foreground">
           <Link href="/templates" className="inline-flex items-center gap-1.5 transition-colors hover:text-foreground">
@@ -172,6 +194,12 @@ export default async function TemplateDetailPage({ params }: PageProps) {
               <Package aria-hidden className="h-4 w-4" />
               {template.deps.join(', ')}
             </span>
+            {added ? (
+              <span className="inline-flex items-center gap-1.5">
+                <CalendarDays aria-hidden className="h-4 w-4" />
+                Added {formatAdded(added)}
+              </span>
+            ) : null}
           </div>
         </header>
 

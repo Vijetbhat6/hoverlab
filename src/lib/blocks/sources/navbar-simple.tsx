@@ -61,6 +61,10 @@ export function NavbarSimple({
   ctaHref = '#',
   className = '',
 }: NavbarSimpleProps) {
+  // Per-instance ids. A literal id in a reusable component is a
+  // collision waiting for the second copy on the page — and a <label>
+  // then resolves to whichever input rendered first.
+  const uid = React.useId()
   const [open, setOpen] = React.useState(false)
   const triggerRef = React.useRef<HTMLButtonElement>(null)
 
@@ -140,7 +144,7 @@ export function NavbarSimple({
           type="button"
           onClick={() => setOpen((v) => !v)}
           aria-expanded={open}
-          aria-controls="navbar-mobile-panel"
+          aria-controls={`${uid}-navbar-mobile-panel`}
           aria-label={open ? 'Close menu' : 'Open menu'}
           className="flex h-10 w-10 items-center justify-center rounded-lg border border-border/60 transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring lg:hidden"
         >
@@ -155,7 +159,7 @@ export function NavbarSimple({
       {/* Mobile panel */}
       {open ? (
         <div
-          id="navbar-mobile-panel"
+          id={`${uid}-navbar-mobile-panel`}
           className="border-t border-border/40 bg-background/95 backdrop-blur-xl lg:hidden"
         >
           <nav aria-label="Main" className="mx-auto w-full max-w-7xl px-4 py-4 sm:px-6">

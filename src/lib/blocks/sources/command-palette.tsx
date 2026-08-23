@@ -76,6 +76,10 @@ export function CommandPalette({
   embedded = false,
   className = '',
 }: CommandPaletteProps) {
+  // Per-instance ids. A literal id in a reusable component is a
+  // collision waiting for the second copy on the page — and a <label>
+  // then resolves to whichever input rendered first.
+  const uid = React.useId()
   const [open, setOpen] = React.useState(defaultOpen)
   const [query, setQuery] = React.useState('')
   const [highlight, setHighlight] = React.useState(0)
@@ -184,7 +188,7 @@ export function CommandPalette({
             type="text"
             role="combobox"
             aria-expanded="true"
-            aria-controls="command-list"
+            aria-controls={`${uid}-command-list`}
             aria-activedescendant={
               results[highlight] ? `command-item-${results[highlight].id}` : undefined
             }
@@ -203,7 +207,7 @@ export function CommandPalette({
 
         <div
           ref={listRef}
-          id="command-list"
+          id={`${uid}-command-list`}
           role="listbox"
           aria-label="Commands"
           className="max-h-72 overflow-y-auto p-2"

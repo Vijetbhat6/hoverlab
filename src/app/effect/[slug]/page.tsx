@@ -1,8 +1,13 @@
+import Link from 'next/link'
 import { notFound, permanentRedirect } from 'next/navigation'
 import type { Metadata } from 'next'
 import { EffectDetail } from '@/components/effect-detail'
+import { JsonLd } from '@/components/json-ld'
 import { EFFECTS, type Effect } from '@/lib/effects'
 import { EFFECT_ID_ALIASES } from '@/lib/effect-aliases'
+import { categorySlug } from '@/lib/effect-types'
+import { artifactBreadcrumbLd, artifactLd } from '@/lib/structured-data'
+import { addedAt, formatAdded } from '@/lib/recency'
 
 /**
  * Pre-generate EVERY effect page at build time.
@@ -106,8 +111,77 @@ export default async function EffectPage({ params }: PageProps) {
   const prev = idx > 0 ? EFFECTS[idx - 1] : null
   const next = idx < EFFECTS.length - 1 ? EFFECTS[idx + 1] : null
 
+  const catSlug = categorySlug(effect.category)
+  const added = addedAt('effect', effect.id)
+
   return (
     <>
+      {/*
+        Structured data. This page is the long-tail landing surface — the
+        one someone reaches by searching "css shimmer skeleton loader" — so
+        it declares what it is (source code, in CSS, free, under our
+        licence) and where it sits, rather than leaving both to be guessed
+        from markup.
+      */}
+      <JsonLd
+        data={artifactLd({
+          level: 'effect',
+          id: effect.id,
+          name: effect.name,
+          description: effect.description,
+          category: effect.category,
+          keywords: effect.tags,
+          datePublished: added,
+        })}
+      />
+      <JsonLd
+        data={artifactBreadcrumbLd('effect', effect.name, {
+          name: effect.category,
+          path: `/category/${catSlug}`,
+        })}
+      />
+
+      {/*
+        The visible crumb trail, rendered here rather than inside
+        <EffectDetail> so the client component stays untouched. The padding
+        matches its container so the two read as one column.
+
+        The detail component's own "Back to library" button is a sibling of
+        this, not a duplicate of it: that one is the escape hatch, this one
+        is the position — and the category link is the internal link that
+        makes a deep page part of the site instead of an orphan.
+      */}
+      <div className="mx-auto flex w-full max-w-7xl flex-wrap items-center justify-between gap-x-4 gap-y-1 px-4 pt-6 text-xs text-muted-foreground sm:px-6 lg:px-8">
+        <nav aria-label="Breadcrumb">
+          <Link href="/" className="transition-colors hover:text-foreground">
+            Home
+          </Link>
+          <span aria-hidden className="mx-1.5">
+            /
+          </span>
+          <Link href="/library" className="transition-colors hover:text-foreground">
+            Effects
+          </Link>
+          <span aria-hidden className="mx-1.5">
+            /
+          </span>
+          <Link
+            href={`/category/${catSlug}`}
+            className="transition-colors hover:text-foreground"
+          >
+            {effect.category}
+          </Link>
+          <span aria-hidden className="mx-1.5">
+            /
+          </span>
+          <span className="text-foreground">{effect.name}</span>
+        </nav>
+        {/* The catalog's first visible sense of time. See lib/recency.ts —
+            the date comes out of git history, not out of a field someone
+            has to remember to set. */}
+        {added ? <span>Added {formatAdded(added)}</span> : null}
+      </div>
+
       <EffectDetail effect={effect} similar={similar} prev={prev} next={next} />
     </>
   )

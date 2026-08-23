@@ -55,6 +55,10 @@ export function ConfirmDialog({
   onConfirm,
   className = '',
 }: ConfirmDialogProps) {
+  // Per-instance ids. A literal id in a reusable component is a
+  // collision waiting for the second copy on the page — and a <label>
+  // then resolves to whichever input rendered first.
+  const uid = React.useId()
   const dialogRef = React.useRef<HTMLDialogElement>(null)
   const cancelRef = React.useRef<HTMLButtonElement>(null)
   const [typed, setTyped] = React.useState('')
@@ -97,8 +101,8 @@ export function ConfirmDialog({
 
       <dialog
         ref={dialogRef}
-        aria-labelledby="confirm-title"
-        aria-describedby="confirm-description"
+        aria-labelledby={`${uid}-confirm-title`}
+        aria-describedby={`${uid}-confirm-description`}
         // The browser fires `cancel` for Escape. Blocking it while a
         // request is in flight keeps the dialog up until the outcome is
         // known, rather than leaving the user guessing.
@@ -118,10 +122,10 @@ export function ConfirmDialog({
               <AlertTriangle aria-hidden className="h-5 w-5" />
             </span>
             <div className="min-w-0">
-              <h2 id="confirm-title" className="text-base font-semibold">
+              <h2 id={`${uid}-confirm-title`} className="text-base font-semibold">
                 {title}
               </h2>
-              <p id="confirm-description" className="mt-2 text-sm leading-relaxed text-muted-foreground">
+              <p id={`${uid}-confirm-description`} className="mt-2 text-sm leading-relaxed text-muted-foreground">
                 {description}
               </p>
             </div>
@@ -129,12 +133,12 @@ export function ConfirmDialog({
 
           {confirmPhrase ? (
             <div className="mt-5">
-              <label htmlFor="confirm-phrase" className="block text-sm text-muted-foreground">
+              <label htmlFor={`${uid}-confirm-phrase`} className="block text-sm text-muted-foreground">
                 Type <span className="font-mono font-semibold text-foreground">{confirmPhrase}</span>{' '}
                 to confirm
               </label>
               <input
-                id="confirm-phrase"
+                id={`${uid}-confirm-phrase`}
                 value={typed}
                 onChange={(e) => setTyped(e.target.value)}
                 autoComplete="off"

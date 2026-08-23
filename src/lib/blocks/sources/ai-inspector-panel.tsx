@@ -45,6 +45,12 @@ export interface AiInspectorPanelProps {
   initial?: Partial<InspectorState>
   /** Which properties the agent changed, for provenance marks. */
   agentTouched?: Array<keyof InspectorState>
+  /**
+   * Id for the field. A server component cannot call `useId`, so this is
+   * the escape hatch for a page that renders two of these: give the second
+   * one its own id rather than letting both labels resolve to the first.
+   */
+  promptId?: string
   className?: string
 }
 
@@ -66,6 +72,7 @@ export function AiInspectorPanel({
   heading = 'Flavour card',
   lastPrompt = 'make it softer and a bit more premium',
   initial,
+  promptId = 'inspector-prompt',
   agentTouched = ['radius', 'accent', 'shadow'],
   className = '',
 }: AiInspectorPanelProps) {
@@ -239,12 +246,12 @@ export function AiInspectorPanel({
           }}
           className="border-t border-border/60 bg-muted/30 p-3"
         >
-          <label htmlFor="inspector-prompt" className="sr-only">
+          <label htmlFor={promptId} className="sr-only">
             Tell the agent what to change
           </label>
           <div className="flex gap-2">
             <input
-              id="inspector-prompt"
+              id={promptId}
               value={prompt}
               onChange={(e) => setPrompt(e.target.value)}
               placeholder="Describe a change…"

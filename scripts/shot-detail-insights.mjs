@@ -5,7 +5,7 @@ import { chromium } from 'playwright'
 import { mkdirSync } from 'node:fs'
 import { join } from 'node:path'
 
-const BASE = process.env.BASE ?? 'http://localhost:3002'
+const BASE = process.env.BASE ?? 'http://localhost:3007'
 const ID = process.argv[2] ?? 'rose-neon-text-md-2093'
 const OUT = 'tool-results/new-categories'
 

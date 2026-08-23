@@ -1,6 +1,6 @@
 /**
- * Verify that a running deployment can sign people in — before a user finds
- * out that it can't.
+ * Verify that a running deployment can sign people in, and is fit to launch —
+ * before a user finds out that it is not.
  *
  * Needs no account, no password and no access to the host: it asks the
  * health endpoint, then exercises the auth surface with deliberately bogus
@@ -10,13 +10,13 @@
  *
  * Usage:
  *   npm run check:deploy -- https://your-deploy.vercel.app
- *   BASE=http://localhost:3002 npm run check:deploy
+ *   BASE=http://localhost:3007 npm run check:deploy
  *
  * Exits non-zero if the deployment is not fit to serve sign-in, so it can be
  * a post-deploy step in CI.
  */
 
-const BASE = (process.argv[2] ?? process.env.BASE ?? 'http://localhost:3002').replace(
+const BASE = (process.argv[2] ?? process.env.BASE ?? 'http://localhost:3007').replace(
   /\/$/,
   '',
 )
@@ -160,13 +160,70 @@ if (me.error) {
   record('returns a null user, not an error page', me.json !== null && 'user' in (me.json ?? {}))
 }
 
+// 4. Launch requirements. Not about signing in — about whether this
+//    deployment is fit to take money and be crawled. Each of these was a
+//    verified launch blocker, and each is a single GET away from being
+//    provable rather than remembered.
+console.log('\nlaunch requirements:')
+
+for (const [path, why] of [
+  ['/terms', 'Terms of Service'],
+  ['/privacy', 'Privacy Policy'],
+  ['/refunds', 'Refund Policy'],
+  ['/licence', 'Licence — what Pro actually sells'],
+]) {
+  const page = await request(path)
+  record(
+    `${path} exists (${why})`,
+    page.res?.status === 200,
+    page.error ?? `got HTTP ${page.res?.status}`,
+  )
+}
+
+// The operator's legal details live in src/lib/legal.ts and ship as
+// detectable placeholders. A policy page naming "TO BE SET" is not a policy,
+// and Polar will reject it — so find out here rather than from the reviewer.
+const terms = await request('/terms')
+record(
+  'legal pages name a real operator',
+  typeof terms.body === 'string' && !terms.body.includes('TO BE SET'),
+  'edit OPERATOR in src/lib/legal.ts — name, address, jurisdiction, contact email',
+)
+
+// The catalog is meant to be public (see proxy.ts). A redirect here means
+// the gate is back, in which case sitemap.ts and robots.ts are lying.
+const library = await request('/library')
+record(
+  'catalog is reachable without a session',
+  library.res?.status === 200,
+  library.res?.status === 307 || library.res?.status === 302
+    ? 'redirects to login — the auth gate is back, and the sitemap now advertises URLs that redirect'
+    : `got HTTP ${library.res?.status}`,
+)
+
+// The newsletter route exists and validates. Deliberately posts something
+// invalid: a 400 proves the handler ran without adding a real address to
+// the list as a side effect of a health check.
+const news = await request('/api/newsletter', {
+  method: 'POST',
+  body: JSON.stringify({ email: 'not-an-email' }),
+})
+record(
+  'newsletter signups reach a real handler',
+  news.res?.status === 400,
+  news.res?.status === 503
+    ? 'route is there but Firebase Admin is not configured — signups would be refused'
+    : `expected 400 for a malformed address, got HTTP ${news.res?.status}`,
+)
+
 const failed = results.filter((r) => !r.pass)
 console.log(`\n${results.length - failed.length}/${results.length} passed`)
 if (failed.length) {
   console.error(
-    '\nThis deployment cannot reliably sign users in. The health output above\n' +
-      'names the cause; the usual one is missing or malformed Firebase\n' +
-      'credentials in the deployment environment.',
+    '\nThis deployment is not ready. The health output above names the cause:\n' +
+      'for the sign-in checks it is usually missing or malformed Firebase\n' +
+      'credentials, and for the launch checks it is usually a page or an\n' +
+      'operator detail that has not been filled in yet.',
   )
 }
 process.exit(failed.length ? 1 : 0)

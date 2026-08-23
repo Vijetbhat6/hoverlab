@@ -37,6 +37,10 @@ export function NewsletterSignup({
   onSubmit,
   className = '',
 }: NewsletterSignupProps) {
+  // Per-instance ids. A literal id in a reusable component is a
+  // collision waiting for the second copy on the page — and a <label>
+  // then resolves to whichever input rendered first.
+  const uid = React.useId()
   const [email, setEmail] = React.useState('')
   const [status, setStatus] = React.useState<Status>('idle')
 
@@ -78,11 +82,11 @@ export function NewsletterSignup({
             onSubmit={handleSubmit}
             className="mx-auto mt-8 flex max-w-md flex-col gap-3 sm:flex-row"
           >
-            <label htmlFor="newsletter-email" className="sr-only">
+            <label htmlFor={`${uid}-newsletter-email`} className="sr-only">
               Email address
             </label>
             <input
-              id="newsletter-email"
+              id={`${uid}-newsletter-email`}
               type="email"
               required
               autoComplete="email"

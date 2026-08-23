@@ -89,6 +89,17 @@ export default function McpDocsPage() {
           desktop app, enable the Dev Mode MCP server under Preferences, then:
         </p>
 
+        <p>
+          {/* The same workflow, written for the person who made the design
+              rather than the person implementing it — this section is filed
+              under "Docs", which is not where a designer looks. */}
+          <Link href="/figma" className="font-medium text-primary hover:underline">
+            /figma
+          </Link>{' '}
+          is this page for designers: what it matches, what it cannot see in a
+          static frame, and the sentence to type.
+        </p>
+
         <Snippet label="terminal">{`claude mcp add --transport http figma http://127.0.0.1:3845/mcp
 claude mcp add hoverlab -- npx -y hoverlab mcp`}</Snippet>
 

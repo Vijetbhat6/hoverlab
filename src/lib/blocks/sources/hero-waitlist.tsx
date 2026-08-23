@@ -50,6 +50,10 @@ export function HeroWaitlist({
   onSubmit,
   className = '',
 }: HeroWaitlistProps) {
+  // Per-instance ids. A literal id in a reusable component is a
+  // collision waiting for the second copy on the page — and a <label>
+  // then resolves to whichever input rendered first.
+  const uid = React.useId()
   const [email, setEmail] = React.useState('')
   const [status, setStatus] = React.useState<Status>('idle')
 
@@ -91,11 +95,11 @@ export function HeroWaitlist({
             </p>
           ) : (
             <form onSubmit={handleSubmit} className="mx-auto flex max-w-md flex-col gap-2 sm:flex-row">
-              <label htmlFor="waitlist-email" className="sr-only">
+              <label htmlFor={`${uid}-waitlist-email`} className="sr-only">
                 Email address
               </label>
               <input
-                id="waitlist-email"
+                id={`${uid}-waitlist-email`}
                 type="email"
                 required
                 autoComplete="email"

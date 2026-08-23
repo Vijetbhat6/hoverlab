@@ -69,7 +69,7 @@ import { LadderTour, openLadderTour } from '@/components/ladder-tour'
 import { useReducedMotion } from '@/components/reduced-motion-provider'
 import { useBundle } from '@/hooks/use-bundle'
 import { useCompare } from '@/hooks/use-compare'
-import { SOCIAL } from '@/lib/social'
+import { SOCIAL, isPlaceholder } from '@/lib/social'
 import { TRAY_EVENTS, isTypingTarget } from '@/lib/tray-events'
 
 /**
@@ -213,6 +213,26 @@ export function SiteHeader({ actions }: SiteHeaderProps) {
 
   return (
     <>
+      {/*
+        Skip link.
+
+        The header carries the brand, a search field, nine nav items, three
+        trays and the account menu — a keyboard or screen-reader user met
+        all of it on every page before reaching a word of content, and the
+        site had no way past it. It lives here rather than in the root
+        layout because the header is what it skips, and because every page
+        that renders content renders this component.
+
+        Visually hidden until focused, then it lands over the header as a
+        real button. `#main-content` is the id on each page's <main>.
+      */}
+      <a
+        href="#main-content"
+        className="sr-only z-50 focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-primary-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+      >
+        Skip to content
+      </a>
+
       <header className="sticky top-0 z-40 border-b border-border/40 bg-background/70 backdrop-blur-xl">
         {/*
           On phones the nav drops to its own full-width row.
@@ -517,11 +537,17 @@ function PreferencesMenu() {
           <Keyboard className="mr-2 h-4 w-4" /> Keyboard shortcuts
           <span className="ml-auto font-mono text-xs text-muted-foreground">?</span>
         </DropdownMenuItem>
-        <DropdownMenuItem asChild className="cursor-pointer">
-          <a href={SOCIAL.github.href} target="_blank" rel="noreferrer noopener">
-            <Github className="mr-2 h-4 w-4" /> Source on GitHub
-          </a>
-        </DropdownMenuItem>
+        {/* Only when NEXT_PUBLIC_GITHUB_URL names an actual repository.
+            Unset, SOCIAL.github falls back to github.com's front page, and a
+            "Source on GitHub" item that lands there is a claim this project
+            cannot back — worse for a developer audience than no item. */}
+        {isPlaceholder(SOCIAL.github) ? null : (
+          <DropdownMenuItem asChild className="cursor-pointer">
+            <a href={SOCIAL.github.href} target="_blank" rel="noreferrer noopener">
+              <Github className="mr-2 h-4 w-4" /> Source on GitHub
+            </a>
+          </DropdownMenuItem>
+        )}
       </DropdownMenuContent>
     </DropdownMenu>
   )

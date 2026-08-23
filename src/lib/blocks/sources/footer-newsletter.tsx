@@ -107,6 +107,10 @@ export function FooterNewsletter({
   year = new Date().getFullYear(),
   className = '',
 }: FooterNewsletterProps) {
+  // Per-instance ids. A literal id in a reusable component is a
+  // collision waiting for the second copy on the page — and a <label>
+  // then resolves to whichever input rendered first.
+  const uid = React.useId()
   const [email, setEmail] = React.useState('')
   const [status, setStatus] = React.useState<Status>('idle')
 
@@ -144,11 +148,11 @@ export function FooterNewsletter({
             ) : (
               <>
                 <form onSubmit={handleSubmit} className="flex flex-col gap-2 sm:flex-row">
-                  <label htmlFor="footer-newsletter-email" className="sr-only">
+                  <label htmlFor={`${uid}-footer-newsletter-email`} className="sr-only">
                     Email address
                   </label>
                   <input
-                    id="footer-newsletter-email"
+                    id={`${uid}-footer-newsletter-email`}
                     type="email"
                     required
                     autoComplete="email"

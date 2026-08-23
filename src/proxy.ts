@@ -21,49 +21,29 @@ import { NextResponse, type NextRequest } from 'next/server'
  * Paths that REQUIRE auth. Proxy redirects to /login if no valid session
  * cookie is present.
  *
- * The catalog is gated: browsing it is an account feature, not a public
- * one. Every hub, category, detail page and the playground bounces an
- * anonymous visitor to /login?redirect=<original>, so they land back where
- * they were aiming once they sign in.
+ * The catalog is PUBLIC. Browsing and copying are what the landing page
+ * promises anonymous visitors ("no account needed to browse or copy"), and
+ * every hub, category and detail page is hand-written content whose whole
+ * acquisition value is long-tail search — "css shimmer skeleton loader",
+ * "glassmorphism card hover", "react pricing section with toggle". Gating
+ * roughly a thousand of those pages behind a login turned the entire
+ * organic channel off and made the site contradict its own hero.
  *
- * This is a deliberate reversal of the earlier decision to open the
- * catalog for search traffic, and it costs exactly what that decision
- * bought: crawlers get a 307 on all ~4,300 artifact pages, so the
- * long-tail surface ("css shimmer skeleton loader", "glassmorphism card
- * hover") stops being indexable. There is no crawler exemption on
- * purpose — serving crawlers a page that humans are redirected away from
- * is cloaking, and Google can deindex a site for it. sitemap.ts and
- * robots.ts were trimmed to match rather than advertise URLs that all
- * redirect.
+ * What is gated instead is where an account actually earns its keep: the
+ * account area itself and the playground, plus everything behind /api that
+ * writes per-user state (favourites, bundles, sync) — those verify sessions
+ * themselves in the route handlers rather than here.
  *
- * What stays public: the marketing landing page, /login and /signup, the
- * docs (they sell the CLI to people who don't have accounts yet) and the
- * standalone /tools utilities, which are not catalog content.
- *
- * Two content paths remain reachable without a session and are NOT closed
- * by this file: /api/v1/* (the CLI and MCP server's only transport — it
- * has no key scheme to authenticate against yet) and /embed/<id> (a
- * cross-site <iframe> never sends a SameSite=Lax cookie, so gating it
- * would break every existing embed rather than gate it).
+ * The earlier gate's reasoning still stands on its own terms and is worth
+ * keeping in view: a sitemap full of URLs that 307 to /login is a quality
+ * signal against the domain, and exempting crawlers from a gate humans hit
+ * is cloaking. Both are true — which is why the gate came down rather than
+ * being kept with a crawler hole punched in it. sitemap.ts and robots.ts
+ * are back in step with what an anonymous visitor can actually load.
  */
 const PROTECTED_PREFIXES = [
   '/account',
-  // Catalog hubs and the unified browse surface.
-  '/library',
-  '/browse',
-  '/category',
-  '/blocks',
-  '/pages',
-  '/templates',
-  '/paths',
-  // Per-artifact detail pages. Singular and plural are distinct routes;
-  // the match below is exact-or-with-slash, so '/page' never swallows
-  // '/pages'.
-  '/effect',
-  '/block',
-  '/page',
-  '/template',
-  // The editor.
+  // The editor. It saves remixes to the signed-in user, so it needs one.
   '/playground',
 ]
 

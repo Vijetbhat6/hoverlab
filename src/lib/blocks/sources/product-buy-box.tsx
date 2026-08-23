@@ -59,6 +59,10 @@ export function ProductBuyBox({
   onAddToCart,
   className = '',
 }: ProductBuyBoxProps) {
+  // Per-instance ids. A literal id in a reusable component is a
+  // collision waiting for the second copy on the page — and a <label>
+  // then resolves to whichever input rendered first.
+  const uid = React.useId()
   const firstAvailable = variants.find((v) => v.inStock)?.value ?? ''
   const [variant, setVariant] = React.useState(firstAvailable)
   const [quantity, setQuantity] = React.useState(1)
@@ -134,7 +138,7 @@ export function ProductBuyBox({
 
       {/* Quantity */}
       <div className="mt-6">
-        <p id="qty-label" className="mb-2.5 text-sm font-medium">
+        <p id={`${uid}-qty-label`} className="mb-2.5 text-sm font-medium">
           Quantity
         </p>
         <div className="inline-flex items-center rounded-xl border border-border/60">
@@ -149,7 +153,7 @@ export function ProductBuyBox({
           </button>
 
           <output
-            aria-labelledby="qty-label"
+            aria-labelledby={`${uid}-qty-label`}
             className="w-12 text-center text-sm font-medium tabular-nums"
           >
             {quantity}

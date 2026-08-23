@@ -18,6 +18,7 @@ import { CATEGORIES, EFFECT_INDEX as EFFECTS, type EffectCategory, type EffectMe
 import { useEffectDetails } from '@/hooks/use-effect-details'
 import { track } from '@/lib/analytics'
 import { EffectCardSkeleton } from '@/components/effect-card-skeleton'
+import { SiteFooter } from '@/components/site-footer'
 import { cn } from '@/lib/utils'
 import { isTypingTarget } from '@/lib/tray-events'
 
@@ -693,7 +694,7 @@ export default function Home() {
       </section>
 
       {/* Effect grid */}
-      <main className="mx-auto w-full max-w-7xl flex-1 px-4 pb-16 pt-4 sm:px-6 lg:px-8">
+      <main id="main-content" className="mx-auto w-full max-w-7xl flex-1 px-4 pb-16 pt-4 sm:px-6 lg:px-8">
         {/* Recently-viewed rail — only shown when not actively filtering or
             searching, so it doesn't compete with focused result sets. */}
         {filter === 'All' && !query.trim() ? <RecentlyViewedRail /> : null}
@@ -873,16 +874,7 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-border/40 bg-background/60 backdrop-blur">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-4 py-6 text-sm text-muted-foreground sm:flex-row sm:px-6 lg:px-8">
-          <p>
-            Built with pure CSS · {EFFECTS.length.toLocaleString('en-US')} effects across {CATEGORIES.length} categories
-          </p>
-          <p className="font-mono text-xs">
-            Click <kbd className="rounded border border-border bg-muted px-1.5 py-0.5 text-[10px]">Copy</kbd> on any code block to grab the source.
-          </p>
-        </div>
-      </footer>
+      <SiteFooter />
 
       {/* The bundle and compare drawers, the shortcuts dialog and the
           command palette are all mounted by <SiteHeader> now — one copy

@@ -14,8 +14,9 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
-import { ArrowLeft, ArrowRight, Blocks, FileCode, Package } from 'lucide-react'
+import { ArrowLeft, ArrowRight, Blocks, CalendarDays, FileCode, Package } from 'lucide-react'
 import { CodeBlock } from '@/components/code-block'
+import { JsonLd } from '@/components/json-ld'
 import { PagePreview } from '@/components/pages/page-preview'
 import { PageCard } from '@/components/pages/page-card'
 import { PAGES, getPage, primaryFile } from '@/lib/pages/pages'
@@ -24,6 +25,8 @@ import { getBlockMeta } from '@/lib/blocks/block-index'
 import { blockCategorySlug } from '@/lib/blocks/block-types'
 import { templatesUsingPage } from '@/lib/templates/template-index'
 import { absoluteUrl } from '@/lib/site'
+import { addedAt, formatAdded } from '@/lib/recency'
+import { artifactBreadcrumbLd, artifactLd } from '@/lib/structured-data'
 import {
   TrackArtifactView,
   FavoriteArtifactButton,
@@ -85,8 +88,24 @@ export default async function PageDetailPage({ params }: PageProps) {
   // `pagesUsingBlock` one rung down, so the ladder climbs the whole way.
   const usedIn = templatesUsingPage(page.id)
 
+  const added = addedAt('page', page.id)
+
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <JsonLd
+        data={artifactLd({
+          level: 'page',
+          id: page.id,
+          name: page.name,
+          description: page.description,
+          category: page.category,
+          keywords: page.tags,
+          dependencies: page.deps,
+          datePublished: added,
+        })}
+      />
+      <JsonLd data={artifactBreadcrumbLd('page', page.name, { name: page.category })} />
+
       <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
         <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-1.5 text-sm text-muted-foreground">
           <Link href="/pages" className="inline-flex items-center gap-1.5 transition-colors hover:text-foreground">
@@ -152,6 +171,12 @@ export default async function PageDetailPage({ params }: PageProps) {
               <Package aria-hidden className="h-4 w-4" />
               {page.deps.length === 0 ? 'No dependencies' : page.deps.join(', ')}
             </span>
+            {added ? (
+              <span className="inline-flex items-center gap-1.5">
+                <CalendarDays aria-hidden className="h-4 w-4" />
+                Added {formatAdded(added)}
+              </span>
+            ) : null}
           </div>
         </header>
 
