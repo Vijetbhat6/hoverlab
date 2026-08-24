@@ -263,7 +263,7 @@ export default function GlassmorphismToolPage() {
                     type="color"
                     value={state[key]}
                     onChange={(e) => update({ [key]: e.target.value, customBg: null })}
-                    className="h-10 w-full cursor-pointer rounded border border-border bg-transparent"
+                    className="h-10 w-full cursor-pointer rounded border border-field bg-transparent"
                     aria-label={`Gradient ${key.slice(-1)}`}
                   />
                   <span className="font-mono text-[10px] text-muted-foreground">{state[key]}</span>
@@ -320,7 +320,7 @@ export default function GlassmorphismToolPage() {
                 type="color"
                 value={state.bgColor}
                 onChange={(e) => update({ bgColor: e.target.value })}
-                className="h-10 w-12 cursor-pointer rounded border border-border bg-transparent"
+                className="h-10 w-12 cursor-pointer rounded border border-field bg-transparent"
               />
               <Input
                 value={state.bgColor}
@@ -348,7 +348,7 @@ export default function GlassmorphismToolPage() {
                 type="color"
                 value={state.borderColor}
                 onChange={(e) => update({ borderColor: e.target.value })}
-                className="h-10 w-12 cursor-pointer rounded border border-border bg-transparent"
+                className="h-10 w-12 cursor-pointer rounded border border-field bg-transparent"
               />
               <Input
                 value={state.borderColor}

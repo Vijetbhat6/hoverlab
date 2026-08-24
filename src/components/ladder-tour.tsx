@@ -45,6 +45,8 @@ import { PAGE_COUNT } from '@/lib/pages/page-index'
 import { TEMPLATE_COUNT } from '@/lib/templates/template-index'
 
 const STORAGE_KEY = 'hoverlab:ladder-tour-seen'
+/** Pages viewed this session. Session-scoped so it resets on a new visit. */
+const VIEW_COUNT_KEY = 'hoverlab:pageviews'
 const OPEN_EVENT = 'hoverlab:open-ladder-tour'
 
 /** Reopen the tour from anywhere. No-op during SSR. */
@@ -121,17 +123,38 @@ export function LadderTour() {
    * First-visit check runs in an effect, not during render: localStorage is
    * not readable on the server, and reading it during the first client
    * render would make the markup disagree with what was sent.
+   *
+   * It opens on the SECOND page of a session, not the first.
+   *
+   * This dialog was written while the catalog was behind a login, so the
+   * only people who reached it had already signed up and the "first visit"
+   * was never someone's first second on the site. The gate is gone: every
+   * one of the ~1,000 artifact pages is now a search landing page, and
+   * opening a focus-trapping modal over the thing a visitor just clicked
+   * from Google is an interstitial — bad for the person, and something
+   * Google downranks on mobile in its own right.
+   *
+   * Waiting one navigation keeps the intent (explain the ladder early,
+   * once) and drops the cost: someone who bounces never meets it, and
+   * someone who is actually exploring still gets the model on page two,
+   * long before it matters. `sessionStorage` scopes the count to the
+   * visit, so a returning visitor who never dismissed it is not made to
+   * wait a page again.
    */
   React.useEffect(() => {
     let seen = true
+    let views = 0
     try {
       seen = window.localStorage.getItem(STORAGE_KEY) === '1'
+      views = Number(window.sessionStorage.getItem(VIEW_COUNT_KEY) ?? '0') + 1
+      window.sessionStorage.setItem(VIEW_COUNT_KEY, String(views))
     } catch {
       // Private mode or blocked storage. Treat as seen — a tour that
       // cannot remember being dismissed would show on every page load,
       // which is far worse than never showing.
+      return
     }
-    if (!seen) setOpen(true)
+    if (!seen && views >= 2) setOpen(true)
   }, [])
 
   React.useEffect(() => {

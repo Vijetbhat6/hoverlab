@@ -70,7 +70,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Docs. Indexable on purpose: "hoverlab cli", "install tailwind block"
     // are navigational queries people actually type.
     { url: absoluteUrl('/docs'), changeFrequency: 'weekly' as const, priority: 0.9 },
-    ...['cli', 'api', 'mcp'].map((slug) => ({
+    ...['cli', 'api', 'mcp', 'registry'].map((slug) => ({
       url: absoluteUrl(`/docs/${slug}`),
       changeFrequency: 'weekly' as const,
       priority: 0.8,

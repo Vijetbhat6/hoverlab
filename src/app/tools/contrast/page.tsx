@@ -276,7 +276,7 @@ function ColorRow({
           type="color"
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className="h-10 w-12 cursor-pointer rounded border border-border bg-transparent"
+          className="h-10 w-12 cursor-pointer rounded border border-field bg-transparent"
           aria-label={label}
         />
         <Input

@@ -111,9 +111,19 @@ const SOCIALS = [
   { label: 'YouTube', href: '#', Icon: Youtube },
 ]
 
-/** Slug for wiring a column's heading to its nav landmark. */
+/**
+ * Slug for wiring a column's heading to its nav landmark.
+ *
+ * Prefixed `footer-mega-`, not `footer-`, because this block is previewed on
+ * /blocks alongside the site's own footer — which builds its ids the same way
+ * from the same column names ("Company", "Developers"). Two elements then
+ * share an id, and `aria-labelledby` resolves to whichever comes first in the
+ * document: the preview. The real footer's navs end up labelled by a
+ * decorative copy of themselves. `footer-newsletter.tsx` already carries a
+ * `footer-nl-` prefix for exactly this reason.
+ */
 function headingId(heading: string): string {
-  return `footer-${heading.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`
+  return `footer-mega-${heading.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`
 }
 
 export function FooterMega({

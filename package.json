@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/dev.mjs",
-    "prebuild": "node scripts/build-effect-index.mjs && tsx scripts/build-catalog-stats.mts && node scripts/build-artifact-sources.mjs && tsx scripts/build-block-markup.mts && tsx scripts/check-paths.mts",
+    "prebuild": "node scripts/build-effect-index.mjs && tsx scripts/build-catalog-stats.mts && node scripts/build-artifact-sources.mjs && tsx scripts/build-block-markup.mts && node scripts/build-registry-tokens.mjs && tsx scripts/check-registry.mts && tsx scripts/check-paths.mts",
     "check:env": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/check-env.mjs",
     "polar:provision": "tsx scripts/provision-polar.mts",
     "check:deploy": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/check-deploy.mjs",
@@ -22,7 +22,10 @@
     "build:recency": "tsx scripts/build-catalog-recency.mts",
     "build:markup": "tsx scripts/build-block-markup.mts",
     "check:paths": "tsx scripts/check-paths.mts",
-    "check:ids": "tsx scripts/check-duplicate-ids.mts"
+    "check:ids": "tsx scripts/check-duplicate-ids.mts",
+    "build:registry": "node scripts/build-registry-tokens.mjs",
+    "check:registry": "tsx scripts/check-registry.mts",
+    "submit:registry": "tsx scripts/submit-registry.mts"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",

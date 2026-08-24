@@ -242,7 +242,7 @@ export default function PlaceholdersToolPage() {
                       type="color"
                       value={state[key]}
                       onChange={(e) => setState((s) => ({ ...s, [key]: e.target.value }))}
-                      className="mt-1.5 h-9 w-full cursor-pointer rounded-lg border border-border/60 bg-transparent"
+                      className="mt-1.5 h-9 w-full cursor-pointer rounded-lg border border-field/60 bg-transparent"
                     />
                   </div>
                 ))}

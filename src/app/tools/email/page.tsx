@@ -311,7 +311,7 @@ export default function EmailToolPage() {
                 type="color"
                 value={state.accent}
                 onChange={(e) => setState((s) => ({ ...s, accent: e.target.value }))}
-                className="mt-2 h-9 w-full cursor-pointer rounded-lg border border-border/60 bg-transparent"
+                className="mt-2 h-9 w-full cursor-pointer rounded-lg border border-field/60 bg-transparent"
               />
             </div>
           </div>

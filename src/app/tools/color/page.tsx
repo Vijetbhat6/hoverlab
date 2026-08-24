@@ -176,7 +176,7 @@ export default function ColorToolPage() {
                 type="color"
                 value={hex}
                 onChange={(e) => setInput(e.target.value)}
-                className="h-10 w-12 shrink-0 cursor-pointer rounded border border-border bg-transparent"
+                className="h-10 w-12 shrink-0 cursor-pointer rounded border border-field bg-transparent"
                 aria-label="Pick a color"
               />
               <Input

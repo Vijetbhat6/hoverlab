@@ -339,7 +339,7 @@ function StopRow({ stop, canRemove, onChange, onRemove }: StopRowProps) {
         type="color"
         value={stop.color}
         onChange={(e) => onChange({ color: e.target.value })}
-        className="h-8 w-9 cursor-pointer rounded border border-border bg-transparent"
+        className="h-8 w-9 cursor-pointer rounded border border-field bg-transparent"
         aria-label={`Stop ${stop.id} color`}
       />
       <button

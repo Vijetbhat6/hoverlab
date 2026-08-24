@@ -21,6 +21,20 @@ import { absoluteUrl } from '@/lib/site'
  *                        compete with the page that should rank. They are
  *                        meant to load inside someone else's <iframe>.
  *
+ * What is deliberately NOT disallowed, despite being JSON:
+ *
+ *   /registry.json       The shadcn registry, and the one URL third parties
+ *   /r/*                 fetch by name. registry.directory audits it on
+ *                        submission and re-fetches to index items, and the
+ *                        shadcn CLI resolves every registry dependency by
+ *                        URL. A robots-respecting fetcher on either side
+ *                        would simply stop working. The "JSON, not
+ *                        documents" rule above exists to protect ranking;
+ *                        here it would break distribution, which is the
+ *                        whole point of the endpoint. If /r/ ever dilutes
+ *                        anything, the fix is a noindex header on those
+ *                        responses, not a robots rule.
+ *
  * There is no Googlebot exemption anywhere in this codebase, and there is
  * no longer anything to exempt it from: crawlers and humans now get the
  * same pages, which is the only version of this that is not cloaking.

@@ -502,7 +502,7 @@ function LayerCard({ layer, mode, index, total, onChange, onRemove, onMove }: La
           type="color"
           value={layer.color}
           onChange={(e) => onChange({ color: e.target.value })}
-          className="h-8 w-9 cursor-pointer rounded border border-border bg-transparent"
+          className="h-8 w-9 cursor-pointer rounded border border-field bg-transparent"
           aria-label="Shadow color"
         />
         <Input

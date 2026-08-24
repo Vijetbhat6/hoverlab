@@ -449,7 +449,7 @@ export default function BorderRadiusToolPage() {
                 type="color"
                 value={state.previewColor}
                 onChange={(e) => update({ previewColor: e.target.value })}
-                className="h-8 w-9 cursor-pointer rounded border border-border bg-transparent"
+                className="h-8 w-9 cursor-pointer rounded border border-field bg-transparent"
               />
               <Input
                 value={state.previewColor}
