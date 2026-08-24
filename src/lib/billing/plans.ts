@@ -269,8 +269,14 @@ export const PLANS: Record<PlanId, Plan> = {
     name: 'Team, annual',
     /** $120 per seat, once, covering twelve months. */
     priceCents: 12000,
-    /** ₹4,750 per seat, once — ten times band A's monthly seat price. */
-    priceInrPaise: 475000,
+    /**
+     * ₹11,500 per seat, once — ten times `team`'s LIST monthly seat price,
+     * mirroring $120 against $12. It tracks the list ladder and not band A's
+     * ₹475, which is what India pays for the same plan and is set in
+     * `IN_PAISE`. Deriving this from the band was how the two came out equal
+     * and left an Indian rupee buyer with no annual discount at all.
+     */
+    priceInrPaise: 1150000,
     // The whole point of the plan. Polar creates an order rather than a
     // subscription, so nothing is ever re-presented to the card.
     interval: 'one_time',
