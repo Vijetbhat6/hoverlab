@@ -142,16 +142,47 @@ export default function LandingPage() {
             {CATALOG_TOTAL.toLocaleString('en-US')} components,
             <br className="hidden sm:inline" /> ready to copy.
           </h1>
+          {/*
+            The positioning paragraph.
+
+            Everything in it was already built and none of it was ever said
+            in one place: the ladder had a band, the agent transports had a
+            band, the licence had a page, and a visitor had to assemble the
+            product out of three sections and infer the combination. The
+            combination IS the product — a catalog that is one thing whether
+            a person or an agent reaches for it — and no competitor in this
+            category can currently write this sentence.
+
+            Order is deliberate. The ladder first, because it is what the
+            headline's number counts. The four routes second, because that
+            is the differentiator. Free third, because it is the objection a
+            developer is already forming. The licence last, because it is
+            the only thing being sold and saying so here is cheaper than
+            having someone discover it at a paywall.
+
+            Kept to one paragraph on purpose. This page has twice deleted a
+            "why us" section for restating what the section below it already
+            says with a table; this earns its place by being the only thing
+            that states the whole, and it must not grow into a fourth.
+          */}
           <p className="mx-auto mt-6 max-w-2xl text-pretty text-base text-body sm:text-lg lg:text-xl">
             Hoverlab is a curated, open-source catalog that starts at a single
-            hover state and goes all the way up to a project you can deploy.
-            Copy one of {TOTAL_COUNT.toLocaleString('en-US')} pure-CSS effects,
-            drop in a finished pricing section, or clone a whole starter — live
-            demos and real source at every rung, with{' '}
+            hover state and goes all the way up to a project you can deploy —
+            and the same artifact is reachable four ways: here, from{' '}
             <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-[0.85em]">
               npx hoverlab add
-            </code>{' '}
-            if you&apos;d rather stay in the terminal.
+            </code>
+            , from{' '}
+            <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-[0.85em]">
+              npx shadcn add
+            </code>
+            , and from an editor agent over MCP. Browsing, copying and
+            installing are free and need no account and no key. What Pro sells
+            is the{' '}
+            <Link href="/licence" className="font-medium text-primary hover:underline">
+              licence to ship it
+            </Link>
+            .
           </p>
           {/*
             The front door is a search box, not a signup decision.

@@ -9,19 +9,26 @@ import {
   ContactEmail,
   OperatorName,
 } from '@/components/legal/legal-parts'
+import { LicenseCertificate } from '@/components/license/license-certificate'
+import { PLANS, formatPrice } from '@/lib/billing/plans'
 import { absoluteUrl } from '@/lib/site'
 
 /**
  * /licence — what you may do with code taken from the catalog.
  *
- * This page is the Pro tier. Pro is pitched on five things, and of those
- * only the bundle cap is a wall the code can enforce: the CLI and `/api/v1`
- * are public by design, so "every export format" cannot be sold; the brand
- * colour picker recolours this site's own chrome and is free; private
- * collections are not built. What is left, and what this market actually
- * pays for, is the right to ship commercially — and that right could not
- * be sold because it had never been written down. Worse, /docs told every
- * visitor they already had it.
+ * This page is the Pro tier. Several things Pro also carries are real and
+ * server-held — private collections, saved brand libraries, an unmetered
+ * export counter, a licence key — and `billing/entitlements.ts` is the
+ * authoritative list of them. But none of those is why this market pays.
+ * What it pays for is the right to ship commercially, and that right could
+ * not be sold because it had never been written down. Worse, /docs told
+ * every visitor they already had it.
+ *
+ * There were briefly two of these pages: this one, and a sales-shaped
+ * /license that arrived with the effect-page-anatomy merge. Two indexed
+ * pages competing for "can I use these in client work" is worse than
+ * either, so /license now 308s here (see next.config.ts) and the one thing
+ * it had that this did not — the reader's own certificate — is below.
  *
  * So this document is the product, and the two grants below are drawn
  * where the pricing page has always drawn them: free covers personal and
@@ -76,6 +83,17 @@ export default function LicencePage() {
           </p>
         }
       />
+
+      {/*
+        The reader's own licence, before the general case.
+
+        Most people arriving here are asking about themselves — "am I
+        covered", "what do I forward to my client" — not reading a document.
+        The certificate answers that in one glance and renders nothing for a
+        signed-out visitor, so it costs the general reader a blank space and
+        nothing else.
+      */}
+      <LicenseCertificate className="my-10" />
 
       <LegalSection id="what-is-covered" title="What this covers">
         <p>
@@ -134,6 +152,20 @@ export default function LicencePage() {
         </p>
       </LegalSection>
 
+      <LegalSection id="studio" title="The Studio licence">
+        <p>
+          Studio is a one-time purchase covering ten people. Each seat carries
+          the same rights as a Pro licence and, like Pro, never renews — it is
+          a licence rather than a workspace, so the shared brand library and
+          shared collections belong to Team rather than to this tier.
+        </p>
+        <p>
+          Seats are occupied by people, not by machines. Ten seats means ten
+          named developers, and the same one-licence-one-developer rule below
+          applies inside them.
+        </p>
+      </LegalSection>
+
       <LegalSection id="team" title="The Team licence">
         <p>
           Team covers one seat per person, billed monthly. Each occupied seat
@@ -175,8 +207,10 @@ export default function LicencePage() {
               <strong className="font-semibold text-foreground">
                 My side project makes a little money.
               </strong>{' '}
-              Then it is commercial and needs Pro. It is a one-time $59 and it
-              covers everything you ever ship.
+              Then it is commercial and needs Pro. It is a one-time{' '}
+              {formatPrice(PLANS.pro.priceCents)} — less where you live, if
+              you are somewhere we price regionally — and it covers
+              everything you ever ship.
             </>,
             <>
               <strong className="font-semibold text-foreground">

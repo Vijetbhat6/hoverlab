@@ -316,7 +316,7 @@ function LockedState({ signedOut }: { signedOut: boolean }) {
               <Link href="/#pricing">See what Pro includes</Link>
             </Button>
             <Button variant="outline" asChild>
-              <Link href="/license">Read the licence</Link>
+              <Link href="/licence">Read the licence</Link>
             </Button>
           </>
         )}

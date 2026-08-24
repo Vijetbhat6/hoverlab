@@ -652,7 +652,7 @@ export function PricingTiers({ className }: { className?: string } = {}) {
         */}
         <p className="mt-4 text-sm text-muted-foreground">
           Everything here is free to read, copy and modify under the{' '}
-          <Link href="/license" className="font-medium text-primary hover:underline">
+          <Link href="/licence" className="font-medium text-primary hover:underline">
             free licence
           </Link>
           . What Pro, Studio and Team add is the commercial one — permission

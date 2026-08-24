@@ -42,7 +42,7 @@ export default function CollectionsPage() {
             the block it lives in and the template you shipped it from, filed
             together. Stored on your account, not this browser, so they survive
             a new machine. See what else Pro includes on the{' '}
-            <Link href="/license" className="font-medium text-primary hover:underline">
+            <Link href="/licence" className="font-medium text-primary hover:underline">
               licence page
             </Link>
             .

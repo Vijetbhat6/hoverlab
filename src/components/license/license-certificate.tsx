@@ -126,7 +126,7 @@ export function LicenseCertificate({ className }: { className?: string }) {
           <CardDescription>
             We could not read your licence just now. The terms themselves are
             unaffected and always available on the{' '}
-            <Link href="/license" className="font-medium text-primary hover:underline">
+            <Link href="/licence" className="font-medium text-primary hover:underline">
               licence page
             </Link>
             .
@@ -298,7 +298,7 @@ export function LicenseCertificate({ className }: { className?: string }) {
             ? 'This certificate records a purchase. There is no activation step and nothing in the product checks the licence id — it exists so you have something to quote.'
             : 'Nothing here requires an account, a key, or attribution.'}{' '}
           Full terms on the{' '}
-          <Link href="/license" className="font-medium text-primary hover:underline">
+          <Link href="/licence" className="font-medium text-primary hover:underline">
             licence page
           </Link>
           .

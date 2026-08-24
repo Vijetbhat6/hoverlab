@@ -27,6 +27,30 @@ const nextConfig: NextConfig = {
    * part of this fix, not incidental to it.
    */
   serverExternalPackages: ["firebase-admin"],
+
+  /**
+   * One licence page, not two.
+   *
+   * `/licence` and `/license` both shipped — the legal document in the
+   * (legal) route group, and a sales-shaped version of the same terms — and
+   * both were indexed, both self-canonical, and both in the sitemap. That is
+   * two pages competing for one query ("can I use these in client work"),
+   * which splits whatever authority either would have had.
+   *
+   * `/licence` wins because it is the URL every internal link already used:
+   * the footer twice, the pricing footnote, /docs, /terms, the homepage and
+   * the legal nav. Redirecting the other way would have meant rewriting all
+   * of those to point at a page that was linked from nowhere.
+   *
+   * Permanent (308), not temporary. The terms live at one address and are
+   * meant to be forwarded to a client's legal team; a 307 tells a crawler
+   * to keep both, which is the thing being fixed.
+   */
+  async redirects() {
+    return [
+      { source: "/license", destination: "/licence", permanent: true },
+    ];
+  },
 };
 
 export default nextConfig;
