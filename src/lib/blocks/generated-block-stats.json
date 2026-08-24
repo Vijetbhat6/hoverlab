@@ -123,8 +123,16 @@
     "lines": 51,
     "files": 1
   },
+  "stats-cards": {
+    "lines": 135,
+    "files": 1
+  },
   "logo-cloud": {
     "lines": 83,
+    "files": 1
+  },
+  "logo-grid": {
+    "lines": 89,
     "files": 1
   },
   "bento-features": {
@@ -161,6 +169,14 @@
   },
   "faq-accordion": {
     "lines": 94,
+    "files": 1
+  },
+  "faq-two-column": {
+    "lines": 143,
+    "files": 1
+  },
+  "faq-grid": {
+    "lines": 109,
     "files": 1
   },
   "changelog-timeline": {

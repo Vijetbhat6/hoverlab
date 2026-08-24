@@ -66,7 +66,9 @@ import { ToastStack } from './sources/toast-stack'
 import { NotificationInbox } from './sources/notification-inbox'
 
 import { StatsBand } from './sources/stats-band'
+import { StatsCards } from './sources/stats-cards'
 import { LogoCloud } from './sources/logo-cloud'
+import { LogoGrid } from './sources/logo-grid'
 import { BentoFeatures } from './sources/bento-features'
 import { PersonaCards } from './sources/persona-cards'
 import { CodeShowcase } from './sources/code-showcase'
@@ -74,6 +76,8 @@ import { PricingTiers } from './sources/pricing-tiers'
 import { ComparisonTable } from './sources/comparison-table'
 import { TestimonialGrid } from './sources/testimonial-grid'
 import { FaqAccordion } from './sources/faq-accordion'
+import { FaqTwoColumn } from './sources/faq-two-column'
+import { FaqGrid } from './sources/faq-grid'
 import { ChangelogTimeline } from './sources/changelog-timeline'
 import { RoadmapColumns } from './sources/roadmap-columns'
 import { NewsletterSignup } from './sources/newsletter-signup'
@@ -237,7 +241,9 @@ export const BLOCK_PREVIEWS: Record<string, React.ReactNode> = {
   'notification-inbox': <NotificationInbox />,
 
   'stats-band': <StatsBand />,
+  'stats-cards': <StatsCards />,
   'logo-cloud': <LogoCloud />,
+  'logo-grid': <LogoGrid />,
   'bento-features': <BentoFeatures />,
   'persona-cards': <PersonaCards />,
   'code-showcase': <CodeShowcase />,
@@ -245,6 +251,8 @@ export const BLOCK_PREVIEWS: Record<string, React.ReactNode> = {
   'comparison-table': <ComparisonTable />,
   'testimonial-grid': <TestimonialGrid />,
   'faq-accordion': <FaqAccordion />,
+  'faq-two-column': <FaqTwoColumn />,
+  'faq-grid': <FaqGrid />,
   'changelog-timeline': <ChangelogTimeline />,
   'roadmap-columns': <RoadmapColumns />,
   'newsletter-signup': <NewsletterSignup />,

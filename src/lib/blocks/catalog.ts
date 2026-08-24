@@ -384,6 +384,16 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     featured: true,
   },
   {
+    id: 'stats-cards',
+    name: 'Stat Cards with Deltas',
+    category: 'Stats',
+    description:
+      'Metrics carrying the direction they moved, with the good direction declared per stat so a falling churn rate reads as a win — arrow and text, never colour alone.',
+    tags: ['stats', 'metrics', 'kpi', 'trend', 'dashboard'],
+    previewComponent: 'stats-cards',
+    deps: ['lucide-react'],
+  },
+  {
     id: 'logo-cloud',
     name: 'Seamless Logo Marquee',
     category: 'Logo Clouds',
@@ -393,6 +403,16 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     previewComponent: 'logo-cloud',
     deps: [],
     featured: true,
+  },
+  {
+    id: 'logo-grid',
+    name: 'Bordered Logo Grid',
+    category: 'Logo Clouds',
+    description:
+      'Hairline-separated cells that hold still and show the whole set at once — the logo wall for a footer, a customers page, or anywhere the count is the claim.',
+    tags: ['logos', 'grid', 'social proof', 'customers', 'static'],
+    previewComponent: 'logo-grid',
+    deps: [],
   },
   {
     id: 'bento-features',
@@ -489,6 +509,26 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     previewComponent: 'faq-accordion',
     deps: ['lucide-react'],
     featured: true,
+  },
+  {
+    id: 'faq-two-column',
+    name: 'Two-Column FAQ with Help Rail',
+    category: 'FAQ',
+    description:
+      'Questions on the right against a sticky rail that keeps a route to a human in view — for the visitor whose objection is not on the list.',
+    tags: ['faq', 'two column', 'sticky', 'support', 'questions'],
+    previewComponent: 'faq-two-column',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'faq-grid',
+    name: 'Open FAQ Grid',
+    category: 'FAQ',
+    description:
+      'Every answer rendered and visible in a two-column description list — the FAQ shape for a marketing page, where collapsed text is text a search engine will not quote.',
+    tags: ['faq', 'grid', 'seo', 'description list', 'questions'],
+    previewComponent: 'faq-grid',
+    deps: [],
   },
   {
     id: 'changelog-timeline',
