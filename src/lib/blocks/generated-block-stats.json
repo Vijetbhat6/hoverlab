@@ -135,12 +135,32 @@
     "lines": 135,
     "files": 1
   },
+  "stats-narrative": {
+    "lines": 133,
+    "files": 1
+  },
+  "stats-comparison": {
+    "lines": 184,
+    "files": 1
+  },
+  "stats-timeline": {
+    "lines": 139,
+    "files": 1
+  },
   "logo-cloud": {
     "lines": 83,
     "files": 1
   },
   "logo-grid": {
     "lines": 89,
+    "files": 1
+  },
+  "logo-strip": {
+    "lines": 95,
+    "files": 1
+  },
+  "logo-segments": {
+    "lines": 126,
     "files": 1
   },
   "bento-features": {
@@ -187,12 +207,32 @@
     "lines": 135,
     "files": 1
   },
+  "pricing-credits": {
+    "lines": 191,
+    "files": 1
+  },
+  "pricing-plan-picker": {
+    "lines": 231,
+    "files": 1
+  },
   "testimonial-grid": {
     "lines": 132,
     "files": 1
   },
   "testimonial-spotlight": {
     "lines": 110,
+    "files": 1
+  },
+  "testimonial-ratings": {
+    "lines": 177,
+    "files": 1
+  },
+  "testimonial-carousel": {
+    "lines": 243,
+    "files": 1
+  },
+  "testimonial-video": {
+    "lines": 180,
     "files": 1
   },
   "faq-accordion": {
@@ -205,6 +245,14 @@
   },
   "faq-grid": {
     "lines": 109,
+    "files": 1
+  },
+  "faq-categorized": {
+    "lines": 216,
+    "files": 1
+  },
+  "faq-search": {
+    "lines": 219,
     "files": 1
   },
   "changelog-timeline": {

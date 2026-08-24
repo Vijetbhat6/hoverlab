@@ -414,6 +414,36 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     deps: ['lucide-react'],
   },
   {
+    id: 'stats-narrative',
+    name: 'Stats Beside the Argument',
+    category: 'Stats',
+    description:
+      'Four figures in a hairline card next to the paragraph making the claim, each carrying an optional source line — for numbers that mean nothing without knowing lower than what, over how long, across how many.',
+    tags: ['stats', 'metrics', 'proof', 'results', 'narrative'],
+    previewComponent: 'stats-narrative',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'stats-comparison',
+    name: 'Before-and-After Metric Table',
+    category: 'Stats',
+    description:
+      'The buyer’s current situation in one column and yours in the next, as a real table with scoped headers — the comparison they are actually making, which a delta against your own past cannot express.',
+    tags: ['stats', 'comparison', 'before after', 'table', 'results'],
+    previewComponent: 'stats-comparison',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'stats-timeline',
+    name: 'Milestone Timeline',
+    category: 'Stats',
+    description:
+      'The same measurement taken year after year down a vertical rail, each with the event that explains it — the shape for trajectory, which no snapshot of four numbers can claim.',
+    tags: ['stats', 'timeline', 'milestones', 'growth', 'about'],
+    previewComponent: 'stats-timeline',
+    deps: [],
+  },
+  {
     id: 'logo-cloud',
     name: 'Seamless Logo Marquee',
     category: 'Logo Clouds',
@@ -432,6 +462,27 @@ export const BLOCK_CATALOG: BlockRecord[] = [
       'Hairline-separated cells that hold still and show the whole set at once — the logo wall for a footer, a customers page, or anywhere the count is the claim.',
     tags: ['logos', 'grid', 'social proof', 'customers', 'static'],
     previewComponent: 'logo-grid',
+    deps: [],
+  },
+  {
+    id: 'logo-strip',
+    name: 'Under-Hero Logo Strip',
+    category: 'Logo Clouds',
+    description:
+      'One unbordered line of wordmarks beside a claim you can actually be wrong about, sized to sit under a hero without pushing the CTA down or moving while the headline is being read.',
+    tags: ['logos', 'social proof', 'hero', 'strip', 'customers'],
+    previewComponent: 'logo-strip',
+    deps: ['lucide-react'],
+    thumbHeight: 'h-24',
+  },
+  {
+    id: 'logo-segments',
+    name: 'Logos Grouped by Industry',
+    category: 'Logo Clouds',
+    description:
+      'Customer logos under segment headings as a description list, with an “and 40 more” count for the ones under NDA — answers whether you have done this for someone like the reader, which a flat wall cannot.',
+    tags: ['logos', 'industry', 'segments', 'enterprise', 'customers'],
+    previewComponent: 'logo-segments',
     deps: [],
   },
   {
@@ -549,6 +600,26 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     deps: ['lucide-react'],
   },
   {
+    id: 'pricing-credits',
+    name: 'Prepaid Credit Packs',
+    category: 'Pricing',
+    description:
+      'One-time packs with the per-credit price worked out for the reader and the saving stated rather than implied — the pricing shape for a product that sells quantity, not a subscription.',
+    tags: ['pricing', 'credits', 'one-time', 'packs', 'prepaid'],
+    previewComponent: 'pricing-credits',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'pricing-plan-picker',
+    name: 'In-App Plan Picker',
+    category: 'Pricing',
+    description:
+      'A native radiogroup of plans with the current one disabled and the prorated charge announced as it changes — the upgrade dialog, not the marketing table.',
+    tags: ['pricing', 'upgrade', 'radio', 'billing', 'form'],
+    previewComponent: 'pricing-plan-picker',
+    deps: ['lucide-react'],
+  },
+  {
     id: 'testimonial-grid',
     name: 'Masonry Testimonial Wall',
     category: 'Testimonials',
@@ -567,6 +638,36 @@ export const BLOCK_CATALOG: BlockRecord[] = [
       'One customer, quoted at length and backed by a stat row — the section for when a single believable story argues better than a wall of five-star fragments.',
     tags: ['testimonial', 'quote', 'case study', 'stats', 'social proof'],
     previewComponent: 'testimonial-spotlight',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'testimonial-ratings',
+    name: 'Aggregate Rating Breakdown',
+    category: 'Testimonials',
+    description:
+      'A mean score over a stated sample with all five rating bands left visible, including the one-star row — proof that survives the objection every hand-picked quote wall invites.',
+    tags: ['reviews', 'ratings', 'stars', 'social proof', 'aggregate'],
+    previewComponent: 'testimonial-ratings',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'testimonial-carousel',
+    name: 'Scroll-Snap Quote Rail',
+    category: 'Testimonials',
+    description:
+      'Twenty quotes in the height of six, scrolled by CSS snap points with arrows that disable at the ends — no auto-advance, and every quote stays in the DOM for search and Cmd-F.',
+    tags: ['testimonials', 'carousel', 'scroll snap', 'quotes', 'rail'],
+    previewComponent: 'testimonial-carousel',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'testimonial-video',
+    name: 'Video Testimonial Cards',
+    category: 'Testimonials',
+    description:
+      'Poster tiles linking out to recordings, each with a pull-quote that has to land for the majority who never press play, and a drawn placeholder until you supply a still.',
+    tags: ['testimonials', 'video', 'social proof', 'customers', 'quotes'],
+    previewComponent: 'testimonial-video',
     deps: ['lucide-react'],
   },
   {
@@ -599,6 +700,26 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     tags: ['faq', 'grid', 'seo', 'description list', 'questions'],
     previewComponent: 'faq-grid',
     deps: [],
+  },
+  {
+    id: 'faq-categorized',
+    name: 'FAQ Grouped by Topic',
+    category: 'FAQ',
+    description:
+      'Anchor-linked topic pills over per-topic details groups with the first answer open — for the FAQ that outgrew a single list, working with JavaScript disabled.',
+    tags: ['faq', 'topics', 'categories', 'anchors', 'no-js'],
+    previewComponent: 'faq-categorized',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'faq-search',
+    name: 'Filterable FAQ with Fallback',
+    category: 'FAQ',
+    description:
+      'A search that narrows the list across answers and keywords, announces the count, and turns an empty result into the contact route it should always have been.',
+    tags: ['faq', 'search', 'filter', 'help centre', 'support'],
+    previewComponent: 'faq-search',
+    deps: ['lucide-react'],
   },
   {
     id: 'changelog-timeline',

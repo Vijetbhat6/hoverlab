@@ -69,8 +69,13 @@ import { NotificationInbox } from './sources/notification-inbox'
 
 import { StatsBand } from './sources/stats-band'
 import { StatsCards } from './sources/stats-cards'
+import { StatsNarrative } from './sources/stats-narrative'
+import { StatsComparison } from './sources/stats-comparison'
+import { StatsTimeline } from './sources/stats-timeline'
 import { LogoCloud } from './sources/logo-cloud'
 import { LogoGrid } from './sources/logo-grid'
+import { LogoStrip } from './sources/logo-strip'
+import { LogoSegments } from './sources/logo-segments'
 import { BentoFeatures } from './sources/bento-features'
 import { FeatureRows } from './sources/feature-rows'
 import { FeatureIconGrid } from './sources/feature-icon-grid'
@@ -81,10 +86,17 @@ import { PricingTiers } from './sources/pricing-tiers'
 import { PricingSingle } from './sources/pricing-single'
 import { PricingUsageCalculator } from './sources/pricing-usage-calculator'
 import { ComparisonTable } from './sources/comparison-table'
+import { PricingCredits } from './sources/pricing-credits'
+import { PricingPlanPicker } from './sources/pricing-plan-picker'
 import { TestimonialGrid } from './sources/testimonial-grid'
+import { TestimonialRatings } from './sources/testimonial-ratings'
+import { TestimonialCarousel } from './sources/testimonial-carousel'
+import { TestimonialVideo } from './sources/testimonial-video'
 import { FaqAccordion } from './sources/faq-accordion'
 import { FaqTwoColumn } from './sources/faq-two-column'
 import { FaqGrid } from './sources/faq-grid'
+import { FaqCategorized } from './sources/faq-categorized'
+import { FaqSearch } from './sources/faq-search'
 import { ChangelogTimeline } from './sources/changelog-timeline'
 import { RoadmapColumns } from './sources/roadmap-columns'
 import { NewsletterSignup } from './sources/newsletter-signup'
@@ -251,8 +263,13 @@ export const BLOCK_PREVIEWS: Record<string, React.ReactNode> = {
 
   'stats-band': <StatsBand />,
   'stats-cards': <StatsCards />,
+  'stats-narrative': <StatsNarrative />,
+  'stats-comparison': <StatsComparison />,
+  'stats-timeline': <StatsTimeline />,
   'logo-cloud': <LogoCloud />,
   'logo-grid': <LogoGrid />,
+  'logo-strip': <LogoStrip />,
+  'logo-segments': <LogoSegments />,
   'bento-features': <BentoFeatures />,
   'feature-rows': <FeatureRows />,
   'feature-icon-grid': <FeatureIconGrid />,
@@ -263,10 +280,17 @@ export const BLOCK_PREVIEWS: Record<string, React.ReactNode> = {
   'pricing-single': <PricingSingle />,
   'pricing-usage-calculator': <PricingUsageCalculator />,
   'comparison-table': <ComparisonTable />,
+  'pricing-credits': <PricingCredits />,
+  'pricing-plan-picker': <PricingPlanPicker />,
   'testimonial-grid': <TestimonialGrid />,
+  'testimonial-ratings': <TestimonialRatings />,
+  'testimonial-carousel': <TestimonialCarousel />,
+  'testimonial-video': <TestimonialVideo />,
   'faq-accordion': <FaqAccordion />,
   'faq-two-column': <FaqTwoColumn />,
   'faq-grid': <FaqGrid />,
+  'faq-categorized': <FaqCategorized />,
+  'faq-search': <FaqSearch />,
   'changelog-timeline': <ChangelogTimeline />,
   'roadmap-columns': <RoadmapColumns />,
   'newsletter-signup': <NewsletterSignup />,
