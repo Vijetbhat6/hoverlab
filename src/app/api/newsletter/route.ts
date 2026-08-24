@@ -56,15 +56,29 @@ const COLLECTION = 'newsletterSubscribers'
 /**
  * The exact promise shown above the field, stored with every signup.
  *
- * Keep this in sync with the copy in `newsletter-signup.tsx`. If the two
- * ever disagree, the stored one is the record of what was actually agreed.
+ * Keep these in sync with the copy beside each form. If the two ever
+ * disagree, the stored one is the record of what was actually agreed.
+ *
+ * Per source, not one string for everyone, and that is not bookkeeping.
+ * Someone signing up from /for-authors is agreeing to a five-email sequence
+ * over about a fortnight; someone signing up from the landing page is
+ * agreeing to be told when things are added. Recording the second promise
+ * against the first person is a false record of consent — and it is a false
+ * record we would only discover when they replied to email three asking why
+ * they were getting it.
  */
-const CONSENT_TEXT =
-  'One email when new effects are added. No spam, no promotions, no digests. ' +
-  'Unsubscribe in one click.'
+const CONSENT_TEXT: Record<string, string> = {
+  default:
+    'One email when new effects are added. No spam, no promotions, no digests. ' +
+    'Unsubscribe in one click.',
+  authors:
+    'A five-email sequence over about two weeks about the licence, the catalog ' +
+    'and how it is reached, then only mail when something is added. No spam, no ' +
+    'promotions. Unsubscribe in one click.',
+}
 
 /** Where the signup happened — for knowing which surface converts. */
-const SOURCES = new Set(['landing', 'pricing', 'footer', 'docs'])
+const SOURCES = new Set(['landing', 'pricing', 'footer', 'docs', 'authors', 'tools'])
 
 /**
  * Deliberately loose.
@@ -162,7 +176,7 @@ export const POST = withJsonErrors('newsletter', async (req: Request) => {
       email,
       source,
       status: 'subscribed',
-      consentedTo: CONSENT_TEXT,
+      consentedTo: CONSENT_TEXT[source] ?? CONSENT_TEXT.default,
       consentedAt: FieldValue.serverTimestamp(),
       unsubscribeToken:
         (existing.data()?.unsubscribeToken as string | undefined) ??

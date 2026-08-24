@@ -34,9 +34,55 @@ import { Mail, Check, ArrowRight, ShieldCheck, AlertCircle } from 'lucide-react'
 import { Reveal } from '@/components/reveal'
 import { track } from '@/lib/analytics'
 
-/** Which surface the signup came from, for knowing what converts. */
+/**
+ * Which surface the signup came from, for knowing what converts.
+ *
+ * Kept in step with SOURCES in `api/newsletter/route.ts`, which is the
+ * authority — a value this type allows and that route does not is silently
+ * recorded as 'landing', which loses the attribution and, for 'authors',
+ * records the wrong consent text against the address.
+ */
+type SignupSource = 'landing' | 'pricing' | 'footer' | 'docs' | 'authors' | 'tools'
+
 interface NewsletterSignupProps {
-  source?: 'landing' | 'pricing' | 'footer' | 'docs'
+  source?: SignupSource
+}
+
+/**
+ * The promise shown above the field, per surface.
+ *
+ * This has to match CONSENT_TEXT for the same source in
+ * `api/newsletter/route.ts`, which stores what was agreed to. One heading
+ * for every surface was fine while every surface promised the same thing;
+ * /for-authors promises a five-email sequence, and rendering "one email
+ * when we drop new effects" above a field that records a different consent
+ * is a false promise on the page and a false record in the database.
+ */
+const COPY: Record<SignupSource, { heading: string; body: string }> = {
+  landing: {
+    heading: 'One email when we drop new effects',
+    body: "No spam, no promotions, no digests. Just a heads-up when there's something new to play with. Unsubscribe in one click.",
+  },
+  pricing: {
+    heading: 'One email when we drop new effects',
+    body: "No spam, no promotions, no digests. Just a heads-up when there's something new to play with. Unsubscribe in one click.",
+  },
+  footer: {
+    heading: 'One email when we drop new effects',
+    body: "No spam, no promotions, no digests. Just a heads-up when there's something new to play with. Unsubscribe in one click.",
+  },
+  docs: {
+    heading: 'One email when we drop new effects',
+    body: "No spam, no promotions, no digests. Just a heads-up when there's something new to play with. Unsubscribe in one click.",
+  },
+  tools: {
+    heading: 'One email when we drop new effects',
+    body: "No spam, no promotions, no digests. Just a heads-up when there's something new to play with. Unsubscribe in one click.",
+  },
+  authors: {
+    heading: 'Five emails, then only when something is added',
+    body: 'The sequence above, over about two weeks — the licence, why this is not a marketplace, and the four ways into the catalog. After that, nothing until there is something new. Unsubscribe in one click.',
+  },
 }
 
 export function NewsletterSignup({ source = 'landing' }: NewsletterSignupProps) {
@@ -111,11 +157,10 @@ export function NewsletterSignup({ source = 'landing' }: NewsletterSignupProps) 
               <Mail className="h-6 w-6" />
             </div>
             <h2 className="text-balance text-2xl font-bold tracking-tight sm:text-3xl">
-              One email when we drop new effects
+              {COPY[source].heading}
             </h2>
             <p className="mx-auto mt-3 max-w-md text-sm text-muted-foreground">
-              No spam, no promotions, no digests. Just a heads-up when
-              there&apos;s something new to play with. Unsubscribe in one click.
+              {COPY[source].body}
             </p>
 
             {status === 'done' ? (

@@ -88,6 +88,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // developers, and the only page that says the catalog is still growing.
     { url: absoluteUrl('/figma'), changeFrequency: 'monthly' as const, priority: 0.8 },
     { url: absoluteUrl('/changelog'), changeFrequency: 'weekly' as const, priority: 0.7 },
+    // Written for one segment rather than for search: people who used to
+    // sell on a marketplace. It is the first thing here aimed at building
+    // the direct traffic that is the only funnel agents cannot re-rank.
+    { url: absoluteUrl('/for-authors'), changeFrequency: 'monthly' as const, priority: 0.7 },
     // The designer tools are self-contained utilities, not catalog
     // artifacts. Derived from the registry rather than a second list: a
     // hand-kept copy here is how the sitemap once carried a redirecting

@@ -85,6 +85,11 @@ const COMPANY_LINKS: FooterLink[] = [
   { label: 'Pricing', href: '/pricing' },
   { label: 'Licence', href: '/licence' },
   { label: 'Changelog', href: '/changelog' },
+  // Written for one audience rather than for search. It sits in the footer
+  // because that is where someone who has already read a page goes looking
+  // for "is this for me", and it is the only route in that does not depend
+  // on us being handed the visitor by a search engine or an agent.
+  { label: 'For marketplace authors', href: '/for-authors' },
 ]
 
 /**
