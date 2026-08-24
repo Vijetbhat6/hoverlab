@@ -31,7 +31,13 @@ import { ToolLayout } from '@/components/designer-tools/tool-layout'
 import { ToolPresetsBar } from '@/components/designer-tools/tool-presets-bar'
 import { UseInCatalog } from '@/components/designer-tools/use-in-catalog'
 import { useToolState } from '@/hooks/use-tool-state'
-import { hexToRgb, normalizeHex, rgbToOklch } from '@/lib/color-tools'
+import {
+  hexToRgb,
+  normalizeHex,
+  oklchToRgb,
+  rgbToHex,
+  rgbToOklch,
+} from '@/lib/color-tools'
 import { cn } from '@/lib/utils'
 
 const TOOL = '/tools/tokens'
@@ -167,6 +173,98 @@ ${lines(dark, '  ')}
   --radius-xl: calc(var(--radius) + 4px);
 }
 `
+}
+
+/**
+ * An `oklch(...)` string from `buildScheme` as hex, or null if it is not one.
+ *
+ * Handles the alpha form (`oklch(1 0 0 / 10%)`) as well as the plain one,
+ * and that is not a nicety: `--border` and `--input` are opaque in the light
+ * theme and translucent white in the dark one. Skipping the alpha form left
+ * the dark token file two variables shorter than the light one, so a
+ * designer mapping the two as modes in Figma would find the pair missing on
+ * one side — the exact seam a mode-mapped import is supposed to remove.
+ *
+ * Alpha comes out as 8-digit hex, which Figma reads and which every DTCG
+ * importer accepts.
+ */
+function oklchStringToHex(value: string): string | null {
+  const parsed = /^oklch\(([\d.]+)\s+([\d.]+)\s+([\d.]+)(?:\s*\/\s*([\d.]+)(%?))?\)$/.exec(
+    value.trim(),
+  )
+  if (!parsed) return null
+
+  const hex = rgbToHex(
+    oklchToRgb({ l: Number(parsed[1]), c: Number(parsed[2]), h: Number(parsed[3]) }),
+  )
+  if (parsed[4] === undefined) return hex
+
+  const raw = Number(parsed[4])
+  const alpha = parsed[5] === '%' ? raw / 100 : raw
+  if (!Number.isFinite(alpha) || alpha >= 1) return hex
+
+  const byte = Math.round(Math.max(0, alpha) * 255)
+  return `${hex}${byte.toString(16).padStart(2, '0')}`
+}
+
+/**
+ * One theme as a W3C Design Tokens (DTCG) document — the file Figma reads.
+ *
+ * The second channel for the same artifact. Rather than hand-drawing Figma
+ * kits nobody will maintain, the tokens a designer needs are generated from
+ * the same state that produces the CSS, so the two cannot describe
+ * different systems.
+ *
+ * DTCG because it is the format that is actually accepted: every current
+ * Figma import plugin reads it (Variables JSON Import, Tokens Studio,
+ * TokensBrücke), and Figma's own native variable import reads it by
+ * dragging the file in. The same reasoning, at more length, is in
+ * `lib/export/design-system.ts`, which produces this shape for a customer's
+ * whole brand — this is the free, tool-shaped half of it.
+ *
+ * Free, and deliberately. The identical values are already one click away
+ * as CSS on this page, so withholding them behind a paywall in a different
+ * file extension would be a wall with a door beside it — the thing this
+ * codebase argues against everywhere else it draws a line. The Pro export
+ * sells the whole derived system, not this.
+ *
+ * ONE FILE PER MODE. DTCG has no settled syntax for modes, so every tool
+ * invented its own and none agree; a file that is unambiguously "the light
+ * theme" imports everywhere.
+ *
+ * Hex, not OKLCH. Figma has no OKLCH variable type, so `oklch(0.52 0.19
+ * 250)` would import as a string — a note to a human rather than a colour a
+ * rectangle can use. The OKLCH original is carried in `$description` so
+ * nothing is lost on the way.
+ */
+function buildDtcg(state: TokenState, dark: boolean): string {
+  const scheme = buildScheme(state, dark)
+  const colors: Record<string, unknown> = { $type: 'color' }
+
+  for (const token of scheme.tokens) {
+    const hex = oklchStringToHex(token.value)
+    if (!hex) continue
+    colors[token.name.replace(/^--/, '')] = {
+      $value: hex,
+      // The OKLCH the value came from, carried across. A designer opening
+      // this in a token editor can see what the hex was derived from, and
+      // the CSS on this page and the JSON stay traceable to each other.
+      $description: token.value,
+    }
+  }
+
+  return `${JSON.stringify(
+    {
+      $description: `Hoverlab design tokens — ${dark ? 'dark' : 'light'} theme`,
+      color: colors,
+      radius: {
+        $type: 'dimension',
+        base: { $value: `${state.radius}rem` },
+      },
+    },
+    null,
+    2,
+  )}\n`
 }
 
 export default function TokensToolPage() {
@@ -404,6 +502,19 @@ export default function TokensToolPage() {
           </div>
 
           <CopyCssCard code={css} title="globals.css" language="css" />
+
+          {/* The same tokens, in the file a designer imports. See the note
+              on buildDtcg — one artifact, two channels. */}
+          <CopyCssCard
+            code={buildDtcg(state, false)}
+            title="tokens.light.json — import into Figma"
+            language="json"
+          />
+          <CopyCssCard
+            code={buildDtcg(state, true)}
+            title="tokens.dark.json — import into Figma"
+            language="json"
+          />
 
           {/* The exit. Placed after the output rather than beside the
               controls: it is worth reading once the tokens exist, and it is
