@@ -95,6 +95,10 @@
     "lines": 207,
     "files": 1
   },
+  "filter-drawer-facets": {
+    "lines": 241,
+    "files": 1
+  },
   "onboarding-checklist": {
     "lines": 230,
     "files": 1
@@ -109,6 +113,10 @@
   },
   "notification-inbox": {
     "lines": 255,
+    "files": 1
+  },
+  "notification-preferences": {
+    "lines": 271,
     "files": 1
   },
   "stats-band": {
@@ -271,6 +279,10 @@
     "lines": 204,
     "files": 1
   },
+  "data-table-column-manager": {
+    "lines": 208,
+    "files": 1
+  },
   "settings-nav-layout": {
     "lines": 119,
     "files": 1
@@ -327,12 +339,20 @@
     "lines": 166,
     "files": 1
   },
+  "payment-method-card": {
+    "lines": 237,
+    "files": 1
+  },
   "command-palette": {
     "lines": 280,
     "files": 1
   },
   "search-results-panel": {
     "lines": 189,
+    "files": 1
+  },
+  "keyboard-shortcuts-sheet": {
+    "lines": 236,
     "files": 1
   },
   "file-dropzone": {

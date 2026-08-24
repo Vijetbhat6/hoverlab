@@ -112,6 +112,11 @@ import { DataTableExpandable } from './sources/data-table-expandable'
 import { SettingsNavLayout } from './sources/settings-nav-layout'
 import { SettingsProfileForm } from './sources/settings-profile-form'
 import { SettingsTeamMembers } from './sources/settings-team-members'
+import { PaymentMethodCard } from './sources/payment-method-card'
+import { NotificationPreferences } from './sources/notification-preferences'
+import { KeyboardShortcutsSheet } from './sources/keyboard-shortcuts-sheet'
+import { FilterDrawerFacets } from './sources/filter-drawer-facets'
+import { DataTableColumnManager } from './sources/data-table-column-manager'
 import { SettingsApiKeys } from './sources/settings-api-keys'
 import { SettingsDangerZone } from './sources/settings-danger-zone'
 
@@ -278,6 +283,11 @@ export const BLOCK_PREVIEWS: Record<string, React.ReactNode> = {
   'settings-nav-layout': <SettingsNavLayout />,
   'settings-profile-form': <SettingsProfileForm />,
   'settings-team-members': <SettingsTeamMembers />,
+  'payment-method-card': <PaymentMethodCard />,
+  'notification-preferences': <NotificationPreferences />,
+  'keyboard-shortcuts-sheet': <KeyboardShortcutsSheet />,
+  'filter-drawer-facets': <FilterDrawerFacets />,
+  'data-table-column-manager': <DataTableColumnManager />,
   'settings-api-keys': <SettingsApiKeys />,
   'settings-danger-zone': <SettingsDangerZone />,
 

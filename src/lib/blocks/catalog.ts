@@ -301,6 +301,17 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     deps: ['lucide-react'],
     thumbHeight: 'h-24',
   },
+  {
+    id: 'filter-drawer-facets',
+    name: 'Faceted Filter Drawer',
+    category: 'Modals & Drawers',
+    description:
+      'Facets with per-option counts, zero-result options disabled rather than hidden so the list never jumps, and a pending selection applied on a button that says how many choices changed.',
+    tags: ['filters', 'facets', 'drawer', 'search', 'refine'],
+    previewComponent: 'filter-drawer-facets',
+    deps: ['lucide-react'],
+    featured: true,
+  },
 
   /* ---------------------------- Onboarding ------------------------- */
   {
@@ -347,6 +358,17 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     tags: ['notifications', 'inbox', 'bell', 'activity', 'unread'],
     previewComponent: 'notification-inbox',
     deps: ['lucide-react'],
+  },
+  {
+    id: 'notification-preferences',
+    name: 'Notification Preferences Matrix',
+    category: 'Notifications',
+    description:
+      'Per-event, per-channel switches as a real table, with required notifications locked and explained, and column headers that toggle a whole channel and report a mixed state honestly.',
+    tags: ['notifications', 'preferences', 'settings', 'email', 'push'],
+    previewComponent: 'notification-preferences',
+    deps: ['lucide-react'],
+    featured: true,
   },
 
   /* ---------------------------- Sections --------------------------- */
@@ -779,6 +801,16 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     previewComponent: 'data-table-expandable',
     deps: ['lucide-react'],
   },
+  {
+    id: 'data-table-column-manager',
+    name: 'Column Show, Hide & Reorder',
+    category: 'Data Tables',
+    description:
+      'Reordering that works from the keyboard rather than by drag alone, pinned columns that cannot be hidden or moved, and a guard so the last visible column cannot be unchecked into a blank table.',
+    tags: ['table', 'columns', 'customise', 'reorder', 'visibility'],
+    previewComponent: 'data-table-column-manager',
+    deps: ['lucide-react'],
+  },
 
   /* ---------------------------- Settings -------------------------- */
   {
@@ -934,6 +966,16 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     previewComponent: 'invoice-history-table',
     deps: ['lucide-react'],
   },
+  {
+    id: 'payment-method-card',
+    name: 'Payment Methods On File',
+    category: 'Billing & Usage',
+    description:
+      'Cards on file with the two failures that cost the subscription: expiry called out before it fails, and the default stated on the row rather than implied by ordering.',
+    tags: ['payment', 'card', 'billing', 'stripe', 'checkout'],
+    previewComponent: 'payment-method-card',
+    deps: ['lucide-react'],
+  },
 
   /* ---------------------- Command & Search ------------------------ */
   {
@@ -957,6 +999,17 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     tags: ['search', 'results', 'docs', 'filter', 'highlight'],
     previewComponent: 'search-results-panel',
     deps: ['lucide-react'],
+  },
+  {
+    id: 'keyboard-shortcuts-sheet',
+    name: 'Keyboard Shortcuts Sheet',
+    category: 'Command & Search',
+    description:
+      'The "?" overlay, with chords written once in one notation and rendered per platform — mod becomes Command on Apple and Ctrl everywhere else, decided after mount so the markup never mismatches.',
+    tags: ['shortcuts', 'keyboard', 'hotkeys', 'help', 'accessibility'],
+    previewComponent: 'keyboard-shortcuts-sheet',
+    deps: ['lucide-react'],
+    featured: true,
   },
 
   /* ---------------------- File Upload ----------------------------- */
