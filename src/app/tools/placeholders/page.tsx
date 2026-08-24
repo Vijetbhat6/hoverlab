@@ -22,9 +22,12 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { CopyCssCard } from '@/components/designer-tools/copy-css-card'
 import { ToolLayout } from '@/components/designer-tools/tool-layout'
+import { ToolPresetsBar } from '@/components/designer-tools/tool-presets-bar'
+import { UseInCatalog } from '@/components/designer-tools/use-in-catalog'
+import { useToolState } from '@/hooks/use-tool-state'
 import { cn } from '@/lib/utils'
 
-const STORAGE_KEY = 'hoverlab:tool:placeholders'
+const TOOL = '/tools/placeholders'
 
 type Mode = 'image' | 'avatar'
 
@@ -124,24 +127,10 @@ const PRESETS: Array<{ label: string; w: number; h: number }> = [
 ]
 
 export default function PlaceholdersToolPage() {
-  const [state, setState] = React.useState<PlaceholderState>(DEFAULT_STATE)
-
-  React.useEffect(() => {
-    try {
-      const raw = window.localStorage.getItem(STORAGE_KEY)
-      if (raw) setState({ ...DEFAULT_STATE, ...(JSON.parse(raw) as Partial<PlaceholderState>) })
-    } catch {
-      /* ignore */
-    }
-  }, [])
-
-  React.useEffect(() => {
-    try {
-      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state))
-    } catch {
-      /* ignore */
-    }
-  }, [state])
+  // Working state stays local and ungated; named presets need an account.
+  // See `use-tool-state.ts` for why the two layers are separate.
+  const tool = useToolState<PlaceholderState>(TOOL, DEFAULT_STATE)
+  const { state, setState } = tool
 
   const svg = state.mode === 'image' ? buildImageSvg(state) : buildAvatarSvg(state.name)
   const uri = toDataUri(svg)
@@ -263,6 +252,10 @@ export default function PlaceholdersToolPage() {
               </p>
             </div>
           )}
+
+          {/* After the controls, never before them — the ask lands once the
+              placeholder exists rather than in front of it. */}
+          <ToolPresetsBar tool={tool} noun="placeholder" />
         </div>
 
         <div className="space-y-6">
@@ -300,6 +293,10 @@ export default function PlaceholdersToolPage() {
             language="html"
           />
           <CopyCssCard code={svg} title="As SVG" language="html" />
+
+          {/* No `brand`: placeholder colour is derived from the seed text
+              rather than chosen, so it states nothing about a product. */}
+          <UseInCatalog tool={TOOL} />
         </div>
       </div>
     </ToolLayout>

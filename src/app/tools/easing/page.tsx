@@ -19,20 +19,32 @@ import { Slider } from '@/components/ui/slider'
 import { CopyCssCard } from '@/components/designer-tools/copy-css-card'
 import { ToolLayout } from '@/components/designer-tools/tool-layout'
 import { readSharedState, ShareLinkButton } from '@/components/designer-tools/share-link'
+import { ToolPresetsBar } from '@/components/designer-tools/tool-presets-bar'
+import { UseInCatalog } from '@/components/designer-tools/use-in-catalog'
+import { useToolState } from '@/hooks/use-tool-state'
 import { cn } from '@/lib/utils'
 
-const STORAGE_KEY = 'hoverlab:tool:easing'
+const TOOL = '/tools/easing'
 
 interface BezierPoint {
   x: number
   y: number
 }
 
+/**
+ * The curve, and nothing about the preview.
+ *
+ * `playing` used to live here and was then explicitly excluded from every
+ * restore (`{ ...parsed, playing: prev.playing }`), which is the shape of a
+ * field that was never state about the curve. Now that this object is also
+ * what a saved preset holds, the distinction has teeth: a preset called
+ * "page transition" should restore a curve and a duration, not pause
+ * someone's animation because it was paused when they saved it.
+ */
 interface EasingState {
   p1: BezierPoint
   p2: BezierPoint
   duration: number // seconds
-  playing: boolean
   reducedMotion: boolean
 }
 
@@ -40,7 +52,6 @@ const DEFAULT_STATE: EasingState = {
   p1: { x: 0.25, y: 0.1 },
   p2: { x: 0.25, y: 1 },
   duration: 1.5,
-  playing: true,
   reducedMotion: false,
 }
 
@@ -117,22 +128,19 @@ function fromCanvas(cx: number, cy: number): BezierPoint {
 }
 
 export default function EasingToolPage() {
-  const [state, setState] = React.useState<EasingState>(DEFAULT_STATE)
+  // Working state stays local and ungated; named presets need an account.
+  // See `use-tool-state.ts` for why the two layers are separate.
+  const tool = useToolState<EasingState>(TOOL, DEFAULT_STATE)
+  const { state, setState } = tool
+  // Preview transport, not curve state — see the note on `EasingState`.
+  const [playing, setPlaying] = React.useState(true)
   const draggingRef = React.useRef<'p1' | 'p2' | null>(null)
   const svgRef = React.useRef<SVGSVGElement | null>(null)
 
   React.useEffect(() => {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY)
-      if (raw) {
-        const parsed = JSON.parse(raw)
-        setState((prev) => ({ ...prev, ...parsed, playing: prev.playing }))
-      }
-    } catch {
-      /* ignore */
-    }
-
     // A shared link's state wins over whatever this browser had stored.
+    // Declared after `useToolState`, so the hook's restore has already run
+    // by the time this does — which is what keeps that precedence true.
     const shared = readSharedState<Partial<EasingState>>()
     if (shared) {
       setState((prev) => {
@@ -155,15 +163,8 @@ export default function EasingToolPage() {
         return next
       })
     }
+    // `setState` is stable; the shared link is read once, on mount.
   }, [])
-
-  React.useEffect(() => {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(state))
-    } catch {
-      /* ignore */
-    }
-  }, [state])
 
   const update = (patch: Partial<EasingState>) =>
     setState((s) => ({ ...s, ...patch }))
@@ -369,9 +370,9 @@ export default function EasingToolPage() {
                   variant="ghost"
                   size="sm"
                   className="h-7 gap-1 text-xs"
-                  onClick={() => update({ playing: !state.playing })}
+                  onClick={() => setPlaying((p) => !p)}
                 >
-                  {state.playing ? (
+                  {playing ? (
                     <>
                       <Pause className="h-3 w-3" /> Pause
                     </>
@@ -385,7 +386,7 @@ export default function EasingToolPage() {
                   variant="ghost"
                   size="sm"
                   className="h-7 gap-1 text-xs"
-                  onClick={() => update({ playing: true })}
+                  onClick={() => setPlaying(true)}
                 >
                   <RotateCcw className="h-3 w-3" /> Restart
                 </Button>
@@ -395,21 +396,21 @@ export default function EasingToolPage() {
               <PreviewTrack
                 cssValue={cssValue}
                 duration={state.duration}
-                playing={state.playing}
+                playing={playing}
                 label="translateX"
                 transform="translateX"
               />
               <PreviewTrack
                 cssValue={cssValue}
                 duration={state.duration}
-                playing={state.playing}
+                playing={playing}
                 label="scale"
                 transform="scale"
               />
               <PreviewTrack
                 cssValue={cssValue}
                 duration={state.duration}
-                playing={state.playing}
+                playing={playing}
                 label="opacity"
                 transform="opacity"
               />
@@ -419,6 +420,9 @@ export default function EasingToolPage() {
           <CopyCssCard code={cssBlock} title="CSS" language="css" />
 
           <CopyCssCard code={linearBlock} title="linear() easing" language="css" />
+
+          {/* No `brand`: a timing function carries no hue. */}
+          <UseInCatalog tool={TOOL} />
         </div>
 
         {/* Right: presets + controls */}
@@ -505,6 +509,10 @@ export default function EasingToolPage() {
               />
             </svg>
           </div>
+
+          {/* After the controls, never before them — the ask lands once the
+              curve exists rather than in front of it. */}
+          <ToolPresetsBar tool={tool} noun="curve" />
         </div>
       </div>
     </ToolLayout>

@@ -18,7 +18,11 @@ import { Blend, Copy } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { ToolLayout, copyWithToast } from '@/components/designer-tools/tool-layout'
+import { ToolPresetsBar } from '@/components/designer-tools/tool-presets-bar'
+import { UseInCatalog } from '@/components/designer-tools/use-in-catalog'
+import { useToolState } from '@/hooks/use-tool-state'
 import {
+  brandFromHex,
   formatOklch,
   hexToRgb,
   hslToRgb,
@@ -32,7 +36,7 @@ import {
 } from '@/lib/color-tools'
 import { cn } from '@/lib/utils'
 
-const STORAGE_KEY = 'hoverlab:tool:color'
+const TOOL = '/tools/color'
 
 interface ParsedColor {
   rgb: RGB
@@ -112,29 +116,35 @@ function parseCssColor(input: string): ParsedColor | null {
 
 const DEFAULT_INPUT = '#10b981'
 
+/**
+ * One field, still an object.
+ *
+ * This tool persisted the raw string rather than JSON, which was fine while
+ * localStorage was the only reader. A preset is `{ tool, name, state }`
+ * with `state` an object, so the shape has to be one — and a stored bare
+ * string now fails `JSON.parse` and restores as the default, which costs a
+ * returning visitor one colour and needs no migration.
+ *
+ * Restoring an unparseable value is safe here in a way it is not elsewhere:
+ * the field already accepts anything while someone types, and renders the
+ * last good colour with an "invalid" flag rather than blanking.
+ */
+interface ColorState {
+  input: string
+}
+
+const DEFAULT_STATE: ColorState = { input: DEFAULT_INPUT }
+
 export default function ColorToolPage() {
-  const [input, setInput] = React.useState(DEFAULT_INPUT)
+  // Working state stays local and ungated; named presets need an account.
+  // See `use-tool-state.ts` for why the two layers are separate.
+  const tool = useToolState<ColorState>(TOOL, DEFAULT_STATE)
+  const input = tool.state.input
+  const setInput = (v: string) => tool.setState({ input: v })
   // Invalid keystrokes keep the last good color on screen instead of blanking it.
   const [lastValid, setLastValid] = React.useState<ParsedColor>(
     () => parseCssColor(DEFAULT_INPUT)!,
   )
-
-  React.useEffect(() => {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY)
-      if (raw && parseCssColor(raw)) setInput(raw)
-    } catch {
-      /* ignore */
-    }
-  }, [])
-
-  React.useEffect(() => {
-    try {
-      localStorage.setItem(STORAGE_KEY, input)
-    } catch {
-      /* ignore */
-    }
-  }, [input])
 
   const parsed = React.useMemo(() => parseCssColor(input), [input])
   React.useEffect(() => {
@@ -219,6 +229,10 @@ export default function ColorToolPage() {
               values (and the swatch) are clamped to the nearest displayable color.
             </p>
           )}
+
+          {/* After the field, never before it — the ask lands once there is a
+              colour worth keeping rather than in front of an empty input. */}
+          <ToolPresetsBar tool={tool} noun="colour" />
         </div>
 
         {/* Swatch on both surfaces */}
@@ -236,6 +250,10 @@ export default function ColorToolPage() {
             row to copy its CSS string. Everything runs locally — nothing is
             uploaded.
           </div>
+
+          {/* The whole tool is one colour, so this is the clearest possible
+              case for repainting the catalog in it. */}
+          <UseInCatalog tool={TOOL} brand={brandFromHex(hex)} />
         </div>
       </div>
     </ToolLayout>

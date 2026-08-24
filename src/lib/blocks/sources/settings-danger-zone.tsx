@@ -69,6 +69,7 @@ export function SettingsDangerZone({
 }: SettingsDangerZoneProps) {
   const [openId, setOpenId] = React.useState<string | null>(null)
   const [typed, setTyped] = React.useState('')
+  const uid = React.useId()
 
   // Exact match. Trimming or case-folding would undo the whole mechanism.
   const confirmed = typed === confirmValue
@@ -108,6 +109,9 @@ export function SettingsDangerZone({
                   type="button"
                   onClick={() => toggle(action.id)}
                   aria-expanded={open}
+                  // Only while the confirmation exists — it is unmounted
+                  // when collapsed, and a dangling IDREF is worse than none.
+                  aria-controls={open ? `${uid}-${action.id}-confirm` : undefined}
                   className="shrink-0 rounded-xl border border-destructive/50 px-3.5 py-2 text-sm font-semibold text-destructive transition-colors hover:bg-destructive/10"
                 >
                   {action.buttonLabel}
@@ -115,7 +119,10 @@ export function SettingsDangerZone({
               </div>
 
               {open ? (
-                <div className="mt-4 rounded-xl border border-destructive/30 bg-destructive/5 p-4">
+                <div
+                  id={`${uid}-${action.id}-confirm`}
+                  className="mt-4 rounded-xl border border-destructive/30 bg-destructive/5 p-4"
+                >
                   {action.requiresTyping ? (
                     <>
                       <label

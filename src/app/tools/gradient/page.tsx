@@ -19,7 +19,10 @@ import { Switch } from '@/components/ui/switch'
 import { CopyCssCard } from '@/components/designer-tools/copy-css-card'
 import { ToolLayout } from '@/components/designer-tools/tool-layout'
 import { readSharedState, ShareLinkButton } from '@/components/designer-tools/share-link'
-import { normalizeHex, randomHex } from '@/lib/color-tools'
+import { ToolPresetsBar } from '@/components/designer-tools/tool-presets-bar'
+import { UseInCatalog } from '@/components/designer-tools/use-in-catalog'
+import { useToolState } from '@/hooks/use-tool-state'
+import { brandFromHex, normalizeHex, randomHex } from '@/lib/color-tools'
 import { cn } from '@/lib/utils'
 
 type GradientType = 'linear' | 'radial' | 'conic'
@@ -31,7 +34,32 @@ interface Stop {
   position: number
 }
 
-const STORAGE_KEY = 'hoverlab:tool:gradient'
+const TOOL = '/tools/gradient'
+
+const GRADIENT_TYPES: GradientType[] = ['linear', 'radial', 'conic']
+
+/**
+ * The stops in a value, if it holds a usable set.
+ *
+ * Two or more, each with the three fields the CSS builder reads. This check
+ * was written twice inline — once for the localStorage restore and once for
+ * the shared link — and a preset restored off the account is now a third
+ * caller, so it lives here instead. Returns null rather than a repaired
+ * array: a gradient missing half its stops is not the gradient someone
+ * saved, and falling back to the default says so plainly.
+ */
+function validStops(value: unknown): Stop[] | null {
+  if (!Array.isArray(value) || value.length < 2) return null
+  const stops = value.filter(
+    (s): s is Stop =>
+      !!s &&
+      typeof s === 'object' &&
+      typeof (s as Stop).id === 'string' &&
+      typeof (s as Stop).color === 'string' &&
+      typeof (s as Stop).position === 'number',
+  )
+  return stops.length >= 2 ? stops : null
+}
 
 interface GradientState {
   type: GradientType
@@ -57,60 +85,46 @@ function newStopId() {
 }
 
 export default function GradientToolPage() {
-  const [type, setType] = React.useState<GradientType>('linear')
-  const [angle, setAngle] = React.useState(135)
-  const [stops, setStops] = React.useState<Stop[]>(DEFAULT_STATE.stops)
-  const [oklch, setOklch] = React.useState(false)
+  // Working state stays local and ungated; named presets need an account.
+  // See `use-tool-state.ts` for why the two layers are separate.
+  const tool = useToolState<GradientState>(TOOL, DEFAULT_STATE)
+  const { state, setState } = tool
 
-  // Hydrate.
+  /*
+    Read through a guard, not straight out of state.
+
+    Four routes now write here — this browser's stored blob, a shared link,
+    a preset off the account, and the controls below — and only the last is
+    typed. Validating on read means one guard for all four; the three
+    inline copies this replaced were one route each, which is how the
+    fourth would have arrived unchecked.
+  */
+  const type = GRADIENT_TYPES.includes(state.type) ? state.type : DEFAULT_STATE.type
+  const angle = Number.isFinite(state.angle) ? state.angle : DEFAULT_STATE.angle
+  const oklch = typeof state.oklch === 'boolean' ? state.oklch : DEFAULT_STATE.oklch
+  const stops = validStops(state.stops) ?? DEFAULT_STATE.stops
+
+  const setType = (v: GradientType) => setState((s) => ({ ...s, type: v }))
+  const setAngle = (v: number) => setState((s) => ({ ...s, angle: v }))
+  const setOklch = (v: boolean) => setState((s) => ({ ...s, oklch: v }))
+  const setStops = (next: (arr: Stop[]) => Stop[]) =>
+    setState((s) => ({ ...s, stops: next(validStops(s.stops) ?? DEFAULT_STATE.stops) }))
+
   React.useEffect(() => {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY)
-      if (raw) {
-        const parsed = JSON.parse(raw)
-        if (parsed.type && ['linear', 'radial', 'conic'].includes(parsed.type)) {
-          setType(parsed.type)
-        }
-        if (typeof parsed.angle === 'number') setAngle(parsed.angle)
-        if (typeof parsed.oklch === 'boolean') setOklch(parsed.oklch)
-        if (Array.isArray(parsed.stops) && parsed.stops.length >= 2) {
-          const valid = parsed.stops.filter(
-            (s: Stop) =>
-              s && typeof s.id === 'string' && typeof s.color === 'string' && typeof s.position === 'number',
-          )
-          if (valid.length >= 2) setStops(valid)
-        }
-      }
-    } catch {
-      /* ignore */
-    }
-
     // A shared link's state wins over whatever this browser had stored.
+    // Declared after `useToolState`, so the hook's restore has already run
+    // by the time this does — which is what keeps that precedence true.
     const shared = readSharedState<Partial<GradientState>>()
-    if (shared) {
-      if (shared.type && ['linear', 'radial', 'conic'].includes(shared.type)) {
-        setType(shared.type)
-      }
-      if (typeof shared.angle === 'number') setAngle(shared.angle)
-      if (typeof shared.oklch === 'boolean') setOklch(shared.oklch)
-      if (Array.isArray(shared.stops) && shared.stops.length >= 2) {
-        const valid = shared.stops.filter(
-          (s: Stop) =>
-            s && typeof s.id === 'string' && typeof s.color === 'string' && typeof s.position === 'number',
-        )
-        if (valid.length >= 2) setStops(valid)
-      }
-    }
+    if (!shared) return
+    setState((s) => ({
+      type:
+        shared.type && GRADIENT_TYPES.includes(shared.type) ? shared.type : s.type,
+      angle: typeof shared.angle === 'number' ? shared.angle : s.angle,
+      oklch: typeof shared.oklch === 'boolean' ? shared.oklch : s.oklch,
+      stops: validStops(shared.stops) ?? s.stops,
+    }))
+    // `setState` is stable; the shared link is read once, on mount.
   }, [])
-
-  // Persist.
-  React.useEffect(() => {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify({ type, angle, stops, oklch }))
-    } catch {
-      /* ignore */
-    }
-  }, [type, angle, stops, oklch])
 
   // Sort stops by position for the CSS output (but keep the user's
   // editing order in the UI).
@@ -303,6 +317,14 @@ export default function GradientToolPage() {
             for arbitrary gradients, or define it as a CSS variable in your
             <code className="ml-1 rounded bg-muted px-1 font-mono">tailwind.config.js</code>.
           </div>
+
+          {/* After the controls, never before them — the ask lands once the
+              gradient exists rather than in front of it. */}
+          <ToolPresetsBar tool={tool} noun="gradient" />
+
+          {/* The first stop is the one a gradient is usually built out from,
+              and it is the only single hue a multi-stop blend can offer. */}
+          <UseInCatalog tool={TOOL} brand={brandFromHex(sortedStops[0]?.color ?? '')} />
         </div>
       </div>
     </ToolLayout>

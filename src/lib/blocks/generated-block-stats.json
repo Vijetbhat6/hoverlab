@@ -64,11 +64,11 @@
     "files": 1
   },
   "navbar-mega-menu": {
-    "lines": 328,
+    "lines": 341,
     "files": 1
   },
   "nav-mobile-drawer": {
-    "lines": 305,
+    "lines": 310,
     "files": 1
   },
   "footer-mega": {
@@ -328,7 +328,7 @@
     "files": 1
   },
   "dashboard-shell": {
-    "lines": 206,
+    "lines": 218,
     "files": 1
   },
   "dashboard-stat-cards": {
@@ -392,7 +392,7 @@
     "files": 1
   },
   "settings-danger-zone": {
-    "lines": 175,
+    "lines": 182,
     "files": 1
   },
   "empty-state-cta": {
@@ -460,7 +460,7 @@
     "files": 1
   },
   "chat-prompt-bar": {
-    "lines": 430,
+    "lines": 434,
     "files": 1
   },
   "chat-streaming-answer": {
@@ -592,7 +592,7 @@
     "files": 1
   },
   "review-list": {
-    "lines": 258,
+    "lines": 266,
     "files": 1
   }
 }

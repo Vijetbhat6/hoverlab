@@ -18,10 +18,13 @@ import { Label } from '@/components/ui/label'
 import { SliderField, ToggleField } from '@/components/control-field'
 import { CopyCssCard } from '@/components/designer-tools/copy-css-card'
 import { ToolLayout } from '@/components/designer-tools/tool-layout'
-import { randomHex } from '@/lib/color-tools'
+import { ToolPresetsBar } from '@/components/designer-tools/tool-presets-bar'
+import { UseInCatalog } from '@/components/designer-tools/use-in-catalog'
+import { useToolState } from '@/hooks/use-tool-state'
+import { brandFromHex, randomHex } from '@/lib/color-tools'
 import { cn } from '@/lib/utils'
 
-const STORAGE_KEY = 'hoverlab:tool:glassmorphism'
+const TOOL = '/tools/glassmorphism'
 
 // The value is rendered as an inline style, so only bare gradient functions
 // are accepted — url(...) and anything that could smuggle extra declarations
@@ -82,21 +85,24 @@ const DEFAULT_STATE: GlassState = {
 }
 
 export default function GlassmorphismToolPage() {
-  const [state, setState] = React.useState<GlassState>(DEFAULT_STATE)
+  // Working state stays local and ungated; named presets need an account.
+  // See `use-tool-state.ts` for why the two layers are separate.
+  const tool = useToolState<GlassState>(TOOL, DEFAULT_STATE)
+  const { state, setState } = tool
+
+  /*
+    Validated where it is used, not where it arrives.
+
+    `customBg` feeds an inline `background`, and it used to be re-validated
+    on the one path that could carry a stale value — the localStorage
+    restore. It now arrives from three: this browser's stored state, the
+    gradient tool's `?bg=` handoff, and a preset restored off the account.
+    Checking it at the point of use covers all three by construction, so
+    adding a fourth route into state cannot quietly skip the guard.
+  */
+  const customBg = safeGradient(state.customBg)
 
   React.useEffect(() => {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY)
-      if (raw) {
-        const parsed = JSON.parse(raw)
-        // Stored customBg is re-validated — it feeds an inline style.
-        parsed.customBg = safeGradient(parsed.customBg)
-        setState((prev) => ({ ...prev, ...parsed }))
-      }
-    } catch {
-      /* ignore */
-    }
-
     // Handoff from the gradient tool: ?bg=<encoded background-image> wins
     // over the restored state. window.location rather than useSearchParams —
     // the hook would force a Suspense boundary around the whole page for one
@@ -107,15 +113,8 @@ export default function GlassmorphismToolPage() {
       if (gradient) setState((prev) => ({ ...prev, customBg: gradient }))
       window.history.replaceState(null, '', window.location.pathname)
     }
+    // `setState` is stable; the handoff is read once, on mount.
   }, [])
-
-  React.useEffect(() => {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(state))
-    } catch {
-      /* ignore */
-    }
-  }, [state])
 
   const update = (patch: Partial<GlassState>) => setState((s) => ({ ...s, ...patch }))
 
@@ -196,13 +195,13 @@ export default function GlassmorphismToolPage() {
             className="relative flex min-h-[420px] items-center justify-center overflow-hidden rounded-xl border border-border p-8"
             style={{
               background:
-                state.customBg ??
+                customBg ??
                 `linear-gradient(135deg, ${state.bgGradient1}, ${state.bgGradient2}, ${state.bgGradient3})`,
             }}
           >
             {/* Decorative shapes for visible blur — their colours belong to the
                 3-stop scene, so they hide under a handed-off gradient */}
-            {!state.customBg && (
+            {!customBg && (
               <>
                 <div
                   className="absolute -left-12 top-8 h-40 w-40 rounded-full opacity-70"
@@ -241,10 +240,10 @@ export default function GlassmorphismToolPage() {
                 <Shuffle className="h-3 w-3" /> Random
               </Button>
             </div>
-            {state.customBg && (
+            {customBg && (
               <div className="mb-3 flex items-center justify-between gap-3 rounded-md border border-border bg-muted/40 px-3 py-2">
                 <span className="truncate font-mono text-[10px] text-muted-foreground">
-                  {state.customBg}
+                  {customBg}
                 </span>
                 <Button
                   variant="outline"
@@ -273,6 +272,10 @@ export default function GlassmorphismToolPage() {
           </div>
 
           <CopyCssCard code={cssBlock} title="CSS" language="css" />
+
+          {/* The tint is the one value here that reads as an identity — the
+              scene behind it is a backdrop, and blur carries no hue. */}
+          <UseInCatalog tool={TOOL} brand={brandFromHex(state.bgColor)} />
         </div>
 
         {/* Controls */}
@@ -433,6 +436,10 @@ export default function GlassmorphismToolPage() {
               onChange={(v) => update({ cardRadius: v })}
             />
           </div>
+
+          {/* After the controls, never before them — the ask lands once the
+              panel exists rather than in front of it. */}
+          <ToolPresetsBar tool={tool} noun="glass style" />
         </div>
       </div>
     </ToolLayout>

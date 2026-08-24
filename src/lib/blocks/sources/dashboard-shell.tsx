@@ -58,6 +58,7 @@ export function DashboardShell({
   className = '',
 }: DashboardShellProps) {
   const [open, setOpen] = React.useState(false)
+  const uid = React.useId()
 
   // Escape closes the mobile drawer. Bound on the document rather than the
   // panel so it works regardless of where focus currently sits.
@@ -135,6 +136,7 @@ export function DashboardShell({
             className="absolute inset-0 z-30 bg-black/40 backdrop-blur-sm lg:hidden"
           />
           <aside
+            id={`${uid}-nav-drawer`}
             role="dialog"
             aria-modal="true"
             aria-label="Navigation"
@@ -161,6 +163,16 @@ export function DashboardShell({
             onClick={() => setOpen(true)}
             aria-label="Open navigation"
             aria-expanded={open}
+            /*
+              Only while the drawer exists.
+
+              Unlike the drawer in `nav-mobile-drawer`, this one is
+              unmounted when closed — so a permanent `aria-controls` would
+              be an IDREF pointing at nothing, which is worse than none at
+              all: it tells assistive tech to go somewhere and then does
+              not arrive.
+            */
+            aria-controls={open ? `${uid}-nav-drawer` : undefined}
             className="rounded-lg p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground lg:hidden"
           >
             <Menu aria-hidden className="h-4 w-4" />

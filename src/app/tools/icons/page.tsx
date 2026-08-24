@@ -40,6 +40,7 @@ import { toast } from 'sonner'
 
 import { Input } from '@/components/ui/input'
 import { ToolLayout } from '@/components/designer-tools/tool-layout'
+import { UseInCatalog } from '@/components/designer-tools/use-in-catalog'
 import { cn } from '@/lib/utils'
 
 interface Entry {
@@ -283,6 +284,16 @@ export default function IconsToolPage() {
         </a>
         , the one dependency blocks in this catalog declare.
       </p>
+
+      {/*
+        No presets bar. A search box is not state anyone would name, and
+        offering to save one would teach visitors that the account does
+        nothing. The catalog exit still belongs here — this page's own
+        closing sentence is that these icons are what the blocks import,
+        which makes it the shortest path from a tool to the catalog on the
+        site.
+      */}
+      <UseInCatalog tool="/tools/icons" className="mt-8" />
     </ToolLayout>
   )
 }

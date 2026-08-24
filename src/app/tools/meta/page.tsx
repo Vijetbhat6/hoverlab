@@ -26,9 +26,12 @@ import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { CopyCssCard } from '@/components/designer-tools/copy-css-card'
 import { ToolLayout } from '@/components/designer-tools/tool-layout'
+import { ToolPresetsBar } from '@/components/designer-tools/tool-presets-bar'
+import { UseInCatalog } from '@/components/designer-tools/use-in-catalog'
+import { useToolState } from '@/hooks/use-tool-state'
 import { cn } from '@/lib/utils'
 
-const STORAGE_KEY = 'hoverlab:tool:meta'
+const TOOL = '/tools/meta'
 
 interface MetaState {
   title: string
@@ -125,24 +128,10 @@ function Counter({ value, limit }: { value: string; limit: number }) {
 }
 
 export default function MetaToolPage() {
-  const [state, setState] = React.useState<MetaState>(DEFAULT_STATE)
-
-  React.useEffect(() => {
-    try {
-      const raw = window.localStorage.getItem(STORAGE_KEY)
-      if (raw) setState({ ...DEFAULT_STATE, ...(JSON.parse(raw) as Partial<MetaState>) })
-    } catch {
-      /* ignore */
-    }
-  }, [])
-
-  React.useEffect(() => {
-    try {
-      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state))
-    } catch {
-      /* ignore */
-    }
-  }, [state])
+  // Working state stays local and ungated; named presets need an account.
+  // See `use-tool-state.ts` for why the two layers are separate.
+  const tool = useToolState<MetaState>(TOOL, DEFAULT_STATE)
+  const { state, setState } = tool
 
   const field =
     <K extends keyof MetaState>(key: K) =>
@@ -200,6 +189,10 @@ export default function MetaToolPage() {
               />
             </div>
           ))}
+
+          {/* After the fields, never before them — the ask lands once the
+              tags exist rather than in front of them. */}
+          <ToolPresetsBar tool={tool} noun="tag set" />
         </div>
 
         {/* Previews + output */}
@@ -243,6 +236,10 @@ export default function MetaToolPage() {
 
           <CopyCssCard code={buildNextMetadata(state)} title="app/layout.tsx" language="tsx" />
           <CopyCssCard code={buildHtml(state)} title="Raw tags" language="html" />
+
+          {/* No `brand`: meta tags are text, and `theme-color` is a chrome
+              colour rather than a stated identity. */}
+          <UseInCatalog tool={TOOL} />
         </div>
       </div>
     </ToolLayout>

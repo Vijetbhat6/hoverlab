@@ -328,6 +328,9 @@ export function ChatPromptBar({
                 type="button"
                 aria-haspopup="listbox"
                 aria-expanded={modelOpen}
+                // Same shape as the combobox above: only while the list is
+                // mounted, so the IDREF always resolves.
+                aria-controls={modelOpen ? `${listId}-models` : undefined}
                 onClick={() => setModelOpen((v) => !v)}
                 onBlur={() => setModelOpen(false)}
                 className="inline-flex items-center gap-1.5 rounded-lg px-2 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
@@ -339,6 +342,7 @@ export function ChatPromptBar({
 
               {modelOpen ? (
                 <ul
+                  id={`${listId}-models`}
                   role="listbox"
                   aria-label="Model"
                   className="absolute bottom-full left-0 z-20 mb-1.5 w-44 rounded-xl border border-border/60 bg-card p-1 shadow-2xl"

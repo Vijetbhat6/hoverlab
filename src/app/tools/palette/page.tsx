@@ -29,7 +29,7 @@ import {
   hexToRgb,
   normalizeHex,
   randomHex,
-  rgbToOklch,
+  brandFromHex,
   type PaletteScheme,
 } from '@/lib/color-tools'
 import { cn } from '@/lib/utils'
@@ -53,23 +53,6 @@ interface PaletteState {
 
 const DEFAULT_STATE: PaletteState = { base: '#10b981', scheme: 'analogous' }
 
-/**
- * The OKLCH hue and chroma behind a hex, for the catalog preview.
- *
- * Returns null for anything that is not a colour — the field accepts partial
- * input while someone types, and offering to repaint the catalog from `#10b`
- * would be a button that does something arbitrary.
- */
-function brandFromHex(hex: string): { hue: number; chroma: number } | null {
-  const normalized = normalizeHex(hex)
-  const rgb = normalized ? hexToRgb(normalized) : null
-  if (!rgb) return null
-  const { c, h } = rgbToOklch(rgb)
-  return {
-    hue: Math.round(((h % 360) + 360) % 360),
-    chroma: Math.min(0.3, Math.round(c * 200) / 200),
-  }
-}
 
 export default function PaletteToolPage() {
   // Working state stays local and ungated; named presets need an account.

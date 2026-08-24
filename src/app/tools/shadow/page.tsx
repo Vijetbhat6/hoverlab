@@ -33,6 +33,9 @@ import { Switch } from '@/components/ui/switch'
 import { CopyCssCard } from '@/components/designer-tools/copy-css-card'
 import { ToolLayout } from '@/components/designer-tools/tool-layout'
 import { readSharedState, ShareLinkButton } from '@/components/designer-tools/share-link'
+import { ToolPresetsBar } from '@/components/designer-tools/tool-presets-bar'
+import { UseInCatalog } from '@/components/designer-tools/use-in-catalog'
+import { useToolState } from '@/hooks/use-tool-state'
 import { normalizeHex, hexToRgb } from '@/lib/color-tools'
 import { cn } from '@/lib/utils'
 
@@ -48,7 +51,7 @@ interface ShadowLayer {
   opacity: number
 }
 
-const STORAGE_KEY = 'hoverlab:tool:shadow'
+const TOOL = '/tools/shadow'
 
 let layerCounter = 0
 function newLayerId() {
@@ -95,6 +98,49 @@ function defaultLayers(): ShadowLayer[] {
 
 type ShadowMode = 'box' | 'text'
 
+interface ShadowState {
+  layers: ShadowLayer[]
+  mode: ShadowMode
+  surface: 'light' | 'dark'
+  cardColor: string
+  textColor: string
+}
+
+/**
+ * Called once, at module scope, so the ids in it are stable.
+ *
+ * `defaultLayers()` mints ids from a counter, and this object is spread on
+ * every restore — calling it per render would hand React a new key for the
+ * same row on every keystroke.
+ */
+const DEFAULT_STATE: ShadowState = {
+  layers: defaultLayers(),
+  mode: 'box',
+  surface: 'light',
+  cardColor: '#ffffff',
+  // Separate from cardColor: the card default (white) would make the text
+  // preview invisible on the light surface.
+  textColor: '#18181b',
+}
+
+/**
+ * The layers in a value, if it holds a usable stack.
+ *
+ * Same argument as `validStops` in the gradient tool: this check existed
+ * twice inline — once for the localStorage restore, once for the shared
+ * link — and a preset restored off the account is a third caller. One
+ * shadow with no layers is not a shadow, so an unusable value falls back to
+ * the default stack rather than rendering nothing.
+ */
+function validLayers(value: unknown): ShadowLayer[] | null {
+  if (!Array.isArray(value) || value.length < 1) return null
+  const layers = value.filter(
+    (l): l is ShadowLayer =>
+      !!l && typeof l === 'object' && typeof (l as ShadowLayer).id === 'string',
+  )
+  return layers.length >= 1 ? layers : null
+}
+
 function layerToCss(l: ShadowLayer, mode: ShadowMode): string {
   const rgb = hexToRgb(l.color)
   if (!rgb) return ''
@@ -111,68 +157,47 @@ function layerToCss(l: ShadowLayer, mode: ShadowMode): string {
 }
 
 export default function ShadowToolPage() {
-  const [layers, setLayers] = React.useState<ShadowLayer[]>(defaultLayers)
-  const [mode, setMode] = React.useState<ShadowMode>('box')
-  const [surface, setSurface] = React.useState<'light' | 'dark'>('light')
-  const [cardColor, setCardColor] = React.useState('#ffffff')
-  // Separate from cardColor: the card default (white) would make the text
-  // preview invisible on the light surface.
-  const [textColor, setTextColor] = React.useState('#18181b')
+  // Working state stays local and ungated; named presets need an account.
+  // See `use-tool-state.ts` for why the two layers are separate.
+  const tool = useToolState<ShadowState>(TOOL, DEFAULT_STATE)
+  const { state, setState } = tool
 
-  // Hydrate.
+  // Read through a guard: four routes write here — stored state, a shared
+  // link, a preset off the account, and the controls below — and only the
+  // last of them is typed.
+  const layers = validLayers(state.layers) ?? DEFAULT_STATE.layers
+  const mode: ShadowMode = state.mode === 'text' ? 'text' : 'box'
+  const surface = state.surface === 'dark' ? 'dark' : 'light'
+  const cardColor =
+    typeof state.cardColor === 'string' ? state.cardColor : DEFAULT_STATE.cardColor
+  const textColor =
+    typeof state.textColor === 'string' ? state.textColor : DEFAULT_STATE.textColor
+
+  const setMode = (v: ShadowMode) => setState((s) => ({ ...s, mode: v }))
+  const setSurface = (v: 'light' | 'dark') => setState((s) => ({ ...s, surface: v }))
+  const setCardColor = (v: string) => setState((s) => ({ ...s, cardColor: v }))
+  const setTextColor = (v: string) => setState((s) => ({ ...s, textColor: v }))
+  const setLayers = (next: (arr: ShadowLayer[]) => ShadowLayer[]) =>
+    setState((s) => ({ ...s, layers: next(validLayers(s.layers) ?? DEFAULT_STATE.layers) }))
+
   React.useEffect(() => {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY)
-      if (raw) {
-        const parsed = JSON.parse(raw)
-        if (Array.isArray(parsed.layers) && parsed.layers.length >= 1) {
-          setLayers(parsed.layers)
-        }
-        if (parsed.surface === 'light' || parsed.surface === 'dark') {
-          setSurface(parsed.surface)
-        }
-        if (parsed.mode === 'box' || parsed.mode === 'text') {
-          setMode(parsed.mode)
-        }
-        if (typeof parsed.cardColor === 'string') setCardColor(parsed.cardColor)
-        if (typeof parsed.textColor === 'string') setTextColor(parsed.textColor)
-      }
-    } catch {
-      /* ignore */
-    }
-
     // A shared link's state wins over whatever this browser had stored.
-    const shared = readSharedState<{
-      layers?: ShadowLayer[]
-      mode?: ShadowMode
-      surface?: 'light' | 'dark'
-      cardColor?: string
-      textColor?: string
-    }>()
-    if (shared) {
-      if (Array.isArray(shared.layers) && shared.layers.length >= 1) {
-        setLayers(shared.layers)
-      }
-      if (shared.mode === 'box' || shared.mode === 'text') setMode(shared.mode)
-      if (shared.surface === 'light' || shared.surface === 'dark') {
-        setSurface(shared.surface)
-      }
-      if (typeof shared.cardColor === 'string') setCardColor(shared.cardColor)
-      if (typeof shared.textColor === 'string') setTextColor(shared.textColor)
-    }
+    // Declared after `useToolState`, so the hook's restore has already run
+    // by the time this does — which is what keeps that precedence true.
+    const shared = readSharedState<Partial<ShadowState>>()
+    if (!shared) return
+    setState((s) => ({
+      layers: validLayers(shared.layers) ?? s.layers,
+      mode: shared.mode === 'box' || shared.mode === 'text' ? shared.mode : s.mode,
+      surface:
+        shared.surface === 'light' || shared.surface === 'dark'
+          ? shared.surface
+          : s.surface,
+      cardColor: typeof shared.cardColor === 'string' ? shared.cardColor : s.cardColor,
+      textColor: typeof shared.textColor === 'string' ? shared.textColor : s.textColor,
+    }))
+    // `setState` is stable; the shared link is read once, on mount.
   }, [])
-
-  // Persist.
-  React.useEffect(() => {
-    try {
-      localStorage.setItem(
-        STORAGE_KEY,
-        JSON.stringify({ layers, mode, surface, cardColor, textColor }),
-      )
-    } catch {
-      /* ignore */
-    }
-  }, [layers, mode, surface, cardColor, textColor])
 
   const cssValue = React.useMemo(() => {
     return layers
@@ -356,6 +381,16 @@ export default function ShadowToolPage() {
           </div>
 
           <CopyCssCard code={cssBlock} title="CSS" language="css" />
+
+          {/* After the layers, never before them — the ask lands once the
+              stack exists rather than in front of it. A layered shadow is
+              among the most tedious things on this site to rebuild from
+              memory, which is exactly what makes it worth naming. */}
+          <ToolPresetsBar tool={tool} noun="shadow" />
+
+          {/* No `brand`: shadow colour is nearly always black at low alpha,
+              and the card behind it is a surface rather than an identity. */}
+          <UseInCatalog tool={TOOL} />
         </div>
       </div>
     </ToolLayout>

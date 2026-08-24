@@ -121,6 +121,33 @@ npx hoverlab init storefront ./shop`}</Snippet>
         </p>
       </DocsSection>
 
+      <DocsSection id="shadcn" title="Or the tool you already have">
+        <p>
+          Every block and page is also published as a shadcn registry item, so
+          you do not have to adopt our CLI to use the catalog. Point{' '}
+          <C>components.json</C> at the registry once and <C>npx shadcn add</C>{' '}
+          works against it — including from the shadcn MCP server, which ships
+          with the CLI.
+        </p>
+
+        <Snippet label="terminal">{`# one block
+npx shadcn add @hoverlab/pricing-tiers
+
+# a page, and the twelve blocks it renders
+npx shadcn add @hoverlab/saas-landing-page
+
+# the design system: light and dark tokens, radius, icons
+npx shadcn add @hoverlab/hoverlab`}</Snippet>
+
+        <p>
+          Setup is one line of config —{' '}
+          <Link href="/docs/registry" className="font-medium text-primary hover:underline">
+            the registry docs
+          </Link>{' '}
+          have it, along with what is and is not published there.
+        </p>
+      </DocsSection>
+
       <DocsSection id="agents" title="Editor agents and Figma">
         <p>
           The CLI doubles as an MCP server, so the agent in your editor can

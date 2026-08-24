@@ -174,6 +174,16 @@ export function NavbarMegaMenu({
                     <button
                       type="button"
                       aria-expanded={isOpen}
+                      /*
+                        The panel this trigger opens, named. `aria-expanded`
+                        alone tells a screen-reader user that something
+                        opened but not what or where; the pair is what lets
+                        them jump to it. One shared id is correct here
+                        because there is one panel — it swaps contents as
+                        the open section changes rather than one panel per
+                        trigger existing at once.
+                      */
+                      aria-controls={`${uid}-mega-panel`}
                       onClick={() => setOpenLabel(isOpen ? null : section.label)}
                       onMouseEnter={() => {
                         cancelClose()
@@ -237,7 +247,10 @@ export function NavbarMegaMenu({
 
         {/* -- Desktop panel ------------------------------------------- */}
         {active ? (
-          <div className="absolute inset-x-0 hidden border-b border-border/40 bg-background/95 shadow-xl shadow-black/10 backdrop-blur-xl lg:block">
+          <div
+            id={`${uid}-mega-panel`}
+            className="absolute inset-x-0 hidden border-b border-border/40 bg-background/95 shadow-xl shadow-black/10 backdrop-blur-xl lg:block"
+          >
             <div className="mx-auto grid w-full max-w-7xl gap-8 px-4 py-8 sm:px-6 lg:grid-cols-3 lg:px-8">
               <ul className={`grid gap-1 sm:grid-cols-2 ${active.feature ? 'lg:col-span-2' : 'lg:col-span-3'}`}>
                 {active.links.map((link) => (

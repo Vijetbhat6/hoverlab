@@ -8,6 +8,7 @@ import { describe, it } from 'node:test'
 import assert from 'node:assert/strict'
 
 import {
+  brandFromHex,
   normalizeHex,
   hexToRgb,
   rgbToHex,
@@ -325,5 +326,50 @@ describe('generatePalette', () => {
   it('falls back to 5 copies of the input for an invalid base', () => {
     const { colors } = generatePalette('nope', 'triadic')
     assert.deepEqual(colors, ['nope', 'nope', 'nope', 'nope', 'nope'])
+  })
+})
+
+/* ============================================================
+ *  brandFromHex
+ * ========================================================== */
+
+describe('brandFromHex', () => {
+  it('returns the OKLCH hue and chroma behind a colour', () => {
+    const brand = brandFromHex('#10b981')
+    assert.ok(brand)
+    const { h, c } = rgbToOklch(hexToRgb('#10b981')!)
+    assert.equal(brand.hue, Math.round(((h % 360) + 360) % 360))
+    assert.ok(Math.abs(brand.chroma - c) <= 0.005, `chroma ${brand.chroma} vs ${c}`)
+  })
+
+  it('accepts the short and bare forms the fields allow', () => {
+    // Every call site passes a value straight out of a text input, where
+    // "10b981" and "#1b9" are both things people type.
+    assert.deepEqual(brandFromHex('10b981'), brandFromHex('#10b981'))
+    assert.ok(brandFromHex('#1b9'))
+  })
+
+  it('returns null for partial input rather than an arbitrary brand', () => {
+    // The tools call this on every keystroke, so half-typed values are the
+    // common case, not the edge one.
+    // `#10b` is deliberately absent: three digits is a real hex that
+    // expands to #1100bb, and treating it as partial would refuse a colour
+    // someone actually meant.
+    for (const v of ['', '#', '#10b9', 'rebeccapurple', 'oklch(0.7 0.15 163)']) {
+      assert.equal(brandFromHex(v), null, `expected null for ${JSON.stringify(v)}`)
+    }
+  })
+
+  it('keeps hue inside 0–360 and chroma inside the slider range', () => {
+    for (const hex of ['#000000', '#ffffff', '#ff0000', '#00ff00', '#0000ff']) {
+      const brand = brandFromHex(hex)
+      assert.ok(brand, hex)
+      assert.ok(brand.hue >= 0 && brand.hue < 360, `${hex}: hue ${brand.hue}`)
+      assert.ok(brand.chroma >= 0 && brand.chroma <= 0.3, `${hex}: chroma ${brand.chroma}`)
+    }
+  })
+
+  it('quantizes, so two tools passing the same hex produce the same brand', () => {
+    assert.deepEqual(brandFromHex('#10b981'), brandFromHex('10B981'))
   })
 })

@@ -360,3 +360,41 @@ export function randomHex(): Hex {
   const l = 45 + Math.floor(Math.random() * 15)
   return hslToHex({ h, s, l })
 }
+
+/* ============================================================
+ *  Catalog brand
+ * ========================================================== */
+
+/** The OKLCH hue and chroma the catalog's brand preview takes. */
+export interface BrandFromColor {
+  hue: number
+  chroma: number
+}
+
+/**
+ * The brand a hex implies, for `<UseInCatalog brand={…}>`.
+ *
+ * Lives here rather than in a tool page because five tools now produce a
+ * colour worth previewing the catalog in — palette, colour, gradient,
+ * glassmorphism and favicon — and a copy per page is five chances for the
+ * rounding to drift apart. Lightness is deliberately absent: it is chosen
+ * against the surface the token lands on, and `UseInCatalog` sets it from
+ * the value measured for AA contrast rather than from a tool.
+ *
+ * Returns null for anything that is not a colour. Every one of those fields
+ * accepts partial input while someone types, and offering to repaint the
+ * catalog from `#10b9` would be a button that does something arbitrary.
+ * (`#10b` is not that case — three digits is a real hex, and expands.)
+ */
+export function brandFromHex(hex: string): BrandFromColor | null {
+  const normalized = normalizeHex(hex)
+  const rgb = normalized ? hexToRgb(normalized) : null
+  if (!rgb) return null
+  const { c, h } = rgbToOklch(rgb)
+  return {
+    hue: Math.round(((h % 360) + 360) % 360),
+    // Quantized to the same 1/200 step the palette tool used, so a preview
+    // launched from two different tools with the same hex is the same brand.
+    chroma: Math.min(0.3, Math.round(c * 200) / 200),
+  }
+}

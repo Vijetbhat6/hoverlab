@@ -14,8 +14,11 @@ import { Ruler, Copy, Check } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { ToolLayout } from '@/components/designer-tools/tool-layout'
+import { ToolPresetsBar } from '@/components/designer-tools/tool-presets-bar'
+import { UseInCatalog } from '@/components/designer-tools/use-in-catalog'
+import { useToolState } from '@/hooks/use-tool-state'
 
-const STORAGE_KEY = 'hoverlab:tool:units'
+const TOOL = '/tools/units'
 
 type Unit = 'px' | 'rem' | 'em' | '%' | 'vw' | 'vh'
 
@@ -39,12 +42,22 @@ const UNIT_DESCRIPTIONS: Record<Unit, string> = {
   vh: '1vh = 1% of viewport height. Changes when window is resized.',
 }
 
+/**
+ * The context, and the value being converted in it.
+ *
+ * These were two pieces of state persisted as `{ state, inputValue,
+ * inputUnit }` — a nested blob that only this tool's own restore could
+ * read. Flattened because a preset is one object, and because "16px at a
+ * 1440 viewport" is one thing a person would name, not two.
+ */
 interface UnitsState {
   rootFontSize: number // px
   parentFontSize: number // px (for em)
   viewportWidth: number // px (for vw, %)
   viewportHeight: number // px (for vh)
   parentDimension: number // px (for % when used on width)
+  inputValue: string
+  inputUnit: Unit
 }
 
 const DEFAULT_STATE: UnitsState = {
@@ -53,37 +66,38 @@ const DEFAULT_STATE: UnitsState = {
   viewportWidth: 1440,
   viewportHeight: 900,
   parentDimension: 1200,
+  inputValue: '16',
+  inputUnit: 'px',
 }
 
 export default function UnitsToolPage() {
-  const [state, setState] = React.useState<UnitsState>(DEFAULT_STATE)
-  const [inputValue, setInputValue] = React.useState('16')
-  const [inputUnit, setInputUnit] = React.useState<Unit>('px')
+  // Working state stays local and ungated; named presets need an account.
+  // See `use-tool-state.ts` for why the two layers are separate.
+  const tool = useToolState<UnitsState>(TOOL, DEFAULT_STATE)
+  const { state, setState } = tool
+  const { inputValue, inputUnit } = state
+  const setInputValue = (v: string) => setState((s) => ({ ...s, inputValue: v }))
+  const setInputUnit = (u: Unit) => setState((s) => ({ ...s, inputUnit: u }))
 
-  React.useEffect(() => {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY)
-      if (raw) {
-        const parsed = JSON.parse(raw)
-        setState((prev) => ({ ...prev, ...parsed.state }))
-        if (typeof parsed.inputValue === 'string') setInputValue(parsed.inputValue)
-        if (parsed.inputUnit && UNITS.includes(parsed.inputUnit)) setInputUnit(parsed.inputUnit)
-      }
-    } catch {
-      /* ignore */
-    }
-  }, [])
+  /*
+    Drop the old nested blob's outer key, once.
 
+    This tool used to persist `{ state, inputValue, inputUnit }`, so a
+    returning visitor's stored JSON merges a stray `state` object into the
+    flat shape above. It restores harmlessly — nothing reads it — but it
+    would then be written back on every change and copied into every preset
+    saved from this browser, which is how a schema stops being the schema.
+    The two fields that were already top-level survive; the context numbers
+    reset to defaults, which is a cheaper price than a migration for five
+    numbers.
+  */
   React.useEffect(() => {
-    try {
-      localStorage.setItem(
-        STORAGE_KEY,
-        JSON.stringify({ state, inputValue, inputUnit }),
-      )
-    } catch {
-      /* ignore */
-    }
-  }, [state, inputValue, inputUnit])
+    setState((s) => {
+      if (!('state' in s)) return s
+      const { state: _legacy, ...rest } = s as UnitsState & { state?: unknown }
+      return rest as UnitsState
+    })
+  }, [setState])
 
   // Convert the input value to px first, then derive all other units.
   const conversions = React.useMemo(() => {
@@ -228,6 +242,13 @@ export default function UnitsToolPage() {
             are computed live as you type. Click any output row to copy it.
             Settings persist across sessions.
           </div>
+
+          {/* After the controls, never before them — the ask lands once the
+              context exists rather than in front of it. */}
+          <ToolPresetsBar tool={tool} noun="context" />
+
+          {/* No `brand`: a unit conversion carries no hue. */}
+          <UseInCatalog tool={TOOL} />
         </div>
       </div>
     </ToolLayout>

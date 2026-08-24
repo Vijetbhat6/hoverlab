@@ -20,9 +20,12 @@ import { Label } from '@/components/ui/label'
 import { SliderField } from '@/components/control-field'
 import { CopyCssCard } from '@/components/designer-tools/copy-css-card'
 import { ToolLayout } from '@/components/designer-tools/tool-layout'
+import { ToolPresetsBar } from '@/components/designer-tools/tool-presets-bar'
+import { UseInCatalog } from '@/components/designer-tools/use-in-catalog'
+import { useToolState } from '@/hooks/use-tool-state'
 import { cn } from '@/lib/utils'
 
-const STORAGE_KEY = 'hoverlab:tool:border-radius'
+const TOOL = '/tools/border-radius'
 
 type Mode = 'standard' | 'squircle' | 'fluid'
 
@@ -103,27 +106,10 @@ function squirclePath(size: number, curve: number): string {
 }
 
 export default function BorderRadiusToolPage() {
-  const [state, setState] = React.useState<BRState>(DEFAULT_STATE)
-
-  React.useEffect(() => {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY)
-      if (raw) {
-        const parsed = JSON.parse(raw)
-        setState((prev) => ({ ...prev, ...parsed }))
-      }
-    } catch {
-      /* ignore */
-    }
-  }, [])
-
-  React.useEffect(() => {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(state))
-    } catch {
-      /* ignore */
-    }
-  }, [state])
+  // Working state stays local and ungated; named presets need an account.
+  // See `use-tool-state.ts` for why the two layers are separate.
+  const tool = useToolState<BRState>(TOOL, DEFAULT_STATE)
+  const { state, setState } = tool
 
   const update = (patch: Partial<BRState>) => setState((s) => ({ ...s, ...patch }))
 
@@ -240,6 +226,10 @@ export default function BorderRadiusToolPage() {
             </>
           )}
           {state.mode === 'fluid' && <CopyCssCard code={fluidCss} title="CSS" language="css" />}
+
+          {/* No `brand`: the preview colour is a backdrop for the corner, not
+              an identity — repainting the catalog from it would be arbitrary. */}
+          <UseInCatalog tool={TOOL} />
         </div>
 
         {/* Controls */}
@@ -458,6 +448,10 @@ export default function BorderRadiusToolPage() {
               />
             </div>
           </div>
+
+          {/* After the controls, never before them — the ask lands once the
+              corner exists rather than in front of it. */}
+          <ToolPresetsBar tool={tool} noun="radius" />
         </div>
       </div>
     </ToolLayout>

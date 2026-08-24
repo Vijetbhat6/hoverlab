@@ -24,6 +24,7 @@ import { Zap, RotateCcw } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { CopyCssCard } from '@/components/designer-tools/copy-css-card'
 import { ToolLayout } from '@/components/designer-tools/tool-layout'
+import { UseInCatalog } from '@/components/designer-tools/use-in-catalog'
 import { cn } from '@/lib/utils'
 
 interface Preset {
@@ -258,6 +259,14 @@ export default function MotionToolPage() {
           </div>
 
           <CopyCssCard code={buildCss(selected)} title={`fx-${selected.id}`} language="css" />
+
+          {/*
+            No presets bar: this page is itself a preset gallery, and the
+            only state is which of them is open. The catalog exit stays —
+            someone comparing motion presets is one click from the effects
+            that already use them.
+          */}
+          <UseInCatalog tool="/tools/motion" />
         </div>
       </div>
     </ToolLayout>

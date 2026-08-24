@@ -183,6 +183,10 @@ export function NavMobileDrawer({
           type="button"
           onClick={() => setOpen(true)}
           aria-expanded={open}
+          // Names the dialog this opens. The panel stays mounted so the
+          // transform can animate, so the id it points at is always in the
+          // document — which is the case `aria-controls` needs.
+          aria-controls={`${uid}-drawer`}
           aria-haspopup="dialog"
           className="flex h-10 items-center gap-2 rounded-lg border border-border/60 px-3 text-sm font-medium transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         >
@@ -205,6 +209,7 @@ export function NavMobileDrawer({
           off-screen and made inert to the tab order when closed. */}
       <div
         ref={panelRef}
+        id={`${uid}-drawer`}
         role="dialog"
         aria-modal="true"
         aria-labelledby={`${uid}-drawer-title`}

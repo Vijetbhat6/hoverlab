@@ -25,9 +25,13 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { CopyCssCard } from '@/components/designer-tools/copy-css-card'
 import { ToolLayout } from '@/components/designer-tools/tool-layout'
+import { ToolPresetsBar } from '@/components/designer-tools/tool-presets-bar'
+import { UseInCatalog } from '@/components/designer-tools/use-in-catalog'
+import { useToolState } from '@/hooks/use-tool-state'
+import { brandFromHex } from '@/lib/color-tools'
 import { cn } from '@/lib/utils'
 
-const STORAGE_KEY = 'hoverlab:tool:email'
+const TOOL = '/tools/email'
 
 interface EmailState {
   brand: string
@@ -234,25 +238,11 @@ function buildText(t: Template, s: EmailState): string {
 }
 
 export default function EmailToolPage() {
-  const [state, setState] = React.useState<EmailState>(DEFAULT_STATE)
+  // Working state stays local and ungated; named presets need an account.
+  // See `use-tool-state.ts` for why the two layers are separate.
+  const tool = useToolState<EmailState>(TOOL, DEFAULT_STATE)
+  const { state, setState } = tool
   const [selected, setSelected] = React.useState<Template>(TEMPLATES[0]!)
-
-  React.useEffect(() => {
-    try {
-      const raw = window.localStorage.getItem(STORAGE_KEY)
-      if (raw) setState({ ...DEFAULT_STATE, ...(JSON.parse(raw) as Partial<EmailState>) })
-    } catch {
-      /* ignore */
-    }
-  }, [])
-
-  React.useEffect(() => {
-    try {
-      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state))
-    } catch {
-      /* ignore */
-    }
-  }, [state])
 
   const html = buildHtml(selected, state)
 
@@ -315,6 +305,10 @@ export default function EmailToolPage() {
               />
             </div>
           </div>
+
+          {/* After the controls, never before them — the ask lands once the
+              email exists rather than in front of it. */}
+          <ToolPresetsBar tool={tool} noun="email" />
         </div>
 
         <div className="space-y-6">
@@ -340,6 +334,9 @@ export default function EmailToolPage() {
             title={`${selected.id}.txt — the text/plain part`}
             language="md"
           />
+
+          {/* The button colour is the one brand value in an email. */}
+          <UseInCatalog tool={TOOL} brand={brandFromHex(state.accent)} />
         </div>
       </div>
     </ToolLayout>

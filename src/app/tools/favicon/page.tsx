@@ -26,8 +26,12 @@ import { Label } from '@/components/ui/label'
 import { Slider } from '@/components/ui/slider'
 import { CopyCssCard } from '@/components/designer-tools/copy-css-card'
 import { ToolLayout } from '@/components/designer-tools/tool-layout'
+import { ToolPresetsBar } from '@/components/designer-tools/tool-presets-bar'
+import { UseInCatalog } from '@/components/designer-tools/use-in-catalog'
+import { useToolState } from '@/hooks/use-tool-state'
+import { brandFromHex } from '@/lib/color-tools'
 
-const STORAGE_KEY = 'hoverlab:tool:favicon'
+const TOOL = '/tools/favicon'
 
 interface FaviconState {
   text: string
@@ -134,25 +138,11 @@ const HTML_SNIPPET = `<link rel="icon" href="/icon.svg" type="image/svg+xml" />
 <link rel="manifest" href="/manifest.webmanifest" />`
 
 export default function FaviconToolPage() {
-  const [state, setState] = React.useState<FaviconState>(DEFAULT_STATE)
+  // Working state stays local and ungated; named presets need an account.
+  // See `use-tool-state.ts` for why the two layers are separate.
+  const tool = useToolState<FaviconState>(TOOL, DEFAULT_STATE)
+  const { state, setState } = tool
   const [busy, setBusy] = React.useState(false)
-
-  React.useEffect(() => {
-    try {
-      const raw = window.localStorage.getItem(STORAGE_KEY)
-      if (raw) setState({ ...DEFAULT_STATE, ...(JSON.parse(raw) as Partial<FaviconState>) })
-    } catch {
-      /* ignore */
-    }
-  }, [])
-
-  React.useEffect(() => {
-    try {
-      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state))
-    } catch {
-      /* ignore */
-    }
-  }, [state])
 
   const svg = buildSvg(state)
   const dataUri = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`
@@ -242,6 +232,10 @@ export default function FaviconToolPage() {
             />
             Bold
           </label>
+
+          {/* After the controls, never before them — the ask lands once the
+              mark exists rather than in front of it. */}
+          <ToolPresetsBar tool={tool} noun="icon" />
         </div>
 
         <div className="space-y-6">
@@ -302,6 +296,10 @@ export default function FaviconToolPage() {
 
           <CopyCssCard code={svg} title="icon.svg" language="html" />
           <CopyCssCard code={HTML_SNIPPET} title="Put this in your <head>" language="html" />
+
+          {/* A favicon's first gradient stop is as close to a stated brand
+              colour as anything on this site gets. */}
+          <UseInCatalog tool={TOOL} brand={brandFromHex(state.bgFrom)} />
         </div>
       </div>
     </ToolLayout>

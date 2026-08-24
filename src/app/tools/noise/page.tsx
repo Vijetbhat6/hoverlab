@@ -30,8 +30,11 @@ import {
 import { SliderField, ToggleField } from '@/components/control-field'
 import { CopyCssCard } from '@/components/designer-tools/copy-css-card'
 import { ToolLayout } from '@/components/designer-tools/tool-layout'
+import { ToolPresetsBar } from '@/components/designer-tools/tool-presets-bar'
+import { UseInCatalog } from '@/components/designer-tools/use-in-catalog'
+import { useToolState } from '@/hooks/use-tool-state'
 
-const STORAGE_KEY = 'hoverlab:tool:noise'
+const TOOL = '/tools/noise'
 
 type NoiseType = 'fractalNoise' | 'turbulence'
 type BlendMode = 'overlay' | 'soft-light' | 'multiply' | 'screen' | 'normal'
@@ -90,24 +93,10 @@ const toDataUri = (svg: string) =>
   `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg.replace(/\s+/g, ' '))}`
 
 export default function NoiseToolPage() {
-  const [state, setState] = React.useState<NoiseState>(DEFAULT_STATE)
-
-  React.useEffect(() => {
-    try {
-      const raw = window.localStorage.getItem(STORAGE_KEY)
-      if (raw) setState({ ...DEFAULT_STATE, ...(JSON.parse(raw) as Partial<NoiseState>) })
-    } catch {
-      /* ignore */
-    }
-  }, [])
-
-  React.useEffect(() => {
-    try {
-      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state))
-    } catch {
-      /* ignore */
-    }
-  }, [state])
+  // Working state stays local and ungated; named presets need an account.
+  // See `use-tool-state.ts` for why the two layers are separate.
+  const tool = useToolState<NoiseState>(TOOL, DEFAULT_STATE)
+  const { state, setState } = tool
 
   const update = (patch: Partial<NoiseState>) => setState((s) => ({ ...s, ...patch }))
 
@@ -167,6 +156,9 @@ export default function NoiseToolPage() {
 
           <CopyCssCard code={cssBlock} title="CSS" language="css" />
           <CopyCssCard code={svg} title="Raw SVG tile" language="svg" />
+
+          {/* No `brand`: grain is monochrome by construction. */}
+          <UseInCatalog tool={TOOL} />
         </div>
 
         {/* Controls */}
@@ -274,6 +266,10 @@ export default function NoiseToolPage() {
               onChange={(v) => update({ tile: v })}
             />
           </div>
+
+          {/* After the controls, never before them — the ask lands once the
+              grain exists rather than in front of it. */}
+          <ToolPresetsBar tool={tool} noun="grain" />
         </div>
       </div>
     </ToolLayout>

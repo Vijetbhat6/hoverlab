@@ -15,7 +15,11 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { CopyCssCard } from '@/components/designer-tools/copy-css-card'
 import { ToolLayout } from '@/components/designer-tools/tool-layout'
+import { ToolPresetsBar } from '@/components/designer-tools/tool-presets-bar'
+import { UseInCatalog } from '@/components/designer-tools/use-in-catalog'
+import { useToolState } from '@/hooks/use-tool-state'
 import {
+  brandFromHex,
   contrastRatio,
   wcagLevel,
   normalizeHex,
@@ -25,30 +29,44 @@ import {
 } from '@/lib/color-tools'
 import { cn } from '@/lib/utils'
 
-const STORAGE_KEY = 'hoverlab:tool:contrast'
+const TOOL = '/tools/contrast'
+
+/**
+ * A pair, which is what this tool is actually about.
+ *
+ * Stored as `{ fg, bg }` before this hook existed too, so a returning
+ * visitor's colours survive the change unaltered.
+ */
+interface ContrastState {
+  fg: string
+  bg: string
+}
+
+const DEFAULT_STATE: ContrastState = { fg: '#0f172a', bg: '#f8fafc' }
 
 export default function ContrastToolPage() {
-  const [fg, setFg] = React.useState('#0f172a')
-  const [bg, setBg] = React.useState('#f8fafc')
+  // Working state stays local and ungated; named presets need an account.
+  // See `use-tool-state.ts` for why the two layers are separate.
+  const tool = useToolState<ContrastState>(TOOL, DEFAULT_STATE)
+  const { setState } = tool
+  /*
+    Normalized at the point of use, not on the way in.
+
+    These two strings feed inline `color` and `backgroundColor`, and used to
+    be normalized on the one path that could carry a stale value — the
+    localStorage restore. They now arrive from three: stored state, the
+    palette tool's `?fg=`/`?bg=` handoff, and a preset restored off the
+    account. Normalizing here covers all three, and a value that is not a
+    colour falls back to the default rather than painting the preview with
+    whatever was in storage — which on a contrast checker would mean
+    reporting a ratio for a colour nobody can see.
+  */
+  const fg = normalizeHex(tool.state.fg) ?? DEFAULT_STATE.fg
+  const bg = normalizeHex(tool.state.bg) ?? DEFAULT_STATE.bg
+  const setFg = (v: string) => setState((s) => ({ ...s, fg: v }))
+  const setBg = (v: string) => setState((s) => ({ ...s, bg: v }))
 
   React.useEffect(() => {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY)
-      if (raw) {
-        const parsed = JSON.parse(raw)
-        if (parsed.fg) {
-          const n = normalizeHex(parsed.fg)
-          if (n) setFg(n)
-        }
-        if (parsed.bg) {
-          const n = normalizeHex(parsed.bg)
-          if (n) setBg(n)
-        }
-      }
-    } catch {
-      /* ignore */
-    }
-
     // Handoff from the palette tool: ?fg=#hex / ?bg=#hex win over the
     // restored state. window.location rather than useSearchParams — the hook
     // would force a Suspense boundary around the whole page for one optional
@@ -58,20 +76,16 @@ export default function ContrastToolPage() {
     const qBg = params.get('bg')
     const nFg = qFg ? normalizeHex(qFg) : null
     const nBg = qBg ? normalizeHex(qBg) : null
-    if (nFg) setFg(nFg)
-    if (nBg) setBg(nBg)
+    if (nFg || nBg) {
+      setState((s) => ({ fg: nFg ?? s.fg, bg: nBg ?? s.bg }))
+    }
     if (qFg !== null || qBg !== null) {
       window.history.replaceState(null, '', window.location.pathname)
     }
+    // `setState` is stable; the handoff is read once, on mount. Declared
+    // after `useToolState`, so the hook's restore has already run and the
+    // link wins, which is the precedence this comment claims.
   }, [])
-
-  React.useEffect(() => {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify({ fg, bg }))
-    } catch {
-      /* ignore */
-    }
-  }, [fg, bg])
 
   const ratio = React.useMemo(() => contrastRatio(fg, bg), [fg, bg])
   const ratioDisplay = ratio ? ratio.toFixed(2) : '—'
@@ -207,6 +221,12 @@ export default function ContrastToolPage() {
             title="CSS"
             language="css"
           />
+
+          {/* After the pair, never before it — the ask lands once there is a
+              combination worth keeping. A checked pair is the clearest case
+              on the site for naming one: it is evidence, and evidence is
+              worth having next week. */}
+          <ToolPresetsBar tool={tool} noun="pair" />
         </div>
 
         {/* Live preview */}
@@ -249,6 +269,10 @@ export default function ContrastToolPage() {
               </a>
             </div>
           </div>
+
+          {/* The foreground is the colour being tested, so it is the one
+              worth previewing the catalog in. */}
+          <UseInCatalog tool={TOOL} brand={brandFromHex(fg)} />
         </div>
       </div>
     </ToolLayout>

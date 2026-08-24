@@ -204,6 +204,7 @@ export function ReviewList({
               <h3 className="mt-2.5 font-semibold">{review.title}</h3>
 
               <p
+                id={`${uid}-${review.id}-body`}
                 className={`mt-1.5 text-sm leading-relaxed text-muted-foreground ${
                   isLong && !isExpanded ? 'line-clamp-3' : ''
                 }`}
@@ -217,6 +218,13 @@ export function ReviewList({
                   type="button"
                   onClick={() => toggleExpanded(review.id)}
                   aria-expanded={isExpanded}
+                  /*
+                    The paragraph, which is always in the document — this
+                    control clamps text rather than unmounting it, so the
+                    IDREF is unconditional here where the drawers and
+                    listboxes elsewhere in the catalog have to guard it.
+                  */
+                  aria-controls={`${uid}-${review.id}-body`}
                   className="mt-1.5 text-xs font-semibold hover:underline"
                 >
                   {isExpanded ? 'Show less' : 'Read more'}

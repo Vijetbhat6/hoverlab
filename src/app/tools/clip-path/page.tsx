@@ -25,9 +25,12 @@ import { SliderField } from '@/components/control-field'
 import { CopyCssCard } from '@/components/designer-tools/copy-css-card'
 import { ToolLayout } from '@/components/designer-tools/tool-layout'
 import { readSharedState, ShareLinkButton } from '@/components/designer-tools/share-link'
+import { ToolPresetsBar } from '@/components/designer-tools/tool-presets-bar'
+import { UseInCatalog } from '@/components/designer-tools/use-in-catalog'
+import { useToolState } from '@/hooks/use-tool-state'
 import { cn } from '@/lib/utils'
 
-const STORAGE_KEY = 'hoverlab:tool:clip-path'
+const TOOL = '/tools/clip-path'
 
 type Mode = 'presets' | 'blob'
 
@@ -400,21 +403,17 @@ const DEFAULT_STATE: ClipState = {
 }
 
 export default function ClipPathToolPage() {
-  const [state, setState] = React.useState<ClipState>(DEFAULT_STATE)
+  // Working state stays local and ungated; named presets need an account.
+  // See `use-tool-state.ts` for why the two layers are separate.
+  const tool = useToolState<ClipState>(TOOL, DEFAULT_STATE)
+  const { state, setState } = tool
   const gradientId = React.useId()
 
   React.useEffect(() => {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY)
-      if (raw) {
-        const parsed = JSON.parse(raw)
-        setState((prev) => ({ ...prev, ...parsed }))
-      }
-    } catch {
-      /* ignore */
-    }
-
     // A shared link's state wins over whatever this browser had stored.
+    // This effect is declared after `useToolState`, so the hook's restore
+    // has already run by the time it does — which is what keeps that
+    // precedence true rather than a race.
     // Seed, points and jitter fully determine the blob, so a shared link
     // reproduces it exactly.
     const shared = readSharedState<Partial<ClipState>>()
@@ -438,15 +437,8 @@ export default function ClipPathToolPage() {
         return next
       })
     }
+    // `setState` is stable; the shared link is read once, on mount.
   }, [])
-
-  React.useEffect(() => {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(state))
-    } catch {
-      /* ignore */
-    }
-  }, [state])
 
   const update = (patch: Partial<ClipState>) => setState((s) => ({ ...s, ...patch }))
 
@@ -550,6 +542,10 @@ export default function ClipPathToolPage() {
               <CopyCssCard code={blobSvg} title="SVG path" language="svg" />
             </>
           )}
+
+          {/* No `brand`: the fill gradient is preview scaffolding, not an
+              identity — the copied CSS carries no colour at all. */}
+          <UseInCatalog tool={TOOL} />
         </div>
 
         {/* Controls */}
@@ -686,6 +682,10 @@ export default function ClipPathToolPage() {
               your own element or image.
             </p>
           </div>
+
+          {/* After the controls, never before them — the ask lands once the
+              shape exists rather than in front of it. */}
+          <ToolPresetsBar tool={tool} noun="shape" />
         </div>
       </div>
     </ToolLayout>
