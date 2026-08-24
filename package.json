@@ -18,6 +18,7 @@
     "check:deps": "node scripts/check-runtime-deps.mjs",
     "audit:motion": "tsx scripts/audit-motion-guard.mts",
     "audit:motion:blocks": "tsx scripts/audit-block-motion.mts",
+    "audit:a11y": "tsx scripts/audit-a11y.mts",
     "build:stats": "tsx scripts/build-catalog-stats.mts",
     "build:recency": "tsx scripts/build-catalog-recency.mts",
     "build:markup": "tsx scripts/build-block-markup.mts",
