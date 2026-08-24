@@ -70,9 +70,13 @@ import { StatsCards } from './sources/stats-cards'
 import { LogoCloud } from './sources/logo-cloud'
 import { LogoGrid } from './sources/logo-grid'
 import { BentoFeatures } from './sources/bento-features'
+import { FeatureRows } from './sources/feature-rows'
+import { FeatureIconGrid } from './sources/feature-icon-grid'
 import { PersonaCards } from './sources/persona-cards'
 import { CodeShowcase } from './sources/code-showcase'
 import { PricingTiers } from './sources/pricing-tiers'
+import { PricingSingle } from './sources/pricing-single'
+import { PricingUsageCalculator } from './sources/pricing-usage-calculator'
 import { ComparisonTable } from './sources/comparison-table'
 import { TestimonialGrid } from './sources/testimonial-grid'
 import { FaqAccordion } from './sources/faq-accordion'
@@ -245,9 +249,13 @@ export const BLOCK_PREVIEWS: Record<string, React.ReactNode> = {
   'logo-cloud': <LogoCloud />,
   'logo-grid': <LogoGrid />,
   'bento-features': <BentoFeatures />,
+  'feature-rows': <FeatureRows />,
+  'feature-icon-grid': <FeatureIconGrid />,
   'persona-cards': <PersonaCards />,
   'code-showcase': <CodeShowcase />,
   'pricing-tiers': <PricingTiers />,
+  'pricing-single': <PricingSingle />,
+  'pricing-usage-calculator': <PricingUsageCalculator />,
   'comparison-table': <ComparisonTable />,
   'testimonial-grid': <TestimonialGrid />,
   'faq-accordion': <FaqAccordion />,

@@ -426,6 +426,26 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     featured: true,
   },
   {
+    id: 'feature-rows',
+    name: 'Alternating Feature Rows',
+    category: 'Feature Sections',
+    description:
+      'A full row per feature with the media side flipping each time, so the eye re-enters the page instead of skimming a stack of identical blocks.',
+    tags: ['features', 'alternating', 'zig zag', 'rows', 'marketing'],
+    previewComponent: 'feature-rows',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'feature-icon-grid',
+    name: 'Icon Feature Grid',
+    category: 'Feature Sections',
+    description:
+      'Uniform cells, no spans, no state — the grid for nine things that matter equally, where a bento would be a wall and tabs would be a filing cabinet.',
+    tags: ['features', 'grid', 'icons', 'marketing', 'benefits'],
+    previewComponent: 'feature-icon-grid',
+    deps: ['lucide-react'],
+  },
+  {
     id: 'persona-cards',
     name: 'Audience Persona Cards',
     category: 'Feature Sections',
@@ -467,6 +487,26 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     previewComponent: 'pricing-tiers',
     deps: ['lucide-react'],
     featured: true,
+  },
+  {
+    id: 'pricing-single',
+    name: 'Single-Plan Price Card',
+    category: 'Pricing',
+    description:
+      'One price given a whole card, with the objection a one-time price raises answered under the button rather than in a FAQ further down.',
+    tags: ['pricing', 'one time', 'single plan', 'lifetime', 'checkout'],
+    previewComponent: 'pricing-single',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'pricing-usage-calculator',
+    name: 'Tiered Usage Calculator',
+    category: 'Pricing',
+    description:
+      'A slider that turns a rate card into the number a buyer actually cares about, with a per-tier breakdown so the total can be checked rather than taken on trust.',
+    tags: ['pricing', 'usage', 'calculator', 'slider', 'metered'],
+    previewComponent: 'pricing-usage-calculator',
+    deps: [],
   },
   {
     id: 'comparison-table',

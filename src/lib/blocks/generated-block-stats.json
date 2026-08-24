@@ -139,6 +139,14 @@
     "lines": 114,
     "files": 1
   },
+  "feature-rows": {
+    "lines": 158,
+    "files": 1
+  },
+  "feature-icon-grid": {
+    "lines": 150,
+    "files": 1
+  },
   "persona-cards": {
     "lines": 145,
     "files": 1
@@ -153,6 +161,14 @@
   },
   "pricing-tiers": {
     "lines": 189,
+    "files": 1
+  },
+  "pricing-single": {
+    "lines": 142,
+    "files": 1
+  },
+  "pricing-usage-calculator": {
+    "lines": 212,
     "files": 1
   },
   "comparison-table": {
