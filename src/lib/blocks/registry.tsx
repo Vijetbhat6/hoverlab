@@ -46,6 +46,7 @@ import { HeroBooking } from './sources/hero-booking'
 import { HeroPriceAnchor } from './sources/hero-price-anchor'
 
 import { NavbarSimple } from './sources/navbar-simple'
+import { AnnouncementBar } from './sources/announcement-bar'
 import { NavbarMegaMenu } from './sources/navbar-mega-menu'
 import { NavMobileDrawer } from './sources/nav-mobile-drawer'
 
@@ -57,6 +58,7 @@ import { ContactFormSplit } from './sources/contact-form-split'
 import { MultiStepForm } from './sources/multi-step-form'
 
 import { ConfirmDialog } from './sources/confirm-dialog'
+import { CookieConsent } from './sources/cookie-consent'
 import { SlideOverPanel } from './sources/slide-over-panel'
 
 import { OnboardingChecklist } from './sources/onboarding-checklist'
@@ -72,6 +74,7 @@ import { LogoGrid } from './sources/logo-grid'
 import { BentoFeatures } from './sources/bento-features'
 import { FeatureRows } from './sources/feature-rows'
 import { FeatureIconGrid } from './sources/feature-icon-grid'
+import { IntegrationGrid } from './sources/integration-grid'
 import { PersonaCards } from './sources/persona-cards'
 import { CodeShowcase } from './sources/code-showcase'
 import { PricingTiers } from './sources/pricing-tiers'
@@ -225,6 +228,7 @@ export const BLOCK_PREVIEWS: Record<string, React.ReactNode> = {
   'hero-price-anchor': <HeroPriceAnchor />,
 
   'navbar-simple': <NavbarSimple />,
+  'announcement-bar': <AnnouncementBar />,
   'navbar-mega-menu': <NavbarMegaMenu />,
   'nav-mobile-drawer': <NavMobileDrawer embedded />,
 
@@ -236,6 +240,7 @@ export const BLOCK_PREVIEWS: Record<string, React.ReactNode> = {
   'multi-step-form': <MultiStepForm />,
 
   'confirm-dialog': <ConfirmDialog />,
+  'cookie-consent': <CookieConsent />,
   'slide-over-panel': <SlideOverPanel />,
 
   'onboarding-checklist': <OnboardingChecklist />,
@@ -251,6 +256,7 @@ export const BLOCK_PREVIEWS: Record<string, React.ReactNode> = {
   'bento-features': <BentoFeatures />,
   'feature-rows': <FeatureRows />,
   'feature-icon-grid': <FeatureIconGrid />,
+  'integration-grid': <IntegrationGrid />,
   'persona-cards': <PersonaCards />,
   'code-showcase': <CodeShowcase />,
   'pricing-tiers': <PricingTiers />,

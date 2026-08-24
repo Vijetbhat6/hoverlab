@@ -59,6 +59,10 @@
     "lines": 206,
     "files": 1
   },
+  "announcement-bar": {
+    "lines": 132,
+    "files": 1
+  },
   "navbar-mega-menu": {
     "lines": 328,
     "files": 1
@@ -89,6 +93,10 @@
   },
   "confirm-dialog": {
     "lines": 184,
+    "files": 1
+  },
+  "cookie-consent": {
+    "lines": 228,
     "files": 1
   },
   "slide-over-panel": {
@@ -145,6 +153,10 @@
   },
   "feature-icon-grid": {
     "lines": 150,
+    "files": 1
+  },
+  "integration-grid": {
+    "lines": 206,
     "files": 1
   },
   "persona-cards": {

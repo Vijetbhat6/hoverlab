@@ -198,6 +198,16 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     thumbHeight: 'h-24',
   },
   {
+    id: 'announcement-bar',
+    name: 'Dismissible Announcement Bar',
+    category: 'Navigation',
+    description:
+      'The strip above the navbar, with the three things it usually gets wrong fixed: a named region, a live role only when it earns one, and a dismissal that persists.',
+    tags: ['announcement', 'banner', 'promo', 'dismissible', 'chrome'],
+    previewComponent: 'announcement-bar',
+    deps: ['lucide-react'],
+  },
+  {
     id: 'navbar-mega-menu',
     name: 'Navbar with Mega Menu',
     category: 'Navigation',
@@ -289,6 +299,16 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     deps: ['lucide-react'],
     featured: true,
     thumbHeight: 'h-24',
+  },
+  {
+    id: 'cookie-consent',
+    name: 'Cookie Consent Banner',
+    category: 'Modals & Drawers',
+    description:
+      'Per-category consent where refusing is exactly as easy as accepting, nothing non-essential is pre-ticked, and the page behind it stays readable — the shape the law expects, wired to your own script gating.',
+    tags: ['cookies', 'consent', 'gdpr', 'privacy', 'banner'],
+    previewComponent: 'cookie-consent',
+    deps: ['lucide-react'],
   },
   {
     id: 'slide-over-panel',
@@ -444,6 +464,16 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     tags: ['features', 'grid', 'icons', 'marketing', 'benefits'],
     previewComponent: 'feature-icon-grid',
     deps: ['lucide-react'],
+  },
+  {
+    id: 'integration-grid',
+    name: 'Integration Directory Grid',
+    category: 'Feature Sections',
+    description:
+      'What each integration actually does, not a wall of logos — with availability as a text pill rather than a tinted border, and the name as the link so the card is not one enormous one.',
+    tags: ['integrations', 'directory', 'grid', 'ecosystem', 'compatibility'],
+    previewComponent: 'integration-grid',
+    deps: [],
   },
   {
     id: 'persona-cards',
