@@ -11,7 +11,7 @@
     "build": "next build",
     "build:index": "node scripts/build-effect-index.mjs",
     "build:artifacts": "node scripts/build-artifact-sources.mjs",
-    "test": "node --import=tsx --test src/lib/color-tools.test.ts src/lib/billing/invite-code.test.ts",
+    "test": "node --import=tsx --test src/lib/color-tools.test.ts src/lib/billing/invite-code.test.ts src/lib/billing/region.test.ts",
     "test:motion": "tsx scripts/test-motion-guard.mts",
     "start": "next start -p 3000",
     "lint": "eslint .",

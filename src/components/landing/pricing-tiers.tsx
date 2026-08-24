@@ -681,6 +681,22 @@ export function PricingTiers({ className }: { className?: string } = {}) {
             indicative, converted at approximately ₹{USD_TO_INR}/$, and your
             card issuer&rsquo;s rate on the day sets the final amount.
           </p>
+        ) : region && region !== 'default' ? (
+          /*
+            Every other band. Written without naming a country because the
+            region IS a band — a table of forty countries priced individually
+            would be forty Polar discounts nobody maintains, so Brazil and
+            Türkiye read the same sentence and pay the same price. Saying
+            "your location" rather than guessing at a country name also
+            avoids telling someone behind a corporate VPN which country we
+            think they are in.
+          */
+          <p className="mt-2 text-xs text-muted-foreground">
+            Regional pricing for your location is applied automatically at
+            checkout — the prices above already include it. Paid plans are
+            charged in USD; rupee amounts are indicative, converted at
+            approximately ₹{USD_TO_INR}/$.
+          </p>
         ) : (
           /*
             Stated plainly rather than buried at checkout: the rupee figures

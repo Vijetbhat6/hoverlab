@@ -16,18 +16,20 @@
  *   Hoverlab 2,000 credits  one-time, $15 and ₹1,425
  *   Hoverlab Studio  one-time, ten seats, $299 and ₹28,000
  *   Hoverlab Team    recurring monthly, seat-based, $12 and ₹1,150 /seat
- *   India / Pro      $54 off Pro,     duration `once`
- *   India / Pro+     $6 off Pro+,     duration `forever`
- *   India / Studio   $200 off Studio, duration `once`
- *   India / Team     $7 off Team,     duration `forever`
- *   India / Pro ₹     ₹5,100 off Pro,     duration `once`
- *   India / Pro+ ₹    ₹560 off Pro+,      duration `forever`
- *   India / Studio ₹  ₹18,500 off Studio, duration `once`
- *   India / Team ₹    ₹675 off Team,      duration `forever`
+ *
+ * and then one discount per (region × plan), thirty in total: six plans
+ * across four regions, plus the rupee pair for each of India's six. Every
+ * amount is computed as `list − band` from the tables in
+ * src/lib/billing/plans.ts, so none of them is written down twice.
+ *
+ * The regions are purchasing-power bands rather than countries — see the
+ * long comment on `Region` in plans.ts for why forty countries would be two
+ * hundred and forty discounts nobody will maintain, and region.ts for which
+ * country is in which band.
  *
  * The discounts are FIXED amounts rather than percentages because the plan
- * catalog uses round numbers: 68% off $59 is $18.88, so a percentage would
- * advertise $19 and charge $18.88. Fixed amounts make the two identical.
+ * catalog uses round numbers: 68% off $79 is $25.28, so a percentage would
+ * advertise $25 and charge $25.28. Fixed amounts make the two identical.
  *
  * That is also why each currency needs its OWN discount. A fixed Polar
  * discount belongs to the currency it is denominated in: offering the dollar
@@ -35,9 +37,13 @@
  * without the rupee pair an Indian buyer either cannot check out or pays
  * undiscounted list price.
  *
- * `forever` on the Team discounts is deliberate — with `once` the customer
- * would pay $5 in month one and $12 from month two, which is not a regional
- * price, it is a trial.
+ * `forever` on the recurring plans' discounts is deliberate — with `once`
+ * the customer would pay $5 in month one and $12 from month two, which is
+ * not a regional price, it is a trial.
+ *
+ * Renewals are discounted on the same bands as the licences they renew.
+ * Charging someone $25 for Pro in Lagos and $32 a year later to keep
+ * receiving updates would be a price rise wearing a renewal's clothes.
  *
  * Idempotent: products and discounts are matched by name, so re-running adds
  * nothing. It never re-prices anything anyone may already have bought — the
@@ -56,6 +62,12 @@
 
 import { readFileSync, existsSync } from 'node:fs'
 import { Polar } from '@polar-sh/sdk'
+import {
+  PLANS,
+  BAND_CENTS,
+  IN_PAISE,
+  type Band,
+} from '../src/lib/billing/plans.ts'
 
 /** Load .env files the way Next.js does. Mirrors scripts/check-env.mjs. */
 function loadEnvFiles(): Record<string, string | undefined> {
@@ -103,16 +115,6 @@ const STUDIO_NAME = 'Hoverlab Studio'
 const TEAM_NAME = 'Hoverlab Team'
 const RENEWAL_NAME = 'Hoverlab Pro updates renewal'
 const RENEWAL_STUDIO_NAME = 'Hoverlab Studio updates renewal'
-const DISCOUNT_PRO_NAME = 'India / Pro'
-const DISCOUNT_PLUS_NAME = 'India / Pro+'
-const DISCOUNT_STUDIO_NAME = 'India / Studio'
-const DISCOUNT_TEAM_NAME = 'India / Team'
-// Separate names so the currency pairs are distinguishable in the dashboard —
-// matching is by name, and two same-named discounts would collide.
-const DISCOUNT_PRO_INR_NAME = 'India / Pro (INR)'
-const DISCOUNT_PLUS_INR_NAME = 'India / Pro+ (INR)'
-const DISCOUNT_STUDIO_INR_NAME = 'India / Studio (INR)'
-const DISCOUNT_TEAM_INR_NAME = 'India / Team (INR)'
 
 /** Collect a paginated Polar list into a plain array. */
 async function collect<T>(pager: AsyncIterable<{ result: { items: T[] } }>): Promise<T[]> {
@@ -257,7 +259,7 @@ async function main() {
    * The checkout route refuses a renewal to anyone not holding the matching
    * licence, so these being live cannot produce an orphaned purchase.
    */
-  await ensureProduct(RENEWAL_NAME, 'POLAR_PRODUCT_ID_RENEWAL', {
+  const renewalId = await ensureProduct(RENEWAL_NAME, 'POLAR_PRODUCT_ID_RENEWAL', {
     name: RENEWAL_NAME,
     description:
       'Twelve more months of catalog updates on an existing Hoverlab Pro ' +
@@ -270,17 +272,21 @@ async function main() {
     ],
   })
 
-  await ensureProduct(RENEWAL_STUDIO_NAME, 'POLAR_PRODUCT_ID_RENEWAL_STUDIO', {
-    name: RENEWAL_STUDIO_NAME,
-    description:
-      'Twelve more months of catalog updates on an existing Hoverlab ' +
-      'Studio license, covering all ten seats.',
-    recurringInterval: null,
-    prices: [
-      { amountType: 'fixed', priceAmount: 12000, priceCurrency: 'usd' },
-      { amountType: 'fixed', priceAmount: 1120000, priceCurrency: 'inr' },
-    ],
-  })
+  const renewalStudioId = await ensureProduct(
+    RENEWAL_STUDIO_NAME,
+    'POLAR_PRODUCT_ID_RENEWAL_STUDIO',
+    {
+      name: RENEWAL_STUDIO_NAME,
+      description:
+        'Twelve more months of catalog updates on an existing Hoverlab ' +
+        'Studio license, covering all ten seats.',
+      recurringInterval: null,
+      prices: [
+        { amountType: 'fixed', priceAmount: 12000, priceCurrency: 'usd' },
+        { amountType: 'fixed', priceAmount: 1120000, priceCurrency: 'inr' },
+      ],
+    },
+  )
 
   const teamId = await ensureProduct(TEAM_NAME, 'POLAR_PRODUCT_ID_TEAM', {
     name: TEAM_NAME,
@@ -523,52 +529,123 @@ async function main() {
     },
   )
 
-  await ensureDiscount(DISCOUNT_PRO_NAME, 'POLAR_DISCOUNT_ID_IN_PRO', proId, 5400, 'once')
-  // `forever`, like Team's: with `once` an Indian subscriber would pay $3
-  // in month one and $9 from month two, which is a trial, not a price.
-  await ensureDiscount(DISCOUNT_PLUS_NAME, 'POLAR_DISCOUNT_ID_IN_PLUS', plusId, 600, 'forever')
-  await ensureDiscount(
-    DISCOUNT_STUDIO_NAME,
-    'POLAR_DISCOUNT_ID_IN_STUDIO',
-    studioId,
-    20000,
-    'once',
-  )
-  await ensureDiscount(DISCOUNT_TEAM_NAME, 'POLAR_DISCOUNT_ID_IN_TEAM', teamId, 700, 'forever')
-  // ₹7,500 − ₹5,100 = ₹2,400, ₹28,000 − ₹18,500 = ₹9,500, and ₹1,150 − ₹675
-  // = ₹475 per seat: the same ladder as the dollar prices, at roughly ₹95/$.
-  await ensureDiscount(
-    DISCOUNT_PRO_INR_NAME,
-    'POLAR_DISCOUNT_ID_IN_PRO_INR',
-    proId,
-    510000,
-    'once',
-    'inr',
-  )
-  await ensureDiscount(
-    DISCOUNT_PLUS_INR_NAME,
-    'POLAR_DISCOUNT_ID_IN_PLUS_INR',
-    plusId,
-    56000,
-    'forever',
-    'inr',
-  )
-  await ensureDiscount(
-    DISCOUNT_STUDIO_INR_NAME,
-    'POLAR_DISCOUNT_ID_IN_STUDIO_INR',
-    studioId,
-    1850000,
-    'once',
-    'inr',
-  )
-  await ensureDiscount(
-    DISCOUNT_TEAM_INR_NAME,
-    'POLAR_DISCOUNT_ID_IN_TEAM_INR',
-    teamId,
-    67500,
-    'forever',
-    'inr',
-  )
+  /*
+    Regional discounts, generated from the same tables the site prices from.
+
+    Written as a loop rather than as thirty hand-written calls for one
+    reason: the amount Polar needs is `list − band`, and the site advertises
+    `band`. Those two numbers are derived from each other, so deriving them
+    here is the only version where they cannot drift. The shape this replaced
+    wrote both by hand — `5400` in this file and `2500` in plans.ts — which
+    meant a change to list price silently made every discount wrong, in the
+    direction that overcharges.
+
+    BAND_CENTS, IN_PAISE and PLANS are imported from the app rather than
+    copied. plans.ts reads POLAR_DISCOUNT_ID_* out of the environment, and at
+    provisioning time those are exactly the ids that do not exist yet — which
+    is fine, because nothing below reads them. It reads the price tables,
+    which are literals.
+  */
+  type BandPlan = 'pro' | 'plus' | 'studio' | 'team' | 'renewal' | 'renewal-studio'
+
+  /**
+   * Per-plan facts that do not vary by band.
+   *
+   * `duration` is the load-bearing one. A recurring plan needs `forever`:
+   * with `once` an Indian Pro+ subscriber would pay $3 in month one and $9
+   * from month two, which is a trial, not a price. A one-time purchase can
+   * only be discounted once, so `once` is both correct and the only thing
+   * Polar accepts for it.
+   */
+  const PLAN_META: Record<
+    BandPlan,
+    { productId: string; label: string; duration: 'once' | 'forever' }
+  > = {
+    pro: { productId: proId, label: 'Pro', duration: 'once' },
+    plus: { productId: plusId, label: 'Pro+', duration: 'forever' },
+    studio: { productId: studioId, label: 'Studio', duration: 'once' },
+    team: { productId: teamId, label: 'Team', duration: 'forever' },
+    renewal: { productId: renewalId, label: 'Pro renewal', duration: 'once' },
+    'renewal-studio': {
+      productId: renewalStudioId,
+      label: 'Studio renewal',
+      duration: 'once',
+    },
+  }
+
+  /**
+   * The regions, and which band each charges at.
+   *
+   * `infix` is what plans.ts reads back out of the environment, as
+   * POLAR_DISCOUNT_ID_<INFIX>_<PLAN>. Keep the two in step: a mismatch
+   * produces a discount that exists in Polar, is printed at the end of this
+   * run, and is never applied to a checkout — so the site quietly charges
+   * list price to the exact region the discount was created for.
+   */
+  const REGIONS: { infix: string; label: string; band: Band; rupees: boolean }[] = [
+    { infix: 'IN', label: 'India', band: 'a', rupees: true },
+    { infix: 'PPP_A', label: 'PPP A', band: 'a', rupees: false },
+    { infix: 'PPP_B', label: 'PPP B', band: 'b', rupees: false },
+    { infix: 'PPP_C', label: 'PPP C', band: 'c', rupees: false },
+  ]
+
+  const BAND_PLANS = Object.keys(PLAN_META) as BandPlan[]
+
+  for (const region of REGIONS) {
+    for (const plan of BAND_PLANS) {
+      const meta = PLAN_META[plan]
+      const banded = BAND_CENTS[region.band][plan]
+      const list = PLANS[plan].priceCents
+      if (banded === undefined) continue
+
+      // A band that does not undercut list has nothing to create. Guarded
+      // rather than assumed: Polar rejects a zero-amount discount, and a
+      // negative one would be a price rise nobody asked for.
+      const off = list - banded
+      if (off <= 0) {
+        drift.push(
+          `${region.label} / ${meta.label}: band price ${banded} is not below ` +
+            `list ${list} — no discount created`,
+        )
+        continue
+      }
+
+      const key = plan.toUpperCase().replace('-', '_')
+      await ensureDiscount(
+        `${region.label} / ${meta.label}`,
+        `POLAR_DISCOUNT_ID_${region.infix}_${key}`,
+        meta.productId,
+        off,
+        meta.duration,
+      )
+
+      if (!region.rupees) continue
+
+      const bandedPaise = IN_PAISE[plan]
+      const listPaise = PLANS[plan].priceInrPaise
+      if (bandedPaise === undefined) continue
+      const offPaise = listPaise - bandedPaise
+      if (offPaise <= 0) {
+        drift.push(
+          `${region.label} / ${meta.label} (INR): band price ${bandedPaise} is ` +
+            `not below list ${listPaise} — no discount created`,
+        )
+        continue
+      }
+
+      // A separate name so the currency pair is distinguishable in the
+      // dashboard — matching is by name, and two same-named discounts would
+      // collide.
+      await ensureDiscount(
+        `${region.label} / ${meta.label} (INR)`,
+        `POLAR_DISCOUNT_ID_${region.infix}_${key}_INR`,
+        meta.productId,
+        offPaise,
+        meta.duration,
+        'inr',
+      )
+    }
+  }
 
   if (drift.length) {
     console.log(

@@ -294,78 +294,180 @@ export function isRenewal(plan: PlanId): boolean {
 /**
  * Pricing regions.
  *
- * 'default' is the USD list price. Additional regions are a DISCOUNT off
- * that list price, never a separate product — Polar settles in USD and a
- * second product would mean a second set of ids, webhooks and entitlement
- * paths to keep in sync for no gain.
+ * 'default' is the USD list price. Every other region is a DISCOUNT off that
+ * list price, never a separate product — Polar settles in USD and a second
+ * product would mean a second set of ids, webhooks and entitlement paths to
+ * keep in sync for no gain.
+ *
+ * A region is a PURCHASING-POWER BAND, not a country. Three bands cover the
+ * places this catalog's traffic actually comes from, and a fourth region
+ * exists only because India is also charged in rupees:
+ *
+ *   IN     band A depth, presented and charged in INR
+ *   ppp-a  band A depth, charged in USD
+ *   ppp-b  band B depth, charged in USD
+ *   ppp-c  band C depth, charged in USD
+ *
+ * Bands rather than per-country prices because the alternative does not
+ * survive contact with Polar: every distinct price is a fixed discount that
+ * has to be created in the dashboard and pasted back here as an id, so forty
+ * countries would be two hundred and forty ids and forty chances to
+ * advertise a number that nothing charges. Three bands are twenty-four.
+ *
+ * India keeps a region of its own rather than folding into `ppp-a` because
+ * the rupee checkout is not a price, it is a currency: a fixed Polar
+ * discount belongs to the currency it is denominated in, so India needs a
+ * second discount id per plan that no dollar-charged country has any use
+ * for. Its dollar figures still come from band A below, so the two cannot
+ * drift apart.
  */
-export type Region = 'default' | 'IN'
+export type Region = 'default' | 'IN' | 'ppp-a' | 'ppp-b' | 'ppp-c'
+
+/** The purchasing-power bands, before India's currency is layered on. */
+export type Band = 'a' | 'b' | 'c'
 
 interface RegionalOverride {
   /** Price after the regional discount, in cents. Display only. */
   priceCents: number
   /** Polar discount id that actually produces `priceCents` at checkout. */
   discountId: string | null
-  /** Price after the regional discount, in paise, for rupee checkouts. */
-  priceInrPaise: number
+  /**
+   * Price after the regional discount, in paise, for rupee checkouts.
+   *
+   * Only India has one. Everywhere else is charged in dollars, so there is
+   * no rupee price to advertise and no rupee discount to reach it with —
+   * `null` here and `presentmentCurrencyFor` returning null are the same
+   * fact said twice, once for display and once for checkout.
+   */
+  priceInrPaise: number | null
   /**
    * Polar discount id that produces `priceInrPaise` at a rupee checkout.
    *
    * A separate id, not an oversight: Polar scopes a fixed discount to the
    * currency it is denominated in, and offering the dollar one on a rupee
    * checkout fails with "Discount does not exist". Two exact discounts also
-   * beat one shared percentage, which would round ₹5,600 down to something
-   * like ₹1,803.20 instead of a round ₹1,800.
+   * beat one shared percentage, which would round ₹7,500 down to something
+   * like ₹2,412.75 instead of a round ₹2,400.
    */
   discountIdInr: string | null
 }
 
 /**
+ * What each band charges, in cents, per plan.
+ *
+ * Band A is roughly 68% off list, B is 50%, C is 30%. The depths are not
+ * arrived at from a PPP table alone — a strict World Bank conversion factor
+ * would put India nearer 25% of list, which is below the price at which this
+ * reads as a product rather than a leak. They are the shallowest discount at
+ * which the price stops being the reason someone does not buy.
+ *
+ * Band A: $79 is roughly 20% of a junior Indian developer's monthly
+ * take-home — the same burden a ~$1,300 purchase would be to a US developer.
+ * $25 is the ~$400 equivalent, which is a considered purchase rather than an
+ * impossible one. Tailwind Plus reaches for the same ratio from the other
+ * direction, listing India at roughly a third of its dollar price.
+ *
+ * Band B: Brazil, Mexico, Türkiye and South Africa sit near half of US
+ * software purchasing power, and each has a developer population large
+ * enough that the discount is worth the dashboard work.
+ *
+ * Band C: Europe's and Asia's lower-cost markets. Thirty percent is small
+ * enough to be a nudge rather than an arbitrage target — the gap between $55
+ * and $79 is not worth a VPN to anyone, which is the point.
+ *
+ * Renewals are banded too. Someone who bought Pro at $25 being asked $32 to
+ * keep receiving updates is a price rise wearing a renewal's clothes, and it
+ * is what this table did before it had bands.
+ */
+export const BAND_CENTS: Record<Band, Partial<Record<PlanId, number>>> = {
+  a: {
+    pro: 2500,
+    plus: 300,
+    studio: 9900,
+    team: 500,
+    renewal: 1000,
+    'renewal-studio': 3900,
+  },
+  b: {
+    pro: 3900,
+    plus: 500,
+    studio: 14900,
+    team: 700,
+    renewal: 1600,
+    'renewal-studio': 5900,
+  },
+  c: {
+    pro: 5500,
+    plus: 700,
+    studio: 20900,
+    team: 900,
+    renewal: 2200,
+    'renewal-studio': 8400,
+  },
+}
+
+/**
+ * India's rupee prices, in paise.
+ *
+ * A real second price, not a conversion of band A: Polar does not convert
+ * between currencies, so the rupee figure is what the card is charged and
+ * has to be a round number in its own right. These track band A at roughly
+ * ₹95/$ so the two ladders stay recognisably the same offer.
+ */
+export const IN_PAISE: Partial<Record<PlanId, number>> = {
+  pro: 240000,
+  plus: 29000,
+  studio: 950000,
+  team: 47500,
+  renewal: 95000,
+  'renewal-studio': 370000,
+}
+
+/**
+ * Build a region's overrides from a band and an env-var infix.
+ *
+ * The infix is what appears in POLAR_DISCOUNT_ID_<INFIX>_<PLAN>, so adding a
+ * band is one call here plus the ids `scripts/provision-polar.mts` prints.
+ *
+ * Ids are read from `process.env` at module load rather than inside the
+ * accessors. One read makes a missing id a boot-time fact instead of a
+ * per-request one, and nothing here can pick up a variable that arrives
+ * after the process starts either way.
+ */
+function bandOverrides(
+  band: Band,
+  infix: string,
+  paise: Partial<Record<PlanId, number>> = {},
+): Partial<Record<PlanId, RegionalOverride>> {
+  const out: Partial<Record<PlanId, RegionalOverride>> = {}
+  for (const [plan, cents] of Object.entries(BAND_CENTS[band]) as [PlanId, number][]) {
+    const key = plan.toUpperCase().replace('-', '_')
+    out[plan] = {
+      priceCents: cents,
+      discountId: process.env[`POLAR_DISCOUNT_ID_${infix}_${key}`] ?? null,
+      priceInrPaise: paise[plan] ?? null,
+      discountIdInr: process.env[`POLAR_DISCOUNT_ID_${infix}_${key}_INR`] ?? null,
+    }
+  }
+  return out
+}
+
+/**
  * Region-specific pricing.
  *
- * India: $79 is roughly 20% of a junior Indian developer's monthly take-home
- * — the same burden a ~$1,300 purchase would be to a US developer. The World
- * Bank PPP conversion factor for India sits near ₹23 per international dollar
- * against a ~₹96 market rate, which puts honest parity for Pro at $23-27.
- * Tailwind Plus reaches for the same ratio from the other direction, listing
- * India at roughly a third of its dollar price.
- *
- * Team is discounted too, but expect it to convert poorly regardless: RBI's
- * e-mandate rules make recurring cross-border card charges unreliable from
- * Indian cards, so renewals fail for reasons no price fixes. If Team-for-India
- * matters, sell it as a one-time annual license rather than a subscription.
+ * Team is discounted in every band, but expect India to convert poorly
+ * regardless: RBI's e-mandate rules make recurring cross-border card charges
+ * unreliable from Indian cards, so renewals fail for reasons no price fixes.
+ * If Team-for-India matters, sell it as a one-time annual license rather
+ * than a subscription. Brazil has a milder version of the same problem —
+ * domestic cards often decline international recurring charges — which is
+ * part of why the one-time tiers are the ones worth discounting hardest.
  */
 const REGIONAL: Record<Exclude<Region, 'default'>, Partial<Record<PlanId, RegionalOverride>>> = {
-  IN: {
-    pro: {
-      priceCents: 2500,
-      discountId: process.env.POLAR_DISCOUNT_ID_IN_PRO ?? null,
-      // ₹2,400 — $25 at the same ~₹95/$ the list price uses.
-      priceInrPaise: 240000,
-      discountIdInr: process.env.POLAR_DISCOUNT_ID_IN_PRO_INR ?? null,
-    },
-    plus: {
-      priceCents: 300,
-      discountId: process.env.POLAR_DISCOUNT_ID_IN_PLUS ?? null,
-      /** ₹290 per month. */
-      priceInrPaise: 29000,
-      discountIdInr: process.env.POLAR_DISCOUNT_ID_IN_PLUS_INR ?? null,
-    },
-    studio: {
-      priceCents: 9900,
-      discountId: process.env.POLAR_DISCOUNT_ID_IN_STUDIO ?? null,
-      /** ₹9,500 — $99 at the same ~₹95/$ the list price uses. */
-      priceInrPaise: 950000,
-      discountIdInr: process.env.POLAR_DISCOUNT_ID_IN_STUDIO_INR ?? null,
-    },
-    team: {
-      priceCents: 500,
-      discountId: process.env.POLAR_DISCOUNT_ID_IN_TEAM ?? null,
-      /** ₹475 per seat / month. */
-      priceInrPaise: 47500,
-      discountIdInr: process.env.POLAR_DISCOUNT_ID_IN_TEAM_INR ?? null,
-    },
-  },
+  IN: bandOverrides('a', 'IN', IN_PAISE),
+  'ppp-a': bandOverrides('a', 'PPP_A'),
+  'ppp-b': bandOverrides('b', 'PPP_B'),
+  'ppp-c': bandOverrides('c', 'PPP_C'),
 }
 
 /**
@@ -382,20 +484,30 @@ const REGIONAL: Record<Exclude<Region, 'default'>, Partial<Record<PlanId, Region
  * foreign-currency charges outright, and a rupee total is simply the number
  * the buyer can sanity-check against their own budget.
  *
+ * The other bands do not, and that is a decision rather than an omission.
+ * Each additional presentment currency is a second price on every product
+ * plus a second discount id on every plan in that band, and it only pays for
+ * itself where card-level friction is costing sales. India is the one place
+ * in this table where that is demonstrably true. Adding BRL later is a row
+ * here, a map shaped like `IN_PAISE`, and the ids the provisioning script
+ * prints.
+ *
  * Polar converts at its own rate at the moment of payment, which is why
  * every rupee figure we render stays labelled approximate: ours comes from
  * the pinned USD_TO_INR below and will not match to the rupee.
  *
- * null means "present in the product's own currency" (USD) — the behavior
- * for every other region, unchanged.
+ * null means "present in the product's own currency" (USD).
  */
 export type PresentmentCurrency = 'inr'
 
 const REGION_PRESENTMENT: Record<
   Exclude<Region, 'default'>,
-  PresentmentCurrency
+  PresentmentCurrency | null
 > = {
   IN: 'inr',
+  'ppp-a': null,
+  'ppp-b': null,
+  'ppp-c': null,
 }
 
 function overrideFor(planId: PlanId, region: Region): RegionalOverride | null {
@@ -421,6 +533,11 @@ export function presentmentCurrencyFor(
   region: Region,
 ): PresentmentCurrency | null {
   if (region === 'default') return null
+  // Most regions are charged in dollars, so there is nothing to present in
+  // and no discount to look for. Checked first because the alternative reads
+  // as "no INR discount configured" — the same null for a different reason,
+  // and the reason is what tells a deploy whether something is missing.
+  if (!REGION_PRESENTMENT[region]) return null
   const override = overrideFor(planId, region)
   return override?.discountIdInr ? REGION_PRESENTMENT[region] : null
 }
@@ -445,7 +562,7 @@ export function priceForRegion(planId: PlanId, region: Region): number {
  */
 export function priceInrForRegion(planId: PlanId, region: Region): number {
   const override = overrideFor(planId, region)
-  return override?.discountIdInr
+  return override?.discountIdInr && override.priceInrPaise !== null
     ? override.priceInrPaise
     : PLANS[planId].priceInrPaise
 }
