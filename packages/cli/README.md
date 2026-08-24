@@ -45,6 +45,8 @@ $ npx hoverlab add checkout-page
 | `search <words...>` | Search every tier at once (`--level` to narrow) |
 | `show <id...>` | Print an artifact's code without writing files |
 | `categories` | List the categories, per tier |
+| `skill [id]` | Install an agent skill into `.claude/skills`. With no id, lists them. |
+| `dna [id]` | Print the Design DNA — tokens, shape, motion, rules — for pasting into an AI tool |
 | `mcp` | Run the MCP server over stdio |
 
 ## Scaffolding a project
@@ -124,18 +126,41 @@ claude mcp add hoverlab -- npx -y hoverlab mcp
 }
 ```
 
-The server exposes eight tools. Four cover the whole catalog:
+The server exposes nine tools. Five cover the whole catalog:
 
 - **`search_catalog`** — free-text search across all four tiers at once
 - **`match_design`** — rank blocks and pages against a described design region (a Figma frame, a screenshot, a spec)
 - **`install_artifact`** — fetch an effect, block or page and write it into the project
 - **`init_template`** — scaffold a whole project from a template
+- **`get_design_dna`** — hand the agent the design system before it writes UI of its own
 
 And four are the original effect-only surface, kept because they carry the framework and recolouring knobs:
 
 - **`search_effects`**, **`get_effect`**, **`install_effect`**, **`list_categories`**
 
 Then just ask: *"find me a shimmering skeleton loader and add it"*, or *"build me a storefront"*.
+
+### Teaching the agent
+
+MCP gives an agent the tools; a skill gives it the judgement about when to reach for them. Install one and it stops hand-rolling components the catalog already has:
+
+```bash
+npx hoverlab skill hoverlab
+```
+
+That writes `.claude/skills/hoverlab/SKILL.md` — plain markdown, so any agent that reads a file can use it. `npx hoverlab skill` lists what is available; all of them are free.
+
+### Design DNA
+
+When there is genuinely nothing in the catalog and the agent has to write a component itself, it should still build against the same design system:
+
+```bash
+npx hoverlab dna                     # the whole system
+npx hoverlab dna saas-starter        # as that template uses it
+npx hoverlab dna --brand indigo --out design-dna.md
+```
+
+Colour tokens for both themes, radius, spacing, motion and the rules that keep generated UI consistent — plus the command that installs the real source. Agents get the same document from `get_design_dna`.
 
 ### Pairing with Figma
 

@@ -11,9 +11,11 @@ import { cn } from '@/lib/utils'
  * Sticky below the site header on desktop; a horizontally scrolling strip
  * on mobile rather than a collapsed menu, for the same reason the ladder
  * nav is — a menu you have to open is one a first-time reader does not know
- * exists. This used to say "four links fit"; at five the mobile strip starts
- * to scroll, which is the behaviour it was built for and still beats a
- * hidden menu. A sixth is the point to reconsider, not this one.
+ * exists. This used to say "four links fit", then five; at seven the mobile
+ * strip scrolls properly, which is the behaviour it was built for and still
+ * beats a hidden menu. The scroll is the signal that there is more, so the
+ * count at which this becomes a real problem is the count at which a reader
+ * stops finding the last entry — not a number worth guessing in advance.
  */
 const SECTIONS: Array<{ href: string; label: string; blurb: string }> = [
   { href: '/docs', label: 'Overview', blurb: 'What this is and how to install' },
@@ -21,6 +23,8 @@ const SECTIONS: Array<{ href: string; label: string; blurb: string }> = [
   { href: '/docs/api', label: 'API', blurb: 'The public /api/v1 surface' },
   { href: '/docs/mcp', label: 'MCP', blurb: 'Editor agents & Figma' },
   { href: '/docs/registry', label: 'Registry', blurb: 'npx shadcn add @hoverlab' },
+  { href: '/docs/dna', label: 'Design DNA', blurb: 'Tokens and rules for AI tools' },
+  { href: '/docs/skills', label: 'Skills', blurb: 'Teach your agent the catalog' },
 ]
 
 export function DocsNav() {

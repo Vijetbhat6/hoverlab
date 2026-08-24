@@ -7,12 +7,14 @@
  * install from* directly, which is distribution rather than a feature.
  *
  * The tool list is in two halves. `search_catalog` / `match_design` /
- * `install_artifact` / `init_template` cover all four tiers and are what an
- * agent should reach for — `match_design` being the entry point when the
- * request arrives as a design (a Figma frame read over the Figma MCP
- * server, a screenshot) rather than as words. The four effect-specific
- * tools predate them and stay because they carry the framework and
- * recolouring knobs the generic ones do not.
+ * `install_artifact` / `init_template` / `get_design_dna` cover all four
+ * tiers and are what an agent should reach for — `match_design` being the
+ * entry point when the request arrives as a design (a Figma frame read over
+ * the Figma MCP server, a screenshot) rather than as words, and
+ * `get_design_dna` the one to call before writing any UI by hand, so what
+ * the agent invents matches what the catalog installs. The four
+ * effect-specific tools predate them and stay because they carry the
+ * framework and recolouring knobs the generic ones do not.
  *
  * The protocol is hand-implemented rather than pulled from the official
  * SDK, deliberately: this package's headline command is
@@ -32,7 +34,9 @@ import {
   DEFAULT_ORIGIN,
   FRAMEWORKS,
   LEVELS,
+  getDna,
   getEffect,
+  reportInstall,
   searchAll,
   searchEffects,
   searchLevel,
@@ -330,6 +334,27 @@ const TOOLS = [
       additionalProperties: false,
     },
   },
+  {
+    name: 'get_design_dna',
+    description:
+      "The design system as a document to work from: colour tokens for both themes, radius, spacing, type, motion rules, and the rules that keep generated UI consistent. Call this BEFORE writing any UI of your own, so what you build matches what the catalog installs instead of inventing a second palette. Pass a catalog id to get the system as that artifact uses it, or omit it for the system on its own.",
+    inputSchema: {
+      type: 'object',
+      properties: {
+        id: {
+          type: 'string',
+          description:
+            'Any catalog id — effect, block, page or template. Omit for the whole system.',
+        },
+        brand: {
+          type: 'string',
+          description:
+            "Brand preset id to use for the accent colour, e.g. \"indigo\". Omit to keep the catalog's default.",
+        },
+      },
+      additionalProperties: false,
+    },
+  },
 ]
 
 /* ------------------------------------------------------------------ *
@@ -418,6 +443,11 @@ async function runInstallEffect(args) {
     force: args.force === true,
     customization: readCustomization(args),
   })
+
+  // Same counter the CLI feeds. An agent installing on someone's behalf is
+  // still a use, and leaving it out would make the Trending list a picture
+  // of humans only, which is not who this catalog is mostly serving now.
+  void reportInstall([written.effect.id])
 
   const lines = [
     `Installed ${written.effect.name} (${written.effect.id}) as ${written.framework}.`,
@@ -539,6 +569,8 @@ async function runInstallArtifact(args) {
     throw error
   }
 
+  void reportInstall([written.artifact.id, ...(written.included ?? [])])
+
   const lines = [
     `Installed ${written.artifact.name} (${written.artifact.id}) — ${written.level}.`,
     written.frameworkReason ? `Resolved from the project: ${written.frameworkReason}.` : null,
@@ -610,6 +642,8 @@ async function runInitTemplate(args) {
     force: args.force === true,
   })
 
+  void reportInstall([result.template.id])
+
   const lines = [
     `Scaffolded ${result.template.name} (${result.template.id}) into ${result.directory}.`,
     `${result.files.length} files.`,
@@ -633,6 +667,18 @@ async function runInitTemplate(args) {
   return lines.join('\n')
 }
 
+/**
+ * The design system, handed over whole.
+ *
+ * Returns the markdown verbatim rather than summarising it: the document
+ * is written to be read by a model, and every paraphrase would lose the
+ * exact token values that are the entire point.
+ */
+async function runGetDesignDna(args) {
+  const doc = await getDna(args.id || 'catalog', { brand: args.brand })
+  return doc.markdown
+}
+
 const HANDLERS = {
   search_effects: runSearchEffects,
   get_effect: runGetEffect,
@@ -642,6 +688,7 @@ const HANDLERS = {
   match_design: runMatchDesign,
   install_artifact: runInstallArtifact,
   init_template: runInitTemplate,
+  get_design_dna: runGetDesignDna,
 }
 
 const TOOLS_BY_NAME = new Map(TOOLS.map((tool) => [tool.name, tool]))

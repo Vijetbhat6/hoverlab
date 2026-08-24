@@ -15,7 +15,7 @@
 import { mkdir, readdir, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 
-import { getTemplate } from './api.mjs'
+import { getTemplate, assertUnlocked } from './api.mjs'
 import { safeRelativePath, WriteError } from './write.mjs'
 
 /** Entries that do not make a directory "occupied" for our purposes. */
@@ -53,7 +53,10 @@ export async function initTemplate({
   cwd = process.cwd(),
   dryRun = false,
 }) {
-  const data = await getTemplate(id)
+  // Checked before anything touches the filesystem: a locked payload
+  // carries a full description and no file bodies, so scaffolding it would
+  // create a directory holding nothing.
+  const data = assertUnlocked(await getTemplate(id))
 
   // Default to a folder named after the template rather than the current
   // directory. `npx hoverlab init storefront` in ~/code should not turn

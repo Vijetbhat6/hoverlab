@@ -12,10 +12,15 @@ import { createRequire } from 'node:module'
 import {
   commandAdd,
   commandCategories,
+  commandDna,
   commandHelp,
   commandInit,
+  commandLogin,
+  commandLogout,
   commandSearch,
   commandShow,
+  commandSkill,
+  commandWhoami,
 } from '../src/commands.mjs'
 import { FRAMEWORKS } from '../src/api.mjs'
 
@@ -25,6 +30,7 @@ const { version } = require('../package.json')
 /** Flags that take a value; everything else is boolean. */
 const VALUE_FLAGS = new Set([
   'framework', 'dir', 'category', 'limit', 'level', 'hue', 'sat', 'scale', 'speed',
+  'brand', 'out',
 ])
 
 /** Flags parsed as numbers rather than strings. */
@@ -143,6 +149,27 @@ async function main() {
     case 'categories':
     case 'list':
       await commandCategories(rest, flags)
+      return
+
+    case 'skill':
+    case 'skills':
+      await commandSkill(rest, flags)
+      return
+
+    case 'dna':
+      await commandDna(rest, flags)
+      return
+
+    case 'login':
+      await commandLogin(rest, flags)
+      return
+
+    case 'logout':
+      await commandLogout(rest, flags)
+      return
+
+    case 'whoami':
+      await commandWhoami(rest, flags)
       return
 
     case 'mcp': {

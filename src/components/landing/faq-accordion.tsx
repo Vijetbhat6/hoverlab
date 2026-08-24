@@ -68,8 +68,10 @@ const FAQ_ITEMS: FaqItem[] = [
         non-commercial work — learning, side projects, portfolios. A one-time
         Pro license covers client projects, paid products, and internal tools
         at a company, for anything in the catalog at any tier, with no
-        attribution required and nothing recurring to pay. Buy it once and it
-        stays yours, including future updates.
+        attribution required and nothing recurring to pay. Buy it once and the
+        licence is permanent — everything you have stays yours forever.
+        Catalog updates are included for twelve months; a renewal buys what
+        gets added after that, and skipping it takes nothing away.
       </>
     ),
   },

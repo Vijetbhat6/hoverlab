@@ -22,11 +22,17 @@
  *
  *   The promises under the field stay true. "Unsubscribe anytime" is
  *   backed by a token issued at signup and a route that honours it.
+ *
+ * Sending is still not wired up: there is no mail provider, so nothing goes
+ * out yet. The copy is written to match — it says what the email will be,
+ * not that one is coming this week — and the addresses are kept so the
+ * first send has a list to go to. See `lib/firebase/subscribers.ts`.
  */
 
 import * as React from 'react'
 import { Mail, Check, ArrowRight, ShieldCheck, AlertCircle } from 'lucide-react'
 import { Reveal } from '@/components/reveal'
+import { track } from '@/lib/analytics'
 
 /** Which surface the signup came from, for knowing what converts. */
 interface NewsletterSignupProps {
@@ -66,7 +72,14 @@ export function NewsletterSignup({ source = 'landing' }: NewsletterSignupProps) 
         return
       }
 
+      /*
+       * The route answers 200 whether or not the address was already on the
+       * list, so this state means "you are on the list" rather than "you
+       * were added just now" — which is the only thing the reader cares
+       * about, and the only thing we should tell an anonymous caller.
+       */
       setStatus('done')
+      track('newsletter_subscribed', { source })
     } catch {
       setError(
         'We could not reach the server, so nothing was saved. Check your connection and try again.',

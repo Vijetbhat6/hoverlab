@@ -79,6 +79,15 @@ export default function ApiDocsPage() {
               <C key="9">GET /api/v1/artifacts/{'{id}'}</C>,
               'Resolves an id against all four tiers — use this when you do not know the tier',
             ],
+            [
+              <C key="10">GET /api/v1/dna/{'{id}'}</C>,
+              'Design DNA — the tokens and rules as a document for an AI tool. Takes any id, or "catalog"',
+            ],
+            [<C key="11">GET /api/v1/skills</C>, 'The agent skills this catalog publishes'],
+            [
+              <C key="12">GET /api/v1/skills/{'{id}'}</C>,
+              'One skill; add ?format=raw for the markdown itself',
+            ],
           ]}
         />
       </DocsSection>

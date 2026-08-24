@@ -4,6 +4,7 @@ import * as React from 'react'
 import { Check, Copy, Atom } from 'lucide-react'
 import { toast } from 'sonner'
 import { track, type AnalyticsEvent } from '@/lib/analytics'
+import { reportUsage } from '@/lib/report-usage'
 import { useCopyHistory } from '@/hooks/use-copy-history'
 import { convertToReactComponent } from '@/lib/html-to-react'
 
@@ -139,6 +140,10 @@ export function CodeBlock({
         record({ id: effect.id, name: effect.name, category: effect.category })
         // Copies are the single strongest signal of which effects are
         // actually worth curating — this is the funnel's core event.
+        // The site's own counter, separate from PostHog: this is what
+        // /api/v1/trending sorts by, and it has to keep working on a
+        // deployment with no analytics key configured.
+        reportUsage(effect.id, 'copy')
         track('effect_copied', {
           effect_id: effect.id,
           category: effect.category,

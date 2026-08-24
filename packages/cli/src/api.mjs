@@ -5,6 +5,8 @@
  * since Node 18, which is also the floor for the CLI.
  */
 
+import { resolveKey } from './auth.mjs'
+
 export const DEFAULT_ORIGIN = process.env.HOVERLAB_API_URL || 'https://hoverlab.dev'
 
 export const FRAMEWORKS = [
@@ -53,8 +55,57 @@ class ApiError extends Error {
 
 export { ApiError }
 
+/**
+ * Raised when the catalog answered, but withheld the source.
+ *
+ * A distinct error rather than an ApiError with a 402, because the
+ * response is a 200: the artifact exists, its description is right there,
+ * and only the file bodies are missing. Callers that treat "no files" as a
+ * transport failure would tell the user to check their connection, which
+ * is the wrong instruction entirely.
+ */
+export class LicenseError extends Error {
+  constructor(message, { id, url, hint } = {}) {
+    super(message)
+    this.name = 'LicenseError'
+    this.id = id
+    this.url = url
+    this.hint = hint
+  }
+}
+
+/**
+ * Throw if a detail payload came back locked.
+ *
+ * Called by every path that is about to write files. Centralised so a new
+ * command cannot forget it and silently scaffold an empty directory.
+ */
+export function assertUnlocked(payload) {
+  if (!payload?.locked) return payload
+  throw new LicenseError(
+    payload.license?.message ?? 'That artifact needs a licence.',
+    {
+      id: payload.artifact?.id,
+      url: payload.license?.url,
+      hint: payload.license?.hint,
+    },
+  )
+}
+
 async function request(path, { origin = DEFAULT_ORIGIN, signal } = {}) {
   const url = `${origin.replace(/\/$/, '')}${path}`
+
+  /*
+   * The key is attached to every request, not only the ones that need it.
+   *
+   * Almost nothing here is gated — effects, blocks, pages and the free
+   * template answer identically with or without it — so the alternative is
+   * a per-endpoint list of which calls carry credentials, which drifts the
+   * first time a route changes. Sending it always costs one header and
+   * means a licensed user never sees "this needs a licence" while holding
+   * one. Callers with no key send no header at all.
+   */
+  const key = await resolveKey()
 
   let response
   try {
@@ -63,6 +114,7 @@ async function request(path, { origin = DEFAULT_ORIGIN, signal } = {}) {
       headers: {
         accept: 'application/json',
         'user-agent': 'hoverlab-cli',
+        ...(key ? { authorization: `Bearer ${key}` } : {}),
       },
     })
   } catch (cause) {
@@ -221,4 +273,73 @@ export async function getArtifact(
 /** Fetch one template — every file of the project it generates. */
 export async function getTemplate(id, options = {}) {
   return request(`/api/v1/templates/${encodeURIComponent(id)}`, options)
+}
+
+/* ------------------------------------------------------------------ *
+ *  Skills
+ * ------------------------------------------------------------------ */
+
+/**
+ * List the published agent skills.
+ *
+ * Fetched rather than bundled with this package, for the same reason the
+ * catalog is: a skill teaches an agent what the catalog can do, and a copy
+ * frozen at install time would teach it last quarter's answer.
+ */
+export async function listSkills(options = {}) {
+  const body = await request('/api/v1/skills', options)
+  return body.skills ?? []
+}
+
+/** One skill, including the markdown to write to disk. */
+export async function getSkill(id, options = {}) {
+  return request(`/api/v1/skills/${encodeURIComponent(id)}`, options)
+}
+
+/* ------------------------------------------------------------------ *
+ *  Design DNA
+ * ------------------------------------------------------------------ */
+
+/**
+ * Fetch the Design DNA document for an id (or the literal `catalog`).
+ *
+ * Returns the JSON envelope rather than the raw markdown, because the CLI
+ * wants the title and the token data alongside the file it writes.
+ */
+export async function getDna(id = 'catalog', { brand } = {}, options = {}) {
+  const params = new URLSearchParams()
+  if (brand) params.set('brand', brand)
+  const query = params.toString()
+  return request(`/api/v1/dna/${encodeURIComponent(id)}${query ? `?${query}` : ''}`, options)
+}
+
+/* ------------------------------------------------------------------ *
+ *  Usage reporting
+ * ------------------------------------------------------------------ */
+
+/**
+ * Tell the catalog an artifact was installed, so the Trending list means
+ * something.
+ *
+ * Deliberately silent and never awaited by callers on the critical path:
+ * an install that already wrote files to disk has succeeded, and a counter
+ * that could turn that into a visible error would be a worse trade than
+ * undercounting. Set HOVERLAB_NO_TELEMETRY=1 to switch it off — it sends
+ * only the artifact ids, but somebody's proxy logs are their business.
+ */
+export async function reportInstall(ids, { origin = DEFAULT_ORIGIN } = {}) {
+  if (process.env.HOVERLAB_NO_TELEMETRY) return
+  const list = (Array.isArray(ids) ? ids : [ids]).filter(Boolean)
+  if (!list.length) return
+
+  try {
+    await fetch(`${origin.replace(/\/$/, '')}/api/usage`, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json', 'user-agent': 'hoverlab-cli' },
+      body: JSON.stringify({ ids: list, kind: 'install' }),
+      signal: AbortSignal.timeout(2500),
+    })
+  } catch {
+    /* offline, blocked, slow — none of it matters to the install */
+  }
 }

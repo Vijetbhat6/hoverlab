@@ -10,12 +10,20 @@
  *
  * What it creates, mirroring src/lib/billing/plans.ts:
  *
- *   Hoverlab Pro    one-time, $59 and ₹5,600
- *   Hoverlab Team   recurring monthly, seat-based, $12 and ₹1,150 /seat
- *   India / Pro     $40 off Pro,  duration `once`
- *   India / Team    $7 off Team,  duration `forever`
- *   India / Pro ₹    ₹3,800 off Pro,  duration `once`
- *   India / Team ₹   ₹675 off Team,   duration `forever`
+ *   Hoverlab Pro     one-time, $79 and ₹7,500
+ *   Hoverlab Pro+    recurring monthly, $9 and ₹850
+ *   Hoverlab 500 credits    one-time, $5 and ₹475
+ *   Hoverlab 2,000 credits  one-time, $15 and ₹1,425
+ *   Hoverlab Studio  one-time, ten seats, $299 and ₹28,000
+ *   Hoverlab Team    recurring monthly, seat-based, $12 and ₹1,150 /seat
+ *   India / Pro      $54 off Pro,     duration `once`
+ *   India / Pro+     $6 off Pro+,     duration `forever`
+ *   India / Studio   $200 off Studio, duration `once`
+ *   India / Team     $7 off Team,     duration `forever`
+ *   India / Pro ₹     ₹5,100 off Pro,     duration `once`
+ *   India / Pro+ ₹    ₹560 off Pro+,      duration `forever`
+ *   India / Studio ₹  ₹18,500 off Studio, duration `once`
+ *   India / Team ₹    ₹675 off Team,      duration `forever`
  *
  * The discounts are FIXED amounts rather than percentages because the plan
  * catalog uses round numbers: 68% off $59 is $18.88, so a percentage would
@@ -36,6 +44,14 @@
  * one update it performs is adding a rupee price to a product that has none,
  * and even that refuses to run if the product's existing dollar price does
  * not match what the catalog declares (see `ensureInrPrice`).
+ *
+ * That idempotency has a sharp edge, so the script now reports on it: when a
+ * price in this file changes, an organization that already has the product
+ * keeps charging the OLD amount while the site advertises the new one. The
+ * run prints a `! price drift` line for every product and discount whose
+ * live amount disagrees with the catalog. Fixing it is a dashboard edit —
+ * deliberately not automated, because rewriting a live price is not
+ * something a script re-run should be able to do by accident.
  */
 
 import { readFileSync, existsSync } from 'node:fs'
@@ -82,12 +98,20 @@ const server: 'sandbox' | 'production' =
 const polar = new Polar({ accessToken, server })
 
 const PRO_NAME = 'Hoverlab Pro'
+const PLUS_NAME = 'Hoverlab Pro+'
+const STUDIO_NAME = 'Hoverlab Studio'
 const TEAM_NAME = 'Hoverlab Team'
+const RENEWAL_NAME = 'Hoverlab Pro updates renewal'
+const RENEWAL_STUDIO_NAME = 'Hoverlab Studio updates renewal'
 const DISCOUNT_PRO_NAME = 'India / Pro'
+const DISCOUNT_PLUS_NAME = 'India / Pro+'
+const DISCOUNT_STUDIO_NAME = 'India / Studio'
 const DISCOUNT_TEAM_NAME = 'India / Team'
 // Separate names so the currency pairs are distinguishable in the dashboard —
 // matching is by name, and two same-named discounts would collide.
 const DISCOUNT_PRO_INR_NAME = 'India / Pro (INR)'
+const DISCOUNT_PLUS_INR_NAME = 'India / Pro+ (INR)'
+const DISCOUNT_STUDIO_INR_NAME = 'India / Studio (INR)'
 const DISCOUNT_TEAM_INR_NAME = 'India / Team (INR)'
 
 /** Collect a paginated Polar list into a plain array. */
@@ -107,9 +131,14 @@ async function main() {
   // a live one. Matching against them would either link the app to a dead
   // product or make an existing product look absent.
   const products = allProducts.filter((p) => !p.isArchived)
-  const discounts = await collect<{ id: string; name: string }>(
-    await polar.discounts.list({ limit: 100 }),
-  )
+  // amount/currency come along so a discount whose value no longer matches
+  // the catalog can be reported rather than silently kept.
+  const discounts = await collect<{
+    id: string
+    name: string
+    amount?: number
+    currency?: string
+  }>(await polar.discounts.list({ limit: 100 }))
 
   /**
    * Match on name, case- and whitespace-insensitively.
@@ -125,8 +154,17 @@ async function main() {
     )
 
   const results: Record<string, string> = {}
+  /** Every mismatch found this run, reported together at the end. */
+  const drift: string[] = []
 
-  /** Create a product unless one with that name already exists. */
+  /**
+   * Create a product unless one with that name already exists.
+   *
+   * When it does exist, its live price is compared against what this script
+   * would have created. They can only disagree because someone changed one
+   * of them, and the direction that matters is a catalog price that moved:
+   * the site would advertise the new figure while Polar charged the old one.
+   */
   async function ensureProduct(
     name: string,
     envKey: string,
@@ -136,6 +174,7 @@ async function main() {
     if (existing) {
       console.log(`= ${name} already exists (${existing.id})`)
       results[envKey] = existing.id
+      await reportPriceDrift(name, existing.id, body.prices ?? [])
       return existing.id
     }
     if (dryRun) {
@@ -152,12 +191,94 @@ async function main() {
   const proId = await ensureProduct(PRO_NAME, 'POLAR_PRODUCT_ID_PRO', {
     name: PRO_NAME,
     description:
-      'One-time commercial license for the full Hoverlab effect catalog, ' +
-      'every export format, and all future updates.',
+      'One-time commercial license for the full Hoverlab catalog, every ' +
+      'export format, and twelve months of catalog updates. The license ' +
+      'itself is perpetual — everything you have stays yours.',
     recurringInterval: null,
     prices: [
-      { amountType: 'fixed', priceAmount: 5900, priceCurrency: 'usd' },
-      { amountType: 'fixed', priceAmount: 560000, priceCurrency: 'inr' },
+      { amountType: 'fixed', priceAmount: 7900, priceCurrency: 'usd' },
+      { amountType: 'fixed', priceAmount: 750000, priceCurrency: 'inr' },
+    ],
+  })
+
+  const plusId = await ensureProduct(PLUS_NAME, 'POLAR_PRODUCT_ID_PLUS', {
+    name: PLUS_NAME,
+    description:
+      'Monthly allowance of 500 AI credits for generating CSS variations. ' +
+      'An add-on to any plan — it grants no catalog rights of its own.',
+    recurringInterval: 'month',
+    prices: [
+      { amountType: 'fixed', priceAmount: 900, priceCurrency: 'usd' },
+      { amountType: 'fixed', priceAmount: 85000, priceCurrency: 'inr' },
+    ],
+  })
+
+  // Credit packs. Deliberately plain one-time products with no discounts:
+  // a $5 purchase does not need a regional price, and the rupee figure is
+  // set on the product rather than reached through a discount, so there is
+  // no way for the advertised and charged amounts to disagree.
+  const packIds: Record<string, string> = {}
+  for (const pack of [
+    { env: 'POLAR_PRODUCT_ID_CREDITS_500', name: 'Hoverlab 500 credits', usd: 500, inr: 47500, credits: 500 },
+    { env: 'POLAR_PRODUCT_ID_CREDITS_2000', name: 'Hoverlab 2,000 credits', usd: 1500, inr: 142500, credits: 2000 },
+  ]) {
+    packIds[pack.env] = await ensureProduct(pack.name, pack.env, {
+      name: pack.name,
+      description: `${pack.credits.toLocaleString('en-US')} AI credits. One-time purchase, never expires.`,
+      recurringInterval: null,
+      prices: [
+        { amountType: 'fixed', priceAmount: pack.usd, priceCurrency: 'usd' },
+        { amountType: 'fixed', priceAmount: pack.inr, priceCurrency: 'inr' },
+      ],
+    })
+  }
+
+  const studioId = await ensureProduct(STUDIO_NAME, 'POLAR_PRODUCT_ID_STUDIO', {
+    name: STUDIO_NAME,
+    description:
+      'One-time commercial license covering ten people. Everything Pro ' +
+      'grants, for a whole team, with no renewal.',
+    // One-time and NOT seat-based: the ten seats are a property of the
+    // license, not a quantity the buyer picks, so Polar sells one thing at
+    // one price and the seat count lives in the app's plan catalog.
+    recurringInterval: null,
+    prices: [
+      { amountType: 'fixed', priceAmount: 29900, priceCurrency: 'usd' },
+      { amountType: 'fixed', priceAmount: 2800000, priceCurrency: 'inr' },
+    ],
+  })
+
+  /*
+   * Renewals. Not licences — each buys another twelve months of catalog
+   * updates on a licence already held, priced at ~40% of the plan it
+   * renews. Two products rather than one because a Studio holder renewing
+   * at the Pro price would be a mispricing bug, not a discount.
+   *
+   * The checkout route refuses a renewal to anyone not holding the matching
+   * licence, so these being live cannot produce an orphaned purchase.
+   */
+  await ensureProduct(RENEWAL_NAME, 'POLAR_PRODUCT_ID_RENEWAL', {
+    name: RENEWAL_NAME,
+    description:
+      'Twelve more months of catalog updates on an existing Hoverlab Pro ' +
+      'license. Not a license on its own — everything you already have ' +
+      'stays yours whether or not you renew.',
+    recurringInterval: null,
+    prices: [
+      { amountType: 'fixed', priceAmount: 3200, priceCurrency: 'usd' },
+      { amountType: 'fixed', priceAmount: 300000, priceCurrency: 'inr' },
+    ],
+  })
+
+  await ensureProduct(RENEWAL_STUDIO_NAME, 'POLAR_PRODUCT_ID_RENEWAL_STUDIO', {
+    name: RENEWAL_STUDIO_NAME,
+    description:
+      'Twelve more months of catalog updates on an existing Hoverlab ' +
+      'Studio license, covering all ten seats.',
+    recurringInterval: null,
+    prices: [
+      { amountType: 'fixed', priceAmount: 12000, priceCurrency: 'usd' },
+      { amountType: 'fixed', priceAmount: 1120000, priceCurrency: 'inr' },
     ],
   })
 
@@ -265,6 +386,42 @@ async function main() {
     console.log(`+ added INR price to ${name}`)
   }
 
+  /**
+   * Compare a live product's prices against the catalog and record any
+   * disagreement. Reports only — see the header for why re-pricing a live
+   * product is a dashboard decision rather than a scripted one.
+   */
+  async function reportPriceDrift(
+    name: string,
+    productId: string,
+    wanted: readonly unknown[],
+  ) {
+    if (productId === '<dry-run>') return
+
+    const product = await polar.products.get({ id: productId })
+    const live = (product.prices ?? []).filter((p) => !p.isArchived) as unknown as Record<
+      string,
+      unknown
+    >[]
+
+    for (const price of wanted as Record<string, unknown>[]) {
+      const currency = price.priceCurrency
+      const match = live.find((p) => p.priceCurrency === currency)
+      // No live price in that currency is not drift — it is what
+      // `ensureInrPrice` exists to fix.
+      if (!match) continue
+
+      const want = price.amountType === 'fixed' ? price.priceAmount : seatPrice(price)
+      const have = match.amountType === 'fixed' ? match.priceAmount : seatPrice(match)
+      if (want === have) continue
+
+      drift.push(
+        `${name} (${String(currency).toUpperCase()}): Polar charges ` +
+          `${String(have)}, the catalog says ${String(want)}`,
+      )
+    }
+  }
+
   /** Per-seat amount out of either a request or response shaped price. */
   function seatPrice(price: Record<string, unknown>): number | null {
     const tiers = (price.seatTiers as { tiers?: { pricePerSeat?: number }[] } | undefined)
@@ -291,6 +448,14 @@ async function main() {
     if (existing) {
       console.log(`= ${name} already exists (${existing.id})`)
       results[envKey] = existing.id
+      // A regional price is list price minus this amount, so a stale
+      // discount advertises one number and charges another — the same
+      // failure `priceForRegion`'s guard exists to prevent.
+      if (typeof existing.amount === 'number' && existing.amount !== amountMinor) {
+        drift.push(
+          `${name}: Polar takes off ${existing.amount}, the catalog says ${amountMinor}`,
+        )
+      }
       return
     }
     const shown =
@@ -322,8 +487,20 @@ async function main() {
   await ensureInrPrice(
     PRO_NAME,
     proId,
-    { amountType: 'fixed', priceAmount: 5900, priceCurrency: 'usd' },
-    { amountType: 'fixed', priceAmount: 560000, priceCurrency: 'inr' },
+    { amountType: 'fixed', priceAmount: 7900, priceCurrency: 'usd' },
+    { amountType: 'fixed', priceAmount: 750000, priceCurrency: 'inr' },
+  )
+  await ensureInrPrice(
+    PLUS_NAME,
+    plusId,
+    { amountType: 'fixed', priceAmount: 900, priceCurrency: 'usd' },
+    { amountType: 'fixed', priceAmount: 85000, priceCurrency: 'inr' },
+  )
+  await ensureInrPrice(
+    STUDIO_NAME,
+    studioId,
+    { amountType: 'fixed', priceAmount: 29900, priceCurrency: 'usd' },
+    { amountType: 'fixed', priceAmount: 2800000, priceCurrency: 'inr' },
   )
   await ensureInrPrice(
     TEAM_NAME,
@@ -346,15 +523,41 @@ async function main() {
     },
   )
 
-  await ensureDiscount(DISCOUNT_PRO_NAME, 'POLAR_DISCOUNT_ID_IN_PRO', proId, 4000, 'once')
+  await ensureDiscount(DISCOUNT_PRO_NAME, 'POLAR_DISCOUNT_ID_IN_PRO', proId, 5400, 'once')
+  // `forever`, like Team's: with `once` an Indian subscriber would pay $3
+  // in month one and $9 from month two, which is a trial, not a price.
+  await ensureDiscount(DISCOUNT_PLUS_NAME, 'POLAR_DISCOUNT_ID_IN_PLUS', plusId, 600, 'forever')
+  await ensureDiscount(
+    DISCOUNT_STUDIO_NAME,
+    'POLAR_DISCOUNT_ID_IN_STUDIO',
+    studioId,
+    20000,
+    'once',
+  )
   await ensureDiscount(DISCOUNT_TEAM_NAME, 'POLAR_DISCOUNT_ID_IN_TEAM', teamId, 700, 'forever')
-  // ₹5,600 − ₹3,800 = ₹1,800, and ₹1,150 − ₹675 = ₹475 per seat: the same
-  // ladder as the dollar prices, at roughly ₹95/$.
+  // ₹7,500 − ₹5,100 = ₹2,400, ₹28,000 − ₹18,500 = ₹9,500, and ₹1,150 − ₹675
+  // = ₹475 per seat: the same ladder as the dollar prices, at roughly ₹95/$.
   await ensureDiscount(
     DISCOUNT_PRO_INR_NAME,
     'POLAR_DISCOUNT_ID_IN_PRO_INR',
     proId,
-    380000,
+    510000,
+    'once',
+    'inr',
+  )
+  await ensureDiscount(
+    DISCOUNT_PLUS_INR_NAME,
+    'POLAR_DISCOUNT_ID_IN_PLUS_INR',
+    plusId,
+    56000,
+    'forever',
+    'inr',
+  )
+  await ensureDiscount(
+    DISCOUNT_STUDIO_INR_NAME,
+    'POLAR_DISCOUNT_ID_IN_STUDIO_INR',
+    studioId,
+    1850000,
     'once',
     'inr',
   )
@@ -366,6 +569,16 @@ async function main() {
     'forever',
     'inr',
   )
+
+  if (drift.length) {
+    console.log(
+      '\n! price drift — Polar and src/lib/billing/plans.ts disagree:\n' +
+        drift.map((line) => `    ${line}`).join('\n') +
+        '\n\n  The site advertises the catalog figure and Polar charges its own.' +
+        '\n  Fix it in the Polar dashboard (Products → price, Discounts → amount);' +
+        '\n  this script will not rewrite a live price.',
+    )
+  }
 
   console.log('\nPaste into .env.local:\n')
   for (const [key, value] of Object.entries(results)) {

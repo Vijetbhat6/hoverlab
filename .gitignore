@@ -57,8 +57,6 @@ dev.out.log
 prompt
 
 server.log
-# Skills directory
-/skills/
 # agent screenshot/verification artifacts
 /tool-results
 

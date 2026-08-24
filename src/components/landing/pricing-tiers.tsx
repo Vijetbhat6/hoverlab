@@ -1,14 +1,25 @@
 'use client'
 
 /**
- * <PricingTiers> — 3-tier pricing (Free / Pro / Team), all purchasable.
+ * <PricingTiers> — 4-tier pricing (Free / Pro / Studio / Team), all
+ * purchasable.
  *
- * The two paid plans are deliberately different shapes:
- *   Pro  — ONE-TIME $59. Individual devs won't subscribe for CSS snippets
- *          they can get free elsewhere, but this market does pay once to
- *          own the source outright (cf. Tailwind Plus, Magic UI Pro).
- *   Team — $12 per seat / month. Seats and shared state are what companies
- *          actually pay recurring money for.
+ * The three paid plans are deliberately different shapes:
+ *   Pro    — ONE-TIME $79. Individual devs won't subscribe for CSS snippets
+ *            they can get free elsewhere, but this market does pay once to
+ *            own the source outright (cf. Tailwind Plus, Magic UI Pro).
+ *   Studio — ONE-TIME $299 for ten seats. The same license bought for a
+ *            whole team, because that is how this market sells to teams
+ *            (Preline $459/15, Tailkit $549/10, Aceternity $1,590/10) — and
+ *            a team that compares a subscription against buying Pro n times
+ *            buys Pro n times.
+ *   Team   — $12 per seat / month. Seats and shared state are what companies
+ *            actually pay recurring money for.
+ *
+ * Pro+ is sold here too, but as a line of copy under the table rather than
+ * a fifth column. It grants no catalog rights — it is a monthly AI credit
+ * allowance — so giving it a card would make the licence comparison harder
+ * in order to advertise a meter.
  *
  * Prices, buyability and the display currency all come from usePricing() —
  * see that hook for why region and purchasability have to come from the
@@ -42,6 +53,7 @@ import { usePricing, type Currency } from '@/hooks/use-pricing'
 import { track } from '@/lib/analytics'
 import { cn } from '@/lib/utils'
 import { PLANS, USD_TO_INR, type PlanId } from '@/lib/billing/plans'
+import { DAILY_EXPORTS } from '@/lib/billing/quota-limits'
 import { TOTAL_COUNT } from '@/lib/catalog-stats'
 import { CATEGORIES } from '@/lib/effect-types'
 import { BLOCK_COUNT } from '@/lib/blocks/block-index'
@@ -96,12 +108,22 @@ const TIERS: Tier[] = [
       // They shipped without ever reaching this list, so a visitor comparing
       // plans saw a catalog of loose CSS snippets and none of the blocks,
       // pages or whole starter projects sitting above them.
-      `${BLOCK_COUNT} blocks, ${PAGE_COUNT} pages, ${TEMPLATE_COUNT} templates — full source`,
+      // Split, now that the top rung is not all free. Naming the free
+      // template rather than saying "1 template" matters: the pitch is that
+      // you get a whole runnable project to judge the others by, and a bare
+      // count does not say that.
+      `${BLOCK_COUNT} blocks and ${PAGE_COUNT} pages — full source`,
+      'One complete template, free — the Marketing Site project',
       'CLI and public API — npx hoverlab add <id>',
       'Live customization sliders',
+      'HTML, CSS and React exports',
       'Save favorites (sync across devices)',
       'Bundle up to 10 effects',
-      'Export bundles as CSS, HTML, or ZIP',
+      // The daily cap is named on the card rather than discovered at the
+      // download button. A limit a visitor finds out about by hitting it
+      // reads as the product breaking; a limit on the pricing page reads as
+      // the free tier being finite, which is the honest description.
+      `Export bundles as CSS, HTML, or ZIP — ${DAILY_EXPORTS.free} a day`,
       'PWA — installable, offline-ready',
       // Links out rather than asserting. This line and the docs used to
       // disagree about whether free covers commercial work; /licence is now
@@ -123,28 +145,66 @@ const TIERS: Tier[] = [
       // Scoped to the catalog, not to effects: the licence has always covered
       // whatever you ship, and three of the four rungs did not exist when
       // this line was written.
-      'Commercial use — every effect, block, page and template',
+      // First line on the card, because it is the one thing on it that a
+      // free user does not already have. The licence follows it.
+      `All ${TEMPLATE_COUNT} templates — complete, runnable projects`,
+      'Commercial licence — every effect, block, page and template',
       'Client work, paid products, no attribution',
-      // The one product limit that is a real wall: PUT /api/sync/bundle
-      // caps a free account at ten saved items and says so.
-      'Unlimited bundle size, synced across devices',
-      // Removed from this list rather than fixed:
+      // The certificate, named on the card. The licence was always the
+      // thing being sold and the buyer received nothing they could show
+      // for it, which is a strange way to sell the one part of this that
+      // copying the source does not get you. See /license.
+      'A dated licence certificate to forward to whoever asks',
+      'Unlimited bundle size',
+      // The meter, not the formats, is the honest wall here. A free
+      // account gets ten exports a UTC day (DAILY_EXPORTS in
+      // billing/quota-limits.ts) and the licence removes the counter.
+      'Unlimited exports — no daily cap',
+      // Named rather than summarised as "every format": the free tier has
+      // three of them, so "every" only means something next to a list.
       //
-      //   "Every export format (Vue, Svelte, Tailwind)" — every format is
-      //   free and always has been. `/api/v1` is public and unauthenticated
-      //   so `npx hoverlab add --framework vue` works with no account, by
-      //   design (see lib/billing/plans.ts). Gating the website's export
-      //   panel while the CLI hands the same file to anyone would be a wall
-      //   made of paper, and charging for it would be a lie.
-      //
-      //   "Custom brand color presets" — the brand picker recolours this
-      //   site's own chrome on /tools. It is a preference, not a product.
-      //
-      //   "Private collections" — no such feature exists in the codebase.
-      //   It is listed below as `soon`, the same treatment Team's unbuilt
-      //   features already get, instead of with a green check.
-      'All future updates included',
-      { label: 'Private collections', soon: true as const },
+      // This one is a product boundary on the website, not a lock, and the
+      // card should never be written as though it were: `/api/v1` and the
+      // CLI hand every format to any caller on purpose, which the footnote
+      // below says out loud. FREE_FRAMEWORK_IDS in lib/export/index.ts
+      // carries the same admission at the point it is enforced.
+      'Vue, Svelte, styled-components and Tailwind exports',
+      'Save your brand colors to your account',
+      // The one Pro feature whose output does not exist until a customer
+      // asks for it. Named on the card because it is the strongest answer
+      // to "why pay for code I can copy".
+      'Export your brand as a design system — CSS, Tailwind, Figma',
+      'Private collections, synced across machines',
+      // The key is a feature, not plumbing: it is what makes the licence
+      // work in CI and in an agent, which is where this audience lives.
+      'A licence key for the CLI, MCP and the API',
+      // Was "All future updates included". Bounded, and said on the card
+      // rather than discovered on the certificate — a term a buyer finds
+      // out about after paying is a term that costs more in trust than it
+      // recovers in revenue. See `updateWindowMonths` in billing/plans.ts.
+      'Twelve months of catalog updates — what you have stays yours',
+    ],
+  },
+  {
+    id: 'studio',
+    name: 'Studio',
+    period: 'once — 10 seats',
+    tagline: 'For agencies and product teams who all ship from one catalog.',
+    cta: 'Buy Studio',
+    ctaVariant: 'outline',
+    badge: 'One-time payment',
+    features: [
+      'Everything in Pro, for 10 people',
+      // The arithmetic is the pitch, so it is on the card rather than left
+      // for the buyer to do: ten Pro licenses is $790.
+      'Ten seats for the price of under four Pro licenses',
+      'Invite your team with a workspace code',
+      'One invoice, one license, no renewals',
+      // Was "All future updates included". Bounded, and said on the card
+      // rather than discovered on the certificate — a term a buyer finds
+      // out about after paying is a term that costs more in trust than it
+      // recovers in revenue. See `updateWindowMonths` in billing/plans.ts.
+      'Twelve months of catalog updates — what you have stays yours',
     ],
   },
   {
@@ -157,7 +217,12 @@ const TIERS: Tier[] = [
     features: [
       'Everything in Pro, for every seat',
       'Priority email support',
-      { label: 'Shared brand color library', soon: true },
+      // No longer `soon`. teams/{id}/brandPresets, /api/team/brand-presets
+      // and the shared strip in the brand picker are real; requireTeam
+      // gates it on a live subscription, and Studio deliberately does not
+      // qualify. This was the one of Team's four differentiators worth a
+      // recurring charge, so it is the one that got built.
+      'Shared brand library — one palette, everyone on the workspace',
       { label: 'Shared collections and bundles', soon: true },
       { label: 'Workspace-wide theming', soon: true },
       { label: 'Seat management', soon: true },
@@ -319,7 +384,11 @@ export function PricingTiers({ className }: { className?: string } = {}) {
    * Per-plan underneath, but the tiers move together — both are provisioned
    * by the same script run — and the page-level copy needs one answer.
    */
-  const rupeeCheckout = chargedInInr('pro') || chargedInInr('team')
+  const rupeeCheckout =
+    chargedInInr('pro') || chargedInInr('studio') || chargedInInr('team')
+
+  /** Pro+ has no tier card, so its price is read for the add-on line. */
+  const plusPrice = headlineFor('plus')
 
   /**
    * Which tiers this account already holds.
@@ -333,6 +402,11 @@ export function PricingTiers({ className }: { className?: string } = {}) {
     if (!signedIn || !entitlements) return 'unknown'
     if (id === 'free') return entitlements.plan === 'free' ? 'owned' : 'available'
     if (id === 'pro') return entitlements.canUseProFeatures ? 'owned' : 'available'
+    // Studio and Team are distinct purchases, not rungs: a Studio license
+    // does not include the shared workspace, and a Team subscriber who wants
+    // to stop renewing can still buy Studio. Only the plan you actually hold
+    // reads as owned.
+    if (id === 'studio') return entitlements.hasStudio ? 'owned' : 'available'
     return entitlements.hasTeam ? 'owned' : 'available'
   }
 
@@ -350,14 +424,15 @@ export function PricingTiers({ className }: { className?: string } = {}) {
           Simple, honest pricing
         </div>
         <h2 className="text-balance text-3xl font-bold tracking-tight sm:text-4xl">
-          Free forever. Pro once. Team by the seat.
+          Free forever. Pro once. Studio for ten. Team by the seat.
         </h2>
         <p className="mt-3 text-muted-foreground">
           Every rung of the ladder — effects, blocks, pages and templates — is
           free to browse, customize and copy for personal projects, and none
           of it moves behind a login. Pro is a single payment that covers
-          commercial work for good; Team puts that on a per-seat plan, with
-          shared brand tokens and seat management on the way.
+          commercial work for good, Studio is that same license bought once
+          for ten people, and Team puts it on a per-seat plan with shared
+          brand tokens and seat management on the way.
         </p>
 
         {/*
@@ -398,7 +473,9 @@ export function PricingTiers({ className }: { className?: string } = {}) {
         </div>
       </Reveal>
 
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+      {/* Four tiers: two up at tablet width, four across on desktop. A
+          three-column grid would orphan Team onto its own row. */}
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {TIERS.map((tier, i) => (
           <Reveal
             key={tier.name}
@@ -528,7 +605,7 @@ export function PricingTiers({ className }: { className?: string } = {}) {
           support, and the CLI and public API are open to everyone — every
           export format included. Free covers personal and non-commercial
           projects; shipping anything from the catalog in client work or a
-          paid product needs Pro or Team. The{' '}
+          paid product needs Pro, Studio or Team. The{' '}
           <Link href="/licence" className="font-medium text-primary hover:underline">
             licence
           </Link>{' '}
@@ -544,8 +621,51 @@ export function PricingTiers({ className }: { className?: string } = {}) {
         <p className="mt-2 text-xs text-muted-foreground">
           Lines marked <span className="font-semibold">Coming</span> are on the
           roadmap and not available yet. A Team seat today grants the full Pro
-          feature set for every member, plus priority support; the shared
-          workspace features ship later this year.
+          feature set for every member, priority support, and the shared brand
+          library; shared collections, workspace theming and seat management
+          ship later this year.
+        </p>
+        {/*
+          Pro+ deliberately has no column. It grants no catalog rights, so a
+          fifth tier would make the licence decision harder in order to sell
+          a meter — it belongs beside the table, as an add-on to whatever
+          the reader picks.
+        */}
+        <p className="mt-4 text-sm text-muted-foreground">
+          <span className="font-semibold text-foreground">
+            Pro+ — {plusPrice}/month
+          </span>{' '}
+          adds 500 AI credits a month on top of any plan, including Free.
+          Credits buy three things: a variation or an edit of any effect
+          (1 credit), a recolour of one onto your brand (1), and a whole
+          section composed from a brief in your design tokens (3). Browsing,
+          copying, the CLI and the API stay free and unmetered. Everyone
+          gets five free generations a day without it.
+        </p>
+
+        {/*
+          The licence, linked before the buy button rather than after it.
+
+          It is the whole answer to the obvious objection — that the code is
+          free to copy, so why pay — and until it had a page, it was a bullet
+          point on a card. Nobody's legal team approves a bullet point.
+        */}
+        <p className="mt-4 text-sm text-muted-foreground">
+          Everything here is free to read, copy and modify under the{' '}
+          <Link href="/license" className="font-medium text-primary hover:underline">
+            free licence
+          </Link>
+          . What Pro, Studio and Team add is the commercial one — permission
+          to ship the result in work you are paid for, with a dated
+          certificate you can forward. Both are written out in full.
+        </p>
+
+        {/* The one thing a buyer could reasonably get wrong about the two
+            team-shaped plans, said before they pick one. */}
+        <p className="mt-2 text-xs text-muted-foreground">
+          Studio is a license, not a workspace: it covers ten people with the
+          full Pro feature set and never renews. The shared brand library and
+          shared collections belong to Team.
         </p>
         {rupeeCheckout ? (
           <p className="mt-2 text-xs text-muted-foreground">

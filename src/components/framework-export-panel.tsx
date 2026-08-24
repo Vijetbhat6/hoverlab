@@ -1,17 +1,23 @@
 'use client'
 
 import * as React from 'react'
-import { Terminal, Check, Copy, HelpCircle } from 'lucide-react'
+import Link from 'next/link'
+import { Terminal, Check, Copy, HelpCircle, Lock } from 'lucide-react'
 import { toast } from 'sonner'
 
 import { CodeBlock } from '@/components/code-block'
+import { useEntitlements } from '@/hooks/use-entitlements'
 import {
   FRAMEWORKS,
   exportEffect,
+  frameworkForPlan,
+  frameworkMeta,
   isFrameworkId,
+  isProFramework,
   pascalCase,
   type FrameworkId,
 } from '@/lib/export'
+import { track } from '@/lib/analytics'
 import { cn } from '@/lib/utils'
 
 /**
@@ -25,6 +31,12 @@ import { cn } from '@/lib/utils'
  *
  * The generated source is derived from the *customized* CSS, so whatever
  * the preview is showing is what you copy.
+ *
+ * HTML, CSS and React are free. Vue, Svelte, styled-components and Tailwind
+ * are the Pro targets — see FREE_FRAMEWORK_IDS in lib/export for where that
+ * line is drawn and why. A locked target still renders its tab: hiding it
+ * would hide the reason to upgrade, and a visitor who cannot see that Svelte
+ * exists cannot want it.
  */
 
 const STORAGE_KEY = 'hoverlab:framework'
@@ -209,25 +221,52 @@ export function FrameworkExportPanel({
   isCustomized = false,
   surface = 'detail',
 }: FrameworkExportPanelProps) {
-  const [framework, setFramework] = React.useState<FrameworkId>('css')
+  const [picked, setPicked] = React.useState<FrameworkId>('css')
   const [copiedInstall, setCopiedInstall] = React.useState(false)
+  const { entitlements } = useEntitlements()
+  const canUsePro = entitlements?.canUseProFeatures ?? false
 
   // Read from localStorage after mount rather than in the initializer, so
   // the server and first client render agree and React doesn't rehydrate
   // into a mismatch.
   React.useEffect(() => {
     const stored = readStoredFramework()
-    if (stored) setFramework(stored)
+    if (stored) setPicked(stored)
   }, [])
 
-  const selectFramework = React.useCallback((next: FrameworkId) => {
-    setFramework(next)
-    try {
-      window.localStorage.setItem(STORAGE_KEY, next)
-    } catch {
-      /* preference is a nicety, never a failure */
-    }
-  }, [])
+  /*
+   * What actually gets generated.
+   *
+   * Clamped rather than trusted, because the stored preference outlives the
+   * entitlement: someone who used Vue on a Pro account, then let a Studio
+   * seat lapse, has 'vue' in localStorage and would otherwise keep getting
+   * Pro output forever. Entitlements also arrive a beat after mount, so this
+   * settles on the free target first and widens once they land — never the
+   * other way round.
+   */
+  const framework = frameworkForPlan(picked, canUsePro)
+
+  const selectFramework = React.useCallback(
+    (next: FrameworkId) => {
+      if (isProFramework(next) && !canUsePro) {
+        // `paywall_hit` already exists and is the event the funnel is built
+        // on — a second name for the same moment would split the report.
+        track('paywall_hit', { feature: `export:${next}`, plan_required: 'pro' })
+        toast.info(`${frameworkMeta(next).label} export is part of Pro`, {
+          description: 'HTML, CSS and React stay free forever.',
+          action: { label: 'See Pro', onClick: () => { window.location.href = '/#pricing' } },
+        })
+        return
+      }
+      setPicked(next)
+      try {
+        window.localStorage.setItem(STORAGE_KEY, next)
+      } catch {
+        /* preference is a nicety, never a failure */
+      }
+    },
+    [canUsePro, effect.id],
+  )
 
   const generated = React.useMemo(
     () =>
@@ -266,25 +305,45 @@ export function FrameworkExportPanel({
       <div className="flex flex-wrap gap-1.5" role="group" aria-label="Export format">
         {FRAMEWORKS.map((meta) => {
           const active = meta.id === framework
+          const locked = isProFramework(meta.id) && !canUsePro
           return (
             <button
               key={meta.id}
               type="button"
               onClick={() => selectFramework(meta.id)}
-              title={meta.description}
+              title={locked ? `${meta.description} — included with Pro` : meta.description}
               aria-pressed={active}
+              /* Not `disabled`: a disabled control is unreachable by keyboard
+                 and announces nothing, so the one thing a locked tab has to
+                 do — explain itself — would only work for mouse hover. */
               className={cn(
-                'rounded-full border px-3 py-1 text-xs font-medium transition-colors',
+                'inline-flex items-center gap-1 rounded-full border px-3 py-1 text-xs font-medium transition-colors',
                 active
                   ? 'border-primary/50 bg-primary/10 text-primary'
-                  : 'border-border/60 text-muted-foreground hover:border-primary/30 hover:text-foreground',
+                  : locked
+                    ? 'border-dashed border-border/60 text-muted-foreground/70 hover:border-primary/40 hover:text-foreground'
+                    : 'border-border/60 text-muted-foreground hover:border-primary/30 hover:text-foreground',
               )}
             >
+              {locked ? <Lock aria-hidden className="h-3 w-3" /> : null}
               {meta.label}
+              {locked ? <span className="sr-only"> — included with Pro</span> : null}
             </button>
           )
         })}
       </div>
+
+      {/* Why the dashed tabs are dashed. One line, under the picker rather
+          than inside a tooltip, so it is readable without a pointer. */}
+      {!canUsePro ? (
+        <p className="text-[11px] text-muted-foreground">
+          Vue, Svelte, styled-components and Tailwind exports are part of{' '}
+          <Link href="/#pricing" className="font-medium text-primary hover:underline">
+            Pro
+          </Link>
+          . HTML, CSS and React are free forever.
+        </p>
+      ) : null}
 
       {/* One block per generated file. */}
       {generated.files.map((file) => (

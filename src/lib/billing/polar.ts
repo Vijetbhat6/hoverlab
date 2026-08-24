@@ -13,6 +13,10 @@ import { Polar } from '@polar-sh/sdk'
  *   POLAR_ACCESS_TOKEN        organization access token
  *   POLAR_WEBHOOK_SECRET      signing secret for /api/billing/webhook
  *   POLAR_PRODUCT_ID_PRO      product id for the one-time Pro license
+ *   POLAR_PRODUCT_ID_PLUS     product id for the monthly AI credit add-on
+ *   POLAR_PRODUCT_ID_STUDIO   product id for the one-time ten-seat license
+ *   POLAR_PRODUCT_ID_CREDITS_500 / _2000
+ *                             product ids for the one-time credit packs
  *   POLAR_PRODUCT_ID_TEAM     product id for the per-seat Team plan
  *   POLAR_SERVER              'sandbox' (default) or 'production'
  *

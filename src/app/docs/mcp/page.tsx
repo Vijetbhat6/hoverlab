@@ -78,6 +78,10 @@ export default function McpDocsPage() {
             [<C key="5">install_artifact</C>, 'Write a block or page, plus what it is composed of'],
             [<C key="6">init_template</C>, 'Scaffold a whole template'],
             [<C key="7">list_categories</C>, 'List the categories, per tier'],
+            [
+              <C key="8">get_design_dna</C>,
+              'Hand the agent the design system — tokens, shape, motion, rules — before it writes UI of its own',
+            ],
           ]}
         />
       </DocsSection>
@@ -121,6 +125,19 @@ claude mcp add hoverlab -- npx -y hoverlab mcp`}</Snippet>
           calls <C>match_design</C> once per region — which tolerates designer
           vocabulary and partial matches where plain search does not — installs
           the winners, and edits the installed React to the design&apos;s tokens.
+        </p>
+
+        <p>
+          Going the other way — code to Figma — is the design system export.
+          It emits your palette as W3C design tokens, one file per mode, which
+          is what Figma&apos;s variable import reads. Do that first and{' '}
+          <C>match_design</C> is matching against a file already in your
+          colours, so &ldquo;match my colours&rdquo; above becomes a check
+          rather than a translation. See{' '}
+          <a href="/design-system" className="font-medium text-primary hover:underline">
+            /design-system
+          </a>
+          .
         </p>
 
         <Callout>

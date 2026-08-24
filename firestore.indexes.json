@@ -1,0 +1,54 @@
+{
+  "//": [
+    "Composite indexes Firestore cannot infer.",
+    "",
+    "Firestore indexes single fields automatically. It does NOT index a query",
+    "that combines several equality filters with an orderBy on a different",
+    "field — that needs a composite index declared ahead of time, and until",
+    "one exists the query throws FAILED_PRECONDITION at runtime.",
+    "",
+    "This file exists so that requirement is reviewable in a pull request",
+    "rather than a console click somebody has to remember. Adding a query of",
+    "that shape without adding it here is a deploy that works locally against",
+    "the emulator and fails in production.",
+    "",
+    "Deploy:  firebase deploy --only firestore:indexes",
+    "",
+    "There is no firebase.json in this repo, so that command needs one (or",
+    "`firebase init firestore` once). The equivalent by hand is Firestore >",
+    "Indexes > Composite > Add, with the fields below in this exact order —",
+    "order is part of the index, not a presentation detail.",
+    "",
+    "Building an index over an existing collection is not instant. Expect",
+    "'Building' for a few minutes on a small collection; the query keeps",
+    "failing until it flips to 'Enabled'."
+  ],
+  "indexes": [
+    {
+      "//": [
+        "GET /api/billing/license — grantingOrder().",
+        "",
+        "Finds the most recent purchase that carries a given plan, so the",
+        "certificate can print a licence id and an issue date, and derive the",
+        "twelve-month update window from it.",
+        "",
+        "The route catches the failure and returns the certificate with",
+        "licenseId: null rather than 500ing, which is the right behaviour and",
+        "also the reason this is easy to miss: without the index nothing",
+        "breaks visibly, every customer simply gets a certificate with the one",
+        "field on it that a procurement inbox actually asks for left blank.",
+        "",
+        "createdAt is DESCENDING because the query takes limit(1) off the top",
+        "to mean 'most recent'. An ascending index does not serve it."
+      ],
+      "collectionGroup": "purchases",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "userId", "order": "ASCENDING" },
+        { "fieldPath": "plan", "order": "ASCENDING" },
+        { "fieldPath": "createdAt", "order": "DESCENDING" }
+      ]
+    }
+  ],
+  "fieldOverrides": []
+}

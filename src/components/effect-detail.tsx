@@ -7,6 +7,7 @@ import {
   ChevronLeft,
   ChevronRight,
   Code2,
+  Copy,
   Heart,
   Package,
   Check,
@@ -27,10 +28,14 @@ import { CodeBlock } from '@/components/code-block'
 import { FrameworkExportPanel } from '@/components/framework-export-panel'
 import { OpenInSandbox } from '@/components/open-in-sandbox'
 import { EffectInsightsPanel } from '@/components/effect-insights-panel'
+import { EffectSpecCard } from '@/components/effect-spec-card'
 import { useFavorites } from '@/hooks/use-favorites'
 import { useBundle } from '@/hooks/use-bundle'
 import { useCompare } from '@/hooks/use-compare'
 import { useRecentlyViewed } from '@/hooks/use-recently-viewed'
+import { useCopyHistory } from '@/hooks/use-copy-history'
+import { reportUsage } from '@/lib/report-usage'
+import { analyzeEffect } from '@/lib/effect-insights'
 import { track } from '@/lib/analytics'
 import {
   customizeCss,
@@ -43,6 +48,7 @@ import {
   type CustomizationOptions,
   type Preset,
 } from '@/lib/customize'
+import { AddToCollectionButton } from '@/components/collections/add-to-collection'
 import { cn } from '@/lib/utils'
 import type { Effect } from '@/lib/effects'
 import type { EffectCategory } from '@/lib/effect-types'
@@ -115,6 +121,26 @@ export function EffectDetail({ effect, similar, prev, next }: EffectDetailProps)
   const inBundle = hasBundle(effect.id)
   const { has: hasCompare, toggle: toggleCompare, isFull: compareFull } = useCompare()
   const inCompare = hasCompare(effect.id)
+  const { record } = useCopyHistory()
+  const [copied, setCopied] = React.useState(false)
+  const copiedTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  /*
+   * The four facts the bento states, three of them computed rather than
+   * authored. `analyzeEffect` already existed for the Insights tab — it
+   * reads browser-support level and whether the CSS ships its own
+   * reduced-motion block straight out of the source text, which is what
+   * makes the claims safe to print in large type: they cannot drift from
+   * the effect the way a hand-written blurb would across 835 of them.
+   */
+  const insights = React.useMemo(
+    () => analyzeEffect(effect.css, effect.html),
+    [effect.css, effect.html],
+  )
+  const cssLines = React.useMemo(
+    () => effect.css.trim().split('\n').length,
+    [effect.css],
+  )
 
   // Track this view in the recently-viewed history. Fires on mount and on
   // every prev/next navigation (effect.id change). Skipped during SSR.
@@ -335,6 +361,36 @@ export function EffectDetail({ effect, similar, prev, next }: EffectDetailProps)
     }
   }
 
+  React.useEffect(
+    () => () => {
+      if (copiedTimer.current) clearTimeout(copiedTimer.current)
+    },
+    [],
+  )
+
+  async function handleCopy() {
+    try {
+      await navigator.clipboard.writeText(combinedSnippet)
+      setCopied(true)
+      if (copiedTimer.current) clearTimeout(copiedTimer.current)
+      copiedTimer.current = setTimeout(() => setCopied(false), 1600)
+      record({ id: effect.id, name: effect.name, category: effect.category })
+      // Same counter the code panes already report to. reportUsage
+      // de-duplicates per artifact per page session, so copying here and
+      // then from a code pane still counts as the one decision it was.
+      reportUsage(effect.id, 'copy')
+      toast.success(`Copied "${effect.name}"`, {
+        description: isCustomized
+          ? 'HTML and CSS, with your tweaks applied.'
+          : 'HTML and CSS are both on your clipboard.',
+      })
+    } catch {
+      toast.error('Could not reach the clipboard', {
+        description: 'Use the copy button on the code pane below instead.',
+      })
+    }
+  }
+
   return (
     <div className="mx-auto w-full max-w-7xl px-4 pb-16 pt-6 sm:px-6 lg:px-8">
       {/* Breadcrumb / back */}
@@ -360,6 +416,154 @@ export function EffectDetail({ effect, similar, prev, next }: EffectDetailProps)
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_320px]">
         {/* Main column */}
         <div className="space-y-6">
+          {/*
+            The action bar, pinned.
+
+            This page is 1,784 px tall and its three actions used to sit
+            at y~293, inside the card header, which meant they were gone
+            after one screen — while the one element that *was* sticky
+            was the "Similar effects" rail. The page had a pinned slot
+            and was spending it on cross-sell rather than on the thing
+            the page exists to do. So the slot changed hands: the actions
+            are here and always reachable, and Similar effects became an
+            ordinary section in the sidebar flow.
+
+            Copy leads, because it is why anyone opened the page. What a
+            marketplace puts beside its buy button is social proof — a
+            like count, a comment count — and there is deliberately none
+            here: nothing in the app counts views or copies, and an
+            invented number is worse than no number.
+          */}
+          <div className="sticky top-16 z-30 -mx-4 border-b border-border/60 bg-background/85 px-4 py-2.5 backdrop-blur sm:-mx-6 sm:px-6 lg:mx-0 lg:rounded-xl lg:border lg:px-4">
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+              <div className="min-w-0 flex-1">
+                <div className="truncate text-sm font-semibold tracking-tight">{effect.name}</div>
+                <div className="truncate font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
+                  {effect.category}
+                </div>
+              </div>
+
+              <div className="flex shrink-0 flex-wrap items-center gap-1.5">
+                <button
+                  type="button"
+                  onClick={handleCopy}
+                  className={cn(
+                    'inline-flex h-9 items-center gap-1.5 rounded-lg px-3 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
+                    copied
+                      ? 'bg-primary/15 text-primary'
+                      : 'bg-primary text-primary-foreground hover:bg-primary/90',
+                  )}
+                >
+                  {copied ? (
+                    <Check aria-hidden className="h-4 w-4" />
+                  ) : (
+                    <Copy aria-hidden className="h-4 w-4" />
+                  )}
+                  {copied ? 'Copied' : 'Copy CSS'}
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => toggle(effect.id)}
+                  aria-pressed={isFav}
+                  className={cn(
+                    'inline-flex h-9 items-center gap-1.5 rounded-lg border px-3 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
+                    isFav
+                      ? 'border-rose-500/40 bg-rose-500/10 text-rose-600 dark:text-rose-400'
+                      : 'border-border/60 text-muted-foreground hover:bg-muted hover:text-foreground',
+                  )}
+                >
+                  <Heart aria-hidden className={cn('h-4 w-4', isFav && 'fill-current')} />
+                  <span className="hidden sm:inline">{isFav ? 'Saved' : 'Save'}</span>
+                  <span className="sr-only">
+                    {isFav
+                      ? 'Remove this effect from favorites'
+                      : 'Save this effect to favorites'}
+                  </span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() =>
+                    toggleBundle(
+                      { id: effect.id, name: effect.name, category: effect.category },
+                      opts,
+                    )
+                  }
+                  aria-pressed={inBundle}
+                  className={cn(
+                    'inline-flex h-9 items-center gap-1.5 rounded-lg border px-3 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
+                    inBundle
+                      ? 'border-primary/40 bg-primary/10 text-primary'
+                      : 'border-border/60 text-muted-foreground hover:bg-muted hover:text-foreground',
+                  )}
+                >
+                  {inBundle ? (
+                    <Check aria-hidden className="h-4 w-4" />
+                  ) : (
+                    <Package aria-hidden className="h-4 w-4" />
+                  )}
+                  <span className="hidden sm:inline">{inBundle ? 'In bundle' : 'Bundle'}</span>
+                  <span className="sr-only">
+                    {inBundle
+                      ? 'Remove this effect from the bundle'
+                      : 'Add this effect to the bundle, with your current tweaks'}
+                  </span>
+                </button>
+
+                <button
+                  type="button"
+                  disabled={compareFull && !inCompare}
+                  onClick={() => {
+                    const result = toggleCompare({
+                      id: effect.id,
+                      name: effect.name,
+                      category: effect.category,
+                    })
+                    if (result === 'added') {
+                      toast.success(`Added "${effect.name}" to compare`, {
+                        description: 'Open compare in the header (or press v) to see it side by side.',
+                      })
+                    } else if (result === 'full') {
+                      toast.error('Compare is full', {
+                        description: 'Remove an effect from compare to add another.',
+                      })
+                    } else {
+                      toast.success(`Removed "${effect.name}" from compare`)
+                    }
+                  }}
+                  aria-pressed={inCompare}
+                  className={cn(
+                    'inline-flex h-9 items-center gap-1.5 rounded-lg border px-3 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
+                    inCompare
+                      ? 'border-primary/40 bg-primary/10 text-primary'
+                      : 'border-border/60 text-muted-foreground hover:bg-muted hover:text-foreground',
+                    compareFull && !inCompare && 'cursor-not-allowed opacity-40',
+                  )}
+                >
+                  <Scale aria-hidden className="h-4 w-4" />
+                  <span className="hidden sm:inline">{inCompare ? 'Comparing' : 'Compare'}</span>
+                  <span className="sr-only">
+                    {inCompare
+                      ? 'Remove this effect from compare'
+                      : 'Add this effect to compare'}
+                  </span>
+                </button>
+
+                {/* Last in the row, because it is the one action here that
+                    is about later rather than now. Copy, save and bundle
+                    all serve the visit; a collection serves the month. */}
+                <AddToCollectionButton
+                  artifact={{
+                    id: effect.id,
+                    name: effect.name,
+                    category: effect.category,
+                  }}
+                />
+              </div>
+            </div>
+          </div>
+
           <Card className="overflow-hidden border-border/60 bg-card/80 backdrop-blur">
             <CardHeader className="gap-2 pb-3">
               <div className="flex flex-wrap items-start justify-between gap-3">
@@ -386,108 +590,70 @@ export function EffectDetail({ effect, similar, prev, next }: EffectDetailProps)
                     ))}
                   </div>
                 </div>
-                {/*
-                  Save · Bundle · Compare, spelled out.
-
-                  This was five circular icon buttons, two of which were the
-                  same scales glyph — one added the effect to compare, the
-                  other opened the compare drawer — and one of which was an
-                  "open in new tab" arrow that opened the bundle drawer. The
-                  two drawer-openers are gone: the header tray does that, with
-                  a count, on every page. What is left is the same
-                  Save / Bundle / Compare trio the block, page and template
-                  detail pages already ship, in the same shape.
-                */}
-                <div className="flex shrink-0 flex-wrap items-center gap-1.5">
-                  <button
-                    type="button"
-                    onClick={() => toggle(effect.id)}
-                    aria-pressed={isFav}
-                    className={cn(
-                      'inline-flex h-9 items-center gap-1.5 rounded-lg border px-3 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
-                      isFav
-                        ? 'border-rose-500/40 bg-rose-500/10 text-rose-600 dark:text-rose-400'
-                        : 'border-border/60 text-muted-foreground hover:bg-muted hover:text-foreground',
-                    )}
-                  >
-                    <Heart aria-hidden className={cn('h-4 w-4', isFav && 'fill-current')} />
-                    {isFav ? 'Saved' : 'Save'}
-                    <span className="sr-only">
-                      {isFav
-                        ? 'Remove this effect from favorites'
-                        : 'Save this effect to favorites'}
-                    </span>
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() =>
-                      toggleBundle(
-                        { id: effect.id, name: effect.name, category: effect.category },
-                        opts,
-                      )
-                    }
-                    aria-pressed={inBundle}
-                    className={cn(
-                      'inline-flex h-9 items-center gap-1.5 rounded-lg border px-3 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
-                      inBundle
-                        ? 'border-primary/40 bg-primary/10 text-primary'
-                        : 'border-border/60 text-muted-foreground hover:bg-muted hover:text-foreground',
-                    )}
-                  >
-                    {inBundle ? (
-                      <Check aria-hidden className="h-4 w-4" />
-                    ) : (
-                      <Package aria-hidden className="h-4 w-4" />
-                    )}
-                    {inBundle ? 'In bundle' : 'Bundle'}
-                    <span className="sr-only">
-                      {inBundle
-                        ? 'Remove this effect from the bundle'
-                        : 'Add this effect to the bundle, with your current tweaks'}
-                    </span>
-                  </button>
-
-                  <button
-                    type="button"
-                    disabled={compareFull && !inCompare}
-                    onClick={() => {
-                      const result = toggleCompare({
-                        id: effect.id,
-                        name: effect.name,
-                        category: effect.category,
-                      })
-                      if (result === 'added') {
-                        toast.success(`Added "${effect.name}" to compare`, {
-                          description: 'Open compare in the header (or press v) to see it side by side.',
-                        })
-                      } else if (result === 'full') {
-                        toast.error('Compare is full', {
-                          description: 'Remove an effect from compare to add another.',
-                        })
-                      } else {
-                        toast.success(`Removed "${effect.name}" from compare`)
-                      }
-                    }}
-                    aria-pressed={inCompare}
-                    className={cn(
-                      'inline-flex h-9 items-center gap-1.5 rounded-lg border px-3 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
-                      inCompare
-                        ? 'border-primary/40 bg-primary/10 text-primary'
-                        : 'border-border/60 text-muted-foreground hover:bg-muted hover:text-foreground',
-                      compareFull && !inCompare && 'cursor-not-allowed opacity-40',
-                    )}
-                  >
-                    <Scale aria-hidden className="h-4 w-4" />
-                    {inCompare ? 'Comparing' : 'Compare'}
-                    <span className="sr-only">
-                      {inCompare
-                        ? 'Remove this effect from compare'
-                        : 'Add this effect to compare'}
-                    </span>
-                  </button>
-                </div>
               </div>
+
+              {/*
+                Four numbers instead of a second paragraph.
+
+                A marketplace listing states its size in large type —
+                "300+ interface element states", "60+ unique elements" —
+                and never writes a prose description at all, because the
+                buyer is deciding, not reading. The equivalent facts here
+                are the ones a developer weighs before pasting a snippet
+                into their repo, and three of the four are derived rather
+                than authored: `analyzeEffect` reads support level and
+                the reduced-motion guard out of the CSS itself, so they
+                cannot go stale across 835 effects the way hand-written
+                copy would. The zero is true by construction — the
+                effects rung is plain CSS, which is the entire claim.
+              */}
+              <dl className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-4">
+                <BentoFact value={cssLines.toLocaleString('en-US')} label={cssLines === 1 ? 'line of CSS' : 'lines of CSS'} />
+                <BentoFact value="0" label="dependencies" />
+                <BentoFact
+                  value={
+                    insights.support === 'wide'
+                      ? 'Every'
+                      : insights.support === 'recent'
+                        ? 'Newly'
+                        : 'Most'
+                  }
+                  label={
+                    insights.support === 'wide'
+                      ? 'browser, for years'
+                      : insights.support === 'recent'
+                        ? 'baseline browsers'
+                        : 'browsers — needs a fallback'
+                  }
+                />
+                {/*
+                  Three states, not two, because "does it respect reduced
+                  motion" has a third honest answer. `withMotionGuard`
+                  only adds a guard where one is owed — an effect that
+                  runs forever — so an effect that merely transitions on
+                  hover has no guard and needs none. Printing "No" for
+                  those, as the first draft of this panel did, told 584 of
+                  835 effects they had an accessibility problem they do
+                  not have. What is true of them is that nothing moves
+                  until the user makes it move.
+                */}
+                <BentoFact
+                  value={
+                    !insights.animates
+                      ? 'None'
+                      : insights.hasInfiniteAnimation
+                        ? 'Guarded'
+                        : 'Hover'
+                  }
+                  label={
+                    !insights.animates
+                      ? 'no motion at all'
+                      : insights.hasInfiniteAnimation
+                        ? 'stops under reduced motion'
+                        : 'motion only on interaction'
+                  }
+                />
+              </dl>
             </CardHeader>
 
             <CardContent className="space-y-4 pt-0">
@@ -646,7 +812,16 @@ export function EffectDetail({ effect, similar, prev, next }: EffectDetailProps)
         </div>
 
         {/* Sidebar: similar effects */}
-        <aside className="space-y-4 lg:sticky lg:top-20 lg:self-start">
+        {/*
+          Not sticky any more. The pinned slot on this page belongs to the
+          action bar above — see the note there. A cross-sell rail that
+          follows you down the page is a cross-sell rail in the way.
+        */}
+        <aside className="space-y-4">
+          {/* What's in the box, above the cross-sell — someone deciding
+              whether to take this needs the contents before the neighbours. */}
+          <EffectSpecCard effect={effect} />
+
           <div className="rounded-lg border border-border/60 bg-card/60 p-4">
             <div className="mb-3 flex items-center justify-between">
               <h2 className="text-sm font-semibold tracking-tight">Similar effects</h2>
@@ -790,6 +965,26 @@ function SimilarPreview({ effect }: { effect: Effect }) {
         style={{ transform: 'scale(0.45)', transformOrigin: 'center' }}
         dangerouslySetInnerHTML={{ __html: effect.html }}
       />
+    </div>
+  )
+}
+
+/**
+ * One panel of the bento. A large value and a quiet label, in a fixed
+ * shape, so four of them read as a spec strip rather than four sentences.
+ */
+function BentoFact({ value, label }: { value: string; label: string }) {
+  return (
+    <div className="rounded-lg border border-border/60 bg-muted/30 px-3 py-2">
+      <dt className="sr-only">{label}</dt>
+      <dd className="m-0">
+        <span className="block text-xl font-bold leading-none tracking-tight tabular-nums">
+          {value}
+        </span>
+        <span className="mt-1 block text-[11px] leading-tight text-muted-foreground">
+          {label}
+        </span>
+      </dd>
     </div>
   )
 }

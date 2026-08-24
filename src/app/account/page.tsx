@@ -20,6 +20,10 @@ import { SiteHeader } from '@/components/site-header'
 import { useFavorites } from '@/hooks/use-favorites'
 import { useBundle } from '@/hooks/use-bundle'
 import { UpgradePanel } from '@/components/billing/upgrade-panel'
+import { LicenseCertificate } from '@/components/license/license-certificate'
+import { LicenseKeyCard } from '@/components/billing/license-key-card'
+import { WorkspaceCard } from '@/components/billing/workspace-card'
+import { CreditsCard } from '@/components/billing/credits-card'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 
@@ -171,6 +175,33 @@ export default function AccountPage() {
         >
           <UpgradePanel />
         </React.Suspense>
+
+        {/*
+          The certificate, directly under the tiers.
+
+          A customer who has just bought Pro lands here from Polar's redirect,
+          and the first useful thing to show them is the thing they bought —
+          not a credit balance. It is also what they come back for months
+          later, when a client's legal team asks.
+        */}
+        <LicenseCertificate className="mt-6" />
+
+        {/* Directly under the certificate, because they are the same fact in
+            two forms: the certificate is the licence a person reads, the key
+            is the licence a machine reads. Renders nothing for a free
+            account — see the component. */}
+        <LicenseKeyCard className="mt-6" />
+
+        {/* Under the licence, because Pro+ is an add-on to whichever tier you
+            hold rather than a rung of its own. */}
+        <CreditsCard />
+
+        {/*
+          Then seats, because the common case is someone who bought a
+          workspace looking for the code to hand out — and the uncommon case
+          is someone redeeming one, who was sent here to do it.
+        */}
+        <WorkspaceCard />
 
         <Card className="mt-6 border-border/60">
           <CardHeader>

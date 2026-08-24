@@ -2,6 +2,12 @@ import { NextResponse } from 'next/server'
 import { validateEvent, WebhookVerificationError } from '@polar-sh/sdk/webhooks'
 import { FieldValue, Timestamp } from 'firebase-admin/firestore'
 import { adminDb } from '@/lib/firebase/admin'
+import { generateInviteCode } from '@/lib/billing/workspace'
+import {
+  addPurchasedCredits,
+  getCreditPack,
+  revokePurchasedCredits,
+} from '@/lib/billing/credits'
 
 /**
  * Polar webhook receiver — the ONLY place entitlements are granted.
@@ -11,9 +17,9 @@ import { adminDb } from '@/lib/firebase/admin'
  * written here, after Polar has signed the event and confirmed payment.
  *
  * Handled events:
- *   order.paid                 → grant Pro license / provision Team seats
+ *   order.paid                 → grant Pro license / Studio seats / credits
  *   order.refunded             → revoke what that order granted
- *   subscription.active        → Team subscription live (or renewed)
+ *   subscription.active        → Team or Pro+ subscription live (or renewed)
  *   subscription.updated       → seat count / period end changed
  *   subscription.canceled      → keep access until the paid period ends
  *   subscription.revoked       → access ends now
@@ -138,6 +144,8 @@ async function handleOrderPaid(data: PolarLike): Promise<void> {
   const plan = typeof data.metadata?.plan === 'string' ? data.metadata.plan : 'pro'
   const interval =
     typeof data.metadata?.interval === 'string' ? data.metadata.interval : 'one_time'
+  const packId = typeof data.metadata?.pack === 'string' ? data.metadata.pack : null
+  const pack = packId ? getCreditPack(packId) : null
   const orderId = data.id
   if (!orderId) return
 
@@ -153,6 +161,10 @@ async function handleOrderPaid(data: PolarLike): Promise<void> {
       currency: data.currency ?? 'usd',
       polarOrderId: orderId,
       polarCheckoutId: data.checkoutId ?? null,
+      // Recorded so a refund knows what to take back without re-reading
+      // the pack catalog, which may have been re-priced since.
+      packId: pack?.id ?? null,
+      credits: pack?.credits ?? null,
       createdAt: Timestamp.now(),
     })
   } catch (err) {
@@ -160,12 +172,96 @@ async function handleOrderPaid(data: PolarLike): Promise<void> {
   }
 
   if (plan === 'pro') {
-    // One-time license: no expiry, nothing to renew.
+    // One-time license. Perpetual, and never revoked by time — what the
+    // twelve-month window bounds is the entitlement to artifacts published
+    // after it, which `updatesUntil` records. See billing/plans.ts.
     await adminDb().collection('users').doc(userId).update({
       proLicense: true,
       proLicenseAt: Timestamp.now(),
     })
   }
+
+  if (plan === 'renewal' || plan === 'renewal-studio') {
+    await extendUpdateWindow(userId, orderId)
+  }
+
+  if (plan === 'studio') {
+    await provisionStudioWorkspace(userId, orderId, data)
+  }
+
+  // A credit pack. `addPurchasedCredits` is keyed by the order id, so a
+  // redelivery cannot grant the same pack twice.
+  if (packId) {
+    if (!pack) {
+      console.error('[billing/webhook] paid order for unknown credit pack', {
+        orderId,
+        packId,
+      })
+      return
+    }
+    await addPurchasedCredits(userId, pack.credits, orderId, pack.id)
+  }
+}
+
+/**
+ * Studio — a one-time license covering ten people.
+ *
+ * Provisioned as a workspace rather than as ten Pro licenses, because the
+ * buyer does not know the other nine email addresses at checkout: they buy,
+ * then invite. That is the same shape as a Team subscription, so it reuses
+ * the same `teams/{id}` documents and the same members subcollection, and
+ * differs in exactly two fields — `kind`, which is what stops a Studio seat
+ * unlocking shared brand tokens, and a `lifetime` status, which has no
+ * renewal to fail.
+ *
+ * Keyed by the ORDER id (a subscription-backed team is keyed by the
+ * subscription id), so a redelivered order.paid re-enters this function and
+ * finds the workspace already there instead of creating a second one.
+ */
+async function provisionStudioWorkspace(
+  userId: string,
+  orderId: string,
+  data: PolarLike,
+): Promise<void> {
+  const db = adminDb()
+  const teamRef = db.collection('teams').doc(orderId)
+  if ((await teamRef.get()).exists) return
+
+  const metaSeats = Number(data.metadata?.seats)
+  const seats = Number.isFinite(metaSeats) && metaSeats > 0 ? metaSeats : 10
+
+  const teamName =
+    typeof data.metadata?.teamName === 'string' && data.metadata.teamName
+      ? data.metadata.teamName
+      : 'My studio'
+
+  const batch = db.batch()
+  batch.set(teamRef, {
+    name: teamName,
+    kind: 'studio',
+    ownerId: userId,
+    polarOrderId: orderId,
+    // Not a subscription status, but the field every seat check already
+    // reads. `teamIsLive()` knows this one never expires.
+    subscriptionStatus: 'lifetime',
+    seats,
+    // The buyer takes the first seat; the other nine are claimed with the
+    // code. Without this the license would be ten seats nobody but the
+    // purchaser could ever use.
+    seatsUsed: 1,
+    inviteCode: generateInviteCode(),
+    currentPeriodEnd: null,
+    createdAt: Timestamp.now(),
+  })
+  batch.set(teamRef.collection('members').doc(userId), {
+    userId,
+    role: 'owner',
+    joinedAt: Timestamp.now(),
+  })
+  batch.update(db.collection('users').doc(userId), {
+    teamIds: FieldValue.arrayUnion(teamRef.id),
+  })
+  await batch.commit()
 }
 
 /** order.refunded — take back exactly what the order granted. */
@@ -185,6 +281,26 @@ async function handleOrderRefunded(data: PolarLike): Promise<void> {
       proLicense: false,
       proLicenseAt: null,
     })
+  }
+
+  if (typeof purchase.packId === 'string') {
+    // Refunding a pack takes the credits back, even into the negative:
+    // clamping at zero would let someone spend a pack, refund it, and keep
+    // the work. A negative balance simply means the next purchase pays it
+    // off, which is the honest arithmetic.
+    await revokePurchasedCredits(userId, Number(purchase.credits) || 0)
+  }
+
+  if (purchase.plan === 'studio') {
+    // The workspace is keyed by this order id. Mark it revoked rather than
+    // deleting it: `teamIsLive()` stops recognising the status, every seat
+    // loses access at once, and the membership records survive in case the
+    // refund was a mistake.
+    await adminDb()
+      .collection('teams')
+      .doc(orderId)
+      .update({ subscriptionStatus: 'revoked' })
+      .catch(() => {})
   }
 }
 
@@ -210,6 +326,24 @@ async function handleSubscription(data: PolarLike, status: string): Promise<void
 
   await linkCustomer(userId, data)
 
+  // Pro+ is a subscription too, and it is NOT a workspace. Without this
+  // branch every Pro+ purchase would create a one-person team, and its
+  // buyer would silently gain the shared-workspace entitlement they did
+  // not pay for.
+  if (data.metadata?.plan === 'plus') {
+    await adminDb()
+      .collection('users')
+      .doc(userId)
+      .update({
+        plusStatus: status,
+        plusPeriodEnd: data.currentPeriodEnd
+          ? Timestamp.fromDate(new Date(data.currentPeriodEnd))
+          : null,
+        plusSubscriptionId: subscriptionId,
+      })
+    return
+  }
+
   const seats = typeof data.quantity === 'number' && data.quantity > 0 ? data.quantity : 1
   const currentPeriodEnd = data.currentPeriodEnd
     ? Timestamp.fromDate(new Date(data.currentPeriodEnd))
@@ -233,10 +367,13 @@ async function handleSubscription(data: PolarLike, status: string): Promise<void
   const batch = db.batch()
   batch.set(teamRef, {
     name: teamName,
+    kind: 'team',
     ownerId: userId,
     polarSubscriptionId: subscriptionId,
     subscriptionStatus: status,
     seats,
+    seatsUsed: 1,
+    inviteCode: generateInviteCode(),
     currentPeriodEnd,
     createdAt: Timestamp.now(),
   })
@@ -251,6 +388,52 @@ async function handleSubscription(data: PolarLike, status: string): Promise<void
     teamIds: FieldValue.arrayUnion(teamRef.id),
   })
   await batch.commit()
+}
+
+/**
+ * Push a licence's update window twelve months further out.
+ *
+ * Extends from whichever is LATER — today, or the window still running —
+ * so renewing early never costs the customer the time they had left. The
+ * opposite (always twelve months from today) quietly punishes the people
+ * who renew before they are forced to, which is exactly the wrong
+ * incentive to build in.
+ *
+ * Stored on the profile rather than derived from the renewal order,
+ * because the derivation this replaces reads the ORIGINAL purchase and a
+ * renewal is a different document. `/api/billing/license` prefers this
+ * field when it is present and falls back to the derived date when it is
+ * not, so a licence that has never been renewed is unaffected.
+ *
+ * Idempotent via the order id: a redelivered webhook finds the ledger
+ * entry and returns, exactly like `addPurchasedCredits`. Without that, a
+ * retried delivery would hand out a free extra year.
+ */
+async function extendUpdateWindow(userId: string, orderId: string): Promise<void> {
+  const db = adminDb()
+  const userRef = db.collection('users').doc(userId)
+  const ledgerRef = userRef.collection('renewals').doc(orderId)
+
+  await db.runTransaction(async (tx) => {
+    if ((await tx.get(ledgerRef)).exists) return
+
+    const snap = await tx.get(userRef)
+    const current = snap.data()?.updatesUntil
+    const from =
+      current instanceof Timestamp && current.toDate().getTime() > Date.now()
+        ? current.toDate()
+        : new Date()
+
+    const next = new Date(from)
+    next.setMonth(next.getMonth() + 12)
+
+    tx.set(ledgerRef, {
+      polarOrderId: orderId,
+      extendedTo: Timestamp.fromDate(next),
+      createdAt: Timestamp.now(),
+    })
+    tx.set(userRef, { updatesUntil: Timestamp.fromDate(next) }, { merge: true })
+  })
 }
 
 export async function POST(request: Request) {

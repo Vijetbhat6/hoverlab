@@ -12,16 +12,29 @@
  *  - Header button on /library, /playground, /effect/[slug]
  *  - Command palette "Change brand color" action
  *  - Keyboard shortcut `Shift+P` (P for palette; bare `P` is taken)
+ *
+ * The curated presets and the sliders are free — recolouring the catalog is
+ * how you check an effect against your own palette, and a catalog you cannot
+ * preview in your own colours is a worse catalog. What Pro adds is the
+ * "Your brands" strip below them: naming a colour and keeping it, on the
+ * account rather than in this browser. See `lib/brand-library.ts`.
  */
 
 import * as React from 'react'
-import { Palette, RotateCcw, Check } from 'lucide-react'
+import Link from 'next/link'
+import { Palette, RotateCcw, Check, Lock, Plus, X } from 'lucide-react'
+import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { Tooltip, TooltipTrigger, TooltipContent } from '@/components/ui/tooltip'
 import { Slider } from '@/components/ui/slider'
 import { cn } from '@/lib/utils'
 import { useBrandColor } from '@/hooks/use-brand-color'
+import { useBrandLibrary } from '@/hooks/use-brand-library'
+import { useTeamBrandLibrary } from '@/hooks/use-team-brand-library'
+import { BRAND_LIBRARY_LIMITS, savedBrandSwatch, type SavedBrand } from '@/lib/brand-library'
+import { track } from '@/lib/analytics'
 import {
   BRAND_PRESETS,
   DEFAULT_BRAND_COLOR,
@@ -39,6 +52,8 @@ const BrandColorPickerInner = React.forwardRef<
   { className?: string }
 >(function BrandColorPicker({ className }, ref) {
   const { color, set, reset, isCustomized } = useBrandColor()
+  const library = useBrandLibrary()
+  const teamLibrary = useTeamBrandLibrary()
   const [open, setOpen] = React.useState(false)
 
   React.useImperativeHandle(ref, () => ({
@@ -156,6 +171,31 @@ const BrandColorPickerInner = React.forwardRef<
           })}
         </div>
 
+        {/* Saved brands — the Pro strip. */}
+        <SavedBrands
+          library={library}
+          current={color}
+          onApply={(next) => commitDraft(next)}
+        />
+
+        {/*
+          The shared strip, under the personal one.
+
+          Rendered only for a live Team subscription rather than shown
+          locked to everyone. The personal strip earns its paywall by being
+          a thing any visitor might want; a shared workspace palette is
+          meaningless to someone with no workspace, and a second locked
+          block in the same popover would read as the product nagging.
+        */}
+        {teamLibrary.locked ? null : (
+          <SavedBrands
+            library={teamLibrary}
+            current={color}
+            onApply={(next) => commitDraft(next)}
+            variant="team"
+          />
+        )}
+
         {/* Custom sliders */}
         <div className="mt-4 space-y-3 border-t pt-3">
           <div className="text-xs font-medium text-muted-foreground">Custom</div>
@@ -236,6 +276,217 @@ const BrandColorPickerInner = React.forwardRef<
 })
 
 export const BrandColorPicker = React.memo(BrandColorPickerInner)
+
+/**
+ * What the strip below needs from a library, and nothing more.
+ *
+ * Declared structurally so the personal and the shared library can both be
+ * passed to one component without either hook importing the other. Adding
+ * a member here is a decision to make both libraries provide it.
+ */
+interface BrandLibraryLike {
+  brands: Array<SavedBrand & { createdBy?: string | null }>
+  loading: boolean
+  locked: boolean
+  signedOut: boolean
+  canSave: boolean
+  /**
+   * Returns the saved preset, or null when the name was empty or the
+   * library is full. Narrowed to the one field the strip renders rather
+   * than to SavedBrand, so a library that carries extra fields (the shared
+   * one carries `createdBy`) still satisfies this.
+   */
+  save: (name: string, color: BrandColor) => { name: string } | null
+  remove: (id: string) => void
+}
+
+/* ============================================================
+ *  Saved brands — the Pro strip
+ * ========================================================== */
+
+/**
+ * The account's named brand colours, under the curated row.
+ *
+ * Shown to everyone, including signed-out visitors, as one line of copy and
+ * a link. A Pro feature the free tier never sees is a Pro feature nobody
+ * buys — and this one is otherwise invisible, since it lives inside a
+ * popover behind a keyboard shortcut.
+ */
+function SavedBrands({
+  library,
+  current,
+  onApply,
+  variant = 'personal',
+}: {
+  /*
+   * Structurally typed rather than tied to one hook. The personal and the
+   * team library expose the same six members on purpose, and this strip is
+   * the reason — the UI for "a list of named colours you can apply, save to
+   * and delete from" should not exist twice.
+   */
+  library: BrandLibraryLike
+  current: BrandColor
+  onApply: (color: BrandColor) => void
+  /** Which library this is. Changes only the copy and the paywall target. */
+  variant?: 'personal' | 'team'
+}) {
+  const team = variant === 'team'
+  const [naming, setNaming] = React.useState(false)
+  const [draftName, setDraftName] = React.useState('')
+
+  /*
+   * Counted on render rather than on a click, and that is the right moment
+   * here: Radix unmounts popover content when closed, so this fires exactly
+   * once per time a free visitor opens the picker and is shown the strip.
+   * That is the number the funnel wants — how many people saw it — not how
+   * many clicked a link there is only one of.
+   */
+  const gated = library.signedOut || library.locked
+  React.useEffect(() => {
+    if (gated) {
+      track('paywall_hit', {
+        feature: team ? 'team_brand_library' : 'brand_library',
+        plan_required: team ? 'team' : 'pro',
+      })
+    }
+  }, [gated, team])
+
+  if (gated) {
+    return (
+      <div className="mt-4 border-t pt-3">
+        <div className="flex items-start gap-2">
+          <Lock aria-hidden className="mt-0.5 h-3.5 w-3.5 shrink-0 text-primary" />
+          <p className="text-[11px] leading-snug text-muted-foreground">
+            {library.signedOut ? (
+              <>
+                <Link href="/login" className="font-medium text-primary hover:underline">
+                  Sign in
+                </Link>{' '}
+                to name a colour and keep it across machines.
+              </>
+            ) : team ? (
+              <>
+                Agree a palette once and have it appear for everyone on the{' '}
+                <Link href="/#pricing" className="font-medium text-primary hover:underline">
+                  Team plan
+                </Link>
+                . Your own saved colours stay yours either way.
+              </>
+            ) : (
+              <>
+                Save a colour under a name — “Northwind blue”, “Acme orange” —
+                and keep it on your account with{' '}
+                <Link href="/#pricing" className="font-medium text-primary hover:underline">
+                  Pro
+                </Link>
+                .
+              </>
+            )}
+          </p>
+        </div>
+      </div>
+    )
+  }
+
+  function saveCurrent(event: React.FormEvent) {
+    event.preventDefault()
+    const saved = library.save(draftName, current)
+    if (!saved) {
+      toast.error(
+        draftName.trim()
+          ? `You can keep up to ${BRAND_LIBRARY_LIMITS.perAccount} brands.`
+          : 'Give the colour a name first.',
+      )
+      return
+    }
+    setDraftName('')
+    setNaming(false)
+    toast.success(`Saved “${saved.name}”`)
+  }
+
+  return (
+    <div className="mt-4 space-y-2 border-t pt-3">
+      <div className="flex items-center justify-between">
+        <span className="text-xs font-medium text-muted-foreground">
+          {team ? 'Shared with your team' : 'Your brands'}
+        </span>
+        <button
+          type="button"
+          onClick={() => setNaming((v) => !v)}
+          disabled={!library.canSave}
+          className="inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-[11px] font-medium text-primary transition-colors hover:bg-primary/10 disabled:opacity-40"
+        >
+          <Plus className="h-3 w-3" />
+          Save this colour
+        </button>
+      </div>
+
+      {naming ? (
+        <form onSubmit={saveCurrent} className="flex gap-1.5">
+          <Input
+            autoFocus
+            value={draftName}
+            onChange={(e) => setDraftName(e.target.value)}
+            placeholder="Name this colour…"
+            maxLength={BRAND_LIBRARY_LIMITS.nameLength}
+            aria-label="Brand colour name"
+            className="h-7 text-xs"
+          />
+          <Button type="submit" size="sm" variant="secondary" className="h-7 px-2 text-xs">
+            Save
+          </Button>
+        </form>
+      ) : null}
+
+      {library.brands.length > 0 ? (
+        <ul className="flex flex-wrap gap-1.5">
+          {library.brands.map((brand) => (
+            <li key={brand.id} className="group relative">
+              <button
+                type="button"
+                onClick={() =>
+                  onApply({
+                    hue: brand.hue,
+                    chroma: brand.chroma,
+                    lightL: brand.lightL,
+                    darkL: brand.darkL,
+                  })
+                }
+                title={brand.name}
+                aria-label={`Use ${brand.name}`}
+                className="flex max-w-[9rem] items-center gap-1.5 rounded-full border border-border/60 py-0.5 pl-1 pr-2 text-[11px] transition-colors hover:border-primary/40"
+              >
+                <span
+                  aria-hidden
+                  className="h-4 w-4 shrink-0 rounded-full"
+                  style={{ backgroundColor: savedBrandSwatch(brand) }}
+                />
+                <span className="truncate">{brand.name}</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => library.remove(brand.id)}
+                aria-label={`Delete ${brand.name}`}
+                /* Visible on hover and on keyboard focus — focus-within on
+                   the row would not cover it, since this button IS the
+                   focused element. */
+                className="absolute -right-1 -top-1 hidden rounded-full border border-border bg-background p-0.5 text-muted-foreground group-hover:block focus:block focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              >
+                <X className="h-2.5 w-2.5" />
+              </button>
+            </li>
+          ))}
+        </ul>
+      ) : !naming ? (
+        <p className="text-[11px] text-muted-foreground">
+          {team
+            ? 'Nothing shared yet. Anything saved here appears for everyone on the workspace.'
+            : 'Nothing saved yet. Tune the sliders below, then name the result.'}
+        </p>
+      ) : null}
+    </div>
+  )
+}
 
 /* ============================================================
  *  Slider row helper

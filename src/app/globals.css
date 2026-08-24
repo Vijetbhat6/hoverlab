@@ -45,6 +45,47 @@
 }
 
 :root {
+  /*
+   * The brand colour, as four numbers rather than three finished colours.
+   *
+   * `applyBrandColorToDocument` sets these on <html>, and --primary, --ring
+   * and --accent are derived from them below. Until this block existed the
+   * hook wrote all four properties and nothing read any of them, so picking
+   * a brand changed a value in the inspector and nothing on screen — which
+   * made "custom brand colours" a Pro feature that did not exist.
+   *
+   * The defaults reproduce the previous literals exactly, with one
+   * deliberate exception: light lightness is 0.49 rather than the 0.55 this
+   * block shipped with. 0.55 measures 3.98:1 for white on the button fill
+   * and 4.09:1 as link text on a card — under the 4.5:1 AA floor, on the
+   * one colour that carries every primary button, link and focus ring.
+   * 0.49 is 5.01:1 on the page background, 5.14:1 on a card and 4.59:1 on
+   * --muted, the tightest pairing the site actually makes. Verified with
+   * the contrast checker this site ships at /tools/contrast.
+   *
+   * A custom brand colour can still be set to something that fails; that is
+   * the user's choice to make about their own palette, and it is why the
+   * default is the one we can vouch for.
+   *
+   *   light primary  oklch(0.49 0.2 160)
+   *   light accent   oklch(0.94 0.02 160)
+   *   dark  primary  oklch(0.7  0.18 160)
+   *   dark  accent   oklch(0.26 0.02 160)
+   * so this is a refactor at the default brand and a feature at any other.
+   */
+  --brand-hue: 160;
+  --brand-chroma: 0.2;
+  --brand-light-l: 0.49;
+  --brand-dark-l: 0.7;
+
+  /*
+   * Accent is the brand at a tenth of its chroma, not a separate colour.
+   * A brand system with an independently chosen accent needs two decisions
+   * from the user and gets contradictory answers; deriving it means one
+   * slider moves the whole surface coherently.
+   */
+  --brand-accent-chroma: calc(var(--brand-chroma) * 0.1);
+
   --radius: 0.75rem;
   --background: oklch(0.99 0.005 90);
   --foreground: oklch(0.15 0.01 250);
@@ -65,7 +106,7 @@
     Dark is untouched: 0.7 measures 8.33:1 there and was never the problem.
     Verified with the contrast checker this site ships at /tools/contrast.
   */
-  --primary: oklch(0.49 0.2 160);
+  --primary: oklch(var(--brand-light-l) var(--brand-chroma) var(--brand-hue));
   --primary-foreground: oklch(0.99 0 0);
   --secondary: oklch(0.96 0.01 90);
   --secondary-foreground: oklch(0.2 0.01 250);
@@ -78,7 +119,7 @@
     site ships and was failing.
   */
   --muted-foreground: oklch(0.47 0.01 250);
-  --accent: oklch(0.94 0.02 160);
+  --accent: oklch(0.94 var(--brand-accent-chroma) var(--brand-hue));
   --accent-foreground: oklch(0.2 0.01 250);
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0.9 0.005 250);
@@ -99,7 +140,7 @@
     UI to fix a border.
   */
   --field: oklch(0.65 0.005 250);
-  --ring: oklch(0.49 0.2 160);
+  --ring: oklch(var(--brand-light-l) var(--brand-chroma) var(--brand-hue));
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -122,7 +163,7 @@
   --card-foreground: oklch(0.97 0.005 90);
   --popover: oklch(0.17 0.012 250);
   --popover-foreground: oklch(0.97 0.005 90);
-  --primary: oklch(0.7 0.18 160);
+  --primary: oklch(var(--brand-dark-l) calc(var(--brand-chroma) * 0.9) var(--brand-hue));
   --primary-foreground: oklch(0.13 0.01 250);
   --secondary: oklch(0.22 0.012 250);
   --secondary-foreground: oklch(0.97 0.005 90);
@@ -136,7 +177,7 @@
     clearly secondary to --foreground at 0.97.
   */
   --muted-foreground: oklch(0.7 0.01 250);
-  --accent: oklch(0.26 0.02 160);
+  --accent: oklch(0.26 var(--brand-accent-chroma) var(--brand-hue));
   --accent-foreground: oklch(0.97 0.005 90);
   --destructive: oklch(0.704 0.191 22.216);
   --border: oklch(1 0 0 / 12%);
@@ -144,7 +185,7 @@
   /* 15% is 1.52:1 over a card. 36% is 3.31:1 over a card and 3.23:1 over
      the page background — see the light-theme note above. */
   --field: oklch(1 0 0 / 36%);
-  --ring: oklch(0.7 0.18 160);
+  --ring: oklch(var(--brand-dark-l) calc(var(--brand-chroma) * 0.9) var(--brand-hue));
   --chart-1: oklch(0.488 0.243 264.376);
   --chart-2: oklch(0.696 0.17 162.48);
   --chart-3: oklch(0.769 0.188 70.08);
@@ -2003,6 +2044,35 @@
   100% { transform: scale(1); opacity: 1; }
 }
 
+/* ---------- Hero effect wall (landing) ----------
+   The ghosted card wall behind the front-door headline. See
+   components/landing/hero-effect-wall.tsx.
+
+   Two rules, both about not animating decoration at people:
+
+   `.fx-hero-wall-paused` is set by an IntersectionObserver once the wall
+   scrolls out of the viewport. Eighteen live effects painting behind a
+   section nobody is looking at is pure battery cost. `!important` and the
+   descendant selector because the paused state has to beat whatever the
+   catalog's own CSS set on the element it applies to.
+
+   Under reduced motion the wall does not render at all. The effects
+   already carry their own guards — bundled-effects.ts runs every one
+   through withMotionGuard — but a purely decorative layer should not
+   depend on 18 separate snippets each having got that right, and someone
+   who asked for less motion is not asking for a dimmer version of it. */
+
+.fx-hero-wall-paused,
+.fx-hero-wall-paused * {
+  animation-play-state: paused !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fx-hero-wall {
+    display: none;
+  }
+}
+
 /* ---------- Scroll reveal (landing sections) ----------
    Used by <Reveal> component. Hidden by default, .is-visible triggers
    the fade-in-up. Respects prefers-reduced-motion via media query. */
@@ -2242,4 +2312,37 @@
 
 .fx-newsletter-input:focus {
   box-shadow: 0 0 0 3px hsl(var(--primary) / 0.2);
+}
+
+/* ---------- Printing the licence certificate ----------
+ *
+ * The certificate is a card in the middle of /account or /license, and the
+ * browser's own print would hand the customer a screenshot of the whole
+ * page — header, upgrade tiers, credit balance and all — as their proof of
+ * licence. `visibility` rather than `display` is what makes this work: it
+ * hides the surrounding boxes while leaving them in flow, so the card does
+ * not have to be re-anchored inside a layout that no longer exists.
+ *
+ * Marked with `data-print-root` rather than a class so it cannot be swept
+ * up by a Tailwind purge or mistaken for a style hook.
+ */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  [data-print-root],
+  [data-print-root] * {
+    visibility: visible;
+  }
+
+  [data-print-root] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    /* Backgrounds and blurs cost ink and read as artifacts on paper. */
+    box-shadow: none;
+    backdrop-filter: none;
+  }
 }

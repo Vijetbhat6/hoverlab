@@ -12,11 +12,32 @@
  */
 
 import path from 'node:path'
+import { mkdir, writeFile } from 'node:fs/promises'
 
-import { FRAMEWORKS, LEVELS, getArtifact, searchAll, searchLevel } from './api.mjs'
+import {
+  FRAMEWORKS,
+  LEVELS,
+  getArtifact,
+  getDna,
+  reportInstall,
+  getSkill,
+  listSkills,
+  searchAll,
+  searchLevel,
+} from './api.mjs'
 import { detectFramework } from './detect.mjs'
 import { addArtifact } from './write.mjs'
 import { initTemplate } from './scaffold.mjs'
+import { readProjectConfig, brandCustomization } from './config.mjs'
+import {
+  CONFIG_FILE,
+  clearKey,
+  keySource,
+  looksLikeKey,
+  maskKey,
+  resolveKey,
+  saveKey,
+} from './auth.mjs'
 
 /* ------------------------------------------------------------------ *
  *  Output helpers
@@ -76,6 +97,33 @@ export async function commandAdd(ids, flags) {
   }
 
   const customization = readCustomization(flags)
+
+  /*
+   * The project's brand, when there is a hoverlab.config.json above the
+   * working directory and the caller has not asked for a specific tint.
+   *
+   * Explicit flags win. Someone who typed `--hue 40` is overriding the
+   * project default on purpose, and silently adding the brand rotation on
+   * top would give them neither the number they asked for nor the brand.
+   */
+  const explicitTint = flags.hue !== undefined || flags.sat !== undefined
+  const projectConfig = explicitTint ? null : await readProjectConfig()
+  const brand = projectConfig ? brandCustomization(projectConfig) : null
+
+  if (brand) {
+    customization.hue = brand.hue
+    customization.sat = brand.saturation
+    out(
+      `${dim('Using your project brand')}${
+        brand.name ? ` ${dim(`(${brand.name})`)}` : ''
+      }${dim(` from ${displayPath(projectConfig.path)}`)}`,
+    )
+    // Said once, up front, rather than per artifact. The rotation is an
+    // approximation — see config.mjs — and a user who is going to be
+    // surprised by it should be told before the files land, not after.
+    out(`${dim('  Effects are hue-rotated to match; blocks and above follow your tokens.')}`)
+  }
+
   let failures = 0
 
   for (const id of ids) {
@@ -88,6 +136,12 @@ export async function commandAdd(ids, flags) {
         dryRun: flags['dry-run'] === true,
         customization,
       })
+
+      // Counted after the files are on disk, and only for a real install:
+      // a dry run is someone deciding, not someone using.
+      if (!result.dryRun) {
+        void reportInstall([result.artifact.id, ...(result.included ?? [])])
+      }
 
       const verb = result.dryRun ? 'Would add' : 'Added'
       const target = result.level === 'effect' ? cyan(result.framework) : cyan(result.level)
@@ -116,7 +170,11 @@ export async function commandAdd(ids, flags) {
       for (const note of result.notes) out(`  ${yellow('!')} ${dim(note)}`)
     } catch (error) {
       failures++
-      out(`${yellow('✗')} ${id}: ${error.message}`)
+      if (error?.name === 'LicenseError') {
+        printLicenseNotice(error)
+      } else {
+        out(`${yellow('✗')} ${id}: ${error.message}`)
+      }
     }
   }
 
@@ -156,17 +214,32 @@ export async function commandInit(args, flags) {
 
   // `hoverlab init storefront ./shop` reads better than forcing --dir for
   // the one argument this command almost always takes.
-  const result = await initTemplate({
-    id,
-    directory: flags.dir ?? positionalDir,
-    force: flags.force === true,
-    dryRun: flags['dry-run'] === true,
-  })
+  let result
+  try {
+    result = await initTemplate({
+      id,
+      directory: flags.dir ?? positionalDir,
+      force: flags.force === true,
+      dryRun: flags['dry-run'] === true,
+    })
+  } catch (error) {
+    if (error?.name !== 'LicenseError') throw error
+    // Handled rather than rethrown so the offer prints as output, not as a
+    // stderr line the shell colours red. `quiet` keeps the top-level
+    // handler from printing the message a second time, while still exiting
+    // non-zero — a scripted `hoverlab init` must not look like it worked.
+    printLicenseNotice(error)
+    const err = new Error(error.message)
+    err.quiet = true
+    throw err
+  }
 
   if (flags.json) {
     out(JSON.stringify(result, null, 2))
     return
   }
+
+  if (!result.dryRun) void reportInstall([result.template.id])
 
   const verb = result.dryRun ? 'Would scaffold' : 'Scaffolded'
   out(
@@ -299,6 +372,21 @@ export async function commandSearch(terms, flags) {
 const EVERY_WORD_HINT =
   'Every word has to match, so try fewer or broader terms — "teal glow" rather than "subtle teal glowing button".'
 
+/**
+ * Print a licence refusal as an offer rather than as an error.
+ *
+ * The person reading this asked for something specific and got told no,
+ * which is the highest-intent moment the CLI has. It should end with the
+ * two things they need — where to buy it, and what to run once they have —
+ * and not with a stack trace.
+ */
+function printLicenseNotice(error) {
+  out(`${yellow('✗')} ${error.message}`)
+  if (error.url) out(`  ${dim(error.url)}`)
+  out(`  ${dim('Already bought it?')} ${cyan('npx hoverlab login <key>')}`)
+  out(`  ${dim('Free to try:')} ${cyan('npx hoverlab init marketing-site')}`)
+}
+
 function installHint(level, id) {
   return level === 'template'
     ? `Scaffold one with: hoverlab init ${id}`
@@ -387,6 +475,166 @@ export async function commandCategories(_args, flags) {
 }
 
 /* ------------------------------------------------------------------ *
+ *  skill
+ * ------------------------------------------------------------------ */
+
+/**
+ * Where an agent skill goes.
+ *
+ * `.claude/skills/<name>/SKILL.md` is what Claude Code and Claude Desktop
+ * read, and it is a plain markdown file — an agent that keeps its skills
+ * somewhere else can be pointed at the same file, which is why `--dir`
+ * exists rather than a list of per-agent special cases.
+ */
+const SKILLS_DIR = path.join('.claude', 'skills')
+
+export async function commandSkill(args, flags) {
+  const [id] = args
+
+  if (!id) {
+    const skills = await listSkills()
+    if (flags.json) {
+      out(JSON.stringify(skills, null, 2))
+      return
+    }
+    out(bold('Agent skills') + dim(' — free, and they never expire'))
+    out()
+    for (const skill of skills) {
+      out(`  ${cyan(skill.id)}`)
+      out(`    ${skill.description}`)
+      out()
+    }
+    out(dim('Install one with: hoverlab skill hoverlab'))
+    return
+  }
+
+  const skill = await getSkill(id)
+
+  const root = flags.dir ? path.resolve(flags.dir) : path.join(process.cwd(), SKILLS_DIR)
+  const target = path.join(root, skill.id, 'SKILL.md')
+
+  if (flags['dry-run']) {
+    out(`${yellow('would write')} ${displayPath(target)}`)
+    return
+  }
+
+  // Overwriting is the right default here, unlike for catalog files: a
+  // skill is a copy of ours, not something the user has edited, and the
+  // reason to run this again is almost always to pick up a newer one.
+  await mkdir(path.dirname(target), { recursive: true })
+  await writeFile(target, skill.markdown, 'utf8')
+
+  out(`${green('✓')} Installed ${bold(skill.name)}`)
+  out(`  ${displayPath(target)}`)
+  out()
+  out(dim('Restart your agent, or start a new session, for it to load.'))
+}
+
+/* ------------------------------------------------------------------ *
+ *  dna
+ * ------------------------------------------------------------------ */
+
+/**
+ * Print or write a Design DNA document.
+ *
+ * Prints by default rather than writing: the common use is piping it into
+ * a prompt or an agent's context, and a command that silently created a
+ * file for that would be surprising. `--out` writes when a file is wanted.
+ */
+export async function commandDna(args, flags) {
+  const id = args[0] ?? 'catalog'
+  const doc = await getDna(id, { brand: flags.brand })
+
+  if (flags.json) {
+    out(JSON.stringify(doc, null, 2))
+    return
+  }
+
+  if (!flags.out) {
+    out(doc.markdown)
+    return
+  }
+
+  const target = path.resolve(flags.out)
+  await mkdir(path.dirname(target), { recursive: true })
+  await writeFile(target, doc.markdown, 'utf8')
+  out(`${green('✓')} ${doc.title}`)
+  out(`  ${displayPath(target)}`)
+}
+
+/* ------------------------------------------------------------------ *
+ *  login / logout / whoami
+ * ------------------------------------------------------------------ */
+
+/**
+ * Store a licence key for this machine.
+ *
+ * Takes the key as an argument rather than prompting for it. A prompt
+ * would have to read from a TTY, which rules out the two places this is
+ * most useful — a CI step and a copy-pasted setup line — and the key is
+ * not a password: it is already on the customer's clipboard from
+ * /account.
+ *
+ * Deliberately does NOT verify the key against the API. A network check
+ * here would turn `login` into a command that fails while offline, and the
+ * first real request reports an invalid key perfectly well. What it does
+ * check is the shape, because a pasted email address or a truncated key is
+ * worth catching before it is written to a file the user then forgets
+ * about.
+ */
+export async function commandLogin(args) {
+  const key = args[0] ?? process.env.HOVERLAB_KEY
+
+  if (!key) {
+    out(`${bold('hoverlab login')} — save a licence key for this machine`)
+    out()
+    out('  npx hoverlab login hl_live_xxxxxxxx')
+    out()
+    out(dim('Get one at https://hoverlab.dev/account. Only Pro templates need it —'))
+    out(dim('every effect, block and page works without a key.'))
+    return
+  }
+
+  if (!looksLikeKey(key)) {
+    throw new Error(
+      'That does not look like a Hoverlab key. They start with `hl_live_` and are issued at https://hoverlab.dev/account.',
+    )
+  }
+
+  const file = await saveKey(key)
+  out(`${green('✓')} Saved ${cyan(maskKey(key))}`)
+  out(`  ${dim(displayPath(file))}`)
+  out()
+  out(dim('HOVERLAB_KEY in your environment still wins over this file.'))
+}
+
+export async function commandLogout() {
+  const cleared = await clearKey()
+  out(
+    cleared
+      ? `${green('✓')} Key removed from ${dim(displayPath(CONFIG_FILE))}`
+      : `${dim('No stored key to remove.')}`,
+  )
+  if (process.env.HOVERLAB_KEY) {
+    // Removing the file while the environment still exports a key would
+    // otherwise look like the logout silently failed.
+    out(`  ${yellow('!')} ${dim('HOVERLAB_KEY is still set in this shell — unset it too.')}`)
+  }
+}
+
+export async function commandWhoami() {
+  const key = await resolveKey()
+  if (!key) {
+    out(`${dim('No licence key. Everything free still works —')} ${cyan('hoverlab add btn-gradient')}`)
+    out(`${dim('Pro templates need one:')} ${cyan('hoverlab login <key>')}`)
+    return
+  }
+  const source = await keySource()
+  out(`${green('✓')} ${cyan(maskKey(key))}`)
+  out(`  ${dim(`from ${source === 'HOVERLAB_KEY' ? 'HOVERLAB_KEY' : displayPath(source)}`)}`)
+}
+
+/* ------------------------------------------------------------------ *
  *  help
  * ------------------------------------------------------------------ */
 
@@ -407,7 +655,15 @@ ${bold('Commands')}
   search <words...>    Search every tier at once
   show <id...>         Print an artifact's code without writing files
   categories           List the categories, per tier
+  skill [id]           Install an agent skill into .claude/skills.
+                       With no id, lists the ones available.
+  dna [id]             Print the Design DNA for an artifact — the tokens,
+                       shape, motion and rules, ready to paste into an AI
+                       tool. With no id, the whole system.
   mcp                  Run the MCP server over stdio (for editor agents)
+  login <key>          Save a licence key for this machine
+  logout               Forget the stored key
+  whoami               Show which key is in play, and where it came from
   help                 Show this message
 
 ${bold('Options')}
@@ -424,6 +680,8 @@ ${bold('Options')}
       --limit <n>      Maximum search results per tier (default 20)
       --deep           show: include the blocks a page is built from
       --json           Machine-readable output
+      --brand <id>     dna: apply a brand preset's accent
+      --out <path>     dna: write to a file instead of printing
       --hue <deg>      Effects only — hue rotation, -180 to 180
       --sat <pct>      Effects only — saturation shift, -100 to 100
       --scale <n>      Effects only — px/rem multiplier, 0.5 to 1.5
@@ -437,6 +695,19 @@ ${bold('Examples')}
   npx hoverlab add checkout-page          ${dim('# page + every block it uses')}
   npx hoverlab init storefront ./shop
 
+${bold('Your brand')}
+  Put a ${cyan('hoverlab.config.json')} in your project root — the design system
+  export at ${dim('hoverlab.dev/design-system')} writes one — and ${dim('add')} tints effects
+  to match it. Blocks, pages and templates need nothing: they style
+  themselves through the tokens in your ${cyan('tokens.css')}. An explicit
+  ${dim('--hue')} or ${dim('--sat')} overrides the project brand.
+
+${bold('Licences')}
+  Everything here is free to install: every effect, every block, every page,
+  and the ${cyan('marketing-site')} template. The other templates are part of Pro —
+  ${dim('hoverlab init')} will say so and link the purchase. Once bought, run
+  ${cyan('hoverlab login <key>')} once, or export ${dim('HOVERLAB_KEY')} in CI.
+
 ${bold('Where files land')}
   Effects go into a hoverlab/ folder inside your components or styles
   directory. Blocks and pages keep their own paths — components/x.tsx,
@@ -444,6 +715,11 @@ ${bold('Where files land')}
   that is what the page sources import against. ${dim('--dir')} overrides both.
 
 ${bold('Editor integration')}
+  Teach your agent the catalog, so it installs the right piece instead of
+  writing a worse one from scratch:
+
+    npx hoverlab skill hoverlab
+
   Register the MCP server so your editor's agent can search and install
   from the catalog directly:
 

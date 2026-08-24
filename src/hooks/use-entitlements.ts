@@ -29,6 +29,10 @@ import type { PlanId } from '@/lib/billing/plans'
 export interface ClientEntitlements {
   plan: PlanId
   hasPro: boolean
+  /** Seat on a one-time Studio license. Grants Pro, not the shared workspace. */
+  hasStudio: boolean
+  /** Active Pro+ subscription — an AI credit allowance, not a catalog licence. */
+  hasPlus: boolean
   hasTeam: boolean
   teamId: string | null
   canUseProFeatures: boolean

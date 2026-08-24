@@ -1,21 +1,58 @@
 'use client'
 
+/**
+ * EffectCard — one tile in the /library grid.
+ *
+ * This card used to be the detail page, 24 times over. Measured at
+ * 1440×900 it was 392 × 876 px and carried a category badge, four icon
+ * actions, a title, a description, a live preview, a Code/Customize tab
+ * bar, a markup.html pane and a styles.css pane: eleven buttons and four
+ * code panes per tile. One row filled the viewport, the 24-card grid ran
+ * to 7,412 px, and pagination was the only thing making the page
+ * survivable. A grid whose every tile is a full workbench is not a grid;
+ * it is a list of documents.
+ *
+ * So the card is now a card:
+ *
+ *   live preview, fixed height
+ *   ── name ─────────────── tier ──
+ *   ── category ────────── copy ──
+ *
+ * Exactly two metadata lines, in fixed positions, so the eye can track a
+ * column rather than re-reading each tile's layout. Everything that left
+ * — the code panes, the customization sliders, compare, insights — is on
+ * `/effect/[slug]`, which already shipped all of it. The grid was
+ * duplicating the detail page instead of leading to it.
+ *
+ * What deliberately stayed:
+ *
+ *  - The live preview. This is the whole differentiator; a marketplace
+ *    shows a JPEG its authors uploaded, and cannot show the running
+ *    thing. The preview keeps `PEEK_CLASS`, so hovering anywhere on the
+ *    card plays the effect's hover state.
+ *  - Copy. It sits where a marketplace card puts the price, because it is
+ *    the same thing: what you came to the grid to get. Removing it would
+ *    have traded a scroll problem for an extra click on the core loop.
+ *  - Save / bundle / compare / open, as an overlay revealed on hover —
+ *    the wishlist-button pattern. They are always visible where hover
+ *    does not exist, since "reveal on hover" is a synonym for "gone" on
+ *    a touch screen.
+ */
+
 import * as React from 'react'
 import Link from 'next/link'
-import { Code2, Heart, Package, RotateCcw, Sparkles, ExternalLink, Check, Scale } from 'lucide-react'
+import { Check, Copy, ExternalLink, Heart, Package, Scale } from 'lucide-react'
 import { toast } from 'sonner'
-import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
-import { Card, CardContent, CardHeader } from '@/components/ui/card'
+import { Card } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { Slider } from '@/components/ui/slider'
-import { CodeBlock } from '@/components/code-block'
 import { IconAction } from '@/components/icon-action'
 import { hoverPeekCss, PEEK_CLASS } from '@/lib/hover-peek-css'
 import { useFavorites } from '@/hooks/use-favorites'
 import { useBundle } from '@/hooks/use-bundle'
 import { useCompare } from '@/hooks/use-compare'
-import { customizeCss, DEFAULT_CUSTOMIZATION, matchingPreset, PRESETS, type CustomizationOptions, type Preset } from '@/lib/customize'
+import { useCopyHistory } from '@/hooks/use-copy-history'
+import { reportUsage } from '@/lib/report-usage'
+import { DEFAULT_CUSTOMIZATION } from '@/lib/customize'
 import { cn } from '@/lib/utils'
 import type { Effect } from '@/lib/effects'
 
@@ -28,13 +65,13 @@ interface EffectCardProps {
  * rules, with clear section comments so the user can paste it into a
  * scratch file and immediately understand the structure.
  */
-function buildCombinedSnippet(effect: Effect, cssOverride?: string): string {
+function buildCombinedSnippet(effect: Effect): string {
   return [
     '<!-- HTML -->',
     effect.html.trim(),
     '',
     '/* CSS */',
-    (cssOverride ?? effect.css).trim(),
+    effect.css.trim(),
   ].join('\n')
 }
 
@@ -47,24 +84,18 @@ export function EffectCard({ effect }: EffectCardProps) {
   const inBundle = hasBundle(effect.id)
   const { has: hasCompare, toggle: toggleCompare, isFull: compareFull } = useCompare()
   const inCompare = hasCompare(effect.id)
+  const { record } = useCopyHistory()
+  const [copied, setCopied] = React.useState(false)
+  const copiedTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null)
 
-  /* Customization state ----------------------------------------------- */
-  const [opts, setOpts] = React.useState<CustomizationOptions>(DEFAULT_CUSTOMIZATION)
-  // Reset opts when the effect changes (pagination / filter switches)
-  React.useEffect(() => {
-    setOpts(DEFAULT_CUSTOMIZATION)
-  }, [effect.id])
-
-  const customizedCss = React.useMemo(
-    () => customizeCss(effect.css, opts),
-    [effect.css, opts],
-  )
-  const isCustomized = customizedCss !== effect.css
-  const activePreset = matchingPreset(opts)
-
-  // Recomputed with the customized CSS rather than on every render: this
-  // parses the whole rule list, and 24 cards do it at once on a page change.
-  const peekCss = React.useMemo(() => hoverPeekCss(customizedCss), [customizedCss])
+  /*
+   * The rules that play the effect's hover state when the pointer is
+   * anywhere on the card, derived from the catalog CSS. The card no
+   * longer customizes, so this is computed once per effect rather than
+   * on every slider drag — customization moved to the detail page, and
+   * with it the reason this had to react to anything.
+   */
+  const peekCss = React.useMemo(() => hoverPeekCss(effect.css), [effect.css])
 
   // For the spotlight card: track cursor and set CSS vars.
   React.useEffect(() => {
@@ -82,383 +113,182 @@ export function EffectCard({ effect }: EffectCardProps) {
     return () => target.removeEventListener('mousemove', handler)
   }, [effect.id])
 
-  const combinedSnippet = React.useMemo(
-    () => buildCombinedSnippet(effect, customizedCss),
-    [effect, customizedCss],
+  React.useEffect(
+    () => () => {
+      if (copiedTimer.current) clearTimeout(copiedTimer.current)
+    },
+    [],
   )
+
+  const snippet = React.useMemo(() => buildCombinedSnippet(effect), [effect])
+
+  async function handleCopy() {
+    try {
+      await navigator.clipboard.writeText(snippet)
+      setCopied(true)
+      if (copiedTimer.current) clearTimeout(copiedTimer.current)
+      copiedTimer.current = setTimeout(() => setCopied(false), 1600)
+      record({ id: effect.id, name: effect.name, category: effect.category })
+      // Feeds the server-side counter that ranks /api/v1/trending. This is
+      // the grid's only copy affordance and likely the most-used one in the
+      // app, so leaving it unreported would rank the catalog by every copy
+      // path except the busiest.
+      reportUsage(effect.id, 'copy')
+      toast.success(`Copied "${effect.name}"`, {
+        description: 'HTML and CSS are both on your clipboard.',
+      })
+    } catch {
+      toast.error('Could not reach the clipboard', {
+        description: 'Open the effect page and copy from the code pane there.',
+      })
+    }
+  }
 
   return (
     <Card
       className={cn(
         PEEK_CLASS,
-        'group relative flex flex-col overflow-hidden border-border/60 bg-card/80 backdrop-blur transition-all duration-300 hover:border-primary/40 hover:shadow-xl hover:shadow-primary/5',
+        'group relative flex flex-col overflow-hidden border-border/60 bg-card/80 backdrop-blur transition-all duration-300 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5',
         isFav && 'border-rose-400/60 ring-1 ring-rose-400/30',
-        isCustomized && 'border-primary/50 ring-1 ring-primary/20',
       )}
     >
       {/*
-        Inject this effect's CSS into the document so the live preview
-        actually renders with styles. When the user is on the Customize tab,
-        we inject the customized CSS instead. The <style> tag is mounted /
-        unmounted with the card, so only the 24 visible cards have their
-        CSS in the DOM at any time.
+        The effect's CSS plus its peek rules. Mounted and unmounted with
+        the card, so only the 24 visible cards have their CSS in the DOM
+        at any time.
       */}
-      {/*
-        The effect's CSS, plus the rules that play its hover state when the
-        pointer is anywhere on the card. Derived from `customizedCss`, not
-        `effect.css`, so a card the user has retuned peeks with the tweak
-        applied rather than snapping back to the catalog default.
-      */}
-      <style dangerouslySetInnerHTML={{ __html: `${customizedCss}\n${peekCss}` }} />
-      <CardHeader className="gap-1.5 pb-3">
-        {/* Top row: category badge (left) + four actions (right).
-            Each action is an <IconAction>, so each one states what it does
-            in a styled tooltip and to a screen reader — where before there
-            were four unlabelled circles and a `title` attribute that only
-            appears on a mouse, after a delay, if you happen to wait. */}
-        <div className="flex items-center justify-between gap-2">
-          <Badge
-            variant="secondary"
-            className="max-w-full truncate font-mono text-[10px] uppercase tracking-wider"
-          >
-            {effect.category}
-          </Badge>
-          <div className="flex shrink-0 items-center gap-1.5">
-            <IconAction
-              href={`/effect/${effect.id}`}
-              label="Open the full page for this effect"
-              icon={<ExternalLink aria-hidden className="h-3.5 w-3.5" />}
-            />
-            <IconAction
-              label={inCompare ? 'Remove from compare' : 'Add to compare'}
-              icon={<Scale aria-hidden className="h-3.5 w-3.5" />}
-              pressed={inCompare}
-              disabled={compareFull && !inCompare}
-              onClick={() => {
-                const result = toggleCompare({ id: effect.id, name: effect.name, category: effect.category })
-                if (result === 'added') {
-                  toast.success(`Added "${effect.name}" to compare`)
-                } else if (result === 'full') {
-                  toast.error('Compare is full', {
-                    description: 'Remove an effect from compare to add another.',
-                  })
-                }
-              }}
-            />
-            <IconAction
-              label={inBundle ? 'Remove from bundle' : 'Add to bundle'}
-              icon={
-                inBundle ? (
-                  <Check aria-hidden className="h-3.5 w-3.5" />
-                ) : (
-                  <Package aria-hidden className="h-3.5 w-3.5" />
-                )
-              }
-              pressed={inBundle}
-              onClick={() => toggleBundle({ id: effect.id, name: effect.name, category: effect.category }, opts)}
-            />
-            <IconAction
-              label={isFav ? 'Remove from favorites' : 'Save to favorites'}
-              tone="rose"
-              icon={
-                <Heart
-                  aria-hidden
-                  className={cn('h-3.5 w-3.5 transition-all', isFav && 'scale-110 fill-current')}
-                />
-              }
-              pressed={isFav}
-              onClick={() => toggle(effect.id)}
-            />
-          </div>
-        </div>
-        {/* Title + description: take full width below the badge/buttons row.
-            This avoids the previous layout where a long category name
-            ("Dividers & Separators", "Skeletons & Shimmers") pushed the
-            heart icon off the right edge of the card. */}
-        <div className="min-w-0">
-          <div className="flex items-center gap-2">
-            <h3 className="truncate font-semibold tracking-tight">
-              <Link
-                href={`/effect/${effect.id}`}
-                className="rounded-sm transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
-                title="Open detail page"
-              >
-                {effect.name}
-              </Link>
-            </h3>
-            {isCustomized ? (
-              <span className="inline-flex shrink-0 items-center gap-0.5 rounded-full bg-primary/10 px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-primary">
-                <Sparkles className="h-2.5 w-2.5" /> Edited
-              </span>
-            ) : null}
-          </div>
-          <p className="mt-1 text-sm text-muted-foreground">
-            {effect.description}
-          </p>
-        </div>
-      </CardHeader>
+      <style dangerouslySetInnerHTML={{ __html: `${effect.css}\n${peekCss}` }} />
 
-      <CardContent className="flex-1 pt-0">
-        {/* Always-visible live preview. Grows on hover, because several of
-            these translate or scale when played and a box sized for the
-            resting state clips them. */}
+      {/* ---- the live preview, at a fixed height ---- */}
+      <div className="relative">
         <div
           ref={previewRef}
           className={cn(
-            'flex min-h-[180px] items-center justify-center overflow-hidden rounded-lg border border-border/50 p-4 transition-[min-height] duration-300 group-hover:min-h-[224px] group-focus-within:min-h-[224px]',
+            'flex h-40 items-center justify-center overflow-hidden p-4',
             surfaceDark ? 'bg-slate-950' : effect.previewClass ?? 'bg-muted/30',
-            isCustomized && 'ring-1 ring-primary/20',
           )}
           dangerouslySetInnerHTML={{ __html: effect.html }}
         />
 
-        {/* Tabs: Code | Customize */}
-        <Tabs defaultValue="code" className="mt-3 w-full">
-          <TabsList className="grid w-full grid-cols-2">
-            <TabsTrigger value="code" className="gap-1.5">
-              <Code2 className="h-3.5 w-3.5" /> Code
-            </TabsTrigger>
-            <TabsTrigger value="customize" className="gap-1.5">
-              <Sparkles className="h-3.5 w-3.5" /> Customize
-            </TabsTrigger>
-          </TabsList>
+        {/*
+          Wishlist-style overlay. `hover:none` keeps it permanently
+          visible on touch, where there is no hover to reveal it with.
+        */}
+        <div className="absolute right-2 top-2 flex items-center gap-1 opacity-0 transition-opacity duration-200 focus-within:opacity-100 group-hover:opacity-100 [@media(hover:none)]:opacity-100">
+          <IconAction
+            href={`/effect/${effect.id}`}
+            label="Open the full page for this effect"
+            icon={<ExternalLink aria-hidden className="h-3.5 w-3.5" />}
+          />
+          <IconAction
+            label={inCompare ? 'Remove from compare' : 'Add to compare'}
+            icon={<Scale aria-hidden className="h-3.5 w-3.5" />}
+            pressed={inCompare}
+            disabled={compareFull && !inCompare}
+            onClick={() => {
+              const result = toggleCompare({
+                id: effect.id,
+                name: effect.name,
+                category: effect.category,
+              })
+              if (result === 'added') {
+                toast.success(`Added "${effect.name}" to compare`)
+              } else if (result === 'full') {
+                toast.error('Compare is full', {
+                  description: 'Remove an effect from compare to add another.',
+                })
+              }
+            }}
+          />
+          <IconAction
+            label={inBundle ? 'Remove from bundle' : 'Add to bundle'}
+            icon={
+              inBundle ? (
+                <Check aria-hidden className="h-3.5 w-3.5" />
+              ) : (
+                <Package aria-hidden className="h-3.5 w-3.5" />
+              )
+            }
+            pressed={inBundle}
+            onClick={() =>
+              toggleBundle(
+                { id: effect.id, name: effect.name, category: effect.category },
+                DEFAULT_CUSTOMIZATION,
+              )
+            }
+          />
+          <IconAction
+            label={isFav ? 'Remove from favorites' : 'Save to favorites'}
+            tone="rose"
+            icon={
+              <Heart
+                aria-hidden
+                className={cn('h-3.5 w-3.5 transition-all', isFav && 'scale-110 fill-current')}
+              />
+            }
+            pressed={isFav}
+            onClick={() => toggle(effect.id)}
+          />
+        </div>
+      </div>
 
-          <TabsContent value="code" className="mt-3 space-y-3">
-            <CodeBlock
-              code={effect.html}
-              filename="markup.html"
-              language="html"
-              effect={{ id: effect.id, name: effect.name, category: effect.category }}
-              surface="card"
-              isCustomized={isCustomized}
-              extraCopy={{ label: 'Copy both', text: combinedSnippet, successMessage: 'Copied HTML + CSS' }}
-            />
-            <CodeBlock
-              code={effect.css}
-              filename="styles.css"
-              language="css"
-              effect={{ id: effect.id, name: effect.name, category: effect.category }}
-              surface="card"
-              isCustomized={isCustomized}
-              pairedHtml={effect.html}
-            />
-          </TabsContent>
+      {/* ---- line one: name · tier ---- */}
+      <div className="flex flex-col gap-1 border-t border-border/60 px-3 py-2.5">
+        <div className="flex items-baseline justify-between gap-2">
+          <h3 className="min-w-0 truncate text-sm font-semibold tracking-tight">
+            <Link
+              href={`/effect/${effect.id}`}
+              className="rounded-sm transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+            >
+              {effect.name}
+            </Link>
+          </h3>
+          {/*
+            Where a marketplace prints the price. Every effect is free, so
+            the slot carries the only distinction the catalog draws
+            between them — and it stays occupied either way, because a
+            column of prices you can scan down only works if the number
+            is always in the same place.
+          */}
+          {effect.featured ? (
+            <Badge className="shrink-0 bg-amber-500/15 px-1.5 text-[10px] font-semibold text-amber-600 hover:bg-amber-500/15 dark:text-amber-400">
+              Featured
+            </Badge>
+          ) : (
+            <span className="shrink-0 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground/70">
+              Free
+            </span>
+          )}
+        </div>
 
-          <TabsContent value="customize" className="mt-3 space-y-4">
-            <CustomizePanel
-              effect={effect}
-              opts={opts}
-              onChange={setOpts}
-              onReset={() => setOpts(DEFAULT_CUSTOMIZATION)}
-              onPreset={(p) => setOpts({ ...p.opts })}
-              activePreset={activePreset}
-              isCustomized={isCustomized}
-              customizedCss={customizedCss}
-              combinedSnippet={combinedSnippet}
-            />
-          </TabsContent>
-        </Tabs>
-      </CardContent>
+        {/* ---- line two: category · copy ---- */}
+        <div className="flex items-center justify-between gap-2">
+          <Link
+            href={`/library?filter=${encodeURIComponent(effect.category)}`}
+            className="min-w-0 truncate font-mono text-[10px] uppercase tracking-wider text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+          >
+            {effect.category}
+          </Link>
+          <button
+            type="button"
+            onClick={handleCopy}
+            className={cn(
+              'inline-flex h-7 shrink-0 items-center gap-1.5 rounded-md border px-2 text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
+              copied
+                ? 'border-primary/40 bg-primary/10 text-primary'
+                : 'border-border/60 text-muted-foreground hover:bg-muted hover:text-foreground',
+            )}
+          >
+            {copied ? (
+              <Check aria-hidden className="h-3.5 w-3.5" />
+            ) : (
+              <Copy aria-hidden className="h-3.5 w-3.5" />
+            )}
+            {copied ? 'Copied' : 'Copy'}
+            <span className="sr-only">the HTML and CSS for {effect.name}</span>
+          </button>
+        </div>
+      </div>
     </Card>
-  )
-}
-
-/* ============================================================
- *  Customize panel — preset chips + 4 sliders + reset + copy buttons
- * ========================================================== */
-
-interface CustomizePanelProps {
-  effect: Effect
-  opts: CustomizationOptions
-  onChange: (opts: CustomizationOptions) => void
-  onReset: () => void
-  onPreset: (preset: Preset) => void
-  activePreset: Preset | null
-  isCustomized: boolean
-  customizedCss: string
-  combinedSnippet: string
-}
-
-function CustomizePanel({
-  effect,
-  opts,
-  onChange,
-  onReset,
-  onPreset,
-  activePreset,
-  isCustomized,
-  customizedCss,
-  combinedSnippet,
-}: CustomizePanelProps) {
-  return (
-    <div className="space-y-4 rounded-lg border border-border/60 bg-muted/20 p-3">
-      <p className="text-xs text-muted-foreground">
-        Slide to transform the live preview. The customized CSS is reflected
-        in real time — copy it when you're happy.
-      </p>
-
-      {/* Presets */}
-      <div className="space-y-2">
-        <div className="flex items-center justify-between">
-          <label className="text-xs font-semibold text-foreground">Presets</label>
-          {activePreset ? (
-            <span className="text-[11px] font-medium text-primary">{activePreset.name}</span>
-          ) : null}
-        </div>
-        <div className="flex flex-wrap gap-1.5">
-          {PRESETS.map((p) => {
-            const isActive = activePreset?.id === p.id
-            return (
-              <button
-                key={p.id}
-                type="button"
-                onClick={() => onPreset(p)}
-                title={p.description}
-                className={cn(
-                  'inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[11px] font-medium transition-all',
-                  isActive
-                    ? 'border-primary bg-primary/10 text-primary'
-                    : 'border-border/60 bg-background/60 text-muted-foreground hover:border-primary/40 hover:text-foreground',
-                )}
-              >
-                <span
-                  className="h-2.5 w-2.5 rounded-full border border-black/10"
-                  style={{ backgroundColor: p.swatch }}
-                  aria-hidden="true"
-                />
-                {p.name}
-              </button>
-            )
-          })}
-        </div>
-      </div>
-
-      <div className="h-px bg-border/40" />
-
-      {/* Hue */}
-      <SliderRow
-        label="Hue"
-        value={opts.hue}
-        min={-180}
-        max={180}
-        step={5}
-        unit="°"
-        onChange={(v) => onChange({ ...opts, hue: v })}
-        description="Rotate every color around the wheel."
-      />
-
-      {/* Saturation */}
-      <SliderRow
-        label="Saturation"
-        value={opts.saturation}
-        min={-100}
-        max={100}
-        step={5}
-        unit="%"
-        format={(v) => `${v > 0 ? '+' : ''}${v}%`}
-        onChange={(v) => onChange({ ...opts, saturation: v })}
-        description="Boost or mute color intensity. -100 = grayscale."
-      />
-
-      {/* Scale */}
-      <SliderRow
-        label="Size"
-        value={opts.scale}
-        min={0.5}
-        max={1.5}
-        step={0.05}
-        unit="×"
-        format={(v) => `${v.toFixed(2)}×`}
-        onChange={(v) => onChange({ ...opts, scale: v })}
-        description="Scale every px/rem dimension."
-      />
-
-      {/* Speed */}
-      <SliderRow
-        label="Speed"
-        value={opts.speed}
-        min={0.25}
-        max={3}
-        step={0.25}
-        unit="×"
-        format={(v) => `${v.toFixed(2)}×`}
-        onChange={(v) => onChange({ ...opts, speed: v })}
-        description="Multiply every animation duration."
-      />
-
-      {/* Action buttons */}
-      <div className="flex flex-wrap items-center gap-2 pt-1">
-        <Button
-          size="sm"
-          variant="outline"
-          onClick={onReset}
-          disabled={!isCustomized}
-          className="h-8 gap-1.5"
-        >
-          <RotateCcw className="h-3.5 w-3.5" /> Reset
-        </Button>
-        <CodeBlock
-          code={customizedCss}
-          filename="customized.css"
-          language="css"
-          effect={{ id: effect.id, name: effect.name, category: effect.category }}
-          surface="card"
-          isCustomized={isCustomized}
-          pairedHtml={effect.html}
-          extraCopy={{ label: 'Copy both', text: combinedSnippet, successMessage: 'Copied HTML + CSS' }}
-        />
-      </div>
-    </div>
-  )
-}
-
-/* ============================================================
- *  SliderRow — label + value badge + slider
- * ========================================================== */
-
-interface SliderRowProps {
-  label: string
-  value: number
-  min: number
-  max: number
-  step: number
-  unit: string
-  format?: (v: number) => string
-  description?: string
-  onChange: (v: number) => void
-}
-
-function SliderRow({
-  label,
-  value,
-  min,
-  max,
-  step,
-  unit,
-  format,
-  description,
-  onChange,
-}: SliderRowProps) {
-  const display = format ? format(value) : `${value}${unit}`
-  return (
-    <div className="space-y-1.5">
-      <div className="flex items-center justify-between">
-        <label className="text-xs font-semibold text-foreground">{label}</label>
-        <span className="rounded-md bg-background px-1.5 py-0.5 font-mono text-[11px] text-muted-foreground tabular-nums">
-          {display}
-        </span>
-      </div>
-      <Slider
-        value={[value]}
-        min={min}
-        max={max}
-        step={step}
-        onValueChange={(arr) => arr[0] !== undefined && onChange(arr[0])}
-        className="w-full"
-      />
-      {description ? (
-        <p className="text-[11px] text-muted-foreground/80">{description}</p>
-      ) : null}
-    </div>
   )
 }

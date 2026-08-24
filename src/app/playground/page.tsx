@@ -18,6 +18,8 @@ import { Slider } from '@/components/ui/slider'
 import { Textarea } from '@/components/ui/textarea'
 import { CodeBlock } from '@/components/code-block'
 import { SiteHeader } from '@/components/site-header'
+import { AiVariantPanel } from '@/components/ai-variant-panel'
+import { AiComposePanel } from '@/components/ai-compose-panel'
 import {
   customizeCss,
   DEFAULT_CUSTOMIZATION,
@@ -304,8 +306,37 @@ export default function PlaygroundPage() {
             </Card>
           </div>
 
-          {/* Sidebar: sliders + presets */}
+          {/* Sidebar: AI, then sliders + presets.
+              AI first because it is the only control here that changes what
+              the component IS — the sliders below transform whatever it
+              already is. */}
           <aside className="space-y-4 lg:sticky lg:top-20 lg:self-start">
+            <AiVariantPanel
+              html={html}
+              css={css}
+              onApply={(variant) => {
+                // Replaces the source, not the transform state: the sliders
+                // stay where the user left them, so a generated variation
+                // arrives wearing the same hue and speed they had set.
+                setHtml(variant.html)
+                setCss(variant.css)
+              }}
+            />
+
+            {/*
+              Compose sits below Change-it, because the two answer different
+              questions and the order matters: someone who already has
+              something on the canvas wants to alter it, and someone who
+              does not is starting over. Replacing the canvas is the more
+              destructive of the two, so it goes second.
+            */}
+            <AiComposePanel
+              onApply={(section) => {
+                setHtml(section.html)
+                setCss(section.css)
+              }}
+            />
+
             <div className="rounded-lg border border-border/60 bg-card/60 p-4">
               <div className="mb-3 flex items-center justify-between">
                 <h2 className="flex items-center gap-1.5 text-sm font-semibold tracking-tight">

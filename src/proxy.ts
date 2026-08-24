@@ -4,8 +4,8 @@
  *  - Reads the `cssfx:session` cookie. If present + valid, the user is
  *    considered authenticated for routing purposes. (API routes do
  *    their own per-request verification via `getSession()`.)
- *  - Protected routes (/library, /playground, /effect/*, /account):
- *    redirect to /login?redirect=<original> if no valid session.
+ *  - Protected routes (/account, /playground): redirect to
+ *    /login?redirect=<original> if no valid session.
  *  - Auth routes (/, /login, /signup): redirect to /library if the
  *    user is already authenticated — avoids showing the marketing /
  *    login page to logged-in users.
@@ -45,6 +45,11 @@ const PROTECTED_PREFIXES = [
   '/account',
   // The editor. It saves remixes to the signed-in user, so it needs one.
   '/playground',
+  // Private collections. Server-held, per-account data — the same category
+  // as /account, and the page has nothing to render without a session. The
+  // panel behind it also handles a free signed-in account, so this redirect
+  // only ever catches the signed-out case.
+  '/collections',
 ]
 
 // Paths that should bounce logged-in users away to /library.

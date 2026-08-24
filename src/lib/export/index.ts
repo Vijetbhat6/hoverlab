@@ -98,6 +98,51 @@ export const FRAMEWORKS: readonly FrameworkMeta[] = [
   },
 ] as const
 
+/**
+ * Export targets a free account can reach on the website.
+ *
+ * The split is the one the pricing page names, and it is drawn where it is
+ * for a reason. HTML and CSS are what the effect *is* — withholding them
+ * would be withholding the artifact, which this catalog does not do. React
+ * is free because it is the majority stack: gating it would make the free
+ * tier read as crippled to most visitors, and the free tier is the SEO
+ * funnel the whole business sits on.
+ *
+ * What Pro buys is the long tail — Vue, Svelte, styled-components,
+ * Tailwind. Each is a real translation of the same source, and each is work
+ * someone would otherwise do by hand.
+ *
+ * Be honest about what this gate is: the CSS is public, the conversion runs
+ * in the browser, and `/api/v1` plus the CLI stay open on purpose (see
+ * `lib/api/public.ts`). A determined user can reach these anyway. That is
+ * true of every product in this market and it is not what the licence
+ * protects — the licence is the enforceable thing, and it is sold on
+ * /license. This gate is the product boundary the pricing page describes;
+ * it is not, and cannot be, a lock.
+ */
+export const FREE_FRAMEWORK_IDS: readonly FrameworkId[] = ['html', 'css', 'react']
+
+const FREE_FRAMEWORK_SET = new Set<string>(FREE_FRAMEWORK_IDS)
+
+/** True when this target is one of the Pro-only export formats. */
+export function isProFramework(id: FrameworkId): boolean {
+  return !FREE_FRAMEWORK_SET.has(id)
+}
+
+/**
+ * Narrow a target to one the given entitlement can actually use.
+ *
+ * Callers pass what the user picked; this returns what they may have. A
+ * stored preference for Vue that outlives a refund would otherwise render a
+ * Pro export to a free account forever.
+ */
+export function frameworkForPlan(
+  id: FrameworkId,
+  canUseProFeatures: boolean,
+): FrameworkId {
+  return canUseProFeatures || !isProFramework(id) ? id : 'css'
+}
+
 const FRAMEWORK_IDS = new Set<string>(FRAMEWORKS.map((f) => f.id))
 
 export function isFrameworkId(value: string): value is FrameworkId {

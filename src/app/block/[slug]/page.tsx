@@ -27,12 +27,16 @@ import { pagesUsingBlock } from '@/lib/pages/page-index'
 import { absoluteUrl } from '@/lib/site'
 import { addedAt, formatAdded } from '@/lib/recency'
 import { artifactBreadcrumbLd, artifactLd } from '@/lib/structured-data'
+import { AddToCollectionButton } from '@/components/collections/add-to-collection'
 import {
   TrackArtifactView,
   FavoriteArtifactButton,
   BundleArtifactButton,
   CompareArtifactButton,
+  CopyDnaButton,
 } from '@/components/artifact-actions'
+import { ArtifactFacts } from '@/components/artifact-facts'
+import { StickyInstallBar } from '@/components/sticky-install-bar'
 
 /**
  * Every block is pre-rendered. There are thirteen of them and they are the
@@ -165,6 +169,20 @@ export default async function BlockDetailPage({ params }: PageProps) {
                 level: 'block',
               }}
             />
+            {/* Last in the row: copy, favorite and bundle all serve this
+                visit, and a collection serves the month after it. */}
+            <AddToCollectionButton
+              artifact={{
+                id: block.id,
+                name: block.name,
+                category: block.category,
+                level: 'block',
+              }}
+            />
+            {/* Aimed at whoever is about to build with an agent rather than
+                paste a component: the tokens, motion and rules, as one
+                pasteable document. */}
+            <CopyDnaButton artifactId={block.id} />
           </div>
 
           <TrackArtifactView
@@ -210,6 +228,22 @@ export default async function BlockDetailPage({ params }: PageProps) {
             </ul>
           ) : null}
         </header>
+
+        {/* What lands in the repo, what it fits, and what you may do with
+            it — the three questions a reader had to infer from the source
+            below before this existed. */}
+        <ArtifactFacts
+          id={block.id}
+          level="block"
+          files={block.files}
+          deps={block.deps}
+        />
+
+        <StickyInstallBar
+          id={block.id}
+          name={block.name}
+          command={`npx hoverlab add ${block.id}`}
+        />
 
         {/* ---------------------------------------------------------- *
          *  Live preview

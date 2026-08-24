@@ -35,6 +35,8 @@ import { PricingTiers } from '@/components/landing/pricing-tiers'
 import { ComparisonTable } from '@/components/landing/comparison-table'
 import { NewsletterSignup } from '@/components/landing/newsletter-signup'
 import { CommunityBand } from '@/components/landing/community-band'
+import { HeroEffectWall } from '@/components/landing/hero-effect-wall'
+import { CATEGORIES } from '@/lib/effect-types'
 import { DESIGNER_TOOLS } from '@/lib/designer-tools'
 import { TOTAL_COUNT } from '@/lib/catalog-stats'
 import { BLOCK_COUNT } from '@/lib/blocks/block-index'
@@ -57,6 +59,18 @@ const HERO_TIERS = [
   { label: 'Templates', href: '/templates', count: TEMPLATE_COUNT },
 ]
 
+/**
+ * Everything in the catalog, as one number.
+ *
+ * This expression already existed inline, labelling the secondary
+ * "Browse all N components" button. It is now the headline as well, which
+ * is the whole point: the count is generated at build time from
+ * `generated-catalog-stats.json` and the three index modules, so it is
+ * exact and it is never stale. An unrounded number reads as a live
+ * counter; "1,000+" reads as marketing.
+ */
+const CATALOG_TOTAL = TOTAL_COUNT + BLOCK_COUNT + PAGE_COUNT + TEMPLATE_COUNT
+
 export default function LandingPage() {
   const { user, loading } = useAuth()
 
@@ -70,13 +84,18 @@ export default function LandingPage() {
    */
   return (
     <div className="relative min-h-screen bg-background text-foreground">
-      {/* Decorative background */}
-      <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute -top-40 left-1/4 h-96 w-96 rounded-full bg-primary/20 blur-3xl" />
-        <div className="absolute -top-32 right-1/4 h-96 w-96 rounded-full bg-rose-500/20 blur-3xl" />
-        <div className="absolute top-1/2 left-1/3 h-72 w-72 rounded-full bg-amber-500/10 blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 h-72 w-72 rounded-full bg-emerald-500/10 blur-3xl" />
-      </div>
+      {/*
+        The backdrop is the catalog, running.
+
+        This was four blurred colour blobs — primary, rose, amber,
+        emerald. They carried no information and were the same gradient
+        wash every other 2026 SaaS hero ships. The wall behind the
+        headline is 18 real effects at ~12% opacity: a demo and a
+        background at once, and the one thing a marketplace of
+        third-party uploads cannot copy, because its cards are JPEGs
+        somebody else drew.
+      */}
+      <HeroEffectWall />
 
       {/*
         The same header as everywhere else. This page used to carry its own,
@@ -94,7 +113,7 @@ export default function LandingPage() {
       <main id="main-content">
 
       {/* Hero */}
-      <section className="mx-auto w-full max-w-7xl px-4 pb-12 pt-16 sm:px-6 sm:pt-24 lg:px-8 lg:pt-32">
+      <section className="relative z-10 mx-auto w-full max-w-7xl px-4 pb-12 pt-16 sm:px-6 sm:pt-24 lg:px-8 lg:pt-32">
         <div className="mx-auto max-w-3xl text-center">
           {/*
             The badge used to read "… · zero dependencies", which was true of
@@ -108,8 +127,19 @@ export default function LandingPage() {
             {TOTAL_COUNT.toLocaleString('en-US')} effects · {BLOCK_COUNT} blocks ·{' '}
             {PAGE_COUNT} pages · {TEMPLATE_COUNT} templates
           </div>
+          {/*
+            The number leads.
+
+            "Beautiful UI, ready to copy." was an adjective and a promise,
+            and the catalog's actual size — the one fact that separates
+            this from a gist — was set at 12 px in the pill above, smaller
+            than the decorative "01 / 02 / 03" step markers further down
+            the page. /library already gets this right; its h1 is
+            literally "835 CSS effects". This is that headline, one level
+            up, spanning all four rungs.
+          */}
           <h1 className="type-display text-gradient-heading">
-            Beautiful UI,
+            {CATALOG_TOTAL.toLocaleString('en-US')} components,
             <br className="hidden sm:inline" /> ready to copy.
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-pretty text-base text-body sm:text-lg lg:text-xl">
@@ -169,7 +199,7 @@ export default function LandingPage() {
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Button size="lg" variant="outline" className="h-12 gap-1.5 px-6" asChild>
               <Link href="/browse">
-                Browse all {(TOTAL_COUNT + BLOCK_COUNT + PAGE_COUNT + TEMPLATE_COUNT).toLocaleString('en-US')} components
+                Browse all {CATALOG_TOTAL.toLocaleString('en-US')} components
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </Button>

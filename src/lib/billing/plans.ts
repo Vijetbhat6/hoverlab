@@ -2,7 +2,7 @@
  * The sellable plan catalog — the single source of truth for what exists,
  * what it costs, and which Polar product backs it.
  *
- * Two products, deliberately different shapes:
+ * Three products, deliberately different shapes:
  *
  *   Pro   — ONE-TIME license. Individual developers don't subscribe to CSS
  *           snippets they can get free elsewhere; they do pay once for a
@@ -23,16 +23,68 @@
  *           previously said Pro bought "the CLI", which was never true and is
  *           the kind of claim the pricing page would have inherited.
  *
+ *   Pro+  — RECURRING monthly, and deliberately NOT a fifth column on the
+ *           pricing grid. It is an add-on: a monthly allowance of AI
+ *           credits on top of whatever licence you hold.
+ *
+ *           This is the answer to the problem the comment below states —
+ *           individuals will not subscribe to static assets. They will pay
+ *           monthly for something that gets consumed, which is why every
+ *           comparable company arrived at credits in the same year (Uiverse
+ *           $4.99 for 500k tokens, 21st.dev $15, Envato's tiers priced by
+ *           credit count, UI8 selling Persona packs). Credits read as fuel;
+ *           a subscription to a catalog reads as rent.
+ *
+ *           Sold as an add-on rather than a tier because it is one: it
+ *           grants no catalog rights Pro does not already grant, and a
+ *           five-column pricing table makes the licence decision harder to
+ *           serve a product that is really a meter.
+ *
+ *           Credits started out buying one endpoint, which made $9/month a
+ *           subscription to a button. They now buy three actions at
+ *           different prices — vary/edit an effect (1), recolour one onto
+ *           your brand (1), compose a section from a brief (3) — because a
+ *           meter is only worth paying for monthly if it measures
+ *           something used weekly. See `ACTION_COSTS` in ./credits.
+ *
+ *   Studio — ONE-TIME, ten seats. The same license as Pro, bought once for a
+ *           whole team. This exists because the comparable market sells
+ *           teams a seat-COUNT license rather than a subscription — Preline
+ *           $459/15 devs, Tailkit $549/10, Aceternity $1,590/10, Tailwind
+ *           Plus for 25 — and a team that priced our $12/seat/month against
+ *           buying Pro n times did the arithmetic and bought Pro n times.
+ *
+ *   Renewal — ONE-TIME, and not a licence at all. It buys another twelve
+ *           months of catalog updates on a licence already held. Two of
+ *           them, priced off the plan they renew (~40%), because a Studio
+ *           holder renewing at the Pro price would be a mispricing bug
+ *           rather than a discount.
+ *
+ *           These have no card on the pricing page and never will. Nobody
+ *           shops for a renewal; it is offered on /account to the specific
+ *           person whose window is running out, which is the only context
+ *           where the word means anything.
+ *
  *   Team  — RECURRING per-seat. Companies pay for seats and shared state
  *           (brand tokens, shared collections); individuals don't. This is
- *           where recurring revenue actually comes from.
+ *           where recurring revenue actually comes from. Studio does not
+ *           replace it: Studio sells the license, Team sells the shared
+ *           workspace, and a Studio buyer who wants shared brand tokens
+ *           still upgrades.
  *
  * Prices are declared here for display only — Polar is authoritative at
  * checkout, and the webhook records the amount actually charged. Changing
  * a number here never changes what a customer is billed.
  */
 
-export type PlanId = 'free' | 'pro' | 'team'
+export type PlanId =
+  | 'free'
+  | 'pro'
+  | 'plus'
+  | 'studio'
+  | 'team'
+  | 'renewal'
+  | 'renewal-studio'
 export type BillingInterval = 'one_time' | 'month'
 
 export interface Plan {
@@ -52,8 +104,38 @@ export interface Plan {
   interval: BillingInterval
   /** Polar product id, from the dashboard. Null for the free plan. */
   polarProductId: string | null
-  /** Per-seat pricing (Team) vs a single purchase (Pro). */
+  /** Per-seat pricing (Team) vs a single purchase (Pro, Studio). */
   perSeat: boolean
+  /**
+   * Months of catalog updates a purchase includes, or null when updates
+   * run for as long as the subscription does.
+   *
+   * A one-time licence previously included "all future updates" forever,
+   * which is a promise that gets more expensive every week it is kept: the
+   * catalog grows, and every artifact added after a purchase is value
+   * delivered to a past buyer against no revenue. Three years of that is
+   * how a lifetime deal stops paying for the work that sustains it.
+   *
+   * Twelve months is what this market does — Preline, Tailwind Plus and
+   * Untitled UI all sell a perpetual licence with a bounded update window
+   * and a discounted renewal.
+   *
+   * Read this carefully, because it is narrower than it sounds. What
+   * expires is the entitlement to artifacts published AFTER the window,
+   * and nothing else. The licence to ship what you already have is
+   * perpetual and irrevocable, nothing stops working, and nothing checks
+   * this at runtime — see `lib/license.ts`. It is a term, not a lock.
+   */
+  updateWindowMonths: number | null
+  /**
+   * Seats a one-time license covers, or null when seats don't apply.
+   *
+   * Distinct from `perSeat`, which asks whether the customer picks a
+   * quantity at checkout. Studio is not per-seat — nobody chooses 7 — but it
+   * does cover ten people, and that number has to be somewhere the webhook
+   * can read it when it provisions the workspace.
+   */
+  includedSeats: number | null
 }
 
 export const PLANS: Record<PlanId, Plan> = {
@@ -65,21 +147,74 @@ export const PLANS: Record<PlanId, Plan> = {
     interval: 'one_time',
     polarProductId: null,
     perSeat: false,
+    // The free licence covers what is in the catalog whenever you look at
+    // it. There is no purchase for updates to run from.
+    updateWindowMonths: null,
+    includedSeats: null,
   },
   pro: {
     id: 'pro',
     name: 'Pro',
-    // $59 one-time. Sits in the band this market has shown it pays
-    // outright (Tailwind Plus $299, Magic UI Pro lifetime tiers), while
-    // staying an easy solo-developer decision.
-    priceCents: 5900,
-    // ₹5,600 — the dollar price at roughly ₹95/$, so the rupee ladder tracks
+    // $79 one-time.
+    //
+    // Was $59, which was under the floor of every comparable product —
+    // React Bits' entry tier is $99, Shadcnblocks $149, Aceternity and
+    // Magic UI $199, Preline $249, Tailwind Plus and React Bits' top tier
+    // $299 — while Hoverlab ships more surface than any of them (the whole
+    // effect catalog, blocks, pages, runnable templates, the tools, the CLI
+    // and the MCP server). A price that far below the band reads as a
+    // cheaper substitute rather than a better product.
+    //
+    // Deliberately not $99: without a consumable tier to justify it, $79 is
+    // still a decision a solo developer makes without a spreadsheet. Revisit
+    // when Pro+ credits ship.
+    priceCents: 7900,
+    // ₹7,500 — the dollar price at roughly ₹95/$, so the rupee ladder tracks
     // the dollar one rather than becoming a second pricing strategy to
     // maintain.
-    priceInrPaise: 560000,
+    priceInrPaise: 750000,
     interval: 'one_time',
     polarProductId: process.env.POLAR_PRODUCT_ID_PRO ?? null,
     perSeat: false,
+    updateWindowMonths: 12,
+    includedSeats: 1,
+  },
+  plus: {
+    id: 'plus',
+    name: 'Pro+',
+    // $9 per month.
+    //
+    // Under Team's $12/seat so the two are never confused for each other,
+    // and in the band this market has settled on for a credit allowance:
+    // Uiverse asks $4.99 for its metered tier and $19.99 for unlimited,
+    // 21st.dev $15, Magic Patterns $17. Cheap enough to be an impulse on
+    // top of a licence already bought.
+    priceCents: 900,
+    /** ₹850. */
+    priceInrPaise: 85000,
+    interval: 'month',
+    polarProductId: process.env.POLAR_PRODUCT_ID_PLUS ?? null,
+    perSeat: false,
+    // A subscription. Credits arrive monthly for as long as it is live;
+    // there is no separate update window to run out.
+    updateWindowMonths: null,
+    includedSeats: 1,
+  },
+  studio: {
+    id: 'studio',
+    name: 'Studio',
+    // $299 one-time for ten seats — $29.90 a head, against $79 each buying
+    // Pro individually. Priced under Preline's $459/15 and Tailkit's
+    // $549/10 for the same reason Pro is priced where it is, and far under
+    // Aceternity's $1,590/10.
+    priceCents: 29900,
+    /** ₹28,000. */
+    priceInrPaise: 2800000,
+    interval: 'one_time',
+    polarProductId: process.env.POLAR_PRODUCT_ID_STUDIO ?? null,
+    perSeat: false,
+    updateWindowMonths: 12,
+    includedSeats: 10,
   },
   team: {
     id: 'team',
@@ -98,7 +233,62 @@ export const PLANS: Record<PlanId, Plan> = {
     interval: 'month',
     polarProductId: process.env.POLAR_PRODUCT_ID_TEAM ?? null,
     perSeat: true,
+    // Updates run with the subscription, which is the point of paying
+    // monthly. Nothing to bound.
+    updateWindowMonths: null,
+    includedSeats: null,
   },
+  renewal: {
+    id: 'renewal',
+    name: 'Pro updates renewal',
+    // $32 — roughly 40% of Pro's $79, which is where this market puts a
+    // renewal. It has to be well under the licence price or nobody renews
+    // and everybody just re-buys at a discount sale; it has to be well
+    // above nothing or the update window is theatre.
+    priceCents: 3200,
+    /** ₹3,000 — 40% of Pro's ₹7,500, tracking the dollar ladder. */
+    priceInrPaise: 300000,
+    interval: 'one_time',
+    polarProductId: process.env.POLAR_PRODUCT_ID_RENEWAL ?? null,
+    perSeat: false,
+    // Buys another twelve months. The webhook extends from whichever is
+    // later — today, or the window still running — so renewing early
+    // never costs the customer the time they had left.
+    updateWindowMonths: 12,
+    // Renews a licence; grants no seats of its own.
+    includedSeats: null,
+  },
+  'renewal-studio': {
+    id: 'renewal-studio',
+    name: 'Studio updates renewal',
+    /** $120 — 40% of Studio's $299, same ratio as the Pro renewal. */
+    priceCents: 12000,
+    /** ₹11,200 — 40% of Studio's ₹28,000. */
+    priceInrPaise: 1120000,
+    interval: 'one_time',
+    polarProductId: process.env.POLAR_PRODUCT_ID_RENEWAL_STUDIO ?? null,
+    perSeat: false,
+    updateWindowMonths: 12,
+    includedSeats: null,
+  },
+}
+
+/**
+ * The renewal that extends a given licence, or null when the plan has no
+ * window to renew.
+ *
+ * Subscriptions return null: their updates run with the plan, so selling
+ * them a renewal would be selling something they already have.
+ */
+export function renewalFor(plan: PlanId): PlanId | null {
+  if (plan === 'pro') return 'renewal'
+  if (plan === 'studio') return 'renewal-studio'
+  return null
+}
+
+/** True when this plan is a renewal rather than a licence. */
+export function isRenewal(plan: PlanId): boolean {
+  return plan === 'renewal' || plan === 'renewal-studio'
 }
 
 /**
@@ -133,10 +323,12 @@ interface RegionalOverride {
 /**
  * Region-specific pricing.
  *
- * India: $59 is roughly 15% of a junior Indian developer's monthly take-home
- * — the same burden a ~$1,000 purchase would be to a US developer. The World
+ * India: $79 is roughly 20% of a junior Indian developer's monthly take-home
+ * — the same burden a ~$1,300 purchase would be to a US developer. The World
  * Bank PPP conversion factor for India sits near ₹23 per international dollar
- * against a ~₹96 market rate, which puts honest parity for Pro at $17-20.
+ * against a ~₹96 market rate, which puts honest parity for Pro at $23-27.
+ * Tailwind Plus reaches for the same ratio from the other direction, listing
+ * India at roughly a third of its dollar price.
  *
  * Team is discounted too, but expect it to convert poorly regardless: RBI's
  * e-mandate rules make recurring cross-border card charges unreliable from
@@ -146,11 +338,25 @@ interface RegionalOverride {
 const REGIONAL: Record<Exclude<Region, 'default'>, Partial<Record<PlanId, RegionalOverride>>> = {
   IN: {
     pro: {
-      priceCents: 1900,
+      priceCents: 2500,
       discountId: process.env.POLAR_DISCOUNT_ID_IN_PRO ?? null,
-      // ₹1,800 — $19 at the same ~₹95/$ the list price uses.
-      priceInrPaise: 180000,
+      // ₹2,400 — $25 at the same ~₹95/$ the list price uses.
+      priceInrPaise: 240000,
       discountIdInr: process.env.POLAR_DISCOUNT_ID_IN_PRO_INR ?? null,
+    },
+    plus: {
+      priceCents: 300,
+      discountId: process.env.POLAR_DISCOUNT_ID_IN_PLUS ?? null,
+      /** ₹290 per month. */
+      priceInrPaise: 29000,
+      discountIdInr: process.env.POLAR_DISCOUNT_ID_IN_PLUS_INR ?? null,
+    },
+    studio: {
+      priceCents: 9900,
+      discountId: process.env.POLAR_DISCOUNT_ID_IN_STUDIO ?? null,
+      /** ₹9,500 — $99 at the same ~₹95/$ the list price uses. */
+      priceInrPaise: 950000,
+      discountIdInr: process.env.POLAR_DISCOUNT_ID_IN_STUDIO_INR ?? null,
     },
     team: {
       priceCents: 500,
@@ -264,7 +470,15 @@ export function discountForRegion(
 
 /** Narrow an arbitrary string to a known plan id. */
 export function parsePlanId(value: unknown): PlanId | null {
-  return value === 'free' || value === 'pro' || value === 'team' ? value : null
+  return value === 'free' ||
+    value === 'pro' ||
+    value === 'plus' ||
+    value === 'studio' ||
+    value === 'team' ||
+    value === 'renewal' ||
+    value === 'renewal-studio'
+    ? value
+    : null
 }
 
 /** Format cents for display, e.g. 5900 → "$59". */

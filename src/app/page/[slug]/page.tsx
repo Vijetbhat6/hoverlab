@@ -27,12 +27,16 @@ import { templatesUsingPage } from '@/lib/templates/template-index'
 import { absoluteUrl } from '@/lib/site'
 import { addedAt, formatAdded } from '@/lib/recency'
 import { artifactBreadcrumbLd, artifactLd } from '@/lib/structured-data'
+import { AddToCollectionButton } from '@/components/collections/add-to-collection'
 import {
   TrackArtifactView,
   FavoriteArtifactButton,
   BundleArtifactButton,
   CompareArtifactButton,
+  CopyDnaButton,
 } from '@/components/artifact-actions'
+import { ArtifactFacts } from '@/components/artifact-facts'
+import { StickyInstallBar } from '@/components/sticky-install-bar'
 
 export const dynamicParams = false
 
@@ -147,6 +151,20 @@ export default async function PageDetailPage({ params }: PageProps) {
                 level: 'page',
               }}
             />
+            {/* Last in the row: copy, favorite and bundle all serve this
+                visit, and a collection serves the month after it. */}
+            <AddToCollectionButton
+              artifact={{
+                id: page.id,
+                name: page.name,
+                category: page.category,
+                level: 'page',
+              }}
+            />
+            {/* Aimed at whoever is about to build with an agent rather than
+                paste a component: the tokens, motion and rules, as one
+                pasteable document. */}
+            <CopyDnaButton artifactId={page.id} />
           </div>
 
           <TrackArtifactView
@@ -179,6 +197,20 @@ export default async function PageDetailPage({ params }: PageProps) {
             ) : null}
           </div>
         </header>
+
+        <ArtifactFacts
+          id={page.id}
+          level="page"
+          files={page.files}
+          deps={page.deps}
+          includes={page.composedOf}
+        />
+
+        <StickyInstallBar
+          id={page.id}
+          name={page.name}
+          command={`npx hoverlab add ${page.id}`}
+        />
 
         {/* ---------------------------------------------------------- *
          *  Live preview

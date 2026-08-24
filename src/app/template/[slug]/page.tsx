@@ -42,12 +42,16 @@ import { getTemplateMeta } from '@/lib/templates/template-index'
 import { absoluteUrl } from '@/lib/site'
 import { addedAt, formatAdded } from '@/lib/recency'
 import { artifactBreadcrumbLd, artifactLd } from '@/lib/structured-data'
+import { AddToCollectionButton } from '@/components/collections/add-to-collection'
 import {
   TrackArtifactView,
   FavoriteArtifactButton,
   BundleArtifactButton,
   CompareArtifactButton,
+  CopyDnaButton,
 } from '@/components/artifact-actions'
+import { ArtifactFacts } from '@/components/artifact-facts'
+import { StickyInstallBar } from '@/components/sticky-install-bar'
 
 export const dynamicParams = false
 
@@ -166,6 +170,20 @@ export default async function TemplateDetailPage({ params }: PageProps) {
                 level: 'template',
               }}
             />
+            {/* Last in the row: copy, favorite and bundle all serve this
+                visit, and a collection serves the month after it. */}
+            <AddToCollectionButton
+              artifact={{
+                id: template.id,
+                name: template.name,
+                category: template.category,
+                level: 'template',
+              }}
+            />
+            {/* Aimed at whoever is about to build with an agent rather than
+                paste a component: the tokens, motion and rules, as one
+                pasteable document. */}
+            <CopyDnaButton artifactId={template.id} />
           </div>
 
           <TrackArtifactView
@@ -203,6 +221,20 @@ export default async function TemplateDetailPage({ params }: PageProps) {
           </div>
         </header>
 
+        <ArtifactFacts
+          id={template.id}
+          level="template"
+          files={projectFiles}
+          deps={template.deps}
+          includes={template.composedOf}
+        />
+
+        <StickyInstallBar
+          id={template.id}
+          name={template.name}
+          command={`npx hoverlab init ${template.id} ./my-app`}
+        />
+
         {/* ---------------------------------------------------------- *
          *  Live preview — every route
          * ---------------------------------------------------------- */}
@@ -229,6 +261,7 @@ export default async function TemplateDetailPage({ params }: PageProps) {
             <TemplateDownloadButton
               templateId={template.id}
               fileCount={template.files.length}
+              tier={template.tier ?? 'free'}
             />
 
             <div className="mt-5 overflow-hidden rounded-xl bg-zinc-950 p-4">

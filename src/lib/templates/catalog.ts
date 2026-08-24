@@ -11,6 +11,26 @@
  * page becomes inside the generated project, and everything else about a
  * template is derived from it: `composedOf`, the preview switcher, the
  * assembled tree, the route table in the README.
+ *
+ * TIERS. This is the one catalog where `tier` is set, and it is the rung
+ * where Pro stops being a licence and starts being a boundary. The reason
+ * is arithmetic: 835 effects at $79 is nine cents an effect, which is not
+ * a pitch anybody makes a decision about. A runnable eight-route project
+ * is. Effects, blocks and pages stay free at every level — browse, copy,
+ * `/api/v1`, `hoverlab add` — because they are the funnel, and taking them
+ * back would cost more traffic than the licence would recover.
+ *
+ * `marketing-site` stays free deliberately, and is marked rather than left
+ * to the default so that nobody later reads its absence as an oversight.
+ * It is the lead magnet: the whole thing, running, with nothing withheld,
+ * for someone deciding whether the other six are worth $79. A paid catalog
+ * with no free example of what is in it converts worse than one with a
+ * good one.
+ *
+ * The gate is real rather than decorative because it is enforced where the
+ * source is served, not where the button is drawn — see
+ * `lib/billing/api-key.ts`, which exists precisely because a website-only
+ * check is walked around by the CLI and the archive URL.
  */
 
 import type { TemplateCategory, TemplateRoute } from './template-types'
@@ -34,6 +54,7 @@ export interface TemplateRecord {
 export const TEMPLATE_CATALOG: TemplateRecord[] = [
   {
     id: 'saas-starter',
+    tier: 'pro',
     name: 'SaaS Starter',
     category: 'Full Product',
     description:
@@ -71,6 +92,7 @@ export const TEMPLATE_CATALOG: TemplateRecord[] = [
   },
   {
     id: 'admin-panel',
+    tier: 'pro',
     name: 'Admin Panel',
     category: 'Internal Tools',
     description:
@@ -99,6 +121,7 @@ export const TEMPLATE_CATALOG: TemplateRecord[] = [
   },
   {
     id: 'marketing-site',
+    tier: 'free',
     name: 'Marketing Site',
     category: 'Marketing',
     description:
@@ -118,6 +141,7 @@ export const TEMPLATE_CATALOG: TemplateRecord[] = [
   },
   {
     id: 'ai-assistant',
+    tier: 'pro',
     name: 'AI Assistant',
     category: 'Full Product',
     description:
@@ -139,6 +163,7 @@ export const TEMPLATE_CATALOG: TemplateRecord[] = [
   },
   {
     id: 'content-site',
+    tier: 'pro',
     name: 'Content Site',
     category: 'Marketing',
     description:
@@ -161,6 +186,7 @@ export const TEMPLATE_CATALOG: TemplateRecord[] = [
   },
   {
     id: 'docs-site',
+    tier: 'pro',
     name: 'Docs Site',
     category: 'Marketing',
     description:
@@ -180,6 +206,7 @@ export const TEMPLATE_CATALOG: TemplateRecord[] = [
   },
   {
     id: 'storefront',
+    tier: 'pro',
     name: 'Storefront',
     category: 'Commerce',
     description:
