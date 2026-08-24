@@ -121,6 +121,24 @@ export type AnalyticsEvent =
    * surface actually feeds it is worth knowing.
    */
   | { name: 'newsletter_subscribed'; props: { source: string } }
+  /*
+   * The designer tools, and whether they are a funnel or a cul-de-sac.
+   *
+   * The tools are plausibly the largest traffic surface on this site and
+   * they led nowhere until /tools grew the save bar and the catalog exits.
+   * These three answer the question that decides whether that work was
+   * worth doing: does anyone who came for a spacing scale ever take a step
+   * toward the catalog, and which step.
+   *
+   * `tool` is the route ('/tools/tokens'), so the answer is per-tool. It is
+   * very unlikely to be uniform — a contrast checker and a token generator
+   * attract different visitors with different intent — and a single blended
+   * conversion rate would hide that.
+   */
+  | { name: 'tool_preset_saved'; props: { tool: string } }
+  | { name: 'tool_preview_in_brand'; props: { tool: string } }
+  | { name: 'tool_copy_install'; props: { tool: string } }
+  | { name: 'tool_open_dna'; props: { tool: string } }
 
 /** True once PostHog has been initialized with a real project key. */
 function enabled(): boolean {

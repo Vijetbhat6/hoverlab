@@ -28,10 +28,13 @@ import { Label } from '@/components/ui/label'
 import { Slider } from '@/components/ui/slider'
 import { CopyCssCard } from '@/components/designer-tools/copy-css-card'
 import { ToolLayout } from '@/components/designer-tools/tool-layout'
+import { ToolPresetsBar } from '@/components/designer-tools/tool-presets-bar'
+import { UseInCatalog } from '@/components/designer-tools/use-in-catalog'
+import { useToolState } from '@/hooks/use-tool-state'
 import { hexToRgb, normalizeHex, rgbToOklch } from '@/lib/color-tools'
 import { cn } from '@/lib/utils'
 
-const STORAGE_KEY = 'hoverlab:tool:tokens'
+const TOOL = '/tools/tokens'
 
 interface TokenState {
   /** Brand hue, 0–360. */
@@ -167,44 +170,31 @@ ${lines(dark, '  ')}
 }
 
 export default function TokensToolPage() {
-  const [state, setState] = React.useState<TokenState>(DEFAULT_STATE)
+  // Working state is local and ungated; named presets need an account.
+  // See `use-tool-state.ts` for why the two layers are kept apart.
+  const tool = useToolState<TokenState>(TOOL, DEFAULT_STATE)
+  const { state, setState } = tool
 
-  // Restore after mount, never during render — reading localStorage in the
-  // initializer would make the server and client markup disagree.
+  // Handoff from the palette generator: ?base=#hex seeds hue + saturation.
+  // window.location rather than useSearchParams — the hook would force a
+  // Suspense boundary around the whole page for one optional param.
+  // The param wins over the restored state, then leaves the URL so a
+  // reload keeps whatever the user tunes afterwards. Waits on `hydrating`
+  // so the localStorage restore cannot land after this and overwrite it.
   React.useEffect(() => {
-    try {
-      const raw = window.localStorage.getItem(STORAGE_KEY)
-      if (raw) setState({ ...DEFAULT_STATE, ...(JSON.parse(raw) as Partial<TokenState>) })
-    } catch {
-      /* private mode — defaults are fine */
-    }
-
-    // Handoff from the palette generator: ?base=#hex seeds hue + saturation.
-    // window.location rather than useSearchParams — the hook would force a
-    // Suspense boundary around the whole page for one optional param.
-    // The param wins over the restored state, then leaves the URL so a
-    // reload keeps whatever the user tunes afterwards.
+    if (tool.hydrating) return
     const param = new URLSearchParams(window.location.search).get('base')
     const hex = param ? normalizeHex(param) : null
     const rgb = hex ? hexToRgb(hex) : null
-    if (rgb) {
-      const { c, h } = rgbToOklch(rgb)
-      setState((s) => ({
-        ...s,
-        hue: Math.round(((h % 360) + 360) % 360),
-        chroma: Math.min(0.3, Math.round(c * 200) / 200),
-      }))
-      window.history.replaceState(null, '', window.location.pathname)
-    }
-  }, [])
-
-  React.useEffect(() => {
-    try {
-      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state))
-    } catch {
-      /* ignore */
-    }
-  }, [state])
+    if (!rgb) return
+    const { c, h } = rgbToOklch(rgb)
+    setState((s) => ({
+      ...s,
+      hue: Math.round(((h % 360) + 360) % 360),
+      chroma: Math.min(0.3, Math.round(c * 200) / 200),
+    }))
+    window.history.replaceState(null, '', window.location.pathname)
+  }, [tool.hydrating, setState])
 
   const light = buildScheme(state, false)
   const dark = buildScheme(state, true)
@@ -319,6 +309,11 @@ export default function TokensToolPage() {
               one across the whole set.
             </p>
           </div>
+
+          {/* After the controls, never before them. Asking for an account in
+              front of a tool that used to be free is a toll booth; asking
+              once the token set exists is an offer. */}
+          <ToolPresetsBar tool={tool} noun="token set" />
         </div>
 
         {/* Preview + output */}
@@ -409,6 +404,14 @@ export default function TokensToolPage() {
           </div>
 
           <CopyCssCard code={css} title="globals.css" language="css" />
+
+          {/* The exit. Placed after the output rather than beside the
+              controls: it is worth reading once the tokens exist, and it is
+              noise while someone is still moving sliders. */}
+          <UseInCatalog
+            tool={TOOL}
+            brand={{ hue: state.hue, chroma: state.chroma }}
+          />
         </div>
       </div>
     </ToolLayout>

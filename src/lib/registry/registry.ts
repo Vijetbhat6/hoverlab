@@ -91,8 +91,12 @@ export interface RegistryItem {
  *  Names
  * ------------------------------------------------------------------ */
 
-/** The `registry:base` item's name, and the namespace people will configure. */
-export const REGISTRY_NAME = 'hoverlab'
+/**
+ * Re-exported from `./name`, which has no `server-only` import — the
+ * install command is rendered on the client and needs the same string.
+ */
+import { REGISTRY_NAME } from './name'
+export { REGISTRY_NAME }
 
 const BLOCK_BY_ID = new Map(BLOCKS.map((b) => [b.id, b]))
 const PAGE_BY_ID = new Map(PAGES.map((p) => [p.id, p]))

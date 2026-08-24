@@ -19,9 +19,12 @@ import { Label } from '@/components/ui/label'
 import { SliderField } from '@/components/control-field'
 import { CopyCssCard } from '@/components/designer-tools/copy-css-card'
 import { ToolLayout } from '@/components/designer-tools/tool-layout'
+import { ToolPresetsBar } from '@/components/designer-tools/tool-presets-bar'
+import { UseInCatalog } from '@/components/designer-tools/use-in-catalog'
+import { useToolState } from '@/hooks/use-tool-state'
 import { cn } from '@/lib/utils'
 
-const STORAGE_KEY = 'hoverlab:tool:spacing'
+const TOOL = '/tools/spacing'
 
 // Same ratio presets as the typography tool, so a designer using both
 // tools can build type and spacing on one ratio.
@@ -79,27 +82,10 @@ interface Step {
 }
 
 export default function SpacingToolPage() {
-  const [state, setState] = React.useState<SpacingState>(DEFAULT_STATE)
-
-  React.useEffect(() => {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY)
-      if (raw) {
-        const parsed = JSON.parse(raw)
-        setState((prev) => ({ ...prev, ...parsed }))
-      }
-    } catch {
-      /* ignore */
-    }
-  }, [])
-
-  React.useEffect(() => {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(state))
-    } catch {
-      /* ignore */
-    }
-  }, [state])
+  // Working state stays local and ungated; named presets need an
+  // account. See `use-tool-state.ts` for why the two are separate.
+  const tool = useToolState<SpacingState>(TOOL, DEFAULT_STATE)
+  const { state, setState } = tool
 
   const scale = React.useMemo<Step[]>(() => {
     const out: Step[] = []
@@ -255,6 +241,10 @@ export default function SpacingToolPage() {
               scale with the user&apos;s font-size preference.
             </p>
           </div>
+
+          {/* After the controls, never before them — the ask lands once the
+              scale exists rather than in front of it. */}
+          <ToolPresetsBar tool={tool} noun="scale" />
         </div>
 
         {/* Preview + output */}
@@ -300,6 +290,10 @@ export default function SpacingToolPage() {
           <CopyCssCard code={cssOutput} title="CSS variables" language="css" />
           <CopyCssCard code={tailwindOutput} title="Tailwind config" language="js" />
           <CopyCssCard code={jsonOutput} title="JSON" language="json" />
+
+          {/* No `brand` — a spacing scale implies no colour, and a button
+              offering to repaint the catalog from one would do nothing. */}
+          <UseInCatalog tool={TOOL} />
         </div>
       </div>
     </ToolLayout>

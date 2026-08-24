@@ -20,10 +20,13 @@ import { Label } from '@/components/ui/label'
 import { SliderField } from '@/components/control-field'
 import { CopyCssCard } from '@/components/designer-tools/copy-css-card'
 import { ToolLayout } from '@/components/designer-tools/tool-layout'
+import { ToolPresetsBar } from '@/components/designer-tools/tool-presets-bar'
+import { UseInCatalog } from '@/components/designer-tools/use-in-catalog'
+import { useToolState } from '@/hooks/use-tool-state'
 import { FONT_PAIRINGS, buildNextFont } from '@/lib/font-pairings'
 import { cn } from '@/lib/utils'
 
-const STORAGE_KEY = 'hoverlab:tool:typography'
+const TOOL = '/tools/typography'
 
 const SCALE_RATIOS = [
   { id: '1.2', label: '1.2 — Minor Third', value: 1.2 },
@@ -67,27 +70,10 @@ const PREVIEW_TEXT = {
 }
 
 export default function TypographyToolPage() {
-  const [state, setState] = React.useState<TypoState>(DEFAULT_STATE)
-
-  React.useEffect(() => {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY)
-      if (raw) {
-        const parsed = JSON.parse(raw)
-        setState((prev) => ({ ...prev, ...parsed }))
-      }
-    } catch {
-      /* ignore */
-    }
-  }, [])
-
-  React.useEffect(() => {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(state))
-    } catch {
-      /* ignore */
-    }
-  }, [state])
+  // Working state stays local and ungated; named presets need an
+  // account. See `use-tool-state.ts` for why the two are separate.
+  const tool = useToolState<TypoState>(TOOL, DEFAULT_STATE)
+  const { state, setState } = tool
 
   const pair = FONT_PAIRINGS.find((p) => p.id === state.pairId) ?? FONT_PAIRINGS[0]!
 
@@ -330,6 +316,10 @@ p + p { margin-top: var(--spacing-paragraph); }`
 
           <CopyCssCard code={cssOutput} title="CSS variables + base styles" language="css" />
           <CopyCssCard code={buildNextFont(pair)} title="next/font" language="tsx" />
+
+          {/* After the controls, never before them — the ask lands once the
+              pairing exists rather than in front of it. */}
+          <ToolPresetsBar tool={tool} noun="pairing" />
         </div>
 
         {/* Preview */}
@@ -429,6 +419,9 @@ p + p { margin-top: var(--spacing-paragraph); }`
               </p>
             </div>
           </div>
+
+          {/* No `brand`: a type scale carries no hue either. */}
+          <UseInCatalog tool={TOOL} />
         </div>
       </div>
     </ToolLayout>

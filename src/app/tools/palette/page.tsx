@@ -19,6 +19,9 @@ import { Label } from '@/components/ui/label'
 import { Slider } from '@/components/ui/slider'
 import { CopyCssCard } from '@/components/designer-tools/copy-css-card'
 import { ToolLayout } from '@/components/designer-tools/tool-layout'
+import { ToolPresetsBar } from '@/components/designer-tools/tool-presets-bar'
+import { UseInCatalog } from '@/components/designer-tools/use-in-catalog'
+import { useToolState } from '@/hooks/use-tool-state'
 import { readSharedState, ShareLinkButton } from '@/components/designer-tools/share-link'
 import {
   generatePalette,
@@ -26,6 +29,7 @@ import {
   hexToRgb,
   normalizeHex,
   randomHex,
+  rgbToOklch,
   type PaletteScheme,
 } from '@/lib/color-tools'
 import { cn } from '@/lib/utils'
@@ -40,54 +44,75 @@ const SCHEMES: { id: PaletteScheme; label: string }[] = [
   { id: 'shades', label: 'Shades & Tints' },
 ]
 
-const STORAGE_KEY = 'hoverlab:tool:palette'
+const TOOL = '/tools/palette'
 
 interface PaletteState {
   base: string
   scheme: PaletteScheme
 }
 
+const DEFAULT_STATE: PaletteState = { base: '#10b981', scheme: 'analogous' }
+
+/**
+ * The OKLCH hue and chroma behind a hex, for the catalog preview.
+ *
+ * Returns null for anything that is not a colour — the field accepts partial
+ * input while someone types, and offering to repaint the catalog from `#10b`
+ * would be a button that does something arbitrary.
+ */
+function brandFromHex(hex: string): { hue: number; chroma: number } | null {
+  const normalized = normalizeHex(hex)
+  const rgb = normalized ? hexToRgb(normalized) : null
+  if (!rgb) return null
+  const { c, h } = rgbToOklch(rgb)
+  return {
+    hue: Math.round(((h % 360) + 360) % 360),
+    chroma: Math.min(0.3, Math.round(c * 200) / 200),
+  }
+}
+
 export default function PaletteToolPage() {
-  const [base, setBase] = React.useState('#10b981')
-  const [scheme, setScheme] = React.useState<PaletteScheme>('analogous')
+  // Working state stays local and ungated; named presets need an account.
+  const tool = useToolState<PaletteState>(TOOL, DEFAULT_STATE)
+  const { setState } = tool
 
-  // Hydrate from localStorage.
+  /*
+    Validation is a derivation, not a restore step.
+
+    The hook merges whatever was stored over the defaults without inspecting
+    it, which is right — it cannot know what any given tool's state means.
+    That leaves this page holding a `base` that might be half-typed and a
+    `scheme` that might name a mode we removed, from localStorage, from a
+    shared link, or from a preset saved a year ago. Checking on the way OUT
+    covers all four with one rule, where the previous shape checked two of
+    them at the point of restore and neither of the others.
+  */
+  const base = normalizeHex(tool.state.base) ?? tool.state.base
+  const scheme: PaletteScheme = SCHEMES.some((s) => s.id === tool.state.scheme)
+    ? tool.state.scheme
+    : DEFAULT_STATE.scheme
+
+  const setBase = React.useCallback(
+    (next: string) => setState((s) => ({ ...s, base: next })),
+    [setState],
+  )
+  const setScheme = React.useCallback(
+    (next: PaletteScheme) => setState((s) => ({ ...s, scheme: next })),
+    [setState],
+  )
+
+  // A shared link's state wins over whatever this browser had stored, so it
+  // runs after hydration rather than racing it.
   React.useEffect(() => {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY)
-      if (raw) {
-        const parsed = JSON.parse(raw)
-        if (parsed.base) {
-          const n = normalizeHex(parsed.base)
-          if (n) setBase(n)
-        }
-        if (parsed.scheme && SCHEMES.some((s) => s.id === parsed.scheme)) {
-          setScheme(parsed.scheme)
-        }
-      }
-    } catch {
-      /* ignore */
-    }
-
-    // A shared link's state wins over whatever this browser had stored.
+    if (tool.hydrating) return
     const shared = readSharedState<PaletteState>()
-    if (shared) {
-      const n = shared.base ? normalizeHex(shared.base) : null
-      if (n) setBase(n)
-      if (shared.scheme && SCHEMES.some((s) => s.id === shared.scheme)) {
-        setScheme(shared.scheme)
-      }
-    }
-  }, [])
-
-  // Persist on change.
-  React.useEffect(() => {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify({ base, scheme }))
-    } catch {
-      /* ignore */
-    }
-  }, [base, scheme])
+    if (!shared) return
+    const n = shared.base ? normalizeHex(shared.base) : null
+    setState((s) => ({
+      base: n ?? s.base,
+      scheme: SCHEMES.some((x) => x.id === shared.scheme) ? shared.scheme : s.scheme,
+    }))
+  }, [tool.hydrating, setState])
 
   const palette = React.useMemo(() => generatePalette(base, scheme), [base, scheme])
 
@@ -207,9 +232,20 @@ export default function PaletteToolPage() {
             </div>
           </div>
 
+          {/* After the controls, never before them. */}
+          <ToolPresetsBar tool={tool} noun="palette" />
+
           <CopyCssCard code={cssVars} title="CSS variables" language="css" />
           <CopyCssCard code={tailwindConfig} title="Tailwind config" language="js" />
           <CopyCssCard code={jsonExport} title="JSON" language="json" />
+
+          {/*
+            The base colour is a hex; the catalog's brand is OKLCH hue and
+            chroma. Converted here rather than stored that way, because the
+            palette maths works in hex and a second representation in state
+            would be one more thing that can disagree with the swatches.
+          */}
+          <UseInCatalog tool={TOOL} brand={brandFromHex(base)} />
         </div>
 
         {/* Palette display */}
