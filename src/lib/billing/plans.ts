@@ -83,6 +83,7 @@ export type PlanId =
   | 'plus'
   | 'studio'
   | 'team'
+  | 'team-annual'
   | 'renewal'
   | 'renewal-studio'
 export type BillingInterval = 'one_time' | 'month'
@@ -238,6 +239,54 @@ export const PLANS: Record<PlanId, Plan> = {
     updateWindowMonths: null,
     includedSeats: null,
   },
+  /**
+   * Team, bought outright for a year instead of billed monthly.
+   *
+   * Same product as `team` — shared brand tokens, shared collections,
+   * workspace theming, seat management — sold as a one-time per-seat charge
+   * covering twelve months.
+   *
+   * It exists because of the payment rail, not the price. RBI's e-mandate
+   * rules make recurring cross-border card charges unreliable from Indian
+   * cards, and Brazilian domestic cards frequently decline international
+   * recurring charges outright. India is the single largest source of
+   * traffic in this category and Brazil is in the top five, so `team` is a
+   * plan our two biggest non-US audiences cannot reliably hold: the first
+   * charge succeeds, the renewal fails, and the workspace dies for a reason
+   * no discount fixes. A one-time charge has no renewal to fail.
+   *
+   * $120 per seat against $144 for twelve months of `team` — ten months'
+   * price for twelve months' term, which is the ordinary annual-vs-monthly
+   * discount and also compensation for paying up front.
+   *
+   * Sold everywhere rather than gated to the affected regions. Gating would
+   * mean a plan that appears and disappears by IP, and US buyers with
+   * procurement that prefers one invoice a year want the same thing for
+   * unrelated reasons.
+   */
+  'team-annual': {
+    id: 'team-annual',
+    name: 'Team, annual',
+    /** $120 per seat, once, covering twelve months. */
+    priceCents: 12000,
+    /** ₹4,750 per seat, once — ten times band A's monthly seat price. */
+    priceInrPaise: 475000,
+    // The whole point of the plan. Polar creates an order rather than a
+    // subscription, so nothing is ever re-presented to the card.
+    interval: 'one_time',
+    polarProductId: process.env.POLAR_PRODUCT_ID_TEAM_ANNUAL ?? null,
+    // Per-seat like `team`: the buyer picks a quantity at checkout, and it
+    // reaches Polar as `seats` on the checkout and comes back as the order
+    // quantity on the webhook.
+    perSeat: true,
+    // Twelve months, and here the window bounds the WORKSPACE and not just
+    // the update entitlement — unlike Pro and Studio, which are perpetual
+    // licences with a bounded update window. That is why the webhook writes
+    // a `term` status with a real `currentPeriodEnd` instead of `lifetime`.
+    updateWindowMonths: 12,
+    // Seats are chosen, not included. Same as `team`.
+    includedSeats: null,
+  },
   renewal: {
     id: 'renewal',
     name: 'Pro updates renewal',
@@ -283,6 +332,12 @@ export const PLANS: Record<PlanId, Plan> = {
 export function renewalFor(plan: PlanId): PlanId | null {
   if (plan === 'pro') return 'renewal'
   if (plan === 'studio') return 'renewal-studio'
+  // 'team-annual' deliberately has no renewal SKU. Pro and Studio are
+  // perpetual licences where a renewal buys back only the update window, so
+  // it is worth ~40% of the licence. An annual term is not that: when it
+  // lapses the workspace stops, and the thing that restarts it is the term
+  // again at the term price. A discounted 'renewal-team' would be a second
+  // product that resolves to the same entitlement as re-buying this one.
   return null
 }
 
@@ -385,6 +440,7 @@ export const BAND_CENTS: Record<Band, Partial<Record<PlanId, number>>> = {
     plus: 300,
     studio: 9900,
     team: 500,
+    'team-annual': 5000,
     renewal: 1000,
     'renewal-studio': 3900,
   },
@@ -393,6 +449,7 @@ export const BAND_CENTS: Record<Band, Partial<Record<PlanId, number>>> = {
     plus: 500,
     studio: 14900,
     team: 700,
+    'team-annual': 7000,
     renewal: 1600,
     'renewal-studio': 5900,
   },
@@ -401,6 +458,7 @@ export const BAND_CENTS: Record<Band, Partial<Record<PlanId, number>>> = {
     plus: 700,
     studio: 20900,
     team: 900,
+    'team-annual': 9000,
     renewal: 2200,
     'renewal-studio': 8400,
   },
@@ -419,6 +477,7 @@ export const IN_PAISE: Partial<Record<PlanId, number>> = {
   plus: 29000,
   studio: 950000,
   team: 47500,
+  'team-annual': 475000,
   renewal: 95000,
   'renewal-studio': 370000,
 }
@@ -458,10 +517,13 @@ function bandOverrides(
  * Team is discounted in every band, but expect India to convert poorly
  * regardless: RBI's e-mandate rules make recurring cross-border card charges
  * unreliable from Indian cards, so renewals fail for reasons no price fixes.
- * If Team-for-India matters, sell it as a one-time annual license rather
- * than a subscription. Brazil has a milder version of the same problem —
- * domestic cards often decline international recurring charges — which is
- * part of why the one-time tiers are the ones worth discounting hardest.
+ * Brazil has a milder version of the same problem — domestic cards often
+ * decline international recurring charges — which is part of why the
+ * one-time tiers are the ones worth discounting hardest.
+ *
+ * That is what 'team-annual' is for, and it is banded here alongside the
+ * monthly plan so the two are the same offer in every region. Where the
+ * recurring rail is unreliable the annual term is the one to lead with.
  */
 const REGIONAL: Record<Exclude<Region, 'default'>, Partial<Record<PlanId, RegionalOverride>>> = {
   IN: bandOverrides('a', 'IN', IN_PAISE),
@@ -592,6 +654,7 @@ export function parsePlanId(value: unknown): PlanId | null {
     value === 'plus' ||
     value === 'studio' ||
     value === 'team' ||
+    value === 'team-annual' ||
     value === 'renewal' ||
     value === 'renewal-studio'
     ? value

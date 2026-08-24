@@ -122,7 +122,10 @@ export async function POST(request: Request) {
   const planId = parsePlanId(body.plan)
   if (!planId || planId === 'free') {
     return NextResponse.json(
-      { error: 'plan must be "pro", "plus", "studio", "team" or a renewal' },
+      {
+        error:
+          'plan must be "pro", "plus", "studio", "team", "team-annual" or a renewal',
+      },
       { status: 400 },
     )
   }
@@ -149,7 +152,7 @@ export async function POST(request: Request) {
             held === 'free'
               ? 'A renewal extends a licence you already hold. Buy Pro or Studio first.'
               : held === 'team'
-                ? 'Team includes updates for as long as the subscription is live — there is nothing to renew.'
+                ? 'Team includes updates for as long as the plan runs — there is nothing to renew.'
                 : `That renewal is for a different plan than the one on this account.`,
         },
         { status: 409 },

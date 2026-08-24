@@ -16,10 +16,11 @@
  *   Hoverlab 2,000 credits  one-time, $15 and ₹1,425
  *   Hoverlab Studio  one-time, ten seats, $299 and ₹28,000
  *   Hoverlab Team    recurring monthly, seat-based, $12 and ₹1,150 /seat
+ *   Hoverlab Team, annual  one-time, seat-based, $120 and ₹4,750 /seat
  *
- * and then one discount per (region × plan), thirty in total: six plans
- * across four regions, plus the rupee pair for each of India's six. Every
- * amount is computed as `list − band` from the tables in
+ * and then one discount per (region × plan), thirty-five in total: seven
+ * plans across four regions, plus the rupee pair for each of India's seven.
+ * Every amount is computed as `list − band` from the tables in
  * src/lib/billing/plans.ts, so none of them is written down twice.
  *
  * The regions are purchasing-power bands rather than countries — see the
@@ -113,6 +114,7 @@ const PRO_NAME = 'Hoverlab Pro'
 const PLUS_NAME = 'Hoverlab Pro+'
 const STUDIO_NAME = 'Hoverlab Studio'
 const TEAM_NAME = 'Hoverlab Team'
+const TEAM_ANNUAL_NAME = 'Hoverlab Team, annual'
 const RENEWAL_NAME = 'Hoverlab Pro updates renewal'
 const RENEWAL_STUDIO_NAME = 'Hoverlab Studio updates renewal'
 
@@ -315,6 +317,51 @@ async function main() {
       },
     ],
   })
+
+  /*
+   * Team as a twelve-month term instead of a subscription.
+   *
+   * Seat-based like the monthly plan, so the buyer picks a quantity and
+   * Polar prices it per seat — but with recurringInterval null, so it
+   * settles as an ORDER and the card is never presented again. That is the
+   * whole point: RBI e-mandate rules make recurring cross-border charges
+   * unreliable from Indian cards and Brazilian cards often decline
+   * international recurring charges, so the monthly plan is one our two
+   * largest audiences cannot reliably keep. A charge that never repeats has
+   * no renewal to fail.
+   *
+   * Priced at ten months of the monthly seat price for a twelve-month term.
+   */
+  const teamAnnualId = await ensureProduct(
+    TEAM_ANNUAL_NAME,
+    'POLAR_PRODUCT_ID_TEAM_ANNUAL',
+    {
+      name: TEAM_ANNUAL_NAME,
+      description:
+        'Twelve months of Hoverlab Team, per seat, paid once — shared brand ' +
+        'tokens, shared collections, workspace theming and seat management, ' +
+        'with no recurring charge.',
+      recurringInterval: null,
+      prices: [
+        {
+          amountType: 'seat_based',
+          priceCurrency: 'usd',
+          seatTiers: {
+            seatTierType: 'volume',
+            tiers: [{ minSeats: 1, maxSeats: null, pricePerSeat: 12000 }],
+          },
+        },
+        {
+          amountType: 'seat_based',
+          priceCurrency: 'inr',
+          seatTiers: {
+            seatTierType: 'volume',
+            tiers: [{ minSeats: 1, maxSeats: null, pricePerSeat: 475000 }],
+          },
+        },
+      ],
+    },
+  )
 
   /**
    * Add a rupee price to a product that already exists with only a dollar
@@ -546,7 +593,14 @@ async function main() {
     is fine, because nothing below reads them. It reads the price tables,
     which are literals.
   */
-  type BandPlan = 'pro' | 'plus' | 'studio' | 'team' | 'renewal' | 'renewal-studio'
+  type BandPlan =
+    | 'pro'
+    | 'plus'
+    | 'studio'
+    | 'team'
+    | 'team-annual'
+    | 'renewal'
+    | 'renewal-studio'
 
   /**
    * Per-plan facts that do not vary by band.
@@ -565,6 +619,14 @@ async function main() {
     plus: { productId: plusId, label: 'Pro+', duration: 'forever' },
     studio: { productId: studioId, label: 'Studio', duration: 'once' },
     team: { productId: teamId, label: 'Team', duration: 'forever' },
+    // 'once' rather than 'forever': a one-time order is charged exactly
+    // once, so there is no later charge for a repeating discount to apply
+    // to. See the note on `duration` above.
+    'team-annual': {
+      productId: teamAnnualId,
+      label: 'Team annual',
+      duration: 'once',
+    },
     renewal: { productId: renewalId, label: 'Pro renewal', duration: 'once' },
     'renewal-studio': {
       productId: renewalStudioId,

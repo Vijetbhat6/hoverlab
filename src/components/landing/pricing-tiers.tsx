@@ -88,6 +88,16 @@ interface Tier {
   popular?: boolean
   badge?: string
   features: Feature[]
+  /**
+   * A second way to buy the same tier, offered under the main CTA.
+   *
+   * A link rather than a fifth card or a billing-period toggle. A card would
+   * orphan a row in a four-across grid, and a toggle would hide one of the
+   * two prices behind a click on the one control a visitor scanning prices
+   * is least likely to touch. This is the same product either way, so it
+   * belongs inside the tier that sells it.
+   */
+  altPlan?: { id: PlanId; label: string; note: string }
 }
 
 const TIERS: Tier[] = [
@@ -214,6 +224,20 @@ const TIERS: Tier[] = [
     tagline: 'For design systems teams standardizing UI across products.',
     cta: 'Start Team plan',
     ctaVariant: 'outline',
+    /*
+     * Offered on every card view, not only where the card rail is unreliable.
+     * The reason it exists is regional — RBI e-mandate rules make recurring
+     * cross-border charges fail from Indian cards, and Brazilian cards often
+     * decline international recurring charges, which between them cover our
+     * two largest audiences — but a plan that appears and disappears by IP
+     * is worse than one always on offer, and buyers with procurement that
+     * wants one invoice a year want the same thing for unrelated reasons.
+     */
+    altPlan: {
+      id: 'team-annual',
+      label: 'Pay for a year instead',
+      note: 'per seat, once — no recurring charge, no renewal to fail',
+    },
     features: [
       'Everything in Pro, for every seat',
       'Priority email support',
@@ -537,6 +561,31 @@ export function PricingTiers({ className }: { className?: string } = {}) {
               signedIn={signedIn}
               onBuy={() => startCheckout(tier.id)}
             />
+
+            {/* The alternative way to buy this same tier. Hidden once the
+                tier is owned — by either route, since ownership is a property
+                of the tier and not of the SKU that granted it — and hidden
+                when the alternative is not configured in Polar, so it never
+                renders a button that dead-ends at a 503. */}
+            {tier.altPlan &&
+              ownershipFor(tier.id) !== 'owned' &&
+              purchasableFor(tier.altPlan.id) === true && (
+                <div className="-mt-4 mb-6">
+                  <button
+                    type="button"
+                    onClick={() => startCheckout(tier.altPlan!.id)}
+                    disabled={pendingPlan === tier.altPlan.id}
+                    className="text-sm font-medium text-primary underline-offset-4 hover:underline disabled:opacity-60"
+                  >
+                    {pendingPlan === tier.altPlan.id
+                      ? 'Starting checkout…'
+                      : `${tier.altPlan.label} — ${headlineFor(tier.altPlan.id)}`}
+                  </button>
+                  <p className="mt-0.5 text-xs text-muted-foreground">
+                    {tier.altPlan.note}
+                  </p>
+                </div>
+              )}
 
             <ul className="mt-auto space-y-2.5">
               {tier.features.map((f, j) => {

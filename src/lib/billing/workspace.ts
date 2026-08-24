@@ -9,7 +9,11 @@ import { generateInviteCode, normalizeInviteCode } from './invite-code'
  * A workspace is a `teams/{id}` document. Two kinds share it:
  *
  *   kind 'studio'  a one-time license covering N people, status 'lifetime'
- *   kind 'team'    a per-seat subscription, status from Polar
+ *   kind 'team'    per-seat. Status from Polar when it is the monthly
+ *                  subscription; status 'term' with a real end date when it
+ *                  was bought as an annual licence ('team-annual'), which
+ *                  exists because recurring cross-border card charges are
+ *                  unreliable in our two largest markets.
  *
  * Both need the same thing from this module: a way for the buyer to let
  * other people in. Seats are claimed with a code rather than an emailed
@@ -48,7 +52,9 @@ export interface Workspace {
 /** Statuses that still entitle a seat. Mirrors `teamIsLive` in entitlements.ts. */
 function isLive(status: unknown, currentPeriodEnd: unknown): boolean {
   if (status === 'active' || status === 'lifetime') return true
-  if (status === 'past_due' || status === 'canceled') {
+  // 'term' is an annual licence bought outright: no renewal to fail, but a
+  // real end date. Same expiry rule as the grace statuses below.
+  if (status === 'term' || status === 'past_due' || status === 'canceled') {
     const end =
       currentPeriodEnd instanceof Timestamp ? currentPeriodEnd.toDate() : null
     return end !== null && end.getTime() > Date.now()

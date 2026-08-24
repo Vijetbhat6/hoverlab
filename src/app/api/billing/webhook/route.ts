@@ -8,6 +8,7 @@ import {
   getCreditPack,
   revokePurchasedCredits,
 } from '@/lib/billing/credits'
+import { PLANS } from '@/lib/billing/plans'
 
 /**
  * Polar webhook receiver — the ONLY place entitlements are granted.
@@ -17,7 +18,7 @@ import {
  * written here, after Polar has signed the event and confirmed payment.
  *
  * Handled events:
- *   order.paid                 → grant Pro license / Studio seats / credits
+ *   order.paid                 → grant Pro license / seats / credits
  *   order.refunded             → revoke what that order granted
  *   subscription.active        → Team or Pro+ subscription live (or renewed)
  *   subscription.updated       → seat count / period end changed
@@ -186,7 +187,14 @@ async function handleOrderPaid(data: PolarLike): Promise<void> {
   }
 
   if (plan === 'studio') {
-    await provisionStudioWorkspace(userId, orderId, data)
+    await provisionOneTimeWorkspace(userId, orderId, data, 'studio')
+  }
+
+  // Team bought as a twelve-month term rather than a subscription. Same
+  // workspace, same seat mechanics; it expires instead of renewing, which
+  // is the entire reason it exists — see 'team-annual' in billing/plans.ts.
+  if (plan === 'team-annual') {
+    await provisionOneTimeWorkspace(userId, orderId, data, 'team-annual')
   }
 
   // A credit pack. `addPurchasedCredits` is keyed by the order id, so a
@@ -204,53 +212,93 @@ async function handleOrderPaid(data: PolarLike): Promise<void> {
 }
 
 /**
- * Studio — a one-time license covering ten people.
+ * The two workspaces bought with a single payment rather than a
+ * subscription: Studio, a licence covering ten people, and 'team-annual',
+ * Team sold as a twelve-month term.
  *
- * Provisioned as a workspace rather than as ten Pro licenses, because the
- * buyer does not know the other nine email addresses at checkout: they buy,
- * then invite. That is the same shape as a Team subscription, so it reuses
- * the same `teams/{id}` documents and the same members subcollection, and
- * differs in exactly two fields — `kind`, which is what stops a Studio seat
- * unlocking shared brand tokens, and a `lifetime` status, which has no
- * renewal to fail.
+ * Both are provisioned as a workspace rather than as N Pro licenses,
+ * because the buyer does not know the other email addresses at checkout:
+ * they buy, then invite. That is the same shape as a Team subscription, so
+ * all three reuse the same `teams/{id}` documents and the same members
+ * subcollection.
+ *
+ * What differs between them is three fields. `kind` — which is what stops a
+ * Studio seat unlocking the shared brand tokens a Team seat gets, and why
+ * an annual Team licence is written as kind 'team' and not 'studio'. The
+ * status — 'lifetime' for Studio, which never expires, against 'term' for
+ * the annual licence, which expires at `currentPeriodEnd`. And where the
+ * seat count comes from: Studio's ten are a property of the licence, while
+ * an annual Team's are the quantity the buyer chose at checkout.
  *
  * Keyed by the ORDER id (a subscription-backed team is keyed by the
  * subscription id), so a redelivered order.paid re-enters this function and
  * finds the workspace already there instead of creating a second one.
  */
-async function provisionStudioWorkspace(
+async function provisionOneTimeWorkspace(
   userId: string,
   orderId: string,
   data: PolarLike,
+  plan: 'studio' | 'team-annual',
 ): Promise<void> {
   const db = adminDb()
   const teamRef = db.collection('teams').doc(orderId)
   if ((await teamRef.get()).exists) return
 
+  const isStudio = plan === 'studio'
+
+  // Studio sells a fixed ten seats, so a missing quantity means ten. An
+  // annual Team licence sells a quantity the buyer picked, which arrives as
+  // the order quantity; metadata is the fallback for the same reason it is
+  // on the subscription path, and one seat is the floor because a workspace
+  // with none would be a purchase that entitles nobody.
   const metaSeats = Number(data.metadata?.seats)
-  const seats = Number.isFinite(metaSeats) && metaSeats > 0 ? metaSeats : 10
+  const orderSeats = typeof data.quantity === 'number' ? data.quantity : 0
+  const seats = isStudio
+    ? Number.isFinite(metaSeats) && metaSeats > 0
+      ? metaSeats
+      : 10
+    : orderSeats > 0
+      ? orderSeats
+      : Number.isFinite(metaSeats) && metaSeats > 0
+        ? metaSeats
+        : 1
+
+  // 'lifetime' never expires; 'term' is live only while currentPeriodEnd is
+  // in the future. Both are read by `subscriptionIsLive()` in
+  // billing/entitlements.ts and `isLive()` in billing/workspace.ts.
+  const months = PLANS[plan].updateWindowMonths
+  const termEnd =
+    isStudio || months === null
+      ? null
+      : (() => {
+          const end = new Date()
+          end.setMonth(end.getMonth() + months)
+          return Timestamp.fromDate(end)
+        })()
 
   const teamName =
     typeof data.metadata?.teamName === 'string' && data.metadata.teamName
       ? data.metadata.teamName
-      : 'My studio'
+      : isStudio
+        ? 'My studio'
+        : 'My team'
 
   const batch = db.batch()
   batch.set(teamRef, {
     name: teamName,
-    kind: 'studio',
+    kind: isStudio ? 'studio' : 'team',
     ownerId: userId,
     polarOrderId: orderId,
     // Not a subscription status, but the field every seat check already
-    // reads. `teamIsLive()` knows this one never expires.
-    subscriptionStatus: 'lifetime',
+    // reads. 'lifetime' never expires; 'term' expires at currentPeriodEnd.
+    subscriptionStatus: isStudio ? 'lifetime' : 'term',
     seats,
-    // The buyer takes the first seat; the other nine are claimed with the
-    // code. Without this the license would be ten seats nobody but the
-    // purchaser could ever use.
+    // The buyer takes the first seat; the rest are claimed with the code.
+    // Without this the license would be N seats nobody but the purchaser
+    // could ever use.
     seatsUsed: 1,
     inviteCode: generateInviteCode(),
-    currentPeriodEnd: null,
+    currentPeriodEnd: termEnd,
     createdAt: Timestamp.now(),
   })
   batch.set(teamRef.collection('members').doc(userId), {
@@ -291,11 +339,13 @@ async function handleOrderRefunded(data: PolarLike): Promise<void> {
     await revokePurchasedCredits(userId, Number(purchase.credits) || 0)
   }
 
-  if (purchase.plan === 'studio') {
-    // The workspace is keyed by this order id. Mark it revoked rather than
-    // deleting it: `teamIsLive()` stops recognising the status, every seat
-    // loses access at once, and the membership records survive in case the
-    // refund was a mistake.
+  if (purchase.plan === 'studio' || purchase.plan === 'team-annual') {
+    // Both are workspaces keyed by this order id — the Studio licence and
+    // the annual Team term are provisioned by the same function, so they
+    // are revoked by the same one. Mark it revoked rather than deleting it:
+    // the liveness checks stop recognising the status, every seat loses
+    // access at once, and the membership records survive in case the refund
+    // was a mistake.
     await adminDb()
       .collection('teams')
       .doc(orderId)

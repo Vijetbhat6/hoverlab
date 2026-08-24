@@ -112,6 +112,13 @@ function subscriptionIsLive(status: string, currentPeriodEnd: Date | null): bool
   // fail and no period to run out. The webhook writes this status once and
   // never revisits it — only a refund takes the seats away.
   if (status === 'lifetime') return true
+  // A fixed term bought outright — 'team-annual'. It has no renewal to fail
+  // either, but unlike 'lifetime' it does run out, so it is live only while
+  // the term it paid for still is. Anything that widens this must widen
+  // `isLive()` in workspace.ts with it.
+  if (status === 'term') {
+    return currentPeriodEnd !== null && currentPeriodEnd.getTime() > Date.now()
+  }
   if (status === 'past_due' || status === 'canceled') {
     return currentPeriodEnd !== null && currentPeriodEnd.getTime() > Date.now()
   }
