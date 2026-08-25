@@ -91,6 +91,14 @@
     "lines": 370,
     "files": 1
   },
+  "booking-scheduler": {
+    "lines": 323,
+    "files": 1
+  },
+  "feedback-widget": {
+    "lines": 237,
+    "files": 1
+  },
   "confirm-dialog": {
     "lines": 184,
     "files": 1
@@ -113,6 +121,10 @@
   },
   "setup-wizard": {
     "lines": 265,
+    "files": 1
+  },
+  "team-invite-step": {
+    "lines": 268,
     "files": 1
   },
   "toast-stack": {

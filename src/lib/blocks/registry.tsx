@@ -98,6 +98,9 @@ import { FaqGrid } from './sources/faq-grid'
 import { FaqCategorized } from './sources/faq-categorized'
 import { FaqSearch } from './sources/faq-search'
 import { LineChartPanel } from './sources/line-chart-panel'
+import { BookingScheduler } from './sources/booking-scheduler'
+import { FeedbackWidget } from './sources/feedback-widget'
+import { TeamInviteStep } from './sources/team-invite-step'
 import { DonutBreakdown } from './sources/donut-breakdown'
 import { ActivityHeatmap } from './sources/activity-heatmap'
 import { CsvImportMapper } from './sources/csv-import-mapper'
@@ -297,6 +300,9 @@ export const BLOCK_PREVIEWS: Record<string, React.ReactNode> = {
   'faq-categorized': <FaqCategorized />,
   'faq-search': <FaqSearch />,
   'line-chart-panel': <LineChartPanel />,
+  'booking-scheduler': <BookingScheduler />,
+  'feedback-widget': <FeedbackWidget />,
+  'team-invite-step': <TeamInviteStep />,
   'donut-breakdown': <DonutBreakdown />,
   'activity-heatmap': <ActivityHeatmap />,
   'csv-import-mapper': <CsvImportMapper />,

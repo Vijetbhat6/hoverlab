@@ -437,6 +437,36 @@
       "findings": []
     },
     {
+      "id": "booking-scheduler",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "feedback-widget",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
       "id": "confirm-dialog",
       "kind": "block",
       "passed": [
@@ -513,6 +543,21 @@
     },
     {
       "id": "setup-wizard",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "team-invite-step",
       "kind": "block",
       "passed": [
         "img-alt",

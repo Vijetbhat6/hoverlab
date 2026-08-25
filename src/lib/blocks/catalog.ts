@@ -287,6 +287,28 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     deps: ['lucide-react'],
   },
 
+  {
+    id: 'booking-scheduler',
+    name: 'Meeting Scheduler',
+    category: 'Contact & Forms',
+    description:
+      'Day strip, slot grid and a time zone the visitor can change — because a slot list with no zone on it is how this pattern wastes an hour of everyone involved.',
+    tags: ['booking', 'calendar', 'scheduler', 'time zone', 'meeting'],
+    previewComponent: 'booking-scheduler',
+    deps: ['lucide-react'],
+    featured: true,
+  },
+  {
+    id: 'feedback-widget',
+    name: 'Inline Feedback Widget',
+    category: 'Contact & Forms',
+    description:
+      'One click to rate, everything after it optional — the shape that collects a complaint from someone mid-task who would never open a contact page.',
+    tags: ['feedback', 'rating', 'widget', 'nps', 'support'],
+    previewComponent: 'feedback-widget',
+    deps: ['lucide-react'],
+  },
+
   /* ---------------------------- Modals & Drawers ------------------- */
   {
     id: 'confirm-dialog',
@@ -354,6 +376,18 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     tags: ['onboarding', 'wizard', 'setup', 'steps', 'radio'],
     previewComponent: 'setup-wizard',
     deps: ['lucide-react'],
+  },
+
+  {
+    id: 'team-invite-step',
+    name: 'Team Invite Step',
+    category: 'Onboarding',
+    description:
+      'The onboarding step where a product becomes multiplayer: pasted addresses split into chips, typos marked rather than dropped, and an honest way to skip.',
+    tags: ['onboarding', 'invite', 'team', 'chips', 'email'],
+    previewComponent: 'team-invite-step',
+    deps: ['lucide-react'],
+    featured: true,
   },
 
   /* ---------------------------- Notifications ---------------------- */
