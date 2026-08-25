@@ -19,6 +19,12 @@
 //      error in Next.
 //   4. The generated token file exists and is not empty, so `registry:base`
 //      actually carries a theme.
+//   5. Every effect's CSS converts to the nested object the schema wants,
+//      with nothing the converter could not read. An effect that half
+//      converts installs and renders wrong, which is worse than one that
+//      refuses to publish.
+//   6. Effect ids do not collide with block or page ids — all three share
+//      the registry's one namespace.
 //
 // Deliberately NOT imported from `src/lib/registry/registry.ts` — that module
 // is `server-only`, which throws outside a React Server Component. The rules
@@ -33,7 +39,9 @@ import { fileURLToPath } from 'node:url'
 
 import { BLOCK_CATALOG } from '../src/lib/blocks/catalog.ts'
 import { PAGE_CATALOG } from '../src/lib/pages/catalog.ts'
+import { EFFECTS } from '../src/lib/effects.ts'
 import { unresolvedLocalImports } from '../src/lib/registry/deps.ts'
+import { cssToObject } from '../src/lib/registry/css-to-object.ts'
 
 const here = dirname(fileURLToPath(import.meta.url))
 const root = join(here, '..')
@@ -106,6 +114,41 @@ try {
   failures.push('src/lib/registry/generated-tokens.json is missing; run npm run build:registry.')
 }
 
+/* -- effects convert ----------------------------------------------------- */
+
+/*
+  Effects ship as a `css` object rather than as files, so the conversion is
+  the packaging — and a conversion failure is invisible until somebody
+  installs the effect into their own project and it renders wrong.
+
+  Only "could not read" fails the build. A repeated declaration is a known
+  and documented fidelity loss (the cascade would have discarded the earlier
+  value anyway) and is reported by the unit tests rather than here.
+*/
+for (const effect of EFFECTS) {
+  const { css, warnings } = cssToObject(effect.css ?? '', effect.id)
+  const unreadable = warnings.filter((w) => w.includes('could not read'))
+
+  if (unreadable.length) {
+    failures.push(`effect "${effect.id}" has CSS the registry converter cannot read: ${unreadable[0]}`)
+  }
+  if (Object.keys(css).length === 0) {
+    failures.push(`effect "${effect.id}" converts to an empty rule set — it would install nothing.`)
+  }
+}
+
+const effectIds = new Set(EFFECTS.map((e) => e.id))
+for (const block of BLOCK_CATALOG) {
+  if (effectIds.has(block.id)) {
+    failures.push(`block "${block.id}" collides with an effect of the same id; the registry addresses both by bare id.`)
+  }
+}
+for (const page of PAGE_CATALOG) {
+  if (effectIds.has(page.id)) {
+    failures.push(`page "${page.id}" collides with an effect of the same id; the registry addresses both by bare id.`)
+  }
+}
+
 /* -- preview coverage ---------------------------------------------------- */
 
 /*
@@ -145,5 +188,6 @@ if (failures.length) {
 }
 
 console.log(
-  `registry check: ${BLOCK_CATALOG.length} blocks + ${PAGE_CATALOG.length} pages + 1 base, all resolvable`,
+  `registry check: ${BLOCK_CATALOG.length} blocks + ${PAGE_CATALOG.length} pages + ` +
+    `${EFFECTS.length} effects + 1 base, all resolvable`,
 )

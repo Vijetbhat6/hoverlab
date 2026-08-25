@@ -29,6 +29,7 @@
     "build:dna": "tsx scripts/build-dna.mts",
     "build:registry": "node scripts/build-registry-tokens.mjs",
     "check:registry": "tsx scripts/check-registry.mts",
+    "check:registry:schema": "node scripts/validate-registry-schema.mjs",
     "submit:registry": "tsx scripts/submit-registry.mts"
   },
   "dependencies": {

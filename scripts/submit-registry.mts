@@ -57,6 +57,9 @@ const submission = {
     'pricing-tiers',
     'dashboard-overview',
     'agent-thinking-trace',
+    // One effect, so a reviewer clicking through sees the half of the
+    // catalog that installs as CSS rather than as a component.
+    'btn-gradient',
   ],
 }
 
@@ -120,21 +123,32 @@ if (problems.length === 0) {
     if (!names.has(name)) fail(`featured item "${name}" is not in the registry index.`)
   }
 
-  // Sample the same way the audit does: the base item plus a block and a
-  // page, checked for actual source rather than a well-formed shell.
-  for (const name of ['hoverlab', 'hero-split', 'saas-landing-page']) {
+  // Sample the same way the audit does, and cover every item shape we
+  // publish: the base, a block, a page and an effect. The effect matters
+  // because it is the one that carries no files at all — a check written
+  // only against `files[].content` would report the whole effect half of
+  // the registry as empty.
+  for (const name of ['hoverlab', 'hero-split', 'saas-landing-page', 'btn-gradient']) {
     const itemUrl = `${base}/r/${name}.json`
     try {
       const item = (await getJson(itemUrl)) as {
         type?: string
         files?: Array<{ content?: string }>
         cssVars?: { light?: Record<string, string> }
+        css?: Record<string, unknown>
       }
 
       if (item.type === 'registry:base') {
         const vars = Object.keys(item.cssVars?.light ?? {}).length
         if (vars === 0) fail(`${name} declares no CSS variables.`)
         else console.log(`  r/${name}.json     ${vars} light tokens`)
+        continue
+      }
+
+      if (item.type === 'registry:item') {
+        const rules = Object.keys(item.css ?? {}).length
+        if (rules === 0) fail(`${name} is an effect that resolves but carries no CSS rules.`)
+        else console.log(`  r/${name}.json     ${rules} CSS rules`)
         continue
       }
 

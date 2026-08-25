@@ -28,11 +28,16 @@
  *   {page id}             `registry:page`  — a full route, targeted at
  *                         app/{id}/page.tsx.
  *
- * Effects are deliberately NOT here yet. They are raw CSS, and shadcn's
- * `css` field wants a nested object, so shipping 835 of them means writing
- * and validating a CSS-to-AST conversion — a separate job with its own
- * failure modes. Blocks and pages map across losslessly today; effects can
- * follow once the conversion is proven rather than assumed.
+ *   {effect id}           `registry:item` — a class and the rules behind
+ *                         it, written straight into the project's CSS.
+ *
+ * Effects were deliberately absent from the first version of this file, on
+ * the grounds that shipping them meant writing and validating a CSS-to-AST
+ * conversion — a separate job with its own failure modes. That job is now
+ * `./css-to-object`, and the condition it was held to has been met: every
+ * declaration in all 835 effects is compared against an independent walk of
+ * the source in `effects-css.test.ts`, and none is lost, gained or altered.
+ * The conversion is proven rather than assumed, so they are here.
  *
  * WHERE FILES LAND
  *
@@ -47,7 +52,9 @@ import 'server-only'
 
 import { BLOCKS } from '../blocks/blocks'
 import { PAGES } from '../pages/pages'
+import { EFFECTS } from '../effects'
 import type { Artifact, ArtifactFile } from '../artifact-types'
+import { cssToObject, type CssObject } from './css-to-object'
 import { registryDepIds, unresolvedLocalImports } from './deps'
 import TOKENS from './generated-tokens.json'
 
@@ -59,6 +66,7 @@ export type RegistryItemType =
   | 'registry:base'
   | 'registry:block'
   | 'registry:component'
+  | 'registry:item'
   | 'registry:page'
 
 export interface RegistryFile {
@@ -82,6 +90,11 @@ export interface RegistryItem {
   registryDependencies?: string[]
   files?: RegistryFile[]
   cssVars?: { theme?: Record<string, string>; light?: Record<string, string>; dark?: Record<string, string> }
+  /**
+   * Rules to add to the project's stylesheet, as the schema's nested
+   * object. This is how an effect ships: it has no files, only CSS.
+   */
+  css?: CssObject
   iconLibrary?: string
   docs?: string
   meta?: Record<string, unknown>
@@ -101,18 +114,27 @@ export { REGISTRY_NAME }
 const BLOCK_BY_ID = new Map(BLOCKS.map((b) => [b.id, b]))
 const PAGE_BY_ID = new Map(PAGES.map((p) => [p.id, p]))
 
+const EFFECT_BY_ID = new Map(EFFECTS.map((e) => [e.id, e]))
+
 /**
- * Block and page ids share one namespace here, so they must not collide.
+ * Block, page and effect ids share one namespace here, so they must not
+ * collide.
  *
- * They do not today (121 blocks, 21 pages, zero overlap) and the ids are
- * hand-authored, so this is the cheap guard that keeps it that way: a
- * collision would silently make one of the two unreachable by name.
+ * They do not today — zero overlap across all three — but the guard matters
+ * more now than when it only covered two hand-authored lists of a hundred:
+ * effect ids are derived from generated display names, so a future wave
+ * naming something `pricing-tiers` would silently make a block unreachable
+ * by name and nothing else would notice.
  */
-const COLLISIONS = BLOCKS.filter((b) => PAGE_BY_ID.has(b.id)).map((b) => b.id)
+const COLLISIONS = [
+  ...BLOCKS.filter((b) => PAGE_BY_ID.has(b.id)).map((b) => b.id),
+  ...BLOCKS.filter((b) => EFFECT_BY_ID.has(b.id)).map((b) => b.id),
+  ...PAGES.filter((p) => EFFECT_BY_ID.has(p.id)).map((p) => p.id),
+]
 if (COLLISIONS.length) {
   throw new Error(
-    `registry: block and page ids collide — ${COLLISIONS.join(', ')}. ` +
-      'Rename one side; the registry addresses both by bare id.',
+    `registry: item ids collide — ${COLLISIONS.join(', ')}. ` +
+      'Rename one side; the registry addresses blocks, pages and effects by bare id.',
   )
 }
 
@@ -234,13 +256,79 @@ function pageItem(id: string, origin: string, withContent: boolean): RegistryIte
   }
 }
 
+/**
+ * One effect as a registry item.
+ *
+ * WHY EFFECTS ARE `registry:item` AND CARRY NO FILES
+ *
+ * A block is a file and the schema takes files. An effect is not: it is a
+ * class name and the rules behind it, and putting those in a `.css` file
+ * would leave the installer to import it from somewhere and remember to
+ * keep doing that. `css` is the field the schema has for exactly this —
+ * "CSS definitions to be added to the project's CSS file" — so
+ * `npx shadcn add @hoverlab/{id}` writes the rules straight into the
+ * project's stylesheet and the class works immediately. `registry:item` is
+ * the schema's generic type, which is what a thing with no files is.
+ *
+ * The conversion from CSS text to that object is `./css-to-object`, and
+ * every declaration in all 835 effects is checked against an independent
+ * walk of the source in `effects-css.test.ts`. Effects were left out of
+ * the registry until that check existed rather than until the converter
+ * did — a conversion nobody has verified across the corpus is a silent
+ * rendering bug in somebody else's project.
+ *
+ * `docs` carries the markup. shadcn prints it after installing, and an
+ * effect without its HTML is a class nobody knows how to apply — the CSS
+ * alone does not say whether it wants a button or a div.
+ *
+ * No `dependencies`: effects are CSS, they import nothing, and that is one
+ * of the few things this catalog has that the React-only competition
+ * cannot claim.
+ */
+function effectItem(id: string, origin: string, withCss: boolean): RegistryItem | null {
+  const effect = EFFECT_BY_ID.get(id)
+  if (!effect) return null
+
+  const item: RegistryItem = {
+    name: effect.id,
+    type: 'registry:item',
+    title: effect.name,
+    description: effect.description,
+    categories: [effect.category],
+    meta: {
+      tier: 'effect',
+      href: `${origin.replace(/\/$/, '')}/effect/${effect.id}`,
+    },
+  }
+
+  /*
+    Both omitted from the discovery document, for the reason file contents
+    are: an index carrying 835 stylesheets and 835 markup samples is
+    content, and every consumer would pay for it to answer "what have you
+    got". Dropping the two of them takes the index from 544 KB to 377.
+  */
+  if (withCss) {
+    item.css = cssToObject(effect.css, effect.id).css
+    item.docs = `Paste this markup where you want it:
+
+${effect.html}`
+  }
+
+  return item
+}
+
 /* ------------------------------------------------------------------ *
  *  Public surface
  * ------------------------------------------------------------------ */
 
 /** Every addressable item name, base first. */
 export function registryItemNames(): string[] {
-  return [REGISTRY_NAME, ...BLOCKS.map((b) => b.id), ...PAGES.map((p) => p.id)]
+  return [
+    REGISTRY_NAME,
+    ...BLOCKS.map((b) => b.id),
+    ...PAGES.map((p) => p.id),
+    ...EFFECTS.map((e) => e.id),
+  ]
 }
 
 /**
@@ -248,7 +336,11 @@ export function registryItemNames(): string[] {
  */
 export function buildRegistryItem(name: string, origin: string): RegistryItem | null {
   if (name === REGISTRY_NAME) return baseItem()
-  return blockItem(name, origin, true) ?? pageItem(name, origin, true)
+  return (
+    blockItem(name, origin, true) ??
+    pageItem(name, origin, true) ??
+    effectItem(name, origin, true)
+  )
 }
 
 /**
@@ -265,6 +357,7 @@ export function buildRegistryIndex(origin: string) {
     baseItem(),
     ...BLOCKS.map((b) => blockItem(b.id, origin, false)!),
     ...PAGES.map((p) => pageItem(p.id, origin, false)!),
+    ...EFFECTS.map((e) => effectItem(e.id, origin, false)!),
   ]
 
   return {

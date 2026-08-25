@@ -12,10 +12,11 @@ import {
 import { absoluteUrl, siteUrl } from '@/lib/site'
 import { BLOCK_COUNT } from '@/lib/blocks/block-index'
 import { PAGE_COUNT } from '@/lib/pages/page-index'
+import { TOTAL_COUNT } from '@/lib/catalog-stats'
 
 const TITLE = 'shadcn registry — Hoverlab Docs'
 const DESCRIPTION =
-  'Install Hoverlab blocks and pages with npx shadcn add. A public registry.json, no account, no API key.'
+  'Install Hoverlab effects, blocks and pages with npx shadcn add. A public registry.json, no account, no API key.'
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -108,6 +109,11 @@ npx shadcn add @hoverlab/saas-landing-page`}</Snippet>
               </>,
             ],
             [
+              <C key="e">registry:item</C>,
+              TOTAL_COUNT.toLocaleString('en-US'),
+              <>your stylesheet, as rules — an effect has no file</>,
+            ],
+            [
               <C key="s">registry:base</C>,
               '1',
               <>your stylesheet&rsquo;s <C>:root</C> and <C>.dark</C></>,
@@ -161,22 +167,35 @@ npx shadcn add @hoverlab/saas-landing-page`}</Snippet>
         </p>
       </DocsSection>
 
-      <DocsSection id="limits" title="What is not in it yet">
+      <DocsSection id="effects" title="Installing an effect">
         <p>
-          Effects are not published as registry items. They are raw CSS, and the
-          registry format wants a structured object rather than a stylesheet, so
-          shipping all of them means a conversion that has to be proven correct
-          across the whole catalog rather than assumed. Until that lands,
-          install effects with{' '}
-          <Link href="/docs/cli">
-            <C>npx hoverlab add</C>
-          </Link>{' '}
-          or copy them from the site.
+          An effect is a class and the rules behind it, not a file, so it
+          installs into your stylesheet rather than into <C>components/</C>.
+          The command is the same as everything else:
         </p>
+        <Snippet label="terminal">{`npx shadcn add @hoverlab/btn-gradient`}</Snippet>
         <p>
-          Templates are not registry items either, for a simpler reason: a
-          template is a whole project, and <C>npx hoverlab init</C> already
-          scaffolds one.
+          That writes the rules — including any <C>@keyframes</C> and{' '}
+          <C>@property</C> the effect needs — straight into the stylesheet
+          your project already has, and prints the markup to paste. There is
+          nothing to import and no dependency to install: effects are CSS, so
+          they work in React, Vue, Svelte or a plain HTML file.
+        </p>
+        <Callout>
+          The rules land where the CLI puts CSS, unwrapped by any cascade
+          layer, exactly as the catalog serves them. If your project uses
+          layers and you want the effect inside one, move the block after
+          install — the classes are self-contained and nothing else
+          references them.
+        </Callout>
+      </DocsSection>
+
+      <DocsSection id="limits" title="What is not in it">
+        <p>
+          Templates are not registry items. A template is a whole project
+          rather than a thing you add to one, and <C>npx hoverlab init</C>{' '}
+          already scaffolds it — including the config, the routes and the
+          dependencies a <C>shadcn add</C> has nowhere to put.
         </p>
       </DocsSection>
     </>
