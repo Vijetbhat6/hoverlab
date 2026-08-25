@@ -134,6 +134,26 @@ function stripComments(source: string): string {
     .replace(/\{\s*\/\*[\s\S]*?\*\/\s*\}/g, ' ')
 }
 
+/**
+ * Remove markup that is being encoded into a string, not rendered.
+ *
+ * A block with no network access that needs a sample image inlines one as
+ * `data:image/svg+xml,` + `encodeURIComponent(\`<svg …>\`)`. That `<svg>`
+ * is never an element: it is the src of an `<img>` that carries its own
+ * `alt`, and the alt is where its accessible name correctly lives. Scanning
+ * it as markup reports a missing `aria-hidden` on a tag that does not exist
+ * in the DOM, and a false violation in an accessibility report is worse
+ * than a missed one — it teaches the reader to skim the list.
+ *
+ * Scoped to `encodeURIComponent(...)` rather than to template literals in
+ * general. A backtick string is normally a className and harmless either
+ * way, but `dangerouslySetInnerHTML={{ __html: \`<svg …>\` }}` really does
+ * render, and that one must stay visible to the audit.
+ */
+function stripEncodedMarkup(source: string): string {
+  return source.replace(/encodeURIComponent\s*\(\s*`[^`]*`/g, ' ')
+}
+
 /** True when a tag's attribute text carries an accessible name. */
 function hasAccessibleName(tag: string): boolean {
   return (
@@ -382,7 +402,7 @@ function auditArtifacts(
 
     for (const file of files) {
       if (!/tsx?$/.test(file.lang) && !/\.tsx?$/.test(file.path)) continue
-      const source = stripComments(file.source)
+      const source = stripEncodedMarkup(stripComments(file.source))
       for (const rule of RULES) {
         for (const message of rule.check(source)) {
           tripped.add(rule.id)

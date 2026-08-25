@@ -1175,6 +1175,38 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     deps: ['lucide-react'],
   },
 
+  {
+    id: 'line-chart-panel',
+    name: 'Dual-Series Line Chart',
+    category: 'Charts & Metrics',
+    description:
+      'A year-over-year trend in inline SVG with a printed axis, no charting dependency and the same data repeated as a screen-reader table.',
+    tags: ['line chart', 'chart', 'svg', 'trend', 'analytics'],
+    previewComponent: 'line-chart-panel',
+    deps: [],
+    featured: true,
+  },
+  {
+    id: 'donut-breakdown',
+    name: 'Donut Breakdown',
+    category: 'Charts & Metrics',
+    description:
+      'Where a total went, drawn as one conic-gradient ring with the total in the hole and every number repeated in the legend.',
+    tags: ['donut', 'pie chart', 'breakdown', 'conic gradient', 'spend'],
+    previewComponent: 'donut-breakdown',
+    deps: [],
+  },
+  {
+    id: 'activity-heatmap',
+    name: 'Daily Activity Heatmap',
+    category: 'Charts & Metrics',
+    description:
+      'A year of daily activity as one square per day, bucketed against a quantile so a single outlier cannot flatten the scale.',
+    tags: ['heatmap', 'calendar', 'activity', 'contributions', 'grid'],
+    previewComponent: 'activity-heatmap',
+    deps: [],
+  },
+
   /* ---------------------- Billing & Usage ------------------------- */
   {
     id: 'billing-plan-summary',
@@ -1291,6 +1323,28 @@ export const BLOCK_CATALOG: BlockRecord[] = [
    * (status). A frozen spinner reads as a hung request, which removes the
    * feedback rather than the discomfort.
    */
+
+  {
+    id: 'csv-import-mapper',
+    name: 'CSV Column Mapper',
+    category: 'File Upload',
+    description:
+      'The screen between "file uploaded" and "data imported": source columns mapped to schema fields, with a sample value under each and required fields blocking the button.',
+    tags: ['csv', 'import', 'mapping', 'spreadsheet', 'data'],
+    previewComponent: 'csv-import-mapper',
+    deps: ['lucide-react'],
+    featured: true,
+  },
+  {
+    id: 'avatar-crop-upload',
+    name: 'Avatar Crop & Upload',
+    category: 'File Upload',
+    description:
+      'Framing a profile photo with keyboard-operable zoom and position, showing what gets trimmed rather than hiding it behind the mask.',
+    tags: ['avatar', 'crop', 'upload', 'profile', 'image'],
+    previewComponent: 'avatar-crop-upload',
+    deps: ['lucide-react'],
+  },
 
   /* ---------------------------- Agent Chat ------------------------- */
   {

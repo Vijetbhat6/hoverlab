@@ -97,6 +97,11 @@ import { FaqTwoColumn } from './sources/faq-two-column'
 import { FaqGrid } from './sources/faq-grid'
 import { FaqCategorized } from './sources/faq-categorized'
 import { FaqSearch } from './sources/faq-search'
+import { LineChartPanel } from './sources/line-chart-panel'
+import { DonutBreakdown } from './sources/donut-breakdown'
+import { ActivityHeatmap } from './sources/activity-heatmap'
+import { CsvImportMapper } from './sources/csv-import-mapper'
+import { AvatarCropUpload } from './sources/avatar-crop-upload'
 import { ChangelogTimeline } from './sources/changelog-timeline'
 import { RoadmapColumns } from './sources/roadmap-columns'
 import { NewsletterSignup } from './sources/newsletter-signup'
@@ -291,6 +296,11 @@ export const BLOCK_PREVIEWS: Record<string, React.ReactNode> = {
   'faq-grid': <FaqGrid />,
   'faq-categorized': <FaqCategorized />,
   'faq-search': <FaqSearch />,
+  'line-chart-panel': <LineChartPanel />,
+  'donut-breakdown': <DonutBreakdown />,
+  'activity-heatmap': <ActivityHeatmap />,
+  'csv-import-mapper': <CsvImportMapper />,
+  'avatar-crop-upload': <AvatarCropUpload />,
   'changelog-timeline': <ChangelogTimeline />,
   'roadmap-columns': <RoadmapColumns />,
   'newsletter-signup': <NewsletterSignup />,

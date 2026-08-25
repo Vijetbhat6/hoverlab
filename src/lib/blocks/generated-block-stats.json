@@ -423,6 +423,18 @@
     "lines": 172,
     "files": 1
   },
+  "line-chart-panel": {
+    "lines": 254,
+    "files": 1
+  },
+  "donut-breakdown": {
+    "lines": 185,
+    "files": 1
+  },
+  "activity-heatmap": {
+    "lines": 213,
+    "files": 1
+  },
   "billing-plan-summary": {
     "lines": 151,
     "files": 1
@@ -453,6 +465,14 @@
   },
   "upload-progress-list": {
     "lines": 171,
+    "files": 1
+  },
+  "csv-import-mapper": {
+    "lines": 269,
+    "files": 1
+  },
+  "avatar-crop-upload": {
+    "lines": 257,
     "files": 1
   },
   "chat-thread-panel": {
