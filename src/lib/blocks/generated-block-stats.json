@@ -423,6 +423,10 @@
     "lines": 88,
     "files": 1
   },
+  "permission-denied-state": {
+    "lines": 155,
+    "files": 1
+  },
   "metric-sparkline-cards": {
     "lines": 142,
     "files": 1
@@ -457,6 +461,14 @@
   },
   "payment-method-card": {
     "lines": 237,
+    "files": 1
+  },
+  "subscription-cancel-flow": {
+    "lines": 262,
+    "files": 1
+  },
+  "usage-overage-notice": {
+    "lines": 219,
     "files": 1
   },
   "command-palette": {

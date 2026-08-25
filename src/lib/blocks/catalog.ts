@@ -1175,6 +1175,17 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     deps: [],
   },
 
+  {
+    id: 'permission-denied-state',
+    name: 'Permission Denied (403)',
+    category: 'Empty & Error States',
+    description:
+      'The state where the page exists and the account is not on the list: names who can grant access, sends the request, and leaks nothing about what is inside.',
+    tags: ['403', 'permission', 'access', 'error state', 'rbac'],
+    previewComponent: 'permission-denied-state',
+    deps: ['lucide-react'],
+  },
+
   /* ---------------------- Charts & Metrics ------------------------ */
   {
     id: 'metric-sparkline-cards',
@@ -1271,6 +1282,28 @@ export const BLOCK_CATALOG: BlockRecord[] = [
       'Cards on file with the two failures that cost the subscription: expiry called out before it fails, and the default stated on the row rather than implied by ordering.',
     tags: ['payment', 'card', 'billing', 'stripe', 'checkout'],
     previewComponent: 'payment-method-card',
+    deps: ['lucide-react'],
+  },
+
+  {
+    id: 'subscription-cancel-flow',
+    name: 'Subscription Cancel Flow',
+    category: 'Billing & Usage',
+    description:
+      'Self-serve cancellation with no dark patterns: the exact date access ends, what breaks, one honest alternative, and a button that works.',
+    tags: ['cancel', 'churn', 'subscription', 'retention', 'billing'],
+    previewComponent: 'subscription-cancel-flow',
+    deps: ['lucide-react'],
+    featured: true,
+  },
+  {
+    id: 'usage-overage-notice',
+    name: 'Overage Notice with Projection',
+    category: 'Billing & Usage',
+    description:
+      'Past the included allowance, with the end-of-month projection and every number the invoice will use — because a surprise bill is a product defect.',
+    tags: ['overage', 'usage', 'billing', 'quota', 'projection'],
+    previewComponent: 'usage-overage-notice',
     deps: ['lucide-react'],
   },
 
