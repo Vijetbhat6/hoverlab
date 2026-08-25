@@ -179,7 +179,7 @@ export function ProductFilterSidebar({
                           type="checkbox"
                           checked={checked}
                           onChange={() => toggle(facet.id, option.value)}
-                          className="h-4 w-4 rounded border-border/60 accent-[hsl(var(--primary))]"
+                          className="h-4 w-4 rounded border-border/60 accent-primary"
                         />
                         <span className="flex-1 text-muted-foreground">{option.label}</span>
                         {typeof option.count === 'number' ? (
@@ -203,7 +203,7 @@ export function ProductFilterSidebar({
             value={price}
             onChange={(e) => setPrice(Number(e.target.value))}
             aria-label="Maximum price"
-            className="w-full accent-[hsl(var(--primary))]"
+            className="w-full accent-primary"
           />
           <p className="mt-1.5 text-sm text-muted-foreground">
             Up to{' '}

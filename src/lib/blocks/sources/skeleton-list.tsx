@@ -81,7 +81,7 @@ export function SkeletonList({
 function Bar({ className = '' }: { className?: string }) {
   return (
     <span
-      className={`block bg-muted motion-safe:animate-[skeleton-sweep_1.6s_ease-in-out_infinite] motion-safe:bg-[linear-gradient(90deg,transparent,hsl(var(--foreground)/0.06),transparent)] motion-safe:bg-[length:200%_100%] ${className}`}
+      className={`block bg-muted motion-safe:animate-[skeleton-sweep_1.6s_ease-in-out_infinite] motion-safe:bg-[linear-gradient(90deg,transparent,color-mix(in_oklab,var(--foreground)_6%,transparent),transparent)] motion-safe:bg-[length:200%_100%] ${className}`}
     />
   )
 }

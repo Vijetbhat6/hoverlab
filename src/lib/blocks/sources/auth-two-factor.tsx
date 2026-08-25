@@ -115,7 +115,7 @@ export function AuthTwoFactor({
               type="checkbox"
               checked={trustDevice}
               onChange={(e) => setTrustDevice(e.target.checked)}
-              className="mt-0.5 h-4 w-4 shrink-0 rounded border-border/60 accent-[hsl(var(--primary))]"
+              className="mt-0.5 h-4 w-4 shrink-0 rounded border-border/60 accent-primary"
             />
             <span className="text-muted-foreground">
               Trust this device for 30 days

@@ -179,7 +179,7 @@ export function DataTableSortable({
                   checked={allSelected}
                   onChange={toggleAll}
                   aria-label={allSelected ? 'Deselect all rows' : 'Select all rows'}
-                  className="h-4 w-4 rounded border-border/60 accent-[hsl(var(--primary))]"
+                  className="h-4 w-4 rounded border-border/60 accent-primary"
                 />
               </th>
 
@@ -245,7 +245,7 @@ export function DataTableSortable({
                       checked={isSelected}
                       onChange={() => toggleRow(row.id)}
                       aria-label={`Select ${row.name}`}
-                      className="h-4 w-4 rounded border-border/60 accent-[hsl(var(--primary))]"
+                      className="h-4 w-4 rounded border-border/60 accent-primary"
                     />
                   </td>
 
