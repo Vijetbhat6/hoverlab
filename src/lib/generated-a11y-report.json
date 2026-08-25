@@ -617,6 +617,21 @@
       "findings": []
     },
     {
+      "id": "push-permission-prompt",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
       "id": "stats-band",
       "kind": "block",
       "passed": [
@@ -1893,6 +1908,21 @@
     },
     {
       "id": "keyboard-shortcuts-sheet",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "applied-filters-bar",
       "kind": "block",
       "passed": [
         "img-alt",

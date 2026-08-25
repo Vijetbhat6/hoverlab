@@ -425,6 +425,17 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     featured: true,
   },
 
+  {
+    id: 'push-permission-prompt',
+    name: 'Push Permission Pre-Prompt',
+    category: 'Notifications',
+    description:
+      'The soft ask before the browser dialog you only get one shot at — what will be sent, what will not, and a decline of the same weight as the yes.',
+    tags: ['push', 'permission', 'notifications', 'opt-in', 'browser'],
+    previewComponent: 'push-permission-prompt',
+    deps: ['lucide-react'],
+  },
+
   /* ---------------------------- Sections --------------------------- */
   {
     id: 'stats-band',
@@ -1338,6 +1349,18 @@ export const BLOCK_CATALOG: BlockRecord[] = [
       'The "?" overlay, with chords written once in one notation and rendered per platform — mod becomes Command on Apple and Ctrl everywhere else, decided after mount so the markup never mismatches.',
     tags: ['shortcuts', 'keyboard', 'hotkeys', 'help', 'accessibility'],
     previewComponent: 'keyboard-shortcuts-sheet',
+    deps: ['lucide-react'],
+    featured: true,
+  },
+
+  {
+    id: 'applied-filters-bar',
+    name: 'Applied Filters Bar',
+    category: 'Command & Search',
+    description:
+      'The strip above a result set that answers "why am I only seeing four things" — every active constraint as a removable chip, with the excluded count beside it.',
+    tags: ['filters', 'chips', 'search', 'facets', 'results'],
+    previewComponent: 'applied-filters-bar',
     deps: ['lucide-react'],
     featured: true,
   },

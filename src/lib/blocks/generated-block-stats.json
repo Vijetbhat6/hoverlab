@@ -139,6 +139,10 @@
     "lines": 271,
     "files": 1
   },
+  "push-permission-prompt": {
+    "lines": 211,
+    "files": 1
+  },
   "stats-band": {
     "lines": 51,
     "files": 1
@@ -481,6 +485,10 @@
   },
   "keyboard-shortcuts-sheet": {
     "lines": 236,
+    "files": 1
+  },
+  "applied-filters-bar": {
+    "lines": 234,
     "files": 1
   },
   "file-dropzone": {

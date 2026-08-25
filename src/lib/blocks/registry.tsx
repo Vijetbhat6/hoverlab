@@ -100,6 +100,8 @@ import { FaqSearch } from './sources/faq-search'
 import { LineChartPanel } from './sources/line-chart-panel'
 import { BookingScheduler } from './sources/booking-scheduler'
 import { SubscriptionCancelFlow } from './sources/subscription-cancel-flow'
+import { PushPermissionPrompt } from './sources/push-permission-prompt'
+import { AppliedFiltersBar } from './sources/applied-filters-bar'
 import { UsageOverageNotice } from './sources/usage-overage-notice'
 import { PermissionDeniedState } from './sources/permission-denied-state'
 import { FeedbackWidget } from './sources/feedback-widget'
@@ -305,6 +307,8 @@ export const BLOCK_PREVIEWS: Record<string, React.ReactNode> = {
   'line-chart-panel': <LineChartPanel />,
   'booking-scheduler': <BookingScheduler />,
   'subscription-cancel-flow': <SubscriptionCancelFlow />,
+  'push-permission-prompt': <PushPermissionPrompt />,
+  'applied-filters-bar': <AppliedFiltersBar />,
   'usage-overage-notice': <UsageOverageNotice />,
   'permission-denied-state': <PermissionDeniedState />,
   'feedback-widget': <FeedbackWidget />,
