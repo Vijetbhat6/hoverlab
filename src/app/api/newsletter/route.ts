@@ -46,6 +46,7 @@ import { NextResponse } from 'next/server'
 import { createHash, randomBytes } from 'node:crypto'
 import { FieldValue } from 'firebase-admin/firestore'
 import { withJsonErrors } from '@/lib/route-errors'
+import { SIGNUP_SOURCES } from '@/lib/sequences'
 import { adminDb, isAdminConfigured } from '@/lib/firebase/admin'
 
 export const runtime = 'nodejs'
@@ -69,16 +70,30 @@ const COLLECTION = 'newsletterSubscribers'
  */
 const CONSENT_TEXT: Record<string, string> = {
   default:
-    'One email when new effects are added. No spam, no promotions, no digests. ' +
+    'Four emails over about a month — what is free, the four ways into the ' +
+    'catalog, the one line in the licence that matters, and what has been ' +
+    'added — then only mail when something is added. No spam, no promotions. ' +
     'Unsubscribe in one click.',
+  tools:
+    'Three emails over about two weeks — how the tools connect to the catalog, ' +
+    'the other nineteen tools, and where the one wall is — then only mail when ' +
+    'something is added. No spam, no promotions. Unsubscribe in one click.',
   authors:
     'A five-email sequence over about two weeks about the licence, the catalog ' +
     'and how it is reached, then only mail when something is added. No spam, no ' +
     'promotions. Unsubscribe in one click.',
 }
 
-/** Where the signup happened — for knowing which surface converts. */
-const SOURCES = new Set(['landing', 'pricing', 'footer', 'docs', 'authors', 'tools'])
+/**
+ * Where the signup happened — for knowing which surface converts, and for
+ * choosing the sequence.
+ *
+ * Imported from `lib/sequences.ts` rather than typed out again. A source
+ * this route accepts is a promise that somebody who signed up there
+ * receives something, so the list belongs with the sequences that honour
+ * it; `sequences.test.ts` asserts every member reaches one.
+ */
+const SOURCES = new Set<string>(SIGNUP_SOURCES)
 
 /**
  * Deliberately loose.

@@ -17,6 +17,7 @@ import { BrandColorPicker } from '@/components/brand-color-picker'
 import { SiteHeader } from '@/components/site-header'
 import { useCommandPalette } from '@/components/command-palette'
 import { SiteFooter } from '@/components/site-footer'
+import { NewsletterSignup } from '@/components/landing/newsletter-signup'
 
 export default function ToolsHubPage() {
   const { open: openCommandPalette } = useCommandPalette()
@@ -81,6 +82,21 @@ export default function ToolsHubPage() {
             </button>{' '}
             and search for what you need.
           </p>
+        </section>
+
+        {/*
+          The one place a tool visitor is asked for anything.
+
+          Below the whole grid and below the request note, because the tools
+          are the funnel and a form above them is a toll booth. `source`
+          matters: it is what enrols the address into the three-email
+          sequence written for someone who came for a free utility rather
+          than to evaluate a catalog, and the heading above the field is the
+          promise that sequence keeps. The API accepted "tools" for months
+          while no page ever sent it — see `lib/sequences.ts`.
+        */}
+        <section className="mt-8">
+          <NewsletterSignup source="tools" />
         </section>
       </main>
       <SiteFooter />

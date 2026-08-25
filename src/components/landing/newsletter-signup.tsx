@@ -52,32 +52,42 @@ interface NewsletterSignupProps {
  * The promise shown above the field, per surface.
  *
  * This has to match CONSENT_TEXT for the same source in
- * `api/newsletter/route.ts`, which stores what was agreed to. One heading
- * for every surface was fine while every surface promised the same thing;
- * /for-authors promises a five-email sequence, and rendering "one email
- * when we drop new effects" above a field that records a different consent
- * is a false promise on the page and a false record in the database.
+ * `api/newsletter/route.ts`, which stores what was agreed to, and both have
+ * to describe the sequence that source actually enrols into — see
+ * `lib/sequences.ts`.
+ *
+ * All six surfaces used to promise "one email when we drop new effects",
+ * which was true only while five of them enrolled nobody into anything. It
+ * stopped being true the moment those sequences were written, and a heading
+ * that under-promises is not the safe direction: it is a false promise on
+ * the page and a false record of consent in the database, which is the one
+ * field GDPR asks you to be able to produce.
  */
 const COPY: Record<SignupSource, { heading: string; body: string }> = {
   landing: {
-    heading: 'One email when we drop new effects',
-    body: "No spam, no promotions, no digests. Just a heads-up when there's something new to play with. Unsubscribe in one click.",
+    heading: 'Four emails, then only when something is added',
+    body:
+      'Over about a month: what is free, the four ways into the catalog, the one line in the licence that matters, and what has been added. Then nothing until there is. Unsubscribe in one click.',
   },
   pricing: {
-    heading: 'One email when we drop new effects',
-    body: "No spam, no promotions, no digests. Just a heads-up when there's something new to play with. Unsubscribe in one click.",
+    heading: 'Four emails, then only when something is added',
+    body:
+      'Over about a month: what is free, the four ways into the catalog, the one line in the licence that matters, and what has been added. Then nothing until there is. Unsubscribe in one click.',
   },
   footer: {
-    heading: 'One email when we drop new effects',
-    body: "No spam, no promotions, no digests. Just a heads-up when there's something new to play with. Unsubscribe in one click.",
+    heading: 'Four emails, then only when something is added',
+    body:
+      'Over about a month: what is free, the four ways into the catalog, the one line in the licence that matters, and what has been added. Then nothing until there is. Unsubscribe in one click.',
   },
   docs: {
-    heading: 'One email when we drop new effects',
-    body: "No spam, no promotions, no digests. Just a heads-up when there's something new to play with. Unsubscribe in one click.",
+    heading: 'Four emails, then only when something is added',
+    body:
+      'Over about a month: what is free, the four ways into the catalog, the one line in the licence that matters, and what has been added. Then nothing until there is. Unsubscribe in one click.',
   },
   tools: {
-    heading: 'One email when we drop new effects',
-    body: "No spam, no promotions, no digests. Just a heads-up when there's something new to play with. Unsubscribe in one click.",
+    heading: 'Three emails, then only when something is added',
+    body:
+      'Over about two weeks: how the tools connect to the catalog, the other nineteen tools, and where the single wall on this site is. Then nothing until something is added. Unsubscribe in one click.',
   },
   authors: {
     heading: 'Five emails, then only when something is added',
