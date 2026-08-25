@@ -408,11 +408,36 @@ function auditArtifacts(
 }
 
 function main(): void {
-  const sources = JSON.parse(
+  const blockSources = JSON.parse(
     readFileSync(join(LIB, 'blocks', 'generated-block-sources.json'), 'utf8'),
   ) as Record<string, SourceFile[]>
 
-  const reports = auditArtifacts(sources, 'block')
+  /*
+    Pages are audited too, and the reason they were not is worth stating
+    rather than quietly fixing: `auditArtifacts` always took a `kind`, and
+    the report type always had 'page' in it, but nothing ever passed one.
+    The result read as full catalog coverage while twenty-one routes had
+    never been looked at.
+
+    Read what a page's own file trips, and nothing more. A page imports its
+    blocks — `@/components/{id}` — so the bytes here are assembly: layout,
+    headings, the odd inline control. The blocks it pulls in are audited on
+    their own rows, which is the right place for them; a page inheriting its
+    blocks' findings would double-count every one of them and make the
+    catalog look worse the more a page reuses.
+
+    The honest reading of a clean page row is therefore "the assembly adds no
+    finding", not "this route is accessible". A reader of the report needs
+    both rows to see the whole picture, which is why `kind` is on every
+    artifact rather than implied by which file it came from.
+  */
+  const pageSources = JSON.parse(
+    readFileSync(join(LIB, 'pages', 'generated-page-sources.json'), 'utf8'),
+  ) as Record<string, SourceFile[]>
+
+  const blockReports = auditArtifacts(blockSources, 'block')
+  const pageReports = auditArtifacts(pageSources, 'page')
+  const reports = [...blockReports, ...pageReports]
   const all = reports.flatMap((r) => r.findings)
   const violations = all.filter((f) => f.severity === 'violation')
   const advisories = all.filter((f) => f.severity === 'advisory')
@@ -444,7 +469,8 @@ function main(): void {
   }
 
   console.log(
-    `audit-a11y: ${reports.length} blocks against ${RULES.length} statically ` +
+    `audit-a11y: ${blockReports.length} blocks and ${pageReports.length} pages ` +
+      `against ${RULES.length} statically ` +
       `decidable criteria — ${violations.length} violation` +
       `${violations.length === 1 ? '' : 's'}, ` +
       `${advisories.length} ${advisories.length === 1 ? 'advisory' : 'advisories'}.`,

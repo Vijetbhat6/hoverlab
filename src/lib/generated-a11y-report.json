@@ -317,27 +317,34 @@
       "findings": []
     },
     {
+      "id": "announcement-bar",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
       "id": "navbar-mega-menu",
       "kind": "block",
       "passed": [
         "img-alt",
         "svg-hidden-or-labelled",
         "switch-checked",
+        "expanded-controls",
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
         "input-labelled"
       ],
-      "findings": [
-        {
-          "rule": "expanded-controls",
-          "sc": "4.1.2",
-          "level": "A",
-          "severity": "advisory",
-          "file": "components/navbar-mega-menu.tsx",
-          "message": "aria-expanded with no aria-controls: <button\n                      type=\"button\"\n                      aria-expanded="
-        }
-      ]
+      "findings": []
     },
     {
       "id": "nav-mobile-drawer",
@@ -346,21 +353,13 @@
         "img-alt",
         "svg-hidden-or-labelled",
         "switch-checked",
+        "expanded-controls",
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
         "input-labelled"
       ],
-      "findings": [
-        {
-          "rule": "expanded-controls",
-          "sc": "4.1.2",
-          "level": "A",
-          "severity": "advisory",
-          "file": "components/nav-mobile-drawer.tsx",
-          "message": "aria-expanded with no aria-controls: <button\n          ref={triggerRef}\n          type=\"button\"\n          onClick={()"
-        }
-      ]
+      "findings": []
     },
     {
       "id": "footer-mega",
@@ -439,6 +438,21 @@
     },
     {
       "id": "confirm-dialog",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "cookie-consent",
       "kind": "block",
       "passed": [
         "img-alt",
@@ -573,6 +587,66 @@
       "findings": []
     },
     {
+      "id": "stats-cards",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "stats-narrative",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "stats-comparison",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "stats-timeline",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
       "id": "logo-cloud",
       "kind": "block",
       "passed": [
@@ -588,7 +662,97 @@
       "findings": []
     },
     {
+      "id": "logo-grid",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "logo-strip",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "logo-segments",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
       "id": "bento-features",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "feature-rows",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "feature-icon-grid",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "integration-grid",
       "kind": "block",
       "passed": [
         "img-alt",
@@ -663,7 +827,67 @@
       "findings": []
     },
     {
+      "id": "pricing-single",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "pricing-usage-calculator",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
       "id": "comparison-table",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "pricing-credits",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "pricing-plan-picker",
       "kind": "block",
       "passed": [
         "img-alt",
@@ -708,7 +932,112 @@
       "findings": []
     },
     {
+      "id": "testimonial-ratings",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "testimonial-carousel",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "testimonial-video",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
       "id": "faq-accordion",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "faq-two-column",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "faq-grid",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "faq-categorized",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "faq-search",
       "kind": "block",
       "passed": [
         "img-alt",
@@ -999,21 +1328,13 @@
         "img-alt",
         "svg-hidden-or-labelled",
         "switch-checked",
+        "expanded-controls",
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
         "input-labelled"
       ],
-      "findings": [
-        {
-          "rule": "expanded-controls",
-          "sc": "4.1.2",
-          "level": "A",
-          "severity": "advisory",
-          "file": "components/dashboard-shell.tsx",
-          "message": "aria-expanded with no aria-controls: <button\n            type=\"button\"\n            onClick={() => setOpen(true)}\n    "
-        }
-      ]
+      "findings": []
     },
     {
       "id": "dashboard-stat-cards",
@@ -1247,21 +1568,13 @@
         "img-alt",
         "svg-hidden-or-labelled",
         "switch-checked",
+        "expanded-controls",
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
         "input-labelled"
       ],
-      "findings": [
-        {
-          "rule": "expanded-controls",
-          "sc": "4.1.2",
-          "level": "A",
-          "severity": "advisory",
-          "file": "components/settings-danger-zone.tsx",
-          "message": "aria-expanded with no aria-controls: <button\n                  type=\"button\"\n                  onClick={() => toggle("
-        }
-      ]
+      "findings": []
     },
     {
       "id": "empty-state-cta",
@@ -1510,21 +1823,13 @@
         "img-alt",
         "svg-hidden-or-labelled",
         "switch-checked",
+        "expanded-controls",
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
         "input-labelled"
       ],
-      "findings": [
-        {
-          "rule": "expanded-controls",
-          "sc": "4.1.2",
-          "level": "A",
-          "severity": "advisory",
-          "file": "components/chat-prompt-bar.tsx",
-          "message": "aria-expanded with no aria-controls: <button\n                type=\"button\"\n                aria-haspopup=\"listbox\"\n  "
-        }
-      ]
+      "findings": []
     },
     {
       "id": "chat-streaming-answer",
@@ -2013,21 +2318,328 @@
         "img-alt",
         "svg-hidden-or-labelled",
         "switch-checked",
+        "expanded-controls",
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
         "input-labelled"
       ],
-      "findings": [
-        {
-          "rule": "expanded-controls",
-          "sc": "4.1.2",
-          "level": "A",
-          "severity": "advisory",
-          "file": "components/review-list.tsx",
-          "message": "aria-expanded with no aria-controls: <button\n                  type=\"button\"\n                  onClick={() => toggleE"
-        }
-      ]
+      "findings": []
+    },
+    {
+      "id": "saas-landing-page",
+      "kind": "page",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "pricing-page",
+      "kind": "page",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "blog-index-page",
+      "kind": "page",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "article-page",
+      "kind": "page",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "careers-page",
+      "kind": "page",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "docs-page",
+      "kind": "page",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "changelog-page",
+      "kind": "page",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "dashboard-overview",
+      "kind": "page",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "ai-assistant-page",
+      "kind": "page",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "project-board-page",
+      "kind": "page",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "customers-table-page",
+      "kind": "page",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "settings-account-page",
+      "kind": "page",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "billing-page",
+      "kind": "page",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "login-page",
+      "kind": "page",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "error-404-page",
+      "kind": "page",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "collection-page",
+      "kind": "page",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "product-detail-page",
+      "kind": "page",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "cart-page",
+      "kind": "page",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "checkout-page",
+      "kind": "page",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "order-confirmation-page",
+      "kind": "page",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "account-orders-page",
+      "kind": "page",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
     }
   ]
 }

@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/dev.mjs",
-    "prebuild": "node scripts/build-effect-index.mjs && tsx scripts/build-catalog-stats.mts && node scripts/build-artifact-sources.mjs && tsx scripts/build-block-markup.mts && tsx scripts/build-skills.mts && tsx scripts/build-dna.mts && node scripts/build-registry-tokens.mjs && tsx scripts/check-registry.mts && tsx scripts/check-paths.mts && tsx scripts/check-catalog-focus.mts",
+    "prebuild": "node scripts/build-effect-index.mjs && tsx scripts/build-catalog-stats.mts && node scripts/build-artifact-sources.mjs && tsx scripts/build-block-markup.mts && tsx scripts/build-skills.mts && tsx scripts/build-dna.mts && node scripts/build-registry-tokens.mjs && tsx scripts/check-registry.mts && tsx scripts/check-paths.mts && tsx scripts/check-catalog-focus.mts && tsx scripts/audit-a11y.mts --json",
     "check:env": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/check-env.mjs",
     "polar:provision": "tsx scripts/provision-polar.mts",
     "check:deploy": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/check-deploy.mjs",
