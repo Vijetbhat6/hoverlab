@@ -83,6 +83,10 @@
     "lines": 253,
     "files": 1
   },
+  "footer-status-locale": {
+    "lines": 171,
+    "files": 1
+  },
   "contact-form-split": {
     "lines": 276,
     "files": 1
@@ -115,6 +119,10 @@
     "lines": 241,
     "files": 1
   },
+  "share-access-dialog": {
+    "lines": 280,
+    "files": 1
+  },
   "onboarding-checklist": {
     "lines": 230,
     "files": 1
@@ -125,6 +133,10 @@
   },
   "team-invite-step": {
     "lines": 268,
+    "files": 1
+  },
+  "product-tour-coachmark": {
+    "lines": 249,
     "files": 1
   },
   "toast-stack": {
@@ -317,6 +329,10 @@
   },
   "cta-split-panel": {
     "lines": 103,
+    "files": 1
+  },
+  "cta-sticky-bar": {
+    "lines": 178,
     "files": 1
   },
   "auth-login-card": {
@@ -645,6 +661,14 @@
   },
   "review-list": {
     "lines": 266,
+    "files": 1
+  },
+  "order-tracking-timeline": {
+    "lines": 238,
+    "files": 1
+  },
+  "review-submit-form": {
+    "lines": 238,
     "files": 1
   }
 }

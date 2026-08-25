@@ -106,6 +106,35 @@ try {
   failures.push('src/lib/registry/generated-tokens.json is missing; run npm run build:registry.')
 }
 
+/* -- preview coverage ---------------------------------------------------- */
+
+/*
+  Every block needs an entry in BLOCK_PREVIEWS, and nothing else was checking.
+
+  A block can be fully valid everywhere else — source present, catalog entry
+  present, shadcn registry item resolvable, a11y and motion audits clean — and
+  still render an empty preview card, because the map in `blocks/registry.tsx`
+  is a plain `Record<string, React.ReactNode>` and a missing key is a
+  `undefined` lookup rather than a type error. That is exactly how
+  order-tracking-timeline shipped past a full prebuild with no preview.
+
+  Read as text rather than imported. Importing the map would pull every block
+  source — and therefore React, lucide-react and every client component — into
+  a node script whose only question is whether a string appears as a key.
+*/
+const previewSource = readFileSync(join(root, 'src/lib/blocks/registry.tsx'), 'utf8')
+const previewKeys = new Set(
+  [...previewSource.matchAll(/^\s*'([a-z0-9-]+)':\s*</gm)].map((m) => m[1]!),
+)
+
+for (const block of BLOCK_CATALOG) {
+  if (!previewKeys.has(block.previewComponent)) {
+    failures.push(
+      `block "${block.id}" has no entry in BLOCK_PREVIEWS — its detail page and card would render empty.`,
+    )
+  }
+}
+
 /* -- report ------------------------------------------------------------- */
 
 if (failures.length) {

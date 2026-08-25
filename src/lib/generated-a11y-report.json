@@ -407,6 +407,21 @@
       "findings": []
     },
     {
+      "id": "footer-status-locale",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
       "id": "contact-form-split",
       "kind": "block",
       "passed": [
@@ -527,6 +542,21 @@
       "findings": []
     },
     {
+      "id": "share-access-dialog",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
       "id": "onboarding-checklist",
       "kind": "block",
       "passed": [
@@ -558,6 +588,21 @@
     },
     {
       "id": "team-invite-step",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "product-tour-coachmark",
       "kind": "block",
       "passed": [
         "img-alt",
@@ -1278,6 +1323,21 @@
     },
     {
       "id": "cta-split-panel",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "cta-sticky-bar",
       "kind": "block",
       "passed": [
         "img-alt",
@@ -2508,6 +2568,36 @@
     },
     {
       "id": "review-list",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "order-tracking-timeline",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "review-submit-form",
       "kind": "block",
       "passed": [
         "img-alt",

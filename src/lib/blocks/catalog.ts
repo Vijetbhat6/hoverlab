@@ -264,6 +264,17 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     deps: ['lucide-react'],
   },
 
+  {
+    id: 'footer-status-locale',
+    name: 'App Footer with Status',
+    category: 'Footers',
+    description:
+      'The footer of a signed-in product rather than a marketing site: a live status line with words as well as colour, plus locale and theme as native selects.',
+    tags: ['footer', 'status', 'locale', 'theme', 'app'],
+    previewComponent: 'footer-status-locale',
+    deps: ['lucide-react'],
+  },
+
   /* ---------------------------- Contact & Forms -------------------- */
   {
     id: 'contact-form-split',
@@ -355,6 +366,18 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     featured: true,
   },
 
+  {
+    id: 'share-access-dialog',
+    name: 'Share & Access Dialog',
+    category: 'Modals & Drawers',
+    description:
+      'The share modal where a design mistake is a data leak: general access stated as its consequence rather than its setting, and a copy button that never silently widens access.',
+    tags: ['share', 'permissions', 'dialog', 'access', 'collaboration'],
+    previewComponent: 'share-access-dialog',
+    deps: ['lucide-react'],
+    featured: true,
+  },
+
   /* ---------------------------- Onboarding ------------------------- */
   {
     id: 'onboarding-checklist',
@@ -388,6 +411,17 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     previewComponent: 'team-invite-step',
     deps: ['lucide-react'],
     featured: true,
+  },
+
+  {
+    id: 'product-tour-coachmark',
+    name: 'Product Tour Coach Mark',
+    category: 'Onboarding',
+    description:
+      'A tour step anchored to the control it explains, with a spotlight cut by one spread shadow, a visible step count and focus that follows the step.',
+    tags: ['onboarding', 'tour', 'coach mark', 'spotlight', 'walkthrough'],
+    previewComponent: 'product-tour-coachmark',
+    deps: ['lucide-react'],
   },
 
   /* ---------------------------- Notifications ---------------------- */
@@ -886,6 +920,16 @@ export const BLOCK_CATALOG: BlockRecord[] = [
       'A rounded gradient panel that restates the offer for the reader who scrolled past everything — heading left, both CTAs right, reassurance points underneath.',
     tags: ['cta', 'conversion', 'closing', 'gradient', 'panel'],
     previewComponent: 'cta-split-panel',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'cta-sticky-bar',
+    name: 'Sticky Conversion Bar',
+    category: 'CTA Sections',
+    description:
+      'The call to action that follows a long page down — held back until the reader is past a scroll threshold, dismissible, and spaced so it never covers the content it is selling.',
+    tags: ['cta', 'sticky', 'conversion', 'scroll', 'banner'],
+    previewComponent: 'cta-sticky-bar',
     deps: ['lucide-react'],
   },
 
@@ -1845,5 +1889,26 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     previewComponent: 'review-list',
     deps: ['lucide-react'],
     featured: true,
+  },
+  {
+    id: 'order-tracking-timeline',
+    name: 'Order Tracking Timeline',
+    category: 'Orders & Reviews',
+    description:
+      'The fortnight between buying and reviewing, answered properly: an arrival range rather than a date, exceptions above the timeline, and a copyable carrier reference.',
+    tags: ['order', 'tracking', 'shipping', 'timeline', 'delivery'],
+    previewComponent: 'order-tracking-timeline',
+    deps: ['lucide-react'],
+    featured: true,
+  },
+  {
+    id: 'review-submit-form',
+    name: 'Write a Review',
+    category: 'Orders & Reviews',
+    description:
+      'The form that produces the reviews the other blocks display — a real radio group for stars, and a prompt that changes with the rating because one star and five need different questions.',
+    tags: ['review', 'rating', 'form', 'stars', 'ugc'],
+    previewComponent: 'review-submit-form',
+    deps: ['lucide-react'],
   },
 ]
