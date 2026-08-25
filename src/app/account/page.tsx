@@ -24,6 +24,7 @@ import { LicenseCertificate } from '@/components/license/license-certificate'
 import { LicenseKeyCard } from '@/components/billing/license-key-card'
 import { WorkspaceCard } from '@/components/billing/workspace-card'
 import { CreditsCard } from '@/components/billing/credits-card'
+import { SavedToolPresets } from '@/components/account/saved-tool-presets'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 
@@ -202,6 +203,18 @@ export default function AccountPage() {
           is someone redeeming one, who was sent here to do it.
         */}
         <WorkspaceCard />
+
+        {/*
+          Then the tools, below everything to do with the licence.
+
+          Placement is the argument: this card is the only thing on the page
+          a FREE account has any reason to come back for. Putting it above
+          the plan would make the account page look like a tools dashboard
+          for the customers who actually pay; putting it below the plan and
+          the seats means the person scrolling past all of it is the person
+          it is for.
+        */}
+        <SavedToolPresets />
 
         <Card className="mt-6 border-border/60">
           <CardHeader>
