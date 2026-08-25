@@ -85,6 +85,10 @@ const COMPANY_LINKS: FooterLink[] = [
   { label: 'Pricing', href: '/pricing' },
   { label: 'Licence', href: '/licence' },
   { label: 'Changelog', href: '/changelog' },
+  // Next to the pricing link on purpose: someone who has just read our price
+  // and is about to go and check it against four other tabs should find the
+  // table we already built for them rather than build it themselves.
+  { label: 'Compared to the others', href: '/compare' },
   // Written for one audience rather than for search. It sits in the footer
   // because that is where someone who has already read a page goes looking
   // for "is this for me", and it is the only route in that does not depend

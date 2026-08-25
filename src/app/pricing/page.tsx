@@ -135,6 +135,21 @@ export default function PricingPage() {
             landing page a buyer may never scroll. */}
         <ComparisonTable />
 
+        {/* That table compares approaches — hand-writing it, or pulling a
+            package. The other question a price raises is about the named
+            products in the next tab, and the answer to that one is a page of
+            its own because it carries other people's figures and has to date
+            them. */}
+        <section className="mx-auto max-w-3xl px-4 pb-4 sm:px-6">
+          <p className="text-center text-sm text-muted-foreground">
+            Comparing against a specific catalog?{' '}
+            <Link href="/compare" className="font-medium underline underline-offset-4">
+              What the nine paid ones cost and withhold
+            </Link>
+            , including the rows where they beat us.
+          </p>
+        </section>
+
         <FaqAccordion />
 
         <section className="mx-auto max-w-3xl px-4 pb-24 sm:px-6">

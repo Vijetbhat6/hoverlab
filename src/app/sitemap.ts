@@ -92,6 +92,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // sell on a marketplace. It is the first thing here aimed at building
     // the direct traffic that is the only funnel agents cannot re-rank.
     { url: absoluteUrl('/for-authors'), changeFrequency: 'monthly' as const, priority: 0.7 },
+    // Unlike /for-authors this one IS written for search: "react bits
+    // alternative" and "tailwind plus alternative" are queries a buyer types
+    // with a card already out. Monthly, because the prices on it are other
+    // people's and they move.
+    { url: absoluteUrl('/compare'), changeFrequency: 'monthly' as const, priority: 0.8 },
     // The designer tools are self-contained utilities, not catalog
     // artifacts. Derived from the registry rather than a second list: a
     // hand-kept copy here is how the sitemap once carried a redirecting
