@@ -38,6 +38,7 @@ import Link from 'next/link'
 import { ArrowRight, Sparkles, Terminal } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { copyWithToast } from '@/components/designer-tools/tool-layout'
+import { CopyForFigma } from '@/components/copy-for-figma'
 import { useBrandColor } from '@/hooks/use-brand-color'
 import { REGISTRY_NAME } from '@/lib/registry/name'
 import { track } from '@/lib/analytics'
@@ -156,6 +157,21 @@ export function UseInCatalog({ brand, tool, className }: UseInCatalogProps) {
           <Terminal className="h-4 w-4" />
           Copy the install command
         </Button>
+
+        {/*
+          The fourth exit, and the only one that leads off the site on
+          purpose. A designer who has just built a palette here is one
+          keystroke from having it on a Figma canvas, and the sheet they
+          paste is stamped with the origin — so the artifact that leaves
+          with them still says where it came from.
+        */}
+        <CopyForFigma
+          size="sm"
+          variant="outline"
+          brand={brand}
+          tool={tool}
+          label="Paste into Figma"
+        />
 
         <Button asChild size="sm" variant="ghost">
           <Link href="/docs/dna" onClick={() => track('tool_open_dna', { tool })}>

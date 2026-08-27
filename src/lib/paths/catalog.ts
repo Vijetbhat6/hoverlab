@@ -44,7 +44,7 @@ export const PATHS: GuidedPath[] = [
   {
     slug: 'landing-page',
     title: 'Build a landing page',
-    tagline: 'Seven blocks, in the order that converts.',
+    tagline: 'Eight blocks, in the order that converts.',
     description:
       'The standard marketing page, assembled from the catalog. Work down the list and you have a complete, responsive landing page — the same running order the SaaS Landing Page template uses.',
     duration: '~30 minutes',

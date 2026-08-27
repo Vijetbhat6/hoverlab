@@ -137,6 +137,48 @@ export function artifactLd(input: ArtifactLdInput) {
 }
 
 /**
+ * One designer tool, as a WebApplication.
+ *
+ * The tools are the site's largest organic surface and carried no
+ * structured data at all — twenty pages that a crawler could only read as
+ * prose. `WebApplication` is the correct type rather than
+ * `SoftwareApplication`: there is nothing to install, the whole thing runs
+ * in the tab, and `browserRequirements` says so.
+ *
+ * The zero-price `Offer` is not decoration. "Free tool" is the query these
+ * pages compete for, and a price of 0 is the machine-readable half of that
+ * claim — which is true here in the strongest sense: no account, no key,
+ * no server round-trip. If a tool ever grows a gate, this is the line that
+ * has to move first.
+ */
+export function toolLd(input: {
+  name: string
+  description: string
+  path: string
+  keywords?: string
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    '@id': absoluteUrl(input.path),
+    name: input.name,
+    description: input.description,
+    url: absoluteUrl(input.path),
+    applicationCategory: 'DesignApplication',
+    operatingSystem: 'Any',
+    browserRequirements: 'Requires JavaScript',
+    isAccessibleForFree: true,
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'USD',
+    },
+    publisher: PUBLISHER,
+    ...(input.keywords ? { keywords: input.keywords } : {}),
+  }
+}
+
+/**
  * The standard crumb trail for a detail page: Home › <Hub> › <Name>.
  *
  * Callers with a real category hub (blocks and effects both have one) pass

@@ -9,6 +9,7 @@ import {
   ContactEmail,
   OperatorName,
 } from '@/components/legal/legal-parts'
+import { CookieChoicesButton } from '@/components/cookie-consent-banner'
 import { OPERATOR } from '@/lib/legal'
 import { absoluteUrl } from '@/lib/site'
 
@@ -27,10 +28,13 @@ import { absoluteUrl } from '@/lib/site'
  * here is used to train a model.
  *
  * PostHog is listed under cookies honestly — it persists to
- * `localStorage+cookie` (see analytics-provider.tsx). Under the EU/UK
- * ePrivacy rules that is non-essential storage and needs consent BEFORE it
- * is set, which means a consent banner, not just this disclosure. That work
- * is not done; section 6 says so rather than implying otherwise.
+ * `localStorage+cookie`, which under the EU/UK ePrivacy rules is
+ * non-essential storage and needs consent BEFORE it is set. For a while
+ * this file admitted that no consent was asked for. It is now: PostHog is
+ * not initialised at all until the banner is answered (src/lib/analytics.ts,
+ * src/lib/consent.ts), so section 6 describes a gate rather than an
+ * intention. If that ever stops being true, section 6 is the paragraph that
+ * has to change back.
  */
 
 const TITLE = 'Privacy Policy — Hoverlab'
@@ -213,23 +217,31 @@ export default function PrivacyPage() {
             <>
               <strong className="font-semibold text-foreground">Your browser&rsquo;s local storage</strong>{' '}
               — theme, reduced-motion preference, framework choice, recently
-              viewed items and an anonymous favourites list. This never leaves
-              your device. Clearing site data removes it.
+              viewed items, an anonymous favourites list, and the answer you
+              give the cookie banner. This never leaves your device. Clearing
+              site data removes it.
             </>,
             <>
               <strong className="font-semibold text-foreground">PostHog analytics storage</strong>{' '}
               — a cookie and a local-storage entry that give your browser a
-              persistent anonymous id. This is not essential.
+              persistent anonymous id. This is not essential, so it is set
+              only if you allow analytics, and never before.
             </>,
           ]}
         />
         <p>
-          To be straight about it: the analytics storage is currently set when
-          the page loads, before any consent is asked for. In the EU and the
-          UK that is not good enough, and a consent prompt is owed. Until one
-          ships, you can opt out completely by turning on Do Not Track, by
-          using your browser&rsquo;s tracking protection, or by asking us at{' '}
-          <ContactEmail /> to exclude you — we will do it by hand.
+          The analytics library is not loaded until you answer the banner. Not
+          loaded-but-silent: until then <code>posthog.init</code> has not run,
+          so there is no id, no cookie and no request to it at all. Refusing
+          stores one thing — the refusal — because the alternative is asking
+          you again on every page.
+        </p>
+        <p>
+          You can <CookieChoicesButton /> at any time, here or from
+          Preferences in the site header, and turning it off clears what was
+          stored. Do Not Track is honoured too: with it on, analytics stay off
+          even if you accept. If you would rather we excluded you by hand,
+          write to <ContactEmail /> and we will.
         </p>
       </LegalSection>
 

@@ -237,6 +237,17 @@ import { OrderSummaryPanel } from './sources/order-summary-panel'
 import { OrderConfirmation } from './sources/order-confirmation'
 import { OrderHistoryList } from './sources/order-history-list'
 import { ReviewList } from './sources/review-list'
+import { DataTableBulkActions } from './sources/data-table-bulk-actions'
+import { SettingsSessions } from './sources/settings-sessions'
+import { DashboardSavedViews } from './sources/dashboard-saved-views'
+import { FunnelConversionPanel } from './sources/funnel-conversion-panel'
+import { AuthSsoDomain } from './sources/auth-sso-domain'
+import { BillingSeatManager } from './sources/billing-seat-manager'
+import { OfflineStateBanner } from './sources/offline-state-banner'
+import { BottomSheetMobile } from './sources/bottom-sheet-mobile'
+import { ChatArtifactCanvas } from './sources/chat-artifact-canvas'
+import { RetrievalIndexStatus } from './sources/retrieval-index-status'
+import { OnboardingImportData } from './sources/onboarding-import-data'
 
 /**
  * Every block renders with no required props — each source defaults its own
@@ -333,15 +344,19 @@ export const BLOCK_PREVIEWS: Record<string, React.ReactNode> = {
   'order-tracking-timeline': <OrderTrackingTimeline />,
   'review-submit-form': <ReviewSubmitForm />,
   'share-access-dialog': <ShareAccessDialog />,
+  'bottom-sheet-mobile': <BottomSheetMobile />,
   'footer-status-locale': <FooterStatusLocale />,
   'product-tour-coachmark': <ProductTourCoachmark />,
   'applied-filters-bar': <AppliedFiltersBar />,
   'usage-overage-notice': <UsageOverageNotice />,
+  'billing-seat-manager': <BillingSeatManager />,
   'permission-denied-state': <PermissionDeniedState />,
+  'offline-state-banner': <OfflineStateBanner />,
   'feedback-widget': <FeedbackWidget />,
   'team-invite-step': <TeamInviteStep />,
   'donut-breakdown': <DonutBreakdown />,
   'activity-heatmap': <ActivityHeatmap />,
+  'funnel-conversion-panel': <FunnelConversionPanel />,
   'csv-import-mapper': <CsvImportMapper />,
   'avatar-crop-upload': <AvatarCropUpload />,
   'changelog-timeline': <ChangelogTimeline />,
@@ -359,13 +374,16 @@ export const BLOCK_PREVIEWS: Record<string, React.ReactNode> = {
   'api-endpoint-card': <ApiEndpointCard />,
   'code-tabs-panel': <CodeTabsPanel />,
   'chat-message-branches': <ChatMessageBranches />,
+  'chat-artifact-canvas': <ChatArtifactCanvas />,
   'agent-run-failure': <AgentRunFailure />,
   'approval-queue': <ApprovalQueue />,
   'ai-slash-menu': <AiSlashMenu />,
   'context-window-budget': <ContextWindowBudget />,
+  'retrieval-index-status': <RetrievalIndexStatus />,
   'navbar-authenticated': <NavbarAuthenticated />,
   'footer-compliance': <FooterCompliance />,
   'onboarding-role-picker': <OnboardingRolePicker />,
+  'onboarding-import-data': <OnboardingImportData />,
   'search-autocomplete': <SearchAutocomplete />,
   'form-error-summary': <FormErrorSummary />,
   'cta-inline-card': <CtaInlineCard />,
@@ -380,6 +398,7 @@ export const BLOCK_PREVIEWS: Record<string, React.ReactNode> = {
   'auth-forgot-password': <AuthForgotPassword embedded />,
   'auth-reset-password': <AuthResetPassword />,
   'auth-two-factor': <AuthTwoFactor embedded />,
+  'auth-sso-domain': <AuthSsoDomain />,
 
   'dashboard-shell': <DashboardShell />,
   'dashboard-stat-cards': <DashboardStatCards />,
@@ -388,6 +407,7 @@ export const BLOCK_PREVIEWS: Record<string, React.ReactNode> = {
   'kanban-board': <KanbanBoard />,
   'activity-timeline': <ActivityTimeline />,
   'calendar-month': <CalendarMonth />,
+  'dashboard-saved-views': <DashboardSavedViews />,
 
   'data-table-sortable': <DataTableSortable />,
   'data-table-toolbar': <DataTableToolbar />,
@@ -402,8 +422,10 @@ export const BLOCK_PREVIEWS: Record<string, React.ReactNode> = {
   'keyboard-shortcuts-sheet': <KeyboardShortcutsSheet />,
   'filter-drawer-facets': <FilterDrawerFacets />,
   'data-table-column-manager': <DataTableColumnManager />,
+  'data-table-bulk-actions': <DataTableBulkActions />,
   'settings-api-keys': <SettingsApiKeys />,
   'settings-danger-zone': <SettingsDangerZone />,
+  'settings-sessions': <SettingsSessions />,
 
   'empty-state-cta': <EmptyState />,
   'error-state-retry': <ErrorStateRetry />,

@@ -39,6 +39,7 @@ import {
 } from '@/components/ui/dialog'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
+import { CONSENT_REQUIRED, readConsent } from '@/lib/consent'
 import { TOTAL_COUNT } from '@/lib/catalog-stats'
 import { BLOCK_COUNT } from '@/lib/blocks/block-index'
 import { PAGE_COUNT } from '@/lib/pages/page-index'
@@ -140,6 +141,12 @@ export function LadderTour() {
    * long before it matters. `sessionStorage` scopes the count to the
    * visit, so a returning visitor who never dismissed it is not made to
    * wait a page again.
+   *
+   * It also waits for the cookie decision. This dialog traps focus; the
+   * consent banner deliberately does not, and putting a trap on top of an
+   * unanswered consent question makes answering it the harder of the two
+   * things on screen. The check re-runs on the next navigation, so a
+   * visitor who answers on page two still meets the tour on page three.
    */
   React.useEffect(() => {
     let seen = true
@@ -154,7 +161,8 @@ export function LadderTour() {
       // which is far worse than never showing.
       return
     }
-    if (!seen && views >= 2) setOpen(true)
+    const consentPending = CONSENT_REQUIRED && readConsent() === null
+    if (!seen && views >= 2 && !consentPending) setOpen(true)
   }, [])
 
   React.useEffect(() => {

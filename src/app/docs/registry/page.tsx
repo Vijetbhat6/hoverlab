@@ -13,6 +13,19 @@ import { absoluteUrl, siteUrl } from '@/lib/site'
 import { BLOCK_COUNT } from '@/lib/blocks/block-index'
 import { PAGE_COUNT } from '@/lib/pages/page-index'
 import { TOTAL_COUNT } from '@/lib/catalog-stats'
+import { PATHS } from '@/lib/paths/catalog'
+
+/** Guided paths, published as packs. Derived, never typed out. */
+const PATH_COUNT = PATHS.length
+
+/*
+ * The path the prose uses as its example, and its real size.
+ *
+ * Both derived, because a hand-typed "all eight blocks" is precisely the
+ * class of claim `scripts/check-claimed-counts.mts` exists to catch — and
+ * this file is outside the directory that script scans.
+ */
+const EXAMPLE_PATH = PATHS.find((p) => p.slug === 'landing-page') ?? PATHS[0]!
 
 const TITLE = 'shadcn registry — Hoverlab Docs'
 const DESCRIPTION =
@@ -114,12 +127,31 @@ npx shadcn add @hoverlab/saas-landing-page`}</Snippet>
               <>your stylesheet, as rules — an effect has no file</>,
             ],
             [
+              <C key="pk">path-{'{slug}'}</C>,
+              String(PATH_COUNT),
+              <>
+                every block in a guided path — no file of its own
+              </>,
+            ],
+            [
               <C key="s">registry:base</C>,
               '1',
               <>your stylesheet&rsquo;s <C>:root</C> and <C>.dark</C></>,
             ],
           ]}
         />
+        <p>
+          The <C>path-</C> items are the {PATH_COUNT} guided paths, published as
+          packs. Each one is nothing but a list of registry dependencies, so{' '}
+          <C>npx shadcn add @hoverlab/path-{EXAMPLE_PATH.slug}</C> writes all{' '}
+          {EXAMPLE_PATH.steps.length} blocks of that path in one pass — and a
+          block fixed here is fixed in every pack that references it, because a
+          pack holds no copies.{' '}
+          <Link href="/paths" className="text-primary underline-offset-4 hover:underline">
+            The paths themselves
+          </Link>{' '}
+          carry the part a registry item cannot: why each block sits where it does.
+        </p>
         <Callout>
           Blocks land directly in <C>components/</C>, not a nested folder,
           because pages import them as <C>@/components/{'{id}'}</C>. If you

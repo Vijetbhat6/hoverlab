@@ -36,6 +36,7 @@ import { useAuth } from '@/components/auth-provider'
 import { useEntitlements } from '@/hooks/use-entitlements'
 import { useBrandColor } from '@/hooks/use-brand-color'
 import { BrandColorPicker } from '@/components/brand-color-picker'
+import { CopyForFigma } from '@/components/copy-for-figma'
 import { downloadBlob, downloadTextFile } from '@/lib/bundle-export'
 import { track } from '@/lib/analytics'
 import type { DesignSystemExport } from '@/lib/export/design-system'
@@ -275,6 +276,25 @@ export function DesignSystemPanel() {
               )}
             </>
           )}
+
+          {/* Outside the Pro branch on purpose: the clipboard path is free
+              for everybody. The zip is derived per-customer and is the
+              thing worth charging for; this is two seconds of proof that
+              the palette is real, aimed at the designer who is the one
+              who actually picks a component library. */}
+          <div className="space-y-2 rounded-lg border border-border/60 bg-muted/30 p-3">
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-semibold">Straight into Figma</span>
+              <span className="rounded-full bg-muted px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+                Free
+              </span>
+            </div>
+            <p className="text-xs text-muted-foreground">
+              Both palettes, the radius scale and the type as editable layers —
+              paste onto any canvas. No plugin, no file, no account.
+            </p>
+            <CopyForFigma className="w-full" />
+          </div>
         </CardContent>
       </Card>
     </div>

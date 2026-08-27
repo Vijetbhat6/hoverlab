@@ -410,6 +410,17 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     deps: ['lucide-react'],
     featured: true,
   },
+  {
+    id: 'bottom-sheet-mobile',
+    name: 'Mobile Bottom Sheet',
+    category: 'Modals & Drawers',
+    description:
+      'Half and full snap points where the content owns the scroll and overscroll-contain keeps the page behind still. The drag handle is a real button, Escape and the backdrop close it, and safe-area padding keeps the last row pressable.',
+    tags: ['bottom sheet', 'mobile', 'drawer', 'snap points', 'safe area'],
+    previewComponent: 'bottom-sheet-mobile',
+    deps: ['lucide-react'],
+    featured: true,
+  },
 
   /* ---------------------------- Onboarding ------------------------- */
   {
@@ -465,6 +476,16 @@ export const BLOCK_CATALOG: BlockRecord[] = [
       'The "what best describes you" step, asked honestly — every option states what it actually changes, the skip is visible and names what you get instead, and the choice is reversible.',
     tags: ['onboarding', 'segmentation', 'role', 'first run', 'radio'],
     previewComponent: 'onboarding-role-picker',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'onboarding-import-data',
+    name: 'Import or Start Empty',
+    category: 'Onboarding',
+    description:
+      'The empty product’s real first question. Sample data is offered with equal weight rather than as grey small print, every connector names its scope before the redirect, and each option carries the honest duration.',
+    tags: ['onboarding', 'import', 'csv', 'connectors', 'sample data'],
+    previewComponent: 'onboarding-import-data',
     deps: ['lucide-react'],
   },
   /* ---------------------------- Notifications ---------------------- */
@@ -1054,6 +1075,16 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     previewComponent: 'auth-two-factor',
     deps: ['lucide-react'],
   },
+  {
+    id: 'auth-sso-domain',
+    name: 'Email-First SSO Sign-In',
+    category: 'Authentication',
+    description:
+      'Email first, then whatever that domain uses. The password field is absent rather than disabled when SSO is enforced, the button names the company it redirects to, and a personal address is a normal answer instead of an error.',
+    tags: ['sso', 'saml', 'enterprise', 'login', 'okta'],
+    previewComponent: 'auth-sso-domain',
+    deps: ['lucide-react'],
+  },
 
   /* ---------------------------- Dashboards ------------------------ */
   {
@@ -1130,6 +1161,16 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     previewComponent: 'calendar-month',
     deps: ['lucide-react'],
   },
+  {
+    id: 'dashboard-saved-views',
+    name: 'Saved View Tabs',
+    category: 'Dashboards',
+    description:
+      'Saved views with the third state most implementations drop: a shared view with unsaved edits, where Save changes what a colleague sees tomorrow. Two honest buttons instead of one, ownership on the tab, and dirty said in words.',
+    tags: ['saved views', 'tabs', 'filters', 'dashboard', 'sharing'],
+    previewComponent: 'dashboard-saved-views',
+    deps: ['lucide-react'],
+  },
 
   /* ---------------------------- Data Tables ----------------------- */
   {
@@ -1182,6 +1223,16 @@ export const BLOCK_CATALOG: BlockRecord[] = [
       'Reordering that works from the keyboard rather than by drag alone, pinned columns that cannot be hidden or moved, and a guard so the last visible column cannot be unchecked into a blank table.',
     tags: ['table', 'columns', 'customise', 'reorder', 'visibility'],
     previewComponent: 'data-table-column-manager',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'data-table-bulk-actions',
+    name: 'Bulk Action Bar',
+    category: 'Data Tables',
+    description:
+      'The selection bar that asks the question most tables skip: this page, or all 1,284 rows the filter matches. Typed confirmation above a threshold, an undo with the window counting down, and a select-all that names its own scope.',
+    tags: ['table', 'bulk actions', 'selection', 'undo', 'destructive'],
+    previewComponent: 'data-table-bulk-actions',
     deps: ['lucide-react'],
   },
 
@@ -1239,6 +1290,16 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     previewComponent: 'settings-danger-zone',
     deps: ['lucide-react'],
   },
+  {
+    id: 'settings-sessions',
+    name: 'Active Sessions & Devices',
+    category: 'Settings',
+    description:
+      'The screen people go looking for after losing a laptop. Sign out everywhere states what it does not reach — API keys keep working — locations are written as estimates, and this device is labelled rather than revocable by misclick.',
+    tags: ['security', 'sessions', 'devices', 'sign out', 'account'],
+    previewComponent: 'settings-sessions',
+    deps: ['lucide-react'],
+  },
 
   /* ---------------------- Empty & Error States -------------------- */
   {
@@ -1291,6 +1352,16 @@ export const BLOCK_CATALOG: BlockRecord[] = [
       'The state where the page exists and the account is not on the list: names who can grant access, sends the request, and leaks nothing about what is inside.',
     tags: ['403', 'permission', 'access', 'error state', 'rbac'],
     previewComponent: 'permission-denied-state',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'offline-state-banner',
+    name: 'Offline With Queued Changes',
+    category: 'Empty & Error States',
+    description:
+      'Leads with what still works — three edits saved on this device — instead of with the failure. The retry backoff counts down in the open, and the three things that genuinely cannot work offline are named rather than discovered.',
+    tags: ['offline', 'network', 'retry', 'queue', 'resilience'],
+    previewComponent: 'offline-state-banner',
     deps: ['lucide-react'],
   },
 
@@ -1359,6 +1430,17 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     previewComponent: 'activity-heatmap',
     deps: [],
   },
+  {
+    id: 'funnel-conversion-panel',
+    name: 'Conversion Funnel',
+    category: 'Charts & Metrics',
+    description:
+      'A funnel that leads with the step-to-step rate and the people who fell out of it, not the tidy share-of-top percentages nobody can act on. Biggest drop named in words, and a footnote saying which definition of funnel this is.',
+    tags: ['funnel', 'conversion', 'analytics', 'chart', 'cohort'],
+    previewComponent: 'funnel-conversion-panel',
+    deps: ['lucide-react'],
+    featured: true,
+  },
 
   /* ---------------------- Billing & Usage ------------------------- */
   {
@@ -1412,6 +1494,16 @@ export const BLOCK_CATALOG: BlockRecord[] = [
       'Past the included allowance, with the end-of-month projection and every number the invoice will use — because a surprise bill is a product defect.',
     tags: ['overage', 'usage', 'billing', 'quota', 'projection'],
     previewComponent: 'usage-overage-notice',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'billing-seat-manager',
+    name: 'Seat Count & Proration',
+    category: 'Billing & Usage',
+    description:
+      'Changing seats with the bill shown first: the part-period charge and the new recurring amount as two numbers, the arithmetic spelled out, and the asymmetry stated where it bites — removing a seat refunds nothing today.',
+    tags: ['billing', 'seats', 'proration', 'subscription', 'per-seat'],
+    previewComponent: 'billing-seat-manager',
     deps: ['lucide-react'],
   },
 
@@ -1613,6 +1705,16 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     deps: ['lucide-react'],
     featured: true,
   },
+  {
+    id: 'chat-artifact-canvas',
+    name: 'Chat Beside a Canvas',
+    category: 'Agent Chat',
+    description:
+      'The two-pane assistant layout, with the mismatch nobody else states: the canvas names the version it is showing and says so when that is not the one the conversation is about. Versions link back to the turn that made them.',
+    tags: ['canvas', 'artifact', 'versions', 'assistant', 'two-pane'],
+    previewComponent: 'chat-artifact-canvas',
+    deps: ['lucide-react'],
+  },
   /* -------------------------- Agent Reasoning ---------------------- */
   {
     id: 'agent-thinking-trace',
@@ -1779,6 +1881,16 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     previewComponent: 'context-window-budget',
     deps: ['lucide-react'],
     featured: true,
+  },
+  {
+    id: 'retrieval-index-status',
+    name: 'Index Freshness Panel',
+    category: 'Retrieval & Context',
+    description:
+      'A green tick means the connector works, not that the answers are current. Freshness as an age in words per source, the headline taken from the stalest one, and a failed sync that still says what age it is answering from.',
+    tags: ['rag', 'indexing', 'freshness', 'connectors', 'sync'],
+    previewComponent: 'retrieval-index-status',
+    deps: ['lucide-react'],
   },
   /* ------------------------ Inline AI Actions ---------------------- */
   {

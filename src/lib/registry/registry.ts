@@ -53,6 +53,7 @@ import 'server-only'
 import { BLOCKS } from '../blocks/blocks'
 import { PAGES } from '../pages/pages'
 import { EFFECTS } from '../effects'
+import { PATHS } from '../paths/catalog'
 import type { Artifact, ArtifactFile } from '../artifact-types'
 import { cssToObject, type CssObject } from './css-to-object'
 import { registryDepIds, unresolvedLocalImports } from './deps'
@@ -130,6 +131,16 @@ const COLLISIONS = [
   ...BLOCKS.filter((b) => PAGE_BY_ID.has(b.id)).map((b) => b.id),
   ...BLOCKS.filter((b) => EFFECT_BY_ID.has(b.id)).map((b) => b.id),
   ...PAGES.filter((p) => EFFECT_BY_ID.has(p.id)).map((p) => p.id),
+  /*
+   * Guided paths are published as `path-{slug}`, so they cannot collide
+   * with an id — unless an artifact is itself named `path-something`, at
+   * which point `buildRegistryItem` would route it to the path branch and
+   * return null for an item the index advertises. Cheap to check, and the
+   * failure without it is a 404 on a name the registry itself published.
+   */
+  ...[...BLOCKS, ...PAGES, ...EFFECTS]
+    .filter((a) => a.id.startsWith('path-'))
+    .map((a) => a.id),
 ]
 if (COLLISIONS.length) {
   throw new Error(
@@ -231,6 +242,65 @@ function blockItem(id: string, origin: string, withContent: boolean): RegistryIt
   }
 }
 
+/**
+ * A guided path, as one installable pack.
+ *
+ * WHY THIS EXISTS
+ *
+ * `/paths` was a reading list. The ordering is the content — social proof
+ * after the hook, the FAQ answering the objection the price just created —
+ * but taking it meant seven visits to seven block pages and seven commands,
+ * and the sequence was the first thing lost on the way. This makes the pack
+ * the unit: one command installs every block in the path, in one pass.
+ *
+ * NO FILES OF ITS OWN
+ *
+ * The item is nothing but `registryDependencies`. That is the whole trick
+ * and it is why this cannot drift: the pack does not contain copies of the
+ * blocks, it points at them by URL, so a block fixed tomorrow is fixed in
+ * every path that uses it. A pack with its own inlined copies would be a
+ * second catalog to keep in step, which is precisely the failure this
+ * codebase spends its `build-artifact-sources` step avoiding.
+ *
+ * `path-` PREFIX
+ *
+ * Item names share one namespace with 194 blocks, 21 pages and 835 effects.
+ * A path called `landing-page` is exactly the sort of name a block could
+ * take later, and the collision guard below would then fail the build on a
+ * name nobody chose deliberately. The prefix keeps the two apart by
+ * construction rather than by luck.
+ *
+ * The reasoning stays on the site: `docs` points at the path page, because
+ * the order is the part worth reading and a registry item cannot carry it.
+ */
+function pathItem(slug: string, origin: string): RegistryItem | null {
+  const path = PATHS.find((p) => p.slug === slug)
+  if (!path) return null
+
+  const site = origin.replace(/\/$/, '')
+  const blockIds = path.steps.map((step) => step.blockId)
+
+  return {
+    name: `path-${path.slug}`,
+    type: 'registry:block',
+    title: path.title,
+    // The tagline already carries the count for most paths, so this adds
+    // only what a registry consumer cannot see: that installing this one
+    // name writes every block in the path.
+    description: `${path.tagline} One install writes all ${path.steps.length} blocks.`,
+    categories: ['Guided paths'],
+    registryDependencies: blockIds.map((id) => itemUrl(id, origin)),
+    docs: `The order is the content — ${site}/paths/${path.slug} gives the reason each block sits where it does, and the alternatives at each step.`,
+    meta: {
+      tier: 'path',
+      href: `${site}/paths/${path.slug}`,
+      level: path.level,
+      duration: path.duration,
+      blocks: blockIds,
+    },
+  }
+}
+
 function pageItem(id: string, origin: string, withContent: boolean): RegistryItem | null {
   const page = PAGE_BY_ID.get(id)
   if (!page) return null
@@ -325,6 +395,7 @@ ${effect.html}`
 export function registryItemNames(): string[] {
   return [
     REGISTRY_NAME,
+    ...PATHS.map((p) => `path-${p.slug}`),
     ...BLOCKS.map((b) => b.id),
     ...PAGES.map((p) => p.id),
     ...EFFECTS.map((e) => e.id),
@@ -336,6 +407,9 @@ export function registryItemNames(): string[] {
  */
 export function buildRegistryItem(name: string, origin: string): RegistryItem | null {
   if (name === REGISTRY_NAME) return baseItem()
+  // Paths first, and by prefix, so the lookup never has to guess: every
+  // other branch keys off an id that could in principle be anything.
+  if (name.startsWith('path-')) return pathItem(name.slice('path-'.length), origin)
   return (
     blockItem(name, origin, true) ??
     pageItem(name, origin, true) ??
@@ -355,6 +429,10 @@ export function buildRegistryItem(name: string, origin: string): RegistryItem | 
 export function buildRegistryIndex(origin: string) {
   const items: RegistryItem[] = [
     baseItem(),
+    // Packs before the parts. An indexer showing the first screen of this
+    // list should see the curated routes through the catalog, not block
+    // number one of 194.
+    ...PATHS.map((p) => pathItem(p.slug, origin)!),
     ...BLOCKS.map((b) => blockItem(b.id, origin, false)!),
     ...PAGES.map((p) => pageItem(p.id, origin, false)!),
     ...EFFECTS.map((e) => effectItem(e.id, origin, false)!),

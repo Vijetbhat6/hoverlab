@@ -8,6 +8,7 @@ import { AuthProvider } from "@/components/auth-provider";
 import { ReducedMotionProvider } from "@/components/reduced-motion-provider";
 import { ServiceWorkerRegister } from "@/components/service-worker-register";
 import { AnalyticsProvider } from "@/components/analytics-provider";
+import { CookieConsentBanner } from "@/components/cookie-consent-banner";
 import { Viewport } from "next";
 
 const geistSans = Geist({
@@ -110,6 +111,12 @@ export default function RootLayout({
                 <Toaster />
                 <SonnerToaster position="bottom-right" />
                 <ServiceWorkerRegister />
+                {/* Last in the tree, and outside nothing: it is fixed to the
+                    viewport, so where it sits in the DOM only decides paint
+                    order and the order a screen reader reaches it in. Both
+                    are right at the end — it asks for a decision about the
+                    page rather than being part of it. */}
+                <CookieConsentBanner />
               </ReducedMotionProvider>
             </AuthProvider>
           </AnalyticsProvider>

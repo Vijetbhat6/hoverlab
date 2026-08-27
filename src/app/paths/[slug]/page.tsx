@@ -64,6 +64,22 @@ export default async function PathDetailPage({ params }: PageProps) {
   // disagree, because they are the same array.
   const installCommand = `npx hoverlab add ${path.steps.map((s) => s.blockId).join(' ')}`
 
+  /*
+   * The same pack, through the shadcn rail.
+   *
+   * Two commands rather than one because they are genuinely different
+   * promises. Ours enumerates the blocks, which is honest about what it
+   * writes and needs our CLI. The registry one names a single published
+   * item — `path-{slug}` in `/registry.json`, whose whole content is a
+   * list of registryDependencies — so it runs in a project that has never
+   * heard of Hoverlab, and it is the form registry.directory indexes.
+   *
+   * The URL form rather than `@hoverlab/…`: somebody arriving from a
+   * search has no `components.json` entry for this registry yet, and the
+   * namespaced form fails on the first try for them.
+   */
+  const packCommand = `npx shadcn@latest add ${absoluteUrl(`/r/path-${path.slug}.json`)}`
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       <div className="mx-auto w-full max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
@@ -109,9 +125,17 @@ export default async function PathDetailPage({ params }: PageProps) {
           <pre className="mt-3 overflow-x-auto rounded-xl bg-[#0b1020] p-4 text-[13px] leading-relaxed text-slate-100">
             <code>{installCommand}</code>
           </pre>
+
+          <p className="mt-4 text-xs font-medium text-foreground">
+            Or through the shadcn CLI, with nothing installed first:
+          </p>
+          <pre className="mt-2 overflow-x-auto rounded-xl bg-[#0b1020] p-4 text-[13px] leading-relaxed text-slate-100">
+            <code>{packCommand}</code>
+          </pre>
           <p className="mt-2 text-xs text-muted-foreground">
-            Or work down the list and copy each one from its page — the order
-            is what matters, not how the files get there.
+            This path is a published registry item — one name that pulls in all{' '}
+            {path.steps.length} blocks. Or work down the list and copy each one
+            from its page; the order is what matters, not how the files get there.
           </p>
         </section>
 

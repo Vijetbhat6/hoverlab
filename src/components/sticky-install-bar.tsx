@@ -12,6 +12,13 @@
  * buttons it duplicates, and only from the `sm` breakpoint up, where there
  * is room for it without eating the viewport. Its one piece of motion is a
  * fade, which the global `prefers-reduced-motion` rule already neutralises.
+ *
+ * It also waits while the cookie banner is unanswered. Both are fixed to the
+ * bottom of the viewport, and stacking a duplicated convenience on top of an
+ * unanswered legal question is the wrong way round: the command is still at
+ * the top of the page, and the wait is one click long. `pending` is false
+ * where no banner is asked for, so this does not go missing on a build with
+ * no analytics key — see useConsent.
  */
 
 import * as React from 'react'
@@ -19,6 +26,7 @@ import { Check, Copy } from 'lucide-react'
 import { toast } from 'sonner'
 
 import { reportUsage } from '@/lib/report-usage'
+import { useConsent } from '@/components/use-consent'
 import { cn } from '@/lib/utils'
 
 export function StickyInstallBar({
@@ -30,13 +38,16 @@ export function StickyInstallBar({
   name: string
   command: string
 }) {
-  const [visible, setVisible] = React.useState(false)
+  const [scrolledPast, setScrolledPast] = React.useState(false)
   const [copied, setCopied] = React.useState(false)
+  const { pending } = useConsent()
+
+  const visible = scrolledPast && !pending
 
   React.useEffect(() => {
     // 480px is roughly the header plus the action row — far enough that the
     // bar cannot appear while the buttons it mirrors are still on screen.
-    const onScroll = () => setVisible(window.scrollY > 480)
+    const onScroll = () => setScrolledPast(window.scrollY > 480)
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)

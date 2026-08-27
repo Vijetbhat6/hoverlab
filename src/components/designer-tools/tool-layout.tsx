@@ -20,6 +20,7 @@ import { Button } from '@/components/ui/button'
 import { SiteHeader } from '@/components/site-header'
 import { BrandColorPicker } from '@/components/brand-color-picker'
 import { SiteFooter } from '@/components/site-footer'
+import { RelatedTools } from '@/components/designer-tools/related-tools'
 import { toast } from 'sonner'
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
@@ -68,6 +69,10 @@ export function ToolLayout({ name, tagline, icon, children }: ToolLayoutProps) {
         </div>
 
         {children}
+
+        {/* Every tool ended at its own output. This is the first thing on
+            the page that suggests there are nineteen more. */}
+        <RelatedTools />
       </main>
       <SiteFooter />
     </div>

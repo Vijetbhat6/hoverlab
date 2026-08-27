@@ -12,6 +12,21 @@
  * mostly there so the copy button has company. The copy handler feature-
  * detects `navigator.clipboard` and simply hides itself where the API is
  * unavailable, rather than rendering a button that silently fails.
+ *
+ * THE DETECTION HAPPENS IN AN EFFECT, NOT DURING RENDER
+ *
+ * `typeof navigator !== 'undefined'` read during render is false on the
+ * server and true in the browser, so the server sent the X link where the
+ * client wanted a copy button and React threw the whole subtree away with
+ * "Hydration failed". It was invisible on the page — the regenerated tree
+ * looks right — and only showed up as a console error, which is how it
+ * survived in a shipped block.
+ *
+ * Reading it in `useEffect` means the first client render matches the
+ * server exactly (no button), and the button appears on the pass after
+ * hydration. That is the correct shape for every browser-capability check
+ * in a server-rendered component, and it is worth copying: the same
+ * one-line detection is a hydration bug anywhere it is read during render.
  */
 
 import * as React from 'react'
@@ -40,7 +55,12 @@ export function ArticleHeader({
   className = '',
 }: ArticleHeaderProps) {
   const [copied, setCopied] = React.useState(false)
-  const canCopy = typeof navigator !== 'undefined' && Boolean(navigator.clipboard)
+  // Starts false so the server's HTML and the first client render agree.
+  const [canCopy, setCanCopy] = React.useState(false)
+
+  React.useEffect(() => {
+    setCanCopy(Boolean(navigator.clipboard))
+  }, [])
 
   const copyLink = async () => {
     try {

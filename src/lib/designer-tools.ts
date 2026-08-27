@@ -266,3 +266,57 @@ export const DESIGNER_TOOLS: DesignerTool[] = [
     seoTitle: 'SVG Noise Texture Generator — Grain via feTurbulence — Hoverlab',
   },
 ]
+
+/**
+ * Words too common across the registry to say anything about relatedness.
+ *
+ * Nearly every tool's keywords contain "css"; a term that appears on most
+ * of the list carries no signal and, worse, drowns the terms that do —
+ * two tools sharing only "css" would outrank two sharing "contrast" and
+ * "wcag" purely on ordering luck.
+ */
+const RELATED_STOPWORDS = new Set(['css', 'and', 'the', 'for', 'to', 'of', 'in', 'a'])
+
+/** A tool's keyword line as a set of comparable terms. */
+function keywordSet(tool: DesignerTool): Set<string> {
+  return new Set(
+    tool.keywords
+      .toLowerCase()
+      .split(/\s+/)
+      .filter((word) => word.length > 1 && !RELATED_STOPWORDS.has(word)),
+  )
+}
+
+/**
+ * The tools most worth showing next to this one.
+ *
+ * Derived from shared keywords rather than a hand-maintained `related`
+ * field on every entry, for the reason the registry exists at all: a new
+ * tool added to the list should appear everywhere it belongs without
+ * twenty other entries having to be edited to mention it. A hand-kept
+ * graph of twenty nodes is a graph that is wrong within two additions.
+ *
+ * Ties break on registry order, which makes the output deterministic —
+ * these render into statically generated pages, and a rail that reshuffled
+ * between builds would churn the HTML for nothing.
+ *
+ * Every tool gets `limit` neighbours even when the overlap is zero: the
+ * section is titled as more tools rather than as a claim of similarity, so
+ * the weakest case is a plain list rather than a wrong one.
+ */
+export function relatedTools(href: string, limit = 3): DesignerTool[] {
+  const self = DESIGNER_TOOLS.find((tool) => tool.href === href)
+  if (!self) return DESIGNER_TOOLS.slice(0, limit)
+
+  const mine = keywordSet(self)
+
+  return DESIGNER_TOOLS.filter((tool) => tool.href !== href)
+    .map((tool, index) => {
+      let shared = 0
+      for (const word of keywordSet(tool)) if (mine.has(word)) shared++
+      return { tool, shared, index }
+    })
+    .sort((a, b) => (b.shared === a.shared ? a.index - b.index : b.shared - a.shared))
+    .slice(0, limit)
+    .map((scored) => scored.tool)
+}

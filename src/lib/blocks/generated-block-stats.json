@@ -135,6 +135,10 @@
     "lines": 280,
     "files": 1
   },
+  "bottom-sheet-mobile": {
+    "lines": 255,
+    "files": 1
+  },
   "onboarding-checklist": {
     "lines": 230,
     "files": 1
@@ -153,6 +157,10 @@
   },
   "onboarding-role-picker": {
     "lines": 191,
+    "files": 1
+  },
+  "onboarding-import-data": {
+    "lines": 216,
     "files": 1
   },
   "toast-stack": {
@@ -312,7 +320,7 @@
     "files": 1
   },
   "article-header": {
-    "lines": 151,
+    "lines": 171,
     "files": 1
   },
   "team-grid": {
@@ -379,6 +387,10 @@
     "lines": 148,
     "files": 1
   },
+  "auth-sso-domain": {
+    "lines": 246,
+    "files": 1
+  },
   "dashboard-shell": {
     "lines": 218,
     "files": 1
@@ -407,6 +419,10 @@
     "lines": 191,
     "files": 1
   },
+  "dashboard-saved-views": {
+    "lines": 300,
+    "files": 1
+  },
   "data-table-sortable": {
     "lines": 288,
     "files": 1
@@ -425,6 +441,10 @@
   },
   "data-table-column-manager": {
     "lines": 208,
+    "files": 1
+  },
+  "data-table-bulk-actions": {
+    "lines": 394,
     "files": 1
   },
   "settings-nav-layout": {
@@ -447,6 +467,10 @@
     "lines": 182,
     "files": 1
   },
+  "settings-sessions": {
+    "lines": 297,
+    "files": 1
+  },
   "empty-state-cta": {
     "lines": 131,
     "files": 1
@@ -465,6 +489,10 @@
   },
   "permission-denied-state": {
     "lines": 155,
+    "files": 1
+  },
+  "offline-state-banner": {
+    "lines": 173,
     "files": 1
   },
   "metric-sparkline-cards": {
@@ -491,6 +519,10 @@
     "lines": 213,
     "files": 1
   },
+  "funnel-conversion-panel": {
+    "lines": 195,
+    "files": 1
+  },
   "billing-plan-summary": {
     "lines": 151,
     "files": 1
@@ -509,6 +541,10 @@
   },
   "usage-overage-notice": {
     "lines": 219,
+    "files": 1
+  },
+  "billing-seat-manager": {
+    "lines": 243,
     "files": 1
   },
   "command-palette": {
@@ -571,6 +607,10 @@
     "lines": 272,
     "files": 1
   },
+  "chat-artifact-canvas": {
+    "lines": 321,
+    "files": 1
+  },
   "agent-thinking-trace": {
     "lines": 247,
     "files": 1
@@ -629,6 +669,10 @@
   },
   "context-window-budget": {
     "lines": 309,
+    "files": 1
+  },
+  "retrieval-index-status": {
+    "lines": 246,
     "files": 1
   },
   "selection-ai-toolbar": {

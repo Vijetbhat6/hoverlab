@@ -97,6 +97,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // with a card already out. Monthly, because the prices on it are other
     // people's and they move.
     { url: absoluteUrl('/compare'), changeFrequency: 'monthly' as const, priority: 0.8 },
+    // Per-artifact WCAG evidence. Weekly, because the numbers on it move
+    // with the catalog — it is regenerated on every build — and because a
+    // buyer doing vendor diligence under the EAA wants the current one.
+    { url: absoluteUrl('/accessibility'), changeFrequency: 'weekly' as const, priority: 0.7 },
     // The designer tools are self-contained utilities, not catalog
     // artifacts. Derived from the registry rather than a second list: a
     // hand-kept copy here is how the sitemap once carried a redirecting

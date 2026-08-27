@@ -34,6 +34,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useTheme } from 'next-themes'
 import {
+  Cookie,
   Github,
   Keyboard,
   Laptop,
@@ -66,6 +67,8 @@ import { CommandPalette, useCommandPalette } from '@/components/command-palette'
 import { ShortcutsHelpButton, useShortcutsHelp } from '@/components/shortcuts-help'
 import { CopyHistoryDropdown } from '@/components/copy-history-dropdown'
 import { LadderTour, openLadderTour } from '@/components/ladder-tour'
+import { openCookieChoices } from '@/components/cookie-consent-banner'
+import { CONSENT_REQUIRED } from '@/lib/consent'
 import { useReducedMotion } from '@/components/reduced-motion-provider'
 import { useBundle } from '@/hooks/use-bundle'
 import { useCompare } from '@/hooks/use-compare'
@@ -594,6 +597,17 @@ function PreferencesMenu() {
           <Keyboard className="mr-2 h-4 w-4" /> Keyboard shortcuts
           <span className="ml-auto font-mono text-xs text-muted-foreground">?</span>
         </DropdownMenuItem>
+        {/* The way back to the consent decision. A choice that cannot be
+            changed is not one the law counts — withdrawal has to be as easy
+            as giving it — and "as easy" cannot mean an email. Hidden where
+            no consent was ever asked for, on the same principle as the
+            GitHub item below: a menu entry that opens nothing is worse than
+            no entry. */}
+        {CONSENT_REQUIRED ? (
+          <DropdownMenuItem onClick={openCookieChoices} className="cursor-pointer">
+            <Cookie className="mr-2 h-4 w-4" /> Cookie choices
+          </DropdownMenuItem>
+        ) : null}
         {/* Only when NEXT_PUBLIC_GITHUB_URL names an actual repository.
             Unset, SOCIAL.github falls back to github.com's front page, and a
             "Source on GitHub" item that lands there is a claim this project

@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import Link from 'next/link'
-import { Search, Sparkles, Heart, Star, ChevronLeft, ChevronRight, Shuffle, ArrowDownUp, Loader2, Plus, Minus } from 'lucide-react'
+import { Search, Sparkles, Heart, Star, ChevronLeft, ChevronRight, Shuffle, ArrowDownUp, Loader2, Plus, Minus, TrendingUp, Clock } from 'lucide-react'
 import { toast } from 'sonner'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
@@ -17,6 +17,7 @@ import { useFavorites } from '@/hooks/use-favorites'
 import { CATEGORIES, EFFECT_INDEX as EFFECTS, type EffectCategory, type EffectMeta } from '@/lib/effect-index'
 import { useEffectDetails } from '@/hooks/use-effect-details'
 import { track } from '@/lib/analytics'
+import { addedAt } from '@/lib/recency'
 import { EffectCardSkeleton } from '@/components/effect-card-skeleton'
 import { SiteFooter } from '@/components/site-footer'
 import { LibraryProTile } from '@/components/library-pro-tile'
@@ -24,7 +25,7 @@ import { cn } from '@/lib/utils'
 import { isTypingTarget } from '@/lib/tray-events'
 
 type Filter = 'All' | 'Featured' | 'Favorites' | EffectCategory
-type Sort = 'default' | 'az' | 'za' | 'featured'
+type Sort = 'default' | 'az' | 'za' | 'featured' | 'trending' | 'recent'
 
 const PAGE_SIZE = 24
 
@@ -48,13 +49,45 @@ function parseFilter(value: string | null): Filter | null {
 }
 
 /**
- * Validate the `?sort=` query param. Only the 4 known sort modes are accepted;
+ * Validate the `?sort=` query param. Only the known sort modes are accepted;
  * anything else falls back to 'default'.
  */
 function parseSort(value: string | null): Sort {
-  if (value === 'az' || value === 'za' || value === 'featured') return value
+  if (
+    value === 'az' ||
+    value === 'za' ||
+    value === 'featured' ||
+    value === 'trending' ||
+    value === 'recent'
+  ) {
+    return value
+  }
   return 'default'
 }
+
+/**
+ * How many trending rows to ask the API for.
+ *
+ * This is a sort over 835 effects backed by a ranking that only covers the
+ * head of the distribution, and that is the honest shape of the data: a
+ * seven-day window has a long tail of ids nobody touched, and ordering
+ * those by a zero would be arbitrary dressed up as measurement. The ranked
+ * ones lead; everything else keeps its curated order behind them, and the
+ * banner says so.
+ *
+ * 50 is the API's own ceiling (`/api/v1/trending` clamps there).
+ */
+const TRENDING_LIMIT = 50
+
+/**
+ * What `sort=trending` knows right now.
+ *
+ * `null` = not fetched yet, `[]` = fetched and there is genuinely no usage
+ * data. The two are different answers and the UI says different things
+ * about them: a fresh deployment has no counters at all, and pretending
+ * otherwise is exactly what <TrendingRail> refuses to do.
+ */
+type TrendingRank = Map<string, number> | null
 
 export default function Home() {
   const [query, setQuery] = React.useState('')
@@ -88,6 +121,17 @@ export default function Home() {
   const [aiLoading, setAiLoading] = React.useState(false)
   const [aiRankedIds, setAiRankedIds] = React.useState<string[] | null>(null)
   const aiRequestIdRef = React.useRef(0)
+
+  /* ---------------- Trending sort ----------------
+   * Fetched lazily, once, the first time someone picks the Trending sort.
+   * Not on mount: the counters live in Firestore, and paying for that read
+   * on every visit to the busiest page — for a sort most visitors never
+   * choose — is the wrong trade. Kept in state afterwards so switching
+   * away and back is free.
+   */
+  const [trendingRank, setTrendingRank] = React.useState<TrendingRank>(null)
+  const [trendingLoading, setTrendingLoading] = React.useState(false)
+  const trendingRequestedRef = React.useRef(false)
 
   // On first client mount, read ?filter=, ?q=, and ?sort= from the URL so
   // deep-links from the detail page's "Browse all in category" button land on
@@ -165,6 +209,32 @@ export default function Home() {
     }
   }, [])
 
+  /*
+   * Load the trending ranking the first time it is asked for.
+   *
+   * An error and an empty ranking collapse to the same state on purpose:
+   * both mean "there is nothing measured to show you", and the banner says
+   * that rather than inventing an order. `trendingRank` staying non-null
+   * afterwards is what stops a failed fetch retrying on every re-render.
+   */
+  React.useEffect(() => {
+    if (sort !== 'trending' || trendingRequestedRef.current) return
+    // A ref, not the loading flag: `setTrendingLoading(true)` re-runs this
+    // effect, and a cleanup keyed on that would cancel the request it just
+    // started — leaving the spinner up forever.
+    trendingRequestedRef.current = true
+    setTrendingLoading(true)
+
+    fetch(`/api/v1/trending?level=effect&limit=${TRENDING_LIMIT}`)
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data: { items?: { id: string }[] } | null) => {
+        const items = data?.items ?? []
+        setTrendingRank(new Map(items.map((item, index) => [item.id, index])))
+      })
+      .catch(() => setTrendingRank(new Map()))
+      .finally(() => setTrendingLoading(false))
+  }, [sort])
+
   const filtered = React.useMemo(() => {
     const q = query.trim().toLowerCase()
     const matched = EFFECTS.filter((e) => {
@@ -201,9 +271,33 @@ export default function Home() {
         if (af !== bf) return af - bf
         return 0
       })
+    } else if (sort === 'recent') {
+      // Newest first. An effect with no ledger date sorts last rather than
+      // to the top or to 1970: a missing date means the ledger has not been
+      // rebuilt since it landed, and guessing either way would put a claim
+      // about time on the page that nothing backs. Ties keep catalog order
+      // (Array#sort is stable), which matters here — the ledger dates a
+      // whole wave of effects to the same day.
+      matched.sort((a, b) => {
+        const ad = addedAt('effect', a.id)
+        const bd = addedAt('effect', b.id)
+        if (ad === bd) return 0
+        if (!ad) return 1
+        if (!bd) return -1
+        return bd.localeCompare(ad)
+      })
+    } else if (sort === 'trending' && trendingRank && trendingRank.size > 0) {
+      // Ranked ids in rank order, then everything the window did not reach,
+      // in curated order. Unranked is not "rank 0" — see TRENDING_LIMIT.
+      matched.sort((a, b) => {
+        const ar = trendingRank.get(a.id) ?? Number.MAX_SAFE_INTEGER
+        const br = trendingRank.get(b.id) ?? Number.MAX_SAFE_INTEGER
+        if (ar === br) return 0
+        return ar - br
+      })
     }
     return matched
-  }, [query, filter, sort, favorites])
+  }, [query, filter, sort, favorites, trendingRank])
 
   /*
    * Reset to the first page whenever the result set changes.
@@ -802,11 +896,52 @@ export default function Home() {
                       Featured first
                       <span className="ml-1.5 text-muted-foreground">· picks on top</span>
                     </SelectItem>
+                    <SelectItem value="trending">
+                      Trending
+                      <span className="ml-1.5 text-muted-foreground">· copied most this week</span>
+                    </SelectItem>
+                    <SelectItem value="recent">
+                      Recently added
+                      <span className="ml-1.5 text-muted-foreground">· newest first</span>
+                    </SelectItem>
                     <SelectItem value="az">Name A → Z</SelectItem>
                     <SelectItem value="za">Name Z → A</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
+            ) : null}
+
+            {/* What the chosen order is actually made of. Only the two
+                measured sorts get a note — "A → Z" explains itself, and a
+                measured order that cannot be read off the cards has to say
+                where it came from or it is just a shuffle. */}
+            {!(aiMode && query.trim()) && (sort === 'trending' || sort === 'recent') ? (
+              <SortNote
+                loading={sort === 'trending' && trendingLoading}
+                icon={sort === 'trending' ? TrendingUp : Clock}
+              >
+                {sort === 'recent' ? (
+                  <>
+                    Newest first, dated by when each effect actually landed in the
+                    repository. Effects added since the last ledger rebuild carry no
+                    date and sort to the end.
+                  </>
+                ) : trendingLoading ? (
+                  <>Reading what people copied and installed this week…</>
+                ) : trendingRank && trendingRank.size > 0 ? (
+                  <>
+                    The {trendingRank.size} most copied and installed effects of the last
+                    seven days, in that order — page views are not counted. Everything
+                    below them keeps its curated order.
+                  </>
+                ) : (
+                  <>
+                    No usage has been recorded yet, so there is nothing to rank — the
+                    grid is in its curated order. This fills in on its own once effects
+                    start being copied and installed.
+                  </>
+                )}
+              </SortNote>
             ) : null}
 
             <div
@@ -893,6 +1028,34 @@ export default function Home() {
           command palette are all mounted by <SiteHeader> now — one copy
           each, on every surface, instead of six copies on six of them. */}
     </div>
+  )
+}
+
+/**
+ * The line under the sort control that says what the order is made of.
+ *
+ * Deliberately quiet — border and muted text, not the primary-tinted panel
+ * the AI banner uses. That one announces a mode the user switched the page
+ * into; this one is a footnote on a control they can already see.
+ */
+function SortNote({
+  loading,
+  icon: Icon,
+  children,
+}: {
+  loading: boolean
+  icon: React.ComponentType<{ className?: string }>
+  children: React.ReactNode
+}) {
+  return (
+    <p className="mb-5 flex items-start gap-2 rounded-xl border border-border/60 bg-muted/30 px-4 py-2.5 text-xs text-muted-foreground">
+      {loading ? (
+        <Loader2 aria-hidden className="mt-0.5 h-3.5 w-3.5 shrink-0 animate-spin" />
+      ) : (
+        <Icon aria-hidden className="mt-0.5 h-3.5 w-3.5 shrink-0" />
+      )}
+      <span>{children}</span>
+    </p>
   )
 }
 

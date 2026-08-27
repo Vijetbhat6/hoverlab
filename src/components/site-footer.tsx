@@ -113,6 +113,11 @@ const LEGAL_LINKS: FooterLink[] = [
   { label: 'Terms', href: '/terms' },
   { label: 'Privacy', href: '/privacy' },
   { label: 'Refunds', href: '/refunds' },
+  // In this row rather than under Company, because the reader who wants it
+  // is doing vendor diligence and is already down here reading policies.
+  // It is deliberately labelled "evidence" and not "statement": the page
+  // makes no conformance claim, and the link should not imply one either.
+  { label: 'Accessibility evidence', href: '/accessibility' },
 ]
 
 /** Social accounts, before the placeholder filter in the component. */

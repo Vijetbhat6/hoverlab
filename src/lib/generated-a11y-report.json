@@ -602,6 +602,21 @@
       "findings": []
     },
     {
+      "id": "bottom-sheet-mobile",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
       "id": "onboarding-checklist",
       "kind": "block",
       "passed": [
@@ -663,6 +678,21 @@
     },
     {
       "id": "onboarding-role-picker",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "onboarding-import-data",
       "kind": "block",
       "passed": [
         "img-alt",
@@ -1517,6 +1547,21 @@
       "findings": []
     },
     {
+      "id": "auth-sso-domain",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
       "id": "dashboard-shell",
       "kind": "block",
       "passed": [
@@ -1622,6 +1667,21 @@
       "findings": []
     },
     {
+      "id": "dashboard-saved-views",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
       "id": "data-table-sortable",
       "kind": "block",
       "passed": [
@@ -1683,6 +1743,21 @@
     },
     {
       "id": "data-table-column-manager",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "data-table-bulk-actions",
       "kind": "block",
       "passed": [
         "img-alt",
@@ -1772,6 +1847,21 @@
       "findings": []
     },
     {
+      "id": "settings-sessions",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
       "id": "empty-state-cta",
       "kind": "block",
       "passed": [
@@ -1833,6 +1923,21 @@
     },
     {
       "id": "permission-denied-state",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "offline-state-banner",
       "kind": "block",
       "passed": [
         "img-alt",
@@ -1937,6 +2042,21 @@
       "findings": []
     },
     {
+      "id": "funnel-conversion-panel",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
       "id": "billing-plan-summary",
       "kind": "block",
       "passed": [
@@ -1998,6 +2118,21 @@
     },
     {
       "id": "usage-overage-notice",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "billing-seat-manager",
       "kind": "block",
       "passed": [
         "img-alt",
@@ -2237,6 +2372,21 @@
       "findings": []
     },
     {
+      "id": "chat-artifact-canvas",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
       "id": "agent-thinking-trace",
       "kind": "block",
       "passed": [
@@ -2448,6 +2598,21 @@
     },
     {
       "id": "context-window-budget",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "retrieval-index-status",
       "kind": "block",
       "passed": [
         "img-alt",

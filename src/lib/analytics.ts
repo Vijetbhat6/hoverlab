@@ -20,6 +20,14 @@ import type { ArtifactLevel } from '@/lib/artifact-types'
  *
  * Every call is a no-op when NEXT_PUBLIC_POSTHOG_KEY is unset, so local
  * dev and self-hosted forks stay silent without extra configuration.
+ *
+ * CONSENT. This module also owns `posthog.init`, and calls it from
+ * `startAnalytics()` — never at import time. No PostHog storage is written
+ * and no PostHog request is made until the visitor has agreed to analytics;
+ * `analytics-provider` is what watches the decision and calls in.
+ * Initialising on import was the old shape, and it set a cookie and a
+ * localStorage id on first paint, before anyone had been asked. See
+ * src/lib/consent.ts.
  */
 
 /** Discriminated event map — keeps property names consistent across call sites. */
@@ -116,6 +124,15 @@ export type AnalyticsEvent =
    */
   | { name: 'design_system_generated'; props: { name: string } }
   /*
+   * The clipboard route into Figma. Separate from the export above because
+   * it answers a different question: that one measures whether Pro is
+   * worth its price, this one measures whether the free designer path is
+   * used at all — and designers pick these libraries more often than the
+   * developers who implement them do. If this never fires, /figma is a
+   * page for an audience that is not arriving.
+   */
+  | { name: 'figma_sheet_copied'; props: { tokens: number; tool?: string } }
+  /*
    * List signups, by where the form was. The point of the list is that it
    * is the one distribution channel that cannot be re-ranked, so which
    * surface actually feeds it is worth knowing.
@@ -140,9 +157,87 @@ export type AnalyticsEvent =
   | { name: 'tool_copy_install'; props: { tool: string } }
   | { name: 'tool_open_dna'; props: { tool: string } }
 
-/** True once PostHog has been initialized with a real project key. */
+const POSTHOG_KEY = process.env.NEXT_PUBLIC_POSTHOG_KEY
+const POSTHOG_HOST = process.env.NEXT_PUBLIC_POSTHOG_HOST ?? 'https://us.i.posthog.com'
+
+/** Has `posthog.init` run in this document? Not undoable, hence separate from `capturing`. */
+let loaded = false
+/** Is PostHog allowed to capture right now? The thing every call below checks. */
+let capturing = false
+
+/**
+ * Start PostHog. Safe to call repeatedly; only the first call initialises.
+ *
+ * The init options are half of the consent gate, and each is load-bearing:
+ *
+ *   `opt_out_capturing_by_default` — belt to the braces of not calling this
+ *   function at all. If a later edit ever initialises PostHog early, the
+ *   worst case is an instance that is loaded and silent, rather than one
+ *   quietly capturing before the question was asked.
+ *
+ *   `opt_out_capturing_persistence_type: 'localStorage'` — the refusal
+ *   record must not be a cookie. Writing a cookie to remember that someone
+ *   refused cookies is the own-goal this whole gate exists to avoid.
+ *
+ *   `opt_out_persistence_by_default` — while opted out the SDK writes no
+ *   persistence of its own, so a refusal leaves no id behind.
+ *
+ *   `respect_dnt` — /privacy tells visitors that Do Not Track opts them
+ *   out. Without this line that sentence is false: posthog-js ignores DNT
+ *   unless it is asked to honour it.
+ */
+export function startAnalytics(): void {
+  if (typeof window === 'undefined' || !POSTHOG_KEY) return
+
+  if (!loaded) {
+    posthog.init(POSTHOG_KEY, {
+      api_host: POSTHOG_HOST,
+      // Pageviews are fired by hand on pathname change: the App Router
+      // navigates on the client, and PostHog's automatic pageview only
+      // fires on a hard load, so /library → /effect/x would go unrecorded.
+      capture_pageview: false,
+      capture_pageleave: true,
+      // Clicks only, and no input values — the search box can contain anything.
+      autocapture: { dom_event_allowlist: ['click'] },
+      persistence: 'localStorage+cookie',
+      opt_out_capturing_by_default: true,
+      opt_out_capturing_persistence_type: 'localStorage',
+      opt_out_persistence_by_default: true,
+      respect_dnt: true,
+    })
+    loaded = true
+  }
+
+  // No `$opt_in` event: a consent decision is not a product event, and
+  // capturing one would put it at the head of every consenting visitor's funnel.
+  posthog.opt_in_capturing({ captureEventName: false })
+
+  // Read the answer back rather than assume it. Under Do Not Track this
+  // stays false even though consent was given, and `enabled()` should agree.
+  capturing = posthog.has_opted_in_capturing()
+}
+
+/**
+ * Stop capturing, and drop what was stored.
+ *
+ * An initialised PostHog cannot be unloaded, so this opts out instead —
+ * which, with the persistence options above, is what actually clears the
+ * cookie and the id. `loaded` deliberately stays true: calling `init` twice
+ * on the same instance is the thing that would be wrong.
+ */
+export function stopAnalytics(): void {
+  capturing = false
+  if (!loaded) return
+  try {
+    posthog.opt_out_capturing()
+  } catch (err) {
+    console.error('[analytics] opt-out failed:', err)
+  }
+}
+
+/** True only while PostHog is initialised *and* consented — see startAnalytics. */
 function enabled(): boolean {
-  return typeof window !== 'undefined' && Boolean(process.env.NEXT_PUBLIC_POSTHOG_KEY)
+  return typeof window !== 'undefined' && Boolean(POSTHOG_KEY) && capturing
 }
 
 /**

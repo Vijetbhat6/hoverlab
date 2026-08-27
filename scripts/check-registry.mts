@@ -25,6 +25,9 @@
 //      refuses to publish.
 //   6. Effect ids do not collide with block or page ids — all three share
 //      the registry's one namespace.
+//   7. Every guided path publishes as an installable pack: unique slug,
+//      every step a real block, and no artifact squatting the `path-`
+//      prefix those packs are addressed by.
 //
 // Deliberately NOT imported from `src/lib/registry/registry.ts` — that module
 // is `server-only`, which throws outside a React Server Component. The rules
@@ -40,6 +43,7 @@ import { fileURLToPath } from 'node:url'
 import { BLOCK_CATALOG } from '../src/lib/blocks/catalog.ts'
 import { PAGE_CATALOG } from '../src/lib/pages/catalog.ts'
 import { EFFECTS } from '../src/lib/effects.ts'
+import { PATHS } from '../src/lib/paths/catalog.ts'
 import { unresolvedLocalImports } from '../src/lib/registry/deps.ts'
 import { cssToObject } from '../src/lib/registry/css-to-object.ts'
 
@@ -178,6 +182,47 @@ for (const block of BLOCK_CATALOG) {
   }
 }
 
+/* -- guided paths publish as packs -------------------------------------- */
+
+/*
+  Paths are published as `path-{slug}` items whose only content is a list of
+  registryDependencies. Two ways that can be wrong, both silent:
+
+    An artifact id beginning `path-` would be routed to the path branch of
+    `buildRegistryItem` and return null — a 404 on a name the index itself
+    advertises.
+
+    A path step naming a block that does not exist would publish a pack
+    whose install half-fails in a stranger's project. `check-paths.mts`
+    already refuses that, but it runs against the *site*; this runs against
+    what is published, and the two are worth checking separately.
+*/
+const blockIds = new Set(BLOCK_CATALOG.map((b) => b.id))
+const pathSlugs = new Set<string>()
+
+for (const path of PATHS) {
+  if (pathSlugs.has(path.slug)) {
+    failures.push(`two guided paths share the slug "${path.slug}"; they would publish as one item.`)
+  }
+  pathSlugs.add(path.slug)
+
+  for (const step of path.steps) {
+    if (!blockIds.has(step.blockId)) {
+      failures.push(
+        `path "${path.slug}" installs "${step.blockId}", which is not a published block.`,
+      )
+    }
+  }
+}
+
+for (const artifact of [...BLOCK_CATALOG, ...PAGE_CATALOG, ...EFFECTS]) {
+  if (artifact.id.startsWith('path-')) {
+    failures.push(
+      `"${artifact.id}" starts with "path-", the prefix reserved for guided-path packs; it would be unreachable by name.`,
+    )
+  }
+}
+
 /* -- report ------------------------------------------------------------- */
 
 if (failures.length) {
@@ -188,6 +233,6 @@ if (failures.length) {
 }
 
 console.log(
-  `registry check: ${BLOCK_CATALOG.length} blocks + ${PAGE_CATALOG.length} pages + ` +
-    `${EFFECTS.length} effects + 1 base, all resolvable`,
+  `registry check: ${PATHS.length} path packs + ${BLOCK_CATALOG.length} blocks + ` +
+    `${PAGE_CATALOG.length} pages + ${EFFECTS.length} effects + 1 base, all resolvable`,
 )

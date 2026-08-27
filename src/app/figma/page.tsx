@@ -33,6 +33,7 @@ import {
 } from 'lucide-react'
 
 import { SiteHeader } from '@/components/site-header'
+import { CopyForFigma } from '@/components/copy-for-figma'
 import { JsonLd } from '@/components/json-ld'
 import { CodeBlock } from '@/components/code-block'
 import { Button } from '@/components/ui/button'
@@ -161,6 +162,36 @@ export default function FigmaPage() {
                 </p>
               </div>
             ))}
+          </div>
+        </section>
+
+        {/* ---------------------------------------------------------- *
+         *  The zero-setup path
+         *
+         *  Everything above this asks for an editor, an agent and two MCP
+         *  registrations. That is the deep version and it is worth the
+         *  setup, but it is a poor first impression for a designer who
+         *  arrived from a link and has Figma open in the next tab. This
+         *  is the thing they can have before deciding anything.
+         * ---------------------------------------------------------- */}
+        <section className="mx-auto max-w-3xl px-4 pb-4 sm:px-6">
+          <div className="rounded-2xl border border-border/60 bg-card/60 p-6 text-center">
+            <h2 className="text-2xl font-bold tracking-tight">
+              Or take the tokens right now
+            </h2>
+            <p className="mx-auto mt-3 max-w-xl text-pretty text-sm leading-relaxed text-muted-foreground">
+              One click puts both palettes, the radius scale and the type on
+              your clipboard as SVG. Figma turns that into named, editable
+              layers on paste — no plugin, no file, no account. It is the same
+              token set every one of the {BLOCK_COUNT} blocks is built from, so
+              a screen drawn against it is a screen the code can already make.
+            </p>
+            <div className="mt-6 flex flex-wrap justify-center gap-3">
+              <CopyForFigma size="lg" variant="default" />
+              <Button asChild size="lg" variant="outline">
+                <Link href="/design-system">Change the brand first</Link>
+              </Button>
+            </div>
           </div>
         </section>
 
