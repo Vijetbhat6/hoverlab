@@ -230,6 +230,18 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     thumbHeight: 'h-24',
   },
 
+  {
+    id: 'navbar-authenticated',
+    name: 'Signed-in Application Bar',
+    category: 'Navigation',
+    description:
+      'The bar above an app rather than a site: workspace and environment named in the open, a bell that counts in words, and an impersonation strip that cannot be dismissed.',
+    tags: ['navbar', 'app', 'workspace', 'account', 'impersonation'],
+    previewComponent: 'navbar-authenticated',
+    deps: ['lucide-react'],
+    featured: true,
+    thumbHeight: 'h-28',
+  },
   /* ---------------------------- Footers ---------------------------- */
   {
     id: 'footer-mega',
@@ -275,6 +287,16 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     deps: ['lucide-react'],
   },
 
+  {
+    id: 'footer-compliance',
+    name: 'Regulated Seller Footer',
+    category: 'Footers',
+    description:
+      'Legal entity, company number, registered address, VAT and the consumer links an EU or UK seller has to publish — with a region control that changes the terms, not just the currency.',
+    tags: ['footer', 'legal', 'compliance', 'gdpr', 'imprint'],
+    previewComponent: 'footer-compliance',
+    deps: ['lucide-react'],
+  },
   /* ---------------------------- Contact & Forms -------------------- */
   {
     id: 'contact-form-split',
@@ -320,6 +342,17 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     deps: ['lucide-react'],
   },
 
+  {
+    id: 'form-error-summary',
+    name: 'Form with Error Summary',
+    category: 'Contact & Forms',
+    description:
+      'The state every form reaches and none of them illustrate: a focused summary at the top linking to each bad field, validation that waits for submit, and somewhere for the failure that belongs to no field.',
+    tags: ['form', 'validation', 'errors', 'accessibility', 'summary'],
+    previewComponent: 'form-error-summary',
+    deps: ['lucide-react'],
+    featured: true,
+  },
   /* ---------------------------- Modals & Drawers ------------------- */
   {
     id: 'confirm-dialog',
@@ -424,6 +457,16 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     deps: ['lucide-react'],
   },
 
+  {
+    id: 'onboarding-role-picker',
+    name: 'Role Picker',
+    category: 'Onboarding',
+    description:
+      'The "what best describes you" step, asked honestly — every option states what it actually changes, the skip is visible and names what you get instead, and the choice is reversible.',
+    tags: ['onboarding', 'segmentation', 'role', 'first run', 'radio'],
+    previewComponent: 'onboarding-role-picker',
+    deps: ['lucide-react'],
+  },
   /* ---------------------------- Notifications ---------------------- */
   {
     id: 'toast-stack',
@@ -933,6 +976,16 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     deps: ['lucide-react'],
   },
 
+  {
+    id: 'cta-inline-card',
+    name: 'In-article CTA Card',
+    category: 'CTA Sections',
+    description:
+      'The offer that sits inside the column instead of interrupting it — a labelled aside a screen reader can skip in one keystroke, tied to the paragraph above it, with the friction admitted before the click.',
+    tags: ['cta', 'inline', 'article', 'content', 'conversion'],
+    previewComponent: 'cta-inline-card',
+    deps: ['lucide-react'],
+  },
   /* ================================================================ *
    *  Product — the blocks an app is built from
    * ================================================================ */
@@ -1409,6 +1462,17 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     featured: true,
   },
 
+  {
+    id: 'search-autocomplete',
+    name: 'Header Search with Suggestions',
+    category: 'Command & Search',
+    description:
+      'The field in the header, not the palette over it: Enter searches for what you typed unless you arrowed to a suggestion, late responses are dropped by sequence number, and recent searches are removable one at a time.',
+    tags: ['search', 'autocomplete', 'combobox', 'typeahead', 'suggestions'],
+    previewComponent: 'search-autocomplete',
+    deps: ['lucide-react'],
+    featured: true,
+  },
   /* ---------------------- File Upload ----------------------------- */
   {
     id: 'file-dropzone',
@@ -1429,6 +1493,17 @@ export const BLOCK_CATALOG: BlockRecord[] = [
       'The list that follows the dropzone: complete, uploading, queued and failed rows with cancel and retry — because hiding the failure is the classic upload bug.',
     tags: ['upload', 'progress', 'files', 'retry', 'queue'],
     previewComponent: 'upload-progress-list',
+    deps: ['lucide-react'],
+  },
+
+  {
+    id: 'upload-resumable',
+    name: 'Resumable Large Upload',
+    category: 'File Upload',
+    description:
+      'One big file on a connection that will drop: a bar allowed to go backwards when a chunk is retried, a time estimate that is a range or nothing, and a promise about closing the tab made before it is needed.',
+    tags: ['upload', 'resumable', 'chunked', 'progress', 'offline'],
+    previewComponent: 'upload-resumable',
     deps: ['lucide-react'],
   },
 
@@ -1527,6 +1602,17 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     deps: ['lucide-react'],
   },
 
+  {
+    id: 'chat-message-branches',
+    name: 'Message Version Switcher',
+    category: 'Agent Chat',
+    description:
+      'The answers a regenerate throws away — siblings rather than replacements, an edited question that branches in place, and a plain sentence about what happens to the replies below.',
+    tags: ['chat', 'regenerate', 'versions', 'branch', 'edit'],
+    previewComponent: 'chat-message-branches',
+    deps: ['lucide-react'],
+    featured: true,
+  },
   /* -------------------------- Agent Reasoning ---------------------- */
   {
     id: 'agent-thinking-trace',
@@ -1575,6 +1661,17 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     thumbHeight: 'h-20',
   },
 
+  {
+    id: 'agent-run-failure',
+    name: 'Failed Run Trace',
+    category: 'Agent Reasoning',
+    description:
+      'The trace after something broke: retries counted in the open with what each one cost, a step that was silently worked around drawn in amber rather than green, and the raw error kept apart from the agent\u2019s reading of it.',
+    tags: ['agent', 'error', 'retry', 'trace', 'recovery'],
+    previewComponent: 'agent-run-failure',
+    deps: ['lucide-react'],
+    featured: true,
+  },
   /* ------------------------ Human in the Loop ---------------------- */
   {
     id: 'approval-request-card',
@@ -1619,6 +1716,16 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     deps: ['lucide-react'],
   },
 
+  {
+    id: 'approval-queue',
+    name: 'Bulk Approval Queue',
+    category: 'Human in the Loop',
+    description:
+      'Forty decisions and an honest way to clear them: bulk approve that cannot reach the high-impact rows, a select-all that says how many it takes, and the auto-approve deadline on every line.',
+    tags: ['approval', 'queue', 'bulk', 'review', 'agent'],
+    previewComponent: 'approval-queue',
+    deps: ['lucide-react'],
+  },
   /* ----------------------- Retrieval & Context --------------------- */
   {
     id: 'context-chunk-cards',
@@ -1662,6 +1769,17 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     deps: ['lucide-react'],
   },
 
+  {
+    id: 'context-window-budget',
+    name: 'Context Window Budget',
+    category: 'Retrieval & Context',
+    description:
+      'What is in the context and what fell out of it — a stacked budget with the reply reserve drawn as a segment, and the dropped chunks named with the reason, which is the part nobody ships.',
+    tags: ['context', 'retrieval', 'tokens', 'budget', 'rag'],
+    previewComponent: 'context-window-budget',
+    deps: ['lucide-react'],
+    featured: true,
+  },
   /* ------------------------ Inline AI Actions ---------------------- */
   {
     id: 'selection-ai-toolbar',
@@ -1706,6 +1824,17 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     previewComponent: 'ai-insight-cards',
     deps: ['lucide-react'],
     thumbHeight: 'h-48',
+  },
+
+  {
+    id: 'ai-slash-menu',
+    name: 'Editor Slash Menu',
+    category: 'Inline AI Actions',
+    description:
+      'The "/" menu inside a document: focus never leaves the editor, every row names what it acts on, and Escape cleans up the trigger text it inserted instead of leaving you to backspace it.',
+    tags: ['ai', 'editor', 'slash', 'combobox', 'inline'],
+    previewComponent: 'ai-slash-menu',
+    deps: ['lucide-react'],
   },
 
   /* ================================================================ *
@@ -1766,6 +1895,17 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     featured: true,
   },
 
+  {
+    id: 'product-compare-table',
+    name: 'Product Comparison Table',
+    category: 'Product Listings',
+    description:
+      'Three products side by side with the row labels pinned through a horizontal scroll, an "only show differences" toggle that says how many rows it hid, and "best" marked only where better means something.',
+    tags: ['compare', 'table', 'specs', 'product', 'sticky'],
+    previewComponent: 'product-compare-table',
+    deps: ['lucide-react'],
+    featured: true,
+  },
   /* ---------------------------- Product Detail -------------------- */
   {
     id: 'product-gallery',
@@ -1811,6 +1951,16 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     featured: true,
   },
 
+  {
+    id: 'product-size-guide',
+    name: 'Size Guide',
+    category: 'Product Detail',
+    description:
+      'The panel that decides whether the parcel comes back: what the model is wearing and what previous buyers did, above a table whose inches are converted rather than maintained twice.',
+    tags: ['size', 'guide', 'apparel', 'measurements', 'returns'],
+    previewComponent: 'product-size-guide',
+    deps: ['lucide-react'],
+  },
   /* ---------------------------- Cart & Checkout ------------------- */
   {
     id: 'cart-drawer',
@@ -1857,6 +2007,16 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     featured: true,
   },
 
+  {
+    id: 'checkout-express-payment',
+    name: 'Express Payment Row',
+    category: 'Cart & Checkout',
+    description:
+      'The wallet buttons above the form, and what they do to it: the address a wallet returns is shown and stays editable, and the row disappears entirely when no wallet is actually available.',
+    tags: ['checkout', 'payment', 'wallet', 'apple pay', 'express'],
+    previewComponent: 'checkout-express-payment',
+    deps: ['lucide-react'],
+  },
   /* ---------------------------- Orders & Reviews ------------------ */
   {
     id: 'order-confirmation',

@@ -71,6 +71,10 @@
     "lines": 310,
     "files": 1
   },
+  "navbar-authenticated": {
+    "lines": 307,
+    "files": 1
+  },
   "footer-mega": {
     "lines": 243,
     "files": 1
@@ -87,6 +91,10 @@
     "lines": 171,
     "files": 1
   },
+  "footer-compliance": {
+    "lines": 264,
+    "files": 1
+  },
   "contact-form-split": {
     "lines": 276,
     "files": 1
@@ -101,6 +109,10 @@
   },
   "feedback-widget": {
     "lines": 237,
+    "files": 1
+  },
+  "form-error-summary": {
+    "lines": 320,
     "files": 1
   },
   "confirm-dialog": {
@@ -137,6 +149,10 @@
   },
   "product-tour-coachmark": {
     "lines": 249,
+    "files": 1
+  },
+  "onboarding-role-picker": {
+    "lines": 191,
     "files": 1
   },
   "toast-stack": {
@@ -335,6 +351,10 @@
     "lines": 178,
     "files": 1
   },
+  "cta-inline-card": {
+    "lines": 132,
+    "files": 1
+  },
   "auth-login-card": {
     "lines": 185,
     "files": 1
@@ -507,12 +527,20 @@
     "lines": 234,
     "files": 1
   },
+  "search-autocomplete": {
+    "lines": 347,
+    "files": 1
+  },
   "file-dropzone": {
     "lines": 219,
     "files": 1
   },
   "upload-progress-list": {
     "lines": 171,
+    "files": 1
+  },
+  "upload-resumable": {
+    "lines": 237,
     "files": 1
   },
   "csv-import-mapper": {
@@ -539,6 +567,10 @@
     "lines": 138,
     "files": 1
   },
+  "chat-message-branches": {
+    "lines": 272,
+    "files": 1
+  },
   "agent-thinking-trace": {
     "lines": 247,
     "files": 1
@@ -553,6 +585,10 @@
   },
   "agent-working-indicator": {
     "lines": 120,
+    "files": 1
+  },
+  "agent-run-failure": {
+    "lines": 330,
     "files": 1
   },
   "approval-request-card": {
@@ -571,6 +607,10 @@
     "lines": 297,
     "files": 1
   },
+  "approval-queue": {
+    "lines": 307,
+    "files": 1
+  },
   "context-chunk-cards": {
     "lines": 327,
     "files": 1
@@ -585,6 +625,10 @@
   },
   "retrieval-empty-state": {
     "lines": 178,
+    "files": 1
+  },
+  "context-window-budget": {
+    "lines": 309,
     "files": 1
   },
   "selection-ai-toolbar": {
@@ -603,6 +647,10 @@
     "lines": 275,
     "files": 1
   },
+  "ai-slash-menu": {
+    "lines": 333,
+    "files": 1
+  },
   "product-grid": {
     "lines": 142,
     "files": 1
@@ -617,6 +665,10 @@
   },
   "product-rail": {
     "lines": 118,
+    "files": 1
+  },
+  "product-compare-table": {
+    "lines": 300,
     "files": 1
   },
   "product-gallery": {
@@ -635,6 +687,10 @@
     "lines": 126,
     "files": 1
   },
+  "product-size-guide": {
+    "lines": 227,
+    "files": 1
+  },
   "cart-drawer": {
     "lines": 256,
     "files": 1
@@ -649,6 +705,10 @@
   },
   "order-summary-panel": {
     "lines": 228,
+    "files": 1
+  },
+  "checkout-express-payment": {
+    "lines": 247,
     "files": 1
   },
   "order-confirmation": {

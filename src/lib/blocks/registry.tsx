@@ -130,6 +130,21 @@ import { JobListingBoard } from './sources/job-listing-board'
 import { DocsLayout } from './sources/docs-layout'
 import { ApiEndpointCard } from './sources/api-endpoint-card'
 import { CodeTabsPanel } from './sources/code-tabs-panel'
+import { ChatMessageBranches } from './sources/chat-message-branches'
+import { AgentRunFailure } from './sources/agent-run-failure'
+import { ApprovalQueue } from './sources/approval-queue'
+import { AiSlashMenu } from './sources/ai-slash-menu'
+import { ContextWindowBudget } from './sources/context-window-budget'
+import { NavbarAuthenticated } from './sources/navbar-authenticated'
+import { FooterCompliance } from './sources/footer-compliance'
+import { OnboardingRolePicker } from './sources/onboarding-role-picker'
+import { SearchAutocomplete } from './sources/search-autocomplete'
+import { FormErrorSummary } from './sources/form-error-summary'
+import { CtaInlineCard } from './sources/cta-inline-card'
+import { CheckoutExpressPayment } from './sources/checkout-express-payment'
+import { UploadResumable } from './sources/upload-resumable'
+import { ProductSizeGuide } from './sources/product-size-guide'
+import { ProductCompareTable } from './sources/product-compare-table'
 
 import { AuthLoginCard } from './sources/auth-login-card'
 import { AuthSignupSplit } from './sources/auth-signup-split'
@@ -343,6 +358,21 @@ export const BLOCK_PREVIEWS: Record<string, React.ReactNode> = {
   'docs-layout': <DocsLayout />,
   'api-endpoint-card': <ApiEndpointCard />,
   'code-tabs-panel': <CodeTabsPanel />,
+  'chat-message-branches': <ChatMessageBranches />,
+  'agent-run-failure': <AgentRunFailure />,
+  'approval-queue': <ApprovalQueue />,
+  'ai-slash-menu': <AiSlashMenu />,
+  'context-window-budget': <ContextWindowBudget />,
+  'navbar-authenticated': <NavbarAuthenticated />,
+  'footer-compliance': <FooterCompliance />,
+  'onboarding-role-picker': <OnboardingRolePicker />,
+  'search-autocomplete': <SearchAutocomplete />,
+  'form-error-summary': <FormErrorSummary />,
+  'cta-inline-card': <CtaInlineCard />,
+  'checkout-express-payment': <CheckoutExpressPayment />,
+  'upload-resumable': <UploadResumable />,
+  'product-size-guide': <ProductSizeGuide />,
+  'product-compare-table': <ProductCompareTable />,
 
   'auth-login-card': <AuthLoginCard />,
   'auth-signup-split': <AuthSignupSplit />,

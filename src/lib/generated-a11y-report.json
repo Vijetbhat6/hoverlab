@@ -362,6 +362,21 @@
       "findings": []
     },
     {
+      "id": "navbar-authenticated",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
       "id": "footer-mega",
       "kind": "block",
       "passed": [
@@ -422,6 +437,21 @@
       "findings": []
     },
     {
+      "id": "footer-compliance",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
       "id": "contact-form-split",
       "kind": "block",
       "passed": [
@@ -468,6 +498,21 @@
     },
     {
       "id": "feedback-widget",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "form-error-summary",
       "kind": "block",
       "passed": [
         "img-alt",
@@ -603,6 +648,21 @@
     },
     {
       "id": "product-tour-coachmark",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "onboarding-role-picker",
       "kind": "block",
       "passed": [
         "img-alt",
@@ -1352,6 +1412,21 @@
       "findings": []
     },
     {
+      "id": "cta-inline-card",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
       "id": "auth-login-card",
       "kind": "block",
       "passed": [
@@ -1997,6 +2072,21 @@
       "findings": []
     },
     {
+      "id": "search-autocomplete",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
       "id": "file-dropzone",
       "kind": "block",
       "passed": [
@@ -2013,6 +2103,21 @@
     },
     {
       "id": "upload-progress-list",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "upload-resumable",
       "kind": "block",
       "passed": [
         "img-alt",
@@ -2117,6 +2222,21 @@
       "findings": []
     },
     {
+      "id": "chat-message-branches",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
       "id": "agent-thinking-trace",
       "kind": "block",
       "passed": [
@@ -2163,6 +2283,21 @@
     },
     {
       "id": "agent-working-indicator",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "agent-run-failure",
       "kind": "block",
       "passed": [
         "img-alt",
@@ -2237,6 +2372,21 @@
       "findings": []
     },
     {
+      "id": "approval-queue",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
       "id": "context-chunk-cards",
       "kind": "block",
       "passed": [
@@ -2283,6 +2433,21 @@
     },
     {
       "id": "retrieval-empty-state",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "context-window-budget",
       "kind": "block",
       "passed": [
         "img-alt",
@@ -2357,6 +2522,21 @@
       "findings": []
     },
     {
+      "id": "ai-slash-menu",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
       "id": "product-grid",
       "kind": "block",
       "passed": [
@@ -2403,6 +2583,21 @@
     },
     {
       "id": "product-rail",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "product-compare-table",
       "kind": "block",
       "passed": [
         "img-alt",
@@ -2477,6 +2672,21 @@
       "findings": []
     },
     {
+      "id": "product-size-guide",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
       "id": "cart-drawer",
       "kind": "block",
       "passed": [
@@ -2523,6 +2733,21 @@
     },
     {
       "id": "order-summary-panel",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "checkout-express-payment",
       "kind": "block",
       "passed": [
         "img-alt",
