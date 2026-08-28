@@ -16,21 +16,35 @@ import {
   Accessibility,
   Activity,
   ALargeSmall,
+  Aperture,
   Blend,
+  Box,
+  Braces,
+  Brush,
+  Clapperboard,
+  Code2,
+  Eye,
   Film,
   Grid3x3,
   Image as ImageIcon,
   Layers,
+  LayoutGrid,
+  LoaderCircle,
   Mail,
   Palette,
   Pipette,
+  Rows3,
   Ruler,
   Search,
   Shapes,
   Sparkles,
   Square,
   StretchHorizontal,
+  StretchVertical,
   SwatchBook,
+  Wand2,
+  Waves,
+  Wind,
   Wine,
   Zap,
   type LucideIcon,
@@ -63,7 +77,39 @@ export function toolMetadata(href: string): Metadata {
   return { title: tool.seoTitle, description: tool.description }
 }
 
+/*
+  Layout first, then paint.
+
+  The registry order is the hub's order, and for a long time the hub opened
+  on tokens and icons — the things you reach for once the boxes are already
+  in the right places. Nothing in the first twenty tools touched layout at
+  all, which is both the wrong teaching order and the wrong merchandising
+  one: "css grid generator" and "flexbox generator" are the two highest
+  -volume queries this whole section can answer.
+*/
 export const DESIGNER_TOOLS: DesignerTool[] = [
+  {
+    href: '/tools/grid',
+    name: 'Grid Generator',
+    description:
+      'Paint a page layout onto a grid and copy the CSS, with grid-template-areas checked for the rectangle rule as you go — the rule that silently voids the whole declaration when you break it. Explicit tracks or a responsive auto-fit wall.',
+    icon: LayoutGrid,
+    accent: 'from-blue-500 to-indigo-500',
+    keywords:
+      'grid css grid generator layout template areas columns rows gap auto-fit minmax fr responsive',
+    seoTitle: 'CSS Grid Generator — Template Areas, Tracks & auto-fit — Hoverlab',
+  },
+  {
+    href: '/tools/flexbox',
+    name: 'Flexbox Playground',
+    description:
+      'Every flex container and flex item property on one screen, against a live row you can add to and resize. Shows the three-part flex shorthand as the browser actually resolves it, including the basis-versus-width trap.',
+    icon: StretchVertical,
+    accent: 'from-teal-500 to-cyan-500',
+    keywords:
+      'flexbox flex generator playground layout justify-content align-items flex-grow shrink basis wrap gap',
+    seoTitle: 'Flexbox Playground & Generator — Every Property, Live — Hoverlab',
+  },
   {
     href: '/tools/tokens',
     name: 'Token Generator',
@@ -88,10 +134,11 @@ export const DESIGNER_TOOLS: DesignerTool[] = [
     href: '/tools/motion',
     name: 'Motion Presets',
     description:
-      'Enter, exit and attention animations, each shipping with its prefers-reduced-motion guard already written. Preview what a reduced-motion visitor actually sees.',
+      'Enter, exit and attention animations, each shipping with its prefers-reduced-motion guard already written — and each one opening in the keyframes editor when the preset is only nearly right. Preview what a reduced-motion visitor actually sees.',
     icon: Zap,
     accent: 'from-yellow-500 to-amber-500',
-    keywords: 'motion animation presets enter exit keyframes prefers-reduced-motion',
+    keywords:
+      'motion animation presets enter exit keyframes prefers-reduced-motion editable timeline',
     seoTitle: 'CSS Animation Presets with Reduced-Motion Guards — Hoverlab',
   },
   {
@@ -168,11 +215,12 @@ export const DESIGNER_TOOLS: DesignerTool[] = [
     href: '/tools/shadow',
     name: 'Shadow Builder',
     description:
-      'Layer multiple box-shadows or text-shadows with independent x/y/blur/spread/color/opacity controls. Save up to 8 layers and copy production-ready CSS.',
+      'Layer up to 8 box-shadows or text-shadows with independent x/y/blur/spread/color/opacity controls, or start from an elevation ramp, an inset well, or neumorphism computed from the surface colour — with the contrast caveat that style carries said out loud.',
     icon: Layers,
     accent: 'from-sky-500 to-cyan-500',
-    keywords: 'box-shadow text-shadow shadow elevation depth layers css',
-    seoTitle: 'Box-Shadow & Text-Shadow Generator — Layered CSS — Hoverlab',
+    keywords:
+      'box-shadow text-shadow shadow elevation depth layers css neumorphism neumorphic soft ui inset inner',
+    seoTitle: 'Box-Shadow, Inset & Neumorphism Generator — Hoverlab',
   },
   {
     href: '/tools/contrast',
@@ -264,6 +312,160 @@ export const DESIGNER_TOOLS: DesignerTool[] = [
     accent: 'from-stone-500 to-zinc-600',
     keywords: 'noise grain texture feturbulence svg film overlay background',
     seoTitle: 'SVG Noise Texture Generator — Grain via feTurbulence — Hoverlab',
+  },
+  {
+    href: '/tools/keyframes',
+    name: 'Keyframes Editor',
+    description:
+      'Author a multi-stop animation on a timeline instead of hand-typing percentages. Transform, opacity and blur per stop, playback controls, and the prefers-reduced-motion guard written for you — with the stricter guard when the animation loops.',
+    icon: Clapperboard,
+    accent: 'from-orange-500 to-amber-500',
+    keywords:
+      'keyframes animation css editor timeline transform opacity easing duration reduced-motion',
+    seoTitle: 'CSS @keyframes Editor — Multi-stop Animation Builder — Hoverlab',
+  },
+  {
+    href: '/tools/divider',
+    name: 'Section Divider',
+    description:
+      'Waves, tilts, notches and arcs for the seam between two full-width bands, as scalable SVG. Emits currentColor so one snippet works in both themes, with the baseline gap and the antialiased hairline already handled.',
+    icon: Waves,
+    accent: 'from-cyan-500 to-sky-500',
+    keywords:
+      'divider wave svg section separator shape curve tilt slant hero background transition',
+    seoTitle: 'SVG Section Divider Generator — Waves, Tilts & Curves — Hoverlab',
+  },
+  {
+    href: '/tools/mesh',
+    name: 'Mesh Gradient',
+    description:
+      'The soft multi-colour wash every hero uses, as stacked CSS radial gradients rather than a 400KB PNG. Drag the blobs on the canvas; fades avoid the grey halo that `transparent` gives every one of them.',
+    icon: Blend,
+    accent: 'from-violet-500 to-pink-500',
+    keywords:
+      'mesh gradient blob radial hero background css multi-colour wash aurora blur',
+    seoTitle: 'CSS Mesh Gradient Generator — No Image, No Request — Hoverlab',
+  },
+  {
+    href: '/tools/filter',
+    name: 'Filter & Blend',
+    description:
+      'Every filter function, backdrop-filter, and all sixteen blend modes on a subject drawn in CSS. Order is preserved because blur-then-brighten is a different picture from brighten-then-blur, and nothing is loaded from anywhere.',
+    icon: Aperture,
+    accent: 'from-rose-500 to-fuchsia-500',
+    keywords:
+      'filter backdrop-filter blend mode blur brightness contrast saturate hue-rotate drop-shadow duotone',
+    seoTitle: 'CSS Filter & Blend Mode Playground — Live Preview — Hoverlab',
+  },
+  {
+    href: '/tools/transform',
+    name: '3D Transform',
+    description:
+      'rotateX, rotateY, translateZ and the three parent properties that have to agree before any of it works — perspective, transform-style and backface-visibility. Includes the card flip everyone is really trying to build.',
+    icon: Box,
+    accent: 'from-indigo-500 to-blue-600',
+    keywords:
+      'transform 3d perspective rotate translate scale skew backface transform-style card flip',
+    seoTitle: 'CSS 3D Transform & Perspective Playground — Hoverlab',
+  },
+  {
+    href: '/tools/scrollbar',
+    name: 'Scrollbar Styler',
+    description:
+      'Both mechanisms from one set of controls — the standard scrollbar-width and scrollbar-color, plus the ::-webkit- pseudo-elements — in the order that makes them agree. Warns when the result gets too thin to grab.',
+    icon: Rows3,
+    accent: 'from-slate-500 to-slate-700',
+    keywords:
+      'scrollbar custom css webkit scrollbar-width scrollbar-color thumb track hide overflow',
+    seoTitle: 'Custom Scrollbar CSS Generator — Standard + WebKit — Hoverlab',
+  },
+  {
+    href: '/tools/colorblind',
+    name: 'Colour Blindness Simulator',
+    description:
+      'Which pairs in your palette become the same colour under each type of colour blindness — the failure a contrast checker cannot see. Reports collisions, not just recoloured swatches.',
+    icon: Eye,
+    accent: 'from-emerald-500 to-lime-500',
+    keywords:
+      'colour blindness colorblind simulator deuteranopia protanopia tritanopia accessibility palette a11y contrast',
+    seoTitle: 'Colour Blindness Simulator — Find Palette Collisions — Hoverlab',
+  },
+  {
+    href: '/tools/tailwind',
+    name: 'Tailwind ↔ CSS',
+    description:
+      'Translate a stylesheet into utilities or a className back into CSS, with a verdict on every line — exact, arbitrary value, arbitrary property, or why it could not be placed. Nothing is dropped in silence.',
+    icon: Wind,
+    accent: 'from-sky-600 to-teal-500',
+    keywords:
+      'tailwind css converter translate utilities class arbitrary values convert stylesheet',
+    seoTitle: 'Tailwind to CSS Converter — Both Directions — Hoverlab',
+  },
+  {
+    href: '/tools/svg',
+    name: 'SVG Toolkit',
+    description:
+      'The four SVG jobs that are always four different websites — optimise, convert to JSX or a data URI, generate a pattern, generate a wave — with one source shared between them, so the file you clean is the file you convert.',
+    icon: Wand2,
+    accent: 'from-purple-500 to-blue-500',
+    keywords:
+      'svg optimizer optimiser minify svgo jsx react component data uri base64 pattern background wave generator convert icon',
+    seoTitle: 'SVG Optimizer, SVG to JSX, Pattern & Wave Generator — Hoverlab',
+  },
+  {
+    href: '/tools/palette-preview',
+    name: 'Live Palette Preview',
+    description:
+      'Your palette on real components — a navbar, a hero, pricing, a dashboard, a footer — repainted as you drag, in both themes, with the contrast of every token pair checked while you do it. Not swatches next to lorem ipsum.',
+    icon: Brush,
+    accent: 'from-rose-500 to-violet-500',
+    keywords:
+      'palette preview live colors realtime theme tokens brand colour scheme components blocks dark mode contrast wcag',
+    seoTitle: 'Live Colour Palette Preview on Real UI — Hoverlab',
+  },
+  {
+    href: '/tools/loader',
+    name: 'Loader Generator',
+    description:
+      'Spinners, dots, bars, pulses and progress rings as pure CSS, tuned on sliders and seeded from the loaders already in the catalog. Every one ships with its reduced-motion guard and the accessible status role written in.',
+    icon: LoaderCircle,
+    accent: 'from-cyan-500 to-indigo-500',
+    keywords:
+      'loader spinner loading animation css generator dots bars pulse progress ring skeleton reduced-motion aria-busy',
+    seoTitle: 'CSS Loader & Spinner Generator — Pure CSS, No SVG — Hoverlab',
+  },
+  {
+    href: '/tools/convert',
+    name: 'HTML to JSX',
+    description:
+      'Paste markup and a stylesheet, take away a component — React, Vue, Svelte, styled-components or Tailwind. The same engine the catalog exports through, pointed at your own code, and it says what changed on the way through rather than leaving you to find out.',
+    icon: Braces,
+    accent: 'from-violet-500 to-purple-600',
+    keywords:
+      'html jsx react vue svelte styled-components convert converter transform markup component paste',
+    seoTitle: 'HTML to JSX Converter — Also Vue, Svelte, styled-components — Hoverlab',
+  },
+  {
+    href: '/tools/shadcn',
+    name: 'shadcn Theme Editor',
+    description:
+      'Tune a shadcn/ui theme against real components in light and dark at once, then install it with one command — the export is a registry item the CLI reads, not a block of CSS to paste and hope.',
+    icon: SwatchBook,
+    accent: 'from-zinc-600 to-zinc-900',
+    keywords:
+      'shadcn theme editor generator registry cli tweakcn oklch css variables radius light dark preview',
+    seoTitle: 'shadcn/ui Theme Editor — Live Preview, One-Command Install — Hoverlab',
+  },
+  {
+    href: '/tools/code-image',
+    name: 'Code to Image',
+    description:
+      'A snippet as a PNG for the places that will not take a code block — slides, social cards, release notes. Drawn on a canvas in your tab, so the preview is the file rather than a DOM screenshot that reflows under different fonts, and nothing is uploaded.',
+    icon: Code2,
+    accent: 'from-violet-500 to-purple-600',
+    keywords:
+      'code image screenshot snippet png carbon ray so social card slide syntax highlight export share',
+    seoTitle: 'Code to Image — Snippet Screenshots as PNG, Offline — Hoverlab',
   },
 ]
 

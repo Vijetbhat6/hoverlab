@@ -147,7 +147,22 @@ export default function ChangelogPage() {
           </h2>
           <p className="mt-2 text-sm text-muted-foreground">
             One email when new effects drop — the same list this page is
-            generated from.
+            generated from.{' '}
+            {/*
+              The feed, named next to the email form rather than hidden in a
+              <head> tag. For a developer audience the reader is the better
+              ask — nothing to hand over, nothing to unsubscribe from — and
+              it is built from the same ledger, so it cannot say anything
+              this page does not.
+            */}
+            Or take{' '}
+            <a
+              href="/feed.xml"
+              className="font-medium text-primary underline-offset-2 hover:underline"
+            >
+              the Atom feed
+            </a>{' '}
+            instead — no address required.
           </p>
           <div className="mt-4 flex flex-wrap gap-3">
             <Button asChild>

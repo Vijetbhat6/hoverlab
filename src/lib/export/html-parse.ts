@@ -378,6 +378,186 @@ const JSX_BOOLEAN_ATTRS = new Set([
   'multiple', 'autofocus', 'hidden', 'open', 'novalidate', 'default',
 ])
 
+/**
+ * SVG elements whose names are camelCase.
+ *
+ * The parser lowercases tag names on purpose — the structural selector
+ * matching downstream depends on it — and in an HTML document that is
+ * harmless, because the HTML parser case-corrects known SVG elements on
+ * the way in. JSX has no such repair: `<lineargradient>` is an unknown
+ * lowercase element, React renders it into the SVG namespace verbatim, and
+ * the gradient silently does not exist. So the casing is put back at the
+ * point of rendering, which is the only place it matters.
+ */
+const SVG_TAG_CASE: Record<string, string> = Object.fromEntries(
+  [
+    'animateMotion', 'animateTransform', 'clipPath', 'feBlend', 'feColorMatrix',
+    'feComponentTransfer', 'feComposite', 'feConvolveMatrix', 'feDiffuseLighting',
+    'feDisplacementMap', 'feDistantLight', 'feDropShadow', 'feFlood', 'feFuncA',
+    'feFuncB', 'feFuncG', 'feFuncR', 'feGaussianBlur', 'feImage', 'feMerge',
+    'feMergeNode', 'feMorphology', 'feOffset', 'fePointLight', 'feSpecularLighting',
+    'feSpotLight', 'feTile', 'feTurbulence', 'foreignObject', 'linearGradient',
+    'radialGradient', 'textPath',
+  ].map((tag) => [tag.toLowerCase(), tag]),
+)
+
+/**
+ * SVG attributes that are camelCase rather than dash-case.
+ *
+ * The dashed ones (`stroke-width`, `clip-rule`) need no table — the
+ * general dash-to-camel rule in `jsxAttrName` covers them, and covers the
+ * HTML stragglers (`http-equiv`, `accept-charset`) with the same line.
+ * These are the ones no rule can derive, and they are only consulted when
+ * the source wrote them in lowercase; markup that already says `viewBox`
+ * keeps its own casing.
+ */
+const SVG_ATTR_CASE: Record<string, string> = Object.fromEntries(
+  [
+    'viewBox', 'preserveAspectRatio', 'gradientUnits', 'gradientTransform',
+    'spreadMethod', 'patternUnits', 'patternContentUnits', 'patternTransform',
+    'clipPathUnits', 'maskUnits', 'maskContentUnits', 'markerWidth', 'markerHeight',
+    'markerUnits', 'refX', 'refY', 'startOffset', 'textLength', 'lengthAdjust',
+    'pathLength', 'baseFrequency', 'numOctaves', 'stitchTiles', 'surfaceScale',
+    'specularConstant', 'specularExponent', 'diffuseConstant', 'kernelMatrix',
+    'primitiveUnits', 'filterUnits', 'stdDeviation', 'xChannelSelector',
+    'yChannelSelector', 'tableValues', 'edgeMode', 'attributeName', 'repeatCount',
+    'calcMode', 'keyTimes', 'keySplines', 'keyPoints',
+  ].map((attr) => [attr.toLowerCase(), attr]),
+)
+
+/**
+ * The JSX spelling of one attribute name.
+ *
+ * Order matters. The explicit map wins (`class` is never `class`), then
+ * dash-case becomes camelCase — except `data-*` and `aria-*`, which JSX
+ * takes literally and which are the only dashed names React does not
+ * rewrite. Anything the source already spelled with a capital is left
+ * alone, so hand-written `viewBox` survives without a table entry.
+ */
+function jsxAttrName(original: string): string {
+  const lower = original.toLowerCase()
+  const mapped = JSX_ATTR_MAP[lower]
+  if (mapped) return mapped
+
+  if (lower.startsWith('data-') || lower.startsWith('aria-')) return lower
+
+  if (lower.includes('-')) {
+    // `-webkit-box-orient` → `WebkitBoxOrient`, `stroke-width` → `strokeWidth`.
+    const camel = lower.replace(/-([a-z0-9])/g, (_m, ch: string) => ch.toUpperCase())
+    return lower.startsWith('-') ? camel.charAt(0).toUpperCase() + camel.slice(1) : camel
+  }
+
+  if (original !== lower) return original
+  return SVG_ATTR_CASE[lower] ?? lower
+}
+
+/**
+ * Inline event handlers, in React's spelling.
+ *
+ * `onclick="save()"` is the second-commonest way a paste breaks: JSX has no
+ * `onclick` prop, so the handler is dropped on the floor with no error at
+ * all — the button renders and does nothing, which is far harder to
+ * diagnose than a crash. React's names are camelCase over the DOM event
+ * word, and the word boundaries are not derivable (`onmouseover` is
+ * `onMouseOver`, not `onMouseover`), so they are listed.
+ *
+ * Anything not listed is left exactly as authored and reported by the
+ * caller, because a guessed handler name is a handler that silently does
+ * not fire.
+ */
+const JSX_EVENT_MAP: Record<string, string> = {
+  onclick: 'onClick', ondblclick: 'onDoubleClick', onmousedown: 'onMouseDown',
+  onmouseup: 'onMouseUp', onmouseover: 'onMouseOver', onmouseout: 'onMouseOut',
+  onmouseenter: 'onMouseEnter', onmouseleave: 'onMouseLeave', onmousemove: 'onMouseMove',
+  oncontextmenu: 'onContextMenu', onkeydown: 'onKeyDown', onkeyup: 'onKeyUp',
+  onkeypress: 'onKeyPress', onfocus: 'onFocus', onblur: 'onBlur', onchange: 'onChange',
+  oninput: 'onInput', onsubmit: 'onSubmit', onreset: 'onReset', onselect: 'onSelect',
+  onscroll: 'onScroll', onwheel: 'onWheel', oncopy: 'onCopy', oncut: 'onCut',
+  onpaste: 'onPaste', ondrag: 'onDrag', ondragstart: 'onDragStart', ondragend: 'onDragEnd',
+  ondragover: 'onDragOver', ondrop: 'onDrop', ontouchstart: 'onTouchStart',
+  ontouchend: 'onTouchEnd', ontouchmove: 'onTouchMove', onload: 'onLoad',
+  onerror: 'onError', ontransitionend: 'onTransitionEnd', onanimationend: 'onAnimationEnd',
+}
+
+/** True for an attribute this renderer knows how to spell as a React prop. */
+export function isJsxEventAttr(name: string): boolean {
+  return name.toLowerCase() in JSX_EVENT_MAP
+}
+
+/** `font-size` → `fontSize`; `--brand` stays as it is; `-webkit-x` → `WebkitX`. */
+function styleProperty(name: string): string {
+  const prop = name.trim()
+  if (prop.startsWith('--')) return prop
+  const camel = prop.replace(/-([a-zA-Z0-9])/g, (_m, ch: string) => ch.toUpperCase())
+  // A leading dash survived the replace as a capital: `-webkit-` → `Webkit`.
+  return prop.startsWith('-') ? camel.charAt(0).toUpperCase() + camel.slice(1) : camel
+}
+
+/**
+ * Split a style attribute on `;`, ignoring the ones inside `url(...)`,
+ * `var(--x, ;)` or a quoted string. `background: url(a;b.png)` is rare and
+ * splitting it produces two declarations that are both wrong.
+ */
+function splitDeclarations(value: string): string[] {
+  const out: string[] = []
+  let depth = 0
+  let quote: string | null = null
+  let current = ''
+
+  for (const ch of value) {
+    if (quote) {
+      current += ch
+      if (ch === quote) quote = null
+      continue
+    }
+    if (ch === '"' || ch === "'") {
+      quote = ch
+      current += ch
+      continue
+    }
+    if (ch === '(') depth++
+    if (ch === ')') depth = Math.max(0, depth - 1)
+    if (ch === ';' && depth === 0) {
+      out.push(current)
+      current = ''
+      continue
+    }
+    current += ch
+  }
+  out.push(current)
+  return out.map((d) => d.trim()).filter(Boolean)
+}
+
+/**
+ * `style="color: red"` as a JSX expression.
+ *
+ * This is the single most common way a pasted snippet breaks in React:
+ * `style` takes an object, and a string throws at render with an error
+ * that names the prop but not the file. Rendered as `{{ … }}` here so the
+ * output runs rather than compiles-and-crashes.
+ *
+ * Returns null when there is nothing convertible, so the caller can drop
+ * the attribute rather than emit `style={{}}`.
+ */
+export function styleAttrToJsx(value: string): string | null {
+  const entries: string[] = []
+
+  for (const decl of splitDeclarations(value)) {
+    const colon = decl.indexOf(':')
+    if (colon < 0) continue
+    const name = decl.slice(0, colon).trim()
+    const raw = decl.slice(colon + 1).trim()
+    if (!name || !raw) continue
+
+    const key = styleProperty(name)
+    // Custom properties and anything camelCase-unsafe need quoting.
+    const quotedKey = /^[A-Za-z_$][A-Za-z0-9_$]*$/.test(key) ? key : `'${key}'`
+    entries.push(`${quotedKey}: '${raw.replace(/\\/g, '\\\\').replace(/'/g, "\\'")}'`)
+  }
+
+  return entries.length ? `{{ ${entries.join(', ')} }}` : null
+}
+
 export interface RenderOptions {
   /** Emit JSX rather than HTML: className, self-closed voids, `{}` escaped. */
   jsx?: boolean
@@ -432,9 +612,24 @@ function renderAttrs(el: HtmlElement, opts: RenderOptions): string {
       continue
     }
 
-    let name = JSX_ATTR_MAP[lower] ?? lower
+    let name = jsxAttrName(attr.name)
     if (opts.reactUncontrolled && lower === 'checked') name = 'defaultChecked'
     if (opts.reactUncontrolled && lower === 'value' && el.tag === 'input') name = 'defaultValue'
+
+    if (lower === 'style' && value !== null) {
+      // A string here is a runtime throw in React, not a warning.
+      const object = styleAttrToJsx(value)
+      if (object) parts.push(`style=${object}`)
+      continue
+    }
+
+    const eventName = JSX_EVENT_MAP[lower]
+    if (eventName && value !== null) {
+      // Wrapped rather than passed through: React wants a function, and
+      // the body is the user's own code, so it is kept verbatim inside one.
+      parts.push(`${eventName}={() => { ${value.trim().replace(/;$/, '')} }}`)
+      continue
+    }
 
     if (value === null) {
       // Bare boolean — JSX treats a valueless attribute as `true`.
@@ -470,6 +665,11 @@ export function renderMarkup(nodes: HtmlNode[], opts: RenderOptions = {}): strin
   const indentUnit = opts.indentUnit ?? '  '
   const jsx = opts.jsx === true
 
+  /* SVG element names only get their casing back in JSX — see
+     SVG_TAG_CASE. HTML output leaves them lowercase, which is what an HTML
+     parser would hand back anyway. */
+  const tagName = (tag: string): string => (jsx ? SVG_TAG_CASE[tag] ?? tag : tag)
+
   const renderNode = (node: HtmlNode, indent: string): string => {
     if (node.type === 'text') {
       const trimmed = node.value.trim()
@@ -485,7 +685,7 @@ export function renderMarkup(nodes: HtmlNode[], opts: RenderOptions = {}): strin
     const isVoid = VOID_ELEMENTS.has(node.tag)
 
     if (isVoid) {
-      return `${indent}<${node.tag}${attrs}${jsx ? ' />' : ' />'}`
+      return `${indent}<${tagName(node.tag)}${attrs} />`
     }
 
     const meaningful = node.children.filter(
@@ -493,13 +693,13 @@ export function renderMarkup(nodes: HtmlNode[], opts: RenderOptions = {}): strin
     )
 
     if (meaningful.length === 0) {
-      return `${indent}<${node.tag}${attrs}></${node.tag}>`
+      return `${indent}<${tagName(node.tag)}${attrs}></${tagName(node.tag)}>`
     }
 
     // Single text child → keep it inline.
     if (meaningful.length === 1 && meaningful[0].type === 'text') {
       const text = meaningful[0].value.trim()
-      return `${indent}<${node.tag}${attrs}>${jsx ? escapeJsxText(text) : text}</${node.tag}>`
+      return `${indent}<${tagName(node.tag)}${attrs}>${jsx ? escapeJsxText(text) : text}</${tagName(node.tag)}>`
     }
 
     const inner = meaningful
@@ -507,7 +707,7 @@ export function renderMarkup(nodes: HtmlNode[], opts: RenderOptions = {}): strin
       .filter(Boolean)
       .join('\n')
 
-    return `${indent}<${node.tag}${attrs}>\n${inner}\n${indent}</${node.tag}>`
+    return `${indent}<${tagName(node.tag)}${attrs}>\n${inner}\n${indent}</${tagName(node.tag)}>`
   }
 
   return nodes

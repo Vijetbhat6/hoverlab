@@ -1056,3 +1056,312 @@ Stage Summary:
 - The index now loads only where the catalog is the content: /library, and ⌘K on demand.
 - Three of the four leaks were invisible in the source. The prefetch one in particular
   could only be found by measuring what the browser actually requested.
+
+---
+Task ID: 25
+Agent: main
+Task: Site audit, then close the gaps it found — ten designer tools starting with the
+grid generator, plus the orphaned page, the two unlinked docs sections, and a feed.
+
+Problem: the audit found nothing broken (32 top-level routes, 21 tool pages, all 200
+except three deliberate auth redirects) and four things missing. The biggest: twenty
+designer tools and not one of them touched **layout**. Every tool was paint (colour,
+gradient, shadow, radius, grain), type, or an asset — the half of CSS you reach for
+once the boxes are already in the right places. "css grid generator" is the highest
+-volume query this section can answer and we answered it with nothing.
+
+Work Log:
+
+1. Ten new tools, /tools/grid first. Each is four files — page.tsx, layout.tsx,
+   opengraph-image.tsx, and a registry entry — and the OG route is the one that is
+   easy to forget, because nothing fails without it. Grid and Flexbox went to the
+   HEAD of DESIGNER_TOOLS rather than the end: the registry order is the hub's order,
+   and the hub opened on tokens and icons.
+
+     /tools/grid        Track editor + a grid-template-areas painter that validates
+                        the rectangle rule on every stroke. That rule is the one
+                        everybody breaks and nobody can see they have broken — a
+                        non-rectangular area voids the WHOLE declaration, silently,
+                        with no console warning. The preview drops areas while it is
+                        broken rather than falling back and contradicting the warning.
+     /tools/flexbox     Every container and item property live, built around the two
+                        invisible traps: `flex: 1` is `1 1 0%` and equalises where
+                        `flex-grow: 1` does not, and `min-width` computes to `auto`
+                        on a flex item so it will not shrink past its content.
+     /tools/keyframes   Multi-stop timeline authoring. /tools/motion is a gallery and
+                        /tools/easing is one curve; neither lets you write an
+                        animation. Emits the reduced-motion guard, with the stricter
+                        `animation: none` form when it loops.
+     /tools/divider     Waves, tilts, notches as scalable SVG. Flip is
+                        translate-then-scale, not scale plus transform-origin —
+                        origin is a patchy presentation attribute and React rejects
+                        the hyphenated form outright.
+     /tools/mesh        Stacked radial-gradients instead of a 400KB PNG. Fades to
+                        `rgba(r,g,b,0)` not `transparent`, which is transparent BLACK
+                        and drags every blob through grey on the way out.
+     /tools/filter      Every filter function, backdrop-filter, sixteen blend modes.
+                        Order is preserved because blur-then-brighten is a different
+                        picture. Subject drawn in CSS — nothing loaded.
+     /tools/transform   The three PARENT properties as first-class controls, because
+                        perspective on the transformed element is the mistake, plus
+                        the card flip people are actually trying to build.
+     /tools/scrollbar   Both mechanisms — the standard properties and the WebKit
+                        pseudo-elements — in the order that makes them agree, and it
+                        says when the two disagree (scrollbar-width takes a keyword,
+                        so a 14px bar cannot be expressed in it at all).
+     /tools/colorblind  Machado (2009) in linear-light sRGB. Reports COLLISIONS —
+                        which pairs become the same colour — rather than pretty
+                        recoloured swatches, because that is the finding. Pairs with
+                        /tools/contrast: a palette can pass AAA on every pair and
+                        still be unusable.
+     /tools/tailwind    Both directions, with a verdict per line. Logic in
+                        `lib/tailwind-convert.ts` with 32 tests, because the mapping
+                        tables are the part that rots. Nothing is dropped in silence:
+                        anything without a utility becomes an arbitrary property.
+
+   Three real bugs the tests caught before the page existed: `rounded-full` fell to an
+   arbitrary value because 9999px is a sentinel and normalising it to rem matched
+   nothing; `text-2xl` expanded to `color: 1.5rem` because `text-` is overloaded and
+   the colour table won; and `grid-cols-3` failed entirely because a lazy prefix regex
+   split it as `grid` + `cols-3`.
+
+2. /design-system was an orphan — a real page, 200, in neither nav nor footer nor
+   sitemap, reachable only from three deep links in /docs/mcp, /figma and the AI
+   variant panel. It is the page that repaints the whole catalog to a brand. Added to
+   the footer's Developers column and to sitemap.ts.
+
+3. /docs linked four of its own six sections. `dna` and `skills` were in the sidebar
+   and nowhere on the index — the page every "how do I use this" link points at. New
+   "What to give the agent" section directly after the MCP one, since all three are
+   the same job.
+
+4. /feed.xml — the changelog as Atom, from the same git-derived ledger, so the two
+   cannot disagree. One entry per (day, rung), which is the grouping the page already
+   renders. The only way to subscribe was an email address, which for this audience is
+   the wrong ask and the wrong medium. Autodiscovery in the root layout, and named
+   next to the newsletter form rather than only in a <head> tag.
+
+Verification:
+- `npx tsc --noEmit` → 0 errors. `npx eslint src` → clean.
+- `npm test` → 258 pass, 0 fail (32 of them new).
+- `npm run build` → prebuild guards all pass, ✓ 1260 static pages.
+- All ten tools fetched and screenshotted at 1440px: 200, correct <h1>, code blocks
+  present, zero console errors. One React warning on /tools/divider
+  (`transform-origin` as a DOM prop) found by screenshotting and fixed.
+- /feed.xml: 200, application/atom+xml, 14 entries balanced, 0 unescaped ampersands.
+- OG card for /tools/grid rendered and eyeballed.
+- `git status` after a full build: no generated file went stale.
+
+Stage Summary:
+- 20 designer tools → 30. Layout, which had no coverage at all, now has two tools at
+  the head of the hub.
+- The orphan, the two unlinked docs sections and the missing feed are closed.
+- Deliberately NOT built: a blog. It was in the audit as the biggest compounding gap
+  and it is a content commitment, not a code one — an empty blog is worse than none.
+
+
+---
+
+## Three from the audit: motion made editable, neumorphism, code → image
+
+The brief was a priority order, not three greenfield tools. Taken in that order.
+
+1. **The keyframe editor was an upgrade to /tools/motion, not a new tool.**
+
+   Both already existed — a gallery of eight animations you could only copy, and a
+   timeline editor with a blank default state. They shared nothing: the gallery held
+   hand-written CSS strings, the editor held a stop model and its own emitter. That
+   is how a gallery ends up handing out a preset the editor next door cannot open,
+   and how the two drift on the details that matter.
+
+   The model moved to `lib/keyframes-css.ts` and both pages read it. A motion preset
+   is now an `Animation` value and its published CSS is *derived* from the same stops
+   the editor loads, so "Edit in the keyframes editor" opens the real thing rather
+   than an approximation of it. A test asserts exactly that equality, per preset.
+
+   The handoff is `#from=<id>` — a hash, matching the share links, so the server never
+   sees it and no `useSearchParams` Suspense boundary has to be threaded through a
+   client page. It is applied after the hook's localStorage restore, or the restore
+   lands on top of it, and the hash is stripped so it does not re-apply forever.
+
+   Two of the eight cannot be expressed on a pixel timeline — `slide-in-right` travels
+   100% of the element's own width, and `shimmer` moves a `background-position`. They
+   keep their literal CSS and say why the Edit button is missing, rather than being
+   approximated into something that changes when you open it. A test asserts every
+   non-editable preset carries a reason.
+
+   Side effects worth noting: the `animation` shorthand now omits every sub-property
+   left at its initial value (`1 normal` was three tokens of noise in every snippet),
+   and the editor's easing select unions in whatever the state holds, so a preset
+   arriving with `cubic-bezier(0.22, 1, 0.36, 1)` does not render a blank select.
+
+2. **Neumorphism went into /tools/shadow, and needed a third surface to be honest.**
+
+   Neumorphism is not a shadow you can reach by dragging: it is two full-opacity
+   shadows whose colours are derived from the surface behind the element, on a page
+   painted that same colour. The second half is a hard requirement, so the preview
+   grew a `match` surface — previewing the style on a stage of a different colour is
+   showing something that cannot exist where the CSS gets pasted.
+
+   The builder now opens with starting stacks (`lib/shadow-presets.ts`): three
+   elevation ramps, an inset well, the neumorphic pair raised and pressed, and three
+   for text mode. The neumorphic two compute from the card colour and move the two
+   settings they cannot work without — including nudging a white card to something
+   with room to be both lightened and darkened, because the builder's own default is
+   white and a preset that visibly does nothing reads as a broken tool.
+
+   The caveat travels with it. On a base near white or near black one half of the pair
+   has nowhere to go and the element ends up lit from one side; the tool says so, live,
+   because the colour is a picker people keep dragging. Whether the current stack *is*
+   a derived pair is decided structurally rather than remembered, so it survives a
+   reload and a shared link.
+
+3. **Code → image is last, and says out loud that it serves publishing.**
+
+   `/tools/code-image`. The preview is the same canvas the export draws to. That is
+   the whole design rather than an implementation note: every other tool of this kind
+   styles a `<pre>` and rasterises the DOM through an SVG `foreignObject`, which
+   reflows under whatever fonts the rasteriser can see and returns a file that is not
+   what was approved on screen. One layout function, called at 1× for the preview and
+   at 2×/3× for the file.
+
+   The highlighter is ours and small — a scanner, not a parser. A real grammar engine
+   is megabytes and wants a network request for its themes, and the site's standing
+   claim about the tools is that they run in the tab with nothing uploaded, which
+   matters more here than anywhere else on it because the input is somebody's source
+   code. The trade is stated in the file: it will colour a keyword used as a property
+   name.
+
+   The page carries the accessibility cost next to the buttons that produce the file,
+   not in a footnote — an image of code cannot be copied, searched, or read aloud, and
+   anywhere a real code block fits, a real code block is better.
+
+Verification:
+- `npx tsc --noEmit` → 0 errors in `src`. `npx eslint` on every changed file → clean.
+- 40 new tests across `keyframes-css`, `shadow-presets` and `code-image`; all pass.
+  Full suite 427, 2 failing — both in `shadcn-theme.test.ts`, a peer's in-flight work,
+  untouched here.
+- Driven in a real browser at 1440px: the gallery's Edit button seeds the editor with
+  `shake` (6 stops, hash stripped), `shimmer` shows its reason instead of a button,
+  the neumorphic preset lands as a derived pair with the stage repainted to match, the
+  warning fires when the card is dragged to white, and the canvas exports a 142KB PNG.
+  Zero console errors on all four pages.
+- `check-paths` → every step resolves.
+- `test:motion` → 191 passed, 8 inconclusive, 0 failed. It covers catalog effects
+  rather than the tools, so it was never the gate here — but the guard emitter these
+  pages now share is asserted directly in `keyframes-css.test.ts`, both branches.
+
+Deliberately NOT built: an SVG export for the code image. PNG plus clipboard covers
+the destinations that refuse a code block; SVG would be a second renderer to keep in
+step with the first, which is the exact failure this tool was built to avoid.
+
+
+---
+
+## Three tools aimed at pooled traffic: SVG, live palette, loaders
+
+The brief named the traffic each one is for. Roughly 880K/quarter is pooled across
+svgviewer, svgbackgrounds, fffuel and getwaves and nobody has consolidated it;
+realtimecolors takes 156K/quarter with nothing to preview a palette *on*; loading.io
+does 196.7K/quarter against a catalog that already contains 35 loaders. What follows
+is what each tool does that the incumbent cannot, because ranking for a term you are
+the thirtieth entrant on requires being better at it, not present for it.
+
+1. **The SVG toolkit is one source through four modes, and that is the whole point.**
+
+   `/tools/svg`. Optimise, convert to JSX or a data URI, generate a pattern, generate
+   a wave. Four sites today, and the real workflow crosses three of them: the file the
+   designer exported gets shrunk, then turned into the component your codebase takes.
+   Here the source is one piece of state, so switching from Optimise to Convert
+   converts the *optimised* markup — which is the correct order and the one everyone
+   gets wrong, because converting first ships Illustrator's layer names into a React
+   component. The generating modes feed the same exporters, so a pattern leaves as a
+   component or a background rather than as a file to process elsewhere.
+
+   The optimiser is string-based, not DOM-based, and says so in the file: this module
+   is imported by the Node test runner as well as by the browser, and half its value
+   is being able to pin its behaviour. Anything needing a real tree — merging paths,
+   collapsing transforms — is absent rather than approximated. Every pass reports what
+   it removed, so the output is a list of decisions rather than a smaller number.
+
+   Two defaults are deliberately not the usual ones. `<title>` is KEPT: it is the
+   accessible name of an inline SVG, and the standard preset deletes it to save nine
+   bytes. `fill="none"` survives the currentColor pass, because on a stroked icon that
+   is structure and not colour. The id sweep skips any file carrying its own `<style>`
+   — a selector can reach an id in ways a regex does not model, and a wrong removal
+   there is an invisible icon.
+
+   The preview is sanitised regardless of the optimiser's own script switch.
+   `innerHTML` will not run a `<script>`, but it very much fires `<svg onload>`, and
+   someone pasting a file they were sent should not be running its author's code.
+
+2. **The palette preview repaints real blocks, because that is the question.**
+
+   `/tools/palette-preview`. Four decisions — background, text, primary, accent — and
+   the twenty-odd semantic tokens every block reads are derived from them, for light
+   and for dark. A palette looks fine as five rectangles; whether the secondary text
+   on the plan card is still readable is a different question, and it only has an
+   answer if the plan card is real. So the stage renders a nav bar, a hero, a pricing
+   table, dashboard stat cards and a footer from the catalog — the same files
+   `npx shadcn add` installs — with the tokens set as custom properties on one
+   wrapper. No iframe and no rebuild: the blocks were always resolving through those
+   properties.
+
+   The route is a server component for that reason. The block registry is deliberately
+   not a client module, so the page does the lookup and hands the rendered nodes to
+   the client shell.
+
+   The trap the derivation exists to avoid: `--accent` in this convention is a hover
+   *surface* — 18 files here read it that way — not a highlight colour. Writing a
+   saturated brand colour into it gives a UI that flashes fluorescent on every hover,
+   so the accent input contributes its hue and a trace of its chroma to a surface one
+   step off the background. Button labels are picked by measuring both candidates
+   rather than by a lightness threshold, which is wrong exactly where it matters. The
+   dark scheme keeps every hue and re-seats the lightnesses on the shadcn anchors the
+   catalog was drawn against, rather than inverting the numbers.
+
+   The contrast panel runs against the derived tokens, not the input — `--muted-
+   foreground` is where a palette usually fails and nobody picks it by hand. The
+   border pair is reported and NOT scored: 1.4.11 is about boundaries that carry
+   meaning, almost no real theme's border clears 3:1 against its own background,
+   shadcn's own included, and a permanent red mark is how a panel gets ignored.
+
+3. **The loader generator reads the catalog rather than sitting next to it.**
+
+   `/tools/loader`. Ten parametric families as pure CSS, and every one of them ships
+   the two parts hand-written loaders go without: a `role="status"` with a
+   visually-hidden name, and a `prefers-reduced-motion` guard built by
+   `reducedMotionGuard` — the same function the catalog's own 835 effects are guarded
+   by, so the rule here cannot drift from the rule there. A spinner is the most common
+   piece of unstoppable infinite motion on the web.
+
+   The 35 loaders already in the catalog are the starting points. Rather than a second
+   table pairing each one with slider positions — wrong within two additions, the way
+   every hand-kept mapping in this repo has been — `seedFromCss` reads the numbers
+   back out of each loader's own stylesheet: family from its tags (or its name, since
+   the ten hand-written ones carry no tags), size from the largest dimension, duration
+   from the animation shorthand, count from its children, colour from the most
+   saturated literal rather than the first.
+
+   Each of those rules is a bug that was found by running it over all 35. The first
+   `width` in an equalizer is one 5px bar, not its 32px container. `border-radius:
+   999px` is not a 999px stroke. The first colour in a dark-surface loader is the
+   surface. "Typing" contains "ping", and the typing indicator came back as a sonar
+   ripple. It is an approximation and the UI says so — nearest family, not a
+   reproduction — but it is the difference between a gallery you copy from and a
+   gallery you start from.
+
+Verification:
+- `npm test` → 457 passing, 0 failing (97 new across `svg-tools`, `palette-preview`
+  and `loader-tools`). `npx tsc --noEmit` clean in `src`; `eslint` clean on every new
+  file.
+- Driven in a real browser at 1440px in both themes via `scripts/shot-new-tools.mts`:
+  all four SVG modes, the palette stage in both schemes, and seeding the loader from
+  three different catalog entries. Zero console or page errors.
+- The seed pass was reviewed against all 35 catalog loaders at once, which is what
+  turned up four of the rules above.
+
+Deliberately NOT built: a wave mode that duplicates `/tools/divider`. The divider
+draws the same family of shapes against *both* bands of a seam, which is the only way
+to see whether the join works; the toolkit's wave is a standalone asset with the
+export formats the divider has no reason to carry, and each page links the other.

@@ -166,6 +166,42 @@ npx shadcn add @hoverlab/hoverlab`}</Snippet>
         </p>
       </DocsSection>
 
+      {/*
+        Design DNA and Skills were in the sidebar and nowhere on this page.
+
+        Two of the six sections had no route in from the docs index — which
+        is the page every "how do I use this" link on the site points at, and
+        the one a reader scrolls rather than scans a sidebar for. Both are
+        about the same job as the MCP section above (handing the catalog to
+        something that writes code for you), so they belong directly after it
+        rather than in a list of their own.
+      */}
+      <DocsSection id="agent-context" title="What to give the agent">
+        <p>
+          The MCP server lets an agent search and install. Two smaller
+          documents make what it installs come out consistent, and both are
+          free and need no account.
+        </p>
+        <p className="mt-3">
+          <Link href="/docs/dna" className="font-medium text-primary hover:underline">
+            Design DNA
+          </Link>{' '}
+          is the design system as one machine-readable document — colour
+          tokens for both themes, radius, spacing and motion, plus the rules
+          that keep generated UI coherent. Paste it into a tool that has no
+          idea what your product looks like and the output stops being
+          generic.
+        </p>
+        <p className="mt-3">
+          <Link href="/docs/skills" className="font-medium text-primary hover:underline">
+            Skills
+          </Link>{' '}
+          teach a coding agent the catalog itself: what is in it, which rung
+          to reach for, and how to install. Versioned, so an agent is not
+          working from whatever it remembers about the catalog from training.
+        </p>
+      </DocsSection>
+
       <DocsSection id="tailwind" title="What blocks assume">
         <p>
           Blocks and pages are styled with Tailwind utilities against semantic

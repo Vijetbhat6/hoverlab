@@ -77,6 +77,13 @@ const DEVELOPER_LINKS: FooterLink[] = [
   { label: 'CLI reference', href: '/docs/cli' },
   { label: 'MCP server', href: '/docs/mcp' },
   { label: 'HTTP API', href: '/docs/api' },
+  // /design-system was an orphan: a real page, returning 200, in neither
+  // nav nor footer nor the sitemap, reachable only from three deep links
+  // inside /docs/mcp, /figma and the AI variant panel. It is the page that
+  // repaints the whole catalog to a brand, which is the most consequential
+  // control on the site — so it now has a way in that does not depend on
+  // already being three pages deep.
+  { label: 'Design system', href: '/design-system' },
   { label: 'Figma pairing', href: '/figma' },
   { label: 'Playground', href: '/playground' },
 ]

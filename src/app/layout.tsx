@@ -50,6 +50,14 @@ export const metadata: Metadata = {
     "demos",
   ],
   authors: [{ name: "Hoverlab" }],
+  // Feed autodiscovery. Without this a reader handed hoverlab.dev finds
+  // nothing to subscribe to, which for a catalog whose whole return-visit
+  // proposition is "there is new stuff" is the wrong answer. The feed is
+  // built from the same git-derived ledger as /changelog, so the two cannot
+  // disagree about what shipped.
+  alternates: {
+    types: { "application/atom+xml": [{ url: "/feed.xml", title: "Hoverlab — what's new" }] },
+  },
   manifest: "/manifest.webmanifest",
   icons: {
     icon: [

@@ -88,6 +88,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // developers, and the only page that says the catalog is still growing.
     { url: absoluteUrl('/figma'), changeFrequency: 'monthly' as const, priority: 0.8 },
     { url: absoluteUrl('/changelog'), changeFrequency: 'weekly' as const, priority: 0.7 },
+    // The brand-token editor that repaints the whole catalog. It was
+    // missing here for the same reason it was missing from the footer:
+    // nothing linked it except three deep links, so nothing found it.
+    { url: absoluteUrl('/design-system'), changeFrequency: 'monthly' as const, priority: 0.7 },
     // Written for one segment rather than for search: people who used to
     // sell on a marketplace. It is the first thing here aimed at building
     // the direct traffic that is the only funnel agents cannot re-rank.
