@@ -110,6 +110,20 @@ function describe(code: string): AuthFailure {
         message: 'That password does not meet the project’s password policy.',
         status: 400,
       }
+    case 'INVALID_CUSTOM_TOKEN':
+    case 'CREDENTIAL_MISMATCH':
+      // Only reachable from passkey sign-in, and never because of anything
+      // the person did: the server signed a token Firebase rejected, which
+      // means the service account and the API key belong to different
+      // projects — the one misconfiguration that looks exactly like a
+      // working setup until someone tries to sign in.
+      return {
+        message:
+          'The server could not complete sign-in. Its Firebase service account ' +
+          'and API key do not appear to be from the same project — check ' +
+          '/api/health/auth.',
+        status: 503,
+      }
     case 'API key not valid. Please pass a valid API key.':
     case 'INVALID_API_KEY':
     case 'API_KEY_INVALID':
@@ -140,7 +154,12 @@ export interface AuthResult {
 }
 
 async function call(
-  path: 'signUp' | 'signInWithPassword' | 'sendOobCode' | 'update',
+  path:
+    | 'signUp'
+    | 'signInWithPassword'
+    | 'signInWithCustomToken'
+    | 'sendOobCode'
+    | 'update',
   body: Record<string, unknown>,
 ): Promise<Record<string, unknown>> {
   let res: Response
@@ -196,6 +215,29 @@ export async function signInWithPassword(
     idToken: String(data.idToken ?? ''),
     localId: String(data.localId ?? ''),
     email: String(data.email ?? email),
+  }
+}
+
+/**
+ * Exchange an Admin-SDK custom token for an ID token.
+ *
+ * The detour exists because `createSessionCookie` accepts only an ID token,
+ * and an ID token is only ever minted by Google. Passkey sign-in verifies
+ * the assertion itself — Firebase has no idea what WebAuthn is — so the
+ * server vouches for the account with a custom token it signs with the
+ * service account key, trades it here for the real thing, and mints the
+ * session cookie from that. The round trip is what keeps every session in
+ * this app the same kind of cookie regardless of how it was earned.
+ */
+export async function signInWithCustomToken(token: string): Promise<AuthResult> {
+  const data = await call('signInWithCustomToken', {
+    token,
+    returnSecureToken: true,
+  })
+  return {
+    idToken: String(data.idToken ?? ''),
+    localId: String(data.localId ?? ''),
+    email: '',
   }
 }
 

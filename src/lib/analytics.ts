@@ -97,7 +97,13 @@ export type AnalyticsEvent =
     }
   // ---- accounts ----
   | { name: 'signup_completed'; props: { method: 'email' } }
-  | { name: 'login_completed'; props: { method: 'email' } }
+  /**
+   * `method` is the whole point of the event now that there are two doors.
+   * Passkey adoption is not observable any other way — the sign-in page
+   * cannot tell how many of its visitors have one — and the ratio is what
+   * decides whether the password form ever stops being the default.
+   */
+  | { name: 'login_completed'; props: { method: 'email' | 'passkey' } }
   // ---- monetization funnel ----
   | { name: 'pricing_viewed'; props: Record<string, never> }
   /**

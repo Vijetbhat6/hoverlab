@@ -18,11 +18,11 @@
 import * as React from 'react'
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { Loader2 } from 'lucide-react'
+import { Fingerprint, Loader2 } from 'lucide-react'
 import { toast } from 'sonner'
 import { track } from '@/lib/analytics'
 
-import { useAuth } from '@/components/auth-provider'
+import { PasskeyCancelled, useAuth } from '@/components/auth-provider'
 import { AuthShell } from '@/components/auth-shell'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -35,7 +35,7 @@ type Mode = 'login' | 'signup'
 export function AuthForm({ mode }: { mode: Mode }) {
   const router = useRouter()
   const params = useSearchParams()
-  const { login, signup, resetPassword } = useAuth()
+  const { login, signup, loginWithPasskey, resetPassword } = useAuth()
 
   const [name, setName] = React.useState('')
   const [email, setEmail] = React.useState('')
@@ -43,9 +43,55 @@ export function AuthForm({ mode }: { mode: Mode }) {
   const [showPw, setShowPw] = React.useState(false)
   const [submitting, setSubmitting] = React.useState(false)
   const [resetting, setResetting] = React.useState(false)
+  const [passkeying, setPasskeying] = React.useState(false)
+  const [passkeysAvailable, setPasskeysAvailable] = React.useState(false)
   const [error, setError] = React.useState<string | null>(null)
 
   const isSignup = mode === 'signup'
+
+  /**
+   * Whether to offer the passkey button at all.
+   *
+   * Decided after mount, never during render: `window.PublicKeyCredential`
+   * does not exist on the server, so branching on it in the render body
+   * would produce markup the client immediately contradicts. Starting at
+   * `false` means the server and the first client render agree, and the
+   * button appears a tick later on the browsers that can honour it.
+   */
+  React.useEffect(() => {
+    if (isSignup) return
+    let cancelled = false
+    import('@simplewebauthn/browser').then(({ browserSupportsWebAuthn }) => {
+      if (!cancelled) setPasskeysAvailable(browserSupportsWebAuthn())
+    })
+    return () => {
+      cancelled = true
+    }
+  }, [isSignup])
+
+  async function onPasskey() {
+    setError(null)
+    setPasskeying(true)
+    try {
+      await loginWithPasskey()
+      track('login_completed', { method: 'passkey' })
+      toast.success('Welcome back!')
+      const redirect = params.get('redirect') || '/library'
+      router.replace(redirect)
+      router.refresh()
+    } catch (err) {
+      // A dismissed prompt is not a failure. Saying nothing at all would be
+      // confusing — the button was pressed and then nothing happened — so it
+      // gets a toast rather than the red alert reserved for real problems.
+      if (err instanceof PasskeyCancelled) {
+        toast.message(err.message)
+      } else {
+        setError(err instanceof Error ? err.message : 'Something went wrong.')
+      }
+    } finally {
+      setPasskeying(false)
+    }
+  }
 
   /**
    * Firebase owns password reset end to end — it sends the email, hosts the
@@ -122,6 +168,41 @@ export function AuthForm({ mode }: { mode: Mode }) {
             <Alert variant="destructive">
               <AlertDescription>{error}</AlertDescription>
             </Alert>
+          ) : null}
+
+          {/*
+            Above the email field, not below the password one. A passkey is
+            the faster path for anyone who has set one up, and burying it
+            under the form they were trying to avoid defeats the point — but
+            it stays a secondary button, because most visitors have no
+            passkey and the primary action must remain the one that works
+            for them.
+          */}
+          {passkeysAvailable ? (
+            <div className="space-y-4">
+              <Button
+                type="button"
+                variant="outline"
+                className="w-full"
+                onClick={onPasskey}
+                disabled={passkeying || submitting}
+              >
+                {passkeying ? (
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                ) : (
+                  <Fingerprint className="mr-2 h-4 w-4" />
+                )}
+                {passkeying ? 'Waiting for your passkey…' : 'Sign in with a passkey'}
+              </Button>
+
+              <div className="flex items-center gap-3">
+                <span className="h-px flex-1 bg-border" />
+                <span className="text-xs uppercase tracking-wide text-muted-foreground">
+                  or
+                </span>
+                <span className="h-px flex-1 bg-border" />
+              </div>
+            </div>
           ) : null}
 
           {isSignup ? (
@@ -210,7 +291,7 @@ export function AuthForm({ mode }: { mode: Mode }) {
           <Button
             type="submit"
             className="w-full"
-            disabled={submitting}
+            disabled={submitting || passkeying}
           >
             {submitting ? (
               <>

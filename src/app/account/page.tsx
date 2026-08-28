@@ -25,6 +25,7 @@ import { LicenseKeyCard } from '@/components/billing/license-key-card'
 import { WorkspaceCard } from '@/components/billing/workspace-card'
 import { CreditsCard } from '@/components/billing/credits-card'
 import { SavedToolPresets } from '@/components/account/saved-tool-presets'
+import { PasskeysCard } from '@/components/account/passkeys-card'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 
@@ -215,6 +216,16 @@ export default function AccountPage() {
           it is for.
         */}
         <SavedToolPresets />
+
+        {/*
+          Immediately above Session, because they are two halves of the same
+          question — how you get in, and how you get out — and someone who
+          has come here to sign out on a shared machine is exactly the person
+          who should see that a passkey is registered on it.
+        */}
+        <div className="mt-6">
+          <PasskeysCard />
+        </div>
 
         <Card className="mt-6 border-border/60">
           <CardHeader>

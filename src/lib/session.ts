@@ -14,6 +14,7 @@
 
 import { cookies } from 'next/headers'
 import { adminAuth } from '@/lib/firebase/admin'
+import { signInWithCustomToken } from '@/lib/firebase/rest'
 import { getUserProfile } from '@/lib/firebase/users'
 
 export const SESSION_COOKIE_NAME = 'cssfx:session'
@@ -128,6 +129,29 @@ export async function getCurrentUser(): Promise<PublicUser | null> {
 }
 
 export type CurrentUser = Awaited<ReturnType<typeof getCurrentUser>>
+
+/**
+ * Mint a session cookie for an account this server has already authenticated
+ * by some means Firebase knows nothing about.
+ *
+ * Password sign-in gets its ID token from Firebase directly, as a by-product
+ * of Firebase checking the password. Passkey sign-in has no such by-product:
+ * the assertion is verified here, against a public key in Firestore, and
+ * Google is never asked anything. So the server states the conclusion in a
+ * custom token signed with the service account key and exchanges it for the
+ * ID token that `createSessionCookie` requires.
+ *
+ * The result is indistinguishable from a password session — same cookie,
+ * same 14-day cap, same revocation behaviour — which is the point. Nothing
+ * downstream needs to know which door someone came through.
+ */
+export async function createSessionCookieForUid(uid: string): Promise<string> {
+  const customToken = await adminAuth().createCustomToken(uid)
+  const { idToken } = await signInWithCustomToken(customToken)
+  return adminAuth().createSessionCookie(idToken, {
+    expiresIn: SESSION_MAX_AGE_SECONDS * 1000,
+  })
+}
 
 /* ============================================================
  *  Cookie helpers

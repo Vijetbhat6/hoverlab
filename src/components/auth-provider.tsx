@@ -30,6 +30,12 @@ interface AuthContextValue {
   login: (email: string, password: string) => Promise<void>
   signup: (email: string, password: string, name?: string) => Promise<void>
   logout: () => Promise<void>
+  /**
+   * Sign in with a passkey. No email needed — the browser asks which of the
+   * passkeys it holds for this site to use, so the flow starts with a
+   * fingerprint rather than a form.
+   */
+  loginWithPasskey: () => Promise<void>
   /** Ask Firebase to send a reset email. Resolves even if unregistered. */
   resetPassword: (email: string) => Promise<void>
   /** Manually refresh the session from the server. */
@@ -53,6 +59,20 @@ function readError(error: unknown): string | null {
     if (typeof message === 'string' && message.trim()) return message
   }
   return null
+}
+
+/**
+ * Someone dismissed the passkey prompt, or it timed out waiting for them.
+ *
+ * A distinct type because it is not an error in the sense the UI treats
+ * errors: nothing went wrong and nothing needs fixing. Callers use it to
+ * stay quiet rather than to shout.
+ */
+export class PasskeyCancelled extends Error {
+  constructor(message: string) {
+    super(message)
+    this.name = 'PasskeyCancelled'
+  }
 }
 
 interface PostResult {
@@ -168,6 +188,60 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setUser(null)
   }, [])
 
+  /**
+   * Passkey sign-in, in three steps: ask the server for a challenge, hand it
+   * to the authenticator, post the signed assertion back.
+   *
+   * The library is imported lazily because it is only ever needed by someone
+   * who actually presses the button, and a sign-in page should not pay for a
+   * WebAuthn helper in its initial bundle.
+   */
+  const loginWithPasskey = React.useCallback(async () => {
+    const { startAuthentication, WebAuthnError } = await import(
+      '@simplewebauthn/browser'
+    )
+
+    const optionsResponse = await post('/api/auth/passkey/login/options', {})
+    if (!optionsResponse.ok) {
+      throw new Error(
+        readError(optionsResponse.data.error) ??
+          'Could not start passkey sign-in. Try again.',
+      )
+    }
+    const { options } = optionsResponse.data as unknown as {
+      options: Parameters<typeof startAuthentication>[0]['optionsJSON']
+    }
+
+    let assertion
+    try {
+      assertion = await startAuthentication({ optionsJSON: options })
+    } catch (err) {
+      // Cancelling the system prompt is a NotAllowedError, and so is letting
+      // it time out. Neither is a failure worth an alarming red banner — the
+      // person simply changed their mind — so it is reported as a plain,
+      // quiet sentence and the password form is still sitting right there.
+      if (
+        err instanceof WebAuthnError ||
+        (err instanceof Error && err.name === 'NotAllowedError')
+      ) {
+        throw new PasskeyCancelled(
+          err instanceof Error && err.name === 'NotAllowedError'
+            ? 'Passkey sign-in was cancelled.'
+            : err.message,
+        )
+      }
+      throw err
+    }
+
+    setUser(
+      await postForUser(
+        '/api/auth/passkey/login/verify',
+        { response: assertion },
+        'Passkey sign-in failed. Please try again.',
+      ),
+    )
+  }, [])
+
   const resetPassword = React.useCallback(async (email: string) => {
     const { data, ok } = await post('/api/auth/forgot-password', { email })
     // Only a hard failure (rate limiting) surfaces; "no such account" comes
@@ -196,8 +270,26 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, [user, loading])
 
   const value = React.useMemo<AuthContextValue>(
-    () => ({ user, loading, login, signup, logout, resetPassword, refresh }),
-    [user, loading, login, signup, logout, resetPassword, refresh],
+    () => ({
+      user,
+      loading,
+      login,
+      signup,
+      logout,
+      loginWithPasskey,
+      resetPassword,
+      refresh,
+    }),
+    [
+      user,
+      loading,
+      login,
+      signup,
+      logout,
+      loginWithPasskey,
+      resetPassword,
+      refresh,
+    ],
   )
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
