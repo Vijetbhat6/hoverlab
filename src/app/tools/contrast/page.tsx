@@ -38,6 +38,7 @@ import { CopyCssCard } from '@/components/designer-tools/copy-css-card'
 import { ToolLayout } from '@/components/designer-tools/tool-layout'
 import { ToolPresetsBar } from '@/components/designer-tools/tool-presets-bar'
 import { UseInCatalog } from '@/components/designer-tools/use-in-catalog'
+import { ToolWorkbench } from '@/components/designer-tools/tool-workbench'
 import { useToolState } from '@/hooks/use-tool-state'
 import {
   brandFromHex,
@@ -195,7 +196,7 @@ export default function ContrastToolPage() {
       tagline="WCAG 2.1 AA / AAA in real time"
       icon={<Accessibility className="h-5 w-5" />}
     >
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-[420px_1fr]">
+      <ToolWorkbench previewSide="right" controlsWidth="420px">
         {/* Inputs */}
         <div className="space-y-5">
           <ColorRow
@@ -340,7 +341,7 @@ export default function ContrastToolPage() {
               worth previewing the catalog in. */}
           <UseInCatalog tool={TOOL} brand={brandFromHex(fg)} />
         </div>
-      </div>
+      </ToolWorkbench>
 
       <section className="mt-8 overflow-hidden rounded-xl border border-border bg-card shadow-sm">
         <div className="flex flex-wrap items-start gap-x-3 gap-y-1 border-b border-border/60 px-5 py-4">

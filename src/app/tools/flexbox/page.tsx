@@ -42,6 +42,7 @@ import { CopyCssCard } from '@/components/designer-tools/copy-css-card'
 import { ToolLayout } from '@/components/designer-tools/tool-layout'
 import { ToolPresetsBar } from '@/components/designer-tools/tool-presets-bar'
 import { UseInCatalog } from '@/components/designer-tools/use-in-catalog'
+import { ToolWorkbench } from '@/components/designer-tools/tool-workbench'
 import { useToolState } from '@/hooks/use-tool-state'
 import { cn } from '@/lib/utils'
 
@@ -279,7 +280,7 @@ export default function FlexboxToolPage() {
       tagline="Every flex property against a live row — including the two that look like grow settings and are not"
       icon={<StretchVertical className="h-5 w-5" />}
     >
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_380px]">
+      <ToolWorkbench controlsWidth="380px">
         <div className="space-y-4">
           {/* The row. The dashed rail is the container: without a visible
               edge, justify-content and the width slider both look like they
@@ -603,7 +604,7 @@ export default function FlexboxToolPage() {
 
           <ToolPresetsBar tool={tool} noun="row" />
         </div>
-      </div>
+      </ToolWorkbench>
     </ToolLayout>
   )
 }

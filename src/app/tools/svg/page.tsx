@@ -45,6 +45,7 @@ import { CopyCssCard } from '@/components/designer-tools/copy-css-card'
 import { ToolLayout } from '@/components/designer-tools/tool-layout'
 import { ToolPresetsBar } from '@/components/designer-tools/tool-presets-bar'
 import { UseInCatalog } from '@/components/designer-tools/use-in-catalog'
+import { ToolWorkbench } from '@/components/designer-tools/tool-workbench'
 import { useToolState } from '@/hooks/use-tool-state'
 import {
   buildPatternCss,
@@ -222,7 +223,7 @@ export default function SvgToolkitPage() {
         ))}
       </div>
 
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_380px]">
+      <ToolWorkbench controlsWidth="380px">
         {/*
           `min-w-0` is load-bearing here in a way it is not on most tool
           pages. A grid item's default `min-width: auto` refuses to shrink
@@ -769,7 +770,7 @@ export default function SvgToolkitPage() {
 
           <ToolPresetsBar tool={tool} noun="SVG setup" />
         </div>
-      </div>
+      </ToolWorkbench>
     </ToolLayout>
   )
 }

@@ -24,6 +24,7 @@ import { CopyCssCard } from '@/components/designer-tools/copy-css-card'
 import { ToolLayout } from '@/components/designer-tools/tool-layout'
 import { ToolPresetsBar } from '@/components/designer-tools/tool-presets-bar'
 import { UseInCatalog } from '@/components/designer-tools/use-in-catalog'
+import { ToolWorkbench } from '@/components/designer-tools/tool-workbench'
 import { useToolState } from '@/hooks/use-tool-state'
 import { cn } from '@/lib/utils'
 
@@ -160,7 +161,7 @@ export default function PlaceholdersToolPage() {
         ))}
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-[320px_minmax(0,1fr)]">
+      <ToolWorkbench previewSide="right" controlsWidth="320px">
         <div className="space-y-5 rounded-2xl border border-border/60 bg-card/60 p-5">
           {state.mode === 'image' ? (
             <>
@@ -298,7 +299,7 @@ export default function PlaceholdersToolPage() {
               rather than chosen, so it states nothing about a product. */}
           <UseInCatalog tool={TOOL} />
         </div>
-      </div>
+      </ToolWorkbench>
     </ToolLayout>
   )
 }

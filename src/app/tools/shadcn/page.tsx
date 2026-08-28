@@ -50,6 +50,7 @@ import { CopyCssCard } from '@/components/designer-tools/copy-css-card'
 import { ToolLayout, copyWithToast } from '@/components/designer-tools/tool-layout'
 import { ToolPresetsBar } from '@/components/designer-tools/tool-presets-bar'
 import { UseInCatalog } from '@/components/designer-tools/use-in-catalog'
+import { ToolWorkbench } from '@/components/designer-tools/tool-workbench'
 import { useToolState } from '@/hooks/use-tool-state'
 import {
   DEFAULT_THEME,
@@ -165,7 +166,7 @@ export default function ShadcnThemeToolPage() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-[360px_1fr]">
+        <ToolWorkbench previewSide="right" controlsWidth="360px">
           {/* Controls */}
           <div className="space-y-5">
             <div className="space-y-3 rounded-lg border border-border bg-card p-5">
@@ -425,7 +426,7 @@ export default function ShadcnThemeToolPage() {
               </div>
             </div>
           </div>
-        </div>
+        </ToolWorkbench>
 
         {/* The other two ways out. */}
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">

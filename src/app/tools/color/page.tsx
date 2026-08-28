@@ -20,6 +20,7 @@ import { Label } from '@/components/ui/label'
 import { ToolLayout, copyWithToast } from '@/components/designer-tools/tool-layout'
 import { ToolPresetsBar } from '@/components/designer-tools/tool-presets-bar'
 import { UseInCatalog } from '@/components/designer-tools/use-in-catalog'
+import { ToolWorkbench } from '@/components/designer-tools/tool-workbench'
 import { useToolState } from '@/hooks/use-tool-state'
 import {
   brandFromHex,
@@ -174,7 +175,7 @@ export default function ColorToolPage() {
       tagline="hex · rgb · hsl · oklch, from any of them"
       icon={<Blend className="h-6 w-6" />}
     >
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_360px]">
+      <ToolWorkbench controlsWidth="360px">
         <div className="space-y-4">
           {/* Input */}
           <div className="rounded-lg border border-border bg-card p-5">
@@ -255,7 +256,7 @@ export default function ColorToolPage() {
               case for repainting the catalog in it. */}
           <UseInCatalog tool={TOOL} brand={brandFromHex(hex)} />
         </div>
-      </div>
+      </ToolWorkbench>
     </ToolLayout>
   )
 }

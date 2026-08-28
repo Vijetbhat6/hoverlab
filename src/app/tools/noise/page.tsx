@@ -32,6 +32,7 @@ import { CopyCssCard } from '@/components/designer-tools/copy-css-card'
 import { ToolLayout } from '@/components/designer-tools/tool-layout'
 import { ToolPresetsBar } from '@/components/designer-tools/tool-presets-bar'
 import { UseInCatalog } from '@/components/designer-tools/use-in-catalog'
+import { ToolWorkbench } from '@/components/designer-tools/tool-workbench'
 import { useToolState } from '@/hooks/use-tool-state'
 
 const TOOL = '/tools/noise'
@@ -131,7 +132,7 @@ export default function NoiseToolPage() {
       tagline="Film grain as an SVG data URI — one CSS rule, zero requests"
       icon={<Film className="h-5 w-5" />}
     >
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_360px]">
+      <ToolWorkbench controlsWidth="360px">
         {/* Preview: the same noise composited over the two surfaces it will
             actually land on. */}
         <div className="space-y-4">
@@ -271,7 +272,7 @@ export default function NoiseToolPage() {
               grain exists rather than in front of it. */}
           <ToolPresetsBar tool={tool} noun="grain" />
         </div>
-      </div>
+      </ToolWorkbench>
     </ToolLayout>
   )
 }

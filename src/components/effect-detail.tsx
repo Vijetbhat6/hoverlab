@@ -50,6 +50,7 @@ import {
 } from '@/lib/customize'
 import { AddToCollectionButton } from '@/components/collections/add-to-collection'
 import { cn } from '@/lib/utils'
+import { useHeaderHeight } from '@/hooks/use-header-height'
 import type { Effect } from '@/lib/effects'
 import type { EffectCategory } from '@/lib/effect-types'
 
@@ -115,6 +116,30 @@ interface EffectDetailProps {
 export function EffectDetail({ effect, similar, prev, next }: EffectDetailProps) {
   const surfaceDark = effect.darkSurface
   const previewRef = React.useRef<HTMLDivElement>(null)
+
+  /*
+    What the preview has to clear to stay pinned: the site header, then the
+    action bar that is already pinned under it.
+
+    Both were hardcoded as `top-16`, i.e. an assertion that the header is
+    64px. It is 65px from `md` up but 85px on a phone and 125px at 320px
+    wide, so the action bar spent every phone visit tucked behind the nav.
+    Measuring both means the stack composes at any width instead of two
+    guesses that happen to agree on a desktop.
+  */
+  const headerHeight = useHeaderHeight()
+  const actionBarRef = React.useRef<HTMLDivElement>(null)
+  const [actionBarHeight, setActionBarHeight] = React.useState(0)
+
+  React.useEffect(() => {
+    const bar = actionBarRef.current
+    if (!bar) return
+    const measure = () => setActionBarHeight(Math.round(bar.getBoundingClientRect().height))
+    measure()
+    const observer = new ResizeObserver(measure)
+    observer.observe(bar)
+    return () => observer.disconnect()
+  }, [])
   const { has, toggle } = useFavorites()
   const isFav = has(effect.id)
   const { has: hasBundle, toggle: toggleBundle } = useBundle()
@@ -434,7 +459,11 @@ export function EffectDetail({ effect, similar, prev, next }: EffectDetailProps)
             here: nothing in the app counts views or copies, and an
             invented number is worse than no number.
           */}
-          <div className="sticky top-16 z-30 -mx-4 border-b border-border/60 bg-background/85 px-4 py-2.5 backdrop-blur sm:-mx-6 sm:px-6 lg:mx-0 lg:rounded-xl lg:border lg:px-4">
+          <div
+            ref={actionBarRef}
+            style={{ top: headerHeight }}
+            className="sticky z-30 -mx-4 border-b border-border/60 bg-background/85 px-4 py-2.5 backdrop-blur sm:-mx-6 sm:px-6 lg:mx-0 lg:rounded-xl lg:border lg:px-4"
+          >
             <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
               <div className="min-w-0 flex-1">
                 <div className="truncate text-sm font-semibold tracking-tight">{effect.name}</div>
@@ -564,7 +593,16 @@ export function EffectDetail({ effect, similar, prev, next }: EffectDetailProps)
             </div>
           </div>
 
-          <Card className="overflow-hidden border-border/60 bg-card/80 backdrop-blur">
+          {/* No `overflow-hidden` here.
+
+            It clipped nothing — every child is inset by CardHeader /
+            CardContent padding, so nothing ever reached the rounded
+            corner it was guarding. What it did do is silently disable
+            `position: sticky` for the whole subtree, because a sticky
+            element resolves against its nearest clipping ancestor and
+            this was it. The pinned preview inside computed the right
+            offset and then never moved. */}
+          <Card className="border-border/60 bg-card/80 backdrop-blur">
             <CardHeader className="gap-2 pb-3">
               <div className="flex flex-wrap items-start justify-between gap-3">
                 <div className="min-w-0">
@@ -673,16 +711,32 @@ export function EffectDetail({ effect, similar, prev, next }: EffectDetailProps)
                 taller than its floor grows the box rather than being
                 cropped by it.
               */}
+              {/*
+                Pinned, because the Customize tab is directly below it.
+                Measured on the running app: at the last of the four
+                sliders the stage was 0% visible on both a 1440x900 desktop
+                and a 390x844 phone — the whole point of a hue slider is
+                watching the hue change, and you could not.
+
+                The wrapper carries an opaque background: the stage's own
+                is `bg-muted/30` or a per-effect gradient class, and the
+                page would otherwise scroll through it.
+              */}
               <div
-                ref={previewRef}
-                className={cn(
-                  'relative flex items-center justify-center overflow-hidden rounded-xl border border-border/50 p-8',
-                  stageMinHeight(effect.category),
-                  surfaceDark ? 'bg-slate-950' : effect.previewClass ?? 'bg-muted/30',
-                  isCustomized && 'ring-1 ring-primary/20',
-                )}
-                dangerouslySetInnerHTML={{ __html: effect.html }}
-              />
+                className="sticky z-10 rounded-xl bg-background"
+                style={{ top: headerHeight + actionBarHeight + 8 }}
+              >
+                <div
+                  ref={previewRef}
+                  className={cn(
+                    'relative flex items-center justify-center overflow-hidden rounded-xl border border-border/50 p-8',
+                    stageMinHeight(effect.category),
+                    surfaceDark ? 'bg-slate-950' : effect.previewClass ?? 'bg-muted/30',
+                    isCustomized && 'ring-1 ring-primary/20',
+                  )}
+                  dangerouslySetInnerHTML={{ __html: effect.html }}
+                />
+              </div>
               {/* Inject this effect's CSS into the document */}
               <style dangerouslySetInnerHTML={{ __html: customizedCss }} />
 

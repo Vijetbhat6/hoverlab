@@ -30,6 +30,7 @@ import { CopyCssCard } from '@/components/designer-tools/copy-css-card'
 import { ToolLayout } from '@/components/designer-tools/tool-layout'
 import { ToolPresetsBar } from '@/components/designer-tools/tool-presets-bar'
 import { UseInCatalog } from '@/components/designer-tools/use-in-catalog'
+import { ToolWorkbench } from '@/components/designer-tools/tool-workbench'
 import { useToolState } from '@/hooks/use-tool-state'
 import {
   hexToRgb,
@@ -307,7 +308,7 @@ export default function TokensToolPage() {
       tagline="Build the CSS variables every block in the catalog is styled against"
       icon={<Palette className="h-5 w-5" />}
     >
-      <div className="grid gap-6 lg:grid-cols-[320px_minmax(0,1fr)]">
+      <ToolWorkbench previewSide="right" controlsWidth="320px">
         {/* Controls */}
         <div className="space-y-6 rounded-2xl border border-border/60 bg-card/60 p-5">
           <div>
@@ -524,7 +525,7 @@ export default function TokensToolPage() {
             brand={{ hue: state.hue, chroma: state.chroma }}
           />
         </div>
-      </div>
+      </ToolWorkbench>
     </ToolLayout>
   )
 }

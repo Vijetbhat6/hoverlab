@@ -29,6 +29,7 @@ import {
   type Preset,
 } from '@/lib/customize'
 import { cn } from '@/lib/utils'
+import { useHeaderHeight } from '@/hooks/use-header-height'
 
 /* ============================================================
  *  Starter sample — what users see on first load.
@@ -92,6 +93,9 @@ function saveState(state: PersistedState) {
 }
 
 export default function PlaygroundPage() {
+  // What the pinned preview parks under. Not a constant — see the hook.
+  const headerHeight = useHeaderHeight()
+
   // Initialize from localStorage (if the user has been here before),
   // else fall back to the sample.
   const [html, setHtml] = React.useState<string>(SAMPLE_HTML)
@@ -155,7 +159,16 @@ export default function PlaygroundPage() {
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_320px]">
           {/* Main column: editor + preview */}
           <div className="space-y-4">
-            <Card className="overflow-hidden border-border/60 bg-card/80 backdrop-blur">
+            {/* No `overflow-hidden` here.
+
+              It clipped nothing — every child is inset by CardHeader /
+              CardContent padding, so nothing ever reached the rounded
+              corner it was guarding. What it did do is silently disable
+              `position: sticky` for the whole subtree, because a sticky
+              element resolves against its nearest clipping ancestor and
+              this was it. The pinned preview inside computed the right
+              offset and then never moved. */}
+            <Card className="border-border/60 bg-card/80 backdrop-blur">
               <CardHeader className="gap-2 pb-3">
                 <div className="flex flex-wrap items-start justify-between gap-3">
                   <div>
@@ -191,10 +204,26 @@ export default function PlaygroundPage() {
               </CardHeader>
 
               <CardContent className="space-y-4 pt-0">
-                {/* Live preview (always visible) */}
+                {/*
+                  Live preview, pinned.
+
+                  "Always visible" was the intent and the comment, but it
+                  was only ever true of the first screen: the editor, the
+                  transformed-CSS card and the sliders in the sidebar all
+                  live below it, so every one of them was something you
+                  operated with the preview off the top of the screen. The
+                  sidebar was already sticky, which meant the controls
+                  stayed and the thing they control left — exactly the
+                  wrong half pinned.
+
+                  It parks under the real header rather than a guessed
+                  64px, because the header wraps to 85px on a phone and
+                  125px at 320px wide.
+                */}
                 <div
+                  style={{ top: headerHeight + 8 }}
                   className={cn(
-                    'relative flex min-h-[280px] items-center justify-center overflow-hidden rounded-xl border border-border/50 bg-muted/30 p-8',
+                    'sticky z-10 flex min-h-[280px] items-center justify-center overflow-hidden rounded-xl border border-border/50 bg-card p-8',
                     isCustomized && 'ring-1 ring-primary/20',
                   )}
                 >

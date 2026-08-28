@@ -21,6 +21,7 @@ import { ToolLayout } from '@/components/designer-tools/tool-layout'
 import { readSharedState, ShareLinkButton } from '@/components/designer-tools/share-link'
 import { ToolPresetsBar } from '@/components/designer-tools/tool-presets-bar'
 import { UseInCatalog } from '@/components/designer-tools/use-in-catalog'
+import { ToolWorkbench } from '@/components/designer-tools/tool-workbench'
 import { useToolState } from '@/hooks/use-tool-state'
 import { brandFromHex, normalizeHex, randomHex } from '@/lib/color-tools'
 import { cn } from '@/lib/utils'
@@ -171,7 +172,7 @@ export default function GradientToolPage() {
       tagline="Visually compose multi-stop gradients"
       icon={<Pipette className="h-5 w-5" />}
     >
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_380px]">
+      <ToolWorkbench controlsWidth="380px">
         {/* Preview + stop track */}
         <div className="space-y-4">
           <div
@@ -326,7 +327,7 @@ export default function GradientToolPage() {
               and it is the only single hue a multi-stop blend can offer. */}
           <UseInCatalog tool={TOOL} brand={brandFromHex(sortedStops[0]?.color ?? '')} />
         </div>
-      </div>
+      </ToolWorkbench>
     </ToolLayout>
   )
 }

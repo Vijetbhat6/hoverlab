@@ -28,6 +28,7 @@ import { CopyCssCard } from '@/components/designer-tools/copy-css-card'
 import { ToolLayout } from '@/components/designer-tools/tool-layout'
 import { ToolPresetsBar } from '@/components/designer-tools/tool-presets-bar'
 import { UseInCatalog } from '@/components/designer-tools/use-in-catalog'
+import { ToolWorkbench } from '@/components/designer-tools/tool-workbench'
 import { useToolState } from '@/hooks/use-tool-state'
 import { cn } from '@/lib/utils'
 
@@ -146,7 +147,7 @@ export default function MetaToolPage() {
       tagline="The tags that get you indexed, and the card your link turns into"
       icon={<Search className="h-5 w-5" />}
     >
-      <div className="grid gap-6 lg:grid-cols-[minmax(0,380px)_minmax(0,1fr)]">
+      <ToolWorkbench previewSide="right" controlsWidth="380px">
         {/* Form */}
         <div className="space-y-4 rounded-2xl border border-border/60 bg-card/60 p-5">
           <div>
@@ -241,7 +242,7 @@ export default function MetaToolPage() {
               colour rather than a stated identity. */}
           <UseInCatalog tool={TOOL} />
         </div>
-      </div>
+      </ToolWorkbench>
     </ToolLayout>
   )
 }

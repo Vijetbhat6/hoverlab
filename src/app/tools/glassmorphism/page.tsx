@@ -20,6 +20,7 @@ import { CopyCssCard } from '@/components/designer-tools/copy-css-card'
 import { ToolLayout } from '@/components/designer-tools/tool-layout'
 import { ToolPresetsBar } from '@/components/designer-tools/tool-presets-bar'
 import { UseInCatalog } from '@/components/designer-tools/use-in-catalog'
+import { ToolWorkbench } from '@/components/designer-tools/tool-workbench'
 import { useToolState } from '@/hooks/use-tool-state'
 import { brandFromHex, randomHex } from '@/lib/color-tools'
 import { cn } from '@/lib/utils'
@@ -188,7 +189,7 @@ export default function GlassmorphismToolPage() {
       tagline="Frosted-glass cards with backdrop-blur"
       icon={<Wine className="h-5 w-5" />}
     >
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_360px]">
+      <ToolWorkbench controlsWidth="360px">
         {/* Preview */}
         <div className="space-y-4">
           <div
@@ -441,7 +442,7 @@ export default function GlassmorphismToolPage() {
               panel exists rather than in front of it. */}
           <ToolPresetsBar tool={tool} noun="glass style" />
         </div>
-      </div>
+      </ToolWorkbench>
     </ToolLayout>
   )
 }

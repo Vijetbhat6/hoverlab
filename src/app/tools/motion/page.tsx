@@ -49,6 +49,7 @@ import {
   type MotionPreset,
 } from '@/lib/motion-presets'
 import { cn } from '@/lib/utils'
+import { ToolWorkbench } from '@/components/designer-tools/tool-workbench'
 
 /** Duration · easing · iterations, for the line under the name. */
 function summarise(preset: MotionPreset): string {
@@ -88,7 +89,7 @@ export default function MotionToolPage() {
         .demo-still, .demo-still * { animation: none !important; }
       `}</style>
 
-      <div className="grid gap-6 lg:grid-cols-[280px_minmax(0,1fr)]">
+      <ToolWorkbench previewSide="right" controlsWidth="280px">
         <div className="space-y-5 rounded-2xl border border-border/60 bg-card/60 p-4">
           {MOTION_GROUPS.map((group) => (
             <div key={group}>
@@ -229,7 +230,7 @@ export default function MotionToolPage() {
           */}
           <UseInCatalog tool="/tools/motion" />
         </div>
-      </div>
+      </ToolWorkbench>
     </ToolLayout>
   )
 }

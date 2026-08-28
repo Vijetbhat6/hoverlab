@@ -21,6 +21,7 @@ import { CopyCssCard } from '@/components/designer-tools/copy-css-card'
 import { ToolLayout } from '@/components/designer-tools/tool-layout'
 import { ToolPresetsBar } from '@/components/designer-tools/tool-presets-bar'
 import { UseInCatalog } from '@/components/designer-tools/use-in-catalog'
+import { ToolWorkbench } from '@/components/designer-tools/tool-workbench'
 import { useToolState } from '@/hooks/use-tool-state'
 import { cn } from '@/lib/utils'
 
@@ -140,7 +141,7 @@ export default function SpacingToolPage() {
       tagline="Linear or modular spacing tokens in px or rem"
       icon={<StretchHorizontal className="h-5 w-5" />}
     >
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-[380px_1fr]">
+      <ToolWorkbench previewSide="right" controlsWidth="380px">
         {/* Controls */}
         <div className="space-y-5">
           <div className="rounded-lg border border-border bg-card p-5">
@@ -295,7 +296,7 @@ export default function SpacingToolPage() {
               offering to repaint the catalog from one would do nothing. */}
           <UseInCatalog tool={TOOL} />
         </div>
-      </div>
+      </ToolWorkbench>
     </ToolLayout>
   )
 }

@@ -27,6 +27,7 @@ import { ToolLayout } from '@/components/designer-tools/tool-layout'
 import { readSharedState, ShareLinkButton } from '@/components/designer-tools/share-link'
 import { ToolPresetsBar } from '@/components/designer-tools/tool-presets-bar'
 import { UseInCatalog } from '@/components/designer-tools/use-in-catalog'
+import { ToolWorkbench } from '@/components/designer-tools/tool-workbench'
 import { useToolState } from '@/hooks/use-tool-state'
 import { cn } from '@/lib/utils'
 
@@ -487,7 +488,7 @@ export default function ClipPathToolPage() {
       tagline="Polygon shape presets & organic blobs"
       icon={<Shapes className="h-5 w-5" />}
     >
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_380px]">
+      <ToolWorkbench controlsWidth="380px">
         {/* Preview */}
         <div className="space-y-4">
           <div
@@ -687,7 +688,7 @@ export default function ClipPathToolPage() {
               shape exists rather than in front of it. */}
           <ToolPresetsBar tool={tool} noun="shape" />
         </div>
-      </div>
+      </ToolWorkbench>
     </ToolLayout>
   )
 }

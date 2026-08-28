@@ -35,6 +35,7 @@ import { CopyCssCard } from '@/components/designer-tools/copy-css-card'
 import { ToolLayout } from '@/components/designer-tools/tool-layout'
 import { ToolPresetsBar } from '@/components/designer-tools/tool-presets-bar'
 import { UseInCatalog } from '@/components/designer-tools/use-in-catalog'
+import { ToolWorkbench } from '@/components/designer-tools/tool-workbench'
 import { useToolState } from '@/hooks/use-tool-state'
 import { cn } from '@/lib/utils'
 
@@ -171,7 +172,7 @@ export default function TransformToolPage() {
       tagline="rotateX, rotateY and the three parent properties that have to agree before any of it looks right"
       icon={<Box className="h-5 w-5" />}
     >
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_380px]">
+      <ToolWorkbench controlsWidth="380px">
         <div className="space-y-4">
           {/* The scene. The dashed frame is the parent that carries the
               perspective — without seeing it, "on the parent" is just a
@@ -427,7 +428,7 @@ export default function TransformToolPage() {
 
           <ToolPresetsBar tool={tool} noun="transform" />
         </div>
-      </div>
+      </ToolWorkbench>
     </ToolLayout>
   )
 }

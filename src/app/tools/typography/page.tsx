@@ -22,6 +22,7 @@ import { CopyCssCard } from '@/components/designer-tools/copy-css-card'
 import { ToolLayout } from '@/components/designer-tools/tool-layout'
 import { ToolPresetsBar } from '@/components/designer-tools/tool-presets-bar'
 import { UseInCatalog } from '@/components/designer-tools/use-in-catalog'
+import { ToolWorkbench } from '@/components/designer-tools/tool-workbench'
 import { useToolState } from '@/hooks/use-tool-state'
 import { FONT_PAIRINGS, buildNextFont } from '@/lib/font-pairings'
 import { cn } from '@/lib/utils'
@@ -157,7 +158,7 @@ p + p { margin-top: var(--spacing-paragraph); }`
       tagline="Font pairing + modular type scale"
       icon={<Type className="h-5 w-5" />}
     >
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-[380px_1fr]">
+      <ToolWorkbench previewSide="right" controlsWidth="380px">
         {/* Controls */}
         <div className="space-y-5">
           {/* Font pairing */}
@@ -423,7 +424,7 @@ p + p { margin-top: var(--spacing-paragraph); }`
           {/* No `brand`: a type scale carries no hue either. */}
           <UseInCatalog tool={TOOL} />
         </div>
-      </div>
+      </ToolWorkbench>
     </ToolLayout>
   )
 }

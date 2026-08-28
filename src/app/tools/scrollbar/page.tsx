@@ -43,6 +43,7 @@ import { CopyCssCard } from '@/components/designer-tools/copy-css-card'
 import { ToolLayout } from '@/components/designer-tools/tool-layout'
 import { ToolPresetsBar } from '@/components/designer-tools/tool-presets-bar'
 import { UseInCatalog } from '@/components/designer-tools/use-in-catalog'
+import { ToolWorkbench } from '@/components/designer-tools/tool-workbench'
 import { useToolState } from '@/hooks/use-tool-state'
 import { cn } from '@/lib/utils'
 
@@ -193,7 +194,7 @@ ${sel}:focus-within::-webkit-scrollbar-thumb {
       tagline="Both mechanisms from one set of controls — the standard properties and the WebKit pseudo-elements, in the order that makes them agree"
       icon={<Rows3 className="h-5 w-5" />}
     >
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_380px]">
+      <ToolWorkbench controlsWidth="380px">
         <div className="space-y-4">
           <style>{previewCss}</style>
 
@@ -392,7 +393,7 @@ ${sel}:focus-within::-webkit-scrollbar-thumb {
 
           <ToolPresetsBar tool={tool} noun="scrollbar" />
         </div>
-      </div>
+      </ToolWorkbench>
     </ToolLayout>
   )
 }

@@ -27,6 +27,7 @@ import { CopyCssCard } from '@/components/designer-tools/copy-css-card'
 import { ToolLayout } from '@/components/designer-tools/tool-layout'
 import { ToolPresetsBar } from '@/components/designer-tools/tool-presets-bar'
 import { UseInCatalog } from '@/components/designer-tools/use-in-catalog'
+import { ToolWorkbench } from '@/components/designer-tools/tool-workbench'
 import { useToolState } from '@/hooks/use-tool-state'
 import { brandFromHex } from '@/lib/color-tools'
 import { cn } from '@/lib/utils'
@@ -252,7 +253,7 @@ export default function EmailToolPage() {
       tagline="The four transactional emails every product sends, in HTML that survives Outlook"
       icon={<Mail className="h-5 w-5" />}
     >
-      <div className="grid gap-6 lg:grid-cols-[280px_minmax(0,1fr)]">
+      <ToolWorkbench previewSide="right" controlsWidth="280px">
         <div className="space-y-5">
           <ul className="space-y-1.5 rounded-2xl border border-border/60 bg-card/60 p-4">
             {TEMPLATES.map((t) => (
@@ -338,7 +339,7 @@ export default function EmailToolPage() {
           {/* The button colour is the one brand value in an email. */}
           <UseInCatalog tool={TOOL} brand={brandFromHex(state.accent)} />
         </div>
-      </div>
+      </ToolWorkbench>
     </ToolLayout>
   )
 }

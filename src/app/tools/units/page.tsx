@@ -16,6 +16,7 @@ import { Label } from '@/components/ui/label'
 import { ToolLayout } from '@/components/designer-tools/tool-layout'
 import { ToolPresetsBar } from '@/components/designer-tools/tool-presets-bar'
 import { UseInCatalog } from '@/components/designer-tools/use-in-catalog'
+import { ToolWorkbench } from '@/components/designer-tools/tool-workbench'
 import { useToolState } from '@/hooks/use-tool-state'
 
 const TOOL = '/tools/units'
@@ -131,7 +132,7 @@ export default function UnitsToolPage() {
       tagline="px · rem · em · % · vw · vh"
       icon={<Ruler className="h-5 w-5" />}
     >
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_360px]">
+      <ToolWorkbench controlsWidth="360px">
         {/* Converter */}
         <div className="space-y-4">
           {/* Input row */}
@@ -250,7 +251,7 @@ export default function UnitsToolPage() {
           {/* No `brand`: a unit conversion carries no hue. */}
           <UseInCatalog tool={TOOL} />
         </div>
-      </div>
+      </ToolWorkbench>
     </ToolLayout>
   )
 }

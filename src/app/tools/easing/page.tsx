@@ -21,6 +21,7 @@ import { ToolLayout } from '@/components/designer-tools/tool-layout'
 import { readSharedState, ShareLinkButton } from '@/components/designer-tools/share-link'
 import { ToolPresetsBar } from '@/components/designer-tools/tool-presets-bar'
 import { UseInCatalog } from '@/components/designer-tools/use-in-catalog'
+import { ToolWorkbench } from '@/components/designer-tools/tool-workbench'
 import { useToolState } from '@/hooks/use-tool-state'
 import { cn } from '@/lib/utils'
 
@@ -243,7 +244,7 @@ export default function EasingToolPage() {
       tagline="cubic-bezier visual editor"
       icon={<Activity className="h-5 w-5" />}
     >
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_360px]">
+      <ToolWorkbench controlsWidth="360px">
         {/* Left: curve editor + preview */}
         <div className="space-y-4">
           {/* Curve canvas */}
@@ -514,7 +515,7 @@ export default function EasingToolPage() {
               curve exists rather than in front of it. */}
           <ToolPresetsBar tool={tool} noun="curve" />
         </div>
-      </div>
+      </ToolWorkbench>
     </ToolLayout>
   )
 }

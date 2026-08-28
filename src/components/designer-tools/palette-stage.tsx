@@ -38,6 +38,7 @@ import { CopyCssCard } from '@/components/designer-tools/copy-css-card'
 import { ToolLayout } from '@/components/designer-tools/tool-layout'
 import { ToolPresetsBar } from '@/components/designer-tools/tool-presets-bar'
 import { UseInCatalog } from '@/components/designer-tools/use-in-catalog'
+import { ToolWorkbench } from '@/components/designer-tools/tool-workbench'
 import { useToolState } from '@/hooks/use-tool-state'
 import { brandFromHex, normalizeHex } from '@/lib/color-tools'
 import {
@@ -111,7 +112,7 @@ export function PaletteStage({ samples }: { samples: PaletteSample[] }) {
       tagline="Four colours, applied to real components — a nav bar, a hero, a pricing table, a dashboard — repainted as you drag, in both schemes, with the contrast of every pair that carries text checked while you work"
       icon={<Brush className="h-5 w-5" />}
     >
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_380px]">
+      <ToolWorkbench controlsWidth="380px">
         <div className="min-w-0 space-y-4">
           {/* Which surface, and which scheme. */}
           <div className="flex flex-wrap items-center gap-2">
@@ -388,7 +389,7 @@ export function PaletteStage({ samples }: { samples: PaletteSample[] }) {
 
           <ToolPresetsBar tool={tool} noun="palette" />
         </div>
-      </div>
+      </ToolWorkbench>
     </ToolLayout>
   )
 }

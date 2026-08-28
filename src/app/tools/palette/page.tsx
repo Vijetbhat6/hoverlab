@@ -23,6 +23,7 @@ import { ToolPresetsBar } from '@/components/designer-tools/tool-presets-bar'
 import { UseInCatalog } from '@/components/designer-tools/use-in-catalog'
 import { useToolState } from '@/hooks/use-tool-state'
 import { readSharedState, ShareLinkButton } from '@/components/designer-tools/share-link'
+import { ToolWorkbench } from '@/components/designer-tools/tool-workbench'
 import {
   generatePalette,
   hexToHsl,
@@ -136,7 +137,7 @@ export default function PaletteToolPage() {
       tagline="5-color palettes from any base color"
       icon={<Palette className="h-5 w-5" />}
     >
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-[380px_1fr]">
+      <ToolWorkbench previewSide="right" controlsWidth="380px">
         {/* Controls */}
         <div className="space-y-6">
           <div className="rounded-lg border border-border bg-card p-5">
@@ -270,7 +271,7 @@ export default function PaletteToolPage() {
             </div>
           </div>
         </div>
-      </div>
+      </ToolWorkbench>
     </ToolLayout>
   )
 }
