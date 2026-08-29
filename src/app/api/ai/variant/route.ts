@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import ZAI from 'z-ai-web-dev-sdk'
+import { complete, isAiConfigured } from '@/lib/ai/claude'
 import { getSession } from '@/lib/session'
 import { getEntitlements, FREE_ENTITLEMENTS } from '@/lib/billing/entitlements'
 import {
@@ -147,6 +147,19 @@ export const POST = withJsonErrors('api/ai/variant', async (request: Request) =>
     )
   }
 
+  /*
+   * Refuse before charging, not after. The catch below refunds, so a
+   * missing key was survivable — but it made every request a spend and a
+   * refund against a model that was never going to answer, and reported it
+   * as a temporary outage. This says the true thing instead.
+   */
+  if (!isAiConfigured()) {
+    return NextResponse.json(
+      { error: 'Generation is not configured on this deployment.' },
+      { status: 503 },
+    )
+  }
+
   const ent = session ? await getEntitlements(session.uid) : FREE_ENTITLEMENTS
   /*
    * The cost is resolved from the mode, so a new mode cannot be added
@@ -210,16 +223,18 @@ export const POST = withJsonErrors('api/ai/variant', async (request: Request) =>
           }\n\nHTML:\n${html || '(none supplied)'}\n\nCSS:\n${css}`
 
   try {
-    const zai = await ZAI.create()
-    const completion = await zai.chat.completions.create({
-      messages: [
-        { role: 'system', content: SYSTEM_PROMPT },
-        { role: 'user', content: userPrompt },
-      ],
-      thinking: { type: 'disabled' },
+    // Middle effort. A recolour or an edit is a constrained rewrite of
+    // something that already works — the structure is given, and the job is
+    // to respect it. That is meaningfully harder than ranking and
+    // meaningfully easier than composing from a sentence.
+    const raw = await complete({
+      system: SYSTEM_PROMPT,
+      user: userPrompt,
+      maxTokens: 16000,
+      effort: 'medium',
     })
 
-    const variant = parseVariant(completion.choices[0]?.message?.content ?? '')
+    const variant = parseVariant(raw)
     if (!variant) {
       // Unusable output is our failure, not the user's spend.
       await refundCredits(session.uid, spend.source, cost)

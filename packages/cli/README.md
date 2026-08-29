@@ -1,6 +1,6 @@
 # hoverlab
 
-Install UI from the [Hoverlab](https://hoverlab.dev) catalog straight into your project — and expose the catalog to your editor's AI agent over MCP.
+Install UI from the [Hoverlab](https://hoverlab-xak9.vercel.app) catalog straight into your project — and expose the catalog to your editor's AI agent over MCP.
 
 ```bash
 npx hoverlab search checkout          # every tier at once
@@ -211,7 +211,7 @@ The effect-only helpers (`searchEffects`, `getEffect`, `writeEffectFiles`) are s
 
 | Variable | Purpose |
 | --- | --- |
-| `HOVERLAB_API_URL` | Point at a different deployment (default `https://hoverlab.dev`) |
+| `HOVERLAB_API_URL` | Point at a different deployment (default `https://hoverlab-xak9.vercel.app`) |
 | `NO_COLOR` | Disable coloured output |
 
 ## Requirements

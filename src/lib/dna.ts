@@ -4,6 +4,7 @@ import { getBlockMeta } from './blocks/block-index'
 import { getPageMeta } from './pages/page-index'
 import { getTemplateMeta } from './templates/template-index'
 import { getEffect } from './effects'
+import { siteUrl } from './site'
 
 /**
  * Design DNA — the design system as something an AI tool can read.
@@ -56,7 +57,19 @@ export interface DnaDocument {
   }
 }
 
-const DEFAULT_ORIGIN = 'https://hoverlab.dev'
+/**
+ * Where a DNA document points when the caller names no origin.
+ *
+ * Was the literal `https://hoverlab.dev`, a domain that does not resolve —
+ * so an unattributed document handed an agent a set of install commands and
+ * fetch URLs aimed at nothing. `siteUrl` is the same value the sitemap and
+ * every canonical tag use, and it falls back to the deployment's own
+ * hostname rather than to a name someone hopes to own later.
+ *
+ * Both callers pass `origin` explicitly today. This is the value that gets
+ * used the day one of them forgets.
+ */
+const DEFAULT_ORIGIN = siteUrl
 
 /** Resolve whatever the caller passed for `brand` into a colour, or null. */
 function resolveBrand(brand: DnaOptions['brand']): (BrandColor & { id: string | null }) | null {

@@ -187,7 +187,9 @@ const terms = await request('/terms')
 record(
   'legal pages name a real operator',
   typeof terms.body === 'string' && !terms.body.includes('TO BE SET'),
-  'edit OPERATOR in src/lib/legal.ts — name, address, jurisdiction, contact email',
+  'set OPERATOR_LEGAL_NAME, OPERATOR_ADDRESS, OPERATOR_JURISDICTION and ' +
+    'OPERATOR_CONTACT_EMAIL in the deployment environment, then redeploy — ' +
+    'they are read at build time, so a running site will not pick them up',
 )
 
 // The catalog is meant to be public (see proxy.ts). A redirect here means

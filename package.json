@@ -25,6 +25,7 @@
     "check:paths": "tsx scripts/check-paths.mts",
     "check:focus": "tsx scripts/check-catalog-focus.mts",
     "check:counts": "tsx scripts/check-claimed-counts.mts",
+    "check:workbench": "tsx scripts/check-workbench.mts",
     "check:ids": "tsx scripts/check-duplicate-ids.mts",
     "build:skills": "tsx scripts/build-skills.mts",
     "build:dna": "tsx scripts/build-dna.mts",
@@ -34,6 +35,7 @@
     "submit:registry": "tsx scripts/submit-registry.mts"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.122.0",
     "@dnd-kit/core": "^6.3.1",
     "@dnd-kit/sortable": "^10.0.0",
     "@dnd-kit/utilities": "^3.2.2",
@@ -101,7 +103,6 @@
     "tailwindcss-animate": "^1.0.7",
     "uuid": "^11.1.1",
     "vaul": "^1.1.2",
-    "z-ai-web-dev-sdk": "^0.0.18",
     "zod": "^4.0.2",
     "zustand": "^5.0.6"
   },

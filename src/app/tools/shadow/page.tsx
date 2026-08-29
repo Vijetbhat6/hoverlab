@@ -45,7 +45,6 @@ import { ToolLayout } from '@/components/designer-tools/tool-layout'
 import { readSharedState, ShareLinkButton } from '@/components/designer-tools/share-link'
 import { ToolPresetsBar } from '@/components/designer-tools/tool-presets-bar'
 import { UseInCatalog } from '@/components/designer-tools/use-in-catalog'
-import { ToolWorkbench } from '@/components/designer-tools/tool-workbench'
 import { useToolState } from '@/hooks/use-tool-state'
 import { normalizeHex, hexToRgb } from '@/lib/color-tools'
 import {
@@ -56,6 +55,7 @@ import {
   type ShadowPreset,
 } from '@/lib/shadow-presets'
 import { cn } from '@/lib/utils'
+import { ToolWorkbench } from '@/components/designer-tools/tool-workbench'
 
 interface ShadowLayer {
   id: string

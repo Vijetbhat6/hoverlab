@@ -254,6 +254,46 @@ export function checkEnv(
     })
   }
 
+  // --- OPERATOR_* ----------------------------------------------------------
+  // Who the customer is contracting with. src/lib/legal.ts falls back to
+  // detectable placeholders, so an unset variable produces a Terms page
+  // naming "TO BE SET" rather than an empty one — visible, but only to
+  // someone who reads the deployed page.
+  //
+  // Warned, not enforced. A required check here would fail the next build of
+  // a site that is already live and serving, turning a paperwork gap into an
+  // outage. The hard gate belongs one step later: check-deploy.mjs asks the
+  // running deployment the same question and FAILS on it, which is the point
+  // at which taking money is actually imminent.
+  const operatorKeys = [
+    ['OPERATOR_LEGAL_NAME', 'the registered company or sole-trader name'],
+    ['OPERATOR_ADDRESS', 'the registered address'],
+    ['OPERATOR_JURISDICTION', 'the governing law and courts'],
+    ['OPERATOR_CONTACT_EMAIL', 'where legal and privacy notices are received'],
+  ] as const
+
+  const operatorMissing = operatorKeys.filter(([key]) => !has(key))
+
+  if (operatorMissing.length) {
+    checks.push({
+      key: 'OPERATOR_*',
+      status: 'missing',
+      level: 'recommended',
+      message:
+        `${operatorMissing.length} of ${operatorKeys.length} unset ` +
+        `(${operatorMissing.map(([key]) => key).join(', ')}) — Terms, Privacy, ` +
+        'Refunds and the Licence will name "TO BE SET" instead of a real ' +
+        'operator, which a payment processor rejects on review.',
+    })
+  } else {
+    checks.push({
+      key: 'OPERATOR_*',
+      status: 'ok',
+      level: 'recommended',
+      message: 'All four operator details set.',
+    })
+  }
+
   return checks
 }
 

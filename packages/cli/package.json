@@ -20,7 +20,7 @@
     "mcp",
     "model-context-protocol"
   ],
-  "homepage": "https://hoverlab.dev",
+  "homepage": "https://hoverlab-xak9.vercel.app",
   "license": "MIT",
   "type": "module",
   "bin": {

@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import ZAI from 'z-ai-web-dev-sdk'
+import { complete, isAiConfigured } from '@/lib/ai/claude'
 import { resolveRequestSubject } from '@/lib/billing/request-subject'
 import { consumeQuota, refundQuota, METERS } from '@/lib/billing/quota'
 
@@ -70,6 +70,23 @@ export async function POST(request: Request) {
   }
   if (candidatesRaw.length === 0) {
     return NextResponse.json({ ids: [] })
+  }
+
+  /*
+   * No key, no search — and crucially, no charge. Checked before the meter
+   * rather than caught after it, because a deployment without a key would
+   * otherwise burn a user's daily allowance on a call that cannot happen.
+   *
+   * `ids: []` so the client falls back to substring search, which is what
+   * it does for every other failure here. A visitor gets ordinary search
+   * instead of an error, which is the correct outcome when the semantic
+   * layer is simply not switched on.
+   */
+  if (!isAiConfigured()) {
+    return NextResponse.json(
+      { ids: [], error: 'AI search is not configured' },
+      { status: 503, headers: { 'Cache-Control': 'private, no-store' } },
+    )
   }
 
   /*
@@ -156,20 +173,17 @@ ${catalog}
 Return the ranked JSON now.`
 
   try {
-    const zai = await ZAI.create()
-    const completion = await zai.chat.completions.create({
-      messages: [
-        // `system`, not `assistant`. Sent as `assistant` these instructions
-        // read as a turn the model already took rather than as its brief, so
-        // the "return ONLY JSON" contract below was advisory at best — which
-        // is what `parseIdsResponse` was left compensating for.
-        { role: 'system', content: systemPrompt },
-        { role: 'user', content: userPrompt },
-      ],
-      thinking: { type: 'disabled' },
+    // Lowest effort of the three AI routes, and the only one where latency
+    // is felt directly — someone is watching a search box. Ranking twenty
+    // ids out of eighty is the kind of work that does not improve with more
+    // deliberation, so paying for more would buy a slower search.
+    const raw = await complete({
+      system: systemPrompt,
+      user: userPrompt,
+      maxTokens: 8000,
+      effort: 'low',
     })
 
-    const raw = completion.choices[0]?.message?.content ?? ''
     const ids = parseIdsResponse(raw, candidates)
 
     return NextResponse.json({ ids })

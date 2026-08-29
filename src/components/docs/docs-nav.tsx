@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
 import { cn } from '@/lib/utils'
+import { useHeaderHeight } from '@/hooks/use-header-height'
 
 /**
  * The docs sidebar.
@@ -30,10 +31,19 @@ const SECTIONS: Array<{ href: string; label: string; blurb: string }> = [
 export function DocsNav() {
   const pathname = usePathname() ?? ''
 
+  /*
+    `top-16` asserted the header is 64px. It is 65 from `md` up, but its
+    nav wraps to a second row on a phone — 85px at 360-430 wide, 125px at
+    320 — so on exactly the widths where this bar is the mobile navigation,
+    it sat behind the site nav instead of below it.
+  */
+  const headerHeight = useHeaderHeight()
+
   return (
     <nav
       aria-label="Documentation"
-      className="sticky top-16 z-30 -mx-4 border-b border-border/60 bg-background/80 px-4 py-3 backdrop-blur lg:mx-0 lg:h-fit lg:border-b-0 lg:bg-transparent lg:px-0 lg:py-14 lg:backdrop-blur-none"
+      style={{ top: headerHeight }}
+      className="sticky z-30 -mx-4 border-b border-border/60 bg-background/80 px-4 py-3 backdrop-blur lg:mx-0 lg:h-fit lg:border-b-0 lg:bg-transparent lg:px-0 lg:py-14 lg:backdrop-blur-none"
     >
       <p className="mb-2 hidden text-xs font-semibold uppercase tracking-wider text-muted-foreground lg:block">
         Documentation

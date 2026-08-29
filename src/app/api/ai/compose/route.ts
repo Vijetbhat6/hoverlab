@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import ZAI from 'z-ai-web-dev-sdk'
+import { complete, isAiConfigured } from '@/lib/ai/claude'
 import { getSession } from '@/lib/session'
 import { getEntitlements, FREE_ENTITLEMENTS } from '@/lib/billing/entitlements'
 import {
@@ -167,6 +167,18 @@ export const POST = withJsonErrors('api/ai/compose', async (request: Request) =>
   // a reasonable thing to build inside.
   const brand = coerceBrandColor(body.brand) ?? DEFAULT_BRAND_COLOR
 
+  /*
+   * Refuse before charging. Three credits is the largest single spend in
+   * the app, and spending then refunding it against a model that cannot be
+   * reached is the worst version of this failure.
+   */
+  if (!isAiConfigured()) {
+    return NextResponse.json(
+      { error: 'Composing is not configured on this deployment.' },
+      { status: 503 },
+    )
+  }
+
   const ent = await getEntitlements(session.uid).catch(() => FREE_ENTITLEMENTS)
   const cost = costOf('compose')
   const spend = await spendCredits(session.uid, ent, cost)
@@ -195,16 +207,19 @@ export const POST = withJsonErrors('api/ai/compose', async (request: Request) =>
     `Brief: ${brief}`
 
   try {
-    const zai = await ZAI.create()
-    const completion = await zai.chat.completions.create({
-      messages: [
-        { role: 'system', content: SYSTEM_PROMPT },
-        { role: 'user', content: userPrompt },
-      ],
-      thinking: { type: 'disabled' },
+    // The most effort of the three, and the only route that earns it. A
+    // compose starts from a sentence and has to satisfy every rule in the
+    // system prompt at once — tokens only, both themes, responsive to
+    // 360px, semantic markup, reduced-motion. It also costs three credits,
+    // so the budget is there to spend.
+    const raw = await complete({
+      system: SYSTEM_PROMPT,
+      user: userPrompt,
+      maxTokens: 16000,
+      effort: 'high',
     })
 
-    const section = parseSection(completion.choices[0]?.message?.content ?? '')
+    const section = parseSection(raw)
     if (!section) {
       // Unusable output is our failure, not the user's spend.
       await refundCredits(session.uid, spend.source, cost)

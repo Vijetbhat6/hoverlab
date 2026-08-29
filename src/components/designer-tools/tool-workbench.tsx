@@ -109,7 +109,19 @@ export function ToolWorkbench({
       >
         {previewSide === 'right' ? <div className="min-w-0">{controls}</div> : null}
         <div
-          className="min-w-0 lg:sticky lg:top-20 lg:max-h-[calc(100dvh-6rem)] lg:self-start lg:overflow-y-auto lg:overscroll-contain"
+          className={cn(
+            'min-w-0 lg:sticky lg:top-20 lg:max-h-[calc(100dvh-6rem)] lg:self-start lg:overflow-y-auto lg:overscroll-contain',
+            // Stacked, the preview goes first whichever column it is in.
+            //
+            // The controls-first tools used to stack controls-first too,
+            // which put the output below a wall of sliders — you scrolled
+            // down to see what you had made. The strip cannot cover that
+            // case: at the top of the page the rail has not reached its
+            // pin point, so drawing it there floats a card over the first
+            // controls rather than under the header. Showing the preview
+            // first is the fix the strip was standing in for.
+            previewSide === 'right' && 'order-first lg:order-none',
+          )}
         >
           {markedPreview}
         </div>
@@ -176,10 +188,29 @@ function markStage(column: React.ReactNode): React.ReactNode {
   const index = stageIndex(items)
   if (index === -1) return column
 
-  const marked = React.cloneElement(
-    items[index] as React.ReactElement<Record<string, unknown>>,
-    { [STAGE_ATTR]: '' },
-  )
+  const child = items[index] as React.ReactElement<Record<string, unknown>>
+
+  /*
+    Clone only what will actually carry the attribute.
+
+    `cloneElement` puts a prop on an element; whether that prop reaches
+    the DOM is up to what the element renders. A host element like `<div>`
+    passes unknown attributes straight through, but a Fragment has no DOM
+    node to put it on and React drops it silently — which is how the svg
+    and contrast tools ended up with no marker at all, and therefore an
+    observer watching nothing and a strip that could never appear. The
+    same is true of any component that does not spread its props.
+
+    So anything that is not a host element gets a plain wrapper instead.
+    That is two of the thirty-one tools, and a bare `<div>` inside a
+    `space-y-*` stack changes nothing about how it lays out.
+  */
+  const marked =
+    typeof child.type === 'string' ? (
+      React.cloneElement(child, { [STAGE_ATTR]: '' })
+    ) : (
+      <div {...{ [STAGE_ATTR]: '' }}>{child}</div>
+    )
   return React.cloneElement(
     column as React.ReactElement<{ children?: React.ReactNode }>,
     undefined,

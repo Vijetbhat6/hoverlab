@@ -7,7 +7,40 @@
 
 import { resolveKey } from './auth.mjs'
 
-export const DEFAULT_ORIGIN = process.env.HOVERLAB_API_URL || 'https://hoverlab.dev'
+/**
+ * Where the catalog lives, when nothing says otherwise.
+ *
+ * ────────────────────────────────────────────────────────────────────────
+ *  ONE PLACE. Change this when the brand domain lands, and nothing else.
+ * ────────────────────────────────────────────────────────────────────────
+ *
+ * This used to be `https://hoverlab.dev`, which does not resolve — the
+ * domain was written into the code before it was registered. Publishing on
+ * that value would have shipped a CLI that fails on its first command with
+ * a DNS error, for every user, with no way to tell that the tool was fine
+ * and the address was not.
+ *
+ * So it points at the deployment that actually answers. That is a Vercel
+ * project hostname rather than a brand one, which is a cosmetic cost and a
+ * redirect to write later; a CLI that cannot reach anything is not
+ * cosmetic. `HOVERLAB_API_URL` overrides it for anyone pointing at a
+ * preview, a fork or a local dev server.
+ *
+ * Every other user-facing mention of the origin in this package derives
+ * from this constant — see `SITE_URL` below. The literal appeared in six
+ * files before, which is six chances to update five of them.
+ */
+export const DEFAULT_ORIGIN =
+  process.env.HOVERLAB_API_URL || 'https://hoverlab-xak9.vercel.app'
+
+/**
+ * The same origin, for printing rather than for fetching.
+ *
+ * Split from `DEFAULT_ORIGIN` only so that a user who has pointed
+ * `HOVERLAB_API_URL` at their own preview deployment is still told to get a
+ * licence key from the real site, which is the only place that issues one.
+ */
+export const SITE_URL = 'https://hoverlab-xak9.vercel.app'
 
 export const FRAMEWORKS = [
   'html',

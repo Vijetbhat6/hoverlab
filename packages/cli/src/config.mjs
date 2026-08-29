@@ -1,7 +1,7 @@
 /**
  * `hoverlab.config.json` — the project's brand, read from disk.
  *
- * Written by the design-system export on hoverlab.dev/design-system. Its
+ * Written by the design-system export on the site’s /design-system page. Its
  * presence in a project root is what lets `hoverlab add` emit an effect in
  * the project's colours rather than in Hoverlab's.
  *

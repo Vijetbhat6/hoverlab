@@ -57,9 +57,41 @@ Until these are set, `isPurchasable` is false, the certificate shows no renew
 button, and the checkout route 503s rather than dead-ending at Polar. That is
 the intended unconfigured state — it is safe to deploy without them.
 
+### Operator details — **required before taking real money**
+
+The four values Terms, Privacy, Refunds and the Licence name as the legal
+person behind Hoverlab:
+
+```
+OPERATOR_LEGAL_NAME       registered company, or your own name as a sole trader
+OPERATOR_ADDRESS          registered address, one line
+OPERATOR_JURISDICTION     governing law and courts, e.g. "India"
+OPERATOR_CONTACT_EMAIL    where support, privacy and legal notices land
+```
+
+Unset, each falls back to a detectable `TO BE SET` placeholder — so the
+pages render, and say something true about being incomplete, rather than
+showing a blank where a company name goes. Polar reads these on merchant
+review.
+
+**They are read at build time**, not per request: module scope in
+`src/lib/legal.ts`, on statically rendered routes. Setting them in the
+hosting dashboard takes effect on the *next deploy*. `npm run check:env`
+warns while any is unset; `npm run check:deploy` FAILS, which is the gate
+that matters — it asks the running site, so it cannot be satisfied by a
+value that never made it into a build.
+
 ### Environment
 
-Nothing new is *required*. One new optional variable:
+Nothing else is *required*. Two optional variables:
+
+- `ANTHROPIC_API_KEY` — what Pro+ sells. `/api/ai/variant`, `/api/ai/compose`
+  and `/api/ai/search` all call a model through `src/lib/ai/claude.ts`.
+  Unset, all three return 503 **before** metering, so nothing is charged and
+  `/library` falls back to substring search. If you are not setting this,
+  leave `POLAR_PRODUCT_ID_PLUS` empty too — otherwise you are selling a
+  $9/month meter for a feature that always refuses. Set a spend limit on the
+  key: the routes are metered per user, not per dollar.
 
 - `QUOTA_IP_SALT` — salts the hashed client IP used to meter anonymous
   visitors. Unset falls back to a constant, which still meters correctly;

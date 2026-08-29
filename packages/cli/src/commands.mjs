@@ -17,6 +17,7 @@ import { mkdir, writeFile } from 'node:fs/promises'
 import {
   FRAMEWORKS,
   LEVELS,
+  SITE_URL,
   getArtifact,
   getDna,
   reportInstall,
@@ -590,14 +591,14 @@ export async function commandLogin(args) {
     out()
     out('  npx hoverlab login hl_live_xxxxxxxx')
     out()
-    out(dim('Get one at https://hoverlab.dev/account. Only Pro templates need it —'))
+    out(dim(`Get one at ${SITE_URL}/account. Only Pro templates need it —`))
     out(dim('every effect, block and page works without a key.'))
     return
   }
 
   if (!looksLikeKey(key)) {
     throw new Error(
-      'That does not look like a Hoverlab key. They start with `hl_live_` and are issued at https://hoverlab.dev/account.',
+      `That does not look like a Hoverlab key. They start with \`hl_live_\` and are issued at ${SITE_URL}/account.`,
     )
   }
 
@@ -697,7 +698,7 @@ ${bold('Examples')}
 
 ${bold('Your brand')}
   Put a ${cyan('hoverlab.config.json')} in your project root — the design system
-  export at ${dim('hoverlab.dev/design-system')} writes one — and ${dim('add')} tints effects
+  export at ${dim(`${SITE_URL.replace('https://', '')}/design-system`)} writes one — and ${dim('add')} tints effects
   to match it. Blocks, pages and templates need nothing: they style
   themselves through the tokens in your ${cyan('tokens.css')}. An explicit
   ${dim('--hue')} or ${dim('--sat')} overrides the project brand.

@@ -2,7 +2,7 @@
  * Who is behind Hoverlab, for the pages that have to say so.
  *
  * ────────────────────────────────────────────────────────────────────────
- *  EDIT THE FIVE VALUES IN `OPERATOR` BEFORE TAKING REAL MONEY.
+ *  SET THE FOUR `OPERATOR_*` VARIABLES BEFORE TAKING REAL MONEY.
  * ────────────────────────────────────────────────────────────────────────
  *
  * Terms, Privacy, Refunds and the Licence all need to name a real legal
@@ -15,6 +15,24 @@
  * have been changed at all. `scripts/check-deploy.mjs` asks the deployed
  * site the same question, which is why the placeholders below are shaped
  * to be detectable rather than plausible.
+ *
+ * They come from the environment rather than being written in as literals
+ * because a registered address is deployment configuration, not source: it
+ * differs between whoever is operating this, it changes without the code
+ * changing, and putting a home address in a git history is a decision that
+ * cannot be taken back. The fallbacks keep the placeholders, so an unset
+ * variable still fails `legalDetailsPending()` rather than rendering an
+ * empty line where a company name belongs.
+ *
+ * ⚠ Server-only, deliberately un-prefixed. Every consumer today is a server
+ * component; import `OPERATOR` into a client one and `process.env` gives it
+ * nothing, so the pages would silently fall back to the placeholders in the
+ * browser while looking correct in a build log. If a client component ever
+ * needs these, pass them down as props rather than adding NEXT_PUBLIC_.
+ *
+ * These are read at module scope, which on a statically rendered route means
+ * build time — so setting them in a hosting dashboard takes effect on the
+ * next deploy, not the next request.
  *
  * `EFFECTIVE_DATE` is the date the current text took effect. Move it when
  * the terms materially change, not on every typo — the date is what a
@@ -37,12 +55,37 @@ export interface Operator {
 /** The placeholder marker. Any value containing it is not real. */
 const PENDING = 'TO BE SET'
 
+/**
+ * Read one operator detail, falling back to its placeholder.
+ *
+ * Whitespace-only counts as unset. An environment variable set to a space —
+ * which is what a dashboard field cleared with the space bar leaves behind —
+ * would otherwise pass every presence check and render a legal page whose
+ * operator name is blank, which is worse than one that says TO BE SET
+ * because nothing downstream can detect it.
+ */
+function operatorDetail(value: string | undefined, placeholder: string): string {
+  return value && value.trim() ? value.trim() : `${PENDING} — ${placeholder}`
+}
+
 export const OPERATOR: Operator = {
-  legalName: `${PENDING} — registered company or sole-trader name`,
+  legalName: operatorDetail(
+    process.env.OPERATOR_LEGAL_NAME,
+    'registered company or sole-trader name',
+  ),
+  // Not read from the environment: the trading name is the product's name,
+  // it is the one value that does not vary by operator, and it is already
+  // written into a hundred other strings on this site.
   tradingName: 'Hoverlab',
-  address: `${PENDING} — registered address`,
-  jurisdiction: `${PENDING} — e.g. India, or England and Wales`,
-  contactEmail: `${PENDING} — e.g. hello@yourdomain.com`,
+  address: operatorDetail(process.env.OPERATOR_ADDRESS, 'registered address'),
+  jurisdiction: operatorDetail(
+    process.env.OPERATOR_JURISDICTION,
+    'e.g. India, or England and Wales',
+  ),
+  contactEmail: operatorDetail(
+    process.env.OPERATOR_CONTACT_EMAIL,
+    'e.g. hello@yourdomain.com',
+  ),
 }
 
 /** ISO date the current version of these documents took effect. */
