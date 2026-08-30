@@ -21,6 +21,7 @@ import { generateV9 } from './generate-effects-v9.mjs'
 import { generateV10 } from './generate-effects-v10.mjs'
 import { generateV11 } from './generate-effects-v11.mjs'
 import { generateV12 } from './generate-effects-v12.mjs'
+import { generateV13 } from './generate-effects-v13.mjs'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const OUT_PATH = join(__dirname, '..', 'src', 'lib', 'generated-effects.json')
@@ -1959,6 +1960,16 @@ generateV11(extraCtx)
  * ========================================================== */
 
 generateV12(extraCtx)
+
+/* ============================================================
+ *  Thirteenth wave: 138 new designs, one entry each, across all
+ *  32 categories — including the six check-catalog-focus had
+ *  sealed, whose baseline was re-accepted for this wave.
+ *  Weighted six-per-category toward the five categories still
+ *  short of shapes. See generate-effects-v13.mjs.
+ * ========================================================== */
+
+generateV13(extraCtx)
 
 /* ============================================================
  *  Thinning

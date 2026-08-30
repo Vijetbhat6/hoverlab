@@ -1,11 +1,11 @@
 {
   "sealed": {
-    "Dividers & Separators": 28,
-    "Badges & Tags": 25,
-    "Skeletons & Shimmers": 24,
-    "Borders & Outlines": 23,
-    "Progress & Meters": 25,
-    "Scroll & Sticky": 23
+    "Dividers & Separators": 32,
+    "Badges & Tags": 29,
+    "Skeletons & Shimmers": 28,
+    "Borders & Outlines": 27,
+    "Progress & Meters": 29,
+    "Scroll & Sticky": 27
   },
-  "blocks": 121
+  "blocks": 194
 }

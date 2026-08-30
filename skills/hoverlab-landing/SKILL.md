@@ -115,7 +115,7 @@ hovers (Buttons). Search the catalog rather than writing keyframes.
 Write it before you place the sections; the copy decides which sections exist.
 
 - Headline says what it *is*, not how it feels. "Install UI from a catalog of
-  835 effects" beats "Ship faster than ever".
+  973 effects" beats "Ship faster than ever".
 - Every feature line names an outcome, not a mechanism.
 - One CTA verb, used everywhere on the page. Not "Get started" in the hero,
   "Try it free" mid-page and "Sign up" at the close — that is three products to
