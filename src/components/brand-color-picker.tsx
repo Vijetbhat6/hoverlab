@@ -367,7 +367,7 @@ function SavedBrands({
             ) : team ? (
               <>
                 Agree a palette once and have it appear for everyone on the{' '}
-                <Link href="/#pricing" className="font-medium text-primary hover:underline">
+                <Link href="/pricing" className="font-medium text-primary hover:underline">
                   Team plan
                 </Link>
                 . Your own saved colours stay yours either way.
@@ -376,7 +376,7 @@ function SavedBrands({
               <>
                 Save a colour under a name — “Northwind blue”, “Acme orange” —
                 and keep it on your account with{' '}
-                <Link href="/#pricing" className="font-medium text-primary hover:underline">
+                <Link href="/pricing" className="font-medium text-primary hover:underline">
                   Pro
                 </Link>
                 .

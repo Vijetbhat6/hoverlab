@@ -179,7 +179,7 @@ export function TemplateDownloadButton({
           </p>
           <div className="mt-3 flex flex-wrap gap-3">
             <Link
-              href="/#pricing"
+              href="/pricing"
               className="inline-flex items-center gap-1.5 rounded-lg bg-primary px-3 py-1.5 text-xs font-semibold text-primary-foreground hover:bg-primary/90"
             >
               See Pro

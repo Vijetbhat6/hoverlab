@@ -18,7 +18,7 @@ import { PLANS, type PlanId } from '@/lib/billing/plans'
  *
  * The plan they picked rides along as `?plan=`, so the panel can highlight
  * it and the second click is the same decision they already made rather
- * than a pricing page to re-read. Sending them back to /#pricing instead
+ * than a pricing page to re-read. Sending them back to /pricing instead
  * would drop them at the top of the funnel with no sign that anything had
  * happened.
  */

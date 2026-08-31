@@ -51,7 +51,7 @@ export function OpenInSandbox({
     ref: React.RefObject<HTMLFormElement | null>,
     target: 'codepen' | 'jsfiddle',
   ) {
-    track('sandbox_open', { effect_id: effectId, target })
+    track('sandbox_open', { artifact_id: effectId, level: 'effect', target })
     ref.current?.submit()
   }
 
@@ -66,7 +66,7 @@ export function OpenInSandbox({
     a.click()
     a.remove()
     URL.revokeObjectURL(url)
-    track('sandbox_open', { effect_id: effectId, target: 'download' })
+    track('sandbox_open', { artifact_id: effectId, level: 'effect', target: 'download' })
     toast.success('Downloaded standalone HTML', {
       description: 'Open it in a browser — everything is inline, no build step.',
     })

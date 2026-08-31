@@ -254,7 +254,7 @@ export function FrameworkExportPanel({
         track('paywall_hit', { feature: `export:${next}`, plan_required: 'pro' })
         toast.info(`${frameworkMeta(next).label} export is part of Pro`, {
           description: 'HTML, CSS and React stay free forever.',
-          action: { label: 'See Pro', onClick: () => { window.location.href = '/#pricing' } },
+          action: { label: 'See Pro', onClick: () => { window.location.href = '/pricing' } },
         })
         return
       }
@@ -338,7 +338,7 @@ export function FrameworkExportPanel({
       {!canUsePro ? (
         <p className="text-[11px] text-muted-foreground">
           Vue, Svelte, styled-components and Tailwind exports are part of{' '}
-          <Link href="/#pricing" className="font-medium text-primary hover:underline">
+          <Link href="/pricing" className="font-medium text-primary hover:underline">
             Pro
           </Link>
           . HTML, CSS and React are free forever.

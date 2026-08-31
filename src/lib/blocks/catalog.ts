@@ -421,6 +421,26 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     deps: ['lucide-react'],
     featured: true,
   },
+  {
+    id: 'modal-unsaved-changes',
+    name: 'Unsaved Changes Prompt',
+    category: 'Modals & Drawers',
+    description:
+      'The interception that keeps work: three answers rather than two, the changed fields listed by name, a destructive-styled discard, and Escape resolving to cancel.',
+    tags: ['modal', 'unsaved changes', 'alertdialog', 'forms', 'focus trap'],
+    previewComponent: 'modal-unsaved-changes',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'drawer-record-detail',
+    name: 'Record Inspector Drawer',
+    category: 'Modals & Drawers',
+    description:
+      'A non-modal drawer that keeps the list on screen, with previous and next controls for moving between records and an activity tab beside the fields.',
+    tags: ['drawer', 'inspector', 'record detail', 'crm', 'panel'],
+    previewComponent: 'drawer-record-detail',
+    deps: ['lucide-react'],
+  },
 
   /* ---------------------------- Onboarding ------------------------- */
   {
@@ -1171,6 +1191,26 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     previewComponent: 'dashboard-saved-views',
     deps: ['lucide-react'],
   },
+  {
+    id: 'dashboard-comparison-period',
+    name: 'Comparison Period Picker',
+    category: 'Dashboards',
+    description:
+      'A reporting window with the comparison window spelled out beside it — resolved dates, UTC arithmetic, and an option to align weekdays so a weekend is never compared against a Tuesday.',
+    tags: ['dashboard', 'date range', 'comparison', 'analytics', 'filters'],
+    previewComponent: 'dashboard-comparison-period',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'dashboard-alert-rules',
+    name: 'Alert Rule List',
+    category: 'Dashboards',
+    description:
+      'Threshold alerts with the two facts most rule lists omit: how often each has fired, and whether its channel is muted — so a rule that is on but delivering nowhere reads as its own state.',
+    tags: ['alerts', 'monitoring', 'thresholds', 'dashboard', 'rules'],
+    previewComponent: 'dashboard-alert-rules',
+    deps: ['lucide-react'],
+  },
 
   /* ---------------------------- Data Tables ----------------------- */
   {
@@ -1233,6 +1273,26 @@ export const BLOCK_CATALOG: BlockRecord[] = [
       'The selection bar that asks the question most tables skip: this page, or all 1,284 rows the filter matches. Typed confirmation above a threshold, an undo with the window counting down, and a select-all that names its own scope.',
     tags: ['table', 'bulk actions', 'selection', 'undo', 'destructive'],
     previewComponent: 'data-table-bulk-actions',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'data-table-inline-edit',
+    name: 'Inline Editable Table',
+    category: 'Data Tables',
+    description:
+      'Edit cells in the grid with staged changes, per-cell validation, the original value kept beside the attempt, and a save that counts what is still pending.',
+    tags: ['table', 'inline edit', 'validation', 'crud', 'grid'],
+    previewComponent: 'data-table-inline-edit',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'data-table-grouped-rows',
+    name: 'Grouped Table with Subtotals',
+    category: 'Data Tables',
+    description:
+      'Collapsible group headers that carry their own subtotals while collapsed, with a grand total that sums every row rather than only the visible ones.',
+    tags: ['table', 'grouping', 'subtotals', 'collapsible', 'reporting'],
+    previewComponent: 'data-table-grouped-rows',
     deps: ['lucide-react'],
   },
 
@@ -1300,6 +1360,26 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     previewComponent: 'settings-sessions',
     deps: ['lucide-react'],
   },
+  {
+    id: 'settings-notification-matrix',
+    name: 'Notification Channel Matrix',
+    category: 'Settings',
+    description:
+      'Every event against every delivery channel in one grid, with column toggles and required rows that show the policy instead of a disabled checkbox.',
+    tags: ['settings', 'notifications', 'preferences', 'matrix', 'channels'],
+    previewComponent: 'settings-notification-matrix',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'settings-audit-log',
+    name: 'Audit Log',
+    category: 'Settings',
+    description:
+      'A compliance-grade trail with named actors, before and after values, IP addresses, and a stated retention window — plus a count of what the active filter is hiding.',
+    tags: ['audit', 'compliance', 'security', 'settings', 'log'],
+    previewComponent: 'settings-audit-log',
+    deps: ['lucide-react'],
+  },
 
   /* ---------------------- Empty & Error States -------------------- */
   {
@@ -1362,6 +1442,26 @@ export const BLOCK_CATALOG: BlockRecord[] = [
       'Leads with what still works — three edits saved on this device — instead of with the failure. The retry backoff counts down in the open, and the three things that genuinely cannot work offline are named rather than discovered.',
     tags: ['offline', 'network', 'retry', 'queue', 'resilience'],
     previewComponent: 'offline-state-banner',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'empty-filtered-results',
+    name: 'Empty Because of Filters',
+    category: 'Empty & Error States',
+    description:
+      'The empty state for a list emptied by its own filters: every active filter shown as a removable chip ordered by how many results it would restore, with clear-all deliberately second.',
+    tags: ['empty state', 'filters', 'search', 'no results', 'recovery'],
+    previewComponent: 'empty-filtered-results',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'maintenance-window-state',
+    name: 'Scheduled Maintenance Window',
+    category: 'Empty & Error States',
+    description:
+      'Planned downtime with a live countdown, an end time in the reader’s timezone, what still works — and a different sentence once the window overruns rather than a negative timer.',
+    tags: ['maintenance', 'downtime', 'status', 'countdown', 'error state'],
+    previewComponent: 'maintenance-window-state',
     deps: ['lucide-react'],
   },
 
@@ -1506,6 +1606,26 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     previewComponent: 'billing-seat-manager',
     deps: ['lucide-react'],
   },
+  {
+    id: 'billing-invoice-detail',
+    name: 'Invoice Detail',
+    category: 'Billing & Usage',
+    description:
+      'One invoice with the arithmetic shown: proration split into a credit and a charge with their own date ranges, tax as a line with its jurisdiction, and totals in a real tfoot.',
+    tags: ['billing', 'invoice', 'proration', 'tax', 'receipt'],
+    previewComponent: 'billing-invoice-detail',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'billing-credit-balance',
+    name: 'Credit Balance and Expiry',
+    category: 'Billing & Usage',
+    description:
+      'Consumable credits split into the buckets they actually live in, rendered in spend order, with a proportional warning that only appears when a meaningful balance is about to expire.',
+    tags: ['billing', 'credits', 'usage', 'expiry', 'meter'],
+    previewComponent: 'billing-credit-balance',
+    deps: ['lucide-react'],
+  },
 
   /* ---------------------- Command & Search ------------------------ */
   {
@@ -1564,6 +1684,26 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     previewComponent: 'search-autocomplete',
     deps: ['lucide-react'],
     featured: true,
+  },
+  {
+    id: 'search-facet-panel',
+    name: 'Faceted Refinement Panel',
+    category: 'Command & Search',
+    description:
+      'Faceted search with result counts on every option, zero-count options kept visible and disabled so the list stays stable, and a note explaining why the counts do not sum.',
+    tags: ['search', 'facets', 'filters', 'refinement', 'sidebar'],
+    previewComponent: 'search-facet-panel',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'search-scope-switcher',
+    name: 'Search Scope Switcher',
+    category: 'Command & Search',
+    description:
+      'One query counted across every scope it could have matched, as a real tablist with arrow-key movement — so an answer that is nowhere is visible without opening four tabs.',
+    tags: ['search', 'scopes', 'tabs', 'results', 'keyboard'],
+    previewComponent: 'search-scope-switcher',
+    deps: ['lucide-react'],
   },
   /* ---------------------- File Upload ----------------------------- */
   {
@@ -1713,6 +1853,26 @@ export const BLOCK_CATALOG: BlockRecord[] = [
       'The two-pane assistant layout, with the mismatch nobody else states: the canvas names the version it is showing and says so when that is not the one the conversation is about. Versions link back to the turn that made them.',
     tags: ['canvas', 'artifact', 'versions', 'assistant', 'two-pane'],
     previewComponent: 'chat-artifact-canvas',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'chat-model-picker',
+    name: 'Model Picker with Trade-offs',
+    category: 'Agent Chat',
+    description:
+      'Model selection with the three numbers the choice actually turns on — capability, latency and cost per message — and locked models explained rather than greyed out.',
+    tags: ['ai', 'model picker', 'chat', 'listbox', 'cost'],
+    previewComponent: 'chat-model-picker',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'chat-attachment-tray',
+    name: 'Prompt Attachment Tray',
+    category: 'Agent Chat',
+    description:
+      'Files staged against a prompt with a running context-token budget, unreadable files flagged before send, removal allowed mid-upload, and a send button that names its one blocker.',
+    tags: ['ai', 'chat', 'attachments', 'upload', 'context window'],
+    previewComponent: 'chat-attachment-tray',
     deps: ['lucide-react'],
   },
   /* -------------------------- Agent Reasoning ---------------------- */

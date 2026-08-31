@@ -356,8 +356,14 @@ export function SiteHeader({ actions }: SiteHeaderProps) {
               a price belongs, and where nothing pushes it off-screen.
             */}
             <Link
-              href="/#pricing"
-              className="hidden h-9 shrink-0 items-center gap-1.5 rounded-lg px-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted/50 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring md:inline-flex"
+              href="/pricing"
+              aria-current={pathname === '/pricing' ? 'page' : undefined}
+              className={cn(
+                'relative hidden h-9 shrink-0 items-center gap-1.5 rounded-lg px-2.5 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring md:inline-flex',
+                pathname === '/pricing'
+                  ? 'text-foreground'
+                  : 'text-muted-foreground hover:bg-muted/50 hover:text-foreground',
+              )}
             >
               Pro
               {/* Derived, not typed out: this badge sat at $59 in the header
@@ -366,6 +372,16 @@ export function SiteHeader({ actions }: SiteHeaderProps) {
               <span className="rounded bg-primary px-1 py-0.5 text-[9px] font-bold uppercase leading-none tracking-wider text-primary-foreground">
                 {formatPrice(PLANS.pro.priceCents)}
               </span>
+              {/* The same underline the ladder nav draws. Pro is a
+                  destination now, not a scroll target, so /pricing has to
+                  look reached rather than leaving the header saying you are
+                  nowhere. */}
+              {pathname === '/pricing' && (
+                <span
+                  aria-hidden
+                  className="absolute inset-x-2.5 -bottom-[1px] h-0.5 rounded-full bg-primary"
+                />
+              )}
             </Link>
 
             <QuickFindButton />

@@ -294,6 +294,51 @@ export function checkEnv(
     })
   }
 
+  // --- NEXT_PUBLIC_{GITHUB,DISCORD,TWITTER}_URL ----------------------------
+  // Where the community is, if there is one.
+  //
+  // These fail SILENTLY today, and that is the reason they are checked here
+  // at all. `lib/social.ts` falls back to the platforms' home pages and
+  // `isPlaceholder()` makes every surface hide the link rather than send
+  // someone to discord.com — which is the right behaviour and also why
+  // nobody notices. The footer, the changelog CTA, the roadmap CTA and the
+  // three community tiles all just quietly are not there.
+  //
+  // That is a commercial gap, not a cosmetic one: Aceternity sells a private
+  // Discord and a response-time promise as features, and a competitor
+  // comparing us row by row sees an empty cell. `/support` states what we
+  // commit to regardless; these three are what give it somewhere to point.
+  //
+  // Recommended, never required, for the OPERATOR_* reason above — a site
+  // with no Discord yet should still build.
+  const socialKeys = [
+    ['NEXT_PUBLIC_GITHUB_URL', 'the repository'],
+    ['NEXT_PUBLIC_DISCORD_URL', 'the community server invite'],
+    ['NEXT_PUBLIC_TWITTER_URL', 'the project account'],
+  ] as const
+
+  const socialMissing = socialKeys.filter(([key]) => !has(key))
+
+  if (socialMissing.length) {
+    checks.push({
+      key: 'NEXT_PUBLIC_*_URL',
+      status: 'missing',
+      level: 'recommended',
+      message:
+        `${socialMissing.length} of ${socialKeys.length} unset ` +
+        `(${socialMissing.map(([key]) => key).join(', ')}) — those links are ` +
+        'hidden site-wide rather than broken, so the absence is invisible ' +
+        'unless you look for it.',
+    })
+  } else {
+    checks.push({
+      key: 'NEXT_PUBLIC_*_URL',
+      status: 'ok',
+      level: 'recommended',
+      message: 'All three community links set.',
+    })
+  }
+
   return checks
 }
 

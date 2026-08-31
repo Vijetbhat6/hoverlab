@@ -64,12 +64,22 @@ export type AnalyticsEvent =
       props: { effect_id: string; hue: number; saturation: number; scale: number; speed: number }
     }
   /**
-   * The user took the snippet somewhere editable. Which destination wins
+   * The user took the artifact somewhere editable. Which destination wins
    * decides whether the other integrations are worth keeping.
+   *
+   * `artifact_id` + `level` rather than `effect_id`, for the reason given
+   * on `bundle_add` below: blocks and pages got a sandbox of their own, and
+   * "does anyone run a block before pasting it" is a different question
+   * from the same one about a hover state. Keeping them on one event name
+   * is what makes the two comparable.
    */
   | {
       name: 'sandbox_open'
-      props: { effect_id: string; target: 'codepen' | 'jsfiddle' | 'download' }
+      props: {
+        artifact_id: string
+        level: ArtifactLevel
+        target: 'codepen' | 'jsfiddle' | 'download' | 'stackblitz'
+      }
     }
   /** Embed snippet copied — tracks the catalog's reach into other sites. */
   | { name: 'embed_copied'; props: { effect_id: string } }
@@ -138,6 +148,20 @@ export type AnalyticsEvent =
    * page for an audience that is not arriving.
    */
   | { name: 'figma_sheet_copied'; props: { tokens: number; tool?: string } }
+  /*
+   * The other half of the Figma path: a whole artifact traced into layers,
+   * rather than the palette.
+   *
+   * Separate from `figma_sheet_copied` because they answer different
+   * questions. That one asks whether designers arrive at all; this one asks
+   * whether they get far enough in to be looking at a specific block — and
+   * `layers` is the only signal available on whether the walk produced
+   * something worth pasting or ten rectangles and a background.
+   */
+  | {
+      name: 'figma_frame_copied'
+      props: { artifact_id: string; level: 'block' | 'page'; layers: number }
+    }
   /*
    * List signups, by where the form was. The point of the list is that it
    * is the one distribution channel that cannot be re-ranked, so which

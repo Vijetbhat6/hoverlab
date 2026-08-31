@@ -49,7 +49,7 @@ export async function requirePro(feature: string): Promise<ProGate> {
      */
     return {
       response: NextResponse.json(
-        { error: `${feature} is part of Pro.`, upgrade: '/#pricing' },
+        { error: `${feature} is part of Pro.`, upgrade: '/pricing' },
         { status: 402 },
       ),
     }

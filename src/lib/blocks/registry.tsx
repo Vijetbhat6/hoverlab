@@ -248,6 +248,22 @@ import { BottomSheetMobile } from './sources/bottom-sheet-mobile'
 import { ChatArtifactCanvas } from './sources/chat-artifact-canvas'
 import { RetrievalIndexStatus } from './sources/retrieval-index-status'
 import { OnboardingImportData } from './sources/onboarding-import-data'
+import { DashboardComparisonPeriod } from './sources/dashboard-comparison-period'
+import { DashboardAlertRules } from './sources/dashboard-alert-rules'
+import { DataTableInlineEdit } from './sources/data-table-inline-edit'
+import { DataTableGroupedRows } from './sources/data-table-grouped-rows'
+import { SettingsNotificationMatrix } from './sources/settings-notification-matrix'
+import { SettingsAuditLog } from './sources/settings-audit-log'
+import { BillingInvoiceDetail } from './sources/billing-invoice-detail'
+import { BillingCreditBalance } from './sources/billing-credit-balance'
+import { EmptyFilteredResults } from './sources/empty-filtered-results'
+import { MaintenanceWindowState } from './sources/maintenance-window-state'
+import { SearchFacetPanel } from './sources/search-facet-panel'
+import { SearchScopeSwitcher } from './sources/search-scope-switcher'
+import { ModalUnsavedChanges } from './sources/modal-unsaved-changes'
+import { DrawerRecordDetail } from './sources/drawer-record-detail'
+import { ChatModelPicker } from './sources/chat-model-picker'
+import { ChatAttachmentTray } from './sources/chat-attachment-tray'
 
 /**
  * Every block renders with no required props — each source defaults its own
@@ -489,6 +505,22 @@ export const BLOCK_PREVIEWS: Record<string, React.ReactNode> = {
   'order-confirmation': <OrderConfirmation />,
   'order-history-list': <OrderHistoryList />,
   'review-list': <ReviewList />,
+  'dashboard-comparison-period': <DashboardComparisonPeriod />,
+  'dashboard-alert-rules': <DashboardAlertRules />,
+  'data-table-inline-edit': <DataTableInlineEdit />,
+  'data-table-grouped-rows': <DataTableGroupedRows />,
+  'settings-notification-matrix': <SettingsNotificationMatrix />,
+  'settings-audit-log': <SettingsAuditLog />,
+  'billing-invoice-detail': <BillingInvoiceDetail />,
+  'billing-credit-balance': <BillingCreditBalance />,
+  'empty-filtered-results': <EmptyFilteredResults />,
+  'maintenance-window-state': <MaintenanceWindowState />,
+  'search-facet-panel': <SearchFacetPanel />,
+  'search-scope-switcher': <SearchScopeSwitcher />,
+  'modal-unsaved-changes': <ModalUnsavedChanges />,
+  'drawer-record-detail': <DrawerRecordDetail />,
+  'chat-model-picker': <ChatModelPicker />,
+  'chat-attachment-tray': <ChatAttachmentTray />,
 }
 
 /** The rendered preview for a block, or undefined if the key is unknown. */

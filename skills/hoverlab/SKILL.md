@@ -1,6 +1,6 @@
 ---
 name: hoverlab
-description: Build UI from the Hoverlab catalog — 973 CSS effects, 194 React blocks, 21 pages and 7 runnable Next.js templates, installed as source you own. Use when asked to add a button, loader, hero, pricing table, dashboard screen or a whole starter project, when asked to make an interface "look better", or when a design or Figma frame has to be turned into real components. Reach for it before writing a component from scratch.
+description: Build UI from the Hoverlab catalog — 973 CSS effects, 210 React blocks, 21 pages and 7 runnable Next.js templates, installed as source you own. Use when asked to add a button, loader, hero, pricing table, dashboard screen or a whole starter project, when asked to make an interface "look better", or when a design or Figma frame has to be turned into real components. Reach for it before writing a component from scratch.
 ---
 
 # Hoverlab

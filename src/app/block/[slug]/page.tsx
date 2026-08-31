@@ -36,6 +36,8 @@ import {
   CopyDnaButton,
 } from '@/components/artifact-actions'
 import { ArtifactFacts } from '@/components/artifact-facts'
+import { OpenArtifactInSandbox } from '@/components/open-artifact-in-sandbox'
+import { CopyFrameForFigma } from '@/components/copy-frame-for-figma'
 import { StickyInstallBar } from '@/components/sticky-install-bar'
 
 /**
@@ -44,6 +46,14 @@ import { StickyInstallBar } from '@/components/sticky-install-bar'
  * them as a cold on-demand render.
  */
 export const dynamicParams = false
+
+/**
+ * The preview wrapper's DOM id, shared by the Figma button and the element
+ * it traces. Constant rather than derived from the block id: there is one
+ * preview per page, and a stable name is easier to find from the console
+ * when a frame comes out wrong.
+ */
+const FRAME_ID = 'artifact-frame' 
 
 export function generateStaticParams() {
   return BLOCKS.map((b) => ({ slug: b.id }))
@@ -183,6 +193,14 @@ export default async function BlockDetailPage({ params }: PageProps) {
                 paste a component: the tokens, motion and rules, as one
                 pasteable document. */}
             <CopyDnaButton artifactId={block.id} />
+            {/* The one action that answers "does it actually work" without
+                asking the reader to paste 200 lines into their own repo
+                first. Builds its payload on click — see the route. */}
+            <OpenArtifactInSandbox level="block" id={block.id} name={block.name} />
+            {/* The designer's exit. Traces the preview below into Figma
+                layers — see lib/export/figma-frame.ts for why it reads the
+                rendered DOM rather than the source. */}
+            <CopyFrameForFigma targetId={FRAME_ID} name={block.name} level="block" />
           </div>
 
           <TrackArtifactView
@@ -252,7 +270,12 @@ export default async function BlockDetailPage({ params }: PageProps) {
           <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
             Preview
           </h2>
-          <BlockPreview componentKey={block.previewComponent} />
+          {/* The id is the handle <CopyFrameForFigma> traces. It has to sit
+              on the element whose box is the artboard, so it wraps the
+              preview rather than living inside it. */}
+          <div id={FRAME_ID}>
+            <BlockPreview componentKey={block.previewComponent} />
+          </div>
           <p className="mt-3 text-xs text-muted-foreground">
             Rendered live in your current theme — this is the same component
             whose source is below, not a screenshot of it.

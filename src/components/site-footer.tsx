@@ -91,6 +91,11 @@ const DEVELOPER_LINKS: FooterLink[] = [
 const COMPANY_LINKS: FooterLink[] = [
   { label: 'Pricing', href: '/pricing' },
   { label: 'Licence', href: '/licence' },
+  // Directly under pricing, because "what happens when it breaks" is a
+  // question asked while looking at a price and nowhere else. Competitors
+  // in this category sell support as a line item; until this page existed
+  // we made no commitment at all, which reads as none.
+  { label: 'Support', href: '/support' },
   { label: 'Changelog', href: '/changelog' },
   // Next to the pricing link on purpose: someone who has just read our price
   // and is about to go and check it against four other tabs should find the

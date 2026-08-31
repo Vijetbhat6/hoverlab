@@ -36,9 +36,14 @@ import {
   CopyDnaButton,
 } from '@/components/artifact-actions'
 import { ArtifactFacts } from '@/components/artifact-facts'
+import { OpenArtifactInSandbox } from '@/components/open-artifact-in-sandbox'
+import { CopyFrameForFigma } from '@/components/copy-frame-for-figma'
 import { StickyInstallBar } from '@/components/sticky-install-bar'
 
 export const dynamicParams = false
+
+/** The preview wrapper's DOM id — the element the Figma button traces. */
+const FRAME_ID = 'artifact-frame' 
 
 export function generateStaticParams() {
   return PAGES.map((p) => ({ slug: p.id }))
@@ -165,6 +170,14 @@ export default async function PageDetailPage({ params }: PageProps) {
                 paste a component: the tokens, motion and rules, as one
                 pasteable document. */}
             <CopyDnaButton artifactId={page.id} />
+            {/* A page is a composition, so the sandbox ships the blocks it
+                renders alongside it — the only way to see the whole screen
+                run without cloning a template. */}
+            <OpenArtifactInSandbox level="page" id={page.id} name={page.name} />
+            {/* A whole screen as Figma layers. The tier where this matters
+                most: a designer redrawing a full page wants the layout, not
+                one section of it. */}
+            <CopyFrameForFigma targetId={FRAME_ID} name={page.name} level="page" />
           </div>
 
           <TrackArtifactView
@@ -219,7 +232,11 @@ export default async function PageDetailPage({ params }: PageProps) {
           <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
             Preview
           </h2>
-          <PagePreview componentKey={page.previewComponent} />
+          {/* Traced by <CopyFrameForFigma>; see the block detail page for
+              why the id wraps the preview instead of sitting inside it. */}
+          <div id={FRAME_ID}>
+            <PagePreview componentKey={page.previewComponent} />
+          </div>
           <p className="mt-3 text-xs text-muted-foreground">
             The real page, rendered in your current theme — every section
             below is a live block, not a screenshot.

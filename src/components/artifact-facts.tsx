@@ -138,7 +138,7 @@ export function ArtifactFacts({
         <p className="text-sm text-muted-foreground">
           Free to read, copy and install, for personal and non-commercial
           projects. Shipping it in client work or a paid product needs{' '}
-          <Link href="/#pricing" className="font-medium text-primary hover:underline">
+          <Link href="/pricing" className="font-medium text-primary hover:underline">
             Pro ({formatPrice(pro.priceCents)} once)
           </Link>
           . The source lands in your repo and stops being ours — no attribution,

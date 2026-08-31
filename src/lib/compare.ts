@@ -170,7 +170,7 @@ export const COMPETITORS: Competitor[] = [
     agent: 'Sells "AI-ready prompts" for v0 and Lovable',
     gate: 'source',
     beatsUs:
-      'Sells support and community as features — a private Discord and a 48-hour response time. We have no room to be in and no promise about answering you.',
+      'Sells community as a feature — a private Discord where other buyers answer each other. We publish response targets at /support and beat the 48 hours, but a room full of people who already solved your problem is not something a target replaces.',
   },
   {
     name: 'Preline',

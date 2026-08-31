@@ -264,7 +264,7 @@ export function DesignSystemPanel() {
                 ))}
               </ul>
               <Button asChild className="w-full">
-                <Link href="/#pricing">See Pro</Link>
+                <Link href="/pricing">See Pro</Link>
               </Button>
               {user ? null : (
                 <p className="text-center text-xs text-muted-foreground">

@@ -55,7 +55,7 @@ export async function GET(
     return NextResponse.json(
       {
         error: `"${template.name}" is part of Pro.`,
-        upgrade: '/#pricing',
+        upgrade: '/pricing',
         hint: 'Already bought it? Sign in, or pass a licence key as `Authorization: Bearer hl_live_…`.',
         free: 'marketing-site',
       },

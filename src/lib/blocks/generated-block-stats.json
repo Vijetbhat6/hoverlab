@@ -139,6 +139,14 @@
     "lines": 255,
     "files": 1
   },
+  "modal-unsaved-changes": {
+    "lines": 220,
+    "files": 1
+  },
+  "drawer-record-detail": {
+    "lines": 325,
+    "files": 1
+  },
   "onboarding-checklist": {
     "lines": 230,
     "files": 1
@@ -423,6 +431,14 @@
     "lines": 300,
     "files": 1
   },
+  "dashboard-comparison-period": {
+    "lines": 315,
+    "files": 1
+  },
+  "dashboard-alert-rules": {
+    "lines": 280,
+    "files": 1
+  },
   "data-table-sortable": {
     "lines": 288,
     "files": 1
@@ -445,6 +461,14 @@
   },
   "data-table-bulk-actions": {
     "lines": 394,
+    "files": 1
+  },
+  "data-table-inline-edit": {
+    "lines": 290,
+    "files": 1
+  },
+  "data-table-grouped-rows": {
+    "lines": 235,
     "files": 1
   },
   "settings-nav-layout": {
@@ -471,6 +495,14 @@
     "lines": 297,
     "files": 1
   },
+  "settings-notification-matrix": {
+    "lines": 221,
+    "files": 1
+  },
+  "settings-audit-log": {
+    "lines": 257,
+    "files": 1
+  },
   "empty-state-cta": {
     "lines": 131,
     "files": 1
@@ -493,6 +525,14 @@
   },
   "offline-state-banner": {
     "lines": 173,
+    "files": 1
+  },
+  "empty-filtered-results": {
+    "lines": 186,
+    "files": 1
+  },
+  "maintenance-window-state": {
+    "lines": 228,
     "files": 1
   },
   "metric-sparkline-cards": {
@@ -547,6 +587,14 @@
     "lines": 243,
     "files": 1
   },
+  "billing-invoice-detail": {
+    "lines": 259,
+    "files": 1
+  },
+  "billing-credit-balance": {
+    "lines": 222,
+    "files": 1
+  },
   "command-palette": {
     "lines": 280,
     "files": 1
@@ -565,6 +613,14 @@
   },
   "search-autocomplete": {
     "lines": 347,
+    "files": 1
+  },
+  "search-facet-panel": {
+    "lines": 258,
+    "files": 1
+  },
+  "search-scope-switcher": {
+    "lines": 236,
     "files": 1
   },
   "file-dropzone": {
@@ -609,6 +665,14 @@
   },
   "chat-artifact-canvas": {
     "lines": 321,
+    "files": 1
+  },
+  "chat-model-picker": {
+    "lines": 241,
+    "files": 1
+  },
+  "chat-attachment-tray": {
+    "lines": 258,
     "files": 1
   },
   "agent-thinking-trace": {

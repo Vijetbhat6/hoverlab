@@ -51,7 +51,7 @@ export async function requireTeam(feature: string): Promise<TeamGate> {
       response: NextResponse.json(
         {
           error: `${feature} is part of the Team plan.`,
-          upgrade: '/#pricing',
+          upgrade: '/pricing',
           hint: ent.hasStudio
             ? 'Studio covers the licence for ten people; the shared workspace is what Team adds.'
             : undefined,

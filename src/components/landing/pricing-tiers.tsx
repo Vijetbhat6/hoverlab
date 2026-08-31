@@ -53,6 +53,7 @@ import { usePricing, type Currency } from '@/hooks/use-pricing'
 import { track } from '@/lib/analytics'
 import { cn } from '@/lib/utils'
 import { PLANS, USD_TO_INR, type PlanId } from '@/lib/billing/plans'
+import { supportFor } from '@/lib/billing/support'
 import { DAILY_EXPORTS } from '@/lib/billing/quota-limits'
 import { TOTAL_COUNT } from '@/lib/catalog-stats'
 import { CATEGORIES } from '@/lib/effect-types'
@@ -77,6 +78,20 @@ import { TEMPLATE_COUNT } from '@/lib/templates/template-index'
  * here that could take money for something that does not exist.
  */
 type Feature = string | { label: string; soon: true }
+
+/**
+ * The support row for one tier, in the pricing table's own vocabulary.
+ *
+ * Phrased as what the buyer gets rather than as the tier's internal name:
+ * "Priority support — 1 business day" answers the question, where
+ * "Priority" alone invites it.
+ */
+function supportFeature(plan: PlanId): Feature {
+  const tier = supportFor(plan)
+  return tier.responseDays === null
+    ? tier.label
+    : `${tier.label} — ${tier.responseDays} business day${tier.responseDays === 1 ? '' : 's'}`
+}
 
 interface Tier {
   id: PlanId
@@ -587,8 +602,17 @@ export function PricingTiers({ className }: { className?: string } = {}) {
                 </div>
               )}
 
+            {/*
+              Support, appended rather than typed into each tier's array.
+
+              It is a row every competitor in this category sells and this
+              page did not have at all, and deriving it from
+              `supportFor()` means the pricing page and /support cannot
+              state different numbers — the exact drift that made a
+              hardcoded effect count understate the catalog by 2.7x above.
+            */}
             <ul className="mt-auto space-y-2.5">
-              {tier.features.map((f, j) => {
+              {[...tier.features, supportFeature(tier.id)].map((f, j) => {
                 const soon = typeof f !== 'string'
                 const label = typeof f === 'string' ? f : f.label
                 return (

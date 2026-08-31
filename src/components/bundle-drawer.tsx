@@ -175,7 +175,7 @@ export function BundleDrawer({ open, onOpenChange }: BundleDrawerProps) {
       action: {
         label: result.offer === 'signin' ? 'Sign in' : 'See Pro',
         onClick: () => {
-          window.location.href = result.offer === 'signin' ? '/login' : '/#pricing'
+          window.location.href = result.offer === 'signin' ? '/login' : '/pricing'
         },
       },
     })
@@ -408,7 +408,7 @@ export function BundleDrawer({ open, onOpenChange }: BundleDrawerProps) {
                   : 'No exports left today'}
                 {' · '}
                 {quota.signedIn ? (
-                  <Link href="/#pricing" className="underline underline-offset-2 hover:text-foreground">
+                  <Link href="/pricing" className="underline underline-offset-2 hover:text-foreground">
                     Pro removes the limit
                   </Link>
                 ) : (

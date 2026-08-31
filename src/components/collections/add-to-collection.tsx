@@ -249,7 +249,7 @@ function UpgradePrompt({ signedOut }: { signedOut: boolean }) {
         </div>
       ) : (
         <Button size="sm" className="w-full" asChild>
-          <Link href="/#pricing">See Pro</Link>
+          <Link href="/pricing">See Pro</Link>
         </Button>
       )}
     </div>

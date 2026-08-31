@@ -61,7 +61,7 @@ export function LibraryProTile() {
         <div className="flex items-baseline justify-between gap-2">
           <h3 className="min-w-0 truncate text-sm font-semibold tracking-tight">
             <Link
-              href="/#pricing"
+              href="/pricing"
               className="rounded-sm transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
             >
               Unlock everything
@@ -76,7 +76,7 @@ export function LibraryProTile() {
             All access
           </span>
           <Link
-            href="/#pricing"
+            href="/pricing"
             className="inline-flex h-7 shrink-0 items-center gap-1.5 rounded-md bg-primary px-2.5 text-xs font-medium text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           >
             See what&apos;s in it

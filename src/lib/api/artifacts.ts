@@ -215,7 +215,7 @@ export function buildArtifactPayload(
           license: {
             tier: 'pro' as const,
             message: `"${artifact.name}" is part of Pro. Its description, dependencies and file list are public; its source needs a licence.`,
-            url: `${siteOrigin}/#pricing`,
+            url: `${siteOrigin}/pricing`,
             hint: 'Pass a licence key as `Authorization: Bearer hl_live_…`, or run `npx hoverlab login`. Keys are issued on /account.',
           },
         }

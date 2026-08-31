@@ -11,7 +11,7 @@
     "build": "next build",
     "build:index": "node scripts/build-effect-index.mjs",
     "build:artifacts": "node scripts/build-artifact-sources.mjs",
-    "test": "node --import=tsx --test \"src/lib/**/*.test.ts\"",
+    "test": "node --conditions=react-server --import=tsx --test \"src/lib/**/*.test.ts\"",
     "test:motion": "tsx scripts/test-motion-guard.mts",
     "start": "next start -p 3000",
     "lint": "eslint .",

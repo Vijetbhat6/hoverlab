@@ -223,7 +223,7 @@ export function LicenseCertificate({ className }: { className?: string }) {
             You hold the free licence — everyone does, account or not. For work
             you are paid for, the commercial licence comes with Pro, Studio and
             Team.{' '}
-            <Link href="/#pricing" className="font-medium text-primary hover:underline">
+            <Link href="/pricing" className="font-medium text-primary hover:underline">
               See what each includes
             </Link>
             .

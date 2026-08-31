@@ -31,6 +31,23 @@ const CSS = resolve(root, 'src/app/globals.css')
 const OUT = resolve(root, 'src/lib/registry/generated-tokens.json')
 
 /**
+ * The second consumer, added with the StackBlitz export.
+ *
+ *   src/lib/export/generated-theme-map.json   { "color-primary": "var(--primary)", … }
+ *
+ * `:root` alone is not a theme. Tailwind v4 only turns `--primary` into the
+ * class `bg-primary` because the `@theme inline` block maps one onto the
+ * other, so a sandbox that shipped the token values and not the mapping
+ * would compile every block against colours no utility could reach — the
+ * same silent-invisible failure the oklch tokens already cause once.
+ *
+ * Extracted rather than restated, for the reason in the header: a hand-kept
+ * copy of a forty-line mapping drifts the first time a token is added, and
+ * nothing would report it.
+ */
+const OUT_THEME = resolve(root, 'src/lib/export/generated-theme-map.json')
+
+/**
  * Pull one brace-delimited block out of the stylesheet by its selector.
  *
  * Two things this has to get right, both of which it got wrong first time:
@@ -98,6 +115,38 @@ if (orphans.length) {
   throw new Error(`tokens defined in .dark but not :root — ${orphans.join(', ')}`)
 }
 
+/*
+ * The `@theme inline` mapping, for the same reason and with the same guard.
+ *
+ * Anchoring matters here too: `@theme` appears inside `@custom-variant` on
+ * line 4 in some Tailwind setups, and an unanchored match would return the
+ * wrong block exactly the way `.dark` did.
+ */
+const theme = tokensIn(blockFor(css, '@theme inline'))
+if (Object.keys(theme).length === 0) throw new Error('@theme inline parsed to zero entries')
+
+/*
+ * Every colour token must be reachable from a utility class.
+ *
+ * A `--foo` in `:root` with no `--color-foo` in `@theme inline` is a token
+ * no block can use: `bg-foo` generates no rule, so the property falls back
+ * and the component renders invisible rather than wrong. That is the
+ * failure mode five shipped blocks carried for months, and it is cheap to
+ * catch here — but only for colours. Non-colour tokens (`--radius`, the
+ * four `--brand-*` numbers the palette is derived from, `--shadow-*`) are
+ * consumed through `var()` in CSS and are correctly absent from the map.
+ */
+const NON_COLOUR = /^(radius|brand-|shadow|font-|spacing|ease|duration|header-)/
+const unmapped = Object.keys(light).filter(
+  (name) => !NON_COLOUR.test(name) && !(`color-${name}` in theme),
+)
+if (unmapped.length) {
+  throw new Error(
+    `tokens in :root with no --color-* entry in @theme inline — ${unmapped.join(', ')}. ` +
+      `Add the mapping or the utility class silently generates nothing.`,
+  )
+}
+
 mkdirSync(dirname(OUT), { recursive: true })
 writeFileSync(
   OUT,
@@ -105,6 +154,10 @@ writeFileSync(
   'utf8',
 )
 
+mkdirSync(dirname(OUT_THEME), { recursive: true })
+writeFileSync(OUT_THEME, `${JSON.stringify(theme, null, 2)}\n`, 'utf8')
+
 console.log(
-  `registry tokens: ${Object.keys(light).length} light, ${Object.keys(dark).length} dark -> ${OUT.replace(root, '.')}`,
+  `registry tokens: ${Object.keys(light).length} light, ${Object.keys(dark).length} dark, ` +
+    `${Object.keys(theme).length} theme entries -> ${OUT.replace(root, '.')}`,
 )
