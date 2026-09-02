@@ -17,6 +17,22 @@
  * than unmounted. Switching back to a screen you have already visited keeps
  * its state — the sort you set on the customer table survives a trip to
  * Settings — which is what an actual app does.
+ *
+ * ── THE PHONE BUTTON IS A REAL VIEWPORT ─────────────────────────────────
+ *
+ * It used to be `max-w-sm` on the wrapper, and that was not a mobile
+ * preview — it was the desktop layout squeezed into a narrow column.
+ * Tailwind's breakpoints are viewport media queries, so `sm:` and `md:`
+ * never changed and the thing being shown was a layout no phone would ever
+ * render. `responsive-preview.tsx` has the long version of this argument;
+ * the short version is that the control was lying.
+ *
+ * Every screen in a template is a catalog page, so each one already has a
+ * `/preview/page/<id>` route standing — the same one the block and page
+ * detail pages frame. Narrow mode points an iframe at it and gets a real
+ * 390px viewport for free. Full width still renders the inline server
+ * markup, for exactly the reasons that file gives: it is what a crawler
+ * reads and what the screenshot script captures.
  */
 
 import * as React from 'react'
@@ -28,7 +44,16 @@ export interface PreviewRoute {
   path: string
   label: string
   preview: React.ReactNode
+  /**
+   * The catalog page id backing this screen, which is what makes a real
+   * mobile viewport possible. Optional: a route without one keeps the
+   * inline preview at every width rather than framing a URL that 404s.
+   */
+  pageId?: string
 }
+
+/** iPhone 14/15 logical width — the narrowest mainstream phone worth testing. */
+const PHONE_WIDTH = 390
 
 export function TemplateRouteSwitcher({ routes }: { routes: PreviewRoute[] }) {
   const [active, setActive] = React.useState(0)
@@ -71,12 +96,16 @@ export function TemplateRouteSwitcher({ routes }: { routes: PreviewRoute[] }) {
           </code>
 
           {/* Width toggle — the fastest way to check a template's mobile
-              layout without opening devtools. */}
+              layout without opening devtools. Hidden for a screen with no
+              page id behind it, because there would be no real viewport to
+              switch to and a squeezed column is what this used to get
+              wrong. */}
           <button
             type="button"
             onClick={() => setNarrow((v) => !v)}
             aria-pressed={narrow}
             aria-label={narrow ? 'Preview at full width' : 'Preview at phone width'}
+            hidden={!routes[active]!.pageId}
             className="rounded-lg p-1.5 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
           >
             {narrow ? (
@@ -90,24 +119,39 @@ export function TemplateRouteSwitcher({ routes }: { routes: PreviewRoute[] }) {
 
       {/* Viewport */}
       <div className="max-h-[36rem] overflow-y-auto bg-background">
-        <div
-          className={`mx-auto transition-all ${
-            narrow ? 'max-w-sm border-x border-border/60' : 'max-w-none'
-          }`}
-        >
-          {/*
-            Same guard the block and page detail previews use: these are
-            whole screens, so each one brings its own <h1> and its own
-            navigation. Unguarded, the active route's headline outranked
-            "SaaS Starter" as the page's heading and its nav links led out
-            of the template and into 404s. See `preview-guard.tsx`.
-          */}
-          {routes.map((route, i) => (
-            <div key={route.path} hidden={i !== active}>
-              <PreviewGuard>{route.preview}</PreviewGuard>
-            </div>
-          ))}
-        </div>
+        {narrow && routes[active]!.pageId ? (
+          /*
+            A real 390px viewport, so the template's own `sm:` and `md:`
+            rules resolve the way they would on a phone. Keyed on the page
+            id so switching routes while narrow loads the new screen rather
+            than reusing the previous frame's document.
+          */
+          <div className="flex justify-center bg-muted/30 py-4">
+            <iframe
+              key={routes[active]!.pageId}
+              src={`/preview/page/${routes[active]!.pageId}`}
+              title={`${routes[active]!.label} at ${PHONE_WIDTH} pixels wide`}
+              loading="lazy"
+              style={{ width: PHONE_WIDTH }}
+              className="h-[34rem] rounded-xl border border-border/60 bg-background shadow-sm"
+            />
+          </div>
+        ) : (
+          <div className="mx-auto max-w-none">
+            {/*
+              Same guard the block and page detail previews use: these are
+              whole screens, so each one brings its own <h1> and its own
+              navigation. Unguarded, the active route's headline outranked
+              "SaaS Starter" as the page's heading and its nav links led out
+              of the template and into 404s. See `preview-guard.tsx`.
+            */}
+            {routes.map((route, i) => (
+              <div key={route.path} hidden={i !== active}>
+                <PreviewGuard>{route.preview}</PreviewGuard>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   )

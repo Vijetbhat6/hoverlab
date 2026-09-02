@@ -32,7 +32,7 @@ import { detectFramework } from './detect.mjs'
 import { addArtifact } from './write.mjs'
 import { initTemplate } from './scaffold.mjs'
 import { readProjectConfig, brandCustomization } from './config.mjs'
-import { readLock, recordInstall, LOCK_NAME } from './lockfile.mjs'
+import { readLock, recordInstall, fileDigest, LOCK_NAME } from './lockfile.mjs'
 import {
   CONFIG_FILE,
   clearKey,
@@ -89,6 +89,35 @@ function readCustomization(flags) {
     if (flags[key] !== undefined) customization[key] = flags[key]
   }
   return customization
+}
+
+/**
+ * An artifact response's files, keyed by basename.
+ *
+ * `code` OR `source`, because the two endpoints disagree and always have:
+ * an effect's files carry `code` (they are generated per framework) while a
+ * block's carry `source` (they are files on disk). Reading only `source`
+ * made `diff` report every effect as identical to the catalog no matter
+ * what the local file said — the map came back empty, every lookup missed,
+ * and the command printed its "matches the catalog" success line. A wrong
+ * answer that looks like a right one, which is why this is a helper now
+ * rather than a field access repeated at each call site.
+ */
+function catalogFilesOf(data) {
+  return new Map(
+    (data.files ?? []).map((file) => [path.basename(file.path), file.source ?? file.code]),
+  )
+}
+
+/**
+ * The revision on an artifact response.
+ *
+ * Effects put it on `effect`, everything else on `artifact`. There is no
+ * top-level copy, so reading `data.revision` — which looks like the obvious
+ * thing — silently yields undefined for every tier.
+ */
+function revisionOf(data) {
+  return data.effect?.revision ?? data.artifact?.revision ?? null
 }
 
 /* ------------------------------------------------------------------ *
@@ -158,6 +187,8 @@ export async function commandAdd(ids, flags) {
           id: result.artifact.id,
           level: result.level,
           revision: result.artifact.revision,
+          // Effects only — see the note in lockfile.mjs.
+          framework: result.level === 'effect' ? result.framework : undefined,
           files: result.files ?? [],
         })
       }
@@ -786,10 +817,12 @@ export async function commandDiff(ids, flags) {
       continue
     }
 
-    const data = assertUnlocked(await getArtifact(id, { deep: false }))
-    const catalogFiles = new Map(
-      (data.files ?? []).map((file) => [path.basename(file.path), file.source]),
+    // Fetched in the framework this project installed, or the API's
+    // default when the entry predates that being recorded.
+    const data = assertUnlocked(
+      await getArtifact(id, { deep: false, ...(entry.framework ? { framework: entry.framework } : {}) }),
     )
+    const catalogFiles = catalogFilesOf(data)
 
     let printed = false
 
@@ -821,6 +854,221 @@ export async function commandDiff(ids, flags) {
     if (!printed) {
       out(`${green('OK')} ${cyan(id)} ${dim('matches the catalog.')}`)
     }
+  }
+}
+
+/**
+ * `hoverlab update <id...>` — apply the catalog's newer copy, safely.
+ *
+ * ── WHY THIS IS NOT THE `--fix` `outdated` REFUSES TO HAVE ──────────────
+ *
+ * The header on `commandOutdated` rules out overwriting on the strength of
+ * a hash comparison against the CATALOG, and it is right to: that
+ * comparison says the upstream file changed, not that yours did not. This
+ * command asks a different question, one the lockfile can now answer —
+ * is your copy byte-for-byte what we wrote when you installed it?
+ *
+ * If it is, replacing it destroys nothing, because there is nothing there
+ * to destroy that we did not put there ourselves. If it is not — you edited
+ * it, a formatter touched it, or it predates the hashes and we simply
+ * cannot tell — this refuses to touch it and points at `diff`. There is no
+ * heuristic and no merge: every file is either provably untouched or left
+ * alone.
+ *
+ * `--force` exists for the person who knows their edits are disposable, and
+ * says so explicitly rather than as a side effect of running an update.
+ * `--dry-run` prints the same report and writes nothing.
+ */
+export async function commandUpdate(ids, flags) {
+  const lock = await readLock()
+  const tracked = Object.keys(lock.artifacts)
+
+  if (tracked.length === 0) {
+    out(dim(`No ${LOCK_NAME} here — nothing installed by this CLI to update.`))
+    out(`${dim('It is written the next time you run')} ${cyan('hoverlab add <id>')}`)
+    return
+  }
+
+  // No ids means "everything the catalog has moved on from", which is the
+  // shape of the question people arrive with after running `outdated`.
+  let targets = ids
+  if (targets.length === 0) {
+    let catalog
+    try {
+      catalog = await getRevisions()
+    } catch (error) {
+      throw new Error(
+        `Could not fetch catalog revisions: ${error.message}\n` +
+          '  Your files are untouched — nothing was written.',
+      )
+    }
+    targets = tracked.filter(
+      (id) => catalog.artifacts?.[id] && catalog.artifacts[id].revision !== lock.artifacts[id].revision,
+    )
+    if (targets.length === 0) {
+      out(`${green('OK')} Everything tracked is already up to date.`)
+      return
+    }
+    out(dim(`${targets.length} outdated: ${targets.join(', ')}`))
+    out()
+  }
+
+  const dryRun = flags['dry-run'] === true
+  const force = flags.force === true
+  let updated = 0
+  let skipped = 0
+
+  for (const id of targets) {
+    const entry = lock.artifacts[id]
+    if (!entry) {
+      out(`${yellow('!')} ${cyan(id)} ${dim(`is not in ${LOCK_NAME} — use`)} ${cyan(`hoverlab add ${id}`)}`)
+      skipped += 1
+      continue
+    }
+
+    let data
+    try {
+      data = assertUnlocked(
+        await getArtifact(id, { deep: false, ...(entry.framework ? { framework: entry.framework } : {}) }),
+      )
+    } catch (error) {
+      out(`${yellow('!')} ${cyan(id)} ${dim(error.message)}`)
+      skipped += 1
+      continue
+    }
+
+    const catalogFiles = catalogFilesOf(data)
+
+    /*
+      Every file is checked before any file is written.
+
+      A partial update is the one outcome worse than no update: half an
+      artifact at the new revision and half at the old compiles, runs, and
+      is wrong in a way nobody thinks to look for. So the loop below only
+      decides, and the writes happen after — all of them or none.
+    */
+    const plan = []
+    const blocked = []
+
+    for (const relative of entry.files) {
+      const absolute = path.resolve(process.cwd(), relative)
+      const next = catalogFiles.get(path.basename(relative))
+      if (next === undefined) continue
+
+      let local
+      try {
+        local = await readFile(absolute, 'utf8')
+      } catch {
+        blocked.push({ relative, why: 'is gone from disk' })
+        continue
+      }
+
+      if (local === next) continue // already current
+
+      const recorded = entry.hashes?.[relative]
+      if (!recorded) {
+        blocked.push({
+          relative,
+          why: 'was installed before update tracking, so we cannot tell if you edited it',
+        })
+        continue
+      }
+      if (fileDigest(local) !== recorded) {
+        blocked.push({ relative, why: 'has local changes' })
+        continue
+      }
+
+      plan.push({ absolute, relative, next })
+    }
+
+    if (blocked.length > 0 && !force) {
+      out(`${yellow('!')} ${cyan(id)} ${dim('not updated:')}`)
+      for (const item of blocked) out(`    ${bold(item.relative)} ${dim(item.why)}`)
+      out(`    ${dim('See what would change:')} ${cyan(`hoverlab diff ${id}`)}`)
+      out(`    ${dim('Or overwrite anyway:')} ${cyan(`hoverlab update ${id} --force`)}`)
+      skipped += 1
+      continue
+    }
+
+    if (force) {
+      // With --force the blocked files are written too, so they have to be
+      // put back into the plan rather than merely reported.
+      for (const item of blocked) {
+        const next = catalogFiles.get(path.basename(item.relative))
+        if (next === undefined) continue
+        plan.push({
+          absolute: path.resolve(process.cwd(), item.relative),
+          relative: item.relative,
+          next,
+        })
+      }
+    }
+
+    if (plan.length === 0) {
+      /*
+        Every file already matches the catalog, but the recorded revision
+        may not — an artifact can be re-published with a new revision and
+        byte-identical output (a description edit, a re-run of the build).
+        Without this the lockfile keeps the old revision, `outdated` reports
+        it forever, and running `update` appears to do nothing about it.
+        Syncing the record is the actual update in that case.
+      */
+      const nextRevision = revisionOf(data)
+      if (nextRevision && nextRevision !== entry.revision && !dryRun) {
+        await recordInstall({
+          id,
+          level: entry.level,
+          revision: nextRevision,
+          framework: entry.framework,
+          files: entry.files.map((relative) => path.resolve(process.cwd(), relative)),
+        })
+        out(`${green('✓')} ${cyan(id)} ${dim('files already matched — recorded the new revision.')}`)
+        updated += 1
+        continue
+      }
+      out(`${green('OK')} ${cyan(id)} ${dim('is already current.')}`)
+      continue
+    }
+
+    if (dryRun) {
+      out(`${cyan(id)} ${dim(`would update ${plan.length} file${plan.length === 1 ? '' : 's'}:`)}`)
+      for (const item of plan) out(`    ${item.relative}`)
+      updated += 1
+      continue
+    }
+
+    for (const item of plan) await writeFile(item.absolute, item.next, 'utf8')
+
+    /*
+      Re-recorded with the artifact's WHOLE file list, not just the ones
+      that changed. `recordInstall` replaces the entry outright, so passing
+      only the plan would drop every untouched file out of the lockfile and
+      leave `outdated` tracking a fraction of what is installed. Re-hashing
+      all of them off disk is also what keeps the next `update` comparing
+      against what is actually there rather than against an install from
+      months ago.
+    */
+    await recordInstall({
+      id,
+      level: entry.level,
+      revision: revisionOf(data),
+      framework: entry.framework,
+      files: entry.files.map((relative) => path.resolve(process.cwd(), relative)),
+    })
+
+    out(
+      `${green('✓')} Updated ${cyan(id)} ${dim(
+        `— ${plan.length} file${plan.length === 1 ? '' : 's'}${force && blocked.length ? ', overwriting local changes' : ''}`,
+      )}`,
+    )
+    updated += 1
+  }
+
+  out()
+  const verb = dryRun ? 'would be updated' : 'updated'
+  out(dim(`${updated} ${verb}, ${skipped} skipped.`))
+  if (skipped > 0 && !force) {
+    out(dim('Skipped artifacts keep your edits. Nothing was overwritten.'))
   }
 }
 
@@ -904,6 +1152,9 @@ ${bold('Commands')}
   logout               Forget the stored key
   outdated             List installed artifacts the catalog has since changed
   diff <id...>         Show what changed between your copy and the catalog
+  update [id...]       Apply the catalog's newer copy. Only touches files
+                       you have not edited since installing them; with no
+                       ids, updates everything outdated lists.
   whoami               Show which key is in play, and where it came from
   help                 Show this message
 

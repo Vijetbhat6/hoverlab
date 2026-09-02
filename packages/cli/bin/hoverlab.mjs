@@ -22,6 +22,7 @@ import {
   commandSearch,
   commandShow,
   commandSkill,
+  commandUpdate,
   commandWhoami,
 } from '../src/commands.mjs'
 import { FRAMEWORKS } from '../src/api.mjs'
@@ -168,6 +169,10 @@ async function main() {
 
     case 'diff':
       await commandDiff(rest, flags)
+      return
+
+    case 'update':
+      await commandUpdate(rest, flags)
       return
 
     case 'login':

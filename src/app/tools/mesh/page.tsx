@@ -29,6 +29,9 @@ import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
 import { SliderField, ToggleField } from '@/components/control-field'
 import { CopyCssCard } from '@/components/designer-tools/copy-css-card'
+import { DownloadBar, type DownloadAction } from '@/components/designer-tools/download-bar'
+import { cssPaneToPngBlob, downloadBlob } from '@/lib/download'
+import { arbitrary, classes } from '@/lib/tailwind-arbitrary'
 import { ToolLayout } from '@/components/designer-tools/tool-layout'
 import { ToolPresetsBar } from '@/components/designer-tools/tool-presets-bar'
 import { UseInCatalog } from '@/components/designer-tools/use-in-catalog'
@@ -141,11 +144,62 @@ export default function MeshToolPage() {
     ${backgroundImage};
 }`
 
+  /*
+    The CSS block above indents its layers across several lines for
+    legibility. A class name and a `background` shorthand both want one
+    line, so the newlines and their indentation collapse to single spaces
+    here — once, rather than at each of the two places that need it.
+  */
+  const flatBackgroundImage = backgroundImage.replace(/\s*\n\s*/g, ' ')
+
+  /*
+    The same mesh as Tailwind classes.
+
+    `bg-[…]` twice is safe here where it was not for the shadow tool: one
+    value is a colour and the other is an image, so Tailwind's arbitrary
+    value inference sends them to `background-color` and `background-image`
+    respectively rather than to the same property. They are separate
+    utilities that happen to share a prefix, not two of the same one.
+  */
+  const tailwindClass = classes(
+    arbitrary('bg', state.base),
+    arbitrary('bg', flatBackgroundImage),
+  )
+
   const previewStyle: React.CSSProperties = {
     backgroundColor: state.base,
     backgroundImage: [state.grain ? GRAIN : null, ...layers].filter(Boolean).join(', '),
     height: state.height,
   }
+
+  /*
+    The mesh as a file.
+
+    Rendered from the same `background-color` + `background-image` pair the
+    CSS output carries, so the PNG is the preview rather than an
+    approximation of it. This is the export that closes the loop the header
+    of this file opens: the reason meshes ship as PNGs is that people make
+    them in Figma — now the CSS is the source and the PNG is the artefact,
+    which is the right way round.
+  */
+  const exports = React.useMemo<DownloadAction[]>(
+    () => [
+      {
+        label: 'PNG',
+        title: '1600 x 900, rendered from the CSS above',
+        run: async () => {
+          const blob = await cssPaneToPngBlob(
+            `background-color:${state.base};background-image:${flatBackgroundImage}`,
+            1600,
+            900,
+          )
+          if (!blob) return false
+          downloadBlob(blob, 'mesh-gradient.png')
+        },
+      },
+    ],
+    [state.base, flatBackgroundImage],
+  )
 
   /** New blobs land somewhere plausible rather than always dead centre. */
   function addBlob() {
@@ -226,6 +280,9 @@ export default function MeshToolPage() {
           </p>
 
           <CopyCssCard code={cssBlock} title="CSS" language="css" />
+
+          <DownloadBar actions={exports} />
+          <CopyCssCard code={tailwindClass} title="Tailwind classes" language="html" />
 
           {/* A mesh has a dominant hue, so the catalog exit is offered with
               one — unlike the layout tools, which have no colour to hand it. */}

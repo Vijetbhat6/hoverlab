@@ -27,14 +27,26 @@
  *
  * `state` is opaque to the server (see `lib/tool-presets.ts`), so adding a
  * tool needs no route change and no migration — only this hook.
+ *
+ * There is a third layer, and it is the one that travels between people
+ * rather than between machines: a shared `#s=` link. It is read here, in
+ * the same restore that reads `localStorage`, because the precedence
+ * between the two has to be decided in one place. A link someone was just
+ * handed wins over whatever this browser happened to have — they clicked it
+ * to see a specific thing, and showing them their own last session instead
+ * is the one outcome that makes the link useless. Five tools used to do
+ * this themselves, each with its own field-by-field merge that had to be
+ * updated whenever the tool grew a control; none of them do now.
  */
 
 import * as React from 'react'
 import { useAuth } from '@/components/auth-provider'
 import { track } from '@/lib/analytics'
+import { readSharedState, shareUrlFor } from '@/components/designer-tools/share-link'
 import {
   TOOL_PRESET_LIMITS,
   rejectionReason,
+  shapeMatched,
   sortToolPresets,
   type ToolPreset,
 } from '@/lib/tool-presets'
@@ -58,13 +70,56 @@ function newPresetId(): string {
 }
 
 /**
- * The preset half, with no reference to the tool's own state type.
+ * Undo history for one tool, as two stacks around the present.
+ *
+ * The state itself is not in here — `state` is the present, and these are
+ * the shoulders on either side of it. Keeping the present in the stack too
+ * is the version of this that is always off by one.
+ */
+interface History<T> {
+  past: T[]
+  future: T[]
+}
+
+const EMPTY_HISTORY: History<never> = { past: [], future: [] }
+
+/**
+ * How many steps back a tool remembers.
+ *
+ * Bounded because this is all in memory next to a live preview, and a tool
+ * whose state holds eight shadow layers is not free to keep a thousand
+ * copies of. Fifty is well past the point where someone reaches for the
+ * button instead — beyond about a dozen presses people re-tune rather than
+ * keep undoing.
+ */
+const HISTORY_LIMIT = 50
+
+/**
+ * How long a run of changes counts as one undoable step, in milliseconds.
+ *
+ * This is the whole reason undo is usable on these tools. Every control
+ * here is a slider, and a slider drag fires a change per frame: without
+ * coalescing, one press of ⌘Z moves the blur radius by one pixel and the
+ * feature is worse than not having it. 400ms is longer than the gap between
+ * two frames of a drag and shorter than the gap between two decisions.
+ */
+const HISTORY_COALESCE_MS = 400
+
+/**
+ * The half of the hook that carries no reference to the tool's own state
+ * type — presets, the share link, and undo.
  *
  * Split out so `<ToolPresetsBar>` can take it without being generic. The bar
  * reads nothing but this — it saves whatever the hook is currently holding
  * and never inspects it — so making it generic over each tool's state would
  * be a type parameter that exists only to be discarded, and every call site
  * would have to name a type it already has in hand.
+ *
+ * `shareUrl` belongs here for exactly that reason: it is a getter that
+ * closes over the state and hands back a string, so the bar can offer
+ * "copy link" beside "save" without either of them naming `T`. That is what
+ * makes the feature universal — the bar is already mounted by every tool,
+ * so nothing had to be wired tool by tool.
  */
 export interface ToolPresetsApi {
   /** Saved presets for this tool, newest-touched first. Empty when signed out. */
@@ -82,6 +137,20 @@ export interface ToolPresetsApi {
   applyPreset: (preset: ToolPreset) => void
   /** Forget a preset. */
   deletePreset: (id: string) => Promise<void>
+
+  /**
+   * A link to this tool carrying the current working state, or null when
+   * that state is too large to survive being pasted somewhere. Built at
+   * call time — see `shareUrlFor`.
+   */
+  shareUrl: () => string | null
+
+  /** Step back one change. A no-op with nothing to go back to. */
+  undo: () => void
+  /** Step forward again, until the next edit clears the way forward. */
+  redo: () => void
+  canUndo: boolean
+  canRedo: boolean
 }
 
 export interface UseToolState<T> extends ToolPresetsApi {
@@ -109,6 +178,20 @@ export interface UseToolState<T> extends ToolPresetsApi {
 export function useToolState<T extends object>(
   tool: string,
   defaults: T,
+  /**
+   * Optional last word on a state arriving from a shared link, applied
+   * after `shapeMatched` has already guaranteed the shape.
+   *
+   * For the handful of tools whose state has values the shape guard cannot
+   * check — a `mode` that is one of two strings, a colour that has to parse
+   * as hex, an id that has to name a preset that still exists. Return the
+   * state to use; return null to ignore the link entirely.
+   *
+   * Most tools do not pass this, and should not: the shape guard is the
+   * floor, and inventing a validator for a tool whose state is four numbers
+   * is a second place for the defaults to be written down.
+   */
+  sanitizeShared?: (shared: T) => T | null,
 ): UseToolState<T> {
   const { user } = useAuth()
   const userId = user?.id ?? null
@@ -118,6 +201,7 @@ export function useToolState<T extends object>(
   const [presets, setPresets] = React.useState<ToolPreset[]>([])
   const [loadingPresets, setLoadingPresets] = React.useState(false)
   const [presetError, setPresetError] = React.useState<string | null>(null)
+  const [history, setHistory] = React.useState<History<T>>(EMPTY_HISTORY)
 
   const key = storageKey(tool)
 
@@ -131,6 +215,40 @@ export function useToolState<T extends object>(
     field does not restore `undefined` into it for every returning visitor.
   */
   React.useEffect(() => {
+    /*
+      A shared link wins over this browser's stored state, and is read
+      first so a malformed hash still falls through to the stored value
+      rather than to bare defaults. `readSharedState` strips the hash as it
+      reads, so the visitor's own subsequent edits survive their reloads.
+
+      Both are merged over `defaults` for the same reason: a link or a blob
+      made before this tool grew a control must not restore that control to
+      `undefined`. The merge is shallow, which is all a tool's state has
+      ever needed and all the preset layer promises either.
+    */
+    const shared = readSharedState<unknown>()
+    if (shared !== null) {
+      const matched = shapeMatched(defaults, shared) as T | undefined
+      /*
+        Written out rather than `sanitizeShared?.(matched) ?? matched`,
+        which reads the same and is not: `??` would turn a sanitizer's
+        deliberate `null` — "ignore this link" — back into the state it
+        just rejected.
+      */
+      let safe: T | null = null
+      if (matched !== undefined) {
+        safe = sanitizeShared ? sanitizeShared(matched) : matched
+      }
+      if (safe) {
+        setState(safe)
+        setHydrating(false)
+        return
+      }
+      // A link that survived neither guard falls through to the stored
+      // state rather than to defaults. The hash is already stripped, so a
+      // reload will not re-apply it; showing the visitor their own last
+      // session is the least surprising thing left.
+    }
     try {
       const raw = window.localStorage.getItem(key)
       if (raw) setState({ ...defaults, ...(JSON.parse(raw) as Partial<T>) })
@@ -295,6 +413,121 @@ export function useToolState<T extends object>(
     // Same reason as `applyPreset` above.
   }, [])
 
+  const shareUrl = React.useCallback(() => shareUrlFor(state), [state])
+
+  /*
+    UNDO
+
+    Recorded by watching `state` rather than by wrapping `setState`, which
+    was the first shape and the wrong one: React state updaters have to be
+    pure, and pushing onto a second piece of state from inside one runs
+    twice under StrictMode and records every change in duplicate. An effect
+    that compares against the previous value is both pure and immune to
+    that — the second invocation sees `prev === state` and does nothing.
+
+    It also means undo covers every route into the state for free. A preset
+    applied off the account, a shared link, and a slider drag are all just
+    `state` changing, so all three are undoable without any of them knowing
+    this exists.
+  */
+  const prevStateRef = React.useRef<T>(state)
+  const lastPushRef = React.useRef(0)
+  /** Set while undo/redo is driving `state`, so the trip is not re-recorded. */
+  const travellingRef = React.useRef(false)
+
+  React.useEffect(() => {
+    const prev = prevStateRef.current
+    prevStateRef.current = state
+
+    // The restore is not an edit. Recording it would put "the defaults" one
+    // undo behind every returning visitor's own saved state.
+    if (hydrating) return
+    if (travellingRef.current) {
+      travellingRef.current = false
+      return
+    }
+    if (Object.is(prev, state)) return
+
+    const now = Date.now()
+    const coalesce = now - lastPushRef.current < HISTORY_COALESCE_MS
+    lastPushRef.current = now
+
+    setHistory((h) => ({
+      // Coalescing keeps the OLDER entry — the state as it was before the
+      // drag started. Replacing it with each frame's predecessor would
+      // leave a stack full of the same drag, one pixel apart.
+      past: coalesce && h.past.length > 0 ? h.past : [...h.past, prev].slice(-HISTORY_LIMIT),
+      // Any new edit abandons the redo branch, which is what makes this a
+      // history and not a tree.
+      future: [],
+    }))
+  }, [state, hydrating])
+
+  /*
+    Both read `history` and `state` from the closure rather than from an
+    updater argument. Driving `setState` from inside a `setHistory` updater
+    would be the same impurity the recording effect above exists to avoid —
+    and these run from a click, where the latest render's values are
+    exactly what the user is looking at.
+  */
+  const undo = React.useCallback(() => {
+    if (history.past.length === 0) return
+    travellingRef.current = true
+    setState(history.past[history.past.length - 1]!)
+    setHistory({
+      past: history.past.slice(0, -1),
+      future: [state, ...history.future].slice(0, HISTORY_LIMIT),
+    })
+  }, [history, state])
+
+  const redo = React.useCallback(() => {
+    if (history.future.length === 0) return
+    travellingRef.current = true
+    setState(history.future[0]!)
+    setHistory({
+      past: [...history.past, state].slice(-HISTORY_LIMIT),
+      future: history.future.slice(1),
+    })
+  }, [history, state])
+
+  /*
+    ⌘Z / Ctrl+Z, bound on the window rather than on a container, because
+    the controls these tools scatter across two columns and a preview have
+    no single element that reliably holds focus.
+
+    Skipped when the event came from a text field: those have their own
+    undo stack, and hijacking ⌘Z inside a hex input to revert a slider
+    somewhere else is the kind of thing that makes people stop trusting the
+    shortcut. `preventDefault` only fires on the paths we actually handle.
+  */
+  React.useEffect(() => {
+    function onKeyDown(e: KeyboardEvent) {
+      if (!e.metaKey && !e.ctrlKey) return
+      const target = e.target as HTMLElement | null
+      if (
+        target &&
+        (target.isContentEditable ||
+          target.tagName === 'INPUT' ||
+          target.tagName === 'TEXTAREA' ||
+          target.tagName === 'SELECT')
+      ) {
+        return
+      }
+      const k = e.key.toLowerCase()
+      // Ctrl+Y is the Windows spelling of redo, and costs one clause.
+      if (k === 'z') {
+        e.preventDefault()
+        if (e.shiftKey) redo()
+        else undo()
+      } else if (k === 'y') {
+        e.preventDefault()
+        redo()
+      }
+    }
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+  }, [undo, redo])
+
   return {
     state,
     setState,
@@ -307,5 +540,10 @@ export function useToolState<T extends object>(
     savePreset,
     applyPreset,
     deletePreset,
+    shareUrl,
+    undo,
+    redo,
+    canUndo: history.past.length > 0,
+    canRedo: history.future.length > 0,
   }
 }

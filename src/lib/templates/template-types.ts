@@ -20,14 +20,27 @@ import { toSlug } from '../artifact-types'
  *  Categories
  * ------------------------------------------------------------------ */
 
+/**
+ * `Landing Pages` is deliberately not folded into `Marketing`.
+ *
+ * Marketing holds *sites* — several routes with a landing page among them,
+ * bought by someone who needs a whole web presence. Landing Pages holds
+ * single-argument projects bought by someone who has one thing to launch,
+ * and they are shopped differently: the visitor is comparing four opening
+ * screens, not four sitemaps. Merging them would put a docs site and a
+ * waitlist page in the same grid section, where the only honest sort order
+ * is "which of these is a landing page".
+ */
 export type TemplateCategory =
   | 'Full Product'
+  | 'Landing Pages'
   | 'Marketing'
   | 'Internal Tools'
   | 'Commerce'
 
 export const TEMPLATE_CATEGORIES: TemplateCategory[] = [
   'Full Product',
+  'Landing Pages',
   'Marketing',
   'Internal Tools',
   'Commerce',
@@ -102,6 +115,21 @@ export interface Template
    * makes it different rather than what it shares.
    */
   previewPageId?: string
+  /**
+   * Palette id from `./palettes`, or undefined for the shared indigo.
+   *
+   * Optional rather than required because the seven original templates are
+   * app shells that genuinely should look alike — a dashboard and an admin
+   * panel are the same product with different routes, and giving each one a
+   * different accent would be variety for its own sake. It is the landing
+   * templates that must not match, so they are the ones that set it.
+   *
+   * Naming a palette here does two things at once: `templates.ts` swaps the
+   * generated project's `globals.css` for that palette's, and the card and
+   * detail preview scope the same colours onto the live React so the site
+   * shows what the download will look like.
+   */
+  palette?: string
   /** Page ids, derived from `routes` — the rung immediately below. */
   composedOf: string[]
 }

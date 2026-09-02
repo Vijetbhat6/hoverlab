@@ -17,8 +17,8 @@ import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
 import { Slider } from '@/components/ui/slider'
 import { CopyCssCard } from '@/components/designer-tools/copy-css-card'
+import { arbitrary, classes } from '@/lib/tailwind-arbitrary'
 import { ToolLayout } from '@/components/designer-tools/tool-layout'
-import { readSharedState, ShareLinkButton } from '@/components/designer-tools/share-link'
 import { ToolPresetsBar } from '@/components/designer-tools/tool-presets-bar'
 import { UseInCatalog } from '@/components/designer-tools/use-in-catalog'
 import { ToolWorkbench } from '@/components/designer-tools/tool-workbench'
@@ -138,34 +138,13 @@ export default function EasingToolPage() {
   const draggingRef = React.useRef<'p1' | 'p2' | null>(null)
   const svgRef = React.useRef<SVGSVGElement | null>(null)
 
-  React.useEffect(() => {
-    // A shared link's state wins over whatever this browser had stored.
-    // Declared after `useToolState`, so the hook's restore has already run
-    // by the time this does — which is what keeps that precedence true.
-    const shared = readSharedState<Partial<EasingState>>()
-    if (shared) {
-      setState((prev) => {
-        const next = { ...prev }
-        if (
-          shared.p1 &&
-          typeof shared.p1.x === 'number' &&
-          typeof shared.p1.y === 'number'
-        ) {
-          next.p1 = { x: shared.p1.x, y: shared.p1.y }
-        }
-        if (
-          shared.p2 &&
-          typeof shared.p2.x === 'number' &&
-          typeof shared.p2.y === 'number'
-        ) {
-          next.p2 = { x: shared.p2.x, y: shared.p2.y }
-        }
-        if (typeof shared.duration === 'number') next.duration = shared.duration
-        return next
-      })
-    }
-    // `setState` is stable; the shared link is read once, on mount.
-  }, [])
+  /*
+    No shared-link effect. `useToolState` reads the `#s=` hash inside its own
+    restore, and its shape guard rejects exactly what the field-by-field
+    checks here used to: a `p1` that is not an object, or whose `x` is not a
+    number. The curve maths below calls `.toFixed` on those, so that guard is
+    load-bearing rather than decorative.
+  */
 
   const update = (patch: Partial<EasingState>) =>
     setState((s) => ({ ...s, ...patch }))
@@ -177,6 +156,25 @@ export default function EasingToolPage() {
   const cssBlock = React.useMemo(() => {
     return `.animated {\n  transition: transform ${state.duration}s ${cssValue};\n  /* or: animation-timing-function: ${cssValue}; */\n}`
   }, [cssValue, state.duration])
+
+  /*
+    The same curve as Tailwind classes.
+
+    `duration-[…]` is emitted in milliseconds rather than the seconds the
+    CSS above uses: Tailwind's own duration scale is in ms, so `duration-300`
+    sits beside `duration-[280ms]` legibly while `duration-[0.28s]` reads
+    as a different unit system in the same class list. Both compile to the
+    same thing; only one of them looks like it belongs.
+  */
+  const tailwindClass = React.useMemo(
+    () =>
+      classes(
+        'transition-transform',
+        arbitrary('duration', `${Math.round(state.duration * 1000)}ms`),
+        arbitrary('ease', cssValue),
+      ),
+    [cssValue, state.duration],
+  )
 
   // Approximate the curve as linear() stops: solve y at 16 evenly spaced x
   // values (positions are implied even, so only the values are emitted).
@@ -364,9 +362,6 @@ export default function EasingToolPage() {
             <div className="flex items-center justify-between border-b border-border/60 bg-muted/40 px-4 py-2">
               <span className="text-xs font-medium text-muted-foreground">Live preview</span>
               <div className="flex items-center gap-1">
-                <ShareLinkButton
-                  state={{ p1: state.p1, p2: state.p2, duration: state.duration }}
-                />
                 <Button
                   variant="ghost"
                   size="sm"
@@ -419,6 +414,7 @@ export default function EasingToolPage() {
           </div>
 
           <CopyCssCard code={cssBlock} title="CSS" language="css" />
+          <CopyCssCard code={tailwindClass} title="Tailwind classes" language="html" />
 
           <CopyCssCard code={linearBlock} title="linear() easing" language="css" />
 

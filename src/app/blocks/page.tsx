@@ -26,6 +26,8 @@ import {
 } from '@/lib/blocks/block-index'
 import { TOTAL_COUNT } from '@/lib/catalog-stats'
 import { absoluteUrl } from '@/lib/site'
+import { JsonLd } from '@/components/json-ld'
+import { breadcrumbLd, itemListLd } from '@/lib/structured-data'
 
 const TITLE = `${BLOCK_COUNT} Copy-Paste UI Blocks — Hoverlab`
 const DESCRIPTION =
@@ -57,8 +59,31 @@ export default function BlocksHubPage() {
   const groups = populatedByGroup()
   const categories = populatedBlockCategories()
 
+  /*
+    A CollectionPage + ItemList, and a breadcrumb.
+
+    The detail pages have carried structured data since they were written
+    and the hubs never did, which is backwards for the pages the sitemap
+    ranks highest: these are the ones a "react pricing section" query lands
+    on, and an ItemList is what lets the result carry its own contents
+    rather than a description.
+
+    Capped by `itemListLd` rather than here — a hub can list two hundred
+    blocks and a list that long is ignored by every consumer of it.
+  */
+  const listLd = itemListLd(
+    'Blocks',
+    '/blocks',
+    categories.map((category) => ({
+      name: category,
+      path: `/blocks/${blockCategorySlug(category)}`,
+    })),
+  )
+
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <JsonLd data={listLd} />
+      <JsonLd data={breadcrumbLd([{ name: 'Home', path: '/' }, { name: 'Blocks' }])} />
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         {/* ---------------------------------------------------------- *
          *  Header

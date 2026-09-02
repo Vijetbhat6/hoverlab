@@ -12,7 +12,7 @@
 import * as React from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { Loader2, LogOut, Heart, Package } from 'lucide-react'
+import { Loader2, LogOut, Heart, Package, FolderOpen, ArrowRight } from 'lucide-react'
 import { toast } from 'sonner'
 
 import { useAuth } from '@/components/auth-provider'
@@ -159,6 +159,35 @@ export default function AccountPage() {
             </CardHeader>
           </Card>
         </div>
+
+        {/*
+          Collections had no route from here.
+
+          Favourites and the bundle are both surfaced above as counts, and
+          collections — the third and the only *named* one of the three —
+          was reachable only from the "Save to…" popover on an artifact
+          page. Someone who made one had to remember it existed and type the
+          URL. No count on this card, deliberately: favourites and the
+          bundle are already loaded in this component, and fetching the
+          collections list to render one number would make the account page
+          wait on a request for a link.
+        */}
+        <Link
+          href="/collections"
+          className="group mt-4 flex items-center gap-3 rounded-xl border border-border/60 bg-card/60 p-4 transition-colors hover:border-border hover:bg-card"
+        >
+          <FolderOpen aria-hidden className="h-5 w-5 shrink-0 text-primary" />
+          <span className="min-w-0 flex-1">
+            <span className="block text-sm font-medium">Collections</span>
+            <span className="block text-sm text-muted-foreground">
+              Your named lists of effects, blocks, pages and templates.
+            </span>
+          </span>
+          <ArrowRight
+            aria-hidden
+            className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5"
+          />
+        </Link>
 
         {/*
           UpgradePanel reads the `?checkout=success` return params with

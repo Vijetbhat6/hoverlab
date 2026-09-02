@@ -27,6 +27,7 @@ import 'server-only'
 
 import { TEMPLATE_CATALOG } from './catalog'
 import GENERATED_SOURCES from './generated-template-sources.json'
+import { getPalette, paletteCss } from './palettes'
 import { PAGES } from '../pages/pages'
 import { BLOCKS } from '../blocks/blocks'
 import type { ArtifactFile } from '../artifact-types'
@@ -53,9 +54,37 @@ function blockIdsFor(pageIds: string[]): string[] {
   return [...seen]
 }
 
+/**
+ * The palette's stylesheet in place of the shared one.
+ *
+ * REPLACE, NOT APPEND. `app/globals.css` is already in the scaffolding for
+ * every template — pushing a second file at the same path would put two
+ * entries in the tree, two in the zip, and an off-by-one in every count
+ * derived from `files.length`. The path is matched rather than assumed at
+ * an index, because scaffolding order comes from a directory walk.
+ *
+ * Done here rather than by writing four CSS files under `files/<id>/`,
+ * which the build script would happily have merged, because the on-site
+ * preview needs the same colours as inline custom properties and two
+ * hand-maintained copies of a palette drift on the first retune. See the
+ * header of `./palettes.ts`.
+ */
+function withPalette(files: ArtifactFile[], paletteId: string | undefined): ArtifactFile[] {
+  const palette = getPalette(paletteId)
+  if (!palette) return files
+
+  const css = paletteCss(palette)
+  return files.map((file) =>
+    file.path === 'app/globals.css' ? { ...file, source: css } : file,
+  )
+}
+
 /** Scaffolding + one file per route + one file per distinct block. */
 function assembleFiles(record: (typeof TEMPLATE_CATALOG)[number]): ArtifactFile[] {
-  const files: ArtifactFile[] = [...(scaffolding[record.id] ?? [])]
+  const files: ArtifactFile[] = withPalette(
+    [...(scaffolding[record.id] ?? [])],
+    record.palette,
+  )
 
   // Pages, at the path the route table says they occupy.
   for (const route of record.routes) {
@@ -92,6 +121,19 @@ function assembleFiles(record: (typeof TEMPLATE_CATALOG)[number]): ArtifactFile[
  * section on its own. Merging them would bury the project's own
  * documentation under provenance notes the moment the user opens it.
  */
+/**
+ * Names the palette in the orientation file, when there is one to name.
+ *
+ * Worth the two lines because the first thing somebody does with a landing
+ * template is change the colour, and the difference between "the design
+ * tokens" and "the design tokens, in the Sandstone palette" is whether they
+ * know there is one file to edit rather than a theme system to find.
+ */
+function paletteNote(record: (typeof TEMPLATE_CATALOG)[number]): string {
+  const palette = getPalette(record.palette)
+  return palette ? `, in the ${palette.name} palette` : ''
+}
+
 function gettingStarted(
   record: (typeof TEMPLATE_CATALOG)[number],
   files: ArtifactFile[],
@@ -134,9 +176,9 @@ wire anything up.
 
 ## The two files that matter most
 
-- **\`app/globals.css\`** — the design tokens. Every block styles itself with
-  \`bg-card\` and \`text-muted-foreground\` rather than literal colours, so
-  changing a value here moves the whole project.
+- **\`app/globals.css\`** — the design tokens${paletteNote(record)}. Every block
+  styles itself with \`bg-card\` and \`text-muted-foreground\` rather than
+  literal colours, so changing a value here moves the whole project.
 - **\`tailwind.config.ts\`** — maps those variables onto the class names.
   This file and \`globals.css\` are a pair; neither works alone.
 

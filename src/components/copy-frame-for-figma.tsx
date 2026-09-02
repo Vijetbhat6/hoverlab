@@ -41,7 +41,15 @@ export function CopyFrameForFigma({
   targetId: string
   /** Artifact name — becomes the artboard's layer name. */
   name: string
-  level: 'block' | 'page'
+  /**
+   * Which tier the traced frame belongs to. Reported on the analytics
+   * event only; the tracing itself reads the DOM and does not care.
+   *
+   * `template` traces the screen the route switcher currently shows, which
+   * is one of the template's pages — the preview is already public, so
+   * this is not a way around the download gate.
+   */
+  level: 'block' | 'page' | 'template'
   className?: string
 }) {
   const [state, setState] = React.useState<'idle' | 'working' | 'done'>('idle')

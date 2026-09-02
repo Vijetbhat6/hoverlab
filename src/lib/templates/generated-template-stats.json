@@ -26,5 +26,41 @@
   "storefront": {
     "lines": 510,
     "files": 10
+  },
+  "startup-waitlist": {
+    "lines": 541,
+    "files": 10
+  },
+  "developer-tool": {
+    "lines": 544,
+    "files": 10
+  },
+  "mobile-app": {
+    "lines": 555,
+    "files": 10
+  },
+  "agency-studio": {
+    "lines": 585,
+    "files": 10
+  },
+  "local-service": {
+    "lines": 595,
+    "files": 10
+  },
+  "marketplace": {
+    "lines": 582,
+    "files": 10
+  },
+  "enterprise": {
+    "lines": 565,
+    "files": 10
+  },
+  "integration-platform": {
+    "lines": 554,
+    "files": 10
+  },
+  "creator-course": {
+    "lines": 571,
+    "files": 10
   }
 }

@@ -19,6 +19,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { SliderField } from '@/components/control-field'
 import { CopyCssCard } from '@/components/designer-tools/copy-css-card'
+import { arbitrary, classes } from '@/lib/tailwind-arbitrary'
 import { ToolLayout } from '@/components/designer-tools/tool-layout'
 import { ToolPresetsBar } from '@/components/designer-tools/tool-presets-bar'
 import { UseInCatalog } from '@/components/designer-tools/use-in-catalog'
@@ -132,6 +133,27 @@ export default function BorderRadiusToolPage() {
     return `.box {\n  border-radius: ${tl}px ${tr}px ${br}px ${bl}px;\n}`
   }, [state.tl, state.tr, state.br, state.bl])
 
+  /*
+    The same corners as Tailwind classes.
+
+    Four equal corners collapse to one `rounded-[…]`, which is what anyone
+    would write by hand. Uneven corners deliberately do NOT go into a single
+    `rounded-[…]` using the four-value shorthand: per-corner utilities read
+    better in a className and, more to the point, stay individually
+    overridable at a breakpoint — which is most of the reason someone is
+    pasting Tailwind rather than the CSS above it.
+  */
+  const tailwindClass = React.useMemo(() => {
+    const { tl, tr, br, bl } = state
+    if (tl === tr && tr === br && br === bl) return arbitrary('rounded', `${tl}px`)
+    return classes(
+      arbitrary('rounded-tl', `${tl}px`),
+      arbitrary('rounded-tr', `${tr}px`),
+      arbitrary('rounded-br', `${br}px`),
+      arbitrary('rounded-bl', `${bl}px`),
+    )
+  }, [state.tl, state.tr, state.br, state.bl])
+
   const squircleSvgPath = React.useMemo(
     () => squirclePath(state.squircleSize, state.squircleCurve),
     [state.squircleSize, state.squircleCurve],
@@ -218,7 +240,10 @@ export default function BorderRadiusToolPage() {
 
           {/* Per-mode output */}
           {state.mode === 'standard' && (
-            <CopyCssCard code={standardCss} title="CSS" language="css" />
+            <>
+              <CopyCssCard code={standardCss} title="CSS" language="css" />
+              <CopyCssCard code={tailwindClass} title="Tailwind class" language="html" />
+            </>
           )}
           {state.mode === 'squircle' && (
             <>

@@ -18,11 +18,13 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Slider } from '@/components/ui/slider'
 import { CopyCssCard } from '@/components/designer-tools/copy-css-card'
+import { DownloadBar, type DownloadAction } from '@/components/designer-tools/download-bar'
+import { downloadBlob, downloadText, fileSlug, svgToPngBlob } from '@/lib/download'
+import { encodeAse } from '@/lib/ase'
 import { ToolLayout } from '@/components/designer-tools/tool-layout'
 import { ToolPresetsBar } from '@/components/designer-tools/tool-presets-bar'
 import { UseInCatalog } from '@/components/designer-tools/use-in-catalog'
 import { useToolState } from '@/hooks/use-tool-state'
-import { readSharedState, ShareLinkButton } from '@/components/designer-tools/share-link'
 import { ToolWorkbench } from '@/components/designer-tools/tool-workbench'
 import {
   generatePalette,
@@ -34,6 +36,44 @@ import {
   type PaletteScheme,
 } from '@/lib/color-tools'
 import { cn } from '@/lib/utils'
+
+/**
+ * The palette as a printable swatch sheet.
+ *
+ * Built as SVG and rasterised rather than drawn on a canvas directly,
+ * because text on a canvas needs the font to have loaded and measured, and
+ * a sheet whose labels are half a swatch off is worse than no sheet. SVG
+ * lets the browser lay it out.
+ *
+ * The hex is printed on every swatch on purpose: this file's whole job is
+ * to be readable by someone who cannot open the tool it came from.
+ */
+function paletteSheetSvg(name: string, colors: string[]): string {
+  const width = 1000
+  const height = 260
+  const swatchWidth = width / Math.max(colors.length, 1)
+  const escape = (s: string) =>
+    s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+
+  const swatches = colors
+    .map((hex, i) => {
+      const x = i * swatchWidth
+      // Label colour follows the swatch's own luminance, so a hex on a pale
+      // yellow is as readable as one on a navy.
+      const rgb = hexToRgb(hex)
+      const luminance = rgb ? (rgb.r * 299 + rgb.g * 587 + rgb.b * 114) / 1000 : 0
+      const ink = luminance > 150 ? '#111827' : '#ffffff'
+      return `  <rect x="${x}" y="0" width="${swatchWidth}" height="200" fill="${escape(hex)}"/>
+  <text x="${x + swatchWidth / 2}" y="180" fill="${ink}" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="20" text-anchor="middle">${escape(hex.toUpperCase())}</text>`
+    })
+    .join('\n')
+
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">
+  <rect width="${width}" height="${height}" fill="#ffffff"/>
+${swatches}
+  <text x="20" y="238" fill="#111827" font-family="ui-sans-serif, system-ui, sans-serif" font-size="22" font-weight="600">${escape(name)}</text>
+</svg>`
+}
 
 const SCHEMES: { id: PaletteScheme; label: string }[] = [
   { id: 'analogous', label: 'Analogous' },
@@ -85,19 +125,6 @@ export default function PaletteToolPage() {
     [setState],
   )
 
-  // A shared link's state wins over whatever this browser had stored, so it
-  // runs after hydration rather than racing it.
-  React.useEffect(() => {
-    if (tool.hydrating) return
-    const shared = readSharedState<PaletteState>()
-    if (!shared) return
-    const n = shared.base ? normalizeHex(shared.base) : null
-    setState((s) => ({
-      base: n ?? s.base,
-      scheme: SCHEMES.some((x) => x.id === shared.scheme) ? shared.scheme : s.scheme,
-    }))
-  }, [tool.hydrating, setState])
-
   const palette = React.useMemo(() => generatePalette(base, scheme), [base, scheme])
 
   // Generate exports.
@@ -130,6 +157,53 @@ export default function PaletteToolPage() {
       2,
     )
   }, [palette, base])
+
+  /*
+    File exports, as opposed to the three clipboard formats above.
+
+    `.ase` is the one that matters and the reason this row exists: it is
+    what opens a palette in Photoshop, Illustrator, Figma and Affinity, and
+    it is the format a designer asks for by name. The PNG is for the other
+    half of that conversation — a swatch sheet you can drop into a deck or
+    a message thread without the recipient needing a design tool at all.
+  */
+  const exports = React.useMemo<DownloadAction[]>(() => {
+    const slug = fileSlug(palette.name, 'palette')
+    return [
+      {
+        label: '.ase',
+        title: 'Adobe Swatch Exchange — Photoshop, Illustrator, Figma, Affinity',
+        run: () => {
+          const bytes = encodeAse(
+            palette.colors.map((hex, i) => ({ name: `${palette.name} ${i + 1}`, hex })),
+          )
+          // A fresh ArrayBuffer copy, because `bytes` is a view over a
+          // buffer whose type the Blob constructor will not accept directly.
+          downloadBlob(
+            new Blob([new Uint8Array(bytes)], { type: 'application/octet-stream' }),
+            `${slug}.ase`,
+          )
+        },
+      },
+      {
+        label: 'PNG',
+        title: 'A swatch sheet, for a deck or a message',
+        run: async () => {
+          const blob = await svgToPngBlob(paletteSheetSvg(palette.name, palette.colors), 1000, 260)
+          if (!blob) return false
+          downloadBlob(blob, `${slug}.png`)
+        },
+      },
+      {
+        label: 'CSS',
+        run: () => downloadText(cssVars, `${slug}.css`, 'text/css'),
+      },
+      {
+        label: 'JSON',
+        run: () => downloadText(jsonExport, `${slug}.json`, 'application/json'),
+      },
+    ]
+  }, [palette, cssVars, jsonExport])
 
   return (
     <ToolLayout
@@ -212,7 +286,6 @@ export default function PaletteToolPage() {
                   <ArrowRight className="h-3.5 w-3.5" />
                 </Link>
               </Button>
-              <ShareLinkButton state={{ base, scheme }} />
             </div>
           </div>
 
@@ -222,6 +295,8 @@ export default function PaletteToolPage() {
           <CopyCssCard code={cssVars} title="CSS variables" language="css" />
           <CopyCssCard code={tailwindConfig} title="Tailwind config" language="js" />
           <CopyCssCard code={jsonExport} title="JSON" language="json" />
+
+          <DownloadBar actions={exports} />
 
           {/*
             The base colour is a hex; the catalog's brand is OKLCH hue and

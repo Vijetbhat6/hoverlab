@@ -10,6 +10,8 @@ import { EFFECTS } from '@/lib/effects'
 import { CATEGORIES, categoryFromSlug, categorySlug, type Effect } from '@/lib/effect-types'
 import { CATEGORY_META } from '@/lib/category-meta'
 import { absoluteUrl } from '@/lib/site'
+import { JsonLd } from '@/components/json-ld'
+import { breadcrumbLd } from '@/lib/structured-data'
 import { cn } from '@/lib/utils'
 
 /**
@@ -113,6 +115,22 @@ export default async function CategoryPage({ params }: PageProps) {
             },
           }),
         }}
+      />
+
+      {/*
+        The breadcrumb the visible <nav> below already draws, in the form a
+        search engine reads. It was the only one of the two: the page has
+        rendered Home > Effects > Category as links since it was written and
+        said none of it in structured data, so a result for one of these —
+        and these are the head-term landing pages — showed a bare URL where
+        every sibling hub now shows a trail.
+      */}
+      <JsonLd
+        data={breadcrumbLd([
+          { name: 'Home', path: '/' },
+          { name: 'Effects', path: '/library' },
+          { name: category },
+        ])}
       />
 
       <header className="border-b border-border/60">

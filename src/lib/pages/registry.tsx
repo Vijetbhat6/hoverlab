@@ -16,6 +16,15 @@
 import type * as React from 'react'
 
 import SaasLandingPage from './sources/saas-landing-page'
+import WaitlistLandingPage from './sources/waitlist-landing-page'
+import DeveloperToolLandingPage from './sources/developer-tool-landing-page'
+import MobileAppLandingPage from './sources/mobile-app-landing-page'
+import AgencyLandingPage from './sources/agency-landing-page'
+import LocalServiceLandingPage from './sources/local-service-landing-page'
+import MarketplaceLandingPage from './sources/marketplace-landing-page'
+import EnterpriseLandingPage from './sources/enterprise-landing-page'
+import IntegrationPlatformLandingPage from './sources/integration-platform-landing-page'
+import CreatorCourseLandingPage from './sources/creator-course-landing-page'
 import PricingPage from './sources/pricing-page'
 import BlogIndexPage from './sources/blog-index-page'
 import ArticlePage from './sources/article-page'
@@ -40,6 +49,15 @@ import AccountOrdersPage from './sources/account-orders-page'
 
 export const PAGE_PREVIEWS: Record<string, React.ReactNode> = {
   'saas-landing-page': <SaasLandingPage />,
+  'waitlist-landing-page': <WaitlistLandingPage />,
+  'developer-tool-landing-page': <DeveloperToolLandingPage />,
+  'mobile-app-landing-page': <MobileAppLandingPage />,
+  'agency-landing-page': <AgencyLandingPage />,
+  'local-service-landing-page': <LocalServiceLandingPage />,
+  'marketplace-landing-page': <MarketplaceLandingPage />,
+  'enterprise-landing-page': <EnterpriseLandingPage />,
+  'integration-platform-landing-page': <IntegrationPlatformLandingPage />,
+  'creator-course-landing-page': <CreatorCourseLandingPage />,
   'pricing-page': <PricingPage />,
   'blog-index-page': <BlogIndexPage />,
   'article-page': <ArticlePage />,

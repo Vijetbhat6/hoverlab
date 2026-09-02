@@ -55,6 +55,15 @@ export default function robots(): MetadataRoute.Robots {
           '/embed/',
           // Keep in sync with PROTECTED_PREFIXES in proxy.ts.
           '/playground',
+          /*
+            /collections was in that list and missing from this one. It
+            carries `robots: { index: false }` in its own metadata, so it
+            was never going to rank — but a crawler still had to request it
+            to find that out, and every one of those requests is a redirect
+            to /login for a page with nothing on it. Listed here it is not
+            fetched at all, and the two lists say the same thing again.
+          */
+          '/collections',
         ],
       },
     ],

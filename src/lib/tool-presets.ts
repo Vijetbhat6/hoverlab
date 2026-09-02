@@ -206,6 +206,72 @@ export function sanitizeToolPreset(
 }
 
 /**
+ * Keep only the parts of `incoming` that match the shape of `reference`.
+ *
+ * The floor under a tool state that arrived from someone else. `localStorage`
+ * and a saved preset are things the visitor made; a shared `#s=` link is a
+ * thing they were handed, and it can say anything — so it is the one restore
+ * path with an attacker on the other end of it.
+ *
+ * "Match the shape" means: the key exists in the reference, and the value has
+ * the same `typeof`, array-ness and null-ness. Arrays are filtered element by
+ * element against the first reference element, objects recurse. What survives
+ * cannot turn a number into a string or an object into an array, which is the
+ * class of breakage that turns a tool into a blank panel — or, where a tool
+ * calls `.toFixed()` on a restored value, into a crash.
+ *
+ * It does NOT know that a `mode` may only be `'presets' | 'blob'`, or that a
+ * hex colour is six characters. No generic function can. A tool needing that
+ * narrows further via `useToolState`'s `sanitizeShared`.
+ *
+ * Returns `undefined` — never a partial repair — when the top-level shapes
+ * disagree, so the caller can tell "nothing usable" from "an object with
+ * some fields dropped".
+ */
+export function shapeMatched(reference: unknown, incoming: unknown): unknown {
+  if (reference === null || incoming === null) {
+    return reference === null && incoming === null ? incoming : undefined
+  }
+  if (Array.isArray(reference)) {
+    if (!Array.isArray(incoming)) return undefined
+    // An empty reference array carries no element shape to check against, so
+    // its elements pass through — a tool whose list starts empty is telling
+    // us it has no template for a row.
+    const template = reference[0]
+    if (template === undefined) return incoming
+    return incoming
+      .map((item) => shapeMatched(template, item))
+      .filter((item) => item !== undefined)
+  }
+  if (typeof reference === 'object') {
+    if (typeof incoming !== 'object' || Array.isArray(incoming)) return undefined
+    const out: Record<string, unknown> = { ...(reference as Record<string, unknown>) }
+    for (const [k, v] of Object.entries(incoming as Record<string, unknown>)) {
+      /*
+        Unknown keys are dropped rather than merged. A tool's state is a
+        closed set, and a stranger's key merged in here would be written
+        straight back to `localStorage` on the next change — outliving the
+        link that delivered it, on a machine whose owner never chose it.
+
+        `Object.hasOwn`, not `k in out`. `in` walks the prototype chain, so
+        it answers true for `__proto__`, `constructor` and `toString` on
+        every object alive — and `out[k] = …` for the first of those is not
+        a property write at all, it is a call to the `__proto__` setter that
+        reparents `out`. A JSON payload can carry that key (`JSON.parse`
+        makes it an own property, unlike an object literal), which makes
+        this the one line here that a hand-edited hash could otherwise use
+        to do something other than fill in a slider.
+      */
+      if (!Object.hasOwn(out, k)) continue
+      const matched = shapeMatched(out[k], v)
+      if (matched !== undefined) out[k] = matched
+    }
+    return out
+  }
+  return typeof reference === typeof incoming ? incoming : undefined
+}
+
+/**
  * Most recently touched first.
  *
  * `updatedAt`, not `createdAt`: a preset you keep coming back to should not

@@ -25,16 +25,32 @@ export async function GET() {
       name: 'Hoverlab API',
       version: API_VERSION,
       documentation: `${siteUrl.replace(/\/$/, '')}/docs/api`,
+      /*
+        Every public route under /api/v1, not just the four catalog tiers.
+
+        This listed the tiers and stopped, which left `skills`, `dna`,
+        `trending` and `revisions` reachable but undiscoverable: the one URL
+        somebody pokes at by hand before reading any docs said they did not
+        exist. They are the endpoints the agent rails are built on — the CLI
+        and the MCP server call them — so they are precisely what the reader
+        of this response is looking for.
+      */
       endpoints: {
         artifacts: `${base}/artifacts/{id}`,
         effects: `${base}/effects`,
         blocks: `${base}/blocks`,
         pages: `${base}/pages`,
         templates: `${base}/templates`,
+        skills: `${base}/skills`,
+        dna: `${base}/dna/{id}`,
+        trending: `${base}/trending`,
+        revisions: `${base}/revisions`,
       },
       notes: [
         'Public and unauthenticated — no key required.',
         'Use /artifacts/{id} when you do not know which tier an id belongs to.',
+        'skills returns agent skill documents; dna returns an artifact’s tokens, shape, motion and rules.',
+        'revisions is what `npx hoverlab outdated` compares against; trending ranks by recorded copies and installs.',
       ],
     },
     { cache: LIST_CACHE },

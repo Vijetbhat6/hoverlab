@@ -23,6 +23,8 @@ import {
 } from '@/lib/pages/page-index'
 import { BLOCK_COUNT } from '@/lib/blocks/block-index'
 import { absoluteUrl } from '@/lib/site'
+import { JsonLd } from '@/components/json-ld'
+import { breadcrumbLd, itemListLd } from '@/lib/structured-data'
 
 const TITLE = `${PAGE_COUNT} Ready-Made Page Layouts — Hoverlab`
 const DESCRIPTION =
@@ -57,8 +59,22 @@ export default function PagesHubPage() {
   // much of the block catalog the pages tier actually exercises.
   const blocksUsed = new Set(PAGE_INDEX.flatMap((p) => p.composedOf)).size
 
+  /*
+    See /blocks for why the hubs carry this. Listed by category rather than
+    by page: the categories are what the sitemap ranks and what a reader is
+    choosing between here, and enumerating every page would put the tier's
+    whole contents in a list nothing renders.
+  */
+  const listLd = itemListLd(
+    'Pages',
+    '/pages',
+    categories.map((category) => ({ name: category, path: '/pages' })),
+  )
+
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <JsonLd data={listLd} />
+      <JsonLd data={breadcrumbLd([{ name: 'Home', path: '/' }, { name: 'Pages' }])} />
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <TierDefinition tier="page" />
 

@@ -4,6 +4,7 @@ import {
   isToolId,
   rejectionReason,
   sanitizeToolPreset,
+  shapeMatched,
   sortToolPresets,
   TOOL_PRESET_LIMITS,
   type ToolPreset,
@@ -140,5 +141,113 @@ describe('sortToolPresets', () => {
       sortToolPresets([a, b]).map((p) => p.id),
       ['b', 'a'],
     )
+  })
+})
+
+/**
+ * `shapeMatched` guards the one restore path with a stranger on the far end
+ * of it: a `#s=` link. The tests below are all things a hand-edited hash
+ * could actually carry, and each one names the breakage it prevents rather
+ * than just asserting a shape.
+ */
+describe('shapeMatched', () => {
+  const defaults = {
+    mode: 'box',
+    angle: 135,
+    oklch: false,
+    point: { x: 0.4, y: 0 },
+    stops: [{ id: 's1', color: '#fff', position: 0 }],
+  }
+
+  test('passes a state that matches the reference through unchanged', () => {
+    const incoming = {
+      mode: 'text',
+      angle: 90,
+      oklch: true,
+      point: { x: 1, y: 0.5 },
+      stops: [{ id: 'a', color: '#000', position: 20 }],
+    }
+    assert.deepEqual(shapeMatched(defaults, incoming), incoming)
+  })
+
+  test('fills missing keys from the reference, so a link made before a control existed still opens', () => {
+    assert.deepEqual(shapeMatched(defaults, { angle: 10 }), { ...defaults, angle: 10 })
+  })
+
+  test('drops a key the tool does not have, so it cannot reach localStorage', () => {
+    const out = shapeMatched(defaults, { angle: 10, evil: 'payload' }) as Record<string, unknown>
+    assert.equal('evil' in out, false)
+  })
+
+  test('rejects a string where a number belongs — the .toFixed() crash', () => {
+    const out = shapeMatched(defaults, { angle: '90' }) as Record<string, unknown>
+    assert.equal(out.angle, 135)
+  })
+
+  test('rejects an array where an object belongs', () => {
+    const out = shapeMatched(defaults, { point: [1, 2] }) as Record<string, unknown>
+    assert.deepEqual(out.point, defaults.point)
+  })
+
+  test('rejects an object where an array belongs', () => {
+    const out = shapeMatched(defaults, { stops: { id: 'a' } }) as Record<string, unknown>
+    assert.deepEqual(out.stops, defaults.stops)
+  })
+
+  test('recurses into objects, keeping the good half of a mixed one', () => {
+    const out = shapeMatched(defaults, { point: { x: 0.9, y: 'nope' } }) as Record<
+      string,
+      unknown
+    >
+    assert.deepEqual(out.point, { x: 0.9, y: 0 })
+  })
+
+  test('filters array elements individually rather than failing the whole list', () => {
+    const out = shapeMatched(defaults, {
+      stops: [{ id: 'a', color: '#000', position: 0 }, 'not-a-stop', { id: 'b' }],
+    }) as Record<string, unknown>
+    assert.deepEqual(out.stops, [
+      { id: 'a', color: '#000', position: 0 },
+      { id: 'b', color: '#fff', position: 0 },
+    ])
+  })
+
+  test('returns undefined when the top-level shapes disagree, so the caller can fall back', () => {
+    assert.equal(shapeMatched(defaults, 'a string'), undefined)
+    assert.equal(shapeMatched(defaults, [1, 2, 3]), undefined)
+    assert.equal(shapeMatched(defaults, null), undefined)
+  })
+
+  test('null is only accepted where the reference is also null', () => {
+    const out = shapeMatched(defaults, { point: null }) as Record<string, unknown>
+    assert.deepEqual(out.point, defaults.point)
+    assert.deepEqual(shapeMatched({ a: null }, { a: null }), { a: null })
+    assert.deepEqual(shapeMatched({ a: null }, { a: 1 }), { a: null })
+  })
+
+  test('an empty reference array has no element template, so its items pass', () => {
+    assert.deepEqual(shapeMatched({ xs: [] }, { xs: [1, 'two'] }), { xs: [1, 'two'] })
+  })
+
+  test('__proto__ is dropped, and does not reparent the result', () => {
+    // JSON.parse makes `__proto__` an own property; an object literal would
+    // not, so this has to go through the parser to be the real payload.
+    const out = shapeMatched(
+      defaults,
+      JSON.parse('{"__proto__":{"polluted":true},"angle":10}'),
+    ) as Record<string, unknown>
+    assert.deepEqual(out, { ...defaults, angle: 10 })
+    assert.equal(Object.getPrototypeOf(out), Object.prototype)
+    assert.equal((out as { polluted?: unknown }).polluted, undefined)
+    assert.equal(({} as { polluted?: unknown }).polluted, undefined)
+  })
+
+  test('constructor and toString are dropped too — `in` would have kept all three', () => {
+    const out = shapeMatched(
+      defaults,
+      JSON.parse('{"constructor":"x","toString":"y","angle":10}'),
+    ) as Record<string, unknown>
+    assert.deepEqual(out, { ...defaults, angle: 10 })
+    assert.equal(typeof out.toString, 'function')
   })
 })

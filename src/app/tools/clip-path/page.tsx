@@ -23,8 +23,8 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { SliderField } from '@/components/control-field'
 import { CopyCssCard } from '@/components/designer-tools/copy-css-card'
+import { arbitraryValue } from '@/lib/tailwind-arbitrary'
 import { ToolLayout } from '@/components/designer-tools/tool-layout'
-import { readSharedState, ShareLinkButton } from '@/components/designer-tools/share-link'
 import { ToolPresetsBar } from '@/components/designer-tools/tool-presets-bar'
 import { UseInCatalog } from '@/components/designer-tools/use-in-catalog'
 import { ToolWorkbench } from '@/components/designer-tools/tool-workbench'
@@ -403,43 +403,36 @@ const DEFAULT_STATE: ClipState = {
   gradTo: '#6366f1',
 }
 
+/**
+ * The two fields `useToolState`'s shape guard cannot check on a shared link.
+ *
+ * The guard guarantees `mode` is a string and `presetId` is a string. It
+ * cannot know that `mode` is one of two, or that `presetId` has to name a
+ * shape that still exists — `PRESETS` is data this file owns. Both matter
+ * on render: an unrecognised `mode` matches neither output branch and draws
+ * an empty panel, and a stale `presetId` would silently fall back to the
+ * first shape while the controls claimed otherwise.
+ *
+ * Numbers are left alone. Seed, points and jitter fully determine the blob,
+ * and the sliders clamp them; a link carrying an out-of-range one draws an
+ * odd shape, which is a shape, not a broken page.
+ */
+function sanitizeShared(shared: ClipState): ClipState {
+  return {
+    ...shared,
+    mode: shared.mode === 'presets' || shared.mode === 'blob' ? shared.mode : DEFAULT_STATE.mode,
+    presetId: PRESETS.some((p) => p.id === shared.presetId)
+      ? shared.presetId
+      : DEFAULT_STATE.presetId,
+  }
+}
+
 export default function ClipPathToolPage() {
   // Working state stays local and ungated; named presets need an account.
   // See `use-tool-state.ts` for why the two layers are separate.
-  const tool = useToolState<ClipState>(TOOL, DEFAULT_STATE)
+  const tool = useToolState<ClipState>(TOOL, DEFAULT_STATE, sanitizeShared)
   const { state, setState } = tool
   const gradientId = React.useId()
-
-  React.useEffect(() => {
-    // A shared link's state wins over whatever this browser had stored.
-    // This effect is declared after `useToolState`, so the hook's restore
-    // has already run by the time it does — which is what keeps that
-    // precedence true rather than a race.
-    // Seed, points and jitter fully determine the blob, so a shared link
-    // reproduces it exactly.
-    const shared = readSharedState<Partial<ClipState>>()
-    if (shared) {
-      setState((prev) => {
-        const next = { ...prev }
-        if (shared.mode === 'presets' || shared.mode === 'blob') next.mode = shared.mode
-        if (
-          typeof shared.presetId === 'string' &&
-          PRESETS.some((p) => p.id === shared.presetId)
-        ) {
-          next.presetId = shared.presetId
-        }
-        if (typeof shared.p1 === 'number') next.p1 = shared.p1
-        if (typeof shared.p2 === 'number') next.p2 = shared.p2
-        if (typeof shared.blobPoints === 'number') next.blobPoints = shared.blobPoints
-        if (typeof shared.blobJitter === 'number') next.blobJitter = shared.blobJitter
-        if (typeof shared.blobSeed === 'number') next.blobSeed = shared.blobSeed
-        if (typeof shared.gradFrom === 'string') next.gradFrom = shared.gradFrom
-        if (typeof shared.gradTo === 'string') next.gradTo = shared.gradTo
-        return next
-      })
-    }
-    // `setState` is stable; the shared link is read once, on mount.
-  }, [])
 
   const update = (patch: Partial<ClipState>) => setState((s) => ({ ...s, ...patch }))
 
@@ -461,6 +454,18 @@ export default function ClipPathToolPage() {
 
   const polygonCss = React.useMemo(
     () => `.shape {\n  clip-path: ${polygon};\n}`,
+    [polygon],
+  )
+
+  /*
+    The same shape as a Tailwind class.
+
+    The arbitrary-PROPERTY form, because there is no `clip-path` utility to
+    hang a value off — `[clip-path:…]` is the whole mechanism Tailwind
+    offers for a property it does not model, and it is exactly right here.
+  */
+  const tailwindClass = React.useMemo(
+    () => `[clip-path:${arbitraryValue(polygon)}]`,
     [polygon],
   )
 
@@ -530,12 +535,14 @@ export default function ClipPathToolPage() {
                 {m}
               </button>
             ))}
-            <ShareLinkButton state={state} />
           </div>
 
           {/* Per-mode output */}
           {state.mode === 'presets' && (
-            <CopyCssCard code={polygonCss} title="CSS" language="css" />
+            <>
+              <CopyCssCard code={polygonCss} title="CSS" language="css" />
+              <CopyCssCard code={tailwindClass} title="Tailwind class" language="html" />
+            </>
           )}
           {state.mode === 'blob' && (
             <>

@@ -18,6 +18,21 @@
  * This is the mechanism. `add` records the id and the revision it wrote;
  * `outdated` compares those against `/api/v1/revisions`.
  *
+ * ── WHY THE FILE HASHES ARE HERE ────────────────────────────────────────
+ *
+ * `add` also records a SHA-256 of every file exactly as it was written.
+ * That single field is what makes `hoverlab update` possible without it
+ * being the destructive command `outdated`'s header rightly refuses to
+ * build: with a hash, the CLI can *prove* a file has not been touched
+ * since it was installed, and update only those. Without one it can only
+ * guess, and guessing wrong means overwriting someone's work.
+ *
+ * A hash of content the catalog already published tells an attacker
+ * nothing it did not already serve, and it is stable across machines and
+ * line-ending settings only insofar as the file is — which is the point,
+ * since a file normalised by a checkout genuinely is a different file from
+ * the one we wrote, and `update` should say so rather than assume.
+ *
  * ── WHAT IT DELIBERATELY DOES NOT HOLD ──────────────────────────────────
  *
  * No paths outside the project, no absolute paths, no user identity, no
@@ -36,9 +51,22 @@
  */
 
 import { promises as fs } from 'node:fs'
+import { createHash } from 'node:crypto'
 import path from 'node:path'
 
 export const LOCK_NAME = 'hoverlab.lock.json'
+
+/**
+ * The digest recorded per installed file, and recomputed by `update`.
+ *
+ * Content only — no path, no salt, nothing about the machine. Two projects
+ * that installed the same artifact record the same hashes, which is what
+ * makes a lockfile reviewable in a pull request rather than a diff full of
+ * values nobody can check.
+ */
+export function fileDigest(contents) {
+  return `sha256:${createHash('sha256').update(contents, 'utf8').digest('hex')}`
+}
 
 /** Bumped only if the shape changes incompatibly. */
 const LOCK_VERSION = 1
@@ -84,9 +112,20 @@ export async function readLock(cwd = process.cwd()) {
  *
  * `files` are stored relative to the project root and POSIX-separated, so a
  * lockfile committed on Windows reads correctly on CI.
+ *
+ * Each file is hashed as it is recorded — read back off disk rather than
+ * hashed from the string we meant to write, so what is stored is what is
+ * actually there. Those two differ whenever anything sits between the CLI
+ * and the filesystem (an editor's format-on-save, a git filter), and a hash
+ * of the intention rather than the result would make `update` report a
+ * freshly installed file as locally modified.
+ *
+ * A file that cannot be read back is recorded without a hash rather than
+ * failing the install. `update` treats a missing hash as "cannot prove this
+ * is untouched" and refuses it, which is the safe direction.
  */
 export async function recordInstall(
-  { id, level, revision, files = [] },
+  { id, level, revision, framework, files = [] },
   cwd = process.cwd(),
 ) {
   // No revision means the deployment predates `/api/v1/revisions`. Writing
@@ -96,13 +135,37 @@ export async function recordInstall(
 
   const lock = await readLock(cwd)
 
+  const relatives = files
+    .map((absolute) => ({
+      absolute,
+      relative: path.relative(cwd, absolute).split(path.sep).join('/'),
+    }))
+    .filter(({ relative }) => relative && !relative.startsWith('..'))
+
+  const hashes = {}
+  for (const { absolute, relative } of relatives) {
+    try {
+      hashes[relative] = fileDigest(await fs.readFile(absolute, 'utf8'))
+    } catch {
+      /* unreadable right after writing — `update` will decline to touch it */
+    }
+  }
+
   lock.artifacts[id] = {
     level,
     revision,
+    /*
+      Effects only, and it matters for `diff` and `update`: the catalog
+      generates an effect's files per framework, so comparing a project
+      that installed the React version against the CSS the API returns by
+      default reports the whole file as changed. Blocks and above ship as
+      written and carry no framework, so the key is omitted for them
+      rather than recorded as a meaningless default.
+    */
+    ...(framework ? { framework } : {}),
     installedAt: new Date().toISOString().slice(0, 10),
-    files: files
-      .map((absolute) => path.relative(cwd, absolute).split(path.sep).join('/'))
-      .filter((relative) => relative && !relative.startsWith('..')),
+    files: relatives.map(({ relative }) => relative),
+    hashes,
   }
 
   await writeLock(lock, cwd)

@@ -56,10 +56,19 @@ const CLAIMS: { label: string; pattern: RegExp; actual: number }[] = [
   { label: 'blocks', pattern: /(\d[\d,]*) blocks/g, actual: BLOCK_INDEX.length },
   { label: 'pages', pattern: /(\d[\d,]*) pages/g, actual: PAGE_INDEX.length },
   {
-    label: 'templates',
+    label: 'runnable Next.js templates',
     pattern: /(\d[\d,]*) runnable Next\.js templates/g,
     actual: TEMPLATE_COUNT,
   },
+  /*
+   * The bare form, matching how `effects` and `blocks` each have a generic
+   * fallback under their specific one. Without it the only guarded phrasing
+   * was "runnable Next.js templates", so "11 templates" in the skill's own
+   * description was never checked at all — and that is the line that travels
+   * furthest, since it is what an agent reads to decide whether to use the
+   * skill.
+   */
+  { label: 'templates', pattern: /(\d[\d,]*) templates/g, actual: TEMPLATE_COUNT },
 ]
 
 const fix = process.argv.includes('--fix')
@@ -86,8 +95,22 @@ for (const entry of readdirSync(SKILLS, { withFileTypes: true })) {
       /* More specific patterns run first; skip what one of them already owns. */
       if (claim.label === 'effects' && /CSS effects/.test(match[0])) continue
       if (claim.label === 'blocks' && /React blocks/.test(match[0])) continue
+      if (claim.label === 'templates' && /Next\.js templates/.test(match[0])) continue
       if (fix) {
-        next = next.split(match[0]).join(`${claim.actual} ${claim.label}`)
+        /*
+         * Swap the NUMBER inside the matched text, not the whole phrase.
+         *
+         * This used to write `${claim.actual} ${claim.label}`, which quietly
+         * disarmed the guard the first time it ran on any claim whose
+         * wording differs from its label: "7 runnable Next.js templates"
+         * came back as "11 templates", the pattern stopped matching, and the
+         * number then rotted from 11 to 16 with the check passing all the
+         * way. A fixer that rewrites the sentence it is looking for can only
+         * work once.
+         */
+        next = next
+          .split(match[0])
+          .join(match[0].replace(match[1], String(claim.actual)))
         rewritten += 1
       } else {
         problems.push(

@@ -17,6 +17,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { SliderField, ToggleField } from '@/components/control-field'
 import { CopyCssCard } from '@/components/designer-tools/copy-css-card'
+import { arbitrary, classes, rgbSlash } from '@/lib/tailwind-arbitrary'
 import { ToolLayout } from '@/components/designer-tools/tool-layout'
 import { ToolPresetsBar } from '@/components/designer-tools/tool-presets-bar'
 import { UseInCatalog } from '@/components/designer-tools/use-in-catalog'
@@ -141,6 +142,62 @@ export default function GlassmorphismToolPage() {
   }, [state.shadowY, state.shadowBlur, state.shadowOpacity])
 
   const filterValue = `blur(${state.blur}px) saturate(${state.saturation}%) brightness(${state.brightness}%)`
+
+  /*
+    The same panel as Tailwind classes.
+
+    Split across several utilities rather than crammed into one arbitrary
+    property, because that is how a glass panel actually gets maintained:
+    the blur and the border are tuned separately and at different
+    breakpoints. `backdrop-blur-[…]` carries its own `-webkit-` prefix from
+    Tailwind, which is a real reason to prefer this over the CSS above —
+    the hand-written version has to repeat the property.
+
+    The `@supports` fallback in the CSS output has no class equivalent, so
+    the note below says so rather than letting the shorter output look like
+    the complete one.
+  */
+  const tailwindClass = React.useMemo(() => {
+    const hex = state.bgColor.replace('#', '')
+    const rgb = {
+      r: parseInt(hex.slice(0, 2), 16),
+      g: parseInt(hex.slice(2, 4), 16),
+      b: parseInt(hex.slice(4, 6), 16),
+    }
+    const bHex = state.borderColor.replace('#', '')
+    const bRgb = {
+      r: parseInt(bHex.slice(0, 2), 16),
+      g: parseInt(bHex.slice(2, 4), 16),
+      b: parseInt(bHex.slice(4, 6), 16),
+    }
+    return classes(
+      arbitrary('bg', rgbSlash(rgb.r, rgb.g, rgb.b, state.bgOpacity)),
+      arbitrary('backdrop-blur', `${state.blur}px`),
+      arbitrary('backdrop-saturate', `${state.saturation}%`),
+      arbitrary('backdrop-brightness', `${state.brightness}%`),
+      arbitrary('border', `${state.borderWidth}px`),
+      arbitrary(
+        'border',
+        rgbSlash(bRgb.r, bRgb.g, bRgb.b, state.borderOpacity),
+      ),
+      arbitrary('rounded', `${state.cardRadius}px`),
+      /*
+        One `shadow-[…]` carrying both layers, never two classes. Two
+        `shadow-*` utilities on the same element do not stack — the later
+        one replaces the property outright — so emitting them separately
+        would silently drop the drop-shadow and ship only the highlight.
+      */
+      arbitrary(
+        'shadow',
+        [
+          `0 ${state.shadowY}px ${state.shadowBlur}px ${rgbSlash(0, 0, 0, state.shadowOpacity)}`,
+          state.innerHighlight ? `inset 0 1px 0 0 ${rgbSlash(255, 255, 255, 0.4)}` : '',
+        ]
+          .filter(Boolean)
+          .join(', '),
+      ),
+    )
+  }, [state])
 
   const cardStyle: React.CSSProperties = React.useMemo(
     () => ({
@@ -273,6 +330,13 @@ export default function GlassmorphismToolPage() {
           </div>
 
           <CopyCssCard code={cssBlock} title="CSS" language="css" />
+          <CopyCssCard code={tailwindClass} title="Tailwind classes" language="html" />
+          <p className="text-xs text-muted-foreground">
+            The Tailwind form has no equivalent of the{' '}
+            <code className="font-mono">@supports</code> fallback above — add
+            an opaque background for browsers without{' '}
+            <code className="font-mono">backdrop-filter</code> if you need one.
+          </p>
 
           {/* The tint is the one value here that reads as an identity — the
               scene behind it is a backdrop, and blur carries no hue. */}

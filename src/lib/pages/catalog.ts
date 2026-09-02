@@ -69,6 +69,216 @@ export const PAGE_CATALOG: PageRecord[] = [
     composedOf: ['pricing-tiers', 'comparison-table', 'faq-accordion'],
     featured: true,
   },
+  /* ------------------------------------------------------------------ *
+   *  Landing pages
+   * ------------------------------------------------------------------ *
+   *
+   * Four more of the same category as `saas-landing-page`, and the reason
+   * they are separate pages rather than props on that one is that the
+   * running order IS the page. A waitlist page is not the SaaS page with
+   * pricing deleted — it opens on a single input, proves momentum instead
+   * of adoption, and closes on the same ask it opened with. Parameterising
+   * that would mean a `variant` prop with four branches in every section,
+   * which is how a catalog of readable files turns into a framework.
+   *
+   * Each pairs with a template in `lib/templates/catalog.ts` that carries a
+   * matching palette, so the colour and the structure change together.
+   */
+  {
+    id: 'waitlist-landing-page',
+    name: 'Waitlist Landing Page',
+    category: 'Marketing Pages',
+    description:
+      'A pre-launch page for a product you cannot buy yet: one email field, scarcity instead of adoption, and no pricing section to be held to later.',
+    tags: ['landing page', 'waitlist', 'pre-launch', 'startup', 'early access'],
+    previewComponent: 'waitlist-landing-page',
+    deps: ['lucide-react'],
+    composedOf: [
+      'navbar-simple',
+      'hero-waitlist',
+      'logo-strip',
+      'stats-band',
+      'feature-icon-grid',
+      'testimonial-spotlight',
+      'faq-two-column',
+      'cta-split-panel',
+      'footer-minimal',
+    ],
+    featured: true,
+  },
+  {
+    id: 'developer-tool-landing-page',
+    name: 'Developer Tool Landing Page',
+    category: 'Marketing Pages',
+    description:
+      'Install command first, real code before any prose, and a usage calculator instead of tiers — the order a developer actually scans in.',
+    tags: ['landing page', 'developer tool', 'api', 'cli', 'devtools'],
+    previewComponent: 'developer-tool-landing-page',
+    deps: ['lucide-react'],
+    composedOf: [
+      'navbar-simple',
+      'hero-terminal',
+      'logo-grid',
+      'code-showcase',
+      'feature-rows',
+      'integration-grid',
+      'pricing-usage-calculator',
+      'faq-grid',
+      'footer-status-locale',
+    ],
+    featured: true,
+  },
+  {
+    id: 'mobile-app-landing-page',
+    name: 'Mobile App Landing Page',
+    category: 'Marketing Pages',
+    description:
+      'Store badges above the fold, the App Store rating as the first proof, and a single price — a page with one job, which is the install.',
+    tags: ['landing page', 'mobile app', 'ios', 'android', 'consumer'],
+    previewComponent: 'mobile-app-landing-page',
+    deps: ['lucide-react'],
+    composedOf: [
+      'navbar-simple',
+      'hero-app-download',
+      'testimonial-ratings',
+      'feature-tabs',
+      'stats-band',
+      'pricing-single',
+      'faq-accordion',
+      'cta-inline-card',
+      'footer-newsletter',
+    ],
+  },
+  {
+    id: 'agency-landing-page',
+    name: 'Agency Landing Page',
+    category: 'Marketing Pages',
+    description:
+      'A studio site: full-bleed hero, client list, engagements described as engagements, and the actual team — with no pricing, on purpose.',
+    tags: ['landing page', 'agency', 'studio', 'portfolio', 'services'],
+    previewComponent: 'agency-landing-page',
+    deps: ['lucide-react'],
+    composedOf: [
+      'navbar-simple',
+      'hero-media-overlay',
+      'logo-cloud',
+      'stats-narrative',
+      'feature-rows',
+      'team-grid',
+      'testimonial-spotlight',
+      'cta-split-panel',
+      'footer-minimal',
+    ],
+  },
+  {
+    id: 'local-service-landing-page',
+    name: 'Local Service Landing Page',
+    category: 'Marketing Pages',
+    description:
+      'A booking widget above the fold, every price published including the awkward ones, and a footer carrying the registrations a regulated trade must show.',
+    tags: ['landing page', 'local business', 'booking', 'service', 'appointments'],
+    previewComponent: 'local-service-landing-page',
+    deps: ['lucide-react'],
+    composedOf: [
+      'navbar-simple',
+      'hero-booking',
+      'stats-band',
+      'persona-cards',
+      'testimonial-grid',
+      'comparison-table',
+      'faq-categorized',
+      'contact-form-split',
+      'footer-compliance',
+    ],
+    featured: true,
+  },
+  {
+    id: 'marketplace-landing-page',
+    name: 'Marketplace Landing Page',
+    category: 'Marketing Pages',
+    description:
+      'Two audiences, one page: a search field and real listings for buyers up top, the seller economics below, and a searchable FAQ because they ask different things.',
+    tags: ['landing page', 'marketplace', 'two-sided', 'search', 'sellers'],
+    previewComponent: 'marketplace-landing-page',
+    deps: ['lucide-react'],
+    composedOf: [
+      'navbar-simple',
+      'hero-search',
+      'logo-segments',
+      'product-rail',
+      'stats-comparison',
+      'testimonial-carousel',
+      'faq-search',
+      'cta-split-panel',
+      'footer-mega',
+    ],
+    featured: true,
+  },
+  {
+    id: 'enterprise-landing-page',
+    name: 'Enterprise Landing Page',
+    category: 'Marketing Pages',
+    description:
+      'Built for a champion assembling an internal case: numbers in the hero, a comparison that concedes two rows, video references, and published prices instead of a sales wall.',
+    tags: ['landing page', 'enterprise', 'b2b', 'sales-led', 'procurement'],
+    previewComponent: 'enterprise-landing-page',
+    deps: ['lucide-react'],
+    composedOf: [
+      'navbar-mega-menu',
+      'hero-metrics',
+      'logo-cloud',
+      'bento-features',
+      'comparison-table',
+      'testimonial-video',
+      'stats-timeline',
+      'pricing-tiers',
+      'cta-split-panel',
+      'footer-compliance',
+    ],
+  },
+  {
+    id: 'integration-platform-landing-page',
+    name: 'Integration Platform Landing Page',
+    category: 'Marketing Pages',
+    description:
+      'The connector names in the hero, a catalogue with honest live/beta/planned status, four SDK languages, credit pricing, and a dated roadmap for everyone who is not on the list.',
+    tags: ['landing page', 'integrations', 'api platform', 'connectors', 'developer'],
+    previewComponent: 'integration-platform-landing-page',
+    deps: ['lucide-react'],
+    composedOf: [
+      'navbar-simple',
+      'hero-integrations',
+      'integration-grid',
+      'code-tabs-panel',
+      'feature-rows',
+      'pricing-credits',
+      'roadmap-columns',
+      'faq-grid',
+      'footer-mega',
+    ],
+  },
+  {
+    id: 'creator-course-landing-page',
+    name: 'Creator Course Landing Page',
+    category: 'Marketing Pages',
+    description:
+      'One person selling one course: a student testimonial as the hero because a course cannot demo, a long instructor section, one price and a refund policy on the page.',
+    tags: ['landing page', 'course', 'creator', 'cohort', 'education'],
+    previewComponent: 'creator-course-landing-page',
+    deps: ['lucide-react'],
+    composedOf: [
+      'navbar-simple',
+      'hero-testimonial',
+      'logo-strip',
+      'feature-icon-grid',
+      'feature-tabs',
+      'team-grid',
+      'pricing-single',
+      'faq-accordion',
+      'cta-inline-card',
+      'footer-minimal',
+    ],
+  },
   {
     id: 'blog-index-page',
     name: 'Blog Index',

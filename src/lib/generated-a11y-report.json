@@ -3272,6 +3272,141 @@
       "findings": []
     },
     {
+      "id": "waitlist-landing-page",
+      "kind": "page",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "developer-tool-landing-page",
+      "kind": "page",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "mobile-app-landing-page",
+      "kind": "page",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "agency-landing-page",
+      "kind": "page",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "local-service-landing-page",
+      "kind": "page",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "marketplace-landing-page",
+      "kind": "page",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "enterprise-landing-page",
+      "kind": "page",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "integration-platform-landing-page",
+      "kind": "page",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "creator-course-landing-page",
+      "kind": "page",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
       "id": "blog-index-page",
       "kind": "page",
       "passed": [

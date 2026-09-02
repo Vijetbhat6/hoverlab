@@ -111,6 +111,8 @@ const SOCIALS = [
   { label: 'YouTube', href: '#', Icon: Youtube },
 ]
 
+const slug = (value: string) => value.toLowerCase().replace(/[^a-z0-9]+/g, '-')
+
 /**
  * Slug for wiring a column's heading to its nav landmark.
  *
@@ -121,9 +123,22 @@ const SOCIALS = [
  * document: the preview. The real footer's navs end up labelled by a
  * decorative copy of themselves. `footer-newsletter.tsx` already carries a
  * `footer-nl-` prefix for exactly this reason.
+ *
+ * The brand is in the id for the next size of the same problem: a fixed
+ * prefix separates this block from *other* footers and does nothing about
+ * two <FooterMega>s on one page, which is what a catalog hub rendering
+ * several sites at once actually is. Nearly every column set contains
+ * "Company", so the collision is close to guaranteed.
+ *
+ * `React.useId()` would be the textbook fix and is not available: this block
+ * has no `'use client'` and is not going to get one. It renders links, and
+ * a footer that hydrates on every page to render links is a cost with
+ * nothing on the other side of it — see the note at the top of the file. The
+ * brand is the discriminator that is already to hand and is different in
+ * every real case where two of these coexist.
  */
-function headingId(heading: string): string {
-  return `footer-mega-${heading.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`
+function headingId(brand: string, heading: string): string {
+  return `footer-mega-${slug(brand)}-${slug(heading)}`
 }
 
 export function FooterMega({
@@ -174,9 +189,9 @@ export function FooterMega({
           {/* -- Link columns ------------------------------------------ */}
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-4 lg:col-span-8">
             {columns.map((column) => (
-              <nav key={column.heading} aria-labelledby={headingId(column.heading)}>
+              <nav key={column.heading} aria-labelledby={headingId(brand, column.heading)}>
                 <h2
-                  id={headingId(column.heading)}
+                  id={headingId(brand, column.heading)}
                   className="text-xs font-semibold uppercase tracking-wider text-foreground"
                 >
                   {column.heading}

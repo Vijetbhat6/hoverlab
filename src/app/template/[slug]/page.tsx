@@ -30,6 +30,8 @@ import { TemplateRouteSwitcher } from '@/components/templates/template-route-swi
 import { TemplateFileBrowser } from '@/components/templates/template-file-browser'
 import { TemplateDownloadButton } from '@/components/templates/template-download-button'
 import { TemplateCard } from '@/components/templates/template-card'
+import { PaletteScope } from '@/components/templates/palette-scope'
+import { getPalette, paletteSwatch } from '@/lib/templates/palettes'
 import { getPagePreview } from '@/lib/pages/registry'
 import { getPageMeta } from '@/lib/pages/page-index'
 import {
@@ -52,6 +54,10 @@ import {
 } from '@/components/artifact-actions'
 import { ArtifactFacts } from '@/components/artifact-facts'
 import { StickyInstallBar } from '@/components/sticky-install-bar'
+import { CopyFrameForFigma } from '@/components/copy-frame-for-figma'
+
+/** The preview wrapper's DOM id — the element the Figma button traces. */
+const FRAME_ID = 'artifact-frame'
 
 export const dynamicParams = false
 
@@ -103,13 +109,21 @@ export default async function TemplateDetailPage({ params }: PageProps) {
 
   const related = templatesInCategory(template.category).filter((t) => t.id !== template.id)
 
+  /*
+    `pageId` travels alongside the rendered preview so the switcher can put
+    a real phone viewport behind its width toggle — every screen here is a
+    catalog page, and each one already has a `/preview/page/<id>` route the
+    block and page detail pages frame the same way.
+  */
   const previewRoutes = template.routes.map((route) => ({
     path: route.path,
     label: route.label,
     preview: getPagePreview(route.pageId),
+    pageId: route.pageId,
   }))
 
   const added = addedAt('template', template.id)
+  const palette = getPalette(template.palette)
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -184,6 +198,18 @@ export default async function TemplateDetailPage({ params }: PageProps) {
                 paste a component: the tokens, motion and rules, as one
                 pasteable document. */}
             <CopyDnaButton artifactId={template.id} />
+            {/*
+                The screen on show, as Figma layers.
+
+                Blocks and pages both had this and templates did not, which
+                had it backwards: the person most likely to want a project's
+                layout in Figma is the designer handed a whole starter to
+                rework, not someone lifting one section. It traces the
+                rendered preview, which is already public on this page, so
+                it gives away nothing the download gate protects — unlike a
+                sandbox, which is why there is still no sandbox button here.
+            */}
+            <CopyFrameForFigma targetId={FRAME_ID} name={template.name} level="template" />
           </div>
 
           <TrackArtifactView
@@ -242,10 +268,40 @@ export default async function TemplateDetailPage({ params }: PageProps) {
           <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
             Every screen
           </h2>
-          <TemplateRouteSwitcher routes={previewRoutes} />
+          {/* Scoped to the template's own palette, so the preview is the
+              colour the download will be rather than the colour this site
+              is. Templates without a palette render unwrapped. */}
+          {/* The id wraps the switcher rather than sitting inside it: what
+              <CopyFrameForFigma> traces is whichever screen is on show, and
+              the switcher owns that choice. */}
+          <div id={FRAME_ID}>
+            <PaletteScope palette={template.palette}>
+              <TemplateRouteSwitcher routes={previewRoutes} />
+            </PaletteScope>
+          </div>
+
           <p className="mt-3 text-xs text-muted-foreground">
             Live components in your current theme — switch routes, or the
             phone icon to check the mobile layout.
+            {palette ? (
+              <>
+                {' '}
+                Colours are this template’s{' '}
+                <span className="inline-flex items-baseline gap-1 font-medium text-foreground">
+                  <span
+                    aria-hidden
+                    className="inline-block h-2.5 w-2.5 translate-y-px rounded-full ring-1 ring-inset ring-border/60"
+                    style={{ background: paletteSwatch(palette) }}
+                  />
+                  {palette.name}
+                </span>{' '}
+                palette, which ships in{' '}
+                <code className="rounded bg-muted px-1 py-0.5 font-mono">
+                  app/globals.css
+                </code>
+                . {palette.note}
+              </>
+            ) : null}
           </p>
         </section>
 

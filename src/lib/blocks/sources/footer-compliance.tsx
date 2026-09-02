@@ -130,6 +130,17 @@ export function FooterCompliance({
   const region = regions.find((r) => r.id === regionId) ?? regions[0]
   const [cookiesReopened, setCookiesReopened] = React.useState(false)
 
+  /**
+   * Per-instance id for the region select.
+   *
+   * It was the literal `"compliance-region"`, which is correct until a
+   * second <FooterCompliance> exists on the page — a catalog hub, or a
+   * comparison of two regional sites. `<label htmlFor>` then binds to
+   * whichever select comes first, so clicking the second one's label focuses
+   * the first one's control and a screen reader announces the wrong region.
+   */
+  const selectId = `${React.useId()}-region`
+
   return (
     <footer className={`w-full border-t border-border bg-card ${className}`}>
       <div className="mx-auto w-full max-w-6xl px-4 py-10 sm:px-6">
@@ -185,11 +196,11 @@ export function FooterCompliance({
             <h2 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
               Region
             </h2>
-            <label htmlFor="compliance-region" className="sr-only">
+            <label htmlFor={selectId} className="sr-only">
               Choose the region whose terms apply to you
             </label>
             <select
-              id="compliance-region"
+              id={selectId}
               value={regionId}
               onChange={(event) => setRegionId(event.target.value)}
               className="mt-3 h-9 w-full rounded-lg border border-field bg-background px-2.5 text-sm text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"

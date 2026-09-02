@@ -118,6 +118,22 @@ export function FeatureTabs({
   const [active, setActive] = React.useState(0)
   const tabRefs = React.useRef<(HTMLButtonElement | null)[]>([])
 
+  /**
+   * Per-instance id prefix.
+   *
+   * The ids used to be `feature-tab-${t.id}` — unique within one instance
+   * and duplicated the moment a second <FeatureTabs> appeared on the same
+   * page, which is exactly what a catalog hub does and what any site with
+   * two feature sections does. Duplicate ids are not a lint nicety here:
+   * `aria-controls` and `aria-labelledby` resolve to whichever element comes
+   * first in the document, so the second tablist silently points at the
+   * first one's panels and a screen reader reads the wrong content.
+   *
+   * `useId()` is React's answer and is stable across server and client
+   * render, which a counter or a random string is not.
+   */
+  const uid = React.useId()
+
   const onKeyDown = (event: React.KeyboardEvent) => {
     let next: number | null = null
     if (event.key === 'ArrowRight') next = (active + 1) % TABS.length
@@ -152,9 +168,9 @@ export function FeatureTabs({
             ref={(el) => { tabRefs.current[i] = el }}
             type="button"
             role="tab"
-            id={`feature-tab-${t.id}`}
+            id={`${uid}-tab-${t.id}`}
             aria-selected={i === active}
-            aria-controls={`feature-panel-${t.id}`}
+            aria-controls={`${uid}-panel-${t.id}`}
             tabIndex={i === active ? 0 : -1}
             onClick={() => setActive(i)}
             className={`inline-flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
@@ -171,8 +187,8 @@ export function FeatureTabs({
 
       <div
         role="tabpanel"
-        id={`feature-panel-${tab.id}`}
-        aria-labelledby={`feature-tab-${tab.id}`}
+        id={`${uid}-panel-${tab.id}`}
+        aria-labelledby={`${uid}-tab-${tab.id}`}
         className="grid items-center gap-10 lg:grid-cols-2"
       >
         <div>

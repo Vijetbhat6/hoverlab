@@ -20,6 +20,8 @@ import {
 import { PAGE_COUNT } from '@/lib/pages/page-index'
 import { BLOCK_COUNT } from '@/lib/blocks/block-index'
 import { absoluteUrl } from '@/lib/site'
+import { JsonLd } from '@/components/json-ld'
+import { breadcrumbLd, itemListLd } from '@/lib/structured-data'
 
 const TITLE = `${TEMPLATE_COUNT} Next.js Starter Templates — Hoverlab`
 const DESCRIPTION =
@@ -51,8 +53,24 @@ export default function TemplatesHubPage() {
   const categories = populatedTemplateCategories()
   const totalRoutes = TEMPLATE_INDEX.reduce((n, t) => n + t.routes.length, 0)
 
+  /*
+    See /blocks. Templates are few enough to list individually, which is
+    the one tier where that is true and also the tier where it matters
+    most: "nextjs saas starter" is a query with a buyer behind it.
+  */
+  const listLd = itemListLd(
+    'Templates',
+    '/templates',
+    TEMPLATE_INDEX.map((template) => ({
+      name: template.name,
+      path: `/template/${template.id}`,
+    })),
+  )
+
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <JsonLd data={listLd} />
+      <JsonLd data={breadcrumbLd([{ name: 'Home', path: '/' }, { name: 'Templates' }])} />
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <TierDefinition tier="template" />
 

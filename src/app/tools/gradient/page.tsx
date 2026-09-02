@@ -17,8 +17,9 @@ import { Label } from '@/components/ui/label'
 import { Slider } from '@/components/ui/slider'
 import { Switch } from '@/components/ui/switch'
 import { CopyCssCard } from '@/components/designer-tools/copy-css-card'
+import { DownloadBar, type DownloadAction } from '@/components/designer-tools/download-bar'
+import { cssPaneToPngBlob, downloadBlob } from '@/lib/download'
 import { ToolLayout } from '@/components/designer-tools/tool-layout'
-import { readSharedState, ShareLinkButton } from '@/components/designer-tools/share-link'
 import { ToolPresetsBar } from '@/components/designer-tools/tool-presets-bar'
 import { UseInCatalog } from '@/components/designer-tools/use-in-catalog'
 import { ToolWorkbench } from '@/components/designer-tools/tool-workbench'
@@ -111,21 +112,14 @@ export default function GradientToolPage() {
   const setStops = (next: (arr: Stop[]) => Stop[]) =>
     setState((s) => ({ ...s, stops: next(validStops(s.stops) ?? DEFAULT_STATE.stops) }))
 
-  React.useEffect(() => {
-    // A shared link's state wins over whatever this browser had stored.
-    // Declared after `useToolState`, so the hook's restore has already run
-    // by the time this does — which is what keeps that precedence true.
-    const shared = readSharedState<Partial<GradientState>>()
-    if (!shared) return
-    setState((s) => ({
-      type:
-        shared.type && GRADIENT_TYPES.includes(shared.type) ? shared.type : s.type,
-      angle: typeof shared.angle === 'number' ? shared.angle : s.angle,
-      oklch: typeof shared.oklch === 'boolean' ? shared.oklch : s.oklch,
-      stops: validStops(shared.stops) ?? s.stops,
-    }))
-    // `setState` is stable; the shared link is read once, on mount.
-  }, [])
+  /*
+    There is no shared-link effect here any more. `useToolState` reads the
+    `#s=` hash as part of its own restore, which is what gives the link
+    precedence over this browser's stored blob without a second effect
+    racing the first — and the read guard above is what makes a sanitizer
+    unnecessary: a shared link is just a fourth route into `state`, and all
+    four are already validated on the way out.
+  */
 
   // Sort stops by position for the CSS output (but keep the user's
   // editing order in the UI).
@@ -147,6 +141,30 @@ export default function GradientToolPage() {
   const cssBlock = React.useMemo(() => {
     return `.gradient {\n  background: ${cssValue};\n  /* Fallback for older browsers */\n  background-color: ${sortedStops[0]?.color ?? '#000'};\n}`
   }, [cssValue, sortedStops])
+
+  /*
+    The gradient as a file.
+
+    Rendered from `cssValue` — the exact string the copy button emits —
+    rather than from a second gradient implementation, so the PNG cannot
+    disagree with the CSS. 1600x900 because the thing people export a
+    gradient for is a hero or a slide background, and both want something
+    that survives a 2x display.
+  */
+  const exports = React.useMemo<DownloadAction[]>(
+    () => [
+      {
+        label: 'PNG',
+        title: '1600 x 900, rendered from the CSS above',
+        run: async () => {
+          const blob = await cssPaneToPngBlob(`background-image:${cssValue}`, 1600, 900)
+          if (!blob) return false
+          downloadBlob(blob, 'gradient.png')
+        },
+      },
+    ],
+    [cssValue],
+  )
 
   // Stop manipulation.
   const updateStop = (id: string, patch: Partial<Stop>) => {
@@ -185,7 +203,6 @@ export default function GradientToolPage() {
             <div className="mb-2 flex items-center justify-between">
               <Label className="text-sm font-medium">Color stops</Label>
               <div className="flex gap-2">
-                <ShareLinkButton state={{ type, angle, stops, oklch }} />
                 <Button variant="outline" size="sm" className="h-7 gap-1 text-xs" onClick={randomize}>
                   <Shuffle className="h-3 w-3" /> Randomize colors
                 </Button>
@@ -304,6 +321,8 @@ export default function GradientToolPage() {
           </div>
 
           <CopyCssCard code={cssBlock} title="CSS" language="css" />
+
+          <DownloadBar actions={exports} />
 
           <Button asChild variant="outline" size="sm" className="w-full gap-1.5">
             <Link href={`/tools/glassmorphism?bg=${encodeURIComponent(cssValue)}`}>

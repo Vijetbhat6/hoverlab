@@ -29,6 +29,9 @@ import {
 } from '@/components/ui/select'
 import { SliderField, ToggleField } from '@/components/control-field'
 import { CopyCssCard } from '@/components/designer-tools/copy-css-card'
+import { DownloadBar, type DownloadAction } from '@/components/designer-tools/download-bar'
+import { downloadBlob, downloadText, svgToPngBlob } from '@/lib/download'
+import { arbitrary, classes } from '@/lib/tailwind-arbitrary'
 import { ToolLayout } from '@/components/designer-tools/tool-layout'
 import { ToolPresetsBar } from '@/components/designer-tools/tool-presets-bar'
 import { UseInCatalog } from '@/components/designer-tools/use-in-catalog'
@@ -126,6 +129,65 @@ export default function NoiseToolPage() {
   mix-blend-mode: ${state.blend};
 }`
 
+  /*
+    The same grain as Tailwind classes.
+
+    This one is on an `after:` variant rather than on the element, because
+    the grain is an overlay: it has to sit above the element's own
+    background without covering its content or eating clicks. That is what
+    the CSS above spends a `::after` rule on, and Tailwind can say it in
+    one line — but only if `content-['']` comes with it. A pseudo-element
+    with no `content` does not render at all, which is the single most
+    common way a copied `after:` class list does nothing.
+  */
+  const tailwindClass = classes(
+    'relative',
+    'after:absolute',
+    "after:content-['']",
+    'after:inset-0',
+    'after:pointer-events-none',
+    `after:${arbitrary('bg', `url("${uri}")`)}`,
+    /*
+      `length:` is required, not decorative. Tailwind infers what an
+      arbitrary `bg-[…]` means from the value, and `16px 16px` looks like a
+      background-POSITION — which is what it would compile to, tiling the
+      grain at its natural size and putting it 16px in from the corner. The
+      type hint is the difference between a texture and a smudge.
+    */
+    `after:${arbitrary('bg', `length:${state.tile}px ${state.tile}px`)}`,
+    `after:mix-blend-${state.blend}`,
+  )
+
+  /*
+    The tile as a file.
+
+    Both formats earn their place. The SVG is the source — a few hundred
+    bytes, resolution-independent, and re-editable — and is what belongs in
+    a repo. The PNG is for the tools that cannot take an SVG filter at all,
+    which is most of the design software someone might want to carry this
+    grain into. Exported at the tile size so it still tiles seamlessly;
+    scaling it afterwards is what breaks the seam.
+  */
+  const exports = React.useMemo<DownloadAction[]>(
+    () => [
+      {
+        label: 'SVG',
+        title: 'The source tile — small, sharp at any size, still editable',
+        run: () => downloadText(svg, `noise-${state.tile}.svg`, 'image/svg+xml'),
+      },
+      {
+        label: 'PNG',
+        title: `${state.tile} x ${state.tile}, tiles seamlessly at that exact size`,
+        run: async () => {
+          const blob = await svgToPngBlob(svg, state.tile, state.tile)
+          if (!blob) return false
+          downloadBlob(blob, `noise-${state.tile}.png`)
+        },
+      },
+    ],
+    [svg, state.tile],
+  )
+
   return (
     <ToolLayout
       name="Noise Texture Generator"
@@ -156,7 +218,10 @@ export default function NoiseToolPage() {
           </div>
 
           <CopyCssCard code={cssBlock} title="CSS" language="css" />
+          <CopyCssCard code={tailwindClass} title="Tailwind classes" language="html" />
           <CopyCssCard code={svg} title="Raw SVG tile" language="svg" />
+
+          <DownloadBar actions={exports} />
 
           {/* No `brand`: grain is monochrome by construction. */}
           <UseInCatalog tool={TOOL} />

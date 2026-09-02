@@ -41,8 +41,8 @@ import { Label } from '@/components/ui/label'
 import { Slider } from '@/components/ui/slider'
 import { Switch } from '@/components/ui/switch'
 import { CopyCssCard } from '@/components/designer-tools/copy-css-card'
+import { arbitraryValue, rgbSlash } from '@/lib/tailwind-arbitrary'
 import { ToolLayout } from '@/components/designer-tools/tool-layout'
-import { readSharedState, ShareLinkButton } from '@/components/designer-tools/share-link'
 import { ToolPresetsBar } from '@/components/designer-tools/tool-presets-bar'
 import { UseInCatalog } from '@/components/designer-tools/use-in-catalog'
 import { useToolState } from '@/hooks/use-tool-state'
@@ -184,6 +184,29 @@ function layerToCss(l: ShadowLayer, mode: ShadowMode): string {
   return parts.join(' ')
 }
 
+/**
+ * One layer in the form a Tailwind arbitrary value wants.
+ *
+ * Differs from `layerToCss` in the colour only: `rgb(0 0 0 / 0.05)` rather
+ * than `rgba(0, 0, 0, 0.05)`. Both are valid CSS and mean the same thing,
+ * but the comma-and-space form has to survive being squeezed into a class
+ * name, and the modern syntax is also what Tailwind's own shadow utilities
+ * emit — so a copied value sits next to theirs without looking foreign.
+ */
+function layerToTailwind(l: ShadowLayer, mode: ShadowMode): string {
+  const rgb = hexToRgb(l.color)
+  if (!rgb) return ''
+  const parts = [
+    mode === 'box' && l.inset ? 'inset' : '',
+    `${l.x}px`,
+    `${l.y}px`,
+    `${l.blur}px`,
+    mode === 'box' && l.spread !== 0 ? `${l.spread}px` : '',
+    rgbSlash(rgb.r, rgb.g, rgb.b, l.opacity),
+  ].filter(Boolean)
+  return parts.join(' ')
+}
+
 export default function ShadowToolPage() {
   // Working state stays local and ungated; named presets need an account.
   // See `use-tool-state.ts` for why the two layers are separate.
@@ -209,26 +232,12 @@ export default function ShadowToolPage() {
   const setLayers = (next: (arr: ShadowLayer[]) => ShadowLayer[]) =>
     setState((s) => ({ ...s, layers: next(validLayers(s.layers) ?? DEFAULT_STATE.layers) }))
 
-  React.useEffect(() => {
-    // A shared link's state wins over whatever this browser had stored.
-    // Declared after `useToolState`, so the hook's restore has already run
-    // by the time this does — which is what keeps that precedence true.
-    const shared = readSharedState<Partial<ShadowState>>()
-    if (!shared) return
-    setState((s) => ({
-      layers: validLayers(shared.layers) ?? s.layers,
-      mode: shared.mode === 'box' || shared.mode === 'text' ? shared.mode : s.mode,
-      surface:
-        shared.surface === 'light' ||
-        shared.surface === 'dark' ||
-        shared.surface === 'match'
-          ? shared.surface
-          : s.surface,
-      cardColor: typeof shared.cardColor === 'string' ? shared.cardColor : s.cardColor,
-      textColor: typeof shared.textColor === 'string' ? shared.textColor : s.textColor,
-    }))
-    // `setState` is stable; the shared link is read once, on mount.
-  }, [])
+  /*
+    No shared-link effect. `useToolState` reads the `#s=` hash inside its own
+    restore, so the link beats this browser's stored state without a second
+    effect racing the first, and the read guard above covers it the same way
+    it covers the other three routes.
+  */
 
   const cssValue = React.useMemo(() => {
     return layers
@@ -236,6 +245,27 @@ export default function ShadowToolPage() {
       .map((l) => layerToCss(l, mode))
       .filter(Boolean)
       .join(',\n    ')
+  }, [layers, mode])
+
+  /*
+    The same shadow as a Tailwind class.
+
+    Box shadows get `shadow-[…]`, which every Tailwind version understands.
+    Text shadows get the arbitrary-PROPERTY form `[text-shadow:…]` instead:
+    a `text-shadow-*` utility only exists from Tailwind v4.1, and a class
+    that silently compiles to nothing on a v3 project is exactly the failure
+    this output is supposed to save someone from. The property form works
+    on both.
+  */
+  const tailwindClass = React.useMemo(() => {
+    const value = layers
+      .filter((l) => l.enabled)
+      .map((l) => layerToTailwind(l, mode))
+      .filter(Boolean)
+      .join(', ')
+    if (!value) return mode === 'box' ? 'shadow-none' : '[text-shadow:none]'
+    const encoded = arbitraryValue(value)
+    return mode === 'box' ? `shadow-[${encoded}]` : `[text-shadow:${encoded}]`
   }, [layers, mode])
 
   const cssBlock = React.useMemo(() => {
@@ -501,7 +531,6 @@ export default function ShadowToolPage() {
               Layers ({layers.length}/8)
             </Label>
             <div className="flex items-center gap-1.5">
-              <ShareLinkButton state={{ layers, mode, surface, cardColor, textColor }} />
               <Button
                 variant="outline"
                 size="sm"
@@ -530,6 +559,7 @@ export default function ShadowToolPage() {
           </div>
 
           <CopyCssCard code={cssBlock} title="CSS" language="css" />
+          <CopyCssCard code={tailwindClass} title="Tailwind class" language="html" />
 
           {/* After the layers, never before them — the ask lands once the
               stack exists rather than in front of it. A layered shadow is

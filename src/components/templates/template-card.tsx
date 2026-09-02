@@ -21,20 +21,29 @@ import * as React from 'react'
 import Link from 'next/link'
 import { Route, LayoutTemplate, Blocks, Lock } from 'lucide-react'
 import { ArtifactThumbnail } from '@/components/artifact-preview'
+import { PaletteScope } from '@/components/templates/palette-scope'
 import { getPagePreview } from '@/lib/pages/registry'
+import { getPalette, paletteSwatch } from '@/lib/templates/palettes'
 import type { TemplateMeta } from '@/lib/templates/template-types'
 
 export function TemplateCard({ template }: { template: TemplateMeta }) {
   const first = template.routes[0]
   const previewPageId = template.previewPageId ?? first?.pageId
+  const palette = getPalette(template.palette)
 
   return (
     <article className="group relative flex flex-col overflow-hidden rounded-2xl border border-border/60 bg-card/60 p-3 transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-lg">
-      <ArtifactThumbnail
-        preview={previewPageId ? getPagePreview(previewPageId) : undefined}
-        missingKey={previewPageId ?? template.id}
-        height="h-80"
-      />
+      {/* Only the thumbnail is scoped. The card's own chrome — the Pro
+          badge, the counts, the hover border — belongs to this site and
+          should stay in this site's colours, or a grid of four palettes
+          stops reading as one page. */}
+      <PaletteScope palette={template.palette} className="contents">
+        <ArtifactThumbnail
+          preview={previewPageId ? getPagePreview(previewPageId) : undefined}
+          missingKey={previewPageId ?? template.id}
+          height="h-80"
+        />
+      </PaletteScope>
 
       {template.tier === 'pro' ? (
         <span className="pointer-events-none absolute right-5 top-5 z-10 inline-flex items-center gap-1 rounded-full bg-background/90 px-2 py-1 text-[10px] font-semibold uppercase tracking-wider text-primary shadow-sm ring-1 ring-primary/30 backdrop-blur">
@@ -70,6 +79,22 @@ export function TemplateCard({ template }: { template: TemplateMeta }) {
             <Blocks aria-hidden className="h-3.5 w-3.5" />
             {template.blockCount} blocks
           </span>
+
+          {/* The palette, named. The thumbnail above already shows the
+              colour; this says it is a decision with a name and a file
+              behind it rather than a screenshot that happened to be green.
+              The swatch is `aria-hidden` because the name beside it is the
+              accessible version of the same information. */}
+          {palette ? (
+            <span className="inline-flex items-center gap-1.5">
+              <span
+                aria-hidden
+                className="h-3 w-3 rounded-full ring-1 ring-inset ring-border/60"
+                style={{ background: paletteSwatch(palette) }}
+              />
+              {palette.name}
+            </span>
+          ) : null}
         </div>
       </div>
     </article>

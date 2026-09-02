@@ -12,14 +12,28 @@
  * would add, once, in the place the button would be. A hidden affordance
  * teaches nobody that the feature exists, and a modal teaches them to close
  * modals.
+ *
+ * It also carries undo, redo and the share link, in both states, because
+ * none of the three is something an account buys. Putting "copy link" only
+ * in the signed-in branch would turn the one action whose whole purpose is
+ * to reach someone who has never been here into a reason to sign up — the
+ * exact toll booth the paragraph above rejects, and undoing a slider is not
+ * a premium feature in any world.
+ *
+ * They live in this component for a duller reason than they look: it is the
+ * one thing every tool already mounts. Undo and share are properties of a
+ * tool's state, `useToolState` owns that state, and this bar is the only
+ * place all thirty-odd tools already hand that hook to something. Wiring
+ * either of them here made them universal without touching a single tool.
  */
 
 import * as React from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Bookmark, Check, Loader2, Trash2 } from 'lucide-react'
+import { Bookmark, Check, Loader2, Redo2, Trash2, Undo2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { ShareLinkButton } from '@/components/designer-tools/share-link'
 import { cn } from '@/lib/utils'
 import type { ToolPreset } from '@/lib/tool-presets'
 import type { ToolPresetsApi } from '@/hooks/use-tool-state'
@@ -43,8 +57,59 @@ export function ToolPresetsBar({ tool, noun, className }: ToolPresetsBarProps) {
   const [saving, setSaving] = React.useState(false)
   const [justSaved, setJustSaved] = React.useState(false)
 
-  const { canSave, presets, loadingPresets, presetError, savePreset, applyPreset, deletePreset } =
-    tool
+  const {
+    canSave,
+    presets,
+    loadingPresets,
+    presetError,
+    savePreset,
+    applyPreset,
+    deletePreset,
+    shareUrl,
+    undo,
+    redo,
+    canUndo,
+    canRedo,
+  } = tool
+
+  /*
+    Undo, redo and share, in that order, in both branches below.
+
+    They are grouped because they are the three things you do to a state
+    rather than with it, and none of them is gated on an account. The
+    shortcut is named on the tooltip rather than printed beside the icon:
+    ⌘Z already works everywhere on the page, and the button is here for the
+    people who would never have tried it.
+  */
+  const stateActions = (
+    <>
+      <Button
+        type="button"
+        variant="outline"
+        size="sm"
+        className="h-8 w-8 p-0"
+        onClick={undo}
+        disabled={!canUndo}
+        title="Undo (⌘Z)"
+      >
+        <Undo2 aria-hidden className="h-3.5 w-3.5" />
+        <span className="sr-only">Undo</span>
+      </Button>
+      <Button
+        type="button"
+        variant="outline"
+        size="sm"
+        className="h-8 w-8 p-0"
+        onClick={redo}
+        disabled={!canRedo}
+        title="Redo (⇧⌘Z)"
+      >
+        <Redo2 aria-hidden className="h-3.5 w-3.5" />
+        <span className="sr-only">Redo</span>
+      </Button>
+      <ShareLinkButton url={shareUrl} className="h-8 gap-1.5" />
+    </>
+  )
 
   async function handleSave(e: React.FormEvent) {
     e.preventDefault()
@@ -71,7 +136,7 @@ export function ToolPresetsBar({ tool, noun, className }: ToolPresetsBarProps) {
           This browser remembers what you last had open. A free account
           remembers the ones you name, on every machine you use.
         </p>
-        <div className="mt-3 flex flex-wrap gap-2">
+        <div className="mt-3 flex flex-wrap items-center gap-2">
           <Button asChild size="sm">
             {/*
               Back to this exact tool afterwards. Signing up and landing on
@@ -84,6 +149,7 @@ export function ToolPresetsBar({ tool, noun, className }: ToolPresetsBarProps) {
           <Button asChild size="sm" variant="ghost">
             <Link href={`/login?redirect=${encodeURIComponent(pathname)}`}>Sign in</Link>
           </Button>
+          {stateActions}
         </div>
       </div>
     )
@@ -115,6 +181,13 @@ export function ToolPresetsBar({ tool, noun, className }: ToolPresetsBarProps) {
           )}
           {justSaved ? 'Saved' : 'Save'}
         </Button>
+        {/*
+          Inside the form element but not submit buttons: every one of them
+          sets `type="button"`, so Enter in the name field still means
+          "save" and not "undo". They sit here rather than in a row of
+          their own so the verbs for "I am done tuning this" are adjacent.
+        */}
+        {stateActions}
       </form>
 
       {presetError ? (

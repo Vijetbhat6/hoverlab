@@ -27,6 +27,8 @@ import {
   BLOCK_COUNT,
 } from '@/lib/blocks/block-index'
 import { absoluteUrl } from '@/lib/site'
+import { JsonLd } from '@/components/json-ld'
+import { breadcrumbLd, itemListLd } from '@/lib/structured-data'
 
 export const dynamicParams = false
 
@@ -81,8 +83,28 @@ export default async function BlockCategoryPage({ params }: PageProps) {
 
   const siblings = populatedBlockCategories().filter((c) => c !== category)
 
+  /*
+    The blocks themselves, not the sibling categories: this is a leaf hub,
+    and what a "react pricing section" result should be able to show is the
+    sections it holds. The breadcrumb gives the same query Home > Blocks >
+    Pricing rather than a bare URL.
+  */
+  const listLd = itemListLd(
+    `${category} blocks`,
+    `/blocks/${slug}`,
+    blocks.map((block) => ({ name: block.name, path: `/block/${block.id}` })),
+  )
+
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <JsonLd data={listLd} />
+      <JsonLd
+        data={breadcrumbLd([
+          { name: 'Home', path: '/' },
+          { name: 'Blocks', path: '/blocks' },
+          { name: category },
+        ])}
+      />
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <Link
           href="/blocks"

@@ -41,6 +41,7 @@ import {
 } from '@/components/ui/select'
 import { SliderField, ToggleField } from '@/components/control-field'
 import { CopyCssCard } from '@/components/designer-tools/copy-css-card'
+import { arbitraryValue, classes } from '@/lib/tailwind-arbitrary'
 import { ToolLayout } from '@/components/designer-tools/tool-layout'
 import { ToolPresetsBar } from '@/components/designer-tools/tool-presets-bar'
 import { UseInCatalog } from '@/components/designer-tools/use-in-catalog'
@@ -211,6 +212,29 @@ export default function FilterToolPage() {
   const property = state.backdrop ? 'backdrop-filter' : 'filter'
 
   /*
+    The same stack as Tailwind classes.
+
+    One arbitrary PROPERTY — `[filter:…]` — rather than the per-function
+    utilities `blur-[…] saturate-[…] …`, and that is a correctness choice
+    rather than a stylistic one. Tailwind's individual filter utilities
+    compose through CSS variables in a fixed order, so a stack that depends
+    on ordering (a hue-rotate before a sepia is not the same picture as
+    after) cannot be expressed by listing them. Emitting the whole value
+    keeps the output identical to the CSS above and to the preview.
+
+    `mix-blend-mode` has real utilities with no such caveat, so it uses one.
+  */
+  const tailwindClass =
+    classes(
+      filter ? `[${property}:${arbitraryValue(filter)}]` : '',
+      state.backdrop && filter ? `[-webkit-${property}:${arbitraryValue(filter)}]` : '',
+      state.blend !== 'normal' ? `mix-blend-${state.blend}` : '',
+    ) ||
+    // Every control at its identity value produces no classes at all, and an
+    // empty code block reads as a bug rather than as "nothing to apply".
+    '<!-- every filter is at its default, so there is nothing to apply -->'
+
+  /*
     `-webkit-backdrop-filter` is still load-bearing.
 
     Safari shipped the property behind the prefix and unprefixed support is
@@ -277,6 +301,7 @@ export default function FilterToolPage() {
           </p>
 
           <CopyCssCard code={cssBlock} title="CSS" language="css" />
+          <CopyCssCard code={tailwindClass} title="Tailwind classes" language="html" />
 
           <UseInCatalog tool={TOOL} />
         </div>

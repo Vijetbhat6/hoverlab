@@ -47,7 +47,12 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-local-*
+# Anchored to the repo root. Unanchored, it matches at any depth — which
+# silently swallowed the whole of
+# src/lib/templates/files/local-service/, so that template built fine here
+# and would have shipped from a clean checkout with no package.json,
+# README or layout.
+/local-*
 .claude
 .z-ai-config
 *.log
