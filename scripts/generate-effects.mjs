@@ -22,6 +22,7 @@ import { generateV10 } from './generate-effects-v10.mjs'
 import { generateV11 } from './generate-effects-v11.mjs'
 import { generateV12 } from './generate-effects-v12.mjs'
 import { generateV13 } from './generate-effects-v13.mjs'
+import { generateV14 } from './generate-effects-v14.mjs'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const OUT_PATH = join(__dirname, '..', 'src', 'lib', 'generated-effects.json')
@@ -1970,6 +1971,20 @@ generateV12(extraCtx)
  * ========================================================== */
 
 generateV13(extraCtx)
+
+/* ============================================================
+ *  Fourteenth wave: 138 more designs, one entry each, across all
+ *  32 categories. Covers the six check-catalog-focus had sealed
+ *  from the outset rather than as an afterthought — the owner
+ *  overruled that seal during v13 and the call stands; the
+ *  baseline is re-accepted for this wave too. Weighted six-per-
+ *  category toward the five still short of shapes. Every part was
+ *  verified through scripts/shot-effects.mjs, the render harness
+ *  that is committed alongside this wave.
+ *  See generate-effects-v14.mjs.
+ * ========================================================== */
+
+generateV14(extraCtx)
 
 /* ============================================================
  *  Thinning
