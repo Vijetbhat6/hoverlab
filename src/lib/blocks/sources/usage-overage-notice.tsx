@@ -170,7 +170,7 @@ export function UsageOverageNotice({
               <TrendingUp aria-hidden className="h-3.5 w-3.5" />
               At this rate, by day {periodDays}
             </dt>
-            <dd className="text-right">
+            <dd className="text-end">
               <span className="block font-mono font-semibold text-foreground">
                 {money(projectedCharge)}
               </span>

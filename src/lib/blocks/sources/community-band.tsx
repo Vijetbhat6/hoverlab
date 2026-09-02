@@ -80,7 +80,7 @@ export function CommunityBand({
               <span className="font-semibold tracking-tight">{link.label}</span>
               <ArrowUpRight
                 aria-hidden
-                className="ml-auto h-4 w-4 text-muted-foreground transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary"
+                className="ms-auto h-4 w-4 text-muted-foreground transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary"
               />
             </div>
 

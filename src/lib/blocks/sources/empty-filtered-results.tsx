@@ -123,7 +123,7 @@ export function EmptyFilteredResults({
                 <button
                   type="button"
                   onClick={() => remove(filter.id)}
-                  className="group inline-flex items-center gap-1.5 rounded-full border border-border bg-background py-1 pl-3 pr-1.5 text-sm transition-colors hover:border-primary/50 hover:bg-primary/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  className="group inline-flex items-center gap-1.5 rounded-full border border-border bg-background py-1 ps-3 pe-1.5 text-sm transition-colors hover:border-primary/50 hover:bg-primary/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 >
                   <span className="text-muted-foreground">{filter.field}:</span>
                   <span className="font-medium">{filter.value}</span>

@@ -201,7 +201,7 @@ export function CookieConsent({
               onClick={() => setShowDetail((v) => !v)}
               aria-expanded={showDetail}
               aria-controls="cookie-consent-categories"
-              className="rounded-xl px-4 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground sm:mr-auto"
+              className="rounded-xl px-4 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground sm:me-auto"
             >
               {showDetail ? 'Hide options' : 'Choose what to allow'}
             </button>

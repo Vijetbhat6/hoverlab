@@ -179,7 +179,7 @@ export function SettingsApiKeys({
               </p>
             </div>
 
-            <div className="text-right text-xs text-muted-foreground">
+            <div className="text-end text-xs text-muted-foreground">
               <p>Created {key.created}</p>
               <p>{key.lastUsed ? `Last used ${key.lastUsed}` : 'Never used'}</p>
             </div>

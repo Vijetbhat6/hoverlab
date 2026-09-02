@@ -154,7 +154,7 @@ export function SourceCitationList({
                       >
                         <span className="sr-only">{KIND_LABEL[citation.kind]}: </span>
                         <cite className="not-italic">{citation.title}</cite>
-                        <ExternalLink aria-hidden className="ml-1 inline h-3 w-3 align-baseline" />
+                        <ExternalLink aria-hidden className="ms-1 inline h-3 w-3 align-baseline" />
                         <span className="sr-only"> (opens in a new tab)</span>
                       </a>
                     ) : (
@@ -175,7 +175,7 @@ export function SourceCitationList({
                   </p>
 
                   {citation.excerpt ? (
-                    <blockquote className="mt-2 border-l-2 border-border pl-3 text-xs italic leading-relaxed text-muted-foreground">
+                    <blockquote className="mt-2 border-s-2 border-border ps-3 text-xs italic leading-relaxed text-muted-foreground">
                       {citation.excerpt}
                     </blockquote>
                   ) : null}

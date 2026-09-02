@@ -161,7 +161,7 @@ export function DashboardSavedViews({
                     {view.shared ? ' (shared with the team)' : ' (only you)'}
                   </span>
                   {selected && dirty ? (
-                    <span className="ml-1 rounded bg-amber-500/15 px-1.5 py-0.5 text-[11px] font-medium text-amber-700 dark:text-amber-400">
+                    <span className="ms-1 rounded bg-amber-500/15 px-1.5 py-0.5 text-[11px] font-medium text-amber-700 dark:text-amber-400">
                       Edited
                     </span>
                   ) : null}

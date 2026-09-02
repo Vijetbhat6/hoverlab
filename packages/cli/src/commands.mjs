@@ -12,14 +12,16 @@
  */
 
 import path from 'node:path'
-import { mkdir, writeFile } from 'node:fs/promises'
+import { mkdir, writeFile, readFile } from 'node:fs/promises'
 
 import {
+  assertUnlocked,
   FRAMEWORKS,
   LEVELS,
   SITE_URL,
   getArtifact,
   getDna,
+  getRevisions,
   reportInstall,
   getSkill,
   listSkills,
@@ -30,6 +32,7 @@ import { detectFramework } from './detect.mjs'
 import { addArtifact } from './write.mjs'
 import { initTemplate } from './scaffold.mjs'
 import { readProjectConfig, brandCustomization } from './config.mjs'
+import { readLock, recordInstall, LOCK_NAME } from './lockfile.mjs'
 import {
   CONFIG_FILE,
   clearKey,
@@ -142,6 +145,21 @@ export async function commandAdd(ids, flags) {
       // a dry run is someone deciding, not someone using.
       if (!result.dryRun) {
         void reportInstall([result.artifact.id, ...(result.included ?? [])])
+
+        /*
+         * Record what landed, so `hoverlab outdated` has something to
+         * compare against later. Awaited rather than fired and forgotten
+         * like `reportInstall`: that one is telemetry we can afford to
+         * lose, this is the only record that this project owns a copy of
+         * this artifact, and losing it silently breaks the feature it
+         * exists for.
+         */
+        await recordInstall({
+          id: result.artifact.id,
+          level: result.level,
+          revision: result.artifact.revision,
+          files: result.files ?? [],
+        })
       }
 
       const verb = result.dryRun ? 'Would add' : 'Added'
@@ -635,9 +653,229 @@ export async function commandWhoami() {
   out(`  ${dim(`from ${source === 'HOVERLAB_KEY' ? 'HOVERLAB_KEY' : displayPath(source)}`)}`)
 }
 
+
+/* ------------------------------------------------------------------ *
+ *  outdated / diff
+ * ------------------------------------------------------------------ */
+
+/**
+ * `hoverlab outdated` — which installed artifacts have moved on.
+ *
+ * WHY THIS COMMAND EXISTS. Hoverlab installs source you own, which is the
+ * product and also the reason a fix could never reach anyone: the moment
+ * the file is in your repo, the catalog has no idea it exists. Pro sells a
+ * twelve-month update window and this is the first thing that makes it a
+ * delivery mechanism rather than a sentence on a pricing page.
+ *
+ * IT NEVER TOUCHES YOUR FILES. Reporting is the whole job. There is no
+ * `--fix`, deliberately: the file is yours, you have almost certainly
+ * edited it, and a command that overwrote local changes on the strength of
+ * a hash comparison would be the most destructive thing this CLI could do.
+ * `hoverlab diff <id>` shows what changed; applying it is a person's call.
+ *
+ * NOTHING ABOUT YOUR PROJECT IS SENT. The revisions endpoint is asked for
+ * everything and the comparison happens locally — see `getRevisions` for
+ * why asking for less would tell the server more.
+ */
+export async function commandOutdated(_args, flags) {
+  const lock = await readLock()
+  const entries = Object.entries(lock.artifacts)
+
+  if (entries.length === 0) {
+    if (flags.json) {
+      out(JSON.stringify({ tracked: 0, outdated: [], unknown: [] }, null, 2))
+      return
+    }
+    out(dim(`No ${LOCK_NAME} here — nothing installed by this CLI to check.`))
+    out(`${dim('It is written the next time you run')} ${cyan('hoverlab add <id>')}`)
+    return
+  }
+
+  let catalog
+  try {
+    catalog = await getRevisions()
+  } catch (error) {
+    throw new Error(
+      `Could not fetch catalog revisions: ${error.message}\n` +
+        '  Your files are untouched — this command only reads.',
+    )
+  }
+
+  const changed = []
+  const unknown = []
+
+  for (const [id, entry] of entries) {
+    const current = catalog.artifacts?.[id]
+    if (!current) {
+      // Retired, renamed, or from a different deployment. Named rather than
+      // dropped: an id that has left the catalog is worth knowing about.
+      unknown.push(id)
+      continue
+    }
+    if (current.revision !== entry.revision) {
+      changed.push({
+        id,
+        level: entry.level,
+        from: entry.revision,
+        to: current.revision,
+        updated: current.updated,
+      })
+    }
+  }
+
+  if (flags.json) {
+    out(JSON.stringify({ tracked: entries.length, outdated: changed, unknown }, null, 2))
+    return
+  }
+
+  if (changed.length === 0 && unknown.length === 0) {
+    const plural = entries.length === 1 ? 'artifact is' : 'artifacts are'
+    out(`${green('OK')} All ${entries.length} tracked ${plural} up to date.`)
+    return
+  }
+
+  if (changed.length > 0) {
+    out(`${yellow('!')} ${bold(String(changed.length))} of ${entries.length} have changed in the catalog:`)
+    out()
+    for (const item of changed) {
+      out(`  ${cyan(item.id)} ${dim(`(${item.level})`)}`)
+      const when = item.updated ? dim(`  ·  updated ${item.updated}`) : ''
+      out(`    ${dim(`${item.from} -> ${item.to}`)}${when}`)
+    }
+    out()
+    out(`${dim('See what changed:')} ${cyan(`hoverlab diff ${changed[0].id}`)}`)
+    out(dim('Nothing has been written. Your copies are untouched.'))
+  }
+
+  if (unknown.length > 0) {
+    out()
+    const plural = unknown.length === 1 ? 'id is' : 'ids are'
+    out(dim(`${unknown.length} tracked ${plural} not in the catalog: ${unknown.join(', ')}`))
+    out(dim('They may have been renamed or retired.'))
+  }
+}
+
+/**
+ * `hoverlab diff <id>` — the catalog's current copy against yours.
+ *
+ * A line-level diff computed locally, with no diff library: the artifacts
+ * here are a few hundred lines and a longest-common-subsequence over that
+ * takes milliseconds, where a dependency would be a permanent cost to every
+ * consumer of this package.
+ *
+ * Prints and exits. Same reasoning as `outdated`: the file is yours.
+ */
+export async function commandDiff(ids, flags) {
+  if (ids.length === 0) {
+    throw new Error('Which one? Try `hoverlab outdated` to see what has changed.')
+  }
+
+  if (flags.json) {
+    // Deliberately unsupported. Anyone scripting this wants the machine
+    // answer from `outdated --json`; a bespoke diff schema here would be a
+    // second format to keep stable for no reader.
+    out(dim('--json is not supported for diff — use `hoverlab outdated --json`.'))
+  }
+
+  const lock = await readLock()
+
+  for (const id of ids) {
+    const entry = lock.artifacts[id]
+    if (!entry) {
+      out(`${yellow('!')} ${cyan(id)} ${dim(`is not in ${LOCK_NAME} — nothing to compare.`)}`)
+      continue
+    }
+
+    const data = assertUnlocked(await getArtifact(id, { deep: false }))
+    const catalogFiles = new Map(
+      (data.files ?? []).map((file) => [path.basename(file.path), file.source]),
+    )
+
+    let printed = false
+
+    for (const relative of entry.files) {
+      let local
+      try {
+        local = await readFile(path.resolve(process.cwd(), relative), 'utf8')
+      } catch {
+        out(`${yellow('!')} ${dim(`${relative} is gone from disk.`)}`)
+        continue
+      }
+
+      const current = catalogFiles.get(path.basename(relative))
+      if (current === undefined) continue
+
+      const lines = lineDiff(local, current)
+      if (lines.length === 0) continue
+
+      printed = true
+      const plural = lines.length === 1 ? 'line' : 'lines'
+      out(`${bold(relative)} ${dim(`— ${lines.length} changed ${plural}`)}`)
+      for (const line of lines.slice(0, 60)) {
+        out(line.startsWith('+') ? green(line) : yellow(line))
+      }
+      if (lines.length > 60) out(dim(`  ... ${lines.length - 60} more`))
+      out()
+    }
+
+    if (!printed) {
+      out(`${green('OK')} ${cyan(id)} ${dim('matches the catalog.')}`)
+    }
+  }
+}
+
+/**
+ * Changed lines between two texts, as `+`/`-` prefixed strings.
+ *
+ * A plain longest-common-subsequence table. Bounded by the sizes this CLI
+ * deals with — the largest block is under 400 lines, so the table is under
+ * 160k cells and finishes instantly. Nothing points this at a large file.
+ */
+export function lineDiff(before, after) {
+  /*
+   * Line endings are normalised first, and this is not a detail.
+   *
+   * The catalog serves LF. A file written or touched on Windows — by an
+   * editor, a formatter, or git's autocrlf — comes back CRLF, so every
+   * single line differs by a trailing carriage return and the diff reports
+   * the whole file as changed. The first run of this on Windows called a
+   * two-line edit "376 changed lines", which is worse than no diff at all:
+   * it teaches the reader to ignore the command.
+   */
+  const a = before.replace(/\r\n/g, '\n').split('\n')
+  const b = after.replace(/\r\n/g, '\n').split('\n')
+
+  const table = Array.from({ length: a.length + 1 }, () => new Uint32Array(b.length + 1))
+  for (let i = a.length - 1; i >= 0; i--) {
+    for (let j = b.length - 1; j >= 0; j--) {
+      table[i][j] =
+        a[i] === b[j] ? table[i + 1][j + 1] + 1 : Math.max(table[i + 1][j], table[i][j + 1])
+    }
+  }
+
+  const result = []
+  let i = 0
+  let j = 0
+  while (i < a.length && j < b.length) {
+    if (a[i] === b[j]) {
+      i++
+      j++
+    } else if (table[i + 1][j] >= table[i][j + 1]) {
+      result.push(`- ${a[i++]}`)
+    } else {
+      result.push(`+ ${b[j++]}`)
+    }
+  }
+  while (i < a.length) result.push(`- ${a[i++]}`)
+  while (j < b.length) result.push(`+ ${b[j++]}`)
+
+  return result
+}
+
 /* ------------------------------------------------------------------ *
  *  help
  * ------------------------------------------------------------------ */
+
 
 export function commandHelp() {
   out(`${bold('hoverlab')} — install UI from the Hoverlab catalog
@@ -664,6 +902,8 @@ ${bold('Commands')}
   mcp                  Run the MCP server over stdio (for editor agents)
   login <key>          Save a licence key for this machine
   logout               Forget the stored key
+  outdated             List installed artifacts the catalog has since changed
+  diff <id...>         Show what changed between your copy and the catalog
   whoami               Show which key is in play, and where it came from
   help                 Show this message
 

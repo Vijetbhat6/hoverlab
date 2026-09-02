@@ -100,7 +100,7 @@ export function AuthResetPassword({
                 autoComplete="new-password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full rounded-xl border border-border/60 bg-background px-3.5 py-2.5 pr-11 text-sm outline-none transition-shadow focus-visible:ring-2 focus-visible:ring-primary"
+                className="w-full rounded-xl border border-border/60 bg-background px-3.5 py-2.5 pe-11 text-sm outline-none transition-shadow focus-visible:ring-2 focus-visible:ring-primary"
               />
               <button
                 type="button"
@@ -129,7 +129,7 @@ export function AuthResetPassword({
                   />
                 ))}
               </div>
-              <span className={`w-16 text-right text-xs font-medium ${level.text}`}>
+              <span className={`w-16 text-end text-xs font-medium ${level.text}`}>
                 {password.length > 0 ? level.label : ''}
               </span>
             </div>

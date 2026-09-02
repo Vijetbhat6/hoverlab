@@ -180,7 +180,7 @@ export function PricingPlanPicker({
                       </span>
                     </span>
 
-                    <span className="shrink-0 text-right">
+                    <span className="shrink-0 text-end">
                       <span className="block text-lg font-bold tabular-nums text-foreground">
                         {plan.price}
                       </span>

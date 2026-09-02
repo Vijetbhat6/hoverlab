@@ -157,7 +157,7 @@ export function DrawerRecordDetail({
                 setOpen(true)
               }}
               aria-current={open && i === index ? 'true' : undefined}
-              className={`w-full rounded-xl border p-3 text-left transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+              className={`w-full rounded-xl border p-3 text-start transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
                 open && i === index
                   ? 'border-primary bg-card'
                   : 'border-border bg-card/50 hover:bg-card'

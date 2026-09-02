@@ -139,7 +139,7 @@ export function AuthLoginCard({
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className="w-full rounded-xl border border-border/60 bg-background px-3.5 py-2.5 pr-11 text-sm outline-none transition-shadow placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-primary"
+                className="w-full rounded-xl border border-border/60 bg-background px-3.5 py-2.5 pe-11 text-sm outline-none transition-shadow placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-primary"
               />
               <button
                 type="button"

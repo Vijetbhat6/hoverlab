@@ -79,7 +79,7 @@ export function TestimonialSpotlight({
           </figcaption>
         </figure>
 
-        <dl className="grid content-center gap-6 border-border/60 max-lg:border-t max-lg:pt-8 sm:max-lg:grid-cols-3 lg:min-w-52 lg:border-l lg:pl-16">
+        <dl className="grid content-center gap-6 border-border/60 max-lg:border-t max-lg:pt-8 sm:max-lg:grid-cols-3 lg:min-w-52 lg:border-s lg:ps-16">
           {stats.map((stat) => (
             <div key={stat.label}>
               <dt className="sr-only">{stat.label}</dt>

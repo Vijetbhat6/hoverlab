@@ -125,7 +125,7 @@ export function StatsComparison({
           </caption>
           <thead>
             <tr className="border-b border-border">
-              <th scope="col" className="py-4 pr-6 text-sm font-semibold text-foreground">
+              <th scope="col" className="py-4 pe-6 text-sm font-semibold text-foreground">
                 Metric
               </th>
               <th scope="col" className="px-6 py-4 text-sm font-medium text-muted-foreground">
@@ -134,7 +134,7 @@ export function StatsComparison({
               <th scope="col" className="px-6 py-4 text-sm font-semibold text-foreground">
                 {afterLabel}
               </th>
-              <th scope="col" className="py-4 pl-6 text-right text-sm font-medium text-muted-foreground">
+              <th scope="col" className="py-4 ps-6 text-end text-sm font-medium text-muted-foreground">
                 Change
               </th>
             </tr>
@@ -144,7 +144,7 @@ export function StatsComparison({
               <tr key={row.metric}>
                 <th
                   scope="row"
-                  className="py-5 pr-6 text-sm font-medium leading-snug text-foreground"
+                  className="py-5 pe-6 text-sm font-medium leading-snug text-foreground"
                 >
                   {row.metric}
                 </th>
@@ -154,7 +154,7 @@ export function StatsComparison({
                 <td className="px-6 py-5 text-lg font-bold tabular-nums text-foreground">
                   {row.after}
                 </td>
-                <td className="py-5 pl-6 text-right">
+                <td className="py-5 ps-6 text-right">
                   {row.improvement ? (
                     <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2.5 py-1 text-xs font-semibold text-primary">
                       {row.direction === 'up' ? (

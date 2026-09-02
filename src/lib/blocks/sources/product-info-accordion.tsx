@@ -90,7 +90,7 @@ export function ProductInfoAccordion({
           open={section.defaultOpen}
           className="group px-5 [&_summary::-webkit-details-marker]:hidden"
         >
-          <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 text-left font-medium transition-colors hover:text-foreground/80">
+          <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 text-start font-medium transition-colors hover:text-foreground/80">
             {section.title}
             <ChevronDown
               aria-hidden
@@ -98,7 +98,7 @@ export function ProductInfoAccordion({
             />
           </summary>
 
-          <div className="pb-5 pr-4">
+          <div className="pb-5 pe-4">
             {section.body.map((paragraph, i) => (
               <p key={i} className="mb-3 text-sm leading-relaxed text-muted-foreground last:mb-0">
                 {paragraph}
@@ -110,7 +110,7 @@ export function ProductInfoAccordion({
                 {section.specs.map((spec) => (
                   <div key={spec.label} className="flex justify-between gap-4 py-2 text-sm">
                     <dt className="text-muted-foreground">{spec.label}</dt>
-                    <dd className="text-right font-medium">{spec.value}</dd>
+                    <dd className="text-end font-medium">{spec.value}</dd>
                   </div>
                 ))}
               </dl>

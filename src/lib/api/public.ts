@@ -24,6 +24,16 @@
 import { NextResponse } from 'next/server'
 import type { Artifact, ArtifactLevel, ArtifactTier } from '@/lib/artifact-types'
 import { artifactHref, levelOf, tierOf } from '@/lib/artifact-types'
+import { updatedAt } from '@/lib/recency'
+import REVISIONS from '@/lib/generated-artifact-revisions.json'
+
+/** Fingerprints by level, for `revisionOf` below. */
+const REVISIONS_BY_LEVEL: Record<ArtifactLevel, Record<string, string>> = {
+  effect: REVISIONS.effects,
+  block: REVISIONS.blocks,
+  page: REVISIONS.pages,
+  template: REVISIONS.templates,
+}
 
 export const API_VERSION = 'v1'
 
@@ -115,19 +125,57 @@ export interface ArtifactSummary {
   featured: boolean
   tier: ArtifactTier
   url: string
+  /**
+   * Content fingerprint — what `npx hoverlab outdated` compares against.
+   *
+   * On the summary rather than only the detail response so a client can
+   * record it from whatever call it already made, and so a lockfile written
+   * after `add` never needs a second request. Twelve hex characters; see
+   * `scripts/build-revisions.mts` for what is hashed and, more importantly,
+   * what is not — metadata changes deliberately do not move it.
+   */
+  revision?: string
+  /** ISO date this artifact last changed, where that is precisely known. */
+  updated?: string
 }
 
 export function toSummary(artifact: SearchableArtifact, siteOrigin: string): ArtifactSummary {
+  const level = levelOf(artifact)
+
   return {
     id: artifact.id,
     name: artifact.name,
-    level: levelOf(artifact),
+    level,
     category: artifact.category,
     description: artifact.description,
     tags: artifact.tags ?? [],
     featured: artifact.featured === true,
     tier: tierOf(artifact),
     url: `${siteOrigin.replace(/\/$/, '')}${artifactHref(artifact)}`,
+    ...revisionOf(level, artifact.id),
+  }
+}
+
+/**
+ * The revision and update date for one artifact, as spreadable fields.
+ *
+ * Omitted rather than nulled when unknown. A `revision` of null on the wire
+ * invites a client to store null and then report the artifact as changed on
+ * every check; an absent key makes the client's own `if (revision)` the
+ * natural guard. `updated` follows the rule `recency.ts` already sets — no
+ * entry means either "never changed" or "cannot be stated precisely", and
+ * both render as nothing.
+ */
+function revisionOf(
+  level: ArtifactLevel,
+  id: string,
+): { revision?: string; updated?: string } {
+  const revision = REVISIONS_BY_LEVEL[level]?.[id]
+  const updated = updatedAt(level, id)
+
+  return {
+    ...(revision ? { revision } : {}),
+    ...(updated ? { updated } : {}),
   }
 }
 

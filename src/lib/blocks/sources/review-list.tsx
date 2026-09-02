@@ -196,7 +196,7 @@ export function ReviewList({
                   </span>
                 ) : null}
 
-                <time dateTime={review.date} className="ml-auto text-xs text-muted-foreground">
+                <time dateTime={review.date} className="ms-auto text-xs text-muted-foreground">
                   {formatDate(review.date, locale)}
                 </time>
               </div>

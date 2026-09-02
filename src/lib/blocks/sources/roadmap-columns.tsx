@@ -81,7 +81,7 @@ export function RoadmapColumns({
               <div className="mb-4 flex items-center gap-2">
                 <span className={col.accent}>{col.icon}</span>
                 <h3 className="font-semibold tracking-tight">{col.label}</h3>
-                <span className="ml-auto rounded-full bg-muted px-2 py-0.5 text-xs font-medium text-muted-foreground">
+                <span className="ms-auto rounded-full bg-muted px-2 py-0.5 text-xs font-medium text-muted-foreground">
                   {columnItems.length}
                 </span>
               </div>

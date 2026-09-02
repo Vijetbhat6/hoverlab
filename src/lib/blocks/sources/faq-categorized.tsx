@@ -164,7 +164,7 @@ export function FaqCategorized({
                 className="block rounded-full border border-border/60 px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:border-border hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               >
                 {topic.name}
-                <span className="ml-2 text-xs tabular-nums text-muted-foreground/70">
+                <span className="ms-2 text-xs tabular-nums text-muted-foreground/70">
                   {topic.questions.length}
                 </span>
               </a>
@@ -193,14 +193,14 @@ export function FaqCategorized({
                     open={openFirst && index === 0}
                     className="group py-1"
                   >
-                    <summary className="flex cursor-pointer list-none items-start justify-between gap-6 py-4 text-left font-medium text-foreground marker:content-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background">
+                    <summary className="flex cursor-pointer list-none items-start justify-between gap-6 py-4 text-start font-medium text-foreground marker:content-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background">
                       {item.question}
                       <Plus
                         aria-hidden
                         className="mt-0.5 h-5 w-5 shrink-0 text-muted-foreground transition-transform duration-200 group-open:rotate-45"
                       />
                     </summary>
-                    <p className="max-w-prose text-pretty pb-5 pr-10 leading-relaxed text-muted-foreground">
+                    <p className="max-w-prose text-pretty pb-5 pe-10 leading-relaxed text-muted-foreground">
                       {item.answer}
                     </p>
                   </details>

@@ -245,7 +245,7 @@ export function ContextChunkCards({
                   · {chunk.location}
                 </span>
 
-                <span className="ml-auto flex shrink-0 items-center gap-2">
+                <span className="ms-auto flex shrink-0 items-center gap-2">
                   <span className="text-[11px] text-muted-foreground">{band(chunk.score)}</span>
                   <meter
                     value={chunk.score}

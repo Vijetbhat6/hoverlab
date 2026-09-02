@@ -176,7 +176,7 @@ export function OrderHistoryList({
                   {status.label}
                 </span>
 
-                <p className="w-20 shrink-0 text-right text-sm font-semibold tabular-nums">
+                <p className="w-20 shrink-0 text-end text-sm font-semibold tabular-nums">
                   {formatPrice(order.total, currency, locale)}
                 </p>
 

@@ -8,6 +8,7 @@ import {
   costOf,
   ACTION_COSTS,
 } from '@/lib/billing/credits'
+import { PLANS } from '@/lib/billing/plans'
 import { coerceBrandColor, DEFAULT_BRAND_COLOR, type BrandColor } from '@/lib/brand-presets'
 import { resolveTokens } from '@/lib/export/design-system'
 import { withJsonErrors } from '@/lib/route-errors'
@@ -140,7 +141,7 @@ export const POST = withJsonErrors('api/ai/compose', async (request: Request) =>
          * and saying "includes 5 a day" here would promise a free compose
          * that the very next request refuses.
          */
-        hint: `Composing costs ${ACTION_COSTS.compose} credits, which the free daily generations do not cover. Pro+ includes 500 a month, and credit packs never expire.`,
+        hint: `Composing costs ${ACTION_COSTS.compose} credits, which the free daily generations do not cover. A Pro licence includes ${PLANS.pro.includedCredits} credits that never expire, and top-up packs never expire either.`,
       },
       { status: 401 },
     )

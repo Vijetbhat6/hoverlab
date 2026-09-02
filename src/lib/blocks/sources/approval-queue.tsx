@@ -183,7 +183,7 @@ export function ApprovalQueue({ items = DEFAULT_ITEMS, className = '' }: Approva
         ) : null}
 
         <div className="overflow-x-auto">
-          <table className="w-full text-left text-sm">
+          <table className="w-full text-start text-sm">
             <caption className="sr-only">
               Actions awaiting approval. High-impact actions have no bulk
               checkbox and must be opened individually.
@@ -210,10 +210,10 @@ export function ApprovalQueue({ items = DEFAULT_ITEMS, className = '' }: Approva
                 <th scope="col" className="px-2 py-2 font-medium">
                   Action
                 </th>
-                <th scope="col" className="px-2 py-2 text-right font-medium">
+                <th scope="col" className="px-2 py-2 text-end font-medium">
                   Amount
                 </th>
-                <th scope="col" className="px-5 py-2 text-right font-medium">
+                <th scope="col" className="px-5 py-2 text-end font-medium">
                   Deadline
                 </th>
               </tr>
@@ -271,10 +271,10 @@ export function ApprovalQueue({ items = DEFAULT_ITEMS, className = '' }: Approva
                         </p>
                       ) : null}
                     </td>
-                    <td className="px-2 py-3 text-right align-top tabular-nums text-foreground">
+                    <td className="px-2 py-3 text-end align-top tabular-nums text-foreground">
                       {item.amount ?? '—'}
                     </td>
-                    <td className="px-5 py-3 text-right align-top">
+                    <td className="px-5 py-3 text-end align-top">
                       {item.needsIndividualReview ? (
                         <a
                           href="#review"

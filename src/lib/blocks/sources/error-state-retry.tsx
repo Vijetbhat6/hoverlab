@@ -116,11 +116,11 @@ export function ErrorStateRetry({
       ) : null}
 
       {detail ? (
-        <details className="mt-6 w-full max-w-lg text-left [&_summary::-webkit-details-marker]:hidden">
+        <details className="mt-6 w-full max-w-lg text-start [&_summary::-webkit-details-marker]:hidden">
           <summary className="cursor-pointer list-none text-center text-xs font-medium text-muted-foreground transition-colors hover:text-foreground">
             Technical details
           </summary>
-          <pre className="mt-3 overflow-x-auto rounded-xl bg-muted/60 p-3 text-left font-mono text-xs text-muted-foreground">
+          <pre className="mt-3 overflow-x-auto rounded-xl bg-muted/60 p-3 text-start font-mono text-xs text-muted-foreground">
             {detail}
           </pre>
         </details>

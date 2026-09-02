@@ -143,7 +143,7 @@ export function AppliedFiltersBar({
             <SlidersHorizontal aria-hidden className="h-4 w-4" />
             Filters
             {removable.length > 0 ? (
-              <span className="ml-0.5 rounded-full bg-primary px-1.5 text-xs font-semibold text-primary-foreground">
+              <span className="ms-0.5 rounded-full bg-primary px-1.5 text-xs font-semibold text-primary-foreground">
                 {removable.length}
               </span>
             ) : null}
@@ -185,7 +185,7 @@ export function AppliedFiltersBar({
               {active.map((filter) => (
                 <li key={filter.id}>
                   <span
-                    className={`inline-flex items-center gap-1.5 rounded-lg py-1 pl-2.5 text-sm ${
+                    className={`inline-flex items-center gap-1.5 rounded-lg py-1 ps-2.5 text-sm ${
                       filter.locked
                         ? 'pr-2.5 bg-muted/60 text-muted-foreground'
                         : 'pr-1 bg-muted text-foreground'
@@ -216,7 +216,7 @@ export function AppliedFiltersBar({
               <button
                 type="button"
                 onClick={clearAll}
-                className="ml-1 rounded text-sm font-medium text-muted-foreground underline-offset-4 transition hover:text-foreground hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                className="ms-1 rounded text-sm font-medium text-muted-foreground underline-offset-4 transition hover:text-foreground hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               >
                 Clear all
               </button>

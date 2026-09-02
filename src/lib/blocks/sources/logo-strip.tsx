@@ -61,7 +61,7 @@ export function LogoStrip({
       className={`w-full ${divided ? 'border-t border-border/60' : ''} ${className}`}
     >
       <div className="mx-auto flex w-full max-w-6xl flex-col items-center gap-6 px-4 py-10 sm:px-6 lg:flex-row lg:gap-12 lg:px-8">
-        <p className="shrink-0 text-center text-sm font-medium text-muted-foreground lg:text-left">
+        <p className="shrink-0 text-center text-sm font-medium text-muted-foreground lg:text-start">
           {claim}
         </p>
 

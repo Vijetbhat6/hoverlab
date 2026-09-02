@@ -18,7 +18,7 @@
 
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { ArrowRight, ShieldCheck } from 'lucide-react'
+import { ArrowRight, ShieldCheck, History } from 'lucide-react'
 
 import { SiteHeader } from '@/components/site-header'
 import { JsonLd } from '@/components/json-ld'
@@ -31,6 +31,7 @@ import { TOTAL_COUNT } from '@/lib/catalog-stats'
 import { BLOCK_COUNT } from '@/lib/blocks/block-index'
 import { PAGE_COUNT } from '@/lib/pages/page-index'
 import { TEMPLATE_COUNT } from '@/lib/templates/template-index'
+import { UPDATE_LEDGER } from '@/lib/compare'
 import { breadcrumbLd, PUBLISHER } from '@/lib/structured-data'
 import { absoluteUrl } from '@/lib/site'
 
@@ -140,6 +141,50 @@ export default function PricingPage() {
             products in the next tab, and the answer to that one is a page of
             its own because it carries other people's figures and has to date
             them. */}
+        {/*
+          The update window's other half, said where the window is sold.
+
+          The Pro card promises twelve months of catalog updates. Until now
+          nothing on this page said how a buyer would ever RECEIVE one — the
+          machinery has shipped for weeks (a revision per artifact, a public
+          endpoint, `hoverlab outdated`) and appeared on no page anyone reads
+          before paying. A bounded update window with no delivery mechanism
+          reads as a limitation; with one, it is the feature.
+        */}
+        <section className="mx-auto max-w-3xl px-4 pb-10 sm:px-6">
+          <div className="rounded-2xl border border-border/60 bg-card/60 p-6">
+            <div className="flex items-start gap-4">
+              <History aria-hidden className="mt-0.5 h-6 w-6 shrink-0 text-primary" />
+              <div>
+                <h2 className="text-lg font-bold tracking-tight">
+                  {UPDATE_LEDGER.claim}
+                </h2>
+                <p className="mt-2 text-sm text-muted-foreground">
+                  Twelve months of updates only means something if you can
+                  tell when one has landed. Every artifact carries a content
+                  revision, the whole ledger is a public endpoint with no key,
+                  and the CLI compares your installed copy against it:
+                </p>
+                <pre className="mt-4 overflow-x-auto rounded-lg border border-border/60 bg-muted/50 p-4 text-xs">
+                  <code>{`npx hoverlab outdated      # what has moved since you installed it
+npx hoverlab diff hero-split   # the lines that changed`}</code>
+                </pre>
+                <p className="mt-3 text-sm text-muted-foreground">
+                  Nothing reaches into your repo and nothing phones home —
+                  applying a change is always your call.{' '}
+                  <Link
+                    href="/compare"
+                    className="font-medium underline underline-offset-4"
+                  >
+                    Why this is the row the comparison table cannot hold
+                  </Link>
+                  .
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <section className="mx-auto max-w-3xl px-4 pb-4 sm:px-6">
           <p className="text-center text-sm text-muted-foreground">
             Comparing against a specific catalog?{' '}

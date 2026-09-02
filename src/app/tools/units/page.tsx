@@ -145,11 +145,13 @@ export default function UnitsToolPage() {
                 onChange={(e) => setInputValue(e.target.value)}
                 className="font-mono text-lg"
                 step="any"
+                aria-label="Input value"
               />
               <select
                 value={inputUnit}
                 onChange={(e) => setInputUnit(e.target.value as Unit)}
                 className="w-28 rounded-md border border-border bg-background px-3 text-sm font-medium"
+                aria-label="Input unit"
               >
                 {UNITS.map((u) => (
                   <option key={u} value={u}>
@@ -332,9 +334,15 @@ function SettingRow({
   unit: string
   hint: string
 }) {
+  // The <Label> named nothing: no `htmlFor`, and it does not wrap the field.
+  const labelId = React.useId()
+  const hintId = `${labelId}-hint`
+
   return (
     <div>
-      <Label className="mb-1 block text-xs font-medium">{label}</Label>
+      <Label id={labelId} className="mb-1 block text-xs font-medium">
+        {label}
+      </Label>
       <div className="flex items-center gap-2">
         <Input
           type="number"
@@ -346,10 +354,14 @@ function SettingRow({
           className="h-8 font-mono text-sm"
           step="any"
           min={1}
+          aria-labelledby={labelId}
+          aria-describedby={hintId}
         />
         <span className="text-xs text-muted-foreground">{unit}</span>
       </div>
-      <p className="mt-1 text-[11px] text-muted-foreground">{hint}</p>
+      <p id={hintId} className="mt-1 text-[11px] text-muted-foreground">
+        {hint}
+      </p>
     </div>
   )
 }

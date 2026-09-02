@@ -168,7 +168,7 @@ export function AiInspectorPanel({
               onChange={(e) => set('radius', Number(e.target.value))}
               className="w-full accent-primary"
             />
-            <span className="w-10 shrink-0 text-right font-mono text-xs tabular-nums text-muted-foreground">
+            <span className="w-10 shrink-0 text-end font-mono text-xs tabular-nums text-muted-foreground">
               {state.radius}px
             </span>
           </Row>
@@ -185,7 +185,7 @@ export function AiInspectorPanel({
               onChange={(e) => set('padding', Number(e.target.value))}
               className="w-full accent-primary"
             />
-            <span className="w-10 shrink-0 text-right font-mono text-xs tabular-nums text-muted-foreground">
+            <span className="w-10 shrink-0 text-end font-mono text-xs tabular-nums text-muted-foreground">
               {state.padding}px
             </span>
           </Row>
@@ -305,7 +305,7 @@ function Row({
             <button
               type="button"
               onClick={onRevert}
-              className="ml-auto inline-flex items-center gap-1 rounded px-1 py-0.5 text-[11px] text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              className="ms-auto inline-flex items-center gap-1 rounded px-1 py-0.5 text-[11px] text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
               <Undo2 aria-hidden className="h-3 w-3" />
               Revert

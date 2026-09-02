@@ -112,7 +112,7 @@ export function KanbanBoard({ columns = DEFAULT_COLUMNS, className = '' }: Kanba
               <button
                 type="button"
                 aria-label={`Add task to ${column.label}`}
-                className="ml-auto inline-flex h-6 w-6 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                className="ms-auto inline-flex h-6 w-6 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
               >
                 <Plus aria-hidden className="h-4 w-4" />
               </button>
@@ -133,7 +133,7 @@ export function KanbanBoard({ columns = DEFAULT_COLUMNS, className = '' }: Kanba
                     <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
                       <span aria-hidden className={`h-2 w-2 rounded-full ${priority.dot}`} />
                       <span>{priority.label}</span>
-                      <span className="ml-auto font-mono text-[0.65rem]">{task.id}</span>
+                      <span className="ms-auto font-mono text-[0.65rem]">{task.id}</span>
                     </div>
 
                     <p className="mt-1.5 text-sm font-medium leading-snug">{task.title}</p>

@@ -39,6 +39,13 @@ import { BrandColorPicker } from '@/components/brand-color-picker'
 import { CopyForFigma } from '@/components/copy-for-figma'
 import { downloadBlob, downloadTextFile } from '@/lib/bundle-export'
 import { track } from '@/lib/analytics'
+import {
+  DEFAULT_THEME_SHAPE,
+  SHAPE_PRESETS,
+  describeShape,
+  shapeEquals,
+  type ThemeShape,
+} from '@/lib/theme-shape'
 import type { DesignSystemExport } from '@/lib/export/design-system'
 
 /** What each file is for, in one line, for the free-tier explanation. */
@@ -62,6 +69,14 @@ export function DesignSystemPanel() {
   const [result, setResult] = React.useState<DesignSystemExport | null>(null)
   const [busy, setBusy] = React.useState(false)
   const [copied, setCopied] = React.useState<string | null>(null)
+  /*
+   * The non-colour axes. Held here rather than in the brand hook because
+   * shape is an export-time choice: it changes the files a customer
+   * downloads, not the site they are looking at. Tying it to the live
+   * theme would restyle the whole page while somebody was comparing
+   * presets, which is a different and much more startling feature.
+   */
+  const [shape, setShape] = React.useState<ThemeShape>(DEFAULT_THEME_SHAPE)
 
   const licensed = entitlements?.canUseProFeatures ?? false
 
@@ -75,7 +90,7 @@ export function DesignSystemPanel() {
    */
   React.useEffect(() => {
     setResult(null)
-  }, [brandColor])
+  }, [brandColor, shape])
 
   async function generate() {
     setBusy(true)
@@ -84,7 +99,11 @@ export function DesignSystemPanel() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'same-origin',
-        body: JSON.stringify({ brand: brandColor, name: name.trim() || undefined }),
+        body: JSON.stringify({
+          brand: brandColor,
+          name: name.trim() || undefined,
+          shape,
+        }),
       })
 
       if (res.status === 402) {
@@ -179,6 +198,57 @@ export function DesignSystemPanel() {
                   maxLength={60}
                   className="h-9 w-full rounded-md border border-border/60 bg-background px-3 text-sm outline-none transition-colors focus-visible:border-primary/50"
                 />
+              </div>
+
+              {/*
+                Shape, beside the brand.
+                The picker above moves one axis — hue — which is not a
+                design system: two products with the same accent and
+                different radii, gutters and type scales look nothing
+                alike. These are the three axes that carry that, and in
+                Tailwind v4 each is a single token that moves everything
+                downstream of it. See lib/theme-shape.ts.
+              */}
+              <div>
+                <span className="mb-1.5 block text-xs font-medium text-muted-foreground">
+                  Shape
+                </span>
+                <div role="radiogroup" aria-label="Shape" className="flex flex-wrap gap-1.5">
+                  {SHAPE_PRESETS.map((preset) => {
+                    const selected = shapeEquals(preset, shape)
+                    return (
+                      <button
+                        key={preset.id}
+                        type="button"
+                        role="radio"
+                        aria-checked={selected}
+                        onClick={() =>
+                          setShape({
+                            radiusRem: preset.radiusRem,
+                            density: preset.density,
+                            typeScale: preset.typeScale,
+                          })
+                        }
+                        title={preset.note}
+                        className={`rounded-lg border px-2.5 py-1.5 text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+                          selected
+                            ? 'border-primary bg-primary/10 text-foreground'
+                            : 'border-border/60 text-muted-foreground hover:bg-muted hover:text-foreground'
+                        }`}
+                      >
+                        {preset.name}
+                      </button>
+                    )
+                  })}
+                </div>
+                {/*
+                  The consequence in words, always. A preset name means
+                  nothing on its own, and this is the sentence that stops
+                  someone exporting "Compact" for a marketing site.
+                */}
+                <p aria-live="polite" className="mt-1.5 text-xs text-muted-foreground">
+                  {describeShape(shape)}
+                </p>
               </div>
 
               <Button onClick={generate} disabled={busy} className="w-full gap-1.5">

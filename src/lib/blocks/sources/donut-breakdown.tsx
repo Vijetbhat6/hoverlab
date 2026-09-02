@@ -166,11 +166,11 @@ export function DonutBreakdown({
                 <dt className="min-w-0 flex-1 truncate text-sm text-foreground">
                   {slice.label}
                 </dt>
-                <dd className="shrink-0 text-right">
+                <dd className="shrink-0 text-end">
                   <span className="font-mono text-sm text-foreground">
                     {format(slice.value)}
                   </span>
-                  <span className="ml-2 font-mono text-xs text-muted-foreground">
+                  <span className="ms-2 font-mono text-xs text-muted-foreground">
                     {slice.share.toFixed(1)}%
                   </span>
                 </dd>

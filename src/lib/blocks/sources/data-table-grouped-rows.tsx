@@ -131,7 +131,7 @@ export function DataTableGroupedRows({
       </header>
 
       <div className="overflow-x-auto">
-        <table className="w-full min-w-[40rem] border-collapse text-left text-sm">
+        <table className="w-full min-w-[40rem] border-collapse text-start text-sm">
           <thead>
             <tr className="border-b border-border">
               <th scope="col" className="px-5 py-2.5 font-semibold sm:px-6">
@@ -140,10 +140,10 @@ export function DataTableGroupedRows({
               <th scope="col" className="px-5 py-2.5 font-semibold">
                 Owner
               </th>
-              <th scope="col" className="px-5 py-2.5 text-right font-semibold">
+              <th scope="col" className="px-5 py-2.5 text-end font-semibold">
                 Seats
               </th>
-              <th scope="col" className="px-5 py-2.5 text-right font-semibold">
+              <th scope="col" className="px-5 py-2.5 text-end font-semibold">
                 ARR
               </th>
             </tr>
@@ -183,10 +183,10 @@ export function DataTableGroupedRows({
                       </span>
                     </button>
                   </th>
-                  <td className="px-5 py-2.5 text-right font-semibold tabular-nums">
+                  <td className="px-5 py-2.5 text-end font-semibold tabular-nums">
                     {totals.seats.toLocaleString('en-US')}
                   </td>
-                  <td className="px-5 py-2.5 text-right font-semibold tabular-nums">
+                  <td className="px-5 py-2.5 text-end font-semibold tabular-nums">
                     {money(totals.arr)}
                   </td>
                 </tr>
@@ -194,14 +194,14 @@ export function DataTableGroupedRows({
                 {open
                   ? group.rows.map((row) => (
                       <tr key={row.id} className="border-t border-border/50">
-                        <th scope="row" className="px-5 py-3 pl-11 font-medium sm:px-6 sm:pl-12">
+                        <th scope="row" className="px-5 py-3 ps-11 font-medium sm:px-6 sm:ps-12">
                           {row.name}
                         </th>
                         <td className="px-5 py-3 text-muted-foreground">{row.owner}</td>
-                        <td className="px-5 py-3 text-right tabular-nums text-muted-foreground">
+                        <td className="px-5 py-3 text-end tabular-nums text-muted-foreground">
                           {row.seats.toLocaleString('en-US')}
                         </td>
-                        <td className="px-5 py-3 text-right tabular-nums text-muted-foreground">
+                        <td className="px-5 py-3 text-end tabular-nums text-muted-foreground">
                           {money(row.arr)}
                         </td>
                       </tr>
@@ -219,10 +219,10 @@ export function DataTableGroupedRows({
                   including collapsed
                 </span>
               </th>
-              <td className="px-5 py-3 text-right font-semibold tabular-nums">
+              <td className="px-5 py-3 text-end font-semibold tabular-nums">
                 {grand.seats.toLocaleString('en-US')}
               </td>
-              <td className="px-5 py-3 text-right font-semibold tabular-nums">
+              <td className="px-5 py-3 text-end font-semibold tabular-nums">
                 {money(grand.arr)}
               </td>
             </tr>

@@ -476,6 +476,7 @@ export default function EasingToolPage() {
                 <span className="font-mono text-xs tabular-nums">{state.duration.toFixed(2)}s</span>
               </div>
               <Slider
+                aria-label="Duration"
                 value={[state.duration]}
                 min={0.2}
                 max={4}

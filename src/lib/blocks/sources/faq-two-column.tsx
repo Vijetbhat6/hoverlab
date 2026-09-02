@@ -123,7 +123,7 @@ export function FaqTwoColumn({
               name={exclusive ? 'faq-two-column' : undefined}
               className="group [&_summary::-webkit-details-marker]:hidden"
             >
-              <summary className="flex cursor-pointer list-none items-start justify-between gap-6 py-5 text-left text-base font-semibold transition-colors hover:text-foreground/80">
+              <summary className="flex cursor-pointer list-none items-start justify-between gap-6 py-5 text-start text-base font-semibold transition-colors hover:text-foreground/80">
                 {item.question}
                 <ChevronDown
                   aria-hidden

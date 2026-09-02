@@ -200,7 +200,7 @@ export function ApprovalRequestCard({
             <button
               type="button"
               onClick={() => setDecision('approved')}
-              className="ml-auto inline-flex items-center gap-1.5 rounded-xl bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              className="ms-auto inline-flex items-center gap-1.5 rounded-xl bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
               <Check aria-hidden className="h-4 w-4" />
               Approve
@@ -229,7 +229,7 @@ export function ApprovalRequestCard({
             <button
               type="button"
               onClick={() => setDecision(null)}
-              className="ml-auto rounded-lg px-2.5 py-1.5 text-xs font-medium text-muted-foreground underline-offset-4 transition-colors hover:text-foreground hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              className="ms-auto rounded-lg px-2.5 py-1.5 text-xs font-medium text-muted-foreground underline-offset-4 transition-colors hover:text-foreground hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
               Undo
             </button>

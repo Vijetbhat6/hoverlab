@@ -18,6 +18,8 @@
 
 import * as React from 'react'
 
+import { PreviewGuard } from '@/components/preview-guard'
+
 /* ------------------------------------------------------------------ *
  *  Full-size
  * ------------------------------------------------------------------ */
@@ -33,7 +35,16 @@ export function ArtifactPreview({
 
   return (
     <div className="overflow-hidden rounded-2xl border border-border/60 bg-background">
-      {preview}
+      {/*
+        The full-size preview is live so you can hover and open the thing you
+        are about to copy — which also made its demo links live. They point
+        at realistic destinations (`/checkout`, `/dashboard`, `/blog/<slug>`)
+        that are not routes here, so a click inside the preview left the
+        detail page for a 404, and its headline was a second <h1>. The
+        thumbnails never had either problem; they are `inert`. See
+        `preview-guard.tsx`.
+      */}
+      <PreviewGuard>{preview}</PreviewGuard>
     </div>
   )
 }

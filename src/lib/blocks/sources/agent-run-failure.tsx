@@ -224,7 +224,7 @@ export function AgentRunFailure({
                         {isOpen ? (
                           <ul
                             id={`attempts-${i}`}
-                            className="mt-2 space-y-1 border-l border-border pl-3"
+                            className="mt-2 space-y-1 border-s border-border ps-3"
                           >
                             {step.attempts.map((a) => (
                               <li

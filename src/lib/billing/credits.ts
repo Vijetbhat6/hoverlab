@@ -12,9 +12,16 @@ import type { Entitlements } from './entitlements'
  *               at the start of each billing month. Unused credits do NOT
  *               roll over, because an allowance that accumulates is a
  *               liability that grows while the subscription is idle.
- *   purchased   bought outright in a pack. Never expires and never resets,
- *               because someone paid for it — expiring it would be taking
- *               money for something we then took away.
+ *   purchased   paid for outright. Never expires and never resets, because
+ *               someone paid for it — expiring it would be taking money for
+ *               something we then took away.
+ *
+ *               Two things land here, and they are the same thing from the
+ *               customer's side: a top-up pack, and the credits included in
+ *               a Pro or Studio licence (`includedCredits` in ./plans).
+ *               Bundling the licence grant into the perpetual bucket rather
+ *               than inventing a third is what keeps "you own these" true
+ *               for both.
  *
  * Allowance is spent first. Spending the perpetual bucket while a monthly
  * one sits unused would quietly convert a purchase into a subscription
@@ -37,11 +44,19 @@ import type { Entitlements } from './entitlements'
 /**
  * Monthly credit allowance, by what the user holds.
  *
- * Pro is absent on purpose. It is a one-time licence, and attaching a
- * perpetual monthly grant to a single payment is an unbounded cost with no
- * revenue behind it — the exact mistake that makes a lifetime deal
- * unprofitable three years later. Pro users get the same free daily
- * actions everyone else does, and buy credits if they want more.
+ * Pro and Studio are absent on purpose, and their absence is now load-
+ * bearing rather than incidental. They are one-time licences, and attaching
+ * a perpetual MONTHLY grant to a single payment is an unbounded cost with
+ * no revenue behind it — the exact mistake that makes a lifetime deal
+ * unprofitable three years later.
+ *
+ * What they carry instead is `includedCredits`: a one-time grant into the
+ * `purchased` bucket at the moment of purchase. Bounded, owned by the
+ * customer forever, and it never appears here — an allowance is something
+ * that resets, and these do not.
+ *
+ * `plus` remains because people still hold it. It is no longer sold; see
+ * `sold` in ./plans.
  */
 export const MONTHLY_ALLOWANCE = {
   plus: 500,
@@ -416,10 +431,21 @@ export async function addPurchasedCredits(
   credits: number,
   orderId: string,
   packId: string,
+  /*
+   * Ledger document id, defaulting to the order id.
+   *
+   * An order is normally either a plan or a credit pack, so the order id
+   * alone is a fine idempotency key. It stops being one now that a Pro
+   * order ALSO grants credits: if a future order ever carried both, the
+   * second write would find the first ledger entry and silently do nothing.
+   * The licence grant passes `${orderId}-licence` so the two can never be
+   * mistaken for each other, and a redelivery of either is still a no-op.
+   */
+  ledgerId: string = orderId,
 ): Promise<void> {
   const db = adminDb()
   const userRef = db.collection('users').doc(userId)
-  const ledgerRef = userRef.collection('creditLedger').doc(orderId)
+  const ledgerRef = userRef.collection('creditLedger').doc(ledgerId)
 
   await db.runTransaction(async (tx) => {
     if ((await tx.get(ledgerRef)).exists) return

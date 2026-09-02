@@ -157,7 +157,7 @@ export function FilterDrawerFacets({
           type="button"
           onClick={onClose}
           aria-label="Close filters"
-          className="ml-auto rounded-lg p-1.5 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+          className="ms-auto rounded-lg p-1.5 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
         >
           <X aria-hidden className="h-4 w-4" />
         </button>
@@ -230,7 +230,7 @@ export function FilterDrawerFacets({
           type="button"
           onClick={() => onApply?.(pending)}
           disabled={changes === 0}
-          className="ml-auto rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-40"
+          className="ms-auto rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-40"
         >
           {changes === 0 ? 'Apply' : `Apply ${changes} change${changes === 1 ? '' : 's'}`}
         </button>

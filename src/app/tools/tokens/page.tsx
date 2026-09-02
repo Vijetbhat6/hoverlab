@@ -313,11 +313,11 @@ export default function TokensToolPage() {
         <div className="space-y-6 rounded-2xl border border-border/60 bg-card/60 p-5">
           <div>
             <div className="flex items-baseline justify-between">
-              <Label htmlFor="hue">Brand hue</Label>
+              <Label>Brand hue</Label>
               <span className="font-mono text-xs text-muted-foreground">{state.hue}°</span>
             </div>
             <Slider
-              id="hue"
+              aria-label="Brand hue"
               value={[state.hue]}
               onValueChange={set('hue')}
               min={0}
@@ -342,13 +342,13 @@ export default function TokensToolPage() {
 
           <div>
             <div className="flex items-baseline justify-between">
-              <Label htmlFor="chroma">Saturation</Label>
+              <Label>Saturation</Label>
               <span className="font-mono text-xs text-muted-foreground">
                 {state.chroma.toFixed(2)}
               </span>
             </div>
             <Slider
-              id="chroma"
+              aria-label="Saturation"
               value={[state.chroma]}
               onValueChange={set('chroma')}
               min={0}
@@ -365,13 +365,13 @@ export default function TokensToolPage() {
 
           <div>
             <div className="flex items-baseline justify-between">
-              <Label htmlFor="neutral">Neutral tint</Label>
+              <Label>Neutral tint</Label>
               <span className="font-mono text-xs text-muted-foreground">
                 {state.neutralChroma.toFixed(3)}
               </span>
             </div>
             <Slider
-              id="neutral"
+              aria-label="Neutral tint"
               value={[state.neutralChroma]}
               onValueChange={set('neutralChroma')}
               min={0}
@@ -388,13 +388,13 @@ export default function TokensToolPage() {
 
           <div>
             <div className="flex items-baseline justify-between">
-              <Label htmlFor="radius">Corner radius</Label>
+              <Label>Corner radius</Label>
               <span className="font-mono text-xs text-muted-foreground">
                 {state.radius.toFixed(3)}rem
               </span>
             </div>
             <Slider
-              id="radius"
+              aria-label="Corner radius"
               value={[state.radius]}
               onValueChange={set('radius')}
               min={0}

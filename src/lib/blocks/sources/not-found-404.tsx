@@ -85,7 +85,7 @@ export function NotFound404({
             name="q"
             type="search"
             placeholder="Search for what you were looking for"
-            className="w-full rounded-xl border border-border/60 bg-background py-2.5 pl-9 pr-3 text-sm outline-none transition-shadow placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-primary"
+            className="w-full rounded-xl border border-border/60 bg-background py-2.5 ps-9 pe-3 text-sm outline-none transition-shadow placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-primary"
           />
         </div>
         <button
@@ -97,7 +97,7 @@ export function NotFound404({
       </form>
 
       {links.length > 0 ? (
-        <ul className="mt-8 w-full max-w-md divide-y divide-border/40 overflow-hidden rounded-2xl border border-border/60 bg-card/60 text-left">
+        <ul className="mt-8 w-full max-w-md divide-y divide-border/40 overflow-hidden rounded-2xl border border-border/60 bg-card/60 text-start">
           {links.map((link) => (
             <li key={link.href}>
               <a

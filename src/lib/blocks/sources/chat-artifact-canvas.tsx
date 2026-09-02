@@ -177,7 +177,7 @@ export function ChatArtifactCanvas({
         <div className="grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)]">
           <section
             aria-label="Conversation"
-            className="order-2 flex flex-col border-border lg:order-1 lg:border-r"
+            className="order-2 flex flex-col border-border lg:order-1 lg:border-e"
           >
             <header className="flex items-center gap-2 border-y border-border px-4 py-2.5 lg:border-t-0">
               <MessageSquare aria-hidden className="h-4 w-4 text-muted-foreground" />
@@ -188,9 +188,9 @@ export function ChatArtifactCanvas({
               {turns.map((turn) => {
                 const active = turn.producedVersion === shown.id
                 return (
-                  <li key={turn.id} className={turn.role === 'user' ? 'text-right' : ''}>
+                  <li key={turn.id} className={turn.role === 'user' ? 'text-end' : ''}>
                     <div
-                      className={`inline-block max-w-[85%] rounded-2xl px-3 py-2 text-left text-sm ${
+                      className={`inline-block max-w-[85%] rounded-2xl px-3 py-2 text-start text-sm ${
                         turn.role === 'user'
                           ? 'bg-primary text-primary-foreground'
                           : `border bg-background ${
@@ -234,7 +234,7 @@ export function ChatArtifactCanvas({
               <button
                 type="button"
                 onClick={() => setEditAttempt(true)}
-                className="ml-auto inline-flex h-7 items-center gap-1 rounded-lg border border-border bg-background px-2 text-xs font-medium text-foreground transition hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                className="ms-auto inline-flex h-7 items-center gap-1 rounded-lg border border-border bg-background px-2 text-xs font-medium text-foreground transition hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
                 <FileText aria-hidden className="h-3.5 w-3.5" />
                 Edit

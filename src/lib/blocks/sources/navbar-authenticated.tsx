@@ -180,7 +180,7 @@ export function NavbarAuthenticated({
                     setCurrent(i)
                     setOpen(null)
                   }}
-                  className="flex w-full items-center gap-2 rounded-lg px-2.5 py-2 text-left text-sm text-foreground transition hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  className="flex w-full items-center gap-2 rounded-lg px-2.5 py-2 text-start text-sm text-foreground transition hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 >
                   <span className="min-w-0 flex-1">
                     <span className="block truncate font-medium">{w.name}</span>
@@ -201,7 +201,7 @@ export function NavbarAuthenticated({
               <button
                 type="button"
                 role="menuitem"
-                className="flex w-full items-center gap-2 rounded-lg px-2.5 py-2 text-left text-sm text-foreground transition hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                className="flex w-full items-center gap-2 rounded-lg px-2.5 py-2 text-start text-sm text-foreground transition hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
                 <Plus aria-hidden className="h-3.5 w-3.5" />
                 New workspace
@@ -211,7 +211,7 @@ export function NavbarAuthenticated({
         </div>
 
         {/* ---- A labelled field, not a div with a placeholder ---------- */}
-        <div className="ml-auto hidden min-w-0 max-w-xs flex-1 sm:block">
+        <div className="ms-auto hidden min-w-0 max-w-xs flex-1 sm:block">
           <label htmlFor="app-search" className="sr-only">
             Search {product}
           </label>
@@ -224,7 +224,7 @@ export function NavbarAuthenticated({
               id="app-search"
               type="search"
               placeholder="Search"
-              className="h-9 w-full rounded-lg border border-field bg-background pl-8 pr-3 text-sm text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              className="h-9 w-full rounded-lg border border-field bg-background ps-8 pe-3 text-sm text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             />
           </div>
         </div>
@@ -233,7 +233,7 @@ export function NavbarAuthenticated({
           type="button"
           /* The count is in the label, not only in the circle. */
           aria-label={`Notifications, ${unread} unread`}
-          className="relative ml-auto inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-muted-foreground transition hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background sm:ml-0"
+          className="relative ms-auto inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-muted-foreground transition hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background sm:ms-0"
         >
           <Bell aria-hidden className="h-4 w-4" />
           {unread > 0 ? (
@@ -250,7 +250,7 @@ export function NavbarAuthenticated({
           <button
             type="button"
             {...menuProps('account')}
-            className="inline-flex h-9 items-center gap-1.5 rounded-lg pl-1 pr-1.5 transition hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            className="inline-flex h-9 items-center gap-1.5 rounded-lg ps-1 pe-1.5 transition hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           >
             <span
               aria-hidden
@@ -282,7 +282,7 @@ export function NavbarAuthenticated({
                   key={label}
                   type="button"
                   role="menuitem"
-                  className="flex w-full items-center gap-2 rounded-lg px-2.5 py-2 text-left text-sm text-foreground transition hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  className="flex w-full items-center gap-2 rounded-lg px-2.5 py-2 text-start text-sm text-foreground transition hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 >
                   <Icon aria-hidden className="h-3.5 w-3.5 text-muted-foreground" />
                   {label}
@@ -292,7 +292,7 @@ export function NavbarAuthenticated({
               <button
                 type="button"
                 role="menuitem"
-                className="flex w-full items-center gap-2 rounded-lg px-2.5 py-2 text-left text-sm text-foreground transition hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                className="flex w-full items-center gap-2 rounded-lg px-2.5 py-2 text-start text-sm text-foreground transition hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
                 <LogOut aria-hidden className="h-3.5 w-3.5 text-muted-foreground" />
                 Sign out

@@ -192,7 +192,7 @@ export function MaintenanceWindowState({
       </div>
 
       {stillWorking.length > 0 ? (
-        <div className="mt-7 text-left">
+        <div className="mt-7 text-start">
           <h2 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
             Still working
           </h2>

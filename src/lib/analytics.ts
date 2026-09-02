@@ -81,6 +81,18 @@ export type AnalyticsEvent =
         target: 'codepen' | 'jsfiddle' | 'download' | 'stackblitz'
       }
     }
+  /*
+   * Which non-React format a reader takes a block's markup in.
+   *
+   * The cheapest available answer to a question this project has so far
+   * settled by assertion: whether the block tier is worth porting properly.
+   * Only fired for the non-default tabs — HTML is what the panel opens on,
+   * so counting it would drown the signal in page views.
+   */
+  | {
+      name: 'block_markup_framework'
+      props: { block_id: string; framework: 'vue' | 'svelte' | 'astro' }
+    }
   /** Embed snippet copied — tracks the catalog's reach into other sites. */
   | { name: 'embed_copied'; props: { effect_id: string } }
   // ---- search ----

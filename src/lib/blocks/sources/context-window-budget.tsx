@@ -215,7 +215,7 @@ export function ContextWindowBudget({
                     ? 'color-mix(in oklab, var(--muted-foreground) 45%, var(--card))'
                     : rampColor(i, segments.length - 1),
               }}
-              className="h-full first:rounded-l-full"
+              className="h-full first:rounded-s-full"
             />
           ))}
         </div>
@@ -244,7 +244,7 @@ export function ContextWindowBudget({
                     {seg.detail}
                   </span>
                 </span>
-                <span className="shrink-0 text-right text-xs tabular-nums text-muted-foreground">
+                <span className="shrink-0 text-end text-xs tabular-nums text-muted-foreground">
                   {compact(seg.tokens)}
                   <span className="ml-1.5 text-foreground">{Math.round(pct(seg.tokens))}%</span>
                 </span>

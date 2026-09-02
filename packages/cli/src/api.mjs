@@ -360,6 +360,25 @@ export async function getDna(id = 'catalog', { brand } = {}, options = {}) {
  * undercounting. Set HOVERLAB_NO_TELEMETRY=1 to switch it off — it sends
  * only the artifact ids, but somebody's proxy logs are their business.
  */
+/**
+ * Content fingerprints for the whole catalog, or a named subset.
+ *
+ * `ids` is optional and the default — the whole file — is the private one.
+ * Forty ids in a query string tells the server exactly what this project
+ * has installed; asking for everything and filtering locally tells it
+ * nothing. About 40 KB, cached hard at the edge, so the privacy is
+ * effectively free. Callers who would rather trade it for bytes can pass
+ * ids, and `outdated` does not.
+ */
+export async function getRevisions({ ids, level } = {}, options = {}) {
+  const params = new URLSearchParams()
+  if (level) params.set('level', level)
+  if (ids?.length) params.set('ids', ids.join(','))
+
+  const query = params.toString()
+  return request(`/api/v1/revisions${query ? `?${query}` : ''}`, options)
+}
+
 export async function reportInstall(ids, { origin = DEFAULT_ORIGIN } = {}) {
   if (process.env.HOVERLAB_NO_TELEMETRY) return
   const list = (Array.isArray(ids) ? ids : [ids]).filter(Boolean)

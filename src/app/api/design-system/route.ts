@@ -3,9 +3,10 @@ import { withJsonErrors } from '@/lib/route-errors'
 import { requirePro } from '@/lib/billing/require-pro'
 import { buildDesignSystem } from '@/lib/export/design-system'
 import { coerceBrandColor, DEFAULT_BRAND_COLOR } from '@/lib/brand-presets'
+import { coerceThemeShape } from '@/lib/theme-shape'
 
 /**
- * POST /api/design-system  body { brand?, name?, radius? } → { files, … }
+ * POST /api/design-system  body { brand?, name?, radius?, shape? } → { files, … }
  *
  * The design system, in the caller's brand.
  *
@@ -33,7 +34,7 @@ export const POST = withJsonErrors('design-system', async (request: Request) => 
   const gate = await requirePro('The design system export')
   if ('response' in gate) return gate.response
 
-  let body: { brand?: unknown; name?: unknown; radius?: unknown }
+  let body: { brand?: unknown; name?: unknown; radius?: unknown; shape?: unknown }
   try {
     body = (await request.json()) as typeof body
   } catch {
@@ -52,7 +53,15 @@ export const POST = withJsonErrors('design-system', async (request: Request) => 
   const name = typeof body.name === 'string' ? body.name.slice(0, 60) : undefined
   const radius = typeof body.radius === 'string' ? body.radius.slice(0, 24) : undefined
 
-  return NextResponse.json(buildDesignSystem(brand, { name, radius }), {
+  /*
+   * The non-colour half. Clamped the same way the brand is and for the same
+   * reason: a density of 0.01 is a legal number and an illegible design
+   * system, and this route is public enough that the caller cannot be
+   * trusted to have used the sliders.
+   */
+  const shape = coerceThemeShape(body.shape)
+
+  return NextResponse.json(buildDesignSystem(brand, { name, radius, shape }), {
     headers: { 'Cache-Control': 'private, no-store' },
   })
 })

@@ -155,7 +155,7 @@ export function AgentToolCalls({
                   aria-expanded={expanded}
                   aria-controls={panelId}
                   onClick={() => toggle(call.id)}
-                  className="flex w-full items-center gap-2.5 px-4 py-2.5 text-left transition-colors hover:bg-muted/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring"
+                  className="flex w-full items-center gap-2.5 px-4 py-2.5 text-start transition-colors hover:bg-muted/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring"
                 >
                   <ChevronRight
                     aria-hidden

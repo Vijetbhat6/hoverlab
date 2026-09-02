@@ -217,7 +217,7 @@ export function UploadResumable({
           {/* Names what it throws away. */}
           <button
             type="button"
-            className="ml-auto inline-flex h-9 items-center gap-1.5 rounded-lg px-3 text-sm font-medium text-destructive transition hover:bg-destructive/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            className="ms-auto inline-flex h-9 items-center gap-1.5 rounded-lg px-3 text-sm font-medium text-destructive transition hover:bg-destructive/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           >
             <Trash2 aria-hidden className="h-4 w-4" />
             Cancel and delete the {size(sent)} already uploaded

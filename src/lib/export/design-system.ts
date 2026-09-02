@@ -45,6 +45,13 @@
 
 import tokens from '@/lib/generated-dna.json'
 import {
+  DEFAULT_THEME_SHAPE,
+  describeShape,
+  shapeCss,
+  shapeEquals,
+  type ThemeShape,
+} from '@/lib/theme-shape'
+import {
   oklchToRgb,
   rgbToHsl,
   rgbToHex,
@@ -220,8 +227,23 @@ export interface DesignSystemExport {
 export interface DesignSystemOptions {
   /** What to call this brand in comments and in the Figma collection. */
   name?: string
-  /** Border radius, if the customer overrides the default. */
+  /**
+   * Border radius as a CSS length, if the customer overrides the default.
+   *
+   * Superseded by `shape.radiusRem` and kept because the API route has
+   * accepted it since this file was written. When both are given the shape
+   * wins, because it is the one a UI can produce.
+   */
   radius?: string
+  /**
+   * Corner radius, spacing density and type scale.
+   *
+   * The non-colour half of a design system. Two products with the same
+   * accent and different radii, gutters and type scales do not look alike,
+   * and until this option the export moved one axis — hue — and called the
+   * result a design system. See `lib/theme-shape.ts`.
+   */
+  shape?: ThemeShape
 }
 
 function cssBlock(selector: string, resolved: ResolvedToken[], radius?: string): string {
@@ -240,6 +262,7 @@ function buildTokensCss(
   brand: BrandColor,
   name: string,
   radius: string,
+  shape: ThemeShape,
 ): string {
   const light = resolveTokens(brand, 'light')
   const dark = resolveTokens(brand, 'dark')
@@ -263,7 +286,7 @@ function buildTokensCss(
 ${cssBlock(':root', light, radius)}
 
 ${cssBlock('.dark', dark)}
-`
+${shapeCss(shape) ? `\n/* ${describeShape(shape)} */\n${shapeCss(shape)}` : ''}`
 }
 
 function buildTailwindTheme(name: string): string {
@@ -456,7 +479,20 @@ export function buildDesignSystem(
   options: DesignSystemOptions = {},
 ): DesignSystemExport {
   const name = options.name?.trim() || 'Brand'
-  const radius = options.radius?.trim() || tokens.radius
+  const shape = options.shape ?? DEFAULT_THEME_SHAPE
+
+  /*
+   * The shape's radius wins over the legacy `radius` string.
+   *
+   * Both exist because `radius` predates the shape and the API route has
+   * accepted it since the file was written. A caller sending both is
+   * almost certainly a UI that sets the shape and an older field it forgot
+   * to drop, so the richer one is authoritative — and the default shape
+   * leaves `radius` in charge, which keeps every existing caller working.
+   */
+  const radius = shapeEquals(shape, DEFAULT_THEME_SHAPE)
+    ? options.radius?.trim() || tokens.radius
+    : `${shape.radiusRem}rem`
 
   /*
    * One warning about the brand, not one per token.
@@ -486,7 +522,11 @@ export function buildDesignSystem(
     brand,
     warnings,
     files: [
-      { path: 'tokens.css', language: 'css', code: buildTokensCss(brand, name, radius) },
+      {
+        path: 'tokens.css',
+        language: 'css',
+        code: buildTokensCss(brand, name, radius, shape),
+      },
       {
         path: 'tailwind-theme.ts',
         language: 'ts',

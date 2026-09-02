@@ -253,7 +253,7 @@ export function ChatPromptBar({
                   <Icon aria-hidden className={`h-4 w-4 shrink-0 ${active ? 'text-primary' : ''}`} />
                   <span className="truncate font-medium text-foreground">{item.label}</span>
                   {item.hint ? (
-                    <span className="ml-auto shrink-0 truncate text-xs text-muted-foreground">
+                    <span className="ms-auto shrink-0 truncate text-xs text-muted-foreground">
                       {item.hint}
                     </span>
                   ) : null}
@@ -269,7 +269,7 @@ export function ChatPromptBar({
             <ul className="flex flex-wrap gap-1.5 px-1.5 pb-2 pt-1">
               {chips.map((chip) => (
                 <li key={chip}>
-                  <span className="inline-flex items-center gap-1.5 rounded-lg border border-border/60 bg-muted/60 py-1 pl-2 pr-1 text-xs">
+                  <span className="inline-flex items-center gap-1.5 rounded-lg border border-border/60 bg-muted/60 py-1 ps-2 pe-1 text-xs">
                     <FileText aria-hidden className="h-3 w-3 text-muted-foreground" />
                     {chip}
                     <button
@@ -358,7 +358,7 @@ export function ChatPromptBar({
                           setModel(name)
                           setModelOpen(false)
                         }}
-                        className={`w-full rounded-lg px-2.5 py-1.5 text-left text-xs transition-colors hover:bg-muted ${
+                        className={`w-full rounded-lg px-2.5 py-1.5 text-start text-xs transition-colors hover:bg-muted ${
                           name === model ? 'font-semibold text-foreground' : 'text-muted-foreground'
                         }`}
                       >
@@ -370,7 +370,7 @@ export function ChatPromptBar({
               ) : null}
             </div>
 
-            <div className="ml-auto flex items-center gap-1">
+            <div className="ms-auto flex items-center gap-1">
               <button
                 type="button"
                 aria-pressed={dictating}

@@ -14,7 +14,7 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
-import { ArrowLeft, ArrowRight, Blocks, CalendarDays, FileCode, Package } from 'lucide-react'
+import { ArrowLeft, ArrowRight, Blocks, CalendarDays, FileCode, Package, History } from 'lucide-react'
 import { CodeBlock } from '@/components/code-block'
 import { JsonLd } from '@/components/json-ld'
 import { PagePreview } from '@/components/pages/page-preview'
@@ -25,7 +25,7 @@ import { getBlockMeta } from '@/lib/blocks/block-index'
 import { blockCategorySlug } from '@/lib/blocks/block-types'
 import { templatesUsingPage } from '@/lib/templates/template-index'
 import { absoluteUrl } from '@/lib/site'
-import { addedAt, formatAdded } from '@/lib/recency'
+import { addedAt, formatAdded, updatedAt } from '@/lib/recency'
 import { artifactBreadcrumbLd, artifactLd } from '@/lib/structured-data'
 import { AddToCollectionButton } from '@/components/collections/add-to-collection'
 import {
@@ -37,6 +37,7 @@ import {
 } from '@/components/artifact-actions'
 import { ArtifactFacts } from '@/components/artifact-facts'
 import { OpenArtifactInSandbox } from '@/components/open-artifact-in-sandbox'
+import { ResponsivePreview } from '@/components/responsive-preview'
 import { CopyFrameForFigma } from '@/components/copy-frame-for-figma'
 import { StickyInstallBar } from '@/components/sticky-install-bar'
 
@@ -98,6 +99,8 @@ export default async function PageDetailPage({ params }: PageProps) {
   const usedIn = templatesUsingPage(page.id)
 
   const added = addedAt('page', page.id)
+  // Undefined unless it genuinely changed after landing — see updatedAt().
+  const updated = updatedAt('page', page.id)
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -208,6 +211,18 @@ export default async function PageDetailPage({ params }: PageProps) {
                 Added {formatAdded(added)}
               </span>
             ) : null}
+            {/*
+              The maintenance signal, and the reason the update ledger
+              exists: Pro sells a twelve-month update window and until this
+              line the catalog could not show that anything had ever been
+              updated. Rendered only where the change history is precise.
+            */}
+            {updated ? (
+              <span className="inline-flex items-center gap-1.5 font-medium text-foreground">
+                <History aria-hidden className="h-4 w-4" />
+                Updated {formatAdded(updated)}
+              </span>
+            ) : null}
           </div>
         </header>
 
@@ -234,9 +249,17 @@ export default async function PageDetailPage({ params }: PageProps) {
           </h2>
           {/* Traced by <CopyFrameForFigma>; see the block detail page for
               why the id wraps the preview instead of sitting inside it. */}
-          <div id={FRAME_ID}>
-            <PagePreview componentKey={page.previewComponent} />
-          </div>
+          {/*
+              The width switcher wraps the inline preview rather than
+              replacing it: full width stays the same server-rendered
+              markup a crawler reads and the screenshot script captures,
+              and a frame is created only if someone asks for one.
+          */}
+          <ResponsivePreview level="page" id={page.id} name={page.name}>
+            <div id={FRAME_ID}>
+              <PagePreview componentKey={page.previewComponent} />
+            </div>
+          </ResponsivePreview>
           <p className="mt-3 text-xs text-muted-foreground">
             The real page, rendered in your current theme — every section
             below is a live block, not a screenshot.

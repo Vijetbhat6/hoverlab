@@ -16,10 +16,12 @@
  *   Team   — $12 per seat / month. Seats and shared state are what companies
  *            actually pay recurring money for.
  *
- * Pro+ is sold here too, but as a line of copy under the table rather than
- * a fifth column. It grants no catalog rights — it is a monthly AI credit
- * allowance — so giving it a card would make the licence comparison harder
- * in order to advertise a meter.
+ * There is no Pro+ column, and no Pro+ line either. Credits used to be a
+ * $9/month add-on advertised under this table; they are now bundled inside
+ * the licence — 500 with Pro, 2,500 with Studio, granted once and never
+ * expiring. See `includedCredits` in billing/plans.ts for why that is the
+ * better product at the same price. What is left under the table is a
+ * sentence about top-ups for the few people who run out.
  *
  * Prices, buyability and the display currency all come from usePricing() —
  * see that hook for why region and purchasability have to come from the
@@ -173,6 +175,12 @@ const TIERS: Tier[] = [
       // First line on the card, because it is the one thing on it that a
       // free user does not already have. The licence follows it.
       `All ${TEMPLATE_COUNT} templates — complete, runnable projects`,
+      // Bundled, not upsold. This line used to be a $9/month add-on
+      // advertised under the table, which asked a buyer who had just
+      // decided to spend $79 to make a second, worse decision. The credits
+      // cost the same to serve either way — see includedCredits in
+      // billing/plans.ts.
+      `${PLANS.pro.includedCredits?.toLocaleString('en-US')} AI credits included — they never expire`,
       'Commercial licence — every effect, block, page and template',
       'Client work, paid products, no attribution',
       // The certificate, named on the card. The licence was always the
@@ -208,6 +216,11 @@ const TIERS: Tier[] = [
       // out about after paying is a term that costs more in trust than it
       // recovers in revenue. See `updateWindowMonths` in billing/plans.ts.
       'Twelve months of catalog updates — what you have stays yours',
+      // The delivery mechanism for the line above, named on the card.
+      // A bounded update window with no way to find out an update happened
+      // reads as a limitation; with `hoverlab outdated` behind it, it is
+      // the feature. Nobody else in /compare answers this question.
+      'npx hoverlab outdated — see what changed since you copied it',
     ],
   },
   {
@@ -223,6 +236,7 @@ const TIERS: Tier[] = [
       // The arithmetic is the pitch, so it is on the card rather than left
       // for the buyer to do: ten Pro licenses is $790.
       'Ten seats for the price of under four Pro licenses',
+      `${PLANS.studio.includedCredits?.toLocaleString('en-US')} AI credits for the workspace — they never expire`,
       'Invite your team with a workspace code',
       'One invoice, one license, no renewals',
       // Was "All future updates included". Bounded, and said on the card
@@ -425,9 +439,6 @@ export function PricingTiers({ className }: { className?: string } = {}) {
    */
   const rupeeCheckout =
     chargedInInr('pro') || chargedInInr('studio') || chargedInInr('team')
-
-  /** Pro+ has no tier card, so its price is read for the add-on line. */
-  const plusPrice = headlineFor('plus')
 
   /**
    * Which tiers this account already holds.
@@ -699,21 +710,27 @@ export function PricingTiers({ className }: { className?: string } = {}) {
           ship later this year.
         </p>
         {/*
-          Pro+ deliberately has no column. It grants no catalog rights, so a
-          fifth tier would make the licence decision harder in order to sell
-          a meter — it belongs beside the table, as an add-on to whatever
-          the reader picks.
+          What used to be the Pro+ add-on line.
+
+          Credits are inside the licence now, so this no longer sells
+          anything — it explains what the number on the card buys, and says
+          where to get more without implying anyone needs to. A paragraph
+          that ended in a $9/month upsell was the second decision this page
+          should never have asked for.
         */}
         <p className="mt-4 text-sm text-muted-foreground">
           <span className="font-semibold text-foreground">
-            Pro+ — {plusPrice}/month
+            AI credits are included in the licence
           </span>{' '}
-          adds 500 AI credits a month on top of any plan, including Free.
-          Credits buy three things: a variation or an edit of any effect
-          (1 credit), a recolour of one onto your brand (1), and a whole
-          section composed from a brief in your design tokens (3). Browsing,
-          copying, the CLI and the API stay free and unmetered. Everyone
-          gets five free generations a day without it.
+          — {PLANS.pro.includedCredits?.toLocaleString('en-US')} with Pro,{' '}
+          {PLANS.studio.includedCredits?.toLocaleString('en-US')} with Studio,
+          granted once and never expiring. They buy three things: a variation
+          or an edit of any effect (1 credit), a recolour of one onto your
+          brand (1), and a whole section composed from a brief in your design
+          tokens (3). Browsing, copying, the CLI and the API stay free and
+          unmetered, and everyone — including free accounts — gets five
+          generations a day without spending any. Run out and you can buy a
+          top-up pack; there is no subscription for them.
         </p>
 
         {/*

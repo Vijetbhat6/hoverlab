@@ -1250,10 +1250,19 @@ function SliderRow({
   onChange,
 }: SliderRowProps) {
   const display = format ? format(value) : `${value}${unit}`
+  const labelId = React.useId()
+
   return (
     <div className="space-y-1.5">
       <div className="flex items-center justify-between">
-        <label className="text-xs font-semibold text-foreground">{label}</label>
+        {/*
+          A <span> carrying the name, not a bare <label>. The label had no
+          `for` and wrapped nothing, so it named no control: the slider
+          announced as a number with no indication of what it moved.
+        */}
+        <span id={labelId} className="text-xs font-semibold text-foreground">
+          {label}
+        </span>
         <span className="rounded-md bg-background px-1.5 py-0.5 font-mono text-[11px] text-muted-foreground tabular-nums">
           {display}
         </span>
@@ -1263,6 +1272,7 @@ function SliderRow({
         min={min}
         max={max}
         step={step}
+        aria-labelledby={labelId}
         onValueChange={(arr) => arr[0] !== undefined && onChange(arr[0])}
         className="w-full"
       />

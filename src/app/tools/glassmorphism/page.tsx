@@ -325,11 +325,13 @@ export default function GlassmorphismToolPage() {
                 value={state.bgColor}
                 onChange={(e) => update({ bgColor: e.target.value })}
                 className="h-10 w-12 cursor-pointer rounded border border-field bg-transparent"
+                aria-label="Glass background colour"
               />
               <Input
                 value={state.bgColor}
                 onChange={(e) => update({ bgColor: e.target.value })}
                 className="font-mono text-xs"
+                aria-label="Glass background, as a hex value"
               />
             </div>
             <SliderField
@@ -353,11 +355,13 @@ export default function GlassmorphismToolPage() {
                 value={state.borderColor}
                 onChange={(e) => update({ borderColor: e.target.value })}
                 className="h-10 w-12 cursor-pointer rounded border border-field bg-transparent"
+                aria-label="Border colour"
               />
               <Input
                 value={state.borderColor}
                 onChange={(e) => update({ borderColor: e.target.value })}
                 className="font-mono text-xs"
+                aria-label="Border, as a hex value"
               />
             </div>
             <SliderField

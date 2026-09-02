@@ -136,7 +136,7 @@ export function ChatThreadPanel({
           {messages.map((message) =>
             message.role === 'user' ? (
               <div key={message.id} className="flex justify-end gap-3">
-                <div className="max-w-[80%] rounded-2xl rounded-br-md bg-primary px-4 py-2.5 text-sm leading-relaxed text-primary-foreground">
+                <div className="max-w-[80%] rounded-2xl rounded-ee-md bg-primary px-4 py-2.5 text-sm leading-relaxed text-primary-foreground">
                   {/* Named for a reader that lands here out of context. */}
                   <span className="sr-only">You said: </span>
                   {message.content}
@@ -158,14 +158,14 @@ export function ChatThreadPanel({
                 </span>
 
                 <div className="min-w-0 max-w-[85%]">
-                  <div className="rounded-2xl rounded-bl-md border border-border/60 bg-background px-4 py-2.5 text-sm leading-relaxed">
+                  <div className="rounded-2xl rounded-es-md border border-border/60 bg-background px-4 py-2.5 text-sm leading-relaxed">
                     <span className="sr-only">Assistant said: </span>
                     {message.content}
                   </div>
 
                   <div className="mt-1.5 flex items-center gap-1">
                     {message.meta ? (
-                      <span className="mr-1 text-xs text-muted-foreground">{message.meta}</span>
+                      <span className="me-1 text-xs text-muted-foreground">{message.meta}</span>
                     ) : null}
                     <TurnAction icon={<Copy className="h-3.5 w-3.5" />} label="Copy reply" />
                     <TurnAction icon={<RefreshCw className="h-3.5 w-3.5" />} label="Regenerate" />

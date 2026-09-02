@@ -142,7 +142,7 @@ export function TestimonialVideo({
                   className="absolute inset-0 flex items-center justify-center bg-foreground/10 transition-colors group-hover:bg-foreground/20"
                 >
                   <span className="flex h-14 w-14 items-center justify-center rounded-full bg-background/90 shadow-sm ring-1 ring-border/60 transition-transform duration-300 motion-safe:group-hover:scale-110">
-                    <Play className="ml-0.5 h-6 w-6 fill-primary text-primary" />
+                    <Play className="ms-0.5 h-6 w-6 fill-primary text-primary" />
                   </span>
                 </span>
 

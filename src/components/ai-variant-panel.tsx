@@ -3,7 +3,7 @@
 /**
  * <AiVariantPanel> — describe a change, or ask for a variation.
  *
- * The one metered thing on the site, and the only reason Pro+ exists. It
+ * The one metered thing on the site, and the only reason credits exist. It
  * sits in the playground because that is where someone already has a
  * component in front of them and a reason to alter it.
  *
@@ -258,9 +258,9 @@ export function AiVariantPanel({
             <>
               That&apos;s today&apos;s free generations used. They reset tomorrow, or{' '}
               <a href="/account#billing" className="font-medium text-primary hover:underline">
-                Pro+
+                Pro
               </a>{' '}
-              adds 500 a month.
+              includes credits that never expire.
             </>
           )}
           {blocked === 'topup' && (

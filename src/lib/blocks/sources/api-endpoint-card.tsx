@@ -119,10 +119,23 @@ export function ApiEndpointCard({
 
   function copyPath() {
     if (typeof navigator === 'undefined' || !navigator.clipboard) return
-    void navigator.clipboard.writeText(path).then(() => {
-      setCopied(true)
-      window.setTimeout(() => setCopied(false), 1600)
-    })
+    /*
+     * The `.catch` is not defensive padding.
+     *
+     * `writeText` rejects on a denied permission, an insecure origin, or an
+     * unfocused document, and a promise chain with only a `.then` turns each
+     * of those into an unhandled rejection in the console of whoever
+     * installed this block. Nothing visible happens either way — this is a
+     * copy button — so the failure is swallowed on purpose rather than
+     * surfaced, but it is swallowed deliberately rather than escaping.
+     */
+    void navigator.clipboard
+      .writeText(path)
+      .then(() => {
+        setCopied(true)
+        window.setTimeout(() => setCopied(false), 1600)
+      })
+      .catch(() => {})
   }
 
   return (
@@ -156,7 +169,7 @@ export function ApiEndpointCard({
 
       <h3 className="mt-6 text-sm font-semibold tracking-tight">Parameters</h3>
       <div className="mt-2 overflow-x-auto rounded-xl border border-border/60">
-        <table className="w-full text-left text-sm">
+        <table className="w-full text-start text-sm">
           <thead>
             <tr className="border-b border-border/60 bg-muted/50">
               <th scope="col" className="px-4 py-2.5 font-medium">

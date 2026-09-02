@@ -151,7 +151,7 @@ export function OrderSummaryPanel({
                 placeholder="Promo code"
                 aria-invalid={Boolean(error)}
                 aria-describedby={`${uid}-promo-error`}
-                className="w-full rounded-xl border border-border/60 bg-background py-2 pl-9 pr-3 text-sm outline-none transition-shadow placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-primary"
+                className="w-full rounded-xl border border-border/60 bg-background py-2 ps-9 pe-3 text-sm outline-none transition-shadow placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-primary"
               />
             </div>
             <button

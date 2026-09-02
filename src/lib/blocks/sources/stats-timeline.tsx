@@ -106,7 +106,7 @@ export function StatsTimeline({
 
       {/* The rule is this list's left border, so it starts at the first dot
           and ends at the last one however many there are. */}
-      <ol className="mt-12 space-y-10 border-l border-border/60 pl-8 sm:pl-10">
+      <ol className="mt-12 space-y-10 border-s border-border/60 ps-8 sm:ps-10">
         {milestones.map((milestone) => (
           <li key={milestone.period} className="relative">
             <span

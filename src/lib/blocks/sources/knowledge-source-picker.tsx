@@ -290,7 +290,7 @@ export function KnowledgeSourcePicker({
 
           <button
             type="button"
-            className="ml-auto inline-flex items-center gap-1.5 rounded-xl border border-border/60 px-3 py-1.5 text-xs font-medium transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            className="ms-auto inline-flex items-center gap-1.5 rounded-xl border border-border/60 px-3 py-1.5 text-xs font-medium transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           >
             <Plus aria-hidden className="h-3.5 w-3.5" />
             Connect a source

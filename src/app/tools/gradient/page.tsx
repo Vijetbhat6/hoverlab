@@ -255,6 +255,7 @@ export default function GradientToolPage() {
                   <span className="font-mono text-xs tabular-nums text-muted-foreground">{angle}°</span>
                 </div>
                 <Slider
+                  aria-label="Angle"
                   value={[angle]}
                   min={0}
                   max={360}

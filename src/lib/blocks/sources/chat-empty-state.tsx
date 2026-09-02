@@ -93,7 +93,7 @@ export function ChatEmptyState({
         {subheading}
       </p>
 
-      <div className="mt-10 grid gap-4 text-left sm:grid-cols-2">
+      <div className="mt-10 grid gap-4 text-start sm:grid-cols-2">
         {groups.map((group) => {
           const Icon = GROUP_ICON[group.icon]
           const headingId = `starters-${group.id}`
@@ -116,7 +116,7 @@ export function ChatEmptyState({
                   <li key={prompt}>
                     <button
                       type="button"
-                      className="w-full rounded-xl px-3 py-2 text-left text-sm leading-snug text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                      className="w-full rounded-xl px-3 py-2 text-start text-sm leading-snug text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                     >
                       {prompt}
                     </button>

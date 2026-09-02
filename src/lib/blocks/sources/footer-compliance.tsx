@@ -150,16 +150,16 @@ export function FooterCompliance({
               <Building2 aria-hidden className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground" />
               {region.entity}
             </p>
-            <p className="mt-1 pl-6 text-xs text-muted-foreground">{region.registration}</p>
+            <p className="mt-1 ps-6 text-xs text-muted-foreground">{region.registration}</p>
             {/* A real <address>, not a stack of divs. */}
-            <address className="mt-2 pl-6 text-xs not-italic leading-relaxed text-muted-foreground">
+            <address className="mt-2 ps-6 text-xs not-italic leading-relaxed text-muted-foreground">
               {region.address.map((line) => (
                 <span key={line} className="block">
                   {line}
                 </span>
               ))}
             </address>
-            <p className="mt-3 pl-6 text-xs text-muted-foreground">{region.taxLine}</p>
+            <p className="mt-3 ps-6 text-xs text-muted-foreground">{region.taxLine}</p>
           </div>
 
           {/* ---- Legal links, kept apart from the product nav --------- */}

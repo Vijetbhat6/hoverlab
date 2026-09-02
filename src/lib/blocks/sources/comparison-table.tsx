@@ -67,7 +67,7 @@ export function ComparisonTable({
           </caption>
           <thead>
             <tr className="border-b border-border/60 bg-muted/40">
-              <th scope="col" className="sticky left-0 z-10 bg-muted/40 p-4 text-left font-semibold">
+              <th scope="col" className="sticky left-0 z-10 bg-muted/40 p-4 text-start font-semibold">
                 Feature
               </th>
               {columns.map((col, i) => (
@@ -80,7 +80,7 @@ export function ComparisonTable({
                 >
                   {col}
                   {i === highlightColumn ? (
-                    <span className="ml-1.5 rounded-full bg-primary/15 px-2 py-0.5 text-xs">
+                    <span className="ms-1.5 rounded-full bg-primary/15 px-2 py-0.5 text-xs">
                       Popular
                     </span>
                   ) : null}
@@ -93,7 +93,7 @@ export function ComparisonTable({
               <tr key={row.feature} className="border-b border-border/40 last:border-0 hover:bg-muted/20">
                 <th
                   scope="row"
-                  className="sticky left-0 z-10 bg-background p-4 text-left font-medium"
+                  className="sticky left-0 z-10 bg-background p-4 text-start font-medium"
                 >
                   {row.feature}
                 </th>

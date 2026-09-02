@@ -120,7 +120,7 @@ export function PricingTiers({
         </button>
         <span className={yearly ? 'text-sm font-semibold' : 'text-sm text-muted-foreground'}>
           Yearly
-          <span className="ml-1.5 rounded-full bg-emerald-500/15 px-2 py-0.5 text-xs font-semibold text-emerald-600 dark:text-emerald-400">
+          <span className="ms-1.5 rounded-full bg-emerald-500/15 px-2 py-0.5 text-xs font-semibold text-emerald-600 dark:text-emerald-400">
             Save {Math.round(yearlyDiscount * 100)}%
           </span>
         </span>

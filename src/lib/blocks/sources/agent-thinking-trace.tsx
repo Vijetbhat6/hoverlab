@@ -163,7 +163,7 @@ export function AgentThinkingTrace({
             {elapsed}
           </time>
 
-          <span className="ml-auto text-xs text-muted-foreground">{steps.length} steps</span>
+          <span className="ms-auto text-xs text-muted-foreground">{steps.length} steps</span>
 
           <ChevronRight
             aria-hidden
@@ -180,7 +180,7 @@ export function AgentThinkingTrace({
             const last = i === steps.length - 1
 
             return (
-              <li key={step.id} className="relative pl-7">
+              <li key={step.id} className="relative ps-7">
                 {/* The rail is drawn per step and stops on the last one, so
                     it does not trail off under nothing. */}
                 {last ? null : (
@@ -200,7 +200,7 @@ export function AgentThinkingTrace({
                   aria-expanded={open}
                   aria-controls={panelId}
                   onClick={() => toggle(step.id)}
-                  className="flex w-full items-center gap-2.5 rounded-lg py-2 pl-1 pr-2 text-left transition-colors hover:bg-muted/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  className="flex w-full items-center gap-2.5 rounded-lg py-2 ps-1 pe-2 text-start transition-colors hover:bg-muted/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 >
                   <Icon aria-hidden className="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
 
@@ -231,7 +231,7 @@ export function AgentThinkingTrace({
                 {open ? (
                   <div
                     id={panelId}
-                    className="mb-1 ml-1 rounded-lg border-l-2 border-border bg-muted/40 px-3 py-2 text-xs leading-relaxed text-muted-foreground"
+                    className="mb-1 ms-1 rounded-lg border-s-2 border-border bg-muted/40 px-3 py-2 text-xs leading-relaxed text-muted-foreground"
                   >
                     {step.detail}
                   </div>

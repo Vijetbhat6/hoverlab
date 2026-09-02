@@ -212,7 +212,7 @@ export function BottomSheetMobile({
                           role="radio"
                           aria-checked={selected}
                           onClick={() => setChosen(option.id)}
-                          className={`flex w-full items-center gap-3 rounded-xl px-3 py-3 text-left transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+                          className={`flex w-full items-center gap-3 rounded-xl px-3 py-3 text-start transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
                             selected ? 'bg-primary/10' : 'hover:bg-muted'
                           }`}
                         >

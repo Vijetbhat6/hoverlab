@@ -93,13 +93,13 @@ export function DataTableExpandable({
               <th scope="col" className="w-10 px-4 py-3">
                 <span className="sr-only">Expand</span>
               </th>
-              <th scope="col" className="px-4 py-3 text-left font-semibold">
+              <th scope="col" className="px-4 py-3 text-start font-semibold">
                 Customer
               </th>
-              <th scope="col" className="px-4 py-3 text-left font-semibold">
+              <th scope="col" className="px-4 py-3 text-start font-semibold">
                 Plan
               </th>
-              <th scope="col" className="px-4 py-3 text-left font-semibold">
+              <th scope="col" className="px-4 py-3 text-start font-semibold">
                 Status
               </th>
             </tr>

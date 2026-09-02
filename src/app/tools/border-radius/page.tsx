@@ -441,11 +441,13 @@ export default function BorderRadiusToolPage() {
                 value={state.previewColor}
                 onChange={(e) => update({ previewColor: e.target.value })}
                 className="h-8 w-9 cursor-pointer rounded border border-field bg-transparent"
+                aria-label="Preview colour"
               />
               <Input
                 value={state.previewColor}
                 onChange={(e) => update({ previewColor: e.target.value })}
                 className="h-8 flex-1 font-mono text-xs"
+                aria-label="Preview colour, as a hex value"
               />
             </div>
           </div>

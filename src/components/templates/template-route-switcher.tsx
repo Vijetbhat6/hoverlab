@@ -20,6 +20,8 @@
  */
 
 import * as React from 'react'
+
+import { PreviewGuard } from '@/components/preview-guard'
 import { Monitor, Smartphone } from 'lucide-react'
 
 export interface PreviewRoute {
@@ -93,9 +95,16 @@ export function TemplateRouteSwitcher({ routes }: { routes: PreviewRoute[] }) {
             narrow ? 'max-w-sm border-x border-border/60' : 'max-w-none'
           }`}
         >
+          {/*
+            Same guard the block and page detail previews use: these are
+            whole screens, so each one brings its own <h1> and its own
+            navigation. Unguarded, the active route's headline outranked
+            "SaaS Starter" as the page's heading and its nav links led out
+            of the template and into 404s. See `preview-guard.tsx`.
+          */}
           {routes.map((route, i) => (
             <div key={route.path} hidden={i !== active}>
-              {route.preview}
+              <PreviewGuard>{route.preview}</PreviewGuard>
             </div>
           ))}
         </div>

@@ -1,7 +1,7 @@
 /**
  * <ChangelogTimeline> — a dated release list on a vertical rail.
  *
- * The rail is a `border-l` on the list with dots absolutely positioned over
+ * The rail is a `border-s` on the list with dots absolutely positioned over
  * it, rather than a separate spine element. That way the line ends exactly
  * where the last entry does instead of running past it, and it stays
  * aligned when an entry's height changes.
@@ -81,7 +81,7 @@ export function ChangelogTimeline({
         {subheading ? <p className="mt-3 text-muted-foreground">{subheading}</p> : null}
       </div>
 
-      <ol className="relative ml-3 space-y-10 border-l border-border/60 pl-8">
+      <ol className="relative ms-3 space-y-10 border-s border-border/60 ps-8">
         {entries.map((entry) => (
           <li key={entry.version} className="relative">
             <span

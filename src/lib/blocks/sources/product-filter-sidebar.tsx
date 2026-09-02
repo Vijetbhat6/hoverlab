@@ -119,7 +119,7 @@ export function ProductFilterSidebar({
         <h2 className="font-semibold tracking-tight">
           Filters
           {appliedCount > 0 ? (
-            <span className="ml-2 rounded-full bg-primary/15 px-2 py-0.5 text-xs font-semibold text-primary">
+            <span className="ms-2 rounded-full bg-primary/15 px-2 py-0.5 text-xs font-semibold text-primary">
               {appliedCount}
             </span>
           ) : null}

@@ -239,7 +239,7 @@ export function ConfidenceRecommendation({
             <button
               type="button"
               onClick={() => setDecision('accepted')}
-              className="ml-auto inline-flex items-center gap-1.5 rounded-xl border border-primary/40 bg-primary/10 px-3.5 py-2 text-sm font-semibold text-primary transition-colors hover:bg-primary/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              className="ms-auto inline-flex items-center gap-1.5 rounded-xl border border-primary/40 bg-primary/10 px-3.5 py-2 text-sm font-semibold text-primary transition-colors hover:bg-primary/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
               <Check aria-hidden className="h-4 w-4" />
               Accept

@@ -16,6 +16,7 @@ import {
   COMPETITORS,
   GATE_LABELS,
   OUR_GATE,
+  UPDATE_LEDGER,
   WHERE_THEY_WIN,
 } from '@/lib/compare'
 import { absoluteUrl } from '@/lib/site'
@@ -287,6 +288,58 @@ export default function ComparePage() {
             <time dateTime={CHECKED_ON}>{CHECKED_ON_LABEL}</time>. Follow any
             name to check it — if one of these is out of date, it is out of
             date here and we would rather hear about it.
+          </p>
+        </section>
+
+        {/*
+          The row the table cannot hold.
+
+          Placed immediately before "what is actually different here" rather
+          than inside it, because it is the one concrete capability on this
+          page that no competitor's marketing answers — and it was built,
+          tested and shipped in the CLI for weeks while appearing on no page
+          a buyer reads. See UPDATE_LEDGER in lib/compare.ts for why it is
+          stated as our own capability and not as a column.
+        */}
+        <section
+          className="mx-auto w-full max-w-3xl px-4 pb-16 sm:px-6 lg:px-8"
+          aria-labelledby="updates-heading"
+        >
+          <h2 id="updates-heading" className="text-2xl font-bold tracking-tight">
+            {UPDATE_LEDGER.claim}
+          </h2>
+
+          <p className="mt-5 text-body">
+            Copying a component is the easy half. The hard half is a year
+            later, when the bug in it has been fixed here and your copy still
+            has it. Everyone in the table sells the copy.
+          </p>
+
+          <ol className="mt-6 space-y-4">
+            {UPDATE_LEDGER.how.map((item, i) => (
+              <li key={item.step} className="flex gap-4">
+                <span
+                  aria-hidden
+                  className="mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-full bg-primary/10 text-sm font-semibold text-primary"
+                >
+                  {i + 1}
+                </span>
+                <span>
+                  <span className="block font-semibold">{item.step}</span>
+                  <span className="mt-1 block text-body text-muted-foreground">
+                    {item.detail}
+                  </span>
+                </span>
+              </li>
+            ))}
+          </ol>
+
+          <p className="mt-6 text-sm text-muted-foreground">
+            {UPDATE_LEDGER.caveat}{' '}
+            <Link href="/docs/cli" className="font-medium text-primary hover:underline">
+              The CLI docs
+            </Link>{' '}
+            show the commands.
           </p>
         </section>
 

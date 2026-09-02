@@ -16,7 +16,9 @@ import {
   commandHelp,
   commandInit,
   commandLogin,
+  commandDiff,
   commandLogout,
+  commandOutdated,
   commandSearch,
   commandShow,
   commandSkill,
@@ -158,6 +160,14 @@ async function main() {
 
     case 'dna':
       await commandDna(rest, flags)
+      return
+
+    case 'outdated':
+      await commandOutdated(rest, flags)
+      return
+
+    case 'diff':
+      await commandDiff(rest, flags)
       return
 
     case 'login':

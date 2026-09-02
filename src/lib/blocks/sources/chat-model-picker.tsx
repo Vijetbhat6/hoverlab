@@ -143,7 +143,7 @@ export function ChatModelPicker({
         aria-expanded={open}
         aria-controls="model-listbox"
         onClick={() => setOpen((value) => !value)}
-        className="flex w-full items-center justify-between gap-3 rounded-xl border border-border bg-card px-3 py-2.5 text-left transition-colors hover:bg-muted/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        className="flex w-full items-center justify-between gap-3 rounded-xl border border-border bg-card px-3 py-2.5 text-start transition-colors hover:bg-muted/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
       >
         <span className="min-w-0">
           <span className="block text-sm font-semibold">{selected.name}</span>
@@ -178,7 +178,7 @@ export function ChatModelPicker({
                     aria-selected={isSelected}
                     aria-disabled={locked || undefined}
                     onClick={() => choose(model)}
-                    className={`flex w-full flex-col items-start gap-2 border-b border-border/60 p-3 text-left transition-colors last:border-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring ${
+                    className={`flex w-full flex-col items-start gap-2 border-b border-border/60 p-3 text-start transition-colors last:border-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring ${
                       locked
                         ? 'cursor-not-allowed opacity-70'
                         : isSelected
@@ -193,7 +193,7 @@ export function ChatModelPicker({
                         <Lock aria-hidden className="h-3.5 w-3.5 text-muted-foreground" />
                       ) : null}
                       {isSelected ? (
-                        <Check aria-hidden className="ml-auto h-4 w-4 text-primary" />
+                        <Check aria-hidden className="ms-auto h-4 w-4 text-primary" />
                       ) : null}
                     </span>
 

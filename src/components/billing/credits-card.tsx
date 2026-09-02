@@ -1,12 +1,13 @@
 'use client'
 
 /**
- * <CreditsCard> — the Pro+ add-on and the credit balance, on /account.
+ * <CreditsCard> — the credit balance, and what to do when it runs low.
  *
- * Sits below the plan tiers rather than among them, because that is what
- * Pro+ is: an add-on to whatever licence you hold, not a fifth licence. A
- * five-column pricing table would make the licence decision harder in
- * order to sell a meter.
+ * Sits below the plan tiers rather than among them, because credits are
+ * not a tier. They used to be one — Pro+, $9/month — and this card used to
+ * sell it. They are inside the licence now (`includedCredits` in
+ * billing/plans.ts), so the card reports a balance and points at Pro or a
+ * top-up pack rather than at a second subscription.
  *
  * Three states in one card — no allowance, subscribed, and out — because
  * they are the same question ("what can I generate?") answered with
@@ -96,10 +97,21 @@ export function CreditsCard() {
 
   if (!state) return null
 
-  const plus = PLANS.plus
   const hasAllowance = state.monthlyAllowance > 0
-  const price =
-    currency === 'INR' ? formatPriceInr(plus.priceCents) : formatPrice(plus.priceCents)
+
+  /*
+   * The Pro+ upsell that used to sit here is gone: credits ship inside the
+   * licence now (`includedCredits` in billing/plans.ts), so the answer to
+   * "I want more credits" is Pro, or a top-up pack, not a second
+   * subscription. `isPurchasable` already refuses a `plus` checkout, so
+   * leaving the button would have offered a plan the API declines.
+   *
+   * What replaces it is an upgrade prompt for accounts with no licence,
+   * pointing at the thing that grants both the credits and everything else.
+   */
+  const proCredits = PLANS.pro.includedCredits ?? 0
+  const proPrice =
+    currency === 'INR' ? formatPriceInr(PLANS.pro.priceCents) : formatPrice(PLANS.pro.priceCents)
 
   return (
     <Card className="mt-6 border-border/60">
@@ -134,35 +146,44 @@ export function CreditsCard() {
       </CardHeader>
 
       <CardContent className="flex flex-col gap-4">
-        {!entitlements?.hasPlus && (
+        {!entitlements?.canUseProFeatures && (
           <div className="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-border/60 bg-muted/40 p-3">
             <div className="text-sm">
-              <p className="font-medium">Pro+ — {price}/month</p>
+              <p className="font-medium">Pro — {proPrice} once</p>
               <p className="text-muted-foreground">
-                500 credits a month, cancel anytime. Add-on to any plan,
-                including Free.
+                Includes {proCredits.toLocaleString('en-US')} credits that never
+                expire, plus the commercial licence and everything else on the
+                plan. No subscription.
               </p>
             </div>
             <Button
               size="sm"
-              onClick={() => startCheckout('plus')}
-              disabled={pendingPlan === 'plus'}
+              onClick={() => startCheckout('pro')}
+              disabled={pendingPlan === 'pro'}
             >
-              {pendingPlan === 'plus' ? (
+              {pendingPlan === 'pro' ? (
                 <Loader2 aria-hidden className="mr-1.5 h-3.5 w-3.5 animate-spin" />
               ) : (
                 <Sparkles aria-hidden className="mr-1.5 h-3.5 w-3.5" />
               )}
-              Add Pro+
+              Get Pro
             </Button>
           </div>
         )}
 
         <div>
           <p className="mb-2 text-sm font-medium">Top up</p>
+          {/*
+            "Monthly allowance" only applies to a Team seat now — Pro and
+            Studio grant their credits once, into this same never-expiring
+            bucket. Saying it unconditionally would tell a Pro customer they
+            have an allowance they do not have.
+          */}
           <p className="mb-3 text-xs text-muted-foreground">
-            One-time packs. They never expire and they are spent only after
-            your monthly allowance runs out.
+            One-time packs. They never expire
+            {hasAllowance
+              ? ', and they are spent only after your monthly allowance runs out.'
+              : ', and they sit alongside the credits included with your licence.'}
           </p>
           <div className="flex flex-wrap gap-2">
             {state.packs.map((pack) => (

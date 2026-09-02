@@ -2265,7 +2265,14 @@
 .fx-pricing-popular::after {
   content: "";
   position: absolute;
-  inset: -20px -20px auto -20px;
+  /*
+   * No horizontal bleed. At -20px on each side the halo reached past the
+   * tile and past the page gutter with it, so /pricing and the landing page
+   * both scrolled 3px sideways on a 390px screen. The glow is a radial
+   * ellipse that is already transparent by 70%, so the side bleed was
+   * invisible and the scrollbar was not.
+   */
+  inset: -20px 0 auto 0;
   height: 80px;
   background: radial-gradient(
     ellipse at center top,

@@ -322,7 +322,15 @@ export default function CodeImageToolPage() {
           <div className="space-y-4 rounded-lg border border-border bg-card p-5">
             <Label className="block text-sm font-medium">Appearance</Label>
 
-            <div className="grid grid-cols-2 gap-3">
+            {/*
+              `min-w-0` on the items and `w-full` on the triggers below.
+
+              SelectTrigger is `w-fit whitespace-nowrap`, so "2× — retina,
+              the safe default" measured 226px, and a grid item's default
+              `min-width: auto` let that push the two-column track past the
+              viewport — 38px of sideways scroll on the whole page at 390px.
+            */}
+            <div className="grid grid-cols-2 gap-3 [&>*]:min-w-0">
               <div className="space-y-1.5">
                 <Label htmlFor="ci-lang" className="text-xs font-semibold">
                   Language
@@ -331,7 +339,7 @@ export default function CodeImageToolPage() {
                   value={state.language}
                   onValueChange={(v) => update({ language: v as CodeLanguage })}
                 >
-                  <SelectTrigger id="ci-lang" aria-label="Language">
+                  <SelectTrigger id="ci-lang" aria-label="Language" className="w-full">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
@@ -352,7 +360,7 @@ export default function CodeImageToolPage() {
                   value={String(state.scale)}
                   onValueChange={(v) => update({ scale: Number(v) })}
                 >
-                  <SelectTrigger id="ci-scale" aria-label="Export scale">
+                  <SelectTrigger id="ci-scale" aria-label="Export scale" className="w-full">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>

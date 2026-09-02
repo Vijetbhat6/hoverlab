@@ -93,7 +93,7 @@ export function AnnouncementBar({
       {...(live ? { role: 'status' } : {})}
       className={`relative border-b border-border/60 bg-primary/10 ${className}`}
     >
-      <div className="mx-auto flex max-w-7xl items-center justify-center gap-x-3 gap-y-1 px-4 py-2.5 pr-12 text-sm sm:px-6 sm:pr-14">
+      <div className="mx-auto flex max-w-7xl items-center justify-center gap-x-3 gap-y-1 px-4 py-2.5 pe-12 text-sm sm:px-6 sm:pe-14">
         <p className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-center">
           {badge ? (
             <span className="rounded-full bg-primary px-2 py-0.5 text-xs font-semibold text-primary-foreground">

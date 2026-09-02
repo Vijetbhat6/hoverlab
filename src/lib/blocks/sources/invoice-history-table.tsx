@@ -99,19 +99,19 @@ export function InvoiceHistoryTable({
           <caption className="sr-only">{heading}</caption>
           <thead>
             <tr className="border-b border-border/60 bg-muted/30">
-              <th scope="col" className="px-6 py-3 text-left font-semibold">
+              <th scope="col" className="px-6 py-3 text-start font-semibold">
                 Invoice
               </th>
-              <th scope="col" className="px-6 py-3 text-left font-semibold">
+              <th scope="col" className="px-6 py-3 text-start font-semibold">
                 Date
               </th>
-              <th scope="col" className="px-6 py-3 text-left font-semibold">
+              <th scope="col" className="px-6 py-3 text-start font-semibold">
                 Status
               </th>
-              <th scope="col" className="px-6 py-3 text-right font-semibold">
+              <th scope="col" className="px-6 py-3 text-end font-semibold">
                 Amount
               </th>
-              <th scope="col" className="px-6 py-3 text-right font-semibold">
+              <th scope="col" className="px-6 py-3 text-end font-semibold">
                 <span className="sr-only">Download</span>
               </th>
             </tr>
@@ -123,7 +123,7 @@ export function InvoiceHistoryTable({
                 key={invoice.id}
                 className="border-b border-border/40 last:border-0 transition-colors hover:bg-muted/20"
               >
-                <th scope="row" className="px-6 py-3.5 text-left font-normal">
+                <th scope="row" className="px-6 py-3.5 text-start font-normal">
                   <span className="block font-mono text-xs font-medium">{invoice.number}</span>
                   <span className="block text-xs text-muted-foreground">
                     {invoice.description}
@@ -142,11 +142,11 @@ export function InvoiceHistoryTable({
                   </span>
                 </td>
 
-                <td className="px-6 py-3.5 text-right font-medium tabular-nums">
+                <td className="px-6 py-3.5 text-end font-medium tabular-nums">
                   {invoice.amount}
                 </td>
 
-                <td className="px-6 py-3.5 text-right">
+                <td className="px-6 py-3.5 text-end">
                   <a
                     href={invoice.pdfHref ?? '#'}
                     aria-label={`Download invoice ${invoice.number} as PDF`}

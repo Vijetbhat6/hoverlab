@@ -69,6 +69,14 @@ export default function CliDocsPage() {
             [<C key="s">search &lt;words…&gt;</C>, 'Search every tier at once'],
             [<C key="sh">show &lt;id…&gt;</C>, "Print an artifact's code without writing anything"],
             [<C key="c">categories</C>, 'List the categories, per tier'],
+            [
+              <C key="o">outdated</C>,
+              'List installed artifacts the catalog has changed since. Reads only.',
+            ],
+            [
+              <C key="d">diff &lt;id…&gt;</C>,
+              'Show what changed between your copy and the current one',
+            ],
             [<C key="m">mcp</C>, 'Run the MCP server over stdio, for editor agents'],
           ]}
         />
@@ -101,6 +109,40 @@ npx hoverlab add btn-gradient --hue 40 --speed 1.5`}</Snippet>
         <Callout>
           Nothing is overwritten without <C>--force</C>. Run with{' '}
           <C>--dry-run</C> first to see the exact file list.
+        </Callout>
+      </DocsSection>
+
+      <DocsSection id="updates" title="Keeping up to date">
+        <p>
+          Hoverlab installs source you own, which is the point — and the reason
+          a fix to a block could never reach you once it was in your repo.{' '}
+          <C>add</C> now records what it wrote in a{' '}
+          <C>hoverlab.lock.json</C> beside your <C>package.json</C>, and{' '}
+          <C>outdated</C> compares that against the catalog.
+        </p>
+
+        <Snippet label="terminal">{`# what has moved on since you installed it
+npx hoverlab outdated
+
+# what actually changed in one of them
+npx hoverlab diff pricing-tiers
+
+# machine-readable, for CI
+npx hoverlab outdated --json`}</Snippet>
+
+        <p>
+          <strong className="text-foreground">Neither command writes.</strong>{' '}
+          There is deliberately no <C>--fix</C>. The file is yours and you have
+          probably edited it; a command that overwrote local changes on the
+          strength of a hash comparison would be the most destructive thing
+          this CLI could do. <C>diff</C> shows you what changed and the merge
+          is your call.
+        </p>
+
+        <Callout>
+          Nothing about your project is sent. <C>outdated</C> fetches every
+          fingerprint and compares locally, so the request does not reveal
+          which artifacts you have installed.
         </Callout>
       </DocsSection>
 

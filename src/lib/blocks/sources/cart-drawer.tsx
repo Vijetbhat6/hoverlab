@@ -168,7 +168,7 @@ export function CartDrawer({
             role="dialog"
             aria-modal="true"
             aria-label="Shopping bag"
-            className="absolute inset-y-0 right-0 z-40 flex w-full max-w-sm flex-col border-l border-border/60 bg-card shadow-2xl"
+            className="absolute inset-y-0 right-0 z-40 flex w-full max-w-sm flex-col border-s border-border/60 bg-card shadow-2xl"
           >
             <div className="flex items-center justify-between gap-3 border-b border-border/60 px-5 py-4">
               <h2 className="font-semibold tracking-tight">

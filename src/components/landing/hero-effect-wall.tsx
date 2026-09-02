@@ -91,6 +91,19 @@ export function HeroEffectWall() {
     <div
       ref={ref}
       aria-hidden
+      /*
+       * `inert` is the other half of `aria-hidden`, and the same omission
+       * `ArtifactThumbnail` already had to fix.
+       *
+       * `aria-hidden` takes the wall out of the accessibility tree but
+       * leaves every button and input inside it in the tab order. The wall
+       * renders before <SiteHeader> in the DOM, so seven decorative demo
+       * controls — Activate, two text fields, Press Me, Continue, Discover,
+       * Subscribe — sat in front of "Skip to content" on the front door.
+       * A keyboard user had to tab through the decoration to reach the link
+       * whose entire purpose is to skip past decoration.
+       */
+      inert
       className={cn(
         /*
          * z-0, not -z-10.

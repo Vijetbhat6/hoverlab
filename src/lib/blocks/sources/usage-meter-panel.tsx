@@ -110,7 +110,7 @@ export function UsageMeterPanel({
                   {format(quota.used)}
                   {quota.unit ? ` ${quota.unit}` : ''}
                   {unlimited ? (
-                    <span className="ml-1 inline-flex items-center gap-1 text-xs">
+                    <span className="ms-1 inline-flex items-center gap-1 text-xs">
                       <span aria-hidden>/</span>
                       <InfinityIcon aria-hidden className="h-3.5 w-3.5" />
                       <span className="sr-only">of unlimited</span>

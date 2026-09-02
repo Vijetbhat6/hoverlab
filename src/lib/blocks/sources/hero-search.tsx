@@ -91,7 +91,7 @@ export function HeroSearch({
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder={placeholder}
-              className="w-full rounded-xl border border-border/60 bg-card/70 py-3.5 pl-11 pr-4 text-sm shadow-sm backdrop-blur transition-colors placeholder:text-muted-foreground focus-visible:border-primary/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              className="w-full rounded-xl border border-border/60 bg-card/70 py-3.5 ps-11 pe-4 text-sm shadow-sm backdrop-blur transition-colors placeholder:text-muted-foreground focus-visible:border-primary/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             />
           </div>
 

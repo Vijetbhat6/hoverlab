@@ -1,4 +1,5 @@
 import * as React from "react"
+import { Slot } from "@radix-ui/react-slot"
 
 import { cn } from "@/lib/utils"
 
@@ -28,9 +29,22 @@ function CardHeader({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
-function CardTitle({ className, ...props }: React.ComponentProps<"div">) {
+/**
+ * `asChild` renders the title as whatever element the caller passes in.
+ *
+ * A card title is a <div>, which is right for the card-in-a-list case and
+ * wrong when the card *is* the page — the auth screens were a card with a
+ * title and therefore had no heading element anywhere in the document.
+ * Opting in per usage keeps the default unchanged everywhere else.
+ */
+function CardTitle({
+  className,
+  asChild = false,
+  ...props
+}: React.ComponentProps<"div"> & { asChild?: boolean }) {
+  const Comp = asChild ? Slot : "div"
   return (
-    <div
+    <Comp
       data-slot="card-title"
       className={cn("leading-none font-semibold", className)}
       {...props}

@@ -255,6 +255,56 @@ export const GATE_LABELS: Record<Gate, string> = {
  * being true — the block gap is closing — it comes off this list in the
  * same commit that makes it false, not a quarter later.
  */
+/**
+ * The one row this table cannot hold, because no vendor publishes a figure
+ * for it: whether you can find out what changed after you copied something.
+ *
+ * WHY IT IS SEPARATE AND NOT A COLUMN. Every other field on `Competitor`
+ * is a number or a sentence read off a vendor's own page on `CHECKED_ON`.
+ * There is nothing to read for this one — an absence is not published
+ * anywhere, and a column asserting eight vendors cannot do something we
+ * never tested them for would be exactly the unsourced claim the docblock
+ * at the top of this file exists to forbid. So this is a statement about
+ * what WE do, with the comparison left where a reader can make it.
+ *
+ * WHY IT IS WORTH SAYING AT ALL. Copying a component is the easy half; the
+ * hard half is a year later, when the accessibility bug in it has been
+ * fixed upstream and your copy has not. Everyone in this market sells the
+ * copy. This is the only catalog here that also ships the answer to "has
+ * this moved since I took it", and until now that was true and unsaid —
+ * built, tested, shipped in the CLI, and mentioned on no page a buyer
+ * reads.
+ */
+export const UPDATE_LEDGER = {
+  claim: 'You can find out what changed after you copied it',
+  /** The mechanism, in the order a buyer would meet it. */
+  how: [
+    {
+      step: 'Every artifact carries a revision',
+      detail:
+        'A content fingerprint per effect, block, page and template, derived from the source rather than from a version somebody remembers to bump.',
+    },
+    {
+      step: 'It is a public endpoint, with no key',
+      detail:
+        '/api/v1/revisions returns the whole ledger. Your lockfile never has to tell us which forty things you installed.',
+    },
+    {
+      step: 'The CLI reads your copy against it',
+      detail:
+        '`npx hoverlab outdated` lists what has moved since you installed it, with the date it changed; `hoverlab diff <id>` shows the lines.',
+    },
+    {
+      step: 'Applying it is your call, always',
+      detail:
+        'Nothing reaches into your repo and nothing phones home. The file is yours — this only tells you it is not the newest one.',
+    },
+  ],
+  /** The honest limit of the claim, said in the same breath as the claim. */
+  caveat:
+    'We have not audited every vendor above for this, so the table has no column for it. What we can say is what we do.',
+} as const
+
 export const WHERE_THEY_WIN: { claim: string; detail: string }[] = [
   {
     claim: 'Block depth',
@@ -274,7 +324,7 @@ export const WHERE_THEY_WIN: { claim: string; detail: string }[] = [
   {
     claim: 'Support',
     detail:
-      'Aceternity sells a private Discord and a 48-hour response. We answer email and promise nothing about when.',
+      'Aceternity sells a private Discord — a room full of other customers, which is a thing a response target cannot be. We publish business-hours targets and answer email, and there is nowhere for buyers to talk to each other.',
   },
   {
     claim: 'An audience',

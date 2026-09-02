@@ -674,6 +674,7 @@ export default function ClipPathToolPage() {
                     value={state[key]}
                     onChange={(e) => update({ [key]: e.target.value })}
                     className="h-8 flex-1 font-mono text-xs"
+                    aria-label={`Gradient ${label.toLowerCase()} colour, as a hex value`}
                   />
                 </div>
               ))}

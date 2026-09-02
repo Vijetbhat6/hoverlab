@@ -219,7 +219,7 @@ export function NavMobileDrawer({
         // to animate, and a translated-off-screen panel is still tabbable.
         // Browsers without `inert` support still get `aria-hidden`.
         inert={!open}
-        className={`fixed inset-y-0 right-0 z-50 flex w-full max-w-sm flex-col border-l border-border/60 bg-background shadow-2xl transition-transform duration-300 ease-out motion-reduce:transition-none ${
+        className={`fixed inset-y-0 right-0 z-50 flex w-full max-w-sm flex-col border-s border-border/60 bg-background shadow-2xl transition-transform duration-300 ease-out motion-reduce:transition-none ${
           open ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
@@ -252,7 +252,7 @@ export function NavMobileDrawer({
                 id={`${uid}-drawer-search`}
                 type="search"
                 placeholder="Search…"
-                className="h-10 w-full rounded-lg border border-border/60 bg-card/60 pl-9 pr-3 text-sm placeholder:text-muted-foreground focus:border-primary/50 focus:outline-none focus:ring-2 focus:ring-ring/30"
+                className="h-10 w-full rounded-lg border border-border/60 bg-card/60 ps-9 pe-3 text-sm placeholder:text-muted-foreground focus:border-primary/50 focus:outline-none focus:ring-2 focus:ring-ring/30"
               />
             </div>
           ) : null}

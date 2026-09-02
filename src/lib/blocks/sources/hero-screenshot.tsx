@@ -146,7 +146,7 @@ function ScreenshotPlaceholder() {
   return (
     <div aria-hidden className="flex h-[26rem] bg-background/60">
       {/* Sidebar */}
-      <div className="hidden w-52 shrink-0 border-r border-border/60 p-4 sm:block">
+      <div className="hidden w-52 shrink-0 border-e border-border/60 p-4 sm:block">
         <div className="h-7 w-24 rounded-md bg-muted" />
         <div className="mt-6 space-y-2">
           {[true, false, false, false, false].map((active, i) => (

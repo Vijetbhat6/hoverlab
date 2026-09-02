@@ -121,7 +121,7 @@ export function AiInsightCards({
         <h3 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
           {heading}
         </h3>
-        <span className="ml-auto font-mono text-xs text-muted-foreground">
+        <span className="ms-auto font-mono text-xs text-muted-foreground">
           {live.length} {live.length === 1 ? 'finding' : 'findings'}
         </span>
       </div>
@@ -179,7 +179,7 @@ export function AiInsightCards({
             {at + 1} of {live.length}
           </p>
 
-          <div className="ml-auto flex gap-1">
+          <div className="ms-auto flex gap-1">
             <button
               type="button"
               disabled={at === 0}
@@ -252,7 +252,7 @@ function Sparkline({
       role="img"
       aria-label={label}
       viewBox={`0 0 ${width} ${height}`}
-      className="ml-auto h-8 w-24 shrink-0 overflow-visible"
+      className="ms-auto h-8 w-24 shrink-0 overflow-visible"
     >
       <title>{label}</title>
       <polyline

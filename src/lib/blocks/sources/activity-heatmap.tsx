@@ -155,7 +155,7 @@ export function ActivityHeatmap({
         <div className="mt-6 flex gap-2 overflow-x-auto pb-2">
           <ul
             aria-hidden
-            className="grid shrink-0 grid-rows-7 gap-1 pr-1 text-[10px] leading-none text-muted-foreground"
+            className="grid shrink-0 grid-rows-7 gap-1 pe-1 text-[10px] leading-none text-muted-foreground"
           >
             {WEEKDAYS.map((day, i) => (
               <li key={day} className="flex h-3 items-center">

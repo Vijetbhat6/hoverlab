@@ -19,6 +19,8 @@ import { PLANS } from '@/lib/billing/plans'
  *
  * Handled events:
  *   order.paid                 → grant Pro license / seats / credits
+ *                                (a licence grants its bundled credits too —
+ *                                 see `includedCredits` in billing/plans.ts)
  *   order.refunded             → revoke what that order granted
  *   subscription.active        → Team or Pro+ subscription live (or renewed)
  *   subscription.updated       → seat count / period end changed
@@ -197,6 +199,35 @@ async function handleOrderPaid(data: PolarLike): Promise<void> {
     await provisionOneTimeWorkspace(userId, orderId, data, 'team-annual')
   }
 
+  /*
+   * Credits bundled in a one-time licence.
+   *
+   * This is the whole of "credits moved inside the licence" at the point it
+   * actually happens: Pro grants 500 and Studio 2,500, once, into the
+   * perpetual bucket, so the customer owns them and nothing expires.
+   *
+   * AFTER the plan branches above and keyed separately from a pack. The
+   * ledger id is `{orderId}-licence` rather than the bare order id, because
+   * the pack grant below already claims that key — sharing it would mean
+   * whichever ran second found the other's ledger entry and quietly granted
+   * nothing.
+   *
+   * `renewal` is deliberately not here. A renewal buys another twelve
+   * months of updates on a licence already held; granting it credits would
+   * make renewing the cheapest way to buy them.
+   */
+  const licenceCredits = PLANS[plan as keyof typeof PLANS]?.includedCredits ?? null
+
+  if (licenceCredits) {
+    await addPurchasedCredits(
+      userId,
+      licenceCredits,
+      orderId,
+      `licence-${plan}`,
+      `${orderId}-licence`,
+    )
+  }
+
   // A credit pack. `addPurchasedCredits` is keyed by the order id, so a
   // redelivery cannot grant the same pack twice.
   if (packId) {
@@ -337,6 +368,24 @@ async function handleOrderRefunded(data: PolarLike): Promise<void> {
     // the work. A negative balance simply means the next purchase pays it
     // off, which is the honest arithmetic.
     await revokePurchasedCredits(userId, Number(purchase.credits) || 0)
+  }
+
+  /*
+   * Same arithmetic for the credits bundled in a refunded licence. Read
+   * from the plan catalog rather than from the purchase record, because the
+   * grant was never written there: `credits` on a purchase means the pack's
+   * credits, and overloading it would make a refund of a Pro order that
+   * also had a pack take one of them back twice.
+   *
+   * A grant amount changed between purchase and refund would revoke the new
+   * figure. That is worth the simplicity — the alternative is a second
+   * field on every purchase record for a number that has moved zero times.
+   */
+  const refundedLicenceCredits =
+    PLANS[purchase.plan as keyof typeof PLANS]?.includedCredits ?? null
+
+  if (refundedLicenceCredits) {
+    await revokePurchasedCredits(userId, refundedLicenceCredits)
   }
 
   if (purchase.plan === 'studio' || purchase.plan === 'team-annual') {

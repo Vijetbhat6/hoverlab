@@ -74,7 +74,7 @@ export function BarChartPanel({
         <div aria-hidden className="absolute inset-0 flex flex-col justify-between">
           {[1, 0.75, 0.5, 0.25, 0].map((fraction) => (
             <div key={fraction} className="flex items-center gap-2">
-              <span className="w-12 shrink-0 text-right text-[0.65rem] text-muted-foreground">
+              <span className="w-12 shrink-0 text-end text-[0.65rem] text-muted-foreground">
                 {format(Math.round(max * fraction))}
               </span>
               <span className="h-px flex-1 bg-border/50" />
@@ -83,7 +83,7 @@ export function BarChartPanel({
         </div>
 
         {/* Bars, offset past the axis labels. */}
-        <div aria-hidden className="relative ml-14 flex h-48 items-end gap-2">
+        <div aria-hidden className="relative ms-14 flex h-48 items-end gap-2">
           {bars.map((bar) => (
             <div key={bar.label} className="group flex h-full flex-1 flex-col justify-end gap-1">
               <div className="relative flex h-full items-end justify-center gap-0.5">

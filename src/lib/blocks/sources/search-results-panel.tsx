@@ -111,7 +111,7 @@ export function SearchResultsPanel({
           type="search"
           defaultValue={query}
           aria-label="Search documentation"
-          className="w-full rounded-xl border border-border/60 bg-background py-3 pl-11 pr-24 text-sm outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring"
+          className="w-full rounded-xl border border-border/60 bg-background py-3 ps-11 pe-24 text-sm outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring"
         />
         <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-xs tabular-nums text-muted-foreground">
           {total} results

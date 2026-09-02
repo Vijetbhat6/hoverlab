@@ -101,6 +101,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // with a card already out. Monthly, because the prices on it are other
     // people's and they move.
     { url: absoluteUrl('/compare'), changeFrequency: 'monthly' as const, priority: 0.8 },
+    // Written for search in the same way /compare is: "vue tailwind
+    // components", "svelte ui components" and "astro components" are
+    // queries we ship an answer to and had no page for. Monthly — the
+    // support matrix moves when a converter does, which is rarely.
+    { url: absoluteUrl('/frameworks'), changeFrequency: 'monthly' as const, priority: 0.8 },
     // Per-artifact WCAG evidence. Weekly, because the numbers on it move
     // with the catalog — it is regenerated on every build — and because a
     // buyer doing vendor diligence under the EAA wants the current one.

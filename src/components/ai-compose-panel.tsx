@@ -187,9 +187,9 @@ export function AiComposePanel({
                 href="/account#billing"
                 className="font-medium text-primary hover:underline"
               >
-                Pro+ or a credit pack
+                Pro, or a credit pack
               </a>{' '}
-              covers it.
+              covers it — Pro includes credits that never expire.
             </>
           )}
         </p>

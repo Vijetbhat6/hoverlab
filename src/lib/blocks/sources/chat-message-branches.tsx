@@ -155,7 +155,7 @@ export function ChatMessageBranches({
         {/* ---- The user turn, which branches as well ------------------ */}
         <div className="flex justify-end">
           <div className="max-w-[85%]">
-            <div className="rounded-2xl rounded-br-sm bg-muted px-4 py-3 text-sm text-foreground">
+            <div className="rounded-2xl rounded-ee-sm bg-muted px-4 py-3 text-sm text-foreground">
               {current.question}
             </div>
             <div className="mt-1.5 flex items-center justify-end gap-2">
@@ -218,7 +218,7 @@ export function ChatMessageBranches({
                 Regenerate
               </button>
 
-              <div className="ml-auto flex items-center gap-0.5">
+              <div className="ms-auto flex items-center gap-0.5">
                 <button
                   type="button"
                   aria-pressed={vote === 'up'}

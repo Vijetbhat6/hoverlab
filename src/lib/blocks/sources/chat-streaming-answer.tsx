@@ -129,8 +129,8 @@ export function ChatStreamingAnswer({
   return (
     <div className={`mx-auto w-full max-w-2xl p-6 ${className}`}>
       {question ? (
-        <p className="mb-5 text-right text-sm">
-          <span className="inline-block rounded-2xl rounded-br-md bg-primary px-4 py-2.5 text-left text-primary-foreground">
+        <p className="mb-5 text-end text-sm">
+          <span className="inline-block rounded-2xl rounded-ee-md bg-primary px-4 py-2.5 text-start text-primary-foreground">
             {question}
           </span>
         </p>
@@ -151,7 +151,7 @@ export function ChatStreamingAnswer({
             {streaming ? 'Generating answer' : 'Answer complete'}
           </span>
 
-          <div className="rounded-2xl rounded-bl-md border border-border/60 bg-card px-4 py-3 text-sm leading-relaxed">
+          <div className="rounded-2xl rounded-es-md border border-border/60 bg-card px-4 py-3 text-sm leading-relaxed">
             <p>
               {renderWithCitations(visible, sources)}
               {streaming ? (
@@ -228,7 +228,7 @@ export function ChatStreamingAnswer({
                   <li key={text}>
                     <button
                       type="button"
-                      className="rounded-full border border-border/60 bg-card px-3 py-1.5 text-left text-xs transition-colors hover:border-primary/40 hover:bg-primary/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                      className="rounded-full border border-border/60 bg-card px-3 py-1.5 text-start text-xs transition-colors hover:border-primary/40 hover:bg-primary/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                     >
                       {text}
                     </button>
@@ -266,7 +266,7 @@ function renderWithCitations(text: string, sources: AnswerSource[]): React.React
         href={`#citation-${id}`}
         // Leading margin only. A trailing one opens a visible gap before
         // the sentence's full stop, which reads as a typo.
-        className="ml-0.5 inline-flex h-4 min-w-4 items-center justify-center rounded bg-primary/10 px-1 align-super font-mono text-[10px] font-semibold text-primary no-underline transition-colors hover:bg-primary/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        className="ms-0.5 inline-flex h-4 min-w-4 items-center justify-center rounded bg-primary/10 px-1 align-super font-mono text-[10px] font-semibold text-primary no-underline transition-colors hover:bg-primary/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
       >
         {id}
         <span className="sr-only"> — see source {id}</span>

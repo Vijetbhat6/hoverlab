@@ -135,7 +135,7 @@ export function AgentDiffReview({
 
             <thead>
               <tr className="border-b border-border/60 text-left">
-                <th scope="col" className="w-10 py-2.5 pl-5 pr-2">
+                <th scope="col" className="w-10 py-2.5 ps-5 pe-2">
                   <input
                     ref={selectAllRef}
                     type="checkbox"
@@ -145,13 +145,13 @@ export function AgentDiffReview({
                     className="h-4 w-4 accent-primary"
                   />
                 </th>
-                <th scope="col" className="py-2.5 pr-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                <th scope="col" className="py-2.5 pe-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                   Record
                 </th>
-                <th scope="col" className="py-2.5 pr-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                <th scope="col" className="py-2.5 pe-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                   Field
                 </th>
-                <th scope="col" className="py-2.5 pr-5 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                <th scope="col" className="py-2.5 pe-5 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                   Change
                 </th>
               </tr>
@@ -166,7 +166,7 @@ export function AgentDiffReview({
                     key={row.id}
                     className={`transition-colors ${on ? '' : 'opacity-45'} hover:bg-muted/40`}
                   >
-                    <td className="py-3 pl-5 pr-2 align-top">
+                    <td className="py-3 ps-5 pe-2 align-top">
                       <input
                         type="checkbox"
                         checked={on}
@@ -176,15 +176,15 @@ export function AgentDiffReview({
                       />
                     </td>
 
-                    <th scope="row" className="py-3 pr-4 text-left align-top font-medium">
+                    <th scope="row" className="py-3 pe-4 text-start align-top font-medium">
                       {row.record}
                     </th>
 
-                    <td className="py-3 pr-4 align-top text-xs text-muted-foreground">
+                    <td className="py-3 pe-4 align-top text-xs text-muted-foreground">
                       {row.field}
                     </td>
 
-                    <td className="py-3 pr-5 align-top">
+                    <td className="py-3 pe-5 align-top">
                       <span className="flex flex-wrap items-center gap-2">
                         <del className="rounded-md bg-rose-500/10 px-1.5 py-0.5 text-xs text-rose-600 decoration-rose-500/50 dark:text-rose-400">
                           {row.before}
@@ -228,7 +228,7 @@ export function AgentDiffReview({
             )}
           </p>
 
-          <div className="ml-auto flex items-center gap-2">
+          <div className="ms-auto flex items-center gap-2">
             {applied ? (
               <button
                 type="button"

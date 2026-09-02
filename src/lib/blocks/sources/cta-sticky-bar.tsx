@@ -163,7 +163,7 @@ export function CtaStickyBar({
               <button
                 type="button"
                 onClick={() => setDismissed(true)}
-                className="-mr-1 rounded p-1.5 text-muted-foreground transition hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                className="-me-1 rounded p-1.5 text-muted-foreground transition hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               >
                 <X aria-hidden className="h-4 w-4" />
                 <span className="sr-only">Dismiss this bar</span>

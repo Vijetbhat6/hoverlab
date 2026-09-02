@@ -29,6 +29,7 @@ import { LandingShowcase } from '@/components/landing-showcase'
 import { Reveal } from '@/components/reveal'
 import { SiteFooter } from '@/components/site-footer'
 import { AgentBand } from '@/components/landing/agent-band'
+import { FrameworkBand } from '@/components/landing/framework-band'
 import { LadderBand } from '@/components/landing/ladder-band'
 import { FaqAccordion } from '@/components/landing/faq-accordion'
 import { PricingTiers } from '@/components/landing/pricing-tiers'
@@ -303,6 +304,21 @@ export default function LandingPage() {
 
       {/* The CLI, the MCP server, and the Figma matcher */}
       <AgentBand />
+
+      {/*
+        Multi-framework output, at the size a competitor gives it.
+
+        Immediately after the agent band because the two are the same kind
+        of claim — "this is not just a website you copy out of" — and
+        because both were previously findable only by someone who already
+        knew to look. Vue, Svelte and Astro output has shipped for months
+        inside a tab strip on a detail page, while Flowbite and React Bits
+        market multi-framework in their mastheads.
+
+        Before the comparison table, deliberately: the table argues against
+        the alternatives, and this is one of the rows it is arguing with.
+      */}
+      <FrameworkBand />
 
       {/*
         The bento grid used to sit here. It was a second "why developers

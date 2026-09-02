@@ -123,7 +123,7 @@ export function DashboardShell({
   return (
     <div className={`flex h-[32rem] overflow-hidden rounded-2xl border border-border/60 bg-background ${className}`}>
       {/* Static sidebar from lg up */}
-      <aside className="hidden w-60 shrink-0 border-r border-border/60 bg-card/40 lg:block">
+      <aside className="hidden w-60 shrink-0 border-e border-border/60 bg-card/40 lg:block">
         {sidebar}
       </aside>
 
@@ -140,7 +140,7 @@ export function DashboardShell({
             role="dialog"
             aria-modal="true"
             aria-label="Navigation"
-            className="absolute inset-y-0 left-0 z-40 w-60 border-r border-border/60 bg-card shadow-xl lg:hidden"
+            className="absolute inset-y-0 left-0 z-40 w-60 border-e border-border/60 bg-card shadow-xl lg:hidden"
           >
             <button
               type="button"
@@ -187,14 +187,14 @@ export function DashboardShell({
               type="search"
               placeholder="Search"
               aria-label="Search"
-              className="w-full rounded-xl border border-border/60 bg-background py-1.5 pl-9 pr-3 text-sm outline-none transition-shadow placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-primary"
+              className="w-full rounded-xl border border-border/60 bg-background py-1.5 ps-9 pe-3 text-sm outline-none transition-shadow placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-primary"
             />
           </div>
 
           <button
             type="button"
             aria-label="Notifications, 3 unread"
-            className="relative ml-auto rounded-lg p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+            className="relative ms-auto rounded-lg p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
           >
             <Bell aria-hidden className="h-4 w-4" />
             <span

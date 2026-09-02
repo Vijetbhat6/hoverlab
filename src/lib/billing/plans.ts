@@ -23,29 +23,34 @@
  *           previously said Pro bought "the CLI", which was never true and is
  *           the kind of claim the pricing page would have inherited.
  *
- *   Pro+  — RECURRING monthly, and deliberately NOT a fifth column on the
- *           pricing grid. It is an add-on: a monthly allowance of AI
- *           credits on top of whatever licence you hold.
+ *   Pro+  — RETIRED as of this revision. Kept as a plan id because people
+ *           hold it; removed from everything that sells.
  *
- *           This is the answer to the problem the comment below states —
- *           individuals will not subscribe to static assets. They will pay
- *           monthly for something that gets consumed, which is why every
- *           comparable company arrived at credits in the same year (Uiverse
- *           $4.99 for 500k tokens, 21st.dev $15, Envato's tiers priced by
- *           credit count, UI8 selling Persona packs). Credits read as fuel;
- *           a subscription to a catalog reads as rent.
+ *           It was a $9/month add-on: a monthly allowance of AI credits on
+ *           top of whatever licence you held, sold as a line under the
+ *           pricing table rather than a fifth column. The reasoning was
+ *           sound as far as it went — individuals will not subscribe to
+ *           static assets, but they will pay for something that gets
+ *           consumed, which is why every comparable company arrived at
+ *           credits in the same year (Uiverse $4.99/$19.99, 21st.dev $15,
+ *           Envato priced by credit count).
  *
- *           Sold as an add-on rather than a tier because it is one: it
- *           grants no catalog rights Pro does not already grant, and a
- *           five-column pricing table makes the licence decision harder to
- *           serve a product that is really a meter.
+ *           What it got wrong was the packaging. A buyer who has just
+ *           decided to spend $79 is then asked to make a second, smaller,
+ *           worse decision, and most people decline a $9/month upsell on
+ *           principle rather than on arithmetic. HeroUI Pro bundles
+ *           500–1,000 credits inside its one-time licence and does not ask
+ *           twice; that is the better product at the same price, and the
+ *           credits cost the same to serve either way.
  *
- *           Credits started out buying one endpoint, which made $9/month a
- *           subscription to a button. They now buy three actions at
- *           different prices — vary/edit an effect (1), recolour one onto
- *           your brand (1), compose a section from a brief (3) — because a
- *           meter is only worth paying for monthly if it measures
- *           something used weekly. See `ACTION_COSTS` in ./credits.
+ *           So the credits moved inside: `includedCredits` on Pro and
+ *           Studio, granted once at purchase into the perpetual bucket.
+ *           Anyone who wants more buys a top-up pack — the same bucket, no
+ *           subscription. See `CREDIT_PACKS` and `includedCredits` below.
+ *
+ *           Existing subscribers are untouched. `hasPlus` still grants the
+ *           monthly allowance in ./entitlements and ./credits; `sold: false`
+ *           only stops it being offered to anyone new.
  *
  *   Studio — ONE-TIME, ten seats. The same license as Pro, bought once for a
  *           whole team. This exists because the comparable market sells
@@ -137,6 +142,45 @@ export interface Plan {
    * can read it when it provisions the workspace.
    */
   includedSeats: number | null
+  /**
+   * AI credits granted once, at purchase, and never expiring.
+   *
+   * THE POINT OF THIS FIELD. Credits used to be a separate product: Pro+ at
+   * $9/month, sold as a line under the pricing table. That was the textbook
+   * answer to "individuals will not subscribe to static assets" and it was
+   * the wrong one here, because it asks a buyer who has just made one
+   * decision to make a second, smaller, worse one. HeroUI Pro bundles
+   * 500–1,000 credits INSIDE its one-time licence, and it is right: Pro at
+   * $79 with 500 credits is a better product than Pro at $79 plus a $9/mo
+   * upsell, and it costs the same to serve.
+   *
+   * ONE-TIME, NOT MONTHLY, AND THIS IS NOT A DETAIL. `MONTHLY_ALLOWANCE` in
+   * billing/credits.ts spells out why a perpetual monthly grant attached to
+   * a single payment is an unbounded cost with no revenue behind it — the
+   * exact mistake that makes a lifetime deal unprofitable three years
+   * later. So these land in the `purchased` bucket: granted once, never
+   * reset, never expiring, and the customer keeps whatever they have not
+   * spent. Someone who wants more buys a pack, which is the same bucket.
+   *
+   * Null where credits are not part of the deal: Free, the renewals (which
+   * buy an update window, not a product), and the subscriptions, which
+   * carry a real monthly allowance instead.
+   */
+  includedCredits: number | null
+  /**
+   * Whether this plan can still be bought.
+   *
+   * False is not "deleted". A retired plan keeps its id, its price and its
+   * Polar product because people still hold it: an existing Pro+ subscriber
+   * renews, shows up in `entitlements`, and must keep the allowance they
+   * are paying for. What changes is that nothing offers it to anyone new.
+   *
+   * Every surface that renders a purchasable plan filters on this. A plan
+   * hidden by deleting its card and left live in the checkout route is the
+   * failure this exists to prevent — the pricing page stops mentioning it
+   * and a stale link still sells it.
+   */
+  sold: boolean
 }
 
 export const PLANS: Record<PlanId, Plan> = {
@@ -152,6 +196,8 @@ export const PLANS: Record<PlanId, Plan> = {
     // it. There is no purchase for updates to run from.
     updateWindowMonths: null,
     includedSeats: null,
+    includedCredits: null,
+    sold: true,
   },
   pro: {
     id: 'pro',
@@ -179,6 +225,11 @@ export const PLANS: Record<PlanId, Plan> = {
     perSeat: false,
     updateWindowMonths: 12,
     includedSeats: 1,
+    // 500, matching the allowance Pro+ used to sell for $9/month, granted
+    // once and never expiring. See `includedCredits` above for why this is
+    // a grant rather than a monthly entitlement.
+    includedCredits: 500,
+    sold: true,
   },
   plus: {
     id: 'plus',
@@ -200,6 +251,14 @@ export const PLANS: Record<PlanId, Plan> = {
     // there is no separate update window to run out.
     updateWindowMonths: null,
     includedSeats: 1,
+    includedCredits: null,
+    /*
+     * RETIRED, not deleted. Credits moved inside the licence, so nothing
+     * offers this to anyone new — but people hold it, it renews, and an
+     * active subscriber must keep the allowance they are paying for.
+     * `hasPlus` in ./entitlements still grants it; only the sale is gone.
+     */
+    sold: false,
   },
   studio: {
     id: 'studio',
@@ -216,6 +275,17 @@ export const PLANS: Record<PlanId, Plan> = {
     perSeat: false,
     updateWindowMonths: 12,
     includedSeats: 10,
+    /*
+     * 2,500 — five times Pro's grant for ten seats, not ten times it.
+     *
+     * Ten Pro licences would carry 5,000 credits between them, and Studio
+     * is deliberately under that for the same reason it is under $790: it
+     * is a discount for buying together, and a bundled meter that scaled
+     * linearly would make Studio the cheap way to buy credits rather than
+     * the cheap way to licence a team.
+     */
+    includedCredits: 2500,
+    sold: true,
   },
   team: {
     id: 'team',
@@ -238,6 +308,10 @@ export const PLANS: Record<PlanId, Plan> = {
     // monthly. Nothing to bound.
     updateWindowMonths: null,
     includedSeats: null,
+    // A subscription. Credits arrive every month it is live - see
+    // MONTHLY_ALLOWANCE in ./credits - so there is no one-time grant.
+    includedCredits: null,
+    sold: true,
   },
   /**
    * Team, bought outright for a year instead of billed monthly.
@@ -292,6 +366,10 @@ export const PLANS: Record<PlanId, Plan> = {
     updateWindowMonths: 12,
     // Seats are chosen, not included. Same as `team`.
     includedSeats: null,
+    // Same product as `team`, bought for a term. The allowance is the
+    // subscription's, not a grant.
+    includedCredits: null,
+    sold: true,
   },
   renewal: {
     id: 'renewal',
@@ -312,6 +390,10 @@ export const PLANS: Record<PlanId, Plan> = {
     updateWindowMonths: 12,
     // Renews a licence; grants no seats of its own.
     includedSeats: null,
+    // A renewal buys an update window, not a product. Bundling credits
+    // into it would make renewing a way to buy credits at a discount.
+    includedCredits: null,
+    sold: true,
   },
   'renewal-studio': {
     id: 'renewal-studio',
@@ -325,6 +407,8 @@ export const PLANS: Record<PlanId, Plan> = {
     perSeat: false,
     updateWindowMonths: 12,
     includedSeats: null,
+    includedCredits: null,
+    sold: true,
   },
 }
 
@@ -724,7 +808,15 @@ export function formatPricePaise(paise: number): string {
  * True when a plan is fully configured and can actually be checked out.
  * The pricing UI uses this to avoid offering a buy button that would dead-end
  * at a 500 because POLAR_PRODUCT_ID_* wasn't set in the environment.
+ *
+ * `sold` is checked here, in the same function, rather than as a second
+ * thing every caller has to remember. Retiring a plan by deleting its card
+ * and leaving the checkout route willing to sell it is the failure mode
+ * this is guarding: the pricing page stops mentioning Pro+ and a bookmarked
+ * link, an old email or a stale client bundle keeps taking money for it.
+ * One predicate, checked by the UI and by the route, means a retirement is
+ * one field.
  */
 export function isPurchasable(plan: Plan): boolean {
-  return plan.polarProductId !== null
+  return plan.sold && plan.polarProductId !== null
 }

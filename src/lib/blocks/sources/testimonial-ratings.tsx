@@ -116,7 +116,7 @@ export function TestimonialRatings({
           </p>
         </div>
 
-        <dl className="grid content-center gap-2.5 border-border/60 max-lg:border-t max-lg:pt-8 lg:border-l lg:pl-16">
+        <dl className="grid content-center gap-2.5 border-border/60 max-lg:border-t max-lg:pt-8 lg:border-s lg:ps-16">
           {breakdown.map((band) => {
             const share = total === 0 ? 0 : (band.count / total) * 100
             return (
@@ -134,7 +134,7 @@ export function TestimonialRatings({
                       style={{ width: `${share}%` }}
                     />
                   </span>
-                  <span className="w-14 shrink-0 text-right text-sm tabular-nums text-muted-foreground">
+                  <span className="w-14 shrink-0 text-end text-sm tabular-nums text-muted-foreground">
                     {band.count.toLocaleString()}
                   </span>
                 </dd>

@@ -156,7 +156,7 @@ export function ProductSizeGuide({
 
         {/* Its own scroll container — the page must not scroll sideways. */}
         <div className="mt-5 -mx-1 overflow-x-auto px-1">
-          <table className="w-full min-w-[34rem] border-collapse text-left text-sm">
+          <table className="w-full min-w-[34rem] border-collapse text-start text-sm">
             <caption className="sr-only">
               Body measurements by size, in {unit === 'cm' ? 'centimetres' : 'inches'}.
             </caption>

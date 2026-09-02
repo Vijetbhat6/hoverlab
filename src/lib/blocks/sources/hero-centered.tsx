@@ -63,7 +63,7 @@ export function HeroCentered({
         {announcement ? (
           <a
             href={announcementHref}
-            className="group inline-flex items-center gap-2 rounded-full border border-border/60 bg-card/60 py-1 pl-1.5 pr-3 text-xs font-medium backdrop-blur transition-colors hover:bg-card focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            className="group inline-flex items-center gap-2 rounded-full border border-border/60 bg-card/60 py-1 ps-1.5 pe-3 text-xs font-medium backdrop-blur transition-colors hover:bg-card focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           >
             <span className="inline-flex items-center gap-1 rounded-full bg-primary/15 px-2 py-0.5 text-primary">
               <Sparkles aria-hidden className="h-3 w-3" />

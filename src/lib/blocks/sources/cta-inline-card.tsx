@@ -102,7 +102,7 @@ export function CtaInlineCard({
             <span className="sr-only">Not now — hide this for the rest of my visit</span>
           </button>
 
-          <p className="flex items-center gap-1.5 pr-8 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+          <p className="flex items-center gap-1.5 pe-8 text-xs font-medium uppercase tracking-wide text-muted-foreground">
             <Sparkles aria-hidden className="h-3.5 w-3.5" />
             {contextLabel}
           </p>

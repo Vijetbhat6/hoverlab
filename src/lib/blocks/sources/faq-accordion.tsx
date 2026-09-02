@@ -75,14 +75,14 @@ export function FaqAccordion({
             name={exclusive ? 'faq' : undefined}
             className="group px-5 py-1 [&_summary::-webkit-details-marker]:hidden"
           >
-            <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 text-left font-semibold transition-colors hover:text-foreground/80">
+            <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 text-start font-semibold transition-colors hover:text-foreground/80">
               {item.question}
               <Plus
                 aria-hidden
                 className="h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200 group-open:rotate-45"
               />
             </summary>
-            <p className="pb-5 pr-8 text-sm leading-relaxed text-muted-foreground">
+            <p className="pb-5 pe-8 text-sm leading-relaxed text-muted-foreground">
               {item.answer}
             </p>
           </details>

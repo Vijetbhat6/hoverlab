@@ -236,7 +236,7 @@ function Field({
       <label htmlFor={id} className="mb-1.5 block text-sm font-medium">
         {label}
         {optional ? (
-          <span className="ml-1.5 font-normal text-muted-foreground">(optional)</span>
+          <span className="ms-1.5 font-normal text-muted-foreground">(optional)</span>
         ) : null}
       </label>
 

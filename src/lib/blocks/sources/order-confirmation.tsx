@@ -181,7 +181,7 @@ export function OrderConfirmation({
                 ) : null}
               </div>
               <p className="shrink-0 text-sm text-muted-foreground">×{line.quantity}</p>
-              <p className="w-20 shrink-0 text-right text-sm font-medium tabular-nums">
+              <p className="w-20 shrink-0 text-end text-sm font-medium tabular-nums">
                 {formatPrice(line.price * line.quantity, currency, locale)}
               </p>
             </li>

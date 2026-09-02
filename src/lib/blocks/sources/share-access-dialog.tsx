@@ -120,6 +120,9 @@ export function ShareAccessDialog({
     Object.fromEntries(people.map((p) => [p.email, p.role])),
   )
   const [copied, setCopied] = React.useState(false)
+  // The refusal path needs its own state: a button that silently does
+  // nothing is the failure mode this replaced.
+  const [failed, setFailed] = React.useState(false)
 
   const copy = ACCESS_COPY[general]
   const Icon = copy.icon
@@ -173,7 +176,7 @@ export function ShareAccessDialog({
 
                   {person.role === 'owner' ? (
                     /* Text, not a disabled control — see the note above. */
-                    <span className="shrink-0 pr-3 text-sm text-muted-foreground">
+                    <span className="shrink-0 pe-3 text-sm text-muted-foreground">
                       Owner
                     </span>
                   ) : (
@@ -239,9 +242,27 @@ export function ShareAccessDialog({
           <button
             type="button"
             onClick={() => {
-              void navigator.clipboard?.writeText(link)
-              setCopied(true)
-              window.setTimeout(() => setCopied(false), 2000)
+              /*
+               * Confirm on success, not on click.
+               *
+               * The clipboard API rejects for reasons a component cannot
+               * predict — permission denied, an insecure origin, a
+               * document that is not focused. The previous version fired
+               * the write and set "Link copied" unconditionally, so a
+               * refused write showed a tick and an unhandled rejection in
+               * the console while the clipboard still held whatever was
+               * there before.
+               */
+              navigator.clipboard
+                ?.writeText(link)
+                .then(() => {
+                  setCopied(true)
+                  window.setTimeout(() => setCopied(false), 2000)
+                })
+                .catch(() => {
+                  setFailed(true)
+                  window.setTimeout(() => setFailed(false), 3000)
+                })
             }}
             className="inline-flex h-9 items-center gap-1.5 rounded-lg border border-border bg-background px-3 text-sm font-medium text-foreground transition hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           >
@@ -250,12 +271,12 @@ export function ShareAccessDialog({
             ) : (
               <Link2 aria-hidden className="h-4 w-4" />
             )}
-            {copied ? 'Link copied' : 'Copy link'}
+            {copied ? 'Link copied' : failed ? 'Copy blocked' : 'Copy link'}
           </button>
 
           <button
             type="button"
-            className="ml-auto inline-flex h-9 items-center rounded-lg bg-primary px-4 text-sm font-semibold text-primary-foreground transition hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            className="ms-auto inline-flex h-9 items-center rounded-lg bg-primary px-4 text-sm font-semibold text-primary-foreground transition hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           >
             Done
           </button>
@@ -266,7 +287,7 @@ export function ShareAccessDialog({
           */}
           {linkIsPrivate ? (
             <p className="w-full text-xs text-muted-foreground">
-              <Copy aria-hidden className="mr-1 inline h-3 w-3" />
+              <Copy aria-hidden className="me-1 inline h-3 w-3" />
               This link only works for the people listed above. Anyone else will
               have to request access — change General access if you meant to
               share it more widely.

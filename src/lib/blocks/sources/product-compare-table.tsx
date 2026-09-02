@@ -211,7 +211,7 @@ export function ProductCompareTable({
         ) : null}
 
         <div className="mt-4 -mx-1 overflow-x-auto px-1">
-          <table className="w-full min-w-[36rem] border-collapse text-left text-sm">
+          <table className="w-full min-w-[36rem] border-collapse text-start text-sm">
             <caption className="sr-only">
               Specifications compared across {shown.length} products.
               {differencesOnly && hidden > 0

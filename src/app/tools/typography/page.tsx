@@ -168,6 +168,7 @@ p + p { margin-top: var(--spacing-paragraph); }`
               value={state.pairId}
               onChange={(e) => setState((s) => ({ ...s, pairId: e.target.value }))}
               className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm"
+              aria-label="Font pairing"
             >
               {FONT_PAIRINGS.map((p) => (
                 <option key={p.id} value={p.id}>
@@ -378,7 +379,19 @@ p + p { margin-top: var(--spacing-paragraph); }`
                 letterSpacing: `${state.bodyLetterSpacing}em`,
               }}
             >
+              {/*
+                A specimen, not the page's heading.
+
+                These two have to be a real <h1> and <h2> — the whole point
+                is to show what heading type looks like at these settings —
+                but "The quick brown fox…" was competing with "Typography
+                Playground" as a top-level heading, so the page shipped two
+                h1s and a screen reader had no way to tell the sample from
+                the page. `aria-level` re-ranks them beneath the panel they
+                sit in without touching how they render.
+              */}
               <h1
+                aria-level={3}
                 style={{
                   fontFamily: pair.heading.stack,
                   fontSize: `${state.baseSize * Math.pow(state.scale, 4)}px`,
@@ -391,6 +404,7 @@ p + p { margin-top: var(--spacing-paragraph); }`
                 {PREVIEW_TEXT.h1}
               </h1>
               <h2
+                aria-level={4}
                 style={{
                   fontFamily: pair.heading.stack,
                   fontSize: `${state.baseSize * Math.pow(state.scale, 2)}px`,

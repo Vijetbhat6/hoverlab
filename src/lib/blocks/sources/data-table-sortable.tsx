@@ -161,7 +161,7 @@ export function DataTableSortable({
           <button
             type="button"
             onClick={() => setSelected(new Set())}
-            className="ml-auto text-muted-foreground hover:text-foreground"
+            className="ms-auto text-muted-foreground hover:text-foreground"
           >
             Clear
           </button>

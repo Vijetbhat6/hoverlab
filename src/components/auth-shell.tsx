@@ -59,7 +59,16 @@ export function AuthShell({
 
         <Card className="border-border/60 bg-background/80 backdrop-blur-xl">
           <CardHeader>
-            <CardTitle className="text-2xl">{title}</CardTitle>
+            {/*
+              `asChild` so the card title is the page's <h1>.
+              CardTitle renders a plain <div>, which meant /login, /signup,
+              /forgot-password and /reset-password shipped with no heading
+              element at all — nothing for a screen reader to jump to, and
+              no answer to "what page am I on" short of reading the form.
+            */}
+            <CardTitle asChild className="text-2xl">
+              <h1>{title}</h1>
+            </CardTitle>
             <CardDescription>{description}</CardDescription>
           </CardHeader>
 

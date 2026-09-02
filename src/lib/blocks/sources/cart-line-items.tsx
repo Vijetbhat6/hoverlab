@@ -154,7 +154,7 @@ export function CartLineItems({
                       onClick={() => setQuantity(line.id, Math.max(1, line.quantity - 1))}
                       disabled={line.quantity <= 1}
                       aria-label={`Decrease quantity of ${line.name}`}
-                      className="rounded-l-lg p-1.5 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground disabled:pointer-events-none disabled:opacity-40"
+                      className="rounded-s-lg p-1.5 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground disabled:pointer-events-none disabled:opacity-40"
                     >
                       <Minus aria-hidden className="h-3.5 w-3.5" />
                     </button>
@@ -171,7 +171,7 @@ export function CartLineItems({
                       }
                       disabled={line.quantity >= (line.maxQuantity ?? 10)}
                       aria-label={`Increase quantity of ${line.name}`}
-                      className="rounded-r-lg p-1.5 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground disabled:pointer-events-none disabled:opacity-40"
+                      className="rounded-e-lg p-1.5 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground disabled:pointer-events-none disabled:opacity-40"
                     >
                       <Plus aria-hidden className="h-3.5 w-3.5" />
                     </button>

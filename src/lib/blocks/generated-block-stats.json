@@ -132,7 +132,7 @@
     "files": 1
   },
   "share-access-dialog": {
-    "lines": 280,
+    "lines": 301,
     "files": 1
   },
   "bottom-sheet-mobile": {
@@ -344,7 +344,7 @@
     "files": 1
   },
   "api-endpoint-card": {
-    "lines": 222,
+    "lines": 235,
     "files": 1
   },
   "code-tabs-panel": {

@@ -1,0 +1,22 @@
+[
+  {
+    "id": "example-wave-stat-band",
+    "name": "Example Stat Band",
+    "category": "Stats",
+    "description": "A worked example of a wave spec. Delete it, or copy it as the starting point for a real one — nothing references it.",
+    "tags": ["example", "stats", "metrics", "wave"],
+    "shape": "stat-band",
+    "deps": [],
+    "content": {
+      "eyebrow": "Reliability",
+      "heading": "Numbers a buyer can check",
+      "intro": "Every figure here is measured rather than claimed, which is the only kind worth putting on a page.",
+      "items": [
+        { "label": "Uptime", "value": "99.98%", "detail": "Rolling 90 days, measured externally." },
+        { "label": "Median response", "value": "84 ms", "detail": "p50 across every region." },
+        { "label": "Open incidents", "value": "0", "detail": "Status page is public." },
+        { "label": "Time to first byte", "value": "112 ms", "detail": "Cold cache, from Frankfurt." }
+      ]
+    }
+  }
+]

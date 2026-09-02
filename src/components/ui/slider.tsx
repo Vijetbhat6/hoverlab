@@ -11,6 +11,10 @@ function Slider({
   value,
   min = 0,
   max = 100,
+  "aria-label": ariaLabel,
+  "aria-labelledby": ariaLabelledBy,
+  "aria-describedby": ariaDescribedBy,
+  "aria-valuetext": ariaValueText,
   ...props
 }: React.ComponentProps<typeof SliderPrimitive.Root>) {
   const _values = React.useMemo(
@@ -53,6 +57,23 @@ function Slider({
         <SliderPrimitive.Thumb
           data-slot="slider-thumb"
           key={index}
+          /*
+           * The name goes on the thumb, not the root.
+           *
+           * Radix renders the root as a <span> and puts role="slider" on the
+           * thumb. So an `aria-label` spread onto the root landed on an
+           * element with no role, and the thumb — the thing a screen reader
+           * actually announces — was left nameless. Every one of the 126
+           * SliderField controls across the designer tools read as a bare
+           * "slider" with a number and no indication of what it adjusted.
+           *
+           * `<label htmlFor>` fails the same way: a <span> is not a labelable
+           * element, so the label never attached to anything.
+           */
+          aria-label={ariaLabel}
+          aria-labelledby={ariaLabelledBy}
+          aria-describedby={ariaDescribedBy}
+          aria-valuetext={ariaValueText}
           className="border-primary bg-background ring-ring/50 block size-4 shrink-0 rounded-full border shadow-sm transition-[color,box-shadow] hover:ring-4 focus-visible:ring-4 focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50"
         />
       ))}

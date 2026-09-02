@@ -190,7 +190,7 @@ export function DocsLayout({
               <span className="h-2.5 w-2.5 rounded-full bg-red-500/80" />
               <span className="h-2.5 w-2.5 rounded-full bg-amber-500/80" />
               <span className="h-2.5 w-2.5 rounded-full bg-emerald-500/80" />
-              <span className="ml-2 font-mono text-xs text-white/40">terminal</span>
+              <span className="ms-2 font-mono text-xs text-white/40">terminal</span>
             </div>
             <pre className="overflow-x-auto p-4 text-xs leading-relaxed">
               <code className="font-mono text-zinc-300">{SNIPPET}</code>
@@ -231,7 +231,7 @@ export function DocsLayout({
             </a>
             <a
               href="#sdks"
-              className="group flex items-center justify-end gap-3 rounded-xl border border-border/60 bg-card/60 p-4 text-right transition-colors hover:border-primary/40"
+              className="group flex items-center justify-end gap-3 rounded-xl border border-border/60 bg-card/60 p-4 text-end transition-colors hover:border-primary/40"
             >
               <span className="min-w-0">
                 <span className="block text-xs text-muted-foreground">Next</span>
@@ -249,13 +249,13 @@ export function DocsLayout({
           <h2 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
             On this page
           </h2>
-          <ul className="mt-3 space-y-1 border-l border-border/60">
+          <ul className="mt-3 space-y-1 border-s border-border/60">
             {TOC.map((item) => (
               <li key={item.href}>
                 <a
                   href={item.href}
                   aria-current={item.active ? 'location' : undefined}
-                  className={`-ml-px block border-l py-1 pl-4 text-sm transition-colors ${
+                  className={`-ms-px block border-s py-1 ps-4 text-sm transition-colors ${
                     item.active
                       ? 'border-primary font-medium text-primary'
                       : 'border-transparent text-muted-foreground hover:text-foreground'

@@ -178,19 +178,19 @@ export function BillingInvoiceDetail({
       </div>
 
       <div className="overflow-x-auto">
-        <table className="w-full min-w-[36rem] border-collapse text-left text-sm">
+        <table className="w-full min-w-[36rem] border-collapse text-start text-sm">
           <thead>
             <tr className="border-b border-border">
               <th scope="col" className="px-5 py-2.5 font-semibold sm:px-6">
                 Description
               </th>
-              <th scope="col" className="px-5 py-2.5 text-right font-semibold">
+              <th scope="col" className="px-5 py-2.5 text-end font-semibold">
                 Qty
               </th>
-              <th scope="col" className="px-5 py-2.5 text-right font-semibold">
+              <th scope="col" className="px-5 py-2.5 text-end font-semibold">
                 Unit
               </th>
-              <th scope="col" className="px-5 py-2.5 text-right font-semibold sm:px-6">
+              <th scope="col" className="px-5 py-2.5 text-end font-semibold sm:px-6">
                 Amount
               </th>
             </tr>
@@ -212,14 +212,14 @@ export function BillingInvoiceDetail({
                     </span>
                   ) : null}
                 </th>
-                <td className="px-5 py-3 text-right tabular-nums text-muted-foreground">
+                <td className="px-5 py-3 text-end tabular-nums text-muted-foreground">
                   {line.quantity}
                 </td>
-                <td className="px-5 py-3 text-right tabular-nums text-muted-foreground">
+                <td className="px-5 py-3 text-end tabular-nums text-muted-foreground">
                   {money(line.unitCents)}
                 </td>
                 <td
-                  className={`px-5 py-3 text-right tabular-nums sm:px-6 ${
+                  className={`px-5 py-3 text-end tabular-nums sm:px-6 ${
                     line.credit ? 'text-emerald-600 dark:text-emerald-400' : ''
                   }`}
                 >
@@ -231,22 +231,22 @@ export function BillingInvoiceDetail({
 
           <tfoot>
             <tr>
-              <th scope="row" colSpan={3} className="px-5 pt-4 text-right font-normal text-muted-foreground sm:px-6">
+              <th scope="row" colSpan={3} className="px-5 pt-4 text-end font-normal text-muted-foreground sm:px-6">
                 Subtotal
               </th>
-              <td className="px-5 pt-4 text-right tabular-nums sm:px-6">{money(subtotal)}</td>
+              <td className="px-5 pt-4 text-end tabular-nums sm:px-6">{money(subtotal)}</td>
             </tr>
             <tr>
-              <th scope="row" colSpan={3} className="px-5 py-1.5 text-right font-normal text-muted-foreground sm:px-6">
+              <th scope="row" colSpan={3} className="px-5 py-1.5 text-end font-normal text-muted-foreground sm:px-6">
                 {taxLabel} at {(taxRate * 100).toFixed(0)}%
               </th>
-              <td className="px-5 py-1.5 text-right tabular-nums sm:px-6">{money(tax)}</td>
+              <td className="px-5 py-1.5 text-end tabular-nums sm:px-6">{money(tax)}</td>
             </tr>
             <tr className="border-t border-border">
-              <th scope="row" colSpan={3} className="px-5 py-3 text-right font-semibold sm:px-6">
+              <th scope="row" colSpan={3} className="px-5 py-3 text-end font-semibold sm:px-6">
                 Total
               </th>
-              <td className="px-5 py-3 text-right text-base font-semibold tabular-nums sm:px-6">
+              <td className="px-5 py-3 text-end text-base font-semibold tabular-nums sm:px-6">
                 {money(total)}
               </td>
             </tr>

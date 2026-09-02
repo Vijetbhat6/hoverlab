@@ -175,7 +175,7 @@ export function NotificationPreferences({
       </header>
 
       <div className="overflow-x-auto">
-        <table className="w-full min-w-[34rem] border-collapse text-left">
+        <table className="w-full min-w-[34rem] border-collapse text-start">
           <caption className="sr-only">
             Notification channels by event type. Each cell is a switch.
           </caption>

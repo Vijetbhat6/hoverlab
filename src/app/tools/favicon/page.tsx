@@ -205,11 +205,11 @@ export default function FaviconToolPage() {
 
           <div>
             <div className="flex items-baseline justify-between">
-              <Label htmlFor="fav-radius">Corner radius</Label>
+              <Label>Corner radius</Label>
               <span className="font-mono text-xs text-muted-foreground">{state.radius}%</span>
             </div>
             <Slider
-              id="fav-radius"
+              aria-label="Corner radius"
               value={[state.radius]}
               onValueChange={(v) => setState((s) => ({ ...s, radius: v[0] ?? 0 }))}
               min={0}

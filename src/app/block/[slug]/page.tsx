@@ -14,18 +14,19 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
-import { ArrowLeft, ArrowRight, CalendarDays, Package, FileCode, Layers } from 'lucide-react'
+import { ArrowLeft, ArrowRight, CalendarDays, Package, FileCode, Layers, History } from 'lucide-react'
 import { CodeBlock } from '@/components/code-block'
 import { JsonLd } from '@/components/json-ld'
 import { BlockPreview } from '@/components/blocks/block-preview'
 import { BlockMarkupPanel } from '@/components/blocks/block-markup-panel'
+import { BlockPropsTable } from '@/components/blocks/block-props-table'
 import { BlockCard } from '@/components/blocks/block-card'
 import { BLOCKS, getBlock, primaryFile } from '@/lib/blocks/blocks'
 import { blockCategorySlug, GROUP_OF } from '@/lib/blocks/block-types'
 import { blocksInCategory, getBlockMeta } from '@/lib/blocks/block-index'
 import { pagesUsingBlock } from '@/lib/pages/page-index'
 import { absoluteUrl } from '@/lib/site'
-import { addedAt, formatAdded } from '@/lib/recency'
+import { addedAt, formatAdded, updatedAt } from '@/lib/recency'
 import { artifactBreadcrumbLd, artifactLd } from '@/lib/structured-data'
 import { AddToCollectionButton } from '@/components/collections/add-to-collection'
 import {
@@ -37,6 +38,7 @@ import {
 } from '@/components/artifact-actions'
 import { ArtifactFacts } from '@/components/artifact-facts'
 import { OpenArtifactInSandbox } from '@/components/open-artifact-in-sandbox'
+import { ResponsivePreview } from '@/components/responsive-preview'
 import { CopyFrameForFigma } from '@/components/copy-frame-for-figma'
 import { StickyInstallBar } from '@/components/sticky-install-bar'
 
@@ -103,6 +105,8 @@ export default async function BlockDetailPage({ params }: PageProps) {
   const usedIn = pagesUsingBlock(block.id)
 
   const added = addedAt('block', block.id)
+  // Undefined unless it genuinely changed after landing — see updatedAt().
+  const updated = updatedAt('block', block.id)
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -231,6 +235,18 @@ export default async function BlockDetailPage({ params }: PageProps) {
                 Added {formatAdded(added)}
               </span>
             ) : null}
+            {/*
+              The maintenance signal, and the reason the update ledger
+              exists: Pro sells a twelve-month update window and until this
+              line the catalog could not show that anything had ever been
+              updated. Rendered only where the change history is precise.
+            */}
+            {updated ? (
+              <span className="inline-flex items-center gap-1.5 font-medium text-foreground">
+                <History aria-hidden className="h-4 w-4" />
+                Updated {formatAdded(updated)}
+              </span>
+            ) : null}
           </div>
 
           {block.tags.length > 0 ? (
@@ -273,9 +289,17 @@ export default async function BlockDetailPage({ params }: PageProps) {
           {/* The id is the handle <CopyFrameForFigma> traces. It has to sit
               on the element whose box is the artboard, so it wraps the
               preview rather than living inside it. */}
-          <div id={FRAME_ID}>
-            <BlockPreview componentKey={block.previewComponent} />
-          </div>
+          {/*
+              The width switcher wraps the inline preview rather than
+              replacing it: full width stays the same server-rendered
+              markup a crawler reads and the screenshot script captures,
+              and a frame is created only if someone asks for one.
+          */}
+          <ResponsivePreview level="block" id={block.id} name={block.name}>
+            <div id={FRAME_ID}>
+              <BlockPreview componentKey={block.previewComponent} />
+            </div>
+          </ResponsivePreview>
           <p className="mt-3 text-xs text-muted-foreground">
             Rendered live in your current theme — this is the same component
             whose source is below, not a screenshot of it.
@@ -299,7 +323,18 @@ export default async function BlockDetailPage({ params }: PageProps) {
               maxHeightClass="max-h-[560px]"
             />
 
-            <div className="mt-6 grid gap-4 sm:grid-cols-2">
+            {/*
+              `min-w-0` on the children, not just the grid.
+
+              A grid item defaults to `min-width: auto`, which is its
+              content's min-content width. The "Where it goes" card holds a
+              one-line `import { … } from '@/components/blocks/…'` that does
+              not wrap, so the track grew to fit it and the whole page
+              scrolled sideways by 51px at 390px wide — and the `pre`'s own
+              `overflow-x-auto` could not help, because the `pre` was being
+              handed the widened track rather than constraining it.
+            */}
+            <div className="mt-6 grid gap-4 sm:grid-cols-2 [&>*]:min-w-0">
               <div className="rounded-xl border border-border/60 bg-card/60 p-4">
                 <h3 className="text-sm font-semibold">Before you paste</h3>
                 <ul className="mt-2 space-y-1.5 text-sm text-muted-foreground">
@@ -334,6 +369,11 @@ export default async function BlockDetailPage({ params }: PageProps) {
             </div>
           </section>
         ) : null}
+
+        {/* Before the non-React markup, because "what can I change"
+            is a question the React reader has and the markup reader
+            does not. */}
+        <BlockPropsTable block={block} />
 
         <BlockMarkupPanel block={block} />
 

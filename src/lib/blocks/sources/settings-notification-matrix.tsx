@@ -143,10 +143,10 @@ export function SettingsNotificationMatrix({
         </p>
 
         <div className="mt-6 overflow-x-auto">
-          <table className="w-full min-w-[34rem] border-collapse text-left text-sm">
+          <table className="w-full min-w-[34rem] border-collapse text-start text-sm">
             <thead>
               <tr className="border-b border-border">
-                <th scope="col" className="py-2.5 pr-4 font-semibold">
+                <th scope="col" className="py-2.5 pe-4 font-semibold">
                   Event
                 </th>
                 {CHANNELS.map(({ id, label, Icon }) => {
@@ -176,7 +176,7 @@ export function SettingsNotificationMatrix({
             <tbody>
               {state.map((event) => (
                 <tr key={event.id} className="border-b border-border/60 last:border-0">
-                  <th scope="row" className="max-w-xs py-3.5 pr-4 font-medium">
+                  <th scope="row" className="max-w-xs py-3.5 pe-4 font-medium">
                     {event.label}
                     <span className="mt-0.5 block text-xs font-normal text-muted-foreground">
                       {event.description}

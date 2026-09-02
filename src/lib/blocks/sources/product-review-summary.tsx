@@ -47,7 +47,7 @@ export function ProductReviewSummary({
     >
       <div className="grid gap-6 sm:grid-cols-[auto_1fr] sm:gap-10">
         {/* Headline */}
-        <div className="text-center sm:text-left">
+        <div className="text-center sm:text-start">
           <p className="text-4xl font-extrabold tracking-tight">
             {average.toFixed(1)}
             <span className="text-lg font-medium text-muted-foreground">/5</span>
@@ -99,7 +99,7 @@ export function ProductReviewSummary({
                   />
                 </span>
 
-                <span className="w-10 shrink-0 text-right tabular-nums text-muted-foreground">
+                <span className="w-10 shrink-0 text-end tabular-nums text-muted-foreground">
                   {count}
                 </span>
               </a>

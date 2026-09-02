@@ -115,7 +115,7 @@ export function RetrievalEmptyState({
               >
                 <Icon aria-hidden className="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
                 <span className="truncate font-medium">{scope.label}</span>
-                <span className="ml-auto shrink-0 text-muted-foreground">{scope.detail}</span>
+                <span className="ms-auto shrink-0 text-muted-foreground">{scope.detail}</span>
                 <span className="shrink-0 text-muted-foreground">· 0 matches</span>
               </li>
             )
@@ -134,10 +134,10 @@ export function RetrievalEmptyState({
               <li key={miss.id}>
                 <button
                   type="button"
-                  className="flex w-full items-center gap-2.5 rounded-xl px-3 py-2 text-left text-xs transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  className="flex w-full items-center gap-2.5 rounded-xl px-3 py-2 text-start text-xs transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 >
                   <span className="truncate">{miss.title}</span>
-                  <span className="ml-auto shrink-0 font-mono text-[11px] tabular-nums text-muted-foreground">
+                  <span className="ms-auto shrink-0 font-mono text-[11px] tabular-nums text-muted-foreground">
                     {miss.score.toFixed(2)}
                     <span className="sr-only"> similarity, below the 0.45 cutoff</span>
                   </span>

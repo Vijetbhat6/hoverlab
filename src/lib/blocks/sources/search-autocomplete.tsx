@@ -197,7 +197,7 @@ export function SearchAutocomplete({
           onFocus={() => setOpen(true)}
           onKeyDown={onKeyDown}
           placeholder="Search customers and documents"
-          className="h-11 w-full rounded-xl border border-field bg-background pl-9 pr-9 text-sm text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+          className="h-11 w-full rounded-xl border border-field bg-background ps-9 pe-9 text-sm text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
         />
         {query ? (
           <button
@@ -237,7 +237,7 @@ export function SearchAutocomplete({
                         event.preventDefault()
                         setQuery(h)
                       }}
-                      className="min-w-0 flex-1 truncate text-left text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                      className="min-w-0 flex-1 truncate text-start text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                     >
                       {h}
                     </button>

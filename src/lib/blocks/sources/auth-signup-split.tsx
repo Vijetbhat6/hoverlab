@@ -175,7 +175,7 @@ export function AuthSignupSplit({
       {/* ---------------------------------------------------------- *
        *  Proof panel — dropped below lg rather than stacked
        * ---------------------------------------------------------- */}
-      <div className="relative hidden items-center justify-center overflow-hidden border-l border-border/60 bg-gradient-to-br from-primary/10 via-card to-emerald-500/5 p-10 lg:flex">
+      <div className="relative hidden items-center justify-center overflow-hidden border-s border-border/60 bg-gradient-to-br from-primary/10 via-card to-emerald-500/5 p-10 lg:flex">
         <div
           aria-hidden
           className="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full bg-primary/20 blur-3xl"

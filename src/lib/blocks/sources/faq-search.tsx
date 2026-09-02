@@ -170,7 +170,7 @@ export function FaqSearch({
             value={query}
             onChange={(event) => setQuery(event.target.value)}
             placeholder={placeholder}
-            className="h-12 w-full rounded-xl border border-field bg-background pl-12 pr-4 text-base text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            className="h-12 w-full rounded-xl border border-field bg-background ps-12 pe-4 text-base text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           />
         </div>
 
@@ -186,14 +186,14 @@ export function FaqSearch({
         <div className="mt-4 divide-y divide-border/60 border-y border-border/60">
           {results.map((item) => (
             <details key={item.question} className="group py-1">
-              <summary className="flex cursor-pointer list-none items-start justify-between gap-6 py-4 text-left font-medium text-foreground marker:content-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background">
+              <summary className="flex cursor-pointer list-none items-start justify-between gap-6 py-4 text-start font-medium text-foreground marker:content-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background">
                 {item.question}
                 <Plus
                   aria-hidden
                   className="mt-0.5 h-5 w-5 shrink-0 text-muted-foreground transition-transform duration-200 group-open:rotate-45"
                 />
               </summary>
-              <p className="max-w-prose text-pretty pb-5 pr-10 leading-relaxed text-muted-foreground">
+              <p className="max-w-prose text-pretty pb-5 pe-10 leading-relaxed text-muted-foreground">
                 {item.answer}
               </p>
             </details>

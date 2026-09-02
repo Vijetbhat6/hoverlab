@@ -88,7 +88,7 @@ export function CodeTabsPanel({
           role="tablist"
           aria-label="Package manager"
           onKeyDown={onKeyDown}
-          className="ml-auto flex gap-1"
+          className="ms-auto flex gap-1"
         >
           {tabs.map((t, i) => (
             <button
@@ -121,7 +121,7 @@ export function CodeTabsPanel({
         aria-labelledby={`${baseId}-tab-${active}`}
         className="relative"
       >
-        <pre className="overflow-x-auto p-4 pr-14 text-sm leading-relaxed">
+        <pre className="overflow-x-auto p-4 pe-14 text-sm leading-relaxed">
           <code
             className="font-mono text-zinc-300"
             data-language={tab.language ?? 'bash'}

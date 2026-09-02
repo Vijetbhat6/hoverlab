@@ -696,6 +696,7 @@ function LayerCard({ layer, mode, index, total, onChange, onRemove, onMove }: La
             onChange({ color: n ?? e.target.value })
           }}
           className="h-8 flex-1 font-mono text-xs"
+          aria-label="Shadow colour, as a hex value"
         />
         {mode === 'box' ? (
           <div className="flex items-center gap-1.5">
@@ -739,10 +740,20 @@ interface NumberSliderProps {
 }
 
 function NumberSlider({ label, value, min, max, step, unit, onChange }: NumberSliderProps) {
+  /*
+   * Both controls here were nameless. The <Label> had no `htmlFor` and
+   * wrapped neither of them, so the number box announced as "spin button"
+   * and the slider as a bare number — on a tool whose whole surface is
+   * eight of these stacked, which left nothing to tell them apart.
+   */
+  const labelId = React.useId()
+
   return (
     <div>
       <div className="mb-1 flex items-center justify-between">
-        <Label className="text-xs text-muted-foreground">{label}</Label>
+        <Label id={labelId} className="text-xs text-muted-foreground">
+          {label}
+        </Label>
         <div className="flex items-center gap-1">
           <input
             type="number"
@@ -750,6 +761,7 @@ function NumberSlider({ label, value, min, max, step, unit, onChange }: NumberSl
             min={min}
             max={max}
             step={step}
+            aria-labelledby={labelId}
             onChange={(e) => {
               const v = parseFloat(e.target.value)
               if (!Number.isNaN(v)) onChange(v)
@@ -764,6 +776,7 @@ function NumberSlider({ label, value, min, max, step, unit, onChange }: NumberSl
         min={min}
         max={max}
         step={step}
+        aria-labelledby={labelId}
         onValueChange={(arr) => onChange(arr[0])}
       />
     </div>

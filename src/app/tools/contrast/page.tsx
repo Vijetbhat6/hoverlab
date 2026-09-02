@@ -459,6 +459,7 @@ function ColorRow({
             onChange(n ?? e.target.value)
           }}
           className="font-mono"
+          aria-label={`${label}, as a hex value`}
         />
       </div>
     </div>

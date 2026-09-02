@@ -318,7 +318,7 @@ export function DataTableBulkActions({
         ) : null}
 
         <div className="overflow-x-auto">
-          <table className="w-full text-left text-sm">
+          <table className="w-full text-start text-sm">
             <caption className="sr-only">
               Members matching the current filter. Selecting every row on this page
               offers to extend the selection to all matching rows.
@@ -342,7 +342,7 @@ export function DataTableBulkActions({
                 </th>
                 <th scope="col" className="px-2 py-2 font-medium">Member</th>
                 <th scope="col" className="px-2 py-2 font-medium">Plan</th>
-                <th scope="col" className="px-5 py-2 text-right font-medium">Last seen</th>
+                <th scope="col" className="px-5 py-2 text-end font-medium">Last seen</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-border">
@@ -378,7 +378,7 @@ export function DataTableBulkActions({
                         {row.plan}
                       </span>
                     </td>
-                    <td className="px-5 py-3 text-right text-xs text-muted-foreground">
+                    <td className="px-5 py-3 text-end text-xs text-muted-foreground">
                       {row.lastSeen}
                     </td>
                   </tr>

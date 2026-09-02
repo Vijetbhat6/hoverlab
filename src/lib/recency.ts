@@ -33,9 +33,46 @@ const BY_LEVEL: Record<ArtifactLevel, Ledger> = {
   template: LEDGER.templates as Ledger,
 }
 
+const UPDATED_BY_LEVEL: Record<ArtifactLevel, Ledger> = {
+  effect: LEDGER.updated.effects as Ledger,
+  block: LEDGER.updated.blocks as Ledger,
+  page: LEDGER.updated.pages as Ledger,
+  template: LEDGER.updated.templates as Ledger,
+}
+
 /** ISO date (YYYY-MM-DD) this artifact first appeared, or undefined. */
 export function addedAt(level: ArtifactLevel, id: string): string | undefined {
   return BY_LEVEL[level][id]
+}
+
+/**
+ * ISO date this artifact last changed, or undefined.
+ *
+ * Undefined has two meanings that the caller does not need to separate:
+ * the artifact has never been touched since it landed, and the artifact is
+ * one whose change history cannot be read precisely (the hand-written
+ * effects share a file — see the ledger builder). Both cases render the
+ * same way, which is: nothing. An "updated" date is a maintenance claim,
+ * and a guessed one is worse than none.
+ */
+export function updatedAt(level: ArtifactLevel, id: string): string | undefined {
+  const updated = UPDATED_BY_LEVEL[level][id]
+  if (!updated) return undefined
+
+  // A change recorded on the day it was added is not an update, it is the
+  // artifact arriving over more than one commit. Showing "Added 3 Aug ·
+  // Updated 3 Aug" reads as a bug, and it is not what a buyer is asking.
+  const added = BY_LEVEL[level][id]
+  return added && updated <= added ? undefined : updated
+}
+
+/** Ids of one rung that have changed since they landed, newest first. */
+export function recentlyUpdated(level: ArtifactLevel, limit = 12): string[] {
+  return Object.entries(UPDATED_BY_LEVEL[level])
+    .filter(([id]) => updatedAt(level, id) !== undefined)
+    .sort(([, a], [, b]) => b.localeCompare(a))
+    .slice(0, limit)
+    .map(([id]) => id)
 }
 
 /** The newest date anywhere in the catalog — "last updated", site-wide. */

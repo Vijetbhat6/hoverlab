@@ -95,7 +95,7 @@ export function PermissionDeniedState({
 
       {/* The identifier only. See the note above: a 403 that describes what
           it is protecting has already leaked it. */}
-      <dl className="mt-6 w-full rounded-xl border border-border bg-card px-4 py-3 text-left text-sm">
+      <dl className="mt-6 w-full rounded-xl border border-border bg-card px-4 py-3 text-start text-sm">
         <div className="flex items-baseline justify-between gap-4 py-1">
           <dt className="text-muted-foreground">Resource</dt>
           <dd className="truncate font-mono text-xs text-foreground">{resourceLabel}</dd>
@@ -106,7 +106,7 @@ export function PermissionDeniedState({
         </div>
       </dl>
 
-      <div className="mt-6 w-full rounded-xl border border-border bg-card p-4 text-left">
+      <div className="mt-6 w-full rounded-xl border border-border bg-card p-4 text-start">
         <h2 className="text-sm font-semibold text-foreground">Who can let you in</h2>
         <ul className="mt-3 space-y-3">
           {owners.map((owner) => (

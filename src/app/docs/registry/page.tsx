@@ -14,9 +14,24 @@ import { BLOCK_COUNT } from '@/lib/blocks/block-index'
 import { PAGE_COUNT } from '@/lib/pages/page-index'
 import { TOTAL_COUNT } from '@/lib/catalog-stats'
 import { PATHS } from '@/lib/paths/catalog'
+import { DESIGN_PRESETS } from '@/lib/registry/presets'
 
 /** Guided paths, published as packs. Derived, never typed out. */
 const PATH_COUNT = PATHS.length
+
+/**
+ * Everything `/registry.json` publishes, counted the way
+ * `registryItemNames()` counts it: the base, then the packs, then the three
+ * catalogs.
+ *
+ * Derived rather than imported from the registry module, which is
+ * `server-only` and carries every artifact's source with it — a docs page
+ * has no business pulling 1.6 MB of catalog in to print one number. Adding
+ * a fifth kind of item means adding it here too, and the arithmetic is
+ * stated so that is obvious.
+ */
+const REGISTRY_ITEM_COUNT =
+  1 + DESIGN_PRESETS.length + PATH_COUNT + BLOCK_COUNT + PAGE_COUNT + TOTAL_COUNT
 
 /*
  * The path the prose uses as its example, and its real size.
@@ -92,6 +107,40 @@ export default function RegistryDocsPage() {
         </p>
       </DocsSection>
 
+      <DocsSection id="presets" title="Or install a whole design system">
+        <p>
+          <C>@hoverlab/hoverlab</C> gives you this site&rsquo;s own look. If you
+          want a different one, there are {DESIGN_PRESETS.length} named presets
+          — each a complete token set covering colour, corner radius, spacing
+          density and the type ramp, in one install.
+        </p>
+        <Snippet label="terminal">{`npx shadcn add @hoverlab/preset-console`}</Snippet>
+        <DocsTable
+          head={['Preset', 'What it reads as', 'Suits']}
+          rows={DESIGN_PRESETS.map((preset) => [
+            <C key={preset.name}>{preset.name}</C>,
+            preset.note,
+            preset.suits,
+          ])}
+        />
+        <p>
+          These are <C>registry:base</C> items — the same document a shadcn
+          preset code resolves to, published at a URL you can install by name.
+          They are not preset <em>codes</em>: those are minted by{' '}
+          <C>ui.shadcn.com/create</C> and only shadcn can issue one, so{' '}
+          <C>shadcn apply --preset</C> will not take these. The payload and the
+          effect on your project are the same.
+        </p>
+        <Callout>
+          Install one <em>before</em> your blocks, and only one. Each preset
+          replaces the same variables, so a second install overwrites the first
+          rather than merging with it. To adjust one instead of adopting it
+          whole, open{' '}
+          <Link href="/tools/shadcn">the theme generator</Link> — it emits the
+          same kind of item from your own values.
+        </Callout>
+      </DocsSection>
+
       <DocsSection id="install" title="Install a block or a page">
         <p>
           Items are addressed by the same id the catalog uses, so anything you
@@ -131,6 +180,14 @@ npx shadcn add @hoverlab/saas-landing-page`}</Snippet>
               String(PATH_COUNT),
               <>
                 every block in a guided path — no file of its own
+              </>,
+            ],
+            [
+              <C key="pr">preset-{'{name}'}</C>,
+              String(DESIGN_PRESETS.length),
+              <>
+                a whole design system — <C>@theme</C>, <C>:root</C> and{' '}
+                <C>.dark</C>
               </>,
             ],
             [
@@ -197,6 +254,34 @@ npx shadcn add @hoverlab/saas-landing-page`}</Snippet>
           through <Link href="/docs/api">the public API</Link> and{' '}
           <Link href="/docs/cli">npx hoverlab</Link>.
         </p>
+      </DocsSection>
+
+      <DocsSection id="search" title="Search runs on our side">
+        <p>
+          <C>shadcn search</C> normally downloads a registry&rsquo;s whole
+          index and filters it in the CLI. At{' '}
+          {REGISTRY_ITEM_COUNT.toLocaleString()} items
+          that is a few hundred kilobytes to show six rows, so this registry
+          implements shadcn&rsquo;s dynamic search instead: the same{' '}
+          <C>/registry.json</C> URL takes <C>q</C>, <C>type</C>, <C>limit</C>{' '}
+          and <C>offset</C>, matches on our side, and returns the page plus a{' '}
+          <C>pagination</C> object.
+        </p>
+        <Snippet label="terminal">{`npx shadcn search @hoverlab -q "pricing"`}</Snippet>
+        <p>
+          Nothing to configure — the CLI appends those parameters on its own
+          and uses the results as they come back. You can call it directly
+          too:
+        </p>
+        <Snippet label="terminal">{`curl '${origin}/registry.json?q=hero&type=registry:block&limit=5'`}</Snippet>
+        <Callout>
+          A request with none of those four parameters still returns the
+          complete index, unchanged and unpaged. Indexers and the shadcn MCP
+          server enumerate the catalog that way, and a page size quietly
+          applied to them would make{' '}
+          {REGISTRY_ITEM_COUNT.toLocaleString()} items
+          look like fifty.
+        </Callout>
       </DocsSection>
 
       <DocsSection id="effects" title="Installing an effect">

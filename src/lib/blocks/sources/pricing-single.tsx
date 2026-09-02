@@ -83,7 +83,7 @@ export function PricingSingle({
       <div className="overflow-hidden rounded-3xl border border-border/60 bg-card/60">
         <div className="grid sm:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
           {/* Price side. */}
-          <div className="border-b border-border/60 p-8 sm:border-b-0 sm:border-r">
+          <div className="border-b border-border/60 p-8 sm:border-b-0 sm:border-e">
             <p className="text-sm font-semibold uppercase tracking-wide text-primary">
               {planName}
             </p>
@@ -97,7 +97,7 @@ export function PricingSingle({
               <p className="mt-2 text-sm text-muted-foreground">
                 <s>{compareAtPrice}</s>
                 {savingLabel ? (
-                  <span className="ml-2 font-medium text-emerald-600 dark:text-emerald-400">
+                  <span className="ms-2 font-medium text-emerald-600 dark:text-emerald-400">
                     {savingLabel}
                   </span>
                 ) : null}

@@ -57,21 +57,29 @@ export function SliderField({
 }: SliderFieldProps) {
   const id = React.useId()
   const descriptionId = `${id}-description`
+  const labelId = `${id}-label`
 
   return (
     <div className={cn('space-y-1.5', className)}>
       <div className="flex items-baseline justify-between gap-3">
-        <label htmlFor={id} className="text-xs font-semibold text-foreground">
+        {/*
+          A <span>, not a <label htmlFor>. Radix renders the slider root as a
+          <span> and a <span> is not a labelable element, so the `for` never
+          bound to anything and the control was left nameless. The visible
+          text is wired to the thumb with `aria-labelledby` instead, which
+          keeps one source of truth for the name rather than duplicating it
+          into an `aria-label` that can drift from what is on screen.
+        */}
+        <span id={labelId} className="text-xs font-semibold text-foreground">
           {label}
-        </label>
+        </span>
         <span className="font-mono text-xs tabular-nums text-muted-foreground">
           {display}
         </span>
       </div>
 
       <Slider
-        id={id}
-        aria-label={label}
+        aria-labelledby={labelId}
         aria-describedby={descriptionId}
         value={[value]}
         min={min}

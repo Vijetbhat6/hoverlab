@@ -33,6 +33,7 @@
  */
 
 import { execFileSync } from 'node:child_process'
+import { createHash } from 'node:crypto'
 import { existsSync, readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { EFFECTS } from '../src/lib/effects.ts'
@@ -56,6 +57,32 @@ interface RecencyFile {
   blocks: Ledger
   pages: Ledger
   templates: Ledger
+  /**
+   * When each artifact last *changed*, for the artifacts where that can be
+   * determined precisely.
+   *
+   * WHY THIS EXISTS. Pro sells a twelve-month update window — see
+   * `updateWindowMonths` in `lib/billing/plans.ts` — and until this key the
+   * catalog could not show that anything had ever been updated. Every date
+   * on the site was a first-appearance date, so a buyer asking "is this
+   * maintained" saw additions and nothing else, and a fix to a shipped
+   * block was invisible to the people who had installed it.
+   *
+   * DELIBERATELY INCOMPLETE. An id appears here only when its change
+   * history can be read exactly: one file per artifact for blocks, pages
+   * and templates, and a per-record hash for the generated effects. The
+   * hand-written effects in `effects-handcrafted.ts` share one file, so a
+   * commit touching it says nothing about which effect changed — those get
+   * no entry rather than a date that would be wrong for most of them. The
+   * site renders nothing where there is no entry, which is the same rule
+   * `addedAt` already follows.
+   */
+  updated: {
+    effects: Ledger
+    blocks: Ledger
+    pages: Ledger
+    templates: Ledger
+  }
 }
 
 const TODAY = new Date().toISOString().slice(0, 10)
@@ -93,6 +120,12 @@ function addedDate(path: string): string | null {
   return lines.length ? lines[lines.length - 1].slice(0, 10) : null
 }
 
+/** The date `path` was last touched, or null if git has never seen it. */
+function updatedDate(path: string): string | null {
+  const iso = git(['log', '-1', '--format=%cI', '--', path]).trim()
+  return iso ? iso.slice(0, 10) : null
+}
+
 /**
  * Walk one file's history and record the first revision each id appears in.
  *
@@ -109,6 +142,48 @@ function walkIds(
     if (!source) continue
     for (const id of extract(source)) {
       if (!(id in into)) into[id] = date
+    }
+  }
+}
+
+/**
+ * The same walk, but recording when each record's *content* last changed.
+ *
+ * A commit that touches `generated-effects.json` touches one file holding
+ * nine hundred effects, so the file's own last-modified date is worthless
+ * per id — it would mark every effect in the catalog as updated on the day
+ * any one of them moved. Hashing each record per revision is what makes the
+ * claim precise enough to publish.
+ *
+ * The first revision an id appears in is its addition, not an update, so
+ * the first hash seen is recorded without a date and only subsequent
+ * changes count.
+ */
+function walkRecordChanges(path: string, into: Ledger): void {
+  const lastHash = new Map<string, string>()
+
+  for (const [sha, date] of commitsFor(path)) {
+    const source = git(['show', `${sha}:${path}`])
+    if (!source) continue
+
+    let parsed: unknown
+    try {
+      parsed = JSON.parse(source)
+    } catch {
+      continue
+    }
+    if (!Array.isArray(parsed)) continue
+
+    for (const row of parsed) {
+      const id = (row as { id?: unknown }).id
+      if (typeof id !== 'string') continue
+
+      const hash = createHash('sha1').update(JSON.stringify(row)).digest('hex')
+      const previousHash = lastHash.get(id)
+      lastHash.set(id, hash)
+
+      // First sighting is the add; only a later change is an update.
+      if (previousHash !== undefined && previousHash !== hash) into[id] = date
     }
   }
 }
@@ -135,12 +210,34 @@ function idsFromTs(source: string): string[] {
 
 const previous: RecencyFile = existsSync(OUT)
   ? (JSON.parse(readFileSync(OUT, 'utf8')) as RecencyFile)
-  : { generatedAt: TODAY, effects: {}, blocks: {}, pages: {}, templates: {} }
+  : {
+      generatedAt: TODAY,
+      effects: {},
+      blocks: {},
+      pages: {},
+      templates: {},
+      updated: { effects: {}, blocks: {}, pages: {}, templates: {} },
+    }
 
 const effects: Ledger = { ...previous.effects }
 const blocks: Ledger = { ...previous.blocks }
 const pages: Ledger = { ...previous.pages }
 const templates: Ledger = { ...previous.templates }
+
+/*
+ * The update ledgers are rebuilt rather than carried forward.
+ *
+ * `added` is seeded from the previous file because a first-appearance date
+ * is a fact that cannot change and a shallow clone might not be able to see
+ * it. An update date is the opposite: it moves every time the artifact
+ * moves, so a stale carried-over value would be a claim that the artifact
+ * has not been touched since — exactly the wrong thing to be confidently
+ * wrong about.
+ */
+const updatedEffects: Ledger = {}
+const updatedBlocks: Ledger = {}
+const updatedPages: Ledger = {}
+const updatedTemplates: Ledger = {}
 
 /* ------------------------------------------------------------------ *
  *  Effects — from the two files that define them.
@@ -148,6 +245,11 @@ const templates: Ledger = { ...previous.templates }
 
 walkIds('src/lib/generated-effects.json', idsFromJson, effects)
 walkIds('src/lib/effects-handcrafted.ts', idsFromTs, effects)
+
+// Per-record hashing, for the generated half only — see walkRecordChanges
+// and the `updated` docs on RecencyFile for why the handcrafted file is
+// deliberately left out.
+walkRecordChanges('src/lib/generated-effects.json', updatedEffects)
 
 /* ------------------------------------------------------------------ *
  *  Blocks, pages, templates — one file (or directory) per artifact.
@@ -159,16 +261,31 @@ for (const block of BLOCK_CATALOG) {
   blocks[block.id] = date ?? TODAY
 }
 
+for (const block of BLOCK_CATALOG) {
+  const touched = updatedDate(`src/lib/blocks/sources/${block.id}.tsx`)
+  if (touched && touched !== blocks[block.id]) updatedBlocks[block.id] = touched
+}
+
 for (const page of PAGE_CATALOG) {
   if (pages[page.id]) continue
   const date = addedDate(`src/lib/pages/sources/${page.id}.tsx`)
   pages[page.id] = date ?? TODAY
 }
 
+for (const page of PAGE_CATALOG) {
+  const touched = updatedDate(`src/lib/pages/sources/${page.id}.tsx`)
+  if (touched && touched !== pages[page.id]) updatedPages[page.id] = touched
+}
+
 for (const template of TEMPLATE_CATALOG) {
   if (templates[template.id]) continue
   const date = addedDate(`src/lib/templates/files/${template.id}`)
   templates[template.id] = date ?? TODAY
+}
+
+for (const template of TEMPLATE_CATALOG) {
+  const touched = updatedDate(`src/lib/templates/files/${template.id}`)
+  if (touched && touched !== templates[template.id]) updatedTemplates[template.id] = touched
 }
 
 /* ------------------------------------------------------------------ *
@@ -198,6 +315,12 @@ const out: RecencyFile = {
   blocks: prune(blocks, BLOCK_CATALOG.map((b) => b.id)),
   pages: prune(pages, PAGE_CATALOG.map((p) => p.id)),
   templates: prune(templates, TEMPLATE_CATALOG.map((t) => t.id)),
+  updated: {
+    effects: prune(updatedEffects, EFFECTS.map((e) => e.id)),
+    blocks: prune(updatedBlocks, BLOCK_CATALOG.map((b) => b.id)),
+    pages: prune(updatedPages, PAGE_CATALOG.map((p) => p.id)),
+    templates: prune(updatedTemplates, TEMPLATE_CATALOG.map((t) => t.id)),
+  },
 }
 
 writeFileSync(OUT, `${JSON.stringify(out, null, 2)}\n`, 'utf8')
@@ -209,6 +332,12 @@ console.log(
     `${Object.keys(out.templates).length} templates`,
 )
 console.log(`  ${dates.size} distinct effect dates; ${stamped} stamped today (uncommitted)`)
+console.log(
+  `  updated: ${Object.keys(out.updated.effects).length} effects, ` +
+    `${Object.keys(out.updated.blocks).length} blocks, ` +
+    `${Object.keys(out.updated.pages).length} pages, ` +
+    `${Object.keys(out.updated.templates).length} templates`,
+)
 
 /** Drop every entry whose id is not in the live catalog. */
 function prune(ledger: Ledger, live: string[]): Ledger {

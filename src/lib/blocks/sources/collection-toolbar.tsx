@@ -77,7 +77,7 @@ export function CollectionToolbar({
         Filters
       </button>
 
-      <div className="ml-auto flex items-center gap-3">
+      <div className="ms-auto flex items-center gap-3">
         <div className="flex items-center gap-2">
           <label htmlFor={`${uid}-collection-sort`} className="text-sm text-muted-foreground">
             Sort

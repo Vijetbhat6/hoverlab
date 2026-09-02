@@ -160,7 +160,7 @@ export function KeyboardShortcutsSheet({
         <h2 id="shortcuts-title" className="text-sm font-semibold tracking-tight">
           Keyboard shortcuts
         </h2>
-        <div className="relative ml-auto">
+        <div className="relative ms-auto">
           <Search
             aria-hidden
             className="pointer-events-none absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground"
@@ -171,7 +171,7 @@ export function KeyboardShortcutsSheet({
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Filter"
             aria-label="Filter shortcuts"
-            className="h-8 w-36 rounded-lg border border-border bg-background pl-8 pr-2 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring sm:w-48"
+            className="h-8 w-36 rounded-lg border border-border bg-background ps-8 pe-2 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring sm:w-48"
           />
         </div>
         <button

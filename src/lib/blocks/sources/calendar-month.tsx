@@ -86,7 +86,7 @@ export function CalendarMonth({ events = DEFAULT_EVENTS, className = '' }: Calen
       <div className="mb-4 flex flex-wrap items-center gap-3">
         <h2 className="text-lg font-bold tracking-tight">August 2026</h2>
 
-        <ul className="flex items-center gap-3 text-xs text-muted-foreground sm:ml-4">
+        <ul className="flex items-center gap-3 text-xs text-muted-foreground sm:ms-4">
           {(Object.keys(CAL_STYLE) as CalendarId[]).map((id) => (
             <li key={id} className="flex items-center gap-1.5">
               <span aria-hidden className={`h-2 w-2 rounded-full ${CAL_STYLE[id].dot}`} />
@@ -95,7 +95,7 @@ export function CalendarMonth({ events = DEFAULT_EVENTS, className = '' }: Calen
           ))}
         </ul>
 
-        <div className="ml-auto flex items-center gap-1">
+        <div className="ms-auto flex items-center gap-1">
           <button
             type="button"
             aria-label="Previous month"
@@ -112,7 +112,7 @@ export function CalendarMonth({ events = DEFAULT_EVENTS, className = '' }: Calen
           </button>
           <button
             type="button"
-            className="ml-1 rounded-lg border border-border/60 px-3 py-1.5 text-sm font-medium transition-colors hover:bg-muted"
+            className="ms-1 rounded-lg border border-border/60 px-3 py-1.5 text-sm font-medium transition-colors hover:bg-muted"
           >
             Today
           </button>
@@ -150,7 +150,7 @@ export function CalendarMonth({ events = DEFAULT_EVENTS, className = '' }: Calen
                       dayEvents.length ? `, ${dayEvents.length} event${dayEvents.length > 1 ? 's' : ''}` : ''
                     }`}
                     aria-current={isToday ? 'date' : undefined}
-                    className="flex min-h-[5.25rem] w-full flex-col items-stretch gap-1 p-1.5 text-left transition-colors hover:bg-muted/50"
+                    className="flex min-h-[5.25rem] w-full flex-col items-stretch gap-1 p-1.5 text-start transition-colors hover:bg-muted/50"
                   >
                     <span
                       className={`inline-flex h-6 w-6 items-center justify-center self-start rounded-full text-xs ${

@@ -152,7 +152,7 @@ export function ActivityTimeline({
               {group.label}
             </h3>
 
-            <ul className="relative ml-3.5 space-y-4 border-l border-border/60 pl-6">
+            <ul className="relative ms-3.5 space-y-4 border-s border-border/60 ps-6">
               {group.events.map((event) => {
                 const style = KIND_STYLE[event.kind]
                 return (

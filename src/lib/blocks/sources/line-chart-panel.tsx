@@ -150,7 +150,7 @@ export function LineChartPanel({
           {/* Axis labels live outside the SVG so they render at real text
               size — text inside a non-uniformly scaled viewBox is stretched
               with it, which is the classic way this pattern goes wrong. */}
-          <ul className="flex w-14 shrink-0 flex-col justify-between py-0.5 text-right font-mono text-xs text-muted-foreground">
+          <ul className="flex w-14 shrink-0 flex-col justify-between py-0.5 text-end font-mono text-xs text-muted-foreground">
             {ticks.map((tick) => (
               <li key={tick}>{format(Math.round(tick))}</li>
             ))}

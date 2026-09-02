@@ -28,6 +28,8 @@
 //   7. Every guided path publishes as an installable pack: unique slug,
 //      every step a real block, and no artifact squatting the `path-`
 //      prefix those packs are addressed by.
+//   8. Every design preset resolves to a complete token set, and the
+//      `preset-` names it is addressed by are not squatted by an artifact.
 //
 // Deliberately NOT imported from `src/lib/registry/registry.ts` — that module
 // is `server-only`, which throws outside a React Server Component. The rules
@@ -44,6 +46,7 @@ import { BLOCK_CATALOG } from '../src/lib/blocks/catalog.ts'
 import { PAGE_CATALOG } from '../src/lib/pages/catalog.ts'
 import { EFFECTS } from '../src/lib/effects.ts'
 import { PATHS } from '../src/lib/paths/catalog.ts'
+import { DESIGN_PRESETS, presetRegistryItem } from '../src/lib/registry/presets.ts'
 import { unresolvedLocalImports } from '../src/lib/registry/deps.ts'
 import { cssToObject } from '../src/lib/registry/css-to-object.ts'
 
@@ -223,6 +226,54 @@ for (const artifact of [...BLOCK_CATALOG, ...PAGE_CATALOG, ...EFFECTS]) {
   }
 }
 
+/* -- presets are complete ------------------------------------------------ */
+
+/*
+  A preset is a whole design system in one install, which makes an
+  incomplete one worse than a missing one: it applies cleanly, changes some
+  of the project, and leaves the rest reading against whatever was there
+  before. Nothing about that looks like a failure from the CLI's side.
+
+  Three things are checked, and the first is the one that bites. Tailwind v4
+  reads `--spacing` and the `--text-*` ramp from `@theme`, so those have to
+  land in `cssVars.theme`; declared under `light` they would set custom
+  properties that no utility ever looks at, apply without error, and do
+  nothing at all.
+*/
+const presetNames = new Set<string>()
+
+for (const preset of DESIGN_PRESETS) {
+  if (presetNames.has(preset.name)) {
+    failures.push(`two presets share the name "${preset.name}"; they would publish as one item.`)
+  }
+  presetNames.add(preset.name)
+
+  const item = presetRegistryItem(preset)
+
+  for (const scope of ['light', 'dark'] as const) {
+    if (Object.keys(item.cssVars[scope]).length === 0) {
+      failures.push(`preset "${preset.name}" declares no ${scope} tokens.`)
+    }
+  }
+
+  for (const variable of ['--radius', '--spacing', '--text-base']) {
+    if (!item.cssVars.theme[variable]) {
+      failures.push(
+        `preset "${preset.name}" is missing ${variable} from cssVars.theme — ` +
+          'Tailwind reads the ramp and the spacing unit from @theme, so it would install and do nothing.',
+      )
+    }
+  }
+}
+
+for (const artifact of [...BLOCK_CATALOG, ...PAGE_CATALOG, ...EFFECTS]) {
+  if (presetNames.has(artifact.id)) {
+    failures.push(
+      `"${artifact.id}" collides with a design preset of the same name; the preset would win the lookup and the artifact would 404.`,
+    )
+  }
+}
+
 /* -- report ------------------------------------------------------------- */
 
 if (failures.length) {
@@ -234,5 +285,6 @@ if (failures.length) {
 
 console.log(
   `registry check: ${PATHS.length} path packs + ${BLOCK_CATALOG.length} blocks + ` +
-    `${PAGE_CATALOG.length} pages + ${EFFECTS.length} effects + 1 base, all resolvable`,
+    `${PAGE_CATALOG.length} pages + ${EFFECTS.length} effects + ` +
+    `${DESIGN_PRESETS.length} presets + 1 base, all resolvable`,
 )

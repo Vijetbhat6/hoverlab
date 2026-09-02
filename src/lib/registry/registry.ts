@@ -56,6 +56,7 @@ import { EFFECTS } from '../effects'
 import { PATHS } from '../paths/catalog'
 import type { Artifact, ArtifactFile } from '../artifact-types'
 import { cssToObject, type CssObject } from './css-to-object'
+import { DESIGN_PRESETS, findPreset, presetRegistryItem } from './presets'
 import { registryDepIds, unresolvedLocalImports } from './deps'
 import TOKENS from './generated-tokens.json'
 
@@ -395,6 +396,7 @@ ${effect.html}`
 export function registryItemNames(): string[] {
   return [
     REGISTRY_NAME,
+    ...DESIGN_PRESETS.map((preset) => preset.name),
     ...PATHS.map((p) => `path-${p.slug}`),
     ...BLOCKS.map((b) => b.id),
     ...PAGES.map((p) => p.id),
@@ -407,7 +409,16 @@ export function registryItemNames(): string[] {
  */
 export function buildRegistryItem(name: string, origin: string): RegistryItem | null {
   if (name === REGISTRY_NAME) return baseItem()
-  // Paths first, and by prefix, so the lookup never has to guess: every
+
+  /*
+   * Presets before everything else, and by exact name. They are the only
+   * items here whose names are not catalog ids, so a lookup that fell
+   * through to the id branches would 404 a name the index advertises.
+   */
+  const preset = findPreset(name)
+  if (preset) return presetRegistryItem(preset, origin)
+
+  // Paths next, and by prefix, so the lookup never has to guess: every
   // other branch keys off an id that could in principle be anything.
   if (name.startsWith('path-')) return pathItem(name.slice('path-'.length), origin)
   return (
@@ -429,6 +440,14 @@ export function buildRegistryItem(name: string, origin: string): RegistryItem | 
 export function buildRegistryIndex(origin: string) {
   const items: RegistryItem[] = [
     baseItem(),
+    /*
+     * Presets second, before the packs and the parts. An indexer or an
+     * agent reading the first screen of this list should see the whole
+     * design systems first: they are the item a project installs before
+     * anything else, and installing a block without one is how a block
+     * ends up rendering against somebody else's `--primary`.
+     */
+    ...DESIGN_PRESETS.map((preset) => presetRegistryItem(preset, origin)),
     // Packs before the parts. An indexer showing the first screen of this
     // list should see the curated routes through the catalog, not block
     // number one of 194.

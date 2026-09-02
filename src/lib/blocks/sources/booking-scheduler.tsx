@@ -238,7 +238,7 @@ export function BookingScheduler({
 
               {/* A control, not a label. Someone booking from an airport is
                   the person this matters most to. */}
-              <label className="ml-auto flex items-center gap-2 text-xs text-muted-foreground">
+              <label className="ms-auto flex items-center gap-2 text-xs text-muted-foreground">
                 <Globe aria-hidden className="h-3.5 w-3.5" />
                 <span className="sr-only">Show times in this time zone</span>
                 <select
@@ -293,7 +293,7 @@ export function BookingScheduler({
           <p role="status" className="text-sm text-muted-foreground">
             {selectedTime && day ? (
               <>
-                <Check aria-hidden className="mr-1.5 inline h-4 w-4 text-foreground" />
+                <Check aria-hidden className="me-1.5 inline h-4 w-4 text-foreground" />
                 {dayLabel(day.date, { weekday: 'long', day: 'numeric', month: 'long' })} at{' '}
                 <span className="font-medium text-foreground">
                   {formatTime(day.date, selectedTime)}

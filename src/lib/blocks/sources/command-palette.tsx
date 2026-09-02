@@ -240,7 +240,7 @@ export function CommandPalette({
                         item.onSelect?.()
                         setOpen(false)
                       }}
-                      className={`flex w-full items-center gap-3 rounded-xl px-3 py-2 text-left text-sm transition-colors ${
+                      className={`flex w-full items-center gap-3 rounded-xl px-3 py-2 text-start text-sm transition-colors ${
                         active ? 'bg-primary/10 text-foreground' : 'text-muted-foreground'
                       }`}
                     >

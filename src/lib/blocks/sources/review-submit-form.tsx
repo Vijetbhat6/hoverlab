@@ -190,7 +190,7 @@ export function ReviewSubmitForm({
               />
               {/* Only near the limit. A counter from zero is a target. */}
               {nearLimit ? (
-                <span className="mt-1 block text-right text-xs text-muted-foreground">
+                <span className="mt-1 block text-end text-xs text-muted-foreground">
                   {remaining} characters left
                 </span>
               ) : null}

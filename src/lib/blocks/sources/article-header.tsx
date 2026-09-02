@@ -158,7 +158,7 @@ export function ArticleHeader({
           switches for services we had already decommissioned.
         </p>
 
-        <blockquote className="border-l-4 border-primary/60 pl-6">
+        <blockquote className="border-s-4 border-primary/60 ps-6">
           <p className="text-pretty text-xl font-semibold leading-relaxed tracking-tight text-foreground">
             &ldquo;A feature flag is a loan. The interest is every engineer
             who has to reason about both branches forever.&rdquo;
