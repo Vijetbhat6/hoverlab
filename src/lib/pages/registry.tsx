@@ -46,6 +46,19 @@ import CartPage from './sources/cart-page'
 import CheckoutPage from './sources/checkout-page'
 import OrderConfirmationPage from './sources/order-confirmation-page'
 import AccountOrdersPage from './sources/account-orders-page'
+import SignupPage from './sources/signup-page'
+import ForgotPasswordPage from './sources/forgot-password-page'
+import TwoFactorPage from './sources/two-factor-page'
+import SsoLoginPage from './sources/sso-login-page'
+import Error500Page from './sources/error-500-page'
+import MaintenancePage from './sources/maintenance-page'
+import PermissionDeniedPage from './sources/permission-denied-page'
+import UsagePage from './sources/usage-page'
+import InvoicesPage from './sources/invoices-page'
+import OnboardingPage from './sources/onboarding-page'
+import SearchPage from './sources/search-page'
+import AgentRunPage from './sources/agent-run-page'
+import ApprovalsPage from './sources/approvals-page'
 
 export const PAGE_PREVIEWS: Record<string, React.ReactNode> = {
   'saas-landing-page': <SaasLandingPage />,
@@ -79,6 +92,19 @@ export const PAGE_PREVIEWS: Record<string, React.ReactNode> = {
   'checkout-page': <CheckoutPage />,
   'order-confirmation-page': <OrderConfirmationPage />,
   'account-orders-page': <AccountOrdersPage />,
+  'signup-page': <SignupPage />,
+  'forgot-password-page': <ForgotPasswordPage />,
+  'two-factor-page': <TwoFactorPage />,
+  'sso-login-page': <SsoLoginPage />,
+  'error-500-page': <Error500Page />,
+  'maintenance-page': <MaintenancePage />,
+  'permission-denied-page': <PermissionDeniedPage />,
+  'usage-page': <UsagePage />,
+  'invoices-page': <InvoicesPage />,
+  'onboarding-page': <OnboardingPage />,
+  'search-page': <SearchPage />,
+  'agent-run-page': <AgentRunPage />,
+  'approvals-page': <ApprovalsPage />,
 }
 
 /** The rendered preview for a page, or undefined if the key is unknown. */

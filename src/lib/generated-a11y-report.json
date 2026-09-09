@@ -4290,6 +4290,201 @@
         "input-labelled"
       ],
       "findings": []
+    },
+    {
+      "id": "signup-page",
+      "kind": "page",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "forgot-password-page",
+      "kind": "page",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "two-factor-page",
+      "kind": "page",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "sso-login-page",
+      "kind": "page",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "error-500-page",
+      "kind": "page",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "maintenance-page",
+      "kind": "page",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "permission-denied-page",
+      "kind": "page",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "usage-page",
+      "kind": "page",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "invoices-page",
+      "kind": "page",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "onboarding-page",
+      "kind": "page",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "search-page",
+      "kind": "page",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "agent-run-page",
+      "kind": "page",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "approvals-page",
+      "kind": "page",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
     }
   ]
 }

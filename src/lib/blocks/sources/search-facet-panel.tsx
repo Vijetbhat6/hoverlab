@@ -58,26 +58,40 @@ export interface SearchFacetPanelProps {
   className?: string
 }
 
+/*
+  Deliberately NOT this catalog's own numbers.
+
+  These facets used to read Effects 973, Blocks 194, Pages 21 — Hoverlab's
+  counts at the moment the block was written, baked into demo data that
+  ships into other people's repositories. Two things were wrong with that.
+  They went stale immediately, and nothing checks them because a
+  component's example data is not a claim anyone thought to verify; and a
+  reader who recognised the numbers would reasonably read the block as
+  hard-wired to this catalog rather than as a generic facet panel.
+
+  A neutral domain avoids both. Nothing here can go out of date, because
+  nothing here is a fact about anything.
+*/
 const DEFAULT_FACETS: Facet[] = [
   {
     id: 'type',
     label: 'Type',
     options: [
-      { id: 'effect', label: 'Effects', count: 973 },
-      { id: 'block', label: 'Blocks', count: 194 },
-      { id: 'page', label: 'Pages', count: 21 },
-      { id: 'template', label: 'Templates', count: 7 },
+      { id: 'doc', label: 'Documents', count: 1240 },
+      { id: 'spreadsheet', label: 'Spreadsheets', count: 318 },
+      { id: 'slide', label: 'Presentations', count: 96 },
+      { id: 'archive', label: 'Archived', count: 44 },
     ],
   },
   {
-    id: 'framework',
-    label: 'Framework',
+    id: 'owner',
+    label: 'Owner',
     options: [
-      { id: 'react', label: 'React', count: 222 },
-      { id: 'html', label: 'HTML + CSS', count: 973 },
-      { id: 'vue', label: 'Vue', count: 973 },
-      { id: 'svelte', label: 'Svelte', count: 973 },
-      { id: 'angular', label: 'Angular', count: 0 },
+      { id: 'me', label: 'Me', count: 212 },
+      { id: 'team', label: 'My team', count: 884 },
+      { id: 'shared', label: 'Shared with me', count: 402 },
+      { id: 'external', label: 'External', count: 61 },
+      { id: 'unassigned', label: 'Unassigned', count: 0 },
     ],
   },
   {
@@ -85,13 +99,13 @@ const DEFAULT_FACETS: Facet[] = [
     label: 'Category',
     visibleLimit: 4,
     options: [
-      { id: 'buttons', label: 'Buttons', count: 59 },
-      { id: 'loaders', label: 'Loaders', count: 39 },
-      { id: 'cards', label: 'Cards', count: 36 },
-      { id: 'text', label: 'Text', count: 38 },
-      { id: 'backgrounds', label: 'Backgrounds', count: 37 },
-      { id: 'nav', label: 'Navigation', count: 30 },
-      { id: 'charts', label: 'Charts', count: 31 },
+      { id: 'contracts', label: 'Contracts', count: 59 },
+      { id: 'invoices', label: 'Invoices', count: 39 },
+      { id: 'reports', label: 'Reports', count: 36 },
+      { id: 'notes', label: 'Meeting notes', count: 38 },
+      { id: 'specs', label: 'Specifications', count: 37 },
+      { id: 'policies', label: 'Policies', count: 30 },
+      { id: 'research', label: 'Research', count: 31 },
     ],
   },
   {

@@ -565,4 +565,177 @@ export const PAGE_CATALOG: PageRecord[] = [
     deps: ['lucide-react'],
     composedOf: ['settings-nav-layout', 'order-history-list'],
   },
+
+  /* -- Auth screens ------------------------------------------------- *
+   * One login page covered four flows worth of category. These are the
+   * screens a real product ships beside it, and each pairs its primary
+   * action with the recovery route that stops it becoming a lockout.
+   */
+  {
+    id: 'signup-page',
+    name: 'Signup Page',
+    category: 'Auth Screens',
+    description:
+      'The signup form with the proof under it rather than above it — the person who arrived here has already decided, and scrolling past testimonials is friction applied to the wrong reader.',
+    tags: ['signup', 'register', 'auth', 'conversion', 'account'],
+    previewComponent: 'signup-page',
+    deps: ['lucide-react'],
+    composedOf: ['auth-signup-split', 'logo-cloud', 'testimonial-ratings'],
+  },
+  {
+    id: 'forgot-password-page',
+    name: 'Forgot Password',
+    category: 'Auth Screens',
+    description:
+      'Password reset, plus the magic link beside it — the moment after a password has failed is when somebody is most willing to stop using one.',
+    tags: ['password', 'reset', 'recovery', 'auth', 'magic link'],
+    previewComponent: 'forgot-password-page',
+    deps: ['lucide-react'],
+    composedOf: ['auth-forgot-password', 'auth-magic-link-form'],
+  },
+  {
+    id: 'two-factor-page',
+    name: 'Two-Factor Challenge',
+    category: 'Auth Screens',
+    description:
+      'The second factor with its fallback on the same screen, because a 2FA prompt with no recovery route is a lockout screen wearing a security screen.',
+    tags: ['2fa', 'mfa', 'otp', 'auth', 'security'],
+    previewComponent: 'two-factor-page',
+    deps: ['lucide-react'],
+    composedOf: ['auth-two-factor', 'auth-otp-verify'],
+  },
+  {
+    id: 'sso-login-page',
+    name: 'SSO Sign In',
+    category: 'Auth Screens',
+    description:
+      'A domain field for the employee who signs in daily, and the capability detail below the fold for the IT reviewer who reads it once.',
+    tags: ['sso', 'saml', 'enterprise', 'auth', 'login'],
+    previewComponent: 'sso-login-page',
+    deps: ['lucide-react'],
+    composedOf: ['auth-sso-domain', 'sso-enterprise-split'],
+  },
+
+  /* -- System pages ------------------------------------------------- *
+   * The pages nobody designs and everybody sees. A 500 is our problem
+   * and a 404 is the visitors, which is why they are shaped differently.
+   */
+  {
+    id: 'error-500-page',
+    name: 'Server Error',
+    category: 'System Pages',
+    description:
+      'Retry first, because a 500 is our failure and offering navigation implies the rest of the site works — which is exactly what is in doubt.',
+    tags: ['500', 'error', 'outage', 'retry', 'system'],
+    previewComponent: 'error-500-page',
+    deps: ['lucide-react'],
+    composedOf: ['error-state-retry', 'offline-state-banner'],
+  },
+  {
+    id: 'maintenance-page',
+    name: 'Scheduled Maintenance',
+    category: 'System Pages',
+    description:
+      'Planned downtime with an actual end time on it — "back soon" is not a time, and a maintenance page without one looks like an outage nobody has noticed.',
+    tags: ['maintenance', 'downtime', 'scheduled', 'status', 'system'],
+    previewComponent: 'maintenance-page',
+    deps: ['lucide-react'],
+    composedOf: ['maintenance-window-state', 'footer-status-locale'],
+  },
+  {
+    id: 'permission-denied-page',
+    name: 'Permission Denied',
+    category: 'System Pages',
+    description:
+      'A 403 that names who can grant what was refused, because the next question is always "then who can" and a support link is the wrong answer to it.',
+    tags: ['403', 'permission', 'access', 'roles', 'system'],
+    previewComponent: 'permission-denied-page',
+    deps: ['lucide-react'],
+    composedOf: ['permission-denied-state', 'settings-team-members'],
+  },
+
+  /* -- Account and billing ------------------------------------------ */
+  {
+    id: 'usage-page',
+    name: 'Usage & Limits',
+    category: 'Account & Billing',
+    description:
+      'Consumption in the order the questions arrive: the overage warning first because it is time-critical, then the meters, then what actually happens at each limit.',
+    tags: ['usage', 'limits', 'quota', 'billing', 'overage'],
+    previewComponent: 'usage-page',
+    deps: ['lucide-react'],
+    composedOf: [
+      'usage-overage-notice',
+      'usage-meter-panel',
+      'billing-credit-balance',
+      'plan-limits-list',
+    ],
+  },
+  {
+    id: 'invoices-page',
+    name: 'Invoices',
+    category: 'Account & Billing',
+    description:
+      'Billing history laid out for finance rather than for the user — a retrieval screen, so the table leads and the payment method comes last.',
+    tags: ['invoices', 'billing', 'receipts', 'finance', 'account'],
+    previewComponent: 'invoices-page',
+    deps: ['lucide-react'],
+    composedOf: ['invoice-history-table', 'billing-invoice-detail', 'payment-method-card'],
+  },
+
+  /* -- App screens -------------------------------------------------- */
+  {
+    id: 'onboarding-page',
+    name: 'Onboarding',
+    category: 'App Screens',
+    description:
+      'A wizard for the session someone finishes and a checklist for the one they do not, with the only genuinely blocking step in front of both.',
+    tags: ['onboarding', 'setup', 'wizard', 'checklist', 'activation'],
+    previewComponent: 'onboarding-page',
+    deps: ['lucide-react'],
+    composedOf: ['workspace-setup-form', 'setup-wizard', 'onboarding-checklist'],
+  },
+  {
+    id: 'search-page',
+    name: 'Search Results',
+    category: 'App Screens',
+    description:
+      'Built around the state a search page is in most of the time — empty — so recent queries lead and the facets sit in a sidebar that survives growing to twelve.',
+    tags: ['search', 'results', 'filters', 'facets', 'empty state'],
+    previewComponent: 'search-page',
+    deps: ['lucide-react'],
+    composedOf: [
+      'recent-search-list',
+      'applied-filters-bar',
+      'search-facet-panel',
+      'search-results-panel',
+    ],
+  },
+  {
+    id: 'agent-run-page',
+    name: 'Agent Run Detail',
+    category: 'App Screens',
+    description:
+      'One run opened up in the order you would debug it — intent, actions, the retries that are invisible in both, then cost.',
+    tags: ['agent', 'trace', 'debugging', 'observability', 'ai'],
+    previewComponent: 'agent-run-page',
+    deps: ['lucide-react'],
+    composedOf: [
+      'agent-thinking-trace',
+      'agent-tool-calls',
+      'agent-retry-log',
+      'agent-cost-breakdown',
+    ],
+  },
+  {
+    id: 'approvals-page',
+    name: 'Approvals Inbox',
+    category: 'App Screens',
+    description:
+      'The queue, the same queue sorted by how long things have waited, and the policy that decided both — with the policy last so it is not scrolled past forever.',
+    tags: ['approvals', 'human in the loop', 'queue', 'escalation', 'agent'],
+    previewComponent: 'approvals-page',
+    deps: ['lucide-react'],
+    composedOf: ['approval-queue', 'escalation-queue-list', 'approval-policy-list'],
+  },
 ]

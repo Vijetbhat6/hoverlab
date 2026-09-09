@@ -118,5 +118,57 @@
   "account-orders-page": {
     "lines": 42,
     "files": 1
+  },
+  "signup-page": {
+    "lines": 34,
+    "files": 1
+  },
+  "forgot-password-page": {
+    "lines": 46,
+    "files": 1
+  },
+  "two-factor-page": {
+    "lines": 40,
+    "files": 1
+  },
+  "sso-login-page": {
+    "lines": 31,
+    "files": 1
+  },
+  "error-500-page": {
+    "lines": 44,
+    "files": 1
+  },
+  "maintenance-page": {
+    "lines": 35,
+    "files": 1
+  },
+  "permission-denied-page": {
+    "lines": 42,
+    "files": 1
+  },
+  "usage-page": {
+    "lines": 66,
+    "files": 1
+  },
+  "invoices-page": {
+    "lines": 41,
+    "files": 1
+  },
+  "onboarding-page": {
+    "lines": 45,
+    "files": 1
+  },
+  "search-page": {
+    "lines": 47,
+    "files": 1
+  },
+  "agent-run-page": {
+    "lines": 49,
+    "files": 1
+  },
+  "approvals-page": {
+    "lines": 45,
+    "files": 1
   }
 }
