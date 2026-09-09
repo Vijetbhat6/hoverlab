@@ -180,11 +180,13 @@ export default function FigmaPage() {
               Or take the tokens right now
             </h2>
             <p className="mx-auto mt-3 max-w-xl text-pretty text-sm leading-relaxed text-muted-foreground">
-              One click puts both palettes, the radius scale and the type on
-              your clipboard as SVG. Figma turns that into named, editable
-              layers on paste — no plugin, no file, no account. It is the same
-              token set every one of the {BLOCK_COUNT} blocks is built from, so
-              a screen drawn against it is a screen the code can already make.
+              One click puts both palettes, the radius scale, the two families
+              and the three heading sizes on your clipboard as SVG. Figma turns
+              that into named, editable layers on paste — the headings arrive as
+              real text at their real sizes, one step from a text style — with
+              no plugin, no file and no account. It is the same token set every
+              one of the {BLOCK_COUNT} blocks is built from, so a screen drawn
+              against it is a screen the code can already make.
             </p>
             <div className="mt-6 flex flex-wrap justify-center gap-3">
               <CopyForFigma size="lg" variant="default" />

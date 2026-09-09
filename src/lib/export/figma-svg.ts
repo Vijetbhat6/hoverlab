@@ -17,9 +17,11 @@
  * WHAT IT IS NOT. It is not a screenshot of a component and it is not a
  * component import — the catalog is CSS, and CSS hover and motion do not
  * exist in a static frame. /figma is careful about that limit and so is
- * this: what travels is the palette, the radius scale and the fonts, which
- * is exactly the part a designer needs to draw the next screen in a way
- * the code can already build.
+ * this: what travels is the palette, the radius scale, the two families
+ * and the heading scale — the part a designer needs to draw the next
+ * screen in a way the code can already build. The heading specimens are
+ * real <text> layers at their real sizes, so they are one step from being
+ * Figma text styles rather than a picture of a scale.
  *
  * FREE, deliberately, while the file bundle is Pro. The zip is derived
  * per-customer and is the thing worth paying for; this is a lead magnet
@@ -42,6 +44,7 @@
 import { resolveTokens, type ResolvedToken, type Theme } from '@/lib/export/design-system'
 import { DEFAULT_BRAND_COLOR, type BrandColor } from '@/lib/brand-presets'
 import tokens from '@/lib/generated-dna.json'
+import { TYPE_SCALE, formatRange, formatTracking } from '@/lib/export/type-scale'
 
 /* ------------------------------------------------------------------ *
  *  Geometry
@@ -78,10 +81,17 @@ function radiusScale(): Array<{ name: string; px: number }> {
 /**
  * The two families the templates actually load, from `globals.css`.
  *
- * Named rather than sampled from a scale: there is no type-scale token in
- * this design system — sizes come from Tailwind's defaults at the call
- * site — and inventing one for the sheet would put a claim on a designer's
- * canvas that no stylesheet here backs.
+ * This used to carry a note saying there was no type scale to sample from,
+ * only Tailwind defaults chosen at the call site. That was half true and
+ * has stopped being the useful half: `globals.css` defines three heading
+ * roles with explicit sizes, line heights and tracking, and those now
+ * travel as their own section — see `./type-scale`, and the specimen rows
+ * below the families.
+ *
+ * The other half of the old note still stands, which is why the sheet
+ * carries headings and not body sizes: nothing here backs a body scale, and
+ * inventing one would put a claim on a designer's canvas that no stylesheet
+ * supports.
  */
 const FONTS: Array<{ role: string; family: string; sample: string }> = [
   { role: 'Sans — headings and UI', family: 'Geist', sample: 'The quick brown fox' },
@@ -250,7 +260,24 @@ export function buildFigmaSheet(
   // swatch + two label lines), so anything under ~150 here collides with
   // the Type heading. It did.
   const fontsY = radiusY + 172
-  const height = fontsY + 152
+  /*
+   * The heading specimens, below the two families.
+   *
+   * Each row is one role drawn at its own maximum size, so the deepest row
+   * governs the spacing: `type-display` at 72px with a 1.04 line height
+   * needs ~75px of its own before the label under it. `SPECIMEN_LEAD` is
+   * the gap from the section title to the first baseline, and each row
+   * advances by its own size rather than by a fixed step — a fixed step
+   * either overlaps at 72px or leaves a hole at 36px.
+   */
+  const specimenY = fontsY + 34 + FONTS.length * 56 + 40
+  const specimenRows = TYPE_SCALE.map((role) => ({
+    role,
+    // Baseline lead for the sample, then two label lines under it.
+    depth: Math.round(role.maxPx * role.lineHeight) + 34,
+  }))
+  const specimenHeight = specimenRows.reduce((n, row) => n + row.depth, 0)
+  const height = specimenY + 28 + specimenHeight + PAD
 
   const scale = radiusScale()
 
@@ -264,7 +291,7 @@ export function buildFigmaSheet(
       'subtitle',
       PAD,
       88,
-      'Colours, radii and type — the same tokens every effect, block and page in the catalog is styled through.',
+      'Colours, radii, families and the heading scale — the same tokens every effect, block and page in the catalog is styled through.',
       { size: 13, fill: '#71717a' },
     ),
     text('credit', WIDTH - PAD, 60, origin.replace(/^https?:\/\//, ''), {
@@ -318,6 +345,62 @@ export function buildFigmaSheet(
         fill: '#71717a',
       }),
     )
+  })
+
+  /*
+   * The heading scale, as specimens.
+   *
+   * Drawn at each role's maximum rather than described in a table, because
+   * the thing a designer needs from a scale is to see 72px next to 48px
+   * next to 36px — a list of numbers is something they have to imagine.
+   * Every sample is a real <text> layer, so pasting this gives three
+   * editable layers at the right size and weight, which is one step from a
+   * Figma text style.
+   *
+   * The label under each carries what the sample cannot show: the fluid
+   * range, the line height and the tracking. Both ends of the clamp are
+   * printed because quoting one would be wrong at the other breakpoint —
+   * see the note in `./type-scale`.
+   */
+  body.push(
+    text('typescale-title', PAD, specimenY, 'Heading scale', { size: 15, weight: 600 }),
+    text(
+      'typescale-note',
+      PAD,
+      specimenY + 18,
+      'Fluid between the two sizes shown. Body sizes are Tailwind defaults and are deliberately not claimed here.',
+      { size: 11, fill: '#71717a' },
+    ),
+  )
+
+  let rowY = specimenY + 28
+  specimenRows.forEach(({ role, depth }) => {
+    const baseline = rowY + Math.round(role.maxPx * role.lineHeight * 0.78)
+    body.push(
+      text(`typescale-${role.className}-sample`, PAD, baseline, 'Heading', {
+        size: role.maxPx,
+        weight: role.fontWeight,
+      }),
+      text(
+        `typescale-${role.className}-name`,
+        PAD,
+        baseline + 20,
+        `.${role.className} — ${role.role}`,
+        { size: 12, weight: 500 },
+      ),
+      text(
+        `typescale-${role.className}-spec`,
+        PAD,
+        baseline + 36,
+        `${formatRange(role.minPx, role.maxPx)} · ${role.fontWeight} · line-height ${role.lineHeight} · ${formatTracking(role.letterSpacing)}`,
+        {
+          size: 11,
+          fill: '#71717a',
+          family: 'JetBrains Mono, ui-monospace, monospace',
+        },
+      ),
+    )
+    rowY += depth
   })
 
   const svg = [
