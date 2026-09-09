@@ -19,6 +19,7 @@ import {
   ArrowLeft,
   ArrowRight,
   CalendarDays,
+  History,
   Route as RouteIcon,
   FileCode,
   Package,
@@ -42,7 +43,7 @@ import {
 } from '@/lib/templates/templates'
 import { getTemplateMeta } from '@/lib/templates/template-index'
 import { absoluteUrl } from '@/lib/site'
-import { addedAt, formatAdded } from '@/lib/recency'
+import { addedAt, formatAdded, updatedAt } from '@/lib/recency'
 import { artifactBreadcrumbLd, artifactLd } from '@/lib/structured-data'
 import { AddToCollectionButton } from '@/components/collections/add-to-collection'
 import {
@@ -123,6 +124,8 @@ export default async function TemplateDetailPage({ params }: PageProps) {
   }))
 
   const added = addedAt('template', template.id)
+  // Undefined unless it genuinely changed after landing — see updatedAt().
+  const updated = updatedAt('template', template.id)
   const palette = getPalette(template.palette)
 
   return (
@@ -137,6 +140,7 @@ export default async function TemplateDetailPage({ params }: PageProps) {
           keywords: template.tags,
           dependencies: template.deps,
           datePublished: added,
+          dateModified: updated,
         })}
       />
       <JsonLd
@@ -242,6 +246,18 @@ export default async function TemplateDetailPage({ params }: PageProps) {
               <span className="inline-flex items-center gap-1.5">
                 <CalendarDays aria-hidden className="h-4 w-4" />
                 Added {formatAdded(added)}
+              </span>
+            ) : null}
+            {/*
+              The maintenance signal. A template is the largest thing on
+              sale here and the one whose staleness costs the most, so
+              "last touched" matters more on this page than anywhere —
+              and it was the one detail page still missing it.
+            */}
+            {updated ? (
+              <span className="inline-flex items-center gap-1.5 font-medium text-foreground">
+                <History aria-hidden className="h-4 w-4" />
+                Updated {formatAdded(updated)}
               </span>
             ) : null}
           </div>

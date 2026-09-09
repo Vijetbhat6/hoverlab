@@ -99,6 +99,16 @@ export interface ArtifactLdInput {
   dependencies?: readonly string[]
   /** ISO date the artifact first appeared in the catalog, when known. */
   datePublished?: string
+  /**
+   * ISO date it last changed, when the ledger can say so precisely.
+   *
+   * Undefined for anything that has not changed since it landed, and the
+   * property is then omitted rather than mirrored from `datePublished`.
+   * `dateModified` equal to `datePublished` on every artifact in a catalog
+   * is not a freshness signal, it is noise that says the field is derived
+   * from nothing.
+   */
+  dateModified?: string
 }
 
 /**
@@ -110,10 +120,12 @@ export interface ArtifactLdInput {
  * gating ever lands, this flag has to move with it — a paywall behind a
  * free-content declaration is exactly the mismatch Google penalises.
  *
- * No `license` property yet. Schema.org wants a URL, and pointing one at a
- * page that does not exist is worse than omitting the field: it is a
- * machine-readable 404 attached to every artifact in the catalog. Add it
- * the moment the licence is published as a document.
+ * `license` points at /licence, which is a real document. It was omitted
+ * for as long as it was not — a machine-readable 404 on every artifact in
+ * the catalog is worse than a missing field — and the terms it states are
+ * the ones the page states: free to copy, Pro to ship for money. It is the
+ * same URL for every artifact because the licence does not vary by
+ * artifact; if per-artifact terms ever land, this has to move with them.
  */
 export function artifactLd(input: ArtifactLdInput) {
   const path = `/${input.level}/${input.id}`
@@ -127,12 +139,14 @@ export function artifactLd(input: ArtifactLdInput) {
     programmingLanguage: LEVEL_LANGUAGE[input.level],
     applicationCategory: input.category,
     isAccessibleForFree: true,
+    license: absoluteUrl('/licence'),
     publisher: PUBLISHER,
     ...(input.keywords?.length ? { keywords: [...input.keywords].join(', ') } : {}),
     ...(input.dependencies?.length
       ? { softwareRequirements: [...input.dependencies].join(', ') }
       : {}),
     ...(input.datePublished ? { datePublished: input.datePublished } : {}),
+    ...(input.dateModified ? { dateModified: input.dateModified } : {}),
   }
 }
 

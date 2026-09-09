@@ -7,7 +7,8 @@ import { EFFECTS, type Effect } from '@/lib/effects'
 import { EFFECT_ID_ALIASES } from '@/lib/effect-aliases'
 import { categorySlug } from '@/lib/effect-types'
 import { artifactBreadcrumbLd, artifactLd } from '@/lib/structured-data'
-import { addedAt, formatAdded } from '@/lib/recency'
+import { addedAt, formatAdded, updatedAt } from '@/lib/recency'
+import { relatedBlocks } from '@/lib/related'
 
 /**
  * Pre-generate EVERY effect page at build time.
@@ -113,6 +114,21 @@ export default async function EffectPage({ params }: PageProps) {
 
   const catSlug = categorySlug(effect.category)
   const added = addedAt('effect', effect.id)
+  /*
+   * Undefined unless the effect genuinely changed after it landed — see
+   * updatedAt(). The block, page and template pages have carried this
+   * since the ledger shipped and this page did not, which left the one
+   * rung with 1,111 pages unable to show that anything is maintained.
+   */
+  const updated = updatedAt('effect', effect.id)
+
+  /*
+   * The route one rung up. "Similar effects" sends you sideways to more
+   * of the same free thing; this is the only link on the page that goes
+   * to something we sell. Computed here rather than inside the client
+   * component because the block index has no business in that bundle.
+   */
+  const related = relatedBlocks(effect.category, 3)
 
   return (
     <>
@@ -132,6 +148,7 @@ export default async function EffectPage({ params }: PageProps) {
           category: effect.category,
           keywords: effect.tags,
           datePublished: added,
+          dateModified: updated,
         })}
       />
       <JsonLd
@@ -179,10 +196,23 @@ export default async function EffectPage({ params }: PageProps) {
         {/* The catalog's first visible sense of time. See lib/recency.ts —
             the date comes out of git history, not out of a field someone
             has to remember to set. */}
-        {added ? <span>Added {formatAdded(added)}</span> : null}
+        <span className="inline-flex items-center gap-1.5">
+          {added ? <span>Added {formatAdded(added)}</span> : null}
+          {updated ? (
+            <span className="font-medium text-foreground">
+              Updated {formatAdded(updated)}
+            </span>
+          ) : null}
+        </span>
       </div>
 
-      <EffectDetail effect={effect} similar={similar} prev={prev} next={next} />
+      <EffectDetail
+        effect={effect}
+        similar={similar}
+        related={related}
+        prev={prev}
+        next={next}
+      />
     </>
   )
 }

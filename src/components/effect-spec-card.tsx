@@ -24,10 +24,21 @@
  * justified the moment any of these becomes conditional; at that point it
  * needs real per-effect data, not a longer list.
  *
- * Deliberately absent: a "last updated" line, which UI8 carries and this
- * cannot — no artifact in the catalog has a date on it. Also absent: a
- * license summary, because the repo has no LICENSE for catalog content to
- * summarise, and inventing terms would be worse than the omission.
+ * Both of the things this card used to say it could not carry are now
+ * carried, because the facts behind them arrived:
+ *
+ *   - Dates. "No artifact in the catalog has a date on it" stopped being
+ *     true when the git-derived recency ledger landed. Added and Updated
+ *     render in the page header rather than in this card — they belong
+ *     beside the name, and the block, page and template pages put them
+ *     there.
+ *   - The licence. "The repo has no LICENSE for catalog content to
+ *     summarise" stopped being true when /licence was published, so the
+ *     summary below is a summary of a real document rather than invented
+ *     terms. It is the same two sentences <ArtifactFacts> gives the upper
+ *     three rungs, and it was worth saying here for the same reason it was
+ *     worth saying there: "am I allowed to ship this" is the question this
+ *     catalog answered nowhere.
  *
  * The usage count IS here, having been impossible a few days ago. It
  * comes from lib/usage.ts via UsageBadge, the same component the upper
@@ -36,10 +47,11 @@
 
 import * as React from 'react'
 import Link from 'next/link'
-import { Check, Terminal } from 'lucide-react'
+import { Check, ShieldCheck, Terminal } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { UsageBadge } from '@/components/usage-badge'
 import { FRAMEWORKS } from '@/lib/export'
+import { PLANS, formatPrice } from '@/lib/billing/plans'
 import type { Effect } from '@/lib/effects'
 
 /**
@@ -129,6 +141,30 @@ export function EffectSpecCard({ effect }: { effect: Effect }) {
       */}
       <p className="mt-3 text-[11px] leading-relaxed text-muted-foreground empty:hidden">
         <UsageBadge id={effect.id} />
+      </p>
+
+      {/*
+        The boundary, in the two sentences /licence opens with. Priced from
+        PLANS rather than typed, because a price typed into a component is
+        a price that goes stale on the day it changes — and this one has
+        already moved once, from $59.
+      */}
+      <h3 className="mb-1.5 mt-4 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+        <ShieldCheck aria-hidden className="h-3.5 w-3.5" />
+        Licence
+      </h3>
+      <p className="text-xs leading-relaxed text-muted-foreground">
+        Free to copy and use in personal and non-commercial projects, in as
+        many as you like, with no attribution. Shipping it in client work or
+        a paid product needs{' '}
+        <Link href="/pricing" className="font-medium text-primary hover:underline">
+          Pro ({formatPrice(PLANS.pro.priceCents)} once)
+        </Link>
+        .{' '}
+        <Link href="/licence" className="underline underline-offset-2 hover:text-foreground">
+          Read the licence
+        </Link>
+        .
       </p>
 
       <h3 className="mb-2 mt-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground">

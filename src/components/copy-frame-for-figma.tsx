@@ -1,7 +1,7 @@
 'use client'
 
 /**
- * <CopyFrameForFigma> — this block, as Figma layers.
+ * <CopyFrameForFigma> — this artifact, as Figma layers.
  *
  * The sibling of `<CopyForFigma>`, and the division between them is worth
  * stating: that one copies the *design system* — palette, radii, fonts —
@@ -48,8 +48,13 @@ export function CopyFrameForFigma({
    * `template` traces the screen the route switcher currently shows, which
    * is one of the template's pages — the preview is already public, so
    * this is not a way around the download gate.
+   *
+   * `effect` traces the live preview stage. That stage reflects the hue,
+   * scale and speed sliders, so the frame carries the reader's tweaks
+   * rather than the catalog's defaults — which is what they are looking at
+   * and therefore what they mean by "this".
    */
-  level: 'block' | 'page' | 'template'
+  level: 'block' | 'page' | 'template' | 'effect'
   className?: string
 }) {
   const [state, setState] = React.useState<'idle' | 'working' | 'done'>('idle')
@@ -105,7 +110,7 @@ export function CopyFrameForFigma({
       className={cn('gap-1.5', className)}
       onClick={copy}
       disabled={state === 'working'}
-      title="Copy this block as SVG layers you can paste straight onto a Figma canvas"
+      title={`Copy this ${level} as SVG layers you can paste straight onto a Figma canvas`}
     >
       {state === 'working' ? (
         <Loader2 aria-hidden className="h-3.5 w-3.5 animate-spin" />

@@ -173,7 +173,14 @@ export type AnalyticsEvent =
   | {
       name: 'figma_frame_copied'
       // `template` traces whichever screen the route switcher is showing.
-      props: { artifact_id: string; level: 'block' | 'page' | 'template'; layers: number }
+      // `effect` traces the live preview stage, customization included —
+      // whatever the reader has the sliders set to is what gets traced,
+      // which is the right behaviour and worth knowing is possible.
+      props: {
+        artifact_id: string
+        level: 'block' | 'page' | 'template' | 'effect'
+        layers: number
+      }
     }
   /*
    * List signups, by where the form was. The point of the list is that it

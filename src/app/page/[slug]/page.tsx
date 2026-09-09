@@ -114,6 +114,7 @@ export default async function PageDetailPage({ params }: PageProps) {
           keywords: page.tags,
           dependencies: page.deps,
           datePublished: added,
+          dateModified: updated,
         })}
       />
       <JsonLd data={artifactBreadcrumbLd('page', page.name, { name: page.category })} />

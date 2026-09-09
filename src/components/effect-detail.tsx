@@ -49,6 +49,8 @@ import {
   type Preset,
 } from '@/lib/customize'
 import { AddToCollectionButton } from '@/components/collections/add-to-collection'
+import { CopyFrameForFigma } from '@/components/copy-frame-for-figma'
+import type { RelatedBlock } from '@/lib/related'
 import { cn } from '@/lib/utils'
 import { useHeaderHeight } from '@/hooks/use-header-height'
 import type { Effect } from '@/lib/effects'
@@ -87,6 +89,14 @@ const COMPONENT_SIZED: ReadonlySet<string> = new Set<EffectCategory>([
   'Progress & Meters',
 ])
 
+/**
+ * DOM handle the Figma tracer reads. Same constant name and same value as
+ * the block, page and template pages use — one preview per page, so it
+ * does not need to be unique across the site, and a stable name is easier
+ * to find from the console when a frame comes out wrong.
+ */
+const FRAME_ID = 'artifact-frame'
+
 function stageMinHeight(category: EffectCategory): string {
   if (FULL_BLEED.has(category)) return 'min-h-[320px] sm:min-h-[400px]'
   if (COMPONENT_SIZED.has(category)) return 'min-h-[180px] sm:min-h-[220px]'
@@ -97,6 +107,14 @@ interface EffectDetailProps {
   effect: Effect
   /** Up to 6 similar effects (same category, excluding `effect`). */
   similar: Effect[]
+  /**
+   * Blocks that use this kind of element, from `lib/related.ts`.
+   *
+   * Resolved on the server and passed down rather than looked up here:
+   * the block index has no business in this bundle, which already carries
+   * an effect's markup, CSS and four export formats.
+   */
+  related?: RelatedBlock[]
   /** Previous effect in the catalog (for prev/next nav). Null if at start. */
   prev?: Effect | null
   /** Next effect in the catalog (for prev/next nav). Null if at end. */
@@ -113,7 +131,13 @@ interface EffectDetailProps {
  * - Prev / next navigation across the catalog
  * - Favorite heart toggle (synced with the grid via localStorage events)
  */
-export function EffectDetail({ effect, similar, prev, next }: EffectDetailProps) {
+export function EffectDetail({
+  effect,
+  similar,
+  related = [],
+  prev,
+  next,
+}: EffectDetailProps) {
   const surfaceDark = effect.darkSurface
   const previewRef = React.useRef<HTMLDivElement>(null)
 
@@ -728,6 +752,7 @@ export function EffectDetail({ effect, similar, prev, next }: EffectDetailProps)
               >
                 <div
                   ref={previewRef}
+                  id={FRAME_ID}
                   className={cn(
                     'relative flex items-center justify-center overflow-hidden rounded-xl border border-border/50 p-8',
                     stageMinHeight(effect.category),
@@ -737,6 +762,21 @@ export function EffectDetail({ effect, similar, prev, next }: EffectDetailProps)
                   dangerouslySetInnerHTML={{ __html: effect.html }}
                 />
               </div>
+              {/*
+                The designer's exit, and the reason it is here rather than
+                in the Code tab beside <OpenInSandbox>: a designer does not
+                open a Code tab. It sits under the stage because the stage
+                is what it traces — the rendered preview, sliders and all,
+                so a frame copied after tweaking the hue is the tweaked
+                one. Blocks, pages and templates have had this since the
+                tracer shipped; the 1,111 effect pages did not, which left
+                the rung a designer is most likely to land on as the one
+                rung with no route into Figma.
+              */}
+              <div className="mt-2 flex justify-end">
+                <CopyFrameForFigma targetId={FRAME_ID} name={effect.name} level="effect" />
+              </div>
+
               {/* Inject this effect's CSS into the document */}
               <style dangerouslySetInnerHTML={{ __html: customizedCss }} />
 
@@ -875,6 +915,64 @@ export function EffectDetail({ effect, similar, prev, next }: EffectDetailProps)
           {/* What's in the box, above the cross-sell — someone deciding
               whether to take this needs the contents before the neighbours. */}
           <EffectSpecCard effect={effect} />
+
+          {/*
+            The only link on this page that goes anywhere but sideways.
+            "Similar effects" below is six more of the same free thing;
+            this is the rung that is actually sold, and until it existed a
+            reader who landed on an effect from search had no route to it.
+
+            Rendered only when the bridge produced something — see
+            lib/related.ts. It never pads, so an empty list means an empty
+            list, and an empty section is worse than no section.
+          */}
+          {related.length > 0 ? (
+            <div className="rounded-lg border border-border/60 bg-card/60 p-4">
+              <h2 className="text-sm font-semibold tracking-tight">Where this fits</h2>
+              {/*
+                The claim, stated rather than implied. None of these blocks
+                is built from this effect and nothing in the data records
+                such a link — this is "sections where an element like this
+                lives", which is a navigational claim about the catalog.
+              */}
+              <p className="mt-1 text-[11px] leading-relaxed text-muted-foreground">
+                Full sections that use this kind of element.
+              </p>
+              <ul className="mt-3 space-y-2">
+                {related.map((block) => (
+                  <li
+                    key={block.id}
+                    className="group relative rounded-md p-2 transition-colors hover:bg-muted/60"
+                  >
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="truncate text-sm font-medium group-hover:text-primary">
+                        {/* Stretched anchor, same shape and same reason as
+                            the Similar rail below. */}
+                        <Link
+                          href={block.href}
+                          prefetch={false}
+                          className="after:absolute after:inset-0 after:content-['']"
+                        >
+                          {block.name}
+                        </Link>
+                      </span>
+                      <Badge variant="outline" className="shrink-0 text-[10px]">
+                        {block.category}
+                      </Badge>
+                    </div>
+                    <p className="mt-0.5 line-clamp-2 text-[11px] text-muted-foreground">
+                      {block.description}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+              <Button asChild variant="outline" size="sm" className="mt-3 w-full">
+                <Link href="/blocks" prefetch={false}>
+                  Browse all blocks
+                </Link>
+              </Button>
+            </div>
+          ) : null}
 
           <div className="rounded-lg border border-border/60 bg-card/60 p-4">
             <div className="mb-3 flex items-center justify-between">

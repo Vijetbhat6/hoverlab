@@ -122,6 +122,7 @@ export default async function BlockDetailPage({ params }: PageProps) {
           keywords: block.tags,
           dependencies: block.deps,
           datePublished: added,
+          dateModified: updated,
         })}
       />
       <JsonLd
