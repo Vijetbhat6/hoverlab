@@ -187,6 +187,20 @@ export type AnalyticsEvent =
    * is the one distribution channel that cannot be re-ranked, so which
    * surface actually feeds it is worth knowing.
    */
+  /*
+   * A whole kit into the bundle. The kits exist to answer "give me the
+   * storefront things" in one press, and this is the only measure of
+   * whether that press happens at all — a kit page that is read and never
+   * pressed is a hub, not a product.
+   *
+   * `added` is separate from `items` on purpose: pressing a second time
+   * adds nothing, and the difference between the two is what says whether
+   * a reader is assembling a bundle across several kits or re-pressing one.
+   */
+  | {
+      name: 'kit_added_to_bundle'
+      props: { kit: string; items: number; added: number }
+    }
   | { name: 'newsletter_subscribed'; props: { source: string } }
   /*
    * The designer tools, and whether they are a funnel or a cul-de-sac.

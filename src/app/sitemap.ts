@@ -8,6 +8,7 @@ import { blockCategorySlug } from '@/lib/blocks/block-types'
 import { PAGE_INDEX } from '@/lib/pages/page-index'
 import { TEMPLATE_INDEX } from '@/lib/templates/template-index'
 import { PATHS } from '@/lib/paths/catalog'
+import { KITS } from '@/lib/kits/catalog'
 import { addedAt } from '@/lib/recency'
 
 /**
@@ -64,6 +65,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: absoluteUrl('/paths'), changeFrequency: 'weekly' as const, priority: 0.8 },
     ...PATHS.map((path) => ({
       url: absoluteUrl(`/paths/${path.slug}`),
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
+    })),
+    // Kits — the cross-rung sets. "react ui kit", "saas starter kit" and
+    // "ecommerce ui kit" are the category's head terms, and until these
+    // pages existed the site had nothing shaped like an answer to them:
+    // every hub was one rung, and a kit is the whole job.
+    { url: absoluteUrl('/kits'), changeFrequency: 'weekly' as const, priority: 0.8 },
+    ...KITS.map((kit) => ({
+      url: absoluteUrl(`/kits/${kit.slug}`),
       changeFrequency: 'monthly' as const,
       priority: 0.8,
     })),

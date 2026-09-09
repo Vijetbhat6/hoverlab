@@ -27,6 +27,7 @@ import { BLOCK_COUNT } from '@/lib/blocks/block-index'
 import { PAGE_COUNT } from '@/lib/pages/page-index'
 import { TEMPLATE_COUNT } from '@/lib/templates/template-index'
 import { PATHS } from '@/lib/paths/catalog'
+import { KITS } from '@/lib/kits/catalog'
 import { SOCIAL, isPlaceholder, type SocialLink } from '@/lib/social'
 
 interface FooterLink {
@@ -44,6 +45,7 @@ const CATALOG_LINKS: FooterLink[] = [
   { label: 'Templates', href: '/templates', meta: String(TEMPLATE_COUNT) },
   { label: 'Categories', href: '/category', meta: String(CATEGORIES.length) },
   { label: 'Guided paths', href: '/paths', meta: String(PATHS.length) },
+  { label: 'Kits', href: '/kits', meta: String(KITS.length) },
 ]
 
 /**

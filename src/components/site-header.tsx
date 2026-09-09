@@ -127,6 +127,12 @@ const NAV: Array<{
     hint: 'Start here — the catalog in the order you would actually build it',
   },
   {
+    label: 'Kits',
+    href: '/kits',
+    match: ['/kits'],
+    hint: 'Everything for one job at once — the template, the screens and the sections',
+  },
+  {
     label: 'Effects',
     href: '/library',
     match: ['/library', '/effect', '/category'],
