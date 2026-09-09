@@ -134,7 +134,24 @@ interface BlockSpec {
     heading?: string
     intro?: string
     /** stat-band: the tiles. list-panel: the rows. split-feature: the points. */
-    items?: Array<{ label: string; value?: string; detail?: string; tone?: string }>
+    items?: Array<{
+      label: string
+      value?: string
+      detail?: string
+      tone?: string
+      /**
+       * list-panel: what the badge SAYS. `tone` is what it looks like.
+       *
+       * These were one field, and the badge rendered the tone word — a row
+       * reading "search_docs — succeeded" with a pill next to it saying
+       * "positive". `neutral` is worse: it is a developer-facing token
+       * with no meaning to a reader, printed in the UI. Splitting them
+       * lets the badge carry the real word ("retried", "3 weeks old",
+       * "blocked") while the colour stays on the four-value scale the
+       * token classes are built from.
+       */
+      status?: string
+    }>
     /** form-card: the fields. */
     fields?: Array<{ name: string; label: string; type?: string; hint?: string }>
     cta?: string
@@ -349,6 +366,8 @@ export interface ${component}Row {
   label: string
   detail?: string
   tone?: Tone
+  /** What the badge says. Falls back to the tone name when absent. */
+  status?: string
 }
 
 export interface ${component}Props {
@@ -379,7 +398,7 @@ ${seed
         row.label,
       )}, detail: ${JSON.stringify(row.detail ?? todo('row detail'))}, tone: ${JSON.stringify(
         (row.tone as string) ?? 'neutral',
-      )} },`,
+      )}${row.status ? `, status: ${JSON.stringify(row.status)}` : ''} },`,
   )
   .join('\n')}
 ]
@@ -439,7 +458,7 @@ export function ${component}({
                       TONE_CLASS[row.tone ?? 'neutral']
                     }\`}
                   >
-                    {row.tone ?? 'neutral'}
+                    {row.status ?? row.tone ?? 'neutral'}
                   </span>
                 </button>
               </li>

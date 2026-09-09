@@ -283,7 +283,19 @@ import { ChatAttachmentTray } from './sources/chat-attachment-tray'
  * halfway down the grid instead of at the top. Any new block that touches
  * `document`, focuses on mount, or calls `scrollIntoView` needs the same
  * escape hatch and the same flag here.
- */
+ */import { StatsBenchmarkBand } from './sources/stats-benchmark-band'
+import { SecurityPostureBand } from './sources/security-posture-band'
+import { NotificationDigestList } from './sources/notification-digest-list'
+import { AgentRetryLog } from './sources/agent-retry-log'
+import { RetrievalFreshnessList } from './sources/retrieval-freshness-list'
+import { ApprovalPolicyList } from './sources/approval-policy-list'
+import { FaqObjectionList } from './sources/faq-objection-list'
+import { ContactSalesForm } from './sources/contact-sales-form'
+import { UploadRequirementsForm } from './sources/upload-requirements-form'
+import { ReferralWaitlistForm } from './sources/referral-waitlist-form'
+import { PricingValueSplit } from './sources/pricing-value-split'
+import { ProductSpecSplit } from './sources/product-spec-split'
+
 export const BLOCK_PREVIEWS: Record<string, React.ReactNode> = {
   'hero-split': <HeroSplit />,
   'hero-centered': <HeroCentered />,
@@ -521,6 +533,18 @@ export const BLOCK_PREVIEWS: Record<string, React.ReactNode> = {
   'drawer-record-detail': <DrawerRecordDetail />,
   'chat-model-picker': <ChatModelPicker />,
   'chat-attachment-tray': <ChatAttachmentTray />,
+  'stats-benchmark-band': <StatsBenchmarkBand />,
+  'security-posture-band': <SecurityPostureBand />,
+  'notification-digest-list': <NotificationDigestList />,
+  'agent-retry-log': <AgentRetryLog />,
+  'retrieval-freshness-list': <RetrievalFreshnessList />,
+  'approval-policy-list': <ApprovalPolicyList />,
+  'faq-objection-list': <FaqObjectionList />,
+  'contact-sales-form': <ContactSalesForm />,
+  'upload-requirements-form': <UploadRequirementsForm />,
+  'referral-waitlist-form': <ReferralWaitlistForm />,
+  'pricing-value-split': <PricingValueSplit />,
+  'product-spec-split': <ProductSpecSplit />,
 }
 
 /** The rendered preview for a block, or undefined if the key is unknown. */

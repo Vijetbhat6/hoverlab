@@ -115,6 +115,10 @@
     "lines": 320,
     "files": 1
   },
+  "contact-sales-form": {
+    "lines": 171,
+    "files": 1
+  },
   "confirm-dialog": {
     "lines": 184,
     "files": 1
@@ -187,6 +191,10 @@
     "lines": 211,
     "files": 1
   },
+  "notification-digest-list": {
+    "lines": 141,
+    "files": 1
+  },
   "stats-band": {
     "lines": 51,
     "files": 1
@@ -205,6 +213,14 @@
   },
   "stats-timeline": {
     "lines": 139,
+    "files": 1
+  },
+  "stats-benchmark-band": {
+    "lines": 98,
+    "files": 1
+  },
+  "security-posture-band": {
+    "lines": 97,
     "files": 1
   },
   "logo-cloud": {
@@ -275,6 +291,10 @@
     "lines": 231,
     "files": 1
   },
+  "pricing-value-split": {
+    "lines": 139,
+    "files": 1
+  },
   "testimonial-grid": {
     "lines": 132,
     "files": 1
@@ -313,6 +333,10 @@
   },
   "faq-search": {
     "lines": 219,
+    "files": 1
+  },
+  "faq-objection-list": {
+    "lines": 143,
     "files": 1
   },
   "changelog-timeline": {
@@ -369,6 +393,10 @@
   },
   "cta-inline-card": {
     "lines": 132,
+    "files": 1
+  },
+  "referral-waitlist-form": {
+    "lines": 170,
     "files": 1
   },
   "auth-login-card": {
@@ -643,6 +671,10 @@
     "lines": 257,
     "files": 1
   },
+  "upload-requirements-form": {
+    "lines": 173,
+    "files": 1
+  },
   "chat-thread-panel": {
     "lines": 253,
     "files": 1
@@ -695,6 +727,10 @@
     "lines": 330,
     "files": 1
   },
+  "agent-retry-log": {
+    "lines": 142,
+    "files": 1
+  },
   "approval-request-card": {
     "lines": 242,
     "files": 1
@@ -713,6 +749,10 @@
   },
   "approval-queue": {
     "lines": 307,
+    "files": 1
+  },
+  "approval-policy-list": {
+    "lines": 145,
     "files": 1
   },
   "context-chunk-cards": {
@@ -737,6 +777,10 @@
   },
   "retrieval-index-status": {
     "lines": 246,
+    "files": 1
+  },
+  "retrieval-freshness-list": {
+    "lines": 140,
     "files": 1
   },
   "selection-ai-toolbar": {
@@ -797,6 +841,10 @@
   },
   "product-size-guide": {
     "lines": 227,
+    "files": 1
+  },
+  "product-spec-split": {
+    "lines": 140,
     "files": 1
   },
   "cart-drawer": {

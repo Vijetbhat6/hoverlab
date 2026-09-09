@@ -527,6 +527,21 @@
       "findings": []
     },
     {
+      "id": "contact-sales-form",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
       "id": "confirm-dialog",
       "kind": "block",
       "passed": [
@@ -797,6 +812,21 @@
       "findings": []
     },
     {
+      "id": "notification-digest-list",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
       "id": "stats-band",
       "kind": "block",
       "passed": [
@@ -858,6 +888,36 @@
     },
     {
       "id": "stats-timeline",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "stats-benchmark-band",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "security-posture-band",
       "kind": "block",
       "passed": [
         "img-alt",
@@ -1127,6 +1187,21 @@
       "findings": []
     },
     {
+      "id": "pricing-value-split",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
       "id": "testimonial-grid",
       "kind": "block",
       "passed": [
@@ -1263,6 +1338,21 @@
     },
     {
       "id": "faq-search",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "faq-objection-list",
       "kind": "block",
       "passed": [
         "img-alt",
@@ -1473,6 +1563,21 @@
     },
     {
       "id": "cta-inline-card",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "referral-waitlist-form",
       "kind": "block",
       "passed": [
         "img-alt",
@@ -2507,6 +2612,21 @@
       "findings": []
     },
     {
+      "id": "upload-requirements-form",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
       "id": "chat-thread-panel",
       "kind": "block",
       "passed": [
@@ -2702,6 +2822,21 @@
       "findings": []
     },
     {
+      "id": "agent-retry-log",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
       "id": "approval-request-card",
       "kind": "block",
       "passed": [
@@ -2763,6 +2898,21 @@
     },
     {
       "id": "approval-queue",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "approval-policy-list",
       "kind": "block",
       "passed": [
         "img-alt",
@@ -2853,6 +3003,21 @@
     },
     {
       "id": "retrieval-index-status",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "retrieval-freshness-list",
       "kind": "block",
       "passed": [
         "img-alt",
@@ -3078,6 +3243,21 @@
     },
     {
       "id": "product-size-guide",
+      "kind": "block",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled"
+      ],
+      "findings": []
+    },
+    {
+      "id": "product-spec-split",
       "kind": "block",
       "passed": [
         "img-alt",

@@ -353,6 +353,16 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     deps: ['lucide-react'],
     featured: true,
   },
+  {
+    id: 'contact-sales-form',
+    name: "Contact Sales Form",
+    category: 'Contact & Forms',
+    description:
+      "A qualifying contact form that asks the three things a first reply needs, and says what happens next before you send it.",
+    tags: ["contact", "sales", "form", "enterprise", "qualification"],
+    previewComponent: 'contact-sales-form',
+    deps: [],
+  },
   /* ---------------------------- Modals & Drawers ------------------- */
   {
     id: 'confirm-dialog',
@@ -553,6 +563,16 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     previewComponent: 'push-permission-prompt',
     deps: ['lucide-react'],
   },
+  {
+    id: 'notification-digest-list',
+    name: "Notification Digest",
+    category: 'Notifications',
+    description:
+      "A day's notifications collapsed into one digest, grouped by what they are rather than when they arrived.",
+    tags: ["notifications", "digest", "inbox", "grouping", "email"],
+    previewComponent: 'notification-digest-list',
+    deps: [],
+  },
 
   /* ---------------------------- Sections --------------------------- */
   {
@@ -604,6 +624,26 @@ export const BLOCK_CATALOG: BlockRecord[] = [
       'The same measurement taken year after year down a vertical rail, each with the event that explains it — the shape for trajectory, which no snapshot of four numbers can claim.',
     tags: ['stats', 'timeline', 'milestones', 'growth', 'about'],
     previewComponent: 'stats-timeline',
+    deps: [],
+  },
+  {
+    id: 'stats-benchmark-band',
+    name: "Benchmark Stat Band",
+    category: 'Stats',
+    description:
+      "Performance figures with the measurement method printed beside each one, so a sceptical reader can check rather than take them.",
+    tags: ["stats", "benchmark", "performance", "metrics", "proof"],
+    previewComponent: 'stats-benchmark-band',
+    deps: [],
+  },
+  {
+    id: 'security-posture-band',
+    name: "Security Posture Band",
+    category: 'Stats',
+    description:
+      "The compliance and security facts a procurement reviewer asks for, stated as figures with their scope rather than as badges.",
+    tags: ["stats", "security", "compliance", "trust", "enterprise"],
+    previewComponent: 'security-posture-band',
     deps: [],
   },
   {
@@ -783,6 +823,16 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     deps: ['lucide-react'],
   },
   {
+    id: 'pricing-value-split',
+    name: "Pricing Value Split",
+    category: 'Pricing',
+    description:
+      "The case for the price, made beside the price — what the alternative costs, in the units a buyer already measures.",
+    tags: ["pricing", "value", "comparison", "roi", "split"],
+    previewComponent: 'pricing-value-split',
+    deps: [],
+  },
+  {
     id: 'testimonial-grid',
     name: 'Masonry Testimonial Wall',
     category: 'Testimonials',
@@ -883,6 +933,16 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     tags: ['faq', 'search', 'filter', 'help centre', 'support'],
     previewComponent: 'faq-search',
     deps: ['lucide-react'],
+  },
+  {
+    id: 'faq-objection-list',
+    name: "Objection FAQ",
+    category: 'FAQ',
+    description:
+      "An FAQ written from the objections that stop a sale rather than from the questions that are comfortable to answer.",
+    tags: ["faq", "objections", "pricing", "sales", "conversion"],
+    previewComponent: 'faq-objection-list',
+    deps: [],
   },
   {
     id: 'changelog-timeline',
@@ -1026,6 +1086,16 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     tags: ['cta', 'inline', 'article', 'content', 'conversion'],
     previewComponent: 'cta-inline-card',
     deps: ['lucide-react'],
+  },
+  {
+    id: 'referral-waitlist-form',
+    name: "Referral Waitlist Form",
+    category: 'CTA Sections',
+    description:
+      "A waitlist capture that shows position and referral credit, turning a dead-end confirmation into the one action that moves the queue.",
+    tags: ["waitlist", "referral", "cta", "signup", "growth"],
+    previewComponent: 'referral-waitlist-form',
+    deps: [],
   },
   /* ================================================================ *
    *  Product — the blocks an app is built from
@@ -1786,6 +1856,16 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     previewComponent: 'avatar-crop-upload',
     deps: ['lucide-react'],
   },
+  {
+    id: 'upload-requirements-form',
+    name: "Upload Requirements Form",
+    category: 'File Upload',
+    description:
+      "An upload form that states the constraints before the file is chosen, rather than rejecting it after a two-minute transfer.",
+    tags: ["upload", "file", "validation", "constraints", "form"],
+    previewComponent: 'upload-requirements-form',
+    deps: [],
+  },
 
   /* ---------------------------- Agent Chat ------------------------- */
   {
@@ -1934,6 +2014,16 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     deps: ['lucide-react'],
     featured: true,
   },
+  {
+    id: 'agent-retry-log',
+    name: "Agent Retry Log",
+    category: 'Agent Reasoning',
+    description:
+      "What the agent tried, what failed, and what it did about it — the run history a user needs before they trust a second attempt.",
+    tags: ["agent", "retry", "failure", "reasoning", "audit"],
+    previewComponent: 'agent-retry-log',
+    deps: [],
+  },
   /* ------------------------ Human in the Loop ---------------------- */
   {
     id: 'approval-request-card',
@@ -1987,6 +2077,16 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     tags: ['approval', 'queue', 'bulk', 'review', 'agent'],
     previewComponent: 'approval-queue',
     deps: ['lucide-react'],
+  },
+  {
+    id: 'approval-policy-list',
+    name: "Approval Policy List",
+    category: 'Human in the Loop',
+    description:
+      "Which agent actions run unattended and which need a signature, stated as a policy the operator can read before anything happens.",
+    tags: ["approval", "policy", "guardrails", "permissions", "agent"],
+    previewComponent: 'approval-policy-list',
+    deps: [],
   },
   /* ----------------------- Retrieval & Context --------------------- */
   {
@@ -2051,6 +2151,16 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     tags: ['rag', 'indexing', 'freshness', 'connectors', 'sync'],
     previewComponent: 'retrieval-index-status',
     deps: ['lucide-react'],
+  },
+  {
+    id: 'retrieval-freshness-list',
+    name: "Retrieval Freshness List",
+    category: 'Retrieval & Context',
+    description:
+      "Retrieved sources ranked by how stale they are, because a confident answer from a two-year-old document is the failure people do not catch.",
+    tags: ["retrieval", "rag", "freshness", "sources", "staleness"],
+    previewComponent: 'retrieval-freshness-list',
+    deps: [],
   },
   /* ------------------------ Inline AI Actions ---------------------- */
   {
@@ -2232,6 +2342,16 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     tags: ['size', 'guide', 'apparel', 'measurements', 'returns'],
     previewComponent: 'product-size-guide',
     deps: ['lucide-react'],
+  },
+  {
+    id: 'product-spec-split',
+    name: "Product Spec Split",
+    category: 'Product Detail',
+    description:
+      "The specification table beside the product image, with the two or three figures that decide the purchase pulled out of it.",
+    tags: ["product", "specification", "detail", "commerce", "split"],
+    previewComponent: 'product-spec-split',
+    deps: [],
   },
   /* ---------------------------- Cart & Checkout ------------------- */
   {

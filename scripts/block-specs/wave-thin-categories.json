@@ -1,0 +1,515 @@
+[
+  {
+    "id": "stats-benchmark-band",
+    "name": "Benchmark Stat Band",
+    "category": "Stats",
+    "description": "Performance figures with the measurement method printed beside each one, so a sceptical reader can check rather than take them.",
+    "tags": [
+      "stats",
+      "benchmark",
+      "performance",
+      "metrics",
+      "proof"
+    ],
+    "shape": "stat-band",
+    "deps": [],
+    "content": {
+      "eyebrow": "Measured, not claimed",
+      "heading": "How fast it is, and how we know",
+      "intro": "Every number below names the conditions it was taken under. A benchmark without its method is a marketing figure wearing a lab coat.",
+      "items": [
+        {
+          "label": "Cold start",
+          "value": "112 ms",
+          "detail": "p50 over 10,000 invocations, Frankfurt, empty cache."
+        },
+        {
+          "label": "Query throughput",
+          "value": "24.6k/s",
+          "detail": "Single node, 4 vCPU, read-only workload."
+        },
+        {
+          "label": "Index rebuild",
+          "value": "38 s",
+          "detail": "One million rows, measured wall-clock end to end."
+        },
+        {
+          "label": "Memory ceiling",
+          "value": "512 MB",
+          "detail": "Peak RSS under the throughput run above."
+        }
+      ]
+    }
+  },
+  {
+    "id": "security-posture-band",
+    "name": "Security Posture Band",
+    "category": "Stats",
+    "description": "The compliance and security facts a procurement reviewer asks for, stated as figures with their scope rather than as badges.",
+    "tags": [
+      "stats",
+      "security",
+      "compliance",
+      "trust",
+      "enterprise"
+    ],
+    "shape": "stat-band",
+    "deps": [],
+    "content": {
+      "eyebrow": "Security",
+      "heading": "What a reviewer will ask, answered first",
+      "intro": "A wall of certification logos answers none of these. Each figure names its scope, because a control that covers one environment and not the other is the thing a reviewer is looking for.",
+      "items": [
+        {
+          "label": "Encryption at rest",
+          "value": "AES-256",
+          "detail": "Every store, including backups and the search index."
+        },
+        {
+          "label": "Median patch time",
+          "value": "31 h",
+          "detail": "Critical CVEs, from advisory to production, trailing year."
+        },
+        {
+          "label": "Data regions",
+          "value": "4",
+          "detail": "EU, US, UK and AU. Pinned per workspace, never replicated out."
+        },
+        {
+          "label": "Access reviews",
+          "value": "Quarterly",
+          "detail": "All production access, logged and exportable."
+        }
+      ]
+    }
+  },
+  {
+    "id": "notification-digest-list",
+    "name": "Notification Digest",
+    "category": "Notifications",
+    "description": "A day's notifications collapsed into one digest, grouped by what they are rather than when they arrived.",
+    "tags": [
+      "notifications",
+      "digest",
+      "inbox",
+      "grouping",
+      "email"
+    ],
+    "shape": "list-panel",
+    "deps": [],
+    "content": {
+      "heading": "Yesterday, in one message",
+      "intro": "The alternative is fourteen separate emails, which is how a notification system trains people to filter it into a folder they never open.",
+      "items": [
+        {
+          "label": "3 deploys shipped",
+          "detail": "All green. The last one is still inside its rollback window.",
+          "tone": "positive",
+          "status": "3 deploys"
+        },
+        {
+          "label": "1 build failed",
+          "detail": "api-gateway on main — the test that failed also failed on the previous run.",
+          "tone": "critical",
+          "status": "1 failed"
+        },
+        {
+          "label": "6 comments on your reviews",
+          "detail": "Two are blocking, four are questions you can answer in a line.",
+          "tone": "neutral",
+          "status": "6 comments"
+        },
+        {
+          "label": "Usage at 82% of plan",
+          "detail": "On the current run rate you cross the limit on the 26th.",
+          "tone": "warning",
+          "status": "82% used"
+        },
+        {
+          "label": "2 people joined the workspace",
+          "detail": "Both are still on the default role and have not opened anything.",
+          "tone": "neutral",
+          "status": "2 joined"
+        }
+      ]
+    }
+  },
+  {
+    "id": "agent-retry-log",
+    "name": "Agent Retry Log",
+    "category": "Agent Reasoning",
+    "description": "What the agent tried, what failed, and what it did about it — the run history a user needs before they trust a second attempt.",
+    "tags": [
+      "agent",
+      "retry",
+      "failure",
+      "reasoning",
+      "audit"
+    ],
+    "shape": "list-panel",
+    "deps": [],
+    "content": {
+      "heading": "What it tried before this answer",
+      "intro": "A retried step that is invisible reads as a slow agent. A retried step that is shown reads as a careful one, and it is the same run either way.",
+      "items": [
+        {
+          "label": "search_docs — succeeded",
+          "detail": "First attempt. 12 passages returned, 4 above the relevance floor.",
+          "tone": "positive",
+          "status": "ok"
+        },
+        {
+          "label": "fetch_invoice — rate limited, retried",
+          "detail": "429 on the first call. Backed off 2.1 s and succeeded on the second.",
+          "tone": "warning",
+          "status": "retried"
+        },
+        {
+          "label": "run_query — failed twice, abandoned",
+          "detail": "Column `renewed_at` does not exist. The agent stopped rather than guessing a column name.",
+          "tone": "critical",
+          "status": "abandoned"
+        },
+        {
+          "label": "summarise — succeeded",
+          "detail": "Ran against the two sources that resolved, and says so in the answer.",
+          "tone": "positive",
+          "status": "ok"
+        }
+      ]
+    }
+  },
+  {
+    "id": "retrieval-freshness-list",
+    "name": "Retrieval Freshness List",
+    "category": "Retrieval & Context",
+    "description": "Retrieved sources ranked by how stale they are, because a confident answer from a two-year-old document is the failure people do not catch.",
+    "tags": [
+      "retrieval",
+      "rag",
+      "freshness",
+      "sources",
+      "staleness"
+    ],
+    "shape": "list-panel",
+    "deps": [],
+    "content": {
+      "heading": "How old the sources are",
+      "intro": "Relevance ranking says which document matched. It says nothing about whether the document is still true, and that is the question a reader has once the answer surprises them.",
+      "items": [
+        {
+          "label": "Pricing page — 2 days old",
+          "detail": "Re-indexed after the last deploy. Matches what is live.",
+          "tone": "positive",
+          "status": "2 days"
+        },
+        {
+          "label": "API reference — 3 weeks old",
+          "detail": "Two endpoints have shipped since. Neither is quoted in this answer.",
+          "tone": "neutral",
+          "status": "3 weeks"
+        },
+        {
+          "label": "Onboarding guide — 8 months old",
+          "detail": "Predates the current signup flow. Cited here for the account model only.",
+          "tone": "warning",
+          "status": "8 months"
+        },
+        {
+          "label": "Migration notes — 2 years old",
+          "detail": "Superseded twice. Excluded from this answer and kept for the audit trail.",
+          "tone": "critical",
+          "status": "2 years"
+        }
+      ]
+    }
+  },
+  {
+    "id": "approval-policy-list",
+    "name": "Approval Policy List",
+    "category": "Human in the Loop",
+    "description": "Which agent actions run unattended and which need a signature, stated as a policy the operator can read before anything happens.",
+    "tags": [
+      "approval",
+      "policy",
+      "guardrails",
+      "permissions",
+      "agent"
+    ],
+    "shape": "list-panel",
+    "deps": [],
+    "content": {
+      "heading": "What runs without asking",
+      "intro": "Approval prompts are trusted in proportion to how predictable they are. Someone who cannot say in advance which actions will stop and ask learns to approve everything.",
+      "items": [
+        {
+          "label": "Read anything",
+          "detail": "Runs unattended. Every read is logged with the query that caused it.",
+          "tone": "positive",
+          "status": "unattended"
+        },
+        {
+          "label": "Draft and edit documents",
+          "detail": "Runs unattended in a draft state. Publishing is a separate action.",
+          "tone": "positive",
+          "status": "unattended"
+        },
+        {
+          "label": "Send an external message",
+          "detail": "Always asks. The recipient and the full body are shown before you sign.",
+          "tone": "warning",
+          "status": "asks"
+        },
+        {
+          "label": "Spend money or change a plan",
+          "detail": "Always asks, and the approval expires after five minutes rather than waiting.",
+          "tone": "critical",
+          "status": "asks"
+        },
+        {
+          "label": "Delete production data",
+          "detail": "Blocked outright. There is no approval that turns this on from here.",
+          "tone": "critical",
+          "status": "blocked"
+        }
+      ]
+    }
+  },
+  {
+    "id": "faq-objection-list",
+    "name": "Objection FAQ",
+    "category": "FAQ",
+    "description": "An FAQ written from the objections that stop a sale rather than from the questions that are comfortable to answer.",
+    "tags": [
+      "faq",
+      "objections",
+      "pricing",
+      "sales",
+      "conversion"
+    ],
+    "shape": "list-panel",
+    "deps": [],
+    "content": {
+      "heading": "The awkward questions",
+      "intro": "Most FAQs answer what the company wishes it were asked. These are the four that actually decide it, including the one where the honest answer is no.",
+      "items": [
+        {
+          "label": "Is this cheaper than building it ourselves?",
+          "detail": "For one screen, no — build it. It stops being true somewhere around the fourth.",
+          "tone": "neutral",
+          "status": "sometimes no"
+        },
+        {
+          "label": "What happens if you shut down?",
+          "detail": "The source is already in your repository and carries no runtime dependency on us.",
+          "tone": "positive",
+          "status": "yes"
+        },
+        {
+          "label": "Can I get a refund?",
+          "detail": "Fourteen days, no questions, and it is stated on the refunds page rather than here only.",
+          "tone": "positive",
+          "status": "yes"
+        },
+        {
+          "label": "Do I have to credit you?",
+          "detail": "No. Attribution is not required anywhere, including on the free tier.",
+          "tone": "positive",
+          "status": "no"
+        }
+      ]
+    }
+  },
+  {
+    "id": "contact-sales-form",
+    "name": "Contact Sales Form",
+    "category": "Contact & Forms",
+    "description": "A qualifying contact form that asks the three things a first reply needs, and says what happens next before you send it.",
+    "tags": [
+      "contact",
+      "sales",
+      "form",
+      "enterprise",
+      "qualification"
+    ],
+    "shape": "form-card",
+    "deps": [],
+    "content": {
+      "heading": "Talk to someone who builds this",
+      "intro": "Three fields, because a fourteen-field form is a way of asking for the meeting twice. You get a reply inside one working day.",
+      "cta": "Request a call",
+      "fields": [
+        {
+          "name": "email",
+          "label": "Work email",
+          "type": "email",
+          "hint": "We reply here. It is never added to a list."
+        },
+        {
+          "name": "company",
+          "label": "Company",
+          "type": "text",
+          "hint": "Enough to look you up before the call."
+        },
+        {
+          "name": "context",
+          "label": "What are you building?",
+          "type": "text",
+          "hint": "One line is plenty. It decides who replies."
+        }
+      ]
+    }
+  },
+  {
+    "id": "upload-requirements-form",
+    "name": "Upload Requirements Form",
+    "category": "File Upload",
+    "description": "An upload form that states the constraints before the file is chosen, rather than rejecting it after a two-minute transfer.",
+    "tags": [
+      "upload",
+      "file",
+      "validation",
+      "constraints",
+      "form"
+    ],
+    "shape": "form-card",
+    "deps": [],
+    "content": {
+      "heading": "Send us the file",
+      "intro": "The limits are here rather than in the error you would otherwise meet after uploading. Rejecting a 400 MB file after transferring it is a failure of the form, not of the person.",
+      "cta": "Upload",
+      "fields": [
+        {
+          "name": "file",
+          "label": "File",
+          "type": "file",
+          "hint": "CSV, XLSX or JSON. Up to 50 MB — larger files go through the import API."
+        },
+        {
+          "name": "label",
+          "label": "Name this import",
+          "type": "text",
+          "hint": "Shown in the import history. The filename is kept either way."
+        },
+        {
+          "name": "notify",
+          "label": "Notify on completion",
+          "type": "email",
+          "hint": "Optional. Large imports finish long after you close the tab."
+        }
+      ]
+    }
+  },
+  {
+    "id": "referral-waitlist-form",
+    "name": "Referral Waitlist Form",
+    "category": "CTA Sections",
+    "description": "A waitlist capture that shows position and referral credit, turning a dead-end confirmation into the one action that moves the queue.",
+    "tags": [
+      "waitlist",
+      "referral",
+      "cta",
+      "signup",
+      "growth"
+    ],
+    "shape": "form-card",
+    "deps": [],
+    "content": {
+      "heading": "Join the queue, or skip it",
+      "intro": "Everyone who joins gets a position and a link. Three people through your link moves you up a hundred places, which is the only honest way a waitlist is worth sharing.",
+      "cta": "Get my place",
+      "fields": [
+        {
+          "name": "email",
+          "label": "Email",
+          "type": "email",
+          "hint": "One message when your place comes up. Nothing else."
+        },
+        {
+          "name": "referrer",
+          "label": "Referral code",
+          "type": "text",
+          "hint": "Optional. Credits whoever sent you, and moves you both up."
+        }
+      ]
+    }
+  },
+  {
+    "id": "pricing-value-split",
+    "name": "Pricing Value Split",
+    "category": "Pricing",
+    "description": "The case for the price, made beside the price — what the alternative costs, in the units a buyer already measures.",
+    "tags": [
+      "pricing",
+      "value",
+      "comparison",
+      "roi",
+      "split"
+    ],
+    "shape": "split-feature",
+    "deps": [],
+    "content": {
+      "eyebrow": "Why this price",
+      "heading": "Cheaper than the week you would spend instead",
+      "intro": "A price defends itself against the alternative, not against a competitor's price. The alternative here is engineering time, so that is the unit.",
+      "cta": "See the licence",
+      "items": [
+        {
+          "label": "One section, hand-built",
+          "detail": "Half a day for the markup, another for the responsive and keyboard passes."
+        },
+        {
+          "label": "The same section here",
+          "detail": "One command, and the accessibility decisions are already made and explained."
+        },
+        {
+          "label": "Where it stops being close",
+          "detail": "Around the fourth section. Before that, honestly, build it yourself."
+        },
+        {
+          "label": "What you are not buying",
+          "detail": "A dependency. The source lands in your repository and stops being ours."
+        }
+      ]
+    }
+  },
+  {
+    "id": "product-spec-split",
+    "name": "Product Spec Split",
+    "category": "Product Detail",
+    "description": "The specification table beside the product image, with the two or three figures that decide the purchase pulled out of it.",
+    "tags": [
+      "product",
+      "specification",
+      "detail",
+      "commerce",
+      "split"
+    ],
+    "shape": "split-feature",
+    "deps": [],
+    "content": {
+      "eyebrow": "Specification",
+      "heading": "The numbers that decide it",
+      "intro": "A forty-row spec table is a place to hide the three figures someone is actually comparing. These are pulled out; the full table is still below for the person who wants it.",
+      "cta": "Full specification",
+      "items": [
+        {
+          "label": "Weight",
+          "detail": "1.24 kg with the battery, which is the only way anyone carries it."
+        },
+        {
+          "label": "Battery",
+          "detail": "18 hours of mixed use, measured at 150 nits rather than at minimum brightness."
+        },
+        {
+          "label": "Ports",
+          "detail": "Two USB-C, one HDMI, one headphone. No dongle in the box and none needed."
+        },
+        {
+          "label": "Repairability",
+          "detail": "Battery and SSD are user-replaceable. Parts and the manual are public."
+        }
+      ]
+    }
+  }
+]
