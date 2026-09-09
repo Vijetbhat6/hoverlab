@@ -330,6 +330,28 @@ export async function getSkill(id, options = {}) {
 }
 
 /* ------------------------------------------------------------------ *
+ *  Kits
+ * ------------------------------------------------------------------ */
+
+/**
+ * The curated cross-tier sets, or one of them in full.
+ *
+ * One function against one endpoint, mirroring the API rather than
+ * splitting into list/detail — a kit has no source of its own, so its
+ * "detail" is a few kilobytes and a second route would only be somewhere
+ * for the two shapes to drift apart.
+ *
+ * With a slug the response carries `install`, which is the whole point:
+ * the precomputed id list an agent hands to `install_artifact` instead of
+ * assembling one and getting it subtly wrong.
+ */
+export async function listKits({ slug } = {}, options = {}) {
+  const query = slug ? `?slug=${encodeURIComponent(slug)}` : ''
+  const body = await request(`/api/v1/kits${query}`, options)
+  return slug ? body.kit : (body.kits ?? [])
+}
+
+/* ------------------------------------------------------------------ *
  *  Design DNA
  * ------------------------------------------------------------------ */
 

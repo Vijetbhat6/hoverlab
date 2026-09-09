@@ -61,7 +61,9 @@ export default function ApiDocsPage() {
       <DocsSection id="endpoints" title="Endpoints">
         <p>
           Each tier has the same pair — a list endpoint that searches, and a
-          detail endpoint that returns source.
+          detail endpoint that returns source. The five below them do not
+          follow that shape, because none of them is a tier: they answer
+          across the catalog rather than within one rung of it.
         </p>
 
         <DocsTable
@@ -88,8 +90,27 @@ export default function ApiDocsPage() {
               <C key="12">GET /api/v1/skills/{'{id}'}</C>,
               'One skill; add ?format=raw for the markdown itself',
             ],
+            [
+              <C key="13">GET /api/v1/kits</C>,
+              'The curated cross-tier sets; add ?slug= for one kit’s full contents and its install line',
+            ],
+            [
+              <C key="14">GET /api/v1/trending</C>,
+              'What has actually been copied and installed this week. Empty is a normal answer',
+            ],
+            [
+              <C key="15">GET /api/v1/revisions</C>,
+              'What changed and when, per artifact — the update ledger behind the changelog',
+            ],
           ]}
         />
+        {/*
+          These last three were live and undocumented, which is worse than
+          not shipping them: an endpoint nobody can find is a maintenance
+          cost with no users. Kits especially — it exists so an agent asked
+          to "build a storefront" can get an id list in one call, and an
+          agent reads this page.
+        */}
       </DocsSection>
 
       <DocsSection id="search" title="Searching">

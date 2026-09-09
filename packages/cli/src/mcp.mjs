@@ -6,15 +6,24 @@
  * makes the catalog something Cursor / Claude Code / Zed can *search and
  * install from* directly, which is distribution rather than a feature.
  *
- * The tool list is in two halves. `search_catalog` / `match_design` /
- * `install_artifact` / `init_template` / `get_design_dna` cover all four
- * tiers and are what an agent should reach for — `match_design` being the
- * entry point when the request arrives as a design (a Figma frame read over
- * the Figma MCP server, a screenshot) rather than as words, and
- * `get_design_dna` the one to call before writing any UI by hand, so what
- * the agent invents matches what the catalog installs. The four
- * effect-specific tools predate them and stay because they carry the
- * framework and recolouring knobs the generic ones do not.
+ * The tool list is in two halves. `search_catalog` / `get_kit` /
+ * `match_design` / `install_artifact` / `init_template` / `get_design_dna`
+ * cover all four tiers and are what an agent should reach for —
+ * `match_design` being the entry point when the request arrives as a design
+ * (a Figma frame read over the Figma MCP server, a screenshot) rather than
+ * as words, `get_kit` the entry point when it arrives as a whole product
+ * ("build me a storefront"), and `get_design_dna` the one to call before
+ * writing any UI by hand, so what the agent invents matches what the
+ * catalog installs. The four effect-specific tools predate them and stay
+ * because they carry the framework and recolouring knobs the generic ones
+ * do not.
+ *
+ * `get_kit` is the newest and the one worth justifying, since
+ * `search_catalog` can technically reach the same artifacts. It cannot
+ * reach the same *answer*: "build me a storefront" is twenty-five
+ * artifacts across three tiers, and assembling that from search results is
+ * twenty-five judgement calls with no way to notice what was left out. A
+ * kit is that list, already made and checked in CI.
  *
  * The protocol is hand-implemented rather than pulled from the official
  * SDK, deliberately: this package's headline command is
@@ -36,6 +45,7 @@ import {
   LEVELS,
   getDna,
   getEffect,
+  listKits,
   reportInstall,
   searchAll,
   searchEffects,
@@ -242,6 +252,22 @@ const TOOLS = [
         },
       },
       required: ['query'],
+      additionalProperties: false,
+    },
+  },
+  {
+    name: 'get_kit',
+    description:
+      'Get a curated Hoverlab kit — everything needed to build one kind of product, across all four tiers at once. Call with no slug to see what kits exist (SaaS launch, AI product, storefront, internal tools, waitlist, content and docs); call with a slug for the full contents of that kit and a ready-made list of ids. Prefer this over search_catalog when the request is a whole product rather than one piece — "build me a storefront", "I need an admin panel", "set up a waitlist" — because a kit is a curated answer to exactly that, and search_catalog would make you assemble one block at a time and guess what you missed. Follow up with install_artifact for each id, and init_template for any template the kit names.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        slug: {
+          type: 'string',
+          description:
+            'Kit slug, as returned by calling this tool with no arguments. Omit to list every kit with its size and what it is for.',
+        },
+      },
       additionalProperties: false,
     },
   },
@@ -548,6 +574,78 @@ async function runSearchCatalog(args) {
   return lines.join('\n')
 }
 
+/**
+ * Kits, listed or expanded.
+ *
+ * The reason this tool exists rather than leaving agents to `search_catalog`:
+ * "build me a storefront" is a request for about twenty-five artifacts
+ * across three tiers, and assembling that list from search results means
+ * twenty-five judgement calls and no way to know what was missed. A kit is
+ * that list, already made.
+ *
+ * The expanded form leads with the ids, grouped by tier, because that is
+ * what the next tool call needs. The prose — tagline, audience — comes
+ * after, since it helps the agent confirm it picked the right kit but is
+ * not what it acts on.
+ *
+ * Templates are separated out in the closing line rather than mixed into
+ * the install list. They take `init_template` and scaffold a whole project;
+ * handing all the ids to `install_artifact` would fail on exactly those,
+ * and a tool that sets up its caller to fail is worse than one that says
+ * less.
+ */
+async function runGetKit(args) {
+  if (!args.slug) {
+    const kits = await listKits()
+    if (!kits.length) {
+      return 'No kits are published right now.'
+    }
+    return [
+      `${kits.length} kits:`,
+      '',
+      ...kits.flatMap((kit) => [
+        `${kit.slug} — ${kit.name} (${kit.size} pieces)`,
+        `  ${kit.tagline}`,
+        `  ${kit.audience}`,
+        '',
+      ]),
+      'Call get_kit again with a slug for that kit\'s full contents and ids.',
+    ].join('\n')
+  }
+
+  const kit = await listKits({ slug: args.slug })
+  if (!kit) {
+    return `No kit called "${args.slug}". Call get_kit with no arguments to see the list.`
+  }
+
+  const lines = [`${kit.name} — ${kit.size} pieces`, '', kit.description, '']
+
+  const templates = []
+  for (const group of kit.contents) {
+    const ids = group.items.map((item) => item.id)
+    if (group.level === 'template') {
+      templates.push(...ids)
+      continue
+    }
+    lines.push(`${group.level}s (${group.count}): ${ids.join(' ')}`)
+  }
+
+  lines.push('', 'Install the ids above with install_artifact, one call each.')
+
+  if (templates.length) {
+    lines.push(
+      '',
+      `This kit also names ${templates.length === 1 ? 'a template' : 'templates'}: ` +
+        `${templates.join(' ')}. ` +
+        'A template is a whole runnable project rather than files dropped into one, ' +
+        'so it goes through init_template — not install_artifact. Use it when the user ' +
+        'is starting from nothing, and the pieces above when they already have a project.',
+    )
+  }
+
+  return lines.join('\n')
+}
+
 async function runInstallArtifact(args) {
   let written
   try {
@@ -685,6 +783,7 @@ const HANDLERS = {
   install_effect: runInstallEffect,
   list_categories: runListCategories,
   search_catalog: runSearchCatalog,
+  get_kit: runGetKit,
   match_design: runMatchDesign,
   install_artifact: runInstallArtifact,
   init_template: runInitTemplate,

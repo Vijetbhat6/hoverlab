@@ -54,6 +54,8 @@ import { BLOCKS } from '../blocks/blocks'
 import { PAGES } from '../pages/pages'
 import { EFFECTS } from '../effects'
 import { PATHS } from '../paths/catalog'
+import { KITS, getKit } from '../kits/catalog'
+import { kitGroups, kitSize } from '../kits/resolve'
 import type { Artifact, ArtifactFile } from '../artifact-types'
 import { cssToObject, type CssObject } from './css-to-object'
 import { DESIGN_PRESETS, findPreset, presetRegistryItem } from './presets'
@@ -141,6 +143,10 @@ const COLLISIONS = [
    */
   ...[...BLOCKS, ...PAGES, ...EFFECTS]
     .filter((a) => a.id.startsWith('path-'))
+    .map((a) => a.id),
+  /* Kits are published as `kit-{slug}` and carry the identical hazard. */
+  ...[...BLOCKS, ...PAGES, ...EFFECTS]
+    .filter((a) => a.id.startsWith('kit-'))
     .map((a) => a.id),
 ]
 if (COLLISIONS.length) {
@@ -302,6 +308,74 @@ function pathItem(slug: string, origin: string): RegistryItem | null {
   }
 }
 
+/**
+ * One kit, as an installable pack.
+ *
+ * The same shape as `pathItem` and for the same reason: a curated set is
+ * one name a consumer can install rather than a list they have to
+ * assemble. Kits existed only on the website and over REST, which meant
+ * the shadcn ecosystem — the channel these are actually distributed
+ * through — could not see them at all.
+ *
+ * `kit-` PREFIX, exactly as `path-` does. Item names share one namespace
+ * with every block, page and effect, and `storefront` is both a kit slug
+ * and a template id today. Without the prefix the collision guard would
+ * fail the build on a name nobody chose deliberately.
+ *
+ * WHAT A KIT PACK CANNOT CARRY, and this is the honest part: templates.
+ * `registryItemNames` has no template entries, because a template is a
+ * whole runnable project rather than a file set dropped into an existing
+ * one — `npx hoverlab init` is its install path. So a kit's registry
+ * dependencies are its pages, blocks and effects, and the template it
+ * names is reported in `meta` and in `docs` rather than silently dropped.
+ * A pack that quietly installed three quarters of a kit while claiming
+ * the whole thing is worse than one that says which quarter is missing.
+ */
+function kitItem(slug: string, origin: string): RegistryItem | null {
+  const kit = getKit(slug)
+  if (!kit) return null
+
+  const site = origin.replace(/\/$/, '')
+  const groups = kitGroups(kit)
+
+  // Everything except templates, which are not addressable here.
+  const installable = groups
+    .filter((group) => group.level !== 'template')
+    .flatMap((group) => group.items.map((item) => item.id))
+
+  const templates = (groups.find((g) => g.level === 'template')?.items ?? []).map((t) => t.id)
+
+  return {
+    name: `kit-${kit.slug}`,
+    type: 'registry:block',
+    title: kit.name,
+    // Counted from what this item will really install, not from the kit's
+    // own total — the two differ by exactly the templates, and describing
+    // the pack by the larger number is the lie this comment exists to
+    // prevent.
+    description:
+      `${kit.tagline} One install writes ${installable.length} of its ${kitSize(kit)} pieces` +
+      (templates.length > 0
+        ? `; the ${templates.length === 1 ? 'template is' : 'templates are'} a separate scaffold.`
+        : '.'),
+    categories: ['Kits'],
+    registryDependencies: installable.map((id) => itemUrl(id, origin)),
+    docs:
+      `${site}/kits/${kit.slug} lists every piece with its own page. ` +
+      (templates.length > 0
+        ? `The assembled starter is a whole project rather than a file set, so it installs with: npx hoverlab init ${templates[0]} ./my-app`
+        : 'Every piece in this kit installs through this pack.'),
+    meta: {
+      tier: 'kit',
+      href: `${site}/kits/${kit.slug}`,
+      pieces: kitSize(kit),
+      // Named rather than omitted, so a consumer reading the index can see
+      // what the pack does not cover without fetching the site.
+      templates,
+    },
+  }
+}
+
 function pageItem(id: string, origin: string, withContent: boolean): RegistryItem | null {
   const page = PAGE_BY_ID.get(id)
   if (!page) return null
@@ -397,6 +471,7 @@ export function registryItemNames(): string[] {
   return [
     REGISTRY_NAME,
     ...DESIGN_PRESETS.map((preset) => preset.name),
+    ...KITS.map((k) => `kit-${k.slug}`),
     ...PATHS.map((p) => `path-${p.slug}`),
     ...BLOCKS.map((b) => b.id),
     ...PAGES.map((p) => p.id),
@@ -421,6 +496,7 @@ export function buildRegistryItem(name: string, origin: string): RegistryItem | 
   // Paths next, and by prefix, so the lookup never has to guess: every
   // other branch keys off an id that could in principle be anything.
   if (name.startsWith('path-')) return pathItem(name.slice('path-'.length), origin)
+  if (name.startsWith('kit-')) return kitItem(name.slice('kit-'.length), origin)
   return (
     blockItem(name, origin, true) ??
     pageItem(name, origin, true) ??
@@ -448,9 +524,16 @@ export function buildRegistryIndex(origin: string) {
      * ends up rendering against somebody else's `--primary`.
      */
     ...DESIGN_PRESETS.map((preset) => presetRegistryItem(preset, origin)),
-    // Packs before the parts. An indexer showing the first screen of this
-    // list should see the curated routes through the catalog, not block
-    // number one of 194.
+    /*
+     * Packs before the parts. An indexer showing the first screen of this
+     * list should see the curated routes through the catalog rather than
+     * block number one of several hundred.
+     *
+     * Kits lead the packs because they are the larger unit: a kit answers
+     * "build me a storefront" and a path answers "teach me to build one",
+     * and an agent scanning this list is far more often doing the first.
+     */
+    ...KITS.map((k) => kitItem(k.slug, origin)!),
     ...PATHS.map((p) => pathItem(p.slug, origin)!),
     ...BLOCKS.map((b) => blockItem(b.id, origin, false)!),
     ...PAGES.map((p) => pageItem(p.id, origin, false)!),

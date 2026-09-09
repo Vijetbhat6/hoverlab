@@ -71,6 +71,10 @@ export default function McpDocsPage() {
           head={['Tool', 'What it does']}
           rows={[
             [<C key="1">search_catalog</C>, 'Search all four tiers at once'],
+            [
+              <C key="1a">get_kit</C>,
+              'Everything for one kind of product in one call — reach for this when the ask is a whole storefront or admin panel rather than one piece',
+            ],
             [<C key="1b">match_design</C>, 'Rank blocks and pages against a described design region'],
             [<C key="2">search_effects</C>, 'Search effects specifically'],
             [<C key="3">get_effect</C>, "Read one effect's markup and CSS"],

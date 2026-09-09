@@ -46,6 +46,7 @@ import { BLOCK_CATALOG } from '../src/lib/blocks/catalog.ts'
 import { PAGE_CATALOG } from '../src/lib/pages/catalog.ts'
 import { EFFECTS } from '../src/lib/effects.ts'
 import { PATHS } from '../src/lib/paths/catalog.ts'
+import { KITS } from '../src/lib/kits/catalog.ts'
 import { DESIGN_PRESETS, presetRegistryItem } from '../src/lib/registry/presets.ts'
 import { unresolvedLocalImports } from '../src/lib/registry/deps.ts'
 import { cssToObject } from '../src/lib/registry/css-to-object.ts'
@@ -218,10 +219,56 @@ for (const path of PATHS) {
   }
 }
 
+/*
+  Kit packs, checked the same way and for a sharper reason than the paths.
+
+  A path installs blocks only, so one bad id is one missing section. A kit
+  spans three rungs, and `kitItem` builds its dependency list from whatever
+  currently resolves — an id that stopped existing does not fail there, it
+  silently shrinks the pack while the description still counts it. That is
+  a published item quietly under-delivering, which is the failure mode this
+  whole file exists to catch.
+
+  `check-kits.mts` already proves the ids resolve against the *site*. This
+  proves it against what is *published*, which is the same separation the
+  comment above draws for paths.
+*/
+// `pageIds` and `effectIds` are already built further up this file; reusing
+// them rather than rebuilding two sets over the same catalogs.
+const kitSlugs = new Set<string>()
+
+for (const kit of KITS) {
+  if (kitSlugs.has(kit.slug)) {
+    failures.push(`two kits share the slug "${kit.slug}"; they would publish as one item.`)
+  }
+  kitSlugs.add(kit.slug)
+
+  for (const id of kit.contents.blocks) {
+    if (!blockIds.has(id)) {
+      failures.push(`kit "${kit.slug}" installs "${id}", which is not a published block.`)
+    }
+  }
+  for (const id of kit.contents.pages ?? []) {
+    if (!pageIds.has(id)) {
+      failures.push(`kit "${kit.slug}" installs "${id}", which is not a published page.`)
+    }
+  }
+  for (const id of kit.contents.effects ?? []) {
+    if (!effectIds.has(id)) {
+      failures.push(`kit "${kit.slug}" installs "${id}", which is not a published effect.`)
+    }
+  }
+}
+
 for (const artifact of [...BLOCK_CATALOG, ...PAGE_CATALOG, ...EFFECTS]) {
   if (artifact.id.startsWith('path-')) {
     failures.push(
       `"${artifact.id}" starts with "path-", the prefix reserved for guided-path packs; it would be unreachable by name.`,
+    )
+  }
+  if (artifact.id.startsWith('kit-')) {
+    failures.push(
+      `"${artifact.id}" starts with "kit-", the prefix reserved for kit packs; it would be unreachable by name.`,
     )
   }
 }
@@ -284,7 +331,7 @@ if (failures.length) {
 }
 
 console.log(
-  `registry check: ${PATHS.length} path packs + ${BLOCK_CATALOG.length} blocks + ` +
+  `registry check: ${KITS.length} kit packs + ${PATHS.length} path packs + ${BLOCK_CATALOG.length} blocks + ` +
     `${PAGE_CATALOG.length} pages + ${EFFECTS.length} effects + ` +
     `${DESIGN_PRESETS.length} presets + 1 base, all resolvable`,
 )
