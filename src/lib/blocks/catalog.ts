@@ -363,6 +363,16 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     previewComponent: 'contact-sales-form',
     deps: [],
   },
+  {
+    id: 'support-ticket-form',
+    name: "Support Ticket Form",
+    category: 'Contact & Forms',
+    description:
+      "A support form that asks for the one thing that halves resolution time — what you already tried — and says when a human will read it.",
+    tags: ["support", "ticket", "help", "contact", "form"],
+    previewComponent: 'support-ticket-form',
+    deps: [],
+  },
   /* ---------------------------- Modals & Drawers ------------------- */
   {
     id: 'confirm-dialog',
@@ -518,6 +528,26 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     previewComponent: 'onboarding-import-data',
     deps: ['lucide-react'],
   },
+  {
+    id: 'workspace-setup-form',
+    name: "Workspace Setup Form",
+    category: 'Onboarding',
+    description:
+      "The first screen after signup, asking only the two things that cannot be changed silently later.",
+    tags: ["onboarding", "workspace", "setup", "signup", "form"],
+    previewComponent: 'workspace-setup-form',
+    deps: [],
+  },
+  {
+    id: 'data-migration-split',
+    name: "Data Migration Split",
+    category: 'Onboarding',
+    description:
+      "What a migration actually moves and what it cannot, stated before the switch rather than discovered after it.",
+    tags: ["migration", "onboarding", "import", "switching", "data"],
+    previewComponent: 'data-migration-split',
+    deps: [],
+  },
   /* ---------------------------- Notifications ---------------------- */
   {
     id: 'toast-stack',
@@ -571,6 +601,26 @@ export const BLOCK_CATALOG: BlockRecord[] = [
       "A day's notifications collapsed into one digest, grouped by what they are rather than when they arrived.",
     tags: ["notifications", "digest", "inbox", "grouping", "email"],
     previewComponent: 'notification-digest-list',
+    deps: [],
+  },
+  {
+    id: 'digest-schedule-form',
+    name: "Digest Schedule Form",
+    category: 'Notifications',
+    description:
+      "The control that turns notification volume down instead of off, which is the choice most people actually want.",
+    tags: ["notifications", "digest", "schedule", "preferences", "email"],
+    previewComponent: 'digest-schedule-form',
+    deps: [],
+  },
+  {
+    id: 'notification-channel-list',
+    name: "Notification Channel List",
+    category: 'Notifications',
+    description:
+      "Which channel carries which event, so the loud ones can be moved rather than muted entirely.",
+    tags: ["notifications", "channels", "preferences", "email", "routing"],
+    previewComponent: 'notification-channel-list',
     deps: [],
   },
 
@@ -762,6 +812,16 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     featured: true,
   },
   {
+    id: 'integration-depth-split',
+    name: "Integration Depth Split",
+    category: 'Feature Sections',
+    description:
+      "An integrations section that says how deep each one goes, instead of a wall of logos that all imply the same thing.",
+    tags: ["integrations", "features", "logos", "depth", "split"],
+    previewComponent: 'integration-depth-split',
+    deps: [],
+  },
+  {
     id: 'pricing-tiers',
     name: 'Three-Plan Pricing Toggle',
     category: 'Pricing',
@@ -833,6 +893,16 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     deps: [],
   },
   {
+    id: 'plan-limits-list',
+    name: "Plan Limits List",
+    category: 'Pricing',
+    description:
+      "What actually runs out on each plan, including what happens when it does — the row a pricing table leaves off.",
+    tags: ["pricing", "limits", "quota", "plans", "overage"],
+    previewComponent: 'plan-limits-list',
+    deps: [],
+  },
+  {
     id: 'testimonial-grid',
     name: 'Masonry Testimonial Wall',
     category: 'Testimonials',
@@ -882,6 +952,16 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     tags: ['testimonials', 'video', 'social proof', 'customers', 'quotes'],
     previewComponent: 'testimonial-video',
     deps: ['lucide-react'],
+  },
+  {
+    id: 'customer-outcome-band',
+    name: "Customer Outcome Band",
+    category: 'Testimonials',
+    description:
+      "Testimonials reduced to the measured outcome and the conditions it happened under, for readers who skip the quotes.",
+    tags: ["testimonials", "outcomes", "results", "proof", "stats"],
+    previewComponent: 'customer-outcome-band',
+    deps: [],
   },
   {
     id: 'faq-accordion',
@@ -942,6 +1022,16 @@ export const BLOCK_CATALOG: BlockRecord[] = [
       "An FAQ written from the objections that stop a sale rather than from the questions that are comfortable to answer.",
     tags: ["faq", "objections", "pricing", "sales", "conversion"],
     previewComponent: 'faq-objection-list',
+    deps: [],
+  },
+  {
+    id: 'security-faq-list',
+    name: "Security FAQ",
+    category: 'FAQ',
+    description:
+      "The security questions a buyer's IT reviewer asks, answered with scope and dates rather than with the word \"enterprise-grade\".",
+    tags: ["faq", "security", "compliance", "procurement", "trust"],
+    previewComponent: 'security-faq-list',
     deps: [],
   },
   {
@@ -1097,6 +1187,16 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     previewComponent: 'referral-waitlist-form',
     deps: [],
   },
+  {
+    id: 'demo-request-form',
+    name: "Demo Request Form",
+    category: 'CTA Sections',
+    description:
+      "A demo request that offers the self-serve escape first, so the people who did not want a call do not book one.",
+    tags: ["demo", "cta", "sales", "form", "conversion"],
+    previewComponent: 'demo-request-form',
+    deps: [],
+  },
   /* ================================================================ *
    *  Product — the blocks an app is built from
    * ================================================================ */
@@ -1174,6 +1274,26 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     tags: ['sso', 'saml', 'enterprise', 'login', 'okta'],
     previewComponent: 'auth-sso-domain',
     deps: ['lucide-react'],
+  },
+  {
+    id: 'auth-magic-link-form',
+    name: "Magic Link Sign In",
+    category: 'Authentication',
+    description:
+      "Passwordless sign-in that says what will land in the inbox and how long it lasts, before the address is typed.",
+    tags: ["auth", "passwordless", "magic link", "email", "signin"],
+    previewComponent: 'auth-magic-link-form',
+    deps: [],
+  },
+  {
+    id: 'sso-enterprise-split',
+    name: "Enterprise SSO Split",
+    category: 'Authentication',
+    description:
+      "What SSO actually covers, written for the person who has to configure it rather than the person who asked for it.",
+    tags: ["sso", "saml", "scim", "enterprise", "auth"],
+    previewComponent: 'sso-enterprise-split',
+    deps: [],
   },
 
   /* ---------------------------- Dashboards ------------------------ */
@@ -1611,6 +1731,26 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     deps: ['lucide-react'],
     featured: true,
   },
+  {
+    id: 'metric-alert-list',
+    name: "Metric Alert List",
+    category: 'Charts & Metrics',
+    description:
+      "Alert thresholds with their current distance from firing, so a quiet alert is visibly armed rather than possibly broken.",
+    tags: ["alerts", "metrics", "thresholds", "monitoring", "dashboard"],
+    previewComponent: 'metric-alert-list',
+    deps: [],
+  },
+  {
+    id: 'kpi-summary-band',
+    name: "KPI Summary Band",
+    category: 'Charts & Metrics',
+    description:
+      "The top-of-dashboard figures, each carrying the comparison period that makes a delta mean anything.",
+    tags: ["kpi", "metrics", "dashboard", "summary", "stats"],
+    previewComponent: 'kpi-summary-band',
+    deps: [],
+  },
 
   /* ---------------------- Billing & Usage ------------------------- */
   {
@@ -1775,6 +1915,16 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     previewComponent: 'search-scope-switcher',
     deps: ['lucide-react'],
   },
+  {
+    id: 'recent-search-list',
+    name: "Recent Search List",
+    category: 'Command & Search',
+    description:
+      "The empty state of a search box, filled with the searches that are worth repeating and the ones worth saving.",
+    tags: ["search", "recent", "history", "empty state", "command"],
+    previewComponent: 'recent-search-list',
+    deps: [],
+  },
   /* ---------------------- File Upload ----------------------------- */
   {
     id: 'file-dropzone',
@@ -1864,6 +2014,16 @@ export const BLOCK_CATALOG: BlockRecord[] = [
       "An upload form that states the constraints before the file is chosen, rather than rejecting it after a two-minute transfer.",
     tags: ["upload", "file", "validation", "constraints", "form"],
     previewComponent: 'upload-requirements-form',
+    deps: [],
+  },
+  {
+    id: 'import-from-url-form',
+    name: "Import From URL Form",
+    category: 'File Upload',
+    description:
+      "The import path for a file that is already on the internet, which does not need to travel through the browser at all.",
+    tags: ["import", "url", "upload", "remote", "form"],
+    previewComponent: 'import-from-url-form',
     deps: [],
   },
 
@@ -2024,6 +2184,16 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     previewComponent: 'agent-retry-log',
     deps: [],
   },
+  {
+    id: 'agent-cost-breakdown',
+    name: "Agent Cost Breakdown",
+    category: 'Agent Reasoning',
+    description:
+      "What one run cost, per step, so an expensive answer is attributable rather than a monthly surprise.",
+    tags: ["agent", "cost", "tokens", "billing", "reasoning"],
+    previewComponent: 'agent-cost-breakdown',
+    deps: [],
+  },
   /* ------------------------ Human in the Loop ---------------------- */
   {
     id: 'approval-request-card',
@@ -2086,6 +2256,26 @@ export const BLOCK_CATALOG: BlockRecord[] = [
       "Which agent actions run unattended and which need a signature, stated as a policy the operator can read before anything happens.",
     tags: ["approval", "policy", "guardrails", "permissions", "agent"],
     previewComponent: 'approval-policy-list',
+    deps: [],
+  },
+  {
+    id: 'escalation-queue-list',
+    name: "Escalation Queue",
+    category: 'Human in the Loop',
+    description:
+      "What is waiting on a person, ordered by how long it has been waiting rather than when it arrived.",
+    tags: ["escalation", "queue", "approval", "sla", "human"],
+    previewComponent: 'escalation-queue-list',
+    deps: [],
+  },
+  {
+    id: 'human-oversight-split',
+    name: "Human Oversight Split",
+    category: 'Human in the Loop',
+    description:
+      "Where a person sits in an automated run, written as four guarantees rather than as a promise that a human is involved.",
+    tags: ["oversight", "human", "agent", "guardrails", "trust"],
+    previewComponent: 'human-oversight-split',
     deps: [],
   },
   /* ----------------------- Retrieval & Context --------------------- */
@@ -2162,6 +2352,26 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     previewComponent: 'retrieval-freshness-list',
     deps: [],
   },
+  {
+    id: 'context-scope-list',
+    name: "Context Scope List",
+    category: 'Retrieval & Context',
+    description:
+      "Which sources this answer may draw on, shown as a scope the user can read before asking rather than a citation list after.",
+    tags: ["retrieval", "scope", "sources", "rag", "permissions"],
+    previewComponent: 'context-scope-list',
+    deps: [],
+  },
+  {
+    id: 'grounding-split',
+    name: "Grounding Split",
+    category: 'Retrieval & Context',
+    description:
+      "How an answer is tied to its sources, and what the system does when it cannot find any.",
+    tags: ["grounding", "rag", "citations", "retrieval", "hallucination"],
+    previewComponent: 'grounding-split',
+    deps: [],
+  },
   /* ------------------------ Inline AI Actions ---------------------- */
   {
     id: 'selection-ai-toolbar',
@@ -2217,6 +2427,16 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     tags: ['ai', 'editor', 'slash', 'combobox', 'inline'],
     previewComponent: 'ai-slash-menu',
     deps: ['lucide-react'],
+  },
+  {
+    id: 'ai-action-menu',
+    name: "Inline AI Action Menu",
+    category: 'Inline AI Actions',
+    description:
+      "The actions offered on a selection, each saying whether it rewrites in place or opens a draft beside it.",
+    tags: ["ai", "inline", "actions", "selection", "editor"],
+    previewComponent: 'ai-action-menu',
+    deps: [],
   },
 
   /* ================================================================ *
@@ -2288,6 +2508,26 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     deps: ['lucide-react'],
     featured: true,
   },
+  {
+    id: 'stock-availability-list',
+    name: "Stock Availability List",
+    category: 'Product Listings',
+    description:
+      "Availability per variant stated before the cart, because discovering it at checkout is where the basket gets abandoned.",
+    tags: ["stock", "availability", "variants", "commerce", "listing"],
+    previewComponent: 'stock-availability-list',
+    deps: [],
+  },
+  {
+    id: 'collection-story-split',
+    name: "Collection Story Split",
+    category: 'Product Listings',
+    description:
+      "The editorial header above a collection grid, carrying the four facts that decide a considered purchase.",
+    tags: ["collection", "editorial", "commerce", "listing", "split"],
+    previewComponent: 'collection-story-split',
+    deps: [],
+  },
   /* ---------------------------- Product Detail -------------------- */
   {
     id: 'product-gallery',
@@ -2353,6 +2593,16 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     previewComponent: 'product-spec-split',
     deps: [],
   },
+  {
+    id: 'back-in-stock-form',
+    name: "Back In Stock Form",
+    category: 'Product Detail',
+    description:
+      "The capture that replaces a dead sold-out button, with the honest caveat that a notification is not a reservation.",
+    tags: ["stock", "notify", "product", "commerce", "waitlist"],
+    previewComponent: 'back-in-stock-form',
+    deps: [],
+  },
   /* ---------------------------- Cart & Checkout ------------------- */
   {
     id: 'cart-drawer',
@@ -2409,6 +2659,16 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     previewComponent: 'checkout-express-payment',
     deps: ['lucide-react'],
   },
+  {
+    id: 'gift-options-form',
+    name: "Gift Options Form",
+    category: 'Cart & Checkout',
+    description:
+      "The gifting step, placed in the cart where it is a choice rather than at checkout where it is friction.",
+    tags: ["gift", "cart", "checkout", "commerce", "form"],
+    previewComponent: 'gift-options-form',
+    deps: [],
+  },
   /* ---------------------------- Orders & Reviews ------------------ */
   {
     id: 'order-confirmation',
@@ -2462,5 +2722,25 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     tags: ['review', 'rating', 'form', 'stars', 'ugc'],
     previewComponent: 'review-submit-form',
     deps: ['lucide-react'],
+  },
+  {
+    id: 'order-lookup-form',
+    name: "Order Lookup Form",
+    category: 'Orders & Reviews',
+    description:
+      "Order tracking for the guest who never made an account, which is most of them.",
+    tags: ["order", "tracking", "guest", "lookup", "commerce"],
+    previewComponent: 'order-lookup-form',
+    deps: [],
+  },
+  {
+    id: 'review-distribution-band',
+    name: "Review Distribution Band",
+    category: 'Orders & Reviews',
+    description:
+      "The rating summary with the numbers that make an average trustworthy — the count, the spread and the verified share.",
+    tags: ["reviews", "ratings", "distribution", "commerce", "stats"],
+    previewComponent: 'review-distribution-band',
+    deps: [],
   },
 ]

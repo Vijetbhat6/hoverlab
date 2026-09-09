@@ -1,0 +1,950 @@
+[
+  {
+    "id": "auth-magic-link-form",
+    "name": "Magic Link Sign In",
+    "category": "Authentication",
+    "description": "Passwordless sign-in that says what will land in the inbox and how long it lasts, before the address is typed.",
+    "tags": ["auth", "passwordless", "magic link", "email", "signin"],
+    "shape": "form-card",
+    "deps": [],
+    "content": {
+      "heading": "Sign in without a password",
+      "intro": "One address, one link, no password to forget or reuse. The link works once and expires in fifteen minutes, which is stated here rather than discovered when it fails.",
+      "cta": "Email me a link",
+      "fields": [
+        {
+          "name": "email",
+          "label": "Email",
+          "type": "email",
+          "hint": "The link lands here and works once. It expires after 15 minutes."
+        }
+      ]
+    }
+  },
+  {
+    "id": "support-ticket-form",
+    "name": "Support Ticket Form",
+    "category": "Contact & Forms",
+    "description": "A support form that asks for the one thing that halves resolution time — what you already tried — and says when a human will read it.",
+    "tags": ["support", "ticket", "help", "contact", "form"],
+    "shape": "form-card",
+    "deps": [],
+    "content": {
+      "heading": "Tell us what broke",
+      "intro": "Most tickets take two round trips because the first reply has to ask what was already tried. This asks up front, and the answer is optional so it never blocks sending.",
+      "cta": "Send ticket",
+      "fields": [
+        {
+          "name": "email",
+          "label": "Email",
+          "type": "email",
+          "hint": "Where the reply goes. Weekdays, inside four hours."
+        },
+        {
+          "name": "summary",
+          "label": "What happened?",
+          "type": "text",
+          "hint": "One sentence. The detail goes below."
+        },
+        {
+          "name": "tried",
+          "label": "What have you already tried?",
+          "type": "text",
+          "hint": "Optional, and the field that saves a round trip."
+        }
+      ]
+    }
+  },
+  {
+    "id": "back-in-stock-form",
+    "name": "Back In Stock Form",
+    "category": "Product Detail",
+    "description": "The capture that replaces a dead sold-out button, with the honest caveat that a notification is not a reservation.",
+    "tags": ["stock", "notify", "product", "commerce", "waitlist"],
+    "shape": "form-card",
+    "deps": [],
+    "content": {
+      "heading": "Tell me when it is back",
+      "intro": "A sold-out product page with a greyed-out button is a dead end and a lost address. One field turns it into the only useful thing left on the page.",
+      "cta": "Notify me",
+      "fields": [
+        {
+          "name": "email",
+          "label": "Email",
+          "type": "email",
+          "hint": "One message when it restocks. This is not a reservation — stock is first come."
+        },
+        {
+          "name": "size",
+          "label": "Size",
+          "type": "text",
+          "hint": "Only that size triggers the alert. Leave blank for any."
+        }
+      ]
+    }
+  },
+  {
+    "id": "order-lookup-form",
+    "name": "Order Lookup Form",
+    "category": "Orders & Reviews",
+    "description": "Order tracking for the guest who never made an account, which is most of them.",
+    "tags": ["order", "tracking", "guest", "lookup", "commerce"],
+    "shape": "form-card",
+    "deps": [],
+    "content": {
+      "heading": "Find your order",
+      "intro": "Guest checkout is the majority of orders on most storefronts, and the usual tracking page asks those buyers to sign in to an account they were never offered.",
+      "cta": "Find it",
+      "fields": [
+        {
+          "name": "order",
+          "label": "Order number",
+          "type": "text",
+          "hint": "On the confirmation email, top right. Starts with a #."
+        },
+        {
+          "name": "email",
+          "label": "Email used at checkout",
+          "type": "email",
+          "hint": "Both have to match. It is what stops an order number being a lookup key for anyone."
+        }
+      ]
+    }
+  },
+  {
+    "id": "import-from-url-form",
+    "name": "Import From URL Form",
+    "category": "File Upload",
+    "description": "The import path for a file that is already on the internet, which does not need to travel through the browser at all.",
+    "tags": ["import", "url", "upload", "remote", "form"],
+    "shape": "form-card",
+    "deps": [],
+    "content": {
+      "heading": "Import from a link",
+      "intro": "A file that already lives at a URL does not need to be downloaded to a laptop and uploaded again. The server fetches it, which also survives the tab being closed.",
+      "cta": "Fetch and import",
+      "fields": [
+        {
+          "name": "url",
+          "label": "File URL",
+          "type": "url",
+          "hint": "Must be publicly reachable. Signed links work; a login page does not."
+        },
+        {
+          "name": "format",
+          "label": "Format",
+          "type": "text",
+          "hint": "Detected from the response, not the extension. Override only if it guesses wrong."
+        }
+      ]
+    }
+  },
+  {
+    "id": "digest-schedule-form",
+    "name": "Digest Schedule Form",
+    "category": "Notifications",
+    "description": "The control that turns notification volume down instead of off, which is the choice most people actually want.",
+    "tags": ["notifications", "digest", "schedule", "preferences", "email"],
+    "shape": "form-card",
+    "deps": [],
+    "content": {
+      "heading": "Send it all at once instead",
+      "intro": "The alternative offered by most products is on or off, so everyone picks off. A time and a floor turns the same stream into one predictable message.",
+      "cta": "Save schedule",
+      "fields": [
+        {
+          "name": "time",
+          "label": "Send at",
+          "type": "time",
+          "hint": "Your local time. Nothing arrives outside this except an outage."
+        },
+        {
+          "name": "threshold",
+          "label": "Skip the digest below",
+          "type": "number",
+          "hint": "Fewer events than this and no message is sent at all. An empty digest is still an interruption."
+        }
+      ]
+    }
+  },
+  {
+    "id": "workspace-setup-form",
+    "name": "Workspace Setup Form",
+    "category": "Onboarding",
+    "description": "The first screen after signup, asking only the two things that cannot be changed silently later.",
+    "tags": ["onboarding", "workspace", "setup", "signup", "form"],
+    "shape": "form-card",
+    "deps": [],
+    "content": {
+      "heading": "Name your workspace",
+      "intro": "Everything else in setup has a sensible default and can be changed later without telling anyone. These two appear in URLs and invitations, so they are worth one screen.",
+      "cta": "Create workspace",
+      "fields": [
+        {
+          "name": "name",
+          "label": "Workspace name",
+          "type": "text",
+          "hint": "Shown to everyone you invite. Changeable at any time."
+        },
+        {
+          "name": "slug",
+          "label": "URL",
+          "type": "text",
+          "hint": "Becomes part of every link you share. Changing it later breaks the old ones."
+        }
+      ]
+    }
+  },
+  {
+    "id": "demo-request-form",
+    "name": "Demo Request Form",
+    "category": "CTA Sections",
+    "description": "A demo request that offers the self-serve escape first, so the people who did not want a call do not book one.",
+    "tags": ["demo", "cta", "sales", "form", "conversion"],
+    "shape": "form-card",
+    "deps": [],
+    "content": {
+      "heading": "See it on your own data",
+      "intro": "Thirty minutes, screen-shared, against something of yours rather than a seeded demo account. If you would rather not talk to anyone, the free tier is the same product.",
+      "cta": "Book the call",
+      "fields": [
+        {
+          "name": "email",
+          "label": "Work email",
+          "type": "email",
+          "hint": "The invitation goes here."
+        },
+        {
+          "name": "goal",
+          "label": "What do you want to see?",
+          "type": "text",
+          "hint": "One line. It decides what gets set up before you arrive."
+        }
+      ]
+    }
+  },
+  {
+    "id": "gift-options-form",
+    "name": "Gift Options Form",
+    "category": "Cart & Checkout",
+    "description": "The gifting step, placed in the cart where it is a choice rather than at checkout where it is friction.",
+    "tags": ["gift", "cart", "checkout", "commerce", "form"],
+    "shape": "form-card",
+    "deps": [],
+    "content": {
+      "heading": "Sending this as a gift?",
+      "intro": "In the cart rather than at checkout, because a gift message added while someone is entering card details is a step between them and paying. Here it is part of choosing.",
+      "cta": "Add gift options",
+      "fields": [
+        {
+          "name": "message",
+          "label": "Message on the card",
+          "type": "text",
+          "hint": "Handwritten and enclosed. Up to 200 characters."
+        },
+        {
+          "name": "from",
+          "label": "From",
+          "type": "text",
+          "hint": "Signed as written. Leave blank to stay anonymous."
+        }
+      ]
+    }
+  },
+  {
+    "id": "context-scope-list",
+    "name": "Context Scope List",
+    "category": "Retrieval & Context",
+    "description": "Which sources this answer may draw on, shown as a scope the user can read before asking rather than a citation list after.",
+    "tags": ["retrieval", "scope", "sources", "rag", "permissions"],
+    "shape": "list-panel",
+    "deps": [],
+    "content": {
+      "heading": "What it can see",
+      "intro": "Citations tell you what an answer used. Scope tells you what it could have used, which is the question behind \"why did it not know that\".",
+      "items": [
+        {
+          "label": "Public documentation",
+          "detail": "Always in scope. Re-indexed on every deploy.",
+          "tone": "positive",
+          "status": "always"
+        },
+        {
+          "label": "Your workspace files",
+          "detail": "In scope. Only files your own account can already open.",
+          "tone": "positive",
+          "status": "on"
+        },
+        {
+          "label": "Support ticket history",
+          "detail": "In scope for your organisation's tickets, never another customer's.",
+          "tone": "neutral",
+          "status": "org only"
+        },
+        {
+          "label": "Billing and payment records",
+          "detail": "Out of scope. No retrieval path reaches them, and turning it on is not an option here.",
+          "tone": "critical",
+          "status": "never"
+        }
+      ]
+    }
+  },
+  {
+    "id": "escalation-queue-list",
+    "name": "Escalation Queue",
+    "category": "Human in the Loop",
+    "description": "What is waiting on a person, ordered by how long it has been waiting rather than when it arrived.",
+    "tags": ["escalation", "queue", "approval", "sla", "human"],
+    "shape": "list-panel",
+    "deps": [],
+    "content": {
+      "heading": "Waiting on a person",
+      "intro": "Sorted by age, not arrival. A queue sorted newest-first buries the item that has been stuck longest, which is always the one that turns into the complaint.",
+      "items": [
+        {
+          "label": "Refund over the auto-approve limit",
+          "detail": "£840. Two people can sign this and neither has opened it.",
+          "tone": "critical",
+          "status": "4h 20m"
+        },
+        {
+          "label": "Outbound message to a customer",
+          "detail": "Drafted by the agent, held because the recipient is outside the workspace.",
+          "tone": "warning",
+          "status": "51m"
+        },
+        {
+          "label": "Schema change on a production table",
+          "detail": "Additive, reversible, and still not something a run should do unattended.",
+          "tone": "warning",
+          "status": "18m"
+        },
+        {
+          "label": "New integration scope request",
+          "detail": "Read-only calendar access. Expires on its own in two days if nobody acts.",
+          "tone": "neutral",
+          "status": "6m"
+        }
+      ]
+    }
+  },
+  {
+    "id": "agent-cost-breakdown",
+    "name": "Agent Cost Breakdown",
+    "category": "Agent Reasoning",
+    "description": "What one run cost, per step, so an expensive answer is attributable rather than a monthly surprise.",
+    "tags": ["agent", "cost", "tokens", "billing", "reasoning"],
+    "shape": "list-panel",
+    "deps": [],
+    "content": {
+      "heading": "What this run cost",
+      "intro": "Per step, not per month. A bill that only arrives in aggregate cannot be acted on — the useful version says which step was expensive and whether it needed to be.",
+      "items": [
+        {
+          "label": "Retrieval — 12 passages",
+          "detail": "Cheap and worth it. Cutting this is what makes the model guess.",
+          "tone": "positive",
+          "status": "$0.004"
+        },
+        {
+          "label": "Reasoning — 4 steps",
+          "detail": "The bulk of it. Three steps would have reached the same answer.",
+          "tone": "warning",
+          "status": "$0.112"
+        },
+        {
+          "label": "Tool calls — 6 invocations",
+          "detail": "One retry included, which is billed like any other call.",
+          "tone": "neutral",
+          "status": "$0.019"
+        },
+        {
+          "label": "Final answer",
+          "detail": "Output tokens only. The cheapest part of almost every run.",
+          "tone": "positive",
+          "status": "$0.007"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ai-action-menu",
+    "name": "Inline AI Action Menu",
+    "category": "Inline AI Actions",
+    "description": "The actions offered on a selection, each saying whether it rewrites in place or opens a draft beside it.",
+    "tags": ["ai", "inline", "actions", "selection", "editor"],
+    "shape": "list-panel",
+    "deps": [],
+    "content": {
+      "heading": "Do something with the selection",
+      "intro": "Every row says where the result lands. An AI action that silently replaces the paragraph someone spent ten minutes on is the fastest way to have the feature turned off.",
+      "items": [
+        {
+          "label": "Rewrite for clarity",
+          "detail": "Replaces the selection. One undo puts it back exactly.",
+          "tone": "warning",
+          "status": "in place"
+        },
+        {
+          "label": "Shorten to one sentence",
+          "detail": "Replaces the selection. Undo restores the original wording.",
+          "tone": "warning",
+          "status": "in place"
+        },
+        {
+          "label": "Suggest three alternatives",
+          "detail": "Opens beside the text. Nothing changes until one is picked.",
+          "tone": "positive",
+          "status": "draft"
+        },
+        {
+          "label": "Explain this passage",
+          "detail": "Read-only. Never touches the document.",
+          "tone": "positive",
+          "status": "read only"
+        }
+      ]
+    }
+  },
+  {
+    "id": "notification-channel-list",
+    "name": "Notification Channel List",
+    "category": "Notifications",
+    "description": "Which channel carries which event, so the loud ones can be moved rather than muted entirely.",
+    "tags": ["notifications", "channels", "preferences", "email", "routing"],
+    "shape": "list-panel",
+    "deps": [],
+    "content": {
+      "heading": "Where each thing goes",
+      "intro": "The all-or-nothing toggle is why people mute products. Routing by event lets the two that matter stay loud while the rest go somewhere quiet.",
+      "items": [
+        {
+          "label": "Production incidents",
+          "detail": "Push and email, immediately, ignoring quiet hours.",
+          "tone": "critical",
+          "status": "push"
+        },
+        {
+          "label": "Someone mentions you",
+          "detail": "Push during working hours, batched into the digest outside them.",
+          "tone": "warning",
+          "status": "push"
+        },
+        {
+          "label": "Build results",
+          "detail": "Digest only. Failures are already in the incident row above.",
+          "tone": "neutral",
+          "status": "digest"
+        },
+        {
+          "label": "Product announcements",
+          "detail": "Email, monthly, and the unsubscribe link is not buried.",
+          "tone": "neutral",
+          "status": "email"
+        }
+      ]
+    }
+  },
+  {
+    "id": "plan-limits-list",
+    "name": "Plan Limits List",
+    "category": "Pricing",
+    "description": "What actually runs out on each plan, including what happens when it does — the row a pricing table leaves off.",
+    "tags": ["pricing", "limits", "quota", "plans", "overage"],
+    "shape": "list-panel",
+    "deps": [],
+    "content": {
+      "heading": "What runs out, and what happens then",
+      "intro": "Pricing tables list what a plan includes. They rarely say what happens at the limit, which is the thing that decides whether a limit is survivable.",
+      "items": [
+        {
+          "label": "Seats",
+          "detail": "Hard limit. Inviting past it prompts an upgrade rather than charging silently.",
+          "tone": "warning",
+          "status": "hard"
+        },
+        {
+          "label": "API requests",
+          "detail": "Soft. You are throttled, not cut off, and told at 80%.",
+          "tone": "positive",
+          "status": "soft"
+        },
+        {
+          "label": "Storage",
+          "detail": "Soft, then read-only. Nothing is ever deleted for being over.",
+          "tone": "neutral",
+          "status": "soft"
+        },
+        {
+          "label": "Retention",
+          "detail": "Hard. Data past the window is deleted on schedule and cannot be recovered.",
+          "tone": "critical",
+          "status": "hard"
+        }
+      ]
+    }
+  },
+  {
+    "id": "metric-alert-list",
+    "name": "Metric Alert List",
+    "category": "Charts & Metrics",
+    "description": "Alert thresholds with their current distance from firing, so a quiet alert is visibly armed rather than possibly broken.",
+    "tags": ["alerts", "metrics", "thresholds", "monitoring", "dashboard"],
+    "shape": "list-panel",
+    "deps": [],
+    "content": {
+      "heading": "Alerts, and how close they are",
+      "intro": "An alert that has never fired looks identical to an alert that is broken. Showing the current distance to the threshold is what tells the two apart at a glance.",
+      "items": [
+        {
+          "label": "Error rate above 1%",
+          "detail": "Currently 0.08%. Fired twice this quarter, both real.",
+          "tone": "positive",
+          "status": "12x under"
+        },
+        {
+          "label": "p95 latency above 800 ms",
+          "detail": "Currently 690 ms and climbing through the week.",
+          "tone": "warning",
+          "status": "14% under"
+        },
+        {
+          "label": "Queue depth above 5,000",
+          "detail": "Currently 4,880. This is the one to look at first.",
+          "tone": "critical",
+          "status": "2% under"
+        },
+        {
+          "label": "Daily signups below 20",
+          "detail": "Currently 74. A floor alert, so under is the safe side.",
+          "tone": "positive",
+          "status": "healthy"
+        }
+      ]
+    }
+  },
+  {
+    "id": "stock-availability-list",
+    "name": "Stock Availability List",
+    "category": "Product Listings",
+    "description": "Availability per variant stated before the cart, because discovering it at checkout is where the basket gets abandoned.",
+    "tags": ["stock", "availability", "variants", "commerce", "listing"],
+    "shape": "list-panel",
+    "deps": [],
+    "content": {
+      "heading": "What is actually available",
+      "intro": "\"In stock\" on a listing that means \"one of nine variants is in stock\" is the single most expensive lie in commerce UI — it is discovered at checkout, and the basket is abandoned there.",
+      "items": [
+        {
+          "label": "Small — Charcoal",
+          "detail": "Ships today if ordered before 4pm.",
+          "tone": "positive",
+          "status": "42 left"
+        },
+        {
+          "label": "Medium — Charcoal",
+          "detail": "Low. The counter is live, not a scarcity banner.",
+          "tone": "warning",
+          "status": "3 left"
+        },
+        {
+          "label": "Large — Charcoal",
+          "detail": "Restocking. Notify me is on the product page.",
+          "tone": "critical",
+          "status": "out"
+        },
+        {
+          "label": "Small — Sand",
+          "detail": "Made to order. Six weeks, stated here rather than at checkout.",
+          "tone": "neutral",
+          "status": "6 weeks"
+        }
+      ]
+    }
+  },
+  {
+    "id": "recent-search-list",
+    "name": "Recent Search List",
+    "category": "Command & Search",
+    "description": "The empty state of a search box, filled with the searches that are worth repeating and the ones worth saving.",
+    "tags": ["search", "recent", "history", "empty state", "command"],
+    "shape": "list-panel",
+    "deps": [],
+    "content": {
+      "heading": "Pick up where you left off",
+      "intro": "An empty search box is the most common state of a search box, and it is usually blank. Recent queries are the cheapest useful thing to put there, and the result count is what makes them worth re-running.",
+      "items": [
+        {
+          "label": "status:open assignee:me",
+          "detail": "Run four times this week. The closest thing you have to a saved view.",
+          "tone": "positive",
+          "status": "12 results"
+        },
+        {
+          "label": "invoice overdue",
+          "detail": "Run yesterday. Two more have gone overdue since.",
+          "tone": "warning",
+          "status": "7 results"
+        },
+        {
+          "label": "\"cannot log in\"",
+          "detail": "Exact phrase. Quoted searches are kept verbatim rather than re-tokenised.",
+          "tone": "neutral",
+          "status": "3 results"
+        },
+        {
+          "label": "region:eu plan:enterprise",
+          "detail": "Returned nothing last time. Kept anyway — an empty result is information.",
+          "tone": "neutral",
+          "status": "0 results"
+        }
+      ]
+    }
+  },
+  {
+    "id": "security-faq-list",
+    "name": "Security FAQ",
+    "category": "FAQ",
+    "description": "The security questions a buyer's IT reviewer asks, answered with scope and dates rather than with the word \"enterprise-grade\".",
+    "tags": ["faq", "security", "compliance", "procurement", "trust"],
+    "shape": "list-panel",
+    "deps": [],
+    "content": {
+      "heading": "Security, answered properly",
+      "intro": "These four arrive in every procurement review. Answering them on a public page rather than in a questionnaire is worth about two weeks of a sales cycle.",
+      "items": [
+        {
+          "label": "Where is our data stored?",
+          "detail": "The region you pick at signup. It is pinned there and never replicated out of it.",
+          "tone": "positive",
+          "status": "pinned"
+        },
+        {
+          "label": "Do you train models on it?",
+          "detail": "No, and there is no setting that turns it on.",
+          "tone": "positive",
+          "status": "no"
+        },
+        {
+          "label": "Who internally can read it?",
+          "detail": "Support, on an approved ticket, time-boxed and logged. You can export that log.",
+          "tone": "neutral",
+          "status": "logged"
+        },
+        {
+          "label": "What happens when we leave?",
+          "detail": "Full export any time. Deletion within 30 days of the request, backups included.",
+          "tone": "positive",
+          "status": "30 days"
+        }
+      ]
+    }
+  },
+  {
+    "id": "sso-enterprise-split",
+    "name": "Enterprise SSO Split",
+    "category": "Authentication",
+    "description": "What SSO actually covers, written for the person who has to configure it rather than the person who asked for it.",
+    "tags": ["sso", "saml", "scim", "enterprise", "auth"],
+    "shape": "split-feature",
+    "deps": [],
+    "content": {
+      "eyebrow": "Single sign-on",
+      "heading": "Your directory, your rules",
+      "intro": "SSO on a pricing page is one word. To the person configuring it, it is four separate features that vendors bundle inconsistently — so this names them.",
+      "cta": "Read the setup guide",
+      "items": [
+        {
+          "label": "SAML 2.0 and OIDC",
+          "detail": "Both, against any provider. Okta, Entra and Google are documented step by step."
+        },
+        {
+          "label": "SCIM provisioning",
+          "detail": "Users appear and disappear with your directory. Deprovisioning is the half that matters."
+        },
+        {
+          "label": "Enforced, not optional",
+          "detail": "Password login can be switched off per domain, so a bypass is not one setting away."
+        },
+        {
+          "label": "Included, not an upsell",
+          "detail": "On every paid plan. Charging for the control that makes offboarding safe is a security tax."
+        }
+      ]
+    }
+  },
+  {
+    "id": "data-migration-split",
+    "name": "Data Migration Split",
+    "category": "Onboarding",
+    "description": "What a migration actually moves and what it cannot, stated before the switch rather than discovered after it.",
+    "tags": ["migration", "onboarding", "import", "switching", "data"],
+    "shape": "split-feature",
+    "deps": [],
+    "content": {
+      "eyebrow": "Switching",
+      "heading": "We move it, and we say what we cannot",
+      "intro": "Every migration page promises everything comes across. Something never does, and finding out which thing after the cutover is how a switch becomes a rollback.",
+      "cta": "Start a trial migration",
+      "items": [
+        {
+          "label": "Records, history and attachments",
+          "detail": "Everything with a stable id, including the timestamps, so reports still line up."
+        },
+        {
+          "label": "Users and their permissions",
+          "detail": "Roles are mapped, and the mapping is shown for approval before anything is written."
+        },
+        {
+          "label": "What does not come across",
+          "detail": "Custom automations. The triggers have no equivalent here and a silent half-migration is worse."
+        },
+        {
+          "label": "Run it twice",
+          "detail": "A trial into a sandbox first, then the real one. The trial is free and does not count against anything."
+        }
+      ]
+    }
+  },
+  {
+    "id": "integration-depth-split",
+    "name": "Integration Depth Split",
+    "category": "Feature Sections",
+    "description": "An integrations section that says how deep each one goes, instead of a wall of logos that all imply the same thing.",
+    "tags": ["integrations", "features", "logos", "depth", "split"],
+    "shape": "split-feature",
+    "deps": [],
+    "content": {
+      "eyebrow": "Integrations",
+      "heading": "Not all of these mean the same thing",
+      "intro": "A grid of thirty logos implies thirty equivalent integrations. Usually four are deep, six are one-way, and the rest are a Zapier entry. Saying which is which costs one sentence each.",
+      "cta": "See every integration",
+      "items": [
+        {
+          "label": "Two-way sync",
+          "detail": "Changes flow both directions and conflicts are resolved, not last-write-wins."
+        },
+        {
+          "label": "One-way import",
+          "detail": "We read from them on a schedule. Nothing is written back, which is often what you want."
+        },
+        {
+          "label": "Notifications only",
+          "detail": "We post events into the channel. Honest, useful, and not a sync — so it is not listed as one."
+        },
+        {
+          "label": "Via the API",
+          "detail": "Everything else. Documented, versioned, and the same API the first row is built on."
+        }
+      ]
+    }
+  },
+  {
+    "id": "human-oversight-split",
+    "name": "Human Oversight Split",
+    "category": "Human in the Loop",
+    "description": "Where a person sits in an automated run, written as four guarantees rather than as a promise that a human is involved.",
+    "tags": ["oversight", "human", "agent", "guardrails", "trust"],
+    "shape": "split-feature",
+    "deps": [],
+    "content": {
+      "eyebrow": "Oversight",
+      "heading": "Where the person actually is",
+      "intro": "\"A human is in the loop\" is a claim with no shape. These are the four points where one really is, and each is a thing the system will not do without them.",
+      "cta": "Read the policy",
+      "items": [
+        {
+          "label": "Before anything leaves",
+          "detail": "External messages and payments stop and wait. The full payload is shown, not a summary of it."
+        },
+        {
+          "label": "On low confidence",
+          "detail": "The run pauses rather than picking the best of four bad options and presenting it as an answer."
+        },
+        {
+          "label": "After the fact, in the log",
+          "detail": "Every unattended action is recorded with its inputs, and the log is exportable."
+        },
+        {
+          "label": "The stop button",
+          "detail": "One press halts a run mid-step and rolls back anything reversible. It is always on screen."
+        }
+      ]
+    }
+  },
+  {
+    "id": "grounding-split",
+    "name": "Grounding Split",
+    "category": "Retrieval & Context",
+    "description": "How an answer is tied to its sources, and what the system does when it cannot find any.",
+    "tags": ["grounding", "rag", "citations", "retrieval", "hallucination"],
+    "shape": "split-feature",
+    "deps": [],
+    "content": {
+      "eyebrow": "Grounding",
+      "heading": "Every claim points at something",
+      "intro": "The interesting half of a retrieval system is not what it does when it finds the answer. It is what it does when it does not.",
+      "cta": "See a worked example",
+      "items": [
+        {
+          "label": "Citations on the sentence",
+          "detail": "Not a source list at the bottom. The claim and its evidence are next to each other or the citation is decoration."
+        },
+        {
+          "label": "Quoted, not paraphrased",
+          "detail": "The retrieved passage is shown as written, so you can see whether it says what the answer claims."
+        },
+        {
+          "label": "It says when it does not know",
+          "detail": "No passage above the relevance floor produces \"I could not find this\", not a fluent guess."
+        },
+        {
+          "label": "Stale sources are flagged",
+          "detail": "Age travels with the passage. A confident answer from a two-year-old document is the failure nobody catches."
+        }
+      ]
+    }
+  },
+  {
+    "id": "collection-story-split",
+    "name": "Collection Story Split",
+    "category": "Product Listings",
+    "description": "The editorial header above a collection grid, carrying the four facts that decide a considered purchase.",
+    "tags": ["collection", "editorial", "commerce", "listing", "split"],
+    "shape": "split-feature",
+    "deps": [],
+    "content": {
+      "eyebrow": "The collection",
+      "heading": "Made to be repaired, not replaced",
+      "intro": "A grid of forty products with a one-line title is a search result. For anything considered, the reason the collection exists is what does the selling, and it belongs above the grid rather than on a linked story page nobody opens.",
+      "cta": "Shop the collection",
+      "items": [
+        {
+          "label": "One factory, named",
+          "detail": "Porto, family-run, thirty years. The address is on the about page rather than implied by a photograph."
+        },
+        {
+          "label": "Repairs, not warranties",
+          "detail": "Send it back at any age. Repair is charged at cost and typically beats replacing it."
+        },
+        {
+          "label": "Deadstock and offcuts",
+          "detail": "Which is why sizes run out and do not come back. The stock list says which."
+        },
+        {
+          "label": "Priced once",
+          "detail": "No seasonal markdown, so nobody who bought in March is punished for it in July."
+        }
+      ]
+    }
+  },
+  {
+    "id": "review-distribution-band",
+    "name": "Review Distribution Band",
+    "category": "Orders & Reviews",
+    "description": "The rating summary with the numbers that make an average trustworthy — the count, the spread and the verified share.",
+    "tags": ["reviews", "ratings", "distribution", "commerce", "stats"],
+    "shape": "stat-band",
+    "deps": [],
+    "content": {
+      "eyebrow": "Reviews",
+      "heading": "4.6, and the numbers behind it",
+      "intro": "An average with nothing beside it is unreadable: 4.6 from nine reviews and 4.6 from nine hundred are different facts. These are what make the first number mean something.",
+      "items": [
+        {
+          "label": "Average",
+          "value": "4.6",
+          "detail": "Across every review, including the ones left after a return."
+        },
+        {
+          "label": "Reviews",
+          "value": "1,284",
+          "detail": "Unfiltered. Nothing is hidden for being low."
+        },
+        {
+          "label": "Verified purchase",
+          "value": "91%",
+          "detail": "Matched to an order. The other 9% are labelled as such."
+        },
+        {
+          "label": "One and two star",
+          "value": "6%",
+          "detail": "Shown, and sorted to the top when you filter by lowest."
+        }
+      ]
+    }
+  },
+  {
+    "id": "customer-outcome-band",
+    "name": "Customer Outcome Band",
+    "category": "Testimonials",
+    "description": "Testimonials reduced to the measured outcome and the conditions it happened under, for readers who skip the quotes.",
+    "tags": ["testimonials", "outcomes", "results", "proof", "stats"],
+    "shape": "stat-band",
+    "deps": [],
+    "content": {
+      "eyebrow": "Results",
+      "heading": "What changed, and over how long",
+      "intro": "Most readers skip the quotes. What they do not skip is a number with a time period attached to it, and every figure here names the company it came from and how long it took.",
+      "items": [
+        {
+          "label": "Support replies",
+          "value": "-63%",
+          "detail": "Median first-response time at Northwind, over one quarter."
+        },
+        {
+          "label": "Onboarding",
+          "value": "9 days → 2",
+          "detail": "Time to a customer's first live workspace, at Arden."
+        },
+        {
+          "label": "Manual reconciliation",
+          "value": "12 hrs/wk",
+          "detail": "Hours returned to one finance team of three, measured before and after."
+        },
+        {
+          "label": "Kept using it",
+          "value": "94%",
+          "detail": "Of teams past 90 days, over the last twelve months."
+        }
+      ]
+    }
+  },
+  {
+    "id": "kpi-summary-band",
+    "name": "KPI Summary Band",
+    "category": "Charts & Metrics",
+    "description": "The top-of-dashboard figures, each carrying the comparison period that makes a delta mean anything.",
+    "tags": ["kpi", "metrics", "dashboard", "summary", "stats"],
+    "shape": "stat-band",
+    "deps": [],
+    "content": {
+      "eyebrow": "This month",
+      "heading": "The four numbers the team looks at",
+      "intro": "Every figure names what it is being compared against. A delta with no stated period is the most common way a dashboard misleads the people who built it.",
+      "items": [
+        {
+          "label": "Active workspaces",
+          "value": "3,412",
+          "detail": "+7.2% on the previous 30 days, not on last calendar month."
+        },
+        {
+          "label": "Net revenue retention",
+          "value": "112%",
+          "detail": "Trailing twelve months, expansion minus churn and contraction."
+        },
+        {
+          "label": "p95 latency",
+          "value": "412 ms",
+          "detail": "Same period, all regions. p50 is 96 ms and hides this."
+        },
+        {
+          "label": "Open incidents",
+          "value": "1",
+          "detail": "Degraded, not down. Public status page has the detail."
+        }
+      ]
+    }
+  }
+]

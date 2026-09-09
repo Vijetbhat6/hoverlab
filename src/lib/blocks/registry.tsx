@@ -295,6 +295,34 @@ import { UploadRequirementsForm } from './sources/upload-requirements-form'
 import { ReferralWaitlistForm } from './sources/referral-waitlist-form'
 import { PricingValueSplit } from './sources/pricing-value-split'
 import { ProductSpecSplit } from './sources/product-spec-split'
+import { AuthMagicLinkForm } from './sources/auth-magic-link-form'
+import { SupportTicketForm } from './sources/support-ticket-form'
+import { BackInStockForm } from './sources/back-in-stock-form'
+import { OrderLookupForm } from './sources/order-lookup-form'
+import { ImportFromUrlForm } from './sources/import-from-url-form'
+import { DigestScheduleForm } from './sources/digest-schedule-form'
+import { WorkspaceSetupForm } from './sources/workspace-setup-form'
+import { DemoRequestForm } from './sources/demo-request-form'
+import { GiftOptionsForm } from './sources/gift-options-form'
+import { ContextScopeList } from './sources/context-scope-list'
+import { EscalationQueueList } from './sources/escalation-queue-list'
+import { AgentCostBreakdown } from './sources/agent-cost-breakdown'
+import { AiActionMenu } from './sources/ai-action-menu'
+import { NotificationChannelList } from './sources/notification-channel-list'
+import { PlanLimitsList } from './sources/plan-limits-list'
+import { MetricAlertList } from './sources/metric-alert-list'
+import { StockAvailabilityList } from './sources/stock-availability-list'
+import { RecentSearchList } from './sources/recent-search-list'
+import { SecurityFaqList } from './sources/security-faq-list'
+import { SsoEnterpriseSplit } from './sources/sso-enterprise-split'
+import { DataMigrationSplit } from './sources/data-migration-split'
+import { IntegrationDepthSplit } from './sources/integration-depth-split'
+import { HumanOversightSplit } from './sources/human-oversight-split'
+import { GroundingSplit } from './sources/grounding-split'
+import { CollectionStorySplit } from './sources/collection-story-split'
+import { ReviewDistributionBand } from './sources/review-distribution-band'
+import { CustomerOutcomeBand } from './sources/customer-outcome-band'
+import { KpiSummaryBand } from './sources/kpi-summary-band'
 
 export const BLOCK_PREVIEWS: Record<string, React.ReactNode> = {
   'hero-split': <HeroSplit />,
@@ -545,6 +573,34 @@ export const BLOCK_PREVIEWS: Record<string, React.ReactNode> = {
   'referral-waitlist-form': <ReferralWaitlistForm />,
   'pricing-value-split': <PricingValueSplit />,
   'product-spec-split': <ProductSpecSplit />,
+  'auth-magic-link-form': <AuthMagicLinkForm />,
+  'support-ticket-form': <SupportTicketForm />,
+  'back-in-stock-form': <BackInStockForm />,
+  'order-lookup-form': <OrderLookupForm />,
+  'import-from-url-form': <ImportFromUrlForm />,
+  'digest-schedule-form': <DigestScheduleForm />,
+  'workspace-setup-form': <WorkspaceSetupForm />,
+  'demo-request-form': <DemoRequestForm />,
+  'gift-options-form': <GiftOptionsForm />,
+  'context-scope-list': <ContextScopeList />,
+  'escalation-queue-list': <EscalationQueueList />,
+  'agent-cost-breakdown': <AgentCostBreakdown />,
+  'ai-action-menu': <AiActionMenu />,
+  'notification-channel-list': <NotificationChannelList />,
+  'plan-limits-list': <PlanLimitsList />,
+  'metric-alert-list': <MetricAlertList />,
+  'stock-availability-list': <StockAvailabilityList />,
+  'recent-search-list': <RecentSearchList />,
+  'security-faq-list': <SecurityFaqList />,
+  'sso-enterprise-split': <SsoEnterpriseSplit />,
+  'data-migration-split': <DataMigrationSplit />,
+  'integration-depth-split': <IntegrationDepthSplit />,
+  'human-oversight-split': <HumanOversightSplit />,
+  'grounding-split': <GroundingSplit />,
+  'collection-story-split': <CollectionStorySplit />,
+  'review-distribution-band': <ReviewDistributionBand />,
+  'customer-outcome-band': <CustomerOutcomeBand />,
+  'kpi-summary-band': <KpiSummaryBand />,
 }
 
 /** The rendered preview for a block, or undefined if the key is unknown. */
