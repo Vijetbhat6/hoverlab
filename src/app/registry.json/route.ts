@@ -45,8 +45,8 @@ export const runtime = 'nodejs'
 /**
  * The index, built once per origin.
  *
- * `buildRegistryIndex` walks 210 blocks, 21 pages and 973 effects and
- * converts every effect's CSS on the way. That was fine when the route was
+ * `buildRegistryIndex` walks every block, page and effect in the catalog
+ * and converts each effect's CSS on the way. That was fine when the route was
  * one document per deploy and is not fine now that a search is a request:
  * a CLI paging through results would rebuild the whole catalog per page.
  * The origin is fixed at runtime, so the map has exactly one entry in

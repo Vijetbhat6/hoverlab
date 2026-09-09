@@ -3,7 +3,7 @@
  *
  * The catalog has four rungs and, until this module, nothing that crossed
  * them. A visitor wanting to build a storefront had to find the storefront
- * template, then guess which of 210 blocks belonged with it, then find the
+ * template, then guess which of the blocks belonged with it, then find the
  * commerce pages, then pick effects. Every one of those is a separate
  * browse, and the thing they actually want — "the commerce set" — did not
  * exist as an object anywhere in the product.

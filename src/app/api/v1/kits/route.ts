@@ -22,9 +22,10 @@ import { apiError, apiJson, apiPreflight, LIST_CACHE } from '@/lib/api/public'
  * The install line. An agent asked to "build a storefront" can read one
  * kit and know the ids to hand `hoverlab add`, which is the thing it could
  * not do before: the four list endpoints are one rung each, and picking
- * the storefront pieces out of 210 blocks was the agent's problem. That is
- * why `install` is precomputed here rather than left to be assembled from
- * `items` — the assembly is where a caller gets it subtly wrong.
+ * the storefront pieces out of the whole block catalog was the agent's
+ * problem. That is why `install` is precomputed here rather than left to
+ * be assembled from `items` — the assembly is where a caller gets it
+ * subtly wrong.
  *
  * Counts and contents both come from `resolve.ts`, so this response and
  * the page at /kits/{slug} cannot disagree about what a kit holds.

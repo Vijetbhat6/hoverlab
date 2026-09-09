@@ -27,6 +27,14 @@
  * of all the numbers on the page ours are the ones we have no excuse for
  * getting wrong.
  *
+ * That includes ratios, which is the loophole this rule leaked through
+ * twice. Two `beatsUs` entries said "eleven times our block count" and
+ * "five times our block count and three times our templates" — our number
+ * smuggled in as a multiplier, and both were wrong by the next wave
+ * exactly as the paragraph above predicts. A competitor's absolute figure
+ * goes stale only when the competitor changes, which is the correct
+ * failure mode for a field describing them.
+ *
  * WHAT IS DELIBERATELY ABSENT
  *
  * Revenue, customer counts and quality judgements. Almost no revenue in
@@ -144,7 +152,7 @@ export const COMPETITORS: Competitor[] = [
     agent: 'Searchable through the official shadcn MCP server',
     gate: 'source',
     beatsUs:
-      'Eleven times our block count, a Figma kit, a page builder and a VSCode extension. On volume this is the deepest catalog a solo developer can buy.',
+      '1,678 blocks and 2,093 components, plus a Figma kit, a page builder and a VSCode extension. On volume this is the deepest catalog a solo developer can buy.',
   },
   {
     name: 'Magic UI Pro',
@@ -183,7 +191,7 @@ export const COMPETITORS: Competitor[] = [
     agent: 'MCP free until 1 January 2027, then a subscription',
     gate: 'source',
     beatsUs:
-      'Five times our block count and three times our templates. This is the gap that costs us sales, and it is the one we are actively closing.',
+      '780 blocks, 207 pages and 21 templates. This is the volume gap that costs us sales, and it is the one we are actively closing.',
   },
   {
     name: 'Tailwind Plus',

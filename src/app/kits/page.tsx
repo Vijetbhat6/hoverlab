@@ -1,8 +1,8 @@
 /**
  * /kits — the curated sets.
  *
- * The hubs answer "what is there" one rung at a time: 1,111 effects here,
- * 210 blocks there, 16 templates somewhere else. Nothing answered "I am
+ * The hubs answer "what is there" one rung at a time: the effects here,
+ * the blocks there, the templates somewhere else. Nothing answered "I am
  * building a storefront, give me the storefront things", which is a
  * question that crosses all four rungs and was therefore four separate
  * browses and a lot of guessing.

@@ -195,7 +195,7 @@ export interface RegistrySearchResult<T> {
  * Order without a query is the index's own order, which is meaningful here:
  * `buildRegistryIndex` puts the base first and the guided paths before the
  * parts, so a consumer paging through with no query sees the curated route
- * into the catalog rather than block number one of 210.
+ * into the catalog rather than block number one of several hundred.
  */
 export function searchRegistryItems<T extends SearchableItem>(
   items: readonly T[],
