@@ -8,7 +8,7 @@
       "slug": "agent-chat",
       "file": "blocks-agent-chat.svg",
       "sections": 8,
-      "bytes": 39904,
+      "bytes": 39914,
       "ids": [
         "chat-thread-panel",
         "chat-prompt-bar",
@@ -25,7 +25,7 @@
       "slug": "agent-reasoning",
       "file": "blocks-agent-reasoning.svg",
       "sections": 7,
-      "bytes": 32146,
+      "bytes": 32148,
       "ids": [
         "agent-thinking-trace",
         "agent-tool-calls",
@@ -176,7 +176,7 @@
       "slug": "dashboards",
       "file": "blocks-dashboards.svg",
       "sections": 10,
-      "bytes": 76186,
+      "bytes": 76191,
       "ids": [
         "dashboard-shell",
         "dashboard-stat-cards",
@@ -262,7 +262,7 @@
       "slug": "file-upload",
       "file": "blocks-file-upload.svg",
       "sections": 7,
-      "bytes": 27801,
+      "bytes": 27803,
       "ids": [
         "file-dropzone",
         "upload-progress-list",
@@ -347,7 +347,7 @@
       "slug": "logo-clouds",
       "file": "blocks-logo-clouds.svg",
       "sections": 4,
-      "bytes": 15705,
+      "bytes": 15703,
       "ids": [
         "logo-cloud",
         "logo-grid",
@@ -391,7 +391,7 @@
       "slug": "notifications",
       "file": "blocks-notifications.svg",
       "sections": 7,
-      "bytes": 31280,
+      "bytes": 31295,
       "ids": [
         "toast-stack",
         "notification-inbox",

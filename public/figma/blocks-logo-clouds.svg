@@ -15,22 +15,22 @@
   <g id="Seamless Logo Marquee" transform="translate(64, 116)">
     <rect id="container" x="0" y="0" width="1088" height="178" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <text id="Trusted by teams shipping every day" x="544" y="63" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Trusted by teams shipping every day</text>
-      <text id="Northwind" x="-18.49" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" letter-spacing="-0.5">Northwind</text>
-      <text id="Contoso" x="135.51" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" letter-spacing="-0.5">Contoso</text>
-      <text id="Initech" x="265.77" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" letter-spacing="-0.5">Initech</text>
-      <text id="Umbrella" x="382.57" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" letter-spacing="-0.5">Umbrella</text>
-      <text id="Globex" x="520.58" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" letter-spacing="-0.5">Globex</text>
-      <text id="Soylent" x="639.99" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" letter-spacing="-0.5">Soylent</text>
-      <text id="Hooli" x="763.08" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" letter-spacing="-0.5">Hooli</text>
-      <text id="Vandelay" x="867.74" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" letter-spacing="-0.5">Vandelay</text>
-      <text id="Northwind 2" x="1004.85" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" letter-spacing="-0.5">Northwind</text>
-      <text id="Contoso 2" x="1158.85" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" letter-spacing="-0.5">Contoso</text>
-      <text id="Initech 2" x="1289.12" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" letter-spacing="-0.5">Initech</text>
-      <text id="Umbrella 2" x="1405.91" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" letter-spacing="-0.5">Umbrella</text>
-      <text id="Globex 2" x="1543.93" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" letter-spacing="-0.5">Globex</text>
-      <text id="Soylent 2" x="1663.33" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" letter-spacing="-0.5">Soylent</text>
-      <text id="Hooli 2" x="1786.43" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" letter-spacing="-0.5">Hooli</text>
-      <text id="Vandelay 2" x="1891.08" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" letter-spacing="-0.5">Vandelay</text>
+      <text id="Northwind" x="-17.66" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" letter-spacing="-0.5">Northwind</text>
+      <text id="Contoso" x="136.34" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" letter-spacing="-0.5">Contoso</text>
+      <text id="Initech" x="266.6" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" letter-spacing="-0.5">Initech</text>
+      <text id="Umbrella" x="383.4" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" letter-spacing="-0.5">Umbrella</text>
+      <text id="Globex" x="521.42" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" letter-spacing="-0.5">Globex</text>
+      <text id="Soylent" x="640.82" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" letter-spacing="-0.5">Soylent</text>
+      <text id="Hooli" x="763.92" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" letter-spacing="-0.5">Hooli</text>
+      <text id="Vandelay" x="868.57" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" letter-spacing="-0.5">Vandelay</text>
+      <text id="Northwind 2" x="1005.68" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" letter-spacing="-0.5">Northwind</text>
+      <text id="Contoso 2" x="1159.68" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" letter-spacing="-0.5">Contoso</text>
+      <text id="Initech 2" x="1289.95" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" letter-spacing="-0.5">Initech</text>
+      <text id="Umbrella 2" x="1406.74" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" letter-spacing="-0.5">Umbrella</text>
+      <text id="Globex 2" x="1544.76" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" letter-spacing="-0.5">Globex</text>
+      <text id="Soylent 2" x="1664.17" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" letter-spacing="-0.5">Soylent</text>
+      <text id="Hooli 2" x="1787.26" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" letter-spacing="-0.5">Hooli</text>
+      <text id="Vandelay 2" x="1891.92" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" letter-spacing="-0.5">Vandelay</text>
   </g>
   <text id="Bordered Logo Grid label" x="64" y="410" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Bordered Logo Grid</text>
   <text id="logo-grid id" x="64" y="424" font-family="ui-monospace, monospace" font-size="12" fill="#737373">logo-grid</text>

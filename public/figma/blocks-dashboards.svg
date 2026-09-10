@@ -520,8 +520,8 @@
       <text id="#incidents" x="26" y="191.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">#incidents</text>
       <text id="Fired 3" x="116.53" y="191.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Fired 3</text>
       <text id="× / 30d" x="152.58" y="191.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">× / 30d</text>
-      <rect id="switch" x="992" y="127" width="36" height="20" rx="10" fill="#007f34" />
-      <rect id="container 3" x="1028" y="129" width="16" height="16" rx="8" fill="#fdfcf8" />
+      <rect id="switch" x="984" y="125" width="44" height="24" rx="12" fill="#007f34" />
+      <rect id="container 3" x="1028" y="127" width="20" height="20" rx="10" fill="#fdfcf8" />
       <rect id="container 4" x="26" y="244.5" width="66.16" height="20.5" rx="4" fill="rgba(245, 147, 0, 0.102)" />
       <text id="warning" x="26" y="255.5" fill="#e17100" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="600" letter-spacing="0.28">warning</text>
       <text id="p95 latency" x="100.16" y="258.75" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">p95 latency</text>
@@ -530,12 +530,12 @@
       <text id="#platform-alerts" x="26" y="313" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">#platform-alerts</text>
       <text id="Fired 27" x="147.94" y="313" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Fired 27</text>
       <text id="× / 30d 2" x="190.45" y="313" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">× / 30d</text>
-      <rect id="paragraph" x="26" y="329" width="950" height="36" rx="12" fill="rgba(245, 147, 0, 0.102)" />
+      <rect id="paragraph" x="26" y="329" width="942" height="36" rx="12" fill="rgba(245, 147, 0, 0.102)" />
       <text id="This rule is on, but" x="58" y="351" fill="#bb4d00" font-family="ui-sans-serif, system-ui" font-size="12">This rule is on, but</text>
       <text id="#platform-alerts 2" x="158" y="351" fill="#bb4d00" font-family="ui-sans-serif, system-ui" font-size="12">#platform-alerts</text>
       <text id="is muted — nothing has been delivered si…" x="243.94" y="351" fill="#bb4d00" font-family="ui-sans-serif, system-ui" font-size="12">is muted — nothing has been delivered since it was muted.</text>
-      <rect id="switch 2" x="992" y="248.5" width="36" height="20" rx="10" fill="#007f34" />
-      <rect id="container 5" x="1028" y="250.5" width="16" height="16" rx="8" fill="#fdfcf8" />
+      <rect id="switch 2" x="984" y="246.5" width="44" height="24" rx="12" fill="#007f34" />
+      <rect id="container 5" x="1028" y="248.5" width="20" height="20" rx="10" fill="#fdfcf8" />
       <rect id="container 6" x="26" y="414" width="66.16" height="20.5" rx="4" fill="rgba(245, 147, 0, 0.102)" />
       <text id="warning 2" x="26" y="425" fill="#e17100" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="600" letter-spacing="0.28">warning</text>
       <text id="Signups per hour" x="100.16" y="428.25" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Signups per hour</text>
@@ -544,12 +544,12 @@
       <text id="growth@acme.com" x="26" y="482.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">growth@acme.com</text>
       <text id="Fired 142" x="165.03" y="482.5" fill="#e17100" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Fired 142</text>
       <text id="× / 30d 3" x="213.84" y="482.5" fill="#e17100" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">× / 30d</text>
-      <rect id="paragraph 2" x="26" y="498.5" width="950" height="36" rx="12" fill="#f3f2ee" />
+      <rect id="paragraph 2" x="26" y="498.5" width="942" height="36" rx="12" fill="#f3f2ee" />
       <text id="Firing" x="58" y="520.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Firing</text>
       <text id="142" x="91" y="520.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">142</text>
       <text id="times a month is usually a threshold pro…" x="110.41" y="520.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">times a month is usually a threshold problem rather than an incident. Consider raising it before muting the channel.</text>
-      <rect id="switch 3" x="992" y="418" width="36" height="20" rx="10" fill="#007f34" />
-      <rect id="container 7" x="1028" y="420" width="16" height="16" rx="8" fill="#fdfcf8" />
+      <rect id="switch 3" x="984" y="416" width="44" height="24" rx="12" fill="#007f34" />
+      <rect id="container 7" x="1028" y="418" width="20" height="20" rx="10" fill="#fdfcf8" />
       <rect id="container 8" x="26" y="583.5" width="59.97" height="20.5" rx="4" fill="rgba(226, 0, 10, 0.102)" />
       <text id="critical 2" x="26" y="594.5" fill="#e7000b" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="600" letter-spacing="0.28">critical</text>
       <text id="Job queue depth" x="93.97" y="597.75" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Job queue depth</text>
@@ -558,8 +558,8 @@
       <text id="pagerduty.com/…/v2" x="26" y="652" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">pagerduty.com/…/v2</text>
       <text id="Fired 1" x="172.28" y="652" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Fired 1</text>
       <text id="× / 30d 4" x="208.33" y="652" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">× / 30d</text>
-      <rect id="switch 4" x="992" y="587.5" width="36" height="20" rx="10" fill="#007f34" />
-      <rect id="container 9" x="1028" y="589.5" width="16" height="16" rx="8" fill="#fdfcf8" />
+      <rect id="switch 4" x="984" y="585.5" width="44" height="24" rx="12" fill="#007f34" />
+      <rect id="container 9" x="1028" y="587.5" width="20" height="20" rx="10" fill="#fdfcf8" />
       <rect id="container 10" x="26" y="705" width="38.59" height="20.5" rx="4" fill="#f3f2ee" />
       <text id="info" x="26" y="716" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="600" letter-spacing="0.28">info</text>
       <text id="Storage used" x="72.59" y="719.25" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Storage used</text>
@@ -568,7 +568,7 @@
       <text id="ops@acme.com" x="26" y="773.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">ops@acme.com</text>
       <text id="Fired 0" x="146.42" y="773.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Fired 0</text>
       <text id="× / 30d 5" x="182.47" y="773.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">× / 30d</text>
-      <rect id="switch 5" x="992" y="709" width="36" height="20" rx="10" fill="rgba(86, 89, 96, 0.302)" />
-      <rect id="container 11" x="1012" y="711" width="16" height="16" rx="8" fill="#fdfcf8" />
+      <rect id="switch 5" x="984" y="707" width="44" height="24" rx="12" fill="rgba(86, 89, 96, 0.302)" />
+      <rect id="container 11" x="1008" y="709" width="20" height="20" rx="10" fill="#fdfcf8" />
   </g>
 </svg>

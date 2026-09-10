@@ -62,8 +62,8 @@
       <text id="Why did churn spike in Q3?" x="654.53" y="39" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14">Why did churn spike in Q3?</text>
       <rect id="container 3" x="232" y="87" width="32" height="32" rx="16" fill="rgba(0, 128, 49, 0.102)" />
       <rect id="container 4" x="276" y="85" width="580" height="48.75" rx="16" fill="#ffffff" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Churn concentrated in accounts under 20 …" x="293" y="112" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">Churn concentrated in accounts under 20 seats, whic</text>
-      <rect id="container 5" x="619.98" y="100" width="2" height="16" fill="#007f34" opacity="0.9" />
+      <text id="Churn concentrated in accounts under 20 …" x="293" y="112" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">Churn concentrated in accounts under 20 seats, which lost 6.</text>
+      <rect id="container 5" x="668.44" y="100" width="2" height="16" fill="#007f34" opacity="0.89" />
       <text id="3 sources" x="276" y="155.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">3 sources</text>
       <rect id="link" x="276" y="174.75" width="580" height="38" rx="12" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="container 6" x="287" y="183.75" width="20" height="20" rx="10" fill="#f3f2ee" />

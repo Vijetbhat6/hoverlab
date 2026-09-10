@@ -38,6 +38,19 @@
  * puts on the clipboard, and there is no second code path to drift from the
  * one that ships.
  *
+ * ── A RE-TRACE IS NEVER A CLEAN NO-OP ───────────────────────────────────
+ *
+ * A handful of blocks animate — streaming assistant text, a logo marquee, a
+ * blinking caret — and the walk records whatever frame the browser happened
+ * to be showing. So re-running this with nothing changed still rewrites four
+ * or five files by a few lines each: half a sentence of streamed text, a
+ * caret at 0.89 opacity instead of 0.9, a marquee at a different offset.
+ *
+ * That is expected, not drift, and it is not worth engineering away —
+ * freezing animations would mean a kit that disagrees with the preview a
+ * reader is looking at, to spare a diff nobody reads. Worth knowing only so
+ * the next person does not go hunting for what changed.
+ *
  * ── WHY IT IS RUN BY HAND ───────────────────────────────────────────────
  *
  * Not in `prebuild`. It needs a running dev server and a real browser for
@@ -292,6 +305,41 @@ if (traced.length === 0) {
   throw new Error(
     `build-figma-kit: traced nothing out of ${BLOCK_INDEX.length}. ` +
       `The reasons are above. Is the dev server up at ${BASE}?`,
+  )
+}
+
+/*
+ * A PARTIAL RUN MUST NOT OVERWRITE A COMPLETE KIT.
+ *
+ * This guarded zero and nothing else, and a re-trace that lost twenty blocks
+ * to `ERR_NETWORK_IO_SUSPENDED` — the machine's network suspending briefly
+ * mid-crawl — cheerfully replaced a good 250-section kit with a 230-section
+ * one and exited 0. `check-figma-kit` caught it at the next build, which is
+ * what it is for, but the damage was already committed to disk and the
+ * previous good kit was gone.
+ *
+ * Exactly the failure `build-block-exports.mjs` has at its own scale: a
+ * generator that silently degrades its output is worse than one that fails,
+ * because the degraded version looks like a successful run. The lesson is
+ * the same and so is the rule — refuse to write, and say what is missing.
+ *
+ * `--allow-partial` exists for the one honest case: a deliberate LIMIT run
+ * while working on the harness.
+ */
+const partial = failed.length > 0 || traced.length < targets.length
+const allowPartial = process.argv.includes('--allow-partial') || Number.isFinite(LIMIT)
+
+if (partial && !allowPartial) {
+  throw new Error(
+    [
+      `build-figma-kit: ${traced.length} of ${targets.length} blocks traced — refusing to`,
+      `write a kit that is missing ${targets.length - traced.length}.`,
+      ``,
+      `  The existing kit in public/figma/ is untouched. The reasons are above;`,
+      `  a network blip mid-crawl is the usual one, and re-running is the usual fix.`,
+      ``,
+      `  To write a partial kit anyway: --allow-partial`,
+    ].join('\n'),
   )
 }
 

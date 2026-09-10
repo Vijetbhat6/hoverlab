@@ -20,31 +20,31 @@
       <text id="Setup progress" x="233" y="110" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Setup progress</text>
       <text id="1 of 5" x="825.8" y="110" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">1 of 5</text>
       <rect id="container 2" x="233" y="162" width="622" height="64" rx="16" fill="rgba(253, 252, 248, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <rect id="button" x="246" y="177" width="20" height="20" rx="10" fill="#007f34" stroke="#007f34" stroke-width="1" />
-      <text id="Create your account" x="278" y="189" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Create your account</text>
-      <text id="Done — welcome aboard." x="278" y="209" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Done — welcome aboard.</text>
+      <rect id="button" x="246" y="177" width="24" height="24" rx="12" fill="#007f34" stroke="#007f34" stroke-width="1" />
+      <text id="Create your account" x="282" y="189" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Create your account</text>
+      <text id="Done — welcome aboard." x="282" y="209" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Done — welcome aboard.</text>
       <rect id="container 3" x="233" y="234" width="622" height="64" rx="16" fill="rgba(253, 252, 248, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <rect id="button 2" x="246" y="249" width="20" height="20" rx="10" fill="none" stroke="#dbdee1" stroke-width="1" />
-      <text id="Create your first project" x="278" y="261" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Create your first project</text>
-      <text id="A project holds your environments, keys …" x="278" y="281" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">A project holds your environments, keys and deployments.</text>
+      <rect id="button 2" x="246" y="249" width="24" height="24" rx="12" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="Create your first project" x="282" y="261" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Create your first project</text>
+      <text id="A project holds your environments, keys …" x="282" y="281" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">A project holds your environments, keys and deployments.</text>
       <text id="Start" x="740.75" y="259" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600">Start</text>
       <text id="2 min" x="814.67" y="268.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11">2 min</text>
       <rect id="container 4" x="233" y="306" width="622" height="64" rx="16" fill="rgba(253, 252, 248, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <rect id="button 3" x="246" y="321" width="20" height="20" rx="10" fill="none" stroke="#dbdee1" stroke-width="1" />
-      <text id="Install the CLI" x="278" y="333" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Install the CLI</text>
-      <text id="One command, and your terminal can deplo…" x="278" y="353" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">One command, and your terminal can deploy.</text>
+      <rect id="button 3" x="246" y="321" width="24" height="24" rx="12" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="Install the CLI" x="282" y="333" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Install the CLI</text>
+      <text id="One command, and your terminal can deplo…" x="282" y="353" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">One command, and your terminal can deploy.</text>
       <text id="Start 2" x="740.75" y="331" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600">Start</text>
       <text id="3 min" x="814.67" y="340.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11">3 min</text>
       <rect id="container 5" x="233" y="378" width="622" height="64" rx="16" fill="rgba(253, 252, 248, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <rect id="button 4" x="246" y="393" width="20" height="20" rx="10" fill="none" stroke="#dbdee1" stroke-width="1" />
-      <text id="Invite a teammate" x="278" y="405" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Invite a teammate</text>
-      <text id="Projects are more useful with someone to…" x="278" y="425" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Projects are more useful with someone to share them with.</text>
+      <rect id="button 4" x="246" y="393" width="24" height="24" rx="12" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="Invite a teammate" x="282" y="405" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Invite a teammate</text>
+      <text id="Projects are more useful with someone to…" x="282" y="425" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Projects are more useful with someone to share them with.</text>
       <text id="Start 3" x="740.75" y="403" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600">Start</text>
       <text id="1 min" x="814.67" y="412.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11">1 min</text>
       <rect id="container 6" x="233" y="450" width="622" height="64" rx="16" fill="rgba(253, 252, 248, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <rect id="button 5" x="246" y="465" width="20" height="20" rx="10" fill="none" stroke="#dbdee1" stroke-width="1" />
-      <text id="Connect a domain" x="278" y="477" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Connect a domain</text>
-      <text id="Point a hostname at your first deploymen…" x="278" y="497" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Point a hostname at your first deployment.</text>
+      <rect id="button 5" x="246" y="465" width="24" height="24" rx="12" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="Connect a domain" x="282" y="477" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Connect a domain</text>
+      <text id="Point a hostname at your first deploymen…" x="282" y="497" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Point a hostname at your first deployment.</text>
       <text id="Start 4" x="740.75" y="475" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600">Start</text>
       <text id="5 min" x="814.67" y="484.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11">5 min</text>
   </g>

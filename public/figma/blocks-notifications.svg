@@ -43,29 +43,29 @@
       <text id="Ada Lovelace" x="381" y="128" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Ada Lovelace</text>
       <text id="mentioned you in “Q3 roadmap”" x="468.47" y="128" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">mentioned you in “Q3 roadmap”</text>
       <text id="18m ago" x="381" y="147.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">18m ago</text>
-      <rect id="container 7" x="739" y="122" width="8" height="8" rx="4" fill="#007f34" />
+      <rect id="container 7" x="735" y="126" width="8" height="8" rx="4" fill="#007f34" />
       <rect id="list item 2" x="321" y="164.25" width="446" height="62.25" fill="rgba(0, 128, 51, 0.039)" />
       <rect id="container 8" x="337" y="178.25" width="32" height="32" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <text id="Grace Hopper" x="381" y="190.25" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Grace Hopper</text>
       <text id="requested your review on #482" x="473.11" y="190.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">requested your review on #482</text>
       <text id="2h ago" x="381" y="209.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">2h ago</text>
-      <rect id="container 9" x="739" y="184.25" width="8" height="8" rx="4" fill="#007f34" />
+      <rect id="container 9" x="735" y="188.25" width="8" height="8" rx="4" fill="#007f34" />
       <rect id="list item 3" x="321" y="226.5" width="446" height="62.25" fill="rgba(0, 128, 51, 0.039)" />
       <rect id="container 10" x="337" y="240.5" width="32" height="32" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <text id="System" x="381" y="252.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">System</text>
       <text id="Usage reached 80% of your monthly quota" x="430.11" y="252.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Usage reached 80% of your monthly quota</text>
       <text id="11h ago" x="381" y="271.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">11h ago</text>
-      <rect id="container 11" x="739" y="246.5" width="8" height="8" rx="4" fill="#007f34" />
+      <rect id="container 11" x="735" y="250.5" width="8" height="8" rx="4" fill="#007f34" />
       <rect id="container 12" x="337" y="302.75" width="32" height="32" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <text id="Alan Turing" x="381" y="314.75" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Alan Turing</text>
       <text id="invited you to the Platform team" x="457.47" y="314.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">invited you to the Platform team</text>
       <text id="18h ago" x="381" y="334" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">18h ago</text>
-      <rect id="container 13" x="739" y="308.75" width="8" height="8" rx="4" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <rect id="container 13" x="735" y="312.75" width="8" height="8" rx="4" fill="none" stroke="#dbdee1" stroke-width="1" />
       <rect id="container 14" x="337" y="365" width="32" height="32" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <text id="Katherine Johnson" x="381" y="377" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Katherine Johnson</text>
       <text id="replied to your comment on #470" x="502.44" y="377" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">replied to your comment on #470</text>
       <text id="2d ago" x="381" y="396.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">2d ago</text>
-      <rect id="container 15" x="739" y="371" width="8" height="8" rx="4" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <rect id="container 15" x="735" y="375" width="8" height="8" rx="4" fill="none" stroke="#dbdee1" stroke-width="1" />
   </g>
   <text id="Notification Preferences Matrix label" x="64" y="1180.25" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Notification Preferences Matrix</text>
   <text id="notification-preferences id" x="64" y="1194.25" font-family="ui-monospace, monospace" font-size="12" fill="#737373">notification-preferences</text>
@@ -83,46 +83,46 @@
       <text id="Turn all on 2" x="1008.37" y="126" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="500" text-anchor="middle">Turn all on</text>
       <text id="Mentions &amp; replies" x="322.77" y="174.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Mentions &amp; replies</text>
       <text id="Someone @-mentions you or replies to you…" x="218" y="194.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" text-anchor="middle">Someone @-mentions you or replies to your comment.</text>
-      <rect id="switch" x="698.83" y="167.5" width="36" height="20" rx="10" fill="#007f34" />
-      <rect id="container 2" x="717.83" y="169.5" width="16" height="16" rx="8" fill="#fdfcf8" />
-      <rect id="switch 2" x="842.44" y="167.5" width="36" height="20" rx="10" fill="#007f34" />
-      <rect id="container 3" x="861.44" y="169.5" width="16" height="16" rx="8" fill="#fdfcf8" />
-      <rect id="switch 3" x="990.38" y="167.5" width="36" height="20" rx="10" fill="#007f34" />
-      <rect id="container 4" x="1009.38" y="169.5" width="16" height="16" rx="8" fill="#fdfcf8" />
+      <rect id="switch" x="694.83" y="165.5" width="44" height="24" rx="12" fill="#007f34" />
+      <rect id="container 2" x="717.83" y="167.5" width="20" height="20" rx="10" fill="#fdfcf8" />
+      <rect id="switch 2" x="838.44" y="165.5" width="44" height="24" rx="12" fill="#007f34" />
+      <rect id="container 3" x="861.44" y="167.5" width="20" height="20" rx="10" fill="#fdfcf8" />
+      <rect id="switch 3" x="986.38" y="165.5" width="44" height="24" rx="12" fill="#007f34" />
+      <rect id="container 4" x="1009.38" y="167.5" width="20" height="20" rx="10" fill="#fdfcf8" />
       <text id="Assignments" x="322.77" y="245.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Assignments</text>
       <text id="Work is assigned to you or reassigned aw…" x="218" y="265.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" text-anchor="middle">Work is assigned to you or reassigned away from you.</text>
-      <rect id="switch 4" x="698.83" y="238.5" width="36" height="20" rx="10" fill="#007f34" />
-      <rect id="container 5" x="717.83" y="240.5" width="16" height="16" rx="8" fill="#fdfcf8" />
-      <rect id="switch 5" x="842.44" y="238.5" width="36" height="20" rx="10" fill="#007f34" />
-      <rect id="container 6" x="861.44" y="240.5" width="16" height="16" rx="8" fill="#fdfcf8" />
-      <rect id="switch 6" x="990.38" y="238.5" width="36" height="20" rx="10" fill="#007f34" />
-      <rect id="container 7" x="1009.38" y="240.5" width="16" height="16" rx="8" fill="#fdfcf8" />
+      <rect id="switch 4" x="694.83" y="236.5" width="44" height="24" rx="12" fill="#007f34" />
+      <rect id="container 5" x="717.83" y="238.5" width="20" height="20" rx="10" fill="#fdfcf8" />
+      <rect id="switch 5" x="838.44" y="236.5" width="44" height="24" rx="12" fill="#007f34" />
+      <rect id="container 6" x="861.44" y="238.5" width="20" height="20" rx="10" fill="#fdfcf8" />
+      <rect id="switch 6" x="986.38" y="236.5" width="44" height="24" rx="12" fill="#007f34" />
+      <rect id="container 7" x="1009.38" y="238.5" width="20" height="20" rx="10" fill="#fdfcf8" />
       <text id="Weekly digest" x="322.77" y="316.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Weekly digest</text>
       <text id="A Monday summary of what moved last week…" x="218" y="336.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" text-anchor="middle">A Monday summary of what moved last week.</text>
-      <rect id="switch 7" x="698.83" y="309.5" width="36" height="20" rx="10" fill="#007f34" />
-      <rect id="container 8" x="717.83" y="311.5" width="16" height="16" rx="8" fill="#fdfcf8" />
-      <rect id="switch 8" x="842.44" y="309.5" width="36" height="20" rx="10" fill="#f3f2ee" />
-      <rect id="container 9" x="845.44" y="311.5" width="16" height="16" rx="8" fill="#fdfcf8" />
-      <rect id="switch 9" x="990.38" y="309.5" width="36" height="20" rx="10" fill="#f3f2ee" />
-      <rect id="container 10" x="993.38" y="311.5" width="16" height="16" rx="8" fill="#fdfcf8" />
+      <rect id="switch 7" x="694.83" y="307.5" width="44" height="24" rx="12" fill="#007f34" />
+      <rect id="container 8" x="717.83" y="309.5" width="20" height="20" rx="10" fill="#fdfcf8" />
+      <rect id="switch 8" x="838.44" y="307.5" width="44" height="24" rx="12" fill="#f3f2ee" />
+      <rect id="container 9" x="841.44" y="309.5" width="20" height="20" rx="10" fill="#fdfcf8" />
+      <rect id="switch 9" x="986.38" y="307.5" width="44" height="24" rx="12" fill="#f3f2ee" />
+      <rect id="container 10" x="989.38" y="309.5" width="20" height="20" rx="10" fill="#fdfcf8" />
       <text id="Billing" x="322.77" y="387.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Billing</text>
       <text id="Receipts, upcoming charges, and failed p…" x="218" y="407.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" text-anchor="middle">Receipts, upcoming charges, and failed payments.</text>
       <text id="A failed payment has to reach you somewh…" x="322.76" y="427.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" text-anchor="middle">A failed payment has to reach you somewhere you will see it.</text>
-      <rect id="switch 10" x="698.83" y="392.5" width="36" height="20" rx="10" fill="#007f34" opacity="0.5" />
-      <rect id="container 11" x="717.83" y="394.5" width="16" height="16" rx="8" fill="#fdfcf8" />
-      <rect id="switch 11" x="842.44" y="392.5" width="36" height="20" rx="10" fill="#f3f2ee" />
-      <rect id="container 12" x="845.44" y="394.5" width="16" height="16" rx="8" fill="#fdfcf8" />
-      <rect id="switch 12" x="990.38" y="392.5" width="36" height="20" rx="10" fill="#007f34" />
-      <rect id="container 13" x="1009.38" y="394.5" width="16" height="16" rx="8" fill="#fdfcf8" />
+      <rect id="switch 10" x="694.83" y="390.5" width="44" height="24" rx="12" fill="#007f34" opacity="0.5" />
+      <rect id="container 11" x="717.83" y="392.5" width="20" height="20" rx="10" fill="#fdfcf8" />
+      <rect id="switch 11" x="838.44" y="390.5" width="44" height="24" rx="12" fill="#f3f2ee" />
+      <rect id="container 12" x="841.44" y="392.5" width="20" height="20" rx="10" fill="#fdfcf8" />
+      <rect id="switch 12" x="986.38" y="390.5" width="44" height="24" rx="12" fill="#007f34" />
+      <rect id="container 13" x="1009.38" y="392.5" width="20" height="20" rx="10" fill="#fdfcf8" />
       <text id="Security" x="322.77" y="482.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Security</text>
       <text id="New sign-ins, password changes, and API …" x="218" y="502.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" text-anchor="middle">New sign-ins, password changes, and API key creation.</text>
       <text id="Security alerts cannot be switched off." x="322.76" y="522.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" text-anchor="middle">Security alerts cannot be switched off.</text>
-      <rect id="switch 13" x="698.83" y="487.5" width="36" height="20" rx="10" fill="#007f34" opacity="0.5" />
-      <rect id="container 14" x="717.83" y="489.5" width="16" height="16" rx="8" fill="#fdfcf8" />
-      <rect id="switch 14" x="842.44" y="487.5" width="36" height="20" rx="10" fill="#f3f2ee" />
-      <rect id="container 15" x="845.44" y="489.5" width="16" height="16" rx="8" fill="#fdfcf8" />
-      <rect id="switch 15" x="990.38" y="487.5" width="36" height="20" rx="10" fill="#007f34" />
-      <rect id="container 16" x="1009.38" y="489.5" width="16" height="16" rx="8" fill="#fdfcf8" />
+      <rect id="switch 13" x="694.83" y="485.5" width="44" height="24" rx="12" fill="#007f34" opacity="0.5" />
+      <rect id="container 14" x="717.83" y="487.5" width="20" height="20" rx="10" fill="#fdfcf8" />
+      <rect id="switch 14" x="838.44" y="485.5" width="44" height="24" rx="12" fill="#f3f2ee" />
+      <rect id="container 15" x="841.44" y="487.5" width="20" height="20" rx="10" fill="#fdfcf8" />
+      <rect id="switch 15" x="986.38" y="485.5" width="44" height="24" rx="12" fill="#007f34" />
+      <rect id="container 16" x="1009.38" y="487.5" width="20" height="20" rx="10" fill="#fdfcf8" />
   </g>
   <text id="Push Permission Pre-Prompt label" x="64" y="1876.75" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Push Permission Pre-Prompt</text>
   <text id="push-permission-prompt id" x="64" y="1890.75" font-family="ui-monospace, monospace" font-size="12" fill="#737373">push-permission-prompt</text>

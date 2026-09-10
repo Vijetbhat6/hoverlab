@@ -28,7 +28,7 @@
       <rect id="container 7" x="253" y="178" width="8" height="8" rx="4" fill="#00bc7d" />
       <text id="Aggregate lost ARR by seat band" x="305" y="185" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">Aggregate lost ARR by seat band</text>
       <text id="2.7s" x="780.59" y="183.75" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="11">2.7s</text>
-      <rect id="container 8" x="253" y="214" width="8" height="8" rx="4" fill="#007f34" opacity="0.6" />
+      <rect id="container 8" x="253" y="214" width="8" height="8" rx="4" fill="#007f34" opacity="0.59" />
       <text id="Test whether one account explains the sp…" x="305" y="221" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">Test whether one account explains the spike</text>
       <text id="0.9s" x="780.59" y="219.75" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="11">0.9s</text>
       <rect id="container 9" x="281" y="235" width="558" height="55" rx="12" fill="rgba(242, 242, 237, 0.4)" />
@@ -87,17 +87,17 @@
   <g id="Working Indicator with Elapsed Time" transform="translate(64, 1600.5)">
     <rect id="container" x="0" y="0" width="1088" height="134" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="container 2" x="320" y="33" width="448" height="68" rx="16" fill="#ffffff" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <rect id="container 3" x="337" y="50.5" width="6" height="6" rx="2" fill="#007f34" opacity="0.97" />
-      <rect id="container 4" x="346" y="50.5" width="6" height="6" rx="2" fill="#007f34" opacity="1" />
-      <rect id="container 5" x="355" y="50.5" width="6" height="6" rx="2" fill="#007f34" opacity="0.99" />
-      <rect id="container 6" x="364" y="50.5" width="6" height="6" rx="2" fill="#007f34" opacity="0.94" />
-      <rect id="container 7" x="337" y="59.5" width="6" height="6" rx="2" fill="#007f34" opacity="0.83" />
-      <rect id="container 8" x="346" y="59.5" width="6" height="6" rx="2" fill="#007f34" opacity="0.67" />
-      <rect id="container 9" x="355" y="59.5" width="6" height="6" rx="2" fill="#007f34" opacity="0.49" />
-      <rect id="container 10" x="364" y="59.5" width="6" height="6" rx="2" fill="#007f34" opacity="0.33" />
-      <rect id="container 11" x="337" y="68.5" width="6" height="6" rx="2" fill="#007f34" opacity="0.21" />
-      <rect id="container 12" x="346" y="68.5" width="6" height="6" rx="2" fill="#007f34" opacity="0.16" />
-      <rect id="container 13" x="355" y="68.5" width="6" height="6" rx="2" fill="#007f34" opacity="0.4" />
+      <rect id="container 3" x="337" y="50.5" width="6" height="6" rx="2" fill="#007f34" opacity="0.93" />
+      <rect id="container 4" x="346" y="50.5" width="6" height="6" rx="2" fill="#007f34" opacity="0.97" />
+      <rect id="container 5" x="355" y="50.5" width="6" height="6" rx="2" fill="#007f34" opacity="1" />
+      <rect id="container 6" x="364" y="50.5" width="6" height="6" rx="2" fill="#007f34" opacity="0.99" />
+      <rect id="container 7" x="337" y="59.5" width="6" height="6" rx="2" fill="#007f34" opacity="0.94" />
+      <rect id="container 8" x="346" y="59.5" width="6" height="6" rx="2" fill="#007f34" opacity="0.82" />
+      <rect id="container 9" x="355" y="59.5" width="6" height="6" rx="2" fill="#007f34" opacity="0.66" />
+      <rect id="container 10" x="364" y="59.5" width="6" height="6" rx="2" fill="#007f34" opacity="0.48" />
+      <rect id="container 11" x="337" y="68.5" width="6" height="6" rx="2" fill="#007f34" opacity="0.32" />
+      <rect id="container 12" x="346" y="68.5" width="6" height="6" rx="2" fill="#007f34" opacity="0.21" />
+      <rect id="container 13" x="355" y="68.5" width="6" height="6" rx="2" fill="#007f34" opacity="0.16" />
       <rect id="container 14" x="364" y="68.5" width="6" height="6" rx="2" fill="#007f34" opacity="0.4" />
       <rect id="container 15" x="337" y="77.5" width="6" height="6" rx="2" fill="#007f34" opacity="0.4" />
       <rect id="container 16" x="346" y="77.5" width="6" height="6" rx="2" fill="#007f34" opacity="0.4" />

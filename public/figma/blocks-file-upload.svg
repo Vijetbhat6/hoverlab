@@ -49,14 +49,14 @@
       <text id="team-offsite-photos.zip" x="353" y="100" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">team-offsite-photos.zip</text>
       <text id="212 MB" x="702.64" y="100" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">212 MB</text>
       <rect id="progressbar" x="353" y="118" width="359.23" height="4" rx="2" fill="#f3f2ee" />
-      <rect id="container 4" x="353" y="118" width="222.72" height="4" rx="2" fill="#007f34" opacity="0.6" />
+      <rect id="container 4" x="353" y="118" width="222.72" height="4" rx="2" fill="#007f34" opacity="0.58" />
       <text id="62%" x="720.23" y="124" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">62%</text>
       <rect id="list item 3" x="288" y="149" width="512" height="68" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="container 5" x="305" y="165" width="36" height="36" rx="12" fill="#f3f2ee" />
       <text id="homepage-hero.png" x="353" y="176" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">homepage-hero.png</text>
       <text id="8.7 MB" x="706.52" y="176" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">8.7 MB</text>
       <rect id="progressbar 2" x="353" y="194" width="359.23" height="4" rx="2" fill="#f3f2ee" />
-      <rect id="container 6" x="353" y="194" width="64.66" height="4" rx="2" fill="#007f34" opacity="0.6" />
+      <rect id="container 6" x="353" y="194" width="64.66" height="4" rx="2" fill="#007f34" opacity="0.58" />
       <text id="18%" x="720.23" y="200" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">18%</text>
       <rect id="list item 4" x="288" y="225" width="512" height="64" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="container 7" x="305" y="239" width="36" height="36" rx="12" fill="#f3f2ee" />
