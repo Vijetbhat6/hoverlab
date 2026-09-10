@@ -34,6 +34,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useTheme } from 'next-themes'
 import {
+  ChevronDown,
   Cookie,
   Github,
   Keyboard,
@@ -189,6 +190,158 @@ function isActive(pathname: string, prefixes: string[]): boolean {
   return prefixes.some((p) => pathname === p || pathname.startsWith(`${p}/`))
 }
 
+/**
+ * How many nav items fit on the line, so the rest can go in a menu that
+ * says so rather than scrolling out of sight behind a hidden scrollbar.
+ *
+ * The nav is the only flexible item in a `max-w-7xl` row, and the cluster
+ * on its right *grows* at `md`, `lg` and `2xl` as Compare, Bundle, History
+ * and the search field earn their labels. So the nav gets narrower as the
+ * viewport gets wider: measured at 1280 and 1440 it had 581px for 790px of
+ * links, and at 1600 and above it had 387px. Playground, Tools and Docs
+ * were unreachable at every desktop width, Templates and Builder too past
+ * 1600, and 1600 rendered the word "Ter" — "Templates" cut mid-word — with
+ * nothing to say five more links existed.
+ *
+ * This is the same bug the Pro link was moved out of the nav to escape,
+ * and the comment there states the rule this restores: a rung nobody can
+ * see is a rung nobody uses.
+ *
+ * Not a hamburger. Everything that fits stays on the line, in order, and
+ * only the tail moves — so on a wide screen the menu holds nothing and
+ * does not render at all.
+ *
+ * Below `sm` the nav is its own full-width scrolling row, which is a
+ * deliberate design that already works; the menu is a no-op there.
+ */
+function useNavOverflow(total: number) {
+  const navRef = React.useRef<HTMLElement | null>(null)
+  /*
+   * Item widths are cached from a paint where every item was on the line —
+   * once the tail is trimmed the trimmed items cannot be measured. They are
+   * static labels, so one good measurement holds for the life of the page;
+   * `document.fonts.ready` re-takes it in case a webfont reflowed them.
+   */
+  const widthsRef = React.useRef<number[] | null>(null)
+  /** Width of the "More" trigger, measured once and cached the same way. */
+  const triggerRef = React.useRef<number>(0)
+  const [visible, setVisible] = React.useState(total)
+
+  React.useEffect(() => {
+    const nav = navRef.current
+    if (!nav) return
+
+    const measure = () => {
+      const el = navRef.current
+      if (!el) return
+
+      // Below `sm` the row scrolls on purpose — show everything.
+      if (!window.matchMedia('(min-width: 640px)').matches) {
+        widthsRef.current = null
+        setVisible(total)
+        return
+      }
+
+      const items = Array.from(
+        el.querySelectorAll<HTMLElement>('[data-nav-item]'),
+      )
+      const moreEl = el.querySelector<HTMLElement>('[data-nav-more]')
+
+      /*
+       * Measure through a forced unhide, restored before this function
+       * returns, because a `hidden` element reports `offsetWidth: 0`.
+       *
+       * Doing it any other way means waiting for React to commit the
+       * unhide first, and that is a race this lost: after a re-measure the
+       * widths came back as zeros for every item still hidden from the
+       * previous pass, every item therefore "fit", and the nav went
+       * straight back to eleven items scrolling behind a hidden scrollbar.
+       * Reading layout is synchronous, so taking the measurement into our
+       * own hands is both correct and cheaper than a second render.
+       */
+      if (!widthsRef.current || !triggerRef.current) {
+        if (items.length < total) return
+        const restore = [...items, moreEl].map((node) =>
+          node ? ([node, node.hidden] as const) : null,
+        )
+        for (const entry of restore) if (entry) entry[0].hidden = false
+
+        widthsRef.current = items.map((item) => item.offsetWidth)
+        // The count badge grows by a digit past nine items; round up once.
+        if (moreEl) triggerRef.current = moreEl.offsetWidth + 8
+
+        for (const entry of restore) if (entry) entry[0].hidden = entry[1]
+      }
+      const widths = widthsRef.current
+
+      const gap = Number.parseFloat(getComputedStyle(el).columnGap) || 0
+      const available = el.clientWidth
+
+      // How many fit with everything on the line and no menu at all.
+      let used = 0
+      let fits = 0
+      for (const w of widths) {
+        const next = used + (fits === 0 ? 0 : gap) + w
+        if (next > available) break
+        used = next
+        fits += 1
+      }
+      if (fits === total) {
+        setVisible(total)
+        return
+      }
+
+      /*
+       * Something has to move, so the trigger now costs width too. Re-run
+       * the fit against the smaller budget, and drop items until the
+       * trigger has room — otherwise adding the menu overflows the line it
+       * was added to prevent. Reserving nothing for it was what put the
+       * trigger past the end of the nav and underneath the Pro link:
+       * visible, and impossible to click.
+       */
+      const trigger = triggerRef.current || 104
+      const budget = available - trigger - gap
+      let room = 0
+      let count = 0
+      for (const w of widths) {
+        const next = room + (count === 0 ? 0 : gap) + w
+        if (next > budget) break
+        room = next
+        count += 1
+      }
+      setVisible(count)
+    }
+
+    measure()
+
+    const observer = new ResizeObserver(measure)
+    observer.observe(nav)
+    // The right-hand cluster is what squeezes the nav, and it changes width
+    // on hydration (Sign in / account) and at every breakpoint above.
+    if (nav.parentElement) observer.observe(nav.parentElement)
+
+    /*
+     * A webfont swapping in changes every label's width. Dropping the
+     * caches is enough — `measure` takes its own reading and no longer
+     * needs a render to show the items first.
+     */
+    let cancelled = false
+    void document.fonts?.ready.then(() => {
+      if (cancelled) return
+      widthsRef.current = null
+      triggerRef.current = 0
+      measure()
+    })
+
+    return () => {
+      cancelled = true
+      observer.disconnect()
+    }
+  }, [total])
+
+  return { navRef, visible }
+}
+
 export interface SiteHeaderProps {
   /**
    * Surface-specific controls, rendered at the head of the tray.
@@ -203,6 +356,8 @@ export interface SiteHeaderProps {
 
 export function SiteHeader({ actions }: SiteHeaderProps) {
   const pathname = usePathname() ?? ''
+
+  const { navRef, visible } = useNavOverflow(NAV.length)
 
   const [bundleOpen, setBundleOpen] = React.useState(false)
   const [compareOpen, setCompareOpen] = React.useState(false)
@@ -300,20 +455,40 @@ export function SiteHeader({ actions }: SiteHeaderProps) {
             </span>
           </Link>
 
-          {/* Ladder nav. Scrolls horizontally rather than collapsing into a
-              hamburger — a menu you have to open is a menu a first-time
-              visitor doesn't know is there, and this nav is the product. */}
+          {/* Ladder nav. Scrolls horizontally on phones rather than
+              collapsing into a hamburger — a menu you have to open is a menu
+              a first-time visitor doesn't know is there, and this nav is the
+              product. On a desktop line the tail that will not fit moves
+              into a labelled "More" menu instead of scrolling out of sight;
+              see `useNavOverflow`. Every item is in the server HTML either
+              way, so a crawler and a phone both get all eleven links. */}
           <nav
+            ref={navRef}
             aria-label="Catalog"
+            /* Still clipped, deliberately: the menu itself is portalled, so
+               nothing needs to escape this box, and if the measurement is
+               ever off by a few pixels the tail scrolls — the old failure —
+               rather than painting on top of the Pro link next to it. */
             className="-mx-1 order-last flex w-full min-w-0 items-center gap-0.5 overflow-x-auto px-1 [scrollbar-width:none] sm:order-none sm:w-auto sm:flex-1 [&::-webkit-scrollbar]:hidden"
           >
-            {NAV.map((item) => {
+            {NAV.map((item, i) => {
               const active = isActive(pathname, item.match)
+              /*
+               * Kept mounted and hidden rather than unmounted: `hidden` is
+               * how the measurer tells "does not fit" from "not there yet",
+               * and an item that is merely hidden is still a link in the
+               * markup for a crawler that ignores our CSS.
+               */
+              const overflowed = i >= visible
               return (
                 <Tooltip key={item.href}>
                   <TooltipTrigger asChild>
                     <Link
+                      data-nav-item
                       href={item.href}
+                      hidden={overflowed}
+                      aria-hidden={overflowed || undefined}
+                      tabIndex={overflowed ? -1 : undefined}
                       aria-current={active ? 'page' : undefined}
                       className={cn(
                         'relative shrink-0 rounded-lg px-2.5 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
@@ -349,6 +524,73 @@ export function SiteHeader({ actions }: SiteHeaderProps) {
                 </Tooltip>
               )
             })}
+
+            {/*
+              The overflow menu. Always in the tree so the measurer can read
+              its width before deciding whether it is needed, and `hidden`
+              whenever everything fits — which is the common case on a wide
+              screen, where this renders nothing at all.
+
+              It carries the word "More" and a count rather than a bare
+              chevron, so the thing it is hiding is legible from the outside.
+            */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <button
+                  data-nav-more
+                  type="button"
+                  hidden={visible >= NAV.length}
+                  aria-hidden={visible >= NAV.length || undefined}
+                  tabIndex={visible >= NAV.length ? -1 : undefined}
+                  className={cn(
+                    'relative shrink-0 items-center gap-1 rounded-lg px-2.5 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
+                    'text-muted-foreground hover:bg-muted/50 hover:text-foreground',
+                    // `hidden` on a flex child needs the display reset to win.
+                    visible >= NAV.length ? 'hidden' : 'flex',
+                  )}
+                >
+                  More
+                  <span className="rounded bg-muted px-1 py-0.5 text-[9px] font-bold leading-none tracking-wider text-muted-foreground">
+                    {NAV.length - visible}
+                  </span>
+                  <ChevronDown aria-hidden className="h-3.5 w-3.5" />
+                </button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-60">
+                <DropdownMenuLabel>More of the catalog</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                {NAV.slice(visible).map((item) => (
+                  <DropdownMenuItem key={item.href} asChild>
+                    <Link
+                      href={item.href}
+                      aria-current={
+                        isActive(pathname, item.match) ? 'page' : undefined
+                      }
+                      className="flex cursor-pointer flex-col items-start gap-0.5"
+                    >
+                      <span className="flex items-center gap-1.5 font-medium">
+                        {item.label}
+                        {item.badge ? (
+                          <span
+                            className={cn(
+                              'rounded px-1 py-0.5 text-[9px] font-bold uppercase leading-none tracking-wider',
+                              item.badge.tone === 'pro'
+                                ? 'bg-primary text-primary-foreground'
+                                : 'bg-amber-500/15 text-amber-600 dark:text-amber-400',
+                            )}
+                          >
+                            {item.badge.text}
+                          </span>
+                        ) : null}
+                      </span>
+                      <span className="text-xs text-muted-foreground">
+                        {item.hint}
+                      </span>
+                    </Link>
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
           </nav>
 
           {/* ml-auto so the controls stay right-aligned on the mobile row,
