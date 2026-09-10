@@ -12,6 +12,7 @@
  */
 
 import Link from 'next/link'
+import { builderHref } from '@/lib/builder/compose'
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import { ArrowLeft, ArrowRight, CalendarDays, Package, FileCode, Layers, History } from 'lucide-react'
@@ -279,6 +280,20 @@ export default async function BlockDetailPage({ params }: PageProps) {
           name={block.name}
           command={`npx hoverlab add ${block.id}`}
         />
+
+        {/* The rung up. A block is rarely wanted on its own — the reader is
+            usually assembling a screen — and this is the only place that
+            says so at the moment they are looking at one. `builderHref`
+            rather than a literal so the parameter name stays in one file. */}
+        <p className="mt-4 text-sm text-muted-foreground">
+          <Link
+            href={builderHref([block.id])}
+            className="font-medium underline underline-offset-4 hover:text-foreground"
+          >
+            Start a page with this section
+          </Link>{' '}
+          — add more, order them, and leave with the page source.
+        </p>
 
         {/* ---------------------------------------------------------- *
          *  Live preview

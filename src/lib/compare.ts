@@ -13,6 +13,12 @@
  *              stamps both the newest and the oldest. List prices move, and
  *              a comparison with no date is asserting it is true today
  *              forever, which it will stop being within a quarter.
+ *   Symmetric. Every competitor has a `beatsUs`, and it is required by the
+ *              type rather than optional. A comparison page where the
+ *              author wins every row is an advertisement, and readers of
+ *              this particular kind of page know that better than most —
+ *              they are here precisely because they do not trust the
+ *              pricing page.
  *
  * WHY THE DATE IS PER-ROW AND NOT ONE CONSTANT.
  *
@@ -29,13 +35,6 @@
  * A per-row date removes the choice. You re-read what answers, you stamp
  * what you re-read, and the rows you could not reach keep the older date
  * where a reader can see it and go check the one you could not.
- *   Symmetric. Every competitor has a `beatsUs`, and it is required by the
- *              type rather than optional. A comparison page where the
- *              author wins every row is an advertisement, and readers of
- *              this particular kind of page know that better than most —
- *              they are here precisely because they do not trust the
- *              pricing page.
- *
  * OUR OWN NUMBERS ARE NOT IN THIS FILE.
  *
  * They are computed by the page from the catalog itself — TOTAL_COUNT,
@@ -206,7 +205,7 @@ export const COMPETITORS: Competitor[] = [
     agent: 'Ships a SKILL.md, plus a 20-item Agent Kit of skills, prompts and recipes at Pro',
     gate: 'source',
     beatsUs:
-      'Our closest business-model twin, and in one sweep it went from 238 blocks to 580 across 60 categories, added an Agent Kit, and shipped a Landing Builder that composes its blocks into a page. We have the blocks, the pages and the templates and no builder over them. It also has the audience — 1.1M visits, 57% direct, meaning people type the name.',
+      'Our closest business-model twin, and in one sweep it went from 238 blocks to 580 across 60 categories, added an Agent Kit, and shipped a Landing Builder that composes its blocks into a page. It also has the audience we do not — 1.1M visits, 57% direct, meaning people type the name. That last one is the durable advantage; almost nobody types ours.',
   },
   {
     name: 'Flowbite',
@@ -461,7 +460,7 @@ export const WHERE_THEY_WIN: { claim: string; detail: string }[] = [
   {
     claim: 'Composition',
     detail:
-      'React Bits has a Landing Builder, Shadcnblocks a page builder, UI8 a Forge. We ship the parts a builder would compose — effects, blocks, pages, templates, kits — and nothing that composes them. This is where the category moved while we were adding volume.',
+      'We now have a builder, so this is no longer the whole gap it was — but theirs do more. React Bits’ Landing Builder and Shadcnblocks’ page builder let you edit inside the composition; ours chooses sections and orders them, and everything past that happens in your editor on the source it hands you. That is a deliberate limit, not a roadmap item, and it is still less than they offer.',
   },
   {
     claim: 'Free tiers',

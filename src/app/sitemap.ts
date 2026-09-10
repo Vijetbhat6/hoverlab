@@ -112,6 +112,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // with a card already out. Monthly, because the prices on it are other
     // people's and they move.
     { url: absoluteUrl('/compare'), changeFrequency: 'monthly' as const, priority: 0.8 },
+    // The page builder. Indexed bare, with no composition: "landing page
+    // builder" and "tailwind page builder" are the queries, and every
+    // composition is a query string over this one URL — so there is exactly
+    // one page here to submit, and an infinite number of states of it that
+    // a crawler has no reason to enumerate.
+    { url: absoluteUrl('/builder'), changeFrequency: 'monthly' as const, priority: 0.8 },
     // Written for search in the same way /compare is: "vue tailwind
     // components", "svelte ui components" and "astro components" are
     // queries we ship an answer to and had no page for. Monthly — the

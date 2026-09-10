@@ -14,7 +14,7 @@
 
 import Link from 'next/link'
 import type { Metadata } from 'next'
-import { ArrowRight, Blocks as BlocksIcon, Layers, Sparkles } from 'lucide-react'
+import { ArrowRight, Blocks as BlocksIcon, Layers, Sparkles, Wand2 } from 'lucide-react'
 import { BlockCard } from '@/components/blocks/block-card'
 import { TierDefinition } from '@/components/tier-definition'
 import { blockCategorySlug } from '@/lib/blocks/block-types'
@@ -118,6 +118,18 @@ export default function BlocksHubPage() {
             >
               <Sparkles aria-hidden className="h-4 w-4" />
               {TOTAL_COUNT.toLocaleString('en-US')} effects underneath them
+              <ArrowRight aria-hidden className="h-3.5 w-3.5" />
+            </Link>
+            <span aria-hidden>·</span>
+            {/* The rung above, offered where someone is already looking at
+                sections. A visitor browsing blocks is one step from wanting
+                several of them in an order. */}
+            <Link
+              href="/builder"
+              className="inline-flex items-center gap-1.5 font-medium transition-colors hover:text-foreground"
+            >
+              <Wand2 aria-hidden className="h-4 w-4" />
+              Compose them into a page
               <ArrowRight aria-hidden className="h-3.5 w-3.5" />
             </Link>
           </div>

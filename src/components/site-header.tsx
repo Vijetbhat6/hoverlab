@@ -157,6 +157,13 @@ const NAV: Array<{
     hint: 'The projects — deployable starters you can clone',
   },
   {
+    label: 'Builder',
+    href: '/builder',
+    match: ['/builder'],
+    hint: 'Compose your own page out of sections, and leave with the source',
+    badge: { text: 'New', tone: 'new' },
+  },
+  {
     label: 'Playground',
     href: '/playground',
     match: ['/playground'],
