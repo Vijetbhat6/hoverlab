@@ -49,7 +49,9 @@ const problems: string[] = []
 const missing = BLOCK_INDEX.filter((b) => !covered.has(b.id))
 if (missing.length) {
   problems.push(
-    `  ${missing.length} block${missing.length === 1 ? '' : 's'} in the catalog are not in the kit:`,
+    `  ${missing.length} block${missing.length === 1 ? ' in' : 's in'} the catalog ${
+      missing.length === 1 ? 'is' : 'are'
+    } not in the kit:`,
     ...missing.slice(0, 12).map((b) => `    ${b.id}`),
     ...(missing.length > 12 ? [`    … and ${missing.length - 12} more`] : []),
   )
@@ -63,7 +65,9 @@ const catalogIds = new Set(BLOCK_INDEX.map((b) => b.id))
 const orphans = [...covered].filter((id) => !catalogIds.has(id))
 if (orphans.length) {
   problems.push(
-    `  ${orphans.length} frame${orphans.length === 1 ? '' : 's'} in the kit have no catalog entry:`,
+    `  ${orphans.length} frame${orphans.length === 1 ? ' in' : 's in'} the kit ${
+      orphans.length === 1 ? 'has' : 'have'
+    } no catalog entry:`,
     ...orphans.slice(0, 12).map((id) => `    ${id}`),
   )
 }
