@@ -118,7 +118,15 @@ export function StatsComparison({
       {/* Scrolls rather than compressing: five columns of numbers squeezed
           into 320px is unreadable, and a horizontal scroll on a table is a
           pattern phone users already understand. */}
-      <div className="mt-12 overflow-x-auto">
+      {/*
+        `relative` is load-bearing. Tailwind's `sr-only` is `position:
+        absolute`, and an overflow box only clips an absolutely positioned
+        descendant when it is also that descendant's containing block.
+        Without it the "Improved:" labels in the right-hand cells laid out at their static position,
+        escaped this scroller and dragged the page sideways on a phone,
+        pointing at nothing anyone could see. Same fix as /compare.
+      */}
+      <div className="relative mt-12 overflow-x-auto">
         <table className="w-full min-w-[36rem] border-collapse text-start">
           <caption className="sr-only">
             Support metrics {beforeLabel} compared with {afterLabel}

@@ -142,7 +142,7 @@ export function SettingsNotificationMatrix({
           Choose where each kind of message goes. Changes save as you make them.
         </p>
 
-        <div className="mt-6 overflow-x-auto">
+        <div className="relative mt-6 overflow-x-auto">
           <table className="w-full min-w-[34rem] border-collapse text-start text-sm">
             <thead>
               <tr className="border-b border-border">

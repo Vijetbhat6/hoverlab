@@ -182,7 +182,7 @@ export function ApprovalQueue({ items = DEFAULT_ITEMS, className = '' }: Approva
           </div>
         ) : null}
 
-        <div className="overflow-x-auto">
+        <div className="relative overflow-x-auto">
           <table className="w-full text-start text-sm">
             <caption className="sr-only">
               Actions awaiting approval. High-impact actions have no bulk

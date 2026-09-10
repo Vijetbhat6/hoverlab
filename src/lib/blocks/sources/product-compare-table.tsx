@@ -210,7 +210,15 @@ export function ProductCompareTable({
           </div>
         ) : null}
 
-        <div className="mt-4 -mx-1 overflow-x-auto px-1">
+        {/*
+          `relative` is load-bearing. Tailwind's `sr-only` is `position:
+          absolute`, and an overflow box only clips an absolutely positioned
+          descendant when it is also that descendant's containing block.
+          Without it the per-column "Remove <product>" labels laid out at their static position,
+          escaped this scroller and dragged the page sideways on a phone,
+          pointing at nothing anyone could see. Same fix as /compare.
+        */}
+        <div className="relative mt-4 -mx-1 overflow-x-auto px-1">
           <table className="w-full min-w-[36rem] border-collapse text-start text-sm">
             <caption className="sr-only">
               Specifications compared across {shown.length} products.

@@ -180,7 +180,7 @@ export function BookingScheduler({
               Pick a day
             </legend>
 
-            <div className="mt-3 flex gap-2 overflow-x-auto pb-2">
+            <div className="relative mt-3 flex gap-2 overflow-x-auto pb-2">
               {days.map((option) => {
                 const open = option.slots.length > 0
                 const active = option.date === selectedDate

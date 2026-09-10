@@ -84,7 +84,7 @@ export function ProductGallery({
         role="tablist"
         aria-label="Product images"
         onKeyDown={onKeyDown}
-        className="flex gap-2.5 overflow-x-auto pb-1"
+        className="relative flex gap-2.5 overflow-x-auto pb-1"
       >
         {views.map((v, i) => (
           <button

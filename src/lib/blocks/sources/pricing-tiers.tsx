@@ -145,7 +145,10 @@ export function PricingTiers({
             <h3 className="text-lg font-bold tracking-tight">{plan.name}</h3>
             <p className="mt-1 text-sm text-muted-foreground">{plan.description}</p>
 
-            <div className="mt-5 flex items-baseline gap-1">
+            {/* Wraps: `priceOf` is whatever currency the caller passes, and a
+                four-figure non-dollar price next to /month is wider than a
+                third-width card’s content box. */}
+            <div className="mt-5 flex flex-wrap items-baseline gap-x-1 gap-y-1">
               <span className="text-4xl font-extrabold tracking-tight">{priceOf(plan)}</span>
               {plan.monthly > 0 ? (
                 <span className="text-sm text-muted-foreground">/month</span>

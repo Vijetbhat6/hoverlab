@@ -86,7 +86,7 @@ export function DataTableExpandable({
 
   return (
     <div className={`overflow-hidden rounded-2xl border border-border/60 bg-card/60 ${className}`}>
-      <div className="overflow-x-auto">
+      <div className="relative overflow-x-auto">
         <table className="w-full border-collapse text-sm">
           <thead>
             <tr className="border-b border-border/60 bg-muted/30">

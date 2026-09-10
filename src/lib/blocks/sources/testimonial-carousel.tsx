@@ -177,13 +177,22 @@ export function TestimonialCarousel({
         </div>
       </div>
 
+      {/*
+        `relative` on the rail is load-bearing. Tailwind's `sr-only` is
+        `position: absolute`, and an overflow box only clips an absolutely
+        positioned descendant when it is also that descendant's containing
+        block. Without it the per-quote "N out of 5" labels laid out at their
+        static position — up to 1042px in on a 390px screen — escaped the rail
+        and gave the whole PAGE a sideways scroll, pointing at nothing anyone
+        could see. Same bug, same fix as the table on /compare.
+      */}
       <ul
         ref={railRef}
         onScroll={syncEnds}
         tabIndex={0}
         role="group"
         aria-label="Customer quotes, scrollable"
-        className="mt-10 flex snap-x snap-mandatory gap-6 overflow-x-auto pb-4 [scrollbar-width:thin] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 focus-visible:ring-offset-background"
+        className="relative mt-10 flex snap-x snap-mandatory gap-6 overflow-x-auto pb-4 [scrollbar-width:thin] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 focus-visible:ring-offset-background"
       >
         {testimonials.map((testimonial) => (
           <li

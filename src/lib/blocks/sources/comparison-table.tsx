@@ -60,7 +60,17 @@ export function ComparisonTable({
         {subheading ? <p className="mt-3 text-muted-foreground">{subheading}</p> : null}
       </div>
 
-      <div className="overflow-x-auto rounded-2xl border border-border/60">
+      {/*
+        `relative` is load-bearing, not decoration. The cells carry `sr-only`
+        labels, and `sr-only` is `position: absolute` — an overflow container
+        only clips an absolutely positioned descendant when it is also that
+        descendant's containing block. Without it those 1px spans laid out at
+        their static position inside a table wider than this box, escaped the
+        scroll port, and gave the whole PAGE a horizontal scrollbar on a phone:
+        18px of sideways scroll on an enterprise landing page, pointing at
+        nothing a sighted visitor could see.
+      */}
+      <div className="relative overflow-x-auto rounded-2xl border border-border/60">
         <table className="w-full border-collapse text-sm">
           <caption className="sr-only">
             {heading} — features by plan

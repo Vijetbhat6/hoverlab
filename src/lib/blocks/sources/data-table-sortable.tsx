@@ -168,7 +168,16 @@ export function DataTableSortable({
         </div>
       ) : null}
 
-      <div className="overflow-x-auto">
+      {/*
+        `relative` is load-bearing. Tailwind's `sr-only` is `position:
+        absolute`, and an overflow box only clips an absolutely positioned
+        descendant when it is also that descendant's containing block. Without
+        it the screen-reader labels in the right-hand cells laid out at their
+        static position, escaped this scroller, and gave the whole PAGE a
+        sideways scroll on a phone — pointing at nothing anyone could see.
+        Same bug, same fix as the table on /compare.
+      */}
+      <div className="relative overflow-x-auto">
         <table className="w-full border-collapse text-sm">
           <thead>
             <tr className="border-b border-border/60 bg-muted/30">

@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/dev.mjs",
-    "prebuild": "node scripts/build-effect-index.mjs && tsx scripts/build-catalog-stats.mts && node scripts/build-artifact-sources.mjs && node scripts/build-block-exports.mjs && tsx scripts/build-revisions.mts && tsx scripts/build-block-markup.mts && tsx scripts/build-skills.mts && tsx scripts/build-dna.mts && node scripts/build-registry-tokens.mjs && tsx scripts/check-registry.mts && tsx scripts/check-paths.mts && tsx scripts/check-kits.mts && tsx scripts/check-catalog-focus.mts && tsx scripts/check-claimed-counts.mts && tsx scripts/check-figma-kit.mts && tsx scripts/check-claims.mts && tsx scripts/check-rtl.mts && tsx scripts/check-llms-links.mts && tsx scripts/check-canonical.mts && tsx scripts/audit-a11y.mts --json",
+    "prebuild": "node scripts/build-effect-index.mjs && tsx scripts/build-catalog-stats.mts && node scripts/build-artifact-sources.mjs && node scripts/build-block-exports.mjs && tsx scripts/build-revisions.mts && tsx scripts/build-block-markup.mts && tsx scripts/build-skills.mts && tsx scripts/build-dna.mts && node scripts/build-registry-tokens.mjs && tsx scripts/check-registry.mts && tsx scripts/check-paths.mts && tsx scripts/check-kits.mts && tsx scripts/check-catalog-focus.mts && tsx scripts/check-claimed-counts.mts && tsx scripts/check-figma-kit.mts && tsx scripts/check-claims.mts && tsx scripts/check-rtl.mts && tsx scripts/check-overflow-clip.mts && tsx scripts/check-llms-links.mts && tsx scripts/check-canonical.mts && tsx scripts/audit-a11y.mts --json",
     "check:env": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/check-env.mjs",
     "polar:provision": "tsx scripts/provision-polar.mts",
     "check:deploy": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/check-deploy.mjs",
@@ -37,6 +37,7 @@
     "check:workbench": "tsx scripts/check-workbench.mts",
     "check:ids": "tsx scripts/check-duplicate-ids.mts",
     "check:rtl": "tsx scripts/check-rtl.mts",
+    "check:overflow": "tsx scripts/check-overflow-clip.mts",
     "build:skills": "tsx scripts/build-skills.mts",
     "build:dna": "tsx scripts/build-dna.mts",
     "build:registry": "node scripts/build-registry-tokens.mjs",

@@ -99,8 +99,15 @@ const DATE_FORMAT = new Intl.DateTimeFormat('en', {
 })
 
 export function KanbanBoard({ columns = DEFAULT_COLUMNS, className = '' }: KanbanBoardProps) {
+  // `relative` on the rail is load-bearing. Tailwind's `sr-only` is
+  // `position: absolute`, and an overflow box only clips an absolutely
+  // positioned descendant when it is also that descendant's containing block.
+  // Without it the assignee names in the right-hand columns laid out at their
+  // static position — 959px in on a 390px screen — escaped this scroller and
+  // gave the whole PAGE a sideways scroll, pointing at nothing anyone could
+  // see. Same bug, same fix as the table on /compare.
   return (
-    <div className={`overflow-x-auto ${className}`}>
+    <div className={`relative overflow-x-auto ${className}`}>
       <div className="flex min-w-max items-start gap-4 p-1">
         {columns.map((column) => (
           <section key={column.id} aria-label={column.label} className="w-72 shrink-0">

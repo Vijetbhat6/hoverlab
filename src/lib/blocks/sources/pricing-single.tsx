@@ -87,7 +87,10 @@ export function PricingSingle({
             <p className="text-sm font-semibold uppercase tracking-wide text-primary">
               {planName}
             </p>
-            <div className="mt-4 flex items-baseline gap-2">
+            {/* Wraps: `price` and `cadence` are both caller-supplied, and a
+                5xl price beside a cadence label overflows this panel long
+                before either string looks unreasonable. */}
+            <div className="mt-4 flex flex-wrap items-baseline gap-2">
               <span className="text-5xl font-extrabold tracking-tight">{price}</span>
               {cadence ? (
                 <span className="text-sm text-muted-foreground">{cadence}</span>

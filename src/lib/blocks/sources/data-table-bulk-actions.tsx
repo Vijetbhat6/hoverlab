@@ -317,7 +317,7 @@ export function DataTableBulkActions({
           </div>
         ) : null}
 
-        <div className="overflow-x-auto">
+        <div className="relative overflow-x-auto">
           <table className="w-full text-start text-sm">
             <caption className="sr-only">
               Members matching the current filter. Selecting every row on this page

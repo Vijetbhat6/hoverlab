@@ -140,7 +140,9 @@ export function PricingCredits({
               {pack.credits}
             </h3>
 
-            <p className="mt-4 flex items-baseline gap-3">
+            {/* Wraps: a long price and a saving pill together are wider than
+                the card once the grid is three across. */}
+            <p className="mt-4 flex flex-wrap items-baseline gap-3">
               <span className="text-4xl font-bold tracking-tight text-foreground">
                 {pack.price}
               </span>

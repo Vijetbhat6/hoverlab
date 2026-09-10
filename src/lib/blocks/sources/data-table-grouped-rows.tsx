@@ -130,7 +130,7 @@ export function DataTableGroupedRows({
         </button>
       </header>
 
-      <div className="overflow-x-auto">
+      <div className="relative overflow-x-auto">
         <table className="w-full min-w-[40rem] border-collapse text-start text-sm">
           <thead>
             <tr className="border-b border-border">

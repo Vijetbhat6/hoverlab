@@ -228,7 +228,7 @@
     "files": 1
   },
   "stats-comparison": {
-    "lines": 184,
+    "lines": 192,
     "files": 1
   },
   "stats-timeline": {
@@ -292,11 +292,11 @@
     "files": 1
   },
   "pricing-tiers": {
-    "lines": 189,
+    "lines": 192,
     "files": 1
   },
   "pricing-single": {
-    "lines": 142,
+    "lines": 145,
     "files": 1
   },
   "pricing-usage-calculator": {
@@ -304,11 +304,11 @@
     "files": 1
   },
   "comparison-table": {
-    "lines": 135,
+    "lines": 145,
     "files": 1
   },
   "pricing-credits": {
-    "lines": 191,
+    "lines": 193,
     "files": 1
   },
   "pricing-plan-picker": {
@@ -336,7 +336,7 @@
     "files": 1
   },
   "testimonial-carousel": {
-    "lines": 243,
+    "lines": 252,
     "files": 1
   },
   "testimonial-video": {
@@ -492,7 +492,7 @@
     "files": 1
   },
   "kanban-board": {
-    "lines": 196,
+    "lines": 203,
     "files": 1
   },
   "activity-timeline": {
@@ -516,7 +516,7 @@
     "files": 1
   },
   "data-table-sortable": {
-    "lines": 288,
+    "lines": 297,
     "files": 1
   },
   "data-table-toolbar": {
@@ -652,7 +652,7 @@
     "files": 1
   },
   "invoice-history-table": {
-    "lines": 166,
+    "lines": 174,
     "files": 1
   },
   "payment-method-card": {
@@ -908,7 +908,7 @@
     "files": 1
   },
   "product-compare-table": {
-    "lines": 300,
+    "lines": 308,
     "files": 1
   },
   "stock-availability-list": {
