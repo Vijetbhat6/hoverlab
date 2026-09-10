@@ -1,0 +1,300 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1216" height="4388" viewBox="0 0 1216 4388" id="Hoverlab — Testimonials">
+  <!--
+    Hoverlab — Testimonials. 6 sections, traced from the
+    rendered catalog. Drag this file onto a Figma canvas.
+
+    These are frames, not components: named, editable layers with real
+    geometry, colour and type. There are no variants, no auto-layout,
+    and no hover or motion — none of those exist in a static frame.
+
+    Every section here is free to copy as code at https://hoverlab.dev/blocks
+  -->
+  <rect id="Background" x="0" y="0" width="1216" height="4388" fill="#ffffff" />
+  <text id="Masonry Testimonial Wall label" x="64" y="84" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Masonry Testimonial Wall</text>
+  <text id="testimonial-grid id" x="64" y="98" font-family="ui-monospace, monospace" font-size="12" fill="#737373">testimonial-grid</text>
+  <g id="Masonry Testimonial Wall" transform="translate(64, 116)">
+    <rect id="container" x="0" y="0" width="1088" height="700.5" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="What people say" x="544" y="101" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="700" letter-spacing="-0.9" text-anchor="middle">What people say</text>
+      <text id="From teams that ship on a deadline." x="544" y="133" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16" text-anchor="middle">From teams that ship on a deadline.</text>
+      <rect id="container 2" x="33" y="189" width="327.33" height="213.25" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="“" x="58" y="255" fill="rgba(8, 11, 16, 0.902)" font-family="ui-sans-serif, system-ui" font-size="14">“</text>
+      <text id="We replaced a week of design polish with" x="63.28" y="255" fill="rgba(8, 11, 16, 0.902)" font-family="ui-sans-serif, system-ui" font-size="14">We replaced a week of design polish with</text>
+      <text id="an afternoon. The parts that used to get…" x="58" y="277.75" fill="rgba(8, 11, 16, 0.902)" font-family="ui-sans-serif, system-ui" font-size="14">an afternoon. The parts that used to get cut</text>
+      <text id="for time are just there now." x="58" y="300.5" fill="rgba(8, 11, 16, 0.902)" font-family="ui-sans-serif, system-ui" font-size="14">for time are just there now.</text>
+      <text id="”" x="224.91" y="300.5" fill="rgba(8, 11, 16, 0.902)" font-family="ui-sans-serif, system-ui" font-size="14">”</text>
+      <rect id="container 3" x="58" y="324.25" width="277.33" height="53" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 4" x="58" y="341.25" width="36" height="36" rx="18" fill="#f3f2ee" />
+      <text id="PR" x="58" y="353.25" fill="rgba(9, 11, 16, 0.702)" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="700">PR</text>
+      <text id="Priya Raman" x="106" y="355.25" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Priya Raman</text>
+      <text id="Staff Engineer, Northwind" x="106" y="373.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Staff Engineer, Northwind</text>
+      <rect id="container 5" x="33" y="422.25" width="327.33" height="213.25" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="“ 2" x="58" y="488.25" fill="rgba(8, 11, 16, 0.902)" font-family="ui-sans-serif, system-ui" font-size="14">“</text>
+      <text id="Dropped it in on a Friday and shipped" x="63.28" y="488.25" fill="rgba(8, 11, 16, 0.902)" font-family="ui-sans-serif, system-ui" font-size="14">Dropped it in on a Friday and shipped</text>
+      <text id="Monday. No dependency argument with my" x="58" y="511" fill="rgba(8, 11, 16, 0.902)" font-family="ui-sans-serif, system-ui" font-size="14">Monday. No dependency argument with my</text>
+      <text id="team for once." x="58" y="533.75" fill="rgba(8, 11, 16, 0.902)" font-family="ui-sans-serif, system-ui" font-size="14">team for once.</text>
+      <text id="” 2" x="147.33" y="533.75" fill="rgba(8, 11, 16, 0.902)" font-family="ui-sans-serif, system-ui" font-size="14">”</text>
+      <rect id="container 6" x="58" y="557.5" width="277.33" height="53" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 7" x="58" y="574.5" width="36" height="36" rx="18" fill="#f3f2ee" />
+      <text id="MS" x="58" y="586.5" fill="rgba(9, 11, 16, 0.702)" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="700">MS</text>
+      <text id="Marco Silva" x="106" y="588.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Marco Silva</text>
+      <text id="Founder, Ferrytale" x="106" y="606.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Founder, Ferrytale</text>
+      <rect id="container 8" x="380.33" y="189" width="327.33" height="236" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="“ 3" x="405.33" y="255" fill="rgba(8, 11, 16, 0.902)" font-family="ui-sans-serif, system-ui" font-size="14">“</text>
+      <text id="The thing I did not expect: it made our" x="410.61" y="255" fill="rgba(8, 11, 16, 0.902)" font-family="ui-sans-serif, system-ui" font-size="14">The thing I did not expect: it made our</text>
+      <text id="junior engineers faster, because the pat…" x="405.33" y="277.75" fill="rgba(8, 11, 16, 0.902)" font-family="ui-sans-serif, system-ui" font-size="14">junior engineers faster, because the patterns</text>
+      <text id="are readable. They learn from what they" x="405.33" y="300.5" fill="rgba(8, 11, 16, 0.902)" font-family="ui-sans-serif, system-ui" font-size="14">are readable. They learn from what they</text>
+      <text id="paste." x="405.33" y="323.25" fill="rgba(8, 11, 16, 0.902)" font-family="ui-sans-serif, system-ui" font-size="14">paste.</text>
+      <text id="” 3" x="441.73" y="323.25" fill="rgba(8, 11, 16, 0.902)" font-family="ui-sans-serif, system-ui" font-size="14">”</text>
+      <rect id="container 9" x="405.33" y="347" width="277.33" height="53" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 10" x="405.33" y="364" width="36" height="36" rx="18" fill="#f3f2ee" />
+      <text id="AC" x="405.33" y="376" fill="rgba(9, 11, 16, 0.702)" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="700">AC</text>
+      <text id="Alex Chen" x="453.33" y="378" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Alex Chen</text>
+      <text id="Engineering Manager, Contoso" x="453.33" y="396" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Engineering Manager, Contoso</text>
+      <rect id="container 11" x="727.67" y="189" width="327.33" height="213.25" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="“ 4" x="752.67" y="255" fill="rgba(8, 11, 16, 0.902)" font-family="ui-sans-serif, system-ui" font-size="14">“</text>
+      <text id="Our marketing site went from three weeks" x="757.95" y="255" fill="rgba(8, 11, 16, 0.902)" font-family="ui-sans-serif, system-ui" font-size="14">Our marketing site went from three weeks</text>
+      <text id="to four days. Same designer, same" x="752.67" y="277.75" fill="rgba(8, 11, 16, 0.902)" font-family="ui-sans-serif, system-ui" font-size="14">to four days. Same designer, same</text>
+      <text id="headcount." x="752.67" y="300.5" fill="rgba(8, 11, 16, 0.902)" font-family="ui-sans-serif, system-ui" font-size="14">headcount.</text>
+      <text id="” 4" x="821.58" y="300.5" fill="rgba(8, 11, 16, 0.902)" font-family="ui-sans-serif, system-ui" font-size="14">”</text>
+      <rect id="container 12" x="752.67" y="324.25" width="277.33" height="53" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 13" x="752.67" y="341.25" width="36" height="36" rx="18" fill="#f3f2ee" />
+      <text id="DW" x="752.67" y="353.25" fill="rgba(9, 11, 16, 0.702)" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="700">DW</text>
+      <text id="Dana Whitfield" x="800.67" y="355.25" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Dana Whitfield</text>
+      <text id="Head of Design, Globex" x="800.67" y="373.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Head of Design, Globex</text>
+      <rect id="container 14" x="727.67" y="422.25" width="327.33" height="213.25" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="“ 5" x="752.67" y="488.25" fill="rgba(8, 11, 16, 0.902)" font-family="ui-sans-serif, system-ui" font-size="14">“</text>
+      <text id="I stopped keeping a personal snippets fi…" x="757.95" y="488.25" fill="rgba(8, 11, 16, 0.902)" font-family="ui-sans-serif, system-ui" font-size="14">I stopped keeping a personal snippets file.</text>
+      <text id="That file had been following me between" x="752.67" y="511" fill="rgba(8, 11, 16, 0.902)" font-family="ui-sans-serif, system-ui" font-size="14">That file had been following me between</text>
+      <text id="jobs for six years." x="752.67" y="533.75" fill="rgba(8, 11, 16, 0.902)" font-family="ui-sans-serif, system-ui" font-size="14">jobs for six years.</text>
+      <text id="” 5" x="858.22" y="533.75" fill="rgba(8, 11, 16, 0.902)" font-family="ui-sans-serif, system-ui" font-size="14">”</text>
+      <rect id="container 15" x="752.67" y="557.5" width="277.33" height="53" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 16" x="752.67" y="574.5" width="36" height="36" rx="18" fill="#f3f2ee" />
+      <text id="SH" x="752.67" y="586.5" fill="rgba(9, 11, 16, 0.702)" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="700">SH</text>
+      <text id="Samir Haddad" x="800.67" y="588.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Samir Haddad</text>
+      <text id="Frontend Lead, Initech" x="800.67" y="606.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Frontend Lead, Initech</text>
+  </g>
+  <text id="Single-Quote Spotlight label" x="64" y="932.5" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Single-Quote Spotlight</text>
+  <text id="testimonial-spotlight id" x="64" y="946.5" font-family="ui-monospace, monospace" font-size="12" fill="#737373">testimonial-spotlight</text>
+  <g id="Single-Quote Spotlight" transform="translate(64, 964.5)">
+    <rect id="container" x="0" y="0" width="1088" height="623" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="33" y="65" width="1022" height="425" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="“" x="82" y="193" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="24" font-weight="500" letter-spacing="-0.6">“</text>
+      <text id="We had tried two other tools and rolled …" x="91.7" y="193" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="24" font-weight="500" letter-spacing="-0.6">We had tried two other tools and rolled both</text>
+      <text id="back. This one stuck because the agents …" x="82" y="232" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="24" font-weight="500" letter-spacing="-0.6">back. This one stuck because the agents stopped</text>
+      <text id="asking us to change how they work — the …" x="82" y="271" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="24" font-weight="500" letter-spacing="-0.6">asking us to change how they work — the queue</text>
+      <text id="finally matched how support actually thi…" x="82" y="310" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="24" font-weight="500" letter-spacing="-0.6">finally matched how support actually thinks</text>
+      <text id="about a bad morning." x="82" y="349" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="24" font-weight="500" letter-spacing="-0.6">about a bad morning.</text>
+      <text id="”" x="304.27" y="349" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="24" font-weight="500" letter-spacing="-0.6">”</text>
+      <rect id="container 3" x="82" y="393" width="48" height="48" rx="24" fill="rgba(0, 128, 49, 0.102)" />
+      <text id="IS" x="82" y="407" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="700">IS</text>
+      <text id="Ingrid Solheim" x="146" y="411" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Ingrid Solheim</text>
+      <text id="VP of Customer Experience, Meridian Logi…" x="146" y="431" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">VP of Customer Experience, Meridian Logistics</text>
+      <text id="48%" x="720.84" y="194.63" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="30" font-weight="700" letter-spacing="-0.75">48%</text>
+      <text id="fewer escalations to engineering" x="720.84" y="218.63" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">fewer escalations to engineering</text>
+      <text id="11 min" x="720.84" y="277.88" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="30" font-weight="700" letter-spacing="-0.75">11 min</text>
+      <text id="median first-response time, down from 3.…" x="720.84" y="301.88" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">median first-response time, down from 3.2 hrs</text>
+      <text id="4 weeks" x="720.84" y="361.13" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="30" font-weight="700" letter-spacing="-0.75">4 weeks</text>
+      <text id="from pilot to full support-team rollout" x="720.84" y="385.13" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">from pilot to full support-team rollout</text>
+      <text id="Trusted by support teams at" x="229.72" y="548" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500" letter-spacing="0.6">Trusted by support teams at</text>
+      <text id="Meridian" x="475.78" y="550" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700" letter-spacing="-0.45">Meridian</text>
+      <text id="Coastline Health" x="596.34" y="550" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700" letter-spacing="-0.45">Coastline Health</text>
+      <text id="Fieldstone" x="775.81" y="550" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700" letter-spacing="-0.45">Fieldstone</text>
+  </g>
+  <text id="Aggregate Rating Breakdown label" x="64" y="1703.5" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Aggregate Rating Breakdown</text>
+  <text id="testimonial-ratings id" x="64" y="1717.5" font-family="ui-monospace, monospace" font-size="12" fill="#737373">testimonial-ratings</text>
+  <g id="Aggregate Rating Breakdown" transform="translate(64, 1735.5)">
+    <rect id="container" x="0" y="0" width="1088" height="449" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="33" y="65" width="1022" height="249" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Rated by the people paying for it" x="82" y="128" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" letter-spacing="0.7">Rated by the people paying for it</text>
+      <text id="4.8" x="82" y="198" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="48" font-weight="700" letter-spacing="-1.2">4.8</text>
+      <text id="out of 5" x="154.64" y="191" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="18">out of 5</text>
+      <text id="from 2,298 verified reviews" x="82" y="259" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">from 2,298 verified reviews</text>
+      <text id="5 stars" x="475.38" y="133.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">5 stars</text>
+      <rect id="container 3" x="555.38" y="125.5" width="378.63" height="8" rx="4" fill="#f3f2ee" />
+      <rect id="container 4" x="555.38" y="125.5" width="293.77" height="8" rx="4" fill="#007f34" />
+      <text id="1,783" x="950" y="133.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">1,783</text>
+      <text id="4 stars" x="475.38" y="163.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">4 stars</text>
+      <rect id="container 5" x="555.38" y="155.5" width="378.63" height="8" rx="4" fill="#f3f2ee" />
+      <rect id="container 6" x="555.38" y="155.5" width="66.23" height="8" rx="4" fill="#007f34" />
+      <text id="402" x="950" y="163.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">402</text>
+      <text id="3 stars" x="475.38" y="193.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">3 stars</text>
+      <rect id="container 7" x="555.38" y="185.5" width="378.63" height="8" rx="4" fill="#f3f2ee" />
+      <rect id="container 8" x="555.38" y="185.5" width="11.69" height="8" rx="4" fill="#007f34" />
+      <text id="71" x="950" y="193.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">71</text>
+      <text id="2 stars" x="475.38" y="223.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">2 stars</text>
+      <rect id="container 9" x="555.38" y="215.5" width="378.63" height="8" rx="4" fill="#f3f2ee" />
+      <rect id="container 10" x="555.38" y="215.5" width="3.95" height="8" rx="1.98" fill="#007f34" />
+      <text id="24" x="950" y="223.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">24</text>
+      <text id="1 star" x="475.38" y="253.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">1 star</text>
+      <rect id="container 11" x="555.38" y="245.5" width="378.63" height="8" rx="4" fill="#f3f2ee" />
+      <rect id="container 12" x="555.38" y="245.5" width="2.95" height="8" rx="1.48" fill="#007f34" />
+      <text id="18" x="950" y="253.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">18</text>
+      <rect id="container 13" x="300.94" y="346" width="120.34" height="38" rx="19" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="4.8 2" x="339.94" y="369" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">4.8</text>
+      <text id="on G2" x="367.16" y="369" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">on G2</text>
+      <rect id="container 14" x="433.28" y="346" width="155.88" height="38" rx="19" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="4.7" x="472.28" y="369" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">4.7</text>
+      <text id="on Capterra" x="499.23" y="369" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">on Capterra</text>
+      <rect id="container 15" x="601.16" y="346" width="185.89" height="38" rx="19" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="4.9" x="640.16" y="369" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">4.9</text>
+      <text id="on Product Hunt" x="667.42" y="369" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">on Product Hunt</text>
+  </g>
+  <text id="Scroll-Snap Quote Rail label" x="64" y="2300.5" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Scroll-Snap Quote Rail</text>
+  <text id="testimonial-carousel id" x="64" y="2314.5" font-family="ui-monospace, monospace" font-size="12" fill="#737373">testimonial-carousel</text>
+  <g id="Scroll-Snap Quote Rail" transform="translate(64, 2332.5)">
+    <rect id="container" x="0" y="0" width="1088" height="563.5" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Customers" x="33" y="79" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" letter-spacing="0.7">Customers</text>
+      <text id="Twenty months of people telling" x="33" y="129" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="700" letter-spacing="-0.9">Twenty months of people telling</text>
+      <text id="us what they actually thought" x="33" y="169" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="700" letter-spacing="-0.9">us what they actually thought</text>
+      <rect id="button" x="967" y="137" width="40" height="40" rx="20" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" opacity="0.4" />
+      <rect id="button 2" x="1015" y="137" width="40" height="40" rx="20" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="list item" x="33" y="217" width="352" height="265.5" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="“" x="58" y="292" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">“</text>
+      <text id="The migration took an afternoon, which I" x="64.03" y="292" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">The migration took an afternoon, which I</text>
+      <text id="did not believe when sales said it. What" x="58" y="318" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">did not believe when sales said it. What</text>
+      <text id="actually saved us was that our old expor…" x="58" y="344" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">actually saved us was that our old exports</text>
+      <text id="imported without a schema rewrite." x="58" y="370" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">imported without a schema rewrite.</text>
+      <text id="”" x="308.36" y="370" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">”</text>
+      <rect id="container 2" x="58" y="402" width="302" height="55.5" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 3" x="58" y="420.25" width="36" height="36" rx="18" fill="rgba(0, 128, 49, 0.102)" />
+      <text id="DO" x="58" y="432.25" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="700">DO</text>
+      <text id="Dara Okonkwo" x="106" y="433" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Dara Okonkwo</text>
+      <text id="Staff Engineer, Northwind Freight" x="106" y="452.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Staff Engineer, Northwind Freight</text>
+      <rect id="list item 2" x="409" y="217" width="352" height="265.5" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="“ 2" x="434" y="292" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">“</text>
+      <text id="We bought it for one team and it spread" x="440.03" y="292" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">We bought it for one team and it spread</text>
+      <text id="to four without anyone asking me to" x="434" y="318" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">to four without anyone asking me to</text>
+      <text id="approve a rollout. That has happened" x="434" y="344" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">approve a rollout. That has happened</text>
+      <text id="twice in nine years here." x="434" y="370" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">twice in nine years here.</text>
+      <text id="” 2" x="602.86" y="370" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">”</text>
+      <rect id="container 4" x="434" y="402" width="302" height="55.5" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 5" x="434" y="420.25" width="36" height="36" rx="18" fill="rgba(0, 128, 49, 0.102)" />
+      <text id="PR" x="434" y="432.25" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="700">PR</text>
+      <text id="Priya Ramachandran" x="482" y="433" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Priya Ramachandran</text>
+      <text id="Director of Platform, Alcove Health" x="482" y="452.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Director of Platform, Alcove Health</text>
+      <rect id="list item 3" x="785" y="217" width="352" height="265.5" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="“ 3" x="810" y="292" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">“</text>
+      <text id="Support answered a schema question at" x="816.03" y="292" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">Support answered a schema question at</text>
+      <text id="2am our time with an actual query, not a" x="810" y="318" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">2am our time with an actual query, not a</text>
+      <text id="docs link. I have kept the thread." x="810" y="344" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">docs link. I have kept the thread.</text>
+      <text id="” 3" x="1038.42" y="344" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">”</text>
+      <rect id="container 6" x="810" y="402" width="302" height="55.5" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 7" x="810" y="420.25" width="36" height="36" rx="18" fill="rgba(0, 128, 49, 0.102)" />
+      <text id="TL" x="810" y="432.25" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="700">TL</text>
+      <text id="Tomas Lindqvist" x="858" y="433" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Tomas Lindqvist</text>
+      <text id="Data Lead, Ravel Studio" x="858" y="452.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Data Lead, Ravel Studio</text>
+      <rect id="list item 4" x="1161" y="217" width="352" height="265.5" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="“ 4" x="1186" y="292" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">“</text>
+      <text id="It is not the cheapest thing we evaluate…" x="1192.03" y="292" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">It is not the cheapest thing we evaluated.</text>
+      <text id="It is the only one where the trial ended" x="1186" y="318" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">It is the only one where the trial ended</text>
+      <text id="and nobody asked to go back." x="1186" y="344" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">and nobody asked to go back.</text>
+      <text id="” 4" x="1399.53" y="344" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">”</text>
+      <rect id="container 8" x="1186" y="402" width="302" height="55.5" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 9" x="1186" y="420.25" width="36" height="36" rx="18" fill="rgba(0, 128, 49, 0.102)" />
+      <text id="AB" x="1186" y="432.25" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="700">AB</text>
+      <text id="Amara Belhadj" x="1234" y="433" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Amara Belhadj</text>
+      <text id="VP Engineering, Kestrel Systems" x="1234" y="452.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">VP Engineering, Kestrel Systems</text>
+      <rect id="list item 5" x="1537" y="217" width="352" height="265.5" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="“ 5" x="1562" y="292" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">“</text>
+      <text id="Our audit went from a three-week" x="1568.03" y="292" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">Our audit went from a three-week</text>
+      <text id="scramble to a report we generate. I know" x="1562" y="318" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">scramble to a report we generate. I know</text>
+      <text id="that sounds like copy off your own" x="1562" y="344" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">that sounds like copy off your own</text>
+      <text id="website. It is what happened." x="1562" y="370" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">website. It is what happened.</text>
+      <text id="” 5" x="1766" y="370" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">”</text>
+      <rect id="container 10" x="1562" y="402" width="302" height="55.5" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 11" x="1562" y="420.25" width="36" height="36" rx="18" fill="rgba(0, 128, 49, 0.102)" />
+      <text id="RM" x="1562" y="432.25" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="700">RM</text>
+      <text id="Ruth Mbeki" x="1610" y="433" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Ruth Mbeki</text>
+      <text id="Head of Compliance, Fieldstone Bank" x="1610" y="452.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Head of Compliance, Fieldstone Bank</text>
+      <rect id="list item 6" x="1913" y="217" width="352" height="265.5" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="“ 6" x="1938" y="292" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">“</text>
+      <text id="The onboarding was rough and we nearly" x="1944.03" y="292" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">The onboarding was rough and we nearly</text>
+      <text id="gave up in week one. Two releases later" x="1938" y="318" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">gave up in week one. Two releases later</text>
+      <text id="the thing we were stuck on is a checkbox…" x="1938" y="344" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">the thing we were stuck on is a checkbox.</text>
+      <text id="” 6" x="2230.13" y="344" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">”</text>
+      <rect id="container 12" x="1938" y="402" width="302" height="55.5" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 13" x="1938" y="420.25" width="36" height="36" rx="18" fill="rgba(0, 128, 49, 0.102)" />
+      <text id="JW" x="1938" y="432.25" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="700">JW</text>
+      <text id="Jonas Weber" x="1986" y="433" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Jonas Weber</text>
+      <text id="Principal Architect, Meridian Logistics" x="1986" y="452.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Principal Architect, Meridian Logistics</text>
+  </g>
+  <text id="Video Testimonial Cards label" x="64" y="3012" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Video Testimonial Cards</text>
+  <text id="testimonial-video id" x="64" y="3026" font-family="ui-monospace, monospace" font-size="12" fill="#737373">testimonial-video</text>
+  <g id="Video Testimonial Cards" transform="translate(64, 3044)">
+    <rect id="container" x="0" y="0" width="1088" height="624.13" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="In their words" x="544" y="79" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" letter-spacing="0.7" text-anchor="middle">In their words</text>
+      <text id="Three customers, unscripted" x="544" y="133" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="700" letter-spacing="-0.9" text-anchor="middle">Three customers, unscripted</text>
+      <text id="Recorded on their own time, edited only …" x="544" y="169" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16" text-anchor="middle">Recorded on their own time, edited only for length. Transcripts on each page.</text>
+      <rect id="link" x="33" y="227" width="319.33" height="179.61" rx="16" fill="#f3f2ee" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="PR" x="34" y="264" fill="rgba(0, 128, 52, 0.4)" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="700" letter-spacing="-0.9">PR</text>
+      <rect id="container 2" x="34" y="228" width="317.33" height="177.61" fill="rgba(10, 10, 20, 0.102)" />
+      <rect id="container 3" x="164.66" y="288.8" width="56" height="56" rx="28" fill="rgba(253, 251, 247, 0.902)" />
+      <rect id="container 4" x="300.44" y="369.61" width="38.89" height="24" rx="10" fill="rgba(253, 251, 247, 0.902)" />
+      <text id="1:48" x="300.44" y="381.61" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">1:48</text>
+      <text id="“" x="33" y="444.61" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">“</text>
+      <text id="We replaced three internal tools with th…" x="39.03" y="444.61" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">We replaced three internal tools with this</text>
+      <text id="and cut the on-call rota from nine peopl…" x="33" y="470.61" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">and cut the on-call rota from nine people</text>
+      <text id="to four." x="33" y="496.61" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">to four.</text>
+      <text id="”" x="84.66" y="496.61" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">”</text>
+      <text id="Priya Ramachandran" x="33" y="534.63" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Priya Ramachandran</text>
+      <text id="Director of Platform, Alcove Health" x="33" y="553.88" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Director of Platform, Alcove Health</text>
+      <rect id="link 2" x="384.33" y="227" width="319.33" height="179.61" rx="16" fill="#f3f2ee" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="DO" x="385.33" y="264" fill="rgba(0, 128, 52, 0.4)" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="700" letter-spacing="-0.9">DO</text>
+      <rect id="container 5" x="385.33" y="228" width="317.33" height="177.61" fill="rgba(10, 10, 20, 0.102)" />
+      <rect id="container 6" x="515.98" y="288.8" width="56" height="56" rx="28" fill="rgba(253, 251, 247, 0.902)" />
+      <rect id="container 7" x="651.77" y="369.61" width="38.89" height="24" rx="10" fill="rgba(253, 251, 247, 0.902)" />
+      <text id="2:12" x="651.77" y="381.61" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">2:12</text>
+      <text id="“ 2" x="384.33" y="444.61" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">“</text>
+      <text id="The part I tell other engineers about" x="390.36" y="444.61" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">The part I tell other engineers about</text>
+      <text id="is the migration. One afternoon, no" x="384.33" y="470.61" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">is the migration. One afternoon, no</text>
+      <text id="schema rewrite." x="384.33" y="496.61" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">schema rewrite.</text>
+      <text id="” 2" x="494.42" y="496.61" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">”</text>
+      <text id="Dara Okonkwo" x="384.33" y="534.63" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Dara Okonkwo</text>
+      <text id="Staff Engineer, Northwind Freight" x="384.33" y="553.88" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Staff Engineer, Northwind Freight</text>
+      <rect id="link 3" x="735.66" y="227" width="319.34" height="179.63" rx="16" fill="#f3f2ee" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="RM" x="736.66" y="264" fill="rgba(0, 128, 52, 0.4)" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="700" letter-spacing="-0.9">RM</text>
+      <rect id="container 8" x="736.66" y="228" width="317.34" height="177.63" fill="rgba(10, 10, 20, 0.102)" />
+      <rect id="container 9" x="867.33" y="288.81" width="56" height="56" rx="28" fill="rgba(253, 251, 247, 0.902)" />
+      <rect id="container 10" x="1003.11" y="369.63" width="38.89" height="24" rx="10" fill="rgba(253, 251, 247, 0.902)" />
+      <text id="3:05" x="1003.11" y="381.63" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">3:05</text>
+      <text id="“ 3" x="735.66" y="444.63" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">“</text>
+      <text id="Audit used to be a three-week scramble" x="741.69" y="444.63" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">Audit used to be a three-week scramble</text>
+      <text id="across four teams. It is a report we" x="735.66" y="470.63" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">across four teams. It is a report we</text>
+      <text id="generate now." x="735.66" y="496.63" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">generate now.</text>
+      <text id="” 3" x="836.2" y="496.63" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">”</text>
+      <text id="Ruth Mbeki" x="735.66" y="534.63" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Ruth Mbeki</text>
+      <text id="Head of Compliance, Fieldstone Bank" x="735.66" y="553.88" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Head of Compliance, Fieldstone Bank</text>
+  </g>
+  <text id="Customer Outcome Band label" x="64" y="3784.13" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Customer Outcome Band</text>
+  <text id="customer-outcome-band id" x="64" y="3798.13" font-family="ui-monospace, monospace" font-size="12" fill="#737373">customer-outcome-band</text>
+  <g id="Customer Outcome Band" transform="translate(64, 3816.13)">
+    <rect id="container" x="0" y="0" width="1088" height="508" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="section" x="1" y="1" width="1086" height="506" fill="#fdfcf8" />
+      <text id="Results" x="32" y="95" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Results</text>
+      <text id="What changed, and over how long" x="32" y="145" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="600" letter-spacing="-0.9">What changed, and over how long</text>
+      <text id="Most readers skip the quotes. What they …" x="32" y="178" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">Most readers skip the quotes. What they do not skip is a number with a time period attached</text>
+      <text id="to it, and every figure here names the c…" x="32" y="202" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">to it, and every figure here names the company it came from and how long it took.</text>
+      <rect id="container 2" x="32" y="249" width="1024" height="178" rx="16" fill="#dbdee1" stroke="#dbdee1" stroke-width="1" />
+      <rect id="container 3" x="33" y="250" width="254.75" height="176" fill="#ffffff" />
+      <text id="Support replies" x="57" y="288" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Support replies</text>
+      <text id="-63%" x="57" y="332" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="30" font-weight="600" letter-spacing="-0.75">-63%</text>
+      <text id="Median first-response time at" x="57" y="356" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Median first-response time at</text>
+      <text id="Northwind, over one quarter." x="57" y="376" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Northwind, over one quarter.</text>
+      <rect id="container 4" x="288.75" y="250" width="254.75" height="176" fill="#ffffff" />
+      <text id="Onboarding" x="312.75" y="288" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Onboarding</text>
+      <text id="9 days → 2" x="312.75" y="332" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="30" font-weight="600" letter-spacing="-0.75">9 days → 2</text>
+      <text id="Time to a customer's first live" x="312.75" y="356" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Time to a customer's first live</text>
+      <text id="workspace, at Arden." x="312.75" y="376" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">workspace, at Arden.</text>
+      <rect id="container 5" x="544.5" y="250" width="254.75" height="176" fill="#ffffff" />
+      <text id="Manual reconciliation" x="568.5" y="288" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Manual reconciliation</text>
+      <text id="12 hrs/wk" x="568.5" y="332" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="30" font-weight="600" letter-spacing="-0.75">12 hrs/wk</text>
+      <text id="Hours returned to one finance" x="568.5" y="356" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Hours returned to one finance</text>
+      <text id="team of three, measured before" x="568.5" y="376" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">team of three, measured before</text>
+      <text id="and after." x="568.5" y="396" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">and after.</text>
+      <rect id="container 6" x="800.25" y="250" width="254.75" height="176" fill="#ffffff" />
+      <text id="Kept using it" x="824.25" y="288" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Kept using it</text>
+      <text id="94%" x="824.25" y="332" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="30" font-weight="600" letter-spacing="-0.75">94%</text>
+      <text id="Of teams past 90 days, over the" x="824.25" y="356" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Of teams past 90 days, over the</text>
+      <text id="last twelve months." x="824.25" y="376" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">last twelve months.</text>
+  </g>
+</svg>

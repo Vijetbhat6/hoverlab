@@ -1,0 +1,253 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1216" height="6117" viewBox="0 0 1216 6117" id="Hoverlab — Onboarding">
+  <!--
+    Hoverlab — Onboarding. 8 sections, traced from the
+    rendered catalog. Drag this file onto a Figma canvas.
+
+    These are frames, not components: named, editable layers with real
+    geometry, colour and type. There are no variants, no auto-layout,
+    and no hover or motion — none of those exist in a static frame.
+
+    Every section here is free to copy as code at https://hoverlab.dev/blocks
+  -->
+  <rect id="Background" x="0" y="0" width="1216" height="6117" fill="#ffffff" />
+  <text id="Setup Checklist with Progress label" x="64" y="84" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Setup Checklist with Progress</text>
+  <text id="onboarding-checklist id" x="64" y="98" font-family="ui-monospace, monospace" font-size="12" fill="#737373">onboarding-checklist</text>
+  <g id="Setup Checklist with Progress" transform="translate(64, 116)">
+    <rect id="container" x="0" y="0" width="1088" height="540" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="section" x="208" y="1" width="672" height="538" rx="16" fill="rgba(255, 255, 255, 0.4)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Finish setting up" x="233" y="44" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700" letter-spacing="-0.45">Finish setting up</text>
+      <text id="Five short steps and your workspace is r…" x="233" y="72" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Five short steps and your workspace is ready to use.</text>
+      <text id="Setup progress" x="233" y="110" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Setup progress</text>
+      <text id="1 of 5" x="825.8" y="110" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">1 of 5</text>
+      <rect id="container 2" x="233" y="162" width="622" height="64" rx="16" fill="rgba(253, 252, 248, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="button" x="246" y="177" width="20" height="20" rx="10" fill="#007f34" stroke="#007f34" stroke-width="1" />
+      <text id="Create your account" x="278" y="189" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Create your account</text>
+      <text id="Done — welcome aboard." x="278" y="209" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Done — welcome aboard.</text>
+      <rect id="container 3" x="233" y="234" width="622" height="64" rx="16" fill="rgba(253, 252, 248, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="button 2" x="246" y="249" width="20" height="20" rx="10" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="Create your first project" x="278" y="261" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Create your first project</text>
+      <text id="A project holds your environments, keys …" x="278" y="281" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">A project holds your environments, keys and deployments.</text>
+      <text id="Start" x="740.75" y="259" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600">Start</text>
+      <text id="2 min" x="814.67" y="268.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11">2 min</text>
+      <rect id="container 4" x="233" y="306" width="622" height="64" rx="16" fill="rgba(253, 252, 248, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="button 3" x="246" y="321" width="20" height="20" rx="10" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="Install the CLI" x="278" y="333" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Install the CLI</text>
+      <text id="One command, and your terminal can deplo…" x="278" y="353" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">One command, and your terminal can deploy.</text>
+      <text id="Start 2" x="740.75" y="331" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600">Start</text>
+      <text id="3 min" x="814.67" y="340.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11">3 min</text>
+      <rect id="container 5" x="233" y="378" width="622" height="64" rx="16" fill="rgba(253, 252, 248, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="button 4" x="246" y="393" width="20" height="20" rx="10" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="Invite a teammate" x="278" y="405" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Invite a teammate</text>
+      <text id="Projects are more useful with someone to…" x="278" y="425" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Projects are more useful with someone to share them with.</text>
+      <text id="Start 3" x="740.75" y="403" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600">Start</text>
+      <text id="1 min" x="814.67" y="412.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11">1 min</text>
+      <rect id="container 6" x="233" y="450" width="622" height="64" rx="16" fill="rgba(253, 252, 248, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="button 5" x="246" y="465" width="20" height="20" rx="10" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="Connect a domain" x="278" y="477" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Connect a domain</text>
+      <text id="Point a hostname at your first deploymen…" x="278" y="497" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Point a hostname at your first deployment.</text>
+      <text id="Start 4" x="740.75" y="475" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600">Start</text>
+      <text id="5 min" x="814.67" y="484.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11">5 min</text>
+  </g>
+  <text id="Guided Setup Wizard label" x="64" y="772" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Guided Setup Wizard</text>
+  <text id="setup-wizard id" x="64" y="786" font-family="ui-monospace, monospace" font-size="12" fill="#737373">setup-wizard</text>
+  <g id="Guided Setup Wizard" transform="translate(64, 804)">
+    <rect id="container" x="0" y="0" width="1088" height="532" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="56" y="49" width="976" height="434" rx="16" fill="rgba(255, 255, 255, 0.4)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="A" x="89" y="94" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="900">A</text>
+      <text id="Acme" x="131" y="102" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="700" letter-spacing="-0.4">Acme</text>
+      <rect id="container 3" x="97" y="146" width="24" height="24" rx="12" fill="none" stroke="#007f34" stroke-width="1" />
+      <text id="1" x="97" y="157" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="700">1</text>
+      <text id="Framework" x="131" y="162" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Framework</text>
+      <rect id="container 4" x="97" y="190" width="24" height="24" rx="12" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="2" x="97" y="201" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="700">2</text>
+      <text id="Styling" x="131" y="206" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Styling</text>
+      <rect id="container 5" x="97" y="234" width="24" height="24" rx="12" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="3" x="97" y="245" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="700">3</text>
+      <text id="Team" x="131" y="250" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Team</text>
+      <text id="What are you building with?" x="357" y="102" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" letter-spacing="-0.5">What are you building with?</text>
+      <rect id="container 6" x="357" y="134" width="642" height="72" rx="16" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 7" x="374" y="153" width="20" height="20" rx="10" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="Next.js" x="406" y="165" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Next.js</text>
+      <text id="App Router, server components" x="406" y="185" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">App Router, server components</text>
+      <rect id="container 8" x="357" y="218" width="642" height="72" rx="16" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 9" x="374" y="237" width="20" height="20" rx="10" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="Vite + React" x="406" y="249" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Vite + React</text>
+      <text id="Client-rendered SPA" x="406" y="269" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Client-rendered SPA</text>
+      <rect id="container 10" x="357" y="302" width="642" height="72" rx="16" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 11" x="374" y="321" width="20" height="20" rx="10" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="Remix" x="406" y="333" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Remix</text>
+      <text id="Nested routes and loaders" x="406" y="353" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Nested routes and loaders</text>
+      <rect id="button" x="357" y="406" width="83.7" height="44" rx="16" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" opacity="0.4" />
+      <text id="Back" x="398.85" y="420" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Back</text>
+      <rect id="button 2" x="893.28" y="406" width="105.72" height="44" rx="16" fill="#007f34" opacity="0.4" />
+      <text id="Continue" x="946.14" y="420" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Continue</text>
+  </g>
+  <text id="Team Invite Step label" x="64" y="1452" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Team Invite Step</text>
+  <text id="team-invite-step id" x="64" y="1466" font-family="ui-monospace, monospace" font-size="12" fill="#737373">team-invite-step</text>
+  <g id="Team Invite Step" transform="translate(64, 1484)">
+    <rect id="container" x="0" y="0" width="1088" height="644" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="240" y="65" width="608" height="514" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="Step 3 of 4" x="273" y="110" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600" letter-spacing="0.6">Step 3 of 4</text>
+      <text id="Bring your team in" x="273" y="142" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" letter-spacing="-0.5">Bring your team in</text>
+      <text id="Paste as many addresses as you like — co…" x="273" y="170" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Paste as many addresses as you like — commas, spaces or one per line all work.</text>
+      <text id="Email addresses" x="273" y="217" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Email addresses</text>
+      <rect id="container 3" x="273" y="232" width="542" height="50" rx="16" fill="#fdfcf8" stroke="#8d8f92" stroke-width="1" />
+      <rect id="container 4" x="282" y="243" width="174.86" height="28" rx="12" fill="#f3f2ee" />
+      <text id="priya@northwind.com" x="282" y="257" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">priya@northwind.com</text>
+      <text id="1 person will be invited to Northwind." x="273" y="302" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">1 person will be invited to Northwind.</text>
+      <text id="Invite everyone as" x="273" y="356.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Invite everyone as</text>
+      <rect id="field" x="388.06" y="334" width="256" height="36" rx="12" fill="#fdfcf8" stroke="#8d8f92" stroke-width="1" />
+      <text id="Can build and ship. The right default." x="273" y="388" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Can build and ship. The right default.</text>
+      <rect id="button" x="273" y="416" width="134" height="36" rx="12" fill="#007f34" />
+      <text id="Send 1 invite" x="340" y="430" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Send 1 invite</text>
+      <text id="I work alone for now" x="496.66" y="430" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">I work alone for now</text>
+      <rect id="container 5" x="273" y="476" width="542" height="42" rx="16" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="https://app.example.com/join/northwind-8…" x="318" y="501" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">https://app.example.com/join/northwind-8f31c2</text>
+      <text id="Copy link" x="772.59" y="501" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500" text-anchor="middle">Copy link</text>
+      <text id="Invites expire after 14 days and can be …" x="273" y="542" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Invites expire after 14 days and can be revoked from Settings.</text>
+  </g>
+  <text id="Product Tour Coach Mark label" x="64" y="2244" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Product Tour Coach Mark</text>
+  <text id="product-tour-coachmark id" x="64" y="2258" font-family="ui-monospace, monospace" font-size="12" fill="#737373">product-tour-coachmark</text>
+  <g id="Product Tour Coach Mark" transform="translate(64, 2276)">
+    <rect id="container" x="0" y="0" width="1088" height="429" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="192" y="65" width="704" height="299" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <rect id="container 3" x="209" y="78" width="60.5" height="32" rx="12" fill="#fdfcf8" />
+      <text id="Filters" x="209" y="92" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">Filters</text>
+      <rect id="container 4" x="277.5" y="78" width="65.14" height="32" rx="12" fill="#f3f2ee" />
+      <text id="Search" x="277.5" y="92" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Search</text>
+      <rect id="container 5" x="350.64" y="78" width="63.56" height="32" rx="12" fill="#f3f2ee" />
+      <text id="Export" x="350.64" y="92" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Export</text>
+      <rect id="container 6" x="422.2" y="78" width="57.81" height="32" rx="12" fill="#f3f2ee" />
+      <text id="Invite" x="422.2" y="92" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Invite</text>
+      <text id="Rows of whatever this product shows sit …" x="209" y="177" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Rows of whatever this product shows sit here. The tour points at the controls</text>
+      <text id="above without moving the reader away fro…" x="209" y="197" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">above without moving the reader away from them.</text>
+      <rect id="dialog" x="559" y="159" width="320" height="188" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="Narrow the list first" x="576" y="190" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Narrow the list first</text>
+      <text id="Filters stack, and every one you apply s…" x="576" y="216" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Filters stack, and every one you apply stays</text>
+      <text id="visible as a chip above the results so y…" x="576" y="236" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">visible as a chip above the results so you</text>
+      <text id="always know why you are seeing what you …" x="576" y="256" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">always know why you are seeing what you are</text>
+      <text id="seeing." x="576" y="276" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">seeing.</text>
+      <text id="1 of 4" x="576" y="318" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">1 of 4</text>
+      <text id="Skip" x="754.21" y="312" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Skip</text>
+      <rect id="button" x="785.75" y="298" width="76.25" height="32" rx="12" fill="#007f34" />
+      <text id="Next" x="823.88" y="312" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Next</text>
+  </g>
+  <text id="Role Picker label" x="64" y="2821" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Role Picker</text>
+  <text id="onboarding-role-picker id" x="64" y="2835" font-family="ui-monospace, monospace" font-size="12" fill="#737373">onboarding-role-picker</text>
+  <g id="Role Picker" transform="translate(64, 2853)">
+    <rect id="container" x="0" y="0" width="1088" height="625.5" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="232" y="65" width="624" height="495.5" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="Step 1 of 3" x="265" y="110" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500" letter-spacing="0.3">Step 1 of 3</text>
+      <text id="What will you be doing in Northwind?" x="265" y="146" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="24" font-weight="600" letter-spacing="-0.6">What will you be doing in Northwind?</text>
+      <text id="This sets what you see first. Nothing he…" x="265" y="176" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">This sets what you see first. Nothing here is locked in.</text>
+      <rect id="container 3" x="265" y="206" width="273" height="116.5" rx="16" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Engineer" x="310" y="237" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Engineer</text>
+      <text id="Opens the code panel first, installs the" x="310" y="260" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Opens the code panel first, installs the</text>
+      <text id="CLI, and shows diffs instead of" x="310" y="279.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">CLI, and shows diffs instead of</text>
+      <text id="previews." x="310" y="299" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">previews.</text>
+      <rect id="container 4" x="550" y="206" width="273" height="116.5" rx="16" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Designer" x="595" y="237" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Designer</text>
+      <text id="Opens the canvas first, hides the code" x="595" y="260" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Opens the canvas first, hides the code</text>
+      <text id="panel, and turns on the Figma import." x="595" y="279.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">panel, and turns on the Figma import.</text>
+      <rect id="container 5" x="265" y="334.5" width="273" height="97" rx="16" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Product or project lead" x="310" y="365.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Product or project lead</text>
+      <text id="Starts on the roadmap view, and weekly" x="310" y="388.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Starts on the roadmap view, and weekly</text>
+      <text id="summaries are switched on by default." x="310" y="408" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">summaries are switched on by default.</text>
+      <rect id="container 6" x="550" y="334.5" width="273" height="97" rx="16" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Operations or support" x="595" y="365.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Operations or support</text>
+      <text id="Starts on the queue, with keyboard" x="595" y="388.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Starts on the queue, with keyboard</text>
+      <text id="shortcuts and bulk actions enabled." x="595" y="408" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">shortcuts and bulk actions enabled.</text>
+      <rect id="button" x="265" y="455.5" width="111.72" height="40" rx="12" fill="#007f34" opacity="0.5" />
+      <text id="Continue" x="320.86" y="469.5" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Continue</text>
+      <text id="Skip — give me the engineer setup, which…" x="603.28" y="479.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" text-anchor="middle">Skip — give me the engineer setup, which is what most people keep</text>
+      <text id="Whatever you pick, you can change it in …" x="265" y="523.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Whatever you pick, you can change it in Settings → Workspace at any time.</text>
+  </g>
+  <text id="Import or Start Empty label" x="64" y="3594.5" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Import or Start Empty</text>
+  <text id="onboarding-import-data id" x="64" y="3608.5" font-family="ui-monospace, monospace" font-size="12" fill="#737373">onboarding-import-data</text>
+  <g id="Import or Start Empty" transform="translate(64, 3626.5)">
+    <rect id="container" x="0" y="0" width="1088" height="808" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="232" y="65" width="624" height="678" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="Step 2 of 4" x="257" y="102" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500" letter-spacing="0.3">Step 2 of 4</text>
+      <text id="Bring your data across" x="257" y="130" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="600" letter-spacing="-0.5">Bring your data across</text>
+      <text id="Or don't — a sample workspace is a perfe…" x="257" y="159" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Or don't — a sample workspace is a perfectly good way to look around first, and nothing</text>
+      <text id="here is permanent." x="257" y="181.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">here is permanent.</text>
+      <rect id="radio" x="257" y="209.5" width="574" height="97.5" rx="16" fill="rgba(0, 118, 59, 0.051)" stroke="#007f34" stroke-width="1" />
+      <rect id="container 3" x="274" y="228.5" width="36" height="36" rx="12" fill="rgba(0, 128, 54, 0.149)" />
+      <text id="HubSpot" x="322" y="240.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">HubSpot</text>
+      <text id="Read-only · contacts and companies. Noth…" x="322" y="262.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Read-only · contacts and companies. Nothing is written back.</text>
+      <text id="About 20 minutes for 50,000 contacts" x="322" y="286" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">About 20 minutes for 50,000 contacts</text>
+      <rect id="radio 2" x="257" y="317" width="574" height="97.5" rx="16" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <rect id="container 4" x="274" y="336" width="36" height="36" rx="12" fill="#f3f2ee" />
+      <text id="Upload a CSV" x="322" y="348" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Upload a CSV</text>
+      <text id="You choose the file and map the columns …" x="322" y="370" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">You choose the file and map the columns before anything is created.</text>
+      <text id="Under a minute" x="322" y="393.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Under a minute</text>
+      <rect id="radio 3" x="257" y="424.5" width="574" height="97.5" rx="16" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <rect id="container 5" x="274" y="443.5" width="36" height="36" rx="12" fill="#f3f2ee" />
+      <text id="Salesforce" x="322" y="455.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Salesforce</text>
+      <text id="Read and write · keeps both sides in syn…" x="322" y="477.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Read and write · keeps both sides in sync, so edits here reach Salesforce.</text>
+      <text id="About 40 minutes for the first sync" x="322" y="501" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">About 40 minutes for the first sync</text>
+      <rect id="radio 4" x="257" y="532" width="574" height="98" rx="16" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <rect id="container 6" x="274" y="551" width="36" height="36" rx="12" fill="#f3f2ee" />
+      <text id="Start with sample data" x="322" y="563.25" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Start with sample data</text>
+      <rect id="container 7" x="472.63" y="549" width="125.7" height="20.5" rx="10" fill="#f3f2ee" />
+      <text id="No connection needed" x="472.63" y="560" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="500">No connection needed</text>
+      <text id="A worked example workspace. Remove it in…" x="322" y="585.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">A worked example workspace. Remove it in one click when you are done.</text>
+      <text id="Instant" x="322" y="609" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Instant</text>
+      <rect id="button" x="257" y="650" width="144.7" height="40" rx="12" fill="#007f34" />
+      <text id="Connect HubSpot" x="329.35" y="664" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Connect HubSpot</text>
+      <text id="Skip for now" x="453.83" y="674" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Skip for now</text>
+      <text id="You can add or change a source at any ti…" x="257" y="714" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">You can add or change a source at any time in Settings — this is not a one-off decision.</text>
+  </g>
+  <text id="Workspace Setup Form label" x="64" y="4550.5" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Workspace Setup Form</text>
+  <text id="workspace-setup-form id" x="64" y="4564.5" font-family="ui-monospace, monospace" font-size="12" fill="#737373">workspace-setup-form</text>
+  <g id="Workspace Setup Form" transform="translate(64, 4582.5)">
+    <rect id="container" x="0" y="0" width="1088" height="604" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="section" x="1" y="1" width="1086" height="602" fill="#fdfcf8" />
+      <rect id="container 2" x="320" y="65" width="448" height="474" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="Name your workspace" x="353" y="118" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="600" letter-spacing="-0.5">Name your workspace</text>
+      <text id="Everything else in setup has a sensible …" x="353" y="148" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Everything else in setup has a sensible default and can be</text>
+      <text id="changed later without telling anyone. Th…" x="353" y="168" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">changed later without telling anyone. These two appear in</text>
+      <text id="URLs and invitations, so they are worth …" x="353" y="188" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">URLs and invitations, so they are worth one screen.</text>
+      <text id="Workspace name" x="353" y="232" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Workspace name</text>
+      <rect id="field" x="353" y="244" width="382" height="38" rx="10" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Shown to everyone you invite. Changeable…" x="353" y="298" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Shown to everyone you invite. Changeable at any time.</text>
+      <text id="URL" x="353" y="332" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">URL</text>
+      <rect id="field 2" x="353" y="344" width="382" height="38" rx="10" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Becomes part of every link you share. Ch…" x="353" y="398" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Becomes part of every link you share. Changing it later breaks the old</text>
+      <text id="ones." x="353" y="414" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">ones.</text>
+      <rect id="button" x="353" y="434" width="382" height="36" rx="10" fill="#007f34" />
+      <text id="Create workspace" x="544" y="448" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Create workspace</text>
+  </g>
+  <text id="Data Migration Split label" x="64" y="5302.5" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Data Migration Split</text>
+  <text id="data-migration-split id" x="64" y="5316.5" font-family="ui-monospace, monospace" font-size="12" fill="#737373">data-migration-split</text>
+  <g id="Data Migration Split" transform="translate(64, 5334.5)">
+    <rect id="container" x="0" y="0" width="1088" height="718" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="section" x="1" y="1" width="1086" height="716" fill="#fdfcf8" />
+      <text id="Switching" x="25" y="111" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Switching</text>
+      <text id="We move it, and we say what" x="25" y="157" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="600" letter-spacing="-0.9">We move it, and we say what</text>
+      <text id="we cannot" x="25" y="197" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="600" letter-spacing="-0.9">we cannot</text>
+      <text id="Every migration page promises everything…" x="25" y="238" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">Every migration page promises everything comes across. Something</text>
+      <text id="never does, and finding out which thing …" x="25" y="262" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">never does, and finding out which thing after the cutover is how a</text>
+      <text id="switch becomes a rollback." x="25" y="286" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">switch becomes a rollback.</text>
+      <text id="Records, history and attachments" x="57" y="339" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Records, history and attachments</text>
+      <text id="Everything with a stable id, including t…" x="57" y="361" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Everything with a stable id, including the timestamps, so reports still line</text>
+      <text id="up." x="57" y="381" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">up.</text>
+      <text id="Users and their permissions" x="57" y="417" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Users and their permissions</text>
+      <text id="Roles are mapped, and the mapping is sho…" x="57" y="439" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Roles are mapped, and the mapping is shown for approval before anything</text>
+      <text id="is written." x="57" y="459" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">is written.</text>
+      <text id="What does not come across" x="57" y="495" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">What does not come across</text>
+      <text id="Custom automations. The triggers have no…" x="57" y="517" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Custom automations. The triggers have no equivalent here and a silent</text>
+      <text id="half-migration is worse." x="57" y="537" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">half-migration is worse.</text>
+      <text id="Run it twice" x="57" y="573" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Run it twice</text>
+      <text id="A trial into a sandbox first, then the r…" x="57" y="595" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">A trial into a sandbox first, then the real one. The trial is free and does not</text>
+      <text id="count against anything." x="57" y="615" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">count against anything.</text>
+      <rect id="container 2" x="568" y="216" width="495" height="286" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <rect id="container 3" x="593" y="241" width="148.33" height="12" rx="4" fill="rgba(0, 126, 53, 0.302)" />
+      <rect id="container 4" x="593" y="265" width="445" height="96" rx="12" fill="#f3f2ee" />
+      <rect id="container 5" x="593" y="373" width="140.33" height="56" rx="12" fill="#f3f2ee" />
+      <rect id="container 6" x="745.33" y="373" width="140.33" height="56" rx="12" fill="#f3f2ee" />
+      <rect id="container 7" x="897.66" y="373" width="140.33" height="56" rx="12" fill="#f3f2ee" />
+      <rect id="container 8" x="593" y="441" width="296.66" height="12" rx="4" fill="#f3f2ee" />
+      <rect id="container 9" x="593" y="465" width="222.5" height="12" rx="4" fill="#f3f2ee" />
+  </g>
+</svg>

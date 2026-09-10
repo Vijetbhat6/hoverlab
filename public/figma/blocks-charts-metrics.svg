@@ -1,0 +1,749 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1216" height="5626" viewBox="0 0 1216 5626" id="Hoverlab — Charts &amp; Metrics">
+  <!--
+    Hoverlab — Charts & Metrics. 9 sections, traced from the
+    rendered catalog. Drag this file onto a Figma canvas.
+
+    These are frames, not components: named, editable layers with real
+    geometry, colour and type. There are no variants, no auto-layout,
+    and no hover or motion — none of those exist in a static frame.
+
+    Every section here is free to copy as code at https://hoverlab.dev/blocks
+  -->
+  <rect id="Background" x="0" y="0" width="1216" height="5626" fill="#ffffff" />
+  <text id="Sparkline Metric Cards label" x="64" y="84" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Sparkline Metric Cards</text>
+  <text id="metric-sparkline-cards id" x="64" y="98" font-family="ui-monospace, monospace" font-size="12" fill="#737373">metric-sparkline-cards</text>
+  <g id="Sparkline Metric Cards" transform="translate(64, 116)">
+    <rect id="container" x="0" y="0" width="1088" height="160" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="1" y="1" width="351.33" height="158" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Requests" x="22" y="36" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Requests</text>
+      <text id="1.24M" x="22" y="74" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="24" font-weight="800" letter-spacing="-0.6">1.24M</text>
+      <text id="+18.2%" x="99.25" y="75" fill="#009966" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600">+18.2%</text>
+      <rect id="container 3" x="368.33" y="1" width="351.33" height="158" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Error rate" x="389.33" y="36" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Error rate</text>
+      <text id="0.12%" x="389.33" y="74" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="24" font-weight="800" letter-spacing="-0.6">0.12%</text>
+      <text id="-34.5%" x="463.92" y="75" fill="#009966" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600">-34.5%</text>
+      <rect id="container 4" x="735.66" y="1" width="351.34" height="158" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="p95 latency" x="756.66" y="36" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">p95 latency</text>
+      <text id="184ms" x="756.66" y="74" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="24" font-weight="800" letter-spacing="-0.6">184ms</text>
+      <text id="-8.1%" x="836.94" y="75" fill="#009966" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600">-8.1%</text>
+  </g>
+  <text id="CSS Bar Chart Panel label" x="64" y="392" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">CSS Bar Chart Panel</text>
+  <text id="bar-chart-panel id" x="64" y="406" font-family="ui-monospace, monospace" font-size="12" fill="#737373">bar-chart-panel</text>
+  <g id="CSS Bar Chart Panel" transform="translate(64, 424)">
+    <rect id="container" x="0" y="0" width="1088" height="330" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="section" x="1" y="1" width="1086" height="328" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Revenue this week" x="26" y="50" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600" letter-spacing="-0.4">Revenue this week</text>
+      <text id="Solid is this week. Faded is the week be…" x="26" y="74" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Solid is this week. Faded is the week before.</text>
+      <text id="$34,500" x="971.73" y="50" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="24" font-weight="800" letter-spacing="-0.6">$34,500</text>
+      <text id="$7,100" x="26" y="122.4" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="10.4">$7,100</text>
+      <text id="$5,325" x="26" y="166.49" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="10.4">$5,325</text>
+      <text id="$3,550" x="26" y="210.6" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="10.4">$3,550</text>
+      <text id="$1,775" x="26" y="254.7" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="10.4">$1,775</text>
+      <text id="$0" x="26" y="298.79" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="10.4">$0</text>
+      <rect id="container 2" x="92.09" y="191.95" width="44.38" height="92.05" rx="4" fill="rgba(85, 90, 95, 0.2)" />
+      <rect id="container 3" x="138.47" y="182.27" width="66.56" height="101.73" rx="4" fill="#007f34" />
+      <text id="Mon" x="148.57" y="300" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" text-anchor="middle">Mon</text>
+      <rect id="container 4" x="233.23" y="177.42" width="44.38" height="106.58" rx="4" fill="rgba(85, 90, 95, 0.2)" />
+      <rect id="container 5" x="279.61" y="160.45" width="66.58" height="123.55" rx="4" fill="#007f34" />
+      <text id="Tue" x="289.72" y="300" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" text-anchor="middle">Tue</text>
+      <rect id="container 6" x="374.39" y="165.3" width="44.38" height="118.7" rx="4" fill="rgba(85, 90, 95, 0.2)" />
+      <rect id="container 7" x="420.77" y="167.72" width="66.56" height="116.28" rx="4" fill="#007f34" />
+      <text id="Wed" x="430.87" y="300" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" text-anchor="middle">Wed</text>
+      <rect id="container 8" x="515.53" y="158.03" width="44.38" height="125.97" rx="4" fill="rgba(85, 90, 95, 0.2)" />
+      <rect id="container 9" x="561.91" y="131.39" width="66.56" height="152.61" rx="4" fill="#007f34" />
+      <text id="Thu" x="572.01" y="300" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" text-anchor="middle">Thu</text>
+      <rect id="container 10" x="656.67" y="143.5" width="44.38" height="140.5" rx="4" fill="rgba(85, 90, 95, 0.2)" />
+      <rect id="container 11" x="703.05" y="112" width="66.56" height="172" rx="4" fill="#007f34" />
+      <text id="Fri" x="713.15" y="300" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" text-anchor="middle">Fri</text>
+      <rect id="container 12" x="797.81" y="196.8" width="44.38" height="87.2" rx="4" fill="rgba(85, 90, 95, 0.2)" />
+      <rect id="container 13" x="844.19" y="189.53" width="66.56" height="94.47" rx="4" fill="#007f34" />
+      <text id="Sat" x="854.29" y="300" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" text-anchor="middle">Sat</text>
+      <rect id="container 14" x="938.95" y="211.33" width="44.38" height="72.67" rx="4" fill="rgba(85, 90, 95, 0.2)" />
+      <rect id="container 15" x="985.33" y="208.91" width="66.56" height="75.09" rx="4" fill="#007f34" />
+      <text id="Sun" x="995.43" y="300" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" text-anchor="middle">Sun</text>
+      <text id="Revenue this week 2" x="25" y="319" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">Revenue this week</text>
+      <text id="Period" x="49.34" y="343" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="700" text-anchor="middle">Period</text>
+      <text id="This week" x="110.65" y="343" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="700" text-anchor="middle">This week</text>
+      <text id="Previous week" x="201.55" y="343" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="700" text-anchor="middle">Previous week</text>
+      <text id="Mon 2" x="49.34" y="367" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="700" text-anchor="middle">Mon</text>
+      <text id="$4,200" x="73.67" y="367" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">$4,200</text>
+      <text id="$3,800" x="147.63" y="367" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">$3,800</text>
+      <text id="Tue 2" x="49.34" y="391" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="700" text-anchor="middle">Tue</text>
+      <text id="$5,100" x="73.67" y="391" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">$5,100</text>
+      <text id="$4,400" x="147.63" y="391" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">$4,400</text>
+      <text id="Wed 2" x="49.34" y="415" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="700" text-anchor="middle">Wed</text>
+      <text id="$4,800" x="73.67" y="415" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">$4,800</text>
+      <text id="$4,900" x="147.63" y="415" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">$4,900</text>
+      <text id="Thu 2" x="49.34" y="439" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="700" text-anchor="middle">Thu</text>
+      <text id="$6,300" x="73.67" y="439" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">$6,300</text>
+      <text id="$5,200" x="147.63" y="439" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">$5,200</text>
+      <text id="Fri 2" x="49.34" y="463" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="700" text-anchor="middle">Fri</text>
+      <text id="$7,100 2" x="73.67" y="463" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">$7,100</text>
+      <text id="$5,800" x="147.63" y="463" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">$5,800</text>
+      <text id="Sat 2" x="49.34" y="487" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="700" text-anchor="middle">Sat</text>
+      <text id="$3,900" x="73.67" y="487" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">$3,900</text>
+      <text id="$3,600" x="147.63" y="487" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">$3,600</text>
+      <text id="Sun 2" x="49.34" y="511" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="700" text-anchor="middle">Sun</text>
+      <text id="$3,100" x="73.67" y="511" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">$3,100</text>
+      <text id="$3,000" x="147.63" y="511" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">$3,000</text>
+  </g>
+  <text id="Quota &amp; Usage Meters label" x="64" y="870" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Quota &amp; Usage Meters</text>
+  <text id="usage-meter-panel id" x="64" y="884" font-family="ui-monospace, monospace" font-size="12" fill="#737373">usage-meter-panel</text>
+  <g id="Quota &amp; Usage Meters" transform="translate(64, 902)">
+    <rect id="container" x="0" y="0" width="1088" height="568" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="section" x="1" y="1" width="1086" height="566" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Usage this period" x="26" y="34" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600" letter-spacing="-0.4">Usage this period</text>
+      <text id="Resets 1 September" x="26" y="58" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Resets 1 September</text>
+      <rect id="paragraph" x="2" y="81" width="1084" height="45" fill="rgba(235, 0, 20, 0.051)" />
+      <text id="You are over the limit on at least one q…" x="2" y="95" fill="#e7000b" font-family="ui-sans-serif, system-ui" font-size="14">You are over the limit on at least one quota. Overage is billed at the end of the period.</text>
+      <text id="API requests" x="26" y="156" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">API requests</text>
+      <text id="842,000 / 1,000,000" x="941.64" y="156" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">842,000 / 1,000,000</text>
+      <rect id="progressbar" x="26" y="170" width="1036" height="8" rx="4" fill="#f3f2ee" />
+      <rect id="container 2" x="26" y="170" width="872.3" height="8" rx="4" fill="#fe9a00" />
+      <text id="84% of your limit used" x="26" y="196" fill="#e17100" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">84% of your limit used</text>
+      <text id="Team seats" x="26" y="247" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Team seats</text>
+      <text id="8 / 10" x="1026.23" y="247" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">8 / 10</text>
+      <rect id="progressbar 2" x="26" y="261" width="1036" height="8" rx="4" fill="#f3f2ee" />
+      <rect id="container 3" x="26" y="261" width="828.8" height="8" rx="4" fill="#fe9a00" />
+      <text id="80% of your limit used" x="26" y="287" fill="#e17100" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">80% of your limit used</text>
+      <text id="Storage" x="26" y="338" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Storage</text>
+      <text id="47 GB / 50 GB" x="975.75" y="338" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">47 GB / 50 GB</text>
+      <rect id="progressbar 3" x="26" y="352" width="1036" height="8" rx="4" fill="#f3f2ee" />
+      <rect id="container 4" x="26" y="352" width="973.83" height="8" rx="4" fill="#fe9a00" />
+      <text id="94% of your limit used" x="26" y="378" fill="#e17100" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">94% of your limit used</text>
+      <text id="Bandwidth" x="26" y="429" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Bandwidth</text>
+      <text id="128 GB / 100 GB" x="960.66" y="429" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">128 GB / 100 GB</text>
+      <rect id="progressbar 4" x="26" y="443" width="1036" height="8" rx="4" fill="#f3f2ee" />
+      <rect id="container 5" x="26" y="443" width="1036" height="8" rx="4" fill="#e7000b" />
+      <text id="28 GB over your limit" x="26" y="469" fill="#e7000b" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">28 GB over your limit</text>
+      <text id="Projects" x="26" y="520" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Projects</text>
+      <text id="23" x="1020.22" y="520" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">23</text>
+      <text id="/" x="1039.31" y="520" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">/</text>
+      <text id="No limit on this plan" x="26" y="546" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">No limit on this plan</text>
+  </g>
+  <text id="Dual-Series Line Chart label" x="64" y="1586" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Dual-Series Line Chart</text>
+  <text id="line-chart-panel id" x="64" y="1600" font-family="ui-monospace, monospace" font-size="12" fill="#737373">line-chart-panel</text>
+  <g id="Dual-Series Line Chart" transform="translate(64, 1618)">
+    <rect id="container" x="0" y="0" width="1088" height="520" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="128" y="65" width="832" height="390" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="Monthly active workspaces" x="161" y="116" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="600">Monthly active workspaces</text>
+      <text id="Compared with the same month last year." x="161" y="144" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Compared with the same month last year.</text>
+      <text id="This year" x="746.16" y="112" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">This year</text>
+      <rect id="container 3" x="746.16" y="107" width="20" height="2" rx="1" fill="#007f34" />
+      <text id="Last year" x="844.67" y="112" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Last year</text>
+      <rect id="container 4" x="844.67" y="107" width="20" height="2" rx="1" fill="#575b60" />
+      <text id="5,000" x="161" y="188" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">5,000</text>
+      <text id="3,500" x="161" y="302" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">3,500</text>
+      <text id="2,000" x="161" y="416" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">2,000</text>
+      <text id="Jan" x="229" y="418" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">Jan</text>
+      <text id="Feb" x="290.48" y="418" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">Feb</text>
+      <text id="Mar" x="351.98" y="418" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">Mar</text>
+      <text id="Apr" x="413.47" y="418" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">Apr</text>
+      <text id="May" x="474.95" y="418" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">May</text>
+      <text id="Jun" x="536.45" y="418" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">Jun</text>
+      <text id="Jul" x="597.94" y="418" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">Jul</text>
+      <text id="Aug" x="659.44" y="418" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">Aug</text>
+      <text id="Sep" x="720.92" y="418" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">Sep</text>
+      <text id="Oct" x="782.41" y="418" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">Oct</text>
+      <text id="Nov" x="843.91" y="418" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">Nov</text>
+      <text id="Dec" x="905.39" y="418" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">Dec</text>
+      <text id="Monthly active workspaces 2" x="160" y="437" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">Monthly active workspaces</text>
+      <text id="Month" x="186.08" y="461" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="700" text-anchor="middle">Month</text>
+      <text id="This year 2" x="246.71" y="461" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="700" text-anchor="middle">This year</text>
+      <text id="Last year 2" x="315.56" y="461" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="700" text-anchor="middle">Last year</text>
+      <text id="Jan 2" x="186.08" y="485" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="700" text-anchor="middle">Jan</text>
+      <text id="3,120" x="212.16" y="485" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">3,120</text>
+      <text id="2,980" x="281.27" y="485" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">2,980</text>
+      <text id="Feb 2" x="186.08" y="509" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="700" text-anchor="middle">Feb</text>
+      <text id="3,260" x="212.16" y="509" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">3,260</text>
+      <text id="3,010" x="281.27" y="509" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">3,010</text>
+      <text id="Mar 2" x="186.08" y="533" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="700" text-anchor="middle">Mar</text>
+      <text id="3,180" x="212.16" y="533" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">3,180</text>
+      <text id="3,090" x="281.27" y="533" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">3,090</text>
+      <text id="Apr 2" x="186.08" y="557" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="700" text-anchor="middle">Apr</text>
+      <text id="3,540" x="212.16" y="557" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">3,540</text>
+      <text id="3,120 2" x="281.27" y="557" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">3,120</text>
+      <text id="May 2" x="186.08" y="581" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="700" text-anchor="middle">May</text>
+      <text id="3,720" x="212.16" y="581" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">3,720</text>
+      <text id="3,050" x="281.27" y="581" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">3,050</text>
+      <text id="Jun 2" x="186.08" y="605" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="700" text-anchor="middle">Jun</text>
+      <text id="3,610" x="212.16" y="605" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">3,610</text>
+      <text id="3,210" x="281.27" y="605" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">3,210</text>
+      <text id="Jul 2" x="186.08" y="629" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="700" text-anchor="middle">Jul</text>
+      <text id="3,880" x="212.16" y="629" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">3,880</text>
+      <text id="3,180 2" x="281.27" y="629" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">3,180</text>
+      <text id="Aug 2" x="186.08" y="653" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="700" text-anchor="middle">Aug</text>
+      <text id="4,020" x="212.16" y="653" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">4,020</text>
+      <text id="3,340" x="281.27" y="653" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">3,340</text>
+      <text id="Sep 2" x="186.08" y="677" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="700" text-anchor="middle">Sep</text>
+      <text id="3,960" x="212.16" y="677" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">3,960</text>
+      <text id="3,290" x="281.27" y="677" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">3,290</text>
+      <text id="Oct 2" x="186.08" y="701" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="700" text-anchor="middle">Oct</text>
+      <text id="4,180" x="212.16" y="701" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">4,180</text>
+      <text id="3,410" x="281.27" y="701" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">3,410</text>
+      <text id="Nov 2" x="186.08" y="725" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="700" text-anchor="middle">Nov</text>
+      <text id="4,320" x="212.16" y="725" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">4,320</text>
+      <text id="3,380" x="281.27" y="725" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">3,380</text>
+      <text id="Dec 2" x="186.08" y="749" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="700" text-anchor="middle">Dec</text>
+      <text id="4,410" x="212.16" y="749" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">4,410</text>
+      <text id="3,520" x="281.27" y="749" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">3,520</text>
+  </g>
+  <text id="Donut Breakdown label" x="64" y="2254" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Donut Breakdown</text>
+  <text id="donut-breakdown id" x="64" y="2268" font-family="ui-monospace, monospace" font-size="12" fill="#737373">donut-breakdown</text>
+  <g id="Donut Breakdown" transform="translate(64, 2286)">
+    <rect id="container" x="0" y="0" width="1088" height="549" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="192" y="65" width="704" height="419" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="Where the bill went" x="225" y="116" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="600">Where the bill went</text>
+      <text id="Billing period to date, across every pro…" x="225" y="144" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Billing period to date, across every project in the workspace.</text>
+      <rect id="container 3" x="263.72" y="267.22" width="98.56" height="98.56" rx="49.28" fill="#ffffff" />
+      <text id="Total spend" x="312.99" y="306.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" text-anchor="middle">Total spend</text>
+      <text id="$9,995" x="312.99" y="330.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" letter-spacing="-0.5" text-anchor="middle">$9,995</text>
+      <rect id="container 4" x="441" y="199" width="10" height="10" rx="5" fill="#007f34" />
+      <text id="Compute" x="463" y="208" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">Compute</text>
+      <text id="$4,820" x="768.58" y="210" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="14">$4,820</text>
+      <text id="48.2%" x="826.98" y="210" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">48.2%</text>
+      <rect id="container 5" x="441" y="244" width="10" height="10" rx="5" fill="#008f4c" />
+      <text id="Object storage" x="463" y="253" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">Object storage</text>
+      <text id="$2,140" x="768.58" y="255" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="14">$2,140</text>
+      <text id="21.4%" x="826.98" y="255" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">21.4%</text>
+      <rect id="container 6" x="441" y="289" width="10" height="10" rx="5" fill="#00a065" />
+      <text id="Egress" x="463" y="298" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">Egress</text>
+      <text id="$1,310" x="768.58" y="300" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="14">$1,310</text>
+      <text id="13.1%" x="826.98" y="300" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">13.1%</text>
+      <rect id="container 7" x="441" y="334" width="10" height="10" rx="5" fill="#41af7d" />
+      <text id="Managed Postgres" x="463" y="343" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">Managed Postgres</text>
+      <text id="$890" x="792.58" y="345" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="14">$890</text>
+      <text id="8.9%" x="834.19" y="345" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">8.9%</text>
+      <rect id="container 8" x="441" y="379" width="10" height="10" rx="5" fill="#70c097" />
+      <text id="Log retention" x="463" y="388" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">Log retention</text>
+      <text id="$420" x="792.58" y="390" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="14">$420</text>
+      <text id="4.2%" x="834.19" y="390" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">4.2%</text>
+      <rect id="container 9" x="441" y="424" width="10" height="10" rx="5" fill="#95cfaf" />
+      <text id="Other (3 lines)" x="463" y="433" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">Other (3 lines)</text>
+      <text id="$415" x="792.58" y="435" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="14">$415</text>
+      <text id="4.2% 2" x="834.19" y="435" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">4.2%</text>
+  </g>
+  <text id="Daily Activity Heatmap label" x="64" y="2951" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Daily Activity Heatmap</text>
+  <text id="activity-heatmap id" x="64" y="2965" font-family="ui-monospace, monospace" font-size="12" fill="#737373">activity-heatmap</text>
+  <g id="Daily Activity Heatmap" transform="translate(64, 2983)">
+    <rect id="container" x="0" y="0" width="1088" height="396" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="128" y="65" width="832" height="266" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="Deploy activity" x="161" y="116" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="600">Deploy activity</text>
+      <text id="deploys across 306 active days in the la…" x="608.13" y="118" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">deploys across 306 active days in the last year</text>
+      <text id="1,453" x="608.13" y="118" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">1,453</text>
+      <text id="Tue" x="161" y="176" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="10">Tue</text>
+      <text id="Thu" x="161" y="208" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="10">Thu</text>
+      <text id="Sat" x="161" y="240" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="10">Sat</text>
+      <rect id="container 3" x="189.56" y="150" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 4" x="189.56" y="166" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 5" x="189.56" y="182" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 6" x="189.56" y="198" width="12" height="12" rx="2" fill="#f3f2ee" />
+      <rect id="container 7" x="189.56" y="214" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 8" x="189.56" y="230" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 9" x="189.56" y="246" width="12" height="12" rx="2" fill="#f3f2ee" />
+      <rect id="container 10" x="205.56" y="150" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 11" x="205.56" y="166" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 12" x="205.56" y="182" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 13" x="205.56" y="198" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 14" x="205.56" y="214" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 15" x="205.56" y="230" width="12" height="12" rx="2" fill="#f3f2ee" />
+      <rect id="container 16" x="205.56" y="246" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 17" x="221.56" y="150" width="12" height="12" rx="2" fill="rgba(0, 127, 51, 0.702)" />
+      <rect id="container 18" x="221.56" y="166" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 19" x="221.56" y="182" width="12" height="12" rx="2" fill="#f3f2ee" />
+      <rect id="container 20" x="221.56" y="198" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 21" x="221.56" y="214" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 22" x="221.56" y="230" width="12" height="12" rx="2" fill="#f3f2ee" />
+      <rect id="container 23" x="221.56" y="246" width="12" height="12" rx="2" fill="#f3f2ee" />
+      <rect id="container 24" x="237.56" y="150" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 25" x="237.56" y="166" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 26" x="237.56" y="182" width="12" height="12" rx="2" fill="rgba(0, 127, 51, 0.702)" />
+      <rect id="container 27" x="237.56" y="198" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 28" x="237.56" y="214" width="12" height="12" rx="2" fill="#f3f2ee" />
+      <rect id="container 29" x="237.56" y="230" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 30" x="237.56" y="246" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 31" x="253.56" y="150" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 32" x="253.56" y="166" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 33" x="253.56" y="182" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 34" x="253.56" y="198" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 35" x="253.56" y="214" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 36" x="253.56" y="230" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 37" x="253.56" y="246" width="12" height="12" rx="2" fill="#f3f2ee" />
+      <rect id="container 38" x="269.56" y="150" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 39" x="269.56" y="166" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 40" x="269.56" y="182" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 41" x="269.56" y="198" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 42" x="269.56" y="214" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 43" x="269.56" y="230" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 44" x="269.56" y="246" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 45" x="285.56" y="150" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 46" x="285.56" y="166" width="12" height="12" rx="2" fill="#f3f2ee" />
+      <rect id="container 47" x="285.56" y="182" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 48" x="285.56" y="198" width="12" height="12" rx="2" fill="rgba(0, 127, 51, 0.702)" />
+      <rect id="container 49" x="285.56" y="214" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 50" x="285.56" y="230" width="12" height="12" rx="2" fill="#f3f2ee" />
+      <rect id="container 51" x="285.56" y="246" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 52" x="301.56" y="150" width="12" height="12" rx="2" fill="rgba(0, 127, 51, 0.702)" />
+      <rect id="container 53" x="301.56" y="166" width="12" height="12" rx="2" fill="#f3f2ee" />
+      <rect id="container 54" x="301.56" y="182" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 55" x="301.56" y="198" width="12" height="12" rx="2" fill="#f3f2ee" />
+      <rect id="container 56" x="301.56" y="214" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 57" x="301.56" y="230" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 58" x="301.56" y="246" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 59" x="317.56" y="150" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 60" x="317.56" y="166" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 61" x="317.56" y="182" width="12" height="12" rx="2" fill="rgba(0, 127, 51, 0.702)" />
+      <rect id="container 62" x="317.56" y="198" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 63" x="317.56" y="214" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 64" x="317.56" y="230" width="12" height="12" rx="2" fill="#f3f2ee" />
+      <rect id="container 65" x="317.56" y="246" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 66" x="333.56" y="150" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 67" x="333.56" y="166" width="12" height="12" rx="2" fill="rgba(0, 127, 51, 0.702)" />
+      <rect id="container 68" x="333.56" y="182" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 69" x="333.56" y="198" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 70" x="333.56" y="214" width="12" height="12" rx="2" fill="rgba(0, 127, 51, 0.702)" />
+      <rect id="container 71" x="333.56" y="230" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 72" x="333.56" y="246" width="12" height="12" rx="2" fill="#f3f2ee" />
+      <rect id="container 73" x="349.56" y="150" width="12" height="12" rx="2" fill="#f3f2ee" />
+      <rect id="container 74" x="349.56" y="166" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 75" x="349.56" y="182" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 76" x="349.56" y="198" width="12" height="12" rx="2" fill="rgba(0, 127, 51, 0.702)" />
+      <rect id="container 77" x="349.56" y="214" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 78" x="349.56" y="230" width="12" height="12" rx="2" fill="#f3f2ee" />
+      <rect id="container 79" x="349.56" y="246" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 80" x="365.56" y="150" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 81" x="365.56" y="166" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 82" x="365.56" y="182" width="12" height="12" rx="2" fill="#f3f2ee" />
+      <rect id="container 83" x="365.56" y="198" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 84" x="365.56" y="214" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 85" x="365.56" y="230" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 86" x="365.56" y="246" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 87" x="381.56" y="150" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 88" x="381.56" y="166" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 89" x="381.56" y="182" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 90" x="381.56" y="198" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 91" x="381.56" y="214" width="12" height="12" rx="2" fill="#f3f2ee" />
+      <rect id="container 92" x="381.56" y="230" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 93" x="381.56" y="246" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 94" x="397.56" y="150" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 95" x="397.56" y="166" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 96" x="397.56" y="182" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 97" x="397.56" y="198" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 98" x="397.56" y="214" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 99" x="397.56" y="230" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 100" x="397.56" y="246" width="12" height="12" rx="2" fill="#f3f2ee" />
+      <rect id="container 101" x="413.56" y="150" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 102" x="413.56" y="166" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 103" x="413.56" y="182" width="12" height="12" rx="2" fill="#f3f2ee" />
+      <rect id="container 104" x="413.56" y="198" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 105" x="413.56" y="214" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 106" x="413.56" y="230" width="12" height="12" rx="2" fill="#f3f2ee" />
+      <rect id="container 107" x="413.56" y="246" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 108" x="429.56" y="150" width="12" height="12" rx="2" fill="rgba(0, 127, 51, 0.702)" />
+      <rect id="container 109" x="429.56" y="166" width="12" height="12" rx="2" fill="#f3f2ee" />
+      <rect id="container 110" x="429.56" y="182" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 111" x="429.56" y="198" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 112" x="429.56" y="214" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 113" x="429.56" y="230" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 114" x="429.56" y="246" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 115" x="445.56" y="150" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 116" x="445.56" y="166" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 117" x="445.56" y="182" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 118" x="445.56" y="198" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 119" x="445.56" y="214" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 120" x="445.56" y="230" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 121" x="445.56" y="246" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 122" x="461.56" y="150" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 123" x="461.56" y="166" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 124" x="461.56" y="182" width="12" height="12" rx="2" fill="rgba(0, 127, 51, 0.702)" />
+      <rect id="container 125" x="461.56" y="198" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 126" x="461.56" y="214" width="12" height="12" rx="2" fill="rgba(0, 127, 51, 0.702)" />
+      <rect id="container 127" x="461.56" y="230" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 128" x="461.56" y="246" width="12" height="12" rx="2" fill="#f3f2ee" />
+      <rect id="container 129" x="477.56" y="150" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 130" x="477.56" y="166" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 131" x="477.56" y="182" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 132" x="477.56" y="198" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 133" x="477.56" y="214" width="12" height="12" rx="2" fill="rgba(0, 127, 51, 0.702)" />
+      <rect id="container 134" x="477.56" y="230" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 135" x="477.56" y="246" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 136" x="493.56" y="150" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 137" x="493.56" y="166" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 138" x="493.56" y="182" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 139" x="493.56" y="198" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 140" x="493.56" y="214" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 141" x="493.56" y="230" width="12" height="12" rx="2" fill="#f3f2ee" />
+      <rect id="container 142" x="493.56" y="246" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 143" x="509.56" y="150" width="12" height="12" rx="2" fill="rgba(0, 127, 51, 0.702)" />
+      <rect id="container 144" x="509.56" y="166" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 145" x="509.56" y="182" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 146" x="509.56" y="198" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 147" x="509.56" y="214" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 148" x="509.56" y="230" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 149" x="509.56" y="246" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 150" x="525.56" y="150" width="12" height="12" rx="2" fill="#f3f2ee" />
+      <rect id="container 151" x="525.56" y="166" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 152" x="525.56" y="182" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 153" x="525.56" y="198" width="12" height="12" rx="2" fill="#f3f2ee" />
+      <rect id="container 154" x="525.56" y="214" width="12" height="12" rx="2" fill="#f3f2ee" />
+      <rect id="container 155" x="525.56" y="230" width="12" height="12" rx="2" fill="#f3f2ee" />
+      <rect id="container 156" x="525.56" y="246" width="12" height="12" rx="2" fill="#f3f2ee" />
+      <rect id="container 157" x="541.56" y="150" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 158" x="541.56" y="166" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 159" x="541.56" y="182" width="12" height="12" rx="2" fill="#f3f2ee" />
+      <rect id="container 160" x="541.56" y="198" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 161" x="541.56" y="214" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 162" x="541.56" y="230" width="12" height="12" rx="2" fill="#f3f2ee" />
+      <rect id="container 163" x="541.56" y="246" width="12" height="12" rx="2" fill="#f3f2ee" />
+      <rect id="container 164" x="557.56" y="150" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 165" x="557.56" y="166" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 166" x="557.56" y="182" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 167" x="557.56" y="198" width="12" height="12" rx="2" fill="rgba(0, 127, 51, 0.702)" />
+      <rect id="container 168" x="557.56" y="214" width="12" height="12" rx="2" fill="#f3f2ee" />
+      <rect id="container 169" x="557.56" y="230" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 170" x="557.56" y="246" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 171" x="573.56" y="150" width="12" height="12" rx="2" fill="rgba(0, 127, 51, 0.702)" />
+      <rect id="container 172" x="573.56" y="166" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 173" x="573.56" y="182" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 174" x="573.56" y="198" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 175" x="573.56" y="214" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 176" x="573.56" y="230" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 177" x="573.56" y="246" width="12" height="12" rx="2" fill="#f3f2ee" />
+      <rect id="container 178" x="589.56" y="150" width="12" height="12" rx="2" fill="#f3f2ee" />
+      <rect id="container 179" x="589.56" y="166" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 180" x="589.56" y="182" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 181" x="589.56" y="198" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 182" x="589.56" y="214" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 183" x="589.56" y="230" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 184" x="589.56" y="246" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 185" x="605.56" y="150" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 186" x="605.56" y="166" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 187" x="605.56" y="182" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 188" x="605.56" y="198" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 189" x="605.56" y="214" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 190" x="605.56" y="230" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 191" x="605.56" y="246" width="12" height="12" rx="2" fill="#f3f2ee" />
+      <rect id="container 192" x="621.56" y="150" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 193" x="621.56" y="166" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 194" x="621.56" y="182" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 195" x="621.56" y="198" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 196" x="621.56" y="214" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 197" x="621.56" y="230" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 198" x="621.56" y="246" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 199" x="637.56" y="150" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 200" x="637.56" y="166" width="12" height="12" rx="2" fill="#f3f2ee" />
+      <rect id="container 201" x="637.56" y="182" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 202" x="637.56" y="198" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 203" x="637.56" y="214" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 204" x="637.56" y="230" width="12" height="12" rx="2" fill="#f3f2ee" />
+      <rect id="container 205" x="637.56" y="246" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 206" x="653.56" y="150" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 207" x="653.56" y="166" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 208" x="653.56" y="182" width="12" height="12" rx="2" fill="rgba(0, 127, 51, 0.702)" />
+      <rect id="container 209" x="653.56" y="198" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 210" x="653.56" y="214" width="12" height="12" rx="2" fill="rgba(0, 127, 51, 0.702)" />
+      <rect id="container 211" x="653.56" y="230" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 212" x="653.56" y="246" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 213" x="669.56" y="150" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 214" x="669.56" y="166" width="12" height="12" rx="2" fill="rgba(0, 127, 51, 0.702)" />
+      <rect id="container 215" x="669.56" y="182" width="12" height="12" rx="2" fill="rgba(0, 127, 51, 0.702)" />
+      <rect id="container 216" x="669.56" y="198" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 217" x="669.56" y="214" width="12" height="12" rx="2" fill="rgba(0, 127, 51, 0.702)" />
+      <rect id="container 218" x="669.56" y="230" width="12" height="12" rx="2" fill="#f3f2ee" />
+      <rect id="container 219" x="669.56" y="246" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 220" x="685.56" y="150" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 221" x="685.56" y="166" width="12" height="12" rx="2" fill="rgba(0, 127, 51, 0.702)" />
+      <rect id="container 222" x="685.56" y="182" width="12" height="12" rx="2" fill="#f3f2ee" />
+      <rect id="container 223" x="685.56" y="198" width="12" height="12" rx="2" fill="rgba(0, 127, 51, 0.702)" />
+      <rect id="container 224" x="685.56" y="214" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 225" x="685.56" y="230" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 226" x="685.56" y="246" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 227" x="701.56" y="150" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 228" x="701.56" y="166" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 229" x="701.56" y="182" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 230" x="701.56" y="198" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 231" x="701.56" y="214" width="12" height="12" rx="2" fill="#f3f2ee" />
+      <rect id="container 232" x="701.56" y="230" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 233" x="701.56" y="246" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 234" x="717.56" y="150" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 235" x="717.56" y="166" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 236" x="717.56" y="182" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 237" x="717.56" y="198" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 238" x="717.56" y="214" width="12" height="12" rx="2" fill="rgba(0, 127, 51, 0.702)" />
+      <rect id="container 239" x="717.56" y="230" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 240" x="717.56" y="246" width="12" height="12" rx="2" fill="#f3f2ee" />
+      <rect id="container 241" x="733.56" y="150" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 242" x="733.56" y="166" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 243" x="733.56" y="182" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 244" x="733.56" y="198" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 245" x="733.56" y="214" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 246" x="733.56" y="230" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 247" x="733.56" y="246" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 248" x="749.56" y="150" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 249" x="749.56" y="166" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 250" x="749.56" y="182" width="12" height="12" rx="2" fill="#f3f2ee" />
+      <rect id="container 251" x="749.56" y="198" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 252" x="749.56" y="214" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 253" x="749.56" y="230" width="12" height="12" rx="2" fill="#f3f2ee" />
+      <rect id="container 254" x="749.56" y="246" width="12" height="12" rx="2" fill="#f3f2ee" />
+      <rect id="container 255" x="765.56" y="150" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 256" x="765.56" y="166" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 257" x="765.56" y="182" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 258" x="765.56" y="198" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 259" x="765.56" y="214" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 260" x="765.56" y="230" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 261" x="765.56" y="246" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 262" x="781.56" y="150" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 263" x="781.56" y="166" width="12" height="12" rx="2" fill="#f3f2ee" />
+      <rect id="container 264" x="781.56" y="182" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 265" x="781.56" y="198" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 266" x="781.56" y="214" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 267" x="781.56" y="230" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 268" x="781.56" y="246" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 269" x="797.56" y="150" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 270" x="797.56" y="166" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 271" x="797.56" y="182" width="12" height="12" rx="2" fill="rgba(0, 127, 51, 0.702)" />
+      <rect id="container 272" x="797.56" y="198" width="12" height="12" rx="2" fill="#f3f2ee" />
+      <rect id="container 273" x="797.56" y="214" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 274" x="797.56" y="230" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 275" x="797.56" y="246" width="12" height="12" rx="2" fill="#f3f2ee" />
+      <rect id="container 276" x="813.56" y="150" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 277" x="813.56" y="166" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 278" x="813.56" y="182" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 279" x="813.56" y="198" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 280" x="813.56" y="214" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 281" x="813.56" y="230" width="12" height="12" rx="2" fill="#f3f2ee" />
+      <rect id="container 282" x="813.56" y="246" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 283" x="829.56" y="150" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 284" x="829.56" y="166" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 285" x="829.56" y="182" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 286" x="829.56" y="198" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 287" x="829.56" y="214" width="12" height="12" rx="2" fill="rgba(0, 127, 51, 0.702)" />
+      <rect id="container 288" x="829.56" y="230" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 289" x="829.56" y="246" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 290" x="845.56" y="150" width="12" height="12" rx="2" fill="#f3f2ee" />
+      <rect id="container 291" x="845.56" y="166" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 292" x="845.56" y="182" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 293" x="845.56" y="198" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 294" x="845.56" y="214" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 295" x="845.56" y="230" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 296" x="845.56" y="246" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 297" x="861.56" y="150" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 298" x="861.56" y="166" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 299" x="861.56" y="182" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 300" x="861.56" y="198" width="12" height="12" rx="2" fill="#f3f2ee" />
+      <rect id="container 301" x="861.56" y="214" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 302" x="861.56" y="230" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 303" x="861.56" y="246" width="12" height="12" rx="2" fill="#f3f2ee" />
+      <rect id="container 304" x="877.56" y="150" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 305" x="877.56" y="166" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 306" x="877.56" y="182" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 307" x="877.56" y="198" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 308" x="877.56" y="214" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 309" x="877.56" y="230" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 310" x="877.56" y="246" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 311" x="893.56" y="150" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 312" x="893.56" y="166" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 313" x="893.56" y="182" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 314" x="893.56" y="198" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 315" x="893.56" y="214" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 316" x="893.56" y="230" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 317" x="893.56" y="246" width="12" height="12" rx="2" fill="#f3f2ee" />
+      <rect id="container 318" x="909.56" y="150" width="12" height="12" rx="2" fill="rgba(0, 127, 51, 0.702)" />
+      <rect id="container 319" x="909.56" y="166" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 320" x="909.56" y="182" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 321" x="909.56" y="198" width="12" height="12" rx="2" fill="rgba(0, 127, 51, 0.702)" />
+      <rect id="container 322" x="909.56" y="214" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 323" x="909.56" y="230" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 324" x="909.56" y="246" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 325" x="925.56" y="150" width="12" height="12" rx="2" fill="#f3f2ee" />
+      <rect id="container 326" x="925.56" y="166" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 327" x="925.56" y="182" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 328" x="925.56" y="198" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 329" x="925.56" y="214" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 330" x="925.56" y="230" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 331" x="925.56" y="246" width="12" height="12" rx="2" fill="#f3f2ee" />
+      <rect id="container 332" x="941.56" y="150" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 333" x="941.56" y="166" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 334" x="941.56" y="182" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 335" x="941.56" y="198" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 336" x="941.56" y="214" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 337" x="941.56" y="230" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 338" x="941.56" y="246" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 339" x="957.56" y="150" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 340" x="957.56" y="166" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 341" x="957.56" y="182" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 342" x="957.56" y="198" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 343" x="957.56" y="214" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 344" x="957.56" y="230" width="12" height="12" rx="2" fill="#f3f2ee" />
+      <rect id="container 345" x="957.56" y="246" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 346" x="973.56" y="150" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 347" x="973.56" y="166" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 348" x="973.56" y="182" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 349" x="973.56" y="198" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 350" x="973.56" y="214" width="12" height="12" rx="2" fill="#f3f2ee" />
+      <rect id="container 351" x="973.56" y="230" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 352" x="973.56" y="246" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 353" x="989.56" y="150" width="12" height="12" rx="2" fill="#f3f2ee" />
+      <rect id="container 354" x="989.56" y="166" width="12" height="12" rx="2" fill="rgba(0, 127, 51, 0.702)" />
+      <rect id="container 355" x="989.56" y="182" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 356" x="989.56" y="198" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 357" x="989.56" y="214" width="12" height="12" rx="2" fill="rgba(0, 127, 51, 0.702)" />
+      <rect id="container 358" x="989.56" y="230" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 359" x="989.56" y="246" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 360" x="1005.56" y="150" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 361" x="1005.56" y="166" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 362" x="1005.56" y="182" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 363" x="1005.56" y="198" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 364" x="1005.56" y="214" width="12" height="12" rx="2" fill="#007f34" />
+      <rect id="container 365" x="1005.56" y="230" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 366" x="1005.56" y="246" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <text id="Less" x="768.63" y="294" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Less</text>
+      <rect id="container 367" x="798.73" y="284" width="12" height="12" rx="2" fill="#f3f2ee" />
+      <rect id="container 368" x="818.73" y="284" width="12" height="12" rx="2" fill="rgba(0, 128, 52, 0.251)" />
+      <rect id="container 369" x="838.73" y="284" width="12" height="12" rx="2" fill="rgba(0, 126, 51, 0.451)" />
+      <rect id="container 370" x="858.73" y="284" width="12" height="12" rx="2" fill="rgba(0, 127, 51, 0.702)" />
+      <rect id="container 371" x="878.73" y="284" width="12" height="12" rx="2" fill="#007f34" />
+      <text id="More" x="898.73" y="294" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">More</text>
+      <text id="Deploy activity by month" x="160" y="313" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">Deploy activity by month</text>
+      <text id="Month" x="209.23" y="337" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="700" text-anchor="middle">Month</text>
+      <text id="deploys" x="297.48" y="337" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="700" text-anchor="middle">deploys</text>
+      <text id="Sep 2025" x="209.23" y="361" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="700" text-anchor="middle">Sep 2025</text>
+      <text id="72" x="258.45" y="361" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">72</text>
+      <text id="Oct 2025" x="209.23" y="385" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="700" text-anchor="middle">Oct 2025</text>
+      <text id="90" x="258.45" y="385" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">90</text>
+      <text id="Nov 2025" x="209.23" y="409" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="700" text-anchor="middle">Nov 2025</text>
+      <text id="87" x="258.45" y="409" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">87</text>
+      <text id="Dec 2025" x="209.23" y="433" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="700" text-anchor="middle">Dec 2025</text>
+      <text id="109" x="258.45" y="433" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">109</text>
+      <text id="Jan 2026" x="209.23" y="457" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="700" text-anchor="middle">Jan 2026</text>
+      <text id="111" x="258.45" y="457" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">111</text>
+      <text id="Feb 2026" x="209.23" y="481" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="700" text-anchor="middle">Feb 2026</text>
+      <text id="69" x="258.45" y="481" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">69</text>
+      <text id="Mar 2026" x="209.23" y="505" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="700" text-anchor="middle">Mar 2026</text>
+      <text id="132" x="258.45" y="505" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">132</text>
+      <text id="Apr 2026" x="209.23" y="529" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="700" text-anchor="middle">Apr 2026</text>
+      <text id="146" x="258.45" y="529" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">146</text>
+      <text id="May 2026" x="209.23" y="553" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="700" text-anchor="middle">May 2026</text>
+      <text id="148" x="258.45" y="553" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">148</text>
+      <text id="Jun 2026" x="209.23" y="577" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="700" text-anchor="middle">Jun 2026</text>
+      <text id="157" x="258.45" y="577" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">157</text>
+      <text id="Jul 2026" x="209.23" y="601" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="700" text-anchor="middle">Jul 2026</text>
+      <text id="170" x="258.45" y="601" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">170</text>
+      <text id="Aug 2026" x="209.23" y="625" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="700" text-anchor="middle">Aug 2026</text>
+      <text id="162" x="258.45" y="625" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">162</text>
+  </g>
+  <text id="Conversion Funnel label" x="64" y="3495" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Conversion Funnel</text>
+  <text id="funnel-conversion-panel id" x="64" y="3509" font-family="ui-monospace, monospace" font-size="12" fill="#737373">funnel-conversion-panel</text>
+  <g id="Conversion Funnel" transform="translate(64, 3527)">
+    <rect id="container" x="0" y="0" width="1088" height="687.5" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="184" y="65" width="720" height="557.5" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="Signup funnel" x="209" y="106" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600">Signup funnel</text>
+      <text id="Last 30 days" x="322.45" y="107" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Last 30 days</text>
+      <text id="End to end" x="791.66" y="107" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">End to end</text>
+      <text id="5.5%" x="852.69" y="107" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600">5.5%</text>
+      <text id="Visited pricing" x="209" y="148" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Visited pricing</text>
+      <text id="18,420" x="308.16" y="148" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">18,420</text>
+      <text id="Top of the funnel" x="788.7" y="148" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Top of the funnel</text>
+      <rect id="container 3" x="209" y="160" width="670" height="10" rx="5" fill="#f3f2ee" />
+      <rect id="container 4" x="209" y="160" width="670" height="10" rx="5" fill="#007f34" />
+      <text id="100.0% of the funnel" x="209" y="186" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">100.0% of the funnel</text>
+      <text id="Started signup" x="209" y="220" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Started signup</text>
+      <text id="6,215" x="309.78" y="220" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">6,215</text>
+      <text id="33.7%" x="737.36" y="220" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">33.7%</text>
+      <text id="from previous step" x="779.56" y="220" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">from previous step</text>
+      <rect id="container 5" x="209" y="232" width="670" height="10" rx="5" fill="#f3f2ee" />
+      <rect id="container 6" x="209" y="232" width="226.05" height="10" rx="5" fill="#007f34" />
+      <text id="did not continue · 33.7% of everyone who…" x="209" y="258" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">did not continue · 33.7% of everyone who started</text>
+      <text id="12,205" x="209" y="258" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">12,205</text>
+      <text id="Verified email" x="209" y="292" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Verified email</text>
+      <text id="4,988" x="304.03" y="292" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">4,988</text>
+      <text id="80.3%" x="737.09" y="292" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">80.3%</text>
+      <text id="from previous step 2" x="779.56" y="292" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">from previous step</text>
+      <rect id="container 7" x="209" y="304" width="670" height="10" rx="5" fill="#f3f2ee" />
+      <rect id="container 8" x="209" y="304" width="181.42" height="10" rx="5" fill="#007f34" />
+      <text id="did not continue · 27.1% of everyone who…" x="209" y="330" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">did not continue · 27.1% of everyone who started · Link expires after 24 hours</text>
+      <text id="1,227" x="209" y="330" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">1,227</text>
+      <text id="Reached checkout" x="209" y="364" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Reached checkout</text>
+      <text id="1,102" x="332" y="364" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">1,102</text>
+      <text id="22.1%" x="737.09" y="364" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">22.1%</text>
+      <text id="from previous step 3" x="779.56" y="364" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">from previous step</text>
+      <rect id="container 9" x="209" y="376" width="670" height="10" rx="5" fill="#f3f2ee" />
+      <rect id="container 10" x="209" y="376" width="40.08" height="10" rx="5" fill="#007f34" />
+      <text id="did not continue · 6.0% of everyone who …" x="209" y="402" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">did not continue · 6.0% of everyone who started</text>
+      <text id="3,886" x="209" y="402" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">3,886</text>
+      <rect id="paragraph" x="209" y="412" width="389.44" height="20" rx="10" fill="rgba(245, 147, 0, 0.102)" />
+      <text id="Biggest drop in the funnel — 77.9% of th…" x="209" y="424" fill="#bb4d00" font-family="ui-sans-serif, system-ui" font-size="12">Biggest drop in the funnel — 77.9% of the previous step stops here</text>
+      <text id="Paid" x="209" y="464" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Paid</text>
+      <text id="1,014" x="244.19" y="464" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">1,014</text>
+      <text id="92.0%" x="737.09" y="464" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">92.0%</text>
+      <text id="from previous step 4" x="779.56" y="464" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">from previous step</text>
+      <rect id="container 11" x="209" y="476" width="670" height="10" rx="5" fill="#f3f2ee" />
+      <rect id="container 12" x="209" y="476" width="36.88" height="10" rx="5" fill="#007f34" />
+      <text id="did not continue · 5.5% of everyone who …" x="209" y="502" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">did not continue · 5.5% of everyone who started</text>
+      <text id="88" x="209" y="502" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">88</text>
+      <rect id="paragraph 2" x="209" y="526" width="670" height="71.5" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="Counted as a cohort: every person here e…" x="209" y="552" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Counted as a cohort: every person here entered at the first step inside the window and is followed through in order. Someone</text>
+      <text id="who signed up last month and paid this m…" x="209" y="571.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">who signed up last month and paid this month is not in these numbers, so this reads lower than a per-step total over the same</text>
+      <text id="period — and it is the one that answers …" x="209" y="591" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">period — and it is the one that answers “what happens to the people we get”.</text>
+  </g>
+  <text id="Metric Alert List label" x="64" y="4330.5" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Metric Alert List</text>
+  <text id="metric-alert-list id" x="64" y="4344.5" font-family="ui-monospace, monospace" font-size="12" fill="#737373">metric-alert-list</text>
+  <g id="Metric Alert List" transform="translate(64, 4362.5)">
+    <rect id="container" x="0" y="0" width="1088" height="543" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="section" x="1" y="1" width="1086" height="541" fill="#fdfcf8" />
+      <text id="Alerts, and how close they are" x="160" y="89" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="24" font-weight="600" letter-spacing="-0.6">Alerts, and how close they are</text>
+      <text id="An alert that has never fired looks iden…" x="160" y="119" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">An alert that has never fired looks identical to an alert that is broken. Showing the current distance to the threshold is what</text>
+      <text id="tells the two apart at a glance." x="160" y="139" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">tells the two apart at a glance.</text>
+      <rect id="container 2" x="160" y="177" width="768" height="301" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <rect id="button" x="161" y="178" width="766" height="74" fill="rgba(242, 242, 237, 0.4)" />
+      <text id="Error rate above 1%" x="181" y="208" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Error rate above 1%</text>
+      <text id="Currently 0.08%. Fired twice this quarte…" x="181" y="230" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Currently 0.08%. Fired twice this quarter, both real.</text>
+      <rect id="container 3" x="834.14" y="203" width="72.86" height="24" rx="12" fill="rgba(0, 128, 49, 0.102)" />
+      <text id="12x under" x="834.14" y="215" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">12x under</text>
+      <text id="p95 latency above 800 ms" x="181" y="283" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">p95 latency above 800 ms</text>
+      <text id="Currently 690 ms and climbing through th…" x="181" y="305" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Currently 690 ms and climbing through the week.</text>
+      <rect id="container 4" x="829.81" y="278" width="77.19" height="24" rx="12" fill="#e0f0e7" />
+      <text id="14% under" x="829.81" y="290" fill="#13161a" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">14% under</text>
+      <text id="Queue depth above 5,000" x="181" y="358" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Queue depth above 5,000</text>
+      <text id="Currently 4,880. This is the one to look…" x="181" y="380" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Currently 4,880. This is the one to look at first.</text>
+      <rect id="container 5" x="834.89" y="353" width="72.11" height="24" rx="12" fill="rgba(226, 0, 10, 0.102)" />
+      <text id="2% under" x="834.89" y="365" fill="#e7000b" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">2% under</text>
+      <text id="Daily signups below 20" x="181" y="433" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Daily signups below 20</text>
+      <text id="Currently 74. A floor alert, so under is…" x="181" y="455" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Currently 74. A floor alert, so under is the safe side.</text>
+      <rect id="container 6" x="846.81" y="428" width="60.19" height="24" rx="12" fill="rgba(0, 128, 49, 0.102)" />
+      <text id="healthy" x="846.81" y="440" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">healthy</text>
+  </g>
+  <text id="KPI Summary Band label" x="64" y="5021.5" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">KPI Summary Band</text>
+  <text id="kpi-summary-band id" x="64" y="5035.5" font-family="ui-monospace, monospace" font-size="12" fill="#737373">kpi-summary-band</text>
+  <g id="KPI Summary Band" transform="translate(64, 5053.5)">
+    <rect id="container" x="0" y="0" width="1088" height="508" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="section" x="1" y="1" width="1086" height="506" fill="#fdfcf8" />
+      <text id="This month" x="32" y="95" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">This month</text>
+      <text id="The four numbers the team looks at" x="32" y="145" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="600" letter-spacing="-0.9">The four numbers the team looks at</text>
+      <text id="Every figure names what it is being comp…" x="32" y="178" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">Every figure names what it is being compared against. A delta with no stated period is the most</text>
+      <text id="common way a dashboard misleads the peop…" x="32" y="202" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">common way a dashboard misleads the people who built it.</text>
+      <rect id="container 2" x="32" y="249" width="1024" height="178" rx="16" fill="#dbdee1" stroke="#dbdee1" stroke-width="1" />
+      <rect id="container 3" x="33" y="250" width="254.75" height="176" fill="#ffffff" />
+      <text id="Active workspaces" x="57" y="288" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Active workspaces</text>
+      <text id="3,412" x="57" y="332" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="30" font-weight="600" letter-spacing="-0.75">3,412</text>
+      <text id="+7.2% on the previous 30 days," x="57" y="356" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">+7.2% on the previous 30 days,</text>
+      <text id="not on last calendar month." x="57" y="376" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">not on last calendar month.</text>
+      <rect id="container 4" x="288.75" y="250" width="254.75" height="176" fill="#ffffff" />
+      <text id="Net revenue retention" x="312.75" y="288" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Net revenue retention</text>
+      <text id="112%" x="312.75" y="332" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="30" font-weight="600" letter-spacing="-0.75">112%</text>
+      <text id="Trailing twelve months," x="312.75" y="356" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Trailing twelve months,</text>
+      <text id="expansion minus churn and" x="312.75" y="376" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">expansion minus churn and</text>
+      <text id="contraction." x="312.75" y="396" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">contraction.</text>
+      <rect id="container 5" x="544.5" y="250" width="254.75" height="176" fill="#ffffff" />
+      <text id="p95 latency" x="568.5" y="288" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">p95 latency</text>
+      <text id="412 ms" x="568.5" y="332" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="30" font-weight="600" letter-spacing="-0.75">412 ms</text>
+      <text id="Same period, all regions. p50 is" x="568.5" y="356" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Same period, all regions. p50 is</text>
+      <text id="96 ms and hides this." x="568.5" y="376" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">96 ms and hides this.</text>
+      <rect id="container 6" x="800.25" y="250" width="254.75" height="176" fill="#ffffff" />
+      <text id="Open incidents" x="824.25" y="288" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Open incidents</text>
+      <text id="1" x="824.25" y="332" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="30" font-weight="600" letter-spacing="-0.75">1</text>
+      <text id="Degraded, not down. Public" x="824.25" y="356" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Degraded, not down. Public</text>
+      <text id="status page has the detail." x="824.25" y="376" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">status page has the detail.</text>
+  </g>
+</svg>

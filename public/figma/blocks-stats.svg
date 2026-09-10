@@ -1,0 +1,233 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1216" height="4869" viewBox="0 0 1216 4869" id="Hoverlab — Stats">
+  <!--
+    Hoverlab — Stats. 7 sections, traced from the
+    rendered catalog. Drag this file onto a Figma canvas.
+
+    These are frames, not components: named, editable layers with real
+    geometry, colour and type. There are no variants, no auto-layout,
+    and no hover or motion — none of those exist in a static frame.
+
+    Every section here is free to copy as code at https://hoverlab.dev/blocks
+  -->
+  <rect id="Background" x="0" y="0" width="1216" height="4869" fill="#ffffff" />
+  <text id="Hairline Stats Band label" x="64" y="84" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Hairline Stats Band</text>
+  <text id="stats-band id" x="64" y="98" font-family="ui-monospace, monospace" font-size="12" fill="#737373">stats-band</text>
+  <g id="Hairline Stats Band" transform="translate(64, 116)">
+    <rect id="container" x="0" y="0" width="1088" height="230" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="33" y="49" width="1022" height="132" rx="16" fill="rgba(220, 222, 225, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 3" x="34" y="50" width="254.25" height="130" fill="rgba(252, 251, 248, 0.8)" />
+      <text id="12,000+" x="161.13" y="110" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="800" letter-spacing="-0.9" text-anchor="middle">12,000+</text>
+      <text id="Developers" x="161.13" y="132" fill="rgba(8, 11, 15, 0.8)" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Developers</text>
+      <text id="Shipping with it weekly" x="161.13" y="152" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" text-anchor="middle">Shipping with it weekly</text>
+      <rect id="container 4" x="289.25" y="50" width="254.25" height="130" fill="rgba(252, 251, 248, 0.8)" />
+      <text id="99.99%" x="416.38" y="110" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="800" letter-spacing="-0.9" text-anchor="middle">99.99%</text>
+      <text id="Uptime" x="416.38" y="132" fill="rgba(8, 11, 15, 0.8)" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Uptime</text>
+      <text id="Trailing twelve months" x="416.38" y="152" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" text-anchor="middle">Trailing twelve months</text>
+      <rect id="container 5" x="544.5" y="50" width="254.25" height="130" fill="rgba(252, 251, 248, 0.8)" />
+      <text id="&lt;40ms" x="671.63" y="110" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="800" letter-spacing="-0.9" text-anchor="middle">&lt;40ms</text>
+      <text id="Median latency" x="671.63" y="132" fill="rgba(8, 11, 15, 0.8)" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Median latency</text>
+      <text id="Measured at the edge" x="671.63" y="152" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" text-anchor="middle">Measured at the edge</text>
+      <rect id="container 6" x="799.75" y="50" width="254.25" height="130" fill="rgba(252, 251, 248, 0.8)" />
+      <text id="24/7" x="926.88" y="110" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="800" letter-spacing="-0.9" text-anchor="middle">24/7</text>
+      <text id="Support" x="926.88" y="132" fill="rgba(8, 11, 15, 0.8)" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Support</text>
+      <text id="Real humans, every timezone" x="926.88" y="152" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" text-anchor="middle">Real humans, every timezone</text>
+  </g>
+  <text id="Stat Cards with Deltas label" x="64" y="462" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Stat Cards with Deltas</text>
+  <text id="stats-cards id" x="64" y="476" font-family="ui-monospace, monospace" font-size="12" fill="#737373">stats-cards</text>
+  <g id="Stat Cards with Deltas" transform="translate(64, 494)">
+    <rect id="container" x="0" y="0" width="1088" height="324" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="How the quarter is going" x="25" y="95" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="30" font-weight="700" letter-spacing="-0.75">How the quarter is going</text>
+      <rect id="container 2" x="25" y="133" width="247.5" height="126" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Monthly recurring revenue" x="46" y="168" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Monthly recurring revenue</text>
+      <text id="$48.2k" x="46" y="212" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="30" font-weight="800" letter-spacing="-0.75">$48.2k</text>
+      <text id="+12.4%" x="149.42" y="209" fill="#009966" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">+12.4%</text>
+      <text id="vs. previous 30 days" x="46" y="234" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">vs. previous 30 days</text>
+      <rect id="container 3" x="288.5" y="133" width="247.5" height="126" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Active workspaces" x="309.5" y="168" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Active workspaces</text>
+      <text id="1,284" x="309.5" y="212" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="30" font-weight="800" letter-spacing="-0.75">1,284</text>
+      <text id="+3.1%" x="392.42" y="209" fill="#009966" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">+3.1%</text>
+      <text id="vs. previous 30 days 2" x="309.5" y="234" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">vs. previous 30 days</text>
+      <rect id="container 4" x="552" y="133" width="247.5" height="126" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Churn" x="573" y="168" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Churn</text>
+      <text id="1.8%" x="573" y="212" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="30" font-weight="800" letter-spacing="-0.75">1.8%</text>
+      <text id="−0.4pt" x="647.02" y="209" fill="#009966" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">−0.4pt</text>
+      <text id="Lower is better" x="573" y="234" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Lower is better</text>
+      <rect id="container 5" x="815.5" y="133" width="247.5" height="126" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Median response time" x="836.5" y="168" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Median response time</text>
+      <text id="142ms" x="836.5" y="212" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="30" font-weight="800" letter-spacing="-0.75">142ms</text>
+      <text id="0.0%" x="934.84" y="209" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">0.0%</text>
+      <text id="vs. previous 30 days 3" x="836.5" y="234" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">vs. previous 30 days</text>
+  </g>
+  <text id="Stats Beside the Argument label" x="64" y="934" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Stats Beside the Argument</text>
+  <text id="stats-narrative id" x="64" y="948" font-family="ui-monospace, monospace" font-size="12" fill="#737373">stats-narrative</text>
+  <g id="Stats Beside the Argument" transform="translate(64, 966)">
+    <rect id="container" x="0" y="0" width="1088" height="507.5" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Results" x="33" y="116.75" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" letter-spacing="0.7">Results</text>
+      <text id="The case for switching," x="33" y="166.75" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="700" letter-spacing="-0.9">The case for switching,</text>
+      <text id="in four numbers we will" x="33" y="206.75" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="700" letter-spacing="-0.9">in four numbers we will</text>
+      <text id="show our working on" x="33" y="246.75" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="700" letter-spacing="-0.9">show our working on</text>
+      <text id="None of these are from a launch week. Th…" x="33" y="292.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">None of these are from a launch week. They are medians across</text>
+      <text id="every account that has been on the platf…" x="33" y="318.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">every account that has been on the platform for a full year,</text>
+      <text id="including the ones that churned — which …" x="33" y="344.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">including the ones that churned — which is why the figures are</text>
+      <text id="lower than the ones on our competitors’ …" x="33" y="370.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">lower than the ones on our competitors’ pages and why we are</text>
+      <text id="willing to name the sample size." x="33" y="396.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">willing to name the sample size.</text>
+      <rect id="container 2" x="576" y="65" width="479" height="377.5" rx="16" fill="rgba(220, 222, 225, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 3" x="577" y="66" width="238" height="195.5" fill="#ffffff" />
+      <text id="31%" x="609" y="134" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="700" letter-spacing="-0.9">31%</text>
+      <text id="lower cost per resolved" x="609" y="160" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">lower cost per resolved</text>
+      <text id="ticket" x="609" y="179.25" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">ticket</text>
+      <text id="Median across 412 accounts, 12" x="609" y="208.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Median across 412 accounts, 12</text>
+      <text id="months" x="609" y="225" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">months</text>
+      <rect id="container 4" x="816" y="66" width="238" height="195.5" fill="#ffffff" />
+      <text id="11 min" x="848" y="134" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="700" letter-spacing="-0.9">11 min</text>
+      <text id="median first response," x="848" y="160" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">median first response,</text>
+      <text id="from 3.2 hrs" x="848" y="179.25" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">from 3.2 hrs</text>
+      <text id="Platform telemetry, Q2 2026" x="848" y="208.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Platform telemetry, Q2 2026</text>
+      <rect id="container 5" x="577" y="262.5" width="238" height="179" fill="#ffffff" />
+      <text id="4 weeks" x="609" y="330.5" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="700" letter-spacing="-0.9">4 weeks</text>
+      <text id="median pilot to full rollout" x="609" y="356.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">median pilot to full rollout</text>
+      <text id="Onboarding records, 2025–26" x="609" y="385.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Onboarding records, 2025–26</text>
+      <rect id="container 6" x="816" y="262.5" width="238" height="179" fill="#ffffff" />
+      <text id="94%" x="848" y="330.5" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="700" letter-spacing="-0.9">94%</text>
+      <text id="of accounts renew at" x="848" y="356.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">of accounts renew at</text>
+      <text id="twelve months" x="848" y="375.75" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">twelve months</text>
+      <text id="Billing, cohort of 2,180" x="848" y="405" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Billing, cohort of 2,180</text>
+  </g>
+  <text id="Before-and-After Metric Table label" x="64" y="1589.5" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Before-and-After Metric Table</text>
+  <text id="stats-comparison id" x="64" y="1603.5" font-family="ui-monospace, monospace" font-size="12" fill="#737373">stats-comparison</text>
+  <g id="Before-and-After Metric Table" transform="translate(64, 1621.5)">
+    <rect id="container" x="0" y="0" width="1088" height="738.5" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Before and after" x="544" y="79" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" letter-spacing="0.7" text-anchor="middle">Before and after</text>
+      <text id="Measured against what you are" x="543.99" y="129" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="700" letter-spacing="-0.9" text-anchor="middle">Measured against what you are</text>
+      <text id="doing now, not against last quarter" x="543.99" y="169" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="700" letter-spacing="-0.9" text-anchor="middle">doing now, not against last quarter</text>
+      <text id="Metric" x="220.83" y="239" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Metric</text>
+      <text id="Shared inbox and a rota" x="514.4" y="239" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Shared inbox and a rota</text>
+      <text id="On the platform" x="754.01" y="239" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">On the platform</text>
+      <text id="Change" x="856.88" y="239" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Change</text>
+      <text id="Median first response" x="220.83" y="292" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Median first response</text>
+      <text id="3.2 hrs" x="377.66" y="296" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="18">3.2 hrs</text>
+      <text id="11 min" x="651.14" y="296" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700">11 min</text>
+      <rect id="container 2" x="928.34" y="299.5" width="95.66" height="24" rx="12" fill="rgba(0, 128, 49, 0.102)" />
+      <text id="94% faster" x="928.34" y="311.5" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600">94% faster</text>
+      <text id="Tickets escalated to engineering" x="220.83" y="360.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Tickets escalated to engineering</text>
+      <text id="1 in 6" x="377.66" y="364.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="18">1 in 6</text>
+      <text id="1 in 12" x="651.14" y="364.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700">1 in 12</text>
+      <rect id="container 3" x="928.69" y="368.5" width="95.31" height="24" rx="12" fill="rgba(0, 128, 49, 0.102)" />
+      <text id="48% fewer" x="928.69" y="380.5" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600">48% fewer</text>
+      <text id="Resolved without a second reply" x="220.83" y="429.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Resolved without a second reply</text>
+      <text id="41%" x="377.66" y="433.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="18">41%</text>
+      <text id="73%" x="651.14" y="433.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700">73%</text>
+      <rect id="container 4" x="944.3" y="437.5" width="79.7" height="24" rx="12" fill="rgba(0, 128, 49, 0.102)" />
+      <text id="+32 pts" x="944.3" y="449.5" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600">+32 pts</text>
+      <text id="Cost per resolved ticket" x="220.83" y="498.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Cost per resolved ticket</text>
+      <text id="$4.90" x="377.66" y="502.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="18">$4.90</text>
+      <text id="$3.38" x="651.14" y="502.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700">$3.38</text>
+      <rect id="container 5" x="930.98" y="506.5" width="93.02" height="24" rx="12" fill="rgba(0, 128, 49, 0.102)" />
+      <text id="31% lower" x="930.98" y="518.5" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600">31% lower</text>
+      <text id="Hours a week spent on triage" x="220.83" y="567.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Hours a week spent on triage</text>
+      <text id="22" x="377.66" y="571.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="18">22</text>
+      <text id="6" x="651.14" y="571.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700">6</text>
+      <rect id="container 6" x="925.91" y="575.5" width="98.09" height="24" rx="12" fill="rgba(0, 128, 49, 0.102)" />
+      <text id="16 hrs back" x="925.91" y="587.5" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600">16 hrs back</text>
+      <text id="Medians across 412 accounts over twelve …" x="544" y="666" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" text-anchor="middle">Medians across 412 accounts over twelve months. “Before” figures are the ones those teams reported at the start of their pilot.</text>
+  </g>
+  <text id="Milestone Timeline label" x="64" y="2476" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Milestone Timeline</text>
+  <text id="stats-timeline id" x="64" y="2490" font-family="ui-monospace, monospace" font-size="12" fill="#737373">stats-timeline</text>
+  <g id="Milestone Timeline" transform="translate(64, 2508)">
+    <rect id="container" x="0" y="0" width="1088" height="1024.5" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Six years" x="192" y="79" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" letter-spacing="0.7">Six years</text>
+      <text id="Growth is a line, not a number" x="192" y="133" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="700" letter-spacing="-0.9">Growth is a line, not a number</text>
+      <rect id="container 2" x="188" y="193" width="10" height="10" rx="5" fill="#007f34" />
+      <text id="2021" x="233" y="199" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">2021</text>
+      <text id="12" x="233" y="245" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="700" letter-spacing="-0.9">12</text>
+      <text id="customers" x="280.63" y="242" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">customers</text>
+      <text id="Two founders, one region, and a product …" x="233" y="272" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Two founders, one region, and a product that only did ticket routing.</text>
+      <rect id="container 3" x="188" y="328.75" width="10" height="10" rx="5" fill="#007f34" />
+      <text id="2022" x="233" y="334.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">2022</text>
+      <text id="190" x="233" y="380.75" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="700" letter-spacing="-0.9">190</text>
+      <text id="customers 2" x="300.42" y="377.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">customers</text>
+      <text id="The API shipped. Half of that year’s sig…" x="233" y="407.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">The API shipped. Half of that year’s signups came through it.</text>
+      <rect id="container 4" x="188" y="464.5" width="10" height="10" rx="5" fill="#007f34" />
+      <text id="2023" x="233" y="470.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">2023</text>
+      <text id="1,100" x="233" y="516.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="700" letter-spacing="-0.9">1,100</text>
+      <text id="customers 3" x="329.09" y="513.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">customers</text>
+      <text id="First enterprise contract, and the audit…" x="233" y="543.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">First enterprise contract, and the audit tooling it forced us to build.</text>
+      <rect id="container 5" x="188" y="600.25" width="10" height="10" rx="5" fill="#007f34" />
+      <text id="2024" x="233" y="606.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">2024</text>
+      <text id="2,400" x="233" y="652.25" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="700" letter-spacing="-0.9">2,400</text>
+      <text id="customers 4" x="329.09" y="649.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">customers</text>
+      <text id="Broke even in Q3 and have not raised sin…" x="233" y="679.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Broke even in Q3 and have not raised since.</text>
+      <rect id="container 6" x="188" y="736" width="10" height="10" rx="5" fill="#007f34" />
+      <text id="2025" x="233" y="742" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">2025</text>
+      <text id="3,300" x="233" y="788" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="700" letter-spacing="-0.9">3,300</text>
+      <text id="customers 5" x="329.09" y="785" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">customers</text>
+      <text id="Opened Frankfurt and Sydney. Data reside…" x="233" y="815" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Opened Frankfurt and Sydney. Data residency stopped being a blocker.</text>
+      <rect id="container 7" x="188" y="871.75" width="10" height="10" rx="5" fill="#007f34" />
+      <text id="2026" x="233" y="877.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">2026</text>
+      <text id="4,180" x="233" y="923.75" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="700" letter-spacing="-0.9">4,180</text>
+      <text id="customers 6" x="329.09" y="920.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">customers</text>
+      <text id="94% of them renewed at twelve months." x="233" y="950.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">94% of them renewed at twelve months.</text>
+  </g>
+  <text id="Benchmark Stat Band label" x="64" y="3648.5" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Benchmark Stat Band</text>
+  <text id="stats-benchmark-band id" x="64" y="3662.5" font-family="ui-monospace, monospace" font-size="12" fill="#737373">stats-benchmark-band</text>
+  <g id="Benchmark Stat Band" transform="translate(64, 3680.5)">
+    <rect id="container" x="0" y="0" width="1088" height="488" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="section" x="1" y="1" width="1086" height="486" fill="#fdfcf8" />
+      <text id="Measured, not claimed" x="32" y="95" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Measured, not claimed</text>
+      <text id="How fast it is, and how we know" x="32" y="145" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="600" letter-spacing="-0.9">How fast it is, and how we know</text>
+      <text id="Every number below names the conditions …" x="32" y="178" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">Every number below names the conditions it was taken under. A benchmark without its</text>
+      <text id="method is a marketing figure wearing a l…" x="32" y="202" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">method is a marketing figure wearing a lab coat.</text>
+      <rect id="container 2" x="32" y="249" width="1024" height="158" rx="16" fill="#dbdee1" stroke="#dbdee1" stroke-width="1" />
+      <rect id="container 3" x="33" y="250" width="254.75" height="156" fill="#ffffff" />
+      <text id="Cold start" x="57" y="288" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Cold start</text>
+      <text id="112 ms" x="57" y="332" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="30" font-weight="600" letter-spacing="-0.75">112 ms</text>
+      <text id="p50 over 10,000 invocations," x="57" y="356" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">p50 over 10,000 invocations,</text>
+      <text id="Frankfurt, empty cache." x="57" y="376" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Frankfurt, empty cache.</text>
+      <rect id="container 4" x="288.75" y="250" width="254.75" height="156" fill="#ffffff" />
+      <text id="Query throughput" x="312.75" y="288" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Query throughput</text>
+      <text id="24.6k/s" x="312.75" y="332" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="30" font-weight="600" letter-spacing="-0.75">24.6k/s</text>
+      <text id="Single node, 4 vCPU, read-only" x="312.75" y="356" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Single node, 4 vCPU, read-only</text>
+      <text id="workload." x="312.75" y="376" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">workload.</text>
+      <rect id="container 5" x="544.5" y="250" width="254.75" height="156" fill="#ffffff" />
+      <text id="Index rebuild" x="568.5" y="288" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Index rebuild</text>
+      <text id="38 s" x="568.5" y="332" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="30" font-weight="600" letter-spacing="-0.75">38 s</text>
+      <text id="One million rows, measured wall-" x="568.5" y="356" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">One million rows, measured wall-</text>
+      <text id="clock end to end." x="568.5" y="376" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">clock end to end.</text>
+      <rect id="container 6" x="800.25" y="250" width="254.75" height="156" fill="#ffffff" />
+      <text id="Memory ceiling" x="824.25" y="288" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Memory ceiling</text>
+      <text id="512 MB" x="824.25" y="332" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="30" font-weight="600" letter-spacing="-0.75">512 MB</text>
+      <text id="Peak RSS under the throughput" x="824.25" y="356" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Peak RSS under the throughput</text>
+      <text id="run above." x="824.25" y="376" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">run above.</text>
+  </g>
+  <text id="Security Posture Band label" x="64" y="4284.5" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Security Posture Band</text>
+  <text id="security-posture-band id" x="64" y="4298.5" font-family="ui-monospace, monospace" font-size="12" fill="#737373">security-posture-band</text>
+  <g id="Security Posture Band" transform="translate(64, 4316.5)">
+    <rect id="container" x="0" y="0" width="1088" height="488" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="section" x="1" y="1" width="1086" height="486" fill="#fdfcf8" />
+      <text id="Security" x="32" y="95" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Security</text>
+      <text id="What a reviewer will ask, answered first" x="32" y="145" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="600" letter-spacing="-0.9">What a reviewer will ask, answered first</text>
+      <text id="A wall of certification logos answers no…" x="32" y="178" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">A wall of certification logos answers none of these. Each figure names its scope, because a</text>
+      <text id="control that covers one environment and …" x="32" y="202" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">control that covers one environment and not the other is the thing a reviewer is looking for.</text>
+      <rect id="container 2" x="32" y="249" width="1024" height="158" rx="16" fill="#dbdee1" stroke="#dbdee1" stroke-width="1" />
+      <rect id="container 3" x="33" y="250" width="254.75" height="156" fill="#ffffff" />
+      <text id="Encryption at rest" x="57" y="288" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Encryption at rest</text>
+      <text id="AES-256" x="57" y="332" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="30" font-weight="600" letter-spacing="-0.75">AES-256</text>
+      <text id="Every store, including backups" x="57" y="356" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Every store, including backups</text>
+      <text id="and the search index." x="57" y="376" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">and the search index.</text>
+      <rect id="container 4" x="288.75" y="250" width="254.75" height="156" fill="#ffffff" />
+      <text id="Median patch time" x="312.75" y="288" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Median patch time</text>
+      <text id="31 h" x="312.75" y="332" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="30" font-weight="600" letter-spacing="-0.75">31 h</text>
+      <text id="Critical CVEs, from advisory to" x="312.75" y="356" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Critical CVEs, from advisory to</text>
+      <text id="production, trailing year." x="312.75" y="376" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">production, trailing year.</text>
+      <rect id="container 5" x="544.5" y="250" width="254.75" height="156" fill="#ffffff" />
+      <text id="Data regions" x="568.5" y="288" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Data regions</text>
+      <text id="4" x="568.5" y="332" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="30" font-weight="600" letter-spacing="-0.75">4</text>
+      <text id="EU, US, UK and AU. Pinned per" x="568.5" y="356" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">EU, US, UK and AU. Pinned per</text>
+      <text id="workspace, never replicated out." x="568.5" y="376" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">workspace, never replicated out.</text>
+      <rect id="container 6" x="800.25" y="250" width="254.75" height="156" fill="#ffffff" />
+      <text id="Access reviews" x="824.25" y="288" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Access reviews</text>
+      <text id="Quarterly" x="824.25" y="332" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="30" font-weight="600" letter-spacing="-0.75">Quarterly</text>
+      <text id="All production access, logged" x="824.25" y="356" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">All production access, logged</text>
+      <text id="and exportable." x="824.25" y="376" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">and exportable.</text>
+  </g>
+</svg>

@@ -1,0 +1,574 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1216" height="6184" viewBox="0 0 1216 6184" id="Hoverlab — Dashboards">
+  <!--
+    Hoverlab — Dashboards. 10 sections, traced from the
+    rendered catalog. Drag this file onto a Figma canvas.
+
+    These are frames, not components: named, editable layers with real
+    geometry, colour and type. There are no variants, no auto-layout,
+    and no hover or motion — none of those exist in a static frame.
+
+    Every section here is free to copy as code at https://hoverlab.dev/blocks
+  -->
+  <rect id="Background" x="0" y="0" width="1216" height="6184" fill="#ffffff" />
+  <text id="Sidebar Dashboard Shell label" x="64" y="84" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Sidebar Dashboard Shell</text>
+  <text id="dashboard-shell id" x="64" y="98" font-family="ui-monospace, monospace" font-size="12" fill="#737373">dashboard-shell</text>
+  <g id="Sidebar Dashboard Shell" transform="translate(64, 116)">
+    <rect id="container" x="0" y="0" width="1088" height="514" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="1" y="1" width="1086" height="512" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="aside" x="2" y="2" width="240" height="510" fill="rgba(255, 255, 255, 0.4)" />
+      <rect id="container 3" x="22" y="15.5" width="28" height="28" rx="12" fill="#007f34" />
+      <text id="A" x="22" y="27.5" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="700">A</text>
+      <text id="Acme Inc" x="58" y="33.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600" letter-spacing="-0.4">Acme Inc</text>
+      <rect id="link" x="14" y="70" width="215" height="36" rx="16" fill="rgba(0, 128, 49, 0.102)" />
+      <text id="Overview" x="54" y="92" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Overview</text>
+      <text id="Customers" x="54" y="132" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Customers</text>
+      <rect id="container 4" x="193.5" y="118" width="23.5" height="20" rx="10" fill="#f3f2ee" />
+      <text id="12" x="193.5" y="130" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">12</text>
+      <text id="Analytics" x="54" y="172" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Analytics</text>
+      <text id="Settings" x="54" y="212" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Settings</text>
+      <rect id="container 5" x="2" y="435" width="239" height="77" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 6" x="22" y="458" width="32" height="32" rx="16" fill="#f3f2ee" />
+      <text id="AL" x="22" y="470" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="700">AL</text>
+      <text id="Ada Lovelace" x="66" y="470" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Ada Lovelace</text>
+      <text id="ada@acme.com" x="66" y="488" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">ada@acme.com</text>
+      <rect id="field" x="258" y="12.5" width="320" height="34" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 7" x="1056" y="19.5" width="8" height="8" rx="4" fill="#007f34" />
+      <rect id="container 8" x="266" y="82" width="796" height="406" rx="16" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Your page content goes here" x="266" y="96" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Your page content goes here</text>
+  </g>
+  <text id="KPI Cards With Deltas label" x="64" y="746" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">KPI Cards With Deltas</text>
+  <text id="dashboard-stat-cards id" x="64" y="760" font-family="ui-monospace, monospace" font-size="12" fill="#737373">dashboard-stat-cards</text>
+  <g id="KPI Cards With Deltas" transform="translate(64, 778)">
+    <rect id="container" x="0" y="0" width="1088" height="148" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="1" y="1" width="259.5" height="146" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Monthly revenue" x="22" y="42" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Monthly revenue</text>
+      <rect id="container 3" x="207.5" y="22" width="32" height="32" rx="12" fill="#f3f2ee" />
+      <text id="$48,290" x="22" y="96" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="30" font-weight="800" letter-spacing="-0.75">$48,290</text>
+      <text id="+12.5%" x="22" y="122" fill="#009966" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600">+12.5%</text>
+      <text id="vs last month" x="83.48" y="122" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">vs last month</text>
+      <rect id="container 4" x="276.5" y="1" width="259.5" height="146" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Active users" x="297.5" y="42" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Active users</text>
+      <rect id="container 5" x="483" y="22" width="32" height="32" rx="12" fill="#f3f2ee" />
+      <text id="2,847" x="297.5" y="96" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="30" font-weight="800" letter-spacing="-0.75">2,847</text>
+      <text id="+8.2%" x="297.5" y="122" fill="#009966" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600">+8.2%</text>
+      <text id="vs last month 2" x="354.16" y="122" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">vs last month</text>
+      <rect id="container 6" x="552" y="1" width="259.5" height="146" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Avg. session" x="573" y="42" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Avg. session</text>
+      <rect id="container 7" x="758.5" y="22" width="32" height="32" rx="12" fill="#f3f2ee" />
+      <text id="4m 32s" x="573" y="96" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="30" font-weight="800" letter-spacing="-0.75">4m 32s</text>
+      <text id="-3.1%" x="573" y="122" fill="#e7000b" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600">-3.1%</text>
+      <text id="vs last month 3" x="624.31" y="122" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">vs last month</text>
+      <rect id="container 8" x="827.5" y="1" width="259.5" height="146" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Churn rate" x="848.5" y="42" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Churn rate</text>
+      <rect id="container 9" x="1034" y="22" width="32" height="32" rx="12" fill="#f3f2ee" />
+      <text id="1.8%" x="848.5" y="96" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="30" font-weight="800" letter-spacing="-0.75">1.8%</text>
+      <text id="-0.4%" x="848.5" y="122" fill="#009966" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600">-0.4%</text>
+      <text id="vs last month 4" x="901.89" y="122" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">vs last month</text>
+  </g>
+  <text id="Activity Feed Panel label" x="64" y="1042" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Activity Feed Panel</text>
+  <text id="dashboard-activity-feed id" x="64" y="1056" font-family="ui-monospace, monospace" font-size="12" fill="#737373">dashboard-activity-feed</text>
+  <g id="Activity Feed Panel" transform="translate(64, 1074)">
+    <rect id="container" x="0" y="0" width="1088" height="391.25" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="section" x="1" y="1" width="1086" height="389.25" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Recent activity" x="22" y="34" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600" letter-spacing="-0.4">Recent activity</text>
+      <rect id="container 2" x="22" y="75" width="28" height="28" rx="12" fill="rgba(255, 154, 0, 0.149)" />
+      <text id="Northwind Ltd" x="62" y="87" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Northwind Ltd</text>
+      <text id="upgraded to" x="158.48" y="87" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">upgraded to</text>
+      <text id="Team annual" x="235.47" y="87" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Team annual</text>
+      <text id="18 minutes ago" x="62" y="106.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">18 minutes ago</text>
+      <rect id="container 3" x="22" y="141.25" width="28" height="28" rx="12" fill="rgba(0, 188, 128, 0.149)" />
+      <text id="Marco Silva" x="62" y="153.25" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Marco Silva</text>
+      <text id="created an account" x="139.06" y="153.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">created an account</text>
+      <text id="3 hours ago" x="62" y="172.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">3 hours ago</text>
+      <rect id="container 4" x="22" y="207.5" width="28" height="28" rx="12" fill="rgba(141, 81, 255, 0.149)" />
+      <text id="Priya Raman" x="62" y="219.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Priya Raman</text>
+      <text id="commented on" x="145.05" y="219.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">commented on</text>
+      <text id="Billing migration" x="239.36" y="219.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Billing migration</text>
+      <text id="20 hours ago" x="62" y="238.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">20 hours ago</text>
+      <rect id="container 5" x="22" y="273.75" width="28" height="28" rx="12" fill="rgba(0, 168, 248, 0.149)" />
+      <text id="Alex Chen" x="62" y="285.75" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Alex Chen</text>
+      <text id="pushed 3 commits to" x="129.66" y="285.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">pushed 3 commits to</text>
+      <text id="main" x="260.11" y="285.75" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">main</text>
+      <text id="yesterday" x="62" y="305" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">yesterday</text>
+      <rect id="container 6" x="22" y="340" width="28" height="28" rx="12" fill="rgba(0, 188, 128, 0.149)" />
+      <text id="Dana Whitfield" x="62" y="352" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Dana Whitfield</text>
+      <text id="created an account 2" x="160.92" y="352" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">created an account</text>
+      <text id="3 days ago" x="62" y="371.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">3 days ago</text>
+  </g>
+  <text id="Page Header With Tabs label" x="64" y="1581.25" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Page Header With Tabs</text>
+  <text id="dashboard-page-header id" x="64" y="1595.25" font-family="ui-monospace, monospace" font-size="12" fill="#737373">dashboard-page-header</text>
+  <g id="Page Header With Tabs" transform="translate(64, 1613.25)">
+    <rect id="container" x="0" y="0" width="1088" height="152" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Dashboard" x="1" y="15" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Dashboard</text>
+      <text id="Customers" x="90.48" y="15" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">Customers</text>
+      <text id="Customers 2" x="1" y="57" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="24" font-weight="700" letter-spacing="-0.6">Customers</text>
+      <text id="Everyone who has ever signed up, and whe…" x="1" y="83" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Everyone who has ever signed up, and where they stand today.</text>
+      <rect id="button" x="842.03" y="33" width="95.7" height="38" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Export" x="889.88" y="47" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Export</text>
+      <rect id="button 2" x="945.73" y="34" width="141.27" height="36" rx="16" fill="#007f34" />
+      <text id="Add customer" x="1016.37" y="48" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Add customer</text>
+      <text id="All" x="1" y="123" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">All</text>
+      <rect id="container 2" x="39.72" y="119" width="41.58" height="20" rx="10" fill="rgba(0, 128, 54, 0.149)" />
+      <text id="2,847" x="39.72" y="131" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">2,847</text>
+      <text id="Active" x="99.3" y="123" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Active</text>
+      <rect id="container 3" x="160.44" y="119" width="39.97" height="20" rx="10" fill="#f3f2ee" />
+      <text id="2,401" x="160.44" y="131" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">2,401</text>
+      <text id="Trialing" x="218.41" y="123" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Trialing</text>
+      <rect id="container 4" x="287.06" y="119" width="30.16" height="20" rx="10" fill="#f3f2ee" />
+      <text id="312" x="287.06" y="131" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">312</text>
+      <text id="Churned" x="335.22" y="123" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Churned</text>
+      <rect id="container 5" x="411.47" y="119" width="30.41" height="20" rx="10" fill="#f3f2ee" />
+      <text id="134" x="411.47" y="131" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">134</text>
+  </g>
+  <text id="Kanban Board Columns label" x="64" y="1881.25" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Kanban Board Columns</text>
+  <text id="kanban-board id" x="64" y="1895.25" font-family="ui-monospace, monospace" font-size="12" fill="#737373">kanban-board</text>
+  <g id="Kanban Board Columns" transform="translate(64, 1913.25)">
+    <rect id="container" x="0" y="0" width="1088" height="474.58" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Backlog" x="9" y="21" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" letter-spacing="-0.35">Backlog</text>
+      <rect id="container 2" x="64.7" y="7" width="22.67" height="20" rx="10" fill="#f3f2ee" />
+      <text id="3" x="64.7" y="19" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">3</text>
+      <rect id="list item" x="5" y="41" width="288" height="128.86" rx="16" fill="#ffffff" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 3" x="18" y="58" width="8" height="8" rx="4" fill="#ff2056" />
+      <text id="High" x="32" y="66" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">High</text>
+      <text id="HL-341" x="242.55" y="65.46" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="10.4">HL-341</text>
+      <text id="Rate-limit the export endpoint" x="18" y="90" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Rate-limit the export endpoint</text>
+      <rect id="container 4" x="18" y="103.25" width="26.42" height="19.61" rx="9.8" fill="#f4f2ea" />
+      <text id="api" x="18" y="113.65" fill="#13161a" font-family="ui-sans-serif, system-ui" font-size="10.4" font-weight="500">api</text>
+      <rect id="container 5" x="48.42" y="103.25" width="33.66" height="19.61" rx="9.8" fill="#f4f2ea" />
+      <text id="infra" x="48.42" y="113.65" fill="#13161a" font-family="ui-sans-serif, system-ui" font-size="10.4" font-weight="500">infra</text>
+      <rect id="container 6" x="18" y="132.86" width="24" height="24" rx="12" fill="#f3f2ee" />
+      <text id="AC" x="18" y="142.46" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="9.6" font-weight="600">AC</text>
+      <text id="Aug 19" x="224.17" y="148.86" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Aug 19</text>
+      <rect id="list item 2" x="5" y="179.86" width="288" height="128.86" rx="16" fill="#ffffff" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 7" x="18" y="196.86" width="8" height="8" rx="4" fill="#fe9a00" />
+      <text id="Medium" x="32" y="204.86" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Medium</text>
+      <text id="HL-338" x="242.55" y="204.32" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="10.4">HL-338</text>
+      <text id="Empty-state illustrations for search" x="18" y="228.86" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Empty-state illustrations for search</text>
+      <rect id="container 8" x="18" y="242.11" width="43.33" height="19.61" rx="9.8" fill="#f4f2ea" />
+      <text id="design" x="18" y="252.51" fill="#13161a" font-family="ui-sans-serif, system-ui" font-size="10.4" font-weight="500">design</text>
+      <rect id="container 9" x="18" y="271.72" width="24" height="24" rx="12" fill="#f3f2ee" />
+      <text id="DW" x="18" y="281.32" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="9.6" font-weight="600">DW</text>
+      <text id="Aug 21" x="224.17" y="287.72" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Aug 21</text>
+      <rect id="list item 3" x="5" y="318.72" width="288" height="128.86" rx="16" fill="#ffffff" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 10" x="18" y="335.72" width="8" height="8" rx="4" fill="#00a6f4" />
+      <text id="Low" x="32" y="343.72" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Low</text>
+      <text id="HL-329" x="242.55" y="343.18" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="10.4">HL-329</text>
+      <text id="Migrate billing webhooks to v2" x="18" y="367.72" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Migrate billing webhooks to v2</text>
+      <rect id="container 11" x="18" y="380.97" width="41.47" height="19.61" rx="9.8" fill="#f4f2ea" />
+      <text id="billing" x="18" y="391.37" fill="#13161a" font-family="ui-sans-serif, system-ui" font-size="10.4" font-weight="500">billing</text>
+      <rect id="container 12" x="18" y="410.58" width="24" height="24" rx="12" fill="#f3f2ee" />
+      <text id="RM" x="18" y="420.18" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="9.6" font-weight="600">RM</text>
+      <text id="Aug 25" x="224.17" y="426.58" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Aug 25</text>
+      <text id="In progress" x="313" y="21" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" letter-spacing="-0.35">In progress</text>
+      <rect id="container 13" x="388.11" y="7" width="22.67" height="20" rx="10" fill="#f3f2ee" />
+      <text id="3 2" x="388.11" y="19" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">3</text>
+      <rect id="list item 4" x="309" y="41" width="288" height="128.86" rx="16" fill="#ffffff" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 14" x="322" y="58" width="8" height="8" rx="4" fill="#ff2056" />
+      <text id="High 2" x="336" y="66" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">High</text>
+      <text id="HL-322" x="546.55" y="65.46" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="10.4">HL-322</text>
+      <text id="Checkout: support SEPA direct debit" x="322" y="90" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Checkout: support SEPA direct debit</text>
+      <rect id="container 15" x="322" y="103.25" width="57.91" height="19.61" rx="9.8" fill="#f4f2ea" />
+      <text id="payments" x="322" y="113.65" fill="#13161a" font-family="ui-sans-serif, system-ui" font-size="10.4" font-weight="500">payments</text>
+      <rect id="container 16" x="322" y="132.86" width="24" height="24" rx="12" fill="#f3f2ee" />
+      <text id="PR" x="322" y="142.46" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="9.6" font-weight="600">PR</text>
+      <text id="#482" x="539.5" y="148.86" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">#482</text>
+      <rect id="list item 5" x="309" y="179.86" width="288" height="150.86" rx="16" fill="rgba(235, 0, 20, 0.051)" stroke="rgba(230, 0, 10, 0.4)" stroke-width="1" />
+      <rect id="container 17" x="322" y="196.86" width="8" height="8" rx="4" fill="#fe9a00" />
+      <text id="Medium 2" x="336" y="204.86" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Medium</text>
+      <text id="HL-318" x="546.55" y="204.32" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="10.4">HL-318</text>
+      <text id="Rotate staging TLS certificates" x="322" y="228.86" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Rotate staging TLS certificates</text>
+      <text id="Blocked — Waiting on DNS delegation" x="322" y="252.11" fill="#e7000b" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Blocked — Waiting on DNS delegation</text>
+      <rect id="container 18" x="322" y="264.11" width="33.66" height="19.61" rx="9.8" fill="#f4f2ea" />
+      <text id="infra 2" x="322" y="274.51" fill="#13161a" font-family="ui-sans-serif, system-ui" font-size="10.4" font-weight="500">infra</text>
+      <rect id="container 19" x="322" y="293.72" width="24" height="24" rx="12" fill="#f3f2ee" />
+      <text id="SO" x="322" y="303.32" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="9.6" font-weight="600">SO</text>
+      <text id="Aug 14" x="528.17" y="309.72" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Aug 14</text>
+      <rect id="list item 6" x="309" y="340.72" width="288" height="128.86" rx="16" fill="#ffffff" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 20" x="322" y="357.72" width="8" height="8" rx="4" fill="#fe9a00" />
+      <text id="Medium 3" x="336" y="365.72" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Medium</text>
+      <text id="HL-325" x="546.55" y="365.18" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="10.4">HL-325</text>
+      <text id="New onboarding checklist" x="322" y="389.72" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">New onboarding checklist</text>
+      <rect id="container 21" x="322" y="402.97" width="45.92" height="19.61" rx="9.8" fill="#f4f2ea" />
+      <text id="growth" x="322" y="413.37" fill="#13161a" font-family="ui-sans-serif, system-ui" font-size="10.4" font-weight="500">growth</text>
+      <rect id="container 22" x="322" y="432.58" width="24" height="24" rx="12" fill="#f3f2ee" />
+      <text id="JW" x="322" y="442.18" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="9.6" font-weight="600">JW</text>
+      <text id="Aug 15" x="528.17" y="448.58" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Aug 15</text>
+      <text id="In review" x="617" y="21" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" letter-spacing="-0.35">In review</text>
+      <rect id="container 23" x="679.23" y="7" width="22.67" height="20" rx="10" fill="#f3f2ee" />
+      <text id="2" x="679.23" y="19" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">2</text>
+      <rect id="list item 7" x="613" y="41" width="288" height="128.86" rx="16" fill="#ffffff" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 24" x="626" y="58" width="8" height="8" rx="4" fill="#ff2056" />
+      <text id="High 3" x="640" y="66" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">High</text>
+      <text id="HL-314" x="850.55" y="65.46" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="10.4">HL-314</text>
+      <text id="Fix duplicate invoice emails" x="626" y="90" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Fix duplicate invoice emails</text>
+      <rect id="container 25" x="626" y="103.25" width="41.47" height="19.61" rx="9.8" fill="#f4f2ea" />
+      <text id="billing 2" x="626" y="113.65" fill="#13161a" font-family="ui-sans-serif, system-ui" font-size="10.4" font-weight="500">billing</text>
+      <rect id="container 26" x="626" y="132.86" width="24" height="24" rx="12" fill="#f3f2ee" />
+      <text id="RM 2" x="626" y="142.46" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="9.6" font-weight="600">RM</text>
+      <text id="#479" x="843.5" y="148.86" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">#479</text>
+      <rect id="list item 8" x="613" y="179.86" width="288" height="128.86" rx="16" fill="#ffffff" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 27" x="626" y="196.86" width="8" height="8" rx="4" fill="#00a6f4" />
+      <text id="Low 2" x="640" y="204.86" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Low</text>
+      <text id="HL-311" x="850.55" y="204.32" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="10.4">HL-311</text>
+      <text id="Dashboard loading skeletons" x="626" y="228.86" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Dashboard loading skeletons</text>
+      <rect id="container 28" x="626" y="242.11" width="43.33" height="19.61" rx="9.8" fill="#f4f2ea" />
+      <text id="design 2" x="626" y="252.51" fill="#13161a" font-family="ui-sans-serif, system-ui" font-size="10.4" font-weight="500">design</text>
+      <rect id="container 29" x="626" y="271.72" width="24" height="24" rx="12" fill="#f3f2ee" />
+      <text id="DW 2" x="626" y="281.32" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="9.6" font-weight="600">DW</text>
+      <text id="#476" x="843.5" y="287.72" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">#476</text>
+      <text id="Done" x="921" y="21" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" letter-spacing="-0.35">Done</text>
+      <rect id="container 30" x="961.61" y="7" width="22.67" height="20" rx="10" fill="#f3f2ee" />
+      <text id="2 2" x="961.61" y="19" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">2</text>
+      <rect id="list item 9" x="917" y="41" width="288" height="128.86" rx="16" fill="#ffffff" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 31" x="930" y="58" width="8" height="8" rx="4" fill="#fe9a00" />
+      <text id="Medium 4" x="944" y="66" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Medium</text>
+      <text id="HL-306" x="1154.55" y="65.46" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="10.4">HL-306</text>
+      <text id="Upgrade CI runners to Node 22" x="930" y="90" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Upgrade CI runners to Node 22</text>
+      <rect id="container 32" x="930" y="103.25" width="33.66" height="19.61" rx="9.8" fill="#f4f2ea" />
+      <text id="infra 3" x="930" y="113.65" fill="#13161a" font-family="ui-sans-serif, system-ui" font-size="10.4" font-weight="500">infra</text>
+      <rect id="container 33" x="930" y="132.86" width="24" height="24" rx="12" fill="#f3f2ee" />
+      <text id="AC 2" x="930" y="142.46" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="9.6" font-weight="600">AC</text>
+      <text id="Aug 11" x="1136.17" y="148.86" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Aug 11</text>
+      <rect id="list item 10" x="917" y="179.86" width="288" height="128.86" rx="16" fill="#ffffff" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 34" x="930" y="196.86" width="8" height="8" rx="4" fill="#ff2056" />
+      <text id="High 4" x="944" y="204.86" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">High</text>
+      <text id="HL-302" x="1154.55" y="204.32" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="10.4">HL-302</text>
+      <text id="Search relevance tuning" x="930" y="228.86" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Search relevance tuning</text>
+      <rect id="container 35" x="930" y="242.11" width="42.14" height="19.61" rx="9.8" fill="#f4f2ea" />
+      <text id="search" x="930" y="252.51" fill="#13161a" font-family="ui-sans-serif, system-ui" font-size="10.4" font-weight="500">search</text>
+      <rect id="container 36" x="930" y="271.72" width="24" height="24" rx="12" fill="#f3f2ee" />
+      <text id="PR 2" x="930" y="281.32" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="9.6" font-weight="600">PR</text>
+      <text id="Aug 12" x="1136.17" y="287.72" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Aug 12</text>
+  </g>
+  <text id="Audit Log Timeline label" x="64" y="2503.83" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Audit Log Timeline</text>
+  <text id="activity-timeline id" x="64" y="2517.83" font-family="ui-monospace, monospace" font-size="12" fill="#737373">activity-timeline</text>
+  <g id="Audit Log Timeline" transform="translate(64, 2535.83)">
+    <rect id="container" x="0" y="0" width="1088" height="613.75" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="section" x="1" y="1" width="1086" height="611.75" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Activity" x="22" y="38" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600" letter-spacing="-0.4">Activity</text>
+      <text id="Today, Aug 13" x="22" y="74" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600" letter-spacing="0.3">Today, Aug 13</text>
+      <rect id="container 2" x="23.41" y="90" width="28" height="28" rx="14" fill="rgba(0, 168, 248, 0.149)" />
+      <text id="Alex Chen" x="61" y="104" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Alex Chen</text>
+      <text id="deployed" x="128.66" y="104" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">deployed</text>
+      <text id="web@2026.08.13-r2" x="186.39" y="104" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">web@2026.08.13-r2</text>
+      <text id="14:05" x="61" y="123.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">14:05</text>
+      <rect id="container 3" x="23.41" y="143.25" width="28" height="28" rx="14" fill="rgba(255, 154, 0, 0.149)" />
+      <text id="Priya Raman" x="61" y="157.25" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Priya Raman</text>
+      <text id="changed retention in" x="144.05" y="157.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">changed retention in</text>
+      <text id="audit-log config" x="272.72" y="157.25" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">audit-log config</text>
+      <text id="11:20" x="61" y="176.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">11:20</text>
+      <rect id="container 4" x="61" y="188.5" width="1005" height="65" rx="12" fill="rgba(242, 242, 237, 0.4)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="- retention_days: 30" x="74" y="213.5" fill="#e7000b" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">- retention_days: 30</text>
+      <text id="+ retention_days: 90" x="74" y="233" fill="#009966" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">+ retention_days: 90</text>
+      <rect id="container 5" x="23.41" y="269.5" width="28" height="28" rx="14" fill="rgba(141, 81, 255, 0.149)" />
+      <text id="Dana Whitfield" x="61" y="283.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Dana Whitfield</text>
+      <text id="commented on" x="159.92" y="283.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">commented on</text>
+      <text id="Billing migration RFC" x="254.23" y="283.5" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Billing migration RFC</text>
+      <text id="09:42" x="61" y="302.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">09:42</text>
+      <text id="Yesterday" x="22" y="342.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600" letter-spacing="0.3">Yesterday</text>
+      <rect id="container 6" x="23.41" y="358.75" width="28" height="28" rx="14" fill="rgba(0, 188, 128, 0.149)" />
+      <text id="Rosa Martínez" x="61" y="372.75" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Rosa Martínez</text>
+      <text id="invited" x="155.41" y="372.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">invited</text>
+      <text id="jonas@acme.dev" x="197.14" y="372.75" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">jonas@acme.dev</text>
+      <text id="16:30" x="61" y="392" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">16:30</text>
+      <rect id="container 7" x="23.41" y="412" width="28" height="28" rx="14" fill="rgba(235, 0, 13, 0.149)" />
+      <text id="Sam Okafor" x="61" y="426" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Sam Okafor</text>
+      <text id="resolved" x="139.64" y="426" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">resolved</text>
+      <text id="INC-208: elevated 5xx on api-eu" x="191.64" y="426" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">INC-208: elevated 5xx on api-eu</text>
+      <text id="08:15" x="61" y="445.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">08:15</text>
+      <text id="Aug 10" x="22" y="485.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600" letter-spacing="0.3">Aug 10</text>
+      <rect id="container 8" x="23.41" y="501.25" width="28" height="28" rx="14" fill="rgba(0, 168, 248, 0.149)" />
+      <text id="Alex Chen 2" x="61" y="515.25" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Alex Chen</text>
+      <text id="rolled back" x="128.66" y="515.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">rolled back</text>
+      <text id="web@2026.08.10-r1" x="196.69" y="515.25" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">web@2026.08.10-r1</text>
+      <text id="19:47" x="61" y="534.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">19:47</text>
+      <rect id="container 9" x="23.41" y="554.5" width="28" height="28" rx="14" fill="rgba(255, 154, 0, 0.149)" />
+      <text id="Priya Raman 2" x="61" y="568.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Priya Raman</text>
+      <text id="enabled" x="144.05" y="568.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">enabled</text>
+      <text id="SSO enforcement" x="193.61" y="568.5" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">SSO enforcement</text>
+      <text id="10:05" x="61" y="587.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">10:05</text>
+  </g>
+  <text id="Month Calendar Grid label" x="64" y="3265.58" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Month Calendar Grid</text>
+  <text id="calendar-month id" x="64" y="3279.58" font-family="ui-monospace, monospace" font-size="12" fill="#737373">calendar-month</text>
+  <g id="Month Calendar Grid" transform="translate(64, 3297.58)">
+    <rect id="container" x="0" y="0" width="1088" height="614.83" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="August 2026" x="1" y="22" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700" letter-spacing="-0.45">August 2026</text>
+      <text id="Product" x="130.94" y="22" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Product</text>
+      <rect id="container 2" x="130.94" y="14" width="8" height="8" rx="4" fill="#007f34" />
+      <text id="Design" x="198.33" y="22" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Design</text>
+      <rect id="container 3" x="198.33" y="14" width="8" height="8" rx="4" fill="#00a6f4" />
+      <text id="Personal" x="260.88" y="22" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Personal</text>
+      <rect id="container 4" x="260.88" y="14" width="8" height="8" rx="4" fill="#00bc7d" />
+      <rect id="button" x="947.41" y="2" width="32" height="32" rx="12" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="button 2" x="983.41" y="2" width="32" height="32" rx="12" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="button 3" x="1023.41" y="1" width="63.59" height="34" rx="12" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Today" x="1055.2" y="15" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Today</text>
+      <rect id="grid" x="1" y="51" width="1086" height="562.83" rx="16" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="row" x="2" y="52" width="1084" height="32" fill="rgba(220, 222, 225, 0.6)" />
+      <rect id="columnheader" x="2" y="52" width="154" height="32" fill="rgba(243, 242, 238, 0.6)" />
+      <text id="Mon" x="79" y="64" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600" text-anchor="middle">Mon</text>
+      <rect id="columnheader 2" x="157" y="52" width="154" height="32" fill="rgba(243, 242, 238, 0.6)" />
+      <text id="Tue" x="234" y="64" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600" text-anchor="middle">Tue</text>
+      <rect id="columnheader 3" x="312" y="52" width="154" height="32" fill="rgba(243, 242, 238, 0.6)" />
+      <text id="Wed" x="389" y="64" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600" text-anchor="middle">Wed</text>
+      <rect id="columnheader 4" x="467" y="52" width="154" height="32" fill="rgba(243, 242, 238, 0.6)" />
+      <text id="Thu" x="544" y="64" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600" text-anchor="middle">Thu</text>
+      <rect id="columnheader 5" x="622" y="52" width="154" height="32" fill="rgba(243, 242, 238, 0.6)" />
+      <text id="Fri" x="699" y="64" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600" text-anchor="middle">Fri</text>
+      <rect id="columnheader 6" x="777" y="52" width="154" height="32" fill="rgba(243, 242, 238, 0.6)" />
+      <text id="Sat" x="854" y="64" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600" text-anchor="middle">Sat</text>
+      <rect id="columnheader 7" x="932" y="52" width="154" height="32" fill="rgba(243, 242, 238, 0.6)" />
+      <text id="Sun" x="1009" y="64" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600" text-anchor="middle">Sun</text>
+      <rect id="row 2" x="2" y="84" width="1084" height="85" fill="rgba(220, 222, 225, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="gridcell" x="2" y="85" width="154" height="84" fill="rgba(242, 238, 235, 0.302)" />
+      <text id="27" x="8" y="103" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="12">27</text>
+      <rect id="gridcell 2" x="157" y="85" width="154" height="84" fill="rgba(242, 238, 235, 0.302)" />
+      <text id="28" x="163" y="103" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="12">28</text>
+      <rect id="gridcell 3" x="312" y="85" width="154" height="84" fill="rgba(242, 238, 235, 0.302)" />
+      <text id="29" x="318" y="103" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="12">29</text>
+      <rect id="gridcell 4" x="467" y="85" width="154" height="84" fill="rgba(242, 238, 235, 0.302)" />
+      <text id="30" x="473" y="103" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="12">30</text>
+      <rect id="gridcell 5" x="622" y="85" width="154" height="84" fill="rgba(242, 238, 235, 0.302)" />
+      <text id="31" x="628" y="103" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="12">31</text>
+      <rect id="gridcell 6" x="777" y="85" width="154" height="84" fill="#ffffff" />
+      <text id="1" x="783" y="103" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">1</text>
+      <rect id="gridcell 7" x="932" y="85" width="154" height="84" fill="#ffffff" />
+      <text id="2" x="938" y="103" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">2</text>
+      <rect id="row 3" x="2" y="169" width="1084" height="85" fill="rgba(220, 222, 225, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="gridcell 8" x="2" y="170" width="154" height="84" fill="#ffffff" />
+      <text id="3" x="8" y="188" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">3</text>
+      <rect id="container 5" x="8" y="204" width="142" height="19.61" rx="4" fill="rgba(0, 128, 54, 0.149)" />
+      <text id="Sprint 42 kickoff" x="8" y="214.4" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="10.4" font-weight="500">Sprint 42 kickoff</text>
+      <rect id="gridcell 9" x="157" y="170" width="154" height="84" fill="#ffffff" />
+      <text id="4" x="163" y="188" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">4</text>
+      <rect id="gridcell 10" x="312" y="170" width="154" height="84" fill="#ffffff" />
+      <text id="5" x="318" y="188" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">5</text>
+      <rect id="gridcell 11" x="467" y="170" width="154" height="84" fill="#ffffff" />
+      <text id="6" x="473" y="188" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">6</text>
+      <rect id="container 6" x="473" y="204" width="142" height="19.61" rx="4" fill="rgba(0, 168, 248, 0.149)" />
+      <text id="Design crit" x="473" y="214.4" fill="#00a6f4" font-family="ui-sans-serif, system-ui" font-size="10.4" font-weight="500">Design crit</text>
+      <rect id="gridcell 12" x="622" y="170" width="154" height="84" fill="#ffffff" />
+      <text id="7" x="628" y="188" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">7</text>
+      <rect id="gridcell 13" x="777" y="170" width="154" height="84" fill="#ffffff" />
+      <text id="8" x="783" y="188" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">8</text>
+      <rect id="gridcell 14" x="932" y="170" width="154" height="84" fill="#ffffff" />
+      <text id="9" x="938" y="188" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">9</text>
+      <rect id="row 4" x="2" y="254" width="1084" height="85" fill="rgba(220, 222, 225, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="gridcell 15" x="2" y="255" width="154" height="84" fill="#ffffff" />
+      <text id="10" x="8" y="273" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">10</text>
+      <rect id="gridcell 16" x="157" y="255" width="154" height="84" fill="#ffffff" />
+      <text id="11" x="163" y="273" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">11</text>
+      <rect id="gridcell 17" x="312" y="255" width="154" height="84" fill="#ffffff" />
+      <text id="12" x="318" y="273" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">12</text>
+      <rect id="gridcell 18" x="467" y="255" width="154" height="84" fill="#ffffff" />
+      <text id="13" x="473" y="273" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="700">13</text>
+      <rect id="container 7" x="473" y="289" width="142" height="19.61" rx="4" fill="rgba(0, 128, 54, 0.149)" />
+      <text id="v3.1 release" x="473" y="299.4" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="10.4" font-weight="500">v3.1 release</text>
+      <rect id="gridcell 19" x="622" y="255" width="154" height="84" fill="#ffffff" />
+      <text id="14" x="628" y="273" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">14</text>
+      <rect id="gridcell 20" x="777" y="255" width="154" height="84" fill="#ffffff" />
+      <text id="15" x="783" y="273" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">15</text>
+      <rect id="gridcell 21" x="932" y="255" width="154" height="84" fill="#ffffff" />
+      <text id="16" x="938" y="273" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">16</text>
+      <rect id="row 5" x="2" y="339" width="1084" height="103.83" fill="rgba(220, 222, 225, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="gridcell 22" x="2" y="340" width="154" height="102.83" fill="#ffffff" />
+      <text id="17" x="8" y="358" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">17</text>
+      <rect id="container 8" x="8" y="374" width="142" height="19.61" rx="4" fill="rgba(0, 188, 128, 0.149)" />
+      <text id="Flight to Lisbon" x="8" y="384.4" fill="#00bc7d" font-family="ui-sans-serif, system-ui" font-size="10.4" font-weight="500">Flight to Lisbon</text>
+      <rect id="gridcell 23" x="157" y="340" width="154" height="102.83" fill="#ffffff" />
+      <text id="18" x="163" y="358" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">18</text>
+      <rect id="gridcell 24" x="312" y="340" width="154" height="102.83" fill="#ffffff" />
+      <text id="19" x="318" y="358" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">19</text>
+      <rect id="gridcell 25" x="467" y="340" width="154" height="102.83" fill="#ffffff" />
+      <text id="20" x="473" y="358" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">20</text>
+      <rect id="container 9" x="473" y="374" width="142" height="19.61" rx="4" fill="rgba(0, 128, 54, 0.149)" />
+      <text id="Roadmap review" x="473" y="384.4" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="10.4" font-weight="500">Roadmap review</text>
+      <rect id="container 10" x="473" y="397.61" width="142" height="19.61" rx="4" fill="rgba(0, 168, 248, 0.149)" />
+      <text id="Portfolio review" x="473" y="408.01" fill="#00a6f4" font-family="ui-sans-serif, system-ui" font-size="10.4" font-weight="500">Portfolio review</text>
+      <text id="+2 more" x="473" y="431.62" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="10.4" font-weight="500">+2 more</text>
+      <rect id="gridcell 26" x="622" y="340" width="154" height="102.83" fill="#ffffff" />
+      <text id="21" x="628" y="358" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">21</text>
+      <rect id="gridcell 27" x="777" y="340" width="154" height="102.83" fill="#ffffff" />
+      <text id="22" x="783" y="358" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">22</text>
+      <rect id="gridcell 28" x="932" y="340" width="154" height="102.83" fill="#ffffff" />
+      <text id="23" x="938" y="358" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">23</text>
+      <rect id="row 6" x="2" y="442.83" width="1084" height="85" fill="rgba(220, 222, 225, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="gridcell 29" x="2" y="443.83" width="154" height="84" fill="#ffffff" />
+      <text id="24" x="8" y="461.83" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">24</text>
+      <rect id="gridcell 30" x="157" y="443.83" width="154" height="84" fill="#ffffff" />
+      <text id="25" x="163" y="461.83" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">25</text>
+      <rect id="gridcell 31" x="312" y="443.83" width="154" height="84" fill="#ffffff" />
+      <text id="26" x="318" y="461.83" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">26</text>
+      <rect id="gridcell 32" x="467" y="443.83" width="154" height="84" fill="#ffffff" />
+      <text id="27 2" x="473" y="461.83" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">27</text>
+      <rect id="container 11" x="473" y="477.83" width="142" height="19.61" rx="4" fill="rgba(0, 128, 54, 0.149)" />
+      <text id="Q3 planning" x="473" y="488.23" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="10.4" font-weight="500">Q3 planning</text>
+      <rect id="gridcell 33" x="622" y="443.83" width="154" height="84" fill="#ffffff" />
+      <text id="28 2" x="628" y="461.83" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">28</text>
+      <rect id="gridcell 34" x="777" y="443.83" width="154" height="84" fill="#ffffff" />
+      <text id="29 2" x="783" y="461.83" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">29</text>
+      <rect id="gridcell 35" x="932" y="443.83" width="154" height="84" fill="#ffffff" />
+      <text id="30 2" x="938" y="461.83" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">30</text>
+      <rect id="row 7" x="2" y="527.83" width="1084" height="85" fill="rgba(220, 222, 225, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="gridcell 36" x="2" y="528.83" width="154" height="84" fill="#ffffff" />
+      <text id="31 2" x="8" y="546.83" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">31</text>
+      <rect id="gridcell 37" x="157" y="528.83" width="154" height="84" fill="rgba(242, 238, 235, 0.302)" />
+      <text id="1 2" x="163" y="546.83" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="12">1</text>
+      <rect id="gridcell 38" x="312" y="528.83" width="154" height="84" fill="rgba(242, 238, 235, 0.302)" />
+      <text id="2 2" x="318" y="546.83" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="12">2</text>
+      <rect id="gridcell 39" x="467" y="528.83" width="154" height="84" fill="rgba(242, 238, 235, 0.302)" />
+      <text id="3 2" x="473" y="546.83" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="12">3</text>
+      <rect id="gridcell 40" x="622" y="528.83" width="154" height="84" fill="rgba(242, 238, 235, 0.302)" />
+      <text id="4 2" x="628" y="546.83" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="12">4</text>
+      <rect id="gridcell 41" x="777" y="528.83" width="154" height="84" fill="rgba(242, 238, 235, 0.302)" />
+      <text id="5 2" x="783" y="546.83" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="12">5</text>
+      <rect id="gridcell 42" x="932" y="528.83" width="154" height="84" fill="rgba(242, 238, 235, 0.302)" />
+      <text id="6 2" x="938" y="546.83" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="12">6</text>
+  </g>
+  <text id="Saved View Tabs label" x="64" y="4028.41" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Saved View Tabs</text>
+  <text id="dashboard-saved-views id" x="64" y="4042.41" font-family="ui-monospace, monospace" font-size="12" fill="#737373">dashboard-saved-views</text>
+  <g id="Saved View Tabs" transform="translate(64, 4060.41)">
+    <rect id="container" x="0" y="0" width="1088" height="496" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="56" y="65" width="976" height="366" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="Support queue" x="77" y="98" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600">Support queue</text>
+      <text id="All open" x="152.27" y="132" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">All open</text>
+      <rect id="container 3" x="171.97" y="126.14" width="43.58" height="19.7" rx="4" fill="rgba(255, 154, 0, 0.149)" />
+      <text id="Edited" x="193.76" y="137.14" fill="#bb4d00" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="500" text-anchor="middle">Edited</text>
+      <text id="My escalations" x="298.92" y="132" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" text-anchor="middle">My escalations</text>
+      <text id="Weekly review" x="436.23" y="132" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" text-anchor="middle">Weekly review</text>
+      <rect id="container 4" x="57" y="157" width="974" height="109" fill="rgba(241, 241, 237, 0.502)" />
+      <text id="One filter has been added to this view:" x="77" y="183" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">One filter has been added to this view:</text>
+      <text id="Enterprise only" x="318.06" y="183" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Enterprise only</text>
+      <text id="Saving changes what everyone sees, inclu…" x="77" y="205" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Saving changes what everyone sees, including tomorrow's scheduled digest.</text>
+      <text id="All open is shared with your team." x="77" y="205" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600">All open is shared with your team.</text>
+      <rect id="button" x="77" y="221" width="141.73" height="32" rx="12" fill="#007f34" />
+      <text id="Save for everyone" x="147.87" y="233" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600" text-anchor="middle">Save for everyone</text>
+      <rect id="button 2" x="226.73" y="221" width="161.92" height="32" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Save as my own copy" x="307.7" y="233" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500" text-anchor="middle">Save as my own copy</text>
+      <text id="Reset to saved" x="453.9" y="233" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500" text-anchor="middle">Reset to saved</text>
+      <text id="Filters in this view" x="77" y="298" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500" letter-spacing="0.3">Filters in this view</text>
+      <rect id="list item" x="77" y="310" width="99.84" height="26" rx="13" fill="rgba(242, 242, 237, 0.4)" stroke="#dbdee1" stroke-width="1" />
+      <text id="Status is open" x="77" y="322" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12">Status is open</text>
+      <rect id="list item 2" x="184.84" y="310" width="95.23" height="26" rx="13" fill="rgba(242, 242, 237, 0.4)" stroke="#dbdee1" stroke-width="1" />
+      <text id="Any assignee" x="184.84" y="322" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12">Any assignee</text>
+      <rect id="list item 3" x="288.08" y="310" width="90.5" height="26" rx="13" fill="rgba(242, 242, 237, 0.4)" stroke="#dbdee1" stroke-width="1" />
+      <text id="Last 30 days" x="288.08" y="322" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12">Last 30 days</text>
+      <rect id="list item 4" x="386.58" y="310" width="107.36" height="26" rx="13" fill="rgba(0, 128, 49, 0.102)" stroke="rgba(0, 128, 52, 0.4)" stroke-width="1" />
+      <text id="Enterprise only 2" x="386.58" y="322" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Enterprise only</text>
+      <text id="Narrow it further" x="77" y="372" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500" letter-spacing="0.3">Narrow it further</text>
+      <rect id="button 3" x="77" y="384" width="104.7" height="26" rx="13" fill="#007f34" stroke="#007f34" stroke-width="1" />
+      <text id="Enterprise only 3" x="129.35" y="396" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="12" text-anchor="middle">Enterprise only</text>
+      <rect id="button 4" x="189.7" y="384" width="109.16" height="26" rx="13" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Has attachment" x="244.28" y="396" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" text-anchor="middle">Has attachment</text>
+      <rect id="button 5" x="306.86" y="384" width="154.13" height="26" rx="13" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Reopened once or more" x="383.92" y="396" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" text-anchor="middle">Reopened once or more</text>
+  </g>
+  <text id="Comparison Period Picker label" x="64" y="4672.41" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Comparison Period Picker</text>
+  <text id="dashboard-comparison-period id" x="64" y="4686.41" font-family="ui-monospace, monospace" font-size="12" fill="#737373">dashboard-comparison-period</text>
+  <g id="Comparison Period Picker" transform="translate(64, 4704.41)">
+    <rect id="container" x="0" y="0" width="1088" height="464" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="section" x="1" y="1" width="1086" height="462" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="Reporting period" x="26" y="42" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600">Reporting period</text>
+      <text id="Every percentage on this dashboard is me…" x="26" y="68" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Every percentage on this dashboard is measured against the comparison window below.</text>
+      <rect id="radio" x="26" y="94" width="95.34" height="34" rx="12" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="Last 7 days" x="73.67" y="108" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Last 7 days</text>
+      <rect id="radio 2" x="129.34" y="94" width="101.55" height="34" rx="12" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="Last 14 days" x="180.12" y="108" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Last 14 days</text>
+      <rect id="radio 3" x="238.89" y="94" width="103.39" height="34" rx="12" fill="rgba(0, 128, 49, 0.102)" stroke="#007f34" stroke-width="1" />
+      <text id="Last 28 days" x="290.59" y="108" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Last 28 days</text>
+      <rect id="radio 4" x="350.28" y="94" width="102.19" height="34" rx="12" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="Last quarter" x="401.38" y="108" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Last quarter</text>
+      <rect id="radio 5" x="460.47" y="94" width="82.05" height="34" rx="12" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="Last year" x="501.49" y="108" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Last year</text>
+      <text id="Compare against" x="26" y="164" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600" letter-spacing="0.6">Compare against</text>
+      <rect id="container 2" x="26" y="180" width="340" height="66" rx="16" fill="rgba(0, 118, 59, 0.051)" stroke="#007f34" stroke-width="1" />
+      <text id="Previous period" x="39" y="207" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Previous period</text>
+      <text id="The window immediately before this one." x="39" y="229" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">The window immediately before this one.</text>
+      <rect id="container 3" x="374" y="180" width="340" height="66" rx="16" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="Same period last year" x="387" y="207" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Same period last year</text>
+      <text id="The same calendar dates, one year back." x="387" y="229" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">The same calendar dates, one year back.</text>
+      <rect id="container 4" x="722" y="180" width="340" height="66" rx="16" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="No comparison" x="735" y="207" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">No comparison</text>
+      <text id="Show absolute numbers with no deltas." x="735" y="229" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Show absolute numbers with no deltas.</text>
+      <rect id="container 5" x="26" y="270" width="1036" height="82" rx="16" fill="rgba(242, 242, 237, 0.4)" stroke="#dbdee1" stroke-width="1" />
+      <text id="Aug 4 – Aug 31, 2026" x="43" y="301" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Aug 4 – Aug 31, 2026</text>
+      <rect id="container 6" x="43" y="293" width="8" height="8" rx="4" fill="#007f34" />
+      <text id="Jul 7 – Aug 3, 2026" x="229.23" y="301" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Jul 7 – Aug 3, 2026</text>
+      <rect id="container 7" x="229.23" y="293" width="8" height="8" rx="4" fill="rgba(86, 92, 96, 0.502)" />
+      <text id="Align to the same weekdays. Off — the co…" x="65" y="331" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Align to the same weekdays. Off — the comparison is the window immediately before this one, which can land a weekend against weekdays.</text>
+      <text id="Both windows are inclusive of their end …" x="26" y="380" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Both windows are inclusive of their end dates and computed in UTC, so a change of clocks never produces a week of six days and 23 hours.</text>
+      <rect id="button" x="910.63" y="404" width="60.33" height="34" rx="12" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="Reset" x="940.79" y="418" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Reset</text>
+      <rect id="button 2" x="978.95" y="404" width="83.05" height="34" rx="12" fill="#007f34" />
+      <text id="Apply" x="1020.48" y="418" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Apply</text>
+  </g>
+  <text id="Alert Rule List label" x="64" y="5284.41" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Alert Rule List</text>
+  <text id="dashboard-alert-rules id" x="64" y="5298.41" font-family="ui-monospace, monospace" font-size="12" fill="#737373">dashboard-alert-rules</text>
+  <g id="Alert Rule List" transform="translate(64, 5316.41)">
+    <rect id="container" x="0" y="0" width="1088" height="803.5" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="section" x="1" y="1" width="1086" height="801.5" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="Alert rules" x="26" y="42" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600">Alert rules</text>
+      <text id="4 of 5 active ·" x="26" y="68" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">4 of 5 active ·</text>
+      <text id="1 delivering nowhere" x="111.67" y="68" fill="#e17100" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">1 delivering nowhere</text>
+      <rect id="button" x="980.94" y="34" width="81.06" height="32" rx="12" fill="#007f34" />
+      <text id="New rule" x="1021.47" y="48" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">New rule</text>
+      <rect id="container 2" x="26" y="123" width="59.97" height="20.5" rx="4" fill="rgba(226, 0, 10, 0.102)" />
+      <text id="critical" x="26" y="134" fill="#e7000b" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="600" letter-spacing="0.28">critical</text>
+      <text id="API error rate" x="93.97" y="137.25" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">API error rate</text>
+      <text id="Alert when API error rate stays for 5 mi…" x="26" y="163.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Alert when API error rate stays for 5 minutes.</text>
+      <text id="above 2%" x="216.97" y="163.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">above 2%</text>
+      <text id="#incidents" x="26" y="191.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">#incidents</text>
+      <text id="Fired 3" x="116.53" y="191.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Fired 3</text>
+      <text id="× / 30d" x="152.58" y="191.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">× / 30d</text>
+      <rect id="switch" x="992" y="127" width="36" height="20" rx="10" fill="#007f34" />
+      <rect id="container 3" x="1028" y="129" width="16" height="16" rx="8" fill="#fdfcf8" />
+      <rect id="container 4" x="26" y="244.5" width="66.16" height="20.5" rx="4" fill="rgba(245, 147, 0, 0.102)" />
+      <text id="warning" x="26" y="255.5" fill="#e17100" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="600" letter-spacing="0.28">warning</text>
+      <text id="p95 latency" x="100.16" y="258.75" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">p95 latency</text>
+      <text id="Alert when p95 latency stays for 15 minu…" x="26" y="285" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Alert when p95 latency stays for 15 minutes.</text>
+      <text id="above 800ms" x="205.42" y="285" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">above 800ms</text>
+      <text id="#platform-alerts" x="26" y="313" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">#platform-alerts</text>
+      <text id="Fired 27" x="147.94" y="313" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Fired 27</text>
+      <text id="× / 30d 2" x="190.45" y="313" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">× / 30d</text>
+      <rect id="paragraph" x="26" y="329" width="950" height="36" rx="12" fill="rgba(245, 147, 0, 0.102)" />
+      <text id="This rule is on, but" x="58" y="351" fill="#bb4d00" font-family="ui-sans-serif, system-ui" font-size="12">This rule is on, but</text>
+      <text id="#platform-alerts 2" x="158" y="351" fill="#bb4d00" font-family="ui-sans-serif, system-ui" font-size="12">#platform-alerts</text>
+      <text id="is muted — nothing has been delivered si…" x="243.94" y="351" fill="#bb4d00" font-family="ui-sans-serif, system-ui" font-size="12">is muted — nothing has been delivered since it was muted.</text>
+      <rect id="switch 2" x="992" y="248.5" width="36" height="20" rx="10" fill="#007f34" />
+      <rect id="container 5" x="1028" y="250.5" width="16" height="16" rx="8" fill="#fdfcf8" />
+      <rect id="container 6" x="26" y="414" width="66.16" height="20.5" rx="4" fill="rgba(245, 147, 0, 0.102)" />
+      <text id="warning 2" x="26" y="425" fill="#e17100" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="600" letter-spacing="0.28">warning</text>
+      <text id="Signups per hour" x="100.16" y="428.25" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Signups per hour</text>
+      <text id="Alert when Signups per hour stays for 1 …" x="26" y="454.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Alert when Signups per hour stays for 1 hour.</text>
+      <text id="below 4" x="240.61" y="454.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">below 4</text>
+      <text id="growth@acme.com" x="26" y="482.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">growth@acme.com</text>
+      <text id="Fired 142" x="165.03" y="482.5" fill="#e17100" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Fired 142</text>
+      <text id="× / 30d 3" x="213.84" y="482.5" fill="#e17100" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">× / 30d</text>
+      <rect id="paragraph 2" x="26" y="498.5" width="950" height="36" rx="12" fill="#f3f2ee" />
+      <text id="Firing" x="58" y="520.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Firing</text>
+      <text id="142" x="91" y="520.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">142</text>
+      <text id="times a month is usually a threshold pro…" x="110.41" y="520.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">times a month is usually a threshold problem rather than an incident. Consider raising it before muting the channel.</text>
+      <rect id="switch 3" x="992" y="418" width="36" height="20" rx="10" fill="#007f34" />
+      <rect id="container 7" x="1028" y="420" width="16" height="16" rx="8" fill="#fdfcf8" />
+      <rect id="container 8" x="26" y="583.5" width="59.97" height="20.5" rx="4" fill="rgba(226, 0, 10, 0.102)" />
+      <text id="critical 2" x="26" y="594.5" fill="#e7000b" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="600" letter-spacing="0.28">critical</text>
+      <text id="Job queue depth" x="93.97" y="597.75" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Job queue depth</text>
+      <text id="Alert when Job queue depth stays for 10 …" x="26" y="624" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Alert when Job queue depth stays for 10 minutes.</text>
+      <text id="above 5,000" x="238.81" y="624" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">above 5,000</text>
+      <text id="pagerduty.com/…/v2" x="26" y="652" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">pagerduty.com/…/v2</text>
+      <text id="Fired 1" x="172.28" y="652" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Fired 1</text>
+      <text id="× / 30d 4" x="208.33" y="652" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">× / 30d</text>
+      <rect id="switch 4" x="992" y="587.5" width="36" height="20" rx="10" fill="#007f34" />
+      <rect id="container 9" x="1028" y="589.5" width="16" height="16" rx="8" fill="#fdfcf8" />
+      <rect id="container 10" x="26" y="705" width="38.59" height="20.5" rx="4" fill="#f3f2ee" />
+      <text id="info" x="26" y="716" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="600" letter-spacing="0.28">info</text>
+      <text id="Storage used" x="72.59" y="719.25" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Storage used</text>
+      <text id="Alert when Storage used stays for 1 day." x="26" y="745.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Alert when Storage used stays for 1 day.</text>
+      <text id="above 85%" x="215.28" y="745.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">above 85%</text>
+      <text id="ops@acme.com" x="26" y="773.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">ops@acme.com</text>
+      <text id="Fired 0" x="146.42" y="773.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Fired 0</text>
+      <text id="× / 30d 5" x="182.47" y="773.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">× / 30d</text>
+      <rect id="switch 5" x="992" y="709" width="36" height="20" rx="10" fill="rgba(86, 89, 96, 0.302)" />
+      <rect id="container 11" x="1012" y="711" width="16" height="16" rx="8" fill="#fdfcf8" />
+  </g>
+</svg>

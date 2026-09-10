@@ -1,0 +1,238 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1216" height="4679" viewBox="0 0 1216 4679" id="Hoverlab — Modals &amp; Drawers">
+  <!--
+    Hoverlab — Modals & Drawers. 8 sections, traced from the
+    rendered catalog. Drag this file onto a Figma canvas.
+
+    These are frames, not components: named, editable layers with real
+    geometry, colour and type. There are no variants, no auto-layout,
+    and no hover or motion — none of those exist in a static frame.
+
+    Every section here is free to copy as code at https://hoverlab.dev/blocks
+  -->
+  <rect id="Background" x="0" y="0" width="1216" height="4679" fill="#ffffff" />
+  <text id="Destructive Confirm Dialog label" x="64" y="84" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Destructive Confirm Dialog</text>
+  <text id="confirm-dialog id" x="64" y="98" font-family="ui-monospace, monospace" font-size="12" fill="#737373">confirm-dialog</text>
+  <g id="Destructive Confirm Dialog" transform="translate(64, 116)">
+    <rect id="container" x="0" y="0" width="1088" height="126" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="button" x="479.28" y="41" width="129.44" height="44" rx="16" fill="#e7000b" />
+      <text id="Delete project" x="544" y="55" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Delete project</text>
+  </g>
+  <text id="Cookie Consent Banner label" x="64" y="358" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Cookie Consent Banner</text>
+  <text id="cookie-consent id" x="64" y="372" font-family="ui-monospace, monospace" font-size="12" fill="#737373">cookie-consent</text>
+  <g id="Cookie Consent Banner" transform="translate(64, 390)">
+    <rect id="container" x="0" y="0" width="1088" height="322" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="160" y="109.5" width="768" height="187.5" rx="16" fill="#ffffff" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 3" x="185" y="134.5" width="40" height="40" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Cookies, and what they are for" x="241" y="150.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600">Cookies, and what they are for</text>
+      <text id="Essential cookies keep you signed in. Th…" x="241" y="179.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Essential cookies keep you signed in. The rest stay off until you turn them on, and you can change your</text>
+      <text id="mind at any time." x="241" y="202.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">mind at any time.</text>
+      <text id="Privacy policy" x="352.2" y="202.25" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="14">Privacy policy</text>
+      <text id="Choose what to allow" x="269.3" y="244" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Choose what to allow</text>
+      <rect id="button" x="637.53" y="230" width="161.5" height="42" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Reject non-essential" x="718.28" y="244" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Reject non-essential</text>
+      <rect id="button 2" x="807.03" y="230" width="95.97" height="42" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Accept all" x="855.02" y="244" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Accept all</text>
+  </g>
+  <text id="Slide-Over Edit Panel label" x="64" y="828" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Slide-Over Edit Panel</text>
+  <text id="slide-over-panel id" x="64" y="842" font-family="ui-monospace, monospace" font-size="12" fill="#737373">slide-over-panel</text>
+  <g id="Slide-Over Edit Panel" transform="translate(64, 860)">
+    <rect id="container" x="0" y="0" width="1088" height="126" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="button" x="479.3" y="41" width="129.39" height="44" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Edit customer" x="543.99" y="55" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Edit customer</text>
+  </g>
+  <text id="Faceted Filter Drawer label" x="64" y="1102" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Faceted Filter Drawer</text>
+  <text id="filter-drawer-facets id" x="64" y="1116" font-family="ui-monospace, monospace" font-size="12" fill="#737373">filter-drawer-facets</text>
+  <g id="Faceted Filter Drawer" transform="translate(64, 1134)">
+    <rect id="container" x="0" y="0" width="1088" height="680" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="aside" x="1" y="1" width="384" height="678" rx="16" fill="#ffffff" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Filters" x="46" y="34" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" letter-spacing="-0.35">Filters</text>
+      <rect id="container 2" x="89.63" y="20" width="20.83" height="20" rx="10" fill="rgba(0, 128, 49, 0.102)" />
+      <text id="1" x="89.63" y="32" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">1</text>
+      <text id="Status" x="22" y="87" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600" letter-spacing="0.3">Status</text>
+      <rect id="field" x="30" y="107" width="16" height="16" rx="4" fill="#007f34" stroke="#007f34" stroke-width="1" />
+      <text id="Active" x="56" y="119" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">Active</text>
+      <text id="128" x="334.39" y="119" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">128</text>
+      <rect id="field 2" x="30" y="141" width="16" height="16" rx="4" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Paused" x="56" y="153" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">Paused</text>
+      <text id="34" x="341.59" y="153" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">34</text>
+      <rect id="field 3" x="30" y="175" width="16" height="16" rx="4" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Archived" x="56" y="187" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">Archived</text>
+      <text id="9" x="348.8" y="187" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">9</text>
+      <rect id="field 4" x="30" y="209" width="16" height="16" rx="4" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Draft" x="56" y="221" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">Draft</text>
+      <text id="0" x="348.8" y="221" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">0</text>
+      <text id="Plan" x="22" y="269" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600" letter-spacing="0.3">Plan</text>
+      <rect id="field 5" x="30" y="289" width="16" height="16" rx="4" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Free" x="56" y="301" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">Free</text>
+      <text id="96" x="341.59" y="301" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">96</text>
+      <rect id="field 6" x="30" y="323" width="16" height="16" rx="4" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Pro" x="56" y="335" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">Pro</text>
+      <text id="51" x="341.59" y="335" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">51</text>
+      <rect id="field 7" x="30" y="357" width="16" height="16" rx="4" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Team" x="56" y="369" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">Team</text>
+      <text id="18" x="341.59" y="369" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">18</text>
+      <rect id="field 8" x="30" y="391" width="16" height="16" rx="4" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Studio" x="56" y="403" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">Studio</text>
+      <text id="6" x="348.8" y="403" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">6</text>
+      <text id="Region" x="22" y="451" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600" letter-spacing="0.3">Region</text>
+      <rect id="field 9" x="30" y="471" width="16" height="16" rx="4" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="North America" x="56" y="483" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">North America</text>
+      <text id="74" x="341.59" y="483" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">74</text>
+      <rect id="field 10" x="30" y="505" width="16" height="16" rx="4" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Europe" x="56" y="517" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">Europe</text>
+      <text id="62" x="341.59" y="517" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">62</text>
+      <rect id="field 11" x="30" y="539" width="16" height="16" rx="4" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Asia Pacific" x="56" y="551" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">Asia Pacific</text>
+      <text id="29" x="341.59" y="551" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">29</text>
+      <rect id="field 12" x="30" y="573" width="16" height="16" rx="4" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Latin America" x="56" y="585" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">Latin America</text>
+      <text id="11" x="341.59" y="585" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">11</text>
+      <rect id="footer" x="2" y="613" width="382" height="65" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Clear all" x="59.38" y="642" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Clear all</text>
+      <rect id="button" x="294.95" y="628" width="69.05" height="36" rx="12" fill="#007f34" opacity="0.4" />
+      <text id="Apply" x="329.48" y="642" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Apply</text>
+  </g>
+  <text id="Share &amp; Access Dialog label" x="64" y="1930" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Share &amp; Access Dialog</text>
+  <text id="share-access-dialog id" x="64" y="1944" font-family="ui-monospace, monospace" font-size="12" fill="#737373">share-access-dialog</text>
+  <g id="Share &amp; Access Dialog" transform="translate(64, 1962)">
+    <rect id="container" x="0" y="0" width="1088" height="659" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="dialog" x="312" y="65" width="464" height="529" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="Share “Q4 pricing model”" x="333" y="98" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600">Share “Q4 pricing model”</text>
+      <rect id="field" x="333" y="139" width="422" height="36" rx="12" fill="#fdfcf8" stroke="#8d8f92" stroke-width="1" />
+      <rect id="container 2" x="333" y="193" width="32" height="32" rx="16" fill="#f3f2ee" />
+      <text id="PR" x="333" y="205" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600">PR</text>
+      <text id="Priya Raman" x="377" y="205" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">Priya Raman</text>
+      <text id="priya@northwind.com" x="377" y="223" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">priya@northwind.com</text>
+      <text id="Owner" x="702.2" y="213" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Owner</text>
+      <rect id="container 3" x="333" y="241" width="32" height="32" rx="16" fill="#f3f2ee" />
+      <text id="TO" x="333" y="253" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600">TO</text>
+      <text id="Tom Okafor" x="377" y="253" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">Tom Okafor</text>
+      <text id="tom@northwind.com" x="377" y="271" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">tom@northwind.com</text>
+      <rect id="field 2" x="624" y="241" width="131" height="32" rx="12" fill="#fdfcf8" stroke="#8d8f92" stroke-width="1" />
+      <rect id="container 4" x="333" y="289" width="32" height="32" rx="16" fill="#f3f2ee" />
+      <text id="ID" x="333" y="301" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600">ID</text>
+      <text id="Ines Duarte" x="377" y="301" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">Ines Duarte</text>
+      <text id="ines@contractor.io" x="377" y="319" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">ines@contractor.io</text>
+      <rect id="field 3" x="624" y="289" width="131" height="32" rx="12" fill="#fdfcf8" stroke="#8d8f92" stroke-width="1" />
+      <rect id="container 5" x="313" y="339" width="462" height="141" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="General access" x="333" y="370" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">General access</text>
+      <rect id="container 6" x="333" y="384" width="32" height="32" rx="16" fill="#f3f2ee" />
+      <rect id="field 4" x="373" y="384" width="382" height="32" rx="12" fill="#fdfcf8" stroke="#8d8f92" stroke-width="1" />
+      <text id="Only the people listed below can open it…" x="333" y="438" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Only the people listed below can open it. Anyone else following the</text>
+      <text id="link is asked to request access." x="333" y="458" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">link is asked to request access.</text>
+      <rect id="footer" x="313" y="480" width="462" height="113" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <rect id="button" x="333" y="497" width="107.3" height="36" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Copy link" x="386.65" y="511" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Copy link</text>
+      <rect id="button 2" x="688.98" y="497" width="66.02" height="36" rx="12" fill="#007f34" />
+      <text id="Done" x="721.99" y="511" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Done</text>
+      <text id="This link only works for the people list…" x="349" y="557" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">This link only works for the people listed above. Anyone else will have to</text>
+      <text id="request access — change General access i…" x="333" y="573" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">request access — change General access if you meant to share it more widely.</text>
+  </g>
+  <text id="Mobile Bottom Sheet label" x="64" y="2737" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Mobile Bottom Sheet</text>
+  <text id="bottom-sheet-mobile id" x="64" y="2751" font-family="ui-monospace, monospace" font-size="12" fill="#737373">bottom-sheet-mobile</text>
+  <g id="Mobile Bottom Sheet" transform="translate(64, 2769)">
+    <rect id="container" x="0" y="0" width="1088" height="650" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="376" y="65" width="336" height="520" rx="32" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <rect id="container 3" x="397" y="86" width="96" height="12" rx="6" fill="#f3f2ee" />
+      <rect id="container 4" x="397" y="110" width="160" height="12" rx="6" fill="#f3f2ee" />
+      <rect id="container 5" x="397" y="134" width="294" height="112" rx="16" fill="rgba(243, 242, 238, 0.6)" />
+      <rect id="container 6" x="397" y="258" width="128" height="12" rx="6" fill="#f3f2ee" />
+      <rect id="container 7" x="397" y="282" width="294" height="112" rx="16" fill="rgba(243, 242, 238, 0.6)" />
+      <rect id="button" x="397" y="406" width="113.98" height="36" rx="12" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="Sort and filter" x="453.99" y="420" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Sort and filter</text>
+      <rect id="button 2" x="377" y="66" width="334" height="518" fill="rgba(8, 12, 15, 0.4)" />
+      <rect id="dialog" x="377" y="283.56" width="334" height="300.44" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <rect id="container 8" x="524" y="294.56" width="40" height="4" rx="2" fill="rgba(87, 92, 97, 0.4)" />
+      <text id="Sort and filter 2" x="397" y="326.56" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600">Sort and filter</text>
+      <text id="Full" x="624.34" y="318.56" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500" text-anchor="middle">Full</text>
+      <rect id="radio" x="389" y="350.56" width="310" height="60" rx="16" fill="rgba(0, 128, 49, 0.102)" />
+      <text id="Most relevant" x="401" y="376.56" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Most relevant</text>
+      <text id="Default" x="401" y="394.56" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Default</text>
+      <text id="Newest first" x="401" y="438.56" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Newest first</text>
+      <text id="Price: low to high" x="401" y="484.56" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Price: low to high</text>
+      <text id="Price: high to low" x="401" y="530.56" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Price: high to low</text>
+      <text id="Best rated" x="401" y="576.56" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Best rated</text>
+      <text id="Four stars and up" x="401" y="594.56" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Four stars and up</text>
+      <text id="Nearest to me" x="401" y="638.56" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Nearest to me</text>
+      <text id="Needs location access" x="401" y="656.56" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Needs location access</text>
+      <rect id="container 9" x="377" y="519" width="334" height="65" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <rect id="button 3" x="389" y="532" width="310" height="40" rx="16" fill="#007f34" />
+      <text id="Show results" x="544" y="546" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Show results</text>
+  </g>
+  <text id="Unsaved Changes Prompt label" x="64" y="3535" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Unsaved Changes Prompt</text>
+  <text id="modal-unsaved-changes id" x="64" y="3549" font-family="ui-monospace, monospace" font-size="12" fill="#737373">modal-unsaved-changes</text>
+  <g id="Unsaved Changes Prompt" transform="translate(64, 3567)">
+    <rect id="container" x="0" y="0" width="1088" height="418" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="1" y="1" width="1086" height="416" rx="16" fill="rgba(242, 238, 235, 0.302)" />
+      <rect id="button" x="25" y="25" width="126.58" height="34" rx="12" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="Close the editor" x="88.29" y="39" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Close the editor</text>
+      <rect id="container 3" x="1" y="1" width="1086" height="416" rx="16" fill="rgba(252, 251, 248, 0.8)" />
+      <rect id="alertdialog" x="320" y="31" width="448" height="356" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <rect id="container 4" x="345" y="56" width="36" height="36" rx="18" fill="rgba(245, 147, 0, 0.102)" />
+      <text id="You have 3 unsaved changes" x="393" y="72" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600">You have 3 unsaved changes</text>
+      <text id="Closing now discards them. Saving keeps …" x="393" y="98" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Closing now discards them. Saving keeps them and</text>
+      <text id="closes the editor." x="393" y="118" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">closes the editor.</text>
+      <rect id="container 5" x="345" y="140" width="398" height="144" rx="16" fill="rgba(242, 242, 237, 0.4)" stroke="#dbdee1" stroke-width="1" />
+      <text id="Display name" x="358" y="165" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Display name</text>
+      <text id="Acme Corp" x="358" y="183" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Acme Corp</text>
+      <text id="→" x="422.88" y="183" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">→</text>
+      <text id="Acme Corporation Ltd" x="439.23" y="183" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Acme Corporation Ltd</text>
+      <text id="Billing email" x="358" y="207" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Billing email</text>
+      <text id="ap@acme.com" x="358" y="225" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">ap@acme.com</text>
+      <text id="→ 2" x="442.41" y="225" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">→</text>
+      <text id="accounts-payable@acme.com" x="458.77" y="225" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">accounts-payable@acme.com</text>
+      <text id="Seat limit" x="358" y="249" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Seat limit</text>
+      <text id="24" x="358" y="267" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">24</text>
+      <text id="→ 3" x="376.94" y="267" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">→</text>
+      <text id="40" x="393.3" y="267" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">40</text>
+      <rect id="button 2" x="345" y="304" width="117.48" height="58" rx="12" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="Keep" x="413.84" y="327" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Keep</text>
+      <text id="editing" x="413.84" y="347" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">editing</text>
+      <rect id="button 3" x="470.48" y="304" width="137.75" height="58" rx="12" fill="none" stroke="rgba(230, 0, 10, 0.4)" stroke-width="1" />
+      <text id="Discard" x="549.45" y="327" fill="#e7000b" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Discard</text>
+      <text id="changes" x="549.45" y="347" fill="#e7000b" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">changes</text>
+      <rect id="button 4" x="616.23" y="304" width="126.77" height="58" rx="12" fill="#007f34" />
+      <text id="Save and" x="689.72" y="327" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Save and</text>
+      <text id="close" x="689.71" y="347" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">close</text>
+  </g>
+  <text id="Record Inspector Drawer label" x="64" y="4101" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Record Inspector Drawer</text>
+  <text id="drawer-record-detail id" x="64" y="4115" font-family="ui-monospace, monospace" font-size="12" fill="#737373">drawer-record-detail</text>
+  <g id="Record Inspector Drawer" transform="translate(64, 4133)">
+    <rect id="container" x="0" y="0" width="1088" height="482" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="1" y="1" width="1086" height="480" rx="16" fill="rgba(242, 238, 235, 0.302)" />
+      <rect id="button" x="17" y="17" width="590" height="64" rx="16" fill="#ffffff" stroke="#007f34" stroke-width="1" />
+      <text id="Acme Corp" x="30" y="44" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Acme Corp</text>
+      <text id="Studio · 40 seats" x="30" y="64" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Studio · 40 seats</text>
+      <rect id="button 2" x="17" y="87" width="590" height="64" rx="16" fill="rgba(253, 255, 255, 0.502)" stroke="#dbdee1" stroke-width="1" />
+      <text id="Globex" x="30" y="114" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Globex</text>
+      <text id="Pro · 8 seats" x="30" y="134" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Pro · 8 seats</text>
+      <rect id="button 3" x="17" y="157" width="590" height="64" rx="16" fill="rgba(253, 255, 255, 0.502)" stroke="#dbdee1" stroke-width="1" />
+      <text id="Initech" x="30" y="184" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Initech</text>
+      <text id="Studio · 51 seats" x="30" y="204" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Studio · 51 seats</text>
+      <rect id="dialog" x="623" y="17" width="448" height="448" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="Acme Corp 2" x="640" y="50" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600">Acme Corp</text>
+      <rect id="container 3" x="728.39" y="35.75" width="49.75" height="20.5" rx="4" fill="rgba(0, 186, 118, 0.102)" />
+      <text id="active" x="728.39" y="46.75" fill="#009966" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="600" letter-spacing="0.28">active</text>
+      <text id="Studio · 40 seats 2" x="640" y="74" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Studio · 40 seats</text>
+      <rect id="tab" x="640" y="96" width="67.2" height="32" rx="12" fill="#f3f2ee" />
+      <text id="details" x="673.6" y="110" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">details</text>
+      <text id="activity" x="747.02" y="110" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">activity</text>
+      <text id="Account ID" x="640" y="175" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Account ID</text>
+      <text id="acct_7Hn2Kq91" x="960.39" y="173" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">acct_7Hn2Kq91</text>
+      <text id="Owner" x="640" y="207" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Owner</text>
+      <text id="Rhea Patel" x="989.47" y="207" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">Rhea Patel</text>
+      <text id="Plan" x="640" y="239" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Plan</text>
+      <text id="Studio (annual)" x="960.81" y="239" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">Studio (annual)</text>
+      <text id="Renews" x="640" y="271" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Renews</text>
+      <text id="1 August 2027" x="964.78" y="271" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">1 August 2027</text>
+      <text id="ARR" x="640" y="303" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">ARR</text>
+      <text id="$48,000" x="1005.67" y="303" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">$48,000</text>
+      <text id="Region" x="640" y="335" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Region</text>
+      <text id="United Kingdom" x="952.73" y="335" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">United Kingdom</text>
+      <rect id="footer" x="624" y="393" width="446" height="71" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <rect id="button 4" x="640" y="411" width="256.42" height="36" rx="12" fill="#007f34" />
+      <text id="Edit" x="768.21" y="425" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Edit</text>
+      <rect id="link" x="904.42" y="410" width="149.58" height="38" rx="12" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="Open full record" x="904.42" y="424" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Open full record</text>
+  </g>
+</svg>

@@ -1,0 +1,464 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1216" height="11477" viewBox="0 0 1216 11477" id="Hoverlab — Heroes">
+  <!--
+    Hoverlab — Heroes. 14 sections, traced from the
+    rendered catalog. Drag this file onto a Figma canvas.
+
+    These are frames, not components: named, editable layers with real
+    geometry, colour and type. There are no variants, no auto-layout,
+    and no hover or motion — none of those exist in a static frame.
+
+    Every section here is free to copy as code at https://hoverlab.dev/blocks
+  -->
+  <rect id="Background" x="0" y="0" width="1216" height="11477" fill="#ffffff" />
+  <text id="Split Hero with Product Panel label" x="64" y="84" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Split Hero with Product Panel</text>
+  <text id="hero-split id" x="64" y="98" font-family="ui-monospace, monospace" font-size="12" fill="#737373">hero-split</text>
+  <g id="Split Hero with Product Panel" transform="translate(64, 116)">
+    <rect id="container" x="0" y="0" width="1088" height="676" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="33" y="126.75" width="141.06" height="26" rx="13" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Now in public beta" x="33" y="138.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Now in public beta</text>
+      <rect id="container 3" x="46" y="136.75" width="6" height="6" rx="3" fill="#007f34" />
+      <text id="Ship your next" x="33" y="222.75" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="60" font-weight="800" letter-spacing="-1.5">Ship your next</text>
+      <text id="idea before" x="33" y="282.75" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="60" font-weight="800" letter-spacing="-1.5">idea before</text>
+      <text id="the weekend." x="33" y="342.75" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="60" font-weight="800" letter-spacing="-1.5">the weekend.</text>
+      <text id="Everything you need to launch — auth, bi…" x="33" y="392.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="18">Everything you need to launch — auth, billing, analytics and</text>
+      <text id="a dashboard your customers will actually…" x="33" y="422" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="18">a dashboard your customers will actually understand.</text>
+      <rect id="link" x="33" y="463.25" width="156.7" height="48" rx="16" fill="#007f34" />
+      <text id="Start building" x="33" y="477.25" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Start building</text>
+      <rect id="link 2" x="201.7" y="463.25" width="134.17" height="48" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Book a demo" x="201.7" y="477.25" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Book a demo</text>
+      <text id="No credit card required" x="33" y="547.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">No credit card required</text>
+      <text id="Free for 14 days" x="196.52" y="547.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Free for 14 days</text>
+      <text id="Cancel anytime" x="320.94" y="547.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Cancel anytime</text>
+      <rect id="container 4" x="576" y="97" width="479" height="482" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 5" x="597" y="114" width="10" height="10" rx="5" fill="rgba(255, 32, 87, 0.698)" />
+      <rect id="container 6" x="613" y="114" width="10" height="10" rx="5" fill="rgba(252, 152, 0, 0.702)" />
+      <rect id="container 7" x="629" y="114" width="10" height="10" rx="5" fill="rgba(0, 188, 124, 0.702)" />
+      <rect id="container 8" x="585" y="132" width="461" height="438" rx="16" fill="rgba(252, 251, 248, 0.8)" />
+      <rect id="container 9" x="601" y="148" width="135" height="88" rx="12" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Revenue" x="614" y="171" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="10" letter-spacing="0.25">Revenue</text>
+      <text id="$48,120" x="614" y="198" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700" letter-spacing="-0.45">$48,120</text>
+      <text id="+12.4%" x="614" y="218" fill="#00bc7d" font-family="ui-sans-serif, system-ui" font-size="10" font-weight="500">+12.4%</text>
+      <rect id="container 10" x="748" y="148" width="135" height="88" rx="12" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Active" x="761" y="171" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="10" letter-spacing="0.25">Active</text>
+      <text id="2,847" x="761" y="198" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700" letter-spacing="-0.45">2,847</text>
+      <text id="+3.1%" x="761" y="218" fill="#00bc7d" font-family="ui-sans-serif, system-ui" font-size="10" font-weight="500">+3.1%</text>
+      <rect id="container 11" x="895" y="148" width="135" height="88" rx="12" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Churn" x="908" y="171" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="10" letter-spacing="0.25">Churn</text>
+      <text id="0.8%" x="908" y="198" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700" letter-spacing="-0.45">0.8%</text>
+      <text id="-0.3%" x="908" y="218" fill="#00bc7d" font-family="ui-sans-serif, system-ui" font-size="10" font-weight="500">-0.3%</text>
+      <rect id="container 12" x="601" y="248" width="429" height="128" rx="12" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 13" x="601" y="388" width="429" height="50" rx="12" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 14" x="612" y="399" width="28" height="28" rx="10" fill="rgba(0, 128, 54, 0.149)" />
+      <text id="AC" x="612" y="409" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="10" font-weight="700">AC</text>
+      <text id="Acme Corp" x="652" y="417" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Acme Corp</text>
+      <text id="$4,200" x="984.05" y="417" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">$4,200</text>
+      <rect id="container 15" x="601" y="446" width="429" height="50" rx="12" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 16" x="612" y="457" width="28" height="28" rx="10" fill="rgba(0, 128, 54, 0.149)" />
+      <text id="GL" x="612" y="467" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="10" font-weight="700">GL</text>
+      <text id="Globex" x="652" y="475" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Globex</text>
+      <text id="$3,300" x="984.05" y="475" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">$3,300</text>
+      <rect id="container 17" x="601" y="504" width="429" height="50" rx="12" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 18" x="612" y="515" width="28" height="28" rx="10" fill="rgba(0, 128, 54, 0.149)" />
+      <text id="IN" x="612" y="525" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="10" font-weight="700">IN</text>
+      <text id="Initech" x="652" y="533" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Initech</text>
+      <text id="$2,400" x="984.05" y="533" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">$2,400</text>
+  </g>
+  <text id="Centered Announcement Hero label" x="64" y="908" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Centered Announcement Hero</text>
+  <text id="hero-centered id" x="64" y="922" font-family="ui-monospace, monospace" font-size="12" fill="#737373">hero-centered</text>
+  <g id="Centered Announcement Hero" transform="translate(64, 940)">
+    <rect id="container" x="0" y="0" width="1088" height="718.5" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="link" x="411.48" y="113" width="265.03" height="30" rx="15" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="418.48" y="118" width="56.66" height="20" rx="10" fill="rgba(0, 128, 54, 0.149)" />
+      <text id="New" x="446.81" y="130" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500" text-anchor="middle">New</text>
+      <text id="Introducing team workspaces" x="563.33" y="132" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500" text-anchor="middle">Introducing team workspaces</text>
+      <text id="One toolkit for the parts every project …" x="544" y="355" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="18" text-anchor="middle">One toolkit for the parts every project needs, so the only thing left to build is the</text>
+      <text id="part that makes yours different." x="544" y="384.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="18" text-anchor="middle">part that makes yours different.</text>
+      <rect id="link 2" x="375.56" y="429.5" width="177.56" height="48" rx="16" fill="#007f34" />
+      <text id="Get started free" x="464.34" y="443.5" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Get started free</text>
+      <rect id="link 3" x="565.13" y="429.5" width="147.3" height="48" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Read the docs" x="638.77" y="443.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Read the docs</text>
+      <text id="Trusted by teams at" x="544" y="553.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500" letter-spacing="0.6" text-anchor="middle">Trusted by teams at</text>
+      <text id="Acme" x="340.99" y="595.5" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700" letter-spacing="-0.45" text-anchor="middle">Acme</text>
+      <text id="Globex" x="432.39" y="595.5" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700" letter-spacing="-0.45" text-anchor="middle">Globex</text>
+      <text id="Initech" x="528.28" y="595.5" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700" letter-spacing="-0.45" text-anchor="middle">Initech</text>
+      <text id="Umbrella" x="632.55" y="595.5" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700" letter-spacing="-0.45" text-anchor="middle">Umbrella</text>
+      <text id="Soylent" x="739.66" y="595.5" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700" letter-spacing="-0.45" text-anchor="middle">Soylent</text>
+  </g>
+  <text id="Hero with Browser Frame label" x="64" y="1774.5" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Hero with Browser Frame</text>
+  <text id="hero-screenshot id" x="64" y="1788.5" font-family="ui-monospace, monospace" font-size="12" fill="#737373">hero-screenshot</text>
+  <g id="Hero with Browser Frame" transform="translate(64, 1806.5)">
+    <rect id="container" x="0" y="0" width="1088" height="1005" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="437.38" y="113" width="213.25" height="26" rx="13" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Analytics, without the spreadsheet" x="544" y="125" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500" text-anchor="middle">Analytics, without the spreadsheet</text>
+      <text id="See what your product" x="544" y="209" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="60" font-weight="800" letter-spacing="-1.5" text-anchor="middle">See what your product</text>
+      <text id="is doing, right now." x="544" y="269" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="60" font-weight="800" letter-spacing="-1.5" text-anchor="middle">is doing, right now.</text>
+      <text id="Every event, session and conversion in o…" x="543.99" y="319" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="18" text-anchor="middle">Every event, session and conversion in one place — with the answer already on</text>
+      <text id="screen instead of three filters away." x="543.99" y="348.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="18" text-anchor="middle">screen instead of three filters away.</text>
+      <rect id="link" x="392.19" y="389.5" width="138.63" height="48" rx="16" fill="#007f34" />
+      <text id="Try it free" x="461.5" y="403.5" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Try it free</text>
+      <rect id="link 2" x="542.81" y="389.5" width="153" height="48" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Watch the tour" x="619.31" y="403.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Watch the tour</text>
+      <text id="from 812 reviews on G2" x="587" y="475.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" text-anchor="middle">from 812 reviews on G2</text>
+      <text id="4.9" x="511.85" y="475.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">4.9</text>
+      <rect id="container 3" x="33" y="537.5" width="1022" height="466.5" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 4" x="50" y="557.75" width="10" height="10" rx="5" fill="rgba(255, 32, 87, 0.698)" />
+      <rect id="container 5" x="66" y="557.75" width="10" height="10" rx="5" fill="rgba(252, 152, 0, 0.702)" />
+      <rect id="container 6" x="82" y="557.75" width="10" height="10" rx="5" fill="rgba(0, 188, 124, 0.702)" />
+      <rect id="container 7" x="461.28" y="550.5" width="159.42" height="24.5" rx="10" fill="rgba(252, 251, 248, 0.8)" />
+      <text id="app.acme.com/overview" x="461.28" y="561.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11">app.acme.com/overview</text>
+      <rect id="container 8" x="34" y="588" width="1020" height="416" fill="rgba(253, 252, 248, 0.6)" />
+      <rect id="container 9" x="50" y="604" width="96" height="28" rx="10" fill="#f3f2ee" />
+      <rect id="container 10" x="50" y="656" width="175" height="32" rx="12" fill="rgba(0, 128, 54, 0.149)" />
+      <rect id="container 11" x="50" y="696" width="175" height="32" rx="12" fill="rgba(243, 242, 238, 0.6)" />
+      <rect id="container 12" x="50" y="736" width="175" height="32" rx="12" fill="rgba(243, 242, 238, 0.6)" />
+      <rect id="container 13" x="50" y="776" width="175" height="32" rx="12" fill="rgba(243, 242, 238, 0.6)" />
+      <rect id="container 14" x="50" y="816" width="175" height="32" rx="12" fill="rgba(243, 242, 238, 0.6)" />
+      <rect id="container 15" x="262" y="612" width="160" height="24" rx="10" fill="#f3f2ee" />
+      <rect id="container 16" x="938" y="608" width="96" height="32" rx="12" fill="rgba(0, 125, 50, 0.2)" />
+      <rect id="container 17" x="262" y="656" width="184" height="80" rx="16" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 18" x="275" y="669" width="48" height="10" rx="4" fill="#f3f2ee" />
+      <rect id="container 19" x="275" y="689" width="80" height="20" rx="4" fill="rgba(242, 241, 237, 0.8)" />
+      <rect id="container 20" x="275" y="715" width="40" height="8" rx="4" fill="rgba(0, 188, 125, 0.4)" />
+      <rect id="container 21" x="458" y="656" width="184" height="80" rx="16" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 22" x="471" y="669" width="48" height="10" rx="4" fill="#f3f2ee" />
+      <rect id="container 23" x="471" y="689" width="80" height="20" rx="4" fill="rgba(242, 241, 237, 0.8)" />
+      <rect id="container 24" x="471" y="715" width="40" height="8" rx="4" fill="rgba(0, 188, 125, 0.4)" />
+      <rect id="container 25" x="654" y="656" width="184" height="80" rx="16" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 26" x="667" y="669" width="48" height="10" rx="4" fill="#f3f2ee" />
+      <rect id="container 27" x="667" y="689" width="80" height="20" rx="4" fill="rgba(242, 241, 237, 0.8)" />
+      <rect id="container 28" x="667" y="715" width="40" height="8" rx="4" fill="rgba(0, 188, 125, 0.4)" />
+      <rect id="container 29" x="850" y="656" width="184" height="80" rx="16" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 30" x="863" y="669" width="48" height="10" rx="4" fill="#f3f2ee" />
+      <rect id="container 31" x="863" y="689" width="80" height="20" rx="4" fill="rgba(242, 241, 237, 0.8)" />
+      <rect id="container 32" x="863" y="715" width="40" height="8" rx="4" fill="rgba(0, 188, 125, 0.4)" />
+      <rect id="container 33" x="262" y="752" width="772" height="192" rx="16" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+  </g>
+  <text id="Waitlist Hero with Email Capture label" x="64" y="2927.5" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Waitlist Hero with Email Capture</text>
+  <text id="hero-waitlist id" x="64" y="2941.5" font-family="ui-monospace, monospace" font-size="12" fill="#737373">hero-waitlist</text>
+  <g id="Waitlist Hero with Email Capture" transform="translate(64, 2959.5)">
+    <rect id="container" x="0" y="0" width="1088" height="600.5" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Be first through" x="543.99" y="163" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="60" font-weight="800" letter-spacing="-1.5" text-anchor="middle">Be first through</text>
+      <text id="the door." x="543.99" y="223" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="60" font-weight="800" letter-spacing="-1.5" text-anchor="middle">the door.</text>
+      <text id="We are letting people in a few hundred a…" x="543.99" y="273" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="18" text-anchor="middle">We are letting people in a few hundred at a time. Leave your email and</text>
+      <text id="we will send an invite the moment a slot…" x="543.99" y="302.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="18" text-anchor="middle">we will send an invite the moment a slot opens.</text>
+      <rect id="field" x="320" y="347.5" width="260.89" height="48" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="button" x="588.89" y="347.5" width="179.11" height="48" rx="16" fill="#007f34" />
+      <text id="Request an invite" x="678.45" y="361.5" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Request an invite</text>
+      <text id="No spam, and one unsubscribe link in eve…" x="544" y="419.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" text-anchor="middle">No spam, and one unsubscribe link in every email.</text>
+      <rect id="container 2" x="408.95" y="455.5" width="32" height="32" rx="16" fill="none" stroke="#fdfcf8" stroke-width="2" />
+      <text id="AL" x="424.95" y="465.5" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="10" font-weight="700" text-anchor="middle">AL</text>
+      <rect id="container 3" x="432.95" y="455.5" width="32" height="32" rx="16" fill="none" stroke="#fdfcf8" stroke-width="2" />
+      <text id="RS" x="448.95" y="465.5" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="10" font-weight="700" text-anchor="middle">RS</text>
+      <rect id="container 4" x="456.95" y="455.5" width="32" height="32" rx="16" fill="none" stroke="#fdfcf8" stroke-width="2" />
+      <text id="MK" x="472.95" y="465.5" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="10" font-weight="700" text-anchor="middle">MK</text>
+      <rect id="container 5" x="480.95" y="455.5" width="32" height="32" rx="16" fill="none" stroke="#fdfcf8" stroke-width="2" />
+      <text id="JT" x="496.95" y="465.5" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="10" font-weight="700" text-anchor="middle">JT</text>
+      <rect id="container 6" x="504.95" y="455.5" width="32" height="32" rx="16" fill="none" stroke="#fdfcf8" stroke-width="2" />
+      <text id="PW" x="520.95" y="465.5" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="10" font-weight="700" text-anchor="middle">PW</text>
+      <text id="already waiting" x="614" y="475.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" text-anchor="middle">already waiting</text>
+      <text id="4,128" x="565.27" y="475.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">4,128</text>
+  </g>
+  <text id="Search-First Hero label" x="64" y="3676" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Search-First Hero</text>
+  <text id="hero-search id" x="64" y="3690" font-family="ui-monospace, monospace" font-size="12" fill="#737373">hero-search</text>
+  <g id="Search-First Hero" transform="translate(64, 3708)">
+    <rect id="container" x="0" y="0" width="1088" height="560.5" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Find the component you" x="544" y="163" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="60" font-weight="800" letter-spacing="-1.5" text-anchor="middle">Find the component you</text>
+      <text id="were about to build." x="543.99" y="223" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="60" font-weight="800" letter-spacing="-1.5" text-anchor="middle">were about to build.</text>
+      <text id="Six hundred production-ready sections, s…" x="543.99" y="273" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="18" text-anchor="middle">Six hundred production-ready sections, searchable by what they do</text>
+      <text id="rather than what they are called." x="544" y="302.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="18" text-anchor="middle">rather than what they are called.</text>
+      <rect id="field" x="256" y="347.5" width="477.83" height="50" rx="16" fill="rgba(255, 255, 255, 0.698)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="button" x="741.83" y="347.5" width="90.17" height="50" rx="16" fill="#007f34" />
+      <text id="Search" x="786.91" y="361.5" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Search</text>
+      <text id="Popular" x="343.25" y="438.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" text-anchor="middle">Popular</text>
+      <rect id="button 2" x="381.42" y="421.5" width="90.3" height="26" rx="13" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Dashboards" x="426.57" y="433.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500" text-anchor="middle">Dashboards</text>
+      <rect id="button 3" x="479.72" y="421.5" width="84.38" height="26" rx="13" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Auth flows" x="521.91" y="433.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500" text-anchor="middle">Auth flows</text>
+      <rect id="button 4" x="572.09" y="421.5" width="99.42" height="26" rx="13" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Pricing tables" x="621.8" y="433.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500" text-anchor="middle">Pricing tables</text>
+      <rect id="button 5" x="679.52" y="421.5" width="95.41" height="26" rx="13" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Empty states" x="727.22" y="433.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500" text-anchor="middle">Empty states</text>
+  </g>
+  <text id="Developer Hero with Install Command label" x="64" y="4384.5" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Developer Hero with Install Command</text>
+  <text id="hero-terminal id" x="64" y="4398.5" font-family="ui-monospace, monospace" font-size="12" fill="#737373">hero-terminal</text>
+  <g id="Developer Hero with Install Command" transform="translate(64, 4416.5)">
+    <rect id="container" x="0" y="0" width="1088" height="784" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="456.19" y="113" width="175.61" height="26" rx="13" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="v2.4 — zero-config" x="543.99" y="125" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12" text-anchor="middle">v2.4 — zero-config</text>
+      <text id="One command." x="544" y="213" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="60" font-weight="800" letter-spacing="-1.5" text-anchor="middle">One command.</text>
+      <text id="Every component." x="544" y="273" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="60" font-weight="800" letter-spacing="-1.5" text-anchor="middle">Every component.</text>
+      <text id="Install the CLI and pull any section str…" x="544" y="323" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="18" text-anchor="middle">Install the CLI and pull any section straight into your project, typed and</text>
+      <text id="themed against your own tokens." x="543.99" y="352.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="18" text-anchor="middle">themed against your own tokens.</text>
+      <rect id="container 3" x="208" y="401.5" width="672" height="189.5" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 4" x="225" y="415.75" width="10" height="10" rx="5" fill="rgba(255, 32, 87, 0.698)" />
+      <rect id="container 5" x="241" y="415.75" width="10" height="10" rx="5" fill="rgba(252, 152, 0, 0.702)" />
+      <rect id="container 6" x="257" y="415.75" width="10" height="10" rx="5" fill="rgba(0, 188, 124, 0.702)" />
+      <text id="bash" x="281" y="423.5" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="11">bash</text>
+      <rect id="container 7" x="209" y="440" width="670" height="150" fill="rgba(252, 251, 248, 0.702)" />
+      <text id="npx hoverlab@latest init" x="225" y="475" fill="#080c0f" font-family="ui-monospace, SFMono-Regular" font-size="14">npx hoverlab@latest init</text>
+      <text id="$" x="225" y="476" fill="#007f34" font-family="ui-monospace, SFMono-Regular" font-size="14">$</text>
+      <rect id="button" x="792.19" y="456" width="70.81" height="30" rx="12" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Copy" x="827.59" y="468" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12" font-weight="500" text-anchor="middle">Copy</text>
+      <text id="resolving dependencies…" x="225" y="510" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">resolving dependencies…</text>
+      <text id="added 3 packages in 1.2s" x="225" y="530" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">added 3 packages in 1.2s</text>
+      <text id="created hoverlab.config.ts" x="225" y="550" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">created hoverlab.config.ts</text>
+      <text id="ready — run `npm run dev`" x="225" y="570" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">ready — run `npm run dev`</text>
+      <rect id="link" x="368.95" y="623" width="159.3" height="48" rx="16" fill="#007f34" />
+      <text id="Read the docs" x="448.6" y="637" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Read the docs</text>
+      <rect id="link 2" x="540.25" y="623" width="178.8" height="48" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Browse components" x="629.65" y="637" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Browse components</text>
+  </g>
+  <text id="App Download Hero with Phone label" x="64" y="5316.5" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">App Download Hero with Phone</text>
+  <text id="hero-app-download id" x="64" y="5330.5" font-family="ui-monospace, monospace" font-size="12" fill="#737373">hero-app-download</text>
+  <g id="App Download Hero with Phone" transform="translate(64, 5348.5)">
+    <rect id="container" x="0" y="0" width="1088" height="655.75" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="33" y="97" width="162.2" height="26" rx="13" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Now on iOS and Android" x="33" y="109" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Now on iOS and Android</text>
+      <text id="Your focus," x="33" y="193" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="60" font-weight="800" letter-spacing="-1.5">Your focus,</text>
+      <text id="finally in" x="33" y="253" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="60" font-weight="800" letter-spacing="-1.5">finally in</text>
+      <text id="one place." x="33" y="313" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="60" font-weight="800" letter-spacing="-1.5">one place.</text>
+      <text id="Track deep work, block the noise and see…" x="33" y="363" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="18">Track deep work, block the noise and see where your</text>
+      <text id="attention actually went — without a dash…" x="33" y="392.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="18">attention actually went — without a dashboard you need a</text>
+      <text id="manual to read." x="33" y="421.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="18">manual to read.</text>
+      <rect id="link" x="33" y="462.75" width="173.91" height="56" rx="16" fill="#080c0f" />
+      <text id="Download on the" x="89" y="484.5" fill="#fdfcf8" font-family="ui-sans-serif, system-ui" font-size="10" letter-spacing="0.25">Download on the</text>
+      <text id="App Store" x="89" y="501" fill="#fdfcf8" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">App Store</text>
+      <rect id="link 2" x="218.91" y="462.75" width="154.13" height="56" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Get it on" x="275.91" y="484.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="10" letter-spacing="0.25">Get it on</text>
+      <text id="Google Play" x="275.91" y="501" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Google Play</text>
+      <text id="4.9 out of 5 · 12,400 ratings" x="57" y="554.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">4.9 out of 5 · 12,400 ratings</text>
+      <rect id="container 3" x="799" y="119.88" width="256" height="416" rx="40" fill="#ffffff" stroke="rgba(8, 12, 15, 0.851)" stroke-width="8" />
+      <rect id="container 4" x="895" y="135.88" width="64" height="6" rx="3" fill="rgba(8, 12, 16, 0.251)" />
+      <text id="Wednesday" x="823" y="175.88" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="10" letter-spacing="0.25">Wednesday</text>
+      <text id="Focus" x="823" y="206.88" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="24" font-weight="700" letter-spacing="-0.6">Focus</text>
+      <rect id="container 5" x="823" y="226.88" width="208" height="107" rx="16" fill="rgba(252, 251, 248, 0.702)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="72%" x="927" y="273.88" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="30" font-weight="800" letter-spacing="-0.75" text-anchor="middle">72%</text>
+      <text id="of daily goal" x="927" y="293.88" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="10" text-anchor="middle">of daily goal</text>
+      <rect id="container 6" x="840" y="310.88" width="174" height="6" rx="3" fill="rgba(220, 222, 225, 0.6)" />
+      <rect id="container 7" x="840" y="310.88" width="125.27" height="6" rx="3" fill="#007f34" />
+      <rect id="container 8" x="823" y="345.88" width="208" height="42" rx="16" fill="rgba(0, 128, 49, 0.102)" stroke="rgba(0, 128, 52, 0.4)" stroke-width="1" />
+      <text id="Deep work" x="836" y="370.88" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Deep work</text>
+      <text id="2h 14m today" x="957" y="369.38" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="10">2h 14m today</text>
+      <rect id="container 9" x="823" y="399.88" width="208" height="42" rx="16" fill="rgba(252, 251, 248, 0.702)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Streak" x="836" y="424.88" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Streak</text>
+      <text id="18 days" x="984.41" y="423.38" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="10">18 days</text>
+      <rect id="container 10" x="823" y="453.88" width="208" height="42" rx="16" fill="rgba(252, 251, 248, 0.702)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Next session" x="836" y="478.88" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Next session</text>
+      <text id="in 25 min" x="976.95" y="477.38" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="10">in 25 min</text>
+      <rect id="container 11" x="879" y="511.88" width="96" height="4" rx="2" fill="rgba(8, 12, 16, 0.251)" />
+  </g>
+  <text id="Hero Anchored by a Customer Quote label" x="64" y="6120.25" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Hero Anchored by a Customer Quote</text>
+  <text id="hero-testimonial id" x="64" y="6134.25" font-family="ui-monospace, monospace" font-size="12" fill="#737373">hero-testimonial</text>
+  <g id="Hero Anchored by a Customer Quote" transform="translate(64, 6152.25)">
+    <rect id="container" x="0" y="0" width="1088" height="609.75" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="33" y="99" width="163.86" height="26" rx="13" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Trusted by 4,000 teams" x="33" y="111" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Trusted by 4,000 teams</text>
+      <rect id="container 3" x="46" y="109" width="6" height="6" rx="3" fill="#00bc7d" />
+      <text id="Stop rebuilding" x="33" y="195" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="60" font-weight="800" letter-spacing="-1.5">Stop rebuilding</text>
+      <text id="the same" x="33" y="255" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="60" font-weight="800" letter-spacing="-1.5">the same</text>
+      <text id="eight screens." x="33" y="315" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="60" font-weight="800" letter-spacing="-1.5">eight screens.</text>
+      <text id="Every section your product needs, writte…" x="33" y="365" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="18">Every section your product needs, written the way a senior</text>
+      <text id="engineer would write it — accessible, th…" x="33" y="394.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="18">engineer would write it — accessible, themed and yours</text>
+      <text id="to edit." x="33" y="423.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="18">to edit.</text>
+      <rect id="link" x="33" y="464.75" width="128.84" height="48" rx="16" fill="#007f34" />
+      <text id="Start free" x="33" y="478.75" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Start free</text>
+      <rect id="link 2" x="173.84" y="464.75" width="126.2" height="48" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Talk to sales" x="173.84" y="478.75" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Talk to sales</text>
+      <rect id="container 4" x="598.8" y="148.38" width="456.2" height="313" rx="16" fill="rgba(255, 255, 255, 0.698)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="image" x="627.8" y="133.38" width="36" height="36" rx="12" fill="#007f34" />
+      <text id="We shipped our entire onboarding flow in" x="635.8" y="219.38" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="500">We shipped our entire onboarding flow in</text>
+      <text id="a weekend. The parts we would have" x="635.8" y="251.88" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="500">a weekend. The parts we would have</text>
+      <text id="argued about for a week were already" x="635.8" y="284.38" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="500">argued about for a week were already</text>
+      <text id="decided, and decided well." x="635.8" y="316.88" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="500">decided, and decided well.</text>
+      <rect id="container 5" x="635.8" y="355.38" width="382.2" height="69" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 6" x="635.8" y="380.38" width="44" height="44" rx="22" fill="rgba(0, 128, 54, 0.149)" />
+      <text id="PR" x="635.8" y="394.38" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="700">PR</text>
+      <text id="Priya Raman" x="691.8" y="398.38" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Priya Raman</text>
+      <text id="Head of Engineering, Northwind" x="691.8" y="416.38" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Head of Engineering, Northwind</text>
+  </g>
+  <text id="Hero with Proof Metrics label" x="64" y="6878" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Hero with Proof Metrics</text>
+  <text id="hero-metrics id" x="64" y="6892" font-family="ui-monospace, monospace" font-size="12" fill="#737373">hero-metrics</text>
+  <g id="Hero with Proof Metrics" transform="translate(64, 6910)">
+    <rect id="container" x="0" y="0" width="1088" height="729" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="453.58" y="115" width="180.84" height="26" rx="13" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Built for production traffic" x="544" y="127" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500" text-anchor="middle">Built for production traffic</text>
+      <rect id="container 3" x="466.58" y="125" width="6" height="6" rx="3" fill="#007f34" />
+      <text id="Infrastructure that" x="544" y="215" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="60" font-weight="800" letter-spacing="-1.5" text-anchor="middle">Infrastructure that</text>
+      <text id="stops being interesting." x="544" y="275" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="60" font-weight="800" letter-spacing="-1.5" text-anchor="middle">stops being interesting.</text>
+      <text id="Deploy once and forget the pager. We han…" x="544" y="325" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="18" text-anchor="middle">Deploy once and forget the pager. We handle the regions, the failover and the</text>
+      <text id="certificate you were about to let expire…" x="543.99" y="354.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="18" text-anchor="middle">certificate you were about to let expire.</text>
+      <rect id="link" x="344.83" y="395.5" width="204.36" height="48" rx="16" fill="#007f34" />
+      <text id="Deploy your first app" x="447.01" y="409.5" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Deploy your first app</text>
+      <rect id="link 2" x="561.19" y="395.5" width="181.98" height="48" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="View the status page" x="652.18" y="409.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">View the status page</text>
+      <rect id="container 4" x="64" y="507.5" width="960" height="108.5" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="99.99%" x="175" y="584.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="800" letter-spacing="-0.9" text-anchor="middle">99.99%</text>
+      <text id="Uptime, rolling 90 days" x="175" y="608.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" text-anchor="middle">Uptime, rolling 90 days</text>
+      <text id="2.4B" x="421" y="584.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="800" letter-spacing="-0.9" text-anchor="middle">2.4B</text>
+      <text id="Requests served monthly" x="421" y="608.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" text-anchor="middle">Requests served monthly</text>
+      <text id="180ms" x="667" y="584.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="800" letter-spacing="-0.9" text-anchor="middle">180ms</text>
+      <text id="Median global latency" x="667" y="608.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" text-anchor="middle">Median global latency</text>
+      <text id="38" x="913" y="584.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="800" letter-spacing="-0.9" text-anchor="middle">38</text>
+      <text id="Edge regions" x="913" y="608.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" text-anchor="middle">Edge regions</text>
+  </g>
+  <text id="Editorial Masthead Hero label" x="64" y="7755" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Editorial Masthead Hero</text>
+  <text id="hero-editorial id" x="64" y="7769" font-family="ui-monospace, monospace" font-size="12" fill="#737373">hero-editorial</text>
+  <g id="Editorial Masthead Hero" transform="translate(64, 7787)">
+    <rect id="container" x="0" y="0" width="1088" height="629" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Field notes" x="192" y="130" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600" letter-spacing="2.16">Field notes</text>
+      <text id="The interface is" x="192" y="245" fill="#080c0f" font-family="ui-serif, Georgia" font-size="60" letter-spacing="-1.5">The interface is</text>
+      <text id="the argument." x="192" y="311" fill="#080c0f" font-family="ui-serif, Georgia" font-size="60" letter-spacing="-1.5">the argument.</text>
+      <text id="Every product makes a claim about how it…" x="192" y="367" fill="#575b60" font-family="ui-serif, Georgia" font-size="20">Every product makes a claim about how its user should think. Most make it by</text>
+      <text id="accident. A short case for treating layo…" x="192" y="399.5" fill="#575b60" font-family="ui-serif, Georgia" font-size="20">accident. A short case for treating layout as a position rather than a container.</text>
+      <text id="Ada Whitfield" x="192" y="459" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Ada Whitfield</text>
+      <text id="·" x="278.91" y="459" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">·</text>
+      <text id="14 March 2026" x="293.52" y="459" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">14 March 2026</text>
+      <text id="· 2" x="384.3" y="459" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">·</text>
+      <text id="9 min read" x="398.91" y="459" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">9 min read</text>
+      <text id="Read the essay" x="192" y="509" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Read the essay</text>
+  </g>
+  <text id="Full-Bleed Media Hero label" x="64" y="8532" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Full-Bleed Media Hero</text>
+  <text id="hero-media-overlay id" x="64" y="8546" font-family="ui-monospace, monospace" font-size="12" fill="#737373">hero-media-overlay</text>
+  <g id="Full-Bleed Media Hero" transform="translate(64, 8564)">
+    <rect id="container" x="0" y="0" width="1088" height="642.5" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="33" y="145" width="126.06" height="26" rx="13" fill="rgba(255, 255, 255, 0.102)" stroke="rgba(255, 255, 255, 0.251)" stroke-width="1" />
+      <text id="Autumn collection" x="33" y="157" fill="#ffffff" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Autumn collection</text>
+      <text id="Made to be" x="33" y="251" fill="#ffffff" font-family="ui-sans-serif, system-ui" font-size="72" font-weight="800" letter-spacing="-1.8">Made to be</text>
+      <text id="worn out." x="33" y="323" fill="#ffffff" font-family="ui-sans-serif, system-ui" font-size="72" font-weight="800" letter-spacing="-1.8">worn out.</text>
+      <text id="Twelve pieces, cut from deadstock wool i…" x="33" y="375" fill="rgba(255, 255, 255, 0.851)" font-family="ui-sans-serif, system-ui" font-size="18">Twelve pieces, cut from deadstock wool in a mill that has been running</text>
+      <text id="since 1908. Built to outlast the season …" x="33" y="404.25" fill="rgba(255, 255, 255, 0.851)" font-family="ui-sans-serif, system-ui" font-size="18">since 1908. Built to outlast the season that named them.</text>
+      <rect id="link" x="33" y="449.5" width="192.44" height="48" rx="16" fill="#ffffff" />
+      <text id="Shop the collection" x="33" y="463.5" fill="#0f172b" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Shop the collection</text>
+      <rect id="link 2" x="237.44" y="449.5" width="166.84" height="48" rx="16" fill="rgba(255, 255, 255, 0.102)" stroke="rgba(255, 255, 255, 0.298)" stroke-width="1" />
+      <text id="Watch the film" x="237.44" y="463.5" fill="#ffffff" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Watch the film</text>
+  </g>
+  <text id="Integration Wall Hero label" x="64" y="9322.5" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Integration Wall Hero</text>
+  <text id="hero-integrations id" x="64" y="9336.5" font-family="ui-monospace, monospace" font-size="12" fill="#737373">hero-integrations</text>
+  <g id="Integration Wall Hero" transform="translate(64, 9354.5)">
+    <rect id="container" x="0" y="0" width="1088" height="673" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="33" y="99.63" width="135.75" height="26" rx="13" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="120+ connectors" x="33" y="111.63" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">120+ connectors</text>
+      <text id="Your stack," x="33" y="195.63" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="60" font-weight="800" letter-spacing="-1.5">Your stack,</text>
+      <text id="finally speaking" x="33" y="255.63" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="60" font-weight="800" letter-spacing="-1.5">finally speaking</text>
+      <text id="the same" x="33" y="315.63" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="60" font-weight="800" letter-spacing="-1.5">the same</text>
+      <text id="language." x="33" y="375.63" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="60" font-weight="800" letter-spacing="-1.5">language.</text>
+      <text id="Sync every system you already run into o…" x="33" y="425.63" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="18">Sync every system you already run into one warehouse —</text>
+      <text id="incrementally, on a schedule you set, wi…" x="33" y="454.88" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="18">incrementally, on a schedule you set, without writing the</text>
+      <text id="pipeline yourself." x="33" y="484.13" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="18">pipeline yourself.</text>
+      <rect id="link" x="33" y="525.38" width="179.13" height="48" rx="16" fill="#007f34" />
+      <text id="Connect a source" x="33" y="539.38" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Connect a source</text>
+      <rect id="link 2" x="224.13" y="525.38" width="169.73" height="48" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Browse connectors" x="224.13" y="539.38" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Browse connectors</text>
+      <rect id="list item" x="576" y="97" width="107.75" height="107.75" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 3" x="611.88" y="122" width="36" height="36" rx="12" fill="rgba(0, 128, 54, 0.149)" />
+      <text id="PO" x="629.88" y="134" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="700" text-anchor="middle">PO</text>
+      <text id="Postgres" x="629.87" y="177" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="500" text-anchor="middle">Postgres</text>
+      <rect id="list item 2" x="699.75" y="97" width="107.75" height="107.75" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 4" x="735.63" y="122" width="36" height="36" rx="12" fill="rgba(0, 128, 54, 0.149)" />
+      <text id="SN" x="753.63" y="134" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="700" text-anchor="middle">SN</text>
+      <text id="Snowflake" x="753.62" y="177" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="500" text-anchor="middle">Snowflake</text>
+      <rect id="list item 3" x="823.5" y="97" width="107.75" height="107.75" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 5" x="859.38" y="122" width="36" height="36" rx="12" fill="rgba(0, 128, 54, 0.149)" />
+      <text id="ST" x="877.38" y="134" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="700" text-anchor="middle">ST</text>
+      <text id="Stripe" x="877.37" y="177" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="500" text-anchor="middle">Stripe</text>
+      <rect id="list item 4" x="947.25" y="97" width="107.75" height="107.75" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 6" x="983.13" y="122" width="36" height="36" rx="12" fill="rgba(0, 128, 54, 0.149)" />
+      <text id="SA" x="1001.13" y="134" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="700" text-anchor="middle">SA</text>
+      <text id="Salesforce" x="1001.12" y="177" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="500" text-anchor="middle">Salesforce</text>
+      <rect id="list item 5" x="576" y="220.75" width="107.75" height="107.75" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 7" x="611.88" y="245.75" width="36" height="36" rx="12" fill="rgba(0, 128, 54, 0.149)" />
+      <text id="HU" x="629.88" y="257.75" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="700" text-anchor="middle">HU</text>
+      <text id="HubSpot" x="629.87" y="300.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="500" text-anchor="middle">HubSpot</text>
+      <rect id="list item 6" x="699.75" y="220.75" width="107.75" height="107.75" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 8" x="735.63" y="245.75" width="36" height="36" rx="12" fill="rgba(0, 128, 54, 0.149)" />
+      <text id="SE" x="753.63" y="257.75" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="700" text-anchor="middle">SE</text>
+      <text id="Segment" x="753.62" y="300.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="500" text-anchor="middle">Segment</text>
+      <rect id="list item 7" x="823.5" y="220.75" width="107.75" height="107.75" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 9" x="859.38" y="245.75" width="36" height="36" rx="12" fill="rgba(0, 128, 54, 0.149)" />
+      <text id="BI" x="877.38" y="257.75" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="700" text-anchor="middle">BI</text>
+      <text id="BigQuery" x="877.37" y="300.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="500" text-anchor="middle">BigQuery</text>
+      <rect id="list item 8" x="947.25" y="220.75" width="107.75" height="107.75" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 10" x="983.13" y="245.75" width="36" height="36" rx="12" fill="rgba(0, 128, 54, 0.149)" />
+      <text id="SH" x="1001.13" y="257.75" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="700" text-anchor="middle">SH</text>
+      <text id="Shopify" x="1001.12" y="300.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="500" text-anchor="middle">Shopify</text>
+      <rect id="list item 9" x="576" y="344.5" width="107.75" height="107.75" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 11" x="611.88" y="369.5" width="36" height="36" rx="12" fill="rgba(0, 128, 54, 0.149)" />
+      <text id="ZE" x="629.88" y="381.5" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="700" text-anchor="middle">ZE</text>
+      <text id="Zendesk" x="629.88" y="424.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="500" text-anchor="middle">Zendesk</text>
+      <rect id="list item 10" x="699.75" y="344.5" width="107.75" height="107.75" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 12" x="735.63" y="369.5" width="36" height="36" rx="12" fill="rgba(0, 128, 54, 0.149)" />
+      <text id="NO" x="753.63" y="381.5" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="700" text-anchor="middle">NO</text>
+      <text id="Notion" x="753.63" y="424.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="500" text-anchor="middle">Notion</text>
+      <rect id="list item 11" x="823.5" y="344.5" width="107.75" height="107.75" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 13" x="859.38" y="369.5" width="36" height="36" rx="12" fill="rgba(0, 128, 54, 0.149)" />
+      <text id="SL" x="877.38" y="381.5" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="700" text-anchor="middle">SL</text>
+      <text id="Slack" x="877.38" y="424.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="500" text-anchor="middle">Slack</text>
+      <rect id="list item 12" x="947.25" y="344.5" width="107.75" height="107.75" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 14" x="983.13" y="369.5" width="36" height="36" rx="12" fill="rgba(0, 128, 54, 0.149)" />
+      <text id="LI" x="1001.13" y="381.5" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="700" text-anchor="middle">LI</text>
+      <text id="Linear" x="1001.12" y="424.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="500" text-anchor="middle">Linear</text>
+      <rect id="list item 13" x="576" y="468.25" width="107.75" height="107.75" rx="16" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="+108 more" x="629.88" y="479.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="500" text-anchor="middle">+108 more</text>
+  </g>
+  <text id="Appointment Booking Hero label" x="64" y="10143.5" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Appointment Booking Hero</text>
+  <text id="hero-booking id" x="64" y="10157.5" font-family="ui-monospace, monospace" font-size="12" fill="#737373">hero-booking</text>
+  <g id="Appointment Booking Hero" transform="translate(64, 10175.5)">
+    <rect id="container" x="0" y="0" width="1088" height="538.5" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="33" y="97" width="197.63" height="26" rx="13" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Shoreditch · open until 8pm" x="33" y="109" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Shoreditch · open until 8pm</text>
+      <text id="A cut that" x="33" y="193" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="60" font-weight="800" letter-spacing="-1.5">A cut that</text>
+      <text id="survives" x="33" y="253" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="60" font-weight="800" letter-spacing="-1.5">survives</text>
+      <text id="the week." x="33" y="313" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="60" font-weight="800" letter-spacing="-1.5">the week.</text>
+      <text id="Forty-five minutes, no rush, no upsell. …" x="33" y="363" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="18">Forty-five minutes, no rush, no upsell. Book the chair rather</text>
+      <text id="than the shop and you get the same hands…" x="33" y="392.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="18">than the shop and you get the same hands every time.</text>
+      <text id="Average wait for a first appointment: 2 …" x="33" y="437.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Average wait for a first appointment: 2 days</text>
+      <rect id="container 3" x="587.67" y="126" width="467.33" height="286.5" rx="16" fill="rgba(255, 255, 255, 0.698)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Pick a day" x="616.67" y="169" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Pick a day</text>
+      <rect id="container 4" x="616.67" y="195" width="75.45" height="88" rx="16" fill="rgba(0, 128, 49, 0.102)" stroke="#007f34" stroke-width="1" />
+      <text id="Mon" x="654.39" y="218" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="10" letter-spacing="0.25" text-anchor="middle">Mon</text>
+      <text id="11" x="654.39" y="243" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700" letter-spacing="-0.45" text-anchor="middle">11</text>
+      <text id="2 left" x="654.39" y="265" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="10" text-anchor="middle">2 left</text>
+      <rect id="container 5" x="700.13" y="195" width="75.47" height="88" rx="16" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" opacity="0.4" />
+      <text id="Tue" x="737.85" y="218" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="10" letter-spacing="0.25" text-anchor="middle">Tue</text>
+      <text id="12" x="737.86" y="243" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700" letter-spacing="-0.45" text-anchor="middle">12</text>
+      <text id="Full" x="737.85" y="265" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="10" text-anchor="middle">Full</text>
+      <rect id="container 6" x="783.59" y="195" width="75.47" height="88" rx="16" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Wed" x="821.32" y="218" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="10" letter-spacing="0.25" text-anchor="middle">Wed</text>
+      <text id="13" x="821.33" y="243" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700" letter-spacing="-0.45" text-anchor="middle">13</text>
+      <text id="5 left" x="821.33" y="265" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="10" text-anchor="middle">5 left</text>
+      <rect id="container 7" x="867.06" y="195" width="75.47" height="88" rx="16" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Thu" x="904.8" y="218" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="10" letter-spacing="0.25" text-anchor="middle">Thu</text>
+      <text id="14" x="904.8" y="243" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700" letter-spacing="-0.45" text-anchor="middle">14</text>
+      <text id="3 left" x="904.8" y="265" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="10" text-anchor="middle">3 left</text>
+      <rect id="container 8" x="950.53" y="195" width="75.45" height="88" rx="16" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Fri" x="988.25" y="218" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="10" letter-spacing="0.25" text-anchor="middle">Fri</text>
+      <text id="15" x="988.25" y="243" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700" letter-spacing="-0.45" text-anchor="middle">15</text>
+      <text id="7 left" x="988.25" y="265" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="10" text-anchor="middle">7 left</text>
+      <rect id="button" x="616.67" y="307" width="409.33" height="48" rx="16" fill="#007f34" />
+      <text id="Check availability" x="821.34" y="321" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Check availability</text>
+      <text id="Free to cancel up to 24 hours before." x="821.34" y="378" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11" text-anchor="middle">Free to cancel up to 24 hours before.</text>
+  </g>
+  <text id="Hero with Inline Price label" x="64" y="10830" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Hero with Inline Price</text>
+  <text id="hero-price-anchor id" x="64" y="10844" font-family="ui-monospace, monospace" font-size="12" fill="#737373">hero-price-anchor</text>
+  <g id="Hero with Inline Price" transform="translate(64, 10862)">
+    <rect id="container" x="0" y="0" width="1088" height="550.5" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="33" y="97" width="156.92" height="26" rx="13" fill="rgba(0, 128, 49, 0.102)" stroke="rgba(0, 126, 53, 0.302)" stroke-width="1" />
+      <text id="Launch week — 40% off" x="33" y="109" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600">Launch week — 40% off</text>
+      <text id="Buy it once. Use" x="33" y="193" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="60" font-weight="800" letter-spacing="-1.5">Buy it once. Use</text>
+      <text id="it in everything." x="33" y="253" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="60" font-weight="800" letter-spacing="-1.5">it in everything.</text>
+      <text id="The whole library, source included, with…" x="33" y="303" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="18">The whole library, source included, with a licence that does not</text>
+      <text id="care how many client projects you ship t…" x="33" y="332.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="18">care how many client projects you ship this year.</text>
+      <text id="Lifetime access, no subscription" x="57" y="387.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Lifetime access, no subscription</text>
+      <text id="Every component and template" x="318.2" y="387.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Every component and template</text>
+      <text id="Figma source files" x="57" y="417.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Figma source files</text>
+      <text id="One year of updates" x="318.2" y="417.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">One year of updates</text>
+      <text id="Unlimited commercial projects" x="57" y="447.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Unlimited commercial projects</text>
+      <rect id="container 3" x="609.41" y="146.25" width="445.58" height="258" rx="16" fill="rgba(255, 255, 255, 0.698)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="$49" x="813.2" y="239.25" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="60" font-weight="800" letter-spacing="-1.5" text-anchor="middle">$49</text>
+      <text id="$82" x="888.51" y="221.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="500" text-anchor="middle">$82</text>
+      <text id="one-time payment" x="832.2" y="259.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" letter-spacing="0.3" text-anchor="middle">one-time payment</text>
+      <rect id="link" x="642.41" y="291.25" width="379.58" height="48" rx="16" fill="#007f34" />
+      <text id="Get the library" x="832.2" y="305.25" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Get the library</text>
+      <text id="30-day refund, no questions asked" x="832.2" y="367.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" text-anchor="middle">30-day refund, no questions asked</text>
+  </g>
+</svg>

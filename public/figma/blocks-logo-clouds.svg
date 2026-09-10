@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1216" height="2166" viewBox="0 0 1216 2166" id="Hoverlab — Logo Clouds">
+  <!--
+    Hoverlab — Logo Clouds. 4 sections, traced from the
+    rendered catalog. Drag this file onto a Figma canvas.
+
+    These are frames, not components: named, editable layers with real
+    geometry, colour and type. There are no variants, no auto-layout,
+    and no hover or motion — none of those exist in a static frame.
+
+    Every section here is free to copy as code at https://hoverlab.dev/blocks
+  -->
+  <rect id="Background" x="0" y="0" width="1216" height="2166" fill="#ffffff" />
+  <text id="Seamless Logo Marquee label" x="64" y="84" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Seamless Logo Marquee</text>
+  <text id="logo-cloud id" x="64" y="98" font-family="ui-monospace, monospace" font-size="12" fill="#737373">logo-cloud</text>
+  <g id="Seamless Logo Marquee" transform="translate(64, 116)">
+    <rect id="container" x="0" y="0" width="1088" height="178" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Trusted by teams shipping every day" x="544" y="63" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Trusted by teams shipping every day</text>
+      <text id="Northwind" x="-18.49" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" letter-spacing="-0.5">Northwind</text>
+      <text id="Contoso" x="135.51" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" letter-spacing="-0.5">Contoso</text>
+      <text id="Initech" x="265.77" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" letter-spacing="-0.5">Initech</text>
+      <text id="Umbrella" x="382.57" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" letter-spacing="-0.5">Umbrella</text>
+      <text id="Globex" x="520.58" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" letter-spacing="-0.5">Globex</text>
+      <text id="Soylent" x="639.99" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" letter-spacing="-0.5">Soylent</text>
+      <text id="Hooli" x="763.08" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" letter-spacing="-0.5">Hooli</text>
+      <text id="Vandelay" x="867.74" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" letter-spacing="-0.5">Vandelay</text>
+      <text id="Northwind 2" x="1004.85" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" letter-spacing="-0.5">Northwind</text>
+      <text id="Contoso 2" x="1158.85" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" letter-spacing="-0.5">Contoso</text>
+      <text id="Initech 2" x="1289.12" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" letter-spacing="-0.5">Initech</text>
+      <text id="Umbrella 2" x="1405.91" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" letter-spacing="-0.5">Umbrella</text>
+      <text id="Globex 2" x="1543.93" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" letter-spacing="-0.5">Globex</text>
+      <text id="Soylent 2" x="1663.33" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" letter-spacing="-0.5">Soylent</text>
+      <text id="Hooli 2" x="1786.43" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" letter-spacing="-0.5">Hooli</text>
+      <text id="Vandelay 2" x="1891.08" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" letter-spacing="-0.5">Vandelay</text>
+  </g>
+  <text id="Bordered Logo Grid label" x="64" y="410" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Bordered Logo Grid</text>
+  <text id="logo-grid id" x="64" y="424" font-family="ui-monospace, monospace" font-size="12" fill="#737373">logo-grid</text>
+  <g id="Bordered Logo Grid" transform="translate(64, 442)">
+    <rect id="container" x="0" y="0" width="1088" height="474" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Trusted by teams shipping every day" x="544" y="79" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Trusted by teams shipping every day</text>
+      <rect id="container 2" x="25" y="117" width="1038" height="292" rx="16" fill="rgba(220, 222, 225, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="list item" x="26" y="118" width="258.25" height="96" fill="#ffffff" />
+      <text id="Northwind" x="155.13" y="170" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="600" letter-spacing="-0.45" text-anchor="middle">Northwind</text>
+      <rect id="list item 2" x="285.25" y="118" width="258.25" height="96" fill="#ffffff" />
+      <text id="Contoso" x="414.37" y="170" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="600" letter-spacing="-0.45" text-anchor="middle">Contoso</text>
+      <rect id="list item 3" x="544.5" y="118" width="258.25" height="96" fill="#ffffff" />
+      <text id="Initech" x="673.63" y="170" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="600" letter-spacing="-0.45" text-anchor="middle">Initech</text>
+      <rect id="list item 4" x="803.75" y="118" width="258.25" height="96" fill="#ffffff" />
+      <text id="Umbra" x="932.87" y="170" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="600" letter-spacing="-0.45" text-anchor="middle">Umbra</text>
+      <rect id="list item 5" x="26" y="215" width="258.25" height="96" fill="#ffffff" />
+      <text id="Lumon" x="155.13" y="267" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="600" letter-spacing="-0.45" text-anchor="middle">Lumon</text>
+      <rect id="list item 6" x="285.25" y="215" width="258.25" height="96" fill="#ffffff" />
+      <text id="Vandelay" x="414.38" y="267" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="600" letter-spacing="-0.45" text-anchor="middle">Vandelay</text>
+      <rect id="list item 7" x="544.5" y="215" width="258.25" height="96" fill="#ffffff" />
+      <text id="Soylent" x="673.62" y="267" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="600" letter-spacing="-0.45" text-anchor="middle">Soylent</text>
+      <rect id="list item 8" x="803.75" y="215" width="258.25" height="96" fill="#ffffff" />
+      <text id="Aperture" x="932.88" y="267" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="600" letter-spacing="-0.45" text-anchor="middle">Aperture</text>
+      <rect id="list item 9" x="26" y="312" width="258.25" height="96" fill="#ffffff" />
+      <text id="Tyrell" x="155.12" y="364" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="600" letter-spacing="-0.45" text-anchor="middle">Tyrell</text>
+      <rect id="list item 10" x="285.25" y="312" width="258.25" height="96" fill="#ffffff" />
+      <text id="Wayne" x="414.38" y="364" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="600" letter-spacing="-0.45" text-anchor="middle">Wayne</text>
+      <rect id="list item 11" x="544.5" y="312" width="258.25" height="96" fill="#ffffff" />
+      <text id="Cyberdyne" x="673.62" y="364" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="600" letter-spacing="-0.45" text-anchor="middle">Cyberdyne</text>
+      <rect id="list item 12" x="803.75" y="312" width="258.25" height="96" fill="#ffffff" />
+      <text id="Stark" x="932.87" y="364" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="600" letter-spacing="-0.45" text-anchor="middle">Stark</text>
+  </g>
+  <text id="Under-Hero Logo Strip label" x="64" y="1032" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Under-Hero Logo Strip</text>
+  <text id="logo-strip id" x="64" y="1046" font-family="ui-monospace, monospace" font-size="12" fill="#737373">logo-strip</text>
+  <g id="Under-Hero Logo Strip" transform="translate(64, 1064)">
+    <rect id="container" x="0" y="0" width="1088" height="111" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="section" x="1" y="1" width="1086" height="109" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Trusted by 4,000+ engineering teams" x="33" y="60" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Trusted by 4,000+ engineering teams</text>
+      <text id="Northwind" x="317.59" y="60" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700" letter-spacing="-0.45">Northwind</text>
+      <text id="Contoso" x="445.8" y="60" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700" letter-spacing="-0.45">Contoso</text>
+      <text id="Umbra" x="552.64" y="60" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700" letter-spacing="-0.45">Umbra</text>
+      <text id="Lumon" x="647.92" y="60" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700" letter-spacing="-0.45">Lumon</text>
+      <text id="Vandelay" x="744.16" y="60" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700" letter-spacing="-0.45">Vandelay</text>
+      <text id="Aperture" x="857.16" y="60" fill="rgba(87, 92, 97, 0.6)" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700" letter-spacing="-0.45">Aperture</text>
+  </g>
+  <text id="Logos Grouped by Industry label" x="64" y="1291" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Logos Grouped by Industry</text>
+  <text id="logo-segments id" x="64" y="1305" font-family="ui-monospace, monospace" font-size="12" fill="#737373">logo-segments</text>
+  <g id="Logos Grouped by Industry" transform="translate(64, 1323)">
+    <rect id="container" x="0" y="0" width="1088" height="779" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Customers" x="33" y="79" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" letter-spacing="0.7">Customers</text>
+      <text id="Someone in your industry" x="33" y="129" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="700" letter-spacing="-0.9">Someone in your industry</text>
+      <text id="has already done this" x="33" y="169" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="700" letter-spacing="-0.9">has already done this</text>
+      <text id="Named with permission. Where a segment s…" x="33" y="211" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">Named with permission. Where a segment shows fewer logos than customers, the rest are</text>
+      <text id="under agreements that do not allow it." x="33" y="237" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">under agreements that do not allow it.</text>
+      <rect id="container 2" x="33" y="293" width="1022" height="421" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Financial services" x="33" y="340" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" letter-spacing="-0.35">Financial services</text>
+      <text id="and 40 more" x="33" y="364" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" letter-spacing="-0.35">and 40 more</text>
+      <text id="Fieldstone" x="265" y="344" fill="rgba(87, 91, 95, 0.702)" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700" letter-spacing="-0.45">Fieldstone</text>
+      <text id="Meridian Capital" x="387.47" y="344" fill="rgba(87, 91, 95, 0.702)" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700" letter-spacing="-0.45">Meridian Capital</text>
+      <text id="Umbra" x="560.39" y="344" fill="rgba(87, 91, 95, 0.702)" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700" letter-spacing="-0.45">Umbra</text>
+      <text id="Halden Trust" x="655.67" y="344" fill="rgba(87, 91, 95, 0.702)" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700" letter-spacing="-0.45">Halden Trust</text>
+      <text id="Healthcare" x="33" y="449" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" letter-spacing="-0.35">Healthcare</text>
+      <text id="and 18 more" x="33" y="473" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" letter-spacing="-0.35">and 18 more</text>
+      <text id="Alcove Health" x="265" y="453" fill="rgba(87, 91, 95, 0.702)" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700" letter-spacing="-0.45">Alcove Health</text>
+      <text id="Coastline" x="417.03" y="453" fill="rgba(87, 91, 95, 0.702)" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700" letter-spacing="-0.45">Coastline</text>
+      <text id="Lumon Care" x="530.52" y="453" fill="rgba(87, 91, 95, 0.702)" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700" letter-spacing="-0.45">Lumon Care</text>
+      <text id="Logistics" x="33" y="558" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" letter-spacing="-0.35">Logistics</text>
+      <text id="and 12 more" x="33" y="582" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" letter-spacing="-0.35">and 12 more</text>
+      <text id="Northwind Freight" x="265" y="562" fill="rgba(87, 91, 95, 0.702)" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700" letter-spacing="-0.45">Northwind Freight</text>
+      <text id="Vandelay" x="454.86" y="562" fill="rgba(87, 91, 95, 0.702)" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700" letter-spacing="-0.45">Vandelay</text>
+      <text id="Portside" x="567.86" y="562" fill="rgba(87, 91, 95, 0.702)" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700" letter-spacing="-0.45">Portside</text>
+      <text id="Public sector" x="33" y="667" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" letter-spacing="-0.35">Public sector</text>
+      <text id="City of Ravel" x="265" y="671" fill="rgba(87, 91, 95, 0.702)" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700" letter-spacing="-0.45">City of Ravel</text>
+      <text id="Kestrel Authority" x="405.63" y="671" fill="rgba(87, 91, 95, 0.702)" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700" letter-spacing="-0.45">Kestrel Authority</text>
+  </g>
+</svg>

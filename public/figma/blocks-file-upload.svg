@@ -1,0 +1,205 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1216" height="4815" viewBox="0 0 1216 4815" id="Hoverlab — File Upload">
+  <!--
+    Hoverlab — File Upload. 7 sections, traced from the
+    rendered catalog. Drag this file onto a Figma canvas.
+
+    These are frames, not components: named, editable layers with real
+    geometry, colour and type. There are no variants, no auto-layout,
+    and no hover or motion — none of those exist in a static frame.
+
+    Every section here is free to copy as code at https://hoverlab.dev/blocks
+  -->
+  <rect id="Background" x="0" y="0" width="1216" height="4815" fill="#ffffff" />
+  <text id="Drag &amp; Drop Upload label" x="64" y="84" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Drag &amp; Drop Upload</text>
+  <text id="file-dropzone id" x="64" y="98" font-family="ui-monospace, monospace" font-size="12" fill="#737373">file-dropzone</text>
+  <g id="Drag &amp; Drop Upload" transform="translate(64, 116)">
+    <rect id="container" x="0" y="0" width="1088" height="428" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="1" y="1" width="1086" height="204" rx="16" fill="rgba(255, 255, 255, 0.4)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="2" />
+      <rect id="container 3" x="520" y="51" width="48" height="48" rx="16" fill="#f3f2ee" />
+      <text id="Drag files here, or click to browse" x="543.99" y="129" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Drag files here, or click to browse</text>
+      <text id="Images and PDFs up to 20 MB each" x="543.99" y="151" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" text-anchor="middle">Images and PDFs up to 20 MB each</text>
+      <rect id="list item" x="1" y="221" width="1086" height="64" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 4" x="18" y="235" width="36" height="36" rx="12" fill="rgba(0, 188, 128, 0.149)" />
+      <text id="brand-guidelines.pdf" x="66" y="248" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">brand-guidelines.pdf</text>
+      <text id="2.3 MB" x="993.52" y="248" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">2.3 MB</text>
+      <text id="Uploaded" x="66" y="268" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Uploaded</text>
+      <rect id="list item 2" x="1" y="293" width="1086" height="62" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 5" x="18" y="306" width="36" height="36" rx="12" fill="#f3f2ee" />
+      <text id="hero-render.png" x="66" y="323" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">hero-render.png</text>
+      <text id="8.5 MB" x="993.52" y="323" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">8.5 MB</text>
+      <rect id="progressbar" x="66" y="335" width="964" height="4" rx="2" fill="#f3f2ee" />
+      <rect id="container 6" x="66" y="335" width="616.95" height="4" rx="2" fill="#007f34" />
+      <rect id="list item 3" x="1" y="363" width="1086" height="64" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 7" x="18" y="377" width="36" height="36" rx="12" fill="rgba(226, 0, 10, 0.102)" />
+      <text id="archive.zip" x="66" y="390" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">archive.zip</text>
+      <text id="142.0 MB" x="980.58" y="390" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">142.0 MB</text>
+      <text id="Larger than the 20 MB limit" x="66" y="410" fill="#e7000b" font-family="ui-sans-serif, system-ui" font-size="12">Larger than the 20 MB limit</text>
+  </g>
+  <text id="Upload Progress List label" x="64" y="660" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Upload Progress List</text>
+  <text id="upload-progress-list id" x="64" y="674" font-family="ui-monospace, monospace" font-size="12" fill="#737373">upload-progress-list</text>
+  <g id="Upload Progress List" transform="translate(64, 692)">
+    <rect id="container" x="0" y="0" width="1088" height="362" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="list item" x="288" y="1" width="512" height="64" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="305" y="15" width="36" height="36" rx="12" fill="rgba(0, 128, 49, 0.102)" />
+      <text id="onboarding-deck.pdf" x="353" y="28" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">onboarding-deck.pdf</text>
+      <text id="4.2 MB" x="746.52" y="28" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">4.2 MB</text>
+      <text id="Uploaded" x="353" y="48" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Uploaded</text>
+      <rect id="list item 2" x="288" y="73" width="512" height="68" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 3" x="305" y="89" width="36" height="36" rx="12" fill="#f3f2ee" />
+      <text id="team-offsite-photos.zip" x="353" y="100" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">team-offsite-photos.zip</text>
+      <text id="212 MB" x="702.64" y="100" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">212 MB</text>
+      <rect id="progressbar" x="353" y="118" width="359.23" height="4" rx="2" fill="#f3f2ee" />
+      <rect id="container 4" x="353" y="118" width="222.72" height="4" rx="2" fill="#007f34" opacity="0.6" />
+      <text id="62%" x="720.23" y="124" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">62%</text>
+      <rect id="list item 3" x="288" y="149" width="512" height="68" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 5" x="305" y="165" width="36" height="36" rx="12" fill="#f3f2ee" />
+      <text id="homepage-hero.png" x="353" y="176" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">homepage-hero.png</text>
+      <text id="8.7 MB" x="706.52" y="176" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">8.7 MB</text>
+      <rect id="progressbar 2" x="353" y="194" width="359.23" height="4" rx="2" fill="#f3f2ee" />
+      <rect id="container 6" x="353" y="194" width="64.66" height="4" rx="2" fill="#007f34" opacity="0.6" />
+      <text id="18%" x="720.23" y="200" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">18%</text>
+      <rect id="list item 4" x="288" y="225" width="512" height="64" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 7" x="305" y="239" width="36" height="36" rx="12" fill="#f3f2ee" />
+      <text id="q3-financials.xlsx" x="353" y="252" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">q3-financials.xlsx</text>
+      <text id="318 KB" x="706.45" y="252" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">318 KB</text>
+      <text id="Queued — waiting for a slot" x="353" y="272" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Queued — waiting for a slot</text>
+      <rect id="list item 5" x="288" y="297" width="512" height="64" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 8" x="305" y="311" width="36" height="36" rx="12" fill="rgba(226, 0, 10, 0.102)" />
+      <text id="launch-video-draft.mp4" x="353" y="324" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">launch-video-draft.mp4</text>
+      <text id="1.4 GB" x="666.17" y="324" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">1.4 GB</text>
+      <text id="Connection lost at 34%" x="353" y="344" fill="#e7000b" font-family="ui-sans-serif, system-ui" font-size="12">Connection lost at 34%</text>
+      <rect id="button" x="712.11" y="314" width="70.89" height="30" rx="12" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Retry" x="747.55" y="326" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600" text-anchor="middle">Retry</text>
+  </g>
+  <text id="Resumable Large Upload label" x="64" y="1170" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Resumable Large Upload</text>
+  <text id="upload-resumable id" x="64" y="1184" font-family="ui-monospace, monospace" font-size="12" fill="#737373">upload-resumable</text>
+  <g id="Resumable Large Upload" transform="translate(64, 1202)">
+    <rect id="container" x="0" y="0" width="1088" height="422" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="280" y="65" width="528" height="292" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <rect id="container 3" x="301" y="86" width="40" height="40" rx="16" fill="#f3f2ee" />
+      <text id="site-backup-2026-08-27.tar.zst" x="353" y="100" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">site-backup-2026-08-27.tar.zst</text>
+      <text id="4.1 GB · 82 chunks · 2 retried" x="353" y="120" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">4.1 GB · 82 chunks · 2 retried</text>
+      <text id="28%" x="759.69" y="100" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">28%</text>
+      <rect id="progressbar" x="301" y="142" width="486" height="8" rx="4" fill="#f3f2ee" />
+      <rect id="container 4" x="301" y="142" width="139.86" height="8" rx="4" fill="#007f34" />
+      <text id="Uploading 1.2 GB of 4.1 GB · time left i…" x="301" y="170" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Uploading 1.2 GB of 4.1 GB · time left is not worth guessing at this connection speed</text>
+      <rect id="button" x="301" y="194" width="84.73" height="36" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Pause" x="343.37" y="208" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Pause</text>
+      <rect id="button 2" x="393.73" y="194" width="195.83" height="36" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Simulate a failed chunk" x="491.65" y="208" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Simulate a failed chunk</text>
+      <text id="Cancel and delete the" x="551.45" y="260" fill="#e7000b" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Cancel and delete the</text>
+      <text id="1.2 GB" x="641.48" y="260" fill="#e7000b" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">1.2 GB</text>
+      <text id="already uploaded" x="717.95" y="260" fill="#e7000b" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">already uploaded</text>
+      <rect id="paragraph" x="301" y="290" width="486" height="46" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="You can close this tab. The upload is st…" x="301" y="315" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">You can close this tab. The upload is stored as</text>
+      <text id="and carries on from" x="619.28" y="315" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">and carries on from</text>
+      <text id="1.2 GB 2" x="729.06" y="315" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">1.2 GB</text>
+      <text id="when you come back — for the next 7 days…" x="301" y="332" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">when you come back — for the next 7 days.</text>
+      <rect id="container 5" x="546.47" y="304" width="72.81" height="16" rx="4" fill="#f3f2ee" />
+      <text id="up_9f2c41" x="546.47" y="316" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">up_9f2c41</text>
+  </g>
+  <text id="CSV Column Mapper label" x="64" y="1740" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">CSV Column Mapper</text>
+  <text id="csv-import-mapper id" x="64" y="1754" font-family="ui-monospace, monospace" font-size="12" fill="#737373">csv-import-mapper</text>
+  <g id="CSV Column Mapper" transform="translate(64, 1772)">
+    <rect id="container" x="0" y="0" width="1088" height="723" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="128" y="65" width="832" height="593" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <rect id="header" x="129" y="66" width="830" height="69" fill="rgba(242, 238, 235, 0.302)" />
+      <text id="customers-export.csv" x="181" y="96" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">customers-export.csv</text>
+      <text id="1,284 rows · 6 columns found" x="181" y="114" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">1,284 rows · 6 columns found</text>
+      <rect id="container 3" x="856.61" y="88" width="82.39" height="24" rx="12" fill="#fdfcf8" />
+      <text id="Step 2 of 3" x="856.61" y="100" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Step 2 of 3</text>
+      <text id="Full Name" x="149" y="165" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Full Name</text>
+      <text id="Ada Lovelace · Grace Hopper" x="149" y="187" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">Ada Lovelace · Grace Hopper</text>
+      <rect id="field" x="572" y="151" width="367" height="36" rx="12" fill="#fdfcf8" stroke="#8d8f92" stroke-width="1" />
+      <text id="Work Email" x="149" y="238" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Work Email</text>
+      <text id="ada@analytical.co · grace@navy.mil" x="149" y="260" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">ada@analytical.co · grace@navy.mil</text>
+      <rect id="field 2" x="572" y="224" width="367" height="36" rx="12" fill="#fdfcf8" stroke="#8d8f92" stroke-width="1" />
+      <text id="One address per row" x="572" y="276" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">One address per row</text>
+      <text id="Company" x="149" y="327" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Company</text>
+      <text id="Analytical Engines · US Navy" x="149" y="349" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">Analytical Engines · US Navy</text>
+      <rect id="field 3" x="572" y="313" width="367" height="36" rx="12" fill="#fdfcf8" stroke="#8d8f92" stroke-width="1" />
+      <text id="Phone" x="149" y="400" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Phone</text>
+      <text id="+44 20 7946 0958 · +1 202 555 0114" x="149" y="422" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">+44 20 7946 0958 · +1 202 555 0114</text>
+      <rect id="field 4" x="572" y="386" width="367" height="36" rx="12" fill="#fdfcf8" stroke="#8d8f92" stroke-width="1" />
+      <text id="Signed Up" x="149" y="473" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Signed Up</text>
+      <text id="2026-03-14 · 2026-04-02" x="149" y="495" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">2026-03-14 · 2026-04-02</text>
+      <rect id="field 5" x="572" y="459" width="367" height="36" rx="12" fill="#fdfcf8" stroke="#8d8f92" stroke-width="1" />
+      <text id="Internal Notes" x="149" y="546" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Internal Notes</text>
+      <text id="do not contact" x="149" y="568" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">do not contact</text>
+      <rect id="field 6" x="572" y="532" width="367" height="36" rx="12" fill="#fdfcf8" stroke="#8d8f92" stroke-width="1" />
+      <rect id="footer" x="129" y="588" width="830" height="69" fill="rgba(242, 238, 235, 0.302)" stroke="#dbdee1" stroke-width="1" />
+      <text id="3 columns mapped, everything required is…" x="173" y="627" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">3 columns mapped, everything required is covered</text>
+      <text id="Cancel" x="740.76" y="619" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Cancel</text>
+      <rect id="button" x="792.69" y="605" width="146.31" height="36" rx="12" fill="#007f34" />
+      <text id="Import" x="832.58" y="627" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Import</text>
+      <text id="1,284" x="872.78" y="627" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">1,284</text>
+      <text id="rows" x="906.05" y="627" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">rows</text>
+  </g>
+  <text id="Avatar Crop &amp; Upload label" x="64" y="2611" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Avatar Crop &amp; Upload</text>
+  <text id="avatar-crop-upload id" x="64" y="2625" font-family="ui-monospace, monospace" font-size="12" fill="#737373">avatar-crop-upload</text>
+  <g id="Avatar Crop &amp; Upload" transform="translate(64, 2643)">
+    <rect id="container" x="0" y="0" width="1088" height="504" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="192" y="65" width="704" height="374" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="Profile photo" x="225" y="116" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="600">Profile photo</text>
+      <text id="Drag the sliders until your face fills t…" x="225" y="144" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Drag the sliders until your face fills the circle. Everything outside it is trimmed.</text>
+      <rect id="container 3" x="225" y="174" width="176" height="176" rx="16" fill="#f3f2ee" />
+      <text id="Preview · 512 × 512 PNG" x="247.61" y="374" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Preview · 512 × 512 PNG</text>
+      <text id="Zoom" x="433" y="188" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Zoom</text>
+      <text id="1.30×" x="826.98" y="189" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12" font-weight="500">1.30×</text>
+      <rect id="field" x="433" y="204" width="430" height="8" rx="4" fill="#f3f2ee" />
+      <text id="Horizontal" x="433" y="252" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Horizontal</text>
+      <text id="7%" x="848.59" y="253" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12" font-weight="500">7%</text>
+      <rect id="field 2" x="433" y="268" width="430" height="8" rx="4" fill="#f3f2ee" />
+      <text id="Vertical" x="433" y="316" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Vertical</text>
+      <text id="6%" x="848.59" y="317" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12" font-weight="500">6%</text>
+      <rect id="field 3" x="433" y="332" width="430" height="8" rx="4" fill="#f3f2ee" />
+      <rect id="button" x="433" y="370" width="139.34" height="36" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Replace photo" x="502.67" y="384" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Replace photo</text>
+      <text id="Reset" x="620.51" y="384" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Reset</text>
+      <rect id="button 2" x="737.5" y="370" width="125.5" height="36" rx="12" fill="#007f34" />
+      <text id="Save photo" x="800.25" y="384" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Save photo</text>
+  </g>
+  <text id="Upload Requirements Form label" x="64" y="3263" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Upload Requirements Form</text>
+  <text id="upload-requirements-form id" x="64" y="3277" font-family="ui-monospace, monospace" font-size="12" fill="#737373">upload-requirements-form</text>
+  <g id="Upload Requirements Form" transform="translate(64, 3295)">
+    <rect id="container" x="0" y="0" width="1088" height="704" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="section" x="1" y="1" width="1086" height="702" fill="#fdfcf8" />
+      <rect id="container 2" x="320" y="65" width="448" height="574" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="Send us the file" x="353" y="118" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="600" letter-spacing="-0.5">Send us the file</text>
+      <text id="The limits are here rather than in the e…" x="353" y="148" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">The limits are here rather than in the error you would</text>
+      <text id="otherwise meet after uploading. Rejectin…" x="353" y="168" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">otherwise meet after uploading. Rejecting a 400 MB file after</text>
+      <text id="transferring it is a failure of the form…" x="353" y="188" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">transferring it is a failure of the form, not of the person.</text>
+      <text id="File" x="353" y="232" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">File</text>
+      <rect id="field" x="353" y="244" width="382" height="38" rx="10" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="CSV, XLSX or JSON. Up to 50 MB — larger …" x="353" y="298" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">CSV, XLSX or JSON. Up to 50 MB — larger files go through the import</text>
+      <text id="API." x="353" y="314" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">API.</text>
+      <text id="Name this import" x="353" y="348" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Name this import</text>
+      <rect id="field 2" x="353" y="360" width="382" height="38" rx="10" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Shown in the import history. The filenam…" x="353" y="414" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Shown in the import history. The filename is kept either way.</text>
+      <text id="Notify on completion" x="353" y="448" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Notify on completion</text>
+      <rect id="field 3" x="353" y="460" width="382" height="38" rx="10" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Optional. Large imports finish long afte…" x="353" y="514" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Optional. Large imports finish long after you close the tab.</text>
+      <rect id="button" x="353" y="534" width="382" height="36" rx="10" fill="#007f34" />
+      <text id="Upload" x="544" y="548" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Upload</text>
+  </g>
+  <text id="Import From URL Form label" x="64" y="4115" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Import From URL Form</text>
+  <text id="import-from-url-form id" x="64" y="4129" font-family="ui-monospace, monospace" font-size="12" fill="#737373">import-from-url-form</text>
+  <g id="Import From URL Form" transform="translate(64, 4147)">
+    <rect id="container" x="0" y="0" width="1088" height="604" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="section" x="1" y="1" width="1086" height="602" fill="#fdfcf8" />
+      <rect id="container 2" x="320" y="65" width="448" height="474" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="Import from a link" x="353" y="118" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="600" letter-spacing="-0.5">Import from a link</text>
+      <text id="A file that already lives at a URL does …" x="353" y="148" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">A file that already lives at a URL does not need to be</text>
+      <text id="downloaded to a laptop and uploaded agai…" x="353" y="168" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">downloaded to a laptop and uploaded again. The server</text>
+      <text id="fetches it, which also survives the tab …" x="353" y="188" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">fetches it, which also survives the tab being closed.</text>
+      <text id="File URL" x="353" y="232" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">File URL</text>
+      <rect id="field" x="353" y="244" width="382" height="38" rx="10" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Must be publicly reachable. Signed links…" x="353" y="298" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Must be publicly reachable. Signed links work; a login page does not.</text>
+      <text id="Format" x="353" y="332" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Format</text>
+      <rect id="field 2" x="353" y="344" width="382" height="38" rx="10" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Detected from the response, not the exte…" x="353" y="398" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Detected from the response, not the extension. Override only if it</text>
+      <text id="guesses wrong." x="353" y="414" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">guesses wrong.</text>
+      <rect id="button" x="353" y="434" width="382" height="36" rx="10" fill="#007f34" />
+      <text id="Fetch and import" x="544" y="448" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Fetch and import</text>
+  </g>
+</svg>

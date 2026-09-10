@@ -1,0 +1,294 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1216" height="6826" viewBox="0 0 1216 6826" id="Hoverlab — Pricing">
+  <!--
+    Hoverlab — Pricing. 8 sections, traced from the
+    rendered catalog. Drag this file onto a Figma canvas.
+
+    These are frames, not components: named, editable layers with real
+    geometry, colour and type. There are no variants, no auto-layout,
+    and no hover or motion — none of those exist in a static frame.
+
+    Every section here is free to copy as code at https://hoverlab.dev/blocks
+  -->
+  <rect id="Background" x="0" y="0" width="1216" height="6826" fill="#ffffff" />
+  <text id="Three-Plan Pricing Toggle label" x="64" y="84" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Three-Plan Pricing Toggle</text>
+  <text id="pricing-tiers id" x="64" y="98" font-family="ui-monospace, monospace" font-size="12" fill="#737373">pricing-tiers</text>
+  <g id="Three-Plan Pricing Toggle" transform="translate(64, 116)">
+    <rect id="container" x="0" y="0" width="1088" height="744" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Simple, honest pricing" x="544" y="101" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="700" letter-spacing="-0.9" text-anchor="middle">Simple, honest pricing</text>
+      <text id="Start free. Upgrade when it starts payin…" x="544" y="133" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16" text-anchor="middle">Start free. Upgrade when it starts paying for itself.</text>
+      <text id="Monthly" x="428.33" y="197" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Monthly</text>
+      <rect id="switch" x="493.78" y="181" width="44" height="24" rx="12" fill="#f3f2ee" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="496.78" y="184" width="16" height="16" rx="8" fill="#fdfcf8" />
+      <text id="Yearly" x="549.78" y="197" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Yearly</text>
+      <rect id="container 3" x="591.77" y="183" width="67.89" height="20" rx="10" fill="rgba(0, 188, 128, 0.149)" />
+      <text id="Save 20%" x="591.77" y="195" fill="#009966" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600">Save 20%</text>
+      <rect id="container 4" x="33" y="253" width="324.66" height="426" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Free" x="58" y="296" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700" letter-spacing="-0.45">Free</text>
+      <text id="Everything you need to try it properly." x="58" y="324" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Everything you need to try it properly.</text>
+      <text id="Free 2" x="58" y="386" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="800" letter-spacing="-0.9">Free</text>
+      <text id="Up to 3 projects" x="82" y="428" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Up to 3 projects</text>
+      <text id="Community support" x="82" y="460" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Community support</text>
+      <text id="Core component library" x="82" y="492" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Core component library</text>
+      <rect id="button" x="58" y="612" width="274.66" height="42" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Start free" x="195.33" y="626" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Start free</text>
+      <rect id="container 5" x="381.66" y="253" width="324.67" height="426" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(0, 128, 52, 0.4)" stroke-width="1" />
+      <rect id="container 6" x="495.21" y="242" width="97.55" height="24" rx="12" fill="#007f34" />
+      <text id="Most popular" x="495.21" y="254" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600">Most popular</text>
+      <text id="Pro" x="406.66" y="296" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700" letter-spacing="-0.45">Pro</text>
+      <text id="For working developers shipping real" x="406.66" y="324" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">For working developers shipping real</text>
+      <text id="products." x="406.66" y="344" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">products.</text>
+      <text id="$19" x="406.66" y="406" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="800" letter-spacing="-0.9">$19</text>
+      <text id="/month" x="468.5" y="404" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">/month</text>
+      <text id="Unlimited projects" x="430.66" y="448" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Unlimited projects</text>
+      <text id="Commercial license" x="430.66" y="480" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Commercial license</text>
+      <text id="The full library" x="430.66" y="512" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">The full library</text>
+      <text id="Priority email support" x="430.66" y="544" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Priority email support</text>
+      <text id="Figma source files" x="430.66" y="576" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Figma source files</text>
+      <rect id="button 2" x="406.66" y="614" width="274.67" height="40" rx="16" fill="#007f34" />
+      <text id="Go Pro" x="543.99" y="628" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Go Pro</text>
+      <rect id="container 7" x="730.33" y="253" width="324.66" height="426" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Team" x="755.33" y="296" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700" letter-spacing="-0.45">Team</text>
+      <text id="Shared access and billing for a whole te…" x="755.33" y="324" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Shared access and billing for a whole team.</text>
+      <text id="$49" x="755.33" y="386" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="800" letter-spacing="-0.9">$49</text>
+      <text id="/month 2" x="822.11" y="384" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">/month</text>
+      <text id="Everything in Pro" x="779.33" y="428" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Everything in Pro</text>
+      <text id="Up to 10 seats" x="779.33" y="460" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Up to 10 seats</text>
+      <text id="Shared component presets" x="779.33" y="492" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Shared component presets</text>
+      <text id="SSO and audit log" x="779.33" y="524" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">SSO and audit log</text>
+      <text id="Invoice billing" x="779.33" y="556" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Invoice billing</text>
+      <rect id="button 3" x="755.33" y="612" width="274.66" height="42" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Contact sales" x="892.66" y="626" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Contact sales</text>
+  </g>
+  <text id="Single-Plan Price Card label" x="64" y="976" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Single-Plan Price Card</text>
+  <text id="pricing-single id" x="64" y="990" font-family="ui-monospace, monospace" font-size="12" fill="#737373">pricing-single</text>
+  <g id="Single-Plan Price Card" transform="translate(64, 1008)">
+    <rect id="container" x="0" y="0" width="1088" height="631" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="One price, paid once" x="544" y="133" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="700" letter-spacing="-0.9" text-anchor="middle">One price, paid once</text>
+      <text id="No subscription, no seat count, no tier …" x="544" y="165" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16" text-anchor="middle">No subscription, no seat count, no tier above this one to discover later.</text>
+      <rect id="container 2" x="120" y="213" width="848" height="321" rx="24" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Pro" x="153" y="260" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" letter-spacing="0.35">Pro</text>
+      <text id="$79" x="153" y="330" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="48" font-weight="800" letter-spacing="-1.2">$79</text>
+      <text id="one-time" x="243.69" y="325" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">one-time</text>
+      <rect id="link" x="153" y="355" width="337.84" height="48" rx="16" fill="#007f34" />
+      <text id="Get Pro" x="153" y="371" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600">Get Pro</text>
+      <text id="The licence to ship what you have is per…" x="179" y="436" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">The licence to ship what you have is permanent. What runs</text>
+      <text id="for twelve months is access to component…" x="179" y="455.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">for twelve months is access to components published after</text>
+      <text id="you buy — nothing you already copied sto…" x="179" y="475" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">you buy — nothing you already copied stops working, and</text>
+      <text id="nothing checks at runtime." x="179" y="494.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">nothing checks at runtime.</text>
+      <text id="What is included" x="555.84" y="260" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">What is included</text>
+      <text id="Every effect, block, page and template" x="581.84" y="296" fill="rgba(8, 11, 16, 0.902)" font-family="ui-sans-serif, system-ui" font-size="14">Every effect, block, page and template</text>
+      <text id="Unlimited projects, including client wor…" x="581.84" y="328" fill="rgba(8, 11, 16, 0.902)" font-family="ui-sans-serif, system-ui" font-size="14">Unlimited projects, including client work</text>
+      <text id="Twelve months of catalog updates" x="581.84" y="360" fill="rgba(8, 11, 16, 0.902)" font-family="ui-sans-serif, system-ui" font-size="14">Twelve months of catalog updates</text>
+      <text id="CLI, MCP server and public API" x="581.84" y="392" fill="rgba(8, 11, 16, 0.902)" font-family="ui-sans-serif, system-ui" font-size="14">CLI, MCP server and public API</text>
+      <text id="No seat fee on people who see what you s…" x="581.84" y="424" fill="rgba(8, 11, 16, 0.902)" font-family="ui-sans-serif, system-ui" font-size="14">No seat fee on people who see what you ship</text>
+      <text id="No attribution required, ever" x="581.84" y="456" fill="rgba(8, 11, 16, 0.902)" font-family="ui-sans-serif, system-ui" font-size="14">No attribution required, ever</text>
+  </g>
+  <text id="Tiered Usage Calculator label" x="64" y="1755" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Tiered Usage Calculator</text>
+  <text id="pricing-usage-calculator id" x="64" y="1769" font-family="ui-monospace, monospace" font-size="12" fill="#737373">pricing-usage-calculator</text>
+  <g id="Tiered Usage Calculator" transform="translate(64, 1787)">
+    <rect id="container" x="0" y="0" width="1088" height="700" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="What it costs at your volume" x="544" y="133" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="700" letter-spacing="-0.9" text-anchor="middle">What it costs at your volume</text>
+      <text id="Move the slider. The first 10,000 are fr…" x="544" y="165" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16" text-anchor="middle">Move the slider. The first 10,000 are free every month.</text>
+      <rect id="container 2" x="184" y="213" width="720" height="390" rx="24" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Monthly volume" x="217" y="271" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Monthly volume</text>
+      <text id="10,000" x="682.56" y="270" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="24" font-weight="700">10,000</text>
+      <text id="requests / month" x="764.72" y="271" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">requests / month</text>
+      <text id="1K" x="217" y="332" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">1K</text>
+      <text id="1M" x="853.75" y="332" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">1M</text>
+      <rect id="container 3" x="217" y="368" width="654" height="45" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="First 10K free" x="217" y="407" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">First 10K free</text>
+      <text id="—" x="857" y="407" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">—</text>
+      <rect id="container 4" x="217" y="437" width="654" height="61" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Estimated monthly total" x="217" y="490" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600">Estimated monthly total</text>
+      <text id="$0.00" x="793.25" y="492" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="30" font-weight="800" letter-spacing="-0.75">$0.00</text>
+      <rect id="link" x="217" y="522" width="654" height="48" rx="16" fill="#007f34" />
+      <text id="Start free" x="217" y="538" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600">Start free</text>
+  </g>
+  <text id="Plan Comparison Matrix label" x="64" y="2603" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Plan Comparison Matrix</text>
+  <text id="comparison-table id" x="64" y="2617" font-family="ui-monospace, monospace" font-size="12" fill="#737373">comparison-table</text>
+  <g id="Plan Comparison Matrix" transform="translate(64, 2635)">
+    <rect id="container" x="0" y="0" width="1088" height="671" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Compare plans" x="544" y="101" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="700" letter-spacing="-0.9" text-anchor="middle">Compare plans</text>
+      <text id="Every line, side by side." x="544" y="133" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16" text-anchor="middle">Every line, side by side.</text>
+      <rect id="container 2" x="64" y="181" width="960" height="425" rx="16" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 3" x="65" y="182" width="958" height="52.5" fill="rgba(242, 242, 237, 0.4)" />
+      <rect id="container 4" x="65" y="182" width="343.14" height="52.5" fill="rgba(242, 242, 237, 0.4)" />
+      <text id="Feature" x="65" y="196" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Feature</text>
+      <text id="Free" x="509.11" y="196" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Free</text>
+      <text id="Pro" x="724.4" y="196" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Pro</text>
+      <rect id="container 5" x="709.27" y="198" width="57.86" height="20" rx="10" fill="rgba(0, 128, 54, 0.149)" />
+      <text id="Popular" x="738.2" y="210" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600" text-anchor="middle">Popular</text>
+      <text id="Team" x="930.86" y="196" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Team</text>
+      <rect id="container 6" x="65" y="235" width="343.14" height="52.5" fill="#fdfcf8" />
+      <text id="Projects" x="65" y="249" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Projects</text>
+      <text id="3" x="509.1" y="265" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" text-anchor="middle">3</text>
+      <rect id="container 7" x="610.08" y="235" width="228.64" height="52.5" fill="rgba(0, 118, 59, 0.051)" />
+      <text id="Unlimited" x="724.39" y="265" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" text-anchor="middle">Unlimited</text>
+      <text id="Unlimited 2" x="930.86" y="265" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" text-anchor="middle">Unlimited</text>
+      <rect id="container 8" x="65" y="287.5" width="343.14" height="53" fill="#fdfcf8" />
+      <text id="Commercial license" x="65" y="301.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Commercial license</text>
+      <rect id="container 9" x="610.08" y="287.5" width="228.64" height="53" fill="rgba(0, 118, 59, 0.051)" />
+      <rect id="container 10" x="65" y="340.5" width="343.14" height="53" fill="#fdfcf8" />
+      <text id="Full component library" x="65" y="354.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Full component library</text>
+      <rect id="container 11" x="610.08" y="340.5" width="228.64" height="53" fill="rgba(0, 118, 59, 0.051)" />
+      <rect id="container 12" x="65" y="393.5" width="343.14" height="53" fill="#fdfcf8" />
+      <text id="Figma source files" x="65" y="407.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Figma source files</text>
+      <rect id="container 13" x="610.08" y="393.5" width="228.64" height="53" fill="rgba(0, 118, 59, 0.051)" />
+      <rect id="container 14" x="65" y="446.5" width="343.14" height="53" fill="#fdfcf8" />
+      <text id="Seats" x="65" y="460.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Seats</text>
+      <text id="1" x="509.1" y="477" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" text-anchor="middle">1</text>
+      <rect id="container 15" x="610.08" y="446.5" width="228.64" height="53" fill="rgba(0, 118, 59, 0.051)" />
+      <text id="1 2" x="724.4" y="477" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" text-anchor="middle">1</text>
+      <text id="Up to 10" x="930.86" y="477" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" text-anchor="middle">Up to 10</text>
+      <rect id="container 16" x="65" y="499.5" width="343.14" height="53" fill="#fdfcf8" />
+      <text id="SSO and audit log" x="65" y="513.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">SSO and audit log</text>
+      <rect id="container 17" x="610.08" y="499.5" width="228.64" height="53" fill="rgba(0, 118, 59, 0.051)" />
+      <rect id="container 18" x="65" y="552.5" width="343.14" height="52.5" fill="#fdfcf8" />
+      <text id="Support" x="65" y="566.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Support</text>
+      <text id="Community" x="509.11" y="583" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" text-anchor="middle">Community</text>
+      <rect id="container 19" x="610.08" y="552.5" width="228.64" height="52.5" fill="rgba(0, 118, 59, 0.051)" />
+      <text id="Priority email" x="724.4" y="583" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" text-anchor="middle">Priority email</text>
+      <text id="Dedicated" x="930.85" y="583" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" text-anchor="middle">Dedicated</text>
+  </g>
+  <text id="Prepaid Credit Packs label" x="64" y="3422" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Prepaid Credit Packs</text>
+  <text id="pricing-credits id" x="64" y="3436" font-family="ui-monospace, monospace" font-size="12" fill="#737373">pricing-credits</text>
+  <g id="Prepaid Credit Packs" transform="translate(64, 3454)">
+    <rect id="container" x="0" y="0" width="1088" height="747.5" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Credits" x="544" y="79" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" letter-spacing="0.7" text-anchor="middle">Credits</text>
+      <text id="Buy what you need, once" x="544" y="133" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="700" letter-spacing="-0.9" text-anchor="middle">Buy what you need, once</text>
+      <text id="No plan to join and nothing that renews.…" x="544" y="171" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16" text-anchor="middle">No plan to join and nothing that renews. Top up whenever the balance runs low, or</text>
+      <text id="never again." x="544" y="197" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16" text-anchor="middle">never again.</text>
+      <rect id="paragraph" x="305.81" y="229" width="476.36" height="36" rx="12" fill="#f3f2ee" />
+      <text id="One credit is one generation at standard…" x="543.99" y="243" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" text-anchor="middle">One credit is one generation at standard quality. High quality costs four.</text>
+      <rect id="list item" x="33" y="313" width="324.66" height="309.5" rx="16" fill="#ffffff" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="500 credits" x="66" y="360" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" letter-spacing="0.7">500 credits</text>
+      <text id="$5" x="66" y="418" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="700" letter-spacing="-0.9">$5</text>
+      <text id="$0.010 per credit" x="66" y="444" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">$0.010 per credit</text>
+      <text id="Enough to finish an evaluation." x="66" y="480" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Enough to finish an evaluation.</text>
+      <rect id="link" x="66" y="545.5" width="258.66" height="44" rx="12" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="Buy 500" x="66" y="559.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Buy 500</text>
+      <rect id="list item 2" x="381.66" y="313" width="324.67" height="309.5" rx="16" fill="#ffffff" stroke="#007f34" stroke-width="1" />
+      <rect id="container 2" x="414.66" y="302" width="113.02" height="24" rx="12" fill="#007f34" />
+      <text id="Most bought" x="414.66" y="314" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600">Most bought</text>
+      <text id="2,000 credits" x="414.66" y="360" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" letter-spacing="0.7">2,000 credits</text>
+      <text id="$15" x="414.66" y="418" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="700" letter-spacing="-0.9">$15</text>
+      <rect id="container 3" x="486.08" y="400" width="71.88" height="24" rx="12" fill="rgba(0, 128, 49, 0.102)" />
+      <text id="Save 25%" x="486.08" y="412" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600">Save 25%</text>
+      <text id="$0.0075 per credit" x="414.66" y="446" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">$0.0075 per credit</text>
+      <text id="What a working month looks like for" x="414.66" y="483" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">What a working month looks like for</text>
+      <text id="one person." x="414.66" y="505.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">one person.</text>
+      <rect id="link 2" x="414.66" y="545.5" width="258.67" height="44" rx="12" fill="#007f34" />
+      <text id="Buy 2,000" x="414.66" y="559.5" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Buy 2,000</text>
+      <rect id="list item 3" x="730.33" y="313" width="324.66" height="309.5" rx="16" fill="#ffffff" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="10,000 credits" x="763.33" y="360" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" letter-spacing="0.7">10,000 credits</text>
+      <text id="$60" x="763.33" y="418" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="700" letter-spacing="-0.9">$60</text>
+      <rect id="container 4" x="834.75" y="400" width="72.13" height="24" rx="12" fill="rgba(0, 128, 49, 0.102)" />
+      <text id="Save 40%" x="834.75" y="412" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600">Save 40%</text>
+      <text id="$0.006 per credit" x="763.33" y="446" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">$0.006 per credit</text>
+      <text id="For a small team, or a batch job with" x="763.33" y="483" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">For a small team, or a batch job with</text>
+      <text id="a deadline." x="763.33" y="505.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">a deadline.</text>
+      <rect id="link 3" x="763.33" y="545.5" width="258.66" height="44" rx="12" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="Buy 10,000" x="763.33" y="559.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Buy 10,000</text>
+      <text id="Credits never expire" x="173.58" y="676.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Credits never expire</text>
+      <text id="No subscription, no card kept on file" x="352.13" y="676.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">No subscription, no card kept on file</text>
+      <text id="Unused credits are refundable for 30 day…" x="632.8" y="676.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Unused credits are refundable for 30 days</text>
+  </g>
+  <text id="In-App Plan Picker label" x="64" y="4317.5" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">In-App Plan Picker</text>
+  <text id="pricing-plan-picker id" x="64" y="4331.5" font-family="ui-monospace, monospace" font-size="12" fill="#737373">pricing-plan-picker</text>
+  <g id="In-App Plan Picker" transform="translate(64, 4349.5)">
+    <rect id="container" x="0" y="0" width="1088" height="895.75" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="312" y="65" width="464" height="765.75" rx="16" fill="#ffffff" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Change your plan" x="345" y="118" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" letter-spacing="-0.5">Change your plan</text>
+      <rect id="container 3" x="345" y="150" width="398" height="107.5" rx="16" fill="rgba(242, 242, 237, 0.4)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Starter" x="394" y="183" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600">Starter</text>
+      <rect id="container 4" x="450.88" y="170" width="56.95" height="20" rx="10" fill="#f3f2ee" />
+      <text id="Current" x="450.88" y="182" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Current</text>
+      <text id="One project, community support, 60 API" x="394" y="210" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">One project, community support, 60 API</text>
+      <text id="requests a minute." x="394" y="232.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">requests a minute.</text>
+      <text id="$0" x="664.8" y="185" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700">$0</text>
+      <text id="free forever" x="664.8" y="209" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">free forever</text>
+      <rect id="container 5" x="345" y="269.5" width="398" height="107.5" rx="16" fill="rgba(0, 118, 59, 0.051)" stroke="#007f34" stroke-width="1" />
+      <text id="Pro" x="394" y="302.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600">Pro</text>
+      <rect id="container 6" x="426.69" y="289.5" width="97.81" height="20" rx="10" fill="rgba(0, 128, 49, 0.102)" />
+      <text id="Recommended" x="426.69" y="301.5" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600">Recommended</text>
+      <text id="Unlimited projects, email support within" x="394" y="329.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Unlimited projects, email support within</text>
+      <text id="one business day, 600 req/min." x="394" y="352.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">one business day, 600 req/min.</text>
+      <text id="$19" x="670.19" y="304.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700">$19</text>
+      <text id="per month" x="670.19" y="328.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">per month</text>
+      <rect id="container 7" x="345" y="389" width="398" height="107.5" rx="16" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Team" x="394" y="422" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600">Team</text>
+      <text id="Everything in Pro for every seat," x="394" y="449" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Everything in Pro for every seat,</text>
+      <text id="shared brand library, SSO." x="394" y="471.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">shared brand library, SSO.</text>
+      <text id="$12" x="621.97" y="424" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700">$12</text>
+      <text id="per seat, per month" x="621.97" y="448" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">per seat, per month</text>
+      <rect id="container 8" x="345" y="508.5" width="398" height="130.25" rx="16" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Team, annual" x="394" y="541.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600">Team, annual</text>
+      <text id="Ten months’ price for twelve" x="394" y="568.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Ten months’ price for twelve</text>
+      <text id="months, billed once — nothing" x="394" y="591.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">months, billed once — nothing</text>
+      <text id="recurring to fail." x="394" y="614" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">recurring to fail.</text>
+      <text id="$120" x="617.09" y="543.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700">$120</text>
+      <text id="per seat, once a year" x="617.09" y="567.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">per seat, once a year</text>
+      <text id="$12.67 today, prorated to the 21st" x="345" y="676.75" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">$12.67 today, prorated to the 21st</text>
+      <rect id="button" x="345" y="698.75" width="398" height="44" rx="12" fill="#007f34" />
+      <text id="Confirm change" x="544" y="712.75" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Confirm change</text>
+      <text id="Changes take effect immediately. Downgra…" x="345" y="771.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Changes take effect immediately. Downgrades credit the unused</text>
+      <text id="remainder against your next invoice." x="345" y="791.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">remainder against your next invoice.</text>
+  </g>
+  <text id="Pricing Value Split label" x="64" y="5361.25" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Pricing Value Split</text>
+  <text id="pricing-value-split id" x="64" y="5375.25" font-family="ui-monospace, monospace" font-size="12" fill="#737373">pricing-value-split</text>
+  <g id="Pricing Value Split" transform="translate(64, 5393.25)">
+    <rect id="container" x="0" y="0" width="1088" height="678" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="section" x="1" y="1" width="1086" height="676" fill="#fdfcf8" />
+      <text id="Why this price" x="25" y="111" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Why this price</text>
+      <text id="Cheaper than the week you" x="25" y="157" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="600" letter-spacing="-0.9">Cheaper than the week you</text>
+      <text id="would spend instead" x="25" y="197" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="600" letter-spacing="-0.9">would spend instead</text>
+      <text id="A price defends itself against the alter…" x="25" y="238" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">A price defends itself against the alternative, not against a</text>
+      <text id="competitor's price. The alternative here…" x="25" y="262" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">competitor's price. The alternative here is engineering time, so that is</text>
+      <text id="the unit." x="25" y="286" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">the unit.</text>
+      <text id="One section, hand-built" x="57" y="339" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">One section, hand-built</text>
+      <text id="Half a day for the markup, another for t…" x="57" y="361" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Half a day for the markup, another for the responsive and keyboard</text>
+      <text id="passes." x="57" y="381" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">passes.</text>
+      <text id="The same section here" x="57" y="417" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">The same section here</text>
+      <text id="One command, and the accessibility decis…" x="57" y="439" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">One command, and the accessibility decisions are already made and</text>
+      <text id="explained." x="57" y="459" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">explained.</text>
+      <text id="Where it stops being close" x="57" y="495" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Where it stops being close</text>
+      <text id="Around the fourth section. Before that, …" x="57" y="517" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Around the fourth section. Before that, honestly, build it yourself.</text>
+      <text id="What you are not buying" x="57" y="553" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">What you are not buying</text>
+      <text id="A dependency. The source lands in your r…" x="57" y="575" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">A dependency. The source lands in your repository and stops being ours.</text>
+      <rect id="container 2" x="568" y="196" width="495" height="286" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <rect id="container 3" x="593" y="221" width="148.33" height="12" rx="4" fill="rgba(0, 126, 53, 0.302)" />
+      <rect id="container 4" x="593" y="245" width="445" height="96" rx="12" fill="#f3f2ee" />
+      <rect id="container 5" x="593" y="353" width="140.33" height="56" rx="12" fill="#f3f2ee" />
+      <rect id="container 6" x="745.33" y="353" width="140.33" height="56" rx="12" fill="#f3f2ee" />
+      <rect id="container 7" x="897.66" y="353" width="140.33" height="56" rx="12" fill="#f3f2ee" />
+      <rect id="container 8" x="593" y="421" width="296.66" height="12" rx="4" fill="#f3f2ee" />
+      <rect id="container 9" x="593" y="445" width="222.5" height="12" rx="4" fill="#f3f2ee" />
+  </g>
+  <text id="Plan Limits List label" x="64" y="6187.25" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Plan Limits List</text>
+  <text id="plan-limits-list id" x="64" y="6201.25" font-family="ui-monospace, monospace" font-size="12" fill="#737373">plan-limits-list</text>
+  <g id="Plan Limits List" transform="translate(64, 6219.25)">
+    <rect id="container" x="0" y="0" width="1088" height="543" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="section" x="1" y="1" width="1086" height="541" fill="#fdfcf8" />
+      <text id="What runs out, and what happens then" x="160" y="89" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="24" font-weight="600" letter-spacing="-0.6">What runs out, and what happens then</text>
+      <text id="Pricing tables list what a plan includes…" x="160" y="119" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Pricing tables list what a plan includes. They rarely say what happens at the limit, which is the thing that decides whether a</text>
+      <text id="limit is survivable." x="160" y="139" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">limit is survivable.</text>
+      <rect id="container 2" x="160" y="177" width="768" height="301" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <rect id="button" x="161" y="178" width="766" height="74" fill="rgba(242, 242, 237, 0.4)" />
+      <text id="Seats" x="181" y="208" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Seats</text>
+      <text id="Hard limit. Inviting past it prompts an …" x="181" y="230" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Hard limit. Inviting past it prompts an upgrade rather than charging silently.</text>
+      <rect id="container 3" x="862.17" y="203" width="44.83" height="24" rx="12" fill="#e0f0e7" />
+      <text id="hard" x="862.17" y="215" fill="#13161a" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">hard</text>
+      <text id="API requests" x="181" y="283" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">API requests</text>
+      <text id="Soft. You are throttled, not cut off, an…" x="181" y="305" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Soft. You are throttled, not cut off, and told at 80%.</text>
+      <rect id="container 4" x="866.16" y="278" width="40.84" height="24" rx="12" fill="rgba(0, 128, 49, 0.102)" />
+      <text id="soft" x="866.16" y="290" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">soft</text>
+      <text id="Storage" x="181" y="358" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Storage</text>
+      <text id="Soft, then read-only. Nothing is ever de…" x="181" y="380" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Soft, then read-only. Nothing is ever deleted for being over.</text>
+      <rect id="container 5" x="866.16" y="353" width="40.84" height="24" rx="12" fill="#f3f2ee" />
+      <text id="soft 2" x="866.16" y="365" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">soft</text>
+      <text id="Retention" x="181" y="433" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Retention</text>
+      <text id="Hard. Data past the window is deleted on…" x="181" y="455" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Hard. Data past the window is deleted on schedule and cannot be recovered.</text>
+      <rect id="container 6" x="862.17" y="428" width="44.83" height="24" rx="12" fill="rgba(226, 0, 10, 0.102)" />
+      <text id="hard 2" x="862.17" y="440" fill="#e7000b" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">hard</text>
+  </g>
+</svg>

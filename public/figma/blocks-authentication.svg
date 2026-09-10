@@ -1,0 +1,208 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1216" height="6086" viewBox="0 0 1216 6086" id="Hoverlab — Authentication">
+  <!--
+    Hoverlab — Authentication. 9 sections, traced from the
+    rendered catalog. Drag this file onto a Figma canvas.
+
+    These are frames, not components: named, editable layers with real
+    geometry, colour and type. There are no variants, no auto-layout,
+    and no hover or motion — none of those exist in a static frame.
+
+    Every section here is free to copy as code at https://hoverlab.dev/blocks
+  -->
+  <rect id="Background" x="0" y="0" width="1216" height="6086" fill="#ffffff" />
+  <text id="Email &amp; Social Login Card label" x="64" y="84" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Email &amp; Social Login Card</text>
+  <text id="auth-login-card id" x="64" y="98" font-family="ui-monospace, monospace" font-size="12" fill="#737373">auth-login-card</text>
+  <g id="Email &amp; Social Login Card" transform="translate(64, 116)">
+    <rect id="container" x="0" y="0" width="1088" height="580" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="352" y="25" width="384" height="530" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Welcome back" x="544" y="78" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="24" font-weight="700" letter-spacing="-0.6" text-anchor="middle">Welcome back</text>
+      <text id="Sign in to pick up where you left off." x="544" y="106" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" text-anchor="middle">Sign in to pick up where you left off.</text>
+      <rect id="button" x="381" y="136" width="157" height="38" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="GitHub" x="459.5" y="150" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">GitHub</text>
+      <rect id="button 2" x="550" y="136" width="157" height="38" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Google" x="628.5" y="150" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Google</text>
+      <text id="or continue with email" x="484.88" y="210" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">or continue with email</text>
+      <text id="Email" x="381" y="252" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Email</text>
+      <rect id="field" x="381" y="264" width="326" height="42" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Password" x="381" y="336" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Password</text>
+      <text id="Forgot?" x="665.8" y="336" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Forgot?</text>
+      <rect id="field 2" x="381" y="348" width="326" height="42" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="button 3" x="381" y="442" width="326" height="40" rx="16" fill="#007f34" />
+      <text id="Sign in" x="544" y="456" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Sign in</text>
+      <text id="New here?" x="544" y="520" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" text-anchor="middle">New here?</text>
+      <text id="Create an account" x="578.65" y="520" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Create an account</text>
+  </g>
+  <text id="Split Signup With Proof label" x="64" y="812" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Split Signup With Proof</text>
+  <text id="auth-signup-split id" x="64" y="826" font-family="ui-monospace, monospace" font-size="12" fill="#737373">auth-signup-split</text>
+  <g id="Split Signup With Proof" transform="translate(64, 844)">
+    <rect id="container" x="0" y="0" width="1088" height="592" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Create your account" x="80.5" y="57" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="24" font-weight="700" letter-spacing="-0.6">Create your account</text>
+      <text id="Free to start. No card required." x="80.5" y="85" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Free to start. No card required.</text>
+      <text id="Full name" x="80.5" y="133" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Full name</text>
+      <rect id="field" x="80.5" y="145" width="384" height="42" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Work email" x="80.5" y="217" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Work email</text>
+      <rect id="field 2" x="80.5" y="229" width="384" height="42" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Password" x="80.5" y="301" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Password</text>
+      <rect id="field 3" x="80.5" y="313" width="384" height="42" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="At least 8 characters" x="80.5" y="379" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">At least 8 characters</text>
+      <rect id="container 2" x="80.5" y="367" width="16" height="16" rx="8" fill="#f3f2ee" />
+      <text id="One number" x="80.5" y="401" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">One number</text>
+      <rect id="container 3" x="80.5" y="389" width="16" height="16" rx="8" fill="#f3f2ee" />
+      <text id="One uppercase letter" x="80.5" y="423" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">One uppercase letter</text>
+      <rect id="container 4" x="80.5" y="411" width="16" height="16" rx="8" fill="#f3f2ee" />
+      <rect id="button" x="80.5" y="443" width="384" height="40" rx="16" fill="#007f34" opacity="0.5" />
+      <text id="Create account" x="272.5" y="457" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Create account</text>
+      <text id="By continuing you agree to the Terms and…" x="272.5" y="511" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" text-anchor="middle">By continuing you agree to the Terms and Privacy Policy.</text>
+      <text id="Already have an account?" x="272.5" y="553" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" text-anchor="middle">Already have an account?</text>
+      <text id="Sign in" x="353.17" y="553" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Sign in</text>
+      <text id="We shipped our marketing site in" x="624" y="217.13" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="500">We shipped our marketing site in</text>
+      <text id="four days instead of three weeks." x="624" y="246.38" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="500">four days instead of three weeks.</text>
+      <text id="Same team, same headcount." x="624" y="275.63" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="500">Same team, same headcount.</text>
+      <text id="Dana Whitfield" x="624" y="318.88" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Dana Whitfield</text>
+      <text id="Head of Design, Globex" x="624" y="338.88" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Head of Design, Globex</text>
+      <rect id="container 5" x="624" y="376.88" width="384" height="66" rx="16" fill="rgba(253, 252, 248, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Set up in under two minutes — nothing to" x="665" y="403.88" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Set up in under two minutes — nothing to</text>
+      <text id="configure." x="665" y="423.88" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">configure.</text>
+  </g>
+  <text id="One-Time Code Input label" x="64" y="1552" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">One-Time Code Input</text>
+  <text id="auth-otp-verify id" x="64" y="1566" font-family="ui-monospace, monospace" font-size="12" fill="#737373">auth-otp-verify</text>
+  <g id="One-Time Code Input" transform="translate(64, 1584)">
+    <rect id="container" x="0" y="0" width="1088" height="386" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="352" y="35" width="384" height="316" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 3" x="522" y="64" width="44" height="44" rx="16" fill="rgba(0, 128, 54, 0.149)" />
+      <text id="Check your email" x="544" y="148" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="24" font-weight="700" letter-spacing="-0.6" text-anchor="middle">Check your email</text>
+      <text id="We sent a 6-digit code to" x="544" y="176" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" text-anchor="middle">We sent a 6-digit code to</text>
+      <text id="you@company.com" x="624.13" y="176" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">you@company.com</text>
+      <rect id="field" x="392" y="210" width="44" height="48" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="field 2" x="444" y="210" width="44" height="48" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="field 3" x="496" y="210" width="44" height="48" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="field 4" x="548" y="210" width="44" height="48" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="field 5" x="600" y="210" width="44" height="48" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="field 6" x="652" y="210" width="44" height="48" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Did not get it?" x="544" y="316" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" text-anchor="middle">Did not get it?</text>
+      <text id="Send another" x="590.19" y="316" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Send another</text>
+  </g>
+  <text id="Password Reset Request label" x="64" y="2086" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Password Reset Request</text>
+  <text id="auth-forgot-password id" x="64" y="2100" font-family="ui-monospace, monospace" font-size="12" fill="#737373">auth-forgot-password</text>
+  <g id="Password Reset Request" transform="translate(64, 2118)">
+    <rect id="container" x="0" y="0" width="1088" height="386" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="352" y="27" width="384" height="332" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Reset your password" x="381" y="80" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="24" font-weight="700" letter-spacing="-0.6">Reset your password</text>
+      <text id="Enter your email and we will send you a …" x="381" y="108" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Enter your email and we will send you a link to set a</text>
+      <text id="new one." x="381" y="128" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">new one.</text>
+      <text id="Email" x="381" y="172" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Email</text>
+      <rect id="field" x="381" y="184" width="326" height="42" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="button" x="381" y="242" width="326" height="40" rx="16" fill="#007f34" />
+      <text id="Send reset link" x="544" y="256" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Send reset link</text>
+      <text id="Back to sign in" x="381" y="320" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Back to sign in</text>
+  </g>
+  <text id="New Password With Strength Meter label" x="64" y="2620" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">New Password With Strength Meter</text>
+  <text id="auth-reset-password id" x="64" y="2634" font-family="ui-monospace, monospace" font-size="12" fill="#737373">auth-reset-password</text>
+  <g id="New Password With Strength Meter" transform="translate(64, 2652)">
+    <rect id="container" x="0" y="0" width="1088" height="518" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="352" y="25" width="384" height="468" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 3" x="381" y="54" width="44" height="44" rx="16" fill="rgba(0, 128, 54, 0.149)" />
+      <text id="Choose a new password" x="381" y="142" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="24" font-weight="700" letter-spacing="-0.6">Choose a new password</text>
+      <text id="It needs at least" x="381" y="170" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">It needs at least</text>
+      <text id="8" x="481.95" y="170" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">8</text>
+      <text id="characters. Longer beats" x="489.5" y="170" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">characters. Longer beats</text>
+      <text id="complicated." x="381" y="190" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">complicated.</text>
+      <text id="New password" x="381" y="234" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">New password</text>
+      <rect id="field" x="381" y="246" width="326" height="42" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 4" x="381" y="298" width="60.5" height="4" rx="2" fill="rgba(220, 222, 225, 0.6)" />
+      <rect id="container 5" x="445.5" y="298" width="60.5" height="4" rx="2" fill="rgba(220, 222, 225, 0.6)" />
+      <rect id="container 6" x="510" y="298" width="60.5" height="4" rx="2" fill="rgba(220, 222, 225, 0.6)" />
+      <rect id="container 7" x="574.5" y="298" width="60.5" height="4" rx="2" fill="rgba(220, 222, 225, 0.6)" />
+      <text id="Confirm password" x="381" y="332" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Confirm password</text>
+      <rect id="field 2" x="381" y="344" width="326" height="42" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="button" x="381" y="424" width="326" height="40" rx="16" fill="#007f34" opacity="0.5" />
+      <text id="Set new password" x="544" y="438" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Set new password</text>
+  </g>
+  <text id="Two-Factor Challenge label" x="64" y="3286" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Two-Factor Challenge</text>
+  <text id="auth-two-factor id" x="64" y="3300" font-family="ui-monospace, monospace" font-size="12" fill="#737373">auth-two-factor</text>
+  <g id="Two-Factor Challenge" transform="translate(64, 3318)">
+    <rect id="container" x="0" y="0" width="1088" height="523" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="352" y="25" width="384" height="473" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 3" x="381" y="54" width="44" height="44" rx="16" fill="rgba(0, 128, 54, 0.149)" />
+      <text id="Two-factor authentication" x="381" y="142" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="24" font-weight="700" letter-spacing="-0.6">Two-factor authentication</text>
+      <text id="Enter the 6-digit code from your authent…" x="381" y="170" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Enter the 6-digit code from your authenticator app.</text>
+      <text id="Authentication code" x="381" y="214" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Authentication code</text>
+      <rect id="field" x="381" y="226" width="326" height="50" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Trust this device for 30 days" x="407" y="342" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Trust this device for 30 days</text>
+      <rect id="button" x="381" y="364" width="326" height="40" rx="16" fill="#007f34" opacity="0.5" />
+      <text id="Verify" x="544" y="378" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Verify</text>
+      <rect id="container 4" x="381" y="428" width="326" height="41" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Lost your device? Use a backup code" x="543.99" y="462" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Lost your device? Use a backup code</text>
+  </g>
+  <text id="Email-First SSO Sign-In label" x="64" y="3957" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Email-First SSO Sign-In</text>
+  <text id="auth-sso-domain id" x="64" y="3971" font-family="ui-monospace, monospace" font-size="12" fill="#737373">auth-sso-domain</text>
+  <g id="Email-First SSO Sign-In" transform="translate(64, 3989)">
+    <rect id="container" x="0" y="0" width="1088" height="570.5" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="344" y="65" width="400" height="440.5" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="Sign in" x="373" y="114" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="600" letter-spacing="-0.5">Sign in</text>
+      <text id="Start with your work email — how you sig…" x="373" y="140" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Start with your work email — how you sign in depends</text>
+      <text id="on what your company has set up." x="373" y="160" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">on what your company has set up.</text>
+      <text id="Email" x="373" y="204" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Email</text>
+      <rect id="field" x="373" y="216" width="342" height="40" rx="12" fill="#fdfcf8" stroke="#8d8f92" stroke-width="1" />
+      <rect id="container 3" x="373" y="272" width="342" height="84.5" rx="16" fill="rgba(242, 242, 237, 0.4)" stroke="#dbdee1" stroke-width="1" />
+      <text id="manages accounts on" x="500.05" y="298" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">manages accounts on</text>
+      <text id="meridianfoods.com" x="412" y="317.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">meridianfoods.com</text>
+      <text id="." x="514.05" y="317.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">.</text>
+      <text id="They require single sign-on, so" x="519.95" y="317.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">They require single sign-on, so</text>
+      <text id="there is no password to enter here." x="412" y="337" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">there is no password to enter here.</text>
+      <text id="Meridian Foods" x="412" y="298" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600">Meridian Foods</text>
+      <rect id="button" x="373" y="368.5" width="342" height="40" rx="12" fill="#007f34" />
+      <text id="Continue with" x="490.72" y="392.5" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Continue with</text>
+      <text id="Meridian Foods 2" x="586.59" y="392.5" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Meridian Foods</text>
+      <text id="SSO" x="650.88" y="392.5" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">SSO</text>
+      <text id="Takes you to Okta" x="544" y="432.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" text-anchor="middle">Takes you to Okta</text>
+      <text id="Use a different email" x="439.38" y="467.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500" text-anchor="middle">Use a different email</text>
+  </g>
+  <text id="Magic Link Sign In label" x="64" y="4675.5" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Magic Link Sign In</text>
+  <text id="auth-magic-link-form id" x="64" y="4689.5" font-family="ui-monospace, monospace" font-size="12" fill="#737373">auth-magic-link-form</text>
+  <g id="Magic Link Sign In" transform="translate(64, 4707.5)">
+    <rect id="container" x="0" y="0" width="1088" height="488" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="section" x="1" y="1" width="1086" height="486" fill="#fdfcf8" />
+      <rect id="container 2" x="320" y="65" width="448" height="358" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="Sign in without a password" x="353" y="118" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="600" letter-spacing="-0.5">Sign in without a password</text>
+      <text id="One address, one link, no password to fo…" x="353" y="148" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">One address, one link, no password to forget or reuse. The</text>
+      <text id="link works once and expires in fifteen m…" x="353" y="168" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">link works once and expires in fifteen minutes, which is stated</text>
+      <text id="here rather than discovered when it fail…" x="353" y="188" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">here rather than discovered when it fails.</text>
+      <text id="Email" x="353" y="232" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Email</text>
+      <rect id="field" x="353" y="244" width="382" height="38" rx="10" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="The link lands here and works once. It e…" x="353" y="298" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">The link lands here and works once. It expires after 15 minutes.</text>
+      <rect id="button" x="353" y="318" width="382" height="36" rx="10" fill="#007f34" />
+      <text id="Email me a link" x="544" y="332" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Email me a link</text>
+  </g>
+  <text id="Enterprise SSO Split label" x="64" y="5311.5" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Enterprise SSO Split</text>
+  <text id="sso-enterprise-split id" x="64" y="5325.5" font-family="ui-monospace, monospace" font-size="12" fill="#737373">sso-enterprise-split</text>
+  <g id="Enterprise SSO Split" transform="translate(64, 5343.5)">
+    <rect id="container" x="0" y="0" width="1088" height="678" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="section" x="1" y="1" width="1086" height="676" fill="#fdfcf8" />
+      <text id="Single sign-on" x="25" y="111" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Single sign-on</text>
+      <text id="Your directory, your rules" x="25" y="161" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="600" letter-spacing="-0.9">Your directory, your rules</text>
+      <text id="SSO on a pricing page is one word. To th…" x="25" y="198" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">SSO on a pricing page is one word. To the person configuring it, it is</text>
+      <text id="four separate features that vendors bund…" x="25" y="222" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">four separate features that vendors bundle inconsistently — so this</text>
+      <text id="names them." x="25" y="246" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">names them.</text>
+      <text id="SAML 2.0 and OIDC" x="57" y="299" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">SAML 2.0 and OIDC</text>
+      <text id="Both, against any provider. Okta, Entra …" x="57" y="321" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Both, against any provider. Okta, Entra and Google are documented step</text>
+      <text id="by step." x="57" y="341" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">by step.</text>
+      <text id="SCIM provisioning" x="57" y="377" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">SCIM provisioning</text>
+      <text id="Users appear and disappear with your dir…" x="57" y="399" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Users appear and disappear with your directory. Deprovisioning is the half</text>
+      <text id="that matters." x="57" y="419" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">that matters.</text>
+      <text id="Enforced, not optional" x="57" y="455" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Enforced, not optional</text>
+      <text id="Password login can be switched off per d…" x="57" y="477" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Password login can be switched off per domain, so a bypass is not one</text>
+      <text id="setting away." x="57" y="497" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">setting away.</text>
+      <text id="Included, not an upsell" x="57" y="533" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Included, not an upsell</text>
+      <text id="On every paid plan. Charging for the con…" x="57" y="555" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">On every paid plan. Charging for the control that makes offboarding safe</text>
+      <text id="is a security tax." x="57" y="575" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">is a security tax.</text>
+      <rect id="container 2" x="568" y="196" width="495" height="286" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <rect id="container 3" x="593" y="221" width="148.33" height="12" rx="4" fill="rgba(0, 126, 53, 0.302)" />
+      <rect id="container 4" x="593" y="245" width="445" height="96" rx="12" fill="#f3f2ee" />
+      <rect id="container 5" x="593" y="353" width="140.33" height="56" rx="12" fill="#f3f2ee" />
+      <rect id="container 6" x="745.33" y="353" width="140.33" height="56" rx="12" fill="#f3f2ee" />
+      <rect id="container 7" x="897.66" y="353" width="140.33" height="56" rx="12" fill="#f3f2ee" />
+      <rect id="container 8" x="593" y="421" width="296.66" height="12" rx="4" fill="#f3f2ee" />
+      <rect id="container 9" x="593" y="445" width="222.5" height="12" rx="4" fill="#f3f2ee" />
+  </g>
+</svg>

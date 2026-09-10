@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1216" height="1112" viewBox="0 0 1216 1112" id="Hoverlab — Navigation">
+  <!--
+    Hoverlab — Navigation. 5 sections, traced from the
+    rendered catalog. Drag this file onto a Figma canvas.
+
+    These are frames, not components: named, editable layers with real
+    geometry, colour and type. There are no variants, no auto-layout,
+    and no hover or motion — none of those exist in a static frame.
+
+    Every section here is free to copy as code at https://hoverlab.dev/blocks
+  -->
+  <rect id="Background" x="0" y="0" width="1216" height="1112" fill="#ffffff" />
+  <text id="Responsive Navbar label" x="64" y="84" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Responsive Navbar</text>
+  <text id="navbar-simple id" x="64" y="98" font-family="ui-monospace, monospace" font-size="12" fill="#737373">navbar-simple</text>
+  <g id="Responsive Navbar" transform="translate(64, 116)">
+    <rect id="container" x="0" y="0" width="1088" height="67" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="header" x="1" y="1" width="1086" height="65" fill="rgba(252, 251, 248, 0.702)" />
+      <text id="A" x="33" y="29" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="900">A</text>
+      <text id="Acme" x="79" y="37" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="700" letter-spacing="-0.4">Acme</text>
+      <text id="Product" x="367.23" y="30" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Product</text>
+      <text id="Pricing" x="445.09" y="30" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Pricing</text>
+      <text id="Docs" x="516.97" y="30" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Docs</text>
+      <text id="Blog" x="576" y="30" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Blog</text>
+      <text id="Sign in" x="876.48" y="29" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Sign in</text>
+      <rect id="link" x="952.05" y="15" width="102.95" height="36" rx="12" fill="#007f34" />
+      <text id="Get started" x="952.05" y="29" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Get started</text>
+  </g>
+  <text id="Dismissible Announcement Bar label" x="64" y="299" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Dismissible Announcement Bar</text>
+  <text id="announcement-bar id" x="64" y="313" font-family="ui-monospace, monospace" font-size="12" fill="#737373">announcement-bar</text>
+  <g id="Dismissible Announcement Bar" transform="translate(64, 331)">
+    <rect id="container" x="0" y="0" width="1088" height="43" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="section" x="1" y="1" width="1086" height="41" fill="rgba(0, 128, 49, 0.102)" />
+      <rect id="container 2" x="248.5" y="11" width="40.66" height="20" rx="10" fill="#007f34" />
+      <text id="New" x="268.83" y="23" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600" text-anchor="middle">New</text>
+      <text id="Blocks v2 is out — 134 sections, all fre…" x="482.41" y="25" fill="rgba(8, 11, 16, 0.902)" font-family="ui-sans-serif, system-ui" font-size="14" text-anchor="middle">Blocks v2 is out — 134 sections, all free to browse and copy.</text>
+      <text id="See what changed" x="741.57" y="25" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">See what changed</text>
+  </g>
+  <text id="Navbar with Mega Menu label" x="64" y="490" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Navbar with Mega Menu</text>
+  <text id="navbar-mega-menu id" x="64" y="504" font-family="ui-monospace, monospace" font-size="12" fill="#737373">navbar-mega-menu</text>
+  <g id="Navbar with Mega Menu" transform="translate(64, 522)">
+    <rect id="container" x="0" y="0" width="1088" height="67" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="header" x="1" y="1" width="1086" height="65" fill="rgba(252, 251, 248, 0.702)" />
+      <text id="A" x="33" y="29" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="900">A</text>
+      <text id="Acme" x="79" y="37" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="700" letter-spacing="-0.4">Acme</text>
+      <text id="Product" x="423.91" y="29" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Product</text>
+      <text id="Solutions" x="524.39" y="29" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Solutions</text>
+      <text id="Pricing" x="578.94" y="30" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Pricing</text>
+      <text id="Docs" x="650.81" y="30" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Docs</text>
+      <rect id="link" x="964.16" y="16" width="90.84" height="35" rx="12" fill="#007f34" />
+      <text id="Start free" x="964.16" y="30" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Start free</text>
+  </g>
+  <text id="Mobile Nav Drawer label" x="64" y="705" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Mobile Nav Drawer</text>
+  <text id="nav-mobile-drawer id" x="64" y="719" font-family="ui-monospace, monospace" font-size="12" fill="#737373">nav-mobile-drawer</text>
+  <g id="Mobile Nav Drawer" transform="translate(64, 737)">
+    <rect id="container" x="0" y="0" width="1088" height="67" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="header" x="1" y="1" width="1086" height="65" fill="rgba(252, 251, 248, 0.702)" />
+      <text id="A" x="33" y="29" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="900">A</text>
+      <text id="Acme" x="79" y="37" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="700" letter-spacing="-0.4">Acme</text>
+      <rect id="button" x="968.28" y="13" width="86.72" height="40" rx="12" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Menu" x="1011.64" y="27" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Menu</text>
+      <rect id="dialog" x="1087" y="1" width="384" height="64" fill="#fdfcf8" />
+      <text id="Acme menu" x="1104" y="36.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Acme menu</text>
+      <rect id="field" x="1104" y="81" width="351" height="40" rx="12" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Product" x="1104" y="153" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600" letter-spacing="0.6">Product</text>
+      <text id="Overview" x="1116" y="189" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Overview</text>
+      <text id="Analytics" x="1116" y="231" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Analytics</text>
+      <text id="Integrations" x="1116" y="273" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Integrations</text>
+      <rect id="container 2" x="1200.88" y="259.86" width="32.55" height="18.28" rx="9.14" fill="rgba(0, 128, 54, 0.149)" />
+      <text id="New" x="1200.88" y="269.86" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="10" font-weight="600">New</text>
+      <text id="Pricing" x="1116" y="315" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Pricing</text>
+      <text id="Developers" x="1104" y="367" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600" letter-spacing="0.6">Developers</text>
+      <text id="Documentation" x="1116" y="403" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Documentation</text>
+      <text id="API reference" x="1116" y="445" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">API reference</text>
+      <text id="Changelog" x="1116" y="487" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Changelog</text>
+      <text id="Status" x="1116" y="529" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Status</text>
+      <text id="Company" x="1104" y="581" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600" letter-spacing="0.6">Company</text>
+      <text id="About" x="1116" y="617" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">About</text>
+      <text id="Blog" x="1116" y="659" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Blog</text>
+      <text id="Careers" x="1116" y="701" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Careers</text>
+      <rect id="container 3" x="1171.25" y="687.86" width="17.56" height="18.28" rx="8.78" fill="rgba(0, 128, 54, 0.149)" />
+      <text id="3" x="1171.25" y="697.86" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="10" font-weight="600">3</text>
+      <rect id="container 4" x="1088" y="97" width="383" height="123" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="link" x="1104" y="114" width="351" height="42" rx="12" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Sign in" x="1279.5" y="128" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Sign in</text>
+      <rect id="link 2" x="1104" y="164" width="351" height="40" rx="12" fill="#007f34" />
+      <text id="Get started" x="1279.5" y="178" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Get started</text>
+  </g>
+  <text id="Signed-in Application Bar label" x="64" y="920" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Signed-in Application Bar</text>
+  <text id="navbar-authenticated id" x="64" y="934" font-family="ui-monospace, monospace" font-size="12" fill="#737373">navbar-authenticated</text>
+  <g id="Signed-in Application Bar" transform="translate(64, 952)">
+    <rect id="container" x="0" y="0" width="1088" height="96" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="status" x="1" y="1" width="1086" height="37" fill="rgba(245, 147, 0, 0.102)" />
+      <text id="You are viewing Northwind as . Anything …" x="53" y="23" fill="#bb4d00" font-family="ui-sans-serif, system-ui" font-size="14">You are viewing Northwind as . Anything you do here is recorded against your own name.</text>
+      <text id="priya@meridianfoods.com" x="240.17" y="23" fill="#bb4d00" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">priya@meridianfoods.com</text>
+      <text id="Stop viewing as" x="1013.45" y="23" fill="#bb4d00" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Stop viewing as</text>
+      <rect id="nav" x="1" y="38" width="1086" height="57" fill="#ffffff" />
+      <rect id="container 2" x="25" y="52" width="28" height="28" rx="12" fill="#007f34" />
+      <text id="N" x="25" y="66" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="700">N</text>
+      <rect id="button" x="65" y="48" width="241.61" height="36" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Northwind Trading" x="136.19" y="70" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Northwind Trading</text>
+      <rect id="container 3" x="204.38" y="55.14" width="69.23" height="21.7" rx="10" fill="#f3f2ee" stroke="#dbdee1" stroke-width="1" />
+      <text id="production" x="238.99" y="66.14" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="500" text-anchor="middle">production</text>
+      <rect id="field" x="625" y="48" width="320" height="36" rx="12" fill="#fdfcf8" stroke="#8d8f92" stroke-width="1" />
+      <rect id="container 4" x="979" y="46" width="16" height="16" rx="8" fill="#e7000b" />
+      <text id="3" x="987" y="56" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="10" font-weight="600" text-anchor="middle">3</text>
+      <rect id="container 5" x="1009" y="52" width="28" height="28" rx="14" fill="#f3f2ee" />
+      <text id="SK" x="1023" y="64" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600" text-anchor="middle">SK</text>
+  </g>
+</svg>

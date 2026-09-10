@@ -1,0 +1,143 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1216" height="4360" viewBox="0 0 1216 4360" id="Hoverlab — CTA Sections">
+  <!--
+    Hoverlab — CTA Sections. 7 sections, traced from the
+    rendered catalog. Drag this file onto a Figma canvas.
+
+    These are frames, not components: named, editable layers with real
+    geometry, colour and type. There are no variants, no auto-layout,
+    and no hover or motion — none of those exist in a static frame.
+
+    Every section here is free to copy as code at https://hoverlab.dev/blocks
+  -->
+  <rect id="Background" x="0" y="0" width="1216" height="4360" fill="#ffffff" />
+  <text id="Newsletter Capture Band label" x="64" y="84" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Newsletter Capture Band</text>
+  <text id="newsletter-signup id" x="64" y="98" font-family="ui-monospace, monospace" font-size="12" fill="#737373">newsletter-signup</text>
+  <g id="Newsletter Capture Band" transform="translate(64, 116)">
+    <rect id="container" x="0" y="0" width="1088" height="514" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="120" y="65" width="848" height="384" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 3" x="522" y="114" width="44" height="44" rx="16" fill="rgba(0, 128, 54, 0.149)" />
+      <text id="Get the monthly digest" x="544" y="204" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="30" font-weight="700" letter-spacing="-0.75" text-anchor="middle">Get the monthly digest</text>
+      <text id="New sections, patterns worth stealing, a…" x="543.99" y="239" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16" text-anchor="middle">New sections, patterns worth stealing, and the occasional teardown. No</text>
+      <text id="spam." x="544" y="263" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16" text-anchor="middle">spam.</text>
+      <rect id="field" x="320" y="302" width="334.44" height="42" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="button" x="666.44" y="302" width="101.56" height="42" rx="16" fill="#007f34" />
+      <text id="Subscribe" x="717.22" y="316" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Subscribe</text>
+      <text id="Unsubscribe in one click. We never share…" x="544" y="396" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" text-anchor="middle">Unsubscribe in one click. We never share your address.</text>
+  </g>
+  <text id="Community Link Band label" x="64" y="746" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Community Link Band</text>
+  <text id="community-band id" x="64" y="760" font-family="ui-monospace, monospace" font-size="12" fill="#737373">community-band</text>
+  <g id="Community Link Band" transform="translate(64, 778)">
+    <rect id="container" x="0" y="0" width="1088" height="428" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Come build with us" x="544" y="101" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="700" letter-spacing="-0.9" text-anchor="middle">Come build with us</text>
+      <text id="Most of what ships started as someone as…" x="544" y="133" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16" text-anchor="middle">Most of what ships started as someone asking for it.</text>
+      <rect id="link" x="33" y="181" width="330" height="182" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="58" y="206" width="40" height="40" rx="16" fill="#f3f2ee" />
+      <text id="GitHub" x="110" y="230" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600" letter-spacing="-0.4">GitHub</text>
+      <text id="Read the source, file an issue, send a p…" x="58" y="272" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Read the source, file an issue, send a pull</text>
+      <text id="request." x="58" y="292" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">request.</text>
+      <rect id="container 3" x="58" y="314" width="71.55" height="24" rx="12" fill="#f3f2ee" />
+      <text id="4.2k stars" x="58" y="326" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">4.2k stars</text>
+      <rect id="link 2" x="379" y="181" width="330" height="182" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 4" x="404" y="206" width="40" height="40" rx="16" fill="#f3f2ee" />
+      <text id="Discord" x="456" y="230" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600" letter-spacing="-0.4">Discord</text>
+      <text id="Ask a question and get an answer the sam…" x="404" y="272" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Ask a question and get an answer the same</text>
+      <text id="day." x="404" y="292" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">day.</text>
+      <rect id="container 5" x="404" y="314" width="94.92" height="24" rx="12" fill="#f3f2ee" />
+      <text id="3.1k members" x="404" y="326" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">3.1k members</text>
+      <rect id="link 3" x="725" y="181" width="330" height="182" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 6" x="750" y="206" width="40" height="40" rx="16" fill="#f3f2ee" />
+      <text id="X" x="802" y="230" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600" letter-spacing="-0.4">X</text>
+      <text id="Release notes, new sections, and work in" x="750" y="272" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Release notes, new sections, and work in</text>
+      <text id="progress." x="750" y="292" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">progress.</text>
+      <rect id="container 7" x="750" y="314" width="68.45" height="24" rx="12" fill="#f3f2ee" />
+      <text id="@handle" x="750" y="326" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">@handle</text>
+  </g>
+  <text id="Closing CTA Panel label" x="64" y="1322" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Closing CTA Panel</text>
+  <text id="cta-split-panel id" x="64" y="1336" font-family="ui-monospace, monospace" font-size="12" fill="#737373">cta-split-panel</text>
+  <g id="Closing CTA Panel" transform="translate(64, 1354)">
+    <rect id="container" x="0" y="0" width="1088" height="455" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="33" y="65" width="1022" height="325" rx="24" fill="#05080b" />
+      <text id="Ship the roadmap, not the tooling" x="81" y="165" fill="#f6f5f1" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="700" letter-spacing="-0.9">Ship the roadmap, not the tooling</text>
+      <text id="Start a workspace now and have your firs…" x="81" y="202" fill="#9a9fa5" font-family="ui-sans-serif, system-ui" font-size="16">Start a workspace now and have your first sprint planned before</text>
+      <text id="standup tomorrow." x="81" y="226" fill="#9a9fa5" font-family="ui-sans-serif, system-ui" font-size="16">standup tomorrow.</text>
+      <rect id="link" x="707.77" y="158" width="153.06" height="46" rx="16" fill="#00bf76" />
+      <text id="Start for free" x="707.77" y="172" fill="#05080b" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Start for free</text>
+      <rect id="link 2" x="872.83" y="158" width="134.17" height="46" rx="16" fill="rgba(4, 8, 12, 0.502)" stroke="rgba(255, 255, 255, 0.122)" stroke-width="1" />
+      <text id="Book a demo" x="872.83" y="172" fill="#f6f5f1" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Book a demo</text>
+      <rect id="container 3" x="81" y="273" width="926" height="53" fill="none" stroke="rgba(255, 255, 255, 0.071)" stroke-width="1" />
+      <text id="No credit card required" x="81" y="320" fill="#9a9fa5" font-family="ui-sans-serif, system-ui" font-size="14">No credit card required</text>
+      <text id="Free for teams up to 5" x="281.11" y="320" fill="#9a9fa5" font-family="ui-sans-serif, system-ui" font-size="14">Free for teams up to 5</text>
+      <text id="Import from Linear in one click" x="473.92" y="320" fill="#9a9fa5" font-family="ui-sans-serif, system-ui" font-size="14">Import from Linear in one click</text>
+  </g>
+  <text id="Sticky Conversion Bar label" x="64" y="1925" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Sticky Conversion Bar</text>
+  <text id="cta-sticky-bar id" x="64" y="1939" font-family="ui-monospace, monospace" font-size="12" fill="#737373">cta-sticky-bar</text>
+  <g id="Sticky Conversion Bar" transform="translate(64, 1957)">
+    <rect id="container" x="0" y="0" width="1088" height="210" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="1" y="1" width="1086" height="208" rx="16" fill="rgba(245, 240, 240, 0.2)" stroke="#dbdee1" stroke-width="1" />
+      <text id="Page content sits here. The bar rides ab…" x="26" y="48" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Page content sits here. The bar rides above it once the reader is past the</text>
+      <text id="threshold, and the spacer at the end of …" x="26" y="68" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">threshold, and the spacer at the end of the document keeps the last element</text>
+      <text id="reachable." x="26" y="88" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">reachable.</text>
+      <rect id="section" x="2" y="143" width="1084" height="65" fill="rgba(255, 255, 255, 0.949)" stroke="#dbdee1" stroke-width="1" />
+      <text id="Start with the free tier" x="56" y="170" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Start with the free tier</text>
+      <text id="Every component readable and installable…" x="56" y="190" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Every component readable and installable. A licence only when you ship it commercially.</text>
+      <text id="See pricing" x="772.58" y="172" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">See pricing</text>
+      <rect id="link" x="875.05" y="158" width="124.95" height="36" rx="12" fill="#007f34" />
+      <text id="Get started" x="875.05" y="172" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Get started</text>
+  </g>
+  <text id="In-article CTA Card label" x="64" y="2283" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">In-article CTA Card</text>
+  <text id="cta-inline-card id" x="64" y="2297" font-family="ui-monospace, monospace" font-size="12" fill="#737373">cta-inline-card</text>
+  <g id="In-article CTA Card" transform="translate(64, 2315)">
+    <rect id="container" x="0" y="0" width="1088" height="509.25" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="…which is why the migration queues behin…" x="232" y="80" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">…which is why the migration queues behind the reporting job rather than failing outright. The lock is</text>
+      <text id="held for as long as the report runs, and…" x="232" y="102.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">held for as long as the report runs, and on a large table that can be several minutes.</text>
+      <rect id="aside" x="232" y="134.5" width="624" height="240.25" rx="16" fill="rgba(241, 241, 237, 0.502)" stroke="#dbdee1" stroke-width="1" />
+      <text id="Since you are reading about migrations" x="253" y="167.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500" letter-spacing="0.3">Since you are reading about migrations</text>
+      <text id="Run this migration against a copy first" x="253" y="195.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600">Run this migration against a copy first</text>
+      <text id="The sandbox restores a snapshot of your …" x="253" y="224.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">The sandbox restores a snapshot of your production database and throws it away after an</text>
+      <text id="hour. It is the cheapest way to find out…" x="253" y="247.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">hour. It is the cheapest way to find out whether the lock timeout above is enough for your</text>
+      <text id="data." x="253" y="270" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">data.</text>
+      <rect id="link" x="253" y="293.75" width="153.17" height="36" rx="12" fill="#007f34" />
+      <text id="Open a sandbox" x="253" y="307.75" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Open a sandbox</text>
+      <text id="No card. About two minutes, and it delet…" x="253" y="349.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">No card. About two minutes, and it deletes itself.</text>
+      <text id="The safe version is to set a lock timeou…" x="232" y="413.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">The safe version is to set a lock timeout and accept that the migration may need a second pass,</text>
+      <text id="rather than letting it wait indefinitely…" x="232" y="436.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">rather than letting it wait indefinitely and block every write behind it.</text>
+  </g>
+  <text id="Referral Waitlist Form label" x="64" y="2940.25" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Referral Waitlist Form</text>
+  <text id="referral-waitlist-form id" x="64" y="2954.25" font-family="ui-monospace, monospace" font-size="12" fill="#737373">referral-waitlist-form</text>
+  <g id="Referral Waitlist Form" transform="translate(64, 2972.25)">
+    <rect id="container" x="0" y="0" width="1088" height="588" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="section" x="1" y="1" width="1086" height="586" fill="#fdfcf8" />
+      <rect id="container 2" x="320" y="65" width="448" height="458" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="Join the queue, or skip it" x="353" y="118" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="600" letter-spacing="-0.5">Join the queue, or skip it</text>
+      <text id="Everyone who joins gets a position and a…" x="353" y="148" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Everyone who joins gets a position and a link. Three people</text>
+      <text id="through your link moves you up a hundred…" x="353" y="168" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">through your link moves you up a hundred places, which is</text>
+      <text id="the only honest way a waitlist is worth …" x="353" y="188" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">the only honest way a waitlist is worth sharing.</text>
+      <text id="Email" x="353" y="232" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Email</text>
+      <rect id="field" x="353" y="244" width="382" height="38" rx="10" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="One message when your place comes up. No…" x="353" y="298" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">One message when your place comes up. Nothing else.</text>
+      <text id="Referral code" x="353" y="332" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Referral code</text>
+      <rect id="field 2" x="353" y="344" width="382" height="38" rx="10" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Optional. Credits whoever sent you, and …" x="353" y="398" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Optional. Credits whoever sent you, and moves you both up.</text>
+      <rect id="button" x="353" y="418" width="382" height="36" rx="10" fill="#007f34" />
+      <text id="Get my place" x="544" y="432" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Get my place</text>
+  </g>
+  <text id="Demo Request Form label" x="64" y="3676.25" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Demo Request Form</text>
+  <text id="demo-request-form id" x="64" y="3690.25" font-family="ui-monospace, monospace" font-size="12" fill="#737373">demo-request-form</text>
+  <g id="Demo Request Form" transform="translate(64, 3708.25)">
+    <rect id="container" x="0" y="0" width="1088" height="588" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="section" x="1" y="1" width="1086" height="586" fill="#fdfcf8" />
+      <rect id="container 2" x="320" y="65" width="448" height="458" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="See it on your own data" x="353" y="118" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="600" letter-spacing="-0.5">See it on your own data</text>
+      <text id="Thirty minutes, screen-shared, against s…" x="353" y="148" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Thirty minutes, screen-shared, against something of yours</text>
+      <text id="rather than a seeded demo account. If yo…" x="353" y="168" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">rather than a seeded demo account. If you would rather not</text>
+      <text id="talk to anyone, the free tier is the sam…" x="353" y="188" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">talk to anyone, the free tier is the same product.</text>
+      <text id="Work email" x="353" y="232" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Work email</text>
+      <rect id="field" x="353" y="244" width="382" height="38" rx="10" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="The invitation goes here." x="353" y="298" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">The invitation goes here.</text>
+      <text id="What do you want to see?" x="353" y="332" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">What do you want to see?</text>
+      <rect id="field 2" x="353" y="344" width="382" height="38" rx="10" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="One line. It decides what gets set up be…" x="353" y="398" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">One line. It decides what gets set up before you arrive.</text>
+      <rect id="button" x="353" y="418" width="382" height="36" rx="10" fill="#007f34" />
+      <text id="Book the call" x="544" y="432" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Book the call</text>
+  </g>
+</svg>

@@ -1,0 +1,409 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1216" height="7311" viewBox="0 0 1216 7311" id="Hoverlab — Retrieval &amp; Context">
+  <!--
+    Hoverlab — Retrieval & Context. 9 sections, traced from the
+    rendered catalog. Drag this file onto a Figma canvas.
+
+    These are frames, not components: named, editable layers with real
+    geometry, colour and type. There are no variants, no auto-layout,
+    and no hover or motion — none of those exist in a static frame.
+
+    Every section here is free to copy as code at https://hoverlab.dev/blocks
+  -->
+  <rect id="Background" x="0" y="0" width="1216" height="7311" fill="#ffffff" />
+  <text id="Retrieved Context Chunks label" x="64" y="84" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Retrieved Context Chunks</text>
+  <text id="context-chunk-cards id" x="64" y="98" font-family="ui-monospace, monospace" font-size="12" fill="#737373">context-chunk-cards</text>
+  <g id="Retrieved Context Chunks" transform="translate(64, 116)">
+    <rect id="container" x="0" y="0" width="1088" height="727" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Retrieved context" x="232" y="39" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Retrieved context</text>
+      <text id="4" x="232" y="59" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">4</text>
+      <text id="chunks for “" x="238.47" y="59" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">chunks for “</text>
+      <text id="why did northwind not get the volume pri…" x="304.8" y="59" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">why did northwind not get the volume price</text>
+      <text id="”, ranked by" x="537.88" y="59" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">”, ranked by</text>
+      <text id="similarity" x="232" y="75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">similarity</text>
+      <rect id="radio" x="621.2" y="39" width="36.33" height="26" rx="13" fill="rgba(0, 128, 49, 0.102)" stroke="#007f34" stroke-width="1" />
+      <text id="All" x="639.37" y="51" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500" text-anchor="middle">All</text>
+      <rect id="radio 2" x="661.53" y="39" width="83.94" height="26" rx="13" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Documents" x="703.5" y="51" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500" text-anchor="middle">Documents</text>
+      <rect id="radio 3" x="749.47" y="39" width="55.64" height="26" rx="13" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Tables" x="777.29" y="51" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500" text-anchor="middle">Tables</text>
+      <rect id="radio 4" x="809.11" y="39" width="46.89" height="26" rx="13" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Web" x="832.55" y="51" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500" text-anchor="middle">Web</text>
+      <rect id="list item" x="232" y="95" width="624" height="152.5" rx="16" fill="#ffffff" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="249" y="106" width="20" height="20" rx="10" fill="#f3f2ee" />
+      <text id="1" x="249" y="116" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="10" font-weight="700">1</text>
+      <text id="Pricing handbook" x="303" y="120" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600">Pricing handbook</text>
+      <text id="· §4.2 — Volume breaks" x="409.25" y="120" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">· §4.2 — Volume breaks</text>
+      <text id="Strong match" x="683.28" y="118.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11">Strong match</text>
+      <text id="0.91" x="756.59" y="129" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">0.91</text>
+      <text id="0.91 2" x="812.59" y="118.75" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="11">0.91</text>
+      <text id="Accounts above 1,200 units per order qua…" x="249" y="162" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Accounts above 1,200 units per order qualify for the tier-two rate of $8.40, held for the duration of the contract</text>
+      <text id="year." x="249" y="181.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">year.</text>
+      <text id=", so a single large order beats two smal…" x="526.7" y="181.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">, so a single large order beats two smaller ones of the</text>
+      <text id="same total volume." x="249" y="201" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">same total volume.</text>
+      <rect id="container 3" x="277.25" y="169.5" width="249.45" height="16" rx="4" fill="rgba(0, 128, 54, 0.149)" />
+      <text id="The break is applied per order, not per …" x="277.25" y="181.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12">The break is applied per order, not per quarter</text>
+      <text id="Show full chunk" x="300.35" y="227.5" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500" text-anchor="middle">Show full chunk</text>
+      <rect id="list item 2" x="232" y="259.5" width="624" height="152.5" rx="16" fill="#ffffff" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 4" x="249" y="270.5" width="20" height="20" rx="10" fill="#f3f2ee" />
+      <text id="2" x="249" y="280.5" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="10" font-weight="700">2</text>
+      <text id="Ticket #4192" x="303" y="284.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600">Ticket #4192</text>
+      <text id="· Northwind Retail · resolved" x="380.7" y="284.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">· Northwind Retail · resolved</text>
+      <text id="Partial match" x="685.61" y="283.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11">Partial match</text>
+      <text id="0.78" x="756.59" y="293.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">0.78</text>
+      <text id="0.78 2" x="812.59" y="283.25" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="11">0.78</text>
+      <text id="Customer asked why their November order …" x="249" y="326.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Customer asked why their November order did not get the tier-two price. Their October and November orders</text>
+      <text id="were 700 units each —" x="249" y="346" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">were 700 units each —</text>
+      <text id=". Confirmed with finance that" x="668" y="346" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">. Confirmed with finance that</text>
+      <text id="this is working as intended." x="249" y="365.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">this is working as intended.</text>
+      <rect id="container 5" x="372.61" y="334" width="295.39" height="16" rx="4" fill="rgba(0, 128, 54, 0.149)" />
+      <text id="combined they clear the break, individua…" x="372.61" y="346" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12">combined they clear the break, individually they do not</text>
+      <text id="Show full chunk 2" x="300.35" y="392" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500" text-anchor="middle">Show full chunk</text>
+      <rect id="list item 3" x="232" y="424" width="624" height="133" rx="16" fill="#ffffff" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 6" x="249" y="435" width="20" height="20" rx="10" fill="#f3f2ee" />
+      <text id="3" x="249" y="445" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="10" font-weight="700">3</text>
+      <text id="warehouse.orders" x="303" y="449" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600">warehouse.orders</text>
+      <text id="· 2,481 rows scanned" x="409.45" y="449" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">· 2,481 rows scanned</text>
+      <text id="Partial match 2" x="685.61" y="447.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11">Partial match</text>
+      <text id="0.64" x="756.59" y="458" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">0.64</text>
+      <text id="0.64 2" x="812.59" y="447.75" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="11">0.64</text>
+      <text id="Aggregated order volume by account for t…" x="249" y="491" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Aggregated order volume by account for the trailing four quarters, filtered to accounts with more than one</text>
+      <text id="order in the period." x="249" y="510.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">order in the period.</text>
+      <text id="Show full chunk 3" x="300.35" y="537" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500" text-anchor="middle">Show full chunk</text>
+      <rect id="list item 4" x="232" y="569" width="624" height="133" rx="16" fill="#ffffff" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 7" x="249" y="580" width="20" height="20" rx="10" fill="#f3f2ee" />
+      <text id="4 2" x="249" y="590" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="10" font-weight="700">4</text>
+      <text id="supplier.example.com" x="303" y="594" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600">supplier.example.com</text>
+      <text id="· Lead times · fetched today" x="431" y="594" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">· Lead times · fetched today</text>
+      <text id="Weak match" x="688.81" y="592.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11">Weak match</text>
+      <text id="0.41" x="756.59" y="603" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">0.41</text>
+      <text id="0.41 2" x="812.59" y="592.75" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="11">0.41</text>
+      <text id="Standard lead time for the winter blend …" x="249" y="636" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Standard lead time for the winter blend is</text>
+      <text id=". Expedited shipping is available at a" x="627.67" y="636" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">. Expedited shipping is available at a</text>
+      <text id="15% surcharge and reduces this to 9 days…" x="249" y="655.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">15% surcharge and reduces this to 9 days.</text>
+      <rect id="container 8" x="471.67" y="624" width="156" height="16" rx="4" fill="rgba(0, 128, 54, 0.149)" />
+      <text id="21 days from purchase order" x="471.67" y="636" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12">21 days from purchase order</text>
+      <text id="Show full chunk 4" x="300.35" y="682" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500" text-anchor="middle">Show full chunk</text>
+  </g>
+  <text id="Answer Source Citations label" x="64" y="959" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Answer Source Citations</text>
+  <text id="source-citation-list id" x="64" y="973" font-family="ui-monospace, monospace" font-size="12" fill="#737373">source-citation-list</text>
+  <g id="Answer Source Citations" transform="translate(64, 991)">
+    <rect id="container" x="0" y="0" width="1088" height="685.88" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Sources" x="232" y="37" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="700" letter-spacing="0.6">Sources</text>
+      <text id="(4)" x="319.03" y="37" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12" font-weight="700">(4)</text>
+      <rect id="list item" x="232" y="53" width="624" height="131.5" rx="16" fill="#ffffff" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="249" y="70" width="24" height="24" rx="12" fill="#f3f2ee" />
+      <text id="1" x="249" y="81" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="11" font-weight="700">1</text>
+      <text id="Q3 revenue cohorts" x="307" y="84" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Q3 revenue cohorts</text>
+      <text id="warehouse.arr_monthly" x="439.89" y="82.75" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="11">warehouse.arr_monthly</text>
+      <text id="The 6.1% churn figure for accounts under…" x="285" y="108" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12">The 6.1% churn figure for accounts under 20 seats</text>
+      <text id="Supports:" x="285" y="109" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Supports:</text>
+      <text id="2,463 accounts · lost ARR $1.24M · seat_…" x="285" y="135.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">2,463 accounts · lost ARR $1.24M · seat_band &lt; 20</text>
+      <text id="Read" x="285" y="162" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11">Read</text>
+      <text id="2 hours ago" x="312.11" y="162" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11">2 hours ago</text>
+      <rect id="list item 2" x="232" y="192.5" width="624" height="131.5" rx="16" fill="#ffffff" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 3" x="249" y="209.5" width="24" height="24" rx="12" fill="#f3f2ee" />
+      <text id="2" x="249" y="220.5" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="11" font-weight="700">2</text>
+      <text id="Activation funnel, Jul–Sep" x="307" y="223.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Activation funnel, Jul–Sep</text>
+      <text id="warehouse.events" x="478.5" y="222.25" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="11">warehouse.events</text>
+      <text id="The claim that a second integration pred…" x="285" y="247.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12">The claim that a second integration predicts retention</text>
+      <text id="Supports: 2" x="285" y="248.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Supports:</text>
+      <text id="Accounts with ≥2 connected sources churn…" x="285" y="275" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Accounts with ≥2 connected sources churned at 1.6%; with 1 source, 6.4%.</text>
+      <text id="Read 2" x="285" y="301.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11">Read</text>
+      <text id="2 hours ago 2" x="312.11" y="301.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11">2 hours ago</text>
+      <rect id="list item 3" x="232" y="332" width="624" height="188.88" rx="16" fill="#ffffff" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 4" x="249" y="349" width="24" height="24" rx="12" fill="#f3f2ee" />
+      <text id="3" x="249" y="360" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="11" font-weight="700">3</text>
+      <text id="Pricing handbook" x="307" y="363" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Pricing handbook</text>
+      <text id="docs/pricing-handbook.md" x="427.28" y="361.75" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="11">docs/pricing-handbook.md</text>
+      <text id="That the volume break applies per order …" x="285" y="387" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12">That the volume break applies per order rather than per quarter</text>
+      <text id="Supports: 3" x="285" y="388" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Supports:</text>
+      <text id="The break is applied per order, not per …" x="299" y="415.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">The break is applied per order, not per quarter, so a single large order beats two smaller ones of the</text>
+      <text id="same total volume." x="299" y="435" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">same total volume.</text>
+      <text id="Read 3" x="285" y="460.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11">Read</text>
+      <text id="4 months ago" x="312.11" y="460.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11">4 months ago</text>
+      <rect id="paragraph" x="285" y="474" width="554" height="29.88" rx="12" fill="rgba(245, 147, 0, 0.102)" />
+      <text id="This document has changed twice since it…" x="285" y="485" fill="#bb4d00" font-family="ui-sans-serif, system-ui" font-size="11">This document has changed twice since it was indexed.</text>
+      <rect id="list item 4" x="232" y="528.88" width="624" height="104" rx="16" fill="#ffffff" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 5" x="249" y="545.88" width="24" height="24" rx="12" fill="#f3f2ee" />
+      <text id="4" x="249" y="556.88" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="11" font-weight="700">4</text>
+      <text id="Supplier lead times" x="307" y="559.88" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Supplier lead times</text>
+      <text id="supplier.example.com" x="452.73" y="558.63" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="11">supplier.example.com</text>
+      <text id="The 21-day reorder window" x="285" y="583.88" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12">The 21-day reorder window</text>
+      <text id="Supports: 4" x="285" y="584.88" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Supports:</text>
+      <text id="Read 4" x="285" y="610.38" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11">Read</text>
+      <text id="2 hours ago 3" x="312.11" y="610.38" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11">2 hours ago</text>
+      <text id="Every figure above traces to one of thes…" x="232" y="656.88" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Every figure above traces to one of these. Nothing was inferred without a source.</text>
+  </g>
+  <text id="Knowledge Source Picker label" x="64" y="1792.88" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Knowledge Source Picker</text>
+  <text id="knowledge-source-picker id" x="64" y="1806.88" font-family="ui-monospace, monospace" font-size="12" fill="#737373">knowledge-source-picker</text>
+  <g id="Knowledge Source Picker" transform="translate(64, 1824.88)">
+    <rect id="container" x="0" y="0" width="1088" height="701.25" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="280" y="25" width="528" height="651.25" rx="16" fill="#ffffff" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="What can the assistant read?" x="301" y="56" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">What can the assistant read?</text>
+      <text id="Only selected sources are searched. Ever…" x="301" y="78" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Only selected sources are searched. Everything else stays invisible to it.</text>
+      <rect id="container 3" x="301" y="94" width="486" height="38" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Company handbook" x="357" y="175" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Company handbook</text>
+      <rect id="container 4" x="493.73" y="161.5" width="59.72" height="19" rx="9.5" fill="rgba(0, 186, 118, 0.102)" />
+      <text id="Ready" x="493.73" y="171.5" fill="#009966" font-family="ui-sans-serif, system-ui" font-size="10" font-weight="700" letter-spacing="0.25">Ready</text>
+      <text id="Google Drive · 214 documents" x="357" y="195" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Google Drive · 214 documents</text>
+      <text id="Analytics warehouse" x="357" y="238" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Analytics warehouse</text>
+      <rect id="container 5" x="494.42" y="224.5" width="59.72" height="19" rx="9.5" fill="rgba(0, 186, 118, 0.102)" />
+      <text id="Ready 2" x="494.42" y="234.5" fill="#009966" font-family="ui-sans-serif, system-ui" font-size="10" font-weight="700" letter-spacing="0.25">Ready</text>
+      <text id="18 tables · schema only, no row data" x="357" y="258" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">18 tables · schema only, no row data</text>
+      <text id="product/api" x="357" y="301" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">product/api</text>
+      <rect id="container 6" x="440.3" y="287.5" width="76.7" height="19" rx="9.5" fill="rgba(0, 128, 49, 0.102)" />
+      <text id="Indexing" x="440.3" y="297.5" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="10" font-weight="700" letter-spacing="0.25">Indexing</text>
+      <text id="GitHub · main branch, docs/ and README" x="357" y="321" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">GitHub · main branch, docs/ and README</text>
+      <text id="44%" x="357" y="363" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">44%</text>
+      <text id="44% indexed — answers from this source w…" x="357" y="372" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11">44% indexed — answers from this source will be incomplete until it finishes</text>
+      <text id="help.acme.com" x="357" y="416.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">help.acme.com</text>
+      <rect id="container 7" x="460.52" y="403" width="59.72" height="19" rx="9.5" fill="rgba(0, 186, 118, 0.102)" />
+      <text id="Ready 3" x="460.52" y="413" fill="#009966" font-family="ui-sans-serif, system-ui" font-size="10" font-weight="700" letter-spacing="0.25">Ready</text>
+      <text id="Crawled weekly · 480 pages" x="357" y="436.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Crawled weekly · 480 pages</text>
+      <text id="Contracts archive" x="357" y="479.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Contracts archive</text>
+      <rect id="container 8" x="474.48" y="466" width="60.17" height="19" rx="9.5" fill="rgba(255, 29, 88, 0.102)" />
+      <text id="Failed" x="474.48" y="476" fill="#ec003f" font-family="ui-sans-serif, system-ui" font-size="10" font-weight="700" letter-spacing="0.25">Failed</text>
+      <text id="SharePoint · 1,902 files" x="357" y="499.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">SharePoint · 1,902 files</text>
+      <text id="Access denied — the connector account ca…" x="377" y="521.5" fill="#ec003f" font-family="ui-sans-serif, system-ui" font-size="11">Access denied — the connector account cannot read this</text>
+      <text id="folder." x="377" y="539.38" fill="#ec003f" font-family="ui-sans-serif, system-ui" font-size="11">folder.</text>
+      <rect id="button" x="690.3" y="465.5" width="96.7" height="26" rx="12" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Reconnect" x="738.65" y="477.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500" text-anchor="middle">Reconnect</text>
+      <text id="Design wiki" x="357" y="584.25" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Design wiki</text>
+      <rect id="container 9" x="437.89" y="570.75" width="65.45" height="19" rx="9.5" fill="#f3f2ee" />
+      <text id="Paused" x="437.89" y="580.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="10" font-weight="700" letter-spacing="0.25">Paused</text>
+      <text id="Paused by you on 2 August" x="357" y="604.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Paused by you on 2 August</text>
+      <rect id="container 10" x="281" y="620.25" width="526" height="55" fill="rgba(242, 238, 235, 0.302)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Searching" x="301" y="652.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Searching</text>
+      <text id="3 sources" x="356.33" y="652.25" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">3 sources</text>
+      <rect id="button 2" x="647.45" y="633.25" width="139.55" height="30" rx="15" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Connect a source" x="717.23" y="645.25" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500" text-anchor="middle">Connect a source</text>
+  </g>
+  <text id="Nothing Found, Answered Honestly label" x="64" y="2642.13" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Nothing Found, Answered Honestly</text>
+  <text id="retrieval-empty-state id" x="64" y="2656.13" font-family="ui-monospace, monospace" font-size="12" fill="#737373">retrieval-empty-state</text>
+  <g id="Nothing Found, Answered Honestly" transform="translate(64, 2674.13)">
+    <rect id="container" x="0" y="0" width="1088" height="629" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="status" x="256" y="1" width="576" height="627" rx="16" fill="#ffffff" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="520" y="26" width="48" height="48" rx="16" fill="#f3f2ee" />
+      <text id="I could not find this in anything I can …" x="544" y="106" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600" text-anchor="middle">I could not find this in anything I can read.</text>
+      <text id="Rather than guess at a number that has t…" x="543.99" y="137" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" text-anchor="middle">Rather than guess at a number that has to be exact, here is</text>
+      <text id="where I looked and what came closest." x="543.99" y="159.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" text-anchor="middle">where I looked and what came closest.</text>
+      <rect id="paragraph" x="383.19" y="179.5" width="321.61" height="30" rx="15" fill="rgba(242, 242, 237, 0.4)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="what is our EU VAT registration number" x="554.99" y="198.5" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12" text-anchor="middle">what is our EU VAT registration number</text>
+      <text id="Searched" x="281" y="245.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="700" letter-spacing="0.6">Searched</text>
+      <rect id="list item" x="281" y="257.5" width="526" height="34" rx="16" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Company handbook" x="318" y="278.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Company handbook</text>
+      <text id="214 documents" x="642.45" y="278.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">214 documents</text>
+      <text id="· 0 matches" x="734.14" y="278.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">· 0 matches</text>
+      <rect id="list item 2" x="281" y="297.5" width="526" height="34" rx="16" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Analytics warehouse" x="318" y="318.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Analytics warehouse</text>
+      <text id="18 tables" x="676.41" y="318.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">18 tables</text>
+      <text id="· 0 matches 2" x="734.14" y="318.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">· 0 matches</text>
+      <rect id="list item 3" x="281" y="337.5" width="526" height="34" rx="16" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="help.acme.com" x="318" y="358.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">help.acme.com</text>
+      <text id="480 pages" x="669.84" y="358.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">480 pages</text>
+      <text id="· 0 matches 3" x="734.14" y="358.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">· 0 matches</text>
+      <text id="Closest, but below the threshold" x="281" y="403.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="700" letter-spacing="0.6">Closest, but below the threshold</text>
+      <text id="Refund policy for annual plans" x="293" y="435.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12">Refund policy for annual plans</text>
+      <text id="0.31" x="768.59" y="435.17" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="11">0.31</text>
+      <text id="Ticket #3820 — chargeback process" x="293" y="473.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12">Ticket #3820 — chargeback process</text>
+      <text id="0.28" x="768.59" y="473.17" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="11">0.28</text>
+      <rect id="paragraph 2" x="281" y="505.5" width="526" height="39.5" rx="16" fill="rgba(242, 242, 237, 0.4)" />
+      <text id="Tax registrations usually live in the fi…" x="281" y="517.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Tax registrations usually live in the finance drive, which is not connected.</text>
+      <rect id="button" x="281" y="561" width="260" height="42" rx="16" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Search without the cutoff" x="411" y="575" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Search without the cutoff</text>
+      <rect id="button 2" x="549" y="561" width="258" height="42" rx="16" fill="#007f34" />
+      <text id="Connect a source" x="678" y="575" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Connect a source</text>
+  </g>
+  <text id="Context Window Budget label" x="64" y="3419.13" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Context Window Budget</text>
+  <text id="context-window-budget id" x="64" y="3433.13" font-family="ui-monospace, monospace" font-size="12" fill="#737373">context-window-budget</text>
+  <g id="Context Window Budget" transform="translate(64, 3451.13)">
+    <rect id="container" x="0" y="0" width="1088" height="758" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="232" y="65" width="624" height="628" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="Context for this reply" x="253" y="102" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600">Context for this reply</text>
+      <text id="of tokens ·" x="418.41" y="103" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">of tokens ·</text>
+      <text id="27.0k" x="418.41" y="103" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">27.0k</text>
+      <text id="32.0k" x="471.31" y="103" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">32.0k</text>
+      <text id="84%" x="559.59" y="103" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">84%</text>
+      <rect id="img" x="253" y="126" width="582" height="12" rx="6" fill="#f3f2ee" />
+      <rect id="container 3" x="253" y="126" width="25.45" height="12" rx="6" fill="#007f34" />
+      <rect id="container 4" x="280.45" y="126" width="56.38" height="12" fill="#009353" />
+      <rect id="container 5" x="338.83" y="126" width="149.13" height="12" fill="#22a871" />
+      <rect id="container 6" x="489.95" y="126" width="87.3" height="12" fill="#66bc90" />
+      <rect id="container 7" x="579.25" y="126" width="80.02" height="12" fill="#96d0b0" />
+      <rect id="container 8" x="661.27" y="126" width="52.73" height="12" fill="#c2e4d0" />
+      <rect id="container 9" x="716" y="126" width="40" height="12" fill="#afb2b4" />
+      <rect id="container 10" x="253" y="167" width="10" height="10" rx="5" fill="#007f34" />
+      <text id="System prompt" x="301" y="168" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">System prompt</text>
+      <text id="Agent role and house rules" x="301" y="186" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Agent role and house rules</text>
+      <text id="1.4k" x="751.19" y="176" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">1.4k</text>
+      <text id="4%" x="778.7" y="176" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12">4%</text>
+      <rect id="container 11" x="253" y="211" width="10" height="10" rx="5" fill="#009353" />
+      <text id="Tool definitions" x="301" y="212" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">Tool definitions</text>
+      <text id="9 tools, JSON schema" x="301" y="230" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">9 tools, JSON schema</text>
+      <text id="3.1k" x="744.72" y="220" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">3.1k</text>
+      <text id="10%" x="772.23" y="220" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12">10%</text>
+      <rect id="container 12" x="253" y="255" width="10" height="10" rx="5" fill="#22a871" />
+      <text id="Conversation" x="301" y="256" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">Conversation</text>
+      <text id="Last 14 turns" x="301" y="274" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Last 14 turns</text>
+      <text id="8.2k" x="744.72" y="264" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">8.2k</text>
+      <text id="26%" x="772.23" y="264" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12">26%</text>
+      <rect id="container 13" x="253" y="299" width="10" height="10" rx="5" fill="#66bc90" />
+      <text id="refunds-policy.md" x="301" y="300" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">refunds-policy.md</text>
+      <text id="Whole file · pinned by you" x="301" y="318" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Whole file · pinned by you</text>
+      <text id="4.8k" x="744.72" y="308" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">4.8k</text>
+      <text id="15%" x="772.23" y="308" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12">15%</text>
+      <rect id="container 14" x="253" y="343" width="10" height="10" rx="5" fill="#96d0b0" />
+      <text id="Q3-support-metrics.csv" x="301" y="344" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">Q3-support-metrics.csv</text>
+      <text id="Rows 1–200 of 4,812" x="301" y="362" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Rows 1–200 of 4,812</text>
+      <text id="4.4k" x="744.72" y="352" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">4.4k</text>
+      <text id="14%" x="772.23" y="352" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12">14%</text>
+      <rect id="container 15" x="253" y="387" width="10" height="10" rx="5" fill="#c2e4d0" />
+      <text id="escalation-runbook.md" x="301" y="388" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">escalation-runbook.md</text>
+      <text id="3 of 9 sections, ranked by the query" x="301" y="406" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">3 of 9 sections, ranked by the query</text>
+      <text id="2.9k" x="751.19" y="396" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">2.9k</text>
+      <text id="9%" x="778.7" y="396" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12">9%</text>
+      <rect id="container 16" x="253" y="431" width="10" height="10" rx="5" fill="#afb2b4" />
+      <text id="Held for the reply" x="301" y="432" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">Held for the reply</text>
+      <text id="Room the answer needs" x="301" y="450" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Room the answer needs</text>
+      <text id="2.2k" x="751.19" y="440" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">2.2k</text>
+      <text id="7%" x="778.7" y="440" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12">7%</text>
+      <rect id="container 17" x="253" y="474" width="582" height="198" rx="16" fill="rgba(242, 242, 237, 0.4)" stroke="#dbdee1" stroke-width="1" />
+      <text id="Left out to make it fit" x="270" y="505" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Left out to make it fit</text>
+      <text id="The model did not see any of this. If an…" x="270" y="527" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">The model did not see any of this. If an answer looks like it ignored a document, start here.</text>
+      <text id="Q3-support-metrics.csv — rows 201–4,812" x="270" y="555" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Q3-support-metrics.csv — rows 201–4,812</text>
+      <text id="Too large for the window. Only the first…" x="270" y="571" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Too large for the window. Only the first 200 rows were sent.</text>
+      <text id="96.0k" x="790.02" y="555" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">96.0k</text>
+      <text id="contract-meridian-2024.pdf" x="270" y="595" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">contract-meridian-2024.pdf</text>
+      <text id="Ranked 8th; seven chunks fitted. Pin it …" x="270" y="611" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Ranked 8th; seven chunks fitted. Pin it to force it in.</text>
+      <text id="18.3k" x="790.02" y="595" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">18.3k</text>
+      <text id="Conversation turns 1–6" x="270" y="635" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Conversation turns 1–6</text>
+      <text id="Aged out of the rolling history window." x="270" y="651" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Aged out of the rolling history window.</text>
+      <text id="7.1k" x="796.48" y="635" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">7.1k</text>
+  </g>
+  <text id="Index Freshness Panel label" x="64" y="4325.13" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Index Freshness Panel</text>
+  <text id="retrieval-index-status id" x="64" y="4339.13" font-family="ui-monospace, monospace" font-size="12" fill="#737373">retrieval-index-status</text>
+  <g id="Index Freshness Panel" transform="translate(64, 4357.13)">
+    <rect id="container" x="0" y="0" width="1088" height="706" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="184" y="65" width="720" height="576" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="Knowledge freshness" x="205" y="98" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600">Knowledge freshness</text>
+      <text id="Answers can only be as current as the so…" x="205" y="123" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Answers can only be as current as the source they come from. The oldest connected source was last read</text>
+      <text id=", so anything changed since then may not…" x="272.2" y="142.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">, so anything changed since then may not be reflected yet.</text>
+      <text id="6 weeks ago" x="205" y="142.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600">6 weeks ago</text>
+      <rect id="button" x="774.25" y="82" width="108.75" height="32" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Re-crawl all" x="828.63" y="94" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500" text-anchor="middle">Re-crawl all</text>
+      <text id="Help centre" x="235" y="196" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Help centre</text>
+      <text id="Website · 4 domains" x="235" y="216" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Website · 4 domains</text>
+      <text id="Up to date" x="235" y="238" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Up to date</text>
+      <text id="· last read 11 minutes ago" x="292.84" y="238" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">· last read 11 minutes ago</text>
+      <text id="486 docs" x="835.56" y="194" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">486 docs</text>
+      <text id="Internal handbook" x="235" y="289" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Internal handbook</text>
+      <text id="Notion workspace" x="235" y="309" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Notion workspace</text>
+      <text id="Partly indexed" x="235" y="331" fill="#bb4d00" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Partly indexed</text>
+      <text id="· last read 2 hours ago" x="312.81" y="331" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">· last read 2 hours ago</text>
+      <rect id="container 3" x="235" y="341" width="320" height="6" rx="3" fill="#f3f2ee" />
+      <rect id="container 4" x="235" y="341" width="195.19" height="6" rx="3" fill="#007f34" />
+      <text id="812 of 1,340 documents searchable — the …" x="235" y="363" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">812 of 1,340 documents searchable — the remaining 528 cannot be cited yet.</text>
+      <text id="1,340 docs" x="826.48" y="287" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">1,340 docs</text>
+      <text id="Past tickets" x="235" y="414" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Past tickets</text>
+      <text id="Zendesk · resolved only" x="235" y="434" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Zendesk · resolved only</text>
+      <text id="Behind" x="235" y="456" fill="#bb4d00" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Behind</text>
+      <text id="· last read 9 days ago" x="272.98" y="456" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">· last read 9 days ago</text>
+      <text id="22,190 docs" x="820.02" y="412" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">22,190 docs</text>
+      <text id="Policy documents" x="235" y="507" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Policy documents</text>
+      <text id="Google Drive folder" x="235" y="527" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Google Drive folder</text>
+      <text id="Not syncing" x="235" y="549" fill="#e7000b" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Not syncing</text>
+      <text id="· last read 6 weeks ago" x="300.3" y="549" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">· last read 6 weeks ago</text>
+      <rect id="paragraph" x="235" y="559" width="595.03" height="40" rx="10" fill="rgba(226, 0, 10, 0.102)" />
+      <text id="The connected account lost access to the…" x="243" y="575" fill="#e7000b" font-family="ui-sans-serif, system-ui" font-size="12">The connected account lost access to the folder on 3 August.</text>
+      <text id="The" x="565.11" y="575" fill="#e7000b" font-family="ui-sans-serif, system-ui" font-size="12">The</text>
+      <text id="74" x="591.05" y="575" fill="#e7000b" font-family="ui-sans-serif, system-ui" font-size="12">74</text>
+      <text id="documents already indexed are still" x="603.98" y="575" fill="#e7000b" font-family="ui-sans-serif, system-ui" font-size="12">documents already indexed are still</text>
+      <text id="being answered from, at the age above." x="243" y="591" fill="#e7000b" font-family="ui-sans-serif, system-ui" font-size="12">being answered from, at the age above.</text>
+      <text id="74 docs" x="842.03" y="505" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">74 docs</text>
+      <rect id="paragraph 2" x="185" y="615" width="718" height="25" fill="none" stroke="#dbdee1" stroke-width="1" />
+  </g>
+  <text id="Retrieval Freshness List label" x="64" y="5179.13" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Retrieval Freshness List</text>
+  <text id="retrieval-freshness-list id" x="64" y="5193.13" font-family="ui-monospace, monospace" font-size="12" fill="#737373">retrieval-freshness-list</text>
+  <g id="Retrieval Freshness List" transform="translate(64, 5211.13)">
+    <rect id="container" x="0" y="0" width="1088" height="543" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="section" x="1" y="1" width="1086" height="541" fill="#fdfcf8" />
+      <text id="How old the sources are" x="160" y="89" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="24" font-weight="600" letter-spacing="-0.6">How old the sources are</text>
+      <text id="Relevance ranking says which document ma…" x="160" y="119" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Relevance ranking says which document matched. It says nothing about whether the document is still true, and that is the</text>
+      <text id="question a reader has once the answer su…" x="160" y="139" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">question a reader has once the answer surprises them.</text>
+      <rect id="container 2" x="160" y="177" width="768" height="301" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <rect id="button" x="161" y="178" width="766" height="74" fill="rgba(242, 242, 237, 0.4)" />
+      <text id="Pricing page — 2 days old" x="181" y="208" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Pricing page — 2 days old</text>
+      <text id="Re-indexed after the last deploy. Matche…" x="181" y="230" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Re-indexed after the last deploy. Matches what is live.</text>
+      <rect id="container 3" x="852.27" y="203" width="54.73" height="24" rx="12" fill="rgba(0, 128, 49, 0.102)" />
+      <text id="2 days" x="852.27" y="215" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">2 days</text>
+      <text id="API reference — 3 weeks old" x="181" y="283" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">API reference — 3 weeks old</text>
+      <text id="Two endpoints have shipped since. Neithe…" x="181" y="305" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Two endpoints have shipped since. Neither is quoted in this answer.</text>
+      <rect id="container 4" x="843.8" y="278" width="63.2" height="24" rx="12" fill="#f3f2ee" />
+      <text id="3 weeks" x="843.8" y="290" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">3 weeks</text>
+      <text id="Onboarding guide — 8 months old" x="181" y="358" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Onboarding guide — 8 months old</text>
+      <text id="Predates the current signup flow. Cited …" x="181" y="380" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Predates the current signup flow. Cited here for the account model only.</text>
+      <rect id="container 5" x="835.73" y="353" width="71.27" height="24" rx="12" fill="#e0f0e7" />
+      <text id="8 months" x="835.73" y="365" fill="#13161a" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">8 months</text>
+      <text id="Migration notes — 2 years old" x="181" y="433" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Migration notes — 2 years old</text>
+      <text id="Superseded twice. Excluded from this ans…" x="181" y="455" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Superseded twice. Excluded from this answer and kept for the audit trail.</text>
+      <rect id="container 6" x="848.69" y="428" width="58.31" height="24" rx="12" fill="rgba(226, 0, 10, 0.102)" />
+      <text id="2 years" x="848.69" y="440" fill="#e7000b" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">2 years</text>
+  </g>
+  <text id="Context Scope List label" x="64" y="5870.13" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Context Scope List</text>
+  <text id="context-scope-list id" x="64" y="5884.13" font-family="ui-monospace, monospace" font-size="12" fill="#737373">context-scope-list</text>
+  <g id="Context Scope List" transform="translate(64, 5902.13)">
+    <rect id="container" x="0" y="0" width="1088" height="543" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="section" x="1" y="1" width="1086" height="541" fill="#fdfcf8" />
+      <text id="What it can see" x="160" y="89" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="24" font-weight="600" letter-spacing="-0.6">What it can see</text>
+      <text id="Citations tell you what an answer used. …" x="160" y="119" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Citations tell you what an answer used. Scope tells you what it could have used, which is the question behind &quot;why did it not</text>
+      <text id="know that&quot;." x="160" y="139" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">know that&quot;.</text>
+      <rect id="container 2" x="160" y="177" width="768" height="301" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <rect id="button" x="161" y="178" width="766" height="74" fill="rgba(242, 242, 237, 0.4)" />
+      <text id="Public documentation" x="181" y="208" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Public documentation</text>
+      <text id="Always in scope. Re-indexed on every dep…" x="181" y="230" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Always in scope. Re-indexed on every deploy.</text>
+      <rect id="container 3" x="850.98" y="203" width="56.02" height="24" rx="12" fill="rgba(0, 128, 49, 0.102)" />
+      <text id="always" x="850.98" y="215" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">always</text>
+      <text id="Your workspace files" x="181" y="283" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Your workspace files</text>
+      <text id="In scope. Only files your own account ca…" x="181" y="305" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">In scope. Only files your own account can already open.</text>
+      <rect id="container 4" x="872.83" y="278" width="34.17" height="24" rx="12" fill="rgba(0, 128, 49, 0.102)" />
+      <text id="on" x="872.83" y="290" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">on</text>
+      <text id="Support ticket history" x="181" y="358" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Support ticket history</text>
+      <text id="In scope for your organisation's tickets…" x="181" y="380" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">In scope for your organisation's tickets, never another customer's.</text>
+      <rect id="container 5" x="841.56" y="353" width="65.44" height="24" rx="12" fill="#f3f2ee" />
+      <text id="org only" x="841.56" y="365" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">org only</text>
+      <text id="Billing and payment records" x="181" y="433" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Billing and payment records</text>
+      <text id="Out of scope. No retrieval path reaches …" x="181" y="455" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Out of scope. No retrieval path reaches them, and turning it on is not an option here.</text>
+      <rect id="container 6" x="856.81" y="428" width="50.19" height="24" rx="12" fill="rgba(226, 0, 10, 0.102)" />
+      <text id="never" x="856.81" y="440" fill="#e7000b" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">never</text>
+  </g>
+  <text id="Grounding Split label" x="64" y="6561.13" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Grounding Split</text>
+  <text id="grounding-split id" x="64" y="6575.13" font-family="ui-monospace, monospace" font-size="12" fill="#737373">grounding-split</text>
+  <g id="Grounding Split" transform="translate(64, 6593.13)">
+    <rect id="container" x="0" y="0" width="1088" height="654" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="section" x="1" y="1" width="1086" height="652" fill="#fdfcf8" />
+      <text id="Grounding" x="25" y="111" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Grounding</text>
+      <text id="Every claim points at something" x="25" y="161" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="600" letter-spacing="-0.9">Every claim points at something</text>
+      <text id="The interesting half of a retrieval syst…" x="25" y="198" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">The interesting half of a retrieval system is not what it does when it</text>
+      <text id="finds the answer. It is what it does whe…" x="25" y="222" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">finds the answer. It is what it does when it does not.</text>
+      <text id="Citations on the sentence" x="57" y="275" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Citations on the sentence</text>
+      <text id="Not a source list at the bottom. The cla…" x="57" y="297" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Not a source list at the bottom. The claim and its evidence are next to each</text>
+      <text id="other or the citation is decoration." x="57" y="317" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">other or the citation is decoration.</text>
+      <text id="Quoted, not paraphrased" x="57" y="353" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Quoted, not paraphrased</text>
+      <text id="The retrieved passage is shown as writte…" x="57" y="375" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">The retrieved passage is shown as written, so you can see whether it says</text>
+      <text id="what the answer claims." x="57" y="395" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">what the answer claims.</text>
+      <text id="It says when it does not know" x="57" y="431" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">It says when it does not know</text>
+      <text id="No passage above the relevance floor pro…" x="57" y="453" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">No passage above the relevance floor produces &quot;I could not find this&quot;, not</text>
+      <text id="a fluent guess." x="57" y="473" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">a fluent guess.</text>
+      <text id="Stale sources are flagged" x="57" y="509" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Stale sources are flagged</text>
+      <text id="Age travels with the passage. A confiden…" x="57" y="531" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Age travels with the passage. A confident answer from a two-year-old</text>
+      <text id="document is the failure nobody catches." x="57" y="551" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">document is the failure nobody catches.</text>
+      <rect id="container 2" x="568" y="184" width="495" height="286" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <rect id="container 3" x="593" y="209" width="148.33" height="12" rx="4" fill="rgba(0, 126, 53, 0.302)" />
+      <rect id="container 4" x="593" y="233" width="445" height="96" rx="12" fill="#f3f2ee" />
+      <rect id="container 5" x="593" y="341" width="140.33" height="56" rx="12" fill="#f3f2ee" />
+      <rect id="container 6" x="745.33" y="341" width="140.33" height="56" rx="12" fill="#f3f2ee" />
+      <rect id="container 7" x="897.66" y="341" width="140.33" height="56" rx="12" fill="#f3f2ee" />
+      <rect id="container 8" x="593" y="409" width="296.66" height="12" rx="4" fill="#f3f2ee" />
+      <rect id="container 9" x="593" y="433" width="222.5" height="12" rx="4" fill="#f3f2ee" />
+  </g>
+</svg>

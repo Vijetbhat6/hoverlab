@@ -1,0 +1,211 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1216" height="5205" viewBox="0 0 1216 5205" id="Hoverlab — Empty &amp; Error States">
+  <!--
+    Hoverlab — Empty & Error States. 8 sections, traced from the
+    rendered catalog. Drag this file onto a Figma canvas.
+
+    These are frames, not components: named, editable layers with real
+    geometry, colour and type. There are no variants, no auto-layout,
+    and no hover or motion — none of those exist in a static frame.
+
+    Every section here is free to copy as code at https://hoverlab.dev/blocks
+  -->
+  <rect id="Background" x="0" y="0" width="1216" height="5205" fill="#ffffff" />
+  <text id="Empty State With Illustration label" x="64" y="84" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Empty State With Illustration</text>
+  <text id="empty-state-cta id" x="64" y="98" font-family="ui-monospace, monospace" font-size="12" fill="#737373">empty-state-cta</text>
+  <g id="Empty State With Illustration" transform="translate(64, 116)">
+    <rect id="container" x="0" y="0" width="1088" height="378" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="1" y="1" width="1086" height="376" rx="16" fill="rgba(255, 255, 255, 0.4)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="No projects yet" x="544" y="196" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700" letter-spacing="-0.45" text-anchor="middle">No projects yet</text>
+      <text id="Projects hold your work and your team’s.…" x="543.99" y="228" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" text-anchor="middle">Projects hold your work and your team’s. Create one to get</text>
+      <text id="started — it takes about ten seconds." x="543.99" y="248" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" text-anchor="middle">started — it takes about ten seconds.</text>
+      <rect id="button" x="394.38" y="279" width="133.22" height="40" rx="16" fill="#007f34" />
+      <text id="New project" x="460.98" y="293" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">New project</text>
+      <rect id="button 2" x="539.59" y="278" width="154.02" height="42" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Read the guide" x="616.6" y="292" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Read the guide</text>
+  </g>
+  <text id="Error State With Retry label" x="64" y="610" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Error State With Retry</text>
+  <text id="error-state-retry id" x="64" y="624" font-family="ui-monospace, monospace" font-size="12" fill="#737373">error-state-retry</text>
+  <g id="Error State With Retry" transform="translate(64, 642)">
+    <rect id="container" x="0" y="0" width="1088" height="390" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="alert" x="1" y="1" width="1086" height="388" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="520" y="50" width="48" height="48" rx="16" fill="rgba(226, 0, 10, 0.102)" />
+      <text id="We could not load this" x="544" y="136" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700" letter-spacing="-0.45" text-anchor="middle">We could not load this</text>
+      <text id="The request failed before it finished. Y…" x="544" y="168" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" text-anchor="middle">The request failed before it finished. Your data is safe — nothing was</text>
+      <text id="changed." x="544" y="188" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" text-anchor="middle">changed.</text>
+      <rect id="button" x="486.91" y="218" width="114.17" height="40" rx="16" fill="#007f34" />
+      <text id="Try again" x="543.99" y="232" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Try again</text>
+      <text id="Reference" x="461.4" y="293" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" text-anchor="middle">Reference</text>
+      <rect id="container 3" x="495.5" y="279" width="127.2" height="20" rx="4" fill="#f3f2ee" />
+      <text id="err_7f3a92c4b81e" x="559.1" y="291" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12" text-anchor="middle">err_7f3a92c4b81e</text>
+      <text id="Technical details" x="544" y="336" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500" text-anchor="middle">Technical details</text>
+      <rect id="container 4" x="288" y="352" width="512" height="72" rx="16" fill="rgba(243, 242, 238, 0.6)" />
+      <text id="GET /api/v1/projects → 503 Service Unava…" x="300" y="376" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">GET /api/v1/projects → 503 Service Unavailable</text>
+      <text id="upstream: projects-api" x="300" y="392" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">upstream: projects-api</text>
+      <text id="duration: 30012ms (timeout)" x="300" y="408" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">duration: 30012ms (timeout)</text>
+  </g>
+  <text id="404 With Search &amp; Suggestions label" x="64" y="1148" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">404 With Search &amp; Suggestions</text>
+  <text id="not-found-404 id" x="64" y="1162" font-family="ui-monospace, monospace" font-size="12" fill="#737373">not-found-404</text>
+  <g id="404 With Search &amp; Suggestions" transform="translate(64, 1180)">
+    <rect id="container" x="0" y="0" width="1088" height="680" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="We could not find that page" x="543.99" y="207" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="30" font-weight="700" letter-spacing="-0.75" text-anchor="middle">We could not find that page</text>
+      <text id="The link may be out of date, or the page…" x="543.99" y="242" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16" text-anchor="middle">The link may be out of date, or the page may have moved.</text>
+      <text id="Here are a few ways forward." x="544" y="266" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16" text-anchor="middle">Here are a few ways forward.</text>
+      <rect id="field" x="320" y="305" width="365.83" height="42" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="button" x="693.83" y="305" width="74.17" height="42" rx="16" fill="#007f34" />
+      <text id="Search" x="730.91" y="319" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Search</text>
+      <rect id="container 2" x="320" y="379" width="448" height="184" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Documentation" x="337" y="406" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Documentation</text>
+      <text id="Guides and API reference" x="337" y="424" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Guides and API reference</text>
+      <text id="Dashboard" x="337" y="467" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Dashboard</text>
+      <text id="Your projects and settings" x="337" y="485" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Your projects and settings</text>
+      <text id="Status" x="337" y="528" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Status</text>
+      <text id="Current uptime and incidents" x="337" y="546" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Current uptime and incidents</text>
+      <text id="Back to home" x="471.84" y="609" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" text-anchor="middle">Back to home</text>
+      <text id="|" x="542.87" y="609" fill="#dbdee1" font-family="ui-sans-serif, system-ui" font-size="14" text-anchor="middle">|</text>
+      <text id="Previous page" x="615.02" y="609" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" text-anchor="middle">Previous page</text>
+  </g>
+  <text id="Shimmer Skeleton List label" x="64" y="1976" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Shimmer Skeleton List</text>
+  <text id="skeleton-list id" x="64" y="1990" font-family="ui-monospace, monospace" font-size="12" fill="#737373">skeleton-list</text>
+  <g id="Shimmer Skeleton List" transform="translate(64, 2008)">
+    <rect id="container" x="0" y="0" width="1088" height="348" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="1" y="1" width="1086" height="346" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 3" x="22" y="18" width="36" height="36" rx="18" fill="#f3f2ee" />
+      <rect id="container 4" x="74" y="21" width="547.19" height="12" rx="4" fill="#f3f2ee" />
+      <rect id="container 5" x="74" y="41" width="364.8" height="10" rx="4" fill="#f3f2ee" opacity="0.7" />
+      <rect id="container 6" x="1002" y="24" width="64" height="24" rx="12" fill="#f3f2ee" />
+      <rect id="container 7" x="22" y="87" width="36" height="36" rx="18" fill="#f3f2ee" />
+      <rect id="container 8" x="74" y="90" width="729.59" height="12" rx="4" fill="#f3f2ee" />
+      <rect id="container 9" x="74" y="110" width="684" height="10" rx="4" fill="#f3f2ee" opacity="0.7" />
+      <rect id="container 10" x="1002" y="93" width="64" height="24" rx="12" fill="#f3f2ee" />
+      <rect id="container 11" x="22" y="156" width="36" height="36" rx="18" fill="#f3f2ee" />
+      <rect id="container 12" x="74" y="159" width="364.8" height="12" rx="4" fill="#f3f2ee" />
+      <rect id="container 13" x="74" y="179" width="456" height="10" rx="4" fill="#f3f2ee" opacity="0.7" />
+      <rect id="container 14" x="1002" y="162" width="64" height="24" rx="12" fill="#f3f2ee" />
+      <rect id="container 15" x="22" y="225" width="36" height="36" rx="18" fill="#f3f2ee" />
+      <rect id="container 16" x="74" y="228" width="684" height="12" rx="4" fill="#f3f2ee" />
+      <rect id="container 17" x="74" y="248" width="547.19" height="10" rx="4" fill="#f3f2ee" opacity="0.7" />
+      <rect id="container 18" x="1002" y="231" width="64" height="24" rx="12" fill="#f3f2ee" />
+      <rect id="container 19" x="22" y="294" width="36" height="36" rx="18" fill="#f3f2ee" />
+      <rect id="container 20" x="74" y="297" width="456" height="12" rx="4" fill="#f3f2ee" />
+      <rect id="container 21" x="74" y="317" width="729.59" height="10" rx="4" fill="#f3f2ee" opacity="0.7" />
+      <rect id="container 22" x="1002" y="300" width="64" height="24" rx="12" fill="#f3f2ee" />
+  </g>
+  <text id="Permission Denied (403) label" x="64" y="2472" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Permission Denied (403)</text>
+  <text id="permission-denied-state id" x="64" y="2486" font-family="ui-monospace, monospace" font-size="12" fill="#737373">permission-denied-state</text>
+  <g id="Permission Denied (403)" transform="translate(64, 2504)">
+    <rect id="container" x="0" y="0" width="1088" height="746" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="520" y="81" width="48" height="48" rx="24" fill="#f3f2ee" />
+      <text id="You do not have access to this" x="544" y="173" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="24" font-weight="700" letter-spacing="-0.6" text-anchor="middle">You do not have access to this</text>
+      <text id="The page exists and you are signed in — …" x="543.99" y="207" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" text-anchor="middle">The page exists and you are signed in — your account</text>
+      <text id="just is not on the list for it. Nothing …" x="544" y="227" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" text-anchor="middle">just is not on the list for it. Nothing has gone wrong,</text>
+      <text id="and nothing you do here will change that…" x="543.99" y="247" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" text-anchor="middle">and nothing you do here will change that except asking.</text>
+      <rect id="container 3" x="312" y="277" width="464" height="82" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="Resource" x="329" y="308" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Resource</text>
+      <text id="northwind / billing-service" x="564.59" y="309" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">northwind / billing-service</text>
+      <text id="Signed in as" x="329" y="336" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Signed in as</text>
+      <text id="you@company.com" x="636.17" y="336" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">you@company.com</text>
+      <rect id="container 4" x="312" y="383" width="464" height="202" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="Who can let you in" x="329" y="414" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Who can let you in</text>
+      <rect id="container 5" x="329" y="434" width="32" height="32" rx="16" fill="#f3f2ee" />
+      <text id="PR" x="329" y="446" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600">PR</text>
+      <text id="Priya Raman" x="373" y="446" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">Priya Raman</text>
+      <text id="Workspace admin" x="373" y="464" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Workspace admin</text>
+      <rect id="container 6" x="329" y="482" width="32" height="32" rx="16" fill="#f3f2ee" />
+      <text id="TO" x="329" y="494" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600">TO</text>
+      <text id="Tom Okafor" x="373" y="494" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">Tom Okafor</text>
+      <text id="Project owner" x="373" y="512" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Project owner</text>
+      <rect id="link" x="329" y="532" width="430" height="36" rx="12" fill="#007f34" />
+      <text id="Request access" x="329" y="546" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Request access</text>
+      <text id="Back to where you were" x="543.99" y="619" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Back to where you were</text>
+      <text id="If access was granted while this page wa…" x="543.99" y="661" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" text-anchor="middle">If access was granted while this page was open, reload to pick it up.</text>
+  </g>
+  <text id="Offline With Queued Changes label" x="64" y="3366" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Offline With Queued Changes</text>
+  <text id="offline-state-banner id" x="64" y="3380" font-family="ui-monospace, monospace" font-size="12" fill="#737373">offline-state-banner</text>
+  <g id="Offline With Queued Changes" transform="translate(64, 3398)">
+    <rect id="container" x="0" y="0" width="1088" height="415.25" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="status" x="232" y="65" width="624" height="285.25" rx="16" fill="rgba(255, 157, 0, 0.051)" stroke="rgba(252, 152, 0, 0.4)" stroke-width="1" />
+      <rect id="container 2" x="253" y="88" width="36" height="36" rx="12" fill="rgba(255, 154, 0, 0.149)" />
+      <text id="3 changes are saved on this device" x="301" y="102" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600">3 changes are saved on this device</text>
+      <text id="You are offline. Keep working — edits ar…" x="301" y="129" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">You are offline. Keep working — edits are written locally and sent automatically the</text>
+      <text id="moment the connection is back. Nothing i…" x="301" y="151.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">moment the connection is back. Nothing is lost by closing this tab, though it will not</text>
+      <text id="send until you open it again." x="301" y="174.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">send until you open it again.</text>
+      <rect id="button" x="301" y="194.25" width="101.44" height="32" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Retry now" x="351.72" y="206.25" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500" text-anchor="middle">Retry now</text>
+      <text id="Trying again in 8s · attempt 2" x="410.44" y="214.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Trying again in 8s · attempt 2</text>
+      <rect id="container 3" x="233" y="246.25" width="622" height="103" fill="rgba(252, 252, 248, 0.4)" stroke="rgba(252, 152, 0, 0.302)" stroke-width="1" />
+      <text id="Not available until you reconnect" x="253" y="271.25" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Not available until you reconnect</text>
+      <text id="Searching across the workspace" x="253" y="293.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Searching across the workspace</text>
+      <rect id="container 4" x="253" y="287.25" width="4" height="4" rx="2" fill="#575b60" />
+      <text id="Inviting people" x="253" y="313.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Inviting people</text>
+      <rect id="container 5" x="253" y="307.25" width="4" height="4" rx="2" fill="#575b60" />
+      <text id="Publishing or sharing a link" x="253" y="333.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Publishing or sharing a link</text>
+      <rect id="container 6" x="253" y="327.25" width="4" height="4" rx="2" fill="#575b60" />
+  </g>
+  <text id="Empty Because of Filters label" x="64" y="3929.25" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Empty Because of Filters</text>
+  <text id="empty-filtered-results id" x="64" y="3943.25" font-family="ui-monospace, monospace" font-size="12" fill="#737373">empty-filtered-results</text>
+  <g id="Empty Because of Filters" transform="translate(64, 3961.25)">
+    <rect id="container" x="0" y="0" width="1088" height="402" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="status" x="1" y="1" width="1086" height="400" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <rect id="container 2" x="520" y="50" width="48" height="48" rx="24" fill="#f3f2ee" />
+      <text id="No results match these filters" x="544" y="136" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="600" text-anchor="middle">No results match these filters</text>
+      <text id="Nothing matched" x="387.85" y="168" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" text-anchor="middle">Nothing matched</text>
+      <text id="with" x="520.77" y="168" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" text-anchor="middle">with</text>
+      <text id="4" x="543.4" y="168" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" text-anchor="middle">4</text>
+      <text id="filters" x="568.04" y="168" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" text-anchor="middle">filters</text>
+      <text id="applied." x="611.47" y="168" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" text-anchor="middle">applied.</text>
+      <text id="1,284" x="658.34" y="168" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" text-anchor="middle">1,284</text>
+      <text id="records exist" x="715.66" y="168" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" text-anchor="middle">records exist</text>
+      <text id="in total." x="543.99" y="188" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" text-anchor="middle">in total.</text>
+      <text id="“renewal”" x="474.92" y="168" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">“renewal”</text>
+      <rect id="button" x="347.14" y="218" width="183.86" height="30" rx="15" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Status:" x="380.4" y="237" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" text-anchor="middle">Status:</text>
+      <text id="Archived" x="434.52" y="237" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Archived</text>
+      <text id="+148" x="482.19" y="237" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" text-anchor="middle">+148</text>
+      <rect id="button 2" x="539" y="218" width="201.84" height="30" rx="15" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Created:" x="577.67" y="237" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" text-anchor="middle">Created:</text>
+      <text id="Last 7 days" x="644.02" y="237" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Last 7 days</text>
+      <text id="+96" x="695.27" y="237" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" text-anchor="middle">+96</text>
+      <rect id="button 3" x="356.14" y="256" width="174.25" height="30" rx="15" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Plan:" x="383.8" y="275" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" text-anchor="middle">Plan:</text>
+      <text id="Enterprise" x="436.35" y="275" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Enterprise</text>
+      <text id="+31" x="484.81" y="275" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" text-anchor="middle">+31</text>
+      <rect id="button 4" x="538.39" y="256" width="193.45" height="30" rx="15" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Owner:" x="573.31" y="275" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" text-anchor="middle">Owner:</text>
+      <text id="Jordan Lee" x="635.46" y="275" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Jordan Lee</text>
+      <text id="+12" x="686.27" y="275" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" text-anchor="middle">+12</text>
+      <rect id="button 5" x="308.2" y="315" width="313.13" height="36" rx="12" fill="#007f34" />
+      <text id="Remove “" x="376.63" y="337" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Remove “</text>
+      <text id="Status" x="426.48" y="337" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Status</text>
+      <text id=":" x="449.52" y="337" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">:</text>
+      <text id="Archived 2" x="481" y="337" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Archived</text>
+      <text id="”" x="511.87" y="337" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">”</text>
+      <text id="— 148 results" x="563.1" y="337" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" text-anchor="middle">— 148 results</text>
+      <rect id="button 6" x="633.33" y="314" width="146.47" height="38" rx="12" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="Clear all filters" x="706.56" y="328" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Clear all filters</text>
+  </g>
+  <text id="Scheduled Maintenance Window label" x="64" y="4479.25" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Scheduled Maintenance Window</text>
+  <text id="maintenance-window-state id" x="64" y="4493.25" font-family="ui-monospace, monospace" font-size="12" fill="#737373">maintenance-window-state</text>
+  <g id="Scheduled Maintenance Window" transform="translate(64, 4511.25)">
+    <rect id="container" x="0" y="0" width="1088" height="630" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="section" x="256" y="1" width="576" height="628" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <rect id="container 2" x="520" y="50" width="48" height="48" rx="24" fill="rgba(245, 147, 0, 0.102)" />
+      <text id="Scheduled maintenance in progress" x="544" y="142" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="24" font-weight="600" text-anchor="middle">Scheduled maintenance in progress</text>
+      <text id="We are migrating the primary database. D…" x="544" y="176" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" text-anchor="middle">We are migrating the primary database. Dashboards, the CLI and sign-in</text>
+      <text id="are unavailable until this finishes." x="543.99" y="196" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" text-anchor="middle">are unavailable until this finishes.</text>
+      <rect id="container 3" x="305" y="230" width="478" height="132" rx="16" fill="rgba(242, 242, 237, 0.4)" stroke="#dbdee1" stroke-width="1" />
+      <text id="Expected back in" x="544" y="263" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500" letter-spacing="0.6" text-anchor="middle">Expected back in</text>
+      <text id="02:14:09" x="544" y="309" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="36" font-weight="700" text-anchor="middle">02:14:09</text>
+      <text id="Estimated finish at" x="544" y="335" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" text-anchor="middle">Estimated finish at</text>
+      <text id="10:00 GMT+5:30" x="602.48" y="335" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">10:00 GMT+5:30</text>
+      <text id="Still working" x="305" y="402" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600" letter-spacing="0.6">Still working</text>
+      <text id="Published sites stay online and serving" x="305" y="430" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Published sites stay online and serving</text>
+      <rect id="container 4" x="305" y="422" width="6" height="6" rx="3" fill="#00bc7d" />
+      <text id="The public API continues to read from ca…" x="305" y="456" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">The public API continues to read from cache</text>
+      <rect id="container 5" x="305" y="448" width="6" height="6" rx="3" fill="#00bc7d" />
+      <text id="Existing sessions are not signed out" x="305" y="482" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Existing sessions are not signed out</text>
+      <rect id="container 6" x="305" y="474" width="6" height="6" rx="3" fill="#00bc7d" />
+      <rect id="link" x="473.77" y="516" width="140.45" height="36" rx="12" fill="#007f34" />
+      <text id="Live status" x="543.99" y="530" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Live status</text>
+      <text id="Hosted separately, so it stays up when t…" x="544" y="576" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" text-anchor="middle">Hosted separately, so it stays up when this does not.</text>
+  </g>
+</svg>

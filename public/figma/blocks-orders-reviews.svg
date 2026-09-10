@@ -1,0 +1,247 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1216" height="5454" viewBox="0 0 1216 5454" id="Hoverlab — Orders &amp; Reviews">
+  <!--
+    Hoverlab — Orders & Reviews. 7 sections, traced from the
+    rendered catalog. Drag this file onto a Figma canvas.
+
+    These are frames, not components: named, editable layers with real
+    geometry, colour and type. There are no variants, no auto-layout,
+    and no hover or motion — none of those exist in a static frame.
+
+    Every section here is free to copy as code at https://hoverlab.dev/blocks
+  -->
+  <rect id="Background" x="0" y="0" width="1216" height="5454" fill="#ffffff" />
+  <text id="Order Confirmation label" x="64" y="84" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Order Confirmation</text>
+  <text id="order-confirmation id" x="64" y="98" font-family="ui-monospace, monospace" font-size="12" fill="#737373">order-confirmation</text>
+  <g id="Order Confirmation" transform="translate(64, 116)">
+    <rect id="container" x="0" y="0" width="1088" height="1016.75" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="516" y="49" width="56" height="56" rx="16" fill="rgba(0, 188, 128, 0.149)" />
+      <text id="Thanks — your order is confirmed" x="544" y="155" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="30" font-weight="800" letter-spacing="-0.75" text-anchor="middle">Thanks — your order is confirmed</text>
+      <text id="A confirmation is on its way to" x="544" y="187" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" text-anchor="middle">A confirmation is on its way to</text>
+      <text id="you@example.com" x="651.6" y="187" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">you@example.com</text>
+      <rect id="paragraph" x="459.72" y="213" width="168.56" height="66" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Order number" x="544" y="236" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" text-anchor="middle">Order number</text>
+      <text id="ORD-4821-9930" x="544" y="260" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="18" font-weight="600" letter-spacing="-0.45" text-anchor="middle">ORD-4821-9930</text>
+      <rect id="container 3" x="232" y="311" width="624" height="116" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Estimated delivery" x="285" y="348" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="500">Estimated delivery</text>
+      <text id="–" x="285" y="372" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">–</text>
+      <text id="Fri 14 August" x="285" y="372" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Fri 14 August</text>
+      <text id="Tue 18 August" x="381.34" y="372" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Tue 18 August</text>
+      <text id="We will email a tracking link as soon as…" x="285" y="400" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">We will email a tracking link as soon as it ships.</text>
+      <rect id="section" x="232" y="451" width="300" height="183.75" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Delivering to" x="253" y="486" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Delivering to</text>
+      <text id="Ada Lovelace" x="253" y="514" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Ada Lovelace</text>
+      <text id="12 Marchmont Street" x="253" y="536.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">12 Marchmont Street</text>
+      <text id="London" x="253" y="559.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">London</text>
+      <text id="WC1N 1AG" x="253" y="582.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">WC1N 1AG</text>
+      <text id="United Kingdom" x="253" y="605" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">United Kingdom</text>
+      <rect id="section 2" x="556" y="451" width="300" height="183.75" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Payment" x="577" y="486" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Payment</text>
+      <text id="Subtotal" x="577" y="514" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Subtotal</text>
+      <text id="£219.00" x="786.67" y="514" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">£219.00</text>
+      <text id="Discount" x="577" y="540" fill="#009966" font-family="ui-sans-serif, system-ui" font-size="14">Discount</text>
+      <text id="−£21.90" x="784.64" y="540" fill="#009966" font-family="ui-sans-serif, system-ui" font-size="14">−£21.90</text>
+      <text id="Delivery" x="577" y="566" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Delivery</text>
+      <text id="Free" x="808.64" y="566" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">Free</text>
+      <rect id="container 4" x="577" y="578" width="258" height="27" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Total" x="577" y="599" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="700">Total</text>
+      <text id="£197.10" x="782.88" y="599" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="700">£197.10</text>
+      <rect id="section 3" x="232" y="658.75" width="624" height="235" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="2 items" x="253" y="693.75" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">2 items</text>
+      <rect id="container 5" x="253" y="723.75" width="44" height="56" rx="12" fill="#f3f2ee" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Merino Crew Sweater" x="309" y="747.75" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Merino Crew Sweater</text>
+      <text id="Stone · M" x="309" y="765.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Stone · M</text>
+      <text id="×1" x="725.88" y="755.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">×1</text>
+      <text id="£89.00" x="755" y="755.75" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">£89.00</text>
+      <rect id="container 6" x="253" y="804.75" width="44" height="56" rx="12" fill="#f3f2ee" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Cotton Oxford Shirt" x="309" y="828.75" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Cotton Oxford Shirt</text>
+      <text id="Sky · L" x="309" y="846.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Sky · L</text>
+      <text id="×2" x="725.88" y="836.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">×2</text>
+      <text id="£130.00" x="755" y="836.75" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">£130.00</text>
+      <rect id="link" x="387.33" y="925.75" width="138.08" height="42" rx="16" fill="#007f34" />
+      <text id="Track this order" x="387.33" y="939.75" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Track this order</text>
+      <rect id="link 2" x="537.41" y="925.75" width="163.25" height="42" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Continue shopping" x="537.41" y="939.75" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Continue shopping</text>
+  </g>
+  <text id="Order History label" x="64" y="1248.75" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Order History</text>
+  <text id="order-history-list id" x="64" y="1262.75" font-family="ui-monospace, monospace" font-size="12" fill="#737373">order-history-list</text>
+  <g id="Order History" transform="translate(64, 1280.75)">
+    <rect id="container" x="0" y="0" width="1088" height="442" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Order history" x="1" y="19" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700" letter-spacing="-0.45">Order history</text>
+      <text id="Everything you have ordered, newest firs…" x="1" y="45" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Everything you have ordered, newest first.</text>
+      <rect id="link" x="1" y="71" width="1086" height="88" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="18" y="91" width="40" height="48" rx="12" fill="none" stroke="#fdfcf8" stroke-width="2" />
+      <rect id="container 3" x="46" y="91" width="40" height="48" rx="12" fill="none" stroke="#fdfcf8" stroke-width="2" />
+      <text id="ORD-4821-9930" x="102" y="100" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12" font-weight="500">ORD-4821-9930</text>
+      <text id="Placed · 2 items" x="102" y="118" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Placed · 2 items</text>
+      <text id="8 Aug 2026" x="139.91" y="118" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">8 Aug 2026</text>
+      <text id="Arriving Friday" x="102" y="138" fill="#e17100" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Arriving Friday</text>
+      <rect id="container 4" x="845.23" y="103" width="96.77" height="24" rx="12" fill="rgba(255, 154, 0, 0.149)" />
+      <text id="On its way" x="845.23" y="115" fill="#e17100" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">On its way</text>
+      <text id="£197.10" x="958" y="119" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">£197.10</text>
+      <rect id="link 2" x="1" y="171" width="1086" height="82" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 5" x="18" y="188" width="40" height="48" rx="12" fill="none" stroke="#fdfcf8" stroke-width="2" />
+      <text id="ORD-4712-1184" x="74" y="207" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12" font-weight="500">ORD-4712-1184</text>
+      <text id="Placed · 1 item" x="74" y="225" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Placed · 1 item</text>
+      <text id="2 Jul 2026" x="111.91" y="225" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">2 Jul 2026</text>
+      <rect id="container 6" x="850.44" y="200" width="91.56" height="24" rx="12" fill="rgba(0, 188, 128, 0.149)" />
+      <text id="Delivered" x="850.44" y="212" fill="#009966" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Delivered</text>
+      <text id="£89.00" x="958" y="216" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">£89.00</text>
+      <rect id="link 3" x="1" y="265" width="1086" height="82" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 7" x="18" y="282" width="40" height="48" rx="12" fill="none" stroke="#fdfcf8" stroke-width="2" />
+      <text id="ORD-4655-3027" x="74" y="301" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12" font-weight="500">ORD-4655-3027</text>
+      <text id="Placed · 1 item 2" x="74" y="319" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Placed · 1 item</text>
+      <text id="19 Jun 2026" x="111.91" y="319" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">19 Jun 2026</text>
+      <rect id="container 8" x="849.48" y="294" width="92.52" height="24" rx="12" fill="#f3f2ee" />
+      <text id="Refunded" x="849.48" y="306" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Refunded</text>
+      <text id="£32.00" x="958" y="310" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">£32.00</text>
+      <rect id="link 4" x="1" y="359" width="1086" height="82" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 9" x="18" y="376" width="40" height="48" rx="12" fill="none" stroke="#fdfcf8" stroke-width="2" />
+      <rect id="container 10" x="46" y="376" width="40" height="48" rx="12" fill="none" stroke="#fdfcf8" stroke-width="2" />
+      <rect id="container 11" x="74" y="376" width="40" height="48" rx="12" fill="none" stroke="#fdfcf8" stroke-width="2" />
+      <text id="ORD-4590-7741" x="130" y="395" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12" font-weight="500">ORD-4590-7741</text>
+      <text id="Placed · 3 items" x="130" y="413" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Placed · 3 items</text>
+      <text id="30 May 2026" x="167.91" y="413" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">30 May 2026</text>
+      <rect id="container 12" x="850.44" y="388" width="91.56" height="24" rx="12" fill="rgba(0, 188, 128, 0.149)" />
+      <text id="Delivered 2" x="850.44" y="400" fill="#009966" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Delivered</text>
+      <text id="£244.00" x="958" y="404" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">£244.00</text>
+  </g>
+  <text id="Customer Reviews label" x="64" y="1838.75" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Customer Reviews</text>
+  <text id="review-list id" x="64" y="1852.75" font-family="ui-monospace, monospace" font-size="12" fill="#737373">review-list</text>
+  <g id="Customer Reviews" transform="translate(64, 1870.75)">
+    <rect id="container" x="0" y="0" width="1088" height="779.75" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="4 reviews" x="1" y="22.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700" letter-spacing="-0.45">4 reviews</text>
+      <text id="Sort" x="927.73" y="22.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Sort</text>
+      <rect id="field" x="961" y="1" width="126" height="35" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Hannah T." x="91" y="91" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Hannah T.</text>
+      <text id="Verified purchase" x="166.11" y="91" fill="#009966" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Verified purchase</text>
+      <text id="28 July 2026" x="1021.81" y="91" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">28 July 2026</text>
+      <text id="Better than the price suggests" x="1" y="123" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600">Better than the price suggests</text>
+      <text id="I bought this expecting to return it and…" x="1" y="152" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">I bought this expecting to return it and it has become the thing I reach for three days a week. The knit is dense without being heavy, and after four washes there is no pilling at</text>
+      <text id="the cuffs where I would expect it first.…" x="1" y="174.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">the cuffs where I would expect it first. Sizing is honest — I am usually a medium and the medium fits with room for a shirt underneath.</text>
+      <text id="Read more" x="30.41" y="200.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600" text-anchor="middle">Read more</text>
+      <rect id="container 2" x="1" y="220.5" width="132.33" height="24" rx="12" fill="#f3f2ee" />
+      <text id="Bought M · usually M" x="1" y="232.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Bought M · usually M</text>
+      <rect id="button" x="149.33" y="219.5" width="99.16" height="26" rx="13" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Helpful" x="198.91" y="231.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" text-anchor="middle">Helpful</text>
+      <text id="34" x="231.02" y="236.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" text-anchor="middle">34</text>
+      <text id="Sam K." x="91" y="308.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Sam K.</text>
+      <text id="11 June 2026" x="1017.47" y="308.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">11 June 2026</text>
+      <text id="Nice but the colour is off" x="1" y="340.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600">Nice but the colour is off</text>
+      <text id="The stone reads much warmer in person th…" x="1" y="368.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">The stone reads much warmer in person than on screen — closer to a light camel. Lovely sweater, just not the colour I was picturing.</text>
+      <rect id="button 2" x="1" y="389.25" width="99.16" height="26" rx="13" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Helpful 2" x="50.58" y="401.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" text-anchor="middle">Helpful</text>
+      <text id="21" x="82.69" y="406.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" text-anchor="middle">21</text>
+      <text id="Devin R." x="91" y="478.25" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Devin R.</text>
+      <text id="Verified purchase 2" x="155.36" y="478.25" fill="#009966" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Verified purchase</text>
+      <text id="14 July 2026" x="1021.81" y="478.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">14 July 2026</text>
+      <text id="Great, but runs slightly long" x="1" y="510.25" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600">Great, but runs slightly long</text>
+      <text id="No complaints about the material at all.…" x="1" y="538.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">No complaints about the material at all. The body is about an inch longer than I expected, which is fine untucked but worth knowing if you are between sizes.</text>
+      <rect id="container 3" x="1" y="560" width="122.08" height="24" rx="12" fill="#f3f2ee" />
+      <text id="Bought L · usually L" x="1" y="572" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Bought L · usually L</text>
+      <rect id="button 3" x="139.08" y="559" width="99.16" height="26" rx="13" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Helpful 3" x="188.66" y="571" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" text-anchor="middle">Helpful</text>
+      <text id="12" x="220.77" y="576" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" text-anchor="middle">12</text>
+      <text id="Priya M." x="91" y="648" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Priya M.</text>
+      <text id="Verified purchase 3" x="154.63" y="648" fill="#009966" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Verified purchase</text>
+      <text id="30 June 2026" x="1017.47" y="648" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">30 June 2026</text>
+      <text id="Third one I have bought" x="1" y="680" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600">Third one I have bought</text>
+      <text id="Two in stone, one in navy. They hold the…" x="1" y="708" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Two in stone, one in navy. They hold their shape better than anything else I own at twice the price.</text>
+      <rect id="button 4" x="1" y="728.75" width="92.69" height="26" rx="13" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Helpful 4" x="47.34" y="740.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" text-anchor="middle">Helpful</text>
+      <text id="8" x="79.45" y="745.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" text-anchor="middle">8</text>
+  </g>
+  <text id="Order Tracking Timeline label" x="64" y="2766.5" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Order Tracking Timeline</text>
+  <text id="order-tracking-timeline id" x="64" y="2780.5" font-family="ui-monospace, monospace" font-size="12" fill="#737373">order-tracking-timeline</text>
+  <g id="Order Tracking Timeline" transform="translate(64, 2798.5)">
+    <rect id="container" x="0" y="0" width="1088" height="657" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="240" y="65" width="608" height="527" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="Order NW-84213" x="265" y="98" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600" letter-spacing="0.6">Order NW-84213</text>
+      <text id="Arriving Thursday 4 – Friday 5 September" x="265" y="124" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="600">Arriving Thursday 4 – Friday 5 September</text>
+      <text id="Evri" x="265" y="161" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Evri</text>
+      <text id="H00 4471 9928 3310" x="325.05" y="161" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">H00 4471 9928 3310</text>
+      <rect id="container 3" x="265" y="209" width="28" height="28" rx="14" fill="rgba(0, 128, 54, 0.149)" />
+      <text id="Order placed" x="309" y="225" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Order placed</text>
+      <text id="Online · 29 Aug, 14:02" x="309" y="245" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Online · 29 Aug, 14:02</text>
+      <rect id="container 4" x="265" y="273" width="28" height="28" rx="14" fill="rgba(0, 128, 54, 0.149)" />
+      <text id="Packed" x="309" y="289" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Packed</text>
+      <text id="Peterborough fulfilment centre · 30 Aug,…" x="309" y="309" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Peterborough fulfilment centre · 30 Aug, 08:41</text>
+      <rect id="container 5" x="265" y="337" width="28" height="28" rx="14" fill="rgba(0, 128, 54, 0.149)" />
+      <text id="Collected by carrier" x="309" y="353" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Collected by carrier</text>
+      <text id="Peterborough · 30 Aug, 17:15" x="309" y="373" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Peterborough · 30 Aug, 17:15</text>
+      <rect id="container 6" x="265" y="401" width="28" height="28" rx="14" fill="#007f34" />
+      <text id="In transit" x="309" y="417" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">In transit</text>
+      <text id="Warrington hub · 31 Aug, 03:22" x="309" y="437" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Warrington hub · 31 Aug, 03:22</text>
+      <text id="Scanned at the sorting hub. The next sca…" x="309" y="461" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Scanned at the sorting hub. The next scan is usually the local depot.</text>
+      <rect id="container 7" x="265" y="491" width="28" height="28" rx="14" fill="#f3f2ee" />
+      <text id="Out for delivery" x="309" y="507" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Out for delivery</text>
+      <text id="— not yet" x="409.36" y="507" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">— not yet</text>
+      <rect id="container 8" x="265" y="543" width="28" height="28" rx="14" fill="#f3f2ee" />
+      <text id="Delivered" x="309" y="559" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Delivered</text>
+      <text id="— not yet 2" x="369.16" y="559" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">— not yet</text>
+  </g>
+  <text id="Write a Review label" x="64" y="3571.5" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Write a Review</text>
+  <text id="review-submit-form id" x="64" y="3585.5" font-family="ui-monospace, monospace" font-size="12" fill="#737373">review-submit-form</text>
+  <g id="Write a Review" transform="translate(64, 3603.5)">
+    <rect id="container" x="0" y="0" width="1088" height="398" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="288" y="65" width="512" height="268" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="Review your Aeropress Go" x="321" y="116" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="600">Review your Aeropress Go</text>
+      <text id="This will be public, shown as" x="321" y="146" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">This will be public, shown as</text>
+      <text id=", marked as a verified" x="577.5" y="146" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">, marked as a verified</text>
+      <text id="purchase" x="321" y="166" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">purchase</text>
+      <text id=". You can edit or delete it later." x="376.8" y="166" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">. You can edit or delete it later.</text>
+      <text id="Priya Raman" x="498.3" y="146" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Priya Raman</text>
+      <text id="How many stars?" x="321" y="210" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">How many stars?</text>
+      <text id="Pick a rating and the rest of the form a…" x="321" y="294" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Pick a rating and the rest of the form appears.</text>
+  </g>
+  <text id="Order Lookup Form label" x="64" y="4117.5" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Order Lookup Form</text>
+  <text id="order-lookup-form id" x="64" y="4131.5" font-family="ui-monospace, monospace" font-size="12" fill="#737373">order-lookup-form</text>
+  <g id="Order Lookup Form" transform="translate(64, 4149.5)">
+    <rect id="container" x="0" y="0" width="1088" height="604" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="section" x="1" y="1" width="1086" height="602" fill="#fdfcf8" />
+      <rect id="container 2" x="320" y="65" width="448" height="474" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="Find your order" x="353" y="118" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="600" letter-spacing="-0.5">Find your order</text>
+      <text id="Guest checkout is the majority of orders…" x="353" y="148" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Guest checkout is the majority of orders on most storefronts,</text>
+      <text id="and the usual tracking page asks those b…" x="353" y="168" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">and the usual tracking page asks those buyers to sign in to an</text>
+      <text id="account they were never offered." x="353" y="188" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">account they were never offered.</text>
+      <text id="Order number" x="353" y="232" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Order number</text>
+      <rect id="field" x="353" y="244" width="382" height="38" rx="10" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="On the confirmation email, top right. St…" x="353" y="298" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">On the confirmation email, top right. Starts with a #.</text>
+      <text id="Email used at checkout" x="353" y="332" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Email used at checkout</text>
+      <rect id="field 2" x="353" y="344" width="382" height="38" rx="10" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Both have to match. It is what stops an …" x="353" y="398" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Both have to match. It is what stops an order number being a lookup</text>
+      <text id="key for anyone." x="353" y="414" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">key for anyone.</text>
+      <rect id="button" x="353" y="434" width="382" height="36" rx="10" fill="#007f34" />
+      <text id="Find it" x="544" y="448" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Find it</text>
+  </g>
+  <text id="Review Distribution Band label" x="64" y="4869.5" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Review Distribution Band</text>
+  <text id="review-distribution-band id" x="64" y="4883.5" font-family="ui-monospace, monospace" font-size="12" fill="#737373">review-distribution-band</text>
+  <g id="Review Distribution Band" transform="translate(64, 4901.5)">
+    <rect id="container" x="0" y="0" width="1088" height="488" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="section" x="1" y="1" width="1086" height="486" fill="#fdfcf8" />
+      <text id="Reviews" x="32" y="95" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Reviews</text>
+      <text id="4.6, and the numbers behind it" x="32" y="145" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="600" letter-spacing="-0.9">4.6, and the numbers behind it</text>
+      <text id="An average with nothing beside it is unr…" x="32" y="178" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">An average with nothing beside it is unreadable: 4.6 from nine reviews and 4.6 from nine</text>
+      <text id="hundred are different facts. These are w…" x="32" y="202" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">hundred are different facts. These are what make the first number mean something.</text>
+      <rect id="container 2" x="32" y="249" width="1024" height="158" rx="16" fill="#dbdee1" stroke="#dbdee1" stroke-width="1" />
+      <rect id="container 3" x="33" y="250" width="254.75" height="156" fill="#ffffff" />
+      <text id="Average" x="57" y="288" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Average</text>
+      <text id="4.6" x="57" y="332" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="30" font-weight="600" letter-spacing="-0.75">4.6</text>
+      <text id="Across every review, including" x="57" y="356" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Across every review, including</text>
+      <text id="the ones left after a return." x="57" y="376" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">the ones left after a return.</text>
+      <rect id="container 4" x="288.75" y="250" width="254.75" height="156" fill="#ffffff" />
+      <text id="Reviews 2" x="312.75" y="288" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Reviews</text>
+      <text id="1,284" x="312.75" y="332" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="30" font-weight="600" letter-spacing="-0.75">1,284</text>
+      <text id="Unfiltered. Nothing is hidden for" x="312.75" y="356" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Unfiltered. Nothing is hidden for</text>
+      <text id="being low." x="312.75" y="376" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">being low.</text>
+      <rect id="container 5" x="544.5" y="250" width="254.75" height="156" fill="#ffffff" />
+      <text id="Verified purchase" x="568.5" y="288" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Verified purchase</text>
+      <text id="91%" x="568.5" y="332" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="30" font-weight="600" letter-spacing="-0.75">91%</text>
+      <text id="Matched to an order. The other" x="568.5" y="356" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Matched to an order. The other</text>
+      <text id="9% are labelled as such." x="568.5" y="376" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">9% are labelled as such.</text>
+      <rect id="container 6" x="800.25" y="250" width="254.75" height="156" fill="#ffffff" />
+      <text id="One and two star" x="824.25" y="288" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">One and two star</text>
+      <text id="6%" x="824.25" y="332" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="30" font-weight="600" letter-spacing="-0.75">6%</text>
+      <text id="Shown, and sorted to the top" x="824.25" y="356" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Shown, and sorted to the top</text>
+      <text id="when you filter by lowest." x="824.25" y="376" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">when you filter by lowest.</text>
+  </g>
+</svg>

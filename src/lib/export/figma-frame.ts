@@ -267,6 +267,14 @@ interface CollectOptions {
   minSize?: number
   /** Hard cap on layers, so a dense page cannot produce an unusable paste. */
   maxNodes?: number
+  /**
+   * Characters this frame may measure to find wrapped line breaks.
+   *
+   * Bounds the one part of the walk whose cost is per character rather than
+   * per element. Past it, wrapped text falls back to a single line — the
+   * behaviour before line splitting existed, rather than a loss.
+   */
+  textBudget?: number
 }
 
 /** Elements that never carry visual meaning of their own. */
@@ -323,6 +331,116 @@ function ownText(el: Element): string {
   return out.replace(/\s+/g, ' ').trim()
 }
 
+/** One visual line of text, as the browser actually drew it. */
+interface TextLine {
+  text: string
+  /** Relative to the viewport; the caller subtracts the frame origin. */
+  left: number
+  top: number
+  width: number
+}
+
+/**
+ * The element's own text, split into the lines a browser wrapped it onto.
+ *
+ * ── WHY THIS EXISTS ─────────────────────────────────────────────────────
+ *
+ * SVG `<text>` does not wrap. Neither does Figma's text layer on import at
+ * a fixed position. So emitting one `<text>` per element — which is what
+ * this did — is correct only for text that already fits on one line, and
+ * silently wrong for everything else: a hero headline the browser drew on
+ * three lines arrived as a single line running several thousand pixels off
+ * the side of the artboard, straight through whatever it crossed.
+ *
+ * It looked fine in every check that did not open the frame, because the
+ * SVG was valid and the string was complete. It was only visible once the
+ * whole catalog was traced at once and the headlines were seen overflowing.
+ *
+ * ── HOW ─────────────────────────────────────────────────────────────────
+ *
+ * A `Range` over a text node reports the geometry the browser gave it, so
+ * the line breaks are read back rather than recomputed. Walking one
+ * character at a time and watching for the top edge to jump is what finds
+ * them; a second measurement per completed line gets that line's real box.
+ *
+ * Deliberately NOT a re-implementation of line breaking. Where the words
+ * broke depends on the font, the available width, hyphenation and the
+ * browser's own algorithm, and a second guess at it would disagree with the
+ * preview sitting on the same page — the mistake `figma-frame.ts` avoids
+ * everywhere else by measuring instead of deriving.
+ */
+function ownTextLines(el: Element, budget: { left: number }): TextLine[] {
+  const doc = el.ownerDocument
+  if (!doc) return []
+
+  const lines: TextLine[] = []
+
+  for (const child of Array.from(el.childNodes)) {
+    if (child.nodeType !== 3) continue
+    const raw = child.textContent ?? ''
+    if (!raw.trim()) continue
+
+    /*
+     * A cap on measurement, not on output. Each character costs a range
+     * measurement, and a frame is copied on a click a reader is waiting
+     * through. Past the budget the remaining text falls back to one line,
+     * which is the old behaviour rather than a loss.
+     */
+    if (budget.left <= 0) {
+      const range = doc.createRange()
+      range.selectNodeContents(child)
+      const box = range.getBoundingClientRect()
+      const text = raw.replace(/\s+/g, ' ').trim()
+      if (text) lines.push({ text, left: box.left, top: box.top, width: box.width })
+      continue
+    }
+
+    const range = doc.createRange()
+    let lineStart = 0
+    let lineTop: number | null = null
+
+    const flush = (end: number) => {
+      const text = raw.slice(lineStart, end).replace(/\s+/g, ' ').trim()
+      if (!text) return
+      range.setStart(child, lineStart)
+      range.setEnd(child, end)
+      const box = range.getBoundingClientRect()
+      lines.push({ text, left: box.left, top: box.top, width: box.width })
+    }
+
+    for (let i = 0; i < raw.length; i++) {
+      if (budget.left <= 0) break
+      budget.left -= 1
+
+      range.setStart(child, i)
+      range.setEnd(child, i + 1)
+      const rect = range.getBoundingClientRect()
+
+      // Collapsed whitespace at a line break has no box at all. Skipping it
+      // keeps it from being read as a line of its own.
+      if (rect.width === 0 && rect.height === 0) continue
+
+      const top = Math.round(rect.top)
+      if (lineTop === null) {
+        lineTop = top
+        lineStart = i
+        continue
+      }
+
+      // More than a rounding wobble means the browser moved to a new line.
+      if (Math.abs(top - lineTop) > 1) {
+        flush(i)
+        lineStart = i
+        lineTop = top
+      }
+    }
+
+    if (lineTop !== null) flush(raw.length)
+  }
+
+  return lines
+}
+
 function numeric(value: string): number {
   const parsed = Number.parseFloat(value)
   return Number.isFinite(parsed) ? parsed : 0
@@ -374,6 +492,13 @@ export function collectFrameNodes(root: HTMLElement, options: CollectOptions = {
   const origin = root.getBoundingClientRect()
   const nodes: FrameNode[] = []
 
+  /*
+   * Characters this frame may measure for line breaks, shared across every
+   * text node in it. See `ownTextLines` — the cost is per character, and a
+   * page-sized frame has a lot of them.
+   */
+  const textBudget = { left: options.textBudget ?? 4000 }
+
   const rootStyle = getComputedStyle(root)
   const background = normalizeColor(rootStyle.backgroundColor, ctx)
 
@@ -386,6 +511,22 @@ export function collectFrameNodes(root: HTMLElement, options: CollectOptions = {
 
     const opacity = numeric(style.opacity || '1')
     if (opacity === 0) return
+
+    /*
+     * Blurred decoration is dropped, subtree and all.
+     *
+     * Half this catalog's heroes float a `blur-3xl` circle behind the copy
+     * as an ambient wash. A blur is not expressible in the SVG this writes,
+     * so what pasted was the shape without the blur: a hard-edged, fully
+     * opaque disc several hundred pixels across, sitting on top of the
+     * headline it was supposed to be a faint glow behind. The reader sees a
+     * broken frame, not a simplified one.
+     *
+     * Dropping it is the honest simplification. The wash contributes nothing
+     * a designer would keep, and its absence reads as a clean frame while
+     * its presence reads as a bug.
+     */
+    if (style.filter && style.filter.includes('blur(')) return
 
     const box = el.getBoundingClientRect()
     const x = box.left - origin.left
@@ -441,30 +582,68 @@ export function collectFrameNodes(root: HTMLElement, options: CollectOptions = {
       const fill = normalizeColor(style.color, ctx)
       const fontSize = numeric(style.fontSize)
       if (fill && fontSize > 0) {
-        /*
-         * SVG places text on its baseline; the DOM gives a box. Approximating
-         * the baseline as the box top plus the font size is close enough for
-         * a frame a designer will nudge anyway, and much closer than using
-         * the box top raw — which would float every label above its own
-         * button by most of a line.
-         */
         const align = style.textAlign
-        const anchor = align === 'center' ? 'middle' : align === 'right' ? 'end' : 'start'
-        const anchorX = anchor === 'middle' ? x + box.width / 2 : anchor === 'end' ? x + box.width : x
-
-        nodes.push({
-          kind: 'text',
-          name: text.length > 40 ? `${text.slice(0, 40)}…` : text,
-          x: anchorX,
-          y: y + fontSize,
-          text,
+        const anchor: FrameText['anchor'] =
+          align === 'center' ? 'middle' : align === 'right' ? 'end' : 'start'
+        const shared = {
           fill,
           fontFamily: trimFontStack(style.fontFamily),
           fontSize,
           fontWeight: numeric(style.fontWeight) || 400,
           letterSpacing: style.letterSpacing === 'normal' ? 0 : numeric(style.letterSpacing),
           anchor,
-        })
+        }
+
+        /*
+         * Measure the wrapped lines only when the box is tall enough to hold
+         * more than one. Almost every string in a UI is a single line —
+         * labels, buttons, table cells — and paying a range measurement per
+         * character for all of them would make the copy button perceptibly
+         * slower to spare the few headlines that actually wrap.
+         */
+        const lineHeight = numeric(style.lineHeight) || fontSize * 1.2
+        const lines =
+          box.height >= lineHeight * 1.7 ? ownTextLines(el, textBudget) : []
+
+        if (lines.length > 1) {
+          for (const line of lines) {
+            const lx = line.left - origin.left
+            const anchorX =
+              anchor === 'middle'
+                ? lx + line.width / 2
+                : anchor === 'end'
+                  ? lx + line.width
+                  : lx
+            nodes.push({
+              kind: 'text',
+              name: line.text.length > 40 ? `${line.text.slice(0, 40)}…` : line.text,
+              x: anchorX,
+              // Same baseline approximation as below, per line box.
+              y: line.top - origin.top + fontSize,
+              text: line.text,
+              ...shared,
+            })
+          }
+        } else {
+          /*
+           * SVG places text on its baseline; the DOM gives a box. Approximating
+           * the baseline as the box top plus the font size is close enough for
+           * a frame a designer will nudge anyway, and much closer than using
+           * the box top raw — which would float every label above its own
+           * button by most of a line.
+           */
+          const anchorX =
+            anchor === 'middle' ? x + box.width / 2 : anchor === 'end' ? x + box.width : x
+
+          nodes.push({
+            kind: 'text',
+            name: text.length > 40 ? `${text.slice(0, 40)}…` : text,
+            x: anchorX,
+            y: y + fontSize,
+            text,
+            ...shared,
+          })
+        }
       }
     }
 

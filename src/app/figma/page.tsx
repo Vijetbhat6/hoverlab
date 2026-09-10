@@ -19,12 +19,26 @@
  * tool names, what `match_design` does with designer vocabulary, and the
  * honest limit at the bottom: a static mockup shows layout, so it matches
  * blocks and pages. Hover and motion are invisible in a frame.
+ *
+ * THE KIT IS THE OTHER HALF, and it is here because the pairing above is
+ * not what a designer comparing catalogs is looking for. They are looking
+ * for a file. Flowbite, Shadcnblocks, Untitled UI and Preline all ship one,
+ * two of them for free, and until the kit existed the answer here was a
+ * better workflow and an empty column.
+ *
+ * It is described as frames rather than as a design system everywhere it
+ * appears, because that is what it is: named editable layers with real
+ * geometry, no variants and no auto-layout. `/compare` goes on conceding
+ * the design-system row for exactly that reason. Overstating it on the one
+ * page a designer arrives at from a comparison would be the fastest way to
+ * lose the argument the comparison page is making.
  */
 
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import {
   ArrowRight,
+  Download,
   Frame,
   MousePointerClick,
   Sparkles,
@@ -40,6 +54,7 @@ import { Button } from '@/components/ui/button'
 import { BLOCK_COUNT } from '@/lib/blocks/block-index'
 import { PAGE_COUNT } from '@/lib/pages/page-index'
 import { TEMPLATE_COUNT } from '@/lib/templates/template-index'
+import { FIGMA_KIT, figmaKitHref, formatBytes } from '@/lib/figma-kit'
 import { TOTAL_COUNT } from '@/lib/catalog-stats'
 import { breadcrumbLd } from '@/lib/structured-data'
 import { absoluteUrl } from '@/lib/site'
@@ -57,6 +72,11 @@ export const metadata: Metadata = {
     'figma mcp server',
     'design to code components',
     'figma tailwind components',
+    // The kit's own queries. A designer looking for a file does not search
+    // for "design to code" — they search for the file.
+    'tailwind figma kit',
+    'free figma ui kit',
+    'figma component library tailwind',
   ],
   alternates: { canonical: '/figma' },
   openGraph: {
@@ -284,6 +304,78 @@ export default function FigmaPage() {
               </p>
             </div>
           </div>
+
+          {/* ---------------------------------------------------------- *
+           *  The kit.
+           *
+           *  Placed after "where it stops" on purpose. The pairing above is
+           *  the better workflow and is what this page is really arguing
+           *  for; the kit is what a designer who is comparing shopping
+           *  carts came here to find, and burying it would be coy about the
+           *  one column competitors tick and we did not.
+           *
+           *  Rendered only when a kit exists — see lib/figma-kit.ts for why
+           *  its absence has to be a state rather than a build error.
+           * ---------------------------------------------------------- */}
+          {FIGMA_KIT && FIGMA_KIT.files.length > 0 && (
+            <div id="kit" className="mt-10 rounded-2xl border border-border/60 bg-card/60 p-6">
+              <h2 className="flex items-center gap-2 text-lg font-bold tracking-tight">
+                <Download aria-hidden className="h-4 w-4 text-primary" />
+                Or open the sections in Figma
+              </h2>
+              <p className="mt-3 max-w-2xl text-sm text-muted-foreground">
+                Every section in the catalog, traced from what actually
+                renders and stitched into one file per category. Drag one
+                onto a Figma canvas and each block arrives as a named,
+                editable frame — real geometry, real colours, real type.{' '}
+                {FIGMA_KIT.sections} sections, free, no account.
+              </p>
+              <p className="mt-3 max-w-2xl text-sm text-muted-foreground">
+                <span className="font-medium text-foreground">
+                  These are frames, not components.
+                </span>{' '}
+                No variants, no auto-layout, and no hover or motion — none of
+                those exist in a static frame. If you want a component library
+                with variants, the vendors who sell one are named on{' '}
+                <Link href="/compare" className="underline underline-offset-4">
+                  our comparison page
+                </Link>
+                , which still concedes that row to them.
+              </p>
+
+              <ul className="mt-5 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+                {FIGMA_KIT.files.map((f) => (
+                  <li key={f.slug}>
+                    <a
+                      href={figmaKitHref(f)}
+                      download
+                      className="flex items-center gap-3 rounded-xl border border-border/60 bg-background/60 p-3 transition-colors hover:border-border hover:bg-muted/60"
+                    >
+                      <Download
+                        aria-hidden
+                        className="h-4 w-4 shrink-0 text-muted-foreground"
+                      />
+                      <span className="min-w-0 flex-1">
+                        <span className="block truncate text-sm font-medium">
+                          {f.category}
+                        </span>
+                        <span className="block text-xs text-muted-foreground">
+                          {f.sections} section{f.sections === 1 ? '' : 's'} ·{' '}
+                          {formatBytes(f.bytes)}
+                        </span>
+                      </span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+
+              <p className="mt-4 text-xs text-muted-foreground">
+                Traced {FIGMA_KIT.generatedAt} from the live catalog. Rebuilt
+                whenever the sections change — the build fails if these files
+                fall behind what is in the catalog.
+              </p>
+            </div>
+          )}
 
           <div className="mt-10 rounded-2xl border border-border/60 bg-card/60 p-6 text-center">
             <h2 className="text-lg font-bold tracking-tight">

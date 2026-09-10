@@ -1,0 +1,554 @@
+{
+  "generatedAt": "2026-09-10",
+  "sections": 250,
+  "note": "Frames, not components. Named editable layers with real geometry, colour and type; no variants, no auto-layout, no hover or motion.",
+  "files": [
+    {
+      "category": "Agent Chat",
+      "slug": "agent-chat",
+      "file": "blocks-agent-chat.svg",
+      "sections": 8,
+      "bytes": 39904,
+      "ids": [
+        "chat-thread-panel",
+        "chat-prompt-bar",
+        "chat-streaming-answer",
+        "chat-empty-state",
+        "chat-message-branches",
+        "chat-artifact-canvas",
+        "chat-model-picker",
+        "chat-attachment-tray"
+      ]
+    },
+    {
+      "category": "Agent Reasoning",
+      "slug": "agent-reasoning",
+      "file": "blocks-agent-reasoning.svg",
+      "sections": 7,
+      "bytes": 32146,
+      "ids": [
+        "agent-thinking-trace",
+        "agent-tool-calls",
+        "agent-task-list",
+        "agent-working-indicator",
+        "agent-run-failure",
+        "agent-retry-log",
+        "agent-cost-breakdown"
+      ]
+    },
+    {
+      "category": "Authentication",
+      "slug": "authentication",
+      "file": "blocks-authentication.svg",
+      "sections": 9,
+      "bytes": 28732,
+      "ids": [
+        "auth-login-card",
+        "auth-signup-split",
+        "auth-otp-verify",
+        "auth-forgot-password",
+        "auth-reset-password",
+        "auth-two-factor",
+        "auth-sso-domain",
+        "auth-magic-link-form",
+        "sso-enterprise-split"
+      ]
+    },
+    {
+      "category": "Billing & Usage",
+      "slug": "billing-usage",
+      "file": "blocks-billing-usage.svg",
+      "sections": 8,
+      "bytes": 42742,
+      "ids": [
+        "billing-plan-summary",
+        "invoice-history-table",
+        "payment-method-card",
+        "subscription-cancel-flow",
+        "usage-overage-notice",
+        "billing-seat-manager",
+        "billing-invoice-detail",
+        "billing-credit-balance"
+      ]
+    },
+    {
+      "category": "Cart & Checkout",
+      "slug": "cart-checkout",
+      "file": "blocks-cart-checkout.svg",
+      "sections": 6,
+      "bytes": 25210,
+      "ids": [
+        "cart-drawer",
+        "cart-line-items",
+        "checkout-form",
+        "order-summary-panel",
+        "checkout-express-payment",
+        "gift-options-form"
+      ]
+    },
+    {
+      "category": "Charts & Metrics",
+      "slug": "charts-metrics",
+      "file": "blocks-charts-metrics.svg",
+      "sections": 9,
+      "bytes": 92367,
+      "ids": [
+        "metric-sparkline-cards",
+        "bar-chart-panel",
+        "usage-meter-panel",
+        "line-chart-panel",
+        "donut-breakdown",
+        "activity-heatmap",
+        "funnel-conversion-panel",
+        "metric-alert-list",
+        "kpi-summary-band"
+      ]
+    },
+    {
+      "category": "Command & Search",
+      "slug": "command-search",
+      "file": "blocks-command-search.svg",
+      "sections": 8,
+      "bytes": 46755,
+      "ids": [
+        "command-palette",
+        "search-results-panel",
+        "keyboard-shortcuts-sheet",
+        "applied-filters-bar",
+        "search-autocomplete",
+        "search-facet-panel",
+        "search-scope-switcher",
+        "recent-search-list"
+      ]
+    },
+    {
+      "category": "Contact & Forms",
+      "slug": "contact-forms",
+      "file": "blocks-contact-forms.svg",
+      "sections": 7,
+      "bytes": 33450,
+      "ids": [
+        "contact-form-split",
+        "multi-step-form",
+        "booking-scheduler",
+        "feedback-widget",
+        "form-error-summary",
+        "contact-sales-form",
+        "support-ticket-form"
+      ]
+    },
+    {
+      "category": "Content & Blog",
+      "slug": "content-blog",
+      "file": "blocks-content-blog.svg",
+      "sections": 9,
+      "bytes": 69905,
+      "ids": [
+        "changelog-timeline",
+        "roadmap-columns",
+        "blog-post-grid",
+        "article-header",
+        "team-grid",
+        "job-listing-board",
+        "docs-layout",
+        "api-endpoint-card",
+        "code-tabs-panel"
+      ]
+    },
+    {
+      "category": "CTA Sections",
+      "slug": "cta-sections",
+      "file": "blocks-cta-sections.svg",
+      "sections": 7,
+      "bytes": 19940,
+      "ids": [
+        "newsletter-signup",
+        "community-band",
+        "cta-split-panel",
+        "cta-sticky-bar",
+        "cta-inline-card",
+        "referral-waitlist-form",
+        "demo-request-form"
+      ]
+    },
+    {
+      "category": "Dashboards",
+      "slug": "dashboards",
+      "file": "blocks-dashboards.svg",
+      "sections": 10,
+      "bytes": 76186,
+      "ids": [
+        "dashboard-shell",
+        "dashboard-stat-cards",
+        "dashboard-activity-feed",
+        "dashboard-page-header",
+        "kanban-board",
+        "activity-timeline",
+        "calendar-month",
+        "dashboard-saved-views",
+        "dashboard-comparison-period",
+        "dashboard-alert-rules"
+      ]
+    },
+    {
+      "category": "Data Tables",
+      "slug": "data-tables",
+      "file": "blocks-data-tables.svg",
+      "sections": 8,
+      "bytes": 41258,
+      "ids": [
+        "data-table-sortable",
+        "data-table-toolbar",
+        "data-table-pagination",
+        "data-table-expandable",
+        "data-table-column-manager",
+        "data-table-bulk-actions",
+        "data-table-inline-edit",
+        "data-table-grouped-rows"
+      ]
+    },
+    {
+      "category": "Empty & Error States",
+      "slug": "empty-error-states",
+      "file": "blocks-empty-error-states.svg",
+      "sections": 8,
+      "bytes": 29197,
+      "ids": [
+        "empty-state-cta",
+        "error-state-retry",
+        "not-found-404",
+        "skeleton-list",
+        "permission-denied-state",
+        "offline-state-banner",
+        "empty-filtered-results",
+        "maintenance-window-state"
+      ]
+    },
+    {
+      "category": "FAQ",
+      "slug": "faq",
+      "file": "blocks-faq.svg",
+      "sections": 7,
+      "bytes": 40979,
+      "ids": [
+        "faq-accordion",
+        "faq-two-column",
+        "faq-grid",
+        "faq-categorized",
+        "faq-search",
+        "faq-objection-list",
+        "security-faq-list"
+      ]
+    },
+    {
+      "category": "Feature Sections",
+      "slug": "feature-sections",
+      "file": "blocks-feature-sections.svg",
+      "sections": 8,
+      "bytes": 58087,
+      "ids": [
+        "bento-features",
+        "feature-rows",
+        "feature-icon-grid",
+        "integration-grid",
+        "persona-cards",
+        "code-showcase",
+        "feature-tabs",
+        "integration-depth-split"
+      ]
+    },
+    {
+      "category": "File Upload",
+      "slug": "file-upload",
+      "file": "blocks-file-upload.svg",
+      "sections": 7,
+      "bytes": 27801,
+      "ids": [
+        "file-dropzone",
+        "upload-progress-list",
+        "upload-resumable",
+        "csv-import-mapper",
+        "avatar-crop-upload",
+        "upload-requirements-form",
+        "import-from-url-form"
+      ]
+    },
+    {
+      "category": "Footers",
+      "slug": "footers",
+      "file": "blocks-footers.svg",
+      "sections": 5,
+      "bytes": 22630,
+      "ids": [
+        "footer-mega",
+        "footer-minimal",
+        "footer-newsletter",
+        "footer-status-locale",
+        "footer-compliance"
+      ]
+    },
+    {
+      "category": "Heroes",
+      "slug": "heroes",
+      "file": "blocks-heroes.svg",
+      "sections": 14,
+      "bytes": 69308,
+      "ids": [
+        "hero-split",
+        "hero-centered",
+        "hero-screenshot",
+        "hero-waitlist",
+        "hero-search",
+        "hero-terminal",
+        "hero-app-download",
+        "hero-testimonial",
+        "hero-metrics",
+        "hero-editorial",
+        "hero-media-overlay",
+        "hero-integrations",
+        "hero-booking",
+        "hero-price-anchor"
+      ]
+    },
+    {
+      "category": "Human in the Loop",
+      "slug": "human-in-the-loop",
+      "file": "blocks-human-in-the-loop.svg",
+      "sections": 8,
+      "bytes": 47542,
+      "ids": [
+        "approval-request-card",
+        "agent-diff-review",
+        "confidence-recommendation",
+        "permission-scope-dialog",
+        "approval-queue",
+        "approval-policy-list",
+        "escalation-queue-list",
+        "human-oversight-split"
+      ]
+    },
+    {
+      "category": "Inline AI Actions",
+      "slug": "inline-ai-actions",
+      "file": "blocks-inline-ai-actions.svg",
+      "sections": 6,
+      "bytes": 22881,
+      "ids": [
+        "selection-ai-toolbar",
+        "ai-inline-suggestion",
+        "ai-inspector-panel",
+        "ai-insight-cards",
+        "ai-slash-menu",
+        "ai-action-menu"
+      ]
+    },
+    {
+      "category": "Logo Clouds",
+      "slug": "logo-clouds",
+      "file": "blocks-logo-clouds.svg",
+      "sections": 4,
+      "bytes": 15705,
+      "ids": [
+        "logo-cloud",
+        "logo-grid",
+        "logo-strip",
+        "logo-segments"
+      ]
+    },
+    {
+      "category": "Modals & Drawers",
+      "slug": "modals-drawers",
+      "file": "blocks-modals-drawers.svg",
+      "sections": 8,
+      "bytes": 31101,
+      "ids": [
+        "confirm-dialog",
+        "cookie-consent",
+        "slide-over-panel",
+        "filter-drawer-facets",
+        "share-access-dialog",
+        "bottom-sheet-mobile",
+        "modal-unsaved-changes",
+        "drawer-record-detail"
+      ]
+    },
+    {
+      "category": "Navigation",
+      "slug": "navigation",
+      "file": "blocks-navigation.svg",
+      "sections": 5,
+      "bytes": 13362,
+      "ids": [
+        "navbar-simple",
+        "announcement-bar",
+        "navbar-mega-menu",
+        "nav-mobile-drawer",
+        "navbar-authenticated"
+      ]
+    },
+    {
+      "category": "Notifications",
+      "slug": "notifications",
+      "file": "blocks-notifications.svg",
+      "sections": 7,
+      "bytes": 31280,
+      "ids": [
+        "toast-stack",
+        "notification-inbox",
+        "notification-preferences",
+        "push-permission-prompt",
+        "notification-digest-list",
+        "digest-schedule-form",
+        "notification-channel-list"
+      ]
+    },
+    {
+      "category": "Onboarding",
+      "slug": "onboarding",
+      "file": "blocks-onboarding.svg",
+      "sections": 8,
+      "bytes": 36286,
+      "ids": [
+        "onboarding-checklist",
+        "setup-wizard",
+        "team-invite-step",
+        "product-tour-coachmark",
+        "onboarding-role-picker",
+        "onboarding-import-data",
+        "workspace-setup-form",
+        "data-migration-split"
+      ]
+    },
+    {
+      "category": "Orders & Reviews",
+      "slug": "orders-reviews",
+      "file": "blocks-orders-reviews.svg",
+      "sections": 7,
+      "bytes": 35123,
+      "ids": [
+        "order-confirmation",
+        "order-history-list",
+        "review-list",
+        "order-tracking-timeline",
+        "review-submit-form",
+        "order-lookup-form",
+        "review-distribution-band"
+      ]
+    },
+    {
+      "category": "Pricing",
+      "slug": "pricing",
+      "file": "blocks-pricing.svg",
+      "sections": 8,
+      "bytes": 42063,
+      "ids": [
+        "pricing-tiers",
+        "pricing-single",
+        "pricing-usage-calculator",
+        "comparison-table",
+        "pricing-credits",
+        "pricing-plan-picker",
+        "pricing-value-split",
+        "plan-limits-list"
+      ]
+    },
+    {
+      "category": "Product Detail",
+      "slug": "product-detail",
+      "file": "blocks-product-detail.svg",
+      "sections": 7,
+      "bytes": 30897,
+      "ids": [
+        "product-gallery",
+        "product-buy-box",
+        "product-info-accordion",
+        "product-review-summary",
+        "product-size-guide",
+        "product-spec-split",
+        "back-in-stock-form"
+      ]
+    },
+    {
+      "category": "Product Listings",
+      "slug": "product-listings",
+      "file": "blocks-product-listings.svg",
+      "sections": 7,
+      "bytes": 34950,
+      "ids": [
+        "product-grid",
+        "product-filter-sidebar",
+        "collection-toolbar",
+        "product-rail",
+        "product-compare-table",
+        "stock-availability-list",
+        "collection-story-split"
+      ]
+    },
+    {
+      "category": "Retrieval & Context",
+      "slug": "retrieval-context",
+      "file": "blocks-retrieval-context.svg",
+      "sections": 9,
+      "bytes": 60279,
+      "ids": [
+        "context-chunk-cards",
+        "source-citation-list",
+        "knowledge-source-picker",
+        "retrieval-empty-state",
+        "context-window-budget",
+        "retrieval-index-status",
+        "retrieval-freshness-list",
+        "context-scope-list",
+        "grounding-split"
+      ]
+    },
+    {
+      "category": "Settings",
+      "slug": "settings",
+      "file": "blocks-settings.svg",
+      "sections": 8,
+      "bytes": 40791,
+      "ids": [
+        "settings-nav-layout",
+        "settings-profile-form",
+        "settings-team-members",
+        "settings-api-keys",
+        "settings-danger-zone",
+        "settings-sessions",
+        "settings-notification-matrix",
+        "settings-audit-log"
+      ]
+    },
+    {
+      "category": "Stats",
+      "slug": "stats",
+      "file": "blocks-stats.svg",
+      "sections": 7,
+      "bytes": 33764,
+      "ids": [
+        "stats-band",
+        "stats-cards",
+        "stats-narrative",
+        "stats-comparison",
+        "stats-timeline",
+        "stats-benchmark-band",
+        "security-posture-band"
+      ]
+    },
+    {
+      "category": "Testimonials",
+      "slug": "testimonials",
+      "file": "blocks-testimonials.svg",
+      "sections": 6,
+      "bytes": 43940,
+      "ids": [
+        "testimonial-grid",
+        "testimonial-spotlight",
+        "testimonial-ratings",
+        "testimonial-carousel",
+        "testimonial-video",
+        "customer-outcome-band"
+      ]
+    }
+  ]
+}

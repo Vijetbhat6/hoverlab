@@ -1,0 +1,225 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1216" height="5144" viewBox="0 0 1216 5144" id="Hoverlab — Product Detail">
+  <!--
+    Hoverlab — Product Detail. 7 sections, traced from the
+    rendered catalog. Drag this file onto a Figma canvas.
+
+    These are frames, not components: named, editable layers with real
+    geometry, colour and type. There are no variants, no auto-layout,
+    and no hover or motion — none of those exist in a static frame.
+
+    Every section here is free to copy as code at https://hoverlab.dev/blocks
+  -->
+  <rect id="Background" x="0" y="0" width="1216" height="5144" fill="#ffffff" />
+  <text id="Product Image Gallery label" x="64" y="84" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Product Image Gallery</text>
+  <text id="product-gallery id" x="64" y="98" font-family="ui-monospace, monospace" font-size="12" fill="#737373">product-gallery</text>
+  <g id="Product Image Gallery" transform="translate(64, 116)">
+    <rect id="container" x="0" y="0" width="1088" height="1184" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="tabpanel" x="1" y="1" width="1086" height="1086" rx="16" fill="#f3f2ee" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="tab" x="1" y="1099" width="80" height="80" rx="16" fill="none" stroke="#007f34" stroke-width="2" />
+  </g>
+  <text id="Variant &amp; Add-to-Cart Box label" x="64" y="1416" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Variant &amp; Add-to-Cart Box</text>
+  <text id="product-buy-box id" x="64" y="1430" font-family="ui-monospace, monospace" font-size="12" fill="#737373">product-buy-box</text>
+  <g id="Variant &amp; Add-to-Cart Box" transform="translate(64, 1448)">
+    <rect id="container" x="0" y="0" width="1088" height="436" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Merino Crew Sweater" x="1" y="31" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="30" font-weight="700" letter-spacing="-0.75">Merino Crew Sweater</text>
+      <text id="£89.00" x="1" y="73" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="24" font-weight="800" letter-spacing="-0.6">£89.00</text>
+      <text id="£120.00" x="88.98" y="73" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">£120.00</text>
+      <rect id="container 2" x="156.2" y="60" width="78.84" height="20" rx="10" fill="rgba(0, 188, 128, 0.149)" />
+      <text id="Save £31.00" x="156.2" y="72" fill="#009966" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600">Save £31.00</text>
+      <text id="Size" x="1" y="119" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Size</text>
+      <text id="Size guide" x="1032.63" y="119" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Size guide</text>
+      <rect id="radio" x="1" y="135" width="48" height="38" rx="16" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="XS" x="25" y="149" fill="rgba(86, 92, 96, 0.502)" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">XS</text>
+      <rect id="radio 2" x="57" y="135" width="48" height="38" rx="16" fill="rgba(0, 128, 49, 0.102)" stroke="#007f34" stroke-width="1" />
+      <text id="S" x="81" y="149" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">S</text>
+      <rect id="radio 3" x="113" y="135" width="48" height="38" rx="16" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="M" x="137" y="149" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">M</text>
+      <rect id="radio 4" x="169" y="135" width="48" height="38" rx="16" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="L" x="193" y="149" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">L</text>
+      <rect id="radio 5" x="225" y="135" width="48" height="38" rx="16" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="XL" x="249" y="149" fill="rgba(86, 92, 96, 0.502)" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">XL</text>
+      <text id="Quantity" x="1" y="211" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Quantity</text>
+      <rect id="container 3" x="1" y="227" width="122" height="38" rx="16" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="1" x="62" y="250" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">1</text>
+      <rect id="button" x="1" y="294" width="1086" height="48" rx="16" fill="#007f34" />
+      <text id="Add to bag" x="544" y="308" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Add to bag</text>
+      <rect id="container 4" x="1" y="366" width="1086" height="69" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Free delivery over £50.00" x="1" y="401" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Free delivery over £50.00</text>
+      <text id="Free returns within 30 days" x="1" y="429" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Free returns within 30 days</text>
+  </g>
+  <text id="Product Details Accordion label" x="64" y="2000" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Product Details Accordion</text>
+  <text id="product-info-accordion id" x="64" y="2014" font-family="ui-monospace, monospace" font-size="12" fill="#737373">product-info-accordion</text>
+  <g id="Product Details Accordion" transform="translate(64, 2032)">
+    <rect id="container" x="0" y="0" width="1088" height="331.25" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="1" y="1" width="1086" height="329.25" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Description" x="22" y="18" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="500">Description</text>
+      <text id="A midweight crew neck knitted from extra…" x="22" y="72" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">A midweight crew neck knitted from extra-fine merino, with a clean set-in sleeve and ribbed trims that hold their shape through a season of wear.</text>
+      <text id="Cut slightly relaxed through the body so…" x="22" y="107.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Cut slightly relaxed through the body so it layers over a shirt without pulling. Fully fashioned, which means the panels are knitted to shape rather than cut from a sheet</text>
+      <text id="— it costs more to make and it does not …" x="22" y="130.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">— it costs more to make and it does not lose its line at the shoulder.</text>
+      <text id="Materials &amp; care" x="22" y="175.25" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="500">Materials &amp; care</text>
+      <text id="Knitted in Scotland from mulesing-free m…" x="22" y="229.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Knitted in Scotland from mulesing-free merino.</text>
+      <rect id="container 3" x="22" y="254" width="1028" height="148" fill="none" stroke="rgba(220, 222, 225, 0.4)" stroke-width="1" />
+      <text id="Composition" x="22" y="277" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Composition</text>
+      <text id="100% extra-fine merino wool" x="867.67" y="277" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">100% extra-fine merino wool</text>
+      <text id="Weight" x="22" y="314" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Weight</text>
+      <text id="19.5 micron, 12gg" x="939.81" y="314" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">19.5 micron, 12gg</text>
+      <text id="Care" x="22" y="351" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Care</text>
+      <text id="Hand wash cold, dry flat" x="895.75" y="351" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Hand wash cold, dry flat</text>
+      <text id="Origin" x="22" y="388" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Origin</text>
+      <text id="Made in Scotland" x="939.16" y="388" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Made in Scotland</text>
+      <text id="Delivery" x="22" y="232.25" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="500">Delivery</text>
+      <text id="Standard delivery is free on orders over…" x="22" y="286.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Standard delivery is free on orders over £50 and arrives in 2–4 working days. Next-day is £6.95 if you order before 2pm.</text>
+      <rect id="container 4" x="22" y="311" width="1028" height="111" fill="none" stroke="rgba(220, 222, 225, 0.4)" stroke-width="1" />
+      <text id="Standard" x="22" y="334" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Standard</text>
+      <text id="2–4 working days · free over £50" x="844.05" y="334" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">2–4 working days · free over £50</text>
+      <text id="Next day" x="22" y="371" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Next day</text>
+      <text id="Order before 2pm · £6.95" x="889.81" y="371" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Order before 2pm · £6.95</text>
+      <text id="International" x="22" y="408" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">International</text>
+      <text id="5–10 working days · from £12" x="866.8" y="408" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">5–10 working days · from £12</text>
+      <text id="Returns" x="22" y="289.25" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="500">Returns</text>
+      <text id="Thirty days from delivery, free, in any …" x="22" y="343.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Thirty days from delivery, free, in any condition you would accept yourself. Print the label from your order page or hand it to any collection point.</text>
+      <text id="Sale items included — we have never unde…" x="22" y="378" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Sale items included — we have never understood shops that exclude them.</text>
+  </g>
+  <text id="Rating Distribution Summary label" x="64" y="2479.25" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Rating Distribution Summary</text>
+  <text id="product-review-summary id" x="64" y="2493.25" font-family="ui-monospace, monospace" font-size="12" fill="#737373">product-review-summary</text>
+  <g id="Rating Distribution Summary" transform="translate(64, 2511.25)">
+    <rect id="container" x="0" y="0" width="1088" height="176" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="section" x="1" y="1" width="1086" height="174" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="4.5" x="26" y="62" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="800" letter-spacing="-0.9">4.5</text>
+      <text id="/5" x="78.73" y="60" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="500" letter-spacing="-0.9">/5</text>
+      <text id="218 reviews" x="26" y="112" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">218 reviews</text>
+      <text id="94% would recommend" x="26" y="136" fill="#009966" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">94% would recommend</text>
+      <text id="5 ★" x="216.8" y="40" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">5 ★</text>
+      <rect id="container 2" x="268.8" y="32" width="741.2" height="8" rx="4" fill="#f3f2ee" />
+      <rect id="container 3" x="268.8" y="32" width="503.19" height="8" rx="4" fill="#ffb900" />
+      <text id="148" x="1022" y="40" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">148</text>
+      <text id="4 ★" x="216.8" y="66" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">4 ★</text>
+      <rect id="container 4" x="268.8" y="58" width="741.2" height="8" rx="4" fill="#f3f2ee" />
+      <rect id="container 5" x="268.8" y="58" width="163.19" height="8" rx="4" fill="#ffb900" />
+      <text id="48" x="1022" y="66" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">48</text>
+      <text id="3 ★" x="216.8" y="92" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">3 ★</text>
+      <rect id="container 6" x="268.8" y="84" width="741.2" height="8" rx="4" fill="#f3f2ee" />
+      <rect id="container 7" x="268.8" y="84" width="47.59" height="8" rx="4" fill="#ffb900" />
+      <text id="14" x="1022" y="92" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">14</text>
+      <text id="2 ★" x="216.8" y="118" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">2 ★</text>
+      <rect id="container 8" x="268.8" y="110" width="741.2" height="8" rx="4" fill="#f3f2ee" />
+      <rect id="container 9" x="268.8" y="110" width="17" height="8" rx="4" fill="#ffb900" />
+      <text id="5" x="1022" y="118" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">5</text>
+      <text id="1 ★" x="216.8" y="144" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">1 ★</text>
+      <rect id="container 10" x="268.8" y="136" width="741.2" height="8" rx="4" fill="#f3f2ee" />
+      <rect id="container 11" x="268.8" y="136" width="10.19" height="8" rx="4" fill="#ffb900" />
+      <text id="3" x="1022" y="144" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">3</text>
+  </g>
+  <text id="Size Guide label" x="64" y="2803.25" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Size Guide</text>
+  <text id="product-size-guide id" x="64" y="2817.25" font-family="ui-monospace, monospace" font-size="12" fill="#737373">product-size-guide</text>
+  <g id="Size Guide" transform="translate(64, 2835.25)">
+    <rect id="container" x="0" y="0" width="1088" height="706.78" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="184" y="65" width="720" height="576.78" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="Size guide — Heavyweight Oxford Shirt" x="209" y="106" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600">Size guide — Heavyweight Oxford Shirt</text>
+      <text id="Measurements are of the body, not the ga…" x="209" y="130" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Measurements are of the body, not the garment.</text>
+      <rect id="container 3" x="708.08" y="90" width="170.92" height="34" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <rect id="container 4" x="711.08" y="93" width="100.45" height="28" rx="10" fill="#007f34" />
+      <text id="Centimetres" x="711.08" y="107" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Centimetres</text>
+      <text id="Inches" x="811.53" y="107" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Inches</text>
+      <rect id="paragraph" x="209" y="150" width="331" height="58" rx="16" fill="rgba(241, 241, 237, 0.502)" stroke="#dbdee1" stroke-width="1" />
+      <text id="The model is 1.78m and wears a medium." x="209" y="164" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">The model is 1.78m and wears a medium.</text>
+      <rect id="paragraph 2" x="548" y="150" width="331" height="58" rx="16" fill="rgba(241, 241, 237, 0.502)" stroke="#dbdee1" stroke-width="1" />
+      <text id="9 in 10 buyers kept their usual size. Th…" x="561" y="173" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">9 in 10 buyers kept their usual size. The 1 in 10</text>
+      <text id="who exchanged went up, not down." x="561" y="193" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">who exchanged went up, not down.</text>
+      <rect id="container 5" x="209" y="228" width="109.72" height="79.88" fill="#ffffff" />
+      <text id="Size" x="263.86" y="240" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500" text-anchor="middle">Size</text>
+      <text id="Chest (cm)" x="411.76" y="248" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500" text-anchor="middle">Chest (cm)</text>
+      <text id="Around the fullest part, under" x="411.76" y="265" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11" text-anchor="middle">Around the fullest part, under</text>
+      <text id="the arms, tape level and not" x="411.75" y="280.13" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11" text-anchor="middle">the arms, tape level and not</text>
+      <text id="pulled tight." x="411.76" y="295.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11" text-anchor="middle">pulled tight.</text>
+      <text id="Waist (cm)" x="598.42" y="248" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500" text-anchor="middle">Waist (cm)</text>
+      <text id="Around the narrowest part," x="598.42" y="265" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11" text-anchor="middle">Around the narrowest part,</text>
+      <text id="usually just above the navel." x="598.42" y="280.13" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11" text-anchor="middle">usually just above the navel.</text>
+      <text id="Sleeve (cm)" x="785.52" y="248" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500" text-anchor="middle">Sleeve (cm)</text>
+      <text id="From the centre back of the neck," x="785.52" y="265" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11" text-anchor="middle">From the centre back of the neck,</text>
+      <text id="over the shoulder, to the wrist." x="785.52" y="280.13" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11" text-anchor="middle">over the shoulder, to the wrist.</text>
+      <rect id="container 6" x="209" y="308.38" width="109.72" height="40.5" fill="#ffffff" />
+      <text id="XS" x="263.86" y="322.38" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">XS</text>
+      <text id="81–86" x="318.72" y="322.38" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">81–86</text>
+      <text id="66–71" x="504.8" y="322.38" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">66–71</text>
+      <text id="61" x="692.05" y="322.38" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">61</text>
+      <rect id="container 7" x="209" y="348.88" width="109.72" height="41" fill="#ffffff" />
+      <text id="S" x="263.86" y="362.88" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">S</text>
+      <text id="86–91" x="318.72" y="362.88" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">86–91</text>
+      <text id="71–76" x="504.8" y="362.88" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">71–76</text>
+      <text id="63" x="692.05" y="362.88" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">63</text>
+      <rect id="container 8" x="209" y="389.88" width="670" height="72.41" fill="rgba(223, 239, 229, 0.502)" />
+      <rect id="container 9" x="209" y="389.88" width="109.72" height="72.41" fill="rgba(223, 239, 229, 0.502)" />
+      <text id="M" x="263.86" y="403.88" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">M</text>
+      <text id="worn by the" x="263.86" y="431.38" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11" text-anchor="middle">worn by the</text>
+      <text id="model" x="263.85" y="447.08" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11" text-anchor="middle">model</text>
+      <text id="96–101" x="318.72" y="403.88" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">96–101</text>
+      <text id="81–86 2" x="504.8" y="403.88" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">81–86</text>
+      <text id="64" x="692.05" y="403.88" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">64</text>
+      <rect id="container 10" x="209" y="462.28" width="109.72" height="41" fill="#ffffff" />
+      <text id="L" x="263.86" y="476.28" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">L</text>
+      <text id="106–111" x="318.72" y="476.28" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">106–111</text>
+      <text id="91–96" x="504.8" y="476.28" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">91–96</text>
+      <text id="66" x="692.05" y="476.28" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">66</text>
+      <rect id="container 11" x="209" y="503.28" width="109.72" height="41" fill="#ffffff" />
+      <text id="XL" x="263.86" y="517.28" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">XL</text>
+      <text id="116–121" x="318.72" y="517.28" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">116–121</text>
+      <text id="101–106" x="504.8" y="517.28" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">101–106</text>
+      <text id="67" x="692.05" y="517.28" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">67</text>
+      <rect id="container 12" x="209" y="544.28" width="109.72" height="40.5" fill="#ffffff" />
+      <text id="XXL" x="263.86" y="558.28" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">XXL</text>
+      <text id="126–131" x="318.72" y="558.28" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">126–131</text>
+      <text id="111–116" x="504.8" y="558.28" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">111–116</text>
+      <text id="69" x="692.05" y="558.28" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">69</text>
+      <text id="Between two sizes on chest and waist? Th…" x="209" y="612.78" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Between two sizes on chest and waist? This shirt is cut straight, so take the larger — that is what the exchanges above did.</text>
+  </g>
+  <text id="Product Spec Split label" x="64" y="3658.0299999999997" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Product Spec Split</text>
+  <text id="product-spec-split id" x="64" y="3672.0299999999997" font-family="ui-monospace, monospace" font-size="12" fill="#737373">product-spec-split</text>
+  <g id="Product Spec Split" transform="translate(64, 3690.0299999999997)">
+    <rect id="container" x="0" y="0" width="1088" height="638" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="section" x="1" y="1" width="1086" height="636" fill="#fdfcf8" />
+      <text id="Specification" x="25" y="111" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Specification</text>
+      <text id="The numbers that decide it" x="25" y="161" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="600" letter-spacing="-0.9">The numbers that decide it</text>
+      <text id="A forty-row spec table is a place to hid…" x="25" y="198" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">A forty-row spec table is a place to hide the three figures someone is</text>
+      <text id="actually comparing. These are pulled out…" x="25" y="222" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">actually comparing. These are pulled out; the full table is still below</text>
+      <text id="for the person who wants it." x="25" y="246" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">for the person who wants it.</text>
+      <text id="Weight" x="57" y="299" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Weight</text>
+      <text id="1.24 kg with the battery, which is the o…" x="57" y="321" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">1.24 kg with the battery, which is the only way anyone carries it.</text>
+      <text id="Battery" x="57" y="357" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Battery</text>
+      <text id="18 hours of mixed use, measured at 150 n…" x="57" y="379" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">18 hours of mixed use, measured at 150 nits rather than at minimum</text>
+      <text id="brightness." x="57" y="399" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">brightness.</text>
+      <text id="Ports" x="57" y="435" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Ports</text>
+      <text id="Two USB-C, one HDMI, one headphone. No d…" x="57" y="457" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Two USB-C, one HDMI, one headphone. No dongle in the box and none</text>
+      <text id="needed." x="57" y="477" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">needed.</text>
+      <text id="Repairability" x="57" y="513" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Repairability</text>
+      <text id="Battery and SSD are user-replaceable. Pa…" x="57" y="535" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Battery and SSD are user-replaceable. Parts and the manual are public.</text>
+      <rect id="container 2" x="568" y="176" width="495" height="286" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <rect id="container 3" x="593" y="201" width="148.33" height="12" rx="4" fill="rgba(0, 126, 53, 0.302)" />
+      <rect id="container 4" x="593" y="225" width="445" height="96" rx="12" fill="#f3f2ee" />
+      <rect id="container 5" x="593" y="333" width="140.33" height="56" rx="12" fill="#f3f2ee" />
+      <rect id="container 6" x="745.33" y="333" width="140.33" height="56" rx="12" fill="#f3f2ee" />
+      <rect id="container 7" x="897.66" y="333" width="140.33" height="56" rx="12" fill="#f3f2ee" />
+      <rect id="container 8" x="593" y="401" width="296.66" height="12" rx="4" fill="#f3f2ee" />
+      <rect id="container 9" x="593" y="425" width="222.5" height="12" rx="4" fill="#f3f2ee" />
+  </g>
+  <text id="Back In Stock Form label" x="64" y="4444.03" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Back In Stock Form</text>
+  <text id="back-in-stock-form id" x="64" y="4458.03" font-family="ui-monospace, monospace" font-size="12" fill="#737373">back-in-stock-form</text>
+  <g id="Back In Stock Form" transform="translate(64, 4476.03)">
+    <rect id="container" x="0" y="0" width="1088" height="604" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="section" x="1" y="1" width="1086" height="602" fill="#fdfcf8" />
+      <rect id="container 2" x="320" y="65" width="448" height="474" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="Tell me when it is back" x="353" y="118" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="600" letter-spacing="-0.5">Tell me when it is back</text>
+      <text id="A sold-out product page with a greyed-ou…" x="353" y="148" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">A sold-out product page with a greyed-out button is a dead</text>
+      <text id="end and a lost address. One field turns …" x="353" y="168" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">end and a lost address. One field turns it into the only useful</text>
+      <text id="thing left on the page." x="353" y="188" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">thing left on the page.</text>
+      <text id="Email" x="353" y="232" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Email</text>
+      <rect id="field" x="353" y="244" width="382" height="38" rx="10" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="One message when it restocks. This is no…" x="353" y="298" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">One message when it restocks. This is not a reservation — stock is first</text>
+      <text id="come." x="353" y="314" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">come.</text>
+      <text id="Size" x="353" y="348" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Size</text>
+      <rect id="field 2" x="353" y="360" width="382" height="38" rx="10" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Only that size triggers the alert. Leave…" x="353" y="414" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Only that size triggers the alert. Leave blank for any.</text>
+      <rect id="button" x="353" y="434" width="382" height="36" rx="10" fill="#007f34" />
+      <text id="Notify me" x="544" y="448" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Notify me</text>
+  </g>
+</svg>

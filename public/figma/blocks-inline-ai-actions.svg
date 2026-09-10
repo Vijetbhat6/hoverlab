@@ -1,0 +1,164 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1216" height="3283" viewBox="0 0 1216 3283" id="Hoverlab — Inline AI Actions">
+  <!--
+    Hoverlab — Inline AI Actions. 6 sections, traced from the
+    rendered catalog. Drag this file onto a Figma canvas.
+
+    These are frames, not components: named, editable layers with real
+    geometry, colour and type. There are no variants, no auto-layout,
+    and no hover or motion — none of those exist in a static frame.
+
+    Every section here is free to copy as code at https://hoverlab.dev/blocks
+  -->
+  <rect id="Background" x="0" y="0" width="1216" height="3283" fill="#ffffff" />
+  <text id="Selection Action Toolbar label" x="64" y="84" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Selection Action Toolbar</text>
+  <text id="selection-ai-toolbar id" x="64" y="98" font-family="ui-monospace, monospace" font-size="12" fill="#737373">selection-ai-toolbar</text>
+  <g id="Selection Action Toolbar" transform="translate(64, 116)">
+    <rect id="container" x="0" y="0" width="1088" height="312" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="232" y="25" width="624" height="230" rx="16" fill="#ffffff" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="should start ninety days out, not thirty…" x="418.13" y="108" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">should start ninety days out, not thirty. By the time a customer is</text>
+      <text id="thirty days from renewal they have alrea…" x="257" y="136" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">thirty days from renewal they have already formed a view, and the only lever left is discount.</text>
+      <text id="Teams that open the conversation at nine…" x="257" y="164" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">Teams that open the conversation at ninety days spend it on scope instead of price, and</text>
+      <text id="close at a materially higher rate — the …" x="257" y="192" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">close at a materially higher rate — the difference in our own book was eleven points last</text>
+      <text id="year." x="257" y="220" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">year.</text>
+      <rect id="container 3" x="257" y="94" width="161.13" height="19" rx="4" fill="rgba(0, 125, 50, 0.2)" />
+      <text id="The renewal conversation" x="257" y="108" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">The renewal conversation</text>
+      <rect id="toolbar" x="134.3" y="49" width="457.41" height="38" rx="16" fill="#ffffff" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Explain" x="178.8" y="66" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500" text-anchor="middle">Explain</text>
+      <text id="Improve" x="262.91" y="66" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500" text-anchor="middle">Improve</text>
+      <text id="Shorten" x="349.09" y="66" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500" text-anchor="middle">Shorten</text>
+      <text id="Tone" x="425.66" y="66" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500" text-anchor="middle">Tone</text>
+      <text id="Grammar" x="506.18" y="66" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500" text-anchor="middle">Grammar</text>
+      <text id="Select any text above to raise the toolb…" x="232" y="279" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Select any text above to raise the toolbar. Shift-Arrow works too.</text>
+  </g>
+  <text id="Ghost Text Completion label" x="64" y="544" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Ghost Text Completion</text>
+  <text id="ai-inline-suggestion id" x="64" y="558" font-family="ui-monospace, monospace" font-size="12" fill="#737373">ai-inline-suggestion</text>
+  <g id="Ghost Text Completion" transform="translate(64, 576)">
+    <rect id="container" x="0" y="0" width="1088" height="229" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Reply" x="280" y="39" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Reply</text>
+      <rect id="container 2" x="280" y="53" width="528" height="123" rx="16" fill="#ffffff" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Thanks for flagging" x="281" y="68" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Thanks for flagging</text>
+      <text id="Keep typing — completions appear after a…" x="280" y="196" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Keep typing — completions appear after a short pause.</text>
+  </g>
+  <text id="Agent-Adjusted Inspector label" x="64" y="921" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Agent-Adjusted Inspector</text>
+  <text id="ai-inspector-panel id" x="64" y="935" font-family="ui-monospace, monospace" font-size="12" fill="#737373">ai-inspector-panel</text>
+  <g id="Agent-Adjusted Inspector" transform="translate(64, 953)">
+    <rect id="container" x="0" y="0" width="1088" height="508" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="184" y="25" width="412" height="458" rx="16" fill="rgba(242, 238, 235, 0.302)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 3" x="230" y="154" width="320" height="200" rx="12" fill="#ffffff" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 4" x="251" y="177" width="78.67" height="24.5" rx="12.25" fill="rgba(98, 98, 245, 0.102)" />
+      <text id="Seasonal" x="251" y="188" fill="#6366f1" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="700" letter-spacing="0.28">Seasonal</text>
+      <text id="Burnt honey &amp; sea salt" x="251" y="231.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="600">Burnt honey &amp; sea salt</text>
+      <text id="Slow-churned with wildflower honey, fini…" x="251" y="255" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Slow-churned with wildflower honey, finished with</text>
+      <text id="flaked salt." x="251" y="274.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">flaked salt.</text>
+      <rect id="button" x="251" y="297" width="278" height="36" rx="8.4" fill="#6366f1" />
+      <text id="Add to case" x="390" y="311" fill="#ffffff" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Add to case</text>
+      <rect id="container 5" x="616" y="25" width="288" height="458" rx="16" fill="#ffffff" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Flavour card" x="657" y="54" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Flavour card</text>
+      <text id="Reset" x="858.73" y="50" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" text-anchor="middle">Reset</text>
+      <text id="Corner radius" x="633" y="105.25" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Corner radius</text>
+      <rect id="container 6" x="714.44" y="91.75" width="82.75" height="19" rx="9.5" fill="rgba(0, 128, 49, 0.102)" />
+      <text id="set by agent" x="714.44" y="101.75" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="10" font-weight="700" letter-spacing="0.25">set by agent</text>
+      <text id="Revert" x="859.7" y="102" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11" text-anchor="middle">Revert</text>
+      <text id="12px" x="847" y="129.5" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">12px</text>
+      <text id="Padding" x="633" y="161.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Padding</text>
+      <text id="20px" x="847" y="183.5" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">20px</text>
+      <text id="Accent" x="633" y="217.75" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Accent</text>
+      <rect id="container 7" x="678.06" y="204.25" width="82.75" height="19" rx="9.5" fill="rgba(0, 128, 49, 0.102)" />
+      <text id="set by agent 2" x="678.06" y="214.25" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="10" font-weight="700" letter-spacing="0.25">set by agent</text>
+      <text id="Revert 2" x="859.7" y="214.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11" text-anchor="middle">Revert</text>
+      <rect id="field" x="633" y="230" width="36" height="28" rx="4" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="field 2" x="677" y="231" width="210" height="26" rx="12" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Title weight" x="633" y="286" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Title weight</text>
+      <rect id="field 3" x="633" y="296" width="254" height="32" rx="12" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Shadow" x="633" y="358.25" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Shadow</text>
+      <rect id="container 8" x="684.27" y="344.75" width="82.75" height="19" rx="9.5" fill="rgba(0, 128, 49, 0.102)" />
+      <text id="set by agent 3" x="684.27" y="354.75" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="10" font-weight="700" letter-spacing="0.25">set by agent</text>
+      <text id="Revert 3" x="859.7" y="355" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11" text-anchor="middle">Revert</text>
+      <text id="On" x="633" y="382.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12">On</text>
+      <rect id="container 9" x="617" y="402.5" width="286" height="79.5" fill="rgba(242, 238, 235, 0.302)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="field 4" x="629" y="415.5" width="195.06" height="30" rx="12" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="button 2" x="832.06" y="415.5" width="58.94" height="30" rx="12" fill="#007f34" />
+      <text id="Adjust" x="861.53" y="427.5" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600" text-anchor="middle">Adjust</text>
+      <text id="Agent adjusted 3 properties." x="629" y="464.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11">Agent adjusted 3 properties.</text>
+  </g>
+  <text id="Unprompted Insight Cards label" x="64" y="1577" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Unprompted Insight Cards</text>
+  <text id="ai-insight-cards id" x="64" y="1591" font-family="ui-monospace, monospace" font-size="12" fill="#737373">ai-insight-cards</text>
+  <g id="Unprompted Insight Cards" transform="translate(64, 1609)">
+    <rect id="container" x="0" y="0" width="1088" height="362.5" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Noticed while working" x="302" y="37" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="700" letter-spacing="0.6">Noticed while working</text>
+      <text id="3 findings" x="735.98" y="37" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">3 findings</text>
+      <rect id="article" x="280" y="53" width="528" height="284.5" rx="16" fill="#ffffff" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Churn in the under-20-seat band is accel…" x="301" y="84" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Churn in the under-20-seat band is accelerating</text>
+      <text id="Up 4.7 points over three months, against…" x="301" y="115" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Up 4.7 points over three months, against 0.3 in every other band. Concentrated in accounts</text>
+      <text id="that never connected a second data sourc…" x="301" y="134.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">that never connected a second data source.</text>
+      <rect id="container 2" x="301" y="157" width="486" height="72.5" rx="16" fill="rgba(242, 238, 235, 0.302)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Monthly churn, &lt;20 seats" x="318" y="181" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11" letter-spacing="0.55">Monthly churn, &lt;20 seats</text>
+      <text id="+4.7 pts" x="318" y="208.5" fill="#ec003f" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700">+4.7 pts</text>
+      <rect id="button" x="301" y="241.5" width="231.69" height="30" rx="15" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Show the 38 highest-risk accounts" x="416.84" y="253.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500" text-anchor="middle">Show the 38 highest-risk accounts</text>
+      <rect id="container 3" x="281" y="287.5" width="526" height="49" fill="rgba(242, 238, 235, 0.302)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="1 of 3" x="301" y="316.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">1 of 3</text>
+      <rect id="button 2" x="727" y="298.5" width="28" height="28" rx="12" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" opacity="0.4" />
+      <rect id="button 3" x="759" y="298.5" width="28" height="28" rx="12" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+  </g>
+  <text id="Editor Slash Menu label" x="64" y="2087.5" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Editor Slash Menu</text>
+  <text id="ai-slash-menu id" x="64" y="2101.5" font-family="ui-monospace, monospace" font-size="12" fill="#737373">ai-slash-menu</text>
+  <g id="Editor Slash Menu" transform="translate(64, 2119.5)">
+    <rect id="container" x="0" y="0" width="1088" height="408.25" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="232" y="65" width="624" height="198.25" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="Release notes — draft" x="253" y="100" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Release notes — draft</text>
+      <text id="Type for actions" x="730.66" y="99.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Type for actions</text>
+      <rect id="container 3" x="758.72" y="87.5" width="17.2" height="18" rx="4" fill="#f3f2ee" stroke="#dbdee1" stroke-width="1" />
+      <text id="/" x="758.72" y="99.5" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">/</text>
+      <rect id="combobox" x="253" y="118" width="582" height="90.25" rx="16" fill="#fdfcf8" stroke="#8d8f92" stroke-width="1" />
+      <text id="Our support team replies to every ticket…" x="253" y="132" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Our support team replies to every ticket. /</text>
+      <rect id="listbox" x="253" y="218.25" width="582" height="192" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <rect id="option" x="258" y="223.25" width="572" height="52" rx="12" fill="#e0f0e7" />
+      <rect id="container 4" x="268" y="235.25" width="28" height="28" rx="12" fill="#f3f2ee" />
+      <text id="Rewrite" x="308" y="245.25" fill="#13161a" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Rewrite</text>
+      <text id="this paragraph" x="308" y="263.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">this paragraph</text>
+      <rect id="container 5" x="268" y="287.25" width="28" height="28" rx="12" fill="#f3f2ee" />
+      <text id="Summarise" x="308" y="297.25" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Summarise</text>
+      <text id="the whole document" x="308" y="315.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">the whole document</text>
+      <rect id="container 6" x="268" y="339.25" width="28" height="28" rx="12" fill="#f3f2ee" />
+      <text id="Continue writing" x="308" y="349.25" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Continue writing</text>
+      <text id="from the caret" x="308" y="367.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">from the caret</text>
+      <rect id="container 7" x="268" y="391.25" width="28" height="28" rx="12" fill="#f3f2ee" />
+      <text id="Translate" x="308" y="401.25" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Translate</text>
+      <text id="this paragraph into French" x="308" y="419.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">this paragraph into French</text>
+      <rect id="container 8" x="268" y="443.25" width="28" height="28" rx="12" fill="#f3f2ee" />
+      <text id="Turn into a table" x="308" y="453.25" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Turn into a table</text>
+      <text id="the list above" x="308" y="471.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">the list above</text>
+      <rect id="container 9" x="268" y="495.25" width="28" height="28" rx="12" fill="#f3f2ee" />
+      <text id="Draft a brief" x="308" y="505.25" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Draft a brief</text>
+      <text id="a new section below" x="308" y="523.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">a new section below</text>
+      <text id="Escape removes the slash and anything ty…" x="253" y="238.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Escape removes the slash and anything typed after it — it does not leave you to clean up.</text>
+  </g>
+  <text id="Inline AI Action Menu label" x="64" y="2643.75" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Inline AI Action Menu</text>
+  <text id="ai-action-menu id" x="64" y="2657.75" font-family="ui-monospace, monospace" font-size="12" fill="#737373">ai-action-menu</text>
+  <g id="Inline AI Action Menu" transform="translate(64, 2675.75)">
+    <rect id="container" x="0" y="0" width="1088" height="543" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="section" x="1" y="1" width="1086" height="541" fill="#fdfcf8" />
+      <text id="Do something with the selection" x="160" y="89" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="24" font-weight="600" letter-spacing="-0.6">Do something with the selection</text>
+      <text id="Every row says where the result lands. A…" x="160" y="119" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Every row says where the result lands. An AI action that silently replaces the paragraph someone spent ten minutes on is the</text>
+      <text id="fastest way to have the feature turned o…" x="160" y="139" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">fastest way to have the feature turned off.</text>
+      <rect id="container 2" x="160" y="177" width="768" height="301" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <rect id="button" x="161" y="178" width="766" height="74" fill="rgba(242, 242, 237, 0.4)" />
+      <text id="Rewrite for clarity" x="181" y="208" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Rewrite for clarity</text>
+      <text id="Replaces the selection. One undo puts it…" x="181" y="230" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Replaces the selection. One undo puts it back exactly.</text>
+      <rect id="container 3" x="844.91" y="203" width="62.09" height="24" rx="12" fill="#e0f0e7" />
+      <text id="in place" x="844.91" y="215" fill="#13161a" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">in place</text>
+      <text id="Shorten to one sentence" x="181" y="283" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Shorten to one sentence</text>
+      <text id="Replaces the selection. Undo restores th…" x="181" y="305" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Replaces the selection. Undo restores the original wording.</text>
+      <rect id="container 4" x="844.91" y="278" width="62.09" height="24" rx="12" fill="#e0f0e7" />
+      <text id="in place 2" x="844.91" y="290" fill="#13161a" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">in place</text>
+      <text id="Suggest three alternatives" x="181" y="358" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Suggest three alternatives</text>
+      <text id="Opens beside the text. Nothing changes u…" x="181" y="380" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Opens beside the text. Nothing changes until one is picked.</text>
+      <rect id="container 5" x="860.36" y="353" width="46.64" height="24" rx="12" fill="rgba(0, 128, 49, 0.102)" />
+      <text id="draft" x="860.36" y="365" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">draft</text>
+      <text id="Explain this passage" x="181" y="433" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Explain this passage</text>
+      <text id="Read-only. Never touches the document." x="181" y="455" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Read-only. Never touches the document.</text>
+      <rect id="container 6" x="836.09" y="428" width="70.91" height="24" rx="12" fill="rgba(0, 128, 49, 0.102)" />
+      <text id="read only" x="836.09" y="440" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">read only</text>
+  </g>
+</svg>

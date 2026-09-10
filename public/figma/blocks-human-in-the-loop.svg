@@ -1,0 +1,318 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1216" height="6274" viewBox="0 0 1216 6274" id="Hoverlab — Human in the Loop">
+  <!--
+    Hoverlab — Human in the Loop. 8 sections, traced from the
+    rendered catalog. Drag this file onto a Figma canvas.
+
+    These are frames, not components: named, editable layers with real
+    geometry, colour and type. There are no variants, no auto-layout,
+    and no hover or motion — none of those exist in a static frame.
+
+    Every section here is free to copy as code at https://hoverlab.dev/blocks
+  -->
+  <rect id="Background" x="0" y="0" width="1216" height="6274" fill="#ffffff" />
+  <text id="Approval Request with Blast Radius label" x="64" y="84" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Approval Request with Blast Radius</text>
+  <text id="approval-request-card id" x="64" y="98" font-family="ui-monospace, monospace" font-size="12" fill="#737373">approval-request-card</text>
+  <g id="Approval Request with Blast Radius" transform="translate(64, 116)">
+    <rect id="container" x="0" y="0" width="1088" height="682.75" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="section" x="256" y="1" width="576" height="680.75" rx="16" fill="#ffffff" stroke="rgba(252, 152, 0, 0.302)" stroke-width="1" />
+      <rect id="container 2" x="257" y="2" width="574" height="73" fill="rgba(255, 157, 0, 0.051)" />
+      <rect id="container 3" x="277" y="20" width="32" height="32" rx="16" fill="rgba(255, 154, 0, 0.149)" />
+      <text id="Waiting on you" x="321" y="30" fill="#e17100" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="700" letter-spacing="0.6">Waiting on you</text>
+      <text id="Who should receive the retention offer?" x="321" y="52" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600">Who should receive the retention offer?</text>
+      <text id="I scored 214 accounts as at-risk for Q4.…" x="277" y="106" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">I scored 214 accounts as at-risk for Q4. 38 of them cleared the high-confidence</text>
+      <text id="threshold. Sending to the full segment r…" x="277" y="128.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">threshold. Sending to the full segment reaches more real churn but also more</text>
+      <text id="accounts that were never going to leave." x="277" y="151.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">accounts that were never going to leave.</text>
+      <rect id="container 4" x="277" y="179.25" width="534" height="120.5" rx="16" fill="rgba(242, 242, 237, 0.4)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="If you approve" x="294" y="204.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="700" letter-spacing="0.6">If you approve</text>
+      <text id="Sends from retention@acme.com via the pr…" x="294" y="228.25" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12">Sends from retention@acme.com via the production Postmark key</text>
+      <text id="Writes a &quot;save offer sent&quot; activity to e…" x="294" y="253.75" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12">Writes a &quot;save offer sent&quot; activity to each CRM account</text>
+      <text id="Cannot be recalled once dispatched" x="294" y="279.25" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12">Cannot be recalled once dispatched</text>
+      <text id="Choose one" x="277" y="331.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="700" letter-spacing="0.6">Choose one</text>
+      <rect id="container 5" x="277" y="343.75" width="534" height="67.5" rx="16" fill="rgba(0, 118, 59, 0.051)" stroke="#007f34" stroke-width="1" />
+      <text id="Email the 38 accounts flagged high-risk" x="318" y="370.75" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Email the 38 accounts flagged high-risk</text>
+      <text id="Smallest blast radius — the cohort the m…" x="318" y="390.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Smallest blast radius — the cohort the model is most confident about</text>
+      <rect id="container 6" x="277" y="419.25" width="534" height="67.5" rx="16" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Email all 214 accounts in the at-risk se…" x="318" y="446.25" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Email all 214 accounts in the at-risk segment</text>
+      <rect id="container 7" x="606.53" y="433.11" width="105.92" height="18.28" rx="9.14" fill="rgba(255, 29, 88, 0.102)" />
+      <text id="Widest reach" x="606.53" y="443.11" fill="#ec003f" font-family="ui-sans-serif, system-ui" font-size="10" font-weight="700" letter-spacing="0.25">Widest reach</text>
+      <text id="Includes medium-confidence accounts; ~40…" x="318" y="466.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Includes medium-confidence accounts; ~40 are likely false positives</text>
+      <rect id="container 8" x="277" y="494.75" width="534" height="67.5" rx="16" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Draft them for me to review, send nothin…" x="318" y="521.75" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Draft them for me to review, send nothing</text>
+      <text id="No mail leaves today" x="318" y="541.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">No mail leaves today</text>
+      <text id="This sends real email from a production …" x="277" y="594.25" fill="#e17100" font-family="ui-sans-serif, system-ui" font-size="12">This sends real email from a production account.</text>
+      <rect id="container 9" x="257" y="617.75" width="574" height="63" fill="rgba(242, 238, 235, 0.302)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="button" x="277" y="630.75" width="98.98" height="38" rx="16" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Decline" x="326.49" y="644.75" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Decline</text>
+      <rect id="button 2" x="702.88" y="631.75" width="108.13" height="36" rx="16" fill="#007f34" />
+      <text id="Approve" x="756.94" y="645.75" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Approve</text>
+  </g>
+  <text id="Proposed Edits Diff Table label" x="64" y="914.75" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Proposed Edits Diff Table</text>
+  <text id="agent-diff-review id" x="64" y="928.75" font-family="ui-monospace, monospace" font-size="12" fill="#737373">agent-diff-review</text>
+  <g id="Proposed Edits Diff Table" transform="translate(64, 946.75)">
+    <rect id="container" x="0" y="0" width="1088" height="577" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="184" y="25" width="720" height="527" rx="16" fill="#ffffff" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 3" x="205" y="44" width="32" height="32" rx="16" fill="rgba(0, 128, 49, 0.102)" />
+      <text id="Proposed cleanup — 5 records" x="249" y="56" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Proposed cleanup — 5 records</text>
+      <text id="I filled gaps and corrected classificati…" x="249" y="79" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">I filled gaps and corrected classifications from public sources. Row 4 is a guess from billing inactivity; the rest are</text>
+      <text id="verified." x="249" y="98.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">verified.</text>
+      <text id="Record" x="309.13" y="134" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600" letter-spacing="0.6" text-anchor="middle">Record</text>
+      <text id="Field" x="436.33" y="134" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600" letter-spacing="0.6" text-anchor="middle">Field</text>
+      <text id="Change" x="693.2" y="134" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600" letter-spacing="0.6" text-anchor="middle">Change</text>
+      <text id="Northwind Retail" x="229" y="178" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Northwind Retail</text>
+      <text id="Industry" x="389.27" y="176" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Industry</text>
+      <rect id="container 4" x="483.39" y="176" width="42.36" height="20" rx="10" fill="rgba(255, 29, 88, 0.102)" />
+      <text id="Other" x="483.39" y="188" fill="#ec003f" font-family="ui-sans-serif, system-ui" font-size="12">Other</text>
+      <text id="→" x="533.75" y="190" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">→</text>
+      <rect id="container 5" x="553.84" y="176" width="102.7" height="20" rx="10" fill="rgba(0, 186, 118, 0.102)" />
+      <text id="Grocery &amp; FMCG" x="553.84" y="188" fill="#007a55" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Grocery &amp; FMCG</text>
+      <text id="Website and SIC code both say grocery" x="483.39" y="212" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Website and SIC code both say grocery</text>
+      <text id="Vela Logistics" x="229" y="242.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Vela Logistics</text>
+      <text id="Employees" x="389.27" y="240.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Employees</text>
+      <rect id="container 6" x="483.39" y="241" width="49.16" height="20" rx="10" fill="rgba(255, 29, 88, 0.102)" />
+      <text id="50-100" x="483.39" y="253" fill="#ec003f" font-family="ui-sans-serif, system-ui" font-size="12">50-100</text>
+      <text id="→ 2" x="540.55" y="255" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">→</text>
+      <rect id="container 7" x="560.64" y="241" width="30.16" height="20" rx="10" fill="rgba(0, 186, 118, 0.102)" />
+      <text id="210" x="560.64" y="253" fill="#007a55" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">210</text>
+      <text id="LinkedIn headcount, verified against las…" x="483.39" y="277" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">LinkedIn headcount, verified against last filing</text>
+      <text id="Harbour Foods" x="229" y="307.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Harbour Foods</text>
+      <text id="Owner" x="389.27" y="305.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Owner</text>
+      <rect id="container 8" x="483.39" y="306" width="73.44" height="20" rx="10" fill="rgba(255, 29, 88, 0.102)" />
+      <text id="Unassigned" x="483.39" y="318" fill="#ec003f" font-family="ui-sans-serif, system-ui" font-size="12">Unassigned</text>
+      <text id="→ 3" x="564.83" y="320" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">→</text>
+      <rect id="container 9" x="584.92" y="306" width="63.5" height="20" rx="10" fill="rgba(0, 186, 118, 0.102)" />
+      <text id="D. Okafor" x="584.92" y="318" fill="#007a55" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">D. Okafor</text>
+      <text id="Territory rule: EMEA mid-market" x="483.39" y="342" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Territory rule: EMEA mid-market</text>
+      <text id="Pike &amp; Sons" x="229" y="372.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Pike &amp; Sons</text>
+      <text id="Status" x="389.27" y="370.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Status</text>
+      <rect id="container 10" x="483.39" y="371" width="44.28" height="20" rx="10" fill="rgba(255, 29, 88, 0.102)" />
+      <text id="Active" x="483.39" y="383" fill="#ec003f" font-family="ui-sans-serif, system-ui" font-size="12">Active</text>
+      <text id="→ 4" x="535.67" y="385" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">→</text>
+      <rect id="container 11" x="555.77" y="371" width="58.5" height="20" rx="10" fill="rgba(0, 186, 118, 0.102)" />
+      <text id="Churned" x="555.77" y="383" fill="#007a55" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Churned</text>
+      <text id="No invoice in 240 days — low confidence,…" x="483.39" y="407" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">No invoice in 240 days — low confidence, worth checking</text>
+      <text id="Cobalt Interiors" x="229" y="437.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Cobalt Interiors</text>
+      <text id="Industry 2" x="389.27" y="435.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Industry</text>
+      <rect id="container 12" x="483.39" y="436" width="41.09" height="20" rx="10" fill="rgba(255, 29, 88, 0.102)" />
+      <text id="Retail" x="483.39" y="448" fill="#ec003f" font-family="ui-sans-serif, system-ui" font-size="12">Retail</text>
+      <text id="→ 5" x="532.48" y="450" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">→</text>
+      <rect id="container 13" x="552.58" y="436" width="131.2" height="20" rx="10" fill="rgba(0, 186, 118, 0.102)" />
+      <text id="Design &amp; Architecture" x="552.58" y="448" fill="#007a55" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Design &amp; Architecture</text>
+      <text id="Reclassified from site copy" x="483.39" y="472" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Reclassified from site copy</text>
+      <rect id="container 14" x="185" y="488" width="718" height="63" fill="rgba(242, 238, 235, 0.302)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="of 5 will be written" x="205" y="524" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">of 5 will be written</text>
+      <text id="5" x="205" y="524" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">5</text>
+      <rect id="button" x="663.31" y="501" width="109" height="38" rx="16" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Reject all" x="717.81" y="515" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Reject all</text>
+      <rect id="button 2" x="780.31" y="502" width="102.69" height="36" rx="16" fill="#007f34" />
+      <text id="Apply" x="838.77" y="524" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Apply</text>
+      <text id="5 2" x="863.11" y="524" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">5</text>
+  </g>
+  <text id="Recommendation with Confidence Meter label" x="64" y="1639.75" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Recommendation with Confidence Meter</text>
+  <text id="confidence-recommendation id" x="64" y="1653.75" font-family="ui-monospace, monospace" font-size="12" fill="#737373">confidence-recommendation</text>
+  <g id="Recommendation with Confidence Meter" transform="translate(64, 1671.75)">
+    <rect id="container" x="0" y="0" width="1088" height="440" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="section" x="256" y="1" width="576" height="438" rx="16" fill="#ffffff" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="277" y="20" width="32" height="32" rx="16" fill="rgba(0, 128, 49, 0.102)" />
+      <text id="Suggested action" x="321" y="30" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="700" letter-spacing="0.6">Suggested action</text>
+      <text id="Reorder 1,400 units of the winter blend …" x="321" y="52" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600">Reorder 1,400 units of the winter blend now</text>
+      <text id="Demand is tracking 22% above last Octobe…" x="277" y="89" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Demand is tracking 22% above last October and your supplier holds a volume break</text>
+      <text id="at 1,200 units. Ordering today lands sto…" x="277" y="111.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">at 1,200 units. Ordering today lands stock four days before the forecast stockout.</text>
+      <rect id="container 3" x="277" y="135.5" width="534" height="119" rx="16" fill="rgba(242, 242, 237, 0.4)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Moderate confidence" x="294" y="162.5" fill="#e17100" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Moderate confidence</text>
+      <text id="71%" x="768.78" y="162.5" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="14">71%</text>
+      <text id="71% 2" x="294" y="199.69" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16">71%</text>
+      <text id="Based on 3 seasons of sales history. The…" x="316" y="215.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Based on 3 seasons of sales history. The forecast has not seen a promotion like the one</text>
+      <text id="running this month, which is why this is…" x="316" y="235" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">running this month, which is why this is not higher.</text>
+      <text id="Considered and rejected" x="277" y="282.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="700" letter-spacing="0.6">Considered and rejected</text>
+      <text id="Wait for the October close" x="297" y="307.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Wait for the October close</text>
+      <text id="—" x="440.19" y="307.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">—</text>
+      <text id="Safer, but the reorder lead time is 3 we…" x="458.77" y="307.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Safer, but the reorder lead time is 3 weeks — you would stock out</text>
+      <text id="first" x="297" y="327" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">first</text>
+      <text id="Order half now, half in November" x="297" y="352.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Order half now, half in November</text>
+      <text id="— Loses the volume break; unit cost rise…" x="479.19" y="352.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">— Loses the volume break; unit cost rises about 9%</text>
+      <rect id="container 4" x="257" y="375" width="574" height="63" fill="rgba(242, 238, 235, 0.302)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="button" x="277" y="388" width="99.88" height="38" rx="16" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Dismiss" x="326.94" y="402" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Dismiss</text>
+      <rect id="button 2" x="384.88" y="388" width="133.22" height="38" rx="16" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Edit quantity" x="451.48" y="402" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Edit quantity</text>
+      <rect id="button 3" x="715.5" y="388" width="95.5" height="38" rx="16" fill="rgba(0, 128, 49, 0.102)" stroke="rgba(0, 128, 52, 0.4)" stroke-width="1" />
+      <text id="Accept" x="763.25" y="402" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Accept</text>
+  </g>
+  <text id="Agent Permission Scopes label" x="64" y="2227.75" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Agent Permission Scopes</text>
+  <text id="permission-scope-dialog id" x="64" y="2241.75" font-family="ui-monospace, monospace" font-size="12" fill="#737373">permission-scope-dialog</text>
+  <g id="Agent Permission Scopes" transform="translate(64, 2259.75)">
+    <rect id="container" x="0" y="0" width="1088" height="848.75" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="section" x="320" y="25" width="448" height="798.75" rx="16" fill="#ffffff" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="522" y="42" width="44" height="44" rx="16" fill="rgba(0, 128, 49, 0.102)" />
+      <text id="Give Retention agent access" x="544" y="114" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600" text-anchor="middle">Give Retention agent access</text>
+      <text id="It needs to see who is at risk, and — if…" x="544" y="140" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" text-anchor="middle">It needs to see who is at risk, and — if you let it — act on that.</text>
+      <text id="Can see" x="341" y="193.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="700" letter-spacing="0.6">Can see</text>
+      <text id="Read accounts and contacts" x="351" y="223.75" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Read accounts and contacts</text>
+      <rect id="container 3" x="535.42" y="210.61" width="63.06" height="18.28" rx="9.14" fill="#f3f2ee" />
+      <text id="Required" x="535.42" y="220.61" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="10" font-weight="700" letter-spacing="0.25">Required</text>
+      <text id="Names, plan, seat count, renewal date" x="351" y="243.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Names, plan, seat count, renewal date</text>
+      <rect id="container 4" x="701" y="211.75" width="36" height="20" rx="10" fill="#007f34" opacity="0.5" />
+      <rect id="container 5" x="719" y="213.75" width="16" height="16" rx="8" fill="#fdfcf8" />
+      <text id="Read product usage events" x="351" y="285.25" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Read product usage events</text>
+      <text id="Last 90 days, aggregated per account" x="351" y="305.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Last 90 days, aggregated per account</text>
+      <rect id="container 6" x="701" y="273.25" width="36" height="20" rx="10" fill="#007f34" />
+      <rect id="container 7" x="719" y="275.25" width="16" height="16" rx="8" fill="#fdfcf8" />
+      <text id="Read support tickets" x="351" y="346.75" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Read support tickets</text>
+      <text id="Subject and status only — message bodies…" x="351" y="366.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Subject and status only — message bodies stay private</text>
+      <rect id="container 8" x="701" y="334.75" width="36" height="20" rx="10" fill="#007f34" />
+      <rect id="container 9" x="719" y="336.75" width="16" height="16" rx="8" fill="#fdfcf8" />
+      <text id="Can change" x="341" y="414.25" fill="#e17100" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="700" letter-spacing="0.6">Can change</text>
+      <text id="Off by default. These act without asking…" x="341" y="434.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Off by default. These act without asking again.</text>
+      <text id="Write notes on accounts" x="351" y="468.25" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Write notes on accounts</text>
+      <text id="Appends to the activity log; nothing is …" x="351" y="488.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Appends to the activity log; nothing is overwritten</text>
+      <rect id="container 10" x="701" y="456.25" width="36" height="20" rx="10" fill="rgba(86, 89, 96, 0.302)" />
+      <rect id="container 11" x="703" y="458.25" width="16" height="16" rx="8" fill="#fdfcf8" />
+      <text id="Send email on your behalf" x="351" y="529.75" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Send email on your behalf</text>
+      <text id="From retention@acme.com, to customers, w…" x="351" y="550.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">From retention@acme.com, to customers, without a second</text>
+      <text id="prompt" x="351" y="570.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">prompt</text>
+      <rect id="container 12" x="701" y="517.75" width="36" height="20" rx="10" fill="rgba(86, 89, 96, 0.302)" />
+      <rect id="container 13" x="703" y="519.75" width="16" height="16" rx="8" fill="#fdfcf8" />
+      <text id="Expires after" x="341" y="616.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="700" letter-spacing="0.6">Expires after</text>
+      <rect id="container 14" x="341" y="628.75" width="130" height="34" rx="16" fill="rgba(0, 118, 59, 0.051)" stroke="#007f34" stroke-width="1" />
+      <text id="This session" x="341" y="640.75" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">This session</text>
+      <rect id="container 15" x="479" y="628.75" width="130" height="34" rx="16" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="7 days" x="479" y="640.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">7 days</text>
+      <rect id="container 16" x="617" y="628.75" width="130" height="34" rx="16" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="30 days" x="617" y="640.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">30 days</text>
+      <rect id="container 17" x="321" y="677.75" width="446" height="145" fill="rgba(242, 238, 235, 0.302)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="button" x="341" y="694.75" width="406" height="40" rx="16" fill="#007f34" />
+      <text id="Grant" x="500.46" y="718.75" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Grant</text>
+      <text id="3" x="524.02" y="718.75" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">3</text>
+      <text id="permissions" x="569.48" y="718.75" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">permissions</text>
+      <text id="Not now" x="544" y="756.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Not now</text>
+      <text id="Revocable at any time from Settings → Ag…" x="341" y="798.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Revocable at any time from Settings → Agents</text>
+  </g>
+  <text id="Bulk Approval Queue label" x="64" y="3224.5" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Bulk Approval Queue</text>
+  <text id="approval-queue id" x="64" y="3238.5" font-family="ui-monospace, monospace" font-size="12" fill="#737373">approval-queue</text>
+  <g id="Bulk Approval Queue" transform="translate(64, 3256.5)">
+    <rect id="container" x="0" y="0" width="1088" height="670" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="120" y="65" width="848" height="540" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="Waiting for you" x="141" y="98" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600">Waiting for you</text>
+      <text id="6 actions the agent will not take on its…" x="141" y="120" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">6 actions the agent will not take on its own · 2 must be opened individually</text>
+      <text id="Action" x="402.73" y="153" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500" text-anchor="middle">Action</text>
+      <text id="Amount" x="628.45" y="153" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Amount</text>
+      <text id="Deadline" x="731.58" y="153" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Deadline</text>
+      <text id="Refund order 41822" x="185" y="203" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Refund order 41822</text>
+      <text id="Damaged on arrival · photo attached · cu…" x="185" y="223" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Damaged on arrival · photo attached · customer since 2023</text>
+      <text id="£38.00" x="628.45" y="191" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">£38.00</text>
+      <text id="Auto-approves in 3h" x="822.5" y="202" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Auto-approves in 3h</text>
+      <text id="Refund order 41830" x="185" y="266" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Refund order 41830</text>
+      <text id="Never delivered · carrier confirmed loss" x="185" y="286" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Never delivered · carrier confirmed loss</text>
+      <text id="£12.50" x="628.45" y="253.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">£12.50</text>
+      <text id="Auto-approves in 3h 2" x="822.5" y="265" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Auto-approves in 3h</text>
+      <text id="Refund order 41833" x="185" y="329" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Refund order 41833</text>
+      <text id="Duplicate charge · matched to payment in…" x="185" y="349" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Duplicate charge · matched to payment intent pi_3Qk</text>
+      <text id="£64.00" x="628.45" y="316.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">£64.00</text>
+      <text id="Auto-approves in 6h" x="822.5" y="328" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Auto-approves in 6h</text>
+      <text id="Close account for Meridian Foods" x="185" y="392" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Close account for Meridian Foods</text>
+      <text id="Requested by an admin · 41 users · 3 yea…" x="185" y="412" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Requested by an admin · 41 users · 3 years of data</text>
+      <rect id="paragraph" x="185" y="420" width="213.95" height="20" rx="10" fill="rgba(245, 147, 0, 0.102)" />
+      <text id="Deletes data — opens individually" x="185" y="432" fill="#bb4d00" font-family="ui-sans-serif, system-ui" font-size="12">Deletes data — opens individually</text>
+      <text id="—" x="628.45" y="379.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">—</text>
+      <text id="Open" x="901.31" y="392" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Open</text>
+      <text id="Refund order 41840" x="185" y="480" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Refund order 41840</text>
+      <text id="Late delivery · goodwill, within policy" x="185" y="500" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Late delivery · goodwill, within policy</text>
+      <text id="£9.99" x="628.45" y="467.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">£9.99</text>
+      <text id="Auto-approves in 12h" x="816.03" y="479" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Auto-approves in 12h</text>
+      <text id="Issue account credit to Halden Group" x="185" y="543" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Issue account credit to Halden Group</text>
+      <text id="Outage compensation · agent proposed 3 m…" x="185" y="563" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Outage compensation · agent proposed 3 months</text>
+      <rect id="paragraph 2" x="185" y="571" width="254.7" height="20" rx="10" fill="rgba(245, 147, 0, 0.102)" />
+      <text id="Above the bulk limit — opens individuall…" x="185" y="583" fill="#bb4d00" font-family="ui-sans-serif, system-ui" font-size="12">Above the bulk limit — opens individually</text>
+      <text id="£4,200.00" x="628.45" y="530.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">£4,200.00</text>
+      <text id="Open 2" x="901.31" y="543" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Open</text>
+  </g>
+  <text id="Approval Policy List label" x="64" y="4042.5" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Approval Policy List</text>
+  <text id="approval-policy-list id" x="64" y="4056.5" font-family="ui-monospace, monospace" font-size="12" fill="#737373">approval-policy-list</text>
+  <g id="Approval Policy List" transform="translate(64, 4074.5)">
+    <rect id="container" x="0" y="0" width="1088" height="618" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="section" x="1" y="1" width="1086" height="616" fill="#fdfcf8" />
+      <text id="What runs without asking" x="160" y="89" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="24" font-weight="600" letter-spacing="-0.6">What runs without asking</text>
+      <text id="Approval prompts are trusted in proporti…" x="160" y="119" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Approval prompts are trusted in proportion to how predictable they are. Someone who cannot say in advance which actions</text>
+      <text id="will stop and ask learns to approve ever…" x="160" y="139" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">will stop and ask learns to approve everything.</text>
+      <rect id="container 2" x="160" y="177" width="768" height="376" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <rect id="button" x="161" y="178" width="766" height="74" fill="rgba(242, 242, 237, 0.4)" />
+      <text id="Read anything" x="181" y="208" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Read anything</text>
+      <text id="Runs unattended. Every read is logged wi…" x="181" y="230" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Runs unattended. Every read is logged with the query that caused it.</text>
+      <rect id="container 3" x="823.91" y="203" width="83.09" height="24" rx="12" fill="rgba(0, 128, 49, 0.102)" />
+      <text id="unattended" x="823.91" y="215" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">unattended</text>
+      <text id="Draft and edit documents" x="181" y="283" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Draft and edit documents</text>
+      <text id="Runs unattended in a draft state. Publis…" x="181" y="305" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Runs unattended in a draft state. Publishing is a separate action.</text>
+      <rect id="container 4" x="823.91" y="278" width="83.09" height="24" rx="12" fill="rgba(0, 128, 49, 0.102)" />
+      <text id="unattended 2" x="823.91" y="290" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">unattended</text>
+      <text id="Send an external message" x="181" y="358" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Send an external message</text>
+      <text id="Always asks. The recipient and the full …" x="181" y="380" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Always asks. The recipient and the full body are shown before you sign.</text>
+      <rect id="container 5" x="864.08" y="353" width="42.92" height="24" rx="12" fill="#e0f0e7" />
+      <text id="asks" x="864.08" y="365" fill="#13161a" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">asks</text>
+      <text id="Spend money or change a plan" x="181" y="433" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Spend money or change a plan</text>
+      <text id="Always asks, and the approval expires af…" x="181" y="455" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Always asks, and the approval expires after five minutes rather than waiting.</text>
+      <rect id="container 6" x="864.08" y="428" width="42.92" height="24" rx="12" fill="rgba(226, 0, 10, 0.102)" />
+      <text id="asks 2" x="864.08" y="440" fill="#e7000b" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">asks</text>
+      <text id="Delete production data" x="181" y="508" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Delete production data</text>
+      <text id="Blocked outright. There is no approval t…" x="181" y="530" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Blocked outright. There is no approval that turns this on from here.</text>
+      <rect id="container 7" x="844.13" y="503" width="62.88" height="24" rx="12" fill="rgba(226, 0, 10, 0.102)" />
+      <text id="blocked" x="844.13" y="515" fill="#e7000b" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">blocked</text>
+  </g>
+  <text id="Escalation Queue label" x="64" y="4808.5" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Escalation Queue</text>
+  <text id="escalation-queue-list id" x="64" y="4822.5" font-family="ui-monospace, monospace" font-size="12" fill="#737373">escalation-queue-list</text>
+  <g id="Escalation Queue" transform="translate(64, 4840.5)">
+    <rect id="container" x="0" y="0" width="1088" height="543" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="section" x="1" y="1" width="1086" height="541" fill="#fdfcf8" />
+      <text id="Waiting on a person" x="160" y="89" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="24" font-weight="600" letter-spacing="-0.6">Waiting on a person</text>
+      <text id="Sorted by age, not arrival. A queue sort…" x="160" y="119" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Sorted by age, not arrival. A queue sorted newest-first buries the item that has been stuck longest, which is always the one</text>
+      <text id="that turns into the complaint." x="160" y="139" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">that turns into the complaint.</text>
+      <rect id="container 2" x="160" y="177" width="768" height="301" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <rect id="button" x="161" y="178" width="766" height="74" fill="rgba(242, 242, 237, 0.4)" />
+      <text id="Refund over the auto-approve limit" x="181" y="208" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Refund over the auto-approve limit</text>
+      <text id="£840. Two people can sign this and neith…" x="181" y="230" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">£840. Two people can sign this and neither has opened it.</text>
+      <rect id="container 3" x="845.84" y="203" width="61.16" height="24" rx="12" fill="rgba(226, 0, 10, 0.102)" />
+      <text id="4h 20m" x="845.84" y="215" fill="#e7000b" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">4h 20m</text>
+      <text id="Outbound message to a customer" x="181" y="283" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Outbound message to a customer</text>
+      <text id="Drafted by the agent, held because the r…" x="181" y="305" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Drafted by the agent, held because the recipient is outside the workspace.</text>
+      <rect id="container 4" x="864.88" y="278" width="42.13" height="24" rx="12" fill="#e0f0e7" />
+      <text id="51m" x="864.88" y="290" fill="#13161a" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">51m</text>
+      <text id="Schema change on a production table" x="181" y="358" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Schema change on a production table</text>
+      <text id="Additive, reversible, and still not some…" x="181" y="380" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Additive, reversible, and still not something a run should do unattended.</text>
+      <rect id="container 5" x="864.88" y="353" width="42.13" height="24" rx="12" fill="#e0f0e7" />
+      <text id="18m" x="864.88" y="365" fill="#13161a" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">18m</text>
+      <text id="New integration scope request" x="181" y="433" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">New integration scope request</text>
+      <text id="Read-only calendar access. Expires on it…" x="181" y="455" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Read-only calendar access. Expires on its own in two days if nobody acts.</text>
+      <rect id="container 6" x="869.67" y="428" width="37.33" height="24" rx="12" fill="#f3f2ee" />
+      <text id="6m" x="869.67" y="440" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">6m</text>
+  </g>
+  <text id="Human Oversight Split label" x="64" y="5499.5" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Human Oversight Split</text>
+  <text id="human-oversight-split id" x="64" y="5513.5" font-family="ui-monospace, monospace" font-size="12" fill="#737373">human-oversight-split</text>
+  <g id="Human Oversight Split" transform="translate(64, 5531.5)">
+    <rect id="container" x="0" y="0" width="1088" height="678" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="section" x="1" y="1" width="1086" height="676" fill="#fdfcf8" />
+      <text id="Oversight" x="25" y="111" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Oversight</text>
+      <text id="Where the person actually is" x="25" y="161" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="600" letter-spacing="-0.9">Where the person actually is</text>
+      <text id="&quot;A human is in the loop&quot; is a claim with…" x="25" y="198" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">&quot;A human is in the loop&quot; is a claim with no shape. These are the four</text>
+      <text id="points where one really is, and each is …" x="25" y="222" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">points where one really is, and each is a thing the system will not do</text>
+      <text id="without them." x="25" y="246" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">without them.</text>
+      <text id="Before anything leaves" x="57" y="299" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Before anything leaves</text>
+      <text id="External messages and payments stop and …" x="57" y="321" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">External messages and payments stop and wait. The full payload is shown,</text>
+      <text id="not a summary of it." x="57" y="341" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">not a summary of it.</text>
+      <text id="On low confidence" x="57" y="377" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">On low confidence</text>
+      <text id="The run pauses rather than picking the b…" x="57" y="399" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">The run pauses rather than picking the best of four bad options and</text>
+      <text id="presenting it as an answer." x="57" y="419" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">presenting it as an answer.</text>
+      <text id="After the fact, in the log" x="57" y="455" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">After the fact, in the log</text>
+      <text id="Every unattended action is recorded with…" x="57" y="477" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Every unattended action is recorded with its inputs, and the log is</text>
+      <text id="exportable." x="57" y="497" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">exportable.</text>
+      <text id="The stop button" x="57" y="533" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">The stop button</text>
+      <text id="One press halts a run mid-step and rolls…" x="57" y="555" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">One press halts a run mid-step and rolls back anything reversible. It is</text>
+      <text id="always on screen." x="57" y="575" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">always on screen.</text>
+      <rect id="container 2" x="568" y="196" width="495" height="286" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <rect id="container 3" x="593" y="221" width="148.33" height="12" rx="4" fill="rgba(0, 126, 53, 0.302)" />
+      <rect id="container 4" x="593" y="245" width="445" height="96" rx="12" fill="#f3f2ee" />
+      <rect id="container 5" x="593" y="353" width="140.33" height="56" rx="12" fill="#f3f2ee" />
+      <rect id="container 6" x="745.33" y="353" width="140.33" height="56" rx="12" fill="#f3f2ee" />
+      <rect id="container 7" x="897.66" y="353" width="140.33" height="56" rx="12" fill="#f3f2ee" />
+      <rect id="container 8" x="593" y="421" width="296.66" height="12" rx="4" fill="#f3f2ee" />
+      <rect id="container 9" x="593" y="445" width="222.5" height="12" rx="4" fill="#f3f2ee" />
+  </g>
+</svg>

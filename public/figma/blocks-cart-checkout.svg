@@ -1,0 +1,188 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1216" height="4747" viewBox="0 0 1216 4747" id="Hoverlab — Cart &amp; Checkout">
+  <!--
+    Hoverlab — Cart & Checkout. 6 sections, traced from the
+    rendered catalog. Drag this file onto a Figma canvas.
+
+    These are frames, not components: named, editable layers with real
+    geometry, colour and type. There are no variants, no auto-layout,
+    and no hover or motion — none of those exist in a static frame.
+
+    Every section here is free to copy as code at https://hoverlab.dev/blocks
+  -->
+  <rect id="Background" x="0" y="0" width="1216" height="4747" fill="#ffffff" />
+  <text id="Slide-Over Cart Drawer label" x="64" y="84" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Slide-Over Cart Drawer</text>
+  <text id="cart-drawer id" x="64" y="98" font-family="ui-monospace, monospace" font-size="12" fill="#737373">cart-drawer</text>
+  <g id="Slide-Over Cart Drawer" transform="translate(64, 116)">
+    <rect id="container" x="0" y="0" width="1088" height="386" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="button" x="470.41" y="41" width="147.17" height="42" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Open bag" x="543.99" y="55" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Open bag</text>
+      <rect id="container 2" x="581.91" y="52" width="18.67" height="20" rx="9.34" fill="#007f34" />
+      <text id="3" x="591.24" y="64" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600" text-anchor="middle">3</text>
+      <rect id="button 2" x="1" y="1" width="1086" height="384" fill="rgba(0, 0, 0, 0.4)" />
+      <rect id="dialog" x="703" y="1" width="384" height="384" fill="#ffffff" />
+      <text id="Your bag" x="724" y="37" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600" letter-spacing="-0.4">Your bag</text>
+      <text id="(3)" x="793.28" y="38" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" letter-spacing="-0.4">(3)</text>
+      <rect id="container 3" x="724" y="82" width="64" height="80" rx="12" fill="#f3f2ee" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Merino Crew Sweater" x="800" y="96" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Merino Crew Sweater</text>
+      <text id="Stone · M" x="800" y="116" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Stone · M</text>
+      <text id="1 × £89.00" x="800" y="142" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">1 × £89.00</text>
+      <text id="£89.00" x="1024.75" y="96" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">£89.00</text>
+      <rect id="container 4" x="724" y="195" width="64" height="80" rx="12" fill="#f3f2ee" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Cotton Oxford Shirt" x="800" y="209" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Cotton Oxford Shirt</text>
+      <text id="Sky · L" x="800" y="229" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Sky · L</text>
+      <text id="2 × £65.00" x="800" y="255" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">2 × £65.00</text>
+      <text id="£130.00" x="1016.98" y="209" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">£130.00</text>
+      <rect id="container 5" x="704" y="198" width="383" height="187" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Subtotal" x="724" y="235" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Subtotal</text>
+      <text id="£219.00" x="1000" y="233" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700">£219.00</text>
+      <text id="Delivery and taxes calculated at checkou…" x="724" y="257" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Delivery and taxes calculated at checkout.</text>
+      <rect id="link" x="724" y="277" width="343" height="44" rx="16" fill="#007f34" />
+      <text id="Checkout" x="724" y="291" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Checkout</text>
+      <text id="Continue shopping" x="895.5" y="343" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Continue shopping</text>
+  </g>
+  <text id="Editable Cart Lines label" x="64" y="618" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Editable Cart Lines</text>
+  <text id="cart-line-items id" x="64" y="632" font-family="ui-monospace, monospace" font-size="12" fill="#737373">cart-line-items</text>
+  <g id="Editable Cart Lines" transform="translate(64, 650)">
+    <rect id="container" x="0" y="0" width="1088" height="457" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Your bag" x="1" y="19" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700" letter-spacing="-0.45">Your bag</text>
+      <text id="4 items ·" x="981.63" y="21" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">4 items ·</text>
+      <text id="£267.00" x="1037.2" y="21" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">£267.00</text>
+      <rect id="container 2" x="1" y="66" width="80" height="96" rx="16" fill="#f3f2ee" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Merino Crew Sweater" x="97" y="80" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Merino Crew Sweater</text>
+      <text id="Stone · M" x="97" y="100" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Stone · M</text>
+      <text id="£89.00" x="1044.75" y="80" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">£89.00</text>
+      <rect id="container 3" x="97" y="134" width="86" height="28" rx="12" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="1" x="140" y="152" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" text-anchor="middle">1</text>
+      <rect id="container 4" x="1" y="203" width="80" height="96" rx="16" fill="#f3f2ee" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Cotton Oxford Shirt" x="97" y="217" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Cotton Oxford Shirt</text>
+      <text id="Sky · L" x="97" y="237" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Sky · L</text>
+      <text id="£130.00" x="1036.98" y="217" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">£130.00</text>
+      <rect id="container 5" x="97" y="271" width="86" height="28" rx="12" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="2" x="140" y="289" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" text-anchor="middle">2</text>
+      <rect id="container 6" x="1" y="340" width="80" height="96" rx="16" fill="#f3f2ee" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Leather Card Holder" x="97" y="354" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Leather Card Holder</text>
+      <text id="Black" x="97" y="374" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Black</text>
+      <text id="£48.00" x="1044.75" y="354" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">£48.00</text>
+      <rect id="container 7" x="97" y="408" width="86" height="28" rx="12" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="1 2" x="140" y="426" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" text-anchor="middle">1</text>
+  </g>
+  <text id="Checkout Address &amp; Payment label" x="64" y="1223" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Checkout Address &amp; Payment</text>
+  <text id="checkout-form id" x="64" y="1237" font-family="ui-monospace, monospace" font-size="12" fill="#737373">checkout-form</text>
+  <g id="Checkout Address &amp; Payment" transform="translate(64, 1255)">
+    <rect id="container" x="0" y="0" width="1088" height="1135" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Contact" x="1" y="19" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700" letter-spacing="-0.45">Contact</text>
+      <text id="Email" x="1" y="59" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Email</text>
+      <rect id="field" x="1" y="71" width="1086" height="42" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Order confirmation and delivery updates …" x="1" y="131" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Order confirmation and delivery updates go here.</text>
+      <text id="Delivery address" x="1" y="185" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700" letter-spacing="-0.45">Delivery address</text>
+      <text id="First name" x="1" y="225" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">First name</text>
+      <rect id="field 2" x="1" y="237" width="535" height="42" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Last name" x="552" y="225" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Last name</text>
+      <rect id="field 3" x="552" y="237" width="535" height="42" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Country" x="1" y="309" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Country</text>
+      <rect id="field 4" x="1" y="321" width="1086" height="43" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Address" x="1" y="394" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Address</text>
+      <rect id="field 5" x="1" y="406" width="1086" height="42" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Apartment, suite, etc." x="1" y="478" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Apartment, suite, etc.</text>
+      <text id="(optional)" x="142.75" y="478" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">(optional)</text>
+      <rect id="field 6" x="1" y="490" width="1086" height="42" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="City" x="1" y="562" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">City</text>
+      <rect id="field 7" x="1" y="574" width="351.33" height="42" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="County" x="368.33" y="562" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">County</text>
+      <rect id="field 8" x="368.33" y="574" width="351.33" height="42" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Postcode" x="735.66" y="562" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Postcode</text>
+      <rect id="field 9" x="735.66" y="574" width="351.34" height="42" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Phone" x="1" y="646" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Phone</text>
+      <text id="(optional) 2" x="47.31" y="646" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">(optional)</text>
+      <rect id="field 10" x="1" y="658" width="1086" height="42" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="For delivery questions only." x="1" y="718" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">For delivery questions only.</text>
+      <text id="Payment" x="1" y="772" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700" letter-spacing="-0.45">Payment</text>
+      <text id="Encrypted in transit. We never see your …" x="1" y="798" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Encrypted in transit. We never see your full card number.</text>
+      <text id="Card number" x="1" y="832" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Card number</text>
+      <rect id="field 11" x="1" y="844" width="1086" height="42" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Expiry" x="1" y="916" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Expiry</text>
+      <rect id="field 12" x="1" y="928" width="535" height="42" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Security code" x="552" y="916" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Security code</text>
+      <rect id="field 13" x="552" y="928" width="535" height="42" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Name on card" x="1" y="1000" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Name on card</text>
+      <rect id="field 14" x="1" y="1012" width="1086" height="42" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="button" x="1" y="1086" width="1086" height="48" rx="16" fill="#007f34" />
+      <text id="Pay now" x="544" y="1100" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Pay now</text>
+  </g>
+  <text id="Order Summary With Promo label" x="64" y="2506" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Order Summary With Promo</text>
+  <text id="order-summary-panel id" x="64" y="2520" font-family="ui-monospace, monospace" font-size="12" fill="#737373">order-summary-panel</text>
+  <g id="Order Summary With Promo" transform="translate(64, 2538)">
+    <rect id="container" x="0" y="0" width="1088" height="412" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="aside" x="1" y="1" width="1086" height="410" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Order summary" x="26" y="44" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700" letter-spacing="-0.45">Order summary</text>
+      <rect id="field" x="26" y="70" width="960.95" height="38" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="button" x="994.95" y="70" width="67.05" height="38" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Apply" x="1028.48" y="84" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Apply</text>
+      <rect id="container 2" x="26" y="150" width="1036" height="144" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Subtotal" x="26" y="185" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Subtotal</text>
+      <text id="£267.00" x="1013.67" y="185" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">£267.00</text>
+      <text id="Delivery" x="26" y="215" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Delivery</text>
+      <text id="Free" x="1035.03" y="215" fill="#009966" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Free</text>
+      <text id="Includes VAT (20%)" x="26" y="243" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Includes VAT (20%)</text>
+      <text id="£44.50" x="1027.05" y="243" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">£44.50</text>
+      <rect id="container 3" x="26" y="257" width="1036" height="37" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Total" x="26" y="286" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="700">Total</text>
+      <text id="£267.00 2" x="1002.44" y="286" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="700">£267.00</text>
+      <rect id="button 2" x="26" y="314" width="1036" height="44" rx="16" fill="#007f34" />
+      <text id="Checkout" x="544" y="328" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Checkout</text>
+      <text id="Taxes and delivery calculated at checkou…" x="544" y="382" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" text-anchor="middle">Taxes and delivery calculated at checkout for your region.</text>
+  </g>
+  <text id="Express Payment Row label" x="64" y="3066" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Express Payment Row</text>
+  <text id="checkout-express-payment id" x="64" y="3080" font-family="ui-monospace, monospace" font-size="12" fill="#737373">checkout-express-payment</text>
+  <g id="Express Payment Row" transform="translate(64, 3098)">
+    <rect id="container" x="0" y="0" width="1088" height="849" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="344" y="65" width="400" height="719" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="Checkout" x="369" y="108" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="600">Checkout</text>
+      <text id="Total" x="643.48" y="110" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Total</text>
+      <text id="£84.00" x="676.75" y="110" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">£84.00</text>
+      <rect id="button" x="369" y="138" width="111.33" height="44" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Apple Pay" x="424.66" y="152" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Apple Pay</text>
+      <rect id="button 2" x="488.33" y="138" width="111.33" height="44" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Google Pay" x="543.99" y="152" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Google Pay</text>
+      <rect id="button 3" x="607.66" y="138" width="111.34" height="44" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="PayPal" x="663.33" y="152" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">PayPal</text>
+      <text id="or pay by card" x="506.11" y="214" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">or pay by card</text>
+      <text id="Email" x="369" y="284" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Email</text>
+      <rect id="field" x="369" y="296" width="350" height="40" rx="12" fill="#fdfcf8" stroke="#8d8f92" stroke-width="1" />
+      <text id="Full name" x="369" y="366" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Full name</text>
+      <rect id="field 2" x="369" y="378" width="350" height="40" rx="12" fill="#fdfcf8" stroke="#8d8f92" stroke-width="1" />
+      <text id="Address" x="369" y="448" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Address</text>
+      <rect id="field 3" x="369" y="460" width="350" height="40" rx="12" fill="#fdfcf8" stroke="#8d8f92" stroke-width="1" />
+      <text id="City" x="369" y="530" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">City</text>
+      <rect id="field 4" x="369" y="542" width="169" height="40" rx="12" fill="#fdfcf8" stroke="#8d8f92" stroke-width="1" />
+      <text id="Postcode" x="550" y="530" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Postcode</text>
+      <rect id="field 5" x="550" y="542" width="169" height="40" rx="12" fill="#fdfcf8" stroke="#8d8f92" stroke-width="1" />
+      <rect id="button 4" x="369" y="598" width="350" height="44" rx="12" fill="#007f34" />
+      <text id="Pay" x="533.72" y="624" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Pay</text>
+      <text id="£84.00 2" x="568.02" y="624" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">£84.00</text>
+      <text id="Card details go straight to the payment …" x="389" y="670" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Card details go straight to the payment provider. They never</text>
+      <text id="touch this site." x="389" y="686" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">touch this site.</text>
+      <rect id="container 3" x="369" y="710" width="350" height="49" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="Pretend no wallet is available — the sta…" x="410" y="739" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Pretend no wallet is available — the state a real capability</text>
+      <text id="check has to produce, and the one nobody…" x="410" y="755" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">check has to produce, and the one nobody designs.</text>
+  </g>
+  <text id="Gift Options Form label" x="64" y="4063" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Gift Options Form</text>
+  <text id="gift-options-form id" x="64" y="4077" font-family="ui-monospace, monospace" font-size="12" fill="#737373">gift-options-form</text>
+  <g id="Gift Options Form" transform="translate(64, 4095)">
+    <rect id="container" x="0" y="0" width="1088" height="588" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="section" x="1" y="1" width="1086" height="586" fill="#fdfcf8" />
+      <rect id="container 2" x="320" y="65" width="448" height="458" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="Sending this as a gift?" x="353" y="118" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="600" letter-spacing="-0.5">Sending this as a gift?</text>
+      <text id="In the cart rather than at checkout, bec…" x="353" y="148" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">In the cart rather than at checkout, because a gift message</text>
+      <text id="added while someone is entering card det…" x="353" y="168" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">added while someone is entering card details is a step</text>
+      <text id="between them and paying. Here it is part…" x="353" y="188" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">between them and paying. Here it is part of choosing.</text>
+      <text id="Message on the card" x="353" y="232" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Message on the card</text>
+      <rect id="field" x="353" y="244" width="382" height="38" rx="10" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Handwritten and enclosed. Up to 200 char…" x="353" y="298" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Handwritten and enclosed. Up to 200 characters.</text>
+      <text id="From" x="353" y="332" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">From</text>
+      <rect id="field 2" x="353" y="344" width="382" height="38" rx="10" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Signed as written. Leave blank to stay a…" x="353" y="398" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Signed as written. Leave blank to stay anonymous.</text>
+      <rect id="button" x="353" y="418" width="382" height="36" rx="10" fill="#007f34" />
+      <text id="Add gift options" x="544" y="432" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Add gift options</text>
+  </g>
+</svg>

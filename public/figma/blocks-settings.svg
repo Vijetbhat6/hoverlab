@@ -1,0 +1,283 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1216" height="5100" viewBox="0 0 1216 5100" id="Hoverlab — Settings">
+  <!--
+    Hoverlab — Settings. 8 sections, traced from the
+    rendered catalog. Drag this file onto a Figma canvas.
+
+    These are frames, not components: named, editable layers with real
+    geometry, colour and type. There are no variants, no auto-layout,
+    and no hover or motion — none of those exist in a static frame.
+
+    Every section here is free to copy as code at https://hoverlab.dev/blocks
+  -->
+  <rect id="Background" x="0" y="0" width="1216" height="5100" fill="#ffffff" />
+  <text id="Grouped Settings Layout label" x="64" y="84" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Grouped Settings Layout</text>
+  <text id="settings-nav-layout id" x="64" y="98" font-family="ui-monospace, monospace" font-size="12" fill="#737373">settings-nav-layout</text>
+  <g id="Grouped Settings Layout" transform="translate(64, 116)">
+    <rect id="container" x="0" y="0" width="1088" height="496" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Settings" x="56" y="49" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="24" font-weight="700" letter-spacing="-0.6">Settings</text>
+      <text id="Manage your account, your workspace and …" x="56" y="75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Manage your account, your workspace and how you sign in.</text>
+      <text id="Account" x="56" y="125" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="700" letter-spacing="0.6">Account</text>
+      <rect id="button" x="56" y="135" width="208" height="36" rx="16" fill="rgba(0, 128, 49, 0.102)" />
+      <text id="Profile" x="160" y="149" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Profile</text>
+      <text id="Appearance" x="160" y="185" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Appearance</text>
+      <text id="Notifications" x="160" y="221" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Notifications</text>
+      <text id="Workspace" x="56" y="275" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="700" letter-spacing="0.6">Workspace</text>
+      <text id="Members" x="160" y="299" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Members</text>
+      <text id="Billing" x="160" y="335" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Billing</text>
+      <text id="Developer" x="56" y="389" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="700" letter-spacing="0.6">Developer</text>
+      <text id="API keys" x="160" y="413" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">API keys</text>
+      <text id="Security" x="160" y="449" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Security</text>
+      <rect id="container 2" x="296" y="113" width="736" height="98" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Profile 2" x="321" y="154" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600" letter-spacing="-0.4">Profile</text>
+      <text id="The panel for “Profile” goes here. Pass …" x="321" y="180" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">The panel for “Profile” goes here. Pass it as .</text>
+      <rect id="container 3" x="587.27" y="167" width="69.61" height="20" rx="4" fill="#f3f2ee" />
+      <text id="children" x="587.27" y="179" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">children</text>
+  </g>
+  <text id="Profile Form With Save Bar label" x="64" y="728" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Profile Form With Save Bar</text>
+  <text id="settings-profile-form id" x="64" y="742" font-family="ui-monospace, monospace" font-size="12" fill="#737373">settings-profile-form</text>
+  <g id="Profile Form With Save Bar" transform="translate(64, 760)">
+    <rect id="container" x="0" y="0" width="1088" height="447" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="1" y="1" width="1086" height="445" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Profile" x="26" y="34" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600" letter-spacing="-0.4">Profile</text>
+      <text id="This is how you appear to everyone else …" x="26" y="58" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">This is how you appear to everyone else in the workspace.</text>
+      <rect id="container 3" x="26" y="105" width="64" height="64" rx="32" fill="#f3f2ee" />
+      <text id="AL" x="26" y="123" fill="rgba(9, 11, 16, 0.702)" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700">AL</text>
+      <rect id="button" x="106" y="107" width="138.02" height="38" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Upload photo" x="175.01" y="121" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Upload photo</text>
+      <text id="JPG, PNG or GIF. 2 MB maximum." x="106" y="163" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">JPG, PNG or GIF. 2 MB maximum.</text>
+      <text id="Full name" x="26" y="207" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Full name</text>
+      <rect id="field" x="26" y="219" width="508" height="42" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Email" x="554" y="207" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Email</text>
+      <rect id="field 2" x="554" y="219" width="508" height="42" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Changing this sends a confirmation link …" x="554" y="279" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Changing this sends a confirmation link to the new address.</text>
+      <text id="Bio" x="26" y="321" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Bio</text>
+      <text id="58/160" x="1024.97" y="321" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">58/160</text>
+      <rect id="field 3" x="26" y="333" width="1036" height="82" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Working on compilers and the occasional …" x="26" y="347" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">Working on compilers and the occasional analytical engine.</text>
+  </g>
+  <text id="Team Members &amp; Invites label" x="64" y="1323" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Team Members &amp; Invites</text>
+  <text id="settings-team-members id" x="64" y="1337" font-family="ui-monospace, monospace" font-size="12" fill="#737373">settings-team-members</text>
+  <g id="Team Members &amp; Invites" transform="translate(64, 1355)">
+    <rect id="container" x="0" y="0" width="1088" height="342" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="1" y="1" width="1086" height="340" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Members" x="26" y="34" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600" letter-spacing="-0.4">Members</text>
+      <text id="4 of 10 seats used" x="26" y="58" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">4 of 10 seats used</text>
+      <rect id="field" x="679.56" y="22" width="192" height="38" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="field 2" x="879.56" y="21.5" width="91" height="39" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="button" x="978.56" y="23" width="83.44" height="36" rx="16" fill="#007f34" />
+      <text id="Invite" x="1020.28" y="37" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Invite</text>
+      <rect id="container 3" x="26" y="95" width="36" height="36" rx="18" fill="#f3f2ee" />
+      <text id="AL" x="26" y="107" fill="rgba(9, 11, 16, 0.702)" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="700">AL</text>
+      <text id="Ada Lovelace" x="74" y="109" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Ada Lovelace</text>
+      <text id="ada@acme.com" x="74" y="127" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">ada@acme.com</text>
+      <rect id="field 3" x="931" y="95.5" width="91" height="35" rx="12" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" opacity="0.6" />
+      <rect id="container 4" x="26" y="160" width="36" height="36" rx="18" fill="#f3f2ee" />
+      <text id="MS" x="26" y="172" fill="rgba(9, 11, 16, 0.702)" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="700">MS</text>
+      <text id="Marco Silva" x="74" y="174" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Marco Silva</text>
+      <text id="marco@acme.com" x="74" y="192" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">marco@acme.com</text>
+      <rect id="field 4" x="931" y="160.5" width="91" height="35" rx="12" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 5" x="26" y="225" width="36" height="36" rx="18" fill="#f3f2ee" />
+      <text id="PR" x="26" y="237" fill="rgba(9, 11, 16, 0.702)" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="700">PR</text>
+      <text id="Priya Raman" x="74" y="239" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Priya Raman</text>
+      <text id="priya@acme.com" x="74" y="257" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">priya@acme.com</text>
+      <rect id="field 5" x="931" y="225.5" width="91" height="35" rx="12" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 6" x="26" y="290" width="36" height="36" rx="18" fill="rgba(243, 242, 238, 0.6)" />
+      <text id="alex@contractor.dev" x="74" y="312" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">alex@contractor.dev</text>
+      <rect id="container 7" x="211.77" y="298" width="94.88" height="20" rx="10" fill="rgba(255, 154, 0, 0.149)" />
+      <text id="Invite pending" x="211.77" y="310" fill="#e17100" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Invite pending</text>
+      <rect id="field 6" x="931" y="290.5" width="91" height="35" rx="12" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+  </g>
+  <text id="API Key Management label" x="64" y="1813" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">API Key Management</text>
+  <text id="settings-api-keys id" x="64" y="1827" font-family="ui-monospace, monospace" font-size="12" fill="#737373">settings-api-keys</text>
+  <g id="API Key Management" transform="translate(64, 1845)">
+    <rect id="container" x="0" y="0" width="1088" height="277" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="1" y="1" width="1086" height="275" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="API keys" x="26" y="34" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600" letter-spacing="-0.4">API keys</text>
+      <text id="Keys carry full account access. Treat th…" x="26" y="58" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Keys carry full account access. Treat them like passwords.</text>
+      <rect id="button" x="943.58" y="23" width="118.42" height="36" rx="16" fill="#007f34" />
+      <text id="Create key" x="1002.79" y="37" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Create key</text>
+      <rect id="container 3" x="26" y="95" width="36" height="36" rx="12" fill="#f3f2ee" />
+      <text id="Production server" x="74" y="109" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Production server</text>
+      <text id="sk_live_••••••••••••4f2a" x="74" y="127" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">sk_live_••••••••••••4f2a</text>
+      <text id="Created 12 Mar 2026" x="906.16" y="109" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Created 12 Mar 2026</text>
+      <text id="Last used 2 hours ago" x="906.16" y="125" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Last used 2 hours ago</text>
+      <rect id="container 4" x="26" y="160" width="36" height="36" rx="12" fill="#f3f2ee" />
+      <text id="CI pipeline" x="74" y="174" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">CI pipeline</text>
+      <text id="sk_live_••••••••••••9c1e" x="74" y="192" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">sk_live_••••••••••••9c1e</text>
+      <text id="Created 3 Jun 2026" x="918.84" y="174" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Created 3 Jun 2026</text>
+      <text id="Last used Yesterday" x="918.84" y="190" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Last used Yesterday</text>
+      <rect id="container 5" x="26" y="225" width="36" height="36" rx="12" fill="#f3f2ee" />
+      <text id="Local development" x="74" y="239" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Local development</text>
+      <text id="sk_test_••••••••••••b7d0" x="74" y="257" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">sk_test_••••••••••••b7d0</text>
+      <text id="Created 28 Jul 2026" x="917.94" y="239" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Created 28 Jul 2026</text>
+      <text id="Never used" x="917.94" y="255" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Never used</text>
+  </g>
+  <text id="Danger Zone label" x="64" y="2238" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Danger Zone</text>
+  <text id="settings-danger-zone id" x="64" y="2252" font-family="ui-monospace, monospace" font-size="12" fill="#737373">settings-danger-zone</text>
+  <g id="Danger Zone" transform="translate(64, 2270)">
+    <rect id="container" x="0" y="0" width="1088" height="313" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="section" x="1" y="1" width="1086" height="311" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(230, 0, 10, 0.4)" stroke-width="1" />
+      <rect id="container 2" x="2" y="2" width="1084" height="79" fill="rgba(235, 0, 20, 0.051)" />
+      <text id="Danger zone" x="50" y="34" fill="#e7000b" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600" letter-spacing="-0.4">Danger zone</text>
+      <text id="These actions affect everyone in the wor…" x="50" y="58" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">These actions affect everyone in the workspace.</text>
+      <text id="Transfer ownership" x="26" y="111" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Transfer ownership</text>
+      <text id="Hand this workspace to another member. Y…" x="26" y="135" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Hand this workspace to another member. You keep admin access, but billing and deletion move to them.</text>
+      <rect id="button" x="981.27" y="97" width="80.73" height="38" rx="16" fill="none" stroke="rgba(231, 0, 10, 0.502)" stroke-width="1" />
+      <text id="Transfer" x="1021.63" y="111" fill="#e7000b" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Transfer</text>
+      <text id="Archive workspace" x="26" y="188" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Archive workspace</text>
+      <text id="Make everything read-only and stop billi…" x="26" y="212" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Make everything read-only and stop billing at the end of the period. You can un-archive at any time.</text>
+      <rect id="button 2" x="984.72" y="174" width="77.28" height="38" rx="16" fill="none" stroke="rgba(231, 0, 10, 0.502)" stroke-width="1" />
+      <text id="Archive" x="1023.36" y="188" fill="#e7000b" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Archive</text>
+      <text id="Delete workspace" x="26" y="265" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Delete workspace</text>
+      <text id="Permanently removes all projects, member…" x="26" y="289" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Permanently removes all projects, members and history. This cannot be undone and support cannot recover it.</text>
+      <rect id="button 3" x="920.09" y="251" width="141.91" height="38" rx="16" fill="none" stroke="rgba(231, 0, 10, 0.502)" stroke-width="1" />
+      <text id="Delete workspace 2" x="991.05" y="265" fill="#e7000b" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Delete workspace</text>
+  </g>
+  <text id="Active Sessions &amp; Devices label" x="64" y="2699" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Active Sessions &amp; Devices</text>
+  <text id="settings-sessions id" x="64" y="2713" font-family="ui-monospace, monospace" font-size="12" fill="#737373">settings-sessions</text>
+  <g id="Active Sessions &amp; Devices" transform="translate(64, 2731)">
+    <rect id="container" x="0" y="0" width="1088" height="696" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="184" y="65" width="720" height="566" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="Where you are signed in" x="205" y="98" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600">Where you are signed in</text>
+      <text id="One row per browser that holds a valid s…" x="205" y="123" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">One row per browser that holds a valid session. Locations are estimated from the IP address and are frequently wrong on</text>
+      <text id="mobile networks and VPNs — treat an unfa…" x="205" y="142.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">mobile networks and VPNs — treat an unfamiliar city as worth checking, not as proof.</text>
+      <rect id="container 3" x="205" y="184" width="36" height="36" rx="12" fill="#f3f2ee" />
+      <text id="MacBook Pro" x="253" y="196" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">MacBook Pro</text>
+      <rect id="container 4" x="345.81" y="182.14" width="77.78" height="19.7" rx="9.85" fill="rgba(0, 128, 49, 0.102)" />
+      <text id="This device" x="345.81" y="193.14" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="600" letter-spacing="0.28">This device</text>
+      <text id="Chrome 141 · macOS 16" x="253" y="216" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Chrome 141 · macOS 16</text>
+      <text id="near Lisbon, Portugal" x="253" y="236" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">near Lisbon, Portugal</text>
+      <text id="·" x="388.47" y="236" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">·</text>
+      <text id="Active now" x="399.08" y="236" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Active now</text>
+      <text id="Use Sign out in the menu" x="748.89" y="199" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Use Sign out in the menu</text>
+      <rect id="container 5" x="205" y="275" width="36" height="36" rx="12" fill="#f3f2ee" />
+      <text id="iPhone 15" x="253" y="287" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">iPhone 15</text>
+      <text id="Safari · iOS 19" x="253" y="307" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Safari · iOS 19</text>
+      <text id="near Lisbon, Portugal 2" x="253" y="327" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">near Lisbon, Portugal</text>
+      <text id="· 2" x="388.47" y="327" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">·</text>
+      <text id="20 minutes ago" x="399.08" y="327" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">20 minutes ago</text>
+      <rect id="button" x="811.3" y="273" width="71.7" height="32" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Sign out" x="847.15" y="285" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500" text-anchor="middle">Sign out</text>
+      <rect id="container 6" x="205" y="366" width="36" height="36" rx="12" fill="#f3f2ee" />
+      <text id="Windows PC" x="253" y="378" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Windows PC</text>
+      <text id="Edge 140 · Windows 11" x="253" y="398" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Edge 140 · Windows 11</text>
+      <text id="near Frankfurt, Germany" x="253" y="418" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">near Frankfurt, Germany</text>
+      <text id="· 3" x="404.92" y="418" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">·</text>
+      <text id="2 days ago" x="415.53" y="418" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">2 days ago</text>
+      <rect id="paragraph" x="253" y="428" width="189.95" height="20" rx="10" fill="rgba(245, 147, 0, 0.102)" />
+      <text id="First sign-in from this country" x="253" y="440" fill="#bb4d00" font-family="ui-sans-serif, system-ui" font-size="12">First sign-in from this country</text>
+      <rect id="button 2" x="811.3" y="364" width="71.7" height="32" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Sign out 2" x="847.15" y="376" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500" text-anchor="middle">Sign out</text>
+      <rect id="container 7" x="205" y="485" width="36" height="36" rx="12" fill="#f3f2ee" />
+      <text id="iPad Air" x="253" y="497" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">iPad Air</text>
+      <text id="Safari · iPadOS 19" x="253" y="517" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Safari · iPadOS 19</text>
+      <text id="near Lisbon, Portugal 3" x="253" y="537" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">near Lisbon, Portugal</text>
+      <text id="· 4" x="388.47" y="537" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">·</text>
+      <text id="3 weeks ago" x="399.08" y="537" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">3 weeks ago</text>
+      <rect id="button 3" x="811.3" y="483" width="71.7" height="32" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Sign out 3" x="847.15" y="495" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500" text-anchor="middle">Sign out</text>
+      <rect id="footer" x="185" y="557" width="718" height="73" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="3 other sessions are active." x="205" y="594" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">3 other sessions are active.</text>
+      <rect id="button 4" x="720.72" y="574" width="162.28" height="32" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Sign out everywhere else" x="801.86" y="586" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500" text-anchor="middle">Sign out everywhere else</text>
+  </g>
+  <text id="Notification Channel Matrix label" x="64" y="3543" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Notification Channel Matrix</text>
+  <text id="settings-notification-matrix id" x="64" y="3557" font-family="ui-monospace, monospace" font-size="12" fill="#737373">settings-notification-matrix</text>
+  <g id="Notification Channel Matrix" transform="translate(64, 3575)">
+    <rect id="container" x="0" y="0" width="1088" height="613.7" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="section" x="1" y="1" width="1086" height="611.7" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="Notifications" x="26" y="18" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600">Notifications</text>
+      <text id="Choose where each kind of message goes. …" x="26" y="68" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Choose where each kind of message goes. Changes save as you make them.</text>
+      <text id="Event" x="240.48" y="112" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Event</text>
+      <text id="Email" x="558.67" y="122" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Email</text>
+      <text id="2/4" x="558.66" y="167" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11" text-anchor="middle">2/4</text>
+      <text id="Slack" x="763.66" y="122" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Slack</text>
+      <text id="2/4 2" x="763.65" y="167" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11" text-anchor="middle">2/4</text>
+      <text id="Push" x="963.46" y="122" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Push</text>
+      <text id="1/4" x="963.46" y="167" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11" text-anchor="middle">1/4</text>
+      <text id="Security alerts" x="240.48" y="200.2" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Security alerts</text>
+      <text id="New sign-ins, password changes, recovery…" x="232.48" y="234.7" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" text-anchor="middle">New sign-ins, password changes, recovery codes used.</text>
+      <rect id="container 2" x="466.95" y="203.7" width="583.05" height="32" rx="12" fill="rgba(243, 242, 238, 0.6)" />
+      <text id="Always sent by email — a security notice…" x="466.95" y="215.7" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Always sent by email — a security notice you can turn off is not one.</text>
+      <text id="Billing and receipts" x="240.48" y="267.2" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Billing and receipts</text>
+      <text id="Invoices, failed payments, plan changes." x="232.48" y="301.7" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" text-anchor="middle">Invoices, failed payments, plan changes.</text>
+      <rect id="container 3" x="466.95" y="270.7" width="583.05" height="32" rx="12" fill="rgba(243, 242, 238, 0.6)" />
+      <text id="Receipts are sent by email for tax and d…" x="466.95" y="282.7" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Receipts are sent by email for tax and dispute records.</text>
+      <text id="Incidents" x="240.48" y="334.2" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Incidents</text>
+      <text id="An alert rule fired, or a service is deg…" x="232.48" y="368.7" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" text-anchor="middle">An alert rule fired, or a service is degraded.</text>
+      <text id="Mentions and replies" x="240.48" y="401.2" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Mentions and replies</text>
+      <text id="Someone named you in a comment or thread…" x="232.48" y="435.7" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" text-anchor="middle">Someone named you in a comment or thread.</text>
+      <text id="Weekly summary" x="240.48" y="468.2" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Weekly summary</text>
+      <text id="One digest of the week, sent Monday morn…" x="232.48" y="502.7" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" text-anchor="middle">One digest of the week, sent Monday morning.</text>
+      <text id="Product updates" x="240.48" y="535.2" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Product updates</text>
+      <text id="New features and changelog highlights." x="232.48" y="569.7" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" text-anchor="middle">New features and changelog highlights.</text>
+  </g>
+  <text id="Audit Log label" x="64" y="4304.7" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Audit Log</text>
+  <text id="settings-audit-log id" x="64" y="4318.7" font-family="ui-monospace, monospace" font-size="12" fill="#737373">settings-audit-log</text>
+  <g id="Audit Log" transform="translate(64, 4336.7)">
+    <rect id="container" x="0" y="0" width="1088" height="699.5" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="section" x="1" y="1" width="1086" height="697.5" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="Audit log" x="26" y="42" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600">Audit log</text>
+      <text id="5 entries" x="26" y="68" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">5 entries</text>
+      <rect id="field" x="836.3" y="26" width="130" height="35" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <rect id="button" x="974.3" y="26.5" width="87.7" height="34" rx="12" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="Export" x="1018.15" y="40.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Export</text>
+      <rect id="container 2" x="26" y="123" width="63.11" height="20.5" rx="4" fill="rgba(226, 0, 10, 0.102)" />
+      <text id="Security" x="26" y="134" fill="#e7000b" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="600" letter-spacing="0.28">Security</text>
+      <text id="Changed log retention" x="97.11" y="137.25" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Changed log retention</text>
+      <text id="— Workspace settings" x="248.22" y="137.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">— Workspace settings</text>
+      <rect id="container 3" x="26" y="153.5" width="66.41" height="20" rx="4" fill="#f3f2ee" />
+      <text id="90 days" x="26" y="165.5" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">90 days</text>
+      <rect id="container 4" x="122.41" y="153.5" width="73.61" height="20" rx="4" fill="rgba(0, 128, 49, 0.102)" />
+      <text id="365 days" x="122.41" y="165.5" fill="#007f34" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">365 days</text>
+      <text id="· · IP" x="26" y="195.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">· · IP</text>
+      <text id="Rhea Patel" x="26" y="195.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Rhea Patel</text>
+      <text id="rhea@acme.com" x="86.41" y="196.5" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">rhea@acme.com</text>
+      <text id="Aug 30, 2:22 PM UTC" x="189.2" y="195.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Aug 30, 2:22 PM UTC</text>
+      <text id="203.0.113.42" x="322.8" y="196.5" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">203.0.113.42</text>
+      <rect id="container 5" x="26" y="249.5" width="51.91" height="20.5" rx="4" fill="#f3f2ee" />
+      <text id="Access" x="26" y="260.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="600" letter-spacing="0.28">Access</text>
+      <text id="Removed member" x="85.91" y="263.75" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Removed member</text>
+      <text id="— jordan@acme.com" x="210.47" y="263.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">— jordan@acme.com</text>
+      <text id="· · IP 2" x="26" y="292" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">· · IP</text>
+      <text id="Sam Okafor" x="26" y="292" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Sam Okafor</text>
+      <text id="sam@acme.com" x="93.41" y="293" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">sam@acme.com</text>
+      <text id="Aug 30, 9:05 AM UTC" x="189" y="292" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Aug 30, 9:05 AM UTC</text>
+      <text id="198.51.100.9" x="323.61" y="293" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">198.51.100.9</text>
+      <rect id="container 6" x="26" y="346" width="63.11" height="20.5" rx="4" fill="rgba(226, 0, 10, 0.102)" />
+      <text id="Security 2" x="26" y="357" fill="#e7000b" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="600" letter-spacing="0.28">Security</text>
+      <text id="Rotated API key" x="97.11" y="360.25" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Rotated API key</text>
+      <text id="— prod-ingest-key" x="206.05" y="360.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">— prod-ingest-key</text>
+      <text id="· · IP 3" x="26" y="388.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">· · IP</text>
+      <text id="Rhea Patel 2" x="26" y="388.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Rhea Patel</text>
+      <text id="rhea@acme.com 2" x="86.41" y="389.5" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">rhea@acme.com</text>
+      <text id="Aug 29, 6:40 PM UTC" x="189.2" y="388.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Aug 29, 6:40 PM UTC</text>
+      <text id="203.0.113.42 2" x="322.8" y="389.5" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">203.0.113.42</text>
+      <rect id="container 7" x="26" y="442.5" width="53.84" height="20.5" rx="4" fill="rgba(0, 128, 49, 0.102)" />
+      <text id="Billing" x="26" y="453.5" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="600" letter-spacing="0.28">Billing</text>
+      <text id="Changed plan" x="87.84" y="456.75" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Changed plan</text>
+      <text id="— Acme Corp" x="183.89" y="456.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">— Acme Corp</text>
+      <rect id="container 8" x="26" y="473" width="116.81" height="20" rx="4" fill="#f3f2ee" />
+      <text id="Team, 24 seats" x="26" y="485" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">Team, 24 seats</text>
+      <rect id="container 9" x="172.81" y="473" width="131.2" height="20" rx="4" fill="rgba(0, 128, 49, 0.102)" />
+      <text id="Studio, 40 seats" x="172.81" y="485" fill="#007f34" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">Studio, 40 seats</text>
+      <text id="· · IP 4" x="26" y="515" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">· · IP</text>
+      <text id="Billing system" x="26" y="515" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Billing system</text>
+      <text id="system" x="104.34" y="516" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">system</text>
+      <text id="Aug 28, 2:00 AM UTC" x="156.73" y="515" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Aug 28, 2:00 AM UTC</text>
+      <text id="—" x="291.34" y="516" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">—</text>
+      <rect id="container 10" x="26" y="569" width="40.09" height="20.5" rx="4" fill="rgba(245, 147, 0, 0.102)" />
+      <text id="Data" x="26" y="580" fill="#e17100" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="600" letter-spacing="0.28">Data</text>
+      <text id="Exported dataset" x="74.09" y="583.25" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Exported dataset</text>
+      <text id="— customers.csv (18,402 rows)" x="190.08" y="583.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">— customers.csv (18,402 rows)</text>
+      <text id="· · IP 5" x="26" y="611.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">· · IP</text>
+      <text id="Jordan Lee" x="26" y="611.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Jordan Lee</text>
+      <text id="jordan@acme.com" x="87.97" y="612.5" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">jordan@acme.com</text>
+      <text id="Aug 27, 11:13 AM UTC" x="205.16" y="611.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Aug 27, 11:13 AM UTC</text>
+      <text id="192.0.2.77" x="346.23" y="612.5" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">192.0.2.77</text>
+      <rect id="paragraph" x="2" y="640.5" width="1084" height="57" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="Entries are kept for" x="48" y="673.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Entries are kept for</text>
+      <text id="365" x="151.41" y="673.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">365</text>
+      <text id="days on your plan and then deleted. Expo…" x="170.81" y="673.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">days on your plan and then deleted. Export before that if you need them for longer — nothing here can be recovered afterwards.</text>
+  </g>
+</svg>

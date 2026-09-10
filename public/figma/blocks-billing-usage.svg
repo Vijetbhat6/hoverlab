@@ -1,0 +1,302 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1216" height="5445" viewBox="0 0 1216 5445" id="Hoverlab — Billing &amp; Usage">
+  <!--
+    Hoverlab — Billing & Usage. 8 sections, traced from the
+    rendered catalog. Drag this file onto a Figma canvas.
+
+    These are frames, not components: named, editable layers with real
+    geometry, colour and type. There are no variants, no auto-layout,
+    and no hover or motion — none of those exist in a static frame.
+
+    Every section here is free to copy as code at https://hoverlab.dev/blocks
+  -->
+  <rect id="Background" x="0" y="0" width="1216" height="5445" fill="#ffffff" />
+  <text id="Plan &amp; Next Charge Summary label" x="64" y="84" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Plan &amp; Next Charge Summary</text>
+  <text id="billing-plan-summary id" x="64" y="98" font-family="ui-monospace, monospace" font-size="12" fill="#737373">billing-plan-summary</text>
+  <g id="Plan &amp; Next Charge Summary" transform="translate(64, 116)">
+    <rect id="container" x="0" y="0" width="1088" height="285" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="section" x="1" y="1" width="1086" height="283" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Billing" x="26" y="34" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600" letter-spacing="-0.4">Billing</text>
+      <text id="Your plan, your next charge and how it i…" x="26" y="58" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Your plan, your next charge and how it is paid.</text>
+      <rect id="container 2" x="2" y="81" width="1084" height="202" fill="rgba(220, 222, 225, 0.6)" />
+      <rect id="container 3" x="2" y="81" width="360.66" height="202" fill="#ffffff" />
+      <text id="Current plan" x="26" y="117" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="700" letter-spacing="0.6">Current plan</text>
+      <text id="Team" x="26" y="153" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="24" font-weight="800" letter-spacing="-0.6">Team</text>
+      <text id="$490/month" x="94.59" y="154" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">$490/month</text>
+      <text id="Up to 10 seats" x="26" y="189" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Up to 10 seats</text>
+      <rect id="container 4" x="26" y="183" width="4" height="4" rx="2" fill="#007f34" />
+      <text id="SSO and audit log" x="26" y="211" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">SSO and audit log</text>
+      <rect id="container 5" x="26" y="205" width="4" height="4" rx="2" fill="#007f34" />
+      <text id="Priority support" x="26" y="233" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Priority support</text>
+      <rect id="container 6" x="26" y="227" width="4" height="4" rx="2" fill="#007f34" />
+      <text id="Invoice billing" x="26" y="255" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Invoice billing</text>
+      <rect id="container 7" x="26" y="249" width="4" height="4" rx="2" fill="#007f34" />
+      <rect id="container 8" x="363.66" y="81" width="360.67" height="202" fill="#ffffff" />
+      <text id="Next charge" x="387.66" y="117" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="700" letter-spacing="0.6">Next charge</text>
+      <text id="$490.00" x="387.66" y="153" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="24" font-weight="800" letter-spacing="-0.6">$490.00</text>
+      <text id="on 1 September 2026" x="387.66" y="179" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">on 1 September 2026</text>
+      <rect id="container 9" x="725.33" y="81" width="360.66" height="202" fill="#ffffff" />
+      <text id="Payment method" x="749.33" y="117" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="700" letter-spacing="0.6">Payment method</text>
+      <rect id="container 10" x="749.33" y="131" width="44" height="32" rx="10" fill="#f3f2ee" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Visa ending 4242" x="801.33" y="143" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Visa ending 4242</text>
+      <text id="Expires 09/28" x="801.33" y="161" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Expires 09/28</text>
+      <text id="Manage billing" x="749.33" y="195" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Manage billing</text>
+  </g>
+  <text id="Invoice History label" x="64" y="517" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Invoice History</text>
+  <text id="invoice-history-table id" x="64" y="531" font-family="ui-monospace, monospace" font-size="12" fill="#737373">invoice-history-table</text>
+  <g id="Invoice History" transform="translate(64, 549)">
+    <rect id="container" x="0" y="0" width="1088" height="432" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="section" x="1" y="1" width="1086" height="430" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Invoice history" x="26" y="34" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600" letter-spacing="-0.4">Invoice history</text>
+      <text id="Every charge on this account. PDFs are a…" x="26" y="58" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Every charge on this account. PDFs are available for seven years.</text>
+      <text id="Billing portal" x="960.05" y="45" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Billing portal</text>
+      <rect id="container 2" x="2" y="81" width="1084" height="44.5" fill="rgba(242, 238, 235, 0.302)" />
+      <text id="Invoice" x="2" y="95" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Invoice</text>
+      <text id="Date" x="300.05" y="95" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Date</text>
+      <text id="Status" x="535.39" y="95" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Status</text>
+      <text id="Amount" x="755.03" y="95" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Amount</text>
+      <text id="INV-2026-0812" x="26" y="152" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12" font-weight="500">INV-2026-0812</text>
+      <text id="Team plan — August" x="26" y="168" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Team plan — August</text>
+      <text id="Aug 1, 2026" x="324.05" y="160" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Aug 1, 2026</text>
+      <rect id="container 3" x="559.39" y="146" width="39.3" height="20" rx="10" fill="rgba(0, 188, 128, 0.149)" />
+      <text id="Paid" x="559.39" y="158" fill="#009966" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Paid</text>
+      <text id="$490.00" x="755.03" y="140" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">$490.00</text>
+      <text id="INV-2026-0745" x="26" y="213" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12" font-weight="500">INV-2026-0745</text>
+      <text id="Team plan — July" x="26" y="229" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Team plan — July</text>
+      <text id="Jul 1, 2026" x="324.05" y="221" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Jul 1, 2026</text>
+      <rect id="container 4" x="559.39" y="207" width="39.3" height="20" rx="10" fill="rgba(0, 188, 128, 0.149)" />
+      <text id="Paid 2" x="559.39" y="219" fill="#009966" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Paid</text>
+      <text id="$490.00 2" x="755.03" y="200.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">$490.00</text>
+      <text id="INV-2026-0698" x="26" y="274" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12" font-weight="500">INV-2026-0698</text>
+      <text id="Additional seats (3)" x="26" y="290" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Additional seats (3)</text>
+      <text id="Jun 14, 2026" x="324.05" y="282" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Jun 14, 2026</text>
+      <rect id="container 5" x="559.39" y="268" width="68.52" height="20" rx="10" fill="#f3f2ee" />
+      <text id="Refunded" x="559.39" y="280" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Refunded</text>
+      <text id="$147.00" x="755.03" y="261.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">$147.00</text>
+      <text id="INV-2026-0671" x="26" y="335" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12" font-weight="500">INV-2026-0671</text>
+      <text id="Team plan — June" x="26" y="351" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Team plan — June</text>
+      <text id="Jun 1, 2026" x="324.05" y="343" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Jun 1, 2026</text>
+      <rect id="container 6" x="559.39" y="329" width="47.77" height="20" rx="10" fill="rgba(235, 0, 13, 0.149)" />
+      <text id="Failed" x="559.39" y="341" fill="#e7000b" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Failed</text>
+      <text id="$490.00 3" x="755.03" y="322.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">$490.00</text>
+      <text id="INV-2026-0602" x="26" y="396" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12" font-weight="500">INV-2026-0602</text>
+      <text id="Pro plan — May" x="26" y="412" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Pro plan — May</text>
+      <text id="May 1, 2026" x="324.05" y="404" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">May 1, 2026</text>
+      <rect id="container 7" x="559.39" y="390" width="39.3" height="20" rx="10" fill="rgba(0, 188, 128, 0.149)" />
+      <text id="Paid 3" x="559.39" y="402" fill="#009966" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Paid</text>
+      <text id="$190.00" x="755.03" y="383.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">$190.00</text>
+  </g>
+  <text id="Payment Methods On File label" x="64" y="1097" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Payment Methods On File</text>
+  <text id="payment-method-card id" x="64" y="1111" font-family="ui-monospace, monospace" font-size="12" fill="#737373">payment-method-card</text>
+  <g id="Payment Methods On File" transform="translate(64, 1129)">
+    <rect id="container" x="0" y="0" width="1088" height="292" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="section" x="1" y="1" width="1086" height="290" rx="16" fill="#ffffff" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Payment methods" x="26" y="34" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600" letter-spacing="-0.4">Payment methods</text>
+      <text id="Receipts and failed-payment notices go t…" x="26" y="58" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Receipts and failed-payment notices go to billing@acme.com.</text>
+      <rect id="container 2" x="26" y="98.5" width="48" height="36" rx="10" fill="rgba(241, 241, 237, 0.502)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Visa •••• 4242" x="90" y="111" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Visa •••• 4242</text>
+      <rect id="container 3" x="186.53" y="97" width="71.86" height="20" rx="10" fill="rgba(0, 128, 49, 0.102)" />
+      <text id="Default" x="186.53" y="109" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Default</text>
+      <text id="Expires 11/2026 — update it before your …" x="90" y="131" fill="#e17100" font-family="ui-sans-serif, system-ui" font-size="12">Expires 11/2026 — update it before your next renewal</text>
+      <rect id="button" x="1034" y="102.5" width="28" height="28" rx="12" fill="none" stroke="#dbdee1" stroke-width="1" opacity="0.4" />
+      <rect id="container 4" x="26" y="170" width="48" height="36" rx="10" fill="rgba(241, 241, 237, 0.502)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Mastercard •••• 5100" x="90" y="183" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Mastercard •••• 5100</text>
+      <text id="Expires 03/2029" x="90" y="203" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Expires 03/2029</text>
+      <rect id="button 2" x="932.39" y="173" width="93.61" height="30" rx="12" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="Make default" x="979.2" y="185" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500" text-anchor="middle">Make default</text>
+      <rect id="button 3" x="1034" y="174" width="28" height="28" rx="12" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <rect id="footer" x="2" y="223" width="1084" height="67" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="button 4" x="26" y="240" width="187.58" height="34" rx="12" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="Add payment method" x="119.79" y="254" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Add payment method</text>
+  </g>
+  <text id="Subscription Cancel Flow label" x="64" y="1537" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Subscription Cancel Flow</text>
+  <text id="subscription-cancel-flow id" x="64" y="1551" font-family="ui-monospace, monospace" font-size="12" fill="#737373">subscription-cancel-flow</text>
+  <g id="Subscription Cancel Flow" transform="translate(64, 1569)">
+    <rect id="container" x="0" y="0" width="1088" height="889" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="240" y="65" width="608" height="759" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="Cancel your Team plan" x="273" y="118" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="700" letter-spacing="-0.5">Cancel your Team plan</text>
+      <text id="You can do this yourself, right here, an…" x="273" y="148" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">You can do this yourself, right here, and it takes one click once you have read what</text>
+      <text id="happens." x="273" y="168" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">happens.</text>
+      <rect id="container 3" x="273" y="198" width="542" height="182" rx="16" fill="rgba(242, 238, 235, 0.302)" stroke="#dbdee1" stroke-width="1" />
+      <text id="What happens, and when" x="290" y="229" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">What happens, and when</text>
+      <text id="You keep" x="290" y="261" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">You keep</text>
+      <text id="Team" x="350.14" y="261" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Team</text>
+      <text id="until" x="382.63" y="261" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">until</text>
+      <text id="— the period you have already paid for." x="521.78" y="261" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">— the period you have already paid for.</text>
+      <text id="Nothing stops today." x="290" y="281" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Nothing stops today.</text>
+      <text id="14 October 2026" x="417.69" y="261" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">14 October 2026</text>
+      <text id="You will not be charged again, and there…" x="290" y="309" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">You will not be charged again, and there is no cancellation fee.</text>
+      <text id="After that, your data is kept for" x="290" y="337" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">After that, your data is kept for</text>
+      <text id="and restoring is one click. It is delete…" x="535.95" y="337" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">and restoring is one click. It is deleted</text>
+      <text id="after that." x="290" y="357" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">after that.</text>
+      <text id="30 days" x="483.81" y="337" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">30 days</text>
+      <rect id="container 4" x="273" y="396" width="542" height="138" rx="16" fill="rgba(235, 0, 20, 0.051)" stroke="rgba(229, 0, 10, 0.302)" stroke-width="1" />
+      <text id="What breaks on 14 October 2026" x="290" y="427" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">What breaks on 14 October 2026</text>
+      <text id="API keys stop working, and any integrati…" x="290" y="459" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">API keys stop working, and any integration using them fails</text>
+      <text id="Team members lose access to shared proje…" x="290" y="485" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Team members lose access to shared projects</text>
+      <text id="Scheduled exports stop running" x="290" y="511" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Scheduled exports stop running</text>
+      <text id="Why are you cancelling?" x="273" y="575" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Why are you cancelling?</text>
+      <text id="— optional, and it does not change anyth…" x="430.42" y="575" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">— optional, and it does not change anything below</text>
+      <rect id="field" x="273" y="590" width="542" height="36" rx="12" fill="#fdfcf8" stroke="#8d8f92" stroke-width="1" />
+      <rect id="container 5" x="273" y="650" width="542" height="141" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="Type to confirm" x="273" y="689" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Type to confirm</text>
+      <text id="cancel" x="306.86" y="690" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="14" font-weight="500">cancel</text>
+      <rect id="field 2" x="273" y="703" width="192" height="36" rx="12" fill="#fdfcf8" stroke="#8d8f92" stroke-width="1" />
+      <rect id="button" x="273" y="755" width="178.84" height="36" rx="12" fill="#e7000b" opacity="0.5" />
+      <text id="Cancel my subscription" x="362.42" y="769" fill="#ffffff" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Cancel my subscription</text>
+      <text id="Keep my plan" x="519.09" y="769" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Keep my plan</text>
+  </g>
+  <text id="Overage Notice with Projection label" x="64" y="2574" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Overage Notice with Projection</text>
+  <text id="usage-overage-notice id" x="64" y="2588" font-family="ui-monospace, monospace" font-size="12" fill="#737373">usage-overage-notice</text>
+  <g id="Overage Notice with Projection" transform="translate(64, 2606)">
+    <rect id="container" x="0" y="0" width="1088" height="661" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="240" y="65" width="608" height="531" rx="16" fill="rgba(255, 157, 0, 0.051)" stroke="rgba(252, 152, 0, 0.4)" stroke-width="1" />
+      <text id="You are past your included API requests" x="301" y="110" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600">You are past your included API requests</text>
+      <text id="Everything is still running. You are bei…" x="301" y="136" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Everything is still running. You are being billed for the overage, and this is what it</text>
+      <text id="looks like so far." x="301" y="156" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">looks like so far.</text>
+      <text id="1,402,500 of 1,000,000 requests" x="269" y="196" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">1,402,500 of 1,000,000 requests</text>
+      <text id="140%" x="785.39" y="196" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="14" font-weight="500">140%</text>
+      <rect id="container 3" x="269" y="210" width="550" height="10" rx="5" fill="#f3f2ee" />
+      <rect id="container 4" x="269" y="210" width="392.16" height="10" fill="#007f34" />
+      <rect id="container 5" x="661.16" y="210" width="157.83" height="10" fill="#fe9a00" />
+      <rect id="container 6" x="269" y="240" width="550" height="183" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="Over your allowance" x="286" y="265" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Over your allowance</text>
+      <text id="402,500 requests" x="667.58" y="265" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="14">402,500 requests</text>
+      <text id="Overage rate" x="286" y="306" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Overage rate</text>
+      <text id="$0.12 per 10,000" x="667.59" y="306" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="14">$0.12 per 10,000</text>
+      <text id="Charged so far" x="286" y="347" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Charged so far</text>
+      <text id="$4.83" x="760" y="347" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="14" font-weight="500">$4.83</text>
+      <text id="At this rate, by day 30" x="286" y="388" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">At this rate, by day 30</text>
+      <text id="$12.04" x="672.38" y="390" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="14" font-weight="600">$12.04</text>
+      <text id="2,003,571 requests" x="672.38" y="408" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">2,003,571 requests</text>
+      <text id="Projected from" x="269" y="447" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Projected from</text>
+      <text id="66,786" x="350.94" y="447" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">66,786</text>
+      <text id="requests" x="389.19" y="447" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">requests</text>
+      <text id="a day over" x="434.03" y="447" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">a day over</text>
+      <text id="21" x="495.5" y="447" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">21</text>
+      <text id="days" x="511.73" y="447" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">days</text>
+      <text id="so far. It is a straight line, not a for…" x="535.81" y="447" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">so far. It is a straight line, not a forecast — a quiet</text>
+      <text id="week moves it." x="269" y="463" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">week moves it.</text>
+      <rect id="button" x="269" y="487" width="261.66" height="36" rx="12" fill="#007f34" />
+      <text id="Move to a plan that includes this" x="399.83" y="501" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Move to a plan that includes this</text>
+      <rect id="button 2" x="542.66" y="487" width="171.55" height="36" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Cap usage instead" x="628.43" y="501" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Cap usage instead</text>
+      <text id="Upgrading is usually cheaper than paying…" x="269" y="547" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Upgrading is usually cheaper than paying overage at this volume. Capping stops the charges and starts</text>
+      <text id="returning 429s — some teams genuinely pr…" x="269" y="563" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">returning 429s — some teams genuinely prefer that, and it is a real option rather than a threat.</text>
+  </g>
+  <text id="Seat Count &amp; Proration label" x="64" y="3383" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Seat Count &amp; Proration</text>
+  <text id="billing-seat-manager id" x="64" y="3397" font-family="ui-monospace, monospace" font-size="12" fill="#737373">billing-seat-manager</text>
+  <g id="Seat Count &amp; Proration" transform="translate(64, 3415)">
+    <rect id="container" x="0" y="0" width="1088" height="451" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="232" y="65" width="624" height="321" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="Seats" x="257" y="106" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600">Seats</text>
+      <text id="£12.00 per seat per month · renews 14 Se…" x="307.25" y="107" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">£12.00 per seat per month · renews 14 September</text>
+      <rect id="button" x="257" y="134" width="36" height="36" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <rect id="field" x="301" y="134" width="80" height="36" rx="12" fill="#fdfcf8" stroke="#8d8f92" stroke-width="1" />
+      <rect id="button 2" x="389" y="134" width="36" height="36" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="9 of 12 seats are in use" x="441" y="156" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">9 of 12 seats are in use</text>
+      <rect id="container 3" x="257" y="190" width="574" height="119" rx="16" fill="rgba(242, 242, 237, 0.4)" stroke="#dbdee1" stroke-width="1" />
+      <text id="2 extra seats for the 18 days left in th…" x="274" y="221" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">2 extra seats for the 18 days left in this period</text>
+      <text id="£14.40" x="771.75" y="221" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">£14.40</text>
+      <rect id="container 4" x="274" y="235" width="540" height="29" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="From 14 September, every month" x="274" y="258" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">From 14 September, every month</text>
+      <text id="£168.00" x="763.98" y="258" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">£168.00</text>
+      <text id="The part-period charge is £12.00 × 2 × 1…" x="274" y="284" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">The part-period charge is £12.00 × 2 × 18/30 days. It goes on the card ending 4242 today.</text>
+      <rect id="button 3" x="257" y="325" width="168.73" height="36" rx="12" fill="#007f34" />
+      <text id="Add 2 and pay £14.40" x="341.37" y="339" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Add 2 and pay £14.40</text>
+      <text id="Cancel" x="466.66" y="339" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Cancel</text>
+  </g>
+  <text id="Invoice Detail label" x="64" y="3982" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Invoice Detail</text>
+  <text id="billing-invoice-detail id" x="64" y="3996" font-family="ui-monospace, monospace" font-size="12" fill="#737373">billing-invoice-detail</text>
+  <g id="Invoice Detail" transform="translate(64, 4014)">
+    <rect id="container" x="0" y="0" width="1088" height="657" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="section" x="1" y="1" width="1086" height="655" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="Invoice INV-2026-0841" x="50" y="42" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600">Invoice INV-2026-0841</text>
+      <rect id="container 2" x="223.22" y="27.75" width="37.27" height="20.5" rx="4" fill="rgba(0, 186, 118, 0.102)" />
+      <text id="paid" x="223.22" y="38.75" fill="#009966" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="600" letter-spacing="0.28">paid</text>
+      <text id="Issued 31 August 2026 · Due 14 September…" x="26" y="68" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Issued 31 August 2026 · Due 14 September 2026</text>
+      <rect id="link" x="922.13" y="26" width="139.88" height="34" rx="12" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="Download PDF" x="922.13" y="40" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Download PDF</text>
+      <text id="Billed to" x="26" y="135" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600" letter-spacing="0.6">Billed to</text>
+      <text id="Acme Corp" x="26" y="161" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">Acme Corp</text>
+      <text id="14 Bridgewater Street" x="26" y="183.75" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">14 Bridgewater Street</text>
+      <text id="Manchester M1 5AN" x="26" y="206.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">Manchester M1 5AN</text>
+      <text id="United Kingdom" x="26" y="229.25" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">United Kingdom</text>
+      <text id="Invoice number" x="556" y="137" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Invoice number</text>
+      <text id="INV-2026-0841" x="952.8" y="137" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="14">INV-2026-0841</text>
+      <text id="Tax registration" x="556" y="165" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Tax registration</text>
+      <text id="GB 123 4567 89" x="944.39" y="165" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="14">GB 123 4567 89</text>
+      <text id="Payment method" x="556" y="193" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Payment method</text>
+      <text id="Visa ending 4242" x="955.94" y="193" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">Visa ending 4242</text>
+      <text id="Description" x="270.87" y="277" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Description</text>
+      <text id="Qty" x="539.73" y="277" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Qty</text>
+      <text id="Unit" x="677.75" y="277" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Unit</text>
+      <text id="Amount" x="855.39" y="277" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Amount</text>
+      <text id="Studio plan — 40 seats" x="270.87" y="317.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Studio plan — 40 seats</text>
+      <text id="1 Aug – 31 Aug 2026" x="270.87" y="350" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" text-anchor="middle">1 Aug – 31 Aug 2026</text>
+      <text id="40" x="539.73" y="317.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">40</text>
+      <text id="$12.00" x="677.75" y="317.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">$12.00</text>
+      <text id="$480.00" x="855.39" y="317.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">$480.00</text>
+      <text id="Unused time on Team plan" x="270.87" y="380.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Unused time on Team plan</text>
+      <text id="20 Aug – 31 Aug 2026" x="270.87" y="413" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" text-anchor="middle">20 Aug – 31 Aug 2026</text>
+      <text id="24" x="539.73" y="380.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">24</text>
+      <text id="$12.00 2" x="677.75" y="380.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">$12.00</text>
+      <text id="-$103.20" x="855.39" y="380.5" fill="#009966" font-family="ui-sans-serif, system-ui" font-size="14">-$103.20</text>
+      <text id="Remaining time on Studio plan" x="270.87" y="443.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Remaining time on Studio plan</text>
+      <text id="20 Aug – 31 Aug 2026 2" x="270.87" y="476" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" text-anchor="middle">20 Aug – 31 Aug 2026</text>
+      <text id="40 2" x="539.73" y="443.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">40</text>
+      <text id="$12.00 3" x="677.75" y="443.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">$12.00</text>
+      <text id="$172.00" x="855.39" y="443.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">$172.00</text>
+      <text id="AI credit pack — 2,000 credits" x="270.87" y="506.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">AI credit pack — 2,000 credits</text>
+      <text id="1" x="539.73" y="506.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">1</text>
+      <text id="$15.00" x="677.75" y="506.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">$15.00</text>
+      <text id="$15.00 2" x="855.39" y="506.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">$15.00</text>
+      <text id="Subtotal" x="2" y="551.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Subtotal</text>
+      <text id="$563.80" x="855.39" y="551.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">$563.80</text>
+      <text id="VAT (United Kingdom) at 20%" x="2" y="588" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">VAT (United Kingdom) at 20%</text>
+      <text id="$112.76" x="855.39" y="588" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">$112.76</text>
+      <rect id="container 3" x="2" y="606.5" width="1084" height="48.5" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="Total" x="2" y="620.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Total</text>
+      <text id="$676.56" x="855.39" y="622.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600">$676.56</text>
+  </g>
+  <text id="Credit Balance and Expiry label" x="64" y="4787" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Credit Balance and Expiry</text>
+  <text id="billing-credit-balance id" x="64" y="4801" font-family="ui-monospace, monospace" font-size="12" fill="#737373">billing-credit-balance</text>
+  <g id="Credit Balance and Expiry" transform="translate(64, 4819)">
+    <rect id="container" x="0" y="0" width="1088" height="561.58" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="section" x="1" y="1" width="1086" height="559.58" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="Credit balance" x="26" y="42" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600">Credit balance</text>
+      <text id="2,110" x="26" y="84" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="30" font-weight="700">2,110</text>
+      <text id="credits available" x="109.16" y="83" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">credits available</text>
+      <rect id="button" x="946.14" y="26" width="115.86" height="32" rx="12" fill="#007f34" />
+      <text id="Buy credits" x="1004.07" y="40" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Buy credits</text>
+      <rect id="paragraph" x="2" y="115" width="1084" height="53" fill="rgba(245, 147, 0, 0.102)" />
+      <text id="320 credits from monthly allowance expir…" x="50" y="145" fill="#bb4d00" font-family="ui-sans-serif, system-ui" font-size="14">320 credits from monthly allowance expire in 1 days; 150 credits from launch bonus expire in 3 days. They are spent last, so use them before buying more.</text>
+      <text id="Monthly allowance" x="26" y="206" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Monthly allowance</text>
+      <rect id="container 2" x="26" y="192.86" width="20" height="20" rx="10" fill="#f3f2ee" />
+      <text id="1" x="26" y="203.86" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="700">1</text>
+      <text id="320" x="1002.89" y="206" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">320</text>
+      <text id="/ 500" x="1026.22" y="206" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">/ 500</text>
+      <rect id="meter" x="26" y="222.86" width="1036" height="8" rx="4" fill="#f3f2ee" />
+      <rect id="container 3" x="26" y="222.86" width="663.03" height="8" rx="4" fill="#007f34" />
+      <text id="Included with Pro+. Resets on the 1st an…" x="26" y="250.86" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Included with Pro+. Resets on the 1st and does not roll over. Expires .</text>
+      <text id="September 1" x="389.02" y="250.86" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">September 1</text>
+      <text id="Credit pack — 2,000" x="26" y="317.86" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Credit pack — 2,000</text>
+      <rect id="container 4" x="26" y="304.72" width="20" height="20" rx="10" fill="#f3f2ee" />
+      <text id="2" x="26" y="315.72" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="700">2</text>
+      <text id="1,640" x="981.16" y="317.86" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">1,640</text>
+      <text id="/ 2,000" x="1015.63" y="317.86" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">/ 2,000</text>
+      <rect id="meter 2" x="26" y="334.72" width="1036" height="8" rx="4" fill="#f3f2ee" />
+      <rect id="container 5" x="26" y="334.72" width="849.52" height="8" rx="4" fill="#007f34" />
+      <text id="Purchased 12 August 2026. Never expires." x="26" y="362.72" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Purchased 12 August 2026. Never expires.</text>
+      <text id="Launch bonus" x="26" y="429.72" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Launch bonus</text>
+      <rect id="container 6" x="26" y="416.58" width="20" height="20" rx="10" fill="#f3f2ee" />
+      <text id="3" x="26" y="427.58" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="700">3</text>
+      <text id="150" x="1002.89" y="429.72" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">150</text>
+      <text id="/ 250" x="1026.22" y="429.72" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">/ 250</text>
+      <rect id="meter 3" x="26" y="446.58" width="1036" height="8" rx="4" fill="#f3f2ee" />
+      <rect id="container 7" x="26" y="446.58" width="621.59" height="8" rx="4" fill="#007f34" />
+      <text id="Granted with your first purchase. Expire…" x="26" y="474.58" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Granted with your first purchase. Expires .</text>
+      <text id="September 3" x="242.19" y="474.58" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">September 3</text>
+      <rect id="paragraph 2" x="2" y="502.58" width="1084" height="57" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="Credits are spent from the top of this l…" x="2" y="514.58" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Credits are spent from the top of this list down, so the allowance included with your plan is used before anything you paid for.</text>
+  </g>
+</svg>

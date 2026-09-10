@@ -1,0 +1,237 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1216" height="5710" viewBox="0 0 1216 5710" id="Hoverlab — Contact &amp; Forms">
+  <!--
+    Hoverlab — Contact & Forms. 7 sections, traced from the
+    rendered catalog. Drag this file onto a Figma canvas.
+
+    These are frames, not components: named, editable layers with real
+    geometry, colour and type. There are no variants, no auto-layout,
+    and no hover or motion — none of those exist in a static frame.
+
+    Every section here is free to copy as code at https://hoverlab.dev/blocks
+  -->
+  <rect id="Background" x="0" y="0" width="1216" height="5710" fill="#ffffff" />
+  <text id="Split Contact Form label" x="64" y="84" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Split Contact Form</text>
+  <text id="contact-form-split id" x="64" y="98" font-family="ui-monospace, monospace" font-size="12" fill="#737373">contact-form-split</text>
+  <g id="Split Contact Form" transform="translate(64, 116)">
+    <rect id="container" x="0" y="0" width="1088" height="586" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Tell us what you need." x="33" y="101" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="700" letter-spacing="-0.9">Tell us what you need.</text>
+      <text id="Sales questions, support, partnerships —…" x="33" y="139" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">Sales questions, support, partnerships — one form,</text>
+      <text id="and it reaches a person rather than a qu…" x="33" y="165" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">and it reaches a person rather than a queue.</text>
+      <rect id="container 2" x="33" y="207" width="36" height="36" rx="12" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Email" x="81" y="217" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500" letter-spacing="0.6">Email</text>
+      <text id="hello@acme.com" x="81" y="238" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">hello@acme.com</text>
+      <rect id="container 3" x="33" y="263" width="36" height="36" rx="12" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Support" x="81" y="273" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500" letter-spacing="0.6">Support</text>
+      <text id="Open a ticket" x="81" y="294" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Open a ticket</text>
+      <rect id="container 4" x="33" y="319" width="36" height="36" rx="12" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Office" x="81" y="329" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500" letter-spacing="0.6">Office</text>
+      <text id="4 Bridge Street, Bristol" x="81" y="350" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">4 Bridge Street, Bristol</text>
+      <rect id="paragraph" x="33" y="389" width="370.39" height="54" rx="16" fill="rgba(255, 255, 255, 0.4)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="We reply to everything within one busine…" x="33" y="403" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">We reply to everything within one business day.</text>
+      <rect id="container 5" x="467.39" y="65" width="587.59" height="456" rx="16" fill="rgba(255, 255, 255, 0.4)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Name" x="500.39" y="112" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Name</text>
+      <rect id="field" x="500.39" y="124" width="252.8" height="44" rx="16" fill="rgba(253, 252, 248, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Work email" x="769.19" y="112" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Work email</text>
+      <rect id="field 2" x="769.19" y="124" width="252.8" height="44" rx="16" fill="rgba(253, 252, 248, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Company" x="500.39" y="198" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Company</text>
+      <text id="(optional)" x="564.72" y="198" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">(optional)</text>
+      <rect id="field 3" x="500.39" y="210" width="252.8" height="44" rx="16" fill="rgba(253, 252, 248, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Subject" x="769.19" y="198" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Subject</text>
+      <rect id="field 4" x="769.19" y="210" width="252.8" height="44" rx="16" fill="rgba(253, 252, 248, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Message" x="500.39" y="284" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Message</text>
+      <rect id="field 5" x="500.39" y="296" width="521.59" height="122" rx="16" fill="rgba(253, 252, 248, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="button" x="500.39" y="444" width="138.61" height="44" rx="16" fill="#007f34" />
+      <text id="Send message" x="569.7" y="458" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Send message</text>
+  </g>
+  <text id="Multi-Step Form with Validation label" x="64" y="818" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Multi-Step Form with Validation</text>
+  <text id="multi-step-form id" x="64" y="832" font-family="ui-monospace, monospace" font-size="12" fill="#737373">multi-step-form</text>
+  <g id="Multi-Step Form with Validation" transform="translate(64, 850)">
+    <rect id="container" x="0" y="0" width="1088" height="604" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Set up your workspace" x="544" y="95" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="30" font-weight="700" letter-spacing="-0.75" text-anchor="middle">Set up your workspace</text>
+      <rect id="container 2" x="232" y="133" width="32" height="32" rx="16" fill="none" stroke="#007f34" stroke-width="1" />
+      <text id="1" x="232" y="145" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="700">1</text>
+      <text id="Your details" x="272" y="153" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Your details</text>
+      <rect id="container 3" x="442.66" y="133" width="32" height="32" rx="16" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="2" x="442.66" y="145" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="700">2</text>
+      <text id="Your team" x="482.66" y="153" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Your team</text>
+      <rect id="container 4" x="653.33" y="133" width="32" height="32" rx="16" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="3" x="653.33" y="145" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="700">3</text>
+      <text id="Finish" x="693.33" y="153" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Finish</text>
+      <rect id="container 5" x="232" y="197" width="624" height="342" rx="16" fill="rgba(255, 255, 255, 0.4)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Your details 2" x="265" y="248" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="600">Your details</text>
+      <text id="Full name" x="265" y="292" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Full name</text>
+      <rect id="field" x="265" y="304" width="558" height="44" rx="16" fill="rgba(253, 252, 248, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Work email" x="265" y="378" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Work email</text>
+      <rect id="field 2" x="265" y="390" width="558" height="44" rx="16" fill="rgba(253, 252, 248, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="button" x="265" y="462" width="83.7" height="44" rx="16" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" opacity="0.4" />
+      <text id="Back" x="306.85" y="476" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Back</text>
+      <rect id="button 2" x="697.28" y="462" width="125.72" height="44" rx="16" fill="#007f34" />
+      <text id="Continue" x="760.14" y="476" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Continue</text>
+  </g>
+  <text id="Meeting Scheduler label" x="64" y="1570" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Meeting Scheduler</text>
+  <text id="booking-scheduler id" x="64" y="1584" font-family="ui-monospace, monospace" font-size="12" fill="#737373">booking-scheduler</text>
+  <g id="Meeting Scheduler" transform="translate(64, 1602)">
+    <rect id="container" x="0" y="0" width="1088" height="639" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="192" y="65" width="704" height="509" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="Book a walkthrough" x="217" y="104" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="600">Book a walkthrough</text>
+      <text id="Thirty minutes with an engineer, not a s…" x="217" y="132" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Thirty minutes with an engineer, not a sales team. Bring your codebase.</text>
+      <text id="30 minutes" x="217" y="168" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">30 minutes</text>
+      <text id="Video call, link on confirmation" x="327.23" y="168" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Video call, link on confirmation</text>
+      <text id="Pick a day" x="217" y="229" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Pick a day</text>
+      <rect id="container 3" x="217" y="247" width="72" height="77" rx="16" fill="rgba(0, 128, 49, 0.102)" stroke="#007f34" stroke-width="1" />
+      <text id="Tue" x="252.99" y="270" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" letter-spacing="0.3" text-anchor="middle">Tue</text>
+      <text id="1" x="253" y="292" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="600" text-anchor="middle">1</text>
+      <text id="5 free" x="253" y="307.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11" text-anchor="middle">5 free</text>
+      <rect id="container 4" x="297" y="247" width="72" height="77" rx="16" fill="rgba(242, 242, 237, 0.4)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Wed" x="333" y="270" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" letter-spacing="0.3" text-anchor="middle">Wed</text>
+      <text id="2" x="333" y="292" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="600" text-anchor="middle">2</text>
+      <text id="Full" x="333" y="307.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11" text-anchor="middle">Full</text>
+      <rect id="container 5" x="377" y="247" width="72" height="77" rx="16" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Thu" x="412.99" y="270" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" letter-spacing="0.3" text-anchor="middle">Thu</text>
+      <text id="3" x="413" y="292" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="600" text-anchor="middle">3</text>
+      <text id="4 free" x="413" y="307.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11" text-anchor="middle">4 free</text>
+      <rect id="container 6" x="457" y="247" width="72" height="77" rx="16" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Fri" x="492.99" y="270" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" letter-spacing="0.3" text-anchor="middle">Fri</text>
+      <text id="4" x="493" y="292" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="600" text-anchor="middle">4</text>
+      <text id="2 free" x="493" y="307.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11" text-anchor="middle">2 free</text>
+      <rect id="container 7" x="537" y="247" width="72" height="77" rx="16" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Sat" x="572.99" y="270" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" letter-spacing="0.3" text-anchor="middle">Sat</text>
+      <text id="5" x="573" y="292" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="600" text-anchor="middle">5</text>
+      <text id="1 free" x="573" y="307.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11" text-anchor="middle">1 free</text>
+      <rect id="container 8" x="617" y="247" width="72" height="77" rx="16" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Tue 2" x="652.99" y="270" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" letter-spacing="0.3" text-anchor="middle">Tue</text>
+      <text id="8" x="653" y="292" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="600" text-anchor="middle">8</text>
+      <text id="5 free 2" x="653" y="307.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11" text-anchor="middle">5 free</text>
+      <rect id="container 9" x="697" y="247" width="72" height="77" rx="16" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Wed 2" x="733" y="270" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" letter-spacing="0.3" text-anchor="middle">Wed</text>
+      <text id="9" x="732.99" y="292" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="600" text-anchor="middle">9</text>
+      <text id="4 free 2" x="733" y="307.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11" text-anchor="middle">4 free</text>
+      <rect id="container 10" x="777" y="247" width="72" height="77" rx="16" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Thu 2" x="812.99" y="270" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" letter-spacing="0.3" text-anchor="middle">Thu</text>
+      <text id="10" x="813" y="292" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="600" text-anchor="middle">10</text>
+      <text id="2 free 2" x="813" y="307.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11" text-anchor="middle">2 free</text>
+      <text id="Pick a time" x="217" y="376" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Pick a time</text>
+      <rect id="field" x="722" y="356" width="149" height="32" rx="12" fill="#fdfcf8" stroke="#8d8f92" stroke-width="1" />
+      <rect id="container 11" x="217" y="400" width="212.66" height="38" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="1:30 PM" x="217" y="414" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">1:30 PM</text>
+      <rect id="container 12" x="437.66" y="400" width="212.67" height="38" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="2:00 PM" x="437.66" y="414" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">2:00 PM</text>
+      <rect id="container 13" x="658.33" y="400" width="212.67" height="38" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="3:30 PM" x="658.33" y="414" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">3:30 PM</text>
+      <rect id="container 14" x="217" y="446" width="212.66" height="38" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="6:30 PM" x="217" y="460" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">6:30 PM</text>
+      <rect id="container 15" x="437.66" y="446" width="212.67" height="38" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="8:00 PM" x="437.66" y="460" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">8:00 PM</text>
+      <rect id="footer" x="193" y="504" width="702" height="69" fill="rgba(242, 238, 235, 0.302)" stroke="#dbdee1" stroke-width="1" />
+      <text id="Pick a time to continue." x="217" y="543" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Pick a time to continue.</text>
+      <rect id="button" x="731.09" y="521" width="139.91" height="36" rx="12" fill="#007f34" opacity="0.5" />
+      <text id="Confirm booking" x="801.05" y="535" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Confirm booking</text>
+  </g>
+  <text id="Inline Feedback Widget label" x="64" y="2357" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Inline Feedback Widget</text>
+  <text id="feedback-widget id" x="64" y="2371" font-family="ui-monospace, monospace" font-size="12" fill="#737373">feedback-widget</text>
+  <g id="Inline Feedback Widget" transform="translate(64, 2389)">
+    <rect id="container" x="0" y="0" width="1088" height="274.5" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="344" y="65" width="400" height="144.5" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="How is this page working for you?" x="365" y="100" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">How is this page working for you?</text>
+      <rect id="container 3" x="365" y="122" width="83.5" height="66.5" rx="16" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="🙁" x="393.02" y="155" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="20">🙁</text>
+      <text id="Bad" x="397.55" y="170" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11">Bad</text>
+      <rect id="container 4" x="456.5" y="122" width="83.5" height="66.5" rx="16" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="😐" x="484.52" y="155" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="20">😐</text>
+      <text id="Fine" x="488.23" y="170" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11">Fine</text>
+      <rect id="container 5" x="548" y="122" width="83.5" height="66.5" rx="16" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="🙂" x="576.02" y="155" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="20">🙂</text>
+      <text id="Good" x="576.28" y="170" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11">Good</text>
+      <rect id="container 6" x="639.5" y="122" width="83.5" height="66.5" rx="16" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="😍" x="667.52" y="155" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="20">😍</text>
+      <text id="Great" x="668.02" y="170" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11">Great</text>
+  </g>
+  <text id="Form with Error Summary label" x="64" y="2779.5" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Form with Error Summary</text>
+  <text id="form-error-summary id" x="64" y="2793.5" font-family="ui-monospace, monospace" font-size="12" fill="#737373">form-error-summary</text>
+  <g id="Form with Error Summary" transform="translate(64, 2811.5)">
+    <rect id="container" x="0" y="0" width="1088" height="1182" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="312" y="65" width="464" height="1052" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="Create a team account" x="345" y="118" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="600" letter-spacing="-0.5">Create a team account</text>
+      <rect id="alert" x="345" y="146" width="398" height="218" rx="16" fill="rgba(235, 0, 20, 0.051)" stroke="rgba(230, 0, 10, 0.4)" stroke-width="1" />
+      <text id="There are 4 problems with this form" x="362" y="177" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">There are 4 problems with this form</text>
+      <text id="Work email" x="362" y="208" fill="#e7000b" font-family="ui-sans-serif, system-ui" font-size="14">Work email</text>
+      <text id=":" x="431.69" y="208" fill="#e7000b" font-family="ui-sans-serif, system-ui" font-size="14">:</text>
+      <text id="Enter an email address in the format" x="438.56" y="208" fill="#e7000b" font-family="ui-sans-serif, system-ui" font-size="14">Enter an email address in the format</text>
+      <text id="name@example.com." x="362" y="232" fill="#e7000b" font-family="ui-sans-serif, system-ui" font-size="14">name@example.com.</text>
+      <text id="Company: Enter the company this is for." x="362" y="260" fill="#e7000b" font-family="ui-sans-serif, system-ui" font-size="14">Company: Enter the company this is for.</text>
+      <text id="Number of seats" x="362" y="288" fill="#e7000b" font-family="ui-sans-serif, system-ui" font-size="14">Number of seats</text>
+      <text id=": 2" x="464.2" y="288" fill="#e7000b" font-family="ui-sans-serif, system-ui" font-size="14">:</text>
+      <text id="Seats must be a whole number between" x="471.08" y="288" fill="#e7000b" font-family="ui-sans-serif, system-ui" font-size="14">Seats must be a whole number between</text>
+      <text id="1 and 500." x="362" y="312" fill="#e7000b" font-family="ui-sans-serif, system-ui" font-size="14">1 and 500.</text>
+      <text id="Password: Use at least 12 characters." x="362" y="340" fill="#e7000b" font-family="ui-sans-serif, system-ui" font-size="14">Password: Use at least 12 characters.</text>
+      <text id="Full name" x="345" y="402" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Full name</text>
+      <rect id="field" x="345" y="414" width="398" height="40" rx="12" fill="#fdfcf8" stroke="#8d8f92" stroke-width="1" />
+      <text id="Work email 2" x="345" y="488" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Work email</text>
+      <text id="We use this for the account, and nothing…" x="345" y="508" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">We use this for the account, and nothing else.</text>
+      <rect id="field 2" x="345" y="518" width="398" height="40" rx="12" fill="#fdfcf8" stroke="#e7000b" stroke-width="1" />
+      <text id="Enter an email address in the format 2" x="383.81" y="578" fill="#e7000b" font-family="ui-sans-serif, system-ui" font-size="14">Enter an email address in the format</text>
+      <text id="name@example.com. 2" x="345" y="598" fill="#e7000b" font-family="ui-sans-serif, system-ui" font-size="14">name@example.com.</text>
+      <text id="Error:" x="345" y="578" fill="#e7000b" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Error:</text>
+      <text id="Company" x="345" y="638" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Company</text>
+      <rect id="field 3" x="345" y="650" width="398" height="40" rx="12" fill="#fdfcf8" stroke="#e7000b" stroke-width="1" />
+      <text id="Enter the company this is for." x="345" y="710" fill="#e7000b" font-family="ui-sans-serif, system-ui" font-size="14">Enter the company this is for.</text>
+      <text id="Error: 2" x="345" y="710" fill="#e7000b" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Error:</text>
+      <text id="Number of seats 2" x="345" y="750" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Number of seats</text>
+      <text id="A number between 1 and 500. You can chan…" x="345" y="770" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">A number between 1 and 500. You can change it later.</text>
+      <rect id="field 4" x="345" y="780" width="398" height="40" rx="12" fill="#fdfcf8" stroke="#e7000b" stroke-width="1" />
+      <text id="Seats must be a whole number between 1 a…" x="345" y="840" fill="#e7000b" font-family="ui-sans-serif, system-ui" font-size="14">Seats must be a whole number between 1 and 500.</text>
+      <text id="Error: 3" x="345" y="840" fill="#e7000b" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Error:</text>
+      <text id="Password" x="345" y="880" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Password</text>
+      <text id="At least 12 characters. Length is the on…" x="345" y="900" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">At least 12 characters. Length is the only requirement.</text>
+      <rect id="field 5" x="345" y="910" width="398" height="40" rx="12" fill="#fdfcf8" stroke="#e7000b" stroke-width="1" />
+      <text id="Use at least 12 characters." x="345" y="970" fill="#e7000b" font-family="ui-sans-serif, system-ui" font-size="14">Use at least 12 characters.</text>
+      <text id="Error: 4" x="345" y="970" fill="#e7000b" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Error:</text>
+      <rect id="button" x="345" y="1000" width="398" height="40" rx="12" fill="#007f34" />
+      <text id="Create account" x="544" y="1014" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Create account</text>
+      <text id="Nothing is checked until you submit — yo…" x="345" y="1064" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Nothing is checked until you submit — you will not be told your email is</text>
+      <text id="wrong while you are still typing it." x="345" y="1080" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">wrong while you are still typing it.</text>
+  </g>
+  <text id="Contact Sales Form label" x="64" y="4109.5" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Contact Sales Form</text>
+  <text id="contact-sales-form id" x="64" y="4123.5" font-family="ui-monospace, monospace" font-size="12" fill="#737373">contact-sales-form</text>
+  <g id="Contact Sales Form" transform="translate(64, 4141.5)">
+    <rect id="container" x="0" y="0" width="1088" height="668" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="section" x="1" y="1" width="1086" height="666" fill="#fdfcf8" />
+      <rect id="container 2" x="320" y="65" width="448" height="538" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="Talk to someone who builds this" x="353" y="118" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="600" letter-spacing="-0.5">Talk to someone who builds this</text>
+      <text id="Three fields, because a fourteen-field f…" x="353" y="148" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Three fields, because a fourteen-field form is a way of asking</text>
+      <text id="for the meeting twice. You get a reply i…" x="353" y="168" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">for the meeting twice. You get a reply inside one working day.</text>
+      <text id="Work email" x="353" y="212" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Work email</text>
+      <rect id="field" x="353" y="224" width="382" height="38" rx="10" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="We reply here. It is never added to a li…" x="353" y="278" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">We reply here. It is never added to a list.</text>
+      <text id="Company" x="353" y="312" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Company</text>
+      <rect id="field 2" x="353" y="324" width="382" height="38" rx="10" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Enough to look you up before the call." x="353" y="378" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Enough to look you up before the call.</text>
+      <text id="What are you building?" x="353" y="412" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">What are you building?</text>
+      <rect id="field 3" x="353" y="424" width="382" height="38" rx="10" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="One line is plenty. It decides who repli…" x="353" y="478" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">One line is plenty. It decides who replies.</text>
+      <rect id="button" x="353" y="498" width="382" height="36" rx="10" fill="#007f34" />
+      <text id="Request a call" x="544" y="512" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Request a call</text>
+  </g>
+  <text id="Support Ticket Form label" x="64" y="4925.5" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Support Ticket Form</text>
+  <text id="support-ticket-form id" x="64" y="4939.5" font-family="ui-monospace, monospace" font-size="12" fill="#737373">support-ticket-form</text>
+  <g id="Support Ticket Form" transform="translate(64, 4957.5)">
+    <rect id="container" x="0" y="0" width="1088" height="688" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="section" x="1" y="1" width="1086" height="686" fill="#fdfcf8" />
+      <rect id="container 2" x="320" y="65" width="448" height="558" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="Tell us what broke" x="353" y="118" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="600" letter-spacing="-0.5">Tell us what broke</text>
+      <text id="Most tickets take two round trips becaus…" x="353" y="148" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Most tickets take two round trips because the first reply has</text>
+      <text id="to ask what was already tried. This asks…" x="353" y="168" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">to ask what was already tried. This asks up front, and the</text>
+      <text id="answer is optional so it never blocks se…" x="353" y="188" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">answer is optional so it never blocks sending.</text>
+      <text id="Email" x="353" y="232" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Email</text>
+      <rect id="field" x="353" y="244" width="382" height="38" rx="10" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Where the reply goes. Weekdays, inside f…" x="353" y="298" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Where the reply goes. Weekdays, inside four hours.</text>
+      <text id="What happened?" x="353" y="332" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">What happened?</text>
+      <rect id="field 2" x="353" y="344" width="382" height="38" rx="10" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="One sentence. The detail goes below." x="353" y="398" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">One sentence. The detail goes below.</text>
+      <text id="What have you already tried?" x="353" y="432" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">What have you already tried?</text>
+      <rect id="field 3" x="353" y="444" width="382" height="38" rx="10" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Optional, and the field that saves a rou…" x="353" y="498" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Optional, and the field that saves a round trip.</text>
+      <rect id="button" x="353" y="518" width="382" height="36" rx="10" fill="#007f34" />
+      <text id="Send ticket" x="544" y="532" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Send ticket</text>
+  </g>
+</svg>

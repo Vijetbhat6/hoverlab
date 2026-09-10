@@ -455,7 +455,7 @@ export const WHERE_THEY_WIN: { claim: string; detail: string }[] = [
   {
     claim: 'Design files',
     detail:
-      'Untitled UI, Flowbite, Shadcnblocks and Preline all ship Figma — and Preline and Flowbite now give theirs away free. We ship frame exports and Dev Mode pairing, which is a better workflow once you are working, and no drawn component library to open. On a shopping list this is a column we cannot tick.',
+      'Untitled UI, Flowbite, Shadcnblocks and Preline all ship Figma — and Preline and Flowbite now give theirs away free. We ship every section as importable Figma frames, plus Dev Mode pairing, which is a better workflow once you are working. What we do not ship is a component library: no variants, no auto-layout, nothing to swap an instance of. Untitled UI sells 10k components with variants and we have frames, so this row still goes to them.',
   },
   {
     claim: 'Composition',

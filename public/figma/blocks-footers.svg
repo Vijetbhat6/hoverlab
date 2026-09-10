@@ -1,0 +1,174 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1216" height="2308" viewBox="0 0 1216 2308" id="Hoverlab — Footers">
+  <!--
+    Hoverlab — Footers. 5 sections, traced from the
+    rendered catalog. Drag this file onto a Figma canvas.
+
+    These are frames, not components: named, editable layers with real
+    geometry, colour and type. There are no variants, no auto-layout,
+    and no hover or motion — none of those exist in a static frame.
+
+    Every section here is free to copy as code at https://hoverlab.dev/blocks
+  -->
+  <rect id="Background" x="0" y="0" width="1216" height="2308" fill="#ffffff" />
+  <text id="Mega Footer with Link Columns label" x="64" y="84" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Mega Footer with Link Columns</text>
+  <text id="footer-mega id" x="64" y="98" font-family="ui-monospace, monospace" font-size="12" fill="#737373">footer-mega</text>
+  <g id="Mega Footer with Link Columns" transform="translate(64, 116)">
+    <rect id="container" x="0" y="0" width="1088" height="498" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="footer" x="1" y="1" width="1086" height="496" fill="rgba(255, 255, 255, 0.298)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="A" x="33" y="72" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="900">A</text>
+      <text id="Acme" x="79" y="80" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="700" letter-spacing="-0.4">Acme</text>
+      <text id="The toolkit for teams who would rather s…" x="33" y="125" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">The toolkit for teams who would rather ship than</text>
+      <text id="configure." x="33" y="147.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">configure.</text>
+      <rect id="link" x="33" y="179.5" width="36" height="36" rx="12" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="link 2" x="77" y="179.5" width="36" height="36" rx="12" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="link 3" x="121" y="179.5" width="36" height="36" rx="12" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="link 4" x="165" y="179.5" width="36" height="36" rx="12" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Product" x="387" y="70" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600" letter-spacing="0.6">Product</text>
+      <text id="Overview" x="387" y="107" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Overview</text>
+      <text id="Features" x="387" y="141" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Features</text>
+      <text id="Pricing" x="387" y="175" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Pricing</text>
+      <text id="Integrations" x="387" y="209" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Integrations</text>
+      <rect id="container 2" x="467.16" y="195.86" width="32.55" height="18.28" rx="9.14" fill="rgba(0, 128, 54, 0.149)" />
+      <text id="New" x="467.16" y="205.86" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="10" font-weight="600">New</text>
+      <text id="Changelog" x="387" y="243" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Changelog</text>
+      <text id="Developers" x="562" y="70" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600" letter-spacing="0.6">Developers</text>
+      <text id="Documentation" x="562" y="107" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Documentation</text>
+      <text id="API reference" x="562" y="141" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">API reference</text>
+      <text id="CLI" x="562" y="175" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">CLI</text>
+      <text id="Status" x="562" y="209" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Status</text>
+      <text id="Open source" x="562" y="243" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Open source</text>
+      <text id="Company" x="737" y="70" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600" letter-spacing="0.6">Company</text>
+      <text id="About" x="737" y="107" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">About</text>
+      <text id="Blog" x="737" y="141" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Blog</text>
+      <text id="Careers" x="737" y="175" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Careers</text>
+      <rect id="container 3" x="789.11" y="161.86" width="17.56" height="18.28" rx="8.78" fill="rgba(0, 128, 54, 0.149)" />
+      <text id="3" x="789.11" y="171.86" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="10" font-weight="600">3</text>
+      <text id="Customers" x="737" y="209" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Customers</text>
+      <text id="Contact" x="737" y="243" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Contact</text>
+      <text id="Resources" x="912" y="70" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600" letter-spacing="0.6">Resources</text>
+      <text id="Help centre" x="912" y="107" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Help centre</text>
+      <text id="Community" x="912" y="141" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Community</text>
+      <text id="Templates" x="912" y="175" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Templates</text>
+      <text id="Guides" x="912" y="209" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Guides</text>
+      <text id="Security" x="912" y="243" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Security</text>
+      <rect id="container 4" x="33" y="298" width="1022" height="54" rx="16" fill="rgba(253, 252, 248, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="All systems operational" x="58" y="329" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">All systems operational</text>
+      <rect id="container 5" x="58" y="321" width="8" height="8" rx="4" fill="rgba(0, 188, 125, 0.6)" />
+      <rect id="container 6" x="58" y="321" width="8" height="8" rx="4" fill="#00bc7d" />
+      <text id="Served from 14 regions worldwide" x="818.36" y="329" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Served from 14 regions worldwide</text>
+      <rect id="container 7" x="33" y="392" width="1022" height="49" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="© 2026 Acme, Inc. All rights reserved." x="33" y="433" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">© 2026 Acme, Inc. All rights reserved.</text>
+      <text id="Privacy" x="905.25" y="434" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Privacy</text>
+      <text id="Terms" x="962.27" y="434" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Terms</text>
+      <text id="Cookies" x="1013.27" y="434" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Cookies</text>
+  </g>
+  <text id="Minimal Footer Bar label" x="64" y="730" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Minimal Footer Bar</text>
+  <text id="footer-minimal id" x="64" y="744" font-family="ui-monospace, monospace" font-size="12" fill="#737373">footer-minimal</text>
+  <g id="Minimal Footer Bar" transform="translate(64, 762)">
+    <rect id="container" x="0" y="0" width="1088" height="99" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="footer" x="1" y="1" width="1086" height="97" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="A" x="33" y="48" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="900">A</text>
+      <text id="© 2026 Acme" x="71" y="54" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">© 2026 Acme</text>
+      <text id="Docs" x="433.73" y="55" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Docs</text>
+      <text id="Pricing" x="488.17" y="55" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Pricing</text>
+      <text id="Blog" x="554.3" y="55" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Blog</text>
+      <text id="Privacy" x="606.17" y="55" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Privacy</text>
+      <text id="Terms" x="673.34" y="55" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Terms</text>
+  </g>
+  <text id="Footer with Newsletter Band label" x="64" y="977" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Footer with Newsletter Band</text>
+  <text id="footer-newsletter id" x="64" y="991" font-family="ui-monospace, monospace" font-size="12" fill="#737373">footer-newsletter</text>
+  <g id="Footer with Newsletter Band" transform="translate(64, 1009)">
+    <rect id="container" x="0" y="0" width="1088" height="464" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="footer" x="1" y="1" width="1086" height="462" fill="rgba(255, 255, 255, 0.298)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="33" y="2" width="1022" height="134" rx="16" fill="rgba(253, 251, 247, 0.902)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="One email a month. Worth the inbox space…" x="66" y="63" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="24" font-weight="700" letter-spacing="-0.6">One email a month. Worth the inbox space.</text>
+      <text id="Product notes, engineering write-ups and…" x="66" y="93" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Product notes, engineering write-ups and the occasional postmortem.</text>
+      <rect id="field" x="634.44" y="35" width="256" height="44" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="button" x="898.44" y="35" width="123.56" height="44" rx="16" fill="#007f34" />
+      <text id="Subscribe" x="960.22" y="49" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Subscribe</text>
+      <text id="Unsubscribe in one click, from any email…" x="634.44" y="99" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Unsubscribe in one click, from any email.</text>
+      <text id="A" x="33" y="196" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="900">A</text>
+      <text id="Acme" x="75" y="204" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="700" letter-spacing="-0.4">Acme</text>
+      <text id="Product" x="296.5" y="196" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600" letter-spacing="0.6">Product</text>
+      <text id="Features" x="296.5" y="233" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Features</text>
+      <text id="Pricing" x="296.5" y="267" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Pricing</text>
+      <text id="Changelog" x="296.5" y="301" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Changelog</text>
+      <text id="Roadmap" x="296.5" y="335" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Roadmap</text>
+      <text id="Company" x="560" y="196" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600" letter-spacing="0.6">Company</text>
+      <text id="About" x="560" y="233" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">About</text>
+      <text id="Blog" x="560" y="267" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Blog</text>
+      <text id="Careers" x="560" y="301" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Careers</text>
+      <text id="Contact" x="560" y="335" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Contact</text>
+      <text id="Support" x="823.5" y="196" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600" letter-spacing="0.6">Support</text>
+      <text id="Help centre" x="823.5" y="233" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Help centre</text>
+      <text id="Documentation" x="823.5" y="267" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Documentation</text>
+      <text id="Status" x="823.5" y="301" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Status</text>
+      <text id="Community" x="823.5" y="335" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Community</text>
+      <rect id="container 3" x="33" y="390" width="1022" height="73" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="© 2026 Acme, Inc." x="33" y="431" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">© 2026 Acme, Inc.</text>
+      <text id="Privacy" x="966.98" y="432" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Privacy</text>
+      <text id="Terms" x="1024" y="432" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Terms</text>
+  </g>
+  <text id="App Footer with Status label" x="64" y="1589" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">App Footer with Status</text>
+  <text id="footer-status-locale id" x="64" y="1603" font-family="ui-monospace, monospace" font-size="12" fill="#737373">footer-status-locale</text>
+  <g id="App Footer with Status" transform="translate(64, 1621)">
+    <rect id="container" x="0" y="0" width="1088" height="75" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="footer" x="1" y="1" width="1086" height="73" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="All systems normal" x="25" y="42" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">All systems normal</text>
+      <text id="Docs" x="178.78" y="42" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Docs</text>
+      <text id="API" x="229.22" y="42" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">API</text>
+      <text id="Support" x="269.83" y="42" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Support</text>
+      <text id="Privacy" x="339.47" y="42" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Privacy</text>
+      <text id="Terms" x="402.64" y="42" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Terms</text>
+      <rect id="field" x="716.59" y="22" width="146" height="32" rx="12" fill="#fdfcf8" stroke="#8d8f92" stroke-width="1" />
+      <rect id="field 2" x="874.59" y="22" width="126" height="32" rx="12" fill="#fdfcf8" stroke="#8d8f92" stroke-width="1" />
+      <text id="v4.12.0" x="1012.59" y="42" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">v4.12.0</text>
+  </g>
+  <text id="Regulated Seller Footer label" x="64" y="1812" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Regulated Seller Footer</text>
+  <text id="footer-compliance id" x="64" y="1826" font-family="ui-monospace, monospace" font-size="12" fill="#737373">footer-compliance</text>
+  <g id="Regulated Seller Footer" transform="translate(64, 1844)">
+    <rect id="container" x="0" y="0" width="1088" height="400" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="footer" x="1" y="1" width="1086" height="398" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <rect id="container 2" x="25" y="42" width="28" height="28" rx="12" fill="#007f34" />
+      <text id="N" x="25" y="56" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="700">N</text>
+      <text id="Northwind" x="61" y="60" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Northwind</text>
+      <text id="Northwind Trading Ltd" x="25" y="100" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Northwind Trading Ltd</text>
+      <text id="Registered in England and Wales, company…" x="25" y="122" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Registered in England and Wales, company no. 09482013</text>
+      <text id="4th Floor, 12 Ridgemount Street" x="49" y="146" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">4th Floor, 12 Ridgemount Street</text>
+      <text id="London WC1E 7AE" x="49" y="165.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">London WC1E 7AE</text>
+      <text id="United Kingdom" x="49" y="185" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">United Kingdom</text>
+      <text id="VAT registration GB 284 9271 05. Prices …" x="25" y="216.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">VAT registration GB 284 9271 05. Prices include VAT where applicable.</text>
+      <text id="Legal" x="560" y="54" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600" letter-spacing="0.3">Legal</text>
+      <text id="Terms of service" x="560" y="87" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">Terms of service</text>
+      <text id="Privacy policy" x="560" y="119" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">Privacy policy</text>
+      <text id="Accessibility statement" x="560" y="151" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">Accessibility statement</text>
+      <text id="Security" x="560" y="183" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">Security</text>
+      <text id="Complaints" x="560" y="215" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">Complaints</text>
+      <text id="Cancellation and returns" x="560" y="247" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">Cancellation and returns</text>
+      <text id="Modern slavery statement" x="560" y="279" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">Modern slavery statement</text>
+      <text id="Region" x="827.5" y="54" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600" letter-spacing="0.3">Region</text>
+      <rect id="field" x="827.5" y="70" width="235.5" height="36" rx="12" fill="#fdfcf8" stroke="#8d8f92" stroke-width="1" />
+      <text id="Showing the entity, tax registration and" x="827.5" y="126" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Showing the entity, tax registration and</text>
+      <text id="consumer rights that apply in" x="827.5" y="142" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">consumer rights that apply in</text>
+      <text id="United" x="985.72" y="142" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">United</text>
+      <text id="Kingdom" x="827.5" y="158" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Kingdom</text>
+      <text id="." x="875.67" y="158" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">.</text>
+      <text id="We accept" x="827.5" y="198" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600" letter-spacing="0.3">We accept</text>
+      <rect id="list item" x="827.5" y="214" width="38.42" height="26.5" rx="10" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Visa" x="827.5" y="225" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="500">Visa</text>
+      <rect id="list item 2" x="871.92" y="214" width="73.91" height="26.5" rx="10" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Mastercard" x="871.92" y="225" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="500">Mastercard</text>
+      <rect id="list item 3" x="951.83" y="214" width="46.48" height="26.5" rx="10" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Amex" x="951.83" y="225" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="500">Amex</text>
+      <rect id="list item 4" x="1004.31" y="214" width="50.19" height="26.5" rx="10" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="PayPal" x="1004.31" y="225" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="500">PayPal</text>
+      <rect id="list item 5" x="827.5" y="246.5" width="67.83" height="26.5" rx="10" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Apple Pay" x="827.5" y="257.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="500">Apple Pay</text>
+      <rect id="list item 6" x="901.33" y="246.5" width="42.75" height="26.5" rx="10" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="SEPA" x="901.33" y="257.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="500">SEPA</text>
+      <rect id="container 3" x="25" y="318" width="1038" height="41" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="© 2026 Northwind Trading Ltd. All rights…" x="25" y="355" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">© 2026 Northwind Trading Ltd. All rights reserved.</text>
+      <text id="Cookie settings" x="357.61" y="355" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" text-anchor="middle">Cookie settings</text>
+      <text id="Report illegal content" x="424.25" y="355" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12">Report illegal content</text>
+  </g>
+</svg>

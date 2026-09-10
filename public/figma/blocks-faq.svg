@@ -1,0 +1,244 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1216" height="6389" viewBox="0 0 1216 6389" id="Hoverlab — FAQ">
+  <!--
+    Hoverlab — FAQ. 7 sections, traced from the
+    rendered catalog. Drag this file onto a Figma canvas.
+
+    These are frames, not components: named, editable layers with real
+    geometry, colour and type. There are no variants, no auto-layout,
+    and no hover or motion — none of those exist in a static frame.
+
+    Every section here is free to copy as code at https://hoverlab.dev/blocks
+  -->
+  <rect id="Background" x="0" y="0" width="1216" height="6389" fill="#ffffff" />
+  <text id="No-JS FAQ Accordion label" x="64" y="84" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">No-JS FAQ Accordion</text>
+  <text id="faq-accordion id" x="64" y="98" font-family="ui-monospace, monospace" font-size="12" fill="#737373">faq-accordion</text>
+  <g id="No-JS FAQ Accordion" transform="translate(64, 116)">
+    <rect id="container" x="0" y="0" width="1088" height="507" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Frequently asked questions" x="544" y="101" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="700" letter-spacing="-0.9" text-anchor="middle">Frequently asked questions</text>
+      <text id="Everything people ask before getting sta…" x="544" y="133" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16" text-anchor="middle">Everything people ask before getting started.</text>
+      <rect id="container 2" x="184" y="181" width="720" height="261" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Can I use this in a commercial project?" x="205" y="202" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600">Can I use this in a commercial project?</text>
+      <text id="Yes. Everything here is yours to ship in…" x="205" y="256" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Yes. Everything here is yours to ship in client work and paid products, with no attribution required.</text>
+      <text id="Do I need a specific framework?" x="205" y="267" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600">Do I need a specific framework?</text>
+      <text id="No. The markup is plain HTML and the sty…" x="205" y="322" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">No. The markup is plain HTML and the styling is utility classes, so it drops into any stack that can render</text>
+      <text id="an element." x="205" y="344.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">an element.</text>
+      <text id="How do updates work?" x="205" y="332" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600">How do updates work?</text>
+      <text id="Copied code is yours — nothing reaches b…" x="205" y="387" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Copied code is yours — nothing reaches back into your project. Pull a newer version whenever you want</text>
+      <text id="it." x="205" y="409.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">it.</text>
+      <text id="Is there a free tier?" x="205" y="397" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600">Is there a free tier?</text>
+      <text id="There is. A large part of the catalog is…" x="205" y="452" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">There is. A large part of the catalog is free forever; the paid plan unlocks the rest and removes usage</text>
+      <text id="limits." x="205" y="474.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">limits.</text>
+  </g>
+  <text id="Two-Column FAQ with Help Rail label" x="64" y="739" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Two-Column FAQ with Help Rail</text>
+  <text id="faq-two-column id" x="64" y="753" font-family="ui-monospace, monospace" font-size="12" fill="#737373">faq-two-column</text>
+  <g id="Two-Column FAQ with Help Rail" transform="translate(64, 771)">
+    <rect id="container" x="0" y="0" width="1088" height="520" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Questions, answered" x="25" y="133" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="700" letter-spacing="-0.9">Questions, answered</text>
+      <text id="The things people ask before they buy — …" x="25" y="166" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">The things people ask before they buy — and a</text>
+      <text id="way to ask the ones that are not here." x="25" y="190" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">way to ask the ones that are not here.</text>
+      <rect id="container 2" x="25" y="229" width="352" height="184.5" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Still not sure?" x="46" y="298" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600">Still not sure?</text>
+      <text id="Send the question. A person reads it, an…" x="46" y="325" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Send the question. A person reads it, and you get</text>
+      <text id="an answer rather than a link to this pag…" x="46" y="347.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">an answer rather than a link to this page.</text>
+      <text id="Ask a question" x="46" y="385.5" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Ask a question</text>
+      <rect id="container 3" x="441" y="97" width="622" height="326" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="What happens when my licence expires?" x="441" y="114" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600">What happens when my licence expires?</text>
+      <text id="Nothing stops working. What ends is acce…" x="441" y="177" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Nothing stops working. What ends is access to components published after</text>
+      <text id="your window — everything you already cop…" x="441" y="199.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">your window — everything you already copied stays yours to ship,</text>
+      <text id="permanently, with no check at runtime." x="441" y="222.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">permanently, with no check at runtime.</text>
+      <text id="Can I use this for client work?" x="441" y="179" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600">Can I use this for client work?</text>
+      <text id="Yes, on any paid plan, including project…" x="441" y="242" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Yes, on any paid plan, including projects you hand over to the client afterwards.</text>
+      <text id="The one thing no licence covers is resel…" x="441" y="264.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">The one thing no licence covers is reselling the components themselves as a</text>
+      <text id="competing library." x="441" y="287.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">competing library.</text>
+      <text id="Do I need to credit you?" x="441" y="244" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600">Do I need to credit you?</text>
+      <text id="No. Attribution is never required, on an…" x="441" y="306" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">No. Attribution is never required, on any plan, including the free one.</text>
+      <text id="Is there a team plan?" x="441" y="309" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600">Is there a team plan?</text>
+      <text id="There is, priced per seat, with shared b…" x="441" y="372" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">There is, priced per seat, with shared brand tokens and one workspace</text>
+      <text id="everybody pulls from. It can be billed m…" x="441" y="394.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">everybody pulls from. It can be billed monthly or bought outright for a year.</text>
+      <text id="What if I need something that is not in …" x="441" y="374" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600">What if I need something that is not in the catalog?</text>
+      <text id="Ask. Requests that several people want a…" x="441" y="437" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Ask. Requests that several people want are usually the next thing built, and the</text>
+      <text id="roadmap is public." x="441" y="459.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">roadmap is public.</text>
+  </g>
+  <text id="Open FAQ Grid label" x="64" y="1407" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Open FAQ Grid</text>
+  <text id="faq-grid id" x="64" y="1421" font-family="ui-monospace, monospace" font-size="12" fill="#737373">faq-grid</text>
+  <g id="Open FAQ Grid" transform="translate(64, 1439)">
+    <rect id="container" x="0" y="0" width="1088" height="663.25" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Common questions" x="544" y="133" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="700" letter-spacing="-0.9" text-anchor="middle">Common questions</text>
+      <text id="Short answers, all of them on the page." x="544" y="165" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16" text-anchor="middle">Short answers, all of them on the page.</text>
+      <text id="Is there a free plan?" x="56" y="237" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600">Is there a free plan?</text>
+      <text id="Yes, and it is not a trial. Browsing, cu…" x="56" y="266" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Yes, and it is not a trial. Browsing, customising and copying stay free</text>
+      <text id="permanently — what a paid licence buys i…" x="56" y="288.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">permanently — what a paid licence buys is the right to ship the result</text>
+      <text id="commercially." x="56" y="311.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">commercially.</text>
+      <text id="Which frameworks are supported?" x="56" y="367.25" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600">Which frameworks are supported?</text>
+      <text id="The effects are CSS-first and work anywh…" x="56" y="396.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">The effects are CSS-first and work anywhere that renders an element. The</text>
+      <text id="blocks, pages and templates are React an…" x="56" y="419" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">blocks, pages and templates are React and Tailwind.</text>
+      <text id="Do I need an account to copy code?" x="56" y="474.75" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600">Do I need an account to copy code?</text>
+      <text id="No. Every artifact is readable and copya…" x="56" y="503.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">No. Every artifact is readable and copyable without signing in, and the</text>
+      <text id="public API needs no key." x="56" y="526.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">public API needs no key.</text>
+      <text id="How do updates reach my project?" x="564" y="237" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600">How do updates reach my project?</text>
+      <text id="They do not, by design. Copied code is y…" x="564" y="266" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">They do not, by design. Copied code is yours and nothing reaches back into</text>
+      <text id="your repository — you pull a newer versi…" x="564" y="288.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">your repository — you pull a newer version when you actually want one.</text>
+      <text id="Can I customise before copying?" x="564" y="344.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600">Can I customise before copying?</text>
+      <text id="Yes. Colours, timing and sizing are edit…" x="564" y="373.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Yes. Colours, timing and sizing are editable in the browser, and what you</text>
+      <text id="copy is what you configured." x="564" y="396.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">copy is what you configured.</text>
+      <text id="What about accessibility?" x="564" y="452" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600">What about accessibility?</text>
+      <text id="Components ship with real semantics and …" x="564" y="481" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Components ship with real semantics and honour prefers-reduced-motion.</text>
+      <text id="Anything decorative that animates is gat…" x="564" y="503.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Anything decorative that animates is gated so it does not run for visitors</text>
+      <text id="who have asked for less motion." x="564" y="526.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">who have asked for less motion.</text>
+  </g>
+  <text id="FAQ Grouped by Topic label" x="64" y="2218.25" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">FAQ Grouped by Topic</text>
+  <text id="faq-categorized id" x="64" y="2232.25" font-family="ui-monospace, monospace" font-size="12" fill="#737373">faq-categorized</text>
+  <g id="FAQ Grouped by Topic" transform="translate(64, 2250.25)">
+    <rect id="container" x="0" y="0" width="1088" height="1694" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Answers" x="128" y="79" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" letter-spacing="0.7">Answers</text>
+      <text id="Everything we get asked," x="128" y="129" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="700" letter-spacing="-0.9">Everything we get asked,</text>
+      <text id="sorted by what it is about" x="128" y="169" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="700" letter-spacing="-0.9">sorted by what it is about</text>
+      <rect id="link" x="128" y="209" width="88.38" height="38" rx="19" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Billing" x="128" y="223" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Billing</text>
+      <text id="3" x="192.7" y="232" fill="rgba(87, 91, 95, 0.702)" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">3</text>
+      <rect id="link 2" x="224.38" y="209" width="99.5" height="38" rx="19" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Security" x="224.38" y="223" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Security</text>
+      <text id="3 2" x="300.2" y="232" fill="rgba(87, 91, 95, 0.702)" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">3</text>
+      <rect id="link 3" x="331.88" y="209" width="125.55" height="38" rx="19" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Integrations" x="331.88" y="223" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Integrations</text>
+      <text id="2" x="433.75" y="232" fill="rgba(87, 91, 95, 0.702)" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">2</text>
+      <rect id="link 4" x="465.42" y="209" width="100.34" height="38" rx="19" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Support" x="465.42" y="223" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Support</text>
+      <text id="2 2" x="542.09" y="232" fill="rgba(87, 91, 95, 0.702)" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">2</text>
+      <text id="Billing 2" x="128" y="309" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" letter-spacing="0.7">Billing</text>
+      <rect id="container 2" x="128" y="331" width="832" height="294" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Can I change plans mid-cycle?" x="128" y="352" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="500">Can I change plans mid-cycle?</text>
+      <text id="Yes, and the change takes effect immedia…" x="128" y="410" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">Yes, and the change takes effect immediately. Upgrades are prorated to</text>
+      <text id="the day; downgrades credit the unused re…" x="128" y="436" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">the day; downgrades credit the unused remainder against your next</text>
+      <text id="invoice rather than refunding it." x="128" y="462" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">invoice rather than refunding it.</text>
+      <text id="What happens if a payment fails?" x="128" y="515" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="500">What happens if a payment fails?</text>
+      <text id="We retry on days 1, 3 and 7 and email yo…" x="128" y="573" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">We retry on days 1, 3 and 7 and email you each time. Nothing is</text>
+      <text id="suspended until the fourth failure, and …" x="128" y="599" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">suspended until the fourth failure, and your data is retained for 30 days</text>
+      <text id="after that." x="128" y="625" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">after that.</text>
+      <text id="Do you offer annual invoicing?" x="128" y="580" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="500">Do you offer annual invoicing?</text>
+      <text id="On any plan, and it is the only option o…" x="128" y="638" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">On any plan, and it is the only option on Enterprise. Annual terms are</text>
+      <text id="billed once, so there is no recurring ch…" x="128" y="664" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">billed once, so there is no recurring charge that can fail — which matters</text>
+      <text id="if your cards decline cross-border subsc…" x="128" y="690" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">if your cards decline cross-border subscriptions.</text>
+      <text id="Security 2" x="128" y="687" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" letter-spacing="0.7">Security</text>
+      <rect id="container 3" x="128" y="709" width="832" height="294" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Where is our data stored?" x="128" y="730" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="500">Where is our data stored?</text>
+      <text id="In the region you pick at workspace crea…" x="128" y="788" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">In the region you pick at workspace creation: Virginia, Frankfurt or</text>
+      <text id="Sydney. It does not leave that region, i…" x="128" y="814" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">Sydney. It does not leave that region, including for backups, and the</text>
+      <text id="region cannot be changed later without a…" x="128" y="840" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">region cannot be changed later without a migration we run for you.</text>
+      <text id="Are you SOC 2 compliant?" x="128" y="893" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="500">Are you SOC 2 compliant?</text>
+      <text id="Type II, audited annually. The current r…" x="128" y="951" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">Type II, audited annually. The current report is available under NDA from</text>
+      <text id="the security page, along with our penetr…" x="128" y="977" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">the security page, along with our penetration test summary.</text>
+      <text id="Can we bring our own encryption keys?" x="128" y="958" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="500">Can we bring our own encryption keys?</text>
+      <text id="On Enterprise, via AWS KMS or Google Clo…" x="128" y="1016" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">On Enterprise, via AWS KMS or Google Cloud KMS. Revoking the key</text>
+      <text id="makes the workspace unreadable to us wit…" x="128" y="1042" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">makes the workspace unreadable to us within minutes.</text>
+      <text id="Integrations 2" x="128" y="1065" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" letter-spacing="0.7">Integrations</text>
+      <rect id="container 4" x="128" y="1087" width="832" height="229" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Does it work with our existing helpdesk?" x="128" y="1108" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="500">Does it work with our existing helpdesk?</text>
+      <text id="There are first-party integrations for Z…" x="128" y="1166" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">There are first-party integrations for Zendesk, Intercom, Front and Help</text>
+      <text id="Scout, and a webhook plus REST API for a…" x="128" y="1192" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">Scout, and a webhook plus REST API for anything else. Most teams run</text>
+      <text id="alongside their helpdesk for the first m…" x="128" y="1218" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">alongside their helpdesk for the first month rather than replacing it.</text>
+      <text id="Is there an API rate limit?" x="128" y="1271" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="500">Is there an API rate limit?</text>
+      <text id="600 requests a minute per workspace on p…" x="128" y="1329" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">600 requests a minute per workspace on paid plans, 60 on trials.</text>
+      <text id="Limits are per workspace rather than per…" x="128" y="1355" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">Limits are per workspace rather than per key, so adding keys does not</text>
+      <text id="add capacity." x="128" y="1381" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">add capacity.</text>
+      <text id="Support 2" x="128" y="1378" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" letter-spacing="0.7">Support</text>
+      <rect id="container 5" x="128" y="1400" width="832" height="229" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="What are your support hours?" x="128" y="1421" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="500">What are your support hours?</text>
+      <text id="Email is answered within one business da…" x="128" y="1479" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">Email is answered within one business day on every plan, including trials.</text>
+      <text id="Priority plans get four hours, and Enter…" x="128" y="1505" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">Priority plans get four hours, and Enterprise gets a shared Slack channel</text>
+      <text id="with a one-hour target during your worki…" x="128" y="1531" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">with a one-hour target during your working day.</text>
+      <text id="Do you help with migration?" x="128" y="1584" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="500">Do you help with migration?</text>
+      <text id="Yes, at no charge, on any plan. Most mig…" x="128" y="1642" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">Yes, at no charge, on any plan. Most migrations are an afternoon; we have</text>
+      <text id="never charged for one and do not intend …" x="128" y="1668" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">never charged for one and do not intend to start.</text>
+  </g>
+  <text id="Filterable FAQ with Fallback label" x="64" y="4060.25" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Filterable FAQ with Fallback</text>
+  <text id="faq-search id" x="64" y="4074.25" font-family="ui-monospace, monospace" font-size="12" fill="#737373">faq-search</text>
+  <g id="Filterable FAQ with Fallback" transform="translate(64, 4092.25)">
+    <rect id="container" x="0" y="0" width="1088" height="851" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Help" x="544" y="79" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" letter-spacing="0.7" text-anchor="middle">Help</text>
+      <text id="Search the questions" x="544" y="133" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="700" letter-spacing="-0.9" text-anchor="middle">Search the questions</text>
+      <rect id="field" x="192" y="169" width="704" height="48" rx="16" fill="#fdfcf8" stroke="#8d8f92" stroke-width="1" />
+      <rect id="container 2" x="192" y="265" width="704" height="521" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Can I change plans mid-cycle?" x="192" y="286" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="500">Can I change plans mid-cycle?</text>
+      <text id="Yes, immediately. Upgrades are prorated …" x="192" y="344" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">Yes, immediately. Upgrades are prorated to the day; downgrades credit</text>
+      <text id="the unused remainder against your next i…" x="192" y="370" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">the unused remainder against your next invoice rather than refunding it.</text>
+      <text id="Do you support single sign-on?" x="192" y="351" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="500">Do you support single sign-on?</text>
+      <text id="SAML 2.0 and OIDC on Team and above, wit…" x="192" y="409" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">SAML 2.0 and OIDC on Team and above, with SCIM provisioning on</text>
+      <text id="Enterprise. Okta, Entra ID, Google Works…" x="192" y="435" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">Enterprise. Okta, Entra ID, Google Workspace and JumpCloud are tested;</text>
+      <text id="anything standards-compliant should work…" x="192" y="461" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">anything standards-compliant should work.</text>
+      <text id="How do you handle compliance?" x="192" y="416" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="500">How do you handle compliance?</text>
+      <text id="SOC 2 Type II, audited annually, with th…" x="192" y="474" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">SOC 2 Type II, audited annually, with the current report available under</text>
+      <text id="NDA. GDPR and UK GDPR as a processor, wi…" x="192" y="500" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">NDA. GDPR and UK GDPR as a processor, with a DPA you can sign from</text>
+      <text id="the billing page. HIPAA BAAs on Enterpri…" x="192" y="526" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">the billing page. HIPAA BAAs on Enterprise.</text>
+      <text id="What is the API rate limit?" x="192" y="481" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="500">What is the API rate limit?</text>
+      <text id="600 requests a minute per workspace on p…" x="192" y="539" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">600 requests a minute per workspace on paid plans, 60 on trials.</text>
+      <text id="Limits are per workspace rather than per…" x="192" y="565" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">Limits are per workspace rather than per key, so adding keys does not</text>
+      <text id="add capacity." x="192" y="591" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">add capacity.</text>
+      <text id="Can we get a refund?" x="192" y="546" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="500">Can we get a refund?</text>
+      <text id="Within 30 days of a first purchase, no q…" x="192" y="604" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">Within 30 days of a first purchase, no questions asked, on any plan. After</text>
+      <text id="that we credit rather than refund, excep…" x="192" y="630" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">that we credit rather than refund, except where local law says otherwise.</text>
+      <text id="Where is our data stored?" x="192" y="611" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="500">Where is our data stored?</text>
+      <text id="In the region you pick at workspace crea…" x="192" y="669" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">In the region you pick at workspace creation: Virginia, Frankfurt or</text>
+      <text id="Sydney. It does not leave that region, i…" x="192" y="695" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">Sydney. It does not leave that region, including for backups.</text>
+      <text id="Do you help with migration?" x="192" y="676" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="500">Do you help with migration?</text>
+      <text id="Yes, at no charge, on any plan. Most mig…" x="192" y="734" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">Yes, at no charge, on any plan. Most migrations take an afternoon and</text>
+      <text id="our exports import without a schema rewr…" x="192" y="760" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">our exports import without a schema rewrite.</text>
+      <text id="What happens when a trial ends?" x="192" y="741" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="500">What happens when a trial ends?</text>
+      <text id="The workspace becomes read-only rather t…" x="192" y="799" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">The workspace becomes read-only rather than being deleted. Everything</text>
+      <text id="is still there for 30 days, and adding a…" x="192" y="825" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">is still there for 30 days, and adding a card restores it instantly.</text>
+  </g>
+  <text id="Objection FAQ label" x="64" y="5059.25" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Objection FAQ</text>
+  <text id="faq-objection-list id" x="64" y="5073.25" font-family="ui-monospace, monospace" font-size="12" fill="#737373">faq-objection-list</text>
+  <g id="Objection FAQ" transform="translate(64, 5091.25)">
+    <rect id="container" x="0" y="0" width="1088" height="543" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="section" x="1" y="1" width="1086" height="541" fill="#fdfcf8" />
+      <text id="The awkward questions" x="160" y="89" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="24" font-weight="600" letter-spacing="-0.6">The awkward questions</text>
+      <text id="Most FAQs answer what the company wishes…" x="160" y="119" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Most FAQs answer what the company wishes it were asked. These are the four that actually decide it, including the one</text>
+      <text id="where the honest answer is no." x="160" y="139" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">where the honest answer is no.</text>
+      <rect id="container 2" x="160" y="177" width="768" height="301" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <rect id="button" x="161" y="178" width="766" height="74" fill="rgba(242, 242, 237, 0.4)" />
+      <text id="Is this cheaper than building it ourselv…" x="181" y="208" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Is this cheaper than building it ourselves?</text>
+      <text id="For one screen, no — build it. It stops …" x="181" y="230" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">For one screen, no — build it. It stops being true somewhere around the fourth.</text>
+      <rect id="container 3" x="810.53" y="203" width="96.47" height="24" rx="12" fill="#f3f2ee" />
+      <text id="sometimes no" x="810.53" y="215" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">sometimes no</text>
+      <text id="What happens if you shut down?" x="181" y="283" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">What happens if you shut down?</text>
+      <text id="The source is already in your repository…" x="181" y="305" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">The source is already in your repository and carries no runtime dependency on us.</text>
+      <rect id="container 4" x="869.44" y="278" width="37.56" height="24" rx="12" fill="rgba(0, 128, 49, 0.102)" />
+      <text id="yes" x="869.44" y="290" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">yes</text>
+      <text id="Can I get a refund?" x="181" y="358" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Can I get a refund?</text>
+      <text id="Fourteen days, no questions, and it is s…" x="181" y="380" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Fourteen days, no questions, and it is stated on the refunds page rather than here only.</text>
+      <rect id="container 5" x="869.44" y="353" width="37.56" height="24" rx="12" fill="rgba(0, 128, 49, 0.102)" />
+      <text id="yes 2" x="869.44" y="365" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">yes</text>
+      <text id="Do I have to credit you?" x="181" y="433" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Do I have to credit you?</text>
+      <text id="No. Attribution is not required anywhere…" x="181" y="455" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">No. Attribution is not required anywhere, including on the free tier.</text>
+      <rect id="container 6" x="872.83" y="428" width="34.17" height="24" rx="12" fill="rgba(0, 128, 49, 0.102)" />
+      <text id="no" x="872.83" y="440" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">no</text>
+  </g>
+  <text id="Security FAQ label" x="64" y="5750.25" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Security FAQ</text>
+  <text id="security-faq-list id" x="64" y="5764.25" font-family="ui-monospace, monospace" font-size="12" fill="#737373">security-faq-list</text>
+  <g id="Security FAQ" transform="translate(64, 5782.25)">
+    <rect id="container" x="0" y="0" width="1088" height="543" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="section" x="1" y="1" width="1086" height="541" fill="#fdfcf8" />
+      <text id="Security, answered properly" x="160" y="89" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="24" font-weight="600" letter-spacing="-0.6">Security, answered properly</text>
+      <text id="These four arrive in every procurement r…" x="160" y="119" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">These four arrive in every procurement review. Answering them on a public page rather than in a questionnaire is worth</text>
+      <text id="about two weeks of a sales cycle." x="160" y="139" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">about two weeks of a sales cycle.</text>
+      <rect id="container 2" x="160" y="177" width="768" height="301" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <rect id="button" x="161" y="178" width="766" height="74" fill="rgba(242, 242, 237, 0.4)" />
+      <text id="Where is our data stored?" x="181" y="208" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Where is our data stored?</text>
+      <text id="The region you pick at signup. It is pin…" x="181" y="230" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">The region you pick at signup. It is pinned there and never replicated out of it.</text>
+      <rect id="container 3" x="849.02" y="203" width="57.98" height="24" rx="12" fill="rgba(0, 128, 49, 0.102)" />
+      <text id="pinned" x="849.02" y="215" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">pinned</text>
+      <text id="Do you train models on it?" x="181" y="283" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Do you train models on it?</text>
+      <text id="No, and there is no setting that turns i…" x="181" y="305" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">No, and there is no setting that turns it on.</text>
+      <rect id="container 4" x="872.83" y="278" width="34.17" height="24" rx="12" fill="rgba(0, 128, 49, 0.102)" />
+      <text id="no" x="872.83" y="290" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">no</text>
+      <text id="Who internally can read it?" x="181" y="358" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Who internally can read it?</text>
+      <text id="Support, on an approved ticket, time-box…" x="181" y="380" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Support, on an approved ticket, time-boxed and logged. You can export that log.</text>
+      <rect id="container 5" x="848.63" y="353" width="58.38" height="24" rx="12" fill="#f3f2ee" />
+      <text id="logged" x="848.63" y="365" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">logged</text>
+      <text id="What happens when we leave?" x="181" y="433" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">What happens when we leave?</text>
+      <text id="Full export any time. Deletion within 30…" x="181" y="455" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Full export any time. Deletion within 30 days of the request, backups included.</text>
+      <rect id="container 6" x="845.61" y="428" width="61.39" height="24" rx="12" fill="rgba(0, 128, 49, 0.102)" />
+      <text id="30 days" x="845.61" y="440" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">30 days</text>
+  </g>
+</svg>

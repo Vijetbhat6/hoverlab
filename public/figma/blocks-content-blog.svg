@@ -1,0 +1,455 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1216" height="7622" viewBox="0 0 1216 7622" id="Hoverlab — Content &amp; Blog">
+  <!--
+    Hoverlab — Content & Blog. 9 sections, traced from the
+    rendered catalog. Drag this file onto a Figma canvas.
+
+    These are frames, not components: named, editable layers with real
+    geometry, colour and type. There are no variants, no auto-layout,
+    and no hover or motion — none of those exist in a static frame.
+
+    Every section here is free to copy as code at https://hoverlab.dev/blocks
+  -->
+  <rect id="Background" x="0" y="0" width="1216" height="7622" fill="#ffffff" />
+  <text id="Release Timeline label" x="64" y="84" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Release Timeline</text>
+  <text id="changelog-timeline id" x="64" y="98" font-family="ui-monospace, monospace" font-size="12" fill="#737373">changelog-timeline</text>
+  <g id="Release Timeline" transform="translate(64, 116)">
+    <rect id="container" x="0" y="0" width="1088" height="644.02" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="What shipped recently" x="544" y="101" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="700" letter-spacing="-0.9" text-anchor="middle">What shipped recently</text>
+      <text id="Every release, in plain language." x="544" y="133" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16" text-anchor="middle">Every release, in plain language.</text>
+      <rect id="container 2" x="192.2" y="195" width="12" height="12" rx="6" fill="#007f34" stroke="#fdfcf8" stroke-width="2" />
+      <text id="Dashboard blocks" x="229" y="207" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700" letter-spacing="-0.45">Dashboard blocks</text>
+      <rect id="container 3" x="384.3" y="196" width="59.2" height="20" rx="10" fill="#f3f2ee" />
+      <text id="v2.4.0" x="384.3" y="208" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12" font-weight="600">v2.4.0</text>
+      <text id="Jul 14, 2026" x="455.5" y="209" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Jul 14, 2026</text>
+      <rect id="container 4" x="229" y="235" width="49.16" height="18.86" rx="4" fill="rgba(0, 188, 128, 0.149)" />
+      <text id="added" x="229" y="245.4" fill="#009966" font-family="ui-sans-serif, system-ui" font-size="10.4" font-weight="700" letter-spacing="0.26">added</text>
+      <text id="Twelve dashboard and data-table sections" x="288.16" y="247" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Twelve dashboard and data-table sections</text>
+      <rect id="container 5" x="229" y="263.86" width="49.16" height="18.86" rx="4" fill="rgba(0, 188, 128, 0.149)" />
+      <text id="added 2" x="229" y="274.26" fill="#009966" font-family="ui-sans-serif, system-ui" font-size="10.4" font-weight="700" letter-spacing="0.26">added</text>
+      <text id="Keyboard navigation across every table b…" x="288.16" y="275.86" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Keyboard navigation across every table block</text>
+      <rect id="container 6" x="229" y="292.72" width="64.41" height="18.86" rx="4" fill="rgba(0, 168, 248, 0.149)" />
+      <text id="changed" x="229" y="303.12" fill="#0084d1" font-family="ui-sans-serif, system-ui" font-size="10.4" font-weight="700" letter-spacing="0.26">changed</text>
+      <text id="Sidebar collapses below 1024px instead o…" x="303.41" y="304.72" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Sidebar collapses below 1024px instead of 768px</text>
+      <rect id="container 7" x="192.2" y="357.58" width="12" height="12" rx="6" fill="#007f34" stroke="#fdfcf8" stroke-width="2" />
+      <text id="Accessibility pass" x="229" y="369.58" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700" letter-spacing="-0.45">Accessibility pass</text>
+      <rect id="container 8" x="378.2" y="358.58" width="59.2" height="20" rx="10" fill="#f3f2ee" />
+      <text id="v2.3.1" x="378.2" y="370.58" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12" font-weight="600">v2.3.1</text>
+      <text id="Jun 2, 2026" x="449.41" y="371.58" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Jun 2, 2026</text>
+      <rect id="container 9" x="229" y="397.58" width="42.03" height="18.86" rx="4" fill="rgba(255, 154, 0, 0.149)" />
+      <text id="fixed" x="229" y="407.98" fill="#e17100" font-family="ui-sans-serif, system-ui" font-size="10.4" font-weight="700" letter-spacing="0.26">fixed</text>
+      <text id="Focus ring clipped inside overflow conta…" x="281.03" y="409.58" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Focus ring clipped inside overflow containers</text>
+      <rect id="container 10" x="229" y="426.44" width="42.03" height="18.86" rx="4" fill="rgba(255, 154, 0, 0.149)" />
+      <text id="fixed 2" x="229" y="436.84" fill="#e17100" font-family="ui-sans-serif, system-ui" font-size="10.4" font-weight="700" letter-spacing="0.26">fixed</text>
+      <text id="Marquee ignored prefers-reduced-motion" x="281.03" y="438.44" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Marquee ignored prefers-reduced-motion</text>
+      <rect id="container 11" x="192.2" y="491.3" width="12" height="12" rx="6" fill="#007f34" stroke="#fdfcf8" stroke-width="2" />
+      <text id="Theming" x="229" y="503.3" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700" letter-spacing="-0.45">Theming</text>
+      <rect id="container 12" x="312.63" y="492.3" width="59.2" height="20" rx="10" fill="#f3f2ee" />
+      <text id="v2.3.0" x="312.63" y="504.3" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12" font-weight="600">v2.3.0</text>
+      <text id="May 19, 2026" x="383.83" y="505.3" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">May 19, 2026</text>
+      <rect id="container 13" x="229" y="531.3" width="49.16" height="18.86" rx="4" fill="rgba(0, 188, 128, 0.149)" />
+      <text id="added 3" x="229" y="541.7" fill="#009966" font-family="ui-sans-serif, system-ui" font-size="10.4" font-weight="700" letter-spacing="0.26">added</text>
+      <text id="Token generator with contrast validation" x="288.16" y="543.3" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Token generator with contrast validation</text>
+      <rect id="container 14" x="229" y="560.16" width="64.41" height="18.86" rx="4" fill="rgba(0, 168, 248, 0.149)" />
+      <text id="changed 2" x="229" y="570.56" fill="#0084d1" font-family="ui-sans-serif, system-ui" font-size="10.4" font-weight="700" letter-spacing="0.26">changed</text>
+      <text id="All blocks now read semantic colour toke…" x="303.41" y="572.16" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">All blocks now read semantic colour tokens</text>
+  </g>
+  <text id="Public Roadmap Columns label" x="64" y="876.02" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Public Roadmap Columns</text>
+  <text id="roadmap-columns id" x="64" y="890.02" font-family="ui-monospace, monospace" font-size="12" fill="#737373">roadmap-columns</text>
+  <g id="Public Roadmap Columns" transform="translate(64, 908.02)">
+    <rect id="container" x="0" y="0" width="1088" height="538" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Roadmap" x="544" y="101" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="700" letter-spacing="-0.9" text-anchor="middle">Roadmap</text>
+      <text id="What is done, what is being built, and w…" x="544" y="133" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16" text-anchor="middle">What is done, what is being built, and what is next.</text>
+      <text id="Shipped" x="57" y="205" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600" letter-spacing="-0.4">Shipped</text>
+      <rect id="container 2" x="334.98" y="191" width="22.67" height="20" rx="10" fill="#f3f2ee" />
+      <text id="2" x="334.98" y="203" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">2</text>
+      <rect id="list item" x="33" y="229" width="324.66" height="82" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Marketing sections" x="50" y="262" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="500">Marketing sections</text>
+      <text id="Heroes, pricing, FAQ, footers." x="50" y="288" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Heroes, pricing, FAQ, footers.</text>
+      <rect id="list item 2" x="33" y="323" width="324.66" height="82" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Dark mode tokens" x="50" y="356" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="500">Dark mode tokens</text>
+      <text id="Every block reads semantic colours." x="50" y="382" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Every block reads semantic colours.</text>
+      <text id="In progress" x="405.66" y="205" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600" letter-spacing="-0.4">In progress</text>
+      <rect id="container 3" x="683.66" y="191" width="22.67" height="20" rx="10" fill="#f3f2ee" />
+      <text id="2 2" x="683.66" y="203" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">2</text>
+      <rect id="list item 3" x="381.66" y="229" width="324.67" height="82" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Dashboard blocks" x="398.66" y="262" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="500">Dashboard blocks</text>
+      <rect id="container 4" x="637.7" y="246" width="51.63" height="19.61" rx="9.8" fill="#f3f2ee" />
+      <text id="Q3 2026" x="637.7" y="256.4" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="10.4" font-weight="600">Q3 2026</text>
+      <text id="Shells, tables, settings." x="398.66" y="288" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Shells, tables, settings.</text>
+      <rect id="list item 4" x="381.66" y="323" width="324.67" height="82" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="CLI install" x="398.66" y="356" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="500">CLI install</text>
+      <rect id="container 5" x="637.7" y="340" width="51.63" height="19.61" rx="9.8" fill="#f3f2ee" />
+      <text id="Q3 2026 2" x="637.7" y="350.4" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="10.4" font-weight="600">Q3 2026</text>
+      <text id="Add a block straight to your repo." x="398.66" y="382" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Add a block straight to your repo.</text>
+      <text id="Planned" x="754.33" y="205" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600" letter-spacing="-0.4">Planned</text>
+      <rect id="container 6" x="1032.31" y="191" width="22.67" height="20" rx="10" fill="#f3f2ee" />
+      <text id="3" x="1032.31" y="203" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">3</text>
+      <rect id="list item 5" x="730.33" y="229" width="324.66" height="82" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Full page layouts" x="747.33" y="262" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="500">Full page layouts</text>
+      <rect id="container 7" x="986.14" y="246" width="51.84" height="19.61" rx="9.8" fill="#f3f2ee" />
+      <text id="Q4 2026" x="986.14" y="256.4" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="10.4" font-weight="600">Q4 2026</text>
+      <text id="Composed screens, not sections." x="747.33" y="288" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Composed screens, not sections.</text>
+      <rect id="list item 6" x="730.33" y="323" width="324.66" height="82" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Starter templates" x="747.33" y="356" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="500">Starter templates</text>
+      <rect id="container 8" x="986.14" y="340" width="51.84" height="19.61" rx="9.8" fill="#f3f2ee" />
+      <text id="Q4 2026 2" x="986.14" y="350.4" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="10.4" font-weight="600">Q4 2026</text>
+      <text id="Multi-page projects, ready to deploy." x="747.33" y="382" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Multi-page projects, ready to deploy.</text>
+      <rect id="list item 7" x="730.33" y="417" width="324.66" height="56" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Vue and Svelte ports" x="747.33" y="450" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="500">Vue and Svelte ports</text>
+      <rect id="container 9" x="1003.08" y="434" width="34.91" height="19.61" rx="9.8" fill="#f3f2ee" />
+      <text id="2027" x="1003.08" y="444.4" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="10.4" font-weight="600">2027</text>
+  </g>
+  <text id="Blog Index Grid label" x="64" y="1562.02" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Blog Index Grid</text>
+  <text id="blog-post-grid id" x="64" y="1576.02" font-family="ui-monospace, monospace" font-size="12" fill="#737373">blog-post-grid</text>
+  <g id="Blog Index Grid" transform="translate(64, 1594.02)">
+    <rect id="container" x="0" y="0" width="1088" height="790.5" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="From the blog" x="33" y="101" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="700" letter-spacing="-0.9">From the blog</text>
+      <rect id="link" x="651.17" y="80" width="70.72" height="24" rx="12" fill="#007f34" />
+      <text id="All posts" x="651.17" y="92" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600">All posts</text>
+      <rect id="link 2" x="729.89" y="79" width="91.14" height="26" rx="13" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Engineering" x="729.89" y="91" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Engineering</text>
+      <rect id="link 3" x="829.03" y="79" width="63.53" height="26" rx="13" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Design" x="829.03" y="91" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Design</text>
+      <rect id="link 4" x="900.56" y="79" width="68.73" height="26" rx="13" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Product" x="900.56" y="91" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Product</text>
+      <rect id="link 5" x="977.3" y="79" width="77.7" height="26" rx="13" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Company" x="977.3" y="91" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Company</text>
+      <rect id="link 6" x="33" y="137" width="1022" height="294.25" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="66" y="178" width="446" height="252.25" rx="16" fill="rgba(252, 251, 248, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 3" x="83" y="195" width="137.33" height="8" rx="4" fill="rgba(0, 128, 52, 0.4)" />
+      <rect id="container 4" x="83" y="215" width="309" height="8" rx="4" fill="rgba(88, 92, 96, 0.251)" />
+      <rect id="container 5" x="83" y="231" width="274.66" height="8" rx="4" fill="rgba(88, 92, 96, 0.251)" />
+      <rect id="container 6" x="83" y="247" width="206" height="8" rx="4" fill="rgba(87, 94, 94, 0.149)" />
+      <rect id="container 7" x="576" y="170" width="85.14" height="20" rx="10" fill="#f4f2ea" />
+      <text id="Engineering 2" x="576" y="182" fill="#13161a" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600">Engineering</text>
+      <text id="How we run incident" x="576" y="234" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="30" font-weight="700" letter-spacing="-0.75">How we run incident</text>
+      <text id="reviews nobody dreads" x="576" y="270" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="30" font-weight="700" letter-spacing="-0.75">reviews nobody dreads</text>
+      <text id="Blameless is easy to say and hard to sch…" x="576" y="305" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Blameless is easy to say and hard to schedule. The template, the</text>
+      <text id="timebox, and the one question we ask bef…" x="576" y="327.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">timebox, and the one question we ask before anyone opens a</text>
+      <text id="dashboard." x="576" y="350.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">dashboard.</text>
+      <text id="Priya Raman" x="576" y="394.25" fill="rgba(8, 11, 15, 0.8)" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Priya Raman</text>
+      <text id="Jul 8, 2026" x="655.89" y="394.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Jul 8, 2026</text>
+      <text id="9 min read" x="723.39" y="394.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">9 min read</text>
+      <rect id="link 7" x="33" y="451.25" width="240.5" height="274.25" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 8" x="54" y="472.25" width="57.53" height="20" rx="10" fill="#f3f2ee" />
+      <text id="Design 2" x="54" y="484.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600">Design</text>
+      <text id="Migrating 214 components" x="54" y="521.25" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="700" letter-spacing="-0.4">Migrating 214 components</text>
+      <text id="to semantic tokens" x="54" y="545.25" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="700" letter-spacing="-0.4">to semantic tokens</text>
+      <text id="Six weeks, zero visual" x="54" y="575.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Six weeks, zero visual</text>
+      <text id="regressions, one codemod we" x="54" y="598" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">regressions, one codemod we</text>
+      <text id="should have written first." x="54" y="620.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">should have written first.</text>
+      <text id="Dana Whitfield" x="54" y="680.5" fill="rgba(8, 11, 15, 0.8)" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Dana Whitfield</text>
+      <text id="Jun 24, 2026" x="147.5" y="680.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Jun 24, 2026</text>
+      <text id="7 min read" x="54" y="700.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">7 min read</text>
+      <rect id="link 8" x="293.5" y="451.25" width="240.5" height="274.25" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 9" x="314.5" y="472.25" width="85.14" height="20" rx="10" fill="#f3f2ee" />
+      <text id="Engineering 3" x="314.5" y="484.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600">Engineering</text>
+      <text id="Partitioning the" x="314.5" y="521.25" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="700" letter-spacing="-0.4">Partitioning the</text>
+      <text id="events table before" x="314.5" y="545.25" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="700" letter-spacing="-0.4">events table before</text>
+      <text id="it partitioned us" x="314.5" y="569.25" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="700" letter-spacing="-0.4">it partitioned us</text>
+      <text id="At 1.8B rows the vacuum" x="314.5" y="599.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">At 1.8B rows the vacuum</text>
+      <text id="stopped keeping up. What we" x="314.5" y="622" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">stopped keeping up. What we</text>
+      <text id="tried, in order." x="314.5" y="644.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">tried, in order.</text>
+      <text id="Marco Silva" x="314.5" y="680.5" fill="rgba(8, 11, 15, 0.8)" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Marco Silva</text>
+      <text id="Jun 10, 2026" x="389.27" y="680.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Jun 10, 2026</text>
+      <text id="11 min read" x="314.5" y="700.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">11 min read</text>
+      <rect id="link 9" x="554" y="451.25" width="240.5" height="274.25" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 10" x="575" y="472.25" width="62.73" height="20" rx="10" fill="#f3f2ee" />
+      <text id="Product 2" x="575" y="484.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600">Product</text>
+      <text id="The pricing page rewrite" x="575" y="521.25" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="700" letter-spacing="-0.4">The pricing page rewrite</text>
+      <text id="that halved support tickets" x="575" y="545.25" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="700" letter-spacing="-0.4">that halved support tickets</text>
+      <text id="Turns out &quot;Contact us&quot; was" x="575" y="575.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Turns out &quot;Contact us&quot; was</text>
+      <text id="doing a lot of damage for a" x="575" y="598" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">doing a lot of damage for a</text>
+      <text id="two-word button." x="575" y="620.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">two-word button.</text>
+      <text id="Alex Chen" x="575" y="680.5" fill="rgba(8, 11, 15, 0.8)" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Alex Chen</text>
+      <text id="May 28, 2026" x="641.7" y="680.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">May 28, 2026</text>
+      <text id="5 min read" x="575" y="700.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">5 min read</text>
+      <rect id="link 10" x="814.5" y="451.25" width="240.5" height="274.25" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 11" x="835.5" y="472.25" width="71.7" height="20" rx="10" fill="#f3f2ee" />
+      <text id="Company 2" x="835.5" y="484.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600">Company</text>
+      <text id="We stopped doing" x="835.5" y="521.25" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="700" letter-spacing="-0.4">We stopped doing</text>
+      <text id="take-homes and asked" x="835.5" y="545.25" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="700" letter-spacing="-0.4">take-homes and asked</text>
+      <text id="for a doc instead" x="835.5" y="569.25" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="700" letter-spacing="-0.4">for a doc instead</text>
+      <text id="A written design doc predicts" x="835.5" y="599.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">A written design doc predicts</text>
+      <text id="on-the-job performance better" x="835.5" y="622" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">on-the-job performance better</text>
+      <text id="than a weekend project." x="835.5" y="644.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">than a weekend project.</text>
+      <text id="Samir Haddad" x="835.5" y="680.5" fill="rgba(8, 11, 15, 0.8)" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Samir Haddad</text>
+      <text id="May 14, 2026" x="924.84" y="680.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">May 14, 2026</text>
+      <text id="6 min read" x="835.5" y="700.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">6 min read</text>
+  </g>
+  <text id="Article Header &amp; Byline label" x="64" y="2500.52" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Article Header &amp; Byline</text>
+  <text id="article-header id" x="64" y="2514.52" font-family="ui-monospace, monospace" font-size="12" fill="#737373">article-header</text>
+  <g id="Article Header &amp; Byline" transform="translate(64, 2532.52)">
+    <rect id="container" x="0" y="0" width="1088" height="721.5" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Engineering" x="184" y="82" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" letter-spacing="0.35">Engineering</text>
+      <text id="The day we deleted 40,000" x="184" y="145" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="48" font-weight="700" letter-spacing="-1.2">The day we deleted 40,000</text>
+      <text id="lines of feature flags" x="184" y="193" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="48" font-weight="700" letter-spacing="-1.2">lines of feature flags</text>
+      <text id="Flags are borrowed complexity — this is …" x="184" y="241" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="18">Flags are borrowed complexity — this is what it cost to pay ours back, and the two rules</text>
+      <text id="that keep the debt from growing again." x="184" y="270.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="18">that keep the debt from growing again.</text>
+      <rect id="container 2" x="184" y="311.5" width="720" height="78" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 3" x="184" y="328.5" width="44" height="44" rx="22" fill="rgba(0, 128, 49, 0.102)" />
+      <text id="PR" x="184" y="342.5" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="700">PR</text>
+      <text id="Priya Raman" x="240" y="344.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Priya Raman</text>
+      <text id="Staff Engineer · · 12 min read" x="240" y="364.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Staff Engineer · · 12 min read</text>
+      <text id="July 21, 2026" x="336.25" y="364.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">July 21, 2026</text>
+      <rect id="button" x="727.17" y="335.5" width="96.83" height="30" rx="12" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Copy link" x="775.59" y="347.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500" text-anchor="middle">Copy link</text>
+      <rect id="link" x="832" y="334.5" width="32" height="32" rx="12" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="link 2" x="872" y="334.5" width="32" height="32" rx="12" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="The pull request was titled “remove stal…" x="184" y="447.5" fill="rgba(8, 11, 16, 0.902)" font-family="ui-sans-serif, system-ui" font-size="16">The pull request was titled “remove stale flags, part 1 of 8” and it deleted more code than the</text>
+      <text id="previous quarter had added. Our flag ser…" x="184" y="473.5" fill="rgba(8, 11, 16, 0.902)" font-family="ui-sans-serif, system-ui" font-size="16">previous quarter had added. Our flag service listed 312 active flags; production telemetry showed 41</text>
+      <text id="of them had evaluated to the same value …" x="184" y="499.5" fill="rgba(8, 11, 16, 0.902)" font-family="ui-sans-serif, system-ui" font-size="16">of them had evaluated to the same value for every user since at least January. The rest were split</text>
+      <text id="roughly evenly between experiments nobod…" x="184" y="525.5" fill="rgba(8, 11, 16, 0.902)" font-family="ui-sans-serif, system-ui" font-size="16">roughly evenly between experiments nobody remembered starting and kill switches for services we</text>
+      <text id="had already decommissioned." x="184" y="551.5" fill="rgba(8, 11, 16, 0.902)" font-family="ui-sans-serif, system-ui" font-size="16">had already decommissioned.</text>
+      <text id="“A feature flag is a loan. The interest …" x="212" y="613.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="600" letter-spacing="-0.5">“A feature flag is a loan. The interest is every engineer who has to reason about</text>
+      <text id="both branches forever.”" x="212" y="646" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="600" letter-spacing="-0.5">both branches forever.”</text>
+  </g>
+  <text id="Team Grid label" x="64" y="3370.02" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Team Grid</text>
+  <text id="team-grid id" x="64" y="3384.02" font-family="ui-monospace, monospace" font-size="12" fill="#737373">team-grid</text>
+  <g id="Team Grid" transform="translate(64, 3402.02)">
+    <rect id="container" x="0" y="0" width="1088" height="637" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="The people building it" x="56" y="95" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="30" font-weight="700" letter-spacing="-0.75">The people building it</text>
+      <text id="A small team spread across four time zon…" x="56" y="125" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">A small team spread across four time zones, shipping every week since 2023.</text>
+      <rect id="list item" x="56" y="173" width="314.66" height="191.5" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="77" y="194" width="48" height="48" rx="24" fill="rgba(0, 128, 54, 0.149)" />
+      <text id="PR" x="77" y="208" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="700">PR</text>
+      <text id="Priya Raghavan" x="137" y="214" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Priya Raghavan</text>
+      <text id="Co-founder &amp; CEO" x="137" y="232" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Co-founder &amp; CEO</text>
+      <text id="Previously led platform at a payments" x="77" y="269" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Previously led platform at a payments</text>
+      <text id="unicorn; still reviews PRs." x="77" y="291.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">unicorn; still reviews PRs.</text>
+      <rect id="list item 2" x="386.66" y="173" width="314.67" height="191.5" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 3" x="407.66" y="194" width="48" height="48" rx="24" fill="#f4f2ea" />
+      <text id="MO" x="407.66" y="208" fill="#13161a" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="700">MO</text>
+      <text id="Marcus Okafor" x="467.66" y="214" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Marcus Okafor</text>
+      <text id="Co-founder &amp; CTO" x="467.66" y="232" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Co-founder &amp; CTO</text>
+      <text id="Wrote the first commit in March 2023 and" x="407.66" y="269" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Wrote the first commit in March 2023 and</text>
+      <text id="the incident runbook the week after." x="407.66" y="291.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">the incident runbook the week after.</text>
+      <rect id="list item 3" x="717.33" y="173" width="314.66" height="191.5" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 4" x="738.33" y="194" width="48" height="48" rx="24" fill="#f3f2ee" />
+      <text id="ES" x="738.33" y="208" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="700">ES</text>
+      <text id="Elena Sokolova" x="798.33" y="214" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Elena Sokolova</text>
+      <text id="Head of Design" x="798.33" y="232" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Head of Design</text>
+      <text id="Believes every empty state deserves as" x="738.33" y="269" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Believes every empty state deserves as</text>
+      <text id="much care as the dashboard." x="738.33" y="291.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">much care as the dashboard.</text>
+      <rect id="list item 4" x="56" y="380.5" width="314.66" height="191.5" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 5" x="77" y="401.5" width="48" height="48" rx="24" fill="rgba(0, 128, 49, 0.102)" />
+      <text id="TW" x="77" y="415.5" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="700">TW</text>
+      <text id="Tom Whitfield" x="137" y="421.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Tom Whitfield</text>
+      <text id="Staff Engineer" x="137" y="439.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Staff Engineer</text>
+      <text id="Owns the sync engine; measures success i…" x="77" y="476.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Owns the sync engine; measures success in</text>
+      <text id="p99s, not features." x="77" y="499.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">p99s, not features.</text>
+      <rect id="list item 5" x="386.66" y="380.5" width="314.67" height="191.5" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 6" x="407.66" y="401.5" width="48" height="48" rx="24" fill="#e0f0e7" />
+      <text id="AD" x="407.66" y="415.5" fill="#13161a" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="700">AD</text>
+      <text id="Aisha Diallo" x="467.66" y="421.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Aisha Diallo</text>
+      <text id="Product Manager" x="467.66" y="439.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Product Manager</text>
+      <text id="Turns forty support tickets a week into …" x="407.66" y="476.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Turns forty support tickets a week into a</text>
+      <text id="roadmap the team believes in." x="407.66" y="499.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">roadmap the team believes in.</text>
+      <rect id="list item 6" x="717.33" y="380.5" width="314.66" height="191.5" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 7" x="738.33" y="401.5" width="48" height="48" rx="24" fill="rgba(243, 242, 238, 0.6)" />
+      <text id="DK" x="738.33" y="415.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="700">DK</text>
+      <text id="Daniel Kim" x="798.33" y="421.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Daniel Kim</text>
+      <text id="Developer Advocate" x="798.33" y="439.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Developer Advocate</text>
+      <text id="If you found us through a conference tal…" x="738.33" y="476.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">If you found us through a conference talk in</text>
+      <text id="2026, it was probably his." x="738.33" y="499.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">2026, it was probably his.</text>
+  </g>
+  <text id="Careers Openings Board label" x="64" y="4155.02" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Careers Openings Board</text>
+  <text id="job-listing-board id" x="64" y="4169.02" font-family="ui-monospace, monospace" font-size="12" fill="#737373">job-listing-board</text>
+  <g id="Careers Openings Board" transform="translate(64, 4187.02)">
+    <rect id="container" x="0" y="0" width="1088" height="1008" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Open roles" x="184" y="95" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="30" font-weight="700" letter-spacing="-0.75">Open roles</text>
+      <text id="We’re hiring across three teams. Every r…" x="184" y="125" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">We’re hiring across three teams. Every role lists the real salary range — no “competitive”.</text>
+      <text id="Engineering" x="184" y="187" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" letter-spacing="0.35">Engineering</text>
+      <text id="3 openings" x="286.22" y="187" fill="rgba(87, 91, 95, 0.702)" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">3 openings</text>
+      <rect id="container 2" x="184" y="205" width="720" height="228" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Senior Frontend Engineer" x="205" y="236" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Senior Frontend Engineer</text>
+      <text id="Berlin" x="205" y="260" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Berlin</text>
+      <rect id="container 3" x="264.94" y="246" width="77.67" height="20" rx="10" fill="rgba(0, 128, 49, 0.102)" />
+      <text id="Remote OK" x="264.94" y="258" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600">Remote OK</text>
+      <text id="Full-time" x="354.61" y="260" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Full-time</text>
+      <text id="€95k–€120k" x="413.47" y="260" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">€95k–€120k</text>
+      <text id="Infrastructure Engineer, Sync" x="205" y="313" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Infrastructure Engineer, Sync</text>
+      <text id="Amsterdam" x="205" y="337" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Amsterdam</text>
+      <rect id="container 4" x="296.2" y="323" width="77.67" height="20" rx="10" fill="rgba(0, 128, 49, 0.102)" />
+      <text id="Remote OK 2" x="296.2" y="335" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600">Remote OK</text>
+      <text id="Full-time 2" x="385.88" y="337" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Full-time</text>
+      <text id="€100k–€130k" x="444.73" y="337" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">€100k–€130k</text>
+      <text id="Engineering Intern (Winter 2026)" x="205" y="390" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Engineering Intern (Winter 2026)</text>
+      <text id="Berlin 2" x="205" y="412" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Berlin</text>
+      <text id="Internship, 6 months" x="264.94" y="412" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Internship, 6 months</text>
+      <text id="€2.8k/month" x="385.83" y="412" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">€2.8k/month</text>
+      <text id="Design" x="184" y="487" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" letter-spacing="0.35">Design</text>
+      <text id="2 openings" x="243.59" y="487" fill="rgba(87, 91, 95, 0.702)" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">2 openings</text>
+      <rect id="container 5" x="184" y="505" width="720" height="151" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Product Designer, Growth" x="205" y="536" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Product Designer, Growth</text>
+      <text id="London" x="205" y="560" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">London</text>
+      <rect id="container 6" x="275.36" y="546" width="77.67" height="20" rx="10" fill="rgba(0, 128, 49, 0.102)" />
+      <text id="Remote OK 3" x="275.36" y="558" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600">Remote OK</text>
+      <text id="Full-time 3" x="365.03" y="560" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Full-time</text>
+      <text id="£75k–£95k" x="423.89" y="560" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">£75k–£95k</text>
+      <text id="Brand Designer" x="205" y="613" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Brand Designer</text>
+      <text id="London 2" x="205" y="635" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">London</text>
+      <text id="Full-time 4" x="275.36" y="635" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Full-time</text>
+      <text id="£60k–£78k" x="334.22" y="635" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">£60k–£78k</text>
+      <text id="Go-to-market" x="184" y="710" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" letter-spacing="0.35">Go-to-market</text>
+      <text id="2 openings 2" x="300.17" y="710" fill="rgba(87, 91, 95, 0.702)" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">2 openings</text>
+      <rect id="container 7" x="184" y="728" width="720" height="155" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Developer Marketing Lead" x="205" y="759" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Developer Marketing Lead</text>
+      <text id="New York" x="205" y="783" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">New York</text>
+      <rect id="container 8" x="284.97" y="769" width="77.67" height="20" rx="10" fill="rgba(0, 128, 49, 0.102)" />
+      <text id="Remote OK 4" x="284.97" y="781" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600">Remote OK</text>
+      <text id="Full-time 5" x="374.64" y="783" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Full-time</text>
+      <text id="$130k–$160k" x="433.5" y="783" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">$130k–$160k</text>
+      <text id="Solutions Engineer, EMEA" x="205" y="836" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Solutions Engineer, EMEA</text>
+      <text id="Dublin" x="205" y="860" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Dublin</text>
+      <rect id="container 9" x="269.88" y="846" width="77.67" height="20" rx="10" fill="rgba(0, 128, 49, 0.102)" />
+      <text id="Remote OK 5" x="269.88" y="858" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600">Remote OK</text>
+      <text id="Full-time 6" x="359.55" y="860" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Full-time</text>
+      <text id="€85k–€105k" x="418.41" y="860" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">€85k–€105k</text>
+      <text id="Nothing that fits? We read every specula…" x="184" y="937" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Nothing that fits? We read every speculative application — .</text>
+      <text id="jobs@hoverlab.dev" x="549.88" y="937" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">jobs@hoverlab.dev</text>
+  </g>
+  <text id="Three-Column Docs Frame label" x="64" y="5311.02" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Three-Column Docs Frame</text>
+  <text id="docs-layout id" x="64" y="5325.02" font-family="ui-monospace, monospace" font-size="12" fill="#737373">docs-layout</text>
+  <g id="Three-Column Docs Frame" transform="translate(64, 5343.02)">
+    <rect id="container" x="0" y="0" width="1088" height="1019.75" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="1" y="1" width="1086" height="1017.75" fill="#fdfcf8" />
+      <text id="Getting started" x="33" y="45" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="700" letter-spacing="0.6">Getting started</text>
+      <text id="Introduction" x="33" y="69" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Introduction</text>
+      <text id="Quickstart" x="33" y="103" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Quickstart</text>
+      <rect id="link" x="33" y="123" width="208" height="32" rx="12" fill="rgba(0, 128, 49, 0.102)" />
+      <text id="Authentication" x="33" y="137" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Authentication</text>
+      <text id="SDKs &amp; clients" x="33" y="171" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">SDKs &amp; clients</text>
+      <text id="Guides" x="33" y="225" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="700" letter-spacing="0.6">Guides</text>
+      <text id="Pagination" x="33" y="249" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Pagination</text>
+      <text id="Rate limits" x="33" y="283" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Rate limits</text>
+      <text id="Webhooks" x="33" y="317" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Webhooks</text>
+      <text id="API reference" x="33" y="371" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="700" letter-spacing="0.6">API reference</text>
+      <text id="Projects" x="33" y="395" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Projects</text>
+      <text id="Deployments" x="33" y="429" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Deployments</text>
+      <text id="Logs" x="33" y="463" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Logs</text>
+      <text id="Docs" x="281" y="47" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Docs</text>
+      <text id="Getting started 2" x="337.44" y="47" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Getting started</text>
+      <text id="Authentication 2" x="456.23" y="47" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Authentication</text>
+      <text id="Authentication 3" x="281" y="99" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="30" font-weight="700" letter-spacing="-0.75">Authentication</text>
+      <text id="Every request to the Acme API is authent…" x="281" y="134" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">Every request to the Acme API is authenticated with a bearer token. This</text>
+      <text id="page covers creating a key, storing it s…" x="281" y="158" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">page covers creating a key, storing it safely, and rotating it without</text>
+      <text id="downtime." x="281" y="182" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="16">downtime.</text>
+      <text id="Acme issues two kinds of keys. Secret ke…" x="281" y="228" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Acme issues two kinds of keys. Secret keys (prefixed</text>
+      <text id=") can read and write" x="674.17" y="228" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">) can read and write</text>
+      <text id="everything in your project and must only…" x="281" y="250.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">everything in your project and must only ever live on a server. Publishable keys</text>
+      <text id="(prefixed" x="281" y="273.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">(prefixed</text>
+      <text id=") are safe to ship in a browser bundle a…" x="408.88" y="273.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">) are safe to ship in a browser bundle and can only create client</text>
+      <text id="sessions." x="281" y="296.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">sessions.</text>
+      <rect id="container 3" x="604.56" y="215" width="69.61" height="20" rx="4" fill="#f3f2ee" />
+      <text id="sk_live_" x="604.56" y="227" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">sk_live_</text>
+      <rect id="container 4" x="339.27" y="260.5" width="69.61" height="20" rx="4" fill="#f3f2ee" />
+      <text id="pk_live_" x="339.27" y="272.5" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">pk_live_</text>
+      <text id="Keys are scoped to a project, not to you…" x="281" y="335" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Keys are scoped to a project, not to your account. Deleting a project revokes its keys</text>
+      <text id="immediately; removing a teammate does no…" x="281" y="357.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">immediately; removing a teammate does not, so treat offboarding as a reason to rotate.</text>
+      <text id="Creating an API key" x="281" y="425.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="600" letter-spacing="-0.5">Creating an API key</text>
+      <text id="Create a key from the dashboard under Se…" x="281" y="460.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Create a key from the dashboard under Settings → API keys, then pass it as a bearer</text>
+      <text id="token on every request:" x="281" y="483.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">token on every request:</text>
+      <rect id="container 5" x="281" y="507" width="542" height="110" rx="16" fill="#09090b" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 6" x="298" y="521" width="10" height="10" rx="5" fill="rgba(250, 44, 54, 0.8)" />
+      <rect id="container 7" x="314" y="521" width="10" height="10" rx="5" fill="rgba(254, 154, 0, 0.8)" />
+      <rect id="container 8" x="330" y="521" width="10" height="10" rx="5" fill="rgba(0, 189, 125, 0.8)" />
+      <text id="terminal" x="354" y="530" fill="rgba(255, 255, 255, 0.4)" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">terminal</text>
+      <text id="curl https://api.acme.dev/v1/projects \" x="298" y="574" fill="#d4d4d8" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">curl https://api.acme.dev/v1/projects \</text>
+      <text id="-H &quot;Authorization: Bearer $ACME_API_KEY&quot;" x="298" y="593.5" fill="#d4d4d8" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">-H &quot;Authorization: Bearer $ACME_API_KEY&quot;</text>
+      <rect id="container 9" x="281" y="641" width="542" height="79.5" rx="16" fill="rgba(0, 167, 235, 0.102)" stroke="rgba(0, 166, 242, 0.302)" stroke-width="1" />
+      <text id="the full secret is shown once, at creati…" x="360.89" y="673" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">the full secret is shown once, at creation. Acme stores only a hash, so a</text>
+      <text id="lost key cannot be recovered — it can on…" x="326" y="695.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">lost key cannot be recovered — it can only be rotated.</text>
+      <text id="Note:" x="326" y="673" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Note:</text>
+      <text id="Rotating keys" x="281" y="780.5" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="600" letter-spacing="-0.5">Rotating keys</text>
+      <text id="Rotation is overlap, not replacement: cr…" x="281" y="815.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Rotation is overlap, not replacement: create the new key, deploy it everywhere, and only</text>
+      <text id="then revoke the old one. Both keys stay …" x="281" y="838.25" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">then revoke the old one. Both keys stay valid during the window, so a slow rollout never</text>
+      <text id="turns into an outage." x="281" y="861" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">turns into an outage.</text>
+      <rect id="link 2" x="281" y="916.75" width="263" height="70" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Previous" x="326" y="945.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Previous</text>
+      <text id="Quickstart 2" x="326" y="963.75" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Quickstart</text>
+      <rect id="link 3" x="560" y="916.75" width="263" height="70" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Next" x="687.44" y="945.75" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Next</text>
+      <text id="SDKs &amp; clients 2" x="687.44" y="963.75" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">SDKs &amp; clients</text>
+      <text id="On this page" x="863" y="45" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="700" letter-spacing="0.6">On this page</text>
+      <text id="Creating an API key 2" x="863" y="75" fill="#007f34" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Creating an API key</text>
+      <text id="Rotating keys 2" x="863" y="107" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Rotating keys</text>
+  </g>
+  <text id="API Endpoint Reference label" x="64" y="6478.77" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">API Endpoint Reference</text>
+  <text id="api-endpoint-card id" x="64" y="6492.77" font-family="ui-monospace, monospace" font-size="12" fill="#737373">api-endpoint-card</text>
+  <g id="API Endpoint Reference" transform="translate(64, 6510.77)">
+    <rect id="container" x="0" y="0" width="1088" height="794.5" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="section" x="1" y="1" width="1086" height="792.5" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="26" y="27" width="37.61" height="24" rx="10" fill="rgba(0, 188, 128, 0.149)" />
+      <text id="GET" x="26" y="39" fill="#00bc7d" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12" font-weight="700">GET</text>
+      <text id="/v1/projects/" x="75.61" y="44" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="14">/v1/projects/</text>
+      <text id="{project_id}" x="184.81" y="44" fill="#fe9a00" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="14">{project_id}</text>
+      <text id="/deployments" x="285.63" y="44" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="14">/deployments</text>
+      <text id="List the deployments for a project, newe…" x="26" y="74" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">List the deployments for a project, newest first.</text>
+      <text id="Parameters" x="26" y="118" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" letter-spacing="-0.35">Parameters</text>
+      <rect id="container 3" x="26" y="132" width="1036" height="206" rx="16" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 4" x="27" y="133" width="1034" height="40.5" fill="rgba(241, 241, 237, 0.502)" />
+      <text id="Name" x="110.61" y="147" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Name</text>
+      <text id="Type" x="260.47" y="147" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Type</text>
+      <text id="Required" x="398.26" y="147" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Required</text>
+      <text id="Description" x="765.4" y="147" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Description</text>
+      <text id="project_id" x="27" y="185.5" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">project_id</text>
+      <text id="string" x="194.22" y="185.5" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">string</text>
+      <text id="Required 2" x="342.72" y="198" fill="#fe9a00" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="500">Required</text>
+      <text id="The project to list deployments for. Pas…" x="469.8" y="187.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">The project to list deployments for. Passed in the path.</text>
+      <text id="status" x="27" y="226.5" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">status</text>
+      <text id="string 2" x="194.22" y="226.5" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">string</text>
+      <text id="Optional" x="342.72" y="239" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Optional</text>
+      <text id="Filter by state: building, ready or fail…" x="469.8" y="228.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Filter by state: building, ready or failed.</text>
+      <text id="limit" x="27" y="267.5" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">limit</text>
+      <text id="integer" x="194.22" y="267.5" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">integer</text>
+      <text id="Optional 2" x="342.72" y="280" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Optional</text>
+      <text id="Page size, 1–100. Defaults to 20." x="469.8" y="269.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Page size, 1–100. Defaults to 20.</text>
+      <text id="cursor" x="27" y="308.5" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">cursor</text>
+      <text id="string 3" x="194.22" y="308.5" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">string</text>
+      <text id="Optional 3" x="342.72" y="321" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Optional</text>
+      <text id="Opaque cursor from a previous page’s nex…" x="469.8" y="310.5" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Opaque cursor from a previous page’s next_cursor.</text>
+      <rect id="container 5" x="26" y="362" width="510" height="406.5" rx="16" fill="#09090b" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Request" x="43" y="385" fill="rgba(255, 255, 255, 0.4)" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">Request</text>
+      <text id="curl &quot;https://api.acme.dev/v1/projects/p…" x="43" y="429" fill="#d4d4d8" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">curl &quot;https://api.acme.dev/v1/projects/prj_8kq2/deployments?limit=2&quot; \</text>
+      <text id="-H &quot;Authorization: Bearer $ACME_API_KEY&quot;" x="43" y="448.5" fill="#d4d4d8" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">-H &quot;Authorization: Bearer $ACME_API_KEY&quot;</text>
+      <rect id="container 6" x="552" y="362" width="510" height="406.5" rx="16" fill="#09090b" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Response" x="569" y="387" fill="rgba(255, 255, 255, 0.4)" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">Response</text>
+      <rect id="container 7" x="989.8" y="373" width="55.2" height="20" rx="10" fill="rgba(0, 188, 128, 0.149)" />
+      <text id="200 OK" x="989.8" y="385" fill="#00d492" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12" font-weight="500">200 OK</text>
+      <text id="{" x="569" y="433" fill="#d4d4d8" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">{</text>
+      <text id="&quot;data&quot;: [" x="569" y="452.5" fill="#d4d4d8" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">&quot;data&quot;: [</text>
+      <text id="{ 2" x="569" y="472" fill="#d4d4d8" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">{</text>
+      <text id="&quot;id&quot;: &quot;dep_9f2c1a&quot;," x="569" y="491.5" fill="#d4d4d8" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">&quot;id&quot;: &quot;dep_9f2c1a&quot;,</text>
+      <text id="&quot;status&quot;: &quot;ready&quot;," x="569" y="511" fill="#d4d4d8" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">&quot;status&quot;: &quot;ready&quot;,</text>
+      <text id="&quot;branch&quot;: &quot;main&quot;," x="569" y="530.5" fill="#d4d4d8" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">&quot;branch&quot;: &quot;main&quot;,</text>
+      <text id="&quot;created_at&quot;: &quot;2026-08-12T09:41:00Z&quot;" x="569" y="550" fill="#d4d4d8" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">&quot;created_at&quot;: &quot;2026-08-12T09:41:00Z&quot;</text>
+      <text id="}," x="569" y="569.5" fill="#d4d4d8" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">},</text>
+      <text id="{ 3" x="569" y="589" fill="#d4d4d8" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">{</text>
+      <text id="&quot;id&quot;: &quot;dep_8e1b0d&quot;," x="569" y="608.5" fill="#d4d4d8" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">&quot;id&quot;: &quot;dep_8e1b0d&quot;,</text>
+      <text id="&quot;status&quot;: &quot;failed&quot;," x="569" y="628" fill="#d4d4d8" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">&quot;status&quot;: &quot;failed&quot;,</text>
+      <text id="&quot;branch&quot;: &quot;fix/session-ttl&quot;," x="569" y="647.5" fill="#d4d4d8" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">&quot;branch&quot;: &quot;fix/session-ttl&quot;,</text>
+      <text id="&quot;created_at&quot;: &quot;2026-08-11T17:03:12Z&quot;" x="569" y="667" fill="#d4d4d8" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">&quot;created_at&quot;: &quot;2026-08-11T17:03:12Z&quot;</text>
+      <text id="}" x="569" y="686.5" fill="#d4d4d8" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">}</text>
+      <text id="]," x="569" y="706" fill="#d4d4d8" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">],</text>
+      <text id="&quot;next_cursor&quot;: &quot;dep_7d0a9c&quot;" x="569" y="725.5" fill="#d4d4d8" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">&quot;next_cursor&quot;: &quot;dep_7d0a9c&quot;</text>
+      <text id="} 2" x="569" y="745" fill="#d4d4d8" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">}</text>
+  </g>
+  <text id="Package Manager Code Tabs label" x="64" y="7421.27" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Package Manager Code Tabs</text>
+  <text id="code-tabs-panel id" x="64" y="7435.27" font-family="ui-monospace, monospace" font-size="12" fill="#737373">code-tabs-panel</text>
+  <g id="Package Manager Code Tabs" transform="translate(64, 7453.27)">
+    <rect id="container" x="0" y="0" width="1088" height="104.75" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="1" y="1" width="672" height="102.75" rx="16" fill="#09090b" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 3" x="18" y="19" width="10" height="10" rx="5" fill="rgba(250, 44, 54, 0.8)" />
+      <rect id="container 4" x="34" y="19" width="10" height="10" rx="5" fill="rgba(254, 154, 0, 0.8)" />
+      <rect id="container 5" x="50" y="19" width="10" height="10" rx="5" fill="rgba(0, 189, 125, 0.8)" />
+      <text id="Install the SDK" x="72" y="28" fill="rgba(255, 255, 255, 0.4)" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">Install the SDK</text>
+      <rect id="tab" x="463.16" y="12" width="41.61" height="24" rx="10" fill="rgba(255, 255, 255, 0.102)" />
+      <text id="npm" x="483.96" y="24" fill="#ffffff" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12" text-anchor="middle">npm</text>
+      <text id="pnpm" x="533.17" y="24" fill="rgba(255, 255, 255, 0.502)" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12" text-anchor="middle">pnpm</text>
+      <text id="yarn" x="585.98" y="24" fill="rgba(255, 255, 255, 0.502)" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12" text-anchor="middle">yarn</text>
+      <text id="bun" x="635.2" y="24" fill="rgba(255, 255, 255, 0.502)" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12" text-anchor="middle">bun</text>
+      <text id="npm install @acme/sdk" x="18" y="79" fill="#d4d4d8" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="14">npm install @acme/sdk</text>
+      <text id="$" x="18" y="79" fill="rgba(255, 255, 255, 0.298)" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="14">$</text>
+  </g>
+</svg>

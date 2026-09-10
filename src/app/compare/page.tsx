@@ -242,13 +242,14 @@ export default function ComparePage() {
                   </td>
                   <td className="px-4 py-4 font-medium">
                     All of it — readable, customisable and copyable without an
-                    account, plus the REST API and the MCP server
+                    account, plus the REST API, the MCP server and the Figma
+                    frame kit
                   </td>
                   <td className="px-4 py-4 text-center">
                     <Minus className="mx-auto h-4 w-4 text-muted-foreground" aria-hidden />
                     <span className="sr-only">
-                      No design files — a token file a designer can import, and no drawn
-                      components
+                      No component library — importable Figma frames for every section
+                      and a token file, but no drawn components with variants
                     </span>
                   </td>
                   <td className="px-4 py-4 text-muted-foreground">
