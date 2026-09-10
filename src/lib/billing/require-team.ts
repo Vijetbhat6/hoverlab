@@ -43,18 +43,20 @@ export async function requireTeam(feature: string): Promise<TeamGate> {
      * 402 and an upgrade target, matching requirePro: this is a purchase
      * away rather than a permission the caller will never have.
      *
-     * The message names Team specifically. A Studio holder landing here
-     * already has a workspace and seats, so "upgrade" would read as
-     * nonsense unless it says which plan and why.
+     * The message names Team specifically. A Studio or Enterprise holder
+     * landing here already has a workspace and seats, so "upgrade" would
+     * read as nonsense unless it says which plan and why.
      */
     return {
       response: NextResponse.json(
         {
           error: `${feature} is part of the Team plan.`,
           upgrade: '/pricing',
-          hint: ent.hasStudio
-            ? 'Studio covers the licence for ten people; the shared workspace is what Team adds.'
-            : undefined,
+          hint: ent.hasEnterprise
+            ? 'Enterprise covers the licence for fifty people; the shared workspace is what Team adds.'
+            : ent.hasStudio
+              ? 'Studio covers the licence for ten people; the shared workspace is what Team adds.'
+              : undefined,
         },
         { status: 402 },
       ),

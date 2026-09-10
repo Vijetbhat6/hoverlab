@@ -36,6 +36,20 @@ export interface Entitlements {
   /** Seat on a one-time Studio license. Grants Pro, not Team. */
   hasStudio: boolean
   /**
+   * Seat on a one-time Enterprise license — fifty seats instead of ten.
+   *
+   * Identical in kind to `hasStudio` and separate from it anyway, because
+   * the two differ in exactly one thing that matters to a caller: how many
+   * people the licence covers. Folding Enterprise into `hasStudio` would
+   * make the flag mean "some one-time multi-seat licence" while still
+   * being named after the ten-seat one, and every seat-count message on
+   * /account would then be reading the wrong number off the right flag.
+   *
+   * Grants Pro, not Team — same as Studio. Fifty seats buy the licence for
+   * fifty people, not the shared workspace.
+   */
+  hasEnterprise: boolean
+  /**
    * Active Pro+ subscription — a monthly AI credit allowance.
    *
    * Grants no catalog rights at all, which is why it is a separate flag
@@ -90,6 +104,7 @@ export const FREE_ENTITLEMENTS: Entitlements = {
   plan: 'free',
   hasPro: false,
   hasStudio: false,
+  hasEnterprise: false,
   hasPlus: false,
   hasTeam: false,
   teamId: null,
@@ -150,6 +165,7 @@ export async function getEntitlements(
 
   let liveTeamId: string | null = null
   let liveStudioId: string | null = null
+  let liveEnterpriseId: string | null = null
   if (teamIds.length) {
     // getAll is a single round trip for all of them, not one read per team.
     const teamRefs = teamIds.map((id) => db.collection('teams').doc(id))
@@ -165,7 +181,9 @@ export async function getEntitlements(
       // be read off the document rather than inferred from membership. An
       // older team document has no `kind` at all, and predates Studio — it
       // is a subscription.
-      if (t.kind === 'studio') {
+      if (t.kind === 'enterprise') {
+        liveEnterpriseId ??= team.id
+      } else if (t.kind === 'studio') {
         liveStudioId ??= team.id
       } else {
         liveTeamId ??= team.id
@@ -178,6 +196,7 @@ export async function getEntitlements(
 
   const hasTeam = liveTeamId !== null
   const hasStudio = liveStudioId !== null
+  const hasEnterprise = liveEnterpriseId !== null
 
   // Pro+ is a subscription on the profile rather than a workspace: it seats
   // exactly one person and shares nothing, so a teams/ document for it
@@ -188,20 +207,32 @@ export async function getEntitlements(
   )
 
   return {
-    // Team is the higher plan for display, then Studio — a Pro licence with
-    // company on it. Pro+ is deliberately not in this ladder: it is an
-    // add-on, and someone holding it alone is still on the free catalog
-    // licence, so it shows beside the plan rather than instead of it.
-    plan: hasTeam ? 'team' : hasStudio ? 'studio' : hasPro ? 'pro' : 'free',
+    // Team is the higher plan for display, then Enterprise, then Studio —
+    // both of the last two are a Pro licence with company on it, and they
+    // rank by how much company. Pro+ is deliberately not in this ladder: it
+    // is an add-on, and someone holding it alone is still on the free
+    // catalog licence, so it shows beside the plan rather than instead of it.
+    plan: hasTeam
+      ? 'team'
+      : hasEnterprise
+        ? 'enterprise'
+        : hasStudio
+          ? 'studio'
+          : hasPro
+            ? 'pro'
+            : 'free',
     hasPro,
     hasStudio,
+    hasEnterprise,
     hasPlus,
     hasTeam,
-    teamId: liveTeamId ?? liveStudioId,
-    // A Team seat and a Studio seat both include everything Pro grants.
-    canUseProFeatures: hasPro || hasStudio || hasTeam,
+    teamId: liveTeamId ?? liveEnterpriseId ?? liveStudioId,
+    // A Team seat, an Enterprise seat and a Studio seat all include
+    // everything Pro grants.
+    canUseProFeatures: hasPro || hasStudio || hasEnterprise || hasTeam,
     // Shared brand tokens and shared collections are the subscription's
-    // product. Studio buys the license for ten people, not the workspace.
+    // product. Studio and Enterprise buy the licence for ten and fifty
+    // people respectively, not the workspace.
     canUseTeamFeatures: hasTeam,
   }
 }

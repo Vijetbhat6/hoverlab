@@ -79,12 +79,25 @@ export const SUPPORT_BY_PLAN: Record<PlanId, SupportTierId> = {
   // it cannot be bought without Pro.
   plus: 'email',
   studio: 'priority',
+  /*
+   * Priority, the same as Studio, and deliberately not a tier of its own.
+   *
+   * A fifty-seat licence is the obvious place to promise a named contact or
+   * a same-day SLA, and there is nobody here to be either. Inventing a
+   * fourth tier would put a response time on the pricing page that one
+   * person cannot hold, which is worse for the buyer than the honest answer
+   * and much worse for us — the tier above `priority` gets added when there
+   * is a support hire behind it, not when there is a price high enough to
+   * imply one. Same rule as the Enterprise card not selling SSO.
+   */
+  enterprise: 'priority',
   team: 'priority',
   'team-annual': 'priority',
   // A renewal buys another update window on a licence already held; the
   // support tier is the one that licence already had.
   renewal: 'email',
   'renewal-studio': 'priority',
+  'renewal-enterprise': 'priority',
 }
 
 export function supportFor(plan: PlanId): SupportTier {

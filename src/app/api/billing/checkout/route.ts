@@ -68,7 +68,7 @@ async function checkoutPack(user: CheckoutUser, packId: string): Promise<Respons
 /**
  * Create a Polar checkout session and return its hosted URL.
  *
- * POST { plan: 'pro' | 'plus' | 'studio' | 'team', seats?: number } → { url }
+ * POST { plan: 'pro' | 'studio' | 'enterprise' | 'team', seats?: number } → { url }
  * POST { pack: 'credits-500' | 'credits-2000' }                    → { url }
  *
  * Requires a signed-in user: the webhook needs a local user to attach the
@@ -144,13 +144,21 @@ export async function POST(request: Request) {
    */
   if (isRenewal(planId)) {
     const ent = await getEntitlements(user.id)
-    const held = ent.hasTeam ? 'team' : ent.hasStudio ? 'studio' : ent.hasPro ? 'pro' : 'free'
+    const held = ent.hasTeam
+      ? 'team'
+      : ent.hasEnterprise
+        ? 'enterprise'
+        : ent.hasStudio
+          ? 'studio'
+          : ent.hasPro
+            ? 'pro'
+            : 'free'
     if (renewalFor(held) !== planId) {
       return NextResponse.json(
         {
           error:
             held === 'free'
-              ? 'A renewal extends a licence you already hold. Buy Pro or Studio first.'
+              ? 'A renewal extends a licence you already hold. Buy Pro, Studio or Enterprise first.'
               : held === 'team'
                 ? 'Team includes updates for as long as the plan runs — there is nothing to renew.'
                 : `That renewal is for a different plan than the one on this account.`,
@@ -170,9 +178,9 @@ export async function POST(request: Request) {
 
   // A customer picks a seat count only on the per-seat Team plan; clamp it to
   // a sane range so a crafted request can't create a 10,000-seat checkout.
-  // Studio's ten seats come from the catalog instead — the buyer isn't
-  // choosing a quantity, so accepting one from the body would let a client
-  // ask for a 500-seat Studio at the ten-seat price.
+  // Studio's ten and Enterprise's fifty come from the catalog instead — the
+  // buyer isn't choosing a quantity, so accepting one from the body would
+  // let a client ask for a 500-seat Studio at the ten-seat price.
   const seats = plan.perSeat
     ? Math.min(Math.max(Number(body.seats) || 1, 1), 500)
     : (plan.includedSeats ?? 1)

@@ -117,6 +117,8 @@ const TEAM_NAME = 'Hoverlab Team'
 const TEAM_ANNUAL_NAME = 'Hoverlab Team, annual'
 const RENEWAL_NAME = 'Hoverlab Pro updates renewal'
 const RENEWAL_STUDIO_NAME = 'Hoverlab Studio updates renewal'
+const ENTERPRISE_NAME = 'Hoverlab Enterprise'
+const RENEWAL_ENTERPRISE_NAME = 'Hoverlab Enterprise updates renewal'
 
 /** Collect a paginated Polar list into a plain array. */
 async function collect<T>(pager: AsyncIterable<{ result: { items: T[] } }>): Promise<T[]> {
@@ -253,6 +255,30 @@ async function main() {
   })
 
   /*
+   * Enterprise — the same product as Studio for five times the seats, and a
+   * separate Polar product rather than a quantity on the Studio one for the
+   * same reason Studio is not a quantity on Pro: the seat count is a
+   * property of the SKU, so Polar sells one thing at one price and the app
+   * catalog holds the number.
+   */
+  const enterpriseId = await ensureProduct(
+    ENTERPRISE_NAME,
+    'POLAR_PRODUCT_ID_ENTERPRISE',
+    {
+      name: ENTERPRISE_NAME,
+      description:
+        'One-time commercial license covering fifty people. Everything Pro ' +
+        'grants, for a whole company, with no renewal. Seats and the ' +
+        'licence — it does not include SSO or a private repository.',
+      recurringInterval: null,
+      prices: [
+        { amountType: 'fixed', priceAmount: 99900, priceCurrency: 'usd' },
+        { amountType: 'fixed', priceAmount: 9500000, priceCurrency: 'inr' },
+      ],
+    },
+  )
+
+  /*
    * Renewals. Not licences — each buys another twelve months of catalog
    * updates on a licence already held, priced at ~40% of the plan it
    * renews. Two products rather than one because a Studio holder renewing
@@ -286,6 +312,22 @@ async function main() {
       prices: [
         { amountType: 'fixed', priceAmount: 12000, priceCurrency: 'usd' },
         { amountType: 'fixed', priceAmount: 1120000, priceCurrency: 'inr' },
+      ],
+    },
+  )
+
+  const renewalEnterpriseId = await ensureProduct(
+    RENEWAL_ENTERPRISE_NAME,
+    'POLAR_PRODUCT_ID_RENEWAL_ENTERPRISE',
+    {
+      name: RENEWAL_ENTERPRISE_NAME,
+      description:
+        'Twelve more months of catalog updates on an existing Hoverlab ' +
+        'Enterprise license, covering all fifty seats.',
+      recurringInterval: null,
+      prices: [
+        { amountType: 'fixed', priceAmount: 40000, priceCurrency: 'usd' },
+        { amountType: 'fixed', priceAmount: 3800000, priceCurrency: 'inr' },
       ],
     },
   )
@@ -601,6 +643,8 @@ async function main() {
     | 'team-annual'
     | 'renewal'
     | 'renewal-studio'
+    | 'enterprise'
+    | 'renewal-enterprise'
 
   /**
    * Per-plan facts that do not vary by band.
@@ -631,6 +675,16 @@ async function main() {
     'renewal-studio': {
       productId: renewalStudioId,
       label: 'Studio renewal',
+      duration: 'once',
+    },
+    enterprise: {
+      productId: enterpriseId,
+      label: 'Enterprise',
+      duration: 'once',
+    },
+    'renewal-enterprise': {
+      productId: renewalEnterpriseId,
+      label: 'Enterprise renewal',
       duration: 'once',
     },
   }

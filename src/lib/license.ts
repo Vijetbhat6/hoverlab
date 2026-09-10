@@ -74,7 +74,7 @@ export const COMMERCIAL_LICENSE: LicenseTerms = {
   kind: 'commercial',
   name: 'Commercial licence',
   summary:
-    'Included with Pro, Studio and Team. It covers work you are paid for — client projects, products that charge money, anything shipped under a company name.',
+    'Included with Pro, Studio, Enterprise and Team. It covers work you are paid for — client projects, products that charge money, anything shipped under a company name.',
   grants: [
     'Everything in the free licence.',
     'Unlimited commercial projects — client work, paid products, SaaS, internal company tools.',

@@ -63,10 +63,10 @@ export const metadata: Metadata = {
  * The plans a buyer actually chooses between.
  *
  * Renewals and the AI add-on carry a support tier so the type stays
- * exhaustive, but neither is a thing anyone buys first, and listing eight
- * rows to describe three commitments would obscure the three.
+ * exhaustive, but neither is a thing anyone buys first, and listing every
+ * row to describe four commitments would obscure the four.
  */
-const LADDER = ['free', 'pro', 'studio', 'team'] as const
+const LADDER = ['free', 'pro', 'studio', 'enterprise', 'team'] as const
 
 export default function SupportPage() {
   const channels = supportChannels()

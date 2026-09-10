@@ -8,7 +8,14 @@ import { generateInviteCode, normalizeInviteCode } from './invite-code'
  *
  * A workspace is a `teams/{id}` document. Two kinds share it:
  *
- *   kind 'studio'  a one-time license covering N people, status 'lifetime'
+ *   kind 'studio'  a one-time license covering ten people, status 'lifetime'
+ *   kind 'enterprise'
+ *                  the same, for fifty. A separate kind rather than a
+ *                  'studio' with a bigger `seats` number, because the seat
+ *                  count is already on the document and the kind is what
+ *                  the UI names the licence by — one that called itself
+ *                  Studio while covering fifty would be wrong on every
+ *                  screen that prints it.
  *   kind 'team'    per-seat. Status from Polar when it is the monthly
  *                  subscription; status 'term' with a real end date when it
  *                  was bought as an annual licence ('team-annual'), which
@@ -38,7 +45,7 @@ export { generateInviteCode, normalizeInviteCode }
 export interface Workspace {
   id: string
   name: string
-  kind: 'studio' | 'team'
+  kind: 'studio' | 'enterprise' | 'team'
   /** Seats the license or subscription pays for. */
   seats: number
   /** Seats claimed so far, including the owner. */
@@ -88,7 +95,8 @@ export async function getWorkspaceForUser(userId: string): Promise<Workspace | n
     return {
       id: snap.id,
       name: typeof t.name === 'string' ? t.name : 'Workspace',
-      kind: t.kind === 'studio' ? 'studio' : 'team',
+      kind:
+        t.kind === 'enterprise' ? 'enterprise' : t.kind === 'studio' ? 'studio' : 'team',
       seats: typeof t.seats === 'number' ? t.seats : 1,
       seatsUsed: typeof t.seatsUsed === 'number' ? t.seatsUsed : 1,
       isOwner,

@@ -89,6 +89,15 @@ function offersLd() {
       },
       {
         '@type': 'Offer',
+        name: 'Enterprise',
+        description: 'One-time commercial licence covering fifty people.',
+        price: (PLANS.enterprise.priceCents / 100).toFixed(2),
+        priceCurrency: 'USD',
+        url: absoluteUrl('/pricing'),
+        availability: 'https://schema.org/InStock',
+      },
+      {
+        '@type': 'Offer',
         name: 'Team',
         description: 'Per-seat monthly plan for teams sharing one design system.',
         price: (PLANS.team.priceCents / 100).toFixed(2),

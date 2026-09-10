@@ -206,8 +206,8 @@ export function WorkspaceCard() {
       <CardHeader>
         <CardTitle className="text-lg">Have a workspace code?</CardTitle>
         <CardDescription>
-          If your team bought Studio or Team, redeem their code to take a seat
-          — you don&apos;t need to buy anything yourself.
+          If your team bought Studio, Enterprise or Team, redeem their code to
+          take a seat — you don&apos;t need to buy anything yourself.
         </CardDescription>
       </CardHeader>
       <CardContent>

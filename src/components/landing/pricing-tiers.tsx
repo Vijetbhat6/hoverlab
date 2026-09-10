@@ -4,7 +4,7 @@
  * <PricingTiers> — 4-tier pricing (Free / Pro / Studio / Team), all
  * purchasable.
  *
- * The three paid plans are deliberately different shapes:
+ * The paid plans are deliberately different shapes:
  *   Pro    — ONE-TIME $79. Individual devs won't subscribe for CSS snippets
  *            they can get free elsewhere, but this market does pay once to
  *            own the source outright (cf. Tailwind Plus, Magic UI Pro).
@@ -13,12 +13,23 @@
  *            (Preline $459/15, Tailkit $549/10, Aceternity $1,590/10) — and
  *            a team that compares a subscription against buying Pro n times
  *            buys Pro n times.
+ *   Enterprise — ONE-TIME $999 for fifty seats. The rung above Studio, and
+ *            the only one NOT rendered as a card: it is a band under the
+ *            grid, because nobody weighs a fifty-seat licence against a free
+ *            tier and a fifth column would cost the four that do get
+ *            compared a quarter of their width. See <EnterpriseBand>.
+ *   Enterprise — ONE-TIME $999 for fifty seats. The rung above Studio, and
+ *            the only one NOT rendered as a card: it is a band under the
+ *            grid, because nobody weighs a fifty-seat licence against a free
+ *            tier and a fifth column would cost the four that do get
+ *            compared a quarter of their width. See <EnterpriseBand>.
  *   Team   — $12 per seat / month. Seats and shared state are what companies
  *            actually pay recurring money for.
  *
  * There is no Pro+ column, and no Pro+ line either. Credits used to be a
  * $9/month add-on advertised under this table; they are now bundled inside
- * the licence — 500 with Pro, 2,500 with Studio, granted once and never
+ * the licence — see `includedCredits` on each plan, rendered from the
+ * catalog under the table rather than typed here, granted once and never
  * expiring. See `includedCredits` in billing/plans.ts for why that is the
  * better product at the same price. What is left under the table is a
  * sentence about top-ups for the few people who run out.
@@ -43,7 +54,14 @@
 import * as React from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Check, Sparkles, ArrowRight, Loader2, Clock } from 'lucide-react'
+import {
+  Check,
+  Sparkles,
+  ArrowRight,
+  Loader2,
+  Clock,
+  Building2,
+} from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
@@ -98,7 +116,24 @@ function supportFeature(plan: PlanId): Feature {
 interface Tier {
   id: PlanId
   name: string
+  /**
+   * The unit, and only the unit — 'once', 'forever', '/seat /month'.
+   *
+   * It sits on the same line as the headline figure, so anything longer
+   * than a couple of words has to fit beside a four-figure rupee price and
+   * a struck-through list price on a quarter-width card. It did not: this
+   * used to read 'once — yours forever' and rendered outside the card.
+   * The qualifier lives in `periodNote` instead.
+   */
   period: string
+  /**
+   * The qualifier under the headline — what 'once' actually buys.
+   *
+   * Shares a line with the secondary-currency figure rather than adding a
+   * fourth stacked line, and every tier sets one so all four price blocks
+   * are the same height and the CTAs below them line up.
+   */
+  periodNote?: string
   tagline: string
   cta: string
   ctaVariant: 'default' | 'outline' | 'ghost'
@@ -122,6 +157,7 @@ const TIERS: Tier[] = [
     id: 'free',
     name: 'Free',
     period: 'forever',
+    periodNote: 'No card, no expiry',
     tagline: 'For individuals exploring, learning, and shipping side projects.',
     cta: 'Get started',
     ctaVariant: 'outline',
@@ -161,7 +197,8 @@ const TIERS: Tier[] = [
   {
     id: 'pro',
     name: 'Pro',
-    period: 'once — yours forever',
+    period: 'once',
+    periodNote: 'Yours forever',
     tagline: 'For developers shipping client work and commercial products.',
     cta: 'Buy Pro',
     ctaVariant: 'default',
@@ -226,7 +263,8 @@ const TIERS: Tier[] = [
   {
     id: 'studio',
     name: 'Studio',
-    period: 'once — 10 seats',
+    period: 'once',
+    periodNote: 'Ten seats, yours forever',
     tagline: 'For agencies and product teams who all ship from one catalog.',
     cta: 'Buy Studio',
     ctaVariant: 'outline',
@@ -250,6 +288,7 @@ const TIERS: Tier[] = [
     id: 'team',
     name: 'Team',
     period: '/seat /month',
+    periodNote: 'Billed monthly, cancel any time',
     tagline: 'For design systems teams standardizing UI across products.',
     cta: 'Start Team plan',
     ctaVariant: 'outline',
@@ -399,6 +438,185 @@ function TierCta({
 }
 
 /**
+ * Enterprise — the fifty-seat licence, sold as a band rather than a card.
+ *
+ * WHY IT IS NOT A FIFTH COLUMN. The four cards above are a comparison, and
+ * a comparison is only useful between things one person might actually
+ * choose between. Nobody weighs a fifty-seat licence against a free tier,
+ * so a fifth column would take a quarter of the width away from the four
+ * that do get compared in order to advertise to the smallest audience on
+ * the page — and it would break the equal-height row those four are tuned
+ * for. Pro+ was sold this way for the same reason before it was retired.
+ *
+ * WHAT IT SAYS IT IS NOT. The "seats and the licence" line is deliberate
+ * and belongs on the page rather than only in the plan catalog. Every
+ * comparable enterprise tier sells SSO, SCIM or a private repo; a buyer who
+ * has seen those tiers will assume this one has them unless it says
+ * otherwise, and discovering it after paying $999 is a refund and a
+ * grudge. See the Enterprise entry in billing/plans.ts.
+ */
+function EnterpriseBand({
+  busy,
+  purchasable,
+  ownership,
+  signedIn,
+  headline,
+  secondary,
+  listHeadline,
+  discounted,
+  onBuy,
+}: {
+  busy: boolean
+  purchasable: boolean | null
+  ownership: Ownership
+  signedIn: boolean
+  headline: string
+  secondary: string
+  listHeadline: string
+  discounted: boolean
+  onBuy: () => void
+}) {
+  const seats = PLANS.enterprise.includedSeats ?? 50
+
+  return (
+    <Reveal delay={360} className="mt-6">
+      <div className="rounded-2xl border border-border/60 bg-card/60 p-6 backdrop-blur sm:p-7">
+        <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+          <div className="min-w-0">
+            <div className="flex flex-wrap items-center gap-2">
+              <Building2 aria-hidden className="h-4 w-4 shrink-0 text-primary" />
+              <span className="font-semibold tracking-tight">
+                {PLANS.enterprise.name}
+              </span>
+              <span className="rounded-full bg-muted px-2 py-0.5 text-xs font-medium text-muted-foreground">
+                {seats} seats
+              </span>
+            </div>
+            <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
+              More than ten people? Studio&rsquo;s licence for {seats} of them,
+              bought once — one invite code and one update window instead of
+              five of each. Everything Pro grants, for everyone on the team,
+              with priority support.
+            </p>
+            <p className="mt-2 max-w-2xl text-xs text-muted-foreground">
+              Seats and the licence. It does not include SSO, SCIM or a
+              private repository — if those are what you need, we do not have
+              them yet and would rather say so here than after you buy.
+            </p>
+          </div>
+
+          <div className="flex shrink-0 flex-col gap-3 lg:items-end">
+            <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
+              <span className="text-3xl font-extrabold tracking-tight tabular-nums">
+                {headline}
+              </span>
+              {discounted && (
+                <span className="text-base font-medium text-muted-foreground line-through tabular-nums">
+                  {listHeadline}
+                </span>
+              )}
+              <span className="whitespace-nowrap text-sm text-muted-foreground">
+                once
+              </span>
+            </div>
+            <p className="text-xs text-muted-foreground lg:text-right">
+              {secondary} &middot;{' '}Yours forever
+            </p>
+            <EnterpriseCta
+              busy={busy}
+              purchasable={purchasable}
+              ownership={ownership}
+              signedIn={signedIn}
+              onBuy={onBuy}
+            />
+          </div>
+        </div>
+      </div>
+    </Reveal>
+  )
+}
+
+/**
+ * The band's button, held to the same rules as `TierCta`.
+ *
+ * Ownership before purchasability, and a disabled button rather than a
+ * guess while either is still unknown — a band that guessed differently
+ * from the cards above it would be the same bug in a second place.
+ */
+function EnterpriseCta({
+  busy,
+  purchasable,
+  ownership,
+  signedIn,
+  onBuy,
+}: {
+  busy: boolean
+  purchasable: boolean | null
+  ownership: Ownership
+  signedIn: boolean
+  onBuy: () => void
+}) {
+  if (ownership === 'owned') {
+    return (
+      <Button variant="outline" size="lg" className="w-full lg:w-auto" disabled>
+        <Check className="mr-1.5 h-4 w-4" />
+        Active on this account
+      </Button>
+    )
+  }
+
+  /*
+   * Held back only while something is genuinely still resolving.
+   *
+   * `signedIn &&` is load-bearing and was missing here for a revision: an
+   * anonymous visitor's ownership is ALWAYS 'unknown' — there is no account
+   * to read one off — so without it every logged-out visitor got a dead
+   * button, which is everyone this band is trying to sell to. Same rule as
+   * TierCta, and it has to stay the same rule.
+   */
+  if (purchasable === null || (signedIn && ownership === 'unknown')) {
+    return (
+      <Button variant="outline" size="lg" className="w-full lg:w-auto" disabled>
+        Buy Enterprise
+      </Button>
+    )
+  }
+
+  if (!purchasable) {
+    return (
+      <Button variant="outline" size="lg" className="w-full lg:w-auto" asChild>
+        <Link href="/support">
+          Talk to us
+          <ArrowRight className="ml-1.5 h-4 w-4" />
+        </Link>
+      </Button>
+    )
+  }
+
+  return (
+    <Button
+      variant="outline"
+      size="lg"
+      className="w-full lg:w-auto"
+      onClick={onBuy}
+      disabled={busy}
+    >
+      {busy ? (
+        <>
+          <Loader2 className="mr-1.5 h-4 w-4 animate-spin" />
+          Starting checkout…
+        </>
+      ) : (
+        <>
+          Buy Enterprise
+          <ArrowRight className="ml-1.5 h-4 w-4" />
+        </>
+      )}
+    </Button>
+  )
+}
+
+/**
  * @param className Overrides for the section's own padding and width, so
  *   the same tiers can sit in the narrower /account column. Tier markup is
  *   never varied by caller — that is the whole point of sharing this.
@@ -457,6 +675,11 @@ export function PricingTiers({ className }: { className?: string } = {}) {
     // to stop renewing can still buy Studio. Only the plan you actually hold
     // reads as owned.
     if (id === 'studio') return entitlements.hasStudio ? 'owned' : 'available'
+    // Enterprise is the same kind of purchase as Studio, one rung up: a
+    // Studio holder is not an Enterprise holder, and must still be able to
+    // buy the bigger licence when the team outgrows ten.
+    if (id === 'enterprise')
+      return entitlements.hasEnterprise ? 'owned' : 'available'
     return entitlements.hasTeam ? 'owned' : 'available'
   }
 
@@ -524,14 +747,22 @@ export function PricingTiers({ className }: { className?: string } = {}) {
       </Reveal>
 
       {/* Four tiers: two up at tablet width, four across on desktop. A
-          three-column grid would orphan Team onto its own row. */}
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          three-column grid would orphan Team onto its own row.
+
+          `items-start` so each card ends where its content ends. Stretching
+          them to a common height is only worth it when the lists are roughly
+          the same length, and these are not — Pro sells fifteen rows and
+          Studio seven — so equal heights bought aligned bottom borders at the
+          price of four hundred pixels of empty card under two of the four
+          CTAs. The tops still line up, which is the edge a price table is
+          actually read along. */}
+      <div className="grid grid-cols-1 items-start gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {TIERS.map((tier, i) => (
           <Reveal
             key={tier.name}
             delay={i * 80}
             className={
-              'fx-bento-tile relative flex h-full flex-col rounded-2xl border bg-card/80 p-6 backdrop-blur ' +
+              'fx-bento-tile relative flex flex-col rounded-2xl border bg-card/80 p-6 backdrop-blur ' +
               (tier.popular
                 ? 'fx-pricing-popular border-transparent lg:-mt-4 lg:mb-4'
                 : 'border-border/60')
@@ -546,37 +777,70 @@ export function PricingTiers({ className }: { className?: string } = {}) {
               )}
             </div>
             <div className="mb-6">
-              <div className="flex items-baseline gap-1">
-                <span className="text-4xl font-extrabold tracking-tight">
+              {/*
+                Wraps rather than overflows. A discounted rupee headline puts
+                three items on this line — ₹2,400, a struck-through ₹7,580 and
+                the unit — and a flex row that cannot wrap has a min-content
+                width wider than a quarter-width card, so the unit rendered
+                outside the card border. Wrapping drops it to its own line;
+                `whitespace-nowrap` stops '/seat /month' breaking mid-unit
+                once it gets there.
+              */}
+              <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
+                <span className="text-4xl font-extrabold tracking-tight tabular-nums">
                   {headlineFor(tier.id)}
                 </span>
                 {/* List price kept visible when a regional discount applies,
                     so the discount is legible as a discount rather than
                     looking like the product is simply cheap. */}
                 {isDiscounted(tier.id) && (
-                  <span className="text-lg font-medium text-muted-foreground line-through">
+                  <span className="text-lg font-medium text-muted-foreground line-through tabular-nums">
                     {listHeadlineFor(tier.id)}
                   </span>
                 )}
-                <span className="text-sm text-muted-foreground">
+                <span className="whitespace-nowrap text-sm text-muted-foreground">
                   {tier.period}
                 </span>
               </div>
-              {tier.id !== 'free' && (
-                /*
-                  The currency not currently selected, as a reference. The ≈
-                  marks whichever side is not the real charge: for a plan sold
-                  in rupees the dollar figure is the conversion, and for every
-                  other plan it is the rupee figure.
-                */
-                <p className="mt-1 text-sm text-muted-foreground">
-                  {(activeCurrency === 'INR') === chargedInInr(tier.id)
-                    ? '≈ '
-                    : ''}
-                  {secondaryFor(tier.id)}
-                </p>
-              )}
-              <p className="mt-2 text-sm text-muted-foreground">{tier.tagline}</p>
+              {/*
+                One line under the headline, carrying two things that are both
+                secondary to the figure:
+
+                  — the currency not currently selected, as a reference. The ≈
+                    marks whichever side is not the real charge: for a plan
+                    sold in rupees the dollar figure is the conversion, and for
+                    every other plan it is the rupee figure.
+                  — the qualifier that used to sit beside the headline and
+                    push it out of the card.
+
+                Together on one line, not stacked, so all four price blocks are
+                exactly two lines tall and the CTAs underneath line up across
+                the row. Free has no second currency worth printing — ₹0 is not
+                a fact — so it carries the note alone and still fills the line.
+              */}
+              <p className="mt-1 text-sm text-muted-foreground lg:min-h-[2.5rem]">
+                {tier.id !== 'free' && (
+                  <>
+                    {(activeCurrency === 'INR') === chargedInInr(tier.id)
+                      ? '≈ '
+                      : ''}
+                    {secondaryFor(tier.id)}
+                  </>
+                )}
+                {tier.id !== 'free' && tier.periodNote ? ' · ' : ''}
+                {tier.periodNote}
+              </p>
+              {/*
+                Reserved height, four across only. In that range the cards are
+                narrow enough that one tagline takes three lines and its
+                neighbour takes two, which walked the four CTAs up to 44px out
+                of line with each other. Below `lg` the cards are wide, every
+                tagline is the same height on its own, and a floor would only
+                add dead space.
+              */}
+              <p className="mt-2 text-sm text-muted-foreground lg:min-h-[3.75rem]">
+                {tier.tagline}
+              </p>
             </div>
 
             <TierCta
@@ -622,7 +886,17 @@ export function PricingTiers({ className }: { className?: string } = {}) {
               state different numbers — the exact drift that made a
               hardcoded effect count understate the catalog by 2.7x above.
             */}
-            <ul className="mt-auto space-y-2.5">
+            {/*
+              Sits directly under the CTA, not pinned to the bottom of the
+              card. This was `mt-auto`, which bottom-aligned every list in a
+              row of equal-height cards: Pro has fifteen rows and Studio has
+              seven, so Studio's list was pushed to the floor of a card sized
+              by Pro's and the buyer read a call to action followed by six
+              hundred pixels of nothing. Trailing space below a short list is
+              the normal shape of a pricing table; a hole in the middle of one
+              is not.
+            */}
+            <ul className="space-y-2.5">
               {[...tier.features, supportFeature(tier.id)].map((f, j) => {
                 const soon = typeof f !== 'string'
                 const label = typeof f === 'string' ? f : f.label
@@ -659,6 +933,25 @@ export function PricingTiers({ className }: { className?: string } = {}) {
         ))}
       </div>
 
+      <EnterpriseBand
+        busy={pendingPlan === 'enterprise'}
+        purchasable={purchasableFor('enterprise')}
+        ownership={ownershipFor('enterprise')}
+        signedIn={signedIn}
+        headline={headlineFor('enterprise')}
+        secondary={
+          // The currency not currently selected, as a reference. The ≈
+          // marks whichever side is not the real charge — same rule the
+          // cards above use, and the same reason.
+          ((activeCurrency === 'INR') === chargedInInr('enterprise')
+            ? '≈ '
+            : '') + secondaryFor('enterprise')
+        }
+        listHeadline={listHeadlineFor('enterprise')}
+        discounted={isDiscounted('enterprise')}
+        onBuy={() => startCheckout('enterprise')}
+      />
+
       {/*
         The linkable version of this section.
 
@@ -689,7 +982,7 @@ export function PricingTiers({ className }: { className?: string } = {}) {
           support, and the CLI and public API are open to everyone — every
           export format included. Free covers personal and non-commercial
           projects; shipping anything from the catalog in client work or a
-          paid product needs Pro, Studio or Team. The{' '}
+          paid product needs Pro, Studio, Enterprise or Team. The{' '}
           <Link href="/licence" className="font-medium text-primary hover:underline">
             licence
           </Link>{' '}
@@ -723,8 +1016,9 @@ export function PricingTiers({ className }: { className?: string } = {}) {
             AI credits are included in the licence
           </span>{' '}
           — {PLANS.pro.includedCredits?.toLocaleString('en-US')} with Pro,{' '}
-          {PLANS.studio.includedCredits?.toLocaleString('en-US')} with Studio,
-          granted once and never expiring. They buy three things: a variation
+          {PLANS.studio.includedCredits?.toLocaleString('en-US')} with Studio
+          and {PLANS.enterprise.includedCredits?.toLocaleString('en-US')} with
+          Enterprise, granted once and never expiring. They buy three things: a variation
           or an edit of any effect (1 credit), a recolour of one onto your
           brand (1), and a whole section composed from a brief in your design
           tokens (3). Browsing, copying, the CLI and the API stay free and
@@ -745,17 +1039,21 @@ export function PricingTiers({ className }: { className?: string } = {}) {
           <Link href="/licence" className="font-medium text-primary hover:underline">
             free licence
           </Link>
-          . What Pro, Studio and Team add is the commercial one — permission
-          to ship the result in work you are paid for, with a dated
-          certificate you can forward. Both are written out in full.
+          . What the paid plans add is the commercial one — permission to
+          ship the result in work you are paid for, with a dated certificate
+          you can forward. Both are written out in full.
         </p>
 
-        {/* The one thing a buyer could reasonably get wrong about the two
-            team-shaped plans, said before they pick one. */}
+        {/* The one thing a buyer could reasonably get wrong about the
+            team-shaped plans, said before they pick one. Enterprise is named
+            here rather than only in the band above, because the band sells
+            it and this is where the distinction it shares with Studio is
+            actually drawn. */}
         <p className="mt-2 text-xs text-muted-foreground">
-          Studio is a license, not a workspace: it covers ten people with the
-          full Pro feature set and never renews. The shared brand library and
-          shared collections belong to Team.
+          Studio and Enterprise are licenses, not workspaces: they cover ten
+          and fifty people respectively with the full Pro feature set, and
+          never renew. The shared brand library and shared collections belong
+          to Team.
         </p>
         {rupeeCheckout ? (
           <p className="mt-2 text-xs text-muted-foreground">

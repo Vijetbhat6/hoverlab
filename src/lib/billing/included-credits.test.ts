@@ -10,9 +10,10 @@ import { MONTHLY_ALLOWANCE } from './credits'
  * wrong quietly.
  */
 
-test('Pro and Studio grant credits at purchase', () => {
+test('Pro, Studio and Enterprise grant credits at purchase', () => {
   assert.equal(PLANS.pro.includedCredits, 500)
   assert.equal(PLANS.studio.includedCredits, 2500)
+  assert.equal(PLANS.enterprise.includedCredits, 7500)
 })
 
 test('no one-time plan carries a monthly allowance', () => {
@@ -46,12 +47,62 @@ test('Studio does not scale credits linearly with seats', () => {
   assert.ok(studio > pro, 'Studio must still grant more than a single Pro')
 })
 
+test('credits per seat fall as the licence grows, and never rise', () => {
+  /*
+   * The rule Studio's test states for one rung, applied along the whole
+   * ladder. A tier whose per-seat grant went UP would make the bigger
+   * licence the cheap way to buy a meter rather than the cheap way to
+   * licence people — which is the failure a single pairwise check misses
+   * once there are three rungs instead of two.
+   */
+  const rungs: PlanId[] = ['pro', 'studio', 'enterprise']
+  const perSeat = rungs.map((id) => {
+    const credits = PLANS[id].includedCredits!
+    const seats = PLANS[id].includedSeats!
+    return { id, rate: credits / seats }
+  })
+
+  for (let i = 1; i < perSeat.length; i += 1) {
+    const prev = perSeat[i - 1]!
+    const here = perSeat[i]!
+    assert.ok(
+      here.rate < prev.rate,
+      `${here.id} grants ${here.rate} credits a seat against ${prev.id}'s ` +
+        `${prev.rate} — the bigger licence must not be the cheaper meter`,
+    )
+  }
+})
+
+test('every seat ladder rung is cheaper per head than the one below', () => {
+  /*
+   * The reason Enterprise exists. A company that needs fifty seats must not
+   * do better by buying the rung below five times over, or the tier is a
+   * worse deal wearing a bigger number.
+   */
+  const rungs: PlanId[] = ['pro', 'studio', 'enterprise']
+  const perHead = rungs.map((id) => ({
+    id,
+    cents: PLANS[id].priceCents / PLANS[id].includedSeats!,
+  }))
+
+  for (let i = 1; i < perHead.length; i += 1) {
+    const prev = perHead[i - 1]!
+    const here = perHead[i]!
+    assert.ok(
+      here.cents < prev.cents,
+      `${here.id} costs ${here.cents} a head against ${prev.id}'s ` +
+        `${prev.cents} — nobody would buy the larger licence`,
+    )
+  }
+})
+
 test('renewals grant no credits', () => {
   // A renewal buys another twelve months of updates on a licence already
   // held. Bundling credits into it would make renewing the cheapest way to
   // buy them, and someone would notice.
   assert.equal(PLANS.renewal.includedCredits, null)
   assert.equal(PLANS['renewal-studio'].includedCredits, null)
+  assert.equal(PLANS['renewal-enterprise'].includedCredits, null)
 })
 
 test('Pro+ is retired, not deleted', () => {

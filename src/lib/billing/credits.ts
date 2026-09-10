@@ -18,7 +18,7 @@ import type { Entitlements } from './entitlements'
  *
  *               Two things land here, and they are the same thing from the
  *               customer's side: a top-up pack, and the credits included in
- *               a Pro or Studio licence (`includedCredits` in ./plans).
+ *               a one-time licence (`includedCredits` in ./plans).
  *               Bundling the licence grant into the perpetual bucket rather
  *               than inventing a third is what keeps "you own these" true
  *               for both.

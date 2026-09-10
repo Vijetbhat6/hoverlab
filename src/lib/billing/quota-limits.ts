@@ -27,7 +27,7 @@
 export const DAILY_EXPORTS = {
   anonymous: 3,
   free: 10,
-  /** Pro, Studio and Team. The licence is what removes the meter. */
+  /** Every paid licence. The licence is what removes the meter. */
   paid: Number.POSITIVE_INFINITY,
 } as const
 

@@ -124,10 +124,18 @@ async function handleGet() {
 
   if (!ent.canUseProFeatures) return NextResponse.json(base)
 
-  // Which plan the licence is attributed to, highest first. A Team seat and
-  // a Studio seat both carry the commercial licence; the certificate names
-  // whichever the account actually holds.
-  const plan: PlanId = ent.hasTeam ? 'team' : ent.hasStudio ? 'studio' : 'pro'
+  // Which plan the licence is attributed to, highest first. A Team seat, an
+  // Enterprise seat and a Studio seat all carry the commercial licence; the
+  // certificate names whichever the account actually holds. Falling through
+  // to 'pro' for an Enterprise holder would print the wrong plan on a
+  // document whose entire job is to say what was bought.
+  const plan: PlanId = ent.hasTeam
+    ? 'team'
+    : ent.hasEnterprise
+      ? 'enterprise'
+      : ent.hasStudio
+        ? 'studio'
+        : 'pro'
   const [order, renewed] = await Promise.all([
     grantingOrder(user.id, plan),
     renewedUntil(user.id),

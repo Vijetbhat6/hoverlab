@@ -2,7 +2,7 @@
  * The sellable plan catalog — the single source of truth for what exists,
  * what it costs, and which Polar product backs it.
  *
- * Three products, deliberately different shapes:
+ * Several products, deliberately different shapes:
  *
  *   Pro   — ONE-TIME license. Individual developers don't subscribe to CSS
  *           snippets they can get free elsewhere; they do pay once for a
@@ -59,11 +59,44 @@
  *           Plus for 25 — and a team that priced our $12/seat/month against
  *           buying Pro n times did the arithmetic and bought Pro n times.
  *
+ *   Enterprise — ONE-TIME, fifty seats. The rung above Studio, and it
+ *           exists because the ladder stopped at $299 while the money in
+ *           this category does not. As of the 10 September sweep in
+ *           `lib/compare.ts`, Untitled UI sells $999 / $2,499 / $8,999,
+ *           Tailwind Plus $979 for 25 and Aceternity $1,590 for 10. A
+ *           company that needs thirty seats had nothing to buy here: Studio
+ *           three times over is a worse deal than Studio once and a worse
+ *           experience than either, because it is three invite codes and
+ *           three update windows for one team.
+ *
+ *           WHAT IT DOES NOT SELL, AND WHY THAT MATTERS. Every enterprise
+ *           tier in the table above sells SSO, SCIM, a private repo or a
+ *           Storybook build. We have none of those, so this one sells
+ *           seats and the licence and says so. That is a deliberately
+ *           narrow tier rather than an aspirational one — the alternative
+ *           is a card promising provisioning we would then have to build
+ *           against a deadline somebody has already paid for, which is the
+ *           same mistake the Pro feature list made before it got cut back
+ *           to what /licence actually grants.
+ *
+ *           $999 for fifty is $19.98 a head, continuing the volume curve
+ *           ($79 → $29.90 → $19.98) rather than restarting it, and it sits
+ *           under every comparable tier for the same reason Pro and Studio
+ *           do.
+ *
+ *           NOT A FIFTH CARD. It renders as a band under the four tiers,
+ *           the way Pro+ used to. Nobody comparison-shops a fifty-seat
+ *           licence against a free tier, and a fifth column would shrink
+ *           the four cards that do get compared in order to advertise to
+ *           the smallest audience on the page.
+ *
  *   Renewal — ONE-TIME, and not a licence at all. It buys another twelve
- *           months of catalog updates on a licence already held. Two of
- *           them, priced off the plan they renew (~40%), because a Studio
- *           holder renewing at the Pro price would be a mispricing bug
- *           rather than a discount.
+ *           months of catalog updates on a licence already held. One per
+ *           licence that has a window to renew, each priced off the plan it
+ *           renews (~40%), because a Studio holder renewing at the Pro
+ *           price would be a mispricing bug rather than a discount — and an
+ *           Enterprise holder renewing at the Studio price would be the
+ *           same bug for five times the seats.
  *
  *           These have no card on the pricing page and never will. Nobody
  *           shops for a renewal; it is offered on /account to the specific
@@ -87,10 +120,12 @@ export type PlanId =
   | 'pro'
   | 'plus'
   | 'studio'
+  | 'enterprise'
   | 'team'
   | 'team-annual'
   | 'renewal'
   | 'renewal-studio'
+  | 'renewal-enterprise'
 export type BillingInterval = 'one_time' | 'month'
 
 export interface Plan {
@@ -300,6 +335,50 @@ export const PLANS: Record<PlanId, Plan> = {
     includedCredits: 2500,
     sold: true,
   },
+  enterprise: {
+    id: 'enterprise',
+    name: 'Enterprise',
+    // $999 one-time for fifty seats — $19.98 a head, against Studio's
+    // $29.90 and Pro's $79. The volume curve keeps bending the same way, so
+    // a team that outgrows Studio is never asked to pay more per person
+    // than the tier they are leaving.
+    //
+    // Under Untitled UI's $999, which buys a studio rather than fifty
+    // seats, and far under its $2,499 business tier; under Tailwind Plus at
+    // $979 for 25. Priced there for the same reason Pro sits at $79 — see
+    // the note on Pro about the band, which applies here with one
+    // difference: this price is new, so it is not carrying a decision made
+    // against a floor that has since moved.
+    //
+    // Five times Studio's price for five times its seats, deliberately
+    // flat rather than discounted further. The per-head saving is already
+    // in the ladder; another discount here would make Enterprise the cheap
+    // way to buy Studio rather than the honest way to licence fifty people.
+    priceCents: 99900,
+    // ₹95,000 — $999 at roughly ₹95/$, tracking the dollar ladder exactly
+    // as Pro and Studio do rather than becoming a third pricing strategy.
+    priceInrPaise: 9500000,
+    interval: 'one_time',
+    polarProductId: process.env.POLAR_PRODUCT_ID_ENTERPRISE ?? null,
+    // Not per-seat: nobody picks 37. Fifty is a property of the licence,
+    // which is what `includedSeats` means and what the webhook reads when
+    // it provisions the workspace.
+    perSeat: false,
+    updateWindowMonths: 12,
+    includedSeats: 50,
+    /*
+     * 7,500 — 150 a seat, against Studio's 250 and Pro's 500.
+     *
+     * The same sub-linear rule Studio follows, for the same reason and one
+     * more. Fifty Pro licences would carry 25,000 credits between them, and
+     * a bundled meter that scaled linearly would make this the cheapest
+     * credit pack we sell by a factor of three. Credits cost real money to
+     * serve — see MONTHLY_ALLOWANCE in ./credits — and the licence is the
+     * product here, not the meter.
+     */
+    includedCredits: 7500,
+    sold: true,
+  },
   team: {
     id: 'team',
     name: 'Team',
@@ -423,6 +502,25 @@ export const PLANS: Record<PlanId, Plan> = {
     includedCredits: null,
     sold: true,
   },
+  'renewal-enterprise': {
+    id: 'renewal-enterprise',
+    name: 'Enterprise updates renewal',
+    /**
+     * $400 — 40% of Enterprise's $999, the same ratio the other two
+     * renewals use. A fifty-seat holder renewing at the Studio price would
+     * be the mispricing bug `renewalFor` exists to prevent, one rung up.
+     */
+    priceCents: 40000,
+    /** ₹38,000 — 40% of Enterprise's ₹95,000. */
+    priceInrPaise: 3800000,
+    interval: 'one_time',
+    polarProductId: process.env.POLAR_PRODUCT_ID_RENEWAL_ENTERPRISE ?? null,
+    perSeat: false,
+    updateWindowMonths: 12,
+    includedSeats: null,
+    includedCredits: null,
+    sold: true,
+  },
 }
 
 /**
@@ -435,6 +533,7 @@ export const PLANS: Record<PlanId, Plan> = {
 export function renewalFor(plan: PlanId): PlanId | null {
   if (plan === 'pro') return 'renewal'
   if (plan === 'studio') return 'renewal-studio'
+  if (plan === 'enterprise') return 'renewal-enterprise'
   // 'team-annual' deliberately has no renewal SKU. Pro and Studio are
   // perpetual licences where a renewal buys back only the update window, so
   // it is worth ~40% of the licence. An annual term is not that: when it
@@ -542,28 +641,34 @@ export const BAND_CENTS: Record<Band, Partial<Record<PlanId, number>>> = {
     pro: 2500,
     plus: 300,
     studio: 9900,
+    enterprise: 32900,
     team: 500,
     'team-annual': 5000,
     renewal: 1000,
     'renewal-studio': 3900,
+    'renewal-enterprise': 12900,
   },
   b: {
     pro: 3900,
     plus: 500,
     studio: 14900,
+    enterprise: 49900,
     team: 700,
     'team-annual': 7000,
     renewal: 1600,
     'renewal-studio': 5900,
+    'renewal-enterprise': 19900,
   },
   c: {
     pro: 5500,
     plus: 700,
     studio: 20900,
+    enterprise: 69900,
     team: 900,
     'team-annual': 9000,
     renewal: 2200,
     'renewal-studio': 8400,
+    'renewal-enterprise': 27900,
   },
 }
 
@@ -579,10 +684,16 @@ export const IN_PAISE: Partial<Record<PlanId, number>> = {
   pro: 240000,
   plus: 29000,
   studio: 950000,
+  // ₹32,000 — the same ~34% of list the other one-time licences carry here
+  // (Pro ₹2,400 of ₹7,500, Studio ₹9,500 of ₹28,000), so band A's depth is
+  // one number applied consistently rather than a per-plan negotiation.
+  enterprise: 3200000,
   team: 47500,
   'team-annual': 475000,
   renewal: 95000,
   'renewal-studio': 370000,
+  /** ₹12,800 — 40% of the Enterprise rupee price, matching the ratio above. */
+  'renewal-enterprise': 1280000,
 }
 
 /**
@@ -756,10 +867,12 @@ export function parsePlanId(value: unknown): PlanId | null {
     value === 'pro' ||
     value === 'plus' ||
     value === 'studio' ||
+    value === 'enterprise' ||
     value === 'team' ||
     value === 'team-annual' ||
     value === 'renewal' ||
-    value === 'renewal-studio'
+    value === 'renewal-studio' ||
+    value === 'renewal-enterprise'
     ? value
     : null
 }

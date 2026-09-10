@@ -184,12 +184,16 @@ async function handleOrderPaid(data: PolarLike): Promise<void> {
     })
   }
 
-  if (plan === 'renewal' || plan === 'renewal-studio') {
+  if (
+    plan === 'renewal' ||
+    plan === 'renewal-studio' ||
+    plan === 'renewal-enterprise'
+  ) {
     await extendUpdateWindow(userId, orderId)
   }
 
-  if (plan === 'studio') {
-    await provisionOneTimeWorkspace(userId, orderId, data, 'studio')
+  if (plan === 'studio' || plan === 'enterprise') {
+    await provisionOneTimeWorkspace(userId, orderId, data, plan)
   }
 
   // Team bought as a twelve-month term rather than a subscription. Same
@@ -254,12 +258,14 @@ async function handleOrderPaid(data: PolarLike): Promise<void> {
  * subcollection.
  *
  * What differs between them is three fields. `kind` — which is what stops a
- * Studio seat unlocking the shared brand tokens a Team seat gets, and why
- * an annual Team licence is written as kind 'team' and not 'studio'. The
- * status — 'lifetime' for Studio, which never expires, against 'term' for
- * the annual licence, which expires at `currentPeriodEnd`. And where the
- * seat count comes from: Studio's ten are a property of the licence, while
- * an annual Team's are the quantity the buyer chose at checkout.
+ * Studio or Enterprise seat unlocking the shared brand tokens a Team seat
+ * gets, and why an annual Team licence is written as kind 'team' and not
+ * 'studio'. The status — 'lifetime' for the perpetual licences, which never
+ * expire, against 'term' for the annual one, which expires at
+ * `currentPeriodEnd`. And where the seat count comes from: Studio's ten and
+ * Enterprise's fifty are a property of the licence and are read off
+ * `includedSeats`, while an annual Team's are the quantity the buyer chose
+ * at checkout.
  *
  * Keyed by the ORDER id (a subscription-backed team is keyed by the
  * subscription id), so a redelivered order.paid re-enters this function and
@@ -269,25 +275,32 @@ async function provisionOneTimeWorkspace(
   userId: string,
   orderId: string,
   data: PolarLike,
-  plan: 'studio' | 'team-annual',
+  plan: 'studio' | 'enterprise' | 'team-annual',
 ): Promise<void> {
   const db = adminDb()
   const teamRef = db.collection('teams').doc(orderId)
   if ((await teamRef.get()).exists) return
 
-  const isStudio = plan === 'studio'
+  // Studio and Enterprise are the same shape — a perpetual licence for a
+  // seat count fixed by the SKU. What separates them from the annual Team
+  // term is the status ('lifetime' against 'term') and where the seat count
+  // comes from, so that is what this asks, rather than asking which of the
+  // three plans it is three separate times.
+  const isFixedSeatLicence = plan === 'studio' || plan === 'enterprise'
 
-  // Studio sells a fixed ten seats, so a missing quantity means ten. An
-  // annual Team licence sells a quantity the buyer picked, which arrives as
-  // the order quantity; metadata is the fallback for the same reason it is
-  // on the subscription path, and one seat is the floor because a workspace
-  // with none would be a purchase that entitles nobody.
+  // A fixed-seat licence carries its own count, so a missing quantity means
+  // whatever the SKU sells — read off the plan rather than written here
+  // twice, which is how a ten would have survived into the fifty-seat tier.
+  // An annual Team licence sells a quantity the buyer picked, which arrives
+  // as the order quantity; metadata is the fallback for the same reason it
+  // is on the subscription path, and one seat is the floor because a
+  // workspace with none would be a purchase that entitles nobody.
   const metaSeats = Number(data.metadata?.seats)
   const orderSeats = typeof data.quantity === 'number' ? data.quantity : 0
-  const seats = isStudio
+  const seats = isFixedSeatLicence
     ? Number.isFinite(metaSeats) && metaSeats > 0
       ? metaSeats
-      : 10
+      : (PLANS[plan].includedSeats ?? 1)
     : orderSeats > 0
       ? orderSeats
       : Number.isFinite(metaSeats) && metaSeats > 0
@@ -299,7 +312,7 @@ async function provisionOneTimeWorkspace(
   // billing/entitlements.ts and `isLive()` in billing/workspace.ts.
   const months = PLANS[plan].updateWindowMonths
   const termEnd =
-    isStudio || months === null
+    isFixedSeatLicence || months === null
       ? null
       : (() => {
           const end = new Date()
@@ -310,19 +323,23 @@ async function provisionOneTimeWorkspace(
   const teamName =
     typeof data.metadata?.teamName === 'string' && data.metadata.teamName
       ? data.metadata.teamName
-      : isStudio
+      : plan === 'studio'
         ? 'My studio'
-        : 'My team'
+        : plan === 'enterprise'
+          ? 'My company'
+          : 'My team'
 
   const batch = db.batch()
   batch.set(teamRef, {
     name: teamName,
-    kind: isStudio ? 'studio' : 'team',
+    // The licence names itself. 'enterprise' is its own kind rather than a
+    // 'studio' with fifty seats — see billing/workspace.ts for why.
+    kind: isFixedSeatLicence ? plan : 'team',
     ownerId: userId,
     polarOrderId: orderId,
     // Not a subscription status, but the field every seat check already
     // reads. 'lifetime' never expires; 'term' expires at currentPeriodEnd.
-    subscriptionStatus: isStudio ? 'lifetime' : 'term',
+    subscriptionStatus: isFixedSeatLicence ? 'lifetime' : 'term',
     seats,
     // The buyer takes the first seat; the rest are claimed with the code.
     // Without this the license would be N seats nobody but the purchaser
@@ -388,7 +405,11 @@ async function handleOrderRefunded(data: PolarLike): Promise<void> {
     await revokePurchasedCredits(userId, refundedLicenceCredits)
   }
 
-  if (purchase.plan === 'studio' || purchase.plan === 'team-annual') {
+  if (
+    purchase.plan === 'studio' ||
+    purchase.plan === 'enterprise' ||
+    purchase.plan === 'team-annual'
+  ) {
     // Both are workspaces keyed by this order id — the Studio licence and
     // the annual Team term are provisioned by the same function, so they
     // are revoked by the same one. Mark it revoked rather than deleting it:

@@ -43,7 +43,7 @@ export const dynamic = 'force-dynamic'
 // pricing page reads its regional price and purchasability from this
 // response — a plan absent from this list renders no price and no live buy
 // button, however completely it is configured everywhere else.
-const PAID_PLANS: PlanId[] = ['pro', 'studio', 'team', 'team-annual']
+const PAID_PLANS: PlanId[] = ['pro', 'studio', 'enterprise', 'team', 'team-annual']
 
 export async function GET(request: Request) {
   const region = regionFromHeaders(request.headers)

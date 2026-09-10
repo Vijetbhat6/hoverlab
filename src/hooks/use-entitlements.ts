@@ -31,6 +31,8 @@ export interface ClientEntitlements {
   hasPro: boolean
   /** Seat on a one-time Studio license. Grants Pro, not the shared workspace. */
   hasStudio: boolean
+  /** Seat on a one-time Enterprise license — fifty seats rather than ten. */
+  hasEnterprise: boolean
   /** Active Pro+ subscription — an AI credit allowance, not a catalog licence. */
   hasPlus: boolean
   hasTeam: boolean
