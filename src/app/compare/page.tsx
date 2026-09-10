@@ -189,7 +189,20 @@ export default function ComparePage() {
             separates these products is the last one.
           </p>
 
-          <div className="mt-5 overflow-x-auto rounded-2xl border border-border/60">
+          {/* `relative` is load-bearing, not decoration.
+
+              Every row here carries `sr-only` text, and Tailwind's `sr-only`
+              is `position: absolute`. A static box does not establish a
+              containing block, so those spans resolved against the outer
+              `relative` wrapper instead of this one, escaped the
+              `overflow-x-auto` entirely, and came to rest 640px into a
+              390px viewport — dragging the whole page into a sideways
+              scroll on every phone. The table itself was always clipped
+              correctly; the screen-reader text was not.
+
+              Making this the containing block brings them back inside the
+              scroller, where they are clipped with everything else. */}
+          <div className="relative mt-5 overflow-x-auto rounded-2xl border border-border/60">
             <table className="w-full min-w-[60rem] border-collapse text-left text-sm">
               <caption className="sr-only">
                 Entry price, contents, design files, agent access and what is

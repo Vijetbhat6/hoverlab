@@ -182,7 +182,11 @@ export default function ForAuthorsPage() {
             Side by side
           </h2>
 
-          <div className="mt-5 overflow-x-auto rounded-2xl border border-border/60">
+          {/* `relative` for the same reason as the table on /compare: the
+              `sr-only` spans in these rows are absolutely positioned, and a
+              static wrapper is not their containing block, so they escaped
+              this scroller and pushed the page to 629px on a 390px screen. */}
+          <div className="relative mt-5 overflow-x-auto rounded-2xl border border-border/60">
             <table className="w-full min-w-[42rem] border-collapse text-left text-sm">
               <thead>
                 <tr className="border-b border-border/60 bg-muted/40">

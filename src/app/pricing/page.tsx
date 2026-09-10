@@ -155,7 +155,13 @@ export default function PricingPage() {
           <div className="rounded-2xl border border-border/60 bg-card/60 p-6">
             <div className="flex items-start gap-4">
               <History aria-hidden className="mt-0.5 h-6 w-6 shrink-0 text-primary" />
-              <div>
+              {/* min-w-0: a flex item's automatic minimum is its content, and
+                  the <pre> below holds an unbreakable command line. Without
+                  this the column grew to 469px inside a 308px row and took
+                  the whole page into a sideways scroll on a phone — the
+                  `overflow-x-auto` on the <pre> never got the chance to act,
+                  because the box around it was already wider than the screen. */}
+              <div className="min-w-0">
                 <h2 className="text-lg font-bold tracking-tight">
                   {UPDATE_LEDGER.claim}
                 </h2>

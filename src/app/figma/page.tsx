@@ -221,7 +221,11 @@ export default function FigmaPage() {
          *  The two commands, and the sentence to type
          * ---------------------------------------------------------- */}
         <section className="border-y border-border/40 bg-background/60 py-16">
-          <div className="mx-auto grid max-w-5xl gap-8 px-4 sm:px-6 lg:grid-cols-2">
+          {/* min-w-0 on the tracks: a grid item's automatic minimum is its
+              content too, and both columns hold terminal blocks whose lines
+              cannot wrap. Without it the column grew to 507px in a 390px
+              viewport and scrolled the page sideways. */}
+          <div className="mx-auto grid max-w-5xl gap-8 px-4 sm:px-6 lg:grid-cols-2 [&>*]:min-w-0">
             <div>
               <h2 className="text-2xl font-bold tracking-tight">
                 The whole setup
