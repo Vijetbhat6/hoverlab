@@ -6,7 +6,7 @@
  * it opens the command palette.
  *
  * The ItemList lives here rather than in `app/tools/layout.tsx` because
- * that layout also wraps all twenty tool routes, and a list of every tool
+ * that layout also wraps every tool route, and a list of every tool
  * repeated on each individual tool page is the sort of thing that reads as
  * boilerplate to a crawler rather than as a directory.
  */

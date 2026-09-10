@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 
 import { ToolFunnelBand } from '@/components/designer-tools/tool-funnel-band'
+import { DESIGNER_TOOLS } from '@/lib/designer-tools'
 
 /**
  * Metadata for the /tools hub itself. See ../library/layout.tsx.
@@ -16,8 +17,14 @@ export const metadata: Metadata = {
   // here rather than inheriting the home page's.
   alternates: { canonical: '/tools' },
   title: 'Designer Tools — Tokens, Palettes, Gradients, Contrast & More — Hoverlab',
-  description:
-    'Twenty free designer tools that run entirely in your browser: design tokens, palettes, color conversion, gradients, shadows, clip-paths, noise textures, type and spacing scales, WCAG contrast checks, favicons, OG tags and email templates.',
+  /*
+   * Counted, not typed. This said "Twenty" while the registry held 36 and
+   * the hero on the page below said 36 — and a meta description is the one
+   * piece of stale prose a reader meets *before* the page that contradicts
+   * it, in the search result itself. It understated the section by sixteen
+   * tools for as long as it took to add them.
+   */
+  description: `${DESIGNER_TOOLS.length} free designer tools that run entirely in your browser: design tokens, palettes, color conversion, gradients, shadows, clip-paths, noise textures, type and spacing scales, WCAG contrast checks, favicons, OG tags and email templates.`,
 }
 
 /**
