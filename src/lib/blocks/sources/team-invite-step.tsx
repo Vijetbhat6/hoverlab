@@ -156,7 +156,7 @@ export function TeamInviteStep({
                   <button
                     type="button"
                     onClick={() => setEmails((c) => c.filter((e) => e !== email))}
-                    className="-mr-0.5 rounded p-0.5 opacity-60 transition hover:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    className="-me-0.5 rounded p-0.5 opacity-60 transition hover:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                   >
                     <X aria-hidden className="h-3.5 w-3.5" />
                     <span className="sr-only">Remove {email}</span>

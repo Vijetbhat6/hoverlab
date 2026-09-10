@@ -173,7 +173,7 @@ export function CartDrawer({
             <div className="flex items-center justify-between gap-3 border-b border-border/60 px-5 py-4">
               <h2 className="font-semibold tracking-tight">
                 Your bag
-                <span className="ml-2 text-sm font-normal text-muted-foreground">
+                <span className="ms-2 text-sm font-normal text-muted-foreground">
                   ({itemCount})
                 </span>
               </h2>
@@ -236,7 +236,7 @@ export function CartDrawer({
                 className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
               >
                 Checkout
-                <ArrowRight aria-hidden className="h-4 w-4" />
+                <ArrowRight aria-hidden className="h-4 w-4 rtl:rotate-180" />
               </a>
 
               <button

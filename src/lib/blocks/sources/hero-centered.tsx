@@ -72,7 +72,7 @@ export function HeroCentered({
             <span className="text-muted-foreground">{announcement}</span>
             <ArrowRight
               aria-hidden
-              className="h-3 w-3 text-muted-foreground transition-transform group-hover:translate-x-0.5"
+              className="h-3 w-3 text-muted-foreground transition-transform group-hover:translate-x-0.5 rtl:rotate-180 rtl:group-hover:-translate-x-0.5"
             />
           </a>
         ) : null}
@@ -91,7 +91,7 @@ export function HeroCentered({
             className="inline-flex h-12 w-full items-center justify-center gap-1.5 rounded-xl bg-primary px-7 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/25 transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background sm:w-auto"
           >
             {primaryLabel}
-            <ArrowRight aria-hidden className="h-4 w-4" />
+            <ArrowRight aria-hidden className="h-4 w-4 rtl:rotate-180" />
           </a>
           <a
             href={secondaryHref}

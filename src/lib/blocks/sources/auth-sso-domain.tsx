@@ -151,7 +151,7 @@ export function AuthSsoDomain({ tenants = DEFAULT_TENANTS, className = '' }: Aut
                 ) : (
                   <>
                     Continue
-                    <ArrowRight aria-hidden className="h-4 w-4" />
+                    <ArrowRight aria-hidden className="h-4 w-4 rtl:rotate-180" />
                   </>
                 )}
               </button>
@@ -234,7 +234,7 @@ export function AuthSsoDomain({ tenants = DEFAULT_TENANTS, className = '' }: Aut
               onClick={back}
               className="inline-flex items-center gap-1.5 rounded text-xs font-medium text-muted-foreground transition hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
-              <ArrowLeft aria-hidden className="h-3.5 w-3.5" />
+              <ArrowLeft aria-hidden className="h-3.5 w-3.5 rtl:rotate-180" />
               Use a different email
             </button>
           ) : null}

@@ -141,7 +141,7 @@ export function BillingPlanSummary({
             className="mt-4 inline-flex items-center gap-1 text-sm font-semibold transition-all hover:gap-2"
           >
             Manage billing
-            <ArrowRight aria-hidden className="h-3.5 w-3.5" />
+            <ArrowRight aria-hidden className="h-3.5 w-3.5 rtl:rotate-180" />
           </a>
         </div>
       </div>

@@ -112,7 +112,7 @@ export function CartLineItems({
             onClick={undo}
             className="inline-flex shrink-0 items-center gap-1.5 font-semibold hover:underline"
           >
-            <Undo2 aria-hidden className="h-3.5 w-3.5" />
+            <Undo2 aria-hidden className="h-3.5 w-3.5 rtl:rotate-180" />
             Undo
           </button>
         </div>

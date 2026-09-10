@@ -168,7 +168,7 @@ export function AiInsightCards({
               className="mt-3 inline-flex items-center gap-1.5 rounded-xl border border-border/60 px-3 py-1.5 text-xs font-medium transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
               {insight.action}
-              <ChevronRight aria-hidden className="h-3.5 w-3.5" />
+              <ChevronRight aria-hidden className="h-3.5 w-3.5 rtl:rotate-180" />
             </button>
           ) : null}
         </div>
@@ -186,7 +186,7 @@ export function AiInsightCards({
               onClick={() => setIndex(at - 1)}
               className="rounded-lg border border-border/60 p-1.5 transition-colors hover:bg-muted disabled:opacity-40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
-              <ChevronLeft aria-hidden className="h-3.5 w-3.5" />
+              <ChevronLeft aria-hidden className="h-3.5 w-3.5 rtl:rotate-180" />
               <span className="sr-only">Previous finding</span>
             </button>
             <button
@@ -195,7 +195,7 @@ export function AiInsightCards({
               onClick={() => setIndex(at + 1)}
               className="rounded-lg border border-border/60 p-1.5 transition-colors hover:bg-muted disabled:opacity-40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
-              <ChevronRight aria-hidden className="h-3.5 w-3.5" />
+              <ChevronRight aria-hidden className="h-3.5 w-3.5 rtl:rotate-180" />
               <span className="sr-only">Next finding</span>
             </button>
           </div>

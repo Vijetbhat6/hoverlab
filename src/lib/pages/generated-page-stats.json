@@ -174,5 +174,97 @@
   "approvals-page": {
     "lines": 45,
     "files": 1
+  },
+  "assistant-chat-page": {
+    "lines": 68,
+    "files": 1
+  },
+  "agent-inspector-page": {
+    "lines": 61,
+    "files": 1
+  },
+  "retrieval-console-page": {
+    "lines": 66,
+    "files": 1
+  },
+  "ai-editor-page": {
+    "lines": 64,
+    "files": 1
+  },
+  "records-table-page": {
+    "lines": 71,
+    "files": 1
+  },
+  "analytics-page": {
+    "lines": 68,
+    "files": 1
+  },
+  "alerting-page": {
+    "lines": 54,
+    "files": 1
+  },
+  "notification-settings-page": {
+    "lines": 59,
+    "files": 1
+  },
+  "team-access-page": {
+    "lines": 61,
+    "files": 1
+  },
+  "import-data-page": {
+    "lines": 64,
+    "files": 1
+  },
+  "account-setup-page": {
+    "lines": 53,
+    "files": 1
+  },
+  "reset-password-page": {
+    "lines": 36,
+    "files": 1
+  },
+  "app-shell-page": {
+    "lines": 68,
+    "files": 1
+  },
+  "security-landing-page": {
+    "lines": 60,
+    "files": 1
+  },
+  "migration-landing-page": {
+    "lines": 57,
+    "files": 1
+  },
+  "launch-note-page": {
+    "lines": 53,
+    "files": 1
+  },
+  "single-offer-page": {
+    "lines": 57,
+    "files": 1
+  },
+  "plan-change-page": {
+    "lines": 52,
+    "files": 1
+  },
+  "product-compare-page": {
+    "lines": 53,
+    "files": 1
+  },
+  "express-checkout-page": {
+    "lines": 57,
+    "files": 1
+  },
+  "order-tracking-page": {
+    "lines": 40,
+    "files": 1
+  },
+  "workspace-activity-page": {
+    "lines": 51,
+    "files": 1
+  },
+  "first-run-page": {
+    "lines": 50,
+    "files": 1
   }
 }

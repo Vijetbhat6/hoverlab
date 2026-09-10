@@ -122,7 +122,7 @@ export function HeroWaitlist({
                 ) : (
                   <>
                     {submitLabel}
-                    <ArrowRight aria-hidden className="h-4 w-4" />
+                    <ArrowRight aria-hidden className="h-4 w-4 rtl:rotate-180" />
                   </>
                 )}
               </button>

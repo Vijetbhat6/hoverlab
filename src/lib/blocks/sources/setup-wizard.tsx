@@ -243,7 +243,7 @@ export function SetupWizard({
                   disabled={step === 0}
                   className="inline-flex h-11 items-center gap-1 rounded-xl border border-border/60 px-4 text-sm font-semibold transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-40"
                 >
-                  <ChevronLeft aria-hidden className="h-4 w-4" />
+                  <ChevronLeft aria-hidden className="h-4 w-4 rtl:rotate-180" />
                   Back
                 </button>
                 <button

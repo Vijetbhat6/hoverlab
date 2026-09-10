@@ -1,5 +1,10 @@
 {
   "publishable": false,
+  "standard": {
+    "wcag": "2.2",
+    "level": "AA",
+    "en301549": "v4.1.1"
+  },
   "rules": [
     {
       "id": "img-alt",
@@ -56,6 +61,76 @@
       "level": "A",
       "name": "Labels or instructions",
       "severity": "violation"
+    },
+    {
+      "id": "paste-blocked-on-credential",
+      "sc": "3.3.8",
+      "level": "AA",
+      "name": "Accessible authentication (minimum)",
+      "severity": "violation"
+    },
+    {
+      "id": "target-size",
+      "sc": "2.5.8",
+      "level": "AA",
+      "name": "Target size (minimum)",
+      "severity": "advisory"
+    },
+    {
+      "id": "dragging-alternative",
+      "sc": "2.5.7",
+      "level": "AA",
+      "name": "Dragging movements",
+      "severity": "advisory"
+    },
+    {
+      "id": "control-has-name",
+      "sc": "4.1.2",
+      "level": "A",
+      "name": "Name, role, value — icon-only controls",
+      "severity": "violation"
+    },
+    {
+      "id": "label-points-at-nothing",
+      "sc": "1.3.1",
+      "level": "A",
+      "name": "Info and relationships — label association",
+      "severity": "violation"
+    },
+    {
+      "id": "placeholder-as-label",
+      "sc": "3.3.2",
+      "level": "A",
+      "name": "Labels or instructions — placeholder is not a label",
+      "severity": "violation"
+    },
+    {
+      "id": "aria-hidden-focusable",
+      "sc": "4.1.2",
+      "level": "A",
+      "name": "Name, role, value — hidden but focusable",
+      "severity": "violation"
+    },
+    {
+      "id": "dialog-named",
+      "sc": "4.1.2",
+      "level": "A",
+      "name": "Name, role, value — dialogs",
+      "severity": "violation"
+    },
+    {
+      "id": "autoplay-audible",
+      "sc": "1.4.2",
+      "level": "A",
+      "name": "Audio control",
+      "severity": "violation"
+    },
+    {
+      "id": "heading-order",
+      "sc": "1.3.1",
+      "level": "A",
+      "name": "Info and relationships — heading order",
+      "severity": "advisory"
     }
   ],
   "unchecked": [
@@ -88,6 +163,26 @@
       "sc": "3.2.3 / 3.2.4",
       "name": "Consistent navigation and identification",
       "why": "A property of the whole consuming site, not of one artifact."
+    },
+    {
+      "sc": "2.4.11",
+      "name": "Focus not obscured (minimum)",
+      "why": "New in WCAG 2.2. Whether a sticky header covers the focused element depends on the rendered page an artifact lands in, not on the artifact."
+    },
+    {
+      "sc": "3.2.6",
+      "name": "Consistent help",
+      "why": "New in WCAG 2.2. Asks whether help is in the same place across a set of pages, which is a property of the consuming site."
+    },
+    {
+      "sc": "3.3.7",
+      "name": "Redundant entry",
+      "why": "New in WCAG 2.2. Needs to know whether two fields in a multi-step flow ask for the same information, which is a question about meaning rather than markup."
+    },
+    {
+      "sc": "2.4.13",
+      "name": "Focus appearance",
+      "why": "New in WCAG 2.2, and Level AAA — outside the AA target, listed so a reader can see it was considered rather than missed."
     }
   ],
   "artifacts": [
@@ -102,7 +197,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -117,7 +222,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -132,7 +247,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -147,7 +272,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -162,7 +297,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -177,7 +322,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -192,7 +347,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -207,7 +372,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -222,7 +397,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -237,7 +422,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -252,7 +447,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -267,7 +472,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -282,7 +497,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -297,7 +522,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -312,7 +547,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -327,7 +572,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -342,7 +597,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -357,7 +622,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -372,7 +647,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -387,7 +672,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -402,7 +697,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -417,7 +722,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -432,7 +747,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -447,7 +772,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -462,7 +797,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -477,7 +822,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -492,7 +847,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -507,7 +872,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -522,7 +897,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -537,7 +922,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -552,7 +947,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -567,7 +972,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -582,7 +997,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -597,7 +1022,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -612,7 +1047,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -627,7 +1072,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -642,7 +1097,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -657,7 +1122,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -672,7 +1147,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -687,9 +1172,27 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
-      "findings": []
+      "findings": [
+        {
+          "rule": "target-size",
+          "sc": "2.5.8",
+          "level": "AA",
+          "severity": "advisory",
+          "file": "components/onboarding-checklist.tsx",
+          "message": "target is 20px, under the 24px minimum: <button\r\n                  type=\"button\"\r\n                  onClick={() => toggl"
+        }
+      ]
     },
     {
       "id": "setup-wizard",
@@ -702,7 +1205,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -717,7 +1230,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -732,7 +1255,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -747,7 +1280,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -762,7 +1305,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -777,7 +1330,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -792,7 +1355,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -807,7 +1380,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -822,9 +1405,27 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
-      "findings": []
+      "findings": [
+        {
+          "rule": "target-size",
+          "sc": "2.5.8",
+          "level": "AA",
+          "severity": "advisory",
+          "file": "components/notification-inbox.tsx",
+          "message": "target is 16px, under the 24px minimum: <button\n                      type=\"button\"\n                      onClick={() =>"
+        }
+      ]
     },
     {
       "id": "notification-preferences",
@@ -837,9 +1438,27 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
-      "findings": []
+      "findings": [
+        {
+          "rule": "target-size",
+          "sc": "2.5.8",
+          "level": "AA",
+          "severity": "advisory",
+          "file": "components/notification-preferences.tsx",
+          "message": "target is 20px, under the 24px minimum: <button\r\n                        type=\"button\"\r\n                        role=\"sw"
+        }
+      ]
     },
     {
       "id": "push-permission-prompt",
@@ -852,7 +1471,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -867,7 +1496,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -882,7 +1521,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -897,7 +1546,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -912,7 +1571,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -927,7 +1596,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -942,7 +1621,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -957,7 +1646,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -972,7 +1671,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -987,7 +1696,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -1002,7 +1721,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -1017,7 +1746,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -1032,7 +1771,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -1047,7 +1796,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -1062,7 +1821,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -1077,7 +1846,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -1092,7 +1871,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -1107,7 +1896,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -1122,7 +1921,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -1137,7 +1946,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -1152,7 +1971,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -1167,7 +1996,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -1182,7 +2021,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -1197,7 +2046,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -1212,7 +2071,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -1227,7 +2096,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -1242,7 +2121,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -1257,7 +2146,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -1272,7 +2171,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -1287,7 +2196,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -1302,7 +2221,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -1317,7 +2246,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -1332,7 +2271,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -1347,7 +2296,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -1362,7 +2321,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -1377,7 +2346,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -1392,7 +2371,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -1407,7 +2396,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -1422,7 +2421,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -1437,7 +2446,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -1452,7 +2471,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -1467,7 +2496,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -1482,7 +2521,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -1497,7 +2546,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -1512,7 +2571,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -1527,7 +2596,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -1542,7 +2621,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -1557,7 +2646,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -1572,7 +2671,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -1587,7 +2696,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -1602,7 +2721,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -1617,7 +2746,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -1632,7 +2771,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -1647,7 +2796,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -1662,7 +2821,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -1677,7 +2846,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -1692,7 +2871,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -1707,7 +2896,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -1722,7 +2921,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -1737,7 +2946,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -1752,7 +2971,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -1767,7 +2996,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -1782,7 +3021,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -1797,7 +3046,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -1812,7 +3071,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -1827,7 +3096,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -1842,7 +3121,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -1857,7 +3146,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -1872,7 +3171,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -1887,7 +3196,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -1902,7 +3221,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -1917,7 +3246,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -1932,7 +3271,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -1947,7 +3296,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -1962,7 +3321,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -1977,7 +3346,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -1992,7 +3371,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -2007,7 +3396,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -2022,9 +3421,27 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
-      "findings": []
+      "findings": [
+        {
+          "rule": "target-size",
+          "sc": "2.5.8",
+          "level": "AA",
+          "severity": "advisory",
+          "file": "components/dashboard-alert-rules.tsx",
+          "message": "target is 20px, under the 24px minimum: <button\r\n                  type=\"button\"\r\n                  role=\"switch\"\r\n     "
+        }
+      ]
     },
     {
       "id": "data-table-sortable",
@@ -2037,7 +3454,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -2052,7 +3479,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -2067,7 +3504,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -2082,7 +3529,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -2097,7 +3554,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -2112,7 +3579,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -2127,7 +3604,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -2142,7 +3629,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -2157,7 +3654,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -2172,7 +3679,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -2187,7 +3704,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -2202,7 +3729,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -2217,7 +3754,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -2232,7 +3779,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -2247,7 +3804,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -2262,7 +3829,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -2277,7 +3854,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -2292,7 +3879,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -2307,7 +3904,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -2322,7 +3929,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -2337,7 +3954,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -2352,7 +3979,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -2367,7 +4004,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -2382,7 +4029,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -2397,7 +4054,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -2412,7 +4079,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -2427,7 +4104,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -2442,7 +4129,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -2457,7 +4154,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -2472,7 +4179,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -2487,7 +4204,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -2502,7 +4229,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -2517,7 +4254,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -2532,7 +4279,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -2547,7 +4304,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -2562,7 +4329,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -2577,7 +4354,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -2592,7 +4379,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -2607,7 +4404,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -2622,7 +4429,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -2637,7 +4454,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -2652,7 +4479,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -2667,7 +4504,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -2682,7 +4529,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -2697,7 +4554,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -2712,7 +4579,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -2727,7 +4604,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -2742,7 +4629,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -2757,7 +4654,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -2772,9 +4679,27 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
-      "findings": []
+      "findings": [
+        {
+          "rule": "dragging-alternative",
+          "sc": "2.5.7",
+          "level": "AA",
+          "severity": "advisory",
+          "file": "components/file-dropzone.tsx",
+          "message": "drag interaction — confirm a non-drag alternative: <label\n        onDragEnter={handleDragEnter}\n        onDragLeave={handleDragLeav"
+        }
+      ]
     },
     {
       "id": "upload-progress-list",
@@ -2787,7 +4712,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -2802,7 +4737,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -2817,7 +4762,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -2832,7 +4787,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -2847,7 +4812,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -2862,7 +4837,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -2877,7 +4862,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -2892,7 +4887,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -2907,7 +4912,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -2922,7 +4937,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -2937,7 +4962,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -2952,7 +4987,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -2967,7 +5012,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -2982,7 +5037,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -2997,7 +5062,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -3012,7 +5087,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -3027,7 +5112,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -3042,7 +5137,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -3057,7 +5162,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -3072,7 +5187,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -3087,7 +5212,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -3102,7 +5237,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -3117,7 +5262,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -3132,7 +5287,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -3147,7 +5312,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -3162,7 +5337,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -3177,7 +5362,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -3192,7 +5387,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -3207,7 +5412,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -3222,7 +5437,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -3237,7 +5462,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -3252,7 +5487,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -3267,7 +5512,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -3282,7 +5537,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -3297,7 +5562,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -3312,7 +5587,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -3327,7 +5612,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -3342,7 +5637,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -3357,7 +5662,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -3372,7 +5687,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -3387,7 +5712,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -3402,7 +5737,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -3417,7 +5762,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -3432,7 +5787,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -3447,7 +5812,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -3462,7 +5837,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -3477,7 +5862,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -3492,7 +5887,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -3507,7 +5912,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -3522,7 +5937,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -3537,7 +5962,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -3552,7 +5987,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -3567,7 +6012,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -3582,7 +6037,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -3597,7 +6062,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -3612,7 +6087,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -3627,7 +6112,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -3642,7 +6137,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -3657,7 +6162,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -3672,7 +6187,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -3687,7 +6212,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -3702,7 +6237,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -3717,7 +6262,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -3732,7 +6287,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -3747,7 +6312,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -3762,7 +6337,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -3777,7 +6362,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -3792,7 +6387,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -3807,7 +6412,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -3822,7 +6437,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -3837,7 +6462,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -3852,7 +6487,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -3867,7 +6512,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -3882,7 +6537,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -3897,7 +6562,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -3912,7 +6587,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -3927,7 +6612,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -3942,7 +6637,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -3957,7 +6662,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -3972,7 +6687,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -3987,7 +6712,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -4002,7 +6737,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -4017,7 +6762,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -4032,7 +6787,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -4047,7 +6812,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -4062,7 +6837,42 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
+      ],
+      "findings": []
+    },
+    {
+      "id": "help-centre-page",
+      "kind": "page",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -4077,7 +6887,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -4092,7 +6912,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -4107,7 +6937,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -4122,7 +6962,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -4137,7 +6987,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -4152,7 +7012,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -4167,7 +7037,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -4182,7 +7062,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -4197,7 +7087,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -4212,7 +7112,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -4227,7 +7137,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -4242,7 +7162,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -4257,7 +7187,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -4272,7 +7212,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -4287,7 +7237,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -4302,7 +7262,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -4317,7 +7287,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -4332,7 +7312,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -4347,7 +7337,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -4362,7 +7362,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -4377,7 +7387,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -4392,7 +7412,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -4407,7 +7437,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -4422,7 +7462,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -4437,7 +7487,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -4452,7 +7512,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -4467,7 +7537,17 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     },
@@ -4482,7 +7562,592 @@
         "click-handler-on-non-interactive",
         "positive-tabindex",
         "table-headers",
-        "input-labelled"
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
+      ],
+      "findings": []
+    },
+    {
+      "id": "assistant-chat-page",
+      "kind": "page",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
+      ],
+      "findings": []
+    },
+    {
+      "id": "agent-inspector-page",
+      "kind": "page",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
+      ],
+      "findings": []
+    },
+    {
+      "id": "retrieval-console-page",
+      "kind": "page",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
+      ],
+      "findings": []
+    },
+    {
+      "id": "ai-editor-page",
+      "kind": "page",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
+      ],
+      "findings": []
+    },
+    {
+      "id": "records-table-page",
+      "kind": "page",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
+      ],
+      "findings": []
+    },
+    {
+      "id": "analytics-page",
+      "kind": "page",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
+      ],
+      "findings": []
+    },
+    {
+      "id": "alerting-page",
+      "kind": "page",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
+      ],
+      "findings": []
+    },
+    {
+      "id": "notification-settings-page",
+      "kind": "page",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
+      ],
+      "findings": []
+    },
+    {
+      "id": "team-access-page",
+      "kind": "page",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
+      ],
+      "findings": []
+    },
+    {
+      "id": "import-data-page",
+      "kind": "page",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
+      ],
+      "findings": []
+    },
+    {
+      "id": "account-setup-page",
+      "kind": "page",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
+      ],
+      "findings": []
+    },
+    {
+      "id": "reset-password-page",
+      "kind": "page",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
+      ],
+      "findings": []
+    },
+    {
+      "id": "app-shell-page",
+      "kind": "page",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
+      ],
+      "findings": []
+    },
+    {
+      "id": "security-landing-page",
+      "kind": "page",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
+      ],
+      "findings": []
+    },
+    {
+      "id": "migration-landing-page",
+      "kind": "page",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
+      ],
+      "findings": []
+    },
+    {
+      "id": "launch-note-page",
+      "kind": "page",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
+      ],
+      "findings": []
+    },
+    {
+      "id": "single-offer-page",
+      "kind": "page",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
+      ],
+      "findings": []
+    },
+    {
+      "id": "plan-change-page",
+      "kind": "page",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
+      ],
+      "findings": []
+    },
+    {
+      "id": "product-compare-page",
+      "kind": "page",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
+      ],
+      "findings": []
+    },
+    {
+      "id": "express-checkout-page",
+      "kind": "page",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
+      ],
+      "findings": []
+    },
+    {
+      "id": "order-tracking-page",
+      "kind": "page",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
+      ],
+      "findings": []
+    },
+    {
+      "id": "workspace-activity-page",
+      "kind": "page",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
+      ],
+      "findings": []
+    },
+    {
+      "id": "first-run-page",
+      "kind": "page",
+      "passed": [
+        "img-alt",
+        "svg-hidden-or-labelled",
+        "switch-checked",
+        "expanded-controls",
+        "click-handler-on-non-interactive",
+        "positive-tabindex",
+        "table-headers",
+        "input-labelled",
+        "paste-blocked-on-credential",
+        "target-size",
+        "dragging-alternative",
+        "control-has-name",
+        "label-points-at-nothing",
+        "placeholder-as-label",
+        "aria-hidden-focusable",
+        "dialog-named",
+        "autoplay-audible",
+        "heading-order"
       ],
       "findings": []
     }

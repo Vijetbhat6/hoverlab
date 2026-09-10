@@ -291,7 +291,7 @@ export function MultiStepForm({
             disabled={step === 0}
             className="inline-flex h-11 items-center gap-1 rounded-xl border border-border/60 px-4 text-sm font-semibold transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-40"
           >
-            <ChevronLeft aria-hidden className="h-4 w-4" />
+            <ChevronLeft aria-hidden className="h-4 w-4 rtl:rotate-180" />
             Back
           </button>
 
@@ -309,7 +309,7 @@ export function MultiStepForm({
               className="inline-flex h-11 items-center gap-1 rounded-xl bg-primary px-6 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
               Continue
-              <ChevronRight aria-hidden className="h-4 w-4" />
+              <ChevronRight aria-hidden className="h-4 w-4 rtl:rotate-180" />
             </button>
           )}
         </div>
@@ -344,7 +344,7 @@ function TextField({
       <label htmlFor={id} className="block text-sm font-medium">
         {label}
         {optional ? (
-          <span className="ml-1 text-xs font-normal text-muted-foreground">(optional)</span>
+          <span className="ms-1 text-xs font-normal text-muted-foreground">(optional)</span>
         ) : null}
       </label>
       <input

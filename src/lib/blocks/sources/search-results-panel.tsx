@@ -155,7 +155,7 @@ export function SearchResultsPanel({
                       {result.path.map((segment, i) => (
                         <React.Fragment key={segment}>
                           {i > 0 ? (
-                            <ChevronRight aria-hidden className="h-3 w-3 shrink-0" />
+                            <ChevronRight aria-hidden className="h-3 w-3 shrink-0 rtl:rotate-180" />
                           ) : null}
                           <span>{segment}</span>
                         </React.Fragment>

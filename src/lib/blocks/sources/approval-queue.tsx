@@ -281,7 +281,7 @@ export function ApprovalQueue({ items = DEFAULT_ITEMS, className = '' }: Approva
                           className="inline-flex items-center gap-1 rounded text-xs font-medium text-primary underline-offset-4 transition hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                         >
                           Open
-                          <ArrowRight aria-hidden className="h-3 w-3" />
+                          <ArrowRight aria-hidden className="h-3 w-3 rtl:rotate-180" />
                           <span className="sr-only"> {item.action}</span>
                         </a>
                       ) : item.autoApproveIn ? (

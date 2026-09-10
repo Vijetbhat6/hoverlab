@@ -101,14 +101,14 @@ export function CalendarMonth({ events = DEFAULT_EVENTS, className = '' }: Calen
             aria-label="Previous month"
             className="inline-flex h-8 w-8 items-center justify-center rounded-lg border border-border/60 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
           >
-            <ChevronLeft aria-hidden className="h-4 w-4" />
+            <ChevronLeft aria-hidden className="h-4 w-4 rtl:rotate-180" />
           </button>
           <button
             type="button"
             aria-label="Next month"
             className="inline-flex h-8 w-8 items-center justify-center rounded-lg border border-border/60 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
           >
-            <ChevronRight aria-hidden className="h-4 w-4" />
+            <ChevronRight aria-hidden className="h-4 w-4 rtl:rotate-180" />
           </button>
           <button
             type="button"

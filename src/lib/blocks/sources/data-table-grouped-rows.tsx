@@ -167,7 +167,10 @@ export function DataTableGroupedRows({
                     >
                       <ChevronRight
                         aria-hidden
-                        className={`h-4 w-4 text-muted-foreground transition-transform ${open ? 'rotate-90' : ''}`}
+                        className={`h-4 w-4 text-muted-foreground transition-transform ${
+                          // Mirrored only while closed; down is down in RTL.
+                          open ? 'rotate-90' : 'rtl:rotate-180'
+                        }`}
                       />
                       {group.label}
                       <span className="font-normal text-muted-foreground">
@@ -215,7 +218,7 @@ export function DataTableGroupedRows({
             <tr className="border-t-2 border-border bg-muted/30">
               <th scope="row" colSpan={2} className="px-5 py-3 font-semibold sm:px-6">
                 All segments
-                <span className="ml-2 font-normal text-muted-foreground">
+                <span className="ms-2 font-normal text-muted-foreground">
                   including collapsed
                 </span>
               </th>

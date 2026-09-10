@@ -528,7 +528,7 @@
     "files": 1
   },
   "data-table-expandable": {
-    "lines": 204,
+    "lines": 205,
     "files": 1
   },
   "data-table-column-manager": {
@@ -544,7 +544,7 @@
     "files": 1
   },
   "data-table-grouped-rows": {
-    "lines": 235,
+    "lines": 238,
     "files": 1
   },
   "settings-nav-layout": {
@@ -772,11 +772,11 @@
     "files": 1
   },
   "agent-thinking-trace": {
-    "lines": 247,
+    "lines": 256,
     "files": 1
   },
   "agent-tool-calls": {
-    "lines": 251,
+    "lines": 253,
     "files": 1
   },
   "agent-task-list": {

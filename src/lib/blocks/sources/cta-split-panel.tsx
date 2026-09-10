@@ -74,7 +74,7 @@ export function CtaSplitPanel({
               className="inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
             >
               {primaryLabel}
-              <ArrowRight aria-hidden className="h-4 w-4" />
+              <ArrowRight aria-hidden className="h-4 w-4 rtl:rotate-180" />
             </a>
             <a
               href={secondaryHref}

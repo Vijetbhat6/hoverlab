@@ -248,7 +248,7 @@ export function ChatAttachmentTray({
           disabled={Boolean(blockedBecause)}
           className="inline-flex items-center gap-1.5 rounded-lg bg-primary px-3 py-2 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90 disabled:pointer-events-none disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
         >
-          <Send aria-hidden className="h-4 w-4" />
+          <Send aria-hidden className="h-4 w-4 rtl:rotate-180" />
           {blockedBecause ?? 'Send'}
         </button>
       </div>

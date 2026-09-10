@@ -134,7 +134,7 @@ export function AgentDiffReview({
             </caption>
 
             <thead>
-              <tr className="border-b border-border/60 text-left">
+              <tr className="border-b border-border/60 text-start">
                 <th scope="col" className="w-10 py-2.5 ps-5 pe-2">
                   <input
                     ref={selectAllRef}
@@ -235,7 +235,7 @@ export function AgentDiffReview({
                 onClick={() => setApplied(false)}
                 className="inline-flex items-center gap-1.5 rounded-xl border border-border/60 px-3.5 py-2 text-sm font-medium transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
-                <Undo2 aria-hidden className="h-4 w-4" />
+                <Undo2 aria-hidden className="h-4 w-4 rtl:rotate-180" />
                 Undo
               </button>
             ) : (

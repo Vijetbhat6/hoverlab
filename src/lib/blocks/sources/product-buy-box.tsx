@@ -147,7 +147,7 @@ export function ProductBuyBox({
             onClick={() => setQuantity((q) => Math.max(1, q - 1))}
             disabled={quantity <= 1}
             aria-label="Decrease quantity"
-            className="rounded-l-xl p-2.5 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground disabled:pointer-events-none disabled:opacity-40"
+            className="rounded-s-xl p-2.5 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground disabled:pointer-events-none disabled:opacity-40"
           >
             <Minus aria-hidden className="h-4 w-4" />
           </button>
@@ -164,7 +164,7 @@ export function ProductBuyBox({
             onClick={() => setQuantity((q) => Math.min(maxQuantity, q + 1))}
             disabled={quantity >= maxQuantity}
             aria-label="Increase quantity"
-            className="rounded-r-xl p-2.5 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground disabled:pointer-events-none disabled:opacity-40"
+            className="rounded-e-xl p-2.5 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground disabled:pointer-events-none disabled:opacity-40"
           >
             <Plus aria-hidden className="h-4 w-4" />
           </button>

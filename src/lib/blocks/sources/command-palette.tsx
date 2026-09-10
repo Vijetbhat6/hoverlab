@@ -167,7 +167,7 @@ export function CommandPalette({
         >
           <Search aria-hidden className="h-4 w-4" />
           Search
-          <kbd className="ml-2 rounded border border-border/60 bg-muted px-1.5 py-0.5 font-mono text-xs">
+          <kbd className="ms-2 rounded border border-border/60 bg-muted px-1.5 py-0.5 font-mono text-xs">
             ⌘K
           </kbd>
         </button>
@@ -269,7 +269,7 @@ export function CommandPalette({
             <CornerDownLeft aria-hidden className="h-3 w-3" />
             select
           </span>
-          <span className="ml-auto">
+          <span className="ms-auto">
             {results.length} {results.length === 1 ? 'result' : 'results'}
           </span>
         </div>

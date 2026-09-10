@@ -114,7 +114,7 @@ export function CtaInlineCard({
             className="mt-4 inline-flex h-9 items-center gap-1.5 rounded-lg bg-primary px-3.5 text-sm font-semibold text-primary-foreground transition hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           >
             {actionLabel}
-            <ArrowRight aria-hidden className="h-4 w-4" />
+            <ArrowRight aria-hidden className="h-4 w-4 rtl:rotate-180" />
           </a>
           {/* The cost, before the click. */}
           <p className="mt-2 text-xs text-muted-foreground">{fineprint}</p>

@@ -60,6 +60,29 @@ import OnboardingPage from './sources/onboarding-page'
 import SearchPage from './sources/search-page'
 import AgentRunPage from './sources/agent-run-page'
 import ApprovalsPage from './sources/approvals-page'
+import AssistantChatPage from './sources/assistant-chat-page'
+import AgentInspectorPage from './sources/agent-inspector-page'
+import RetrievalConsolePage from './sources/retrieval-console-page'
+import AiEditorPage from './sources/ai-editor-page'
+import RecordsTablePage from './sources/records-table-page'
+import AnalyticsPage from './sources/analytics-page'
+import AlertingPage from './sources/alerting-page'
+import NotificationSettingsPage from './sources/notification-settings-page'
+import TeamAccessPage from './sources/team-access-page'
+import ImportDataPage from './sources/import-data-page'
+import AccountSetupPage from './sources/account-setup-page'
+import ResetPasswordPage from './sources/reset-password-page'
+import AppShellPage from './sources/app-shell-page'
+import SecurityLandingPage from './sources/security-landing-page'
+import MigrationLandingPage from './sources/migration-landing-page'
+import LaunchNotePage from './sources/launch-note-page'
+import SingleOfferPage from './sources/single-offer-page'
+import PlanChangePage from './sources/plan-change-page'
+import ProductComparePage from './sources/product-compare-page'
+import ExpressCheckoutPage from './sources/express-checkout-page'
+import OrderTrackingPage from './sources/order-tracking-page'
+import WorkspaceActivityPage from './sources/workspace-activity-page'
+import FirstRunPage from './sources/first-run-page'
 
 export const PAGE_PREVIEWS: Record<string, React.ReactNode> = {
   'saas-landing-page': <SaasLandingPage />,
@@ -107,6 +130,31 @@ export const PAGE_PREVIEWS: Record<string, React.ReactNode> = {
   'search-page': <SearchPage />,
   'agent-run-page': <AgentRunPage />,
   'approvals-page': <ApprovalsPage />,
+
+  /* The composition wave, 2026-09-10 — see the note in catalog.ts. */
+  'assistant-chat-page': <AssistantChatPage />,
+  'agent-inspector-page': <AgentInspectorPage />,
+  'retrieval-console-page': <RetrievalConsolePage />,
+  'ai-editor-page': <AiEditorPage />,
+  'records-table-page': <RecordsTablePage />,
+  'analytics-page': <AnalyticsPage />,
+  'alerting-page': <AlertingPage />,
+  'notification-settings-page': <NotificationSettingsPage />,
+  'team-access-page': <TeamAccessPage />,
+  'import-data-page': <ImportDataPage />,
+  'account-setup-page': <AccountSetupPage />,
+  'reset-password-page': <ResetPasswordPage />,
+  'app-shell-page': <AppShellPage />,
+  'security-landing-page': <SecurityLandingPage />,
+  'migration-landing-page': <MigrationLandingPage />,
+  'launch-note-page': <LaunchNotePage />,
+  'single-offer-page': <SingleOfferPage />,
+  'plan-change-page': <PlanChangePage />,
+  'product-compare-page': <ProductComparePage />,
+  'express-checkout-page': <ExpressCheckoutPage />,
+  'order-tracking-page': <OrderTrackingPage />,
+  'workspace-activity-page': <WorkspaceActivityPage />,
+  'first-run-page': <FirstRunPage />,
 }
 
 /** The rendered preview for a page, or undefined if the key is unknown. */

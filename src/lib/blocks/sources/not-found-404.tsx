@@ -112,7 +112,7 @@ export function NotFound404({
                 </span>
                 <ArrowRight
                   aria-hidden
-                  className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5"
+                  className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 rtl:rotate-180 rtl:group-hover:-translate-x-0.5"
                 />
               </a>
             </li>
@@ -136,7 +136,7 @@ export function NotFound404({
           href={homeHref}
           className="inline-flex items-center gap-1.5 text-muted-foreground transition-colors hover:text-foreground"
         >
-          <ArrowLeft aria-hidden className="h-4 w-4" />
+          <ArrowLeft aria-hidden className="h-4 w-4 rtl:rotate-180" />
           Previous page
         </a>
       </div>

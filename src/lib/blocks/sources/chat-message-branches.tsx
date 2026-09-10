@@ -131,7 +131,7 @@ export function ChatMessageBranches({
         disabled={index === 0}
         className="inline-flex h-6 w-6 items-center justify-center rounded-md text-muted-foreground transition hover:bg-muted hover:text-foreground disabled:pointer-events-none disabled:opacity-40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
       >
-        <ChevronLeft aria-hidden className="h-3.5 w-3.5" />
+        <ChevronLeft aria-hidden className="h-3.5 w-3.5 rtl:rotate-180" />
         <span className="sr-only">Previous version</span>
       </button>
       <span className="px-1 text-xs tabular-nums text-muted-foreground">
@@ -143,7 +143,7 @@ export function ChatMessageBranches({
         disabled={index === total - 1}
         className="inline-flex h-6 w-6 items-center justify-center rounded-md text-muted-foreground transition hover:bg-muted hover:text-foreground disabled:pointer-events-none disabled:opacity-40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
       >
-        <ChevronRight aria-hidden className="h-3.5 w-3.5" />
+        <ChevronRight aria-hidden className="h-3.5 w-3.5 rtl:rotate-180" />
         <span className="sr-only">Next version</span>
       </button>
     </div>

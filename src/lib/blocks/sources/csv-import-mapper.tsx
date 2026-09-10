@@ -188,7 +188,7 @@ export function CsvImportMapper({
 
                 <ArrowRight
                   aria-hidden
-                  className="hidden h-4 w-4 shrink-0 self-center text-muted-foreground sm:block"
+                  className="hidden h-4 w-4 shrink-0 self-center text-muted-foreground sm:block rtl:rotate-180"
                 />
 
                 <div className="min-w-0">

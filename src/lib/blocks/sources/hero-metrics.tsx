@@ -92,7 +92,7 @@ export function HeroMetrics({
             className="inline-flex h-12 items-center justify-center gap-1.5 rounded-xl bg-primary px-6 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/25 transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           >
             {primaryLabel}
-            <ArrowRight aria-hidden className="h-4 w-4" />
+            <ArrowRight aria-hidden className="h-4 w-4 rtl:rotate-180" />
           </a>
           <a
             href={secondaryHref}

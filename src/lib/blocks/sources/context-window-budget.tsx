@@ -246,7 +246,7 @@ export function ContextWindowBudget({
                 </span>
                 <span className="shrink-0 text-end text-xs tabular-nums text-muted-foreground">
                   {compact(seg.tokens)}
-                  <span className="ml-1.5 text-foreground">{Math.round(pct(seg.tokens))}%</span>
+                  <span className="ms-1.5 text-foreground">{Math.round(pct(seg.tokens))}%</span>
                 </span>
                 {canPin ? (
                   <button

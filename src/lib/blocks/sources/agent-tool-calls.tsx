@@ -160,7 +160,9 @@ export function AgentToolCalls({
                   <ChevronRight
                     aria-hidden
                     className={`h-3.5 w-3.5 shrink-0 text-muted-foreground transition-transform ${
-                      expanded ? 'rotate-90' : ''
+                      // Closed points at the panel it opens — start edge, so
+                      // it mirrors. Open points down, which RTL leaves alone.
+                      expanded ? 'rotate-90' : 'rtl:rotate-180'
                     }`}
                   />
 

@@ -40,6 +40,7 @@ import {
   AUDIT_RULES,
   CONFORMANCE_CLAIM_APPROVED,
   CRITERIA_COVERED,
+  STANDARD,
   UNCHECKED_CRITERIA,
   artifactsWithFindings,
   evidenceSummary,
@@ -47,14 +48,14 @@ import {
 
 const TITLE = 'Accessibility evidence — every block, audited — Hoverlab'
 const DESCRIPTION =
-  'Per-artifact WCAG results for every block and page in the catalog: which success criteria are checked, what the checks found, and — stated plainly — the six criteria a static audit cannot decide. Evidence, not a conformance claim.'
+  'Per-artifact WCAG results for every block and page in the catalog: which success criteria are checked, what the checks found, and — stated plainly — the criteria a static audit cannot decide. Evidence, not a conformance claim.'
 
 export const metadata: Metadata = {
   title: TITLE,
   description: DESCRIPTION,
   keywords: [
     'accessible react components',
-    'wcag 2.1 aa components',
+    `wcag ${STANDARD.wcag} ${STANDARD.level.toLowerCase()} components`,
     'european accessibility act components',
     'accessibility audit ui library',
   ],
@@ -95,8 +96,8 @@ export default function AccessibilityPage() {
           <p className="mt-4 text-pretty text-body">
             Every one of the {summary.artifacts.toLocaleString('en-US')} artifacts in
             this catalog — {summary.blocks} blocks and {summary.pages} pages — is
-            checked against {summary.rules} rules covering {summary.criteria} WCAG
-            2.1 success criteria on every build. The current result is{' '}
+            checked against {summary.rules} rules covering {summary.criteria} WCAG{' '}
+            {STANDARD.wcag} success criteria on every build. The current result is{' '}
             <strong className="font-semibold text-foreground">
               {summary.violations} violations
             </strong>{' '}
@@ -116,7 +117,8 @@ export default function AccessibilityPage() {
                 <strong className="font-semibold text-foreground">
                   This is evidence, not a conformance statement.
                 </strong>{' '}
-                We do not claim these components conform to WCAG 2.1 AA, and you
+                We do not claim these components conform to WCAG {STANDARD.wcag}{' '}
+                {STANDARD.level}, and you
                 should not represent to your own customers that they do on the
                 strength of this page. A static audit reads source text; it cannot
                 see rendered colour, focus order or reflow, and{' '}
@@ -239,7 +241,8 @@ export default function AccessibilityPage() {
             <p className="mt-2 text-sm text-body">
               None. All {summary.artifacts.toLocaleString('en-US')} artifacts pass
               every rule above, on the build that produced this page. That is a
-              statement about {summary.criteria} criteria, not about WCAG 2.1 AA
+              statement about {summary.criteria} criteria, not about WCAG{' '}
+              {STANDARD.wcag} {STANDARD.level}
               as a whole.
             </p>
           ) : (

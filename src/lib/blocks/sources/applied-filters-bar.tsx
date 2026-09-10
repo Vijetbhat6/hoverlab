@@ -160,7 +160,7 @@ export function AppliedFiltersBar({
 
           {/* Sort lives on the other side of the bar. It is not a chip
               because removing it would not show you more. */}
-          <label className="ml-auto flex items-center gap-2 text-sm text-muted-foreground">
+          <label className="ms-auto flex items-center gap-2 text-sm text-muted-foreground">
             <span className="sr-only">Sort results by</span>
             <select
               value={sort}

@@ -279,7 +279,7 @@ export function NavMobileDrawer({
                             </span>
                           ) : null}
                         </span>
-                        <ChevronRight aria-hidden className="h-4 w-4 text-muted-foreground" />
+                        <ChevronRight aria-hidden className="h-4 w-4 text-muted-foreground rtl:rotate-180" />
                       </a>
                     </li>
                   ))}

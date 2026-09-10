@@ -140,13 +140,13 @@ export function DocsLayout({
                   Docs
                 </a>
               </li>
-              <ChevronRight aria-hidden className="h-3.5 w-3.5" />
+              <ChevronRight aria-hidden className="h-3.5 w-3.5 rtl:rotate-180" />
               <li>
                 <a href="#getting-started" className="transition-colors hover:text-foreground">
                   Getting started
                 </a>
               </li>
-              <ChevronRight aria-hidden className="h-3.5 w-3.5" />
+              <ChevronRight aria-hidden className="h-3.5 w-3.5 rtl:rotate-180" />
               <li aria-current="page" className="font-medium text-foreground">
                 {title}
               </li>
@@ -222,7 +222,7 @@ export function DocsLayout({
             >
               <ArrowLeft
                 aria-hidden
-                className="h-4 w-4 shrink-0 text-muted-foreground transition-colors group-hover:text-primary"
+                className="h-4 w-4 shrink-0 text-muted-foreground transition-colors group-hover:text-primary rtl:rotate-180"
               />
               <span className="min-w-0">
                 <span className="block text-xs text-muted-foreground">Previous</span>
@@ -239,7 +239,7 @@ export function DocsLayout({
               </span>
               <ArrowRight
                 aria-hidden
-                className="h-4 w-4 shrink-0 text-muted-foreground transition-colors group-hover:text-primary"
+                className="h-4 w-4 shrink-0 text-muted-foreground transition-colors group-hover:text-primary rtl:rotate-180"
               />
             </a>
           </nav>

@@ -294,7 +294,7 @@ export function NavbarAuthenticated({
                 role="menuitem"
                 className="flex w-full items-center gap-2 rounded-lg px-2.5 py-2 text-start text-sm text-foreground transition hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
-                <LogOut aria-hidden className="h-3.5 w-3.5 text-muted-foreground" />
+                <LogOut aria-hidden className="h-3.5 w-3.5 text-muted-foreground rtl:rotate-180" />
                 Sign out
               </button>
             </div>

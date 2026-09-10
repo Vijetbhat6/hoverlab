@@ -165,9 +165,17 @@ export function AgentThinkingTrace({
 
           <span className="ms-auto text-xs text-muted-foreground">{steps.length} steps</span>
 
+          {/*
+            Only the CLOSED state is mirrored for RTL, and the asymmetry is
+            the whole point: closed, the chevron points at the content it
+            would reveal, which is the start edge — right in Arabic. Open, it
+            points down, and down is down in every writing direction. So the
+            open rule is restated under `rtl:` to beat `rtl:rotate-180`
+            rather than being flipped to some RTL value of its own.
+          */}
           <ChevronRight
             aria-hidden
-            className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-open:rotate-90"
+            className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-open:rotate-90 rtl:rotate-180 rtl:group-open:rotate-90"
           />
         </summary>
 
@@ -220,7 +228,8 @@ export function AgentThinkingTrace({
                   <ChevronRight
                     aria-hidden
                     className={`h-3.5 w-3.5 shrink-0 text-muted-foreground transition-transform ${
-                      open ? 'rotate-90' : ''
+                      // Closed points at the content, which is the start edge.
+                      open ? 'rotate-90' : 'rtl:rotate-180'
                     }`}
                   />
                 </button>

@@ -186,7 +186,7 @@ export function ConfidenceRecommendation({
                 <li key={alt.id} className="flex gap-2 text-xs leading-relaxed">
                   <ChevronRight
                     aria-hidden
-                    className="mt-0.5 h-3 w-3 shrink-0 text-muted-foreground"
+                    className="mt-0.5 h-3 w-3 shrink-0 text-muted-foreground rtl:rotate-180"
                   />
                   <span>
                     <span className="font-medium">{alt.label}</span>

@@ -78,7 +78,7 @@ export function HeroAppDownload({
               className="inline-flex h-14 items-center gap-3 rounded-xl bg-foreground px-5 text-background transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
               <Apple aria-hidden className="h-6 w-6" />
-              <span className="text-left leading-tight">
+              <span className="text-start leading-tight">
                 <span className="block text-[10px] uppercase tracking-wide opacity-70">
                   Download on the
                 </span>
@@ -91,7 +91,7 @@ export function HeroAppDownload({
               className="inline-flex h-14 items-center gap-3 rounded-xl border border-border/60 bg-card/60 px-5 backdrop-blur transition-colors hover:bg-card focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
               <Play aria-hidden className="h-6 w-6 text-primary" />
-              <span className="text-left leading-tight">
+              <span className="text-start leading-tight">
                 <span className="block text-[10px] uppercase tracking-wide text-muted-foreground">
                   Get it on
                 </span>

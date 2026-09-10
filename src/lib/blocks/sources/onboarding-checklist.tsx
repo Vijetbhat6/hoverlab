@@ -210,7 +210,7 @@ export function OnboardingChecklist({
                     className="inline-flex shrink-0 items-center gap-1 rounded-lg px-2.5 py-1.5 text-xs font-semibold text-primary transition-colors hover:bg-primary/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                   >
                     Start
-                    <ArrowRight aria-hidden className="h-3 w-3" />
+                    <ArrowRight aria-hidden className="h-3 w-3 rtl:rotate-180" />
                   </a>
                 ) : null}
 

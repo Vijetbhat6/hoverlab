@@ -123,7 +123,7 @@ export function AuthForgotPassword({
           href={loginHref}
           className="mt-6 inline-flex w-full items-center justify-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
         >
-          <ArrowLeft aria-hidden className="h-4 w-4" />
+          <ArrowLeft aria-hidden className="h-4 w-4 rtl:rotate-180" />
           Back to sign in
         </a>
       </div>

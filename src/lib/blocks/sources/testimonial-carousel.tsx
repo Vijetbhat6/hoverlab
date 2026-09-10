@@ -167,11 +167,11 @@ export function TestimonialCarousel({
             disabled={atStart}
             className={arrowClass}
           >
-            <ChevronLeft aria-hidden className="h-5 w-5" />
+            <ChevronLeft aria-hidden className="h-5 w-5 rtl:rotate-180" />
             <span className="sr-only">Previous quotes</span>
           </button>
           <button type="button" onClick={() => nudge(1)} disabled={atEnd} className={arrowClass}>
-            <ChevronRight aria-hidden className="h-5 w-5" />
+            <ChevronRight aria-hidden className="h-5 w-5 rtl:rotate-180" />
             <span className="sr-only">More quotes</span>
           </button>
         </div>

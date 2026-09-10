@@ -167,7 +167,7 @@ export function OnboardingRolePicker({
             className="inline-flex h-10 items-center gap-1.5 rounded-lg bg-primary px-4 text-sm font-semibold text-primary-foreground transition hover:opacity-90 disabled:pointer-events-none disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           >
             Continue
-            <ArrowRight aria-hidden className="h-4 w-4" />
+            <ArrowRight aria-hidden className="h-4 w-4 rtl:rotate-180" />
           </button>
 
           {/* Visible, plain, and it names what you get instead. */}

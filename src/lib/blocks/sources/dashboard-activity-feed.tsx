@@ -130,7 +130,7 @@ export function DashboardActivityFeed({
             className="inline-flex items-center gap-1 text-sm text-muted-foreground transition-all hover:gap-2 hover:text-foreground"
           >
             View all
-            <ArrowRight aria-hidden className="h-3.5 w-3.5" />
+            <ArrowRight aria-hidden className="h-3.5 w-3.5 rtl:rotate-180" />
           </a>
         ) : null}
       </div>

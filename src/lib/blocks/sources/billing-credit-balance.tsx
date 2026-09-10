@@ -124,7 +124,7 @@ export function BillingCreditBalance({
           </h2>
           <p className="mt-1 text-3xl font-bold tabular-nums">
             {total.toLocaleString('en-US')}
-            <span className="ml-1.5 text-sm font-normal text-muted-foreground">
+            <span className="ms-1.5 text-sm font-normal text-muted-foreground">
               credits available
             </span>
           </p>
@@ -167,7 +167,7 @@ export function BillingCreditBalance({
             <li key={bucket.id} className="p-5 sm:p-6">
               <div className="flex flex-wrap items-baseline justify-between gap-2">
                 <h3 className="text-sm font-semibold">
-                  <span className="mr-2 inline-flex h-5 w-5 items-center justify-center rounded-full bg-muted text-[11px] font-bold text-muted-foreground">
+                  <span className="me-2 inline-flex h-5 w-5 items-center justify-center rounded-full bg-muted text-[11px] font-bold text-muted-foreground">
                     {index + 1}
                   </span>
                   {bucket.label}

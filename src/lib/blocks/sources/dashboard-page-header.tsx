@@ -75,7 +75,7 @@ export function DashboardPageHeader({
                       {crumb.label}
                     </span>
                   )}
-                  {!last ? <ChevronRight aria-hidden className="h-3.5 w-3.5" /> : null}
+                  {!last ? <ChevronRight aria-hidden className="h-3.5 w-3.5 rtl:rotate-180" /> : null}
                 </li>
               )
             })}

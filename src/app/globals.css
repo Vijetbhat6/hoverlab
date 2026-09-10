@@ -2116,91 +2116,6 @@
   }
 }
 
-/* Stat number count-up polish — slight pop when the band scrolls in */
-@keyframes fx-stat-pop {
-  0%   { transform: translateY(8px); opacity: 0; }
-  100% { transform: translateY(0); opacity: 1; }
-}
-
-.fx-stat-pop {
-  animation: fx-stat-pop 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
-/* ---------- Logo marquee ----------
-   Two rows scrolling in opposite directions. The track is duplicated
-   so when the first copy scrolls fully out, the second copy is in place
-   — giving the illusion of infinite scroll. translateX(-50%) because
-   the track contains 2 identical halves. */
-
-@keyframes fx-marquee-left {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}
-
-@keyframes fx-marquee-right {
-  from { transform: translateX(-50%); }
-  to   { transform: translateX(0); }
-}
-
-.fx-marquee-track {
-  display: flex;
-  width: max-content;
-  animation: fx-marquee-left 40s linear infinite;
-}
-
-.fx-marquee-track--reverse {
-  animation: fx-marquee-right 40s linear infinite;
-}
-
-.fx-marquee-mask {
-  -webkit-mask-image: linear-gradient(
-    to right,
-    transparent 0,
-    black 8%,
-    black 92%,
-    transparent 100%
-  );
-  mask-image: linear-gradient(
-    to right,
-    transparent 0,
-    black 8%,
-    black 92%,
-    transparent 100%
-  );
-}
-
-.fx-marquee:hover .fx-marquee-track {
-  animation-play-state: paused;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .fx-marquee-track,
-  .fx-marquee-track--reverse {
-    animation: none;
-    transform: none;
-  }
-  .fx-marquee-mask {
-    -webkit-mask-image: none;
-    mask-image: none;
-  }
-}
-
-/* ---------- Code preview window ---------- */
-
-.fx-code-line {
-  opacity: 0;
-  animation: fx-code-line-in 0.4s ease-out forwards;
-}
-
-@keyframes fx-code-line-in {
-  from { opacity: 0; transform: translateY(4px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .fx-code-line { opacity: 1; animation: none; transform: none; }
-}
-
 /* ---------- Bento tile hover lift ---------- */
 
 .fx-bento-tile {
@@ -2211,8 +2126,8 @@
 
 .fx-bento-tile:hover {
   transform: translateY(-4px);
-  border-color: hsl(var(--primary) / 0.4);
-  box-shadow: 0 12px 32px -12px hsl(var(--primary) / 0.25);
+  border-color: color-mix(in oklab, var(--primary) 40%, transparent);
+  box-shadow: 0 12px 32px -12px color-mix(in oklab, var(--primary) 25%, transparent);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -2250,9 +2165,9 @@
   padding: 1px;
   background: linear-gradient(
     135deg,
-    hsl(var(--primary) / 0.6),
+    color-mix(in oklab, var(--primary) 60%, transparent),
     hsl(160 84% 50% / 0.4),
-    hsl(var(--primary) / 0.6)
+    color-mix(in oklab, var(--primary) 60%, transparent)
   );
   -webkit-mask:
     linear-gradient(#fff 0 0) content-box,
@@ -2276,66 +2191,17 @@
   height: 80px;
   background: radial-gradient(
     ellipse at center top,
-    hsl(var(--primary) / 0.25),
+    color-mix(in oklab, var(--primary) 25%, transparent),
     transparent 70%
   );
   pointer-events: none;
   z-index: -1;
 }
 
-/* ---------- Changelog timeline ---------- */
-
-.fx-timeline-dot {
-  position: relative;
-}
-
-.fx-timeline-dot::before {
-  content: "";
-  position: absolute;
-  left: -1.625rem;
-  top: 0.5rem;
-  width: 0.75rem;
-  height: 0.75rem;
-  border-radius: 9999px;
-  background: hsl(var(--primary));
-  box-shadow: 0 0 0 4px hsl(var(--primary) / 0.15);
-}
-
-.fx-timeline-dot::after {
-  content: "";
-  position: absolute;
-  left: -1.375rem;
-  top: 1.5rem;
-  bottom: -1.5rem;
-  width: 1px;
-  background: hsl(var(--border) / 0.6);
-}
-
-.fx-timeline-item:last-child .fx-timeline-dot::after {
-  display: none;
-}
-
-/* ---------- Roadmap column hover ---------- */
-
-.fx-roadmap-card {
-  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
-              border-color 0.25s ease;
-}
-
-.fx-roadmap-card:hover {
-  transform: translateY(-3px);
-  border-color: hsl(var(--primary) / 0.4);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .fx-roadmap-card { transition: none; }
-  .fx-roadmap-card:hover { transform: none; }
-}
-
 /* ---------- Newsletter input focus glow ---------- */
 
 .fx-newsletter-input:focus {
-  box-shadow: 0 0 0 3px hsl(var(--primary) / 0.2);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--primary) 20%, transparent);
 }
 
 /* ---------- Printing the licence certificate ----------

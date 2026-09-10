@@ -302,7 +302,7 @@ export function DataTableBulkActions({
                   onClick={() => setUndo(null)}
                   className="inline-flex h-7 items-center gap-1.5 rounded-lg border border-border bg-background px-2.5 text-xs font-medium text-foreground transition hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 >
-                  <Undo2 aria-hidden className="h-3.5 w-3.5" />
+                  <Undo2 aria-hidden className="h-3.5 w-3.5 rtl:rotate-180" />
                   Undo
                 </button>
               </>

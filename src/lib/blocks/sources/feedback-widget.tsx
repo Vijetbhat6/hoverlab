@@ -222,7 +222,7 @@ export function FeedbackWidget({
               type="submit"
               className="inline-flex h-9 w-full items-center justify-center gap-1.5 rounded-lg bg-primary px-4 text-sm font-semibold text-primary-foreground transition hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
-              <Send aria-hidden className="h-4 w-4" />
+              <Send aria-hidden className="h-4 w-4 rtl:rotate-180" />
               Send feedback
             </button>
 

@@ -307,7 +307,7 @@ function Row({
               onClick={onRevert}
               className="ms-auto inline-flex items-center gap-1 rounded px-1 py-0.5 text-[11px] text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
-              <Undo2 aria-hidden className="h-3 w-3" />
+              <Undo2 aria-hidden className="h-3 w-3 rtl:rotate-180" />
               Revert
               <span className="sr-only"> {label}</span>
             </button>

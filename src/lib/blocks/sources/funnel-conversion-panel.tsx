@@ -104,7 +104,7 @@ export function FunnelConversionPanel({
         <header className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
           <h2 className="text-base font-semibold text-foreground">{title}</h2>
           <p className="text-xs text-muted-foreground">{period}</p>
-          <p className="ml-auto text-xs text-muted-foreground">
+          <p className="ms-auto text-xs text-muted-foreground">
             End to end{' '}
             <strong className="font-semibold tabular-nums text-foreground">
               {pct((steps[steps.length - 1]?.count ?? 0) / top)}
@@ -122,14 +122,14 @@ export function FunnelConversionPanel({
                   {row.count.toLocaleString('en-US')}
                 </span>
                 {row.index > 0 ? (
-                  <span className="ml-auto text-sm font-semibold tabular-nums text-foreground">
+                  <span className="ms-auto text-sm font-semibold tabular-nums text-foreground">
                     {pct(row.fromPrevious)}
-                    <span className="ml-1 text-xs font-normal text-muted-foreground">
+                    <span className="ms-1 text-xs font-normal text-muted-foreground">
                       from previous step
                     </span>
                   </span>
                 ) : (
-                  <span className="ml-auto text-xs text-muted-foreground">
+                  <span className="ms-auto text-xs text-muted-foreground">
                     Top of the funnel
                   </span>
                 )}

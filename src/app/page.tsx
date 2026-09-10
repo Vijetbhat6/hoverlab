@@ -453,20 +453,41 @@ export default function LandingPage() {
       </section>
 
       {/*
-        Three sections came out here.
+        Three sections came out here, and as of 2026-09-10 their component
+        files came out with them.
 
         Testimonials: six quotes attributed to named people in named cities —
         "Maya Krishnan, Indie hacker, Berlin" — who do not exist. Invented
         endorsements are the one thing on this page with real downside: the
         audience is developers, the names are checkable, and a single person
         searching one of them turns every other claim on the page into a
-        maybe. Put it back the moment there are real quotes to put in it.
+        maybe.
+
+        Unrendering it was only ever half the fix. `landing/testimonials.tsx`
+        sat in the tree for two weeks afterwards, exporting a component whose
+        whole payload was the fabrication, one autocomplete away from being
+        imported back by someone who had not read this comment. A dormant
+        false claim is still a false claim with a loaded spring on it, so the
+        file is deleted rather than orphaned. `landing/bento-grid.tsx` went
+        the same way and for the same reason — its last tile carried "Maya
+        K., Indie hacker, Berlin" too. Git has both if real quotes ever
+        arrive, and a real quote needs new markup anyway.
 
         Changelog and roadmap: both are real and both are worth publishing,
         but neither belongs on the front door. They answer "what has this
         project been up to", which is a question you ask after deciding to
         care — the FAQ below answers the questions people have before that.
-        They belong under /docs.
+        /changelog now does that job properly, derived from git so it cannot
+        be inflated; the hand-maintained `landing/changelog-timeline.tsx`
+        that predated it was a second, rotting answer to the same question
+        and is gone. The roadmap, code preview, logo marquee, stats band and
+        use-cases grid went with the same sweep: superseded by the bands
+        above, imported by nothing, and costing a page of dead CSS.
+
+        `scripts/check-claims.mts` now fails the build on both halves of
+        this — an unreachable module under `components/landing`, and any
+        counted-audience claim ("Join 1,200+ developers") that nothing
+        counts.
       */}
 
       {/* FAQ */}

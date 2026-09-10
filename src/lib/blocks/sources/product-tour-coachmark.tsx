@@ -223,7 +223,7 @@ export function ProductTourCoachmark({
                   className="inline-flex h-8 items-center gap-1.5 rounded-lg bg-primary px-3 text-sm font-semibold text-primary-foreground transition hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 >
                   {last ? 'Done' : 'Next'}
-                  {last ? null : <ArrowRight aria-hidden className="h-4 w-4" />}
+                  {last ? null : <ArrowRight aria-hidden className="h-4 w-4 rtl:rotate-180" />}
                 </button>
               </div>
             </div>

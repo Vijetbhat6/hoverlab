@@ -182,7 +182,7 @@ export function OrderHistoryList({
 
                 <ChevronRight
                   aria-hidden
-                  className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5"
+                  className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 rtl:rotate-180 rtl:group-hover:-translate-x-0.5"
                 />
               </a>
             </li>

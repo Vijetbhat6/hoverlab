@@ -134,7 +134,7 @@ export function EmptyFilteredResults({
                   ) : null}
                   <span
                     aria-hidden
-                    className="ml-0.5 flex h-5 w-5 items-center justify-center rounded-full text-muted-foreground transition-colors group-hover:bg-muted group-hover:text-foreground"
+                    className="ms-0.5 flex h-5 w-5 items-center justify-center rounded-full text-muted-foreground transition-colors group-hover:bg-muted group-hover:text-foreground"
                   >
                     <X className="h-3 w-3" />
                   </span>

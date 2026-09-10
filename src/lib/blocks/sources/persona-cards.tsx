@@ -131,7 +131,7 @@ export function PersonaCards({
                     className={`mt-5 inline-flex items-center gap-1 text-sm font-semibold transition-all hover:gap-2 ${accent}`}
                   >
                     {p.ctaLabel ?? 'Get started'}
-                    <ArrowRight aria-hidden className="h-3.5 w-3.5" />
+                    <ArrowRight aria-hidden className="h-3.5 w-3.5 rtl:rotate-180" />
                   </a>
                 ) : null}
               </div>

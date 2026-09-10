@@ -260,7 +260,7 @@ export function DrawerRecordDetail({
                 {record.fields.map((field) => (
                   <div key={field.label} className="flex justify-between gap-4 text-sm">
                     <dt className="text-muted-foreground">{field.label}</dt>
-                    <dd className={`text-right ${field.mono ? 'font-mono text-xs' : ''}`}>
+                    <dd className={`text-end ${field.mono ? 'font-mono text-xs' : ''}`}>
                       {field.value}
                     </dd>
                   </div>

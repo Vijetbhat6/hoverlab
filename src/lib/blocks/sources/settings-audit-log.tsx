@@ -225,7 +225,7 @@ export function SettingsAuditLog({
                   <span className="rounded bg-muted px-2 py-0.5 font-mono text-xs text-muted-foreground line-through">
                     {entry.before}
                   </span>
-                  <ArrowRight aria-hidden className="h-3.5 w-3.5 text-muted-foreground" />
+                  <ArrowRight aria-hidden className="h-3.5 w-3.5 text-muted-foreground rtl:rotate-180" />
                   <span className="rounded bg-primary/10 px-2 py-0.5 font-mono text-xs text-primary">
                     {entry.after}
                   </span>

@@ -165,7 +165,7 @@ export function OnboardingImportData({
                       id={`${option.id}-scope`}
                       className="mt-1 block text-xs leading-relaxed text-muted-foreground"
                     >
-                      <ShieldCheck aria-hidden className="mr-1 inline h-3 w-3 align-[-2px]" />
+                      <ShieldCheck aria-hidden className="me-1 inline h-3 w-3 align-[-2px]" />
                       {option.scope}
                     </span>
 

@@ -140,7 +140,7 @@ export function PermissionDeniedState({
         href={backHref}
         className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground underline-offset-4 hover:text-foreground hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
       >
-        <ArrowLeft aria-hidden className="h-4 w-4" />
+        <ArrowLeft aria-hidden className="h-4 w-4 rtl:rotate-180" />
         Back to where you were
       </a>
 

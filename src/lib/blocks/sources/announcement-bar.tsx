@@ -107,7 +107,7 @@ export function AnnouncementBar({
               className="inline-flex items-center gap-0.5 font-medium text-primary underline-offset-4 hover:underline"
             >
               {ctaLabel}
-              <ArrowRight aria-hidden className="h-3.5 w-3.5" />
+              <ArrowRight aria-hidden className="h-3.5 w-3.5 rtl:rotate-180" />
             </a>
           ) : null}
         </p>

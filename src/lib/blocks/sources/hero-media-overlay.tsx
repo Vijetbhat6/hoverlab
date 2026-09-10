@@ -88,7 +88,7 @@ export function HeroMediaOverlay({
               className="inline-flex h-12 items-center justify-center gap-1.5 rounded-xl bg-white px-6 text-sm font-semibold text-slate-900 shadow-lg shadow-black/25 transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
             >
               {primaryLabel}
-              <ArrowRight aria-hidden className="h-4 w-4" />
+              <ArrowRight aria-hidden className="h-4 w-4 rtl:rotate-180" />
             </a>
             <a
               href={secondaryHref}

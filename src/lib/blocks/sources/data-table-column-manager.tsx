@@ -117,7 +117,7 @@ export function DataTableColumnManager({
         <button
           type="button"
           onClick={() => commit(initial)}
-          className="ml-auto inline-flex items-center gap-1 rounded-lg px-2 py-1 text-xs font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+          className="ms-auto inline-flex items-center gap-1 rounded-lg px-2 py-1 text-xs font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
         >
           <RotateCcw aria-hidden className="h-3 w-3" />
           Reset

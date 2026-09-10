@@ -129,7 +129,8 @@ export function DataTableExpandable({
                         <ChevronRight
                           aria-hidden
                           className={`h-4 w-4 transition-transform duration-200 ${
-                            expanded ? 'rotate-90' : ''
+                            // Mirrored only while closed; down is down in RTL.
+                            expanded ? 'rotate-90' : 'rtl:rotate-180'
                           }`}
                         />
                       </button>

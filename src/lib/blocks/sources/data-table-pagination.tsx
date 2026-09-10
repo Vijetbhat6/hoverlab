@@ -118,10 +118,10 @@ export function DataTablePagination({
 
       <nav aria-label="Pagination" className="flex items-center gap-1">
         <PageButton onClick={() => goTo(1)} disabled={page === 1} label="First page">
-          <ChevronsLeft aria-hidden className="h-4 w-4" />
+          <ChevronsLeft aria-hidden className="h-4 w-4 rtl:rotate-180" />
         </PageButton>
         <PageButton onClick={() => goTo(page - 1)} disabled={page === 1} label="Previous page">
-          <ChevronLeft aria-hidden className="h-4 w-4" />
+          <ChevronLeft aria-hidden className="h-4 w-4 rtl:rotate-180" />
         </PageButton>
 
         {pages.map((entry, i) =>
@@ -148,10 +148,10 @@ export function DataTablePagination({
         )}
 
         <PageButton onClick={() => goTo(page + 1)} disabled={page === pageCount} label="Next page">
-          <ChevronRight aria-hidden className="h-4 w-4" />
+          <ChevronRight aria-hidden className="h-4 w-4 rtl:rotate-180" />
         </PageButton>
         <PageButton onClick={() => goTo(pageCount)} disabled={page === pageCount} label="Last page">
-          <ChevronsRight aria-hidden className="h-4 w-4" />
+          <ChevronsRight aria-hidden className="h-4 w-4 rtl:rotate-180" />
         </PageButton>
       </nav>
     </div>

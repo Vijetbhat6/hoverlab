@@ -119,7 +119,7 @@ export function StatsComparison({
           into 320px is unreadable, and a horizontal scroll on a table is a
           pattern phone users already understand. */}
       <div className="mt-12 overflow-x-auto">
-        <table className="w-full min-w-[36rem] border-collapse text-left">
+        <table className="w-full min-w-[36rem] border-collapse text-start">
           <caption className="sr-only">
             Support metrics {beforeLabel} compared with {afterLabel}
           </caption>
@@ -154,7 +154,7 @@ export function StatsComparison({
                 <td className="px-6 py-5 text-lg font-bold tabular-nums text-foreground">
                   {row.after}
                 </td>
-                <td className="py-5 ps-6 text-right">
+                <td className="py-5 ps-6 text-end">
                   {row.improvement ? (
                     <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2.5 py-1 text-xs font-semibold text-primary">
                       {row.direction === 'up' ? (
