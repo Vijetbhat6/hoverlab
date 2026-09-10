@@ -129,13 +129,19 @@ export interface Template
    */
   previewPageId?: string
   /**
-   * Palette id from `./palettes`, or undefined for the shared indigo.
+   * Palette id from `./palettes`. Every template names one.
    *
-   * Optional rather than required because the seven original templates are
-   * app shells that genuinely should look alike — a dashboard and an admin
-   * panel are the same product with different routes, and giving each one a
-   * different accent would be variety for its own sake. It is the landing
-   * templates that must not match, so they are the ones that set it.
+   * OPTIONAL IN THE TYPE, REQUIRED IN PRACTICE — `palettes.test.ts` fails
+   * the build for a template that omits it. It stays optional here only
+   * because the field arrived after the first seven templates did, and
+   * widening it to required would be a lie about what the file has to
+   * tolerate while a new template is being written.
+   *
+   * The reason it cannot be skipped: omitting it does *not* fall back to
+   * the shared indigo on the site. The card thumbnail is live React inside
+   * Hoverlab's own tokens, so a template with no palette renders in
+   * Hoverlab's green — and a grid of those is one template photographed
+   * from several angles.
    *
    * Naming a palette here does two things at once: `templates.ts` swaps the
    * generated project's `globals.css` for that palette's, and the card and

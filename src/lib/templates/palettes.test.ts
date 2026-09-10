@@ -1,6 +1,7 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 
+import { TEMPLATE_CATALOG } from './catalog'
 import {
   TEMPLATE_PALETTES,
   getPalette,
@@ -173,4 +174,46 @@ test('the swatch is a renderable colour', () => {
 test('getPalette is undefined for unknown and missing ids', () => {
   assert.equal(getPalette('no-such-palette'), undefined)
   assert.equal(getPalette(undefined), undefined)
+})
+
+/* ------------------------------------------------------------------ *
+ *  Coverage
+ * ------------------------------------------------------------------ *
+ *
+ * `palette` is optional in the type and mandatory in practice, and the gap
+ * is not visible by reading either file. A template that omits it does not
+ * fall back to the shared indigo on the site — the card thumbnail is live
+ * React against Hoverlab's own tokens, so it renders in Hoverlab's green
+ * and the grid gains another identical tile. That is exactly how twelve of
+ * them ended up looking like one template.
+ */
+
+test('every template names a palette that exists', () => {
+  for (const record of TEMPLATE_CATALOG) {
+    assert.ok(
+      record.palette,
+      `${record.id} has no palette, so its card renders in Hoverlab's own colours`,
+    )
+    assert.ok(
+      getPalette(record.palette),
+      `${record.id} names palette "${record.palette}", which is not in TEMPLATE_PALETTES`,
+    )
+  }
+})
+
+test('no two templates in a category share a palette', () => {
+  // The grid renders one section per category, so this is the comparison a
+  // visitor actually makes. Reuse across categories is fine and deliberate;
+  // reuse inside one is two cards that look like the same template.
+  const seen = new Map<string, string>()
+  for (const record of TEMPLATE_CATALOG) {
+    const key = `${record.category}/${record.palette}`
+    const other = seen.get(key)
+    assert.equal(
+      other,
+      undefined,
+      `${record.id} and ${other} are both ${record.category} in the ${record.palette} palette`,
+    )
+    seen.set(key, record.id)
+  }
 })

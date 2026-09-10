@@ -47,7 +47,7 @@ export interface TemplateRecord {
   routes: TemplateRoute[]
   /** Thumbnail override when `routes[0]` is shared with another template. */
   previewPageId?: string
-  /** Palette id from `./palettes`. Omit for the shared indigo. */
+  /** Palette id from `./palettes`. Required in practice — see the type. */
   palette?: string
   tier?: ArtifactTier
   featured?: boolean
@@ -59,6 +59,7 @@ export const TEMPLATE_CATALOG: TemplateRecord[] = [
     tier: 'pro',
     name: 'SaaS Starter',
     category: 'Full Product',
+    palette: 'iris',
     description:
       'The whole thing: marketing site, sign-in, dashboard, customer list, settings and billing. Eight routes, one runtime dependency.',
     tags: ['saas', 'starter', 'full stack', 'dashboard', 'nextjs'],
@@ -97,6 +98,7 @@ export const TEMPLATE_CATALOG: TemplateRecord[] = [
     tier: 'pro',
     name: 'Admin Panel',
     category: 'Internal Tools',
+    palette: 'steel',
     description:
       'The internal-tool half on its own — dashboard, list view, settings, billing and sign-in. Ships noindex, because an admin panel has no business in a search result.',
     tags: ['admin', 'internal', 'dashboard', 'crud', 'back office'],
@@ -126,6 +128,7 @@ export const TEMPLATE_CATALOG: TemplateRecord[] = [
     tier: 'free',
     name: 'Marketing Site',
     category: 'Marketing',
+    palette: 'vermilion',
     description:
       'Landing page, pricing page, 404. The smallest thing you can put in front of a product and have it look deliberate.',
     tags: ['marketing', 'landing page', 'pricing', 'website', 'launch'],
@@ -146,6 +149,7 @@ export const TEMPLATE_CATALOG: TemplateRecord[] = [
     tier: 'pro',
     name: 'AI Assistant',
     category: 'Full Product',
+    palette: 'orchid',
     description:
       'An agent product’s working surface: transcript, reasoning, tool calls and the approval card, with sign-in and settings around it. Wiring a model in is your half.',
     tags: ['ai', 'assistant', 'agent', 'chat', 'copilot'],
@@ -168,6 +172,7 @@ export const TEMPLATE_CATALOG: TemplateRecord[] = [
     tier: 'pro',
     name: 'Content Site',
     category: 'Marketing',
+    palette: 'ink',
     description:
       'A publication that happens to belong to a company: blog index, article, careers and a 404. The site for when the writing is the product — or the marketing.',
     tags: ['blog', 'content', 'publication', 'careers', 'editorial'],
@@ -191,6 +196,7 @@ export const TEMPLATE_CATALOG: TemplateRecord[] = [
     tier: 'pro',
     name: 'Docs Site',
     category: 'Marketing',
+    palette: 'azure',
     description:
       'The three-column docs frame — sidebar, article, on-this-page rail — plus a changelog and a 404. The part of the product a search for an error message should find.',
     tags: ['docs', 'documentation', 'developer', 'changelog', 'reference'],
@@ -211,6 +217,7 @@ export const TEMPLATE_CATALOG: TemplateRecord[] = [
     tier: 'pro',
     name: 'Storefront',
     category: 'Commerce',
+    palette: 'cocoa',
     description:
       'The whole purchase funnel: collection, product detail, bag, checkout, confirmation and an account area. Seven routes, no commerce SDK.',
     tags: ['ecommerce', 'shop', 'storefront', 'checkout', 'retail'],
@@ -532,6 +539,7 @@ export const TEMPLATE_CATALOG: TemplateRecord[] = [
     tier: 'pro',
     name: 'Help Centre',
     category: 'Marketing',
+    palette: 'rose',
     description:
       'The support surface, as four routes that agree with each other: searchable answers, the docs, what changed, and a status page carrying the same incident the help page announces.',
     tags: ['help center', 'support', 'knowledge base', 'faq', 'status'],
@@ -558,6 +566,7 @@ export const TEMPLATE_CATALOG: TemplateRecord[] = [
     tier: 'pro',
     name: 'Agent Console',
     category: 'Full Product',
+    palette: 'slate',
     description:
       'The operator’s half of an agent product: the approval queue it opens on, a run trace with tool calls, retries and cost, and the chat surface behind them.',
     tags: ['ai', 'agent', 'operations', 'approvals', 'observability'],
@@ -590,6 +599,7 @@ export const TEMPLATE_CATALOG: TemplateRecord[] = [
     tier: 'pro',
     name: 'Project Tracker',
     category: 'Internal Tools',
+    palette: 'fern',
     description:
       'A board, a search that works across it, settings and a sign-in — plus the two screens every internal tool needs and nobody builds: a real 500 boundary and a 404.',
     tags: ['project', 'kanban', 'board', 'internal', 'tracker'],
@@ -651,6 +661,7 @@ export const TEMPLATE_CATALOG: TemplateRecord[] = [
     tier: 'free',
     name: 'Auth Flow',
     category: 'Account & Access',
+    palette: 'midnight',
     description:
       'Every screen between a stranger and a working account: sign in, sign up, reset, the second factor, SSO by email domain, and the first-run setup on the other side.',
     tags: ['auth', 'sign in', 'sign up', 'two factor', 'sso'],
@@ -694,6 +705,7 @@ export const TEMPLATE_CATALOG: TemplateRecord[] = [
     tier: 'pro',
     name: 'Customer Portal',
     category: 'Account & Access',
+    palette: 'amethyst',
     description:
       'What a paying customer needs and never gets: this period’s usage with the overage rate on it, every invoice as a PDF, the plan, the card — and a 403 that names who can grant what was refused.',
     tags: ['billing', 'invoices', 'usage', 'account', 'self-serve'],
