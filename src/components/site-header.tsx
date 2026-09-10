@@ -699,14 +699,14 @@ function QuickFindButton() {
           className="flex h-9 items-center gap-2 rounded-full border border-border/60 bg-background/60 px-2.5 text-muted-foreground shadow-sm backdrop-blur transition-colors hover:border-border hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring lg:px-3"
         >
           <Search aria-hidden className="h-4 w-4 shrink-0" />
-          {/* Same reasoning as the tray labels: at lg these cost ~60px of a
-              row that could not afford it, which pushed "Docs" — the last
-              nav item — off the end at 1440px. The icon plus its tooltip
-              carries this control; the nav cannot be carried by anything. */}
-          <span className="hidden text-xs 2xl:inline">Search</span>
-          <kbd className="ml-0.5 hidden rounded border border-border bg-muted px-1 py-0.5 font-mono text-[10px] font-semibold 2xl:inline">
-            ⌘K
-          </kbd>
+          {/* Same reasoning as the tray labels, and the same correction: at
+              lg these cost ~60px of a row that could not afford it, which
+              pushed "Docs" — the last nav item — off the end at 1440px, and
+              moving them to 2xl did not buy the room it looked like it did,
+              because `max-w-7xl` caps this row at 1280px whatever the
+              viewport does. The icon plus its tooltip carries this control;
+              the nav cannot be carried by anything. The ⌘K shortcut is in
+              the tooltip, and on the shortcuts dialog. */}
         </button>
       </TooltipTrigger>
       <TooltipContent side="bottom">
@@ -756,17 +756,22 @@ function TrayButton({
         >
           {icon}
           {/*
-            Labels return at 2xl, not xl.
+            No label. The tooltip carries this control.
 
-            At xl (1280px) they were on at a 1440px viewport, where the row
-            is brand + nine nav items + search + two labelled trays + history
-            + preferences + account + "Get started". That overran the 1216px
-            content box and the nav — the flexible item — absorbed all of it,
-            clipping "Playground" to "Playgrou". The nav is the product; it
-            gets the space, and the labels come back when there is genuinely
-            room at 1536px. The tooltip carries the meaning in between.
+            It used to appear at xl, which clipped "Playground" to
+            "Playgrou" at 1440px, and was moved to 2xl on the reasoning that
+            there is "genuinely room at 1536px". There is not, and that is
+            the whole bug: this row is `max-w-7xl`, so the content box stops
+            growing at 1280px no matter how wide the viewport gets. Past
+            1536 the labels switch on and nothing pays for them but the nav,
+            which is the only flexible item in the row.
+
+            Measured, that made the site worse on a bigger screen: seven nav
+            items on the line at 1440, four at 1600 and at 1920. A label
+            waiting for room that never arrives is a label that only ever
+            takes it from the nav, and the rule the xl fix already wrote
+            down still applies — the nav is the product; it gets the space.
           */}
-          <span className="hidden text-sm font-medium 2xl:inline">{label}</span>
           {count > 0 ? (
             <span className="flex h-4 min-w-4 items-center justify-center rounded-full bg-primary px-1 text-[10px] font-bold text-primary-foreground">
               {count}
