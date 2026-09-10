@@ -11,6 +11,10 @@ import { ToolFunnelBand } from '@/components/designer-tools/tool-funnel-band'
  * only what the hub page shows.
  */
 export const metadata: Metadata = {
+  // The hub's own canonical. Each tool under it derives one from its href
+  // in `toolMetadata`; this route is not in that registry, so it says so
+  // here rather than inheriting the home page's.
+  alternates: { canonical: '/tools' },
   title: 'Designer Tools — Tokens, Palettes, Gradients, Contrast & More — Hoverlab',
   description:
     'Twenty free designer tools that run entirely in your browser: design tokens, palettes, color conversion, gradients, shadows, clip-paths, noise textures, type and spacing scales, WCAG contrast checks, favicons, OG tags and email templates.',

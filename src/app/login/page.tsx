@@ -3,6 +3,10 @@ import { AuthForm } from '@/components/auth-form'
 
 export const metadata = {
   title: 'Sign in — Hoverlab',
+  // Set here rather than inherited: the root layout's canonical is the
+  // home page, and a sign-in screen claiming to be the home page is worse
+  // than one claiming nothing. Disallowed in robots.txt either way.
+  alternates: { canonical: '/login' },
 }
 
 /**

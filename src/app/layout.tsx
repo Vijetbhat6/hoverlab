@@ -56,6 +56,24 @@ export const metadata: Metadata = {
   // built from the same git-derived ledger as /changelog, so the two cannot
   // disagree about what shipped.
   alternates: {
+    /*
+     * The home page's canonical, and only the home page's.
+     *
+     * "/" is a client component, so it cannot export metadata of its own
+     * and this is the one place its canonical can be set. Every other
+     * route sets its own and overrides this — the catalog, the docs, the
+     * legal pages, the dynamic block, effect, template and path routes,
+     * and, as of this change, the tool pages, /login and /signup. So
+     * nothing inherits it but "/".
+     *
+     * The footgun that leaves behind: a new route that forgets its
+     * canonical claims to be the home page rather than claiming nothing.
+     *
+     * It belongs in this object rather than next to it — a second
+     * `alternates` key does not merge, it replaces, and the duplicate
+     * silently dropped the feed link below until tsc named it.
+     */
+    canonical: "/",
     types: { "application/atom+xml": [{ url: "/feed.xml", title: "Hoverlab — what's new" }] },
   },
   manifest: "/manifest.webmanifest",

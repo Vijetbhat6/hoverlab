@@ -96,10 +96,29 @@ export interface DesignerTool {
  * Metadata for a tool's route, for the per-tool layout.tsx files. The pages
  * are client components and cannot export metadata themselves.
  */
+/*
+ * The canonical is derived from `href` rather than written into each of the
+ * thirty-six layouts, because every one of them was missing it.
+ *
+ * The tool pages are client components, so their metadata lives in a
+ * sibling `layout.tsx` and all of them call this. Nothing here emitted an
+ * `alternates`, so /tools and every tool under it shipped without a
+ * canonical tag while the rest of the site had one — 38 URLs, and the
+ * largest block of them is the section with the highest-volume queries the
+ * site can answer ("css grid generator", "flexbox generator").
+ *
+ * These are also the pages most likely to be reached with query strings
+ * appended — every tool encodes its state in the URL — which is exactly
+ * the case a canonical exists to collapse.
+ */
 export function toolMetadata(href: string): Metadata {
   const tool = DESIGNER_TOOLS.find((t) => t.href === href)
   if (!tool) throw new Error(`Unknown designer tool: ${href}`)
-  return { title: tool.seoTitle, description: tool.description }
+  return {
+    title: tool.seoTitle,
+    description: tool.description,
+    alternates: { canonical: href },
+  }
 }
 
 /*

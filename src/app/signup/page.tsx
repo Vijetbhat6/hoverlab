@@ -3,6 +3,8 @@ import { AuthForm } from '@/components/auth-form'
 
 export const metadata = {
   title: 'Create account — Hoverlab',
+  // See the note on /login.
+  alternates: { canonical: '/signup' },
 }
 
 /**
