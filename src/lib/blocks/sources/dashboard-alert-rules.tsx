@@ -251,14 +251,14 @@ export function DashboardAlertRules({
                   aria-checked={rule.enabled}
                   aria-label={`${rule.enabled ? 'Disable' : 'Enable'} ${rule.metric} alert`}
                   onClick={() => toggle(rule.id)}
-                  className={`relative h-5 w-9 rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
+                  className={`relative h-6 w-11 rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
                     rule.enabled ? 'bg-primary' : 'bg-muted-foreground/30'
                   }`}
                 >
                   <span
                     aria-hidden
-                    className={`absolute top-0.5 h-4 w-4 rounded-full bg-background transition-transform ${
-                      rule.enabled ? 'translate-x-[18px]' : 'translate-x-[2px]'
+                    className={`absolute top-0.5 h-5 w-5 rounded-full bg-background transition-transform ${
+                      rule.enabled ? 'translate-x-[22px]' : 'translate-x-[2px]'
                     }`}
                   />
                 </button>

@@ -246,14 +246,14 @@ export function NotificationPreferences({
                         onClick={() => toggle(event.id, channel.id)}
                         aria-label={`${event.label} by ${channel.label}`}
                         title={locked ? event.required?.reason : undefined}
-                        className={`relative inline-flex h-5 w-9 shrink-0 items-center rounded-full border border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 ${
+                        className={`relative inline-flex h-6 w-11 shrink-0 items-center rounded-full border border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 ${
                           on ? 'bg-primary' : 'bg-muted'
                         }`}
                       >
                         <span
                           aria-hidden
-                          className={`pointer-events-none block h-4 w-4 rounded-full bg-background shadow-sm motion-safe:transition-transform ${
-                            on ? 'translate-x-[1.125rem]' : 'translate-x-0.5'
+                          className={`pointer-events-none block h-5 w-5 rounded-full bg-background shadow-sm motion-safe:transition-transform ${
+                            on ? 'translate-x-[1.375rem]' : 'translate-x-0.5'
                           }`}
                         />
                       </button>

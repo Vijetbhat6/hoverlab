@@ -224,7 +224,7 @@ export function NotificationInbox({
                     <button
                       type="button"
                       onClick={() => toggleRead(item.id)}
-                      className="mt-1 flex h-4 w-4 shrink-0 items-center justify-center rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                      className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                     >
                       {/* Dot plus text — never colour alone. */}
                       <span

@@ -1174,6 +1174,7 @@
         "table-headers",
         "input-labelled",
         "paste-blocked-on-credential",
+        "target-size",
         "dragging-alternative",
         "control-has-name",
         "label-points-at-nothing",
@@ -1183,16 +1184,7 @@
         "autoplay-audible",
         "heading-order"
       ],
-      "findings": [
-        {
-          "rule": "target-size",
-          "sc": "2.5.8",
-          "level": "AA",
-          "severity": "advisory",
-          "file": "components/onboarding-checklist.tsx",
-          "message": "target is 20px, under the 24px minimum: <button\r\n                  type=\"button\"\r\n                  onClick={() => toggl"
-        }
-      ]
+      "findings": []
     },
     {
       "id": "setup-wizard",
@@ -1407,6 +1399,7 @@
         "table-headers",
         "input-labelled",
         "paste-blocked-on-credential",
+        "target-size",
         "dragging-alternative",
         "control-has-name",
         "label-points-at-nothing",
@@ -1416,16 +1409,7 @@
         "autoplay-audible",
         "heading-order"
       ],
-      "findings": [
-        {
-          "rule": "target-size",
-          "sc": "2.5.8",
-          "level": "AA",
-          "severity": "advisory",
-          "file": "components/notification-inbox.tsx",
-          "message": "target is 16px, under the 24px minimum: <button\n                      type=\"button\"\n                      onClick={() =>"
-        }
-      ]
+      "findings": []
     },
     {
       "id": "notification-preferences",
@@ -1440,6 +1424,7 @@
         "table-headers",
         "input-labelled",
         "paste-blocked-on-credential",
+        "target-size",
         "dragging-alternative",
         "control-has-name",
         "label-points-at-nothing",
@@ -1449,16 +1434,7 @@
         "autoplay-audible",
         "heading-order"
       ],
-      "findings": [
-        {
-          "rule": "target-size",
-          "sc": "2.5.8",
-          "level": "AA",
-          "severity": "advisory",
-          "file": "components/notification-preferences.tsx",
-          "message": "target is 20px, under the 24px minimum: <button\r\n                        type=\"button\"\r\n                        role=\"sw"
-        }
-      ]
+      "findings": []
     },
     {
       "id": "push-permission-prompt",
@@ -3423,6 +3399,7 @@
         "table-headers",
         "input-labelled",
         "paste-blocked-on-credential",
+        "target-size",
         "dragging-alternative",
         "control-has-name",
         "label-points-at-nothing",
@@ -3432,16 +3409,7 @@
         "autoplay-audible",
         "heading-order"
       ],
-      "findings": [
-        {
-          "rule": "target-size",
-          "sc": "2.5.8",
-          "level": "AA",
-          "severity": "advisory",
-          "file": "components/dashboard-alert-rules.tsx",
-          "message": "target is 20px, under the 24px minimum: <button\r\n                  type=\"button\"\r\n                  role=\"switch\"\r\n     "
-        }
-      ]
+      "findings": []
     },
     {
       "id": "data-table-sortable",
@@ -4682,6 +4650,7 @@
         "input-labelled",
         "paste-blocked-on-credential",
         "target-size",
+        "dragging-alternative",
         "control-has-name",
         "label-points-at-nothing",
         "placeholder-as-label",
@@ -4690,16 +4659,7 @@
         "autoplay-audible",
         "heading-order"
       ],
-      "findings": [
-        {
-          "rule": "dragging-alternative",
-          "sc": "2.5.7",
-          "level": "AA",
-          "severity": "advisory",
-          "file": "components/file-dropzone.tsx",
-          "message": "drag interaction — confirm a non-drag alternative: <label\n        onDragEnter={handleDragEnter}\n        onDragLeave={handleDragLeav"
-        }
-      ]
+      "findings": []
     },
     {
       "id": "upload-progress-list",

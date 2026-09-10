@@ -595,12 +595,28 @@ export const RULES: Rule[] = [
       whose test is "is there another way", and it is the reason the board
       and reorder blocks are worth a person's attention rather than a
       regex's verdict.
+
+      ONE SHAPE IS DECIDABLE, and it is worth exempting because otherwise
+      the rule asks the same question every build and is answered the same
+      way every time — which is how a report stops being read. A `<label>`
+      that drags and whose file input is the thing it labels has a non-drag
+      alternative by construction: activating a label focuses and clicks its
+      control, so click, Enter and Space all open the file picker without a
+      pointer ever being dragged. That is not an inference about the
+      author's intent, it is what a label does.
+
+      Deliberately narrow. Only when the dragging element is itself the
+      label — a draggable `<div>` somewhere in a file that happens to also
+      contain an upload input proves nothing, and still asks.
     */
-    check: (source) =>
-      allTags(source)
+    check: (source) => {
+      const labelWrapsFileInput = /<input\b[^>]*\btype\s*=\s*["']file["']/.test(source)
+      return allTags(source)
         .filter((tag) => /\b(draggable|onDragStart|onDragOver|onDrop)\b/.test(tag))
         .filter((tag) => !/\bdraggable\s*=\s*\{?false\}?/.test(tag))
-        .map((tag) => `drag interaction — confirm a non-drag alternative: ${tag.slice(0, 80)}`),
+        .filter((tag) => !(labelWrapsFileInput && /^<label\b/.test(tag)))
+        .map((tag) => `drag interaction — confirm a non-drag alternative: ${tag.slice(0, 80)}`)
+    },
   },
 
   /* ══ WCAG 2.1 criteria the first eight rules missed ══════════════════════

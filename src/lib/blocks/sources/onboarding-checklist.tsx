@@ -183,7 +183,7 @@ export function OnboardingChecklist({
                   type="button"
                   onClick={() => toggle(step.id)}
                   aria-pressed={isDone}
-                  className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+                  className={`mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
                     isDone
                       ? 'border-primary bg-primary text-primary-foreground'
                       : 'border-border hover:border-primary'
