@@ -205,16 +205,29 @@ export const PLANS: Record<PlanId, Plan> = {
     // $79 one-time.
     //
     // Was $59, which was under the floor of every comparable product —
-    // React Bits' entry tier is $99, Shadcnblocks $149, Aceternity and
-    // Magic UI $199, Preline $249, Tailwind Plus and React Bits' top tier
-    // $299 — while Hoverlab ships more surface than any of them (the whole
-    // effect catalog, blocks, pages, runnable templates, the tools, the CLI
-    // and the MCP server). A price that far below the band reads as a
-    // cheaper substitute rather than a better product.
+    // while Hoverlab ships more surface than any of them (the whole effect
+    // catalog, blocks, pages, runnable templates, the tools, the CLI and the
+    // MCP server). A price that far below the band reads as a cheaper
+    // substitute rather than a better product.
     //
     // Deliberately not $99: without a consumable tier to justify it, $79 is
-    // still a decision a solo developer makes without a spreadsheet. Revisit
-    // when Pro+ credits ship.
+    // still a decision a solo developer makes without a spreadsheet.
+    //
+    // THE BAND HAS MOVED SINCE, AND $79 HAS NOT. As of the 10 September 2026
+    // sweep in `lib/compare.ts`, the cheapest one-time licence in the field
+    // is React Bits at $129 — it was $99 when the paragraph above was
+    // written — then Flowbite and Shadcnblocks at $149, Magic UI and
+    // Aceternity at $199, Preline at $249, Tailwind Plus at $299, Untitled
+    // UI at $349. Every one-time vendor either raised prices this year or
+    // held; not one cut. $79 is now roughly 40% under the floor rather than
+    // just under it, which is the same distance from the band that $59 was
+    // when it got moved, for the same reason.
+    //
+    // Left at $79 deliberately, not by default: raising it is a business
+    // decision with a Polar migration attached (see `polar-org-state` — the
+    // org still carries stale $59-era prices), not a code change. What the
+    // code can do is stop the rationale from citing a floor that no longer
+    // exists. Revisit alongside Pro+ credits.
     priceCents: 7900,
     // ₹7,500 — the dollar price at roughly ₹95/$, so the rupee ladder tracks
     // the dollar one rather than becoming a second pricing strategy to

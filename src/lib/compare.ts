@@ -9,9 +9,26 @@
  *
  *   Sourced.   Every competitor carries the URL the numbers were read off.
  *              A claim with no source is a rumour with a table around it.
- *   Dated.     `CHECKED_ON` is stamped on the page. List prices move, and a
- *              comparison with no date is asserting it is true today
+ *   Dated.     Every competitor carries its OWN `checkedOn`, and the page
+ *              stamps both the newest and the oldest. List prices move, and
+ *              a comparison with no date is asserting it is true today
  *              forever, which it will stop being within a quarter.
+ *
+ * WHY THE DATE IS PER-ROW AND NOT ONE CONSTANT.
+ *
+ * It used to be a single `CHECKED_ON`, and that constant quietly forced a
+ * lie every time it was touched. A sweep almost never lands all nine rows:
+ * vendors put pricing behind a login (Tailwind Plus), move a page (Flowbite),
+ * or simply fail to answer. With one date there are two options and both are
+ * wrong — move it, and seven verified rows drag two unverified ones along
+ * under a stamp that says they were read today; leave it, and seven fresh
+ * rows are published under a date that makes them look months stale. The
+ * second is what happened, and it is why this file went eighteen days out of
+ * date in the competitors' favour while every number in it was fixable.
+ *
+ * A per-row date removes the choice. You re-read what answers, you stamp
+ * what you re-read, and the rows you could not reach keep the older date
+ * where a reader can see it and go check the one you could not.
  *   Symmetric. Every competitor has a `beatsUs`, and it is required by the
  *              type rather than optional. A comparison page where the
  *              author wins every row is an advertisement, and readers of
@@ -51,11 +68,38 @@
  * would be the one mistake that discredits all the rest of it.
  */
 
-/** The day every figure below was read off a vendor's own page. */
-export const CHECKED_ON = '2026-08-23'
+/**
+ * The day the most recent sweep ran.
+ *
+ * This is a claim about US — when we last went looking — not about any
+ * particular row. What each row is worth is on the row.
+ */
+export const LAST_SWEEP = '2026-09-10'
 
 /** How that date reads in prose. Fixed locale — this is rendered at build. */
-export const CHECKED_ON_LABEL = '23 August 2026'
+export const LAST_SWEEP_LABEL = '10 September 2026'
+
+/** Month names, spelled out so a build machine's locale cannot move them. */
+const MONTHS = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+]
+
+/** `2026-09-10` -> `10 September 2026`. Parsed by hand for the same reason. */
+export function dateLabel(iso: string): string {
+  const [y, m, d] = iso.split('-')
+  return `${Number(d)} ${MONTHS[Number(m) - 1]} ${y}`
+}
 
 /** What a catalog withholds until you pay. The row that actually differs. */
 export type Gate =
@@ -73,15 +117,44 @@ export interface Competitor {
   /** Vendor page the figures were read from. */
   href: string
   /**
-   * Entry price for one individual, in USD, as the vendor lists it.
+   * ISO day this row was last read off `href`. Required. See the docblock
+   * at the top of the file for why this is not one constant for the table.
+   */
+  checkedOn: string
+  /**
+   * Cheapest price that buys the paid product, for one individual, in USD.
    *
-   * `null` where the entry point is free rather than cheap — the difference
-   * between "costs least" and "costs nothing" is the whole argument on a
-   * page like this and a 0 would flatten it.
+   * Deliberately NOT "what it costs to start", because six of these now
+   * give something away and sorting a table by zero would put six vendors
+   * in a tie at the top and tell the reader nothing. What they give away
+   * is `freeTier`, which is a sentence because the interesting part of a
+   * free tier has never been its price.
+   *
+   * `null` where there is no paid individual licence at all.
    */
   entryUsd: number | null
   /** How the entry price is charged. */
   entryTerm: 'one-time' | 'per year' | 'per month' | 'free'
+  /**
+   * What the vendor gives away, in their words, or `null` for none.
+   *
+   * THE ROW THIS TABLE WAS MISSING, and the one the market moved on while
+   * we were not looking. When this file was first written a free tier meant
+   * a handful of teaser components, so "entry price" carried the whole
+   * argument and this field would have been nine near-empty cells.
+   *
+   * It does not mean that any more. Preline now gives away 640 components,
+   * 189 blocks, five templates and its entire Figma design system for
+   * nothing, which is a better free offer than most of this table's paid
+   * one. That is the single most consequential fact in this sweep, and
+   * under the old shape it had nowhere to go — it would have been a price
+   * that did not change ($249) beside a `ships` string that describes the
+   * paid tier, and a reader would have learned none of it.
+   *
+   * It is also the row where our own answer is strongest, which is exactly
+   * why it needs to be sourced and symmetric rather than asserted.
+   */
+  freeTier: string | null
   /** Where the ladder ends, in the vendor's own words. */
   ladder: string
   /** Volume, phrased the way the vendor phrases it. */
@@ -108,7 +181,11 @@ export interface Competitor {
  * closest comparable than next to the most expensive one. React Bits opens
  * the table for that reason: it is the closest business-model twin we have
  * — one-time, lifetime, unlimited projects, no seat fees, agent-friendly by
- * design — and it opens at $99.
+ * design — and it opens at $129.
+ *
+ * That $129 was $99 at the last sweep, and every one-time vendor here has
+ * either raised prices this year or held. Not one cut. Worth knowing before
+ * reading our own number as the cheap one by accident rather than on purpose.
  *
  * 21st.dev sits at the end despite the smallest number on its card. $6 a
  * month is not comparable to a one-time licence and putting it first would
@@ -118,23 +195,34 @@ export const COMPETITORS: Competitor[] = [
   {
     name: 'React Bits',
     href: 'https://pro.reactbits.dev',
-    entryUsd: 99,
+    checkedOn: '2026-09-10',
+    entryUsd: 129,
     entryTerm: 'one-time',
-    ladder: '$99 / $199 / $299, lifetime, unlimited projects, no seat fees',
-    ships: '101+ animated components, 238 UI blocks at Pro, templates at Ultimate',
+    ladder: '$129 / $249 / $349, lifetime, unlimited projects, no seat fees',
+    ships:
+      '150 animated components, 280 page blocks in 22 categories, 300 app UI blocks in 38 categories, 15 templates — 765 assets in total',
+    freeTier: '165+ components in the open-source library, MIT + Commons Clause',
     figma: false,
-    agent: 'Ships a SKILL.md; calls itself agent-friendly by design',
+    agent: 'Ships a SKILL.md, plus a 20-item Agent Kit of skills, prompts and recipes at Pro',
     gate: 'source',
     beatsUs:
-      'The closest thing to us in this table, and it has an audience we do not — 1.1M visits and 57% of them direct, meaning people type the name.',
+      'Our closest business-model twin, and in one sweep it went from 238 blocks to 580 across 60 categories, added an Agent Kit, and shipped a Landing Builder that composes its blocks into a page. We have the blocks, the pages and the templates and no builder over them. It also has the audience — 1.1M visits, 57% direct, meaning people type the name.',
   },
   {
     name: 'Flowbite',
     href: 'https://flowbite.com',
+    /*
+     * NOT re-read on the 10 September sweep: flowbite.com/pro and
+     * flowbite.com/pricing both failed to return a readable page. Left at
+     * its last confirmed date rather than carried along by the rows that
+     * did answer — which is the entire reason this field is per-row.
+     */
+    checkedOn: '2026-08-23',
     entryUsd: 149,
     entryTerm: 'one-time',
     ladder: 'Free open-source core, Pro from $149',
     ships: '330+ blocks, 185 ported to React in beta',
+    freeTier: 'The open-source core, plus a free edition of the Figma design system',
     figma: true,
     agent: 'No dedicated server; the open core is installable anywhere',
     gate: 'source',
@@ -144,23 +232,29 @@ export const COMPETITORS: Competitor[] = [
   {
     name: 'Shadcnblocks',
     href: 'https://shadcnblocks.com',
+    checkedOn: '2026-09-10',
     entryUsd: 149,
     entryTerm: 'one-time',
-    ladder: '$149 / $299 / $399, plus CMS ports at $379 each',
-    ships: '2,093 components, 1,678 blocks, 19 templates, Figma kit, page builder',
+    ladder:
+      '$149 Pro / $299 Premium adds the Figma kit / $399 Elite adds the page builder, plus CMS ports at $379 each',
+    ships:
+      '2,104+ components, 1,858+ blocks, 20 templates, 49+ pre-built pages, a 484-block Figma kit, a page builder and a VSCode extension',
+    freeTier: 'Basic-tier blocks, browsable and copyable behind a login',
     figma: true,
     agent: 'Searchable through the official shadcn MCP server',
     gate: 'source',
     beatsUs:
-      '1,678 blocks and 2,093 components, plus a Figma kit, a page builder and a VSCode extension. On volume this is the deepest catalog a solo developer can buy.',
+      '1,858 blocks and 2,104 components, plus a Figma kit, a page builder and a VSCode extension. On volume this is still the deepest catalog a solo developer can buy, and it grew by 180 blocks in the eighteen days between our last two sweeps.',
   },
   {
     name: 'Magic UI Pro',
     href: 'https://pro.magicui.design',
+    checkedOn: '2026-09-10',
     entryUsd: 199,
     entryTerm: 'one-time',
-    ladder: '$199 lifetime',
-    ships: '50+ sections, 9 templates',
+    ladder: '$199 lifetime, one-time, perpetual licence',
+    ships: '50+ sections, 9+ templates',
+    freeTier: '150+ free and open-source animated components and effects',
     figma: false,
     agent: 'Free MIT MCP server — no API key, no account',
     gate: 'source',
@@ -170,10 +264,12 @@ export const COMPETITORS: Competitor[] = [
   {
     name: 'Aceternity UI',
     href: 'https://ui.aceternity.com',
+    checkedOn: '2026-09-10',
     entryUsd: 199,
     entryTerm: 'one-time',
-    ladder: 'Free tier, $169/yr, $199 lifetime, $1,590 for 10 seats',
-    ships: '200+ blocks, 12+ templates',
+    ladder: '$169/yr, $199 lifetime, $1,590 for 10 seats — all currently discounted',
+    ships: '200+ premium blocks, 12+ templates',
+    freeTier: 'Free copy-paste components for React and Next.js; no count published',
     figma: false,
     agent: 'Sells "AI-ready prompts" for v0 and Lovable',
     gate: 'source',
@@ -182,24 +278,37 @@ export const COMPETITORS: Competitor[] = [
   },
   {
     name: 'Preline',
-    href: 'https://preline.co',
+    href: 'https://preline.co/pricing.html',
+    checkedOn: '2026-09-10',
     entryUsd: 249,
     entryTerm: 'one-time',
-    ladder: '$249 solo, $459 for 15 developers',
-    ships: '640+ components, 780+ blocks, 21 templates, 207 pages',
+    ladder: 'Free tier, $249 solo, $459 for 15 developers, custom for enterprise',
+    ships:
+      '780+ blocks, 21 premium templates across 207 pages, 100 animated icons, 37 AI-built demos',
+    freeTier:
+      'All 640+ components, 189 blocks, 5 premium templates and the full Figma design system — no account required',
     figma: true,
     agent: 'MCP free until 1 January 2027, then a subscription',
     gate: 'source',
     beatsUs:
-      '780 blocks, 207 pages and 21 templates. This is the volume gap that costs us sales, and it is the one we are actively closing.',
+      'The free tier is the story. 640 components, 189 blocks, five templates and the entire Figma design system, for nothing and without an account — a better free offer than several of the paid tiers in this table, and the closest thing here to what we do. Their paid tier still holds the volume gap at 780 blocks and 207 pages.',
   },
   {
     name: 'Tailwind Plus',
     href: 'https://tailwindcss.com/plus',
+    /*
+     * NOT re-read on the 10 September sweep: the page serves a login form to
+     * anything that is not a signed-in browser, so there was nothing to read
+     * off it. Third-party trackers still report $299/$979, but a page whose
+     * argument is that we read the vendor's own page does not get to launder
+     * somebody else's summary into a fresh date.
+     */
+    checkedOn: '2026-08-23',
     entryUsd: 299,
     entryTerm: 'one-time',
     ladder: '$299 personal, $979 for a team of 25',
     ships: '500+ blocks in React, Vue and HTML, 13 templates, Catalyst UI kit',
+    freeTier: 'None for Plus; Tailwind CSS itself is separate and free',
     figma: false,
     agent: 'None',
     gate: 'source',
@@ -208,11 +317,15 @@ export const COMPETITORS: Competitor[] = [
   },
   {
     name: 'Untitled UI',
-    href: 'https://untitledui.com',
+    href: 'https://www.untitledui.com/pricing',
+    checkedOn: '2026-09-10',
     entryUsd: 349,
     entryTerm: 'one-time',
-    ladder: '$349 solo to $8,999 enterprise — private repo, Storybook, SSO/SCIM',
-    ships: '5,000+ components, plus a separate Figma ladder from $129',
+    ladder:
+      'React $349 solo / $999 studio / $2,499 business / $8,999 enterprise — private repo, Storybook, SSO/SCIM',
+    ships: '5k+ React components and sections, plus a separate Figma ladder from $129',
+    freeTier:
+      '100+ open-source React components, and 2k+ components free in Figma',
     figma: true,
     agent: 'None',
     gate: 'source',
@@ -221,11 +334,14 @@ export const COMPETITORS: Competitor[] = [
   },
   {
     name: '21st.dev',
-    href: 'https://21st.dev',
+    href: 'https://21st.dev/pricing',
+    checkedOn: '2026-09-10',
     entryUsd: 6,
     entryTerm: 'per month',
-    ladder: '$6/mo Builder, $15/mo Builder+AI, $7.50 per seat for teams',
-    ships: '12,000+ components, MCP and CLI',
+    ladder:
+      '$6/mo Builder, $15/mo Builder+AI, $7.50 per seat for teams — all billed yearly',
+    ships: '12,000+ crafted React components, templates and shadcn themes, MCP and CLI',
+    freeTier: 'No free plan; 5 Design Bug Bot reviews in the first 7 days',
     figma: false,
     agent: 'MCP access is a paid feature — one of only two vendors charging',
     gate: 'agent',
@@ -233,6 +349,24 @@ export const COMPETITORS: Competitor[] = [
       'Twelve thousand components and a subscription funding the whole thing. Recurring revenue buys a roadmap that one-time licences do not.',
   },
 ]
+
+/**
+ * The oldest row on the table, derived rather than written down.
+ *
+ * This is the number that keeps the page honest: it is the strongest thing
+ * we can say about EVERY figure at once — "nothing here is older than
+ * this". Derived from the rows so that it cannot be optimistic, and so that
+ * re-reading a stale vendor moves it without anybody remembering to.
+ */
+export const OLDEST_CHECK = COMPETITORS.reduce(
+  (oldest, c) => (c.checkedOn < oldest ? c.checkedOn : oldest),
+  LAST_SWEEP,
+)
+
+export const OLDEST_CHECK_LABEL = dateLabel(OLDEST_CHECK)
+
+/** Rows the most recent sweep actually reached. Rendered as a count. */
+export const FRESH_COUNT = COMPETITORS.filter((c) => c.checkedOn === LAST_SWEEP).length
 
 /**
  * What we put behind the wall, phrased for the same table.
@@ -317,12 +451,22 @@ export const WHERE_THEY_WIN: { claim: string; detail: string }[] = [
   {
     claim: 'Block depth',
     detail:
-      'Preline ships 780 blocks and Shadcnblocks 1,678. We are a fraction of both, and blocks are what buyers actually compare.',
+      'Preline ships 780 blocks and Shadcnblocks 1,858. We are a fraction of both, and blocks are what buyers actually compare.',
   },
   {
     claim: 'Design files',
     detail:
-      'Untitled UI, Flowbite, Shadcnblocks and Preline all ship Figma. We ship a token file a designer can import, and no drawn components.',
+      'Untitled UI, Flowbite, Shadcnblocks and Preline all ship Figma — and Preline and Flowbite now give theirs away free. We ship frame exports and Dev Mode pairing, which is a better workflow once you are working, and no drawn component library to open. On a shopping list this is a column we cannot tick.',
+  },
+  {
+    claim: 'Composition',
+    detail:
+      'React Bits has a Landing Builder, Shadcnblocks a page builder, UI8 a Forge. We ship the parts a builder would compose — effects, blocks, pages, templates, kits — and nothing that composes them. This is where the category moved while we were adding volume.',
+  },
+  {
+    claim: 'Free tiers',
+    detail:
+      'Preline gives away 640 components, 189 blocks, five templates and its whole Figma system without an account. Our free offer is still broader — everything readable, plus the API and MCP — but "free" stopped being ours alone.',
   },
   {
     claim: 'Team pricing',

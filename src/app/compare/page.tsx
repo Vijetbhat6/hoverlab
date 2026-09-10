@@ -11,10 +11,14 @@ import { TEMPLATE_COUNT } from '@/lib/templates/template-index'
 import { DESIGNER_TOOLS } from '@/lib/designer-tools'
 import { PLANS, formatPrice } from '@/lib/billing/plans'
 import {
-  CHECKED_ON,
-  CHECKED_ON_LABEL,
   COMPETITORS,
+  dateLabel,
+  FRESH_COUNT,
   GATE_LABELS,
+  LAST_SWEEP,
+  LAST_SWEEP_LABEL,
+  OLDEST_CHECK,
+  OLDEST_CHECK_LABEL,
   OUR_GATE,
   UPDATE_LEDGER,
   WHERE_THEY_WIN,
@@ -54,10 +58,13 @@ import { absoluteUrl } from '@/lib/site'
  *
  * Everything about Hoverlab on this page is computed — the counts from the
  * indexes, the price from PLANS. Nothing here can drift from what we
- * actually ship. Their figures cannot work that way, so they carry
- * CHECKED_ON instead, rendered where a reader sees it rather than in a
- * comment. See `lib/compare.ts` for what is deliberately absent from that
- * file, including our nearest neighbour.
+ * actually ship. Their figures cannot work that way, so each one carries
+ * its own `checkedOn`, rendered beside the row it vouches for rather than
+ * in a comment. The page-level dates are derived from those: LAST_SWEEP is
+ * when we last went looking, OLDEST_CHECK is the strongest claim that
+ * covers every figure at once. See `lib/compare.ts` for why the date is
+ * per-row, and for what is deliberately absent from that file, including
+ * our nearest neighbour.
  */
 
 const TITLE = 'Hoverlab vs the paid component catalogs — Hoverlab'
@@ -99,7 +106,7 @@ export default function ComparePage() {
       <main id="main-content" className="flex-1">
         <section className="mx-auto w-full max-w-3xl px-4 pb-12 pt-16 sm:px-6 lg:px-8">
           <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-            Compared, {CHECKED_ON_LABEL}
+            Compared, {LAST_SWEEP_LABEL}
           </p>
           <h1 className="type-page mt-3">
             Everyone here gates something. We gate one thing.
@@ -107,10 +114,18 @@ export default function ComparePage() {
 
           <div className="mt-5 space-y-4 text-body">
             <p>
-              Nine paid catalogs, read off their own pricing pages on{' '}
-              <time dateTime={CHECKED_ON}>{CHECKED_ON_LABEL}</time>. Eight of
+              Nine paid catalogs, read off their own pricing pages. Eight of
               them sell you the source: you can look at a component, and the
               code is the purchase. One sells agent access by subscription.
+            </p>
+            <p>
+              Every row carries the day it was read, because a sweep never
+              lands all nine: some vendors put pricing behind a login, some
+              move the page. The last sweep was{' '}
+              <time dateTime={LAST_SWEEP}>{LAST_SWEEP_LABEL}</time> and
+              reached {FRESH_COUNT} of {COMPETITORS.length}. Nothing on this
+              page is older than{' '}
+              <time dateTime={OLDEST_CHECK}>{OLDEST_CHECK_LABEL}</time>.
             </p>
             <p>
               Hoverlab sells neither.{' '}
@@ -179,7 +194,7 @@ export default function ComparePage() {
               <caption className="sr-only">
                 Entry price, contents, design files, agent access and what is
                 behind the paywall, for Hoverlab and nine competing component
-                catalogs, as listed on {CHECKED_ON_LABEL}.
+                catalogs, each row dated with the day it was read.
               </caption>
               <thead>
                 <tr className="border-b border-border/60 bg-muted/40">
@@ -191,6 +206,9 @@ export default function ComparePage() {
                   </th>
                   <th scope="col" className="px-4 py-3 font-semibold">
                     Ships
+                  </th>
+                  <th scope="col" className="px-4 py-3 font-semibold">
+                    Free
                   </th>
                   <th scope="col" className="px-4 py-3 text-center font-semibold">
                     Figma
@@ -222,6 +240,10 @@ export default function ComparePage() {
                     blocks, {PAGE_COUNT} pages, {TEMPLATE_COUNT} templates,{' '}
                     {TOOL_COUNT} tools
                   </td>
+                  <td className="px-4 py-4 font-medium">
+                    All of it — readable, customisable and copyable without an
+                    account, plus the REST API and the MCP server
+                  </td>
                   <td className="px-4 py-4 text-center">
                     <Minus className="mx-auto h-4 w-4 text-muted-foreground" aria-hidden />
                     <span className="sr-only">
@@ -247,6 +269,14 @@ export default function ComparePage() {
                         {c.name}
                         <ExternalLink className="h-3 w-3 text-muted-foreground" aria-hidden />
                       </a>
+                      {/* The row's own date, next to the row it vouches for.
+                          A stale row is allowed here; a stale row wearing a
+                          fresh date is not. */}
+                      <span className="mt-1 block text-xs font-normal text-muted-foreground">
+                        Read{' '}
+                        <time dateTime={c.checkedOn}>{dateLabel(c.checkedOn)}</time>
+                        {c.checkedOn !== LAST_SWEEP ? ' — not reachable since' : null}
+                      </span>
                     </th>
                     <td className="px-4 py-4">
                       <span className="font-semibold">
@@ -257,6 +287,14 @@ export default function ComparePage() {
                       </span>
                     </td>
                     <td className="px-4 py-4 text-muted-foreground">{c.ships}</td>
+                    <td className="px-4 py-4 text-muted-foreground">
+                      {c.freeTier ?? (
+                        <>
+                          <Minus className="h-4 w-4 text-muted-foreground" aria-hidden />
+                          <span className="sr-only">Nothing free</span>
+                        </>
+                      )}
+                    </td>
                     <td className="px-4 py-4 text-center">
                       {c.figma ? (
                         <>
@@ -284,10 +322,12 @@ export default function ComparePage() {
           </div>
 
           <p className="mt-4 text-sm text-muted-foreground">
-            Figures read from each vendor&apos;s own pages on{' '}
-            <time dateTime={CHECKED_ON}>{CHECKED_ON_LABEL}</time>. Follow any
-            name to check it — if one of these is out of date, it is out of
-            date here and we would rather hear about it.
+            Figures read from each vendor&apos;s own pages on the date beside
+            the name. Where a vendor could not be reached on the last sweep —
+            a login wall, a moved page — the row keeps its older date rather
+            than borrowing a newer one. Follow any name to check it; if one of
+            these is out of date, it is out of date here and we would rather
+            hear about it.
           </p>
         </section>
 
