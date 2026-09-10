@@ -21,6 +21,14 @@
     "model-context-protocol"
   ],
   "homepage": "https://hoverlab-xak9.vercel.app",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vijetbhat6/hoverlab.git",
+    "directory": "packages/cli"
+  },
+  "bugs": {
+    "url": "https://github.com/Vijetbhat6/hoverlab/issues"
+  },
   "license": "MIT",
   "type": "module",
   "bin": {
