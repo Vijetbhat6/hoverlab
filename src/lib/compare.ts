@@ -211,10 +211,19 @@ export const COMPETITORS: Competitor[] = [
     name: 'Flowbite',
     href: 'https://flowbite.com',
     /*
-     * NOT re-read on the 10 September sweep: flowbite.com/pro and
-     * flowbite.com/pricing both failed to return a readable page. Left at
-     * its last confirmed date rather than carried along by the rows that
-     * did answer — which is the entire reason this field is per-row.
+     * NOT re-read on the 10 September sweep. flowbite.com/pro,
+     * /pricing, /pro/ and the bare domain all failed to return a readable
+     * page; five attempts, no price. Left at its last confirmed date rather
+     * than carried along by the rows that did answer — which is the entire
+     * reason this field is per-row.
+     *
+     * One thing the sweep DID read, and deliberately did not adopt: the docs
+     * introduction says "over 450+ website sections and advanced UI
+     * components", against the 330+ blocks below. It is not the same metric
+     * — it counts sections and components together — so swapping it in would
+     * put a number measuring one thing under a label describing another, and
+     * would let a figure read today vouch for a price that was not. Both
+     * halves of a row have to be re-read before the row's date moves.
      */
     checkedOn: '2026-08-23',
     entryUsd: 149,
