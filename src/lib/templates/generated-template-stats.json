@@ -62,5 +62,25 @@
   "creator-course": {
     "lines": 571,
     "files": 10
+  },
+  "help-centre": {
+    "lines": 534,
+    "files": 10
+  },
+  "agent-console": {
+    "lines": 522,
+    "files": 10
+  },
+  "project-tracker": {
+    "lines": 592,
+    "files": 11
+  },
+  "auth-flow": {
+    "lines": 527,
+    "files": 10
+  },
+  "customer-portal": {
+    "lines": 541,
+    "files": 10
   }
 }

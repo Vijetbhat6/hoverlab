@@ -163,11 +163,11 @@ export function SettingsTeamMembers({
                 ) : null}
               </div>
 
-              <label htmlFor={`role-${member.id}`} className="sr-only">
+              <label htmlFor={`${uid}-role-${member.id}`} className="sr-only">
                 Role for {member.name}
               </label>
               <select
-                id={`role-${member.id}`}
+                id={`${uid}-role-${member.id}`}
                 value={member.role}
                 disabled={isLastOwner}
                 title={lockReason}

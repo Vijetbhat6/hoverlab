@@ -66,6 +66,26 @@ const DEFAULT_SOURCES: RatingSource[] = [
   { name: 'Product Hunt', score: '4.9' },
 ]
 
+/**
+ * The heading's id, derived from the heading rather than fixed.
+ *
+ * It was the literal `ratings-heading`, which is correct for one instance
+ * and wrong for two. Two is not hypothetical: a sign-up screen and a
+ * consumer landing page both want an aggregate rating, and a catalog hub
+ * renders every page it has on one document — at which point both sections
+ * point `aria-labelledby` at whichever heading comes first, and one of them
+ * is announced under the other's name.
+ *
+ * `React.useId()` is the textbook fix and is not available here. This block
+ * is static markup with no `'use client'`, and adding one to generate an id
+ * ships a hydration pass to render a bar chart that never changes. The
+ * headline is the discriminator already to hand, and it differs in every
+ * real case where two of these coexist — see `footer-mega.tsx`, which
+ * reaches the same conclusion from the brand name.
+ */
+const headingId = (headline: string) =>
+  `ratings-${headline.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}`
+
 export function TestimonialRatings({
   score = '4.8',
   outOf = 5,
@@ -77,16 +97,17 @@ export function TestimonialRatings({
 }: TestimonialRatingsProps) {
   const total = breakdown.reduce((sum, band) => sum + band.count, 0)
   const filled = Math.round(Number(score))
+  const labelId = headingId(headline)
 
   return (
     <section
-      aria-labelledby="ratings-heading"
+      aria-labelledby={labelId}
       className={`mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 lg:px-8 ${className}`}
     >
       <div className="grid gap-10 rounded-2xl border border-border/60 bg-card/80 p-8 sm:p-12 lg:grid-cols-[auto_1fr] lg:gap-16">
         <div className="lg:min-w-56">
           <h2
-            id="ratings-heading"
+            id={labelId}
             className="text-sm font-medium uppercase tracking-wider text-muted-foreground"
           >
             {headline}

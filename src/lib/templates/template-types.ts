@@ -31,12 +31,24 @@ import { toSlug } from '../artifact-types'
  * waitlist page in the same grid section, where the only honest sort order
  * is "which of these is a landing page".
  */
+/**
+ * `Account & Access` is the newest and the narrowest, and it earns the row.
+ *
+ * The screens in it — sign-in, sign-up, recovery, the second factor, the
+ * invoice, the usage meter, the 403 — are the ones every product has and
+ * nobody sets out to build. They are not a Full Product, because none of
+ * them is the thing being sold; they are not Internal Tools, because the
+ * customer is on the other side of them. Filed under either, they read as
+ * offcuts. Filed together, they are what somebody actually searches for at
+ * the point they need them, which is a fortnight before launch.
+ */
 export type TemplateCategory =
   | 'Full Product'
   | 'Landing Pages'
   | 'Marketing'
   | 'Internal Tools'
   | 'Commerce'
+  | 'Account & Access'
 
 export const TEMPLATE_CATEGORIES: TemplateCategory[] = [
   'Full Product',
@@ -44,6 +56,7 @@ export const TEMPLATE_CATEGORIES: TemplateCategory[] = [
   'Marketing',
   'Internal Tools',
   'Commerce',
+  'Account & Access',
 ]
 
 /* ------------------------------------------------------------------ *

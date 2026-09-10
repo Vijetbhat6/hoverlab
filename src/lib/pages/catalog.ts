@@ -343,6 +343,28 @@ export const PAGE_CATALOG: PageRecord[] = [
     featured: true,
   },
   {
+    id: 'help-centre-page',
+    name: 'Help Centre',
+    category: 'Marketing Pages',
+    description:
+      'Search first, the six answers that absorb the most contact volume under it, and the ticket form in plain sight rather than behind a modal — a support page measured in tickets not filed.',
+    // Both spellings, deliberately. The prose here is British and the page
+    // is filed as one; the phrase somebody types into a search box is not.
+    tags: ['help center', 'help centre', 'support', 'faq', 'knowledge base'],
+    previewComponent: 'help-centre-page',
+    deps: ['lucide-react'],
+    composedOf: [
+      'announcement-bar',
+      'navbar-simple',
+      'hero-search',
+      'faq-grid',
+      'feedback-widget',
+      'support-ticket-form',
+      'footer-status-locale',
+    ],
+    featured: true,
+  },
+  {
     id: 'changelog-page',
     name: 'Changelog Page',
     category: 'Marketing Pages',

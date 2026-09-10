@@ -30,6 +30,7 @@ import BlogIndexPage from './sources/blog-index-page'
 import ArticlePage from './sources/article-page'
 import CareersPage from './sources/careers-page'
 import DocsPage from './sources/docs-page'
+import HelpCentrePage from './sources/help-centre-page'
 import ChangelogPage from './sources/changelog-page'
 import ProjectBoardPage from './sources/project-board-page'
 import DashboardOverview from './sources/dashboard-overview'
@@ -76,6 +77,7 @@ export const PAGE_PREVIEWS: Record<string, React.ReactNode> = {
   'article-page': <ArticlePage />,
   'careers-page': <CareersPage />,
   'docs-page': <DocsPage />,
+  'help-centre-page': <HelpCentrePage />,
   'changelog-page': <ChangelogPage />,
   'project-board-page': <ProjectBoardPage />,
   'dashboard-overview': <DashboardOverview />,
