@@ -113,13 +113,14 @@ export function SlideOverPanel({
           if (e.target === dialogRef.current) close()
         }}
         // The dialog itself is the full-screen surface; the panel inside is
-        // what slides. `ms-auto` pins it to the right edge.
+        // what slides. `ms-auto` pins it to the end edge,
+        // which is the right in English and the left in Arabic.
         className="m-0 h-full max-h-full w-full max-w-full bg-transparent p-0 text-foreground backdrop:bg-black/50 backdrop:backdrop-blur-sm"
       >
         <div
           ref={panelRef}
           data-shown={shown ? '' : undefined}
-          className="ms-auto flex h-full w-full max-w-md flex-col border-s border-border/60 bg-background shadow-2xl motion-safe:translate-x-full motion-safe:transition-transform motion-safe:duration-300 motion-safe:ease-out motion-safe:data-shown:translate-x-0"
+          className="ms-auto flex h-full w-full max-w-md flex-col border-s border-border/60 bg-background shadow-2xl motion-safe:translate-x-full motion-safe:rtl:-translate-x-full motion-safe:transition-transform motion-safe:duration-300 motion-safe:ease-out motion-safe:data-shown:translate-x-0"
         >
           <div className="flex shrink-0 items-start justify-between gap-4 border-b border-border/60 p-5">
             <div className="min-w-0">

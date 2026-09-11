@@ -219,8 +219,8 @@ export function NavMobileDrawer({
         // to animate, and a translated-off-screen panel is still tabbable.
         // Browsers without `inert` support still get `aria-hidden`.
         inert={!open}
-        className={`fixed inset-y-0 right-0 z-50 flex w-full max-w-sm flex-col border-s border-border/60 bg-background shadow-2xl transition-transform duration-300 ease-out motion-reduce:transition-none ${
-          open ? 'translate-x-0' : 'translate-x-full'
+        className={`fixed inset-y-0 end-0 z-50 flex w-full max-w-sm flex-col border-s border-border/60 bg-background shadow-2xl transition-transform duration-300 ease-out motion-reduce:transition-none ${
+          open ? 'translate-x-0' : 'translate-x-full rtl:-translate-x-full'
         }`}
       >
         <div className="flex h-16 shrink-0 items-center justify-between border-b border-border/60 px-4">
@@ -243,7 +243,7 @@ export function NavMobileDrawer({
             <div className="relative mb-5">
               <Search
                 aria-hidden
-                className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground"
+                className="pointer-events-none absolute start-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground"
               />
               <label htmlFor={`${uid}-drawer-search`} className="sr-only">
                 Search

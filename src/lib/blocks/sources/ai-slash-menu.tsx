@@ -262,7 +262,7 @@ export function AiSlashMenu({
               id={LISTBOX_ID}
               role="listbox"
               aria-label="AI actions"
-              className="absolute left-0 right-0 top-full z-10 mt-1 max-h-48 overflow-y-auto rounded-xl border border-border bg-popover p-1 shadow-lg"
+              className="absolute inset-x-0 top-full z-10 mt-1 max-h-48 overflow-y-auto rounded-xl border border-border bg-popover p-1 shadow-lg"
             >
               {matches.length === 0 ? (
                 <p className="px-3 py-6 text-center text-sm text-muted-foreground">

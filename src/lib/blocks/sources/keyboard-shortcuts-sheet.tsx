@@ -163,7 +163,7 @@ export function KeyboardShortcutsSheet({
         <div className="relative ms-auto">
           <Search
             aria-hidden
-            className="pointer-events-none absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground"
+            className="pointer-events-none absolute start-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground"
           />
           <input
             type="search"

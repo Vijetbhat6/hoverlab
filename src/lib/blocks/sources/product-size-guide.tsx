@@ -164,7 +164,7 @@ export function ProductSizeGuide({
               <tr className="border-b border-border">
                 <th
                   scope="col"
-                  className="sticky left-0 z-10 bg-card px-3 py-2 text-xs font-medium text-muted-foreground"
+                  className="sticky start-0 z-10 bg-card px-3 py-2 text-xs font-medium text-muted-foreground"
                 >
                   Size
                 </th>
@@ -188,7 +188,7 @@ export function ProductSizeGuide({
                   <tr key={row.size} className={on ? 'bg-accent/50' : undefined}>
                     <th
                       scope="row"
-                      className={`sticky left-0 z-10 px-3 py-2.5 font-semibold text-foreground ${
+                      className={`sticky start-0 z-10 px-3 py-2.5 font-semibold text-foreground ${
                         on ? 'bg-accent/50' : 'bg-card'
                       }`}
                     >

@@ -102,7 +102,7 @@ export function HeroTestimonial({
         <figure className="relative rounded-2xl border border-border/60 bg-card/70 p-7 shadow-xl shadow-black/10 backdrop-blur sm:p-9">
           <Quote
             aria-hidden
-            className="absolute -top-4 left-7 h-9 w-9 rounded-lg bg-primary p-2 text-primary-foreground shadow-lg shadow-primary/25"
+            className="absolute -top-4 start-7 h-9 w-9 rounded-lg bg-primary p-2 text-primary-foreground shadow-lg shadow-primary/25"
           />
 
           <blockquote className="mt-3 text-pretty text-lg font-medium leading-relaxed sm:text-xl">

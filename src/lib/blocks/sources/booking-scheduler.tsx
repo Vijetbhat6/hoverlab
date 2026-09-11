@@ -232,7 +232,7 @@ export function BookingScheduler({
 
           <fieldset className="mt-6">
             <div className="flex flex-wrap items-center justify-between gap-3">
-              <legend className="float-left text-sm font-medium text-foreground">
+              <legend className="float-start text-sm font-medium text-foreground">
                 Pick a time
               </legend>
 

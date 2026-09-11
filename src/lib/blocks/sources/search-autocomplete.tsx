@@ -176,7 +176,7 @@ export function SearchAutocomplete({
         </label>
         <Search
           aria-hidden
-          className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground"
+          className="pointer-events-none absolute start-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground"
         />
         <input
           id="search-autocomplete"
@@ -206,7 +206,7 @@ export function SearchAutocomplete({
               setQuery('')
               setSubmitted(null)
             }}
-            className="absolute right-2 top-1/2 inline-flex h-7 w-7 -translate-y-1/2 items-center justify-center rounded-lg text-muted-foreground transition hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            className="absolute end-2 top-1/2 inline-flex h-7 w-7 -translate-y-1/2 items-center justify-center rounded-lg text-muted-foreground transition hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           >
             <X aria-hidden className="h-4 w-4" />
             <span className="sr-only">Clear search</span>
@@ -218,7 +218,7 @@ export function SearchAutocomplete({
             id={LISTBOX_ID}
             role="listbox"
             aria-label="Search suggestions"
-            className="absolute left-0 right-0 top-full z-10 mt-1 max-h-80 overflow-y-auto rounded-xl border border-border bg-popover p-1 shadow-lg"
+            className="absolute inset-x-0 top-full z-10 mt-1 max-h-80 overflow-y-auto rounded-xl border border-border bg-popover p-1 shadow-lg"
           >
             {showRecents ? (
               <div role="group" aria-label="Recent searches">

@@ -146,7 +146,7 @@ export function AuthLoginCard({
                 onClick={() => setVisible((v) => !v)}
                 aria-label={visible ? 'Hide password' : 'Show password'}
                 aria-pressed={visible}
-                className="absolute right-1.5 top-1/2 -translate-y-1/2 rounded-lg p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                className="absolute end-1.5 top-1/2 -translate-y-1/2 rounded-lg p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
               >
                 {visible ? (
                   <EyeOff aria-hidden className="h-4 w-4" />

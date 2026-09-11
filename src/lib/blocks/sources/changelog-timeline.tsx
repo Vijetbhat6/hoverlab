@@ -86,7 +86,7 @@ export function ChangelogTimeline({
           <li key={entry.version} className="relative">
             <span
               aria-hidden
-              className="absolute -left-[2.3rem] top-1.5 h-3 w-3 rounded-full border-2 border-background bg-primary ring-4 ring-primary/15"
+              className="absolute -start-[2.3rem] top-1.5 h-3 w-3 rounded-full border-2 border-background bg-primary ring-4 ring-primary/15"
             />
 
             <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">

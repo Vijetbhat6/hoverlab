@@ -152,7 +152,7 @@ export function TestimonialVideo({
 
                 <span
                   aria-hidden
-                  className="absolute bottom-3 right-3 rounded-md bg-background/90 px-2 py-1 text-xs font-medium tabular-nums text-foreground ring-1 ring-border/60"
+                  className="absolute bottom-3 end-3 rounded-md bg-background/90 px-2 py-1 text-xs font-medium tabular-nums text-foreground ring-1 ring-border/60"
                 >
                   {testimonial.duration}
                 </span>

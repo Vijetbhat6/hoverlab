@@ -105,7 +105,7 @@ export function SearchResultsPanel({
       <div className="relative">
         <Search
           aria-hidden
-          className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground"
+          className="pointer-events-none absolute start-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground"
         />
         <input
           type="search"
@@ -113,7 +113,7 @@ export function SearchResultsPanel({
           aria-label="Search documentation"
           className="w-full rounded-xl border border-border/60 bg-background py-3 ps-11 pe-24 text-sm outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring"
         />
-        <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-xs tabular-nums text-muted-foreground">
+        <span className="pointer-events-none absolute end-4 top-1/2 -translate-y-1/2 text-xs tabular-nums text-muted-foreground">
           {total} results
         </span>
       </div>

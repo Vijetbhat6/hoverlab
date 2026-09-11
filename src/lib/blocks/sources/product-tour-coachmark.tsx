@@ -175,7 +175,7 @@ export function ProductTourCoachmark({
             aria-labelledby="tour-step-title"
             aria-describedby="tour-step-body"
             tabIndex={-1}
-            className="absolute inset-x-4 bottom-4 z-30 rounded-xl border border-border bg-card p-4 shadow-lg outline-none focus-visible:ring-2 focus-visible:ring-ring sm:inset-x-auto sm:right-4 sm:w-80"
+            className="absolute inset-x-4 bottom-4 z-30 rounded-xl border border-border bg-card p-4 shadow-lg outline-none focus-visible:ring-2 focus-visible:ring-ring sm:inset-x-auto sm:end-4 sm:w-80"
           >
             <div className="flex items-start justify-between gap-3">
               <h3 id="tour-step-title" className="text-sm font-semibold text-foreground">

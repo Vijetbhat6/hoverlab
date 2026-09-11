@@ -159,7 +159,7 @@ export function ActivityTimeline({
                   <li key={event.id} className="relative">
                     <span
                       aria-hidden
-                      className={`absolute -left-[2.35rem] top-0 inline-flex h-7 w-7 items-center justify-center rounded-full ring-4 ring-background ${style.tone}`}
+                      className={`absolute -start-[2.35rem] top-0 inline-flex h-7 w-7 items-center justify-center rounded-full ring-4 ring-background ${style.tone}`}
                     >
                       {style.icon}
                     </span>

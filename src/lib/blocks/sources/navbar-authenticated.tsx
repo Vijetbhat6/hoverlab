@@ -168,7 +168,7 @@ export function NavbarAuthenticated({
             <div
               role="menu"
               aria-label="Workspaces"
-              className="absolute left-0 top-full z-20 mt-1 w-72 rounded-xl border border-border bg-popover p-1 shadow-lg"
+              className="absolute start-0 top-full z-20 mt-1 w-72 rounded-xl border border-border bg-popover p-1 shadow-lg"
             >
               {workspaces.map((w, i) => (
                 <button
@@ -218,7 +218,7 @@ export function NavbarAuthenticated({
           <div className="relative">
             <Search
               aria-hidden
-              className="pointer-events-none absolute left-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground"
+              className="pointer-events-none absolute start-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground"
             />
             <input
               id="app-search"
@@ -239,7 +239,7 @@ export function NavbarAuthenticated({
           {unread > 0 ? (
             <span
               aria-hidden
-              className="absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-destructive px-1 text-[10px] font-semibold leading-none text-destructive-foreground"
+              className="absolute -end-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-destructive px-1 text-[10px] font-semibold leading-none text-destructive-foreground"
             >
               {unread > 9 ? '9+' : unread}
             </span>
@@ -266,7 +266,7 @@ export function NavbarAuthenticated({
             <div
               role="menu"
               aria-label="Account"
-              className="absolute right-0 top-full z-20 mt-1 w-60 rounded-xl border border-border bg-popover p-1 shadow-lg"
+              className="absolute end-0 top-full z-20 mt-1 w-60 rounded-xl border border-border bg-popover p-1 shadow-lg"
             >
               <div className="px-2.5 py-2">
                 <p className="truncate text-sm font-medium text-foreground">Sam Keller</p>

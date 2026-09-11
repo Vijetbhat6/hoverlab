@@ -223,7 +223,7 @@ export function ChatPromptBar({
             id={listId}
             role="listbox"
             aria-label={trigger?.char === '@' ? 'Sources' : 'Commands'}
-            className="absolute bottom-full left-0 z-20 mb-2 max-h-60 w-full overflow-y-auto rounded-xl border border-border/60 bg-card p-1.5 shadow-2xl"
+            className="absolute bottom-full start-0 z-20 mb-2 max-h-60 w-full overflow-y-auto rounded-xl border border-border/60 bg-card p-1.5 shadow-2xl"
           >
             <p className="px-2.5 py-1.5 text-xs font-bold uppercase tracking-wider text-muted-foreground">
               {trigger?.char === '@' ? 'Attach a source' : 'Run a command'}
@@ -345,7 +345,7 @@ export function ChatPromptBar({
                   id={`${listId}-models`}
                   role="listbox"
                   aria-label="Model"
-                  className="absolute bottom-full left-0 z-20 mb-1.5 w-44 rounded-xl border border-border/60 bg-card p-1 shadow-2xl"
+                  className="absolute bottom-full start-0 z-20 mb-1.5 w-44 rounded-xl border border-border/60 bg-card p-1 shadow-2xl"
                 >
                   {models.map((name) => (
                     <li key={name}>

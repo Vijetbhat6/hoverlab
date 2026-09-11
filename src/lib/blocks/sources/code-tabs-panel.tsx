@@ -137,7 +137,7 @@ export function CodeTabsPanel({
           type="button"
           onClick={copy}
           aria-label={copied ? 'Copied' : `Copy ${tab.label} command`}
-          className="absolute right-3 top-3 inline-flex items-center rounded-md p-1.5 text-white/50 transition-colors hover:bg-white/10 hover:text-white"
+          className="absolute end-3 top-3 inline-flex items-center rounded-md p-1.5 text-white/50 transition-colors hover:bg-white/10 hover:text-white"
         >
           {copied ? (
             <Check aria-hidden className="h-4 w-4 text-emerald-400" />

@@ -79,7 +79,7 @@ export function ProductGrid({
             />
 
             {product.badge ? (
-              <span className="absolute left-3 top-3 rounded-full bg-foreground px-2.5 py-1 text-xs font-semibold text-background">
+              <span className="absolute start-3 top-3 rounded-full bg-foreground px-2.5 py-1 text-xs font-semibold text-background">
                 {product.badge}
               </span>
             ) : null}
@@ -94,7 +94,7 @@ export function ProductGrid({
             <button
               type="button"
               aria-label={`Save ${product.name}`}
-              className="absolute right-3 top-3 z-10 rounded-full bg-background/80 p-2 text-muted-foreground backdrop-blur transition-colors hover:text-rose-500"
+              className="absolute end-3 top-3 z-10 rounded-full bg-background/80 p-2 text-muted-foreground backdrop-blur transition-colors hover:text-rose-500"
             >
               <Heart aria-hidden className="h-4 w-4" />
             </button>

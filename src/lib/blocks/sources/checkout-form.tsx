@@ -168,7 +168,7 @@ export function CheckoutForm({
           />
           <CreditCard
             aria-hidden
-            className="pointer-events-none absolute right-3.5 top-9 h-4 w-4 text-muted-foreground"
+            className="pointer-events-none absolute end-3.5 top-9 h-4 w-4 text-muted-foreground"
           />
         </div>
 

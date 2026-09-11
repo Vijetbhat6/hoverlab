@@ -111,7 +111,7 @@ export function StatsTimeline({
           <li key={milestone.period} className="relative">
             <span
               aria-hidden
-              className="absolute -left-8 top-2 h-2.5 w-2.5 -translate-x-1/2 rounded-full bg-primary ring-4 ring-background sm:-left-10"
+              className="absolute -start-8 top-2 h-2.5 w-2.5 -translate-x-1/2 rtl:translate-x-1/2 rounded-full bg-primary ring-4 ring-background sm:-start-10"
             />
 
             <p className="text-sm font-medium tabular-nums text-muted-foreground">

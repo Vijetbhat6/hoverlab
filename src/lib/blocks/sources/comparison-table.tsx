@@ -77,7 +77,7 @@ export function ComparisonTable({
           </caption>
           <thead>
             <tr className="border-b border-border/60 bg-muted/40">
-              <th scope="col" className="sticky left-0 z-10 bg-muted/40 p-4 text-start font-semibold">
+              <th scope="col" className="sticky start-0 z-10 bg-muted/40 p-4 text-start font-semibold">
                 Feature
               </th>
               {columns.map((col, i) => (
@@ -103,7 +103,7 @@ export function ComparisonTable({
               <tr key={row.feature} className="border-b border-border/40 last:border-0 hover:bg-muted/20">
                 <th
                   scope="row"
-                  className="sticky left-0 z-10 bg-background p-4 text-start font-medium"
+                  className="sticky start-0 z-10 bg-background p-4 text-start font-medium"
                 >
                   {row.feature}
                 </th>

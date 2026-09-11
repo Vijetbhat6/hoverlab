@@ -14,10 +14,10 @@
  * `ps-4` compiles to `padding-inline-start`, which browsers have supported
  * since 2019. There is no trade-off here, only a habit.
  *
- * ── WHAT THIS DOES NOT FLAG, AND WHY ────────────────────────────────────
+ * ── WHAT --fix DOES NOT TOUCH, AND WHY ──────────────────────────────────
  *
- * `left-` and `right-` positioning is left alone. Two reasons, and the
- * second is the one that would have caused a bug:
+ * `left-` and `right-` positioning is never rewritten automatically. Two
+ * reasons, and the second is the one that would have caused a bug:
  *
  *   - `left-1/2 -translate-x-1/2` is the standard centring idiom. Rewriting
  *     `left-1/2` to `start-1/2` sets `inset-inline-start`, which in RTL
@@ -27,10 +27,11 @@
  *     corner does not need to migrate across the layout when the language
  *     changes.
  *
- * Those are judgement calls, so they stay judgement calls. What this script
- * covers is the set with no judgement in it: padding, margin, text
- * alignment, borders and corner radii, where the logical form is simply
- * correct and the physical form is simply a habit.
+ * Those are judgement calls, so they are ruled by hand in PART THREE and
+ * the build checks the code still agrees. What `--fix` covers is the set
+ * with no judgement in it: padding, margin, text alignment, floats, borders
+ * and corner radii, where the logical form is simply correct and the
+ * physical form is simply a habit.
  *
  * ── HOW IT IS USED ──────────────────────────────────────────────────────
  *
@@ -45,12 +46,14 @@
  * one flag away, so the failure would be pure friction and it would teach
  * people to route around the script.
  *
- * Directional icons DO fail it (PART TWO, below). There is no `--fix` for
- * them and there cannot be one: whether a glyph mirrors depends on what it
- * means at its call site, so an unruled icon is a question, not a typo. The
- * cost of ignoring it is an Arabic reader seeing an arrow point at the
- * thing they just came from, which is the sort of bug that never shows up
- * in a screenshot anyone on this team takes.
+ * Directional icons DO fail it (PART TWO, below), and so do physical
+ * positions and horizontal movement (PART THREE). There is no `--fix` for
+ * either and there cannot be one: whether a glyph mirrors, or a badge
+ * follows the text, depends on what it means where it sits, so an unruled
+ * one is a question, not a typo. The cost of ignoring it is an Arabic
+ * reader seeing an arrow point at the thing they just came from, or a
+ * search icon sitting on top of the words they are typing — the sort of
+ * bug that never shows up in a screenshot anyone on this team takes.
  */
 
 import { readdirSync, readFileSync, writeFileSync } from 'node:fs'
@@ -89,6 +92,12 @@ const MAPPINGS: Array<[RegExp, string]> = [
   // Text alignment.
   [/^text-left$/, 'text-start'],
   [/^text-right$/, 'text-end'],
+
+  // Floats and clears, which Tailwind v4 spells with the logical keywords.
+  [/^float-left$/, 'float-start'],
+  [/^float-right$/, 'float-end'],
+  [/^clear-left$/, 'clear-start'],
+  [/^clear-right$/, 'clear-end'],
 ]
 
 /** Split a class token into its variant prefixes and its base utility. */
@@ -470,6 +479,164 @@ function auditDirectionalIcons(): IconProblem[] {
   return problems
 }
 
+/* ══ PART THREE: POSITIONS AND MOVEMENT ══════════════════════════════════
+ *
+ * Padding became logical months ago and positioning did not, so the two
+ * disagreed at every corner where they meet. The search field is the
+ * clearest case and there were eleven of them: the input reserves room
+ * with `ps-9` — the right in Arabic — while the magnifier sat at `left-3`,
+ * on top of the first letters typed. Timelines were the other shape: a
+ * list ruled with `border-s` and a dot pinned at `-left-[2.3rem]`, so in
+ * RTL the rail is on one side and the dots float over the other.
+ *
+ * Seventy-five positions were ruled by hand on 2026-09-11. What came out:
+ *
+ *   - most follow the text — search icons, close buttons, badges, sticky
+ *     first columns, drawers, switch knobs, the toast corner — and are now
+ *     `start-` or `end-`;
+ *   - a `left-0 right-0` pair is `inset-x-0`, which says "full width"
+ *     without naming a side;
+ *   - `left-1/2 -translate-x-1/2` stays, for the reason in the header;
+ *   - a blurred glow stays where it is, per block below, because it is
+ *     light rather than layout.
+ *
+ * Movement is the same question. `translate-x-*` is physical: a switch
+ * knob that slides right to mean "on" slides out of its track in RTL,
+ * where it starts at the right. So a horizontal translate must travel with
+ * an `rtl:` counterpart in the same class string, unless it is ruled below.
+ *
+ * NOT covered: inline `style={{ left }}`. The one case in the catalog is
+ * `selection-ai-toolbar`, which positions from `getBoundingClientRect()` —
+ * a measured physical coordinate, correct as physical.
+ */
+
+const GLOW =
+  'a blurred glow in a corner of the section. It is lighting, not layout: nothing reads from it, and moving it to the other corner would re-light the design for no reader.'
+
+/** Physical classes that stay physical, block → exact token → why. */
+const PHYSICAL: Record<string, Record<string, string>> = {
+  'auth-signup-split': { '-right-16': GLOW },
+  'bento-features': { '-right-12': GLOW },
+  'cta-split-panel': { '-right-24': GLOW },
+  'hero-app-download': { '-left-20': GLOW, 'right-0': GLOW },
+  'hero-booking': { 'right-0': GLOW, 'left-1/4': GLOW },
+  'hero-price-anchor': { 'left-1/3': GLOW, 'right-1/4': GLOW },
+  'hero-split': { 'left-1/4': GLOW, 'right-1/5': GLOW },
+  'hero-testimonial': { 'right-1/4': GLOW },
+  'persona-cards': { '-right-12': GLOW },
+  'community-band': {
+    'group-hover:translate-x-0.5':
+      'the up-and-out lean on an ArrowUpRight, which ICONS rules "keep". The glyph does not turn round, so its lean does not either.',
+  },
+  'selection-ai-toolbar': {
+    '-translate-x-1/2':
+      'centres the toolbar on an inline `left` measured from getBoundingClientRect(). Both halves are physical pixels, so the pair is right in either direction.',
+  },
+}
+
+const POSITION = /^-?(?:left|right)-/
+const SLIDE = /^-?translate-x-/
+
+interface ClassToken {
+  token: string
+  prefix: string
+  base: string
+}
+
+/**
+ * Tokens of one string literal, template literals included.
+ *
+ * A backtick literal swallows the quoted strings inside its `${…}` — the
+ * ternary halves of a class list — so the quotes and braces are separators
+ * here. That is what lets `open ? 'translate-x-0' : 'translate-x-full'`
+ * be seen at all.
+ */
+function classTokens(body: string): ClassToken[] {
+  return body
+    .split(/[\s'"`{}$]+/)
+    .filter(Boolean)
+    .map((token) => ({ token, ...splitVariants(token) }))
+}
+
+function auditPositions(): IconProblem[] {
+  const problems: IconProblem[] = []
+  const used = new Set<string>()
+  let followed = 0
+  let centred = 0
+  let kept = 0
+
+  for (const name of files) {
+    const block = name.replace(/\.tsx$/, '')
+    const code = maskComments(readFileSync(join(SOURCES, name), 'utf8'))
+    const ruled = PHYSICAL[block] ?? {}
+
+    for (const match of code.matchAll(STRING_LITERAL)) {
+      const tokens = classTokens(match[2]!)
+      const has = (base: string) => tokens.some((t) => t.base === base)
+      const line = code.slice(0, match.index!).split('\n').length
+      const problem = (token: string, message: string) =>
+        problems.push({ block, line, icon: token, message })
+
+      for (const { token, prefix, base } of tokens) {
+        const isRtl = prefix.includes('rtl:')
+        const isCentring =
+          (base === 'left-1/2' && has('-translate-x-1/2')) ||
+          (base === '-translate-x-1/2' && has('left-1/2'))
+
+        if (POSITION.test(base)) {
+          if (isCentring) centred++
+          else if (ruled[token]) {
+            kept++
+            used.add(`${block} ${token}`)
+          } else {
+            problem(
+              token,
+              'physical position. Use start-/end- (a left-0 right-0 pair is inset-x-0), ' +
+                'or add it to PHYSICAL with the reason it must not follow the text',
+            )
+          }
+          continue
+        }
+
+        if (/^-?(?:start|end)-/.test(base) || base === 'inset-x-0') followed++
+
+        if (!SLIDE.test(base) || isRtl || base === 'translate-x-0' || isCentring) continue
+        const paired = tokens.some((t) => t.prefix.includes('rtl:') && SLIDE.test(t.base))
+        if (paired) continue
+        if (ruled[token]) {
+          kept++
+          used.add(`${block} ${token}`)
+          continue
+        }
+        problem(
+          token,
+          'horizontal movement with no rtl: counterpart in the same class string. ' +
+            'Add one (rtl:-translate-x-…), or rule it in PHYSICAL',
+        )
+      }
+    }
+  }
+
+  // A ruling whose code has gone is a ruling waiting to excuse the wrong thing.
+  for (const [block, tokens] of Object.entries(PHYSICAL)) {
+    for (const token of Object.keys(tokens)) {
+      if (used.has(`${block} ${token}`)) continue
+      problems.push({
+        block,
+        line: 1,
+        icon: token,
+        message: 'PHYSICAL rules this token, but the block no longer uses it — delete the entry',
+      })
+    }
+  }
+
+  console.log(
+    `\ncheck-rtl: positions — ${followed} follow the text, ${centred} centring ` +
+      `idioms, ${kept} ruled physical${problems.length ? '' : ', none unruled'}.`,
+  )
+  return problems
+}
+
 /* ══ DRIVER ══════════════════════════════════════════════════════════════ */
 
 const fix = process.argv.includes('--fix')
@@ -500,21 +667,19 @@ if (all.length === 0) {
 
   if (!fix) {
     console.log('\nRun with --fix to rewrite them. Positioning (left-/right-) is')
-    console.log('deliberately left alone — see the header for why.')
+    console.log('never rewritten — it is ruled by hand in PART THREE.')
   }
 }
 
-const problems = auditDirectionalIcons()
-
-if (problems.length > 0) {
-  console.error(
-    `\ncheck-rtl: ${problems.length} icon ${problems.length === 1 ? 'problem' : 'problems'}.\n`,
-  )
-  for (const problem of problems) {
-    console.error(
-      `  src/lib/blocks/sources/${problem.block}.tsx:${problem.line}  <${problem.icon}>`,
-    )
+const report = (label: string, found: IconProblem[], show: (token: string) => string) => {
+  if (found.length === 0) return
+  console.error(`\ncheck-rtl: ${found.length} ${label} ${found.length === 1 ? 'problem' : 'problems'}.\n`)
+  for (const problem of found) {
+    console.error(`  src/lib/blocks/sources/${problem.block}.tsx:${problem.line}  ${show(problem.icon)}`)
     console.error(`    ${problem.message}`)
   }
   process.exitCode = 1
 }
+
+report('icon', auditDirectionalIcons(), (icon) => `<${icon}>`)
+report('position', auditPositions(), (token) => token)

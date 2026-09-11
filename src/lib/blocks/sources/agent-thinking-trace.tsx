@@ -194,13 +194,13 @@ export function AgentThinkingTrace({
                 {last ? null : (
                   <span
                     aria-hidden
-                    className="absolute left-[7px] top-6 h-[calc(100%-1rem)] w-px bg-border"
+                    className="absolute start-[7px] top-6 h-[calc(100%-1rem)] w-px bg-border"
                   />
                 )}
 
                 <span
                   aria-hidden
-                  className={`absolute left-1 top-[15px] h-2 w-2 rounded-full ring-4 ring-card ${DOT[state]}`}
+                  className={`absolute start-1 top-[15px] h-2 w-2 rounded-full ring-4 ring-card ${DOT[state]}`}
                 />
 
                 <button

@@ -96,7 +96,7 @@ export function CtaInlineCard({
           <button
             type="button"
             onClick={() => setDismissed(true)}
-            className="absolute right-2 top-2 inline-flex h-7 w-7 items-center justify-center rounded-lg text-muted-foreground transition hover:bg-background hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            className="absolute end-2 top-2 inline-flex h-7 w-7 items-center justify-center rounded-lg text-muted-foreground transition hover:bg-background hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           >
             <X aria-hidden className="h-3.5 w-3.5" />
             <span className="sr-only">Not now — hide this for the rest of my visit</span>

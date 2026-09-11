@@ -283,7 +283,7 @@ function ScopeGroup({
                   />
                   <span
                     aria-hidden
-                    className="absolute left-0.5 top-0.5 block h-4 w-4 rounded-full bg-background transition-transform peer-checked:translate-x-4"
+                    className="absolute start-0.5 top-0.5 block h-4 w-4 rounded-full bg-background transition-transform peer-checked:translate-x-4 rtl:peer-checked:-translate-x-4"
                   />
                 </span>
               </label>

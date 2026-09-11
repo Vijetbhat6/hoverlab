@@ -231,7 +231,7 @@ export function ProductCompareTable({
                 {/* Opaque, or the scrolling column shows through it. */}
                 <th
                   scope="col"
-                  className="sticky left-0 z-10 w-40 bg-card px-3 py-3 text-xs font-medium text-muted-foreground"
+                  className="sticky start-0 z-10 w-40 bg-card px-3 py-3 text-xs font-medium text-muted-foreground"
                 >
                   Specification
                 </th>
@@ -268,7 +268,7 @@ export function ProductCompareTable({
                   <tr key={row.label}>
                     <th
                       scope="row"
-                      className="sticky left-0 z-10 bg-card px-3 py-2.5 text-xs font-medium text-muted-foreground"
+                      className="sticky start-0 z-10 bg-card px-3 py-2.5 text-xs font-medium text-muted-foreground"
                     >
                       {row.label}
                     </th>

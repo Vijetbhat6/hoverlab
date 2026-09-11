@@ -74,7 +74,7 @@ export function ProductGallery({
         <button
           type="button"
           aria-label={`Expand ${view.label}`}
-          className="absolute bottom-3 right-3 rounded-full bg-background/85 p-2.5 text-muted-foreground opacity-0 backdrop-blur transition-all hover:text-foreground focus-visible:opacity-100 group-hover:opacity-100"
+          className="absolute bottom-3 end-3 rounded-full bg-background/85 p-2.5 text-muted-foreground opacity-0 backdrop-blur transition-all hover:text-foreground focus-visible:opacity-100 group-hover:opacity-100"
         >
           <Expand aria-hidden className="h-4 w-4" />
         </button>

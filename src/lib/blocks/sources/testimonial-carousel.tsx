@@ -115,12 +115,17 @@ export function TestimonialCarousel({
     One handler for both ends, run on scroll and once on mount. The 1px slack
     absorbs sub-pixel scroll positions, which otherwise leave the "next"
     arrow enabled at the very end on fractional-DPI displays.
+
+    `Math.abs` because right-to-left, `scrollLeft` starts at 0 and runs
+    NEGATIVE towards the end. Read raw, the rail reports itself at the
+    start forever and never reaches the end.
   */
   const syncEnds = React.useCallback(() => {
     const rail = railRef.current
     if (!rail) return
-    setAtStart(rail.scrollLeft <= 1)
-    setAtEnd(rail.scrollLeft + rail.clientWidth >= rail.scrollWidth - 1)
+    const offset = Math.abs(rail.scrollLeft)
+    setAtStart(offset <= 1)
+    setAtEnd(offset + rail.clientWidth >= rail.scrollWidth - 1)
   }, [])
 
   React.useEffect(() => {
@@ -138,7 +143,9 @@ export function TestimonialCarousel({
     if (!rail) return
     const card = rail.firstElementChild as HTMLElement | null
     const step = card ? card.offsetWidth + 24 : rail.clientWidth * 0.8
-    rail.scrollBy({ left: step * direction, behavior: 'smooth' })
+    // `scrollBy` takes a physical offset, and "next" is leftwards in RTL.
+    const physical = getComputedStyle(rail).direction === 'rtl' ? -1 : 1
+    rail.scrollBy({ left: step * direction * physical, behavior: 'smooth' })
   }
 
   const arrowClass =

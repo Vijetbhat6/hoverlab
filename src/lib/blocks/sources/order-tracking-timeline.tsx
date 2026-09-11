@@ -184,7 +184,7 @@ export function OrderTrackingTimeline({
                 {last ? null : (
                   <span
                     aria-hidden
-                    className={`absolute left-[13px] top-7 h-[calc(100%-1.75rem)] w-px ${
+                    className={`absolute start-[13px] top-7 h-[calc(100%-1.75rem)] w-px ${
                       step.state === 'done' ? 'bg-primary/40' : 'bg-border'
                     }`}
                   />

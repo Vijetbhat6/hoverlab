@@ -127,7 +127,7 @@ export function ToastStack({ duration = 5000, className = '' }: ToastStackProps)
         onMouseLeave={() => setPaused(false)}
         onFocusCapture={() => setPaused(true)}
         onBlurCapture={() => setPaused(false)}
-        className="pointer-events-none absolute bottom-6 right-6 flex w-full max-w-sm flex-col gap-2"
+        className="pointer-events-none absolute bottom-6 end-6 flex w-full max-w-sm flex-col gap-2"
       >
         {toasts.map((toast) => {
           const { Icon, tone, ring } = VARIANTS[toast.variant]

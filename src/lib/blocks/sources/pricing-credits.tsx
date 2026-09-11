@@ -130,7 +130,7 @@ export function PricingCredits({
             }`}
           >
             {pack.featured ? (
-              <span className="absolute -top-3 left-8 inline-flex items-center gap-1 rounded-full bg-primary px-3 py-1 text-xs font-semibold text-primary-foreground">
+              <span className="absolute -top-3 start-8 inline-flex items-center gap-1 rounded-full bg-primary px-3 py-1 text-xs font-semibold text-primary-foreground">
                 <Sparkles aria-hidden className="h-3.5 w-3.5" />
                 Most bought
               </span>

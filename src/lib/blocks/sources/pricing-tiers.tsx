@@ -114,7 +114,7 @@ export function PricingTiers({
           <span
             aria-hidden
             className={`absolute top-0.5 h-4 w-4 rounded-full bg-background shadow transition-all ${
-              yearly ? 'left-6' : 'left-0.5'
+              yearly ? 'start-6' : 'start-0.5'
             }`}
           />
         </button>

@@ -163,7 +163,7 @@ export function ChatModelPicker({
           id="model-listbox"
           role="listbox"
           aria-label="Model"
-          className="absolute left-0 right-0 top-full z-10 mt-2 overflow-hidden rounded-xl border border-border bg-card shadow-xl"
+          className="absolute inset-x-0 top-full z-10 mt-2 overflow-hidden rounded-xl border border-border bg-card shadow-xl"
         >
           <ul className="max-h-96 overflow-y-auto">
             {models.map((model) => {

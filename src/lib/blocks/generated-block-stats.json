@@ -132,7 +132,7 @@
     "files": 1
   },
   "slide-over-panel": {
-    "lines": 207,
+    "lines": 208,
     "files": 1
   },
   "filter-drawer-facets": {
@@ -196,7 +196,7 @@
     "files": 1
   },
   "notification-preferences": {
-    "lines": 271,
+    "lines": 273,
     "files": 1
   },
   "push-permission-prompt": {
@@ -336,7 +336,7 @@
     "files": 1
   },
   "testimonial-carousel": {
-    "lines": 252,
+    "lines": 259,
     "files": 1
   },
   "testimonial-video": {
@@ -512,7 +512,7 @@
     "files": 1
   },
   "dashboard-alert-rules": {
-    "lines": 280,
+    "lines": 282,
     "files": 1
   },
   "data-table-sortable": {

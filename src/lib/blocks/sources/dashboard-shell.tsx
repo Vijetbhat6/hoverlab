@@ -140,13 +140,13 @@ export function DashboardShell({
             role="dialog"
             aria-modal="true"
             aria-label="Navigation"
-            className="absolute inset-y-0 left-0 z-40 w-60 border-e border-border/60 bg-card shadow-xl lg:hidden"
+            className="absolute inset-y-0 start-0 z-40 w-60 border-e border-border/60 bg-card shadow-xl lg:hidden"
           >
             <button
               type="button"
               onClick={() => setOpen(false)}
               aria-label="Close navigation"
-              className="absolute right-2 top-3 rounded-lg p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+              className="absolute end-2 top-3 rounded-lg p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
             >
               <X aria-hidden className="h-4 w-4" />
             </button>
@@ -181,7 +181,7 @@ export function DashboardShell({
           <div className="relative max-w-xs flex-1">
             <Search
               aria-hidden
-              className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground"
+              className="pointer-events-none absolute start-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground"
             />
             <input
               type="search"
@@ -199,7 +199,7 @@ export function DashboardShell({
             <Bell aria-hidden className="h-4 w-4" />
             <span
               aria-hidden
-              className="absolute right-1.5 top-1.5 h-2 w-2 rounded-full bg-primary ring-2 ring-background"
+              className="absolute end-1.5 top-1.5 h-2 w-2 rounded-full bg-primary ring-2 ring-background"
             />
           </button>
         </header>

@@ -121,7 +121,7 @@ export function AnnouncementBar({
           // several dismissible things, and "Close" three times over tells
           // a screen-reader user nothing about which is which.
           aria-label={`Dismiss ${label.toLowerCase()}`}
-          className="absolute right-2 top-1/2 -translate-y-1/2 rounded-lg p-2 text-muted-foreground transition-colors hover:bg-background/60 hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:right-4"
+          className="absolute end-2 top-1/2 -translate-y-1/2 rounded-lg p-2 text-muted-foreground transition-colors hover:bg-background/60 hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:end-4"
         >
           <X aria-hidden className="h-4 w-4" />
         </button>

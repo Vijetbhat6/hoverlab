@@ -253,7 +253,9 @@ export function NotificationPreferences({
                         <span
                           aria-hidden
                           className={`pointer-events-none block h-5 w-5 rounded-full bg-background shadow-sm motion-safe:transition-transform ${
-                            on ? 'translate-x-[1.375rem]' : 'translate-x-0.5'
+                            on
+                              ? 'translate-x-[1.375rem] rtl:-translate-x-[1.375rem]'
+                              : 'translate-x-0.5 rtl:-translate-x-0.5'
                           }`}
                         />
                       </button>

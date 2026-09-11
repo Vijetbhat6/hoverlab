@@ -257,8 +257,10 @@ export function DashboardAlertRules({
                 >
                   <span
                     aria-hidden
-                    className={`absolute top-0.5 h-5 w-5 rounded-full bg-background transition-transform ${
-                      rule.enabled ? 'translate-x-[22px]' : 'translate-x-[2px]'
+                    className={`absolute start-0 top-0.5 h-5 w-5 rounded-full bg-background transition-transform ${
+                      rule.enabled
+                        ? 'translate-x-[22px] rtl:-translate-x-[22px]'
+                        : 'translate-x-[2px] rtl:-translate-x-[2px]'
                     }`}
                   />
                 </button>
