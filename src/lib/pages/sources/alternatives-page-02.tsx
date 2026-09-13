@@ -70,11 +70,19 @@ const PRODUCTS = [
   },
 ]
 
+/*
+  No `numeric` on any row. <ProductCompareTable> is a client component, and
+  a function cannot cross that boundary from a server page — passing one
+  compiles, type-checks and renders in isolation, then fails the production
+  build during prerender. The block's `defaultNumeric` reads "12", "94%" and
+  "6 weeks" correctly, and declines to mark a winner on anything it cannot
+  parse, which is what the four 'none' rows below want anyway.
+*/
 const ROWS = [
-  { label: 'Entities included', better: 'higher' as const, numeric: (v: string) => Number(v) },
-  { label: 'Auto-match, median at 12 weeks', better: 'higher' as const, numeric: (v: string) => parseFloat(v) },
+  { label: 'Entities included', better: 'higher' as const },
+  { label: 'Auto-match, median at 12 weeks', better: 'higher' as const },
   { label: 'Rule editor for your team', better: 'none' as const },
-  { label: 'Time to first close', better: 'lower' as const, numeric: (v: string) => parseInt(v, 10) },
+  { label: 'Time to first close', better: 'lower' as const },
   { label: 'SOC 2', better: 'none' as const },
   { label: 'Self-hosting', better: 'none' as const },
   { label: 'Data export on cancellation', better: 'none' as const },

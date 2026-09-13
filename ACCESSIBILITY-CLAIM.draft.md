@@ -16,7 +16,7 @@ Accessibility Act is met by conforming to.
 
 ## The proposed claim
 
-> Every one of the 372 components in this catalog is checked, on every build, against 10 WCAG 2.2 Level AA success criteria that can be decided from source.
+> Every one of the 392 components in this catalog is checked, on every build, against 10 WCAG 2.2 Level AA success criteria that can be decided from source.
 
 > This is a statement about each artifact's source — the exact text you copy — and not about a rendered page, a website, or the product you paste it into.
 >
@@ -29,7 +29,7 @@ Accessibility Act is met by conforming to.
 
 ## What the claim rests on
 
-- **372 artifacts** — 285 blocks, 87 pages.
+- **392 artifacts** — 285 blocks, 107 pages.
 - **18 rules** over **10 success criteria**: 1.1.1, 1.3.1, 1.4.2, 2.1.1, 2.4.3, 2.5.7, 2.5.8, 3.3.2, 3.3.8, 4.1.2.
 - **0 violations** and **0 advisories** at the time of writing.
 

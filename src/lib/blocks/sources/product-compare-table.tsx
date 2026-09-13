@@ -58,8 +58,40 @@ export interface CompareRow {
   label: string
   /** How to read the row, or 'none' where "best" is a matter of taste. */
   better: 'higher' | 'lower' | 'none'
-  /** Extracts the comparable number from a display value. */
+  /**
+   * Extracts the comparable number from a display value.
+   *
+   * Optional, and in practice you should leave it out. This block is
+   * `'use client'`, so a function here cannot reach it from a server
+   * component — React refuses with "Functions cannot be passed directly to
+   * Client Components", at build time, during prerender. Every page in the
+   * catalog is a server component, so that is nearly every caller.
+   *
+   * `DEFAULT_ROWS` below still uses functions because module-level defaults
+   * never cross a boundary. Anyone passing `rows` gets `defaultNumeric`,
+   * which handles the shapes these tables actually hold.
+   */
   numeric?: (value: string) => number
+}
+
+/**
+ * Pull the comparable number out of a display value.
+ *
+ * The fallback for every row that does not carry its own `numeric` — which
+ * is every row a server component can pass, since a function cannot cross
+ * that boundary into a client block. Before this existed, `better: 'higher'`
+ * from a server page silently highlighted nothing, and supplying the
+ * obvious fix (a `numeric` function) failed the production build rather
+ * than the dev render.
+ *
+ * Strips everything but digits and a decimal point, so "€490/mo" reads 490,
+ * "94%" reads 94 and "6 weeks" reads 6. A value with no digits yields NaN,
+ * and `bestIds` already refuses to mark a winner on any row where a cell
+ * does not parse — so guessing here cannot produce a wrong highlight, only
+ * no highlight.
+ */
+function defaultNumeric(value: string): number {
+  return parseFloat(value.replace(/[^\d.]/g, ''))
 }
 
 export interface ProductCompareTableProps {
@@ -149,8 +181,9 @@ export function ProductCompareTable({
 
   /* Direction comes from the row, so nothing declares a winner by guess. */
   const bestIds = (row: CompareRow) => {
-    if (row.better === 'none' || !row.numeric || shown.length < 2) return []
-    const scored = shown.map((p) => ({ id: p.id, n: row.numeric!(p.values[row.label] ?? '') }))
+    const read = row.numeric ?? defaultNumeric
+    if (row.better === 'none' || shown.length < 2) return []
+    const scored = shown.map((p) => ({ id: p.id, n: read(p.values[row.label] ?? '') }))
     if (scored.some((s) => Number.isNaN(s.n))) return []
     const target =
       row.better === 'higher'
