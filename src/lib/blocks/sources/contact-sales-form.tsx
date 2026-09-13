@@ -73,6 +73,10 @@ export function ContactSalesForm({
   onSubmit,
   className,
 }: ContactSalesFormProps) {
+  // Per-instance ids. A literal id in a reusable component is a
+  // collision waiting for the second copy on the page — and a <label>
+  // then resolves to whichever input rendered first.
+  const uid = React.useId()
   const [status, setStatus] = React.useState<Status>('idle')
   const [message, setMessage] = React.useState('')
 
@@ -96,12 +100,12 @@ export function ContactSalesForm({
 
   return (
     <section
-      aria-labelledby="contact-sales-form-heading"
+      aria-labelledby={`${uid}-contact-sales-form-heading`}
       className={`w-full bg-background px-6 py-16 ${className ?? ''}`}
     >
       <div className="mx-auto max-w-md rounded-xl border border-border bg-card p-8 shadow-sm">
         <h2
-          id="contact-sales-form-heading"
+          id={`${uid}-contact-sales-form-heading`}
           className="text-xl font-semibold tracking-tight text-card-foreground"
         >
           {heading}
@@ -117,22 +121,22 @@ export function ContactSalesForm({
                 aria-describedby is for.
               */}
               <label
-                htmlFor={`contact-sales-form-${field.name}`}
+                htmlFor={`${uid}-contact-sales-form-${field.name}`}
                 className="block text-sm font-medium text-foreground"
               >
                 {field.label}
               </label>
               <input
-                id={`contact-sales-form-${field.name}`}
+                id={`${uid}-contact-sales-form-${field.name}`}
                 name={field.name}
                 type={field.type}
                 required
-                aria-describedby={field.hint ? `contact-sales-form-${field.name}-hint` : undefined}
+                aria-describedby={field.hint ? `${uid}-contact-sales-form-${field.name}-hint` : undefined}
                 className="mt-1.5 w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               />
               {field.hint ? (
                 <p
-                  id={`contact-sales-form-${field.name}-hint`}
+                  id={`${uid}-contact-sales-form-${field.name}-hint`}
                   className="mt-1 text-xs text-muted-foreground"
                 >
                   {field.hint}

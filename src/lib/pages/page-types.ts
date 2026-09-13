@@ -70,6 +70,26 @@ export interface Page
   deps: string[]
   /** Block ids this page renders. Must match what the source imports. */
   composedOf: string[]
+  /**
+   * The page this one is a second take on — set on take 02 only, naming
+   * take 01's id.
+   *
+   * One layout is a bet. Two takes of the same page type turn that bet
+   * into a choice, which is the difference between a template and a
+   * catalog: the reader stops asking "is this the layout?" and starts
+   * asking "which of these two is mine?".
+   *
+   * Deliberately one-directional. The alternative — a symmetric `takes:
+   * string[]` on both — has to be edited in two places to stay true, and
+   * the half that gets forgotten is the half that renders a dead link.
+   * Take 01 never mentions its sibling; the index derives that with
+   * `takesOfPage`, so the pair cannot fall out of step.
+   *
+   * Not chainable: a take 02 may not itself be a take of a take. See
+   * `scripts/check-page-takes.mts`, which fails the build on a self-
+   * reference, a chain, or an id that resolves to nothing.
+   */
+  takeOf?: string
 }
 
 /** A page without its source — what the client-side index carries. */

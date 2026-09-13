@@ -54,5 +54,52 @@ export function pagesUsingBlock(blockId: string): PageMeta[] {
   return PAGE_INDEX.filter((p) => p.composedOf.includes(blockId))
 }
 
+/* ------------------------------------------------------------------ *
+ *  Takes
+ * ------------------------------------------------------------------ */
+
+/** Take 01's id → the takes that name it, in catalog order. */
+const TAKES_BY_ORIGIN = PAGE_INDEX.reduce((acc, p) => {
+  if (!p.takeOf) return acc
+  acc.set(p.takeOf, [...(acc.get(p.takeOf) ?? []), p])
+  return acc
+}, new Map<string, PageMeta[]>())
+
+/**
+ * Every take of the page type `id` belongs to, take 01 first — or an empty
+ * array when this page type only has the one layout.
+ *
+ * Works from either end of the pair: given take 02 it walks up to take 01
+ * first, so a caller never has to know which half it is holding. Empty
+ * rather than `[self]` for a lone page, because the only question the UI
+ * asks is "is there another take?" and a one-element answer would have
+ * every caller writing `length > 1`.
+ */
+export function takesOfPage(id: string): PageMeta[] {
+  const page = BY_ID.get(id)
+  if (!page) return []
+
+  const originId = page.takeOf ?? page.id
+  const origin = BY_ID.get(originId)
+  if (!origin) return []
+
+  const siblings = TAKES_BY_ORIGIN.get(originId) ?? []
+  return siblings.length > 0 ? [origin, ...siblings] : []
+}
+
+/**
+ * Which take this page is, 1-based, for the "Take 2 of 2" label.
+ *
+ * Returns `undefined` for a page type with a single layout — the label is
+ * noise when there is nothing to choose between.
+ */
+export function takeNumber(id: string): { n: number; of: number } | undefined {
+  const takes = takesOfPage(id)
+  if (takes.length === 0) return undefined
+
+  const n = takes.findIndex((p) => p.id === id)
+  return n === -1 ? undefined : { n: n + 1, of: takes.length }
+}
+
 /** Curated picks. */
 export const FEATURED_PAGES: PageMeta[] = PAGE_INDEX.filter((p) => p.featured)

@@ -96,6 +96,10 @@ export function AppliedFiltersBar({
   onChange,
   className = '',
 }: AppliedFiltersBarProps) {
+  // Per-instance ids. A literal id in a reusable component is a
+  // collision waiting for the second copy on the page — and a <label>
+  // then resolves to whichever input rendered first.
+  const uid = React.useId()
   const [active, setActive] = React.useState(filters)
   const [sort, setSort] = React.useState(sortOptions[0]?.value ?? '')
 
@@ -126,10 +130,10 @@ export function AppliedFiltersBar({
 
   return (
     <section
-      aria-labelledby="filters-bar-heading"
+      aria-labelledby={`${uid}-filters-bar-heading`}
       className={`mx-auto w-full max-w-4xl px-4 py-16 sm:px-6 lg:px-8 ${className}`}
     >
-      <h2 id="filters-bar-heading" className="sr-only">
+      <h2 id={`${uid}-filters-bar-heading`} className="sr-only">
         Active filters and sorting
       </h2>
 

@@ -51,6 +51,29 @@ const METRICS: StatsBenchmarkBandMetric[] = [
   { label: "Memory ceiling", value: "512 MB", detail: "Peak RSS under the throughput run above." },
 ]
 
+/**
+ * A per-instance heading id, derived rather than generated.
+ *
+ * `React.useId()` is the textbook fix for a literal id in a reusable
+ * component and is not available here: this block has no `'use client'`
+ * and does not warrant one. It renders text, and a band that hydrates on
+ * every page to render text is a cost with nothing on the other side of
+ * it. Same call, and the same reasoning, as `footer-mega`.
+ *
+ * Hashing the heading *and* the intro is deliberate. Either alone works
+ * until two callers happen to agree, which is exactly what a catalog hub
+ * rendering every page into one document arranges for; between them they
+ * are the two props nobody leaves at the default.
+ */
+function headingId(heading: string, intro: string): string {
+  let hash = 0
+  const source = `${heading}|${intro}`
+  for (let i = 0; i < source.length; i++) {
+    hash = (Math.imul(hash, 31) + source.charCodeAt(i)) | 0
+  }
+  return `stats-benchmark-band-heading-${(hash >>> 0).toString(36).slice(0, 4)}`
+}
+
 export function StatsBenchmarkBand({
   eyebrow = "Measured, not claimed",
   heading = "How fast it is, and how we know",
@@ -60,13 +83,13 @@ export function StatsBenchmarkBand({
 }: StatsBenchmarkBandProps) {
   return (
     <section
-      aria-labelledby="stats-benchmark-band-heading"
+      aria-labelledby={headingId(heading, intro)}
       className={`w-full bg-background px-6 py-16 sm:py-20 ${className ?? ''}`}
     >
       <div className="mx-auto max-w-5xl">
         <p className="text-sm font-medium text-primary">{eyebrow}</p>
         <h2
-          id="stats-benchmark-band-heading"
+          id={headingId(heading, intro)}
           className="mt-2 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl"
         >
           {heading}

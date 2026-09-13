@@ -60,6 +60,10 @@ export function HeroBooking({
   onBook,
   className = '',
 }: HeroBookingProps) {
+  // Per-instance ids. A literal id in a reusable component is a
+  // collision waiting for the second copy on the page — and a <label>
+  // then resolves to whichever input rendered first.
+  const uid = React.useId()
   const firstAvailable = days.find((d) => d.slots > 0) ?? days[0]
   const [selected, setSelected] = React.useState(firstAvailable?.day ?? '')
 
@@ -114,7 +118,7 @@ export function HeroBooking({
             <div className="mt-5 grid grid-cols-5 gap-2">
               {days.map((d) => {
                 const unavailable = d.slots === 0
-                const id = `hero-booking-day-${d.day}`
+                const id = `${uid}-hero-booking-day-${d.day}`
 
                 return (
                   <div key={d.day}>

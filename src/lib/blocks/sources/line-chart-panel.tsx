@@ -92,6 +92,29 @@ function niceCeil(value: number, step: number): number {
   return Math.ceil(value / step) * step
 }
 
+/**
+ * A per-instance heading id, derived rather than generated.
+ *
+ * `React.useId()` is the textbook fix for a literal id in a reusable
+ * component and is not available here: this block has no `'use client'`
+ * and does not warrant one. It renders text, and a band that hydrates on
+ * every page to render text is a cost with nothing on the other side of
+ * it. Same call, and the same reasoning, as `footer-mega`.
+ *
+ * Hashing the heading *and* the description is deliberate. Either alone works
+ * until two callers happen to agree, which is exactly what a catalog hub
+ * rendering every page into one document arranges for; between them they
+ * are the two props nobody leaves at the default.
+ */
+function headingId(heading: string, description: string): string {
+  let hash = 0
+  const source = `${heading}|${description}`
+  for (let i = 0; i < source.length; i++) {
+    hash = (Math.imul(hash, 31) + source.charCodeAt(i)) | 0
+  }
+  return `line-chart-heading-${(hash >>> 0).toString(36).slice(0, 4)}`
+}
+
 export function LineChartPanel({
   heading = 'Monthly active workspaces',
   description = 'Compared with the same month last year.',
@@ -121,13 +144,13 @@ export function LineChartPanel({
 
   return (
     <section
-      aria-labelledby="line-chart-heading"
+      aria-labelledby={headingId(heading, description)}
       className={`mx-auto w-full max-w-4xl px-4 py-16 sm:px-6 lg:px-8 ${className}`}
     >
       <div className="rounded-2xl border border-border bg-card p-6 sm:p-8">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
-            <h2 id="line-chart-heading" className="text-lg font-semibold text-foreground">
+            <h2 id={headingId(heading, description)} className="text-lg font-semibold text-foreground">
               {heading}
             </h2>
             <p className="mt-1 text-sm text-muted-foreground">{description}</p>

@@ -9,15 +9,29 @@
 
 import * as React from 'react'
 import Link from 'next/link'
-import { Blocks, FileCode } from 'lucide-react'
+import { Blocks, FileCode, Layers2 } from 'lucide-react'
 import { PageThumbnail } from './page-preview'
 import { UsageCount } from '@/components/usage-count'
+import { takeNumber } from '@/lib/pages/page-index'
 import type { PageMeta } from '@/lib/pages/page-types'
 
 export function PageCard({ page }: { page: PageMeta }) {
+  // Undefined on a page type with only one layout — see takeNumber(). The
+  // badge is the whole point of shipping two takes: on a card it is the
+  // only signal that this layout is a choice rather than the answer.
+  const take = takeNumber(page.id)
+
   return (
     <article className="group relative flex flex-col overflow-hidden rounded-2xl border border-border/60 bg-card/60 p-3 transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-lg">
-      <PageThumbnail componentKey={page.previewComponent} />
+      <div className="relative">
+        <PageThumbnail componentKey={page.previewComponent} />
+        {take ? (
+          <span className="pointer-events-none absolute left-2 top-2 inline-flex items-center gap-1 rounded-full border border-border/60 bg-background/90 px-2 py-0.5 text-[11px] font-medium text-muted-foreground backdrop-blur">
+            <Layers2 aria-hidden className="h-3 w-3" />
+            Take {take.n} of {take.of}
+          </span>
+        ) : null}
+      </div>
 
       <div className="flex flex-1 flex-col p-3">
         <h3 className="font-semibold leading-snug tracking-tight">

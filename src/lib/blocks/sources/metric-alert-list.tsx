@@ -74,16 +74,20 @@ export function MetricAlertList({
   rows = ROWS,
   className,
 }: MetricAlertListProps) {
+  // Per-instance ids. A literal id in a reusable component is a
+  // collision waiting for the second copy on the page — and a <label>
+  // then resolves to whichever input rendered first.
+  const uid = React.useId()
   const [selected, setSelected] = React.useState<string | null>(rows[0]?.id ?? null)
 
   return (
     <section
-      aria-labelledby="metric-alert-list-heading"
+      aria-labelledby={`${uid}-metric-alert-list-heading`}
       className={`w-full bg-background px-6 py-16 ${className ?? ''}`}
     >
       <div className="mx-auto max-w-3xl">
         <h2
-          id="metric-alert-list-heading"
+          id={`${uid}-metric-alert-list-heading`}
           className="text-2xl font-semibold tracking-tight text-foreground"
         >
           {heading}

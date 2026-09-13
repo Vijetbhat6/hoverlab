@@ -14,14 +14,14 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
-import { ArrowLeft, ArrowRight, Blocks, CalendarDays, FileCode, Package, History } from 'lucide-react'
+import { ArrowLeft, ArrowRight, Blocks, CalendarDays, FileCode, Layers2, Package, History } from 'lucide-react'
 import { CodeBlock } from '@/components/code-block'
 import { CopyForAi } from '@/components/copy-for-ai'
 import { JsonLd } from '@/components/json-ld'
 import { PagePreview } from '@/components/pages/page-preview'
 import { PageCard } from '@/components/pages/page-card'
 import { PAGES, getPage, primaryFile } from '@/lib/pages/pages'
-import { getPageMeta, pagesInCategory } from '@/lib/pages/page-index'
+import { getPageMeta, pagesInCategory, takeNumber, takesOfPage } from '@/lib/pages/page-index'
 import { getBlockMeta } from '@/lib/blocks/block-index'
 import { blockCategorySlug } from '@/lib/blocks/block-types'
 import { templatesUsingPage } from '@/lib/templates/template-index'
@@ -92,7 +92,18 @@ export default async function PageDetailPage({ params }: PageProps) {
     .map((id) => getBlockMeta(id))
     .filter((b): b is NonNullable<typeof b> => Boolean(b))
 
-  const related = pagesInCategory(page.category).filter((p) => p.id !== page.id)
+  // Both takes of this page type, take 01 first — empty when this page
+  // type ships a single layout. See takesOfPage().
+  const takes = takesOfPage(page.id)
+  const otherTakes = takes.filter((p) => p.id !== page.id)
+  const take = takeNumber(page.id)
+
+  // The sibling take is excluded here: it gets its own section above, and
+  // showing it twice would read as two different pages rather than one
+  // choice made twice.
+  const related = pagesInCategory(page.category).filter(
+    (p) => p.id !== page.id && !otherTakes.some((t) => t.id === p.id),
+  )
 
   // The upward half — every template that routes to this page. Mirrors
   // `pagesUsingBlock` one rung down, so the ladder climbs the whole way.
@@ -190,6 +201,14 @@ export default async function PageDetailPage({ params }: PageProps) {
           />
 
           <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-muted-foreground">
+            {/* First in the row when it exists: whether this layout is the
+                answer or one of two changes how everything after it reads. */}
+            {take ? (
+              <span className="inline-flex items-center gap-1.5 font-medium text-foreground">
+                <Layers2 aria-hidden className="h-4 w-4" />
+                Take {take.n} of {take.of}
+              </span>
+            ) : null}
             <span className="inline-flex items-center gap-1.5">
               <Blocks aria-hidden className="h-4 w-4" />
               {blocks.length} blocks
@@ -262,6 +281,33 @@ export default async function PageDetailPage({ params }: PageProps) {
             below is a live block, not a screenshot.
           </p>
         </section>
+
+        {/* ---------------------------------------------------------- *
+         *  The other take
+         *
+         *  Above "Built from" on purpose. Which of the two layouts you
+         *  want is a bigger decision than which blocks the one you are
+         *  looking at is made of, and it is one a reader cannot make
+         *  unless they know the alternative exists.
+         * ---------------------------------------------------------- */}
+        {otherTakes.length > 0 ? (
+          <section className="mt-12">
+            <h2 className="mb-2 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+              {otherTakes.length === 1 ? 'The other take' : 'The other takes'}
+            </h2>
+            <p className="mb-4 max-w-2xl text-sm text-muted-foreground">
+              Same page type, different bet about what the reader came for.
+              Neither is the &ldquo;correct&rdquo; one — pick the layout whose
+              opening section matches the question your visitors arrive with.
+            </p>
+
+            <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+              {otherTakes.map((p) => (
+                <PageCard key={p.id} page={p} />
+              ))}
+            </div>
+          </section>
+        ) : null}
 
         {/* ---------------------------------------------------------- *
          *  Built from — the drill-down

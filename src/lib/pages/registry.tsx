@@ -104,6 +104,27 @@ import TestimonialsPage from './sources/testimonials-page'
 import GalleryPage from './sources/gallery-page'
 import PortfolioIndexPage from './sources/portfolio-index-page'
 
+import AboutPage02 from './sources/about-page-02'
+import ContactPage02 from './sources/contact-page-02'
+import TeamPage02 from './sources/team-page-02'
+import FaqPage02 from './sources/faq-page-02'
+import CaseStudyPage02 from './sources/case-study-page-02'
+import CaseStudyIndexPage02 from './sources/case-study-index-page-02'
+import ServicesPage02 from './sources/services-page-02'
+import IntegrationsIndexPage02 from './sources/integrations-index-page-02'
+import IntegrationDetailPage02 from './sources/integration-detail-page-02'
+import AlternativesPage02 from './sources/alternatives-page-02'
+import StatusPage02 from './sources/status-page-02'
+import RoadmapPage02 from './sources/roadmap-page-02'
+import WebinarPage02 from './sources/webinar-page-02'
+import ComingSoonPage02 from './sources/coming-soon-page-02'
+import LegalPage02 from './sources/legal-page-02'
+import CommunityPage02 from './sources/community-page-02'
+import AffiliatePage02 from './sources/affiliate-page-02'
+import TestimonialsPage02 from './sources/testimonials-page-02'
+import GalleryPage02 from './sources/gallery-page-02'
+import PortfolioIndexPage02 from './sources/portfolio-index-page-02'
+
 export const PAGE_PREVIEWS: Record<string, React.ReactNode> = {
   'saas-landing-page': <SaasLandingPage />,
   'waitlist-landing-page': <WaitlistLandingPage />,
@@ -196,6 +217,28 @@ export const PAGE_PREVIEWS: Record<string, React.ReactNode> = {
   'testimonials-page': <TestimonialsPage />,
   'gallery-page': <GalleryPage />,
   'portfolio-index-page': <PortfolioIndexPage />,
+
+  /* Second takes — see Page['takeOf']. */
+  'about-page-02': <AboutPage02 />,
+  'contact-page-02': <ContactPage02 />,
+  'team-page-02': <TeamPage02 />,
+  'faq-page-02': <FaqPage02 />,
+  'case-study-page-02': <CaseStudyPage02 />,
+  'case-study-index-page-02': <CaseStudyIndexPage02 />,
+  'services-page-02': <ServicesPage02 />,
+  'integrations-index-page-02': <IntegrationsIndexPage02 />,
+  'integration-detail-page-02': <IntegrationDetailPage02 />,
+  'alternatives-page-02': <AlternativesPage02 />,
+  'status-page-02': <StatusPage02 />,
+  'roadmap-page-02': <RoadmapPage02 />,
+  'webinar-page-02': <WebinarPage02 />,
+  'coming-soon-page-02': <ComingSoonPage02 />,
+  'legal-page-02': <LegalPage02 />,
+  'community-page-02': <CommunityPage02 />,
+  'affiliate-page-02': <AffiliatePage02 />,
+  'testimonials-page-02': <TestimonialsPage02 />,
+  'gallery-page-02': <GalleryPage02 />,
+  'portfolio-index-page-02': <PortfolioIndexPage02 />,
 }
 
 /** The rendered preview for a page, or undefined if the key is unknown. */

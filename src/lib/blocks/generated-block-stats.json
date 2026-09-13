@@ -48,7 +48,7 @@
     "files": 1
   },
   "hero-booking": {
-    "lines": 164,
+    "lines": 168,
     "files": 1
   },
   "hero-price-anchor": {
@@ -116,11 +116,11 @@
     "files": 1
   },
   "contact-sales-form": {
-    "lines": 171,
+    "lines": 175,
     "files": 1
   },
   "support-ticket-form": {
-    "lines": 165,
+    "lines": 169,
     "files": 1
   },
   "confirm-dialog": {
@@ -128,7 +128,7 @@
     "files": 1
   },
   "cookie-consent": {
-    "lines": 228,
+    "lines": 232,
     "files": 1
   },
   "slide-over-panel": {
@@ -184,7 +184,7 @@
     "files": 1
   },
   "data-migration-split": {
-    "lines": 135,
+    "lines": 158,
     "files": 1
   },
   "toast-stack": {
@@ -212,7 +212,7 @@
     "files": 1
   },
   "notification-channel-list": {
-    "lines": 138,
+    "lines": 142,
     "files": 1
   },
   "stats-band": {
@@ -236,7 +236,7 @@
     "files": 1
   },
   "stats-benchmark-band": {
-    "lines": 98,
+    "lines": 121,
     "files": 1
   },
   "security-posture-band": {
@@ -288,7 +288,7 @@
     "files": 1
   },
   "integration-depth-split": {
-    "lines": 134,
+    "lines": 157,
     "files": 1
   },
   "pricing-tiers": {
@@ -344,7 +344,7 @@
     "files": 1
   },
   "customer-outcome-band": {
-    "lines": 98,
+    "lines": 121,
     "files": 1
   },
   "faq-accordion": {
@@ -368,11 +368,11 @@
     "files": 1
   },
   "faq-objection-list": {
-    "lines": 143,
+    "lines": 147,
     "files": 1
   },
   "security-faq-list": {
-    "lines": 139,
+    "lines": 143,
     "files": 1
   },
   "changelog-timeline": {
@@ -432,11 +432,11 @@
     "files": 1
   },
   "referral-waitlist-form": {
-    "lines": 170,
+    "lines": 174,
     "files": 1
   },
   "demo-request-form": {
-    "lines": 164,
+    "lines": 168,
     "files": 1
   },
   "auth-login-card": {
@@ -672,7 +672,7 @@
     "files": 1
   },
   "line-chart-panel": {
-    "lines": 254,
+    "lines": 277,
     "files": 1
   },
   "donut-breakdown": {
@@ -688,7 +688,7 @@
     "files": 1
   },
   "metric-alert-list": {
-    "lines": 137,
+    "lines": 141,
     "files": 1
   },
   "kpi-summary-band": {
@@ -776,7 +776,7 @@
     "files": 1
   },
   "applied-filters-bar": {
-    "lines": 234,
+    "lines": 238,
     "files": 1
   },
   "search-autocomplete": {
@@ -784,7 +784,7 @@
     "files": 1
   },
   "search-facet-panel": {
-    "lines": 272,
+    "lines": 276,
     "files": 1
   },
   "search-scope-switcher": {
@@ -1008,7 +1008,7 @@
     "files": 1
   },
   "collection-story-split": {
-    "lines": 134,
+    "lines": 157,
     "files": 1
   },
   "product-gallery": {
@@ -1100,7 +1100,7 @@
     "files": 1
   },
   "review-distribution-band": {
-    "lines": 102,
+    "lines": 125,
     "files": 1
   },
   "warranty-coverage-panel": {

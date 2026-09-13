@@ -346,5 +346,85 @@
   "portfolio-index-page": {
     "lines": 144,
     "files": 1
+  },
+  "about-page-02": {
+    "lines": 170,
+    "files": 1
+  },
+  "contact-page-02": {
+    "lines": 147,
+    "files": 1
+  },
+  "team-page-02": {
+    "lines": 154,
+    "files": 1
+  },
+  "faq-page-02": {
+    "lines": 215,
+    "files": 1
+  },
+  "case-study-page-02": {
+    "lines": 153,
+    "files": 1
+  },
+  "case-study-index-page-02": {
+    "lines": 205,
+    "files": 1
+  },
+  "services-page-02": {
+    "lines": 185,
+    "files": 1
+  },
+  "integrations-index-page-02": {
+    "lines": 193,
+    "files": 1
+  },
+  "integration-detail-page-02": {
+    "lines": 309,
+    "files": 1
+  },
+  "alternatives-page-02": {
+    "lines": 211,
+    "files": 1
+  },
+  "status-page-02": {
+    "lines": 237,
+    "files": 1
+  },
+  "roadmap-page-02": {
+    "lines": 180,
+    "files": 1
+  },
+  "webinar-page-02": {
+    "lines": 192,
+    "files": 1
+  },
+  "coming-soon-page-02": {
+    "lines": 116,
+    "files": 1
+  },
+  "legal-page-02": {
+    "lines": 200,
+    "files": 1
+  },
+  "community-page-02": {
+    "lines": 137,
+    "files": 1
+  },
+  "affiliate-page-02": {
+    "lines": 212,
+    "files": 1
+  },
+  "testimonials-page-02": {
+    "lines": 229,
+    "files": 1
+  },
+  "gallery-page-02": {
+    "lines": 209,
+    "files": 1
+  },
+  "portfolio-index-page-02": {
+    "lines": 169,
+    "files": 1
   }
 }

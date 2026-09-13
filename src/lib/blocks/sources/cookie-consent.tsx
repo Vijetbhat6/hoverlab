@@ -105,6 +105,10 @@ export function CookieConsent({
   onDecide,
   className = '',
 }: CookieConsentProps) {
+  // Per-instance ids. A literal id in a reusable component is a
+  // collision waiting for the second copy on the page — and a <label>
+  // then resolves to whichever input rendered first.
+  const uid = React.useId()
   const [open, setOpen] = React.useState(true)
   const [showDetail, setShowDetail] = React.useState(false)
 
@@ -131,7 +135,7 @@ export function CookieConsent({
         role="dialog"
         // Not modal on purpose: see the note above on cookie walls.
         aria-modal={false}
-        aria-labelledby="cookie-consent-heading"
+        aria-labelledby={`${uid}-cookie-consent-heading`}
         className="absolute inset-x-0 bottom-0 z-10 p-4 sm:p-6"
       >
         <div className="mx-auto max-w-3xl rounded-2xl border border-border/60 bg-card p-5 shadow-lg sm:p-6">
@@ -140,7 +144,7 @@ export function CookieConsent({
               <Cookie aria-hidden className="h-5 w-5 text-muted-foreground" />
             </div>
             <div className="min-w-0">
-              <h2 id="cookie-consent-heading" className="font-semibold">
+              <h2 id={`${uid}-cookie-consent-heading`} className="font-semibold">
                 {heading}
               </h2>
               <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
@@ -157,7 +161,7 @@ export function CookieConsent({
 
           {showDetail ? (
             <fieldset
-              id="cookie-consent-categories"
+              id={`${uid}-cookie-consent-categories`}
               className="mt-5 space-y-3 border-t border-border/60 pt-5"
             >
               <legend className="sr-only">Cookie categories</legend>
@@ -200,7 +204,7 @@ export function CookieConsent({
               type="button"
               onClick={() => setShowDetail((v) => !v)}
               aria-expanded={showDetail}
-              aria-controls="cookie-consent-categories"
+              aria-controls={`${uid}-cookie-consent-categories`}
               className="rounded-xl px-4 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground sm:me-auto"
             >
               {showDetail ? 'Hide options' : 'Choose what to allow'}

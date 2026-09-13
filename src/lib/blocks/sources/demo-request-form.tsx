@@ -66,6 +66,10 @@ export function DemoRequestForm({
   onSubmit,
   className,
 }: DemoRequestFormProps) {
+  // Per-instance ids. A literal id in a reusable component is a
+  // collision waiting for the second copy on the page — and a <label>
+  // then resolves to whichever input rendered first.
+  const uid = React.useId()
   const [status, setStatus] = React.useState<Status>('idle')
   const [message, setMessage] = React.useState('')
 
@@ -89,12 +93,12 @@ export function DemoRequestForm({
 
   return (
     <section
-      aria-labelledby="demo-request-form-heading"
+      aria-labelledby={`${uid}-demo-request-form-heading`}
       className={`w-full bg-background px-6 py-16 ${className ?? ''}`}
     >
       <div className="mx-auto max-w-md rounded-xl border border-border bg-card p-8 shadow-sm">
         <h2
-          id="demo-request-form-heading"
+          id={`${uid}-demo-request-form-heading`}
           className="text-xl font-semibold tracking-tight text-card-foreground"
         >
           {heading}
@@ -110,22 +114,22 @@ export function DemoRequestForm({
                 aria-describedby is for.
               */}
               <label
-                htmlFor={`demo-request-form-${field.name}`}
+                htmlFor={`${uid}-demo-request-form-${field.name}`}
                 className="block text-sm font-medium text-foreground"
               >
                 {field.label}
               </label>
               <input
-                id={`demo-request-form-${field.name}`}
+                id={`${uid}-demo-request-form-${field.name}`}
                 name={field.name}
                 type={field.type}
                 required
-                aria-describedby={field.hint ? `demo-request-form-${field.name}-hint` : undefined}
+                aria-describedby={field.hint ? `${uid}-demo-request-form-${field.name}-hint` : undefined}
                 className="mt-1.5 w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               />
               {field.hint ? (
                 <p
-                  id={`demo-request-form-${field.name}-hint`}
+                  id={`${uid}-demo-request-form-${field.name}-hint`}
                   className="mt-1 text-xs text-muted-foreground"
                 >
                   {field.hint}

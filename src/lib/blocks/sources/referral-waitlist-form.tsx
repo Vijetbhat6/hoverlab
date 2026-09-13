@@ -72,6 +72,10 @@ export function ReferralWaitlistForm({
   onSubmit,
   className,
 }: ReferralWaitlistFormProps) {
+  // Per-instance ids. A literal id in a reusable component is a
+  // collision waiting for the second copy on the page — and a <label>
+  // then resolves to whichever input rendered first.
+  const uid = React.useId()
   const [status, setStatus] = React.useState<Status>('idle')
   const [message, setMessage] = React.useState('')
 
@@ -95,12 +99,12 @@ export function ReferralWaitlistForm({
 
   return (
     <section
-      aria-labelledby="referral-waitlist-form-heading"
+      aria-labelledby={`${uid}-referral-waitlist-form-heading`}
       className={`w-full bg-background px-6 py-16 ${className ?? ''}`}
     >
       <div className="mx-auto max-w-md rounded-xl border border-border bg-card p-8 shadow-sm">
         <h2
-          id="referral-waitlist-form-heading"
+          id={`${uid}-referral-waitlist-form-heading`}
           className="text-xl font-semibold tracking-tight text-card-foreground"
         >
           {heading}
@@ -116,22 +120,22 @@ export function ReferralWaitlistForm({
                 aria-describedby is for.
               */}
               <label
-                htmlFor={`referral-waitlist-form-${field.name}`}
+                htmlFor={`${uid}-referral-waitlist-form-${field.name}`}
                 className="block text-sm font-medium text-foreground"
               >
                 {field.label}
               </label>
               <input
-                id={`referral-waitlist-form-${field.name}`}
+                id={`${uid}-referral-waitlist-form-${field.name}`}
                 name={field.name}
                 type={field.type}
                 required
-                aria-describedby={field.hint ? `referral-waitlist-form-${field.name}-hint` : undefined}
+                aria-describedby={field.hint ? `${uid}-referral-waitlist-form-${field.name}-hint` : undefined}
                 className="mt-1.5 w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               />
               {field.hint ? (
                 <p
-                  id={`referral-waitlist-form-${field.name}-hint`}
+                  id={`${uid}-referral-waitlist-form-${field.name}-hint`}
                   className="mt-1 text-xs text-muted-foreground"
                 >
                   {field.hint}

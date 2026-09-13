@@ -123,6 +123,10 @@ export function SearchFacetPanel({
   resultCount = 1_195,
   className = '',
 }: SearchFacetPanelProps) {
+  // Per-instance ids. A literal id in a reusable component is a
+  // collision waiting for the second copy on the page — and a <label>
+  // then resolves to whichever input rendered first.
+  const uid = React.useId()
   const [selected, setSelected] = React.useState<Record<string, string[]>>({
     type: ['block'],
   })
@@ -173,7 +177,7 @@ export function SearchFacetPanel({
       <div className="divide-y divide-border">
         {facets.map((facet) => {
           const open = !collapsed.includes(facet.id)
-          const listId = `facet-${facet.id}`
+          const listId = `${uid}-facet-${facet.id}`
           const limit = facet.visibleLimit ?? facet.options.length
           const showingAll = expandedLists.includes(facet.id)
           const options = showingAll ? facet.options : facet.options.slice(0, limit)
