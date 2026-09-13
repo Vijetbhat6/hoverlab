@@ -19,6 +19,7 @@ import {
   commandDiff,
   commandLogout,
   commandOutdated,
+  commandReview,
   commandSearch,
   commandShow,
   commandSkill,
@@ -33,7 +34,7 @@ const { version } = require('../package.json')
 /** Flags that take a value; everything else is boolean. */
 const VALUE_FLAGS = new Set([
   'framework', 'dir', 'category', 'limit', 'level', 'hue', 'sat', 'scale', 'speed',
-  'brand', 'out',
+  'brand', 'out', 'base', 'format',
 ])
 
 /** Flags parsed as numbers rather than strings. */
@@ -173,6 +174,10 @@ async function main() {
 
     case 'update':
       await commandUpdate(rest, flags)
+      return
+
+    case 'review':
+      await commandReview(rest, flags)
       return
 
     case 'login':

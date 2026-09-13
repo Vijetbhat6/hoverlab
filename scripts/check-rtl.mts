@@ -59,104 +59,52 @@
 import { readdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 
+/*
+  The mappings, the icon ledger and the source walkers live in
+  `packages/cli/src/review` — the same place the accessibility rules went,
+  for the same reason. They are the engine behind `hoverlab review`, and a
+  second copy here would drift: the CLI would tell somebody their `pl-4`
+  was fine on a day this build was failing on it, and nothing would catch
+  the disagreement.
+
+  What stays here is what is genuinely about THIS catalog — the per-block
+  `PHYSICAL` rulings in PART THREE, and the `except` overlay below. Those
+  are judgements about our own components and mean nothing in anyone
+  else's repo.
+*/
+import {
+  lineAt,
+  maskComments,
+  openingTag,
+  splitVariants,
+  stringLiterals,
+} from '../packages/cli/src/review/jsx.mjs'
+import {
+  ICONS as RULINGS,
+  MIRROR_CLASS,
+  convertToken,
+  fixSpacing,
+  looksDirectional,
+} from '../packages/cli/src/review/rtl.mjs'
+
 const ROOT = process.cwd()
 const SOURCES = join(ROOT, 'src/lib/blocks/sources')
 
-/**
- * Physical → logical, for the utilities where the mapping is unambiguous.
- *
- * Order matters: longer prefixes first, so `border-l-2` is not matched by
- * the `border-l` rule with the `-2` left dangling.
- */
-const MAPPINGS: Array<[RegExp, string]> = [
-  // Corner radii. `rounded-l-*` → `rounded-s-*`, and the per-corner forms.
-  [/^rounded-tl(-|$)/, 'rounded-ss$1'],
-  [/^rounded-tr(-|$)/, 'rounded-se$1'],
-  [/^rounded-br(-|$)/, 'rounded-ee$1'],
-  [/^rounded-bl(-|$)/, 'rounded-es$1'],
-  [/^rounded-l(-|$)/, 'rounded-s$1'],
-  [/^rounded-r(-|$)/, 'rounded-e$1'],
+/*
+  PART ONE used to carry the physical→logical table, a variant splitter, a
+  string-literal scanner and an offset-preserving comment mask. All four
+  are now imported: `fixSpacing` is exactly this pass, generalised to take
+  text rather than a filename.
 
-  // Borders — width and colour both take the logical side.
-  [/^border-l(-|$)/, 'border-s$1'],
-  [/^border-r(-|$)/, 'border-e$1'],
-
-  // Padding and margin, including the negative margins.
-  [/^pl-/, 'ps-'],
-  [/^pr-/, 'pe-'],
-  [/^ml-/, 'ms-'],
-  [/^mr-/, 'me-'],
-  [/^-ml-/, '-ms-'],
-  [/^-mr-/, '-me-'],
-
-  // Text alignment.
-  [/^text-left$/, 'text-start'],
-  [/^text-right$/, 'text-end'],
-
-  // Floats and clears, which Tailwind v4 spells with the logical keywords.
-  [/^float-left$/, 'float-start'],
-  [/^float-right$/, 'float-end'],
-  [/^clear-left$/, 'clear-start'],
-  [/^clear-right$/, 'clear-end'],
-]
-
-/** Split a class token into its variant prefixes and its base utility. */
-function splitVariants(token: string): { prefix: string; base: string } {
-  const index = token.lastIndexOf(':')
-  return index === -1
-    ? { prefix: '', base: token }
-    : { prefix: token.slice(0, index + 1), base: token.slice(index + 1) }
-}
-
-function convertToken(token: string): string | null {
-  const { prefix, base } = splitVariants(token)
-
-  for (const [pattern, replacement] of MAPPINGS) {
-    if (pattern.test(base)) {
-      return prefix + base.replace(pattern, replacement)
-    }
-  }
-  return null
-}
-
-/**
- * Every class-like string literal in a source file.
- *
- * Blocks build class names three ways — a `className="..."` attribute, a
- * template literal, and a lookup table of strings — so this walks quoted
- * strings generally rather than parsing JSX. A false positive would have to
- * be a string that happens to contain a bare `pl-4` token and is not a
- * class list, which does not occur in this catalog and which the `--fix`
- * diff would show immediately.
- */
-const STRING_LITERAL = /(['"`])((?:\\.|(?!\1)[^\\])*)\1/g
-
-/**
- * The same source with every comment blanked to spaces.
- *
- * Offsets are preserved so a match found here can be applied to the original
- * text, and that is the entire trick: the scanner needs to see the code
- * without the prose, but the rewriter must still edit the real file.
- *
- * This is a bug fix, not a tidy-up. `STRING_LITERAL` starts a string at the
- * first quote character it meets, and an English apostrophe in a docblock —
- * "a screen reader's table commands" — is a quote character. From there the
- * scanner is one quote out of phase for the rest of the file: it reads code
- * as string and string as code, and every className after it is invisible.
- *
- * The failure was silent and it was partial, which is the worst combination.
- * A run over the catalog rewrote 15 of the 19 physical `text-left` tokens
- * and reported "15 rewritten" — a green, confident, wrong number. The four
- * it skipped were skipped because of where an apostrophe happened to fall in
- * a comment nine lines from the top of the file, so the same input would
- * have produced a different answer after any unrelated edit to the prose.
- */
-function maskComments(source: string): string {
-  const blank = (m: string) => m.replace(/[^\n\r]/g, ' ')
-  return source
-    .replace(/\/\*[\s\S]*?\*\//g, blank)
-    .replace(/(^|[^:])\/\/[^\n\r]*/g, (m, lead: string) => lead + blank(m.slice(lead.length)))
-}
+  The comment mask is the one worth knowing about. `STRING_LITERAL` starts
+  a string at the first quote it meets, and an English apostrophe in a
+  docblock — "a screen reader's table commands" — is a quote character.
+  From there the scanner is one quote out of phase for the rest of the
+  file: it reads code as string and string as code, and every className
+  after it is invisible. A run over the catalog rewrote 15 of the 19
+  physical `text-left` tokens and reported a green, confident, wrong "15
+  rewritten". That fix travelled with the code into `jsx.mjs`.
+*/
 
 interface Finding {
   file: string
@@ -167,45 +115,12 @@ interface Finding {
 function processFile(name: string, fix: boolean): Finding[] {
   const path = join(SOURCES, name)
   const source = readFileSync(path, 'utf8')
-  const findings: Finding[] = []
+  const { source: next, rewrites } = fixSpacing(source)
 
-  // Find literals in the comment-blanked copy; rewrite the real one. Offsets
-  // line up because `maskComments` replaces character-for-character.
-  const masked = maskComments(source)
-  let out = ''
-  let cursor = 0
-
-  for (const match of masked.matchAll(STRING_LITERAL)) {
-    const start = match.index!
-    const end = start + match[0].length
-    const quote = match[1]!
-    const body = source.slice(start + 1, end - 1)
-
-    // Only strings that look like class lists. A sentence in a description
-    // has spaces and punctuation; a class list is tokens separated by
-    // single spaces, and every token here has to be one we recognise.
-    if (!/[a-z]/.test(body)) continue
-
-    let changed = false
-    const tokens = body.split(/(\s+)/).map((token) => {
-      if (!token.trim()) return token
-      const converted = convertToken(token)
-      if (!converted) return token
-      changed = true
-      findings.push({ file: name, from: token, to: converted })
-      return converted
-    })
-
-    if (!changed) continue
-    out += source.slice(cursor, start) + quote + tokens.join('') + quote
-    cursor = end
-  }
-
-  const next = out + source.slice(cursor)
   if (fix && next !== source) writeFileSync(path, next, 'utf8')
-  return findings
-}
 
+  return rewrites.map((rewrite) => ({ file: name, from: rewrite.from, to: rewrite.to }))
+}
 /* ══ PART TWO: DIRECTIONAL ICONS ═════════════════════════════════════════
  *
  * Logical properties mirror the *layout*. They do nothing to a glyph: an
@@ -253,144 +168,19 @@ function processFile(name: string, fix: boolean): Finding[] {
  * does not come along with the rotation.
  */
 
-type Ruling = 'mirror' | 'keep' | 'symmetric'
-
-interface IconRule {
-  ruling: Ruling
-  why: string
-  /** Blocks where this icon's ruling does not apply, id → reason. */
-  except?: Record<string, string>
-}
-
 /**
- * The adjudication.
+ * Blocks where an icon’s ruling does not apply, icon → block id → reason.
  *
- * Keyed by icon rather than by call site because that is how it came out,
- * not because it has to be: each of these icons is used in exactly one
- * sense across the catalog today. `except` exists for the day that stops
- * being true — an `ArrowRight` used as a trend indicator belongs there
- * rather than forcing the whole icon to be reclassified.
- */
-const ICONS: Record<string, IconRule> = {
-  /* ── Mirrored: these run along the reading axis ─────────────────────── */
-  ArrowRight: {
-    ruling: 'mirror',
-    why: 'forward — CTA, continue, next, and the source→target arrow in a column mapping or an audit diff. All of it runs with the text.',
-  },
-  ArrowLeft: {
-    ruling: 'mirror',
-    why: 'back — "back to sign in", "previous page", docs pagination.',
-  },
-  ChevronRight: {
-    ruling: 'mirror',
-    why: 'breadcrumb separator, row affordance, and the closed state of a disclosure. Each points at content lying towards the end edge.',
-  },
-  ChevronLeft: {
-    ruling: 'mirror',
-    why: 'previous, in a carousel, a stepper, a pager or a month view.',
-  },
-  ChevronsRight: {
-    ruling: 'mirror',
-    why: 'last page — the end of a sequence, which moves with the sequence.',
-  },
-  ChevronsLeft: { ruling: 'mirror', why: 'first page.' },
-  CornerDownRight: {
-    ruling: 'mirror',
-    why: 'a nesting elbow: the indent it draws runs from the start edge inwards.',
-  },
-  Undo2: {
-    ruling: 'mirror',
-    why: 'undo runs backwards through a history whose forward direction is the reading direction.',
-  },
-  Send: { ruling: 'mirror', why: 'the paper plane leaves along the reading direction.' },
-  LogOut: {
-    ruling: 'mirror',
-    why: 'an arrow leaving through a door, and the door is on the end edge.',
-  },
-
-  /* ── Not mirrored, each for its own reason ──────────────────────────── */
-  CornerDownLeft: {
-    ruling: 'keep',
-    why: 'this is the Return key. It is a picture of a physical object on a physical keyboard, and that keyboard does not rearrange itself for Arabic — mirroring it draws a key no keyboard has.',
-  },
-  ArrowUpRight: {
-    ruling: 'keep',
-    why: 'the launch idiom — "opens elsewhere" — or the rising half of a trend. Neither meaning is about reading order: the diagonal is the point, and up is up.',
-  },
-  ArrowDownRight: {
-    ruling: 'keep',
-    why: 'the falling half of that trend pair. Mirroring one arrow of a matched up/down set breaks the pair.',
-  },
-  ExternalLink: {
-    ruling: 'keep',
-    why: 'same family as ArrowUpRight and the same argument. Leaving the site is not a direction the text has an opinion about.',
-  },
-  Play: {
-    ruling: 'keep',
-    why: 'transport controls run along the media timeline, not the text. Every RTL platform ships play pointing the same way, and a mirrored play button reads as rewind.',
-  },
-  ArrowLeftRight: {
-    ruling: 'symmetric',
-    why: 'a two-headed arrow. Mirroring it is a no-op, so the class would be noise a reader has to stop and check.',
-  },
-}
-
-/** Any class that turns a glyph around. */
-const MIRROR_CLASS = /\brtl:(?:-?rotate-|-?scale-x-|-scale-)/
-
-/**
- * Whether an icon name looks directional enough to demand a ruling.
+ * The rulings themselves are shared, because "does this glyph run with the
+ * reading direction" is a question about the glyph and has the same answer
+ * in every codebase. This overlay is not shared, because it is a statement
+ * about OUR components: an `ArrowRight` used as a trend indicator belongs
+ * here rather than forcing the whole icon to be reclassified for everyone.
  *
- * Deliberately broader than `ICONS`, because its job is to catch the icon
- * nobody has thought about yet. Matched on camel-case words rather than as
- * a substring, so `Copyright` and `Highlighter` do not trip on "right".
+ * Empty today. Kept because the day it stops being empty is the day
+ * somebody would otherwise reclassify a shared ruling to fix one block.
  */
-const DIRECTIONAL_WORDS = new Set([
-  'Left',
-  'Right',
-  'Forward',
-  'Backward',
-  'Rewind',
-  'Undo',
-  'Redo',
-  'Reply',
-  'Indent',
-  'Outdent',
-  'Send',
-  'Play',
-  'Skip',
-  'Next',
-  'Previous',
-  'Corner',
-  'Move',
-  'External',
-])
-
-const DIRECTIONAL_NAMES = new Set(['LogIn', 'LogOut', 'Import', 'Export'])
-
-function looksDirectional(name: string): boolean {
-  if (DIRECTIONAL_NAMES.has(name)) return true
-  return (name.match(/[A-Z][a-z]*/g) ?? []).some((word) => DIRECTIONAL_WORDS.has(word))
-}
-
-/** One opening tag as raw text, brace- and quote-aware. */
-function openingTag(source: string, start: number): string {
-  let depth = 0
-  let quote: string | null = null
-  for (let i = start; i < source.length; i++) {
-    const ch = source[i]!
-    if (quote) {
-      if (ch === '\\') i++
-      else if (ch === quote) quote = null
-      continue
-    }
-    if (ch === '"' || ch === "'" || ch === '`') quote = ch
-    else if (ch === '{') depth++
-    else if (ch === '}') depth--
-    else if (ch === '>' && depth === 0) return source.slice(start, i + 1)
-  }
-  return source.slice(start)
-}
+const EXCEPT: Record<string, Record<string, string>> = {}
 
 interface IconProblem {
   block: string
@@ -422,7 +212,7 @@ function auditDirectionalIcons(): IconProblem[] {
       if (!seen.has(icon)) seen.set(icon, new Set())
       seen.get(icon)!.add(block)
 
-      const rule = ICONS[icon]
+      const rule = RULINGS[icon]
       if (!rule) {
         problems.push({
           block,
@@ -434,7 +224,7 @@ function auditDirectionalIcons(): IconProblem[] {
         })
         continue
       }
-      if (rule.except?.[block]) continue
+      if (EXCEPT[icon]?.[block]) continue
 
       for (const match of code.matchAll(new RegExp(`<${icon}(?=[\\s/>])`, 'g'))) {
         const tag = openingTag(code, match.index!)
@@ -470,7 +260,7 @@ function auditDirectionalIcons(): IconProblem[] {
       `${blockCount} blocks${problems.length ? '' : ', all adjudicated'}.`,
   )
   for (const [icon, set] of counts) {
-    const rule = ICONS[icon]
+    const rule = RULINGS[icon]
     console.log(
       `  ${String(set.size).padStart(4)}  ${icon.padEnd(16)} ${rule?.ruling ?? 'NO RULING'}`,
     )
@@ -570,10 +360,10 @@ function auditPositions(): IconProblem[] {
     const code = maskComments(readFileSync(join(SOURCES, name), 'utf8'))
     const ruled = PHYSICAL[block] ?? {}
 
-    for (const match of code.matchAll(STRING_LITERAL)) {
-      const tokens = classTokens(match[2]!)
+    for (const literal of stringLiterals(code)) {
+      const tokens = classTokens(literal.body)
       const has = (base: string) => tokens.some((t) => t.base === base)
-      const line = code.slice(0, match.index!).split('\n').length
+      const line = lineAt(code, literal.start)
       const problem = (token: string, message: string) =>
         problems.push({ block, line, icon: token, message })
 

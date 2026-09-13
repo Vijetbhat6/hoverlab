@@ -24,6 +24,28 @@
  * putting assignee names at 959px and `testimonial-carousel` ratings at
  * 1042px on a 390px screen.
  *
+ * ── THE SECOND IMPLEMENTATION, AND WHY IT IS ALLOWED TO EXIST ───────────
+ *
+ * `packages/cli/src/review/overflow.mjs` applies this same rule inside
+ * `hoverlab review`. Everywhere else the rules moved into that package and
+ * this repo imports them back, precisely so the CLI cannot tell somebody
+ * their code is fine on a day this build is failing on it. This one did not
+ * move, and the reason is the parser.
+ *
+ * The rule needs to know what encloses what, and this file gets that from
+ * `typescript` — a real AST, already paid for by a build that has the
+ * compiler in it anyway. The CLI is dependency-free on purpose, so shipping
+ * it that parser would add several megabytes and a second of startup to a
+ * command whose promise is that it runs in CI before the install finishes.
+ * Its `walkElements` tracks the nesting by hand instead.
+ *
+ * So the divergence is deliberate and bounded: same three class patterns,
+ * same containing-block argument, same exemptions, two ways of finding the
+ * tree. If you change what counts as a scroller or an escapee, change it in
+ * both — the constants are named identically in each file to make that
+ * grep-able, and the CLI's copy carries tests for the walk that this one
+ * gets from the compiler for free.
+ *
  * ── WHY A STATIC CHECK, AND NOT A BROWSER ONE ───────────────────────────
  *
  * It was found in a browser, and a browser is the wrong tool for keeping it

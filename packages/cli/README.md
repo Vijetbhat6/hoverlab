@@ -47,6 +47,7 @@ $ npx hoverlab add checkout-page
 | `categories` | List the categories, per tier |
 | `skill [id]` | Install an agent skill into `.claude/skills`. With no id, lists them. |
 | `dna [id]` | Print the Design DNA — tokens, shape, motion, rules — for pasting into an AI tool |
+| `review [path...]` | Review your components for design defects. With no paths, reviews what you changed. |
 | `mcp` | Run the MCP server over stdio |
 
 ## Scaffolding a project
@@ -102,6 +103,65 @@ npx hoverlab add btn-gradient --hue 40 --sat 15 --scale 1.2 --speed 1.5
 | `--sat` | -100 to 100 | Boost or mute colour intensity |
 | `--scale` | 0.5 to 1.5 | Multiply every `px` / `rem` value |
 | `--speed` | 0.25 to 3 | Multiply every animation duration |
+
+## Reviewing your own code
+
+`hoverlab review` checks components for the class of design defect that survives code review because it is invisible to the person writing it — and in most cases invisible to everyone on the team, because nobody is testing the site in Arabic, with a screen reader, on a phone, with reduced motion switched on.
+
+```bash
+npx hoverlab review                 # what you have changed
+npx hoverlab review --base main     # what your branch proposes
+npx hoverlab review src/components  # a directory, in full
+npx hoverlab review --fix           # apply the rewrites that need no judgement
+```
+
+It runs entirely on your machine. No account, no key, nothing uploaded — the rules are in the package you just installed.
+
+### What it looks for
+
+| Family | Examples |
+| --- | --- |
+| **Accessibility** | 18 rules over 10 WCAG 2.2 AA criteria that can be decided from source: an icon-only button with no accessible name, `<label htmlFor>` pointing at an id nothing has, a password field that blocks paste, `aria-hidden` on something a keyboard can still reach |
+| **Right-to-left** | `pl-4` and friends, which stay on the left in Arabic, Hebrew, Farsi and Urdu; an `<ArrowRight>` beside "Next" that keeps pointing away from next; a `translate-x` that slides a switch knob out of its own track |
+| **Motion** | An animation that runs forever with no `motion-safe:` or `motion-reduce:` route out |
+| **Layout** | `sr-only` text inside a horizontal scroller that is not positioned — it escapes, and scrolls the whole page sideways on a phone, pointing at nothing anyone can see |
+
+These are the checks that run over the Hoverlab catalog's own components on every build. That is the reason they are worth pointing at your code rather than a rule list assembled from a spec: every one has been run over hundreds of real components, and the ones that turned out to be only *nearly* right were deleted rather than kept. A rule that is nearly right produces confident, specific, wrong findings, and one of those teaches you to skim the other forty.
+
+### Violations and advisories
+
+A **violation** means the rule is confident and the thing is broken. Violations set a non-zero exit code.
+
+An **advisory** is a question the rule cannot close from source. A 20×20px tap target might pass 2.5.8 by the spacing exception, and spacing is a rendered property. A `left-6` might be a search icon that should follow the text, or a blurred glow in a corner that is lighting rather than layout. A `draggable` handle might have a keyboard alternative three components away. Advisories never fail a run — a reviewer that blocks a merge on a question is a reviewer that gets switched off, and then the violations go unread too.
+
+`--violations-only` drops them.
+
+### In CI
+
+`--format github` emits workflow commands, which the runner turns into annotations on the diff itself, so a finding lands on the line that caused it:
+
+```yaml
+- uses: actions/checkout@v4
+  with:
+    fetch-depth: 0            # review needs the merge base
+- run: npx hoverlab review --base ${{ github.base_ref }} --format github
+```
+
+By default only findings the change is responsible for are reported — the files the diff touched, and within them the findings on or beside a touched line. Pointed at a mature repository with that filter off, these rules will return hundreds of findings that all predate the pull request, which is a backlog rather than a review. `--all-lines` turns the filter off when you want it.
+
+`--base` measures from the merge base rather than the tip of the base branch, so commits other people landed while your branch was open are not reported as yours.
+
+### `--fix`
+
+Only the physical-to-logical spacing codemod is applied: `pl-4` → `ps-4`, `text-right` → `text-end`, `rounded-tl-lg` → `rounded-ss-lg` and the rest of that set. Those have exactly one correct answer and no effect left-to-right.
+
+Nothing else is rewritten, and the restraint is deliberate. Everything else here is either a judgement call or has more than one correct shape — an infinite animation wants *stopping* if it is decorative and *slowing* if it is a status spinner, and a fixer that guesses wrong writes a stopped spinner next to "Signing in", which reads as a hung request. The finding says which is which; you decide.
+
+### What it cannot see
+
+A large share of WCAG AA is not decidable without rendering, without resolved colour, or without a human: contrast, focus order, reflow, reading order, and whether help is in the same place across a site. `--json` lists every one of them with the reason it is out of reach.
+
+That list ships with every report on purpose. A tool that reports what passed and stays silent about what it never looked at reads as full coverage, and that silence is the part that misleads. `hoverlab review` produces evidence about your source. It is not a conformance claim and cannot be used as one.
 
 ## Editor integration (MCP)
 

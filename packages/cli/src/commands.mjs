@@ -12,7 +12,7 @@
  */
 
 import path from 'node:path'
-import { mkdir, writeFile, readFile } from 'node:fs/promises'
+import { mkdir, writeFile, readFile, readdir, stat } from 'node:fs/promises'
 
 import {
   assertUnlocked,
@@ -29,6 +29,9 @@ import {
   searchLevel,
 } from './api.mjs'
 import { detectFramework } from './detect.mjs'
+import { REVIEWABLE, fixSource, reviewSource } from './review/index.mjs'
+import { changedFiles, changedLines, mergeBase, repoRoot, touchedByDiff } from './review/git.mjs'
+import { renderGitHub, renderJson, renderTerminal } from './review/report.mjs'
 import { addArtifact } from './write.mjs'
 import { initTemplate } from './scaffold.mjs'
 import { readProjectConfig, brandCustomization } from './config.mjs'
@@ -1125,6 +1128,181 @@ export function lineDiff(before, after) {
  * ------------------------------------------------------------------ */
 
 
+/* ------------------------------------------------------------------ *
+ *  review
+ * ------------------------------------------------------------------ */
+
+/**
+ * Files to review when the user named paths rather than a diff.
+ *
+ * A directory is walked; a file is taken as given even when it does not
+ * look reviewable, because someone who types a filename has said what they
+ * mean and a silent skip would read as a clean bill of health.
+ */
+async function collectPaths(inputs, cwd) {
+  const found = []
+
+  const visit = async (target, explicit) => {
+    const absolute = path.resolve(cwd, target)
+    let info
+    try {
+      info = await stat(absolute)
+    } catch {
+      throw new Error(`No such file or directory: ${target}`)
+    }
+
+    if (info.isDirectory()) {
+      for (const entry of await readdir(absolute, { withFileTypes: true })) {
+        if (entry.name === 'node_modules' || entry.name.startsWith('.')) continue
+        await visit(path.join(absolute, entry.name), false)
+      }
+      return
+    }
+
+    if (explicit || REVIEWABLE.test(absolute)) found.push(absolute)
+  }
+
+  for (const input of inputs) await visit(input, true)
+  return found
+}
+
+/** A path as the reader will type it: repo- or cwd-relative, forward slashes. */
+function reviewPath(absolute, root, cwd, useRepoRoot) {
+  const base = useRepoRoot ? path.relative(root, absolute) : displayPath(absolute, cwd)
+  return base.split(path.sep).join('/')
+}
+
+/**
+ * Review components for design defects.
+ *
+ * THE DEFAULT IS A DIFF, NOT A CODEBASE
+ *
+ * Pointed at a mature repository these rules return hundreds of findings,
+ * every one of which predates the change in front of you. That is a
+ * backlog, not a review, and a reviewer that opens with a backlog gets
+ * muted. So with no arguments this reads the working tree's changes; with
+ * `--base` it reads what a branch proposes, measured from the merge base
+ * rather than the tip, so commits other people landed on main are not
+ * reported as yours.
+ *
+ * WHAT SETS THE EXIT CODE
+ *
+ * Violations only. Advisories are questions the rules cannot close from
+ * source — a 20px tap target that may pass by the spacing exception, a glow
+ * that may be lighting rather than layout — and blocking a merge on a
+ * question is how a check gets deleted, taking the violations with it.
+ */
+export async function commandReview(paths, flags) {
+  const cwd = process.cwd()
+  const root = repoRoot(cwd)
+  const diffMode = paths.length === 0
+
+  let absolutePaths
+  let base = null
+  let scope
+
+  if (!diffMode) {
+    absolutePaths = await collectPaths(paths, cwd)
+    scope = `${absolutePaths.length} file${absolutePaths.length === 1 ? '' : 's'} you named`
+  } else {
+    if (!root) {
+      throw new Error(
+        'Not a git repository, so there is no diff to review. Name the files or a ' +
+          'directory instead: `hoverlab review src/components`.',
+      )
+    }
+    base = flags.base ? mergeBase(String(flags.base), root) : null
+    absolutePaths = changedFiles(root, base)
+      .filter((file) => REVIEWABLE.test(file))
+      .map((file) => path.resolve(root, file))
+    scope = flags.base
+      ? `what this branch changes against ${flags.base}`
+      : 'your uncommitted changes'
+  }
+
+  if (absolutePaths.length === 0) {
+    out(dim(`Nothing to review in ${scope}.`))
+    return
+  }
+
+  const files = []
+  for (const absolute of absolutePaths) {
+    files.push({ path: absolute, source: await readFile(absolute, 'utf8') })
+  }
+
+  if (flags.fix) {
+    let changed = 0
+    let rewrites = 0
+    for (const file of files) {
+      const result = fixSource(file)
+      if (result.rewrites.length === 0) continue
+      await writeFile(file.path, result.source, 'utf8')
+      file.source = result.source
+      changed++
+      rewrites += result.rewrites.length
+    }
+    out(
+      rewrites === 0
+        ? dim('Nothing to rewrite — no physical spacing utilities found.')
+        : green(
+            `Rewrote ${rewrites} physical spacing utilit${rewrites === 1 ? 'y' : 'ies'} ` +
+              `in ${changed} file${changed === 1 ? '' : 's'}.`,
+          ),
+    )
+    out(
+      dim(
+        'Only the physical-to-logical spacing codemod is applied. Everything else here ' +
+          'is either a judgement call or has more than one correct fix.',
+      ),
+    )
+  }
+
+  let findings = []
+  for (const file of files) {
+    const display = reviewPath(file.path, root, cwd, diffMode)
+    let forFile = reviewSource({ path: display, source: file.source })
+
+    /*
+      In diff mode, keep only what the change is responsible for. A file
+      with no hunks — reached because it is untracked, so every line of it
+      is new — comes back with an empty set, and `touchedByDiff` treats that
+      as "all of it", which is right.
+    */
+    if (diffMode && !flags['all-lines']) {
+      const lines = changedLines(root, base, display)
+      forFile = forFile.filter((finding) => touchedByDiff(finding, lines))
+    }
+
+    findings.push(...forFile)
+  }
+
+  if (flags['violations-only']) {
+    findings = findings.filter((finding) => finding.severity === 'violation')
+  }
+
+  if (flags.json) {
+    out(renderJson(findings))
+  } else if (flags.format === 'github') {
+    if (findings.length > 0) out(renderGitHub(findings))
+  } else {
+    out(dim(`Reviewing ${scope}.`))
+    out(
+      renderTerminal(findings, {
+        bold,
+        dim,
+        green,
+        yellow,
+        cyan,
+        width: process.stdout.columns,
+      }),
+    )
+  }
+
+  if (findings.some((finding) => finding.severity === 'violation')) {
+    process.exitCode = 1
+  }
+}
+
 export function commandHelp() {
   out(`${bold('hoverlab')} — install UI from the Hoverlab catalog
 
@@ -1155,6 +1333,10 @@ ${bold('Commands')}
   update [id...]       Apply the catalog's newer copy. Only touches files
                        you have not edited since installing them; with no
                        ids, updates everything outdated lists.
+  review [path...]     Review your components for design defects —
+                       accessibility, right-to-left, reduced motion, and
+                       layout escapes. With no paths, reviews what you have
+                       changed. Runs entirely on your machine.
   whoami               Show which key is in play, and where it came from
   help                 Show this message
 
@@ -1172,6 +1354,15 @@ ${bold('Options')}
       --limit <n>      Maximum search results per tier (default 20)
       --deep           show: include the blocks a page is built from
       --json           Machine-readable output
+      --base <ref>     review: review what this branch changes against a
+                       base branch, measured from the merge base
+      --all-lines      review: report every finding in a changed file, not
+                       only the ones the change is responsible for
+      --violations-only
+                       review: drop the advisories
+      --fix            review: apply the physical-to-logical spacing
+                       codemod. Nothing else is rewritten
+      --format github  review: emit GitHub Actions annotations
       --brand <id>     dna: apply a brand preset's accent
       --out <path>     dna: write to a file instead of printing
       --hue <deg>      Effects only — hue rotation, -180 to 180
@@ -1205,6 +1396,38 @@ ${bold('Where files land')}
   directory. Blocks and pages keep their own paths — components/x.tsx,
   app/y.tsx — rooted at your project (or src/, if you use it), because
   that is what the page sources import against. ${dim('--dir')} overrides both.
+
+${bold('Reviewing your own code')}
+  ${cyan('hoverlab review')} checks components for the design defects that survive
+  code review because they are invisible to the person writing them:
+
+    accessibility  18 rules over 10 WCAG 2.2 AA criteria decidable from
+                   source — unnamed icon buttons, labels pointing at
+                   nothing, paste blocked on a password field
+    right-to-left  physical utilities that pin a layout to the left, and
+                   glyphs that point the wrong way in Arabic or Hebrew
+    motion         animation that runs forever with no reduced-motion route
+    layout         sr-only text escaping a scroll container, which scrolls
+                   the whole page sideways on a phone
+
+  These are the same checks that run over this catalog's 250 components on
+  every build, which is why they are worth pointing at yours: each one has
+  been shaken out against real code, and the rules that were only nearly
+  right were deleted rather than kept.
+
+    npx hoverlab review                    ${dim('# what you have changed')}
+    npx hoverlab review --base main        ${dim('# what your branch proposes')}
+    npx hoverlab review src/components     ${dim('# a directory, in full')}
+    npx hoverlab review --fix              ${dim('# apply the safe rewrites')}
+
+  It runs entirely on your machine — no account, no key, no upload. In CI,
+  ${dim('--format github')} turns findings into annotations on the diff:
+
+    - run: npx hoverlab review --base \${{ github.base_ref }} --format github
+
+  Violations set a non-zero exit code. Advisories are questions the rules
+  cannot close from source — is that glow lighting or layout? does that drag
+  have a keyboard alternative? — and never fail a run.
 
 ${bold('Editor integration')}
   Teach your agent the catalog, so it installs the right piece instead of
