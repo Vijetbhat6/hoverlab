@@ -1,0 +1,77 @@
+{
+  "aurora-veil": {
+    "html": "<div class=\"fx-aurora-veil\"><canvas data-hoverlab-shader=\"aurora-veil\" aria-hidden=\"true\"></canvas></div>",
+    "css": ".fx-aurora-veil {\n  position: relative;\n  align-self: stretch;\n  flex: 1 1 auto;\n  width: 100%;\n  min-height: 9rem;\n  overflow: hidden;\n  border-radius: 0.75rem;\n  /* Shown until the shader's first frame, and permanently if WebGL is\n     unavailable. Derived from the program's palette, not typed twice. */\n  background: linear-gradient(145deg, #f4f6ff 0%, #0d9488 58%, #4f46e5 100%);\n}\n\n.fx-aurora-veil > canvas {\n  position: absolute;\n  inset: 0;\n  display: block;\n  width: 100%;\n  height: 100%;\n}\n\n.dark .fx-aurora-veil {\n  background: linear-gradient(145deg, #05060f 0%, #34d399 58%, #6366f1 100%);\n}\n",
+    "lines": 94
+  },
+  "plasma-field": {
+    "html": "<div class=\"fx-plasma-field\"><canvas data-hoverlab-shader=\"plasma-field\" aria-hidden=\"true\"></canvas></div>",
+    "css": ".fx-plasma-field {\n  position: relative;\n  align-self: stretch;\n  flex: 1 1 auto;\n  width: 100%;\n  min-height: 9rem;\n  overflow: hidden;\n  border-radius: 0.75rem;\n  /* Shown until the shader's first frame, and permanently if WebGL is\n     unavailable. Derived from the program's palette, not typed twice. */\n  background: linear-gradient(145deg, #f8fafc 0%, #a5b4fc 58%, #fda4af 100%);\n}\n\n.fx-plasma-field > canvas {\n  position: absolute;\n  inset: 0;\n  display: block;\n  width: 100%;\n  height: 100%;\n}\n\n.dark .fx-plasma-field {\n  background: linear-gradient(145deg, #0b0714 0%, #4338ca 58%, #be123c 100%);\n}\n",
+    "lines": 56
+  },
+  "liquid-metal": {
+    "html": "<div class=\"fx-liquid-metal\"><canvas data-hoverlab-shader=\"liquid-metal\" aria-hidden=\"true\"></canvas></div>",
+    "css": ".fx-liquid-metal {\n  position: relative;\n  align-self: stretch;\n  flex: 1 1 auto;\n  width: 100%;\n  min-height: 9rem;\n  overflow: hidden;\n  border-radius: 0.75rem;\n  /* Shown until the shader's first frame, and permanently if WebGL is\n     unavailable. Derived from the program's palette, not typed twice. */\n  background: linear-gradient(145deg, #e2e8f0 0%, #94a3b8 58%, #c4b5fd 100%);\n}\n\n.fx-liquid-metal > canvas {\n  position: absolute;\n  inset: 0;\n  display: block;\n  width: 100%;\n  height: 100%;\n}\n\n.dark .fx-liquid-metal {\n  background: linear-gradient(145deg, #020617 0%, #1e293b 58%, #7c3aed 100%);\n}\n",
+    "lines": 58
+  },
+  "iridescence": {
+    "html": "<div class=\"fx-iridescence\"><canvas data-hoverlab-shader=\"iridescence\" aria-hidden=\"true\"></canvas></div>",
+    "css": ".fx-iridescence {\n  position: relative;\n  align-self: stretch;\n  flex: 1 1 auto;\n  width: 100%;\n  min-height: 9rem;\n  overflow: hidden;\n  border-radius: 0.75rem;\n  /* Shown until the shader's first frame, and permanently if WebGL is\n     unavailable. Derived from the program's palette, not typed twice. */\n  background: linear-gradient(145deg, #f8fafc 0%, #38bdf8 58%, #f472b6 100%);\n}\n\n.fx-iridescence > canvas {\n  position: absolute;\n  inset: 0;\n  display: block;\n  width: 100%;\n  height: 100%;\n}\n\n.dark .fx-iridescence {\n  background: linear-gradient(145deg, #07050d 0%, #0ea5e9 58%, #db2777 100%);\n}\n",
+    "lines": 58
+  },
+  "dither-gradient": {
+    "html": "<div class=\"fx-dither-gradient\"><canvas data-hoverlab-shader=\"dither-gradient\" aria-hidden=\"true\"></canvas></div>",
+    "css": ".fx-dither-gradient {\n  position: relative;\n  align-self: stretch;\n  flex: 1 1 auto;\n  width: 100%;\n  min-height: 9rem;\n  overflow: hidden;\n  border-radius: 0.75rem;\n  /* Shown until the shader's first frame, and permanently if WebGL is\n     unavailable. Derived from the program's palette, not typed twice. */\n  background: linear-gradient(145deg, #f1f5f9 0%, #334155 58%, #0f172a 100%);\n}\n\n.fx-dither-gradient > canvas {\n  position: absolute;\n  inset: 0;\n  display: block;\n  width: 100%;\n  height: 100%;\n}\n\n.dark .fx-dither-gradient {\n  background: linear-gradient(145deg, #0a0f07 0%, #a3e635 58%, #ecfccb 100%);\n}\n",
+    "lines": 64
+  },
+  "halftone-wave": {
+    "html": "<div class=\"fx-halftone-wave\"><canvas data-hoverlab-shader=\"halftone-wave\" aria-hidden=\"true\"></canvas></div>",
+    "css": ".fx-halftone-wave {\n  position: relative;\n  align-self: stretch;\n  flex: 1 1 auto;\n  width: 100%;\n  min-height: 9rem;\n  overflow: hidden;\n  border-radius: 0.75rem;\n  /* Shown until the shader's first frame, and permanently if WebGL is\n     unavailable. Derived from the program's palette, not typed twice. */\n  background: linear-gradient(145deg, #fffbeb 0%, #0f172a 58%, #e11d48 100%);\n}\n\n.fx-halftone-wave > canvas {\n  position: absolute;\n  inset: 0;\n  display: block;\n  width: 100%;\n  height: 100%;\n}\n\n.dark .fx-halftone-wave {\n  background: linear-gradient(145deg, #0c0a09 0%, #f8fafc 58%, #f43f5e 100%);\n}\n",
+    "lines": 60
+  },
+  "metaball-lava": {
+    "html": "<div class=\"fx-metaball-lava\"><canvas data-hoverlab-shader=\"metaball-lava\" aria-hidden=\"true\"></canvas></div>",
+    "css": ".fx-metaball-lava {\n  position: relative;\n  align-self: stretch;\n  flex: 1 1 auto;\n  width: 100%;\n  min-height: 9rem;\n  overflow: hidden;\n  border-radius: 0.75rem;\n  /* Shown until the shader's first frame, and permanently if WebGL is\n     unavailable. Derived from the program's palette, not typed twice. */\n  background: linear-gradient(145deg, #fff7ed 0%, #fb923c 58%, #f43f5e 100%);\n}\n\n.fx-metaball-lava > canvas {\n  position: absolute;\n  inset: 0;\n  display: block;\n  width: 100%;\n  height: 100%;\n}\n\n.dark .fx-metaball-lava {\n  background: linear-gradient(145deg, #120508 0%, #ea580c 58%, #9f1239 100%);\n}\n",
+    "lines": 61
+  },
+  "ferrofluid": {
+    "html": "<div class=\"fx-ferrofluid\"><canvas data-hoverlab-shader=\"ferrofluid\" aria-hidden=\"true\"></canvas></div>",
+    "css": ".fx-ferrofluid {\n  position: relative;\n  align-self: stretch;\n  flex: 1 1 auto;\n  width: 100%;\n  min-height: 9rem;\n  overflow: hidden;\n  border-radius: 0.75rem;\n  /* Shown until the shader's first frame, and permanently if WebGL is\n     unavailable. Derived from the program's palette, not typed twice. */\n  background: linear-gradient(145deg, #e2e8f0 0%, #1e293b 58%, #475569 100%);\n}\n\n.fx-ferrofluid > canvas {\n  position: absolute;\n  inset: 0;\n  display: block;\n  width: 100%;\n  height: 100%;\n}\n\n.dark .fx-ferrofluid {\n  background: linear-gradient(145deg, #060910 0%, #020617 58%, #1e1b4b 100%);\n}\n",
+    "lines": 70
+  },
+  "lightning-arc": {
+    "html": "<div class=\"fx-lightning-arc\"><canvas data-hoverlab-shader=\"lightning-arc\" aria-hidden=\"true\"></canvas></div>",
+    "css": ".fx-lightning-arc {\n  position: relative;\n  align-self: stretch;\n  flex: 1 1 auto;\n  width: 100%;\n  min-height: 9rem;\n  overflow: hidden;\n  border-radius: 0.75rem;\n  /* Shown until the shader's first frame, and permanently if WebGL is\n     unavailable. Derived from the program's palette, not typed twice. */\n  background: linear-gradient(145deg, #eef2ff 0%, #4338ca 58%, #a5b4fc 100%);\n}\n\n.fx-lightning-arc > canvas {\n  position: absolute;\n  inset: 0;\n  display: block;\n  width: 100%;\n  height: 100%;\n}\n\n.dark .fx-lightning-arc {\n  background: linear-gradient(145deg, #04040a 0%, #6366f1 58%, #a78bfa 100%);\n}\n",
+    "lines": 89
+  },
+  "hyperspeed": {
+    "html": "<div class=\"fx-hyperspeed\"><canvas data-hoverlab-shader=\"hyperspeed\" aria-hidden=\"true\"></canvas></div>",
+    "css": ".fx-hyperspeed {\n  position: relative;\n  align-self: stretch;\n  flex: 1 1 auto;\n  width: 100%;\n  min-height: 9rem;\n  overflow: hidden;\n  border-radius: 0.75rem;\n  /* Shown until the shader's first frame, and permanently if WebGL is\n     unavailable. Derived from the program's palette, not typed twice. */\n  background: linear-gradient(145deg, #f0f9ff 0%, #0369a1 58%, #7dd3fc 100%);\n}\n\n.fx-hyperspeed > canvas {\n  position: absolute;\n  inset: 0;\n  display: block;\n  width: 100%;\n  height: 100%;\n}\n\n.dark .fx-hyperspeed {\n  background: linear-gradient(145deg, #01030c 0%, #38bdf8 58%, #a855f7 100%);\n}\n",
+    "lines": 85
+  },
+  "plasma-orb": {
+    "html": "<div class=\"fx-plasma-orb\"><canvas data-hoverlab-shader=\"plasma-orb\" aria-hidden=\"true\"></canvas></div>",
+    "css": ".fx-plasma-orb {\n  position: relative;\n  align-self: stretch;\n  flex: 1 1 auto;\n  width: 100%;\n  min-height: 9rem;\n  overflow: hidden;\n  border-radius: 0.75rem;\n  /* Shown until the shader's first frame, and permanently if WebGL is\n     unavailable. Derived from the program's palette, not typed twice. */\n  background: linear-gradient(145deg, #f5f3ff 0%, #8b5cf6 58%, #22d3ee 100%);\n}\n\n.fx-plasma-orb > canvas {\n  position: absolute;\n  inset: 0;\n  display: block;\n  width: 100%;\n  height: 100%;\n}\n\n.dark .fx-plasma-orb {\n  background: linear-gradient(145deg, #07040f 0%, #7c3aed 58%, #06b6d4 100%);\n}\n",
+    "lines": 71
+  },
+  "grid-distortion": {
+    "html": "<div class=\"fx-grid-distortion\"><canvas data-hoverlab-shader=\"grid-distortion\" aria-hidden=\"true\"></canvas></div>",
+    "css": ".fx-grid-distortion {\n  position: relative;\n  align-self: stretch;\n  flex: 1 1 auto;\n  width: 100%;\n  min-height: 9rem;\n  overflow: hidden;\n  border-radius: 0.75rem;\n  /* Shown until the shader's first frame, and permanently if WebGL is\n     unavailable. Derived from the program's palette, not typed twice. */\n  background: linear-gradient(145deg, #f8fafc 0%, #0f172a 58%, #6366f1 100%);\n}\n\n.fx-grid-distortion > canvas {\n  position: absolute;\n  inset: 0;\n  display: block;\n  width: 100%;\n  height: 100%;\n}\n\n.dark .fx-grid-distortion {\n  background: linear-gradient(145deg, #050810 0%, #64748b 58%, #818cf8 100%);\n}\n",
+    "lines": 71
+  },
+  "ripple-grid": {
+    "html": "<div class=\"fx-ripple-grid\"><canvas data-hoverlab-shader=\"ripple-grid\" aria-hidden=\"true\"></canvas></div>",
+    "css": ".fx-ripple-grid {\n  position: relative;\n  align-self: stretch;\n  flex: 1 1 auto;\n  width: 100%;\n  min-height: 9rem;\n  overflow: hidden;\n  border-radius: 0.75rem;\n  /* Shown until the shader's first frame, and permanently if WebGL is\n     unavailable. Derived from the program's palette, not typed twice. */\n  background: linear-gradient(145deg, #f1f5f9 0%, #2563eb 58%, #7c3aed 100%);\n}\n\n.fx-ripple-grid > canvas {\n  position: absolute;\n  inset: 0;\n  display: block;\n  width: 100%;\n  height: 100%;\n}\n\n.dark .fx-ripple-grid {\n  background: linear-gradient(145deg, #04070f 0%, #3b82f6 58%, #a855f7 100%);\n}\n",
+    "lines": 67
+  },
+  "ascii-rain": {
+    "html": "<div class=\"fx-ascii-rain\"><canvas data-hoverlab-shader=\"ascii-rain\" aria-hidden=\"true\"></canvas></div>",
+    "css": ".fx-ascii-rain {\n  position: relative;\n  align-self: stretch;\n  flex: 1 1 auto;\n  width: 100%;\n  min-height: 9rem;\n  overflow: hidden;\n  border-radius: 0.75rem;\n  /* Shown until the shader's first frame, and permanently if WebGL is\n     unavailable. Derived from the program's palette, not typed twice. */\n  background: linear-gradient(145deg, #f8fafc 0%, #94a3b8 58%, #0f172a 100%);\n}\n\n.fx-ascii-rain > canvas {\n  position: absolute;\n  inset: 0;\n  display: block;\n  width: 100%;\n  height: 100%;\n}\n\n.dark .fx-ascii-rain {\n  background: linear-gradient(145deg, #020803 0%, #14532d 58%, #4ade80 100%);\n}\n",
+    "lines": 108
+  },
+  "particle-drift": {
+    "html": "<div class=\"fx-particle-drift\"><canvas data-hoverlab-shader=\"particle-drift\" aria-hidden=\"true\"></canvas></div>",
+    "css": ".fx-particle-drift {\n  position: relative;\n  align-self: stretch;\n  flex: 1 1 auto;\n  width: 100%;\n  min-height: 9rem;\n  overflow: hidden;\n  border-radius: 0.75rem;\n  /* Shown until the shader's first frame, and permanently if WebGL is\n     unavailable. Derived from the program's palette, not typed twice. */\n  background: linear-gradient(145deg, #f8fafc 0%, #6366f1 58%, #94a3b8 100%);\n}\n\n.fx-particle-drift > canvas {\n  position: absolute;\n  inset: 0;\n  display: block;\n  width: 100%;\n  height: 100%;\n}\n\n.dark .fx-particle-drift {\n  background: linear-gradient(145deg, #03050d 0%, #818cf8 58%, #334155 100%);\n}\n",
+    "lines": 145
+  }
+}

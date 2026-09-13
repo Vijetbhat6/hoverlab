@@ -41,15 +41,32 @@ export type BlockCategory =
   | 'Authentication'
   | 'Dashboards'
   | 'Data Tables'
+  /* The create/read/update/delete family, in all three surfaces. Its own
+   * category rather than a corner of Data Tables or Modals & Drawers,
+   * because the interesting question about a CRUD screen is which of the
+   * four verbs it serves and on which surface — and a visitor building an
+   * internal tool wants to see the whole matrix at once. */
+  | 'CRUD'
   | 'Charts & Metrics'
   | 'Settings'
   | 'Empty & Error States'
   | 'Modals & Drawers'
   | 'Onboarding'
   | 'Notifications'
+  /* Human-to-human messaging: threads, bubbles, inboxes, calls. Kept apart
+   * from Agent Chat on purpose — a delivery receipt, a mute state and an
+   * active speaker are problems an assistant thread does not have. */
+  | 'Communication'
   | 'Command & Search'
   | 'File Upload'
   | 'Billing & Usage'
+  /* Anything whose subject is a date or a time: month and week views,
+   * availability grids, slot pickers, timezone strips, recurrence editors.
+   * Its own category rather than a corner of Dashboards, because the hard
+   * part of a scheduling screen is never the shell it sits in — it is the
+   * overflow on a busy day, the zone the slot is quoted in, and the keyboard
+   * model for a grid of dates, and none of those are Dashboard problems. */
+  | 'Scheduling & Calendar'
   /* -- AI: the surfaces an agent product is assembled from ---------- *
    * Separate from Product on purpose. These are not "a dashboard with
    * a chatbot bolted on" — a thread, a reasoning trace and an approval
@@ -66,6 +83,10 @@ export type BlockCategory =
   | 'Product Detail'
   | 'Cart & Checkout'
   | 'Orders & Reviews'
+  /* Everything after the money has changed hands: warranties, refunds,
+   * returns, repairs. Nobody builds these until the complaints start, which
+   * is exactly why they belong in a catalog. */
+  | 'After-Sale Service'
 
 export const BLOCK_CATEGORIES: BlockCategory[] = [
   'Heroes',
@@ -83,15 +104,18 @@ export const BLOCK_CATEGORIES: BlockCategory[] = [
   'Authentication',
   'Dashboards',
   'Data Tables',
+  'CRUD',
   'Charts & Metrics',
   'Settings',
   'Empty & Error States',
   'Modals & Drawers',
   'Onboarding',
   'Notifications',
+  'Communication',
   'Command & Search',
   'File Upload',
   'Billing & Usage',
+  'Scheduling & Calendar',
   'Agent Chat',
   'Agent Reasoning',
   'Human in the Loop',
@@ -101,12 +125,13 @@ export const BLOCK_CATEGORIES: BlockCategory[] = [
   'Product Detail',
   'Cart & Checkout',
   'Orders & Reviews',
+  'After-Sale Service',
 ]
 
 /**
  * The audiences the taxonomy serves, used to group the category rail on
- * `/blocks`. A flat list of 33 categories is a wall; four groups of roughly
- * ten is a menu.
+ * `/blocks`. A flat list of thirty-odd categories is a wall; four groups of
+ * roughly ten is a menu.
  */
 export type BlockGroup = 'Marketing' | 'Product' | 'AI Interfaces' | 'Commerce'
 
@@ -133,15 +158,18 @@ export const GROUP_OF: Record<BlockCategory, BlockGroup> = {
   Authentication: 'Product',
   Dashboards: 'Product',
   'Data Tables': 'Product',
+  CRUD: 'Product',
   'Charts & Metrics': 'Product',
   Settings: 'Product',
   'Empty & Error States': 'Product',
   'Modals & Drawers': 'Product',
   Onboarding: 'Product',
   Notifications: 'Product',
+  Communication: 'Product',
   'Command & Search': 'Product',
   'File Upload': 'Product',
   'Billing & Usage': 'Product',
+  'Scheduling & Calendar': 'Product',
   'Agent Chat': 'AI Interfaces',
   'Agent Reasoning': 'AI Interfaces',
   'Human in the Loop': 'AI Interfaces',
@@ -151,6 +179,7 @@ export const GROUP_OF: Record<BlockCategory, BlockGroup> = {
   'Product Detail': 'Commerce',
   'Cart & Checkout': 'Commerce',
   'Orders & Reviews': 'Commerce',
+  'After-Sale Service': 'Commerce',
 }
 
 /* ------------------------------------------------------------------ *

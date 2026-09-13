@@ -324,6 +324,42 @@ import { ReviewDistributionBand } from './sources/review-distribution-band'
 import { CustomerOutcomeBand } from './sources/customer-outcome-band'
 import { KpiSummaryBand } from './sources/kpi-summary-band'
 
+import { CrudCreateForm } from './sources/crud-create-form'
+import { CrudCreateModal } from './sources/crud-create-modal'
+import { CrudCreateDrawer } from './sources/crud-create-drawer'
+import { CrudReadPage } from './sources/crud-read-page'
+import { CrudReadModal } from './sources/crud-read-modal'
+import { CrudUpdateForm } from './sources/crud-update-form'
+import { CrudUpdateModal } from './sources/crud-update-modal'
+import { CrudUpdateDrawer } from './sources/crud-update-drawer'
+import { CrudDeleteCascade } from './sources/crud-delete-cascade'
+import { CrudSuccessState } from './sources/crud-success-state'
+import { CrudBulkEditDrawer } from './sources/crud-bulk-edit-drawer'
+import { CrudArchiveRestore } from './sources/crud-archive-restore'
+import { SearchFacetedResults } from './sources/search-faceted-results'
+import { SearchFacetRange } from './sources/search-facet-range'
+import { SupportChatWidget } from './sources/support-chat-widget'
+import { MessageBubbleThread } from './sources/message-bubble-thread'
+import { MessageAttachmentBubble } from './sources/message-attachment-bubble'
+import { InboxThreadList } from './sources/inbox-thread-list'
+import { InboxThreadDetail } from './sources/inbox-thread-detail'
+import { VoiceMessagePlayer } from './sources/voice-message-player'
+import { VideoCallLayout } from './sources/video-call-layout'
+import { CallDeviceSettings } from './sources/call-device-settings'
+import { SupportTicketThread } from './sources/support-ticket-thread'
+import { GiftCardPurchase } from './sources/gift-card-purchase'
+import { GuestCheckoutForm } from './sources/guest-checkout-form'
+import { DiscountModal } from './sources/discount-modal'
+import { WarrantyCoveragePanel } from './sources/warranty-coverage-panel'
+import { RefundRequestForm } from './sources/refund-request-form'
+import { RefundStatusTracker } from './sources/refund-status-tracker'
+import { RefundsOverviewTable } from './sources/refunds-overview-table'
+import { ReturnExchangePicker } from './sources/return-exchange-picker'
+import { ReturnLabelInstructions } from './sources/return-label-instructions'
+import { RepairRequestForm } from './sources/repair-request-form'
+import { ReviewHistoryList } from './sources/review-history-list'
+import { GiftCardBalance } from './sources/gift-card-balance'
+
 export const BLOCK_PREVIEWS: Record<string, React.ReactNode> = {
   'hero-split': <HeroSplit />,
   'hero-centered': <HeroCentered />,
@@ -601,6 +637,41 @@ export const BLOCK_PREVIEWS: Record<string, React.ReactNode> = {
   'review-distribution-band': <ReviewDistributionBand />,
   'customer-outcome-band': <CustomerOutcomeBand />,
   'kpi-summary-band': <KpiSummaryBand />,
+  'crud-create-form': <CrudCreateForm />,
+  'crud-create-modal': <CrudCreateModal />,
+  'crud-create-drawer': <CrudCreateDrawer />,
+  'crud-read-page': <CrudReadPage />,
+  'crud-read-modal': <CrudReadModal />,
+  'crud-update-form': <CrudUpdateForm />,
+  'crud-update-modal': <CrudUpdateModal />,
+  'crud-update-drawer': <CrudUpdateDrawer />,
+  'crud-delete-cascade': <CrudDeleteCascade />,
+  'crud-success-state': <CrudSuccessState />,
+  'crud-bulk-edit-drawer': <CrudBulkEditDrawer />,
+  'crud-archive-restore': <CrudArchiveRestore />,
+  'search-faceted-results': <SearchFacetedResults />,
+  'search-facet-range': <SearchFacetRange />,
+  'support-chat-widget': <SupportChatWidget />,
+  'message-bubble-thread': <MessageBubbleThread />,
+  'message-attachment-bubble': <MessageAttachmentBubble />,
+  'inbox-thread-list': <InboxThreadList />,
+  'inbox-thread-detail': <InboxThreadDetail />,
+  'voice-message-player': <VoiceMessagePlayer />,
+  'video-call-layout': <VideoCallLayout />,
+  'call-device-settings': <CallDeviceSettings />,
+  'support-ticket-thread': <SupportTicketThread />,
+  'gift-card-purchase': <GiftCardPurchase />,
+  'guest-checkout-form': <GuestCheckoutForm />,
+  'discount-modal': <DiscountModal />,
+  'warranty-coverage-panel': <WarrantyCoveragePanel />,
+  'refund-request-form': <RefundRequestForm />,
+  'refund-status-tracker': <RefundStatusTracker />,
+  'refunds-overview-table': <RefundsOverviewTable />,
+  'return-exchange-picker': <ReturnExchangePicker />,
+  'return-label-instructions': <ReturnLabelInstructions />,
+  'repair-request-form': <RepairRequestForm />,
+  'review-history-list': <ReviewHistoryList />,
+  'gift-card-balance': <GiftCardBalance />,
 }
 
 /** The rendered preview for a block, or undefined if the key is unknown. */

@@ -83,21 +83,39 @@ const DEFAULT_MILESTONES: Milestone[] = [
   },
 ]
 
+/*
+  A stable id suffix derived from this instance's own heading.
+
+  `useId` is the right answer and is not available here: this is a server
+  component and hooks are not. The heading is what differs when a section is
+  used twice on one page, so hashing it gives each copy its own
+  `aria-labelledby` target without a hook, a prop or a counter — and it
+  stays stable across server and client renders, which a counter would not.
+*/
+function instanceId(...parts: (string | undefined)[]): string {
+  const text = parts.filter(Boolean).join('|')
+  let hash = 0
+  for (let i = 0; i < text.length; i++) hash = (Math.imul(hash, 31) + text.charCodeAt(i)) | 0
+  return (hash >>> 0).toString(36).slice(0, 6)
+}
+
 export function StatsTimeline({
   eyebrow = 'Six years',
   heading = 'Growth is a line, not a number',
   milestones = DEFAULT_MILESTONES,
   className = '',
 }: StatsTimelineProps) {
+  const headingId = `stats-timeline-heading-${instanceId(heading, eyebrow)}`
+
   return (
     <section
-      aria-labelledby="stats-timeline-heading"
+      aria-labelledby={headingId}
       className={`mx-auto w-full max-w-3xl px-4 py-16 sm:px-6 lg:px-8 ${className}`}
     >
       <div className="max-w-2xl">
         <p className="text-sm font-medium uppercase tracking-wider text-primary">{eyebrow}</p>
         <h2
-          id="stats-timeline-heading"
+          id={headingId}
           className="mt-3 text-balance text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
         >
           {heading}

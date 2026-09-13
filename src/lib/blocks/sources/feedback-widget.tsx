@@ -78,6 +78,17 @@ export function FeedbackWidget({
   onSubmit,
   className = '',
 }: FeedbackWidgetProps) {
+  /*
+    Ids come from `useId`, not from a literal.
+
+    A literal is correct until the section appears twice on one page — and
+    then `aria-labelledby` resolves to whichever copy is first in the
+    document, so the second one is announced with the first one's heading.
+    It renders identically and reads wrongly, which is why nothing catches
+    it but an id check.
+  */
+  const headingId = React.useId()
+
   const [rating, setRating] = React.useState('')
   const [comment, setComment] = React.useState('')
   const [email, setEmail] = React.useState('')
@@ -93,13 +104,13 @@ export function FeedbackWidget({
     return (
       <section
         className={`mx-auto w-full max-w-md px-4 py-16 sm:px-6 ${className}`}
-        aria-labelledby="feedback-heading"
+        aria-labelledby={headingId}
       >
         <div
           role="status"
           className="rounded-2xl border border-border bg-card p-6 text-center"
         >
-          <h2 id="feedback-heading" className="text-base font-semibold text-foreground">
+          <h2 id={headingId} className="text-base font-semibold text-foreground">
             Thank you — that is genuinely useful.
           </h2>
           <p className="mt-2 text-sm text-muted-foreground">
@@ -126,7 +137,7 @@ export function FeedbackWidget({
 
   return (
     <section
-      aria-labelledby="feedback-heading"
+      aria-labelledby={headingId}
       className={`mx-auto w-full max-w-md px-4 py-16 sm:px-6 ${className}`}
     >
       <form
@@ -135,7 +146,7 @@ export function FeedbackWidget({
       >
         <div className="flex items-start justify-between gap-3">
           <h2
-            id="feedback-heading"
+            id={headingId}
             className="flex items-center gap-2 text-sm font-semibold text-foreground"
           >
             <MessageSquare aria-hidden className="h-4 w-4 text-muted-foreground" />

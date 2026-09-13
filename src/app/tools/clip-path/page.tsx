@@ -1,9 +1,9 @@
 'use client'
 
 /**
- * Clip-path & Blob Generator.
+ * Clip-path, Blob & Shape Magic.
  *
- * Two modes:
+ * Three modes:
  *  1. Presets — the classic polygon() shapes (chevron, star, arrow, speech
  *     bubble…), each with the one or two parameters that shape actually has,
  *     because "star" is not one shape but a family of them.
@@ -11,18 +11,35 @@
  *     per-point radius jitter, smoothed Catmull-Rom → cubic bezier, drawn in
  *     a 0–100 box so the same path works as SVG anywhere.
  *
- * Both previews sit over a checkerboard, because a clip only reads as a cut
+ *  3. Merge — Shape Magic. Several circles that blend into one organic
+ *     outline, dragged around a canvas. The merged edge is real geometry
+ *     rather than a gooey filter, which is what lets it leave as an SVG, a
+ *     React component, a clip-path or a PNG. See `lib/shape-magic.ts` for
+ *     why that distinction is the whole point.
+ *
+ * Every preview sits over a checkerboard, because a clip only reads as a cut
  * when you can see what it removed. polygon() takes percentages and scales
- * with the element; path() clips in px, so the blob output says so.
+ * with the element; path() clips in px, so both path outputs say so.
  */
 
 import * as React from 'react'
-import { Shapes, Shuffle } from 'lucide-react'
+import { Plus, Shapes, Shuffle, Trash2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { SliderField } from '@/components/control-field'
 import { CopyCssCard } from '@/components/designer-tools/copy-css-card'
+import { DownloadBar, type DownloadAction } from '@/components/designer-tools/download-bar'
+import { ShapeStage } from '@/components/designer-tools/shape-stage'
+import { downloadBlob, downloadText, svgToPngBlob } from '@/lib/download'
+import {
+  mergedShapePath,
+  shapeClipPathCss,
+  shapeReactComponent,
+  shapeSvg,
+  smoothClosedPath,
+  type Metaball,
+} from '@/lib/shape-magic'
 import { arbitraryValue } from '@/lib/tailwind-arbitrary'
 import { ToolLayout } from '@/components/designer-tools/tool-layout'
 import { ToolPresetsBar } from '@/components/designer-tools/tool-presets-bar'
@@ -33,7 +50,23 @@ import { cn } from '@/lib/utils'
 
 const TOOL = '/tools/clip-path'
 
-type Mode = 'presets' | 'blob'
+type Mode = 'presets' | 'blob' | 'merge'
+
+/** The modes, in the order the switcher shows them. Also the share-link allow-list. */
+const MODES: Mode[] = ['presets', 'blob', 'merge']
+
+/**
+ * What each mode is called in the switcher.
+ *
+ * Was `capitalize` on the raw key, which is fine for two words that happen
+ * to describe themselves and wrong for the third: "Merge" is the verb, and
+ * the thing it makes is the reason to press it.
+ */
+const MODE_LABEL: Record<Mode, string> = {
+  presets: 'Presets',
+  blob: 'Blob',
+  merge: 'Shape Magic',
+}
 
 interface ShapeParam {
   label: string
@@ -341,24 +374,6 @@ function mulberry32(seed: number): () => number {
   }
 }
 
-/** Catmull-Rom through all points → closed cubic-bezier SVG path. */
-function smoothClosedPath(points: [number, number][]): string {
-  const n = points.length
-  let d = `M ${points[0][0].toFixed(2)},${points[0][1].toFixed(2)}`
-  for (let i = 0; i < n; i++) {
-    const p0 = points[(i - 1 + n) % n]
-    const p1 = points[i]
-    const p2 = points[(i + 1) % n]
-    const p3 = points[(i + 2) % n]
-    const c1x = p1[0] + (p2[0] - p0[0]) / 6
-    const c1y = p1[1] + (p2[1] - p0[1]) / 6
-    const c2x = p2[0] - (p3[0] - p1[0]) / 6
-    const c2y = p2[1] - (p3[1] - p1[1]) / 6
-    d += ` C ${c1x.toFixed(2)},${c1y.toFixed(2)} ${c2x.toFixed(2)},${c2y.toFixed(2)} ${p2[0].toFixed(2)},${p2[1].toFixed(2)}`
-  }
-  return d + ' Z'
-}
-
 function blobPath(count: number, jitter: number, seed: number): string {
   const rand = mulberry32(seed)
   const step = (Math.PI * 2) / count
@@ -387,6 +402,12 @@ interface ClipState {
   blobPoints: number
   blobJitter: number
   blobSeed: number
+  /** Shape Magic: the circles that merge into one outline. */
+  balls: Metaball[]
+  /** Which of them the sliders and the arrow keys are aimed at. */
+  selected: number
+  /** How readily they blend, 0-100. See `lib/shape-magic.ts`. */
+  gooeyness: number
   gradFrom: string
   gradTo: string
 }
@@ -399,31 +420,64 @@ const DEFAULT_STATE: ClipState = {
   blobPoints: 6,
   blobJitter: 55,
   blobSeed: 1337,
+  /*
+    Three circles rather than two.
+
+    Two make a peanut, which demonstrates merging but looks like a mistake.
+    Three in a loose triangle is the shape that shows what the tool is for
+    on first load, and it is also the arrangement where moving the
+    gooeyness slider visibly changes the topology rather than just the
+    waist.
+  */
+  balls: [
+    { id: 1, x: 38, y: 40, r: 20 },
+    { id: 2, x: 62, y: 44, r: 16 },
+    { id: 3, x: 50, y: 68, r: 14 },
+  ],
+  selected: 1,
+  gooeyness: 55,
   gradFrom: '#10b981',
   gradTo: '#6366f1',
 }
 
 /**
- * The two fields `useToolState`'s shape guard cannot check on a shared link.
+ * The fields `useToolState`'s shape guard cannot check on a shared link.
  *
- * The guard guarantees `mode` is a string and `presetId` is a string. It
- * cannot know that `mode` is one of two, or that `presetId` has to name a
- * shape that still exists — `PRESETS` is data this file owns. Both matter
- * on render: an unrecognised `mode` matches neither output branch and draws
- * an empty panel, and a stale `presetId` would silently fall back to the
- * first shape while the controls claimed otherwise.
+ * The guard guarantees types: `mode` is a string, `presetId` is a string,
+ * `balls` is an array of objects with three numbers each. It cannot know
+ * that `mode` is one of three, that `presetId` has to name a shape that
+ * still exists, or that `selected` has to name a circle that is actually in
+ * the list — `PRESETS` is data this file owns, and the other two are
+ * relationships between fields rather than properties of one.
  *
- * Numbers are left alone. Seed, points and jitter fully determine the blob,
- * and the sliders clamp them; a link carrying an out-of-range one draws an
+ * All three matter on render. An unrecognised `mode` matches no output
+ * branch and draws an empty panel. A stale `presetId` falls back to the
+ * first shape while the controls claim otherwise. And a `selected` naming
+ * nothing leaves the radius slider driving a circle that does not exist,
+ * which reads as a tool that has stopped responding.
+ *
+ * The empty-`balls` case is the one worth spelling out: the guard drops
+ * array elements individually, so a link mangled in transit can arrive with
+ * a well-typed empty list. That is a canvas with nothing on it and no
+ * selection, so it falls back to the default arrangement rather than to a
+ * blank stage nobody can tell from a bug.
+ *
+ * Numbers are otherwise left alone. Seed, points, jitter and gooeyness are
+ * clamped by their sliders; a link carrying an out-of-range one draws an
  * odd shape, which is a shape, not a broken page.
  */
 function sanitizeShared(shared: ClipState): ClipState {
+  const balls =
+    Array.isArray(shared.balls) && shared.balls.length > 0 ? shared.balls : DEFAULT_STATE.balls
+
   return {
     ...shared,
-    mode: shared.mode === 'presets' || shared.mode === 'blob' ? shared.mode : DEFAULT_STATE.mode,
+    mode: MODES.includes(shared.mode) ? shared.mode : DEFAULT_STATE.mode,
     presetId: PRESETS.some((p) => p.id === shared.presetId)
       ? shared.presetId
       : DEFAULT_STATE.presetId,
+    balls,
+    selected: balls.some((b) => b.id === shared.selected) ? shared.selected : balls[0].id,
   }
 }
 
@@ -487,10 +541,114 @@ export default function ClipPathToolPage() {
 
   const regenerate = () => update({ blobSeed: Math.floor(Math.random() * 2 ** 31) })
 
+  /* ---------------------------------------------------------------- *
+   *  Shape Magic
+   * ---------------------------------------------------------------- */
+
+  const selectedBall =
+    state.balls.find((b) => b.id === state.selected) ?? state.balls[0]
+
+  /*
+    The contour, recomputed whenever a circle or the blend moves.
+
+    It is a grid sweep — ~9,000 field evaluations at the default resolution
+    — which is cheap enough to run on every drag frame and far too much to
+    run on every render, hence the memo. The dependency is the balls array
+    itself: `useToolState` replaces it on each edit, so identity is an
+    honest signal here rather than a trap.
+  */
+  const mergedD = React.useMemo(
+    () => mergedShapePath(state.balls, { gooeyness: state.gooeyness }),
+    [state.balls, state.gooeyness],
+  )
+
+  const mergeSvg = React.useMemo(() => shapeSvg(mergedD), [mergedD])
+  const mergeReact = React.useMemo(() => shapeReactComponent(mergedD, 'Blob'), [mergedD])
+  const mergeCss = React.useMemo(() => shapeClipPathCss(mergedD), [mergedD])
+
+  /** Move one circle. Kept stable so the stage does not re-bind on each drag frame. */
+  const moveBall = React.useCallback(
+    (id: number, x: number, y: number) =>
+      setState((s) => ({ ...s, balls: s.balls.map((b) => (b.id === id ? { ...b, x, y } : b)) })),
+    [setState],
+  )
+
+  const selectBall = React.useCallback(
+    (id: number) => setState((s) => ({ ...s, selected: id })),
+    [setState],
+  )
+
+  function patchSelected(patch: Partial<Metaball>) {
+    update({
+      balls: state.balls.map((b) => (b.id === state.selected ? { ...b, ...patch } : b)),
+    })
+  }
+
+  function addBall() {
+    // Ids are max+1 rather than length+1: removing the middle circle and
+    // adding another would otherwise mint an id that is already taken, and
+    // two circles sharing one would move together for no visible reason.
+    const id = state.balls.reduce((max, b) => Math.max(max, b.id), 0) + 1
+    update({
+      balls: [...state.balls, { id, x: 50, y: 50, r: 14 }],
+      selected: id,
+    })
+  }
+
+  function removeBall() {
+    // The last circle is not removable. An empty canvas has no shape, no
+    // selection and no obvious way back, and "add one" is not a state a
+    // tool should be able to strand someone in.
+    if (state.balls.length <= 1) return
+    const balls = state.balls.filter((b) => b.id !== state.selected)
+    update({ balls, selected: balls[0].id })
+  }
+
+  function scatter() {
+    update({
+      balls: state.balls.map((b) => ({
+        ...b,
+        x: 25 + Math.random() * 50,
+        y: 25 + Math.random() * 50,
+        r: 10 + Math.random() * 12,
+      })),
+    })
+  }
+
+  const mergeExports = React.useMemo<DownloadAction[]>(
+    () => [
+      {
+        label: 'SVG',
+        title: 'The outline as a standalone SVG file',
+        run: () => downloadText(mergeSvg, 'shape.svg', 'image/svg+xml'),
+      },
+      {
+        label: 'PNG',
+        title: 'Rasterised at 1024×1024, on a transparent ground',
+        run: async () => {
+          /*
+            Rasterised from the export SVG, not from the stage.
+
+            The stage carries the drag handles and a gradient that only ever
+            existed to make the preview legible, and a PNG with dashed
+            circles baked into it is not the artifact anyone asked for.
+            Going through `shapeSvg` means the file is the same geometry the
+            SVG and clip-path exports carry, filled flat in the first
+            gradient stop so it is visible against anything.
+          */
+          const blob = await svgToPngBlob(shapeSvg(mergedD, state.gradFrom), 1024, 1024)
+          if (!blob) return false
+          downloadBlob(blob, 'shape.png')
+        },
+      },
+    ],
+    [mergeSvg, mergedD, state.gradFrom],
+  )
+
   return (
     <ToolLayout
-      name="Clip-path & Blob"
-      tagline="Polygon shape presets & organic blobs"
+      name="Clip-path, Blob & Shape Magic"
+      tagline="Polygon presets, organic blobs, and circles that merge into one shape"
       icon={<Shapes className="h-5 w-5" />}
     >
       <ToolWorkbench controlsWidth="380px">
@@ -505,6 +663,18 @@ export default function ClipPathToolPage() {
                 className="h-[280px] w-[280px]"
                 style={{ background: gradient, clipPath: polygon }}
               />
+            ) : state.mode === 'merge' ? (
+              <div className="h-[280px] w-[280px]">
+                <ShapeStage
+                  balls={state.balls}
+                  d={mergedD}
+                  selectedId={state.selected}
+                  onSelect={selectBall}
+                  onMove={moveBall}
+                  from={state.gradFrom}
+                  to={state.gradTo}
+                />
+              </div>
             ) : (
               <svg width={280} height={280} viewBox="0 0 100 100" role="img" aria-label="Blob preview">
                 <defs>
@@ -520,19 +690,19 @@ export default function ClipPathToolPage() {
 
           {/* Mode selector */}
           <div className="flex items-center gap-2">
-            {(['presets', 'blob'] as Mode[]).map((m) => (
+            {MODES.map((m) => (
               <button
                 key={m}
                 type="button"
                 onClick={() => update({ mode: m })}
                 className={cn(
-                  'flex-1 rounded-md border px-3 py-2 text-sm font-medium capitalize transition-colors',
+                  'flex-1 rounded-md border px-3 py-2 text-sm font-medium transition-colors',
                   state.mode === m
                     ? 'border-primary bg-primary/10 text-primary'
                     : 'border-border bg-background hover:bg-muted',
                 )}
               >
-                {m}
+                {MODE_LABEL[m]}
               </button>
             ))}
           </div>
@@ -548,6 +718,20 @@ export default function ClipPathToolPage() {
             <>
               <CopyCssCard code={blobCss} title="CSS with clip-path" language="css" />
               <CopyCssCard code={blobSvg} title="SVG path" language="svg" />
+            </>
+          )}
+          {state.mode === 'merge' && (
+            <>
+              {/*
+                Four formats, in the order they are worth taking. The React
+                component first because it is the one that stays editable
+                and takes its colour from where it lands; the clip-path last
+                because it is the one with a caveat attached.
+              */}
+              <CopyCssCard code={mergeReact} title="React component" language="tsx" />
+              <CopyCssCard code={mergeSvg} title="SVG" language="svg" />
+              <CopyCssCard code={mergeCss} title="CSS with clip-path" language="css" />
+              <DownloadBar actions={mergeExports} />
             </>
           )}
 
@@ -654,6 +838,121 @@ export default function ClipPathToolPage() {
               <p className="text-xs text-muted-foreground">
                 The same seed always draws the same blob, so a shape you like survives a
                 reload. Regenerate rolls a new one.
+              </p>
+            </div>
+          )}
+
+          {state.mode === 'merge' && (
+            <div className="space-y-4 rounded-lg border border-border bg-card p-5">
+              <div className="flex items-center justify-between">
+                <Label className="text-sm font-medium">Circles</Label>
+                <div className="flex items-center gap-1.5">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="h-7 gap-1 text-xs"
+                    onClick={scatter}
+                  >
+                    <Shuffle className="h-3 w-3" /> Scatter
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="h-7 gap-1 text-xs"
+                    onClick={addBall}
+                  >
+                    <Plus className="h-3 w-3" /> Add
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="h-7 gap-1 text-xs"
+                    onClick={removeBall}
+                    disabled={state.balls.length <= 1}
+                  >
+                    <Trash2 className="h-3 w-3" /> Remove
+                  </Button>
+                </div>
+              </div>
+
+              {/*
+                The selector is a row of buttons rather than a dropdown: the
+                canvas already shows which circle is which, and a menu that
+                hides three items costs a click to tell you nothing.
+              */}
+              <div className="flex flex-wrap gap-1.5">
+                {state.balls.map((ball, i) => (
+                  <button
+                    key={ball.id}
+                    type="button"
+                    onClick={() => selectBall(ball.id)}
+                    aria-pressed={ball.id === state.selected}
+                    className={cn(
+                      'rounded-md border px-2.5 py-1 text-xs font-medium transition-colors',
+                      ball.id === state.selected
+                        ? 'border-primary bg-primary/10 text-primary'
+                        : 'border-border hover:bg-muted',
+                    )}
+                  >
+                    Circle {i + 1}
+                  </button>
+                ))}
+              </div>
+
+              <SliderField
+                label="Blend"
+                description="How far each circle's influence reaches. Low keeps them separate until they physically overlap; high grows a neck between circles that are some way apart."
+                value={state.gooeyness}
+                min={0}
+                max={100}
+                step={1}
+                display={`${state.gooeyness}%`}
+                onChange={(v) => update({ gooeyness: v })}
+              />
+
+              {/*
+                X, Y and radius as sliders, not only as a drag.
+
+                WCAG 2.2's 2.5.7 requires a non-drag route to anything a
+                drag can do, and this is that route — alongside the arrow
+                keys on the canvas handles themselves. It is also simply
+                better for precision: nobody drags a circle to exactly 50.
+              */}
+              <SliderField
+                label="Selected circle — across"
+                description="Horizontal position in the 0–100 box the exported path is drawn in."
+                value={selectedBall.x}
+                min={0}
+                max={100}
+                step={1}
+                display={String(Math.round(selectedBall.x))}
+                onChange={(v) => patchSelected({ x: v })}
+              />
+              <SliderField
+                label="Selected circle — down"
+                description="Vertical position, measured from the top."
+                value={selectedBall.y}
+                min={0}
+                max={100}
+                step={1}
+                display={String(Math.round(selectedBall.y))}
+                onChange={(v) => patchSelected({ y: v })}
+              />
+              <SliderField
+                label="Selected circle — radius"
+                description="A lone circle keeps this radius exactly, whatever the blend is set to — so sizing and merging never fight each other."
+                value={selectedBall.r}
+                min={2}
+                max={40}
+                step={1}
+                display={String(Math.round(selectedBall.r))}
+                onChange={(v) => patchSelected({ r: v })}
+              />
+
+              <p className="text-xs text-muted-foreground">
+                Drag a circle on the canvas, or focus one and use the arrow keys
+                (hold Shift for bigger steps). The circles are scaffolding — what
+                every export carries is the merged outline alone.
               </p>
             </div>
           )}

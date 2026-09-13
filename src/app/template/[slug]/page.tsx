@@ -27,6 +27,7 @@ import {
   Terminal,
 } from 'lucide-react'
 import { JsonLd } from '@/components/json-ld'
+import { CopyForAi } from '@/components/copy-for-ai'
 import { TemplateRouteSwitcher } from '@/components/templates/template-route-switcher'
 import { TemplateFileBrowser } from '@/components/templates/template-file-browser'
 import { TemplateDownloadButton } from '@/components/templates/template-download-button'
@@ -51,7 +52,6 @@ import {
   FavoriteArtifactButton,
   BundleArtifactButton,
   CompareArtifactButton,
-  CopyDnaButton,
 } from '@/components/artifact-actions'
 import { ArtifactFacts } from '@/components/artifact-facts'
 import { StickyInstallBar } from '@/components/sticky-install-bar'
@@ -198,10 +198,6 @@ export default async function TemplateDetailPage({ params }: PageProps) {
                 level: 'template',
               }}
             />
-            {/* Aimed at whoever is about to build with an agent rather than
-                paste a component: the tokens, motion and rules, as one
-                pasteable document. */}
-            <CopyDnaButton artifactId={template.id} />
             {/*
                 The screen on show, as Figma layers.
 
@@ -355,6 +351,25 @@ export default async function TemplateDetailPage({ params }: PageProps) {
             </p>
           </div>
         </section>
+
+        {/*
+          Directly under "Get it", because for a template it is a second way
+          of getting it rather than a postscript. It inlines no source — see
+          the note in lib/ai-handoff.ts about what a forty-thousand-line
+          paste does to a context window — so what the agent receives is the
+          `init` command, the pages it composes and the system to build
+          against, which is exactly the brief a scaffold needs.
+        */}
+        <CopyForAi
+          subject={{
+            level: 'template',
+            id: template.id,
+            name: template.name,
+            description: template.description,
+            deps: template.deps,
+            composedOf: template.composedOf,
+          }}
+        />
 
         {/* ---------------------------------------------------------- *
          *  Routes — the spine

@@ -26,6 +26,7 @@ import {
   artifactHref,
   type ArtifactLevel,
 } from '@/lib/artifact-types'
+import { PRIMITIVE_INDEX } from '@/lib/primitives/primitive-index'
 import type { Kit, KitContents } from '@/lib/kits/catalog'
 
 /** One item of a kit, flattened to what a row shows. */
@@ -61,6 +62,7 @@ const FIELD: Record<ArtifactLevel, keyof KitContents> = {
   template: 'templates',
   page: 'pages',
   block: 'blocks',
+  primitive: 'primitives',
   effect: 'effects',
 }
 
@@ -75,6 +77,7 @@ const BY_LEVEL: Record<ArtifactLevel, Map<string, KitItem>> = {
   template: indexOf('template', TEMPLATE_INDEX),
   page: indexOf('page', PAGE_INDEX),
   block: indexOf('block', BLOCK_INDEX),
+  primitive: indexOf('primitive', PRIMITIVE_INDEX),
   effect: indexOf('effect', EFFECT_INDEX),
 }
 

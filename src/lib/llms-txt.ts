@@ -1,4 +1,5 @@
 import { TOTAL_COUNT, FEATURED_COUNT } from '@/lib/catalog-stats'
+import { PRIMITIVE_COUNT } from '@/lib/primitives/primitive-index'
 import { BLOCK_COUNT } from '@/lib/blocks/block-index'
 import { PAGE_COUNT } from '@/lib/pages/page-index'
 import { TEMPLATE_INDEX } from '@/lib/templates/template-index'
@@ -64,21 +65,25 @@ function link(name: string, path: string, note: string): string {
 
 export function buildLlmsTxt(): string {
   const templateCount = TEMPLATE_INDEX.length
-  const total = TOTAL_COUNT + BLOCK_COUNT + PAGE_COUNT + templateCount
+  const total = TOTAL_COUNT + PRIMITIVE_COUNT + BLOCK_COUNT + PAGE_COUNT + templateCount
 
   return `# Hoverlab
 
-> ${total.toLocaleString('en-US')} installable UI artifacts on four rungs — ${TOTAL_COUNT.toLocaleString('en-US')} CSS effects, ${BLOCK_COUNT} React blocks, ${PAGE_COUNT} full page routes and ${templateCount} scaffoldable project templates. Everything installs from the terminal or an editor agent without an account, an API key, or a visit to the website.
+> ${total.toLocaleString('en-US')} installable UI artifacts on five rungs — ${TOTAL_COUNT.toLocaleString('en-US')} effects, ${PRIMITIVE_COUNT} React primitives, ${BLOCK_COUNT} React blocks, ${PAGE_COUNT} full page routes and ${templateCount} scaffoldable project templates. Everything installs from the terminal or an editor agent without an account, an API key, or a visit to the website.
 
 Hoverlab is a catalog built for agents first. The same id resolves across
 every tier, so \`npx hoverlab add pricing-tiers\` works whether the caller
-knows it is asking for a block or not. Blocks and pages are Tailwind +
-React source you own after install; effects are plain CSS with no runtime.
+knows it is asking for a block or not. Primitives, blocks and pages are
+Tailwind + React source you own after install; effects are CSS, or — for
+fifteen of them — a fragment shader on a canvas.
 
 Pick the rung before you pick the artifact:
 
 - **effect** — one CSS animation or interaction (a gradient button, a
   shimmer skeleton). No JavaScript, no dependencies. ${TOTAL_COUNT.toLocaleString('en-US')} of them, ${FEATURED_COUNT} curated.
+- **primitive** — one React control (a segmented control, an input group,
+  a combobox, a field wrapper). The layer between an element and a
+  section, and the one no base library ships. ${PRIMITIVE_COUNT} of them.
 - **block** — one React section (a pricing table, a FAQ accordion).
   Tailwind classes only, ships as source into your repo. ${BLOCK_COUNT} of them.
 - **page** — a complete route composed of blocks (a checkout page, a
@@ -99,8 +104,9 @@ ${link('Registry docs', '/docs/registry', 'How to wire `@hoverlab` into componen
 ## Machine-readable endpoints
 
 ${link('REST API', '/docs/api', 'Public, unauthenticated, CORS-open. No key')}
-${link('Artifact resolver', '/api/v1/artifacts/hero-split', 'Resolves one id against all four tiers and returns its source. The endpoint to use when you do not know the rung')}
+${link('Artifact resolver', '/api/v1/artifacts/hero-split', 'Resolves one id against every tier and returns its source. The endpoint to use when you do not know the rung')}
 ${link('Effects', '/api/v1/effects', 'Search and page the effect catalog: `?q=`, `?category=`, `?featured=`, `?limit=`, `?offset=`')}
+${link('Primitives', '/api/v1/primitives', 'Same parameters, primitive catalog')}
 ${link('Blocks', '/api/v1/blocks', 'Same parameters, block catalog')}
 ${link('Pages', '/api/v1/pages', 'Same parameters, page catalog')}
 ${link('Templates', '/api/v1/templates', 'Same parameters, template catalog')}
@@ -111,12 +117,15 @@ ${link('Sitemap', '/sitemap.xml', 'Every indexable URL')}
 
 ## Browse surfaces (for humans, and for grounding a link)
 
-${link('Browse everything', '/browse', 'All four tiers in one filterable surface')}
+${link('Browse everything', '/browse', 'Every tier in one filterable surface')}
 ${link('Effects library', '/library', 'The effect catalog with live previews')}
+${link('Primitives', '/primitives', 'React controls by category — the layer under the blocks')}
 ${link('Blocks', '/blocks', 'React section components by category')}
 ${link('Pages', '/pages', 'Full route compositions')}
 ${link('Templates', '/templates', 'Scaffoldable projects')}
 ${link('Categories', '/category', 'The effect taxonomy')}
+${link('Free assets', '/assets', 'Generated SVG — animated icons, seeded avatars, invented company logos and isometric illustrations. No account, no attribution, not part of the artifact ladder')}
+${link('Themes', '/themes', 'Recolour every preview at once — accent, neutrals, typeface and corner radius, as named themes or nine lines of CSS')}
 
 ## Guided paths
 

@@ -345,7 +345,7 @@ export function generateV8(ctx) {
 }`
     add(mk({
       name: `${g.name} Event Card`,
-      category: 'Cards',
+      category: 'Dates & Time',
       description: `Listing led by a tear-off date block in a real \`<time>\`, so the day and month are one semantic unit rather than two decorated spans.`,
       html, css,
       tags: ['card', 'event', 'date', 'listing', 'calendar', g.name.toLowerCase()],
@@ -3208,7 +3208,7 @@ export function generateV8(ctx) {
 }`
     add(mk({
       name: `${t.name} Date Range`,
-      category: 'Forms & Validation',
+      category: 'Dates & Time',
       description: `Two dates joined by an en-dash inside one focus ring, with quick presets underneath because most range picks are a common span, not an arbitrary one.`,
       html, css,
       tags: ['form', 'date range', 'picker', 'presets', 'filter', t.name.toLowerCase()],

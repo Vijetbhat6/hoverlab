@@ -9,7 +9,10 @@
 import Link from 'next/link'
 import type { Metadata } from 'next'
 import { ArrowRight, Rocket, LayoutTemplate, Blocks } from 'lucide-react'
+import { NewThisWeek } from '@/components/new-this-week'
 import { TemplateCard } from '@/components/templates/template-card'
+import { SortableArtifactGrid } from '@/components/sortable-artifact-grid'
+import { addedAt } from '@/lib/recency'
 import { TierDefinition } from '@/components/tier-definition'
 import {
   TEMPLATE_COUNT,
@@ -51,6 +54,8 @@ export const metadata: Metadata = {
 
 export default function TemplatesHubPage() {
   const categories = populatedTemplateCategories()
+  /* Flat, in category order, so a sort has one list to rank. */
+  const allTemplates = categories.flatMap((category) => templatesInCategory(category))
   const totalRoutes = TEMPLATE_INDEX.reduce((n, t) => n + t.routes.length, 0)
 
   /*
@@ -117,18 +122,31 @@ export default function TemplatesHubPage() {
           </div>
         </header>
 
-        <div className="mt-16 space-y-16">
-          {categories.map((category) => (
-            <section key={category}>
-              <h2 className="mb-6 text-2xl font-bold tracking-tight">{category}</h2>
+        {/* What changed since last time — see the component for the two
+            states and why both print dates. */}
+        <NewThisWeek level="template" />
 
-              <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-                {templatesInCategory(category).map((template) => (
-                  <TemplateCard key={template.id} template={template} />
-                ))}
-              </div>
-            </section>
-          ))}
+        {/* The cards are rendered here and reordered in the browser — see
+            `SortableArtifactGrid` for why that is not a client grid. */}
+        <div className="mt-16">
+          <SortableArtifactGrid
+            noun="templates"
+            className="grid grid-cols-1 gap-6 lg:grid-cols-2"
+            items={allTemplates.map((template) => ({
+              id: template.id,
+              added: addedAt('template', template.id),
+              node: <TemplateCard key={template.id} template={template} />,
+            }))}
+            groups={categories.map((category) => ({
+              key: category,
+              ids: templatesInCategory(category).map((t) => t.id),
+              heading: (
+                <h2 key={category} className="mb-6 text-2xl font-bold tracking-tight">
+                  {category}
+                </h2>
+              ),
+            }))}
+          />
         </div>
 
         <section className="mt-20 rounded-2xl border border-border/60 bg-card/40 p-8 text-center">

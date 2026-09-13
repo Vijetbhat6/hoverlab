@@ -1094,7 +1094,7 @@ ${shimmer(c)}
 .${c} .g i:nth-child(n+22) { animation-delay: 0.3s; }`
     add(mk({
       name: 'Calendar Grid Skeleton',
-      category: 'Skeletons & Shimmers',
+      category: 'Dates & Time',
       description: 'Month-view placeholder with a header, amber weekday ticks, a 7-by-4 grid of day cells and a highlighted today dot.',
       html, css,
       tags: ['calendar', 'grid', 'month', 'skeleton', 'shimmer'],

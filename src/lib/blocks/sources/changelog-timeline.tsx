@@ -81,9 +81,18 @@ export function ChangelogTimeline({
         {subheading ? <p className="mt-3 text-muted-foreground">{subheading}</p> : null}
       </div>
 
+      {/*
+        Rows are keyed on date AND version, not on version alone.
+
+        A product changelog has unique version strings, so the version looked
+        like a natural key — but this block is also the right shape for an
+        incident history, where the badge is a status word and "Resolved"
+        appears on every second entry. React then drops the duplicates with a
+        console warning and the timeline silently loses rows.
+      */}
       <ol className="relative ms-3 space-y-10 border-s border-border/60 ps-8">
         {entries.map((entry) => (
-          <li key={entry.version} className="relative">
+          <li key={`${entry.date}-${entry.version}`} className="relative">
             <span
               aria-hidden
               className="absolute -start-[2.3rem] top-1.5 h-3 w-3 rounded-full border-2 border-background bg-primary ring-4 ring-primary/15"

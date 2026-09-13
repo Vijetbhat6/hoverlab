@@ -27,6 +27,7 @@ import { SiteHeader } from '@/components/site-header'
 import { JsonLd } from '@/components/json-ld'
 import { Button } from '@/components/ui/button'
 import { EFFECTS } from '@/lib/effects'
+import { PRIMITIVE_CATALOG } from '@/lib/primitives/catalog'
 import { BLOCK_CATALOG } from '@/lib/blocks/catalog'
 import { PAGE_CATALOG } from '@/lib/pages/catalog'
 import { TEMPLATE_CATALOG } from '@/lib/templates/catalog'
@@ -73,6 +74,7 @@ export const metadata: Metadata = {
  */
 const NAMES: Record<ArtifactLevel, Map<string, string>> = {
   effect: new Map(EFFECTS.map((e) => [e.id, e.name])),
+  primitive: new Map(PRIMITIVE_CATALOG.map((p) => [p.id, p.name])),
   block: new Map(BLOCK_CATALOG.map((b) => [b.id, b.name])),
   page: new Map(PAGE_CATALOG.map((p) => [p.id, p.name])),
   template: new Map(TEMPLATE_CATALOG.map((t) => [t.id, t.name])),
@@ -92,7 +94,11 @@ export default function ChangelogPage() {
   const days = [...byDate.entries()]
 
   const total =
-    EFFECTS.length + BLOCK_CATALOG.length + PAGE_CATALOG.length + TEMPLATE_CATALOG.length
+    EFFECTS.length +
+    PRIMITIVE_CATALOG.length +
+    BLOCK_CATALOG.length +
+    PAGE_CATALOG.length +
+    TEMPLATE_CATALOG.length
 
   return (
     <div className="min-h-screen bg-background text-foreground">

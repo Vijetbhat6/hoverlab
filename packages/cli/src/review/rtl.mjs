@@ -203,6 +203,10 @@ export const ICONS = {
     why: 'undo runs backwards through a history whose forward direction is the reading direction.',
   },
   Send: { ruling: 'mirror', why: 'the paper plane leaves along the reading direction.' },
+  Reply: {
+    ruling: 'mirror',
+    why: 'the arrow doubles back along the reading direction, to a message that lies towards the start edge. It is the matched pair of Forward, and mirroring one without the other breaks the pair.',
+  },
   LogOut: {
     ruling: 'mirror',
     why: 'an arrow leaving through a door, and the door is on the end edge.',
@@ -228,6 +232,14 @@ export const ICONS = {
   Play: {
     ruling: 'keep',
     why: 'transport controls run along the media timeline, not the text. Every RTL platform ships play pointing the same way, and a mirrored play button reads as rewind.',
+  },
+  SkipBack: {
+    ruling: 'keep',
+    why: 'the same timeline as Play. Back ten seconds is a position in a recording, and a recording does not run the other way in Arabic.',
+  },
+  SkipForward: {
+    ruling: 'keep',
+    why: 'the forward half of that pair. Mirroring one arrow of a matched transport set is worse than mirroring neither.',
   },
   ArrowLeftRight: {
     ruling: 'symmetric',

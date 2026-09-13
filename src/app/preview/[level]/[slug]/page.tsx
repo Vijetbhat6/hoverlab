@@ -33,12 +33,14 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
+import { PrimitivePreview } from '@/components/primitives/primitive-preview'
 import { BlockPreview } from '@/components/blocks/block-preview'
 import { PagePreview } from '@/components/pages/page-preview'
+import { PRIMITIVES, getPrimitive } from '@/lib/primitives/primitives'
 import { BLOCKS, getBlock } from '@/lib/blocks/blocks'
 import { PAGES, getPage } from '@/lib/pages/pages'
 
-const LEVELS = ['block', 'page'] as const
+const LEVELS = ['primitive', 'block', 'page'] as const
 type PreviewLevel = (typeof LEVELS)[number]
 
 function isPreviewLevel(value: string): value is PreviewLevel {
@@ -49,6 +51,7 @@ export const dynamicParams = false
 
 export function generateStaticParams() {
   return [
+    ...PRIMITIVES.map((primitive) => ({ level: 'primitive', slug: primitive.id })),
     ...BLOCKS.map((block) => ({ level: 'block', slug: block.id })),
     ...PAGES.map((page) => ({ level: 'page', slug: page.id })),
   ]
@@ -67,7 +70,12 @@ export default async function ArtifactPreviewFrame({ params, searchParams }: Pag
   const { level, slug } = await params
   if (!isPreviewLevel(level)) notFound()
 
-  const artifact = level === 'block' ? getBlock(slug) : getPage(slug)
+  const artifact =
+    level === 'primitive'
+      ? getPrimitive(slug)
+      : level === 'block'
+        ? getBlock(slug)
+        : getPage(slug)
   if (!artifact) notFound()
 
   /*
@@ -94,7 +102,9 @@ export default async function ArtifactPreviewFrame({ params, searchParams }: Pag
      * switched to in order to check it.
      */
     <main dir={rtl ? 'rtl' : undefined} className="min-h-screen bg-background text-foreground">
-      {level === 'block' ? (
+      {level === 'primitive' ? (
+        <PrimitivePreview componentKey={artifact.previewComponent} />
+      ) : level === 'block' ? (
         <BlockPreview componentKey={artifact.previewComponent} />
       ) : (
         <PagePreview componentKey={artifact.previewComponent} />

@@ -21,6 +21,7 @@ import * as React from 'react'
 import Link from 'next/link'
 import { Route, LayoutTemplate, Blocks, Lock } from 'lucide-react'
 import { ArtifactThumbnail } from '@/components/artifact-preview'
+import { UsageCount } from '@/components/usage-count'
 import { PaletteScope } from '@/components/templates/palette-scope'
 import { getPagePreview } from '@/lib/pages/registry'
 import { getPalette, paletteSwatch } from '@/lib/templates/palettes'
@@ -95,6 +96,12 @@ export function TemplateCard({ template }: { template: TemplateMeta }) {
               {palette.name}
             </span>
           ) : null}
+
+          {/* Absent on anything nobody copied this week — see <UsageCount>.
+              It sits after the palette rather than among the three counts,
+              which are properties of the template; this one is a property
+              of the week. */}
+          <UsageCount id={template.id} className="font-medium text-foreground/70" />
         </div>
       </div>
     </article>

@@ -16,6 +16,7 @@ import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import { ArrowLeft, ArrowRight, Blocks, CalendarDays, FileCode, Package, History } from 'lucide-react'
 import { CodeBlock } from '@/components/code-block'
+import { CopyForAi } from '@/components/copy-for-ai'
 import { JsonLd } from '@/components/json-ld'
 import { PagePreview } from '@/components/pages/page-preview'
 import { PageCard } from '@/components/pages/page-card'
@@ -33,7 +34,6 @@ import {
   FavoriteArtifactButton,
   BundleArtifactButton,
   CompareArtifactButton,
-  CopyDnaButton,
 } from '@/components/artifact-actions'
 import { ArtifactFacts } from '@/components/artifact-facts'
 import { OpenArtifactInSandbox } from '@/components/open-artifact-in-sandbox'
@@ -170,10 +170,6 @@ export default async function PageDetailPage({ params }: PageProps) {
                 level: 'page',
               }}
             />
-            {/* Aimed at whoever is about to build with an agent rather than
-                paste a component: the tokens, motion and rules, as one
-                pasteable document. */}
-            <CopyDnaButton artifactId={page.id} />
             {/* A page is a composition, so the sandbox ships the blocks it
                 renders alongside it — the only way to see the whole screen
                 run without cloning a template. */}
@@ -410,6 +406,27 @@ export default async function PageDetailPage({ params }: PageProps) {
             </div>
           </section>
         ) : null}
+
+        {/*
+          The agent's copy of everything above.
+
+          A page is the rung where the handoff earns the most: the "how to
+          use it" list one section up is three manual steps across as many
+          block pages, and the prompt collapses them into one paste that
+          already names the children by id.
+        */}
+        <CopyForAi
+          subject={{
+            level: 'page',
+            id: page.id,
+            name: page.name,
+            description: page.description,
+            category: page.category,
+            file: file ? { path: file.path, source: file.source } : null,
+            deps: page.deps,
+            composedOf: page.composedOf,
+          }}
+        />
 
         {/* ---------------------------------------------------------- *
          *  Related

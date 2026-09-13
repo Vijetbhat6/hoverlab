@@ -6,7 +6,24 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  /*
+    One indirection, and it is load-bearing.
+
+    This block is `@theme inline`, which means Tailwind substitutes these
+    values into the utilities it generates rather than emitting a reference
+    to the variable. So `--font-sans: var(--font-geist-sans)` compiles every
+    `font-sans` utility — and the preflight rule on <html> — down to a
+    literal `var(--font-geist-sans)`, and overriding `--font-sans` at runtime
+    changes a variable nothing reads. The token moved in the inspector and
+    the page stayed in Geist, which is the same shape of bug as
+    `hsl(var(--primary))` elsewhere in this file: correct-looking, silent,
+    and only findable by reading the computed value back.
+
+    Pointing at `--app-font-sans` instead gives the utilities a variable that
+    is still live at runtime. `:root` below sets its default, and the theme
+    studio overrides it on <html>.
+  */
+  --font-sans: var(--app-font-sans);
   --font-mono: var(--font-jetbrains-mono);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
@@ -87,13 +104,52 @@
    */
   --brand-accent-chroma: calc(var(--brand-chroma) * 0.1);
 
+  /*
+   * The NEUTRAL half of the theme, as three numbers rather than a dozen
+   * finished greys.
+   *
+   * The catalog's neutrals were never one hue. Light surfaces are warm
+   * (90) and light ink is cool (250); in dark the two swap over, because a
+   * dark surface reads better cool and the text on it reads better warm.
+   * That is a real decision and it is why these are named for their
+   * temperature rather than for their job — "surface hue" would have to
+   * mean 90 in one theme and 250 in the other, which is how a token ends
+   * up lying about itself.
+   *
+   *   --base-warm-hue   light surfaces, dark text
+   *   --base-cool-hue   light text and borders, dark surfaces
+   *   --base-chroma     a MULTIPLIER on the existing tiny chromas, not an
+   *                     absolute. 0 is a pure grey; 1 is what ships; 3 is
+   *                     visibly tinted. Keeping it relative means the
+   *                     careful per-token amounts below stay in proportion
+   *                     instead of being flattened to one value.
+   *
+   * At the defaults every token below computes to exactly the literal it
+   * replaced. Verified by reading the computed values back out of the
+   * document rather than by trusting the arithmetic.
+   */
+  /*
+    The live typeface. See the note in the @theme block above.
+
+    The fallback is not decoration: `--font-geist-sans` is declared by a
+    next/font class on <html>, and if that class is ever missing — a
+    layout refactor, a font that failed to load — the whole variable
+    resolves to nothing and every element falls back to the browser's
+    default. One comma keeps the page in a sane face instead.
+  */
+  --app-font-sans: var(--font-geist-sans, ui-sans-serif, system-ui, sans-serif);
+
+  --base-warm-hue: 90;
+  --base-cool-hue: 250;
+  --base-chroma: 1;
+
   --radius: 0.75rem;
-  --background: oklch(0.99 0.005 90);
-  --foreground: oklch(0.15 0.01 250);
+  --background: oklch(0.99 calc(0.005 * var(--base-chroma)) var(--base-warm-hue));
+  --foreground: oklch(0.15 calc(0.01 * var(--base-chroma)) var(--base-cool-hue));
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.15 0.01 250);
+  --card-foreground: oklch(0.15 calc(0.01 * var(--base-chroma)) var(--base-cool-hue));
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.15 0.01 250);
+  --popover-foreground: oklch(0.15 calc(0.01 * var(--base-chroma)) var(--base-cool-hue));
   /*
     Was 0.55, which is 3.98:1 for white on the button fill and 4.09:1 for
     the same colour as link text on a card — under the 4.5:1 AA floor, on
@@ -109,9 +165,9 @@
   */
   --primary: oklch(var(--brand-light-l) var(--brand-chroma) var(--brand-hue));
   --primary-foreground: oklch(0.99 0 0);
-  --secondary: oklch(0.96 0.01 90);
-  --secondary-foreground: oklch(0.2 0.01 250);
-  --muted: oklch(0.96 0.005 90);
+  --secondary: oklch(0.96 calc(0.01 * var(--base-chroma)) var(--base-warm-hue));
+  --secondary-foreground: oklch(0.2 calc(0.01 * var(--base-chroma)) var(--base-cool-hue));
+  --muted: oklch(0.96 calc(0.005 * var(--base-chroma)) var(--base-warm-hue));
   /*
     Was 0.5, which is 4.37:1 on this background — under the 4.5:1
     WCAG AA floor for normal text, on the colour that carries most
@@ -119,9 +175,9 @@
     the contrast checker at /tools/contrast, which is the tool this
     site ships and was failing.
   */
-  --muted-foreground: oklch(0.47 0.01 250);
+  --muted-foreground: oklch(0.47 calc(0.01 * var(--base-chroma)) var(--base-cool-hue));
   --accent: oklch(0.94 var(--brand-accent-chroma) var(--brand-hue));
-  --accent-foreground: oklch(0.2 0.01 250);
+  --accent-foreground: oklch(0.2 calc(0.01 * var(--base-chroma)) var(--base-cool-hue));
   --destructive: oklch(0.577 0.245 27.325);
   /*
     Text on a --destructive fill, and it is NOT the same choice in both
@@ -132,8 +188,8 @@
     is not defined generates no rule, so the colour silently inherited.
   */
   --destructive-foreground: oklch(0.99 0 0);
-  --border: oklch(0.9 0.005 250);
-  --input: oklch(0.9 0.005 250);
+  --border: oklch(0.9 calc(0.005 * var(--base-chroma)) var(--base-cool-hue));
+  --input: oklch(0.9 calc(0.005 * var(--base-chroma)) var(--base-cool-hue));
   /*
     --field is --border split in two.
 
@@ -149,7 +205,7 @@
     tabs and outline buttons) — darkening that would repaint half the dark
     UI to fix a border.
   */
-  --field: oklch(0.65 0.005 250);
+  --field: oklch(0.65 calc(0.005 * var(--base-chroma)) var(--base-cool-hue));
   --ring: oklch(var(--brand-light-l) var(--brand-chroma) var(--brand-hue));
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
@@ -167,17 +223,17 @@
 }
 
 .dark {
-  --background: oklch(0.13 0.01 250);
-  --foreground: oklch(0.97 0.005 90);
-  --card: oklch(0.17 0.012 250);
-  --card-foreground: oklch(0.97 0.005 90);
-  --popover: oklch(0.17 0.012 250);
-  --popover-foreground: oklch(0.97 0.005 90);
+  --background: oklch(0.13 calc(0.01 * var(--base-chroma)) var(--base-cool-hue));
+  --foreground: oklch(0.97 calc(0.005 * var(--base-chroma)) var(--base-warm-hue));
+  --card: oklch(0.17 calc(0.012 * var(--base-chroma)) var(--base-cool-hue));
+  --card-foreground: oklch(0.97 calc(0.005 * var(--base-chroma)) var(--base-warm-hue));
+  --popover: oklch(0.17 calc(0.012 * var(--base-chroma)) var(--base-cool-hue));
+  --popover-foreground: oklch(0.97 calc(0.005 * var(--base-chroma)) var(--base-warm-hue));
   --primary: oklch(var(--brand-dark-l) calc(var(--brand-chroma) * 0.9) var(--brand-hue));
-  --primary-foreground: oklch(0.13 0.01 250);
-  --secondary: oklch(0.22 0.012 250);
-  --secondary-foreground: oklch(0.97 0.005 90);
-  --muted: oklch(0.22 0.012 250);
+  --primary-foreground: oklch(0.13 calc(0.01 * var(--base-chroma)) var(--base-cool-hue));
+  --secondary: oklch(0.22 calc(0.012 * var(--base-chroma)) var(--base-cool-hue));
+  --secondary-foreground: oklch(0.97 calc(0.005 * var(--base-chroma)) var(--base-warm-hue));
+  --muted: oklch(0.22 calc(0.012 * var(--base-chroma)) var(--base-cool-hue));
   /*
     Was 0.65 — 5.95:1 against a flat background, which reads as
     passing until you remember that the landing, library and account
@@ -186,9 +242,9 @@
     usable cushion once the blobs are under it, while staying
     clearly secondary to --foreground at 0.97.
   */
-  --muted-foreground: oklch(0.7 0.01 250);
+  --muted-foreground: oklch(0.7 calc(0.01 * var(--base-chroma)) var(--base-cool-hue));
   --accent: oklch(0.26 var(--brand-accent-chroma) var(--brand-hue));
-  --accent-foreground: oklch(0.97 0.005 90);
+  --accent-foreground: oklch(0.97 calc(0.005 * var(--base-chroma)) var(--base-warm-hue));
   --destructive: oklch(0.704 0.191 22.216);
   /*
     Inverted against the light theme, on purpose. The dark red is lighter
@@ -196,7 +252,7 @@
     the light value here is the mistake that makes a destructive button
     unreadable in exactly one theme.
   */
-  --destructive-foreground: oklch(0.15 0.01 250);
+  --destructive-foreground: oklch(0.15 calc(0.01 * var(--base-chroma)) var(--base-cool-hue));
   --border: oklch(1 0 0 / 12%);
   --input: oklch(1 0 0 / 15%);
   /* 15% is 1.52:1 over a card. 36% is 3.31:1 over a card and 3.23:1 over
@@ -208,8 +264,8 @@
   --chart-3: oklch(0.769 0.188 70.08);
   --chart-4: oklch(0.627 0.265 303.9);
   --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.17 0.012 250);
-  --sidebar-foreground: oklch(0.97 0.005 90);
+  --sidebar: oklch(0.17 calc(0.012 * var(--base-chroma)) var(--base-cool-hue));
+  --sidebar-foreground: oklch(0.97 calc(0.005 * var(--base-chroma)) var(--base-warm-hue));
   --sidebar-primary: oklch(0.488 0.243 264.376);
   --sidebar-primary-foreground: oklch(0.985 0 0);
   --sidebar-accent: oklch(0.269 0 0);

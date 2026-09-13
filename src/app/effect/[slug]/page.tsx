@@ -9,6 +9,9 @@ import { categorySlug } from '@/lib/effect-types'
 import { artifactBreadcrumbLd, artifactLd } from '@/lib/structured-data'
 import { addedAt, formatAdded, updatedAt } from '@/lib/recency'
 import { relatedBlocks } from '@/lib/related'
+import { ArtifactFacts } from '@/components/artifact-facts'
+import { StickyInstallBar } from '@/components/sticky-install-bar'
+import { CategoryProRail } from '@/components/category-pro-rail'
 
 /**
  * Pre-generate EVERY effect page at build time.
@@ -107,6 +110,13 @@ export default async function EffectPage({ params }: PageProps) {
     if (candidate.category !== effect.category) continue
     similar.push(candidate)
   }
+
+  // Everything else on this shelf — the honest denominator for the rail at
+  // the foot of the page.
+  const similarCount = EFFECTS.reduce(
+    (n, e) => (e.category === effect.category && e.id !== effect.id ? n + 1 : n),
+    0,
+  )
 
   // Prev / next navigation across the full catalog (in canonical order).
   const prev = idx > 0 ? EFFECTS[idx - 1] : null
@@ -212,6 +222,43 @@ export default async function EffectPage({ params }: PageProps) {
         related={related}
         prev={prev}
         next={next}
+        /*
+         * Rendered here and handed down, because <ArtifactFacts> is a
+         * server component and <EffectDetail> is not.
+         *
+         * `deps={[]}` is a fact, not a placeholder: an effect is HTML and
+         * CSS and pulls in no package at all, which is the strongest thing
+         * this rung has to say about what it costs to adopt. The component
+         * prints "No runtime dependencies" from it.
+         */
+        facts={<ArtifactFacts id={effect.id} level="effect" deps={[]} />}
+        /*
+         * `similarCount` is how many OTHER effects share the category, not
+         * the six the sidebar rail shows — the rail's number is a shelf
+         * size, and truncating it to the six on screen would undersell a
+         * category of ninety.
+         */
+        proRail={
+          <CategoryProRail
+            category={effect.category}
+            remaining={similarCount}
+            categoryHref={`/category/${catSlug}`}
+            noun="effects"
+          />
+        }
+      />
+
+      {/*
+        The install command, kept within reach on a long page — the same
+        bar the other three rungs have had. Effects are installable by
+        exactly the same CLI (`LEVELS` in packages/cli/src/api.mjs covers
+        all four rungs), and these pages were the only ones that never
+        mentioned it.
+      */}
+      <StickyInstallBar
+        id={effect.id}
+        name={effect.name}
+        command={`npx hoverlab add ${effect.id}`}
       />
     </>
   )

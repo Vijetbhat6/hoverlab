@@ -132,11 +132,23 @@ if (Object.keys(theme).length === 0) throw new Error('@theme inline parsed to ze
  * no block can use: `bg-foo` generates no rule, so the property falls back
  * and the component renders invisible rather than wrong. That is the
  * failure mode five shipped blocks carried for months, and it is cheap to
- * catch here — but only for colours. Non-colour tokens (`--radius`, the
- * four `--brand-*` numbers the palette is derived from, `--shadow-*`) are
- * consumed through `var()` in CSS and are correctly absent from the map.
+ * catch here — but only for colours. Non-colour tokens are consumed through
+ * `var()` in CSS and are correctly absent from the map:
+ *
+ *   --radius, --shadow-*, --spacing, --ease-*, --duration-*, --header-*
+ *   --brand-*   the four numbers the BRAND half of the palette derives from
+ *   --base-*    the three the NEUTRAL half derives from — two hue angles and
+ *               a chroma multiplier. Same kind of token as `--brand-*` and
+ *               exempt for the same reason: `--base-warm-hue` is the number
+ *               `90`, and `bg-base-warm-hue` is not a thing anyone wants.
+ *   --app-font-sans   a font stack, not a colour. It needs its own prefix
+ *               here because `font-` is anchored and this one is not called
+ *               `--font-sans` — see the note in globals.css about why the
+ *               live typeface has to be one indirection away from the
+ *               `@theme inline` entry that consumes it.
  */
-const NON_COLOUR = /^(radius|brand-|shadow|font-|spacing|ease|duration|header-)/
+const NON_COLOUR =
+  /^(radius|brand-|base-|shadow|font-|app-font-|spacing|ease|duration|header-)/
 const unmapped = Object.keys(light).filter(
   (name) => !NON_COLOUR.test(name) && !(`color-${name}` in theme),
 )

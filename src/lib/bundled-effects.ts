@@ -16,17 +16,32 @@
  */
 
 import { HANDCRAFTED } from './effects-handcrafted'
+import { SHADER_EFFECTS } from './shaders/shader-effects'
 import { withMotionGuard } from './effect-insights'
 import type { Effect } from './effect-types'
 
-export const BUNDLED_EFFECTS: Effect[] = HANDCRAFTED.map((e) => ({
-  ...e,
-  // The same motion guard the server-side catalog applies, so a bundled
-  // effect rendered straight from the client matches what /api/effects
-  // would have returned for it. See `withMotionGuard`.
-  css: withMotionGuard(e.css),
-  featured: true,
-}))
+export const BUNDLED_EFFECTS: Effect[] = [
+  ...HANDCRAFTED.map((e) => ({
+    ...e,
+    // The same motion guard the server-side catalog applies, so a bundled
+    // effect rendered straight from the client matches what /api/effects
+    // would have returned for it. See `withMotionGuard`.
+    css: withMotionGuard(e.css),
+    featured: true,
+  })),
+  /*
+   * The shader tier is bundled too, and it is cheap to: markup plus a
+   * fallback gradient is ~13 KB for all fifteen, because the part that is
+   * actually big — the GLSL — is not here. It lives in `shaders/registry`,
+   * which `<ShaderRuntime>` dynamic-imports the first time it sees a shader
+   * canvas, so a visitor who never scrolls to one never downloads it.
+   *
+   * Bundling matters more here than for a CSS effect: a shader whose markup
+   * arrives a round-trip late is a canvas that boots a round-trip late, and
+   * the landing showcase would show a gradient and then jump.
+   */
+  ...SHADER_EFFECTS,
+]
 
 const BY_ID = new Map(BUNDLED_EFFECTS.map((e) => [e.id, e]))
 

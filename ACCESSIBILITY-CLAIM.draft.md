@@ -16,7 +16,7 @@ Accessibility Act is met by conforming to.
 
 ## The proposed claim
 
-> Every one of the 317 components in this catalog is checked, on every build, against 10 WCAG 2.2 Level AA success criteria that can be decided from source.
+> Every one of the 372 components in this catalog is checked, on every build, against 10 WCAG 2.2 Level AA success criteria that can be decided from source.
 
 > This is a statement about each artifact's source — the exact text you copy — and not about a rendered page, a website, or the product you paste it into.
 >
@@ -29,7 +29,7 @@ Accessibility Act is met by conforming to.
 
 ## What the claim rests on
 
-- **317 artifacts** — 250 blocks, 67 pages.
+- **372 artifacts** — 285 blocks, 87 pages.
 - **18 rules** over **10 success criteria**: 1.1.1, 1.3.1, 1.4.2, 2.1.1, 2.4.3, 2.5.7, 2.5.8, 3.3.2, 3.3.8, 4.1.2.
 - **0 violations** and **0 advisories** at the time of writing.
 
@@ -61,13 +61,13 @@ claim above, not after it.
 
 | SC | Criterion | Why it is out of reach |
 | --- | --- | --- |
-| 1.4.3 / 1.4.11 | Contrast (minimum, non-text) | Artifacts are styled with CSS variables the consuming project supplies. Whether a block passes depends on a palette we do not control. |
+| 1.4.3 / 1.4.11 | Contrast (minimum, non-text) | Components are styled with CSS variables the consuming project supplies. Whether one passes depends on a palette this check does not control. |
 | 1.3.2 | Meaningful sequence | Needs rendered reading order, not source order. |
 | 2.4.3 | Focus order | Needs a rendered tab sequence. |
 | 1.4.10 | Reflow | Needs a viewport at 320 CSS pixels. |
 | 2.5.3 | Label in name | Needs the rendered visible label to compare against the accessible name. |
-| 3.2.3 / 3.2.4 | Consistent navigation and identification | A property of the whole consuming site, not of one artifact. |
-| 2.4.11 | Focus not obscured (minimum) | New in WCAG 2.2. Whether a sticky header covers the focused element depends on the rendered page an artifact lands in, not on the artifact. |
+| 3.2.3 / 3.2.4 | Consistent navigation and identification | A property of the whole site, not of one component. |
+| 2.4.11 | Focus not obscured (minimum) | New in WCAG 2.2. Whether a sticky header covers the focused element depends on the rendered page a component lands in, not on the component. |
 | 3.2.6 | Consistent help | New in WCAG 2.2. Asks whether help is in the same place across a set of pages, which is a property of the consuming site. |
 | 3.3.7 | Redundant entry | New in WCAG 2.2. Needs to know whether two fields in a multi-step flow ask for the same information, which is a question about meaning rather than markup. |
 | 2.4.13 | Focus appearance | New in WCAG 2.2, and Level AAA — outside the AA target, listed so a reader can see it was considered rather than missed. |

@@ -30,6 +30,7 @@ import REVISIONS from '@/lib/generated-artifact-revisions.json'
 /** Fingerprints by level, for `revisionOf` below. */
 const REVISIONS_BY_LEVEL: Record<ArtifactLevel, Record<string, string>> = {
   effect: REVISIONS.effects,
+  primitive: REVISIONS.primitives,
   block: REVISIONS.blocks,
   page: REVISIONS.pages,
   template: REVISIONS.templates,

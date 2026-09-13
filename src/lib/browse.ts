@@ -1,5 +1,5 @@
 /**
- * One search across all four rungs of the ladder.
+ * One search across every rung of the ladder.
  *
  * Everything above `effect` was, until this module, invisible to search:
  * ⌘K read `EFFECT_INDEX` and nothing else, so a catalog of 4,384 artifacts
@@ -25,6 +25,7 @@
  */
 
 import { EFFECT_INDEX } from '@/lib/effect-index'
+import { PRIMITIVE_INDEX } from '@/lib/primitives/primitive-index'
 import { BLOCK_INDEX } from '@/lib/blocks/block-index'
 import { PAGE_INDEX } from '@/lib/pages/page-index'
 import { TEMPLATE_INDEX } from '@/lib/templates/template-index'
@@ -74,6 +75,20 @@ function flatten(): BrowseHit[] {
       featured: Boolean(e.featured),
       tier: 'free',
       href: `/effect/${e.id}`,
+    })
+  }
+
+  for (const p of PRIMITIVE_INDEX) {
+    hits.push({
+      id: p.id,
+      level: 'primitive',
+      name: p.name,
+      category: p.category,
+      description: p.description,
+      tags: p.tags,
+      featured: Boolean(p.featured),
+      tier: tierOf(p),
+      href: `/primitive/${p.id}`,
     })
   }
 
@@ -150,6 +165,13 @@ const LEVEL_BONUS: Record<ArtifactLevel, number> = {
   template: 12,
   page: 10,
   block: 8,
+  /*
+   * Above effects and below blocks. A search for "button" should reach the
+   * primitive before it reaches four hundred button effects, and a search
+   * for "pricing" should still reach the pricing block first — a primitive
+   * is hand-authored like a block, but it answers a smaller question.
+   */
+  primitive: 4,
   effect: 0,
 }
 

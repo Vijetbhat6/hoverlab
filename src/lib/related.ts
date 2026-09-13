@@ -97,6 +97,7 @@ const FITS_IN: Record<EffectCategory, readonly BlockCategory[]> = {
   'Patterns & Textures': ['Heroes', 'CTA Sections', 'Logo Clouds'],
   'Masks & Clip Paths': ['Heroes', 'Feature Sections'],
   'Charts & Data': ['Charts & Metrics', 'Dashboards', 'Stats'],
+  'Dates & Time': ['Scheduling & Calendar', 'Contact & Forms', 'Dashboards'],
   'Timelines & Steps': ['Onboarding', 'Orders & Reviews', 'Agent Reasoning'],
   'Tables & Data Grids': ['Data Tables', 'Orders & Reviews', 'Dashboards'],
   'Forms & Validation': ['Contact & Forms', 'Authentication', 'File Upload'],

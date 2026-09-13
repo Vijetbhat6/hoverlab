@@ -122,7 +122,20 @@ export function ArtifactFacts({
         </p>
         <p className="mt-1.5 text-xs text-muted-foreground">
           Or over MCP, from your editor&apos;s agent —{' '}
-          <Link href="/docs/mcp" className="text-primary hover:underline">
+          {/*
+            Underlined at rest, not only on hover.
+
+            WCAG 1.4.1: a link inside a paragraph cannot be distinguished by
+            colour alone. `hover:underline` gives it back on hover, which is
+            a pointer-only affordance and nothing at all for anyone reading
+            in greyscale or with low colour vision. The rest of the site
+            already uses the persistent form — this was the outlier, and it
+            renders on every artifact detail page.
+          */}
+          <Link
+            href="/docs/mcp"
+            className="text-primary underline underline-offset-2 hover:no-underline"
+          >
             no account needed
           </Link>
           .

@@ -11,6 +11,7 @@ import * as React from 'react'
 import Link from 'next/link'
 import { Package, FileCode } from 'lucide-react'
 import { BlockThumbnail } from './block-preview'
+import { UsageCount } from '@/components/usage-count'
 import { blockCategorySlug, type BlockMeta } from '@/lib/blocks/block-types'
 
 export function BlockCard({ block }: { block: BlockMeta }) {
@@ -52,6 +53,11 @@ export function BlockCard({ block }: { block: BlockMeta }) {
               ? 'No deps'
               : `${block.deps.length} dep${block.deps.length > 1 ? 's' : ''}`}
           </span>
+
+          {/* Last, and often absent — see <UsageCount>. The metadata row
+              already wraps, so a row that gains a fourth item on the
+              popular blocks and keeps three on the rest stays aligned. */}
+          <UsageCount id={block.id} className="font-medium text-foreground/70" />
         </div>
       </div>
     </article>

@@ -721,7 +721,7 @@ export function generateV13H(ctx) {
 }`
     add(mk({
       name: 'Timer Border',
-      category: 'Borders & Outlines',
+      category: 'Dates & Time',
       description: 'Outline that draws itself edge by edge around the panel on a four-second cycle, the way a countdown ring reads on a rectangle.',
       html, css,
       tags: ['timer', 'countdown', 'draw', 'outline', 'sequence'],
@@ -985,7 +985,7 @@ export function generateV13H(ctx) {
 }`
     add(mk({
       name: 'Streak Week Meter',
-      category: 'Progress & Meters',
+      category: 'Dates & Time',
       description: 'Seven day cells reading a week at a glance — filled for done, outlined red for missed, and a dashed pulse on the day still open.',
       html, css,
       tags: ['streak', 'week', 'habit', 'cells', 'calendar'],

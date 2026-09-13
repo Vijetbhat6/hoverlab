@@ -571,7 +571,7 @@ export function generateV13D(ctx) {
 }`
     add(mk({
       name: 'Flip Clock',
-      category: '3D & Perspective',
+      category: 'Dates & Time',
       description: 'Split-flap digit cards whose top half hinges forward on its axis and falls out of sight, the way a station clock turns over.',
       html, css,
       tags: ['flip-clock', 'split-flap', 'hinge', 'rotatex', 'digits'],

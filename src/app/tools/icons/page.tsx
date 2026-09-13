@@ -10,8 +10,14 @@
  * Rendering the full set means importing the full set — roughly a megabyte
  * of JavaScript for a page whose job is to help you find one icon — and a
  * grid of 1,600 tiles is a worse way to find something than a search box
- * over the 180 that cover almost every real UI need. The link out to
+ * over the 136 that cover almost every real UI need. The link out to
  * lucide.dev is there for the long tail.
+ *
+ * The `ICONS` array below is also the source for `/assets/animated-icons`:
+ * `scripts/build-icon-nodes.mjs` parses the names out of this file and
+ * writes each icon's geometry next to the generator, so the animated set is
+ * provably the same list rather than a second one that drifts. Adding an
+ * entry here adds twelve animated pairings there; nothing else to update.
  *
  * Search matches keywords, not just names: someone looking for "delete"
  * should find `Trash2`, and looking for "user" should find `CircleUser`.

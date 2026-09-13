@@ -121,3 +121,118 @@ test('nothing is silently dropped from the sort', () => {
   const props = parseBlockProps(SOURCE)
   assert.equal(sortBlockProps(props).length, props.length)
 })
+
+/* ------------------------------------------------------------------ *
+ *  The three shapes the primitive tier introduced
+ *
+ *  Each of these silently produced an empty table before the parser
+ *  learned them, which is the worst available failure here: the page
+ *  renders, the prompt copies, and the "what can I change" half is
+ *  simply missing with nothing to say so.
+ * ------------------------------------------------------------------ */
+
+test('an interface with a heritage clause still yields its own members', () => {
+  const props = parseBlockProps(`
+export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
+  tone?: BadgeTone
+  /** Pill rather than rounded rectangle. */
+  pill?: boolean
+}
+
+export function Badge({
+  tone = 'neutral',
+  pill = false,
+}: BadgeProps) {}
+`)
+  assert.deepEqual(props.map((p) => p.name), ['tone', 'pill'])
+  assert.equal(props[0].defaultValue, "'neutral'")
+  assert.equal(props[1].description, 'Pill rather than rounded rectangle.')
+})
+
+test('the heritage clause may sit on its own line', () => {
+  // Prettier wraps a long `extends` onto the next line, which read as an
+  // interface with no brace at all.
+  const props = parseBlockProps(`
+export interface InputGroupProps
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size' | 'prefix'> {
+  addonStart?: React.ReactNode
+  invalid?: boolean
+}
+`)
+  assert.deepEqual(props.map((p) => p.name), ['addonStart', 'invalid'])
+})
+
+test('a type alias is followed to the local type holding its members', () => {
+  const props = parseBlockProps(`
+type BaseProps = Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'className'> & {
+  variant?: Variant
+  /** Shown before the label. */
+  icon?: React.ReactNode
+  className?: string
+}
+
+export type ButtonProps = BaseProps &
+  ({ size: 'icon'; 'aria-label': string } | { size?: Exclude<Size, 'icon'> })
+
+export function Button({
+  variant = 'primary',
+  className = '',
+}: ButtonProps) {}
+`)
+  assert.deepEqual(props.map((p) => p.name), ['variant', 'icon', 'className'])
+  assert.equal(props[0].defaultValue, "'primary'")
+  // The union branches are deliberately not read: they are single-line and
+  // semicolon-separated, and a union declares `size` twice with two
+  // different types. A missing row beats two contradictory ones.
+  assert.ok(!props.some((p) => p.name === 'size'))
+})
+
+test('a referenced type with no object body cannot bind to a later brace', () => {
+  /*
+    The regression this exists for. With an unbounded `[^{]*`, `type Size`
+    matched forward into the `const SIZES` style map below it and the table
+    sprouted rows called `sm`, `md` and `lg` — CSS class names presented as
+    props. Wrong rows are the one thing this parser promises never to emit.
+  */
+  const props = parseBlockProps(`
+type Size = 'sm' | 'md' | 'lg'
+
+const SIZES: Record<Size, string> = {
+  sm: 'h-8 px-3',
+  md: 'h-9 px-4',
+  lg: 'h-11 px-6',
+}
+
+type BaseProps = {
+  loading?: boolean
+}
+
+export type ThingProps = BaseProps & { size?: Size }
+`)
+  assert.deepEqual(props.map((p) => p.name), ['loading'])
+  for (const bad of ['sm', 'md', 'lg']) {
+    assert.ok(!props.some((p) => p.name === bad), `"${bad}" is a class name, not a prop`)
+  }
+})
+
+test('a prop declared in two resolved bodies appears once', () => {
+  const props = parseBlockProps(`
+type A = {
+  tone?: 'a'
+}
+
+type B = {
+  tone?: 'b'
+  extra?: boolean
+}
+
+export type DupProps = A & B
+`)
+  assert.deepEqual(props.map((p) => p.name), ['tone', 'extra'])
+  // First declaration wins, rather than the table showing one prop twice.
+  assert.equal(props[0].type, "'a'")
+})
+
+test('a component with no props declaration still returns nothing', () => {
+  assert.deepEqual(parseBlockProps('export function Plain() { return null }'), [])
+})

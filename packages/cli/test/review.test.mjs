@@ -173,7 +173,13 @@ describe('directional icons', () => {
   })
 
   test('asks about a directional icon nobody has ruled on', () => {
-    const source = importing('SkipForward', '<SkipForward />')
+    // The example has to be a glyph ICONS does NOT rule, which makes this
+    // test quietly self-destructing: it used SkipForward until the voice
+    // player shipped and that icon was ruled, at which point the assertion
+    // failed for the best possible reason. Rewind is unruled today; if this
+    // breaks again, the fix is a new unruled name here, not a ruling removed
+    // from the ledger to keep a test green.
+    const source = importing('Rewind', '<Rewind />')
     assert.deepEqual(
       reviewRtlIcons(source).map((f) => f.rule),
       ['directional-icon-unruled'],

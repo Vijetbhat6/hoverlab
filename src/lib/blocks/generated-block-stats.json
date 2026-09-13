@@ -76,7 +76,7 @@
     "files": 1
   },
   "footer-mega": {
-    "lines": 258,
+    "lines": 265,
     "files": 1
   },
   "footer-minimal": {
@@ -104,11 +104,11 @@
     "files": 1
   },
   "booking-scheduler": {
-    "lines": 323,
+    "lines": 334,
     "files": 1
   },
   "feedback-widget": {
-    "lines": 237,
+    "lines": 248,
     "files": 1
   },
   "form-error-summary": {
@@ -224,15 +224,15 @@
     "files": 1
   },
   "stats-narrative": {
-    "lines": 133,
+    "lines": 151,
     "files": 1
   },
   "stats-comparison": {
-    "lines": 192,
+    "lines": 210,
     "files": 1
   },
   "stats-timeline": {
-    "lines": 139,
+    "lines": 157,
     "files": 1
   },
   "stats-benchmark-band": {
@@ -256,7 +256,7 @@
     "files": 1
   },
   "logo-segments": {
-    "lines": 126,
+    "lines": 144,
     "files": 1
   },
   "bento-features": {
@@ -300,7 +300,7 @@
     "files": 1
   },
   "pricing-usage-calculator": {
-    "lines": 212,
+    "lines": 224,
     "files": 1
   },
   "comparison-table": {
@@ -324,7 +324,7 @@
     "files": 1
   },
   "testimonial-grid": {
-    "lines": 132,
+    "lines": 140,
     "files": 1
   },
   "testimonial-spotlight": {
@@ -336,11 +336,11 @@
     "files": 1
   },
   "testimonial-carousel": {
-    "lines": 259,
+    "lines": 270,
     "files": 1
   },
   "testimonial-video": {
-    "lines": 180,
+    "lines": 198,
     "files": 1
   },
   "customer-outcome-band": {
@@ -360,11 +360,11 @@
     "files": 1
   },
   "faq-categorized": {
-    "lines": 216,
+    "lines": 234,
     "files": 1
   },
   "faq-search": {
-    "lines": 219,
+    "lines": 231,
     "files": 1
   },
   "faq-objection-list": {
@@ -376,7 +376,7 @@
     "files": 1
   },
   "changelog-timeline": {
-    "lines": 134,
+    "lines": 143,
     "files": 1
   },
   "roadmap-columns": {
@@ -400,7 +400,7 @@
     "files": 1
   },
   "docs-layout": {
-    "lines": 274,
+    "lines": 290,
     "files": 1
   },
   "api-endpoint-card": {
@@ -547,6 +547,54 @@
     "lines": 238,
     "files": 1
   },
+  "crud-create-form": {
+    "lines": 408,
+    "files": 1
+  },
+  "crud-create-modal": {
+    "lines": 260,
+    "files": 1
+  },
+  "crud-create-drawer": {
+    "lines": 331,
+    "files": 1
+  },
+  "crud-read-page": {
+    "lines": 294,
+    "files": 1
+  },
+  "crud-read-modal": {
+    "lines": 244,
+    "files": 1
+  },
+  "crud-update-form": {
+    "lines": 259,
+    "files": 1
+  },
+  "crud-update-modal": {
+    "lines": 248,
+    "files": 1
+  },
+  "crud-update-drawer": {
+    "lines": 327,
+    "files": 1
+  },
+  "crud-delete-cascade": {
+    "lines": 262,
+    "files": 1
+  },
+  "crud-success-state": {
+    "lines": 260,
+    "files": 1
+  },
+  "crud-bulk-edit-drawer": {
+    "lines": 229,
+    "files": 1
+  },
+  "crud-archive-restore": {
+    "lines": 277,
+    "files": 1
+  },
   "settings-nav-layout": {
     "lines": 119,
     "files": 1
@@ -632,7 +680,7 @@
     "files": 1
   },
   "activity-heatmap": {
-    "lines": 213,
+    "lines": 231,
     "files": 1
   },
   "funnel-conversion-panel": {
@@ -679,6 +727,42 @@
     "lines": 222,
     "files": 1
   },
+  "support-chat-widget": {
+    "lines": 307,
+    "files": 1
+  },
+  "message-bubble-thread": {
+    "lines": 325,
+    "files": 1
+  },
+  "message-attachment-bubble": {
+    "lines": 305,
+    "files": 1
+  },
+  "inbox-thread-list": {
+    "lines": 333,
+    "files": 1
+  },
+  "inbox-thread-detail": {
+    "lines": 309,
+    "files": 1
+  },
+  "voice-message-player": {
+    "lines": 271,
+    "files": 1
+  },
+  "video-call-layout": {
+    "lines": 286,
+    "files": 1
+  },
+  "call-device-settings": {
+    "lines": 315,
+    "files": 1
+  },
+  "support-ticket-thread": {
+    "lines": 338,
+    "files": 1
+  },
   "command-palette": {
     "lines": 280,
     "files": 1
@@ -709,6 +793,14 @@
   },
   "recent-search-list": {
     "lines": 139,
+    "files": 1
+  },
+  "search-faceted-results": {
+    "lines": 388,
+    "files": 1
+  },
+  "search-facet-range": {
+    "lines": 272,
     "files": 1
   },
   "file-dropzone": {
@@ -924,8 +1016,8 @@
     "files": 1
   },
   "product-buy-box": {
-    "lines": 205,
-    "files": 1
+    "lines": 347,
+    "files": 2
   },
   "product-info-accordion": {
     "lines": 124,
@@ -971,6 +1063,18 @@
     "lines": 166,
     "files": 1
   },
+  "gift-card-purchase": {
+    "lines": 359,
+    "files": 1
+  },
+  "guest-checkout-form": {
+    "lines": 394,
+    "files": 1
+  },
+  "discount-modal": {
+    "lines": 214,
+    "files": 1
+  },
   "order-confirmation": {
     "lines": 209,
     "files": 1
@@ -980,7 +1084,7 @@
     "files": 1
   },
   "review-list": {
-    "lines": 266,
+    "lines": 272,
     "files": 1
   },
   "order-tracking-timeline": {
@@ -997,6 +1101,42 @@
   },
   "review-distribution-band": {
     "lines": 102,
+    "files": 1
+  },
+  "warranty-coverage-panel": {
+    "lines": 259,
+    "files": 1
+  },
+  "refund-request-form": {
+    "lines": 348,
+    "files": 1
+  },
+  "refund-status-tracker": {
+    "lines": 239,
+    "files": 1
+  },
+  "refunds-overview-table": {
+    "lines": 277,
+    "files": 1
+  },
+  "return-exchange-picker": {
+    "lines": 331,
+    "files": 1
+  },
+  "return-label-instructions": {
+    "lines": 285,
+    "files": 1
+  },
+  "repair-request-form": {
+    "lines": 310,
+    "files": 1
+  },
+  "review-history-list": {
+    "lines": 278,
+    "files": 1
+  },
+  "gift-card-balance": {
+    "lines": 252,
     "files": 1
   }
 }

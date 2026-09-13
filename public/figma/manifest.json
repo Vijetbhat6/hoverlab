@@ -1,14 +1,32 @@
 {
-  "generatedAt": "2026-09-10",
-  "sections": 250,
+  "generatedAt": "2026-09-13",
+  "sections": 285,
   "note": "Frames, not components. Named editable layers with real geometry, colour and type; no variants, no auto-layout, no hover or motion.",
   "files": [
+    {
+      "category": "After-Sale Service",
+      "slug": "after-sale-service",
+      "file": "blocks-after-sale-service.svg",
+      "sections": 9,
+      "bytes": 78723,
+      "ids": [
+        "warranty-coverage-panel",
+        "refund-request-form",
+        "refund-status-tracker",
+        "refunds-overview-table",
+        "return-exchange-picker",
+        "return-label-instructions",
+        "repair-request-form",
+        "review-history-list",
+        "gift-card-balance"
+      ]
+    },
     {
       "category": "Agent Chat",
       "slug": "agent-chat",
       "file": "blocks-agent-chat.svg",
       "sections": 8,
-      "bytes": 39914,
+      "bytes": 41276,
       "ids": [
         "chat-thread-panel",
         "chat-prompt-bar",
@@ -25,7 +43,7 @@
       "slug": "agent-reasoning",
       "file": "blocks-agent-reasoning.svg",
       "sections": 7,
-      "bytes": 32148,
+      "bytes": 33001,
       "ids": [
         "agent-thinking-trace",
         "agent-tool-calls",
@@ -41,7 +59,7 @@
       "slug": "authentication",
       "file": "blocks-authentication.svg",
       "sections": 9,
-      "bytes": 28732,
+      "bytes": 29608,
       "ids": [
         "auth-login-card",
         "auth-signup-split",
@@ -59,7 +77,7 @@
       "slug": "billing-usage",
       "file": "blocks-billing-usage.svg",
       "sections": 8,
-      "bytes": 42742,
+      "bytes": 44285,
       "ids": [
         "billing-plan-summary",
         "invoice-history-table",
@@ -75,15 +93,18 @@
       "category": "Cart & Checkout",
       "slug": "cart-checkout",
       "file": "blocks-cart-checkout.svg",
-      "sections": 6,
-      "bytes": 25210,
+      "sections": 9,
+      "bytes": 52615,
       "ids": [
         "cart-drawer",
         "cart-line-items",
         "checkout-form",
         "order-summary-panel",
         "checkout-express-payment",
-        "gift-options-form"
+        "gift-options-form",
+        "gift-card-purchase",
+        "guest-checkout-form",
+        "discount-modal"
       ]
     },
     {
@@ -91,7 +112,7 @@
       "slug": "charts-metrics",
       "file": "blocks-charts-metrics.svg",
       "sections": 9,
-      "bytes": 92367,
+      "bytes": 94405,
       "ids": [
         "metric-sparkline-cards",
         "bar-chart-panel",
@@ -108,8 +129,8 @@
       "category": "Command & Search",
       "slug": "command-search",
       "file": "blocks-command-search.svg",
-      "sections": 8,
-      "bytes": 46755,
+      "sections": 10,
+      "bytes": 57764,
       "ids": [
         "command-palette",
         "search-results-panel",
@@ -118,7 +139,27 @@
         "search-autocomplete",
         "search-facet-panel",
         "search-scope-switcher",
-        "recent-search-list"
+        "recent-search-list",
+        "search-faceted-results",
+        "search-facet-range"
+      ]
+    },
+    {
+      "category": "Communication",
+      "slug": "communication",
+      "file": "blocks-communication.svg",
+      "sections": 9,
+      "bytes": 70164,
+      "ids": [
+        "support-chat-widget",
+        "message-bubble-thread",
+        "message-attachment-bubble",
+        "inbox-thread-list",
+        "inbox-thread-detail",
+        "voice-message-player",
+        "video-call-layout",
+        "call-device-settings",
+        "support-ticket-thread"
       ]
     },
     {
@@ -126,7 +167,7 @@
       "slug": "contact-forms",
       "file": "blocks-contact-forms.svg",
       "sections": 7,
-      "bytes": 33450,
+      "bytes": 34741,
       "ids": [
         "contact-form-split",
         "multi-step-form",
@@ -142,7 +183,7 @@
       "slug": "content-blog",
       "file": "blocks-content-blog.svg",
       "sections": 9,
-      "bytes": 69905,
+      "bytes": 72525,
       "ids": [
         "changelog-timeline",
         "roadmap-columns",
@@ -156,11 +197,32 @@
       ]
     },
     {
+      "category": "CRUD",
+      "slug": "crud",
+      "file": "blocks-crud.svg",
+      "sections": 12,
+      "bytes": 78589,
+      "ids": [
+        "crud-create-form",
+        "crud-create-modal",
+        "crud-create-drawer",
+        "crud-read-page",
+        "crud-read-modal",
+        "crud-update-form",
+        "crud-update-modal",
+        "crud-update-drawer",
+        "crud-delete-cascade",
+        "crud-success-state",
+        "crud-bulk-edit-drawer",
+        "crud-archive-restore"
+      ]
+    },
+    {
       "category": "CTA Sections",
       "slug": "cta-sections",
       "file": "blocks-cta-sections.svg",
       "sections": 7,
-      "bytes": 19940,
+      "bytes": 20534,
       "ids": [
         "newsletter-signup",
         "community-band",
@@ -176,7 +238,7 @@
       "slug": "dashboards",
       "file": "blocks-dashboards.svg",
       "sections": 10,
-      "bytes": 76191,
+      "bytes": 78902,
       "ids": [
         "dashboard-shell",
         "dashboard-stat-cards",
@@ -195,7 +257,7 @@
       "slug": "data-tables",
       "file": "blocks-data-tables.svg",
       "sections": 8,
-      "bytes": 41258,
+      "bytes": 43030,
       "ids": [
         "data-table-sortable",
         "data-table-toolbar",
@@ -212,7 +274,7 @@
       "slug": "empty-error-states",
       "file": "blocks-empty-error-states.svg",
       "sections": 8,
-      "bytes": 29197,
+      "bytes": 30029,
       "ids": [
         "empty-state-cta",
         "error-state-retry",
@@ -229,7 +291,7 @@
       "slug": "faq",
       "file": "blocks-faq.svg",
       "sections": 7,
-      "bytes": 40979,
+      "bytes": 41774,
       "ids": [
         "faq-accordion",
         "faq-two-column",
@@ -245,7 +307,7 @@
       "slug": "feature-sections",
       "file": "blocks-feature-sections.svg",
       "sections": 8,
-      "bytes": 58087,
+      "bytes": 60172,
       "ids": [
         "bento-features",
         "feature-rows",
@@ -262,7 +324,7 @@
       "slug": "file-upload",
       "file": "blocks-file-upload.svg",
       "sections": 7,
-      "bytes": 27803,
+      "bytes": 28688,
       "ids": [
         "file-dropzone",
         "upload-progress-list",
@@ -278,7 +340,7 @@
       "slug": "footers",
       "file": "blocks-footers.svg",
       "sections": 5,
-      "bytes": 22630,
+      "bytes": 23732,
       "ids": [
         "footer-mega",
         "footer-minimal",
@@ -292,7 +354,7 @@
       "slug": "heroes",
       "file": "blocks-heroes.svg",
       "sections": 14,
-      "bytes": 69308,
+      "bytes": 71450,
       "ids": [
         "hero-split",
         "hero-centered",
@@ -315,7 +377,7 @@
       "slug": "human-in-the-loop",
       "file": "blocks-human-in-the-loop.svg",
       "sections": 8,
-      "bytes": 47542,
+      "bytes": 49410,
       "ids": [
         "approval-request-card",
         "agent-diff-review",
@@ -332,7 +394,7 @@
       "slug": "inline-ai-actions",
       "file": "blocks-inline-ai-actions.svg",
       "sections": 6,
-      "bytes": 22881,
+      "bytes": 24899,
       "ids": [
         "selection-ai-toolbar",
         "ai-inline-suggestion",
@@ -347,7 +409,7 @@
       "slug": "logo-clouds",
       "file": "blocks-logo-clouds.svg",
       "sections": 4,
-      "bytes": 15703,
+      "bytes": 16252,
       "ids": [
         "logo-cloud",
         "logo-grid",
@@ -360,7 +422,7 @@
       "slug": "modals-drawers",
       "file": "blocks-modals-drawers.svg",
       "sections": 8,
-      "bytes": 31101,
+      "bytes": 32181,
       "ids": [
         "confirm-dialog",
         "cookie-consent",
@@ -377,7 +439,7 @@
       "slug": "navigation",
       "file": "blocks-navigation.svg",
       "sections": 5,
-      "bytes": 13362,
+      "bytes": 13792,
       "ids": [
         "navbar-simple",
         "announcement-bar",
@@ -391,7 +453,7 @@
       "slug": "notifications",
       "file": "blocks-notifications.svg",
       "sections": 7,
-      "bytes": 31295,
+      "bytes": 32274,
       "ids": [
         "toast-stack",
         "notification-inbox",
@@ -407,7 +469,7 @@
       "slug": "onboarding",
       "file": "blocks-onboarding.svg",
       "sections": 8,
-      "bytes": 36286,
+      "bytes": 37600,
       "ids": [
         "onboarding-checklist",
         "setup-wizard",
@@ -424,7 +486,7 @@
       "slug": "orders-reviews",
       "file": "blocks-orders-reviews.svg",
       "sections": 7,
-      "bytes": 35123,
+      "bytes": 36393,
       "ids": [
         "order-confirmation",
         "order-history-list",
@@ -440,7 +502,7 @@
       "slug": "pricing",
       "file": "blocks-pricing.svg",
       "sections": 8,
-      "bytes": 42063,
+      "bytes": 43782,
       "ids": [
         "pricing-tiers",
         "pricing-single",
@@ -457,7 +519,7 @@
       "slug": "product-detail",
       "file": "blocks-product-detail.svg",
       "sections": 7,
-      "bytes": 30897,
+      "bytes": 32342,
       "ids": [
         "product-gallery",
         "product-buy-box",
@@ -473,7 +535,7 @@
       "slug": "product-listings",
       "file": "blocks-product-listings.svg",
       "sections": 7,
-      "bytes": 34950,
+      "bytes": 36265,
       "ids": [
         "product-grid",
         "product-filter-sidebar",
@@ -489,7 +551,7 @@
       "slug": "retrieval-context",
       "file": "blocks-retrieval-context.svg",
       "sections": 9,
-      "bytes": 60279,
+      "bytes": 62794,
       "ids": [
         "context-chunk-cards",
         "source-citation-list",
@@ -507,7 +569,7 @@
       "slug": "settings",
       "file": "blocks-settings.svg",
       "sections": 8,
-      "bytes": 40791,
+      "bytes": 42139,
       "ids": [
         "settings-nav-layout",
         "settings-profile-form",
@@ -524,7 +586,7 @@
       "slug": "stats",
       "file": "blocks-stats.svg",
       "sections": 7,
-      "bytes": 33764,
+      "bytes": 35070,
       "ids": [
         "stats-band",
         "stats-cards",
@@ -540,7 +602,7 @@
       "slug": "testimonials",
       "file": "blocks-testimonials.svg",
       "sections": 6,
-      "bytes": 43940,
+      "bytes": 45983,
       "ids": [
         "testimonial-grid",
         "testimonial-spotlight",

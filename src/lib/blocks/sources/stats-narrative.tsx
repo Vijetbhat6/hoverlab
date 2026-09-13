@@ -71,6 +71,22 @@ const DEFAULT_STATS: NarrativeStat[] = [
   },
 ]
 
+/*
+  A stable id suffix derived from this instance's own heading.
+
+  `useId` is the right answer and is not available here: this is a server
+  component and hooks are not. The heading is what differs when a section is
+  used twice on one page, so hashing it gives each copy its own
+  `aria-labelledby` target without a hook, a prop or a counter — and it
+  stays stable across server and client renders, which a counter would not.
+*/
+function instanceId(...parts: (string | undefined)[]): string {
+  const text = parts.filter(Boolean).join('|')
+  let hash = 0
+  for (let i = 0; i < text.length; i++) hash = (Math.imul(hash, 31) + text.charCodeAt(i)) | 0
+  return (hash >>> 0).toString(36).slice(0, 6)
+}
+
 export function StatsNarrative({
   eyebrow = 'Results',
   heading = 'The case for switching, in four numbers we will show our working on',
@@ -80,16 +96,18 @@ export function StatsNarrative({
   ctaHref,
   className = '',
 }: StatsNarrativeProps) {
+  const headingId = `stats-narrative-heading-${instanceId(heading, eyebrow)}`
+
   return (
     <section
-      aria-labelledby="stats-narrative-heading"
+      aria-labelledby={headingId}
       className={`mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 lg:px-8 ${className}`}
     >
       <div className="grid gap-12 lg:grid-cols-2 lg:items-center lg:gap-16">
         <div className="max-w-xl">
           <p className="text-sm font-medium uppercase tracking-wider text-primary">{eyebrow}</p>
           <h2
-            id="stats-narrative-heading"
+            id={headingId}
             className="mt-3 text-balance text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
           >
             {heading}

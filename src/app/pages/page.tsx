@@ -13,7 +13,10 @@
 import Link from 'next/link'
 import type { Metadata } from 'next'
 import { ArrowRight, LayoutTemplate, Blocks as BlocksIcon } from 'lucide-react'
+import { NewThisWeek } from '@/components/new-this-week'
 import { PageCard } from '@/components/pages/page-card'
+import { SortableArtifactGrid } from '@/components/sortable-artifact-grid'
+import { addedAt } from '@/lib/recency'
 import { TierDefinition } from '@/components/tier-definition'
 import {
   PAGE_COUNT,
@@ -54,6 +57,8 @@ export const metadata: Metadata = {
 
 export default function PagesHubPage() {
   const categories = populatedPageCategories()
+  /* Flat, in category order, so a sort has one list to rank. */
+  const allPages = categories.flatMap((category) => pagesInCategory(category))
 
   // Every distinct block used across every page — the honest measure of how
   // much of the block catalog the pages tier actually exercises.
@@ -111,21 +116,31 @@ export default function PagesHubPage() {
           </div>
         </header>
 
-        <div className="mt-16 space-y-16">
-          {categories.map((category) => {
-            const pages = pagesInCategory(category)
-            return (
-              <section key={category}>
-                <h2 className="mb-6 text-2xl font-bold tracking-tight">{category}</h2>
+        {/* What changed since last time — see the component for the two
+            states and why both print dates. */}
+        <NewThisWeek level="page" />
 
-                <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-                  {pages.map((page) => (
-                    <PageCard key={page.id} page={page} />
-                  ))}
-                </div>
-              </section>
-            )
-          })}
+        {/* The cards are rendered here and reordered in the browser — see
+            `SortableArtifactGrid` for why that is not a client grid. */}
+        <div className="mt-16">
+          <SortableArtifactGrid
+            noun="pages"
+            className="grid grid-cols-1 gap-6 lg:grid-cols-2"
+            items={allPages.map((page) => ({
+              id: page.id,
+              added: addedAt('page', page.id),
+              node: <PageCard key={page.id} page={page} />,
+            }))}
+            groups={categories.map((category) => ({
+              key: category,
+              ids: pagesInCategory(category).map((p) => p.id),
+              heading: (
+                <h2 key={category} className="mb-6 text-2xl font-bold tracking-tight">
+                  {category}
+                </h2>
+              ),
+            }))}
+          />
         </div>
 
         <section className="mt-20 rounded-2xl border border-dashed border-border/60 p-8 text-center">

@@ -323,7 +323,7 @@ export const BLOCK_CATALOG: BlockRecord[] = [
   {
     id: 'booking-scheduler',
     name: 'Meeting Scheduler',
-    category: 'Contact & Forms',
+    category: 'Scheduling & Calendar',
     description:
       'Day strip, slot grid and a time zone the visitor can change — because a slot list with no zone on it is how this pattern wastes an hour of everyone involved.',
     tags: ['booking', 'calendar', 'scheduler', 'time zone', 'meeting'],
@@ -1364,7 +1364,7 @@ export const BLOCK_CATALOG: BlockRecord[] = [
   {
     id: 'calendar-month',
     name: 'Month Calendar Grid',
-    category: 'Dashboards',
+    category: 'Scheduling & Calendar',
     description:
       'A month view where event chips truncate and overflow becomes "+n more", so a busy Tuesday never changes the height of the row it sits in.',
     tags: ['calendar', 'month', 'events', 'schedule', 'grid'],
@@ -1483,6 +1483,141 @@ export const BLOCK_CATALOG: BlockRecord[] = [
       'Collapsible group headers that carry their own subtotals while collapsed, with a grand total that sums every row rather than only the visible ones.',
     tags: ['table', 'grouping', 'subtotals', 'collapsible', 'reporting'],
     previewComponent: 'data-table-grouped-rows',
+    deps: ['lucide-react'],
+  },
+
+  /* ---------------------------- CRUD ------------------------------ *
+   *
+   * Twelve shapes, because create, read, update and delete each want a
+   * page, a modal and a drawer, and the choice between the three is a real
+   * decision rather than a matter of taste. The rule running through all
+   * of them: a modal is for a record that fits without scrolling, a drawer
+   * is for one that does not but whose list you still need on screen, and
+   * a page is for everything else.
+   *
+   * Three neighbours finish the family off and live elsewhere on purpose.
+   * `drawer-record-detail` is the read drawer, `data-table-inline-edit` is
+   * update-in-place, and `confirm-dialog` is the generic destructive
+   * confirm that `crud-delete-cascade` deliberately does not duplicate.
+   */
+  {
+    id: 'crud-create-form',
+    name: 'Create Record Form',
+    category: 'CRUD',
+    description:
+      'A full-page create form with a guidance rail and a Save-and-create-another that keeps the shared fields - the shape a record with more than six fields actually needs.',
+    tags: ['crud', 'create', 'form', 'admin', 'internal tool'],
+    previewComponent: 'crud-create-form',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'crud-create-modal',
+    name: 'Create Record Modal',
+    category: 'CRUD',
+    description:
+      'Three fields over the list they add to, with the new row appearing behind the dialog rather than after it closes.',
+    tags: ['crud', 'create', 'modal', 'dialog', 'admin'],
+    previewComponent: 'crud-create-modal',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'crud-create-drawer',
+    name: 'Create Record Drawer',
+    category: 'CRUD',
+    description:
+      'A long create form in a side drawer: the fields scroll, the header and the action bar do not, and the list stays legible beside it.',
+    tags: ['crud', 'create', 'drawer', 'form', 'admin'],
+    previewComponent: 'crud-create-drawer',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'crud-read-page',
+    name: 'Record Detail Page',
+    category: 'CRUD',
+    description:
+      'The read view arranged by what a reader came for - a verdict band of four facts, then details, then the related records a field dump can never show.',
+    tags: ['crud', 'read', 'detail', 'record', 'admin'],
+    previewComponent: 'crud-read-page',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'crud-read-modal',
+    name: 'Record Quick Look',
+    category: 'CRUD',
+    description:
+      'The verification modal from a table row: copyable identifiers, no editing, nothing scrolling, and the row still marked behind it.',
+    tags: ['crud', 'read', 'modal', 'quick look', 'table'],
+    previewComponent: 'crud-read-modal',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'crud-update-form',
+    name: 'Edit Record Form',
+    category: 'CRUD',
+    description:
+      'An edit page that shows the diff - per-field change markers carrying the previous value, a per-field revert, and a Save button that counts what it will write.',
+    tags: ['crud', 'update', 'edit', 'form', 'diff'],
+    previewComponent: 'crud-update-form',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'crud-update-modal',
+    name: 'Edit Record Modal',
+    category: 'CRUD',
+    description:
+      'The edit modal including the parts nobody draws: the in-flight state, the rejected save that keeps your typing, and the conflict when someone else got there first.',
+    tags: ['crud', 'update', 'modal', 'conflict', 'error'],
+    previewComponent: 'crud-update-modal',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'crud-update-drawer',
+    name: 'Field-Level Edit Drawer',
+    category: 'CRUD',
+    description:
+      'The save-on-blur model, with per-field confirmation, per-field failure and a written-in-this-session log - the only honest answer to what did I just change.',
+    tags: ['crud', 'update', 'drawer', 'autosave', 'inline'],
+    previewComponent: 'crud-update-drawer',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'crud-delete-cascade',
+    name: 'Cascade Delete Dialog',
+    category: 'CRUD',
+    description:
+      'Deleting a record other records depend on: dependents counted and grouped by fate - deleted, orphaned, retained - with a guard that scales to the blast radius.',
+    tags: ['crud', 'delete', 'destructive', 'dialog', 'cascade'],
+    previewComponent: 'crud-delete-cascade',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'crud-success-state',
+    name: 'Record Created State',
+    category: 'CRUD',
+    description:
+      'The screen after the write: the reference copyable, next actions ranked rather than listed, and an undo window that counts down honestly and then says why it is gone.',
+    tags: ['crud', 'success', 'confirmation', 'undo', 'state'],
+    previewComponent: 'crud-success-state',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'crud-bulk-edit-drawer',
+    name: 'Bulk Edit Drawer',
+    category: 'CRUD',
+    description:
+      'One change applied to many records that disagree - mixed values shown as mixed, untouched fields never written, and skipped rows counted before you commit.',
+    tags: ['crud', 'bulk', 'edit', 'drawer', 'table'],
+    previewComponent: 'crud-bulk-edit-drawer',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'crud-archive-restore',
+    name: 'Archive and Restore',
+    category: 'CRUD',
+    description:
+      'The bin with the clock on it: days until purge per row, who archived it, and a restore disabled with a reason when the parent has already gone.',
+    tags: ['crud', 'archive', 'restore', 'soft delete', 'retention'],
+    previewComponent: 'crud-archive-restore',
     deps: ['lucide-react'],
   },
 
@@ -1837,6 +1972,104 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     deps: ['lucide-react'],
   },
 
+  /* ---------------------- Communication ---------------------------- *
+   *
+   * Human-to-human, which is a different problem from Agent Chat. An
+   * assistant thread has no delivery receipt, no mute state, no active
+   * speaker and no internal note that must never reach the customer.
+   * Every block here turns on one of those.
+   */
+  {
+    id: 'support-chat-widget',
+    name: 'Support Chat Widget',
+    category: 'Communication',
+    description:
+      'The corner launcher, with real availability instead of a stock reassurance, article deflection before the form, no self-opening, and a way to make it go away.',
+    tags: ['chat', 'support', 'widget', 'launcher', 'help'],
+    previewComponent: 'support-chat-widget',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'message-bubble-thread',
+    name: 'Message Bubble Thread',
+    category: 'Communication',
+    description:
+      'Bubbles with the parts that get skipped: per-message delivery state, grouping by author and time, day separators, and a retry on the failed bubble itself.',
+    tags: ['chat', 'messages', 'bubbles', 'thread', 'messaging'],
+    previewComponent: 'message-bubble-thread',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'message-attachment-bubble',
+    name: 'Attachment Bubbles',
+    category: 'Communication',
+    description:
+      'Five kinds of thing that is not text - image, document, link, location and an upload still in flight - each answering the question its own kind raises.',
+    tags: ['chat', 'attachment', 'upload', 'file', 'messaging'],
+    previewComponent: 'message-attachment-bubble',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'inbox-thread-list',
+    name: 'Inbox Thread List',
+    category: 'Communication',
+    description:
+      'The list half of a two-pane inbox, with unread and selected as visibly different states and bulk selection as a mode rather than a hover checkbox.',
+    tags: ['inbox', 'list', 'threads', 'email', 'support'],
+    previewComponent: 'inbox-thread-list',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'inbox-thread-detail',
+    name: 'Inbox Reading Pane',
+    category: 'Communication',
+    description:
+      'The reading pane with the composer always present, quoted history collapsed behind a count, and an internal-note mode whose send button names the recipient.',
+    tags: ['inbox', 'thread', 'reply', 'support', 'shared inbox'],
+    previewComponent: 'inbox-thread-detail',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'voice-message-player',
+    name: 'Voice Message Player',
+    category: 'Communication',
+    description:
+      'A voice note you can navigate: a waveform that is a real seek control, a speed button, a transcript, and a played state that survives finishing.',
+    tags: ['voice', 'audio', 'player', 'transcript', 'messaging'],
+    previewComponent: 'voice-message-player',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'video-call-layout',
+    name: 'Video Call Layout',
+    category: 'Communication',
+    description:
+      'The call grid with the state that makes it usable - active speaker, per-tile connection quality, hide self-view, and the you-are-muted nudge.',
+    tags: ['video', 'call', 'meeting', 'grid', 'conferencing'],
+    previewComponent: 'video-call-layout',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'call-device-settings',
+    name: 'Call Device Settings',
+    category: 'Communication',
+    description:
+      'The green room, where every picker has a test beside it - an input meter, a test tone, a camera preview - and blocked permission is a state, not an error.',
+    tags: ['call', 'devices', 'microphone', 'camera', 'settings'],
+    previewComponent: 'call-device-settings',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'support-ticket-thread',
+    name: 'Support Ticket Thread',
+    category: 'Communication',
+    description:
+      'The customer side of a ticket, where a named owner and a deadline replace Status: Open - including the waiting-on-you state that stops the argument about response times.',
+    tags: ['support', 'ticket', 'sla', 'status', 'thread'],
+    previewComponent: 'support-ticket-thread',
+    deps: ['lucide-react'],
+  },
+
   /* ---------------------- Command & Search ------------------------ */
   {
     id: 'command-palette',
@@ -1924,6 +2157,26 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     tags: ["search", "recent", "history", "empty state", "command"],
     previewComponent: 'recent-search-list',
     deps: [],
+  },
+  {
+    id: 'search-faceted-results',
+    name: 'Faceted Search Results',
+    category: 'Command & Search',
+    description:
+      'The whole faceted search assembled - rail, chips, live count and sort - with the intersection actually applied and relevance offered only when there is a query.',
+    tags: ['search', 'facets', 'filters', 'results', 'ecommerce'],
+    previewComponent: 'search-faceted-results',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'search-facet-range',
+    name: 'Range Facet with Histogram',
+    category: 'Command & Search',
+    description:
+      'The facet that is a number: a distribution over a dual-thumb slider built from two real range inputs, with typed bounds clamped on blur rather than per keystroke.',
+    tags: ['search', 'facet', 'range', 'price', 'histogram'],
+    previewComponent: 'search-facet-range',
+    deps: ['lucide-react'],
   },
   /* ---------------------- File Upload ----------------------------- */
   {
@@ -2669,6 +2922,36 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     previewComponent: 'gift-options-form',
     deps: [],
   },
+  {
+    id: 'gift-card-purchase',
+    name: 'Gift Card Purchase',
+    category: 'Cart & Checkout',
+    description:
+      'The only checkout where the buyer is not the recipient - live preview, a send date with a stated timezone, and the confirm-the-address field that prevents the expensive typo.',
+    tags: ['gift card', 'checkout', 'commerce', 'purchase', 'email'],
+    previewComponent: 'gift-card-purchase',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'guest-checkout-form',
+    name: 'Guest Checkout',
+    category: 'Cart & Checkout',
+    description:
+      'Guest as the default and the whole form, with a real autocomplete token on every field and the account offer moved to the end, where it costs one checkbox.',
+    tags: ['checkout', 'guest', 'commerce', 'form', 'conversion'],
+    previewComponent: 'guest-checkout-form',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'discount-modal',
+    name: 'Discount Offer Modal',
+    category: 'Cart & Checkout',
+    description:
+      'The offer popup with four rules applied: triggered by intent, a decline button of equal weight, a dismissal that is remembered, and the terms on its face.',
+    tags: ['discount', 'popup', 'modal', 'promotion', 'commerce'],
+    previewComponent: 'discount-modal',
+    deps: ['lucide-react'],
+  },
   /* ---------------------------- Orders & Reviews ------------------ */
   {
     id: 'order-confirmation',
@@ -2742,5 +3025,104 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     tags: ["reviews", "ratings", "distribution", "commerce", "stats"],
     previewComponent: 'review-distribution-band',
     deps: [],
+  },
+
+  /* ---------------------- After-Sale Service ----------------------- *
+   *
+   * Everything after the money has changed hands. These screens get built
+   * last and under pressure, which is exactly why a catalog is worth
+   * having for them: a refund tracker that names who is holding the money,
+   * a returns picker that prices the exchange before the goods are posted,
+   * a warranty panel whose exclusions are as prominent as its cover.
+   */
+  {
+    id: 'warranty-coverage-panel',
+    name: 'Warranty Coverage Panel',
+    category: 'After-Sale Service',
+    description:
+      'A verdict for this serial number today, with exclusions given equal weight to cover and an extension offered only while it can still be bought.',
+    tags: ['warranty', 'coverage', 'after-sale', 'claim', 'commerce'],
+    previewComponent: 'warranty-coverage-panel',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'refund-request-form',
+    name: 'Refund Request Form',
+    category: 'After-Sale Service',
+    description:
+      'Refunds are per line, not per order: a reason on each line that drives what is asked for next, and a running total itemising the restocking fee and the delivery rule.',
+    tags: ['refund', 'returns', 'form', 'after-sale', 'commerce'],
+    previewComponent: 'refund-request-form',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'refund-status-tracker',
+    name: 'Refund Status Tracker',
+    category: 'After-Sale Service',
+    description:
+      'Where the money is and who is holding it - four stages, each naming the responsible party, including the bank stage every where-is-my-refund contact comes from.',
+    tags: ['refund', 'status', 'tracker', 'timeline', 'after-sale'],
+    previewComponent: 'refund-status-tracker',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'refunds-overview-table',
+    name: 'Refunds Overview Table',
+    category: 'After-Sale Service',
+    description:
+      'The operator queue, sorted oldest-open-first because recency is the wrong default, with blocked as a first-class status that names its blocker.',
+    tags: ['refunds', 'table', 'queue', 'operations', 'after-sale'],
+    previewComponent: 'refunds-overview-table',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'return-exchange-picker',
+    name: 'Return or Exchange Picker',
+    category: 'After-Sale Service',
+    description:
+      'Refund, exchange or credit decided per line, with live stock on the variants and the price difference shown before the goods are posted rather than after.',
+    tags: ['returns', 'exchange', 'after-sale', 'commerce', 'store credit'],
+    previewComponent: 'return-exchange-picker',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'return-label-instructions',
+    name: 'Return Label and Instructions',
+    category: 'After-Sale Service',
+    description:
+      'The screen between approved and posted: three drop-off methods with the thing that actually blocks each one, the packing rules that get returns refused, and a date rather than a duration.',
+    tags: ['returns', 'label', 'shipping', 'instructions', 'after-sale'],
+    previewComponent: 'return-label-instructions',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'repair-request-form',
+    name: 'Service Repair Request',
+    category: 'After-Sale Service',
+    description:
+      'A repair is not a return - a symptom picker that filters the service routes, warranty resolved inside the form, and an estimate with its uncertainty stated.',
+    tags: ['repair', 'service', 'warranty', 'form', 'after-sale'],
+    previewComponent: 'repair-request-form',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'review-history-list',
+    name: 'Review History',
+    category: 'After-Sale Service',
+    description:
+      'The reviews you wrote and the ones you owe, with editing that is honest about being marked as edited and moderation that names the rule it applied.',
+    tags: ['reviews', 'history', 'account', 'moderation', 'commerce'],
+    previewComponent: 'review-history-list',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'gift-card-balance',
+    name: 'Gift Card Balance Check',
+    category: 'After-Sale Service',
+    description:
+      'A balance checker built for the two ways it goes wrong - an empty card and an expired one - answering with a transaction history rather than a bare zero.',
+    tags: ['gift card', 'balance', 'after-sale', 'commerce', 'account'],
+    previewComponent: 'gift-card-balance',
+    deps: ['lucide-react'],
   },
 ]

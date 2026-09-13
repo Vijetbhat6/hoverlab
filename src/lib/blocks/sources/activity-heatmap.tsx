@@ -94,12 +94,30 @@ const LEVEL_CLASSES = [
   'bg-primary',
 ]
 
+/*
+  A stable id suffix derived from this instance's own heading.
+
+  `useId` is the right answer and is not available here: this is a server
+  component and hooks are not. The heading is what differs when a section is
+  used twice on one page, so hashing it gives each copy its own
+  `aria-labelledby` target without a hook, a prop or a counter — and it
+  stays stable across server and client renders, which a counter would not.
+*/
+function instanceId(...parts: (string | undefined)[]): string {
+  const text = parts.filter(Boolean).join('|')
+  let hash = 0
+  for (let i = 0; i < text.length; i++) hash = (Math.imul(hash, 31) + text.charCodeAt(i)) | 0
+  return (hash >>> 0).toString(36).slice(0, 6)
+}
+
 export function ActivityHeatmap({
   heading = 'Deploy activity',
   noun = 'deploy',
   days = DEFAULT_DAYS,
   className = '',
 }: ActivityHeatmapProps) {
+  const headingId = `activity-heatmap-heading-${instanceId(heading, noun)}`
+
   const counts = days.map((d) => d.count)
   const total = counts.reduce((sum, n) => sum + n, 0)
   const active = counts.filter((n) => n > 0).length
@@ -136,12 +154,12 @@ export function ActivityHeatmap({
 
   return (
     <section
-      aria-labelledby="activity-heatmap-heading"
+      aria-labelledby={headingId}
       className={`mx-auto w-full max-w-4xl px-4 py-16 sm:px-6 lg:px-8 ${className}`}
     >
       <div className="rounded-2xl border border-border bg-card p-6 sm:p-8">
         <div className="flex flex-wrap items-baseline justify-between gap-3">
-          <h2 id="activity-heatmap-heading" className="text-lg font-semibold text-foreground">
+          <h2 id={headingId} className="text-lg font-semibold text-foreground">
             {heading}
           </h2>
           <p className="text-sm text-muted-foreground">

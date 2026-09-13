@@ -28,6 +28,7 @@ type Ledger = Record<string, string>
 
 const BY_LEVEL: Record<ArtifactLevel, Ledger> = {
   effect: LEDGER.effects as Ledger,
+  primitive: LEDGER.primitives as Ledger,
   block: LEDGER.blocks as Ledger,
   page: LEDGER.pages as Ledger,
   template: LEDGER.templates as Ledger,
@@ -35,6 +36,7 @@ const BY_LEVEL: Record<ArtifactLevel, Ledger> = {
 
 const UPDATED_BY_LEVEL: Record<ArtifactLevel, Ledger> = {
   effect: LEDGER.updated.effects as Ledger,
+  primitive: LEDGER.updated.primitives as Ledger,
   block: LEDGER.updated.blocks as Ledger,
   page: LEDGER.updated.pages as Ledger,
   template: LEDGER.updated.templates as Ledger,
@@ -111,6 +113,38 @@ export function catalogWaves(): CatalogWave[] {
   return [...grouped.values()].sort((a, b) =>
     a.date === b.date ? a.level.localeCompare(b.level) : b.date.localeCompare(a.date),
   )
+}
+
+/**
+ * What arrived on one rung in the last `days` days, newest first.
+ *
+ * ── WHY "SINCE" AND NOT "THIS WEEK" ─────────────────────────────────────
+ *
+ * The window is measured from the moment this runs, which on a statically
+ * rendered page is BUILD time, not the reader's. That is the whole reason
+ * this returns dates alongside ids and the caller prints them: a page built
+ * three weeks ago would otherwise still be saying "new this week" about
+ * something a month old, and nothing on the page would let a reader catch
+ * it. With the date rendered, a stale strip is visibly stale rather than
+ * quietly false — which is the same bargain the rest of this file makes.
+ *
+ * An empty result is a normal answer. A quiet fortnight is a fact about the
+ * fortnight, and the caller falls back to the most recent wave rather than
+ * padding the list out to look busy.
+ */
+export function addedSince(
+  level: ArtifactLevel,
+  days = 7,
+  now = new Date(),
+): { id: string; date: string }[] {
+  const cutoff = new Date(now)
+  cutoff.setUTCDate(cutoff.getUTCDate() - days)
+  const key = cutoff.toISOString().slice(0, 10)
+
+  return Object.entries(BY_LEVEL[level])
+    .filter(([, date]) => date >= key)
+    .sort(([, a], [, b]) => b.localeCompare(a))
+    .map(([id, date]) => ({ id, date }))
 }
 
 /** The `limit` most recently added ids on one rung, newest first. */

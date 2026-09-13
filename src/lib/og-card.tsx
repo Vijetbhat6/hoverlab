@@ -31,13 +31,16 @@ export const OG_SIZE = { width: 1200, height: 630 }
 export const OG_CONTENT_TYPE = 'image/png'
 
 /**
- * Per-tier accent, so the four rungs of the ladder are distinguishable at
+ * Per-tier accent, so the rungs of the ladder are distinguishable at
  * thumbnail size. Shared hue family with the brand, different anchor —
  * a template card should not be mistakable for an effect card when three
  * of them land in the same channel.
  */
 const ACCENTS: Record<ArtifactLevel, { glow: string; wash: string; chip: string; text: string }> = {
   effect: { glow: '99,102,241', wash: '236,72,153', chip: '99,102,241', text: '#c7d2fe' },
+  /* Cyan: adjacent to the effect indigo, because a primitive is the rung
+     directly above one, and distinct from the block emerald. */
+  primitive: { glow: '6,182,212', wash: '99,102,241', chip: '6,182,212', text: '#a5f3fc' },
   block: { glow: '16,185,129', wash: '99,102,241', chip: '16,185,129', text: '#a7f3d0' },
   page: { glow: '245,158,11', wash: '236,72,153', chip: '245,158,11', text: '#fde68a' },
   template: { glow: '168,85,247', wash: '244,63,94', chip: '168,85,247', text: '#e9d5ff' },

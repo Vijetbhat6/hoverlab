@@ -43,6 +43,7 @@ export const PUBLISHER = {
 /** Hub URL for each rung — the plural route, and the breadcrumb's parent. */
 const LEVEL_HUB: Record<ArtifactLevel, string> = {
   effect: '/library',
+  primitive: '/primitives',
   block: '/blocks',
   page: '/pages',
   template: '/templates',
@@ -56,6 +57,7 @@ const LEVEL_HUB: Record<ArtifactLevel, string> = {
  */
 const LEVEL_LANGUAGE: Record<ArtifactLevel, string> = {
   effect: 'CSS',
+  primitive: 'TypeScript',
   block: 'TypeScript',
   page: 'TypeScript',
   template: 'TypeScript',

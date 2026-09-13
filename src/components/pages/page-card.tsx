@@ -11,6 +11,7 @@ import * as React from 'react'
 import Link from 'next/link'
 import { Blocks, FileCode } from 'lucide-react'
 import { PageThumbnail } from './page-preview'
+import { UsageCount } from '@/components/usage-count'
 import type { PageMeta } from '@/lib/pages/page-types'
 
 export function PageCard({ page }: { page: PageMeta }) {
@@ -44,6 +45,9 @@ export function PageCard({ page }: { page: PageMeta }) {
             <FileCode aria-hidden className="h-3.5 w-3.5" />
             {page.lines} lines
           </span>
+
+          {/* Absent on anything nobody copied this week — see <UsageCount>. */}
+          <UsageCount id={page.id} className="font-medium text-foreground/70" />
         </div>
       </div>
     </article>

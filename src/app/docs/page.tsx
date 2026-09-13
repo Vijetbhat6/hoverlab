@@ -12,7 +12,7 @@ import {
 import { BLOCK_COUNT } from '@/lib/blocks/block-index'
 import { PAGE_COUNT } from '@/lib/pages/page-index'
 import { TEMPLATE_COUNT } from '@/lib/templates/template-index'
-import { TOTAL_COUNT } from '@/lib/catalog-stats'
+import { CSS_COUNT, SHADER_COUNT } from '@/lib/catalog-stats'
 import { absoluteUrl } from '@/lib/site'
 
 const TITLE = 'Docs — Hoverlab'
@@ -41,17 +41,18 @@ export default function DocsOverviewPage() {
         title="Install anything from the catalog"
         intro={
           <>
-            Hoverlab is {TOTAL_COUNT.toLocaleString('en-US')} CSS effects,{' '}
-            {BLOCK_COUNT} blocks, {PAGE_COUNT} pages and {TEMPLATE_COUNT} templates. Nothing
-            here is a dependency: everything you take is source that lands in your
-            repo and stops being ours.
+            Hoverlab is {CSS_COUNT.toLocaleString('en-US')} CSS effects,{' '}
+            {SHADER_COUNT} shader and canvas effects, {BLOCK_COUNT} blocks,{' '}
+            {PAGE_COUNT} pages and {TEMPLATE_COUNT} templates. Nothing here is a
+            dependency: everything you take is source that lands in your repo and
+            stops being ours.
           </>
         }
       />
 
-      <DocsSection id="the-ladder" title="The four tiers">
+      <DocsSection id="the-ladder" title="The five tiers">
         <p>
-          Every artifact sits on one of four rungs, and the rung tells you what
+          Every artifact sits on one of five rungs, and the rung tells you what
           you get. The id is unique across all of them, so any tool that takes
           an id — the CLI, the API — resolves it without you saying which tier
           it came from.
@@ -64,6 +65,11 @@ export default function DocsOverviewPage() {
               <Link key="e" href="/library" className="font-medium text-primary hover:underline">Effect</Link>,
               'One element — a button hover, a loader, a gradient',
               <>HTML + CSS, exportable as React, Vue, Svelte and more</>,
+            ],
+            [
+              <Link key="pr" href="/primitives" className="font-medium text-primary hover:underline">Primitive</Link>,
+              'One control — segmented control, input group, field, combobox',
+              'A single React + Tailwind file, usually with no dependencies',
             ],
             [
               <Link key="b" href="/blocks" className="font-medium text-primary hover:underline">Block</Link>,
@@ -92,10 +98,11 @@ export default function DocsOverviewPage() {
           you see is what lands in your editor.
         </p>
         <p>
-          Blocks and pages are React with Tailwind utility classes. They import
-          nothing from Hoverlab; the only dependency any of them declares is{' '}
-          <C>lucide-react</C>, and the detail page tells you when even that is
-          not needed.
+          Primitives, blocks and pages are React with Tailwind utility
+          classes. They import nothing from Hoverlab; the only dependency any
+          of them declares is <C>lucide-react</C>, and the detail page tells
+          you when even that is not needed — which, for the primitives, is
+          about half of them.
         </p>
       </DocsSection>
 

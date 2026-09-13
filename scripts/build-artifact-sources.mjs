@@ -33,6 +33,14 @@ const libDir = join(here, '..', 'src', 'lib')
  * the file — pages land beside routes, blocks beside components.
  */
 const TIERS = [
+  /*
+   * Primitives land in `components/ui/`, not `components/`, because that is
+   * where shadcn's CLI puts the controls they sit beside — a segmented
+   * control next to a button, not next to a pricing section. The path is
+   * also what the detail page tells the visitor to create, so it has to
+   * match the convention their project already has.
+   */
+  { dir: 'primitives', singular: 'primitive', copyDir: 'components/ui' },
   { dir: 'blocks', singular: 'block', copyDir: 'components' },
   { dir: 'pages', singular: 'page', copyDir: 'app' },
   // Templates are projects, not components: each one is a directory of
@@ -200,7 +208,7 @@ for (const tier of TIERS) {
 
     const source = rewriteImports(readFileSync(join(sourcesDir, `${id}.tsx`), 'utf8'))
 
-    sources[id] = [
+    const files = [
       {
         // Relative to wherever the user drops it. `components/` and `app/`
         // are the conventions every framework's docs assume, so they are
@@ -211,7 +219,42 @@ for (const tier of TIERS) {
       },
     ]
 
-    stats[id] = { lines: source.split('\n').length, files: 1 }
+    /*
+      An artifact that imports a sibling ships that sibling with it.
+
+      Almost every primitive is one self-contained file, and the tier's
+      promise is "paste this and it works". `device-showcase` is the case
+      that promise did not cover: it is an *arrangement* of `<LaptopFrame>`
+      and `<PhoneFrame>`, so its whole value is that it composes them, and
+      inlining two frames to keep the file count at one would duplicate
+      three hundred lines to satisfy a rule rather than a reader.
+
+      So the rule it actually has to satisfy is the honest one — every
+      relative import resolves to a file shipped alongside it — and the
+      sibling list is derived from the imports rather than declared in the
+      catalog, so it cannot go stale when somebody adds or drops one.
+
+      One hop only, and deliberately: a sibling that itself composed
+      siblings would be a dependency graph, and a tier whose paste target is
+      a graph is a block. `primitives.test.ts` holds that line.
+    */
+    for (const [, sibling] of source.matchAll(/from\s+'\.\/([\w-]+)'/g)) {
+      const siblingPath = join(sourcesDir, `${sibling}.tsx`)
+      if (!existsSync(siblingPath)) continue
+      if (files.some((f) => f.path === `${tier.copyDir}/${sibling}.tsx`)) continue
+      files.push({
+        path: `${tier.copyDir}/${sibling}.tsx`,
+        lang: 'tsx',
+        source: rewriteImports(readFileSync(siblingPath, 'utf8')),
+      })
+    }
+
+    sources[id] = files
+
+    stats[id] = {
+      lines: files.reduce((n, f) => n + f.source.split('\n').length, 0),
+      files: files.length,
+    }
   }
 
   writeFileSync(

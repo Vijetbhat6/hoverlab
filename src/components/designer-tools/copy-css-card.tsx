@@ -73,7 +73,23 @@ export function CopyCssCard({
           )}
         </Button>
       </div>
-      <pre className="overflow-x-auto p-4 text-xs leading-relaxed">
+      {/*
+        Focusable, because it scrolls.
+
+        WCAG 2.1.1: a region that scrolls has to be reachable by
+        keyboard, or the content past its right edge is readable only
+        with a pointer. Every tool page carries two or three of these,
+        so this one attribute is the whole fix for all of them.
+
+        A tabbable non-interactive element also needs a name and a role
+        or a screen reader announces an unlabelled group.
+      */}
+      <pre
+        tabIndex={0}
+        role="region"
+        aria-label={`${title} code`}
+        className="overflow-x-auto p-4 text-xs leading-relaxed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+      >
         <code className="font-mono">{code}</code>
       </pre>
     </div>

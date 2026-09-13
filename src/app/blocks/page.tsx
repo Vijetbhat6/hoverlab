@@ -7,14 +7,20 @@
  * marketing, product and commerce, and the grid below shows every section
  * rendered live rather than as a screenshot.
  *
- * Fully static and server-rendered — no filter chips, no client grid. The
+ * Static and server-rendered — no filter chips, no client grid. The
  * category links are real URLs, which is both the cheaper page and the one
  * a crawler can actually follow.
+ *
+ * The one piece of client code is the sort control, and it is deliberately
+ * not a client grid: the cards are still rendered here, and
+ * `SortableArtifactGrid` reorders the finished nodes. What a crawler reads
+ * is the full curated page either way.
  */
 
 import Link from 'next/link'
 import type { Metadata } from 'next'
 import { ArrowRight, Blocks as BlocksIcon, Layers, Sparkles, Wand2 } from 'lucide-react'
+import { NewThisWeek } from '@/components/new-this-week'
 import { BlockCard } from '@/components/blocks/block-card'
 import { TierDefinition } from '@/components/tier-definition'
 import { blockCategorySlug } from '@/lib/blocks/block-types'
@@ -24,6 +30,8 @@ import {
   populatedBlockCategories,
   blocksInCategory,
 } from '@/lib/blocks/block-index'
+import { SortableArtifactGrid } from '@/components/sortable-artifact-grid'
+import { addedAt } from '@/lib/recency'
 import { TOTAL_COUNT } from '@/lib/catalog-stats'
 import { absoluteUrl } from '@/lib/site'
 import { JsonLd } from '@/components/json-ld'
@@ -58,6 +66,8 @@ export const metadata: Metadata = {
 export default function BlocksHubPage() {
   const groups = populatedByGroup()
   const categories = populatedBlockCategories()
+  /* Flat, in category order, so a sort has one list to rank. */
+  const allBlocks = categories.flatMap((category) => blocksInCategory(category))
 
   /*
     A CollectionPage + ItemList, and a breadcrumb.
@@ -135,6 +145,10 @@ export default function BlocksHubPage() {
           </div>
         </header>
 
+        {/* What changed since last time — see the component for the two
+            states and why both print dates. */}
+        <NewThisWeek level="block" />
+
         {/* ---------------------------------------------------------- *
          *  Category rail, bucketed by audience
          * ---------------------------------------------------------- */}
@@ -166,30 +180,42 @@ export default function BlocksHubPage() {
         {/* ---------------------------------------------------------- *
          *  Every block, grouped by category
          * ---------------------------------------------------------- */}
-        <div className="mt-16 space-y-16">
-          {categories.map((category) => {
-            const blocks = blocksInCategory(category)
-            return (
-              <section key={category} id={blockCategorySlug(category)}>
-                <div className="mb-6 flex items-baseline justify-between gap-4">
+        {/*
+          Still server-rendered, still one pass — `SortableArtifactGrid`
+          takes the finished cards and reorders the array, so choosing
+          "Newest" does not drag 250 block sources into the browser. See
+          that file for why it is not CSS `order`.
+        */}
+        <div className="mt-16">
+          <SortableArtifactGrid
+            noun="blocks"
+            className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3"
+            items={allBlocks.map((block) => ({
+              id: block.id,
+              added: addedAt('block', block.id),
+              node: <BlockCard key={block.id} block={block} />,
+            }))}
+            groups={categories.map((category) => ({
+              key: category,
+              ids: blocksInCategory(category).map((b) => b.id),
+              heading: (
+                <div
+                  key={category}
+                  id={blockCategorySlug(category)}
+                  className="mb-6 flex items-baseline justify-between gap-4 scroll-mt-20"
+                >
                   <h2 className="text-2xl font-bold tracking-tight">{category}</h2>
                   <Link
                     href={`/blocks/${blockCategorySlug(category)}`}
                     className="inline-flex shrink-0 items-center gap-1 text-sm font-medium text-muted-foreground transition-all hover:gap-2 hover:text-foreground"
                   >
-                    View all {blocks.length}
+                    View all {blocksInCategory(category).length}
                     <ArrowRight aria-hidden className="h-3.5 w-3.5" />
                   </Link>
                 </div>
-
-                <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
-                  {blocks.map((block) => (
-                    <BlockCard key={block.id} block={block} />
-                  ))}
-                </div>
-              </section>
-            )
-          })}
+              ),
+            }))}
+          />
         </div>
 
         {/* ---------------------------------------------------------- *

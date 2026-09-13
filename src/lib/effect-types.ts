@@ -14,6 +14,7 @@
 
 import type { Artifact } from './artifact-types'
 import { toSlug } from './artifact-types'
+import type { EffectRenderer } from './shaders/shader-types'
 
 export type EffectCategory =
   | "Buttons"
@@ -40,6 +41,7 @@ export type EffectCategory =
   | "Patterns & Textures"
   | "Masks & Clip Paths"
   | "Charts & Data"
+  | "Dates & Time"
   | "Timelines & Steps"
   | "Tables & Data Grids"
   | "Forms & Validation"
@@ -62,6 +64,18 @@ export interface Effect
   html: string;
   /** The CSS source the user can copy. */
   css: string;
+  /**
+   * How the effect paints itself. Absent means `'css'`, which is what all
+   * 1,047 generated and hand-written records are.
+   *
+   * A `'webgl'` or `'canvas'` effect still has `html` and `css` — the html
+   * is the canvas the shader runtime looks for, and the css is the gradient
+   * fallback a visitor without WebGL keeps — so nothing that consumes an
+   * effect had to learn about this field. What it buys is the ability to
+   * *say* which kind it is: the `/library` filter, the detail page's spec
+   * row, and an honest split in the counts. See `shaders/shader-types.ts`.
+   */
+  renderer?: EffectRenderer;
 }
 
 export const CATEGORIES: EffectCategory[] = [
@@ -89,6 +103,7 @@ export const CATEGORIES: EffectCategory[] = [
   "Patterns & Textures",
   "Masks & Clip Paths",
   "Charts & Data",
+  "Dates & Time",
   "Timelines & Steps",
   "Tables & Data Grids",
   "Forms & Validation",

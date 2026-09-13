@@ -21,6 +21,7 @@
 
 import GENERATED_RAW from "./generated-effects.json";
 import { HANDCRAFTED } from "./effects-handcrafted";
+import { SHADER_EFFECTS_WITH_SOURCE } from "./shaders/shaders";
 import { withMotionGuard } from "./effect-insights";
 import type { Effect } from "./effect-types";
 
@@ -52,10 +53,20 @@ const GENERATED: Effect[] = (GENERATED_RAW as Effect[]).map((e) => ({
 }));
 
 /**
- * Full catalog: hand-crafted (featured) + generated.
- * Total count is over 1,600.
+ * Full catalog: hand-crafted (featured) + shader tier + generated.
+ *
+ * The shader effects sit second rather than last. `'default'` sort on
+ * /library preserves this order as a curation choice, and a tier that
+ * exists because every visual comparison was being lost without it does not
+ * belong on page 44. They carry their source files, unlike every other
+ * effect, because `html` + `css` is the whole deliverable for a CSS effect
+ * and only the preview for a shader — see `shaders/shaders.ts`.
  */
-export const EFFECTS: Effect[] = [...FEATURED_HANDCRAFTED, ...GENERATED];
+export const EFFECTS: Effect[] = [
+  ...FEATURED_HANDCRAFTED,
+  ...SHADER_EFFECTS_WITH_SOURCE,
+  ...GENERATED,
+];
 
 /** Total effect count, exposed for the hero badge. */
 export const TOTAL_COUNT = EFFECTS.length;

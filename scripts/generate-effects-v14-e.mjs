@@ -586,7 +586,7 @@ export function generateV14E(ctx) {
 .${c}:hover i:nth-child(5) { color: #7dd3fc; font-weight: 700; opacity: 1; }`
     add(mk({
       name: 'Wheel Picker Reel',
-      category: 'Sliders & Carousels',
+      category: 'Dates & Time',
       description: 'A drum of month labels standing on a 3D cylinder, fading as they curve away from the lit selection band, and rolling on by one notch when hovered.',
       html, css,
       tags: ['picker', 'wheel', 'cylinder', '3d', 'selection'],
@@ -843,7 +843,7 @@ export function generateV14E(ctx) {
 }`
     add(mk({
       name: 'Hourglass Timer Icon',
-      category: 'Icons & Shapes',
+      category: 'Dates & Time',
       description: 'A framed hourglass whose upper chamber empties through a thin stream into the heap below, and once the sand has run through the whole frame turns over to start again.',
       html, css,
       tags: ['hourglass', 'timer', 'sand', 'flip', 'countdown'],

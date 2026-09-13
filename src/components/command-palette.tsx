@@ -59,6 +59,7 @@ import {
   Loader2,
   Blocks,
   FileText,
+  Component,
   LayoutTemplate,
   Layers,
   type LucideIcon,
@@ -134,11 +135,20 @@ function fuzzyMatch(query: string, text: string): FuzzyResult | null {
  * are outnumbered ~50:1 by effects, and a single merged list is how they
  * were invisible here in the first place.
  */
-type ItemKind = 'action' | 'tool' | 'category' | 'template' | 'page' | 'block' | 'effect'
+type ItemKind =
+  | 'action'
+  | 'tool'
+  | 'category'
+  | 'template'
+  | 'page'
+  | 'block'
+  | 'primitive'
+  | 'effect'
 
 /** Row icon per level. */
 const LEVEL_ICON: Record<ArtifactLevel, LucideIcon> = {
   effect: Sparkles,
+  primitive: Component,
   block: Blocks,
   page: FileText,
   template: LayoutTemplate,
@@ -146,7 +156,7 @@ const LEVEL_ICON: Record<ArtifactLevel, LucideIcon> = {
 
 /** The artifact sections, in render order. Assembly first, atoms last. */
 const ARTIFACT_SECTIONS: Array<{ kind: ItemKind; label: string }> = (
-  ['template', 'page', 'block', 'effect'] as const
+  ['template', 'page', 'block', 'primitive', 'effect'] as const
 ).map((level) => ({ kind: level, label: LEVEL_LABEL[level].many }))
 
 interface BaseItem {
@@ -556,6 +566,7 @@ export function CommandPalette() {
       template: [],
       page: [],
       block: [],
+      primitive: [],
       effect: [],
     }
     for (const r of results) {

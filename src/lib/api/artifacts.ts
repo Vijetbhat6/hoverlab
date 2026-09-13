@@ -19,6 +19,7 @@
 import 'server-only'
 
 import { getEffect } from '@/lib/effects'
+import { getPrimitive } from '@/lib/primitives/primitives'
 import { getBlock } from '@/lib/blocks/blocks'
 import { getPage } from '@/lib/pages/pages'
 import { getTemplate } from '@/lib/templates/templates'
@@ -337,11 +338,14 @@ export function buildEffectPayload(
  */
 export type ResolvedArtifact =
   | { level: 'effect'; effect: NonNullable<ReturnType<typeof getEffect>> }
-  | { level: 'block' | 'page' | 'template'; artifact: FileArtifact }
+  | { level: 'primitive' | 'block' | 'page' | 'template'; artifact: FileArtifact }
 
 export function resolveArtifact(id: string): ResolvedArtifact | null {
   const effect = getEffect(id)
   if (effect) return { level: 'effect', effect }
+
+  const primitive = getPrimitive(id)
+  if (primitive) return { level: 'primitive', artifact: primitive }
 
   const block = getBlock(id)
   if (block) return { level: 'block', artifact: block }

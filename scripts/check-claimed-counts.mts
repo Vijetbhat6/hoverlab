@@ -49,8 +49,27 @@ const SKILLS = join(HERE, '..', 'skills')
  * a bare number near the word "blocks" — because a guard that fires on
  * prose nobody meant as a count is a guard people switch off.
  */
+/**
+ * Not every effect is a CSS effect any more.
+ *
+ * `"1111 CSS effects"` was true for as long as there was only one kind, and
+ * it stopped being true the day the shader tier landed — at which point the
+ * honest failure would have been this check passing while `--fix` rewrote
+ * the claim to "1126 CSS effects", which is a bigger number and a false
+ * statement. A guard against stale counts that launders a wrong noun is
+ * worse than no guard, so the two are counted separately: `CSS effects`
+ * means the ones that are CSS, and the bare `effects` means all of them.
+ */
+const CSS_EFFECTS = EFFECTS.filter((e) => (e.renderer ?? 'css') === 'css').length
+const SHADER_EFFECTS = EFFECTS.length - CSS_EFFECTS
+
 const CLAIMS: { label: string; pattern: RegExp; actual: number }[] = [
-  { label: 'CSS effects', pattern: /(\d[\d,]*) CSS effects/g, actual: EFFECTS.length },
+  { label: 'CSS effects', pattern: /(\d[\d,]*) CSS effects/g, actual: CSS_EFFECTS },
+  {
+    label: 'shader effects',
+    pattern: /(\d[\d,]*) shader effects/g,
+    actual: SHADER_EFFECTS,
+  },
   { label: 'effects', pattern: /(\d[\d,]*) effects/g, actual: EFFECTS.length },
   { label: 'React blocks', pattern: /(\d[\d,]*) React blocks/g, actual: BLOCK_INDEX.length },
   { label: 'blocks', pattern: /(\d[\d,]*) blocks/g, actual: BLOCK_INDEX.length },
@@ -93,7 +112,7 @@ for (const entry of readdirSync(SKILLS, { withFileTypes: true })) {
       const claimed = Number(match[1].replace(/,/g, ''))
       if (claimed === claim.actual) continue
       /* More specific patterns run first; skip what one of them already owns. */
-      if (claim.label === 'effects' && /CSS effects/.test(match[0])) continue
+      if (claim.label === 'effects' && /(CSS|shader) effects/.test(match[0])) continue
       if (claim.label === 'blocks' && /React blocks/.test(match[0])) continue
       if (claim.label === 'templates' && /Next\.js templates/.test(match[0])) continue
       if (fix) {

@@ -54,7 +54,7 @@ export function CopyFrameForFigma({
    * rather than the catalog's defaults — which is what they are looking at
    * and therefore what they mean by "this".
    */
-  level: 'block' | 'page' | 'template' | 'effect'
+  level: 'primitive' | 'block' | 'page' | 'template' | 'effect'
   className?: string
 }) {
   const [state, setState] = React.useState<'idle' | 'working' | 'done'>('idle')

@@ -34,20 +34,32 @@ const byCategory = {} as Record<EffectCategory, number>
 for (const c of CATEGORIES) byCategory[c] = 0
 
 let featured = 0
+/*
+ * How many effects are actually CSS.
+ *
+ * Counted rather than assumed, because "effects" and "CSS effects" stopped
+ * being the same number when the shader tier landed, and the difference is
+ * the kind that goes wrong silently: every surface that says "N CSS
+ * effects" keeps rendering while the noun quietly becomes false. `/docs`
+ * said exactly that, off this constant.
+ */
+let css = 0
 for (const e of EFFECTS) {
   if (e.featured) featured++
+  if ((e.renderer ?? 'css') === 'css') css++
   if (e.category in byCategory) byCategory[e.category as EffectCategory]++
   else console.warn(`[build-catalog-stats] unknown category: ${e.category}`)
 }
 
 const empty = CATEGORIES.filter((c) => byCategory[c] === 0)
 
-const stats = { total: EFFECTS.length, featured, byCategory }
+const stats = { total: EFFECTS.length, css, shader: EFFECTS.length - css, featured, byCategory }
 writeFileSync(OUT, JSON.stringify(stats, null, 2) + '\n')
 
 const bytes = JSON.stringify(stats).length
 console.log(
-  `[build-catalog-stats] ${EFFECTS.length} effects, ${CATEGORIES.length} categories -> ${(bytes / 1024).toFixed(1)} KB`,
+  `[build-catalog-stats] ${EFFECTS.length} effects (${css} css, ${EFFECTS.length - css} shader), ` +
+    `${CATEGORIES.length} categories -> ${(bytes / 1024).toFixed(1)} KB`,
 )
 
 // A declared-but-empty category is a live bug, not a warning: /category/<slug>

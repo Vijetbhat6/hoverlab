@@ -4,6 +4,7 @@ import * as React from 'react'
 import Link from 'next/link'
 import {
   ArrowLeft,
+  Bot,
   ChevronLeft,
   ChevronRight,
   Code2,
@@ -25,9 +26,12 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Slider } from '@/components/ui/slider'
 import { CodeBlock } from '@/components/code-block'
+import { ShaderSourcePanel } from '@/components/shader-source-panel'
+import { isShaderRenderer } from '@/lib/shaders/shader-types'
 import { FrameworkExportPanel } from '@/components/framework-export-panel'
 import { OpenInSandbox } from '@/components/open-in-sandbox'
 import { EffectInsightsPanel } from '@/components/effect-insights-panel'
+import { CopyForAi } from '@/components/copy-for-ai'
 import { EffectSpecCard } from '@/components/effect-spec-card'
 import { useFavorites } from '@/hooks/use-favorites'
 import { useBundle } from '@/hooks/use-bundle'
@@ -115,6 +119,26 @@ interface EffectDetailProps {
    * an effect's markup, CSS and four export formats.
    */
   related?: RelatedBlock[]
+  /**
+   * "What you get" — files, compatibility, install command, licence.
+   *
+   * Passed in already rendered rather than imported here, because
+   * `<ArtifactFacts>` is a server component and this is not. The block,
+   * page and template pages have carried it since it was written; the
+   * effect pages never did, which left the rung with 1,111 pages as the
+   * only one that never said what the licence was or that the CLI could
+   * install it.
+   */
+  facts?: React.ReactNode
+  /**
+   * The per-category merchandising rail, rendered below prev/next.
+   *
+   * A server node for the same reason `facts` is. It goes in the main
+   * column rather than the sidebar because it is two columns wide and the
+   * sidebar rail is a narrow card — and below prev/next because it is the
+   * last thing on the page, not a competitor to the catalog navigation.
+   */
+  proRail?: React.ReactNode
   /** Previous effect in the catalog (for prev/next nav). Null if at start. */
   prev?: Effect | null
   /** Next effect in the catalog (for prev/next nav). Null if at end. */
@@ -135,6 +159,8 @@ export function EffectDetail({
   effect,
   similar,
   related = [],
+  facts,
+  proRail,
   prev,
   next,
 }: EffectDetailProps) {
@@ -222,7 +248,16 @@ export function EffectDetail({
    * and flip to 'customize' in a useEffect if the hash has any
    * customization params.
    */
-  const [activeTab, setActiveTab] = React.useState<'code' | 'customize' | 'insights'>('code')
+  /*
+   * Which kind of effect this is. Three tabs assume the deliverable is a
+   * stylesheet — Code converts it between frameworks, Customize parses it
+   * for variables to put on sliders, Insights analyses it for motion and
+   * paint cost — and none of those questions has an answer for a fragment
+   * shader.
+   */
+  const isShader = isShaderRenderer(effect.renderer)
+
+  const [activeTab, setActiveTab] = React.useState<'code' | 'customize' | 'insights' | 'ai'>('code')
   React.useEffect(() => {
     const parts = parseHash(window.location.hash)
     const hasCustomization =
@@ -240,11 +275,25 @@ export function EffectDetail({
    * customized view. When the user navigates to a different effect
    * via prev/next, we re-read the hash for that URL too.
    */
-  const [opts, setOpts] = React.useState<CustomizationOptions>(() =>
-    typeof window === 'undefined'
-      ? DEFAULT_CUSTOMIZATION
-      : hashToOpts(parseHash(window.location.hash)),
-  )
+  /*
+   * Defaults on both sides of the render, never the hash.
+   *
+   * This read the hash in its initialiser when `window` existed, which is
+   * the `typeof window !== 'undefined'` branch React's hydration error
+   * names by name: the server cannot see a fragment, so it rendered the
+   * stock effect while the client's first pass rendered the customised one.
+   * Arriving on a share link therefore threw a hydration mismatch and React
+   * silently regenerated the whole subtree — the visible symptom being the
+   * "Edited" badge, which exists only when the two disagree.
+   *
+   * The fix is the pattern `activeTab` twenty lines up already uses, and
+   * the comment there already explains: start identical, then apply the
+   * hash in an effect. No new effect is needed — the `[effect.id]` one
+   * below re-reads the hash and runs on mount as well as on prev/next, so
+   * the customisation lands on the frame after hydration, exactly as the
+   * tab switch does.
+   */
+  const [opts, setOpts] = React.useState<CustomizationOptions>(DEFAULT_CUSTOMIZATION)
   // Flag used to suppress the very first hash-write effect (so we don't
   // re-write the hash that the user just landed on, which would trigger
   // an unnecessary history entry).
@@ -785,22 +834,63 @@ export function EffectDetail({
                   arrives via a share link with #hash customization. */}
               <Tabs
                 value={activeTab}
-                onValueChange={(v) => setActiveTab(v as 'code' | 'customize' | 'insights')}
+                onValueChange={(v) => setActiveTab(v as 'code' | 'customize' | 'insights' | 'ai')}
                 className="w-full"
               >
-                <TabsList className="grid w-full grid-cols-3">
+                {/*
+                  Four columns from three. At 4 the labels are tight on a
+                  small phone, which is why every trigger's icon is
+                  decorative and the words carry the meaning — the grid
+                  shrinks the cells, not the text out of them.
+                */}
+                {/*
+                  Two of the four are CSS questions. Customize parses the
+                  stylesheet for the declarations it can put on a slider and
+                  Insights analyses it for motion, paint cost and reduced-
+                  motion coverage; on a fragment shader both would render an
+                  instrument with nothing to measure. Dropped rather than
+                  disabled — a tab that exists and says "not applicable" is
+                  a worse answer than a tab bar that fits its subject.
+                */}
+                <TabsList className={isShader ? 'grid w-full grid-cols-2' : 'grid w-full grid-cols-4'}>
                   <TabsTrigger value="code" className="gap-1.5">
                     <Code2 className="h-3.5 w-3.5" /> Code
                   </TabsTrigger>
-                  <TabsTrigger value="customize" className="gap-1.5">
-                    <Sparkles className="h-3.5 w-3.5" /> Customize
-                  </TabsTrigger>
-                  <TabsTrigger value="insights" className="gap-1.5">
-                    <ShieldCheck className="h-3.5 w-3.5" /> Insights
+                  {isShader ? null : (
+                    <TabsTrigger value="customize" className="gap-1.5">
+                      <Sparkles className="h-3.5 w-3.5" /> Customize
+                    </TabsTrigger>
+                  )}
+                  {isShader ? null : (
+                    <TabsTrigger value="insights" className="gap-1.5">
+                      <ShieldCheck className="h-3.5 w-3.5" /> Insights
+                    </TabsTrigger>
+                  )}
+                  <TabsTrigger value="ai" className="gap-1.5">
+                    <Bot className="h-3.5 w-3.5" /> For AI
                   </TabsTrigger>
                 </TabsList>
 
                 <TabsContent value="code" className="mt-3 space-y-3">
+                  {/*
+                    A shader effect's deliverable is its source files, not
+                    its markup and stylesheet — those are the preview
+                    surface and the fallback. Running the framework
+                    converter on them would hand somebody a React component
+                    wrapping an empty canvas. See `shader-source-panel`.
+                  */}
+                  {isShader && effect.files && effect.files.length > 0 ? (
+                    <ShaderSourcePanel
+                      effect={{
+                        id: effect.id,
+                        name: effect.name,
+                        category: effect.category,
+                      }}
+                      files={effect.files}
+                      renderer={effect.renderer ?? 'webgl'}
+                    />
+                  ) : (
+                  <>
                   {/* Escape hatches to an editable environment. Fed the
                       customized CSS, so a pen opened after tweaking the
                       hue carries the tweak with it. */}
@@ -832,9 +922,11 @@ export function EffectDetail({
                     css={customizedCss}
                     isCustomized={isCustomized}
                   />
+                  </>
+                  )}
                 </TabsContent>
 
-                <TabsContent value="customize" className="mt-3 space-y-4">
+                <TabsContent value="customize" className="mt-3 space-y-4" hidden={isShader}>
                   <CustomizePanel
                     effect={effect}
                     opts={opts}
@@ -849,12 +941,41 @@ export function EffectDetail({
                   />
                 </TabsContent>
 
-                <TabsContent value="insights" className="mt-3">
+                <TabsContent value="insights" className="mt-3" hidden={isShader}>
                   <EffectInsightsPanel html={effect.html} css={customizedCss} />
+                </TabsContent>
+
+                {/*
+                  Fed `customizedCss` and `isCustomized`, exactly as the Code
+                  tab is. That pairing is the whole reason this tab is worth
+                  having on the effect tier: a visitor who has just spent a
+                  minute on the sliders and then hands their agent the stock
+                  hue has been quietly robbed of the minute, and the prompt
+                  says so in words when the two differ.
+                */}
+                <TabsContent value="ai" className="mt-3">
+                  <CopyForAi
+                    variant="bare"
+                    subject={{
+                      level: 'effect',
+                      id: effect.id,
+                      name: effect.name,
+                      description: effect.description,
+                      category: effect.category,
+                      html: effect.html,
+                      css: customizedCss,
+                      customized: isCustomized,
+                    }}
+                  />
                 </TabsContent>
               </Tabs>
             </CardContent>
           </Card>
+
+          {/* Under the code rather than above the preview: these are the
+              questions a reader has once they have decided they want it —
+              what lands in my repo, and may I ship it. */}
+          {facts}
 
           {/* Prev / next navigation */}
           <nav className="grid grid-cols-2 gap-3">
@@ -903,6 +1024,8 @@ export function EffectDetail({
               </div>
             )}
           </nav>
+
+          {proRail}
         </div>
 
         {/* Sidebar: similar effects */}

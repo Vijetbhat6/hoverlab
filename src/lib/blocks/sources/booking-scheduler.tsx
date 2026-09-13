@@ -102,6 +102,17 @@ export function BookingScheduler({
   onConfirm,
   className = '',
 }: BookingSchedulerProps) {
+  /*
+    Ids come from `useId`, not from a literal.
+
+    A literal is correct until the section appears twice on one page — and
+    then `aria-labelledby` resolves to whichever copy is first in the
+    document, so the second one is announced with the first one's heading.
+    It renders identically and reads wrongly, which is why nothing catches
+    it but an id check.
+  */
+  const headingId = React.useId()
+
   const firstOpen = days.find((day) => day.slots.length > 0)
   const [selectedDate, setSelectedDate] = React.useState(firstOpen?.date ?? days[0]?.date ?? '')
   const [selectedTime, setSelectedTime] = React.useState('')
@@ -151,12 +162,12 @@ export function BookingScheduler({
 
   return (
     <section
-      aria-labelledby="booking-heading"
+      aria-labelledby={headingId}
       className={`mx-auto w-full max-w-3xl px-4 py-16 sm:px-6 lg:px-8 ${className}`}
     >
       <div className="overflow-hidden rounded-2xl border border-border bg-card">
         <header className="border-b border-border px-6 py-5">
-          <h2 id="booking-heading" className="text-lg font-semibold text-foreground">
+          <h2 id={headingId} className="text-lg font-semibold text-foreground">
             {heading}
           </h2>
           <p className="mt-1 text-sm text-muted-foreground">{description}</p>

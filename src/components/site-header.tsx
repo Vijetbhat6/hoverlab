@@ -140,6 +140,13 @@ const NAV: Array<{
     hint: 'The atoms — single pure-CSS hover states, loaders and animations',
   },
   {
+    label: 'Primitives',
+    href: '/primitives',
+    match: ['/primitives', '/primitive'],
+    hint: 'The controls — button groups, fields, combobox, segmented control',
+    badge: { text: 'New', tone: 'new' },
+  },
+  {
     label: 'Blocks',
     href: '/blocks',
     match: ['/blocks', '/block'],

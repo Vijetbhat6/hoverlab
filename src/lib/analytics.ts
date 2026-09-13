@@ -178,7 +178,11 @@ export type AnalyticsEvent =
       // which is the right behaviour and worth knowing is possible.
       props: {
         artifact_id: string
-        level: 'block' | 'page' | 'template' | 'effect'
+        // `ArtifactLevel` rather than a literal union: this used to be a
+        // second copy of the ladder, and adding a rung to the real one left
+        // the copy behind — which shows up as a type error on the button,
+        // not as a missing event, but only because the button is typed.
+        level: ArtifactLevel
         layers: number
       }
     }
@@ -220,6 +224,21 @@ export type AnalyticsEvent =
   | { name: 'tool_preview_in_brand'; props: { tool: string } }
   | { name: 'tool_copy_install'; props: { tool: string } }
   | { name: 'tool_open_dna'; props: { tool: string } }
+
+  /**
+   * Someone put an artifact on the clipboard as a prompt.
+   *
+   * The one event that says whether the agent rail is reaching the people
+   * who decide to use a piece. `level` separates the rungs — an effect
+   * handed to an agent and a template handed to one are different intents,
+   * and a blended number would read as neither. `customized` is only ever
+   * true on the effect tier and is worth knowing on its own: it is the
+   * difference between "I want this" and "I want the thing I just made".
+   */
+  | {
+      name: 'artifact_copy_for_ai'
+      props: { id: string; level: string; customized?: boolean }
+    }
 
 const POSTHOG_KEY = process.env.NEXT_PUBLIC_POSTHOG_KEY
 const POSTHOG_HOST = process.env.NEXT_PUBLIC_POSTHOG_HOST ?? 'https://us.i.posthog.com'

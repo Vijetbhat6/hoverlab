@@ -47,6 +47,14 @@ export interface KitContents {
   pages?: string[]
   /** Sections. Every kit has these — they are the substance. */
   blocks: string[]
+  /**
+   * Controls. Optional, like effects, and for the same reason: a kit is a
+   * job to be done, and most jobs are done by the sections. A primitive
+   * earns a place here only when the kit's blocks assume one — an auth kit
+   * that does not name the verification code input is hiding a component
+   * its buyer will have to go and find.
+   */
+  primitives?: string[]
   /** Polish. Optional, and deliberately a short list rather than a dump. */
   effects?: string[]
 }

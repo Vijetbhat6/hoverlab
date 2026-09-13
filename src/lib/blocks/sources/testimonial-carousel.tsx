@@ -107,6 +107,17 @@ export function TestimonialCarousel({
   testimonials = DEFAULT_TESTIMONIALS,
   className = '',
 }: TestimonialCarouselProps) {
+  /*
+    Ids come from `useId`, not from a literal.
+
+    A literal is correct until the section appears twice on one page — and
+    then `aria-labelledby` resolves to whichever copy is first in the
+    document, so the second one is announced with the first one's heading.
+    It renders identically and reads wrongly, which is why nothing catches
+    it but an id check.
+  */
+  const headingId = React.useId()
+
   const railRef = React.useRef<HTMLUListElement>(null)
   const [atStart, setAtStart] = React.useState(true)
   const [atEnd, setAtEnd] = React.useState(false)
@@ -153,14 +164,14 @@ export function TestimonialCarousel({
 
   return (
     <section
-      aria-labelledby="carousel-heading"
+      aria-labelledby={headingId}
       className={`mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 lg:px-8 ${className}`}
     >
       <div className="flex flex-wrap items-end justify-between gap-6">
         <div className="max-w-2xl">
           <p className="text-sm font-medium uppercase tracking-wider text-primary">{eyebrow}</p>
           <h2
-            id="carousel-heading"
+            id={headingId}
             className="mt-3 text-balance text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
           >
             {heading}

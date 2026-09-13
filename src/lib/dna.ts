@@ -1,5 +1,14 @@
 import tokens from './generated-dna.json'
+import type { ArtifactLevel } from './artifact-types'
+import {
+  GENERATED_UI_RULES,
+  MOTION,
+  SHAPE_AND_TYPE,
+  TOKEN_FORMAT_NOTE,
+  tokenCss,
+} from './design-system-doc'
 import { BRAND_PRESETS, DEFAULT_BRAND_COLOR, type BrandColor } from './brand-presets'
+import { getPrimitiveMeta } from './primitives/primitive-index'
 import { getBlockMeta } from './blocks/block-index'
 import { getPageMeta } from './pages/page-index'
 import { getTemplateMeta } from './templates/template-index'
@@ -30,7 +39,7 @@ import { siteUrl } from './site'
 /** What a DNA document can be built for. */
 export type DnaSubject =
   | { kind: 'catalog' }
-  | { kind: 'artifact'; level: 'effect' | 'block' | 'page' | 'template'; id: string }
+  | { kind: 'artifact'; level: ArtifactLevel; id: string }
 
 export interface DnaOptions {
   /** Brand preset id, or a raw brand colour, to override `--primary`. */
@@ -96,14 +105,6 @@ function oklch(color: BrandColor, theme: 'light' | 'dark'): string {
   return `oklch(${l} ${color.chroma} ${color.hue})`
 }
 
-function tokenTable(theme: 'light' | 'dark'): string {
-  const values = theme === 'light' ? tokens.light : tokens.dark
-  return (tokens.colorKeys as string[])
-    .filter((key) => values[key as keyof typeof values])
-    .map((key) => `  --${key}: ${values[key as keyof typeof values]};`)
-    .join('\n')
-}
-
 /**
  * Detail-page path for a child id.
  *
@@ -113,6 +114,15 @@ function tokenTable(theme: 'light' | 'dark'): string {
  * reader of a template to `/block/saas-landing-page`, which is a 404.
  */
 function childHref(id: string): string {
+  /*
+    Primitives first, and ahead of blocks, for the same reason the list is
+    ordered at all: a `composedOf` naming a primitive is the case this tier
+    was added for — a block built out of Button and Field — and nothing
+    today exercises it, so a missing lookup here would not fail anything
+    until the first block declares one and its DNA document quietly sends
+    every reader to a search page instead of to the component.
+  */
+  if (getPrimitiveMeta(id)) return `/primitive/${id}`
   if (getBlockMeta(id)) return `/block/${id}`
   if (getPageMeta(id)) return `/page/${id}`
   if (getTemplateMeta(id)) return `/template/${id}`
@@ -128,6 +138,16 @@ function describeSubject(subject: DnaSubject) {
       const effect = getEffect(subject.id)
       return effect
         ? { name: effect.name, description: effect.description, composedOf: [] as string[] }
+        : null
+    }
+    case 'primitive': {
+      const primitive = getPrimitiveMeta(subject.id)
+      return primitive
+        ? {
+            name: primitive.name,
+            description: primitive.description,
+            composedOf: [] as string[],
+          }
         : null
     }
     case 'block': {
@@ -196,21 +216,10 @@ export function buildDna(subject: DnaSubject, options: DnaOptions = {}): DnaDocu
 
   lines.push('## Colour tokens')
   lines.push('')
-  lines.push(
-    'Bare HSL channels, not `hsl(...)` calls — that is what lets Tailwind ' +
-      'compose an alpha suffix, so `bg-primary/10` expands to ' +
-      '`hsl(var(--primary) / 0.1)`. Keep the format.',
-  )
+  lines.push(TOKEN_FORMAT_NOTE)
   lines.push('')
   lines.push('```css')
-  lines.push(':root {')
-  lines.push(tokenTable('light'))
-  lines.push(`  --radius: ${tokens.radius};`)
-  lines.push('}')
-  lines.push('')
-  lines.push('.dark {')
-  lines.push(tokenTable('dark'))
-  lines.push('}')
+  lines.push(tokenCss())
   lines.push('```')
   lines.push('')
 
@@ -238,26 +247,17 @@ export function buildDna(subject: DnaSubject, options: DnaOptions = {}): DnaDocu
 
   lines.push('## Shape and type')
   lines.push('')
-  lines.push(`- **Radius**: \`--radius: ${tokens.radius}\`. Tailwind maps \`rounded-lg\` to it, with \`md\` and \`sm\` derived 2px and 4px tighter. Do not hand-pick radii per component.`)
-  lines.push('- **Spacing**: Tailwind\'s default scale, untouched. Sections run `py-16 sm:py-24`; card padding is `p-6`.')
-  lines.push('- **Type**: one display face and one text face, set on `body` and inherited. Headings carry `text-wrap: balance`; body text stays near 65 characters.')
-  lines.push('- **Borders**: `border-border` everywhere, never a literal grey. The global base layer already applies it to `*`.')
+  for (const line of SHAPE_AND_TYPE) lines.push(`- ${line}`)
   lines.push('')
 
   lines.push('## Motion')
   lines.push('')
-  lines.push('- Entrances are short — under ~400ms — and staggered rather than simultaneous.')
-  lines.push('- Hover and focus transitions are `transition-colors`, ~150ms.')
-  lines.push('- Animation is written with Tailwind\'s `motion-safe:` prefix, and a global `prefers-reduced-motion` block neutralises anything that forgets. Keep both.')
+  for (const line of MOTION) lines.push(`- ${line}`)
   lines.push('')
 
   lines.push('## Rules for generated UI')
   lines.push('')
-  lines.push('1. Style with the semantic classes — `bg-card`, `text-muted-foreground`, `border-border`, `bg-primary` — never a literal hex or a Tailwind palette colour. That is what makes both themes work at once.')
-  lines.push('2. Every surface pairs with its own foreground token: `bg-card` with `text-card-foreground`, `bg-primary` with `text-primary-foreground`.')
-  lines.push('3. One accent. `--primary` is the only chromatic colour in the system; `--destructive` is for destructive actions and nothing else.')
-  lines.push('4. Check both themes before calling anything finished.')
-  lines.push('5. Give every interactive element a visible focus state, using `--ring`.')
+  GENERATED_UI_RULES.forEach((rule, i) => lines.push(`${i + 1}. ${rule}`))
   lines.push('')
 
   if (meta && meta.composedOf.length) {

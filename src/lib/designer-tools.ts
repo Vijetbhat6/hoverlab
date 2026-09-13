@@ -338,13 +338,14 @@ export const DESIGNER_TOOLS: DesignerTool[] = [
   {
     href: '/tools/clip-path',
     group: 'Effects & motion',
-    name: 'Clip-path & Blob',
+    name: 'Clip-path, Blob & Shape Magic',
     description:
-      'Eleven classic polygon() shapes — chevrons, stars, arrows, speech bubbles — each with its own tunable parameters, plus a seeded organic blob generator with 3–12 control points and a randomness dial. Copy as CSS clip-path or raw SVG path data.',
+      'Eleven classic polygon() shapes — chevrons, stars, arrows, speech bubbles — each with its own tunable parameters, plus a seeded organic blob generator with 3–12 control points and a randomness dial. Shape Magic merges draggable circles into one organic outline and leaves as a React component, SVG, PNG or CSS clip-path.',
     icon: Shapes,
     accent: 'from-purple-500 to-indigo-500',
-    keywords: 'clip-path polygon blob organic shape mask svg path css',
-    seoTitle: 'CSS Clip-Path & Blob Shape Generator — Hoverlab',
+    keywords:
+      'clip-path polygon blob organic shape mask svg path css metaball merge gooey react component png',
+    seoTitle: 'CSS Clip-Path, Blob & Shape Generator — Hoverlab',
   },
   {
     href: '/tools/easing',
@@ -371,13 +372,14 @@ export const DESIGNER_TOOLS: DesignerTool[] = [
   {
     href: '/tools/noise',
     group: 'Effects & motion',
-    name: 'Noise Texture',
+    name: 'Noise & Texture Lab',
     description:
-      "Film-grain and noise textures from the browser's own feTurbulence — a seamlessly tiling SVG data URI, previewed over a gradient and a card with the real blend mode. No PNG asset, no request, works offline.",
+      "Film-grain and noise textures from the browser's own feTurbulence — a seamlessly tiling SVG data URI, previewed over a gradient and a card with the real blend mode. Texture Lab takes an image of yours instead and reduces it to a dither, a vector halftone or ASCII, entirely in the tab — nothing is uploaded.",
     icon: Film,
     accent: 'from-stone-500 to-zinc-600',
-    keywords: 'noise grain texture feturbulence svg film overlay background',
-    seoTitle: 'SVG Noise Texture Generator — Grain via feTurbulence — Hoverlab',
+    keywords:
+      'noise grain texture feturbulence svg film overlay background dither halftone ascii floyd steinberg atkinson bayer image',
+    seoTitle: 'SVG Noise, Dither, Halftone & ASCII Texture Generator — Hoverlab',
   },
   {
     href: '/tools/keyframes',

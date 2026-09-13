@@ -25,8 +25,10 @@
  * route, not here: see `lib/billing/require-pro.ts`.
  */
 
+import primitiveSources from '@/lib/primitives/generated-primitive-sources.json'
 import blockSources from '@/lib/blocks/generated-block-sources.json'
 import pageSources from '@/lib/pages/generated-page-sources.json'
+import { getPrimitive } from '@/lib/primitives/primitives'
 import { getBlock } from '@/lib/blocks/blocks'
 import { getPage } from '@/lib/pages/pages'
 import { PAGE_CATALOG } from '@/lib/pages/catalog'
@@ -39,7 +41,7 @@ import {
 import type { SandboxForm } from '@/lib/sandbox'
 
 /** The tiers a sandbox can be built for. Templates are excluded — see above. */
-export const SANDBOX_LEVELS = ['block', 'page'] as const
+export const SANDBOX_LEVELS = ['primitive', 'block', 'page'] as const
 export type SandboxLevel = (typeof SANDBOX_LEVELS)[number]
 
 export function isSandboxLevel(value: string): value is SandboxLevel {
@@ -48,6 +50,7 @@ export function isSandboxLevel(value: string): value is SandboxLevel {
 
 type SourceMap = Record<string, { path: string; lang: string; source: string }[]>
 
+const PRIMITIVE_SOURCES = primitiveSources as SourceMap
 const BLOCK_SOURCES = blockSources as SourceMap
 const PAGE_SOURCES = pageSources as SourceMap
 
@@ -156,10 +159,31 @@ export function buildArtifactSandbox(
   id: string,
   siteUrl?: string,
 ): ArtifactSandbox | null {
-  const meta = level === 'block' ? getBlock(id) : getPage(id)
+  const meta =
+    level === 'primitive' ? getPrimitive(id) : level === 'block' ? getBlock(id) : getPage(id)
   if (!meta) return null
 
-  const files = level === 'block' ? blockFiles(id) : pageFiles(id)
+  /*
+   * A primitive still needs none of the import-walking the block collector
+   * does, but not because it is always one file.
+   *
+   * It is self-contained *as shipped*: `build-artifact-sources.mjs` reads
+   * each primitive's relative imports and pulls those siblings into the
+   * same artifact, so `PRIMITIVE_SOURCES[id]` already holds everything the
+   * paste needs. Almost every primitive is a single control and comes back
+   * as one file; `device-showcase` composes two frames and comes back as
+   * three. Either way the collector's job is done before it starts.
+   *
+   * A property the tier maintains rather than an assumption:
+   * `primitives.test.ts` fails if any import — bare or relative — does not
+   * resolve to react, lucide-react, or a file shipped alongside it.
+   */
+  const files =
+    level === 'primitive'
+      ? (PRIMITIVE_SOURCES[id] ?? []).map((f) => ({ path: f.path, source: f.source }))
+      : level === 'block'
+        ? blockFiles(id)
+        : pageFiles(id)
   if (files.length === 0) return null
 
   /*

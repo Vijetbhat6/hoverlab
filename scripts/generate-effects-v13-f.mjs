@@ -307,7 +307,7 @@ export function generateV13F(ctx) {
 .${c} i:hover { filter: brightness(1.2); transform: scaleY(1.15); }`
     add(mk({
       name: 'Schedule Grid',
-      category: 'Tables & Data Grids',
+      category: 'Dates & Time',
       description: 'Booking grid with resources down the side and hours across the top, each reservation drawn as a block spanning its slots.',
       html, css,
       tags: ['schedule', 'booking', 'timeline-grid', 'resources', 'slots'],
@@ -1106,7 +1106,7 @@ export function generateV13F(ctx) {
 @keyframes ${c}-tick { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }`
     add(mk({
       name: 'Ticking Clock Icon',
-      category: 'Icons & Shapes',
+      category: 'Dates & Time',
       description: 'Analogue clock face with hour ticks and three hands, the red second hand stepping round in sixty discrete jumps.',
       html, css,
       tags: ['clock', 'hands', 'ticking', 'steps', 'analogue'],

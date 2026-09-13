@@ -22,6 +22,7 @@
 import { EFFECTS } from '@/lib/effects'
 import { BLOCK_CATALOG } from '@/lib/blocks/catalog'
 import { PAGE_CATALOG } from '@/lib/pages/catalog'
+import { PRIMITIVE_CATALOG } from '@/lib/primitives/catalog'
 import { TEMPLATE_CATALOG } from '@/lib/templates/catalog'
 import { LEVEL_LABEL, type ArtifactLevel } from '@/lib/artifact-types'
 import { CATALOG_UPDATED_AT, catalogWaves } from '@/lib/recency'
@@ -30,6 +31,7 @@ import { absoluteUrl } from '@/lib/site'
 /** Ids carry no names; the catalogs do. Same lookup as the changelog page. */
 const NAMES: Record<ArtifactLevel, Map<string, string>> = {
   effect: new Map(EFFECTS.map((e) => [e.id, e.name])),
+  primitive: new Map(PRIMITIVE_CATALOG.map((p) => [p.id, p.name])),
   block: new Map(BLOCK_CATALOG.map((b) => [b.id, b.name])),
   page: new Map(PAGE_CATALOG.map((p) => [p.id, p.name])),
   template: new Map(TEMPLATE_CATALOG.map((t) => [t.id, t.name])),
@@ -38,6 +40,7 @@ const NAMES: Record<ArtifactLevel, Map<string, string>> = {
 /** Where one artifact lives, so an entry links to something and not nothing. */
 const PATH: Record<ArtifactLevel, string> = {
   effect: '/effect',
+  primitive: '/primitive',
   block: '/block',
   page: '/page',
   template: '/template',

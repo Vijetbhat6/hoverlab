@@ -83,6 +83,26 @@ import ExpressCheckoutPage from './sources/express-checkout-page'
 import OrderTrackingPage from './sources/order-tracking-page'
 import WorkspaceActivityPage from './sources/workspace-activity-page'
 import FirstRunPage from './sources/first-run-page'
+import AboutPage from './sources/about-page'
+import ContactPage from './sources/contact-page'
+import TeamPage from './sources/team-page'
+import FaqPage from './sources/faq-page'
+import CaseStudyPage from './sources/case-study-page'
+import CaseStudyIndexPage from './sources/case-study-index-page'
+import ServicesPage from './sources/services-page'
+import IntegrationsIndexPage from './sources/integrations-index-page'
+import IntegrationDetailPage from './sources/integration-detail-page'
+import AlternativesPage from './sources/alternatives-page'
+import StatusPage from './sources/status-page'
+import RoadmapPage from './sources/roadmap-page'
+import WebinarPage from './sources/webinar-page'
+import ComingSoonPage from './sources/coming-soon-page'
+import LegalPage from './sources/legal-page'
+import CommunityPage from './sources/community-page'
+import AffiliatePage from './sources/affiliate-page'
+import TestimonialsPage from './sources/testimonials-page'
+import GalleryPage from './sources/gallery-page'
+import PortfolioIndexPage from './sources/portfolio-index-page'
 
 export const PAGE_PREVIEWS: Record<string, React.ReactNode> = {
   'saas-landing-page': <SaasLandingPage />,
@@ -155,6 +175,27 @@ export const PAGE_PREVIEWS: Record<string, React.ReactNode> = {
   'order-tracking-page': <OrderTrackingPage />,
   'workspace-activity-page': <WorkspaceActivityPage />,
   'first-run-page': <FirstRunPage />,
+
+  'about-page': <AboutPage />,
+  'contact-page': <ContactPage />,
+  'team-page': <TeamPage />,
+  'faq-page': <FaqPage />,
+  'case-study-page': <CaseStudyPage />,
+  'case-study-index-page': <CaseStudyIndexPage />,
+  'services-page': <ServicesPage />,
+  'integrations-index-page': <IntegrationsIndexPage />,
+  'integration-detail-page': <IntegrationDetailPage />,
+  'alternatives-page': <AlternativesPage />,
+  'status-page': <StatusPage />,
+  'roadmap-page': <RoadmapPage />,
+  'webinar-page': <WebinarPage />,
+  'coming-soon-page': <ComingSoonPage />,
+  'legal-page': <LegalPage />,
+  'community-page': <CommunityPage />,
+  'affiliate-page': <AffiliatePage />,
+  'testimonials-page': <TestimonialsPage />,
+  'gallery-page': <GalleryPage />,
+  'portfolio-index-page': <PortfolioIndexPage />,
 }
 
 /** The rendered preview for a page, or undefined if the key is unknown. */

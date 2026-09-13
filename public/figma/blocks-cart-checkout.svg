@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1216" height="4747" viewBox="0 0 1216 4747" id="Hoverlab — Cart &amp; Checkout">
+<svg xmlns="http://www.w3.org/2000/svg" width="1216" height="7695" viewBox="0 0 1216 7695" id="Hoverlab — Cart &amp; Checkout">
   <!--
-    Hoverlab — Cart & Checkout. 6 sections, traced from the
+    Hoverlab — Cart & Checkout. 9 sections, traced from the
     rendered catalog. Drag this file onto a Figma canvas.
 
     These are frames, not components: named, editable layers with real
@@ -9,180 +9,364 @@
 
     Every section here is free to copy as code at https://hoverlab.dev/blocks
   -->
-  <rect id="Background" x="0" y="0" width="1216" height="4747" fill="#ffffff" />
+  <rect id="Background" x="0" y="0" width="1216" height="7695" fill="#ffffff" />
   <text id="Slide-Over Cart Drawer label" x="64" y="84" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Slide-Over Cart Drawer</text>
   <text id="cart-drawer id" x="64" y="98" font-family="ui-monospace, monospace" font-size="12" fill="#737373">cart-drawer</text>
   <g id="Slide-Over Cart Drawer" transform="translate(64, 116)">
     <rect id="container" x="0" y="0" width="1088" height="386" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <rect id="button" x="470.41" y="41" width="147.17" height="42" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Open bag" x="543.99" y="55" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Open bag</text>
-      <rect id="container 2" x="581.91" y="52" width="18.67" height="20" rx="9.34" fill="#007f34" />
-      <text id="3" x="591.24" y="64" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="600" text-anchor="middle">3</text>
+      <rect id="button" x="469.5" y="41" width="148.98" height="42" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Open bag" x="543.99" y="55" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Open bag</text>
+      <rect id="container 2" x="581.83" y="52" width="19.66" height="20" rx="9.83" fill="#007f34" />
+      <text id="3" x="591.66" y="64" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="600" text-anchor="middle">3</text>
       <rect id="button 2" x="1" y="1" width="1086" height="384" fill="rgba(0, 0, 0, 0.4)" />
       <rect id="dialog" x="703" y="1" width="384" height="384" fill="#ffffff" />
-      <text id="Your bag" x="724" y="37" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="600" letter-spacing="-0.4">Your bag</text>
-      <text id="(3)" x="793.28" y="38" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" letter-spacing="-0.4">(3)</text>
+      <text id="Your bag" x="724" y="37" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="600" letter-spacing="-0.4">Your bag</text>
+      <text id="(3)" x="795.83" y="38" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" letter-spacing="-0.4">(3)</text>
       <rect id="container 3" x="724" y="82" width="64" height="80" rx="12" fill="#f3f2ee" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Merino Crew Sweater" x="800" y="96" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Merino Crew Sweater</text>
-      <text id="Stone · M" x="800" y="116" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Stone · M</text>
-      <text id="1 × £89.00" x="800" y="142" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">1 × £89.00</text>
-      <text id="£89.00" x="1024.75" y="96" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">£89.00</text>
+      <text id="Merino Crew Sweater" x="800" y="96" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Merino Crew Sweater</text>
+      <text id="Stone · M" x="800" y="116" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Stone · M</text>
+      <text id="1 × £89.00" x="800" y="142" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">1 × £89.00</text>
+      <text id="£89.00" x="1020.02" y="96" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">£89.00</text>
       <rect id="container 4" x="724" y="195" width="64" height="80" rx="12" fill="#f3f2ee" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Cotton Oxford Shirt" x="800" y="209" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Cotton Oxford Shirt</text>
-      <text id="Sky · L" x="800" y="229" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Sky · L</text>
-      <text id="2 × £65.00" x="800" y="255" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">2 × £65.00</text>
-      <text id="£130.00" x="1016.98" y="209" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">£130.00</text>
+      <text id="Cotton Oxford Shirt" x="800" y="209" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Cotton Oxford Shirt</text>
+      <text id="Sky · L" x="800" y="229" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Sky · L</text>
+      <text id="2 × £65.00" x="800" y="255" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">2 × £65.00</text>
+      <text id="£130.00" x="1011.27" y="209" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">£130.00</text>
       <rect id="container 5" x="704" y="198" width="383" height="187" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Subtotal" x="724" y="235" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Subtotal</text>
-      <text id="£219.00" x="1000" y="233" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700">£219.00</text>
-      <text id="Delivery and taxes calculated at checkou…" x="724" y="257" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Delivery and taxes calculated at checkout.</text>
+      <text id="Subtotal" x="724" y="234" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Subtotal</text>
+      <text id="£219.00" x="993.86" y="233" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" font-weight="700">£219.00</text>
+      <text id="Delivery and taxes calculated at checkou…" x="724" y="257" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Delivery and taxes calculated at checkout.</text>
       <rect id="link" x="724" y="277" width="343" height="44" rx="16" fill="#007f34" />
-      <text id="Checkout" x="724" y="291" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">Checkout</text>
-      <text id="Continue shopping" x="895.5" y="343" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Continue shopping</text>
+      <text id="Checkout" x="724" y="291" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Checkout</text>
+      <text id="Continue shopping" x="895.5" y="343" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Continue shopping</text>
   </g>
   <text id="Editable Cart Lines label" x="64" y="618" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Editable Cart Lines</text>
   <text id="cart-line-items id" x="64" y="632" font-family="ui-monospace, monospace" font-size="12" fill="#737373">cart-line-items</text>
   <g id="Editable Cart Lines" transform="translate(64, 650)">
     <rect id="container" x="0" y="0" width="1088" height="457" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Your bag" x="1" y="19" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700" letter-spacing="-0.45">Your bag</text>
-      <text id="4 items ·" x="981.63" y="21" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">4 items ·</text>
-      <text id="£267.00" x="1037.2" y="21" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">£267.00</text>
+      <text id="Your bag" x="1" y="19" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" font-weight="700" letter-spacing="-0.45">Your bag</text>
+      <text id="4 items ·" x="976.28" y="20" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">4 items ·</text>
+      <text id="£267.00" x="1033.47" y="21" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">£267.00</text>
       <rect id="container 2" x="1" y="66" width="80" height="96" rx="16" fill="#f3f2ee" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Merino Crew Sweater" x="97" y="80" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Merino Crew Sweater</text>
-      <text id="Stone · M" x="97" y="100" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Stone · M</text>
-      <text id="£89.00" x="1044.75" y="80" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">£89.00</text>
+      <text id="Merino Crew Sweater" x="97" y="80" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Merino Crew Sweater</text>
+      <text id="Stone · M" x="97" y="100" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Stone · M</text>
+      <text id="£89.00" x="1040.02" y="80" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">£89.00</text>
       <rect id="container 3" x="97" y="134" width="86" height="28" rx="12" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="1" x="140" y="152" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" text-anchor="middle">1</text>
+      <text id="1" x="140" y="152" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" text-anchor="middle">1</text>
       <rect id="container 4" x="1" y="203" width="80" height="96" rx="16" fill="#f3f2ee" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Cotton Oxford Shirt" x="97" y="217" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Cotton Oxford Shirt</text>
-      <text id="Sky · L" x="97" y="237" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Sky · L</text>
-      <text id="£130.00" x="1036.98" y="217" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">£130.00</text>
+      <text id="Cotton Oxford Shirt" x="97" y="217" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Cotton Oxford Shirt</text>
+      <text id="Sky · L" x="97" y="237" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Sky · L</text>
+      <text id="£130.00" x="1031.27" y="217" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">£130.00</text>
       <rect id="container 5" x="97" y="271" width="86" height="28" rx="12" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="2" x="140" y="289" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" text-anchor="middle">2</text>
+      <text id="2" x="140" y="289" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" text-anchor="middle">2</text>
       <rect id="container 6" x="1" y="340" width="80" height="96" rx="16" fill="#f3f2ee" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Leather Card Holder" x="97" y="354" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Leather Card Holder</text>
-      <text id="Black" x="97" y="374" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Black</text>
-      <text id="£48.00" x="1044.75" y="354" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">£48.00</text>
+      <text id="Leather Card Holder" x="97" y="354" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Leather Card Holder</text>
+      <text id="Black" x="97" y="374" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Black</text>
+      <text id="£48.00" x="1040.02" y="354" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">£48.00</text>
       <rect id="container 7" x="97" y="408" width="86" height="28" rx="12" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="1 2" x="140" y="426" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" text-anchor="middle">1</text>
+      <text id="1 2" x="140" y="426" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" text-anchor="middle">1</text>
   </g>
   <text id="Checkout Address &amp; Payment label" x="64" y="1223" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Checkout Address &amp; Payment</text>
   <text id="checkout-form id" x="64" y="1237" font-family="ui-monospace, monospace" font-size="12" fill="#737373">checkout-form</text>
   <g id="Checkout Address &amp; Payment" transform="translate(64, 1255)">
-    <rect id="container" x="0" y="0" width="1088" height="1135" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Contact" x="1" y="19" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700" letter-spacing="-0.45">Contact</text>
-      <text id="Email" x="1" y="59" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Email</text>
+    <rect id="container" x="0" y="0" width="1088" height="1134" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Contact" x="1" y="19" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" font-weight="700" letter-spacing="-0.45">Contact</text>
+      <text id="Email" x="1" y="59" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Email</text>
       <rect id="field" x="1" y="71" width="1086" height="42" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Order confirmation and delivery updates …" x="1" y="131" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Order confirmation and delivery updates go here.</text>
-      <text id="Delivery address" x="1" y="185" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700" letter-spacing="-0.45">Delivery address</text>
-      <text id="First name" x="1" y="225" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">First name</text>
+      <text id="Order confirmation and delivery updates …" x="1" y="131" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Order confirmation and delivery updates go here.</text>
+      <text id="Delivery address" x="1" y="185" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" font-weight="700" letter-spacing="-0.45">Delivery address</text>
+      <text id="First name" x="1" y="225" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">First name</text>
       <rect id="field 2" x="1" y="237" width="535" height="42" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Last name" x="552" y="225" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Last name</text>
+      <text id="Last name" x="552" y="225" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Last name</text>
       <rect id="field 3" x="552" y="237" width="535" height="42" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Country" x="1" y="309" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Country</text>
-      <rect id="field 4" x="1" y="321" width="1086" height="43" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Address" x="1" y="394" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Address</text>
-      <rect id="field 5" x="1" y="406" width="1086" height="42" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Apartment, suite, etc." x="1" y="478" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Apartment, suite, etc.</text>
-      <text id="(optional)" x="142.75" y="478" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">(optional)</text>
-      <rect id="field 6" x="1" y="490" width="1086" height="42" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="City" x="1" y="562" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">City</text>
-      <rect id="field 7" x="1" y="574" width="351.33" height="42" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="County" x="368.33" y="562" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">County</text>
-      <rect id="field 8" x="368.33" y="574" width="351.33" height="42" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Postcode" x="735.66" y="562" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Postcode</text>
-      <rect id="field 9" x="735.66" y="574" width="351.34" height="42" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Phone" x="1" y="646" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Phone</text>
-      <text id="(optional) 2" x="47.31" y="646" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">(optional)</text>
-      <rect id="field 10" x="1" y="658" width="1086" height="42" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="For delivery questions only." x="1" y="718" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">For delivery questions only.</text>
-      <text id="Payment" x="1" y="772" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700" letter-spacing="-0.45">Payment</text>
-      <text id="Encrypted in transit. We never see your …" x="1" y="798" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Encrypted in transit. We never see your full card number.</text>
-      <text id="Card number" x="1" y="832" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Card number</text>
-      <rect id="field 11" x="1" y="844" width="1086" height="42" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Expiry" x="1" y="916" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Expiry</text>
-      <rect id="field 12" x="1" y="928" width="535" height="42" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Security code" x="552" y="916" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Security code</text>
-      <rect id="field 13" x="552" y="928" width="535" height="42" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Name on card" x="1" y="1000" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Name on card</text>
-      <rect id="field 14" x="1" y="1012" width="1086" height="42" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <rect id="button" x="1" y="1086" width="1086" height="48" rx="16" fill="#007f34" />
-      <text id="Pay now" x="544" y="1100" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Pay now</text>
+      <text id="Country" x="1" y="309" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Country</text>
+      <rect id="field 4" x="1" y="321" width="1086" height="42" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Address" x="1" y="393" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Address</text>
+      <rect id="field 5" x="1" y="405" width="1086" height="42" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Apartment, suite, etc." x="1" y="477" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Apartment, suite, etc.</text>
+      <text id="(optional)" x="146.38" y="478" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">(optional)</text>
+      <rect id="field 6" x="1" y="489" width="1086" height="42" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="City" x="1" y="561" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">City</text>
+      <rect id="field 7" x="1" y="573" width="351.33" height="42" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="County" x="368.33" y="561" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">County</text>
+      <rect id="field 8" x="368.33" y="573" width="351.33" height="42" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Postcode" x="735.66" y="561" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Postcode</text>
+      <rect id="field 9" x="735.66" y="573" width="351.34" height="42" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Phone" x="1" y="645" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Phone</text>
+      <text id="(optional) 2" x="48.28" y="646" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">(optional)</text>
+      <rect id="field 10" x="1" y="657" width="1086" height="42" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="For delivery questions only." x="1" y="717" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">For delivery questions only.</text>
+      <text id="Payment" x="1" y="771" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" font-weight="700" letter-spacing="-0.45">Payment</text>
+      <text id="Encrypted in transit. We never see your …" x="1" y="797" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Encrypted in transit. We never see your full card number.</text>
+      <text id="Card number" x="1" y="831" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Card number</text>
+      <rect id="field 11" x="1" y="843" width="1086" height="42" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Expiry" x="1" y="915" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Expiry</text>
+      <rect id="field 12" x="1" y="927" width="535" height="42" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Security code" x="552" y="915" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Security code</text>
+      <rect id="field 13" x="552" y="927" width="535" height="42" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Name on card" x="1" y="999" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Name on card</text>
+      <rect id="field 14" x="1" y="1011" width="1086" height="42" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="button" x="1" y="1085" width="1086" height="48" rx="16" fill="#007f34" />
+      <text id="Pay now" x="544" y="1099" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Pay now</text>
   </g>
-  <text id="Order Summary With Promo label" x="64" y="2506" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Order Summary With Promo</text>
-  <text id="order-summary-panel id" x="64" y="2520" font-family="ui-monospace, monospace" font-size="12" fill="#737373">order-summary-panel</text>
-  <g id="Order Summary With Promo" transform="translate(64, 2538)">
+  <text id="Order Summary With Promo label" x="64" y="2505" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Order Summary With Promo</text>
+  <text id="order-summary-panel id" x="64" y="2519" font-family="ui-monospace, monospace" font-size="12" fill="#737373">order-summary-panel</text>
+  <g id="Order Summary With Promo" transform="translate(64, 2537)">
     <rect id="container" x="0" y="0" width="1088" height="412" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="aside" x="1" y="1" width="1086" height="410" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Order summary" x="26" y="44" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="700" letter-spacing="-0.45">Order summary</text>
-      <rect id="field" x="26" y="70" width="960.95" height="38" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <rect id="button" x="994.95" y="70" width="67.05" height="38" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Apply" x="1028.48" y="84" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Apply</text>
+      <text id="Order summary" x="26" y="44" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" font-weight="700" letter-spacing="-0.45">Order summary</text>
+      <rect id="field" x="26" y="70" width="960.5" height="38" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="button" x="994.5" y="70" width="67.5" height="38" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Apply" x="1028.25" y="84" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Apply</text>
       <rect id="container 2" x="26" y="150" width="1036" height="144" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Subtotal" x="26" y="185" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Subtotal</text>
-      <text id="£267.00" x="1013.67" y="185" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14">£267.00</text>
-      <text id="Delivery" x="26" y="215" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Delivery</text>
-      <text id="Free" x="1035.03" y="215" fill="#009966" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Free</text>
-      <text id="Includes VAT (20%)" x="26" y="243" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Includes VAT (20%)</text>
-      <text id="£44.50" x="1027.05" y="243" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">£44.50</text>
+      <text id="Subtotal" x="26" y="185" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Subtotal</text>
+      <text id="£267.00" x="1008.63" y="185" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">£267.00</text>
+      <text id="Delivery" x="26" y="215" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Delivery</text>
+      <text id="Free" x="1033.11" y="216" fill="#009966" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Free</text>
+      <text id="Includes VAT (20%)" x="26" y="243" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Includes VAT (20%)</text>
+      <text id="£44.50" x="1023.45" y="243" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">£44.50</text>
       <rect id="container 3" x="26" y="257" width="1036" height="37" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Total" x="26" y="286" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="700">Total</text>
-      <text id="£267.00 2" x="1002.44" y="286" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="700">£267.00</text>
+      <text id="Total" x="26" y="286" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="700">Total</text>
+      <text id="£267.00 2" x="996.98" y="286" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="700">£267.00</text>
       <rect id="button 2" x="26" y="314" width="1036" height="44" rx="16" fill="#007f34" />
-      <text id="Checkout" x="544" y="328" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Checkout</text>
-      <text id="Taxes and delivery calculated at checkou…" x="544" y="382" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12" text-anchor="middle">Taxes and delivery calculated at checkout for your region.</text>
+      <text id="Checkout" x="544" y="328" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Checkout</text>
+      <text id="Taxes and delivery calculated at checkou…" x="544" y="382" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" text-anchor="middle">Taxes and delivery calculated at checkout for your region.</text>
   </g>
-  <text id="Express Payment Row label" x="64" y="3066" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Express Payment Row</text>
-  <text id="checkout-express-payment id" x="64" y="3080" font-family="ui-monospace, monospace" font-size="12" fill="#737373">checkout-express-payment</text>
-  <g id="Express Payment Row" transform="translate(64, 3098)">
-    <rect id="container" x="0" y="0" width="1088" height="849" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <rect id="container 2" x="344" y="65" width="400" height="719" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
-      <text id="Checkout" x="369" y="108" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="600">Checkout</text>
-      <text id="Total" x="643.48" y="110" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">Total</text>
-      <text id="£84.00" x="676.75" y="110" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600">£84.00</text>
+  <text id="Express Payment Row label" x="64" y="3065" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Express Payment Row</text>
+  <text id="checkout-express-payment id" x="64" y="3079" font-family="ui-monospace, monospace" font-size="12" fill="#737373">checkout-express-payment</text>
+  <g id="Express Payment Row" transform="translate(64, 3097)">
+    <rect id="container" x="0" y="0" width="1088" height="865" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="344" y="65" width="400" height="735" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="Checkout" x="369" y="108" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" font-weight="600">Checkout</text>
+      <text id="Total" x="637.64" y="109" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Total</text>
+      <text id="£84.00" x="672.02" y="110" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">£84.00</text>
       <rect id="button" x="369" y="138" width="111.33" height="44" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
-      <text id="Apple Pay" x="424.66" y="152" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Apple Pay</text>
+      <text id="Apple Pay" x="424.66" y="152" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Apple Pay</text>
       <rect id="button 2" x="488.33" y="138" width="111.33" height="44" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
-      <text id="Google Pay" x="543.99" y="152" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Google Pay</text>
+      <text id="Google Pay" x="543.99" y="152" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Google Pay</text>
       <rect id="button 3" x="607.66" y="138" width="111.34" height="44" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
-      <text id="PayPal" x="663.33" y="152" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">PayPal</text>
-      <text id="or pay by card" x="506.11" y="214" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">or pay by card</text>
-      <text id="Email" x="369" y="284" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Email</text>
+      <text id="PayPal" x="663.33" y="152" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">PayPal</text>
+      <text id="or pay by card" x="505.03" y="214" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">or pay by card</text>
+      <text id="Email" x="369" y="284" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Email</text>
       <rect id="field" x="369" y="296" width="350" height="40" rx="12" fill="#fdfcf8" stroke="#8d8f92" stroke-width="1" />
-      <text id="Full name" x="369" y="366" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Full name</text>
+      <text id="Full name" x="369" y="366" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Full name</text>
       <rect id="field 2" x="369" y="378" width="350" height="40" rx="12" fill="#fdfcf8" stroke="#8d8f92" stroke-width="1" />
-      <text id="Address" x="369" y="448" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Address</text>
+      <text id="Address" x="369" y="448" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Address</text>
       <rect id="field 3" x="369" y="460" width="350" height="40" rx="12" fill="#fdfcf8" stroke="#8d8f92" stroke-width="1" />
-      <text id="City" x="369" y="530" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">City</text>
+      <text id="City" x="369" y="530" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">City</text>
       <rect id="field 4" x="369" y="542" width="169" height="40" rx="12" fill="#fdfcf8" stroke="#8d8f92" stroke-width="1" />
-      <text id="Postcode" x="550" y="530" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Postcode</text>
+      <text id="Postcode" x="550" y="530" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Postcode</text>
       <rect id="field 5" x="550" y="542" width="169" height="40" rx="12" fill="#fdfcf8" stroke="#8d8f92" stroke-width="1" />
       <rect id="button 4" x="369" y="598" width="350" height="44" rx="12" fill="#007f34" />
-      <text id="Pay" x="533.72" y="624" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">Pay</text>
-      <text id="£84.00 2" x="568.02" y="624" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="600" text-anchor="middle">£84.00</text>
-      <text id="Card details go straight to the payment …" x="389" y="670" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Card details go straight to the payment provider. They never</text>
-      <text id="touch this site." x="389" y="686" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">touch this site.</text>
-      <rect id="container 3" x="369" y="710" width="350" height="49" fill="none" stroke="#dbdee1" stroke-width="1" />
-      <text id="Pretend no wallet is available — the sta…" x="410" y="739" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Pretend no wallet is available — the state a real capability</text>
-      <text id="check has to produce, and the one nobody…" x="410" y="755" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">check has to produce, and the one nobody designs.</text>
+      <text id="Pay" x="530.33" y="625" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Pay</text>
+      <text id="£84.00 2" x="568.98" y="625" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">£84.00</text>
+      <text id="Card details go straight to the payment …" x="389" y="670" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Card details go straight to the payment provider. They never</text>
+      <text id="touch this site." x="389" y="686" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">touch this site.</text>
+      <rect id="container 3" x="369" y="710" width="350" height="65" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="Pretend no wallet is available — the sta…" x="410" y="739" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Pretend no wallet is available — the state a real</text>
+      <text id="capability check has to produce, and the…" x="410" y="755" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">capability check has to produce, and the one nobody</text>
+      <text id="designs." x="410" y="771" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">designs.</text>
   </g>
-  <text id="Gift Options Form label" x="64" y="4063" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Gift Options Form</text>
-  <text id="gift-options-form id" x="64" y="4077" font-family="ui-monospace, monospace" font-size="12" fill="#737373">gift-options-form</text>
-  <g id="Gift Options Form" transform="translate(64, 4095)">
+  <text id="Gift Options Form label" x="64" y="4078" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Gift Options Form</text>
+  <text id="gift-options-form id" x="64" y="4092" font-family="ui-monospace, monospace" font-size="12" fill="#737373">gift-options-form</text>
+  <g id="Gift Options Form" transform="translate(64, 4110)">
     <rect id="container" x="0" y="0" width="1088" height="588" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="section" x="1" y="1" width="1086" height="586" fill="#fdfcf8" />
       <rect id="container 2" x="320" y="65" width="448" height="458" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
-      <text id="Sending this as a gift?" x="353" y="118" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="20" font-weight="600" letter-spacing="-0.5">Sending this as a gift?</text>
-      <text id="In the cart rather than at checkout, bec…" x="353" y="148" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">In the cart rather than at checkout, because a gift message</text>
-      <text id="added while someone is entering card det…" x="353" y="168" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">added while someone is entering card details is a step</text>
-      <text id="between them and paying. Here it is part…" x="353" y="188" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="14">between them and paying. Here it is part of choosing.</text>
-      <text id="Message on the card" x="353" y="232" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">Message on the card</text>
+      <text id="Sending this as a gift?" x="353" y="118" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="20" font-weight="600" letter-spacing="-0.5">Sending this as a gift?</text>
+      <text id="In the cart rather than at checkout, bec…" x="353" y="149" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">In the cart rather than at checkout, because a gift message</text>
+      <text id="added while someone is entering card det…" x="353" y="169" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">added while someone is entering card details is a step</text>
+      <text id="between them and paying. Here it is part…" x="353" y="189" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">between them and paying. Here it is part of choosing.</text>
+      <text id="Message on the card" x="353" y="232" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Message on the card</text>
       <rect id="field" x="353" y="244" width="382" height="38" rx="10" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
-      <text id="Handwritten and enclosed. Up to 200 char…" x="353" y="298" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Handwritten and enclosed. Up to 200 characters.</text>
-      <text id="From" x="353" y="332" fill="#080c0f" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500">From</text>
+      <text id="Handwritten and enclosed. Up to 200 char…" x="353" y="298" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Handwritten and enclosed. Up to 200 characters.</text>
+      <text id="From" x="353" y="332" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">From</text>
       <rect id="field 2" x="353" y="344" width="382" height="38" rx="10" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
-      <text id="Signed as written. Leave blank to stay a…" x="353" y="398" fill="#575b60" font-family="ui-sans-serif, system-ui" font-size="12">Signed as written. Leave blank to stay anonymous.</text>
+      <text id="Signed as written. Leave blank to stay a…" x="353" y="398" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Signed as written. Leave blank to stay anonymous.</text>
       <rect id="button" x="353" y="418" width="382" height="36" rx="10" fill="#007f34" />
-      <text id="Add gift options" x="544" y="432" fill="#fcfcfc" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="500" text-anchor="middle">Add gift options</text>
+      <text id="Add gift options" x="544" y="432" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Add gift options</text>
+  </g>
+  <text id="Gift Card Purchase label" x="64" y="4814" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Gift Card Purchase</text>
+  <text id="gift-card-purchase id" x="64" y="4828" font-family="ui-monospace, monospace" font-size="12" fill="#737373">gift-card-purchase</text>
+  <g id="Gift Card Purchase" transform="translate(64, 4846)">
+    <rect id="container" x="0" y="0" width="1088" height="843" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="section" x="1" y="1" width="1086" height="841" fill="#fdfcf8" />
+      <text id="Send a gift card" x="96" y="61" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="20" font-weight="700" letter-spacing="-0.5">Send a gift card</text>
+      <text id="Delivered by email on a date you choose.…" x="96" y="88" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Delivered by email on a date you choose. Nothing is posted, so there is no shipping to</text>
+      <text id="pay and nothing to arrive late." x="96" y="108" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">pay and nothing to arrive late.</text>
+      <text id="Amount" x="96" y="151" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Amount</text>
+      <rect id="container 2" x="96" y="165" width="61.08" height="38" rx="12" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="£" x="113" y="189" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">£</text>
+      <text id="25" x="121.89" y="189" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">25</text>
+      <rect id="container 3" x="165.08" y="165" width="61.36" height="38" rx="12" fill="rgba(0, 128, 49, 0.102)" stroke="#007f34" stroke-width="1" />
+      <text id="£ 2" x="182.08" y="189" fill="#007f34" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">£</text>
+      <text id="50" x="190.97" y="189" fill="#007f34" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">50</text>
+      <rect id="container 4" x="234.44" y="165" width="67.94" height="38" rx="12" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="£ 3" x="251.44" y="189" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">£</text>
+      <text id="100" x="260.33" y="189" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">100</text>
+      <rect id="container 5" x="310.38" y="165" width="70.36" height="38" rx="12" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="£ 4" x="327.38" y="189" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">£</text>
+      <text id="250" x="336.27" y="189" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">250</text>
+      <text id="Or another amount" x="96" y="223" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Or another amount</text>
+      <rect id="field" x="96" y="231" width="544" height="38" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Between £10 and £500." x="96" y="285" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Between £10 and £500.</text>
+      <text id="Design" x="96" y="327" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Design</text>
+      <rect id="container 6" x="96" y="341" width="54.19" height="30" rx="12" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="Plain" x="96" y="353" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Plain</text>
+      <rect id="container 7" x="158.19" y="341" width="59.41" height="30" rx="12" fill="rgba(0, 128, 49, 0.102)" stroke="#007f34" stroke-width="1" />
+      <text id="Brand" x="158.19" y="353" fill="#007f34" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Brand</text>
+      <rect id="container 8" x="225.59" y="341" width="75.45" height="30" rx="12" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="Midnight" x="225.59" y="353" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Midnight</text>
+      <rect id="container 9" x="309.05" y="341" width="58.69" height="30" rx="12" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="Warm" x="309.05" y="353" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Warm</text>
+      <text id="Their email" x="96" y="409" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Their email</text>
+      <rect id="field 2" x="96" y="421" width="264" height="38" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Their email again" x="376" y="409" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Their email again</text>
+      <rect id="field 3" x="376" y="421" width="264" height="38" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Asked twice because a mistyped address" x="376" y="475" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Asked twice because a mistyped address</text>
+      <text id="means the money is gone." x="376" y="491" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">means the money is gone.</text>
+      <text id="Their name" x="96" y="525" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Their name</text>
+      <rect id="field 4" x="96" y="537" width="264" height="38" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="From" x="376" y="525" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">From</text>
+      <rect id="field 5" x="376" y="537" width="264" height="38" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Message" x="96" y="605" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Message</text>
+      <text id="52/200" x="163.39" y="606" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">52/200</text>
+      <rect id="field 6" x="96" y="617" width="544" height="78" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="For the desk you keep talking about. Hap…" x="96" y="631" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">For the desk you keep talking about. Happy birthday.</text>
+      <text id="Send on" x="96" y="732" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Send on</text>
+      <rect id="field 7" x="96" y="744" width="544" height="38" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Sent at 09:00 in the recipient’s timezon…" x="96" y="798" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Sent at 09:00 in the recipient’s timezone, not yours.</text>
+      <text id="Preview" x="672" y="55" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Preview</text>
+      <rect id="container 10" x="672" y="69" width="320" height="184" rx="16" fill="#007f34" />
+      <text id="Gift card" x="692" y="101" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="600" letter-spacing="0.3">Gift card</text>
+      <text id="£50" x="692" y="147" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="30" font-weight="700" letter-spacing="-0.75">£50</text>
+      <text id="For" x="692" y="180" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">For</text>
+      <text id="Imani" x="716.53" y="180" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Imani</text>
+      <text id="— For the desk you keep talking" x="751.67" y="180" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">— For the desk you keep talking</text>
+      <text id="about. Happy birthday." x="692" y="200" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">about. Happy birthday.</text>
+      <text id="From Marte" x="692" y="229" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">From Marte</text>
+      <rect id="container 11" x="672" y="269" width="320" height="227" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="Card value" x="689" y="300" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Card value</text>
+      <text id="£50 2" x="948.14" y="300" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">£50</text>
+      <text id="Delivery" x="689" y="328" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Delivery</text>
+      <text id="Free · by email" x="883.56" y="328" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Free · by email</text>
+      <rect id="container 12" x="689" y="342" width="286" height="29" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="To pay" x="689" y="365" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">To pay</text>
+      <text id="£50 3" x="947.64" y="365" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">£50</text>
+      <rect id="button" x="689" y="387" width="286" height="36" rx="12" fill="#007f34" />
+      <text id="Buy and schedule" x="832" y="401" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Buy and schedule</text>
+      <text id="You get a receipt straight away." x="689" y="443" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">You get a receipt straight away.</text>
+      <text id="Imani 2" x="862.17" y="443" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Imani</text>
+      <text id="get the card" x="892.28" y="443" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">get the card</text>
+      <text id="on" x="689" y="459" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">on</text>
+      <text id="2026-09-24" x="705.73" y="459" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">2026-09-24</text>
+      <text id="— two different emails, saying two" x="775.13" y="459" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">— two different emails, saying two</text>
+      <text id="different things." x="689" y="475" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">different things.</text>
+  </g>
+  <text id="Guest Checkout label" x="64" y="5805" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Guest Checkout</text>
+  <text id="guest-checkout-form id" x="64" y="5819" font-family="ui-monospace, monospace" font-size="12" fill="#737373">guest-checkout-form</text>
+  <g id="Guest Checkout" transform="translate(64, 5837)">
+    <rect id="container" x="0" y="0" width="1088" height="1196" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="section" x="1" y="1" width="1086" height="1194" fill="#fdfcf8" />
+      <text id="Checkout" x="96" y="61" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="20" font-weight="700" letter-spacing="-0.5">Checkout</text>
+      <text id="Checking out as a guest. to use saved ad…" x="96" y="87" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Checking out as a guest. to use saved addresses and cards.</text>
+      <text id="Sign in instead" x="257" y="88" fill="#007f34" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Sign in instead</text>
+      <text id="Contact" x="96" y="127" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Contact</text>
+      <text id="Email" x="96" y="159" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Email</text>
+      <rect id="field" x="96" y="171" width="576" height="38" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="For your receipt and delivery updates. W…" x="114" y="227" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">For your receipt and delivery updates. We will not add you to anything, and there is a link at the end to</text>
+      <text id="create an account if you decide you want…" x="114" y="243" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">create an account if you decide you want one.</text>
+      <text id="Delivery address" x="96" y="293" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Delivery address</text>
+      <text id="First name" x="96" y="325" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">First name</text>
+      <rect id="field 2" x="96" y="337" width="576" height="38" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Last name" x="96" y="401" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Last name</text>
+      <rect id="field 3" x="96" y="413" width="576" height="38" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Address" x="96" y="477" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Address</text>
+      <rect id="field 4" x="96" y="489" width="576" height="38" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Apartment, floor, company" x="96" y="553" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Apartment, floor, company</text>
+      <text id="Optional" x="277.42" y="554" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Optional</text>
+      <rect id="field 5" x="96" y="565" width="576" height="38" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="City" x="96" y="629" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">City</text>
+      <rect id="field 6" x="96" y="641" width="282" height="38" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Postcode" x="390" y="629" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Postcode</text>
+      <rect id="field 7" x="390" y="641" width="282" height="38" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Country" x="96" y="705" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Country</text>
+      <rect id="field 8" x="96" y="717" width="576" height="38" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Phone" x="96" y="781" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Phone</text>
+      <text id="For the driver only" x="145.28" y="782" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">For the driver only</text>
+      <rect id="field 9" x="96" y="793" width="576" height="38" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Payment" x="96" y="877" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Payment</text>
+      <text id="Card number" x="96" y="909" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Card number</text>
+      <rect id="field 10" x="96" y="921" width="576" height="38" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Expiry" x="96" y="985" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Expiry</text>
+      <rect id="field 11" x="96" y="997" width="282" height="38" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Security code" x="390" y="985" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Security code</text>
+      <rect id="field 12" x="390" y="997" width="282" height="38" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <rect id="container 2" x="96" y="1067" width="576" height="88" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="Save these details for next time" x="139" y="1098" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Save these details for next time</text>
+      <text id="Everything above is already typed. This …" x="139" y="1118" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Everything above is already typed. This adds a password and nothing else — the order goes</text>
+      <text id="through either way." x="139" y="1134" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">through either way.</text>
+      <rect id="container 3" x="704" y="113" width="288" height="266" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="Order summary" x="721" y="144" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Order summary</text>
+      <text id="Meridian task chair" x="721" y="176" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Meridian task chair</text>
+      <text id="Graphite mesh · ×1" x="721" y="194" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Graphite mesh · ×1</text>
+      <text id="£420.00" x="917.25" y="176" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">£420.00</text>
+      <text id="Halo task lamp" x="721" y="222" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Halo task lamp</text>
+      <text id="Brushed steel · ×2" x="721" y="240" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Brushed steel · ×2</text>
+      <text id="£290.00" x="917.44" y="222" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">£290.00</text>
+      <rect id="container 4" x="721" y="260" width="254" height="102" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="Goods" x="721" y="287" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Goods</text>
+      <text id="£710.00" x="922.92" y="287" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">£710.00</text>
+      <text id="Delivery" x="721" y="315" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Delivery</text>
+      <text id="£12.00" x="931.02" y="315" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">£12.00</text>
+      <rect id="container 5" x="721" y="329" width="254" height="33" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="Total" x="721" y="354" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="700">Total</text>
+      <text id="£722.00" x="909.09" y="354" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="700">£722.00</text>
+      <rect id="button" x="704" y="391" width="288" height="40" rx="12" fill="#007f34" />
+      <text id="Pay" x="830.66" y="416" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Pay</text>
+      <text id="£722.00 2" x="872.98" y="416" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">£722.00</text>
+      <text id="Card details go straight to the payment …" x="722" y="455" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Card details go straight to the payment provider.</text>
+      <text id="Nothing on this page ever holds them." x="722" y="471" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Nothing on this page ever holds them.</text>
+  </g>
+  <text id="Discount Offer Modal label" x="64" y="7149" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Discount Offer Modal</text>
+  <text id="discount-modal id" x="64" y="7163" font-family="ui-monospace, monospace" font-size="12" fill="#737373">discount-modal</text>
+  <g id="Discount Offer Modal" transform="translate(64, 7181)">
+    <rect id="container" x="0" y="0" width="1088" height="450" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="section" x="1" y="1" width="1086" height="448" fill="rgba(242, 238, 235, 0.302)" />
+      <rect id="container 2" x="160" y="25" width="208" height="32" rx="4" fill="#f3f2ee" />
+      <rect id="container 3" x="160" y="69" width="248" height="158" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <rect id="container 4" x="177" y="86" width="214" height="80" rx="12" fill="#f3f2ee" />
+      <rect id="container 5" x="177" y="178" width="160.5" height="12" rx="4" fill="#f3f2ee" />
+      <rect id="container 6" x="177" y="198" width="107" height="12" rx="4" fill="#f3f2ee" />
+      <rect id="container 7" x="420" y="69" width="248" height="158" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <rect id="container 8" x="437" y="86" width="214" height="80" rx="12" fill="#f3f2ee" />
+      <rect id="container 9" x="437" y="178" width="160.5" height="12" rx="4" fill="#f3f2ee" />
+      <rect id="container 10" x="437" y="198" width="107" height="12" rx="4" fill="#f3f2ee" />
+      <rect id="container 11" x="680" y="69" width="248" height="158" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <rect id="container 12" x="697" y="86" width="214" height="80" rx="12" fill="#f3f2ee" />
+      <rect id="container 13" x="697" y="178" width="160.5" height="12" rx="4" fill="#f3f2ee" />
+      <rect id="container 14" x="697" y="198" width="107" height="12" rx="4" fill="#f3f2ee" />
+      <rect id="button" x="160" y="239" width="153.19" height="34" rx="12" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="Simulate exit intent" x="236.59" y="253" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Simulate exit intent</text>
+      <rect id="container 15" x="1" y="1" width="1086" height="448" fill="rgba(7, 10, 17, 0.302)" />
+      <rect id="dialog" x="320" y="40" width="448" height="370" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <rect id="container 16" x="341" y="61" width="40" height="40" rx="20" fill="rgba(0, 128, 49, 0.102)" />
+      <text id="10% off your first order" x="341" y="131" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" font-weight="700" letter-spacing="-0.45">10% off your first order</text>
+      <text id="Because you were about to leave, and bec…" x="341" y="162" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Because you were about to leave, and because a code is</text>
+      <text id="cheaper for us than a retargeting ad." x="341" y="182" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">cheaper for us than a retargeting ad.</text>
+      <rect id="container 17" x="341" y="203" width="406" height="56" rx="16" fill="rgba(0, 118, 59, 0.051)" stroke="rgba(0, 126, 52, 0.502)" stroke-width="1" />
+      <text id="DESK10" x="354" y="235" fill="#007f34" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="18" font-weight="700" letter-spacing="1.8">DESK10</text>
+      <rect id="button 2" x="631.13" y="216" width="102.88" height="30" rx="12" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="Copy code" x="682.56" y="228" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="600" text-anchor="middle">Copy code</text>
+      <text id="Minimum spend £60 before delivery." x="341" y="283" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Minimum spend £60 before delivery.</text>
+      <rect id="container 18" x="341" y="277" width="4" height="4" rx="2" fill="#575b60" />
+      <text id="Not valid on clearance, gift cards or se…" x="341" y="303" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Not valid on clearance, gift cards or service plans.</text>
+      <rect id="container 19" x="341" y="297" width="4" height="4" rx="2" fill="#575b60" />
+      <text id="One use per customer. Expires 30 Septemb…" x="341" y="323" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">One use per customer. Expires 30 September 2026.</text>
+      <rect id="container 20" x="341" y="317" width="4" height="4" rx="2" fill="#575b60" />
+      <rect id="button 3" x="341" y="347" width="199" height="42" rx="12" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="No thanks" x="440.5" y="361" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">No thanks</text>
+      <rect id="button 4" x="548" y="347" width="199" height="42" rx="12" fill="#007f34" />
+      <text id="Use the code" x="647.5" y="361" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Use the code</text>
   </g>
 </svg>

@@ -1,0 +1,534 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1216" height="10524" viewBox="0 0 1216 10524" id="Hoverlab — CRUD">
+  <!--
+    Hoverlab — CRUD. 12 sections, traced from the
+    rendered catalog. Drag this file onto a Figma canvas.
+
+    These are frames, not components: named, editable layers with real
+    geometry, colour and type. There are no variants, no auto-layout,
+    and no hover or motion — none of those exist in a static frame.
+
+    Every section here is free to copy as code at https://hoverlab.dev/blocks
+  -->
+  <rect id="Background" x="0" y="0" width="1216" height="10524" fill="#ffffff" />
+  <text id="Create Record Form label" x="64" y="84" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Create Record Form</text>
+  <text id="crud-create-form id" x="64" y="98" font-family="ui-monospace, monospace" font-size="12" fill="#737373">crud-create-form</text>
+  <g id="Create Record Form" transform="translate(64, 116)">
+    <rect id="container" x="0" y="0" width="1088" height="1036" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="section" x="1" y="1" width="1086" height="1034" fill="#fdfcf8" />
+      <text id="Suppliers" x="32" y="53" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Suppliers</text>
+      <text id="/" x="89.53" y="53" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">/</text>
+      <text id="New" x="101.3" y="53" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">New</text>
+      <text id="New supplier" x="32" y="89" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="24" font-weight="700" letter-spacing="-0.6">New supplier</text>
+      <text id="0 of 7 fields filled. Nothing is saved u…" x="32" y="115" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">0 of 7 fields filled. Nothing is saved until you submit.</text>
+      <text id="Identity" x="32" y="169" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="600">Identity</text>
+      <text id="How this supplier is named everywhere el…" x="32" y="195" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">How this supplier is named everywhere else in the system.</text>
+      <text id="Legal name" x="32" y="231" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Legal name</text>
+      <text id="*" x="111.48" y="232" fill="#e7000b" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">*</text>
+      <rect id="field" x="32" y="243" width="340" height="38" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="As it appears on the invoice, not the tr…" x="32" y="299" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">As it appears on the invoice, not the trading name.</text>
+      <text id="External reference" x="388" y="231" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">External reference</text>
+      <text id="Optional" x="516.09" y="232" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Optional</text>
+      <rect id="field 2" x="388" y="243" width="340" height="38" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Your accounting system’s id. Leave blank…" x="388" y="299" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Your accounting system’s id. Leave blank and one is</text>
+      <text id="generated." x="388" y="315" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">generated.</text>
+      <text id="Billing email" x="32" y="349" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Billing email</text>
+      <text id="* 2" x="115.67" y="350" fill="#e7000b" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">*</text>
+      <rect id="field 3" x="32" y="361" width="340" height="38" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Commercial terms" x="32" y="455" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="600">Commercial terms</text>
+      <text id="Defaults applied to every purchase order…" x="32" y="481" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Defaults applied to every purchase order raised against this supplier.</text>
+      <text id="Currency" x="32" y="517" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Currency</text>
+      <text id="Optional 2" x="99.27" y="518" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Optional</text>
+      <rect id="field 4" x="32" y="529" width="340" height="38" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Payment terms" x="388" y="517" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Payment terms</text>
+      <text id="Optional 3" x="495.06" y="518" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Optional</text>
+      <rect id="field 5" x="388" y="529" width="340" height="38" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Credit limit" x="32" y="597" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Credit limit</text>
+      <text id="Optional 4" x="111.86" y="598" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Optional</text>
+      <rect id="field 6" x="32" y="609" width="340" height="38" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Orders above this need a second approver…" x="32" y="665" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Orders above this need a second approver.</text>
+      <text id="Notes" x="32" y="725" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="600">Notes</text>
+      <text id="Anything the next person raising an orde…" x="32" y="751" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Anything the next person raising an order should know.</text>
+      <text id="Internal notes" x="32" y="787" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Internal notes</text>
+      <text id="Optional 5" x="130.34" y="788" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Optional</text>
+      <rect id="field 7" x="32" y="799" width="696" height="78" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <rect id="container 2" x="768" y="153" width="288" height="230" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="Before you save" x="785" y="184" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Before you save</text>
+      <text id="The external reference is what reconcili…" x="785" y="214" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">The external reference is what reconciliation</text>
+      <text id="matches on. If finance already has a cod…" x="785" y="230" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">matches on. If finance already has a code, use</text>
+      <text id="theirs." x="785" y="246" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">theirs.</text>
+      <text id="Payment terms and currency become the" x="785" y="272" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Payment terms and currency become the</text>
+      <text id="defaults on every order. They can be" x="785" y="288" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">defaults on every order. They can be</text>
+      <text id="overridden per order, and rarely are." x="785" y="304" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">overridden per order, and rarely are.</text>
+      <text id="Nothing here notifies the supplier. Send…" x="785" y="330" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Nothing here notifies the supplier. Sending the</text>
+      <text id="onboarding pack is a separate, deliberat…" x="785" y="346" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">onboarding pack is a separate, deliberate</text>
+      <text id="step." x="785" y="362" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">step.</text>
+      <rect id="container 3" x="32" y="924" width="1024" height="71" fill="rgba(253, 251, 247, 0.902)" stroke="#dbdee1" stroke-width="1" />
+      <text id="Cancel" x="662.78" y="956" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Cancel</text>
+      <rect id="button" x="705.56" y="941" width="207.5" height="38" rx="12" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="Save and create another" x="809.31" y="955" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Save and create another</text>
+      <rect id="button 2" x="921.06" y="942" width="134.94" height="36" rx="12" fill="#007f34" />
+      <text id="Create" x="961.2" y="965" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Create</text>
+      <text id="supplier" x="1012.66" y="965" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">supplier</text>
+  </g>
+  <text id="Create Record Modal label" x="64" y="1268" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Create Record Modal</text>
+  <text id="crud-create-modal id" x="64" y="1282" font-family="ui-monospace, monospace" font-size="12" fill="#737373">crud-create-modal</text>
+  <g id="Create Record Modal" transform="translate(64, 1300)">
+    <rect id="container" x="0" y="0" width="1088" height="418" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="section" x="1" y="1" width="1086" height="416" fill="rgba(242, 238, 235, 0.302)" />
+      <rect id="container 2" x="160" y="25" width="768" height="260" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" opacity="0.5" />
+      <text id="Projects" x="181" y="66" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Projects</text>
+      <rect id="button" x="779.91" y="46" width="127.09" height="32" rx="12" fill="#007f34" />
+      <text id="New project" x="843.45" y="60" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">New project</text>
+      <text id="Warehouse relabelling" x="189" y="118" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Warehouse relabelling</text>
+      <text id="PRJ-114 · Rhea Patel" x="189" y="136" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">PRJ-114 · Rhea Patel</text>
+      <text id="Q4 supplier audit" x="189" y="175" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Q4 supplier audit</text>
+      <text id="PRJ-113 · Sam Okafor" x="189" y="193" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">PRJ-113 · Sam Okafor</text>
+      <text id="Returns triage rewrite" x="189" y="232" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Returns triage rewrite</text>
+      <text id="PRJ-112 · Jordan Lee" x="189" y="250" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">PRJ-112 · Jordan Lee</text>
+      <rect id="container 3" x="1" y="1" width="1086" height="416" fill="rgba(8, 12, 16, 0.251)" />
+      <rect id="dialog" x="320" y="2" width="448" height="414" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="New project 2" x="341" y="39" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="600">New project</text>
+      <text id="Three fields. A modal that scrolls shoul…" x="341" y="66" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Three fields. A modal that scrolls should have been a</text>
+      <text id="drawer." x="341" y="86" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">drawer.</text>
+      <text id="Project name" x="341" y="125" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Project name</text>
+      <rect id="field" x="341" y="137" width="406" height="38" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Owner" x="341" y="205" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Owner</text>
+      <rect id="field 2" x="341" y="217" width="406" height="38" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Visibility" x="341" y="285" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Visibility</text>
+      <rect id="field 3" x="341" y="297" width="406" height="38" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Cancel" x="576.14" y="373" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Cancel</text>
+      <rect id="button 2" x="618.92" y="359" width="128.08" height="36" rx="12" fill="#007f34" />
+      <text id="Create project" x="682.96" y="373" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Create project</text>
+  </g>
+  <text id="Create Record Drawer label" x="64" y="1834" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Create Record Drawer</text>
+  <text id="crud-create-drawer id" x="64" y="1848" font-family="ui-monospace, monospace" font-size="12" fill="#737373">crud-create-drawer</text>
+  <g id="Create Record Drawer" transform="translate(64, 1866)">
+    <rect id="container" x="0" y="0" width="1088" height="1185" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="section" x="1" y="1" width="1086" height="1183" fill="rgba(242, 238, 235, 0.302)" />
+      <text id="Assets" x="17" y="36" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Assets</text>
+      <rect id="button" x="507.63" y="17" width="67.38" height="30" rx="12" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="New" x="541.31" y="29" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500" text-anchor="middle">New</text>
+      <rect id="list item" x="17" y="59" width="558" height="42" rx="12" fill="rgba(255, 255, 255, 0.6)" stroke="#dbdee1" stroke-width="1" />
+      <text id="Forklift 03 · Rotterdam DC" x="17" y="73" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Forklift 03 · Rotterdam DC</text>
+      <rect id="list item 2" x="17" y="107" width="558" height="42" rx="12" fill="rgba(255, 255, 255, 0.6)" stroke="#dbdee1" stroke-width="1" />
+      <text id="Chiller 11 · Leeds DC" x="17" y="121" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Chiller 11 · Leeds DC</text>
+      <rect id="list item 3" x="17" y="155" width="558" height="42" rx="12" fill="rgba(255, 255, 255, 0.6)" stroke="#dbdee1" stroke-width="1" />
+      <text id="Pallet wrapper 02 · Pune DC" x="17" y="169" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Pallet wrapper 02 · Pune DC</text>
+      <rect id="list item 4" x="17" y="203" width="558" height="42" rx="12" fill="rgba(255, 255, 255, 0.6)" stroke="#dbdee1" stroke-width="1" />
+      <text id="Forklift 02 · Rotterdam DC" x="17" y="217" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Forklift 02 · Rotterdam DC</text>
+      <rect id="list item 5" x="17" y="251" width="558" height="42" rx="12" fill="rgba(255, 255, 255, 0.6)" stroke="#dbdee1" stroke-width="1" />
+      <text id="Scanner cart 07 · Leeds DC" x="17" y="265" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Scanner cart 07 · Leeds DC</text>
+      <rect id="dialog" x="591" y="17" width="480" height="1151" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="New asset" x="608" y="50" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="600">New asset</text>
+      <text id="3 groups · 3 required fields" x="608" y="74" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">3 groups · 3 required fields</text>
+      <text id="Basics" x="608" y="125" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="700" letter-spacing="0.6">Basics</text>
+      <text id="Asset name" x="608" y="155" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Asset name</text>
+      <rect id="field" x="608" y="167" width="446" height="38" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Category" x="608" y="233" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Category</text>
+      <rect id="field 2" x="608" y="245" width="446" height="38" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Serial number" x="608" y="311" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Serial number</text>
+      <text id="Optional" x="707.33" y="312" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Optional</text>
+      <rect id="field 3" x="608" y="323" width="446" height="38" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Location" x="608" y="397" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="700" letter-spacing="0.6">Location</text>
+      <text id="Site" x="608" y="427" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Site</text>
+      <rect id="field 4" x="608" y="439" width="446" height="38" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Zone" x="608" y="505" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Zone</text>
+      <text id="Optional 2" x="647.66" y="506" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Optional</text>
+      <rect id="field 5" x="608" y="517" width="446" height="38" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Custodian" x="608" y="583" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Custodian</text>
+      <text id="Optional 3" x="682.47" y="584" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Optional</text>
+      <rect id="field 6" x="608" y="595" width="446" height="38" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Lifecycle" x="608" y="669" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="700" letter-spacing="0.6">Lifecycle</text>
+      <text id="Acquired on" x="608" y="699" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Acquired on</text>
+      <text id="Optional 4" x="694.47" y="700" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Optional</text>
+      <rect id="field 7" x="608" y="711" width="446" height="38" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Book value" x="608" y="777" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Book value</text>
+      <text id="Optional 5" x="688.92" y="778" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Optional</text>
+      <rect id="field 8" x="608" y="789" width="446" height="38" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Service interval" x="608" y="855" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Service interval</text>
+      <text id="Optional 6" x="718.03" y="856" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Optional</text>
+      <rect id="field 9" x="608" y="867" width="446" height="38" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Drives the maintenance schedule. Changea…" x="608" y="923" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Drives the maintenance schedule. Changeable later.</text>
+      <text id="Commissioning notes" x="608" y="955" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Commissioning notes</text>
+      <text id="Optional 7" x="756.91" y="956" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Optional</text>
+      <rect id="field 10" x="608" y="967" width="446" height="78" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <rect id="footer" x="592" y="1068" width="478" height="99" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="1 required field left: Site." x="608" y="1097" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">1 required field left: Site.</text>
+      <rect id="button 2" x="608" y="1113" width="71.56" height="38" rx="12" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="Cancel" x="643.78" y="1127" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Cancel</text>
+      <rect id="button 3" x="687.56" y="1114" width="366.44" height="36" rx="12" fill="#007f34" opacity="0.5" />
+      <text id="Create asset" x="870.78" y="1128" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Create asset</text>
+  </g>
+  <text id="Record Detail Page label" x="64" y="3167" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Record Detail Page</text>
+  <text id="crud-read-page id" x="64" y="3181" font-family="ui-monospace, monospace" font-size="12" fill="#737373">crud-read-page</text>
+  <g id="Record Detail Page" transform="translate(64, 3199)">
+    <rect id="container" x="0" y="0" width="1088" height="969" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="section" x="1" y="1" width="1086" height="967" fill="#fdfcf8" />
+      <text id="Suppliers" x="32" y="53" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Suppliers</text>
+      <text id="/" x="89.53" y="53" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">/</text>
+      <text id="Northwind Trading Ltd" x="101.3" y="53" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Northwind Trading Ltd</text>
+      <text id="Northwind Trading Ltd 2" x="32" y="93" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="24" font-weight="700" letter-spacing="-0.6">Northwind Trading Ltd</text>
+      <rect id="container 2" x="289.17" y="74.75" width="73.27" height="20.5" rx="4" fill="rgba(0, 186, 118, 0.102)" />
+      <text id="Approved" x="289.17" y="85.75" fill="#007a55" font-family="Geist, &quot;Geist Fallback&quot;" font-size="11" font-weight="600" letter-spacing="0.28">Approved</text>
+      <text id="Supplier · Tier 2 · Active since January…" x="32" y="119" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Supplier · Tier 2 · Active since January 2026</text>
+      <rect id="button" x="750.67" y="70" width="72.14" height="36" rx="12" fill="#007f34" />
+      <text id="Edit" x="786.74" y="84" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Edit</text>
+      <rect id="button 2" x="830.81" y="69" width="119.95" height="38" rx="12" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="Raise an order" x="890.79" y="83" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Raise an order</text>
+      <text id="Archive" x="1007.38" y="83" fill="#e7000b" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Archive</text>
+      <rect id="container 3" x="32" y="149" width="1024" height="102" rx="16" fill="#dbdee1" stroke="#dbdee1" stroke-width="1" />
+      <rect id="container 4" x="33" y="150" width="254.75" height="100" fill="#ffffff" />
+      <text id="Contract value" x="49" y="178" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500" letter-spacing="0.3">Contract value</text>
+      <text id="£248,000" x="49" y="206" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" font-weight="600" letter-spacing="-0.45">£248,000</text>
+      <text id="Annual, indexed to CPI" x="49" y="230" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Annual, indexed to CPI</text>
+      <rect id="container 5" x="288.75" y="150" width="254.75" height="100" fill="#ffffff" />
+      <text id="Owner" x="304.75" y="178" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500" letter-spacing="0.3">Owner</text>
+      <text id="Rhea Patel" x="304.75" y="206" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" font-weight="600" letter-spacing="-0.45">Rhea Patel</text>
+      <text id="Procurement" x="304.75" y="230" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Procurement</text>
+      <rect id="container 6" x="544.5" y="150" width="254.75" height="100" fill="#ffffff" />
+      <text id="Renews" x="560.5" y="178" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500" letter-spacing="0.3">Renews</text>
+      <text id="1 April 2027" x="560.5" y="206" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" font-weight="600" letter-spacing="-0.45">1 April 2027</text>
+      <text id="90-day notice period" x="560.5" y="230" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">90-day notice period</text>
+      <rect id="container 7" x="800.25" y="150" width="254.75" height="100" fill="#ffffff" />
+      <text id="Risk tier" x="816.25" y="178" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500" letter-spacing="0.3">Risk tier</text>
+      <text id="Tier 2" x="816.25" y="206" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" font-weight="600" letter-spacing="-0.45">Tier 2</text>
+      <text id="Reviewed 14 Aug 2026" x="816.25" y="230" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Reviewed 14 Aug 2026</text>
+      <text id="Details" x="32" y="299" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="600">Details</text>
+      <rect id="container 8" x="32" y="319" width="578.66" height="361" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="Supplier id" x="49" y="346" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Supplier id</text>
+      <text id="SUP-0417" x="536.05" y="347" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">SUP-0417</text>
+      <text id="Registered name" x="49" y="391" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Registered name</text>
+      <text id="Northwind Trading Ltd 3" x="448.73" y="391" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Northwind Trading Ltd</text>
+      <text id="Company number" x="49" y="436" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Company number</text>
+      <text id="09182736" x="536.05" y="437" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">09182736</text>
+      <text id="Registered office" x="49" y="481" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Registered office</text>
+      <text id="Rotterdam, Netherlands" x="438.13" y="481" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Rotterdam, Netherlands</text>
+      <text id="Payment terms" x="49" y="526" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Payment terms</text>
+      <text id="Net 30" x="548.39" y="526" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Net 30</text>
+      <text id="Currency" x="49" y="571" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Currency</text>
+      <text id="EUR" x="565.67" y="571" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">EUR</text>
+      <text id="Insurance expiry" x="49" y="616" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Insurance expiry</text>
+      <text id="30 November 2026" x="465.5" y="616" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">30 November 2026</text>
+      <text id="Data processing agreement" x="49" y="661" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Data processing agreement</text>
+      <text id="Signed 3 March 2026" x="452.23" y="661" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Signed 3 March 2026</text>
+      <text id="What changed" x="32" y="728" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="600">What changed</text>
+      <rect id="container 9" x="32" y="748" width="578.66" height="180" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <rect id="container 10" x="49" y="771" width="6" height="6" rx="3" fill="#007f34" />
+      <text id="Risk tier moved from 3 to 2" x="67" y="779" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Risk tier moved from 3 to 2</text>
+      <text id="Sam Okafor · 14 Aug 2026" x="67" y="799" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Sam Okafor · 14 Aug 2026</text>
+      <rect id="container 11" x="49" y="825" width="6" height="6" rx="3" fill="#007f34" />
+      <text id="Payment terms changed to Net 30" x="67" y="833" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Payment terms changed to Net 30</text>
+      <text id="Rhea Patel · 2 Jul 2026" x="67" y="853" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Rhea Patel · 2 Jul 2026</text>
+      <rect id="container 12" x="49" y="879" width="6" height="6" rx="3" fill="#007f34" />
+      <text id="Record created" x="67" y="887" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Record created</text>
+      <text id="Import · finance-2026 · 11 Jan 2026" x="67" y="907" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Import · finance-2026 · 11 Jan 2026</text>
+      <text id="Attached to this record" x="642.66" y="299" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="600">Attached to this record</text>
+      <rect id="link" x="642.66" y="319" width="413.33" height="80.5" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="Purchase order" x="655.66" y="343" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="11" font-weight="600" letter-spacing="0.28">Purchase order</text>
+      <text id="PO-2291" x="655.66" y="364.5" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">PO-2291</text>
+      <text id="£41,200 · Awaiting delivery" x="655.66" y="382.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">£41,200 · Awaiting delivery</text>
+      <rect id="link 2" x="642.66" y="407.5" width="413.33" height="80.5" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="Purchase order 2" x="655.66" y="431.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="11" font-weight="600" letter-spacing="0.28">Purchase order</text>
+      <text id="PO-2264" x="655.66" y="453" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">PO-2264</text>
+      <text id="£18,900 · Received" x="655.66" y="471" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">£18,900 · Received</text>
+      <rect id="link 3" x="642.66" y="496" width="413.33" height="80.5" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="Invoice" x="655.66" y="520" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="11" font-weight="600" letter-spacing="0.28">Invoice</text>
+      <text id="INV-2026-0841" x="655.66" y="541.5" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">INV-2026-0841</text>
+      <text id="£18,900 · Paid 31 Aug" x="655.66" y="559.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">£18,900 · Paid 31 Aug</text>
+      <rect id="link 4" x="642.66" y="584.5" width="413.33" height="80.5" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="Review" x="655.66" y="608.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="11" font-weight="600" letter-spacing="0.28">Review</text>
+      <text id="Annual supplier review" x="655.66" y="630" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Annual supplier review</text>
+      <text id="Due 14 Feb 2027" x="655.66" y="648" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Due 14 Feb 2027</text>
+      <rect id="paragraph" x="642.66" y="681" width="413.33" height="58" rx="16" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="The annual review is raised automaticall…" x="677.66" y="706" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">The annual review is raised automatically 60 days before the</text>
+      <text id="renewal date. Nothing on this page trigg…" x="677.66" y="722" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">renewal date. Nothing on this page triggers it.</text>
+  </g>
+  <text id="Record Quick Look label" x="64" y="4284" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Record Quick Look</text>
+  <text id="crud-read-modal id" x="64" y="4298" font-family="ui-monospace, monospace" font-size="12" fill="#737373">crud-read-modal</text>
+  <g id="Record Quick Look" transform="translate(64, 4316)">
+    <rect id="container" x="0" y="0" width="1088" height="418" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="section" x="1" y="1" width="1086" height="416" fill="rgba(242, 238, 235, 0.302)" />
+      <rect id="container 2" x="160" y="25" width="768" height="229" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" opacity="0.5" />
+      <text id="Invoices" x="161" y="40" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Invoices</text>
+      <rect id="button" x="161" y="71" width="766" height="60" fill="rgba(0, 128, 49, 0.102)" />
+      <text id="INV-2026-0841" x="177" y="97" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">INV-2026-0841</text>
+      <text id="Northwind Trading · £18,900" x="177" y="115" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Northwind Trading · £18,900</text>
+      <text id="Quick look" x="852.44" y="105" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Quick look</text>
+      <text id="INV-2026-0839" x="177" y="158" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">INV-2026-0839</text>
+      <text id="Contoso Logistics · £4,120" x="177" y="176" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Contoso Logistics · £4,120</text>
+      <text id="Quick look 2" x="852.44" y="166" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Quick look</text>
+      <text id="INV-2026-0836" x="177" y="219" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">INV-2026-0836</text>
+      <text id="Fabrikam Parts · £912" x="177" y="237" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Fabrikam Parts · £912</text>
+      <text id="Quick look 3" x="852.44" y="227" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Quick look</text>
+      <rect id="container 3" x="1" y="1" width="1086" height="416" fill="rgba(8, 12, 16, 0.251)" />
+      <rect id="dialog" x="320" y="10.5" width="448" height="397" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="INV-2026-0841 2" x="337" y="43.5" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="600">INV-2026-0841</text>
+      <text id="Northwind Trading · £18,900 2" x="337" y="67.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Northwind Trading · £18,900</text>
+      <text id="Reference" x="337" y="115.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Reference</text>
+      <text id="INV-2026-0841 3" x="629.39" y="115.5" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">INV-2026-0841</text>
+      <text id="Supplier" x="337" y="157.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Supplier</text>
+      <text id="Northwind Trading Ltd" x="609.38" y="157.5" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Northwind Trading Ltd</text>
+      <text id="Amount" x="337" y="198.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Amount</text>
+      <text id="£18,900.00" x="677.41" y="198.5" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">£18,900.00</text>
+      <text id="Raised" x="337" y="239.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Raised</text>
+      <text id="31 July 2026" x="667.8" y="239.5" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">31 July 2026</text>
+      <text id="Paid" x="337" y="280.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Paid</text>
+      <text id="31 August 2026" x="649.56" y="280.5" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">31 August 2026</text>
+      <text id="Bank reference" x="337" y="322.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Bank reference</text>
+      <text id="BACS-77120934" x="629.39" y="322.5" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">BACS-77120934</text>
+      <rect id="footer" x="321" y="339.5" width="446" height="67" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="Open the full record" x="337" y="377.5" fill="#007f34" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Open the full record</text>
+      <rect id="button 2" x="625.59" y="356.5" width="125.41" height="34" rx="12" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="Back to the list" x="688.3" y="370.5" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Back to the list</text>
+  </g>
+  <text id="Edit Record Form label" x="64" y="4850" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Edit Record Form</text>
+  <text id="crud-update-form id" x="64" y="4864" font-family="ui-monospace, monospace" font-size="12" fill="#737373">crud-update-form</text>
+  <g id="Edit Record Form" transform="translate(64, 4882)">
+    <rect id="container" x="0" y="0" width="1088" height="644" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="section" x="1" y="1" width="1086" height="642" fill="#fdfcf8" />
+      <text id="Edit supplier" x="96" y="65" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="24" font-weight="700" letter-spacing="-0.6">Edit supplier</text>
+      <text id="Last edited by Sam Okafor, 14 August 202…" x="96" y="91" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Last edited by Sam Okafor, 14 August 2026</text>
+      <text id="No unsaved changes." x="855.69" y="91" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">No unsaved changes.</text>
+      <text id="Legal name" x="96" y="143" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Legal name</text>
+      <rect id="field" x="96" y="155" width="440" height="38" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Billing email" x="552" y="143" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Billing email</text>
+      <rect id="field 2" x="552" y="155" width="440" height="38" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Payment terms" x="96" y="223" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Payment terms</text>
+      <rect id="field 3" x="96" y="235" width="440" height="38" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Applies to orders raised from now on, no…" x="96" y="291" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Applies to orders raised from now on, not to open ones.</text>
+      <text id="Currency" x="552" y="223" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Currency</text>
+      <rect id="field 4" x="552" y="235" width="440" height="38" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Risk tier" x="96" y="325" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Risk tier</text>
+      <rect id="field 5" x="96" y="337" width="440" height="38" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Internal notes" x="96" y="405" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Internal notes</text>
+      <rect id="field 6" x="96" y="417" width="896" height="78" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Ships from Rotterdam. Lead time doubles …" x="96" y="431" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Ships from Rotterdam. Lead time doubles in December.</text>
+      <rect id="container 2" x="96" y="534" width="896" height="69" fill="rgba(253, 251, 247, 0.902)" stroke="#dbdee1" stroke-width="1" />
+      <text id="Discard all changes" x="842.82" y="565" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Discard all changes</text>
+      <rect id="button" x="926.81" y="551" width="65.19" height="36" rx="12" fill="#007f34" opacity="0.4" />
+      <text id="Save" x="959.41" y="565" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Save</text>
+  </g>
+  <text id="Edit Record Modal label" x="64" y="5642" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Edit Record Modal</text>
+  <text id="crud-update-modal id" x="64" y="5656" font-family="ui-monospace, monospace" font-size="12" fill="#737373">crud-update-modal</text>
+  <g id="Edit Record Modal" transform="translate(64, 5674)">
+    <rect id="container" x="0" y="0" width="1088" height="450" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="section" x="1" y="1" width="1086" height="448" fill="rgba(242, 238, 235, 0.302)" />
+      <rect id="dialog" x="320" y="61.66" width="448" height="326.69" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="Edit Rotterdam DC · receiving hours" x="337" y="94.66" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="600">Edit Rotterdam DC · receiving hours</text>
+      <text id="Changes apply to bookings made from now …" x="337" y="118.66" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Changes apply to bookings made from now on.</text>
+      <text id="Opens" x="337" y="171.66" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Opens</text>
+      <rect id="field" x="337" y="183.66" width="201" height="38.69" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Closes" x="550" y="171.66" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Closes</text>
+      <rect id="field 2" x="550" y="183.66" width="201" height="38.69" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Goods-in contact" x="337" y="252.34" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Goods-in contact</text>
+      <rect id="field 3" x="337" y="264.34" width="414" height="38" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <rect id="footer" x="321" y="318.34" width="446" height="69" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="Cancel" x="582.75" y="349.34" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Cancel</text>
+      <rect id="button" x="625.53" y="335.34" width="125.47" height="36" rx="12" fill="#007f34" />
+      <text id="Save changes" x="688.27" y="349.34" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Save changes</text>
+  </g>
+  <text id="Field-Level Edit Drawer label" x="64" y="6240" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Field-Level Edit Drawer</text>
+  <text id="crud-update-drawer id" x="64" y="6254" font-family="ui-monospace, monospace" font-size="12" fill="#737373">crud-update-drawer</text>
+  <g id="Field-Level Edit Drawer" transform="translate(64, 6272)">
+    <rect id="container" x="0" y="0" width="1088" height="733" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="section" x="1" y="1" width="1086" height="731" fill="rgba(242, 238, 235, 0.302)" />
+      <text id="Returns queue" x="17" y="31" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Returns queue</text>
+      <rect id="list item" x="17" y="49" width="590" height="42" rx="12" fill="#ffffff" stroke="#007f34" stroke-width="1" />
+      <text id="RET-118 · Exchange arrives damaged" x="17" y="63" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">RET-118 · Exchange arrives damaged</text>
+      <rect id="list item 2" x="17" y="97" width="590" height="42" rx="12" fill="rgba(255, 255, 255, 0.6)" stroke="#dbdee1" stroke-width="1" />
+      <text id="RET-117 · Wrong size sent" x="17" y="111" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">RET-117 · Wrong size sent</text>
+      <rect id="list item 3" x="17" y="145" width="590" height="42" rx="12" fill="rgba(255, 255, 255, 0.6)" stroke="#dbdee1" stroke-width="1" />
+      <text id="RET-115 · Refund not received" x="17" y="159" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">RET-115 · Refund not received</text>
+      <rect id="list item 4" x="17" y="193" width="590" height="42" rx="12" fill="rgba(255, 255, 255, 0.6)" stroke="#dbdee1" stroke-width="1" />
+      <text id="RET-112 · Missing accessory" x="17" y="207" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">RET-112 · Missing accessory</text>
+      <rect id="dialog" x="623" y="17" width="448" height="699" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="RET-118 · Exchange arrives damaged 2" x="640" y="50" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="600">RET-118 · Exchange arrives damaged</text>
+      <text id="Returns · Rotterdam DC" x="640" y="74" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Returns · Rotterdam DC</text>
+      <rect id="paragraph" x="624" y="97" width="446" height="49" fill="rgba(242, 242, 237, 0.4)" />
+      <text id="Each field saves on its own. There is no…" x="640" y="117" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Each field saves on its own. There is no Save button because these</text>
+      <text id="attributes do not depend on each other." x="640" y="133" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">attributes do not depend on each other.</text>
+      <text id="Status" x="640" y="176" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Status</text>
+      <rect id="field" x="640" y="188" width="414" height="38" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Assignee" x="640" y="256" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Assignee</text>
+      <rect id="field 2" x="640" y="268" width="414" height="38" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Priority" x="640" y="336" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Priority</text>
+      <rect id="field 3" x="640" y="348" width="414" height="38" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Due" x="640" y="416" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Due</text>
+      <rect id="field 4" x="640" y="428" width="414" height="38" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Estimate" x="640" y="496" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Estimate</text>
+      <rect id="field 5" x="640" y="508" width="414" height="38" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Labels" x="640" y="576" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Labels</text>
+      <rect id="field 6" x="640" y="588" width="414" height="38" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <rect id="footer" x="624" y="642" width="446" height="73" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="Written in this session" x="640" y="671" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="700" letter-spacing="0.6">Written in this session</text>
+      <text id="Nothing yet. Change a field and it write…" x="640" y="695" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Nothing yet. Change a field and it writes on blur.</text>
+  </g>
+  <text id="Cascade Delete Dialog label" x="64" y="7121" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Cascade Delete Dialog</text>
+  <text id="crud-delete-cascade id" x="64" y="7135" font-family="ui-monospace, monospace" font-size="12" fill="#737373">crud-delete-cascade</text>
+  <g id="Cascade Delete Dialog" transform="translate(64, 7153)">
+    <rect id="container" x="0" y="0" width="1088" height="799" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="section" x="1" y="1" width="1086" height="797" fill="rgba(242, 238, 235, 0.302)" />
+      <rect id="alertdialog" x="288" y="25" width="512" height="749" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <rect id="container 2" x="309" y="46" width="36" height="36" rx="18" fill="rgba(226, 0, 10, 0.102)" />
+      <text id="Delete the workspace “Rotterdam Operatio…" x="357" y="62" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="600">Delete the workspace “Rotterdam Operations”?</text>
+      <text id="77" x="357" y="89" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">77</text>
+      <text id="linked records are affected." x="371.95" y="89" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">linked records are affected.</text>
+      <text id="47" x="552.08" y="89" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">47</text>
+      <text id="of them are deleted" x="567.61" y="89" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">of them are deleted</text>
+      <text id="outright and cannot be restored after 30…" x="357" y="109" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">outright and cannot be restored after 30 days.</text>
+      <rect id="container 3" x="309" y="155" width="470" height="285" rx="16" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <rect id="container 4" x="322" y="170" width="78.05" height="24" rx="4" fill="rgba(226, 0, 10, 0.102)" />
+      <text id="Deleted" x="322" y="181" fill="#e7000b" font-family="Geist, &quot;Geist Fallback&quot;" font-size="11" font-weight="600" letter-spacing="0.28">Deleted</text>
+      <text id="41 Documents" x="412.05" y="182" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">41 Documents</text>
+      <text id="Removed with the workspace. Not recovera…" x="412.05" y="202" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Removed with the workspace. Not recoverable after 30 days.</text>
+      <rect id="container 5" x="322" y="233" width="78.05" height="24" rx="4" fill="rgba(226, 0, 10, 0.102)" />
+      <text id="Deleted 2" x="322" y="244" fill="#e7000b" font-family="Geist, &quot;Geist Fallback&quot;" font-size="11" font-weight="600" letter-spacing="0.28">Deleted</text>
+      <text id="6 Integrations" x="412.05" y="245" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">6 Integrations</text>
+      <text id="Webhooks stop firing immediately. Third …" x="412.05" y="265" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Webhooks stop firing immediately. Third parties are not notified.</text>
+      <rect id="container 6" x="322" y="296" width="91.25" height="24" rx="4" fill="rgba(245, 147, 0, 0.102)" />
+      <text id="Orphaned" x="322" y="307" fill="#bb4d00" font-family="Geist, &quot;Geist Fallback&quot;" font-size="11" font-weight="600" letter-spacing="0.28">Orphaned</text>
+      <text id="18 Shared links" x="425.25" y="308" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">18 Shared links</text>
+      <text id="Stay live and start returning 404. Anyon…" x="425.25" y="328" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Stay live and start returning 404. Anyone holding one sees a</text>
+      <text id="dead page." x="425.25" y="344" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">dead page.</text>
+      <rect id="container 7" x="322" y="375" width="83.02" height="24" rx="4" fill="#f3f2ee" />
+      <text id="Retained" x="322" y="386" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="11" font-weight="600" letter-spacing="0.28">Retained</text>
+      <text id="12 Invoices" x="417.02" y="387" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">12 Invoices</text>
+      <text id="Kept for seven years under statutory ret…" x="417.02" y="407" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Kept for seven years under statutory retention. Detached from</text>
+      <text id="the workspace." x="417.02" y="423" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">the workspace.</text>
+      <rect id="container 8" x="309" y="456" width="470" height="118" rx="16" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="Two safer options" x="322" y="481" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="600" letter-spacing="0.3">Two safer options</text>
+      <rect id="button" x="322" y="493" width="187.28" height="30" rx="12" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="Transfer to another owner" x="415.64" y="505" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500" text-anchor="middle">Transfer to another owner</text>
+      <rect id="button 2" x="322" y="531" width="288.47" height="30" rx="12" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="Archive instead — keeps everything, hide…" x="466.23" y="543" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500" text-anchor="middle">Archive instead — keeps everything, hides it</text>
+      <text id="Type to confirm" x="309" y="604" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Type to confirm</text>
+      <text id="Rotterdam Operations" x="343.59" y="605" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12" font-weight="500">Rotterdam Operations</text>
+      <rect id="field" x="309" y="616" width="470" height="38" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Asked because more than 10 records are a…" x="309" y="672" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Asked because more than 10 records are affected. Smaller deletes get a plain confirm.</text>
+      <rect id="footer" x="289" y="696" width="510" height="77" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="Cancel" x="481.11" y="731" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Cancel</text>
+      <rect id="button 3" x="523.89" y="717" width="255.11" height="36" rx="12" fill="#e7000b" opacity="0.4" />
+      <text id="Delete" x="563.66" y="740" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Delete</text>
+      <text id="workspace" x="624.15" y="740" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">workspace</text>
+      <text id="and" x="676.7" y="740" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">and</text>
+      <text id="47 2" x="700.58" y="740" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">47</text>
+      <text id="records" x="735.82" y="740" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">records</text>
+  </g>
+  <text id="Record Created State label" x="64" y="8068" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Record Created State</text>
+  <text id="crud-success-state id" x="64" y="8082" font-family="ui-monospace, monospace" font-size="12" fill="#737373">crud-success-state</text>
+  <g id="Record Created State" transform="translate(64, 8100)">
+    <rect id="container" x="0" y="0" width="1088" height="853" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="section" x="1" y="1" width="1086" height="851" fill="#fdfcf8" />
+      <rect id="status" x="256" y="57" width="576" height="739" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <rect id="container 2" x="281" y="82" width="44" height="44" rx="22" fill="rgba(0, 186, 118, 0.102)" />
+      <text id="Purchase order raised" x="281" y="162" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="20" font-weight="700" letter-spacing="-0.5">Purchase order raised</text>
+      <text id="Reference" x="281" y="190" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Reference</text>
+      <text id="PO-2291" x="354.09" y="190" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">PO-2291</text>
+      <text id="Copy" x="439.01" y="188" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500" text-anchor="middle">Copy</text>
+      <rect id="container 3" x="281" y="216" width="526" height="165" rx="16" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="Supplier" x="294" y="241" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Supplier</text>
+      <text id="Northwind Trading Ltd" x="649.08" y="241" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Northwind Trading Ltd</text>
+      <text id="Value" x="294" y="282" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Value</text>
+      <text id="£41,200.00" x="718.31" y="282" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">£41,200.00</text>
+      <text id="Delivery" x="294" y="323" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Delivery</text>
+      <text id="Rotterdam DC · 24 Sep 2026" x="607.11" y="323" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Rotterdam DC · 24 Sep 2026</text>
+      <text id="Approver" x="294" y="364" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Approver</text>
+      <text id="Rhea Patel (auto-assigned)" x="617.58" y="364" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Rhea Patel (auto-assigned)</text>
+      <rect id="button" x="281" y="401" width="526" height="62" rx="16" fill="#007f34" />
+      <text id="Send to the supplier" x="297" y="427" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Send to the supplier</text>
+      <text id="Emails the order and starts the acknowle…" x="297" y="447" fill="rgba(251, 251, 251, 0.8)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Emails the order and starts the acknowledgement clock.</text>
+      <rect id="button 2" x="281" y="471" width="526" height="64" rx="16" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="Raise another order" x="298" y="498" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Raise another order</text>
+      <text id="Same supplier and delivery site, empty l…" x="298" y="518" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Same supplier and delivery site, empty line items.</text>
+      <rect id="button 3" x="281" y="543" width="526" height="64" rx="16" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="Attach a quote" x="298" y="570" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Attach a quote</text>
+      <text id="Required before finance will match the i…" x="298" y="590" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Required before finance will match the invoice.</text>
+      <rect id="container 4" x="281" y="627" width="526" height="100" rx="16" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="You can withdraw this for another" x="294" y="652" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">You can withdraw this for another</text>
+      <text id=". After that it is dispatched and revers…" x="503.73" y="652" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">. After that it is dispatched and reversing it is a credit</text>
+      <text id="note." x="294" y="668" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">note.</text>
+      <text id="20s" x="481.19" y="652" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="600">20s</text>
+      <rect id="button 4" x="294" y="684" width="97.13" height="30" rx="12" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="Withdraw" x="342.56" y="696" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="600" text-anchor="middle">Withdraw</text>
+      <text id="Back to purchase orders" x="544" y="764" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Back to purchase orders</text>
+  </g>
+  <text id="Bulk Edit Drawer label" x="64" y="9069" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Bulk Edit Drawer</text>
+  <text id="crud-bulk-edit-drawer id" x="64" y="9083" font-family="ui-monospace, monospace" font-size="12" fill="#737373">crud-bulk-edit-drawer</text>
+  <g id="Bulk Edit Drawer" transform="translate(64, 9101)">
+    <rect id="container" x="0" y="0" width="1088" height="770" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="section" x="1" y="1" width="1086" height="768" fill="rgba(242, 238, 235, 0.302)" />
+      <rect id="dialog" x="623" y="17" width="448" height="736" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="Edit 17 orders" x="640" y="50" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="600">Edit 17 orders</text>
+      <text id="Only the fields you tick are written. Ev…" x="640" y="75" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Only the fields you tick are written. Everything else is left</text>
+      <text id="exactly as it is." x="640" y="95" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">exactly as it is.</text>
+      <rect id="container 2" x="640" y="133" width="414" height="114" rx="16" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="Change Payment terms" x="679" y="163" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Change Payment terms</text>
+      <text id="Mixed — 3 different values across the se…" x="679" y="184" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Mixed — 3 different values across the selection</text>
+      <rect id="field" x="679" y="196" width="362" height="38" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" opacity="0.5" />
+      <rect id="container 3" x="640" y="263" width="414" height="114" rx="16" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="Change Delivery site" x="679" y="293" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Change Delivery site</text>
+      <text id="All 17 are currently Rotterdam DC" x="679" y="314" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">All 17 are currently Rotterdam DC</text>
+      <rect id="field 2" x="679" y="326" width="362" height="38" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" opacity="0.5" />
+      <rect id="container 4" x="640" y="393" width="414" height="114" rx="16" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="Change Approver" x="679" y="423" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Change Approver</text>
+      <text id="Mixed — 2 different values across the se…" x="679" y="444" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Mixed — 2 different values across the selection</text>
+      <rect id="field 3" x="679" y="456" width="362" height="38" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" opacity="0.5" />
+      <rect id="container 5" x="640" y="523" width="414" height="114" rx="16" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="Change Priority" x="679" y="553" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Change Priority</text>
+      <text id="All 17 are currently Standard" x="679" y="574" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">All 17 are currently Standard</text>
+      <rect id="field 4" x="679" y="586" width="362" height="38" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" opacity="0.5" />
+      <rect id="footer" x="624" y="653" width="446" height="99" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="Nothing selected to change yet." x="640" y="682" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Nothing selected to change yet.</text>
+      <rect id="button" x="640" y="698" width="71.56" height="38" rx="12" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="Cancel" x="675.78" y="712" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Cancel</text>
+      <rect id="button 2" x="719.56" y="699" width="334.44" height="36" rx="12" fill="#007f34" opacity="0.4" />
+      <text id="Apply to" x="867.98" y="722" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Apply to</text>
+      <text id="17" x="904.27" y="722" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">17</text>
+      <text id="orders" x="935.71" y="722" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">orders</text>
+  </g>
+  <text id="Archive and Restore label" x="64" y="9987" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Archive and Restore</text>
+  <text id="crud-archive-restore id" x="64" y="10001" font-family="ui-monospace, monospace" font-size="12" fill="#737373">crud-archive-restore</text>
+  <g id="Archive and Restore" transform="translate(64, 10019)">
+    <rect id="container" x="0" y="0" width="1088" height="441" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="section" x="1" y="1" width="1086" height="439" fill="#fdfcf8" />
+      <text id="Archive" x="96" y="61" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="20" font-weight="700" letter-spacing="-0.5">Archive</text>
+      <text id="Archived records are kept for 90 days an…" x="96" y="87" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Archived records are kept for 90 days and then permanently removed. Sorted by whichever goes first.</text>
+      <text id="4 archived records." x="871.09" y="87" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">4 archived records.</text>
+      <rect id="container 2" x="96" y="113" width="896" height="287" rx="16" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <rect id="container 3" x="97" y="114" width="894" height="41.5" fill="rgba(241, 241, 237, 0.502)" />
+      <text id="Record" x="137" y="128" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Record</text>
+      <text id="Archived" x="330.41" y="128" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Archived</text>
+      <text id="Purged in" x="453.91" y="128" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Purged in</text>
+      <text id="Warehouse relabelling" x="149" y="182" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Warehouse relabelling</text>
+      <text id="Project" x="149" y="200" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Project</text>
+      <text id="9 Sep 2026" x="342.41" y="182" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">9 Sep 2026</text>
+      <text id="by Sam Okafor" x="342.41" y="200" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">by Sam Okafor</text>
+      <rect id="container 4" x="465.91" y="175.5" width="65.56" height="20" rx="4" fill="rgba(226, 0, 10, 0.102)" />
+      <text id="3 days" x="465.91" y="187.5" fill="#e7000b" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="600">3 days</text>
+      <rect id="button" x="893.28" y="171" width="85.72" height="30" rx="12" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="Restore" x="936.14" y="183" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500" text-anchor="middle">Restore</text>
+      <text id="Fabrikam Parts GmbH" x="149" y="243" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Fabrikam Parts GmbH</text>
+      <text id="Supplier" x="149" y="261" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Supplier</text>
+      <text id="2 Sep 2026" x="342.41" y="243" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">2 Sep 2026</text>
+      <text id="by Rhea Patel" x="342.41" y="261" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">by Rhea Patel</text>
+      <rect id="container 5" x="465.91" y="236.5" width="67.69" height="20" rx="4" fill="#f3f2ee" />
+      <text id="11 days" x="465.91" y="248.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="600">11 days</text>
+      <rect id="button 2" x="893.28" y="232" width="85.72" height="30" rx="12" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="Restore 2" x="936.14" y="244" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500" text-anchor="middle">Restore</text>
+      <text id="Q3 carrier tender" x="149" y="304" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Q3 carrier tender</text>
+      <text id="Document" x="149" y="322" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Document</text>
+      <text id="28 Aug 2026" x="342.41" y="304" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">28 Aug 2026</text>
+      <text id="by Jordan Lee" x="342.41" y="322" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">by Jordan Lee</text>
+      <rect id="container 6" x="465.91" y="297.5" width="70.25" height="20" rx="4" fill="#f3f2ee" />
+      <text id="16 days" x="465.91" y="309.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="600">16 days</text>
+      <text id="Cannot restore — its workspace was purge…" x="629.17" y="310" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Cannot restore — its workspace was purged on 1 September</text>
+      <text id="Returns triage rewrite" x="149" y="365" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Returns triage rewrite</text>
+      <text id="Project 2" x="149" y="383" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Project</text>
+      <text id="21 Aug 2026" x="342.41" y="365" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">21 Aug 2026</text>
+      <text id="by Rhea Patel 2" x="342.41" y="383" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">by Rhea Patel</text>
+      <rect id="container 7" x="465.91" y="358.5" width="73.34" height="20" rx="4" fill="#f3f2ee" />
+      <text id="44 days" x="465.91" y="370.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="600">44 days</text>
+      <rect id="button 3" x="893.28" y="354" width="85.72" height="30" rx="12" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="Restore 3" x="936.14" y="366" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500" text-anchor="middle">Restore</text>
+  </g>
+</svg>

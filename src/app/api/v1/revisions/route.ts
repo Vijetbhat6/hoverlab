@@ -28,10 +28,11 @@ import type { ArtifactLevel } from '@/lib/artifact-types'
 
 export const runtime = 'nodejs'
 
-const LEVELS = ['effect', 'block', 'page', 'template'] as const
+const LEVELS = ['effect', 'primitive', 'block', 'page', 'template'] as const
 
 const BY_LEVEL: Record<ArtifactLevel, Record<string, string>> = {
   effect: REVISIONS.effects,
+  primitive: REVISIONS.primitives,
   block: REVISIONS.blocks,
   page: REVISIONS.pages,
   template: REVISIONS.templates,

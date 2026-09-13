@@ -22,6 +22,8 @@ import type { EffectCategory } from './effect-types'
 
 interface CatalogStats {
   total: number
+  css: number
+  shader: number
   featured: number
   byCategory: Record<string, number>
 }
@@ -30,6 +32,18 @@ const stats = STATS as CatalogStats
 
 /** Every effect in the catalog, hand-written and generated. */
 export const TOTAL_COUNT = stats.total
+
+/**
+ * The effects that are CSS, and the ones that run.
+ *
+ * Both are here rather than only the total, because the total on its own
+ * invites the sentence that used to be on `/docs`: "N CSS effects", where N
+ * was every effect in the catalog. That was true until the shader tier
+ * landed and false afterwards, with nothing to notice — a count that is
+ * right and a noun that is wrong is the worst shape a claim can take.
+ */
+export const CSS_COUNT = stats.css
+export const SHADER_COUNT = stats.shader
 
 /** Hand-crafted (curated) effects — what the "Featured" filter shows. */
 export const FEATURED_COUNT = stats.featured

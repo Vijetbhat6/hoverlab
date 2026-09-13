@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import Link from 'next/link'
-import { Search, Sparkles, Heart, Star, ChevronLeft, ChevronRight, Shuffle, ArrowDownUp, Loader2, Plus, Minus, TrendingUp, Clock } from 'lucide-react'
+import { Search, Sparkles, Heart, Star, ChevronLeft, ChevronRight, Shuffle, ArrowDownUp, Loader2, Plus, Minus, TrendingUp, Clock, Waves } from 'lucide-react'
 import { toast } from 'sonner'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
@@ -23,11 +23,22 @@ import { SiteFooter } from '@/components/site-footer'
 import { LibraryProTile } from '@/components/library-pro-tile'
 import { cn } from '@/lib/utils'
 import { isTypingTarget } from '@/lib/tray-events'
+import { isShaderRenderer } from '@/lib/shaders/shader-types'
 
-type Filter = 'All' | 'Featured' | 'Favorites' | EffectCategory
+type Filter = 'All' | 'Featured' | 'Favorites' | 'Shaders' | EffectCategory
 type Sort = 'default' | 'az' | 'za' | 'featured' | 'trending' | 'recent'
 
 const PAGE_SIZE = 24
+
+/**
+ * How many effects run rather than being declared.
+ *
+ * Counted from the index at module load instead of inside the render, the
+ * same as every other chip's count is derived — but unlike the category
+ * counts this one cannot be read off `catalog-stats`, because the shader
+ * tier is not a category.
+ */
+const SHADER_TOTAL = EFFECTS.filter((e) => isShaderRenderer(e.renderer)).length
 
 /**
  * How many category chips stay visible before the row collapses behind a
@@ -43,7 +54,8 @@ const VISIBLE_CATEGORY_CHIPS = 8
  */
 function parseFilter(value: string | null): Filter | null {
   if (!value) return null
-  if (value === 'All' || value === 'Featured' || value === 'Favorites') return value
+  if (value === 'All' || value === 'Featured' || value === 'Favorites' || value === 'Shaders')
+    return value
   if ((CATEGORIES as string[]).includes(value)) return value as EffectCategory
   return null
 }
@@ -242,11 +254,21 @@ export default function Home() {
         filter === 'All' ||
         filter === 'Favorites' ||
         filter === 'Featured' ||
+        filter === 'Shaders' ||
         e.category === filter
       const matchesFavorites =
         filter !== 'Favorites' || favorites.has(e.id)
       const matchesFeatured =
         filter !== 'Featured' || e.featured === true
+      /*
+       * Cuts across the categories rather than being one of them: the
+       * shader tier spans Backgrounds, Patterns, Glow, Text and 3D, and
+       * filing it under a thirty-third category would have meant either
+       * mis-filing an aurora as "not a background" or hiding the tier
+       * inside five different chips.
+       */
+      const matchesShaders =
+        filter !== 'Shaders' || isShaderRenderer(e.renderer)
       const matchesQuery =
         !q ||
         e.name.toLowerCase().includes(q) ||
@@ -254,7 +276,13 @@ export default function Home() {
         e.id.toLowerCase().includes(q) ||
         e.category.toLowerCase().includes(q) ||
         (e.tags ?? []).some((t) => t.toLowerCase().includes(q))
-      return matchesCategory && matchesFavorites && matchesFeatured && matchesQuery
+      return (
+        matchesCategory &&
+        matchesFavorites &&
+        matchesFeatured &&
+        matchesShaders &&
+        matchesQuery
+      )
     })
 
     // Apply sort. 'default' preserves the original EFFECTS order (which is
@@ -742,6 +770,13 @@ export default function Home() {
             active={filter === 'Favorites'}
             onClick={() => setFilter('Favorites')}
             icon={<Heart className="h-3 w-3" />}
+          />
+          <CategoryChip
+            label="Shaders"
+            count={SHADER_TOTAL}
+            active={filter === 'Shaders'}
+            onClick={() => setFilter('Shaders')}
+            icon={<Waves className="h-3 w-3" />}
           />
           {visibleCategories.map((c) => {
             const count = EFFECTS.filter((e) => e.category === c).length

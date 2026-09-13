@@ -88,7 +88,31 @@ import {
 } from '../packages/cli/src/review/rtl.mjs'
 
 const ROOT = process.cwd()
-const SOURCES = join(ROOT, 'src/lib/blocks/sources')
+
+/**
+ * Every catalog tier written as hand-authored .tsx, in ladder order.
+ *
+ * This was one directory until the primitive tier landed, and a check that
+ * gates the build on right-to-left correctness cannot cover only the tier
+ * it happened to be written for — a segmented control whose arrow keys walk
+ * backwards in Arabic is a worse bug than a hero with a glow on the wrong
+ * side, and it is exactly the sort that never shows up in a screenshot.
+ */
+const SOURCE_DIRS = [
+  { label: 'src/lib/primitives/sources', dir: join(ROOT, 'src/lib/primitives/sources') },
+  { label: 'src/lib/blocks/sources', dir: join(ROOT, 'src/lib/blocks/sources') },
+]
+
+interface SourceFile {
+  /** File name with extension. */
+  name: string
+  /** The artifact id — the file name without `.tsx`. */
+  id: string
+  /** Absolute path. */
+  path: string
+  /** Repo-relative directory, for the report. */
+  label: string
+}
 
 /*
   PART ONE used to carry the physical→logical table, a variant splitter, a
@@ -112,14 +136,17 @@ interface Finding {
   to: string
 }
 
-function processFile(name: string, fix: boolean): Finding[] {
-  const path = join(SOURCES, name)
-  const source = readFileSync(path, 'utf8')
+function processFile(file: SourceFile, fix: boolean): Finding[] {
+  const source = readFileSync(file.path, 'utf8')
   const { source: next, rewrites } = fixSpacing(source)
 
-  if (fix && next !== source) writeFileSync(path, next, 'utf8')
+  if (fix && next !== source) writeFileSync(file.path, next, 'utf8')
 
-  return rewrites.map((rewrite) => ({ file: name, from: rewrite.from, to: rewrite.to }))
+  return rewrites.map((rewrite) => ({
+    file: file.name,
+    from: rewrite.from,
+    to: rewrite.to,
+  }))
 }
 /* ══ PART TWO: DIRECTIONAL ICONS ═════════════════════════════════════════
  *
@@ -193,9 +220,9 @@ function auditDirectionalIcons(): IconProblem[] {
   const problems: IconProblem[] = []
   const seen = new Map<string, Set<string>>()
 
-  for (const name of files) {
-    const block = name.replace(/\.tsx$/, '')
-    const source = readFileSync(join(SOURCES, name), 'utf8')
+  for (const file of files) {
+    const block = file.id
+    const source = readFileSync(file.path, 'utf8')
     const code = maskComments(source)
 
     const imports = /^import\s+\{([^}]*)\}\s+from\s+'lucide-react'/ms.exec(code)
@@ -318,9 +345,26 @@ const PHYSICAL: Record<string, Record<string, string>> = {
     'group-hover:translate-x-0.5':
       'the up-and-out lean on an ArrowUpRight, which ICONS rules "keep". The glyph does not turn round, so its lean does not either.',
   },
+  'video-player': {
+    'translate-x-0.5':
+      'optical centring for the play triangle, whose visual mass sits left of its bounding box. It pairs with a <Play> that ICONS rules "keep" — transport controls run along the media timeline, not the text — so the nudge must not turn round either, or the glyph ends up off-centre in exactly one direction.',
+  },
   'selection-ai-toolbar': {
     '-translate-x-1/2':
       'centres the toolbar on an inline `left` measured from getBoundingClientRect(). Both halves are physical pixels, so the pair is right in either direction.',
+  },
+  /*
+    The one case where the thing being drawn is not layout at all.
+
+    A phone-shaped bezel is a picture of an object, and an object does not
+    reorganise itself around the reader's script: a handset's volume rocker
+    is on its left edge and its power button on its right in Cairo exactly
+    as in California. Mirroring these would draw a device that does not
+    exist, and it would do it in the one locale least able to tell us.
+  */
+  'phone-frame': {
+    '-left-[3px]': 'the volume rocker on the handset\'s physical left edge.',
+    '-right-[3px]': 'the power button on the handset\'s physical right edge.',
   },
 }
 
@@ -355,9 +399,9 @@ function auditPositions(): IconProblem[] {
   let centred = 0
   let kept = 0
 
-  for (const name of files) {
-    const block = name.replace(/\.tsx$/, '')
-    const code = maskComments(readFileSync(join(SOURCES, name), 'utf8'))
+  for (const file of files) {
+    const block = file.id
+    const code = maskComments(readFileSync(file.path, 'utf8'))
     const ruled = PHYSICAL[block] ?? {}
 
     for (const literal of stringLiterals(code)) {
@@ -430,13 +474,20 @@ function auditPositions(): IconProblem[] {
 /* ══ DRIVER ══════════════════════════════════════════════════════════════ */
 
 const fix = process.argv.includes('--fix')
-const files = readdirSync(SOURCES).filter((name) => name.endsWith('.tsx'))
+const files: SourceFile[] = SOURCE_DIRS.flatMap(({ dir, label }) =>
+  readdirSync(dir)
+    .filter((name) => name.endsWith('.tsx'))
+    .map((name) => ({ name, id: name.replace(/\.tsx$/, ''), path: join(dir, name), label })),
+)
+
+/** Where a given artifact id's source lives, for the report lines. */
+const PATH_OF = new Map(files.map((f) => [f.id, `${f.label}/${f.name}`]))
 
 const all: Finding[] = []
-for (const name of files) all.push(...processFile(name, fix))
+for (const file of files) all.push(...processFile(file, fix))
 
 if (all.length === 0) {
-  console.log(`check-rtl: ${files.length} blocks, no physical-direction utilities.`)
+  console.log(`check-rtl: ${files.length} sources, no physical-direction utilities.`)
 } else {
   const byUtility = new Map<string, number>()
   for (const finding of all) {
@@ -465,7 +516,9 @@ const report = (label: string, found: IconProblem[], show: (token: string) => st
   if (found.length === 0) return
   console.error(`\ncheck-rtl: ${found.length} ${label} ${found.length === 1 ? 'problem' : 'problems'}.\n`)
   for (const problem of found) {
-    console.error(`  src/lib/blocks/sources/${problem.block}.tsx:${problem.line}  ${show(problem.icon)}`)
+    console.error(
+      `  ${PATH_OF.get(problem.block) ?? `${problem.block}.tsx`}:${problem.line}  ${show(problem.icon)}`,
+    )
     console.error(`    ${problem.message}`)
   }
   process.exitCode = 1

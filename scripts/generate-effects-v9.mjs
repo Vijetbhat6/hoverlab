@@ -3009,7 +3009,7 @@ export function generateV9(ctx) {
 }`
     add(mk({
       name: `${g.name} Countdown Ring`,
-      category: 'Progress & Meters',
+      category: 'Dates & Time',
       description: `Timer that empties rather than fills, the sweep animated through a registered angle property so the arc interpolates smoothly instead of snapping between conic stops.`,
       html, css,
       tags: ['progress', 'countdown', 'timer', 'ring', 'conic', g.name.toLowerCase()],
@@ -3839,7 +3839,7 @@ export function generateV9(ctx) {
 }`
     add(mk({
       name: `${t.name} Day Agenda`,
-      category: 'Timelines & Steps',
+      category: 'Dates & Time',
       description: `Hour rail with events sitting in the slots they occupy and an empty hour left visibly empty, the current-time rule crossing the whole column with a dot on the gutter.`,
       html, css,
       tags: ['timeline', 'agenda', 'calendar', 'schedule', 'day view', t.name.toLowerCase()],
@@ -4158,7 +4158,7 @@ export function generateV9(ctx) {
 }`
     add(mk({
       name: `${t.name} Calendar Popover`,
-      category: 'Tooltips & Popovers',
+      category: 'Dates & Time',
       description: `Date field opening a month grid anchored beneath it, leading days from the previous month dimmed rather than blank so the week rows stay aligned to their columns.`,
       html, css,
       tags: ['popover', 'calendar', 'date picker', 'month', 'grid', t.name.toLowerCase()],

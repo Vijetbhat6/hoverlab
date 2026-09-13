@@ -14,6 +14,7 @@
  *   effects    walk every commit that touched the generated catalog (and
  *              the hand-written one), parse the ids out of each revision,
  *              and record the first commit an id appears in.
+ *   primitives the same, under primitives/sources.
  *   blocks     one source file per block, so the commit that ADDED
  *              src/lib/blocks/sources/<id>.tsx is the block's birthday.
  *   pages      the same, under pages/sources.
@@ -41,6 +42,7 @@ import { EFFECTS } from '../src/lib/effects.ts'
 // modules pull in the generated source bundles, which are marked
 // `server-only` and refuse to load outside a Server Component. Ids are all
 // this script needs, and the records carry them.
+import { PRIMITIVE_CATALOG } from '../src/lib/primitives/catalog.ts'
 import { BLOCK_CATALOG } from '../src/lib/blocks/catalog.ts'
 import { PAGE_CATALOG } from '../src/lib/pages/catalog.ts'
 import { TEMPLATE_CATALOG } from '../src/lib/templates/catalog.ts'
@@ -54,6 +56,7 @@ interface RecencyFile {
   /** When this ledger was last rebuilt. */
   generatedAt: string
   effects: Ledger
+  primitives: Ledger
   blocks: Ledger
   pages: Ledger
   templates: Ledger
@@ -79,6 +82,7 @@ interface RecencyFile {
    */
   updated: {
     effects: Ledger
+    primitives: Ledger
     blocks: Ledger
     pages: Ledger
     templates: Ledger
@@ -213,13 +217,18 @@ const previous: RecencyFile = existsSync(OUT)
   : {
       generatedAt: TODAY,
       effects: {},
+      primitives: {},
       blocks: {},
       pages: {},
       templates: {},
-      updated: { effects: {}, blocks: {}, pages: {}, templates: {} },
+      updated: { effects: {}, primitives: {}, blocks: {}, pages: {}, templates: {} },
     }
 
 const effects: Ledger = { ...previous.effects }
+/* `?? {}` so a ledger written before the primitive tier existed still loads
+   instead of throwing on a missing key — the file is committed, and an old
+   one is exactly what a checkout from before this tier has. */
+const primitives: Ledger = { ...(previous.primitives ?? {}) }
 const blocks: Ledger = { ...previous.blocks }
 const pages: Ledger = { ...previous.pages }
 const templates: Ledger = { ...previous.templates }
@@ -235,6 +244,7 @@ const templates: Ledger = { ...previous.templates }
  * wrong about.
  */
 const updatedEffects: Ledger = {}
+const updatedPrimitives: Ledger = {}
 const updatedBlocks: Ledger = {}
 const updatedPages: Ledger = {}
 const updatedTemplates: Ledger = {}
@@ -252,8 +262,21 @@ walkIds('src/lib/effects-handcrafted.ts', idsFromTs, effects)
 walkRecordChanges('src/lib/generated-effects.json', updatedEffects)
 
 /* ------------------------------------------------------------------ *
- *  Blocks, pages, templates — one file (or directory) per artifact.
+ *  Primitives, blocks, pages, templates — one file (or directory) each.
  * ------------------------------------------------------------------ */
+
+for (const primitive of PRIMITIVE_CATALOG) {
+  if (primitives[primitive.id]) continue
+  const date = addedDate(`src/lib/primitives/sources/${primitive.id}.tsx`)
+  primitives[primitive.id] = date ?? TODAY
+}
+
+for (const primitive of PRIMITIVE_CATALOG) {
+  const touched = updatedDate(`src/lib/primitives/sources/${primitive.id}.tsx`)
+  if (touched && touched !== primitives[primitive.id]) {
+    updatedPrimitives[primitive.id] = touched
+  }
+}
 
 for (const block of BLOCK_CATALOG) {
   if (blocks[block.id]) continue
@@ -312,11 +335,13 @@ for (const effect of EFFECTS) {
 const out: RecencyFile = {
   generatedAt: TODAY,
   effects: prune(effects, EFFECTS.map((e) => e.id)),
+  primitives: prune(primitives, PRIMITIVE_CATALOG.map((p) => p.id)),
   blocks: prune(blocks, BLOCK_CATALOG.map((b) => b.id)),
   pages: prune(pages, PAGE_CATALOG.map((p) => p.id)),
   templates: prune(templates, TEMPLATE_CATALOG.map((t) => t.id)),
   updated: {
     effects: prune(updatedEffects, EFFECTS.map((e) => e.id)),
+    primitives: prune(updatedPrimitives, PRIMITIVE_CATALOG.map((p) => p.id)),
     blocks: prune(updatedBlocks, BLOCK_CATALOG.map((b) => b.id)),
     pages: prune(updatedPages, PAGE_CATALOG.map((p) => p.id)),
     templates: prune(updatedTemplates, TEMPLATE_CATALOG.map((t) => t.id)),
@@ -328,6 +353,7 @@ writeFileSync(OUT, `${JSON.stringify(out, null, 2)}\n`, 'utf8')
 const dates = new Set(Object.values(out.effects))
 console.log(
   `recency ledger → ${Object.keys(out.effects).length} effects, ` +
+    `${Object.keys(out.primitives).length} primitives, ` +
     `${Object.keys(out.blocks).length} blocks, ${Object.keys(out.pages).length} pages, ` +
     `${Object.keys(out.templates).length} templates`,
 )

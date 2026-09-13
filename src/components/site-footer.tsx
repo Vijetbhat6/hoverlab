@@ -3,7 +3,7 @@
  *
  * It replaces a single line of text — a wordmark and an `npx hoverlab add`
  * string — that ended a site with forty-plus routes, three docs pages,
- * twenty tools, thirty-two categories and eleven guided paths. Nothing
+ * twenty tools, thirty-odd categories and eleven guided paths. Nothing
  * below the fold linked anywhere. For a catalog that is two problems at
  * once: a visitor who scrolled to the bottom looking for the thing they
  * wanted found no way to it, and the internal link equity that makes a
@@ -23,6 +23,7 @@ import { Github, MessageCircle, Twitter, Wand2 } from 'lucide-react'
 import { CATEGORIES } from '@/lib/effect-types'
 import { DESIGNER_TOOLS } from '@/lib/designer-tools'
 import { TOTAL_COUNT } from '@/lib/catalog-stats'
+import { PRIMITIVE_COUNT } from '@/lib/primitives/primitive-index'
 import { BLOCK_COUNT } from '@/lib/blocks/block-index'
 import { PAGE_COUNT } from '@/lib/pages/page-index'
 import { TEMPLATE_COUNT } from '@/lib/templates/template-index'
@@ -40,6 +41,7 @@ interface FooterLink {
 const CATALOG_LINKS: FooterLink[] = [
   { label: 'Browse everything', href: '/browse' },
   { label: 'Effects', href: '/library', meta: TOTAL_COUNT.toLocaleString('en-US') },
+  { label: 'Primitives', href: '/primitives', meta: String(PRIMITIVE_COUNT) },
   { label: 'Blocks', href: '/blocks', meta: String(BLOCK_COUNT) },
   { label: 'Pages', href: '/pages', meta: String(PAGE_COUNT) },
   { label: 'Templates', href: '/templates', meta: String(TEMPLATE_COUNT) },

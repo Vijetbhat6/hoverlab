@@ -91,6 +91,22 @@ const DEFAULT_ROWS: ComparisonRow[] = [
   },
 ]
 
+/*
+  A stable id suffix derived from this instance's own heading.
+
+  `useId` is the right answer and is not available here: this is a server
+  component and hooks are not. The heading is what differs when a section is
+  used twice on one page, so hashing it gives each copy its own
+  `aria-labelledby` target without a hook, a prop or a counter — and it
+  stays stable across server and client renders, which a counter would not.
+*/
+function instanceId(...parts: (string | undefined)[]): string {
+  const text = parts.filter(Boolean).join('|')
+  let hash = 0
+  for (let i = 0; i < text.length; i++) hash = (Math.imul(hash, 31) + text.charCodeAt(i)) | 0
+  return (hash >>> 0).toString(36).slice(0, 6)
+}
+
 export function StatsComparison({
   eyebrow = 'Before and after',
   heading = 'Measured against what you are doing now, not against last quarter',
@@ -100,15 +116,17 @@ export function StatsComparison({
   footnote = 'Medians across 412 accounts over twelve months. “Before” figures are the ones those teams reported at the start of their pilot.',
   className = '',
 }: StatsComparisonProps) {
+  const headingId = `stats-comparison-heading-${instanceId(heading, eyebrow)}`
+
   return (
     <section
-      aria-labelledby="stats-comparison-heading"
+      aria-labelledby={headingId}
       className={`mx-auto w-full max-w-5xl px-4 py-16 sm:px-6 lg:px-8 ${className}`}
     >
       <div className="mx-auto max-w-2xl text-center">
         <p className="text-sm font-medium uppercase tracking-wider text-primary">{eyebrow}</p>
         <h2
-          id="stats-comparison-heading"
+          id={headingId}
           className="mt-3 text-balance text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
         >
           {heading}

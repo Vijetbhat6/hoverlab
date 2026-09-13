@@ -172,7 +172,13 @@ export function ReviewList({
           return (
             <li key={review.id} className="py-6">
               <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
-                <div className="flex gap-0.5" aria-label={`${review.rating} out of 5`}>
+                {/* One image, not five icons — see the note in
+                    testimonial-grid. Without the role the label is dropped. */}
+                <div
+                  role="img"
+                  aria-label={`${review.rating} out of 5`}
+                  className="flex gap-0.5"
+                >
                   {Array.from({ length: 5 }, (_, i) => (
                     <Star
                       key={i}

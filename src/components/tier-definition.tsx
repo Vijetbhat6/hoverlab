@@ -1,8 +1,8 @@
 /**
  * TierDefinition — one sentence saying what the rung actually is.
  *
- * "Effect", "block", "page", "template" are this site's vocabulary, not the
- * visitor's. Someone arriving on /blocks from a search for "react pricing
+ * "Effect", "primitive", "block", "page", "template" are this site's
+ * vocabulary, not the visitor's. Someone arriving on /blocks from a search for "react pricing
  * section" has never read the ladder metaphor and has no way to know whether
  * a block is a component, a file, a template or a paid thing — and the hero
  * copy underneath doesn't tell them, because hero copy is written for people
@@ -23,6 +23,8 @@ import { Info } from 'lucide-react'
 export const TIER_DEFINITIONS = {
   effect:
     'An effect is one small piece of CSS that changes how a single element looks or moves — a glowing button, a shimmer, a hover lift.',
+  primitive:
+    'A primitive is one control you drop into a form or a toolbar — a segmented control, an input with an addon, a tag field.',
   block:
     'A block is one finished section of a page — a pricing table, a hero, a footer.',
   page: 'A page is a full screen of blocks in the right order — the whole pricing page, not just the table.',

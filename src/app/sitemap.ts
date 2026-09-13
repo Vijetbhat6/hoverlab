@@ -3,6 +3,12 @@ import { EFFECTS, CATEGORIES } from '@/lib/effects'
 import { categorySlug } from '@/lib/effect-types'
 import { absoluteUrl } from '@/lib/site'
 import { DESIGNER_TOOLS } from '@/lib/designer-tools'
+import { ASSET_FAMILIES } from '@/lib/assets/asset-types'
+import {
+  PRIMITIVE_INDEX,
+  populatedPrimitiveCategories,
+} from '@/lib/primitives/primitive-index'
+import { primitiveCategorySlug } from '@/lib/primitives/primitive-types'
 import { BLOCK_INDEX, populatedBlockCategories } from '@/lib/blocks/block-index'
 import { blockCategorySlug } from '@/lib/blocks/block-types'
 import { PAGE_INDEX } from '@/lib/pages/page-index'
@@ -54,9 +60,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // are filters that canonicalize back to this, not separate documents.
     { url: absoluteUrl('/browse'), changeFrequency: 'daily' as const, priority: 0.9 },
     { url: absoluteUrl('/category'), changeFrequency: 'weekly' as const, priority: 0.9 },
-    // The three tiers above effects. Each is a static, server-rendered hub
+    // The four tiers above effects. Each is a static, server-rendered hub
     // with real links out to its catalog, so a crawler that lands on one
     // can reach every artifact under it.
+    { url: absoluteUrl('/primitives'), changeFrequency: 'weekly' as const, priority: 0.9 },
     { url: absoluteUrl('/blocks'), changeFrequency: 'weekly' as const, priority: 0.9 },
     { url: absoluteUrl('/pages'), changeFrequency: 'weekly' as const, priority: 0.9 },
     { url: absoluteUrl('/templates'), changeFrequency: 'weekly' as const, priority: 0.9 },
@@ -73,6 +80,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // pages existed the site had nothing shaped like an answer to them:
     // every hub was one rung, and a kit is the whole job.
     { url: absoluteUrl('/kits'), changeFrequency: 'weekly' as const, priority: 0.8 },
+    // "shadcn theme", "tailwind theme generator" and "design tokens" are
+    // head terms this site had nothing shaped like an answer to, despite
+    // having carried the tokens for a year. Monthly rather than weekly: the
+    // page changes when a preset is added, which is rare on purpose.
+    { url: absoluteUrl('/themes'), changeFrequency: 'monthly' as const, priority: 0.8 },
     ...KITS.map((kit) => ({
       url: absoluteUrl(`/kits/${kit.slug}`),
       changeFrequency: 'monthly' as const,
@@ -136,6 +148,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // artifacts. Derived from the registry rather than a second list: a
     // hand-kept copy here is how the sitemap once carried a redirecting
     // /tools/fonts and missed new tools.
+    // The free-asset families. The hub and the four family pages only —
+    // there is deliberately no per-asset route (2,194 of them would be
+    // prerendered for content a browser generates in microseconds), so the
+    // selection lives in a query string and the sitemap stops here.
+    { url: absoluteUrl('/assets'), changeFrequency: 'monthly' as const, priority: 0.8 },
+    ...ASSET_FAMILIES.map((family) => ({
+      url: absoluteUrl(`/assets/${family}`),
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    })),
     { url: absoluteUrl('/tools'), changeFrequency: 'monthly' as const, priority: 0.9 },
     ...DESIGNER_TOOLS.map((tool) => ({
       url: absoluteUrl(tool.href),
@@ -163,6 +185,27 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Only populated categories. `BLOCK_CATEGORIES` describes the finished
   // taxonomy and runs ahead of what is built, so listing all of them would
   // hand a crawler empty pages and teach it that this site has thin ones.
+  /*
+   * Primitive category hubs. "react segmented control" and "tailwind input
+   * group" are head terms with no good answer anywhere — every result is a
+   * blog post or a library's docs page — so these are the highest-intent
+   * category pages on the site despite being the newest.
+   */
+  const primitiveCategoryRoutes: MetadataRoute.Sitemap =
+    populatedPrimitiveCategories().map((category) => ({
+      url: absoluteUrl(`/primitives/${primitiveCategorySlug(category)}`),
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    }))
+
+  const primitiveRoutes: MetadataRoute.Sitemap = PRIMITIVE_INDEX.map((primitive) => ({
+    url: absoluteUrl(`/primitive/${primitive.id}`),
+    lastModified: addedAt('primitive', primitive.id) ?? now,
+    changeFrequency: 'monthly',
+    priority: primitive.featured ? 0.8 : 0.7,
+  }))
+
   const blockCategoryRoutes: MetadataRoute.Sitemap = populatedBlockCategories().map(
     (category) => ({
       url: absoluteUrl(`/blocks/${blockCategorySlug(category)}`),
@@ -214,10 +257,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     ...staticRoutes,
     ...categoryRoutes,
+    ...primitiveCategoryRoutes,
     ...blockCategoryRoutes,
     ...templateRoutes,
     ...pageRoutes,
     ...blockRoutes,
+    ...primitiveRoutes,
     ...effectRoutes,
   ]
 }

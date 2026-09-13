@@ -125,6 +125,18 @@ export function FaqSearch({
   contactHref = '#',
   className = '',
 }: FaqSearchProps) {
+  /*
+    Ids come from `useId`, not from a literal.
+
+    A literal is correct until the section appears twice on one page — and
+    then `aria-labelledby` resolves to whichever copy is first in the
+    document, so the second one is announced with the first one's heading.
+    It renders identically and reads wrongly, which is why nothing catches
+    it but an id check.
+  */
+  const headingId = React.useId()
+  const inputId = React.useId()
+
   const [query, setQuery] = React.useState('')
 
   const results = React.useMemo(() => {
@@ -142,13 +154,13 @@ export function FaqSearch({
 
   return (
     <section
-      aria-labelledby="faq-search-heading"
+      aria-labelledby={headingId}
       className={`mx-auto w-full max-w-3xl px-4 py-16 sm:px-6 lg:px-8 ${className}`}
     >
       <div className="text-center">
         <p className="text-sm font-medium uppercase tracking-wider text-primary">{eyebrow}</p>
         <h2
-          id="faq-search-heading"
+          id={headingId}
           className="mt-3 text-balance text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
         >
           {heading}
@@ -156,7 +168,7 @@ export function FaqSearch({
       </div>
 
       <div className="mt-8">
-        <label htmlFor="faq-search-input" className="sr-only">
+        <label htmlFor={inputId} className="sr-only">
           {inputLabel}
         </label>
         <div className="relative">
@@ -165,7 +177,7 @@ export function FaqSearch({
             className="pointer-events-none absolute start-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground"
           />
           <input
-            id="faq-search-input"
+            id={inputId}
             type="search"
             value={query}
             onChange={(event) => setQuery(event.target.value)}

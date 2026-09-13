@@ -1,0 +1,146 @@
+{
+  "button": {
+    "lines": 114,
+    "files": 1
+  },
+  "button-group": {
+    "lines": 104,
+    "files": 1
+  },
+  "social-buttons": {
+    "lines": 150,
+    "files": 1
+  },
+  "field": {
+    "lines": 129,
+    "files": 1
+  },
+  "input-group": {
+    "lines": 120,
+    "files": 1
+  },
+  "verification-code-input": {
+    "lines": 170,
+    "files": 1
+  },
+  "stepper": {
+    "lines": 178,
+    "files": 1
+  },
+  "kbd": {
+    "lines": 149,
+    "files": 1
+  },
+  "combobox": {
+    "lines": 235,
+    "files": 1
+  },
+  "segmented-control": {
+    "lines": 164,
+    "files": 1
+  },
+  "rating": {
+    "lines": 158,
+    "files": 1
+  },
+  "emoji-selector": {
+    "lines": 153,
+    "files": 1
+  },
+  "badge": {
+    "lines": 91,
+    "files": 1
+  },
+  "status-badge": {
+    "lines": 104,
+    "files": 1
+  },
+  "tag-chip": {
+    "lines": 166,
+    "files": 1
+  },
+  "skeleton": {
+    "lines": 127,
+    "files": 1
+  },
+  "progress-steps": {
+    "lines": 145,
+    "files": 1
+  },
+  "tree-view": {
+    "lines": 235,
+    "files": 1
+  },
+  "avatar-group": {
+    "lines": 148,
+    "files": 1
+  },
+  "featured-icon": {
+    "lines": 124,
+    "files": 1
+  },
+  "color-picker": {
+    "lines": 187,
+    "files": 1
+  },
+  "gradient-picker": {
+    "lines": 238,
+    "files": 1
+  },
+  "image-picker": {
+    "lines": 184,
+    "files": 1
+  },
+  "credit-card": {
+    "lines": 279,
+    "files": 1
+  },
+  "qr-code": {
+    "lines": 538,
+    "files": 1
+  },
+  "video-player": {
+    "lines": 227,
+    "files": 1
+  },
+  "calendar": {
+    "lines": 359,
+    "files": 1
+  },
+  "date-picker": {
+    "lines": 629,
+    "files": 2
+  },
+  "time-picker": {
+    "lines": 266,
+    "files": 1
+  },
+  "relative-time": {
+    "lines": 135,
+    "files": 1
+  },
+  "duration-input": {
+    "lines": 241,
+    "files": 1
+  },
+  "content-divider": {
+    "lines": 105,
+    "files": 1
+  },
+  "browser-frame": {
+    "lines": 139,
+    "files": 1
+  },
+  "phone-frame": {
+    "lines": 145,
+    "files": 1
+  },
+  "laptop-frame": {
+    "lines": 68,
+    "files": 1
+  },
+  "device-showcase": {
+    "lines": 291,
+    "files": 3
+  }
+}

@@ -2,7 +2,6 @@ import * as React from 'react'
 import { SlidersHorizontal } from 'lucide-react'
 
 import { parseBlockProps, sortBlockProps } from '@/lib/blocks/props-table'
-import type { Block } from '@/lib/blocks/block-types'
 
 /**
  * "What can I change?" — the block's props, from its own source.
@@ -21,7 +20,21 @@ import type { Block } from '@/lib/blocks/block-types'
  * purpose, and inverting that would trade a real correctness property for
  * a set of sliders.
  */
-export function BlockPropsTable({ block }: { block: Block }) {
+/**
+ * What this table needs, which is less than a block.
+ *
+ * It was typed as `Block`, and the primitive tier is structurally the same
+ * artifact with a different `level` and `category` — so the table could not
+ * be reused on a rung whose props it can read perfectly well. Narrowing the
+ * parameter to the one field it touches is what makes it shared rather than
+ * copied, and it cannot widen by accident: adding a second field here is a
+ * deliberate edit.
+ */
+export interface PropsTableSubject {
+  files: readonly { source: string }[]
+}
+
+export function BlockPropsTable({ block }: { block: PropsTableSubject }) {
   const source = block.files[0]?.source
   if (!source) return null
 
@@ -36,9 +49,12 @@ export function BlockPropsTable({ block }: { block: Block }) {
         Props
       </h2>
       <p className="mb-4 max-w-2xl text-sm text-muted-foreground">
+        {/* "component", not "block": this table serves the primitive tier
+            too now, and a Button page telling you what "the block" does
+            names a rung the reader is not on. */}
         Read out of the component&rsquo;s own type and signature, so this cannot
-        drift from the source below. Every prop has a default — the block renders
-        standalone before you pass it anything.
+        drift from the source below. Every prop has a default — the component
+        renders standalone before you pass it anything.
       </p>
 
       <div className="overflow-x-auto rounded-xl border border-border">

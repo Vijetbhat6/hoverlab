@@ -52,9 +52,12 @@ export default function DocsDnaPage() {
 
       <DocsSection id="use" title="Use it">
         <p>
-          Press <strong>Copy Design DNA</strong> on any block, page or template
-          and paste the result into your AI tool before you ask it for UI. From
-          a terminal, or in a script:
+          Press <strong>Copy for AI</strong> on any effect, primitive, block,
+          page or template and paste the result into your AI tool before you
+          ask it for UI. That prompt carries this system <em>and</em> the
+          component you were looking at — its source, its props and the command
+          that installs it. For the system on its own, from a terminal or in a
+          script:
         </p>
         <Snippet label="terminal">{`npx hoverlab dna                       # the whole system
 npx hoverlab dna saas-starter          # as that template uses it

@@ -35,12 +35,17 @@ import {
   FavoriteArtifactButton,
   BundleArtifactButton,
   CompareArtifactButton,
-  CopyDnaButton,
 } from '@/components/artifact-actions'
 import { ArtifactFacts } from '@/components/artifact-facts'
+import { CategoryProRail } from '@/components/category-pro-rail'
 import { OpenArtifactInSandbox } from '@/components/open-artifact-in-sandbox'
 import { ResponsivePreview } from '@/components/responsive-preview'
 import { CopyFrameForFigma } from '@/components/copy-frame-for-figma'
+import { CopyForAi } from '@/components/copy-for-ai'
+import { parseBlockProps, sortBlockProps } from '@/lib/blocks/props-table'
+import { knobsFor } from '@/lib/blocks/props-knobs'
+import { BlockPlayground } from '@/components/blocks/block-playground'
+import { blockExportName, fixedPreviewProps } from '@/lib/blocks/block-exports'
 import { StickyInstallBar } from '@/components/sticky-install-bar'
 
 /**
@@ -104,6 +109,22 @@ export default async function BlockDetailPage({ params }: PageProps) {
   // Derived from the page catalog's `composedOf`, so it stays correct
   // without this tier knowing anything about pages.
   const usedIn = pagesUsingBlock(block.id)
+
+  /*
+   * The knobs for the Customize panel, parsed here rather than in the
+   * client: the parse runs once per build on a string already in memory,
+   * and what crosses into the browser is a small array of names and
+   * values instead of 200 lines of source.
+   */
+  const knobs = knobsFor(sortBlockProps(parseBlockProps(file?.source ?? '')))
+
+  /*
+   * Props the registry hands this block so it can be previewed in place —
+   * `embedded` on the seven overlays and drawers that would otherwise
+   * portal themselves to the viewport. The panel has to pass them too, or
+   * opening the controls on a cart drawer would cover the page.
+   */
+  const previewProps = fixedPreviewProps(block.id)
 
   const added = addedAt('block', block.id)
   // Undefined unless it genuinely changed after landing — see updatedAt().
@@ -195,10 +216,6 @@ export default async function BlockDetailPage({ params }: PageProps) {
                 level: 'block',
               }}
             />
-            {/* Aimed at whoever is about to build with an agent rather than
-                paste a component: the tokens, motion and rules, as one
-                pasteable document. */}
-            <CopyDnaButton artifactId={block.id} />
             {/* The one action that answers "does it actually work" without
                 asking the reader to paste 200 lines into their own repo
                 first. Builds its payload on click — see the route. */}
@@ -386,12 +403,46 @@ export default async function BlockDetailPage({ params }: PageProps) {
           </section>
         ) : null}
 
+        {/* The knobs, then the table. The panel covers the props a control
+            can honestly drive; the table is the complete answer and stays
+            directly underneath it, which is also the order the two were
+            built in — see `props-knobs.ts` for what the panel refuses. */}
+        <BlockPlayground
+          blockId={block.id}
+          exportName={blockExportName(block.id)}
+          knobs={knobs}
+          fixedProps={previewProps}
+        />
+
         {/* Before the non-React markup, because "what can I change"
             is a question the React reader has and the markup reader
             does not. */}
         <BlockPropsTable block={block} />
 
         <BlockMarkupPanel block={block} />
+
+        {/*
+          After the markup panel, not before it.
+
+          The order down this page is the order of the decisions a reader
+          makes: see it, read it, learn its API, get it in a framework that
+          is not React. Handing the whole thing to an agent is the last of
+          those and the most committing, so it sits where someone who has
+          decided will find it — and the props it carries are the same
+          parse the table above renders, not a second one.
+        */}
+        <CopyForAi
+          subject={{
+            level: 'block',
+            id: block.id,
+            name: block.name,
+            description: block.description,
+            category: block.category,
+            file: file ? { path: file.path, source: file.source } : null,
+            props: sortBlockProps(parseBlockProps(file?.source ?? '')),
+            deps: block.deps,
+          }}
+        />
 
         {/* ---------------------------------------------------------- *
          *  Used in — climb the ladder rather than only descending it
@@ -431,6 +482,16 @@ export default async function BlockDetailPage({ params }: PageProps) {
             </p>
           </section>
         ) : null}
+
+        {/* The merchandising slot every competitor's component page ends
+            with — see the component for why ours does not say "N more in
+            Pro". `related` already excludes this block. */}
+        <CategoryProRail
+          category={block.category}
+          remaining={related.length}
+          categoryHref={`/blocks/${blockCategorySlug(block.category)}`}
+          noun="blocks"
+        />
 
         {/* ---------------------------------------------------------- *
          *  Related

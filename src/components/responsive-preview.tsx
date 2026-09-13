@@ -58,7 +58,7 @@ export function ResponsivePreview({
   name,
   children,
 }: {
-  level: 'block' | 'page'
+  level: 'primitive' | 'block' | 'page'
   id: string
   name: string
   /** The inline preview, rendered at full width. */

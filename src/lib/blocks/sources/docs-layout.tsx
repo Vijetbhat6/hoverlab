@@ -36,6 +36,16 @@ interface DocsNavGroup {
 export interface DocsLayoutProps {
   title?: string
   standfirst?: string
+  /**
+   * Prefix for the article's heading anchors.
+   *
+   * The anchors are readable slugs — `#rotating-keys` — which is right for a
+   * docs page and wrong the moment two of these frames land on one document:
+   * both links then jump to the first copy. One route per document needs no
+   * prefix. A catalog hub, a tabbed help centre, or a legal section
+   * rendering several documents at once does.
+   */
+  anchorPrefix?: string
   className?: string
 }
 
@@ -109,8 +119,14 @@ function SidebarNav() {
 export function DocsLayout({
   title = 'Authentication',
   standfirst = 'Every request to the Acme API is authenticated with a bearer token. This page covers creating a key, storing it safely, and rotating it without downtime.',
+  anchorPrefix = '',
   className = '',
 }: DocsLayoutProps) {
+  // The table of contents is a module constant, so the prefix is applied to
+  // its hrefs here rather than at the literal — otherwise the links keep
+  // pointing at the unprefixed copy.
+  const toc = TOC.map((item) => ({ ...item, href: `#${anchorPrefix}${item.href.slice(1)}` }))
+
   return (
     <div className={`w-full bg-background text-foreground ${className}`}>
       {/* Mobile: the sidebar folds behind a summary line; the article stays. */}
@@ -175,7 +191,7 @@ export function DocsLayout({
           </p>
 
           <h2
-            id="creating-an-api-key"
+            id={`${anchorPrefix}creating-an-api-key`}
             className="mt-10 text-xl font-semibold tracking-tight"
           >
             Creating an API key
@@ -206,7 +222,7 @@ export function DocsLayout({
             </p>
           </div>
 
-          <h2 id="rotating-keys" className="mt-10 text-xl font-semibold tracking-tight">
+          <h2 id={`${anchorPrefix}rotating-keys`} className="mt-10 text-xl font-semibold tracking-tight">
             Rotating keys
           </h2>
           <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
@@ -250,7 +266,7 @@ export function DocsLayout({
             On this page
           </h2>
           <ul className="mt-3 space-y-1 border-s border-border/60">
-            {TOC.map((item) => (
+            {toc.map((item) => (
               <li key={item.href}>
                 <a
                   href={item.href}

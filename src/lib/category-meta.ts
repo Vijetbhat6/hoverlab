@@ -141,6 +141,11 @@ export const CATEGORY_META: Record<EffectCategory, CategoryMeta> = {
       'Bar charts, conic donuts, sparklines, KPI tiles and heat grids drawn entirely in CSS.',
     keywords: ['css chart', 'css bar chart', 'conic gradient pie chart', 'css sparkline'],
   },
+  'Dates & Time': {
+    blurb:
+      'Clocks, month grids, date fields, countdowns and agenda rails — anything whose subject is a date or a time.',
+    keywords: ['css clock', 'css calendar', 'countdown timer css', 'css date picker'],
+  },
   'Timelines & Steps': {
     blurb:
       'Vertical activity timelines, checkout steppers and pipeline progress rails.',

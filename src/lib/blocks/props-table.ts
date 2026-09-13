@@ -66,16 +66,90 @@ function blockBody(source: string, open: number): string | null {
 }
 
 /**
- * The props interface body.
+ * The props declaration body, or bodies.
  *
- * Anchored on `export interface <Something>Props`, which every block in the
- * catalog uses. A block with no such interface takes no props, and returns
- * an empty table rather than an error.
+ * ── THE THREE SHAPES THIS HAS TO READ ───────────────────────────────────
+ *
+ * This was anchored on `export interface <Something>Props {`, which is what
+ * every *block* in the catalog uses. The primitive tier writes props three
+ * other ways, and each one silently produced an empty table:
+ *
+ *     export interface BadgeProps extends React.HTMLAttributes<…> {
+ *     export interface InputGroupProps
+ *       extends Omit<React.InputHTMLAttributes<…>, 'size'> {
+ *     export type ButtonProps = BaseProps & (…)
+ *
+ * The first two are one fix: allow a heritage clause, across a line break,
+ * before the brace. A heritage clause cannot contain a `{`, so `[^{]` skips
+ * it without any attempt to parse generics.
+ *
+ * ── WHY AN ALIAS RESOLVES ONE HOP, AND NOT INTO ITS INLINE OBJECTS ──────
+ *
+ * `ButtonProps` holds no members of its own; they live in the `BaseProps`
+ * alias it intersects. So an alias is followed to the local types it names
+ * and their object bodies are read.
+ *
+ * What is deliberately not read is an inline object literal in the alias —
+ * the `({ size: 'icon'; 'aria-label': string } | { size?: … })` union on
+ * Button. Those branches are single-line and semicolon-separated, and the
+ * line reader below would turn the first into a prop named `size` whose
+ * type is `'icon'; 'aria-label': string`. Worse, a union declares the same
+ * prop twice with different types, so rendering it honestly means two
+ * contradictory rows.
+ *
+ * The cost is that Button's `size` is missing from its table. That is this
+ * file's documented failure mode — a missing row, never a wrong one — and
+ * it is the right side to err on.
  */
-function propsInterface(source: string): string | null {
-  const match = /export interface \w*Props\s*\{/.exec(source)
-  if (!match) return null
-  return blockBody(source, match.index + match[0].length - 1)
+function propsInterface(source: string): string[] {
+  const bodies: string[] = []
+
+  const declared = /export interface \w*Props(?:\s+extends\s+[^{]+)?\s*\{/.exec(source)
+  if (declared) {
+    const body = blockBody(source, declared.index + declared[0].length - 1)
+    if (body) bodies.push(body)
+    return bodies
+  }
+
+  /*
+    The alias runs to the next blank line or top-level declaration — or to
+    the end of the file, which is the `$` and is not decoration: a source
+    whose last line is the alias matched none of the other terminators and
+    came back with no props at all.
+  */
+  const alias = /export type (\w*Props)\s*=([\s\S]*?)(?:\n\n|\nexport |\nfunction |$)/.exec(source)
+  if (!alias) return bodies
+
+  /*
+    Every locally declared type the alias names, in the order it names them.
+
+    Restricted to identifiers that actually have a `type X = … {` of their
+    own in this file, so `Omit`, `Exclude`, `React` and the like are skipped
+    by simply never matching.
+  */
+  const seen = new Set<string>()
+  for (const [, name] of alias[2].matchAll(/\b([A-Z]\w*)\b/g)) {
+    if (seen.has(name) || name === alias[1]) continue
+    seen.add(name)
+    /*
+      `[^{\n]` and not `[^{]`: the brace must open on the declaration's own
+      line.
+
+      Unbounded, this walks past a type that has no object body at all and
+      binds to the next `{` anywhere below it. On Button that meant
+      `type Size = 'sm' | 'md' | …` matching forward into the
+      `const VARIANTS = {` style map, and the table sprouted rows called
+      `primary`, `secondary`, `outline` and `ghost` — CSS class names
+      presented as props. Wrong rows, which is the one thing this file
+      promises never to produce.
+    */
+    const local = new RegExp(String.raw`(?:export )?type ${name}\s*=[^{\n]*\{`).exec(source)
+    if (!local) continue
+    const body = blockBody(source, local.index + local[0].length - 1)
+    if (body) bodies.push(body)
+  }
+
+  return bodies
 }
 
 /**
@@ -154,16 +228,19 @@ function flattenDoc(lines: string[]): string | null {
 }
 
 export function parseBlockProps(source: string): BlockProp[] {
-  const body = propsInterface(source)
-  if (!body) return []
+  const bodies = propsInterface(source)
+  if (bodies.length === 0) return []
 
   const defaults = defaultsFrom(source)
   const props: BlockProp[] = []
+  // An alias can name two locals that both declare the same prop.
+  // First declaration wins, so no prop can appear in the table twice.
+  const claimed = new Set<string>()
 
   let pendingDoc: string[] = []
   let inComment = false
 
-  for (const rawLine of body.split('\n')) {
+  for (const rawLine of bodies.join('\n').split('\n')) {
     const line = rawLine.trim()
     if (!line) continue
 
@@ -190,6 +267,11 @@ export function parseBlockProps(source: string): BlockProp[] {
     }
 
     const [, name, optional, type] = entry
+    if (claimed.has(name)) {
+      pendingDoc = []
+      continue
+    }
+    claimed.add(name)
 
     props.push({
       name,

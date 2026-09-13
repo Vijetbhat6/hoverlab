@@ -140,6 +140,42 @@ export async function topUsage(limit = 12): Promise<UsageCount[]> {
     .filter((entry) => entry.recent > 0)
 }
 
+/**
+ * One page's worth of counters, as a map, for rendering numbers on cards.
+ *
+ * The grids are statically prerendered and the counters are not, so a card
+ * cannot carry its number in the HTML — it has to arrive afterwards. Doing
+ * that per card would mean one request per tile and a Firestore read per
+ * request; this is the whole visible ranking in a single read, cached, so a
+ * grid of 250 cards costs exactly what a grid of one does.
+ *
+ * Ordered by `recent7` and capped, which means the map is deliberately
+ * PARTIAL: an artifact nobody has used this week is absent rather than
+ * present with a zero. Callers render nothing for a missing id — see
+ * `UsageCount` — because "0 copies" on a page nobody has visited yet reads
+ * as a verdict on the artifact rather than on the counter's age.
+ */
+export async function usageSnapshot(limit = 500): Promise<Record<string, UsageCount>> {
+  const snap = await adminDb()
+    .collection('usage')
+    .orderBy('recent7', 'desc')
+    .limit(Math.min(Math.max(limit, 1), 1000))
+    .get()
+
+  const out: Record<string, UsageCount> = {}
+  for (const doc of snap.docs) {
+    const data = doc.data()
+    const recent = typeof data.recent7 === 'number' ? data.recent7 : 0
+    if (recent <= 0) continue
+    out[doc.id] = {
+      id: doc.id,
+      recent,
+      total: typeof data.total === 'number' ? data.total : 0,
+    }
+  }
+  return out
+}
+
 /** Usage for one artifact, or null when it has never been used. */
 export async function usageFor(id: string): Promise<UsageCount | null> {
   const snap = await adminDb().collection('usage').doc(id).get()

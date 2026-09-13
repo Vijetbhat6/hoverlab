@@ -823,7 +823,7 @@ ${lines
 }`
     add(mk({
       name: 'Hourglass Timer Meter',
-      category: 'Progress & Meters',
+      category: 'Dates & Time',
       description: 'Remaining time read as sand rather than a bar — the level in the top cone drops while the heap in the bottom one builds, with a dashed grain stream falling through the waist and the whole glass turning over on hover.',
       html, css,
       tags: ['hourglass', 'timer', 'sand', 'countdown', 'meter'],

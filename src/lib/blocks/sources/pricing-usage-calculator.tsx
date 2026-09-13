@@ -116,6 +116,18 @@ export function PricingUsageCalculator({
   ctaHref = '/signup',
   className = '',
 }: PricingUsageCalculatorProps) {
+  /*
+    Ids come from `useId`, not from a literal.
+
+    A literal is correct until the section appears twice on one page — and
+    then `aria-labelledby` resolves to whichever copy is first in the
+    document, so the second one is announced with the first one's heading.
+    It renders identically and reads wrongly, which is why nothing catches
+    it but an id check.
+  */
+  const volumeId = React.useId()
+  const totalId = React.useId()
+
   // The slider's value is the index. Two steps of the same width can be an
   // order of magnitude apart in units, which is the point.
   const [index, setIndex] = React.useState(() => Math.min(2, scale.length - 1))
@@ -140,7 +152,7 @@ export function PricingUsageCalculator({
 
       <div className="rounded-3xl border border-border/60 bg-card/60 p-6 sm:p-8">
         <label
-          htmlFor="usage-volume"
+          htmlFor={volumeId}
           className="flex flex-wrap items-baseline justify-between gap-2"
         >
           <span className="text-sm font-medium text-muted-foreground">
@@ -155,14 +167,14 @@ export function PricingUsageCalculator({
         </label>
 
         <input
-          id="usage-volume"
+          id={volumeId}
           type="range"
           min={0}
           max={scale.length - 1}
           step={1}
           value={index}
           onChange={(e) => setIndex(Number(e.target.value))}
-          aria-describedby="usage-total"
+          aria-describedby={totalId}
           // The thumb and track come from the platform; `accent-color` is
           // what tints them without replacing the control.
           className="mt-4 w-full accent-primary"
@@ -190,7 +202,7 @@ export function PricingUsageCalculator({
         </dl>
 
         <div
-          id="usage-total"
+          id={totalId}
           className="mt-6 flex items-baseline justify-between gap-4 border-t border-border/60 pt-6"
         >
           <span className="font-semibold">Estimated monthly total</span>

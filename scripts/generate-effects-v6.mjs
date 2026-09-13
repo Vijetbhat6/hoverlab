@@ -2543,7 +2543,7 @@ export function generateV6(ctx) {
 .${c} .l3 { background: ${t.c}; }`
     add(mk({
       name: `${t.name} Heat Calendar`,
-      category: 'Charts & Data',
+      category: 'Dates & Time',
       description: `Contribution grid filled column-first with \`grid-auto-flow\`, so weeks run down and the whole thing stays one flat list of cells.`,
       html, css,
       tags: ['chart', 'heatmap', 'calendar', 'contributions', 'grid', t.name.toLowerCase()],

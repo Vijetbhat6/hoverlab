@@ -1,7 +1,7 @@
 'use client'
 
 /**
- * Noise Texture Generator.
+ * Noise & Texture Lab.
  *
  * Grain overlays usually arrive as a 50KB PNG exported from Photoshop and
  * copied between projects forever. The browser already ships the generator:
@@ -14,6 +14,16 @@
  * film grain once it is blended over a real surface, and `overlay` on a
  * gradient looks nothing like `multiply` on a white card. So the preview
  * layers the noise over both, with the blend mode as a first-class control.
+ *
+ * The second mode is Texture Lab, which inverts the relationship: instead
+ * of generating a texture from nothing, it takes an image of yours and
+ * reduces it to one — dithered, halftoned or as ASCII. Same page because
+ * it is the same job ("I need a texture") approached from the other end,
+ * and because the grain mode is where someone arrives from a search and
+ * the image mode is what they did not know they could also have.
+ *
+ * The image is decoded and processed in the tab. Nothing is uploaded; see
+ * `components/designer-tools/texture-lab.tsx`.
  */
 
 import * as React from 'react'
@@ -37,6 +47,14 @@ import { ToolPresetsBar } from '@/components/designer-tools/tool-presets-bar'
 import { UseInCatalog } from '@/components/designer-tools/use-in-catalog'
 import { ToolWorkbench } from '@/components/designer-tools/tool-workbench'
 import { useToolState } from '@/hooks/use-tool-state'
+import {
+  DEFAULT_TEXTURE,
+  TextureLab,
+  TextureLabControls,
+  sanitizeTexture,
+  type TextureSettings,
+} from '@/components/designer-tools/texture-lab'
+import { cn } from '@/lib/utils'
 
 const TOOL = '/tools/noise'
 
@@ -45,7 +63,20 @@ type BlendMode = 'overlay' | 'soft-light' | 'multiply' | 'screen' | 'normal'
 
 const BLEND_MODES: BlendMode[] = ['overlay', 'soft-light', 'multiply', 'screen', 'normal']
 
+type NoiseMode = 'grain' | 'image'
+
+/** The modes, in switcher order. Also the share-link allow-list. */
+const MODES: NoiseMode[] = ['grain', 'image']
+
+const MODE_LABEL: Record<NoiseMode, string> = {
+  grain: 'Grain generator',
+  image: 'Texture Lab',
+}
+
 interface NoiseState {
+  mode: NoiseMode
+  /** Texture Lab's settings. The image itself is never persisted — see its docblock. */
+  texture: TextureSettings
   type: NoiseType
   /** Slider position 0–100, mapped to baseFrequency logarithmically. */
   freqT: number
@@ -57,6 +88,8 @@ interface NoiseState {
 }
 
 const DEFAULT_STATE: NoiseState = {
+  mode: 'grain',
+  texture: DEFAULT_TEXTURE,
   type: 'fractalNoise',
   freqT: 65,
   octaves: 3,
@@ -96,13 +129,37 @@ function buildNoiseSvg(s: NoiseState): string {
 const toDataUri = (svg: string) =>
   `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg.replace(/\s+/g, ' '))}`
 
+/**
+ * The two things `useToolState`'s shape guard cannot check on a shared link.
+ *
+ * The guard is a type check: it knows `mode` is a string and that `texture`
+ * is an object of the right shape, and it cannot know that `mode` is one of
+ * two, or that `texture.process` names a process this file implements. Both
+ * matter on render — an unrecognised mode matches no branch and draws an
+ * empty page — and neither is a property the guard could ever derive,
+ * because the valid values are data this module owns.
+ */
+function sanitizeShared(shared: NoiseState): NoiseState {
+  return {
+    ...shared,
+    mode: MODES.includes(shared.mode) ? shared.mode : DEFAULT_STATE.mode,
+    texture: sanitizeTexture({ ...DEFAULT_TEXTURE, ...shared.texture }),
+  }
+}
+
 export default function NoiseToolPage() {
   // Working state stays local and ungated; named presets need an account.
   // See `use-tool-state.ts` for why the two layers are separate.
-  const tool = useToolState<NoiseState>(TOOL, DEFAULT_STATE)
+  const tool = useToolState<NoiseState>(TOOL, DEFAULT_STATE, sanitizeShared)
   const { state, setState } = tool
 
   const update = (patch: Partial<NoiseState>) => setState((s) => ({ ...s, ...patch }))
+
+  const updateTexture = React.useCallback(
+    (patch: Partial<TextureSettings>) =>
+      setState((s) => ({ ...s, texture: { ...s.texture, ...patch } })),
+    [setState],
+  )
 
   const svg = buildNoiseSvg(state)
   const uri = toDataUri(svg)
@@ -190,14 +247,44 @@ export default function NoiseToolPage() {
 
   return (
     <ToolLayout
-      name="Noise Texture Generator"
-      tagline="Film grain as an SVG data URI — one CSS rule, zero requests"
+      name="Noise & Texture Lab"
+      tagline="Generate film grain, or turn an image into a dither, halftone or ASCII"
       icon={<Film className="h-5 w-5" />}
     >
       <ToolWorkbench controlsWidth="360px">
         {/* Preview: the same noise composited over the two surfaces it will
-            actually land on. */}
+            actually land on — or, in the other mode, your own image. */}
         <div className="space-y-4">
+          {/*
+            The switcher sits above the stage rather than in the controls
+            column. It changes what the whole page is, not one parameter of
+            it, and on a phone the controls column is below the fold — so
+            a mode switch down there would be a thing most visitors never
+            discover the tool has.
+          */}
+          <div className="flex items-center gap-2">
+            {MODES.map((m) => (
+              <button
+                key={m}
+                type="button"
+                onClick={() => update({ mode: m })}
+                aria-pressed={state.mode === m}
+                className={cn(
+                  'flex-1 rounded-md border px-3 py-2 text-sm font-medium transition-colors',
+                  state.mode === m
+                    ? 'border-primary bg-primary/10 text-primary'
+                    : 'border-border bg-background hover:bg-muted',
+                )}
+              >
+                {MODE_LABEL[m]}
+              </button>
+            ))}
+          </div>
+
+          {state.mode === 'image' ? (
+            <TextureLab settings={state.texture} onChange={updateTexture} />
+          ) : (
+          <>
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="relative min-h-[260px] overflow-hidden rounded-xl border border-border bg-gradient-to-br from-primary via-violet-500 to-emerald-500">
               <div className="absolute inset-0" style={overlayStyle} aria-hidden="true" />
@@ -222,13 +309,19 @@ export default function NoiseToolPage() {
           <CopyCssCard code={svg} title="Raw SVG tile" language="svg" />
 
           <DownloadBar actions={exports} />
+          </>
+          )}
 
-          {/* No `brand`: grain is monochrome by construction. */}
+          {/* No `brand`: both modes are monochrome by construction. */}
           <UseInCatalog tool={TOOL} />
         </div>
 
         {/* Controls */}
         <div className="space-y-5">
+          {state.mode === 'image' ? (
+            <TextureLabControls settings={state.texture} onChange={updateTexture} />
+          ) : (
+          <>
           <div className="space-y-4 rounded-lg border border-border bg-card p-5">
             <Label className="block text-sm font-medium">Noise</Label>
 
@@ -332,10 +425,14 @@ export default function NoiseToolPage() {
               onChange={(v) => update({ tile: v })}
             />
           </div>
+          </>
+          )}
 
           {/* After the controls, never before them — the ask lands once the
-              grain exists rather than in front of it. */}
-          <ToolPresetsBar tool={tool} noun="grain" />
+              texture exists rather than in front of it. Shared by both
+              modes: a preset carries the whole state, so one saved in
+              Texture Lab reopens in Texture Lab. */}
+          <ToolPresetsBar tool={tool} noun={state.mode === 'image' ? 'texture' : 'grain'} />
         </div>
       </ToolWorkbench>
     </ToolLayout>

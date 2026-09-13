@@ -133,12 +133,19 @@ const slug = (value: string) => value.toLowerCase().replace(/[^a-z0-9]+/g, '-')
  * `React.useId()` would be the textbook fix and is not available: this block
  * has no `'use client'` and is not going to get one. It renders links, and
  * a footer that hydrates on every page to render links is a cost with
- * nothing on the other side of it — see the note at the top of the file. The
- * brand is the discriminator that is already to hand and is different in
- * every real case where two of these coexist.
+ * nothing on the other side of it — see the note at the top of the file.
+ *
+ * The brand alone was the discriminator until a catalog hub rendered three
+ * pages that were all called "Acme", which is the failure mode of choosing
+ * exactly one prop: it works until two callers happen to agree. The tagline
+ * joins it because a real second site on the same page has a different one,
+ * and because between them they are the two props nobody leaves at the
+ * default on something they actually ship.
  */
-function headingId(brand: string, heading: string): string {
-  return `footer-mega-${slug(brand)}-${slug(heading)}`
+function headingId(brand: string, tagline: string, heading: string): string {
+  let hash = 0
+  for (let i = 0; i < tagline.length; i++) hash = (Math.imul(hash, 31) + tagline.charCodeAt(i)) | 0
+  return `footer-mega-${slug(brand)}-${(hash >>> 0).toString(36).slice(0, 4)}-${slug(heading)}`
 }
 
 export function FooterMega({
@@ -189,9 +196,9 @@ export function FooterMega({
           {/* -- Link columns ------------------------------------------ */}
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-4 lg:col-span-8">
             {columns.map((column) => (
-              <nav key={column.heading} aria-labelledby={headingId(brand, column.heading)}>
+              <nav key={column.heading} aria-labelledby={headingId(brand, tagline, column.heading)}>
                 <h2
-                  id={headingId(brand, column.heading)}
+                  id={headingId(brand, tagline, column.heading)}
                   className="text-xs font-semibold uppercase tracking-wider text-foreground"
                 >
                   {column.heading}

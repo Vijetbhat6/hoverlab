@@ -33,7 +33,7 @@ export async function GET(
 
   if (!isSandboxLevel(level)) {
     return apiError(
-      `No sandbox for "${level}". Blocks and pages only — templates ship as a download.`,
+      `No sandbox for "${level}". Primitives, blocks and pages only — templates ship as a download.`,
       404,
     )
   }

@@ -16,10 +16,13 @@
  *
  *   live preview, fixed height
  *   ── name ─────────────── tier ──
- *   ── category ────────── copy ──
+ *   ── category · uses ──── copy ──
  *
  * Exactly two metadata lines, in fixed positions, so the eye can track a
- * column rather than re-reading each tile's layout. Everything that left
+ * column rather than re-reading each tile's layout. The use count shares
+ * line two with the category rather than taking a line of its own: it is
+ * absent on most tiles (see `<UsageCount>`), and a row reserved for it
+ * would be blank down most of the grid. Everything that left
  * — the code panes, the customization sliders, compare, insights — is on
  * `/effect/[slug]`, which already shipped all of it. The grid was
  * duplicating the detail page instead of leading to it.
@@ -52,6 +55,7 @@ import { useBundle } from '@/hooks/use-bundle'
 import { useCompare } from '@/hooks/use-compare'
 import { useCopyHistory } from '@/hooks/use-copy-history'
 import { reportUsage } from '@/lib/report-usage'
+import { UsageCount } from '@/components/usage-count'
 import { DEFAULT_CUSTOMIZATION } from '@/lib/customize'
 import { cn } from '@/lib/utils'
 import type { Effect } from '@/lib/effects'
@@ -261,14 +265,30 @@ export function EffectCard({ effect }: EffectCardProps) {
           )}
         </div>
 
-        {/* ---- line two: category · copy ---- */}
+        {/* ---- line two: category · uses · copy ---- */}
         <div className="flex items-center justify-between gap-2">
-          <Link
-            href={`/library?filter=${encodeURIComponent(effect.category)}`}
-            className="min-w-0 truncate font-mono text-[10px] uppercase tracking-wider text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
-          >
-            {effect.category}
-          </Link>
+          {/*
+            Still one line, not a third. The count joins the category
+            rather than claiming a row of its own, because the two fixed
+            lines are what let the eye track a column down the grid — and
+            because on most cards there is no count to show at all, so a
+            reserved third line would be an empty one on the majority of
+            the catalog. `min-w-0` stays on the link, which is the part
+            that may truncate; the number never does.
+          */}
+          <span className="flex min-w-0 items-baseline gap-2">
+            <Link
+              href={`/library?filter=${encodeURIComponent(effect.category)}`}
+              className="min-w-0 truncate font-mono text-[10px] uppercase tracking-wider text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+            >
+              {effect.category}
+            </Link>
+            <UsageCount
+              id={effect.id}
+              withIcon={false}
+              className="shrink-0 text-[10px] font-medium text-muted-foreground/80"
+            />
+          </span>
           <button
             type="button"
             onClick={handleCopy}

@@ -77,6 +77,7 @@ export const metadata: Metadata = {
  */
 const PREVIEW_LIMIT: Record<ArtifactLevel, number> = {
   effect: 6,
+  primitive: 6,
   block: 6,
   page: 3,
   template: 3,

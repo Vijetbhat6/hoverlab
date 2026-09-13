@@ -82,8 +82,16 @@ export function TestimonialGrid({
             key={t.name}
             className="break-inside-avoid rounded-2xl border border-border/60 bg-card/80 p-6 backdrop-blur transition-shadow hover:shadow-lg"
           >
+            {/* The star row is one image, not five. `role="img"` is what
+                makes the label legal on a div and what stops a screen
+                reader walking five aria-hidden icons and announcing
+                nothing. */}
             {t.rating ? (
-              <div className="mb-3 flex gap-0.5" aria-label={`${t.rating} out of 5`}>
+              <div
+                role="img"
+                aria-label={`${t.rating} out of 5`}
+                className="mb-3 flex gap-0.5"
+              >
                 {Array.from({ length: 5 }, (_, i) => (
                   <Star
                     key={i}

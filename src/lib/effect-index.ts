@@ -19,7 +19,9 @@
 
 import GENERATED_INDEX from './generated-effects-index.json'
 import { HANDCRAFTED } from './effects-handcrafted'
+import { SHADER_EFFECTS } from './shaders/shader-effects'
 import type { Effect, EffectCategory } from './effect-types'
+import type { EffectRenderer } from './shaders/shader-types'
 
 export type { Effect, EffectCategory } from './effect-types'
 export { CATEGORIES } from './effect-types'
@@ -37,6 +39,13 @@ export interface EffectMeta {
   featured: boolean
   darkSurface: boolean
   previewClass?: string
+  /**
+   * How the effect paints itself. Absent means `'css'` — the tuple encoding
+   * has no column for it, because 1,047 of 1,062 rows would carry the same
+   * value. The fifteen that do not are appended from `SHADER_EFFECTS`,
+   * which is a literal, so they can simply say so.
+   */
+  renderer?: EffectRenderer
 }
 
 /** Shape emitted by scripts/build-effect-index.mjs. */
@@ -85,12 +94,35 @@ const HANDCRAFTED_META: EffectMeta[] = HANDCRAFTED.map((e) => ({
 }))
 
 /**
+ * The shader tier, as metadata.
+ *
+ * A literal rather than a row in the encoded index: the encoding is built
+ * from `generated-effects.json`, which these are not in, and fifteen
+ * records is not worth a second encoder. They are `featured: false` by
+ * default and opt in individually, the same as any other effect — the tier
+ * being new is not a reason for all of it to be curated.
+ */
+const SHADER_META: EffectMeta[] = SHADER_EFFECTS.map((e) => ({
+  id: e.id,
+  name: e.name,
+  category: e.category,
+  description: e.description,
+  tags: e.tags ?? [],
+  featured: e.featured === true,
+  darkSurface: e.darkSurface === true,
+  renderer: e.renderer,
+  ...(e.previewClass ? { previewClass: e.previewClass } : {}),
+}))
+
+/**
  * The full catalog as metadata, in the same order as `EFFECTS` in
- * `@/lib/effects` (hand-crafted first, then generated). Order matters:
- * the library page's 'default' sort preserves it as a curation choice.
+ * `@/lib/effects` (hand-crafted, then shaders, then generated). Order
+ * matters: the library page's 'default' sort preserves it as a curation
+ * choice.
  */
 export const EFFECT_INDEX: EffectMeta[] = [
   ...HANDCRAFTED_META,
+  ...SHADER_META,
   ...decodeIndex(),
 ]
 

@@ -10,9 +10,24 @@
  * `Artifact` is the base every tier shares:
  *
  *   effect    a single element            html + css            ~4,300
+ *   primitive a single control            files[] + component      →30
  *   block     a full section              files[] + component     →400
  *   page      a composed screen           files[] + composedOf     →80
  *   template  a multi-page starter        files[] + composedOf     →20
+ *
+ * `primitive` is the rung that was missing, and its absence was visible in
+ * the shape of the catalog rather than in any one artifact: we sold single
+ * elements and whole sections with nothing in between, so a visitor who
+ * needed a segmented control or an input group had to take a section apart
+ * to find one. Every vendor in this market sells this layer — Shadcnblocks
+ * lists 2,104 of them, Untitled UI leads with 940 button variants — because
+ * it is what an application is actually assembled from.
+ *
+ * It sits above `effect` because it is a component with props and files
+ * rather than a stylesheet, and below `block` because it is one control
+ * rather than one section of a screen. The test, when it is not obvious:
+ * a block answers "what goes in this part of the page", a primitive
+ * answers "what goes in this part of the form".
  *
  * Search, favorites, bundles, compare and the public API all work against
  * this one type, so a new tier costs a `level` value rather than a parallel
@@ -28,10 +43,11 @@
  * ------------------------------------------------------------------ */
 
 /** Rungs of the ladder, ordered atom → assembly. */
-export type ArtifactLevel = 'effect' | 'block' | 'page' | 'template'
+export type ArtifactLevel = 'effect' | 'primitive' | 'block' | 'page' | 'template'
 
 export const ARTIFACT_LEVELS: readonly ArtifactLevel[] = [
   'effect',
+  'primitive',
   'block',
   'page',
   'template',
@@ -40,6 +56,7 @@ export const ARTIFACT_LEVELS: readonly ArtifactLevel[] = [
 /** Singular / plural labels for headings, chips and breadcrumbs. */
 export const LEVEL_LABEL: Record<ArtifactLevel, { one: string; many: string }> = {
   effect: { one: 'Effect', many: 'Effects' },
+  primitive: { one: 'Primitive', many: 'Primitives' },
   block: { one: 'Block', many: 'Blocks' },
   page: { one: 'Page', many: 'Pages' },
   template: { one: 'Template', many: 'Templates' },

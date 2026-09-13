@@ -1,5 +1,11 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, JetBrains_Mono } from "next/font/google";
+import {
+  Geist,
+  Geist_Mono,
+  JetBrains_Mono,
+  Source_Serif_4,
+  Space_Grotesk,
+} from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as SonnerToaster } from "@/components/ui/sonner";
@@ -9,6 +15,7 @@ import { ReducedMotionProvider } from "@/components/reduced-motion-provider";
 import { ServiceWorkerRegister } from "@/components/service-worker-register";
 import { AnalyticsProvider } from "@/components/analytics-provider";
 import { CookieConsentBanner } from "@/components/cookie-consent-banner";
+import { ShaderRuntime } from "@/components/shader-runtime";
 import { Viewport } from "next";
 
 const geistSans = Geist({
@@ -24,6 +31,29 @@ const geistMono = Geist_Mono({
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
   subsets: ["latin"],
+});
+
+/*
+  The two faces the theme studio offers beyond what the site already loads.
+
+  Kept to two, and both `display: "swap"`, because this is a picker: the
+  cost of a font nobody selects is paid by every visitor, so the list is as
+  short as it can be while still covering the three things a typeface can
+  say — neutral (Geist), editorial (a text serif) and product (a grotesque
+  with a squarer eye). The other two options in `lib/theme-studio.ts` are
+  the mono this site already ships and the system stack, which downloads
+  nothing at all.
+*/
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const sourceSerif = Source_Serif_4({
+  variable: "--font-source-serif",
+  subsets: ["latin"],
+  display: "swap",
 });
 
 // Absolute base for resolving OG / Twitter image URLs, canonical links,
@@ -108,11 +138,28 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  /*
+    The font variables live on <html>, not on <body>.
+
+    They used to be on the body, which was fine while nothing read them
+    from further up. The theme studio does: it writes `--font-sans` as an
+    inline style on <html>, and a custom property is resolved against the
+    element it is declared on — so `--font-sans: var(--font-space-grotesk)`
+    computed on <html> could not see a `--font-space-grotesk` declared on
+    <body>, and silently became invalid. Declaring both on the same
+    element fixes it, and costs nothing: the classes only define variables.
+
+    Written as a JS comment rather than a JSX one: a braced JSX comment
+    here would be a second child of the return expression, which does not
+    parse.
+  */
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} ${jetbrainsMono.variable} antialiased bg-background text-foreground`}
-      >
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${geistSans.variable} ${geistMono.variable} ${jetbrainsMono.variable} ${spaceGrotesk.variable} ${sourceSerif.variable}`}
+    >
+      <body className="antialiased bg-background text-foreground">
         {/*
           defaultTheme is "system", not "dark".
 
@@ -137,6 +184,14 @@ export default function RootLayout({
                 <Toaster />
                 <SonnerToaster position="bottom-right" />
                 <ServiceWorkerRegister />
+                {/* Renders nothing. It finds the `<canvas
+                    data-hoverlab-shader>` elements that effect markup drops
+                    into the page — on any surface, including ones added
+                    later — and starts them. Here rather than per page
+                    because effect markup is injected as a string by nine
+                    different components, and a tenth would otherwise have
+                    to remember. See `shader-runtime.tsx`. */}
+                <ShaderRuntime />
                 {/* Last in the tree, and outside nothing: it is fixed to the
                     viewport, so where it sits in the DOM only decides paint
                     order and the order a screen reader reaches it in. Both

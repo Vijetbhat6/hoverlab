@@ -2038,7 +2038,7 @@ export function generateV10(ctx) {
 .${c}:hover .cal::before { background: ${g.b}; }`
     add(mk({
       name: `${g.name} Date Mask Field`,
-      category: 'Inputs & Hover',
+      category: 'Dates & Time',
       description: `Fixed day/month/year segments that take focus one at a time and auto-advance, so the separators are chrome the user never has to type.`,
       html, css,
       tags: ['input', 'date', 'mask', 'segmented', 'autoadvance', g.name.toLowerCase()],
@@ -2236,7 +2236,7 @@ export function generateV10(ctx) {
 }`
     add(mk({
       name: `${t.name} Hourglass`,
-      category: 'Loaders',
+      category: 'Dates & Time',
       description: `Upper cone draining and lower cone filling on matched clip-path keyframes, the whole body turning over only once the sand has run through.`,
       html, css,
       tags: ['loader', 'hourglass', 'sand', 'timer', 'flip', t.name.toLowerCase()],
