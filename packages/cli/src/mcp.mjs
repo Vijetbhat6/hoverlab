@@ -8,7 +8,7 @@
  *
  * The tool list is in two halves. `search_catalog` / `get_kit` /
  * `match_design` / `install_artifact` / `init_template` / `get_design_dna`
- * cover all four tiers and are what an agent should reach for —
+ * cover all five tiers and are what an agent should reach for —
  * `match_design` being the entry point when the request arrives as a design
  * (a Figma frame read over the Figma MCP server, a screenshot) rather than
  * as words, `get_kit` the entry point when it arrives as a whole product
@@ -43,6 +43,7 @@ import {
   DEFAULT_ORIGIN,
   FRAMEWORKS,
   LEVELS,
+  SEARCH_ORDER,
   getDna,
   getEffect,
   listKits,
@@ -223,7 +224,7 @@ const TOOLS = [
   {
     name: 'search_catalog',
     description:
-      'Search the whole Hoverlab catalog across all four tiers at once: effects (a single element — a button hover, a loader), blocks (a complete section — a pricing table, a checkout form, a sortable data table), pages (a composed screen — a full landing page, a product detail page) and templates (a whole runnable Next.js project). Prefer this over search_effects whenever the user is asking for something larger than one element: "build me a pricing page", "I need a checkout form", "scaffold a storefront". Returns metadata only; follow up with install_artifact or init_template.',
+      'Search the whole Hoverlab catalog across all five tiers at once: effects (a single element — a button hover, a loader), primitives (a single control — a segmented control, a combobox, an input group), blocks (a complete section — a pricing table, a checkout form, a sortable data table), pages (a composed screen — a full landing page, a product detail page) and templates (a whole runnable Next.js project). Prefer this over search_effects whenever the user is asking for something larger than one element: "build me a pricing page", "I need a checkout form", "scaffold a storefront". Returns metadata only; follow up with install_artifact or init_template.',
     inputSchema: {
       type: 'object',
       properties: {
@@ -258,7 +259,7 @@ const TOOLS = [
   {
     name: 'get_kit',
     description:
-      'Get a curated Hoverlab kit — everything needed to build one kind of product, across all four tiers at once. Call with no slug to see what kits exist (SaaS launch, AI product, storefront, internal tools, waitlist, content and docs); call with a slug for the full contents of that kit and a ready-made list of ids. Prefer this over search_catalog when the request is a whole product rather than one piece — "build me a storefront", "I need an admin panel", "set up a waitlist" — because a kit is a curated answer to exactly that, and search_catalog would make you assemble one block at a time and guess what you missed. Follow up with install_artifact for each id, and init_template for any template the kit names.',
+      'Get a curated Hoverlab kit — everything needed to build one kind of product, across all five tiers at once. Call with no slug to see what kits exist (SaaS launch, AI product, storefront, internal tools, waitlist, content and docs); call with a slug for the full contents of that kit and a ready-made list of ids. Prefer this over search_catalog when the request is a whole product rather than one piece — "build me a storefront", "I need an admin panel", "set up a waitlist" — because a kit is a curated answer to exactly that, and search_catalog would make you assemble one block at a time and guess what you missed. Follow up with install_artifact for each id, and init_template for any template the kit names.',
     inputSchema: {
       type: 'object',
       properties: {
@@ -513,8 +514,18 @@ function describe(item) {
   return lines
 }
 
+/**
+ * One line per rung, teaching the model what the tier is for.
+ *
+ * Keyed by every entry in `LEVELS`, and iterated in `SEARCH_ORDER`, which
+ * `api.mjs` owns and `api.test.mjs` holds to being a permutation of
+ * `LEVELS` — a level present in the search and absent from either would be
+ * fetched, paid for, and then dropped from the answer without a trace.
+ * That is exactly what happened to the primitive tier.
+ */
 const LEVEL_BLURB = {
   effect: 'EFFECTS — one element',
+  primitive: 'PRIMITIVES — one control',
   block: 'BLOCKS — one complete section',
   page: 'PAGES — one composed screen',
   template: 'TEMPLATES — a whole runnable project',
@@ -558,9 +569,7 @@ async function runSearchCatalog(args) {
 
   const lines = [`${total} match${total === 1 ? '' : 'es'} for "${args.query}":`, '']
 
-  // Assembly first: if a whole page or template answers the request, the
-  // model should see that before it starts stitching blocks together.
-  for (const level of ['template', 'page', 'block', 'effect']) {
+  for (const level of SEARCH_ORDER) {
     const result = results.find((r) => r.level === level)
     if (!result?.items.length) continue
     lines.push(`${LEVEL_BLURB[level]} (${result.total})`)
@@ -569,7 +578,7 @@ async function runSearchCatalog(args) {
   }
 
   lines.push(
-    'Use install_artifact for an effect, block or page; init_template for a template.',
+    'Use install_artifact for an effect, primitive, block or page; init_template for a template.',
   )
   return lines.join('\n')
 }
@@ -968,13 +977,15 @@ async function handleMessage(message) {
         capabilities: { tools: { listChanged: false } },
         serverInfo: { name: SERVER_NAME, version: SERVER_VERSION },
         instructions:
-          'Search the Hoverlab catalog and install from it. The catalog has four tiers: ' +
+          'Search the Hoverlab catalog and install from it. The catalog has five tiers: ' +
           'effects (one element, plain CSS, emittable as React/Vue/Svelte/styled-components/' +
-          'Tailwind/raw CSS), blocks (one complete section, React + Tailwind), pages (one ' +
+          'Tailwind/raw CSS), primitives (one control — a segmented control, a combobox, an ' +
+          'input group — as a single React + Tailwind file, usually with no dependencies), ' +
+          'blocks (one complete section, React + Tailwind), pages (one ' +
           'composed screen) and templates (a whole runnable Next.js project). ' +
-          'Start with search_catalog, which covers all four — the user usually does not know ' +
+          'Start with search_catalog, which covers all five — the user usually does not know ' +
           'which tier holds what they asked for. Then install_artifact to write an effect, ' +
-          'block or page into the project, or init_template to scaffold a project. ' +
+          'primitive, block or page into the project, or init_template to scaffold a project. ' +
           'Reach for a block before hand-writing a section: they are hundreds of lines of ' +
           'accessible, keyboard-complete React that would take far longer to reproduce. ' +
           'When the user shares a design — a Figma frame via a design MCP tool, a screenshot, ' +

@@ -57,17 +57,65 @@ export const FRAMEWORKS = [
  *
  * Mirrors `ArtifactLevel` on the site. Every level has the same two
  * endpoints — `/api/v1/{level}s` to search and `/api/v1/{level}s/{id}` to
- * fetch — which is what lets one client serve all four.
+ * fetch — which is what lets one client serve all five.
+ *
+ * `primitive` was missing from this list for as long as the tier existed,
+ * and the omission was invisible from inside the CLI: installing one always
+ * worked, because `/api/v1/artifacts/{id}` resolves an id across every tier
+ * server-side and never asks the client which rung it came from. Only
+ * SEARCH was broken — `hoverlab search combobox` could not return the
+ * combobox, `--level primitive` was rejected as unknown, and the MCP tool
+ * built its enum from this array, so an editor agent could not reach the
+ * tier at all. The lesson is in the sentence above: this array is the one
+ * place a new rung has to be added, and nothing fails when it is not.
  */
-export const LEVELS = ['effect', 'block', 'page', 'template']
+export const LEVELS = ['effect', 'primitive', 'block', 'page', 'template']
 
 /** Response key each list endpoint uses for its results array. */
 const LIST_KEY = {
   effect: 'effects',
+  primitive: 'primitives',
   block: 'blocks',
   page: 'pages',
   template: 'templates',
 }
+
+/**
+ * How each rung reads in prose.
+ *
+ * Here rather than in the command layer because three surfaces need it —
+ * the CLI's own output, the MCP server's, and the editor extension's — and
+ * it had drifted into two private copies, one of which printed
+ * "No undefined matched …" the moment a tier was added.
+ */
+export const LEVEL_PLURAL = {
+  effect: 'effects',
+  primitive: 'primitives',
+  block: 'blocks',
+  page: 'pages',
+  template: 'templates',
+}
+
+/**
+ * The order a MIXED result list is presented in — assembly downward.
+ *
+ * Not the same list as `LEVELS`, and that is the point of it existing:
+ * `LEVELS` is what gets searched, this is what gets printed, and the bug
+ * this constant exists to prevent is the two disagreeing. When the
+ * primitive tier was added to `LEVELS`, two separate private copies of
+ * this order kept dropping it — the CLI printed "6 matches across the
+ * catalog" and listed five, and the MCP server fetched a tier it then
+ * discarded. Both were silent.
+ *
+ * A primitive sorts above an effect because a primitive is a working
+ * control and an effect is a style on one; assembly sorts first because
+ * someone who can have the whole page should be told before being shown
+ * nine buttons to build it from.
+ *
+ * `api.test.mjs` asserts this is a permutation of `LEVELS` and that
+ * `LEVEL_PLURAL` covers it, so a sixth tier cannot be added quietly.
+ */
+export const SEARCH_ORDER = ['template', 'page', 'block', 'primitive', 'effect']
 
 /** `"block"` → `"blocks"`, for building a URL path. */
 function pathFor(level) {
@@ -231,11 +279,11 @@ export async function searchLevel(
  * The default for `hoverlab search`, and the reason is the catalog's own
  * shape: someone typing "checkout" may want the button hover, the checkout
  * form block, the checkout page or the storefront template, and which one
- * they meant is not knowable from the query. Four small concurrent requests
- * cost about as much as one, and all four are edge-cached.
+ * they meant is not knowable from the query. Five small concurrent requests
+ * cost about as much as one, and all five are edge-cached.
  *
  * A level that fails is dropped rather than failing the search — one
- * endpoint being down should not stop the other three answering.
+ * endpoint being down should not stop the other four answering.
  */
 export async function searchAll(params = {}, options = {}) {
   const results = await Promise.all(

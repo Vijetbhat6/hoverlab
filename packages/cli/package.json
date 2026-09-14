@@ -48,6 +48,8 @@
   "//": "Intentionally dependency-free. `npx hoverlab add btn-gradient` should be one round-trip to npm and one to the API — every dependency added here is latency a user feels before they get their effect. This is also why `init` reads a template as JSON rather than unzipping the archive the website serves.",
   "dependencies": {},
   "scripts": {
-    "test": "node --test"
+    "test": "node --test",
+    "//prepublishOnly": "Runs on `npm publish` and not on `npm install`, which is the whole point of choosing this hook. This package is the install path for the CLI, the MCP server and the editor extension, and npm publishes are effectively permanent — unpublishing is restricted to 72 hours and leaves the version burned. 128 tests take about a second; a broken `add` reaching npm costs a version number.",
+    "prepublishOnly": "node --test"
   }
 }

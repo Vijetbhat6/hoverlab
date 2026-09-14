@@ -10,13 +10,14 @@ npx hoverlab init storefront ./shop   # a whole project
 
 No install, no config, no dependencies.
 
-## Four tiers
+## Five tiers
 
 The catalog is a ladder, and the CLI reaches every rung. You type an id; which tier it belongs to is worked out for you.
 
 | Tier | What it is | Install with |
 | --- | --- | --- |
 | **effect** | One element — a button hover, a loader, a skeleton. Plain CSS. | `add` |
+| **primitive** | One control — a segmented control, a combobox, an input group, a field wrapper. A single React + Tailwind file, usually with no dependencies. | `add` |
 | **block** | One complete section — a pricing table, a checkout form, a sortable data table. React + Tailwind. | `add` |
 | **page** | One composed screen, assembled from blocks. | `add` |
 | **template** | A whole runnable Next.js project — routing, layout, theme tokens, every page. | `init` |
@@ -40,7 +41,7 @@ $ npx hoverlab add checkout-page
 
 | Command | What it does |
 | --- | --- |
-| `add <id...>` | Write an effect, block or page into your project |
+| `add <id...>` | Write an effect, primitive, block or page into your project |
 | `init [template] [dir]` | Scaffold a template into a new directory. With no template, lists them. |
 | `search <words...>` | Search every tier at once (`--level` to narrow) |
 | `show <id...>` | Print an artifact's code without writing files |
@@ -188,9 +189,9 @@ claude mcp add hoverlab -- npx -y hoverlab mcp
 
 The server exposes nine tools. Five cover the whole catalog:
 
-- **`search_catalog`** — free-text search across all four tiers at once
+- **`search_catalog`** — free-text search across all five tiers at once
 - **`match_design`** — rank blocks and pages against a described design region (a Figma frame, a screenshot, a spec)
-- **`install_artifact`** — fetch an effect, block or page and write it into the project
+- **`install_artifact`** — fetch an effect, primitive, block or page and write it into the project
 - **`init_template`** — scaffold a whole project from a template
 - **`get_design_dna`** — hand the agent the design system before it writes UI of its own
 

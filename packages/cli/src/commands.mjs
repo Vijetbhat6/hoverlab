@@ -6,9 +6,9 @@
  * landed on disk and get back to work. Anything longer than a few lines is
  * behind a flag.
  *
- * Every command works across all four rungs of the catalog — effects,
- * blocks, pages, templates. The user types an id; which tier it belongs to
- * is the API's problem, not theirs.
+ * Every command works across all five rungs of the catalog — effects,
+ * primitives, blocks, pages, templates. The user types an id; which tier it
+ * belongs to is the API's problem, not theirs.
  */
 
 import path from 'node:path'
@@ -18,6 +18,8 @@ import {
   assertUnlocked,
   FRAMEWORKS,
   LEVELS,
+  LEVEL_PLURAL,
+  SEARCH_ORDER,
   SITE_URL,
   getArtifact,
   getDna,
@@ -68,14 +70,6 @@ function out(line = '') {
 function displayPath(absolute, cwd = process.cwd()) {
   const relative = path.relative(cwd, absolute)
   return relative && !relative.startsWith('..') ? relative : absolute
-}
-
-/** Plural labels, for headings. */
-const LEVEL_PLURAL = {
-  effect: 'effects',
-  block: 'blocks',
-  page: 'pages',
-  template: 'templates',
 }
 
 function validateLevel(level) {
@@ -372,8 +366,9 @@ export async function commandSearch(terms, flags) {
   }
 
   // Unified: the whole ladder at once. "checkout" could reasonably mean the
-  // hover effect, the form block, the page or the storefront template, and
-  // only the user knows which — so show all four and let them pick.
+  // hover effect, the input group, the form block, the page or the
+  // storefront template, and only the user knows which — so show all five
+  // and let them pick.
   // The upper tiers are capped tighter: there are 76 of them in total, and
   // a wall of blocks would bury the effects someone was probably after.
   const { results, total, errors } = await searchAll({
@@ -401,9 +396,19 @@ export async function commandSearch(terms, flags) {
   out(`${total} match${total === 1 ? '' : 'es'} across the catalog:`)
   out()
 
-  // Assembly first. Someone searching "pricing" who can have the whole
-  // pricing page should be told that before being shown nine buttons.
-  for (const level of ['template', 'page', 'block', 'effect']) {
+  /*
+   * Assembly first. Someone searching "pricing" who can have the whole
+   * pricing page should be told that before being shown nine buttons; a
+   * primitive before an effect, because a primitive is a working control
+   * and an effect is a style on one.
+   *
+   * This list has to hold every entry in `LEVELS`. When the primitive tier
+   * was added to that array, the search started fetching primitives and
+   * this loop kept silently dropping them — the header said "6 matches
+   * across the catalog" and printed five, which is worse than not
+   * searching the tier at all.
+   */
+  for (const level of SEARCH_ORDER) {
     const result = results.find((r) => r.level === level)
     if (!result?.items.length) continue
 
