@@ -3,6 +3,7 @@ import { test } from 'node:test'
 
 import {
   COMPETITORS,
+  competitorBySlug,
   dateLabel,
   FRESH_COUNT,
   LAST_SWEEP,
@@ -27,6 +28,32 @@ import {
  */
 
 const ISO = /^\d{4}-\d{2}-\d{2}$/
+
+test('every competitor has a unique, URL-safe slug', () => {
+  // Each of these is a published URL under /alternatives. A duplicate makes
+  // one vendor's page unreachable — `competitorBySlug` returns the first
+  // match and the second row simply never renders, with nothing to see.
+  const slugs = COMPETITORS.map((c) => c.slug)
+  for (const c of COMPETITORS) {
+    assert.match(
+      c.slug,
+      /^[a-z0-9]+(-[a-z0-9]+)*$/,
+      `${c.name} has a slug that is not safe in a URL path`,
+    )
+  }
+  assert.equal(
+    new Set(slugs).size,
+    slugs.length,
+    'two competitors share a slug, so one of their pages is unreachable',
+  )
+})
+
+test('competitorBySlug resolves every row and nothing else', () => {
+  for (const c of COMPETITORS) {
+    assert.equal(competitorBySlug(c.slug)?.name, c.name)
+  }
+  assert.equal(competitorBySlug('not-a-vendor'), undefined)
+})
 
 test('every row carries a well-formed date that is not in the future', () => {
   const today = new Date().toISOString().slice(0, 10)

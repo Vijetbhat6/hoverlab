@@ -1127,6 +1127,28 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     deps: ['lucide-react'],
   },
   {
+    id: 'resume-document',
+    name: 'Résumé Document',
+    category: 'Content & Blog',
+    description:
+      'A CV as a document rather than a timeline of cards — one column, dates on the end edge, and a print layer that puts it on paper without a separate PDF to keep in step.',
+    tags: ['resume', 'cv', 'personal', 'print', 'hiring'],
+    previewComponent: 'resume-document',
+    deps: ['lucide-react'],
+    thumbHeight: 'h-[28rem]',
+  },
+  {
+    id: 'video-player-shell',
+    name: 'Video Player Shell',
+    category: 'Content & Blog',
+    description:
+      'The watch screen with no playback in it: a ratio-locked stage, a control bar drawn down to the buffered layer, and an up-next rail. Drop a video element in and wire your own player.',
+    tags: ['video', 'player', 'streaming', 'watch', 'media'],
+    previewComponent: 'video-player-shell',
+    deps: ['lucide-react'],
+    featured: true,
+  },
+  {
     id: 'newsletter-signup',
     name: 'Newsletter Capture Band',
     category: 'CTA Sections',
@@ -1370,6 +1392,18 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     tags: ['calendar', 'month', 'events', 'schedule', 'grid'],
     previewComponent: 'calendar-month',
     deps: ['lucide-react'],
+  },
+  {
+    id: 'event-agenda-grid',
+    name: 'Conference Agenda Grid',
+    category: 'Scheduling & Calendar',
+    description:
+      'Time down the side, tracks across, breaks spanning the width — the one comparison a month view cannot make. Falls to a linear list on a phone, from the same array.',
+    tags: ['agenda', 'conference', 'schedule', 'tracks', 'event'],
+    previewComponent: 'event-agenda-grid',
+    deps: ['lucide-react'],
+    featured: true,
+    thumbHeight: 'h-[28rem]',
   },
   {
     id: 'dashboard-saved-views',
@@ -1885,6 +1919,17 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     tags: ["kpi", "metrics", "dashboard", "summary", "stats"],
     previewComponent: 'kpi-summary-band',
     deps: [],
+  },
+  {
+    id: 'price-ticker-strip',
+    name: 'Market Price Ticker',
+    category: 'Charts & Metrics',
+    description:
+      'The moving price rail that sits under an exchange’s navbar — direction carried by an arrow and a sign as well as by colour, and the duplicate half dropped rather than read twice.',
+    tags: ['ticker', 'prices', 'crypto', 'fintech', 'marquee'],
+    previewComponent: 'price-ticker-strip',
+    deps: ['lucide-react'],
+    thumbHeight: 'h-40',
   },
 
   /* ---------------------- Billing & Usage ------------------------- */
@@ -2780,6 +2825,29 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     tags: ["collection", "editorial", "commerce", "listing", "split"],
     previewComponent: 'collection-story-split',
     deps: [],
+  },
+  {
+    id: 'listing-map-split',
+    name: 'Map and Results Split',
+    category: 'Product Listings',
+    description:
+      'Results on one side, a drawn map on the other, scrolling independently. The map is explicitly decorative and out of the tab order — the list is the content, not its companion.',
+    tags: ['map', 'listings', 'real estate', 'search', 'property'],
+    previewComponent: 'listing-map-split',
+    deps: ['lucide-react'],
+    featured: true,
+    thumbHeight: 'h-[28rem]',
+  },
+  {
+    id: 'menu-course-list',
+    name: 'Menu Course List',
+    category: 'Product Listings',
+    description:
+      'A restaurant menu typeset as a bill of fare rather than a product grid — dotted leaders to the price, dietary marks as abbreviations with a key, and prices as strings so “market price” still fits.',
+    tags: ['menu', 'restaurant', 'food', 'pricing', 'hospitality'],
+    previewComponent: 'menu-course-list',
+    deps: [],
+    thumbHeight: 'h-[28rem]',
   },
   /* ---------------------------- Product Detail -------------------- */
   {

@@ -75,3 +75,14 @@ server.log
 # Firebase service account keys — secrets, never commit
 *service-account*.json
 firebase-service-account.json
+
+# Publish artifacts. Both are BUILD OUTPUT of a package.json that is already
+# committed, so committing them would mean two records of the same version
+# that can disagree — and the .vsix is 128 KB of duplicated source.
+#
+# Anchored to no directory on purpose: `npm pack` writes the tarball wherever
+# it is run and `vsce package` writes the .vsix beside the extension, so a
+# leading-slash rule would miss the case it exists for. (See the note above
+# about bare patterns matching at any depth — here that is the intent.)
+*.vsix
+hoverlab-*.tgz

@@ -20,7 +20,7 @@
     "files": 1
   },
   "hero-terminal": {
-    "lines": 158,
+    "lines": 163,
     "files": 1
   },
   "hero-app-download": {
@@ -72,7 +72,7 @@
     "files": 1
   },
   "navbar-authenticated": {
-    "lines": 307,
+    "lines": 318,
     "files": 1
   },
   "footer-mega": {
@@ -92,7 +92,7 @@
     "files": 1
   },
   "footer-compliance": {
-    "lines": 275,
+    "lines": 278,
     "files": 1
   },
   "contact-form-split": {
@@ -140,19 +140,19 @@
     "files": 1
   },
   "share-access-dialog": {
-    "lines": 301,
+    "lines": 312,
     "files": 1
   },
   "bottom-sheet-mobile": {
-    "lines": 255,
+    "lines": 266,
     "files": 1
   },
   "modal-unsaved-changes": {
-    "lines": 220,
+    "lines": 231,
     "files": 1
   },
   "drawer-record-detail": {
-    "lines": 325,
+    "lines": 336,
     "files": 1
   },
   "onboarding-checklist": {
@@ -164,11 +164,11 @@
     "files": 1
   },
   "team-invite-step": {
-    "lines": 268,
+    "lines": 279,
     "files": 1
   },
   "product-tour-coachmark": {
-    "lines": 249,
+    "lines": 260,
     "files": 1
   },
   "onboarding-role-picker": {
@@ -180,7 +180,7 @@
     "files": 1
   },
   "workspace-setup-form": {
-    "lines": 165,
+    "lines": 176,
     "files": 1
   },
   "data-migration-split": {
@@ -196,19 +196,19 @@
     "files": 1
   },
   "notification-preferences": {
-    "lines": 273,
+    "lines": 284,
     "files": 1
   },
   "push-permission-prompt": {
-    "lines": 211,
+    "lines": 222,
     "files": 1
   },
   "notification-digest-list": {
-    "lines": 141,
+    "lines": 152,
     "files": 1
   },
   "digest-schedule-form": {
-    "lines": 164,
+    "lines": 175,
     "files": 1
   },
   "notification-channel-list": {
@@ -240,7 +240,7 @@
     "files": 1
   },
   "security-posture-band": {
-    "lines": 97,
+    "lines": 116,
     "files": 1
   },
   "logo-cloud": {
@@ -308,19 +308,19 @@
     "files": 1
   },
   "pricing-credits": {
-    "lines": 193,
+    "lines": 213,
     "files": 1
   },
   "pricing-plan-picker": {
-    "lines": 231,
+    "lines": 242,
     "files": 1
   },
   "pricing-value-split": {
-    "lines": 139,
+    "lines": 158,
     "files": 1
   },
   "plan-limits-list": {
-    "lines": 138,
+    "lines": 149,
     "files": 1
   },
   "testimonial-grid": {
@@ -348,11 +348,11 @@
     "files": 1
   },
   "faq-accordion": {
-    "lines": 94,
+    "lines": 121,
     "files": 1
   },
   "faq-two-column": {
-    "lines": 143,
+    "lines": 170,
     "files": 1
   },
   "faq-grid": {
@@ -411,6 +411,14 @@
     "lines": 152,
     "files": 1
   },
+  "resume-document": {
+    "lines": 347,
+    "files": 1
+  },
+  "video-player-shell": {
+    "lines": 327,
+    "files": 1
+  },
   "newsletter-signup": {
     "lines": 134,
     "files": 1
@@ -464,15 +472,15 @@
     "files": 1
   },
   "auth-sso-domain": {
-    "lines": 246,
+    "lines": 257,
     "files": 1
   },
   "auth-magic-link-form": {
-    "lines": 165,
+    "lines": 176,
     "files": 1
   },
   "sso-enterprise-split": {
-    "lines": 135,
+    "lines": 155,
     "files": 1
   },
   "dashboard-shell": {
@@ -501,6 +509,10 @@
   },
   "calendar-month": {
     "lines": 191,
+    "files": 1
+  },
+  "event-agenda-grid": {
+    "lines": 397,
     "files": 1
   },
   "dashboard-saved-views": {
@@ -532,15 +544,15 @@
     "files": 1
   },
   "data-table-column-manager": {
-    "lines": 208,
+    "lines": 219,
     "files": 1
   },
   "data-table-bulk-actions": {
-    "lines": 394,
+    "lines": 405,
     "files": 1
   },
   "data-table-inline-edit": {
-    "lines": 290,
+    "lines": 301,
     "files": 1
   },
   "data-table-grouped-rows": {
@@ -560,7 +572,7 @@
     "files": 1
   },
   "crud-read-page": {
-    "lines": 294,
+    "lines": 314,
     "files": 1
   },
   "crud-read-modal": {
@@ -624,7 +636,7 @@
     "files": 1
   },
   "settings-audit-log": {
-    "lines": 257,
+    "lines": 268,
     "files": 1
   },
   "empty-state-cta": {
@@ -644,7 +656,7 @@
     "files": 1
   },
   "permission-denied-state": {
-    "lines": 155,
+    "lines": 175,
     "files": 1
   },
   "offline-state-banner": {
@@ -676,7 +688,7 @@
     "files": 1
   },
   "donut-breakdown": {
-    "lines": 185,
+    "lines": 205,
     "files": 1
   },
   "activity-heatmap": {
@@ -692,7 +704,11 @@
     "files": 1
   },
   "kpi-summary-band": {
-    "lines": 98,
+    "lines": 118,
+    "files": 1
+  },
+  "price-ticker-strip": {
+    "lines": 180,
     "files": 1
   },
   "billing-plan-summary": {
@@ -704,23 +720,23 @@
     "files": 1
   },
   "payment-method-card": {
-    "lines": 237,
+    "lines": 248,
     "files": 1
   },
   "subscription-cancel-flow": {
-    "lines": 262,
+    "lines": 273,
     "files": 1
   },
   "usage-overage-notice": {
-    "lines": 219,
+    "lines": 230,
     "files": 1
   },
   "billing-seat-manager": {
-    "lines": 243,
+    "lines": 254,
     "files": 1
   },
   "billing-invoice-detail": {
-    "lines": 259,
+    "lines": 262,
     "files": 1
   },
   "billing-credit-balance": {
@@ -772,7 +788,7 @@
     "files": 1
   },
   "keyboard-shortcuts-sheet": {
-    "lines": 236,
+    "lines": 247,
     "files": 1
   },
   "applied-filters-bar": {
@@ -780,7 +796,7 @@
     "files": 1
   },
   "search-autocomplete": {
-    "lines": 347,
+    "lines": 357,
     "files": 1
   },
   "search-facet-panel": {
@@ -788,11 +804,11 @@
     "files": 1
   },
   "search-scope-switcher": {
-    "lines": 236,
+    "lines": 247,
     "files": 1
   },
   "recent-search-list": {
-    "lines": 139,
+    "lines": 150,
     "files": 1
   },
   "search-faceted-results": {
@@ -816,19 +832,19 @@
     "files": 1
   },
   "csv-import-mapper": {
-    "lines": 269,
+    "lines": 280,
     "files": 1
   },
   "avatar-crop-upload": {
-    "lines": 257,
+    "lines": 268,
     "files": 1
   },
   "upload-requirements-form": {
-    "lines": 173,
+    "lines": 184,
     "files": 1
   },
   "import-from-url-form": {
-    "lines": 167,
+    "lines": 178,
     "files": 1
   },
   "chat-thread-panel": {
@@ -840,7 +856,7 @@
     "files": 1
   },
   "chat-streaming-answer": {
-    "lines": 277,
+    "lines": 296,
     "files": 1
   },
   "chat-empty-state": {
@@ -856,11 +872,11 @@
     "files": 1
   },
   "chat-model-picker": {
-    "lines": 241,
+    "lines": 252,
     "files": 1
   },
   "chat-attachment-tray": {
-    "lines": 258,
+    "lines": 269,
     "files": 1
   },
   "agent-thinking-trace": {
@@ -880,15 +896,15 @@
     "files": 1
   },
   "agent-run-failure": {
-    "lines": 330,
+    "lines": 337,
     "files": 1
   },
   "agent-retry-log": {
-    "lines": 142,
+    "lines": 153,
     "files": 1
   },
   "agent-cost-breakdown": {
-    "lines": 138,
+    "lines": 149,
     "files": 1
   },
   "approval-request-card": {
@@ -912,15 +928,15 @@
     "files": 1
   },
   "approval-policy-list": {
-    "lines": 145,
+    "lines": 156,
     "files": 1
   },
   "escalation-queue-list": {
-    "lines": 137,
+    "lines": 148,
     "files": 1
   },
   "human-oversight-split": {
-    "lines": 136,
+    "lines": 156,
     "files": 1
   },
   "context-chunk-cards": {
@@ -928,7 +944,7 @@
     "files": 1
   },
   "source-citation-list": {
-    "lines": 212,
+    "lines": 231,
     "files": 1
   },
   "knowledge-source-picker": {
@@ -948,15 +964,15 @@
     "files": 1
   },
   "retrieval-freshness-list": {
-    "lines": 140,
+    "lines": 151,
     "files": 1
   },
   "context-scope-list": {
-    "lines": 141,
+    "lines": 152,
     "files": 1
   },
   "grounding-split": {
-    "lines": 136,
+    "lines": 156,
     "files": 1
   },
   "selection-ai-toolbar": {
@@ -976,11 +992,11 @@
     "files": 1
   },
   "ai-slash-menu": {
-    "lines": 333,
+    "lines": 343,
     "files": 1
   },
   "ai-action-menu": {
-    "lines": 140,
+    "lines": 151,
     "files": 1
   },
   "product-grid": {
@@ -1004,15 +1020,23 @@
     "files": 1
   },
   "stock-availability-list": {
-    "lines": 138,
+    "lines": 149,
     "files": 1
   },
   "collection-story-split": {
     "lines": 157,
     "files": 1
   },
+  "listing-map-split": {
+    "lines": 329,
+    "files": 1
+  },
+  "menu-course-list": {
+    "lines": 276,
+    "files": 1
+  },
   "product-gallery": {
-    "lines": 111,
+    "lines": 119,
     "files": 1
   },
   "product-buy-box": {
@@ -1020,7 +1044,7 @@
     "files": 2
   },
   "product-info-accordion": {
-    "lines": 124,
+    "lines": 156,
     "files": 1
   },
   "product-review-summary": {
@@ -1032,11 +1056,11 @@
     "files": 1
   },
   "product-spec-split": {
-    "lines": 140,
+    "lines": 159,
     "files": 1
   },
   "back-in-stock-form": {
-    "lines": 166,
+    "lines": 177,
     "files": 1
   },
   "cart-drawer": {
@@ -1056,11 +1080,11 @@
     "files": 1
   },
   "checkout-express-payment": {
-    "lines": 247,
+    "lines": 258,
     "files": 1
   },
   "gift-options-form": {
-    "lines": 166,
+    "lines": 177,
     "files": 1
   },
   "gift-card-purchase": {
@@ -1076,7 +1100,7 @@
     "files": 1
   },
   "order-confirmation": {
-    "lines": 209,
+    "lines": 212,
     "files": 1
   },
   "order-history-list": {
@@ -1088,15 +1112,15 @@
     "files": 1
   },
   "order-tracking-timeline": {
-    "lines": 238,
+    "lines": 258,
     "files": 1
   },
   "review-submit-form": {
-    "lines": 238,
+    "lines": 249,
     "files": 1
   },
   "order-lookup-form": {
-    "lines": 165,
+    "lines": 176,
     "files": 1
   },
   "review-distribution-band": {
@@ -1132,7 +1156,7 @@
     "files": 1
   },
   "review-history-list": {
-    "lines": 278,
+    "lines": 289,
     "files": 1
   },
   "gift-card-balance": {

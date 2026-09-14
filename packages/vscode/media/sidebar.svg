@@ -1,0 +1,17 @@
+<!--
+  The activity-bar icon.
+
+  Monochrome and `currentColor`, which is not a style choice: VS Code tints
+  activity-bar icons itself — dimmed when inactive, full-contrast when
+  active, and something else again under each high-contrast theme. An icon
+  with its own colours ignores all of that and is the one badge in the bar
+  that does not respond to the theme.
+
+  The shape is the catalog's own argument: three stacked sections, the
+  middle one offset, which is what a composed page is.
+-->
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="3" y="4" width="18" height="4.5" rx="1.5" fill="currentColor" />
+  <rect x="6.5" y="10.25" width="14.5" height="4.5" rx="1.5" fill="currentColor" opacity="0.65" />
+  <rect x="3" y="16.5" width="18" height="4.5" rx="1.5" fill="currentColor" opacity="0.9" />
+</svg>

@@ -25,7 +25,7 @@ import {
 } from '@/lib/assets/asset-types'
 import { absoluteUrl } from '@/lib/site'
 
-import { FAMILY_COUNT } from '../page'
+import { FAMILY_COUNT } from '@/lib/assets/family-count'
 
 export function generateStaticParams() {
   return ASSET_FAMILIES.map((family) => ({ family }))

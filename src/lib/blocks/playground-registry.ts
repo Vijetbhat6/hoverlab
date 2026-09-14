@@ -483,6 +483,10 @@ export const PLAYGROUND_BLOCKS: Record<
     ssr: false,
     loading: () => null,
   }),
+  'event-agenda-grid': dynamic(() => import('./sources/event-agenda-grid').then((m) => m.EventAgendaGrid), {
+    ssr: false,
+    loading: () => null,
+  }),
   'faq-accordion': dynamic(() => import('./sources/faq-accordion').then((m) => m.FaqAccordion), {
     ssr: false,
     loading: () => null,
@@ -687,6 +691,10 @@ export const PLAYGROUND_BLOCKS: Record<
     ssr: false,
     loading: () => null,
   }),
+  'listing-map-split': dynamic(() => import('./sources/listing-map-split').then((m) => m.ListingMapSplit), {
+    ssr: false,
+    loading: () => null,
+  }),
   'logo-cloud': dynamic(() => import('./sources/logo-cloud').then((m) => m.LogoCloud), {
     ssr: false,
     loading: () => null,
@@ -704,6 +712,10 @@ export const PLAYGROUND_BLOCKS: Record<
     loading: () => null,
   }),
   'maintenance-window-state': dynamic(() => import('./sources/maintenance-window-state').then((m) => m.MaintenanceWindowState), {
+    ssr: false,
+    loading: () => null,
+  }),
+  'menu-course-list': dynamic(() => import('./sources/menu-course-list').then((m) => m.MenuCourseList), {
     ssr: false,
     loading: () => null,
   }),
@@ -827,6 +839,10 @@ export const PLAYGROUND_BLOCKS: Record<
     ssr: false,
     loading: () => null,
   }),
+  'price-ticker-strip': dynamic(() => import('./sources/price-ticker-strip').then((m) => m.PriceTickerStrip), {
+    ssr: false,
+    loading: () => null,
+  }),
   'pricing-credits': dynamic(() => import('./sources/pricing-credits').then((m) => m.PricingCredits), {
     ssr: false,
     loading: () => null,
@@ -920,6 +936,10 @@ export const PLAYGROUND_BLOCKS: Record<
     loading: () => null,
   }),
   'repair-request-form': dynamic(() => import('./sources/repair-request-form').then((m) => m.RepairRequestForm), {
+    ssr: false,
+    loading: () => null,
+  }),
+  'resume-document': dynamic(() => import('./sources/resume-document').then((m) => m.ResumeDocument), {
     ssr: false,
     loading: () => null,
   }),
@@ -1152,6 +1172,10 @@ export const PLAYGROUND_BLOCKS: Record<
     loading: () => null,
   }),
   'video-call-layout': dynamic(() => import('./sources/video-call-layout').then((m) => m.VideoCallLayout), {
+    ssr: false,
+    loading: () => null,
+  }),
+  'video-player-shell': dynamic(() => import('./sources/video-player-shell').then((m) => m.VideoPlayerShell), {
     ssr: false,
     loading: () => null,
   }),

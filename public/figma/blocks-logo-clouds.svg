@@ -15,22 +15,22 @@
   <g id="Seamless Logo Marquee" transform="translate(64, 116)">
     <rect id="container" x="0" y="0" width="1088" height="178" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <text id="Trusted by teams shipping every day" x="544" y="63" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Trusted by teams shipping every day</text>
-      <text id="Northwind" x="-16.4" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="20" font-weight="700" letter-spacing="-0.5">Northwind</text>
-      <text id="Contoso" x="137.35" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="20" font-weight="700" letter-spacing="-0.5">Contoso</text>
-      <text id="Initech" x="272.39" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="20" font-weight="700" letter-spacing="-0.5">Initech</text>
-      <text id="Umbrella" x="392.65" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="20" font-weight="700" letter-spacing="-0.5">Umbrella</text>
-      <text id="Globex" x="532.93" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="20" font-weight="700" letter-spacing="-0.5">Globex</text>
-      <text id="Soylent" x="655.24" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="20" font-weight="700" letter-spacing="-0.5">Soylent</text>
-      <text id="Hooli" x="783.18" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="20" font-weight="700" letter-spacing="-0.5">Hooli</text>
-      <text id="Vandelay" x="887.06" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="20" font-weight="700" letter-spacing="-0.5">Vandelay</text>
-      <text id="Northwind 2" x="1029.9" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="20" font-weight="700" letter-spacing="-0.5">Northwind</text>
-      <text id="Contoso 2" x="1183.65" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="20" font-weight="700" letter-spacing="-0.5">Contoso</text>
-      <text id="Initech 2" x="1318.68" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="20" font-weight="700" letter-spacing="-0.5">Initech</text>
-      <text id="Umbrella 2" x="1438.95" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="20" font-weight="700" letter-spacing="-0.5">Umbrella</text>
-      <text id="Globex 2" x="1579.23" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="20" font-weight="700" letter-spacing="-0.5">Globex</text>
-      <text id="Soylent 2" x="1701.54" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="20" font-weight="700" letter-spacing="-0.5">Soylent</text>
-      <text id="Hooli 2" x="1829.48" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="20" font-weight="700" letter-spacing="-0.5">Hooli</text>
-      <text id="Vandelay 2" x="1933.35" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="20" font-weight="700" letter-spacing="-0.5">Vandelay</text>
+      <text id="Northwind" x="-21.49" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="20" font-weight="700" letter-spacing="-0.5">Northwind</text>
+      <text id="Contoso" x="132.26" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="20" font-weight="700" letter-spacing="-0.5">Contoso</text>
+      <text id="Initech" x="267.29" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="20" font-weight="700" letter-spacing="-0.5">Initech</text>
+      <text id="Umbrella" x="387.56" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="20" font-weight="700" letter-spacing="-0.5">Umbrella</text>
+      <text id="Globex" x="527.84" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="20" font-weight="700" letter-spacing="-0.5">Globex</text>
+      <text id="Soylent" x="650.15" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="20" font-weight="700" letter-spacing="-0.5">Soylent</text>
+      <text id="Hooli" x="778.09" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="20" font-weight="700" letter-spacing="-0.5">Hooli</text>
+      <text id="Vandelay" x="881.97" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="20" font-weight="700" letter-spacing="-0.5">Vandelay</text>
+      <text id="Northwind 2" x="1024.81" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="20" font-weight="700" letter-spacing="-0.5">Northwind</text>
+      <text id="Contoso 2" x="1178.56" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="20" font-weight="700" letter-spacing="-0.5">Contoso</text>
+      <text id="Initech 2" x="1313.59" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="20" font-weight="700" letter-spacing="-0.5">Initech</text>
+      <text id="Umbrella 2" x="1433.86" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="20" font-weight="700" letter-spacing="-0.5">Umbrella</text>
+      <text id="Globex 2" x="1574.14" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="20" font-weight="700" letter-spacing="-0.5">Globex</text>
+      <text id="Soylent 2" x="1696.45" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="20" font-weight="700" letter-spacing="-0.5">Soylent</text>
+      <text id="Hooli 2" x="1824.39" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="20" font-weight="700" letter-spacing="-0.5">Hooli</text>
+      <text id="Vandelay 2" x="1928.26" y="121" fill="rgba(87, 92, 97, 0.6)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="20" font-weight="700" letter-spacing="-0.5">Vandelay</text>
   </g>
   <text id="Bordered Logo Grid label" x="64" y="410" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Bordered Logo Grid</text>
   <text id="logo-grid id" x="64" y="424" font-family="ui-monospace, monospace" font-size="12" fill="#737373">logo-grid</text>

@@ -87,8 +87,15 @@ function blockImportsOf(source: string): string[] {
  * Breadth-first over `blockImportsOf`, with a seen-set because a cycle
  * would otherwise hang the request rather than fail it. The seed order is
  * preserved so the caller can still treat the first file as the entry.
+ *
+ * Exported for `composition-sandbox`, which is the page collector's problem
+ * again with the composition coming from a query string instead of from
+ * `composedOf`. Sharing this is what keeps a `/builder` sandbox and a
+ * `/page/<id>` sandbox assembling the same block the same way — including
+ * the two blocks in the catalog that import another block without declaring
+ * it, which is the whole reason this walk exists.
  */
-function blockFiles(id: string, seen = new Set<string>()): SandboxFile[] {
+export function blockFiles(id: string, seen = new Set<string>()): SandboxFile[] {
   const out: SandboxFile[] = []
   const queue = [id]
 

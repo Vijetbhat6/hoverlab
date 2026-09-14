@@ -133,7 +133,7 @@ export default function DesignSystemPage() {
             colours, so there is nothing to translate.
           </p>
           <Link
-            href="/docs/mcp#figma"
+            href="/mcp#figma"
             className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline"
           >
             Pairing it with Figma <ArrowRight aria-hidden className="h-3.5 w-3.5" />

@@ -89,6 +89,17 @@ export function NavbarAuthenticated({
   actingAs = 'priya@meridianfoods.com',
   className = '',
 }: NavbarAuthenticatedProps) {
+  /*
+    Per-instance prefix for every id this block emits.
+
+    The literals these replaced were a latent duplicate the moment the
+    block appeared twice on one document, and `aria-labelledby` on a
+    duplicated id resolves to the first match -- so the second copy was
+    labelled by the first copy's heading. Client component, so `useId` is
+    the right tool.
+  */
+  const uid = React.useId()
+
   const [current, setCurrent] = React.useState(0)
   const [open, setOpen] = React.useState<'workspace' | 'account' | null>(null)
   const workspace = workspaces[current]
@@ -212,7 +223,7 @@ export function NavbarAuthenticated({
 
         {/* ---- A labelled field, not a div with a placeholder ---------- */}
         <div className="ms-auto hidden min-w-0 max-w-xs flex-1 sm:block">
-          <label htmlFor="app-search" className="sr-only">
+          <label htmlFor={`${uid}-app-search`} className="sr-only">
             Search {product}
           </label>
           <div className="relative">
@@ -221,7 +232,7 @@ export function NavbarAuthenticated({
               className="pointer-events-none absolute start-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground"
             />
             <input
-              id="app-search"
+              id={`${uid}-app-search`}
               type="search"
               placeholder="Search"
               className="h-9 w-full rounded-lg border border-field bg-background ps-8 pe-3 text-sm text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"

@@ -35,7 +35,25 @@
  *
  * Pure data, client-safe. `lib/export` and `lib/blocks/markup-frameworks`
  * remain the implementations; this is what they amount to, for a reader.
+ *
+ * ── WHY EACH ENTRY CARRIES A TOOLCHAIN AND A SETUP LIST ─────────────────
+ *
+ * Because "we support Vue" and "this is for Vue developers" are different
+ * claims, and only the second one wins anybody. React Bits shipped Vue Bits
+ * and Svelte Bits as whole separate sites; Preline publishes a setup guide
+ * per framework, Laravel and Rails included. What those do that a support
+ * matrix cannot is address the reader in their own toolchain — Nuxt, not
+ * "Vue"; `src/lib/components`, not "your components folder".
+ *
+ * So every entry below names the toolchain, the dependency our own CLI
+ * looks for in a package.json, and what to do with the file once it lands.
+ * `/frameworks/[slug]` renders that, next to output generated at build time
+ * by the real converter. The page cannot claim a conversion that does not
+ * run, because the conversion is what is printed on it.
  */
+
+import type { FrameworkId } from './export'
+import type { MarkupFramework } from './blocks/markup-frameworks'
 
 export type FrameworkSupport =
   /** A real conversion, tested — the artifact, in that framework. */
@@ -58,6 +76,66 @@ export interface FrameworkStory {
   extension: string
   /** True where the website's own panel gates it behind a licence. */
   proOnWebsite: boolean
+
+  /**
+   * The `<h1>` of this framework's own page.
+   *
+   * Written per framework rather than templated, because the honest
+   * headline genuinely differs: Astro's page cannot promise effects, and
+   * pretending otherwise to keep the sentence parallel is how the matrix
+   * would start lying again.
+   */
+  headline: string
+
+  /**
+   * The converter that produces an effect in this framework, or null where
+   * there is none.
+   *
+   * Typed as `FrameworkId` so that deleting a converter is a compile error
+   * here rather than a page that offers a target nothing can build. Null is
+   * only correct for Astro, whose story says `effects: 'none'` — and
+   * `frameworks.test.ts` asserts the two agree.
+   */
+  exportTarget: FrameworkId | null
+
+  /**
+   * The block-markup wrapper for this framework, or null.
+   *
+   * Null does not mean "no blocks". React gets the source as written and
+   * Tailwind blocks already *are* Tailwind, so neither needs a wrapper;
+   * `blocks: 'full'` covers both. styled-components is the one real gap.
+   */
+  markupTarget: MarkupFramework | null
+
+  /**
+   * The toolchain, in the words its users use.
+   *
+   * "Vue" is a library; "Nuxt" is what somebody actually has open. A reader
+   * scanning for whether this is for them is looking for the second.
+   */
+  ecosystem: readonly string[]
+
+  /**
+   * The package.json dependency `packages/cli/src/detect.mjs` looks for to
+   * pick this target with no flag, phrased as the CLI phrases it.
+   *
+   * Quoted on the page to back a specific claim — run `hoverlab add` in
+   * your project and it emits your framework without being told. Null where
+   * detection cannot reach it: Astro has no effect converter to detect for,
+   * and plain HTML/CSS is the fallback rather than a detection.
+   */
+  detectedFrom: string | null
+
+  /** What to do with the file once it lands, in this framework. */
+  setup: readonly string[]
+
+  /**
+   * Queries this page is the answer to.
+   *
+   * Per framework, because "vue tailwind components" and "astro components"
+   * are different searches and the hub page can only rank for one of them.
+   */
+  keywords: readonly string[]
 }
 
 /**
@@ -76,6 +154,17 @@ export const FRAMEWORK_STORIES: readonly FrameworkStory[] = [
     blocks: 'full',
     extension: 'tsx',
     proOnWebsite: false,
+    headline: 'Tailwind hover effects, blocks and pages for React',
+    exportTarget: 'react',
+    markupTarget: null,
+    ecosystem: ['React 19', 'Next.js', 'Vite', 'Remix'],
+    detectedFrom: 'react is a dependency',
+    setup: [
+      'Drop the file in your components folder. It is valid as .tsx and as .jsx — there are no type annotations to strip.',
+      'Import it and render it. The styles travel inside the component, so there is no stylesheet to register.',
+      'Blocks and pages arrive as the React source they were written in, with their Tailwind classes and their hooks intact.',
+    ],
+    keywords: ['react tailwind components', 'react hover effects', 'react tailwind blocks'],
   },
   {
     id: 'html',
@@ -86,6 +175,30 @@ export const FRAMEWORK_STORIES: readonly FrameworkStory[] = [
     blocks: 'markup',
     extension: 'html',
     proOnWebsite: false,
+    headline: 'Tailwind hover effects in plain HTML and CSS',
+    exportTarget: 'html',
+    markupTarget: 'html',
+    /*
+     * The frameworks that have no framework — and the reason this entry is
+     * not a booby prize. A Rails, Laravel, Django or Phoenix template is
+     * server-rendered HTML with Tailwind classes in it, which is exactly
+     * what this produces. Preline publishes a guide per backend framework;
+     * this row is the honest version of all of them at once, because the
+     * artifact genuinely is the same file in every one.
+     */
+    ecosystem: ['Rails', 'Laravel', 'Django', 'Phoenix', 'Hugo', 'no build step at all'],
+    detectedFrom: null,
+    setup: [
+      'Paste the markup into your template. Server-rendered templates in Rails, Laravel, Django and Phoenix take it unchanged — it is HTML with Tailwind classes.',
+      'Either keep the <style> block where it is or move the rules into your stylesheet. Nothing here depends on where it lives.',
+      'No build step, no install, nothing to hydrate.',
+    ],
+    keywords: [
+      'tailwind css hover effects',
+      'html css hover effects',
+      'tailwind components for rails',
+      'tailwind components for laravel',
+    ],
   },
   {
     id: 'vue',
@@ -96,6 +209,22 @@ export const FRAMEWORK_STORIES: readonly FrameworkStory[] = [
     blocks: 'markup',
     extension: 'vue',
     proOnWebsite: true,
+    headline: 'Tailwind hover effects and UI blocks for Vue',
+    exportTarget: 'vue',
+    markupTarget: 'vue',
+    ecosystem: ['Vue 3', 'Nuxt', 'Vite', 'VitePress'],
+    detectedFrom: 'vue is a dependency',
+    setup: [
+      'Save the file under src/components. It is a single-file component — nothing to register and no plugin to install.',
+      'The <style> block is scoped, so the rules cannot leak into the rest of your app. Vue rewrites @keyframes names inside a scoped block for you.',
+      'To style something a child component renders, wrap that selector in :deep().',
+    ],
+    keywords: [
+      'vue tailwind components',
+      'vue hover effects',
+      'nuxt tailwind components',
+      'vue css animations',
+    ],
   },
   {
     id: 'svelte',
@@ -106,6 +235,22 @@ export const FRAMEWORK_STORIES: readonly FrameworkStory[] = [
     blocks: 'markup',
     extension: 'svelte',
     proOnWebsite: true,
+    headline: 'Tailwind hover effects and UI blocks for Svelte',
+    exportTarget: 'svelte',
+    markupTarget: 'svelte',
+    ecosystem: ['Svelte 5', 'SvelteKit', 'Vite'],
+    detectedFrom: 'svelte is a dependency',
+    setup: [
+      'Save the file under src/lib/components. A .svelte file that is markup and a <style> block is a complete component.',
+      'Svelte scopes component styles and prunes selectors it cannot statically match.',
+      'If the compiler reports an unused selector, wrap it in :global(...). That is expected for rules targeting pseudo-elements, and it is not a mistake in the output.',
+    ],
+    keywords: [
+      'svelte ui components',
+      'svelte tailwind components',
+      'svelte hover effects',
+      'sveltekit components',
+    ],
   },
   {
     id: 'astro',
@@ -116,6 +261,28 @@ export const FRAMEWORK_STORIES: readonly FrameworkStory[] = [
     blocks: 'markup',
     extension: 'astro',
     proOnWebsite: false,
+    /*
+     * The one headline that does not mention effects, and it stays that
+     * way. There is no Astro effect converter — `exportTarget` is null and
+     * the test asserts that matches `effects: 'none'`. An Astro page
+     * promising hover effects would be the matrix lying in a bigger font.
+     */
+    headline: 'Tailwind UI blocks and page sections for Astro',
+    exportTarget: null,
+    markupTarget: 'astro',
+    ecosystem: ['Astro 5', 'Starlight', 'content sites'],
+    detectedFrom: null,
+    setup: [
+      'Save the file under src/components. The frontmatter fence is there and empty, which is where your props go.',
+      'A component that is only markup is not a compromise in Astro — it is the normal shape of one, and it ships zero JavaScript.',
+      'For an effect, take the HTML and CSS target instead and keep the <style> block: Astro scopes component styles for you.',
+    ],
+    keywords: [
+      'astro components tailwind',
+      'astro ui components',
+      'astro page sections',
+      'astro blocks',
+    ],
   },
   {
     id: 'tailwind',
@@ -126,6 +293,21 @@ export const FRAMEWORK_STORIES: readonly FrameworkStory[] = [
     blocks: 'full',
     extension: 'html',
     proOnWebsite: true,
+    headline: 'Hover effects as Tailwind utility classes',
+    exportTarget: 'tailwind',
+    markupTarget: null,
+    ecosystem: ['Tailwind v4', 'Tailwind v3', 'any framework'],
+    detectedFrom: 'tailwindcss is a dependency',
+    setup: [
+      'Paste the markup. The effect is in the class list rather than in a stylesheet, so there is nothing else to add.',
+      'Arbitrary values have to appear as complete literal strings for Tailwind to detect them — do not build these class names by concatenation.',
+      'Blocks and pages are already written in Tailwind, so at that rung this target is simply the source.',
+    ],
+    keywords: [
+      'tailwind hover effects',
+      'tailwind utility animations',
+      'tailwind css effects',
+    ],
   },
   {
     id: 'styled-components',
@@ -136,8 +318,52 @@ export const FRAMEWORK_STORIES: readonly FrameworkStory[] = [
     blocks: 'none',
     extension: 'tsx',
     proOnWebsite: true,
+    headline: 'Hover effects as styled-components',
+    exportTarget: 'styled-components',
+    markupTarget: null,
+    ecosystem: ['styled-components', 'CSS-in-JS'],
+    /*
+     * Checked before React in `detect.mjs`, and the reason is worth
+     * repeating here because it looks like a bug otherwise: a project with
+     * both dependencies is telling you which one it prefers.
+     */
+    detectedFrom: 'styled-components is a dependency',
+    setup: [
+      'Save the file in your components folder. The @keyframes are hoisted into keyframes helpers, so there is no global animation name to collide with.',
+      'The root class selector is rewritten to &, which binds the styles to the component rather than to a global class name.',
+      'This is the one target with nothing at the block rung: blocks are React plus Tailwind, and rewriting hundreds of utility classes as CSS-in-JS would be a worse block wearing the same name.',
+    ],
+    keywords: [
+      'styled-components animations',
+      'styled-components hover effects',
+      'css-in-js effects',
+    ],
   },
 ]
+
+/** One framework by its slug, for `/frameworks/[slug]`. */
+export function getFrameworkStory(slug: string): FrameworkStory | undefined {
+  return FRAMEWORK_STORIES.find((f) => f.id === slug)
+}
+
+/**
+ * The effect every per-framework page converts, and the block every one
+ * wraps.
+ *
+ * Shared rather than chosen per framework, and that is the point: seven
+ * pages showing the same artifact make the comparison a reader is actually
+ * running — "what does this look like in mine" — answerable by opening two
+ * tabs. Picking a flattering effect per framework would defeat it.
+ *
+ * The block is a magic-link form, and it is interactive, which is the
+ * deliberately unflattering choice. Its wrapper prints the caveat at its
+ * strongest — the submit handler is genuinely not in that file — and a
+ * reader who sees that and takes it anyway is a reader who will not file a
+ * bug in a week. A logo strip would have shown a caveat reading "nothing is
+ * missing", which is true and proves nothing.
+ */
+export const SAMPLE_EFFECT_ID = 'btn-gradient'
+export const SAMPLE_BLOCK_ID = 'auth-magic-link-form'
 
 export const SUPPORT_LABELS: Record<FrameworkSupport, string> = {
   full: 'Converted',

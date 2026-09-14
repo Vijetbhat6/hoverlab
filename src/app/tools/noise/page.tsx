@@ -150,7 +150,7 @@ function sanitizeShared(shared: NoiseState): NoiseState {
 export default function NoiseToolPage() {
   // Working state stays local and ungated; named presets need an account.
   // See `use-tool-state.ts` for why the two layers are separate.
-  const tool = useToolState<NoiseState>(TOOL, DEFAULT_STATE, sanitizeShared)
+  const tool = useToolState<NoiseState>(TOOL, DEFAULT_STATE, { sanitizeShared })
   const { state, setState } = tool
 
   const update = (patch: Partial<NoiseState>) => setState((s) => ({ ...s, ...patch }))

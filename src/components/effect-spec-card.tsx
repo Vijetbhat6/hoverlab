@@ -100,7 +100,7 @@ function commands(effect: Effect): Array<{ command: string; hint: string }> {
 const WORKS_WITH: Array<{ group: string; items: string[] }> = [
   { group: 'Frameworks', items: ['Plain HTML', 'React', 'Vue', 'Svelte', 'Tailwind', 'styled-components'] },
   // get_effect and match_design are both live MCP tools; match_design is
-  // what the Figma pairing runs through. See app/docs/mcp.
+  // what the Figma pairing runs through. See app/mcp.
   { group: 'Agents', items: ['CLI', 'MCP', 'Figma'] },
 ]
 

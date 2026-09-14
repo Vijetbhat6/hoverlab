@@ -201,16 +201,11 @@
   <g id="Header Search with Suggestions" transform="translate(64, 2667.75)">
     <rect id="container" x="0" y="0" width="1088" height="302" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="combobox" x="280" y="65" width="528" height="44" rx="16" fill="#fdfcf8" stroke="#8d8f92" stroke-width="1" />
-      <rect id="listbox" x="280" y="113" width="528" height="178" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <rect id="listbox" x="280" y="113" width="528" height="46" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
       <rect id="option" x="285" y="118" width="518" height="36" rx="12" fill="#e0f0e7" />
       <text id="Search for" x="317" y="140" fill="#13161a" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Search for</text>
       <text id="meri" x="387.22" y="141" fill="#13161a" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">meri</text>
-      <text id="Customers" x="285" y="166" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Customers</text>
-      <text id="Meridian Foods" x="317" y="204" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Meridian Foods</text>
-      <text id="Customer · 41 seats · Scale" x="317" y="222" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Customer · 41 seats · Scale</text>
-      <text id="Meridian Logistics" x="317" y="256" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Meridian Logistics</text>
-      <text id="Customer · 8 seats · Team" x="317" y="274" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Customer · 8 seats · Team</text>
-      <text id="2 suggestions. Enter searches for what y…" x="280" y="133" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">2 suggestions. Enter searches for what you typed.</text>
+      <text id="Searching…" x="280" y="133" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Searching…</text>
   </g>
   <text id="Faceted Refinement Panel label" x="64" y="3085.75" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Faceted Refinement Panel</text>
   <text id="search-facet-panel id" x="64" y="3099.75" font-family="ui-monospace, monospace" font-size="12" fill="#737373">search-facet-panel</text>

@@ -36,7 +36,10 @@ import { PricingTiers } from '@/components/landing/pricing-tiers'
 import { ComparisonTable } from '@/components/landing/comparison-table'
 import { NewsletterSignup } from '@/components/landing/newsletter-signup'
 import { CommunityBand } from '@/components/landing/community-band'
+import { UsedByBand } from '@/components/landing/used-by-band'
 import { HeroEffectWall } from '@/components/landing/hero-effect-wall'
+import { HeroThemePills } from '@/components/landing/hero-theme-pills'
+import { ShippedBand } from '@/components/landing/shipped-band'
 import { CATEGORIES } from '@/lib/effect-types'
 import { DESIGNER_TOOLS } from '@/lib/designer-tools'
 import { TOTAL_COUNT } from '@/lib/catalog-stats'
@@ -247,6 +250,23 @@ export default function LandingPage() {
             No account needed to browse or copy · Sign up only to save
             favorites and sync them across devices
           </p>
+
+          {/*
+            The last row of the hero, and the first interactive proof.
+
+            Four named themes that repaint this page and every preview on
+            the site, plus the way into the token generator with the theme
+            already loaded. It sits below the CTAs rather than above them
+            because it is not a call to action — it answers the objection a
+            visitor forms while reading the ones above it ("this is somebody
+            else's design system"), and it answers it by changing the page
+            they are standing on rather than by claiming anything.
+
+            It is also the only thing on "/" that mounts `useThemeStudio`,
+            which is what makes the front door honour a theme picked
+            elsewhere on the site. See the component.
+          */}
+          <HeroThemePills className="mt-8" />
         </div>
       </section>
 
@@ -260,6 +280,31 @@ export default function LandingPage() {
         stack" in twenty scrolling wordmarks, which is a claim the CLI
         section makes concretely a screen later.
       */}
+
+      {/*
+        Renders nothing today, and will keep rendering nothing until a named
+        company has given permission in writing. Mounted here rather than
+        left out so the first real logo is one array entry in lib/showcase.ts
+        instead of a layout decision taken on the day. See the component.
+      */}
+      <UsedByBand />
+
+      {/*
+        The one number on this page that is not a size.
+
+        Everything above counts what the catalog holds, which an abandoned
+        catalog does just as loudly. This counts what it gained last week,
+        out of the same git-derived ledger `/changelog` and `/feed.xml` are
+        built from — computed for months, and until now rendered only on
+        pages a visitor reaches after they are already convinced.
+
+        It reads the 2 KB velocity summary rather than `lib/recency`, which
+        matters on this page specifically: `/` is a Client Component, JSON
+        imports do not tree-shake, and the full ledger is 78 KB. See
+        `lib/velocity`, which also explains why its window is anchored to
+        the build date instead of `new Date()`.
+      */}
+      <ShippedBand />
 
       {/* The four tiers — effects up to templates */}
       <LadderBand />

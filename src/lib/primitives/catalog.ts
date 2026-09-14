@@ -443,6 +443,94 @@ export const PRIMITIVE_CATALOG: PrimitiveRecord[] = [
     thumbHeight: 'h-40',
   },
 
+  /* --------------------------- AI & Chat --------------------------- */
+  {
+    id: 'message-bubble',
+    name: 'Message Bubble',
+    category: 'AI & Chat',
+    description:
+      'One turn in a thread, with the part every chat UI leaves out: the speaker is in the text rather than implied by which side the bubble sits on, so a screen reader hears a conversation instead of an unattributed monologue.',
+    tags: ['chat', 'message', 'bubble', 'ai', 'conversation', 'thread'],
+    previewComponent: 'message-bubble',
+    exportName: 'MessageBubble',
+    deps: [],
+    featured: true,
+    thumbHeight: 'h-60',
+  },
+  {
+    id: 'prompt-input',
+    name: 'Prompt Input',
+    category: 'AI & Chat',
+    description:
+      'The composer, reduced to the four things that are actually hard: Enter that does not fire mid-IME-composition, one submit path for button and keyboard alike, stop as a separate button from send, and a row cap measured from the real line height.',
+    tags: ['prompt', 'composer', 'textarea', 'chat input', 'ai', 'autosize'],
+    previewComponent: 'prompt-input',
+    exportName: 'PromptInput',
+    deps: ['lucide-react'],
+    featured: true,
+    thumbHeight: 'h-56',
+  },
+  {
+    id: 'tool-call',
+    name: 'Tool Call',
+    category: 'AI & Chat',
+    description:
+      'A single tool invocation that opens into its arguments and result — status carried by a glyph and a word rather than a colour, arguments as a definition list, and a duration formatted arithmetically so it cannot drift at hydration.',
+    tags: ['tool call', 'function calling', 'agent', 'ai', 'disclosure', 'status'],
+    previewComponent: 'tool-call',
+    exportName: 'ToolCall',
+    deps: ['lucide-react'],
+    thumbHeight: 'h-56',
+  },
+  {
+    id: 'reasoning-panel',
+    name: 'Reasoning Panel',
+    category: 'AI & Chat',
+    description:
+      'The "Thought for 12s" disclosure, built on a native details element — so it keeps its state without JavaScript, needs no ARIA at all, and renders on the server in the same pass as the answer above it.',
+    tags: ['reasoning', 'thinking', 'trace', 'ai', 'disclosure', 'details'],
+    previewComponent: 'reasoning-panel',
+    exportName: 'ReasoningPanel',
+    deps: ['lucide-react'],
+    thumbHeight: 'h-52',
+  },
+  {
+    id: 'citation-chip',
+    name: 'Citation Chip',
+    category: 'AI & Chat',
+    description:
+      'A numbered source reference whose accessible name is the source rather than the numeral — because eight links all called a digit cannot be told apart in a screen reader link list, which is how many people navigate a page.',
+    tags: ['citation', 'source', 'reference', 'rag', 'grounding', 'footnote'],
+    previewComponent: 'citation-chip',
+    exportName: 'CitationChip',
+    deps: [],
+    thumbHeight: 'h-52',
+  },
+  {
+    id: 'typing-indicator',
+    name: 'Typing Indicator',
+    category: 'AI & Chat',
+    description:
+      'Three dots that stop moving for anyone who asked their OS for less motion, and a polite live region that says who is typing — so the information was never carried by the animation in the first place.',
+    tags: ['typing', 'loading', 'streaming', 'ai', 'skeleton', 'motion'],
+    previewComponent: 'typing-indicator',
+    exportName: 'TypingIndicator',
+    deps: [],
+    thumbHeight: 'h-44',
+  },
+  {
+    id: 'prompt-suggestions',
+    name: 'Prompt Suggestions',
+    category: 'AI & Chat',
+    description:
+      'The starters that fill an empty thread, as a real list of real buttons rather than the usual grid of clickable divs — reachable by keyboard, skippable in one keystroke, and named for the prompt they actually send.',
+    tags: ['suggestions', 'starters', 'empty state', 'ai', 'onboarding', 'prompts'],
+    previewComponent: 'prompt-suggestions',
+    exportName: 'PromptSuggestions',
+    deps: [],
+    thumbHeight: 'h-56',
+  },
+
   /* --------------------------- Structure --------------------------- */
   {
     id: 'content-divider',

@@ -484,7 +484,7 @@ function sanitizeShared(shared: ClipState): ClipState {
 export default function ClipPathToolPage() {
   // Working state stays local and ungated; named presets need an account.
   // See `use-tool-state.ts` for why the two layers are separate.
-  const tool = useToolState<ClipState>(TOOL, DEFAULT_STATE, sanitizeShared)
+  const tool = useToolState<ClipState>(TOOL, DEFAULT_STATE, { sanitizeShared })
   const { state, setState } = tool
   const gradientId = React.useId()
 

@@ -62,6 +62,17 @@ export function ModalUnsavedChanges({
   defaultOpen = true,
   className = '',
 }: ModalUnsavedChangesProps) {
+  /*
+    Per-instance prefix for every id this block emits.
+
+    The literals these replaced were a latent duplicate the moment the
+    block appeared twice on one document, and `aria-labelledby` on a
+    duplicated id resolves to the first match -- so the second copy was
+    labelled by the first copy's heading. Client component, so `useId` is
+    the right tool.
+  */
+  const uid = React.useId()
+
   const [open, setOpen] = React.useState(defaultOpen)
   const [outcome, setOutcome] = React.useState<string | null>(null)
 
@@ -143,8 +154,8 @@ export function ModalUnsavedChanges({
             ref={dialogRef}
             role="alertdialog"
             aria-modal="true"
-            aria-labelledby="unsaved-title"
-            aria-describedby="unsaved-body"
+            aria-labelledby={`${uid}-unsaved-title`}
+            aria-describedby={`${uid}-unsaved-body`}
             onKeyDown={onKeyDown}
             className="relative w-full max-w-md rounded-2xl border border-border bg-card p-6 text-card-foreground shadow-2xl"
           >
@@ -156,11 +167,11 @@ export function ModalUnsavedChanges({
                 <AlertTriangle className="h-4 w-4 text-amber-600 dark:text-amber-400" />
               </span>
               <div className="min-w-0">
-                <h2 id="unsaved-title" className="text-base font-semibold">
+                <h2 id={`${uid}-unsaved-title`} className="text-base font-semibold">
                   You have {changes.length} unsaved{' '}
                   {changes.length === 1 ? 'change' : 'changes'}
                 </h2>
-                <p id="unsaved-body" className="mt-1 text-sm text-muted-foreground">
+                <p id={`${uid}-unsaved-body`} className="mt-1 text-sm text-muted-foreground">
                   Closing now discards them. Saving keeps them and closes the editor.
                 </p>
               </div>

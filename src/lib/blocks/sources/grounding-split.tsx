@@ -56,6 +56,24 @@ const POINTS: GroundingSplitPoint[] = [
   { label: "Stale sources are flagged", detail: "Age travels with the passage. A confident answer from a two-year-old document is the failure nobody catches." },
 ]
 
+/*
+  Per-instance id, hashed from props that differ between instances.
+
+  A literal id is a latent duplicate the moment this block is rendered
+  twice on one document -- two pages on a catalog hub, or one page using
+  the section twice. `aria-labelledby` pointing at a duplicated id resolves
+  to whichever element comes first, so the second copy is announced with
+  the first copy's label. Server component, so no `useId`: hashing props
+  gives each instance its own target and stays stable across server and
+  client renders in a way a counter would not.
+*/
+function instanceId(...parts: (string | undefined)[]): string {
+  const text = parts.filter(Boolean).join('|')
+  let hash = 0
+  for (let i = 0; i < text.length; i++) hash = (Math.imul(hash, 31) + text.charCodeAt(i)) | 0
+  return (hash >>> 0).toString(36).slice(0, 6)
+}
+
 export function GroundingSplit({
   eyebrow = "Grounding",
   heading = "Every claim points at something",
@@ -64,16 +82,18 @@ export function GroundingSplit({
   media,
   className,
 }: GroundingSplitProps) {
+  const uid = instanceId(heading, eyebrow)
+
   return (
     <section
-      aria-labelledby="grounding-split-heading"
+      aria-labelledby={`grounding-split-heading-${uid}`}
       className={`w-full bg-background px-6 py-16 sm:py-24 ${className ?? ''}`}
     >
       <div className="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-2">
         <div>
           <p className="text-sm font-medium text-primary">{eyebrow}</p>
           <h2
-            id="grounding-split-heading"
+            id={`grounding-split-heading-${uid}`}
             className="mt-2 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl"
           >
             {heading}

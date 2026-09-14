@@ -115,6 +115,17 @@ export function ShareAccessDialog({
   access = 'restricted',
   className = '',
 }: ShareAccessDialogProps) {
+  /*
+    Per-instance prefix for every id this block emits.
+
+    The literals these replaced were a latent duplicate the moment the
+    block appeared twice on one document, and `aria-labelledby` on a
+    duplicated id resolves to the first match -- so the second copy was
+    labelled by the first copy's heading. Client component, so `useId` is
+    the right tool.
+  */
+  const uid = React.useId()
+
   const [general, setGeneral] = React.useState<GeneralAccess>(access)
   const [roles, setRoles] = React.useState(() =>
     Object.fromEntries(people.map((p) => [p.email, p.role])),
@@ -134,11 +145,11 @@ export function ShareAccessDialog({
       <div
         role="dialog"
         aria-modal="true"
-        aria-labelledby="share-heading"
+        aria-labelledby={`${uid}-share-heading`}
         className="rounded-2xl border border-border bg-card shadow-lg"
       >
         <header className="border-b border-border px-5 py-4">
-          <h2 id="share-heading" className="truncate text-base font-semibold text-foreground">
+          <h2 id={`${uid}-share-heading`} className="truncate text-base font-semibold text-foreground">
             Share &ldquo;{documentName}&rdquo;
           </h2>
         </header>

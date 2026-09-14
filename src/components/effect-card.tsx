@@ -54,8 +54,9 @@ import { useFavorites } from '@/hooks/use-favorites'
 import { useBundle } from '@/hooks/use-bundle'
 import { useCompare } from '@/hooks/use-compare'
 import { useCopyHistory } from '@/hooks/use-copy-history'
-import { reportUsage } from '@/lib/report-usage'
-import { UsageCount } from '@/components/usage-count'
+import { reportSave, reportUsage } from '@/lib/report-usage'
+import { ArtifactUpdated } from '@/components/artifact-updated'
+import { CardStats, UsageCount } from '@/components/usage-count'
 import { DEFAULT_CUSTOMIZATION } from '@/lib/customize'
 import { cn } from '@/lib/utils'
 import type { Effect } from '@/lib/effects'
@@ -231,7 +232,13 @@ export function EffectCard({ effect }: EffectCardProps) {
               />
             }
             pressed={isFav}
-            onClick={() => toggle(effect.id)}
+            onClick={() => {
+              toggle(effect.id)
+              // Feeds the save count this card now renders. `isFav` is the
+              // state before the toggle, so the report is its negation —
+              // same pairing as <CardHoverActions>.
+              reportSave(effect.id, !isFav)
+            }}
           />
         </div>
       </div>
@@ -287,6 +294,30 @@ export function EffectCard({ effect }: EffectCardProps) {
               id={effect.id}
               withIcon={false}
               className="shrink-0 text-[10px] font-medium text-muted-foreground/80"
+            />
+            {/*
+              Views and saves join line two rather than taking a third,
+              for the reason in the header: the two fixed lines are what
+              let the eye track a column down the grid. They are glyph +
+              number and `shrink-0`, so the category link beside them is
+              what gives way — it already has `min-w-0 truncate` and is
+              the one item here that can lose characters without losing
+              its meaning.
+
+              The updated date is on this line too and is the rarest thing
+              on it: the ledger can only date an effect's last change when
+              that change has its own commit, and the hand-written effects
+              share a file. 25 of 1,126 carry one today. It costs nothing
+              on the other 1,101 — see <ArtifactUpdated>.
+            */}
+            <CardStats
+              id={effect.id}
+              className="shrink-0 text-[10px] text-muted-foreground/80 [&_svg]:h-3 [&_svg]:w-3"
+            />
+            <ArtifactUpdated
+              level="effect"
+              id={effect.id}
+              className="shrink-0 text-[10px] text-muted-foreground/80 [&_svg]:h-3 [&_svg]:w-3"
             />
           </span>
           <button

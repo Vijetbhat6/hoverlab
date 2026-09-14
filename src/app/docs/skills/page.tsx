@@ -94,7 +94,7 @@ curl https://hoverlab.dev/api/v1/skills/hoverlab?format=raw`}</Snippet>
       <DocsSection id="mcp" title="Skills and MCP together">
         <p>
           They do different jobs and the pair is better than either alone. The{' '}
-          <Link href="/docs/mcp" className="font-medium text-primary hover:underline">
+          <Link href="/mcp" className="font-medium text-primary hover:underline">
             MCP server
           </Link>{' '}
           gives an agent the ability to search and install; a skill gives it the

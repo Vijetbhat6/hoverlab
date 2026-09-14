@@ -65,7 +65,7 @@ npx hoverlab dna pricing-tiers --brand indigo
 npx hoverlab dna --out design-dna.md`}</Snippet>
         <p>
           Agents connected over{' '}
-          <Link href="/docs/mcp" className="font-medium text-primary hover:underline">
+          <Link href="/mcp" className="font-medium text-primary hover:underline">
             MCP
           </Link>{' '}
           get the same document from the <C>get_design_dna</C> tool, and the{' '}

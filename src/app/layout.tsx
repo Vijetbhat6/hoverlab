@@ -15,6 +15,7 @@ import { ReducedMotionProvider } from "@/components/reduced-motion-provider";
 import { ServiceWorkerRegister } from "@/components/service-worker-register";
 import { AnalyticsProvider } from "@/components/analytics-provider";
 import { CookieConsentBanner } from "@/components/cookie-consent-banner";
+import { RegionalOfferBanner } from "@/components/billing/regional-offer-banner";
 import { ShaderRuntime } from "@/components/shader-runtime";
 import { Viewport } from "next";
 
@@ -180,6 +181,13 @@ export default function RootLayout({
           <AnalyticsProvider>
             <AuthProvider>
               <ReducedMotionProvider>
+                {/* Above `children` so it sits at the very top of every
+                    document, ahead of each surface's own sticky header, and
+                    scrolls away with the page rather than being subtracted
+                    from that header's offset on forty-odd routes. Renders
+                    null for most visitors and on any deployment with no
+                    regional discount configured — see the component. */}
+                <RegionalOfferBanner />
                 {children}
                 <Toaster />
                 <SonnerToaster position="bottom-right" />

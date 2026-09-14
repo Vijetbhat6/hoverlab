@@ -419,6 +419,50 @@ function structuralMatches(
  * and pseudo-elements are deliberately treated as always-true here — they
  * are carried out as Tailwind variants instead of filtering the match.
  */
+/**
+ * A selector's specificity, as the `(id, class, type)` triple.
+ *
+ * The Tailwind exporter needs this because collapsing a stylesheet onto
+ * elements throws the selectors away: once `.card i.title` and `.card
+ * .title` are both "some utilities on one element", the only thing left to
+ * order them by is the order they were written, and CSS orders them by
+ * specificity first. An effect with `background: #1e293b` on `i.l2` and
+ * `background: #273449` on `.l2` came out the wrong colour for exactly
+ * that reason.
+ *
+ * `:not(…)` is counted as one class rather than by its argument, which is
+ * right for `:not(.x)` and one column off for `:not(div)`. That is the only
+ * approximation, and it cannot change the winner between two selectors
+ * unless they are otherwise tied.
+ */
+export function specificity(selector: ComplexSelector): [number, number, number] {
+  let ids = 0
+  let classes = 0
+  let types = 0
+
+  for (const part of selector.parts) {
+    const compound = part.compound
+    if (compound.id) ids++
+    classes +=
+      compound.classes.length +
+      compound.attrs.length +
+      compound.structural.length +
+      compound.states.length
+    if (compound.tag && compound.tag !== '*') types++
+    if (compound.pseudoElement) types++
+  }
+
+  return [ids, classes, types]
+}
+
+/** Ordering for the cascade: negative when `a` loses to `b`. */
+export function compareSpecificity(
+  a: readonly [number, number, number],
+  b: readonly [number, number, number],
+): number {
+  return a[0] - b[0] || a[1] - b[1] || a[2] - b[2]
+}
+
 export function matchCompoundStatic(
   el: HtmlElement,
   compound: CompoundSelector | undefined,

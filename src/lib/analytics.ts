@@ -77,7 +77,15 @@ export type AnalyticsEvent =
       name: 'sandbox_open'
       props: {
         artifact_id: string
-        level: ArtifactLevel
+        /*
+         * `'composition'` is not a rung of the ladder, and is here rather
+         * than in `ArtifactLevel` for that reason: `/builder` exports a
+         * page the reader invented, which has no catalog entry and no id.
+         * Widening the catalog's own union to admit it would make every
+         * exhaustive switch over the tiers have to handle a thing that is
+         * not in the catalog.
+         */
+        level: ArtifactLevel | 'composition'
         target: 'codepen' | 'jsfiddle' | 'download' | 'stackblitz'
       }
     }
@@ -138,6 +146,30 @@ export type AnalyticsEvent =
       name: 'pricing_currency_toggled'
       props: { currency: 'USD' | 'INR'; region: string }
     }
+  /*
+   * The site-wide regional banner, which fires at most once per page load
+   * and only when something was actually rendered — see the component. The
+   * pair of events answers the one question the banner was built to settle:
+   * whether telling people about the regional price before checkout moves
+   * anything, and which of the two shapes does it.
+   *
+   * `kind` matters more than it looks. An 'automatic' banner is a statement
+   * of a price and a 'code' banner is an instruction to type something, so
+   * they convert differently for reasons that have nothing to do with the
+   * discount depth. Counting them together would average the two into a
+   * number describing neither.
+   */
+  | {
+      name: 'regional_offer_shown'
+      props: { region: string; kind: 'automatic' | 'code' }
+    }
+  /**
+   * Copying the code is the closest thing to an intent signal this banner
+   * has, and it is the only one available for the 'code' shape — the
+   * discount is applied at Polar, so nothing downstream of here can tell us
+   * the code came from the banner rather than from somewhere else.
+   */
+  | { name: 'regional_offer_code_copied'; props: { region: string; code: string } }
   | { name: 'checkout_started'; props: { plan: string; interval: 'one_time' | 'month' } }
   | {
       name: 'purchase_completed'
@@ -224,6 +256,33 @@ export type AnalyticsEvent =
   | { name: 'tool_preview_in_brand'; props: { tool: string } }
   | { name: 'tool_copy_install'; props: { tool: string } }
   | { name: 'tool_open_dna'; props: { tool: string } }
+
+  /**
+   * The studio pushed its theme onto the whole site.
+   *
+   * The one event worth having from `/studio`, because it is the only
+   * moment the editor hands the visitor off to the catalog under their own
+   * colours — which is the question the catalog exists to answer. Copying
+   * a document is measured by `tool_copy_install` where it applies;
+   * measuring every keystroke of a colour editor would be telemetry about
+   * a slider, not about a decision.
+   *
+   * `font` and nothing else: the typeface is the axis someone changes
+   * last, so it is a decent proxy for "finished tuning", and an accent hue
+   * in degrees would be a histogram nobody acts on.
+   */
+  | { name: 'studio_apply_site'; props: { font: string } }
+
+  /**
+   * Somebody restyled the front door from the hero pills.
+   *
+   * The one number that says whether the theme work is reaching people who
+   * have not yet decided to look at the catalog. `preset` is the theme id,
+   * or 'edit' for the exit into the generator — worth separating, because
+   * "tried a look" and "went to build one" are different depths of intent
+   * and a blended count would read as neither.
+   */
+  | { name: 'hero_theme_applied'; props: { preset: string } }
 
   /**
    * Someone put an artifact on the clipboard as a prompt.

@@ -44,6 +44,18 @@ const eslintConfig = [...nextCoreWebVitals, ...nextTypescript, {
     "no-useless-escape": "off",
   },
 }, {
+  // The editor extension is CommonJS because it has to be: VS Code loads an
+  // extension's entry point with `require`, and the `vscode` module itself
+  // is injected into that loader rather than resolvable from disk. So
+  // `require('vscode')` is not a style choice there, it is the only way to
+  // reach the API — and the one ESM import in the package (the `hoverlab`
+  // catalog client, which is `"type": "module"`) is a dynamic `import()`
+  // for exactly that reason. See packages/vscode/src/catalog.js.
+  files: ["packages/vscode/**/*.js"],
+  rules: {
+    "@typescript-eslint/no-require-imports": "off",
+  },
+}, {
   // src/lib/templates/files is template scaffolding, not application code:
   // it is never imported, it is read as text and shipped to users, and its
   // imports resolve against *their* project rather than this one. Linting

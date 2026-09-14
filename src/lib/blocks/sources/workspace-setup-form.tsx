@@ -67,6 +67,17 @@ export function WorkspaceSetupForm({
   onSubmit,
   className,
 }: WorkspaceSetupFormProps) {
+  /*
+    Per-instance prefix for every id this block emits.
+
+    The literals these replaced were a latent duplicate the moment the
+    block appeared twice on one document, and `aria-labelledby` on a
+    duplicated id resolves to the first match -- so the second copy was
+    labelled by the first copy's heading. Client component, so `useId` is
+    the right tool.
+  */
+  const uid = React.useId()
+
   const [status, setStatus] = React.useState<Status>('idle')
   const [message, setMessage] = React.useState('')
 
@@ -90,12 +101,12 @@ export function WorkspaceSetupForm({
 
   return (
     <section
-      aria-labelledby="workspace-setup-form-heading"
+      aria-labelledby={`${uid}-workspace-setup-form-heading`}
       className={`w-full bg-background px-6 py-16 ${className ?? ''}`}
     >
       <div className="mx-auto max-w-md rounded-xl border border-border bg-card p-8 shadow-sm">
         <h2
-          id="workspace-setup-form-heading"
+          id={`${uid}-workspace-setup-form-heading`}
           className="text-xl font-semibold tracking-tight text-card-foreground"
         >
           {heading}
@@ -111,22 +122,22 @@ export function WorkspaceSetupForm({
                 aria-describedby is for.
               */}
               <label
-                htmlFor={`workspace-setup-form-${field.name}`}
+                htmlFor={`${uid}-workspace-setup-form-${field.name}`}
                 className="block text-sm font-medium text-foreground"
               >
                 {field.label}
               </label>
               <input
-                id={`workspace-setup-form-${field.name}`}
+                id={`${uid}-workspace-setup-form-${field.name}`}
                 name={field.name}
                 type={field.type}
                 required
-                aria-describedby={field.hint ? `workspace-setup-form-${field.name}-hint` : undefined}
+                aria-describedby={field.hint ? `${uid}-workspace-setup-form-${field.name}-hint` : undefined}
                 className="mt-1.5 w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               />
               {field.hint ? (
                 <p
-                  id={`workspace-setup-form-${field.name}-hint`}
+                  id={`${uid}-workspace-setup-form-${field.name}-hint`}
                   className="mt-1 text-xs text-muted-foreground"
                 >
                   {field.hint}

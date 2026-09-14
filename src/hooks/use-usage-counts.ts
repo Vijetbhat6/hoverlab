@@ -25,8 +25,19 @@
 
 import * as React from 'react'
 
+export interface UsageEntry {
+  /** Copies and installs in the last seven days. The ranking signal. */
+  recent: number
+  /** Copies and installs since counting began. */
+  total: number
+  /** Detail-page views. Displayed, never ranked — see `lib/usage.ts`. */
+  views: number
+  /** People holding this in favorites, net of unsaves. */
+  saves: number
+}
+
 export interface UsageCounts {
-  [id: string]: { recent: number; total: number }
+  [id: string]: UsageEntry
 }
 
 /**
@@ -43,8 +54,26 @@ function load(): Promise<UsageCounts> {
   if (!pending) {
     pending = fetch('/api/usage/counts')
       .then((res) => (res.ok ? res.json() : { counts: {} }))
-      .then((data: { counts?: UsageCounts }) => {
-        settled = data.counts ?? {}
+      .then((data: { counts?: Record<string, Partial<UsageEntry>> }) => {
+        /*
+         * Filled in field by field rather than trusted wholesale. The
+         * response is cached at the edge for five minutes, so for the
+         * first few minutes after a deploy that adds a counter, live
+         * browsers are reading a body written by the previous version —
+         * with `views` and `saves` simply absent. Defaulting them here is
+         * the difference between a card showing one number and a card
+         * rendering `undefined`.
+         */
+        const counts: UsageCounts = {}
+        for (const [id, entry] of Object.entries(data.counts ?? {})) {
+          counts[id] = {
+            recent: entry?.recent ?? 0,
+            total: entry?.total ?? 0,
+            views: entry?.views ?? 0,
+            saves: entry?.saves ?? 0,
+          }
+        }
+        settled = counts
         return settled
       })
       .catch(() => {
@@ -101,4 +130,18 @@ export function useUsageCount(id: string): number | null {
   const counts = useUsageCounts()
   const entry = counts[id]
   return entry && entry.recent > 0 ? entry.recent : null
+}
+
+/**
+ * One artifact's whole row, or null when it has no counters at all.
+ *
+ * The three numbers arrive together and a card renders them together, so
+ * asking for them one hook at a time would be three subscriptions to the
+ * same map for one tile. Individual fields can still be zero here — a block
+ * with views and no copies is a normal row — and it is the RENDERER that
+ * decides a zero is not worth printing, not this.
+ */
+export function useUsageEntry(id: string): UsageEntry | null {
+  const counts = useUsageCounts()
+  return counts[id] ?? null
 }

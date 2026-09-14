@@ -16,6 +16,13 @@
  * both spend a docblock being precise about the difference. The caveat is
  * rendered here, in the band, rather than left for the page behind it: a
  * reader who never clicks through must not come away with the flat claim.
+ *
+ * WHERE EACH CARD GOES. To `/frameworks/[slug]` — that framework's own
+ * page, with the converter's real output on it. The band originally led
+ * only to the matrix, which is the right page for "what do you support"
+ * and the wrong one for "is this for me". The second question is the one a
+ * Vue or Svelte developer is actually asking, and it is the one React Bits
+ * answered by shipping whole separate sites.
  */
 
 import Link from 'next/link'
@@ -65,27 +72,41 @@ export function FrameworkBand() {
           */}
           <ul className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {FRAMEWORK_STORIES.map((framework) => (
-              <li
-                key={framework.id}
-                className="rounded-xl border border-border bg-card p-5"
-              >
-                <p className="text-sm font-semibold text-foreground">
-                  {framework.label}
-                </p>
-                <dl className="mt-3 space-y-1 text-xs text-muted-foreground">
-                  <div className="flex items-baseline justify-between gap-3">
-                    <dt>Effects</dt>
-                    <dd className="font-medium text-foreground">
-                      {SUPPORT_LABELS[framework.effects]}
-                    </dd>
-                  </div>
-                  <div className="flex items-baseline justify-between gap-3">
-                    <dt>Blocks &amp; pages</dt>
-                    <dd className="font-medium text-foreground">
-                      {SUPPORT_LABELS[framework.blocks]}
-                    </dd>
-                  </div>
-                </dl>
+              <li key={framework.id}>
+                {/*
+                  Each card is a link to that framework's own page, and this
+                  is the click the band was missing. A Vue developer reading
+                  the landing page had one destination — a support matrix —
+                  and a matrix answers "do you support Vue" without ever
+                  addressing them. /frameworks/vue does: their toolchain,
+                  their install line, and the converter's real output.
+
+                  The whole card is the target rather than the label alone,
+                  because the label is two words in a 5-unit padding box and
+                  the rest of the card is the part a pointer lands on.
+                */}
+                <Link
+                  href={`/frameworks/${framework.id}`}
+                  className="block h-full rounded-xl border border-border bg-card p-5 transition hover:border-primary/60 hover:bg-muted/40"
+                >
+                  <p className="text-sm font-semibold text-foreground">
+                    {framework.label}
+                  </p>
+                  <dl className="mt-3 space-y-1 text-xs text-muted-foreground">
+                    <div className="flex items-baseline justify-between gap-3">
+                      <dt>Effects</dt>
+                      <dd className="font-medium text-foreground">
+                        {SUPPORT_LABELS[framework.effects]}
+                      </dd>
+                    </div>
+                    <div className="flex items-baseline justify-between gap-3">
+                      <dt>Blocks &amp; pages</dt>
+                      <dd className="font-medium text-foreground">
+                        {SUPPORT_LABELS[framework.blocks]}
+                      </dd>
+                    </div>
+                  </dl>
+                </Link>
               </li>
             ))}
           </ul>

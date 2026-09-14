@@ -106,6 +106,24 @@ const ICONS: Record<TrackingState, React.ComponentType<{ className?: string }>> 
   failed: AlertTriangle,
 }
 
+/*
+  Per-instance id, hashed from props that differ between instances.
+
+  A literal id is a latent duplicate the moment this block is rendered
+  twice on one document -- two pages on a catalog hub, or one page using
+  the section twice. `aria-labelledby` pointing at a duplicated id resolves
+  to whichever element comes first, so the second copy is announced with
+  the first copy's label. Server component, so no `useId`: hashing props
+  gives each instance its own target and stays stable across server and
+  client renders in a way a counter would not.
+*/
+function instanceId(...parts: (string | undefined)[]): string {
+  const text = parts.filter(Boolean).join('|')
+  let hash = 0
+  for (let i = 0; i < text.length; i++) hash = (Math.imul(hash, 31) + text.charCodeAt(i)) | 0
+  return (hash >>> 0).toString(36).slice(0, 6)
+}
+
 export function OrderTrackingTimeline({
   orderRef = 'NW-84213',
   carrier = 'Evri',
@@ -115,9 +133,11 @@ export function OrderTrackingTimeline({
   exception,
   className = '',
 }: OrderTrackingTimelineProps) {
+  const uid = instanceId(orderRef, trackingNumber)
+
   return (
     <section
-      aria-labelledby="tracking-heading"
+      aria-labelledby={`tracking-heading-${uid}`}
       className={`mx-auto w-full max-w-2xl px-4 py-16 sm:px-6 lg:px-8 ${className}`}
     >
       <div className="overflow-hidden rounded-2xl border border-border bg-card">
@@ -125,7 +145,7 @@ export function OrderTrackingTimeline({
           <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
             Order {orderRef}
           </p>
-          <h2 id="tracking-heading" className="mt-1 text-lg font-semibold text-foreground">
+          <h2 id={`tracking-heading-${uid}`} className="mt-1 text-lg font-semibold text-foreground">
             Arriving {estimate}
           </h2>
 

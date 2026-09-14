@@ -180,6 +180,18 @@ export interface ReactSandboxInput {
   sourceUrl?: string
   /** Open the sandbox in dark mode. Defaults to the site's dark preview. */
   dark?: boolean
+  /**
+   * CSS appended to `src/styles.css`, after the catalog's own tokens.
+   *
+   * For `/builder`, whose compositions can carry a generated theme. Order
+   * is the mechanism: the token sheet declares `:root` and `.dark` first,
+   * this lands after with the same specificity, and the later rule wins.
+   * It deliberately does not re-declare the `@theme inline` map — that is
+   * what makes `bg-primary` exist at all, it is already in the sheet
+   * above, and a second copy of it would be one more place for the token
+   * list to drift.
+   */
+  extraStyles?: string
 }
 
 export interface ExportedComponent {
@@ -381,7 +393,9 @@ export function reactSandboxFiles(input: ReactSandboxInput): Record<string, stri
     'README.md': readme(input),
     'src/main.tsx': MAIN_TSX,
     'src/App.tsx': appTsx(input),
-    'src/styles.css': sandboxThemeCss(),
+    'src/styles.css': input.extraStyles
+      ? `${sandboxThemeCss()}\n${input.extraStyles}`
+      : sandboxThemeCss(),
   }
 
   for (const file of input.files) {

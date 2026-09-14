@@ -28,15 +28,7 @@ import { Layers, SlidersHorizontal } from 'lucide-react'
 
 import { TrendingRail } from '@/components/trending-rail'
 import { CatalogSearchForm } from '@/components/catalog-search-form'
-import { hoverPeekCssFor } from '@/lib/hover-peek-css'
-import { BlockCard } from '@/components/blocks/block-card'
-import { PageCard } from '@/components/pages/page-card'
-import { TemplateCard } from '@/components/templates/template-card'
-import { EffectStaticCard } from '@/components/effect-static-card'
-import { getEffect } from '@/lib/effects'
-import { getBlockMeta } from '@/lib/blocks/block-index'
-import { getPageMeta } from '@/lib/pages/page-index'
-import { getTemplateMeta } from '@/lib/templates/template-index'
+import { ArtifactResultGrid, effectCssFor } from '@/components/artifact-result-grid'
 import {
   searchArtifacts,
   categoriesAtLevel,
@@ -113,18 +105,11 @@ export default async function BrowsePage({ searchParams }: BrowsePageProps) {
   const grouped = level ? null : groupByLevel(hits)
   const shown = level ? hits.slice(0, LEVEL_LIMIT) : (grouped ?? []).flatMap((g) => g.items)
 
-  // One <style> for every effect preview on the page. Class names are
-  // globally unique per effect, so concatenation cannot collide.
-  //
-  // The second half is the hover-to-play CSS: without it, 44% of these
-  // tiles are a still image until you land the pointer on the element
-  // itself. See `lib/hover-peek-css`.
-  const shownEffectCss = shown
-    .filter((h) => h.level === 'effect')
-    .map((h) => getEffect(h.id)?.css ?? '')
-  const effectCss = [shownEffectCss.join('\n'), hoverPeekCssFor(shownEffectCss)]
-    .filter(Boolean)
-    .join('\n')
+  // One <style> for every effect preview on the page, plus the
+  // hover-to-play rules derived from it — without those, 44% of these tiles
+  // are a still image until you land the pointer on the element itself.
+  // Shared with /ui/[slug]; see `effectCssFor`.
+  const effectCss = effectCssFor(shown)
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -228,7 +213,7 @@ export default async function BrowsePage({ searchParams }: BrowsePageProps) {
         ) : level ? (
           <>
             <div className="mt-8">
-              <ResultGrid level={level} items={shown} />
+              <ArtifactResultGrid level={level} items={shown} />
             </div>
             {total > LEVEL_LIMIT ? (
               <p className="mt-8 text-center text-sm text-muted-foreground">
@@ -264,7 +249,7 @@ export default async function BrowsePage({ searchParams }: BrowsePageProps) {
                     See all →
                   </Link>
                 </div>
-                <ResultGrid level={group.level} items={group.items} />
+                <ArtifactResultGrid level={group.level} items={group.items} />
               </section>
             ))}
           </div>
@@ -360,59 +345,6 @@ function CategoryChip({
     >
       {label}
     </Link>
-  )
-}
-
-/**
- * The grid for one level, dispatching to that tier's own card.
- *
- * Deliberately not a single unified card: a block card shows a line count
- * and a dependency list, a page card shows how many blocks it is made of,
- * a template card shows routes. Flattening those into one card would mean
- * showing the union (noise) or the intersection (nothing useful). The tier
- * cards already exist and are already what each hub renders.
- */
-function ResultGrid({ level, items }: { level: ArtifactLevel; items: BrowseHit[] }) {
-  if (level === 'effect') {
-    return (
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {items.map((hit) => {
-          const effect = getEffect(hit.id)
-          return effect ? <EffectStaticCard key={hit.id} effect={effect} /> : null
-        })}
-      </div>
-    )
-  }
-
-  if (level === 'template') {
-    return (
-      <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-        {items.map((hit) => {
-          const template = getTemplateMeta(hit.id)
-          return template ? <TemplateCard key={hit.id} template={template} /> : null
-        })}
-      </div>
-    )
-  }
-
-  if (level === 'page') {
-    return (
-      <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-        {items.map((hit) => {
-          const page = getPageMeta(hit.id)
-          return page ? <PageCard key={hit.id} page={page} /> : null
-        })}
-      </div>
-    )
-  }
-
-  return (
-    <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-      {items.map((hit) => {
-        const block = getBlockMeta(hit.id)
-        return block ? <BlockCard key={hit.id} block={block} /> : null
-      })}
-    </div>
   )
 }
 

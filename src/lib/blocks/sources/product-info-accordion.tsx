@@ -75,10 +75,42 @@ const DEFAULT_SECTIONS: InfoSection[] = [
   },
 ]
 
+/*
+  A stable id suffix derived from this instance's own content.
+
+  `useId` is the right answer and is not available here: this is a server
+  component and hooks are not. Hashing what makes one copy different from
+  another gives each its own name without a hook, a prop or a counter — and
+  it stays stable across server and client renders, which a counter would
+  not.
+*/
+function instanceId(...parts: (string | undefined)[]): string {
+  const text = parts.filter(Boolean).join('|')
+  let hash = 0
+  for (let i = 0; i < text.length; i++) hash = (Math.imul(hash, 31) + text.charCodeAt(i)) | 0
+  return (hash >>> 0).toString(36).slice(0, 6)
+}
+
 export function ProductInfoAccordion({
   sections = DEFAULT_SECTIONS,
   className = '',
 }: ProductInfoAccordionProps) {
+  /*
+   * The exclusive-<details> group name, derived rather than written down.
+   *
+   * `name` on <details> is DOCUMENT-global: every <details> sharing it is
+   * one accordion, wherever on the page it sits. A literal therefore joins
+   * two copies of this block into one — opening a row in the second closes
+   * a row in the first — and when more than one copy renders a row open,
+   * the browser force-closes all but one during parsing, which React then
+   * reports as a hydration mismatch on `open`. That is not hypothetical:
+   * five page artifacts render this block, and the catalog hub renders
+   * them together.
+   */
+  const group = `product-info-${instanceId(
+    ...sections.map((section) => `${section.id}:${section.title}`),
+  )}`
+
   return (
     <div
       className={`divide-y divide-border/40 overflow-hidden rounded-2xl border border-border/60 bg-card/60 ${className}`}
@@ -86,7 +118,7 @@ export function ProductInfoAccordion({
       {sections.map((section) => (
         <details
           key={section.id}
-          name="product-info"
+          name={group}
           open={section.defaultOpen}
           className="group px-5 [&_summary::-webkit-details-marker]:hidden"
         >

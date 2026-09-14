@@ -3,6 +3,7 @@ import { EFFECTS, CATEGORIES } from '@/lib/effects'
 import { categorySlug } from '@/lib/effect-types'
 import { absoluteUrl } from '@/lib/site'
 import { DESIGNER_TOOLS } from '@/lib/designer-tools'
+import { CURATED_PERMALINK_HREFS } from '@/lib/tools/permalinks'
 import { ASSET_FAMILIES } from '@/lib/assets/asset-types'
 import {
   PRIMITIVE_INDEX,
@@ -15,7 +16,10 @@ import { PAGE_INDEX } from '@/lib/pages/page-index'
 import { TEMPLATE_INDEX } from '@/lib/templates/template-index'
 import { PATHS } from '@/lib/paths/catalog'
 import { KITS } from '@/lib/kits/catalog'
+import { HUBS } from '@/lib/hubs/catalog'
+import { FRAMEWORK_STORIES } from '@/lib/frameworks'
 import { addedAt } from '@/lib/recency'
+import { COMPETITORS } from '@/lib/compare'
 
 /**
  * XML sitemap covering every indexable URL.
@@ -75,6 +79,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly' as const,
       priority: 0.8,
     })),
+    // The glossary. One URL rather than sixty: every term is an anchor on
+    // this page, and sixty two-paragraph documents would be exactly the thin
+    // set of near-duplicate pages the hubs are checked against. Monthly —
+    // the terms change when the catalog grows a family, which is rare.
+    { url: absoluteUrl('/glossary'), changeFrequency: 'monthly' as const, priority: 0.8 },
     // Kits — the cross-rung sets. "react ui kit", "saas starter kit" and
     // "ecommerce ui kit" are the category's head terms, and until these
     // pages existed the site had nothing shaped like an answer to them:
@@ -85,15 +94,37 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // having carried the tokens for a year. Monthly rather than weekly: the
     // page changes when a preset is added, which is rare on purpose.
     { url: absoluteUrl('/themes'), changeFrequency: 'monthly' as const, priority: 0.8 },
+    { url: absoluteUrl('/studio'), changeFrequency: 'monthly' as const, priority: 0.9 },
     ...KITS.map((kit) => ({
       url: absoluteUrl(`/kits/${kit.slug}`),
       changeFrequency: 'monthly' as const,
       priority: 0.8,
     })),
+    /*
+     * Intent hubs. The phrases people actually type — "glassmorphism
+     * cards", "tailwind loaders", "react pricing tables" — each a filtered
+     * view over the same catalog with its own editorial copy.
+     *
+     * These sit at the same priority as the category hubs and above the
+     * individual artifacts, because they are the pages written *for* these
+     * queries: /category/glow-neon is our taxonomy, /ui/neon-glow-effects
+     * is the search. Weekly, since what they contain changes whenever the
+     * catalog does — the grid is resolved at build time, not hand-listed.
+     *
+     * Derived from HUBS rather than typed out, for the reason the designer
+     * tools below are: a hand-kept copy is how a sitemap ends up missing
+     * the pages added last week.
+     */
+    { url: absoluteUrl('/ui'), changeFrequency: 'weekly' as const, priority: 0.9 },
+    ...HUBS.map((hub) => ({
+      url: absoluteUrl(`/ui/${hub.slug}`),
+      changeFrequency: 'weekly' as const,
+      priority: 0.8,
+    })),
     // Docs. Indexable on purpose: "hoverlab cli", "install tailwind block"
     // are navigational queries people actually type.
     { url: absoluteUrl('/docs'), changeFrequency: 'weekly' as const, priority: 0.9 },
-    ...['cli', 'api', 'mcp', 'registry', 'dna', 'skills'].map((slug) => ({
+    ...['cli', 'editor', 'api', 'registry', 'dna', 'skills'].map((slug) => ({
       url: absoluteUrl(`/docs/${slug}`),
       changeFrequency: 'weekly' as const,
       priority: 0.8,
@@ -107,6 +138,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: absoluteUrl('/terms'), changeFrequency: 'yearly' as const, priority: 0.3 },
     { url: absoluteUrl('/privacy'), changeFrequency: 'yearly' as const, priority: 0.3 },
     { url: absoluteUrl('/refunds'), changeFrequency: 'yearly' as const, priority: 0.3 },
+    // Agent access, which used to be /docs/mcp and is now a page of its
+    // own. Priority 0.9 rather than the 0.8 the docs pages get: it is the
+    // one claim in the catalog no competitor matches, and "mcp server
+    // components" is a query with intent behind it rather than a
+    // navigational lookup.
+    { url: absoluteUrl('/mcp'), changeFrequency: 'weekly' as const, priority: 0.9 },
     // The design-to-code story, written for designers rather than for
     // developers, and the only page that says the catalog is still growing.
     { url: absoluteUrl('/figma'), changeFrequency: 'monthly' as const, priority: 0.8 },
@@ -124,6 +161,40 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // with a card already out. Monthly, because the prices on it are other
     // people's and they move.
     { url: absoluteUrl('/compare'), changeFrequency: 'monthly' as const, priority: 0.8 },
+    // One page per competitor, generated from the same sourced data as
+    // /compare. These are the URLs that answer the query people actually
+    // type — "react bits alternative" — which no single comparison page can
+    // rank for nine times over. Derived from COMPETITORS rather than listed
+    // by hand, for the reason the designer tools below are.
+    { url: absoluteUrl('/alternatives'), changeFrequency: 'monthly' as const, priority: 0.8 },
+    ...COMPETITORS.map((competitor) => ({
+      url: absoluteUrl(`/alternatives/${competitor.slug}`),
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    })),
+    // What ships next, publicly. Monthly rather than weekly: a roadmap that
+    // changed every week would be telling on itself.
+    { url: absoluteUrl('/roadmap'), changeFrequency: 'monthly' as const, priority: 0.7 },
+    // The commerce surfaces aimed at a specific person rather than at a
+    // query. Both resolve to a real, complete page on any deployment — they
+    // explain the terms and say plainly when the door is not yet open,
+    // rather than 404ing or rendering a dead button.
+    { url: absoluteUrl('/affiliate'), changeFrequency: 'monthly' as const, priority: 0.6 },
+    { url: absoluteUrl('/students'), changeFrequency: 'monthly' as const, priority: 0.6 },
+    /*
+     * The three community surfaces, which ship with empty lists on purpose.
+     *
+     * Listed anyway, and that is a considered exception to this file's own
+     * rule about only listing what an anonymous visitor can usefully load.
+     * The rule is there to keep thin and dead-ending pages out of the index;
+     * each of these renders a complete document that explains what it is
+     * for and how to get on it, which is exactly what somebody searching
+     * "hoverlab showcase" wants to find. Low priority, because until they
+     * have entries they are invitations rather than content.
+     */
+    { url: absoluteUrl('/showcase'), changeFrequency: 'monthly' as const, priority: 0.5 },
+    { url: absoluteUrl('/wall'), changeFrequency: 'monthly' as const, priority: 0.5 },
+    { url: absoluteUrl('/labs'), changeFrequency: 'monthly' as const, priority: 0.5 },
     // The page builder. Indexed bare, with no composition: "landing page
     // builder" and "tailwind page builder" are the queries, and every
     // composition is a query string over this one URL — so there is exactly
@@ -135,6 +206,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // queries we ship an answer to and had no page for. Monthly — the
     // support matrix moves when a converter does, which is rarely.
     { url: absoluteUrl('/frameworks'), changeFrequency: 'monthly' as const, priority: 0.8 },
+    // One page per framework, and they are submitted at the same priority
+    // as the hub rather than below it. The hub ranks for "multi framework
+    // component library", which nobody types; these rank for "vue tailwind
+    // components" and "svelte ui components", which are the queries. Derived
+    // from FRAMEWORK_STORIES so adding a converter cannot leave its page
+    // out of the index.
+    ...FRAMEWORK_STORIES.map((framework) => ({
+      url: absoluteUrl(`/frameworks/${framework.id}`),
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
+    })),
     // Per-artifact WCAG evidence. Weekly, because the numbers on it move
     // with the catalog — it is regenerated on every build — and because a
     // buyer doing vendor diligence under the EAA wants the current one.
@@ -163,6 +245,33 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: absoluteUrl(tool.href),
       changeFrequency: 'monthly' as const,
       priority: 0.8,
+    })),
+    /*
+      Tool permalinks — the curated ones only.
+
+      Six tools now carry their state in a readable query string rather than
+      an invisible `#s=` fragment, which makes a tuned palette or a contrast
+      pair a real URL. The query space over those parameters is infinite, so
+      listing all of it would build a crawl trap rather than a hundred
+      ranking pages — thousands of near-identical documents competing with
+      each other and with the tool itself.
+
+      So only the hand-picked entries are here: eight to twelve per tool,
+      each answering a query somebody actually types ("white on blue
+      contrast", "golden ratio type scale", "neumorphic box shadow"), each
+      self-canonical, and each linked from its tool page so a crawler that
+      arrives has somewhere to go. Every OTHER permalink works identically
+      and canonicalises back to the bare tool — the treatment `/browse`
+      already gives its filters. The rule is written down once, in
+      `lib/tools/tool-page-metadata.ts`.
+
+      Priority 0.6, under the tools' own 0.8: these are answers to narrow
+      questions, and the tool is the page that should win the broad one.
+    */
+    ...CURATED_PERMALINK_HREFS.map((href) => ({
+      url: absoluteUrl(href),
+      changeFrequency: 'monthly' as const,
+      priority: 0.6,
     })),
   ].map((entry) => ({ ...entry, lastModified: now }))
 

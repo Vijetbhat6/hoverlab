@@ -70,13 +70,25 @@ export function UserMenu() {
 
   if (loading) {
     return (
+      /*
+       * `aria-label`, because the only child is an `aria-hidden` icon and a
+       * <button> whose entire content is hidden has no accessible name — a
+       * critical `button-name` failure that a live axe run finds on every
+       * page, in the seconds before auth resolves. `disabled` does not exempt
+       * it: the element is still in the tree and still announced.
+       *
+       * `aria-busy` rather than a visually-hidden "Loading" string, so the
+       * spinner keeps the header's width stable while it spins.
+       */
       <Button
         variant="ghost"
         size="sm"
         disabled
+        aria-label="Checking your account"
+        aria-busy="true"
         className="hidden h-9 gap-1.5 sm:inline-flex"
       >
-        <Loader2 className="h-4 w-4 animate-spin" />
+        <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />
       </Button>
     )
   }

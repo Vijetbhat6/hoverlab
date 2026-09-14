@@ -51,6 +51,24 @@ const METRICS: KpiSummaryBandMetric[] = [
   { label: "Open incidents", value: "1", detail: "Degraded, not down. Public status page has the detail." },
 ]
 
+/*
+  Per-instance id, hashed from props that differ between instances.
+
+  A literal id is a latent duplicate the moment this block is rendered
+  twice on one document -- two pages on a catalog hub, or one page using
+  the section twice. `aria-labelledby` pointing at a duplicated id resolves
+  to whichever element comes first, so the second copy is announced with
+  the first copy's label. Server component, so no `useId`: hashing props
+  gives each instance its own target and stays stable across server and
+  client renders in a way a counter would not.
+*/
+function instanceId(...parts: (string | undefined)[]): string {
+  const text = parts.filter(Boolean).join('|')
+  let hash = 0
+  for (let i = 0; i < text.length; i++) hash = (Math.imul(hash, 31) + text.charCodeAt(i)) | 0
+  return (hash >>> 0).toString(36).slice(0, 6)
+}
+
 export function KpiSummaryBand({
   eyebrow = "This month",
   heading = "The four numbers the team looks at",
@@ -58,15 +76,17 @@ export function KpiSummaryBand({
   metrics = METRICS,
   className,
 }: KpiSummaryBandProps) {
+  const uid = instanceId(heading, eyebrow)
+
   return (
     <section
-      aria-labelledby="kpi-summary-band-heading"
+      aria-labelledby={`kpi-summary-band-heading-${uid}`}
       className={`w-full bg-background px-6 py-16 sm:py-20 ${className ?? ''}`}
     >
       <div className="mx-auto max-w-5xl">
         <p className="text-sm font-medium text-primary">{eyebrow}</p>
         <h2
-          id="kpi-summary-band-heading"
+          id={`kpi-summary-band-heading-${uid}`}
           className="mt-2 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl"
         >
           {heading}

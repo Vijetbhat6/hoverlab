@@ -129,8 +129,13 @@ export function HeroTerminal({
             </div>
 
             <div aria-hidden className="space-y-1 pt-2 text-xs text-muted-foreground">
-              {output.map((line) => (
-                <div key={line}>{line}</div>
+              {/* Keyed by position, not by content. Terminal output is a fixed
+                  list of display lines that never reorders or filters, and a
+                  blank line is how a caller spaces it — so keying by the line
+                  itself collides on the second `''` and React drops one of
+                  them. `developer-portfolio-page` passes two. */}
+              {output.map((line, i) => (
+                <div key={i}>{line}</div>
               ))}
             </div>
           </div>

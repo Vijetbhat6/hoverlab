@@ -119,6 +119,17 @@ export function KeyboardShortcutsSheet({
   onOpenChange,
   className,
 }: KeyboardShortcutsSheetProps) {
+  /*
+    Per-instance prefix for every id this block emits.
+
+    The literals these replaced were a latent duplicate the moment the
+    block appeared twice on one document, and `aria-labelledby` on a
+    duplicated id resolves to the first match -- so the second copy was
+    labelled by the first copy's heading. Client component, so `useId` is
+    the right tool.
+  */
+  const uid = React.useId()
+
   const [internalOpen, setInternalOpen] = React.useState(true)
   const isOpen = open ?? internalOpen
   const setOpen = (next: boolean) => {
@@ -154,10 +165,10 @@ export function KeyboardShortcutsSheet({
       className={`w-full overflow-hidden rounded-2xl border border-border/60 bg-card shadow-xl ${className ?? ''}`}
       role="dialog"
       aria-modal="true"
-      aria-labelledby="shortcuts-title"
+      aria-labelledby={`${uid}-shortcuts-title`}
     >
       <header className="flex items-center gap-3 border-b border-border/60 px-5 py-3.5">
-        <h2 id="shortcuts-title" className="text-sm font-semibold tracking-tight">
+        <h2 id={`${uid}-shortcuts-title`} className="text-sm font-semibold tracking-tight">
           Keyboard shortcuts
         </h2>
         <div className="relative ms-auto">

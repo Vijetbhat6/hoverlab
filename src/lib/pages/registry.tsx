@@ -125,6 +125,27 @@ import TestimonialsPage02 from './sources/testimonials-page-02'
 import GalleryPage02 from './sources/gallery-page-02'
 import PortfolioIndexPage02 from './sources/portfolio-index-page-02'
 
+/* Genre pages -- templates 22-32. */
+import DeveloperPortfolioPage from './sources/developer-portfolio-page'
+import ResumePage from './sources/resume-page'
+import CryptoLandingPage from './sources/crypto-landing-page'
+import MarketsPage from './sources/markets-page'
+import EventLandingPage from './sources/event-landing-page'
+import SchedulePage from './sources/schedule-page'
+import RestaurantLandingPage from './sources/restaurant-landing-page'
+import MenuPage from './sources/menu-page'
+import ReservationPage from './sources/reservation-page'
+import PropertySearchPage from './sources/property-search-page'
+import PropertyDetailPage from './sources/property-detail-page'
+import JobBoardPage from './sources/job-board-page'
+import JobDetailPage from './sources/job-detail-page'
+import NewsletterLandingPage from './sources/newsletter-landing-page'
+import OssLandingPage from './sources/oss-landing-page'
+import DirectoryIndexPage from './sources/directory-index-page'
+import DirectoryListingPage from './sources/directory-listing-page'
+import StreamingLandingPage from './sources/streaming-landing-page'
+import WatchPage from './sources/watch-page'
+
 export const PAGE_PREVIEWS: Record<string, React.ReactNode> = {
   'saas-landing-page': <SaasLandingPage />,
   'waitlist-landing-page': <WaitlistLandingPage />,
@@ -239,6 +260,26 @@ export const PAGE_PREVIEWS: Record<string, React.ReactNode> = {
   'testimonials-page-02': <TestimonialsPage02 />,
   'gallery-page-02': <GalleryPage02 />,
   'portfolio-index-page-02': <PortfolioIndexPage02 />,
+
+  'developer-portfolio-page': <DeveloperPortfolioPage />,
+  'resume-page': <ResumePage />,
+  'crypto-landing-page': <CryptoLandingPage />,
+  'markets-page': <MarketsPage />,
+  'event-landing-page': <EventLandingPage />,
+  'schedule-page': <SchedulePage />,
+  'restaurant-landing-page': <RestaurantLandingPage />,
+  'menu-page': <MenuPage />,
+  'reservation-page': <ReservationPage />,
+  'property-search-page': <PropertySearchPage />,
+  'property-detail-page': <PropertyDetailPage />,
+  'job-board-page': <JobBoardPage />,
+  'job-detail-page': <JobDetailPage />,
+  'newsletter-landing-page': <NewsletterLandingPage />,
+  'oss-landing-page': <OssLandingPage />,
+  'directory-index-page': <DirectoryIndexPage />,
+  'directory-listing-page': <DirectoryListingPage />,
+  'streaming-landing-page': <StreamingLandingPage />,
+  'watch-page': <WatchPage />,
 }
 
 /** The rendered preview for a page, or undefined if the key is unknown. */

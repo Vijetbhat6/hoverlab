@@ -16,7 +16,9 @@ import Link from 'next/link'
 import { FileCode, Package } from 'lucide-react'
 
 import { PrimitiveThumbnail } from './primitive-preview'
-import { UsageCount } from '@/components/usage-count'
+import { ArtifactUpdated } from '@/components/artifact-updated'
+import { CardHoverActions } from '@/components/card-hover-actions'
+import { CardStats, UsageCount } from '@/components/usage-count'
 import {
   primitiveCategorySlug,
   type PrimitiveMeta,
@@ -25,10 +27,22 @@ import {
 export function PrimitiveCard({ primitive }: { primitive: PrimitiveMeta }) {
   return (
     <article className="group relative flex flex-col overflow-hidden rounded-2xl border border-border/60 bg-card/60 p-3 transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-lg">
-      <PrimitiveThumbnail
-        componentKey={primitive.previewComponent}
-        height={primitive.thumbHeight}
-      />
+      <div className="relative">
+        <PrimitiveThumbnail
+          componentKey={primitive.previewComponent}
+          height={primitive.thumbHeight}
+        />
+        <CardHoverActions
+          artifact={{
+            id: primitive.id,
+            name: primitive.name,
+            category: primitive.category,
+            level: 'primitive',
+          }}
+          href={`/primitive/${primitive.id}`}
+          className="right-2 top-2"
+        />
+      </div>
 
       <div className="flex flex-1 flex-col p-3">
         <h3 className="font-semibold leading-snug tracking-tight">
@@ -67,7 +81,11 @@ export function PrimitiveCard({ primitive }: { primitive: PrimitiveMeta }) {
               : `${primitive.deps.length} dep${primitive.deps.length > 1 ? 's' : ''}`}
           </span>
 
+          <ArtifactUpdated level="primitive" id={primitive.id} />
+
           <UsageCount id={primitive.id} className="font-medium text-foreground/70" />
+
+          <CardStats id={primitive.id} />
         </div>
       </div>
     </article>

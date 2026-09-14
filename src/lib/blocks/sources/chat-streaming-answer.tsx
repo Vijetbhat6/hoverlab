@@ -77,6 +77,23 @@ const DEFAULT_FOLLOW_UPS = [
 const useIsomorphicLayoutEffect =
   typeof window === 'undefined' ? React.useEffect : React.useLayoutEffect
 
+/*
+  Per-instance id, hashed from props that differ between instances.
+
+  A literal-rooted id is a latent duplicate the moment this block renders
+  twice on one document. `aria-labelledby` resolves to whichever element
+  with that id comes first, so the second copy is announced with the
+  first copy's label. Server component, so no `useId` -- hashing props
+  gives each instance its own namespace and stays stable across server and
+  client renders in a way a counter would not.
+*/
+function instanceId(...parts: (string | undefined)[]): string {
+  const text = parts.filter(Boolean).join('|')
+  let hash = 0
+  for (let i = 0; i < text.length; i++) hash = (Math.imul(hash, 31) + text.charCodeAt(i)) | 0
+  return (hash >>> 0).toString(36).slice(0, 6)
+}
+
 export function ChatStreamingAnswer({
   question = 'Why did churn spike in Q3?',
   answer = DEFAULT_ANSWER,
@@ -85,6 +102,8 @@ export function ChatStreamingAnswer({
   speed = 12,
   className = '',
 }: ChatStreamingAnswerProps) {
+  const uid = instanceId(question)
+
   // Starts complete: this is what the server renders and what a user with
   // reduced motion keeps.
   const [shown, setShown] = React.useState(answer.length)
@@ -175,7 +194,7 @@ export function ChatStreamingAnswer({
                 <li key={source.id}>
                   <a
                     href="#"
-                    id={`citation-${source.id}`}
+                    id={`${uid}-citation-${source.id}`}
                     className="flex items-center gap-2.5 rounded-lg border border-border/60 bg-card/60 px-2.5 py-2 text-xs transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                   >
                     <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-md bg-muted font-mono text-[10px] font-semibold">

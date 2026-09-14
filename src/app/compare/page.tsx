@@ -291,6 +291,16 @@ export default function ComparePage() {
                         <time dateTime={c.checkedOn}>{dateLabel(c.checkedOn)}</time>
                         {c.checkedOn !== LAST_SWEEP ? ' — not reachable since' : null}
                       </span>
+                      {/* The per-vendor page, generated from this same row.
+                          This table is the landscape; that page is the
+                          head-to-head, and it opens with this vendor's
+                          `beatsUs` at full size rather than as one cell. */}
+                      <Link
+                        href={`/alternatives/${c.slug}`}
+                        className="mt-1 block text-xs font-normal text-primary underline underline-offset-4 hover:text-primary/80"
+                      >
+                        Head to head
+                      </Link>
                     </th>
                     <td className="px-4 py-4">
                       <span className="font-semibold">

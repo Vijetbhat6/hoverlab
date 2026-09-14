@@ -96,6 +96,17 @@ export function DataTableInlineEdit({
   rows = DEFAULT_ROWS,
   className = '',
 }: DataTableInlineEditProps) {
+  /*
+    Per-instance prefix for every id this block emits.
+
+    The literals these replaced were a latent duplicate the moment the
+    block appeared twice on one document, and `aria-labelledby` on a
+    duplicated id resolves to the first match -- so the second copy was
+    labelled by the first copy's heading. Client component, so `useId` is
+    the right tool.
+  */
+  const uid = React.useId()
+
   const [edits, setEdits] = React.useState<EditMap>({})
   const [saved, setSaved] = React.useState(false)
 
@@ -197,16 +208,16 @@ export function DataTableInlineEdit({
         <table className="w-full min-w-[36rem] border-collapse text-start text-sm">
           <thead>
             <tr className="border-b border-border">
-              <th id="col-account" scope="col" className="px-5 py-2.5 font-semibold sm:px-6">
+              <th id={`${uid}-col-account`} scope="col" className="px-5 py-2.5 font-semibold sm:px-6">
                 Account
               </th>
-              <th id="col-plan" scope="col" className="px-5 py-2.5 font-semibold">
+              <th id={`${uid}-col-plan`} scope="col" className="px-5 py-2.5 font-semibold">
                 Plan
               </th>
-              <th id="col-seats" scope="col" className="px-5 py-2.5 font-semibold">
+              <th id={`${uid}-col-seats`} scope="col" className="px-5 py-2.5 font-semibold">
                 Seats
               </th>
-              <th id="col-monthly" scope="col" className="px-5 py-2.5 font-semibold">
+              <th id={`${uid}-col-monthly`} scope="col" className="px-5 py-2.5 font-semibold">
                 Monthly
               </th>
             </tr>
@@ -216,7 +227,7 @@ export function DataTableInlineEdit({
               <tr key={row.id} className="border-b border-border/60 last:border-0">
                 <th
                   scope="row"
-                  id={`row-${row.id}`}
+                  id={`${uid}-row-${row.id}`}
                   className="px-5 py-3 font-medium sm:px-6"
                 >
                   {row.account}
@@ -235,7 +246,7 @@ export function DataTableInlineEdit({
                         type="text"
                         inputMode="numeric"
                         value={value}
-                        aria-labelledby={`col-${field} row-${row.id}`}
+                        aria-labelledby={`${uid}-col-${field} row-${row.id}`}
                         aria-invalid={Boolean(edit?.error)}
                         aria-describedby={edit?.error ? errorId : undefined}
                         onKeyDown={onKeyDown}

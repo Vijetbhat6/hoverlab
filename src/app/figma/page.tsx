@@ -143,7 +143,7 @@ export default function FigmaPage() {
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Button asChild size="lg">
-              <Link href="/docs/mcp#figma">
+              <Link href="/mcp#figma">
                 Set it up
                 <ArrowRight aria-hidden className="ml-1.5 h-4 w-4" />
               </Link>
@@ -233,7 +233,7 @@ export default function FigmaPage() {
               <p className="mt-2 text-sm text-muted-foreground">
                 Both servers, registered with Claude Code. Any MCP client works
                 the same way — the{' '}
-                <Link href="/docs/mcp" className="font-medium text-primary hover:underline">
+                <Link href="/mcp" className="font-medium text-primary hover:underline">
                   MCP docs
                 </Link>{' '}
                 have the config-file form.

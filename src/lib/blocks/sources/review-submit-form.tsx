@@ -80,6 +80,17 @@ export function ReviewSubmitForm({
   onSubmit,
   className = '',
 }: ReviewSubmitFormProps) {
+  /*
+    Per-instance prefix for every id this block emits.
+
+    The literals these replaced were a latent duplicate the moment the
+    block appeared twice on one document, and `aria-labelledby` on a
+    duplicated id resolves to the first match -- so the second copy was
+    labelled by the first copy's heading. Client component, so `useId` is
+    the right tool.
+  */
+  const uid = React.useId()
+
   const [rating, setRating] = React.useState(0)
   const [hovered, setHovered] = React.useState<number | null>(null)
   const [title, setTitle] = React.useState('')
@@ -92,7 +103,7 @@ export function ReviewSubmitForm({
 
   return (
     <section
-      aria-labelledby="review-form-heading"
+      aria-labelledby={`${uid}-review-form-heading`}
       className={`mx-auto w-full max-w-xl px-4 py-16 sm:px-6 lg:px-8 ${className}`}
     >
       <form
@@ -102,7 +113,7 @@ export function ReviewSubmitForm({
         }}
         className="rounded-2xl border border-border bg-card p-6 sm:p-8"
       >
-        <h2 id="review-form-heading" className="text-lg font-semibold text-foreground">
+        <h2 id={`${uid}-review-form-heading`} className="text-lg font-semibold text-foreground">
           Review your {productName}
         </h2>
 

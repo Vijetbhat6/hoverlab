@@ -449,6 +449,67 @@ export function themeCss(value: ThemeStudioValue): string {
   ].join('\n')
 }
 
+/**
+ * The same theme, as the four numbers `/tools/tokens` works in.
+ *
+ * ── WHY A HANDOFF RATHER THAN A SHARED MODEL ────────────────────────────
+ *
+ * The token generator predates this module and answers a different
+ * question. It builds a *complete* shadcn token block — eighty-odd finished
+ * `oklch()` declarations for someone who has no tokens at all — from one
+ * brand hue and one neutral tint. This module moves a small set of INPUTS
+ * that `globals.css` derives the catalog's own tokens from. Merging them
+ * would mean one of the two giving up the shape that makes it useful.
+ *
+ * So they stay separate and this is the bridge: pick a look on the landing
+ * page, then open it in the generator with the sliders already where the
+ * preset put them. Encoded into the tool's own `#s=` share link, so no
+ * route, no param and no second entry point had to be invented — the
+ * generator has read that hash since the day it was built.
+ *
+ * ── WHAT DOES NOT SURVIVE THE TRIP, AND WHY THAT IS FINE ────────────────
+ *
+ * The neutral hue. This module runs warm surfaces against cool ink and
+ * swaps the two in dark; the generator tints its greys toward the brand hue
+ * with a single number. There is no pair of values that expresses the first
+ * in the second, so `warmHue`/`coolHue` are dropped rather than flattened
+ * into something that would claim to be them.
+ *
+ * The typeface goes too — the generator emits colour and radius, not type.
+ *
+ * What travels is everything the generator can actually hold: the accent's
+ * hue and chroma, the corner radius, and the neutral chroma as an absolute
+ * (this module's `chroma` is a multiplier on the amounts in the stylesheet,
+ * and 0.006 is what a multiplier of 1 means there). Lightness is not sent
+ * because the generator owns its own ramp and it is the shadcn one on
+ * purpose — see `buildScheme`.
+ *
+ * Values are rounded onto each slider's step and clamped to its range, so
+ * what lands is a position the control can actually represent.
+ */
+export interface TokenGeneratorState {
+  hue: number
+  chroma: number
+  radius: number
+  neutralChroma: number
+}
+
+/** What a multiplier of 1 means in absolute chroma, per `globals.css`. */
+const NEUTRAL_CHROMA_AT_1 = 0.006
+
+export function tokenGeneratorState(value: ThemeStudioValue): TokenGeneratorState {
+  const step = (n: number, size: number, max: number) =>
+    clamp(Math.round(n / size) * size, 0, max)
+  return {
+    hue: Math.round(normalizeHue(value.accent.hue)),
+    chroma: Number(step(value.accent.chroma, 0.005, 0.3).toFixed(3)),
+    radius: Number(step(value.radiusRem, 0.025, 1.5).toFixed(3)),
+    neutralChroma: Number(
+      step(value.base.chroma * NEUTRAL_CHROMA_AT_1, 0.001, 0.03).toFixed(3),
+    ),
+  }
+}
+
 /** A swatch colour for a preset chip, in the light theme. */
 export function accentSwatch(accent: BrandColor): string {
   return `oklch(${accent.lightL} ${accent.chroma} ${accent.hue})`

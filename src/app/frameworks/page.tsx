@@ -115,6 +115,16 @@ export default function FrameworksPage() {
           <h2 id="matrix-heading" className="text-2xl font-bold tracking-tight">
             What each framework gets
           </h2>
+          {/*
+            Said once, above the table, because a reader who scans a matrix
+            and leaves never discovers that every row has a page behind it
+            with the converter's actual output printed on it.
+          */}
+          <p className="mt-3 text-sm text-muted-foreground">
+            Every name below is a page of its own, with the real converted
+            output for that framework, its toolchain, and the one command
+            that installs into it.
+          </p>
 
           <div className="mt-6 overflow-x-auto">
             <table className="w-full min-w-[36rem] border-collapse text-sm">
@@ -143,7 +153,18 @@ export default function FrameworksPage() {
                 {FRAMEWORK_STORIES.map((framework) => (
                   <tr key={framework.id} className="border-b border-border/60 align-top">
                     <th scope="row" className="py-4 pr-4 text-left font-medium">
-                      {framework.label}
+                      {/*
+                        The row name is the way in to that framework's own
+                        page. This table is what a reader arrives at and it
+                        used to be a dead end: it answers "do you support
+                        Vue" and then offers nowhere to go and see it.
+                      */}
+                      <Link
+                        href={`/frameworks/${framework.id}`}
+                        className="text-primary hover:underline"
+                      >
+                        {framework.label}
+                      </Link>
                       {framework.proOnWebsite ? (
                         <span className="mt-1 block text-xs font-normal text-muted-foreground">
                           Pro, in the website&rsquo;s panel

@@ -32,6 +32,7 @@ import { Plus, Search } from 'lucide-react'
 
 import { BLOCK_INDEX } from '@/lib/blocks/block-index'
 import { BLOCK_CATEGORIES } from '@/lib/blocks/block-types'
+import { BLOCK_DRAG_TYPE } from '@/components/builder/builder-surface'
 import { appendBlock, builderHref } from '@/lib/builder/compose'
 import { cn } from '@/lib/utils'
 
@@ -41,11 +42,22 @@ const POPULATED = BLOCK_CATEGORIES.filter((c) => BLOCK_INDEX.some((b) => b.categ
 export function BlockPicker({
   current,
   atCapacity,
+  theme,
 }: {
   /** The composition as it stands — what each link appends to. */
   current: string[]
   /** True when the page is full; links become inert rather than lying. */
   atCapacity: boolean
+  /**
+   * The encoded theme, carried into every add.
+   *
+   * Threaded rather than read from the URL here, because the URL is the one
+   * source of truth and the page has already parsed it. A picker that
+   * rebuilt the href without it would silently reset the reader's colours
+   * the first time they added a section — the failure mode a client-side
+   * store would not have, and the price of this design.
+   */
+  theme: string | null
 }) {
   const [query, setQuery] = React.useState('')
   const [category, setCategory] = React.useState<string>('All')
@@ -149,8 +161,28 @@ export function BlockPicker({
                   <span className={cn(shape, 'cursor-not-allowed opacity-50')}>{label}</span>
                 ) : (
                   <Link
-                    href={builderHref(appendBlock(current, b.id))}
+                    href={builderHref(appendBlock(current, b.id), theme)}
                     scroll={false}
+                    /*
+                     * Draggable as well as clickable, and the two do
+                     * different things: a click appends to the end, a drag
+                     * places the section where it is dropped. The outline
+                     * is sticky, so on a desktop it stays in view while
+                     * this list is scrolled — which is the only reason a
+                     * drag from down here is a reasonable gesture.
+                     *
+                     * Clicking remains the whole feature on a phone, where
+                     * there is no drag-and-drop to speak of and the outline
+                     * is not beside anything.
+                     */
+                    draggable
+                    onDragStart={(event) => {
+                      event.dataTransfer.setData(BLOCK_DRAG_TYPE, b.id)
+                      /* A standard type too: without one, some browsers
+                         refuse to start the drag at all. */
+                      event.dataTransfer.setData('text/plain', b.name)
+                      event.dataTransfer.effectAllowed = 'copy'
+                    }}
                     className={cn(
                       shape,
                       'bg-card/40 transition-colors hover:border-border hover:bg-muted/60',

@@ -19,9 +19,11 @@
 
 import * as React from 'react'
 import Link from 'next/link'
-import { Route, LayoutTemplate, Blocks, Lock } from 'lucide-react'
+import { Route, LayoutTemplate, Blocks, Lock, Sparkles } from 'lucide-react'
 import { ArtifactThumbnail } from '@/components/artifact-preview'
-import { UsageCount } from '@/components/usage-count'
+import { ArtifactUpdated } from '@/components/artifact-updated'
+import { CardHoverActions } from '@/components/card-hover-actions'
+import { CardStats, UsageCount } from '@/components/usage-count'
 import { PaletteScope } from '@/components/templates/palette-scope'
 import { getPagePreview } from '@/lib/pages/registry'
 import { getPalette, paletteSwatch } from '@/lib/templates/palettes'
@@ -53,6 +55,25 @@ export function TemplateCard({ template }: { template: TemplateMeta }) {
         </span>
       ) : null}
 
+      {/*
+        Left, not right: the Pro badge owns the right corner on the paid
+        templates, and an overlay that appeared under the reader's cursor
+        on top of it would cover the one thing on the card that says what
+        buying it gets you. Positioned against the article rather than a
+        thumbnail wrapper — this card has none, because `PaletteScope`
+        already wraps the thumbnail and re-colours anything inside it.
+      */}
+      <CardHoverActions
+        artifact={{
+          id: template.id,
+          name: template.name,
+          category: template.category,
+          level: 'template',
+        }}
+        href={`/template/${template.id}`}
+        className="left-5 top-5"
+      />
+
       <div className="flex flex-1 flex-col p-3">
         <h3 className="font-semibold leading-snug tracking-tight">
           <Link
@@ -62,6 +83,29 @@ export function TemplateCard({ template }: { template: TemplateMeta }) {
             {template.name}
           </Link>
         </h3>
+
+        {/*
+            The set piece, directly under the name and above the
+            description.
+
+            This is the line the card is sold on. A grid of thirty-two
+            cards whose only distinguishing text is "a landing page for X"
+            is thirty-two copies of one sentence, and a visitor scanning it
+            has no basis for opening any of them — so the one concrete
+            screen goes first and the description follows as context.
+
+            `truncate` rather than a clamp: the name is capped at 45
+            characters by `templates.test.ts` precisely so it fits on one
+            line, and if a longer one ever slips past that test, cutting it
+            is better than growing this card taller than the three beside
+            it. The full sentence behind it lives on the detail page.
+        */}
+        {template.setPiece ? (
+          <p className="mt-2 flex items-center gap-1.5 text-xs font-medium text-primary">
+            <Sparkles aria-hidden className="h-3.5 w-3.5 shrink-0" />
+            <span className="truncate">{template.setPiece.name}</span>
+          </p>
+        ) : null}
 
         <p className="mt-1.5 line-clamp-2 text-sm text-muted-foreground">
           {template.description}
@@ -102,6 +146,10 @@ export function TemplateCard({ template }: { template: TemplateMeta }) {
               which are properties of the template; this one is a property
               of the week. */}
           <UsageCount id={template.id} className="font-medium text-foreground/70" />
+
+          <CardStats id={template.id} />
+
+          <ArtifactUpdated level="template" id={template.id} />
         </div>
       </div>
     </article>

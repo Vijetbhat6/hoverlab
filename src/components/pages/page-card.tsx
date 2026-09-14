@@ -11,7 +11,9 @@ import * as React from 'react'
 import Link from 'next/link'
 import { Blocks, FileCode, Layers2 } from 'lucide-react'
 import { PageThumbnail } from './page-preview'
-import { UsageCount } from '@/components/usage-count'
+import { ArtifactUpdated } from '@/components/artifact-updated'
+import { CardHoverActions } from '@/components/card-hover-actions'
+import { CardStats, UsageCount } from '@/components/usage-count'
 import { takeNumber } from '@/lib/pages/page-index'
 import type { PageMeta } from '@/lib/pages/page-types'
 
@@ -31,6 +33,19 @@ export function PageCard({ page }: { page: PageMeta }) {
             Take {take.n} of {take.of}
           </span>
         ) : null}
+
+        {/* Opposite corner from the take badge, which is why this one is
+            positioned by the caller — see <CardHoverActions>. */}
+        <CardHoverActions
+          artifact={{
+            id: page.id,
+            name: page.name,
+            category: page.category,
+            level: 'page',
+          }}
+          href={`/page/${page.id}`}
+          className="right-2 top-2"
+        />
       </div>
 
       <div className="flex flex-1 flex-col p-3">
@@ -60,8 +75,13 @@ export function PageCard({ page }: { page: PageMeta }) {
             {page.lines} lines
           </span>
 
-          {/* Absent on anything nobody copied this week — see <UsageCount>. */}
+          {/* Absent on anything nobody copied this week — see <UsageCount>.
+              The date above it is static; these arrive after the HTML. */}
+          <ArtifactUpdated level="page" id={page.id} />
+
           <UsageCount id={page.id} className="font-medium text-foreground/70" />
+
+          <CardStats id={page.id} />
         </div>
       </div>
     </article>

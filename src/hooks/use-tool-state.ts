@@ -29,20 +29,41 @@
  * tool needs no route change and no migration — only this hook.
  *
  * There is a third layer, and it is the one that travels between people
- * rather than between machines: a shared `#s=` link. It is read here, in
- * the same restore that reads `localStorage`, because the precedence
- * between the two has to be decided in one place. A link someone was just
- * handed wins over whatever this browser happened to have — they clicked it
- * to see a specific thing, and showing them their own last session instead
- * is the one outcome that makes the link useless. Five tools used to do
- * this themselves, each with its own field-by-field merge that had to be
- * updated whenever the tool grew a control; none of them do now.
+ * rather than between machines: a shared link. It is read here, in the same
+ * restore that reads `localStorage`, because the precedence between the two
+ * has to be decided in one place. A link someone was just handed wins over
+ * whatever this browser happened to have — they clicked it to see a
+ * specific thing, and showing them their own last session instead is the
+ * one outcome that makes the link useless. Five tools used to do this
+ * themselves, each with its own field-by-field merge that had to be updated
+ * whenever the tool grew a control; none of them do now.
+ *
+ * That third layer now has two spellings, and the order between them is the
+ * only genuinely new decision in this file:
+ *
+ *   `options.initial` is a readable permalink — `?fg=ffffff&bg=3b82f6` —
+ *   that the SERVER already parsed, because it also had to build the page's
+ *   <title> out of it. It arrives as a prop rather than being read from the
+ *   URL here, which is what lets it seed `useState` directly: the server
+ *   rendered with that exact state, so using it as the initial value is the
+ *   one restore path with no flash of defaults and no hydration mismatch.
+ *
+ *   `#s=` is the old opaque fragment. Still read, still second, and still
+ *   the only option for a tool whose state is not expressible as readable
+ *   parameters. Links already pasted into other people's channels have to
+ *   keep working.
+ *
+ * When a tool passes `options.permalink`, this hook also keeps the address
+ * bar in sync with the working state, and `shareUrl()` hands out the
+ * readable form instead of the fragment. See the two blocks near the bottom
+ * of the file for why that sync is a `replaceState` and not a navigation.
  */
 
 import * as React from 'react'
 import { useAuth } from '@/components/auth-provider'
 import { track } from '@/lib/analytics'
 import { readSharedState, shareUrlFor } from '@/components/designer-tools/share-link'
+import { toolHref, type ToolPermalink } from '@/lib/tools/permalink'
 import {
   TOOL_PRESET_LIMITS,
   rejectionReason,
@@ -51,9 +72,17 @@ import {
   type ToolPreset,
 } from '@/lib/tool-presets'
 
-/** The `hoverlab:tool:*` convention every tool already used. */
+/**
+ * The `hoverlab:tool:*` convention every tool already used.
+ *
+ * The leading slash is stripped separately from the `tools/` prefix so that
+ * `/studio` — the one caller that is not under `/tools` — keys as
+ * `hoverlab:tool:studio` rather than `hoverlab:tool:/studio`. Every
+ * existing key is unchanged: `/tools/tokens` loses the slash, then the
+ * prefix, and is still `tokens`.
+ */
 function storageKey(tool: string): string {
-  return `hoverlab:tool:${tool.replace(/^\/tools\//, '')}`
+  return `hoverlab:tool:${tool.replace(/^\//, '').replace(/^tools\//, '')}`
 }
 
 /**
@@ -168,6 +197,81 @@ export interface UseToolState<T> extends ToolPresetsApi {
   hydrating: boolean
 }
 
+export interface ToolStateOptions<T extends object> {
+  /**
+   * State the server already read out of a readable permalink.
+   *
+   * Passed rather than read from `window` because the server needed it
+   * first — the page's <title> is built from it — and because a value that
+   * both sides have makes this the only restore path that can seed
+   * `useState` directly instead of landing in an effect a frame later.
+   *
+   * `undefined` means "no permalink on this request", which is different
+   * from "a permalink that spells out the defaults": the second must still
+   * outrank this browser's stored state. `parseToolState` draws that line
+   * with its `fromLink` flag, and the caller passes `undefined` accordingly.
+   */
+  initial?: T
+
+  /**
+   * This tool's permalink spec.
+   *
+   * Its presence is what switches `shareUrl()` from the `#s=` fragment to
+   * the readable query string, and what turns on the address-bar sync.
+   */
+  permalink?: ToolPermalink<T>
+
+  /**
+   * Optional last word on a state arriving from a shared `#s=` link, applied
+   * after `shapeMatched` has already guaranteed the shape.
+   *
+   * For the handful of tools whose state has values the shape guard cannot
+   * check — a `mode` that is one of two strings, a colour that has to parse
+   * as hex, an id that has to name a preset that still exists. Return the
+   * state to use; return null to ignore the link entirely.
+   *
+   * Most tools do not pass this, and should not: the shape guard is the
+   * floor, and inventing a validator for a tool whose state is four numbers
+   * is a second place for the defaults to be written down. A tool with a
+   * `permalink` spec needs it even less — every field there is validated by
+   * its own codec on the way in.
+   */
+  sanitizeShared?: (shared: T) => T | null
+
+  /**
+   * Repair a restored state before it is used, on every restore path.
+   *
+   * ── WHY A SECOND GUARD, AND WHY IT IS NOT `sanitizeShared` ──────────
+   *
+   * `sanitizeShared` guards one path and may reject: a link that says
+   * something impossible should be ignored, because the visitor still has
+   * their own session underneath it. This guards the other two —
+   * `localStorage` and a saved preset — and may NOT reject, because
+   * underneath those there is nothing but defaults, and throwing away
+   * somebody's saved brand because one field is malformed is worse than
+   * repairing it. So the signatures differ on purpose: `T | null` there,
+   * `T` here.
+   *
+   * ── WHY IT WAS NEEDED ─────────────────────────────────────────
+   *
+   * Both of those paths merge with `{ ...defaults, ...stored }`, which is
+   * SHALLOW, and that was enough for as long as every tool's state was a
+   * handful of numbers at the top level: a missing key is filled in by the
+   * spread and a present one is a number.
+   *
+   * `/studio` is the first state with nested objects in it, and a shallow
+   * merge cannot repair those — a stored `{ theme: { accent: { hue: 200 } } }`
+   * replaces the whole `theme` branch, so `accent.chroma` is `undefined`,
+   * and the first `accent.chroma.toFixed(3)` on the way to a slider label
+   * throws. Verified before the fix: that exact blob produced an accent of
+   * `#NaNNaNNaN` and then a TypeError, which in a tool with no error
+   * boundary is a white screen and a lost brand.
+   *
+   * Tools whose state is flat do not need this and should not pass it.
+   */
+  coerce?: (restored: T) => T
+}
+
 /**
  * `T extends object` rather than `Record<string, unknown>`: a tool's state
  * is an `interface`, and TypeScript will not assign an interface to an
@@ -178,32 +282,37 @@ export interface UseToolState<T> extends ToolPresetsApi {
 export function useToolState<T extends object>(
   tool: string,
   defaults: T,
-  /**
-   * Optional last word on a state arriving from a shared link, applied
-   * after `shapeMatched` has already guaranteed the shape.
-   *
-   * For the handful of tools whose state has values the shape guard cannot
-   * check — a `mode` that is one of two strings, a colour that has to parse
-   * as hex, an id that has to name a preset that still exists. Return the
-   * state to use; return null to ignore the link entirely.
-   *
-   * Most tools do not pass this, and should not: the shape guard is the
-   * floor, and inventing a validator for a tool whose state is four numbers
-   * is a second place for the defaults to be written down.
-   */
-  sanitizeShared?: (shared: T) => T | null,
+  options: ToolStateOptions<T> = {},
 ): UseToolState<T> {
+  const { initial, permalink, sanitizeShared, coerce } = options
   const { user } = useAuth()
   const userId = user?.id ?? null
 
-  const [state, setState] = React.useState<T>(defaults)
-  const [hydrating, setHydrating] = React.useState(true)
+  /*
+    `initial` seeds the state rather than being applied in the effect below,
+    and it is the one value that may: it came from the server, which
+    rendered this page with it, so using it here is what the server already
+    committed to. Every other source has to wait for mount — reading
+    `localStorage` or `window.location.hash` during render would make the
+    server markup and the first client render disagree, which React resolves
+    by throwing the server markup away.
+  */
+  const [state, setState] = React.useState<T>(initial ?? defaults)
+  const [hydrating, setHydrating] = React.useState(initial === undefined)
   const [presets, setPresets] = React.useState<ToolPreset[]>([])
   const [loadingPresets, setLoadingPresets] = React.useState(false)
   const [presetError, setPresetError] = React.useState<string | null>(null)
   const [history, setHistory] = React.useState<History<T>>(EMPTY_HISTORY)
 
   const key = storageKey(tool)
+
+  /*
+    `coerce` held in a ref so `applyPreset` can use it without taking it as
+    a dependency. Callers pass an inline arrow, so a real dependency would
+    rebuild that callback every render.
+  */
+  const coerceRef = React.useRef(coerce)
+  coerceRef.current = coerce
 
   /*
     Restore after mount, never during render. Reading localStorage in the
@@ -215,6 +324,19 @@ export function useToolState<T extends object>(
     field does not restore `undefined` into it for every returning visitor.
   */
   React.useEffect(() => {
+    /*
+      A readable permalink has already won before this effect runs — it
+      seeded the state above — so there is nothing left to restore and
+      reading `localStorage` here would undo it. The hash is still cleared
+      on the way past, for the case where somebody has pasted a link
+      carrying both spellings: leaving a dead `#s=` on the address bar next
+      to the query that overruled it is confusing to no purpose.
+    */
+    if (initial !== undefined) {
+      readSharedState<unknown>()
+      return
+    }
+
     /*
       A shared link wins over this browser's stored state, and is read
       first so a malformed hash still falls through to the stored value
@@ -251,7 +373,10 @@ export function useToolState<T extends object>(
     }
     try {
       const raw = window.localStorage.getItem(key)
-      if (raw) setState({ ...defaults, ...(JSON.parse(raw) as Partial<T>) })
+      if (raw) {
+        const merged = { ...defaults, ...(JSON.parse(raw) as Partial<T>) }
+        setState(coerce ? coerce(merged) : merged)
+      }
     } catch {
       /* private mode, or a blob from an older version of this tool */
     }
@@ -383,11 +508,15 @@ export function useToolState<T extends object>(
       // Merged over defaults for the same reason the localStorage restore
       // is: a preset saved before the tool grew a control must not restore
       // that control to undefined.
-      setState({ ...defaults, ...(preset.state as Partial<T>) })
+      const merged = { ...defaults, ...(preset.state as Partial<T>) }
+      setState(coerceRef.current ? coerceRef.current(merged) : merged)
       setPresetError(null)
     },
     // `defaults` is a literal at every call site, so depending on it would
-    // rebuild this callback on every render.
+    // rebuild this callback on every render. `coerce` is read through a ref
+    // for the same reason — callers pass a literal or an inline arrow, and
+    // depending on it directly would make this callback a new function
+    // every render, which is the one thing its `[]` exists to avoid.
     [],
   )
 
@@ -413,7 +542,72 @@ export function useToolState<T extends object>(
     // Same reason as `applyPreset` above.
   }, [])
 
-  const shareUrl = React.useCallback(() => shareUrlFor(state), [state])
+  /*
+    The link the copy button hands out.
+
+    A tool with a permalink spec gets the readable query string; everything
+    else still gets the `#s=` fragment, which is what `shareUrlFor` builds.
+    The fallback is not deprecation-in-waiting — the code screenshotter
+    holds a pasted document, and there is no readable parameter form for
+    that — but for the six tools that have a spec, this is the whole point
+    of the exercise: what lands on the clipboard is a URL the recipient can
+    read before they click it.
+
+    Still a getter rather than a value, for the reason it always was: built
+    at click time, so a slider drag does not re-encode the state on every
+    frame for a string almost nobody asks for.
+  */
+  const shareUrl = React.useCallback(() => {
+    if (permalink && typeof window !== 'undefined') {
+      return `${window.location.origin}${toolHref(permalink, state)}`
+    }
+    return shareUrlFor(state)
+  }, [permalink, state])
+
+  /*
+    THE ADDRESS BAR
+
+    Kept in step with the working state, so the URL a visitor is looking at
+    is always the permalink for what they are looking at. That is the
+    property `/builder` has and the tools did not: you can copy the address
+    bar, or bookmark it, or send someone a screenshot with the URL in it,
+    without first finding a button.
+
+    `history.replaceState` rather than a router navigation, and the choice
+    is not incidental:
+
+      A navigation would re-run the server component on every slider frame.
+      `/builder` can afford a round trip per edit because an edit there is a
+      click; here an edit is a drag, at one event per frame.
+
+      `replaceState` writes no history entry, which keeps the back button
+      meaning "the page before this one". `pushState` would bury it under
+      several hundred gradient stops — and undo is already ⌘Z, wired below.
+
+    Next supports this for shallow URL updates, and because nothing in the
+    page reads `useSearchParams`, the write is invisible to React: no
+    re-render, no refetch, no effect anywhere else in the tree.
+
+    Debounced, because a drag would otherwise call it sixty times a second —
+    Safari throttles history writes and starts throwing once a page exceeds
+    roughly a hundred of them in thirty seconds, which would turn a long
+    drag into a console full of SecurityErrors.
+  */
+  React.useEffect(() => {
+    if (!permalink || hydrating || typeof window === 'undefined') return
+    const timer = window.setTimeout(() => {
+      const href = toolHref(permalink, state)
+      // Compared before writing so the common case — a tool sitting at its
+      // defaults while somebody reads the page — writes nothing at all.
+      if (href === window.location.pathname + window.location.search) return
+      try {
+        window.history.replaceState(window.history.state, '', href)
+      } catch {
+        /* a browser rate-limiting history writes; the copy button still works */
+      }
+    }, 250)
+    return () => window.clearTimeout(timer)
+  }, [permalink, state, hydrating])
 
   /*
     UNDO

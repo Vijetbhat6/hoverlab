@@ -29,7 +29,10 @@ import { PAGE_COUNT } from '@/lib/pages/page-index'
 import { TEMPLATE_COUNT } from '@/lib/templates/template-index'
 import { PATHS } from '@/lib/paths/catalog'
 import { KITS } from '@/lib/kits/catalog'
+import { GLOSSARY_COUNT } from '@/lib/glossary/catalog'
+import { HUBS } from '@/lib/hubs/catalog'
 import { SOCIAL, isPlaceholder, type SocialLink } from '@/lib/social'
+import { AFFILIATE_PERCENT } from '@/lib/affiliate'
 
 interface FooterLink {
   label: string
@@ -40,6 +43,10 @@ interface FooterLink {
 
 const CATALOG_LINKS: FooterLink[] = [
   { label: 'Browse everything', href: '/browse' },
+  // The phrase-shaped way in, above the tier list on purpose: it is the
+  // one entry here named after what a visitor wants rather than after what
+  // we call it.
+  { label: 'UI collections', href: '/ui', meta: String(HUBS.length) },
   { label: 'Effects', href: '/library', meta: TOTAL_COUNT.toLocaleString('en-US') },
   { label: 'Primitives', href: '/primitives', meta: String(PRIMITIVE_COUNT) },
   { label: 'Blocks', href: '/blocks', meta: String(BLOCK_COUNT) },
@@ -48,6 +55,10 @@ const CATALOG_LINKS: FooterLink[] = [
   { label: 'Categories', href: '/category', meta: String(CATEGORIES.length) },
   { label: 'Guided paths', href: '/paths', meta: String(PATHS.length) },
   { label: 'Kits', href: '/kits', meta: String(KITS.length) },
+  // The other way in for someone who has the word but not our name for the
+  // thing — "scrim", "bento grid", "combobox" — and the only entry here that
+  // ends at a definition rather than at a grid.
+  { label: 'Glossary', href: '/glossary', meta: String(GLOSSARY_COUNT) },
 ]
 
 /**
@@ -79,7 +90,7 @@ const TOOL_LINKS: FooterLink[] = [
 const DEVELOPER_LINKS: FooterLink[] = [
   { label: 'Documentation', href: '/docs' },
   { label: 'CLI reference', href: '/docs/cli' },
-  { label: 'MCP server', href: '/docs/mcp' },
+  { label: 'MCP server', href: '/mcp' },
   { label: 'HTTP API', href: '/docs/api' },
   // /design-system was an orphan: a real page, returning 200, in neither
   // nav nor footer nor the sitemap, reachable only from three deep links
@@ -101,15 +112,49 @@ const COMPANY_LINKS: FooterLink[] = [
   // we made no commitment at all, which reads as none.
   { label: 'Support', href: '/support' },
   { label: 'Changelog', href: '/changelog' },
+  // Directly under the changelog, because the two answer halves of the same
+  // question and neither is complete alone: the changelog proves the catalog
+  // is still moving, the roadmap says where. A one-time licence makes "what
+  // happens next" a fair thing to ask before paying.
+  { label: 'Roadmap', href: '/roadmap' },
   // Next to the pricing link on purpose: someone who has just read our price
   // and is about to go and check it against four other tabs should find the
   // table we already built for them rather than build it themselves.
   { label: 'Compared to the others', href: '/compare' },
+  // The per-vendor pages beside the table they are generated from. In the
+  // footer as well as on /compare because the query these answer ("<vendor>
+  // alternative") is typed by someone who has never seen /compare.
+  { label: 'Alternatives', href: '/alternatives' },
   // Written for one audience rather than for search. It sits in the footer
   // because that is where someone who has already read a page goes looking
   // for "is this for me", and it is the only route in that does not depend
   // on us being handed the visitor by a search engine or an agent.
   { label: 'For marketplace authors', href: '/for-authors' },
+]
+
+/**
+ * The surfaces that are about people outside this project rather than about
+ * the catalog.
+ *
+ * A column of their own rather than five more rows under Company, because
+ * they answer a different question. Company is "who is behind this and what
+ * happens if I buy"; these are "who else is here, and can I be one of them".
+ *
+ * Three of the five render an empty state today — the showcase, the wall and
+ * the labs shelf all ship with nothing in them, on purpose, and say so. They
+ * are linked anyway, which is a deliberate departure from this footer's own
+ * rule about not linking things that are not ready. The rule exists so that
+ * nothing here 404s or dead-ends; these resolve, explain what they are for,
+ * and tell a reader how to get on them, which is the whole reason to link an
+ * empty showcase at all. The alternative is a submission surface nobody can
+ * find until after it already has entries, which is the wrong way round.
+ */
+const COMMUNITY_LINKS: FooterLink[] = [
+  { label: 'Showcase', href: '/showcase' },
+  { label: 'Wall of love', href: '/wall' },
+  { label: 'Labs', href: '/labs' },
+  { label: 'Affiliate', href: '/affiliate', meta: `${AFFILIATE_PERCENT}%` },
+  { label: 'Student discount', href: '/students' },
 ]
 
 /**
@@ -160,7 +205,16 @@ export function SiteFooter() {
   return (
     <footer className="border-t border-border/40 bg-background/60 backdrop-blur">
       <div className="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-14">
-        <div className="grid grid-cols-2 gap-x-8 gap-y-10 sm:grid-cols-3 lg:grid-cols-[1.3fr_1fr_1fr_1fr_0.8fr]">
+        {/*
+          A fifth link column landed here with the growth surfaces, so the
+          brand block's share shrinks rather than the columns crowding: the
+          old template gave the brand 1.3fr against four 1fr columns and a
+          0.8fr tail, and appending a sixth track to that made every link
+          column too narrow for two-word labels like "Wall of love". The
+          brand block is the one element on this row with nothing that wraps
+          badly, so it is the one that gives.
+        */}
+        <div className="grid grid-cols-2 gap-x-8 gap-y-10 sm:grid-cols-3 lg:grid-cols-[1.1fr_1fr_1fr_1fr_1fr_0.8fr]">
           {/* Brand */}
           <div className="col-span-2 sm:col-span-3 lg:col-span-1">
             <Link
@@ -205,6 +259,7 @@ export function SiteFooter() {
           <FooterColumn title="Tools" links={TOOL_LINKS} />
           <FooterColumn title="Developers" links={DEVELOPER_LINKS} />
           <FooterColumn title="Company" links={COMPANY_LINKS} />
+          <FooterColumn title="Community" links={COMMUNITY_LINKS} />
         </div>
 
         <div className="mt-12 flex flex-col gap-3 border-t border-border/40 pt-6 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">

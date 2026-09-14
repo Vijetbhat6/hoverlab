@@ -82,5 +82,49 @@
   "customer-portal": {
     "lines": 541,
     "files": 10
+  },
+  "developer-portfolio": {
+    "lines": 499,
+    "files": 10
+  },
+  "personal-resume": {
+    "lines": 493,
+    "files": 10
+  },
+  "crypto-exchange": {
+    "lines": 502,
+    "files": 10
+  },
+  "conference-site": {
+    "lines": 501,
+    "files": 10
+  },
+  "restaurant": {
+    "lines": 502,
+    "files": 10
+  },
+  "estate-agency": {
+    "lines": 502,
+    "files": 10
+  },
+  "job-board": {
+    "lines": 498,
+    "files": 10
+  },
+  "newsletter": {
+    "lines": 497,
+    "files": 10
+  },
+  "open-source": {
+    "lines": 499,
+    "files": 10
+  },
+  "directory": {
+    "lines": 497,
+    "files": 10
+  },
+  "streaming": {
+    "lines": 501,
+    "files": 10
   }
 }

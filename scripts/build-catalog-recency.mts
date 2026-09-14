@@ -350,6 +350,66 @@ const out: RecencyFile = {
 
 writeFileSync(OUT, `${JSON.stringify(out, null, 2)}\n`, 'utf8')
 
+/* ------------------------------------------------------------------ *
+ *  The velocity summary
+ * ------------------------------------------------------------------ */
+
+/**
+ * The same history, counted, small enough for the front door.
+ *
+ * WHY A SECOND FILE. The ledger above is 78 KB of ids and dates, and it is
+ * imported as a module — nothing tree-shakes a JSON object, so any page
+ * that reads one date ships all of them. `/` is the highest-traffic page on
+ * the site and is a Client Component, so importing `lib/recency` there
+ * would put the whole ledger in the landing bundle to render two dozen
+ * numbers. This is those numbers: one row per (day, rung), about 1 KB.
+ *
+ * WHY IT CARRIES `generatedAt`. The homepage strip asks "what shipped in
+ * the last seven days", and a Client Component that answers that with
+ * `new Date()` renders one list on the build machine and a different one in
+ * the reader's browser three weeks later — a hydration mismatch, and a
+ * silently wrong one, since the two lists differ only in which waves fall
+ * inside the window. The window is therefore measured from the day this
+ * file was built, which is a committed constant and identical on both
+ * sides. It is also the honest anchor: the strip is reporting on the
+ * catalog's last week, and it prints the date so a stale deploy reads as
+ * stale rather than as a quiet week that never ended.
+ *
+ * Grouped and ordered exactly as `catalogWaves()` groups and orders the
+ * ledger — the homepage and `/changelog` are describing the same events and
+ * must not disagree about where one wave ends and the next begins.
+ */
+const VELOCITY_OUT = join(ROOT, 'src/lib/generated-catalog-velocity.json')
+
+const waveCounts = new Map<string, number>()
+for (const [level, ledger] of [
+  ['effect', out.effects],
+  ['primitive', out.primitives],
+  ['block', out.blocks],
+  ['page', out.pages],
+  ['template', out.templates],
+] satisfies Array<[string, Ledger]>) {
+  for (const date of Object.values(ledger)) {
+    const key = `${date}:${level}`
+    waveCounts.set(key, (waveCounts.get(key) ?? 0) + 1)
+  }
+}
+
+const waves = [...waveCounts.entries()]
+  .map(([key, count]) => {
+    const [date, level] = key.split(':')
+    return { date, level, count }
+  })
+  .sort((a, b) =>
+    a.date === b.date ? a.level.localeCompare(b.level) : b.date.localeCompare(a.date),
+  )
+
+writeFileSync(
+  VELOCITY_OUT,
+  `${JSON.stringify({ generatedAt: TODAY, waves }, null, 2)}\n`,
+  'utf8',
+)
+
 const dates = new Set(Object.values(out.effects))
 console.log(
   `recency ledger → ${Object.keys(out.effects).length} effects, ` +
@@ -364,6 +424,7 @@ console.log(
     `${Object.keys(out.updated.pages).length} pages, ` +
     `${Object.keys(out.updated.templates).length} templates`,
 )
+console.log(`  velocity summary: ${waves.length} waves`)
 
 /** Drop every entry whose id is not in the live catalog. */
 function prune(ledger: Ledger, live: string[]): Ledger {

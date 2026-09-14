@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1216" height="5626" viewBox="0 0 1216 5626" id="Hoverlab — Charts &amp; Metrics">
+<svg xmlns="http://www.w3.org/2000/svg" width="1216" height="5842" viewBox="0 0 1216 5842" id="Hoverlab — Charts &amp; Metrics">
   <!--
-    Hoverlab — Charts & Metrics. 9 sections, traced from the
+    Hoverlab — Charts & Metrics. 10 sections, traced from the
     rendered catalog. Drag this file onto a Figma canvas.
 
     These are frames, not components: named, editable layers with real
@@ -9,7 +9,7 @@
 
     Every section here is free to copy as code at https://hoverlab.dev/blocks
   -->
-  <rect id="Background" x="0" y="0" width="1216" height="5626" fill="#ffffff" />
+  <rect id="Background" x="0" y="0" width="1216" height="5842" fill="#ffffff" />
   <text id="Sparkline Metric Cards label" x="64" y="84" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Sparkline Metric Cards</text>
   <text id="metric-sparkline-cards id" x="64" y="98" font-family="ui-monospace, monospace" font-size="12" fill="#737373">metric-sparkline-cards</text>
   <g id="Sparkline Metric Cards" transform="translate(64, 116)">
@@ -745,5 +745,62 @@
       <text id="1" x="824.25" y="332" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="30" font-weight="600" letter-spacing="-0.75">1</text>
       <text id="Degraded, not down. Public" x="824.25" y="357" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Degraded, not down. Public</text>
       <text id="status page has the detail." x="824.25" y="377" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">status page has the detail.</text>
+  </g>
+  <text id="Market Price Ticker label" x="64" y="5677.5" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Market Price Ticker</text>
+  <text id="price-ticker-strip id" x="64" y="5691.5" font-family="ui-monospace, monospace" font-size="12" fill="#737373">price-ticker-strip</text>
+  <g id="Market Price Ticker" transform="translate(64, 5709.5)">
+    <rect id="container" x="0" y="0" width="1088" height="68.5" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="section" x="1" y="1" width="1086" height="66.5" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="BTC" x="-21.37" y="26" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="700" letter-spacing="-0.35">BTC</text>
+      <text id="$63,204.10" x="15.05" y="26" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">$63,204.10</text>
+      <text id="+2.41%" x="98.28" y="26" fill="#009966" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="600">+2.41%</text>
+      <text id="ETH" x="188.07" y="26" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="700" letter-spacing="-0.35">ETH</text>
+      <text id="$3,118.62" x="223.96" y="26" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">$3,118.62</text>
+      <text id="+1.08%" x="298.8" y="26" fill="#009966" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="600">+1.08%</text>
+      <text id="SOL" x="388.58" y="26" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="700" letter-spacing="-0.35">SOL</text>
+      <text id="$147.93" x="425.99" y="26" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">$147.93</text>
+      <text id="−3.22%" x="489.61" y="26" fill="#ec003f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="600">−3.22%</text>
+      <text id="USDC" x="579.03" y="26" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="700" letter-spacing="-0.35">USDC</text>
+      <text id="$1.0001" x="627.42" y="26" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">$1.0001</text>
+      <text id="0.00%" x="691.05" y="26" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="600">0.00%</text>
+      <text id="–" x="691.05" y="28" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="600">–</text>
+      <text id="XRP" x="767.17" y="26" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="700" letter-spacing="-0.35">XRP</text>
+      <text id="$0.5284" x="804.78" y="26" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">$0.5284</text>
+      <text id="−0.94%" x="868.41" y="26" fill="#ec003f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="600">−0.94%</text>
+      <text id="ADA" x="957.83" y="26" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="700" letter-spacing="-0.35">ADA</text>
+      <text id="$0.4471" x="996.22" y="26" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">$0.4471</text>
+      <text id="+5.67%" x="1059.85" y="26" fill="#009966" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="600">+5.67%</text>
+      <text id="AVAX" x="1149.63" y="26" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="700" letter-spacing="-0.35">AVAX</text>
+      <text id="$27.84" x="1195.33" y="26" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">$27.84</text>
+      <text id="+0.72%" x="1250.57" y="26" fill="#009966" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="600">+0.72%</text>
+      <text id="DOT" x="1340.35" y="26" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="700" letter-spacing="-0.35">DOT</text>
+      <text id="$6.19" x="1378.02" y="26" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">$6.19</text>
+      <text id="−1.55%" x="1424.85" y="26" fill="#ec003f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="600">−1.55%</text>
+      <text id="BTC 2" x="1514.27" y="26" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="700" letter-spacing="-0.35">BTC</text>
+      <text id="$63,204.10 2" x="1550.69" y="26" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">$63,204.10</text>
+      <text id="+2.41% 2" x="1633.92" y="26" fill="#009966" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="600">+2.41%</text>
+      <text id="ETH 2" x="1723.71" y="26" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="700" letter-spacing="-0.35">ETH</text>
+      <text id="$3,118.62 2" x="1759.6" y="26" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">$3,118.62</text>
+      <text id="+1.08% 2" x="1834.44" y="26" fill="#009966" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="600">+1.08%</text>
+      <text id="SOL 2" x="1924.22" y="26" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="700" letter-spacing="-0.35">SOL</text>
+      <text id="$147.93 2" x="1961.63" y="26" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">$147.93</text>
+      <text id="−3.22% 2" x="2025.25" y="26" fill="#ec003f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="600">−3.22%</text>
+      <text id="USDC 2" x="2114.67" y="26" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="700" letter-spacing="-0.35">USDC</text>
+      <text id="$1.0001 2" x="2163.07" y="26" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">$1.0001</text>
+      <text id="0.00% 2" x="2226.69" y="26" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="600">0.00%</text>
+      <text id="– 2" x="2226.69" y="28" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="600">–</text>
+      <text id="XRP 2" x="2302.82" y="26" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="700" letter-spacing="-0.35">XRP</text>
+      <text id="$0.5284 2" x="2340.42" y="26" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">$0.5284</text>
+      <text id="−0.94% 2" x="2404.05" y="26" fill="#ec003f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="600">−0.94%</text>
+      <text id="ADA 2" x="2493.47" y="26" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="700" letter-spacing="-0.35">ADA</text>
+      <text id="$0.4471 2" x="2531.86" y="26" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">$0.4471</text>
+      <text id="+5.67% 2" x="2595.49" y="26" fill="#009966" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="600">+5.67%</text>
+      <text id="AVAX 2" x="2685.27" y="26" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="700" letter-spacing="-0.35">AVAX</text>
+      <text id="$27.84 2" x="2730.97" y="26" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">$27.84</text>
+      <text id="+0.72% 2" x="2786.21" y="26" fill="#009966" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="600">+0.72%</text>
+      <text id="DOT 2" x="2875.99" y="26" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="700" letter-spacing="-0.35">DOT</text>
+      <text id="$6.19 2" x="2913.66" y="26" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">$6.19</text>
+      <text id="−1.55% 2" x="2960.49" y="26" fill="#ec003f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="600">−1.55%</text>
+      <text id="Indicative prices, delayed 15 minutes" x="544" y="53" fill="rgba(87, 91, 95, 0.702)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="11" text-anchor="middle">Indicative prices, delayed 15 minutes</text>
   </g>
 </svg>

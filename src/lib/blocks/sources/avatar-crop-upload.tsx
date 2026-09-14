@@ -108,6 +108,17 @@ export function AvatarCropUpload({
   onSave,
   className = '',
 }: AvatarCropUploadProps) {
+  /*
+    Per-instance prefix for every id this block emits.
+
+    The literals these replaced were a latent duplicate the moment the
+    block appeared twice on one document, and `aria-labelledby` on a
+    duplicated id resolves to the first match -- so the second copy was
+    labelled by the first copy's heading. Client component, so `useId` is
+    the right tool.
+  */
+  const uid = React.useId()
+
   const [zoom, setZoom] = React.useState(DEFAULT_CROP.zoom)
   const [x, setX] = React.useState(DEFAULT_CROP.x)
   const [y, setY] = React.useState(DEFAULT_CROP.y)
@@ -123,11 +134,11 @@ export function AvatarCropUpload({
 
   return (
     <section
-      aria-labelledby="avatar-crop-heading"
+      aria-labelledby={`${uid}-avatar-crop-heading`}
       className={`mx-auto w-full max-w-3xl px-4 py-16 sm:px-6 lg:px-8 ${className}`}
     >
       <div className="rounded-2xl border border-border bg-card p-6 sm:p-8">
-        <h2 id="avatar-crop-heading" className="text-lg font-semibold text-foreground">
+        <h2 id={`${uid}-avatar-crop-heading`} className="text-lg font-semibold text-foreground">
           {heading}
         </h2>
         <p className="mt-1 max-w-prose text-sm text-muted-foreground">{description}</p>

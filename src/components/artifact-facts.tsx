@@ -133,7 +133,7 @@ export function ArtifactFacts({
             renders on every artifact detail page.
           */}
           <Link
-            href="/docs/mcp"
+            href="/mcp"
             className="text-primary underline underline-offset-2 hover:no-underline"
           >
             no account needed

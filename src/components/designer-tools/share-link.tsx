@@ -19,6 +19,30 @@
  * the five that had hand-rolled copies of this no longer need one. The
  * exports remain for a tool that needs the button somewhere other than the
  * tray.
+ *
+ * ── THIS IS NO LONGER THE PREFERRED FORM ────────────────────────────────
+ *
+ * Six tools — palette, tokens, gradient, shadow, typography and contrast —
+ * now carry their state in a readable query string instead: see
+ * `lib/tools/permalink.ts`. A fragment buys invisibility, and invisibility
+ * turned out to be the problem rather than the feature. The server never
+ * sees a hash, so the page cannot say in its <title> what the link
+ * contains; a crawler never sees one, so the link is not a document; and a
+ * person cannot read one, so nobody can tell two apart or edit one by hand.
+ *
+ * What is left here is still load-bearing, in two places:
+ *
+ *   Reading. Every `#s=` link already pasted into somebody's channel keeps
+ *   working — `useToolState` still decodes them, one rung below the query
+ *   string in its restore order.
+ *
+ *   Writing, for the tools with no readable form. The code screenshotter
+ *   holds a pasted document; there is no honest way to spell that as named
+ *   parameters, and a base64 blob is the right answer for it.
+ *
+ * `ShareLinkButton` itself did not change and does not care: it calls
+ * whatever getter it was handed, and the hook decides which of the two
+ * spellings that getter builds.
  */
 
 import * as React from 'react'
@@ -26,28 +50,11 @@ import { Link2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { copyWithToast } from '@/components/designer-tools/tool-layout'
 import { toast } from 'sonner'
-
-/**
- * The longest `#s=` payload we will put on a clipboard.
- *
- * Browsers take far more than this, but a link is shared through things
- * that do not: chat clients wrap it, some mail clients hard-break it, and a
- * URL that arrives split is worse than one that never arrived — the
- * recipient sees a link, clicks it, and lands on a tool showing defaults
- * with no indication anything was lost. 4,000 characters clears every
- * mainstream client with room to spare, and every tool's real state is an
- * order of magnitude under it. The tools that could exceed it are the ones
- * holding pasted documents (the code screenshotter), and for those the
- * honest answer is that a link is the wrong transport.
- */
-export const SHARE_URL_MAX = 4000
-
-function encodeState(state: unknown): string {
-  const bytes = new TextEncoder().encode(JSON.stringify(state))
-  let bin = ''
-  for (const b of bytes) bin += String.fromCharCode(b)
-  return btoa(bin).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '')
-}
+import {
+  SHARE_URL_MAX,
+  decodeSharedState,
+  encodeSharedState,
+} from '@/lib/shared-tool-state'
 
 /**
  * Build the shareable URL for `state`, or null if it would be too long to
@@ -56,19 +63,17 @@ function encodeState(state: unknown): string {
  * Returns null rather than throwing or truncating: the caller's job is to
  * say so in the UI, and a truncated payload would decode to nothing on the
  * far end while still looking like a working link.
+ *
+ * The base64url-JSON itself is `lib/shared-tool-state.ts`, so a caller that
+ * wants a link to a *different* route — the landing hero's theme pills,
+ * which point at /tools/tokens — can encode one without pulling this
+ * module's toast and Button in behind it.
  */
 export function shareUrlFor(state: unknown): string | null {
   if (typeof window === 'undefined') return null
-  let encoded: string
-  try {
-    encoded = encodeState(state)
-  } catch {
-    // A state carrying something JSON cannot express (a cycle, a BigInt).
-    // No tool does this today; if one starts, it fails here rather than
-    // producing a link that decodes to garbage.
-    return null
-  }
-  const url = `${window.location.origin}${window.location.pathname}#s=${encoded}`
+  const hash = encodeSharedState(state)
+  if (hash === null) return null
+  const url = `${window.location.origin}${window.location.pathname}${hash}`
   return url.length > SHARE_URL_MAX ? null : url
 }
 
@@ -80,17 +85,10 @@ export function shareUrlFor(state: unknown): string | null {
  */
 export function readSharedState<T>(): T | null {
   if (typeof window === 'undefined') return null
-  const m = /^#s=([A-Za-z0-9_-]+)$/.exec(window.location.hash)
-  if (!m) return null
-  try {
-    const bin = atob(m[1]!.replace(/-/g, '+').replace(/_/g, '/'))
-    const bytes = Uint8Array.from(bin, (c) => c.charCodeAt(0))
-    const parsed = JSON.parse(new TextDecoder().decode(bytes)) as T
-    window.history.replaceState(null, '', window.location.pathname + window.location.search)
-    return parsed
-  } catch {
-    return null
-  }
+  const parsed = decodeSharedState<T>(window.location.hash)
+  if (parsed === null) return null
+  window.history.replaceState(null, '', window.location.pathname + window.location.search)
+  return parsed
 }
 
 /**

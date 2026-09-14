@@ -133,6 +133,17 @@ export function DrawerRecordDetail({
   records = DEFAULT_RECORDS,
   className = '',
 }: DrawerRecordDetailProps) {
+  /*
+    Per-instance prefix for every id this block emits.
+
+    The literals these replaced were a latent duplicate the moment the
+    block appeared twice on one document, and `aria-labelledby` on a
+    duplicated id resolves to the first match -- so the second copy was
+    labelled by the first copy's heading. Client component, so `useId` is
+    the right tool.
+  */
+  const uid = React.useId()
+
   const [index, setIndex] = React.useState(0)
   const [tab, setTab] = React.useState<'details' | 'activity'>('details')
   const [open, setOpen] = React.useState(true)
@@ -176,14 +187,14 @@ export function DrawerRecordDetail({
           // Non-modal on purpose: the list behind stays usable, and claiming
           // aria-modal here would be a lie to assistive tech.
           aria-modal="false"
-          aria-labelledby="record-title"
+          aria-labelledby={`${uid}-record-title`}
           className="flex w-full flex-col rounded-xl border border-border bg-card text-card-foreground sm:w-[28rem] sm:shrink-0"
         >
           <header className="border-b border-border p-4">
             <div className="flex items-start justify-between gap-2">
               <div className="min-w-0">
                 <div className="flex flex-wrap items-center gap-2">
-                  <h2 id="record-title" className="truncate text-base font-semibold">
+                  <h2 id={`${uid}-record-title`} className="truncate text-base font-semibold">
                     {record.title}
                   </h2>
                   <span
@@ -232,9 +243,9 @@ export function DrawerRecordDetail({
                   key={id}
                   type="button"
                   role="tab"
-                  id={`record-tab-${id}`}
+                  id={`${uid}-record-tab-${id}`}
                   aria-selected={tab === id}
-                  aria-controls={`record-panel-${id}`}
+                  aria-controls={`${uid}-record-panel-${id}`}
                   tabIndex={tab === id ? 0 : -1}
                   onClick={() => setTab(id)}
                   className={`rounded-lg px-3 py-1.5 text-sm font-medium capitalize transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
@@ -252,9 +263,9 @@ export function DrawerRecordDetail({
           <div className="min-h-0 flex-1 overflow-y-auto p-4">
             {tab === 'details' ? (
               <dl
-                id="record-panel-details"
+                id={`${uid}-record-panel-details`}
                 role="tabpanel"
-                aria-labelledby="record-tab-details"
+                aria-labelledby={`${uid}-record-tab-details`}
                 className="space-y-3"
               >
                 {record.fields.map((field) => (
@@ -268,9 +279,9 @@ export function DrawerRecordDetail({
               </dl>
             ) : (
               <ol
-                id="record-panel-activity"
+                id={`${uid}-record-panel-activity`}
                 role="tabpanel"
-                aria-labelledby="record-tab-activity"
+                aria-labelledby={`${uid}-record-tab-activity`}
                 className="space-y-4"
               >
                 {record.events.map((event) => (

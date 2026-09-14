@@ -18,6 +18,7 @@ import { CATEGORIES, EFFECT_INDEX as EFFECTS, type EffectCategory, type EffectMe
 import { useEffectDetails } from '@/hooks/use-effect-details'
 import { track } from '@/lib/analytics'
 import { addedAt } from '@/lib/recency'
+import { newSeed, parseSeed, seededShuffle } from '@/lib/shuffle'
 import { EffectCardSkeleton } from '@/components/effect-card-skeleton'
 import { SiteFooter } from '@/components/site-footer'
 import { LibraryProTile } from '@/components/library-pro-tile'
@@ -26,7 +27,7 @@ import { isTypingTarget } from '@/lib/tray-events'
 import { isShaderRenderer } from '@/lib/shaders/shader-types'
 
 type Filter = 'All' | 'Featured' | 'Favorites' | 'Shaders' | EffectCategory
-type Sort = 'default' | 'az' | 'za' | 'featured' | 'trending' | 'recent'
+type Sort = 'default' | 'az' | 'za' | 'featured' | 'trending' | 'recent' | 'random'
 
 const PAGE_SIZE = 24
 
@@ -70,7 +71,8 @@ function parseSort(value: string | null): Sort {
     value === 'za' ||
     value === 'featured' ||
     value === 'trending' ||
-    value === 'recent'
+    value === 'recent' ||
+    value === 'random'
   ) {
     return value
   }
@@ -106,6 +108,16 @@ export default function Home() {
   // Initial filter is set from ?filter= on first client mount (see below).
   const [filter, setFilter] = React.useState<Filter>('All')
   const [sort, setSort] = React.useState<Sort>('default')
+  /*
+   * The Randomized sort's seed. Null until the reader picks that sort.
+   *
+   * This page already had a random *pick* — "Surprise me" rolls the grid
+   * and lands on one effect. That is a different thing from a random
+   * *order*: the roll answers "show me something", the sort answers "let me
+   * browse the parts of the catalog the curated top never reaches". Both
+   * are worth having, and they share nothing but the word.
+   */
+  const [seed, setSeed] = React.useState<number | null>(null)
   const [page, setPage] = React.useState(1)
   const [isRolling, setIsRolling] = React.useState(false)
   const [showSweep, setShowSweep] = React.useState(false)
@@ -159,6 +171,10 @@ export default function Home() {
     if (q) setQuery(q)
     const s = parseSort(params.get('sort'))
     if (s !== 'default') setSort(s)
+    // A shuffled grid reopens in the same order it was linked in. A
+    // `sort=random` with no usable seed gets a fresh one — any order
+    // answers the request that was made.
+    if (s === 'random') setSeed(parseSeed(params.get('seed')) ?? newSeed())
   }, [])
 
   // Keep the URL in sync with the filter, query, and sort, so the user can
@@ -182,10 +198,17 @@ export default function Home() {
     } else {
       params.set('sort', sort)
     }
+    // Only while the shuffle is showing, so switching away does not leave
+    // a stale seed in a URL that no longer uses one.
+    if (sort === 'random' && seed !== null) {
+      params.set('seed', String(seed))
+    } else {
+      params.delete('seed')
+    }
     const qs = params.toString()
     const url = qs ? `/library?${qs}` : '/library'
     window.history.replaceState(null, '', url)
-  }, [filter, query, sort])
+  }, [filter, query, sort, seed])
 
   /**
    * Shortcuts that only exist on this page: `/` to focus search, and Escape
@@ -314,6 +337,12 @@ export default function Home() {
         if (!bd) return -1
         return bd.localeCompare(ad)
       })
+    } else if (sort === 'random' && seed !== null) {
+      // Shuffled AFTER filtering, so a category or a search narrows the
+      // pool and the shuffle reorders what is left. Shuffling first and
+      // filtering second would give the same result here and a wrong one
+      // the moment this page paginates — which it does, at 24 a page.
+      return seededShuffle(matched, seed)
     } else if (sort === 'trending' && trendingRank && trendingRank.size > 0) {
       // Ranked ids in rank order, then everything the window did not reach,
       // in curated order. Unranked is not "rank 0" — see TRENDING_LIMIT.
@@ -325,7 +354,7 @@ export default function Home() {
       })
     }
     return matched
-  }, [query, filter, sort, favorites, trendingRank])
+  }, [query, filter, sort, favorites, trendingRank, seed])
 
   /*
    * Reset to the first page whenever the result set changes.
@@ -906,7 +935,30 @@ export default function Home() {
                 <span className="hidden text-xs text-muted-foreground sm:inline">
                   Showing {pageStart + 1}–{pageEnd} of {filtered.length.toLocaleString('en-US')}
                 </span>
-                <Select value={sort} onValueChange={(v) => setSort(v as Sort)}>
+                {/* Only while the shuffle is showing — a re-roll button
+                    beside a grid in curated order has nothing to do. */}
+                {sort === 'random' ? (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSeed(newSeed())
+                      setPage(1)
+                    }}
+                    className="inline-flex h-8 items-center gap-1.5 rounded-full border border-border/60 bg-background/70 px-3 text-xs font-medium text-muted-foreground shadow-sm transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  >
+                    <Shuffle aria-hidden className="h-3.5 w-3.5" />
+                    Shuffle again
+                    <span className="sr-only">, reordering the effects at random</span>
+                  </button>
+                ) : null}
+                <Select
+                  value={sort}
+                  onValueChange={(v) => {
+                    const next = v as Sort
+                    setSort(next)
+                    if (next === 'random') setSeed((current) => current ?? newSeed())
+                  }}
+                >
                   <Tooltip>
                     <TooltipTrigger asChild>
                       <SelectTrigger
@@ -939,6 +991,10 @@ export default function Home() {
                       Recently added
                       <span className="ml-1.5 text-muted-foreground">· newest first</span>
                     </SelectItem>
+                    <SelectItem value="random">
+                      Randomized
+                      <span className="ml-1.5 text-muted-foreground">· shuffled</span>
+                    </SelectItem>
                     <SelectItem value="az">Name A → Z</SelectItem>
                     <SelectItem value="za">Name Z → A</SelectItem>
                   </SelectContent>
@@ -950,12 +1006,22 @@ export default function Home() {
                 measured sorts get a note — "A → Z" explains itself, and a
                 measured order that cannot be read off the cards has to say
                 where it came from or it is just a shuffle. */}
-            {!(aiMode && query.trim()) && (sort === 'trending' || sort === 'recent') ? (
+            {!(aiMode && query.trim()) &&
+            (sort === 'trending' || sort === 'recent' || sort === 'random') ? (
               <SortNote
                 loading={sort === 'trending' && trendingLoading}
-                icon={sort === 'trending' ? TrendingUp : Clock}
+                icon={
+                  sort === 'trending' ? TrendingUp : sort === 'random' ? Shuffle : Clock
+                }
               >
-                {sort === 'recent' ? (
+                {sort === 'random' ? (
+                  <>
+                    {filtered.length.toLocaleString('en-US')} effects in a random
+                    order, so the tail of the catalog gets the top of the grid for
+                    once. The shuffle is in the address bar — this exact order
+                    reopens on a reload and survives being sent to someone else.
+                  </>
+                ) : sort === 'recent' ? (
                   <>
                     Newest first, dated by when each effect actually landed in the
                     repository. Effects added since the last ledger rebuild carry no

@@ -116,6 +116,24 @@ const TONE: Record<'good' | 'warn' | 'bad', string> = {
   bad: 'bg-destructive/10 text-destructive',
 }
 
+/*
+  Per-instance id, hashed from props that differ between instances.
+
+  A literal id is a latent duplicate the moment this block is rendered
+  twice on one document -- two pages on a catalog hub, or one page using
+  the section twice. `aria-labelledby` pointing at a duplicated id resolves
+  to whichever element comes first, so the second copy is announced with
+  the first copy's label. Server component, so no `useId`: hashing props
+  gives each instance its own target and stays stable across server and
+  client renders in a way a counter would not.
+*/
+function instanceId(...parts: (string | undefined)[]): string {
+  const text = parts.filter(Boolean).join('|')
+  let hash = 0
+  for (let i = 0; i < text.length; i++) hash = (Math.imul(hash, 31) + text.charCodeAt(i)) | 0
+  return (hash >>> 0).toString(36).slice(0, 6)
+}
+
 export function CrudReadPage({
   title = 'Northwind Trading Ltd',
   subtitle = 'Supplier · Tier 2 · Active since January 2026',
@@ -126,6 +144,8 @@ export function CrudReadPage({
   events = DEFAULT_EVENTS,
   className = '',
 }: CrudReadPageProps) {
+  const uid = instanceId(title, subtitle)
+
   return (
     <section className={`bg-background px-4 py-10 sm:px-6 ${className}`}>
       <div className="mx-auto max-w-5xl">
@@ -201,8 +221,8 @@ export function CrudReadPage({
 
         <div className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
           <div className="space-y-8">
-            <section aria-labelledby="crud-read-details">
-              <h2 id="crud-read-details" className="text-base font-semibold">
+            <section aria-labelledby={`crud-read-details-${uid}`}>
+              <h2 id={`crud-read-details-${uid}`} className="text-base font-semibold">
                 Details
               </h2>
               <dl className="mt-3 divide-y divide-border/70 rounded-xl border border-border bg-card">
@@ -220,9 +240,9 @@ export function CrudReadPage({
               </dl>
             </section>
 
-            <section aria-labelledby="crud-read-trail">
+            <section aria-labelledby={`crud-read-trail-${uid}`}>
               <h2
-                id="crud-read-trail"
+                id={`crud-read-trail-${uid}`}
                 className="flex items-center gap-2 text-base font-semibold"
               >
                 <ShieldCheck aria-hidden className="h-4 w-4 text-primary" />
@@ -249,8 +269,8 @@ export function CrudReadPage({
           </div>
 
           {/* Related records as a peer of the details, not a tab behind them. */}
-          <section aria-labelledby="crud-read-related">
-            <h2 id="crud-read-related" className="text-base font-semibold">
+          <section aria-labelledby={`crud-read-related-${uid}`}>
+            <h2 id={`crud-read-related-${uid}`} className="text-base font-semibold">
               Attached to this record
             </h2>
             <ul className="mt-3 space-y-2">

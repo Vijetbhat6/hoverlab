@@ -11,13 +11,27 @@ import * as React from 'react'
 import Link from 'next/link'
 import { Package, FileCode } from 'lucide-react'
 import { BlockThumbnail } from './block-preview'
-import { UsageCount } from '@/components/usage-count'
+import { ArtifactUpdated } from '@/components/artifact-updated'
+import { CardHoverActions } from '@/components/card-hover-actions'
+import { CardStats, UsageCount } from '@/components/usage-count'
 import { blockCategorySlug, type BlockMeta } from '@/lib/blocks/block-types'
 
 export function BlockCard({ block }: { block: BlockMeta }) {
   return (
     <article className="group relative flex flex-col overflow-hidden rounded-2xl border border-border/60 bg-card/60 p-3 transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-lg">
-      <BlockThumbnail componentKey={block.previewComponent} height={block.thumbHeight} />
+      <div className="relative">
+        <BlockThumbnail componentKey={block.previewComponent} height={block.thumbHeight} />
+        <CardHoverActions
+          artifact={{
+            id: block.id,
+            name: block.name,
+            category: block.category,
+            level: 'block',
+          }}
+          href={`/block/${block.id}`}
+          className="right-2 top-2"
+        />
+      </div>
 
       <div className="flex flex-1 flex-col p-3">
         <h3 className="font-semibold leading-snug tracking-tight">
@@ -54,10 +68,15 @@ export function BlockCard({ block }: { block: BlockMeta }) {
               : `${block.deps.length} dep${block.deps.length > 1 ? 's' : ''}`}
           </span>
 
-          {/* Last, and often absent — see <UsageCount>. The metadata row
-              already wraps, so a row that gains a fourth item on the
-              popular blocks and keeps three on the rest stays aligned. */}
+          {/* The date is static and in the HTML; the three counts arrive
+              from Firestore afterwards and are each independently absent.
+              The metadata row already wraps, so a card that gains four
+              items and one that gains none both stay aligned. */}
+          <ArtifactUpdated level="block" id={block.id} />
+
           <UsageCount id={block.id} className="font-medium text-foreground/70" />
+
+          <CardStats id={block.id} />
         </div>
       </div>
     </article>

@@ -3,12 +3,17 @@
 /**
  * What /builder is actually for: leaving with the page.
  *
- * Three artifacts, in the order someone uses them:
+ * Four artifacts, in the order someone uses them:
  *
  *   1. The command that installs the sections the file imports. Without it
- *      the source is a list of imports that do not resolve.
+ *      the source is a list of imports that do not resolve. Plus, when the
+ *      composition was themed, the second command that installs the tokens
+ *      — the colours are a stylesheet and do not travel in the page.
  *   2. The page source itself, named, copyable and downloadable.
- *   3. The link, because the composition is the URL and a teammate should
+ *   3. A running project, because a composed page is the one artifact in
+ *      this catalog whose correctness is invisible in its source: five
+ *      files that each compile do not prove the five of them stack.
+ *   4. The link, because the composition is the URL and a teammate should
  *      be able to open the same layout rather than a screenshot of it.
  *
  * The name field is here rather than in the URL on purpose. It changes one
@@ -24,6 +29,7 @@ import { Check, Copy, Download, Link2 } from 'lucide-react'
 import { toast } from 'sonner'
 
 import { CopyableCommand } from '@/components/copyable-command'
+import { OpenArtifactInSandbox } from '@/components/open-artifact-in-sandbox'
 import { downloadTextFile } from '@/lib/bundle-export'
 import { componentName, fileName } from '@/lib/builder/compose'
 
@@ -33,6 +39,9 @@ export function BuilderExport({
   deps,
   count,
   shareUrl,
+  themeCommand,
+  themeSheet,
+  sandboxEndpoint,
 }: {
   /** The page source, composed on the server for the current URL. */
   source: string
@@ -40,6 +49,12 @@ export function BuilderExport({
   deps: string[]
   count: number
   shareUrl: string
+  /** `npx shadcn add …` for the composition's theme, when it has one. */
+  themeCommand: string | null
+  /** The theme's globals.css block, when the composition has a theme. */
+  themeSheet: string | null
+  /** Where the StackBlitz payload for this composition is served. */
+  sandboxEndpoint: string
 }) {
   const [name, setName] = React.useState('')
 
@@ -61,6 +76,19 @@ export function BuilderExport({
   }, [source, trimmed])
 
   const [copied, setCopied] = React.useState(false)
+  const [copiedTheme, setCopiedTheme] = React.useState(false)
+
+  async function copyTheme() {
+    if (!themeSheet) return
+    try {
+      await navigator.clipboard.writeText(themeSheet)
+      setCopiedTheme(true)
+      toast.success('Copied the theme. Replace the :root and .dark blocks in globals.css.')
+      setTimeout(() => setCopiedTheme(false), 2000)
+    } catch {
+      toast.error('Copy failed — select the CSS and copy it by hand.')
+    }
+  }
 
   async function copySource() {
     try {
@@ -108,6 +136,45 @@ export function BuilderExport({
               else they use is React and Tailwind.
             </p>
           )}
+
+          {/*
+            The theme, immediately under the sections and not in a tab of its
+            own. A reader who themed the composition and installed only the
+            blocks gets the catalog's default palette in their repo and
+            concludes the preview lied — so the second command has to be
+            impossible to miss while the first one is being copied.
+          */}
+          {themeCommand && (
+            <div className="mt-5">
+              <h4 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                And the theme
+              </h4>
+              <p className="mt-1 text-sm text-muted-foreground">
+                The colours are tokens, not markup, so they install separately —
+                into <code className="font-mono text-xs">globals.css</code>, once,
+                for every section at the same time.
+              </p>
+              <CopyableCommand
+                command={themeCommand}
+                label="the theme install command"
+                className="mt-3"
+              />
+              {themeSheet && (
+                <button
+                  type="button"
+                  onClick={copyTheme}
+                  className="mt-2 inline-flex h-8 items-center gap-1.5 rounded-lg border border-border/60 px-2.5 text-xs font-medium transition-colors hover:bg-muted"
+                >
+                  {copiedTheme ? (
+                    <Check className="h-3.5 w-3.5" aria-hidden />
+                  ) : (
+                    <Copy className="h-3.5 w-3.5" aria-hidden />
+                  )}
+                  {copiedTheme ? 'Copied the CSS' : 'Or copy the CSS'}
+                </button>
+              )}
+            </div>
+          )}
         </div>
 
         <div>
@@ -133,6 +200,18 @@ export function BuilderExport({
         <div className="flex flex-wrap items-center justify-between gap-3">
           <h3 className="text-sm font-semibold">3. Take the source</h3>
           <div className="flex flex-wrap items-center gap-2">
+            {/*
+              First in the row on purpose. Everything else here hands the
+              reader something to check later; this is the only control that
+              answers the question a composed page actually raises — whether
+              these five sections work together — before they paste anything
+              into their own repo.
+            */}
+            <OpenArtifactInSandbox
+              endpoint={sandboxEndpoint}
+              name="this composition"
+              label="Run it"
+            />
             <button
               type="button"
               onClick={copySource}
@@ -167,7 +246,25 @@ export function BuilderExport({
           </div>
         </div>
 
-        <pre className="mt-3 max-h-[420px] overflow-auto rounded-xl border border-border/60 bg-muted/30 p-4 text-xs leading-relaxed">
+        {/*
+          `tabIndex={0}` and a label, because this box scrolls.
+
+          A composed page's source runs past 420px at about four sections,
+          and a scrollable region with nothing focusable inside it cannot be
+          reached by a keyboard at all — the content below the fold is
+          simply unavailable. Making the region itself focusable is what
+          WCAG 2.1.1 asks for here, and it needs a name once it is focusable
+          or a screen reader announces an unlabelled group.
+
+          Caught by a live axe run rather than by `audit:a11y`, which covers
+          blocks and pages and does not see this page.
+        */}
+        <pre
+          tabIndex={0}
+          role="region"
+          aria-label="The composed page source"
+          className="mt-3 max-h-[420px] overflow-auto rounded-xl border border-border/60 bg-muted/30 p-4 text-xs leading-relaxed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        >
           <code className="font-mono">{renamed}</code>
         </pre>
       </div>

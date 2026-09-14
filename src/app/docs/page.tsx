@@ -166,7 +166,7 @@ npx shadcn add @hoverlab/hoverlab`}</Snippet>
         </p>
         <p>
           Setup and prompts in{' '}
-          <Link href="/docs/mcp" className="font-medium text-primary hover:underline">
+          <Link href="/mcp" className="font-medium text-primary hover:underline">
             the MCP docs
           </Link>
           .

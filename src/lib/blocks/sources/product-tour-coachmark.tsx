@@ -101,6 +101,17 @@ export function ProductTourCoachmark({
   onSkip,
   className = '',
 }: ProductTourCoachmarkProps) {
+  /*
+    Per-instance prefix for every id this block emits.
+
+    The literals these replaced were a latent duplicate the moment the
+    block appeared twice on one document, and `aria-labelledby` on a
+    duplicated id resolves to the first match -- so the second copy was
+    labelled by the first copy's heading. Client component, so `useId` is
+    the right tool.
+  */
+  const uid = React.useId()
+
   const [index, setIndex] = React.useState(0)
   const [running, setRunning] = React.useState(true)
   const cardRef = React.useRef<HTMLDivElement>(null)
@@ -172,13 +183,13 @@ export function ProductTourCoachmark({
             ref={cardRef}
             role="dialog"
             aria-modal="true"
-            aria-labelledby="tour-step-title"
-            aria-describedby="tour-step-body"
+            aria-labelledby={`${uid}-tour-step-title`}
+            aria-describedby={`${uid}-tour-step-body`}
             tabIndex={-1}
             className="absolute inset-x-4 bottom-4 z-30 rounded-xl border border-border bg-card p-4 shadow-lg outline-none focus-visible:ring-2 focus-visible:ring-ring sm:inset-x-auto sm:end-4 sm:w-80"
           >
             <div className="flex items-start justify-between gap-3">
-              <h3 id="tour-step-title" className="text-sm font-semibold text-foreground">
+              <h3 id={`${uid}-tour-step-title`} className="text-sm font-semibold text-foreground">
                 {step.title}
               </h3>
               <button
@@ -191,7 +202,7 @@ export function ProductTourCoachmark({
               </button>
             </div>
 
-            <p id="tour-step-body" className="mt-1.5 text-sm text-muted-foreground">
+            <p id={`${uid}-tour-step-body`} className="mt-1.5 text-sm text-muted-foreground">
               {step.body}
             </p>
 

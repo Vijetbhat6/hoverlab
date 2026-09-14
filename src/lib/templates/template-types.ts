@@ -83,6 +83,26 @@ export interface TemplateRoute {
 }
 
 /* ------------------------------------------------------------------ *
+ *  Set pieces
+ * ------------------------------------------------------------------ */
+
+/**
+ * The single distinctive screen a template is sold on.
+ *
+ * Kept as its own exported type rather than three inline fields because
+ * the card, the detail page and the hub's index all render it, and a
+ * shape spelled out in three places drifts on the first addition.
+ */
+export interface TemplateSetPiece {
+  /** A noun phrase. Renders on a card, so keep it short. */
+  name: string
+  /** One sentence on why this is the hard part of the genre. */
+  note: string
+  /** Page id the set piece lives on. Must be one of the template's routes. */
+  pageId: string
+}
+
+/* ------------------------------------------------------------------ *
  *  The Template type
  * ------------------------------------------------------------------ */
 
@@ -128,6 +148,36 @@ export interface Template
    * makes it different rather than what it shares.
    */
   previewPageId?: string
+  /**
+   * The one thing this template is sold on.
+   *
+   * REQUIRED IN PRACTICE, like `palette` — `templates.test.ts` fails the
+   * build for a template without one, and it is optional in the type only
+   * because the field arrived after the first twenty-one templates did.
+   *
+   * The reason it exists: a grid of thirty-two cards described as "a
+   * landing page for X" is thirty-two rows of the same sentence with the
+   * noun changed, and a visitor scanning it has no way to tell which one
+   * is worth opening. Naming a single concrete set piece — the menu
+   * typeset as a bill of fare, the agenda across three tracks, the map
+   * beside the results, the CV that prints — gives them something to
+   * recognise and, more usefully, gives us somewhere to be wrong. A
+   * template that cannot name one distinctive screen probably should not
+   * be a separate template.
+   *
+   * `name` is a noun phrase, not a sentence, and stays under about forty
+   * characters because it renders on a card. `note` is one sentence on
+   * why that piece is the hard part of the genre — it is the line that
+   * has to earn the click, so it says something a competitor's page does
+   * not, rather than restating the name.
+   *
+   * `pageId` names the screen the set piece is actually on, so the card
+   * can link into it rather than to the template's front door. It is
+   * validated against `routes`: naming a page the template does not
+   * contain is the failure this field invites, and it is a type-level
+   * lie about what somebody is about to download.
+   */
+  setPiece?: TemplateSetPiece
   /**
    * Palette id from `./palettes`. Every template names one.
    *

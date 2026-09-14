@@ -77,6 +77,17 @@ export function PushPermissionPrompt({
   onDismiss,
   className = '',
 }: PushPermissionPromptProps) {
+  /*
+    Per-instance prefix for every id this block emits.
+
+    The literals these replaced were a latent duplicate the moment the
+    block appeared twice on one document, and `aria-labelledby` on a
+    duplicated id resolves to the first match -- so the second copy was
+    labelled by the first copy's heading. Client component, so `useId` is
+    the right tool.
+  */
+  const uid = React.useId()
+
   const [state, setState] = React.useState<PushPermission>(permission)
   const [dismissed, setDismissed] = React.useState(false)
 
@@ -128,7 +139,7 @@ export function PushPermissionPrompt({
 
   return (
     <section
-      aria-labelledby="push-prompt-heading"
+      aria-labelledby={`${uid}-push-prompt-heading`}
       className={`mx-auto w-full max-w-md px-4 py-16 sm:px-6 ${className}`}
     >
       <div className="rounded-2xl border border-border bg-card p-5 shadow-sm">
@@ -140,7 +151,7 @@ export function PushPermissionPrompt({
             <Bell className="h-4.5 w-4.5" />
           </span>
           <div className="min-w-0 flex-1">
-            <h2 id="push-prompt-heading" className="text-sm font-semibold text-foreground">
+            <h2 id={`${uid}-push-prompt-heading`} className="text-sm font-semibold text-foreground">
               {heading}
             </h2>
             {context ? (

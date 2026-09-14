@@ -37,11 +37,27 @@ const base = (urlArg ?? process.env.NEXT_PUBLIC_SITE_URL ?? '').replace(/\/$/, '
 /**
  * The submission body.
  *
- * Note what is absent: the optional `pro` object. It exists to declare
- * content that sits behind a paywall, and nothing in this registry does —
- * every block and page is free to install, and Pro sells the commercial
- * licence rather than access. Declaring a paid tier here would describe a
- * product we do not sell.
+ * Three corrections landed here on 2026-09-14, after reading the published
+ * contract at https://registry.directory/how-to-submit.md rather than
+ * trusting what this file assumed:
+ *
+ * 1. `namespace` is gone. It is only legal if the handle is actually listed
+ *    in the official shadcn registry index, and it is "verified during
+ *    review" — a bad claim is a 422 that rejects the whole POST. All 344
+ *    entries of https://ui.shadcn.com/r/registries.json were checked and
+ *    `@hoverlab` is not among them, so sending it could only fail. Register
+ *    the handle there first, then add it back.
+ *
+ * 2. `featured` is capped at 6 by the spec. This used to send 7, which is a
+ *    400. `dashboard-overview` was the cut — the most commodity of the set.
+ *
+ * 3. `pro` is now sent. This file used to argue that the object "exists to
+ *    declare content that sits behind a paywall", and omitted it on the
+ *    grounds that nothing here is gated. That premise was simply wrong: on a
+ *    rendered vendor page the five booleans read "Pro blocks & components
+ *    offered / Figma kit not offered / Team license not offered". It is a
+ *    capability matrix, not a paywall declaration, and omitting it forfeits
+ *    the comparison entirely rather than answering it honestly.
  */
 const submission = {
   name: 'Hoverlab',
@@ -49,18 +65,44 @@ const submission = {
     'Free, installable Tailwind blocks and full page routes, plus a design system you can install in one command. No account, no key.',
   url: base,
   registry_url: `${base}/registry.json`,
-  namespace: '@hoverlab',
+  github_url: 'https://github.com/Vijetbhat6/hoverlab',
+  github_profile: 'https://github.com/Vijetbhat6.png',
   featured: [
+    // First in the list is the one the landing page puts in the install
+    // command, so it leads with the design system rather than a component.
     'hoverlab',
     'saas-landing-page',
     'hero-split',
-    'pricing-tiers',
-    'dashboard-overview',
+    // The agent blocks are the half of the catalog no competitor ships.
     'agent-thinking-trace',
+    'pricing-tiers',
     // One effect, so a reviewer clicking through sees the half of the
     // catalog that installs as CSS rather than as a component.
     'btn-gradient',
   ],
+  /**
+   * Every boolean is audited against the live site, so each one below was
+   * checked against a URL before it was written — `false` renders as an
+   * explicit ✗ and is data, not a gap to paper over.
+   *
+   * pro_blocks   285 blocks and 107 pages, and a Pro tier that licenses them.
+   * templates    /templates, and "All 21 templates" is a Pro line on /pricing.
+   * figma_kit    /figma lists 36 downloadable SVG frame files (verified 200).
+   *              Note this is a kit of *frames* — named editable layers, no
+   *              variants, no auto-layout. The flag asks whether a Figma kit
+   *              is offered, which it is; /compare still concedes the richer
+   *              "Design files" row to Untitled UI, and should keep doing so.
+   * mcp_agent    /docs/mcp, the MCP server in packages/cli, and the skills.
+   * team_license /pricing sells Studio at $299 for ten seats and Team at
+   *              $12/seat/month — a real per-seat licence, not a promise.
+   */
+  pro: {
+    pro_blocks: true,
+    templates: true,
+    figma_kit: true,
+    mcp_agent: true,
+    team_license: true,
+  },
 }
 
 /* -- pre-flight --------------------------------------------------------- */
@@ -84,6 +126,54 @@ if (!base) {
     `Base URL is "${base}". registry.directory requires https and fetches it from ` +
       'the public internet — localhost and http will fail the audit.',
   )
+}
+
+// Shape checks first — these need no network, and every one of them is a
+// limit the published contract enforces with a 4xx. They exist because this
+// file shipped a 7-item `featured` and an unverifiable `namespace` for months
+// without either being caught: a pre-flight that only checks the registry is
+// still happy to POST a body the endpoint will refuse.
+if (submission.name.length > 100) fail(`name is ${submission.name.length} chars; the limit is 100.`)
+
+if (submission.description.length > 300) {
+  fail(`description is ${submission.description.length} chars; the limit is 300.`)
+}
+
+if (submission.featured.length < 1 || submission.featured.length > 6) {
+  fail(`featured has ${submission.featured.length} items; the spec allows 1-6.`)
+}
+
+if (new Set(submission.featured).size !== submission.featured.length) {
+  fail('featured contains a duplicate name.')
+}
+
+const bodyBytes = Buffer.byteLength(JSON.stringify(submission))
+if (bodyBytes > 10_000) fail(`body is ${bodyBytes} bytes; the limit is 10 KB.`)
+
+// A namespace is only legal if it is really in the official shadcn index, and
+// the endpoint returns 422 when it is not. Verify rather than hope.
+const namespace = (submission as { namespace?: string }).namespace
+if (namespace) {
+  try {
+    const index = (await getJson('https://ui.shadcn.com/r/registries.json')) as
+      | Array<{ name?: string; homepage?: string }>
+      | { registries?: Array<{ name?: string; homepage?: string }> }
+    const entries = Array.isArray(index) ? index : (index.registries ?? [])
+    const match = entries.find((e) => e.name === namespace)
+    if (!match) {
+      fail(
+        `namespace "${namespace}" is not in the official shadcn registry index, so the ` +
+          'submission would be rejected with 422. Register the handle there, or drop the field.',
+      )
+    } else if (match.homepage && base && new URL(match.homepage).host !== new URL(base).host) {
+      fail(
+        `namespace "${namespace}" is registered to ${match.homepage}, not ${base}. ` +
+          'A handle pointing at another domain fails verification with 422.',
+      )
+    }
+  } catch (error) {
+    fail(`could not verify the namespace claim: ${(error as Error).message}`)
+  }
 }
 
 if (problems.length === 0) {
@@ -197,7 +287,37 @@ if (!res.ok) {
 }
 
 console.log(`\nsubmitted. ${res.status}\n${body}`)
+
+// The submission_token is returned exactly once and is the only credential
+// that can amend a pending submission. Losing it is not fatal — the pending
+// version still gets reviewed — but it is unrecoverable, so persist it before
+// anything else can scroll it away. .env.local is gitignored by `.env*`, and
+// is where this script already reads the token back from.
+let issued: string | undefined
+try {
+  issued = (JSON.parse(body) as { submission_token?: string }).submission_token
+} catch {
+  // A non-JSON 2xx is not an error worth failing the run over.
+}
+
+if (issued) {
+  const fs = await import('node:fs')
+  const line = `REGISTRY_DIRECTORY_TOKEN=${issued}\n`
+  const existing = fs.existsSync('.env.local') ? fs.readFileSync('.env.local', 'utf8') : ''
+
+  if (existing.includes('REGISTRY_DIRECTORY_TOKEN=')) {
+    fs.writeFileSync(
+      '.env.local',
+      existing.replace(/REGISTRY_DIRECTORY_TOKEN=.*\n?/, line),
+    )
+  } else {
+    fs.writeFileSync('.env.local', existing + (existing.endsWith('\n') || !existing ? '' : '\n') + line)
+  }
+
+  console.log('\nsubmission_token saved to .env.local (gitignored). It is shown only once.')
+}
+
 console.log(
-  '\nA human reviews it, typically within days. If they issue a token, store it as ' +
-    'REGISTRY_DIRECTORY_TOKEN — updates are a re-submission with the same registry_url.',
+  '\nA human reviews it, typically within days. Updates are a re-submission with the ' +
+    'same registry_url and that token as an Authorization: Bearer header.',
 )

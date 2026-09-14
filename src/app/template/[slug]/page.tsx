@@ -24,6 +24,7 @@ import {
   FileCode,
   Package,
   Blocks,
+  Sparkles,
   Terminal,
 } from 'lucide-react'
 import { JsonLd } from '@/components/json-ld'
@@ -127,6 +128,13 @@ export default async function TemplateDetailPage({ params }: PageProps) {
   // Undefined unless it genuinely changed after landing — see updatedAt().
   const updated = updatedAt('template', template.id)
   const palette = getPalette(template.palette)
+  /* The route the set piece sits on, so the callout can name the screen.
+     `templates.test.ts` guarantees this resolves for every template that
+     declares a set piece, but the lookup stays optional because the field
+     itself is optional in the type. */
+  const setPieceRoute = template.routes.find(
+    (route) => route.pageId === template.setPiece?.pageId,
+  )
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -220,6 +228,46 @@ export default async function TemplateDetailPage({ params }: PageProps) {
               level: 'template',
             }}
           />
+
+          {/*
+              The set piece, in full.
+
+              The card shows only its name, because a card has room for one
+              line. This is where the sentence behind it goes, and it sits
+              above the counts on purpose: routes, pages and blocks are how
+              much you get, and this is why you would want it. A visitor
+              comparing four templates is answering the second question,
+              and until now the page only answered the first.
+
+              It names the screen rather than linking away to it — the
+              route switcher is a few hundred pixels below and already
+              renders that page live, so a link would be sending somebody
+              off a page to reach something they can already see.
+          */}
+          {template.setPiece ? (
+            <aside className="mt-6 rounded-xl border border-primary/25 bg-primary/[0.04] p-4">
+              <p className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-primary">
+                <Sparkles aria-hidden className="h-3.5 w-3.5" />
+                The set piece
+              </p>
+              <p className="mt-2 text-base font-semibold tracking-tight text-foreground">
+                {template.setPiece.name}
+              </p>
+              <p className="mt-1.5 max-w-2xl text-pretty text-sm leading-relaxed text-muted-foreground">
+                {template.setPiece.note}
+              </p>
+              {setPieceRoute ? (
+                <p className="mt-2.5 text-xs text-muted-foreground">
+                  On the{' '}
+                  <span className="font-medium text-foreground">{setPieceRoute.label}</span>{' '}
+                  screen —{' '}
+                  <code className="rounded bg-muted px-1 py-0.5 font-mono">
+                    {setPieceRoute.path}
+                  </code>
+                </p>
+              ) : null}
+            </aside>
+          ) : null}
 
           <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-muted-foreground">
             <span className="inline-flex items-center gap-1.5">

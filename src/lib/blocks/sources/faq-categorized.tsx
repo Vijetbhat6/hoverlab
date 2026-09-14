@@ -195,9 +195,9 @@ export function FaqCategorized({
         {topics.map((topic) => {
           const slug = slugify(topic.name)
           return (
-            <section key={topic.name} id={`faq-${slug}`} aria-labelledby={`faq-${slug}-heading`} className="scroll-mt-24">
+            <section key={topic.name} id={`${headingId}-faq-${slug}`} aria-labelledby={`${headingId}-faq-${slug}-heading`} className="scroll-mt-24">
               <h3
-                id={`faq-${slug}-heading`}
+                id={`${headingId}-faq-${slug}-heading`}
                 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground"
               >
                 {topic.name}
@@ -207,7 +207,7 @@ export function FaqCategorized({
                 {topic.questions.map((item, index) => (
                   <details
                     key={item.question}
-                    name={`faq-${slug}`}
+                    name={`${headingId}-faq-${slug}`}
                     open={openFirst && index === 0}
                     className="group py-1"
                   >

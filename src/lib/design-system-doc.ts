@@ -56,13 +56,36 @@ export const TOKEN_FORMAT_NOTE =
   'compose an alpha suffix, so `bg-primary/10` expands to ' +
   '`hsl(var(--primary) / 0.1)`. Keep the format.'
 
+/**
+ * The four shape-and-type rules, named individually.
+ *
+ * Split out of the array below when `/studio` started emitting a document
+ * for somebody else's design system rather than for this one. Two of these
+ * four are true of any project built this way — the spacing scale and the
+ * border token are conventions, not values — and two of them quote a
+ * specific number or typeface that a studio document has its own answer
+ * for. A document that reused all four would tell an agent the radius is
+ * 0.75rem directly above a token block setting it to 1.5rem, which is
+ * worse than saying nothing: of two contradictory instructions a model
+ * picks one, and there is no telling which.
+ *
+ * So the array is composed from the parts, rather than the parts being
+ * sliced back out of the array by index. `SHAPE_AND_TYPE` is unchanged for
+ * its existing readers.
+ */
+export const RADIUS_RULE = `**Radius**: \`--radius: ${tokens.radius}\`. Tailwind maps \`rounded-lg\` to it, with \`md\` and \`sm\` derived 2px and 4px tighter. Do not hand-pick radii per component.`
+
+export const SPACING_RULE =
+  "**Spacing**: Tailwind's default scale, untouched. Sections run `py-16 sm:py-24`; card padding is `p-6`."
+
+export const TYPE_RULE =
+  '**Type**: one display face and one text face, set on `body` and inherited. Headings carry `text-wrap: balance`; body text stays near 65 characters.'
+
+export const BORDERS_RULE =
+  '**Borders**: `border-border` everywhere, never a literal grey. The global base layer already applies it to `*`.'
+
 /** Everything that is not colour: radius, spacing, type, borders. */
-export const SHAPE_AND_TYPE: string[] = [
-  `**Radius**: \`--radius: ${tokens.radius}\`. Tailwind maps \`rounded-lg\` to it, with \`md\` and \`sm\` derived 2px and 4px tighter. Do not hand-pick radii per component.`,
-  "**Spacing**: Tailwind's default scale, untouched. Sections run `py-16 sm:py-24`; card padding is `p-6`.",
-  '**Type**: one display face and one text face, set on `body` and inherited. Headings carry `text-wrap: balance`; body text stays near 65 characters.',
-  '**Borders**: `border-border` everywhere, never a literal grey. The global base layer already applies it to `*`.',
-]
+export const SHAPE_AND_TYPE: string[] = [RADIUS_RULE, SPACING_RULE, TYPE_RULE, BORDERS_RULE]
 
 /** How things move, including the part that keeps it accessible. */
 export const MOTION: string[] = [

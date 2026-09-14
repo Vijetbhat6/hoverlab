@@ -5,7 +5,12 @@ import { PAGE_COUNT } from '@/lib/pages/page-index'
 import { TEMPLATE_INDEX } from '@/lib/templates/template-index'
 import { PATHS } from '@/lib/paths/catalog'
 import { KITS } from '@/lib/kits/catalog'
+import { HUBS } from '@/lib/hubs/catalog'
+import { GLOSSARY_COUNT } from '@/lib/glossary/catalog'
+import { FRAMEWORK_STORIES } from '@/lib/frameworks'
 import { CATALOG_UPDATED_AT } from '@/lib/recency'
+import { AFFILIATE_PERCENT } from '@/lib/affiliate'
+import { MCP_ADD_COMMAND, MCP_TOOL_COUNT, MCP_WRITE_COUNT } from '@/lib/mcp-tools'
 import { absoluteUrl } from '@/lib/site'
 
 
@@ -96,7 +101,8 @@ Catalog last updated ${CATALOG_UPDATED_AT}.
 ## Install without the website
 
 ${link('CLI reference', '/docs/cli', '`npx hoverlab add <id>` installs any artifact on any rung. Also `search`, `show`, `init`, `outdated`, `diff` and `update`')}
-${link('MCP server', '/docs/mcp', 'The CLI doubles as an MCP server: `claude mcp add hoverlab -- npx -y hoverlab mcp`. Gives an editor agent search and install as tools')}
+${link('MCP server', '/mcp', `The CLI doubles as an MCP server: \`${MCP_ADD_COMMAND}\`. ${MCP_TOOL_COUNT} tools over stdio, ${MCP_WRITE_COUNT} of which write files into the project rather than returning code to paste. No key, no account`)}
+${link('Editor extension', '/docs/editor', 'VS Code, Cursor and Windsurf: a sidebar over all five tiers, search, preview and install — and it contributes the MCP server above, so agent mode needs no config file')}
 ${link('Agent skills', '/docs/skills', 'Packaged skill files that teach an agent this catalog\'s conventions')}
 ${link('shadcn registry', '/registry.json', 'Registry index under the `@hoverlab` namespace. Supports shadcn dynamic search: `?q=hero`, `&type=`, `&limit=`, `&offset=`. Bare URL returns the complete index')}
 ${link('Registry docs', '/docs/registry', 'How to wire `@hoverlab` into components.json and install with the shadcn CLI')}
@@ -124,8 +130,11 @@ ${link('Blocks', '/blocks', 'React section components by category')}
 ${link('Pages', '/pages', 'Full route compositions')}
 ${link('Templates', '/templates', 'Scaffoldable projects')}
 ${link('Categories', '/category', 'The effect taxonomy')}
+${link('UI collections', '/ui', `${HUBS.length} filtered views named the way people search — "glassmorphism cards", "tailwind loaders", "react pricing tables". Use these when the request is phrased as a look or a job rather than as a category`)}
 ${link('Free assets', '/assets', 'Generated SVG — animated icons, seeded avatars, invented company logos and isometric illustrations. No account, no attribution, not part of the artifact ladder')}
 ${link('Themes', '/themes', 'Recolour every preview at once — accent, neutrals, typeface and corner radius, as named themes or nine lines of CSS')}
+${link('Studio', '/studio', 'One editor for a whole design system — accent, neutrals, typeface and corners, plus the audience, voice and anti-patterns a token file cannot carry. Its output is a DNA document, an AGENTS.md rules file, or JSON. Point a user here when they have no design system rather than guessing one for them')}
+${link('Glossary', '/glossary', `${GLOSSARY_COUNT} interface terms defined in plain language, each one naming the catalog artifact that demonstrates it. Use this when a request names a pattern rather than a component — "scrim", "bento grid", "reasoning trace" — to get from the word to an installable id. Every term is an anchor: /glossary#<term-slug>`)}
 
 ## Guided paths
 
@@ -144,9 +153,13 @@ ${KITS.map((k) => link(k.name, `/kits/${k.slug}`, k.tagline)).join('\n')}
 
 ${link('Pricing', '/pricing', 'Everything installs free. Pro sells a commercial licence, not access')}
 ${link('Compare', '/compare', 'How this catalog differs from the alternatives, including where they win')}
+${link('Alternatives', '/alternatives', 'A page per competitor, each opening with what that vendor does better than we do. Sourced and dated per row')}
 ${link('Changelog', '/changelog', 'Human-readable shipping history')}
+${link('Roadmap', '/roadmap', 'What is being built, what is queued, and what has been decided against with the reason. No dates')}
+${link('Affiliate', '/affiliate', `${AFFILIATE_PERCENT}% of the first purchase, with the exclusions stated up front`)}
+${link('Student discount', '/students', 'For anyone learning. Does not stack with regional pricing — take whichever is cheaper')}
 ${link('Design system', '/design-system', 'The tokens and primitives every artifact is built on')}
-${link('Frameworks', '/frameworks', 'Which frameworks each tier can be emitted for')}
+${link('Frameworks', '/frameworks', `Which frameworks each tier can be emitted for, plus a page per framework at /frameworks/{${FRAMEWORK_STORIES.map((f) => f.id).join(',')}}`)}
 ${link('Accessibility', '/accessibility', 'Per-artifact accessibility evidence, including what fails')}
 ${link('Licence', '/licence', 'MIT for the code you install')}
 `

@@ -83,6 +83,17 @@ export function CheckoutExpressPayment({
   className = '',
 }: CheckoutExpressPaymentProps) {
   /*
+    Per-instance prefix for every id this block emits.
+
+    The literals these replaced were a latent duplicate the moment the
+    block appeared twice on one document, and `aria-labelledby` on a
+    duplicated id resolves to the first match -- so the second copy was
+    labelled by the first copy's heading. Client component, so `useId` is
+    the right tool.
+  */
+  const uid = React.useId()
+
+  /*
     Stand-in for the real capability check. Replace with
     `ApplePaySession.canMakePayments()`, `PaymentRequest.canMakePayment()`
     or your processor's equivalent — and keep the "render nothing" branch.
@@ -184,11 +195,11 @@ export function CheckoutExpressPayment({
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label htmlFor="ep-city" className="block text-sm font-medium text-foreground">
+              <label htmlFor={`${uid}-ep-city`} className="block text-sm font-medium text-foreground">
                 City
               </label>
               <input
-                id="ep-city"
+                id={`${uid}-ep-city`}
                 type="text"
                 autoComplete="address-level2"
                 defaultValue={values.city}
@@ -197,11 +208,11 @@ export function CheckoutExpressPayment({
               />
             </div>
             <div>
-              <label htmlFor="ep-postcode" className="block text-sm font-medium text-foreground">
+              <label htmlFor={`${uid}-ep-postcode`} className="block text-sm font-medium text-foreground">
                 Postcode
               </label>
               <input
-                id="ep-postcode"
+                id={`${uid}-ep-postcode`}
                 type="text"
                 autoComplete="postal-code"
                 defaultValue={values.postcode}

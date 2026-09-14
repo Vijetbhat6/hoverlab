@@ -56,7 +56,23 @@ export default function TemplatesHubPage() {
   const categories = populatedTemplateCategories()
   /* Flat, in category order, so a sort has one list to rank. */
   const allTemplates = categories.flatMap((category) => templatesInCategory(category))
-  const totalRoutes = TEMPLATE_INDEX.reduce((n, t) => n + t.routes.length, 0)
+
+  /*
+    PAGE DEPTH, the way Preline publishes it ("22 templates, 207 pages").
+
+    It is a different number from PAGE_COUNT and both belong on this page.
+    PAGE_COUNT is how many distinct screens the catalog holds; this is how
+    many screens you get *across the templates*, counting a screen once per
+    template that ships it. A reader deciding between libraries is asking
+    the second question — "if I buy this, how many built screens land in my
+    project" — and the first number understates it badly, because the
+    templates deliberately share screens.
+
+    Summed from `composedOf` rather than `routes` so a template that points
+    two routes at one page (a listing and its detail sharing a shell) does
+    not count that page twice within its own row.
+  */
+  const totalTemplatePages = TEMPLATE_INDEX.reduce((n, t) => n + t.composedOf.length, 0)
 
   /*
     See /blocks. Templates are few enough to list individually, which is
@@ -99,8 +115,21 @@ export default function TemplatesHubPage() {
           </p>
 
           <div className="mt-6 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-sm text-muted-foreground">
+            {/*
+                "32 templates, 181 pages" — the depth claim, the way Preline
+                makes it.
+
+                `totalRoutes` is deliberately NOT printed beside it. Today
+                every template maps one route to one page, so the two
+                numbers are identical and rendering both reads as a mistake
+                rather than as two facts. The routes figure is still on each
+                card, where it is per-template and means something.
+            */}
             <span>
-              {TEMPLATE_COUNT} templates · {totalRoutes} routes
+              <strong className="font-semibold text-foreground">
+                {TEMPLATE_COUNT} templates
+              </strong>
+              , {totalTemplatePages} pages
             </span>
             <span aria-hidden>·</span>
             <Link

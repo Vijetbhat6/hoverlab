@@ -64,6 +64,17 @@ type Step = 'email' | 'sso' | 'password'
 
 export function AuthSsoDomain({ tenants = DEFAULT_TENANTS, className = '' }: AuthSsoDomainProps) {
   /*
+    Per-instance prefix for every id this block emits.
+
+    The literals these replaced were a latent duplicate the moment the
+    block appeared twice on one document, and `aria-labelledby` on a
+    duplicated id resolves to the first match -- so the second copy was
+    labelled by the first copy's heading. Client component, so `useId` is
+    the right tool.
+  */
+  const uid = React.useId()
+
+  /*
    * Opens on the second step, with a domain already recognised.
    *
    * The first step is an email field, which is what every sign-in screen
@@ -115,11 +126,11 @@ export function AuthSsoDomain({ tenants = DEFAULT_TENANTS, className = '' }: Aut
 
         <form onSubmit={lookUp} className="mt-6 space-y-4">
           <div>
-            <label htmlFor="sso-email" className="block text-sm font-medium text-foreground">
+            <label htmlFor={`${uid}-sso-email`} className="block text-sm font-medium text-foreground">
               Email
             </label>
             <input
-              id="sso-email"
+              id={`${uid}-sso-email`}
               ref={emailRef}
               type="email"
               required
@@ -200,13 +211,13 @@ export function AuthSsoDomain({ tenants = DEFAULT_TENANTS, className = '' }: Aut
               <div className="space-y-3">
                 <div>
                   <label
-                    htmlFor="sso-password"
+                    htmlFor={`${uid}-sso-password`}
                     className="block text-sm font-medium text-foreground"
                   >
                     Password
                   </label>
                   <input
-                    id="sso-password"
+                    id={`${uid}-sso-password`}
                     type="password"
                     autoComplete="current-password"
                     className="mt-1.5 h-10 w-full rounded-lg border border-field bg-background px-3 text-sm text-foreground outline-none transition focus-visible:ring-2 focus-visible:ring-ring"

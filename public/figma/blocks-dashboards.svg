@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1216" height="6184" viewBox="0 0 1216 6184" id="Hoverlab — Dashboards">
+<svg xmlns="http://www.w3.org/2000/svg" width="1216" height="5421" viewBox="0 0 1216 5421" id="Hoverlab — Dashboards">
   <!--
-    Hoverlab — Dashboards. 10 sections, traced from the
+    Hoverlab — Dashboards. 9 sections, traced from the
     rendered catalog. Drag this file onto a Figma canvas.
 
     These are frames, not components: named, editable layers with real
@@ -9,7 +9,7 @@
 
     Every section here is free to copy as code at https://hoverlab.dev/blocks
   -->
-  <rect id="Background" x="0" y="0" width="1216" height="6184" fill="#ffffff" />
+  <rect id="Background" x="0" y="0" width="1216" height="5421" fill="#ffffff" />
   <text id="Sidebar Dashboard Shell label" x="64" y="84" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Sidebar Dashboard Shell</text>
   <text id="dashboard-shell id" x="64" y="98" font-family="ui-monospace, monospace" font-size="12" fill="#737373">dashboard-shell</text>
   <g id="Sidebar Dashboard Shell" transform="translate(64, 116)">
@@ -288,146 +288,9 @@
       <text id="SSO enforcement" x="197.84" y="568.5" fill="#007f34" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">SSO enforcement</text>
       <text id="10:05" x="61" y="587.75" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">10:05</text>
   </g>
-  <text id="Month Calendar Grid label" x="64" y="3265.58" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Month Calendar Grid</text>
-  <text id="calendar-month id" x="64" y="3279.58" font-family="ui-monospace, monospace" font-size="12" fill="#737373">calendar-month</text>
-  <g id="Month Calendar Grid" transform="translate(64, 3297.58)">
-    <rect id="container" x="0" y="0" width="1088" height="614.83" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="August 2026" x="1" y="22" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" font-weight="700" letter-spacing="-0.45">August 2026</text>
-      <text id="Product" x="138.86" y="22" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Product</text>
-      <rect id="container 2" x="138.86" y="14" width="8" height="8" rx="4" fill="#007f34" />
-      <text id="Design" x="207.95" y="22" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Design</text>
-      <rect id="container 3" x="207.95" y="14" width="8" height="8" rx="4" fill="#00a6f4" />
-      <text id="Personal" x="272.09" y="22" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Personal</text>
-      <rect id="container 4" x="272.09" y="14" width="8" height="8" rx="4" fill="#00bc7d" />
-      <rect id="button" x="946.42" y="2" width="32" height="32" rx="12" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <rect id="button 2" x="982.42" y="2" width="32" height="32" rx="12" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <rect id="button 3" x="1022.42" y="1" width="64.58" height="34" rx="12" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Today" x="1054.71" y="15" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Today</text>
-      <rect id="grid" x="1" y="51" width="1086" height="562.83" rx="16" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <rect id="row" x="2" y="52" width="1084" height="32" fill="rgba(220, 222, 225, 0.6)" />
-      <rect id="columnheader" x="2" y="52" width="154" height="32" fill="rgba(243, 242, 238, 0.6)" />
-      <text id="Mon" x="79" y="64" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="600" text-anchor="middle">Mon</text>
-      <rect id="columnheader 2" x="157" y="52" width="154" height="32" fill="rgba(243, 242, 238, 0.6)" />
-      <text id="Tue" x="234" y="64" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="600" text-anchor="middle">Tue</text>
-      <rect id="columnheader 3" x="312" y="52" width="154" height="32" fill="rgba(243, 242, 238, 0.6)" />
-      <text id="Wed" x="389" y="64" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="600" text-anchor="middle">Wed</text>
-      <rect id="columnheader 4" x="467" y="52" width="154" height="32" fill="rgba(243, 242, 238, 0.6)" />
-      <text id="Thu" x="544" y="64" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="600" text-anchor="middle">Thu</text>
-      <rect id="columnheader 5" x="622" y="52" width="154" height="32" fill="rgba(243, 242, 238, 0.6)" />
-      <text id="Fri" x="699" y="64" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="600" text-anchor="middle">Fri</text>
-      <rect id="columnheader 6" x="777" y="52" width="154" height="32" fill="rgba(243, 242, 238, 0.6)" />
-      <text id="Sat" x="854" y="64" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="600" text-anchor="middle">Sat</text>
-      <rect id="columnheader 7" x="932" y="52" width="154" height="32" fill="rgba(243, 242, 238, 0.6)" />
-      <text id="Sun" x="1009" y="64" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="600" text-anchor="middle">Sun</text>
-      <rect id="row 2" x="2" y="84" width="1084" height="85" fill="rgba(220, 222, 225, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <rect id="gridcell" x="2" y="85" width="154" height="84" fill="rgba(242, 238, 235, 0.302)" />
-      <text id="27" x="8" y="103" fill="rgba(87, 92, 97, 0.6)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">27</text>
-      <rect id="gridcell 2" x="157" y="85" width="154" height="84" fill="rgba(242, 238, 235, 0.302)" />
-      <text id="28" x="163" y="103" fill="rgba(87, 92, 97, 0.6)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">28</text>
-      <rect id="gridcell 3" x="312" y="85" width="154" height="84" fill="rgba(242, 238, 235, 0.302)" />
-      <text id="29" x="318" y="103" fill="rgba(87, 92, 97, 0.6)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">29</text>
-      <rect id="gridcell 4" x="467" y="85" width="154" height="84" fill="rgba(242, 238, 235, 0.302)" />
-      <text id="30" x="473" y="103" fill="rgba(87, 92, 97, 0.6)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">30</text>
-      <rect id="gridcell 5" x="622" y="85" width="154" height="84" fill="rgba(242, 238, 235, 0.302)" />
-      <text id="31" x="628" y="103" fill="rgba(87, 92, 97, 0.6)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">31</text>
-      <rect id="gridcell 6" x="777" y="85" width="154" height="84" fill="#ffffff" />
-      <text id="1" x="783" y="103" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">1</text>
-      <rect id="gridcell 7" x="932" y="85" width="154" height="84" fill="#ffffff" />
-      <text id="2" x="938" y="103" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">2</text>
-      <rect id="row 3" x="2" y="169" width="1084" height="85" fill="rgba(220, 222, 225, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <rect id="gridcell 8" x="2" y="170" width="154" height="84" fill="#ffffff" />
-      <text id="3" x="8" y="188" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">3</text>
-      <rect id="container 5" x="8" y="204" width="142" height="19.61" rx="4" fill="rgba(0, 128, 54, 0.149)" />
-      <text id="Sprint 42 kickoff" x="8" y="214.4" fill="#007f34" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10.4" font-weight="500">Sprint 42 kickoff</text>
-      <rect id="gridcell 9" x="157" y="170" width="154" height="84" fill="#ffffff" />
-      <text id="4" x="163" y="188" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">4</text>
-      <rect id="gridcell 10" x="312" y="170" width="154" height="84" fill="#ffffff" />
-      <text id="5" x="318" y="188" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">5</text>
-      <rect id="gridcell 11" x="467" y="170" width="154" height="84" fill="#ffffff" />
-      <text id="6" x="473" y="188" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">6</text>
-      <rect id="container 6" x="473" y="204" width="142" height="19.61" rx="4" fill="rgba(0, 168, 248, 0.149)" />
-      <text id="Design crit" x="473" y="214.4" fill="#00a6f4" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10.4" font-weight="500">Design crit</text>
-      <rect id="gridcell 12" x="622" y="170" width="154" height="84" fill="#ffffff" />
-      <text id="7" x="628" y="188" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">7</text>
-      <rect id="gridcell 13" x="777" y="170" width="154" height="84" fill="#ffffff" />
-      <text id="8" x="783" y="188" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">8</text>
-      <rect id="gridcell 14" x="932" y="170" width="154" height="84" fill="#ffffff" />
-      <text id="9" x="938" y="188" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">9</text>
-      <rect id="row 4" x="2" y="254" width="1084" height="85" fill="rgba(220, 222, 225, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <rect id="gridcell 15" x="2" y="255" width="154" height="84" fill="#ffffff" />
-      <text id="10" x="8" y="273" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">10</text>
-      <rect id="gridcell 16" x="157" y="255" width="154" height="84" fill="#ffffff" />
-      <text id="11" x="163" y="273" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">11</text>
-      <rect id="gridcell 17" x="312" y="255" width="154" height="84" fill="#ffffff" />
-      <text id="12" x="318" y="273" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">12</text>
-      <rect id="gridcell 18" x="467" y="255" width="154" height="84" fill="#ffffff" />
-      <text id="13" x="473" y="273" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="700">13</text>
-      <rect id="container 7" x="473" y="289" width="142" height="19.61" rx="4" fill="rgba(0, 128, 54, 0.149)" />
-      <text id="v3.1 release" x="473" y="299.4" fill="#007f34" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10.4" font-weight="500">v3.1 release</text>
-      <rect id="gridcell 19" x="622" y="255" width="154" height="84" fill="#ffffff" />
-      <text id="14" x="628" y="273" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">14</text>
-      <rect id="gridcell 20" x="777" y="255" width="154" height="84" fill="#ffffff" />
-      <text id="15" x="783" y="273" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">15</text>
-      <rect id="gridcell 21" x="932" y="255" width="154" height="84" fill="#ffffff" />
-      <text id="16" x="938" y="273" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">16</text>
-      <rect id="row 5" x="2" y="339" width="1084" height="103.83" fill="rgba(220, 222, 225, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <rect id="gridcell 22" x="2" y="340" width="154" height="102.83" fill="#ffffff" />
-      <text id="17" x="8" y="358" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">17</text>
-      <rect id="container 8" x="8" y="374" width="142" height="19.61" rx="4" fill="rgba(0, 188, 128, 0.149)" />
-      <text id="Flight to Lisbon" x="8" y="384.4" fill="#00bc7d" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10.4" font-weight="500">Flight to Lisbon</text>
-      <rect id="gridcell 23" x="157" y="340" width="154" height="102.83" fill="#ffffff" />
-      <text id="18" x="163" y="358" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">18</text>
-      <rect id="gridcell 24" x="312" y="340" width="154" height="102.83" fill="#ffffff" />
-      <text id="19" x="318" y="358" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">19</text>
-      <rect id="gridcell 25" x="467" y="340" width="154" height="102.83" fill="#ffffff" />
-      <text id="20" x="473" y="358" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">20</text>
-      <rect id="container 9" x="473" y="374" width="142" height="19.61" rx="4" fill="rgba(0, 128, 54, 0.149)" />
-      <text id="Roadmap review" x="473" y="384.4" fill="#007f34" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10.4" font-weight="500">Roadmap review</text>
-      <rect id="container 10" x="473" y="397.61" width="142" height="19.61" rx="4" fill="rgba(0, 168, 248, 0.149)" />
-      <text id="Portfolio review" x="473" y="408.01" fill="#00a6f4" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10.4" font-weight="500">Portfolio review</text>
-      <text id="+2 more" x="473" y="431.62" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10.4" font-weight="500">+2 more</text>
-      <rect id="gridcell 26" x="622" y="340" width="154" height="102.83" fill="#ffffff" />
-      <text id="21" x="628" y="358" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">21</text>
-      <rect id="gridcell 27" x="777" y="340" width="154" height="102.83" fill="#ffffff" />
-      <text id="22" x="783" y="358" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">22</text>
-      <rect id="gridcell 28" x="932" y="340" width="154" height="102.83" fill="#ffffff" />
-      <text id="23" x="938" y="358" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">23</text>
-      <rect id="row 6" x="2" y="442.83" width="1084" height="85" fill="rgba(220, 222, 225, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <rect id="gridcell 29" x="2" y="443.83" width="154" height="84" fill="#ffffff" />
-      <text id="24" x="8" y="461.83" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">24</text>
-      <rect id="gridcell 30" x="157" y="443.83" width="154" height="84" fill="#ffffff" />
-      <text id="25" x="163" y="461.83" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">25</text>
-      <rect id="gridcell 31" x="312" y="443.83" width="154" height="84" fill="#ffffff" />
-      <text id="26" x="318" y="461.83" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">26</text>
-      <rect id="gridcell 32" x="467" y="443.83" width="154" height="84" fill="#ffffff" />
-      <text id="27 2" x="473" y="461.83" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">27</text>
-      <rect id="container 11" x="473" y="477.83" width="142" height="19.61" rx="4" fill="rgba(0, 128, 54, 0.149)" />
-      <text id="Q3 planning" x="473" y="488.23" fill="#007f34" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10.4" font-weight="500">Q3 planning</text>
-      <rect id="gridcell 33" x="622" y="443.83" width="154" height="84" fill="#ffffff" />
-      <text id="28 2" x="628" y="461.83" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">28</text>
-      <rect id="gridcell 34" x="777" y="443.83" width="154" height="84" fill="#ffffff" />
-      <text id="29 2" x="783" y="461.83" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">29</text>
-      <rect id="gridcell 35" x="932" y="443.83" width="154" height="84" fill="#ffffff" />
-      <text id="30 2" x="938" y="461.83" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">30</text>
-      <rect id="row 7" x="2" y="527.83" width="1084" height="85" fill="rgba(220, 222, 225, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <rect id="gridcell 36" x="2" y="528.83" width="154" height="84" fill="#ffffff" />
-      <text id="31 2" x="8" y="546.83" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">31</text>
-      <rect id="gridcell 37" x="157" y="528.83" width="154" height="84" fill="rgba(242, 238, 235, 0.302)" />
-      <text id="1 2" x="163" y="546.83" fill="rgba(87, 92, 97, 0.6)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">1</text>
-      <rect id="gridcell 38" x="312" y="528.83" width="154" height="84" fill="rgba(242, 238, 235, 0.302)" />
-      <text id="2 2" x="318" y="546.83" fill="rgba(87, 92, 97, 0.6)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">2</text>
-      <rect id="gridcell 39" x="467" y="528.83" width="154" height="84" fill="rgba(242, 238, 235, 0.302)" />
-      <text id="3 2" x="473" y="546.83" fill="rgba(87, 92, 97, 0.6)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">3</text>
-      <rect id="gridcell 40" x="622" y="528.83" width="154" height="84" fill="rgba(242, 238, 235, 0.302)" />
-      <text id="4 2" x="628" y="546.83" fill="rgba(87, 92, 97, 0.6)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">4</text>
-      <rect id="gridcell 41" x="777" y="528.83" width="154" height="84" fill="rgba(242, 238, 235, 0.302)" />
-      <text id="5 2" x="783" y="546.83" fill="rgba(87, 92, 97, 0.6)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">5</text>
-      <rect id="gridcell 42" x="932" y="528.83" width="154" height="84" fill="rgba(242, 238, 235, 0.302)" />
-      <text id="6 2" x="938" y="546.83" fill="rgba(87, 92, 97, 0.6)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">6</text>
-  </g>
-  <text id="Saved View Tabs label" x="64" y="4028.41" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Saved View Tabs</text>
-  <text id="dashboard-saved-views id" x="64" y="4042.41" font-family="ui-monospace, monospace" font-size="12" fill="#737373">dashboard-saved-views</text>
-  <g id="Saved View Tabs" transform="translate(64, 4060.41)">
+  <text id="Saved View Tabs label" x="64" y="3265.58" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Saved View Tabs</text>
+  <text id="dashboard-saved-views id" x="64" y="3279.58" font-family="ui-monospace, monospace" font-size="12" fill="#737373">dashboard-saved-views</text>
+  <g id="Saved View Tabs" transform="translate(64, 3297.58)">
     <rect id="container" x="0" y="0" width="1088" height="496" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="container 2" x="56" y="65" width="976" height="366" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
       <text id="Support queue" x="77" y="98" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="600">Support queue</text>
@@ -463,9 +326,9 @@
       <rect id="button 5" x="313.03" y="384" width="156.5" height="26" rx="13" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
       <text id="Reopened once or more" x="391.28" y="396" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" text-anchor="middle">Reopened once or more</text>
   </g>
-  <text id="Comparison Period Picker label" x="64" y="4672.41" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Comparison Period Picker</text>
-  <text id="dashboard-comparison-period id" x="64" y="4686.41" font-family="ui-monospace, monospace" font-size="12" fill="#737373">dashboard-comparison-period</text>
-  <g id="Comparison Period Picker" transform="translate(64, 4704.41)">
+  <text id="Comparison Period Picker label" x="64" y="3909.58" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Comparison Period Picker</text>
+  <text id="dashboard-comparison-period id" x="64" y="3923.58" font-family="ui-monospace, monospace" font-size="12" fill="#737373">dashboard-comparison-period</text>
+  <g id="Comparison Period Picker" transform="translate(64, 3941.58)">
     <rect id="container" x="0" y="0" width="1088" height="464" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="section" x="1" y="1" width="1086" height="462" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
       <text id="Reporting period" x="26" y="42" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="600">Reporting period</text>
@@ -502,9 +365,9 @@
       <rect id="button 2" x="977.45" y="404" width="84.55" height="34" rx="12" fill="#007f34" />
       <text id="Apply" x="1019.73" y="418" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Apply</text>
   </g>
-  <text id="Alert Rule List label" x="64" y="5284.41" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Alert Rule List</text>
-  <text id="dashboard-alert-rules id" x="64" y="5298.41" font-family="ui-monospace, monospace" font-size="12" fill="#737373">dashboard-alert-rules</text>
-  <g id="Alert Rule List" transform="translate(64, 5316.41)">
+  <text id="Alert Rule List label" x="64" y="4521.58" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Alert Rule List</text>
+  <text id="dashboard-alert-rules id" x="64" y="4535.58" font-family="ui-monospace, monospace" font-size="12" fill="#737373">dashboard-alert-rules</text>
+  <g id="Alert Rule List" transform="translate(64, 4553.58)">
     <rect id="container" x="0" y="0" width="1088" height="803.5" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="section" x="1" y="1" width="1086" height="801.5" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
       <text id="Alert rules" x="26" y="42" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="600">Alert rules</text>

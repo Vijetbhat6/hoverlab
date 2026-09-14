@@ -35,9 +35,9 @@
  */
 
 import * as React from 'react'
-import { Copy } from 'lucide-react'
+import { Copy, Eye, Heart } from 'lucide-react'
 
-import { useUsageCount } from '@/hooks/use-usage-counts'
+import { useUsageCount, useUsageEntry } from '@/hooks/use-usage-counts'
 import { cn } from '@/lib/utils'
 
 export function UsageCount({
@@ -67,4 +67,76 @@ export function UsageCount({
       <span aria-hidden>{count === 1 ? 'copy' : 'copies'} this week</span>
     </span>
   )
+}
+
+/**
+ * Views and saves, as one quiet pair beside the copy count.
+ *
+ * ── WHY THESE TWO ARE ONE COMPONENT AND THE COPY COUNT IS NOT ───────────
+ *
+ * The copy count is a claim about this week and reads as a sentence
+ * ("412 copies this week"). Views and saves are running totals and read as
+ * a tally — a number and a glyph, the shape every catalog on the internet
+ * puts in this position. Rendering them through `<UsageCount>` would have
+ * meant a prop that switched between two different typographic ideas.
+ *
+ * ── WHY VIEWS ARE SHOWN AT ALL, GIVEN THEY DO NOT RANK ──────────────────
+ *
+ * `lib/usage.ts` refuses to sort by views, and that has not changed: a
+ * ranking built on traffic promotes whatever already ranks. But a number
+ * on a tile is not a ranking. It answers "has anyone been here", which is
+ * the question a visitor has in front of a grid of 290 blocks, and it is
+ * the one signal that exists for an artifact nobody has copied yet. Shown,
+ * not sorted, is the whole position.
+ *
+ * Each half is independently absent. A block with 2,000 views and no saves
+ * renders the views alone — the alternative is "0 saves", which is a
+ * verdict rather than a measurement, for all the reasons above.
+ */
+export function CardStats({ id, className }: { id: string; className?: string }) {
+  const entry = useUsageEntry(id)
+  if (!entry) return null
+
+  const views = entry.views > 0 ? entry.views : null
+  const saves = entry.saves > 0 ? entry.saves : null
+  if (views === null && saves === null) return null
+
+  return (
+    <>
+      {views !== null ? (
+        <span className={cn('inline-flex items-center gap-1 tabular-nums', className)}>
+          <Eye aria-hidden className="h-3.5 w-3.5" />
+          {compact(views)}
+          <span className="sr-only"> {views === 1 ? 'view' : 'views'}</span>
+        </span>
+      ) : null}
+
+      {saves !== null ? (
+        <span className={cn('inline-flex items-center gap-1 tabular-nums', className)}>
+          <Heart aria-hidden className="h-3.5 w-3.5" />
+          {compact(saves)}
+          <span className="sr-only"> {saves === 1 ? 'save' : 'saves'}</span>
+        </span>
+      ) : null}
+    </>
+  )
+}
+
+/**
+ * 1,240 → "1.2k".
+ *
+ * These sit in a metadata row that already wraps, next to "9 blocks" and
+ * "214 lines", and a five-digit view count would be the widest thing on the
+ * card by some margin. Nobody reading a tile needs the last two digits of a
+ * view count; they need to know whether it is hundreds or thousands.
+ *
+ * Under a thousand the number is printed in full, because at that size the
+ * exact figure is both short and meaningful. The screen-reader text beside
+ * it says the unit either way, so "1.2k" is never read as a bare token.
+ */
+function compact(n: number): string {
+  if (n < 1000) return n.toLocaleString('en-US')
+  if (n < 10_000) return `${(n / 1000).toFixed(1).replace(/\.0$/, '')}k`
+  if (n < 1_000_000) return `${Math.round(n / 1000)}k`
+  return `${(n / 1_000_000).toFixed(1).replace(/\.0$/, '')}m`
 }

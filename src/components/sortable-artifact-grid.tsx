@@ -33,10 +33,24 @@
  * `?sort=` via `replaceState`, matching `/library`. These hubs are
  * statically rendered, so the parameter cannot change the HTML — but it
  * survives a reload, it can be linked, and it costs no navigation.
+ *
+ * ── WHY RANDOMIZED IS HERE AT ALL ───────────────────────────────────────
+ *
+ * Curated order is a decision made once and then frozen, and the top of it
+ * is the only part most visitors ever see: a hub with 290 blocks in a fixed
+ * order has a long tail nobody has any route to. Newest reaches the tail
+ * only if it is new, Popular only if it is already popular — both of them
+ * are feedback loops that reward what is already visible. A shuffle is the
+ * one order that gives the two-hundredth block the same chance as the
+ * second, which is worth having on a catalog whose whole claim is breadth.
+ *
+ * It carries a seed in the URL so it is still a shareable, reloadable
+ * order rather than the one sort that changes under the reader — see
+ * `lib/shuffle.ts`.
  */
 
 import * as React from 'react'
-import { ArrowDownUp, Clock, Loader2, TrendingUp } from 'lucide-react'
+import { ArrowDownUp, Clock, Loader2, Shuffle, TrendingUp } from 'lucide-react'
 
 import {
   Select,
@@ -47,10 +61,11 @@ import {
 } from '@/components/ui/select'
 import { useUsageCountsState } from '@/hooks/use-usage-counts'
 import { formatAdded } from '@/lib/recency'
+import { newSeed, parseSeed, seededShuffle } from '@/lib/shuffle'
 
-export type ArtifactSort = 'catalog' | 'newest' | 'popular'
+export type ArtifactSort = 'catalog' | 'newest' | 'popular' | 'random'
 
-const SORTS: ArtifactSort[] = ['catalog', 'newest', 'popular']
+const SORTS: ArtifactSort[] = ['catalog', 'newest', 'popular', 'random']
 
 export interface SortableItem {
   id: string
@@ -109,12 +124,24 @@ export function SortableArtifactGrid({
   noun: string
 }) {
   const [sort, setSort] = React.useState<ArtifactSort>('catalog')
+  /*
+   * The shuffle's seed. Held as state rather than generated inside the
+   * memo below, because an order has to be a value the reader can keep —
+   * see `lib/shuffle.ts`. Null until the reader asks for a shuffle, so no
+   * seed appears in the URL of a grid that is not shuffled.
+   */
+  const [seed, setSeed] = React.useState<number | null>(null)
   const { counts, ready } = useUsageCountsState()
 
   // Read `?sort=` once on mount, so a shared link opens in its own order.
   React.useEffect(() => {
-    const fromUrl = parseSort(new URLSearchParams(window.location.search).get('sort'))
+    const params = new URLSearchParams(window.location.search)
+    const fromUrl = parseSort(params.get('sort'))
     if (fromUrl !== 'catalog') setSort(fromUrl)
+    // A link to a shuffled grid should reproduce that exact shuffle. A
+    // `sort=random` with no usable seed gets a fresh one rather than an
+    // error — the reader asked for a random order and any of them answers.
+    if (fromUrl === 'random') setSeed(parseSeed(params.get('seed')) ?? newSeed())
   }, [])
 
   React.useEffect(() => {
@@ -122,13 +149,23 @@ export function SortableArtifactGrid({
     const params = new URLSearchParams(window.location.search)
     if (sort === 'catalog') params.delete('sort')
     else params.set('sort', sort)
+    // The seed rides along only while the shuffle is showing, so switching
+    // back to Newest does not leave a stale number in the address bar.
+    if (sort === 'random' && seed !== null) params.set('seed', String(seed))
+    else params.delete('seed')
     const qs = params.toString()
     window.history.replaceState(
       null,
       '',
       qs ? `${window.location.pathname}?${qs}` : window.location.pathname,
     )
-  }, [sort])
+  }, [sort, seed])
+
+  /** Switch sorts, minting a seed the first time the shuffle is chosen. */
+  const chooseSort = React.useCallback((next: ArtifactSort) => {
+    setSort(next)
+    if (next === 'random') setSeed((current) => current ?? newSeed())
+  }, [])
 
   /*
    * Every sort starts from catalog order and is stable, so items the sort
@@ -152,12 +189,19 @@ export function SortableArtifactGrid({
       })
     }
 
+    if (sort === 'random') {
+      // Pure in the seed, so this recomputes only when the reader shuffles
+      // again — and gives every browser opening the same link the same
+      // grid.
+      return seed === null ? items : seededShuffle(items, seed)
+    }
+
     return [...items].sort((a, b) => {
       const ca = counts[a.id]?.recent ?? 0
       const cb = counts[b.id]?.recent ?? 0
       return cb - ca
     })
-  }, [items, sort, counts])
+  }, [items, sort, counts, seed])
 
   const byId = React.useMemo(
     () => new Map(items.map((item) => [item.id, item])),
@@ -182,7 +226,25 @@ export function SortableArtifactGrid({
   return (
     <>
       <div className="mb-5 flex flex-wrap items-center justify-end gap-3">
-        <Select value={sort} onValueChange={(v) => setSort(v as ArtifactSort)}>
+        {/*
+          Only while the shuffle is showing. A "Shuffle again" sitting
+          beside a grid that is in curated order would either do nothing
+          visible or silently change the sort — and a control whose effect
+          you cannot see is one nobody presses twice.
+        */}
+        {sort === 'random' ? (
+          <button
+            type="button"
+            onClick={() => setSeed(newSeed())}
+            className="inline-flex h-8 items-center gap-1.5 rounded-full border border-border/60 bg-background/70 px-3 text-xs font-medium text-muted-foreground shadow-sm transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          >
+            <Shuffle aria-hidden className="h-3.5 w-3.5" />
+            Shuffle again
+            <span className="sr-only">, reordering the {noun} at random</span>
+          </button>
+        ) : null}
+
+        <Select value={sort} onValueChange={(v) => chooseSort(v as ArtifactSort)}>
           <SelectTrigger
             className="h-8 w-[170px] gap-1.5 rounded-full border-border/60 bg-background/70 text-xs shadow-sm"
             aria-label={`Sort ${noun}`}
@@ -202,6 +264,10 @@ export function SortableArtifactGrid({
             <SelectItem value="popular">
               Popular
               <span className="ml-1.5 text-muted-foreground">· copied this week</span>
+            </SelectItem>
+            <SelectItem value="random">
+              Randomized
+              <span className="ml-1.5 text-muted-foreground">· shuffled</span>
             </SelectItem>
           </SelectContent>
         </Select>
@@ -239,6 +305,15 @@ export function SortableArtifactGrid({
               installs, never by page views.
             </>
           )}
+        </SortNote>
+      ) : null}
+
+      {sort === 'random' ? (
+        <SortNote icon={Shuffle}>
+          All {items.length} {noun} in a random order, so the ones a curated
+          list keeps at the bottom get the top of the grid for once. The
+          shuffle is in the address bar — this exact order reopens on a
+          reload and survives being sent to someone else.
         </SortNote>
       ) : null}
 

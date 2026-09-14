@@ -1,12 +1,12 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
-import { ArrowDown, ArrowUp, Layers, Plus, X } from 'lucide-react'
 
 import { SiteHeader } from '@/components/site-header'
 import { SiteFooter } from '@/components/site-footer'
 import { PreviewGuard } from '@/components/preview-guard'
 import { BlockPicker } from '@/components/builder/block-picker'
 import { BuilderExport } from '@/components/builder/builder-export'
+import { BuilderSurface, type BuilderSection } from '@/components/builder/builder-surface'
+import { BuilderThemeBar } from '@/components/builder/builder-theme-bar'
 import { getBlockPreview } from '@/lib/blocks/registry'
 import { BLOCK_INDEX } from '@/lib/blocks/block-index'
 import { PAGE_COUNT } from '@/lib/pages/page-index'
@@ -17,11 +17,16 @@ import {
   COMPOSITION_PARAM,
   installCommand,
   MAX_SECTIONS,
-  moveAt,
   parseComposition,
-  removeAt,
+  serializeComposition,
+  THEME_PARAM,
 } from '@/lib/builder/compose'
-import { absoluteUrl } from '@/lib/site'
+import {
+  compositionTheme,
+  compositionThemeSheet,
+  themeInstallCommand,
+} from '@/lib/builder/theme'
+import { absoluteUrl, siteUrl } from '@/lib/site'
 
 /**
  * /builder — assemble blocks into a page, and leave with the source.
@@ -48,8 +53,9 @@ import { absoluteUrl } from '@/lib/site'
  *
  *   A layout is a link. The whole composition is the query string, so it
  *   pastes into a channel and opens for someone with no account. A builder
- *   is exactly where a competitor puts an account wall, and `/compare`
- *   claims the only thing we withhold is the licence to ship.
+ *   is exactly where a competitor puts an account wall — Shadcnblocks locks
+ *   its builder to the $399 tier — and `/compare` claims the only thing we
+ *   withhold is the licence to ship.
  *
  *   Every edit is a navigation. Reorder and remove are `<Link>`s to the
  *   next composition, so the back button is an undo stack and the whole
@@ -58,18 +64,33 @@ import { absoluteUrl } from '@/lib/site'
  * The cost is a round trip per edit, which is the right trade for a control
  * a reader clicks a handful of times before copying the source.
  *
- * ── WHAT IT DELIBERATELY IS NOT ─────────────────────────────────────────
+ * ── WHAT DRAGGING DID AND DID NOT CHANGE ────────────────────────────────
  *
- * A design tool. There is no dragging, no resizing, no per-block prop
- * editing and no canvas. Blocks are chosen and ordered; everything else is
- * done in your editor, on the file this hands you. Building the other thing
- * means owning a layout engine that disagrees with Tailwind, and the
- * catalog's whole argument is that you leave with real source.
+ * The first version of this page had two arrows per row, and `/compare` said
+ * so in the row where the competitors win: theirs drag, reorder, restyle and
+ * run. All four are here now, and none of them moved the source of truth.
+ * A drop is a `moveTo` and a `moveTo` is a URL; the theme is a second query
+ * parameter; the runnable project is assembled from the same query string on
+ * demand. `BuilderSurface` holds the gestures and the reasoning behind them.
+ *
+ * The arrows did not go away, because HTML5 drag-and-drop has no keyboard
+ * interface at all — they are how the builder is operated without a mouse.
+ *
+ * ── WHAT IT STILL DELIBERATELY IS NOT ───────────────────────────────────
+ *
+ * A design tool. There is no canvas, no resizing and no per-block prop
+ * editing, and the last one is the real line: blocks in this catalog take no
+ * props, because they are files you leave with and change in your editor.
+ * A prop panel would be a second, worse editor for the same text, and
+ * building the other thing means owning a layout engine that disagrees with
+ * Tailwind. What the reader can change here is what a token can change —
+ * which, because every block styles itself through tokens and never a
+ * literal colour, is the whole palette of all thirty sections at once.
  */
 
 const TITLE = 'Page builder — compose blocks into a page — Hoverlab'
 const DESCRIPTION =
-  'Pick sections, order them, see the real thing render, and leave with the page source and the one command that installs it. No account, no export limit — the layout is the link.'
+  'Drag sections into order, theme the whole page at once, see the real thing render at any width, and leave with the source and the one command that installs it. No account, no export limit — the layout is the link.'
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -90,34 +111,64 @@ export default async function BuilderPage({
 }) {
   const params = await searchParams
   const { ids, dropped, truncated } = parseComposition(params[COMPOSITION_PARAM])
+  const theme = compositionTheme(params[THEME_PARAM])
+
+  const shareUrl = absoluteUrl(builderHref(ids, theme.param))
+  const themeCommand = themeInstallCommand(theme.param, siteUrl)
 
   const source = composePageSource(ids, {
-    shareUrl: absoluteUrl(builderHref(ids)),
+    shareUrl,
+    themeCommand: themeCommand ?? undefined,
   })
   const command = installCommand(ids)
   const deps = composedDeps(ids)
+
   const byId = new Map(BLOCK_INDEX.map((b) => [b.id, b]))
+
+  /*
+   * The two arrays `BuilderSurface` aligns by position, built together here
+   * so they cannot come apart. `items` is plain data that crosses the RSC
+   * boundary; `sections` is the rendered previews, which cross it as
+   * serialized element trees.
+   *
+   * `PreviewGuard` on each, the same wrapper the detail pages use: a
+   * composed page holds several blocks that each believe they own the <h1>,
+   * and demo links that point at routes this site does not have.
+   */
+  const items: BuilderSection[] = ids.map((id) => {
+    const meta = byId.get(id)
+    return { id, name: meta?.name ?? id, category: meta?.category ?? 'Block' }
+  })
+
+  const sections = ids.map((id, i) => (
+    <PreviewGuard key={`${id}-${i}`}>{getBlockPreview(id)}</PreviewGuard>
+  ))
+
+  const sandboxEndpoint = `/api/sandbox/builder?${COMPOSITION_PARAM}=${serializeComposition(
+    ids,
+  )}${theme.param ? `&${THEME_PARAM}=${encodeURIComponent(theme.param)}` : ''}`
 
   return (
     <div className="relative flex min-h-screen flex-col">
       <SiteHeader />
 
       <main id="main-content" className="flex-1">
-        <section className="mx-auto w-full max-w-6xl px-4 pb-10 pt-14 sm:px-6 lg:px-8">
+        <section className="mx-auto w-full max-w-6xl px-4 pb-8 pt-14 sm:px-6 lg:px-8">
           <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
             Builder
           </p>
           <h1 className="type-page mt-3">Compose a page out of real sections.</h1>
           <p className="mt-4 max-w-2xl text-body text-muted-foreground">
-            Pick sections from {BLOCK_INDEX.length} blocks and order them. What
-            renders below is the actual component, not a picture of it — the
-            same one the {PAGE_COUNT} pages in the catalog are built from. When
-            it looks right, take the source.
+            Pick sections from {BLOCK_INDEX.length} blocks, drag them into
+            order, and theme the lot in one go. What renders below is the actual
+            component, not a picture of it — the same one the {PAGE_COUNT} pages
+            in the catalog are built from. When it looks right, run it or take
+            the source.
           </p>
           <p className="mt-3 max-w-2xl text-sm text-muted-foreground">
-            The layout lives in the address bar, so this page is shareable as a
-            link and needs no account. Reordering is a normal navigation, which
-            makes the back button an undo.
+            The layout and the theme both live in the address bar, so this page
+            is shareable as a link and needs no account. Every edit is a normal
+            navigation, which makes the back button an undo.
           </p>
         </section>
 
@@ -150,130 +201,42 @@ export default async function BuilderPage({
           </section>
         )}
 
+        {/* ------------------------------------------------------------ *
+            The theme. Above the canvas rather than beside the export,
+            because it changes what the reader is looking at — a control
+            whose effect is visible below it belongs above it.
+         * ------------------------------------------------------------ */}
+        <section className="mx-auto w-full max-w-6xl px-4 pb-2 sm:px-6 lg:px-8">
+          <BuilderThemeBar ids={ids} theme={theme.state} malformed={theme.malformed} />
+        </section>
+
+        {/* ------------------------------------------------------------ *
+            The outline, the canvas, and the gestures over both.
+         * ------------------------------------------------------------ */}
         <section className="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
-          <div className="grid gap-8 lg:grid-cols-[20rem_minmax(0,1fr)]">
-            {/* -------------------------------------------------------- *
-                The outline: what is in the page, and the only controls
-                that change it.
-             * -------------------------------------------------------- */}
-            <div className="lg:sticky lg:top-24 lg:self-start">
-              <div className="flex items-center justify-between">
-                <h2 className="type-section flex items-center gap-2">
-                  <Layers className="h-4 w-4 text-muted-foreground" aria-hidden />
-                  Outline
-                </h2>
-                <span className="text-xs text-muted-foreground">
-                  {ids.length} / {MAX_SECTIONS}
-                </span>
-              </div>
+          {/* The theme's token overrides, scoped to the canvas wrapper.
+              Rendered here rather than inside the client surface so it is
+              in the first byte of HTML: injecting it after hydration
+              would paint the composition twice, once in the wrong palette. */}
+          {theme.css ? <style>{theme.css}</style> : null}
 
-              {ids.length === 0 ? (
-                <p className="mt-4 rounded-xl border border-dashed border-border/60 p-4 text-sm text-muted-foreground">
-                  Nothing in the page yet. Add a section below — a hero is the
-                  usual first one.
-                </p>
-              ) : (
-                <ol className="mt-4 space-y-2">
-                  {ids.map((id, i) => {
-                    const meta = byId.get(id)
-                    return (
-                      <li
-                        key={`${id}-${i}`}
-                        className="flex items-start gap-2 rounded-xl border border-border/60 bg-card/50 p-3"
-                      >
-                        <span className="mt-0.5 w-5 shrink-0 text-xs tabular-nums text-muted-foreground">
-                          {i + 1}
-                        </span>
-                        <div className="min-w-0 flex-1">
-                          <Link
-                            href={`/block/${id}`}
-                            className="block truncate text-sm font-medium underline-offset-4 hover:underline"
-                          >
-                            {meta?.name ?? id}
-                          </Link>
-                          <span className="text-xs text-muted-foreground">
-                            {meta?.category ?? 'Block'}
-                          </span>
-                        </div>
-                        <div className="flex shrink-0 items-center gap-0.5">
-                          <OutlineButton
-                            href={builderHref(moveAt(ids, i, -1))}
-                            disabled={i === 0}
-                            label={`Move ${meta?.name ?? id} up`}
-                          >
-                            <ArrowUp className="h-3.5 w-3.5" aria-hidden />
-                          </OutlineButton>
-                          <OutlineButton
-                            href={builderHref(moveAt(ids, i, 1))}
-                            disabled={i === ids.length - 1}
-                            label={`Move ${meta?.name ?? id} down`}
-                          >
-                            <ArrowDown className="h-3.5 w-3.5" aria-hidden />
-                          </OutlineButton>
-                          <OutlineButton
-                            href={builderHref(removeAt(ids, i))}
-                            label={`Remove ${meta?.name ?? id}`}
-                          >
-                            <X className="h-3.5 w-3.5" aria-hidden />
-                          </OutlineButton>
-                        </div>
-                      </li>
-                    )
-                  })}
-                </ol>
-              )}
-
-              {ids.length > 0 && (
-                <Link
-                  href="/builder"
-                  className="mt-3 inline-block text-xs text-muted-foreground underline underline-offset-4 hover:text-foreground"
-                >
-                  Start over
-                </Link>
-              )}
-            </div>
-
-            {/* -------------------------------------------------------- *
-                The preview. Real components, stacked, each wrapped in the
-                same PreviewGuard the detail pages use — a composed page
-                holds several blocks that each believe they own the <h1>,
-                and demo links that point at routes this site does not have.
-             * -------------------------------------------------------- */}
-            <div className="min-w-0">
-              <h2 className="type-section">Preview</h2>
-              {ids.length === 0 ? (
-                <div className="mt-4 rounded-2xl border border-dashed border-border/60 p-12 text-center text-sm text-muted-foreground">
-                  Your page renders here as you add sections.
-                </div>
-              ) : (
-                <div className="mt-4 overflow-hidden rounded-2xl border border-border/60 bg-background">
-                  {ids.map((id, i) => (
-                    <div
-                      key={`${id}-${i}`}
-                      className="border-b border-border/40 last:border-b-0"
-                    >
-                      <PreviewGuard>{getBlockPreview(id)}</PreviewGuard>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-          </div>
+          <BuilderSurface items={items} theme={theme.param} sections={sections} />
         </section>
 
         {/* -------------------------------------------------------- *
             Add a section.
          * -------------------------------------------------------- */}
         <section className="mx-auto w-full max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
-          <h2 className="type-section flex items-center gap-2">
-            <Plus className="h-4 w-4 text-muted-foreground" aria-hidden />
-            Add a section
-          </h2>
+          <h2 className="type-section">Add a section</h2>
           <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
-            Every block in the catalog, filtered by what it is. Sections are
-            appended to the end of the page; reorder them in the outline.
+            Every block in the catalog, filtered by what it is. Click to append
+            to the end of the page, or drag one into the outline to place it.
           </p>
-          <BlockPicker current={ids} atCapacity={ids.length >= MAX_SECTIONS} />
+          <BlockPicker
+            current={ids}
+            atCapacity={ids.length >= MAX_SECTIONS}
+            theme={theme.param}
+          />
         </section>
 
         {/* -------------------------------------------------------- *
@@ -286,53 +249,15 @@ export default async function BuilderPage({
             command={command}
             deps={deps}
             count={ids.length}
-            shareUrl={absoluteUrl(builderHref(ids))}
+            shareUrl={shareUrl}
+            themeCommand={themeCommand}
+            themeSheet={theme.state ? compositionThemeSheet(theme.state) : null}
+            sandboxEndpoint={sandboxEndpoint}
           />
         </section>
       </main>
 
       <SiteFooter />
     </div>
-  )
-}
-
-/**
- * One outline control.
- *
- * A disabled control renders as a `<span>` rather than a greyed `<a>`,
- * because an anchor with no href is not focusable and an anchor that points
- * at the composition it already is would be a navigation to nowhere.
- */
-function OutlineButton({
-  href,
-  disabled = false,
-  label,
-  children,
-}: {
-  href: string
-  disabled?: boolean
-  label: string
-  children: React.ReactNode
-}) {
-  const shape =
-    'inline-flex h-7 w-7 items-center justify-center rounded-md border border-border/60'
-
-  if (disabled) {
-    return (
-      <span className={`${shape} text-muted-foreground/40`} aria-hidden>
-        {children}
-      </span>
-    )
-  }
-
-  return (
-    <Link
-      href={href}
-      scroll={false}
-      className={`${shape} text-muted-foreground transition-colors hover:bg-muted hover:text-foreground`}
-    >
-      {children}
-      <span className="sr-only">{label}</span>
-    </Link>
   )
 }

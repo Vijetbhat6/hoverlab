@@ -1,413 +1,61 @@
-'use client'
+import type { Metadata } from 'next'
+
+import { ToolPermalinkGallery } from '@/components/designer-tools/tool-permalink-gallery'
+import { parseToolState, type SearchParams } from '@/lib/tools/permalink'
+import { PALETTE_PERMALINK } from '@/lib/tools/permalinks/palette'
+import { toolPageMetadata } from '@/lib/tools/tool-page-metadata'
+import PaletteTool from './palette-tool'
 
 /**
- * Palette Generator tool.
+ * /tools/palette — the server half.
  *
- * Lets the designer pick a base color and a color-harmony scheme, then
- * generates a 5-color palette. Shows the palette as large swatches with
- * hex/HSL/RGB readouts, copy-as-CSS-variables, copy-as-Tailwind-config,
- * and copy-as-JSON. State persists to localStorage so reloads restore
- * the working palette.
+ * A palette is a base colour and a harmony, and `generatePalette` is a
+ * pure function of exactly those two. That is what makes the permalink
+ * worth having here: the server can resolve the link to five real
+ * swatches and put them in the HTML, so a shared palette is a document
+ * rather than a bookmark that only means something once JavaScript runs.
+ *
+ * The split is thin on purpose. This file reads the query string, decides
+ * what the page is ABOUT — the <title>, the description, the canonical —
+ * and hands the parsed state to the same client component that always
+ * rendered the tool. The tool did not become a server component and could
+ * not: it is controls over a live preview.
+ *
+ * `initial` is passed only when the URL actually carried a state. That is
+ * why `parseToolState` reports `fromLink` separately: a link spelling out
+ * the defaults must still outrank whatever this browser had in
+ * `localStorage`, and a bare visit must not. Passing it unconditionally
+ * would make every visit look like a shared link and break the restore that
+ * was already there.
  */
 
-import * as React from 'react'
-import Link from 'next/link'
-import { Palette, Shuffle, Copy, Check, ArrowRight } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Slider } from '@/components/ui/slider'
-import { CopyCssCard } from '@/components/designer-tools/copy-css-card'
-import { DownloadBar, type DownloadAction } from '@/components/designer-tools/download-bar'
-import { downloadBlob, downloadText, fileSlug, svgToPngBlob } from '@/lib/download'
-import { encodeAse } from '@/lib/ase'
-import { ToolLayout } from '@/components/designer-tools/tool-layout'
-import { ToolPresetsBar } from '@/components/designer-tools/tool-presets-bar'
-import { UseInCatalog } from '@/components/designer-tools/use-in-catalog'
-import { useToolState } from '@/hooks/use-tool-state'
-import { ToolWorkbench } from '@/components/designer-tools/tool-workbench'
-import {
-  generatePalette,
-  hexToHsl,
-  hexToRgb,
-  normalizeHex,
-  randomHex,
-  brandFromHex,
-  type PaletteScheme,
-} from '@/lib/color-tools'
-import { cn } from '@/lib/utils'
-
-/**
- * The palette as a printable swatch sheet.
- *
- * Built as SVG and rasterised rather than drawn on a canvas directly,
- * because text on a canvas needs the font to have loaded and measured, and
- * a sheet whose labels are half a swatch off is worse than no sheet. SVG
- * lets the browser lay it out.
- *
- * The hex is printed on every swatch on purpose: this file's whole job is
- * to be readable by someone who cannot open the tool it came from.
- */
-function paletteSheetSvg(name: string, colors: string[]): string {
-  const width = 1000
-  const height = 260
-  const swatchWidth = width / Math.max(colors.length, 1)
-  const escape = (s: string) =>
-    s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-
-  const swatches = colors
-    .map((hex, i) => {
-      const x = i * swatchWidth
-      // Label colour follows the swatch's own luminance, so a hex on a pale
-      // yellow is as readable as one on a navy.
-      const rgb = hexToRgb(hex)
-      const luminance = rgb ? (rgb.r * 299 + rgb.g * 587 + rgb.b * 114) / 1000 : 0
-      const ink = luminance > 150 ? '#111827' : '#ffffff'
-      return `  <rect x="${x}" y="0" width="${swatchWidth}" height="200" fill="${escape(hex)}"/>
-  <text x="${x + swatchWidth / 2}" y="180" fill="${ink}" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="20" text-anchor="middle">${escape(hex.toUpperCase())}</text>`
-    })
-    .join('\n')
-
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">
-  <rect width="${width}" height="${height}" fill="#ffffff"/>
-${swatches}
-  <text x="20" y="238" fill="#111827" font-family="ui-sans-serif, system-ui, sans-serif" font-size="22" font-weight="600">${escape(name)}</text>
-</svg>`
+export function generateMetadata({
+  searchParams,
+}: {
+  searchParams: Promise<SearchParams>
+}): Promise<Metadata> {
+  return searchParams.then((params) => toolPageMetadata(PALETTE_PERMALINK, params))
 }
 
-const SCHEMES: { id: PaletteScheme; label: string }[] = [
-  { id: 'analogous', label: 'Analogous' },
-  { id: 'complementary', label: 'Complementary' },
-  { id: 'triadic', label: 'Triadic' },
-  { id: 'split-complementary', label: 'Split Complementary' },
-  { id: 'tetradic', label: 'Tetradic' },
-  { id: 'monochromatic', label: 'Monochromatic' },
-  { id: 'shades', label: 'Shades & Tints' },
-]
-
-const TOOL = '/tools/palette'
-
-interface PaletteState {
-  base: string
-  scheme: PaletteScheme
-}
-
-const DEFAULT_STATE: PaletteState = { base: '#10b981', scheme: 'analogous' }
-
-
-export default function PaletteToolPage() {
-  // Working state stays local and ungated; named presets need an account.
-  const tool = useToolState<PaletteState>(TOOL, DEFAULT_STATE)
-  const { setState } = tool
-
-  /*
-    Validation is a derivation, not a restore step.
-
-    The hook merges whatever was stored over the defaults without inspecting
-    it, which is right — it cannot know what any given tool's state means.
-    That leaves this page holding a `base` that might be half-typed and a
-    `scheme` that might name a mode we removed, from localStorage, from a
-    shared link, or from a preset saved a year ago. Checking on the way OUT
-    covers all four with one rule, where the previous shape checked two of
-    them at the point of restore and neither of the others.
-  */
-  const base = normalizeHex(tool.state.base) ?? tool.state.base
-  const scheme: PaletteScheme = SCHEMES.some((s) => s.id === tool.state.scheme)
-    ? tool.state.scheme
-    : DEFAULT_STATE.scheme
-
-  const setBase = React.useCallback(
-    (next: string) => setState((s) => ({ ...s, base: next })),
-    [setState],
-  )
-  const setScheme = React.useCallback(
-    (next: PaletteScheme) => setState((s) => ({ ...s, scheme: next })),
-    [setState],
-  )
-
-  const palette = React.useMemo(() => generatePalette(base, scheme), [base, scheme])
-
-  // Generate exports.
-  const cssVars = React.useMemo(() => {
-    const lines = palette.colors.map(
-      (c, i) => `  --color-${i + 1}: ${c};`,
-    )
-    return `:root {\n${lines.join('\n')}\n}`
-  }, [palette])
-
-  const tailwindConfig = React.useMemo(() => {
-    const entries = palette.colors
-      .map((c, i) => `      '${(i + 1) * 100}': '${c}',`)
-      .join('\n')
-    return `// tailwind.config.js\nmodule.exports = {\n  theme: {\n    extend: {\n      colors: {\n        palette: {\n${entries}\n        }\n      }\n    }\n  }\n}`
-  }, [palette])
-
-  const jsonExport = React.useMemo(() => {
-    return JSON.stringify(
-      {
-        name: palette.name,
-        base,
-        colors: palette.colors.map((c) => ({
-          hex: c,
-          rgb: hexToRgb(c),
-          hsl: hexToHsl(c),
-        })),
-      },
-      null,
-      2,
-    )
-  }, [palette, base])
-
-  /*
-    File exports, as opposed to the three clipboard formats above.
-
-    `.ase` is the one that matters and the reason this row exists: it is
-    what opens a palette in Photoshop, Illustrator, Figma and Affinity, and
-    it is the format a designer asks for by name. The PNG is for the other
-    half of that conversation — a swatch sheet you can drop into a deck or
-    a message thread without the recipient needing a design tool at all.
-  */
-  const exports = React.useMemo<DownloadAction[]>(() => {
-    const slug = fileSlug(palette.name, 'palette')
-    return [
-      {
-        label: '.ase',
-        title: 'Adobe Swatch Exchange — Photoshop, Illustrator, Figma, Affinity',
-        run: () => {
-          const bytes = encodeAse(
-            palette.colors.map((hex, i) => ({ name: `${palette.name} ${i + 1}`, hex })),
-          )
-          // A fresh ArrayBuffer copy, because `bytes` is a view over a
-          // buffer whose type the Blob constructor will not accept directly.
-          downloadBlob(
-            new Blob([new Uint8Array(bytes)], { type: 'application/octet-stream' }),
-            `${slug}.ase`,
-          )
-        },
-      },
-      {
-        label: 'PNG',
-        title: 'A swatch sheet, for a deck or a message',
-        run: async () => {
-          const blob = await svgToPngBlob(paletteSheetSvg(palette.name, palette.colors), 1000, 260)
-          if (!blob) return false
-          downloadBlob(blob, `${slug}.png`)
-        },
-      },
-      {
-        label: 'CSS',
-        run: () => downloadText(cssVars, `${slug}.css`, 'text/css'),
-      },
-      {
-        label: 'JSON',
-        run: () => downloadText(jsonExport, `${slug}.json`, 'application/json'),
-      },
-    ]
-  }, [palette, cssVars, jsonExport])
+export default async function PaletteToolPage({
+  searchParams,
+}: {
+  searchParams: Promise<SearchParams>
+}) {
+  const params = await searchParams
+  const { state, fromLink } = parseToolState(PALETTE_PERMALINK, params)
 
   return (
-    <ToolLayout
-      name="Palette Generator"
-      tagline="5-color palettes from any base color"
-      icon={<Palette className="h-5 w-5" />}
-    >
-      <ToolWorkbench previewSide="right" controlsWidth="380px">
-        {/* Controls */}
-        <div className="space-y-6">
-          <div className="rounded-lg border border-border bg-card p-5">
-            <Label className="mb-2 block text-sm font-medium">Base color</Label>
-            <div className="flex items-center gap-3">
-              <input
-                type="color"
-                value={base}
-                onChange={(e) => setBase(e.target.value)}
-                className="h-10 w-12 cursor-pointer rounded border border-field bg-transparent"
-                aria-label="Pick base color"
-              />
-              <Input
-                value={base}
-                onChange={(e) => {
-                  const n = normalizeHex(e.target.value)
-                  if (n) setBase(n)
-                  else setBase(e.target.value)
-                }}
-                className="font-mono"
-                placeholder="#10b981"
-              />
-              <Button
-                variant="outline"
-                size="icon"
-                onClick={() => setBase(randomHex())}
-                aria-label="Random base color"
-                title="Random base color"
-              >
-                <Shuffle className="h-4 w-4" />
-              </Button>
-            </div>
-
-            <Label className="mb-2 mt-5 block text-sm font-medium">Scheme</Label>
-            <div className="grid grid-cols-2 gap-2">
-              {SCHEMES.map((s) => (
-                <button
-                  key={s.id}
-                  type="button"
-                  onClick={() => setScheme(s.id)}
-                  className={cn(
-                    'rounded-md border px-3 py-2 text-xs font-medium transition-colors',
-                    scheme === s.id
-                      ? 'border-primary bg-primary/10 text-primary'
-                      : 'border-border bg-background hover:bg-muted',
-                  )}
-                >
-                  {s.label}
-                </button>
-              ))}
-            </div>
-
-            {/* The base's position varies by scheme (index 0, 1 or 2 —
-                see generatePalette), so compute it rather than claim one. */}
-            <div className="mt-5 rounded-md bg-muted/50 p-3 text-xs text-muted-foreground">
-              <span className="font-medium text-foreground">{palette.name}</span>{' '}
-              scheme · 5 colors
-              {(() => {
-                const i = palette.colors.findIndex(
-                  (c) => c.toLowerCase() === base.toLowerCase(),
-                )
-                return i >= 0 ? ` · base at position ${i + 1}` : ''
-              })()}
-            </div>
-
-            {/* Handoff: the palette picks the colour, the token generator
-                turns it into the full variable set the catalog runs on. */}
-            <div className="mt-3 flex items-center gap-2">
-              <Button asChild variant="outline" size="sm" className="flex-1 gap-1.5">
-                <Link href={`/tools/tokens?base=${encodeURIComponent(base)}`}>
-                  Build design tokens from this base
-                  <ArrowRight className="h-3.5 w-3.5" />
-                </Link>
-              </Button>
-            </div>
-          </div>
-
-          {/* After the controls, never before them. */}
-          <ToolPresetsBar tool={tool} noun="palette" />
-
-          <CopyCssCard code={cssVars} title="CSS variables" language="css" />
-          <CopyCssCard code={tailwindConfig} title="Tailwind config" language="js" />
-          <CopyCssCard code={jsonExport} title="JSON" language="json" />
-
-          <DownloadBar actions={exports} />
-
-          {/*
-            The base colour is a hex; the catalog's brand is OKLCH hue and
-            chroma. Converted here rather than stored that way, because the
-            palette maths works in hex and a second representation in state
-            would be one more thing that can disagree with the swatches.
-          */}
-          <UseInCatalog tool={TOOL} brand={brandFromHex(base)} />
-        </div>
-
-        {/* Palette display */}
-        <div className="space-y-6">
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-5">
-            {palette.colors.map((color, i) => (
-              <SwatchCard key={`${color}-${i}`} color={color} index={i} />
-            ))}
-          </div>
-
-          {/* Big preview using the palette */}
-          <div className="overflow-hidden rounded-lg border border-border">
-            <div className="border-b border-border/60 bg-muted/40 px-4 py-2 text-xs font-medium text-muted-foreground">
-              Live preview — buttons styled with this palette
-            </div>
-            <div className="space-y-4 p-6">
-              <div className="flex flex-wrap gap-3">
-                {palette.colors.map((color, i) => (
-                  <button
-                    key={i}
-                    type="button"
-                    className="rounded-md px-4 py-2 text-sm font-semibold text-white shadow-sm transition-transform hover:scale-105"
-                    style={{ backgroundColor: color }}
-                  >
-                    Button {i + 1}
-                  </button>
-                ))}
-              </div>
-              <div
-                className="flex h-24 items-center justify-center rounded-md text-2xl font-bold"
-                style={{
-                  background: `linear-gradient(135deg, ${palette.colors[0]}, ${palette.colors[2]}, ${palette.colors[4]})`,
-                  color: '#fff',
-                  textShadow: '0 1px 4px rgba(0,0,0,0.4)',
-                }}
-              >
-                Gradient hero
-              </div>
-            </div>
-          </div>
-        </div>
-      </ToolWorkbench>
-    </ToolLayout>
-  )
-}
-
-/* ============================================================
- *  Swatch card
- * ========================================================== */
-
-function SwatchCard({ color, index }: { color: string; index: number }) {
-  const [copied, setCopied] = React.useState(false)
-  const hsl = hexToHsl(color)
-  const rgb = hexToRgb(color)
-
-  const onCopy = React.useCallback(async () => {
-    try {
-      await navigator.clipboard.writeText(color)
-      setCopied(true)
-      setTimeout(() => setCopied(false), 1500)
-    } catch {
-      /* ignore */
-    }
-  }, [color])
-
-  return (
-    <div className="overflow-hidden rounded-lg border border-border bg-card shadow-sm">
-      <button
-        type="button"
-        onClick={onCopy}
-        className="group relative block h-28 w-full"
-        style={{ backgroundColor: color }}
-        aria-label={`Copy ${color}`}
-        title={`Click to copy ${color}`}
-      >
-        <span className="absolute right-2 top-2 flex h-7 w-7 items-center justify-center rounded-full bg-black/30 text-white opacity-0 backdrop-blur-sm transition-opacity group-hover:opacity-100">
-          {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
-        </span>
-        <span className="absolute bottom-2 left-2 rounded bg-black/30 px-1.5 py-0.5 text-[10px] font-medium text-white backdrop-blur-sm">
-          {index + 1}
-        </span>
-      </button>
-      <div className="space-y-1 p-3">
-        <div className="font-mono text-xs font-semibold uppercase">{color}</div>
-        {rgb && (
-          <div className="font-mono text-[10px] text-muted-foreground">
-            rgb({rgb.r}, {rgb.g}, {rgb.b})
-          </div>
-        )}
-        {hsl && (
-          <div className="font-mono text-[10px] text-muted-foreground">
-            hsl({Math.round(hsl.h)}, {Math.round(hsl.s)}%, {Math.round(hsl.l)}%)
-          </div>
-        )}
-        {/* Handoff: is this swatch readable as text? The checker answers
-            properly — against both surfaces, at three sizes. */}
-        <Link
-          href={`/tools/contrast?fg=${encodeURIComponent(color)}`}
-          className="inline-block pt-1 text-[10px] font-medium text-primary underline-offset-2 hover:underline"
-        >
-          Check contrast →
-        </Link>
-      </div>
-    </div>
+    <PaletteTool
+      initial={fromLink ? state : undefined}
+      permalinks={
+        <ToolPermalinkGallery
+          spec={PALETTE_PERMALINK}
+          current={state}
+          heading="Palettes, as links"
+          blurb="Twelve starting points — a base colour people search for by name, paired with the harmony that flatters it. Open one, retune the base, and the address bar follows; what is in it is the palette."
+        />
+      }
+    />
   )
 }

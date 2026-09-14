@@ -36,10 +36,13 @@ import {
   type PlanId,
   type Region,
 } from '@/lib/billing/plans'
+import type { PublicOffer } from '@/lib/billing/codes'
 
 /** Shape of GET /api/billing/pricing. */
 interface PricingResponse {
   region: Region
+  country: string | null
+  offer: PublicOffer | null
   plans: Record<
     string,
     {
@@ -51,6 +54,35 @@ interface PricingResponse {
   >
 }
 
+/**
+ * One request per page load, however many components ask.
+ *
+ * The regional banner mounts in the root layout, so on /pricing this hook
+ * now runs twice — once for the banner and once for the tiers — against an
+ * endpoint that is `no-store` by necessity and therefore un-cacheable by the
+ * browser. Sharing the promise rather than the result keeps the second
+ * caller from firing a second request even while the first is still in
+ * flight, which is the case that actually happens: both mount together.
+ *
+ * Deliberately not reset on navigation. Region and offer are decided by the
+ * visitor's IP, which does not change between two client-side route changes,
+ * and a full reload starts a new module instance anyway.
+ */
+let inFlight: Promise<PricingResponse | null> | null = null
+
+function fetchPricing(): Promise<PricingResponse | null> {
+  inFlight ??= fetch('/api/billing/pricing')
+    .then((res) => (res.ok ? (res.json() as Promise<PricingResponse>) : null))
+    .catch(() => {
+      // Let the next mount try again rather than caching the failure: a
+      // dropped request on a flaky connection should not disable buying for
+      // the rest of the session.
+      inFlight = null
+      return null
+    })
+  return inFlight
+}
+
 /** Currency a price is displayed in. Never what it is charged in — see above. */
 export type Currency = 'USD' | 'INR'
 
@@ -58,6 +90,23 @@ const CURRENCY_KEY = 'hl:pricing-currency'
 
 export interface UsePricing {
   region: Region | null
+  /**
+   * ISO country code the region was resolved from, or null when the request
+   * carried no usable geolocation header.
+   *
+   * For saying where the visitor is, not for deciding what they pay — every
+   * figure on this hook comes from `region`. A component that branches a
+   * price on this would be pricing off one of twenty-one countries in a band
+   * rather than off the band.
+   */
+  country: string | null
+  /**
+   * What may be said about this visitor's region before checkout, or null
+   * when there is nothing true to say. See `lib/billing/codes.ts` — the two
+   * shapes are mutually exclusive, and which one is live depends on the
+   * Polar dashboard rather than on this repo.
+   */
+  offer: PublicOffer | null
   currency: Currency
   chooseCurrency: (next: Currency) => void
   /** Cents to display — regional price once known, list price until then. */
@@ -92,15 +141,12 @@ export function usePricing(): UsePricing {
 
   React.useEffect(() => {
     let cancelled = false
-    fetch('/api/billing/pricing')
-      .then((res) => (res.ok ? res.json() : null))
-      .then((data: PricingResponse | null) => {
-        if (!cancelled && data) setPricing(data)
-      })
-      .catch(() => {
-        // Leave `pricing` null: list prices stay on screen and the paid CTAs
-        // stay disabled. Better than offering a checkout we can't confirm.
-      })
+    // Leave `pricing` null on failure: list prices stay on screen, the paid
+    // CTAs stay disabled and the banner renders nothing. Better than offering
+    // a checkout — or a discount — we can't confirm.
+    fetchPricing().then((data) => {
+      if (!cancelled && data) setPricing(data)
+    })
     return () => {
       cancelled = true
     }
@@ -216,6 +262,8 @@ export function usePricing(): UsePricing {
 
   return {
     region: pricing?.region ?? null,
+    country: pricing?.country ?? null,
+    offer: pricing?.offer ?? null,
     currency: activeCurrency,
     chooseCurrency,
     centsFor,

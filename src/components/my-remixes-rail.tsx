@@ -1,111 +1,136 @@
 'use client'
 
 /**
- * My Remixes rail — horizontal scroll strip showing the user's saved
- * remixes (customized variants of effects). Renders above the effect
- * grid on /library when the user has at least one remix.
+ * <MyRemixesRail> — the private lane beneath the public one.
  *
- * Each mini card shows: live preview (CSS scoped to a unique wrapper
- * class), effect name, opts summary, "Copy" button, "Open source"
- * link (deep-links to the effect detail page with the same opts in
- * the URL hash so the customize panel opens with the saved state),
- * and a "Delete" (X) button.
+ * ── WHAT CHANGED ────────────────────────────────────────────────────────
  *
- * Hidden when:
- *  - The user has no remixes (don't add an empty rail).
- *  - The user is actively searching or filtering (don't compete with
- *    active sessions — same pattern as the recently-viewed rail).
+ * This used to be the whole feature: a rail of the visitor's localStorage
+ * remixes, intended for /library, mounted on no page, seen by nobody. The
+ * published seven now live in `<VariationsRail>`, which is server-rendered
+ * and public, and this is what is left of the original job — showing a person
+ * the remixes they saved themselves.
+ *
+ * It is scoped to one effect now rather than being a global list, because it
+ * renders directly under that effect's published variations and a strip of
+ * remixes of six other effects underneath them would read as more of the
+ * same seven. The same entries are still in one store, keyed by effect.
+ *
+ * ── WHY IT IS HONEST ABOUT WHOSE THEY ARE ───────────────────────────────
+ *
+ * Same reason the public rail carries a byline: these sit inches below seven
+ * cards that say "by Hoverlab", so the heading says "Yours" and each card is
+ * marked "Saved by you". A rail of unlabelled remixes next to a rail of
+ * attributed ones invites the reader to assume the top row is community work
+ * and the bottom row is ours, which is exactly backwards.
+ *
+ * Nothing here is published. These never leave the browser — `use-remixes`
+ * is localStorage with no sync — and the copy says so, because "your remixes"
+ * next to a public rail could easily be read as "your remixes, now public".
+ *
+ * ── THE MOUNT GATE ──────────────────────────────────────────────────────
+ *
+ * `useRemixes` reads localStorage in a `useState` initializer, which runs on
+ * the server too (returning nothing) and again on the client's first render
+ * (returning entries). On the pages this was written for that was survivable.
+ * This one is statically generated, so the server HTML is fixed at build time
+ * and a first client render that disagreed with it is a hydration error — and
+ * worse, React would discard the whole tree and re-render it, which on this
+ * page means the seven scoped previews above blink. So the first client render
+ * deliberately matches the build: nothing, until after mount.
  */
 
 import * as React from 'react'
 import Link from 'next/link'
-import { Sparkles, X, Copy, Trash2, Wand2 } from 'lucide-react'
+import { Check, Copy, User, Wand2, X } from 'lucide-react'
 import { toast } from 'sonner'
-import { Button } from '@/components/ui/button'
+
 import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
 import { useRemixes, type RemixEntry } from '@/hooks/use-remixes'
 import { optsToHash } from '@/lib/customize'
+import { namespaceKeyframes, scopeCss } from '@/lib/scope-css'
 import { cn } from '@/lib/utils'
 
-interface MyRemixesRailProps {
-  /** Hide when the user is searching or filtering — pass true then. */
-  hidden?: boolean
-}
+export function MyRemixesRail({ effectId }: { effectId: string }) {
+  const { entries, remove } = useRemixes()
 
-export function MyRemixesRail({ hidden = false }: MyRemixesRailProps) {
-  const { entries, remove, clear, count } = useRemixes()
+  // See the header: the build emitted nothing here, so the first client
+  // render has to agree before localStorage is allowed to change the page.
+  const [mounted, setMounted] = React.useState(false)
+  React.useEffect(() => setMounted(true), [])
 
-  if (hidden || entries.length === 0) return null
+  const mine = React.useMemo(
+    () => entries.filter((e) => e.effectId === effectId),
+    [entries, effectId],
+  )
+
+  if (!mounted || mine.length === 0) return null
 
   return (
-    <section className="mb-6">
-      <div className="mb-3 flex items-center justify-between gap-3">
-        <div className="flex items-center gap-2">
-          <Wand2 className="h-4 w-4 text-primary" />
-          <h2 className="text-sm font-semibold tracking-tight">
-            Your remixes
-          </h2>
-          <Badge variant="secondary" className="font-mono text-[10px]">
-            {count}
-          </Badge>
-          <span className="text-xs text-muted-foreground">
-            Customized effects you saved
-          </span>
-        </div>
-        <Button
-          variant="ghost"
-          size="sm"
-          className="h-7 gap-1.5 text-xs text-muted-foreground hover:text-rose-500"
-          onClick={() => {
-            clear()
-            toast.success('Remixes cleared')
-          }}
-        >
-          <Trash2 className="h-3 w-3" /> Clear
-        </Button>
+    <div className="mt-5">
+      <div className="mb-3 flex flex-wrap items-center gap-x-2 gap-y-1">
+        <Wand2 className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
+        <h3 className="text-sm font-semibold tracking-tight">Yours</h3>
+        <Badge variant="outline" className="font-mono text-[10px]">
+          {mine.length}
+        </Badge>
+        <p className="w-full text-xs text-muted-foreground sm:w-auto">
+          Saved in this browser only — nothing here is published.
+        </p>
       </div>
 
-      <div className="fx-no-scrollbar -mx-1 flex gap-3 overflow-x-auto px-1 pb-2">
-        {entries.map((entry) => (
-          <RemixCard key={entry.id} entry={entry} onRemove={() => {
-            remove(entry.id)
-            toast.success(`Removed "${entry.effectName}" remix`)
-          }} />
+      {/* `relative` for the same containing-block reason as the public rail. */}
+      <ul
+        className="fx-no-scrollbar relative -mx-1 flex list-none gap-3 overflow-x-auto px-1 pb-2"
+        role="list"
+      >
+        {mine.map((entry) => (
+          <RemixCard
+            key={entry.id}
+            entry={entry}
+            onRemove={() => {
+              remove(entry.id)
+              toast.success(`Removed your ${entry.effectName} remix`)
+            }}
+          />
         ))}
-      </div>
-    </section>
+      </ul>
+    </div>
   )
 }
 
 /* ============================================================
- *  RemixCard — single remix with mini live preview
+ *  One saved remix
  * ========================================================== */
 
-interface RemixCardProps {
-  entry: RemixEntry
-  onRemove: () => void
-}
+function RemixCard({ entry, onRemove }: { entry: RemixEntry; onRemove: () => void }) {
+  /*
+   * `useId`, not a module-level counter. The counter this file used to carry
+   * kept climbing for the life of the server process while the browser
+   * restarted it at 1, so the class React rendered never matched the one it
+   * hydrated against. Colons are legal in an id and not in a class name.
+   */
+  const wrapper = `fx-remix-${React.useId().replace(/[^a-zA-Z0-9]/g, '')}`
 
-let remixSeq = 0
+  /*
+   * `scopeCss` from lib, not the regex this file used to inline. That regex
+   * prefixed at-rule preludes as if they were selectors, producing
+   * `.fx-remix-1 @keyframes spin { … }` — which browsers drop whole, so every
+   * animated remix rendered frozen while still pointing at keyframes that no
+   * longer existed. The shared version handles at-rules explicitly.
+   */
+  const scoped = React.useMemo(
+    // Namespaced as well as scoped, and for a reason this lane hits sooner
+    // than the public one: two saved remixes of the SAME effect declare the
+    // same keyframe names at different values, and the later card's
+    // definition would win for both — and for the effect's main preview above
+    // them. See lib/scope-css.ts.
+    () => scopeCss(namespaceKeyframes(entry.customizedCss, wrapper), wrapper),
+    [entry.customizedCss, wrapper],
+  )
 
-function RemixCard({ entry, onRemove }: RemixCardProps) {
-  const [wrapId] = React.useState(() => `fx-remix-${++remixSeq}`)
-
-  // Scope the CSS so multiple previews don't class-collide.
-  const scopedCss = React.useMemo(() => {
-    return entry.customizedCss.replace(
-      /(^|\})\s*([^{}]+)\{/g,
-      (_m, brace: string, selectors: string) => {
-        const scoped = selectors
-          .split(',')
-          .map((s: string) => `.${wrapId} ${s.trim()}`)
-          .join(', ')
-        return `${brace} ${scoped} {`
-      },
-    )
-  }, [entry.customizedCss, wrapId])
-
-  const optsSummary = React.useMemo(() => {
+  const summary = React.useMemo(() => {
     const parts: string[] = []
     if (entry.opts.hue !== 0) parts.push(`hue ${entry.opts.hue}°`)
     if (entry.opts.saturation !== 0) parts.push(`sat ${entry.opts.saturation}%`)
@@ -113,6 +138,13 @@ function RemixCard({ entry, onRemove }: RemixCardProps) {
     if (entry.opts.speed !== 1) parts.push(`speed ${entry.opts.speed}×`)
     return parts.join(' · ') || 'default'
   }, [entry.opts])
+
+  const [copied, setCopied] = React.useState(false)
+  React.useEffect(() => {
+    if (!copied) return
+    const t = window.setTimeout(() => setCopied(false), 1600)
+    return () => window.clearTimeout(t)
+  }, [copied])
 
   function handleCopy() {
     const snippet = [
@@ -125,11 +157,10 @@ function RemixCard({ entry, onRemove }: RemixCardProps) {
     void navigator.clipboard
       .writeText(snippet)
       .then(() => {
-        toast.success(`Copied "${entry.effectName}" remix`, {
+        setCopied(true)
+        toast.success(`Copied your ${entry.effectName} remix`, {
           description: 'HTML + CSS ready to paste.',
         })
-        // Record in copy-history via the same custom event the
-        // useCopyHistory hook listens for.
         window.dispatchEvent(new CustomEvent('hoverlab:copy-history-changed'))
       })
       .catch(() => {
@@ -139,69 +170,72 @@ function RemixCard({ entry, onRemove }: RemixCardProps) {
       })
   }
 
-  // Build a deep-link to the source effect with the same opts in the
-  // URL hash so the detail page opens with the customize panel preset
-  // to the saved state.
   const hash = optsToHash(entry.opts)
-  const detailHref = hash
-    ? `/effect/${entry.effectId}#${hash}`
-    : `/effect/${entry.effectId}`
+  const href = hash ? `/effect/${entry.effectId}#${hash}` : `/effect/${entry.effectId}`
 
   return (
-    <div className="group relative flex w-56 shrink-0 flex-col overflow-hidden rounded-xl border border-border/60 bg-card/80 backdrop-blur transition-all hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5">
-      {/* Live preview */}
+    <li className="flex w-56 shrink-0 flex-col overflow-hidden rounded-xl border border-dashed border-border/70 bg-card/60 transition-colors hover:border-primary/40">
+      {/* Decoration, like the public cards: the controls below are the real ones. */}
       <div
+        inert
+        aria-hidden="true"
         className={cn(
           'flex h-28 items-center justify-center overflow-hidden',
           entry.darkSurface ? 'bg-slate-950' : 'bg-muted/30',
         )}
       >
-        <style dangerouslySetInnerHTML={{ __html: scopedCss }} />
+        <style dangerouslySetInnerHTML={{ __html: scoped }} />
         <div
-          className={cn(wrapId, 'pointer-events-none')}
+          className={wrapper}
           style={{ transform: 'scale(0.55)', transformOrigin: 'center' }}
           dangerouslySetInnerHTML={{ __html: entry.html }}
         />
       </div>
 
-      {/* Body */}
       <div className="flex flex-1 flex-col gap-1.5 p-3">
         <div className="flex items-start justify-between gap-1.5">
-          <Link
-            href={detailHref}
-            className="min-w-0 flex-1 truncate text-sm font-semibold hover:text-primary"
-            title={`${entry.effectName} — open with these customizations`}
-          >
-            {entry.effectName}
-          </Link>
+          <h4 className="min-w-0 flex-1 truncate text-sm font-semibold">
+            <Link href={href} scroll={false} className="hover:text-primary">
+              {entry.effectName}
+            </Link>
+          </h4>
           <button
             type="button"
             onClick={onRemove}
-            aria-label={`Delete ${entry.effectName} remix`}
-            title="Delete remix"
+            aria-label={`Delete your ${entry.effectName} remix`}
             className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-rose-500/10 hover:text-rose-500"
           >
-            <X className="h-3 w-3" />
+            <X className="h-3 w-3" aria-hidden="true" />
           </button>
         </div>
-        <div className="flex flex-wrap items-center gap-1">
-          <Badge variant="outline" className="text-[9px] font-mono uppercase tracking-wider">
-            {entry.effectCategory}
-          </Badge>
-          <span className="inline-flex items-center gap-0.5 text-[10px] text-primary">
-            <Sparkles className="h-2.5 w-2.5" />
-            <span className="font-mono">{optsSummary}</span>
-          </span>
-        </div>
+
+        {/* The byline, in the same slot and shape as the public cards'. */}
+        <p className="inline-flex items-center gap-1 text-[11px] text-muted-foreground">
+          <User className="h-2.5 w-2.5" aria-hidden="true" />
+          Saved by you
+        </p>
+
+        <p className="truncate font-mono text-[10px] text-muted-foreground/80" title={summary}>
+          {summary}
+        </p>
+
         <Button
           size="sm"
           variant="outline"
-          className="mt-1 h-7 gap-1.5 text-xs"
+          className="mt-auto h-7 gap-1.5 text-xs"
           onClick={handleCopy}
         >
-          <Copy className="h-3 w-3" /> Copy
+          {copied ? (
+            <>
+              <Check className="h-3 w-3" /> Copied
+            </>
+          ) : (
+            <>
+              <Copy className="h-3 w-3" /> Copy
+            </>
+          )}
         </Button>
       </div>
-    </div>
+    </li>
   )
 }

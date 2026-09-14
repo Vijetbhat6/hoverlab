@@ -63,6 +63,24 @@ const DEFAULT_OWNERS: AccessOwner[] = [
   { name: 'Tom Okafor', role: 'Project owner', initials: 'TO' },
 ]
 
+/*
+  Per-instance id, hashed from props that differ between instances.
+
+  A literal id is a latent duplicate the moment this block is rendered
+  twice on one document -- two pages on a catalog hub, or one page using
+  the section twice. `aria-labelledby` pointing at a duplicated id resolves
+  to whichever element comes first, so the second copy is announced with
+  the first copy's label. Server component, so no `useId`: hashing props
+  gives each instance its own target and stays stable across server and
+  client renders in a way a counter would not.
+*/
+function instanceId(...parts: (string | undefined)[]): string {
+  const text = parts.filter(Boolean).join('|')
+  let hash = 0
+  for (let i = 0; i < text.length; i++) hash = (Math.imul(hash, 31) + text.charCodeAt(i)) | 0
+  return (hash >>> 0).toString(36).slice(0, 6)
+}
+
 export function PermissionDeniedState({
   resourceLabel = 'northwind / billing-service',
   signedInAs = 'you@company.com',
@@ -71,9 +89,11 @@ export function PermissionDeniedState({
   backHref = '#',
   className = '',
 }: PermissionDeniedStateProps) {
+  const uid = instanceId(resourceLabel, signedInAs)
+
   return (
     <section
-      aria-labelledby="denied-heading"
+      aria-labelledby={`denied-heading-${uid}`}
       className={`mx-auto flex w-full max-w-lg flex-col items-center px-4 py-20 text-center sm:px-6 ${className}`}
     >
       <span
@@ -83,7 +103,7 @@ export function PermissionDeniedState({
         <Lock className="h-5 w-5" />
       </span>
 
-      <h1 id="denied-heading" className="mt-5 text-2xl font-bold tracking-tight text-foreground">
+      <h1 id={`denied-heading-${uid}`} className="mt-5 text-2xl font-bold tracking-tight text-foreground">
         You do not have access to this
       </h1>
 

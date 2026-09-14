@@ -88,7 +88,16 @@ export interface ToolPreset {
  * this system already survives: the preset simply never appears, because
  * nothing asks for that tool's list.
  */
-const TOOL_PATTERN = /^\/tools\/[a-z0-9-]{1,40}$/
+/*
+  `/studio` is listed separately rather than the pattern being loosened to
+  any path. It is the one preset-keeping surface that is not one of the
+  thirty-six — see `STUDIO_TOOL_ID` — and a preset there is a whole brand
+  identity rather than four slider positions, which is the case the named
+  -preset layer exists for most. Widening this to `^/[a-z0-9-/]+$` would
+  have been shorter and would have made every future route a preset
+  namespace by accident, including ones with a path parameter in them.
+*/
+const TOOL_PATTERN = /^\/(tools\/[a-z0-9-]{1,40}|studio)$/
 
 export function isToolId(value: unknown): value is string {
   return typeof value === 'string' && TOOL_PATTERN.test(value)

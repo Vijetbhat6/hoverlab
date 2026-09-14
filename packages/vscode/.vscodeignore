@@ -1,0 +1,21 @@
+# What does NOT go into the .vsix.
+#
+# Inverted from .gitignore's logic: everything is included unless listed, so
+# this file is the one place a stray artifact gets caught. The two rules
+# that matter are the last ones — a nested node_modules under the linked
+# `hoverlab` dependency, and any editor state that happened to be in the
+# folder.
+
+.vscode/**
+.vscode-test/**
+**/.eslintrc.json
+**/*.map
+**/.DS_Store
+**/Thumbs.db
+
+# The one runtime dependency IS shipped — the extension does nothing without
+# it — but its own development files are not.
+node_modules/hoverlab/node_modules/**
+node_modules/hoverlab/**/*.test.mjs
+node_modules/hoverlab/test/**
+node_modules/.package-lock.json

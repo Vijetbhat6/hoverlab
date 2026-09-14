@@ -209,7 +209,7 @@ npx hoverlab show pricing-tiers --deep`}</Snippet>
         <p>
           The CLI doubles as an MCP server so your editor&apos;s agent can search
           and install from the catalog directly. See{' '}
-          <Link href="/docs/mcp" className="font-medium text-primary hover:underline">
+          <Link href="/mcp" className="font-medium text-primary hover:underline">
             the MCP docs
           </Link>
           .

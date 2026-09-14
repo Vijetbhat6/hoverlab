@@ -50,6 +50,22 @@ const DEFAULT_ITEMS: FaqItem[] = [
   },
 ]
 
+/*
+  A stable id suffix derived from this instance's own content.
+
+  `useId` is the right answer and is not available here: this is a server
+  component and hooks are not. Hashing what makes one copy different from
+  another gives each its own name without a hook, a prop or a counter — and
+  it stays stable across server and client renders, which a counter would
+  not.
+*/
+function instanceId(...parts: (string | undefined)[]): string {
+  const text = parts.filter(Boolean).join('|')
+  let hash = 0
+  for (let i = 0; i < text.length; i++) hash = (Math.imul(hash, 31) + text.charCodeAt(i)) | 0
+  return (hash >>> 0).toString(36).slice(0, 6)
+}
+
 export function FaqAccordion({
   items = DEFAULT_ITEMS,
   heading = 'Frequently asked questions',
@@ -57,6 +73,17 @@ export function FaqAccordion({
   exclusive = true,
   className = '',
 }: FaqAccordionProps) {
+  /*
+   * The exclusive-<details> group name, derived rather than written down.
+   *
+   * `name` on <details> is DOCUMENT-global: every <details> sharing it is
+   * one accordion, wherever on the page it sits. A literal therefore fuses
+   * two copies of this block into a single accordion — opening a question
+   * in one silently closes a question in the other — and a page rendering
+   * several of these at once is exactly what the catalog hubs do.
+   */
+  const group = `faq-${instanceId(heading, subheading, items[0]?.question)}`
+
   return (
     <section className={`mx-auto w-full max-w-3xl px-4 py-16 sm:px-6 ${className}`}>
       <div className="mx-auto mb-10 max-w-2xl text-center">
@@ -72,7 +99,7 @@ export function FaqAccordion({
         {items.map((item) => (
           <details
             key={item.question}
-            name={exclusive ? 'faq' : undefined}
+            name={exclusive ? group : undefined}
             className="group px-5 py-1 [&_summary::-webkit-details-marker]:hidden"
           >
             <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 text-start font-semibold transition-colors hover:text-foreground/80">

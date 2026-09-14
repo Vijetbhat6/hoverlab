@@ -48,7 +48,7 @@ const PANES: Pane[] = [
     title: 'Your editor’s agent can search it',
     description:
       'An MCP server over stdio exposes the whole catalog as tools, so Claude Code, Cursor or any MCP client can find a component and install it without leaving the conversation.',
-    href: '/docs/mcp',
+    href: '/mcp',
     linkLabel: 'MCP server',
     sample: 'search · get · add · match_design',
   },
@@ -57,7 +57,7 @@ const PANES: Pane[] = [
     title: 'Point it at a Figma frame',
     description:
       'Paired with Figma’s own MCP, match_design reads a frame region by region and returns the blocks that actually match it — real, accessible source rather than generated markup.',
-    href: '/docs/mcp',
+    href: '/mcp',
     linkLabel: 'How the pairing works',
     sample: 'frame → regions → blocks',
   },

@@ -28,7 +28,7 @@
       <rect id="container 7" x="253" y="178" width="8" height="8" rx="4" fill="#00bc7d" />
       <text id="Aggregate lost ARR by seat band" x="305" y="185" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Aggregate lost ARR by seat band</text>
       <text id="2.7s" x="780.59" y="183.75" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="11">2.7s</text>
-      <rect id="container 8" x="253" y="214" width="8" height="8" rx="4" fill="#007f34" opacity="0.55" />
+      <rect id="container 8" x="253" y="214" width="8" height="8" rx="4" fill="#007f34" opacity="0.5" />
       <text id="Test whether one account explains the sp…" x="305" y="221" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Test whether one account explains the spike</text>
       <text id="0.9s" x="780.59" y="219.75" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="11">0.9s</text>
       <rect id="container 9" x="281" y="235" width="558" height="55" rx="12" fill="rgba(242, 242, 237, 0.4)" />
@@ -87,24 +87,24 @@
   <g id="Working Indicator with Elapsed Time" transform="translate(64, 1600.5)">
     <rect id="container" x="0" y="0" width="1088" height="134" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="container 2" x="320" y="33" width="448" height="68" rx="16" fill="#ffffff" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <rect id="container 3" x="337" y="50.5" width="6" height="6" rx="2" fill="#007f34" opacity="0.86" />
-      <rect id="container 4" x="346" y="50.5" width="6" height="6" rx="2" fill="#007f34" opacity="0.93" />
-      <rect id="container 5" x="355" y="50.5" width="6" height="6" rx="2" fill="#007f34" opacity="0.98" />
-      <rect id="container 6" x="364" y="50.5" width="6" height="6" rx="2" fill="#007f34" opacity="1" />
+      <rect id="container 3" x="337" y="50.5" width="6" height="6" rx="2" fill="#007f34" opacity="0.68" />
+      <rect id="container 4" x="346" y="50.5" width="6" height="6" rx="2" fill="#007f34" opacity="0.79" />
+      <rect id="container 5" x="355" y="50.5" width="6" height="6" rx="2" fill="#007f34" opacity="0.88" />
+      <rect id="container 6" x="364" y="50.5" width="6" height="6" rx="2" fill="#007f34" opacity="0.95" />
       <rect id="container 7" x="337" y="59.5" width="6" height="6" rx="2" fill="#007f34" opacity="0.99" />
-      <rect id="container 8" x="346" y="59.5" width="6" height="6" rx="2" fill="#007f34" opacity="0.93" />
-      <rect id="container 9" x="355" y="59.5" width="6" height="6" rx="2" fill="#007f34" opacity="0.82" />
-      <rect id="container 10" x="364" y="59.5" width="6" height="6" rx="2" fill="#007f34" opacity="0.65" />
-      <rect id="container 11" x="337" y="68.5" width="6" height="6" rx="2" fill="#007f34" opacity="0.47" />
-      <rect id="container 12" x="346" y="68.5" width="6" height="6" rx="2" fill="#007f34" opacity="0.31" />
-      <rect id="container 13" x="355" y="68.5" width="6" height="6" rx="2" fill="#007f34" opacity="0.2" />
-      <rect id="container 14" x="364" y="68.5" width="6" height="6" rx="2" fill="#007f34" opacity="0.15" />
-      <rect id="container 15" x="337" y="77.5" width="6" height="6" rx="2" fill="#007f34" opacity="0.4" />
-      <rect id="container 16" x="346" y="77.5" width="6" height="6" rx="2" fill="#007f34" opacity="0.4" />
+      <rect id="container 8" x="346" y="59.5" width="6" height="6" rx="2" fill="#007f34" opacity="1" />
+      <rect id="container 9" x="355" y="59.5" width="6" height="6" rx="2" fill="#007f34" opacity="0.98" />
+      <rect id="container 10" x="364" y="59.5" width="6" height="6" rx="2" fill="#007f34" opacity="0.9" />
+      <rect id="container 11" x="337" y="68.5" width="6" height="6" rx="2" fill="#007f34" opacity="0.77" />
+      <rect id="container 12" x="346" y="68.5" width="6" height="6" rx="2" fill="#007f34" opacity="0.59" />
+      <rect id="container 13" x="355" y="68.5" width="6" height="6" rx="2" fill="#007f34" opacity="0.41" />
+      <rect id="container 14" x="364" y="68.5" width="6" height="6" rx="2" fill="#007f34" opacity="0.27" />
+      <rect id="container 15" x="337" y="77.5" width="6" height="6" rx="2" fill="#007f34" opacity="0.18" />
+      <rect id="container 16" x="346" y="77.5" width="6" height="6" rx="2" fill="#007f34" opacity="0.15" />
       <rect id="container 17" x="355" y="77.5" width="6" height="6" rx="2" fill="#007f34" opacity="0.4" />
       <rect id="container 18" x="364" y="77.5" width="6" height="6" rx="2" fill="#007f34" opacity="0.4" />
       <text id="Reading your question" x="386" y="62" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Reading your question</text>
-      <text id="0.3s elapsed" x="386" y="82" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">0.3s elapsed</text>
+      <text id="0.0s elapsed" x="386" y="82" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">0.0s elapsed</text>
       <rect id="button" x="684.45" y="52" width="66.55" height="30" rx="12" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <text id="Stop" x="717.73" y="64" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500" text-anchor="middle">Stop</text>
   </g>

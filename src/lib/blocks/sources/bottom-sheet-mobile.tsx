@@ -69,6 +69,17 @@ export function BottomSheetMobile({
   options = DEFAULT_OPTIONS,
   className = '',
 }: BottomSheetMobileProps) {
+  /*
+    Per-instance prefix for every id this block emits.
+
+    The literals these replaced were a latent duplicate the moment the
+    block appeared twice on one document, and `aria-labelledby` on a
+    duplicated id resolves to the first match -- so the second copy was
+    labelled by the first copy's heading. Client component, so `useId` is
+    the right tool.
+  */
+  const uid = React.useId()
+
   /* Open by default: a sheet demo whose interesting state is shut is a
      screenshot of a button. */
   const [open, setOpen] = React.useState(true)
@@ -148,7 +159,7 @@ export function BottomSheetMobile({
               ref={sheetRef}
               role="dialog"
               aria-modal="true"
-              aria-labelledby="sheet-title"
+              aria-labelledby={`${uid}-sheet-title`}
               tabIndex={-1}
               className={`absolute inset-x-0 bottom-0 flex flex-col rounded-t-2xl border-t border-border bg-card shadow-lg outline-none transition-[height] duration-300 ${
                 expanded ? 'h-[92%]' : 'h-[58%]'
@@ -172,7 +183,7 @@ export function BottomSheetMobile({
               </button>
 
               <header className="flex shrink-0 items-center gap-2 px-5 pb-3 pt-1">
-                <h2 id="sheet-title" className="min-w-0 flex-1 text-base font-semibold text-foreground">
+                <h2 id={`${uid}-sheet-title`} className="min-w-0 flex-1 text-base font-semibold text-foreground">
                   {title}
                 </h2>
                 <button
@@ -202,7 +213,7 @@ export function BottomSheetMobile({
                 hand-built sheets.
               */}
               <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-3">
-                <ul role="radiogroup" aria-labelledby="sheet-title" className="space-y-0.5 pb-2">
+                <ul role="radiogroup" aria-labelledby={`${uid}-sheet-title`} className="space-y-0.5 pb-2">
                   {options.map((option) => {
                     const selected = option.id === chosen
                     return (

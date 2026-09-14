@@ -12,8 +12,10 @@
  * what actually happened rather than a field someone remembers to set, so
  * they cannot drift from the truth and cannot be inflated.
  *
- * Data-only and tiny (~40 KB of ids and ISO dates), so client components
- * can import it without dragging a catalog behind them.
+ * Data-only, but not small — 78 KB of ids and ISO dates, and JSON imports
+ * do not tree-shake. A Client Component that needs only the shape of the
+ * history should read `lib/velocity` instead, which is the same events
+ * counted, at 2 KB.
  *
  * Every lookup tolerates a missing id. An artifact added between ledger
  * rebuilds has no date, and the callers here render nothing rather than
@@ -155,22 +157,9 @@ export function recentlyAdded(level: ArtifactLevel, limit = 12): string[] {
     .map(([id]) => id)
 }
 
-/**
- * Format a ledger date for display: "17 Aug 2026".
- *
- * Fixed to en-GB and UTC on purpose. These pages are statically rendered,
- * so a locale-dependent format would bake whatever the build machine
- * happened to be set to into HTML served to everyone — and a date parsed as
- * local time can land on the previous day west of UTC.
+/*
+ * Re-exported, not defined here. `formatAdded` reads no ledger, and every
+ * caller that only wanted to print a date was paying 78 KB of JSON for it —
+ * see `lib/recency-format`, and `lib/velocity` for who needed the split.
  */
-export function formatAdded(date: string | undefined): string | null {
-  if (!date) return null
-  const parsed = new Date(`${date}T00:00:00Z`)
-  if (Number.isNaN(parsed.getTime())) return null
-  return parsed.toLocaleDateString('en-GB', {
-    day: 'numeric',
-    month: 'short',
-    year: 'numeric',
-    timeZone: 'UTC',
-  })
-}
+export { formatAdded } from '@/lib/recency-format'

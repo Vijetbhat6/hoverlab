@@ -113,6 +113,17 @@ export function ChatModelPicker({
   initialModelId = 'balanced',
   className = '',
 }: ChatModelPickerProps) {
+  /*
+    Per-instance prefix for every id this block emits.
+
+    The literals these replaced were a latent duplicate the moment the
+    block appeared twice on one document, and `aria-labelledby` on a
+    duplicated id resolves to the first match -- so the second copy was
+    labelled by the first copy's heading. Client component, so `useId` is
+    the right tool.
+  */
+  const uid = React.useId()
+
   const [open, setOpen] = React.useState(true)
   const [selectedId, setSelectedId] = React.useState(initialModelId)
   const triggerRef = React.useRef<HTMLButtonElement>(null)
@@ -141,7 +152,7 @@ export function ChatModelPicker({
         type="button"
         aria-haspopup="listbox"
         aria-expanded={open}
-        aria-controls="model-listbox"
+        aria-controls={`${uid}-model-listbox`}
         onClick={() => setOpen((value) => !value)}
         className="flex w-full items-center justify-between gap-3 rounded-xl border border-border bg-card px-3 py-2.5 text-start transition-colors hover:bg-muted/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
       >
@@ -160,7 +171,7 @@ export function ChatModelPicker({
 
       {open ? (
         <div
-          id="model-listbox"
+          id={`${uid}-model-listbox`}
           role="listbox"
           aria-label="Model"
           className="absolute inset-x-0 top-full z-10 mt-2 overflow-hidden rounded-xl border border-border bg-card shadow-xl"

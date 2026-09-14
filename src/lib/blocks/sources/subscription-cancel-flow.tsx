@@ -122,6 +122,17 @@ export function SubscriptionCancelFlow({
   onDowngrade,
   className = '',
 }: SubscriptionCancelFlowProps) {
+  /*
+    Per-instance prefix for every id this block emits.
+
+    The literals these replaced were a latent duplicate the moment the
+    block appeared twice on one document, and `aria-labelledby` on a
+    duplicated id resolves to the first match -- so the second copy was
+    labelled by the first copy's heading. Client component, so `useId` is
+    the right tool.
+  */
+  const uid = React.useId()
+
   const [reason, setReason] = React.useState('')
   const [typed, setTyped] = React.useState('')
 
@@ -130,11 +141,11 @@ export function SubscriptionCancelFlow({
 
   return (
     <section
-      aria-labelledby="cancel-heading"
+      aria-labelledby={`${uid}-cancel-heading`}
       className={`mx-auto w-full max-w-2xl px-4 py-16 sm:px-6 lg:px-8 ${className}`}
     >
       <div className="rounded-2xl border border-border bg-card p-6 sm:p-8">
-        <h2 id="cancel-heading" className="text-xl font-bold tracking-tight text-foreground">
+        <h2 id={`${uid}-cancel-heading`} className="text-xl font-bold tracking-tight text-foreground">
           Cancel your {planName} plan
         </h2>
         <p className="mt-2 text-sm text-muted-foreground">
@@ -178,14 +189,14 @@ export function SubscriptionCancelFlow({
         </div>
 
         <div className="mt-6">
-          <label htmlFor="cancel-reason" className="text-sm font-medium text-foreground">
+          <label htmlFor={`${uid}-cancel-reason`} className="text-sm font-medium text-foreground">
             Why are you cancelling?{' '}
             <span className="font-normal text-muted-foreground">
               — optional, and it does not change anything below
             </span>
           </label>
           <select
-            id="cancel-reason"
+            id={`${uid}-cancel-reason`}
             value={reason}
             onChange={(event) => setReason(event.target.value)}
             className="mt-2 h-9 w-full rounded-lg border border-field bg-background px-3 text-sm text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
@@ -225,12 +236,12 @@ export function SubscriptionCancelFlow({
         </div>
 
         <div className="mt-6 border-t border-border pt-6">
-          <label htmlFor="cancel-confirm" className="block text-sm font-medium text-foreground">
+          <label htmlFor={`${uid}-cancel-confirm`} className="block text-sm font-medium text-foreground">
             Type <span className="font-mono text-foreground">{confirmWord}</span> to
             confirm
           </label>
           <input
-            id="cancel-confirm"
+            id={`${uid}-cancel-confirm`}
             type="text"
             value={typed}
             onChange={(event) => setTyped(event.target.value)}

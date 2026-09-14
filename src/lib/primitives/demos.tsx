@@ -72,6 +72,13 @@ import { TagInput } from './sources/tag-chip'
 import { TreeView } from './sources/tree-view'
 import { VerificationCodeInput } from './sources/verification-code-input'
 import { VideoPlayer } from './sources/video-player'
+import { CitationChip } from './sources/citation-chip'
+import { MessageBubble } from './sources/message-bubble'
+import { PromptInput } from './sources/prompt-input'
+import { PromptSuggestions } from './sources/prompt-suggestions'
+import { ReasoningPanel } from './sources/reasoning-panel'
+import { ToolCall } from './sources/tool-call'
+import { TypingIndicator } from './sources/typing-indicator'
 
 /** Shared frame: centred, padded, and never wider than a card. */
 function Stage({ children }: { children: React.ReactNode }) {
@@ -727,10 +734,27 @@ export function TimePickerDemo() {
   )
 }
 
+/**
+ * Where the offsets below are measured from before the demo has mounted.
+ *
+ * A `useState(() => Date.now())` initializer looks like it runs once. It
+ * runs twice — once on the server and again during hydration, about a
+ * second apart — so `dateTime` and `title` disagreed across the boundary
+ * and React regenerated the tree. A hydration mismatch in the demo for the
+ * one primitive whose whole docblock is about not having one.
+ *
+ * Any fixed instant works: it only has to be the same on both sides, and it
+ * is replaced by the real clock in an effect a moment later.
+ */
+const RELATIVE_TIME_ANCHOR = Date.parse('2026-01-01T12:00:00Z')
+
 export function RelativeTimeDemo() {
   /* Offsets from mount rather than fixed dates, so the wording is the point
-     of the demo — the absolute dates would say nothing about the component. */
-  const [base] = React.useState(() => Date.now())
+     of the demo — the absolute dates would say nothing about the component.
+     Null until mounted, the same shape <RelativeTime> uses for `now`. */
+  const [base, setBase] = React.useState<number | null>(null)
+  React.useEffect(() => setBase(Date.now()), [])
+  const anchor = base ?? RELATIVE_TIME_ANCHOR
   return (
     <Stage>
       <div className="flex flex-col gap-1.5 text-sm text-foreground">
@@ -741,7 +765,7 @@ export function RelativeTimeDemo() {
         ].map(([label, offset]) => (
           <div key={label as string} className="flex items-baseline gap-2">
             <span className="w-20 text-xs text-muted-foreground">{label}</span>
-            <RelativeTime date={new Date(base + (offset as number))} />
+            <RelativeTime date={new Date(anchor + (offset as number))} />
           </div>
         ))}
       </div>
@@ -760,6 +784,183 @@ export function DurationInputDemo() {
         showSeconds={false}
         onChange={() => {}}
       />
+    </Stage>
+  )
+}
+
+/* --------------------------- AI & Chat ---------------------------- */
+
+/*
+ * Timestamps here are a fixed instant rather than `Date.now()`. These
+ * demos are rendered by the screenshot harness as well as the browser, and
+ * a clock in the frame makes every shot differ from the last one.
+ */
+const SENT_AT = '2026-09-14T09:41:00.000Z'
+
+export function MessageBubbleDemo() {
+  return (
+    <Stage>
+      <div className="flex w-full max-w-md flex-col gap-4">
+        <MessageBubble role="user" timestamp={SENT_AT} avatar="VB">
+          Why did the deploy roll back last night?
+        </MessageBubble>
+        <MessageBubble
+          role="assistant"
+          timestamp={SENT_AT}
+          avatar="AI"
+          alwaysShowActions
+          actions={
+            <>
+              <span className="rounded border border-border px-1.5 py-0.5 text-[11px] text-muted-foreground">
+                Copy
+              </span>
+              <span className="rounded border border-border px-1.5 py-0.5 text-[11px] text-muted-foreground">
+                Retry
+              </span>
+            </>
+          }
+        >
+          The health check failed twice in a row, so the release controller
+          reverted to the previous revision.
+        </MessageBubble>
+      </div>
+    </Stage>
+  )
+}
+
+export function PromptInputDemo() {
+  const [value, setValue] = React.useState('Summarise the rollback and who to notify')
+  const [streaming, setStreaming] = React.useState(false)
+
+  return (
+    <Stage>
+      <div className="w-full max-w-md">
+        <PromptInput
+          value={value}
+          onValueChange={setValue}
+          streaming={streaming}
+          onSubmit={() => setStreaming(true)}
+          onStop={() => setStreaming(false)}
+          footer="Enter to send, Shift+Enter for a new line."
+          toolbar={
+            <span className="rounded-md border border-border px-2 py-1 text-xs text-muted-foreground">
+              Opus 5
+            </span>
+          }
+        />
+      </div>
+    </Stage>
+  )
+}
+
+export function ToolCallDemo() {
+  return (
+    <Stage>
+      <div className="flex w-full max-w-md flex-col gap-2">
+        <ToolCall
+          name="search_logs"
+          status="success"
+          summary="service=api since=-24h"
+          durationMs={1420}
+          defaultOpen
+          args={{ service: 'api', since: '-24h', limit: 50 }}
+          result="47 matching entries, 2 at level=error"
+        />
+        <ToolCall
+          name="restart_pod"
+          status="error"
+          summary="api-7f9c4"
+          durationMs={320}
+          args={{ pod: 'api-7f9c4' }}
+          result="Forbidden: requires approval from an operator"
+        />
+        <ToolCall name="fetch_release" status="running" summary="waiting for the registry" />
+      </div>
+    </Stage>
+  )
+}
+
+export function ReasoningPanelDemo() {
+  return (
+    <Stage>
+      <div className="w-full max-w-md">
+        <ReasoningPanel
+          seconds={12}
+          defaultOpen
+          steps={[
+            'The rollback happened at 02:14, so start from the release controller log.',
+            'Two consecutive health checks failed — that is the revert threshold.',
+            'Check whether the failing check was the new one added in this release.',
+          ]}
+        />
+      </div>
+    </Stage>
+  )
+}
+
+export function CitationChipDemo() {
+  return (
+    <Stage>
+      <div className="flex w-full max-w-md flex-col gap-3">
+        <p className="text-sm leading-relaxed text-foreground">
+          The controller reverted after two failed probes
+          <CitationChip index={1} title="Release controller log, 02:14" href="#" source="internal" />
+          , which matches the documented threshold
+          <CitationChip index={2} title="Deploy runbook" href="#" source="wiki" />.
+        </p>
+        <CitationChip
+          variant="card"
+          index={1}
+          title="Release controller log, 02:14"
+          href="#"
+          source="internal · logs.example.com"
+          snippet="probe failed (2/2) — reverting to revision 481 and holding traffic on the previous pod set."
+        />
+      </div>
+    </Stage>
+  )
+}
+
+export function TypingIndicatorDemo() {
+  return (
+    <Stage>
+      <div className="flex w-full max-w-md flex-col gap-4">
+        <TypingIndicator bubble />
+        <div className="w-full rounded-2xl rounded-ss-sm bg-muted px-3.5 py-3">
+          <TypingIndicator variant="shimmer" label="Drafting an answer" />
+        </div>
+        <span className="flex items-center gap-2 text-xs text-muted-foreground">
+          <TypingIndicator variant="pulse" label="Connecting" />
+          Connecting to the run
+        </span>
+      </div>
+    </Stage>
+  )
+}
+
+export function PromptSuggestionsDemo() {
+  const [picked, setPicked] = React.useState<string | null>(null)
+
+  return (
+    <Stage>
+      <div className="w-full max-w-md">
+        <PromptSuggestions
+          onSelect={(prompt) => setPicked(prompt)}
+          suggestions={[
+            {
+              label: 'Explain the rollback',
+              description: 'Walk through last night, step by step',
+              prompt: 'Explain last night rollback step by step, with timestamps',
+            },
+            { label: 'Draft the incident note', description: 'One paragraph, for the channel' },
+            { label: 'Find the failing probe', description: 'Across the last three releases' },
+            { label: 'Who should I notify?', description: 'From the on-call rota' },
+          ]}
+        />
+        {picked ? (
+          <p className="mt-3 truncate text-xs text-muted-foreground">Sent: {picked}</p>
+        ) : null}
+      </div>
     </Stage>
   )
 }

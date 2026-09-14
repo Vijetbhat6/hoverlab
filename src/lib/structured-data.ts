@@ -246,3 +246,68 @@ export function itemListLd(
     },
   }
 }
+
+/**
+ * An FAQPage.
+ *
+ * The one hard rule, and the reason this takes the rendered questions
+ * rather than a separate list: every entry marked up here MUST be visible
+ * on the page it is on. FAQ markup for answers a visitor cannot see is a
+ * spam policy violation with a manual action attached, not a grey area —
+ * so callers pass the same array they render, and the two cannot drift.
+ */
+export function faqLd(entries: ReadonlyArray<{ q: string; a: string }>) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: entries.map((entry) => ({
+      '@type': 'Question',
+      name: entry.q,
+      acceptedAnswer: { '@type': 'Answer', text: entry.a },
+    })),
+  }
+}
+
+/**
+ * A glossary, as a DefinedTermSet.
+ *
+ * The specific type matters here in a way it usually does not. `/glossary` is
+ * a page of sixty short definitions, which is shaped exactly like the thing
+ * every low-value scraped word-list on the web is also shaped like. Declaring
+ * `DefinedTermSet` with a per-term `@id` is what lets a crawler tell that
+ * this is one edited vocabulary with sixty stable anchors rather than sixty
+ * thin pages' worth of text pasted into one document.
+ *
+ * Every term is emitted, not a capped sample the way `itemListLd` does it:
+ * the terms are the page's own content and all sixty are visible on it, so
+ * there is no gap between what is marked up and what is rendered. The whole
+ * set is ~14 KB of JSON, which is smaller than the prose it describes.
+ *
+ * `inDefinedTermSet` is left off the individual terms — they are nested
+ * inside the set via `hasDefinedTerm`, which already states the relation, and
+ * repeating it in both directions is the usual way these get self-referential
+ * and wrong.
+ */
+export function definedTermSetLd(input: {
+  name: string
+  description: string
+  path: string
+  terms: ReadonlyArray<{ slug: string; term: string; definition: string }>
+}) {
+  const url = absoluteUrl(input.path)
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'DefinedTermSet',
+    '@id': url,
+    name: input.name,
+    description: input.description,
+    url,
+    hasDefinedTerm: input.terms.map((t) => ({
+      '@type': 'DefinedTerm',
+      '@id': `${url}#${t.slug}`,
+      name: t.term,
+      description: t.definition,
+      url: `${url}#${t.slug}`,
+    })),
+  }
+}

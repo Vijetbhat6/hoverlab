@@ -126,7 +126,7 @@ export function SettingsDangerZone({
                   {action.requiresTyping ? (
                     <>
                       <label
-                        htmlFor={`confirm-${action.id}`}
+                        htmlFor={`${uid}-confirm-${action.id}`}
                         className="block text-sm font-medium"
                       >
                         Type{' '}
@@ -136,7 +136,7 @@ export function SettingsDangerZone({
                         to confirm
                       </label>
                       <input
-                        id={`confirm-${action.id}`}
+                        id={`${uid}-confirm-${action.id}`}
                         autoComplete="off"
                         autoFocus
                         value={typed}

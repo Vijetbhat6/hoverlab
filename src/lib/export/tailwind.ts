@@ -44,7 +44,13 @@ import {
   parseCss,
   ruleToCss,
 } from './css-parse'
-import { type ComplexSelector, matchComplex, parseSelector } from './selector'
+import {
+  type ComplexSelector,
+  compareSpecificity,
+  matchComplex,
+  parseSelector,
+  specificity,
+} from './selector'
 
 export interface TailwindResult {
   /** Markup with utility classes applied. */
@@ -94,6 +100,45 @@ function topLevelCommas(value: string): number {
     else if (ch === ',' && depth === 0) count++
   }
   return count
+}
+
+/**
+ * True when the value is exactly one function call and nothing after it.
+ *
+ * `linear-gradient(…)` qualifies. `linear-gradient(…) 12px 12px / calc(100%
+ * - 24px) 100% no-repeat` does not, and telling the two apart is the whole
+ * job: the second is a `background` shorthand carrying a position, a size
+ * and a repeat, and handing the lot to `bg-[…]` produces a
+ * `background-image` declaration the browser rejects outright. The effect
+ * loses its background entirely rather than losing a detail of it.
+ *
+ * Found by `test-verify`, on the one effect in a thirty-effect sample that
+ * used the long form of the shorthand.
+ */
+function isLoneFunction(value: string): boolean {
+  const v = value.trim()
+  const open = v.match(/^([a-z-]+)\(/i)
+  if (!open) return false
+
+  let depth = 0
+  let quote: string | null = null
+
+  for (let i = open[1].length; i < v.length; i++) {
+    const ch = v[i]
+    if (quote) {
+      if (ch === '\\') i++
+      else if (ch === quote) quote = null
+      continue
+    }
+    if (ch === '"' || ch === "'") quote = ch
+    else if (ch === '(') depth++
+    else if (ch === ')') {
+      depth--
+      if (depth === 0) return i === v.length - 1
+    }
+  }
+
+  return false
 }
 
 /** Does this value look like a color rather than a length? */
@@ -247,6 +292,34 @@ const PREFIX_UTILITIES: Record<string, string> = {
   'margin-bottom': 'mb', 'margin-left': 'ml',
 }
 
+/**
+ * Prefixes whose bare `-0` is a real class.
+ *
+ * `0` is a value on a *scale*, and only some prefixes have one that
+ * contains it. `p-0`, `top-0`, `z-0`, `border-0` and `opacity-0` are all
+ * real utilities; `rounded-0`, `leading-0` and `tracking-0` are not —
+ * Tailwind spells those zeroes `rounded-none` and `leading-none`, and a
+ * class Tailwind has no rule for compiles to nothing at all, silently
+ * dropping the declaration.
+ *
+ * Everything outside this set takes the arbitrary form instead, which is
+ * correct for any prefix at the cost of two brackets.
+ *
+ * Found by `check-verify`, which renders the export back and noticed the
+ * radius had gone missing on five effects. There is a second copy of this
+ * set in `tailwind-utilities.ts`, and it is deliberate: that module is the
+ * independent reader that caught this one, and sharing a table with the
+ * code it checks is how it would stop catching the next.
+ */
+const ZERO_SCALE_PREFIXES = new Set([
+  'w', 'h', 'min-w', 'min-h', 'max-w', 'max-h',
+  'top', 'right', 'bottom', 'left', 'inset',
+  'gap', 'gap-x', 'gap-y',
+  'pt', 'pr', 'pb', 'pl', 'mt', 'mr', 'mb', 'ml',
+  'border', 'border-t', 'border-r', 'border-b', 'border-l',
+  'outline', 'z', 'opacity', 'basis',
+])
+
 /** Expansion order for 1–4 value box shorthands: top, right, bottom, left. */
 function expandBoxShorthand(value: string): [string, string, string, string] | null {
   // Bail if the value contains functions/commas — `margin: calc(1px + 2%)` etc.
@@ -332,14 +405,40 @@ export function declarationToUtilities(decl: CssDeclaration): string[] {
     // resolve the whole thing to background-image and drop the colour.
     const singleLayer =
       topLevelCommas(raw) === 0 &&
-      /^(url|linear-gradient|radial-gradient|conic-gradient|repeating-linear-gradient|repeating-radial-gradient|repeating-conic-gradient|image-set)\(/i.test(raw)
-    if (singleLayer) return mark([`bg-[${arb(raw)}]`])
+      /^(url|linear-gradient|radial-gradient|conic-gradient|repeating-linear-gradient|repeating-radial-gradient|repeating-conic-gradient|image-set)\(/i.test(raw) &&
+      // …and nothing else: a shorthand's position, size and repeat cannot
+      // ride along inside `bg-[…]`. See `isLoneFunction`.
+      isLoneFunction(raw)
+    if (singleLayer) {
+      /*
+       * `background` is a shorthand, and a shorthand resets every longhand
+       * it did not mention — including `background-color`, which goes back
+       * to `transparent`. `bg-[linear-gradient(…)]` sets only the image, so
+       * whatever colour was underneath survives.
+       *
+       * On a `<div>` that is nothing: the initial colour is transparent
+       * either way. On a `<button>` or an `<input>` it is the user agent's
+       * own `ButtonFace` grey, still sitting there behind the gradient —
+       * invisible while the gradient is opaque and covers the box, and very
+       * visible the moment it is neither.
+       *
+       * Found by the Verify tab, which rendered the export beside the
+       * original and reported `background-color` as the one property that
+       * did not match on every gradient button in the catalog.
+       */
+      return mark(
+        prop === 'background'
+          ? ['bg-transparent', `bg-[${arb(raw)}]`]
+          : // `background-image` is a longhand and resets nothing.
+            [`bg-[${arb(raw)}]`],
+      )
+    }
     return mark([`[${prop}:${arb(raw)}]`])
   }
 
   const prefix = PREFIX_UTILITIES[prop]
   if (prefix) {
-    if (raw === '0') return mark([`${prefix}-0`])
+    if (raw === '0' && ZERO_SCALE_PREFIXES.has(prefix)) return mark([`${prefix}-0`])
     // `text-` is overloaded (color and size); hint when inference can't
     // see a literal, e.g. `var(--brand)`.
     if (prefix === 'text' && raw.startsWith('var(')) {
@@ -401,9 +500,22 @@ interface PseudoLike {
   arg: string | null
 }
 
-/** Render a pseudo-class as the selector text used inside `[...]`. */
+/**
+ * Render a pseudo-class as the selector text used inside `[...]`.
+ *
+ * `arb()` is applied for the same reason it is applied to a value: a class
+ * name cannot contain a space. `:has(label:nth-child(1), input:checked)`
+ * written literally ends the class attribute's token at the comma, so the
+ * browser sees two classes, neither of which is anything, and the rule
+ * disappears. Tailwind's spelling for a space inside brackets is `_`, in a
+ * variant exactly as in a value.
+ *
+ * Found by `check-verify` on seven effects — every one of them a tab strip
+ * or a disclosure, i.e. precisely the interactive effects whose whole
+ * behaviour lives in the variant.
+ */
 function pseudoSelector(pseudo: PseudoLike): string {
-  return pseudo.arg ? `:${pseudo.name}(${pseudo.arg})` : `:${pseudo.name}`
+  return pseudo.arg ? `:${pseudo.name}(${arb(pseudo.arg)})` : `:${pseudo.name}`
 }
 
 function selfVariant(pseudo: PseudoLike): string {
@@ -519,6 +631,13 @@ export function cssToTailwind(
     /** Variants that don't depend on naming: self states, then pseudo-element. */
     selfVariants: string[]
     declarations: CssDeclaration[]
+    /**
+     * The selector's specificity, kept so pass 3 can apply these in
+     * cascade order. Collapsing a stylesheet onto elements discards the
+     * selectors, and with them the only thing that decides which of two
+     * declarations for the same property wins.
+     */
+    specificity: [number, number, number]
   }
 
   const pending: Pending[] = []
@@ -600,6 +719,7 @@ export function cssToTailwind(
           })),
           selfVariants,
           declarations: rule.declarations,
+          specificity: specificity(selector),
         })
       }
     }
@@ -632,9 +752,32 @@ export function cssToTailwind(
     s.peerName = peerName(el)
   }
 
-  /* Pass 3 — attach utilities. */
+  /* Pass 3 — attach utilities, in cascade order. */
 
-  for (const p of pending) {
+  /*
+   * Weakest selector first, source order breaking ties, so the declaration
+   * CSS would have picked is the one written last into the map — which is
+   * the one that survives.
+   *
+   * Without this the map kept whichever rule came last in the file.
+   * `.stack i.l2 { background: #1e293b }` followed by `.stack .l2 {
+   * background: #273449 }` therefore exported the second colour, while the
+   * browser renders the first: the type selector makes it more specific.
+   *
+   * `!important` is not handled, and does not need to be: the catalog has
+   * none outside at-rules, and at-rule content never reaches this map. If
+   * that changes, importance sorts above specificity and this becomes a
+   * three-key comparison.
+   */
+  const inCascadeOrder = pending
+    .map((p, index) => ({ p, index }))
+    .sort(
+      (a, b) =>
+        compareSpecificity(a.p.specificity, b.p.specificity) || a.index - b.index,
+    )
+    .map((entry) => entry.p)
+
+  for (const p of inCascadeOrder) {
     const variants = [
       ...p.relational.map((r) =>
         relationalVariant(
@@ -741,9 +884,48 @@ function finalize(input: FinalizeInput): TailwindResult {
   for (const statement of parsed.statements) {
     cssParts.push(`${statement};`)
   }
-  for (const rule of leftoverRules) {
-    cssParts.push(ruleToCss(rule))
+  /*
+   * Leftover rules, back inside the at-rules they came out of.
+   *
+   * `ruleToCss` writes a selector and a block and nothing else — `atContext`
+   * is carried on the rule but is the caller's job to emit. Without this
+   * loop every `@media (prefers-reduced-motion: reduce)` guard in the
+   * catalog was flattened into an unconditional rule, so the Tailwind
+   * export of an animated effect ran its animation at `1ms !important`
+   * for *everyone*: the effect was dead in the export and looked correct
+   * in the source.
+   *
+   * Found by the Verify tab, which rendered the export next to the
+   * original and reported `animation-duration: 2s` against `0.001s`.
+   *
+   * Consecutive rules sharing a context are emitted in one block rather
+   * than one block each, and nested contexts nest — `@supports` wrapping
+   * `@media` has to come back out in that order or it is a different rule.
+   */
+  let openContext: string[] = []
+  let contextRules: string[] = []
+
+  const flushContext = () => {
+    if (!contextRules.length) return
+    let text = contextRules.join('\n\n')
+    for (let i = openContext.length - 1; i >= 0; i--) {
+      text = `${openContext[i]} {\n${text
+        .split('\n')
+        .map((line) => (line.trim() ? `  ${line}` : ''))
+        .join('\n')}\n}`
+    }
+    cssParts.push(text)
+    contextRules = []
   }
+
+  for (const rule of leftoverRules) {
+    if (rule.atContext.join(' ') !== openContext.join(' ')) {
+      flushContext()
+      openContext = rule.atContext
+    }
+    contextRules.push(ruleToCss({ ...rule, atContext: [] }))
+  }
+  flushContext()
 
   /* Honest notes. */
   if (parsed.atBlocks.some((b) => b.name === 'keyframes')) {

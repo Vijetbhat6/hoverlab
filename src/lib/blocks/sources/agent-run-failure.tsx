@@ -135,6 +135,13 @@ export function AgentRunFailure({
   steps = DEFAULT_STEPS,
   className = '',
 }: AgentRunFailureProps) {
+  /*
+    Per-instance namespace for every id below. The literal roots these
+    replaced were the same string in every instance, so two copies of this
+    block on one page pointed every label at the first copy's control.
+  */
+  const uid = React.useId()
+
   const [openAttempts, setOpenAttempts] = React.useState<number | null>(2)
   const [copied, setCopied] = React.useState(false)
 
@@ -212,7 +219,7 @@ export function AgentRunFailure({
                           aria-expanded={isOpen}
                           /* Paired with aria-controls — expanded on its own
                              says a thing opened but not which thing. */
-                          aria-controls={`attempts-${i}`}
+                          aria-controls={`${uid}-attempts-${i}`}
                           className="mt-2 inline-flex items-center gap-1 rounded-md text-xs text-muted-foreground transition hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                         >
                           <ChevronDown
@@ -223,7 +230,7 @@ export function AgentRunFailure({
                         </button>
                         {isOpen ? (
                           <ul
-                            id={`attempts-${i}`}
+                            id={`${uid}-attempts-${i}`}
                             className="mt-2 space-y-1 border-s border-border ps-3"
                           >
                             {step.attempts.map((a) => (

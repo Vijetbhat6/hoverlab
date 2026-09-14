@@ -164,8 +164,11 @@ export function FooterCompliance({
             <p className="mt-1 ps-6 text-xs text-muted-foreground">{region.registration}</p>
             {/* A real <address>, not a stack of divs. */}
             <address className="mt-2 ps-6 text-xs not-italic leading-relaxed text-muted-foreground">
-              {region.address.map((line) => (
-                <span key={line} className="block">
+              {/* Keyed by position: an address is a fixed list of display
+                  lines, and two of them can legitimately read the same (or be
+                  blank). Keying by content drops the duplicate. */}
+              {region.address.map((line, i) => (
+                <span key={i} className="block">
                   {line}
                 </span>
               ))}

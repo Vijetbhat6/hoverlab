@@ -8,10 +8,23 @@ import { Button } from '@/components/ui/button'
 import { track } from '@/lib/analytics'
 import type { SandboxLevel } from '@/lib/export/artifact-sandbox'
 
-interface OpenArtifactInSandboxProps {
-  level: SandboxLevel
-  id: string
+/**
+ * Either an artifact to derive the payload endpoint from, or the endpoint.
+ *
+ * A union rather than three optional props, so neither half can be
+ * half-supplied. `endpoint` exists for `/builder`, whose composition is not
+ * an artifact and has no id — but which needs every word of the
+ * popup-blocker dance below, and would have got a second, subtly different
+ * copy of it if this component had stayed artifact-shaped.
+ */
+type SandboxTarget =
+  | { level: SandboxLevel; id: string; endpoint?: never }
+  | { level?: never; id?: never; endpoint: string }
+
+type OpenArtifactInSandboxProps = SandboxTarget & {
   name: string
+  /** Overrides the button's label. Defaults to "Open in StackBlitz". */
+  label?: string
 }
 
 interface SandboxPayload {
@@ -44,7 +57,13 @@ interface SandboxPayload {
  * If the tab is blocked anyway (some blockers refuse even a same-gesture
  * open) the button says so rather than silently doing nothing.
  */
-export function OpenArtifactInSandbox({ level, id, name }: OpenArtifactInSandboxProps) {
+export function OpenArtifactInSandbox({
+  level,
+  id,
+  name,
+  endpoint,
+  label,
+}: OpenArtifactInSandboxProps) {
   const [pending, setPending] = React.useState(false)
   const formRef = React.useRef<HTMLFormElement>(null)
   const [payload, setPayload] = React.useState<SandboxPayload | null>(null)
@@ -71,7 +90,7 @@ export function OpenArtifactInSandbox({ level, id, name }: OpenArtifactInSandbox
     const tab = window.open('about:blank', 'hoverlab-stackblitz')
 
     try {
-      const response = await fetch(`/api/sandbox/${level}/${id}`)
+      const response = await fetch(endpoint ?? `/api/sandbox/${level}/${id}`)
       if (!response.ok) throw new Error(`sandbox ${response.status}`)
 
       const data = (await response.json()) as SandboxPayload
@@ -83,7 +102,17 @@ export function OpenArtifactInSandbox({ level, id, name }: OpenArtifactInSandbox
         return
       }
 
-      track('sandbox_open', { artifact_id: id, level, target: 'stackblitz' })
+      /*
+       * A composition has no artifact id, so it reports as one named
+       * `composition` rather than as an empty string. Analytics that
+       * counted it under `''` would put every builder export in the same
+       * bucket as a genuine bug elsewhere.
+       */
+      track('sandbox_open', {
+        artifact_id: id ?? 'composition',
+        level: level ?? 'composition',
+        target: 'stackblitz',
+      })
       setPayload(data)
     } catch {
       tab?.close()
@@ -125,7 +154,7 @@ export function OpenArtifactInSandbox({ level, id, name }: OpenArtifactInSandbox
         ) : (
           <Play aria-hidden className="h-3.5 w-3.5" />
         )}
-        {pending ? 'Building…' : 'Open in StackBlitz'}
+        {pending ? 'Building…' : (label ?? 'Open in StackBlitz')}
       </Button>
     </>
   )

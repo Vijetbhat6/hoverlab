@@ -112,6 +112,17 @@ export function NotificationPreferences({
   onChange,
   className,
 }: NotificationPreferencesProps) {
+  /*
+    Per-instance prefix for every id this block emits.
+
+    The literals these replaced were a latent duplicate the moment the
+    block appeared twice on one document, and `aria-labelledby` on a
+    duplicated id resolves to the first match -- so the second copy was
+    labelled by the first copy's heading. Client component, so `useId` is
+    the right tool.
+  */
+  const uid = React.useId()
+
   // Uncontrolled by default, controlled when `value` is supplied — the same
   // contract as a native input, so this drops into a form without the
   // caller having to own state it does not care about.
@@ -162,10 +173,10 @@ export function NotificationPreferences({
   return (
     <section
       className={`w-full rounded-2xl border border-border/60 bg-card ${className ?? ''}`}
-      aria-labelledby="notif-heading"
+      aria-labelledby={`${uid}-notif-heading`}
     >
       <header className="border-b border-border/60 px-6 py-4">
-        <h2 id="notif-heading" className="text-base font-semibold tracking-tight">
+        <h2 id={`${uid}-notif-heading`} className="text-base font-semibold tracking-tight">
           Notifications
         </h2>
         <p className="mt-0.5 text-sm text-muted-foreground">

@@ -91,6 +91,17 @@ export function PaymentMethodCard({
   className,
 }: PaymentMethodCardProps) {
   /*
+    Per-instance prefix for every id this block emits.
+
+    The literals these replaced were a latent duplicate the moment the
+    block appeared twice on one document, and `aria-labelledby` on a
+    duplicated id resolves to the first match -- so the second copy was
+    labelled by the first copy's heading. Client component, so `useId` is
+    the right tool.
+  */
+  const uid = React.useId()
+
+  /*
     "Now" is read once, after mount, and the rows render as `ok` until it
     arrives. The alternative — `new Date()` during render — makes the
     server's month and the client's month two different strings whenever a
@@ -106,10 +117,10 @@ export function PaymentMethodCard({
   return (
     <section
       className={`w-full rounded-2xl border border-border/60 bg-card ${className ?? ''}`}
-      aria-labelledby="payment-heading"
+      aria-labelledby={`${uid}-payment-heading`}
     >
       <header className="border-b border-border/60 px-6 py-4">
-        <h2 id="payment-heading" className="text-base font-semibold tracking-tight">
+        <h2 id={`${uid}-payment-heading`} className="text-base font-semibold tracking-tight">
           Payment methods
         </h2>
         <p className="mt-0.5 text-sm text-muted-foreground">

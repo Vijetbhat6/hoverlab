@@ -81,6 +81,17 @@ export function DataTableColumnManager({
   onChange,
   className,
 }: DataTableColumnManagerProps) {
+  /*
+    Per-instance prefix for every id this block emits.
+
+    The literals these replaced were a latent duplicate the moment the
+    block appeared twice on one document, and `aria-labelledby` on a
+    duplicated id resolves to the first match -- so the second copy was
+    labelled by the first copy's heading. Client component, so `useId` is
+    the right tool.
+  */
+  const uid = React.useId()
+
   const [initial] = React.useState(columns)
   const [state, setState] = React.useState(columns)
 
@@ -104,11 +115,11 @@ export function DataTableColumnManager({
   return (
     <section
       className={`w-full max-w-sm rounded-2xl border border-border/60 bg-card ${className ?? ''}`}
-      aria-labelledby="columns-heading"
+      aria-labelledby={`${uid}-columns-heading`}
     >
       <header className="flex items-center gap-2 border-b border-border/60 px-5 py-3.5">
         <Columns3 aria-hidden className="h-4 w-4 text-muted-foreground" />
-        <h2 id="columns-heading" className="text-sm font-semibold tracking-tight">
+        <h2 id={`${uid}-columns-heading`} className="text-sm font-semibold tracking-tight">
           Columns
         </h2>
         <span className="text-xs text-muted-foreground">

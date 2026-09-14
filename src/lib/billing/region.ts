@@ -142,8 +142,20 @@ export function regionFromCountry(country: string | null | undefined): Region {
   return COUNTRY_BAND[code] ?? 'default'
 }
 
-/** Pricing region for an incoming request. */
-export function regionFromHeaders(headers: Headers): Region {
+/**
+ * The ISO country code an incoming request geolocates to, or null.
+ *
+ * Separate from `regionFromHeaders` because the band is a lossy read of
+ * this: twenty-one countries collapse into 'ppp-a', and the banner has to
+ * be able to say "Nigeria" rather than "band A". Nothing prices off this —
+ * `regionFromHeaders` is still the only input to a discount — so a wrong or
+ * spoofed value here changes a flag and a country name, never an amount.
+ *
+ * Returns the raw code even when it is not a priced country, so a caller
+ * that wants to say "we don't price for your country yet" can. Callers that
+ * only care about the band should keep using `regionFromHeaders`.
+ */
+export function countryFromHeaders(headers: Headers): string | null {
   /*
     Dev-only override. No edge proxy runs locally, so every request resolves
     to 'default' and the regional paths — a discount, and in India's case a
@@ -153,12 +165,25 @@ export function regionFromHeaders(headers: Headers): Region {
     Guarded on NODE_ENV rather than on the variable alone: a production
     deployment must not be able to set its way into handing every visitor
     the deepest regional discount.
-  */
-  if (process.env.NODE_ENV !== 'production' && process.env.DEV_PRICING_REGION) {
-    return regionFromCountry(process.env.DEV_PRICING_REGION)
-  }
 
-  return regionFromCountry(
-    headers.get('x-vercel-ip-country') ?? headers.get('cf-ipcountry'),
-  )
+    Read here rather than in `regionFromHeaders` so the override moves the
+    flag and the price together. Split across the two functions, setting
+    DEV_PRICING_REGION=BR would have shown a Brazilian discount under
+    whatever flag the machine's real IP resolved to.
+  */
+  const raw =
+    process.env.NODE_ENV !== 'production' && process.env.DEV_PRICING_REGION
+      ? process.env.DEV_PRICING_REGION
+      : (headers.get('x-vercel-ip-country') ?? headers.get('cf-ipcountry'))
+
+  const code = raw?.trim().toUpperCase()
+  // Vercel sends "XX" for an address it cannot place — a value that would
+  // otherwise reach `Intl.DisplayNames` and come back as the literal "XX".
+  if (!code || !/^[A-Z]{2}$/.test(code) || code === 'XX') return null
+  return code
+}
+
+/** Pricing region for an incoming request. */
+export function regionFromHeaders(headers: Headers): Region {
+  return regionFromCountry(countryFromHeaders(headers))
 }

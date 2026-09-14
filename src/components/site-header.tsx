@@ -122,6 +122,15 @@ const NAV: Array<{
     hint: 'Search everything — all four rungs at once',
   },
   {
+    // Next to Browse rather than beside the tier links, because it answers
+    // the same question from the other side: Browse is "search for it",
+    // this is "it is already collected under the name you would search".
+    label: 'Collections',
+    href: '/ui',
+    match: ['/ui'],
+    hint: 'Named the way you would search — glassmorphism cards, tailwind loaders, pricing tables',
+  },
+  {
     label: 'Paths',
     href: '/paths',
     match: ['/paths'],
@@ -172,6 +181,13 @@ const NAV: Array<{
     badge: { text: 'New', tone: 'new' },
   },
   {
+    label: 'Studio',
+    href: '/studio',
+    match: ['/studio'],
+    hint: 'Build the design system — colours, type, voice — and leave with the DNA',
+    badge: { text: 'New', tone: 'new' },
+  },
+  {
     label: 'Playground',
     href: '/playground',
     match: ['/playground'],
@@ -183,6 +199,12 @@ const NAV: Array<{
     match: ['/tools'],
     hint: 'Palettes, gradients, shadows, contrast and unit conversion',
     badge: { text: 'New', tone: 'new' },
+  },
+  {
+    label: 'MCP',
+    href: '/mcp',
+    match: ['/mcp'],
+    hint: 'Give your editor’s agent the catalog — it installs, not pastes',
   },
   {
     label: 'Docs',

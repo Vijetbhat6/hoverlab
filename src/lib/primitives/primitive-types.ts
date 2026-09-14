@@ -67,6 +67,25 @@ export type PrimitiveCategory =
    * Filing them together buried the calendar under the swatches.
    */
   | 'Date & Time'
+  /**
+   * The parts an assistant interface is assembled from.
+   *
+   * The blocks tier already has an `AI Interfaces` group — five categories
+   * of whole sections, a thread panel with its composer attached, a list of
+   * tool calls, a citation apparatus. This is the rung under it, and it
+   * exists because almost nobody building an AI product wants the whole
+   * section: they have their own streaming hook, their own message array
+   * and their own scroll container, and what they are missing is one turn
+   * drawn and announced correctly.
+   *
+   * It sits here, after the control families and before the two groups that
+   * are not controls, rather than at the head of the list. By the ordering
+   * rule above it has the strongest claim of any group — no base library
+   * ships a single one of these — but the tier's argument opens on the
+   * button group and the field wrapper, and that argument is what the
+   * ordering is really carrying.
+   */
+  | 'AI & Chat'
   /** Structure that is too small to be a block. */
   | 'Structure'
   /**
@@ -90,6 +109,7 @@ export const PRIMITIVE_CATEGORIES: PrimitiveCategory[] = [
   'Identity',
   'Pickers & Media',
   'Date & Time',
+  'AI & Chat',
   'Structure',
   'Frames & Mocks',
 ]

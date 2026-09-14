@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/dev.mjs",
-    "prebuild": "tsx scripts/build-shader-sources.mts && node scripts/build-icon-nodes.mjs && node scripts/build-effect-index.mjs && tsx scripts/build-catalog-stats.mts && node scripts/build-artifact-sources.mjs && node scripts/build-block-exports.mjs && node scripts/build-block-playground.mjs && tsx scripts/build-revisions.mts && tsx scripts/build-block-markup.mts && tsx scripts/build-skills.mts && tsx scripts/build-dna.mts && node scripts/build-registry-tokens.mjs && tsx scripts/check-registry.mts && tsx scripts/check-paths.mts && tsx scripts/check-kits.mts && tsx scripts/check-catalog-focus.mts && tsx scripts/check-claimed-counts.mts && tsx scripts/check-figma-kit.mts && tsx scripts/check-claims.mts && tsx scripts/check-rtl.mts && tsx scripts/check-overflow-clip.mts && tsx scripts/check-llms-links.mts && tsx scripts/check-canonical.mts && tsx scripts/check-page-takes.mts && tsx scripts/audit-a11y.mts --json",
+    "prebuild": "tsx scripts/build-shader-sources.mts && node scripts/build-icon-nodes.mjs && node scripts/build-effect-index.mjs && tsx scripts/build-catalog-stats.mts && node scripts/build-artifact-sources.mjs && node scripts/build-block-exports.mjs && node scripts/build-block-playground.mjs && tsx scripts/build-revisions.mts && tsx scripts/build-block-markup.mts && tsx scripts/build-skills.mts && tsx scripts/build-dna.mts && node scripts/build-registry-tokens.mjs && tsx scripts/check-registry.mts && tsx scripts/check-paths.mts && tsx scripts/check-hubs.mts && tsx scripts/check-kits.mts && tsx scripts/check-catalog-focus.mts && tsx scripts/check-claimed-counts.mts && tsx scripts/check-figma-kit.mts && tsx scripts/check-claims.mts && tsx scripts/check-literal-ids.mts && tsx scripts/check-verify.mts && tsx scripts/check-rtl.mts && tsx scripts/check-overflow-clip.mts && tsx scripts/check-llms-links.mts && tsx scripts/check-canonical.mts && tsx scripts/check-page-takes.mts && tsx scripts/check-glossary.mts && tsx scripts/audit-a11y.mts --json",
     "check:env": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/check-env.mjs",
     "polar:provision": "tsx scripts/provision-polar.mts",
     "check:deploy": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/check-deploy.mjs",
@@ -25,6 +25,7 @@
     "test": "node --conditions=react-server --import=tsx --test \"src/lib/**/*.test.ts\"",
     "test:motion": "tsx scripts/test-motion-guard.mts",
     "test:blocks": "tsx scripts/test-blocks.mts",
+    "test:verify": "tsx scripts/test-verify.mts",
     "start": "next start -p 3000",
     "lint": "eslint .",
     "check:deps": "node scripts/check-runtime-deps.mjs",
@@ -35,6 +36,7 @@
     "build:recency": "tsx scripts/build-catalog-recency.mts",
     "build:markup": "tsx scripts/build-block-markup.mts",
     "check:paths": "tsx scripts/check-paths.mts",
+    "check:hubs": "tsx scripts/check-hubs.mts",
     "check:kits": "tsx scripts/check-kits.mts",
     "check:focus": "tsx scripts/check-catalog-focus.mts",
     "check:counts": "tsx scripts/check-claimed-counts.mts",
@@ -43,7 +45,10 @@
     "check:canonical": "tsx scripts/check-canonical.mts",
     "check:workbench": "tsx scripts/check-workbench.mts",
     "check:ids": "tsx scripts/check-duplicate-ids.mts",
+    "check:literal-ids": "tsx scripts/check-literal-ids.mts",
+    "check:verify": "tsx scripts/check-verify.mts",
     "check:takes": "tsx scripts/check-page-takes.mts",
+    "check:glossary": "tsx scripts/check-glossary.mts",
     "check:rtl": "tsx scripts/check-rtl.mts",
     "check:overflow": "tsx scripts/check-overflow-clip.mts",
     "build:skills": "tsx scripts/build-skills.mts",
@@ -53,7 +58,8 @@
     "check:registry:schema": "node scripts/validate-registry-schema.mjs",
     "submit:registry": "tsx scripts/submit-registry.mts",
     "registry:feed": "tsx scripts/registry-feed.mts",
-    "blocks:wave": "tsx scripts/generate-blocks.mts"
+    "blocks:wave": "tsx scripts/generate-blocks.mts",
+    "newsletter:digest": "tsx scripts/send-catalog-digest.mts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.122.0",

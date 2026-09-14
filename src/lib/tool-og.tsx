@@ -81,10 +81,38 @@ export function toolOgAlt(href: string): string {
   return findTool(href).seoTitle
 }
 
+/**
+ * What the card needs, independent of where it came from.
+ *
+ * Split out from `toolOgImage` when `/studio` needed the same card and is
+ * not in `DESIGNER_TOOLS` — it is not one of the thirty-six, so
+ * `findTool` throws on it. A copy of the card would have been the other
+ * option and is how two share cards drift into looking like two products.
+ */
+export interface OgCard {
+  /** The visual anchor. Shrinks a size past 22 characters. */
+  name: string
+  /** Clamped to about two lines. */
+  description: string
+  /** Tailwind gradient stops, e.g. `from-indigo-500 to-violet-500`. */
+  accent: string
+  /** The line after the wordmark. */
+  tagline?: string
+}
+
 /** Render the 1200×630 share card for the tool at `href`. */
 export function toolOgImage(href: string): ImageResponse {
   const tool = findTool(href)
-  const [from, to] = accentHex(tool.accent)
+  return ogCardImage({
+    name: tool.name,
+    description: tool.description,
+    accent: tool.accent,
+  })
+}
+
+/** Render the same card from values the caller holds directly. */
+export function ogCardImage(card: OgCard): ImageResponse {
+  const [from, to] = accentHex(card.accent)
 
   return new ImageResponse(
     (
@@ -156,7 +184,7 @@ export function toolOgImage(href: string): ImageResponse {
         <div
           style={{
             display: 'flex',
-            fontSize: tool.name.length > 22 ? '64px' : '76px',
+            fontSize: card.name.length > 22 ? '64px' : '76px',
             fontWeight: 700,
             lineHeight: 1.1,
             marginTop: '44px',
@@ -165,7 +193,7 @@ export function toolOgImage(href: string): ImageResponse {
             position: 'relative',
           }}
         >
-          {tool.name}
+          {card.name}
         </div>
 
         {/* Description, clamped to ~2 lines */}
@@ -180,7 +208,7 @@ export function toolOgImage(href: string): ImageResponse {
             position: 'relative',
           }}
         >
-          {clampText(tool.description)}
+          {clampText(card.description)}
         </div>
 
         {/* Footer brand line */}
@@ -213,7 +241,7 @@ export function toolOgImage(href: string): ImageResponse {
             Hoverlab
           </div>
           <div style={{ display: 'flex', fontSize: '24px', color: '#64748b' }}>
-            — free designer tools
+            — {card.tagline ?? 'free designer tools'}
           </div>
         </div>
       </div>

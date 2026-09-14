@@ -78,6 +78,17 @@ export function UsageOverageNotice({
   onCap,
   className = '',
 }: UsageOverageNoticeProps) {
+  /*
+    Per-instance prefix for every id this block emits.
+
+    The literals these replaced were a latent duplicate the moment the
+    block appeared twice on one document, and `aria-labelledby` on a
+    duplicated id resolves to the first match -- so the second copy was
+    labelled by the first copy's heading. Client component, so `useId` is
+    the right tool.
+  */
+  const uid = React.useId()
+
   const over = Math.max(0, used - included)
 
   /*
@@ -103,7 +114,7 @@ export function UsageOverageNotice({
 
   return (
     <section
-      aria-labelledby="overage-heading"
+      aria-labelledby={`${uid}-overage-heading`}
       className={`mx-auto w-full max-w-2xl px-4 py-16 sm:px-6 lg:px-8 ${className}`}
     >
       {/* Amber, not red. Nothing is broken. */}
@@ -114,7 +125,7 @@ export function UsageOverageNotice({
             {/* The label is used as written. Lower-casing it to fit the
                 sentence turns "API requests" into "api requests", and every
                 metric worth metering is an acronym sooner or later. */}
-            <h2 id="overage-heading" className="text-base font-semibold text-foreground">
+            <h2 id={`${uid}-overage-heading`} className="text-base font-semibold text-foreground">
               You are past your included {metricLabel}
             </h2>
             <p className="mt-1 text-sm text-muted-foreground">

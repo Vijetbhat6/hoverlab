@@ -226,7 +226,7 @@ npx shadcn add @hoverlab/saas-landing-page`}</Snippet>
         </p>
         <p>
           This sits alongside{' '}
-          <Link href="/docs/mcp">Hoverlab&rsquo;s own MCP server</Link>, which
+          <Link href="/mcp">Hoverlab&rsquo;s own MCP server</Link>, which
           goes further: it searches all four tiers, scaffolds whole templates,
           and matches a Figma frame against the catalog. Use the shadcn registry
           when you want the standard tool; use ours when you want the rest of

@@ -230,7 +230,7 @@ export function CommandPalette({
                   return (
                     <button
                       key={item.id}
-                      id={`command-item-${item.id}`}
+                      id={`${uid}-command-item-${item.id}`}
                       type="button"
                       role="option"
                       aria-selected={active}

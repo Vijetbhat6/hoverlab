@@ -145,6 +145,17 @@ export function SettingsAuditLog({
   retentionDays = 365,
   className = '',
 }: SettingsAuditLogProps) {
+  /*
+    Per-instance prefix for every id this block emits.
+
+    The literals these replaced were a latent duplicate the moment the
+    block appeared twice on one document, and `aria-labelledby` on a
+    duplicated id resolves to the first match -- so the second copy was
+    labelled by the first copy's heading. Client component, so `useId` is
+    the right tool.
+  */
+  const uid = React.useId()
+
   const [category, setCategory] = React.useState<'all' | AuditEntry['category']>('all')
 
   const shown = category === 'all' ? entries : entries.filter((e) => e.category === category)
@@ -175,11 +186,11 @@ export function SettingsAuditLog({
           </div>
 
           <div className="flex items-center gap-2">
-            <label className="sr-only" htmlFor="audit-category">
+            <label className="sr-only" htmlFor={`${uid}-audit-category`}>
               Filter by category
             </label>
             <select
-              id="audit-category"
+              id={`${uid}-audit-category`}
               value={category}
               onChange={(event) =>
                 setCategory(event.target.value as 'all' | AuditEntry['category'])

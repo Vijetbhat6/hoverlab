@@ -62,6 +62,13 @@ import {
   TreeViewDemo,
   VerificationCodeInputDemo,
   VideoPlayerDemo,
+  CitationChipDemo,
+  MessageBubbleDemo,
+  PromptInputDemo,
+  PromptSuggestionsDemo,
+  ReasoningPanelDemo,
+  ToolCallDemo,
+  TypingIndicatorDemo,
 } from './demos'
 
 export const PRIMITIVE_PREVIEWS: Record<string, React.ReactNode> = {
@@ -103,6 +110,14 @@ export const PRIMITIVE_PREVIEWS: Record<string, React.ReactNode> = {
   'time-picker': <TimePickerDemo />,
   'relative-time': <RelativeTimeDemo />,
   'duration-input': <DurationInputDemo />,
+
+  'message-bubble': <MessageBubbleDemo />,
+  'prompt-input': <PromptInputDemo />,
+  'tool-call': <ToolCallDemo />,
+  'reasoning-panel': <ReasoningPanelDemo />,
+  'citation-chip': <CitationChipDemo />,
+  'typing-indicator': <TypingIndicatorDemo />,
+  'prompt-suggestions': <PromptSuggestionsDemo />,
 
   'content-divider': <ContentDividerDemo />,
 

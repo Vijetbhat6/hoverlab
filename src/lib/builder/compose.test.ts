@@ -7,10 +7,13 @@ import {
   componentName,
   composedDeps,
   composePageSource,
+  duplicateAt,
   fileName,
+  insertAt,
   installCommand,
   MAX_SECTIONS,
   moveAt,
+  moveTo,
   parseComposition,
   removeAt,
   serializeComposition,
@@ -95,6 +98,26 @@ test('builderHref is the bare route when nothing is chosen', () => {
   assert.equal(builderHref(['hero-split']), '/builder?b=hero-split')
 })
 
+test('builderHref leaves the id separator unescaped', () => {
+  // The composition is meant to be readable and editable in the address
+  // bar. URLSearchParams would render this `b=hero-split%2Clogo-strip`.
+  assert.equal(
+    builderHref(['hero-split', 'logo-strip']),
+    '/builder?b=hero-split,logo-strip',
+  )
+})
+
+test('builderHref carries the theme, and drops it only when absent', () => {
+  assert.equal(builderHref(['hero-split'], 'abc123'), '/builder?b=hero-split&t=abc123')
+  assert.equal(builderHref([], 'abc123'), '/builder?t=abc123')
+  // Every falsy shape a caller can arrive with means "no theme", not "a
+  // theme called empty string" — an edit made before the reader has touched
+  // the colours must not stamp `&t=` into the URL.
+  for (const empty of [undefined, null, '']) {
+    assert.equal(builderHref(['hero-split'], empty), '/builder?b=hero-split')
+  }
+})
+
 /* ------------------------------------------------------------------ *
  *  Editing operations
  * ------------------------------------------------------------------ */
@@ -125,6 +148,66 @@ test('removeAt is a no-op out of range', () => {
 test('appendBlock stops at the cap', () => {
   const full = Array.from({ length: MAX_SECTIONS }, () => 'hero-split')
   assert.equal(appendBlock(full, 'logo-strip').length, MAX_SECTIONS)
+})
+
+test('insertAt clamps instead of producing holes', () => {
+  assert.deepEqual(insertAt(['a', 'c'], 1, 'b'), ['a', 'b', 'c'])
+  assert.deepEqual(insertAt(['a', 'b'], 0, 'z'), ['z', 'a', 'b'])
+  // A drop above the first row and below the last one — both reachable
+  // from geometry, neither an error.
+  assert.deepEqual(insertAt(['a', 'b'], -4, 'z'), ['z', 'a', 'b'])
+  assert.deepEqual(insertAt(['a', 'b'], 99, 'z'), ['a', 'b', 'z'])
+})
+
+test('insertAt respects the cap', () => {
+  const full = Array.from({ length: MAX_SECTIONS }, () => 'hero-split')
+  assert.deepEqual(insertAt(full, 0, 'logo-strip'), full)
+})
+
+test('duplicateAt puts the copy directly below the original', () => {
+  assert.deepEqual(duplicateAt(['a', 'b', 'c'], 1), ['a', 'b', 'b', 'c'])
+  assert.deepEqual(duplicateAt(['a'], 0), ['a', 'a'])
+  assert.deepEqual(duplicateAt(['a'], 3), ['a'])
+  assert.deepEqual(duplicateAt(['a'], -1), ['a'])
+})
+
+test('moveTo lands the section on the index it names', () => {
+  // Downward: a is removed first, so index 2 is between c and d.
+  assert.deepEqual(moveTo(['a', 'b', 'c', 'd'], 0, 2), ['b', 'c', 'a', 'd'])
+  // Upward: nothing shifts ahead of the target.
+  assert.deepEqual(moveTo(['a', 'b', 'c', 'd'], 3, 1), ['a', 'd', 'b', 'c'])
+  assert.deepEqual(moveTo(['a', 'b', 'c'], 0, 99), ['b', 'c', 'a'])
+  assert.deepEqual(moveTo(['a', 'b', 'c'], 2, -5), ['c', 'a', 'b'])
+})
+
+test('moveTo is identity when it would not move anything', () => {
+  const ids = ['a', 'b', 'c']
+  assert.equal(moveTo(ids, 1, 1), ids, 'should return the same array, not a copy')
+  assert.equal(moveTo(ids, 9, 0), ids)
+  assert.equal(moveTo(ids, -1, 0), ids)
+})
+
+test('moveTo preserves the multiset — a drag can never lose a section', () => {
+  // The property that matters. Dragging is the one edit whose indices come
+  // from geometry rather than from a control, so it is the one that could
+  // plausibly drop or clone a row without anybody noticing.
+  const ids = ['a', 'b', 'c', 'd', 'e']
+  for (let from = 0; from < ids.length; from += 1) {
+    for (let to = 0; to < ids.length; to += 1) {
+      const next = moveTo(ids, from, to)
+      assert.deepEqual([...next].sort(), [...ids].sort(), `${from} -> ${to} changed the contents`)
+      assert.equal(next[to], ids[from], `${from} -> ${to} did not land where it said`)
+    }
+  }
+})
+
+test('the new edits never mutate the list they are given', () => {
+  const ids = ['a', 'b', 'c']
+  const frozen = [...ids]
+  insertAt(ids, 1, 'z')
+  duplicateAt(ids, 0)
+  moveTo(ids, 0, 2)
+  assert.deepEqual(ids, frozen)
 })
 
 /* ------------------------------------------------------------------ *

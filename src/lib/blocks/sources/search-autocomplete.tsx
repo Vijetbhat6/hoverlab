@@ -77,7 +77,6 @@ const DEFAULT_ENTITIES: SearchEntity[] = [
 
 const DEFAULT_RECENTS = ['refund policy', 'meridian', 'seat count enterprise']
 
-const LISTBOX_ID = 'search-autocomplete-listbox'
 
 export function SearchAutocomplete({
   entities = DEFAULT_ENTITIES,
@@ -86,6 +85,17 @@ export function SearchAutocomplete({
   initialQuery = 'meri',
   className = '',
 }: SearchAutocompleteProps) {
+  /*
+    Per-instance prefix for every id this block emits.
+
+    The literals these replaced were a latent duplicate the moment the
+    block appeared twice on one document, and `aria-labelledby` on a
+    duplicated id resolves to the first match -- so the second copy was
+    labelled by the first copy's heading. Client component, so `useId` is
+    the right tool.
+  */
+  const uid = React.useId()
+
   const [query, setQuery] = React.useState(initialQuery)
   const [open, setOpen] = React.useState(Boolean(initialQuery))
   /* -1 means "nothing navigated to", which is what makes Enter honest. */
@@ -171,7 +181,7 @@ export function SearchAutocomplete({
     */
     <section className={`mx-auto w-full max-w-xl px-4 pb-40 pt-16 sm:px-6 ${className}`}>
       <div className="relative">
-        <label htmlFor="search-autocomplete" className="sr-only">
+        <label htmlFor={`${uid}-search-autocomplete`} className="sr-only">
           Search customers and documents
         </label>
         <Search
@@ -179,11 +189,11 @@ export function SearchAutocomplete({
           className="pointer-events-none absolute start-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground"
         />
         <input
-          id="search-autocomplete"
+          id={`${uid}-search-autocomplete`}
           type="text"
           role="combobox"
           aria-expanded={open}
-          aria-controls={LISTBOX_ID}
+          aria-controls={`${uid}-search-autocomplete-listbox`}
           aria-autocomplete="list"
           aria-activedescendant={
             active >= 0 && flat[active] ? `search-option-${flat[active].id}` : undefined
@@ -215,7 +225,7 @@ export function SearchAutocomplete({
 
         {open ? (
           <div
-            id={LISTBOX_ID}
+            id={`${uid}-search-autocomplete-listbox`}
             role="listbox"
             aria-label="Search suggestions"
             className="absolute inset-x-0 top-full z-10 mt-1 max-h-80 overflow-y-auto rounded-xl border border-border bg-popover p-1 shadow-lg"
@@ -291,7 +301,7 @@ export function SearchAutocomplete({
                       return (
                         <div
                           key={row.id}
-                          id={`search-option-${row.id}`}
+                          id={`${uid}-search-option-${row.id}`}
                           role="option"
                           aria-selected={isActive}
                           onMouseDown={(event) => {

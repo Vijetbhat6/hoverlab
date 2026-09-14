@@ -68,6 +68,22 @@ const DEFAULT_ITEMS: FaqTwoColumnItem[] = [
   },
 ]
 
+/*
+  A stable id suffix derived from this instance's own content.
+
+  `useId` is the right answer and is not available here: this is a server
+  component and hooks are not. Hashing what makes one copy different from
+  another gives each its own name without a hook, a prop or a counter — and
+  it stays stable across server and client renders, which a counter would
+  not.
+*/
+function instanceId(...parts: (string | undefined)[]): string {
+  const text = parts.filter(Boolean).join('|')
+  let hash = 0
+  for (let i = 0; i < text.length; i++) hash = (Math.imul(hash, 31) + text.charCodeAt(i)) | 0
+  return (hash >>> 0).toString(36).slice(0, 6)
+}
+
 export function FaqTwoColumn({
   items = DEFAULT_ITEMS,
   heading = 'Questions, answered',
@@ -80,6 +96,17 @@ export function FaqTwoColumn({
   exclusive = true,
   className = '',
 }: FaqTwoColumnProps) {
+  /*
+   * The exclusive-<details> group name, derived rather than written down.
+   *
+   * `name` on <details> is DOCUMENT-global: every <details> sharing it is
+   * one accordion, wherever on the page it sits. A literal therefore fuses
+   * two copies of this block into a single accordion — opening a question
+   * in one silently closes a question in the other — and a page rendering
+   * several of these at once is exactly what the catalog hubs do.
+   */
+  const group = `faq-two-column-${instanceId(heading, subheading, items[0]?.question)}`
+
   return (
     <section
       className={`mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 sm:py-24 ${className}`}
@@ -120,7 +147,7 @@ export function FaqTwoColumn({
           {items.map((item) => (
             <details
               key={item.question}
-              name={exclusive ? 'faq-two-column' : undefined}
+              name={exclusive ? group : undefined}
               className="group [&_summary::-webkit-details-marker]:hidden"
             >
               <summary className="flex cursor-pointer list-none items-start justify-between gap-6 py-5 text-start text-base font-semibold transition-colors hover:text-foreground/80">

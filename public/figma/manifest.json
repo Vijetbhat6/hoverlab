@@ -1,6 +1,6 @@
 {
   "generatedAt": "2026-09-13",
-  "sections": 285,
+  "sections": 291,
   "note": "Frames, not components. Named editable layers with real geometry, colour and type; no variants, no auto-layout, no hover or motion.",
   "files": [
     {
@@ -26,7 +26,7 @@
       "slug": "agent-chat",
       "file": "blocks-agent-chat.svg",
       "sections": 8,
-      "bytes": 41276,
+      "bytes": 41238,
       "ids": [
         "chat-thread-panel",
         "chat-prompt-bar",
@@ -43,7 +43,7 @@
       "slug": "agent-reasoning",
       "file": "blocks-agent-reasoning.svg",
       "sections": 7,
-      "bytes": 33001,
+      "bytes": 33002,
       "ids": [
         "agent-thinking-trace",
         "agent-tool-calls",
@@ -111,8 +111,8 @@
       "category": "Charts & Metrics",
       "slug": "charts-metrics",
       "file": "blocks-charts-metrics.svg",
-      "sections": 9,
-      "bytes": 94405,
+      "sections": 10,
+      "bytes": 103059,
       "ids": [
         "metric-sparkline-cards",
         "bar-chart-panel",
@@ -122,7 +122,8 @@
         "activity-heatmap",
         "funnel-conversion-panel",
         "metric-alert-list",
-        "kpi-summary-band"
+        "kpi-summary-band",
+        "price-ticker-strip"
       ]
     },
     {
@@ -130,7 +131,7 @@
       "slug": "command-search",
       "file": "blocks-command-search.svg",
       "sections": 10,
-      "bytes": 57764,
+      "bytes": 56884,
       "ids": [
         "command-palette",
         "search-results-panel",
@@ -149,7 +150,7 @@
       "slug": "communication",
       "file": "blocks-communication.svg",
       "sections": 9,
-      "bytes": 70164,
+      "bytes": 70061,
       "ids": [
         "support-chat-widget",
         "message-bubble-thread",
@@ -166,12 +167,11 @@
       "category": "Contact & Forms",
       "slug": "contact-forms",
       "file": "blocks-contact-forms.svg",
-      "sections": 7,
-      "bytes": 34741,
+      "sections": 6,
+      "bytes": 25829,
       "ids": [
         "contact-form-split",
         "multi-step-form",
-        "booking-scheduler",
         "feedback-widget",
         "form-error-summary",
         "contact-sales-form",
@@ -182,8 +182,8 @@
       "category": "Content & Blog",
       "slug": "content-blog",
       "file": "blocks-content-blog.svg",
-      "sections": 9,
-      "bytes": 72525,
+      "sections": 11,
+      "bytes": 88435,
       "ids": [
         "changelog-timeline",
         "roadmap-columns",
@@ -193,7 +193,9 @@
         "job-listing-board",
         "docs-layout",
         "api-endpoint-card",
-        "code-tabs-panel"
+        "code-tabs-panel",
+        "resume-document",
+        "video-player-shell"
       ]
     },
     {
@@ -237,8 +239,8 @@
       "category": "Dashboards",
       "slug": "dashboards",
       "file": "blocks-dashboards.svg",
-      "sections": 10,
-      "bytes": 78902,
+      "sections": 9,
+      "bytes": 61775,
       "ids": [
         "dashboard-shell",
         "dashboard-stat-cards",
@@ -246,7 +248,6 @@
         "dashboard-page-header",
         "kanban-board",
         "activity-timeline",
-        "calendar-month",
         "dashboard-saved-views",
         "dashboard-comparison-period",
         "dashboard-alert-rules"
@@ -394,7 +395,7 @@
       "slug": "inline-ai-actions",
       "file": "blocks-inline-ai-actions.svg",
       "sections": 6,
-      "bytes": 24899,
+      "bytes": 23552,
       "ids": [
         "selection-ai-toolbar",
         "ai-inline-suggestion",
@@ -409,7 +410,7 @@
       "slug": "logo-clouds",
       "file": "blocks-logo-clouds.svg",
       "sections": 4,
-      "bytes": 16252,
+      "bytes": 16254,
       "ids": [
         "logo-cloud",
         "logo-grid",
@@ -534,8 +535,8 @@
       "category": "Product Listings",
       "slug": "product-listings",
       "file": "blocks-product-listings.svg",
-      "sections": 7,
-      "bytes": 36265,
+      "sections": 9,
+      "bytes": 60355,
       "ids": [
         "product-grid",
         "product-filter-sidebar",
@@ -543,7 +544,9 @@
         "product-rail",
         "product-compare-table",
         "stock-availability-list",
-        "collection-story-split"
+        "collection-story-split",
+        "listing-map-split",
+        "menu-course-list"
       ]
     },
     {
@@ -562,6 +565,18 @@
         "retrieval-freshness-list",
         "context-scope-list",
         "grounding-split"
+      ]
+    },
+    {
+      "category": "Scheduling & Calendar",
+      "slug": "scheduling-calendar",
+      "file": "blocks-scheduling-calendar.svg",
+      "sections": 3,
+      "bytes": 42331,
+      "ids": [
+        "booking-scheduler",
+        "calendar-month",
+        "event-agenda-grid"
       ]
     },
     {

@@ -1,11 +1,25 @@
 import { NextResponse } from 'next/server'
-import { recordUsage, usageFor, MAX_IDS_PER_REPORT, type UsageKind } from '@/lib/usage'
+import {
+  recordSignal,
+  recordUsage,
+  usageFor,
+  MAX_IDS_PER_REPORT,
+  type SignalKind,
+  type UsageKind,
+} from '@/lib/usage'
 
 /**
- * Report that artifacts were copied or installed.
+ * Report that artifacts were copied, installed, viewed or saved.
  *
- * POST { ids: string[], kind: 'copy' | 'install' } → { recorded }
- * GET  ?id=<artifact>                                → { recent, total }
+ * POST { ids: string[], kind }  → { recorded }
+ * GET  ?id=<artifact>           → { recent, total, views, saves }
+ *
+ * `kind` is one of `copy` and `install`, which feed the seven-day ranking
+ * window, or one of `view`, `save` and `unsave`, which do not — see
+ * `lib/usage.ts` for why the split is real rather than bookkeeping. The
+ * route dispatches on it so that a caller cannot reach the ranking by
+ * sending an unexpected string: anything unrecognized falls to `copy`
+ * only after the signal kinds have had their chance to match.
  *
  * The GET is here rather than under /api/v1 because it is a page
  * ornament, not part of the public contract: detail pages are statically
@@ -28,11 +42,11 @@ export const dynamic = 'force-dynamic'
 
 export async function GET(request: Request) {
   const id = new URL(request.url).searchParams.get('id')
-  if (!id) return NextResponse.json({ recent: 0, total: 0 })
+  if (!id) return NextResponse.json({ recent: 0, total: 0, views: 0, saves: 0 })
 
   try {
     const usage = await usageFor(id)
-    return NextResponse.json(usage ?? { id, recent: 0, total: 0 }, {
+    return NextResponse.json(usage ?? { id, recent: 0, total: 0, views: 0, saves: 0 }, {
       // Briefly cacheable: a counter that lags by a minute is still true
       // enough for a line of small print, and the alternative is a
       // Firestore read on every detail-page view.
@@ -40,9 +54,12 @@ export async function GET(request: Request) {
     })
   } catch (err) {
     console.error('[api/usage] failed to read:', err)
-    return NextResponse.json({ id, recent: 0, total: 0 })
+    return NextResponse.json({ id, recent: 0, total: 0, views: 0, saves: 0 })
   }
 }
+
+/** The kinds that are displayed but never ranked. */
+const SIGNALS: readonly SignalKind[] = ['view', 'save', 'unsave']
 
 export async function POST(request: Request) {
   let body: { ids?: unknown; kind?: unknown }
@@ -55,13 +72,16 @@ export async function POST(request: Request) {
   const ids = Array.isArray(body.ids)
     ? body.ids.filter((id): id is string => typeof id === 'string')
     : []
-  const kind: UsageKind = body.kind === 'install' ? 'install' : 'copy'
-
   if (!ids.length) return NextResponse.json({ recorded: 0 })
   if (ids.length > MAX_IDS_PER_REPORT) ids.length = MAX_IDS_PER_REPORT
 
+  const signal = SIGNALS.find((k) => k === body.kind)
+  const kind: UsageKind = body.kind === 'install' ? 'install' : 'copy'
+
   try {
-    const recorded = await recordUsage(ids, kind)
+    const recorded = signal
+      ? await recordSignal(ids, signal)
+      : await recordUsage(ids, kind)
     return NextResponse.json({ recorded })
   } catch (err) {
     console.error('[api/usage] failed to record:', err)

@@ -12,10 +12,12 @@ import {
   Heart,
   Package,
   Check,
+  BookmarkPlus,
   Link2,
   RotateCcw,
   Sparkles,
   ExternalLink,
+  GitCompare,
   Scale,
   ShieldCheck,
 } from 'lucide-react'
@@ -31,14 +33,17 @@ import { isShaderRenderer } from '@/lib/shaders/shader-types'
 import { FrameworkExportPanel } from '@/components/framework-export-panel'
 import { OpenInSandbox } from '@/components/open-in-sandbox'
 import { EffectInsightsPanel } from '@/components/effect-insights-panel'
+import { VerifyExportPanel } from '@/components/verify-export-panel'
 import { CopyForAi } from '@/components/copy-for-ai'
 import { EffectSpecCard } from '@/components/effect-spec-card'
+import { EffectStage } from '@/components/effect-stage'
 import { useFavorites } from '@/hooks/use-favorites'
 import { useBundle } from '@/hooks/use-bundle'
 import { useCompare } from '@/hooks/use-compare'
 import { useRecentlyViewed } from '@/hooks/use-recently-viewed'
 import { useCopyHistory } from '@/hooks/use-copy-history'
-import { reportUsage } from '@/lib/report-usage'
+import { useRemixes } from '@/hooks/use-remixes'
+import { reportSave, reportUsage, reportView } from '@/lib/report-usage'
 import { analyzeEffect } from '@/lib/effect-insights'
 import { track } from '@/lib/analytics'
 import {
@@ -55,6 +60,7 @@ import {
 import { AddToCollectionButton } from '@/components/collections/add-to-collection'
 import { CopyFrameForFigma } from '@/components/copy-frame-for-figma'
 import type { RelatedBlock } from '@/lib/related'
+import { scopeCss } from '@/lib/scope-css'
 import { cn } from '@/lib/utils'
 import { useHeaderHeight } from '@/hooks/use-header-height'
 import type { Effect } from '@/lib/effects'
@@ -192,6 +198,18 @@ export function EffectDetail({
   }, [])
   const { has, toggle } = useFavorites()
   const isFav = has(effect.id)
+  /*
+   * Saving happens from two places on this page — the button and the `f`
+   * shortcut — and both have to feed the save counter the grid tiles
+   * render. Wrapping it once is what stops a third call site from being
+   * added later with the report quietly missing, which is the same trap
+   * the copy counter has (see `reportUsage`'s note about copy
+   * affordances).
+   */
+  const toggleFavorite = React.useCallback(() => {
+    toggle(effect.id)
+    reportSave(effect.id, !has(effect.id))
+  }, [toggle, has, effect.id])
   const { has: hasBundle, toggle: toggleBundle } = useBundle()
   const inBundle = hasBundle(effect.id)
   const { has: hasCompare, toggle: toggleCompare, isFull: compareFull } = useCompare()
@@ -226,6 +244,9 @@ export function EffectDetail({
       name: effect.name,
       category: effect.category,
     })
+    // The server-side view counter, which is what puts a view count on a
+    // library tile. De-duped per tab session — see `reportView`.
+    reportView(effect.id)
     // Views pair with effect_copied to give a per-effect view→copy rate,
     // which is the ranking signal for what to curate and what to cut.
     track('effect_viewed', {
@@ -257,7 +278,8 @@ export function EffectDetail({
    */
   const isShader = isShaderRenderer(effect.renderer)
 
-  const [activeTab, setActiveTab] = React.useState<'code' | 'customize' | 'insights' | 'ai'>('code')
+  const [activeTab, setActiveTab] =
+    React.useState<'code' | 'customize' | 'verify' | 'insights' | 'ai'>('code')
   React.useEffect(() => {
     const parts = parseHash(window.location.hash)
     const hasCustomization =
@@ -396,7 +418,7 @@ export function EffectDetail({
         prevLinkRef.current?.click()
       } else if (key === 'f') {
         e.preventDefault()
-        toggle(effect.id)
+        toggleFavorite()
       } else if (key === 's') {
         e.preventDefault()
         toggleBundle({ id: effect.id, name: effect.name, category: effect.category }, opts)
@@ -566,7 +588,7 @@ export function EffectDetail({
 
                 <button
                   type="button"
-                  onClick={() => toggle(effect.id)}
+                  onClick={toggleFavorite}
                   aria-pressed={isFav}
                   className={cn(
                     'inline-flex h-9 items-center gap-1.5 rounded-lg border px-3 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
@@ -799,16 +821,24 @@ export function EffectDetail({
                 className="sticky z-10 rounded-xl bg-background"
                 style={{ top: headerHeight + actionBarHeight + 8 }}
               >
-                <div
-                  ref={previewRef}
-                  id={FRAME_ID}
-                  className={cn(
-                    'relative flex items-center justify-center overflow-hidden rounded-xl border border-border/50 p-8',
-                    stageMinHeight(effect.category),
-                    surfaceDark ? 'bg-slate-950' : effect.previewClass ?? 'bg-muted/30',
-                    isCustomized && 'ring-1 ring-primary/20',
-                  )}
-                  dangerouslySetInnerHTML={{ __html: effect.html }}
+                {/*
+                  The stage itself, plus the backdrop chips above it and
+                  the resize rail below. Both controls are inside the
+                  sticky wrapper deliberately: the tab directly under this
+                  is Customize, and a backdrop you can only change from the
+                  top of the page is one you cannot change while dragging
+                  the hue slider that made you want to change it.
+                */}
+                <EffectStage
+                  stageRef={previewRef}
+                  frameId={FRAME_ID}
+                  html={effect.html}
+                  minHeightClass={stageMinHeight(effect.category)}
+                  surfaceClass={
+                    surfaceDark ? 'bg-slate-950' : effect.previewClass ?? 'bg-muted/30'
+                  }
+                  customized={isCustomized}
+                  resetKey={effect.id}
                 />
               </div>
               {/*
@@ -834,31 +864,49 @@ export function EffectDetail({
                   arrives via a share link with #hash customization. */}
               <Tabs
                 value={activeTab}
-                onValueChange={(v) => setActiveTab(v as 'code' | 'customize' | 'insights' | 'ai')}
+                onValueChange={(v) =>
+                  setActiveTab(v as 'code' | 'customize' | 'verify' | 'insights' | 'ai')
+                }
                 className="w-full"
               >
                 {/*
-                  Four columns from three. At 4 the labels are tight on a
-                  small phone, which is why every trigger's icon is
-                  decorative and the words carry the meaning — the grid
-                  shrinks the cells, not the text out of them.
+                  Five columns now, and past the width a phone can give
+                  five cells — so it wraps to 3 + 2 rather than shrinking
+                  the words out of the cells. Every trigger's icon is
+                  decorative and the label carries the meaning, which is
+                  what makes wrapping safe.
                 */}
                 {/*
-                  Two of the four are CSS questions. Customize parses the
-                  stylesheet for the declarations it can put on a slider and
+                  Three of the five are CSS questions. Customize parses the
+                  stylesheet for the declarations it can put on a slider,
                   Insights analyses it for motion, paint cost and reduced-
-                  motion coverage; on a fragment shader both would render an
-                  instrument with nothing to measure. Dropped rather than
-                  disabled — a tab that exists and says "not applicable" is
-                  a worse answer than a tab bar that fits its subject.
+                  motion coverage, and Verify renders the framework exports
+                  of it; on a fragment shader all three would render an
+                  instrument with nothing to measure — the markup and CSS
+                  of a shader effect are its fallback, not its deliverable,
+                  so converting them to Vue answers a question nobody
+                  asked. Dropped rather than disabled — a tab that exists
+                  and says "not applicable" is a worse answer than a tab
+                  bar that fits its subject.
                 */}
-                <TabsList className={isShader ? 'grid w-full grid-cols-2' : 'grid w-full grid-cols-4'}>
+                <TabsList
+                  className={
+                    isShader
+                      ? 'grid w-full grid-cols-2'
+                      : 'grid w-full grid-cols-3 sm:grid-cols-5'
+                  }
+                >
                   <TabsTrigger value="code" className="gap-1.5">
                     <Code2 className="h-3.5 w-3.5" /> Code
                   </TabsTrigger>
                   {isShader ? null : (
                     <TabsTrigger value="customize" className="gap-1.5">
                       <Sparkles className="h-3.5 w-3.5" /> Customize
+                    </TabsTrigger>
+                  )}
+                  {isShader ? null : (
+                    <TabsTrigger value="verify" className="gap-1.5">
+                      <GitCompare className="h-3.5 w-3.5" /> Verify
                     </TabsTrigger>
                   )}
                   {isShader ? null : (
@@ -922,6 +970,21 @@ export function EffectDetail({
                     css={customizedCss}
                     isCustomized={isCustomized}
                   />
+
+                  {/*
+                    The door to the Verify tab, at the bottom of the thing
+                    it is about. A reader who has just been handed a Vue
+                    single-file component has exactly one question, and
+                    until this line the page's answer was to be believed.
+                  */}
+                  <button
+                    type="button"
+                    onClick={() => setActiveTab('verify')}
+                    className="flex w-full items-center justify-center gap-2 rounded-lg border border-dashed border-border px-4 py-2.5 text-[11px] text-muted-foreground transition-colors hover:border-solid hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  >
+                    <GitCompare className="h-3.5 w-3.5" aria-hidden />
+                    Not taking our word for it? Render this export beside the original
+                  </button>
                   </>
                   )}
                 </TabsContent>
@@ -938,6 +1001,28 @@ export function EffectDetail({
                     customizedCss={customizedCss}
                     combinedSnippet={combinedSnippet}
                     onCopyShareLink={copyShareLink}
+                  />
+                </TabsContent>
+
+                {/*
+                  Fed `customizedCss` for the same reason the Code tab is:
+                  the panel verifies the export of whatever the preview is
+                  currently showing. Verifying the stock stylesheet while
+                  the sliders sit at a custom hue would be checking a file
+                  nobody is about to copy.
+                */}
+                <TabsContent value="verify" className="mt-3" hidden={isShader}>
+                  <VerifyExportPanel
+                    effect={{
+                      id: effect.id,
+                      name: effect.name,
+                      description: effect.description,
+                      category: effect.category,
+                    }}
+                    html={effect.html}
+                    css={customizedCss}
+                    isCustomized={isCustomized}
+                    darkSurface={surfaceDark}
                   />
                 </TabsContent>
 
@@ -1163,57 +1248,6 @@ export function EffectDetail({
  *  so multiple similar effects can render side by side.
  * ========================================================== */
 
-/** Index of the `}` that closes the `{` at `open`. */
-function matchingBrace(css: string, open: number): number {
-  let depth = 0
-  for (let i = open; i < css.length; i++) {
-    if (css[i] === '{') depth++
-    else if (css[i] === '}' && --depth === 0) return i
-  }
-  return css.length
-}
-
-/**
- * Prefix every rule in `css` with `.wrapper`, so a 40px thumbnail can render
- * an effect without its styles leaking into the rest of the page.
- *
- * At-rules are the whole reason this isn't a regex. Prefixing blindly
- * produced `.fx-preview-1 @keyframes spin { … }`, which is not a selector —
- * browsers drop the entire block, so every animated effect in this rail
- * rendered frozen while still carrying an `animation-name` that pointed at
- * keyframes that no longer existed. `@keyframes` (and friends) therefore
- * pass through untouched; their bodies aren't selector lists, and the
- * generator already namespaces animation names per effect, so they can't
- * collide. Conditional groups like `@media` keep their condition and get
- * scoped one level in — which is also what finally lets the reduced-motion
- * guard reach these previews.
- */
-function scopeCss(css: string, wrapper: string): string {
-  let out = ''
-  let i = 0
-  while (i < css.length) {
-    const open = css.indexOf('{', i)
-    if (open === -1) break
-    const prelude = css.slice(i, open).trim()
-    const close = matchingBrace(css, open)
-    const body = css.slice(open + 1, close)
-
-    if (/^@(-[a-z]+-)?(keyframes|font-face|counter-style|property)\b/i.test(prelude)) {
-      out += `${prelude} {${body}}\n`
-    } else if (prelude.startsWith('@')) {
-      out += `${prelude} {${scopeCss(body, wrapper)}}\n`
-    } else {
-      const scoped = prelude
-        .split(',')
-        .map((s) => `.${wrapper} ${s.trim()}`)
-        .join(', ')
-      out += `${scoped} {${body}}\n`
-    }
-    i = close + 1
-  }
-  return out
-}
-
 function SimilarPreview({ effect }: { effect: Effect }) {
   // useId, not a module-level counter: the counter kept climbing for the
   // life of the server process while the browser restarted it at 1, so the
@@ -1295,6 +1329,15 @@ function CustomizePanel({
 }: CustomizePanelProps) {
   const [copiedLink, setCopiedLink] = React.useState(false)
 
+  /*
+   * The save path for the private lane under <VariationsRail>. Without a
+   * control here, a visitor could see seven published variations of an effect
+   * and had no way to keep one of their own beside them: the store and the
+   * rail both existed, and nothing called `save`.
+   */
+  const { save, hasRemix } = useRemixes()
+  const alreadySaved = hasRemix(effect.id, opts)
+
   // Reset the "copied" indicator on the share button after a short delay.
   // We don't trigger this here — the parent's onCopyShareLink fires the
   // toast. We just flip the icon back after 1.6s when the button is hit.
@@ -1307,6 +1350,23 @@ function CustomizePanel({
   function handleShareClick() {
     onCopyShareLink()
     setCopiedLink(true)
+  }
+
+  function handleSaveRemix() {
+    save({
+      effectId: effect.id,
+      effectName: effect.name,
+      effectCategory: effect.category,
+      opts,
+      // A snapshot, so the rail can render a live preview without re-running
+      // the customize engine for every saved card.
+      customizedCss,
+      html: effect.html,
+      darkSurface: Boolean(effect.darkSurface),
+    })
+    toast.success(`Saved your ${effect.name} remix`, {
+      description: 'It is in "Yours", under the published variations.',
+    })
   }
 
   return (
@@ -1412,6 +1472,29 @@ function CustomizePanel({
           className="h-8 gap-1.5"
         >
           <RotateCcw className="h-3.5 w-3.5" /> Reset
+        </Button>
+        {/*
+          Disabled until something has actually been changed: the default
+          state is the effect, and "saving" it would put a card in the reader's
+          own lane that is indistinguishable from the one already at the top of
+          the page.
+        */}
+        <Button
+          size="sm"
+          variant="outline"
+          onClick={handleSaveRemix}
+          disabled={!isCustomized || alreadySaved}
+          className="h-8 gap-1.5"
+        >
+          {alreadySaved ? (
+            <>
+              <Check className="h-3.5 w-3.5" /> Saved
+            </>
+          ) : (
+            <>
+              <BookmarkPlus className="h-3.5 w-3.5" /> Save remix
+            </>
+          )}
         </Button>
         <Button
           size="sm"

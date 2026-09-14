@@ -105,6 +105,17 @@ export function SearchScopeSwitcher({
   results = DEFAULT_RESULTS,
   className = '',
 }: SearchScopeSwitcherProps) {
+  /*
+    Per-instance prefix for every id this block emits.
+
+    The literals these replaced were a latent duplicate the moment the
+    block appeared twice on one document, and `aria-labelledby` on a
+    duplicated id resolves to the first match -- so the second copy was
+    labelled by the first copy's heading. Client component, so `useId` is
+    the right tool.
+  */
+  const uid = React.useId()
+
   const [activeId, setActiveId] = React.useState('all')
   const tabRefs = React.useRef<Record<string, HTMLButtonElement | null>>({})
 
@@ -153,9 +164,9 @@ export function SearchScopeSwitcher({
                 }}
                 type="button"
                 role="tab"
-                id={`scope-tab-${scope.id}`}
+                id={`${uid}-scope-tab-${scope.id}`}
                 aria-selected={selected}
-                aria-controls="scope-panel"
+                aria-controls={`${uid}-scope-panel`}
                 aria-disabled={empty || undefined}
                 // Roving tabIndex: one stop for the whole strip, then arrows.
                 tabIndex={selected ? 0 : -1}
@@ -193,9 +204,9 @@ export function SearchScopeSwitcher({
       </div>
 
       <div
-        id="scope-panel"
+        id={`${uid}-scope-panel`}
         role="tabpanel"
-        aria-labelledby={`scope-tab-${activeId}`}
+        aria-labelledby={`${uid}-scope-tab-${activeId}`}
         tabIndex={0}
         className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
       >

@@ -1,0 +1,246 @@
+{
+  "name": "hoverlab-vscode",
+  "displayName": "Hoverlab",
+  "description": "Search and install UI from the Hoverlab catalog — CSS effects, React primitives, blocks, pages and templates — without leaving your editor. Registers the Hoverlab MCP server for agent mode.",
+  "version": "0.1.0",
+  "publisher": "hoverlab",
+  "license": "MIT",
+  "//private": "Blocks `vsce publish` and not `vsce package`, which is the state this extension should be in until somebody decides to put it on the Marketplace: a .vsix can be built and installed today, and an accidental publish under the `hoverlab` publisher id cannot happen. Remove this line when that decision is made — it is the only thing standing in the way, and the README's Packaging section is the rest of the procedure.",
+  "private": true,
+  "icon": "media/icon.png",
+  "homepage": "https://hoverlab-xak9.vercel.app",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vijetbhat6/hoverlab.git",
+    "directory": "packages/vscode"
+  },
+  "bugs": {
+    "url": "https://github.com/Vijetbhat6/hoverlab/issues"
+  },
+  "categories": [
+    "Snippets",
+    "Other"
+  ],
+  "keywords": [
+    "ui",
+    "components",
+    "blocks",
+    "tailwind",
+    "react",
+    "shadcn",
+    "css",
+    "animation",
+    "mcp"
+  ],
+  "engines": {
+    "vscode": "^1.84.0"
+  },
+  "main": "./src/extension.js",
+  "//": "Deliberately no bundler and no compile step. The extension is plain CommonJS and every line that ships is a line in this repo — see the header of src/extension.js for why the one runtime dependency is loaded the way it is.",
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": "limited",
+      "description": "Browsing and previewing the catalog work anywhere. Installing writes files into the workspace, so it needs a trusted one."
+    },
+    "virtualWorkspaces": {
+      "supported": "limited",
+      "description": "Browsing and previewing work everywhere. Installing writes through the filesystem and needs a workspace on disk."
+    }
+  },
+  "//activationEvents": "The sidebar activates this on its own when opened. `onStartupFinished` is here for one reason: the MCP server has to be offered to agent mode whether or not anybody opens the sidebar, and an agent asked to 'add a pricing section' will not open it first. It runs after the window is up, and `activate` does no network and no filesystem work, so the cost is a few milliseconds once.",
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "hoverlab",
+          "title": "Hoverlab",
+          "icon": "media/sidebar.svg"
+        }
+      ]
+    },
+    "views": {
+      "hoverlab": [
+        {
+          "id": "hoverlab.catalog",
+          "name": "Catalog",
+          "icon": "media/sidebar.svg"
+        }
+      ]
+    },
+    "viewsWelcome": [
+      {
+        "view": "hoverlab.catalog",
+        "contents": "Five tiers of UI you can install into this project: effects, primitives, blocks, pages and whole templates.\n\n[Search the catalog](command:hoverlab.search)\n\nEverything is readable without an account. A licence is only needed to ship the Pro templates."
+      }
+    ],
+    "commands": [
+      {
+        "command": "hoverlab.search",
+        "title": "Search catalog",
+        "category": "Hoverlab",
+        "icon": "$(search)"
+      },
+      {
+        "command": "hoverlab.refresh",
+        "title": "Refresh catalog",
+        "category": "Hoverlab",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "hoverlab.preview",
+        "title": "Preview",
+        "category": "Hoverlab",
+        "icon": "$(eye)"
+      },
+      {
+        "command": "hoverlab.install",
+        "title": "Install into this project",
+        "category": "Hoverlab",
+        "icon": "$(cloud-download)"
+      },
+      {
+        "command": "hoverlab.copySource",
+        "title": "Copy source",
+        "category": "Hoverlab",
+        "icon": "$(copy)"
+      },
+      {
+        "command": "hoverlab.copyCommand",
+        "title": "Copy install command",
+        "category": "Hoverlab"
+      },
+      {
+        "command": "hoverlab.openOnWeb",
+        "title": "Open on hoverlab.dev",
+        "category": "Hoverlab",
+        "icon": "$(link-external)"
+      },
+      {
+        "command": "hoverlab.openBuilder",
+        "title": "Open the page builder",
+        "category": "Hoverlab"
+      },
+      {
+        "command": "hoverlab.setLicenceKey",
+        "title": "Set licence key",
+        "category": "Hoverlab"
+      },
+      {
+        "command": "hoverlab.clearLicenceKey",
+        "title": "Clear licence key",
+        "category": "Hoverlab"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "hoverlab.search",
+          "when": "view == hoverlab.catalog",
+          "group": "navigation@1"
+        },
+        {
+          "command": "hoverlab.refresh",
+          "when": "view == hoverlab.catalog",
+          "group": "navigation@2"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "hoverlab.preview",
+          "when": "view == hoverlab.catalog && viewItem == hoverlab.artifact",
+          "group": "inline@1"
+        },
+        {
+          "command": "hoverlab.install",
+          "when": "view == hoverlab.catalog && viewItem == hoverlab.artifact",
+          "group": "inline@2"
+        },
+        {
+          "command": "hoverlab.copySource",
+          "when": "view == hoverlab.catalog && viewItem == hoverlab.artifact",
+          "group": "1_copy@1"
+        },
+        {
+          "command": "hoverlab.copyCommand",
+          "when": "view == hoverlab.catalog && viewItem == hoverlab.artifact",
+          "group": "1_copy@2"
+        },
+        {
+          "command": "hoverlab.openOnWeb",
+          "when": "view == hoverlab.catalog && viewItem == hoverlab.artifact",
+          "group": "2_open@1"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "hoverlab.preview",
+          "when": "false"
+        },
+        {
+          "command": "hoverlab.install",
+          "when": "false"
+        },
+        {
+          "command": "hoverlab.copySource",
+          "when": "false"
+        },
+        {
+          "command": "hoverlab.copyCommand",
+          "when": "false"
+        },
+        {
+          "command": "hoverlab.openOnWeb",
+          "when": "false"
+        }
+      ]
+    },
+    "mcpServerDefinitionProviders": [
+      {
+        "id": "hoverlab.mcp",
+        "label": "Hoverlab catalog"
+      }
+    ],
+    "configuration": {
+      "title": "Hoverlab",
+      "properties": {
+        "hoverlab.apiUrl": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Origin to read the catalog from. Leave empty for the public one. Set it to a preview deployment or `http://localhost:3000` when working on the catalog itself.",
+          "scope": "window"
+        },
+        "hoverlab.framework": {
+          "type": "string",
+          "enum": [
+            "auto",
+            "html",
+            "css",
+            "react",
+            "vue",
+            "svelte",
+            "styled-components",
+            "tailwind"
+          ],
+          "default": "auto",
+          "markdownDescription": "Output target for **effects**. `auto` reads it off the project's dependencies, which is right almost always. Primitives, blocks and pages are React and ignore this.",
+          "scope": "resource"
+        },
+        "hoverlab.registerMcpServer": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "Offer the Hoverlab MCP server to agent mode, so the catalog is searchable and installable by the agent with no config file. Runs `npx -y hoverlab mcp` on demand.",
+          "scope": "window"
+        }
+      }
+    }
+  },
+  "dependencies": {
+    "hoverlab": "file:../cli"
+  },
+  "scripts": {
+    "package": "npx --yes @vscode/vsce package --no-dependencies=false"
+  }
+}

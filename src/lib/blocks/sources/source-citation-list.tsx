@@ -110,12 +110,31 @@ const DEFAULT_CITATIONS: Citation[] = [
   },
 ]
 
+/*
+  Per-instance id, hashed from props that differ between instances.
+
+  A literal-rooted id is a latent duplicate the moment this block renders
+  twice on one document. `aria-labelledby` resolves to whichever element
+  with that id comes first, so the second copy is announced with the
+  first copy's label. Server component, so no `useId` -- hashing props
+  gives each instance its own namespace and stays stable across server and
+  client renders in a way a counter would not.
+*/
+function instanceId(...parts: (string | undefined)[]): string {
+  const text = parts.filter(Boolean).join('|')
+  let hash = 0
+  for (let i = 0; i < text.length; i++) hash = (Math.imul(hash, 31) + text.charCodeAt(i)) | 0
+  return (hash >>> 0).toString(36).slice(0, 6)
+}
+
 export function SourceCitationList({
   heading = 'Sources',
   citations = DEFAULT_CITATIONS,
   footnote = 'Every figure above traces to one of these. Nothing was inferred without a source.',
   className = '',
 }: SourceCitationListProps) {
+  const uid = instanceId(heading, footnote)
+
   return (
     <section className={`mx-auto w-full max-w-2xl p-6 ${className}`}>
       <h3 className="mb-3 flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-muted-foreground">
@@ -132,7 +151,7 @@ export function SourceCitationList({
           return (
             <li
               key={citation.id}
-              id={`source-${citation.id}`}
+              id={`${uid}-source-${citation.id}`}
               className="rounded-2xl border border-border/60 bg-card p-4"
             >
               <div className="flex gap-3">

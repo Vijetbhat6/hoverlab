@@ -46,9 +46,27 @@ const nextConfig: NextConfig = {
    * meant to be forwarded to a client's legal team; a 307 tells a crawler
    * to keep both, which is the thing being fixed.
    */
+  /**
+   * `/docs/mcp` moved to `/mcp`.
+   *
+   * Agent access stopped being a thing you look up after deciding and
+   * became a thing people decide on, so it got a landing page and left the
+   * docs tree — see the docblock on `src/app/mcp/page.tsx`. Every internal
+   * link moved with it, but the old URL is in the npm README, the skill
+   * files, and anywhere anyone has pasted it, so it cannot simply 404.
+   *
+   * Permanent (308), like the licence redirect above and for the same
+   * reason: there is one page here, not two, and a 307 tells a crawler to
+   * keep both and split whatever authority either had.
+   *
+   * Next carries the fragment through on its own, so the `#figma` anchor
+   * that `/design-system` and `/figma` used to point at still lands on the
+   * Figma section — which is why that section on the new page kept the id.
+   */
   async redirects() {
     return [
       { source: "/license", destination: "/licence", permanent: true },
+      { source: "/docs/mcp", destination: "/mcp", permanent: true },
     ];
   },
 };

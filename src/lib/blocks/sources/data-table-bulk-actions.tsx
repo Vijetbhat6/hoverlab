@@ -83,6 +83,17 @@ export function DataTableBulkActions({
   className = '',
 }: DataTableBulkActionsProps) {
   /*
+    Per-instance prefix for every id this block emits.
+
+    The literals these replaced were a latent duplicate the moment the
+    block appeared twice on one document, and `aria-labelledby` on a
+    duplicated id resolves to the first match -- so the second copy was
+    labelled by the first copy's heading. Client component, so `useId` is
+    the right tool.
+  */
+  const uid = React.useId()
+
+  /*
    * Opens with every row on the page ticked, which is not the state a
    * real table starts in.
    *
@@ -244,7 +255,7 @@ export function DataTableBulkActions({
             {pendingDelete ? (
               <div className="mt-3 rounded-xl border border-destructive/40 bg-destructive/5 p-3">
                 <label
-                  htmlFor="bulk-confirm"
+                  htmlFor={`${uid}-bulk-confirm`}
                   className="block text-xs font-medium text-foreground"
                 >
                   This deletes {count.toLocaleString('en-US')} members and cannot be
@@ -253,7 +264,7 @@ export function DataTableBulkActions({
                 </label>
                 <div className="mt-2 flex flex-wrap items-center gap-2">
                   <input
-                    id="bulk-confirm"
+                    id={`${uid}-bulk-confirm`}
                     value={confirmText}
                     onChange={(e) => setConfirmText(e.target.value)}
                     inputMode="numeric"
@@ -351,11 +362,11 @@ export function DataTableBulkActions({
                 return (
                   <tr key={row.id} className={checked ? 'bg-primary/5' : undefined}>
                     <td className="px-5 py-3">
-                      <label htmlFor={`row-${row.id}`} className="sr-only">
+                      <label htmlFor={`${uid}-row-${row.id}`} className="sr-only">
                         Select {row.name}
                       </label>
                       <input
-                        id={`row-${row.id}`}
+                        id={`${uid}-row-${row.id}`}
                         type="checkbox"
                         checked={checked}
                         onChange={() => {

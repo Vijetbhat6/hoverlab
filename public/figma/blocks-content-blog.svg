@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1216" height="7644" viewBox="0 0 1216 7644" id="Hoverlab — Content &amp; Blog">
+<svg xmlns="http://www.w3.org/2000/svg" width="1216" height="9816" viewBox="0 0 1216 9816" id="Hoverlab — Content &amp; Blog">
   <!--
-    Hoverlab — Content & Blog. 9 sections, traced from the
+    Hoverlab — Content & Blog. 11 sections, traced from the
     rendered catalog. Drag this file onto a Figma canvas.
 
     These are frames, not components: named, editable layers with real
@@ -9,7 +9,7 @@
 
     Every section here is free to copy as code at https://hoverlab.dev/blocks
   -->
-  <rect id="Background" x="0" y="0" width="1216" height="7644" fill="#ffffff" />
+  <rect id="Background" x="0" y="0" width="1216" height="9816" fill="#ffffff" />
   <text id="Release Timeline label" x="64" y="84" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Release Timeline</text>
   <text id="changelog-timeline id" x="64" y="98" font-family="ui-monospace, monospace" font-size="12" fill="#737373">changelog-timeline</text>
   <g id="Release Timeline" transform="translate(64, 116)">
@@ -453,5 +453,95 @@
       <text id="bun" x="635.2" y="24" fill="rgba(255, 255, 255, 0.502)" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12" text-anchor="middle">bun</text>
       <text id="npm install @acme/sdk" x="18" y="79" fill="#d4d4d8" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="14">npm install @acme/sdk</text>
       <text id="$" x="18" y="79" fill="rgba(255, 255, 255, 0.298)" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="14">$</text>
+  </g>
+  <text id="Résumé Document label" x="64" y="7695.77" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Résumé Document</text>
+  <text id="resume-document id" x="64" y="7709.77" font-family="ui-monospace, monospace" font-size="12" fill="#737373">resume-document</text>
+  <g id="Résumé Document" transform="translate(64, 7727.77)">
+    <rect id="container" x="0" y="0" width="1088" height="1223" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Aisling Moreau" x="184" y="93" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="36" font-weight="700" letter-spacing="-0.9">Aisling Moreau</text>
+      <text id="Principal engineer — platform, performan…" x="184" y="119" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">Principal engineer — platform, performance and the unglamorous parts</text>
+      <rect id="container 2" x="745.11" y="57" width="158.89" height="30" rx="12" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="Print or save as PDF" x="745.11" y="69" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Print or save as PDF</text>
+      <text id="aisling@moreau.dev" x="184" y="157" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">aisling@moreau.dev</text>
+      <text id="moreau.dev" x="352.47" y="157" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">moreau.dev</text>
+      <text id="github.com/amoreau" x="466.77" y="157" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">github.com/amoreau</text>
+      <text id="Lisbon, Portugal (UTC+1)" x="639.61" y="157" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Lisbon, Portugal (UTC+1)</text>
+      <text id="Ten years building systems that other en…" x="184" y="230" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Ten years building systems that other engineers depend on, mostly by removing things. I am</text>
+      <text id="at my best on a team that has outgrown i…" x="184" y="252.75" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">at my best on a team that has outgrown its first architecture and has to keep shipping while</text>
+      <text id="it changes. Looking for a principal or s…" x="184" y="275.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">it changes. Looking for a principal or staff role where the hard problem is technical rather</text>
+      <text id="than political." x="184" y="298.25" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">than political.</text>
+      <text id="Experience" x="184" y="357" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="600" letter-spacing="2.16">Experience</text>
+      <text id="Principal Engineer, Platform" x="184" y="397" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="600">Principal Engineer, Platform</text>
+      <text id="· Northwind" x="396.33" y="398" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">· Northwind</text>
+      <text id="Mar 2023 — Present · Remote" x="740.41" y="398" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Mar 2023 — Present · Remote</text>
+      <text id="Series B logistics platform, 40 engineer…" x="184" y="425" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Series B logistics platform, 40 engineers, one Rails monolith and four Go services.</text>
+      <text id="Cut p95 checkout latency from 2.4s to 61…" x="204" y="457" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Cut p95 checkout latency from 2.4s to 610ms by deleting a caching layer rather than adding one — the</text>
+      <text id="invalidation cost more than the reads sa…" x="204" y="479.75" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">invalidation cost more than the reads saved.</text>
+      <text id="Led the migration off a managed search p…" x="204" y="508.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Led the migration off a managed search product onto Postgres full-text, against a hard contract-expiry date.</text>
+      <text id="Saved $310k a year with no change to res…" x="204" y="531.25" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Saved $310k a year with no change to result quality anyone could measure.</text>
+      <text id="Wrote the on-call handbook and cut pages…" x="204" y="560" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Wrote the on-call handbook and cut pages per engineer per week from 11 to 2, mostly by deleting alerts</text>
+      <text id="nobody had ever acted on." x="204" y="582.75" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">nobody had ever acted on.</text>
+      <text id="Senior Software Engineer" x="184" y="633.5" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="600">Senior Software Engineer</text>
+      <text id="· Contoso Health" x="379.95" y="634.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">· Contoso Health</text>
+      <text id="Jun 2019 — Feb 2023 · Dublin" x="738.38" y="634.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Jun 2019 — Feb 2023 · Dublin</text>
+      <text id="Patient records for 60 clinics. Regulate…" x="184" y="661.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Patient records for 60 clinics. Regulated, audited, and slow to change by design.</text>
+      <text id="Rebuilt the appointment booking flow to …" x="204" y="693.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Rebuilt the appointment booking flow to meet WCAG 2.1 AA before the deadline the procurement contract</text>
+      <text id="set. It passed audit first time, which n…" x="204" y="716.25" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">set. It passed audit first time, which nothing else that year did.</text>
+      <text id="Introduced contract tests between the sc…" x="204" y="745" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Introduced contract tests between the scheduling service and three consumers, ending a class of release</text>
+      <text id="that broke a downstream team every quart…" x="204" y="767.75" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">that broke a downstream team every quarter.</text>
+      <text id="Software Engineer" x="184" y="818.5" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="600">Software Engineer</text>
+      <text id="· Umbra Labs" x="326.34" y="819.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">· Umbra Labs</text>
+      <text id="Sep 2016 — May 2019 · Dublin" x="735.11" y="819.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Sep 2016 — May 2019 · Dublin</text>
+      <text id="Second engineer. Built the billing integ…" x="204" y="850.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Second engineer. Built the billing integration that the company ran on unchanged for six years.</text>
+      <text id="Skills" x="184" y="911.25" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="600" letter-spacing="2.16">Skills</text>
+      <text id="TypeScript · Go · Postgres · React · Nex…" x="184" y="941.25" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">TypeScript · Go · Postgres · React · Next.js · Terraform · OpenTelemetry · WCAG 2.2 AA · Incident command</text>
+      <text id="Education" x="184" y="1002" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="600" letter-spacing="2.16">Education</text>
+      <text id="BA (Mod) Computer Science" x="184" y="1036" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">BA (Mod) Computer Science</text>
+      <text id="— Trinity College Dublin — First Class H…" x="367.84" y="1037" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">— Trinity College Dublin — First Class Honours</text>
+      <text id="2012 — 2016" x="829.52" y="1037" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">2012 — 2016</text>
+      <text id="Selected writing and talks" x="184" y="1094" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="600" letter-spacing="2.16">Selected writing and talks</text>
+      <text id="“The cache we deleted”" x="184" y="1128" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">“The cache we deleted”</text>
+      <text id="— SRECon EMEA, main track" x="337.89" y="1129" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">— SRECon EMEA, main track</text>
+      <text id="2025" x="875.19" y="1129" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">2025</text>
+      <text id="“Accessibility as a procurement requirem…" x="184" y="1160" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">“Accessibility as a procurement requirement”</text>
+      <text id="— Write the Docs" x="478.41" y="1161" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">— Write the Docs</text>
+      <text id="2024" x="875.19" y="1161" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">2024</text>
+  </g>
+  <text id="Video Player Shell label" x="64" y="9066.77" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Video Player Shell</text>
+  <text id="video-player-shell id" x="64" y="9080.77" font-family="ui-monospace, monospace" font-size="12" fill="#737373">video-player-shell</text>
+  <g id="Video Player Shell" transform="translate(64, 9098.77)">
+    <rect id="container" x="0" y="0" width="1088" height="653.13" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="33" y="41" width="670" height="376.88" rx="16" fill="#0a0a0a" />
+      <rect id="container 3" x="49" y="57" width="81.86" height="24.5" rx="12.25" fill="rgba(0, 0, 0, 0.6)" />
+      <text id="Episode 3" x="49" y="68" fill="rgba(255, 255, 255, 0.902)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="11" font-weight="600" letter-spacing="0.55">Episode 3</text>
+      <rect id="button" x="336" y="197.44" width="64" height="64" rx="32" fill="rgba(255, 255, 255, 0.149)" />
+      <rect id="progressbar" x="45" y="357.88" width="646" height="4" rx="2" fill="rgba(255, 255, 255, 0.251)" />
+      <rect id="container 4" x="45" y="357.88" width="394.05" height="4" rx="2" fill="rgba(255, 255, 255, 0.4)" />
+      <rect id="container 5" x="45" y="357.88" width="232.55" height="4" rx="2" fill="#007f34" />
+      <text id="4:18" x="201" y="391.88" fill="rgba(255, 255, 255, 0.8)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">4:18</text>
+      <text id="/ 12:04" x="226.17" y="391.88" fill="rgba(255, 255, 255, 0.4)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">/ 12:04</text>
+      <text id="Profiling, end to end" x="33" y="449.88" fill="#007f34" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="600" letter-spacing="0.6">Profiling, end to end</text>
+      <text id="Where the time actually goes" x="33" y="489.88" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="30" font-weight="700" letter-spacing="-0.75">Where the time actually goes</text>
+      <text id="48,219 views · Episode 3 of 7 · Publishe…" x="33" y="517.88" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">48,219 views · Episode 3 of 7 · Published 4 March</text>
+      <text id="We take a page that feels slow and find …" x="33" y="559.88" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">We take a page that feels slow and find out what is actually slow about it — with a profiler</text>
+      <text id="open the whole time, and no guessing. Th…" x="33" y="582.63" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">open the whole time, and no guessing. The fix at the end is two lines; finding it is the other</text>
+      <text id="eleven minutes." x="33" y="605.38" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">eleven minutes.</text>
+      <text id="Up next in this series" x="735" y="55" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" letter-spacing="-0.35">Up next in this series</text>
+      <rect id="paragraph" x="735" y="73" width="320" height="66" rx="12" fill="rgba(0, 118, 59, 0.051)" stroke="rgba(0, 128, 52, 0.4)" stroke-width="1" />
+      <text id="12:04" x="744" y="92" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" font-weight="600">12:04</text>
+      <text id="Where the time actually goes 2" x="836" y="101" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Where the time actually goes</text>
+      <text id="Episode 3 · watching now" x="836" y="121" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Episode 3 · watching now</text>
+      <text id="18:41" x="744" y="164" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" font-weight="600">18:41</text>
+      <text id="Reading a flame graph without guessing" x="836" y="173" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Reading a flame graph without guessing</text>
+      <text id="Episode 4" x="836" y="193" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Episode 4</text>
+      <text id="09:57" x="744" y="236" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" font-weight="600">09:57</text>
+      <text id="The three allocations that mattered" x="836" y="245" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">The three allocations that mattered</text>
+      <text id="Episode 5" x="836" y="265" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Episode 5</text>
+      <text id="15:22" x="744" y="308" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" font-weight="600">15:22</text>
+      <text id="Making the fix stick in CI" x="836" y="317" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Making the fix stick in CI</text>
+      <text id="Episode 6" x="836" y="337" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Episode 6</text>
+      <text id="07:15" x="744" y="380" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" font-weight="600">07:15</text>
+      <text id="What we would do differently" x="836" y="389" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">What we would do differently</text>
+      <text id="Episode 7" x="836" y="409" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Episode 7</text>
   </g>
 </svg>

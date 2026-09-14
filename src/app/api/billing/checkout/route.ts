@@ -221,8 +221,21 @@ export async function POST(request: Request) {
       ...(plan.perSeat ? { seats } : {}),
       ...(discountId ? { discountId } : {}),
       ...(presentmentCurrency ? { currency: presentmentCurrency } : {}),
-      // A regional price is already a large discount; stacking a public
-      // coupon on top of it is not intended.
+      /*
+       * A regional price is already a large discount; stacking a public
+       * coupon on top of it is not intended.
+       *
+       * This line is also the contract the site-wide banner is written
+       * against, so the two have to be read together. `publicOfferFor` in
+       * `lib/billing/codes.ts` advertises a typed code ONLY when this
+       * region has no `discountId` — precisely because a code entered
+       * against a checkout created with `allowDiscountCodes: false` is
+       * rejected at the till, after the buyer has already been told it
+       * would work. Flipping this to an unconditional `true` to "let
+       * people stack" would not stack anything; it would make the banner
+       * and the checkout disagree in the other direction, which is the
+       * failure mode that costs a sale rather than a margin.
+       */
       allowDiscountCodes: !discountId,
       metadata: {
         userId: user.id,

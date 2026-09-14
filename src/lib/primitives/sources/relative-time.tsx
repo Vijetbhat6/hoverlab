@@ -21,6 +21,17 @@
  *   minute under an hour, hourly after that — so a feed of a hundred of
  *   these is not a hundred one-second timers.
  *
+ *   **Its ABSOLUTE half has the same bug, one layer down.** The fix above
+ *   makes both sides render the absolute date — which only helps if the two
+ *   sides format it the same way, and by default they do not.
+ *   `Intl.DateTimeFormat(undefined, …)` resolves the *runtime's* locale and
+ *   zone: Node's on the server (24-hour, UTC on a typical host) and the
+ *   reader's in the browser. "14 Sept 2026, 20:12" against "14 Sept 2026,
+ *   8:12 pm", on the exact render this component exists to get right. So
+ *   the pre-mount format is pinned to a fixed locale and UTC and the
+ *   reader's own formatting takes over in the effect, where nothing can
+ *   disagree with it. See `absolute` below.
+ *
  * The rendered element is a real `<time dateTime={...}>` carrying the
  * machine-readable instant, with the full absolute date in `title`. That is
  * what makes it copyable, translatable and meaningful to a crawler, and it
@@ -53,6 +64,13 @@ const DAY = 24 * HOUR
 const WEEK = 7 * DAY
 const MONTH = 30 * DAY
 const YEAR = 365 * DAY
+
+/**
+ * What the absolute date is formatted in before mount, when the caller
+ * named no locale. Any fixed tag would do — this one only has to be the
+ * same on the server and in the browser.
+ */
+const SSR_LOCALE = 'en-GB'
 
 /** Largest unit that divides the gap, so 90 minutes reads "1 hour" not "90 minutes". */
 const UNITS: [Intl.RelativeTimeFormatUnit, number][] = [
@@ -100,14 +118,26 @@ export function RelativeTime({
     return () => clearTimeout(timer)
   }, [instant])
 
-  const absolute = React.useMemo(
-    () =>
-      new Intl.DateTimeFormat(locale, {
-        dateStyle: 'medium',
-        timeStyle: 'short',
-      }).format(instant),
-    [locale, instant],
-  )
+  /*
+   * Mount is the only thing `absolute` needs from the clock, so it depends
+   * on the flag rather than on `now` — otherwise every tick would rebuild
+   * a formatter whose output cannot have changed.
+   */
+  const mounted = now !== null
+
+  const absolute = React.useMemo(() => {
+    // Pinned only while both of these hold: the caller named no locale (an
+    // explicit one already agrees on both sides), and we have not mounted
+    // yet (after that, the reader's own format is the right answer and the
+    // server is no longer in the conversation). Same bargain, and the same
+    // reason, as `formatAdded` in `lib/recency`.
+    const pinned = locale === undefined && !mounted
+    return new Intl.DateTimeFormat(pinned ? SSR_LOCALE : locale, {
+      dateStyle: 'medium',
+      timeStyle: 'short',
+      timeZone: pinned ? 'UTC' : undefined,
+    }).format(instant)
+  }, [locale, instant, mounted])
 
   const text = React.useMemo(() => {
     if (now === null) return absolute

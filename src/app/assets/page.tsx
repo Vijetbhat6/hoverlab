@@ -30,26 +30,9 @@ import { AVATAR_SET, AVATAR_STYLES, buildAvatarSvg } from '@/lib/assets/avatars'
 import { LOGO_SET, buildLogoSvg } from '@/lib/assets/logos'
 import { SCENES, buildIllustrationSvg } from '@/lib/assets/illustrations'
 import { absoluteUrl } from '@/lib/site'
+import { ASSET_TOTAL as TOTAL, FAMILY_COUNT } from '@/lib/assets/family-count'
 
-export const FAMILY_COUNT: Record<string, { total: number; shape: string }> = {
-  'animated-icons': {
-    total: animatedIconCount(),
-    shape: `${ICON_GEOMETRY.length} icons × ${ICON_MOTIONS.length} motions`,
-  },
-  // The shape never restates the total — the card already renders it, and
-  // "372 · 372 in the grid" is what happens when it does.
-  avatars: {
-    total: AVATAR_SET.length,
-    shape: `${AVATAR_STYLES.length} styles × ${AVATAR_SET.length / AVATAR_STYLES.length} names, and unlimited by seed`,
-  },
-  logos: { total: LOGO_SET.length, shape: `30 invented brands × 6 mark families` },
-  illustrations: {
-    total: SCENES.length,
-    shape: 'isometric scenes, each one file for light and dark',
-  },
-}
 
-const TOTAL = Object.values(FAMILY_COUNT).reduce((n, f) => n + f.total, 0)
 
 const TITLE = 'Free assets — animated icons, avatars, logos and illustrations — Hoverlab'
 const DESCRIPTION =

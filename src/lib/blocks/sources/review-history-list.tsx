@@ -140,6 +140,17 @@ export function ReviewHistoryList({
   written = DEFAULT_WRITTEN,
   className = '',
 }: ReviewHistoryListProps) {
+  /*
+    Per-instance prefix for every id this block emits.
+
+    The literals these replaced were a latent duplicate the moment the
+    block appeared twice on one document, and `aria-labelledby` on a
+    duplicated id resolves to the first match -- so the second copy was
+    labelled by the first copy's heading. Client component, so `useId` is
+    the right tool.
+  */
+  const uid = React.useId()
+
   const [removed, setRemoved] = React.useState<string[]>([])
   const visible = written.filter((review) => !removed.includes(review.id))
 
@@ -152,8 +163,8 @@ export function ReviewHistoryList({
         </p>
 
         {pending.length > 0 ? (
-          <section aria-labelledby="review-pending" className="mt-6">
-            <h3 id="review-pending" className="text-sm font-semibold">
+          <section aria-labelledby={`${uid}-review-pending`} className="mt-6">
+            <h3 id={`${uid}-review-pending`} className="text-sm font-semibold">
               Waiting on you
             </h3>
             <ul className="mt-3 space-y-2">
@@ -183,8 +194,8 @@ export function ReviewHistoryList({
           </section>
         ) : null}
 
-        <section aria-labelledby="review-written" className="mt-8">
-          <h3 id="review-written" className="text-sm font-semibold">
+        <section aria-labelledby={`${uid}-review-written`} className="mt-8">
+          <h3 id={`${uid}-review-written`} className="text-sm font-semibold">
             Written
           </h3>
 

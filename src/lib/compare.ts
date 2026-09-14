@@ -113,6 +113,17 @@ export type Gate =
 
 export interface Competitor {
   name: string
+  /**
+   * URL segment for this vendor's page under /alternatives.
+   *
+   * Written down rather than derived from `name`, because it is a public
+   * URL and a derived one changes the day a vendor rebrands — silently
+   * 404ing whatever already links to it, which for a page written to catch
+   * "<vendor> alternative" searches is the entire value of the page.
+   *
+   * `compare.test.ts` asserts these are unique and URL-safe.
+   */
+  slug: string
   /** Vendor page the figures were read from. */
   href: string
   /**
@@ -193,6 +204,7 @@ export interface Competitor {
 export const COMPETITORS: Competitor[] = [
   {
     name: 'React Bits',
+    slug: 'react-bits',
     href: 'https://pro.reactbits.dev',
     checkedOn: '2026-09-10',
     entryUsd: 129,
@@ -205,10 +217,11 @@ export const COMPETITORS: Competitor[] = [
     agent: 'Ships a SKILL.md, plus a 20-item Agent Kit of skills, prompts and recipes at Pro',
     gate: 'source',
     beatsUs:
-      'Our closest business-model twin, and in one sweep it went from 238 blocks to 580 across 60 categories, added an Agent Kit, and shipped a Landing Builder that composes its blocks into a page. It also has the audience we do not — 1.1M visits, 57% direct, meaning people type the name. That last one is the durable advantage; almost nobody types ours.',
+      'Our closest business-model twin, and in one sweep it went from 238 blocks to 580 across 60 categories and added an Agent Kit. Its Landing Builder still edits the content of a section, which ours does not and will not — see the Composition row below for why. It also has the audience we do not: 1.1M visits, 57% direct, meaning people type the name. That last one is the durable advantage; almost nobody types ours.',
   },
   {
     name: 'Flowbite',
+    slug: 'flowbite',
     href: 'https://flowbite.com',
     /*
      * NOT re-read on the 10 September sweep. flowbite.com/pro,
@@ -239,6 +252,7 @@ export const COMPETITORS: Competitor[] = [
   },
   {
     name: 'Shadcnblocks',
+    slug: 'shadcnblocks',
     href: 'https://shadcnblocks.com',
     checkedOn: '2026-09-10',
     entryUsd: 149,
@@ -252,10 +266,11 @@ export const COMPETITORS: Competitor[] = [
     agent: 'Searchable through the official shadcn MCP server',
     gate: 'source',
     beatsUs:
-      '1,858 blocks and 2,104 components, plus a Figma kit, a page builder and a VSCode extension. On volume this is still the deepest catalog a solo developer can buy, and it grew by 180 blocks in the eighteen days between our last two sweeps.',
+      '1,858 blocks and 2,104 components, plus a Figma component library. On volume this is still the deepest catalog a solo developer can buy, and it grew by 180 blocks in the eighteen days between our last two sweeps. The page builder and the VSCode extension used to be on this list and are not any more — we ship both, and ours are not tier-locked, where theirs puts the builder behind the $399 Elite plan.',
   },
   {
     name: 'Magic UI Pro',
+    slug: 'magic-ui',
     href: 'https://pro.magicui.design',
     checkedOn: '2026-09-10',
     entryUsd: 199,
@@ -271,6 +286,7 @@ export const COMPETITORS: Competitor[] = [
   },
   {
     name: 'Aceternity UI',
+    slug: 'aceternity-ui',
     href: 'https://ui.aceternity.com',
     checkedOn: '2026-09-10',
     entryUsd: 199,
@@ -286,6 +302,7 @@ export const COMPETITORS: Competitor[] = [
   },
   {
     name: 'Preline',
+    slug: 'preline',
     href: 'https://preline.co/pricing.html',
     checkedOn: '2026-09-10',
     entryUsd: 249,
@@ -303,6 +320,7 @@ export const COMPETITORS: Competitor[] = [
   },
   {
     name: 'Tailwind Plus',
+    slug: 'tailwind-plus',
     href: 'https://tailwindcss.com/plus',
     /*
      * NOT re-read on the 10 September sweep: the page serves a login form to
@@ -325,6 +343,7 @@ export const COMPETITORS: Competitor[] = [
   },
   {
     name: 'Untitled UI',
+    slug: 'untitled-ui',
     href: 'https://www.untitledui.com/pricing',
     checkedOn: '2026-09-10',
     entryUsd: 349,
@@ -342,6 +361,7 @@ export const COMPETITORS: Competitor[] = [
   },
   {
     name: '21st.dev',
+    slug: '21st-dev',
     href: 'https://21st.dev/pricing',
     checkedOn: '2026-09-10',
     entryUsd: 6,
@@ -372,6 +392,17 @@ export const OLDEST_CHECK = COMPETITORS.reduce(
 )
 
 export const OLDEST_CHECK_LABEL = dateLabel(OLDEST_CHECK)
+
+/**
+ * One competitor by its `slug`, for /alternatives/[slug].
+ *
+ * Returns undefined rather than throwing so the route can call `notFound()`
+ * — a slug that does not resolve is a 404, not a 500, and the difference
+ * decides whether a crawler drops the URL or keeps retrying it.
+ */
+export function competitorBySlug(slug: string): Competitor | undefined {
+  return COMPETITORS.find((c) => c.slug === slug)
+}
 
 /** Rows the most recent sweep actually reached. Rendered as a count. */
 export const FRESH_COUNT = COMPETITORS.filter((c) => c.checkedOn === LAST_SWEEP).length
@@ -469,7 +500,7 @@ export const WHERE_THEY_WIN: { claim: string; detail: string }[] = [
   {
     claim: 'Composition',
     detail:
-      'We now have a builder, so this is no longer the whole gap it was — but theirs do more. React Bits’ Landing Builder and Shadcnblocks’ page builder let you edit inside the composition; ours chooses sections and orders them, and everything past that happens in your editor on the source it hands you. That is a deliberate limit, not a roadmap item, and it is still less than they offer.',
+      'Ours now drags, reorders, duplicates, restyles every section at once and opens the result as a running project — and it does all of that without an account, where Shadcnblocks locks its builder to the $399 Elite tier. What theirs still do and ours does not is edit the CONTENT of a section: change the heading, swap the image, retype the price. That one is not a roadmap item, because blocks here take no props — they are files you leave with and change in your editor, and a prop panel would be a second, worse editor for the same text. It is still a thing a buyer will compare and find missing.',
   },
   {
     claim: 'Free tiers',

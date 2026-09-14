@@ -24,10 +24,18 @@ import { useCompare } from '@/hooks/use-compare'
 import { useRecentlyViewed } from '@/hooks/use-recently-viewed'
 import type { RecordableArtifact } from '@/lib/artifact-history'
 import { LEVEL_LABEL, levelOf } from '@/lib/artifact-types'
+import { reportSave, reportView } from '@/lib/report-usage'
 import { cn } from '@/lib/utils'
 
 /**
  * Records a detail-page view. Renders nothing.
+ *
+ * Two records, to two different places, from one mount. The reader's own
+ * "recently viewed" rail is localStorage and private to them; the server
+ * counter is the aggregate that puts a view count on a card. They are
+ * deliberately separate stores and not two reads of one — a visitor's
+ * history should never need a network call, and a site-wide counter cannot
+ * be assembled from anyone's browser.
  *
  * Artifact ids are unique across all four tiers (verified against the
  * catalog — 4,402 artifacts, zero collisions), which is why the history and
@@ -44,6 +52,9 @@ export function TrackArtifactView({ artifact }: { artifact: RecordableArtifact }
   const { id, name, category, level } = artifact
   React.useEffect(() => {
     record({ id, name, category, level })
+    // De-duped per tab session, so a reload is not a second view — see
+    // `reportView`.
+    reportView(id)
   }, [record, id, name, category, level])
 
   return null
@@ -77,7 +88,12 @@ export function FavoriteArtifactButton({
   return (
     <button
       type="button"
-      onClick={() => toggle(artifact.id)}
+      onClick={() => {
+        toggle(artifact.id)
+        // The other half of the save counter rendered on the grid tiles.
+        // `isFavorite` is the pre-toggle state, hence the negation.
+        reportSave(artifact.id, !isFavorite)
+      }}
       aria-pressed={isFavorite}
       className={cn(
         'inline-flex h-9 items-center gap-1.5 rounded-lg border px-3 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',

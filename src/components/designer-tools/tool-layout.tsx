@@ -33,9 +33,23 @@ export interface ToolLayoutProps {
   /** Icon element for the logo badge. */
   icon: React.ReactNode
   children: React.ReactNode
+  /**
+   * The tool's curated permalinks, for the tools that have them.
+   *
+   * A slot rather than something this component builds, because the element
+   * is rendered on the SERVER — see `tool-permalink-gallery.tsx` for why
+   * that matters — and handed down through this client component as an
+   * already-rendered tree. That is the same move `/builder` makes with its
+   * section previews, and it is what keeps the swatches in the HTML a
+   * crawler is served rather than in a `useEffect`.
+   *
+   * It sits above `<RelatedTools>` on purpose: "twelve more of the thing
+   * you came for" is a better next step than "nineteen other tools".
+   */
+  permalinks?: React.ReactNode
 }
 
-export function ToolLayout({ name, tagline, icon, children }: ToolLayoutProps) {
+export function ToolLayout({ name, tagline, icon, children, permalinks }: ToolLayoutProps) {
   return (
     <div className="relative flex min-h-screen flex-col">
       {/* Brand colour is the one control that only makes sense here: it
@@ -69,6 +83,8 @@ export function ToolLayout({ name, tagline, icon, children }: ToolLayoutProps) {
         </div>
 
         {children}
+
+        {permalinks}
 
         {/* Every tool ended at its own output. This is the first thing on
             the page that suggests there are nineteen more. */}

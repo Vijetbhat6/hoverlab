@@ -17,7 +17,7 @@
       <rect id="section" x="1" y="1" width="1086" height="544" fill="rgba(242, 238, 235, 0.302)" />
       <rect id="container 2" x="208" y="25" width="192" height="28" rx="4" fill="#f3f2ee" />
       <rect id="container 3" x="208" y="65" width="672" height="12" rx="4" fill="#f3f2ee" />
-      <rect id="container 4" x="208" y="89" width="559.98" height="12" rx="4" fill="#f3f2ee" />
+      <rect id="container 4" x="208" y="89" width="560" height="12" rx="4" fill="#f3f2ee" />
       <rect id="container 5" x="208" y="113" width="448" height="12" rx="4" fill="#f3f2ee" />
       <rect id="dialog" x="719" y="53" width="352" height="416" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
       <text id="Support" x="736" y="84" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Support</text>
@@ -441,7 +441,6 @@
       <rect id="button 3" x="554" y="189" width="58.11" height="30" rx="12" fill="none" stroke="#dbdee1" stroke-width="1" />
       <text id="On" x="583.05" y="201" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500" text-anchor="middle">On</text>
       <rect id="meter" x="620.11" y="200" width="307.89" height="8" rx="4" fill="#f3f2ee" />
-      <rect id="container 4" x="620.11" y="200" width="132.22" height="8" rx="4" fill="#00bc7d" />
       <text id="Say something — the bar should move. If …" x="554" y="235" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Say something — the bar should move. If it does not, pick another</text>
       <text id="input." x="554" y="251" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">input.</text>
       <text id="Speaker" x="554" y="285" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Speaker</text>
@@ -451,7 +450,7 @@
       <text id="A dropdown cannot tell you whether the o…" x="554" y="389" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">A dropdown cannot tell you whether the output actually works.</text>
       <text id="Camera" x="554" y="423" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Camera</text>
       <rect id="field 3" x="554" y="435" width="374" height="38" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
-      <rect id="container 5" x="160" y="497" width="768" height="53" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <rect id="container 4" x="160" y="497" width="768" height="53" fill="none" stroke="#dbdee1" stroke-width="1" />
       <text id="These choices are remembered for the nex…" x="160" y="536" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">These choices are remembered for the next call on this device.</text>
       <rect id="button 5" x="630.38" y="514" width="297.63" height="36" rx="12" fill="#007f34" />
       <text id="Join with microphone" x="720" y="537" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Join with microphone</text>

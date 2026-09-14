@@ -116,11 +116,39 @@
     "files": 1
   },
   "relative-time": {
-    "lines": 135,
+    "lines": 165,
     "files": 1
   },
   "duration-input": {
     "lines": 241,
+    "files": 1
+  },
+  "message-bubble": {
+    "lines": 178,
+    "files": 1
+  },
+  "prompt-input": {
+    "lines": 177,
+    "files": 1
+  },
+  "tool-call": {
+    "lines": 202,
+    "files": 1
+  },
+  "reasoning-panel": {
+    "lines": 110,
+    "files": 1
+  },
+  "citation-chip": {
+    "lines": 134,
+    "files": 1
+  },
+  "typing-indicator": {
+    "lines": 98,
+    "files": 1
+  },
+  "prompt-suggestions": {
+    "lines": 120,
     "files": 1
   },
   "content-divider": {

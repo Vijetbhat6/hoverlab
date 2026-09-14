@@ -105,6 +105,17 @@ export function CsvImportMapper({
   onImport,
   className = '',
 }: CsvImportMapperProps) {
+  /*
+    Per-instance prefix for every id this block emits.
+
+    The literals these replaced were a latent duplicate the moment the
+    block appeared twice on one document, and `aria-labelledby` on a
+    duplicated id resolves to the first match -- so the second copy was
+    labelled by the first copy's heading. Client component, so `useId` is
+    the right tool.
+  */
+  const uid = React.useId()
+
   const [mapping, setMapping] = React.useState<Record<string, string>>(initialMapping)
 
   /*
@@ -135,14 +146,14 @@ export function CsvImportMapper({
 
   return (
     <section
-      aria-labelledby="csv-mapper-heading"
+      aria-labelledby={`${uid}-csv-mapper-heading`}
       className={`mx-auto w-full max-w-4xl px-4 py-16 sm:px-6 lg:px-8 ${className}`}
     >
       <div className="overflow-hidden rounded-2xl border border-border bg-card">
         <header className="flex flex-wrap items-center gap-3 border-b border-border bg-muted/30 px-5 py-4">
           <FileSpreadsheet aria-hidden className="h-5 w-5 shrink-0 text-muted-foreground" />
           <div className="min-w-0 flex-1">
-            <h2 id="csv-mapper-heading" className="truncate text-sm font-semibold text-foreground">
+            <h2 id={`${uid}-csv-mapper-heading`} className="truncate text-sm font-semibold text-foreground">
               {fileName}
             </h2>
             <p className="text-xs text-muted-foreground">

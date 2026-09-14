@@ -52,14 +52,27 @@ const DEVICES: Device[] = [
   { id: 'full', label: 'Full width', width: null, Icon: Monitor },
 ]
 
+/**
+ * Either an artifact to derive the frame URL from, or the URL itself.
+ *
+ * A union rather than three optional props, so neither half can be
+ * half-supplied. `frameSrc` exists for `/builder`, whose preview is a
+ * composition the reader just invented — it has no id, so there is nothing
+ * for `/preview/{level}/{id}` to name. Everything else about the control is
+ * the same problem (viewport media queries need a real viewport) and was
+ * worth reusing rather than reimplementing beside it.
+ */
+type PreviewTarget =
+  | { level: 'primitive' | 'block' | 'page'; id: string; frameSrc?: never }
+  | { level?: never; id?: never; frameSrc: string }
+
 export function ResponsivePreview({
   level,
   id,
   name,
   children,
-}: {
-  level: 'primitive' | 'block' | 'page'
-  id: string
+  frameSrc,
+}: PreviewTarget & {
   name: string
   /** The inline preview, rendered at full width. */
   children: React.ReactNode
@@ -86,6 +99,15 @@ export function ResponsivePreview({
    */
   const framed = device.width !== null || rtl
   const frameWidth = device.width ?? undefined
+
+  /*
+   * `?dir=rtl` has to survive a base URL that already carries a query —
+   * `/builder`'s composition travels as `?b=`, so appending a second `?`
+   * would produce a frame that renders nothing and an RTL toggle that
+   * silently does not work.
+   */
+  const base = frameSrc ?? `/preview/${level}/${id}`
+  const src = rtl ? `${base}${base.includes('?') ? '&' : '?'}dir=rtl` : base
 
   function toggleRtl() {
     setLoaded(false)
@@ -174,7 +196,7 @@ export function ResponsivePreview({
               // state the block was in, and a menu left open at 1024px
               // reopens looking wrong at 375px.
               key={`${device.id}-${rtl ? 'rtl' : 'ltr'}`}
-              src={`/preview/${level}/${id}${rtl ? '?dir=rtl' : ''}`}
+              src={src}
               title={
                 `${name}` +
                 (device.width ? ` at ${device.width} pixels wide` : ' at full width') +

@@ -654,12 +654,42 @@ function renderAttrs(el: HtmlElement, opts: RenderOptions): string {
 }
 
 /**
+ * Elements whose text content is rendered exactly as written.
+ *
+ * Collapsing whitespace inside one of these is not a formatting choice,
+ * it is a content change: `white-space: pre` is the whole reason the tag
+ * exists.
+ */
+const PREFORMATTED_ELEMENTS = new Set(['pre', 'textarea'])
+
+/**
  * Render a node tree back to markup.
  *
- * Formatting rule: an element whose children are a single text node stays
- * on one line (`<button class="x">Click me</button>`); anything else gets
- * one child per line. That matches how the catalog's source is written, so
- * exported code diffs cleanly against what users see in the preview.
+ * ── THE FORMATTING RULE, AND WHY IT IS NOT JUST TASTE ───────────────────
+ *
+ * An element gets one child per line, except when doing that would change
+ * what the browser draws. Three cases stay on one line:
+ *
+ *   - a single text child — `<button class="x">Click me</button>`
+ *   - *mixed content*: any element with both text and element children
+ *   - `<pre>` and `<textarea>`, verbatim
+ *
+ * The mixed-content case is the one that matters, and it was missing.
+ * `<td><i class="cv"></i>North America</td>` was being broken across
+ * lines, which puts a newline between the icon and the word — and a
+ * newline in an inline formatting context *is a space*. The exported table
+ * rendered 1.6px wider than the effect it was exported from, on every
+ * target, invisibly, because the only difference in the file was
+ * indentation.
+ *
+ * Found by the Verify tab: the CSS export, which barely transforms
+ * anything, reported forty differing computed properties on a table.
+ *
+ * So text nodes in mixed content keep their whitespace, collapsed the way
+ * the browser collapses it rather than trimmed away. The line can get long
+ * — correctness first; a mixed-content element is usually a cell or a
+ * label, and the alternative is markup that quietly renders differently
+ * from the thing it is a copy of.
  */
 export function renderMarkup(nodes: HtmlNode[], opts: RenderOptions = {}): string {
   const indentUnit = opts.indentUnit ?? '  '
@@ -669,6 +699,43 @@ export function renderMarkup(nodes: HtmlNode[], opts: RenderOptions = {}): strin
      SVG_TAG_CASE. HTML output leaves them lowercase, which is what an HTML
      parser would hand back anyway. */
   const tagName = (tag: string): string => (jsx ? SVG_TAG_CASE[tag] ?? tag : tag)
+
+  /**
+   * One node on the current line, with its own whitespace intact.
+   *
+   * `verbatim` is the `<pre>` case, where even collapsing runs of spaces
+   * is a content change. Everywhere else runs of whitespace collapse to a
+   * single space, which is what the browser does to them anyway — so the
+   * output is shorter and renders identically.
+   */
+  const renderInline = (node: HtmlNode, verbatim: boolean): string => {
+    if (node.type === 'text') {
+      if (verbatim) {
+        /*
+         * JSX does not have preformatted text. It strips the leading and
+         * trailing whitespace of every line and joins the lines with a
+         * space, so a `<pre>` written as text comes out as one long line —
+         * which for a terminal card or a stack trace is the whole content
+         * gone. A string expression is the only spelling JSX keeps
+         * verbatim.
+         */
+        return jsx ? `{${JSON.stringify(node.value)}}` : node.value
+      }
+      const text = node.value.replace(/\s+/g, ' ')
+      return jsx ? escapeJsxText(text) : text
+    }
+    if (node.type === 'comment') {
+      const body = node.value.trim()
+      return jsx ? `{/* ${body} */}` : `<!-- ${body} -->`
+    }
+
+    const attrs = renderAttrs(node, opts)
+    if (VOID_ELEMENTS.has(node.tag)) return `<${tagName(node.tag)}${attrs} />`
+
+    const nested = verbatim || PREFORMATTED_ELEMENTS.has(node.tag)
+    const inner = node.children.map((c) => renderInline(c, nested)).join('')
+    return `<${tagName(node.tag)}${attrs}>${inner}</${tagName(node.tag)}>`
+  }
 
   const renderNode = (node: HtmlNode, indent: string): string => {
     if (node.type === 'text') {
@@ -696,10 +763,30 @@ export function renderMarkup(nodes: HtmlNode[], opts: RenderOptions = {}): strin
       return `${indent}<${tagName(node.tag)}${attrs}></${tagName(node.tag)}>`
     }
 
-    // Single text child → keep it inline.
-    if (meaningful.length === 1 && meaningful[0].type === 'text') {
+    const preformatted = PREFORMATTED_ELEMENTS.has(node.tag)
+
+    /*
+     * Single text child → keep it inline, trimmed.
+     *
+     * Not for `<pre>`, where the leading newline and the indentation are
+     * the content. Testing this first was a bug: a stack trace in a `<pre>`
+     * took this branch, came out as raw newlines in a JSX file, and JSX
+     * joined the lines back together with spaces.
+     */
+    if (!preformatted && meaningful.length === 1 && meaningful[0].type === 'text') {
       const text = meaningful[0].value.trim()
       return `${indent}<${tagName(node.tag)}${attrs}>${jsx ? escapeJsxText(text) : text}</${tagName(node.tag)}>`
+    }
+
+    /*
+     * Mixed content, or preformatted text: render the whole subtree on one
+     * line, with no whitespace this function did not find. See the header —
+     * a newline between an inline element and the text beside it is a
+     * space, and adding one changes the layout.
+     */
+    if (preformatted || meaningful.some((c) => c.type === 'text')) {
+      const inner = node.children.map((c) => renderInline(c, preformatted)).join('')
+      return `${indent}<${tagName(node.tag)}${attrs}>${inner}</${tagName(node.tag)}>`
     }
 
     const inner = meaningful

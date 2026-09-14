@@ -44,6 +44,14 @@ export function ProductGallery({
   views = DEFAULT_VIEWS,
   className = '',
 }: ProductGalleryProps) {
+  /*
+     Per-instance prefix. The panel ids were literal, so two galleries
+     on one document -- a product page and a related-items rail, or two
+     page previews on the catalog hub -- emitted the same id twice and
+     every tab's `aria-controls` resolved to the first one's panel.
+     Client component, so `useId` is the right tool here.
+  */
+  const uid = React.useId()
   const [active, setActive] = React.useState(0)
   const view = views[active] ?? views[0]
 
@@ -61,7 +69,7 @@ export function ProductGallery({
     <div className={`flex flex-col gap-3 ${className}`}>
       {/* Fixed ratio — the buy box must not move as images swap. */}
       <div
-        id={`gallery-panel-${view.id}`}
+        id={`${uid}-gallery-panel-${view.id}`}
         role="tabpanel"
         aria-label={view.label}
         className="group relative aspect-square overflow-hidden rounded-2xl border border-border/60 bg-muted"
@@ -92,7 +100,7 @@ export function ProductGallery({
             type="button"
             role="tab"
             aria-selected={i === active}
-            aria-controls={`gallery-panel-${v.id}`}
+            aria-controls={`${uid}-gallery-panel-${v.id}`}
             // Only the active tab is in the tab order; arrows move within.
             tabIndex={i === active ? 0 : -1}
             onClick={() => setActive(i)}

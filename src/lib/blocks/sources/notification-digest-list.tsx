@@ -78,16 +78,27 @@ export function NotificationDigestList({
   rows = ROWS,
   className,
 }: NotificationDigestListProps) {
+  /*
+    Per-instance prefix for every id this block emits.
+
+    The literals these replaced were a latent duplicate the moment the
+    block appeared twice on one document, and `aria-labelledby` on a
+    duplicated id resolves to the first match -- so the second copy was
+    labelled by the first copy's heading. Client component, so `useId` is
+    the right tool.
+  */
+  const uid = React.useId()
+
   const [selected, setSelected] = React.useState<string | null>(rows[0]?.id ?? null)
 
   return (
     <section
-      aria-labelledby="notification-digest-list-heading"
+      aria-labelledby={`${uid}-notification-digest-list-heading`}
       className={`w-full bg-background px-6 py-16 ${className ?? ''}`}
     >
       <div className="mx-auto max-w-3xl">
         <h2
-          id="notification-digest-list-heading"
+          id={`${uid}-notification-digest-list-heading`}
           className="text-2xl font-semibold tracking-tight text-foreground"
         >
           {heading}

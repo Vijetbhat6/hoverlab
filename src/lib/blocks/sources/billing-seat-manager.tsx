@@ -75,6 +75,17 @@ export function BillingSeatManager({
   className = '',
 }: BillingSeatManagerProps) {
   /*
+    Per-instance prefix for every id this block emits.
+
+    The literals these replaced were a latent duplicate the moment the
+    block appeared twice on one document, and `aria-labelledby` on a
+    duplicated id resolves to the first match -- so the second copy was
+    labelled by the first copy's heading. Client component, so `useId` is
+    the right tool.
+  */
+  const uid = React.useId()
+
+  /*
    * Opens two seats above what is paid for.
    *
    * At parity the card says "nothing has changed", which is true and
@@ -120,11 +131,11 @@ export function BillingSeatManager({
             </button>
 
             {/* A real input: seat counts get typed, not clicked, past ten. */}
-            <label htmlFor="seat-count" className="sr-only">
+            <label htmlFor={`${uid}-seat-count`} className="sr-only">
               Number of seats
             </label>
             <input
-              id="seat-count"
+              id={`${uid}-seat-count`}
               type="number"
               inputMode="numeric"
               min={occupied}

@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1216" height="5731" viewBox="0 0 1216 5731" id="Hoverlab — Contact &amp; Forms">
+<svg xmlns="http://www.w3.org/2000/svg" width="1216" height="4944" viewBox="0 0 1216 4944" id="Hoverlab — Contact &amp; Forms">
   <!--
-    Hoverlab — Contact & Forms. 7 sections, traced from the
+    Hoverlab — Contact & Forms. 6 sections, traced from the
     rendered catalog. Drag this file onto a Figma canvas.
 
     These are frames, not components: named, editable layers with real
@@ -9,7 +9,7 @@
 
     Every section here is free to copy as code at https://hoverlab.dev/blocks
   -->
-  <rect id="Background" x="0" y="0" width="1216" height="5731" fill="#ffffff" />
+  <rect id="Background" x="0" y="0" width="1216" height="4944" fill="#ffffff" />
   <text id="Split Contact Form label" x="64" y="84" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Split Contact Form</text>
   <text id="contact-form-split id" x="64" y="98" font-family="ui-monospace, monospace" font-size="12" fill="#737373">contact-form-split</text>
   <g id="Split Contact Form" transform="translate(64, 116)">
@@ -68,68 +68,9 @@
       <rect id="button 2" x="694.41" y="462" width="128.59" height="44" rx="16" fill="#007f34" />
       <text id="Continue" x="758.7" y="476" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Continue</text>
   </g>
-  <text id="Meeting Scheduler label" x="64" y="1571" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Meeting Scheduler</text>
-  <text id="booking-scheduler id" x="64" y="1585" font-family="ui-monospace, monospace" font-size="12" fill="#737373">booking-scheduler</text>
-  <g id="Meeting Scheduler" transform="translate(64, 1603)">
-    <rect id="container" x="0" y="0" width="1088" height="639" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <rect id="container 2" x="192" y="65" width="704" height="509" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
-      <text id="Book a walkthrough" x="217" y="104" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" font-weight="600">Book a walkthrough</text>
-      <text id="Thirty minutes with an engineer, not a s…" x="217" y="132" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Thirty minutes with an engineer, not a sales team. Bring your codebase.</text>
-      <text id="30 minutes" x="217" y="168" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">30 minutes</text>
-      <text id="Video call, link on confirmation" x="331.92" y="168" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Video call, link on confirmation</text>
-      <text id="Pick a day" x="217" y="229" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Pick a day</text>
-      <rect id="container 3" x="217" y="247" width="72" height="77" rx="16" fill="rgba(0, 128, 49, 0.102)" stroke="#007f34" stroke-width="1" />
-      <text id="Tue" x="253" y="270" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" letter-spacing="0.3" text-anchor="middle">Tue</text>
-      <text id="1" x="253" y="292" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" font-weight="600" text-anchor="middle">1</text>
-      <text id="5 free" x="253" y="307.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="11" text-anchor="middle">5 free</text>
-      <rect id="container 4" x="297" y="247" width="72" height="77" rx="16" fill="rgba(242, 242, 237, 0.4)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Wed" x="332.99" y="270" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" letter-spacing="0.3" text-anchor="middle">Wed</text>
-      <text id="2" x="333" y="292" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" font-weight="600" text-anchor="middle">2</text>
-      <text id="Full" x="333" y="307.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="11" text-anchor="middle">Full</text>
-      <rect id="container 5" x="377" y="247" width="72" height="77" rx="16" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
-      <text id="Thu" x="412.99" y="270" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" letter-spacing="0.3" text-anchor="middle">Thu</text>
-      <text id="3" x="413" y="292" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" font-weight="600" text-anchor="middle">3</text>
-      <text id="4 free" x="413" y="307.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="11" text-anchor="middle">4 free</text>
-      <rect id="container 6" x="457" y="247" width="72" height="77" rx="16" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
-      <text id="Fri" x="492.99" y="270" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" letter-spacing="0.3" text-anchor="middle">Fri</text>
-      <text id="4" x="492.99" y="292" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" font-weight="600" text-anchor="middle">4</text>
-      <text id="2 free" x="492.99" y="307.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="11" text-anchor="middle">2 free</text>
-      <rect id="container 7" x="537" y="247" width="72" height="77" rx="16" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
-      <text id="Sat" x="573" y="270" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" letter-spacing="0.3" text-anchor="middle">Sat</text>
-      <text id="5" x="573" y="292" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" font-weight="600" text-anchor="middle">5</text>
-      <text id="1 free" x="572.99" y="307.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="11" text-anchor="middle">1 free</text>
-      <rect id="container 8" x="617" y="247" width="72" height="77" rx="16" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
-      <text id="Tue 2" x="653" y="270" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" letter-spacing="0.3" text-anchor="middle">Tue</text>
-      <text id="8" x="653" y="292" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" font-weight="600" text-anchor="middle">8</text>
-      <text id="5 free 2" x="653" y="307.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="11" text-anchor="middle">5 free</text>
-      <rect id="container 9" x="697" y="247" width="72" height="77" rx="16" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
-      <text id="Wed 2" x="732.99" y="270" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" letter-spacing="0.3" text-anchor="middle">Wed</text>
-      <text id="9" x="733" y="292" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" font-weight="600" text-anchor="middle">9</text>
-      <text id="4 free 2" x="733" y="307.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="11" text-anchor="middle">4 free</text>
-      <rect id="container 10" x="777" y="247" width="72" height="77" rx="16" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
-      <text id="Thu 2" x="812.99" y="270" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" letter-spacing="0.3" text-anchor="middle">Thu</text>
-      <text id="10" x="812.99" y="292" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" font-weight="600" text-anchor="middle">10</text>
-      <text id="2 free 2" x="812.99" y="307.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="11" text-anchor="middle">2 free</text>
-      <text id="Pick a time" x="217" y="376" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Pick a time</text>
-      <rect id="field" x="715" y="356" width="156" height="32" rx="12" fill="#fdfcf8" stroke="#8d8f92" stroke-width="1" />
-      <rect id="container 11" x="217" y="400" width="212.66" height="38" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
-      <text id="1:30 PM" x="217" y="414" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">1:30 PM</text>
-      <rect id="container 12" x="437.66" y="400" width="212.67" height="38" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
-      <text id="2:00 PM" x="437.66" y="414" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">2:00 PM</text>
-      <rect id="container 13" x="658.33" y="400" width="212.67" height="38" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
-      <text id="3:30 PM" x="658.33" y="414" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">3:30 PM</text>
-      <rect id="container 14" x="217" y="446" width="212.66" height="38" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
-      <text id="6:30 PM" x="217" y="460" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">6:30 PM</text>
-      <rect id="container 15" x="437.66" y="446" width="212.67" height="38" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
-      <text id="8:00 PM" x="437.66" y="460" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">8:00 PM</text>
-      <rect id="footer" x="193" y="504" width="702" height="69" fill="rgba(242, 238, 235, 0.302)" stroke="#dbdee1" stroke-width="1" />
-      <text id="Pick a time to continue." x="217" y="543" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Pick a time to continue.</text>
-      <rect id="button" x="728.13" y="521" width="142.88" height="36" rx="12" fill="#007f34" opacity="0.5" />
-      <text id="Confirm booking" x="799.56" y="535" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Confirm booking</text>
-  </g>
-  <text id="Inline Feedback Widget label" x="64" y="2358" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Inline Feedback Widget</text>
-  <text id="feedback-widget id" x="64" y="2372" font-family="ui-monospace, monospace" font-size="12" fill="#737373">feedback-widget</text>
-  <g id="Inline Feedback Widget" transform="translate(64, 2390)">
+  <text id="Inline Feedback Widget label" x="64" y="1571" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Inline Feedback Widget</text>
+  <text id="feedback-widget id" x="64" y="1585" font-family="ui-monospace, monospace" font-size="12" fill="#737373">feedback-widget</text>
+  <g id="Inline Feedback Widget" transform="translate(64, 1603)">
     <rect id="container" x="0" y="0" width="1088" height="274.5" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="container 2" x="344" y="65" width="400" height="144.5" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
       <text id="How is this page working for you?" x="365" y="100" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">How is this page working for you?</text>
@@ -146,9 +87,9 @@
       <text id="😍" x="667.52" y="155" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="20">😍</text>
       <text id="Great" x="667.52" y="170" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="11">Great</text>
   </g>
-  <text id="Form with Error Summary label" x="64" y="2780.5" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Form with Error Summary</text>
-  <text id="form-error-summary id" x="64" y="2794.5" font-family="ui-monospace, monospace" font-size="12" fill="#737373">form-error-summary</text>
-  <g id="Form with Error Summary" transform="translate(64, 2812.5)">
+  <text id="Form with Error Summary label" x="64" y="1993.5" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Form with Error Summary</text>
+  <text id="form-error-summary id" x="64" y="2007.5" font-family="ui-monospace, monospace" font-size="12" fill="#737373">form-error-summary</text>
+  <g id="Form with Error Summary" transform="translate(64, 2025.5)">
     <rect id="container" x="0" y="0" width="1088" height="1182" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="container 2" x="312" y="65" width="464" height="1052" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
       <text id="Create a team account" x="345" y="118" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="20" font-weight="600" letter-spacing="-0.5">Create a team account</text>
@@ -191,9 +132,9 @@
       <text id="Nothing is checked until you submit — yo…" x="345" y="1064" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Nothing is checked until you submit — you will not be told your email is</text>
       <text id="wrong while you are still typing it." x="345" y="1080" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">wrong while you are still typing it.</text>
   </g>
-  <text id="Contact Sales Form label" x="64" y="4110.5" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Contact Sales Form</text>
-  <text id="contact-sales-form id" x="64" y="4124.5" font-family="ui-monospace, monospace" font-size="12" fill="#737373">contact-sales-form</text>
-  <g id="Contact Sales Form" transform="translate(64, 4142.5)">
+  <text id="Contact Sales Form label" x="64" y="3323.5" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Contact Sales Form</text>
+  <text id="contact-sales-form id" x="64" y="3337.5" font-family="ui-monospace, monospace" font-size="12" fill="#737373">contact-sales-form</text>
+  <g id="Contact Sales Form" transform="translate(64, 3355.5)">
     <rect id="container" x="0" y="0" width="1088" height="688" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="section" x="1" y="1" width="1086" height="686" fill="#fdfcf8" />
       <rect id="container 2" x="320" y="65" width="448" height="558" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
@@ -213,9 +154,9 @@
       <rect id="button" x="353" y="518" width="382" height="36" rx="10" fill="#007f34" />
       <text id="Request a call" x="544" y="532" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Request a call</text>
   </g>
-  <text id="Support Ticket Form label" x="64" y="4946.5" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Support Ticket Form</text>
-  <text id="support-ticket-form id" x="64" y="4960.5" font-family="ui-monospace, monospace" font-size="12" fill="#737373">support-ticket-form</text>
-  <g id="Support Ticket Form" transform="translate(64, 4978.5)">
+  <text id="Support Ticket Form label" x="64" y="4159.5" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Support Ticket Form</text>
+  <text id="support-ticket-form id" x="64" y="4173.5" font-family="ui-monospace, monospace" font-size="12" fill="#737373">support-ticket-form</text>
+  <g id="Support Ticket Form" transform="translate(64, 4191.5)">
     <rect id="container" x="0" y="0" width="1088" height="688" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="section" x="1" y="1" width="1086" height="686" fill="#fdfcf8" />
       <rect id="container 2" x="320" y="65" width="448" height="558" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />

@@ -99,6 +99,17 @@ export function ChatAttachmentTray({
   usedTokens = 21_400,
   className = '',
 }: ChatAttachmentTrayProps) {
+  /*
+    Per-instance prefix for every id this block emits.
+
+    The literals these replaced were a latent duplicate the moment the
+    block appeared twice on one document, and `aria-labelledby` on a
+    duplicated id resolves to the first match -- so the second copy was
+    labelled by the first copy's heading. Client component, so `useId` is
+    the right tool.
+  */
+  const uid = React.useId()
+
   const [files, setFiles] = React.useState(attachments)
   const [prompt, setPrompt] = React.useState('Summarise the renewal risks in these.')
 
@@ -201,11 +212,11 @@ export function ChatAttachmentTray({
         </ul>
       ) : null}
 
-      <label className="sr-only" htmlFor="chat-prompt">
+      <label className="sr-only" htmlFor={`${uid}-chat-prompt`}>
         Message
       </label>
       <textarea
-        id="chat-prompt"
+        id={`${uid}-chat-prompt`}
         rows={2}
         value={prompt}
         onChange={(event) => setPrompt(event.target.value)}

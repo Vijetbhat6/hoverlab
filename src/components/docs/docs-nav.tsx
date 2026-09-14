@@ -21,8 +21,15 @@ import { useHeaderHeight } from '@/hooks/use-header-height'
 const SECTIONS: Array<{ href: string; label: string; blurb: string }> = [
   { href: '/docs', label: 'Overview', blurb: 'What this is and how to install' },
   { href: '/docs/cli', label: 'CLI', blurb: 'npx hoverlab add, init, search' },
+  { href: '/docs/editor', label: 'Editor', blurb: 'VS Code, Cursor, Windsurf' },
   { href: '/docs/api', label: 'API', blurb: 'The public /api/v1 surface' },
-  { href: '/docs/mcp', label: 'MCP', blurb: 'Editor agents & Figma' },
+  // The only row that leaves the docs shell. MCP moved to a landing page
+  // of its own at /mcp because it is a thing people decide on rather than
+  // look up — but a reader working through the install surfaces still
+  // expects to find it between the API and the registry, so the row stays
+  // and points out. It never renders as active, since /mcp does not use
+  // this layout.
+  { href: '/mcp', label: 'MCP', blurb: 'Editor agents & Figma' },
   { href: '/docs/registry', label: 'Registry', blurb: 'npx shadcn add @hoverlab' },
   { href: '/docs/dna', label: 'Design DNA', blurb: 'Tokens and rules for AI tools' },
   { href: '/docs/skills', label: 'Skills', blurb: 'Teach your agent the catalog' },

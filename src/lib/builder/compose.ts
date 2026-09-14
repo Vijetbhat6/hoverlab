@@ -14,6 +14,13 @@
  * records exactly that. This module is that same act performed by the
  * reader instead of by us.
  *
+ * The first version of it chose sections and ordered them with two arrows,
+ * and `/compare` said so in the row where the competitors won: theirs drag,
+ * reorder, restyle and run. The operations below are the second version —
+ * `insertAt`, `duplicateAt` and `moveTo` are what a pointer released over a
+ * gap actually means, and the theme param is the "restyle" half. What has
+ * not changed is where the answer lives.
+ *
  * ── WHY THE COMPOSITION LIVES IN THE URL ────────────────────────────────
  *
  * A builder is the obvious place to require an account — it is where a
@@ -60,6 +67,17 @@ export const MAX_SECTIONS = 30
 
 /** Query parameter the composition travels in. */
 export const COMPOSITION_PARAM = 'b'
+
+/**
+ * Query parameter the theme travels in.
+ *
+ * Same encoding `/tools/shadcn` puts in its install URL — `encodeTheme` from
+ * `lib/shadcn-theme`. Deliberately opaque and deliberately not decoded in
+ * this file: the composer's job is blocks, and pulling the colour maths in
+ * here would make a module that is tested without a browser depend on
+ * oklch conversion. The page decodes it and hands the result back as CSS.
+ */
+export const THEME_PARAM = 't'
 
 export interface Composition {
   /** Block ids, in render order. Duplicates are allowed and meaningful. */
@@ -113,10 +131,29 @@ export function serializeComposition(ids: string[]): string {
   return ids.slice(0, MAX_SECTIONS).join(',')
 }
 
-/** The `/builder` href for a given list of blocks. */
-export function builderHref(ids: string[]): string {
-  if (ids.length === 0) return '/builder'
-  return `/builder?${COMPOSITION_PARAM}=${serializeComposition(ids)}`
+/**
+ * The `/builder` href for a given list of blocks, under a given theme.
+ *
+ * `theme` is threaded through every edit rather than being remembered
+ * anywhere, because the URL is the only place state lives. An edit that
+ * dropped it would silently reset the reader's colours the first time they
+ * moved a section — the exact bug a client-side store would not have, and
+ * the price of this design is paying attention to it at every call site.
+ */
+export function builderHref(ids: string[], theme?: string | null): string {
+  /*
+   * Assembled by hand rather than with URLSearchParams, which percent-
+   * encodes the comma separating the ids. `?b=hero-split%2Clogo-strip` is
+   * a correct URL and parses back identically, but the composition is meant
+   * to be read and edited in the address bar and pasted into a channel —
+   * an escape sequence where a comma should be costs that for nothing.
+   * Ids are `[a-z0-9-]` by catalog rule and the theme param is base64url,
+   * so neither half needs escaping.
+   */
+  const parts: string[] = []
+  if (ids.length > 0) parts.push(`${COMPOSITION_PARAM}=${serializeComposition(ids)}`)
+  if (theme) parts.push(`${THEME_PARAM}=${encodeURIComponent(theme)}`)
+  return parts.length ? `/builder?${parts.join('&')}` : '/builder'
 }
 
 /* ------------------------------------------------------------------ *
@@ -126,6 +163,11 @@ export function builderHref(ids: string[]): string {
  *  buttons can be plain links: every edit is "here is the next list",
  *  and the next list is a URL. That is what makes the builder work with
  *  JavaScript disabled and makes the back button an undo stack.
+ *
+ *  The drag surface calls these same functions and then navigates to the
+ *  result, which is why adding dragging did not add a second source of
+ *  truth: a drop is `moveTo`, and a `moveTo` is a URL. The pointer is a
+ *  faster way to name the next list, not a different kind of edit.
  * ------------------------------------------------------------------ */
 
 /** Insert `id` at the end. */
@@ -134,10 +176,37 @@ export function appendBlock(ids: string[], id: string): string[] {
   return [...ids, id]
 }
 
+/**
+ * Insert `id` at `index`, pushing whatever was there down.
+ *
+ * `index` is clamped rather than validated: the callers are a drop target
+ * and a keyboard handler, both of which compute positions from geometry
+ * and both of which can legitimately arrive at -1 or at length + 1 when
+ * the pointer is above the first row or below the last.
+ */
+export function insertAt(ids: string[], index: number, id: string): string[] {
+  if (ids.length >= MAX_SECTIONS) return ids
+  const at = Math.max(0, Math.min(index, ids.length))
+  return [...ids.slice(0, at), id, ...ids.slice(at)]
+}
+
 /** Remove whatever is at `index`. Out-of-range is a no-op, not a throw. */
 export function removeAt(ids: string[], index: number): string[] {
   if (index < 0 || index >= ids.length) return ids
   return [...ids.slice(0, index), ...ids.slice(index + 1)]
+}
+
+/**
+ * Copy the section at `index` and put the copy directly below it.
+ *
+ * Duplicates were always legal in a composition — two CTAs on one page is a
+ * real layout — but the only way to make one was to find the block in the
+ * picker again, which for a page with a section already in it is the one
+ * operation the reader has to search for something they can see.
+ */
+export function duplicateAt(ids: string[], index: number): string[] {
+  if (index < 0 || index >= ids.length) return ids
+  return insertAt(ids, index + 1, ids[index])
 }
 
 /**
@@ -154,6 +223,38 @@ export function moveAt(ids: string[], index: number, direction: -1 | 1): string[
   if (target < 0 || target >= ids.length) return ids
   const next = [...ids]
   ;[next[index], next[target]] = [next[target], next[index]]
+  return next
+}
+
+/**
+ * Move the section at `from` so that it ends up at index `to`.
+ *
+ * The arbitrary-distance sibling of `moveAt`, and what dragging needs:
+ * a pointer released over the seventh gap is not a sequence of swaps, and
+ * expressing it as one would put six intermediate compositions in the
+ * history stack for one gesture.
+ *
+ * `to` is where the section lands in the RESULT, not a gap index in the
+ * input. The two differ by one whenever a section moves downward — drop
+ * the first row into the gap before the fourth and it lands at index 2,
+ * because removing it first shifted everything below up. Callers that
+ * think in gaps convert once, at the call site, where the geometry is.
+ *
+ * Generic in the element, alone among the operations here, because the drag
+ * surface applies the same permutation twice: once to the ids that become
+ * the next URL, and once to a list of INDICES that reorders the
+ * server-rendered previews optimistically. Both have to be the identical
+ * transform or the outline and the canvas disagree about what just moved,
+ * and one function is how that is guaranteed rather than reviewed.
+ */
+export function moveTo<T>(items: T[], from: number, to: number): T[] {
+  if (from < 0 || from >= items.length) return items
+  const target = Math.max(0, Math.min(to, items.length - 1))
+  if (target === from) return items
+
+  const next = [...items]
+  const [moved] = next.splice(from, 1)
+  next.splice(target, 0, moved)
   return next
 }
 
@@ -209,6 +310,19 @@ export interface ComposeOptions {
   name?: string
   /** Absolute URL of the composition, recorded in the file's header. */
   shareUrl?: string
+  /**
+   * The command that installs the theme this layout was composed under,
+   * when it was composed under one.
+   *
+   * Recorded in the header rather than emitted into the component, because
+   * a shadcn theme is a token sheet and a token sheet belongs in
+   * `globals.css` — a page that carried its own colours would restyle
+   * itself against the app it landed in. The file that leaves here has to
+   * be able to say "and the colours came from somewhere else", or the
+   * reader installs the sections, sees the default palette, and concludes
+   * the builder lied about the preview.
+   */
+  themeCommand?: string
 }
 
 /**
@@ -241,6 +355,14 @@ export function composePageSource(ids: string[], options: ComposeOptions = {}): 
     ` *   ${installCommand(uniqueIds)}`,
     ...(deps.length
       ? [' *', ` * Packages the sections need: ${deps.join(', ')}`]
+      : []),
+    ...(options.themeCommand
+      ? [
+          ' *',
+          ' * Composed under a custom theme. The colours live in globals.css,',
+          ' * not in this file — install them too:',
+          ` *   ${options.themeCommand}`,
+        ]
       : []),
     ...(options.shareUrl ? [' *', ` * Rebuild or edit this layout: ${options.shareUrl}`] : []),
     ' */',

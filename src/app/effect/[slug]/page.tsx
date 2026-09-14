@@ -12,6 +12,7 @@ import { relatedBlocks } from '@/lib/related'
 import { ArtifactFacts } from '@/components/artifact-facts'
 import { StickyInstallBar } from '@/components/sticky-install-bar'
 import { CategoryProRail } from '@/components/category-pro-rail'
+import { VariationsRail } from '@/components/variations-rail'
 
 /**
  * Pre-generate EVERY effect page at build time.
@@ -247,6 +248,16 @@ export default async function EffectPage({ params }: PageProps) {
           />
         }
       />
+
+      {/*
+        The seven published variations of this effect, plus whatever the
+        reader has saved of it themselves. Mounted here rather than inside
+        <EffectDetail> for the same reason <ArtifactFacts> is: this is a
+        server component, and the point of it is that its contents are in the
+        statically generated HTML rather than assembled in a browser. See
+        components/variations-rail.tsx.
+      */}
+      <VariationsRail effect={effect} />
 
       {/*
         The install command, kept within reach on a long page — the same

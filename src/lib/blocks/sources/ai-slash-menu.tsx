@@ -134,7 +134,6 @@ const DEFAULT_ACTIONS: SlashAction[] = [
   },
 ]
 
-const LISTBOX_ID = 'slash-menu-listbox'
 
 export function AiSlashMenu({
   actions = DEFAULT_ACTIONS,
@@ -146,6 +145,17 @@ export function AiSlashMenu({
   initialText = 'Our support team replies to every ticket. /',
   className = '',
 }: AiSlashMenuProps) {
+  /*
+    Per-instance prefix for every id this block emits.
+
+    The literals these replaced were a latent duplicate the moment the
+    block appeared twice on one document, and `aria-labelledby` on a
+    duplicated id resolves to the first match -- so the second copy was
+    labelled by the first copy's heading. Client component, so `useId` is
+    the right tool.
+  */
+  const uid = React.useId()
+
   const [text, setText] = React.useState(initialText)
   const [triggerAt, setTriggerAt] = React.useState<number | null>(() =>
     initialText.endsWith('/') ? initialText.length - 1 : null,
@@ -232,11 +242,11 @@ export function AiSlashMenu({
         </div>
 
         <div className="relative mt-3">
-          <label htmlFor="slash-editor" className="sr-only">
+          <label htmlFor={`${uid}-slash-editor`} className="sr-only">
             Document body
           </label>
           <textarea
-            id="slash-editor"
+            id={`${uid}-slash-editor`}
             ref={editor}
             value={text}
             onChange={onChange}
@@ -244,7 +254,7 @@ export function AiSlashMenu({
             rows={3}
             role="combobox"
             aria-expanded={open}
-            aria-controls={LISTBOX_ID}
+            aria-controls={`${uid}-slash-menu-listbox`}
             aria-autocomplete="list"
             aria-activedescendant={
               open && matches[active] ? `slash-option-${matches[active].id}` : undefined
@@ -259,7 +269,7 @@ export function AiSlashMenu({
                 Not focusable, and no tabindex anywhere in here. The caret
                 stays in the textarea for the whole life of this popup.
               */
-              id={LISTBOX_ID}
+              id={`${uid}-slash-menu-listbox`}
               role="listbox"
               aria-label="AI actions"
               className="absolute inset-x-0 top-full z-10 mt-1 max-h-48 overflow-y-auto rounded-xl border border-border bg-popover p-1 shadow-lg"
@@ -276,7 +286,7 @@ export function AiSlashMenu({
                   return (
                     <div
                       key={action.id}
-                      id={`slash-option-${action.id}`}
+                      id={`${uid}-slash-option-${action.id}`}
                       role="option"
                       aria-selected={isActive}
                       /*

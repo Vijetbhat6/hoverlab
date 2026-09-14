@@ -125,8 +125,11 @@ export function OrderConfirmation({
             Delivering to
           </h2>
           <address className="mt-2 text-sm not-italic leading-relaxed text-muted-foreground">
-            {address.map((line) => (
-              <span key={line} className="block">
+            {/* Keyed by position: an address is a fixed list of display
+                lines, and two of them can legitimately read the same (or be
+                blank). Keying by content drops the duplicate. */}
+            {address.map((line, i) => (
+              <span key={i} className="block">
                 {line}
               </span>
             ))}

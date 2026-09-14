@@ -130,6 +130,8 @@ import { JobListingBoard } from './sources/job-listing-board'
 import { DocsLayout } from './sources/docs-layout'
 import { ApiEndpointCard } from './sources/api-endpoint-card'
 import { CodeTabsPanel } from './sources/code-tabs-panel'
+import { ResumeDocument } from './sources/resume-document'
+import { VideoPlayerShell } from './sources/video-player-shell'
 import { ChatMessageBranches } from './sources/chat-message-branches'
 import { AgentRunFailure } from './sources/agent-run-failure'
 import { ApprovalQueue } from './sources/approval-queue'
@@ -160,6 +162,7 @@ import { DashboardPageHeader } from './sources/dashboard-page-header'
 import { KanbanBoard } from './sources/kanban-board'
 import { ActivityTimeline } from './sources/activity-timeline'
 import { CalendarMonth } from './sources/calendar-month'
+import { EventAgendaGrid } from './sources/event-agenda-grid'
 
 import { DataTableSortable } from './sources/data-table-sortable'
 import { DataTableToolbar } from './sources/data-table-toolbar'
@@ -320,9 +323,12 @@ import { IntegrationDepthSplit } from './sources/integration-depth-split'
 import { HumanOversightSplit } from './sources/human-oversight-split'
 import { GroundingSplit } from './sources/grounding-split'
 import { CollectionStorySplit } from './sources/collection-story-split'
+import { ListingMapSplit } from './sources/listing-map-split'
+import { MenuCourseList } from './sources/menu-course-list'
 import { ReviewDistributionBand } from './sources/review-distribution-band'
 import { CustomerOutcomeBand } from './sources/customer-outcome-band'
 import { KpiSummaryBand } from './sources/kpi-summary-band'
+import { PriceTickerStrip } from './sources/price-ticker-strip'
 
 import { CrudCreateForm } from './sources/crud-create-form'
 import { CrudCreateModal } from './sources/crud-create-modal'
@@ -465,6 +471,8 @@ export const BLOCK_PREVIEWS: Record<string, React.ReactNode> = {
   'docs-layout': <DocsLayout />,
   'api-endpoint-card': <ApiEndpointCard />,
   'code-tabs-panel': <CodeTabsPanel />,
+  'resume-document': <ResumeDocument />,
+  'video-player-shell': <VideoPlayerShell />,
   'chat-message-branches': <ChatMessageBranches />,
   'chat-artifact-canvas': <ChatArtifactCanvas />,
   'agent-run-failure': <AgentRunFailure />,
@@ -499,6 +507,7 @@ export const BLOCK_PREVIEWS: Record<string, React.ReactNode> = {
   'kanban-board': <KanbanBoard />,
   'activity-timeline': <ActivityTimeline />,
   'calendar-month': <CalendarMonth />,
+  'event-agenda-grid': <EventAgendaGrid />,
   'dashboard-saved-views': <DashboardSavedViews />,
 
   'data-table-sortable': <DataTableSortable />,
@@ -634,9 +643,12 @@ export const BLOCK_PREVIEWS: Record<string, React.ReactNode> = {
   'human-oversight-split': <HumanOversightSplit />,
   'grounding-split': <GroundingSplit />,
   'collection-story-split': <CollectionStorySplit />,
+  'listing-map-split': <ListingMapSplit />,
+  'menu-course-list': <MenuCourseList />,
   'review-distribution-band': <ReviewDistributionBand />,
   'customer-outcome-band': <CustomerOutcomeBand />,
   'kpi-summary-band': <KpiSummaryBand />,
+  'price-ticker-strip': <PriceTickerStrip />,
   'crud-create-form': <CrudCreateForm />,
   'crud-create-modal': <CrudCreateModal />,
   'crud-create-drawer': <CrudCreateDrawer />,

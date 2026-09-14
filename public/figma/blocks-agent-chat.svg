@@ -62,8 +62,8 @@
       <text id="Why did churn spike in Q3?" x="650.2" y="39" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Why did churn spike in Q3?</text>
       <rect id="container 3" x="232" y="87" width="32" height="32" rx="16" fill="rgba(0, 128, 49, 0.102)" />
       <rect id="container 4" x="276" y="85" width="580" height="48.75" rx="16" fill="#ffffff" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Churn concentrated in ac" x="293" y="112" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Churn concentrated in ac</text>
-      <rect id="container 5" x="455.91" y="100" width="2" height="16" fill="#007f34" opacity="0.87" />
+      <text id="Churn" x="293" y="112" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Churn</text>
+      <rect id="container 5" x="337.23" y="100" width="2" height="16" fill="#007f34" opacity="0.97" />
       <text id="3 sources" x="276" y="155.75" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">3 sources</text>
       <rect id="link" x="276" y="175.75" width="580" height="38" rx="12" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="container 6" x="287" y="184.75" width="20" height="20" rx="10" fill="#f3f2ee" />

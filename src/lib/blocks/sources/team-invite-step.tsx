@@ -85,6 +85,17 @@ export function TeamInviteStep({
   onSkip,
   className = '',
 }: TeamInviteStepProps) {
+  /*
+    Per-instance prefix for every id this block emits.
+
+    The literals these replaced were a latent duplicate the moment the
+    block appeared twice on one document, and `aria-labelledby` on a
+    duplicated id resolves to the first match -- so the second copy was
+    labelled by the first copy's heading. Client component, so `useId` is
+    the right tool.
+  */
+  const uid = React.useId()
+
   const [emails, setEmails] = React.useState<string[]>(initialEmails)
   const [draft, setDraft] = React.useState('')
   const [role, setRole] = React.useState(roles[0]?.value ?? 'member')
@@ -120,20 +131,20 @@ export function TeamInviteStep({
 
   return (
     <section
-      aria-labelledby="team-invite-heading"
+      aria-labelledby={`${uid}-team-invite-heading`}
       className={`mx-auto w-full max-w-2xl px-4 py-16 sm:px-6 lg:px-8 ${className}`}
     >
       <div className="rounded-2xl border border-border bg-card p-6 sm:p-8">
         <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
           Step 3 of 4
         </p>
-        <h2 id="team-invite-heading" className="mt-2 text-xl font-bold tracking-tight text-foreground">
+        <h2 id={`${uid}-team-invite-heading`} className="mt-2 text-xl font-bold tracking-tight text-foreground">
           {heading}
         </h2>
         <p className="mt-1.5 text-sm text-muted-foreground">{description}</p>
 
         <div className="mt-6">
-          <label htmlFor="invite-emails" className="text-sm font-medium text-foreground">
+          <label htmlFor={`${uid}-invite-emails`} className="text-sm font-medium text-foreground">
             Email addresses
           </label>
 
@@ -166,7 +177,7 @@ export function TeamInviteStep({
             })}
 
             <input
-              id="invite-emails"
+              id={`${uid}-invite-emails`}
               type="text"
               inputMode="email"
               value={draft}
@@ -194,11 +205,11 @@ export function TeamInviteStep({
         </div>
 
         <div className="mt-5">
-          <label htmlFor="invite-role" className="text-sm font-medium text-foreground">
+          <label htmlFor={`${uid}-invite-role`} className="text-sm font-medium text-foreground">
             Invite everyone as
           </label>
           <select
-            id="invite-role"
+            id={`${uid}-invite-role`}
             value={role}
             onChange={(event) => setRole(event.target.value)}
             className="mt-2 h-9 w-full rounded-lg border border-field bg-background px-3 text-sm text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background sm:w-64"

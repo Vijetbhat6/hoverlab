@@ -85,6 +85,24 @@ function rampColor(index: number, count: number): string {
   return `color-mix(in oklab, var(--primary) ${100 - toward}%, var(--card))`
 }
 
+/*
+  Per-instance id, hashed from props that differ between instances.
+
+  A literal id is a latent duplicate the moment this block is rendered
+  twice on one document -- two pages on a catalog hub, or one page using
+  the section twice. `aria-labelledby` pointing at a duplicated id resolves
+  to whichever element comes first, so the second copy is announced with
+  the first copy's label. Server component, so no `useId`: hashing props
+  gives each instance its own target and stays stable across server and
+  client renders in a way a counter would not.
+*/
+function instanceId(...parts: (string | undefined)[]): string {
+  const text = parts.filter(Boolean).join('|')
+  let hash = 0
+  for (let i = 0; i < text.length; i++) hash = (Math.imul(hash, 31) + text.charCodeAt(i)) | 0
+  return (hash >>> 0).toString(36).slice(0, 6)
+}
+
 export function DonutBreakdown({
   heading = 'Where the bill went',
   description = 'Billing period to date, across every project in the workspace.',
@@ -94,6 +112,8 @@ export function DonutBreakdown({
   format = (value) => `$${value.toLocaleString('en-US')}`,
   className = '',
 }: DonutBreakdownProps) {
+  const uid = instanceId(heading, totalLabel)
+
   const sorted = [...slices].sort((a, b) => b.value - a.value)
   const head = sorted.slice(0, maxSlices)
   const tail = sorted.slice(maxSlices)
@@ -131,11 +151,11 @@ export function DonutBreakdown({
 
   return (
     <section
-      aria-labelledby="donut-breakdown-heading"
+      aria-labelledby={`donut-breakdown-heading-${uid}`}
       className={`mx-auto w-full max-w-3xl px-4 py-16 sm:px-6 lg:px-8 ${className}`}
     >
       <div className="rounded-2xl border border-border bg-card p-6 sm:p-8">
-        <h2 id="donut-breakdown-heading" className="text-lg font-semibold text-foreground">
+        <h2 id={`donut-breakdown-heading-${uid}`} className="text-lg font-semibold text-foreground">
           {heading}
         </h2>
         <p className="mt-1 text-sm text-muted-foreground">{description}</p>

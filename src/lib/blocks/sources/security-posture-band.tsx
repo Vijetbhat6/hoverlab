@@ -50,6 +50,24 @@ const METRICS: SecurityPostureBandMetric[] = [
   { label: "Access reviews", value: "Quarterly", detail: "All production access, logged and exportable." },
 ]
 
+/*
+  Per-instance id, hashed from the heading.
+
+  The literal id this replaced collided the moment a second page used this
+  block: `aria-labelledby` pointing at a duplicated id resolves to whichever
+  element is first in the document, so the second copy of the section was
+  announced with the first copy's heading. Server component, so there is no
+  `useId` available -- hashing the heading gives each instance its own target
+  without a hook, a prop or a counter, and stays stable across server and
+  client renders in a way a counter would not.
+*/
+function instanceId(...parts: (string | undefined)[]): string {
+  const text = parts.filter(Boolean).join('|')
+  let hash = 0
+  for (let i = 0; i < text.length; i++) hash = (Math.imul(hash, 31) + text.charCodeAt(i)) | 0
+  return (hash >>> 0).toString(36).slice(0, 6)
+}
+
 export function SecurityPostureBand({
   eyebrow = "Security",
   heading = "What a reviewer will ask, answered first",
@@ -57,15 +75,16 @@ export function SecurityPostureBand({
   metrics = METRICS,
   className,
 }: SecurityPostureBandProps) {
+  const headingId = `security-posture-band-heading-${instanceId(heading, eyebrow)}`
   return (
     <section
-      aria-labelledby="security-posture-band-heading"
+      aria-labelledby={headingId}
       className={`w-full bg-background px-6 py-16 sm:py-20 ${className ?? ''}`}
     >
       <div className="mx-auto max-w-5xl">
         <p className="text-sm font-medium text-primary">{eyebrow}</p>
         <h2
-          id="security-posture-band-heading"
+          id={headingId}
           className="mt-2 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl"
         >
           {heading}
