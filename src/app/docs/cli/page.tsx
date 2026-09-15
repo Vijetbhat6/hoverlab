@@ -183,7 +183,14 @@ npx hoverlab show pricing-tiers --deep`}</Snippet>
               <C key="f">-f, --framework &lt;t&gt;</C>,
               <>
                 Effects only. Blocks and above ship as React — see{' '}
-                <Link href="/docs/api#block-html" className="text-primary hover:underline">
+                {/* Underlined at rest, not just on hover: inside a sentence
+                    this is the WCAG 1.4.1 case, where colour alone cannot be
+                    the only thing marking a link. The standalone links in
+                    these tables are not in a text block and do not need it. */}
+                <Link
+                  href="/docs/api#block-html"
+                  className="text-primary underline underline-offset-2"
+                >
                   rendered HTML
                 </Link>{' '}
                 if you are not using it. Auto-detected from your project when omitted.

@@ -48,7 +48,16 @@ export function EffectStaticCard({ effect }: { effect: Effect }) {
         )}
         // The preview is decoration; the stretched link below is the real
         // control, so nothing in here should take focus or be announced.
+        //
+        // `inert` is the other half of that, and it was missing here while
+        // the four other decorative previews in this codebase already had
+        // it. `aria-hidden` takes the subtree out of the accessibility tree
+        // and leaves every control inside it in the tab order — and as the
+        // docblock above says, effect markup routinely ships buttons,
+        // <details> and anchors of its own. So a keyboard user on a hub
+        // tabbed through a screenful of controls that announced as nothing.
         aria-hidden="true"
+        inert
         dangerouslySetInnerHTML={{ __html: effect.html }}
       />
       <div className="border-t border-border/60 p-3">

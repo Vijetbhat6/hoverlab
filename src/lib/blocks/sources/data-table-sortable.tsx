@@ -202,7 +202,7 @@ export function DataTableSortable({
                       isSorted ? (direction === 'asc' ? 'ascending' : 'descending') : 'none'
                     }
                     className={`px-4 py-3 font-semibold ${
-                      col.align === 'right' ? 'text-right' : 'text-left'
+                      col.align === 'right' ? 'text-end' : 'text-start'
                     }`}
                   >
                     {col.sortable ? (
@@ -261,7 +261,7 @@ export function DataTableSortable({
                   {columns.map((col) => (
                     <td
                       key={col.key}
-                      className={`px-4 py-3 ${col.align === 'right' ? 'text-right tabular-nums' : ''}`}
+                      className={`px-4 py-3 ${col.align === 'right' ? 'text-end tabular-nums' : ''}`}
                     >
                       {col.render ? (
                         col.render(row)

@@ -130,6 +130,31 @@ interface SourceFile {
   rewritten". That fix travelled with the code into `jsx.mjs`.
 */
 
+/**
+ * Spacing tokens that stay physical, block → exact token → why.
+ *
+ * The same overlay shape as PART THREE's `PHYSICAL`, and for the same
+ * reason: the mapping is shared because "is padding-left the start edge"
+ * has one answer everywhere, while "is THIS element layout at all" is a
+ * question about our components and belongs here.
+ *
+ * It exists because PART THREE already ruled `phone-frame`'s bezel physical
+ * and PART ONE had no way to hear about it. The report said "run with
+ * --fix", and doing so would have rounded the volume rocker on the logical
+ * start edge while the ruling below pinned it to the handset's physical
+ * left — in RTL, a nub positioned on one edge and cornered on the other.
+ * A fix the tool recommends should not be able to break a decision the
+ * same tool recorded two hundred lines further down.
+ */
+const PHYSICAL_SPACING: Record<string, Record<string, string>> = {
+  'phone-frame': {
+    'rounded-l-sm':
+      "the outer corners of the volume rocker, which PHYSICAL pins to the handset's physical left edge. The radius has to round the same edge the nub is on.",
+    'rounded-r-sm':
+      "the outer corners of the power button, pinned likewise to the handset's physical right edge.",
+  },
+}
+
 interface Finding {
   file: string
   from: string
@@ -138,7 +163,14 @@ interface Finding {
 
 function processFile(file: SourceFile, fix: boolean): Finding[] {
   const source = readFileSync(file.path, 'utf8')
-  const { source: next, rewrites } = fixSpacing(source)
+  const ruled = PHYSICAL_SPACING[file.id] ?? {}
+  const { source: next, rewrites } = fixSpacing(source, {
+    keep: (token: string) => {
+      if (!ruled[token]) return false
+      keptSpacing.add(`${file.id} ${token}`)
+      return true
+    },
+  })
 
   if (fix && next !== source) writeFileSync(file.path, next, 'utf8')
 
@@ -147,6 +179,27 @@ function processFile(file: SourceFile, fix: boolean): Finding[] {
     from: rewrite.from,
     to: rewrite.to,
   }))
+}
+
+/** Rulings actually exercised this run, so a stale one can be reported. */
+const keptSpacing = new Set<string>()
+
+/**
+ * A ruling whose code has gone is a ruling waiting to excuse the wrong
+ * thing — the same guard PART THREE keeps over its own table.
+ */
+function auditSpacingRulings(): IconProblem[] {
+  return Object.entries(PHYSICAL_SPACING).flatMap(([block, tokens]) =>
+    Object.keys(tokens)
+      .filter((token) => !keptSpacing.has(`${block} ${token}`))
+      .map((token) => ({
+        block,
+        line: 1,
+        icon: token,
+        message:
+          'PHYSICAL_SPACING rules this token, but the block no longer uses it — delete the entry',
+      })),
+  )
 }
 /* ══ PART TWO: DIRECTIONAL ICONS ═════════════════════════════════════════
  *
@@ -524,5 +577,6 @@ const report = (label: string, found: IconProblem[], show: (token: string) => st
   process.exitCode = 1
 }
 
+report('spacing ruling', auditSpacingRulings(), (token) => token)
 report('icon', auditDirectionalIcons(), (icon) => `<${icon}>`)
 report('position', auditPositions(), (token) => token)

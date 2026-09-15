@@ -2,7 +2,7 @@
   "light": {
     "brand-hue": "160",
     "brand-chroma": "0.2",
-    "brand-light-l": "0.49",
+    "brand-light-l": "0.47",
     "brand-dark-l": "0.7",
     "brand-accent-chroma": "calc(var(--brand-chroma) * 0.1)",
     "app-font-sans": "var(--font-geist-sans, ui-sans-serif, system-ui, sans-serif)",

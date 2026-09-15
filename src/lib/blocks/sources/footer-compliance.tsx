@@ -239,7 +239,16 @@ export function FooterCompliance({
         </div>
 
         <div className="mt-8 flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-border pt-6">
-          <p className="text-xs text-muted-foreground">
+          {/*
+            `suppressHydrationWarning` because the year is read from a clock
+            and this is a client component, so it is read twice — once in
+            Node and once in the browser. For a few hours every New Year's
+            Eve those two are in different years, and without this React
+            treats the copyright line as a torn tree and rebuilds the
+            footer. The server's year is the one kept, which for a
+            copyright notice is the harmless side of the trade.
+          */}
+          <p className="text-xs text-muted-foreground" suppressHydrationWarning>
             © {new Date().getFullYear()} {region.entity}. All rights reserved.
           </p>
 

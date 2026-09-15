@@ -74,7 +74,10 @@ export default function DocsOverviewPage() {
             [
               <Link key="b" href="/blocks" className="font-medium text-primary hover:underline">Block</Link>,
               'One section — pricing table, FAQ, navbar, footer',
-              <>A React + Tailwind file, or its <Link href="/docs/api#block-html" className="text-primary hover:underline">rendered HTML</Link></>,
+              /* Underlined at rest — a link inside a sentence cannot be
+                 marked by colour alone (WCAG 1.4.1). The standalone links
+                 in the first column are not in a text block. */
+              <>A React + Tailwind file, or its <Link href="/docs/api#block-html" className="text-primary underline underline-offset-2">rendered HTML</Link></>,
             ],
             [
               <Link key="p" href="/pages" className="font-medium text-primary hover:underline">Page</Link>,

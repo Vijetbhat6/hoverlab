@@ -85,7 +85,7 @@
    * the user's choice to make about their own palette, and it is why the
    * default is the one we can vouch for.
    *
-   *   light primary  oklch(0.49 0.2 160)
+   *   light primary  oklch(0.47 0.2 160)
    *   light accent   oklch(0.94 0.02 160)
    *   dark  primary  oklch(0.7  0.18 160)
    *   dark  accent   oklch(0.26 0.02 160)
@@ -93,7 +93,24 @@
    */
   --brand-hue: 160;
   --brand-chroma: 0.2;
-  --brand-light-l: 0.49;
+  /*
+   * 0.47 rather than 0.49, and the two hundredths are a WCAG threshold.
+   *
+   * The failing pair was never `--primary` on a page — that measures 4.99
+   * and always did. It was `text-primary` on `bg-primary/10`, the tinted
+   * badge, where the text and its own 10% wash move together and the gap
+   * between them barely opens: 4.36 against a 4.5 floor for text under
+   * 18.66px. A live axe run found it on the hub badges; the same pairing is
+   * in eight catalog blocks, which is the half that matters, because those
+   * get copied into other people's projects and carry the defect with them.
+   *
+   * Darkening is free here. `--primary` in light theme is only ever dark-on
+   * -light text or a button ground under white, and both improve: the badge
+   * goes to 4.75, body text to 5.47, and white-on-primary from 5.01 to
+   * 5.49. Dark theme derives from `--brand-dark-l` and never had the
+   * problem (6.91), so it is untouched.
+   */
+  --brand-light-l: 0.47;
   --brand-dark-l: 0.7;
 
   /*

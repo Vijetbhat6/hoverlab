@@ -102,6 +102,30 @@ export function convertToken(token) {
 }
 
 /**
+ * Class-list tokens, with the quotes and braces of an interpolation as
+ * separators rather than as part of the token.
+ *
+ * Whitespace alone is not enough, and the gap it leaves is not a corner
+ * case — it is the ordinary way a conditional class gets written:
+ *
+ *     className={`px-4 ${col.align === 'right' ? 'text-right' : 'text-left'}`}
+ *
+ * A backtick literal swallows the quoted strings inside its `${…}`, so the
+ * whole interpolation arrives here as part of one body. Split on whitespace
+ * only and the tokens are `'text-right'` and `'text-left'` — quotes
+ * included, matching no mapping, converted never. The rule reported green
+ * on this line for as long as it has existed.
+ *
+ * The separator set is the one `classTokens` in check-rtl's position pass
+ * has always used. The two halves of the same rule disagreed about what a
+ * token was, and the mechanical half was the one getting it wrong.
+ *
+ * Capturing the separators keeps the split lossless, so a body with nothing
+ * to convert rebuilds byte-for-byte and tokens sit at the even indices.
+ */
+const TOKEN_SPLIT = /([\s'"`{}$]+)/
+
+/**
  * Rewrite every physical spacing utility in a source to its logical form.
  *
  * Returns the new text and the list of rewrites, so a caller can report
@@ -109,28 +133,53 @@ export function convertToken(token) {
  * copy and applied to the real one — offsets line up because `maskComments`
  * replaces character-for-character, and that is the whole reason it exists.
  *
+ * `keep(token, line)` is the caller's veto, for the few places where a
+ * physical utility is the correct answer and the logical one would draw
+ * something false. There is no such case in the mapping itself — the
+ * mapping is mechanical, which is the whole reason this rule ships a fix —
+ * but there are such cases in components, and a caller that knows its own
+ * components is the only thing in a position to say so. Without the veto
+ * the only way to protect one is to not run the fix at all.
+ *
+ * @param {string} source
+ * @param {{ keep?: (token: string, line: number) => boolean }} [options]
  * @returns {{ source: string, rewrites: { from: string, to: string, line: number }[] }}
  */
-export function fixSpacing(source) {
+export function fixSpacing(source, { keep } = {}) {
   const masked = maskComments(source)
   const rewrites = []
   let out = ''
   let cursor = 0
 
   for (const literal of stringLiterals(masked)) {
-    const body = source.slice(literal.start + 1, literal.end - 1)
+    const start = literal.start + 1
+    const body = source.slice(start, literal.end - 1)
 
     // Only strings that could be class lists. A string with no lowercase
     // letter cannot contain a utility.
     if (!/[a-z]/.test(body)) continue
 
     let changed = false
-    const tokens = body.split(/(\s+)/).map((token) => {
-      if (!token.trim()) return token
-      const converted = convertToken(token)
-      if (!converted) return token
+    let offset = 0
+
+    const tokens = body.split(TOKEN_SPLIT).map((part, index) => {
+      const at = offset
+      offset += part.length
+
+      // Odd indices are the captured separators, and rebuild verbatim.
+      if (index % 2 === 1 || !part) return part
+
+      const converted = convertToken(part)
+      if (!converted) return part
+
+      // The token's own line, not the literal's. A conditional class list
+      // spans four lines as often as not, and a fix reported against the
+      // opening backtick sends the reader to the wrong one.
+      const line = lineAt(source, start + at)
+      if (keep?.(part, line)) return part
+
       changed = true
-      rewrites.push({ from: token, to: converted, line: lineAt(source, literal.start) })
+      rewrites.push({ from: part, to: converted, line })
       return converted
     })
 

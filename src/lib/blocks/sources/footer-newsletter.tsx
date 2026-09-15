@@ -230,7 +230,14 @@ export function FooterNewsletter({
         </div>
 
         <div className="flex flex-col-reverse items-center gap-3 border-t border-border/60 py-6 sm:flex-row sm:justify-between">
-          <p className="text-xs text-muted-foreground">
+          {/*
+            `suppressHydrationWarning` for the `year` default, which reads a
+            clock inside a client component and so reads it twice — once in
+            Node, once in the browser. They disagree for a few hours every
+            New Year's Eve, and React answers a torn text node by rebuilding
+            the subtree. A caller that passes `year` never relies on this.
+          */}
+          <p className="text-xs text-muted-foreground" suppressHydrationWarning>
             © {year} {brand}, Inc.
           </p>
           <ul className="flex gap-5">

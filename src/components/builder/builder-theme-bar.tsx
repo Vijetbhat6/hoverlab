@@ -76,13 +76,26 @@ export function BuilderThemeBar({
    */
   const serverParam = theme ? encodeTheme(theme) : null
   const [appliedParam, setAppliedParam] = React.useState(serverParam)
+
+  /*
+   * Whether a theme is in effect at all — tracked on its own rather than
+   * derived from `draft`.
+   *
+   * `draft` always holds a complete ThemeState, because the sliders need
+   * numbers to sit on. So it cannot answer "has the reader chosen a theme",
+   * and the value it seeds from when nobody has — DEFAULT_THEME — is
+   * byte-identical to the Violet preset. Asking `draft` therefore lit the
+   * Violet chip and set `aria-checked` on it on a page with no theme
+   * applied, while the canvas below painted itself in the site's own green.
+   * The bar named a colour the sections were visibly not.
+   */
+  const [themed, setThemed] = React.useState(theme !== null)
+
   if (appliedParam !== serverParam) {
     setAppliedParam(serverParam)
     setDraft(theme ?? DEFAULT_THEME)
+    setThemed(theme !== null)
   }
-
-  const draftParam = React.useMemo(() => encodeTheme(draft), [draft])
-  const isDefault = draftParam === encodeTheme(DEFAULT_THEME)
 
   /*
    * One timer, cleared on every change and on unmount. Without the cleanup
@@ -99,14 +112,23 @@ export function BuilderThemeBar({
 
   function schedule(next: ThemeState) {
     setDraft(next)
+    setThemed(true)
     if (timer.current) clearTimeout(timer.current)
     timer.current = setTimeout(() => {
-      const param = encodeTheme(next)
-      // The default theme is the absence of a theme, not a theme called
-      // default: `?t=` for it would be a parameter that changes nothing and
-      // makes every shared link look customised.
-      const isDefaultNext = param === encodeTheme(DEFAULT_THEME)
-      router.push(builderHref(ids, isDefaultNext ? null : param), { scroll: false })
+      /*
+       * Always emit the parameter. This used to collapse a theme equal to
+       * DEFAULT_THEME down to `null`, reasoning that "`?t=` for it would be
+       * a parameter that changes nothing" — but that is only true if an
+       * unthemed canvas looks like DEFAULT_THEME, and it does not. Unthemed
+       * sections read the SITE's tokens, which are green; DEFAULT_THEME is
+       * hue 250. So the collapse made the Violet preset unreachable:
+       * clicking it resolved to "no theme" and the canvas stayed green,
+       * which is why it is the one preset that never appeared to work.
+       *
+       * Reset is now the only thing that clears `?t=`, which is what a
+       * reader means by it anyway.
+       */
+      router.push(builderHref(ids, encodeTheme(next)), { scroll: false })
     }, COMMIT_DELAY)
   }
 
@@ -133,6 +155,7 @@ export function BuilderThemeBar({
         <div role="radiogroup" aria-label="Theme preset" className="flex flex-wrap gap-1.5">
           {THEME_PRESETS.map((preset) => {
             const selected =
+              themed &&
               draft.hue === preset.state.hue &&
               draft.chroma === preset.state.chroma &&
               draft.radius === preset.state.radius &&
@@ -164,11 +187,12 @@ export function BuilderThemeBar({
           })}
         </div>
 
-        {!isDefault && (
+        {themed && (
           <button
             type="button"
             onClick={() => {
               setDraft(DEFAULT_THEME)
+              setThemed(false)
               if (timer.current) clearTimeout(timer.current)
               router.push(builderHref(ids, null), { scroll: false })
             }}
@@ -180,9 +204,9 @@ export function BuilderThemeBar({
         )}
 
         <span className="ml-auto text-xs text-muted-foreground">
-          {isDefault
-            ? 'The catalog default. Every section reads its colours from tokens.'
-            : 'Applied to every section, and exported as CSS below.'}
+          {themed
+            ? 'Applied to every section, and exported as CSS below.'
+            : 'The catalog default. Every section reads its colours from tokens.'}
         </span>
       </div>
 

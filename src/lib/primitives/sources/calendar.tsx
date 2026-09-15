@@ -36,6 +36,22 @@
  * Dates are compared by local midnight, never by `getTime()` on the values
  * handed in. A `Date` is an instant, two of them on the same calendar day
  * are not equal, and `sameDay` is the only comparison this file trusts.
+ *
+ * ── THE CLOCK IS NOT AVAILABLE DURING RENDER ─────────────────────────────
+ *
+ * `new Date()` in the body of this component is a hydration bug, and it was
+ * one here: the server ran in UTC, the reader's browser did not, and for
+ * the hours between the two midnights they were on different DAYS. The
+ * server marked one cell `aria-current="date"` and put the dot under it,
+ * the browser marked another, and React resolved the disagreement by
+ * throwing the whole grid away and rebuilding it client-side — logging
+ * error #418 each time. It reached production on five primitives and the
+ * three catalog pages that preview them, because every check we own runs in
+ * one process and one timezone, where the two halves cannot disagree.
+ *
+ * So the clock is read in an effect, after mount, the same bargain
+ * `<RelativeTime>` makes. Before it arrives `today` is null and nothing is
+ * marked current — `sameDay` is null-safe, which is what makes that cheap.
  */
 
 import * as React from 'react'
@@ -104,6 +120,16 @@ function sameMonth(a: Date, b: Date): boolean {
   return a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth()
 }
 
+/**
+ * The month a server-rendered calendar shows before it has a clock.
+ *
+ * Deliberately a fixed instant rather than `new Date()`: its whole job is
+ * to be the same value in Node and in the browser for the one render where
+ * they have to agree. Which month it is does not matter — the grid is six
+ * rows whatever it shows, so swapping it for the real one costs no height.
+ */
+const SSR_MONTH = new Date(2024, 0, 1)
+
 /** The grid always starts on the week containing the 1st. */
 function gridStart(month: Date, weekStartsOn: 0 | 1): Date {
   const first = new Date(month.getFullYear(), month.getMonth(), 1)
@@ -124,18 +150,51 @@ export function Calendar({
   label = 'Calendar',
   className = '',
 }: CalendarProps) {
-  const today = React.useMemo(() => startOfDay(new Date()), [])
+  /*
+   * The reader's today — null until mounted. See the header note on the
+   * clock; `sameDay` already returns false for a null, so the two places
+   * that mark the current day simply mark nothing until it arrives.
+   */
+  const [today, setToday] = React.useState<Date | null>(null)
+  React.useEffect(() => setToday(startOfDay(new Date())), [])
 
-  /* Uncontrolled month, used only while `month` is absent. Seeded from the
-     selection so opening on a chosen date shows that date's month. */
-  const [ownMonth, setOwnMonth] = React.useState<Date>(() =>
-    startOfDay(month ?? value ?? today),
-  )
-  const shownMonth = month ?? ownMonth
+  /* What the caller told us to open on. Both orders are kept: the month
+     follows `month` first, the focus follows `value` first, which is what
+     makes a calendar handed both open on the month but focus the day. */
+  const monthSeed = React.useMemo(() => {
+    const given = month ?? value
+    return given ? startOfDay(given) : null
+  }, [month, value])
 
-  const [focused, setFocused] = React.useState<Date>(() =>
-    startOfDay(value ?? month ?? today),
-  )
+  const focusSeed = React.useMemo(() => {
+    const given = value ?? month
+    return given ? startOfDay(given) : null
+  }, [value, month])
+
+  /*
+   * The day everything falls back to, and the only line here that is a
+   * compromise.
+   *
+   * A caller that names neither `month` nor `value` is asking for "the
+   * current month", and during server rendering nobody can answer that:
+   * the answer depends on a clock in a timezone the server has not been
+   * told about. So this renders `SSR_MONTH` on the server, hydrates to the
+   * same `SSR_MONTH` in the browser — they agree, which is the point — and
+   * the effect above then moves it to the real month. One extra render,
+   * and no torn grid.
+   *
+   * Callers who pass `month` or `value` — every one in this catalog — never
+   * reach the fallback at all.
+   */
+  const anchor = monthSeed ?? today ?? SSR_MONTH
+
+  /* Uncontrolled month, used only while `month` is absent. Null until the
+     reader pages away from the anchor. */
+  const [ownMonth, setOwnMonth] = React.useState<Date | null>(null)
+  const shownMonth = month ?? ownMonth ?? anchor
+
+  const [ownFocus, setOwnFocus] = React.useState<Date | null>(null)
+  const focused = ownFocus ?? focusSeed ?? today ?? SSR_MONTH
 
   const gridRef = React.useRef<HTMLDivElement>(null)
   /* See the header: without this, the effect below steals focus on mount. */
@@ -162,7 +221,7 @@ export function Calendar({
      edge of a month is how the keyboard reaches the next one. */
   const moveFocus = React.useCallback(
     (next: Date) => {
-      setFocused(next)
+      setOwnFocus(next)
       if (!sameMonth(next, shownMonth)) setMonth(next)
     },
     [shownMonth, setMonth],

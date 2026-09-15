@@ -201,7 +201,7 @@ export function TimePicker({
       >
         <Clock className="h-4 w-4 shrink-0 text-muted-foreground" aria-hidden />
         <span
-          className={`flex-1 text-left ${value === null ? 'text-muted-foreground' : 'text-foreground'}`}
+          className={`flex-1 text-start ${value === null ? 'text-muted-foreground' : 'text-foreground'}`}
         >
           {value === null ? placeholder : formatMinutes(value, hour12)}
         </span>

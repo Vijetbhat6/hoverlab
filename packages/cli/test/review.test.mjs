@@ -136,6 +136,61 @@ describe('physical spacing', () => {
     const file = { path: 'a.css', source: '.x { }' }
     assert.deepEqual(fixSource(file).rewrites, [])
   })
+
+  test('sees a class quoted inside a template interpolation', () => {
+    /*
+      The blind spot that made this rule report green on the commonest way
+      there is to write a conditional class. The backtick literal swallows
+      the quoted strings inside `${…}`, so splitting the body on whitespace
+      alone yields `'text-right'` — quotes and all — which matches no
+      mapping. Two real misalignments sat in the catalog behind this.
+    */
+    const source = [
+      'const cls = `px-4 ${',
+      "  col.align === 'right' ? 'text-right' : 'text-left'",
+      '}`',
+    ].join('\n')
+
+    const { source: fixed, rewrites } = fixSpacing(source)
+    assert.deepEqual(
+      rewrites.map((r) => `${r.from}->${r.to}`),
+      ['text-right->text-end', 'text-left->text-start'],
+    )
+    assert.match(fixed, /'text-end' : 'text-start'/)
+  })
+
+  test('reports the line the token is on, not the one the literal opens on', () => {
+    const source = ['const cls = `px-4', '  py-2', "  pl-4`"].join('\n')
+    const [rewrite] = fixSpacing(source).rewrites
+    assert.equal(rewrite.line, 3)
+  })
+
+  test('rebuilds a body it changed elsewhere byte-for-byte', () => {
+    // The separator capture is what makes the split lossless. Without it a
+    // fix to one token reflows the whitespace of every other.
+    const source = 'const cls = `pl-4  ${a}\\n\\tflex ${b ? "x" : "y"}`\n'
+    const { source: fixed } = fixSpacing(source)
+    assert.equal(fixed, source.replace('pl-4', 'ps-4'))
+  })
+
+  test('a caller can veto a token that must stay physical', () => {
+    const source = 'const cls = "rounded-l-sm pl-4"\n'
+    const { source: fixed, rewrites } = fixSpacing(source, {
+      keep: (token) => token === 'rounded-l-sm',
+    })
+    assert.equal(fixed, 'const cls = "rounded-l-sm ps-4"\n')
+    assert.deepEqual(
+      rewrites.map((r) => r.from),
+      ['pl-4'],
+    )
+  })
+
+  test('a veto that matches everything leaves the source untouched', () => {
+    const source = 'const cls = "pl-4 text-left"\n'
+    const { source: fixed, rewrites } = fixSpacing(source, { keep: () => true })
+    assert.equal(fixed, source)
+    assert.deepEqual(rewrites, [])
+  })
 })
 
 /* ------------------------------------------------------------------ *

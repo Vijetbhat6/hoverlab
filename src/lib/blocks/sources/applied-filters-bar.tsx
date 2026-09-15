@@ -191,8 +191,8 @@ export function AppliedFiltersBar({
                   <span
                     className={`inline-flex items-center gap-1.5 rounded-lg py-1 ps-2.5 text-sm ${
                       filter.locked
-                        ? 'pr-2.5 bg-muted/60 text-muted-foreground'
-                        : 'pr-1 bg-muted text-foreground'
+                        ? 'pe-2.5 bg-muted/60 text-muted-foreground'
+                        : 'pe-1 bg-muted text-foreground'
                     }`}
                   >
                     <span className="text-muted-foreground">{filter.field}:</span>
