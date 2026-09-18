@@ -249,6 +249,7 @@ export function EffectCard({ effect }: EffectCardProps) {
           <h3 className="min-w-0 truncate text-sm font-semibold tracking-tight">
             <Link
               href={`/effect/${effect.id}`}
+              prefetch={false}
               className="rounded-sm transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
             >
               {effect.name}

@@ -115,11 +115,19 @@ export async function proxy(req: NextRequest) {
 }
 
 export const config = {
-  // Run proxy on everything EXCEPT:
-  //  - API routes (they handle their own auth)
-  //  - Next internals (_next/static, _next/image, favicon, etc.)
-  //  - static file extensions
+  // Run proxy ONLY on the paths it can act on: PROTECTED_PREFIXES and
+  // AUTH_PATHS. Keep this list in step with both.
+  //
+  // It used to match every page, which made each of ~2,000 static catalog
+  // pages — and every <Link> prefetch of one — a function invocation that
+  // did nothing but return NextResponse.next(). On Vercel Hobby that was
+  // 2.6M invocations and ~14h of CPU in a month, and the project was paused.
   matcher: [
-    '/((?!api|_next/static|_next/image|favicon.ico|robots.txt|sitemap.xml|logo.svg).*)',
+    '/',
+    '/login',
+    '/signup',
+    '/account/:path*',
+    '/playground/:path*',
+    '/collections/:path*',
   ],
 }

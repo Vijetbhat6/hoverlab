@@ -48,6 +48,7 @@ export function PrimitiveCard({ primitive }: { primitive: PrimitiveMeta }) {
         <h3 className="font-semibold leading-snug tracking-tight">
           <Link
             href={`/primitive/${primitive.id}`}
+            prefetch={false}
             className="outline-none after:absolute after:inset-0 after:content-[''] focus-visible:underline"
           >
             {primitive.name}
@@ -62,6 +63,7 @@ export function PrimitiveCard({ primitive }: { primitive: PrimitiveMeta }) {
           {/* Relative to the card's link overlay, so it stays clickable. */}
           <Link
             href={`/primitives/${primitiveCategorySlug(primitive.category)}`}
+            prefetch={false}
             className="relative z-10 font-medium transition-colors hover:text-foreground"
           >
             {primitive.category}

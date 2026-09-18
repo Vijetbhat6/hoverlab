@@ -78,6 +78,7 @@ export function TemplateCard({ template }: { template: TemplateMeta }) {
         <h3 className="font-semibold leading-snug tracking-tight">
           <Link
             href={`/template/${template.id}`}
+            prefetch={false}
             className="outline-none after:absolute after:inset-0 after:content-[''] focus-visible:underline"
           >
             {template.name}

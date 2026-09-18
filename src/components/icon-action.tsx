@@ -93,7 +93,7 @@ export function IconAction({
     <Tooltip>
       <TooltipTrigger asChild>
         {href ? (
-          <Link href={href} className={classes} aria-label={label}>
+          <Link href={href} prefetch={false} className={classes} aria-label={label}>
             {body}
           </Link>
         ) : (

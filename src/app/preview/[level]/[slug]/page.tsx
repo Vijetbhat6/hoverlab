@@ -63,10 +63,16 @@ export const metadata: Metadata = {
 
 interface PageProps {
   params: Promise<{ level: string; slug: string }>
-  searchParams: Promise<{ dir?: string }>
 }
 
-export default async function ArtifactPreviewFrame({ params, searchParams }: PageProps) {
+/*
+ * Runs while the parser is still inside <main>, so the attribute is set
+ * before the first paint and before hydration — no LTR flash, and nothing
+ * on the server has to read the query.
+ */
+const APPLY_DIR_FROM_QUERY = `(function(){try{if(new URLSearchParams(location.search).get('dir')==='rtl'){document.currentScript.parentElement.setAttribute('dir','rtl')}}catch(e){}})()`
+
+export default async function ArtifactPreviewFrame({ params }: PageProps) {
   const { level, slug } = await params
   if (!isPreviewLevel(level)) notFound()
 
@@ -90,10 +96,15 @@ export default async function ArtifactPreviewFrame({ params, searchParams }: Pag
    *
    * `dynamicParams = false` prerenders the LTR form; the RTL variant is the
    * same page with one attribute, so it costs nothing to serve.
+   *
+   * The query is read in the browser, not here. Awaiting `searchParams`
+   * opts the route out of static rendering, which turned all ~430 of these
+   * prerendered frames into a function call on every detail-page view —
+   * part of what paused the Vercel Hobby project in Sep 2026. The inline
+   * script sets `dir` on this <main> during parsing; React never renders a
+   * `dir` prop here, so it never touches the attribute, and
+   * suppressHydrationWarning covers the one attribute it did not render.
    */
-  const { dir } = await searchParams
-  const rtl = dir === 'rtl'
-
   return (
     /*
      * `min-h-screen` and the background token, because the frame is its own
@@ -101,7 +112,8 @@ export default async function ArtifactPreviewFrame({ params, searchParams }: Pag
      * white and the dark theme looks broken at exactly the width someone
      * switched to in order to check it.
      */
-    <main dir={rtl ? 'rtl' : undefined} className="min-h-screen bg-background text-foreground">
+    <main suppressHydrationWarning className="min-h-screen bg-background text-foreground">
+      <script dangerouslySetInnerHTML={{ __html: APPLY_DIR_FROM_QUERY }} />
       {level === 'primitive' ? (
         <PrimitivePreview componentKey={artifact.previewComponent} />
       ) : level === 'block' ? (

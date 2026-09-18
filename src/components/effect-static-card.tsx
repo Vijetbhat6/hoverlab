@@ -65,6 +65,7 @@ export function EffectStaticCard({ effect }: { effect: Effect }) {
           <h2 className="truncate text-sm font-semibold group-hover:text-primary">
             <Link
               href={`/effect/${effect.id}`}
+              prefetch={false}
               className="after:absolute after:inset-0 after:content-['']"
             >
               {effect.name}

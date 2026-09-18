@@ -4,6 +4,10 @@ import { ogCard, OG_SIZE, OG_CONTENT_TYPE } from '@/lib/og-card'
 /** Share card for /page/[slug]. */
 
 export const runtime = 'nodejs'
+// Draw each card once, on first request, then serve it from the CDN. Left
+// dynamic, every crawler and link-unfurl re-rendered it in a function.
+export const dynamic = 'force-static'
+export const revalidate = false
 export const alt = 'Hoverlab page'
 export const size = OG_SIZE
 export const contentType = OG_CONTENT_TYPE

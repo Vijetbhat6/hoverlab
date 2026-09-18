@@ -37,6 +37,7 @@ export function BlockCard({ block }: { block: BlockMeta }) {
         <h3 className="font-semibold leading-snug tracking-tight">
           <Link
             href={`/block/${block.id}`}
+            prefetch={false}
             className="outline-none after:absolute after:inset-0 after:content-[''] focus-visible:underline"
           >
             {block.name}
@@ -51,6 +52,7 @@ export function BlockCard({ block }: { block: BlockMeta }) {
           {/* Relative to the card's link overlay, so it stays clickable. */}
           <Link
             href={`/blocks/${blockCategorySlug(block.category)}`}
+            prefetch={false}
             className="relative z-10 font-medium transition-colors hover:text-foreground"
           >
             {block.category}

@@ -52,6 +52,7 @@ export function PageCard({ page }: { page: PageMeta }) {
         <h3 className="font-semibold leading-snug tracking-tight">
           <Link
             href={`/page/${page.id}`}
+            prefetch={false}
             className="outline-none after:absolute after:inset-0 after:content-[''] focus-visible:underline"
           >
             {page.name}
