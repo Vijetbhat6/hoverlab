@@ -1,0 +1,17 @@
+{
+  "name": "hoverlab",
+  "owner": {
+    "name": "Vijetbhat6",
+    "url": "https://github.com/Vijetbhat6"
+  },
+  "description": "Hoverlab for Claude Code: a UI catalog the agent can search and install from, instead of writing components from memory.",
+  "plugins": [
+    {
+      "name": "hoverlab",
+      "source": "./plugins/hoverlab",
+      "description": "Search and install CSS effects, React blocks, pages and whole templates as source you own, and review your components for accessibility, right-to-left, motion and layout defects.",
+      "category": "development",
+      "keywords": ["ui", "components", "tailwind", "react", "design-system", "mcp", "accessibility"]
+    }
+  ]
+}

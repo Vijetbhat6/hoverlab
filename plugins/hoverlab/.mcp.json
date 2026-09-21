@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "hoverlab": {
+      "command": "npx",
+      "args": ["-y", "hoverlab", "mcp"]
+    }
+  }
+}

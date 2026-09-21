@@ -1,0 +1,14 @@
+{
+  "name": "hoverlab",
+  "displayName": "Hoverlab",
+  "description": "Search and install CSS effects, React blocks, pages and whole templates as source you own, and review your components for accessibility, right-to-left, motion and layout defects.",
+  "version": "0.4.0",
+  "author": {
+    "name": "Vijetbhat6",
+    "url": "https://github.com/Vijetbhat6"
+  },
+  "homepage": "https://hoverlab5.netlify.app",
+  "repository": "https://github.com/Vijetbhat6/hoverlab",
+  "license": "MIT",
+  "keywords": ["ui", "components", "tailwind", "react", "design-system", "mcp", "accessibility"]
+}
