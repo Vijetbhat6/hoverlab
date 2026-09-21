@@ -12,6 +12,8 @@ import { readFile, access } from 'node:fs/promises'
 import { constants } from 'node:fs'
 import path from 'node:path'
 
+import { resolveAtAlias } from './project.mjs'
+
 async function exists(filePath) {
   try {
     await access(filePath, constants.F_OK)
@@ -109,6 +111,26 @@ export async function detectFramework(cwd = process.cwd()) {
  */
 export async function detectArtifactRoot(cwd = process.cwd()) {
   const root = (await findProjectRoot(cwd)) ?? path.resolve(cwd)
+
+  /*
+    The project's own answer beats a guess. Every page imports
+    `@/components/<block>`, so the directory `@/*` points at IS where
+    `components/` must land — read from tsconfig rather than inferred from
+    whether a `src/` folder happens to exist. The two disagree in exactly the
+    projects that hurt: a Vite app with `src/` and `@/* → ./src/*`, or a
+    Next app that keeps `app/` at the root but aliases `@/*` to `./src/*`.
+    Only trusted when it stays inside the project.
+  */
+  const alias = await resolveAtAlias(cwd)
+  if (alias) {
+    const relative = path.relative(root, alias.dir)
+    if (!relative.startsWith('..') && !path.isAbsolute(relative)) {
+      return {
+        root: alias.dir,
+        reason: `rooted at ${relative || 'the project root'}, where "@/*" points (${alias.from})`,
+      }
+    }
+  }
 
   for (const marker of ['src/app', 'src/components', 'src/pages']) {
     if (await exists(path.join(root, marker))) {

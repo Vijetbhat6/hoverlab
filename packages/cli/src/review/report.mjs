@@ -167,6 +167,166 @@ export function renderGitHub(findings) {
     .join('\n')
 }
 
+/** The first line of every markdown report; the sticky-comment poster finds its comment by it. */
+export const MARKDOWN_MARKER = '<!-- hoverlab-review -->'
+
+/** How many findings a comment lists before it stops and says so. */
+const MARKDOWN_LIMITS = { violation: 40, advisory: 20 }
+
+/**
+ * Escape prose for GitHub-flavoured markdown.
+ *
+ * Findings quote source. A message ending `: <button class="…">` is raw
+ * HTML to a markdown renderer, which swallows the tag and leaves a comment
+ * that says "unnamed control:" and nothing after it — the one part that
+ * tells the reader which control. So markup characters are escaped, and
+ * backtick spans the rules already write are kept as code rather than
+ * escaped into visible backticks.
+ */
+export function escapeMarkdown(text) {
+  return String(text)
+    .split(/(`[^`\n]+`)/)
+    .map((part, index) =>
+      index % 2 === 1
+        ? part
+        : part.replace(/[\\<>&*_[\]|]/g, (char) =>
+            char === '<' ? '&lt;' : char === '>' ? '&gt;' : char === '&' ? '&amp;' : `\\${char}`,
+          ),
+    )
+    .join('')
+}
+
+/**
+ * A finding's message, with the quoted tag put in a code span.
+ *
+ * The a11y rules end a message with `: <tag …>` — the first 80 characters
+ * of the offending tag. That suffix is source, not prose, so it goes in
+ * code; a code span also survives the class names inside it (`[&>svg]:size-4`,
+ * `*:p-2`) that escaping would otherwise litter with backslashes.
+ */
+function messageMarkdown(message) {
+  const suffix = message.lastIndexOf(': <')
+  if (suffix === -1) return escapeMarkdown(message)
+  const tag = message.slice(suffix + 2).replace(/`/g, "'")
+  return `${escapeMarkdown(message.slice(0, suffix))}: \`${tag}\``
+}
+
+/**
+ * The report as a pull-request comment.
+ *
+ * WHY ITS OWN RENDERER
+ *
+ * The terminal report is laid out for 80 columns and colour, and the
+ * annotation format vanishes once a check is re-run. A pull request wants
+ * something else: one comment, updated in place on every push, that says at
+ * the top whether the change is safe to merge and lists what is wrong
+ * underneath. It is also the only surface where the reader cannot re-run
+ * anything, so it says what was reviewed and what was never looked at.
+ *
+ * THE MARKER
+ *
+ * The first line is a hidden HTML comment. It is how the poster finds its
+ * own previous comment to edit rather than adding a new one per push, and
+ * it is on the first line so that "starts with the marker" is a check a
+ * human comment that merely quotes it will not pass.
+ *
+ * THERE IS NO TIMESTAMP AND NO COMMIT SHA
+ *
+ * Two runs over the same findings must produce the same bytes, so the
+ * poster can see nothing changed and skip the write. A comment that
+ * carried a sha would be edited on every push even when the review was
+ * identical, which is noise the reader learns to ignore.
+ *
+ * @param {object[]} findings
+ * @param {object} [options]
+ * @param {string} [options.scope]     what was reviewed, in words
+ * @param {number} [options.fileCount] files that were read
+ * @param {string} [options.blobBase]  `https://github.com/o/r/blob/<sha>`; makes locations links
+ */
+export function renderMarkdown(findings, options = {}) {
+  const { scope = 'this change', fileCount, blobBase } = options
+  const violations = findings.filter((f) => f.severity === 'violation')
+  const advisories = findings.filter((f) => f.severity !== 'violation')
+  const seen = coverage()
+  const plural = (n, one, many) => `${n} ${n === 1 ? one : many}`
+
+  const lines = [MARKDOWN_MARKER, '## Hoverlab design review', '']
+
+  const reviewed =
+    fileCount === undefined ? '' : ` (${plural(fileCount, 'file', 'files')} read)`
+
+  if (findings.length === 0) {
+    lines.push(
+      fileCount === 0
+        ? `Nothing to review in ${scope}: no component files changed.`
+        : `**No design defects found** in ${scope}${reviewed}.`,
+    )
+  } else if (violations.length === 0) {
+    lines.push(
+      `**No violations.** ${plural(advisories.length, 'advisory', 'advisories')} ` +
+        `for a human to look at in ${scope}${reviewed} — questions, not defects, and they never fail the check.`,
+    )
+  } else {
+    lines.push(
+      `**${plural(violations.length, 'violation', 'violations')}**` +
+        (advisories.length ? ` and ${plural(advisories.length, 'advisory', 'advisories')}` : '') +
+        ` in ${scope}${reviewed}. Violations fail the check.`,
+    )
+  }
+
+  const location = (finding) => {
+    const at = finding.line === undefined ? finding.file : `${finding.file}:${finding.line}`
+    if (!blobBase) return `\`${at}\``
+    const anchor = finding.line === undefined ? '' : `#L${finding.line}`
+    return `[\`${at}\`](${blobBase}/${finding.file.split('/').map(encodeURIComponent).join('/')}${anchor})`
+  }
+
+  const list = (items, limit) => {
+    const out = []
+    for (const [, inFile] of group(items.slice(0, limit))) {
+      for (const finding of inFile) {
+        out.push(
+          `- ${location(finding)} · **${finding.rule}**` +
+            `${finding.sc ? ` (WCAG ${finding.sc})` : ''} — ${messageMarkdown(finding.message)}`,
+        )
+        if (finding.fix) out.push(`  - Fix: ${escapeMarkdown(finding.fix)}`)
+      }
+    }
+    if (items.length > limit) {
+      out.push(
+        `- …and ${items.length - limit} more. Run \`npx hoverlab review\` locally for the full list.`,
+      )
+    }
+    return out
+  }
+
+  if (violations.length) {
+    lines.push('', '### Violations', '', ...list(violations, MARKDOWN_LIMITS.violation))
+  }
+
+  if (advisories.length) {
+    lines.push(
+      '',
+      '<details>',
+      `<summary>${plural(advisories.length, 'advisory', 'advisories')} — questions the rules cannot close from source</summary>`,
+      '',
+      ...list(advisories, MARKDOWN_LIMITS.advisory),
+      '',
+      '</details>',
+    )
+  }
+
+  lines.push(
+    '',
+    `<sub>Checked against ${seen.rules} rules over ${seen.criteria} ${seen.standard} criteria ` +
+      `decidable from source. ${seen.unchecked} criteria are not evaluated here — contrast, focus order, ` +
+      `reflow and reading order depend on the page the component sits in. This is evidence, not a ` +
+      `claim of conformance. Runs on the runner; nothing is uploaded.</sub>`,
+  )
+
+  return lines.join('\n')
+}
+
 /** The machine shape, carrying its own limits. */
 export function renderJson(findings) {
   return JSON.stringify(

@@ -1,0 +1,44 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.Vijetbhat6/hoverlab",
+  "title": "Hoverlab",
+  "description": "Search and install accessible React UI blocks, pages and CSS effects; review code for defects.",
+  "version": "0.4.0",
+  "websiteUrl": "https://hoverlab5.netlify.app/mcp",
+  "repository": {
+    "url": "https://github.com/Vijetbhat6/hoverlab",
+    "source": "github",
+    "subfolder": "packages/cli"
+  },
+  "packages": [
+    {
+      "registryType": "npm",
+      "registryBaseUrl": "https://registry.npmjs.org",
+      "identifier": "hoverlab",
+      "version": "0.4.0",
+      "runtimeHint": "npx",
+      "transport": {
+        "type": "stdio"
+      },
+      "packageArguments": [
+        {
+          "type": "positional",
+          "value": "mcp"
+        }
+      ],
+      "environmentVariables": [
+        {
+          "name": "HOVERLAB_KEY",
+          "description": "Optional licence key. Only needed to install the Pro templates; everything else is free without one.",
+          "isRequired": false,
+          "isSecret": true
+        },
+        {
+          "name": "HOVERLAB_API_URL",
+          "description": "Optional. Point the server at a different Hoverlab deployment.",
+          "isRequired": false
+        }
+      ]
+    }
+  ]
+}

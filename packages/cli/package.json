@@ -1,7 +1,8 @@
 {
   "name": "hoverlab",
-  "version": "0.3.0",
-  "description": "Install UI from the Hoverlab catalog — CSS effects, React blocks, whole pages, and scaffoldable project templates — and expose them to your editor's AI agent over MCP.",
+  "version": "0.4.0",
+  "mcpName": "io.github.Vijetbhat6/hoverlab",
+  "description": "Install UI from the Hoverlab catalog — CSS effects, React blocks, whole pages and scaffoldable templates — review your own components for design defects, and expose it all to your editor's AI agent over MCP.",
   "keywords": [
     "css",
     "animation",
@@ -18,7 +19,13 @@
     "vue",
     "svelte",
     "mcp",
-    "model-context-protocol"
+    "model-context-protocol",
+    "accessibility",
+    "a11y",
+    "code-review",
+    "agent-rules",
+    "cursor",
+    "windsurf"
   ],
   "homepage": "https://hoverlab5.netlify.app",
   "repository": {

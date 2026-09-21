@@ -27,8 +27,10 @@ import {
   detectFramework,
   detectOutputDir,
   detectReactSupport,
+  findProjectRoot,
   missingDeps,
 } from './detect.mjs'
+import { detectTailwind, resolveAtAlias } from './project.mjs'
 
 async function exists(filePath) {
   try {
@@ -181,6 +183,59 @@ export async function writeEffectFiles({
  *  Blocks and pages
  * ------------------------------------------------------------------ */
 
+/**
+ * What is about to go wrong after the files land, said before it does.
+ *
+ * Two things stop an installed page compiling that no amount of correct file
+ * writing can prevent, both about the project rather than the artifact:
+ *
+ *   - its imports are `@/components/<block>`, and resolve only if `@/*`
+ *     points at the directory the files were written under;
+ *   - it is styled in semantic names (`bg-primary`), which are only classes
+ *     if the project maps them — in `@theme` on Tailwind v4, in the config's
+ *     colours on v3.
+ *
+ * Each is a note, not an error. The files are still what was asked for and
+ * still correct; the user can fix the project in one line, and refusing to
+ * write would only send them somewhere else for the same code.
+ */
+async function projectNotes({ planned, outDir, cwd, explicitDir }) {
+  const notes = []
+  const usesAlias = planned.some((file) => /from\s+['"]@\//.test(file.code))
+  const root = (await findProjectRoot(cwd)) ?? path.resolve(cwd)
+  const show = (absolute) => path.relative(root, absolute).split(path.sep).join('/') || '.'
+
+  if (usesAlias) {
+    const alias = await resolveAtAlias(cwd)
+    if (!alias) {
+      notes.push(
+        `These files import from "@/…" and this project declares no "@/*" path alias. ` +
+          `Add to tsconfig.json compilerOptions: "paths": { "@/*": ["./${show(outDir)}/*"] }`,
+      )
+    } else if (!explicitDir && path.resolve(alias.dir) !== path.resolve(outDir)) {
+      notes.push(
+        `"@/*" points at ${show(alias.dir)}/ but these files were written under ${show(outDir)}/, ` +
+          `so their "@/components/…" imports will not resolve until one of them moves.`,
+      )
+    }
+  }
+
+  const tailwind = await detectTailwind(cwd)
+  if (!tailwind) {
+    notes.push('No Tailwind found. These components are styled with Tailwind classes and render unstyled without it.')
+  } else if (!tailwind.mapsColors) {
+    notes.push(
+      tailwind.major === 3
+        ? `These components use semantic colours (bg-primary, text-muted-foreground). ` +
+            `${tailwind.configFile ?? 'tailwind.config'} does not map them — run \`npx hoverlab doctor\` for the fix.`
+        : `These components use semantic colours (bg-primary, text-muted-foreground) and your ` +
+            `${tailwind.entryCss ?? 'stylesheet'} has no @theme block mapping them — run \`npx hoverlab doctor\` for the fix.`,
+    )
+  }
+
+  return notes
+}
+
 /** Turn a block/page detail payload into files on disk. */
 async function emitFileArtifact(data, { directory, force, dryRun, cwd }) {
   let outDir
@@ -216,6 +271,8 @@ async function emitFileArtifact(data, { directory, force, dryRun, cwd }) {
       `${data.artifact.name} is a React component and ships as written — ${react.reason}.`,
     )
   }
+
+  notes.push(...(await projectNotes({ planned, outDir, cwd, explicitDir: Boolean(directory) })))
 
   await commit(planned, { force, dryRun })
 

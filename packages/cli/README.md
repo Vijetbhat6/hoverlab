@@ -34,21 +34,28 @@ $ npx hoverlab add checkout-page
   src/app/checkout-page.tsx
   src/components/checkout-form.tsx
   src/components/order-summary-panel.tsx
-  ! npm i lucide-react
+Install lucide-react with pnpm? [Y/n]
 ```
 
 ## Commands
 
 | Command | What it does |
 | --- | --- |
-| `add <id...>` | Write an effect, primitive, block or page into your project |
+| `add <id...>` | Write an effect, primitive, block or page into your project, and offer to install the packages it needs |
+| `remove <id...>` | Take an installed artifact back out — only files still exactly as installed, that nothing else imports and no other artifact shares (aliases: `rm`, `uninstall`) |
 | `init [template] [dir]` | Scaffold a template into a new directory. With no template, lists them. |
+| `doctor` | Check the project can run Hoverlab code: Tailwind version and colour mapping, the `@/` alias, React, `components.json`, what is installed |
 | `search <words...>` | Search every tier at once (`--level` to narrow) |
 | `show <id...>` | Print an artifact's code without writing files |
 | `categories` | List the categories, per tier |
+| `outdated` | List installed artifacts the catalog has since changed |
+| `diff <id...>` | Show what changed between your copy and the catalog |
+| `update [id...]` | Apply the catalog's newer copy — only to files you have not edited since installing them |
+| `review [path...]` | Review your components for design defects. With no paths, reviews what you changed. |
+| `rules [target...]` | Write agent rules files for Cursor, Windsurf, Claude Code and `AGENTS.md`-aware tools |
 | `skill [id]` | Install an agent skill into `.claude/skills`. With no id, lists them. |
 | `dna [id]` | Print the Design DNA — tokens, shape, motion, rules — for pasting into an AI tool |
-| `review [path...]` | Review your components for design defects. With no paths, reviews what you changed. |
+| `login <key>` / `logout` / `whoami` | Manage the licence key for the Pro templates |
 | `mcp` | Run the MCP server over stdio |
 
 ## Scaffolding a project
@@ -56,8 +63,49 @@ $ npx hoverlab add checkout-page
 ```bash
 npx hoverlab init            # list the templates
 npx hoverlab init storefront ./shop
-cd shop && npm install && npm run dev
+cd shop && npm install && npm run dev    # or pnpm / yarn / bun — it prints yours
 ```
+
+## Your project, read before anything is written
+
+The CLI looks at the project it is standing in and adapts instead of assuming.
+
+**Package manager.** From the `packageManager` field, then the nearest lockfile (searched upward, so a workspace root counts), then whatever launched the CLI (`pnpm dlx hoverlab` says pnpm). Install hints and `init`'s next steps use it: `pnpm add lucide-react`, not a hard-coded `npm i`.
+
+**Installing what an artifact needs.** After `add`, missing packages are collected into one line. At a terminal you are asked once. Anywhere else — a pipe, CI, an agent's shell — nothing is installed and the command is printed. `--yes` (`-y`) answers for you, and `--no-install` never asks:
+
+```bash
+npx hoverlab add pricing-tiers faq-accordion --yes
+```
+
+**Tailwind v3 or v4.** Read from what is installed, then `package.json`, then a `@tailwindcss/*` plugin or a `tailwind.config.*`. The two differ in where `bg-primary` gets its meaning — a `@theme` block in v4, `theme.extend.colors` in v3 — and a block installed into a project that maps neither renders as unstyled boxes with no error anywhere. `add` says so, and `doctor` names the fix.
+
+**`components.json` and the `@/*` alias.** Every page imports `@/components/<block>`, so blocks and pages are rooted at the directory `@/*` points at in your `tsconfig.json` (or `tsconfig.app.json`, as Vite scaffolds put it) rather than guessed from whether a `src/` folder exists. If there is no such alias, the install says so and gives the line to add. A `components.json` is read for its stylesheet path and component alias; it is never written.
+
+```bash
+npx hoverlab doctor           # what an install will trip on, each with the line that fixes it
+npx hoverlab doctor --json    # the same, for a script
+```
+
+Only two things make `doctor` exit non-zero: no `package.json` to install into, and a Node too old to run the CLI. A project without React or Tailwind is a warning, because effects still work there.
+
+## Removing what you installed
+
+`add` records every file and a hash of it in `hoverlab.lock.json`. `remove` uses that record to prove a file is still exactly what was installed before it deletes it, and keeps and names everything else:
+
+| Kept because | Meaning |
+| --- | --- |
+| edited | The file changed since install — it is yours now |
+| shared | Another installed artifact lists it (a page brings its blocks; the same block installed on its own is not the page's to delete) |
+| in use | Something outside the removal imports it |
+
+```bash
+npx hoverlab remove pricing-tiers --dry-run   # the plan, nothing changed
+npx hoverlab remove pricing-tiers             # asks once, at a terminal
+npx hoverlab remove pricing-tiers --yes       # in a script
+```
+
+Without a terminal and without `--yes`, nothing is deleted and the exit code is 1. `--force` overrides *edited* and *in use*, never *shared*. Packages the artifact needed stay in `package.json` — the lockfile does not record which dependency a block brought, and `lucide-react` is probably yours by now.
 
 `init` refuses to write into a directory that already has files in it unless you pass `--force`, so it cannot land on top of an existing project. A directory holding nothing but `.git` counts as empty — `git init` first is a normal thing to do.
 
@@ -137,16 +185,36 @@ An **advisory** is a question the rule cannot close from source. A 20×20px tap 
 
 `--violations-only` drops them.
 
-### In CI
+### On a pull request
 
-`--format github` emits workflow commands, which the runner turns into annotations on the diff itself, so a finding lands on the line that caused it:
+The GitHub Action in [`packages/review-action`](https://github.com/Vijetbhat6/hoverlab/tree/main/packages/review-action) posts **one comment and edits it in place** on every push, annotates the diff, and fails the check on violations. It handles shallow checkouts itself and does not fail on fork PRs, where the token cannot write:
+
+```yaml
+permissions:
+  contents: read
+  pull-requests: write
+steps:
+  - uses: actions/checkout@v4
+    with:
+      fetch-depth: 0
+  - uses: Vijetbhat6/hoverlab/packages/review-action@main
+```
+
+Pin a tag once one exists. Nothing is uploaded: the review runs on the runner.
+
+Without the Action, two formats are available, and both need the merge base in history:
+
+- `--format github` emits workflow commands, which the runner turns into annotations on the diff itself, so a finding lands on the line that caused it.
+- `--format markdown` prints a comment body whose first line is a hidden marker, always — even when clean — so a poster can find its previous comment and replace it rather than add another.
 
 ```yaml
 - uses: actions/checkout@v4
   with:
     fetch-depth: 0            # review needs the merge base
-- run: npx hoverlab review --base ${{ github.base_ref }} --format github
+- run: npx hoverlab review --base origin/${{ github.base_ref }} --format github
 ```
+
+`--format json` is the machine form, with the list of what was never checked.
 
 By default only findings the change is responsible for are reported — the files the diff touched, and within them the findings on or beside a touched line. Pointed at a mature repository with that filter off, these rules will return hundreds of findings that all predate the pull request, which is a backlog rather than a review. `--all-lines` turns the filter off when you want it.
 
@@ -187,19 +255,51 @@ claude mcp add hoverlab -- npx -y hoverlab mcp
 }
 ```
 
-The server exposes nine tools. Five cover the whole catalog:
+The server speaks all three MCP primitives.
+
+**Tools.** These cover the whole catalog:
 
 - **`search_catalog`** — free-text search across all five tiers at once
+- **`get_kit`** — a ready-made list of ids for a kind of product, instead of a search the agent has to assemble
 - **`match_design`** — rank blocks and pages against a described design region (a Figma frame, a screenshot, a spec)
 - **`install_artifact`** — fetch an effect, primitive, block or page and write it into the project
 - **`init_template`** — scaffold a whole project from a template
 - **`get_design_dna`** — hand the agent the design system before it writes UI of its own
+- **`review_code`** — check code for accessibility, right-to-left, reduced-motion and overflow defects: on source the agent has not saved yet (`source`), on named files (`paths`, kept inside the project), or on what git says changed (`base`). Read-only and local; nothing is uploaded. The agent is told to run it before it says UI work is done.
 
-And four are the original effect-only surface, kept because they carry the framework and recolouring knobs:
+And four are the original effect-only surface, kept because they carry the framework and recolouring knobs: **`search_effects`**, **`get_effect`**, **`install_effect`**, **`list_categories`**.
 
-- **`search_effects`**, **`get_effect`**, **`install_effect`**, **`list_categories`**
+Every tool carries a title and honest annotations — `readOnlyHint`, `destructiveHint`, `openWorldHint` — which is what clients grant permission by. The three that write files (`install_effect`, `install_artifact`, `init_template`) say so, and say they can overwrite behind `force`.
+
+**Resources** — what you can `@`-attach rather than hope the agent remembers to fetch. `hoverlab://dna` is the design system; `hoverlab://kits` lists the kits; the published skills appear as `hoverlab://skill/<id>`; and templates cover `hoverlab://artifact/<id>`, `hoverlab://dna/<id>` and `hoverlab://kit/<slug>`.
+
+**Prompts** — the workflows written once by the people who know the tool order, shown as slash commands in clients that support them: `add-section`, `build-from-design`, `scaffold-project`, `review-changes`.
 
 Then just ask: *"find me a shimmering skeleton loader and add it"*, or *"build me a storefront"*.
+
+The server is stdio only — it runs on your machine, on demand, from `npx`. There is no hosted endpoint. It is listed for the [MCP registry](https://registry.modelcontextprotocol.io) by [`server.json`](./server.json) as `io.github.Vijetbhat6/hoverlab`.
+
+### Rules files, for editors that do not read skills
+
+```bash
+npx hoverlab rules              # the tools you appear to use (.cursor/, .windsurf/, AGENTS.md, CLAUDE.md)
+npx hoverlab rules cursor windsurf
+npx hoverlab rules all --check  # in CI: exit 1 if a file is missing or stale
+npx hoverlab rules --remove
+```
+
+| Target | File | Notes |
+| --- | --- | --- |
+| `cursor` | `.cursor/rules/hoverlab.mdc` | Applied when the request is about UI, not when a `.tsx` file happens to be open |
+| `windsurf` | `.windsurf/rules/hoverlab.md` | Kept under Windsurf's per-file size limit; sections dropped to fit are reported |
+| `agents` | `AGENTS.md` | Read by Codex, Cursor, Copilot, Zed and others |
+| `claude` | `CLAUDE.md` | |
+
+They are generated from the same published skill `hoverlab skill` installs, so there is one source for what an agent is told. In `AGENTS.md` and `CLAUDE.md` your own text is never touched: only the section between `<!-- hoverlab:start -->` and `<!-- hoverlab:end -->` is written, and running it twice changes nothing. The copy is a snapshot, so re-run it — or use `--check` in CI — when the catalog moves.
+
+### Claude Code plugin
+
+The repository is also a Claude Code plugin marketplace: `/plugin marketplace add Vijetbhat6/hoverlab`, then `/plugin install hoverlab@hoverlab`. It bundles the MCP server, the skill, and `/hoverlab:review` and `/hoverlab:add`.
 
 ### Teaching the agent
 
@@ -273,7 +373,12 @@ The effect-only helpers (`searchEffects`, `getEffect`, `writeEffectFiles`) are s
 | Variable | Purpose |
 | --- | --- |
 | `HOVERLAB_API_URL` | Point at a different deployment (default `https://hoverlab5.netlify.app`) |
+| `HOVERLAB_KEY` | Licence key for the Pro templates, e.g. in CI. Everything else installs without one |
+| `HOVERLAB_NO_TELEMETRY` | Set to `1` to stop reporting installed ids, which is what feeds Trending. Nothing else is sent |
 | `NO_COLOR` | Disable coloured output |
+| `CI` | When set, nothing is ever prompted for, whatever the terminal |
+
+`hoverlab.config.json` in your project carries your brand (the design system export at `/design-system` writes one), and effects are hue-rotated to match. `hoverlab.lock.json` records what `add` wrote; commit it.
 
 ## Requirements
 

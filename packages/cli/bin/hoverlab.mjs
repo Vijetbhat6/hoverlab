@@ -13,13 +13,16 @@ import {
   commandAdd,
   commandCategories,
   commandDna,
+  commandDoctor,
   commandHelp,
   commandInit,
   commandLogin,
   commandDiff,
   commandLogout,
   commandOutdated,
+  commandRemove,
   commandReview,
+  commandRules,
   commandSearch,
   commandShow,
   commandSkill,
@@ -48,6 +51,7 @@ const ALIASES = {
   c: 'category',
   n: 'limit',
   l: 'level',
+  y: 'yes',
 }
 
 /**
@@ -178,6 +182,20 @@ async function main() {
 
     case 'review':
       await commandReview(rest, flags)
+      return
+
+    case 'remove':
+    case 'rm':
+    case 'uninstall':
+      await commandRemove(rest, flags)
+      return
+
+    case 'doctor':
+      await commandDoctor(rest, flags)
+      return
+
+    case 'rules':
+      await commandRules(rest, flags)
       return
 
     case 'login':

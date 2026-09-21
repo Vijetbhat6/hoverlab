@@ -12,7 +12,8 @@
  */
 
 import path from 'node:path'
-import { mkdir, writeFile, readFile, readdir, stat } from 'node:fs/promises'
+import { createRequire } from 'node:module'
+import { mkdir, writeFile, readFile, rmdir, stat, unlink } from 'node:fs/promises'
 
 import {
   assertUnlocked,
@@ -30,14 +31,18 @@ import {
   searchAll,
   searchLevel,
 } from './api.mjs'
-import { detectFramework } from './detect.mjs'
-import { REVIEWABLE, fixSource, reviewSource } from './review/index.mjs'
-import { changedFiles, changedLines, mergeBase, repoRoot, touchedByDiff } from './review/git.mjs'
-import { renderGitHub, renderJson, renderTerminal } from './review/report.mjs'
+import { detectFramework, findProjectRoot } from './detect.mjs'
+import { runDoctor } from './doctor.mjs'
+import { RULE_TARGETS, mergeManagedSection, removeManagedSection, renderRules } from './rules.mjs'
+import { addCommand, detectPackageManager, installAllCommand, runScriptCommand } from './project.mjs'
+import { confirm, runPackageManager } from './interactive.mjs'
+import { runReview } from './review/run.mjs'
+import { renderGitHub, renderJson, renderMarkdown, renderTerminal } from './review/report.mjs'
 import { addArtifact } from './write.mjs'
 import { initTemplate } from './scaffold.mjs'
 import { readProjectConfig, brandCustomization } from './config.mjs'
-import { readLock, recordInstall, fileDigest, LOCK_NAME } from './lockfile.mjs'
+import { readLock, recordInstall, removeFromLock, fileDigest, LOCK_NAME } from './lockfile.mjs'
+import { planRemoval } from './remove.mjs'
 import {
   CONFIG_FILE,
   clearKey,
@@ -155,6 +160,8 @@ export async function commandAdd(ids, flags) {
   }
 
   let failures = 0
+  const missing = new Set()
+  const missingOnDryRun = []
 
   for (const id of ids) {
     try {
@@ -211,9 +218,10 @@ export async function commandAdd(ids, flags) {
 
       for (const file of result.files) out(`  ${dim(displayPath(file))}`)
 
-      if (result.missingDeps.length) {
-        out(`  ${yellow('!')} ${dim(`npm i ${result.missingDeps.join(' ')}`)}`)
-      }
+      // Collected, not printed per artifact: three blocks that all need
+      // lucide-react want one install line at the end, not three.
+      if (!result.dryRun) for (const dep of result.missingDeps) missing.add(dep)
+      else if (result.missingDeps.length) missingOnDryRun.push(...result.missingDeps)
       for (const note of result.notes) out(`  ${yellow('!')} ${dim(note)}`)
     } catch (error) {
       failures++
@@ -225,10 +233,70 @@ export async function commandAdd(ids, flags) {
     }
   }
 
+  await offerDependencies({ missing: [...missing], dryRunMissing: missingOnDryRun, flags })
+
   if (failures > 0 && failures === ids.length) {
     const err = new Error('Nothing was installed.')
     err.quiet = true
     throw err
+  }
+}
+
+/**
+ * The packages an install left missing: install them, or say the command.
+ *
+ * WHAT HAPPENS, AND WHEN
+ *
+ *   --yes                        install them, no question
+ *   a person at a terminal       ask once, default yes
+ *   a pipe, CI, an agent's shell print the command for the project's own
+ *                                package manager and change nothing
+ *   --no-install                 print the command, never ask
+ *
+ * The command is built for the manager the project uses — `pnpm add`, not the
+ * `npm i` this used to print regardless, which in a pnpm or yarn workspace
+ * either fails or writes a second lockfile beside the real one.
+ *
+ * A failed install is reported and does not fail the run: the files are on
+ * disk and correct, and the user needs one command, not a stack trace.
+ */
+async function offerDependencies({ missing, dryRunMissing, flags }) {
+  const cwd = process.cwd()
+
+  if (dryRunMissing.length) {
+    const manager = await detectPackageManager(cwd)
+    const { display } = addCommand(manager.name, [...new Set(dryRunMissing)])
+    out(`  ${yellow('!')} ${dim(`would need: ${display}`)}`)
+  }
+  if (missing.length === 0) return
+
+  const manager = await detectPackageManager(cwd)
+  const command = addCommand(manager.name, missing)
+
+  const wantsInstall =
+    flags['no-install'] === true
+      ? false
+      : await confirm(`Install ${missing.join(', ')} with ${manager.name}?`, {
+          yes: flags.yes === true,
+        })
+
+  if (!wantsInstall) {
+    out(`${yellow('!')} ${dim(`Still to install: ${command.display}`)}`)
+    return
+  }
+
+  out(dim(`${manager.reason} — running ${command.display}`))
+  try {
+    const { code, error } = await runPackageManager({
+      command: command.command,
+      args: command.args,
+      cwd: manager.root ?? cwd,
+    })
+    if (code !== 0) {
+      out(`${yellow('!')} ${dim(error ?? `${command.display} exited ${code}. Run it yourself to see why.`)}`)
+    }
+  } catch (error) {
+    out(`${yellow('!')} ${dim(error.message)}`)
   }
 }
 
@@ -313,8 +381,13 @@ export async function commandInit(args, flags) {
   const where = displayPath(result.directory)
   out(bold('  Next:'))
   if (where !== '.') out(`    cd ${where}`)
-  out('    npm install')
-  out('    npm run dev')
+  // The manager whoever ran this is using, not a hard-coded npm: a template
+  // has no lockfile yet, so the only signals are `packageManager` in the
+  // template, a lockfile in a parent workspace, or how this was launched
+  // (`pnpm dlx hoverlab` says pnpm).
+  const manager = (await detectPackageManager(result.directory)).name
+  out(`    ${installAllCommand(manager).display}`)
+  out(`    ${runScriptCommand(manager, 'dev').display}`)
 }
 
 /* ------------------------------------------------------------------ *
@@ -1138,57 +1211,330 @@ export function lineDiff(before, after) {
  * ------------------------------------------------------------------ */
 
 /**
- * Files to review when the user named paths rather than a diff.
+ * `hoverlab remove <id...>` — take an installed artifact back out.
  *
- * A directory is walked; a file is taken as given even when it does not
- * look reviewable, because someone who types a filename has said what they
- * mean and a silent skip would read as a clean bill of health.
+ * The lockfile is the whole basis for this: it records which files an `add`
+ * wrote and the hash of each as it was written, so removal can prove a file
+ * is still exactly what was installed before deleting it. Everything else is
+ * kept and named — edited files, files another installed artifact also uses,
+ * files something else still imports. See remove.mjs for why each.
+ *
+ * WHAT IT DOES NOT DO: uninstall packages. `lucide-react` is in your
+ * package.json because your project uses it, not because a block did, and
+ * the lockfile does not record which dependency an artifact brought.
+ *
+ * Nothing is deleted without a yes. A person at a terminal is asked once;
+ * anywhere else the plan is printed and nothing changes until `--yes`.
  */
-async function collectPaths(inputs, cwd) {
-  const found = []
-
-  const visit = async (target, explicit) => {
-    const absolute = path.resolve(cwd, target)
-    let info
-    try {
-      info = await stat(absolute)
-    } catch {
-      throw new Error(`No such file or directory: ${target}`)
-    }
-
-    if (info.isDirectory()) {
-      for (const entry of await readdir(absolute, { withFileTypes: true })) {
-        if (entry.name === 'node_modules' || entry.name.startsWith('.')) continue
-        await visit(path.join(absolute, entry.name), false)
-      }
-      return
-    }
-
-    if (explicit || REVIEWABLE.test(absolute)) found.push(absolute)
+export async function commandRemove(ids, flags) {
+  if (ids.length === 0) {
+    throw new Error('Which one? `hoverlab outdated` lists what this project has installed.')
   }
 
-  for (const input of inputs) await visit(input, true)
-  return found
+  const cwd = process.cwd()
+  const lock = await readLock(cwd)
+  const plans = []
+
+  for (const id of ids) {
+    const entry = lock.artifacts[id]
+    if (!entry) {
+      out(
+        `${yellow('!')} ${cyan(id)} ${dim(`is not in ${LOCK_NAME}, so there is no record of what to remove.`)}`,
+      )
+      out(dim('  Installed before the lockfile existed, or in another directory? Delete its files by hand.'))
+      continue
+    }
+    plans.push(
+      await planRemoval({ id, entry, artifacts: lock.artifacts, cwd, force: flags.force === true }),
+    )
+  }
+
+  if (plans.length === 0) {
+    process.exitCode = 1
+    return
+  }
+
+  for (const plan of plans) {
+    out(`${bold(plan.id)}`)
+    for (const file of plan.remove) out(`  ${yellow('-')} ${dim(displayPath(file, cwd))}`)
+    for (const file of plan.missing) out(`  ${dim(`· ${displayPath(file, cwd)} is already gone`)}`)
+    for (const item of plan.keep) {
+      out(`  ${green('=')} ${dim(`${displayPath(item.file, cwd)} — kept, ${item.why}: ${item.detail}`)}`)
+    }
+    for (const bad of plan.unsafe) out(`  ${yellow('!')} ${dim(`ignored an unsafe path in ${LOCK_NAME}: ${bad}`)}`)
+  }
+
+  const total = plans.reduce((n, plan) => n + plan.remove.length, 0)
+  const kept = plans.reduce((n, plan) => n + plan.keep.length, 0)
+
+  if (flags['dry-run'] === true) {
+    out()
+    out(dim(`Dry run: would delete ${total} file${total === 1 ? '' : 's'}, keep ${kept}. Nothing was changed.`))
+    return
+  }
+
+  out()
+  const go =
+    total === 0
+      ? true // nothing to delete: only the lockfile entry goes, which loses nothing
+      : await confirm(`Delete ${total} file${total === 1 ? '' : 's'}?`, {
+          yes: flags.yes === true,
+          defaultYes: false,
+        })
+
+  if (!go) {
+    out(dim('Nothing was removed.'))
+    if (!process.stdin.isTTY || process.env.CI) out(dim('Not at a terminal — re-run with --yes to apply.'))
+    process.exitCode = 1
+    return
+  }
+
+  for (const plan of plans) {
+    for (const file of plan.remove) await unlink(file)
+    await pruneEmptyDirs(plan.remove, cwd)
+    await removeFromLock(plan.id, cwd)
+  }
+
+  out(`${green('✓')} Removed ${total} file${total === 1 ? '' : 's'} and ${plans.length} lockfile entr${plans.length === 1 ? 'y' : 'ies'}.`)
+  if (kept > 0) {
+    out(dim(`  ${kept} kept file${kept === 1 ? ' is' : 's are'} yours now, or still tracked by something else. Re-run with --force to delete edited or imported ones.`))
+  }
+  out(dim('  Packages it needed stay in package.json — remove any that nothing else uses.'))
 }
 
-/** A path as the reader will type it: repo- or cwd-relative, forward slashes. */
-function reviewPath(absolute, root, cwd, useRepoRoot) {
-  const base = useRepoRoot ? path.relative(root, absolute) : displayPath(absolute, cwd)
-  return base.split(path.sep).join('/')
+/**
+ * Delete directories a removal emptied, and stop at the first that is not.
+ *
+ * `rmdir` rather than a recursive remove, deliberately: it fails on a
+ * directory with anything left in it, which is the whole safety property. The
+ * walk goes upward from each deleted file and never past the project root.
+ */
+async function pruneEmptyDirs(files, root) {
+  const dirs = new Set(files.map((file) => path.dirname(file)))
+  for (const start of dirs) {
+    let dir = start
+    while (dir.startsWith(root + path.sep)) {
+      try {
+        await rmdir(dir)
+      } catch {
+        break
+      }
+      dir = path.dirname(dir)
+    }
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ *  doctor
+ * ------------------------------------------------------------------ */
+
+const red = paint('31')
+
+/**
+ * `hoverlab doctor` — check that this project can run Hoverlab code.
+ *
+ * The checks and what each status means are in doctor.mjs; this only prints.
+ * Exit 1 is reserved for `fail`, which is the CLI being unable to work here at
+ * all. Everything a project can fix is a `warn` with the line that fixes it.
+ */
+export async function commandDoctor(_args, flags) {
+  const version = createRequire(import.meta.url)('../package.json').version
+  const { checks, summary } = await runDoctor({ offline: flags.offline === true, version })
+
+  if (flags.json) {
+    out(JSON.stringify({ checks, summary }, null, 2))
+  } else {
+    const glyph = {
+      pass: green('✓'),
+      warn: yellow('!'),
+      fail: red('✗'),
+      info: dim('·'),
+    }
+    for (const item of checks) {
+      out(`${glyph[item.status]} ${item.title}`)
+      if (item.detail) out(`    ${dim(item.detail)}`)
+      if (item.fix) out(`    ${cyan('→')} ${item.fix}`)
+    }
+    out()
+    out(
+      `${summary.pass} ok · ${summary.warn} to look at · ${summary.fail} failed` +
+        dim(summary.warn + summary.fail === 0 ? '' : '  — each has the line that fixes it'),
+    )
+  }
+
+  if (summary.fail > 0) process.exitCode = 1
+}
+
+/* ------------------------------------------------------------------ *
+ *  rules
+ * ------------------------------------------------------------------ */
+
+/**
+ * Which rules targets a project has evidence of using.
+ *
+ * `AGENTS.md` is the fallback rather than a guess about the editor: it is the
+ * one file most agents read, so writing it is right when nothing else says
+ * which tool is in play.
+ */
+async function detectRuleTargets(root) {
+  const has = async (relative) => {
+    try {
+      await stat(path.join(root, relative))
+      return true
+    } catch {
+      return false
+    }
+  }
+  const found = []
+  if (await has('.cursor')) found.push('cursor')
+  if (await has('.windsurf')) found.push('windsurf')
+  if (await has('AGENTS.md')) found.push('agents')
+  if ((await has('CLAUDE.md')) || (await has('.claude'))) found.push('claude')
+  return found.length ? found : ['agents']
+}
+
+/**
+ * `hoverlab rules [cursor|windsurf|agents|claude|all]`
+ *
+ * Writes the instruction files that tell an editor's agent to search the
+ * catalog before it invents a component. Built from the published skill, so
+ * there is one source of what an agent is told and no counts typed here.
+ *
+ * The shared files (AGENTS.md, CLAUDE.md) are the user's own, so only a
+ * marked section is ever written and everything outside it is left alone —
+ * rules.mjs is where that guarantee lives and is tested. Cursor's and
+ * Windsurf's files are ours entirely and are simply rewritten.
+ *
+ *   --check    write nothing; exit 1 if any file is missing or out of date,
+ *              for CI, since the files copy text that changes
+ *   --remove   take the section (or file) back out
+ *   --dry-run  print what would be written
+ */
+export async function commandRules(args, flags) {
+  const cwd = process.cwd()
+  const root = (await findProjectRoot(cwd)) ?? cwd
+
+  const known = Object.keys(RULE_TARGETS)
+  const named = args.filter((arg) => arg !== 'all')
+  const unknown = named.filter((arg) => !known.includes(arg))
+  if (unknown.length) {
+    throw new Error(`Unknown target "${unknown[0]}". Pick from: ${known.join(', ')}, or all.`)
+  }
+
+  const targets = args.includes('all')
+    ? known
+    : named.length
+      ? [...new Set(named)]
+      : await detectRuleTargets(root)
+
+  const readIfPresent = async (file) => {
+    try {
+      return await readFile(file, 'utf8')
+    } catch {
+      return null
+    }
+  }
+
+  if (flags.remove) {
+    for (const id of targets) {
+      const target = RULE_TARGETS[id]
+      const file = path.join(root, target.path)
+      const existing = await readIfPresent(file)
+      if (existing === null) {
+        out(`${dim('·')} ${dim(`${target.path} does not exist`)}`)
+        continue
+      }
+      if (target.managed) {
+        const { text, found, empty } = removeManagedSection(existing)
+        if (!found) {
+          out(`${dim('·')} ${dim(`no Hoverlab section in ${target.path}`)}`)
+          continue
+        }
+        if (flags['dry-run']) {
+          out(`Would remove the Hoverlab section from ${target.path}`)
+          continue
+        }
+        if (empty) await unlink(file)
+        else await writeFile(file, text, 'utf8')
+        out(`${green('✓')} Removed the Hoverlab section from ${target.path}${empty ? dim(' (the file is gone — nothing else was in it)') : ''}`)
+      } else {
+        if (flags['dry-run']) {
+          out(`Would delete ${target.path}`)
+          continue
+        }
+        const yes = await confirm(`Delete ${target.path}?`, { yes: flags.yes === true, defaultYes: false })
+        if (!yes) {
+          out(dim(`Kept ${target.path}. Re-run with --yes to delete it.`))
+          continue
+        }
+        await unlink(file)
+        out(`${green('✓')} Deleted ${target.path}`)
+      }
+    }
+    return
+  }
+
+  const skill = await getSkill('hoverlab')
+  let stale = 0
+
+  for (const id of targets) {
+    const rendered = renderRules(id, skill)
+    const file = path.join(root, rendered.path)
+    const existing = await readIfPresent(file)
+    const next = rendered.managed
+      ? mergeManagedSection(existing ?? '', rendered.content)
+      : rendered.content
+
+    if (existing === next) {
+      out(`${green('✓')} ${rendered.path} ${dim('is already current')}`)
+      continue
+    }
+
+    stale++
+
+    if (flags.check) {
+      out(`${yellow('!')} ${rendered.path} ${dim(existing === null ? 'is missing' : 'is out of date')}`)
+      continue
+    }
+    if (flags['dry-run']) {
+      out(`${dim('Would write')} ${rendered.path} ${dim(`(${rendered.size.chars} chars)`)}`)
+      continue
+    }
+
+    await mkdir(path.dirname(file), { recursive: true })
+    await writeFile(file, next, 'utf8')
+    out(
+      `${green('✓')} ${existing === null ? 'Wrote' : 'Updated'} ${rendered.path} ` +
+        dim(`(${RULE_TARGETS[id].label})`),
+    )
+    if (rendered.dropped.length) {
+      out(`  ${dim(`left out to fit ${RULE_TARGETS[id].label}'s size limit: ${rendered.dropped.join(', ')}`)}`)
+    }
+  }
+
+  if (flags.check && stale > 0) process.exitCode = 1
+}
+
+const REVIEW_FORMATS = ['terminal', 'github', 'markdown', 'md', 'json']
+
+/**
+ * The GitHub blob URL for the checked-out commit, when we are in Actions.
+ *
+ * Findings in a pull-request comment link to the line they are about. The
+ * base is assembled from the variables the runner always sets, so the CLI
+ * needs no `--repo` flag and outside Actions it simply returns nothing and
+ * locations render as plain text.
+ */
+function githubBlobBase(env = process.env) {
+  const { GITHUB_SERVER_URL: server, GITHUB_REPOSITORY: repo, GITHUB_SHA: sha } = env
+  if (!server || !repo || !sha) return undefined
+  return `${server}/${repo}/blob/${sha}`
 }
 
 /**
  * Review components for design defects.
  *
- * THE DEFAULT IS A DIFF, NOT A CODEBASE
- *
- * Pointed at a mature repository these rules return hundreds of findings,
- * every one of which predates the change in front of you. That is a
- * backlog, not a review, and a reviewer that opens with a backlog gets
- * muted. So with no arguments this reads the working tree's changes; with
- * `--base` it reads what a branch proposes, measured from the merge base
- * rather than the tip, so commits other people landed on main are not
- * reported as yours.
+ * Which files and which findings is `review/run.mjs`; this is the printing.
  *
  * WHAT SETS THE EXIT CODE
  *
@@ -1199,62 +1545,34 @@ function reviewPath(absolute, root, cwd, useRepoRoot) {
  */
 export async function commandReview(paths, flags) {
   const cwd = process.cwd()
-  const root = repoRoot(cwd)
-  const diffMode = paths.length === 0
 
-  let absolutePaths
-  let base = null
-  let scope
-
-  if (!diffMode) {
-    absolutePaths = await collectPaths(paths, cwd)
-    scope = `${absolutePaths.length} file${absolutePaths.length === 1 ? '' : 's'} you named`
-  } else {
-    if (!root) {
-      throw new Error(
-        'Not a git repository, so there is no diff to review. Name the files or a ' +
-          'directory instead: `hoverlab review src/components`.',
-      )
-    }
-    base = flags.base ? mergeBase(String(flags.base), root) : null
-    absolutePaths = changedFiles(root, base)
-      .filter((file) => REVIEWABLE.test(file))
-      .map((file) => path.resolve(root, file))
-    scope = flags.base
-      ? `what this branch changes against ${flags.base}`
-      : 'your uncommitted changes'
+  if (flags.format && !REVIEW_FORMATS.includes(flags.format)) {
+    throw new Error(`Unknown --format "${flags.format}". Pick one of: ${REVIEW_FORMATS.join(', ')}.`)
   }
 
-  if (absolutePaths.length === 0) {
-    out(dim(`Nothing to review in ${scope}.`))
-    return
-  }
+  const { findings, scope, fileCount, fixed } = await runReview({
+    paths,
+    base: flags.base ? String(flags.base) : undefined,
+    cwd,
+    fix: flags.fix === true,
+    allLines: flags['all-lines'] === true,
+    violationsOnly: flags['violations-only'] === true,
+  })
 
-  const files = []
-  for (const absolute of absolutePaths) {
-    files.push({ path: absolute, source: await readFile(absolute, 'utf8') })
-  }
+  const format = flags.json ? 'json' : flags.format
 
-  if (flags.fix) {
-    let changed = 0
-    let rewrites = 0
-    for (const file of files) {
-      const result = fixSource(file)
-      if (result.rewrites.length === 0) continue
-      await writeFile(file.path, result.source, 'utf8')
-      file.source = result.source
-      changed++
-      rewrites += result.rewrites.length
-    }
-    out(
-      rewrites === 0
+  if (fixed) {
+    // stderr, so a machine format on stdout stays parseable.
+    const say = format ? (line) => process.stderr.write(`${line}\n`) : out
+    say(
+      fixed.rewrites === 0
         ? dim('Nothing to rewrite — no physical spacing utilities found.')
         : green(
-            `Rewrote ${rewrites} physical spacing utilit${rewrites === 1 ? 'y' : 'ies'} ` +
-              `in ${changed} file${changed === 1 ? '' : 's'}.`,
+            `Rewrote ${fixed.rewrites} physical spacing utilit${fixed.rewrites === 1 ? 'y' : 'ies'} ` +
+              `in ${fixed.files} file${fixed.files === 1 ? '' : 's'}.`,
           ),
     )
-    out(
+    say(
       dim(
         'Only the physical-to-logical spacing codemod is applied. Everything else here ' +
           'is either a judgement call or has more than one correct fix.',
@@ -1262,33 +1580,16 @@ export async function commandReview(paths, flags) {
     )
   }
 
-  let findings = []
-  for (const file of files) {
-    const display = reviewPath(file.path, root, cwd, diffMode)
-    let forFile = reviewSource({ path: display, source: file.source })
-
-    /*
-      In diff mode, keep only what the change is responsible for. A file
-      with no hunks — reached because it is untracked, so every line of it
-      is new — comes back with an empty set, and `touchedByDiff` treats that
-      as "all of it", which is right.
-    */
-    if (diffMode && !flags['all-lines']) {
-      const lines = changedLines(root, base, display)
-      forFile = forFile.filter((finding) => touchedByDiff(finding, lines))
-    }
-
-    findings.push(...forFile)
-  }
-
-  if (flags['violations-only']) {
-    findings = findings.filter((finding) => finding.severity === 'violation')
-  }
-
-  if (flags.json) {
+  if (format === 'json') {
     out(renderJson(findings))
-  } else if (flags.format === 'github') {
+  } else if (format === 'markdown' || format === 'md') {
+    // Always printed, clean or not: a sticky comment has to be able to say
+    // "no findings" to replace the one that said otherwise on the last push.
+    out(renderMarkdown(findings, { scope, fileCount, blobBase: githubBlobBase() }))
+  } else if (format === 'github') {
     if (findings.length > 0) out(renderGitHub(findings))
+  } else if (fileCount === 0) {
+    out(dim(`Nothing to review in ${scope}.`))
   } else {
     out(dim(`Reviewing ${scope}.`))
     out(
@@ -1307,12 +1608,12 @@ export async function commandReview(paths, flags) {
     process.exitCode = 1
   }
 }
-
 export function commandHelp() {
   out(`${bold('hoverlab')} — install UI from the Hoverlab catalog
 
-Four rungs, one command surface: ${dim('effects')} (one element), ${dim('blocks')} (one
-section), ${dim('pages')} (one screen), ${dim('templates')} (a whole project).
+Five rungs, one command surface: ${dim('effects')} (one element), ${dim('primitives')} (one
+control), ${dim('blocks')} (one section), ${dim('pages')} (one screen), ${dim('templates')} (a
+whole project).
 
 ${bold('Usage')}
   npx hoverlab <command> [options]
@@ -1338,6 +1639,16 @@ ${bold('Commands')}
   update [id...]       Apply the catalog's newer copy. Only touches files
                        you have not edited since installing them; with no
                        ids, updates everything outdated lists.
+  remove <id...>       Take an installed artifact back out. Deletes only
+                       files still exactly as installed, that nothing else
+                       imports and no other artifact shares; keeps and names
+                       the rest. Aliases: rm, uninstall
+  doctor               Check this project can run Hoverlab code: Tailwind
+                       version and colour mapping, the @/ path alias,
+                       React, components.json, what is installed
+  rules [target...]    Write agent rules files that point Cursor, Windsurf,
+                       Claude Code and AGENTS.md-aware tools at the catalog.
+                       Targets: cursor, windsurf, agents, claude, all
   review [path...]     Review your components for design defects —
                        accessibility, right-to-left, reduced motion, and
                        layout escapes. With no paths, reviews what you have
@@ -1367,8 +1678,16 @@ ${bold('Options')}
                        review: drop the advisories
       --fix            review: apply the physical-to-logical spacing
                        codemod. Nothing else is rewritten
-      --format github  review: emit GitHub Actions annotations
-      --brand <id>     dna: apply a brand preset's accent
+      --format <f>     review: terminal (default) | github (annotations) |
+                       markdown (a pull-request comment body) | json
+  -y, --yes            Answer yes: install the packages an add needs, confirm
+                       a remove. Without it, nothing is installed or deleted
+                       unless a person at a terminal says so
+      --no-install     add: print the install command, never run or ask
+      --offline        doctor: skip the network checks
+      --check          rules: write nothing, exit 1 if a file is stale
+      --remove         rules: take the rules back out
+      --brand <id>    dna: apply a brand preset's accent
       --out <path>     dna: write to a file instead of printing
       --hue <deg>      Effects only — hue rotation, -180 to 180
       --sat <pct>      Effects only — saturation shift, -100 to 100
@@ -1415,7 +1734,7 @@ ${bold('Reviewing your own code')}
     layout         sr-only text escaping a scroll container, which scrolls
                    the whole page sideways on a phone
 
-  These are the same checks that run over this catalog's 250 components on
+  These are the same checks that run over every component in this catalog on
   every build, which is why they are worth pointing at yours: each one has
   been shaken out against real code, and the rules that were only nearly
   right were deleted rather than kept.
@@ -1425,10 +1744,17 @@ ${bold('Reviewing your own code')}
     npx hoverlab review src/components     ${dim('# a directory, in full')}
     npx hoverlab review --fix              ${dim('# apply the safe rewrites')}
 
-  It runs entirely on your machine — no account, no key, no upload. In CI,
-  ${dim('--format github')} turns findings into annotations on the diff:
+  It runs entirely on your machine — no account, no key, no upload. On a
+  pull request, the GitHub Action posts one comment and edits it in place on
+  every push, and annotates the diff:
 
-    - run: npx hoverlab review --base \${{ github.base_ref }} --format github
+    - uses: actions/checkout@v4
+      with: { fetch-depth: 0 }
+    - uses: Vijetbhat6/hoverlab/packages/review-action@main
+
+  Without the Action, ${dim('--format github')} turns findings into annotations and
+  ${dim('--format markdown')} prints the comment body. Both need the merge base in
+  history, which a default shallow checkout does not have.
 
   Violations set a non-zero exit code. Advisories are questions the rules
   cannot close from source — is that glow lighting or layout? does that drag
@@ -1439,6 +1765,12 @@ ${bold('Editor integration')}
   writing a worse one from scratch:
 
     npx hoverlab skill hoverlab
+
+  Or write rules files for the editors that do not read skills — Cursor,
+  Windsurf, and anything that reads AGENTS.md. Your own text in a shared
+  file is never touched; only a marked section is written:
+
+    npx hoverlab rules
 
   Register the MCP server so your editor's agent can search and install
   from the catalog directly:

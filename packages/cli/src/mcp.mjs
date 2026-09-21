@@ -36,9 +36,23 @@
  * diagnostic goes to stderr, or it corrupts the stream.
  */
 
+import { createRequire } from 'node:module'
+import path from 'node:path'
+
 import { addArtifact, writeEffectFiles } from './write.mjs'
 import { initTemplate } from './scaffold.mjs'
 import { DESIGN_LEVELS, matchDesign } from './design.mjs'
+import { REVIEWABLE, reviewSource } from './review/index.mjs'
+import { renderTerminal } from './review/report.mjs'
+import { runReview } from './review/run.mjs'
+import {
+  RESOURCE_TEMPLATES,
+  ResourceNotFound,
+  getPrompt,
+  listPrompts,
+  listResources,
+  readResource,
+} from './mcp-extras.mjs'
 import {
   DEFAULT_ORIGIN,
   FRAMEWORKS,
@@ -54,7 +68,17 @@ import {
 } from './api.mjs'
 
 const SERVER_NAME = 'hoverlab'
-const SERVER_VERSION = '0.2.0'
+
+/**
+ * Read from package.json rather than typed here.
+ *
+ * This constant said 0.2.0 while the package it ships in said 0.3.0, and
+ * nothing failed: the version is only ever shown in a client's server list,
+ * where a stale one makes a bug report unanswerable ("which build are you
+ * on?"). `mcp-args.test.mjs` pins the two together, but deriving it means
+ * there is nothing to keep in step in the first place.
+ */
+const SERVER_VERSION = createRequire(import.meta.url)('../package.json').version
 
 /**
  * Protocol revisions this server understands. We echo back whichever one
@@ -68,7 +92,10 @@ const LATEST_PROTOCOL_VERSION = SUPPORTED_PROTOCOL_VERSIONS[0]
 const PARSE_ERROR = -32700
 const INVALID_REQUEST = -32600
 const METHOD_NOT_FOUND = -32601
+const INVALID_PARAMS = -32602
 const INTERNAL_ERROR = -32603
+/** MCP's own code: the resource URI names nothing this server holds. */
+const RESOURCE_NOT_FOUND = -32002
 
 function log(...args) {
   process.stderr.write(`[hoverlab-mcp] ${args.join(' ')}\n`)
@@ -78,7 +105,7 @@ function log(...args) {
  *  Tool definitions
  * ------------------------------------------------------------------ */
 
-const TOOLS = [
+const TOOL_DEFINITIONS = [
   {
     name: 'search_effects',
     // No effect count in the description, deliberately. The catalog is
@@ -382,7 +409,101 @@ const TOOLS = [
       additionalProperties: false,
     },
   },
+  {
+    name: 'review_code',
+    description:
+      'Check UI code for the design defects that survive code review because they are invisible to whoever wrote it: unnamed icon buttons and inputs, labels pointing at nothing, animation that never stops and has no reduced-motion route, physical left/right utilities that break in right-to-left languages, and absolutely positioned text that scrolls the page sideways. Run this on every component you write or install, BEFORE telling the user it is done. Three ways to call it: pass `source` (and a `path` ending in .tsx) to check code you have not saved yet; pass `paths` to check files or directories; or pass nothing to check what has changed in the git working tree — add `base` to check what a branch changes against another. Violations are defects to fix; advisories are questions the rules cannot close from source, so read each one and fix it only if it is real. Runs locally, reads files only, and never uploads code.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        source: {
+          type: 'string',
+          description:
+            'Component source to check without saving it first. Use this for code you have just written and not yet put on disk.',
+        },
+        path: {
+          type: 'string',
+          description:
+            'With `source`: the file name to report against, e.g. "components/pricing.tsx". Must end in .tsx or .jsx. Defaults to "component.tsx".',
+        },
+        paths: {
+          type: 'array',
+          items: { type: 'string' },
+          description:
+            'Files or directories to check, relative to the project. Directories are walked. Must stay inside the project.',
+        },
+        base: {
+          type: 'string',
+          description:
+            'With neither `source` nor `paths`: a git ref such as "main". Checks what this branch changes against it, measured from the merge base. Omit to check uncommitted changes.',
+        },
+        violations_only: {
+          type: 'boolean',
+          description: 'Drop the advisories and report violations alone. Defaults to false.',
+        },
+        all_lines: {
+          type: 'boolean',
+          description:
+            'When checking a diff, report every finding in each changed file rather than only those on or near a changed line. Defaults to false.',
+        },
+      },
+      additionalProperties: false,
+    },
+  },
 ]
+
+/**
+ * What each tool does to the world, in the vocabulary MCP clients act on.
+ *
+ * Clients use these to decide what to ask permission for: a tool marked
+ * read-only can run without a prompt, and one that writes cannot. Getting
+ * them right is therefore a security property, not decoration — and getting
+ * them wrong toward "read-only" would let an agent write files silently.
+ *
+ *   readOnlyHint     touches nothing on disk
+ *   destructiveHint  can overwrite what is already there. The three
+ *                    installers do so behind `force`, so they say yes; an
+ *                    honest hint costs one extra confirmation, a dishonest
+ *                    one costs somebody a file.
+ *   idempotentHint   the same call twice leaves the same state
+ *   openWorldHint    talks to something outside the machine. Everything that
+ *                    reads the catalog does; `review_code` alone stays home.
+ *
+ * Kept in one table beside the tool list, not scattered through it, so the
+ * writers are visible together and the test that requires every tool to have
+ * an entry has one place to look.
+ */
+const TOOL_META = {
+  search_effects: { title: 'Search effects', readOnly: true, openWorld: true },
+  get_effect: { title: 'Read an effect', readOnly: true, openWorld: true },
+  install_effect: { title: 'Install an effect', readOnly: false, destructive: true, openWorld: true },
+  list_categories: { title: 'List categories', readOnly: true, openWorld: true },
+  search_catalog: { title: 'Search the catalog', readOnly: true, openWorld: true },
+  get_kit: { title: 'Get a kit', readOnly: true, openWorld: true },
+  install_artifact: { title: 'Install a block or page', readOnly: false, destructive: true, openWorld: true },
+  match_design: { title: 'Match a design to the catalog', readOnly: true, openWorld: true },
+  init_template: { title: 'Scaffold a project', readOnly: false, destructive: true, openWorld: true },
+  get_design_dna: { title: 'Get the design system', readOnly: true, openWorld: true },
+  review_code: { title: 'Review code for design defects', readOnly: true, openWorld: false },
+}
+
+const TOOLS = TOOL_DEFINITIONS.map((tool) => {
+  const meta = TOOL_META[tool.name]
+  if (!meta) throw new Error(`mcp.mjs: tool "${tool.name}" has no TOOL_META entry`)
+  return {
+    ...tool,
+    title: meta.title,
+    annotations: {
+      title: meta.title,
+      readOnlyHint: meta.readOnly,
+      // Only meaningful when the tool is not read-only; omitted otherwise
+      // rather than sent as a misleading `false`.
+      ...(meta.readOnly ? {} : { destructiveHint: meta.destructive === true }),
+      idempotentHint: meta.readOnly,
+      openWorldHint: meta.openWorld,
+    },
+  }
+})
 
 /* ------------------------------------------------------------------ *
  *  Tool implementations
@@ -786,6 +907,93 @@ async function runGetDesignDna(args) {
   return doc.markdown
 }
 
+/** Longest review reply, in characters. A whole directory can produce a novel. */
+const REVIEW_REPLY_LIMIT = 24_000
+
+const plain = (text) => text
+
+/**
+ * `paths` from a model, held inside the project.
+ *
+ * `review_code` reads files, and a tool that reads whatever path it is handed
+ * is a way to ask this process about the rest of the disk. The reply only
+ * carries findings and the first 80 characters of an offending tag, not file
+ * contents — but "only a little" is the wrong bar for a path the model wrote
+ * on the strength of a web page it just read. So every path is resolved and
+ * must land inside the working directory.
+ */
+function insideProject(cwd, candidates) {
+  const root = path.resolve(cwd)
+  return candidates.map((candidate) => {
+    const absolute = path.resolve(root, String(candidate))
+    const relative = path.relative(root, absolute)
+    if (relative.startsWith('..') || path.isAbsolute(relative)) {
+      throw new Error(
+        `"${candidate}" is outside the project (${root}). review_code only reads inside it.`,
+      )
+    }
+    return relative || '.'
+  })
+}
+
+async function runReviewCode(args) {
+  const cwd = process.cwd()
+  const hasSource = typeof args.source === 'string' && args.source.trim() !== ''
+  const hasPaths = Array.isArray(args.paths) && args.paths.length > 0
+
+  if (hasSource && hasPaths) {
+    throw new Error('Pass either `source` or `paths`, not both — they check different things.')
+  }
+
+  let findings
+  let scope
+  let fileCount
+
+  if (hasSource) {
+    const name = typeof args.path === 'string' && args.path.trim() ? args.path.trim() : 'component.tsx'
+    if (!REVIEWABLE.test(name)) {
+      throw new Error(`"${name}" is not a component file — \`path\` must end in .tsx or .jsx.`)
+    }
+    findings = reviewSource({ path: name, source: args.source })
+    scope = `the source you passed as ${name}`
+    fileCount = 1
+    if (args.violations_only) findings = findings.filter((f) => f.severity === 'violation')
+  } else {
+    ;({ findings, scope, fileCount } = await runReview({
+      paths: hasPaths ? insideProject(cwd, args.paths) : [],
+      base: typeof args.base === 'string' && args.base.trim() ? args.base.trim() : undefined,
+      cwd,
+      allLines: args.all_lines === true,
+      violationsOnly: args.violations_only === true,
+    }))
+  }
+
+  if (fileCount === 0) return `Nothing to review in ${scope}.`
+
+  const violations = findings.filter((f) => f.severity === 'violation').length
+  const advisories = findings.length - violations
+  const header =
+    findings.length === 0
+      ? `Reviewed ${scope}.`
+      : `Reviewed ${scope}: ${violations} violation${violations === 1 ? '' : 's'}, ` +
+        `${advisories} advisor${advisories === 1 ? 'y' : 'ies'}.` +
+        (violations ? ' Fix every violation, then run review_code again.' : '')
+
+  const body = renderTerminal(findings, {
+    bold: plain,
+    dim: plain,
+    green: plain,
+    yellow: plain,
+    cyan: plain,
+    width: 100,
+  })
+
+  const text = `${header}\n${body}`
+  return text.length > REVIEW_REPLY_LIMIT
+    ? `${text.slice(0, REVIEW_REPLY_LIMIT)}\n\n[truncated — narrow \`paths\`, or set violations_only]`
+    : text
+}
+
 const HANDLERS = {
   search_effects: runSearchEffects,
   get_effect: runGetEffect,
@@ -797,6 +1005,7 @@ const HANDLERS = {
   install_artifact: runInstallArtifact,
   init_template: runInitTemplate,
   get_design_dna: runGetDesignDna,
+  review_code: runReviewCode,
 }
 
 const TOOLS_BY_NAME = new Map(TOOLS.map((tool) => [tool.name, tool]))
@@ -974,8 +1183,12 @@ async function handleMessage(message) {
         : LATEST_PROTOCOL_VERSION
       sendResult(id, {
         protocolVersion,
-        capabilities: { tools: { listChanged: false } },
-        serverInfo: { name: SERVER_NAME, version: SERVER_VERSION },
+        capabilities: {
+          tools: { listChanged: false },
+          resources: { subscribe: false, listChanged: false },
+          prompts: { listChanged: false },
+        },
+        serverInfo: { name: SERVER_NAME, title: 'Hoverlab', version: SERVER_VERSION },
         instructions:
           'Search the Hoverlab catalog and install from it. The catalog has five tiers: ' +
           'effects (one element, plain CSS, emittable as React/Vue/Svelte/styled-components/' +
@@ -992,7 +1205,9 @@ async function handleMessage(message) {
           'a mockup — do not search with literal text from it. Read its structure, then call ' +
           'match_design once per distinct region; it tolerates designer vocabulary and partial ' +
           'matches where search_catalog does not. Install the closest match and restyle it to ' +
-          "the design's tokens.",
+          "the design's tokens. Before you tell the user UI work is finished, run review_code on " +
+          'what you wrote or installed and fix its violations — it checks accessibility, ' +
+          'right-to-left, reduced motion and overflow locally, and never uploads anything.',
       })
       return
     }
@@ -1014,6 +1229,43 @@ async function handleMessage(message) {
       await handleToolCall(id, params)
       return
 
+    case 'resources/list':
+      sendResult(id, { resources: await listResources() })
+      return
+
+    case 'resources/templates/list':
+      sendResult(id, { resourceTemplates: RESOURCE_TEMPLATES })
+      return
+
+    case 'resources/read':
+      try {
+        sendResult(id, await readResource(params?.uri))
+      } catch (error) {
+        // -32002 is the code the spec reserves for a resource that does not
+        // exist. Anything else is a genuine fault — a network failure, say —
+        // and stays an internal error so the client does not cache "gone".
+        if (error instanceof ResourceNotFound) {
+          sendError(id, RESOURCE_NOT_FOUND, error.message, { uri: error.uri })
+        } else {
+          sendError(id, INTERNAL_ERROR, `Could not read ${params?.uri}: ${error?.message ?? error}`)
+        }
+      }
+      return
+
+    case 'prompts/list':
+      sendResult(id, { prompts: listPrompts() })
+      return
+
+    case 'prompts/get':
+      try {
+        sendResult(id, getPrompt(params?.name, params?.arguments))
+      } catch (error) {
+        // An unknown prompt or a missing argument is the caller's mistake
+        // (-32602, invalid params), and the message says how to fix it.
+        sendError(id, INVALID_PARAMS, error?.message ?? 'Invalid prompt request')
+      }
+      return
+
     default:
       // Notifications never get a response, even an error one.
       if (!isNotification) {
@@ -1027,7 +1279,7 @@ async function handleMessage(message) {
  * signals shutdown.
  */
 export function startMcpServer() {
-  log(`serving ${TOOLS.length} tools against ${DEFAULT_ORIGIN}`)
+  log(`v${SERVER_VERSION}: ${TOOLS.length} tools, resources and prompts against ${DEFAULT_ORIGIN}`)
 
   return new Promise((resolve) => {
     let buffer = ''
