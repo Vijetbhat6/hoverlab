@@ -1,21 +1,57 @@
 # What does NOT go into the .vsix.
 #
 # Inverted from .gitignore's logic: everything is included unless listed, so
-# this file is the one place a stray artifact gets caught. The two rules
-# that matter are the last ones — a nested node_modules under the linked
-# `hoverlab` dependency, and any editor state that happened to be in the
-# folder.
+# this file is the one place a stray artifact gets caught. vsce already
+# drops devDependencies (@vscode/vsce, ovsx and their ~330 packages) by
+# asking `npm ls --omit=dev`, so none of them need a rule here; what needs
+# one is everything else that can sit in this folder.
+#
+# After changing this file, look at what actually ships:
+#
+#   npx vsce ls
+#
+# The intended shape is the extension's own src/ and media/, the manifest,
+# README, CHANGELOG and LICENSE, and node_modules/hoverlab as real files.
 
+# Editor and tooling state.
 .vscode/**
 .vscode-test/**
+.github/**
 **/.eslintrc.json
-**/*.map
 **/.DS_Store
 **/Thumbs.db
 
-# The one runtime dependency IS shipped — the extension does nothing without
-# it — but its own development files are not.
+# Build products of this very folder. A .vsix packaged earlier must never be
+# folded into the next one, and a `npm pack` tarball of the CLI is a
+# leftover of the old file: recipe.
+*.vsix
+**/*.vsix
+*.tgz
+**/*.tgz
+
+# Anything that could hold a credential. Nothing here reads one from disk
+# (the licence key lives in ~/.hoverlab, outside the project), so a match
+# is always a mistake.
+.env
+.env.*
+**/.env
+**/.env.*
+**/*.pem
+**/*.key
+
+# Source maps and dev-only files.
+**/*.map
+**/*.test.js
+**/*.test.mjs
+**/test/**
+**/tests/**
+package-lock.json
+
+# The one runtime dependency IS shipped, since the extension does nothing
+# without it, but its own development files and its README are not. The npm
+# tarball only carries bin/, src/ and README.md, so this is belt and braces
+# for the day someone links a checkout again.
 node_modules/hoverlab/node_modules/**
-node_modules/hoverlab/**/*.test.mjs
-node_modules/hoverlab/test/**
+node_modules/hoverlab/README.md
 node_modules/.package-lock.json
+node_modules/.bin/**

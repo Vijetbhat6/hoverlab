@@ -34,8 +34,9 @@
  * feels) and this one has its own: an extension is a thing people are
  * asked to trust with write access to their repo, and it should be
  * possible to read every line that ships without running a build first.
- * The cost is that `packages/cli` has to be `npm install`ed here — see
- * `catalog.js`, which is the only file that touches it.
+ * The cost is that the published `hoverlab` package has to be `npm install`ed
+ * here and ships inside the .vsix — see `catalog.js`, which is the only file
+ * that touches it.
  *
  * ── WHAT IT DELIBERATELY DOES NOT DO ────────────────────────────────────
  *

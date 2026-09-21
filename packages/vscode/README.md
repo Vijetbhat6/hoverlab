@@ -2,7 +2,7 @@
 
 Search and install UI from the [Hoverlab catalog](https://hoverlab5.netlify.app) without leaving the editor — and hand the whole catalog to your agent with nothing to configure.
 
-Works in **VS Code**, **Cursor** and **Windsurf**.
+Works in **VS Code**, **Cursor**, **Windsurf** and **VSCodium**. VS Code installs extensions from the Visual Studio Marketplace; Cursor, Windsurf and VSCodium install from [Open VSX](https://open-vsx.org), so this one is built to be published to both. It is not listed on either yet: until it is, install the `.vsix` (see [Install a .vsix](#install-a-vsix) below).
 
 ## What it does
 
@@ -57,36 +57,70 @@ npx -y hoverlab mcp
 
 ```sh
 cd packages/vscode
-npm install        # links ../cli, which does the fetching and installing
+npm install        # installs the published hoverlab package, which does the fetching and installing
 code .             # then F5 to launch an Extension Development Host
 ```
 
 No build step: plain CommonJS, no bundler, no TypeScript. An extension asks for write access to your repo, so every line that ships should be readable without running a build first.
 
-## Packaging
-
-The one runtime dependency is the `hoverlab` CLI package next door, and how it is installed decides whether a `.vsix` comes out usable.
-
-**Once the CLI is on npm** — the end state, and one line of setup:
+The extension depends on the published `hoverlab` range in `package.json`, not on the checkout next door, so what you run is what a user gets. To try unreleased CLI changes from `packages/cli`, link them without touching the manifest or the lockfile, and undo it with a plain `npm install`:
 
 ```sh
-# in packages/vscode/package.json, swap file:../cli for the published range
-npm install
-npx @vscode/vsce package
+npm install --no-save ../cli    # a symlink: fine for F5, wrong for packaging
+npm install                     # back to the published package
 ```
 
-**Until then**, `"hoverlab": "file:../cli"` installs as a *symlink*, and `vsce` packages the link rather than the files — so the extension ships with nothing to load. Pack the CLI and install the tarball instead, which is the same shape npm will serve later:
+Do not package while the symlink is in place. `vsce` packages the link rather than the files, so the extension would ship with nothing to load.
+
+## Install a .vsix
+
+Until the extension is listed on a marketplace, or to test a build before it is published, install the file directly:
 
 ```sh
-npm pack ../cli --pack-destination .
-npm install ./hoverlab-0.3.0.tgz
-npx @vscode/vsce package
+npm ci
+npm run package                                   # writes hoverlab-vscode-<version>.vsix beside this file
+code --install-extension hoverlab-vscode-0.1.0.vsix
 ```
 
-That produces `hoverlab-vscode-0.1.0.vsix` (32 files, ~128 KB) with the CLI inside as real files. Install it with `code --install-extension hoverlab-vscode-0.1.0.vsix`, or from the Extensions view's "Install from VSIX…".
+`code` can be `cursor`, `windsurf` or `codium`. Or use the Extensions view, **...** menu, **Install from VSIX...**. `npm run package` is `vsce package`; `@vscode/vsce` is a dev dependency and does not end up in the `.vsix`. Check what would ship with `npx vsce ls`.
 
-Afterwards, put the dev setup back — `npm install` against `file:../cli` again — so edits to the CLI are picked up live instead of frozen in a tarball.
+## Publishing
 
-Two things that look like fixes and are not. `npm install --install-links` does copy the dependency into place, but leaves the lockfile claiming `file:`, and `vsce` runs `npm list` which then calls the tree invalid. And `vsce package --no-dependencies` succeeds while producing an extension whose every command fails on the first call, because the code it needs was never included.
+The extension is published from CI, to the Visual Studio Marketplace (VS Code) and to Open VSX (Cursor, Windsurf, VSCodium), by [`.github/workflows/publish-vscode.yml`](../../.github/workflows/publish-vscode.yml). Nothing has been published yet: the one-time steps below need accounts that only a person can create.
 
-`"private": true` in the manifest blocks `vsce publish` on purpose; see the note beside it.
+### One-time setup (needs a human)
+
+**Visual Studio Marketplace**
+
+1. Sign in at [marketplace.visualstudio.com/manage](https://marketplace.visualstudio.com/manage) with a Microsoft account and create a publisher with the id `hoverlab`. The id must match `"publisher"` in `package.json`. This needs an Azure DevOps organisation, which the first sign-in offers to create.
+2. In Azure DevOps, create a personal access token (User settings, Personal access tokens) with organisation **All accessible organizations** and scope **Marketplace, Manage**.
+3. Save it as the repository secret `VSCE_PAT` (Settings, Secrets and variables, Actions).
+
+**Open VSX**
+
+1. Sign in at [open-vsx.org](https://open-vsx.org) with GitHub, open your profile and agree to the Publisher Agreement.
+2. Create an access token at [open-vsx.org/user-settings/tokens](https://open-vsx.org/user-settings/tokens).
+3. Create the namespace once: `npx ovsx create-namespace hoverlab -p <token>`. Publishing fails until the namespace exists. Claiming the namespace as its verified owner is a separate request described on the Open VSX wiki; publishing works without it, but the listing shows as unverified.
+4. Save the token as the repository secret `OVSX_PAT`.
+
+Either half can be set up alone. A marketplace whose secret is missing is skipped with a notice in the run log, not failed.
+
+### Cut a release
+
+1. Bump `"version"` in `package.json` and add an entry to `CHANGELOG.md`. Commit and push.
+2. Tag and push, using exactly `vscode-v` plus the version:
+
+   ```sh
+   git tag vscode-v0.1.0
+   git push origin vscode-v0.1.0
+   ```
+
+The workflow refuses to run past its first step if the tag and the manifest version disagree. Otherwise it builds the `.vsix`, checks that the `hoverlab` package is inside as real files and that nothing stray is, uploads it as a workflow artifact and as a GitHub release asset, then publishes that same file to each marketplace that has a token.
+
+To rehearse without publishing, run the workflow by hand from the Actions tab. **dry-run** defaults to on: it builds and inspects the `.vsix` and stops. Turning it off publishes for real, and only when run against a `vscode-v*` tag.
+
+### Notes
+
+- The `hoverlab` dependency is a normal semver range (`^0.3.0`), so a release picks up the newest compatible CLI at install time and the lockfile pins what CI actually packages. If the extension starts calling something newer than the range allows, raise the range.
+- A version can be published to each marketplace once. Fix a bad release by bumping the version, not by re-tagging.
+- `npm install --install-links` and `vsce package --no-dependencies` both look like shortcuts and are not: the first leaves a lockfile that `vsce` calls invalid, and the second builds an extension whose every command fails on first use because the code it needs was never included.

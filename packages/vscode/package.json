@@ -5,8 +5,7 @@
   "version": "0.1.0",
   "publisher": "hoverlab",
   "license": "MIT",
-  "//private": "Blocks `vsce publish` and not `vsce package`, which is the state this extension should be in until somebody decides to put it on the Marketplace: a .vsix can be built and installed today, and an accidental publish under the `hoverlab` publisher id cannot happen. Remove this line when that decision is made — it is the only thing standing in the way, and the README's Packaging section is the rest of the procedure.",
-  "private": true,
+  "//publish": "There is no `private` flag any more, so `vsce publish` and `ovsx publish` will run if somebody types them. The gate lives elsewhere on purpose: .github/workflows/publish-vscode.yml publishes only from a `vscode-v*` tag whose version matches this file, and skips each marketplace cleanly when its token secret is unset; the README's Publishing section is the one-time checklist (publisher, namespace, tokens).",
   "icon": "media/icon.png",
   "homepage": "https://hoverlab5.netlify.app",
   "repository": {
@@ -17,20 +16,34 @@
   "bugs": {
     "url": "https://github.com/Vijetbhat6/hoverlab/issues"
   },
+  "qna": "https://github.com/Vijetbhat6/hoverlab/issues",
+  "pricing": "Free",
+  "galleryBanner": {
+    "color": "#0B0F0D",
+    "theme": "dark"
+  },
   "categories": [
+    "AI",
     "Snippets",
     "Other"
   ],
   "keywords": [
+    "hoverlab",
     "ui",
     "components",
     "blocks",
+    "templates",
     "tailwind",
     "react",
     "shadcn",
     "css",
     "animation",
-    "mcp"
+    "mcp",
+    "model context protocol",
+    "agent",
+    "copilot",
+    "cursor",
+    "windsurf"
   ],
   "engines": {
     "vscode": "^1.84.0"
@@ -238,9 +251,15 @@
     }
   },
   "dependencies": {
-    "hoverlab": "file:../cli"
+    "hoverlab": "^0.3.0"
+  },
+  "devDependencies": {
+    "@vscode/vsce": "^4.0.0",
+    "ovsx": "^1.2.0"
   },
   "scripts": {
-    "package": "npx --yes @vscode/vsce package --no-dependencies=false"
+    "package": "vsce package",
+    "publish:vsce": "vsce publish",
+    "publish:ovsx": "ovsx publish"
   }
 }
