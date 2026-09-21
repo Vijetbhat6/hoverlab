@@ -177,7 +177,19 @@ export async function GET() {
 
   // Config checks run even when the probes pass: NEXT_PUBLIC_SITE_URL being
   // wrong breaks canonical URLs without breaking anything a probe notices.
-  const envFailures = blockingFailures(checkEnv(process.env, { production }))
+  //
+  // NEXT_PUBLIC_SITE_URL is passed as a literal `process.env.X` reference on
+  // purpose. Next inlines NEXT_PUBLIC_ values at build time only where they are
+  // written out like this; `process.env` handed over whole is read at runtime,
+  // where on Netlify the value is absent (next.config.ts supplies it from the
+  // platform's own URL at build). Without this the check reported "falls back
+  // to localhost" on a site whose every page and route had the right address.
+  const envFailures = blockingFailures(
+    checkEnv(
+      { ...process.env, NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL },
+      { production },
+    ),
+  )
   const config: Probe[] = envFailures
     // Already covered, in more detail, by the live probes above.
     .filter((c) => !/FIREBASE/.test(c.key))

@@ -1,6 +1,6 @@
 # Hoverlab for VS Code
 
-Search and install UI from the [Hoverlab catalog](https://hoverlab-xak9.vercel.app) without leaving the editor — and hand the whole catalog to your agent with nothing to configure.
+Search and install UI from the [Hoverlab catalog](https://hoverlab5.netlify.app) without leaving the editor — and hand the whole catalog to your agent with nothing to configure.
 
 Works in **VS Code**, **Cursor** and **Windsurf**.
 

@@ -31,7 +31,7 @@ import { resolveKey } from './auth.mjs'
  * files before, which is six chances to update five of them.
  */
 export const DEFAULT_ORIGIN =
-  process.env.HOVERLAB_API_URL || 'https://hoverlab-xak9.vercel.app'
+  process.env.HOVERLAB_API_URL || 'https://hoverlab5.netlify.app'
 
 /**
  * The same origin, for printing rather than for fetching.
@@ -40,7 +40,7 @@ export const DEFAULT_ORIGIN =
  * `HOVERLAB_API_URL` at their own preview deployment is still told to get a
  * licence key from the real site, which is the only place that issues one.
  */
-export const SITE_URL = 'https://hoverlab-xak9.vercel.app'
+export const SITE_URL = 'https://hoverlab5.netlify.app'
 
 export const FRAMEWORKS = [
   'html',

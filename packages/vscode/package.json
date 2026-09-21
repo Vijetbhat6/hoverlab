@@ -8,7 +8,7 @@
   "//private": "Blocks `vsce publish` and not `vsce package`, which is the state this extension should be in until somebody decides to put it on the Marketplace: a .vsix can be built and installed today, and an accidental publish under the `hoverlab` publisher id cannot happen. Remove this line when that decision is made — it is the only thing standing in the way, and the README's Packaging section is the rest of the procedure.",
   "private": true,
   "icon": "media/icon.png",
-  "homepage": "https://hoverlab-xak9.vercel.app",
+  "homepage": "https://hoverlab5.netlify.app",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Vijetbhat6/hoverlab.git",
