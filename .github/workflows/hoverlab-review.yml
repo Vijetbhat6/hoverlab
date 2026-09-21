@@ -1,0 +1,49 @@
+# Dogfood: review this repo's own pull requests with the reviewer in the PR.
+#
+# `cli:` points at the checked-out CLI instead of `hoverlab@latest`, so a
+# pull request that changes a review rule is judged by that rule, and a rule
+# that is wrong shows up here before it reaches npm.
+#
+# Safe for untrusted code: this runs on `pull_request` (not
+# `pull_request_target`), so a fork's PR gets a read-only token and no
+# secrets. The comment step then degrades to a warning and the annotations
+# and step summary carry the review.
+
+name: Hoverlab design review
+
+on:
+  pull_request:
+    paths:
+      - 'src/**/*.tsx'
+      - 'src/**/*.jsx'
+      - 'src/**/*.css'
+      - 'packages/**/*.tsx'
+      - 'packages/**/*.jsx'
+      - 'packages/**/*.css'
+      # The reviewer itself and this action: a change to either should be run.
+      - 'packages/cli/src/review/**'
+      - 'packages/review-action/**'
+      - '.github/workflows/hoverlab-review.yml'
+
+concurrency:
+  group: hoverlab-review-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out with full history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Hoverlab design review
+        uses: ./packages/review-action
+        with:
+          cli: node packages/cli/bin/hoverlab.mjs

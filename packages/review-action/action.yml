@@ -1,0 +1,175 @@
+name: Hoverlab design review
+description: >-
+  Review the components a pull request changes for accessibility, RTL,
+  reduced-motion and overflow defects. Annotates the diff, writes a step
+  summary, and keeps one sticky comment up to date.
+author: Hoverlab
+
+branding:
+  icon: eye
+  color: green
+
+inputs:
+  base:
+    description: >-
+      Branch (or full commit SHA) to review against. Defaults to the pull
+      request's base branch. On a push event with no value, the push's
+      "before" commit is used. Ignored when `paths` is set.
+    required: false
+    default: ${{ github.base_ref }}
+  paths:
+    description: >-
+      Space-separated files or directories to review in full instead of the
+      diff. When set, `base` is ignored. Paths containing spaces are not
+      supported.
+    required: false
+    default: ''
+  github-token:
+    description: >-
+      Token used to fetch history if the checkout did not keep its
+      credentials, and to post the comment. The default `github.token`
+      needs `pull-requests: write` to comment.
+    required: false
+    default: ${{ github.token }}
+  comment:
+    description: >-
+      `true` posts and updates the sticky pull-request comment, `false`
+      only annotates and writes the step summary.
+    required: false
+    default: 'true'
+  comment-on-clean:
+    description: >-
+      What to do with the comment when the review finds nothing at all.
+      `true` (default): update an existing comment to "no findings", but never
+      create one. `false`: leave an existing comment untouched (it may go
+      stale). `always`: also create a "no findings" comment when none exists.
+    required: false
+    default: 'true'
+  fail-on:
+    description: >-
+      `violation` (default) fails the job when there is any violation, or when
+      the reviewer could not run. `never` never fails the job. Advisories
+      never fail a run either way.
+    required: false
+    default: violation
+  cli:
+    description: >-
+      Command that invokes the hoverlab CLI. Split on whitespace, relative
+      paths resolve from `working-directory`.
+    required: false
+    default: npx --yes hoverlab@latest
+  args:
+    description: >-
+      Extra flags for `hoverlab review`, space-separated, for example
+      `--all-lines --violations-only`.
+    required: false
+    default: ''
+  working-directory:
+    description: Directory to run the review in, relative to the workspace.
+    required: false
+    default: '.'
+
+outputs:
+  violations:
+    description: Number of violations found.
+    value: ${{ steps.review.outputs.violations }}
+  advisories:
+    description: Number of advisory findings.
+    value: ${{ steps.review.outputs.advisories }}
+  body-file:
+    description: Path of the Markdown report, for later steps. Empty if the reviewer did not run.
+    value: ${{ steps.review.outputs.body-file }}
+  comment-action:
+    description: created, updated, unchanged, skipped, forbidden, rate-limited or error. Empty when no comment step ran.
+    value: ${{ steps.comment.outputs.comment-action }}
+  comment-url:
+    description: URL of the sticky comment, when one was written or found.
+    value: ${{ steps.comment.outputs.comment-url }}
+
+runs:
+  using: composite
+  steps:
+    # Every ${{ }} below lands in `env:`, never inside a `run:` script. A
+    # branch name or input is text an attacker can shape; in `env:` it is
+    # data, in a script it is code.
+
+    # With fail-on: never, even a setup failure (no history, bad input) must
+    # not block a merge, so it is allowed to fail softly; the error
+    # annotation still shows, and the review step below is skipped rather
+    # than run without a base and report a false "no findings".
+    - name: Make the merge-base history available
+      id: prepare
+      continue-on-error: ${{ inputs.fail-on == 'never' }}
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
+      env:
+        ACTION_PATH: ${{ github.action_path }}
+        INPUT_BASE: ${{ inputs.base }}
+        INPUT_PATHS: ${{ inputs.paths }}
+        INPUT_FAIL_ON: ${{ inputs.fail-on }}
+        INPUT_COMMENT: ${{ inputs.comment }}
+        INPUT_COMMENT_ON_CLEAN: ${{ inputs.comment-on-clean }}
+        EVENT_NAME: ${{ github.event_name }}
+        EVENT_BEFORE: ${{ github.event.before }}
+        GITHUB_TOKEN: ${{ inputs.github-token }}
+      run: bash "$ACTION_PATH/prepare.sh"
+
+    - name: Review (annotations and summary)
+      id: review
+      if: ${{ steps.prepare.outcome == 'success' }}
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
+      env:
+        ACTION_PATH: ${{ github.action_path }}
+        INPUT_CLI: ${{ inputs.cli }}
+        INPUT_PATHS: ${{ inputs.paths }}
+        INPUT_ARGS: ${{ inputs.args }}
+        BASE: ${{ steps.prepare.outputs.base }}
+      run: bash "$ACTION_PATH/review.sh"
+
+    # Only on pull requests, and never if the reviewer itself did not run
+    # (there is no body to post). A failure to comment is a warning: it must
+    # not replace the review's own verdict, which the last step delivers.
+    - name: Update the sticky pull-request comment
+      id: comment
+      if: >-
+        ${{ !cancelled()
+        && inputs.comment == 'true'
+        && (github.event_name == 'pull_request' || github.event_name == 'pull_request_target')
+        && steps.review.outputs.body-file != '' }}
+      shell: bash
+      env:
+        ACTION_PATH: ${{ github.action_path }}
+        GITHUB_TOKEN: ${{ inputs.github-token }}
+        BODY_FILE: ${{ steps.review.outputs.body-file }}
+        CLEAN: ${{ steps.review.outputs.clean }}
+        COMMENT_ON_CLEAN: ${{ inputs.comment-on-clean }}
+      run: |
+        case "$COMMENT_ON_CLEAN" in
+          true) on_clean=update ;;
+          false) on_clean=skip ;;
+          always) on_clean=create ;;
+        esac
+        node "$ACTION_PATH/post-comment.mjs" \
+          --body-file "$BODY_FILE" --clean "$CLEAN" --on-clean "$on_clean" ||
+          echo "::warning title=hoverlab review::Could not update the pull-request comment (see the message above). The annotations and step summary still carry the review."
+
+    - name: Fail on violations
+      shell: bash
+      if: ${{ !cancelled() }}
+      env:
+        FAIL_ON: ${{ inputs.fail-on }}
+        VIOLATIONS: ${{ steps.review.outputs.violations }}
+        HAS_VIOLATIONS: ${{ steps.review.outputs.has-violations }}
+        TOOL_ERROR: ${{ steps.review.outputs.tool-error }}
+      run: |
+        if [ "$TOOL_ERROR" = true ]; then
+          if [ "$FAIL_ON" = violation ]; then
+            echo "::error title=hoverlab review::The reviewer did not run, so this check cannot vouch for the change. Set fail-on: never to make that a warning."
+            exit 1
+          fi
+          echo "::warning title=hoverlab review::The reviewer did not run; fail-on is never, so the job continues."
+        elif [ "$HAS_VIOLATIONS" = true ] && [ "$FAIL_ON" = violation ]; then
+          echo "::error title=hoverlab review::${VIOLATIONS} design violation(s). Advisories are questions and do not fail the run."
+          exit 1
+        fi
