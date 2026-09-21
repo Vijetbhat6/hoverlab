@@ -48,8 +48,8 @@ const SERVER = join(HERE, '..', '..', 'packages', 'cli', 'src', 'mcp.mjs')
 function serverToolNames(): string[] {
   const src = readFileSync(SERVER, 'utf8')
 
-  const start = src.indexOf('const TOOLS = [')
-  assert.notEqual(start, -1, 'mcp.mjs no longer declares `const TOOLS = [`')
+  const start = src.indexOf('const TOOL_DEFINITIONS = [')
+  assert.notEqual(start, -1, 'mcp.mjs no longer declares `const TOOL_DEFINITIONS = [`')
 
   // The tool definitions run to the first line that closes the array at
   // column 0. Every entry inside is indented, so this cannot end early.

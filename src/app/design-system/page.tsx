@@ -25,7 +25,7 @@ import { TOTAL_COUNT } from '@/lib/catalog-stats'
 
 const TITLE = 'Design system export — your brand, as tokens — Hoverlab'
 const DESCRIPTION =
-  'Pick a brand colour and get the whole token set as files: tokens.css, a Tailwind theme, W3C design tokens for Figma and a config the CLI reads. Every effect, block and page in the catalog is already styled through those tokens, so the catalog matches your product instead of the other way round.'
+  'Pick a brand colour and get the whole token set as files: tokens.css, a Tailwind v4 theme (and a v3 config), W3C design tokens for Figma and a config the CLI reads. Every effect, block and page in the catalog is already styled through those tokens, so the catalog matches your product instead of the other way round.'
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -52,7 +52,7 @@ const READS_IT = [
   {
     icon: FileCode,
     title: 'Your codebase',
-    body: 'tokens.css and a Tailwind theme. Drop them into any Hoverlab template, or into a project of your own that uses the same token names.',
+    body: 'tokens.css and a Tailwind theme, for v4 or v3. Drop them into any Hoverlab template, or into a project of your own that uses the same token names.',
   },
   {
     icon: Figma,

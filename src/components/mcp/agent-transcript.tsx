@@ -4,7 +4,7 @@
  * WHY A TRANSCRIPT AND NOT A FEATURE LIST.
  *
  * "MCP server" tells a reader nothing about what changes on their machine.
- * The table of ten tools further down the page is reference material — it
+ * The table of tools further down the page is reference material — it
  * answers questions somebody already has. This answers the question they
  * have not formed yet: what does it look like when it works? A list of
  * capabilities cannot show the one thing that distinguishes this server

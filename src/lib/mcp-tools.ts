@@ -134,6 +134,13 @@ export const MCP_TOOLS: McpTool[] = [
     detail:
       'Tokens for both themes, radius, spacing, type and motion rules. Called before the agent writes UI of its own, so it does not invent a second palette.',
   },
+  {
+    name: 'review_code',
+    kind: 'read',
+    summary: 'Check UI code for design defects',
+    detail:
+      'Accessibility, right-to-left, reduced motion and overflow, on code the agent has not saved yet, on named files, or on what changed in git. Runs on your machine, reads files only, uploads nothing. The agent calls it before saying the work is done.',
+  },
 ]
 
 export const MCP_TOOL_COUNT = MCP_TOOLS.length

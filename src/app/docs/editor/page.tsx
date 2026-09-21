@@ -169,8 +169,8 @@ code --install-extension hoverlab-vscode-0.1.0.vsix`}</Snippet>
           VS Code lets an extension <em>contribute</em> an MCP server. So
           installing this one is configuring it: agent mode gets{' '}
           <C>search_catalog</C>, <C>install_artifact</C>, <C>get_kit</C>,{' '}
-          <C>match_design</C>, <C>init_template</C> and <C>get_design_dna</C>{' '}
-          over all five tiers, with nothing typed. It runs{' '}
+          <C>match_design</C>, <C>init_template</C>, <C>get_design_dna</C> and{' '}
+          <C>review_code</C> over all five tiers, with nothing typed. It runs{' '}
           <C>npx -y hoverlab mcp</C> on demand rather than bundling a copy,
           because the tool definitions teach an agent what the catalog can do
           and a frozen copy would teach it last quarter&rsquo;s answer.

@@ -28,7 +28,7 @@
  * ── THE ARGUMENT, AND THE PART OF IT THAT IS DELIBERATELY NOT MADE ──────
  *
  * The claim worth making is a difference in kind, not a score: three of
- * these ten tools put files in the reader's repo, and every competing
+ * these tools put files in the reader's repo, and every competing
  * server in this category hands back code, or a command to run, and stops.
  * `install_artifact` resolving a page's blocks so the result compiles is
  * the concrete version of that, and it is the thing a read-only server
@@ -86,7 +86,7 @@ import { breadcrumbLd } from '@/lib/structured-data'
 
 const TITLE = 'MCP server — the component library your agent installs from'
 const DESCRIPTION =
-  'Register Hoverlab as an MCP server and your editor’s agent gets the whole catalog as tools. Ten of them, three of which write files into your project. No key, no account, one command.'
+  `Register Hoverlab as an MCP server and your editor’s agent gets the whole catalog as tools. ${MCP_TOOL_COUNT} of them, ${MCP_WRITE_COUNT} of which write files into your project, plus a reviewer that checks what it wrote. No key, no account, one command.`
 
 export const metadata: Metadata = {
   title: TITLE,

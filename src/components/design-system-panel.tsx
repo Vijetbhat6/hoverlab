@@ -51,14 +51,21 @@ import type { DesignSystemExport } from '@/lib/export/design-system'
 /** What each file is for, in one line, for the free-tier explanation. */
 const CONTENTS: Array<{ path: string; blurb: string }> = [
   { path: 'tokens.css', blurb: 'Every colour token in your brand, light and dark.' },
-  { path: 'tailwind-theme.ts', blurb: 'Maps them onto class names — bg-primary and the rest.' },
+  {
+    path: 'tailwind-theme.css',
+    blurb: 'Tailwind v4: maps them onto class names — bg-primary and the rest.',
+  },
+  {
+    path: 'tailwind-theme.v3.ts',
+    blurb: 'The same mapping for Tailwind v3, as a config to merge.',
+  },
   {
     path: 'tokens.light.json',
     blurb: 'W3C design tokens — what Figma’s variable import reads.',
   },
   { path: 'tokens.dark.json', blurb: 'The same, for dark mode. Figma splits modes by file.' },
   { path: 'hoverlab.config.json', blurb: 'So the CLI installs artifacts already in your brand.' },
-  { path: 'README.md', blurb: 'What to do with the four files above.' },
+  { path: 'README.md', blurb: 'What to do with the files above, and which Tailwind file is yours.' },
 ]
 
 export function DesignSystemPanel() {
