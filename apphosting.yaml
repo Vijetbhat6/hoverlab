@@ -1,0 +1,111 @@
+# Firebase App Hosting configuration for Hoverlab.
+#
+# This file is what the Vercel dashboard used to be: runtime size, scaling
+# limits and every environment variable. App Hosting builds the repo on Cloud
+# Build with `npm run build` and serves the result from Cloud Run behind Cloud
+# CDN, so nothing here changes how the app is built.
+#
+# Variable precedence: the Firebase console overrides this file, which
+# overrides .env files. Do NOT set NODE_ENV here; the buildpack sets it, and
+# forcing it to production makes the build skip devDependencies that the
+# prebuild scripts (tsx, tailwind) need.
+
+# Matches "engines.node" in package.json. firebase-admin reaches jose@6
+# (ESM-only) through jwks-rsa, and require() of an ES module needs Node 22.12+.
+# If the first build rejects nodejs24, change this AND engines.node to 22.
+runtime: nodejs24
+
+runConfig:
+  cpu: 1
+  # The default is 512. A Next server holding ~2,000 prerendered routes plus
+  # sharp for next/image is tight in that, and an out-of-memory restart looks
+  # like a random 502.
+  memoryMiB: 1024
+  concurrency: 80
+  minInstances: 0
+  # Blaze has no hard spend cap, so this is the cap. Three instances at 80
+  # concurrent requests each is far above current traffic; raise it only when
+  # the Cloud Run metrics show requests queueing.
+  maxInstances: 3
+
+env:
+  # --- Firebase web config (public by design) --------------------------------
+  # NEXT_PUBLIC_* values are inlined into the client bundle at build time, so
+  # they must be available at BUILD as well as at runtime. The server also
+  # falls back to the API key here for its Auth REST calls (lib/firebase/rest.ts),
+  # so there is no separate FIREBASE_API_KEY.
+  - variable: NEXT_PUBLIC_FIREBASE_API_KEY
+    value: AIzaSyCmw3LE4PA5LoIMX9p1hkSCnRMYhMDq6AA
+  - variable: NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN
+    value: hoverlab-18c8a.firebaseapp.com
+  - variable: NEXT_PUBLIC_FIREBASE_PROJECT_ID
+    value: hoverlab-18c8a
+  - variable: NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET
+    value: hoverlab-18c8a.firebasestorage.app
+  - variable: NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID
+    value: "680372412408"
+  - variable: NEXT_PUBLIC_FIREBASE_APP_ID
+    value: 1:680372412408:web:6fc4f8c5e71d3f503a800d
+
+  # --- Canonical site URL ----------------------------------------------------
+  # REQUIRED, and there is no fallback any more. On Vercel, lib/site.ts
+  # inherited VERCEL_PROJECT_PRODUCTION_URL; nothing equivalent exists here.
+  # Unset, every canonical tag, the sitemap, OG images and the Polar checkout
+  # return URL resolve to http://localhost:3000.
+  #
+  # Set it to the backend's URL once it exists:
+  #   https://<backendId>--<projectId>.<region>.hosted.app
+  # and switch it to the custom domain when one is attached.
+  # - variable: NEXT_PUBLIC_SITE_URL
+  #   value: https://hoverlab--hoverlab-18c8a.REGION.hosted.app
+
+  # --- Secrets (Cloud Secret Manager) ----------------------------------------
+  # Create each one with:
+  #   firebase apphosting:secrets:set NAME --data-file <file> --project hoverlab-18c8a
+  # A rollout FAILS if a secret named here does not exist, which is the loud
+  # failure we want; the alternative is a server that boots without auth.
+  - variable: FIREBASE_SERVICE_ACCOUNT
+    secret: FIREBASE_SERVICE_ACCOUNT
+  - variable: POLAR_ACCESS_TOKEN
+    secret: POLAR_ACCESS_TOKEN
+  - variable: POLAR_WEBHOOK_SECRET
+    secret: POLAR_WEBHOOK_SECRET
+
+  # --- Polar (sandbox) -------------------------------------------------------
+  # Identifiers, not credentials. Copied from .env.local; they belong to the
+  # same sandbox org as the access token above. Move to production ids only
+  # together with POLAR_SERVER and the token.
+  - variable: POLAR_SERVER
+    value: sandbox
+  - variable: POLAR_PRODUCT_ID_PRO
+    value: e8bc5bd7-42d1-404f-9eb4-db489346d088
+  - variable: POLAR_PRODUCT_ID_TEAM
+    value: 04e87e12-8e7f-4695-b542-2f143e8870b0
+  - variable: POLAR_DISCOUNT_ID_IN_PRO
+    value: 989537d5-f96e-49fc-863f-da14624af22d
+  - variable: POLAR_DISCOUNT_ID_IN_TEAM
+    value: d74c1e61-dac3-4a62-ac6c-5c620dcf7b99
+  - variable: POLAR_DISCOUNT_ID_IN_PRO_INR
+    value: 34793f82-fd76-47a7-b798-dac9e038d99a
+  - variable: POLAR_DISCOUNT_ID_IN_TEAM_INR
+    value: 866124c2-df6b-4212-9e7e-e79634b856f5
+
+  # --- Not set yet; add when you need them -----------------------------------
+  # Legal pages read these at BUILD time (src/lib/legal.ts), so they need the
+  # default availability and a new rollout after changing them.
+  # - variable: OPERATOR_LEGAL_NAME
+  #   value: ""
+  # - variable: OPERATOR_ADDRESS
+  #   value: ""
+  # - variable: OPERATOR_JURISDICTION
+  #   value: ""
+  # - variable: OPERATOR_CONTACT_EMAIL
+  #   value: ""
+  #
+  # Secrets, each needing `apphosting:secrets:set` first:
+  # - variable: ANTHROPIC_API_KEY
+  #   secret: ANTHROPIC_API_KEY
+  # - variable: RESEND_API_KEY
+  #   secret: RESEND_API_KEY
+  # - variable: QUOTA_IP_SALT
+  #   secret: QUOTA_IP_SALT

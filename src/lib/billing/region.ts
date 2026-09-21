@@ -121,8 +121,16 @@ export function pricedCountries(): string[] {
  * The country comes from the edge proxy's IP geolocation header, which is
  * set before the request reaches us and cannot be spoofed by the client the
  * way a cookie or query parameter could. `x-vercel-ip-country` is what
- * Vercel sets; `cf-ipcountry` covers a Cloudflare front if one is ever put
- * in place.
+ * Vercel set; `cf-ipcountry` is what a Cloudflare front sets.
+ *
+ * Off Vercel, neither is guaranteed. Firebase App Hosting's CDN does not pass
+ * geolocation headers to the backend, and Netlify exposes geolocation through
+ * its own mechanism, not through either of these — so after deploying, check
+ * `/api/billing/pricing` from a non-US network. Where no header arrives,
+ * every request resolves to 'default' — list price, in dollars, for
+ * everyone. That is the safe failure (a missing header can never advertise a
+ * discount the checkout will not honour), but it means regional pricing is
+ * OFF until something sets one of these headers.
  *
  * Locally neither header exists, so everything resolves to 'default' — list
  * price. To exercise a regional path in dev, send the header by hand:

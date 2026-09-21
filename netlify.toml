@@ -1,0 +1,53 @@
+# Netlify build configuration for Hoverlab.
+#
+# Netlify detects Next.js and installs its own runtime (the OpenNext adapter)
+# automatically; nothing here selects it.
+#
+# BUDGET, because it is the whole risk of this host: the free plan is 300
+# credits a month as a HARD cap. A production deploy costs 15, bandwidth is
+# about 10 credits per GB, and when the balance hits zero every site on the
+# team is paused until the month resets - the same failure that paused Vercel.
+# So a deploy is not free. `ignore` below skips the ones that change nothing
+# a visitor can see; the rest is discipline: batch changes into fewer pushes.
+
+[build]
+  command = "npm run build"
+
+  # Skip the build - and the 15 credits - when nothing that ships changed since
+  # the last SUCCESSFUL build. Exit 0 means "skip", non-zero means "build".
+  # CACHED_COMMIT_REF is that last built commit, so a push of several commits
+  # is judged as a whole rather than by its last commit alone. On a site's
+  # first build it is empty, the diff errors, and the build runs.
+  ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF -- src public scripts packages package.json package-lock.json next.config.ts netlify.toml tsconfig.json postcss.config.mjs"
+
+[build.environment]
+  # firebase-admin reaches jose@6 (ESM-only) through jwks-rsa, and require() of
+  # an ES module needs Node 22.12+. Matches "engines.node" in package.json.
+  # Functions run on the same version as the build.
+  NODE_VERSION = "24"
+
+  # The Firebase web config is public by design (it ships to every browser).
+  # Build-only: variables set in this file are NOT passed to functions, which
+  # matters because Netlify caps a function's environment at 4 KB and the
+  # service account key alone is 2.4 KB. NEXT_PUBLIC_* values are inlined into
+  # the server bundle at build time anyway, so the server still sees them.
+  NEXT_PUBLIC_FIREBASE_API_KEY = "AIzaSyCmw3LE4PA5LoIMX9p1hkSCnRMYhMDq6AA"
+  NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN = "hoverlab-18c8a.firebaseapp.com"
+  NEXT_PUBLIC_FIREBASE_PROJECT_ID = "hoverlab-18c8a"
+  NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET = "hoverlab-18c8a.firebasestorage.app"
+  NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID = "680372412408"
+  NEXT_PUBLIC_FIREBASE_APP_ID = "1:680372412408:web:6fc4f8c5e71d3f503a800d"
+
+  # Identifiers, not credentials. The Polar sandbox ids from .env.local; they
+  # belong to the same org as the access token you set in the Netlify UI.
+  # Runtime reads (process.env.POLAR_*), so these are NOT inlined - and being
+  # in this file means they are NOT in the function environment either. Set
+  # them in the Netlify UI (Site configuration -> Environment variables, scope
+  # "Functions") instead; they are listed here so the full set is in one place.
+  # POLAR_SERVER = sandbox
+  # POLAR_PRODUCT_ID_PRO = e8bc5bd7-42d1-404f-9eb4-db489346d088
+  # POLAR_PRODUCT_ID_TEAM = 04e87e12-8e7f-4695-b542-2f143e8870b0
+  # POLAR_DISCOUNT_ID_IN_PRO = 989537d5-f96e-49fc-863f-da14624af22d
+  # POLAR_DISCOUNT_ID_IN_TEAM = d74c1e61-dac3-4a62-ac6c-5c620dcf7b99
+  # POLAR_DISCOUNT_ID_IN_PRO_INR = 34793f82-fd76-47a7-b798-dac9e038d99a
+  # POLAR_DISCOUNT_ID_IN_TEAM_INR = 866124c2-df6b-4212-9e7e-e79634b856f5

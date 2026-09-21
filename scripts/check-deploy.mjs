@@ -9,7 +9,7 @@
  * set of checks exists to catch.
  *
  * Usage:
- *   npm run check:deploy -- https://your-deploy.vercel.app
+ *   npm run check:deploy -- https://your-backend.hosted.app
  *   BASE=http://localhost:3007 npm run check:deploy
  *
  * Exits non-zero if the deployment is not fit to serve sign-in, so it can be

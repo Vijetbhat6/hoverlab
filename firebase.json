@@ -1,5 +1,24 @@
 {
   "firestore": {
     "indexes": "firestore.indexes.json"
+  },
+  "apphosting": {
+    "backendId": "hoverlab",
+    "rootDir": "/",
+    "ignore": [
+      "node_modules",
+      ".git",
+      ".next",
+      ".vercel",
+      ".pgdata",
+      "tool-results",
+      "firebase-debug.log",
+      "firebase-debug.*.log",
+      "firebase-service-account.json",
+      "*service-account*.json",
+      ".env",
+      ".env.local",
+      ".env.production"
+    ]
   }
 }

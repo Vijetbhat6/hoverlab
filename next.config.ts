@@ -13,6 +13,27 @@ const nextConfig: NextConfig = {
   reactStrictMode: false,
 
   /**
+   * Canonical site URL on Netlify.
+   *
+   * lib/site.ts reads NEXT_PUBLIC_SITE_URL and has no other fallback. Vercel
+   * used to supply one; Netlify does too, as `URL` — the primary address of
+   * the site, which is the custom domain once one is attached and the
+   * *.netlify.app name until then. `env` inlines it at build time exactly
+   * like a NEXT_PUBLIC_ variable, so neither the prerendered pages nor the
+   * checkout return URL can silently say localhost.
+   *
+   * An explicit NEXT_PUBLIC_SITE_URL always wins. Gated on NETLIFY so no other
+   * host (or a developer machine that happens to have a `URL` variable)
+   * picks it up.
+   */
+  env:
+    process.env.NETLIFY === "true" &&
+    !process.env.NEXT_PUBLIC_SITE_URL &&
+    process.env.URL
+      ? { NEXT_PUBLIC_SITE_URL: process.env.URL }
+      : {},
+
+  /**
    * Load firebase-admin from node_modules at runtime instead of putting it
    * through the bundler.
    *

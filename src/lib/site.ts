@@ -8,28 +8,15 @@
  * checkout builds its return URL from here, a wrong value strands a paying
  * customer on a dead page immediately after they are charged.
  *
- * The Vercel fallbacks are ordered deliberately:
- *
- *   VERCEL_PROJECT_PRODUCTION_URL  the project's stable production domain.
- *     Constant across deploys, so canonical tags and sitemap entries stay
- *     valid rather than pointing at a build that has since been superseded.
- *
- *   VERCEL_URL  the deployment-specific hostname, which carries a per-build
- *     hash. Right for a preview (it is self-consistent), wrong for anything
- *     durable: the URL dies with the deployment, and preview hostnames sit
- *     behind Vercel's SSO wall where neither a crawler nor Polar's webhook
- *     can reach them.
- *
- * Both are server-side runtime values, not NEXT_PUBLIC_ build-time ones —
- * safe here because every consumer of this module is server-only.
+ * There is no fallback here. The site used to run on Vercel and inherit
+ * VERCEL_PROJECT_PRODUCTION_URL. On Netlify, next.config.ts bridges Netlify's
+ * own `URL` into this variable at build time, so nothing needs setting; on any
+ * other host (Firebase App Hosting: apphosting.yaml) it has to be set
+ * explicitly. NEXT_PUBLIC_ values are inlined at BUILD time, so setting it
+ * only on a running server does nothing. `npm run check:env` reports it as
+ * required in production.
  */
-export const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ??
-  (process.env.VERCEL_PROJECT_PRODUCTION_URL
-    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-    : process.env.VERCEL_URL
-      ? `https://${process.env.VERCEL_URL}`
-      : 'http://localhost:3000')
+export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000'
 
 /** Join a path onto the canonical origin, avoiding double slashes. */
 export function absoluteUrl(path: string): string {
