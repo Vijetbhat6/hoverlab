@@ -86,7 +86,7 @@ export function UserMenu() {
         disabled
         aria-label="Checking your account"
         aria-busy="true"
-        className="hidden h-9 gap-1.5 sm:inline-flex"
+        className="h-9 w-9 gap-1.5 px-0 sm:w-auto sm:px-3"
       >
         <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />
       </Button>
@@ -96,14 +96,23 @@ export function UserMenu() {
   if (!user) {
     return (
       <div className="flex items-center gap-1">
+        {/*
+          Icon-only below `sm`, same convention as TrayButton: the header has
+          no room for the label there, not for the control itself. It used to
+          be `hidden sm:inline-flex` — gone below `sm` entirely — which left a
+          returning visitor on a phone with no way back in except stumbling
+          onto "Already have an account?" at the bottom of the signup form.
+        */}
         <Button
           variant="ghost"
           size="sm"
-          className="hidden h-9 gap-1.5 sm:inline-flex"
+          className="h-9 w-9 gap-1.5 px-0 sm:w-auto sm:px-3"
+          aria-label="Sign in"
           asChild
         >
           <Link href="/login">
-            <UserIcon className="h-4 w-4" /> Sign in
+            <UserIcon className="h-4 w-4" aria-hidden="true" />
+            <span className="hidden sm:inline">Sign in</span>
           </Link>
         </Button>
         <Button size="sm" className="h-9" asChild>
