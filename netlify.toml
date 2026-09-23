@@ -29,11 +29,22 @@
   # Netlify fails a deploy when the VALUE of a variable marked "secret" appears
   # anywhere in the build output. POLAR_SERVER is "sandbox", which is also a
   # route (/api/sandbox/...) and ordinary prose in dozens of pages, so it matched
-  # 60,000 files and blocked the first deploy. These seven are identifiers and a
-  # mode flag, not credentials, so they are excluded from the scan. The real
+  # 60,000 files and blocked the first deploy. These identifiers and a mode flag
+  # are not credentials, so they are excluded from the scan - as is
+  # NEXT_PUBLIC_GOOGLE_CLIENT_ID, an OAuth client ID that is meant to ship in
+  # browser JS (the client *secret* is a different, unexported var). The real
   # secrets (POLAR_ACCESS_TOKEN, POLAR_WEBHOOK_SECRET, FIREBASE_SERVICE_ACCOUNT)
   # are deliberately NOT listed and stay scanned.
-  SECRETS_SCAN_OMIT_KEYS = "POLAR_SERVER,POLAR_PRODUCT_ID_PRO,POLAR_PRODUCT_ID_TEAM,POLAR_DISCOUNT_ID_IN_PRO,POLAR_DISCOUNT_ID_IN_TEAM,POLAR_DISCOUNT_ID_IN_PRO_INR,POLAR_DISCOUNT_ID_IN_TEAM_INR"
+  SECRETS_SCAN_OMIT_KEYS = "POLAR_SERVER,POLAR_PRODUCT_ID_PRO,POLAR_PRODUCT_ID_TEAM,POLAR_DISCOUNT_ID_IN_PRO,POLAR_DISCOUNT_ID_IN_TEAM,POLAR_DISCOUNT_ID_IN_PRO_INR,POLAR_DISCOUNT_ID_IN_TEAM_INR,NEXT_PUBLIC_GOOGLE_CLIENT_ID"
+
+  # POLAR_ACCESS_TOKEN and POLAR_WEBHOOK_SECRET are real secrets and stay
+  # scanned everywhere that ships - but Turbopack's persistent build cache
+  # (restored/saved as "Next.js cache" between builds, NOT the publish
+  # directory) retains a raw process.env snapshot from an incremental-build
+  # artifact and trips the scanner. That cache is never served to visitors, so
+  # its path is excluded by PATH rather than putting the keys in the omit list
+  # above, which would also blind the scanner to a real leak elsewhere.
+  SECRETS_SCAN_OMIT_PATHS = ".netlify/.next/cache/**"
 
   # The Firebase web config is public by design (it ships to every browser).
   # Build-only: variables set in this file are NOT passed to functions, which
