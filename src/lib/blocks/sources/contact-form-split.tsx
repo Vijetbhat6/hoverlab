@@ -258,7 +258,10 @@ function Field({
       <label htmlFor={id} className="block text-sm font-medium">
         {label}
         {required ? null : (
-          <span className="ms-1 text-xs font-normal text-muted-foreground">(optional)</span>
+          <>
+            {' '}
+            <span className="text-xs font-normal text-muted-foreground">(optional)</span>
+          </>
         )}
       </label>
       <input

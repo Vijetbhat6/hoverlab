@@ -99,7 +99,7 @@ function SidebarNav() {
                 <a
                   href={item.href}
                   aria-current={item.active ? 'page' : undefined}
-                  className={`block rounded-lg px-3 py-1.5 text-sm transition-colors ${
+                  className={`block break-words rounded-lg px-3 py-1.5 text-sm transition-colors ${
                     item.active
                       ? 'bg-primary/10 font-medium text-primary'
                       : 'text-muted-foreground hover:bg-muted hover:text-foreground'
@@ -203,10 +203,10 @@ export function DocsLayout({
 
           <div className="mt-4 overflow-hidden rounded-xl border border-border/60 bg-zinc-950">
             <div aria-hidden className="flex items-center gap-1.5 border-b border-white/10 px-4 py-2.5">
-              <span className="h-2.5 w-2.5 rounded-full bg-red-500/80" />
-              <span className="h-2.5 w-2.5 rounded-full bg-amber-500/80" />
-              <span className="h-2.5 w-2.5 rounded-full bg-emerald-500/80" />
-              <span className="ms-2 font-mono text-xs text-white/40">terminal</span>
+              <span className="h-2.5 w-2.5 rounded-full bg-red-500/80 border border-transparent" />
+              <span className="h-2.5 w-2.5 rounded-full bg-amber-500/80 border border-transparent" />
+              <span className="h-2.5 w-2.5 rounded-full bg-emerald-500/80 border border-transparent" />
+              <span className="ms-2 font-mono text-xs text-white/60">terminal</span>
             </div>
             <pre className="overflow-x-auto p-4 text-xs leading-relaxed">
               <code className="font-mono text-zinc-300">{SNIPPET}</code>
@@ -234,7 +234,7 @@ export function DocsLayout({
           <nav aria-label="Pagination" className="mt-12 grid gap-4 sm:grid-cols-2">
             <a
               href="#quickstart"
-              className="group flex items-center gap-3 rounded-xl border border-border/60 bg-card/60 p-4 transition-colors hover:border-primary/40"
+              className="group flex min-w-0 items-center gap-3 rounded-xl border border-border/60 bg-card/60 p-4 transition-colors hover:border-primary/40"
             >
               <ArrowLeft
                 aria-hidden
@@ -247,7 +247,7 @@ export function DocsLayout({
             </a>
             <a
               href="#sdks"
-              className="group flex items-center justify-end gap-3 rounded-xl border border-border/60 bg-card/60 p-4 text-end transition-colors hover:border-primary/40"
+              className="group flex min-w-0 items-center justify-end gap-3 rounded-xl border border-border/60 bg-card/60 p-4 text-end transition-colors hover:border-primary/40"
             >
               <span className="min-w-0">
                 <span className="block text-xs text-muted-foreground">Next</span>

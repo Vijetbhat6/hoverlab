@@ -274,11 +274,11 @@ export function MessageAttachmentBubble({
                     aria-valuemin={0}
                     aria-valuemax={100}
                     aria-label={`Uploading ${item.name}`}
-                    className="mt-2 h-1.5 overflow-hidden rounded-full bg-card"
+                    className="mt-2 h-1.5 overflow-hidden rounded-full bg-card border border-transparent"
                   >
                     <div
                       style={{ width: `${item.percent ?? 0}%` }}
-                      className="h-full rounded-full bg-primary transition-[width]"
+                      className="h-full rounded-full bg-primary transition-[width] border border-transparent"
                     />
                   </div>
                 </div>

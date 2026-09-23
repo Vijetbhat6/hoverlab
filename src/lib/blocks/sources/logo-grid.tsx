@@ -71,9 +71,9 @@ export function LogoGrid({
         {logos.map((logo, i) => (
           <li
             key={i}
-            className="flex min-h-24 items-center justify-center bg-card px-6 py-8"
+            className="flex min-h-24 min-w-0 items-center justify-center bg-card px-6 py-8"
           >
-            <span className="text-center text-lg font-semibold tracking-tight text-muted-foreground transition-colors hover:text-foreground">
+            <span className="w-full truncate text-center text-lg font-semibold tracking-tight text-muted-foreground transition-colors hover:text-foreground">
               {logo}
             </span>
           </li>

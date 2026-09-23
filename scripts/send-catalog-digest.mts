@@ -45,10 +45,20 @@
  *   Firebase Admin     for the subscriber list and the watermark
  *
  * Any of them missing and `--send` refuses loudly rather than pretending.
+ *
+ * ── WHO GETS IT: CONFIRMED SUBSCRIBERS ONLY ─────────────────────────────
+ *
+ * The list is double opt-in (lib/newsletter-state.ts). This mails rows whose
+ * status is exactly 'confirmed' — not 'pending', not 'unsubscribed', and not
+ * the rows written before double opt-in existed, which carry status
+ * 'subscribed' or none. Those never confirmed anything, so they are counted
+ * and reported below rather than mailed. `scripts/send-pending-confirmations
+ * .mts` is how they get the chance to confirm.
  */
 
 import { composeDigest } from '../src/lib/newsletter-digest.ts'
 import { adminDb, isAdminConfigured } from '../src/lib/firebase/admin.ts'
+import { canReceiveMail } from '../src/lib/newsletter-state.ts'
 
 const argv = process.argv.slice(2)
 const SEND = argv.includes('--send')
@@ -82,19 +92,20 @@ async function advanceWatermark(until: string): Promise<void> {
 }
 
 /**
- * Everyone who is still subscribed, with the token their unsubscribe link
- * needs.
+ * Everyone who has CONFIRMED, with the token their unsubscribe link needs.
  *
- * Filtered on status rather than fetched whole and filtered here, because
- * "unsubscribed" has to mean unsubscribed at the point of sending. A
- * subscriber with no token is skipped rather than mailed a broken link: the
- * promise in the consent text is one-click unsubscribe, and an email that
- * cannot honour it should not go out.
+ * Filtered on status in the query rather than fetched whole and filtered
+ * here, because "confirmed" has to mean confirmed at the point of sending —
+ * and re-checked per row with `canReceiveMail`, the one predicate every
+ * sender shares, so a change to what may be mailed is made in one place.
+ * A subscriber with no token is skipped rather than mailed a broken link:
+ * the promise in the consent text is one-click unsubscribe, and an email
+ * that cannot honour it should not go out.
  */
 async function recipients(): Promise<{ email: string; token: string }[]> {
   const snap = await adminDb()
     .collection(SUBSCRIBERS)
-    .where('status', '==', 'subscribed')
+    .where('status', '==', 'confirmed')
     .get()
 
   const out: { email: string; token: string }[] = []
@@ -102,6 +113,9 @@ async function recipients(): Promise<{ email: string; token: string }[]> {
 
   for (const doc of snap.docs) {
     const data = doc.data()
+    if (!canReceiveMail({ status: typeof data.status === 'string' ? data.status : undefined })) {
+      continue
+    }
     const email = typeof data.email === 'string' ? data.email : null
     const token = typeof data.unsubscribeToken === 'string' ? data.unsubscribeToken : null
     if (!email) continue
@@ -120,6 +134,34 @@ async function recipients(): Promise<{ email: string; token: string }[]> {
   }
 
   return out
+}
+
+/**
+ * A one-line account of who would receive this and who would not.
+ *
+ * Printed on the dry run so the number is seen BEFORE `--send`, and so the
+ * gap between "on the list" and "will be mailed" is never a surprise: until
+ * people confirm, that gap is most of the list.
+ */
+async function audienceSummary(): Promise<string> {
+  if (!isAdminConfigured()) {
+    return 'Audience: unknown here (Firebase Admin credentials are not configured).'
+  }
+  const snap = await adminDb().collection(SUBSCRIBERS).select('status').get()
+  const counts = { confirmed: 0, pending: 0, unsubscribed: 0, legacy: 0 }
+  for (const doc of snap.docs) {
+    const status = doc.data().status
+    if (status === 'confirmed' || status === 'pending' || status === 'unsubscribed') {
+      counts[status]++
+    } else {
+      counts.legacy++
+    }
+  }
+  return (
+    `Audience: ${counts.confirmed} confirmed (would be mailed); ` +
+    `${counts.pending} pending and ${counts.legacy} legacy unconfirmed (would NOT); ` +
+    `${counts.unsubscribed} unsubscribed.`
+  )
 }
 
 const siteBase = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, '') ?? 'https://hoverlab.dev'
@@ -209,6 +251,9 @@ async function main(): Promise<void> {
   console.log(`Subject: ${digest.subject}`)
   console.log(`Items:   ${digest.itemCount}\n`)
   console.log(digest.text)
+  console.log()
+
+  console.log(await audienceSummary())
   console.log()
 
   if (!SEND) {

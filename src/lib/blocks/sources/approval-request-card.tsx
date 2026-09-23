@@ -99,9 +99,11 @@ export function ApprovalRequestCard({
           <p className="text-xs font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400">
             Waiting on you
           </p>
-          <h3 id={headingId} className="mt-0.5 text-base font-semibold leading-snug">
-            {question}
-          </h3>
+          {question ? (
+            <h3 id={headingId} data-stress-ignore className="mt-0.5 text-base font-semibold leading-snug">
+              {question}
+            </h3>
+          ) : null}
         </div>
       </div>
 
@@ -111,7 +113,10 @@ export function ApprovalRequestCard({
         {/* -- What actually happens ----------------------------------- */}
         {effects.length > 0 ? (
           <div className="rounded-xl border border-border/60 bg-muted/40 px-4 py-3">
-            <h4 className="mb-2 text-xs font-bold uppercase tracking-wider text-muted-foreground">
+            <h4
+              data-stress-ignore
+              className="mb-2 text-xs font-bold uppercase tracking-wider text-muted-foreground"
+            >
               If you approve
             </h4>
             <ul className="space-y-1.5">

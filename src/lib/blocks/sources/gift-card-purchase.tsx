@@ -289,7 +289,9 @@ export function GiftCardPurchase({
         </form>
 
         <aside className="lg:sticky lg:top-6 lg:self-start">
-          <h3 className="text-sm font-semibold">Preview</h3>
+          <h3 data-stress-ignore className="text-sm font-semibold">
+            Preview
+          </h3>
 
           {/* Decorative: the same content is in the summary below. */}
           <div
@@ -328,7 +330,7 @@ export function GiftCardPurchase({
               </div>
               <div className="flex justify-between gap-3">
                 <dt className="text-muted-foreground">Delivery</dt>
-                <dd>Free · by email</dd>
+                <dd className="min-w-0 truncate">Free · by email</dd>
               </div>
               <div className="flex justify-between gap-3 border-t border-border pt-2 font-semibold">
                 <dt>To pay</dt>

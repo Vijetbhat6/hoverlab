@@ -1,0 +1,68 @@
+<!doctype html>
+<!--
+  Planted defects for `hoverlab audit-url`. Every one is deliberate and the
+  end-to-end test asserts each is found. Nothing here is a real design.
+
+    1. .muted        #999 on white, 2.85:1: fails WCAG 1.4.3 (needs 4.5:1)
+    2. .odd          padding 13px on a page that is otherwise on a 4px grid
+    3. .odd          border-radius 7px among 30 cards at 8px
+    4. .odd          font-size 15px among text at 16px, and a background one
+                     shade off the card colour
+    5. .pin          a box pinned to the physical left whose text spills
+                     outwards: fits left-to-right, runs off the left edge in RTL
+    6. .close        left: 12px in a toolbar whose chips mirror: stays put in RTL
+    7. .more svg     a Lucide arrow-right with no flip: points the wrong way in RTL
+  Controls, which must NOT be reported: .ok (#767676, 4.54:1) and the flipped
+  chevron.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Defects fixture</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font: 16px/24px Arial, Helvetica, sans-serif; color: #222; background: #fff; }
+  main { position: static; width: 960px; margin: 0 auto; padding: 16px 0; }
+  h1 { font-size: 32px; line-height: 40px; margin-bottom: 16px; }
+  .muted { color: #999; margin-bottom: 16px; }
+  .ok { color: #767676; margin-bottom: 16px; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .card { background: #f4f4f5; border-radius: 8px; padding: 16px; margin-bottom: 8px; }
+  .odd { background: #f6f6f7; border-radius: 7px; padding: 13px; font-size: 15px; }
+  .toolbar { position: relative; display: flex; gap: 8px; width: 600px; height: 48px; padding: 0 48px; margin: 16px 0; background: #eee; }
+  .chip { width: 100px; height: 32px; margin-top: 8px; padding: 4px 8px; background: #ddd; border-radius: 8px; }
+  .close { position: absolute; left: 12px; top: 12px; width: 24px; height: 24px; border: 0; background: #ccc; }
+  .pin { position: absolute; left: 0; top: 120px; width: 120px; white-space: nowrap; }
+  .more { display: inline-block; margin-bottom: 16px; }
+  .flip { }
+  [dir="rtl"] .flip { transform: scaleX(-1); }
+</style>
+</head>
+<body>
+<main>
+  <h1>Defects fixture</h1>
+  <p class="muted">Muted paragraph that is too pale to read comfortably.</p>
+  <p class="ok">Passing paragraph in a grey that just clears the threshold.</p>
+  <div class="pin"><span>Pinned label that is much longer than its box allows</span></div>
+  <div class="toolbar">
+    <button class="close" type="button">x</button>
+    <div class="chip">One</div>
+    <div class="chip">Two</div>
+    <div class="chip">Three</div>
+  </div>
+  <a class="more" href="#">Read more <svg class="lucide lucide-arrow-right" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+  <a class="more" href="#">Next <svg class="lucide lucide-chevron-right flip" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></a>
+  <div class="grid" id="grid"></div>
+  <div class="grid"><article class="card odd">Odd card</article></div>
+</main>
+<script>
+  var grid = document.getElementById('grid');
+  for (var i = 1; i <= 30; i++) {
+    var card = document.createElement('article');
+    card.className = 'card';
+    card.textContent = 'Card ' + i + ' content';
+    grid.appendChild(card);
+  }
+</script>
+</body>
+</html>

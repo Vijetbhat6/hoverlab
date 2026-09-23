@@ -199,7 +199,7 @@ export function NavMobileDrawer({
           click on the page underneath. */}
       {open ? (
         <div
-          className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm"
+          className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm border border-transparent"
           onClick={close}
           aria-hidden
         />

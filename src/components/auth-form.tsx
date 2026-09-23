@@ -24,6 +24,7 @@ import { track } from '@/lib/analytics'
 
 import { PasskeyCancelled, useAuth } from '@/components/auth-provider'
 import { AuthShell } from '@/components/auth-shell'
+import { GoogleSignInButton } from '@/components/google-sign-in-button'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -35,7 +36,7 @@ type Mode = 'login' | 'signup'
 export function AuthForm({ mode }: { mode: Mode }) {
   const router = useRouter()
   const params = useSearchParams()
-  const { login, signup, loginWithPasskey, resetPassword } = useAuth()
+  const { login, signup, loginWithPasskey, loginWithGoogle, resetPassword } = useAuth()
 
   const [name, setName] = React.useState('')
   const [email, setEmail] = React.useState('')
@@ -44,10 +45,15 @@ export function AuthForm({ mode }: { mode: Mode }) {
   const [submitting, setSubmitting] = React.useState(false)
   const [resetting, setResetting] = React.useState(false)
   const [passkeying, setPasskeying] = React.useState(false)
+  const [googleBusy, setGoogleBusy] = React.useState(false)
   const [passkeysAvailable, setPasskeysAvailable] = React.useState(false)
   const [error, setError] = React.useState<string | null>(null)
 
   const isSignup = mode === 'signup'
+  // Build-time inline, same as every other NEXT_PUBLIC_ value — unset simply
+  // hides the button rather than rendering one that can't work.
+  const googleClientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID
+  const anyAltMethodAvailable = passkeysAvailable || Boolean(googleClientId)
 
   /**
    * Whether to offer the passkey button at all.
@@ -90,6 +96,31 @@ export function AuthForm({ mode }: { mode: Mode }) {
       }
     } finally {
       setPasskeying(false)
+    }
+  }
+
+  async function onGoogleCredential(credential: string) {
+    setError(null)
+    setGoogleBusy(true)
+    try {
+      await loginWithGoogle(credential)
+      // Firebase creates the account on first use, so /signup and /login
+      // reach the same route — the page tells us which event this was,
+      // Firebase does not.
+      if (isSignup) {
+        track('signup_completed', { method: 'google' })
+        toast.success('Account created. Your work is now saved to your account.')
+      } else {
+        track('login_completed', { method: 'google' })
+        toast.success('Welcome back!')
+      }
+      const redirect = params.get('redirect') || '/library'
+      router.replace(redirect)
+      router.refresh()
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Something went wrong.')
+    } finally {
+      setGoogleBusy(false)
     }
   }
 
@@ -171,29 +202,41 @@ export function AuthForm({ mode }: { mode: Mode }) {
           ) : null}
 
           {/*
-            Above the email field, not below the password one. A passkey is
-            the faster path for anyone who has set one up, and burying it
-            under the form they were trying to avoid defeats the point — but
-            it stays a secondary button, because most visitors have no
-            passkey and the primary action must remain the one that works
+            Above the email field, not below the password one. A passkey or a
+            Google account is the faster path for anyone who has one, and
+            burying it under the form they were trying to avoid defeats the
+            point — but they stay secondary, because most visitors have
+            neither and the primary action must remain the one that works
             for them.
           */}
-          {passkeysAvailable ? (
+          {anyAltMethodAvailable ? (
             <div className="space-y-4">
-              <Button
-                type="button"
-                variant="outline"
-                className="w-full"
-                onClick={onPasskey}
-                disabled={passkeying || submitting}
-              >
-                {passkeying ? (
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                ) : (
-                  <Fingerprint className="mr-2 h-4 w-4" />
-                )}
-                {passkeying ? 'Waiting for your passkey…' : 'Sign in with a passkey'}
-              </Button>
+              {passkeysAvailable ? (
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="w-full"
+                  onClick={onPasskey}
+                  disabled={passkeying || submitting}
+                >
+                  {passkeying ? (
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  ) : (
+                    <Fingerprint className="mr-2 h-4 w-4" />
+                  )}
+                  {passkeying ? 'Waiting for your passkey…' : 'Sign in with a passkey'}
+                </Button>
+              ) : null}
+
+              {googleClientId ? (
+                <div className="flex justify-center">
+                  <GoogleSignInButton
+                    clientId={googleClientId}
+                    onCredential={onGoogleCredential}
+                    disabled={submitting || passkeying || googleBusy}
+                  />
+                </div>
+              ) : null}
 
               <div className="flex items-center gap-3">
                 <span className="h-px flex-1 bg-border" />
@@ -291,7 +334,7 @@ export function AuthForm({ mode }: { mode: Mode }) {
           <Button
             type="submit"
             className="w-full"
-            disabled={submitting || passkeying}
+            disabled={submitting || passkeying || googleBusy}
           >
             {submitting ? (
               <>

@@ -305,7 +305,7 @@ export function ChatPromptBar({
             onKeyUp={syncCaret}
             onClick={syncCaret}
             onKeyDown={onKeyDown}
-            className="max-h-40 w-full resize-none bg-transparent px-2 py-1.5 text-sm leading-relaxed outline-none placeholder:text-muted-foreground"
+            className="max-h-40 w-full resize-none bg-transparent px-2 py-1.5 text-sm leading-relaxed outline-none placeholder:text-muted-foreground border border-transparent"
           />
 
           {/* -- Toolbar ---------------------------------------------- */}

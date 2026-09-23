@@ -160,7 +160,7 @@ export function DonutBreakdown({
         </h2>
         <p className="mt-1 text-sm text-muted-foreground">{description}</p>
 
-        <div className="mt-8 flex flex-col items-center gap-8 sm:flex-row sm:items-center sm:gap-10">
+        <div className="mt-8 flex flex-col items-center gap-8 md:flex-row md:items-center md:gap-10">
           <div aria-hidden className="relative shrink-0">
             <div
               className="h-44 w-44 rounded-full"
@@ -177,16 +177,16 @@ export function DonutBreakdown({
 
           <dl className="w-full min-w-0 flex-1 divide-y divide-border/60">
             {stops.map((slice) => (
-              <div key={slice.label} className="flex items-center gap-3 py-2.5">
+              <div key={slice.label} className="flex flex-wrap items-center gap-x-3 gap-y-1 py-2.5">
                 <span
                   aria-hidden
-                  className="h-2.5 w-2.5 shrink-0 rounded-sm"
+                  className="h-2.5 w-2.5 shrink-0 rounded-sm border border-transparent"
                   style={{ background: slice.color }}
                 />
                 <dt className="min-w-0 flex-1 truncate text-sm text-foreground">
                   {slice.label}
                 </dt>
-                <dd className="shrink-0 text-end">
+                <dd className="ms-auto text-end">
                   <span className="font-mono text-sm text-foreground">
                     {format(slice.value)}
                   </span>

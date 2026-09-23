@@ -226,11 +226,11 @@ export function CallDeviceSettings({
                   aria-valuenow={level}
                   aria-valuemin={0}
                   aria-valuemax={100}
-                  className="h-2 min-w-0 flex-1 overflow-hidden rounded-full bg-muted"
+                  className="h-2 min-w-0 flex-1 overflow-hidden rounded-full bg-muted border border-transparent"
                 >
                   <div
                     style={{ width: `${level}%` }}
-                    className="h-full rounded-full bg-emerald-500 motion-safe:transition-[width] motion-safe:duration-150"
+                    className="h-full rounded-full bg-emerald-500 motion-safe:transition-[width] motion-safe:duration-150 border border-transparent"
                   />
                 </div>
               </div>

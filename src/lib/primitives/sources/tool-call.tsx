@@ -126,7 +126,7 @@ export function ToolCall({
         />
         <span className="sr-only">{label}: </span>
 
-        <code className="min-w-0 shrink-0 font-mono text-[13px] font-medium text-foreground">
+        <code className="min-w-0 max-w-[45%] shrink truncate font-mono text-[13px] font-medium text-foreground">
           {name}
         </code>
 

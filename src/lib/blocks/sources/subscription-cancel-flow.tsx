@@ -254,7 +254,7 @@ export function SubscriptionCancelFlow({
               type="button"
               disabled={!confirmed}
               onClick={() => onCancel?.(reason)}
-              className="inline-flex h-9 items-center rounded-lg bg-destructive px-4 text-sm font-semibold text-white transition hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50"
+              className="inline-flex h-9 items-center rounded-lg bg-destructive px-4 text-sm font-semibold text-destructive-foreground transition hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50"
             >
               Cancel my subscription
             </button>

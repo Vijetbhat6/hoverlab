@@ -160,7 +160,7 @@ export function ColorPicker({
                 if (e.key === 'Enter') e.currentTarget.blur()
                 if (e.key === 'Escape') setDraft(null)
               }}
-              className="w-full bg-transparent px-2 font-mono text-sm uppercase text-foreground outline-none"
+              className="w-full bg-transparent px-2 font-mono text-sm uppercase text-foreground outline-none border border-transparent"
             />
           </div>
 

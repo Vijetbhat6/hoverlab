@@ -128,7 +128,21 @@ export async function claimExport(action: QuotaAction): Promise<ClaimResult> {
   return { ok: true, quota: data }
 }
 
-export function useExportQuota() {
+export interface UseExportQuotaOptions {
+  /**
+   * Whether to read the meter now. Defaults to true.
+   *
+   * The bundle drawer is mounted by the site header, which is on every page,
+   * and its count is only visible while the drawer is open. Loading on mount
+   * therefore cost a function call and a Firestore read on every page view
+   * for a number almost nobody looked at. The drawer passes its `open` flag,
+   * so the first read happens when someone can actually see it.
+   * `claim()` is unaffected — it always asks the server.
+   */
+  enabled?: boolean
+}
+
+export function useExportQuota({ enabled = true }: UseExportQuotaOptions = {}) {
   const [, forceRender] = React.useReducer((n: number) => n + 1, 0)
 
   React.useEffect(() => {
@@ -139,13 +153,13 @@ export function useExportQuota() {
   }, [])
 
   React.useEffect(() => {
-    if (cache) return
+    if (!enabled || cache) return
     if (!inflight) {
       inflight = load().finally(() => {
         inflight = null
       })
     }
-  }, [])
+  }, [enabled])
 
   return {
     quota: cache,

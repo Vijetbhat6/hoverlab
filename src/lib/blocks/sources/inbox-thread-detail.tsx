@@ -131,7 +131,7 @@ export function InboxThreadDetail({
       aria-label="Thread"
       className={`bg-background px-4 py-10 sm:px-6 ${className}`}
     >
-      <div className="mx-auto flex h-[38rem] max-w-2xl flex-col overflow-hidden rounded-2xl border border-border bg-card">
+      <div className="mx-auto flex min-h-[38rem] max-w-2xl flex-col overflow-hidden rounded-2xl border border-border bg-card">
         {/* Operational facts, not just a subject line. */}
         <header className="border-b border-border p-4">
           <h2 className="text-base font-semibold">{subject}</h2>
@@ -165,7 +165,9 @@ export function InboxThreadDetail({
                   >
                     {entry.initials}
                   </span>
-                  <h3 className="text-sm font-semibold">{entry.author}</h3>
+                  {entry.author ? (
+                    <h3 data-stress-ignore className="text-sm font-semibold">{entry.author}</h3>
+                  ) : null}
                   {entry.role === 'note' ? (
                     <span className="inline-flex items-center gap-1 rounded bg-amber-500/15 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-amber-700 dark:text-amber-400">
                       <Lock aria-hidden className="h-2.5 w-2.5" />

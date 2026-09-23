@@ -141,8 +141,8 @@ export function ProductInfoAccordion({
               <dl className="mt-4 divide-y divide-border/40 border-t border-border/40">
                 {section.specs.map((spec) => (
                   <div key={spec.label} className="flex justify-between gap-4 py-2 text-sm">
-                    <dt className="text-muted-foreground">{spec.label}</dt>
-                    <dd className="text-end font-medium">{spec.value}</dd>
+                    <dt className="min-w-0 break-words text-muted-foreground">{spec.label}</dt>
+                    <dd className="min-w-0 break-words text-end font-medium">{spec.value}</dd>
                   </div>
                 ))}
               </dl>

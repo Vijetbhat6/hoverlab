@@ -94,7 +94,7 @@ export function ProductRail({
         {products.map((product) => (
           <li
             key={product.id}
-            className="w-40 shrink-0 snap-start sm:w-48"
+            className="w-40 min-w-0 shrink-0 snap-start sm:w-48"
           >
             <a href={`/products/${product.id}`} className="group block">
               <div className="aspect-[4/5] overflow-hidden rounded-xl border border-border/60 bg-muted">

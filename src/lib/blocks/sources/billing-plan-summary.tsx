@@ -66,15 +66,15 @@ export function BillingPlanSummary({
         </p>
       ) : null}
 
-      <div className="grid gap-px bg-border/60 sm:grid-cols-3">
+      <div className="grid gap-px bg-border/60 md:grid-cols-3">
         {/* Current plan */}
         <div className="bg-card p-6">
-          <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+          <p className="break-words text-xs font-bold uppercase tracking-wider text-muted-foreground">
             Current plan
           </p>
           <p className="mt-2 flex items-baseline gap-1.5">
-            <span className="text-2xl font-extrabold tracking-tight">{planName}</span>
-            <span className="text-sm text-muted-foreground">
+            <span className="min-w-0 break-words text-2xl font-extrabold tracking-tight">{planName}</span>
+            <span className="min-w-0 break-words text-sm text-muted-foreground">
               {planPrice}/{planInterval}
             </span>
           </p>
@@ -82,7 +82,7 @@ export function BillingPlanSummary({
           <ul className="mt-4 space-y-1.5">
             {features.map((feature) => (
               <li key={feature} className="flex items-start gap-2 text-xs text-muted-foreground">
-                <span aria-hidden className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-primary" />
+                <span aria-hidden className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-primary border border-transparent" />
                 {feature}
               </li>
             ))}
@@ -91,7 +91,7 @@ export function BillingPlanSummary({
 
         {/* Next charge */}
         <div className="bg-card p-6">
-          <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+          <p className="break-words text-xs font-bold uppercase tracking-wider text-muted-foreground">
             Next charge
           </p>
 
@@ -104,10 +104,10 @@ export function BillingPlanSummary({
             </>
           ) : (
             <>
-              <p className="mt-2 text-2xl font-extrabold tracking-tight">{nextChargeAmount}</p>
+              <p className="mt-2 break-words text-2xl font-extrabold tracking-tight">{nextChargeAmount}</p>
               <p className="mt-1 flex items-center gap-1.5 text-sm text-muted-foreground">
-                <CalendarClock aria-hidden className="h-3.5 w-3.5" />
-                on {nextChargeDate}
+                <CalendarClock aria-hidden className="h-3.5 w-3.5 shrink-0" />
+                <span className="min-w-0 break-words">on {nextChargeDate}</span>
               </p>
             </>
           )}
@@ -115,22 +115,22 @@ export function BillingPlanSummary({
 
         {/* Payment method */}
         <div className="bg-card p-6">
-          <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+          <p className="break-words text-xs font-bold uppercase tracking-wider text-muted-foreground">
             Payment method
           </p>
 
           <p className="mt-2 flex items-center gap-2">
             <span
               aria-hidden
-              className="inline-flex h-8 w-11 items-center justify-center rounded-md border border-border/60 bg-muted"
+              className="inline-flex h-8 w-11 shrink-0 items-center justify-center rounded-md border border-border/60 bg-muted"
             >
               <CreditCard className="h-4 w-4 text-muted-foreground" />
             </span>
-            <span>
-              <span className="block text-sm font-medium">
+            <span className="min-w-0">
+              <span className="block break-words text-sm font-medium">
                 {card.brand} ending {card.last4}
               </span>
-              <span className="block text-xs text-muted-foreground">
+              <span className="block break-words text-xs text-muted-foreground">
                 Expires {card.expiry}
               </span>
             </span>

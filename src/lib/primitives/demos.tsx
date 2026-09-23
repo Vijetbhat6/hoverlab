@@ -34,6 +34,11 @@ import {
   ShieldCheck,
   Sparkles,
   X,
+  ChevronDown,
+  Copy,
+  Pencil,
+  Share2,
+  Trash2,
 } from 'lucide-react'
 
 import { AvatarGroup } from './sources/avatar-group'
@@ -70,6 +75,17 @@ import { StatusBadge } from './sources/status-badge'
 import { Stepper } from './sources/stepper'
 import { TagInput } from './sources/tag-chip'
 import { TreeView } from './sources/tree-view'
+import { Tabs } from './sources/tabs'
+import { Breadcrumbs } from './sources/breadcrumbs'
+import { Pagination } from './sources/pagination'
+import { Accordion } from './sources/accordion'
+import { Alert } from './sources/alert'
+import { DropdownMenu } from './sources/dropdown-menu'
+import { Dialog } from './sources/dialog'
+import { Tooltip } from './sources/tooltip'
+import { Switch } from './sources/switch'
+import { RangeSlider } from './sources/range-slider'
+import { RadioCardGroup } from './sources/radio-card-group'
 import { VerificationCodeInput } from './sources/verification-code-input'
 import { VideoPlayer } from './sources/video-player'
 import { CitationChip } from './sources/citation-chip'
@@ -233,6 +249,45 @@ export function KbdDemo() {
   )
 }
 
+export function SwitchDemo() {
+  return (
+    <Stage>
+      <div className="w-full max-w-sm divide-y divide-border text-start">
+        <div className="pb-4">
+          <Switch
+            label="Email notifications"
+            description="A summary of activity on your projects, once a day."
+            defaultChecked
+          />
+        </div>
+        <div className="py-4">
+          <Switch label="Weekly digest" description="Sent on Monday morning." size="sm" />
+        </div>
+        <div className="pt-4">
+          <Switch label="Two-factor required" description="Set by your workspace admin." defaultChecked disabled />
+        </div>
+      </div>
+    </Stage>
+  )
+}
+
+export function RangeSliderDemo() {
+  return (
+    <Stage>
+      <div className="w-full max-w-sm text-start">
+        <RangeSlider
+          label="Price"
+          min={0}
+          max={500}
+          step={10}
+          defaultValue={[120, 360]}
+          format={(n) => `$${n}`}
+        />
+      </div>
+    </Stage>
+  )
+}
+
 /* --------------------------- Selection ---------------------------- */
 
 const PEOPLE = [
@@ -318,6 +373,26 @@ export function EmojiSelectorDemo() {
   )
 }
 
+export function RadioCardGroupDemo() {
+  const [plan, setPlan] = React.useState('pro')
+  return (
+    <Stage>
+      <div className="w-full max-w-md text-start">
+        <RadioCardGroup
+          legend="Choose a plan"
+          value={plan}
+          onValueChange={setPlan}
+          options={[
+            { value: 'free', title: 'Starter', description: 'One project, community support.', meta: '$0' },
+            { value: 'pro', title: 'Pro', description: 'Unlimited projects and priority support.', meta: '$19', badge: 'Popular' },
+            { value: 'team', title: 'Team', description: 'Shared workspaces and audit log.', meta: '$49', disabled: true },
+          ]}
+        />
+      </div>
+    </Stage>
+  )
+}
+
 /* ------------------------ Status & Labels ------------------------- */
 
 export function BadgeDemo() {
@@ -386,6 +461,37 @@ export function SkeletonDemo() {
 
 /* --------------------- Navigation & Steps ------------------------- */
 
+export function TabsDemo() {
+  return (
+    <Stage>
+      <div className="w-full max-w-md text-start">
+        <Tabs
+          label="Project sections"
+          items={[
+            {
+              id: 'overview',
+              label: 'Overview',
+              content: 'Three deploys this week, none rolled back. The last one shipped at 09:42.',
+            },
+            {
+              id: 'activity',
+              label: 'Activity',
+              badge: 12,
+              content: 'Twelve events since Monday: eight commits, three comments and one review.',
+            },
+            { id: 'billing', label: 'Billing', disabled: true, content: null },
+            {
+              id: 'settings',
+              label: 'Settings',
+              content: 'Domains, environment variables and the team that can change them.',
+            },
+          ]}
+        />
+      </div>
+    </Stage>
+  )
+}
+
 export function ProgressStepsDemo() {
   return (
     <Stage>
@@ -436,6 +542,210 @@ export function TreeViewDemo() {
         />
       </div>
     </Stage>
+  )
+}
+
+export function BreadcrumbsDemo() {
+  return (
+    <Stage>
+      <div className="w-full max-w-md space-y-4 text-start">
+        <Breadcrumbs
+          items={[
+            { label: 'Home', href: '#' },
+            { label: 'Settings', href: '#' },
+            { label: 'Billing' },
+          ]}
+        />
+        <Breadcrumbs
+          maxVisible={4}
+          items={[
+            { label: 'Home', href: '#' },
+            { label: 'Products', href: '#' },
+            { label: 'Electronics', href: '#' },
+            { label: 'Audio', href: '#' },
+            { label: 'Headphones', href: '#' },
+            { label: 'Aurora X2' },
+          ]}
+        />
+      </div>
+    </Stage>
+  )
+}
+
+export function PaginationDemo() {
+  const [page, setPage] = React.useState(7)
+  return (
+    <Stage>
+      <Pagination page={page} pageCount={24} onPageChange={setPage} />
+    </Stage>
+  )
+}
+
+export function AccordionDemo() {
+  return (
+    <Stage>
+      <div className="w-full max-w-md text-start">
+        <Accordion
+          defaultValue={['shipping']}
+          items={[
+            {
+              id: 'shipping',
+              title: 'How long does shipping take?',
+              content: 'Most orders leave the warehouse within a day and arrive in three to five working days.',
+            },
+            {
+              id: 'returns',
+              title: 'Can I return an order?',
+              content: 'Yes, within 30 days of delivery, as long as it is unused and in its original packaging.',
+            },
+            {
+              id: 'warranty',
+              title: 'What does the warranty cover?',
+              content: 'Manufacturing defects for two years. It does not cover accidental damage.',
+            },
+          ]}
+        />
+      </div>
+    </Stage>
+  )
+}
+
+/* ------------------------ Overlays & Feedback --------------------- */
+
+export function AlertDemo() {
+  const [dismissed, setDismissed] = React.useState(false)
+  return (
+    <Stage>
+      <div className="w-full max-w-md space-y-3 text-start">
+        <Alert tone="info" title="Scheduled maintenance" action={{ label: 'View the schedule', href: '#' }}>
+          The dashboard will be read-only on Sunday between 02:00 and 03:00 UTC.
+        </Alert>
+        <Alert tone="success" title="Payment received">
+          Your invoice for September has been marked as paid.
+        </Alert>
+        {dismissed ? (
+          <button
+            type="button"
+            onClick={() => setDismissed(false)}
+            className="text-sm text-muted-foreground underline underline-offset-4"
+          >
+            Show the error again
+          </button>
+        ) : (
+          <Alert tone="error" title="Could not save changes" onDismiss={() => setDismissed(true)}>
+            The connection dropped before your edits reached the server. Try again in a moment.
+          </Alert>
+        )}
+      </div>
+    </Stage>
+  )
+}
+
+export function DropdownMenuDemo() {
+  return (
+    // Room underneath: the menu is absolutely positioned and adds nothing to
+    // the height, so without it the card's crop would clip the open menu.
+    <div className="flex min-h-72 w-full items-start justify-center p-6">
+      <DropdownMenu
+        label="Project actions"
+        defaultOpen
+        trigger={
+          <>
+            Actions
+            <ChevronDown aria-hidden className="h-4 w-4 text-muted-foreground" />
+          </>
+        }
+        items={[
+          { id: 'edit', label: 'Edit', icon: <Pencil className="h-4 w-4" />, shortcut: 'E' },
+          { id: 'duplicate', label: 'Duplicate', icon: <Copy className="h-4 w-4" />, shortcut: 'D' },
+          { id: 'share', label: 'Share', icon: <Share2 className="h-4 w-4" /> },
+          { type: 'separator' },
+          { id: 'delete', label: 'Delete project', icon: <Trash2 className="h-4 w-4" />, danger: true },
+        ]}
+      />
+    </div>
+  )
+}
+
+export function DialogDemo() {
+  const [edit, setEdit] = React.useState(false)
+  const [del, setDel] = React.useState(false)
+  return (
+    <Stage>
+      <div className="flex flex-wrap items-center justify-center gap-3">
+        <Button variant="outline" onClick={() => setEdit(true)}>
+          Edit profile
+        </Button>
+        <Button variant="destructive" onClick={() => setDel(true)}>
+          Delete project
+        </Button>
+      </div>
+
+      <Dialog
+        open={edit}
+        onOpenChange={setEdit}
+        title="Edit profile"
+        description="Changes are visible to everyone in your workspace."
+        footer={
+          <>
+            <Button variant="ghost" onClick={() => setEdit(false)}>
+              Cancel
+            </Button>
+            <Button onClick={() => setEdit(false)}>Save changes</Button>
+          </>
+        }
+      >
+        <label htmlFor="dialog-demo-name" className="mb-1.5 block text-sm font-medium">
+          Display name
+        </label>
+        <input
+          id="dialog-demo-name"
+          defaultValue="Ada Lovelace"
+          className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+        />
+      </Dialog>
+
+      <Dialog
+        open={del}
+        onOpenChange={setDel}
+        role="alertdialog"
+        size="sm"
+        title="Delete this project?"
+        description="This removes its deployments and environment variables. It cannot be undone."
+        footer={
+          <>
+            <Button variant="outline" onClick={() => setDel(false)}>
+              Cancel
+            </Button>
+            <Button variant="destructive" onClick={() => setDel(false)}>
+              Delete
+            </Button>
+          </>
+        }
+      />
+    </Stage>
+  )
+}
+
+export function TooltipDemo() {
+  return (
+    <div className="flex min-h-40 w-full items-end justify-center gap-3 p-6">
+      {[
+        { label: 'Edit', icon: <Pencil aria-hidden className="h-4 w-4" /> },
+        { label: 'Duplicate', icon: <Copy aria-hidden className="h-4 w-4" /> },
+        { label: 'Delete', icon: <Trash2 aria-hidden className="h-4 w-4" /> },
+      ].map((b) => (
+        <Tooltip key={b.label} content={b.label}>
+          <button
+            type="button"
+            aria-label={b.label}
+            className="rounded-lg border border-border bg-background p-2.5 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+          >
+            {b.icon}
+          </button>
+        </Tooltip>
+      ))}
+    </div>
   )
 }
 
@@ -603,17 +913,17 @@ function ScreenFill({ compact = false }: { compact?: boolean }) {
   return (
     <div className="flex h-full w-full flex-col bg-gradient-to-b from-muted/40 to-background">
       <div className="flex items-center gap-1.5 border-b border-border/70 px-3 py-2">
-        <span className="size-4 rounded bg-primary/70" />
-        {!compact ? <span className="h-2 w-14 rounded-full bg-foreground/20" /> : null}
-        <span className="ms-auto h-2 w-6 rounded-full bg-foreground/15" />
+        <span className="size-4 rounded bg-primary/70 border border-transparent" />
+        {!compact ? <span className="h-2 w-14 rounded-full bg-foreground/20 border border-transparent" /> : null}
+        <span className="ms-auto h-2 w-6 rounded-full bg-foreground/15 border border-transparent" />
       </div>
       <div className="flex flex-1 flex-col gap-2 p-3">
-        <span className="h-2.5 w-2/3 rounded-full bg-foreground/25" />
-        <span className="h-2 w-1/2 rounded-full bg-foreground/15" />
+        <span className="h-2.5 w-2/3 rounded-full bg-foreground/25 border border-transparent" />
+        <span className="h-2 w-1/2 rounded-full bg-foreground/15 border border-transparent" />
         <div className={`mt-1 grid gap-2 ${compact ? 'grid-cols-1' : 'grid-cols-3'}`}>
-          <span className="h-9 rounded-md bg-muted" />
-          <span className="h-9 rounded-md bg-muted" />
-          <span className="h-9 rounded-md bg-muted" />
+          <span className="h-9 rounded-md bg-muted border border-transparent" />
+          <span className="h-9 rounded-md bg-muted border border-transparent" />
+          <span className="h-9 rounded-md bg-muted border border-transparent" />
         </div>
       </div>
     </div>
@@ -764,7 +1074,7 @@ export function RelativeTimeDemo() {
           ['Trial ends', 6 * 24 * 60 * 60 * 1000],
         ].map(([label, offset]) => (
           <div key={label as string} className="flex items-baseline gap-2">
-            <span className="w-20 text-xs text-muted-foreground">{label}</span>
+            <span className="w-20 shrink-0 break-words text-xs text-muted-foreground">{label}</span>
             <RelativeTime date={new Date(anchor + (offset as number))} />
           </div>
         ))}

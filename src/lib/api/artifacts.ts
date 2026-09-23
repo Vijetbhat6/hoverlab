@@ -19,6 +19,7 @@
 import 'server-only'
 
 import { getEffect } from '@/lib/effects'
+import { getEffectMotion } from '@/lib/effect-motion-data'
 import { getPrimitive } from '@/lib/primitives/primitives'
 import { getBlock } from '@/lib/blocks/blocks'
 import { getPage } from '@/lib/pages/pages'
@@ -320,6 +321,13 @@ export function buildEffectPayload(
     /** The raw source, so clients can run their own transforms. */
     source: { html: effect.html, css },
     customization,
+    /**
+     * Motion-safety profile of the effect as published (not of the
+     * customized CSS: `speed` retimes it). Static estimate read from the
+     * source; only `measured`, when present, is a browser reading. See
+     * `lib/effect-motion.ts` and the API docs.
+     */
+    motion: getEffectMotion(effect.id) ?? null,
   }
 }
 

@@ -283,6 +283,63 @@ export function checkEnv(
     })
   }
 
+  // --- NEXT_PUBLIC_POSTHOG_KEY ---------------------------------------------
+  // The other silent one. `lib/analytics.ts` no-ops without it, and
+  // `lib/consent.ts` then shows no banner, so a deployment without the key is
+  // indistinguishable from one with it until somebody asks what the traffic
+  // is. That is how five competitor sweeps ran against a site with no
+  // analytics of its own: the code was finished and the key was never set.
+  //
+  // It is inlined at BUILD time, so setting it in a host's dashboard does
+  // nothing until the next build — which is why it is a build-time warning
+  // and not something /api/health/auth could report about a running site.
+  //
+  // Warned, not required: a site without analytics is a legitimate site, and
+  // the privacy page's wording is the part that has to match either way.
+  if (!has('NEXT_PUBLIC_POSTHOG_KEY')) {
+    checks.push({
+      key: 'NEXT_PUBLIC_POSTHOG_KEY',
+      status: 'missing',
+      level: 'recommended',
+      message:
+        'Analytics is switched off: no events are captured and no consent ' +
+        'banner is shown. Set it and rebuild — it is inlined at build time.',
+    })
+  } else {
+    checks.push({
+      key: 'NEXT_PUBLIC_POSTHOG_KEY',
+      status: 'ok',
+      level: 'recommended',
+      message: 'Set.',
+    })
+  }
+
+  // --- NEXT_PUBLIC_GOOGLE_CLIENT_ID -----------------------------------------
+  // Silent by design when unset: auth-form.tsx simply omits the "Continue
+  // with Google" button rather than rendering one that can't work, so a
+  // missing key looks identical to a deliberate choice not to offer it.
+  // Worth a warning anyway, the same way NEXT_PUBLIC_POSTHOG_KEY is, since
+  // it is inlined at BUILD time — setting it in a host's dashboard alone
+  // does nothing until the next build.
+  if (!has('NEXT_PUBLIC_GOOGLE_CLIENT_ID')) {
+    checks.push({
+      key: 'NEXT_PUBLIC_GOOGLE_CLIENT_ID',
+      status: 'missing',
+      level: 'recommended',
+      message:
+        'Google sign-in is switched off: /login and /signup show no ' +
+        '"Continue with Google" button. Set it and rebuild — see ' +
+        '.env.example for the Firebase + Google Cloud console setup.',
+    })
+  } else {
+    checks.push({
+      key: 'NEXT_PUBLIC_GOOGLE_CLIENT_ID',
+      status: 'ok',
+      level: 'recommended',
+      message: 'Set.',
+    })
+  }
+
   // --- NEXT_PUBLIC_{GITHUB,DISCORD,TWITTER}_URL ----------------------------
   // Where the community is, if there is one.
   //

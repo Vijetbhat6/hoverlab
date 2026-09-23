@@ -121,7 +121,7 @@ export function AgentDiffReview({
             <Sparkles aria-hidden className="h-4 w-4" />
           </span>
           <div className="min-w-0">
-            <h3 className="text-sm font-semibold">{title}</h3>
+            {title ? <h3 data-stress-ignore className="text-sm font-semibold">{title}</h3> : null}
             <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{summary}</p>
           </div>
         </div>

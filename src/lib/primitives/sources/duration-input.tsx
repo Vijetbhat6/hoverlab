@@ -226,7 +226,7 @@ export function DurationInput({
                 onFocus={(e) => e.currentTarget.select()}
                 onBlur={() => setDraft(null)}
                 onKeyDown={(e) => onSegmentKeyDown(e, index)}
-                className={`${segment.width} bg-transparent text-center font-mono text-sm tabular-nums text-foreground outline-none`}
+                className={`${segment.width} border border-transparent bg-transparent text-center font-mono text-sm tabular-nums text-foreground outline-none`}
               />
               <span aria-hidden className="text-[0.625rem] uppercase text-muted-foreground">
                 {segment.label.slice(0, 3)}

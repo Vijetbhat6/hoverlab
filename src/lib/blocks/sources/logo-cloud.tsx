@@ -63,7 +63,7 @@ export function LogoCloud({
             <span
               key={`${name}-${i}`}
               aria-hidden={i >= logos.length}
-              className="shrink-0 text-xl font-bold tracking-tight text-muted-foreground/60 transition-colors hover:text-foreground"
+              className="shrink-0 text-xl font-bold tracking-tight text-muted-foreground/85 transition-colors hover:text-foreground"
             >
               {name}
             </span>

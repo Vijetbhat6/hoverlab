@@ -74,7 +74,7 @@ export function HeroMediaOverlay({
             </span>
           ) : null}
 
-          <h1 className="mt-5 text-balance text-4xl font-extrabold tracking-tight text-white drop-shadow-sm sm:text-5xl lg:text-7xl">
+          <h1 className="mt-5 text-balance break-words text-4xl font-extrabold tracking-tight text-white drop-shadow-sm sm:text-5xl lg:text-7xl">
             {heading}
           </h1>
 

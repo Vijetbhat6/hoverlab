@@ -188,7 +188,7 @@ export function RetrievalIndexStatus({
                   className={`mt-0.5 h-4.5 w-4.5 shrink-0 ${STATE_TONE[source.state]}`}
                 />
                 <div className="min-w-0 flex-1">
-                  <h3 className="text-sm font-medium text-foreground">{source.name}</h3>
+                  <h3 data-stress-ignore className="text-sm font-medium text-foreground">{source.name}</h3>
                   <p className="mt-0.5 text-xs text-muted-foreground">{source.kind}</p>
 
                   <p className="mt-1.5 text-xs">
@@ -203,10 +203,10 @@ export function RetrievalIndexStatus({
                     <>
                       <div
                         aria-hidden
-                        className="mt-1.5 h-1.5 w-full max-w-xs overflow-hidden rounded-full bg-muted"
+                        className="mt-1.5 h-1.5 w-full max-w-xs overflow-hidden rounded-full border border-transparent bg-muted"
                       >
                         <div
-                          className="h-full rounded-full bg-primary"
+                          className="h-full rounded-full bg-primary border border-transparent"
                           style={{ width: `${share}%` }}
                         />
                       </div>

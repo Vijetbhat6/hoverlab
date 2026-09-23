@@ -128,7 +128,7 @@ export function NavbarAuthenticated({
           className="flex flex-wrap items-center gap-x-3 gap-y-1 border-b border-amber-500/40 bg-amber-500/10 px-4 py-2 text-sm text-amber-700 dark:text-amber-400 sm:px-6"
         >
           <UserRoundX aria-hidden className="h-4 w-4 shrink-0" />
-          <p className="min-w-0 flex-1">
+          <p className="min-w-0 flex-1 break-words">
             You are viewing {product} as <strong className="font-semibold">{actingAs}</strong>.
             Anything you do here is recorded against your own name.
           </p>

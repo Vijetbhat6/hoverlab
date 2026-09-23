@@ -168,15 +168,20 @@ export function SettingsSessions({
                   <Icon aria-hidden className="h-4.5 w-4.5" />
                 </span>
 
-                <div className="min-w-0 flex-1">
-                  <h3 className="flex flex-wrap items-center gap-2 text-sm font-medium text-foreground">
-                    {session.device}
-                    {session.current ? (
-                      <span className="inline-flex items-center rounded-md bg-primary/10 px-1.5 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-primary">
-                        This device
-                      </span>
-                    ) : null}
-                  </h3>
+                <div className="min-w-[11rem] flex-1">
+                  {session.device ? (
+                    <h3
+                      data-stress-ignore
+                      className="flex flex-wrap items-center gap-2 text-sm font-medium text-foreground"
+                    >
+                      <span className="min-w-0 break-words">{session.device}</span>
+                      {session.current ? (
+                        <span className="shrink-0 inline-flex items-center rounded-md bg-primary/10 px-1.5 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-primary">
+                          This device
+                        </span>
+                      ) : null}
+                    </h3>
+                  ) : null}
                   <p className="mt-0.5 text-xs text-muted-foreground">{session.browser}</p>
                   <p className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-0.5 text-xs text-muted-foreground">
                     <span className="inline-flex items-center gap-1">

@@ -163,7 +163,7 @@ export function PriceTickerStrip({
       </div>
 
       {asOf ? (
-        <p className="px-4 pb-2 text-center text-[11px] text-muted-foreground/70 sm:px-6">
+        <p className="px-4 pb-2 text-center text-[11px] text-muted-foreground/85 sm:px-6">
           {asOf}
         </p>
       ) : null}

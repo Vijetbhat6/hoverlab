@@ -81,7 +81,7 @@ export function ArticleHeader({
         {category}
       </a>
 
-      <h1 className="mt-4 text-balance text-4xl font-bold tracking-tight sm:text-5xl">{title}</h1>
+      <h1 className="mt-4 text-balance break-words text-4xl font-bold tracking-tight sm:text-5xl">{title}</h1>
 
       <p className="mt-5 text-pretty text-lg leading-relaxed text-muted-foreground">{standfirst}</p>
 

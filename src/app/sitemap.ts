@@ -20,6 +20,7 @@ import { HUBS } from '@/lib/hubs/catalog'
 import { FRAMEWORK_STORIES } from '@/lib/frameworks'
 import { addedAt } from '@/lib/recency'
 import { COMPETITORS } from '@/lib/compare'
+import { MIGRATE_INDEX, MIGRATION_GUIDES, guidePath } from '@/lib/migration/guides'
 
 /**
  * XML sitemap covering every indexable URL.
@@ -128,6 +129,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: absoluteUrl(`/docs/${slug}`),
       changeFrequency: 'weekly' as const,
       priority: 0.8,
+    })),
+    // Migration guides: an index and three how-tos for a project that
+    // already exists. Derived from MIGRATION_GUIDES so a fourth guide cannot
+    // ship unlisted. Monthly — they change when the CLI's commands do.
+    { url: absoluteUrl(MIGRATE_INDEX.path), changeFrequency: 'monthly' as const, priority: 0.7 },
+    ...MIGRATION_GUIDES.map((guide) => ({
+      url: absoluteUrl(guidePath(guide.slug)),
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
     })),
     // Commerce and legal. /pricing is the URL people type and paste before
     // buying; /licence is what Pro actually sells, so it has to be readable

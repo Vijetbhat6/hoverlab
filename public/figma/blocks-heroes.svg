@@ -7,7 +7,7 @@
     geometry, colour and type. There are no variants, no auto-layout,
     and no hover or motion — none of those exist in a static frame.
 
-    Every section here is free to copy as code at https://hoverlab.dev/blocks
+    Every one of these is free to copy as code at https://hoverlab.dev/blocks
   -->
   <rect id="Background" x="0" y="0" width="1216" height="11478" fill="#ffffff" />
   <text id="Split Hero with Product Panel label" x="64" y="84" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Split Hero with Product Panel</text>
@@ -15,51 +15,64 @@
   <g id="Split Hero with Product Panel" transform="translate(64, 116)">
     <rect id="container" x="0" y="0" width="1088" height="676" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="container 2" x="33" y="126.25" width="142.13" height="26" rx="13" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Now in public beta" x="33" y="138.25" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Now in public beta</text>
-      <rect id="container 3" x="46" y="136.25" width="6" height="6" rx="3" fill="#007f34" />
+      <text id="Now in public beta" x="58" y="143.25" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Now in public beta</text>
+      <rect id="container 3" x="46" y="136.25" width="6" height="6" rx="3" fill="#00782e" />
       <text id="Ship your next" x="33" y="223.25" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="60" font-weight="800" letter-spacing="-1.5">Ship your next</text>
       <text id="idea before" x="33" y="283.25" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="60" font-weight="800" letter-spacing="-1.5">idea before</text>
       <text id="the weekend." x="33" y="343.25" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="60" font-weight="800" letter-spacing="-1.5">the weekend.</text>
       <text id="Everything you need to launch — auth, bi…" x="33" y="393.25" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18">Everything you need to launch — auth, billing, analytics</text>
       <text id="and a dashboard your customers will actu…" x="33" y="422.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18">and a dashboard your customers will actually understand.</text>
-      <rect id="link" x="33" y="462.75" width="161.19" height="48" rx="16" fill="#007f34" />
-      <text id="Start building" x="33" y="476.75" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Start building</text>
+      <rect id="link" x="33" y="462.75" width="161.19" height="48" rx="16" fill="#00782e" />
+      <text id="Start building" x="57" y="491.75" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Start building</text>
+      <g id="icon arrow-right" transform="translate(154.188 478.75) scale(0.667 0.667)" fill="none" stroke="#fcfcfc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14" />
+        <path d="m12 5 7 7-7 7" />
+      </g>
       <rect id="link 2" x="206.19" y="462.75" width="137.23" height="48" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Book a demo" x="206.19" y="476.75" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Book a demo</text>
-      <text id="No credit card required" x="33" y="546.75" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">No credit card required</text>
-      <text id="Free for 14 days" x="198.58" y="546.75" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Free for 14 days</text>
-      <text id="Cancel anytime" x="324.7" y="546.75" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Cancel anytime</text>
+      <text id="Book a demo" x="231.19" y="491.75" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Book a demo</text>
+      <text id="No credit card required" x="53" y="546.75" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">No credit card required</text>
+      <g id="icon check" transform="translate(33 535.75) scale(0.583 0.583)" fill="none" stroke="#00782e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 6 9 17l-5-5" />
+      </g>
+      <text id="Free for 14 days" x="218.58" y="546.75" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Free for 14 days</text>
+      <g id="icon check 2" transform="translate(198.578 535.75) scale(0.583 0.583)" fill="none" stroke="#00782e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 6 9 17l-5-5" />
+      </g>
+      <text id="Cancel anytime" x="344.7" y="546.75" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Cancel anytime</text>
+      <g id="icon check 3" transform="translate(324.703 535.75) scale(0.583 0.583)" fill="none" stroke="#00782e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 6 9 17l-5-5" />
+      </g>
       <rect id="container 4" x="576" y="97" width="479" height="482" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="container 5" x="597" y="114" width="10" height="10" rx="5" fill="rgba(255, 32, 87, 0.698)" />
       <rect id="container 6" x="613" y="114" width="10" height="10" rx="5" fill="rgba(252, 152, 0, 0.702)" />
       <rect id="container 7" x="629" y="114" width="10" height="10" rx="5" fill="rgba(0, 188, 124, 0.702)" />
       <rect id="container 8" x="585" y="132" width="461" height="438" rx="16" fill="rgba(252, 251, 248, 0.8)" />
       <rect id="container 9" x="601" y="148" width="135" height="88" rx="12" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Revenue" x="614" y="171" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" letter-spacing="0.25">Revenue</text>
-      <text id="$48,120" x="614" y="198" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" font-weight="700" letter-spacing="-0.45">$48,120</text>
-      <text id="+12.4%" x="614" y="218" fill="#00bc7d" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" font-weight="500">+12.4%</text>
+      <text id="Revenue" x="614" y="172" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" letter-spacing="0.25">Revenue</text>
+      <text id="$48,120" x="614" y="200" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" font-weight="700" letter-spacing="-0.45">$48,120</text>
+      <text id="+12.4%" x="614" y="219" fill="#00bc7d" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" font-weight="500">+12.4%</text>
       <rect id="container 10" x="748" y="148" width="135" height="88" rx="12" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Active" x="761" y="171" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" letter-spacing="0.25">Active</text>
-      <text id="2,847" x="761" y="198" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" font-weight="700" letter-spacing="-0.45">2,847</text>
-      <text id="+3.1%" x="761" y="218" fill="#00bc7d" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" font-weight="500">+3.1%</text>
+      <text id="Active" x="761" y="172" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" letter-spacing="0.25">Active</text>
+      <text id="2,847" x="761" y="200" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" font-weight="700" letter-spacing="-0.45">2,847</text>
+      <text id="+3.1%" x="761" y="219" fill="#00bc7d" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" font-weight="500">+3.1%</text>
       <rect id="container 11" x="895" y="148" width="135" height="88" rx="12" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Churn" x="908" y="171" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" letter-spacing="0.25">Churn</text>
-      <text id="0.8%" x="908" y="198" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" font-weight="700" letter-spacing="-0.45">0.8%</text>
-      <text id="-0.3%" x="908" y="218" fill="#00bc7d" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" font-weight="500">-0.3%</text>
+      <text id="Churn" x="908" y="172" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" letter-spacing="0.25">Churn</text>
+      <text id="0.8%" x="908" y="200" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" font-weight="700" letter-spacing="-0.45">0.8%</text>
+      <text id="-0.3%" x="908" y="219" fill="#00bc7d" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" font-weight="500">-0.3%</text>
       <rect id="container 12" x="601" y="248" width="429" height="128" rx="12" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="container 13" x="601" y="388" width="429" height="50" rx="12" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <rect id="container 14" x="612" y="399" width="28" height="28" rx="10" fill="rgba(0, 128, 54, 0.149)" />
-      <text id="AC" x="612" y="409" fill="#007f34" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" font-weight="700">AC</text>
+      <rect id="container 14" x="612" y="399" width="28" height="28" rx="10" fill="rgba(0, 121, 47, 0.149)" />
+      <text id="AC" x="618.88" y="416.5" fill="#00782e" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" font-weight="700">AC</text>
       <text id="Acme Corp" x="652" y="417" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Acme Corp</text>
       <text id="$4,200" x="978.17" y="417" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">$4,200</text>
       <rect id="container 15" x="601" y="446" width="429" height="50" rx="12" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <rect id="container 16" x="612" y="457" width="28" height="28" rx="10" fill="rgba(0, 128, 54, 0.149)" />
-      <text id="GL" x="612" y="467" fill="#007f34" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" font-weight="700">GL</text>
+      <rect id="container 16" x="612" y="457" width="28" height="28" rx="10" fill="rgba(0, 121, 47, 0.149)" />
+      <text id="GL" x="619.36" y="474.5" fill="#00782e" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" font-weight="700">GL</text>
       <text id="Globex" x="652" y="475" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Globex</text>
       <text id="$3,300" x="978.28" y="475" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">$3,300</text>
       <rect id="container 17" x="601" y="504" width="429" height="50" rx="12" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <rect id="container 18" x="612" y="515" width="28" height="28" rx="10" fill="rgba(0, 128, 54, 0.149)" />
-      <text id="IN" x="612" y="525" fill="#007f34" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" font-weight="700">IN</text>
+      <rect id="container 18" x="612" y="515" width="28" height="28" rx="10" fill="rgba(0, 121, 47, 0.149)" />
+      <text id="IN" x="620.81" y="532.5" fill="#00782e" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" font-weight="700">IN</text>
       <text id="Initech" x="652" y="533" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Initech</text>
       <text id="$2,400" x="978.3" y="533" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">$2,400</text>
   </g>
@@ -68,53 +81,91 @@
   <g id="Centered Announcement Hero" transform="translate(64, 940)">
     <rect id="container" x="0" y="0" width="1088" height="718.5" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="link" x="407.88" y="113" width="272.23" height="30" rx="15" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <rect id="container 2" x="414.88" y="118" width="57.38" height="20" rx="10" fill="rgba(0, 128, 54, 0.149)" />
-      <text id="New" x="443.56" y="130" fill="#007f34" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500" text-anchor="middle">New</text>
+      <rect id="container 2" x="414.88" y="118" width="57.38" height="20" rx="10" fill="rgba(0, 121, 47, 0.149)" />
+      <text id="New" x="451.56" y="132" fill="#00782e" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500" text-anchor="middle">New</text>
+      <g id="icon sparkles" transform="translate(422.875 122) scale(0.5 0.5)" fill="none" stroke="#00782e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z" />
+        <path d="M20 3v4" />
+        <path d="M22 5h-4" />
+        <path d="M4 17v2" />
+        <path d="M5 18H3" />
+      </g>
       <text id="Introducing team workspaces" x="563.68" y="132" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500" text-anchor="middle">Introducing team workspaces</text>
+      <g id="icon arrow-right" transform="translate(655.109 122) scale(0.5 0.5)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14" />
+        <path d="m12 5 7 7-7 7" />
+      </g>
       <text id="One toolkit for the parts every project …" x="543.99" y="356" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" text-anchor="middle">One toolkit for the parts every project needs, so the only thing left to build is the</text>
       <text id="part that makes yours different." x="543.99" y="385.25" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" text-anchor="middle">part that makes yours different.</text>
-      <rect id="link 2" x="368.5" y="429.5" width="185.11" height="48" rx="16" fill="#007f34" />
-      <text id="Get started free" x="461.05" y="443.5" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Get started free</text>
+      <rect id="link 2" x="368.5" y="429.5" width="185.11" height="48" rx="16" fill="#00782e" />
+      <text id="Get started free" x="450.05" y="458.5" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Get started free</text>
+      <g id="icon arrow-right 2" transform="translate(509.609 445.5) scale(0.667 0.667)" fill="none" stroke="#fcfcfc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14" />
+        <path d="m12 5 7 7-7 7" />
+      </g>
       <rect id="link 3" x="565.61" y="429.5" width="153.88" height="48" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Read the docs" x="642.55" y="443.5" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Read the docs</text>
-      <text id="Trusted by teams at" x="544" y="553.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500" letter-spacing="0.6" text-anchor="middle">Trusted by teams at</text>
-      <text id="Acme" x="334.93" y="595.5" fill="rgba(87, 92, 97, 0.6)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" font-weight="700" letter-spacing="-0.45" text-anchor="middle">Acme</text>
-      <text id="Globex" x="428.94" y="595.5" fill="rgba(87, 92, 97, 0.6)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" font-weight="700" letter-spacing="-0.45" text-anchor="middle">Globex</text>
-      <text id="Initech" x="527.7" y="595.5" fill="rgba(87, 92, 97, 0.6)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" font-weight="700" letter-spacing="-0.45" text-anchor="middle">Initech</text>
-      <text id="Umbrella" x="634.55" y="595.5" fill="rgba(87, 92, 97, 0.6)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" font-weight="700" letter-spacing="-0.45" text-anchor="middle">Umbrella</text>
-      <text id="Soylent" x="744.86" y="595.5" fill="rgba(87, 92, 97, 0.6)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" font-weight="700" letter-spacing="-0.45" text-anchor="middle">Soylent</text>
+      <text id="Read the docs" x="642.55" y="458.5" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Read the docs</text>
+      <text id="Trusted by teams at" x="543.99" y="553.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500" letter-spacing="0.6" text-anchor="middle">Trusted by teams at</text>
+      <text id="Acme" x="334.93" y="597.5" fill="rgba(87, 92, 97, 0.6)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" font-weight="700" letter-spacing="-0.45" text-anchor="middle">Acme</text>
+      <text id="Globex" x="428.94" y="597.5" fill="rgba(87, 92, 97, 0.6)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" font-weight="700" letter-spacing="-0.45" text-anchor="middle">Globex</text>
+      <text id="Initech" x="527.7" y="597.5" fill="rgba(87, 92, 97, 0.6)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" font-weight="700" letter-spacing="-0.45" text-anchor="middle">Initech</text>
+      <text id="Umbrella" x="634.55" y="597.5" fill="rgba(87, 92, 97, 0.6)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" font-weight="700" letter-spacing="-0.45" text-anchor="middle">Umbrella</text>
+      <text id="Soylent" x="744.86" y="597.5" fill="rgba(87, 92, 97, 0.6)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" font-weight="700" letter-spacing="-0.45" text-anchor="middle">Soylent</text>
   </g>
   <text id="Hero with Browser Frame label" x="64" y="1774.5" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Hero with Browser Frame</text>
   <text id="hero-screenshot id" x="64" y="1788.5" font-family="ui-monospace, monospace" font-size="12" fill="#737373">hero-screenshot</text>
   <g id="Hero with Browser Frame" transform="translate(64, 1806.5)">
     <rect id="container" x="0" y="0" width="1088" height="1005" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="container 2" x="433.7" y="113" width="220.58" height="26" rx="13" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Analytics, without the spreadsheet" x="543.99" y="125" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500" text-anchor="middle">Analytics, without the spreadsheet</text>
+      <text id="Analytics, without the spreadsheet" x="543.99" y="130" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500" text-anchor="middle">Analytics, without the spreadsheet</text>
       <text id="See what your product" x="544" y="210" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="60" font-weight="800" letter-spacing="-1.5" text-anchor="middle">See what your product</text>
       <text id="is doing, right now." x="544" y="270" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="60" font-weight="800" letter-spacing="-1.5" text-anchor="middle">is doing, right now.</text>
       <text id="Every event, session and conversion in o…" x="544" y="320" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" text-anchor="middle">Every event, session and conversion in one place — with the answer already on</text>
       <text id="screen instead of three filters away." x="543.99" y="349.25" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" text-anchor="middle">screen instead of three filters away.</text>
-      <rect id="link" x="388.06" y="389.5" width="142.03" height="48" rx="16" fill="#007f34" />
-      <text id="Try it free" x="459.08" y="403.5" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Try it free</text>
+      <rect id="link" x="388.06" y="389.5" width="142.03" height="48" rx="16" fill="#00782e" />
+      <text id="Try it free" x="448.08" y="418.5" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Try it free</text>
+      <g id="icon arrow-right" transform="translate(486.094 405.5) scale(0.667 0.667)" fill="none" stroke="#fcfcfc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14" />
+        <path d="m12 5 7 7-7 7" />
+      </g>
       <rect id="link 2" x="542.09" y="389.5" width="157.83" height="48" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Watch the tour" x="621.01" y="403.5" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Watch the tour</text>
-      <text id="from 812 reviews on G2" x="587" y="475.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" text-anchor="middle">from 812 reviews on G2</text>
+      <text id="Watch the tour" x="621.01" y="418.5" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Watch the tour</text>
+      <g id="icon star" transform="translate(414.156 464.5) scale(0.583 0.583)" fill="#ffb900" stroke="#ffb900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
+      <g id="icon star 2" transform="translate(430.156 464.5) scale(0.583 0.583)" fill="#ffb900" stroke="#ffb900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
+      <g id="icon star 3" transform="translate(446.156 464.5) scale(0.583 0.583)" fill="#ffb900" stroke="#ffb900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
+      <g id="icon star 4" transform="translate(462.156 464.5) scale(0.583 0.583)" fill="#ffb900" stroke="#ffb900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
+      <g id="icon star 5" transform="translate(478.156 464.5) scale(0.583 0.583)" fill="#ffb900" stroke="#ffb900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
+      <text id="from 812 reviews on G2" x="597.41" y="476.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" text-anchor="middle">from 812 reviews on G2</text>
       <text id="4.9" x="510.56" y="476.5" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">4.9</text>
       <rect id="container 3" x="33" y="537.5" width="1022" height="466.5" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="container 4" x="50" y="557.75" width="10" height="10" rx="5" fill="rgba(255, 32, 87, 0.698)" />
       <rect id="container 5" x="66" y="557.75" width="10" height="10" rx="5" fill="rgba(252, 152, 0, 0.702)" />
       <rect id="container 6" x="82" y="557.75" width="10" height="10" rx="5" fill="rgba(0, 188, 124, 0.702)" />
       <rect id="container 7" x="458.78" y="550.5" width="164.44" height="24.5" rx="10" fill="rgba(252, 251, 248, 0.8)" />
-      <text id="app.acme.com/overview" x="458.78" y="561.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="11">app.acme.com/overview</text>
+      <text id="app.acme.com/overview" x="488.78" y="566.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="11">app.acme.com/overview</text>
+      <g id="icon lock" transform="translate(470.781 556.75) scale(0.5 0.5)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect rx="2" ry="2" x="3" y="11" width="18" height="11" />
+        <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+      </g>
       <rect id="container 8" x="34" y="588" width="1020" height="416" fill="rgba(253, 252, 248, 0.6)" />
       <rect id="container 9" x="50" y="604" width="96" height="28" rx="10" fill="#f3f2ee" />
-      <rect id="container 10" x="50" y="656" width="175" height="32" rx="12" fill="rgba(0, 128, 54, 0.149)" />
+      <rect id="container 10" x="50" y="656" width="175" height="32" rx="12" fill="rgba(0, 121, 47, 0.149)" />
       <rect id="container 11" x="50" y="696" width="175" height="32" rx="12" fill="rgba(243, 242, 238, 0.6)" />
       <rect id="container 12" x="50" y="736" width="175" height="32" rx="12" fill="rgba(243, 242, 238, 0.6)" />
       <rect id="container 13" x="50" y="776" width="175" height="32" rx="12" fill="rgba(243, 242, 238, 0.6)" />
       <rect id="container 14" x="50" y="816" width="175" height="32" rx="12" fill="rgba(243, 242, 238, 0.6)" />
       <rect id="container 15" x="262" y="612" width="160" height="24" rx="10" fill="#f3f2ee" />
-      <rect id="container 16" x="938" y="608" width="96" height="32" rx="12" fill="rgba(0, 125, 50, 0.2)" />
+      <rect id="container 16" x="938" y="608" width="96" height="32" rx="12" fill="rgba(0, 120, 45, 0.2)" />
       <rect id="container 17" x="262" y="656" width="184" height="80" rx="16" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="container 18" x="275" y="669" width="48" height="10" rx="4" fill="#f3f2ee" />
       <rect id="container 19" x="275" y="689" width="80" height="20" rx="4" fill="rgba(242, 241, 237, 0.8)" />
@@ -142,20 +193,24 @@
       <text id="We are letting people in a few hundred a…" x="544" y="274" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" text-anchor="middle">We are letting people in a few hundred at a time. Leave your email and</text>
       <text id="we will send an invite the moment a slot…" x="544" y="303.25" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" text-anchor="middle">we will send an invite the moment a slot opens.</text>
       <rect id="field" x="320" y="347.5" width="253.73" height="48" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <rect id="button" x="581.73" y="347.5" width="186.27" height="48" rx="16" fill="#007f34" />
-      <text id="Request an invite" x="674.87" y="361.5" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Request an invite</text>
+      <rect id="button" x="581.73" y="347.5" width="186.27" height="48" rx="16" fill="#00782e" />
+      <text id="Request an invite" x="663.87" y="376.5" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Request an invite</text>
+      <g id="icon arrow-right" transform="translate(728 363.5) scale(0.667 0.667)" fill="none" stroke="#fcfcfc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14" />
+        <path d="m12 5 7 7-7 7" />
+      </g>
       <text id="No spam, and one unsubscribe link in eve…" x="544" y="419.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" text-anchor="middle">No spam, and one unsubscribe link in every email.</text>
       <rect id="container 2" x="406.03" y="455.5" width="32" height="32" rx="16" fill="none" stroke="#fdfcf8" stroke-width="2" />
-      <text id="AL" x="422.03" y="465.5" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" font-weight="700" text-anchor="middle">AL</text>
+      <text id="AL" x="422.03" y="475" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" font-weight="700" text-anchor="middle">AL</text>
       <rect id="container 3" x="430.03" y="455.5" width="32" height="32" rx="16" fill="none" stroke="#fdfcf8" stroke-width="2" />
-      <text id="RS" x="446.03" y="465.5" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" font-weight="700" text-anchor="middle">RS</text>
+      <text id="RS" x="446.02" y="475" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" font-weight="700" text-anchor="middle">RS</text>
       <rect id="container 4" x="454.03" y="455.5" width="32" height="32" rx="16" fill="none" stroke="#fdfcf8" stroke-width="2" />
-      <text id="MK" x="470.03" y="465.5" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" font-weight="700" text-anchor="middle">MK</text>
+      <text id="MK" x="470.02" y="475" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" font-weight="700" text-anchor="middle">MK</text>
       <rect id="container 5" x="478.03" y="455.5" width="32" height="32" rx="16" fill="none" stroke="#fdfcf8" stroke-width="2" />
-      <text id="JT" x="494.03" y="465.5" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" font-weight="700" text-anchor="middle">JT</text>
+      <text id="JT" x="494.02" y="475" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" font-weight="700" text-anchor="middle">JT</text>
       <rect id="container 6" x="502.03" y="455.5" width="32" height="32" rx="16" fill="none" stroke="#fdfcf8" stroke-width="2" />
-      <text id="PW" x="518.03" y="465.5" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" font-weight="700" text-anchor="middle">PW</text>
-      <text id="already waiting" x="613.99" y="475.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" text-anchor="middle">already waiting</text>
+      <text id="PW" x="518.02" y="475" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" font-weight="700" text-anchor="middle">PW</text>
+      <text id="already waiting" x="633.24" y="476.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" text-anchor="middle">already waiting</text>
       <text id="4,128" x="563.53" y="476.5" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">4,128</text>
   </g>
   <text id="Search-First Hero label" x="64" y="3676" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Search-First Hero</text>
@@ -166,25 +221,37 @@
       <text id="you were about to build." x="543.99" y="224" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="60" font-weight="800" letter-spacing="-1.5" text-anchor="middle">you were about to build.</text>
       <text id="Six hundred production-ready sections, s…" x="543.99" y="274" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" text-anchor="middle">Six hundred production-ready sections, searchable by what they do</text>
       <text id="rather than what they are called." x="544" y="303.25" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" text-anchor="middle">rather than what they are called.</text>
+      <g id="icon search" transform="translate(272 364.5) scale(0.667 0.667)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m21 21-4.34-4.34" />
+        <circle cx="11" cy="11" r="8" />
+      </g>
       <rect id="field" x="256" y="347.5" width="472.61" height="50" rx="16" fill="rgba(255, 255, 255, 0.698)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <rect id="button" x="736.61" y="347.5" width="95.39" height="50" rx="16" fill="#007f34" />
-      <text id="Search" x="784.3" y="361.5" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Search</text>
-      <text id="Popular" x="336.42" y="438.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" text-anchor="middle">Popular</text>
+      <rect id="button" x="736.61" y="347.5" width="95.39" height="50" rx="16" fill="#00782e" />
+      <text id="Search" x="784.3" y="377.5" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Search</text>
+      <text id="Popular" x="346.42" y="438.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" text-anchor="middle">Popular</text>
+      <g id="icon trending-up" transform="translate(305.188 427.5) scale(0.583 0.583)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M16 7h6v6" />
+        <path d="m22 7-8.5 8.5-5-5L2 17" />
+      </g>
       <rect id="button 2" x="375.66" y="421.5" width="93.41" height="26" rx="13" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Dashboards" x="422.36" y="433.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500" text-anchor="middle">Dashboards</text>
+      <text id="Dashboards" x="422.36" y="438.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500" text-anchor="middle">Dashboards</text>
       <rect id="button 3" x="477.06" y="421.5" width="86.34" height="26" rx="13" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Auth flows" x="520.23" y="433.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500" text-anchor="middle">Auth flows</text>
+      <text id="Auth flows" x="520.23" y="438.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500" text-anchor="middle">Auth flows</text>
       <rect id="button 4" x="571.41" y="421.5" width="103.31" height="26" rx="13" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Pricing tables" x="623.06" y="433.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500" text-anchor="middle">Pricing tables</text>
+      <text id="Pricing tables" x="623.06" y="438.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500" text-anchor="middle">Pricing tables</text>
       <rect id="button 5" x="682.72" y="421.5" width="100.09" height="26" rx="13" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Empty states" x="732.77" y="433.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500" text-anchor="middle">Empty states</text>
+      <text id="Empty states" x="732.77" y="438.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500" text-anchor="middle">Empty states</text>
   </g>
   <text id="Developer Hero with Install Command label" x="64" y="4384.5" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Developer Hero with Install Command</text>
   <text id="hero-terminal id" x="64" y="4398.5" font-family="ui-monospace, monospace" font-size="12" fill="#737373">hero-terminal</text>
   <g id="Developer Hero with Install Command" transform="translate(64, 4416.5)">
     <rect id="container" x="0" y="0" width="1088" height="785" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="container 2" x="456.19" y="113" width="175.61" height="26" rx="13" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="v2.4 — zero-config" x="543.99" y="125" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12" text-anchor="middle">v2.4 — zero-config</text>
+      <text id="v2.4 — zero-config" x="553.99" y="130" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12" text-anchor="middle">v2.4 — zero-config</text>
+      <g id="icon terminal" transform="translate(469.188 119) scale(0.583 0.583)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 19h8" />
+        <path d="m4 17 6-6-6-6" />
+      </g>
       <text id="One command." x="543.99" y="215" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="60" font-weight="800" letter-spacing="-1.5" text-anchor="middle">One command.</text>
       <text id="Every component." x="544" y="275" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="60" font-weight="800" letter-spacing="-1.5" text-anchor="middle">Every component.</text>
       <text id="Install the CLI and pull any section str…" x="543.99" y="325" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" text-anchor="middle">Install the CLI and pull any section straight into your project, typed</text>
@@ -193,27 +260,35 @@
       <rect id="container 4" x="225" y="416.75" width="10" height="10" rx="5" fill="rgba(255, 32, 87, 0.698)" />
       <rect id="container 5" x="241" y="416.75" width="10" height="10" rx="5" fill="rgba(252, 152, 0, 0.702)" />
       <rect id="container 6" x="257" y="416.75" width="10" height="10" rx="5" fill="rgba(0, 188, 124, 0.702)" />
-      <text id="bash" x="281" y="424.5" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="11">bash</text>
+      <text id="bash" x="281" y="425.5" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="11">bash</text>
       <rect id="container 7" x="209" y="441" width="670" height="150" fill="rgba(252, 251, 248, 0.702)" />
-      <text id="npx hoverlab@latest init" x="225" y="476" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="14">npx hoverlab@latest init</text>
-      <text id="$" x="225" y="477" fill="#007f34" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="14">$</text>
+      <text id="npx hoverlab@latest init" x="241.41" y="477" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="14">npx hoverlab@latest init</text>
+      <text id="$" x="225" y="477" fill="#00782e" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="14">$</text>
       <rect id="button" x="792.19" y="457" width="70.81" height="30" rx="12" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Copy" x="827.59" y="469" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12" font-weight="500" text-anchor="middle">Copy</text>
+      <text id="Copy" x="837.59" y="476" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12" font-weight="500" text-anchor="middle">Copy</text>
+      <g id="icon copy" transform="translate(803.188 465) scale(0.583 0.583)" fill="none" stroke="#080c0f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect rx="2" ry="2" x="8" y="8" width="14" height="14" />
+        <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+      </g>
       <text id="resolving dependencies…" x="225" y="511" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">resolving dependencies…</text>
       <text id="added 3 packages in 1.2s" x="225" y="531" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">added 3 packages in 1.2s</text>
       <text id="created hoverlab.config.ts" x="225" y="551" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">created hoverlab.config.ts</text>
       <text id="ready — run `npm run dev`" x="225" y="571" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">ready — run `npm run dev`</text>
-      <rect id="link" x="361.78" y="624" width="165.88" height="48" rx="16" fill="#007f34" />
-      <text id="Read the docs" x="444.72" y="638" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Read the docs</text>
+      <rect id="link" x="361.78" y="624" width="165.88" height="48" rx="16" fill="#00782e" />
+      <text id="Read the docs" x="433.72" y="653" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Read the docs</text>
+      <g id="icon arrow-right" transform="translate(487.656 640) scale(0.667 0.667)" fill="none" stroke="#fcfcfc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14" />
+        <path d="m12 5 7 7-7 7" />
+      </g>
       <rect id="link 2" x="539.66" y="624" width="186.55" height="48" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Browse components" x="632.93" y="638" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Browse components</text>
+      <text id="Browse components" x="632.93" y="653" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Browse components</text>
   </g>
   <text id="App Download Hero with Phone label" x="64" y="5317.5" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">App Download Hero with Phone</text>
   <text id="hero-app-download id" x="64" y="5331.5" font-family="ui-monospace, monospace" font-size="12" fill="#737373">hero-app-download</text>
   <g id="App Download Hero with Phone" transform="translate(64, 5349.5)">
     <rect id="container" x="0" y="0" width="1088" height="655.75" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="container 2" x="33" y="97" width="161.72" height="26" rx="13" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Now on iOS and Android" x="33" y="109" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Now on iOS and Android</text>
+      <text id="Now on iOS and Android" x="46" y="114" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Now on iOS and Android</text>
       <text id="Your focus," x="33" y="194" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="60" font-weight="800" letter-spacing="-1.5">Your focus,</text>
       <text id="finally in" x="33" y="254" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="60" font-weight="800" letter-spacing="-1.5">finally in</text>
       <text id="one place." x="33" y="314" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="60" font-weight="800" letter-spacing="-1.5">one place.</text>
@@ -221,30 +296,40 @@
       <text id="attention actually went — without a dash…" x="33" y="393.25" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18">attention actually went — without a dashboard you need a</text>
       <text id="manual to read." x="33" y="422.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18">manual to read.</text>
       <rect id="link" x="33" y="462.75" width="174.38" height="56" rx="16" fill="#080c0f" />
-      <text id="Download on the" x="89" y="484.5" fill="#fdfcf8" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" letter-spacing="0.25">Download on the</text>
-      <text id="App Store" x="89" y="501" fill="#fdfcf8" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">App Store</text>
+      <g id="icon apple" transform="translate(53 478.75) scale(1 1)" fill="none" stroke="#fdfcf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 20.94c1.5 0 2.75 1.06 4 1.06 3 0 6-8 6-12.22A4.91 4.91 0 0 0 17 5c-2.22 0-4 1.44-5 2-1-.56-2.78-2-5-2a4.9 4.9 0 0 0-5 4.78C2 14 5 22 8 22c1.25 0 2.5-1.06 4-1.06Z" />
+        <path d="M10 2c1 .5 2 2 2 5" />
+      </g>
+      <text id="Download on the" x="89" y="483.5" fill="#fdfcf8" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" letter-spacing="0.25">Download on the</text>
+      <text id="App Store" x="89" y="502" fill="#fdfcf8" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">App Store</text>
       <rect id="link 2" x="219.38" y="462.75" width="158.31" height="56" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Get it on" x="276.38" y="484.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" letter-spacing="0.25">Get it on</text>
-      <text id="Google Play" x="276.38" y="501" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Google Play</text>
+      <g id="icon play" transform="translate(240.375 478.75) scale(1 1)" fill="none" stroke="#00782e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="6 3 20 12 6 21 6 3" />
+      </g>
+      <text id="Get it on" x="276.38" y="483.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" letter-spacing="0.25">Get it on</text>
+      <text id="Google Play" x="276.38" y="502" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Google Play</text>
+      <g id="icon star" transform="translate(33 542.75) scale(0.667 0.667)" fill="#ffb900" stroke="#ffb900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
       <text id="4.9 out of 5 · 12,400 ratings" x="57" y="554.75" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">4.9 out of 5 · 12,400 ratings</text>
       <rect id="container 3" x="799" y="119.88" width="256" height="416" rx="40" fill="#ffffff" stroke="rgba(8, 12, 15, 0.851)" stroke-width="8" />
       <rect id="container 4" x="895" y="135.88" width="64" height="6" rx="3" fill="rgba(8, 12, 16, 0.251)" />
-      <text id="Wednesday" x="823" y="175.88" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" letter-spacing="0.25">Wednesday</text>
+      <text id="Wednesday" x="823" y="176.88" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" letter-spacing="0.25">Wednesday</text>
       <text id="Focus" x="823" y="206.88" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="24" font-weight="700" letter-spacing="-0.6">Focus</text>
       <rect id="container 5" x="823" y="226.88" width="208" height="107" rx="16" fill="rgba(252, 251, 248, 0.702)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="72%" x="927" y="273.88" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="30" font-weight="800" letter-spacing="-0.75" text-anchor="middle">72%</text>
-      <text id="of daily goal" x="927" y="293.88" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" text-anchor="middle">of daily goal</text>
+      <text id="72%" x="926.99" y="271.88" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="30" font-weight="800" letter-spacing="-0.75" text-anchor="middle">72%</text>
+      <text id="of daily goal" x="927" y="294.88" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" text-anchor="middle">of daily goal</text>
       <rect id="container 6" x="840" y="310.88" width="174" height="6" rx="3" fill="rgba(220, 222, 225, 0.6)" />
-      <rect id="container 7" x="840" y="310.88" width="125.27" height="6" rx="3" fill="#007f34" />
-      <rect id="container 8" x="823" y="345.88" width="208" height="42" rx="16" fill="rgba(0, 128, 49, 0.102)" stroke="rgba(0, 128, 52, 0.4)" stroke-width="1" />
+      <rect id="container 7" x="840" y="310.88" width="125.27" height="6" rx="3" fill="#00782e" />
+      <rect id="container 8" x="823" y="345.88" width="208" height="42" rx="16" fill="rgba(0, 118, 49, 0.102)" stroke="rgba(0, 120, 45, 0.4)" stroke-width="1" />
       <text id="Deep work" x="836" y="370.88" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Deep work</text>
-      <text id="2h 14m today" x="956.55" y="369.38" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10">2h 14m today</text>
+      <text id="2h 14m today" x="956.55" y="370.38" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10">2h 14m today</text>
       <rect id="container 9" x="823" y="399.88" width="208" height="42" rx="16" fill="rgba(252, 251, 248, 0.702)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <text id="Streak" x="836" y="424.88" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Streak</text>
-      <text id="18 days" x="984.38" y="423.38" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10">18 days</text>
+      <text id="18 days" x="984.38" y="424.38" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10">18 days</text>
       <rect id="container 10" x="823" y="453.88" width="208" height="42" rx="16" fill="rgba(252, 251, 248, 0.702)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <text id="Next session" x="836" y="478.88" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Next session</text>
-      <text id="in 25 min" x="975.22" y="477.38" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10">in 25 min</text>
+      <text id="in 25 min" x="975.22" y="478.38" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10">in 25 min</text>
       <rect id="container 11" x="879" y="511.88" width="96" height="4" rx="2" fill="rgba(8, 12, 16, 0.251)" />
   </g>
   <text id="Hero Anchored by a Customer Quote label" x="64" y="6121.25" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Hero Anchored by a Customer Quote</text>
@@ -252,7 +337,7 @@
   <g id="Hero Anchored by a Customer Quote" transform="translate(64, 6153.25)">
     <rect id="container" x="0" y="0" width="1088" height="608.75" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="container 2" x="33" y="98" width="172.86" height="26" rx="13" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Trusted by 4,000 teams" x="33" y="110" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Trusted by 4,000 teams</text>
+      <text id="Trusted by 4,000 teams" x="58" y="115" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Trusted by 4,000 teams</text>
       <rect id="container 3" x="46" y="108" width="6" height="6" rx="3" fill="#00bc7d" />
       <text id="Stop rebuilding" x="33" y="195" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="60" font-weight="800" letter-spacing="-1.5">Stop rebuilding</text>
       <text id="the same" x="33" y="255" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="60" font-weight="800" letter-spacing="-1.5">the same</text>
@@ -260,20 +345,28 @@
       <text id="Every section your product needs, writte…" x="33" y="365" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18">Every section your product needs, written the way a senior</text>
       <text id="engineer would write it — accessible, th…" x="33" y="394.25" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18">engineer would write it — accessible, themed and yours</text>
       <text id="to edit." x="33" y="423.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18">to edit.</text>
-      <rect id="link" x="33" y="463.75" width="134.7" height="48" rx="16" fill="#007f34" />
-      <text id="Start free" x="33" y="477.75" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Start free</text>
+      <rect id="link" x="33" y="463.75" width="134.7" height="48" rx="16" fill="#00782e" />
+      <text id="Start free" x="57" y="492.75" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Start free</text>
+      <g id="icon arrow-right" transform="translate(127.703 479.75) scale(0.667 0.667)" fill="none" stroke="#fcfcfc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14" />
+        <path d="m12 5 7 7-7 7" />
+      </g>
       <rect id="link 2" x="179.7" y="463.75" width="134.47" height="48" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Talk to sales" x="179.7" y="477.75" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Talk to sales</text>
+      <text id="Talk to sales" x="204.7" y="492.75" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Talk to sales</text>
       <rect id="container 4" x="598.8" y="147.88" width="456.2" height="313" rx="16" fill="rgba(255, 255, 255, 0.698)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <rect id="image" x="627.8" y="132.88" width="36" height="36" rx="12" fill="#007f34" />
+      <rect id="image" x="627.8" y="132.88" width="36" height="36" rx="12" fill="#00782e" />
+      <g id="icon quote" transform="translate(627.797 132.875) scale(1.5 1.5)" fill="none" stroke="#fcfcfc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M16 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z" />
+        <path d="M5 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z" />
+      </g>
       <text id="We shipped our entire onboarding flow" x="635.8" y="219.88" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="20" font-weight="500">We shipped our entire onboarding flow</text>
       <text id="in a weekend. The parts we would have" x="635.8" y="252.38" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="20" font-weight="500">in a weekend. The parts we would have</text>
       <text id="argued about for a week were already" x="635.8" y="284.88" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="20" font-weight="500">argued about for a week were already</text>
       <text id="decided, and decided well." x="635.8" y="317.38" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="20" font-weight="500">decided, and decided well.</text>
       <rect id="container 5" x="635.8" y="354.88" width="382.2" height="69" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <rect id="container 6" x="635.8" y="379.88" width="44" height="44" rx="22" fill="rgba(0, 128, 54, 0.149)" />
-      <text id="PR" x="635.8" y="393.88" fill="#007f34" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="700">PR</text>
-      <text id="Priya Raman" x="691.8" y="397.88" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Priya Raman</text>
+      <rect id="container 6" x="635.8" y="379.88" width="44" height="44" rx="22" fill="rgba(0, 121, 47, 0.149)" />
+      <text id="PR" x="648.34" y="406.88" fill="#00782e" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="700">PR</text>
+      <text id="Priya Raman" x="691.8" y="398.88" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Priya Raman</text>
       <text id="Head of Engineering, Northwind" x="691.8" y="415.88" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Head of Engineering, Northwind</text>
   </g>
   <text id="Hero with Proof Metrics label" x="64" y="6878" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Hero with Proof Metrics</text>
@@ -281,63 +374,84 @@
   <g id="Hero with Proof Metrics" transform="translate(64, 6910)">
     <rect id="container" x="0" y="0" width="1088" height="728" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="container 2" x="452.58" y="114" width="182.83" height="26" rx="13" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Built for production traffic" x="543.99" y="126" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500" text-anchor="middle">Built for production traffic</text>
-      <rect id="container 3" x="465.58" y="124" width="6" height="6" rx="3" fill="#007f34" />
+      <text id="Built for production traffic" x="549.99" y="131" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500" text-anchor="middle">Built for production traffic</text>
+      <rect id="container 3" x="465.58" y="124" width="6" height="6" rx="3" fill="#00782e" />
       <text id="Infrastructure that" x="544" y="215" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="60" font-weight="800" letter-spacing="-1.5" text-anchor="middle">Infrastructure that</text>
       <text id="stops being interesting." x="543.99" y="275" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="60" font-weight="800" letter-spacing="-1.5" text-anchor="middle">stops being interesting.</text>
       <text id="Deploy once and forget the pager. We han…" x="543.99" y="325" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" text-anchor="middle">Deploy once and forget the pager. We handle the regions, the failover and the</text>
       <text id="certificate you were about to let expire…" x="543.99" y="354.25" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" text-anchor="middle">certificate you were about to let expire.</text>
-      <rect id="link" x="337.41" y="394.5" width="210.05" height="48" rx="16" fill="#007f34" />
-      <text id="Deploy your first app" x="442.43" y="408.5" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Deploy your first app</text>
+      <rect id="link" x="337.41" y="394.5" width="210.05" height="48" rx="16" fill="#00782e" />
+      <text id="Deploy your first app" x="431.43" y="423.5" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Deploy your first app</text>
+      <g id="icon arrow-right" transform="translate(507.453 410.5) scale(0.667 0.667)" fill="none" stroke="#fcfcfc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14" />
+        <path d="m12 5 7 7-7 7" />
+      </g>
       <rect id="link 2" x="559.45" y="394.5" width="191.14" height="48" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="View the status page" x="655.02" y="408.5" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">View the status page</text>
+      <text id="View the status page" x="655.02" y="423.5" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">View the status page</text>
       <rect id="container 4" x="64" y="506.5" width="960" height="108.5" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="99.99%" x="175" y="583.5" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="36" font-weight="800" letter-spacing="-0.9" text-anchor="middle">99.99%</text>
-      <text id="Uptime, rolling 90 days" x="175" y="607.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" text-anchor="middle">Uptime, rolling 90 days</text>
-      <text id="2.4B" x="421" y="583.5" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="36" font-weight="800" letter-spacing="-0.9" text-anchor="middle">2.4B</text>
-      <text id="Requests served monthly" x="421" y="607.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" text-anchor="middle">Requests served monthly</text>
-      <text id="180ms" x="667" y="583.5" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="36" font-weight="800" letter-spacing="-0.9" text-anchor="middle">180ms</text>
-      <text id="Median global latency" x="667" y="607.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" text-anchor="middle">Median global latency</text>
-      <text id="38" x="913" y="583.5" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="36" font-weight="800" letter-spacing="-0.9" text-anchor="middle">38</text>
-      <text id="Edge regions" x="913" y="607.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" text-anchor="middle">Edge regions</text>
+      <text id="99.99%" x="174.99" y="579.5" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="36" font-weight="800" letter-spacing="-0.9" text-anchor="middle">99.99%</text>
+      <text id="Uptime, rolling 90 days" x="175" y="608.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" text-anchor="middle">Uptime, rolling 90 days</text>
+      <text id="2.4B" x="420.99" y="579.5" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="36" font-weight="800" letter-spacing="-0.9" text-anchor="middle">2.4B</text>
+      <text id="Requests served monthly" x="421" y="608.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" text-anchor="middle">Requests served monthly</text>
+      <text id="180ms" x="666.99" y="579.5" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="36" font-weight="800" letter-spacing="-0.9" text-anchor="middle">180ms</text>
+      <text id="Median global latency" x="667" y="608.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" text-anchor="middle">Median global latency</text>
+      <text id="38" x="913" y="579.5" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="36" font-weight="800" letter-spacing="-0.9" text-anchor="middle">38</text>
+      <text id="Edge regions" x="913" y="608.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" text-anchor="middle">Edge regions</text>
   </g>
   <text id="Editorial Masthead Hero label" x="64" y="7754" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Editorial Masthead Hero</text>
   <text id="hero-editorial id" x="64" y="7768" font-family="ui-monospace, monospace" font-size="12" fill="#737373">hero-editorial</text>
   <g id="Editorial Masthead Hero" transform="translate(64, 7786)">
     <rect id="container" x="0" y="0" width="1088" height="630" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Field notes" x="192" y="130" fill="#007f34" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="600" letter-spacing="2.16">Field notes</text>
-      <text id="The interface is" x="192" y="245" fill="#080c0f" font-family="ui-serif, Georgia" font-size="60" letter-spacing="-1.5">The interface is</text>
-      <text id="the argument." x="192" y="311" fill="#080c0f" font-family="ui-serif, Georgia" font-size="60" letter-spacing="-1.5">the argument.</text>
-      <text id="Every product makes a claim about how it…" x="192" y="367" fill="#575b60" font-family="ui-serif, Georgia" font-size="20">Every product makes a claim about how its user should think. Most make it by</text>
-      <text id="accident. A short case for treating layo…" x="192" y="399.5" fill="#575b60" font-family="ui-serif, Georgia" font-size="20">accident. A short case for treating layout as a position rather than a container.</text>
+      <text id="Field notes" x="192" y="130" fill="#00782e" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="600" letter-spacing="2.16">Field notes</text>
+      <text id="The interface is" x="192" y="240" fill="#080c0f" font-family="ui-serif, Georgia" font-size="60" letter-spacing="-1.5">The interface is</text>
+      <text id="the argument." x="192" y="306" fill="#080c0f" font-family="ui-serif, Georgia" font-size="60" letter-spacing="-1.5">the argument.</text>
+      <text id="Every product makes a claim about how it…" x="192" y="365" fill="#575b60" font-family="ui-serif, Georgia" font-size="20">Every product makes a claim about how its user should think. Most make it by</text>
+      <text id="accident. A short case for treating layo…" x="192" y="397.5" fill="#575b60" font-family="ui-serif, Georgia" font-size="20">accident. A short case for treating layout as a position rather than a container.</text>
       <text id="Ada Whitfield" x="192" y="459" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Ada Whitfield</text>
       <text id="·" x="279.39" y="459" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">·</text>
       <text id="14 March 2026" x="293.81" y="459" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">14 March 2026</text>
       <text id="· 2" x="387.94" y="459" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">·</text>
       <text id="9 min read" x="402.36" y="459" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">9 min read</text>
-      <text id="Read the essay" x="192" y="509" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Read the essay</text>
+      <text id="Read the essay" x="192" y="510" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Read the essay</text>
+      <g id="icon arrow-right" transform="translate(300.422 497) scale(0.667 0.667)" fill="none" stroke="#080c0f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14" />
+        <path d="m12 5 7 7-7 7" />
+      </g>
   </g>
   <text id="Full-Bleed Media Hero label" x="64" y="8532" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Full-Bleed Media Hero</text>
   <text id="hero-media-overlay id" x="64" y="8546" font-family="ui-monospace, monospace" font-size="12" fill="#737373">hero-media-overlay</text>
   <g id="Full-Bleed Media Hero" transform="translate(64, 8564)">
     <rect id="container" x="0" y="0" width="1088" height="642.5" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="container 2" x="33" y="145" width="128.19" height="26" rx="13" fill="rgba(255, 255, 255, 0.102)" stroke="rgba(255, 255, 255, 0.251)" stroke-width="1" />
-      <text id="Autumn collection" x="33" y="157" fill="#ffffff" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Autumn collection</text>
+      <text id="Autumn collection" x="46" y="162" fill="#ffffff" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Autumn collection</text>
       <text id="Made to be" x="33" y="252" fill="#ffffff" font-family="Geist, &quot;Geist Fallback&quot;" font-size="72" font-weight="800" letter-spacing="-1.8">Made to be</text>
       <text id="worn out." x="33" y="324" fill="#ffffff" font-family="Geist, &quot;Geist Fallback&quot;" font-size="72" font-weight="800" letter-spacing="-1.8">worn out.</text>
       <text id="Twelve pieces, cut from deadstock wool i…" x="33" y="376" fill="rgba(255, 255, 255, 0.851)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18">Twelve pieces, cut from deadstock wool in a mill that has been</text>
       <text id="running since 1908. Built to outlast the…" x="33" y="405.25" fill="rgba(255, 255, 255, 0.851)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18">running since 1908. Built to outlast the season that named them.</text>
       <rect id="link" x="33" y="449.5" width="200.05" height="48" rx="16" fill="#ffffff" />
-      <text id="Shop the collection" x="33" y="463.5" fill="#0f172b" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Shop the collection</text>
+      <text id="Shop the collection" x="57" y="478.5" fill="#0f172b" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Shop the collection</text>
+      <g id="icon arrow-right" transform="translate(193.047 465.5) scale(0.667 0.667)" fill="none" stroke="#0f172b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14" />
+        <path d="m12 5 7 7-7 7" />
+      </g>
       <rect id="link 2" x="245.05" y="449.5" width="171.55" height="48" rx="16" fill="rgba(255, 255, 255, 0.102)" stroke="rgba(255, 255, 255, 0.298)" stroke-width="1" />
-      <text id="Watch the film" x="245.05" y="463.5" fill="#ffffff" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Watch the film</text>
+      <text id="Watch the film" x="294.05" y="478.5" fill="#ffffff" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Watch the film</text>
+      <g id="icon play" transform="translate(270.047 465.5) scale(0.667 0.667)" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="6 3 20 12 6 21 6 3" />
+      </g>
   </g>
   <text id="Integration Wall Hero label" x="64" y="9322.5" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Integration Wall Hero</text>
   <text id="hero-integrations id" x="64" y="9336.5" font-family="ui-monospace, monospace" font-size="12" fill="#737373">hero-integrations</text>
   <g id="Integration Wall Hero" transform="translate(64, 9354.5)">
     <rect id="container" x="0" y="0" width="1088" height="673" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="container 2" x="33" y="99.13" width="139.02" height="26" rx="13" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="120+ connectors" x="33" y="111.13" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">120+ connectors</text>
+      <text id="120+ connectors" x="66" y="116.13" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">120+ connectors</text>
+      <g id="icon plug" transform="translate(46 105.125) scale(0.583 0.583)" fill="none" stroke="#00782e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 22v-5" />
+        <path d="M9 8V2" />
+        <path d="M15 8V2" />
+        <path d="M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8Z" />
+      </g>
       <text id="Your stack," x="33" y="197.13" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="60" font-weight="800" letter-spacing="-1.5">Your stack,</text>
       <text id="finally speaking" x="33" y="257.13" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="60" font-weight="800" letter-spacing="-1.5">finally speaking</text>
       <text id="the same" x="33" y="317.13" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="60" font-weight="800" letter-spacing="-1.5">the same</text>
@@ -345,120 +459,167 @@
       <text id="Sync every system you already run into o…" x="33" y="427.13" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18">Sync every system you already run into one warehouse —</text>
       <text id="incrementally, on a schedule you set, wi…" x="33" y="456.38" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18">incrementally, on a schedule you set, without writing the</text>
       <text id="pipeline yourself." x="33" y="485.63" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18">pipeline yourself.</text>
-      <rect id="link" x="33" y="525.88" width="187" height="48" rx="16" fill="#007f34" />
-      <text id="Connect a source" x="33" y="539.88" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Connect a source</text>
+      <rect id="link" x="33" y="525.88" width="187" height="48" rx="16" fill="#00782e" />
+      <text id="Connect a source" x="57" y="554.88" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Connect a source</text>
+      <g id="icon arrow-right" transform="translate(180 541.875) scale(0.667 0.667)" fill="none" stroke="#fcfcfc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14" />
+        <path d="m12 5 7 7-7 7" />
+      </g>
       <rect id="link 2" x="232" y="525.88" width="178.92" height="48" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Browse connectors" x="232" y="539.88" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Browse connectors</text>
+      <text id="Browse connectors" x="257" y="554.88" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Browse connectors</text>
       <rect id="list item" x="576" y="97" width="107.75" height="107.75" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <rect id="container 3" x="611.88" y="122" width="36" height="36" rx="12" fill="rgba(0, 128, 54, 0.149)" />
-      <text id="PO" x="629.88" y="134" fill="#007f34" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="700" text-anchor="middle">PO</text>
-      <text id="Postgres" x="629.87" y="177" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="11" font-weight="500" text-anchor="middle">Postgres</text>
+      <rect id="container 3" x="611.88" y="122" width="36" height="36" rx="12" fill="rgba(0, 121, 47, 0.149)" />
+      <text id="PO" x="629.88" y="144" fill="#00782e" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="700" text-anchor="middle">PO</text>
+      <text id="Postgres" x="629.87" y="176" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="11" font-weight="500" text-anchor="middle">Postgres</text>
       <rect id="list item 2" x="699.75" y="97" width="107.75" height="107.75" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <rect id="container 4" x="735.63" y="122" width="36" height="36" rx="12" fill="rgba(0, 128, 54, 0.149)" />
-      <text id="SN" x="753.63" y="134" fill="#007f34" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="700" text-anchor="middle">SN</text>
-      <text id="Snowflake" x="753.63" y="177" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="11" font-weight="500" text-anchor="middle">Snowflake</text>
+      <rect id="container 4" x="735.63" y="122" width="36" height="36" rx="12" fill="rgba(0, 121, 47, 0.149)" />
+      <text id="SN" x="753.62" y="144" fill="#00782e" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="700" text-anchor="middle">SN</text>
+      <text id="Snowflake" x="753.63" y="176" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="11" font-weight="500" text-anchor="middle">Snowflake</text>
       <rect id="list item 3" x="823.5" y="97" width="107.75" height="107.75" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <rect id="container 5" x="859.38" y="122" width="36" height="36" rx="12" fill="rgba(0, 128, 54, 0.149)" />
-      <text id="ST" x="877.38" y="134" fill="#007f34" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="700" text-anchor="middle">ST</text>
-      <text id="Stripe" x="877.37" y="177" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="11" font-weight="500" text-anchor="middle">Stripe</text>
+      <rect id="container 5" x="859.38" y="122" width="36" height="36" rx="12" fill="rgba(0, 121, 47, 0.149)" />
+      <text id="ST" x="877.37" y="144" fill="#00782e" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="700" text-anchor="middle">ST</text>
+      <text id="Stripe" x="877.37" y="176" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="11" font-weight="500" text-anchor="middle">Stripe</text>
       <rect id="list item 4" x="947.25" y="97" width="107.75" height="107.75" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <rect id="container 6" x="983.13" y="122" width="36" height="36" rx="12" fill="rgba(0, 128, 54, 0.149)" />
-      <text id="SA" x="1001.13" y="134" fill="#007f34" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="700" text-anchor="middle">SA</text>
-      <text id="Salesforce" x="1001.12" y="177" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="11" font-weight="500" text-anchor="middle">Salesforce</text>
+      <rect id="container 6" x="983.13" y="122" width="36" height="36" rx="12" fill="rgba(0, 121, 47, 0.149)" />
+      <text id="SA" x="1001.12" y="144" fill="#00782e" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="700" text-anchor="middle">SA</text>
+      <text id="Salesforce" x="1001.12" y="176" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="11" font-weight="500" text-anchor="middle">Salesforce</text>
       <rect id="list item 5" x="576" y="220.75" width="107.75" height="107.75" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <rect id="container 7" x="611.88" y="245.75" width="36" height="36" rx="12" fill="rgba(0, 128, 54, 0.149)" />
-      <text id="HU" x="629.88" y="257.75" fill="#007f34" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="700" text-anchor="middle">HU</text>
-      <text id="HubSpot" x="629.88" y="300.75" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="11" font-weight="500" text-anchor="middle">HubSpot</text>
+      <rect id="container 7" x="611.88" y="245.75" width="36" height="36" rx="12" fill="rgba(0, 121, 47, 0.149)" />
+      <text id="HU" x="629.88" y="267.75" fill="#00782e" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="700" text-anchor="middle">HU</text>
+      <text id="HubSpot" x="629.88" y="299.75" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="11" font-weight="500" text-anchor="middle">HubSpot</text>
       <rect id="list item 6" x="699.75" y="220.75" width="107.75" height="107.75" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <rect id="container 8" x="735.63" y="245.75" width="36" height="36" rx="12" fill="rgba(0, 128, 54, 0.149)" />
-      <text id="SE" x="753.63" y="257.75" fill="#007f34" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="700" text-anchor="middle">SE</text>
-      <text id="Segment" x="753.62" y="300.75" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="11" font-weight="500" text-anchor="middle">Segment</text>
+      <rect id="container 8" x="735.63" y="245.75" width="36" height="36" rx="12" fill="rgba(0, 121, 47, 0.149)" />
+      <text id="SE" x="753.62" y="267.75" fill="#00782e" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="700" text-anchor="middle">SE</text>
+      <text id="Segment" x="753.62" y="299.75" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="11" font-weight="500" text-anchor="middle">Segment</text>
       <rect id="list item 7" x="823.5" y="220.75" width="107.75" height="107.75" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <rect id="container 9" x="859.38" y="245.75" width="36" height="36" rx="12" fill="rgba(0, 128, 54, 0.149)" />
-      <text id="BI" x="877.38" y="257.75" fill="#007f34" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="700" text-anchor="middle">BI</text>
-      <text id="BigQuery" x="877.38" y="300.75" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="11" font-weight="500" text-anchor="middle">BigQuery</text>
+      <rect id="container 9" x="859.38" y="245.75" width="36" height="36" rx="12" fill="rgba(0, 121, 47, 0.149)" />
+      <text id="BI" x="877.37" y="267.75" fill="#00782e" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="700" text-anchor="middle">BI</text>
+      <text id="BigQuery" x="877.38" y="299.75" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="11" font-weight="500" text-anchor="middle">BigQuery</text>
       <rect id="list item 8" x="947.25" y="220.75" width="107.75" height="107.75" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <rect id="container 10" x="983.13" y="245.75" width="36" height="36" rx="12" fill="rgba(0, 128, 54, 0.149)" />
-      <text id="SH" x="1001.13" y="257.75" fill="#007f34" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="700" text-anchor="middle">SH</text>
-      <text id="Shopify" x="1001.13" y="300.75" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="11" font-weight="500" text-anchor="middle">Shopify</text>
+      <rect id="container 10" x="983.13" y="245.75" width="36" height="36" rx="12" fill="rgba(0, 121, 47, 0.149)" />
+      <text id="SH" x="1001.12" y="267.75" fill="#00782e" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="700" text-anchor="middle">SH</text>
+      <text id="Shopify" x="1001.13" y="299.75" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="11" font-weight="500" text-anchor="middle">Shopify</text>
       <rect id="list item 9" x="576" y="344.5" width="107.75" height="107.75" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <rect id="container 11" x="611.88" y="369.5" width="36" height="36" rx="12" fill="rgba(0, 128, 54, 0.149)" />
-      <text id="ZE" x="629.88" y="381.5" fill="#007f34" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="700" text-anchor="middle">ZE</text>
-      <text id="Zendesk" x="629.87" y="424.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="11" font-weight="500" text-anchor="middle">Zendesk</text>
+      <rect id="container 11" x="611.88" y="369.5" width="36" height="36" rx="12" fill="rgba(0, 121, 47, 0.149)" />
+      <text id="ZE" x="629.87" y="391.5" fill="#00782e" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="700" text-anchor="middle">ZE</text>
+      <text id="Zendesk" x="629.87" y="423.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="11" font-weight="500" text-anchor="middle">Zendesk</text>
       <rect id="list item 10" x="699.75" y="344.5" width="107.75" height="107.75" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <rect id="container 12" x="735.63" y="369.5" width="36" height="36" rx="12" fill="rgba(0, 128, 54, 0.149)" />
-      <text id="NO" x="753.63" y="381.5" fill="#007f34" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="700" text-anchor="middle">NO</text>
-      <text id="Notion" x="753.63" y="424.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="11" font-weight="500" text-anchor="middle">Notion</text>
+      <rect id="container 12" x="735.63" y="369.5" width="36" height="36" rx="12" fill="rgba(0, 121, 47, 0.149)" />
+      <text id="NO" x="753.63" y="391.5" fill="#00782e" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="700" text-anchor="middle">NO</text>
+      <text id="Notion" x="753.63" y="423.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="11" font-weight="500" text-anchor="middle">Notion</text>
       <rect id="list item 11" x="823.5" y="344.5" width="107.75" height="107.75" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <rect id="container 13" x="859.38" y="369.5" width="36" height="36" rx="12" fill="rgba(0, 128, 54, 0.149)" />
-      <text id="SL" x="877.38" y="381.5" fill="#007f34" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="700" text-anchor="middle">SL</text>
-      <text id="Slack" x="877.38" y="424.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="11" font-weight="500" text-anchor="middle">Slack</text>
+      <rect id="container 13" x="859.38" y="369.5" width="36" height="36" rx="12" fill="rgba(0, 121, 47, 0.149)" />
+      <text id="SL" x="877.37" y="391.5" fill="#00782e" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="700" text-anchor="middle">SL</text>
+      <text id="Slack" x="877.38" y="423.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="11" font-weight="500" text-anchor="middle">Slack</text>
       <rect id="list item 12" x="947.25" y="344.5" width="107.75" height="107.75" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <rect id="container 14" x="983.13" y="369.5" width="36" height="36" rx="12" fill="rgba(0, 128, 54, 0.149)" />
-      <text id="LI" x="1001.13" y="381.5" fill="#007f34" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="700" text-anchor="middle">LI</text>
-      <text id="Linear" x="1001.12" y="424.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="11" font-weight="500" text-anchor="middle">Linear</text>
+      <rect id="container 14" x="983.13" y="369.5" width="36" height="36" rx="12" fill="rgba(0, 121, 47, 0.149)" />
+      <text id="LI" x="1001.12" y="391.5" fill="#00782e" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="700" text-anchor="middle">LI</text>
+      <text id="Linear" x="1001.12" y="423.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="11" font-weight="500" text-anchor="middle">Linear</text>
       <rect id="list item 13" x="576" y="468.25" width="107.75" height="107.75" rx="16" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="+108 more" x="629.88" y="479.25" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="11" font-weight="500" text-anchor="middle">+108 more</text>
+      <text id="+108 more" x="629.88" y="525.88" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="11" font-weight="500" text-anchor="middle">+108 more</text>
   </g>
   <text id="Appointment Booking Hero label" x="64" y="10143.5" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Appointment Booking Hero</text>
   <text id="hero-booking id" x="64" y="10157.5" font-family="ui-monospace, monospace" font-size="12" fill="#737373">hero-booking</text>
   <g id="Appointment Booking Hero" transform="translate(64, 10175.5)">
     <rect id="container" x="0" y="0" width="1088" height="539.5" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="container 2" x="33" y="97" width="199.34" height="26" rx="13" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Shoreditch · open until 8pm" x="33" y="109" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Shoreditch · open until 8pm</text>
+      <text id="Shoreditch · open until 8pm" x="66" y="114" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Shoreditch · open until 8pm</text>
+      <g id="icon map-pin" transform="translate(46 103) scale(0.583 0.583)" fill="none" stroke="#00782e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
+        <circle cx="12" cy="10" r="3" />
+      </g>
       <text id="A cut that" x="33" y="195" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="60" font-weight="800" letter-spacing="-1.5">A cut that</text>
       <text id="survives" x="33" y="255" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="60" font-weight="800" letter-spacing="-1.5">survives</text>
       <text id="the week." x="33" y="315" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="60" font-weight="800" letter-spacing="-1.5">the week.</text>
       <text id="Forty-five minutes, no rush, no upsell. …" x="33" y="365" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18">Forty-five minutes, no rush, no upsell. Book the chair rather</text>
       <text id="than the shop and you get the same hands…" x="33" y="394.25" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18">than the shop and you get the same hands every time.</text>
-      <text id="Average wait for a first appointment: 2 …" x="33" y="438.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Average wait for a first appointment: 2 days</text>
+      <text id="Average wait for a first appointment: 2 …" x="57" y="438.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Average wait for a first appointment: 2 days</text>
+      <g id="icon clock" transform="translate(33 426.5) scale(0.667 0.667)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 6v6l4 2" />
+        <circle cx="12" cy="12" r="10" />
+      </g>
       <rect id="container 3" x="587.67" y="126.5" width="467.33" height="286.5" rx="16" fill="rgba(255, 255, 255, 0.698)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Pick a day" x="616.67" y="169.5" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Pick a day</text>
-      <rect id="container 4" x="616.67" y="195.5" width="75.45" height="88" rx="16" fill="rgba(0, 128, 49, 0.102)" stroke="#007f34" stroke-width="1" />
-      <text id="Mon" x="654.4" y="218.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" letter-spacing="0.25" text-anchor="middle">Mon</text>
-      <text id="11" x="654.4" y="243.5" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" font-weight="700" letter-spacing="-0.45" text-anchor="middle">11</text>
-      <text id="2 left" x="654.39" y="265.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" text-anchor="middle">2 left</text>
+      <text id="Pick a day" x="640.67" y="170.5" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Pick a day</text>
+      <g id="icon calendar-days" transform="translate(616.672 157.5) scale(0.667 0.667)" fill="none" stroke="#00782e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M8 2v4" />
+        <path d="M16 2v4" />
+        <rect rx="2" x="3" y="4" width="18" height="18" />
+        <path d="M3 10h18" />
+        <path d="M8 14h.01" />
+        <path d="M12 14h.01" />
+        <path d="M16 14h.01" />
+        <path d="M8 18h.01" />
+        <path d="M12 18h.01" />
+        <path d="M16 18h.01" />
+      </g>
+      <rect id="container 4" x="616.67" y="195.5" width="75.45" height="88" rx="16" fill="rgba(0, 118, 49, 0.102)" stroke="#00782e" stroke-width="1" />
+      <text id="Mon" x="654.4" y="219.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" letter-spacing="0.25" text-anchor="middle">Mon</text>
+      <text id="11" x="654.4" y="245.5" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" font-weight="700" letter-spacing="-0.45" text-anchor="middle">11</text>
+      <text id="2 left" x="654.39" y="266.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" text-anchor="middle">2 left</text>
       <rect id="container 5" x="700.13" y="195.5" width="75.47" height="88" rx="16" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" opacity="0.4" />
-      <text id="Tue" x="737.86" y="218.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" letter-spacing="0.25" text-anchor="middle">Tue</text>
-      <text id="12" x="737.85" y="243.5" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" font-weight="700" letter-spacing="-0.45" text-anchor="middle">12</text>
-      <text id="Full" x="737.86" y="265.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" text-anchor="middle">Full</text>
+      <text id="Tue" x="737.86" y="219.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" letter-spacing="0.25" text-anchor="middle">Tue</text>
+      <text id="12" x="737.85" y="245.5" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" font-weight="700" letter-spacing="-0.45" text-anchor="middle">12</text>
+      <text id="Full" x="737.86" y="266.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" text-anchor="middle">Full</text>
       <rect id="container 6" x="783.59" y="195.5" width="75.47" height="88" rx="16" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Wed" x="821.32" y="218.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" letter-spacing="0.25" text-anchor="middle">Wed</text>
-      <text id="13" x="821.32" y="243.5" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" font-weight="700" letter-spacing="-0.45" text-anchor="middle">13</text>
-      <text id="5 left" x="821.33" y="265.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" text-anchor="middle">5 left</text>
+      <text id="Wed" x="821.32" y="219.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" letter-spacing="0.25" text-anchor="middle">Wed</text>
+      <text id="13" x="821.32" y="245.5" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" font-weight="700" letter-spacing="-0.45" text-anchor="middle">13</text>
+      <text id="5 left" x="821.33" y="266.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" text-anchor="middle">5 left</text>
       <rect id="container 7" x="867.06" y="195.5" width="75.47" height="88" rx="16" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Thu" x="904.79" y="218.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" letter-spacing="0.25" text-anchor="middle">Thu</text>
-      <text id="14" x="904.79" y="243.5" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" font-weight="700" letter-spacing="-0.45" text-anchor="middle">14</text>
-      <text id="3 left" x="904.8" y="265.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" text-anchor="middle">3 left</text>
+      <text id="Thu" x="904.79" y="219.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" letter-spacing="0.25" text-anchor="middle">Thu</text>
+      <text id="14" x="904.79" y="245.5" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" font-weight="700" letter-spacing="-0.45" text-anchor="middle">14</text>
+      <text id="3 left" x="904.8" y="266.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" text-anchor="middle">3 left</text>
       <rect id="container 8" x="950.53" y="195.5" width="75.45" height="88" rx="16" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Fri" x="988.25" y="218.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" letter-spacing="0.25" text-anchor="middle">Fri</text>
-      <text id="15" x="988.26" y="243.5" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" font-weight="700" letter-spacing="-0.45" text-anchor="middle">15</text>
-      <text id="7 left" x="988.26" y="265.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" text-anchor="middle">7 left</text>
-      <rect id="button" x="616.67" y="307.5" width="409.33" height="48" rx="16" fill="#007f34" />
-      <text id="Check availability" x="821.34" y="321.5" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Check availability</text>
-      <text id="Free to cancel up to 24 hours before." x="821.34" y="378.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="11" text-anchor="middle">Free to cancel up to 24 hours before.</text>
+      <text id="Fri" x="988.25" y="219.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" letter-spacing="0.25" text-anchor="middle">Fri</text>
+      <text id="15" x="988.26" y="245.5" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" font-weight="700" letter-spacing="-0.45" text-anchor="middle">15</text>
+      <text id="7 left" x="988.26" y="266.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" text-anchor="middle">7 left</text>
+      <rect id="button" x="616.67" y="307.5" width="409.33" height="48" rx="16" fill="#00782e" />
+      <text id="Check availability" x="821.33" y="336.5" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Check availability</text>
+      <text id="Free to cancel up to 24 hours before." x="821.34" y="379.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="11" text-anchor="middle">Free to cancel up to 24 hours before.</text>
   </g>
   <text id="Hero with Inline Price label" x="64" y="10831" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Hero with Inline Price</text>
   <text id="hero-price-anchor id" x="64" y="10845" font-family="ui-monospace, monospace" font-size="12" fill="#737373">hero-price-anchor</text>
   <g id="Hero with Inline Price" transform="translate(64, 10863)">
     <rect id="container" x="0" y="0" width="1088" height="550.5" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <rect id="container 2" x="33" y="97" width="163.2" height="26" rx="13" fill="rgba(0, 128, 49, 0.102)" stroke="rgba(0, 126, 53, 0.302)" stroke-width="1" />
-      <text id="Launch week — 40% off" x="33" y="109" fill="#007f34" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="600">Launch week — 40% off</text>
+      <rect id="container 2" x="33" y="97" width="163.2" height="26" rx="13" fill="rgba(0, 118, 49, 0.102)" stroke="rgba(0, 119, 46, 0.302)" stroke-width="1" />
+      <text id="Launch week — 40% off" x="46" y="114" fill="#00782e" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="600">Launch week — 40% off</text>
       <text id="Buy it once. Use" x="33" y="194" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="60" font-weight="800" letter-spacing="-1.5">Buy it once. Use</text>
       <text id="it in everything." x="33" y="254" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="60" font-weight="800" letter-spacing="-1.5">it in everything.</text>
       <text id="The whole library, source included, with…" x="33" y="304" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18">The whole library, source included, with a licence that does not</text>
       <text id="care how many client projects you ship t…" x="33" y="333.25" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18">care how many client projects you ship this year.</text>
-      <text id="Lifetime access, no subscription" x="57" y="387.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Lifetime access, no subscription</text>
-      <text id="Every component and template" x="318.2" y="387.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Every component and template</text>
-      <text id="Figma source files" x="57" y="417.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Figma source files</text>
-      <text id="One year of updates" x="318.2" y="417.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">One year of updates</text>
-      <text id="Unlimited commercial projects" x="57" y="447.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Unlimited commercial projects</text>
+      <g id="icon check" transform="translate(33 375.5) scale(0.667 0.667)" fill="none" stroke="#00782e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 6 9 17l-5-5" />
+      </g>
+      <text id="Lifetime access, no subscription" x="57" y="388.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Lifetime access, no subscription</text>
+      <g id="icon check 2" transform="translate(294.203 375.5) scale(0.667 0.667)" fill="none" stroke="#00782e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 6 9 17l-5-5" />
+      </g>
+      <text id="Every component and template" x="318.2" y="388.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Every component and template</text>
+      <g id="icon check 3" transform="translate(33 405.5) scale(0.667 0.667)" fill="none" stroke="#00782e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 6 9 17l-5-5" />
+      </g>
+      <text id="Figma source files" x="57" y="418.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Figma source files</text>
+      <g id="icon check 4" transform="translate(294.203 405.5) scale(0.667 0.667)" fill="none" stroke="#00782e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 6 9 17l-5-5" />
+      </g>
+      <text id="One year of updates" x="318.2" y="418.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">One year of updates</text>
+      <g id="icon check 5" transform="translate(33 435.5) scale(0.667 0.667)" fill="none" stroke="#00782e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 6 9 17l-5-5" />
+      </g>
+      <text id="Unlimited commercial projects" x="57" y="448.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Unlimited commercial projects</text>
       <rect id="container 3" x="609.41" y="146.25" width="445.58" height="258" rx="16" fill="rgba(255, 255, 255, 0.698)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="$49" x="811.12" y="239.25" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="60" font-weight="800" letter-spacing="-1.5" text-anchor="middle">$49</text>
-      <text id="$82" x="893.83" y="221.25" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" font-weight="500" text-anchor="middle">$82</text>
+      <text id="$49" x="811.12" y="230.25" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="60" font-weight="800" letter-spacing="-1.5" text-anchor="middle">$49</text>
+      <text id="$82" x="893.83" y="223.25" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" font-weight="500" text-anchor="middle">$82</text>
       <text id="one-time payment" x="832.2" y="259.25" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" letter-spacing="0.3" text-anchor="middle">one-time payment</text>
-      <rect id="link" x="642.41" y="291.25" width="379.58" height="48" rx="16" fill="#007f34" />
-      <text id="Get the library" x="832.2" y="305.25" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Get the library</text>
-      <text id="30-day refund, no questions asked" x="832.2" y="367.25" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" text-anchor="middle">30-day refund, no questions asked</text>
+      <rect id="link" x="642.41" y="291.25" width="379.58" height="48" rx="16" fill="#00782e" />
+      <text id="Get the library" x="821.19" y="320.25" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Get the library</text>
+      <g id="icon arrow-right" transform="translate(875.156 307.25) scale(0.667 0.667)" fill="none" stroke="#fcfcfc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14" />
+        <path d="m12 5 7 7-7 7" />
+      </g>
+      <text id="30-day refund, no questions asked" x="843.19" y="367.25" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" text-anchor="middle">30-day refund, no questions asked</text>
+      <g id="icon shield-check" transform="translate(725.813 355.25) scale(0.667 0.667)" fill="none" stroke="#00bc7d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
+        <path d="m9 12 2 2 4-4" />
+      </g>
   </g>
 </svg>

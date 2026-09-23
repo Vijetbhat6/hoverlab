@@ -31,6 +31,14 @@
     "lines": 149,
     "files": 1
   },
+  "switch": {
+    "lines": 106,
+    "files": 1
+  },
+  "range-slider": {
+    "lines": 129,
+    "files": 1
+  },
   "combobox": {
     "lines": 235,
     "files": 1
@@ -45,6 +53,10 @@
   },
   "emoji-selector": {
     "lines": 153,
+    "files": 1
+  },
+  "radio-card-group": {
+    "lines": 135,
     "files": 1
   },
   "badge": {
@@ -69,6 +81,38 @@
   },
   "tree-view": {
     "lines": 235,
+    "files": 1
+  },
+  "tabs": {
+    "lines": 181,
+    "files": 1
+  },
+  "breadcrumbs": {
+    "lines": 106,
+    "files": 1
+  },
+  "pagination": {
+    "lines": 179,
+    "files": 1
+  },
+  "accordion": {
+    "lines": 138,
+    "files": 1
+  },
+  "alert": {
+    "lines": 134,
+    "files": 1
+  },
+  "dropdown-menu": {
+    "lines": 222,
+    "files": 1
+  },
+  "dialog": {
+    "lines": 156,
+    "files": 1
+  },
+  "tooltip": {
+    "lines": 128,
     "files": 1
   },
   "avatar-group": {
@@ -148,7 +192,7 @@
     "files": 1
   },
   "prompt-suggestions": {
-    "lines": 120,
+    "lines": 121,
     "files": 1
   },
   "content-divider": {

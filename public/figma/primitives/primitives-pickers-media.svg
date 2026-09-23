@@ -1,0 +1,147 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1216" height="2520" viewBox="0 0 1216 2520" id="Hoverlab — Pickers &amp; Media">
+  <!--
+    Hoverlab — Pickers & Media. 6 controls, traced from the
+    rendered catalog. Drag this file onto a Figma canvas.
+
+    These are frames, not components: named, editable layers with real
+    geometry, colour and type. There are no variants, no auto-layout,
+    and no hover or motion — none of those exist in a static frame.
+
+    Every one of these is free to copy as code at https://hoverlab.dev/primitives
+  -->
+  <rect id="Background" x="0" y="0" width="1216" height="2520" fill="#ffffff" />
+  <text id="Color Picker label" x="64" y="84" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Color Picker</text>
+  <text id="color-picker id" x="64" y="98" font-family="ui-monospace, monospace" font-size="12" fill="#737373">color-picker</text>
+  <g id="Color Picker" transform="translate(64, 116)">
+    <rect id="container" x="0" y="0" width="1088" height="170" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="radio" x="384" y="25" width="46.66" height="32" rx="10" fill="#0f172a" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="radio 2" x="438.66" y="25" width="46.67" height="32" rx="10" fill="#64748b" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="radio 3" x="493.33" y="25" width="46.67" height="32" rx="10" fill="#ef4444" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="radio 4" x="548" y="25" width="46.66" height="32" rx="10" fill="#f97316" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="radio 5" x="602.66" y="25" width="46.67" height="32" rx="10" fill="#eab308" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="radio 6" x="657.33" y="25" width="46.67" height="32" rx="10" fill="#22c55e" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="radio 7" x="384" y="65" width="46.66" height="32" rx="10" fill="#14b8a6" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="radio 8" x="438.66" y="65" width="46.67" height="32" rx="10" fill="#3b82f6" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="radio 9" x="493.33" y="65" width="46.67" height="32" rx="10" fill="#6366f1" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <g id="icon check" transform="translate(508.656 73) scale(0.667 0.667)" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 6 9 17l-5-5" />
+      </g>
+      <rect id="radio 10" x="548" y="65" width="46.66" height="32" rx="10" fill="#a855f7" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="radio 11" x="602.66" y="65" width="46.67" height="32" rx="10" fill="#ec4899" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="radio 12" x="657.33" y="65" width="46.67" height="32" rx="10" fill="#ffffff" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="384" y="109" width="276" height="36" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <rect id="container 3" x="395" y="119" width="16" height="16" rx="4" fill="#6366f1" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 4" x="668" y="109" width="36" height="36" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <g id="icon pipette" transform="translate(678 119) scale(0.667 0.667)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m12 9-8.414 8.414A2 2 0 0 0 3 18.828v1.344a2 2 0 0 1-.586 1.414A2 2 0 0 1 3.828 21h1.344a2 2 0 0 0 1.414-.586L15 12" />
+        <path d="m18 9 .4.4a1 1 0 1 1-3 3l-3.8-3.8a1 1 0 1 1 3-3l.4.4 3.4-3.4a1 1 0 1 1 3 3z" />
+        <path d="m2 22 .414-.414" />
+      </g>
+  </g>
+  <text id="Gradient Picker label" x="64" y="402" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Gradient Picker</text>
+  <text id="gradient-picker id" x="64" y="416" font-family="ui-monospace, monospace" font-size="12" fill="#737373">gradient-picker</text>
+  <g id="Gradient Picker" transform="translate(64, 434)">
+    <rect id="container" x="0" y="0" width="1088" height="274" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="img" x="352" y="25" width="384" height="80" rx="16" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <rect id="container 2" x="352" y="117" width="384" height="24" rx="12" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <rect id="slider" x="343" y="119" width="20" height="20" rx="10" fill="#6366f1" stroke="#080c0f" stroke-width="2" />
+      <rect id="slider 2" x="553.09" y="119" width="20" height="20" rx="10" fill="#ec4899" stroke="#fdfcf8" stroke-width="2" />
+      <rect id="slider 3" x="725" y="119" width="20" height="20" rx="10" fill="#f59e0b" stroke="#fdfcf8" stroke-width="2" />
+      <rect id="field" x="352" y="153" width="36" height="36" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <rect id="container 3" x="396" y="153" width="109.61" height="36" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Angle" x="407" y="175" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Angle</text>
+      <rect id="button" x="513.61" y="153" width="60.97" height="36" rx="12" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="Linear" x="544.09" y="175" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500" text-anchor="middle">Linear</text>
+      <rect id="button 2" x="582.58" y="153" width="72.55" height="36" rx="12" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="Stop" x="628.85" y="175" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500" text-anchor="middle">Stop</text>
+      <g id="icon plus" transform="translate(595.578 164) scale(0.583 0.583)" fill="none" stroke="#080c0f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14" />
+        <path d="M12 5v14" />
+      </g>
+      <rect id="button 3" x="663.13" y="153" width="36" height="36" rx="12" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <g id="icon trash2" transform="translate(674.125 164) scale(0.583 0.583)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 6h18" />
+        <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+        <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+        <line x1="10" y1="11" x2="10" y2="17" />
+        <line x1="14" y1="11" x2="14" y2="17" />
+      </g>
+      <rect id="container 4" x="352" y="201" width="384" height="48" rx="12" fill="rgba(243, 242, 238, 0.6)" />
+      <text id="linear-gradient(135deg, #6366f1 0%, #ec4…" x="364" y="221" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">linear-gradient(135deg, #6366f1 0%, #ec4899 55%,</text>
+      <text id="#f59e0b 100%)" x="364" y="237" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">#f59e0b 100%)</text>
+  </g>
+  <text id="Image Picker label" x="64" y="824" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Image Picker</text>
+  <text id="image-picker id" x="64" y="838" font-family="ui-monospace, monospace" font-size="12" fill="#737373">image-picker</text>
+  <g id="Image Picker" transform="translate(64, 856)">
+    <rect id="container" x="0" y="0" width="1088" height="210" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="352" y="25" width="384" height="160" rx="16" fill="rgba(245, 240, 240, 0.2)" stroke="#dbdee1" stroke-width="2" />
+      <rect id="container 3" x="524" y="59" width="40" height="40" rx="20" fill="#fdfcf8" />
+      <g id="icon image-plus" transform="translate(534 69) scale(0.833 0.833)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M16 5h6" />
+        <path d="M19 2v6" />
+        <path d="M21 11.5V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7.5" />
+        <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
+        <circle cx="9" cy="9" r="2" />
+      </g>
+      <text id="Upload an image" x="543.99" y="122" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Upload an image</text>
+      <text id="PNG, JPG, WebP or AVIF · up to 5 MB" x="543.99" y="147" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" text-anchor="middle">PNG, JPG, WebP or AVIF · up to 5 MB</text>
+  </g>
+  <text id="Credit Card Input label" x="64" y="1182" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Credit Card Input</text>
+  <text id="credit-card id" x="64" y="1196" font-family="ui-monospace, monospace" font-size="12" fill="#737373">credit-card</text>
+  <g id="Credit Card Input" transform="translate(64, 1214)">
+    <rect id="container" x="0" y="0" width="1088" height="497.75" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Visa" x="623.28" y="57" fill="#ffffff" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="600" letter-spacing="0.3">Visa</text>
+      <text id="4242 4242 4242 4242" x="372" y="137.38" fill="#ffffff" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="16" letter-spacing="1.92">4242 4242 4242 4242</text>
+      <text id="A. Lovelace" x="372" y="202.75" fill="#ffffff" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" letter-spacing="0.25">A. Lovelace</text>
+      <text id="04/27" x="620.75" y="202.75" fill="#ffffff" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="10" letter-spacing="0.25">04/27</text>
+      <text id="Card number" x="352" y="257.75" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Card number</text>
+      <rect id="container 2" x="352" y="268.75" width="384" height="40" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <rect id="container 3" x="685.06" y="278.25" width="37.94" height="21" rx="4" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="Visa 2" x="692.06" y="292.25" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" font-weight="600" letter-spacing="0.25">Visa</text>
+      <text id="Expiry" x="352" y="339.75" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Expiry</text>
+      <rect id="field" x="352" y="350.75" width="186" height="40" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="CVC" x="550" y="339.75" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">CVC</text>
+      <text id="(3 digits)" x="582.8" y="339.75" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">(3 digits)</text>
+      <rect id="field 2" x="550" y="350.75" width="186" height="40" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Name on card" x="352" y="421.75" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Name on card</text>
+      <rect id="field 3" x="352" y="432.75" width="384" height="40" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+  </g>
+  <text id="QR Code label" x="64" y="1827.75" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">QR Code</text>
+  <text id="qr-code id" x="64" y="1841.75" font-family="ui-monospace, monospace" font-size="12" fill="#737373">qr-code</text>
+  <g id="QR Code" transform="translate(64, 1859.75)">
+    <rect id="container" x="0" y="0" width="1088" height="182" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <g id="icon" transform="translate(333.953 25) scale(3.568 3.568)" fill="#000000" stroke="none">
+        <rect width="37" height="37" fill="#ffffff" />
+        <path d="M4 4h1v1h-1zM5 4h1v1h-1zM6 4h1v1h-1zM7 4h1v1h-1zM8 4h1v1h-1zM9 4h1v1h-1zM10 4h1v1h-1zM15 4h1v1h-1zM16 4h1v1h-1zM19 4h1v1h-1zM20 4h1v1h-1zM23 4h1v1h-1zM24 4h1v1h-1zM26 4h1v1h-1zM27 4h1v1h-1zM28 4h1v1h-1zM29 4h1v1h-1zM30 4h1v1h-1zM31 4h1v1h-1zM32 4h1v1h-1zM4 5h1v1h-1zM10 5h1v1h-1zM13 5h1v1h-1zM14 5h1v1h-1zM16 5h1v1h-1zM21 5h1v1h-1zM22 5h1v1h-1zM26 5h1v1h-1zM32 5h1v1h-1zM4 6h1v1h-1zM6 6h1v1h-1zM7 6h1v1h-1zM8 6h1v1h-1zM10 6h1v1h-1zM12 6h1v1h-1zM13 6h1v1h-1zM14 6h1v1h-1zM18 6h1v1h-1zM20 6h1v1h-1zM22 6h1v1h-1zM26 6h1v1h-1zM28 6h1v1h-1zM29 6h1v1h-1zM30 6h1v1h-1zM32 6h1v1h-1zM4 7h1v1h-1zM6 7h1v1h-1zM7 7h1v1h-1zM8 7h1v1h-1zM10 7h1v1h-1zM12 7h1v1h-1zM13 7h1v1h-1zM16 7h1v1h-1zM20 7h1v1h-1zM21 7h1v1h-1zM24 7h1v1h-1zM26 7h1v1h-1zM28 7h1v1h-1zM29 7h1v1h-1zM30 7h1v1h-1zM32 7h1v1h-1zM4 8h1v1h-1zM6 8h1v1h-1zM7 8h1v1h-1zM8 8h1v1h-1zM10 8h1v1h-1zM12 8h1v1h-1zM16 8h1v1h-1zM17 8h1v1h-1zM18 8h1v1h-1zM19 8h1v1h-1zM21 8h1v1h-1zM22 8h1v1h-1zM23 8h1v1h-1zM24 8h1v1h-1zM26 8h1v1h-1zM28 8h1v1h-1zM29 8h1v1h-1zM30 8h1v1h-1zM32 8h1v1h-1zM4 9h1v1h-1zM10 9h1v1h-1zM12 9h1v1h-1zM13 9h1v1h-1zM14 9h1v1h-1zM16 9h1v1h-1zM17 9h1v1h-1zM18 9h1v1h-1zM19 9h1v1h-1zM20 9h1v1h-1zM22 9h1v1h-1zM24 9h1v1h-1zM26 9h1v1h-1zM32 9h1v1h-1zM4 10h1v1h-1zM5 10h1v1h-1zM6 10h1v1h-1zM7 10h1v1h-1zM8 10h1v1h-1zM9 10h1v1h-1zM10 10h1v1h-1zM12 10h1v1h-1zM14 10h1v1h-1zM16 10h1v1h-1zM18 10h1v1h-1zM20 10h1v1h-1zM22 10h1v1h-1zM24 10h1v1h-1zM26 10h1v1h-1zM27 10h1v1h-1zM28 10h1v1h-1zM29 10h1v1h-1zM30 10h1v1h-1zM31 10h1v1h-1zM32 10h1v1h-1zM12 11h1v1h-1zM14 11h1v1h-1zM15 11h1v1h-1zM16 11h1v1h-1zM17 11h1v1h-1zM19 11h1v1h-1zM23 11h1v1h-1zM24 11h1v1h-1zM4 12h1v1h-1zM6 12h1v1h-1zM7 12h1v1h-1zM8 12h1v1h-1zM9 12h1v1h-1zM10 12h1v1h-1zM18 12h1v1h-1zM19 12h1v1h-1zM21 12h1v1h-1zM23 12h1v1h-1zM26 12h1v1h-1zM27 12h1v1h-1zM28 12h1v1h-1zM29 12h1v1h-1zM30 12h1v1h-1zM7 13h1v1h-1zM8 13h1v1h-1zM11 13h1v1h-1zM12 13h1v1h-1zM14 13h1v1h-1zM19 13h1v1h-1zM20 13h1v1h-1zM21 13h1v1h-1zM22 13h1v1h-1zM23 13h1v1h-1zM26 13h1v1h-1zM27 13h1v1h-1zM28 13h1v1h-1zM32 13h1v1h-1zM6 14h1v1h-1zM9 14h1v1h-1zM10 14h1v1h-1zM13 14h1v1h-1zM16 14h1v1h-1zM25 14h1v1h-1zM27 14h1v1h-1zM28 14h1v1h-1zM6 15h1v1h-1zM7 15h1v1h-1zM8 15h1v1h-1zM18 15h1v1h-1zM20 15h1v1h-1zM23 15h1v1h-1zM24 15h1v1h-1zM25 15h1v1h-1zM26 15h1v1h-1zM27 15h1v1h-1zM28 15h1v1h-1zM29 15h1v1h-1zM31 15h1v1h-1zM4 16h1v1h-1zM6 16h1v1h-1zM9 16h1v1h-1zM10 16h1v1h-1zM12 16h1v1h-1zM15 16h1v1h-1zM16 16h1v1h-1zM20 16h1v1h-1zM21 16h1v1h-1zM24 16h1v1h-1zM29 16h1v1h-1zM30 16h1v1h-1zM6 17h1v1h-1zM11 17h1v1h-1zM13 17h1v1h-1zM16 17h1v1h-1zM17 17h1v1h-1zM18 17h1v1h-1zM19 17h1v1h-1zM21 17h1v1h-1zM22 17h1v1h-1zM23 17h1v1h-1zM24 17h1v1h-1zM25 17h1v1h-1zM26 17h1v1h-1zM27 17h1v1h-1zM28 17h1v1h-1zM32 17h1v1h-1zM4 18h1v1h-1zM7 18h1v1h-1zM8 18h1v1h-1zM9 18h1v1h-1zM10 18h1v1h-1zM17 18h1v1h-1zM18 18h1v1h-1zM19 18h1v1h-1zM20 18h1v1h-1zM22 18h1v1h-1zM24 18h1v1h-1zM26 18h1v1h-1zM29 18h1v1h-1zM30 18h1v1h-1zM5 19h1v1h-1zM8 19h1v1h-1zM9 19h1v1h-1zM13 19h1v1h-1zM17 19h1v1h-1zM19 19h1v1h-1zM24 19h1v1h-1zM25 19h1v1h-1zM27 19h1v1h-1zM28 19h1v1h-1zM31 19h1v1h-1zM5 20h1v1h-1zM7 20h1v1h-1zM8 20h1v1h-1zM10 20h1v1h-1zM11 20h1v1h-1zM12 20h1v1h-1zM14 20h1v1h-1zM15 20h1v1h-1zM18 20h1v1h-1zM19 20h1v1h-1zM21 20h1v1h-1zM27 20h1v1h-1zM29 20h1v1h-1zM30 20h1v1h-1zM4 21h1v1h-1zM5 21h1v1h-1zM6 21h1v1h-1zM9 21h1v1h-1zM12 21h1v1h-1zM14 21h1v1h-1zM16 21h1v1h-1zM19 21h1v1h-1zM20 21h1v1h-1zM23 21h1v1h-1zM24 21h1v1h-1zM25 21h1v1h-1zM26 21h1v1h-1zM27 21h1v1h-1zM28 21h1v1h-1zM30 21h1v1h-1zM32 21h1v1h-1zM4 22h1v1h-1zM7 22h1v1h-1zM8 22h1v1h-1zM10 22h1v1h-1zM13 22h1v1h-1zM25 22h1v1h-1zM27 22h1v1h-1zM30 22h1v1h-1zM4 23h1v1h-1zM7 23h1v1h-1zM14 23h1v1h-1zM18 23h1v1h-1zM20 23h1v1h-1zM22 23h1v1h-1zM24 23h1v1h-1zM27 23h1v1h-1zM31 23h1v1h-1zM4 24h1v1h-1zM6 24h1v1h-1zM7 24h1v1h-1zM10 24h1v1h-1zM16 24h1v1h-1zM21 24h1v1h-1zM24 24h1v1h-1zM25 24h1v1h-1zM26 24h1v1h-1zM27 24h1v1h-1zM28 24h1v1h-1zM30 24h1v1h-1zM31 24h1v1h-1zM32 24h1v1h-1zM12 25h1v1h-1zM13 25h1v1h-1zM14 25h1v1h-1zM17 25h1v1h-1zM18 25h1v1h-1zM19 25h1v1h-1zM21 25h1v1h-1zM22 25h1v1h-1zM24 25h1v1h-1zM28 25h1v1h-1zM29 25h1v1h-1zM30 25h1v1h-1zM31 25h1v1h-1zM32 25h1v1h-1zM4 26h1v1h-1zM5 26h1v1h-1zM6 26h1v1h-1zM7 26h1v1h-1zM8 26h1v1h-1zM9 26h1v1h-1zM10 26h1v1h-1zM15 26h1v1h-1zM17 26h1v1h-1zM18 26h1v1h-1zM19 26h1v1h-1zM20 26h1v1h-1zM22 26h1v1h-1zM23 26h1v1h-1zM24 26h1v1h-1zM26 26h1v1h-1zM28 26h1v1h-1zM29 26h1v1h-1zM30 26h1v1h-1zM4 27h1v1h-1zM10 27h1v1h-1zM12 27h1v1h-1zM15 27h1v1h-1zM16 27h1v1h-1zM17 27h1v1h-1zM23 27h1v1h-1zM24 27h1v1h-1zM28 27h1v1h-1zM32 27h1v1h-1zM4 28h1v1h-1zM6 28h1v1h-1zM7 28h1v1h-1zM8 28h1v1h-1zM10 28h1v1h-1zM12 28h1v1h-1zM15 28h1v1h-1zM16 28h1v1h-1zM18 28h1v1h-1zM19 28h1v1h-1zM20 28h1v1h-1zM21 28h1v1h-1zM24 28h1v1h-1zM25 28h1v1h-1zM26 28h1v1h-1zM27 28h1v1h-1zM28 28h1v1h-1zM30 28h1v1h-1zM32 28h1v1h-1zM4 29h1v1h-1zM6 29h1v1h-1zM7 29h1v1h-1zM8 29h1v1h-1zM10 29h1v1h-1zM12 29h1v1h-1zM16 29h1v1h-1zM20 29h1v1h-1zM24 29h1v1h-1zM29 29h1v1h-1zM30 29h1v1h-1zM4 30h1v1h-1zM6 30h1v1h-1zM7 30h1v1h-1zM8 30h1v1h-1zM10 30h1v1h-1zM12 30h1v1h-1zM13 30h1v1h-1zM14 30h1v1h-1zM15 30h1v1h-1zM17 30h1v1h-1zM19 30h1v1h-1zM20 30h1v1h-1zM21 30h1v1h-1zM23 30h1v1h-1zM24 30h1v1h-1zM25 30h1v1h-1zM26 30h1v1h-1zM27 30h1v1h-1zM28 30h1v1h-1zM29 30h1v1h-1zM30 30h1v1h-1zM31 30h1v1h-1zM4 31h1v1h-1zM10 31h1v1h-1zM19 31h1v1h-1zM20 31h1v1h-1zM22 31h1v1h-1zM24 31h1v1h-1zM25 31h1v1h-1zM28 31h1v1h-1zM29 31h1v1h-1zM31 31h1v1h-1zM4 32h1v1h-1zM5 32h1v1h-1zM6 32h1v1h-1zM7 32h1v1h-1zM8 32h1v1h-1zM9 32h1v1h-1zM10 32h1v1h-1zM12 32h1v1h-1zM14 32h1v1h-1zM19 32h1v1h-1zM21 32h1v1h-1zM25 32h1v1h-1zM26 32h1v1h-1zM30 32h1v1h-1z" />
+      </g>
+      <text id="Scannable, not decorative." x="481.95" y="85" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Scannable, not decorative.</text>
+      <text id="Reed-Solomon, mask scoring, zero depende…" x="481.95" y="105" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Reed-Solomon, mask scoring, zero dependencies.</text>
+  </g>
+  <text id="Video Player label" x="64" y="2157.75" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Video Player</text>
+  <text id="video-player id" x="64" y="2171.75" font-family="ui-monospace, monospace" font-size="12" fill="#737373">video-player</text>
+  <g id="Video Player" transform="translate(64, 2189.75)">
+    <rect id="container" x="0" y="0" width="1088" height="266" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="region" x="352" y="25" width="384" height="216" rx="16" fill="#000000" />
+      <rect id="container 2" x="352" y="25" width="384" height="216" fill="#000000" />
+      <rect id="container 3" x="512" y="101" width="64" height="64" rx="32" fill="rgba(0, 0, 0, 0.6)" />
+      <g id="icon play" transform="translate(530 119) translate(14 14) matrix(1 0 0 1 2 0) translate(-14 -14) scale(1.167 1.167)" fill="#ffffff" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="6 3 20 12 6 21 6 3" />
+      </g>
+      <rect id="container 4" x="364" y="191" width="360" height="4" rx="2" fill="rgba(255, 255, 255, 0.2)" />
+      <g id="icon play 2" transform="translate(368 209) scale(0.667 0.667)" fill="#ffffff" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="6 3 20 12 6 21 6 3" />
+      </g>
+      <g id="icon volume2" transform="translate(400 209) scale(0.667 0.667)" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z" />
+        <path d="M16 9a5 5 0 0 1 0 6" />
+        <path d="M19.364 18.364a9 9 0 0 0 0-12.728" />
+      </g>
+      <text id="0:00 / 0:00" x="428" y="221" fill="#ffffff" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">0:00 / 0:00</text>
+      <g id="icon maximize" transform="translate(704 209) scale(0.667 0.667)" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M8 3H5a2 2 0 0 0-2 2v3" />
+        <path d="M21 8V5a2 2 0 0 0-2-2h-3" />
+        <path d="M3 16v3a2 2 0 0 0 2 2h3" />
+        <path d="M16 21h3a2 2 0 0 0 2-2v-3" />
+      </g>
+  </g>
+</svg>

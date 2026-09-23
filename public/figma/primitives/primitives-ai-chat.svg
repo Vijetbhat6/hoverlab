@@ -1,0 +1,177 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1216" height="2705" viewBox="0 0 1216 2705" id="Hoverlab — AI &amp; Chat">
+  <!--
+    Hoverlab — AI & Chat. 7 controls, traced from the
+    rendered catalog. Drag this file onto a Figma canvas.
+
+    These are frames, not components: named, editable layers with real
+    geometry, colour and type. There are no variants, no auto-layout,
+    and no hover or motion — none of those exist in a static frame.
+
+    Every one of these is free to copy as code at https://hoverlab.dev/primitives
+  -->
+  <rect id="Background" x="0" y="0" width="1216" height="2705" fill="#ffffff" />
+  <text id="Message Bubble label" x="64" y="84" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Message Bubble</text>
+  <text id="message-bubble id" x="64" y="98" font-family="ui-monospace, monospace" font-size="12" fill="#737373">message-bubble</text>
+  <g id="Message Bubble" transform="translate(64, 116)">
+    <rect id="container" x="0" y="0" width="1088" height="240.75" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="736" y="27" width="32" height="32" rx="16" fill="#f3f2ee" />
+      <text id="VB" x="743.88" y="47" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">VB</text>
+      <text id="You" x="663.36" y="37" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">You</text>
+      <text id="15:11" x="691.63" y="37" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">15:11</text>
+      <rect id="container 3" x="443.8" y="45" width="280.2" height="42.75" rx="16" fill="#00782e" />
+      <text id="Why did the deploy roll back last night?" x="457.8" y="71" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Why did the deploy roll back last night?</text>
+      <rect id="container 4" x="320" y="105.75" width="32" height="32" rx="16" fill="#f3f2ee" />
+      <text id="AI" x="330.31" y="125.75" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">AI</text>
+      <text id="Assistant" x="364" y="115.75" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Assistant</text>
+      <text id="15:11 2" x="424.84" y="115.75" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">15:11</text>
+      <rect id="container 5" x="364" y="123.75" width="380.8" height="65.5" rx="8" fill="#f3f2ee" />
+      <text id="The health check failed twice in a row, …" x="378" y="149.75" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">The health check failed twice in a row, so the release</text>
+      <text id="controller reverted to the previous revi…" x="378" y="172.5" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">controller reverted to the previous revision.</text>
+      <rect id="container 6" x="364" y="193.25" width="40.02" height="22.5" rx="4" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="Copy" x="371" y="208.25" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="11">Copy</text>
+      <rect id="container 7" x="408.02" y="193.25" width="41.28" height="22.5" rx="4" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="Retry" x="415.02" y="208.25" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="11">Retry</text>
+  </g>
+  <text id="Prompt Input label" x="64" y="472.75" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Prompt Input</text>
+  <text id="prompt-input id" x="64" y="486.75" font-family="ui-monospace, monospace" font-size="12" fill="#737373">prompt-input</text>
+  <g id="Prompt Input" transform="translate(64, 504.75)">
+    <rect id="container" x="0" y="0" width="1088" height="165" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="320" y="25" width="448" height="115" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="Summarise the rollback and who to notify" x="329" y="48" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Summarise the rollback and who to notify</text>
+      <rect id="container 3" x="329" y="79" width="57.42" height="26" rx="10" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="Opus 5" x="338" y="96" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Opus 5</text>
+      <rect id="button" x="727" y="73" width="32" height="32" rx="16" fill="#00782e" />
+      <g id="icon arrow-up" transform="translate(735 81) scale(0.667 0.667)" fill="none" stroke="#fcfcfc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m5 12 7-7 7 7" />
+        <path d="M12 19V5" />
+      </g>
+      <text id="Enter to send, Shift+Enter for a new lin…" x="337" y="123" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Enter to send, Shift+Enter for a new line.</text>
+  </g>
+  <text id="Tool Call label" x="64" y="785.75" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Tool Call</text>
+  <text id="tool-call id" x="64" y="799.75" font-family="ui-monospace, monospace" font-size="12" fill="#737373">tool-call</text>
+  <g id="Tool Call" transform="translate(64, 817.75)">
+    <rect id="container" x="0" y="0" width="1088" height="337.69" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="320" y="25" width="448" height="198.56" rx="12" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <g id="icon check" transform="translate(333 35.281) scale(0.667 0.667)" fill="none" stroke="#009966" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 6 9 17l-5-5" />
+      </g>
+      <text id="search_logs" x="359" y="47" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="13" font-weight="500">search_logs</text>
+      <text id="service=api since=-24h" x="454.81" y="47.28" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">service=api since=-24h</text>
+      <text id="1.4s" x="705.94" y="47.28" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">1.4s</text>
+      <g id="icon chevron-down" transform="translate(739 35.281) translate(8 8) matrix(-1 0 0 -1 0 0) translate(-8 -8) scale(0.667 0.667)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m6 9 6 6 6-6" />
+      </g>
+      <rect id="container 3" x="321" y="60.56" width="446" height="162" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="Arguments" x="333" y="83.56" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="11" font-weight="500" letter-spacing="0.28">Arguments</text>
+      <text id="service" x="333" y="104.06" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">service</text>
+      <text id="api" x="395.41" y="104.06" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">api</text>
+      <text id="since" x="333" y="124.06" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">since</text>
+      <text id="-24h" x="395.41" y="124.06" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">-24h</text>
+      <text id="limit" x="333" y="144.06" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">limit</text>
+      <text id="50" x="395.41" y="144.06" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">50</text>
+      <text id="Result" x="333" y="172.06" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="11" font-weight="500" letter-spacing="0.28">Result</text>
+      <rect id="container 4" x="333" y="180.56" width="422" height="32" rx="10" fill="#f3f2ee" />
+      <text id="47 matching entries, 2 at level=error" x="343" y="200.56" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">47 matching entries, 2 at level=error</text>
+      <rect id="container 5" x="320" y="231.56" width="448" height="36.56" rx="12" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <g id="icon triangle-alert" transform="translate(333 241.844) scale(0.667 0.667)" fill="none" stroke="#e7000b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3" />
+        <path d="M12 9v4" />
+        <path d="M12 17h.01" />
+      </g>
+      <text id="restart_pod" x="359" y="253.56" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="13" font-weight="500">restart_pod</text>
+      <text id="api-7f9c4" x="454.81" y="253.84" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">api-7f9c4</text>
+      <text id="320ms" x="690.77" y="253.84" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">320ms</text>
+      <g id="icon chevron-down 2" transform="translate(739 241.844) scale(0.667 0.667)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m6 9 6 6 6-6" />
+      </g>
+      <rect id="container 6" x="320" y="276.13" width="448" height="36.56" rx="12" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <g id="icon loader-circle" transform="translate(333 286.406) translate(8 8) matrix(-0.809 -0.588 0.588 -0.809 0 0) translate(-8 -8) scale(0.667 0.667)" fill="none" stroke="#0084d1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12a9 9 0 1 1-6.219-8.56" />
+      </g>
+      <text id="fetch_release" x="359" y="298.13" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="13" font-weight="500">fetch_release</text>
+      <text id="waiting for the registry" x="470.41" y="298.41" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">waiting for the registry</text>
+  </g>
+  <text id="Reasoning Panel label" x="64" y="1271.44" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Reasoning Panel</text>
+  <text id="reasoning-panel id" x="64" y="1285.44" font-family="ui-monospace, monospace" font-size="12" fill="#737373">reasoning-panel</text>
+  <g id="Reasoning Panel" transform="translate(64, 1303.44)">
+    <rect id="container" x="0" y="0" width="1088" height="257.5" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="320" y="25" width="448" height="207.5" rx="12" fill="rgba(242, 242, 237, 0.4)" stroke="#dbdee1" stroke-width="1" />
+      <g id="icon sparkles" transform="translate(333 35) scale(0.583 0.583)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z" />
+        <path d="M20 3v4" />
+        <path d="M22 5h-4" />
+        <path d="M4 17v2" />
+        <path d="M5 18H3" />
+      </g>
+      <text id="Thought for 12s" x="355" y="46" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Thought for 12s</text>
+      <g id="icon chevron-down" transform="translate(739 34) translate(8 8) matrix(-1 0 0 -1 0 0) translate(-8 -8) scale(0.667 0.667)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m6 9 6 6 6-6" />
+      </g>
+      <rect id="container 3" x="321" y="58" width="446" height="173.5" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <rect id="container 4" x="333" y="71" width="16" height="16" rx="8" fill="#dbdee1" />
+      <text id="1" x="337.94" y="82" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" font-weight="500">1</text>
+      <text id="The rollback happened at 02:14, so start…" x="359" y="85" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">The rollback happened at 02:14, so start from the release</text>
+      <text id="controller log." x="359" y="107.75" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">controller log.</text>
+      <rect id="container 5" x="333" y="124.5" width="16" height="16" rx="8" fill="#dbdee1" />
+      <text id="2" x="337.94" y="135.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" font-weight="500">2</text>
+      <text id="Two consecutive health checks failed — t…" x="359" y="138.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Two consecutive health checks failed — that is the revert</text>
+      <text id="threshold." x="359" y="161.25" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">threshold.</text>
+      <rect id="container 6" x="333" y="178" width="16" height="16" rx="8" fill="#dbdee1" />
+      <text id="3" x="337.94" y="189" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" font-weight="500">3</text>
+      <text id="Check whether the failing check was the …" x="359" y="192" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Check whether the failing check was the new one added in</text>
+      <text id="this release." x="359" y="214.75" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">this release.</text>
+  </g>
+  <text id="Citation Chip label" x="64" y="1676.94" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Citation Chip</text>
+  <text id="citation-chip id" x="64" y="1690.94" font-family="ui-monospace, monospace" font-size="12" fill="#737373">citation-chip</text>
+  <g id="Citation Chip" transform="translate(64, 1708.94)">
+    <rect id="container" x="0" y="0" width="1088" height="212.5" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="The controller reverted after two failed…" x="320" y="41" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">The controller reverted after two failed probes</text>
+      <text id=", which matches the" x="626.02" y="41" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">, which matches the</text>
+      <text id="documented threshold" x="320" y="63.75" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">documented threshold</text>
+      <text id="." x="476.89" y="63.75" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">.</text>
+      <rect id="link" x="615.58" y="23.55" width="8.44" height="8.44" rx="1.84" fill="#f3f2ee" />
+      <text id="1" x="617.55" y="30.09" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="7.35" font-weight="500">1</text>
+      <rect id="link 2" x="466.45" y="46.3" width="8.44" height="8.44" rx="1.84" fill="#f3f2ee" />
+      <text id="2" x="468.42" y="52.84" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="7.35" font-weight="500">2</text>
+      <rect id="container 2" x="320" y="82.5" width="448" height="105" rx="12" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <rect id="container 3" x="331" y="95.5" width="20" height="20" rx="4" fill="#f3f2ee" />
+      <text id="1 2" x="337.63" y="109.25" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="11" font-weight="500">1</text>
+      <text id="Release controller log, 02:14" x="361" y="108.5" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Release controller log, 02:14</text>
+      <text id="internal · logs.example.com" x="361" y="127.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">internal · logs.example.com</text>
+      <text id="probe failed (2/2) — reverting to revisi…" x="361" y="150.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">probe failed (2/2) — reverting to revision 481 and holding traffic on the</text>
+      <text id="previous pod set." x="361" y="170" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">previous pod set.</text>
+  </g>
+  <text id="Typing Indicator label" x="64" y="2037.44" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Typing Indicator</text>
+  <text id="typing-indicator id" x="64" y="2051.44" font-family="ui-monospace, monospace" font-size="12" fill="#737373">typing-indicator</text>
+  <g id="Typing Indicator" transform="translate(64, 2069.44)">
+    <rect id="container" x="0" y="0" width="1088" height="187" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="status" x="320" y="25" width="448" height="30" rx="8" fill="#f3f2ee" />
+      <rect id="container 2" x="334" y="36.17" width="6" height="6" rx="3" fill="#575b60" />
+      <rect id="container 3" x="344" y="36.67" width="6" height="6" rx="3" fill="#575b60" />
+      <rect id="container 4" x="354" y="35.92" width="6" height="6" rx="3" fill="#575b60" />
+      <rect id="container 5" x="320" y="71" width="448" height="59" rx="8" fill="#f3f2ee" />
+      <rect id="container 6" x="334" y="90" width="336" height="10" rx="5" fill="rgba(85, 90, 95, 0.2)" opacity="0.66" />
+      <rect id="container 7" x="334" y="108" width="252" height="10" rx="5" fill="rgba(85, 90, 95, 0.2)" opacity="0.66" />
+      <text id="Connecting to the run" x="336" y="158" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Connecting to the run</text>
+      <rect id="container 8" x="320" y="150" width="8" height="8" rx="4" fill="#575b60" opacity="0.66" />
+  </g>
+  <text id="Prompt Suggestions label" x="64" y="2372.44" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Prompt Suggestions</text>
+  <text id="prompt-suggestions id" x="64" y="2386.44" font-family="ui-monospace, monospace" font-size="12" fill="#737373">prompt-suggestions</text>
+  <g id="Prompt Suggestions" transform="translate(64, 2404.44)">
+    <rect id="container" x="0" y="0" width="1088" height="236.5" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Try one of these" x="320" y="37" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500" letter-spacing="0.3">Try one of these</text>
+      <rect id="button" x="320" y="49" width="220" height="87" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="Explain the rollback" x="333" y="77" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Explain the rollback</text>
+      <text id="Walk through last night, step by" x="333" y="97" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Walk through last night, step by</text>
+      <text id="step" x="333" y="116.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">step</text>
+      <rect id="button 2" x="548" y="49" width="220" height="87" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="Draft the incident note" x="561" y="77" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Draft the incident note</text>
+      <text id="One paragraph, for the channel" x="561" y="97" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">One paragraph, for the channel</text>
+      <rect id="button 3" x="320" y="144" width="220" height="67.5" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="Find the failing probe" x="333" y="172" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Find the failing probe</text>
+      <text id="Across the last three releases" x="333" y="192" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Across the last three releases</text>
+      <rect id="button 4" x="548" y="144" width="220" height="67.5" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <text id="Who should I notify?" x="561" y="172" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Who should I notify?</text>
+      <text id="From the on-call rota" x="561" y="192" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">From the on-call rota</text>
+  </g>
+</svg>

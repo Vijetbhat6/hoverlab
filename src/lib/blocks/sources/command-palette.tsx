@@ -179,7 +179,7 @@ export function CommandPalette({
 
   return (
     <div className={`flex justify-center p-6 ${className}`}>
-      <div className="w-full max-w-lg overflow-hidden rounded-2xl border border-border/60 bg-card shadow-2xl">
+      <div className="w-full max-w-lg overflow-y-hidden rounded-2xl border border-border/60 bg-card shadow-2xl">
         <div className="flex items-center gap-3 border-b border-border/60 px-4">
           <Search aria-hidden className="h-4 w-4 shrink-0 text-muted-foreground" />
 
@@ -197,7 +197,7 @@ export function CommandPalette({
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder={placeholder}
-            className="flex-1 bg-transparent py-3.5 text-sm outline-none placeholder:text-muted-foreground"
+            className="min-w-0 flex-1 bg-transparent py-3.5 text-sm outline-none placeholder:text-muted-foreground border border-transparent"
           />
 
           <kbd className="shrink-0 rounded border border-border/60 bg-muted px-1.5 py-0.5 font-mono text-xs text-muted-foreground">

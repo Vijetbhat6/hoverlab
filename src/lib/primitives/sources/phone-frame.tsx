@@ -68,15 +68,15 @@ export function PhoneFrame({
         <>
           <span
             aria-hidden
-            className="absolute -left-[3px] top-[18%] h-[6%] w-[3px] rounded-l-sm bg-foreground/25"
+            className="absolute -left-[3px] top-[18%] h-[6%] w-[3px] rounded-l-sm bg-foreground/25 border border-transparent"
           />
           <span
             aria-hidden
-            className="absolute -left-[3px] top-[28%] h-[9%] w-[3px] rounded-l-sm bg-foreground/25"
+            className="absolute -left-[3px] top-[28%] h-[9%] w-[3px] rounded-l-sm bg-foreground/25 border border-transparent"
           />
           <span
             aria-hidden
-            className="absolute -right-[3px] top-[24%] h-[12%] w-[3px] rounded-r-sm bg-foreground/25"
+            className="absolute -right-[3px] top-[24%] h-[12%] w-[3px] rounded-r-sm bg-foreground/25 border border-transparent"
           />
         </>
       ) : null}
@@ -113,19 +113,19 @@ export function PhoneFrame({
           {cutout === 'island' ? (
             <span
               aria-hidden
-              className="absolute left-1/2 top-2 z-30 h-6 w-20 -translate-x-1/2 rounded-full bg-foreground/85"
+              className="absolute left-1/2 top-2 z-30 h-6 w-20 -translate-x-1/2 rounded-full bg-foreground/85 border border-transparent"
             />
           ) : null}
           {cutout === 'notch' ? (
             <span
               aria-hidden
-              className="absolute left-1/2 top-0 z-30 h-6 w-32 -translate-x-1/2 rounded-b-2xl bg-foreground/85"
+              className="absolute left-1/2 top-0 z-30 h-6 w-32 -translate-x-1/2 rounded-b-2xl bg-foreground/85 border border-transparent"
             />
           ) : null}
           {cutout === 'punch' ? (
             <span
               aria-hidden
-              className="absolute left-1/2 top-2.5 z-30 size-3 -translate-x-1/2 rounded-full bg-foreground/85"
+              className="absolute left-1/2 top-2.5 z-30 size-3 -translate-x-1/2 rounded-full bg-foreground/85 border border-transparent"
             />
           ) : null}
 
@@ -134,7 +134,7 @@ export function PhoneFrame({
           {chrome && !tablet ? (
             <span
               aria-hidden
-              className="absolute bottom-2 left-1/2 h-1 w-1/3 -translate-x-1/2 rounded-full bg-foreground/40"
+              className="absolute bottom-2 left-1/2 h-1 w-1/3 -translate-x-1/2 rounded-full bg-foreground/40 border border-transparent"
             />
           ) : null}
         </div>

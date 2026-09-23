@@ -112,12 +112,12 @@ export function MetricAlertList({
                     isSelected ? 'bg-muted/40' : ''
                   }`}
                 >
-                  <span className="min-w-0">
+                  <span className="min-w-0 flex-1">
                     <span className="block truncate text-sm font-medium text-foreground">
                       {row.label}
                     </span>
                     {row.detail ? (
-                      <span className="mt-0.5 block truncate text-sm text-muted-foreground">
+                      <span className="mt-0.5 block text-sm text-muted-foreground">
                         {row.detail}
                       </span>
                     ) : null}

@@ -106,7 +106,7 @@ export function TestimonialGrid({
               </div>
             ) : null}
 
-            <blockquote className="text-sm leading-relaxed text-foreground/90">
+            <blockquote className="break-words text-sm leading-relaxed text-foreground/90">
               &ldquo;{t.quote}&rdquo;
             </blockquote>
 
@@ -117,9 +117,9 @@ export function TestimonialGrid({
               >
                 {initials(t.name)}
               </span>
-              <span className="min-w-0">
-                <span className="block truncate text-sm font-semibold">{t.name}</span>
-                <span className="block truncate text-xs text-muted-foreground">{t.role}</span>
+              <span className="min-w-0 flex-1">
+                <span className="block break-words text-sm font-semibold">{t.name}</span>
+                <span className="block break-words text-xs text-muted-foreground">{t.role}</span>
               </span>
             </figcaption>
           </figure>

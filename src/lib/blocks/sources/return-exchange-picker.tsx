@@ -199,13 +199,13 @@ export function ReturnExchangePicker({
                           <legend className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
                             Outcome for {line.name}
                           </legend>
-                          <div className="mt-2 grid gap-2 sm:grid-cols-3">
+                          <div className="mt-2 grid gap-2 md:grid-cols-3">
                             {OUTCOMES.map((outcome) => {
                               const Icon = outcome.icon
                               const id = `${uid}-${line.id}-${outcome.id}`
                               const on = c.outcome === outcome.id
                               return (
-                                <div key={outcome.id}>
+                                <div key={outcome.id} className="min-w-0">
                                   <input
                                     type="radio"
                                     id={id}
@@ -221,7 +221,7 @@ export function ReturnExchangePicker({
                                     }`}
                                   >
                                     <span className="flex items-center gap-1.5 font-semibold">
-                                      <Icon aria-hidden className="h-3.5 w-3.5" />
+                                      <Icon aria-hidden className="h-3.5 w-3.5 shrink-0" />
                                       {outcome.label}
                                       {outcome.id === 'credit' ? (
                                         <span className="rounded bg-emerald-500/10 px-1 text-[10px] font-bold text-emerald-700 dark:text-emerald-400">
@@ -297,7 +297,7 @@ export function ReturnExchangePicker({
           aria-live="polite"
           className="mt-6 rounded-xl border border-border bg-card p-4"
         >
-          <h3 className="text-sm font-semibold">Summary</h3>
+          <h3 data-stress-ignore className="text-sm font-semibold">Summary</h3>
           <dl className="mt-3 space-y-2 text-sm">
             <div className="flex justify-between gap-3">
               <dt className="text-muted-foreground">Lines selected</dt>

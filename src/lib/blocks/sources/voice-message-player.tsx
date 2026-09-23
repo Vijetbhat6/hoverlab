@@ -235,8 +235,8 @@ function Note({ message, speeds }: { message: VoiceMessage; speeds: number[] }) 
 
         <div id={`${uid}-transcript`} className="mt-2">
           <p
-            className={`text-xs text-muted-foreground ${
-              showTranscript ? '' : 'line-clamp-1'
+            className={`break-words text-xs text-muted-foreground ${
+              showTranscript ? '' : 'line-clamp-2'
             }`}
           >
             {message.transcript}

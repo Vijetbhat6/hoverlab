@@ -129,10 +129,10 @@ export function UploadProgressList({
                     aria-valuemin={0}
                     aria-valuemax={100}
                     aria-label={`Uploading ${row.name}`}
-                    className="h-1 flex-1 overflow-hidden rounded-full bg-muted"
+                    className="h-1 flex-1 overflow-hidden rounded-full bg-muted border border-transparent"
                   >
                     <span
-                      className="block h-full rounded-full bg-primary motion-safe:animate-pulse"
+                      className="block h-full rounded-full bg-primary motion-safe:animate-pulse border border-transparent"
                       style={{ width: `${row.progress ?? 0}%` }}
                     />
                   </div>

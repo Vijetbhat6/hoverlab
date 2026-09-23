@@ -1,0 +1,256 @@
+<!--
+ISC License
+
+Copyright (c) for portions of Lucide are held by Cole Bemis 2013-2022 as part of Feather (MIT). All other copyright (c) for Lucide are held by Lucide Contributors 2022.
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted, provided that the above
+copyright notice and this permission notice appear in all copies.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" width="784" height="64" viewBox="0 0 784 64" id="Lucide icons / Notifications" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <g id="alarm-clock" transform="translate(0 0)">
+    <rect id="alarm-clock bounds" width="24" height="24" fill="none" stroke="none" />
+    <circle cx="12" cy="13" r="8" />
+    <path d="M12 9v4l2 2" />
+    <path d="M5 3 2 6" />
+    <path d="m22 6-3-3" />
+    <path d="M6.38 18.7 4 21" />
+    <path d="M17.64 18.67 20 21" />
+  </g>
+  <g id="alarm-clock-check" transform="translate(40 0)">
+    <rect id="alarm-clock-check bounds" width="24" height="24" fill="none" stroke="none" />
+    <circle cx="12" cy="13" r="8" />
+    <path d="M5 3 2 6" />
+    <path d="m22 6-3-3" />
+    <path d="M6.38 18.7 4 21" />
+    <path d="M17.64 18.67 20 21" />
+    <path d="m9 13 2 2 4-4" />
+  </g>
+  <g id="alarm-clock-minus" transform="translate(80 0)">
+    <rect id="alarm-clock-minus bounds" width="24" height="24" fill="none" stroke="none" />
+    <circle cx="12" cy="13" r="8" />
+    <path d="M5 3 2 6" />
+    <path d="m22 6-3-3" />
+    <path d="M6.38 18.7 4 21" />
+    <path d="M17.64 18.67 20 21" />
+    <path d="M9 13h6" />
+  </g>
+  <g id="alarm-clock-off" transform="translate(120 0)">
+    <rect id="alarm-clock-off bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M6.87 6.87a8 8 0 1 0 11.26 11.26" />
+    <path d="M19.9 14.25a8 8 0 0 0-9.15-9.15" />
+    <path d="m22 6-3-3" />
+    <path d="M6.26 18.67 4 21" />
+    <path d="m2 2 20 20" />
+    <path d="M4 4 2 6" />
+  </g>
+  <g id="alarm-clock-plus" transform="translate(160 0)">
+    <rect id="alarm-clock-plus bounds" width="24" height="24" fill="none" stroke="none" />
+    <circle cx="12" cy="13" r="8" />
+    <path d="M5 3 2 6" />
+    <path d="m22 6-3-3" />
+    <path d="M6.38 18.7 4 21" />
+    <path d="M17.64 18.67 20 21" />
+    <path d="M12 10v6" />
+    <path d="M9 13h6" />
+  </g>
+  <g id="bell" transform="translate(200 0)">
+    <rect id="bell bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M10.268 21a2 2 0 0 0 3.464 0" />
+    <path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326" />
+  </g>
+  <g id="bell-dot" transform="translate(240 0)">
+    <rect id="bell-dot bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M10.268 21a2 2 0 0 0 3.464 0" />
+    <path d="M13.916 2.314A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.74 7.327A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673 9 9 0 0 1-.585-.665" />
+    <circle cx="18" cy="8" r="3" />
+  </g>
+  <g id="bell-electric" transform="translate(280 0)">
+    <rect id="bell-electric bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M18.518 17.347A7 7 0 0 1 14 19" />
+    <path d="M18.8 4A11 11 0 0 1 20 9" />
+    <path d="M9 9h.01" />
+    <circle cx="20" cy="16" r="2" />
+    <circle cx="9" cy="9" r="7" />
+    <rect x="4" y="16" width="10" height="6" rx="2" />
+  </g>
+  <g id="bell-minus" transform="translate(320 0)">
+    <rect id="bell-minus bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M10.268 21a2 2 0 0 0 3.464 0" />
+    <path d="M15 8h6" />
+    <path d="M16.243 3.757A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673A9.4 9.4 0 0 1 18.667 12" />
+  </g>
+  <g id="bell-off" transform="translate(360 0)">
+    <rect id="bell-off bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M10.268 21a2 2 0 0 0 3.464 0" />
+    <path d="M17 17H4a1 1 0 0 1-.74-1.673C4.59 13.956 6 12.499 6 8a6 6 0 0 1 .258-1.742" />
+    <path d="m2 2 20 20" />
+    <path d="M8.668 3.01A6 6 0 0 1 18 8c0 2.687.77 4.653 1.707 6.05" />
+  </g>
+  <g id="bell-plus" transform="translate(400 0)">
+    <rect id="bell-plus bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M10.268 21a2 2 0 0 0 3.464 0" />
+    <path d="M15 8h6" />
+    <path d="M18 5v6" />
+    <path d="M20.002 14.464a9 9 0 0 0 .738.863A1 1 0 0 1 20 17H4a1 1 0 0 1-.74-1.673C4.59 13.956 6 12.499 6 8a6 6 0 0 1 8.75-5.332" />
+  </g>
+  <g id="bell-ring" transform="translate(440 0)">
+    <rect id="bell-ring bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M10.268 21a2 2 0 0 0 3.464 0" />
+    <path d="M22 8c0-2.3-.8-4.3-2-6" />
+    <path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326" />
+    <path d="M4 2C2.8 3.7 2 5.7 2 8" />
+  </g>
+  <g id="check" transform="translate(480 0)">
+    <rect id="check bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M20 6 9 17l-5-5" />
+  </g>
+  <g id="check-check" transform="translate(520 0)">
+    <rect id="check-check bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M18 6 7 17l-5-5" />
+    <path d="m22 10-7.5 7.5L13 16" />
+  </g>
+  <g id="check-line" transform="translate(560 0)">
+    <rect id="check-line bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M20 4L9 15" />
+    <path d="M21 19L3 19" />
+    <path d="M9 15L4 10" />
+  </g>
+  <g id="circle-alert" transform="translate(600 0)">
+    <rect id="circle-alert bounds" width="24" height="24" fill="none" stroke="none" />
+    <circle cx="12" cy="12" r="10" />
+    <line x1="12" x2="12" y1="8" y2="12" />
+    <line x1="12" x2="12.01" y1="16" y2="16" />
+  </g>
+  <g id="circle-check" transform="translate(640 0)">
+    <rect id="circle-check bounds" width="24" height="24" fill="none" stroke="none" />
+    <circle cx="12" cy="12" r="10" />
+    <path d="m9 12 2 2 4-4" />
+  </g>
+  <g id="circle-check-big" transform="translate(680 0)">
+    <rect id="circle-check-big bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M21.801 10A10 10 0 1 1 17 3.335" />
+    <path d="m9 11 3 3L22 4" />
+  </g>
+  <g id="circle-question-mark" transform="translate(720 0)">
+    <rect id="circle-question-mark bounds" width="24" height="24" fill="none" stroke="none" />
+    <circle cx="12" cy="12" r="10" />
+    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+    <path d="M12 17h.01" />
+  </g>
+  <g id="copy-check" transform="translate(760 0)">
+    <rect id="copy-check bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m12 15 2 2 4-4" />
+    <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+    <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+  </g>
+  <g id="copy-x" transform="translate(0 40)">
+    <rect id="copy-x bounds" width="24" height="24" fill="none" stroke="none" />
+    <line x1="12" x2="18" y1="12" y2="18" />
+    <line x1="12" x2="18" y1="18" y2="12" />
+    <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+    <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+  </g>
+  <g id="info" transform="translate(40 40)">
+    <rect id="info bounds" width="24" height="24" fill="none" stroke="none" />
+    <circle cx="12" cy="12" r="10" />
+    <path d="M12 16v-4" />
+    <path d="M12 8h.01" />
+  </g>
+  <g id="laptop-minimal-check" transform="translate(80 40)">
+    <rect id="laptop-minimal-check bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M2 20h20" />
+    <path d="m9 10 2 2 4-4" />
+    <rect x="3" y="4" width="18" height="12" rx="2" />
+  </g>
+  <g id="megaphone" transform="translate(120 40)">
+    <rect id="megaphone bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M11 6a13 13 0 0 0 8.4-2.8A1 1 0 0 1 21 4v12a1 1 0 0 1-1.6.8A13 13 0 0 0 11 14H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z" />
+    <path d="M6 14a12 12 0 0 0 2.4 7.2 2 2 0 0 0 3.2-2.4A8 8 0 0 1 10 14" />
+    <path d="M8 6v8" />
+  </g>
+  <g id="megaphone-off" transform="translate(160 40)">
+    <rect id="megaphone-off bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M11.636 6A13 13 0 0 0 19.4 3.2 1 1 0 0 1 21 4v11.344" />
+    <path d="M14.378 14.357A13 13 0 0 0 11 14H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h1" />
+    <path d="m2 2 20 20" />
+    <path d="M6 14a12 12 0 0 0 2.4 7.2 2 2 0 0 0 3.2-2.4A8 8 0 0 1 10 14" />
+    <path d="M8 8v6" />
+  </g>
+  <g id="message-circle-warning" transform="translate(200 40)">
+    <rect id="message-circle-warning bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" />
+    <path d="M12 8v4" />
+    <path d="M12 16h.01" />
+  </g>
+  <g id="message-square-dot" transform="translate(240 40)">
+    <rect id="message-square-dot bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M11.7 3H5a2 2 0 0 0-2 2v16l4-4h12a2 2 0 0 0 2-2v-2.7" />
+    <circle cx="18" cy="6" r="3" />
+  </g>
+  <g id="message-square-warning" transform="translate(280 40)">
+    <rect id="message-square-warning bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+    <path d="M12 7v2" />
+    <path d="M12 13h.01" />
+  </g>
+  <g id="octagon-alert" transform="translate(320 40)">
+    <rect id="octagon-alert bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 16h.01" />
+    <path d="M12 8v4" />
+    <path d="M15.312 2a2 2 0 0 1 1.414.586l4.688 4.688A2 2 0 0 1 22 8.688v6.624a2 2 0 0 1-.586 1.414l-4.688 4.688a2 2 0 0 1-1.414.586H8.688a2 2 0 0 1-1.414-.586l-4.688-4.688A2 2 0 0 1 2 15.312V8.688a2 2 0 0 1 .586-1.414l4.688-4.688A2 2 0 0 1 8.688 2z" />
+  </g>
+  <g id="octagon-x" transform="translate(360 40)">
+    <rect id="octagon-x bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m15 9-6 6" />
+    <path d="M2.586 16.726A2 2 0 0 1 2 15.312V8.688a2 2 0 0 1 .586-1.414l4.688-4.688A2 2 0 0 1 8.688 2h6.624a2 2 0 0 1 1.414.586l4.688 4.688A2 2 0 0 1 22 8.688v6.624a2 2 0 0 1-.586 1.414l-4.688 4.688a2 2 0 0 1-1.414.586H8.688a2 2 0 0 1-1.414-.586z" />
+    <path d="m9 9 6 6" />
+  </g>
+  <g id="shield-alert" transform="translate(400 40)">
+    <rect id="shield-alert bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
+    <path d="M12 8v4" />
+    <path d="M12 16h.01" />
+  </g>
+  <g id="square-check" transform="translate(440 40)">
+    <rect id="square-check bounds" width="24" height="24" fill="none" stroke="none" />
+    <rect width="18" height="18" x="3" y="3" rx="2" />
+    <path d="m9 12 2 2 4-4" />
+  </g>
+  <g id="square-check-big" transform="translate(480 40)">
+    <rect id="square-check-big bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M21 10.656V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h12.344" />
+    <path d="m9 11 3 3L22 4" />
+  </g>
+  <g id="square-x" transform="translate(520 40)">
+    <rect id="square-x bounds" width="24" height="24" fill="none" stroke="none" />
+    <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
+    <path d="m15 9-6 6" />
+    <path d="m9 9 6 6" />
+  </g>
+  <g id="triangle-alert" transform="translate(560 40)">
+    <rect id="triangle-alert bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3" />
+    <path d="M12 9v4" />
+    <path d="M12 17h.01" />
+  </g>
+  <g id="vibrate" transform="translate(600 40)">
+    <rect id="vibrate bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m2 8 2 2-2 2 2 2-2 2" />
+    <path d="m22 8-2 2 2 2-2 2 2 2" />
+    <rect width="8" height="14" x="8" y="5" rx="1" />
+  </g>
+  <g id="x" transform="translate(640 40)">
+    <rect id="x bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M18 6 6 18" />
+    <path d="m6 6 12 12" />
+  </g>
+</svg>

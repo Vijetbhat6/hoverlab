@@ -1,0 +1,338 @@
+<!--
+ISC License
+
+Copyright (c) for portions of Lucide are held by Cole Bemis 2013-2022 as part of Feather (MIT). All other copyright (c) for Lucide are held by Lucide Contributors 2022.
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted, provided that the above
+copyright notice and this permission notice appear in all copies.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" width="784" height="104" viewBox="0 0 784 104" id="Lucide icons / Weather" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <g id="bubbles" transform="translate(0 0)">
+    <rect id="bubbles bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M7.2 14.8a2 2 0 0 1 2 2" />
+    <circle cx="18.5" cy="8.5" r="3.5" />
+    <circle cx="7.5" cy="16.5" r="5.5" />
+    <circle cx="7.5" cy="4.5" r="2.5" />
+  </g>
+  <g id="cloud" transform="translate(40 0)">
+    <rect id="cloud bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z" />
+  </g>
+  <g id="cloud-drizzle" transform="translate(80 0)">
+    <rect id="cloud-drizzle bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242" />
+    <path d="M8 19v1" />
+    <path d="M8 14v1" />
+    <path d="M16 19v1" />
+    <path d="M16 14v1" />
+    <path d="M12 21v1" />
+    <path d="M12 16v1" />
+  </g>
+  <g id="cloud-fog" transform="translate(120 0)">
+    <rect id="cloud-fog bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242" />
+    <path d="M16 17H7" />
+    <path d="M17 21H9" />
+  </g>
+  <g id="cloud-hail" transform="translate(160 0)">
+    <rect id="cloud-hail bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242" />
+    <path d="M16 14v2" />
+    <path d="M8 14v2" />
+    <path d="M16 20h.01" />
+    <path d="M8 20h.01" />
+    <path d="M12 16v2" />
+    <path d="M12 22h.01" />
+  </g>
+  <g id="cloud-lightning" transform="translate(200 0)">
+    <rect id="cloud-lightning bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M6 16.326A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 .5 8.973" />
+    <path d="m13 12-3 5h4l-3 5" />
+  </g>
+  <g id="cloud-moon" transform="translate(240 0)">
+    <rect id="cloud-moon bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M10.188 8.5A6 6 0 0 1 16 4a1 1 0 0 0 6 6 6 6 0 0 1-3 5.197" />
+    <path d="M13 16a3 3 0 1 1 0 6H7a5 5 0 1 1 4.9-6Z" />
+  </g>
+  <g id="cloud-moon-rain" transform="translate(280 0)">
+    <rect id="cloud-moon-rain bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M10.188 8.5A6 6 0 0 1 16 4a1 1 0 0 0 6 6 6 6 0 0 1-3 5.197" />
+    <path d="M11 20v2" />
+    <path d="M3 20a5 5 0 1 1 8.9-4H13a3 3 0 0 1 2 5.24" />
+    <path d="M7 19v2" />
+  </g>
+  <g id="cloud-off" transform="translate(320 0)">
+    <rect id="cloud-off bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m2 2 20 20" />
+    <path d="M5.782 5.782A7 7 0 0 0 9 19h8.5a4.5 4.5 0 0 0 1.307-.193" />
+    <path d="M21.532 16.5A4.5 4.5 0 0 0 17.5 10h-1.79A7.008 7.008 0 0 0 10 5.07" />
+  </g>
+  <g id="cloud-rain" transform="translate(360 0)">
+    <rect id="cloud-rain bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242" />
+    <path d="M16 14v6" />
+    <path d="M8 14v6" />
+    <path d="M12 16v6" />
+  </g>
+  <g id="cloud-rain-wind" transform="translate(400 0)">
+    <rect id="cloud-rain-wind bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242" />
+    <path d="m9.2 22 3-7" />
+    <path d="m9 13-3 7" />
+    <path d="m17 13-3 7" />
+  </g>
+  <g id="cloud-snow" transform="translate(440 0)">
+    <rect id="cloud-snow bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242" />
+    <path d="M8 15h.01" />
+    <path d="M8 19h.01" />
+    <path d="M12 17h.01" />
+    <path d="M12 21h.01" />
+    <path d="M16 15h.01" />
+    <path d="M16 19h.01" />
+  </g>
+  <g id="cloud-sun" transform="translate(480 0)">
+    <rect id="cloud-sun bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 2v2" />
+    <path d="m4.93 4.93 1.41 1.41" />
+    <path d="M20 12h2" />
+    <path d="m19.07 4.93-1.41 1.41" />
+    <path d="M15.947 12.65a4 4 0 0 0-5.925-4.128" />
+    <path d="M13 22H7a5 5 0 1 1 4.9-6H13a3 3 0 0 1 0 6Z" />
+  </g>
+  <g id="cloud-sun-rain" transform="translate(520 0)">
+    <rect id="cloud-sun-rain bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 2v2" />
+    <path d="m4.93 4.93 1.41 1.41" />
+    <path d="M20 12h2" />
+    <path d="m19.07 4.93-1.41 1.41" />
+    <path d="M15.947 12.65a4 4 0 0 0-5.925-4.128" />
+    <path d="M3 20a5 5 0 1 1 8.9-4H13a3 3 0 0 1 2 5.24" />
+    <path d="M11 20v2" />
+    <path d="M7 19v2" />
+  </g>
+  <g id="cloudy" transform="translate(560 0)">
+    <rect id="cloudy bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M17.5 21H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z" />
+    <path d="M22 10a3 3 0 0 0-3-3h-2.207a5.502 5.502 0 0 0-10.702.5" />
+  </g>
+  <g id="droplet" transform="translate(600 0)">
+    <rect id="droplet bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z" />
+  </g>
+  <g id="droplet-off" transform="translate(640 0)">
+    <rect id="droplet-off bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M18.715 13.186C18.29 11.858 17.384 10.607 16 9.5c-2-1.6-3.5-4-4-6.5a10.7 10.7 0 0 1-.884 2.586" />
+    <path d="m2 2 20 20" />
+    <path d="M8.795 8.797A11 11 0 0 1 8 9.5C6 11.1 5 13 5 15a7 7 0 0 0 13.222 3.208" />
+  </g>
+  <g id="droplets" transform="translate(680 0)">
+    <rect id="droplets bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z" />
+    <path d="M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97" />
+  </g>
+  <g id="flame" transform="translate(720 0)">
+    <rect id="flame bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z" />
+  </g>
+  <g id="haze" transform="translate(760 0)">
+    <rect id="haze bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m5.2 6.2 1.4 1.4" />
+    <path d="M2 13h2" />
+    <path d="M20 13h2" />
+    <path d="m17.4 7.6 1.4-1.4" />
+    <path d="M22 17H2" />
+    <path d="M22 21H2" />
+    <path d="M16 13a4 4 0 0 0-8 0" />
+    <path d="M12 5V2.5" />
+  </g>
+  <g id="moon-star" transform="translate(0 40)">
+    <rect id="moon-star bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9" />
+    <path d="M20 3v4" />
+    <path d="M22 5h-4" />
+  </g>
+  <g id="rainbow" transform="translate(40 40)">
+    <rect id="rainbow bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M22 17a10 10 0 0 0-20 0" />
+    <path d="M6 17a6 6 0 0 1 12 0" />
+    <path d="M10 17a2 2 0 0 1 4 0" />
+  </g>
+  <g id="snowflake" transform="translate(80 40)">
+    <rect id="snowflake bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m10 20-1.25-2.5L6 18" />
+    <path d="M10 4 8.75 6.5 6 6" />
+    <path d="m14 20 1.25-2.5L18 18" />
+    <path d="m14 4 1.25 2.5L18 6" />
+    <path d="m17 21-3-6h-4" />
+    <path d="m17 3-3 6 1.5 3" />
+    <path d="M2 12h6.5L10 9" />
+    <path d="m20 10-1.5 2 1.5 2" />
+    <path d="M22 12h-6.5L14 15" />
+    <path d="m4 10 1.5 2L4 14" />
+    <path d="m7 21 3-6-1.5-3" />
+    <path d="m7 3 3 6h4" />
+  </g>
+  <g id="sparkles" transform="translate(120 40)">
+    <rect id="sparkles bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z" />
+    <path d="M20 3v4" />
+    <path d="M22 5h-4" />
+    <path d="M4 17v2" />
+    <path d="M5 18H3" />
+  </g>
+  <g id="star" transform="translate(160 40)">
+    <rect id="star bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+  </g>
+  <g id="sun" transform="translate(200 40)">
+    <rect id="sun bounds" width="24" height="24" fill="none" stroke="none" />
+    <circle cx="12" cy="12" r="4" />
+    <path d="M12 2v2" />
+    <path d="M12 20v2" />
+    <path d="m4.93 4.93 1.41 1.41" />
+    <path d="m17.66 17.66 1.41 1.41" />
+    <path d="M2 12h2" />
+    <path d="M20 12h2" />
+    <path d="m6.34 17.66-1.41 1.41" />
+    <path d="m19.07 4.93-1.41 1.41" />
+  </g>
+  <g id="sun-dim" transform="translate(240 40)">
+    <rect id="sun-dim bounds" width="24" height="24" fill="none" stroke="none" />
+    <circle cx="12" cy="12" r="4" />
+    <path d="M12 4h.01" />
+    <path d="M20 12h.01" />
+    <path d="M12 20h.01" />
+    <path d="M4 12h.01" />
+    <path d="M17.657 6.343h.01" />
+    <path d="M17.657 17.657h.01" />
+    <path d="M6.343 17.657h.01" />
+    <path d="M6.343 6.343h.01" />
+  </g>
+  <g id="sun-medium" transform="translate(280 40)">
+    <rect id="sun-medium bounds" width="24" height="24" fill="none" stroke="none" />
+    <circle cx="12" cy="12" r="4" />
+    <path d="M12 3v1" />
+    <path d="M12 20v1" />
+    <path d="M3 12h1" />
+    <path d="M20 12h1" />
+    <path d="m18.364 5.636-.707.707" />
+    <path d="m6.343 17.657-.707.707" />
+    <path d="m5.636 5.636.707.707" />
+    <path d="m17.657 17.657.707.707" />
+  </g>
+  <g id="sun-snow" transform="translate(320 40)">
+    <rect id="sun-snow bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M10 21v-1" />
+    <path d="M10 4V3" />
+    <path d="M10 9a3 3 0 0 0 0 6" />
+    <path d="m14 20 1.25-2.5L18 18" />
+    <path d="m14 4 1.25 2.5L18 6" />
+    <path d="m17 21-3-6 1.5-3H22" />
+    <path d="m17 3-3 6 1.5 3" />
+    <path d="M2 12h1" />
+    <path d="m20 10-1.5 2 1.5 2" />
+    <path d="m3.64 18.36.7-.7" />
+    <path d="m4.34 6.34-.7-.7" />
+  </g>
+  <g id="sunrise" transform="translate(360 40)">
+    <rect id="sunrise bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 2v8" />
+    <path d="m4.93 10.93 1.41 1.41" />
+    <path d="M2 18h2" />
+    <path d="M20 18h2" />
+    <path d="m19.07 10.93-1.41 1.41" />
+    <path d="M22 22H2" />
+    <path d="m8 6 4-4 4 4" />
+    <path d="M16 18a4 4 0 0 0-8 0" />
+  </g>
+  <g id="sunset" transform="translate(400 40)">
+    <rect id="sunset bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 10V2" />
+    <path d="m4.93 10.93 1.41 1.41" />
+    <path d="M2 18h2" />
+    <path d="M20 18h2" />
+    <path d="m19.07 10.93-1.41 1.41" />
+    <path d="M22 22H2" />
+    <path d="m16 6-4 4-4-4" />
+    <path d="M16 18a4 4 0 0 0-8 0" />
+  </g>
+  <g id="thermometer" transform="translate(440 40)">
+    <rect id="thermometer bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M14 4v10.54a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0Z" />
+  </g>
+  <g id="thermometer-snowflake" transform="translate(480 40)">
+    <rect id="thermometer-snowflake bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m10 20-1.25-2.5L6 18" />
+    <path d="M10 4 8.75 6.5 6 6" />
+    <path d="M10.585 15H10" />
+    <path d="M2 12h6.5L10 9" />
+    <path d="M20 14.54a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0z" />
+    <path d="m4 10 1.5 2L4 14" />
+    <path d="m7 21 3-6-1.5-3" />
+    <path d="m7 3 3 6h2" />
+  </g>
+  <g id="thermometer-sun" transform="translate(520 40)">
+    <rect id="thermometer-sun bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 9a4 4 0 0 0-2 7.5" />
+    <path d="M12 3v2" />
+    <path d="m6.6 18.4-1.4 1.4" />
+    <path d="M20 4v10.54a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0Z" />
+    <path d="M4 13H2" />
+    <path d="M6.34 7.34 4.93 5.93" />
+  </g>
+  <g id="tornado" transform="translate(560 40)">
+    <rect id="tornado bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M21 4H3" />
+    <path d="M18 8H6" />
+    <path d="M19 12H9" />
+    <path d="M16 16h-6" />
+    <path d="M11 20H9" />
+  </g>
+  <g id="umbrella" transform="translate(600 40)">
+    <rect id="umbrella bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M22 12a10.06 10.06 1 0 0-20 0Z" />
+    <path d="M12 12v8a2 2 0 0 0 4 0" />
+    <path d="M12 2v1" />
+  </g>
+  <g id="umbrella-off" transform="translate(640 40)">
+    <rect id="umbrella-off bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 2v1" />
+    <path d="M15.5 21a1.85 1.85 0 0 1-3.5-1v-8H2a10 10 0 0 1 3.428-6.575" />
+    <path d="M17.5 12H22A10 10 0 0 0 9.004 3.455" />
+    <path d="m2 2 20 20" />
+  </g>
+  <g id="wind" transform="translate(680 40)">
+    <rect id="wind bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12.8 19.6A2 2 0 1 0 14 16H2" />
+    <path d="M17.5 8a2.5 2.5 0 1 1 2 4H2" />
+    <path d="M9.8 4.4A2 2 0 1 1 11 8H2" />
+  </g>
+  <g id="wind-arrow-down" transform="translate(720 40)">
+    <rect id="wind-arrow-down bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M10 2v8" />
+    <path d="M12.8 21.6A2 2 0 1 0 14 18H2" />
+    <path d="M17.5 10a2.5 2.5 0 1 1 2 4H2" />
+    <path d="m6 6 4 4 4-4" />
+  </g>
+  <g id="zap" transform="translate(760 40)">
+    <rect id="zap bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z" />
+  </g>
+  <g id="zap-off" transform="translate(0 80)">
+    <rect id="zap-off bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M10.513 4.856 13.12 2.17a.5.5 0 0 1 .86.46l-1.377 4.317" />
+    <path d="M15.656 10H20a1 1 0 0 1 .78 1.63l-1.72 1.773" />
+    <path d="M16.273 16.273 10.88 21.83a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14H4a1 1 0 0 1-.78-1.63l4.507-4.643" />
+    <path d="m2 2 20 20" />
+  </g>
+</svg>

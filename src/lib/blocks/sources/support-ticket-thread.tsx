@@ -258,7 +258,9 @@ export function SupportTicketThread({
                   >
                     {post.initials}
                   </span>
-                  <h3 className="text-sm font-semibold">{post.author}</h3>
+                  {post.author ? (
+                    <h3 data-stress-ignore className="text-sm font-semibold">{post.author}</h3>
+                  ) : null}
                   <span className="ms-auto text-[11px] text-muted-foreground">{post.at}</span>
                 </div>
                 <p className="mt-2 text-sm text-muted-foreground">{post.body}</p>

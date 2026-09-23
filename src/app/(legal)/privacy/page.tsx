@@ -19,7 +19,7 @@ import { absoluteUrl } from '@/lib/site'
  *
  * Written from the code rather than from a template, and it names every
  * processor the app actually talks to: Firebase for accounts and stored
- * state, Polar for payments, PostHog for product analytics, Vercel for
+ * state, Polar for payments, PostHog for product analytics, Netlify for
  * hosting, and Resend only if a mailing key is configured. If a service is
  * added, it belongs in section 4 in the same commit.
  *
@@ -119,6 +119,14 @@ export default function PrivacyPage() {
               keep our books. Legal basis: contract, and legal obligation for
               the accounting records.
             </>,
+            <>
+              <strong className="font-semibold text-foreground">Sign-in and usage records</strong>{' '}
+              — passkey names and dates (the key itself stays on your device
+              and only its public half is stored), a licence key held as a
+              hash, and per-day counters that enforce the daily export limit.
+              Legal basis: performance of a contract, and legitimate interest
+              in protecting the service from abuse.
+            </>,
           ]}
         />
         <p>
@@ -174,8 +182,8 @@ export default function PrivacyPage() {
               product analytics.
             </>,
             <>
-              <strong className="font-semibold text-foreground">Vercel</strong> —
-              hosting. Vercel keeps standard server logs, which include IP
+              <strong className="font-semibold text-foreground">Netlify</strong> —
+              hosting. Netlify keeps standard server logs, which include IP
               addresses, for a limited period.
             </>,
             <>
@@ -196,9 +204,9 @@ export default function PrivacyPage() {
       <LegalSection id="retention" title="5. How long we keep it">
         <LegalList
           items={[
-            'Account data and saved state: until you delete your account, then removed within 30 days.',
-            'Purchase and invoice records: kept for as long as tax law requires, typically six to eight years, even after an account is closed.',
-            'Mailing list entries: until you unsubscribe. An unsubscribed address is kept, marked as unsubscribed, so that we can prove you asked to leave and so you are not re-added by mistake.',
+            'Account data and saved state: until you delete your account. Deleting it from your account page removes it immediately; if you ask us by email instead, within 30 days.',
+            'Purchase and invoice records: kept for as long as tax law requires, typically six to eight years, even after an account is closed. When you delete your account they stay but are cut loose from you: the link to your account is removed and only the order id, plan, amount, currency and date remain.',
+            'Mailing list entries: until you unsubscribe. An unsubscribed address is kept, marked as unsubscribed, so that we can prove you asked to leave and so you are not re-added by mistake. Deleting your account removes your entry entirely, including that marker.',
             'Analytics events: retained by PostHog under its own retention settings.',
           ]}
         />
@@ -254,9 +262,24 @@ export default function PrivacyPage() {
           time without giving a reason.
         </p>
         <p>
-          Exercise any of these by emailing <ContactEmail />. We answer within
-          30 days. You can also complain to your local data protection
-          authority; we would rather you told us first.
+          Two of these you can do yourself, straight away, from the{' '}
+          <Link href="/account" className="font-medium text-primary hover:underline">
+            account page
+          </Link>
+          : <strong className="font-semibold text-foreground">Download my data</strong>{' '}
+          gives you a JSON file of everything we hold about your account, and{' '}
+          <strong className="font-semibold text-foreground">Delete my account</strong>{' '}
+          erases it. Deletion keeps purchase records without your identity, as
+          section 5 explains, and it asks you to cancel a subscription first
+          rather than leaving it charging a closed account. Polar, as
+          merchant of record, keeps its own customer record; ask us if you want
+          that closed as well.
+        </p>
+        <p>
+          For anything else &mdash; correction, restriction, objection, or if
+          the tools above do not work for you &mdash; email <ContactEmail />.
+          We answer within 30 days. You can also complain to your local data
+          protection authority; we would rather you told us first.
         </p>
       </LegalSection>
 

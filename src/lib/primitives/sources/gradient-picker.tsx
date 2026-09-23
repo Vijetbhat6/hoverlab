@@ -198,7 +198,7 @@ export function GradientPicker({
             value={Math.round(value.angle)}
             disabled={value.type === 'radial'}
             onChange={(e) => onChange({ ...value, angle: Number(e.target.value) })}
-            className="w-12 bg-transparent text-sm tabular-nums text-foreground outline-none disabled:opacity-40"
+            className="w-12 bg-transparent text-sm tabular-nums text-foreground outline-none disabled:opacity-40 border border-transparent"
           />
         </label>
 

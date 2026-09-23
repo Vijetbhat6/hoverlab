@@ -79,7 +79,7 @@ export function ProductBuyBox({
 
   return (
     <div className={`flex flex-col ${className}`}>
-      <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">{name}</h1>
+      <h1 className="text-2xl leading-snug font-bold tracking-tight sm:text-3xl sm:leading-[1.3]">{name}</h1>
 
       <div className="mt-3 flex flex-wrap items-baseline gap-3">
         <span className="text-2xl font-extrabold tracking-tight">

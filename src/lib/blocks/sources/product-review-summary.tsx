@@ -94,12 +94,12 @@ export function ProductReviewSummary({
 
                 <span className="h-2 flex-1 overflow-hidden rounded-full bg-muted">
                   <span
-                    className="block h-full rounded-full bg-amber-400 transition-all group-hover:bg-amber-500"
+                    className="block h-full rounded-full bg-amber-400 transition-all group-hover:bg-amber-500 border border-transparent"
                     style={{ width: `${percent}%` }}
                   />
                 </span>
 
-                <span className="w-10 shrink-0 text-end tabular-nums text-muted-foreground">
+                <span className="min-w-10 shrink-0 text-end tabular-nums text-muted-foreground">
                   {count}
                 </span>
               </a>

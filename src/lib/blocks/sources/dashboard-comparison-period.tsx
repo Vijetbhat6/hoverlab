@@ -217,22 +217,22 @@ export function DashboardComparisonPeriod({
             return (
               <label
                 key={option.id}
-                className={`cursor-pointer rounded-xl border p-3 transition-colors ${
+                className={`min-w-0 cursor-pointer rounded-xl border p-3 transition-colors ${
                   selected ? 'border-primary bg-primary/5' : 'border-border hover:bg-muted/50'
                 }`}
               >
-                <span className="flex items-center gap-2 text-sm font-medium">
+                <span className="flex min-w-0 items-center gap-2 text-sm font-medium">
                   <input
                     type="radio"
                     name="comparison-mode"
                     value={option.id}
                     checked={selected}
                     onChange={() => setMode(option.id)}
-                    className="h-3.5 w-3.5 accent-primary"
+                    className="h-3.5 w-3.5 shrink-0 accent-primary"
                   />
-                  {option.label}
+                  <span className="min-w-0 flex-1 break-words">{option.label}</span>
                 </span>
-                <span className="mt-1 block text-xs text-muted-foreground">{option.hint}</span>
+                <span className="mt-1 block break-words text-xs text-muted-foreground">{option.hint}</span>
               </label>
             )
           })}
@@ -248,7 +248,7 @@ export function DashboardComparisonPeriod({
       >
         <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm">
           <span className="inline-flex items-center gap-1.5 font-semibold">
-            <span aria-hidden className="h-2 w-2 rounded-full bg-primary" />
+            <span aria-hidden className="h-2 w-2 rounded-full bg-primary border border-transparent" />
             {formatRange(primary.start, primary.end)}
           </span>
 
@@ -256,7 +256,7 @@ export function DashboardComparisonPeriod({
             <>
               <ArrowLeftRight aria-hidden className="h-3.5 w-3.5 text-muted-foreground" />
               <span className="inline-flex items-center gap-1.5 text-muted-foreground">
-                <span aria-hidden className="h-2 w-2 rounded-full bg-muted-foreground/50" />
+                <span aria-hidden className="h-2 w-2 rounded-full bg-muted-foreground/50 border border-transparent" />
                 {formatRange(comparison.start, comparison.end)}
               </span>
             </>

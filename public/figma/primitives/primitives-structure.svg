@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1216" height="310" viewBox="0 0 1216 310" id="Hoverlab — Structure">
+  <!--
+    Hoverlab — Structure. 1 controls, traced from the
+    rendered catalog. Drag this file onto a Figma canvas.
+
+    These are frames, not components: named, editable layers with real
+    geometry, colour and type. There are no variants, no auto-layout,
+    and no hover or motion — none of those exist in a static frame.
+
+    Every one of these is free to copy as code at https://hoverlab.dev/primitives
+  -->
+  <rect id="Background" x="0" y="0" width="1216" height="310" fill="#ffffff" />
+  <text id="Content Divider label" x="64" y="84" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Content Divider</text>
+  <text id="content-divider id" x="64" y="98" font-family="ui-monospace, monospace" font-size="12" fill="#737373">content-divider</text>
+  <g id="Content Divider" transform="translate(64, 116)">
+    <rect id="container" x="0" y="0" width="1088" height="130" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="or" x="535.05" y="37" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500" letter-spacing="0.3">or</text>
+      <text id="Today" x="412" y="69" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500" letter-spacing="0.3">Today</text>
+      <text id="Unread from here" x="481.23" y="101" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500" letter-spacing="0.3">Unread from here</text>
+  </g>
+</svg>

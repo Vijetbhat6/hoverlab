@@ -73,7 +73,7 @@ export function SettingsNavLayout({
           <div className="flex gap-1 overflow-x-auto pb-2 lg:block lg:space-y-5 lg:overflow-visible lg:pb-0">
             {groups.map(([group, items]) => (
               <div key={group} className="contents lg:block">
-                <h2 className="hidden px-3 pb-1.5 text-xs font-bold uppercase tracking-wider text-muted-foreground lg:block">
+                <h2 className="hidden break-words px-3 pb-1.5 text-xs font-bold uppercase tracking-wider text-muted-foreground lg:block">
                   {group}
                 </h2>
 
@@ -85,14 +85,14 @@ export function SettingsNavLayout({
                       type="button"
                       onClick={() => setActive(section.label)}
                       aria-current={isActive ? 'page' : undefined}
-                      className={`flex shrink-0 items-center gap-2.5 rounded-xl px-3 py-2 text-sm font-medium transition-colors lg:w-full ${
+                      className={`flex shrink-0 items-center gap-2.5 break-words rounded-xl px-3 py-2 text-sm font-medium transition-colors lg:w-full ${
                         isActive
                           ? 'bg-primary/10 text-primary'
                           : 'text-muted-foreground hover:bg-muted hover:text-foreground'
                       }`}
                     >
                       {section.icon}
-                      {section.label}
+                      <span className="min-w-0 flex-1 break-words text-start">{section.label}</span>
                     </button>
                   )
                 })}

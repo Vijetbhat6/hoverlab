@@ -105,7 +105,7 @@ export function TeamGrid({
         {members.map((member, index) => (
           <li
             key={member.name}
-            className="flex flex-col rounded-2xl border border-border/60 bg-card/60 p-5 text-card-foreground"
+            className="flex min-w-0 flex-col rounded-2xl border border-border/60 bg-card/60 p-5 text-card-foreground"
           >
             <div className="flex items-center gap-3">
               <span
@@ -116,9 +116,11 @@ export function TeamGrid({
               >
                 {member.initials ?? initialsOf(member.name)}
               </span>
-              <div className="min-w-0">
-                <h3 className="truncate text-sm font-semibold">{member.name}</h3>
-                <p className="truncate text-xs text-muted-foreground">{member.role}</p>
+              <div className="min-w-0 flex-1">
+                {member.name ? (
+                  <h3 data-stress-ignore className="break-words text-sm font-semibold">{member.name}</h3>
+                ) : null}
+                <p className="break-words text-xs text-muted-foreground">{member.role}</p>
               </div>
             </div>
 

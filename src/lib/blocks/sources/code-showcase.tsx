@@ -101,16 +101,16 @@ export function CodeShowcase({
           </ul>
         </div>
 
-        <div className="overflow-hidden rounded-2xl border border-border/60 bg-zinc-950 shadow-xl">
+        <div className="overflow-y-hidden rounded-2xl border border-border/60 bg-zinc-950 shadow-xl">
           {/* Window chrome */}
-          <div className="flex items-center gap-2 border-b border-white/10 px-4 py-3">
-            <div aria-hidden className="flex gap-1.5">
-              <span className="h-3 w-3 rounded-full bg-red-500/80" />
-              <span className="h-3 w-3 rounded-full bg-amber-500/80" />
-              <span className="h-3 w-3 rounded-full bg-emerald-500/80" />
+          <div className="flex flex-wrap items-center gap-2 border-b border-white/10 px-4 py-3">
+            <div aria-hidden className="flex shrink-0 gap-1.5">
+              <span className="h-3 w-3 rounded-full bg-red-500/80 border border-transparent" />
+              <span className="h-3 w-3 rounded-full bg-amber-500/80 border border-transparent" />
+              <span className="h-3 w-3 rounded-full bg-emerald-500/80 border border-transparent" />
             </div>
 
-            <div role="tablist" className="ms-3 flex gap-1">
+            <div role="tablist" className="ms-3 flex flex-wrap gap-1">
               {files.map((f, i) => (
                 <button
                   key={f.name}
@@ -148,7 +148,7 @@ export function CodeShowcase({
             <code className="font-mono text-zinc-300">
               {file.code.split('\n').map((line, i) => (
                 <span key={i} className="grid grid-cols-[2rem_1fr]">
-                  <span aria-hidden className="select-none text-end text-white/20">
+                  <span aria-hidden className="select-none text-end text-white/50">
                     {i + 1}
                   </span>
                   <span className="ps-4">{line || ' '}</span>

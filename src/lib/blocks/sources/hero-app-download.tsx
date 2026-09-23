@@ -51,8 +51,8 @@ export function HeroAppDownload({
   return (
     <section className={`relative overflow-hidden ${className}`}>
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute -left-20 top-10 h-80 w-80 rounded-full bg-primary/20 blur-3xl" />
-        <div className="absolute bottom-0 right-0 h-72 w-72 rounded-full bg-sky-500/10 blur-3xl" />
+        <div className="absolute -left-20 top-10 h-80 w-80 rounded-full bg-primary/20 blur-3xl border border-transparent" />
+        <div className="absolute bottom-0 right-0 h-72 w-72 rounded-full bg-sky-500/10 blur-3xl border border-transparent" />
       </div>
 
       <div className="mx-auto grid w-full max-w-7xl items-center gap-12 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:gap-16 lg:px-8 lg:py-24">
@@ -113,15 +113,15 @@ export function HeroAppDownload({
           <div className="w-64 rounded-[2.5rem] border-8 border-foreground/85 bg-card shadow-2xl shadow-black/30">
             {/* Notch */}
             <div className="flex justify-center pt-2">
-              <span className="h-1.5 w-16 rounded-full bg-foreground/25" />
+              <span className="h-1.5 w-16 rounded-full bg-foreground/25 border border-transparent" />
             </div>
 
             <div className="space-y-3 p-4">
               <div className="pt-2">
-                <div className="text-[10px] uppercase tracking-wide text-muted-foreground">
+                <div className="truncate text-[10px] uppercase tracking-wide text-muted-foreground">
                   Wednesday
                 </div>
-                <div className="mt-0.5 text-2xl font-bold tracking-tight">Focus</div>
+                <div className="mt-0.5 truncate text-2xl font-bold tracking-tight">Focus</div>
               </div>
 
               {/* Progress ring stand-in */}
@@ -129,7 +129,7 @@ export function HeroAppDownload({
                 <div className="text-3xl font-extrabold tracking-tight">72%</div>
                 <div className="mt-1 text-[10px] text-muted-foreground">of daily goal</div>
                 <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-border/60">
-                  <div className="h-full w-[72%] rounded-full bg-primary" />
+                  <div className="h-full w-[72%] rounded-full bg-primary border border-transparent" />
                 </div>
               </div>
 
@@ -150,7 +150,7 @@ export function HeroAppDownload({
 
             {/* Home indicator */}
             <div className="flex justify-center pb-3">
-              <span className="h-1 w-24 rounded-full bg-foreground/25" />
+              <span className="h-1 w-24 rounded-full bg-foreground/25 border border-transparent" />
             </div>
           </div>
         </div>

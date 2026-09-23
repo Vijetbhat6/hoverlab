@@ -155,7 +155,7 @@ export function MultiStepForm({
         {steps.map((label, i) => {
           const state = i < step ? 'complete' : i === step ? 'current' : 'upcoming'
           return (
-            <li key={label} className="flex flex-1 items-center gap-2">
+            <li key={label} className="flex min-w-0 flex-1 items-center gap-2">
               <span
                 aria-current={state === 'current' ? 'step' : undefined}
                 className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border text-xs font-bold ${
@@ -170,7 +170,7 @@ export function MultiStepForm({
                 {state === 'complete' ? <span className="sr-only">completed</span> : null}
               </span>
               <span
-                className={`hidden text-xs font-medium sm:block ${
+                className={`hidden min-w-0 truncate text-xs font-medium sm:block ${
                   state === 'upcoming' ? 'text-muted-foreground' : 'text-foreground'
                 }`}
               >
@@ -191,13 +191,16 @@ export function MultiStepForm({
         onSubmit={handleSubmit}
         className="mt-8 rounded-2xl border border-border/60 bg-card/40 p-6 sm:p-8"
       >
-        <h3
-          ref={headingRef}
-          tabIndex={-1}
-          className="text-lg font-semibold outline-none"
-        >
-          {steps[step]}
-        </h3>
+        {steps[step] ? (
+          <h3
+            ref={headingRef}
+            tabIndex={-1}
+            data-stress-ignore
+            className="text-lg font-semibold outline-none"
+          >
+            {steps[step]}
+          </h3>
+        ) : null}
 
         <div className="mt-5 space-y-4">
           {step === 0 ? (

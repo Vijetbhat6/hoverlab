@@ -192,6 +192,16 @@ export default function AccessibilityPage() {
             Nothing below is a known failure — it is a known blind spot, which is
             a different and more useful thing to be told.
           </p>
+          <p className="mt-2 text-sm text-body">
+            Part of that blind spot is measured separately, in a real browser:
+            text at 200% size, reflow at 320px, forced colors, reduced motion,
+            right-to-left and dark contrast. Those results are on the{' '}
+            <Link href="/stress" className="font-medium text-foreground underline underline-offset-2">
+              stress-test matrix
+            </Link>
+            , and they are a measurement of what a browser could detect, not a
+            conformance claim either.
+          </p>
 
           <ul className="mt-5 space-y-3">
             {UNCHECKED_CRITERIA.map((criterion) => (

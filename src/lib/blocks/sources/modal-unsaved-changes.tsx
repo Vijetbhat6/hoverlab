@@ -122,7 +122,7 @@ export function ModalUnsavedChanges({
   }
 
   return (
-    <div className={`relative min-h-[26rem] rounded-2xl bg-muted/30 p-6 ${className}`}>
+    <div className={`rounded-2xl bg-muted/30 p-6 ${className}`}>
       <div className="flex flex-wrap items-center gap-3">
         <button
           ref={triggerRef}
@@ -142,89 +142,95 @@ export function ModalUnsavedChanges({
         ) : null}
       </div>
 
-      {open ? (
-        <div className="absolute inset-0 z-10 flex items-center justify-center p-4">
-          <div
-            aria-hidden
-            className="absolute inset-0 rounded-2xl bg-background/80 backdrop-blur-sm"
-            onClick={() => close('cancelled')}
-          />
+      {/* A separate, relatively-positioned stage below the trigger row — not
+          wrapped around it — so the centred dialog's box never reaches back
+          up over "Close the editor" at larger text sizes, where the taller
+          dialog would otherwise sit closer to the top of a shared box. */}
+      <div className="relative mt-4 min-h-[22rem]">
+        {open ? (
+          <div className="absolute inset-0 z-10 flex items-center justify-center p-4">
+            <div
+              aria-hidden
+              className="absolute inset-0 rounded-2xl bg-background/80 backdrop-blur-sm"
+              onClick={() => close('cancelled')}
+            />
 
-          <div
-            ref={dialogRef}
-            role="alertdialog"
-            aria-modal="true"
-            aria-labelledby={`${uid}-unsaved-title`}
-            aria-describedby={`${uid}-unsaved-body`}
-            onKeyDown={onKeyDown}
-            className="relative w-full max-w-md rounded-2xl border border-border bg-card p-6 text-card-foreground shadow-2xl"
-          >
-            <div className="flex items-start gap-3">
-              <span
-                aria-hidden
-                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-amber-500/10"
-              >
-                <AlertTriangle className="h-4 w-4 text-amber-600 dark:text-amber-400" />
-              </span>
-              <div className="min-w-0">
-                <h2 id={`${uid}-unsaved-title`} className="text-base font-semibold">
-                  You have {changes.length} unsaved{' '}
-                  {changes.length === 1 ? 'change' : 'changes'}
-                </h2>
-                <p id={`${uid}-unsaved-body`} className="mt-1 text-sm text-muted-foreground">
-                  Closing now discards them. Saving keeps them and closes the editor.
-                </p>
+            <div
+              ref={dialogRef}
+              role="alertdialog"
+              aria-modal="true"
+              aria-labelledby={`${uid}-unsaved-title`}
+              aria-describedby={`${uid}-unsaved-body`}
+              onKeyDown={onKeyDown}
+              className="relative max-h-full w-full max-w-md overflow-y-auto rounded-2xl border border-border bg-card p-6 text-card-foreground shadow-2xl"
+            >
+              <div className="flex items-start gap-3">
+                <span
+                  aria-hidden
+                  className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-amber-500/10"
+                >
+                  <AlertTriangle className="h-4 w-4 text-amber-600 dark:text-amber-400" />
+                </span>
+                <div className="min-w-0">
+                  <h2 id={`${uid}-unsaved-title`} className="text-base font-semibold">
+                    You have {changes.length} unsaved{' '}
+                    {changes.length === 1 ? 'change' : 'changes'}
+                  </h2>
+                  <p id={`${uid}-unsaved-body`} className="mt-1 text-sm text-muted-foreground">
+                    Closing now discards them. Saving keeps them and closes the editor.
+                  </p>
+                </div>
+              </div>
+
+              {/* Naming the changes is what makes this a decision rather than
+                  a guess. */}
+              <dl className="mt-4 space-y-2 rounded-xl border border-border bg-muted/40 p-3">
+                {changes.map((change) => (
+                  <div key={change.field} className="text-xs">
+                    <dt className="font-medium">{change.field}</dt>
+                    <dd className="mt-0.5 flex flex-wrap items-center gap-1.5 text-muted-foreground">
+                      <span className="line-through">{change.from}</span>
+                      <span aria-hidden>→</span>
+                      <span className="font-medium text-foreground">{change.to}</span>
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+
+              <div className="mt-5 flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
+                <button
+                  type="button"
+                  onClick={() => close('cancelled')}
+                  className="inline-flex items-center justify-center gap-1.5 rounded-lg border border-border px-3 py-2 text-sm font-medium transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                >
+                  <X aria-hidden className="h-4 w-4" />
+                  Keep editing
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => close('discarded')}
+                  className="inline-flex items-center justify-center gap-1.5 rounded-lg border border-destructive/40 px-3 py-2 text-sm font-medium text-destructive transition-colors hover:bg-destructive/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                >
+                  <Trash2 aria-hidden className="h-4 w-4" />
+                  Discard changes
+                </button>
+
+                {/* The third button, and the default — see the header. */}
+                <button
+                  ref={primaryRef}
+                  type="button"
+                  onClick={() => close('saved and closed')}
+                  className="inline-flex items-center justify-center gap-1.5 rounded-lg bg-primary px-3 py-2 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                >
+                  <Save aria-hidden className="h-4 w-4" />
+                  Save and close
+                </button>
               </div>
             </div>
-
-            {/* Naming the changes is what makes this a decision rather than
-                a guess. */}
-            <dl className="mt-4 space-y-2 rounded-xl border border-border bg-muted/40 p-3">
-              {changes.map((change) => (
-                <div key={change.field} className="text-xs">
-                  <dt className="font-medium">{change.field}</dt>
-                  <dd className="mt-0.5 flex flex-wrap items-center gap-1.5 text-muted-foreground">
-                    <span className="line-through">{change.from}</span>
-                    <span aria-hidden>→</span>
-                    <span className="font-medium text-foreground">{change.to}</span>
-                  </dd>
-                </div>
-              ))}
-            </dl>
-
-            <div className="mt-5 flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
-              <button
-                type="button"
-                onClick={() => close('cancelled')}
-                className="inline-flex items-center justify-center gap-1.5 rounded-lg border border-border px-3 py-2 text-sm font-medium transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-              >
-                <X aria-hidden className="h-4 w-4" />
-                Keep editing
-              </button>
-
-              <button
-                type="button"
-                onClick={() => close('discarded')}
-                className="inline-flex items-center justify-center gap-1.5 rounded-lg border border-destructive/40 px-3 py-2 text-sm font-medium text-destructive transition-colors hover:bg-destructive/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-              >
-                <Trash2 aria-hidden className="h-4 w-4" />
-                Discard changes
-              </button>
-
-              {/* The third button, and the default — see the header. */}
-              <button
-                ref={primaryRef}
-                type="button"
-                onClick={() => close('saved and closed')}
-                className="inline-flex items-center justify-center gap-1.5 rounded-lg bg-primary px-3 py-2 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-              >
-                <Save aria-hidden className="h-4 w-4" />
-                Save and close
-              </button>
-            </div>
           </div>
-        </div>
-      ) : null}
+        ) : null}
+      </div>
     </div>
   )
 }

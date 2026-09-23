@@ -38,6 +38,14 @@ export function NewsletterInline({
     'idle',
   )
   const [dismissed, setDismissed] = React.useState(false)
+  /*
+   * Whether the server can actually email a confirmation link, read from
+   * the response. RESEND_API_KEY is unset in production, so where nothing
+   * can be sent the confirmation must not be described as if it had been.
+   */
+  const [confirmationEmail, setConfirmationEmail] = React.useState(false)
+  /** Honeypot: never visible, so only a bot fills it. */
+  const [website, setWebsite] = React.useState('')
 
   if (loading || user || dismissed) return null
 
@@ -49,12 +57,16 @@ export function NewsletterInline({
       const res = await fetch('/api/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, source }),
+        body: JSON.stringify({ email, source, website }),
       })
       if (!res.ok) {
         setStatus('error')
         return
       }
+      const data = (await res.json().catch(() => ({}))) as {
+        confirmationEmail?: boolean
+      }
+      setConfirmationEmail(data.confirmationEmail === true)
       setStatus('done')
       track('newsletter_subscribed', { source })
     } catch {
@@ -65,10 +77,13 @@ export function NewsletterInline({
   if (status === 'done') {
     return (
       <p
-        className={`inline-flex items-center gap-2 text-xs text-emerald-600 dark:text-emerald-400 ${className ?? ''}`}
+        role="status"
+        className={`inline-flex items-start gap-2 text-xs text-emerald-700 dark:text-emerald-400 ${className ?? ''}`}
       >
-        <Check aria-hidden className="h-3.5 w-3.5" />
-        On the list. Nothing else to do.
+        <Check aria-hidden className="mt-0.5 h-3.5 w-3.5 shrink-0" />
+        {confirmationEmail
+          ? "Check your inbox for a confirmation link. We won't send anything until you follow it."
+          : "You're on the list. We'll email a confirmation link before we send anything."}
       </p>
     )
   }
@@ -92,7 +107,8 @@ export function NewsletterInline({
       </p>
       <p className="mt-1 text-xs text-muted-foreground">
         One email when something new lands. No digests, no promotions,
-        unsubscribe in a click.
+        unsubscribe in a click. We email a confirmation link first and send
+        nothing until you follow it.
       </p>
 
       <form onSubmit={submit} className="mt-3 flex flex-col gap-2 sm:flex-row">
@@ -105,6 +121,16 @@ export function NewsletterInline({
           disabled={status === 'loading'}
           aria-label="Email address"
           className="h-9 flex-1 rounded-lg border border-border/60 bg-background px-3 text-sm outline-none transition-colors focus-visible:border-primary/50 disabled:opacity-50"
+        />
+        <input
+          type="text"
+          name="website"
+          value={website}
+          onChange={(e) => setWebsite(e.target.value)}
+          tabIndex={-1}
+          autoComplete="off"
+          aria-hidden="true"
+          className="pointer-events-none absolute h-0 w-0 opacity-0"
         />
         <button
           type="submit"

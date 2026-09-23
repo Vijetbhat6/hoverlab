@@ -199,7 +199,7 @@ export function DashboardAlertRules({
                   >
                     {rule.severity}
                   </span>
-                  <h3 className="text-sm font-semibold">{rule.metric}</h3>
+                  <h3 data-stress-ignore className="text-sm font-semibold">{rule.metric}</h3>
                 </div>
 
                 {/* The rule as a sentence — the form people actually verify. */}
@@ -251,13 +251,13 @@ export function DashboardAlertRules({
                   aria-checked={rule.enabled}
                   aria-label={`${rule.enabled ? 'Disable' : 'Enable'} ${rule.metric} alert`}
                   onClick={() => toggle(rule.id)}
-                  className={`relative h-6 w-11 rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
+                  className={`relative h-6 w-11 rounded-full border border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
                     rule.enabled ? 'bg-primary' : 'bg-muted-foreground/30'
                   }`}
                 >
                   <span
                     aria-hidden
-                    className={`absolute start-0 top-0.5 h-5 w-5 rounded-full bg-background transition-transform ${
+                    className={`absolute start-0 top-0.5 h-5 w-5 rounded-full border border-transparent bg-background transition-transform ${
                       rule.enabled
                         ? 'translate-x-[22px] rtl:-translate-x-[22px]'
                         : 'translate-x-[2px] rtl:-translate-x-[2px]'

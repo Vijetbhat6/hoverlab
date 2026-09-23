@@ -1,0 +1,454 @@
+<!--
+ISC License
+
+Copyright (c) for portions of Lucide are held by Cole Bemis 2013-2022 as part of Feather (MIT). All other copyright (c) for Lucide are held by Lucide Contributors 2022.
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted, provided that the above
+copyright notice and this permission notice appear in all copies.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" width="784" height="104" viewBox="0 0 784 104" id="Lucide icons / Transportation" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <g id="ambulance" transform="translate(0 0)">
+    <rect id="ambulance bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M10 10H6" />
+    <path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2" />
+    <path d="M19 18h2a1 1 0 0 0 1-1v-3.28a1 1 0 0 0-.684-.948l-1.923-.641a1 1 0 0 1-.578-.502l-1.539-3.076A1 1 0 0 0 16.382 8H14" />
+    <path d="M8 8v4" />
+    <path d="M9 18h6" />
+    <circle cx="17" cy="18" r="2" />
+    <circle cx="7" cy="18" r="2" />
+  </g>
+  <g id="anchor" transform="translate(40 0)">
+    <rect id="anchor bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 22V8" />
+    <path d="M5 12H2a10 10 0 0 0 20 0h-3" />
+    <circle cx="12" cy="5" r="3" />
+  </g>
+  <g id="arrows-up-from-line" transform="translate(80 0)">
+    <rect id="arrows-up-from-line bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m4 6 3-3 3 3" />
+    <path d="M7 17V3" />
+    <path d="m14 6 3-3 3 3" />
+    <path d="M17 17V3" />
+    <path d="M4 21h16" />
+  </g>
+  <g id="baggage-claim" transform="translate(120 0)">
+    <rect id="baggage-claim bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M22 18H6a2 2 0 0 1-2-2V7a2 2 0 0 0-2-2" />
+    <path d="M17 14V4a2 2 0 0 0-2-2h-1a2 2 0 0 0-2 2v10" />
+    <rect width="13" height="8" x="8" y="6" rx="1" />
+    <circle cx="18" cy="20" r="2" />
+    <circle cx="9" cy="20" r="2" />
+  </g>
+  <g id="bike" transform="translate(160 0)">
+    <rect id="bike bounds" width="24" height="24" fill="none" stroke="none" />
+    <circle cx="18.5" cy="17.5" r="3.5" />
+    <circle cx="5.5" cy="17.5" r="3.5" />
+    <circle cx="15" cy="5" r="1" />
+    <path d="M12 17.5V14l-3-3 4-3 2 3h2" />
+  </g>
+  <g id="briefcase" transform="translate(200 0)">
+    <rect id="briefcase bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+    <rect width="20" height="14" x="2" y="6" rx="2" />
+  </g>
+  <g id="briefcase-business" transform="translate(240 0)">
+    <rect id="briefcase-business bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 12h.01" />
+    <path d="M16 6V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
+    <path d="M22 13a18.15 18.15 0 0 1-20 0" />
+    <rect width="20" height="14" x="2" y="6" rx="2" />
+  </g>
+  <g id="briefcase-conveyor-belt" transform="translate(280 0)">
+    <rect id="briefcase-conveyor-belt bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M10 20v2" />
+    <path d="M14 20v2" />
+    <path d="M18 20v2" />
+    <path d="M21 20H3" />
+    <path d="M6 20v2" />
+    <path d="M8 16V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v12" />
+    <rect x="4" y="6" width="16" height="10" rx="2" />
+  </g>
+  <g id="briefcase-medical" transform="translate(320 0)">
+    <rect id="briefcase-medical bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 11v4" />
+    <path d="M14 13h-4" />
+    <path d="M16 6V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
+    <path d="M18 6v14" />
+    <path d="M6 6v14" />
+    <rect width="20" height="14" x="2" y="6" rx="2" />
+  </g>
+  <g id="bus" transform="translate(360 0)">
+    <rect id="bus bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M8 6v6" />
+    <path d="M15 6v6" />
+    <path d="M2 12h19.6" />
+    <path d="M18 18h3s.5-1.7.8-2.8c.1-.4.2-.8.2-1.2 0-.4-.1-.8-.2-1.2l-1.4-5C20.1 6.8 19.1 6 18 6H4a2 2 0 0 0-2 2v10h3" />
+    <circle cx="7" cy="18" r="2" />
+    <path d="M9 18h5" />
+    <circle cx="16" cy="18" r="2" />
+  </g>
+  <g id="bus-front" transform="translate(400 0)">
+    <rect id="bus-front bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M4 6 2 7" />
+    <path d="M10 6h4" />
+    <path d="m22 7-2-1" />
+    <rect width="16" height="16" x="4" y="3" rx="2" />
+    <path d="M4 11h16" />
+    <path d="M8 15h.01" />
+    <path d="M16 15h.01" />
+    <path d="M6 19v2" />
+    <path d="M18 21v-2" />
+  </g>
+  <g id="cable-car" transform="translate(440 0)">
+    <rect id="cable-car bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M10 3h.01" />
+    <path d="M14 2h.01" />
+    <path d="m2 9 20-5" />
+    <path d="M12 12V6.5" />
+    <rect width="16" height="10" x="4" y="12" rx="3" />
+    <path d="M9 12v5" />
+    <path d="M15 12v5" />
+    <path d="M4 17h16" />
+  </g>
+  <g id="car" transform="translate(480 0)">
+    <rect id="car bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2" />
+    <circle cx="7" cy="17" r="2" />
+    <path d="M9 17h6" />
+    <circle cx="17" cy="17" r="2" />
+  </g>
+  <g id="car-front" transform="translate(520 0)">
+    <rect id="car-front bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m21 8-2 2-1.5-3.7A2 2 0 0 0 15.646 5H8.4a2 2 0 0 0-1.903 1.257L5 10 3 8" />
+    <path d="M7 14h.01" />
+    <path d="M17 14h.01" />
+    <rect width="18" height="8" x="3" y="10" rx="2" />
+    <path d="M5 18v2" />
+    <path d="M19 18v2" />
+  </g>
+  <g id="car-taxi-front" transform="translate(560 0)">
+    <rect id="car-taxi-front bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M10 2h4" />
+    <path d="m21 8-2 2-1.5-3.7A2 2 0 0 0 15.646 5H8.4a2 2 0 0 0-1.903 1.257L5 10 3 8" />
+    <path d="M7 14h.01" />
+    <path d="M17 14h.01" />
+    <rect width="18" height="8" x="3" y="10" rx="2" />
+    <path d="M5 18v2" />
+    <path d="M19 18v2" />
+  </g>
+  <g id="caravan" transform="translate(600 0)">
+    <rect id="caravan bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M18 19V9a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v8a2 2 0 0 0 2 2h2" />
+    <path d="M2 9h3a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2" />
+    <path d="M22 17v1a1 1 0 0 1-1 1H10v-9a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v9" />
+    <circle cx="8" cy="19" r="2" />
+  </g>
+  <g id="cigarette" transform="translate(640 0)">
+    <rect id="cigarette bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M17 12H3a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h14" />
+    <path d="M18 8c0-2.5-2-2.5-2-5" />
+    <path d="M21 16a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1" />
+    <path d="M22 8c0-2.5-2-2.5-2-5" />
+    <path d="M7 12v4" />
+  </g>
+  <g id="cigarette-off" transform="translate(680 0)">
+    <rect id="cigarette-off bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 12H3a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h13" />
+    <path d="M18 8c0-2.5-2-2.5-2-5" />
+    <path d="m2 2 20 20" />
+    <path d="M21 12a1 1 0 0 1 1 1v2a1 1 0 0 1-.5.866" />
+    <path d="M22 8c0-2.5-2-2.5-2-5" />
+    <path d="M7 12v4" />
+  </g>
+  <g id="circle-gauge" transform="translate(720 0)">
+    <rect id="circle-gauge bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M15.6 2.7a10 10 0 1 0 5.7 5.7" />
+    <circle cx="12" cy="12" r="2" />
+    <path d="M13.4 10.6 19 5" />
+  </g>
+  <g id="circle-parking" transform="translate(760 0)">
+    <rect id="circle-parking bounds" width="24" height="24" fill="none" stroke="none" />
+    <circle cx="12" cy="12" r="10" />
+    <path d="M9 17V7h4a3 3 0 0 1 0 6H9" />
+  </g>
+  <g id="circle-parking-off" transform="translate(0 40)">
+    <rect id="circle-parking-off bounds" width="24" height="24" fill="none" stroke="none" />
+    <circle cx="12" cy="12" r="10" />
+    <path d="m5 5 14 14" />
+    <path d="M13 13a3 3 0 1 0 0-6H9v2" />
+    <path d="M9 17v-2.34" />
+  </g>
+  <g id="container" transform="translate(40 40)">
+    <rect id="container bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M22 7.7c0-.6-.4-1.2-.8-1.5l-6.3-3.9a1.72 1.72 0 0 0-1.7 0l-10.3 6c-.5.2-.9.8-.9 1.4v6.6c0 .5.4 1.2.8 1.5l6.3 3.9a1.72 1.72 0 0 0 1.7 0l10.3-6c.5-.3.9-1 .9-1.5Z" />
+    <path d="M10 21.9V14L2.1 9.1" />
+    <path d="m10 14 11.9-6.9" />
+    <path d="M14 19.8v-8.1" />
+    <path d="M18 17.5V9.4" />
+  </g>
+  <g id="drone" transform="translate(80 40)">
+    <rect id="drone bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M10 10 7 7" />
+    <path d="m10 14-3 3" />
+    <path d="m14 10 3-3" />
+    <path d="m14 14 3 3" />
+    <path d="M14.205 4.139a4 4 0 1 1 5.439 5.863" />
+    <path d="M19.637 14a4 4 0 1 1-5.432 5.868" />
+    <path d="M4.367 10a4 4 0 1 1 5.438-5.862" />
+    <path d="M9.795 19.862a4 4 0 1 1-5.429-5.873" />
+    <rect x="10" y="8" width="4" height="8" rx="1" />
+  </g>
+  <g id="forklift" transform="translate(120 40)">
+    <rect id="forklift bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 12H5a2 2 0 0 0-2 2v5" />
+    <circle cx="13" cy="19" r="2" />
+    <circle cx="5" cy="19" r="2" />
+    <path d="M8 19h3m5-17v17h6M6 12V7c0-1.1.9-2 2-2h3l5 5" />
+  </g>
+  <g id="fuel" transform="translate(160 40)">
+    <rect id="fuel bounds" width="24" height="24" fill="none" stroke="none" />
+    <line x1="3" x2="15" y1="22" y2="22" />
+    <line x1="4" x2="14" y1="9" y2="9" />
+    <path d="M14 22V4a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v18" />
+    <path d="M14 13h2a2 2 0 0 1 2 2v2a2 2 0 0 0 2 2a2 2 0 0 0 2-2V9.83a2 2 0 0 0-.59-1.42L18 5" />
+  </g>
+  <g id="gauge" transform="translate(200 40)">
+    <rect id="gauge bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m12 14 4-4" />
+    <path d="M3.34 19a10 10 0 1 1 17.32 0" />
+  </g>
+  <g id="luggage" transform="translate(240 40)">
+    <rect id="luggage bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M6 20a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2" />
+    <path d="M8 18V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v14" />
+    <path d="M10 20h4" />
+    <circle cx="16" cy="20" r="2" />
+    <circle cx="8" cy="20" r="2" />
+  </g>
+  <g id="octagon-minus" transform="translate(280 40)">
+    <rect id="octagon-minus bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M2.586 16.726A2 2 0 0 1 2 15.312V8.688a2 2 0 0 1 .586-1.414l4.688-4.688A2 2 0 0 1 8.688 2h6.624a2 2 0 0 1 1.414.586l4.688 4.688A2 2 0 0 1 22 8.688v6.624a2 2 0 0 1-.586 1.414l-4.688 4.688a2 2 0 0 1-1.414.586H8.688a2 2 0 0 1-1.414-.586z" />
+    <path d="M8 12h8" />
+  </g>
+  <g id="parking-meter" transform="translate(320 40)">
+    <rect id="parking-meter bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M11 15h2" />
+    <path d="M12 12v3" />
+    <path d="M12 19v3" />
+    <path d="M15.282 19a1 1 0 0 0 .948-.68l2.37-6.988a7 7 0 1 0-13.2 0l2.37 6.988a1 1 0 0 0 .948.68z" />
+    <path d="M9 9a3 3 0 1 1 6 0" />
+  </g>
+  <g id="plane" transform="translate(360 40)">
+    <rect id="plane bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z" />
+  </g>
+  <g id="plane-landing" transform="translate(400 40)">
+    <rect id="plane-landing bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M2 22h20" />
+    <path d="M3.77 10.77 2 9l2-4.5 1.1.55c.55.28.9.84.9 1.45s.35 1.17.9 1.45L8 8.5l3-6 1.05.53a2 2 0 0 1 1.09 1.52l.72 5.4a2 2 0 0 0 1.09 1.52l4.4 2.2c.42.22.78.55 1.01.96l.6 1.03c.49.88-.06 1.98-1.06 2.1l-1.18.15c-.47.06-.95-.02-1.37-.24L4.29 11.15a2 2 0 0 1-.52-.38Z" />
+  </g>
+  <g id="plane-takeoff" transform="translate(440 40)">
+    <rect id="plane-takeoff bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M2 22h20" />
+    <path d="M6.36 17.4 4 17l-2-4 1.1-.55a2 2 0 0 1 1.8 0l.17.1a2 2 0 0 0 1.8 0L8 12 5 6l.9-.45a2 2 0 0 1 2.09.2l4.02 3a2 2 0 0 0 2.1.2l4.19-2.06a2.41 2.41 0 0 1 1.73-.17L21 7a1.4 1.4 0 0 1 .87 1.99l-.38.76c-.23.46-.6.84-1.07 1.08L7.58 17.2a2 2 0 0 1-1.22.18Z" />
+  </g>
+  <g id="sailboat" transform="translate(480 40)">
+    <rect id="sailboat bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M22 18H2a4 4 0 0 0 4 4h12a4 4 0 0 0 4-4Z" />
+    <path d="M21 14 10 2 3 14h18Z" />
+    <path d="M10 2v16" />
+  </g>
+  <g id="ship" transform="translate(520 40)">
+    <rect id="ship bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 10.189V14" />
+    <path d="M12 2v3" />
+    <path d="M19 13V7a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v6" />
+    <path d="M19.38 20A11.6 11.6 0 0 0 21 14l-8.188-3.639a2 2 0 0 0-1.624 0L3 14a11.6 11.6 0 0 0 2.81 7.76" />
+    <path d="M2 21c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1s1.2 1 2.5 1c2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1" />
+  </g>
+  <g id="ship-wheel" transform="translate(560 40)">
+    <rect id="ship-wheel bounds" width="24" height="24" fill="none" stroke="none" />
+    <circle cx="12" cy="12" r="8" />
+    <path d="M12 2v7.5" />
+    <path d="m19 5-5.23 5.23" />
+    <path d="M22 12h-7.5" />
+    <path d="m19 19-5.23-5.23" />
+    <path d="M12 14.5V22" />
+    <path d="M10.23 13.77 5 19" />
+    <path d="M9.5 12H2" />
+    <path d="M10.23 10.23 5 5" />
+    <circle cx="12" cy="12" r="2.5" />
+  </g>
+  <g id="square-m" transform="translate(600 40)">
+    <rect id="square-m bounds" width="24" height="24" fill="none" stroke="none" />
+    <rect width="18" height="18" x="3" y="3" rx="2" />
+    <path d="M8 16V8l4 4 4-4v8" />
+  </g>
+  <g id="square-parking" transform="translate(640 40)">
+    <rect id="square-parking bounds" width="24" height="24" fill="none" stroke="none" />
+    <rect width="18" height="18" x="3" y="3" rx="2" />
+    <path d="M9 17V7h4a3 3 0 0 1 0 6H9" />
+  </g>
+  <g id="square-parking-off" transform="translate(680 40)">
+    <rect id="square-parking-off bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M3.6 3.6A2 2 0 0 1 5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-.59 1.41" />
+    <path d="M3 8.7V19a2 2 0 0 0 2 2h10.3" />
+    <path d="m2 2 20 20" />
+    <path d="M13 13a3 3 0 1 0 0-6H9v2" />
+    <path d="M9 17v-2.3" />
+  </g>
+  <g id="ticket" transform="translate(720 40)">
+    <rect id="ticket bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z" />
+    <path d="M13 5v2" />
+    <path d="M13 17v2" />
+    <path d="M13 11v2" />
+  </g>
+  <g id="ticket-check" transform="translate(760 40)">
+    <rect id="ticket-check bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z" />
+    <path d="m9 12 2 2 4-4" />
+  </g>
+  <g id="ticket-minus" transform="translate(0 80)">
+    <rect id="ticket-minus bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z" />
+    <path d="M9 12h6" />
+  </g>
+  <g id="ticket-percent" transform="translate(40 80)">
+    <rect id="ticket-percent bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M2 9a3 3 0 1 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 1 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z" />
+    <path d="M9 9h.01" />
+    <path d="m15 9-6 6" />
+    <path d="M15 15h.01" />
+  </g>
+  <g id="ticket-plus" transform="translate(80 80)">
+    <rect id="ticket-plus bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z" />
+    <path d="M9 12h6" />
+    <path d="M12 9v6" />
+  </g>
+  <g id="ticket-slash" transform="translate(120 80)">
+    <rect id="ticket-slash bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z" />
+    <path d="m9.5 14.5 5-5" />
+  </g>
+  <g id="ticket-x" transform="translate(160 80)">
+    <rect id="ticket-x bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z" />
+    <path d="m9.5 14.5 5-5" />
+    <path d="m9.5 9.5 5 5" />
+  </g>
+  <g id="tickets" transform="translate(200 80)">
+    <rect id="tickets bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m4.5 8 10.58-5.06a1 1 0 0 1 1.342.488L18.5 8" />
+    <path d="M6 10V8" />
+    <path d="M6 14v1" />
+    <path d="M6 19v2" />
+    <rect x="2" y="8" width="20" height="13" rx="2" />
+  </g>
+  <g id="tickets-plane" transform="translate(240 80)">
+    <rect id="tickets-plane bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M10.5 17h1.227a2 2 0 0 0 1.345-.52L18 12" />
+    <path d="m12 13.5 3.75.5" />
+    <path d="m4.5 8 10.58-5.06a1 1 0 0 1 1.342.488L18.5 8" />
+    <path d="M6 10V8" />
+    <path d="M6 14v1" />
+    <path d="M6 19v2" />
+    <rect x="2" y="8" width="20" height="13" rx="2" />
+  </g>
+  <g id="tower-control" transform="translate(280 80)">
+    <rect id="tower-control bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M18.2 12.27 20 6H4l1.8 6.27a1 1 0 0 0 .95.73h10.5a1 1 0 0 0 .96-.73Z" />
+    <path d="M8 13v9" />
+    <path d="M16 22v-9" />
+    <path d="m9 6 1 7" />
+    <path d="m15 6-1 7" />
+    <path d="M12 6V2" />
+    <path d="M13 2h-2" />
+  </g>
+  <g id="tractor" transform="translate(320 80)">
+    <rect id="tractor bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m10 11 11 .9a1 1 0 0 1 .8 1.1l-.665 4.158a1 1 0 0 1-.988.842H20" />
+    <path d="M16 18h-5" />
+    <path d="M18 5a1 1 0 0 0-1 1v5.573" />
+    <path d="M3 4h8.129a1 1 0 0 1 .99.863L13 11.246" />
+    <path d="M4 11V4" />
+    <path d="M7 15h.01" />
+    <path d="M8 10.1V4" />
+    <circle cx="18" cy="18" r="2" />
+    <circle cx="7" cy="15" r="5" />
+  </g>
+  <g id="traffic-cone" transform="translate(360 80)">
+    <rect id="traffic-cone bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M16.05 10.966a5 2.5 0 0 1-8.1 0" />
+    <path d="m16.923 14.049 4.48 2.04a1 1 0 0 1 .001 1.831l-8.574 3.9a2 2 0 0 1-1.66 0l-8.574-3.91a1 1 0 0 1 0-1.83l4.484-2.04" />
+    <path d="M16.949 14.14a5 2.5 0 1 1-9.9 0L10.063 3.5a2 2 0 0 1 3.874 0z" />
+    <path d="M9.194 6.57a5 2.5 0 0 0 5.61 0" />
+  </g>
+  <g id="train-front" transform="translate(400 80)">
+    <rect id="train-front bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M8 3.1V7a4 4 0 0 0 8 0V3.1" />
+    <path d="m9 15-1-1" />
+    <path d="m15 15 1-1" />
+    <path d="M9 19c-2.8 0-5-2.2-5-5v-4a8 8 0 0 1 16 0v4c0 2.8-2.2 5-5 5Z" />
+    <path d="m8 19-2 3" />
+    <path d="m16 19 2 3" />
+  </g>
+  <g id="train-front-tunnel" transform="translate(440 80)">
+    <rect id="train-front-tunnel bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M2 22V12a10 10 0 1 1 20 0v10" />
+    <path d="M15 6.8v1.4a3 2.8 0 1 1-6 0V6.8" />
+    <path d="M10 15h.01" />
+    <path d="M14 15h.01" />
+    <path d="M10 19a4 4 0 0 1-4-4v-3a6 6 0 1 1 12 0v3a4 4 0 0 1-4 4Z" />
+    <path d="m9 19-2 3" />
+    <path d="m15 19 2 3" />
+  </g>
+  <g id="train-track" transform="translate(480 80)">
+    <rect id="train-track bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M2 17 17 2" />
+    <path d="m2 14 8 8" />
+    <path d="m5 11 8 8" />
+    <path d="m8 8 8 8" />
+    <path d="m11 5 8 8" />
+    <path d="m14 2 8 8" />
+    <path d="M7 22 22 7" />
+  </g>
+  <g id="tram-front" transform="translate(520 80)">
+    <rect id="tram-front bounds" width="24" height="24" fill="none" stroke="none" />
+    <rect width="16" height="16" x="4" y="3" rx="2" />
+    <path d="M4 11h16" />
+    <path d="M12 3v8" />
+    <path d="m8 19-2 3" />
+    <path d="m18 22-2-3" />
+    <path d="M8 15h.01" />
+    <path d="M16 15h.01" />
+  </g>
+  <g id="truck" transform="translate(560 80)">
+    <rect id="truck bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2" />
+    <path d="M15 18H9" />
+    <path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14" />
+    <circle cx="17" cy="18" r="2" />
+    <circle cx="7" cy="18" r="2" />
+  </g>
+  <g id="truck-electric" transform="translate(600 80)">
+    <rect id="truck-electric bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M14 19V7a2 2 0 0 0-2-2H9" />
+    <path d="M15 19H9" />
+    <path d="M19 19h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.62L18.3 9.38a1 1 0 0 0-.78-.38H14" />
+    <path d="M2 13v5a1 1 0 0 0 1 1h2" />
+    <path d="M4 3 2.15 5.15a.495.495 0 0 0 .35.86h2.15a.47.47 0 0 1 .35.86L3 9.02" />
+    <circle cx="17" cy="19" r="2" />
+    <circle cx="7" cy="19" r="2" />
+  </g>
+</svg>

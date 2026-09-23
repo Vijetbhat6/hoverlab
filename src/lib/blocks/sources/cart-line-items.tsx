@@ -136,7 +136,9 @@ export function CartLineItems({
               <div className="flex min-w-0 flex-1 flex-col">
                 <div className="flex items-start justify-between gap-3">
                   <div className="min-w-0">
-                    <h3 className="truncate text-sm font-medium">{line.name}</h3>
+                    {line.name ? (
+                      <h3 data-stress-ignore className="truncate text-sm font-medium">{line.name}</h3>
+                    ) : null}
                     {line.variant ? (
                       <p className="mt-0.5 text-xs text-muted-foreground">{line.variant}</p>
                     ) : null}

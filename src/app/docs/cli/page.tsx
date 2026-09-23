@@ -78,6 +78,10 @@ export default function CliDocsPage() {
               'Show what changed between your copy and the current one',
             ],
             [<C key="m">mcp</C>, 'Run the MCP server over stdio, for editor agents'],
+            [
+              <C key="au">audit-url &lt;url&gt;</C>,
+              'Audit a deployed page in a real browser: contrast, design drift, right-to-left breakage',
+            ],
           ]}
         />
       </DocsSection>
@@ -172,6 +176,84 @@ cd shop && npm install && npm run dev`}</Snippet>
 npx hoverlab search "pulsing teal button" --level effect
 npx hoverlab search pricing --level block --featured
 npx hoverlab show pricing-tiers --deep`}</Snippet>
+      </DocsSection>
+
+      <DocsSection id="audit-url" title="Auditing a deployed page">
+        <p>
+          <C>review</C> reads your source. <C>audit-url</C> loads the running
+          site in a real browser and reports what only exists once a page is
+          rendered: the contrast ratio of text against the background actually
+          underneath it, spacing and colour that drift from the
+          site&apos;s own scale, and what breaks when the page is laid out
+          right-to-left. Each finding names the closest tool, primitive or
+          command in the catalog.
+        </p>
+
+        <Snippet label="terminal">{`npx hoverlab audit-url https://staging.example.com
+
+# also load it with dir=rtl and report what breaks
+npx hoverlab audit-url http://localhost:3000 --dir rtl
+
+# a phone-sized viewport, dark scheme, and more pages on the same origin
+npx hoverlab audit-url https://example.com --viewport mobile --dark --pages /pricing,/docs
+
+# machine-readable, or a pull-request comment body
+npx hoverlab audit-url https://example.com --json
+npx hoverlab audit-url https://example.com --format markdown`}</Snippet>
+
+        <p>
+          <strong className="text-foreground">Tokens are inferred, not assumed.</strong>{' '}
+          Nothing here compares your site to Hoverlab&apos;s design. It reads
+          the computed values your page painted, works out the scale they
+          follow (a 4px spacing grid, a handful of radii and type sizes) and
+          reports the values that break it: a <C>13px</C> padding on a 4px
+          grid, a <C>7px</C> radius among <C>8px</C> ones, a near-duplicate
+          grey. Only rare values close to a dominant one are reported, and
+          every finding carries its counts so you can overrule it.
+        </p>
+
+        <DocsTable
+          head={['Flag', 'Effect']}
+          rows={[
+            [<C key="vp">--viewport &lt;v&gt;</C>, 'WIDTHxHEIGHT, or mobile | tablet | desktop. Default 1280x800'],
+            [<C key="dir">--dir rtl</C>, 'Load the page a second time with dir=rtl injected before any script, and compare'],
+            [<C key="dark">--dark</C>, 'Emulate prefers-color-scheme: dark'],
+            [<C key="pg">--pages &lt;a,b&gt;</C>, 'Extra paths on the same origin, at most ten. Other origins are refused'],
+            [<C key="fmt">--format &lt;f&gt;</C>, 'terminal (default) | markdown | json. --json is the same as --format json'],
+            [<C key="strict">--strict</C>, 'Advisories fail the run as well'],
+            [<C key="axe">--no-axe</C>, 'Skip axe-core even when it is installed'],
+          ]}
+        />
+
+        <p>
+          <strong className="text-foreground">It needs Playwright.</strong>{' '}
+          The CLI itself has no dependencies, so the browser driver is not
+          installed with it. Add it to the project you run the command from:
+        </p>
+        <Snippet label="terminal">{`npm i -D playwright && npx playwright install chromium`}</Snippet>
+        <p>
+          Without it the command prints that line and exits with code 2. If
+          Playwright&apos;s Chromium is missing but Chrome or Edge is
+          installed, that is used instead. axe-core is optional: when it can
+          be found its contrast results are merged in, and the built-in
+          measurement works without it.
+        </p>
+
+        <Callout>
+          <strong className="text-foreground">Exit codes.</strong>{' '}
+          <C>0</C> nothing that fails the run, <C>1</C> at least one violation
+          (contrast, or right-to-left content cut off or overflowing),{' '}
+          <C>2</C> the audit could not run. Advisories never fail a run unless
+          you pass <C>--strict</C>. Nothing is uploaded: the page is loaded by
+          a browser on your machine.
+        </Callout>
+
+        <p>
+          It reports what it measured and says what it did not: text over
+          images and gradients, hover and focus states, pages behind a login,
+          and real Arabic or Hebrew copy are outside what one rendering can
+          show.
+        </p>
       </DocsSection>
 
       <DocsSection id="options" title="Options">

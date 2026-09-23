@@ -5,20 +5,24 @@
  *  - Shows the user's email + name (if logged in).
  *  - Plan and upgrade options, and the landing spot for Polar's
  *    post-checkout redirect (see <UpgradePanel>).
+ *  - A link to /account/billing (orders, receipts, the billing portal).
  *  - "Sign out" button, which returns to the landing page.
+ *  - "Your data": download everything held about the account, or delete it.
  *  - If not logged in, prompts to sign in / sign up.
  */
 
 import * as React from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { Loader2, LogOut, Heart, Package, FolderOpen, ArrowRight } from 'lucide-react'
+import { Loader2, LogOut, Heart, Package, FolderOpen, ArrowRight, Receipt } from 'lucide-react'
 import { toast } from 'sonner'
 
 import { useAuth } from '@/components/auth-provider'
 import { SiteHeader } from '@/components/site-header'
 import { useFavorites } from '@/hooks/use-favorites'
 import { useBundle } from '@/hooks/use-bundle'
+import { useEntitlements } from '@/hooks/use-entitlements'
+import { FirstRunChecklist } from '@/components/onboarding'
 import { UpgradePanel } from '@/components/billing/upgrade-panel'
 import { LicenseCertificate } from '@/components/license/license-certificate'
 import { LicenseKeyCard } from '@/components/billing/license-key-card'
@@ -26,6 +30,7 @@ import { WorkspaceCard } from '@/components/billing/workspace-card'
 import { CreditsCard } from '@/components/billing/credits-card'
 import { SavedToolPresets } from '@/components/account/saved-tool-presets'
 import { PasskeysCard } from '@/components/account/passkeys-card'
+import { YourDataCard } from '@/components/account/your-data-card'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 
@@ -33,6 +38,9 @@ export default function AccountPage() {
   const { user, loading, logout } = useAuth()
   const { count: favCount } = useFavorites()
   const { count: bundleCount } = useBundle()
+  // Shared with <UpgradePanel>: one module-level cache per user, so this is
+  // a read of what is already loaded, not a second request.
+  const { entitlements } = useEntitlements()
   const router = useRouter()
   const [signingOut, setSigningOut] = React.useState(false)
 
@@ -133,6 +141,26 @@ export default function AccountPage() {
           </div>
         </div>
 
+        {/*
+          What to do next, for an account that has not done much yet.
+
+          Only mounted once the plan is known: whether a step about Pro
+          applies depends on it, and "unknown" must not be drawn as "free".
+          The passkey, licence-key and collection steps are left out on
+          purpose — those cards keep their state to themselves, and the
+          component omits a step whose input it was not given rather than
+          showing it as pending. See components/onboarding.
+        */}
+        {entitlements ? (
+          <FirstRunChecklist
+            className="mt-8"
+            userId={user.id}
+            favoriteCount={favCount}
+            bundleCount={bundleCount}
+            hasPro={entitlements.canUseProFeatures}
+          />
+        ) : null}
+
         <div className="mt-8 grid gap-4 sm:grid-cols-2">
           <Card className="border-border/60">
             <CardHeader>
@@ -223,6 +251,29 @@ export default function AccountPage() {
             account — see the component. */}
         <LicenseKeyCard className="mt-6" />
 
+        {/*
+          Receipts and the billing portal live on their own page. A link
+          rather than a card, and shown to everyone: the page itself says
+          "no purchases yet" or "billing isn't set up", so this row never
+          has to know — which would cost this page a request to find out.
+        */}
+        <Link
+          href="/account/billing"
+          className="group mt-6 flex items-center gap-3 rounded-xl border border-border/60 bg-card/60 p-4 transition-colors hover:border-border hover:bg-card"
+        >
+          <Receipt aria-hidden className="h-5 w-5 shrink-0 text-primary" />
+          <span className="min-w-0 flex-1">
+            <span className="block text-sm font-medium">Billing and receipts</span>
+            <span className="block text-sm text-muted-foreground">
+              What you have bought, invoices, and managing a subscription.
+            </span>
+          </span>
+          <ArrowRight
+            aria-hidden
+            className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 rtl:rotate-180 rtl:group-hover:-translate-x-0.5"
+          />
+        </Link>
+
         {/* Under the licence, because Pro+ is an add-on to whichever tier you
             hold rather than a rung of its own. */}
         <CreditsCard />
@@ -279,6 +330,14 @@ export default function AccountPage() {
             </Button>
           </CardContent>
         </Card>
+
+        {/*
+          Last, below Session: the two things on this page that end or copy
+          out the whole account, kept apart from everything you use daily.
+        */}
+        <div className="mt-6">
+          <YourDataCard />
+        </div>
       </main>
     </div>
   )

@@ -116,7 +116,7 @@ export function PermissionScopeDialog({
           <span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-primary/10 text-primary">
             <KeyRound aria-hidden className="h-5 w-5" />
           </span>
-          <h3 id={headingId} className="mt-3 text-base font-semibold">
+          <h3 id={headingId} data-stress-ignore className="mt-3 text-base font-semibold">
             Give {agentName} access
           </h3>
           <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{purpose}</p>
@@ -125,7 +125,7 @@ export function PermissionScopeDialog({
         {/* Tall enough to show the write scopes without scrolling. A cap
             that hides them defeats the block: "writes are off by default"
             is only reassuring if you can see the writes. */}
-        <div className="max-h-[32rem] space-y-5 overflow-y-auto px-5 py-4">
+        <div className="max-h-[64rem] space-y-5 overflow-y-auto px-5 py-4">
           <ScopeGroup
             icon={<Eye aria-hidden className="h-3.5 w-3.5" />}
             title="Can see"
@@ -279,11 +279,11 @@ function ScopeGroup({
                   />
                   <span
                     aria-hidden
-                    className="block h-5 w-9 rounded-full bg-muted-foreground/30 transition-colors peer-checked:bg-primary peer-disabled:opacity-50"
+                    className="block h-5 w-9 rounded-full border border-transparent bg-muted-foreground/30 transition-colors peer-checked:bg-primary peer-disabled:opacity-50"
                   />
                   <span
                     aria-hidden
-                    className="absolute start-0.5 top-0.5 block h-4 w-4 rounded-full bg-background transition-transform peer-checked:translate-x-4 rtl:peer-checked:-translate-x-4"
+                    className="absolute start-0.5 top-0.5 block h-4 w-4 rounded-full border border-transparent bg-background transition-transform peer-checked:translate-x-4 rtl:peer-checked:-translate-x-4"
                   />
                 </span>
               </label>

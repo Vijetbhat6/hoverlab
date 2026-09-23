@@ -12,6 +12,7 @@ import { CATALOG_UPDATED_AT } from '@/lib/recency'
 import { AFFILIATE_PERCENT } from '@/lib/affiliate'
 import { MCP_ADD_COMMAND, MCP_TOOL_COUNT, MCP_WRITE_COUNT } from '@/lib/mcp-tools'
 import { absoluteUrl } from '@/lib/site'
+import { MIGRATE_INDEX, MIGRATION_GUIDES, guidePath } from '@/lib/migration/guides'
 
 
 /**
@@ -106,6 +107,8 @@ ${link('Editor extension', '/docs/editor', 'VS Code, Cursor and Windsurf: a side
 ${link('Agent skills', '/docs/skills', 'Packaged skill files that teach an agent this catalog\'s conventions')}
 ${link('shadcn registry', '/registry.json', 'Registry index under the `@hoverlab` namespace. Supports shadcn dynamic search: `?q=hero`, `&type=`, `&limit=`, `&offset=`. Bare URL returns the complete index')}
 ${link('Registry docs', '/docs/registry', 'How to wire `@hoverlab` into components.json and install with the shadcn CLI')}
+${link('Migrating an existing project', MIGRATE_INDEX.path, 'Three guides for a project that already runs: adopting Hoverlab, moving design tokens onto it, and keeping installed files up to date')}
+${MIGRATION_GUIDES.map((guide) => link(guide.title, guidePath(guide.slug), guide.description)).join('\n')}
 
 ## Machine-readable endpoints
 

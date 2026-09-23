@@ -29,7 +29,7 @@ const VARIANTS: Record<Variant, string> = {
   secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
   outline: 'border border-border bg-background hover:bg-muted/60 text-foreground',
   ghost: 'text-foreground hover:bg-muted/70',
-  destructive: 'bg-destructive text-white hover:bg-destructive/90 shadow-sm',
+  destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/90 shadow-sm',
   link: 'text-primary underline-offset-4 hover:underline',
 }
 

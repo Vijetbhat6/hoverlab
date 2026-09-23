@@ -160,29 +160,29 @@ export function RefundsOverviewTable({
         </header>
 
         {/* Three numbers, and they are the three that matter. */}
-        <dl className="mt-5 grid grid-cols-1 gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-3">
-          <div className="bg-card p-4">
+        <dl className="mt-5 grid grid-cols-1 gap-px overflow-hidden rounded-xl border border-border bg-border md:grid-cols-3">
+          <div className="min-w-0 bg-card p-4">
             <dt className="flex items-center gap-1.5 text-xs font-medium uppercase tracking-wide text-muted-foreground">
-              <Banknote aria-hidden className="h-3.5 w-3.5" />
+              <Banknote aria-hidden className="h-3.5 w-3.5 shrink-0" />
               Released this period
             </dt>
-            <dd className="mt-1.5 text-xl font-bold tracking-tight">{money(released)}</dd>
+            <dd className="mt-1.5 break-words text-xl font-bold tracking-tight">{money(released)}</dd>
           </div>
-          <div className="bg-card p-4">
+          <div className="min-w-0 bg-card p-4">
             <dt className="flex items-center gap-1.5 text-xs font-medium uppercase tracking-wide text-muted-foreground">
-              <Clock aria-hidden className="h-3.5 w-3.5" />
+              <Clock aria-hidden className="h-3.5 w-3.5 shrink-0" />
               Past {promiseDays} days
             </dt>
-            <dd className="mt-1.5 text-xl font-bold tracking-tight text-destructive">
+            <dd className="mt-1.5 break-words text-xl font-bold tracking-tight text-destructive">
               {breaching.length}
             </dd>
           </div>
-          <div className="bg-card p-4">
+          <div className="min-w-0 bg-card p-4">
             <dt className="flex items-center gap-1.5 text-xs font-medium uppercase tracking-wide text-muted-foreground">
-              <AlertTriangle aria-hidden className="h-3.5 w-3.5" />
+              <AlertTriangle aria-hidden className="h-3.5 w-3.5 shrink-0" />
               Blocked on us
             </dt>
-            <dd className="mt-1.5 text-xl font-bold tracking-tight">{blocked.length}</dd>
+            <dd className="mt-1.5 break-words text-xl font-bold tracking-tight">{blocked.length}</dd>
           </div>
         </dl>
 

@@ -220,8 +220,8 @@ export function WarrantyCoveragePanel({
 
         {/* Equal weight, deliberately. */}
         <div className="mt-6 grid gap-4 sm:grid-cols-2">
-          <div className="rounded-xl border border-border bg-card p-4">
-            <h3 className="text-sm font-semibold">Covered</h3>
+          <div className="min-w-0 rounded-xl border border-border bg-card p-4">
+            <h3 data-stress-ignore className="text-sm font-semibold">Covered</h3>
             <ul className="mt-3 space-y-2">
               {covered.map((item) => (
                 <li key={item} className="flex gap-2 text-sm text-muted-foreground">
@@ -229,19 +229,19 @@ export function WarrantyCoveragePanel({
                     aria-hidden
                     className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600 dark:text-emerald-400"
                   />
-                  {item}
+                  <span className="min-w-0 flex-1 break-words">{item}</span>
                 </li>
               ))}
             </ul>
           </div>
 
-          <div className="rounded-xl border border-border bg-card p-4">
-            <h3 className="text-sm font-semibold">Not covered</h3>
+          <div className="min-w-0 rounded-xl border border-border bg-card p-4">
+            <h3 data-stress-ignore className="text-sm font-semibold">Not covered</h3>
             <ul className="mt-3 space-y-2">
               {excluded.map((item) => (
                 <li key={item} className="flex gap-2 text-sm text-muted-foreground">
                   <CircleX aria-hidden className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground" />
-                  {item}
+                  <span className="min-w-0 flex-1 break-words">{item}</span>
                 </li>
               ))}
             </ul>

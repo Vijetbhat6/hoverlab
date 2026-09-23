@@ -1,0 +1,604 @@
+<!--
+ISC License
+
+Copyright (c) for portions of Lucide are held by Cole Bemis 2013-2022 as part of Feather (MIT). All other copyright (c) for Lucide are held by Lucide Contributors 2022.
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted, provided that the above
+copyright notice and this permission notice appear in all copies.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" width="784" height="184" viewBox="0 0 784 184" id="Lucide icons / Connectivity" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <g id="airplay" transform="translate(0 0)">
+    <rect id="airplay bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1" />
+    <path d="m12 15 5 6H7Z" />
+  </g>
+  <g id="battery" transform="translate(40 0)">
+    <rect id="battery bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M 22 14 L 22 10" />
+    <rect x="2" y="6" width="16" height="12" rx="2" />
+  </g>
+  <g id="battery-charging" transform="translate(80 0)">
+    <rect id="battery-charging bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m11 7-3 5h4l-3 5" />
+    <path d="M14.856 6H16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.935" />
+    <path d="M22 14v-4" />
+    <path d="M5.14 18H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h2.936" />
+  </g>
+  <g id="battery-full" transform="translate(120 0)">
+    <rect id="battery-full bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M10 10v4" />
+    <path d="M14 10v4" />
+    <path d="M22 14v-4" />
+    <path d="M6 10v4" />
+    <rect x="2" y="6" width="16" height="12" rx="2" />
+  </g>
+  <g id="battery-low" transform="translate(160 0)">
+    <rect id="battery-low bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M22 14v-4" />
+    <path d="M6 14v-4" />
+    <rect x="2" y="6" width="16" height="12" rx="2" />
+  </g>
+  <g id="battery-medium" transform="translate(200 0)">
+    <rect id="battery-medium bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M10 14v-4" />
+    <path d="M22 14v-4" />
+    <path d="M6 14v-4" />
+    <rect x="2" y="6" width="16" height="12" rx="2" />
+  </g>
+  <g id="battery-warning" transform="translate(240 0)">
+    <rect id="battery-warning bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M10 17h.01" />
+    <path d="M10 7v6" />
+    <path d="M14 6h2a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2" />
+    <path d="M22 14v-4" />
+    <path d="M6 18H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h2" />
+  </g>
+  <g id="bluetooth" transform="translate(280 0)">
+    <rect id="bluetooth bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m7 7 10 10-5 5V2l5 5L7 17" />
+  </g>
+  <g id="bluetooth-connected" transform="translate(320 0)">
+    <rect id="bluetooth-connected bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m7 7 10 10-5 5V2l5 5L7 17" />
+    <line x1="18" x2="21" y1="12" y2="12" />
+    <line x1="3" x2="6" y1="12" y2="12" />
+  </g>
+  <g id="bluetooth-off" transform="translate(360 0)">
+    <rect id="bluetooth-off bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m17 17-5 5V12l-5 5" />
+    <path d="m2 2 20 20" />
+    <path d="M14.5 9.5 17 7l-5-5v4.5" />
+  </g>
+  <g id="bluetooth-searching" transform="translate(400 0)">
+    <rect id="bluetooth-searching bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m7 7 10 10-5 5V2l5 5L7 17" />
+    <path d="M20.83 14.83a4 4 0 0 0 0-5.66" />
+    <path d="M18 12h.01" />
+  </g>
+  <g id="book-user" transform="translate(440 0)">
+    <rect id="book-user bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M15 13a3 3 0 1 0-6 0" />
+    <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20" />
+    <circle cx="12" cy="8" r="2" />
+  </g>
+  <g id="brick-wall-fire" transform="translate(480 0)">
+    <rect id="brick-wall-fire bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M16 3v2.107" />
+    <path d="M17 9c1 3 2.5 3.5 3.5 4.5A5 5 0 0 1 22 17a5 5 0 0 1-10 0c0-.3 0-.6.1-.9a2 2 0 1 0 3.3-2C13 11.5 16 9 17 9" />
+    <path d="M21 8.274V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3.938" />
+    <path d="M3 15h5.253" />
+    <path d="M3 9h8.228" />
+    <path d="M8 15v6" />
+    <path d="M8 3v6" />
+  </g>
+  <g id="cable" transform="translate(520 0)">
+    <rect id="cable bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M17 21v-2a1 1 0 0 1-1-1v-1a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v1a1 1 0 0 1-1 1" />
+    <path d="M19 15V6.5a1 1 0 0 0-7 0v11a1 1 0 0 1-7 0V9" />
+    <path d="M21 21v-2h-4" />
+    <path d="M3 5h4V3" />
+    <path d="M7 5a1 1 0 0 1 1 1v1a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a1 1 0 0 1 1-1V3" />
+  </g>
+  <g id="card-sim" transform="translate(560 0)">
+    <rect id="card-sim bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 14v4" />
+    <path d="M14.172 2a2 2 0 0 1 1.414.586l3.828 3.828A2 2 0 0 1 20 7.828V20a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" />
+    <path d="M8 14h8" />
+    <rect x="8" y="10" width="8" height="8" rx="1" />
+  </g>
+  <g id="cassette-tape" transform="translate(600 0)">
+    <rect id="cassette-tape bounds" width="24" height="24" fill="none" stroke="none" />
+    <rect width="20" height="16" x="2" y="4" rx="2" />
+    <circle cx="8" cy="10" r="2" />
+    <path d="M8 12h8" />
+    <circle cx="16" cy="10" r="2" />
+    <path d="m6 20 .7-2.9A1.4 1.4 0 0 1 8.1 16h7.8a1.4 1.4 0 0 1 1.4 1l.7 3" />
+  </g>
+  <g id="cast" transform="translate(640 0)">
+    <rect id="cast bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M2 8V6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-6" />
+    <path d="M2 12a9 9 0 0 1 8 8" />
+    <path d="M2 16a5 5 0 0 1 4 4" />
+    <line x1="2" x2="2.01" y1="20" y2="20" />
+  </g>
+  <g id="cctv" transform="translate(680 0)">
+    <rect id="cctv bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M16.75 12h3.632a1 1 0 0 1 .894 1.447l-2.034 4.069a1 1 0 0 1-1.708.134l-2.124-2.97" />
+    <path d="M17.106 9.053a1 1 0 0 1 .447 1.341l-3.106 6.211a1 1 0 0 1-1.342.447L3.61 12.3a2.92 2.92 0 0 1-1.3-3.91L3.69 5.6a2.92 2.92 0 0 1 3.92-1.3z" />
+    <path d="M2 19h3.76a2 2 0 0 0 1.8-1.1L9 15" />
+    <path d="M2 21v-4" />
+    <path d="M7 9h.01" />
+  </g>
+  <g id="circle-power" transform="translate(720 0)">
+    <rect id="circle-power bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 7v4" />
+    <path d="M7.998 9.003a5 5 0 1 0 8-.005" />
+    <circle cx="12" cy="12" r="10" />
+  </g>
+  <g id="cloud-off" transform="translate(760 0)">
+    <rect id="cloud-off bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m2 2 20 20" />
+    <path d="M5.782 5.782A7 7 0 0 0 9 19h8.5a4.5 4.5 0 0 0 1.307-.193" />
+    <path d="M21.532 16.5A4.5 4.5 0 0 0 17.5 10h-1.79A7.008 7.008 0 0 0 10 5.07" />
+  </g>
+  <g id="contact" transform="translate(0 40)">
+    <rect id="contact bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M16 2v2" />
+    <path d="M7 22v-2a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v2" />
+    <path d="M8 2v2" />
+    <circle cx="12" cy="11" r="3" />
+    <rect x="3" y="4" width="18" height="18" rx="2" />
+  </g>
+  <g id="contact-round" transform="translate(40 40)">
+    <rect id="contact-round bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M16 2v2" />
+    <path d="M17.915 22a6 6 0 0 0-12 0" />
+    <path d="M8 2v2" />
+    <circle cx="12" cy="12" r="4" />
+    <rect x="3" y="4" width="18" height="18" rx="2" />
+  </g>
+  <g id="headphone-off" transform="translate(80 40)">
+    <rect id="headphone-off bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M21 14h-1.343" />
+    <path d="M9.128 3.47A9 9 0 0 1 21 12v3.343" />
+    <path d="m2 2 20 20" />
+    <path d="M20.414 20.414A2 2 0 0 1 19 21h-1a2 2 0 0 1-2-2v-3" />
+    <path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 2.636-6.364" />
+  </g>
+  <g id="headphones" transform="translate(120 40)">
+    <rect id="headphones bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3" />
+  </g>
+  <g id="headset" transform="translate(160 40)">
+    <rect id="headset bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M3 11h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-5Zm0 0a9 9 0 1 1 18 0m0 0v5a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3Z" />
+    <path d="M21 16v2a4 4 0 0 1-4 4h-5" />
+  </g>
+  <g id="house-wifi" transform="translate(200 40)">
+    <rect id="house-wifi bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M9.5 13.866a4 4 0 0 1 5 .01" />
+    <path d="M12 17h.01" />
+    <path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+    <path d="M7 10.754a8 8 0 0 1 10 0" />
+  </g>
+  <g id="mic" transform="translate(240 40)">
+    <rect id="mic bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 19v3" />
+    <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+    <rect x="9" y="2" width="6" height="13" rx="3" />
+  </g>
+  <g id="mic-off" transform="translate(280 40)">
+    <rect id="mic-off bounds" width="24" height="24" fill="none" stroke="none" />
+    <line x1="2" x2="22" y1="2" y2="22" />
+    <path d="M18.89 13.23A7.12 7.12 0 0 0 19 12v-2" />
+    <path d="M5 10v2a7 7 0 0 0 12 5" />
+    <path d="M15 9.34V5a3 3 0 0 0-5.68-1.33" />
+    <path d="M9 9v3a3 3 0 0 0 5.12 2.12" />
+    <line x1="12" x2="12" y1="19" y2="22" />
+  </g>
+  <g id="monitor" transform="translate(320 40)">
+    <rect id="monitor bounds" width="24" height="24" fill="none" stroke="none" />
+    <rect width="20" height="14" x="2" y="3" rx="2" />
+    <line x1="8" x2="16" y1="21" y2="21" />
+    <line x1="12" x2="12" y1="17" y2="21" />
+  </g>
+  <g id="monitor-check" transform="translate(360 40)">
+    <rect id="monitor-check bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m9 10 2 2 4-4" />
+    <rect width="20" height="14" x="2" y="3" rx="2" />
+    <path d="M12 17v4" />
+    <path d="M8 21h8" />
+  </g>
+  <g id="monitor-cog" transform="translate(400 40)">
+    <rect id="monitor-cog bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 17v4" />
+    <path d="m14.305 7.53.923-.382" />
+    <path d="m15.228 4.852-.923-.383" />
+    <path d="m16.852 3.228-.383-.924" />
+    <path d="m16.852 8.772-.383.923" />
+    <path d="m19.148 3.228.383-.924" />
+    <path d="m19.53 9.696-.382-.924" />
+    <path d="m20.772 4.852.924-.383" />
+    <path d="m20.772 7.148.924.383" />
+    <path d="M22 13v2a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7" />
+    <path d="M8 21h8" />
+    <circle cx="18" cy="6" r="3" />
+  </g>
+  <g id="monitor-dot" transform="translate(440 40)">
+    <rect id="monitor-dot bounds" width="24" height="24" fill="none" stroke="none" />
+    <circle cx="19" cy="6" r="3" />
+    <path d="M22 12v3a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9" />
+    <path d="M12 17v4" />
+    <path d="M8 21h8" />
+  </g>
+  <g id="monitor-down" transform="translate(480 40)">
+    <rect id="monitor-down bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 13V7" />
+    <path d="m15 10-3 3-3-3" />
+    <rect width="20" height="14" x="2" y="3" rx="2" />
+    <path d="M12 17v4" />
+    <path d="M8 21h8" />
+  </g>
+  <g id="monitor-off" transform="translate(520 40)">
+    <rect id="monitor-off bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M17 17H4a2 2 0 0 1-2-2V5c0-1.5 1-2 1-2" />
+    <path d="M22 15V5a2 2 0 0 0-2-2H9" />
+    <path d="M8 21h8" />
+    <path d="M12 17v4" />
+    <path d="m2 2 20 20" />
+  </g>
+  <g id="monitor-pause" transform="translate(560 40)">
+    <rect id="monitor-pause bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M10 13V7" />
+    <path d="M14 13V7" />
+    <rect width="20" height="14" x="2" y="3" rx="2" />
+    <path d="M12 17v4" />
+    <path d="M8 21h8" />
+  </g>
+  <g id="monitor-play" transform="translate(600 40)">
+    <rect id="monitor-play bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M10 7.75a.75.75 0 0 1 1.142-.638l3.664 2.249a.75.75 0 0 1 0 1.278l-3.664 2.25a.75.75 0 0 1-1.142-.64z" />
+    <path d="M12 17v4" />
+    <path d="M8 21h8" />
+    <rect x="2" y="3" width="20" height="14" rx="2" />
+  </g>
+  <g id="monitor-smartphone" transform="translate(640 40)">
+    <rect id="monitor-smartphone bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M18 8V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h8" />
+    <path d="M10 19v-3.96 3.15" />
+    <path d="M7 19h5" />
+    <rect width="6" height="10" x="16" y="12" rx="2" />
+  </g>
+  <g id="monitor-speaker" transform="translate(680 40)">
+    <rect id="monitor-speaker bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M5.5 20H8" />
+    <path d="M17 9h.01" />
+    <rect width="10" height="16" x="12" y="4" rx="2" />
+    <path d="M8 6H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h4" />
+    <circle cx="17" cy="15" r="1" />
+  </g>
+  <g id="monitor-stop" transform="translate(720 40)">
+    <rect id="monitor-stop bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 17v4" />
+    <path d="M8 21h8" />
+    <rect x="2" y="3" width="20" height="14" rx="2" />
+    <rect x="9" y="7" width="6" height="6" rx="1" />
+  </g>
+  <g id="monitor-up" transform="translate(760 40)">
+    <rect id="monitor-up bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m9 10 3-3 3 3" />
+    <path d="M12 13V7" />
+    <rect width="20" height="14" x="2" y="3" rx="2" />
+    <path d="M12 17v4" />
+    <path d="M8 21h8" />
+  </g>
+  <g id="monitor-x" transform="translate(0 80)">
+    <rect id="monitor-x bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m14.5 12.5-5-5" />
+    <path d="m9.5 12.5 5-5" />
+    <rect width="20" height="14" x="2" y="3" rx="2" />
+    <path d="M12 17v4" />
+    <path d="M8 21h8" />
+  </g>
+  <g id="phone" transform="translate(40 80)">
+    <rect id="phone bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384" />
+  </g>
+  <g id="phone-call" transform="translate(80 80)">
+    <rect id="phone-call bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M13 2a9 9 0 0 1 9 9" />
+    <path d="M13 6a5 5 0 0 1 5 5" />
+    <path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384" />
+  </g>
+  <g id="phone-forwarded" transform="translate(120 80)">
+    <rect id="phone-forwarded bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M14 6h8" />
+    <path d="m18 2 4 4-4 4" />
+    <path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384" />
+  </g>
+  <g id="phone-incoming" transform="translate(160 80)">
+    <rect id="phone-incoming bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M16 2v6h6" />
+    <path d="m22 2-6 6" />
+    <path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384" />
+  </g>
+  <g id="phone-missed" transform="translate(200 80)">
+    <rect id="phone-missed bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m16 2 6 6" />
+    <path d="m22 2-6 6" />
+    <path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384" />
+  </g>
+  <g id="phone-off" transform="translate(240 80)">
+    <rect id="phone-off bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M10.1 13.9a14 14 0 0 0 3.732 2.668 1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2 18 18 0 0 1-12.728-5.272" />
+    <path d="M22 2 2 22" />
+    <path d="M4.76 13.582A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 .244.473" />
+  </g>
+  <g id="phone-outgoing" transform="translate(280 80)">
+    <rect id="phone-outgoing bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m16 8 6-6" />
+    <path d="M22 8V2h-6" />
+    <path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384" />
+  </g>
+  <g id="power" transform="translate(320 80)">
+    <rect id="power bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 2v10" />
+    <path d="M18.4 6.6a9 9 0 1 1-12.77.04" />
+  </g>
+  <g id="power-off" transform="translate(360 80)">
+    <rect id="power-off bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M18.36 6.64A9 9 0 0 1 20.77 15" />
+    <path d="M6.16 6.16a9 9 0 1 0 12.68 12.68" />
+    <path d="M12 2v4" />
+    <path d="m2 2 20 20" />
+  </g>
+  <g id="rectangle-goggles" transform="translate(400 80)">
+    <rect id="rectangle-goggles bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M20 6a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-4a2 2 0 0 1-1.6-.8l-1.6-2.13a1 1 0 0 0-1.6 0L9.6 17.2A2 2 0 0 1 8 18H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z" />
+  </g>
+  <g id="router" transform="translate(440 80)">
+    <rect id="router bounds" width="24" height="24" fill="none" stroke="none" />
+    <rect width="20" height="8" x="2" y="14" rx="2" />
+    <path d="M6.01 18H6" />
+    <path d="M10.01 18H10" />
+    <path d="M15 10v4" />
+    <path d="M17.84 7.17a4 4 0 0 0-5.66 0" />
+    <path d="M20.66 4.34a8 8 0 0 0-11.31 0" />
+  </g>
+  <g id="satellite" transform="translate(480 80)">
+    <rect id="satellite bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m13.5 6.5-3.148-3.148a1.205 1.205 0 0 0-1.704 0L6.352 5.648a1.205 1.205 0 0 0 0 1.704L9.5 10.5" />
+    <path d="M16.5 7.5 19 5" />
+    <path d="m17.5 10.5 3.148 3.148a1.205 1.205 0 0 1 0 1.704l-2.296 2.296a1.205 1.205 0 0 1-1.704 0L13.5 14.5" />
+    <path d="M9 21a6 6 0 0 0-6-6" />
+    <path d="M9.352 10.648a1.205 1.205 0 0 0 0 1.704l2.296 2.296a1.205 1.205 0 0 0 1.704 0l4.296-4.296a1.205 1.205 0 0 0 0-1.704l-2.296-2.296a1.205 1.205 0 0 0-1.704 0z" />
+  </g>
+  <g id="satellite-dish" transform="translate(520 80)">
+    <rect id="satellite-dish bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M4 10a7.31 7.31 0 0 0 10 10Z" />
+    <path d="m9 15 3-3" />
+    <path d="M17 13a6 6 0 0 0-6-6" />
+    <path d="M21 13A10 10 0 0 0 11 3" />
+  </g>
+  <g id="screen-share" transform="translate(560 80)">
+    <rect id="screen-share bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M13 3H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-3" />
+    <path d="M8 21h8" />
+    <path d="M12 17v4" />
+    <path d="m17 8 5-5" />
+    <path d="M17 3h5v5" />
+  </g>
+  <g id="screen-share-off" transform="translate(600 80)">
+    <rect id="screen-share-off bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M13 3H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-3" />
+    <path d="M8 21h8" />
+    <path d="M12 17v4" />
+    <path d="m22 3-5 5" />
+    <path d="m17 3 5 5" />
+  </g>
+  <g id="send" transform="translate(640 80)">
+    <rect id="send bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z" />
+    <path d="m21.854 2.147-10.94 10.939" />
+  </g>
+  <g id="send-horizontal" transform="translate(680 80)">
+    <rect id="send-horizontal bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M3.714 3.048a.498.498 0 0 0-.683.627l2.843 7.627a2 2 0 0 1 0 1.396l-2.842 7.627a.498.498 0 0 0 .682.627l18-8.5a.5.5 0 0 0 0-.904z" />
+    <path d="M6 12h16" />
+  </g>
+  <g id="signal" transform="translate(720 80)">
+    <rect id="signal bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M2 20h.01" />
+    <path d="M7 20v-4" />
+    <path d="M12 20v-8" />
+    <path d="M17 20V8" />
+    <path d="M22 4v16" />
+  </g>
+  <g id="signal-high" transform="translate(760 80)">
+    <rect id="signal-high bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M2 20h.01" />
+    <path d="M7 20v-4" />
+    <path d="M12 20v-8" />
+    <path d="M17 20V8" />
+  </g>
+  <g id="signal-low" transform="translate(0 120)">
+    <rect id="signal-low bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M2 20h.01" />
+    <path d="M7 20v-4" />
+  </g>
+  <g id="signal-medium" transform="translate(40 120)">
+    <rect id="signal-medium bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M2 20h.01" />
+    <path d="M7 20v-4" />
+    <path d="M12 20v-8" />
+  </g>
+  <g id="signal-zero" transform="translate(80 120)">
+    <rect id="signal-zero bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M2 20h.01" />
+  </g>
+  <g id="smartphone" transform="translate(120 120)">
+    <rect id="smartphone bounds" width="24" height="24" fill="none" stroke="none" />
+    <rect width="14" height="20" x="5" y="2" rx="2" ry="2" />
+    <path d="M12 18h.01" />
+  </g>
+  <g id="smartphone-charging" transform="translate(160 120)">
+    <rect id="smartphone-charging bounds" width="24" height="24" fill="none" stroke="none" />
+    <rect width="14" height="20" x="5" y="2" rx="2" ry="2" />
+    <path d="M12.667 8 10 12h4l-2.667 4" />
+  </g>
+  <g id="square-power" transform="translate(200 120)">
+    <rect id="square-power bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 7v4" />
+    <path d="M7.998 9.003a5 5 0 1 0 8-.005" />
+    <rect x="3" y="3" width="18" height="18" rx="2" />
+  </g>
+  <g id="vibrate" transform="translate(240 120)">
+    <rect id="vibrate bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m2 8 2 2-2 2 2 2-2 2" />
+    <path d="m22 8-2 2 2 2-2 2 2 2" />
+    <rect width="8" height="14" x="8" y="5" rx="1" />
+  </g>
+  <g id="vibrate-off" transform="translate(280 120)">
+    <rect id="vibrate-off bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m2 8 2 2-2 2 2 2-2 2" />
+    <path d="m22 8-2 2 2 2-2 2 2 2" />
+    <path d="M8 8v10c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2" />
+    <path d="M16 10.34V6c0-.55-.45-1-1-1h-4.34" />
+    <line x1="2" x2="22" y1="2" y2="22" />
+  </g>
+  <g id="video" transform="translate(320 120)">
+    <rect id="video bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5" />
+    <rect x="2" y="6" width="14" height="12" rx="2" />
+  </g>
+  <g id="video-off" transform="translate(360 120)">
+    <rect id="video-off bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M10.66 6H14a2 2 0 0 1 2 2v2.5l5.248-3.062A.5.5 0 0 1 22 7.87v8.196" />
+    <path d="M16 16a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h2" />
+    <path d="m2 2 20 20" />
+  </g>
+  <g id="videotape" transform="translate(400 120)">
+    <rect id="videotape bounds" width="24" height="24" fill="none" stroke="none" />
+    <rect width="20" height="16" x="2" y="4" rx="2" />
+    <path d="M2 8h20" />
+    <circle cx="8" cy="14" r="2" />
+    <path d="M8 12h8" />
+    <circle cx="16" cy="14" r="2" />
+  </g>
+  <g id="voicemail" transform="translate(440 120)">
+    <rect id="voicemail bounds" width="24" height="24" fill="none" stroke="none" />
+    <circle cx="6" cy="12" r="4" />
+    <circle cx="18" cy="12" r="4" />
+    <line x1="6" x2="18" y1="16" y2="16" />
+  </g>
+  <g id="volume" transform="translate(480 120)">
+    <rect id="volume bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z" />
+  </g>
+  <g id="volume-1" transform="translate(520 120)">
+    <rect id="volume-1 bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z" />
+    <path d="M16 9a5 5 0 0 1 0 6" />
+  </g>
+  <g id="volume-2" transform="translate(560 120)">
+    <rect id="volume-2 bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z" />
+    <path d="M16 9a5 5 0 0 1 0 6" />
+    <path d="M19.364 18.364a9 9 0 0 0 0-12.728" />
+  </g>
+  <g id="volume-off" transform="translate(600 120)">
+    <rect id="volume-off bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M16 9a5 5 0 0 1 .95 2.293" />
+    <path d="M19.364 5.636a9 9 0 0 1 1.889 9.96" />
+    <path d="m2 2 20 20" />
+    <path d="m7 7-.587.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298V11" />
+    <path d="M9.828 4.172A.686.686 0 0 1 11 4.657v.686" />
+  </g>
+  <g id="volume-x" transform="translate(640 120)">
+    <rect id="volume-x bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z" />
+    <line x1="22" x2="16" y1="9" y2="15" />
+    <line x1="16" x2="22" y1="9" y2="15" />
+  </g>
+  <g id="webcam" transform="translate(680 120)">
+    <rect id="webcam bounds" width="24" height="24" fill="none" stroke="none" />
+    <circle cx="12" cy="10" r="8" />
+    <circle cx="12" cy="10" r="3" />
+    <path d="M7 22h10" />
+    <path d="M12 22v-4" />
+  </g>
+  <g id="wifi" transform="translate(720 120)">
+    <rect id="wifi bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 20h.01" />
+    <path d="M2 8.82a15 15 0 0 1 20 0" />
+    <path d="M5 12.859a10 10 0 0 1 14 0" />
+    <path d="M8.5 16.429a5 5 0 0 1 7 0" />
+  </g>
+  <g id="wifi-cog" transform="translate(760 120)">
+    <rect id="wifi-cog bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m14.305 19.53.923-.382" />
+    <path d="m15.228 16.852-.923-.383" />
+    <path d="m16.852 15.228-.383-.923" />
+    <path d="m16.852 20.772-.383.924" />
+    <path d="m19.148 15.228.383-.923" />
+    <path d="m19.53 21.696-.382-.924" />
+    <path d="M2 7.82a15 15 0 0 1 20 0" />
+    <path d="m20.772 16.852.924-.383" />
+    <path d="m20.772 19.148.924.383" />
+    <path d="M5 11.858a10 10 0 0 1 11.5-1.785" />
+    <path d="M8.5 15.429a5 5 0 0 1 2.413-1.31" />
+    <circle cx="18" cy="18" r="3" />
+  </g>
+  <g id="wifi-high" transform="translate(0 160)">
+    <rect id="wifi-high bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 20h.01" />
+    <path d="M5 12.859a10 10 0 0 1 14 0" />
+    <path d="M8.5 16.429a5 5 0 0 1 7 0" />
+  </g>
+  <g id="wifi-low" transform="translate(40 160)">
+    <rect id="wifi-low bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 20h.01" />
+    <path d="M8.5 16.429a5 5 0 0 1 7 0" />
+  </g>
+  <g id="wifi-off" transform="translate(80 160)">
+    <rect id="wifi-off bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 20h.01" />
+    <path d="M8.5 16.429a5 5 0 0 1 7 0" />
+    <path d="M5 12.859a10 10 0 0 1 5.17-2.69" />
+    <path d="M19 12.859a10 10 0 0 0-2.007-1.523" />
+    <path d="M2 8.82a15 15 0 0 1 4.177-2.643" />
+    <path d="M22 8.82a15 15 0 0 0-11.288-3.764" />
+    <path d="m2 2 20 20" />
+  </g>
+  <g id="wifi-pen" transform="translate(120 160)">
+    <rect id="wifi-pen bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M2 8.82a15 15 0 0 1 20 0" />
+    <path d="M21.378 16.626a1 1 0 0 0-3.004-3.004l-4.01 4.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z" />
+    <path d="M5 12.859a10 10 0 0 1 10.5-2.222" />
+    <path d="M8.5 16.429a5 5 0 0 1 3-1.406" />
+  </g>
+  <g id="wifi-zero" transform="translate(160 160)">
+    <rect id="wifi-zero bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 20h.01" />
+  </g>
+  <g id="zap" transform="translate(200 160)">
+    <rect id="zap bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z" />
+  </g>
+  <g id="zap-off" transform="translate(240 160)">
+    <rect id="zap-off bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M10.513 4.856 13.12 2.17a.5.5 0 0 1 .86.46l-1.377 4.317" />
+    <path d="M15.656 10H20a1 1 0 0 1 .78 1.63l-1.72 1.773" />
+    <path d="M16.273 16.273 10.88 21.83a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14H4a1 1 0 0 1-.78-1.63l4.507-4.643" />
+    <path d="m2 2 20 20" />
+  </g>
+</svg>

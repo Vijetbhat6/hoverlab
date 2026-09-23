@@ -267,11 +267,11 @@ export function CrudCreateForm({
                     return (
                       <div
                         key={field.id}
-                        className={wide ? 'sm:col-span-2' : undefined}
+                        className={wide ? 'min-w-0 sm:col-span-2' : 'min-w-0'}
                       >
                         <label
                           htmlFor={fieldId(field.id)}
-                          className="block text-sm font-medium"
+                          className="block break-words text-sm font-medium"
                         >
                           {field.label}
                           {field.required ? (

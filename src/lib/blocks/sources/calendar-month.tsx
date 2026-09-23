@@ -89,7 +89,7 @@ export function CalendarMonth({ events = DEFAULT_EVENTS, className = '' }: Calen
         <ul className="flex items-center gap-3 text-xs text-muted-foreground sm:ms-4">
           {(Object.keys(CAL_STYLE) as CalendarId[]).map((id) => (
             <li key={id} className="flex items-center gap-1.5">
-              <span aria-hidden className={`h-2 w-2 rounded-full ${CAL_STYLE[id].dot}`} />
+              <span aria-hidden className={`h-2 w-2 rounded-full border border-transparent ${CAL_STYLE[id].dot}`} />
               {CAL_STYLE[id].label}
             </li>
           ))}
@@ -129,7 +129,7 @@ export function CalendarMonth({ events = DEFAULT_EVENTS, className = '' }: Calen
             <span
               key={weekday}
               role="columnheader"
-              className="bg-muted/60 px-2 py-2 text-center text-xs font-semibold text-muted-foreground"
+              className="min-w-0 truncate bg-muted/60 px-2 py-2 text-center text-xs font-semibold text-muted-foreground"
             >
               {weekday}
             </span>
@@ -158,7 +158,7 @@ export function CalendarMonth({ events = DEFAULT_EVENTS, className = '' }: Calen
                           ? 'font-bold ring-2 ring-primary'
                           : cell.inMonth
                             ? 'font-medium'
-                            : 'text-muted-foreground/60'
+                            : 'text-muted-foreground/85'
                       }`}
                     >
                       {cell.day}

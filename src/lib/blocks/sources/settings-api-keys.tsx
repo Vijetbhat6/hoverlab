@@ -171,8 +171,8 @@ export function SettingsApiKeys({
             </span>
 
             <div className="min-w-0 flex-1">
-              <p className="text-sm font-medium">{key.name}</p>
-              <p className="font-mono text-xs text-muted-foreground">
+              <p className="truncate text-sm font-medium">{key.name}</p>
+              <p className="truncate font-mono text-xs text-muted-foreground">
                 {key.prefix}
                 {'•'.repeat(12)}
                 {key.last4}

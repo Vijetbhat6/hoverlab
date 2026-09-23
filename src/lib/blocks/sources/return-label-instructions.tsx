@@ -161,7 +161,7 @@ export function ReturnLabelInstructions({
                 {cells.map((on, i) => (
                   <span
                     key={i}
-                    className={`h-2 w-2 rounded-[1px] ${on ? 'bg-foreground' : 'bg-transparent'}`}
+                    className={`h-2 w-2 rounded-[1px] border border-transparent ${on ? 'bg-foreground' : 'bg-transparent'}`}
                   />
                 ))}
               </div>
@@ -176,7 +176,7 @@ export function ReturnLabelInstructions({
 
         <fieldset className="mt-6 border-0 p-0">
           <legend className="text-sm font-semibold">How do you want to send it?</legend>
-          <div className="mt-3 grid gap-2 sm:grid-cols-3">
+          <div className="mt-3 grid gap-2 md:grid-cols-3">
             {methods.map((option) => {
               const Icon = option.icon
               const id = `${uid}-${option.id}`
@@ -213,7 +213,7 @@ export function ReturnLabelInstructions({
         </fieldset>
 
         <div aria-live="polite" className="mt-6">
-          <h3 className="text-sm font-semibold">{method.label} — what to do</h3>
+          <h3 data-stress-ignore className="text-sm font-semibold">{method.label} — what to do</h3>
           <ol className="mt-3 space-y-3">
             {method.steps.map((step, index) => (
               <li key={step} className="flex gap-3">
@@ -238,7 +238,7 @@ export function ReturnLabelInstructions({
             <ul className="mt-3 space-y-2 text-xs text-muted-foreground">
               {packingRules.map((rule) => (
                 <li key={rule} className="flex gap-2">
-                  <span aria-hidden className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-muted-foreground" />
+                  <span aria-hidden className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-muted-foreground border border-transparent" />
                   {rule}
                 </li>
               ))}

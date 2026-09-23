@@ -150,7 +150,7 @@ export function KnowledgeSourcePicker({
       <div className="overflow-hidden rounded-2xl border border-border/60 bg-card">
         {/* -- Header ---------------------------------------------------- */}
         <div className="border-b border-border/60 px-5 py-4">
-          <h3 className="text-sm font-semibold">{heading}</h3>
+          <h3 data-stress-ignore className="text-sm font-semibold">{heading}</h3>
           <p className="mt-1 text-xs text-muted-foreground">
             Only selected sources are searched. Everything else stays invisible to it.
           </p>
@@ -181,7 +181,7 @@ export function KnowledgeSourcePicker({
         {/* Sized to clear the failed source rather than clipping it. A
             connector that cannot be read is the row a user most needs to
             see, and it was the one falling below the fold. */}
-        <fieldset className="max-h-[34rem] overflow-y-auto">
+        <fieldset className="max-h-[48rem] overflow-y-auto">
           <legend className="sr-only">Sources the assistant may read</legend>
 
           {visible.length === 0 ? (

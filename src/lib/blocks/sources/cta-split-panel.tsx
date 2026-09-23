@@ -57,18 +57,18 @@ export function CtaSplitPanel({
         />
         <div
           aria-hidden
-          className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-primary/20 blur-3xl"
+          className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-primary/20 blur-3xl border border-transparent"
         />
 
         <div className="relative flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between lg:gap-16">
           <div className="max-w-xl">
-            <h2 className="text-balance text-3xl font-bold tracking-tight sm:text-4xl">
+            <h2 className="text-balance break-words text-3xl font-bold tracking-tight sm:text-4xl">
               {heading}
             </h2>
             <p className="mt-4 text-pretty text-muted-foreground">{supporting}</p>
           </div>
 
-          <div className="flex shrink-0 flex-col gap-3 sm:flex-row lg:flex-col xl:flex-row">
+          <div className="flex flex-wrap shrink-0 flex-col gap-3 sm:flex-row lg:flex-col xl:flex-row">
             <a
               href={primaryHref}
               className="inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"

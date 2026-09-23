@@ -1,0 +1,110 @@
+{
+  "generatedAt": "2026-09-22",
+  "primitives": 20,
+  "states": [
+    {
+      "id": "default",
+      "figmaName": "State=Default"
+    },
+    {
+      "id": "hover",
+      "figmaName": "State=Hover"
+    },
+    {
+      "id": "focus",
+      "figmaName": "State=Focus"
+    },
+    {
+      "id": "active",
+      "figmaName": "State=Active"
+    },
+    {
+      "id": "disabled",
+      "figmaName": "State=Disabled"
+    },
+    {
+      "id": "loading",
+      "figmaName": "State=Loading"
+    },
+    {
+      "id": "error",
+      "figmaName": "State=Error"
+    },
+    {
+      "id": "empty",
+      "figmaName": "State=Empty"
+    },
+    {
+      "id": "long-text",
+      "figmaName": "State=Long text"
+    }
+  ],
+  "note": "Variant-READY frames named Property=Value, not variants. Convert each frame to a component, select the row, Combine as Variants.",
+  "files": [
+    {
+      "category": "Actions",
+      "slug": "actions",
+      "file": "primitives-states-actions.svg",
+      "primitives": 3,
+      "bytes": 80840,
+      "ids": [
+        "button",
+        "button-group",
+        "social-buttons"
+      ]
+    },
+    {
+      "category": "Form Controls",
+      "slug": "form-controls",
+      "file": "primitives-states-form-controls.svg",
+      "primitives": 7,
+      "bytes": 102062,
+      "ids": [
+        "field",
+        "input-group",
+        "verification-code-input",
+        "stepper",
+        "kbd",
+        "switch",
+        "range-slider"
+      ]
+    },
+    {
+      "category": "Navigation & Steps",
+      "slug": "navigation-steps",
+      "file": "primitives-states-navigation-steps.svg",
+      "primitives": 1,
+      "bytes": 10328,
+      "ids": [
+        "progress-steps"
+      ]
+    },
+    {
+      "category": "Selection",
+      "slug": "selection",
+      "file": "primitives-states-selection.svg",
+      "primitives": 5,
+      "bytes": 158204,
+      "ids": [
+        "combobox",
+        "segmented-control",
+        "rating",
+        "emoji-selector",
+        "radio-card-group"
+      ]
+    },
+    {
+      "category": "Status & Labels",
+      "slug": "status-labels",
+      "file": "primitives-states-status-labels.svg",
+      "primitives": 4,
+      "bytes": 42368,
+      "ids": [
+        "badge",
+        "status-badge",
+        "tag-chip",
+        "skeleton"
+      ]
+    }
+  ]
+}

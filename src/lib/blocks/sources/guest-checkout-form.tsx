@@ -334,15 +334,17 @@ export function GuestCheckoutForm({
             </div>
           </form>
 
-          <aside className="hidden lg:sticky lg:top-6 lg:block lg:self-start">
+          <aside className="hidden min-w-0 lg:sticky lg:top-6 lg:block lg:self-start">
             <div className="rounded-xl border border-border bg-card p-4">
-              <h3 className="text-sm font-semibold">Order summary</h3>
+              <h3 data-stress-ignore className="text-sm font-semibold">
+                Order summary
+              </h3>
               <ul className="mt-3 space-y-2.5">
                 {lines.map((line) => (
                   <li key={line.id} className="flex justify-between gap-3 text-sm">
-                    <span className="min-w-0">
+                    <span className="min-w-0 flex-1">
                       <span className="block truncate">{line.name}</span>
-                      <span className="block text-xs text-muted-foreground">
+                      <span className="block truncate text-xs text-muted-foreground">
                         {line.variant} · ×{line.quantity}
                       </span>
                     </span>
@@ -354,16 +356,16 @@ export function GuestCheckoutForm({
               </ul>
               <dl className="mt-4 space-y-2 border-t border-border pt-3 text-sm">
                 <div className="flex justify-between gap-3">
-                  <dt className="text-muted-foreground">Goods</dt>
-                  <dd>{money(goods)}</dd>
+                  <dt className="min-w-0 break-words text-muted-foreground">Goods</dt>
+                  <dd className="shrink-0">{money(goods)}</dd>
                 </div>
                 <div className="flex justify-between gap-3">
-                  <dt className="text-muted-foreground">Delivery</dt>
-                  <dd>{money(delivery)}</dd>
+                  <dt className="min-w-0 break-words text-muted-foreground">Delivery</dt>
+                  <dd className="shrink-0">{money(delivery)}</dd>
                 </div>
                 <div className="flex justify-between gap-3 border-t border-border pt-2 text-base font-bold">
-                  <dt>Total</dt>
-                  <dd>{money(total)}</dd>
+                  <dt className="min-w-0 break-words">Total</dt>
+                  <dd className="shrink-0">{money(total)}</dd>
                 </div>
               </dl>
             </div>

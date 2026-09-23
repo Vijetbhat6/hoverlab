@@ -140,7 +140,7 @@ export function CrudCreateModal({
             >
               <span className="min-w-0">
                 <span className="block truncate font-medium">{row.name}</span>
-                <span className="block text-xs text-muted-foreground">
+                <span className="block truncate text-xs text-muted-foreground">
                   {row.id} · {row.owner}
                 </span>
               </span>
@@ -167,9 +167,11 @@ export function CrudCreateModal({
             <form onSubmit={create} className="p-5">
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <h3 id={`${uid}-title`} className="text-base font-semibold">
-                    {title}
-                  </h3>
+                  {title ? (
+                    <h3 id={`${uid}-title`} data-stress-ignore className="text-base font-semibold">
+                      {title}
+                    </h3>
+                  ) : null}
                   <p id={`${uid}-note`} className="mt-1 text-sm text-muted-foreground">
                     Three fields. A modal that scrolls should have been a drawer.
                   </p>

@@ -147,7 +147,7 @@ export function LineChartPanel({
       aria-labelledby={headingId(heading, description)}
       className={`mx-auto w-full max-w-4xl px-4 py-16 sm:px-6 lg:px-8 ${className}`}
     >
-      <div className="rounded-2xl border border-border bg-card p-6 sm:p-8">
+      <div className="relative rounded-2xl border border-border bg-card p-6 sm:p-8">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
             <h2 id={headingId(heading, description)} className="text-lg font-semibold text-foreground">
@@ -173,7 +173,7 @@ export function LineChartPanel({
           {/* Axis labels live outside the SVG so they render at real text
               size — text inside a non-uniformly scaled viewBox is stretched
               with it, which is the classic way this pattern goes wrong. */}
-          <ul className="flex w-14 shrink-0 flex-col justify-between py-0.5 text-end font-mono text-xs text-muted-foreground">
+          <ul className="flex min-w-14 shrink-0 flex-col justify-between py-0.5 text-end font-mono text-xs text-muted-foreground">
             {ticks.map((tick) => (
               <li key={tick}>{format(Math.round(tick))}</li>
             ))}
@@ -230,14 +230,14 @@ export function LineChartPanel({
               })}
             </svg>
 
-            <ul className="mt-2 flex justify-between font-mono text-xs text-muted-foreground">
+            <ul className="mt-2 flex justify-between gap-1 font-mono text-xs text-muted-foreground">
               {labels.map((label, i) =>
                 /* Every other label below `sm`, all of them above it —
                    twelve months in 320 pixels overlap into a smudge. */
                 i % 2 === 0 ? (
-                  <li key={label}>{label}</li>
+                  <li key={label} className="min-w-0 truncate">{label}</li>
                 ) : (
-                  <li key={label} className="hidden sm:block">
+                  <li key={label} className="hidden min-w-0 truncate sm:block">
                     {label}
                   </li>
                 ),

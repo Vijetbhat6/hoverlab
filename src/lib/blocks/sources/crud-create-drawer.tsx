@@ -24,8 +24,9 @@
  * depend on each other; use this when they are just long.
  *
  * WIDTH IS CAPPED. A drawer that covers the list defeats its own argument, so
- * it stops at 30rem and goes full-width only below `sm`, where the list is
- * not visible anyway.
+ * it stops at 30rem and goes full-width only below `md`, where the list is
+ * not visible anyway — `sm` (640px) is exactly wide enough for the drawer
+ * alone, leaving the list too little room for its own header row.
  *
  * ACCESSIBILITY: `role="dialog"` with `aria-modal="false"` — deliberately
  * non-modal, because the list behind stays readable and claiming modality
@@ -153,14 +154,18 @@ export function CrudCreateDrawer({
         if (event.key === 'Escape') setOpen(false)
       }}
     >
-      {/* The list is the reason this is a drawer and not a page. */}
-      <div className="hidden min-w-0 flex-1 sm:block">
-        <div className="flex items-center justify-between gap-3">
-          <h2 className="text-sm font-semibold">Assets</h2>
+      {/* The list is the reason this is a drawer and not a page. Held back
+          to `md`, not `sm`: at exactly 640px the drawer is already at its
+          full 30rem, and a 640px-wide list panel would get only the
+          scraps — too narrow for even its own "Assets"/"New" header row,
+          which then overflows into the drawer next to it. */}
+      <div className="hidden min-w-0 flex-1 md:block">
+        <div className="flex min-w-0 flex-wrap items-center justify-between gap-3">
+          <h2 className="min-w-0 truncate text-sm font-semibold">Assets</h2>
           <button
             type="button"
             onClick={() => setOpen(true)}
-            className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-card px-2.5 py-1.5 text-xs font-medium transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            className="inline-flex shrink-0 items-center gap-1.5 rounded-lg border border-border bg-card px-2.5 py-1.5 text-xs font-medium transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           >
             <Plus aria-hidden className="h-3.5 w-3.5" />
             New
@@ -184,7 +189,7 @@ export function CrudCreateDrawer({
           // Non-modal on purpose: the list stays usable behind it.
           aria-modal="false"
           aria-labelledby={`${uid}-heading`}
-          className="flex w-full flex-col rounded-xl border border-border bg-card text-card-foreground sm:w-[30rem] sm:shrink-0"
+          className="flex w-full flex-col rounded-xl border border-border bg-card text-card-foreground md:w-[30rem] md:max-w-full md:shrink-0"
         >
           <header className="flex items-start justify-between gap-3 border-b border-border p-4">
             <div>
@@ -296,7 +301,7 @@ export function CrudCreateDrawer({
                 } left: ${outstanding.map((f) => f.label).join(', ')}.`
               )}
             </p>
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2">
               <button
                 type="button"
                 onClick={() => setOpen(false)}
@@ -307,7 +312,7 @@ export function CrudCreateDrawer({
               <button
                 type="button"
                 disabled={outstanding.length > 0}
-                className="flex-1 rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90 disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-card"
+                className="min-w-0 flex-1 rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90 disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-card"
               >
                 Create asset
               </button>

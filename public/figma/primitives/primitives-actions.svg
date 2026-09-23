@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1216" height="930" viewBox="0 0 1216 930" id="Hoverlab — Actions">
+  <!--
+    Hoverlab — Actions. 3 controls, traced from the
+    rendered catalog. Drag this file onto a Figma canvas.
+
+    These are frames, not components: named, editable layers with real
+    geometry, colour and type. There are no variants, no auto-layout,
+    and no hover or motion — none of those exist in a static frame.
+
+    Every one of these is free to copy as code at https://hoverlab.dev/primitives
+  -->
+  <rect id="Background" x="0" y="0" width="1216" height="930" fill="#ffffff" />
+  <text id="Button label" x="64" y="84" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Button</text>
+  <text id="button id" x="64" y="98" font-family="ui-monospace, monospace" font-size="12" fill="#737373">button</text>
+  <g id="Button" transform="translate(64, 116)">
+    <rect id="container" x="0" y="0" width="1088" height="134" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="button" x="321.42" y="25" width="82.91" height="36" rx="12" fill="#00782e" />
+      <text id="Primary" x="362.88" y="48" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Primary</text>
+      <rect id="button 2" x="412.33" y="25" width="102.34" height="36" rx="12" fill="#f4f2ea" />
+      <text id="Secondary" x="463.5" y="48" fill="#13161a" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Secondary</text>
+      <rect id="button 3" x="522.67" y="25" width="81.78" height="36" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Outline" x="563.56" y="48" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Outline</text>
+      <text id="Ghost" x="647.97" y="48" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Ghost</text>
+      <rect id="button 4" x="691.48" y="25" width="75.08" height="36" rx="12" fill="#e7000b" />
+      <text id="Delete" x="729.02" y="48" fill="#ffffff" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Delete</text>
+      <rect id="button 5" x="419.44" y="75" width="96.34" height="32" rx="12" fill="#00782e" />
+      <text id="With icon" x="477.61" y="95" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500" text-anchor="middle">With icon</text>
+      <g id="icon sparkles" transform="translate(431.438 84) scale(0.583 0.583)" fill="none" stroke="#fcfcfc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z" />
+        <path d="M20 3v4" />
+        <path d="M22 5h-4" />
+        <path d="M4 17v2" />
+        <path d="M5 18H3" />
+      </g>
+      <rect id="button 6" x="523.78" y="73" width="100.77" height="36" rx="12" fill="#00782e" opacity="0.5" />
+      <text id="Saving" x="586.16" y="96" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Saving</text>
+      <g id="icon loader-circle" transform="translate(539.781 83) translate(8 8) matrix(-0.208 -0.978 0.978 -0.208 0 0) translate(-8 -8) scale(0.667 0.667)" fill="none" stroke="#fcfcfc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12a9 9 0 1 1-6.219-8.56" />
+      </g>
+      <rect id="button 7" x="632.55" y="73" width="36" height="36" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <g id="icon x" transform="translate(642.547 83) scale(0.667 0.667)" fill="none" stroke="#080c0f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 6 6 18" />
+        <path d="m6 6 12 12" />
+      </g>
+  </g>
+  <text id="Button Group label" x="64" y="366" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Button Group</text>
+  <text id="button-group id" x="64" y="380" font-family="ui-monospace, monospace" font-size="12" fill="#737373">button-group</text>
+  <g id="Button Group" transform="translate(64, 398)">
+    <rect id="container" x="0" y="0" width="1088" height="134" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="button" x="485" y="25" width="40" height="36" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <g id="icon bold" transform="translate(498 36) scale(0.583 0.583)" fill="none" stroke="#080c0f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6 12h9a4 4 0 0 1 0 8H7a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h7a4 4 0 0 1 0 8" />
+      </g>
+      <rect id="button 2" x="524" y="25" width="40" height="36" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <g id="icon italic" transform="translate(537 36) scale(0.583 0.583)" fill="none" stroke="#080c0f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="19" y1="4" x2="10" y2="4" />
+        <line x1="14" y1="20" x2="5" y2="20" />
+        <line x1="15" y1="4" x2="9" y2="20" />
+      </g>
+      <rect id="button 3" x="563" y="25" width="40" height="36" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <g id="icon underline" transform="translate(576 36) scale(0.583 0.583)" fill="none" stroke="#080c0f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6 4v6a6 6 0 0 0 12 0V4" />
+        <line x1="4" y1="20" x2="20" y2="20" />
+      </g>
+      <rect id="button 4" x="453.75" y="73" width="51.2" height="36" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Day" x="479.35" y="96" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Day</text>
+      <rect id="button 5" x="503.95" y="73" width="63.31" height="36" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Week" x="535.61" y="96" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Week</text>
+      <rect id="button 6" x="566.27" y="73" width="67.97" height="36" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Month" x="600.25" y="96" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Month</text>
+  </g>
+  <text id="Social &amp; Login Buttons label" x="64" y="648" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Social &amp; Login Buttons</text>
+  <text id="social-buttons id" x="64" y="662" font-family="ui-monospace, monospace" font-size="12" fill="#737373">social-buttons</text>
+  <g id="Social &amp; Login Buttons" transform="translate(64, 680)">
+    <rect id="container" x="0" y="0" width="1088" height="186" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="button" x="384" y="25" width="320" height="40" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Continue with" x="533.63" y="50" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Continue with</text>
+      <text id="Google" x="604.13" y="50" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Google</text>
+      <g id="icon" transform="translate(460.5 37) scale(0.667 0.667)" fill="#000000" stroke="none">
+        <path d="M23.06 12.25c0-.82-.07-1.6-.21-2.36H12v4.47h6.2a5.3 5.3 0 0 1-2.3 3.48v2.9h3.72c2.18-2 3.44-4.96 3.44-8.49Z" fill="#4285f4" />
+        <path d="M12 23.5c3.11 0 5.72-1.03 7.62-2.79l-3.72-2.89c-1.03.69-2.35 1.1-3.9 1.1-3 0-5.55-2.03-6.46-4.76H1.69v2.98A11.5 11.5 0 0 0 12 23.5Z" fill="#34a853" />
+        <path d="M5.54 14.16a6.9 6.9 0 0 1 0-4.32V6.86H1.69a11.5 11.5 0 0 0 0 10.28l3.85-2.98Z" fill="#fbbc05" />
+        <path d="M12 5.08c1.69 0 3.2.58 4.4 1.72l3.3-3.3C17.72 1.62 15.11.5 12 .5A11.5 11.5 0 0 0 1.69 6.86l3.85 2.98C6.45 7.11 9 5.08 12 5.08Z" fill="#ea4335" />
+      </g>
+      <rect id="button 2" x="384" y="73" width="320" height="40" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Continue with 2" x="534.55" y="98" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Continue with</text>
+      <text id="GitHub" x="604.13" y="98" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">GitHub</text>
+      <g id="icon 2" transform="translate(461.422 85) scale(0.667 0.667)" fill="#080c0f" stroke="none">
+        <path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.55v-2.1c-3.2.7-3.88-1.37-3.88-1.37-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.5 3.17-1.18 3.17-1.18.63 1.59.24 2.76.12 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.7 5.4-5.27 5.69.41.36.78 1.06.78 2.14v3.17c0 .3.21.66.8.55A11.5 11.5 0 0 0 12 .5Z" />
+      </g>
+      <rect id="button 3" x="384" y="121" width="320" height="40" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <text id="Continue with 3" x="537.95" y="146" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Continue with</text>
+      <text id="Apple" x="604.13" y="146" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Apple</text>
+      <g id="icon 3" transform="translate(464.813 133) scale(0.667 0.667)" fill="#080c0f" stroke="none">
+        <path d="M17.05 12.7c-.03-2.6 2.12-3.85 2.22-3.91-1.21-1.77-3.1-2.02-3.77-2.04-1.6-.17-3.13.94-3.94.94-.82 0-2.07-.92-3.4-.9-1.75.03-3.36 1.02-4.26 2.58-1.82 3.15-.46 7.8 1.3 10.36.87 1.25 1.9 2.66 3.25 2.6 1.31-.05 1.8-.84 3.38-.84 1.57 0 2.02.84 3.4.82 1.4-.03 2.29-1.27 3.14-2.53.99-1.45 1.4-2.86 1.42-2.93-.03-.01-2.72-1.04-2.74-4.14ZM14.47 4.5c.72-.87 1.2-2.08 1.07-3.29-1.03.04-2.28.69-3.02 1.56-.66.77-1.24 2-1.09 3.18 1.15.09 2.32-.58 3.04-1.45Z" />
+      </g>
+  </g>
+</svg>

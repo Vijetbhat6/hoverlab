@@ -148,9 +148,14 @@ export function ActivityTimeline({
       <div className="mt-4 space-y-6">
         {groups.map((group) => (
           <div key={group.label}>
-            <h3 className="mb-3 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-              {group.label}
-            </h3>
+            {group.label ? (
+              <h3
+                data-stress-ignore
+                className="mb-3 text-xs font-semibold uppercase tracking-wide text-muted-foreground"
+              >
+                {group.label}
+              </h3>
+            ) : null}
 
             <ul className="relative ms-3.5 space-y-4 border-s border-border/60 ps-6">
               {group.events.map((event) => {

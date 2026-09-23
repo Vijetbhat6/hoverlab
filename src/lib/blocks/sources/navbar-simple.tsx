@@ -86,7 +86,7 @@ export function NavbarSimple({
     <header
       className={`sticky top-0 z-40 border-b border-border/40 bg-background/70 backdrop-blur-xl ${className}`}
     >
-      <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex min-h-16 w-full max-w-7xl flex-wrap items-center justify-between gap-x-4 gap-y-2 px-4 py-2 sm:px-6 lg:px-8">
         {/* Brand */}
         <a href="#" className="flex shrink-0 items-center gap-2.5">
           <span
@@ -132,7 +132,7 @@ export function NavbarSimple({
           </a>
           <a
             href={ctaHref}
-            className="rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-sm transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            className="shrink-0 rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-sm transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           >
             {ctaLabel}
           </a>

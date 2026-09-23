@@ -16,6 +16,7 @@
  */
 
 import * as React from 'react'
+import { useRouter } from 'next/navigation'
 import { identify, resetIdentity } from '@/lib/analytics'
 
 export interface AuthUser {
@@ -36,6 +37,12 @@ interface AuthContextValue {
    * fingerprint rather than a form.
    */
   loginWithPasskey: () => Promise<void>
+  /**
+   * Sign in with the Google ID token Identity Services handed back after the
+   * person picked an account. The credential itself never reaches Firebase
+   * from the browser — see /api/auth/google.
+   */
+  loginWithGoogle: (credential: string) => Promise<void>
   /** Ask Firebase to send a reset email. Resolves even if unregistered. */
   resetPassword: (email: string) => Promise<void>
   /** Manually refresh the session from the server. */
@@ -129,9 +136,60 @@ async function postForUser(
   return data.user
 }
 
+/**
+ * A note that this browser has signed in, kept in localStorage.
+ *
+ * The session cookie is HttpOnly, so page script cannot tell whether one
+ * exists — and "ask the server" used to be a function call on EVERY page view
+ * of ~2,400 otherwise-static pages, made almost entirely by visitors who have
+ * never had an account. On a host that bills by invocation that is the whole
+ * bill. The note lets an anonymous visitor skip the call.
+ *
+ * It is a hint, never a credential: the server still decides who anyone is.
+ * It is written whenever `/api/auth/me` or a sign-in says so and cleared when
+ * either says otherwise. Where storage is unavailable the answer is "maybe",
+ * because asking is the safe direction to be wrong in.
+ */
+const AUTH_HINT_KEY = 'hl:auth-hint'
+
+/**
+ * Surfaces that must always ask, hint or no hint.
+ *
+ * proxy.ts lets a visitor holding a session cookie through to these, and it
+ * bounces the same visitor away from /login and /signup. Someone whose
+ * cookie predates the hint (or whose storage was cleared) would otherwise
+ * land here looking signed out while the server disagrees.
+ */
+const AUTH_AWARE_PREFIXES = ['/account', '/playground', '/collections', '/login', '/signup']
+
+function mayBeSignedIn(): boolean {
+  try {
+    return window.localStorage.getItem(AUTH_HINT_KEY) === '1'
+  } catch {
+    return true
+  }
+}
+
+function writeAuthHint(signedIn: boolean) {
+  try {
+    if (signedIn) window.localStorage.setItem(AUTH_HINT_KEY, '1')
+    else window.localStorage.removeItem(AUTH_HINT_KEY)
+  } catch {
+    // Private mode. Nothing to remember it in, so the next page asks again.
+  }
+}
+
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = React.useState<AuthUser | null>(null)
+  const router = useRouter()
+  const [user, setUserState] = React.useState<AuthUser | null>(null)
   const [loading, setLoading] = React.useState(true)
+
+  // Every path that decides who is signed in goes through here, so the hint
+  // cannot drift from the state it describes.
+  const setUser = React.useCallback((next: AuthUser | null) => {
+    setUserState(next)
+    writeAuthHint(next !== null)
+  }, [])
 
   const refresh = React.useCallback(async () => {
     try {
@@ -150,12 +208,29 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     } finally {
       setLoading(false)
     }
-  }, [])
+  }, [setUser])
 
-  // Hydrate on mount.
+  // Hydrate on mount — but only ask the server when there is a reason to.
   React.useEffect(() => {
-    refresh()
+    const path = window.location.pathname
+    const onAuthSurface = AUTH_AWARE_PREFIXES.some(
+      (p) => path === p || path.startsWith(`${p}/`),
+    )
+    if (onAuthSurface || mayBeSignedIn()) {
+      refresh()
+    } else {
+      setLoading(false)
+    }
   }, [refresh])
+
+  // Signed-in visitors have no use for the landing page. proxy.ts used to
+  // redirect them; it no longer runs on `/` (see the note there), so it is
+  // done here once the session is known.
+  React.useEffect(() => {
+    if (!loading && user && window.location.pathname === '/') {
+      router.replace('/library')
+    }
+  }, [loading, user, router])
 
   const login = React.useCallback(async (email: string, password: string) => {
     setUser(
@@ -165,7 +240,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         'Sign in failed. Please try again.',
       ),
     )
-  }, [])
+  }, [setUser])
 
   const signup = React.useCallback(
     async (email: string, password: string, name?: string) => {
@@ -177,7 +252,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         ),
       )
     },
-    [],
+    [setUser],
   )
 
   const logout = React.useCallback(async () => {
@@ -186,7 +261,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       credentials: 'same-origin',
     }).catch(() => {})
     setUser(null)
-  }, [])
+  }, [setUser])
 
   /**
    * Passkey sign-in, in three steps: ask the server for a challenge, hand it
@@ -240,7 +315,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         'Passkey sign-in failed. Please try again.',
       ),
     )
-  }, [])
+  }, [setUser])
+
+  const loginWithGoogle = React.useCallback(async (credential: string) => {
+    setUser(
+      await postForUser(
+        '/api/auth/google',
+        { credential },
+        'Google sign-in failed. Please try again.',
+      ),
+    )
+  }, [setUser])
 
   const resetPassword = React.useCallback(async (email: string) => {
     const { data, ok } = await post('/api/auth/forgot-password', { email })
@@ -277,6 +362,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       signup,
       logout,
       loginWithPasskey,
+      loginWithGoogle,
       resetPassword,
       refresh,
     }),
@@ -287,6 +373,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       signup,
       logout,
       loginWithPasskey,
+      loginWithGoogle,
       resetPassword,
       refresh,
     ],

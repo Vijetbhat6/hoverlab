@@ -183,7 +183,9 @@ export function RefundStatusTracker({
 
                 <div className={`min-w-0 flex-1 ${last ? 'pb-0' : 'pb-6'}`}>
                   <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
-                    <h3 className="text-sm font-semibold">{stage.label}</h3>
+                    {stage.label ? (
+                      <h3 data-stress-ignore className="text-sm font-semibold">{stage.label}</h3>
+                    ) : null}
                     <span className="text-xs text-muted-foreground">
                       {STATE_WORD[stage.state]}
                     </span>
@@ -210,7 +212,7 @@ export function RefundStatusTracker({
             role="alert"
             className="mt-6 rounded-xl border border-destructive/40 bg-destructive/5 p-4"
           >
-            <h3 className="text-sm font-semibold text-destructive">
+            <h3 data-stress-ignore className="text-sm font-semibold text-destructive">
               The card refused the refund
             </h3>
             <p className="mt-1 text-sm text-muted-foreground">

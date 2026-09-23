@@ -268,8 +268,8 @@ export function RefundRequestForm({
           </div>
         ) : null}
 
-        <div className="mt-6 grid gap-4 sm:grid-cols-[minmax(0,1fr)_16rem]">
-          <div>
+        <div className="mt-6 grid gap-4 md:grid-cols-[minmax(0,1fr)_16rem]">
+          <div className="min-w-0">
             <label htmlFor={`${uid}-notes`} className="block text-sm font-medium">
               Anything else we should know
               <span className="ms-2 text-xs font-normal text-muted-foreground">
@@ -288,7 +288,7 @@ export function RefundRequestForm({
             aria-live="polite"
             className="rounded-xl border border-border bg-card p-4 text-sm"
           >
-            <h3 className="text-sm font-semibold">Estimated refund</h3>
+            <h3 data-stress-ignore className="text-sm font-semibold">Estimated refund</h3>
             <dl className="mt-3 space-y-2">
               <div className="flex justify-between gap-3">
                 <dt className="text-muted-foreground">Goods</dt>

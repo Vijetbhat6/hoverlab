@@ -128,7 +128,7 @@ export function ContextScopeList({
                       {row.label}
                     </span>
                     {row.detail ? (
-                      <span className="mt-0.5 block truncate text-sm text-muted-foreground">
+                      <span className="mt-0.5 block text-sm text-muted-foreground">
                         {row.detail}
                       </span>
                     ) : null}

@@ -1,0 +1,377 @@
+<!--
+ISC License
+
+Copyright (c) for portions of Lucide are held by Cole Bemis 2013-2022 as part of Feather (MIT). All other copyright (c) for Lucide are held by Lucide Contributors 2022.
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted, provided that the above
+copyright notice and this permission notice appear in all copies.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" width="784" height="104" viewBox="0 0 784 104" id="Lucide icons / Finance" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <g id="badge-cent" transform="translate(0 0)">
+    <rect id="badge-cent bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" />
+    <path d="M12 7v10" />
+    <path d="M15.4 10a4 4 0 1 0 0 4" />
+  </g>
+  <g id="badge-dollar-sign" transform="translate(40 0)">
+    <rect id="badge-dollar-sign bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" />
+    <path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8" />
+    <path d="M12 18V6" />
+  </g>
+  <g id="badge-euro" transform="translate(80 0)">
+    <rect id="badge-euro bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" />
+    <path d="M7 12h5" />
+    <path d="M15 9.4a4 4 0 1 0 0 5.2" />
+  </g>
+  <g id="badge-indian-rupee" transform="translate(120 0)">
+    <rect id="badge-indian-rupee bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" />
+    <path d="M8 8h8" />
+    <path d="M8 12h8" />
+    <path d="m13 17-5-1h1a4 4 0 0 0 0-8" />
+  </g>
+  <g id="badge-japanese-yen" transform="translate(160 0)">
+    <rect id="badge-japanese-yen bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" />
+    <path d="m9 8 3 3v7" />
+    <path d="m12 11 3-3" />
+    <path d="M9 12h6" />
+    <path d="M9 16h6" />
+  </g>
+  <g id="badge-percent" transform="translate(200 0)">
+    <rect id="badge-percent bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" />
+    <path d="m15 9-6 6" />
+    <path d="M9 9h.01" />
+    <path d="M15 15h.01" />
+  </g>
+  <g id="badge-pound-sterling" transform="translate(240 0)">
+    <rect id="badge-pound-sterling bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" />
+    <path d="M8 12h4" />
+    <path d="M10 16V9.5a2.5 2.5 0 0 1 5 0" />
+    <path d="M8 16h7" />
+  </g>
+  <g id="badge-russian-ruble" transform="translate(280 0)">
+    <rect id="badge-russian-ruble bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" />
+    <path d="M9 16h5" />
+    <path d="M9 12h5a2 2 0 1 0 0-4h-3v9" />
+  </g>
+  <g id="badge-swiss-franc" transform="translate(320 0)">
+    <rect id="badge-swiss-franc bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" />
+    <path d="M11 17V8h4" />
+    <path d="M11 12h3" />
+    <path d="M9 16h4" />
+  </g>
+  <g id="banknote" transform="translate(360 0)">
+    <rect id="banknote bounds" width="24" height="24" fill="none" stroke="none" />
+    <rect width="20" height="12" x="2" y="6" rx="2" />
+    <circle cx="12" cy="12" r="2" />
+    <path d="M6 12h.01M18 12h.01" />
+  </g>
+  <g id="banknote-arrow-down" transform="translate(400 0)">
+    <rect id="banknote-arrow-down bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 18H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5" />
+    <path d="m16 19 3 3 3-3" />
+    <path d="M18 12h.01" />
+    <path d="M19 16v6" />
+    <path d="M6 12h.01" />
+    <circle cx="12" cy="12" r="2" />
+  </g>
+  <g id="banknote-arrow-up" transform="translate(440 0)">
+    <rect id="banknote-arrow-up bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 18H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5" />
+    <path d="M18 12h.01" />
+    <path d="M19 22v-6" />
+    <path d="m22 19-3-3-3 3" />
+    <path d="M6 12h.01" />
+    <circle cx="12" cy="12" r="2" />
+  </g>
+  <g id="banknote-x" transform="translate(480 0)">
+    <rect id="banknote-x bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M13 18H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5" />
+    <path d="m17 17 5 5" />
+    <path d="M18 12h.01" />
+    <path d="m22 17-5 5" />
+    <path d="M6 12h.01" />
+    <circle cx="12" cy="12" r="2" />
+  </g>
+  <g id="bitcoin" transform="translate(520 0)">
+    <rect id="bitcoin bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M11.767 19.089c4.924.868 6.14-6.025 1.216-6.894m-1.216 6.894L5.86 18.047m5.908 1.042-.347 1.97m1.563-8.864c4.924.869 6.14-6.025 1.215-6.893m-1.215 6.893-3.94-.694m5.155-6.2L8.29 4.26m5.908 1.042.348-1.97M7.48 20.364l3.126-17.727" />
+  </g>
+  <g id="chart-candlestick" transform="translate(560 0)">
+    <rect id="chart-candlestick bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M9 5v4" />
+    <rect width="4" height="6" x="7" y="9" rx="1" />
+    <path d="M9 15v2" />
+    <path d="M17 3v2" />
+    <rect width="4" height="8" x="15" y="5" rx="1" />
+    <path d="M17 13v3" />
+    <path d="M3 3v16a2 2 0 0 0 2 2h16" />
+  </g>
+  <g id="circle-dollar-sign" transform="translate(600 0)">
+    <rect id="circle-dollar-sign bounds" width="24" height="24" fill="none" stroke="none" />
+    <circle cx="12" cy="12" r="10" />
+    <path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8" />
+    <path d="M12 18V6" />
+  </g>
+  <g id="circle-percent" transform="translate(640 0)">
+    <rect id="circle-percent bounds" width="24" height="24" fill="none" stroke="none" />
+    <circle cx="12" cy="12" r="10" />
+    <path d="m15 9-6 6" />
+    <path d="M9 9h.01" />
+    <path d="M15 15h.01" />
+  </g>
+  <g id="circle-pound-sterling" transform="translate(680 0)">
+    <rect id="circle-pound-sterling bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M10 16V9.5a1 1 0 0 1 5 0" />
+    <path d="M8 12h4" />
+    <path d="M8 16h7" />
+    <circle cx="12" cy="12" r="10" />
+  </g>
+  <g id="credit-card" transform="translate(720 0)">
+    <rect id="credit-card bounds" width="24" height="24" fill="none" stroke="none" />
+    <rect width="20" height="14" x="2" y="5" rx="2" />
+    <line x1="2" x2="22" y1="10" y2="10" />
+  </g>
+  <g id="currency" transform="translate(760 0)">
+    <rect id="currency bounds" width="24" height="24" fill="none" stroke="none" />
+    <circle cx="12" cy="12" r="8" />
+    <line x1="3" x2="6" y1="3" y2="6" />
+    <line x1="21" x2="18" y1="3" y2="6" />
+    <line x1="3" x2="6" y1="21" y2="18" />
+    <line x1="21" x2="18" y1="21" y2="18" />
+  </g>
+  <g id="diamond-percent" transform="translate(0 40)">
+    <rect id="diamond-percent bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M2.7 10.3a2.41 2.41 0 0 0 0 3.41l7.59 7.59a2.41 2.41 0 0 0 3.41 0l7.59-7.59a2.41 2.41 0 0 0 0-3.41L13.7 2.71a2.41 2.41 0 0 0-3.41 0Z" />
+    <path d="M9.2 9.2h.01" />
+    <path d="m14.5 9.5-5 5" />
+    <path d="M14.7 14.8h.01" />
+  </g>
+  <g id="dollar-sign" transform="translate(40 40)">
+    <rect id="dollar-sign bounds" width="24" height="24" fill="none" stroke="none" />
+    <line x1="12" x2="12" y1="2" y2="22" />
+    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+  </g>
+  <g id="euro" transform="translate(80 40)">
+    <rect id="euro bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M4 10h12" />
+    <path d="M4 14h9" />
+    <path d="M19 6a7.7 7.7 0 0 0-5.2-2A7.9 7.9 0 0 0 6 12c0 4.4 3.5 8 7.8 8 2 0 3.8-.8 5.2-2" />
+  </g>
+  <g id="gem" transform="translate(120 40)">
+    <rect id="gem bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M6 3h12l4 6-10 13L2 9Z" />
+    <path d="M11 3 8 9l4 13 4-13-3-6" />
+    <path d="M2 9h20" />
+  </g>
+  <g id="georgian-lari" transform="translate(160 40)">
+    <rect id="georgian-lari bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M11.5 21a7.5 7.5 0 1 1 7.35-9" />
+    <path d="M13 12V3" />
+    <path d="M4 21h16" />
+    <path d="M9 12V3" />
+  </g>
+  <g id="hand-coins" transform="translate(200 40)">
+    <rect id="hand-coins bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M11 15h2a2 2 0 1 0 0-4h-3c-.6 0-1.1.2-1.4.6L3 17" />
+    <path d="m7 21 1.6-1.4c.3-.4.8-.6 1.4-.6h4c1.1 0 2.1-.4 2.8-1.2l4.6-4.4a2 2 0 0 0-2.75-2.91l-4.2 3.9" />
+    <path d="m2 16 6 6" />
+    <circle cx="16" cy="9" r="2.9" />
+    <circle cx="6" cy="5" r="3" />
+  </g>
+  <g id="handshake" transform="translate(240 40)">
+    <rect id="handshake bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m11 17 2 2a1 1 0 1 0 3-3" />
+    <path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4" />
+    <path d="m21 3 1 11h-2" />
+    <path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3" />
+    <path d="M3 4h8" />
+  </g>
+  <g id="indian-rupee" transform="translate(280 40)">
+    <rect id="indian-rupee bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M6 3h12" />
+    <path d="M6 8h12" />
+    <path d="m6 13 8.5 8" />
+    <path d="M6 13h3" />
+    <path d="M9 13c6.667 0 6.667-10 0-10" />
+  </g>
+  <g id="japanese-yen" transform="translate(320 40)">
+    <rect id="japanese-yen bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 9.5V21m0-11.5L6 3m6 6.5L18 3" />
+    <path d="M6 15h12" />
+    <path d="M6 11h12" />
+  </g>
+  <g id="landmark" transform="translate(360 40)">
+    <rect id="landmark bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M10 18v-7" />
+    <path d="M11.12 2.198a2 2 0 0 1 1.76.006l7.866 3.847c.476.233.31.949-.22.949H3.474c-.53 0-.695-.716-.22-.949z" />
+    <path d="M14 18v-7" />
+    <path d="M18 18v-7" />
+    <path d="M3 22h18" />
+    <path d="M6 18v-7" />
+  </g>
+  <g id="nfc" transform="translate(400 40)">
+    <rect id="nfc bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M6 8.32a7.43 7.43 0 0 1 0 7.36" />
+    <path d="M9.46 6.21a11.76 11.76 0 0 1 0 11.58" />
+    <path d="M12.91 4.1a15.91 15.91 0 0 1 .01 15.8" />
+    <path d="M16.37 2a20.16 20.16 0 0 1 0 20" />
+  </g>
+  <g id="percent" transform="translate(440 40)">
+    <rect id="percent bounds" width="24" height="24" fill="none" stroke="none" />
+    <line x1="19" x2="5" y1="5" y2="19" />
+    <circle cx="6.5" cy="6.5" r="2.5" />
+    <circle cx="17.5" cy="17.5" r="2.5" />
+  </g>
+  <g id="philippine-peso" transform="translate(480 40)">
+    <rect id="philippine-peso bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M20 11H4" />
+    <path d="M20 7H4" />
+    <path d="M7 21V4a1 1 0 0 1 1-1h4a1 1 0 0 1 0 12H7" />
+  </g>
+  <g id="piggy-bank" transform="translate(520 40)">
+    <rect id="piggy-bank bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M11 17h3v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-3a3.16 3.16 0 0 0 2-2h1a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1h-1a5 5 0 0 0-2-4V3a4 4 0 0 0-3.2 1.6l-.3.4H11a6 6 0 0 0-6 6v1a5 5 0 0 0 2 4v3a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1z" />
+    <path d="M16 10h.01" />
+    <path d="M2 8v1a2 2 0 0 0 2 2h1" />
+  </g>
+  <g id="pound-sterling" transform="translate(560 40)">
+    <rect id="pound-sterling bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M18 7c0-5.333-8-5.333-8 0" />
+    <path d="M10 7v14" />
+    <path d="M6 21h12" />
+    <path d="M6 13h10" />
+  </g>
+  <g id="receipt" transform="translate(600 40)">
+    <rect id="receipt bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z" />
+    <path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8" />
+    <path d="M12 17.5v-11" />
+  </g>
+  <g id="receipt-cent" transform="translate(640 40)">
+    <rect id="receipt-cent bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z" />
+    <path d="M12 6.5v11" />
+    <path d="M15 9.4a4 4 0 1 0 0 5.2" />
+  </g>
+  <g id="receipt-euro" transform="translate(680 40)">
+    <rect id="receipt-euro bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z" />
+    <path d="M8 12h5" />
+    <path d="M16 9.5a4 4 0 1 0 0 5.2" />
+  </g>
+  <g id="receipt-indian-rupee" transform="translate(720 40)">
+    <rect id="receipt-indian-rupee bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z" />
+    <path d="M8 7h8" />
+    <path d="M12 17.5 8 15h1a4 4 0 0 0 0-8" />
+    <path d="M8 11h8" />
+  </g>
+  <g id="receipt-japanese-yen" transform="translate(760 40)">
+    <rect id="receipt-japanese-yen bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z" />
+    <path d="m12 10 3-3" />
+    <path d="m9 7 3 3v7.5" />
+    <path d="M9 11h6" />
+    <path d="M9 15h6" />
+  </g>
+  <g id="receipt-pound-sterling" transform="translate(0 80)">
+    <rect id="receipt-pound-sterling bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z" />
+    <path d="M8 13h5" />
+    <path d="M10 17V9.5a2.5 2.5 0 0 1 5 0" />
+    <path d="M8 17h7" />
+  </g>
+  <g id="receipt-russian-ruble" transform="translate(40 80)">
+    <rect id="receipt-russian-ruble bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z" />
+    <path d="M8 15h5" />
+    <path d="M8 11h5a2 2 0 1 0 0-4h-3v10" />
+  </g>
+  <g id="receipt-swiss-franc" transform="translate(80 80)">
+    <rect id="receipt-swiss-franc bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z" />
+    <path d="M10 17V7h5" />
+    <path d="M10 11h4" />
+    <path d="M8 15h5" />
+  </g>
+  <g id="receipt-text" transform="translate(120 80)">
+    <rect id="receipt-text bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z" />
+    <path d="M14 8H8" />
+    <path d="M16 12H8" />
+    <path d="M13 16H8" />
+  </g>
+  <g id="russian-ruble" transform="translate(160 80)">
+    <rect id="russian-ruble bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M6 11h8a4 4 0 0 0 0-8H9v18" />
+    <path d="M6 15h8" />
+  </g>
+  <g id="saudi-riyal" transform="translate(200 80)">
+    <rect id="saudi-riyal bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m20 19.5-5.5 1.2" />
+    <path d="M14.5 4v11.22a1 1 0 0 0 1.242.97L20 15.2" />
+    <path d="m2.978 19.351 5.549-1.363A2 2 0 0 0 10 16V2" />
+    <path d="M20 10 4 13.5" />
+  </g>
+  <g id="scale" transform="translate(240 80)">
+    <rect id="scale bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z" />
+    <path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z" />
+    <path d="M7 21h10" />
+    <path d="M12 3v18" />
+    <path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2" />
+  </g>
+  <g id="smartphone-nfc" transform="translate(280 80)">
+    <rect id="smartphone-nfc bounds" width="24" height="24" fill="none" stroke="none" />
+    <rect width="7" height="12" x="2" y="6" rx="1" />
+    <path d="M13 8.32a7.43 7.43 0 0 1 0 7.36" />
+    <path d="M16.46 6.21a11.76 11.76 0 0 1 0 11.58" />
+    <path d="M19.91 4.1a15.91 15.91 0 0 1 .01 15.8" />
+  </g>
+  <g id="square-percent" transform="translate(320 80)">
+    <rect id="square-percent bounds" width="24" height="24" fill="none" stroke="none" />
+    <rect width="18" height="18" x="3" y="3" rx="2" />
+    <path d="m15 9-6 6" />
+    <path d="M9 9h.01" />
+    <path d="M15 15h.01" />
+  </g>
+  <g id="swiss-franc" transform="translate(360 80)">
+    <rect id="swiss-franc bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M10 21V3h8" />
+    <path d="M6 16h9" />
+    <path d="M10 9.5h7" />
+  </g>
+  <g id="wallet" transform="translate(400 80)">
+    <rect id="wallet bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1" />
+    <path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4" />
+  </g>
+  <g id="wallet-cards" transform="translate(440 80)">
+    <rect id="wallet-cards bounds" width="24" height="24" fill="none" stroke="none" />
+    <rect width="18" height="18" x="3" y="3" rx="2" />
+    <path d="M3 9a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2" />
+    <path d="M3 11h3c.8 0 1.6.3 2.1.9l1.1.9c1.6 1.6 4.1 1.6 5.7 0l1.1-.9c.5-.5 1.3-.9 2.1-.9H21" />
+  </g>
+  <g id="wallet-minimal" transform="translate(480 80)">
+    <rect id="wallet-minimal bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M17 14h.01" />
+    <path d="M7 7h12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14" />
+  </g>
+</svg>

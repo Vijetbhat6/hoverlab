@@ -69,6 +69,7 @@ export function PromptSuggestions({
       {heading ? (
         <h3
           id={`${uid}-heading`}
+          data-stress-ignore
           className="mb-2 text-xs font-medium uppercase tracking-wide text-muted-foreground"
         >
           {heading}

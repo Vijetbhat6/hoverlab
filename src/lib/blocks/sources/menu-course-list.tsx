@@ -165,7 +165,8 @@ function Dish({ dish }: { dish: MenuDish }) {
           under the name rather than as a line across to the price. */}
       <div className="flex items-baseline gap-2">
         <h4
-          className={`shrink-0 text-[0.95rem] leading-snug ${
+          data-stress-ignore
+          className={`min-w-0 text-[0.95rem] leading-snug ${
             dish.signature ? 'font-semibold text-foreground' : 'font-medium text-card-foreground'
           }`}
         >
@@ -237,9 +238,14 @@ export function MenuCourseList({
         {courses.map((course) => (
           <div key={course.name}>
             <div className="flex items-baseline justify-between gap-4 border-b border-border pb-2">
-              <h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-                {course.name}
-              </h3>
+              {course.name ? (
+                <h3
+                  data-stress-ignore
+                  className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground"
+                >
+                  {course.name}
+                </h3>
+              ) : null}
               {course.note ? (
                 <p className="text-xs text-muted-foreground/80">{course.note}</p>
               ) : null}

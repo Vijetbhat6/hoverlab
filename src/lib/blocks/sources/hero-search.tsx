@@ -60,11 +60,11 @@ export function HeroSearch({
   return (
     <section className={`relative overflow-hidden ${className}`}>
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute -top-40 left-1/2 h-[28rem] w-[28rem] -translate-x-1/2 rounded-full bg-primary/15 blur-3xl" />
+        <div className="absolute -top-40 left-1/2 h-[28rem] w-[28rem] -translate-x-1/2 rounded-full bg-primary/15 blur-3xl border border-transparent" />
       </div>
 
       <div className="mx-auto w-full max-w-3xl px-4 py-20 text-center sm:px-6 lg:px-8 lg:py-28">
-        <h1 className="text-balance text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+        <h1 className="text-balance break-words text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
           {heading}
         </h1>
 

@@ -61,9 +61,17 @@ const CONTENTS: Array<{ path: string; blurb: string }> = [
   },
   {
     path: 'tokens.light.json',
-    blurb: 'W3C design tokens — what Figma’s variable import reads.',
+    blurb: 'W3C design tokens — colour, radius, spacing and type. Figma plugins and Style Dictionary read it.',
   },
-  { path: 'tokens.dark.json', blurb: 'The same, for dark mode. Figma splits modes by file.' },
+  { path: 'tokens.dark.json', blurb: 'The same, for dark mode. Design tools split modes by file.' },
+  {
+    path: 'style-dictionary.config.mjs',
+    blurb: 'Builds both token files into CSS and JS, for other platforms.',
+  },
+  {
+    path: 'figma-variables.json',
+    blurb: 'One Figma collection with Light and Dark modes (Enterprise plan), plus the script that sends it.',
+  },
   { path: 'hoverlab.config.json', blurb: 'So the CLI installs artifacts already in your brand.' },
   { path: 'README.md', blurb: 'What to do with the files above, and which Tailwind file is yours.' },
 ]

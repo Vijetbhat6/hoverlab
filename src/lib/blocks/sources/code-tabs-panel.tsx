@@ -76,19 +76,19 @@ export function CodeTabsPanel({
     <div
       className={`w-full max-w-2xl overflow-hidden rounded-2xl border border-border/60 bg-zinc-950 ${className}`}
     >
-      <div className="flex items-center gap-3 border-b border-white/10 px-4 py-2.5">
-        <div aria-hidden className="flex gap-1.5">
-          <span className="h-2.5 w-2.5 rounded-full bg-red-500/80" />
-          <span className="h-2.5 w-2.5 rounded-full bg-amber-500/80" />
-          <span className="h-2.5 w-2.5 rounded-full bg-emerald-500/80" />
+      <div className="flex flex-wrap items-center gap-3 border-b border-white/10 px-4 py-2.5">
+        <div aria-hidden className="flex shrink-0 gap-1.5">
+          <span className="h-2.5 w-2.5 rounded-full bg-red-500/80 border border-transparent" />
+          <span className="h-2.5 w-2.5 rounded-full bg-amber-500/80 border border-transparent" />
+          <span className="h-2.5 w-2.5 rounded-full bg-emerald-500/80 border border-transparent" />
         </div>
-        <span className="truncate font-mono text-xs text-white/40">{title}</span>
+        <span className="min-w-0 truncate font-mono text-xs text-white/60">{title}</span>
 
         <div
           role="tablist"
           aria-label="Package manager"
           onKeyDown={onKeyDown}
-          className="ms-auto flex gap-1"
+          className="ms-auto flex flex-wrap gap-1"
         >
           {tabs.map((t, i) => (
             <button
@@ -103,7 +103,7 @@ export function CodeTabsPanel({
               aria-controls={`${baseId}-panel-${i}`}
               tabIndex={i === active ? 0 : -1}
               onClick={() => select(i)}
-              className={`rounded-md px-2.5 py-1 font-mono text-xs transition-colors ${
+              className={`shrink-0 rounded-md px-2.5 py-1 font-mono text-xs transition-colors ${
                 i === active
                   ? 'bg-white/10 text-white'
                   : 'text-white/50 hover:text-white/80'

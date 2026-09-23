@@ -27,10 +27,18 @@
  *                       served because both majors are in the wild: a v4
  *                       project has nowhere to merge a config object, and a
  *                       v3 project cannot read an `@theme` block.
- *   tokens.<mode>.json  the designer. W3C DTCG, one file per mode — what
- *                       Figma's variable import reads, so the palette in
- *                       the file is the palette in the code rather than a
- *                       screenshot of it.
+ *   tokens.<mode>.json  the designer and the pipeline. W3C DTCG, one file
+ *                       per mode: colour, radius steps, spacing and the type
+ *                       ramp. What Figma's variable plugins and Style
+ *                       Dictionary both read, so the palette in the file is
+ *                       the palette in the code rather than a screenshot.
+ *   style-dictionary.config.mjs
+ *                       builds both DTCG files into CSS and JS, for a team
+ *                       that feeds other platforms from the same source.
+ *   figma-variables.json  the same tokens as one Figma collection with Light
+ *                       and Dark modes — the REST Variables API body, which
+ *                       is the only route to real modes. Enterprise-plan
+ *                       Figma only; push-figma-variables.mjs sends it.
  *   hoverlab.config     the agent and the CLI. Machine-readable, so
  *                       `hoverlab add` and an MCP client can emit code in
  *                       the brand without being told the numbers again.
@@ -55,8 +63,16 @@ import {
   describeShape,
   shapeCss,
   shapeEquals,
+  shapeThemeVars,
   type ThemeShape,
 } from '@/lib/theme-shape'
+import {
+  buildDtcg,
+  buildFigmaPushScript,
+  buildFigmaVariables,
+  buildStyleDictionaryConfig,
+  type TokenDocumentInput,
+} from '@/lib/export/design-tokens'
 import {
   oklchToRgb,
   rgbToHsl,
@@ -416,74 +432,6 @@ export default theme
 }
 
 /**
- * One theme as a W3C Design Tokens (DTCG) document.
- *
- * This replaced a shape invented here — a `{ name, modes, variables[] }`
- * object with `valuesByMode` — which read plausibly and which no tool on
- * earth consumes. It was labelled "Figma's Variables import format" and
- * was not that; a designer following the README would have got as far as
- * looking for the import button.
- *
- * DTCG is the format that is actually accepted. Every current Figma import
- * plugin (Variables JSON Import, Tokens Studio, TokensBrücke, styleframe)
- * reads it, and Figma's own native variable import — announced for
- * November 2026 against the stable DTCG 1.0 spec — reads it too, by
- * dragging the file in.
- *
- * ONE FILE PER MODE, rather than one file carrying both. DTCG has no
- * settled syntax for modes, so every tool invented its own and none of
- * them agree. Figma's native export resolves it the same way this does:
- * multiple modes come out as a zip with one JSON file per mode. A file
- * that is unambiguously "the light theme" imports everywhere; a file with
- * a clever mode syntax imports into whichever tool inspired it.
- *
- * Hex rather than the HSL channels the CSS uses. Figma has no
- * HSL-channel variable type, so "174 62% 38%" would import as a string
- * variable — a note to a human rather than a colour a rectangle can use.
- *
- * The `$value` is a hex string rather than DTCG 1.0's object colour form
- * (`{ colorSpace, components, alpha }`). That is a deliberate bet on what
- * is verifiable: hex is what every shipping importer accepts today, and
- * the object form can only be tested against an importer that does not
- * exist yet. Revisit when Figma's native import ships and can be tried.
- */
-function buildDtcgTokens(
-  brand: BrandColor,
-  name: string,
-  theme: Theme,
-  radius: string,
-): string {
-  const colors: Record<string, unknown> = { $type: 'color' }
-
-  for (const token of resolveTokens(brand, theme)) {
-    colors[token.name] = {
-      $value: token.hex,
-      // The OKLCH the brand tokens came from, carried across. A designer
-      // asking "where did this green come from" gets an answer inside
-      // Figma rather than having to come back to the export.
-      ...(token.oklch ? { $description: `Brand-derived — ${token.oklch}` } : {}),
-    }
-  }
-
-  return `${JSON.stringify(
-    {
-      $description: `${name} — Hoverlab design tokens (${theme})`,
-      // Top-level keys become collection names in the importers that make
-      // collections, so they are named for what they are rather than for
-      // this product.
-      color: colors,
-      radius: {
-        $type: 'dimension',
-        default: { $value: radius },
-      },
-    },
-    null,
-    2,
-  )}
-`
-}
-
-/**
  * The config the CLI and MCP server read.
  *
  * This is the file that makes the export more than a set of static documents:
@@ -517,7 +465,9 @@ Tailwind version — you need one of the two, not both.
 | \`tokens.css\` | the browser — replaces the \`:root\`/\`.dark\` blocks in \`app/globals.css\` |
 | \`tailwind-theme.css\` | the build, **Tailwind v4** — a CSS \`@theme\` block you import |
 | \`tailwind-theme.v3.ts\` | the build, **Tailwind v3** — merge \`theme.extend\` into \`tailwind.config\` |
-| \`tokens.light.json\` / \`tokens.dark.json\` | Figma, and any other design-token tool |
+| \`tokens.light.json\` / \`tokens.dark.json\` | Figma plugins, Style Dictionary, any DTCG tool |
+| \`style-dictionary.config.mjs\` | builds the two DTCG files into CSS and JS |
+| \`figma-variables.json\` / \`push-figma-variables.mjs\` | one Figma collection with Light and Dark modes (Enterprise plan) |
 | \`hoverlab.config.json\` | the CLI and MCP server — put it in your project root |
 
 ## Which Tailwind are you on?
@@ -568,17 +518,43 @@ resolves to it. Install both or neither.
 
 ## Getting the tokens into Figma
 
-The two \`tokens.*.json\` files are [W3C Design Tokens](https://www.designtokens.org/)
-documents — one per mode, which is how Figma itself splits them.
+Two routes. Which one you have depends on your Figma plan.
 
-Figma's **native** variable import is announced for November 2026: drag the
-files in, one per mode. Until then any of the community importers read the
-same files — *Variables JSON Import*, *Tokens Studio*, *TokensBrücke*.
+**Any plan — the DTCG files.** \`tokens.light.json\` and \`tokens.dark.json\` are
+[W3C Design Tokens](https://www.designtokens.org/) documents, one per mode.
+Figma's native variable import is announced for November 2026; until then the
+community importers read the same files — *Variables JSON Import*, *Tokens
+Studio*, *TokensBrücke*.
 
 Import \`tokens.light.json\` into a collection, then \`tokens.dark.json\` into a
 second mode on that same collection. Importing into an existing collection
 updates the variables rather than duplicating them, so re-exporting after a
 brand change is a re-import, not a cleanup.
+
+**Enterprise plan — \`figma-variables.json\`.** This is the body of Figma's
+Variables REST API, and it is the one output where Light and Dark already live
+in a single collection, so \`color/primary\` flips with the frame's mode and
+there is nothing to line up by hand. Radius, spacing and type come in a second
+"Shape" collection.
+
+\`\`\`
+FIGMA_TOKEN=figd_… node push-figma-variables.mjs <file-key-or-url>
+\`\`\`
+
+The token needs the \`file_variables:write\` scope and a full seat on an
+Enterprise-plan organisation; that is Figma's rule for its Variables API. The
+script creates new collections each time, so delete an earlier run's first.
+
+## Style Dictionary
+
+\`\`\`
+npm i -D style-dictionary
+npx style-dictionary build --config style-dictionary.config.mjs
+\`\`\`
+
+Writes \`build/css/light.css\` (\`:root\`), \`build/css/dark.css\` (\`.dark\`) and a
+JS module per mode. Variable names follow the token paths, so they differ from
+\`tokens.css\`; a web project that only wants CSS should use \`tokens.css\`.
 
 ## Then
 
@@ -652,6 +628,14 @@ export function buildDesignSystem(
       ]
     : []
 
+  const tokenInput: TokenDocumentInput = {
+    name,
+    light: resolveTokens(brand, 'light'),
+    dark: resolveTokens(brand, 'dark'),
+    radius,
+    shapeVars: shapeThemeVars(shape),
+  }
+
   return {
     name,
     brand,
@@ -675,12 +659,27 @@ export function buildDesignSystem(
       {
         path: 'tokens.light.json',
         language: 'json',
-        code: buildDtcgTokens(brand, name, 'light', radius),
+        code: buildDtcg(tokenInput, 'light'),
       },
       {
         path: 'tokens.dark.json',
         language: 'json',
-        code: buildDtcgTokens(brand, name, 'dark', radius),
+        code: buildDtcg(tokenInput, 'dark'),
+      },
+      {
+        path: 'style-dictionary.config.mjs',
+        language: 'js',
+        code: buildStyleDictionaryConfig(name),
+      },
+      {
+        path: 'figma-variables.json',
+        language: 'json',
+        code: buildFigmaVariables(tokenInput),
+      },
+      {
+        path: 'push-figma-variables.mjs',
+        language: 'js',
+        code: buildFigmaPushScript(),
       },
       {
         path: 'hoverlab.config.json',

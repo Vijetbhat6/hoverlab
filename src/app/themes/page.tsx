@@ -32,6 +32,7 @@ import Link from 'next/link'
 import { ArrowRight, Palette } from 'lucide-react'
 
 import { ThemeGallery } from '@/components/theme-gallery'
+import { BrandFromUrl } from '@/components/brand-from-url'
 import { BlockPreview } from '@/components/blocks/block-preview'
 import { THEME_PRESETS } from '@/lib/theme-studio'
 import { BLOCK_COUNT } from '@/lib/blocks/block-index'
@@ -111,6 +112,10 @@ export default function ThemesPage() {
             footnote.
           </p>
         </header>
+
+        <div className="mx-auto mt-10 max-w-3xl">
+          <BrandFromUrl />
+        </div>
 
         <section aria-labelledby="theme-presets" className="mt-12">
           <h2 id="theme-presets" className="sr-only">
@@ -192,7 +197,9 @@ export default function ThemesPage() {
                 </li>
                 <li>
                   Anything on the server. The theme lives in this browser and
-                  is not sent anywhere.
+                  is not sent anywhere. The one exception is the address you
+                  paste under &ldquo;Start from your site&rdquo;: that goes to
+                  our server once so it can fetch the page, and is not stored.
                 </li>
               </ul>
             </div>

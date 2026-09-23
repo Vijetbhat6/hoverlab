@@ -77,13 +77,13 @@ function PlaceholderPanel() {
       className="aspect-[4/3] w-full rounded-2xl border border-border/60 bg-gradient-to-br from-muted/60 to-card p-6"
     >
       <div className="flex h-full flex-col gap-3 rounded-xl border border-border/50 bg-background/60 p-4">
-        <div className="h-2.5 w-1/3 rounded-full bg-muted-foreground/25" />
-        <div className="h-2 w-3/4 rounded-full bg-muted-foreground/15" />
-        <div className="h-2 w-2/3 rounded-full bg-muted-foreground/15" />
+        <div className="h-2.5 w-1/3 rounded-full bg-muted-foreground/25 border border-transparent" />
+        <div className="h-2 w-3/4 rounded-full bg-muted-foreground/15 border border-transparent" />
+        <div className="h-2 w-2/3 rounded-full bg-muted-foreground/15 border border-transparent" />
         <div className="mt-auto grid grid-cols-3 gap-2">
-          <div className="h-10 rounded-lg bg-muted-foreground/10" />
-          <div className="h-10 rounded-lg bg-muted-foreground/10" />
-          <div className="h-10 rounded-lg bg-muted-foreground/10" />
+          <div className="h-10 rounded-lg bg-muted-foreground/10 border border-transparent" />
+          <div className="h-10 rounded-lg bg-muted-foreground/10 border border-transparent" />
+          <div className="h-10 rounded-lg bg-muted-foreground/10 border border-transparent" />
         </div>
       </div>
     </div>
@@ -123,7 +123,10 @@ export function FeatureRows({
                   {row.eyebrow}
                 </p>
               ) : null}
-              <h3 className="mt-2 text-balance text-2xl font-bold tracking-tight sm:text-3xl">
+              <h3
+                data-stress-ignore
+                className="mt-2 text-balance text-2xl font-bold tracking-tight sm:text-3xl"
+              >
                 {row.title}
               </h3>
               <p className="mt-4 text-pretty leading-relaxed text-muted-foreground">

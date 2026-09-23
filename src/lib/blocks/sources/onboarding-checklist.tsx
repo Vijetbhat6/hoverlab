@@ -198,7 +198,7 @@ export function OnboardingChecklist({
                 <div className="min-w-0 flex-1">
                   {/* Completed rows stay readable — no strike-through, no
                       40% opacity. The list is also a record of what you did. */}
-                  <p className={`text-sm font-semibold ${isDone ? 'text-muted-foreground' : ''}`}>
+                  <p className={`break-words text-sm font-semibold ${isDone ? 'text-muted-foreground' : ''}`}>
                     {step.label}
                   </p>
                   <p className="mt-0.5 text-xs text-muted-foreground">{step.description}</p>

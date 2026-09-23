@@ -96,11 +96,11 @@
     "files": 1
   },
   "contact-form-split": {
-    "lines": 276,
+    "lines": 279,
     "files": 1
   },
   "multi-step-form": {
-    "lines": 370,
+    "lines": 373,
     "files": 1
   },
   "booking-scheduler": {
@@ -121,6 +121,22 @@
   },
   "support-ticket-form": {
     "lines": 169,
+    "files": 1
+  },
+  "email-product-announcement": {
+    "lines": 173,
+    "files": 1
+  },
+  "email-newsletter-digest": {
+    "lines": 162,
+    "files": 1
+  },
+  "email-promo-offer": {
+    "lines": 155,
+    "files": 1
+  },
+  "email-winback": {
+    "lines": 151,
     "files": 1
   },
   "confirm-dialog": {
@@ -148,7 +164,7 @@
     "files": 1
   },
   "modal-unsaved-changes": {
-    "lines": 231,
+    "lines": 237,
     "files": 1
   },
   "drawer-record-detail": {
@@ -168,7 +184,7 @@
     "files": 1
   },
   "product-tour-coachmark": {
-    "lines": 260,
+    "lines": 262,
     "files": 1
   },
   "onboarding-role-picker": {
@@ -264,7 +280,7 @@
     "files": 1
   },
   "feature-rows": {
-    "lines": 158,
+    "lines": 161,
     "files": 1
   },
   "feature-icon-grid": {
@@ -272,7 +288,7 @@
     "files": 1
   },
   "integration-grid": {
-    "lines": 206,
+    "lines": 208,
     "files": 1
   },
   "persona-cards": {
@@ -308,7 +324,7 @@
     "files": 1
   },
   "pricing-credits": {
-    "lines": 213,
+    "lines": 218,
     "files": 1
   },
   "pricing-plan-picker": {
@@ -360,7 +376,7 @@
     "files": 1
   },
   "faq-categorized": {
-    "lines": 234,
+    "lines": 237,
     "files": 1
   },
   "faq-search": {
@@ -376,7 +392,7 @@
     "files": 1
   },
   "changelog-timeline": {
-    "lines": 143,
+    "lines": 145,
     "files": 1
   },
   "roadmap-columns": {
@@ -387,12 +403,16 @@
     "lines": 188,
     "files": 1
   },
+  "case-study-grid": {
+    "lines": 136,
+    "files": 1
+  },
   "article-header": {
     "lines": 171,
     "files": 1
   },
   "team-grid": {
-    "lines": 164,
+    "lines": 166,
     "files": 1
   },
   "job-listing-board": {
@@ -404,7 +424,7 @@
     "files": 1
   },
   "api-endpoint-card": {
-    "lines": 235,
+    "lines": 237,
     "files": 1
   },
   "code-tabs-panel": {
@@ -483,6 +503,50 @@
     "lines": 155,
     "files": 1
   },
+  "sidebar-app-grouped": {
+    "lines": 199,
+    "files": 1
+  },
+  "sidebar-collapsible": {
+    "lines": 197,
+    "files": 1
+  },
+  "sidebar-two-pane": {
+    "lines": 176,
+    "files": 1
+  },
+  "sidebar-nested-accordion": {
+    "lines": 195,
+    "files": 1
+  },
+  "sidebar-workspace-switcher": {
+    "lines": 241,
+    "files": 1
+  },
+  "sidebar-floating-inset": {
+    "lines": 137,
+    "files": 1
+  },
+  "sidebar-resizable": {
+    "lines": 179,
+    "files": 1
+  },
+  "sidebar-docs-tree": {
+    "lines": 208,
+    "files": 1
+  },
+  "sidebar-thread-history": {
+    "lines": 170,
+    "files": 1
+  },
+  "sidebar-mail-folders": {
+    "lines": 199,
+    "files": 1
+  },
+  "sidebar-file-tree": {
+    "lines": 260,
+    "files": 1
+  },
   "dashboard-shell": {
     "lines": 218,
     "files": 1
@@ -504,7 +568,7 @@
     "files": 1
   },
   "activity-timeline": {
-    "lines": 199,
+    "lines": 204,
     "files": 1
   },
   "calendar-month": {
@@ -516,7 +580,7 @@
     "files": 1
   },
   "dashboard-saved-views": {
-    "lines": 300,
+    "lines": 306,
     "files": 1
   },
   "dashboard-comparison-period": {
@@ -564,11 +628,11 @@
     "files": 1
   },
   "crud-create-modal": {
-    "lines": 260,
+    "lines": 262,
     "files": 1
   },
   "crud-create-drawer": {
-    "lines": 331,
+    "lines": 336,
     "files": 1
   },
   "crud-read-page": {
@@ -624,11 +688,11 @@
     "files": 1
   },
   "settings-danger-zone": {
-    "lines": 182,
+    "lines": 184,
     "files": 1
   },
   "settings-sessions": {
-    "lines": 297,
+    "lines": 302,
     "files": 1
   },
   "settings-notification-matrix": {
@@ -636,7 +700,7 @@
     "files": 1
   },
   "settings-audit-log": {
-    "lines": 268,
+    "lines": 270,
     "files": 1
   },
   "empty-state-cta": {
@@ -736,7 +800,7 @@
     "files": 1
   },
   "billing-invoice-detail": {
-    "lines": 262,
+    "lines": 265,
     "files": 1
   },
   "billing-credit-balance": {
@@ -760,7 +824,7 @@
     "files": 1
   },
   "inbox-thread-detail": {
-    "lines": 309,
+    "lines": 311,
     "files": 1
   },
   "voice-message-player": {
@@ -776,7 +840,7 @@
     "files": 1
   },
   "support-ticket-thread": {
-    "lines": 338,
+    "lines": 340,
     "files": 1
   },
   "command-palette": {
@@ -784,11 +848,11 @@
     "files": 1
   },
   "search-results-panel": {
-    "lines": 189,
+    "lines": 194,
     "files": 1
   },
   "keyboard-shortcuts-sheet": {
-    "lines": 247,
+    "lines": 252,
     "files": 1
   },
   "applied-filters-bar": {
@@ -872,7 +936,7 @@
     "files": 1
   },
   "chat-model-picker": {
-    "lines": 252,
+    "lines": 267,
     "files": 1
   },
   "chat-attachment-tray": {
@@ -884,7 +948,7 @@
     "files": 1
   },
   "agent-tool-calls": {
-    "lines": 253,
+    "lines": 258,
     "files": 1
   },
   "agent-task-list": {
@@ -908,7 +972,7 @@
     "files": 1
   },
   "approval-request-card": {
-    "lines": 242,
+    "lines": 247,
     "files": 1
   },
   "agent-diff-review": {
@@ -916,7 +980,7 @@
     "files": 1
   },
   "confidence-recommendation": {
-    "lines": 253,
+    "lines": 258,
     "files": 1
   },
   "permission-scope-dialog": {
@@ -952,7 +1016,7 @@
     "files": 1
   },
   "retrieval-empty-state": {
-    "lines": 178,
+    "lines": 180,
     "files": 1
   },
   "context-window-budget": {
@@ -984,11 +1048,11 @@
     "files": 1
   },
   "ai-inspector-panel": {
-    "lines": 322,
+    "lines": 381,
     "files": 1
   },
   "ai-insight-cards": {
-    "lines": 275,
+    "lines": 284,
     "files": 1
   },
   "ai-slash-menu": {
@@ -1032,7 +1096,7 @@
     "files": 1
   },
   "menu-course-list": {
-    "lines": 276,
+    "lines": 282,
     "files": 1
   },
   "product-gallery": {
@@ -1068,7 +1132,7 @@
     "files": 1
   },
   "cart-line-items": {
-    "lines": 197,
+    "lines": 199,
     "files": 1
   },
   "checkout-form": {
@@ -1088,11 +1152,11 @@
     "files": 1
   },
   "gift-card-purchase": {
-    "lines": 359,
+    "lines": 361,
     "files": 1
   },
   "guest-checkout-form": {
-    "lines": 394,
+    "lines": 396,
     "files": 1
   },
   "discount-modal": {
@@ -1108,7 +1172,7 @@
     "files": 1
   },
   "review-list": {
-    "lines": 272,
+    "lines": 274,
     "files": 1
   },
   "order-tracking-timeline": {
@@ -1136,7 +1200,7 @@
     "files": 1
   },
   "refund-status-tracker": {
-    "lines": 239,
+    "lines": 241,
     "files": 1
   },
   "refunds-overview-table": {
@@ -1156,11 +1220,11 @@
     "files": 1
   },
   "review-history-list": {
-    "lines": 289,
+    "lines": 291,
     "files": 1
   },
   "gift-card-balance": {
-    "lines": 252,
+    "lines": 254,
     "files": 1
   }
 }

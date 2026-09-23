@@ -65,7 +65,7 @@ export function HeroIntegrations({
   return (
     <section className={`relative overflow-hidden ${className}`}>
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute -top-32 left-1/2 h-96 w-[40rem] -translate-x-1/2 rounded-full bg-primary/15 blur-3xl" />
+        <div className="absolute -top-32 left-1/2 h-96 w-[40rem] -translate-x-1/2 rounded-full bg-primary/15 blur-3xl border border-transparent" />
       </div>
 
       <div className="mx-auto grid w-full max-w-7xl items-center gap-12 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:gap-16 lg:px-8 lg:py-24">
@@ -108,23 +108,23 @@ export function HeroIntegrations({
           {integrations.map((name) => (
             <li
               key={name}
-              className="flex aspect-square flex-col items-center justify-center gap-2 rounded-2xl border border-border/60 bg-card/60 p-2 text-center backdrop-blur transition-colors hover:border-primary/40 hover:bg-card"
+              className="flex aspect-square min-w-0 flex-col items-center justify-center gap-2 rounded-2xl border border-border/60 bg-card/60 p-2 text-center backdrop-blur transition-colors hover:border-primary/40 hover:bg-card"
             >
               <span
                 aria-hidden
-                className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/15 text-xs font-bold text-primary"
+                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary/15 text-xs font-bold text-primary"
               >
                 {name.slice(0, 2).toUpperCase()}
               </span>
-              <span className="text-[11px] font-medium leading-tight text-muted-foreground">
+              <span className="w-full truncate text-[11px] font-medium leading-tight text-muted-foreground">
                 {name}
               </span>
             </li>
           ))}
 
           {moreLabel ? (
-            <li className="flex aspect-square items-center justify-center rounded-2xl border border-dashed border-border/60 p-2 text-center text-[11px] font-medium text-muted-foreground">
-              {moreLabel}
+            <li className="flex aspect-square min-w-0 items-center justify-center rounded-2xl border border-dashed border-border/60 p-2 text-center text-[11px] font-medium text-muted-foreground">
+              <span className="w-full truncate">{moreLabel}</span>
             </li>
           ) : null}
         </ul>

@@ -196,12 +196,15 @@ export function FaqCategorized({
           const slug = slugify(topic.name)
           return (
             <section key={topic.name} id={`${headingId}-faq-${slug}`} aria-labelledby={`${headingId}-faq-${slug}-heading`} className="scroll-mt-24">
-              <h3
-                id={`${headingId}-faq-${slug}-heading`}
-                className="text-sm font-semibold uppercase tracking-wider text-muted-foreground"
-              >
-                {topic.name}
-              </h3>
+              {topic.name ? (
+                <h3
+                  id={`${headingId}-faq-${slug}-heading`}
+                  data-stress-ignore
+                  className="text-sm font-semibold uppercase tracking-wider text-muted-foreground"
+                >
+                  {topic.name}
+                </h3>
+              ) : null}
 
               <div className="mt-4 divide-y divide-border/60 border-y border-border/60">
                 {topic.questions.map((item, index) => (

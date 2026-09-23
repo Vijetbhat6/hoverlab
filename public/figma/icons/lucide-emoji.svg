@@ -1,0 +1,101 @@
+<!--
+ISC License
+
+Copyright (c) for portions of Lucide are held by Cole Bemis 2013-2022 as part of Feather (MIT). All other copyright (c) for Lucide are held by Lucide Contributors 2022.
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted, provided that the above
+copyright notice and this permission notice appear in all copies.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" width="504" height="24" viewBox="0 0 504 24" id="Lucide icons / Emoji" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <g id="biceps-flexed" transform="translate(0 0)">
+    <rect id="biceps-flexed bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12.409 13.017A5 5 0 0 1 22 15c0 3.866-4 7-9 7-4.077 0-8.153-.82-10.371-2.462-.426-.316-.631-.832-.62-1.362C2.118 12.723 2.627 2 10 2a3 3 0 0 1 3 3 2 2 0 0 1-2 2c-1.105 0-1.64-.444-2-1" />
+    <path d="M15 14a5 5 0 0 0-7.584 2" />
+    <path d="M9.964 6.825C8.019 7.977 9.5 13 8 15" />
+  </g>
+  <g id="hand-helping" transform="translate(40 0)">
+    <rect id="hand-helping bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M11 12h2a2 2 0 1 0 0-4h-3c-.6 0-1.1.2-1.4.6L3 14" />
+    <path d="m7 18 1.6-1.4c.3-.4.8-.6 1.4-.6h4c1.1 0 2.1-.4 2.8-1.2l4.6-4.4a2 2 0 0 0-2.75-2.91l-4.2 3.9" />
+    <path d="m2 13 6 6" />
+  </g>
+  <g id="hand-metal" transform="translate(80 0)">
+    <rect id="hand-metal bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M18 12.5V10a2 2 0 0 0-2-2a2 2 0 0 0-2 2v1.4" />
+    <path d="M14 11V9a2 2 0 1 0-4 0v2" />
+    <path d="M10 10.5V5a2 2 0 1 0-4 0v9" />
+    <path d="m7 15-1.76-1.76a2 2 0 0 0-2.83 2.82l3.6 3.6C7.5 21.14 9.2 22 12 22h2a8 8 0 0 0 8-8V7a2 2 0 1 0-4 0v5" />
+  </g>
+  <g id="heart" transform="translate(120 0)">
+    <rect id="heart bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
+  </g>
+  <g id="heart-crack" transform="translate(160 0)">
+    <rect id="heart-crack bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
+    <path d="m12 13-1-1 2-2-3-3 2-2" />
+  </g>
+  <g id="heart-handshake" transform="translate(200 0)">
+    <rect id="heart-handshake bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
+    <path d="M12 5 9.04 7.96a2.17 2.17 0 0 0 0 3.08c.82.82 2.13.85 3 .07l2.07-1.9a2.82 2.82 0 0 1 3.79 0l2.96 2.66" />
+    <path d="m18 15-2-2" />
+    <path d="m15 18-2-2" />
+  </g>
+  <g id="leafy-green" transform="translate(240 0)">
+    <rect id="leafy-green bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M2 22c1.25-.987 2.27-1.975 3.9-2.2a5.56 5.56 0 0 1 3.8 1.5 4 4 0 0 0 6.187-2.353 3.5 3.5 0 0 0 3.69-5.116A3.5 3.5 0 0 0 20.95 8 3.5 3.5 0 1 0 16 3.05a3.5 3.5 0 0 0-5.831 1.373 3.5 3.5 0 0 0-5.116 3.69 4 4 0 0 0-2.348 6.155C3.499 15.42 4.409 16.712 4.2 18.1 3.926 19.743 3.014 20.732 2 22" />
+    <path d="M2 22 17 7" />
+  </g>
+  <g id="party-popper" transform="translate(280 0)">
+    <rect id="party-popper bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M5.8 11.3 2 22l10.7-3.79" />
+    <path d="M4 3h.01" />
+    <path d="M22 8h.01" />
+    <path d="M15 2h.01" />
+    <path d="M22 20h.01" />
+    <path d="m22 2-2.24.75a2.9 2.9 0 0 0-1.96 3.12c.1.86-.57 1.63-1.45 1.63h-.38c-.86 0-1.6.6-1.76 1.44L14 10" />
+    <path d="m22 13-.82-.33c-.86-.34-1.82.2-1.98 1.11c-.11.7-.72 1.22-1.43 1.22H17" />
+    <path d="m11 2 .33.82c.34.86-.2 1.82-1.11 1.98C9.52 4.9 9 5.52 9 6.23V7" />
+    <path d="M11 13c1.93 1.93 2.83 4.17 2 5-.83.83-3.07-.07-5-2-1.93-1.93-2.83-4.17-2-5 .83-.83 3.07.07 5 2Z" />
+  </g>
+  <g id="ribbon" transform="translate(320 0)">
+    <rect id="ribbon bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 11.22C11 9.997 10 9 10 8a2 2 0 0 1 4 0c0 1-.998 2.002-2.01 3.22" />
+    <path d="m12 18 2.57-3.5" />
+    <path d="M6.243 9.016a7 7 0 0 1 11.507-.009" />
+    <path d="M9.35 14.53 12 11.22" />
+    <path d="M9.35 14.53C7.728 12.246 6 10.221 6 7a6 5 0 0 1 12 0c-.005 3.22-1.778 5.235-3.43 7.5l3.557 4.527a1 1 0 0 1-.203 1.43l-1.894 1.36a1 1 0 0 1-1.384-.215L12 18l-2.679 3.593a1 1 0 0 1-1.39.213l-1.865-1.353a1 1 0 0 1-.203-1.422z" />
+  </g>
+  <g id="salad" transform="translate(360 0)">
+    <rect id="salad bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M7 21h10" />
+    <path d="M12 21a9 9 0 0 0 9-9H3a9 9 0 0 0 9 9Z" />
+    <path d="M11.38 12a2.4 2.4 0 0 1-.4-4.77 2.4 2.4 0 0 1 3.2-2.77 2.4 2.4 0 0 1 3.47-.63 2.4 2.4 0 0 1 3.37 3.37 2.4 2.4 0 0 1-1.1 3.7 2.51 2.51 0 0 1 .03 1.1" />
+    <path d="m13 12 4-4" />
+    <path d="M10.9 7.25A3.99 3.99 0 0 0 4 10c0 .73.2 1.41.54 2" />
+  </g>
+  <g id="star" transform="translate(400 0)">
+    <rect id="star bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+  </g>
+  <g id="thumbs-down" transform="translate(440 0)">
+    <rect id="thumbs-down bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M17 14V2" />
+    <path d="M9 18.12 10 14H4.17a2 2 0 0 1-1.92-2.56l2.33-8A2 2 0 0 1 6.5 2H20a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.76a2 2 0 0 0-1.79 1.11L12 22a3.13 3.13 0 0 1-3-3.88Z" />
+  </g>
+  <g id="thumbs-up" transform="translate(480 0)">
+    <rect id="thumbs-up bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M7 10v12" />
+    <path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z" />
+  </g>
+</svg>

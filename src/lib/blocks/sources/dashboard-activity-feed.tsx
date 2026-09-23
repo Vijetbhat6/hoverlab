@@ -156,7 +156,7 @@ export function DashboardActivityFeed({
                 <time
                   dateTime={event.at}
                   title={new Date(event.at).toUTCString()}
-                  className="mt-0.5 block text-xs text-muted-foreground"
+                  className="mt-0.5 block break-words text-xs text-muted-foreground"
                 >
                   {relativeTime(event.at, now)}
                 </time>

@@ -151,7 +151,7 @@ export function VideoCallLayout({
                 ) : (
                   <Mic aria-hidden className="h-3 w-3 shrink-0 text-muted-foreground" />
                 )}
-                <span className="min-w-0 truncate text-[11px] font-medium">
+                <span className="min-w-0 flex-1 break-words text-[11px] font-medium">
                   {person.name}
                   {person.self ? ' (you)' : ''}
                 </span>

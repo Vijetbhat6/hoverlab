@@ -38,12 +38,24 @@ const IP_SALT = process.env.QUOTA_IP_SALT ?? 'hoverlab:quota:unsalted'
  * is the client and the rest are proxies. Vercel also sets
  * `x-real-ip`, which is already resolved and is preferred when present.
  *
+ * On Netlify, `x-nf-client-connection-ip` is the address Netlify's edge saw
+ * and is written by Netlify, not the caller, so it is read first there
+ * (`TRUST_NF_CLIENT_IP` is set at build by next.config.ts). Off Netlify it is
+ * just a header and is ignored: `x-real-ip` below is the same story on any
+ * host that does not overwrite it, which is why a client could move itself
+ * to a fresh anonymous bucket by sending one.
+ *
  * A spoofed header can only ever move a visitor to a different anonymous
  * bucket, which is why this does not try harder: the defence against
  * someone forging IPs to reset their own counter is that signing in is
  * free and gives them more exports anyway.
  */
-function clientIp(request: Request): string {
+export function clientIp(request: Request): string {
+  if (process.env.TRUST_NF_CLIENT_IP === '1') {
+    const nf = request.headers.get('x-nf-client-connection-ip')
+    if (nf) return nf.trim()
+  }
+
   const real = request.headers.get('x-real-ip')
   if (real) return real.trim()
 

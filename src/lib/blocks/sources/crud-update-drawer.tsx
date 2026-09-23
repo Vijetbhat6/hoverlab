@@ -173,7 +173,7 @@ export function CrudUpdateDrawer({
           role="dialog"
           aria-modal="false"
           aria-labelledby={`${uid}-title`}
-          className="flex w-full flex-col rounded-xl border border-border bg-card text-card-foreground sm:w-[28rem] sm:shrink-0"
+          className="flex w-full flex-col rounded-xl border border-border bg-card text-card-foreground sm:w-[28rem] sm:max-w-full sm:shrink-0"
         >
           <header className="flex items-start justify-between gap-3 border-b border-border p-4">
             <div className="min-w-0">

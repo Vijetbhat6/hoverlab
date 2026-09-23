@@ -7,7 +7,7 @@
     geometry, colour and type. There are no variants, no auto-layout,
     and no hover or motion — none of those exist in a static frame.
 
-    Every section here is free to copy as code at https://hoverlab.dev/blocks
+    Every one of these is free to copy as code at https://hoverlab.dev/blocks
   -->
   <rect id="Background" x="0" y="0" width="1216" height="6086" fill="#ffffff" />
   <text id="Email &amp; Social Login Card label" x="64" y="84" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Email &amp; Social Login Card</text>
@@ -15,21 +15,36 @@
   <g id="Email &amp; Social Login Card" transform="translate(64, 116)">
     <rect id="container" x="0" y="0" width="1088" height="580" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="container 2" x="352" y="25" width="384" height="530" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Welcome back" x="544" y="78" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="24" font-weight="700" letter-spacing="-0.6" text-anchor="middle">Welcome back</text>
-      <text id="Sign in to pick up where you left off." x="544" y="106" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" text-anchor="middle">Sign in to pick up where you left off.</text>
+      <text id="Welcome back" x="543.99" y="78" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="24" font-weight="700" letter-spacing="-0.6" text-anchor="middle">Welcome back</text>
+      <text id="Sign in to pick up where you left off." x="543.99" y="107" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" text-anchor="middle">Sign in to pick up where you left off.</text>
       <rect id="button" x="381" y="136" width="157" height="38" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="GitHub" x="459.5" y="150" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">GitHub</text>
+      <text id="GitHub" x="471.49" y="160" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">GitHub</text>
+      <g id="icon github" transform="translate(425.047 147) scale(0.667 0.667)" fill="none" stroke="#080c0f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
+        <path d="M9 18c-4.51 2-5-2-7-2" />
+      </g>
       <rect id="button 2" x="550" y="136" width="157" height="38" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Google" x="628.5" y="150" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Google</text>
+      <text id="Google" x="640.5" y="160" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Google</text>
+      <g id="icon chrome" transform="translate(593.141 147) scale(0.667 0.667)" fill="none" stroke="#080c0f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10" />
+        <circle cx="12" cy="12" r="4" />
+        <line x1="21.17" y1="8" x2="12" y2="8" />
+        <line x1="3.95" y1="6.06" x2="8.54" y2="14" />
+        <line x1="10.88" y1="21.94" x2="15.46" y2="14" />
+      </g>
       <text id="or continue with email" x="483.5" y="210" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">or continue with email</text>
-      <text id="Email" x="381" y="252" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Email</text>
+      <text id="Email" x="381" y="253" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Email</text>
       <rect id="field" x="381" y="264" width="326" height="42" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Password" x="381" y="336" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Password</text>
+      <text id="Password" x="381" y="337" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Password</text>
       <text id="Forgot?" x="663.38" y="337" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Forgot?</text>
       <rect id="field 2" x="381" y="348" width="326" height="42" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <rect id="button 3" x="381" y="442" width="326" height="40" rx="16" fill="#007f34" />
-      <text id="Sign in" x="544" y="456" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Sign in</text>
-      <text id="New here?" x="544" y="520" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" text-anchor="middle">New here?</text>
+      <g id="icon eye" transform="translate(677 361) scale(0.667 0.667)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0" />
+        <circle cx="12" cy="12" r="3" />
+      </g>
+      <rect id="button 3" x="381" y="442" width="326" height="40" rx="16" fill="#00782e" />
+      <text id="Sign in" x="543.99" y="467" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Sign in</text>
+      <text id="New here?" x="480.95" y="521" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" text-anchor="middle">New here?</text>
       <text id="Create an account" x="579.88" y="521" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Create an account</text>
   </g>
   <text id="Split Signup With Proof label" x="64" y="812" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Split Signup With Proof</text>
@@ -37,30 +52,41 @@
   <g id="Split Signup With Proof" transform="translate(64, 844)">
     <rect id="container" x="0" y="0" width="1088" height="592" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <text id="Create your account" x="80.5" y="57" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="24" font-weight="700" letter-spacing="-0.6">Create your account</text>
-      <text id="Free to start. No card required." x="80.5" y="85" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Free to start. No card required.</text>
-      <text id="Full name" x="80.5" y="133" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Full name</text>
+      <text id="Free to start. No card required." x="80.5" y="86" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Free to start. No card required.</text>
+      <text id="Full name" x="80.5" y="134" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Full name</text>
       <rect id="field" x="80.5" y="145" width="384" height="42" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Work email" x="80.5" y="217" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Work email</text>
+      <text id="Work email" x="80.5" y="218" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Work email</text>
       <rect id="field 2" x="80.5" y="229" width="384" height="42" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Password" x="80.5" y="301" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Password</text>
+      <text id="Password" x="80.5" y="302" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Password</text>
       <rect id="field 3" x="80.5" y="313" width="384" height="42" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="At least 8 characters" x="80.5" y="379" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">At least 8 characters</text>
+      <text id="At least 8 characters" x="104.5" y="379" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">At least 8 characters</text>
       <rect id="container 2" x="80.5" y="367" width="16" height="16" rx="8" fill="#f3f2ee" />
-      <text id="One number" x="80.5" y="401" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">One number</text>
+      <text id="One number" x="104.5" y="401" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">One number</text>
       <rect id="container 3" x="80.5" y="389" width="16" height="16" rx="8" fill="#f3f2ee" />
-      <text id="One uppercase letter" x="80.5" y="423" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">One uppercase letter</text>
+      <text id="One uppercase letter" x="104.5" y="423" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">One uppercase letter</text>
       <rect id="container 4" x="80.5" y="411" width="16" height="16" rx="8" fill="#f3f2ee" />
-      <rect id="button" x="80.5" y="443" width="384" height="40" rx="16" fill="#007f34" opacity="0.5" />
-      <text id="Create account" x="272.5" y="457" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Create account</text>
+      <rect id="button" x="80.5" y="443" width="384" height="40" rx="16" fill="#00782e" opacity="0.5" />
+      <text id="Create account" x="272.49" y="468" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Create account</text>
       <text id="By continuing you agree to the Terms and…" x="272.5" y="511" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" text-anchor="middle">By continuing you agree to the Terms and Privacy Policy.</text>
-      <text id="Already have an account?" x="272.5" y="553" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" text-anchor="middle">Already have an account?</text>
+      <text id="Already have an account?" x="247.86" y="554" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" text-anchor="middle">Already have an account?</text>
       <text id="Sign in" x="356.68" y="554" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Sign in</text>
+      <g id="icon quote" transform="translate(624 149.125) scale(1.333 1.333)" fill="none" stroke="rgba(0, 120, 45, 0.4)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M16 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z" />
+        <path d="M5 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z" />
+      </g>
       <text id="We shipped our marketing site in" x="624" y="218.13" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" font-weight="500">We shipped our marketing site in</text>
       <text id="four days instead of three weeks." x="624" y="247.38" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" font-weight="500">four days instead of three weeks.</text>
       <text id="Same team, same headcount." x="624" y="276.63" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" font-weight="500">Same team, same headcount.</text>
-      <text id="Dana Whitfield" x="624" y="318.88" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Dana Whitfield</text>
-      <text id="Head of Design, Globex" x="624" y="338.88" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Head of Design, Globex</text>
+      <text id="Dana Whitfield" x="624" y="319.88" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Dana Whitfield</text>
+      <text id="Head of Design, Globex" x="624" y="339.88" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Head of Design, Globex</text>
       <rect id="container 5" x="624" y="376.88" width="384" height="66" rx="16" fill="rgba(253, 252, 248, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <g id="icon sparkles" transform="translate(641 401.875) scale(0.667 0.667)" fill="none" stroke="#00782e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z" />
+        <path d="M20 3v4" />
+        <path d="M22 5h-4" />
+        <path d="M4 17v2" />
+        <path d="M5 18H3" />
+      </g>
       <text id="Set up in under two minutes — nothing to" x="665" y="404.88" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Set up in under two minutes — nothing to</text>
       <text id="configure." x="665" y="424.88" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">configure.</text>
   </g>
@@ -69,9 +95,13 @@
   <g id="One-Time Code Input" transform="translate(64, 1584)">
     <rect id="container" x="0" y="0" width="1088" height="386" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="container 2" x="352" y="35" width="384" height="316" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <rect id="container 3" x="522" y="64" width="44" height="44" rx="16" fill="rgba(0, 128, 54, 0.149)" />
+      <rect id="container 3" x="522" y="64" width="44" height="44" rx="16" fill="rgba(0, 121, 47, 0.149)" />
+      <g id="icon shield-check" transform="translate(534 76) scale(0.833 0.833)" fill="none" stroke="#00782e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
+        <path d="m9 12 2 2 4-4" />
+      </g>
       <text id="Check your email" x="544" y="148" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="24" font-weight="700" letter-spacing="-0.6" text-anchor="middle">Check your email</text>
-      <text id="We sent a 6-digit code to" x="544" y="176" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" text-anchor="middle">We sent a 6-digit code to</text>
+      <text id="We sent a 6-digit code to" x="478.77" y="177" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" text-anchor="middle">We sent a 6-digit code to</text>
       <text id="you@company.com" x="625.91" y="177" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">you@company.com</text>
       <rect id="field" x="392" y="210" width="44" height="48" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="field 2" x="444" y="210" width="44" height="48" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
@@ -79,8 +109,8 @@
       <rect id="field 4" x="548" y="210" width="44" height="48" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="field 5" x="600" y="210" width="44" height="48" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="field 6" x="652" y="210" width="44" height="48" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Did not get it?" x="544" y="316" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" text-anchor="middle">Did not get it?</text>
-      <text id="Send another" x="590.91" y="316" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Send another</text>
+      <text id="Did not get it?" x="497.18" y="317" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" text-anchor="middle">Did not get it?</text>
+      <text id="Send another" x="590.91" y="317" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Send another</text>
   </g>
   <text id="Password Reset Request label" x="64" y="2086" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Password Reset Request</text>
   <text id="auth-forgot-password id" x="64" y="2100" font-family="ui-monospace, monospace" font-size="12" fill="#737373">auth-forgot-password</text>
@@ -90,73 +120,106 @@
       <text id="Reset your password" x="381" y="79.5" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="24" font-weight="700" letter-spacing="-0.6">Reset your password</text>
       <text id="Enter your email and we will send you a …" x="381" y="108.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Enter your email and we will send you a link to set</text>
       <text id="a new one." x="381" y="128.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">a new one.</text>
-      <text id="Email" x="381" y="171.5" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Email</text>
+      <text id="Email" x="381" y="172.5" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Email</text>
       <rect id="field" x="381" y="183.5" width="326" height="42" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <rect id="button" x="381" y="241.5" width="326" height="40" rx="16" fill="#007f34" />
-      <text id="Send reset link" x="544" y="255.5" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Send reset link</text>
-      <text id="Back to sign in" x="381" y="319.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Back to sign in</text>
+      <rect id="button" x="381" y="241.5" width="326" height="40" rx="16" fill="#00782e" />
+      <text id="Send reset link" x="544" y="266.5" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Send reset link</text>
+      <text id="Back to sign in" x="507.45" y="320.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Back to sign in</text>
+      <g id="icon arrow-left" transform="translate(485.453 307.5) scale(0.667 0.667)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m12 19-7-7 7-7" />
+        <path d="M19 12H5" />
+      </g>
   </g>
   <text id="New Password With Strength Meter label" x="64" y="2620" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">New Password With Strength Meter</text>
   <text id="auth-reset-password id" x="64" y="2634" font-family="ui-monospace, monospace" font-size="12" fill="#737373">auth-reset-password</text>
   <g id="New Password With Strength Meter" transform="translate(64, 2652)">
     <rect id="container" x="0" y="0" width="1088" height="518" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="container 2" x="352" y="25" width="384" height="468" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <rect id="container 3" x="381" y="54" width="44" height="44" rx="16" fill="rgba(0, 128, 54, 0.149)" />
+      <rect id="container 3" x="381" y="54" width="44" height="44" rx="16" fill="rgba(0, 121, 47, 0.149)" />
+      <g id="icon key-round" transform="translate(393 66) scale(0.833 0.833)" fill="none" stroke="#00782e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z" />
+        <circle cx="16.5" cy="7.5" r=".5" fill="#00782e" />
+      </g>
       <text id="Choose a new password" x="381" y="142" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="24" font-weight="700" letter-spacing="-0.6">Choose a new password</text>
       <text id="It needs at least" x="381" y="171" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">It needs at least</text>
       <text id="8" x="486.63" y="171" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">8</text>
       <text id="characters. Longer beats" x="495.09" y="171" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">characters. Longer beats</text>
       <text id="complicated." x="381" y="191" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">complicated.</text>
-      <text id="New password" x="381" y="234" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">New password</text>
+      <text id="New password" x="381" y="235" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">New password</text>
       <rect id="field" x="381" y="246" width="326" height="42" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <g id="icon eye" transform="translate(677 259) scale(0.667 0.667)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0" />
+        <circle cx="12" cy="12" r="3" />
+      </g>
       <rect id="container 4" x="381" y="298" width="60.5" height="4" rx="2" fill="rgba(220, 222, 225, 0.6)" />
       <rect id="container 5" x="445.5" y="298" width="60.5" height="4" rx="2" fill="rgba(220, 222, 225, 0.6)" />
       <rect id="container 6" x="510" y="298" width="60.5" height="4" rx="2" fill="rgba(220, 222, 225, 0.6)" />
       <rect id="container 7" x="574.5" y="298" width="60.5" height="4" rx="2" fill="rgba(220, 222, 225, 0.6)" />
-      <text id="Confirm password" x="381" y="332" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Confirm password</text>
+      <text id="Confirm password" x="381" y="333" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Confirm password</text>
       <rect id="field 2" x="381" y="344" width="326" height="42" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <rect id="button" x="381" y="424" width="326" height="40" rx="16" fill="#007f34" opacity="0.5" />
-      <text id="Set new password" x="544" y="438" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Set new password</text>
+      <rect id="button" x="381" y="424" width="326" height="40" rx="16" fill="#00782e" opacity="0.5" />
+      <text id="Set new password" x="543.99" y="449" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Set new password</text>
   </g>
   <text id="Two-Factor Challenge label" x="64" y="3286" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Two-Factor Challenge</text>
   <text id="auth-two-factor id" x="64" y="3300" font-family="ui-monospace, monospace" font-size="12" fill="#737373">auth-two-factor</text>
   <g id="Two-Factor Challenge" transform="translate(64, 3318)">
     <rect id="container" x="0" y="0" width="1088" height="523" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="container 2" x="352" y="25" width="384" height="473" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <rect id="container 3" x="381" y="54" width="44" height="44" rx="16" fill="rgba(0, 128, 54, 0.149)" />
+      <rect id="container 3" x="381" y="54" width="44" height="44" rx="16" fill="rgba(0, 121, 47, 0.149)" />
+      <g id="icon smartphone" transform="translate(393 66) scale(0.833 0.833)" fill="none" stroke="#00782e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect rx="2" ry="2" x="5" y="2" width="14" height="20" />
+        <path d="M12 18h.01" />
+      </g>
       <text id="Two-factor authentication" x="381" y="142" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="24" font-weight="700" letter-spacing="-0.6">Two-factor authentication</text>
-      <text id="Enter the 6-digit code from your authent…" x="381" y="170" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Enter the 6-digit code from your authenticator app.</text>
-      <text id="Authentication code" x="381" y="214" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Authentication code</text>
+      <text id="Enter the 6-digit code from your authent…" x="381" y="171" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Enter the 6-digit code from your authenticator app.</text>
+      <text id="Authentication code" x="381" y="215" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Authentication code</text>
       <rect id="field" x="381" y="226" width="326" height="50" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Trust this device for 30 days" x="407" y="342" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Trust this device for 30 days</text>
-      <rect id="button" x="381" y="364" width="326" height="40" rx="16" fill="#007f34" opacity="0.5" />
-      <text id="Verify" x="544" y="378" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Verify</text>
+      <text id="Trust this device for 30 days" x="407" y="343" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Trust this device for 30 days</text>
+      <rect id="button" x="381" y="364" width="326" height="40" rx="16" fill="#00782e" opacity="0.5" />
+      <text id="Verify" x="544" y="389" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Verify</text>
       <rect id="container 4" x="381" y="428" width="326" height="41" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Lost your device? Use a backup code" x="544" y="461" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Lost your device? Use a backup code</text>
+      <text id="Lost your device? Use a backup code" x="544" y="462" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Lost your device? Use a backup code</text>
   </g>
   <text id="Email-First SSO Sign-In label" x="64" y="3957" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Email-First SSO Sign-In</text>
   <text id="auth-sso-domain id" x="64" y="3971" font-family="ui-monospace, monospace" font-size="12" fill="#737373">auth-sso-domain</text>
   <g id="Email-First SSO Sign-In" transform="translate(64, 3989)">
     <rect id="container" x="0" y="0" width="1088" height="570.5" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="container 2" x="344" y="65" width="400" height="440.5" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
-      <text id="Sign in" x="373" y="114" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="20" font-weight="600" letter-spacing="-0.5">Sign in</text>
+      <text id="Sign in" x="373" y="115" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="20" font-weight="600" letter-spacing="-0.5">Sign in</text>
       <text id="Start with your work email — how you sig…" x="373" y="141" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Start with your work email — how you sign in</text>
       <text id="depends on what your company has set up." x="373" y="161" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">depends on what your company has set up.</text>
-      <text id="Email" x="373" y="204" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Email</text>
+      <text id="Email" x="373" y="205" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Email</text>
       <rect id="field" x="373" y="216" width="342" height="40" rx="12" fill="#fdfcf8" stroke="#8d8f92" stroke-width="1" />
       <rect id="container 3" x="373" y="272" width="342" height="84.5" rx="16" fill="rgba(242, 242, 237, 0.4)" stroke="#dbdee1" stroke-width="1" />
+      <g id="icon building2" transform="translate(386 287) scale(0.667 0.667)" fill="none" stroke="#00782e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z" />
+        <path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2" />
+        <path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2" />
+        <path d="M10 6h4" />
+        <path d="M10 10h4" />
+        <path d="M10 14h4" />
+        <path d="M10 18h4" />
+      </g>
       <text id="manages accounts on" x="502.83" y="298" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">manages accounts on</text>
       <text id="meridianfoods.com" x="412" y="317.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">meridianfoods.com</text>
       <text id="." x="515.94" y="317.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">.</text>
       <text id="They require single sign-on, so" x="521.36" y="317.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">They require single sign-on, so</text>
       <text id="there is no password to enter here." x="412" y="337" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">there is no password to enter here.</text>
       <text id="Meridian Foods" x="412" y="298" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="600">Meridian Foods</text>
-      <rect id="button" x="373" y="368.5" width="342" height="40" rx="12" fill="#007f34" />
+      <rect id="button" x="373" y="368.5" width="342" height="40" rx="12" fill="#00782e" />
       <text id="Continue with" x="487.41" y="393.5" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Continue with</text>
       <text id="Meridian Foods 2" x="586.81" y="393.5" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Meridian Foods</text>
       <text id="SSO" x="654.4" y="393.5" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">SSO</text>
+      <g id="icon shield-check" transform="translate(417.25 380.5) scale(0.667 0.667)" fill="none" stroke="#fcfcfc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
+        <path d="m9 12 2 2 4-4" />
+      </g>
       <text id="Takes you to Okta" x="544" y="432.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" text-anchor="middle">Takes you to Okta</text>
-      <text id="Use a different email" x="440.25" y="466.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500" text-anchor="middle">Use a different email</text>
+      <text id="Use a different email" x="450.25" y="466.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500" text-anchor="middle">Use a different email</text>
+      <g id="icon arrow-left" transform="translate(373 455.5) scale(0.583 0.583)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m12 19-7-7 7-7" />
+        <path d="M19 12H5" />
+      </g>
   </g>
   <text id="Magic Link Sign In label" x="64" y="4675.5" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Magic Link Sign In</text>
   <text id="auth-magic-link-form id" x="64" y="4689.5" font-family="ui-monospace, monospace" font-size="12" fill="#737373">auth-magic-link-form</text>
@@ -164,40 +227,52 @@
     <rect id="container" x="0" y="0" width="1088" height="488" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="section" x="1" y="1" width="1086" height="486" fill="#fdfcf8" />
       <rect id="container 2" x="320" y="65" width="448" height="358" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
-      <text id="Sign in without a password" x="353" y="118" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="20" font-weight="600" letter-spacing="-0.5">Sign in without a password</text>
+      <text id="Sign in without a password" x="353" y="119" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="20" font-weight="600" letter-spacing="-0.5">Sign in without a password</text>
       <text id="One address, one link, no password to fo…" x="353" y="149" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">One address, one link, no password to forget or reuse. The</text>
       <text id="link works once and expires in fifteen m…" x="353" y="169" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">link works once and expires in fifteen minutes, which is</text>
       <text id="stated here rather than discovered when …" x="353" y="189" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">stated here rather than discovered when it fails.</text>
-      <text id="Email" x="353" y="232" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Email</text>
+      <text id="Email" x="353" y="233" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Email</text>
       <rect id="field" x="353" y="244" width="382" height="38" rx="10" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
       <text id="The link lands here and works once. It e…" x="353" y="298" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">The link lands here and works once. It expires after 15 minutes.</text>
-      <rect id="button" x="353" y="318" width="382" height="36" rx="10" fill="#007f34" />
-      <text id="Email me a link" x="544" y="332" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Email me a link</text>
+      <rect id="button" x="353" y="318" width="382" height="36" rx="10" fill="#00782e" />
+      <text id="Email me a link" x="544" y="341" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Email me a link</text>
   </g>
   <text id="Enterprise SSO Split label" x="64" y="5311.5" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Enterprise SSO Split</text>
   <text id="sso-enterprise-split id" x="64" y="5325.5" font-family="ui-monospace, monospace" font-size="12" fill="#737373">sso-enterprise-split</text>
   <g id="Enterprise SSO Split" transform="translate(64, 5343.5)">
     <rect id="container" x="0" y="0" width="1088" height="678" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="section" x="1" y="1" width="1086" height="676" fill="#fdfcf8" />
-      <text id="Single sign-on" x="25" y="111" fill="#007f34" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Single sign-on</text>
-      <text id="Your directory, your rules" x="25" y="161" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="36" font-weight="600" letter-spacing="-0.9">Your directory, your rules</text>
+      <text id="Single sign-on" x="25" y="112" fill="#00782e" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Single sign-on</text>
+      <text id="Your directory, your rules" x="25" y="157" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="36" font-weight="600" letter-spacing="-0.9">Your directory, your rules</text>
       <text id="SSO on a pricing page is one word. To th…" x="25" y="198" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">SSO on a pricing page is one word. To the person configuring it, it is</text>
       <text id="four separate features that vendors bund…" x="25" y="222" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">four separate features that vendors bundle inconsistently — so this</text>
       <text id="names them." x="25" y="246" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">names them.</text>
-      <text id="SAML 2.0 and OIDC" x="57" y="299" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">SAML 2.0 and OIDC</text>
+      <g id="icon" transform="translate(25 287) scale(1 1)" fill="#00782e" stroke="none">
+        <path d="M16.7 5.3a1 1 0 0 1 0 1.4l-7.5 7.5a1 1 0 0 1-1.4 0L3.3 9.7a1 1 0 1 1 1.4-1.4l3.8 3.8 6.8-6.8a1 1 0 0 1 1.4 0Z" />
+      </g>
+      <text id="SAML 2.0 and OIDC" x="57" y="300" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">SAML 2.0 and OIDC</text>
       <text id="Both, against any provider. Okta, Entra …" x="57" y="322" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Both, against any provider. Okta, Entra and Google are documented step</text>
       <text id="by step." x="57" y="342" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">by step.</text>
-      <text id="SCIM provisioning" x="57" y="377" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">SCIM provisioning</text>
+      <g id="icon 2" transform="translate(25 365) scale(1 1)" fill="#00782e" stroke="none">
+        <path d="M16.7 5.3a1 1 0 0 1 0 1.4l-7.5 7.5a1 1 0 0 1-1.4 0L3.3 9.7a1 1 0 1 1 1.4-1.4l3.8 3.8 6.8-6.8a1 1 0 0 1 1.4 0Z" />
+      </g>
+      <text id="SCIM provisioning" x="57" y="378" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">SCIM provisioning</text>
       <text id="Users appear and disappear with your dir…" x="57" y="400" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Users appear and disappear with your directory. Deprovisioning is the</text>
       <text id="half that matters." x="57" y="420" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">half that matters.</text>
-      <text id="Enforced, not optional" x="57" y="455" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Enforced, not optional</text>
+      <g id="icon 3" transform="translate(25 443) scale(1 1)" fill="#00782e" stroke="none">
+        <path d="M16.7 5.3a1 1 0 0 1 0 1.4l-7.5 7.5a1 1 0 0 1-1.4 0L3.3 9.7a1 1 0 1 1 1.4-1.4l3.8 3.8 6.8-6.8a1 1 0 0 1 1.4 0Z" />
+      </g>
+      <text id="Enforced, not optional" x="57" y="456" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Enforced, not optional</text>
       <text id="Password login can be switched off per d…" x="57" y="478" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Password login can be switched off per domain, so a bypass is not one</text>
       <text id="setting away." x="57" y="498" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">setting away.</text>
-      <text id="Included, not an upsell" x="57" y="533" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Included, not an upsell</text>
+      <g id="icon 4" transform="translate(25 521) scale(1 1)" fill="#00782e" stroke="none">
+        <path d="M16.7 5.3a1 1 0 0 1 0 1.4l-7.5 7.5a1 1 0 0 1-1.4 0L3.3 9.7a1 1 0 1 1 1.4-1.4l3.8 3.8 6.8-6.8a1 1 0 0 1 1.4 0Z" />
+      </g>
+      <text id="Included, not an upsell" x="57" y="534" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Included, not an upsell</text>
       <text id="On every paid plan. Charging for the con…" x="57" y="556" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">On every paid plan. Charging for the control that makes offboarding safe</text>
       <text id="is a security tax." x="57" y="576" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">is a security tax.</text>
       <rect id="container 2" x="568" y="196" width="495" height="286" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
-      <rect id="container 3" x="593" y="221" width="148.33" height="12" rx="4" fill="rgba(0, 126, 53, 0.302)" />
+      <rect id="container 3" x="593" y="221" width="148.33" height="12" rx="4" fill="rgba(0, 119, 46, 0.302)" />
       <rect id="container 4" x="593" y="245" width="445" height="96" rx="12" fill="#f3f2ee" />
       <rect id="container 5" x="593" y="353" width="140.33" height="56" rx="12" fill="#f3f2ee" />
       <rect id="container 6" x="745.33" y="353" width="140.33" height="56" rx="12" fill="#f3f2ee" />

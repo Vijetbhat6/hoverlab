@@ -207,6 +207,10 @@ export const PLAYGROUND_BLOCKS: Record<
     ssr: false,
     loading: () => null,
   }),
+  'case-study-grid': dynamic(() => import('./sources/case-study-grid').then((m) => m.CaseStudyGrid), {
+    ssr: false,
+    loading: () => null,
+  }),
   'changelog-timeline': dynamic(() => import('./sources/changelog-timeline').then((m) => m.ChangelogTimeline), {
     ssr: false,
     loading: () => null,
@@ -464,6 +468,22 @@ export const PLAYGROUND_BLOCKS: Record<
     loading: () => null,
   }),
   'drawer-record-detail': dynamic(() => import('./sources/drawer-record-detail').then((m) => m.DrawerRecordDetail), {
+    ssr: false,
+    loading: () => null,
+  }),
+  'email-newsletter-digest': dynamic(() => import('./sources/email-newsletter-digest').then((m) => m.EmailNewsletterDigest), {
+    ssr: false,
+    loading: () => null,
+  }),
+  'email-product-announcement': dynamic(() => import('./sources/email-product-announcement').then((m) => m.EmailProductAnnouncement), {
+    ssr: false,
+    loading: () => null,
+  }),
+  'email-promo-offer': dynamic(() => import('./sources/email-promo-offer').then((m) => m.EmailPromoOffer), {
+    ssr: false,
+    loading: () => null,
+  }),
+  'email-winback': dynamic(() => import('./sources/email-winback').then((m) => m.EmailWinback), {
     ssr: false,
     loading: () => null,
   }),
@@ -1056,6 +1076,50 @@ export const PLAYGROUND_BLOCKS: Record<
     loading: () => null,
   }),
   'share-access-dialog': dynamic(() => import('./sources/share-access-dialog').then((m) => m.ShareAccessDialog), {
+    ssr: false,
+    loading: () => null,
+  }),
+  'sidebar-app-grouped': dynamic(() => import('./sources/sidebar-app-grouped').then((m) => m.SidebarAppGrouped), {
+    ssr: false,
+    loading: () => null,
+  }),
+  'sidebar-collapsible': dynamic(() => import('./sources/sidebar-collapsible').then((m) => m.SidebarCollapsible), {
+    ssr: false,
+    loading: () => null,
+  }),
+  'sidebar-docs-tree': dynamic(() => import('./sources/sidebar-docs-tree').then((m) => m.SidebarDocsTree), {
+    ssr: false,
+    loading: () => null,
+  }),
+  'sidebar-file-tree': dynamic(() => import('./sources/sidebar-file-tree').then((m) => m.SidebarFileTree), {
+    ssr: false,
+    loading: () => null,
+  }),
+  'sidebar-floating-inset': dynamic(() => import('./sources/sidebar-floating-inset').then((m) => m.SidebarFloatingInset), {
+    ssr: false,
+    loading: () => null,
+  }),
+  'sidebar-mail-folders': dynamic(() => import('./sources/sidebar-mail-folders').then((m) => m.SidebarMailFolders), {
+    ssr: false,
+    loading: () => null,
+  }),
+  'sidebar-nested-accordion': dynamic(() => import('./sources/sidebar-nested-accordion').then((m) => m.SidebarNestedAccordion), {
+    ssr: false,
+    loading: () => null,
+  }),
+  'sidebar-resizable': dynamic(() => import('./sources/sidebar-resizable').then((m) => m.SidebarResizable), {
+    ssr: false,
+    loading: () => null,
+  }),
+  'sidebar-thread-history': dynamic(() => import('./sources/sidebar-thread-history').then((m) => m.SidebarThreadHistory), {
+    ssr: false,
+    loading: () => null,
+  }),
+  'sidebar-two-pane': dynamic(() => import('./sources/sidebar-two-pane').then((m) => m.SidebarTwoPane), {
+    ssr: false,
+    loading: () => null,
+  }),
+  'sidebar-workspace-switcher': dynamic(() => import('./sources/sidebar-workspace-switcher').then((m) => m.SidebarWorkspaceSwitcher), {
     ssr: false,
     loading: () => null,
   }),

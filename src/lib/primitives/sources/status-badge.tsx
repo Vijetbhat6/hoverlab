@@ -95,7 +95,7 @@ export function StatusBadge({
             className={`absolute inline-flex h-full w-full animate-ping rounded-full opacity-60 motion-reduce:animate-none ${style.dot}`}
           />
         ) : null}
-        <span aria-hidden className={`relative inline-flex h-2 w-2 rounded-full ${style.dot}`} />
+        <span aria-hidden className={`relative inline-flex h-2 w-2 rounded-full border border-transparent ${style.dot}`} />
       </span>
       {text}
     </span>

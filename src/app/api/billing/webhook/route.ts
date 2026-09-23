@@ -9,6 +9,7 @@ import {
   revokePurchasedCredits,
 } from '@/lib/billing/credits'
 import { PLANS } from '@/lib/billing/plans'
+import { refundMarker } from '@/lib/account/billing'
 
 /**
  * Polar webhook receiver — the ONLY place entitlements are granted.
@@ -369,6 +370,16 @@ async function handleOrderRefunded(data: PolarLike): Promise<void> {
   if (!snap.exists) return
 
   const purchase = snap.data() ?? {}
+
+  // Mark the order refunded so /account/billing can say so. Written BEFORE
+  // the userId check below on purpose: a purchase whose owner deleted their
+  // account has no userId (see `purchaseTombstone` in lib/account/billing),
+  // and that record is the one kept for tax purposes — it must still say it
+  // was refunded. `refundMarker` is null once set, so a redelivery (or a
+  // retry after the release-and-retry path below) never moves the date.
+  const refundMark = refundMarker(purchase, Timestamp.now())
+  if (refundMark) await snap.ref.update(refundMark)
+
   const userId = typeof purchase.userId === 'string' ? purchase.userId : null
   if (!userId) return
 

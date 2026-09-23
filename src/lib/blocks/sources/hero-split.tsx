@@ -55,8 +55,8 @@ export function HeroSplit({
     <section className={`relative overflow-hidden ${className}`}>
       {/* Ambient wash. Sits behind everything and eats no pointer events. */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute -top-32 left-1/4 h-96 w-96 rounded-full bg-primary/20 blur-3xl" />
-        <div className="absolute -top-20 right-1/5 h-80 w-80 rounded-full bg-rose-500/10 blur-3xl" />
+        <div className="absolute -top-32 left-1/4 h-96 w-96 rounded-full bg-primary/20 blur-3xl border border-transparent" />
+        <div className="absolute -top-20 right-1/5 h-80 w-80 rounded-full bg-rose-500/10 blur-3xl border border-transparent" />
       </div>
 
       <div className="mx-auto grid w-full max-w-7xl items-center gap-12 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:gap-16 lg:px-8 lg:py-24">
@@ -66,7 +66,7 @@ export function HeroSplit({
             <span className="inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-card/60 px-3 py-1 text-xs font-medium text-muted-foreground backdrop-blur">
               <span
                 aria-hidden
-                className="h-1.5 w-1.5 rounded-full bg-primary shadow-[0_0_0_3px] shadow-primary/20"
+                className="h-1.5 w-1.5 rounded-full bg-primary shadow-[0_0_0_3px] shadow-primary/20 border border-transparent"
               />
               {eyebrow}
             </span>
@@ -113,9 +113,9 @@ export function HeroSplit({
           <div className="rounded-2xl border border-border/60 bg-card/80 p-2 shadow-2xl shadow-black/20 backdrop-blur">
             {/* Window chrome */}
             <div className="flex items-center gap-1.5 px-3 py-2">
-              <span className="h-2.5 w-2.5 rounded-full bg-rose-500/70" />
-              <span className="h-2.5 w-2.5 rounded-full bg-amber-500/70" />
-              <span className="h-2.5 w-2.5 rounded-full bg-emerald-500/70" />
+              <span className="h-2.5 w-2.5 rounded-full bg-rose-500/70 border border-transparent" />
+              <span className="h-2.5 w-2.5 rounded-full bg-amber-500/70 border border-transparent" />
+              <span className="h-2.5 w-2.5 rounded-full bg-emerald-500/70 border border-transparent" />
             </div>
 
             <div className="space-y-3 rounded-xl bg-background/80 p-4">
@@ -126,12 +126,12 @@ export function HeroSplit({
                   { label: 'Active', value: '2,847', delta: '+3.1%' },
                   { label: 'Churn', value: '0.8%', delta: '-0.3%' },
                 ].map((m) => (
-                  <div key={m.label} className="rounded-lg border border-border/60 p-3">
-                    <div className="text-[10px] uppercase tracking-wide text-muted-foreground">
+                  <div key={m.label} className="min-w-0 rounded-lg border border-border/60 p-3">
+                    <div className="truncate text-[10px] uppercase tracking-wide text-muted-foreground">
                       {m.label}
                     </div>
-                    <div className="mt-1 text-lg font-bold tracking-tight">{m.value}</div>
-                    <div className="text-[10px] font-medium text-emerald-500">{m.delta}</div>
+                    <div className="mt-1 break-words text-lg font-bold tracking-tight">{m.value}</div>
+                    <div className="break-words text-[10px] font-medium text-emerald-500">{m.delta}</div>
                   </div>
                 ))}
               </div>

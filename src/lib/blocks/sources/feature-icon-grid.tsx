@@ -137,7 +137,7 @@ export function FeatureIconGrid({
             <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-border/60 bg-card/60">
               <Icon aria-hidden className="h-5 w-5 text-primary" />
             </div>
-            <h3 className="mt-4 font-semibold leading-snug">{title}</h3>
+            {title ? <h3 data-stress-ignore className="mt-4 font-semibold leading-snug">{title}</h3> : null}
             <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
               {body}
             </p>

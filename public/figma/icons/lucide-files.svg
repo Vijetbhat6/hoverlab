@@ -1,0 +1,1019 @@
+<!--
+ISC License
+
+Copyright (c) for portions of Lucide are held by Cole Bemis 2013-2022 as part of Feather (MIT). All other copyright (c) for Lucide are held by Lucide Contributors 2022.
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted, provided that the above
+copyright notice and this permission notice appear in all copies.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" width="784" height="304" viewBox="0 0 784 304" id="Lucide icons / Files" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <g id="app-window" transform="translate(0 0)">
+    <rect id="app-window bounds" width="24" height="24" fill="none" stroke="none" />
+    <rect x="2" y="4" width="20" height="16" rx="2" />
+    <path d="M10 4v4" />
+    <path d="M2 8h20" />
+    <path d="M6 4v4" />
+  </g>
+  <g id="app-window-mac" transform="translate(40 0)">
+    <rect id="app-window-mac bounds" width="24" height="24" fill="none" stroke="none" />
+    <rect width="20" height="16" x="2" y="4" rx="2" />
+    <path d="M6 8h.01" />
+    <path d="M10 8h.01" />
+    <path d="M14 8h.01" />
+  </g>
+  <g id="archive" transform="translate(80 0)">
+    <rect id="archive bounds" width="24" height="24" fill="none" stroke="none" />
+    <rect width="20" height="5" x="2" y="3" rx="1" />
+    <path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8" />
+    <path d="M10 12h4" />
+  </g>
+  <g id="archive-restore" transform="translate(120 0)">
+    <rect id="archive-restore bounds" width="24" height="24" fill="none" stroke="none" />
+    <rect width="20" height="5" x="2" y="3" rx="1" />
+    <path d="M4 8v11a2 2 0 0 0 2 2h2" />
+    <path d="M20 8v11a2 2 0 0 1-2 2h-2" />
+    <path d="m9 15 3-3 3 3" />
+    <path d="M12 12v9" />
+  </g>
+  <g id="archive-x" transform="translate(160 0)">
+    <rect id="archive-x bounds" width="24" height="24" fill="none" stroke="none" />
+    <rect width="20" height="5" x="2" y="3" rx="1" />
+    <path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8" />
+    <path d="m9.5 17 5-5" />
+    <path d="m9.5 12 5 5" />
+  </g>
+  <g id="arrow-big-down-dash" transform="translate(200 0)">
+    <rect id="arrow-big-down-dash bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M15 5H9" />
+    <path d="M15 9v3h4l-7 7-7-7h4V9z" />
+  </g>
+  <g id="arrow-down-from-line" transform="translate(240 0)">
+    <rect id="arrow-down-from-line bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M19 3H5" />
+    <path d="M12 21V7" />
+    <path d="m6 15 6 6 6-6" />
+  </g>
+  <g id="arrow-down-to-line" transform="translate(280 0)">
+    <rect id="arrow-down-to-line bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 17V3" />
+    <path d="m6 11 6 6 6-6" />
+    <path d="M19 21H5" />
+  </g>
+  <g id="arrow-up-from-line" transform="translate(320 0)">
+    <rect id="arrow-up-from-line bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m18 9-6-6-6 6" />
+    <path d="M12 3v14" />
+    <path d="M5 21h14" />
+  </g>
+  <g id="arrow-up-to-line" transform="translate(360 0)">
+    <rect id="arrow-up-to-line bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M5 3h14" />
+    <path d="m18 13-6-6-6 6" />
+    <path d="M12 7v14" />
+  </g>
+  <g id="book-image" transform="translate(400 0)">
+    <rect id="book-image bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m20 13.7-2.1-2.1a2 2 0 0 0-2.8 0L9.7 17" />
+    <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20" />
+    <circle cx="10" cy="8" r="2" />
+  </g>
+  <g id="braces" transform="translate(440 0)">
+    <rect id="braces bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M8 3H7a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5c0 1.1.9 2 2 2h1" />
+    <path d="M16 21h1a2 2 0 0 0 2-2v-5c0-1.1.9-2 2-2a2 2 0 0 1-2-2V5a2 2 0 0 0-2-2h-1" />
+  </g>
+  <g id="brackets" transform="translate(480 0)">
+    <rect id="brackets bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M16 3h3a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1h-3" />
+    <path d="M8 21H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h3" />
+  </g>
+  <g id="calendar-fold" transform="translate(520 0)">
+    <rect id="calendar-fold bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M8 2v4" />
+    <path d="M16 2v4" />
+    <path d="M21 17V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11Z" />
+    <path d="M3 10h18" />
+    <path d="M15 22v-4a2 2 0 0 1 2-2h4" />
+  </g>
+  <g id="cassette-tape" transform="translate(560 0)">
+    <rect id="cassette-tape bounds" width="24" height="24" fill="none" stroke="none" />
+    <rect width="20" height="16" x="2" y="4" rx="2" />
+    <circle cx="8" cy="10" r="2" />
+    <path d="M8 12h8" />
+    <circle cx="16" cy="10" r="2" />
+    <path d="m6 20 .7-2.9A1.4 1.4 0 0 1 8.1 16h7.8a1.4 1.4 0 0 1 1.4 1l.7 3" />
+  </g>
+  <g id="chart-pie" transform="translate(600 0)">
+    <rect id="chart-pie bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M21 12c.552 0 1.005-.449.95-.998a10 10 0 0 0-8.953-8.951c-.55-.055-.998.398-.998.95v8a1 1 0 0 0 1 1z" />
+    <path d="M21.21 15.89A10 10 0 1 1 8 2.83" />
+  </g>
+  <g id="cloud-download" transform="translate(640 0)">
+    <rect id="cloud-download bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 13v8l-4-4" />
+    <path d="m12 21 4-4" />
+    <path d="M4.393 15.269A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.436 8.284" />
+  </g>
+  <g id="cloud-upload" transform="translate(680 0)">
+    <rect id="cloud-upload bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 13v8" />
+    <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242" />
+    <path d="m8 17 4-4 4 4" />
+  </g>
+  <g id="combine" transform="translate(720 0)">
+    <rect id="combine bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M10 18H5a3 3 0 0 1-3-3v-1" />
+    <path d="M14 2a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2" />
+    <path d="M20 2a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2" />
+    <path d="m7 21 3-3-3-3" />
+    <rect x="14" y="14" width="8" height="8" rx="2" />
+    <rect x="2" y="2" width="8" height="8" rx="2" />
+  </g>
+  <g id="diff" transform="translate(760 0)">
+    <rect id="diff bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 3v14" />
+    <path d="M5 10h14" />
+    <path d="M5 21h14" />
+  </g>
+  <g id="dock" transform="translate(0 40)">
+    <rect id="dock bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M2 8h20" />
+    <rect width="20" height="16" x="2" y="4" rx="2" />
+    <path d="M6 16h12" />
+  </g>
+  <g id="download" transform="translate(40 40)">
+    <rect id="download bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 15V3" />
+    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+    <path d="m7 10 5 5 5-5" />
+  </g>
+  <g id="file" transform="translate(80 40)">
+    <rect id="file bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+    <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+  </g>
+  <g id="file-archive" transform="translate(120 40)">
+    <rect id="file-archive bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M10 12v-1" />
+    <path d="M10 18v-2" />
+    <path d="M10 7V6" />
+    <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+    <path d="M15.5 22H18a2 2 0 0 0 2-2V7l-5-5H6a2 2 0 0 0-2 2v16a2 2 0 0 0 .274 1.01" />
+    <circle cx="10" cy="20" r="2" />
+  </g>
+  <g id="file-axis-3d" transform="translate(160 40)">
+    <rect id="file-axis-3d bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+    <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+    <path d="m8 18 4-4" />
+    <path d="M8 10v8h8" />
+  </g>
+  <g id="file-badge" transform="translate(200 40)">
+    <rect id="file-badge bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 22h6a2 2 0 0 0 2-2V7l-5-5H6a2 2 0 0 0-2 2v3.072" />
+    <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+    <path d="m6.69 16.479 1.29 4.88a.5.5 0 0 1-.698.591l-1.843-.849a1 1 0 0 0-.88.001l-1.846.85a.5.5 0 0 1-.693-.593l1.29-4.88" />
+    <circle cx="5" cy="14" r="3" />
+  </g>
+  <g id="file-box" transform="translate(240 40)">
+    <rect id="file-box bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M14.5 22H18a2 2 0 0 0 2-2V7l-5-5H6a2 2 0 0 0-2 2v4" />
+    <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+    <path d="M3 13.1a2 2 0 0 0-1 1.76v3.24a2 2 0 0 0 .97 1.78L6 21.7a2 2 0 0 0 2.03.01L11 19.9a2 2 0 0 0 1-1.76V14.9a2 2 0 0 0-.97-1.78L8 11.3a2 2 0 0 0-2.03-.01Z" />
+    <path d="M7 17v5" />
+    <path d="M11.7 14.2 7 17l-4.7-2.8" />
+  </g>
+  <g id="file-chart-column" transform="translate(280 40)">
+    <rect id="file-chart-column bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+    <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+    <path d="M8 18v-1" />
+    <path d="M12 18v-6" />
+    <path d="M16 18v-3" />
+  </g>
+  <g id="file-chart-column-increasing" transform="translate(320 40)">
+    <rect id="file-chart-column-increasing bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+    <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+    <path d="M8 18v-2" />
+    <path d="M12 18v-4" />
+    <path d="M16 18v-6" />
+  </g>
+  <g id="file-chart-line" transform="translate(360 40)">
+    <rect id="file-chart-line bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+    <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+    <path d="m16 13-3.5 3.5-2-2L8 17" />
+  </g>
+  <g id="file-chart-pie" transform="translate(400 40)">
+    <rect id="file-chart-pie bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+    <path d="M16 22h2a2 2 0 0 0 2-2V7l-5-5H6a2 2 0 0 0-2 2v3.5" />
+    <path d="M4.017 11.512a6 6 0 1 0 8.466 8.475" />
+    <path d="M9 16a1 1 0 0 1-1-1v-4c0-.552.45-1.008.995-.917a6 6 0 0 1 4.922 4.922c.091.544-.365.995-.917.995z" />
+  </g>
+  <g id="file-check" transform="translate(440 40)">
+    <rect id="file-check bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+    <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+    <path d="m9 15 2 2 4-4" />
+  </g>
+  <g id="file-clock" transform="translate(480 40)">
+    <rect id="file-clock bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+    <path d="M16 22h2a2 2 0 0 0 2-2V7l-5-5H6a2 2 0 0 0-2 2v3" />
+    <path d="M8 14v2.2l1.6 1" />
+    <circle cx="8" cy="16" r="6" />
+  </g>
+  <g id="file-code" transform="translate(520 40)">
+    <rect id="file-code bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M10 12.5 8 15l2 2.5" />
+    <path d="m14 12.5 2 2.5-2 2.5" />
+    <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+    <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z" />
+  </g>
+  <g id="file-cog" transform="translate(560 40)">
+    <rect id="file-cog bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+    <path d="m2.305 15.53.923-.382" />
+    <path d="m3.228 12.852-.924-.383" />
+    <path d="M4.677 21.5a2 2 0 0 0 1.313.5H18a2 2 0 0 0 2-2V7l-5-5H6a2 2 0 0 0-2 2v2.5" />
+    <path d="m4.852 11.228-.383-.923" />
+    <path d="m4.852 16.772-.383.924" />
+    <path d="m7.148 11.228.383-.923" />
+    <path d="m7.53 17.696-.382-.924" />
+    <path d="m8.772 12.852.923-.383" />
+    <path d="m8.772 15.148.923.383" />
+    <circle cx="6" cy="14" r="3" />
+  </g>
+  <g id="file-diff" transform="translate(600 40)">
+    <rect id="file-diff bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+    <path d="M9 10h6" />
+    <path d="M12 13V7" />
+    <path d="M9 17h6" />
+  </g>
+  <g id="file-digit" transform="translate(640 40)">
+    <rect id="file-digit bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M4 22h14a2 2 0 0 0 2-2V7l-5-5H6a2 2 0 0 0-2 2v4" />
+    <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+    <rect width="4" height="6" x="2" y="12" rx="2" />
+    <path d="M10 12h2v6" />
+    <path d="M10 18h4" />
+  </g>
+  <g id="file-down" transform="translate(680 40)">
+    <rect id="file-down bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+    <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+    <path d="M12 18v-6" />
+    <path d="m9 15 3 3 3-3" />
+  </g>
+  <g id="file-heart" transform="translate(720 40)">
+    <rect id="file-heart bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M4 22h14a2 2 0 0 0 2-2V7l-5-5H6a2 2 0 0 0-2 2v2" />
+    <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+    <path d="M10.29 10.7a2.43 2.43 0 0 0-2.66-.52c-.29.12-.56.3-.78.53l-.35.34-.35-.34a2.43 2.43 0 0 0-2.65-.53c-.3.12-.56.3-.79.53-.95.94-1 2.53.2 3.74L6.5 18l3.6-3.55c1.2-1.21 1.14-2.8.19-3.74Z" />
+  </g>
+  <g id="file-image" transform="translate(760 40)">
+    <rect id="file-image bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+    <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+    <circle cx="10" cy="12" r="2" />
+    <path d="m20 17-1.296-1.296a2.41 2.41 0 0 0-3.408 0L9 22" />
+  </g>
+  <g id="file-input" transform="translate(0 80)">
+    <rect id="file-input bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M4 22h14a2 2 0 0 0 2-2V7l-5-5H6a2 2 0 0 0-2 2v4" />
+    <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+    <path d="M2 15h10" />
+    <path d="m9 18 3-3-3-3" />
+  </g>
+  <g id="file-key" transform="translate(40 80)">
+    <rect id="file-key bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+    <circle cx="10" cy="16" r="2" />
+    <path d="m16 10-4.5 4.5" />
+    <path d="m15 11 1 1" />
+  </g>
+  <g id="file-lock" transform="translate(80 80)">
+    <rect id="file-lock bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+    <rect width="8" height="6" x="8" y="12" rx="1" />
+    <path d="M10 12v-2a2 2 0 1 1 4 0v2" />
+  </g>
+  <g id="file-minus" transform="translate(120 80)">
+    <rect id="file-minus bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+    <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+    <path d="M9 15h6" />
+  </g>
+  <g id="file-music" transform="translate(160 80)">
+    <rect id="file-music bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M10.5 22H18a2 2 0 0 0 2-2V7l-5-5H6a2 2 0 0 0-2 2v8.4" />
+    <path d="M8 18v-7.7L16 9v7" />
+    <circle cx="14" cy="16" r="2" />
+    <circle cx="6" cy="18" r="2" />
+  </g>
+  <g id="file-output" transform="translate(200 80)">
+    <rect id="file-output bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+    <path d="M4 7V4a2 2 0 0 1 2-2 2 2 0 0 0-2 2" />
+    <path d="M4.063 20.999a2 2 0 0 0 2 1L18 22a2 2 0 0 0 2-2V7l-5-5H6" />
+    <path d="m5 11-3 3" />
+    <path d="m5 17-3-3h10" />
+  </g>
+  <g id="file-pen" transform="translate(240 80)">
+    <rect id="file-pen bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12.5 22H18a2 2 0 0 0 2-2V7l-5-5H6a2 2 0 0 0-2 2v9.5" />
+    <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+    <path d="M13.378 15.626a1 1 0 1 0-3.004-3.004l-5.01 5.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z" />
+  </g>
+  <g id="file-pen-line" transform="translate(280 80)">
+    <rect id="file-pen-line bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m18 5-2.414-2.414A2 2 0 0 0 14.172 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2" />
+    <path d="M21.378 12.626a1 1 0 0 0-3.004-3.004l-4.01 4.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z" />
+    <path d="M8 18h1" />
+  </g>
+  <g id="file-plus" transform="translate(320 80)">
+    <rect id="file-plus bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+    <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+    <path d="M9 15h6" />
+    <path d="M12 18v-6" />
+  </g>
+  <g id="file-question-mark" transform="translate(360 80)">
+    <rect id="file-question-mark bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 17h.01" />
+    <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z" />
+    <path d="M9.1 9a3 3 0 0 1 5.82 1c0 2-3 3-3 3" />
+  </g>
+  <g id="file-scan" transform="translate(400 80)">
+    <rect id="file-scan bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M20 10V7l-5-5H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4" />
+    <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+    <path d="M16 14a2 2 0 0 0-2 2" />
+    <path d="M20 14a2 2 0 0 1 2 2" />
+    <path d="M20 22a2 2 0 0 0 2-2" />
+    <path d="M16 22a2 2 0 0 1-2-2" />
+  </g>
+  <g id="file-search" transform="translate(440 80)">
+    <rect id="file-search bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+    <path d="M4.268 21a2 2 0 0 0 1.727 1H18a2 2 0 0 0 2-2V7l-5-5H6a2 2 0 0 0-2 2v3" />
+    <path d="m9 18-1.5-1.5" />
+    <circle cx="5" cy="14" r="3" />
+  </g>
+  <g id="file-sliders" transform="translate(480 80)">
+    <rect id="file-sliders bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+    <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+    <path d="M8 12h8" />
+    <path d="M10 11v2" />
+    <path d="M8 17h8" />
+    <path d="M14 16v2" />
+  </g>
+  <g id="file-spreadsheet" transform="translate(520 80)">
+    <rect id="file-spreadsheet bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+    <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+    <path d="M8 13h2" />
+    <path d="M14 13h2" />
+    <path d="M8 17h2" />
+    <path d="M14 17h2" />
+  </g>
+  <g id="file-stack" transform="translate(560 80)">
+    <rect id="file-stack bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M21 7h-3a2 2 0 0 1-2-2V2" />
+    <path d="M21 6v6.5c0 .8-.7 1.5-1.5 1.5h-7c-.8 0-1.5-.7-1.5-1.5v-9c0-.8.7-1.5 1.5-1.5H17Z" />
+    <path d="M7 8v8.8c0 .3.2.6.4.8.2.2.5.4.8.4H15" />
+    <path d="M3 12v8.8c0 .3.2.6.4.8.2.2.5.4.8.4H11" />
+  </g>
+  <g id="file-symlink" transform="translate(600 80)">
+    <rect id="file-symlink bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m10 18 3-3-3-3" />
+    <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+    <path d="M4 11V4a2 2 0 0 1 2-2h9l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h7" />
+  </g>
+  <g id="file-terminal" transform="translate(640 80)">
+    <rect id="file-terminal bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+    <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+    <path d="m8 16 2-2-2-2" />
+    <path d="M12 18h4" />
+  </g>
+  <g id="file-text" transform="translate(680 80)">
+    <rect id="file-text bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+    <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+    <path d="M10 9H8" />
+    <path d="M16 13H8" />
+    <path d="M16 17H8" />
+  </g>
+  <g id="file-type" transform="translate(720 80)">
+    <rect id="file-type bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+    <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+    <path d="M9 13v-1h6v1" />
+    <path d="M12 12v6" />
+    <path d="M11 18h2" />
+  </g>
+  <g id="file-up" transform="translate(760 80)">
+    <rect id="file-up bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+    <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+    <path d="M12 12v6" />
+    <path d="m15 15-3-3-3 3" />
+  </g>
+  <g id="file-user" transform="translate(0 120)">
+    <rect id="file-user bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+    <path d="M15 18a3 3 0 1 0-6 0" />
+    <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z" />
+    <circle cx="12" cy="13" r="2" />
+  </g>
+  <g id="file-volume" transform="translate(40 120)">
+    <rect id="file-volume bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M11 11a5 5 0 0 1 0 6" />
+    <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+    <path d="M4 6.765V4a2 2 0 0 1 2-2h9l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-.93-.23" />
+    <path d="M7 10.51a.5.5 0 0 0-.826-.38l-1.893 1.628A1 1 0 0 1 3.63 12H2.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h1.129a1 1 0 0 1 .652.242l1.893 1.63a.5.5 0 0 0 .826-.38z" />
+  </g>
+  <g id="file-x" transform="translate(80 120)">
+    <rect id="file-x bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+    <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+    <path d="m14.5 12.5-5 5" />
+    <path d="m9.5 12.5 5 5" />
+  </g>
+  <g id="files" transform="translate(120 120)">
+    <rect id="files bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M20 7h-3a2 2 0 0 1-2-2V2" />
+    <path d="M9 18a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h7l4 4v10a2 2 0 0 1-2 2Z" />
+    <path d="M3 7.6v12.8A1.6 1.6 0 0 0 4.6 22h9.8" />
+  </g>
+  <g id="folder" transform="translate(160 120)">
+    <rect id="folder bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z" />
+  </g>
+  <g id="folder-archive" transform="translate(200 120)">
+    <rect id="folder-archive bounds" width="24" height="24" fill="none" stroke="none" />
+    <circle cx="15" cy="19" r="2" />
+    <path d="M20.9 19.8A2 2 0 0 0 22 18V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h5.1" />
+    <path d="M15 11v-1" />
+    <path d="M15 17v-2" />
+  </g>
+  <g id="folder-check" transform="translate(240 120)">
+    <rect id="folder-check bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z" />
+    <path d="m9 13 2 2 4-4" />
+  </g>
+  <g id="folder-clock" transform="translate(280 120)">
+    <rect id="folder-clock bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M16 14v2.2l1.6 1" />
+    <path d="M7 20H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H20a2 2 0 0 1 2 2" />
+    <circle cx="16" cy="16" r="6" />
+  </g>
+  <g id="folder-closed" transform="translate(320 120)">
+    <rect id="folder-closed bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z" />
+    <path d="M2 10h20" />
+  </g>
+  <g id="folder-code" transform="translate(360 120)">
+    <rect id="folder-code bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M10 10.5 8 13l2 2.5" />
+    <path d="m14 10.5 2 2.5-2 2.5" />
+    <path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2z" />
+  </g>
+  <g id="folder-cog" transform="translate(400 120)">
+    <rect id="folder-cog bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M10.3 20H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.98a2 2 0 0 1 1.69.9l.66 1.2A2 2 0 0 0 12 6h8a2 2 0 0 1 2 2v3.3" />
+    <path d="m14.305 19.53.923-.382" />
+    <path d="m15.228 16.852-.923-.383" />
+    <path d="m16.852 15.228-.383-.923" />
+    <path d="m16.852 20.772-.383.924" />
+    <path d="m19.148 15.228.383-.923" />
+    <path d="m19.53 21.696-.382-.924" />
+    <path d="m20.772 16.852.924-.383" />
+    <path d="m20.772 19.148.924.383" />
+    <circle cx="18" cy="18" r="3" />
+  </g>
+  <g id="folder-dot" transform="translate(440 120)">
+    <rect id="folder-dot bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z" />
+    <circle cx="12" cy="13" r="1" />
+  </g>
+  <g id="folder-down" transform="translate(480 120)">
+    <rect id="folder-down bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z" />
+    <path d="M12 10v6" />
+    <path d="m15 13-3 3-3-3" />
+  </g>
+  <g id="folder-git" transform="translate(520 120)">
+    <rect id="folder-git bounds" width="24" height="24" fill="none" stroke="none" />
+    <circle cx="12" cy="13" r="2" />
+    <path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z" />
+    <path d="M14 13h3" />
+    <path d="M7 13h3" />
+  </g>
+  <g id="folder-git-2" transform="translate(560 120)">
+    <rect id="folder-git-2 bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M9 20H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H20a2 2 0 0 1 2 2v5" />
+    <circle cx="13" cy="12" r="2" />
+    <path d="M18 19c-2.8 0-5-2.2-5-5v8" />
+    <circle cx="20" cy="19" r="2" />
+  </g>
+  <g id="folder-heart" transform="translate(600 120)">
+    <rect id="folder-heart bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M11 20H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H20a2 2 0 0 1 2 2v1.5" />
+    <path d="M13.9 17.45c-1.2-1.2-1.14-2.8-.2-3.73a2.43 2.43 0 0 1 3.44 0l.36.34.34-.34a2.43 2.43 0 0 1 3.45-.01c.95.95 1 2.53-.2 3.74L17.5 21Z" />
+  </g>
+  <g id="folder-input" transform="translate(640 120)">
+    <rect id="folder-input bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M2 9V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H20a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-1" />
+    <path d="M2 13h10" />
+    <path d="m9 16 3-3-3-3" />
+  </g>
+  <g id="folder-kanban" transform="translate(680 120)">
+    <rect id="folder-kanban bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z" />
+    <path d="M8 10v4" />
+    <path d="M12 10v2" />
+    <path d="M16 10v6" />
+  </g>
+  <g id="folder-key" transform="translate(720 120)">
+    <rect id="folder-key bounds" width="24" height="24" fill="none" stroke="none" />
+    <circle cx="16" cy="20" r="2" />
+    <path d="M10 20H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H20a2 2 0 0 1 2 2v2" />
+    <path d="m22 14-4.5 4.5" />
+    <path d="m21 15 1 1" />
+  </g>
+  <g id="folder-lock" transform="translate(760 120)">
+    <rect id="folder-lock bounds" width="24" height="24" fill="none" stroke="none" />
+    <rect width="8" height="5" x="14" y="17" rx="1" />
+    <path d="M10 20H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H20a2 2 0 0 1 2 2v2.5" />
+    <path d="M20 17v-2a2 2 0 1 0-4 0v2" />
+  </g>
+  <g id="folder-minus" transform="translate(0 160)">
+    <rect id="folder-minus bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M9 13h6" />
+    <path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z" />
+  </g>
+  <g id="folder-open" transform="translate(40 160)">
+    <rect id="folder-open bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2" />
+  </g>
+  <g id="folder-open-dot" transform="translate(80 160)">
+    <rect id="folder-open-dot bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m6 14 1.45-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.55 6a2 2 0 0 1-1.94 1.5H4a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2h3.93a2 2 0 0 1 1.66.9l.82 1.2a2 2 0 0 0 1.66.9H18a2 2 0 0 1 2 2v2" />
+    <circle cx="14" cy="15" r="1" />
+  </g>
+  <g id="folder-output" transform="translate(120 160)">
+    <rect id="folder-output bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M2 7.5V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H20a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-1.5" />
+    <path d="M2 13h10" />
+    <path d="m5 10-3 3 3 3" />
+  </g>
+  <g id="folder-pen" transform="translate(160 160)">
+    <rect id="folder-pen bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M2 11.5V5a2 2 0 0 1 2-2h3.9c.7 0 1.3.3 1.7.9l.8 1.2c.4.6 1 .9 1.7.9H20a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-9.5" />
+    <path d="M11.378 13.626a1 1 0 1 0-3.004-3.004l-5.01 5.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z" />
+  </g>
+  <g id="folder-plus" transform="translate(200 160)">
+    <rect id="folder-plus bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 10v6" />
+    <path d="M9 13h6" />
+    <path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z" />
+  </g>
+  <g id="folder-root" transform="translate(240 160)">
+    <rect id="folder-root bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z" />
+    <circle cx="12" cy="13" r="2" />
+    <path d="M12 15v5" />
+  </g>
+  <g id="folder-search" transform="translate(280 160)">
+    <rect id="folder-search bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M10.7 20H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H20a2 2 0 0 1 2 2v4.1" />
+    <path d="m21 21-1.9-1.9" />
+    <circle cx="17" cy="17" r="3" />
+  </g>
+  <g id="folder-search-2" transform="translate(320 160)">
+    <rect id="folder-search-2 bounds" width="24" height="24" fill="none" stroke="none" />
+    <circle cx="11.5" cy="12.5" r="2.5" />
+    <path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z" />
+    <path d="M13.3 14.3 15 16" />
+  </g>
+  <g id="folder-symlink" transform="translate(360 160)">
+    <rect id="folder-symlink bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M2 9V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H20a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h7" />
+    <path d="m8 16 3-3-3-3" />
+  </g>
+  <g id="folder-sync" transform="translate(400 160)">
+    <rect id="folder-sync bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M9 20H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H20a2 2 0 0 1 2 2v.5" />
+    <path d="M12 10v4h4" />
+    <path d="m12 14 1.535-1.605a5 5 0 0 1 8 1.5" />
+    <path d="M22 22v-4h-4" />
+    <path d="m22 18-1.535 1.605a5 5 0 0 1-8-1.5" />
+  </g>
+  <g id="folder-tree" transform="translate(440 160)">
+    <rect id="folder-tree bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M20 10a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1h-2.5a1 1 0 0 1-.8-.4l-.9-1.2A1 1 0 0 0 15 3h-2a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1Z" />
+    <path d="M20 21a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1h-2.9a1 1 0 0 1-.88-.55l-.42-.85a1 1 0 0 0-.92-.6H13a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1Z" />
+    <path d="M3 5a2 2 0 0 0 2 2h3" />
+    <path d="M3 3v13a2 2 0 0 0 2 2h3" />
+  </g>
+  <g id="folder-up" transform="translate(480 160)">
+    <rect id="folder-up bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z" />
+    <path d="M12 10v6" />
+    <path d="m9 13 3-3 3 3" />
+  </g>
+  <g id="folder-x" transform="translate(520 160)">
+    <rect id="folder-x bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z" />
+    <path d="m9.5 10.5 5 5" />
+    <path d="m14.5 10.5-5 5" />
+  </g>
+  <g id="folders" transform="translate(560 160)">
+    <rect id="folders bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M20 17a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3.9a2 2 0 0 1-1.69-.9l-.81-1.2a2 2 0 0 0-1.67-.9H8a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2Z" />
+    <path d="M2 8v11a2 2 0 0 0 2 2h14" />
+  </g>
+  <g id="gallery-horizontal-end" transform="translate(600 160)">
+    <rect id="gallery-horizontal-end bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M2 7v10" />
+    <path d="M6 5v14" />
+    <rect width="12" height="18" x="10" y="3" rx="2" />
+  </g>
+  <g id="gallery-vertical-end" transform="translate(640 160)">
+    <rect id="gallery-vertical-end bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M7 2h10" />
+    <path d="M5 6h14" />
+    <rect width="18" height="12" x="3" y="10" rx="2" />
+  </g>
+  <g id="group" transform="translate(680 160)">
+    <rect id="group bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M3 7V5c0-1.1.9-2 2-2h2" />
+    <path d="M17 3h2c1.1 0 2 .9 2 2v2" />
+    <path d="M21 17v2c0 1.1-.9 2-2 2h-2" />
+    <path d="M7 21H5c-1.1 0-2-.9-2-2v-2" />
+    <rect width="7" height="5" x="7" y="7" rx="1" />
+    <rect width="7" height="5" x="10" y="12" rx="1" />
+  </g>
+  <g id="hard-drive-download" transform="translate(720 160)">
+    <rect id="hard-drive-download bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 2v8" />
+    <path d="m16 6-4 4-4-4" />
+    <rect width="20" height="8" x="2" y="14" rx="2" />
+    <path d="M6 18h.01" />
+    <path d="M10 18h.01" />
+  </g>
+  <g id="hard-drive-upload" transform="translate(760 160)">
+    <rect id="hard-drive-upload bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m16 6-4-4-4 4" />
+    <path d="M12 2v8" />
+    <rect width="20" height="8" x="2" y="14" rx="2" />
+    <path d="M6 18h.01" />
+    <path d="M10 18h.01" />
+  </g>
+  <g id="headphones" transform="translate(0 200)">
+    <rect id="headphones bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3" />
+  </g>
+  <g id="headset" transform="translate(40 200)">
+    <rect id="headset bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M3 11h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-5Zm0 0a9 9 0 1 1 18 0m0 0v5a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3Z" />
+    <path d="M21 16v2a4 4 0 0 1-4 4h-5" />
+  </g>
+  <g id="image" transform="translate(80 200)">
+    <rect id="image bounds" width="24" height="24" fill="none" stroke="none" />
+    <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
+    <circle cx="9" cy="9" r="2" />
+    <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
+  </g>
+  <g id="image-down" transform="translate(120 200)">
+    <rect id="image-down bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M10.3 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10l-3.1-3.1a2 2 0 0 0-2.814.014L6 21" />
+    <path d="m14 19 3 3v-5.5" />
+    <path d="m17 22 3-3" />
+    <circle cx="9" cy="9" r="2" />
+  </g>
+  <g id="image-minus" transform="translate(160 200)">
+    <rect id="image-minus bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M21 9v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7" />
+    <line x1="16" x2="22" y1="5" y2="5" />
+    <circle cx="9" cy="9" r="2" />
+    <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
+  </g>
+  <g id="image-off" transform="translate(200 200)">
+    <rect id="image-off bounds" width="24" height="24" fill="none" stroke="none" />
+    <line x1="2" x2="22" y1="2" y2="22" />
+    <path d="M10.41 10.41a2 2 0 1 1-2.83-2.83" />
+    <line x1="13.5" x2="6" y1="13.5" y2="21" />
+    <line x1="18" x2="21" y1="12" y2="15" />
+    <path d="M3.59 3.59A1.99 1.99 0 0 0 3 5v14a2 2 0 0 0 2 2h14c.55 0 1.052-.22 1.41-.59" />
+    <path d="M21 15V5a2 2 0 0 0-2-2H9" />
+  </g>
+  <g id="image-play" transform="translate(240 200)">
+    <rect id="image-play bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m11 16-5 5" />
+    <path d="M11 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v6.5" />
+    <path d="M15.765 22a.5.5 0 0 1-.765-.424V13.38a.5.5 0 0 1 .765-.424l5.878 3.674a1 1 0 0 1 0 1.696z" />
+    <circle cx="9" cy="9" r="2" />
+  </g>
+  <g id="image-plus" transform="translate(280 200)">
+    <rect id="image-plus bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M16 5h6" />
+    <path d="M19 2v6" />
+    <path d="M21 11.5V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7.5" />
+    <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
+    <circle cx="9" cy="9" r="2" />
+  </g>
+  <g id="image-up" transform="translate(320 200)">
+    <rect id="image-up bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M10.3 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10l-3.1-3.1a2 2 0 0 0-2.814.014L6 21" />
+    <path d="m14 19.5 3-3 3 3" />
+    <path d="M17 22v-5.5" />
+    <circle cx="9" cy="9" r="2" />
+  </g>
+  <g id="images" transform="translate(360 200)">
+    <rect id="images bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M18 22H4a2 2 0 0 1-2-2V6" />
+    <path d="m22 13-1.296-1.296a2.41 2.41 0 0 0-3.408 0L11 18" />
+    <circle cx="12" cy="8" r="2" />
+    <rect width="16" height="16" x="6" y="2" rx="2" />
+  </g>
+  <g id="import" transform="translate(400 200)">
+    <rect id="import bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 3v12" />
+    <path d="m8 11 4 4 4-4" />
+    <path d="M8 5H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-4" />
+  </g>
+  <g id="list-tree" transform="translate(440 200)">
+    <rect id="list-tree bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M21 12h-8" />
+    <path d="M21 6H8" />
+    <path d="M21 18h-8" />
+    <path d="M3 6v4c0 1.1.9 2 2 2h3" />
+    <path d="M3 10v6c0 1.1.9 2 2 2h3" />
+  </g>
+  <g id="message-square-diff" transform="translate(480 200)">
+    <rect id="message-square-diff bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m5 19-2 2V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2" />
+    <path d="M9 10h6" />
+    <path d="M12 7v6" />
+    <path d="M9 17h6" />
+  </g>
+  <g id="music" transform="translate(520 200)">
+    <rect id="music bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M9 18V5l12-2v13" />
+    <circle cx="6" cy="18" r="3" />
+    <circle cx="18" cy="16" r="3" />
+  </g>
+  <g id="music-2" transform="translate(560 200)">
+    <rect id="music-2 bounds" width="24" height="24" fill="none" stroke="none" />
+    <circle cx="8" cy="18" r="4" />
+    <path d="M12 18V2l7 4" />
+  </g>
+  <g id="music-3" transform="translate(600 200)">
+    <rect id="music-3 bounds" width="24" height="24" fill="none" stroke="none" />
+    <circle cx="12" cy="18" r="4" />
+    <path d="M16 18V2" />
+  </g>
+  <g id="music-4" transform="translate(640 200)">
+    <rect id="music-4 bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M9 18V5l12-2v13" />
+    <path d="m9 9 12-2" />
+    <circle cx="6" cy="18" r="3" />
+    <circle cx="18" cy="16" r="3" />
+  </g>
+  <g id="package" transform="translate(680 200)">
+    <rect id="package bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z" />
+    <path d="M12 22V12" />
+    <polyline points="3.29 7 12 12 20.71 7" />
+    <path d="m7.5 4.27 9 5.15" />
+  </g>
+  <g id="package-2" transform="translate(720 200)">
+    <rect id="package-2 bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 3v6" />
+    <path d="M16.76 3a2 2 0 0 1 1.8 1.1l2.23 4.479a2 2 0 0 1 .21.891V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9.472a2 2 0 0 1 .211-.894L5.45 4.1A2 2 0 0 1 7.24 3z" />
+    <path d="M3.054 9.013h17.893" />
+  </g>
+  <g id="package-open" transform="translate(760 200)">
+    <rect id="package-open bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 22v-9" />
+    <path d="M15.17 2.21a1.67 1.67 0 0 1 1.63 0L21 4.57a1.93 1.93 0 0 1 0 3.36L8.82 14.79a1.655 1.655 0 0 1-1.64 0L3 12.43a1.93 1.93 0 0 1 0-3.36z" />
+    <path d="M20 13v3.87a2.06 2.06 0 0 1-1.11 1.83l-6 3.08a1.93 1.93 0 0 1-1.78 0l-6-3.08A2.06 2.06 0 0 1 4 16.87V13" />
+    <path d="M21 12.43a1.93 1.93 0 0 0 0-3.36L8.83 2.2a1.64 1.64 0 0 0-1.63 0L3 4.57a1.93 1.93 0 0 0 0 3.36l12.18 6.86a1.636 1.636 0 0 0 1.63 0z" />
+  </g>
+  <g id="package-search" transform="translate(0 240)">
+    <rect id="package-search bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M21 10V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l2-1.14" />
+    <path d="m7.5 4.27 9 5.15" />
+    <polyline points="3.29 7 12 12 20.71 7" />
+    <line x1="12" x2="12" y1="22" y2="12" />
+    <circle cx="18.5" cy="15.5" r="2.5" />
+    <path d="M20.27 17.27 22 19" />
+  </g>
+  <g id="paperclip" transform="translate(40 240)">
+    <rect id="paperclip bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m16 6-8.414 8.586a2 2 0 0 0 2.829 2.829l8.414-8.586a4 4 0 1 0-5.657-5.657l-8.379 8.551a6 6 0 1 0 8.485 8.485l8.379-8.551" />
+  </g>
+  <g id="parentheses" transform="translate(80 240)">
+    <rect id="parentheses bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M8 21s-4-3-4-9 4-9 4-9" />
+    <path d="M16 3s4 3 4 9-4 9-4 9" />
+  </g>
+  <g id="save" transform="translate(120 240)">
+    <rect id="save bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M15.2 3a2 2 0 0 1 1.4.6l3.8 3.8a2 2 0 0 1 .6 1.4V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z" />
+    <path d="M17 21v-7a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v7" />
+    <path d="M7 3v4a1 1 0 0 0 1 1h7" />
+  </g>
+  <g id="save-all" transform="translate(160 240)">
+    <rect id="save-all bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M10 2v3a1 1 0 0 0 1 1h5" />
+    <path d="M18 18v-6a1 1 0 0 0-1-1h-6a1 1 0 0 0-1 1v6" />
+    <path d="M18 22H4a2 2 0 0 1-2-2V6" />
+    <path d="M8 18a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9.172a2 2 0 0 1 1.414.586l2.828 2.828A2 2 0 0 1 22 6.828V16a2 2 0 0 1-2.01 2z" />
+  </g>
+  <g id="save-off" transform="translate(200 240)">
+    <rect id="save-off bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M13 13H8a1 1 0 0 0-1 1v7" />
+    <path d="M14 8h1" />
+    <path d="M17 21v-4" />
+    <path d="m2 2 20 20" />
+    <path d="M20.41 20.41A2 2 0 0 1 19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 .59-1.41" />
+    <path d="M29.5 11.5s5 5 4 5" />
+    <path d="M9 3h6.2a2 2 0 0 1 1.4.6l3.8 3.8a2 2 0 0 1 .6 1.4V15" />
+  </g>
+  <g id="sheet" transform="translate(240 240)">
+    <rect id="sheet bounds" width="24" height="24" fill="none" stroke="none" />
+    <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
+    <line x1="3" x2="21" y1="9" y2="9" />
+    <line x1="3" x2="21" y1="15" y2="15" />
+    <line x1="9" x2="9" y1="9" y2="21" />
+    <line x1="15" x2="15" y1="9" y2="21" />
+  </g>
+  <g id="shredder" transform="translate(280 240)">
+    <rect id="shredder bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M10 22v-5" />
+    <path d="M14 19v-2" />
+    <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+    <path d="M18 20v-3" />
+    <path d="M2 13h20" />
+    <path d="M20 13V7l-5-5H6a2 2 0 0 0-2 2v9" />
+    <path d="M6 20v-3" />
+  </g>
+  <g id="square-bottom-dashed-scissors" transform="translate(320 240)">
+    <rect id="square-bottom-dashed-scissors bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M4 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2" />
+    <path d="M10 22H8" />
+    <path d="M16 22h-2" />
+    <circle cx="8" cy="8" r="2" />
+    <path d="M9.414 9.414 12 12" />
+    <path d="M14.8 14.8 18 18" />
+    <circle cx="8" cy="16" r="2" />
+    <path d="m18 6-8.586 8.586" />
+  </g>
+  <g id="square-dashed-bottom" transform="translate(360 240)">
+    <rect id="square-dashed-bottom bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M5 21a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2" />
+    <path d="M9 21h1" />
+    <path d="M14 21h1" />
+  </g>
+  <g id="square-dashed-bottom-code" transform="translate(400 240)">
+    <rect id="square-dashed-bottom-code bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M10 9.5 8 12l2 2.5" />
+    <path d="M14 21h1" />
+    <path d="m14 9.5 2 2.5-2 2.5" />
+    <path d="M5 21a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2" />
+    <path d="M9 21h1" />
+  </g>
+  <g id="square-scissors" transform="translate(440 240)">
+    <rect id="square-scissors bounds" width="24" height="24" fill="none" stroke="none" />
+    <rect width="20" height="20" x="2" y="2" rx="2" />
+    <circle cx="8" cy="8" r="2" />
+    <path d="M9.414 9.414 12 12" />
+    <path d="M14.8 14.8 18 18" />
+    <circle cx="8" cy="16" r="2" />
+    <path d="m18 6-8.586 8.586" />
+  </g>
+  <g id="square-stack" transform="translate(480 240)">
+    <rect id="square-stack bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M4 10c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h4c1.1 0 2 .9 2 2" />
+    <path d="M10 16c-1.1 0-2-.9-2-2v-4c0-1.1.9-2 2-2h4c1.1 0 2 .9 2 2" />
+    <rect width="8" height="8" x="14" y="14" rx="2" />
+  </g>
+  <g id="table" transform="translate(520 240)">
+    <rect id="table bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 3v18" />
+    <rect width="18" height="18" x="3" y="3" rx="2" />
+    <path d="M3 9h18" />
+    <path d="M3 15h18" />
+  </g>
+  <g id="table-2" transform="translate(560 240)">
+    <rect id="table-2 bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18" />
+  </g>
+  <g id="table-cells-merge" transform="translate(600 240)">
+    <rect id="table-cells-merge bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 21v-6" />
+    <path d="M12 9V3" />
+    <path d="M3 15h18" />
+    <path d="M3 9h18" />
+    <rect width="18" height="18" x="3" y="3" rx="2" />
+  </g>
+  <g id="table-cells-split" transform="translate(640 240)">
+    <rect id="table-cells-split bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 15V9" />
+    <path d="M3 15h18" />
+    <path d="M3 9h18" />
+    <rect width="18" height="18" x="3" y="3" rx="2" />
+  </g>
+  <g id="table-columns-split" transform="translate(680 240)">
+    <rect id="table-columns-split bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M14 14v2" />
+    <path d="M14 20v2" />
+    <path d="M14 2v2" />
+    <path d="M14 8v2" />
+    <path d="M2 15h8" />
+    <path d="M2 3h6a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H2" />
+    <path d="M2 9h8" />
+    <path d="M22 15h-4" />
+    <path d="M22 3h-2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h2" />
+    <path d="M22 9h-4" />
+    <path d="M5 3v18" />
+  </g>
+  <g id="table-properties" transform="translate(720 240)">
+    <rect id="table-properties bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M15 3v18" />
+    <rect width="18" height="18" x="3" y="3" rx="2" />
+    <path d="M21 9H3" />
+    <path d="M21 15H3" />
+  </g>
+  <g id="table-rows-split" transform="translate(760 240)">
+    <rect id="table-rows-split bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M14 10h2" />
+    <path d="M15 22v-8" />
+    <path d="M15 2v4" />
+    <path d="M2 10h2" />
+    <path d="M20 10h2" />
+    <path d="M3 19h18" />
+    <path d="M3 22v-6a2 2 135 0 1 2-2h14a2 2 45 0 1 2 2v6" />
+    <path d="M3 2v2a2 2 45 0 0 2 2h14a2 2 135 0 0 2-2V2" />
+    <path d="M8 10h2" />
+    <path d="M9 22v-8" />
+    <path d="M9 2v4" />
+  </g>
+  <g id="trash" transform="translate(0 280)">
+    <rect id="trash bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M3 6h18" />
+    <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+    <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+  </g>
+  <g id="ungroup" transform="translate(40 280)">
+    <rect id="ungroup bounds" width="24" height="24" fill="none" stroke="none" />
+    <rect width="8" height="6" x="5" y="4" rx="1" />
+    <rect width="8" height="6" x="11" y="14" rx="1" />
+  </g>
+  <g id="upload" transform="translate(80 280)">
+    <rect id="upload bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 3v12" />
+    <path d="m17 8-5-5-5 5" />
+    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+  </g>
+  <g id="videotape" transform="translate(120 280)">
+    <rect id="videotape bounds" width="24" height="24" fill="none" stroke="none" />
+    <rect width="20" height="16" x="2" y="4" rx="2" />
+    <path d="M2 8h20" />
+    <circle cx="8" cy="14" r="2" />
+    <path d="M8 12h8" />
+    <circle cx="16" cy="14" r="2" />
+  </g>
+  <g id="wifi-cog" transform="translate(160 280)">
+    <rect id="wifi-cog bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m14.305 19.53.923-.382" />
+    <path d="m15.228 16.852-.923-.383" />
+    <path d="m16.852 15.228-.383-.923" />
+    <path d="m16.852 20.772-.383.924" />
+    <path d="m19.148 15.228.383-.923" />
+    <path d="m19.53 21.696-.382-.924" />
+    <path d="M2 7.82a15 15 0 0 1 20 0" />
+    <path d="m20.772 16.852.924-.383" />
+    <path d="m20.772 19.148.924.383" />
+    <path d="M5 11.858a10 10 0 0 1 11.5-1.785" />
+    <path d="M8.5 15.429a5 5 0 0 1 2.413-1.31" />
+    <circle cx="18" cy="18" r="3" />
+  </g>
+</svg>

@@ -176,7 +176,7 @@ export function ChatStreamingAnswer({
               {streaming ? (
                 <span
                   aria-hidden
-                  className="ms-0.5 inline-block h-4 w-[2px] translate-y-0.5 bg-primary motion-safe:animate-pulse"
+                  className="ms-0.5 inline-block h-4 w-[2px] translate-y-0.5 bg-primary motion-safe:animate-pulse border border-transparent"
                 />
               ) : null}
             </p>
@@ -200,8 +200,8 @@ export function ChatStreamingAnswer({
                     <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-md bg-muted font-mono text-[10px] font-semibold">
                       {source.id}
                     </span>
-                    <span className="truncate font-medium">{source.title}</span>
-                    <span className="ms-auto shrink-0 truncate font-mono text-[11px] text-muted-foreground">
+                    <span className="min-w-0 break-words font-medium">{source.title}</span>
+                    <span className="ms-auto min-w-0 break-words font-mono text-[11px] text-muted-foreground">
                       {source.host}
                     </span>
                     <ExternalLink aria-hidden className="h-3 w-3 shrink-0 text-muted-foreground" />

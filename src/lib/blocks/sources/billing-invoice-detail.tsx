@@ -149,7 +149,10 @@ export function BillingInvoiceDetail({
 
       <div className="grid gap-6 border-b border-border p-5 sm:grid-cols-2 sm:p-6">
         <div>
-          <h3 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+          <h3
+            data-stress-ignore
+            className="text-xs font-semibold uppercase tracking-wider text-muted-foreground"
+          >
             Billed to
           </h3>
           <address className="mt-2 text-sm not-italic leading-relaxed">

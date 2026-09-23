@@ -216,7 +216,7 @@ export function ChatThreadPanel({
             }}
             placeholder={placeholder}
             aria-label={placeholder}
-            className="max-h-32 min-h-9 flex-1 resize-none bg-transparent px-1.5 py-1.5 text-sm outline-none placeholder:text-muted-foreground"
+            className="max-h-32 min-h-9 flex-1 resize-none bg-transparent px-1.5 py-1.5 text-sm outline-none placeholder:text-muted-foreground border border-transparent"
           />
           <button
             type="submit"

@@ -16,6 +16,7 @@ import { NextResponse } from 'next/server'
 import { generateAuthenticationOptions } from '@simplewebauthn/server'
 
 import { withJsonErrors } from '@/lib/route-errors'
+import { enforceRateLimit, RATE_LIMITS } from '@/lib/rate-limit'
 import {
   issueChallenge,
   relyingPartyFrom,
@@ -25,6 +26,11 @@ import {
 export const runtime = 'nodejs'
 
 async function handle(req: Request) {
+  // Each call parks a challenge server-side, so an unlimited caller is an
+  // unlimited writer. Per-IP, like every other sign-in route.
+  const limited = await enforceRateLimit(req, RATE_LIMITS.passkeyOptions)
+  if (limited) return limited
+
   let rp
   try {
     rp = relyingPartyFrom(req)

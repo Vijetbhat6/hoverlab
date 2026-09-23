@@ -157,7 +157,7 @@ export function AiInlineSuggestion({
           autoComplete="off"
           spellCheck
           aria-describedby={suggestion ? `${fieldId}-hint` : undefined}
-          className={`relative resize-none bg-transparent outline-none placeholder:text-muted-foreground ${METRICS}`}
+          className={`relative resize-none border border-transparent bg-transparent outline-none placeholder:text-muted-foreground ${METRICS}`}
         />
       </div>
 

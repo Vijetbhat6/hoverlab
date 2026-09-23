@@ -57,13 +57,13 @@ export function TypingIndicator({
          * is a correctly-rendered invisible component, which typechecks,
          * lints, and passes every test that does not open a browser.
          */}
-        <span className="h-2.5 w-4/5 rounded-full bg-muted-foreground/20 motion-safe:animate-pulse" />
-        <span className="h-2.5 w-3/5 rounded-full bg-muted-foreground/20 motion-safe:animate-pulse" />
+        <span className="h-2.5 w-4/5 rounded-full bg-muted-foreground/20 motion-safe:animate-pulse border border-transparent" />
+        <span className="h-2.5 w-3/5 rounded-full bg-muted-foreground/20 motion-safe:animate-pulse border border-transparent" />
       </span>
     ) : variant === 'pulse' ? (
       <span
         aria-hidden="true"
-        className="size-2 rounded-full bg-muted-foreground motion-safe:animate-pulse"
+        className="size-2 rounded-full bg-muted-foreground motion-safe:animate-pulse border border-transparent"
       />
     ) : (
       <span aria-hidden="true" className="flex items-center gap-1">
@@ -71,7 +71,7 @@ export function TypingIndicator({
           <span
             key={delay}
             style={{ animationDelay: delay }}
-            className="size-1.5 rounded-full bg-muted-foreground motion-safe:animate-bounce"
+            className="size-1.5 rounded-full bg-muted-foreground motion-safe:animate-bounce border border-transparent"
           />
         ))}
       </span>

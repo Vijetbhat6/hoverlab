@@ -13,6 +13,17 @@ const nextConfig: NextConfig = {
   reactStrictMode: false,
 
   /**
+   * Where the build writes. `.next` unless NEXT_DIST_DIR says otherwise.
+   *
+   * Two sessions in one checkout share `.next`: a `next build` rewrites the
+   * directory a running `next dev` reads, and deleting it kills the dev
+   * server outright. Pointing a verification build somewhere else (e.g.
+   * NEXT_DIST_DIR=.next-verify) leaves the other one alone. Unset on Netlify,
+   * so production output is unchanged.
+   */
+  distDir: process.env.NEXT_DIST_DIR || ".next",
+
+  /**
    * Canonical site URL on Netlify.
    *
    * lib/site.ts reads NEXT_PUBLIC_SITE_URL and has no other fallback. Vercel
@@ -26,12 +37,83 @@ const nextConfig: NextConfig = {
    * host (or a developer machine that happens to have a `URL` variable)
    * picks it up.
    */
-  env:
-    process.env.NETLIFY === "true" &&
+  env: {
+    ...(process.env.NETLIFY === "true" &&
     !process.env.NEXT_PUBLIC_SITE_URL &&
     process.env.URL
       ? { NEXT_PUBLIC_SITE_URL: process.env.URL }
-      : {},
+      : {}),
+
+    /**
+     * Whether this deployment can ever geolocate a visitor.
+     *
+     * The regional-offer banner sits in the root layout, so without this every
+     * page view on every host fired a function call to /api/billing/pricing —
+     * and on a host that sends no trusted country header that call can only
+     * ever answer "no offer". This mirrors `trustedCountryHeader()` in
+     * src/lib/billing/region.ts: Vercel sets VERCEL, and a deployment behind
+     * Cloudflare opts in with TRUST_CF_IPCOUNTRY=1. When a Netlify header is
+     * added there, add it here too, or the banner will never ask.
+     *
+     * Inlined at build time, so both variables must be visible to the build.
+     */
+    NEXT_PUBLIC_GEO_PRICING:
+      process.env.VERCEL || process.env.TRUST_CF_IPCOUNTRY === "1" ? "1" : "",
+
+    /**
+     * Whether `x-nf-client-connection-ip` can be believed, i.e. the build is
+     * for Netlify. Inlined rather than read as NETLIFY at request time,
+     * because whether Netlify exposes that variable to a running function is
+     * not something to bet a quota on — an unset one would quietly fall back
+     * to the spoofable header. See `clientIp()` in lib/billing/request-subject.ts.
+     */
+    TRUST_NF_CLIENT_IP: process.env.NETLIFY === "true" ? "1" : "",
+  },
+
+  /**
+   * Response headers every page ships with.
+   *
+   * There were none, so the site could be framed by anyone, sniffed and
+   * downgraded to http on a first visit. These are the ones that cost nothing
+   * and cannot break a page:
+   *
+   *   HSTS              A year, no `includeSubDomains` and no `preload`: this
+   *                     is served from a shared *.netlify.app name today and
+   *                     will move to a custom domain, and preload is a
+   *                     commitment that cannot be taken back quickly.
+   *   nosniff           Stops a served file being reinterpreted as another type.
+   *   Referrer-Policy   The default, made explicit, so it does not change
+   *                     under us.
+   *   Permissions-Policy  Nothing here uses the camera, microphone or
+   *                     location, so nobody embedded on a page can ask.
+   *   X-Frame-Options   The preview iframes are same-origin, so SAMEORIGIN
+   *                     is enough. `/embed/*` is excluded on purpose: it is
+   *                     an embed, and its own route sets `frame-ancestors *`.
+   *
+   * NOT here: a Content-Security-Policy. A useful one has to govern inline
+   * scripts, and Next inlines its bootstrap, the preview iframes inherit the
+   * parent's policy through srcdoc, and PostHog and the checkout redirect
+   * add origins. That needs a Report-Only run against real traffic first —
+   * shipping one blind would break pages to look secure.
+   */
+  async headers() {
+    const baseline = [
+      { key: "Strict-Transport-Security", value: "max-age=31536000" },
+      { key: "X-Content-Type-Options", value: "nosniff" },
+      { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+      {
+        key: "Permissions-Policy",
+        value: "camera=(), microphone=(), geolocation=()",
+      },
+    ];
+    return [
+      { source: "/:path*", headers: baseline },
+      {
+        source: "/((?!embed/).*)",
+        headers: [{ key: "X-Frame-Options", value: "SAMEORIGIN" }],
+      },
+    ];
+  },
 
   /**
    * Load firebase-admin from node_modules at runtime instead of putting it

@@ -143,7 +143,7 @@ export function SearchFacetRange({
                 <span
                   key={bucket.from}
                   style={{ height: `${Math.max(6, (bucket.count / tallest) * 100)}%` }}
-                  className={`flex-1 rounded-t-sm transition-colors ${
+                  className={`flex-1 rounded-t-sm border border-transparent transition-colors ${
                     inside ? 'bg-primary/70' : 'bg-muted'
                   }`}
                 />
@@ -155,12 +155,12 @@ export function SearchFacetRange({
           <div className="relative mt-2 h-6">
             <span
               aria-hidden
-              className="absolute inset-x-0 top-1/2 h-1 -translate-y-1/2 rounded-full bg-muted"
+              className="absolute inset-x-0 top-1/2 h-1 -translate-y-1/2 rounded-full bg-muted border border-transparent"
             />
             <span
               aria-hidden
               style={{ insetInlineStart: `${pct(from)}%`, width: `${pct(to) - pct(from)}%` }}
-              className="absolute top-1/2 h-1 -translate-y-1/2 rounded-full bg-primary"
+              className="absolute top-1/2 h-1 -translate-y-1/2 rounded-full bg-primary border border-transparent"
             />
             <label htmlFor={`${uid}-from`} className="sr-only">
               Lowest {label}

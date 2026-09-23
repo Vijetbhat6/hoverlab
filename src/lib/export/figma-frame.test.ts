@@ -1,7 +1,7 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 
-import { serializeFrame, type Frame, type FrameNode } from './figma-frame'
+import { serializeFrame, type Frame, type FrameIcon, type FrameNode } from './figma-frame'
 
 /**
  * These guard the format, not the walk.
@@ -90,14 +90,14 @@ test('a rect with no fill is explicitly none rather than absent', () => {
   // An omitted fill attribute means black in SVG, which would paint every
   // outline-only element as a solid block.
   const svg = serializeFrame(
-    frame([{ ...RECT, fill: null, stroke: '#334155', strokeWidth: 1 } as FrameNode]),
+    frame([{ ...RECT, fill: null, stroke: '#334155', strokeWidth: 1 }]),
   )
   assert.match(svg, /fill="none"/)
   assert.match(svg, /stroke="#334155" stroke-width="1"/)
 })
 
 test('layer names collide gracefully instead of silently merging', () => {
-  const svg = serializeFrame(frame([RECT, { ...RECT, x: 200 } as FrameNode]))
+  const svg = serializeFrame(frame([RECT, { ...RECT, x: 200 }]))
   assert.match(svg, /id="button"/)
   assert.match(svg, /id="button 2"/)
 })
@@ -126,7 +126,7 @@ test('font family is quoted so a stack with spaces survives', () => {
 
 test('default weight and anchor are omitted rather than restated', () => {
   const svg = serializeFrame(
-    frame([{ ...TEXT, fontWeight: 400, anchor: 'start', letterSpacing: 0 } as FrameNode]),
+    frame([{ ...TEXT, fontWeight: 400, anchor: 'start', letterSpacing: 0 }]),
   )
   assert.doesNotMatch(svg, /font-weight/)
   assert.doesNotMatch(svg, /text-anchor/)
@@ -134,7 +134,7 @@ test('default weight and anchor are omitted rather than restated', () => {
 })
 
 test('a centred label carries its anchor', () => {
-  const svg = serializeFrame(frame([{ ...TEXT, anchor: 'middle' } as FrameNode]))
+  const svg = serializeFrame(frame([{ ...TEXT, anchor: 'middle' }]))
   assert.match(svg, /text-anchor="middle"/)
 })
 
@@ -142,4 +142,87 @@ test('an empty frame is still a valid document', () => {
   const svg = serializeFrame(frame([], { background: null }))
   assert.match(svg, /^<svg /)
   assert.ok(svg.trimEnd().endsWith('</svg>'))
+})
+
+/* ------------------------------------------------------------------ *
+ *  Icons
+ * ------------------------------------------------------------------ */
+
+const ICON: FrameIcon = {
+  kind: 'icon',
+  name: 'icon chevron-down',
+  x: 420,
+  y: 22,
+  width: 16,
+  height: 16,
+  viewBox: { x: 0, y: 0, width: 24, height: 24 },
+  stretch: false,
+  matrix: null,
+  opacity: 1,
+  fill: 'none',
+  stroke: '#575b60',
+  strokeWidth: 2,
+  strokeLinecap: 'round',
+  strokeLinejoin: 'round',
+  shapes: [{ tag: 'path', attrs: { d: 'm6 9 6 6 6-6' }, children: [] }],
+}
+
+test('an icon is one group carrying its paint, with the shapes inside', () => {
+  const svg = serializeFrame(frame([ICON]))
+  assert.match(svg, /<g id="icon chevron-down" transform="translate\(420 22\) scale\(0\.667 0\.667\)"/)
+  assert.match(svg, /fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">/)
+  assert.match(svg, /<path d="m6 9 6 6 6-6" \/>/)
+  assert.ok(svg.includes('</g>'))
+})
+
+test('a stroke-less icon does not restate stroke attributes', () => {
+  const svg = serializeFrame(frame([{ ...ICON, stroke: 'none', fill: '#ff0000' }]))
+  assert.match(svg, /fill="#ff0000" stroke="none">/)
+  assert.doesNotMatch(svg, /stroke-width/)
+})
+
+test('a CSS rotation is applied about the box centre, not the corner', () => {
+  const svg = serializeFrame(frame([{ ...ICON, matrix: [-1, 0, 0, -1, 0, 0] }]))
+  assert.match(
+    svg,
+    /transform="translate\(420 22\) translate\(8 8\) matrix\(-1 0 0 -1 0 0\) translate\(-8 -8\) scale\(0\.667 0\.667\)"/,
+  )
+})
+
+test('a non-square box centres the viewBox instead of stretching it', () => {
+  const svg = serializeFrame(frame([{ ...ICON, width: 48, height: 24 }]))
+  // 24x24 fitted into 48x24 keeps scale 1 and moves right by 12.
+  assert.match(svg, /translate\(12 0\) scale\(1 1\)/)
+})
+
+test('preserveAspectRatio none stretches each axis independently', () => {
+  const svg = serializeFrame(frame([{ ...ICON, width: 48, height: 24, stretch: true }]))
+  assert.match(svg, /scale\(2 1\)/)
+})
+
+test('nested shapes keep their nesting and escape attribute values', () => {
+  const nested: FrameNode = {
+    ...ICON,
+    shapes: [
+      {
+        tag: 'g',
+        attrs: { stroke: '#ff0000' },
+        children: [{ tag: 'path', attrs: { d: 'M0 0"<' }, children: [] }],
+      },
+    ],
+  }
+  const svg = serializeFrame(frame([nested]))
+  assert.match(svg, /<g stroke="#ff0000">\n\s+<path d="M0 0&quot;&lt;" \/>\n\s+<\/g>/)
+})
+
+test('two icons with the same name are suffixed like any other layer', () => {
+  const svg = serializeFrame(frame([ICON, ICON]))
+  assert.match(svg, /id="icon chevron-down"/)
+  assert.match(svg, /id="icon chevron-down 2"/)
+})
+
+test('an icon frame is still well-formed and carries no classes or styles', () => {
+  const svg = serializeFrame(frame([ICON, RECT, TEXT]))
+  assert.equal(svg.split('<svg ').length - 1, 1)
+  assert.doesNotMatch(svg, /class=|<style/)
 })

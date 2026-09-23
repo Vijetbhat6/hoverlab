@@ -42,7 +42,7 @@ export function LaptopFrame({
         <div className={`${aspect} relative w-full overflow-hidden bg-background`}>
           <span
             aria-hidden
-            className="absolute left-1/2 top-1 z-10 size-1 -translate-x-1/2 rounded-full bg-foreground/30"
+            className="absolute left-1/2 top-1 z-10 size-1 -translate-x-1/2 rounded-full bg-foreground/30 border border-transparent"
           />
           {children}
         </div>
@@ -51,7 +51,7 @@ export function LaptopFrame({
       {base ? (
         <div aria-hidden className="relative mx-auto" style={{ width: '112%' }}>
           <div
-            className="h-3 rounded-b-lg bg-foreground/85"
+            className="h-3 rounded-b-lg bg-foreground/85 border border-transparent"
             // 2.6% on each side is the taper. Expressed as a percentage so it
             // holds at any `width`, which a pixel value would not.
             style={{ clipPath: 'polygon(2.6% 0, 97.4% 0, 94% 100%, 6% 100%)' }}
@@ -59,7 +59,7 @@ export function LaptopFrame({
           {/* The notch a thumb goes into. Drawn as a light bar on the base
               rather than as a cut-out, because a cut-out needs a second
               clip-path and shows the page through the laptop. */}
-          <div className="absolute left-1/2 top-0 h-1 w-16 -translate-x-1/2 rounded-b-md bg-background/25" />
+          <div className="absolute left-1/2 top-0 h-1 w-16 -translate-x-1/2 rounded-b-md bg-background/25 border border-transparent" />
         </div>
       ) : null}
     </div>

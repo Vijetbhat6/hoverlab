@@ -242,7 +242,10 @@ export function DashboardSavedViews({
         </div>
 
         <div className="px-5 py-5">
-          <h3 className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+          <h3
+            data-stress-ignore
+            className="text-xs font-medium uppercase tracking-wide text-muted-foreground"
+          >
             Filters in this view
           </h3>
           <ul className="mt-2 flex flex-wrap gap-2">
@@ -264,7 +267,10 @@ export function DashboardSavedViews({
             ))}
           </ul>
 
-          <h3 className="mt-6 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+          <h3
+            data-stress-ignore
+            className="mt-6 text-xs font-medium uppercase tracking-wide text-muted-foreground"
+          >
             Narrow it further
           </h3>
           <ul className="mt-2 flex flex-wrap gap-2">

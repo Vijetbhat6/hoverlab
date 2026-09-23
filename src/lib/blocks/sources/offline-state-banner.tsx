@@ -160,7 +160,7 @@ export function OfflineStateBanner({
           <ul className="mt-1.5 space-y-1 text-xs text-muted-foreground">
             {unavailable.map((item) => (
               <li key={item} className="flex items-start gap-1.5">
-                <span aria-hidden className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-muted-foreground" />
+                <span aria-hidden className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-muted-foreground border border-transparent" />
                 {item}
               </li>
             ))}

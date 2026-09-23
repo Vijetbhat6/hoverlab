@@ -95,8 +95,17 @@ function describe(code: string): AuthFailure {
     case 'PASSWORD_LOGIN_DISABLED':
       return {
         message:
-          'Email and password sign-in is not enabled for this Firebase project.',
+          'That sign-in method is not enabled for this Firebase project ' +
+          '(Authentication → Sign-in method).',
         status: 503,
+      }
+    case 'INVALID_IDP_RESPONSE':
+      // The Google ID token this server forwarded was rejected — expired,
+      // meant for a different OAuth client, or otherwise not what Firebase
+      // expected. Not a password problem, so it gets its own sentence.
+      return {
+        message: 'Google sign-in could not be verified. Please try again.',
+        status: 401,
       }
     case 'ADMIN_ONLY_OPERATION':
       return {
@@ -158,6 +167,7 @@ async function call(
     | 'signUp'
     | 'signInWithPassword'
     | 'signInWithCustomToken'
+    | 'signInWithIdp'
     | 'sendOobCode'
     | 'update',
   body: Record<string, unknown>,
@@ -238,6 +248,37 @@ export async function signInWithCustomToken(token: string): Promise<AuthResult> 
     idToken: String(data.idToken ?? ''),
     localId: String(data.localId ?? ''),
     email: '',
+  }
+}
+
+/**
+ * Exchange a Google ID token for a Firebase account.
+ *
+ * The token is minted by Google Identity Services running in the browser —
+ * OAuth consent has no server-side substitute, so that one hop to
+ * accounts.google.com is unavoidable. Firebase is not part of that hop: the
+ * credential lands here, on the server, and this is the code that calls
+ * identitytoolkit.googleapis.com with it, same as every other sign-in in
+ * this file. `requestUri` does not need to be reachable — Firebase only uses
+ * it to decide which project's redirect-domain allowlist applies — so the
+ * canonical site URL is enough.
+ *
+ * A first-time Google sign-in creates the Firebase user as a side effect;
+ * the caller still runs `ensureUserProfile` afterwards, same as sign-up.
+ */
+export async function signInWithGoogleIdToken(
+  googleIdToken: string,
+  requestUri: string,
+): Promise<AuthResult> {
+  const data = await call('signInWithIdp', {
+    postBody: `id_token=${encodeURIComponent(googleIdToken)}&providerId=google.com`,
+    requestUri,
+    returnSecureToken: true,
+  })
+  return {
+    idToken: String(data.idToken ?? ''),
+    localId: String(data.localId ?? ''),
+    email: String(data.email ?? ''),
   }
 }
 

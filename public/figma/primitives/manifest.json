@@ -1,0 +1,169 @@
+{
+  "generatedAt": "2026-09-21",
+  "sections": 54,
+  "note": "Frames, not components. Named editable layers with real geometry, colour and type; no variants, no auto-layout, no hover or motion.",
+  "files": [
+    {
+      "category": "Actions",
+      "slug": "actions",
+      "file": "primitives-actions.svg",
+      "sections": 3,
+      "bytes": 10752,
+      "ids": [
+        "button",
+        "button-group",
+        "social-buttons"
+      ]
+    },
+    {
+      "category": "AI & Chat",
+      "slug": "ai-chat",
+      "file": "primitives-ai-chat.svg",
+      "sections": 7,
+      "bytes": 21353,
+      "ids": [
+        "message-bubble",
+        "prompt-input",
+        "tool-call",
+        "reasoning-panel",
+        "citation-chip",
+        "typing-indicator",
+        "prompt-suggestions"
+      ]
+    },
+    {
+      "category": "Date & Time",
+      "slug": "date-time",
+      "file": "primitives-date-time.svg",
+      "sections": 5,
+      "bytes": 15425,
+      "ids": [
+        "calendar",
+        "date-picker",
+        "time-picker",
+        "relative-time",
+        "duration-input"
+      ]
+    },
+    {
+      "category": "Form Controls",
+      "slug": "form-controls",
+      "file": "primitives-form-controls.svg",
+      "sections": 7,
+      "bytes": 14292,
+      "ids": [
+        "field",
+        "input-group",
+        "verification-code-input",
+        "stepper",
+        "kbd",
+        "switch",
+        "range-slider"
+      ]
+    },
+    {
+      "category": "Frames & Mocks",
+      "slug": "frames-mocks",
+      "file": "primitives-frames-mocks.svg",
+      "sections": 4,
+      "bytes": 13698,
+      "ids": [
+        "browser-frame",
+        "phone-frame",
+        "laptop-frame",
+        "device-showcase"
+      ]
+    },
+    {
+      "category": "Identity",
+      "slug": "identity",
+      "file": "primitives-identity.svg",
+      "sections": 2,
+      "bytes": 6309,
+      "ids": [
+        "avatar-group",
+        "featured-icon"
+      ]
+    },
+    {
+      "category": "Navigation & Steps",
+      "slug": "navigation-steps",
+      "file": "primitives-navigation-steps.svg",
+      "sections": 6,
+      "bytes": 16184,
+      "ids": [
+        "progress-steps",
+        "tree-view",
+        "tabs",
+        "breadcrumbs",
+        "pagination",
+        "accordion"
+      ]
+    },
+    {
+      "category": "Overlays & Feedback",
+      "slug": "overlays-feedback",
+      "file": "primitives-overlays-feedback.svg",
+      "sections": 4,
+      "bytes": 11029,
+      "ids": [
+        "alert",
+        "dropdown-menu",
+        "dialog",
+        "tooltip"
+      ]
+    },
+    {
+      "category": "Pickers & Media",
+      "slug": "pickers-media",
+      "file": "primitives-pickers-media.svg",
+      "sections": 6,
+      "bytes": 20861,
+      "ids": [
+        "color-picker",
+        "gradient-picker",
+        "image-picker",
+        "credit-card",
+        "qr-code",
+        "video-player"
+      ]
+    },
+    {
+      "category": "Selection",
+      "slug": "selection",
+      "file": "primitives-selection.svg",
+      "sections": 5,
+      "bytes": 18902,
+      "ids": [
+        "combobox",
+        "segmented-control",
+        "rating",
+        "emoji-selector",
+        "radio-card-group"
+      ]
+    },
+    {
+      "category": "Status & Labels",
+      "slug": "status-labels",
+      "file": "primitives-status-labels.svg",
+      "sections": 4,
+      "bytes": 9225,
+      "ids": [
+        "badge",
+        "status-badge",
+        "tag-chip",
+        "skeleton"
+      ]
+    },
+    {
+      "category": "Structure",
+      "slug": "structure",
+      "file": "primitives-structure.svg",
+      "sections": 1,
+      "bytes": 1656,
+      "ids": [
+        "content-divider"
+      ]
+    }
+  ]
+}

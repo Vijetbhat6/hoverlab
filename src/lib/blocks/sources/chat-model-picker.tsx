@@ -138,114 +138,129 @@ export function ChatModelPicker({
   }
 
   return (
-    <div
-      className={`relative w-full max-w-md ${className}`}
-      onKeyDown={(event) => {
-        if (event.key === 'Escape' && open) {
-          setOpen(false)
-          triggerRef.current?.focus()
-        }
-      }}
-    >
-      <button
-        ref={triggerRef}
-        type="button"
-        aria-haspopup="listbox"
-        aria-expanded={open}
-        aria-controls={`${uid}-model-listbox`}
-        onClick={() => setOpen((value) => !value)}
-        className="flex w-full items-center justify-between gap-3 rounded-xl border border-border bg-card px-3 py-2.5 text-start transition-colors hover:bg-muted/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+    /*
+      The demo opens on the panel, because the panel is what this block is
+      about, and the panel is `absolute` -- it adds nothing to the height of
+      the section it hangs from. Any `overflow-hidden` ancestor (the preview
+      frame, a card, a Figma trace) therefore clips it away and leaves a lone
+      trigger. The outer wrapper reserves the room instead: 29rem is the
+      panel's real height (max-h-96 list + footnote + the mt-2 gap).
+
+      It is an OUTER wrapper on purpose. Padding on the `relative` element
+      below would move `top-full` down with it and the panel would open a
+      screen away from its trigger. In your own layout the panel can overlay
+      whatever follows, so delete `pb-[29rem]` there.
+    */
+    <div className={`w-full max-w-md pb-[29rem] ${className}`}>
+      <div
+        className="relative"
+        onKeyDown={(event) => {
+          if (event.key === 'Escape' && open) {
+            setOpen(false)
+            triggerRef.current?.focus()
+          }
+        }}
       >
-        <span className="min-w-0">
-          <span className="block text-sm font-semibold">{selected.name}</span>
-          <span className="block text-xs text-muted-foreground">
-            {selected.latency} · {selected.costPerMessage}
-          </span>
-        </span>
-        <span className="sr-only">Current model: {selected.name}. Change model.</span>
-        <ChevronDown
-          aria-hidden
-          className={`h-4 w-4 shrink-0 text-muted-foreground transition-transform ${open ? 'rotate-180' : ''}`}
-        />
-      </button>
-
-      {open ? (
-        <div
-          id={`${uid}-model-listbox`}
-          role="listbox"
-          aria-label="Model"
-          className="absolute inset-x-0 top-full z-10 mt-2 overflow-hidden rounded-xl border border-border bg-card shadow-xl"
+        <button
+          ref={triggerRef}
+          type="button"
+          aria-haspopup="listbox"
+          aria-expanded={open}
+          aria-controls={`${uid}-model-listbox`}
+          onClick={() => setOpen((value) => !value)}
+          className="flex w-full items-center justify-between gap-3 rounded-xl border border-border bg-card px-3 py-2.5 text-start transition-colors hover:bg-muted/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         >
-          <ul className="max-h-96 overflow-y-auto">
-            {models.map((model) => {
-              const isSelected = model.id === selectedId
-              const locked = Boolean(model.lockedReason)
+          <span className="min-w-0">
+            <span className="block text-sm font-semibold">{selected.name}</span>
+            <span className="block text-xs text-muted-foreground">
+              {selected.latency} · {selected.costPerMessage}
+            </span>
+          </span>
+          <span className="sr-only">Current model: {selected.name}. Change model.</span>
+          <ChevronDown
+            aria-hidden
+            className={`h-4 w-4 shrink-0 text-muted-foreground transition-transform ${open ? 'rotate-180' : ''}`}
+          />
+        </button>
 
-              return (
-                <li key={model.id}>
-                  <button
-                    type="button"
-                    role="option"
-                    aria-selected={isSelected}
-                    aria-disabled={locked || undefined}
-                    onClick={() => choose(model)}
-                    className={`flex w-full flex-col items-start gap-2 border-b border-border/60 p-3 text-start transition-colors last:border-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring ${
-                      locked
-                        ? 'cursor-not-allowed opacity-70'
-                        : isSelected
-                          ? 'bg-primary/5'
-                          : 'hover:bg-muted/50'
-                    }`}
-                  >
-                    <span className="flex w-full items-center gap-2">
-                      <span className="text-sm font-semibold">{model.name}</span>
-                      <span className="text-xs text-muted-foreground">{model.vendor}</span>
-                      {locked ? (
-                        <Lock aria-hidden className="h-3.5 w-3.5 text-muted-foreground" />
-                      ) : null}
-                      {isSelected ? (
-                        <Check aria-hidden className="ms-auto h-4 w-4 text-primary" />
-                      ) : null}
-                    </span>
+        {open ? (
+          <div
+            id={`${uid}-model-listbox`}
+            role="listbox"
+            aria-label="Model"
+            className="absolute inset-x-0 top-full z-10 mt-2 overflow-hidden rounded-xl border border-border bg-card shadow-xl"
+          >
+            <ul className="max-h-96 overflow-y-auto">
+              {models.map((model) => {
+                const isSelected = model.id === selectedId
+                const locked = Boolean(model.lockedReason)
 
-                    <span className="text-xs text-muted-foreground">{model.blurb}</span>
+                return (
+                  <li key={model.id}>
+                    <button
+                      type="button"
+                      role="option"
+                      aria-selected={isSelected}
+                      aria-disabled={locked || undefined}
+                      onClick={() => choose(model)}
+                      className={`flex w-full flex-col items-start gap-2 border-b border-border/60 p-3 text-start transition-colors last:border-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring ${
+                        locked
+                          ? 'cursor-not-allowed opacity-70'
+                          : isSelected
+                            ? 'bg-primary/5'
+                            : 'hover:bg-muted/50'
+                      }`}
+                    >
+                      <span className="flex w-full items-center gap-2">
+                        <span className="text-sm font-semibold">{model.name}</span>
+                        <span className="text-xs text-muted-foreground">{model.vendor}</span>
+                        {locked ? (
+                          <Lock aria-hidden className="h-3.5 w-3.5 text-muted-foreground" />
+                        ) : null}
+                        {isSelected ? (
+                          <Check aria-hidden className="ms-auto h-4 w-4 text-primary" />
+                        ) : null}
+                      </span>
 
-                    {/* The three numbers. Announced as words, not bars. */}
-                    <span className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-muted-foreground">
-                      <span className="inline-flex items-center gap-1.5">
-                        <CapabilityBar level={model.capability} />
-                        <span className="sr-only">
-                          Capability {model.capability} of 5.
+                      <span className="text-xs text-muted-foreground">{model.blurb}</span>
+
+                      {/* The three numbers. Announced as words, not bars. */}
+                      <span className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-muted-foreground">
+                        <span className="inline-flex items-center gap-1.5">
+                          <CapabilityBar level={model.capability} />
+                          <span className="sr-only">
+                            Capability {model.capability} of 5.
+                          </span>
+                        </span>
+                        <span className="inline-flex items-center gap-1">
+                          <Gauge aria-hidden className="h-3 w-3" />
+                          {model.latency}
+                        </span>
+                        <span className="inline-flex items-center gap-1">
+                          <Zap aria-hidden className="h-3 w-3" />
+                          {model.costPerMessage}
                         </span>
                       </span>
-                      <span className="inline-flex items-center gap-1">
-                        <Gauge aria-hidden className="h-3 w-3" />
-                        {model.latency}
-                      </span>
-                      <span className="inline-flex items-center gap-1">
-                        <Zap aria-hidden className="h-3 w-3" />
-                        {model.costPerMessage}
-                      </span>
-                    </span>
 
-                    {/* Explained rather than greyed — see the header. */}
-                    {locked ? (
-                      <span className="mt-0.5 w-full rounded-lg bg-muted px-2 py-1.5 text-[11px] text-muted-foreground">
-                        {model.lockedReason}
-                      </span>
-                    ) : null}
-                  </button>
-                </li>
-              )
-            })}
-          </ul>
+                      {/* Explained rather than greyed — see the header. */}
+                      {locked ? (
+                        <span className="mt-0.5 w-full rounded-lg bg-muted px-2 py-1.5 text-[11px] text-muted-foreground">
+                          {model.lockedReason}
+                        </span>
+                      ) : null}
+                    </button>
+                  </li>
+                )
+              })}
+            </ul>
 
-          <p className="border-t border-border bg-muted/40 p-3 text-[11px] text-muted-foreground">
-            Changing model applies to your next message. Earlier replies in this thread
-            stay as the model that wrote them left them.
-          </p>
-        </div>
-      ) : null}
+            <p className="border-t border-border bg-muted/40 p-3 text-[11px] text-muted-foreground">
+              Changing model applies to your next message. Earlier replies in this thread
+              stay as the model that wrote them left them.
+            </p>
+          </div>
+        ) : null}
+      </div>
     </div>
   )
 }

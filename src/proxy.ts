@@ -54,7 +54,12 @@ const PROTECTED_PREFIXES = [
 
 // Paths that should bounce logged-in users away to /library.
 // (Auth pages don't make sense once you're already signed in.)
-const AUTH_PATHS = new Set(['/', '/login', '/signup'])
+//
+// `/` is deliberately NOT here. It is the highest-traffic page on the site
+// and nearly every visitor is anonymous, so matching it made each hit a
+// function invocation to decide nothing. Signed-in visitors are sent on from
+// the client instead — see the redirect in components/auth-provider.tsx.
+const AUTH_PATHS = new Set(['/login', '/signup'])
 
 export async function proxy(req: NextRequest) {
   const { pathname, search } = req.nextUrl
@@ -123,7 +128,6 @@ export const config = {
   // did nothing but return NextResponse.next(). On Vercel Hobby that was
   // 2.6M invocations and ~14h of CPU in a month, and the project was paused.
   matcher: [
-    '/',
     '/login',
     '/signup',
     '/account/:path*',

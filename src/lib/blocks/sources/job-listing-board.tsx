@@ -129,7 +129,7 @@ export function JobListingBoard({
           <div key={department.name}>
             <h3 className="flex items-baseline gap-2 text-sm font-semibold uppercase tracking-wide text-muted-foreground">
               {department.name}
-              <span className="text-xs font-medium normal-case tracking-normal text-muted-foreground/70">
+              <span className="text-xs font-medium normal-case tracking-normal text-muted-foreground/85">
                 {department.openings.length}{' '}
                 {department.openings.length === 1 ? 'opening' : 'openings'}
               </span>

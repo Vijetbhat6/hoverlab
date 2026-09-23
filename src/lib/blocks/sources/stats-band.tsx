@@ -33,14 +33,14 @@ export function StatsBand({ stats = DEFAULT_STATS, className = '' }: StatsBandPr
         {stats.map((s) => (
           <div
             key={s.label}
-            className="bg-background/80 p-5 text-center backdrop-blur transition-colors hover:bg-background sm:p-6"
+            className="min-w-0 bg-background/80 p-5 text-center backdrop-blur transition-colors hover:bg-background sm:p-6"
           >
-            <div className="text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl">
+            <div className="break-words text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl">
               {s.value}
             </div>
-            <div className="mt-1 text-sm font-semibold text-foreground/80">{s.label}</div>
+            <div className="mt-1 break-words text-sm font-semibold text-foreground/80">{s.label}</div>
             {s.caption ? (
-              <div className="mt-0.5 text-xs text-muted-foreground">{s.caption}</div>
+              <div className="mt-0.5 break-words text-xs text-muted-foreground">{s.caption}</div>
             ) : null}
           </div>
         ))}

@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="5824" height="342" viewBox="0 0 5824 342" id="Hoverlab states - Navigation &amp; Steps">
+  <!--
+    Hoverlab primitive states - Navigation & Steps. 1 primitives, one row each,
+    states across, traced from the rendered catalog.
+
+    These are variant-READY frames named Property=Value (State=Hover, State=Focus ...).
+    They are NOT variants: an SVG import cannot create components. To get variants,
+    in Figma convert each frame to a component, select the row of components, and
+    choose Combine as Variants. Figma reads the State=... names into a State property.
+
+    Hover, focus and active are forced on every control at once. Loading is only
+    shown where a component's CSS keys on aria-busy or data-loading. Slots marked
+    n/a had nothing to force the state on. Tracer limits carry over: single-line
+    text can sit offset and lucide icons are not traced.
+
+    Every primitive here is free to copy as code at https://hoverlab.dev/primitives
+  -->
+  <rect id="Background" x="0" y="0" width="5824" height="342" fill="#ffffff" />
+  <text id="Progress Steps title" x="64" y="86" font-family="Inter, system-ui, sans-serif" font-size="20" font-weight="700" fill="#0a0a0a">Progress Steps</text>
+  <text id="progress-steps id" x="64" y="104" font-family="ui-monospace, monospace" font-size="12" fill="#737373">progress-steps</text>
+  <text id="State=Default label progress-steps" x="64" y="138" font-family="ui-monospace, monospace" font-size="13" font-weight="600" fill="#0a0a0a">State=Default</text>
+  <g id="State=Default" transform="translate(64, 148)">
+    <rect id="container" x="0" y="0" width="1088" height="110" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="320" y="25" width="32" height="32" rx="16" fill="#00782e" stroke="#00782e" stroke-width="2" />
+      <g id="icon check" transform="translate(328 33) scale(0.667 0.667)" fill="none" stroke="#fcfcfc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 6 9 17l-5-5" />
+      </g>
+      <rect id="container 3" x="360" y="40" width="93.92" height="2" rx="1" fill="#00782e" />
+      <text id="Cart" x="320" y="80" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Cart</text>
+      <rect id="container 4" x="453.92" y="25" width="32" height="32" rx="16" fill="#00782e" stroke="#00782e" stroke-width="2" />
+      <g id="icon check 2" transform="translate(461.922 33) scale(0.667 0.667)" fill="none" stroke="#fcfcfc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 6 9 17l-5-5" />
+      </g>
+      <rect id="container 5" x="493.92" y="40" width="93.92" height="2" rx="1" fill="#00782e" />
+      <text id="Delivery" x="453.92" y="80" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Delivery</text>
+      <rect id="container 6" x="587.84" y="25" width="32" height="32" rx="16" fill="#fdfcf8" stroke="#00782e" stroke-width="2" />
+      <text id="3" x="600.02" y="45" fill="#00782e" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="600">3</text>
+      <rect id="container 7" x="627.84" y="40" width="93.92" height="2" rx="1" fill="#dbdee1" />
+      <text id="Payment" x="587.84" y="80" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Payment</text>
+      <rect id="container 8" x="721.77" y="25" width="32" height="32" rx="16" fill="#fdfcf8" stroke="#dbdee1" stroke-width="2" />
+      <text id="4" x="733.91" y="45" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="600">4</text>
+      <text id="Done" x="721.77" y="80" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Done</text>
+  </g>
+  <text id="State=Hover label progress-steps" x="1216" y="138" font-family="ui-monospace, monospace" font-size="13" font-weight="600" fill="#0a0a0a">State=Hover</text>
+  <text id="State=Hover note progress-steps" x="1216" y="164" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#737373">n/a: no interactive element</text>
+  <text id="State=Focus label progress-steps" x="1600" y="138" font-family="ui-monospace, monospace" font-size="13" font-weight="600" fill="#0a0a0a">State=Focus</text>
+  <text id="State=Focus note progress-steps" x="1600" y="164" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#737373">n/a: no interactive element</text>
+  <text id="State=Active label progress-steps" x="1984" y="138" font-family="ui-monospace, monospace" font-size="13" font-weight="600" fill="#0a0a0a">State=Active</text>
+  <text id="State=Active note progress-steps" x="1984" y="164" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#737373">n/a: no interactive element</text>
+  <text id="State=Disabled label progress-steps" x="2368" y="138" font-family="ui-monospace, monospace" font-size="13" font-weight="600" fill="#0a0a0a">State=Disabled</text>
+  <text id="State=Disabled note progress-steps" x="2368" y="164" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#737373">n/a: no interactive element</text>
+  <text id="State=Loading label progress-steps" x="2752" y="138" font-family="ui-monospace, monospace" font-size="13" font-weight="600" fill="#0a0a0a">State=Loading</text>
+  <text id="State=Loading note progress-steps" x="2752" y="164" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#737373">n/a: no interactive element</text>
+  <text id="State=Error label progress-steps" x="3136" y="138" font-family="ui-monospace, monospace" font-size="13" font-weight="600" fill="#0a0a0a">State=Error</text>
+  <text id="State=Error note progress-steps" x="3136" y="164" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#737373">n/a: no form control</text>
+  <text id="State=Empty label progress-steps" x="3520" y="138" font-family="ui-monospace, monospace" font-size="13" font-weight="600" fill="#0a0a0a">State=Empty</text>
+  <g id="State=Empty" transform="translate(3520, 148)">
+    <rect id="container" x="0" y="0" width="1088" height="90" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="320" y="25" width="32" height="32" rx="16" fill="#00782e" stroke="#00782e" stroke-width="2" />
+      <g id="icon check" transform="translate(328 33) scale(0.667 0.667)" fill="none" stroke="#fcfcfc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 6 9 17l-5-5" />
+      </g>
+      <rect id="container 3" x="360" y="40" width="98.66" height="2" rx="1" fill="#00782e" />
+      <rect id="container 4" x="458.66" y="25" width="32" height="32" rx="16" fill="#00782e" stroke="#00782e" stroke-width="2" />
+      <g id="icon check 2" transform="translate(466.656 33) scale(0.667 0.667)" fill="none" stroke="#fcfcfc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 6 9 17l-5-5" />
+      </g>
+      <rect id="container 5" x="498.66" y="40" width="98.67" height="2" rx="1" fill="#00782e" />
+      <rect id="container 6" x="597.33" y="25" width="32" height="32" rx="16" fill="#fdfcf8" stroke="#00782e" stroke-width="2" />
+      <rect id="container 7" x="637.33" y="40" width="98.67" height="2" rx="1" fill="#dbdee1" />
+      <rect id="container 8" x="736" y="25" width="32" height="32" rx="16" fill="#fdfcf8" stroke="#dbdee1" stroke-width="2" />
+  </g>
+  <text id="State=Long text label progress-steps" x="4672" y="138" font-family="ui-monospace, monospace" font-size="13" font-weight="600" fill="#0a0a0a">State=Long text</text>
+  <g id="State=Long text" transform="translate(4672, 148)">
+    <rect id="container" x="0" y="0" width="1088" height="130" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="320" y="25" width="32" height="32" rx="16" fill="#00782e" stroke="#00782e" stroke-width="2" />
+      <g id="icon check" transform="translate(328 33) scale(0.667 0.667)" fill="none" stroke="#fcfcfc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 6 9 17l-5-5" />
+      </g>
+      <rect id="container 3" x="360" y="40" width="218.83" height="2" rx="1" fill="#00782e" />
+      <text id="Cart" x="320" y="80" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Cart</text>
+      <text id="Wolfeschlegelsteinhausenbergerdorff" x="320" y="100" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Wolfeschlegelsteinhausenbergerdorff</text>
+      <rect id="container 4" x="578.83" y="25" width="32" height="32" rx="16" fill="#00782e" stroke="#00782e" stroke-width="2" />
+      <g id="icon check 2" transform="translate(586.828 33) scale(0.667 0.667)" fill="none" stroke="#fcfcfc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 6 9 17l-5-5" />
+      </g>
+      <rect id="container 5" x="618.83" y="40" width="218.83" height="2" rx="1" fill="#00782e" />
+      <text id="Delivery" x="578.83" y="80" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Delivery</text>
+      <text id="Wolfeschlegelsteinhausenbergerdorff 2" x="578.83" y="100" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Wolfeschlegelsteinhausenbergerdorff</text>
+      <rect id="container 6" x="837.66" y="25" width="32" height="32" rx="16" fill="#fdfcf8" stroke="#00782e" stroke-width="2" />
+      <text id="3" x="849.83" y="45" fill="#00782e" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="600">3</text>
+      <rect id="container 7" x="877.66" y="40" width="218.83" height="2" rx="1" fill="#dbdee1" />
+      <text id="Payment" x="837.66" y="80" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Payment</text>
+      <text id="Wolfeschlegelsteinhausenbergerdorff 3" x="837.66" y="100" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Wolfeschlegelsteinhausenbergerdorff</text>
+  </g>
+</svg>

@@ -89,12 +89,12 @@ export function MetricSparklineCards({
         return (
           <div
             key={metric.label}
-            className="rounded-2xl border border-border/60 bg-card/80 p-5 backdrop-blur transition-shadow hover:shadow-md"
+            className="min-w-0 rounded-2xl border border-border/60 bg-card/80 p-5 backdrop-blur transition-shadow hover:shadow-md"
           >
-            <p className="text-sm font-medium text-muted-foreground">{metric.label}</p>
+            <p className="truncate text-sm font-medium text-muted-foreground">{metric.label}</p>
 
-            <div className="mt-2 flex items-baseline gap-2">
-              <span className="text-2xl font-extrabold tracking-tight">{metric.value}</span>
+            <div className="mt-2 flex flex-wrap items-baseline gap-2">
+              <span className="min-w-0 break-words text-2xl font-extrabold tracking-tight">{metric.value}</span>
               <span
                 className={`text-xs font-semibold ${
                   good ? 'text-emerald-600 dark:text-emerald-400' : 'text-red-600 dark:text-red-400'

@@ -203,7 +203,7 @@ export function ContextWindowBudget({
         <div
           role="img"
           aria-label={summary}
-          className="mt-4 flex h-3 w-full gap-0.5 overflow-hidden rounded-full bg-muted"
+          className="mt-4 flex h-3 w-full gap-0.5 overflow-hidden rounded-full border border-transparent bg-muted"
         >
           {segments.map((seg, i) => (
             <div
@@ -215,7 +215,7 @@ export function ContextWindowBudget({
                     ? 'color-mix(in oklab, var(--muted-foreground) 45%, var(--card))'
                     : rampColor(i, segments.length - 1),
               }}
-              className="h-full first:rounded-s-full"
+              className="h-full border border-transparent first:rounded-s-full"
             />
           ))}
         </div>
@@ -235,7 +235,7 @@ export function ContextWindowBudget({
                         ? 'color-mix(in oklab, var(--muted-foreground) 45%, var(--card))'
                         : rampColor(i, segments.length - 1),
                   }}
-                  className="h-2.5 w-2.5 shrink-0 rounded-sm"
+                  className="h-2.5 w-2.5 shrink-0 rounded-sm border border-transparent"
                 />
                 <Icon aria-hidden className="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
                 <span className="min-w-0 flex-1">

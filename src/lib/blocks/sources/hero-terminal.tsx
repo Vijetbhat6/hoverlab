@@ -78,7 +78,7 @@ export function HeroTerminal({
   return (
     <section className={`relative overflow-hidden ${className}`}>
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute left-1/2 top-0 h-72 w-[36rem] -translate-x-1/2 rounded-full bg-primary/15 blur-3xl" />
+        <div className="absolute left-1/2 top-0 h-72 w-[36rem] -translate-x-1/2 rounded-full bg-primary/15 blur-3xl border border-transparent" />
       </div>
 
       <div className="mx-auto w-full max-w-4xl px-4 py-20 text-center sm:px-6 lg:px-8 lg:py-28">
@@ -89,7 +89,7 @@ export function HeroTerminal({
           </span>
         ) : null}
 
-        <h1 className="mt-6 text-balance text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+        <h1 className="mt-6 text-balance break-words text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
           {heading}
         </h1>
 
@@ -100,15 +100,15 @@ export function HeroTerminal({
         {/* -- Terminal ------------------------------------------------- */}
         <div className="mx-auto mt-10 max-w-2xl overflow-hidden rounded-2xl border border-border/60 bg-card/80 text-start shadow-2xl shadow-black/20 backdrop-blur">
           <div aria-hidden className="flex items-center gap-1.5 border-b border-border/60 px-4 py-2.5">
-            <span className="h-2.5 w-2.5 rounded-full bg-rose-500/70" />
-            <span className="h-2.5 w-2.5 rounded-full bg-amber-500/70" />
-            <span className="h-2.5 w-2.5 rounded-full bg-emerald-500/70" />
+            <span className="h-2.5 w-2.5 rounded-full bg-rose-500/70 border border-transparent" />
+            <span className="h-2.5 w-2.5 rounded-full bg-amber-500/70 border border-transparent" />
+            <span className="h-2.5 w-2.5 rounded-full bg-emerald-500/70 border border-transparent" />
             <span className="ms-2 font-mono text-[11px] text-muted-foreground">bash</span>
           </div>
 
           <div className="space-y-1 bg-background/70 p-4 font-mono text-sm">
             <div className="flex items-center gap-3">
-              <code className="flex-1 truncate">
+              <code className="min-w-0 flex-1 truncate">
                 <span aria-hidden className="me-2 select-none text-primary">
                   $
                 </span>

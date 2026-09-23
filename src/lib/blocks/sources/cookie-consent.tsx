@@ -130,7 +130,7 @@ export function CookieConsent({
   return (
     // The containing frame. In a real mount this goes away and the banner
     // below becomes `fixed` — see POSITIONING above.
-    <div className={`relative min-h-80 w-full ${className}`}>
+    <div className={`relative min-h-[27rem] w-full ${className}`}>
       <div
         role="dialog"
         // Not modal on purpose: see the note above on cookie walls.
@@ -199,7 +199,7 @@ export function CookieConsent({
               unequal prominence as invalidating consent. If a design system
               insists the primary action be loud here, the honest fix is to
               make both loud, never just this one. */}
-          <div className="mt-5 flex flex-col gap-2 sm:flex-row sm:justify-end">
+          <div className="mt-5 flex flex-col flex-wrap gap-2 sm:flex-row sm:justify-end">
             <button
               type="button"
               onClick={() => setShowDetail((v) => !v)}

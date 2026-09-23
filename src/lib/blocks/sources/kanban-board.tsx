@@ -138,7 +138,7 @@ export function KanbanBoard({ columns = DEFAULT_COLUMNS, className = '' }: Kanba
                     }`}
                   >
                     <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
-                      <span aria-hidden className={`h-2 w-2 rounded-full ${priority.dot}`} />
+                      <span aria-hidden className={`h-2 w-2 rounded-full border border-transparent ${priority.dot}`} />
                       <span>{priority.label}</span>
                       <span className="ms-auto font-mono text-[0.65rem]">{task.id}</span>
                     </div>

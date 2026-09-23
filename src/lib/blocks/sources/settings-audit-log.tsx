@@ -226,7 +226,9 @@ export function SettingsAuditLog({
                 >
                   {CATEGORY_LABEL[entry.category]}
                 </span>
-                <h3 className="text-sm font-semibold">{entry.action}</h3>
+                {entry.action ? (
+                  <h3 data-stress-ignore className="text-sm font-semibold">{entry.action}</h3>
+                ) : null}
                 <span className="text-sm text-muted-foreground">— {entry.target}</span>
               </div>
 

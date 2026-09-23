@@ -154,7 +154,7 @@ export function NavbarMegaMenu({
           if (!e.currentTarget.contains(e.relatedTarget as Node | null)) setOpenLabel(null)
         }}
       >
-        <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto flex min-h-16 w-full max-w-7xl flex-wrap items-center justify-between gap-x-4 gap-y-2 px-4 py-2 sm:px-6 lg:px-8">
           <a href="#" className="flex shrink-0 items-center gap-2.5">
             <span
               aria-hidden
@@ -220,7 +220,7 @@ export function NavbarMegaMenu({
             </ul>
           </nav>
 
-          <div className="hidden lg:block">
+          <div className="hidden shrink-0 lg:block">
             <a
               href={ctaHref}
               className="rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-sm transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"

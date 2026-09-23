@@ -119,7 +119,7 @@ export function OrderConfirmation({
       </div>
 
       <div className="mt-6 grid gap-6 sm:grid-cols-2">
-        <section className="rounded-2xl border border-border/60 bg-card/60 p-5">
+        <section className="min-w-0 rounded-2xl border border-border/60 bg-card/60 p-5">
           <h2 className="flex items-center gap-2 text-sm font-semibold">
             <Package aria-hidden className="h-4 w-4" />
             Delivering to
@@ -129,35 +129,35 @@ export function OrderConfirmation({
                 lines, and two of them can legitimately read the same (or be
                 blank). Keying by content drops the duplicate. */}
             {address.map((line, i) => (
-              <span key={i} className="block">
+              <span key={i} className="block break-words">
                 {line}
               </span>
             ))}
           </address>
         </section>
 
-        <section className="rounded-2xl border border-border/60 bg-card/60 p-5">
+        <section className="min-w-0 rounded-2xl border border-border/60 bg-card/60 p-5">
           <h2 className="text-sm font-semibold">Payment</h2>
           <dl className="mt-2 space-y-1.5 text-sm">
             <div className="flex justify-between gap-3">
-              <dt className="text-muted-foreground">Subtotal</dt>
-              <dd className="tabular-nums">{formatPrice(subtotal, currency, locale)}</dd>
+              <dt className="min-w-0 break-words text-muted-foreground">Subtotal</dt>
+              <dd className="shrink-0 tabular-nums">{formatPrice(subtotal, currency, locale)}</dd>
             </div>
             {discount > 0 ? (
               <div className="flex justify-between gap-3 text-emerald-600 dark:text-emerald-400">
-                <dt>Discount</dt>
-                <dd className="tabular-nums">−{formatPrice(discount, currency, locale)}</dd>
+                <dt className="min-w-0 break-words">Discount</dt>
+                <dd className="shrink-0 tabular-nums">−{formatPrice(discount, currency, locale)}</dd>
               </div>
             ) : null}
             <div className="flex justify-between gap-3">
-              <dt className="text-muted-foreground">Delivery</dt>
-              <dd className="tabular-nums">
+              <dt className="min-w-0 break-words text-muted-foreground">Delivery</dt>
+              <dd className="min-w-0 shrink-0 break-words text-end tabular-nums">
                 {shipping === 0 ? 'Free' : formatPrice(shipping, currency, locale)}
               </dd>
             </div>
             <div className="flex justify-between gap-3 border-t border-border/60 pt-1.5 font-bold">
-              <dt>Total</dt>
-              <dd className="tabular-nums">{formatPrice(total, currency, locale)}</dd>
+              <dt className="min-w-0 break-words">Total</dt>
+              <dd className="shrink-0 tabular-nums">{formatPrice(total, currency, locale)}</dd>
             </div>
           </dl>
         </section>
@@ -184,7 +184,7 @@ export function OrderConfirmation({
                 ) : null}
               </div>
               <p className="shrink-0 text-sm text-muted-foreground">×{line.quantity}</p>
-              <p className="w-20 shrink-0 text-end text-sm font-medium tabular-nums">
+              <p className="min-w-20 shrink-0 text-end text-sm font-medium tabular-nums">
                 {formatPrice(line.price * line.quantity, currency, locale)}
               </p>
             </li>

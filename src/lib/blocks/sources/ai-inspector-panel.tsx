@@ -30,6 +30,57 @@
 import * as React from 'react'
 import { RotateCcw, Sparkles, Undo2 } from 'lucide-react'
 
+/*
+  Contrast ratio, inlined rather than imported from `@/lib/color-tools`:
+  the registry serves this file standalone, and that module is app-internal
+  (the Designer Tools), not part of the component catalog it can package.
+  Just the WCAG relative-luminance/contrast-ratio pair this block needs.
+*/
+function hexToRgb(hex: string): { r: number; g: number; b: number } | null {
+  const m = /^#?([0-9a-f]{3}|[0-9a-f]{6}|[0-9a-f]{8})$/i.exec(hex.trim())
+  if (!m) return null
+  let s = m[1]
+  if (s.length === 3) {
+    s = s[0] + s[0] + s[1] + s[1] + s[2] + s[2]
+  }
+  return {
+    r: parseInt(s.slice(0, 2), 16),
+    g: parseInt(s.slice(2, 4), 16),
+    b: parseInt(s.slice(4, 6), 16),
+  }
+}
+
+function relativeLuminance({ r, g, b }: { r: number; g: number; b: number }): number {
+  const channel = (c: number) => {
+    const s = c / 255
+    return s <= 0.03928 ? s / 12.92 : Math.pow((s + 0.055) / 1.055, 2.4)
+  }
+  return 0.2126 * channel(r) + 0.7152 * channel(g) + 0.0722 * channel(b)
+}
+
+function contrastRatio(fg: string, bg: string): number | null {
+  const fgRgb = hexToRgb(fg)
+  const bgRgb = hexToRgb(bg)
+  if (!fgRgb || !bgRgb) return null
+  const l1 = relativeLuminance(fgRgb)
+  const l2 = relativeLuminance(bgRgb)
+  const lighter = Math.max(l1, l2)
+  const darker = Math.min(l1, l2)
+  return (lighter + 0.05) / (darker + 0.05)
+}
+
+/**
+ * Ink for text painted directly on a solid accent fill. The accent is a
+ * live, user-picked colour (the whole point of this inspector), so a fixed
+ * `text-white` is only an accident away from failing 1.4.3 — pick whichever
+ * of black or white actually contrasts against the value in hand.
+ */
+function readableInk(hex: string): string {
+  const onWhite = contrastRatio(hex, '#ffffff') ?? 0
+  const onBlack = contrastRatio(hex, '#0a0a0a') ?? 0
+  return onWhite >= onBlack ? '#ffffff' : '#0a0a0a'
+}
+
 export interface InspectorState {
   radius: number
   padding: number
@@ -57,7 +108,7 @@ export interface AiInspectorPanelProps {
 const BASE: InspectorState = {
   radius: 12,
   padding: 20,
-  accent: '#6366f1',
+  accent: '#4f46e5',
   weight: '600',
   shadow: true,
 }
@@ -109,8 +160,8 @@ export function AiInspectorPanel({
           className="w-full max-w-xs border border-border/60 bg-card"
         >
           <span
-            style={{ backgroundColor: `${state.accent}1a`, color: state.accent }}
-            className="inline-flex rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide"
+            style={{ backgroundColor: `${state.accent}1a` }}
+            className="inline-flex max-w-full truncate rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide text-foreground"
           >
             Seasonal
           </span>
@@ -128,8 +179,12 @@ export function AiInspectorPanel({
 
           <button
             type="button"
-            style={{ backgroundColor: state.accent, borderRadius: `${state.radius * 0.7}px` }}
-            className="mt-4 w-full px-3 py-2 text-sm font-semibold text-white transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            style={{
+              backgroundColor: state.accent,
+              color: readableInk(state.accent),
+              borderRadius: `${state.radius * 0.7}px`,
+            }}
+            className="mt-4 w-full px-3 py-2 text-sm font-semibold transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           >
             Add to case
           </button>
@@ -137,10 +192,14 @@ export function AiInspectorPanel({
       </div>
 
       {/* -- Inspector ----------------------------------------------------- */}
-      <div className="overflow-hidden rounded-2xl border border-border/60 bg-card">
+      <div className="overflow-y-hidden rounded-2xl border border-border/60 bg-card">
         <div className="flex items-center gap-2 border-b border-border/60 px-4 py-3">
           <Sparkles aria-hidden className="h-4 w-4 shrink-0 text-primary" />
-          <h3 className="min-w-0 flex-1 truncate text-sm font-semibold">{heading}</h3>
+          {heading ? (
+            <h3 data-stress-ignore className="min-w-0 flex-1 break-words text-sm font-semibold">
+              {heading}
+            </h3>
+          ) : null}
           <button
             type="button"
             onClick={() => {
@@ -295,11 +354,11 @@ function Row({
   return (
     <div>
       <div className="mb-1.5 flex items-center gap-2">
-        <span className="text-xs font-medium">{label}</span>
+        <span className="min-w-0 flex-1 truncate text-xs font-medium">{label}</span>
 
         {owned ? (
           <>
-            <span className="rounded-full bg-primary/10 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-primary">
+            <span className="shrink-0 rounded-full bg-primary/10 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-primary">
               set by agent
             </span>
             <button

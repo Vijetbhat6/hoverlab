@@ -142,10 +142,10 @@ export function FunnelConversionPanel({
               */}
               <div
                 aria-hidden
-                className="mt-1.5 h-2.5 w-full overflow-hidden rounded-full bg-muted"
+                className="mt-1.5 h-2.5 w-full overflow-hidden rounded-full border border-transparent bg-muted"
               >
                 <div
-                  className="h-full rounded-full bg-primary transition-[width] duration-500"
+                  className="h-full rounded-full bg-primary transition-[width] duration-500 border border-transparent"
                   style={{ width: `${Math.max(row.fromTop * 100, 1)}%` }}
                 />
               </div>

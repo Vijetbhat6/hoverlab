@@ -324,7 +324,7 @@ export function EventAgendaGrid({
           {tracks.map((track) => (
             <span
               key={track}
-              className="px-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground"
+              className="min-w-0 truncate px-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground"
             >
               {track}
             </span>
@@ -342,7 +342,7 @@ export function EventAgendaGrid({
                 <div className="pt-3 text-xs font-medium tabular-nums text-muted-foreground">
                   {slot.start}
                   {slot.end ? (
-                    <span className="block text-muted-foreground/60">{slot.end}</span>
+                    <span className="block text-muted-foreground/85">{slot.end}</span>
                   ) : null}
                 </div>
 

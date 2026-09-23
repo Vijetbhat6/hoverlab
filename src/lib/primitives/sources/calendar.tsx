@@ -359,7 +359,7 @@ export function Calendar({
               key={day.long}
               role="columnheader"
               aria-label={day.long}
-              className="py-1 text-center text-[0.6875rem] font-medium uppercase tracking-wide text-muted-foreground"
+              className="min-w-0 truncate py-1 text-center text-[0.6875rem] font-medium uppercase tracking-wide text-muted-foreground"
             >
               {day.short}
             </div>
@@ -402,7 +402,7 @@ export function Calendar({
                     {sameDay(date, today) && !selected ? (
                       <span
                         aria-hidden
-                        className="absolute bottom-1 h-1 w-1 rounded-full bg-primary"
+                        className="absolute bottom-1 h-1 w-1 rounded-full bg-primary border border-transparent"
                       />
                     ) : null}
                   </button>

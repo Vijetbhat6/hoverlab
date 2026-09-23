@@ -288,7 +288,7 @@ export function DrawerRecordDetail({
                   <li key={event.id} className="flex gap-3">
                     <span
                       aria-hidden
-                      className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary"
+                      className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary border border-transparent"
                     />
                     <div className="min-w-0">
                       <p className="text-sm">{event.what}</p>

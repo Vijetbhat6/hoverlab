@@ -7,25 +7,41 @@
     geometry, colour and type. There are no variants, no auto-layout,
     and no hover or motion — none of those exist in a static frame.
 
-    Every section here is free to copy as code at https://hoverlab.dev/blocks
+    Every one of these is free to copy as code at https://hoverlab.dev/blocks
   -->
   <rect id="Background" x="0" y="0" width="1216" height="6401" fill="#ffffff" />
   <text id="No-JS FAQ Accordion label" x="64" y="84" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">No-JS FAQ Accordion</text>
   <text id="faq-accordion id" x="64" y="98" font-family="ui-monospace, monospace" font-size="12" fill="#737373">faq-accordion</text>
   <g id="No-JS FAQ Accordion" transform="translate(64, 116)">
     <rect id="container" x="0" y="0" width="1088" height="507" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Frequently asked questions" x="544" y="101" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="36" font-weight="700" letter-spacing="-0.9" text-anchor="middle">Frequently asked questions</text>
-      <text id="Everything people ask before getting sta…" x="544" y="133" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" text-anchor="middle">Everything people ask before getting started.</text>
+      <text id="Frequently asked questions" x="544" y="97" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="36" font-weight="700" letter-spacing="-0.9" text-anchor="middle">Frequently asked questions</text>
+      <text id="Everything people ask before getting sta…" x="543.99" y="134" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" text-anchor="middle">Everything people ask before getting started.</text>
       <rect id="container 2" x="184" y="181" width="720" height="261" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Can I use this in a commercial project?" x="205" y="202" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="600">Can I use this in a commercial project?</text>
-      <text id="Yes. Everything here is yours to ship in…" x="205" y="256" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Yes. Everything here is yours to ship in client work and paid products, with no attribution required.</text>
-      <text id="Do I need a specific framework?" x="205" y="267" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="600">Do I need a specific framework?</text>
+      <text id="Can I use this in a commercial project?" x="205" y="219" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="600">Can I use this in a commercial project?</text>
+      <g id="icon plus" transform="translate(867 206) scale(0.667 0.667)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14" />
+        <path d="M12 5v14" />
+      </g>
+      <text id="Yes. Everything here is yours to ship in…" x="205" y="258" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Yes. Everything here is yours to ship in client work and paid products, with no attribution required.</text>
+      <text id="Do I need a specific framework?" x="205" y="284" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="600">Do I need a specific framework?</text>
+      <g id="icon plus 2" transform="translate(867 271) scale(0.667 0.667)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14" />
+        <path d="M12 5v14" />
+      </g>
       <text id="No. The markup is plain HTML and the sty…" x="205" y="323" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">No. The markup is plain HTML and the styling is utility classes, so it drops into any stack that can</text>
       <text id="render an element." x="205" y="345.75" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">render an element.</text>
-      <text id="How do updates work?" x="205" y="332" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="600">How do updates work?</text>
+      <text id="How do updates work?" x="205" y="349" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="600">How do updates work?</text>
+      <g id="icon plus 3" transform="translate(867 336) scale(0.667 0.667)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14" />
+        <path d="M12 5v14" />
+      </g>
       <text id="Copied code is yours — nothing reaches b…" x="205" y="388" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Copied code is yours — nothing reaches back into your project. Pull a newer version whenever you</text>
       <text id="want it." x="205" y="410.75" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">want it.</text>
-      <text id="Is there a free tier?" x="205" y="397" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="600">Is there a free tier?</text>
+      <text id="Is there a free tier?" x="205" y="414" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="600">Is there a free tier?</text>
+      <g id="icon plus 4" transform="translate(867 401) scale(0.667 0.667)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14" />
+        <path d="M12 5v14" />
+      </g>
       <text id="There is. A large part of the catalog is…" x="205" y="453" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">There is. A large part of the catalog is free forever; the paid plan unlocks the rest and removes usage</text>
       <text id="limits." x="205" y="475.75" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">limits.</text>
   </g>
@@ -33,27 +49,45 @@
   <text id="faq-two-column id" x="64" y="753" font-family="ui-monospace, monospace" font-size="12" fill="#737373">faq-two-column</text>
   <g id="Two-Column FAQ with Help Rail" transform="translate(64, 771)">
     <rect id="container" x="0" y="0" width="1088" height="520" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Questions, answered" x="25" y="133" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="36" font-weight="700" letter-spacing="-0.9">Questions, answered</text>
+      <text id="Questions, answered" x="25" y="129" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="36" font-weight="700" letter-spacing="-0.9">Questions, answered</text>
       <text id="The things people ask before they buy — …" x="25" y="166" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">The things people ask before they buy — and a</text>
       <text id="way to ask the ones that are not here." x="25" y="190" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">way to ask the ones that are not here.</text>
       <rect id="container 2" x="25" y="229" width="352" height="185.5" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Still not sure?" x="46" y="298" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="600">Still not sure?</text>
+      <g id="icon message-circle" transform="translate(46 250) scale(0.833 0.833)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" />
+      </g>
+      <text id="Still not sure?" x="46" y="299" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="600">Still not sure?</text>
       <text id="Send the question. A person reads it, an…" x="46" y="326" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Send the question. A person reads it, and you</text>
       <text id="get an answer rather than a link to this…" x="46" y="348.75" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">get an answer rather than a link to this page.</text>
-      <text id="Ask a question" x="46" y="385.5" fill="#007f34" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Ask a question</text>
+      <text id="Ask a question" x="46" y="386.5" fill="#00782e" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Ask a question</text>
       <rect id="container 3" x="441" y="97" width="622" height="326" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="What happens when my licence expires?" x="441" y="114" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="600">What happens when my licence expires?</text>
+      <text id="What happens when my licence expires?" x="441" y="135" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="600">What happens when my licence expires?</text>
+      <g id="icon chevron-down" transform="translate(1043 120) scale(0.833 0.833)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m6 9 6 6 6-6" />
+      </g>
       <text id="Nothing stops working. What ends is acce…" x="441" y="178" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Nothing stops working. What ends is access to components published after your window —</text>
       <text id="everything you already copied stays your…" x="441" y="200.75" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">everything you already copied stays yours to ship, permanently, with no check at runtime.</text>
-      <text id="Can I use this for client work?" x="441" y="179" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="600">Can I use this for client work?</text>
+      <text id="Can I use this for client work?" x="441" y="200" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="600">Can I use this for client work?</text>
+      <g id="icon chevron-down 2" transform="translate(1043 185) scale(0.833 0.833)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m6 9 6 6 6-6" />
+      </g>
       <text id="Yes, on any paid plan, including project…" x="441" y="243" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Yes, on any paid plan, including projects you hand over to the client afterwards. The one thing</text>
       <text id="no licence covers is reselling the compo…" x="441" y="265.75" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">no licence covers is reselling the components themselves as a competing library.</text>
-      <text id="Do I need to credit you?" x="441" y="244" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="600">Do I need to credit you?</text>
-      <text id="No. Attribution is never required, on an…" x="441" y="306" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">No. Attribution is never required, on any plan, including the free one.</text>
-      <text id="Is there a team plan?" x="441" y="309" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="600">Is there a team plan?</text>
+      <text id="Do I need to credit you?" x="441" y="265" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="600">Do I need to credit you?</text>
+      <g id="icon chevron-down 3" transform="translate(1043 250) scale(0.833 0.833)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m6 9 6 6 6-6" />
+      </g>
+      <text id="No. Attribution is never required, on an…" x="441" y="308" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">No. Attribution is never required, on any plan, including the free one.</text>
+      <text id="Is there a team plan?" x="441" y="330" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="600">Is there a team plan?</text>
+      <g id="icon chevron-down 4" transform="translate(1043 315) scale(0.833 0.833)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m6 9 6 6 6-6" />
+      </g>
       <text id="There is, priced per seat, with shared b…" x="441" y="373" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">There is, priced per seat, with shared brand tokens and one workspace everybody pulls from. It</text>
       <text id="can be billed monthly or bought outright…" x="441" y="395.75" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">can be billed monthly or bought outright for a year.</text>
-      <text id="What if I need something that is not in …" x="441" y="374" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="600">What if I need something that is not in the catalog?</text>
+      <text id="What if I need something that is not in …" x="441" y="395" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="600">What if I need something that is not in the catalog?</text>
+      <g id="icon chevron-down 5" transform="translate(1043 380) scale(0.833 0.833)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m6 9 6 6 6-6" />
+      </g>
       <text id="Ask. Requests that several people want a…" x="441" y="438" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Ask. Requests that several people want are usually the next thing built, and the roadmap is</text>
       <text id="public." x="441" y="460.75" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">public.</text>
   </g>
@@ -61,8 +95,8 @@
   <text id="faq-grid id" x="64" y="1421" font-family="ui-monospace, monospace" font-size="12" fill="#737373">faq-grid</text>
   <g id="Open FAQ Grid" transform="translate(64, 1439)">
     <rect id="container" x="0" y="0" width="1088" height="674.63" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Common questions" x="544" y="133" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="36" font-weight="700" letter-spacing="-0.9" text-anchor="middle">Common questions</text>
-      <text id="Short answers, all of them on the page." x="544" y="165" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" text-anchor="middle">Short answers, all of them on the page.</text>
+      <text id="Common questions" x="543.99" y="129" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="36" font-weight="700" letter-spacing="-0.9" text-anchor="middle">Common questions</text>
+      <text id="Short answers, all of them on the page." x="543.99" y="166" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" text-anchor="middle">Short answers, all of them on the page.</text>
       <text id="Is there a free plan?" x="56" y="237" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="600">Is there a free plan?</text>
       <text id="Yes, and it is not a trial. Browsing, cu…" x="56" y="267" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Yes, and it is not a trial. Browsing, customising and copying stay free</text>
       <text id="permanently — what a paid licence buys i…" x="56" y="289.75" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">permanently — what a paid licence buys is the right to ship the result</text>
@@ -89,62 +123,102 @@
   <text id="faq-categorized id" x="64" y="2243.63" font-family="ui-monospace, monospace" font-size="12" fill="#737373">faq-categorized</text>
   <g id="FAQ Grouped by Topic" transform="translate(64, 2261.63)">
     <rect id="container" x="0" y="0" width="1088" height="1694" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Answers" x="128" y="79" fill="#007f34" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" letter-spacing="0.7">Answers</text>
+      <text id="Answers" x="128" y="80" fill="#00782e" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" letter-spacing="0.7">Answers</text>
       <text id="Everything we get asked," x="128" y="129" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="36" font-weight="700" letter-spacing="-0.9">Everything we get asked,</text>
       <text id="sorted by what it is about" x="128" y="169" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="36" font-weight="700" letter-spacing="-0.9">sorted by what it is about</text>
       <rect id="link" x="128" y="209" width="90.27" height="38" rx="19" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Billing" x="128" y="223" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Billing</text>
+      <text id="Billing" x="145" y="233" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Billing</text>
       <text id="3" x="193.91" y="233" fill="rgba(87, 91, 95, 0.702)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">3</text>
       <rect id="link 2" x="226.27" y="209" width="104.08" height="38" rx="19" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Security" x="226.27" y="223" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Security</text>
+      <text id="Security" x="243.27" y="233" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Security</text>
       <text id="3 2" x="305.98" y="233" fill="rgba(87, 91, 95, 0.702)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">3</text>
       <rect id="link 3" x="338.34" y="209" width="127.97" height="38" rx="19" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Integrations" x="338.34" y="223" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Integrations</text>
+      <text id="Integrations" x="355.34" y="233" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Integrations</text>
       <text id="2" x="441.95" y="233" fill="rgba(87, 91, 95, 0.702)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">2</text>
       <rect id="link 4" x="474.31" y="209" width="102.2" height="38" rx="19" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Support" x="474.31" y="223" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Support</text>
+      <text id="Support" x="491.31" y="233" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Support</text>
       <text id="2 2" x="552.16" y="233" fill="rgba(87, 91, 95, 0.702)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">2</text>
-      <text id="Billing 2" x="128" y="309" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" letter-spacing="0.7">Billing</text>
+      <text id="Billing 2" x="128" y="310" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" letter-spacing="0.7">Billing</text>
       <rect id="container 2" x="128" y="331" width="832" height="294" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Can I change plans mid-cycle?" x="128" y="352" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="500">Can I change plans mid-cycle?</text>
+      <text id="Can I change plans mid-cycle?" x="128" y="369" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="500">Can I change plans mid-cycle?</text>
+      <g id="icon plus" transform="translate(940 354) translate(10 10) matrix(0.707 0.707 -0.707 0.707 0 0) translate(-10 -10) scale(0.833 0.833)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14" />
+        <path d="M12 5v14" />
+      </g>
       <text id="Yes, and the change takes effect immedia…" x="128" y="410" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">Yes, and the change takes effect immediately. Upgrades are prorated to the day;</text>
       <text id="downgrades credit the unused remainder a…" x="128" y="436" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">downgrades credit the unused remainder against your next invoice rather than</text>
       <text id="refunding it." x="128" y="462" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">refunding it.</text>
-      <text id="What happens if a payment fails?" x="128" y="515" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="500">What happens if a payment fails?</text>
+      <text id="What happens if a payment fails?" x="128" y="532" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="500">What happens if a payment fails?</text>
+      <g id="icon plus 2" transform="translate(940 517) scale(0.833 0.833)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14" />
+        <path d="M12 5v14" />
+      </g>
       <text id="We retry on days 1, 3 and 7 and email yo…" x="128" y="573" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">We retry on days 1, 3 and 7 and email you each time. Nothing is suspended until the</text>
       <text id="fourth failure, and your data is retaine…" x="128" y="599" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">fourth failure, and your data is retained for 30 days after that.</text>
-      <text id="Do you offer annual invoicing?" x="128" y="580" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="500">Do you offer annual invoicing?</text>
+      <text id="Do you offer annual invoicing?" x="128" y="597" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="500">Do you offer annual invoicing?</text>
+      <g id="icon plus 3" transform="translate(940 582) scale(0.833 0.833)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14" />
+        <path d="M12 5v14" />
+      </g>
       <text id="On any plan, and it is the only option o…" x="128" y="638" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">On any plan, and it is the only option on Enterprise. Annual terms are billed once, so</text>
       <text id="there is no recurring charge that can fa…" x="128" y="664" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">there is no recurring charge that can fail — which matters if your cards decline cross-</text>
       <text id="border subscriptions." x="128" y="690" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">border subscriptions.</text>
-      <text id="Security 2" x="128" y="687" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" letter-spacing="0.7">Security</text>
+      <text id="Security 2" x="128" y="688" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" letter-spacing="0.7">Security</text>
       <rect id="container 3" x="128" y="709" width="832" height="294" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Where is our data stored?" x="128" y="730" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="500">Where is our data stored?</text>
+      <text id="Where is our data stored?" x="128" y="747" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="500">Where is our data stored?</text>
+      <g id="icon plus 4" transform="translate(940 732) translate(10 10) matrix(0.707 0.707 -0.707 0.707 0 0) translate(-10 -10) scale(0.833 0.833)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14" />
+        <path d="M12 5v14" />
+      </g>
       <text id="In the region you pick at workspace crea…" x="128" y="788" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">In the region you pick at workspace creation: Virginia, Frankfurt or Sydney. It does not</text>
       <text id="leave that region, including for backups…" x="128" y="814" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">leave that region, including for backups, and the region cannot be changed later without</text>
       <text id="a migration we run for you." x="128" y="840" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">a migration we run for you.</text>
-      <text id="Are you SOC 2 compliant?" x="128" y="893" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="500">Are you SOC 2 compliant?</text>
+      <text id="Are you SOC 2 compliant?" x="128" y="910" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="500">Are you SOC 2 compliant?</text>
+      <g id="icon plus 5" transform="translate(940 895) scale(0.833 0.833)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14" />
+        <path d="M12 5v14" />
+      </g>
       <text id="Type II, audited annually. The current r…" x="128" y="951" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">Type II, audited annually. The current report is available under NDA from the security</text>
       <text id="page, along with our penetration test su…" x="128" y="977" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">page, along with our penetration test summary.</text>
-      <text id="Can we bring our own encryption keys?" x="128" y="958" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="500">Can we bring our own encryption keys?</text>
+      <text id="Can we bring our own encryption keys?" x="128" y="975" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="500">Can we bring our own encryption keys?</text>
+      <g id="icon plus 6" transform="translate(940 960) scale(0.833 0.833)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14" />
+        <path d="M12 5v14" />
+      </g>
       <text id="On Enterprise, via AWS KMS or Google Clo…" x="128" y="1016" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">On Enterprise, via AWS KMS or Google Cloud KMS. Revoking the key makes the</text>
       <text id="workspace unreadable to us within minute…" x="128" y="1042" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">workspace unreadable to us within minutes.</text>
-      <text id="Integrations 2" x="128" y="1065" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" letter-spacing="0.7">Integrations</text>
+      <text id="Integrations 2" x="128" y="1066" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" letter-spacing="0.7">Integrations</text>
       <rect id="container 4" x="128" y="1087" width="832" height="229" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Does it work with our existing helpdesk?" x="128" y="1108" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="500">Does it work with our existing helpdesk?</text>
+      <text id="Does it work with our existing helpdesk?" x="128" y="1125" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="500">Does it work with our existing helpdesk?</text>
+      <g id="icon plus 7" transform="translate(940 1110) translate(10 10) matrix(0.707 0.707 -0.707 0.707 0 0) translate(-10 -10) scale(0.833 0.833)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14" />
+        <path d="M12 5v14" />
+      </g>
       <text id="There are first-party integrations for Z…" x="128" y="1166" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">There are first-party integrations for Zendesk, Intercom, Front and Help Scout, and a</text>
       <text id="webhook plus REST API for anything else.…" x="128" y="1192" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">webhook plus REST API for anything else. Most teams run alongside their helpdesk for</text>
       <text id="the first month rather than replacing it…" x="128" y="1218" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">the first month rather than replacing it.</text>
-      <text id="Is there an API rate limit?" x="128" y="1271" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="500">Is there an API rate limit?</text>
+      <text id="Is there an API rate limit?" x="128" y="1288" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="500">Is there an API rate limit?</text>
+      <g id="icon plus 8" transform="translate(940 1273) scale(0.833 0.833)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14" />
+        <path d="M12 5v14" />
+      </g>
       <text id="600 requests a minute per workspace on p…" x="128" y="1329" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">600 requests a minute per workspace on paid plans, 60 on trials. Limits are per</text>
       <text id="workspace rather than per key, so adding…" x="128" y="1355" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">workspace rather than per key, so adding keys does not add capacity.</text>
-      <text id="Support 2" x="128" y="1378" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" letter-spacing="0.7">Support</text>
+      <text id="Support 2" x="128" y="1379" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" letter-spacing="0.7">Support</text>
       <rect id="container 5" x="128" y="1400" width="832" height="229" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="What are your support hours?" x="128" y="1421" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="500">What are your support hours?</text>
+      <text id="What are your support hours?" x="128" y="1438" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="500">What are your support hours?</text>
+      <g id="icon plus 9" transform="translate(940 1423) translate(10 10) matrix(0.707 0.707 -0.707 0.707 0 0) translate(-10 -10) scale(0.833 0.833)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14" />
+        <path d="M12 5v14" />
+      </g>
       <text id="Email is answered within one business da…" x="128" y="1479" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">Email is answered within one business day on every plan, including trials. Priority plans</text>
       <text id="get four hours, and Enterprise gets a sh…" x="128" y="1505" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">get four hours, and Enterprise gets a shared Slack channel with a one-hour target during</text>
       <text id="your working day." x="128" y="1531" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">your working day.</text>
-      <text id="Do you help with migration?" x="128" y="1584" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="500">Do you help with migration?</text>
+      <text id="Do you help with migration?" x="128" y="1601" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="500">Do you help with migration?</text>
+      <g id="icon plus 10" transform="translate(940 1586) scale(0.833 0.833)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14" />
+        <path d="M12 5v14" />
+      </g>
       <text id="Yes, at no charge, on any plan. Most mig…" x="128" y="1642" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">Yes, at no charge, on any plan. Most migrations are an afternoon; we have never charged</text>
       <text id="for one and do not intend to start." x="128" y="1668" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">for one and do not intend to start.</text>
   </g>
@@ -152,34 +226,70 @@
   <text id="faq-search id" x="64" y="4085.63" font-family="ui-monospace, monospace" font-size="12" fill="#737373">faq-search</text>
   <g id="Filterable FAQ with Fallback" transform="translate(64, 4103.63)">
     <rect id="container" x="0" y="0" width="1088" height="851" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Help" x="544" y="79" fill="#007f34" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" letter-spacing="0.7" text-anchor="middle">Help</text>
-      <text id="Search the questions" x="544" y="133" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="36" font-weight="700" letter-spacing="-0.9" text-anchor="middle">Search the questions</text>
+      <text id="Help" x="544" y="80" fill="#00782e" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" letter-spacing="0.7" text-anchor="middle">Help</text>
+      <text id="Search the questions" x="544" y="129" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="36" font-weight="700" letter-spacing="-0.9" text-anchor="middle">Search the questions</text>
+      <g id="icon search" transform="translate(208 183) scale(0.833 0.833)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m21 21-4.34-4.34" />
+        <circle cx="11" cy="11" r="8" />
+      </g>
       <rect id="field" x="192" y="169" width="704" height="48" rx="16" fill="#fdfcf8" stroke="#8d8f92" stroke-width="1" />
       <rect id="container 2" x="192" y="265" width="704" height="521" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Can I change plans mid-cycle?" x="192" y="286" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="500">Can I change plans mid-cycle?</text>
+      <text id="Can I change plans mid-cycle?" x="192" y="303" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="500">Can I change plans mid-cycle?</text>
+      <g id="icon plus" transform="translate(876 288) scale(0.833 0.833)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14" />
+        <path d="M12 5v14" />
+      </g>
       <text id="Yes, immediately. Upgrades are prorated …" x="192" y="344" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">Yes, immediately. Upgrades are prorated to the day; downgrades credit the unused</text>
       <text id="remainder against your next invoice rath…" x="192" y="370" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">remainder against your next invoice rather than refunding it.</text>
-      <text id="Do you support single sign-on?" x="192" y="351" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="500">Do you support single sign-on?</text>
+      <text id="Do you support single sign-on?" x="192" y="368" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="500">Do you support single sign-on?</text>
+      <g id="icon plus 2" transform="translate(876 353) scale(0.833 0.833)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14" />
+        <path d="M12 5v14" />
+      </g>
       <text id="SAML 2.0 and OIDC on Team and above, wit…" x="192" y="409" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">SAML 2.0 and OIDC on Team and above, with SCIM provisioning on Enterprise. Okta,</text>
       <text id="Entra ID, Google Workspace and JumpCloud…" x="192" y="435" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">Entra ID, Google Workspace and JumpCloud are tested; anything standards-compliant</text>
       <text id="should work." x="192" y="461" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">should work.</text>
-      <text id="How do you handle compliance?" x="192" y="416" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="500">How do you handle compliance?</text>
+      <text id="How do you handle compliance?" x="192" y="433" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="500">How do you handle compliance?</text>
+      <g id="icon plus 3" transform="translate(876 418) scale(0.833 0.833)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14" />
+        <path d="M12 5v14" />
+      </g>
       <text id="SOC 2 Type II, audited annually, with th…" x="192" y="474" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">SOC 2 Type II, audited annually, with the current report available under NDA. GDPR and</text>
       <text id="UK GDPR as a processor, with a DPA you c…" x="192" y="500" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">UK GDPR as a processor, with a DPA you can sign from the billing page. HIPAA BAAs</text>
       <text id="on Enterprise." x="192" y="526" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">on Enterprise.</text>
-      <text id="What is the API rate limit?" x="192" y="481" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="500">What is the API rate limit?</text>
+      <text id="What is the API rate limit?" x="192" y="498" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="500">What is the API rate limit?</text>
+      <g id="icon plus 4" transform="translate(876 483) scale(0.833 0.833)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14" />
+        <path d="M12 5v14" />
+      </g>
       <text id="600 requests a minute per workspace on p…" x="192" y="539" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">600 requests a minute per workspace on paid plans, 60 on trials. Limits are per</text>
       <text id="workspace rather than per key, so adding…" x="192" y="565" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">workspace rather than per key, so adding keys does not add capacity.</text>
-      <text id="Can we get a refund?" x="192" y="546" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="500">Can we get a refund?</text>
+      <text id="Can we get a refund?" x="192" y="563" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="500">Can we get a refund?</text>
+      <g id="icon plus 5" transform="translate(876 548) scale(0.833 0.833)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14" />
+        <path d="M12 5v14" />
+      </g>
       <text id="Within 30 days of a first purchase, no q…" x="192" y="604" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">Within 30 days of a first purchase, no questions asked, on any plan. After that we credit</text>
       <text id="rather than refund, except where local l…" x="192" y="630" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">rather than refund, except where local law says otherwise.</text>
-      <text id="Where is our data stored?" x="192" y="611" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="500">Where is our data stored?</text>
+      <text id="Where is our data stored?" x="192" y="628" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="500">Where is our data stored?</text>
+      <g id="icon plus 6" transform="translate(876 613) scale(0.833 0.833)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14" />
+        <path d="M12 5v14" />
+      </g>
       <text id="In the region you pick at workspace crea…" x="192" y="669" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">In the region you pick at workspace creation: Virginia, Frankfurt or Sydney. It does not</text>
       <text id="leave that region, including for backups…" x="192" y="695" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">leave that region, including for backups.</text>
-      <text id="Do you help with migration?" x="192" y="676" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="500">Do you help with migration?</text>
+      <text id="Do you help with migration?" x="192" y="693" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="500">Do you help with migration?</text>
+      <g id="icon plus 7" transform="translate(876 678) scale(0.833 0.833)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14" />
+        <path d="M12 5v14" />
+      </g>
       <text id="Yes, at no charge, on any plan. Most mig…" x="192" y="734" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">Yes, at no charge, on any plan. Most migrations take an afternoon and our exports import</text>
       <text id="without a schema rewrite." x="192" y="760" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">without a schema rewrite.</text>
-      <text id="What happens when a trial ends?" x="192" y="741" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="500">What happens when a trial ends?</text>
+      <text id="What happens when a trial ends?" x="192" y="758" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="500">What happens when a trial ends?</text>
+      <g id="icon plus 8" transform="translate(876 743) scale(0.833 0.833)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14" />
+        <path d="M12 5v14" />
+      </g>
       <text id="The workspace becomes read-only rather t…" x="192" y="799" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">The workspace becomes read-only rather than being deleted. Everything is still there for</text>
       <text id="30 days, and adding a card restores it i…" x="192" y="825" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">30 days, and adding a card restores it instantly.</text>
   </g>
@@ -193,22 +303,22 @@
       <text id="where the honest answer is no." x="160" y="140" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">where the honest answer is no.</text>
       <rect id="container 2" x="160" y="177" width="768" height="301" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
       <rect id="button" x="161" y="178" width="766" height="74" fill="rgba(242, 242, 237, 0.4)" />
-      <text id="Is this cheaper than building it ourselv…" x="181" y="208" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Is this cheaper than building it ourselves?</text>
-      <text id="For one screen, no — build it. It stops …" x="181" y="230" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">For one screen, no — build it. It stops being true somewhere around the fourth.</text>
+      <text id="Is this cheaper than building it ourselv…" x="181" y="209" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Is this cheaper than building it ourselves?</text>
+      <text id="For one screen, no — build it. It stops …" x="181" y="231" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">For one screen, no — build it. It stops being true somewhere around the fourth.</text>
       <rect id="container 3" x="808.19" y="203" width="98.81" height="24" rx="12" fill="#f3f2ee" />
-      <text id="sometimes no" x="808.19" y="215" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">sometimes no</text>
-      <text id="What happens if you shut down?" x="181" y="283" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">What happens if you shut down?</text>
-      <text id="The source is already in your repository…" x="181" y="305" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">The source is already in your repository and carries no runtime dependency on us.</text>
-      <rect id="container 4" x="867.44" y="278" width="39.56" height="24" rx="12" fill="rgba(0, 128, 49, 0.102)" />
-      <text id="yes" x="867.44" y="290" fill="#007f34" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">yes</text>
-      <text id="Can I get a refund?" x="181" y="358" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Can I get a refund?</text>
-      <text id="Fourteen days, no questions, and it is s…" x="181" y="380" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Fourteen days, no questions, and it is stated on the refunds page rather than here only.</text>
-      <rect id="container 5" x="867.44" y="353" width="39.56" height="24" rx="12" fill="rgba(0, 128, 49, 0.102)" />
-      <text id="yes 2" x="867.44" y="365" fill="#007f34" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">yes</text>
-      <text id="Do I have to credit you?" x="181" y="433" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Do I have to credit you?</text>
-      <text id="No. Attribution is not required anywhere…" x="181" y="455" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">No. Attribution is not required anywhere, including on the free tier.</text>
-      <rect id="container 6" x="873" y="428" width="34" height="24" rx="12" fill="rgba(0, 128, 49, 0.102)" />
-      <text id="no" x="873" y="440" fill="#007f34" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">no</text>
+      <text id="sometimes no" x="818.19" y="219" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">sometimes no</text>
+      <text id="What happens if you shut down?" x="181" y="284" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">What happens if you shut down?</text>
+      <text id="The source is already in your repository…" x="181" y="306" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">The source is already in your repository and carries no runtime dependency on us.</text>
+      <rect id="container 4" x="867.44" y="278" width="39.56" height="24" rx="12" fill="rgba(0, 118, 49, 0.102)" />
+      <text id="yes" x="877.44" y="294" fill="#00782e" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">yes</text>
+      <text id="Can I get a refund?" x="181" y="359" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Can I get a refund?</text>
+      <text id="Fourteen days, no questions, and it is s…" x="181" y="381" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Fourteen days, no questions, and it is stated on the refunds page rather than here only.</text>
+      <rect id="container 5" x="867.44" y="353" width="39.56" height="24" rx="12" fill="rgba(0, 118, 49, 0.102)" />
+      <text id="yes 2" x="877.44" y="369" fill="#00782e" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">yes</text>
+      <text id="Do I have to credit you?" x="181" y="434" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Do I have to credit you?</text>
+      <text id="No. Attribution is not required anywhere…" x="181" y="456" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">No. Attribution is not required anywhere, including on the free tier.</text>
+      <rect id="container 6" x="873" y="428" width="34" height="24" rx="12" fill="rgba(0, 118, 49, 0.102)" />
+      <text id="no" x="883" y="444" fill="#00782e" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">no</text>
   </g>
   <text id="Security FAQ label" x="64" y="5761.63" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Security FAQ</text>
   <text id="security-faq-list id" x="64" y="5775.63" font-family="ui-monospace, monospace" font-size="12" fill="#737373">security-faq-list</text>
@@ -220,21 +330,21 @@
       <text id="about two weeks of a sales cycle." x="160" y="140" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">about two weeks of a sales cycle.</text>
       <rect id="container 2" x="160" y="177" width="768" height="301" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
       <rect id="button" x="161" y="178" width="766" height="74" fill="rgba(242, 242, 237, 0.4)" />
-      <text id="Where is our data stored?" x="181" y="208" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Where is our data stored?</text>
-      <text id="The region you pick at signup. It is pin…" x="181" y="230" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">The region you pick at signup. It is pinned there and never replicated out of it.</text>
-      <rect id="container 3" x="848.77" y="203" width="58.23" height="24" rx="12" fill="rgba(0, 128, 49, 0.102)" />
-      <text id="pinned" x="848.77" y="215" fill="#007f34" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">pinned</text>
-      <text id="Do you train models on it?" x="181" y="283" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Do you train models on it?</text>
-      <text id="No, and there is no setting that turns i…" x="181" y="305" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">No, and there is no setting that turns it on.</text>
-      <rect id="container 4" x="873" y="278" width="34" height="24" rx="12" fill="rgba(0, 128, 49, 0.102)" />
-      <text id="no" x="873" y="290" fill="#007f34" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">no</text>
-      <text id="Who internally can read it?" x="181" y="358" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Who internally can read it?</text>
-      <text id="Support, on an approved ticket, time-box…" x="181" y="380" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Support, on an approved ticket, time-boxed and logged. You can export that log.</text>
+      <text id="Where is our data stored?" x="181" y="209" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Where is our data stored?</text>
+      <text id="The region you pick at signup. It is pin…" x="181" y="231" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">The region you pick at signup. It is pinned there and never replicated out of it.</text>
+      <rect id="container 3" x="848.77" y="203" width="58.23" height="24" rx="12" fill="rgba(0, 118, 49, 0.102)" />
+      <text id="pinned" x="858.77" y="219" fill="#00782e" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">pinned</text>
+      <text id="Do you train models on it?" x="181" y="284" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Do you train models on it?</text>
+      <text id="No, and there is no setting that turns i…" x="181" y="306" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">No, and there is no setting that turns it on.</text>
+      <rect id="container 4" x="873" y="278" width="34" height="24" rx="12" fill="rgba(0, 118, 49, 0.102)" />
+      <text id="no" x="883" y="294" fill="#00782e" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">no</text>
+      <text id="Who internally can read it?" x="181" y="359" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Who internally can read it?</text>
+      <text id="Support, on an approved ticket, time-box…" x="181" y="381" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Support, on an approved ticket, time-boxed and logged. You can export that log.</text>
       <rect id="container 5" x="848.34" y="353" width="58.66" height="24" rx="12" fill="#f3f2ee" />
-      <text id="logged" x="848.34" y="365" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">logged</text>
-      <text id="What happens when we leave?" x="181" y="433" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">What happens when we leave?</text>
-      <text id="Full export any time. Deletion within 30…" x="181" y="455" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Full export any time. Deletion within 30 days of the request, backups included.</text>
-      <rect id="container 6" x="842.11" y="428" width="64.89" height="24" rx="12" fill="rgba(0, 128, 49, 0.102)" />
-      <text id="30 days" x="842.11" y="440" fill="#007f34" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">30 days</text>
+      <text id="logged" x="858.34" y="369" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">logged</text>
+      <text id="What happens when we leave?" x="181" y="434" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">What happens when we leave?</text>
+      <text id="Full export any time. Deletion within 30…" x="181" y="456" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Full export any time. Deletion within 30 days of the request, backups included.</text>
+      <rect id="container 6" x="842.11" y="428" width="64.89" height="24" rx="12" fill="rgba(0, 118, 49, 0.102)" />
+      <text id="30 days" x="852.11" y="444" fill="#00782e" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">30 days</text>
   </g>
 </svg>

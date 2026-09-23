@@ -34,8 +34,8 @@ export interface FigmaKit {
   files: FigmaKitFile[]
 }
 
-function load(): FigmaKit | null {
-  const path = join(process.cwd(), 'public', 'figma', 'manifest.json')
+function load(...subdir: string[]): FigmaKit | null {
+  const path = join(process.cwd(), 'public', 'figma', ...subdir, 'manifest.json')
   if (!existsSync(path)) return null
   try {
     return JSON.parse(readFileSync(path, 'utf8')) as FigmaKit
@@ -48,9 +48,12 @@ function load(): FigmaKit | null {
 
 export const FIGMA_KIT: FigmaKit | null = load()
 
+/** The primitives kit, in `public/figma/primitives/`, on the same terms. */
+export const FIGMA_PRIMITIVE_KIT: FigmaKit | null = load('primitives')
+
 /** Public URL for one kit file. */
-export function figmaKitHref(file: FigmaKitFile): string {
-  return `/figma/${file.file}`
+export function figmaKitHref(file: FigmaKitFile, subdir = ''): string {
+  return `/figma/${subdir ? `${subdir}/` : ''}${file.file}`
 }
 
 /** `1.4 MB`, `812 KB` — sizes a designer is choosing between. */

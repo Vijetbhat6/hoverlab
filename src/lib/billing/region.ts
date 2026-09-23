@@ -151,6 +151,32 @@ export function regionFromCountry(country: string | null | undefined): Region {
 }
 
 /**
+ * The geolocation header, but only where the platform in front of us is the
+ * one that wrote it.
+ *
+ * A header is proof of location only when something between the visitor and
+ * this code overwrites whatever the visitor sent. Vercel's edge does that for
+ * `x-vercel-ip-country`; Cloudflare does it for `cf-ipcountry`. Anywhere
+ * else, both are just headers, and `curl -H 'x-vercel-ip-country: IN'` was
+ * enough to see (and be charged) the Indian price on the Netlify deployment.
+ * Checkout picks its discount from this value, so a spoofable one is a
+ * discount code printed on the front door.
+ *
+ * So each header is honoured only when its platform is known to be present:
+ * Vercel sets VERCEL in its runtime, and a deployment behind Cloudflare opts
+ * in with TRUST_CF_IPCOUNTRY=1. Neither is true on Netlify, which yields null
+ * — list price for everyone — until a header there can be trusted.
+ */
+function trustedCountryHeader(headers: Headers): string | null {
+  if (process.env.VERCEL) {
+    const vercel = headers.get('x-vercel-ip-country')
+    if (vercel) return vercel
+  }
+  if (process.env.TRUST_CF_IPCOUNTRY === '1') return headers.get('cf-ipcountry')
+  return null
+}
+
+/**
  * The ISO country code an incoming request geolocates to, or null.
  *
  * Separate from `regionFromHeaders` because the band is a lossy read of
@@ -182,7 +208,7 @@ export function countryFromHeaders(headers: Headers): string | null {
   const raw =
     process.env.NODE_ENV !== 'production' && process.env.DEV_PRICING_REGION
       ? process.env.DEV_PRICING_REGION
-      : (headers.get('x-vercel-ip-country') ?? headers.get('cf-ipcountry'))
+      : trustedCountryHeader(headers)
 
   const code = raw?.trim().toUpperCase()
   // Vercel sends "XX" for an address it cannot place — a value that would

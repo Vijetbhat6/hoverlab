@@ -97,7 +97,7 @@ export function FaqGrid({
           // fall between a question and its own answer.
           <div key={item.question} className="mb-8 break-inside-avoid">
             <dt className="font-semibold leading-snug">{item.question}</dt>
-            <dd className="mt-2 text-sm leading-relaxed text-muted-foreground">
+            <dd className="mt-2 break-words text-sm leading-relaxed text-muted-foreground">
               {item.answer}
             </dd>
           </div>

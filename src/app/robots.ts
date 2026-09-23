@@ -64,6 +64,13 @@ export default function robots(): MetadataRoute.Robots {
             fetched at all, and the two lists say the same thing again.
           */
           '/collections',
+          /*
+            /c/<token> is a collection its owner chose to share by link.
+            The token IS the access control, so the page is noindex in its
+            own metadata, absent from sitemap.ts, and disallowed here too —
+            a crawler has no reason to request a URL that is a secret.
+          */
+          '/c/',
         ],
       },
     ],

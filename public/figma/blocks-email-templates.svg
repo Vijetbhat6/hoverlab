@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1216" height="3460" viewBox="0 0 1216 3460" id="Hoverlab — Email Templates">
+  <!--
+    Hoverlab — Email Templates. 4 sections, traced from the
+    rendered catalog. Drag this file onto a Figma canvas.
+
+    These are frames, not components: named, editable layers with real
+    geometry, colour and type. There are no variants, no auto-layout,
+    and no hover or motion — none of those exist in a static frame.
+
+    Every one of these is free to copy as code at https://hoverlab.dev/blocks
+  -->
+  <rect id="Background" x="0" y="0" width="1216" height="3460" fill="#ffffff" />
+  <text id="Feature Launch Email label" x="64" y="84" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Feature Launch Email</text>
+  <text id="email-product-announcement id" x="64" y="98" font-family="ui-monospace, monospace" font-size="12" fill="#737373">email-product-announcement</text>
+  <g id="Feature Launch Email" transform="translate(64, 116)">
+    <rect id="container" x="0" y="0" width="1088" height="684" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="1" y="1" width="1086" height="682" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Introducing Workflows — automate the par…" x="69.17" y="30" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Introducing Workflows — automate the parts of Acme you repeat</text>
+      <text id="Subject:" x="18" y="30" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="600">Subject:</text>
+      <text id="Set a trigger once, and Acme does the re…" x="762.42" y="30" fill="rgba(86, 91, 96, 0.8)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Set a trigger once, and Acme does the rest from now on.</text>
+      <rect id="container 3" x="18" y="46" width="1052" height="620" rx="16" fill="#ffffff" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+  </g>
+  <text id="Newsletter Digest Email label" x="64" y="916" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Newsletter Digest Email</text>
+  <text id="email-newsletter-digest id" x="64" y="930" font-family="ui-monospace, monospace" font-size="12" fill="#737373">email-newsletter-digest</text>
+  <g id="Newsletter Digest Email" transform="translate(64, 948)">
+    <rect id="container" x="0" y="0" width="1088" height="764" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="1" y="1" width="1086" height="762" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Issue 42 — September 2026: what shipped,…" x="69.17" y="30" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Issue 42 — September 2026: what shipped, what we learned, one thing to try</text>
+      <text id="Subject:" x="18" y="30" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="600">Subject:</text>
+      <text id="Three things from this month, in the ord…" x="670.83" y="30" fill="rgba(86, 91, 96, 0.8)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Three things from this month, in the order we would read them ourselves.</text>
+      <rect id="container 3" x="18" y="46" width="1052" height="700" rx="16" fill="#ffffff" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+  </g>
+  <text id="Promotional Offer Email label" x="64" y="1828" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Promotional Offer Email</text>
+  <text id="email-promo-offer id" x="64" y="1842" font-family="ui-monospace, monospace" font-size="12" fill="#737373">email-promo-offer</text>
+  <g id="Promotional Offer Email" transform="translate(64, 1860)">
+    <rect id="container" x="0" y="0" width="1088" height="724" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="1" y="1" width="1086" height="722" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="20% off Pro, through the end of the mont…" x="69.17" y="30" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">20% off Pro, through the end of the month</text>
+      <text id="Subject:" x="18" y="30" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="600">Subject:</text>
+      <text id="Use SAVE20 at checkout — ends 30 septemb…" x="703.3" y="30" fill="rgba(86, 91, 96, 0.8)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Use SAVE20 at checkout — ends 30 september, 11:59pm your time.</text>
+      <rect id="container 3" x="18" y="46" width="1052" height="660" rx="16" fill="#ffffff" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+  </g>
+  <text id="Re-Engagement Email label" x="64" y="2700" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Re-Engagement Email</text>
+  <text id="email-winback id" x="64" y="2714" font-family="ui-monospace, monospace" font-size="12" fill="#737373">email-winback</text>
+  <g id="Re-Engagement Email" transform="translate(64, 2732)">
+    <rect id="container" x="0" y="0" width="1088" height="664" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="1" y="1" width="1086" height="662" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Your 1,204 saved items are still there" x="69.17" y="30" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Your 1,204 saved items are still there</text>
+      <text id="Subject:" x="18" y="30" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="600">Subject:</text>
+      <text id="We have not changed anything without tel…" x="663.39" y="30" fill="rgba(86, 91, 96, 0.8)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">We have not changed anything without telling you — here's what's waiting.</text>
+      <rect id="container 3" x="18" y="46" width="1052" height="600" rx="16" fill="#ffffff" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+  </g>
+</svg>

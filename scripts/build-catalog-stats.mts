@@ -26,6 +26,7 @@ import { fileURLToPath } from 'node:url'
 import { dirname, join } from 'node:path'
 import { EFFECTS } from '../src/lib/effects.ts'
 import { CATEGORIES, type EffectCategory } from '../src/lib/effect-types.ts'
+import { buildEffectColors } from './build-effect-colors.mts'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const OUT = join(__dirname, '..', 'src', 'lib', 'generated-catalog-stats.json')
@@ -61,6 +62,14 @@ console.log(
   `[build-catalog-stats] ${EFFECTS.length} effects (${css} css, ${EFFECTS.length - css} shader), ` +
     `${CATEGORIES.length} categories -> ${(bytes / 1024).toFixed(1)} KB`,
 )
+
+/*
+ * The colour table for the /library and /browse colour filter. Lives here
+ * rather than in its own prebuild step because this is the generator that
+ * already loads the whole effect catalog through `tsx`, and a new step would
+ * need a package.json line for a table nobody runs on its own.
+ */
+buildEffectColors()
 
 // A declared-but-empty category is a live bug, not a warning: /category/<slug>
 // is statically generated for every entry in CATEGORIES and calls notFound()

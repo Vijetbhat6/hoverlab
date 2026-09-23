@@ -113,7 +113,7 @@ export function PricingTiers({
         >
           <span
             aria-hidden
-            className={`absolute top-0.5 h-4 w-4 rounded-full bg-background shadow transition-all ${
+            className={`absolute top-0.5 h-4 w-4 rounded-full border border-transparent bg-background shadow transition-all ${
               yearly ? 'start-6' : 'start-0.5'
             }`}
           />
@@ -130,7 +130,7 @@ export function PricingTiers({
         {plans.map((plan) => (
           <div
             key={plan.name}
-            className={`relative flex flex-col rounded-2xl border bg-card/80 p-6 backdrop-blur transition-shadow hover:shadow-lg ${
+            className={`relative flex min-w-0 flex-col rounded-2xl border bg-card/80 p-6 backdrop-blur transition-shadow hover:shadow-lg ${
               plan.featured
                 ? 'border-primary/40 shadow-lg ring-1 ring-primary/30'
                 : 'border-border/60'
@@ -142,14 +142,14 @@ export function PricingTiers({
               </span>
             ) : null}
 
-            <h3 className="text-lg font-bold tracking-tight">{plan.name}</h3>
+            <h3 data-stress-ignore className="text-lg font-bold tracking-tight">{plan.name}</h3>
             <p className="mt-1 text-sm text-muted-foreground">{plan.description}</p>
 
             {/* Wraps: `priceOf` is whatever currency the caller passes, and a
                 four-figure non-dollar price next to /month is wider than a
                 third-width card’s content box. */}
-            <div className="mt-5 flex flex-wrap items-baseline gap-x-1 gap-y-1">
-              <span className="text-4xl font-extrabold tracking-tight">{priceOf(plan)}</span>
+            <div className="mt-5 flex min-w-0 flex-wrap items-baseline gap-x-1 gap-y-1">
+              <span className="min-w-0 break-words text-4xl font-extrabold tracking-tight">{priceOf(plan)}</span>
               {plan.monthly > 0 ? (
                 <span className="text-sm text-muted-foreground">/month</span>
               ) : null}

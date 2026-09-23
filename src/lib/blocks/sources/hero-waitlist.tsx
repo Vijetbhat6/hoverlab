@@ -76,7 +76,7 @@ export function HeroWaitlist({
   return (
     <section className={`relative overflow-hidden ${className}`}>
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute -top-32 left-1/2 h-96 w-96 -translate-x-1/2 rounded-full bg-primary/20 blur-3xl" />
+        <div className="absolute -top-32 left-1/2 h-96 w-96 -translate-x-1/2 rounded-full bg-primary/20 blur-3xl border border-transparent" />
       </div>
 
       <div className="mx-auto w-full max-w-2xl px-4 py-20 text-center sm:px-6 lg:py-28">
@@ -94,7 +94,7 @@ export function HeroWaitlist({
               {successMessage}
             </p>
           ) : (
-            <form onSubmit={handleSubmit} className="mx-auto flex max-w-md flex-col gap-2 sm:flex-row">
+            <form onSubmit={handleSubmit} className="mx-auto flex max-w-md flex-col flex-wrap gap-2 sm:flex-row">
               <label htmlFor={`${uid}-waitlist-email`} className="sr-only">
                 Email address
               </label>
@@ -107,7 +107,7 @@ export function HeroWaitlist({
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder={placeholder}
                 disabled={status === 'pending'}
-                className="h-12 flex-1 rounded-xl border border-border/60 bg-card/60 px-4 text-sm backdrop-blur transition-colors placeholder:text-muted-foreground focus:border-primary/50 focus:outline-none focus:ring-2 focus:ring-ring/30 disabled:opacity-60"
+                className="h-12 min-w-0 flex-1 rounded-xl border border-border/60 bg-card/60 px-4 text-sm backdrop-blur transition-colors placeholder:text-muted-foreground focus:border-primary/50 focus:outline-none focus:ring-2 focus:ring-ring/30 disabled:opacity-60"
               />
               <button
                 type="submit"

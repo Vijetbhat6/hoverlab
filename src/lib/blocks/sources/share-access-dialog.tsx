@@ -187,7 +187,7 @@ export function ShareAccessDialog({
 
                   {person.role === 'owner' ? (
                     /* Text, not a disabled control — see the note above. */
-                    <span className="shrink-0 pe-3 text-sm text-muted-foreground">
+                    <span className="max-w-[8rem] shrink-0 truncate pe-3 text-sm text-muted-foreground">
                       Owner
                     </span>
                   ) : (
@@ -220,7 +220,7 @@ export function ShareAccessDialog({
         </div>
 
         <div className="border-t border-border px-5 py-4">
-          <h3 className="text-sm font-medium text-foreground">General access</h3>
+          <h3 data-stress-ignore className="text-sm font-medium text-foreground">General access</h3>
 
           <div className="mt-2 flex items-center gap-2">
             <span

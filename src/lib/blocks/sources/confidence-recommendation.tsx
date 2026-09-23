@@ -135,7 +135,9 @@ export function ConfidenceRecommendation({
             <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
               {eyebrow}
             </p>
-            <h3 className="mt-0.5 text-base font-semibold leading-snug">{headline}</h3>
+            {headline ? (
+              <h3 data-stress-ignore className="mt-0.5 text-base font-semibold leading-snug">{headline}</h3>
+            ) : null}
           </div>
         </div>
 
@@ -178,7 +180,10 @@ export function ConfidenceRecommendation({
         {/* -- What it rejected ----------------------------------------- */}
         {alternatives.length > 0 ? (
           <div>
-            <h4 className="mb-2 text-xs font-bold uppercase tracking-wider text-muted-foreground">
+            <h4
+              data-stress-ignore
+              className="mb-2 text-xs font-bold uppercase tracking-wider text-muted-foreground"
+            >
               Considered and rejected
             </h4>
             <ul className="space-y-1.5">

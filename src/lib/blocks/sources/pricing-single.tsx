@@ -84,14 +84,14 @@ export function PricingSingle({
         <div className="grid sm:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
           {/* Price side. */}
           <div className="border-b border-border/60 p-8 sm:border-b-0 sm:border-e">
-            <p className="text-sm font-semibold uppercase tracking-wide text-primary">
+            <p className="break-words text-sm font-semibold uppercase tracking-wide text-primary">
               {planName}
             </p>
             {/* Wraps: `price` and `cadence` are both caller-supplied, and a
                 5xl price beside a cadence label overflows this panel long
                 before either string looks unreasonable. */}
             <div className="mt-4 flex flex-wrap items-baseline gap-2">
-              <span className="text-5xl font-extrabold tracking-tight">{price}</span>
+              <span className="min-w-0 break-words text-5xl font-extrabold tracking-tight">{price}</span>
               {cadence ? (
                 <span className="text-sm text-muted-foreground">{cadence}</span>
               ) : null}
@@ -109,9 +109,9 @@ export function PricingSingle({
 
             <a
               href={ctaHref}
-              className="mt-6 inline-flex w-full items-center justify-center rounded-xl bg-primary px-5 py-3 font-semibold text-primary-foreground transition-opacity hover:opacity-90"
+              className="mt-6 flex w-full items-center justify-center rounded-xl bg-primary px-5 py-3 text-center font-semibold text-primary-foreground transition-opacity hover:opacity-90"
             >
-              {ctaLabel}
+              <span className="min-w-0 break-words">{ctaLabel}</span>
             </a>
 
             {note ? (
@@ -132,7 +132,7 @@ export function PricingSingle({
                     aria-hidden
                     className="mt-0.5 h-4 w-4 shrink-0 text-emerald-500"
                   />
-                  <span className="text-foreground/90">{f}</span>
+                  <span className="min-w-0 break-words text-foreground/90">{f}</span>
                 </li>
               ))}
             </ul>

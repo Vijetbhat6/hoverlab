@@ -18,7 +18,7 @@
 
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { ArrowRight, ShieldCheck, History } from 'lucide-react'
+import { ArrowRight, ShieldCheck, History, RotateCcw } from 'lucide-react'
 
 import { SiteHeader } from '@/components/site-header'
 import { JsonLd } from '@/components/json-ld'
@@ -32,7 +32,8 @@ import { BLOCK_COUNT } from '@/lib/blocks/block-index'
 import { PAGE_COUNT } from '@/lib/pages/page-index'
 import { TEMPLATE_COUNT } from '@/lib/templates/template-index'
 import { UPDATE_LEDGER } from '@/lib/compare'
-import { breadcrumbLd, PUBLISHER } from '@/lib/structured-data'
+import { breadcrumbLd, faqLd, PUBLISHER } from '@/lib/structured-data'
+import { PRICING_FAQ } from '@/lib/pricing-faq'
 import { absoluteUrl } from '@/lib/site'
 
 const TITLE = 'Pricing — free forever, Pro once, Team by the seat'
@@ -118,6 +119,7 @@ export default function PricingPage() {
 
       <JsonLd data={offersLd()} />
       <JsonLd data={breadcrumbLd([{ name: 'Home', path: '/' }, { name: 'Pricing' }])} />
+      <JsonLd data={faqLd(PRICING_FAQ)} />
 
       <main>
         <header className="mx-auto max-w-3xl px-4 pt-14 text-center sm:px-6">
@@ -139,6 +141,21 @@ export default function PricingPage() {
           above it and nothing else.
         */}
         <PricingTiers className="pt-10 sm:pt-14" />
+
+        {/*
+          The guarantee, said where the decision is made. It used to appear
+          only on /refunds, the footer and /support — three places a buyer
+          who is deciding does not go. Restates the policy and links to it;
+          it does not add terms.
+        */}
+        <p className="mx-auto mt-6 max-w-3xl px-4 text-center text-sm text-muted-foreground sm:px-6">
+          <RotateCcw aria-hidden className="me-1.5 inline h-4 w-4 align-[-0.15em] text-primary" />
+          <strong className="font-semibold text-foreground">14-day refund on Pro, no questions asked.</strong>{' '}
+          Cancel Team any time. Polar handles tax and issues your invoice.{' '}
+          <Link href="/refunds" className="font-medium underline underline-offset-4">
+            Refund policy
+          </Link>
+        </p>
 
         {/* Why this rather than the alternatives — the objection a price
             raises, answered where it is raised rather than only on the
@@ -208,6 +225,26 @@ npx hoverlab diff hero-split   # the lines that changed`}</code>
             </Link>
             , including the rows where they beat us.
           </p>
+        </section>
+
+        {/* The four things a price raises. Native <details>, so it costs no
+            client JavaScript, and the same strings feed the FAQPage block. */}
+        <section aria-labelledby="buying-questions" className="mx-auto max-w-3xl px-4 pb-12 pt-4 sm:px-6">
+          <h2 id="buying-questions" className="text-balance text-2xl font-bold tracking-tight">
+            Before you buy
+          </h2>
+          <div className="mt-5 divide-y divide-border/60 overflow-hidden rounded-2xl border border-border/60 bg-card/60">
+            {PRICING_FAQ.map((item) => (
+              <details key={item.q} className="group px-5 py-4 sm:px-6">
+                <summary className="cursor-pointer list-none text-base font-medium marker:hidden [&::-webkit-details-marker]:hidden">
+                  {item.q}
+                </summary>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                  {item.a}
+                </p>
+              </details>
+            ))}
+          </div>
         </section>
 
         <FaqAccordion />

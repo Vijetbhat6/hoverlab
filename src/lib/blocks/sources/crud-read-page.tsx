@@ -207,13 +207,13 @@ export function CrudReadPage({
         {/* The verdict line. Four facts, above everything the schema wants. */}
         <dl className="mt-6 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-border bg-border lg:grid-cols-4">
           {facts.map((fact) => (
-            <div key={fact.label} className="bg-card p-4">
-              <dt className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+            <div key={fact.label} className="min-w-0 bg-card p-4">
+              <dt className="truncate text-xs font-medium uppercase tracking-wide text-muted-foreground">
                 {fact.label}
               </dt>
-              <dd className="mt-1.5 text-lg font-semibold tracking-tight">{fact.value}</dd>
+              <dd className="mt-1.5 break-words text-lg font-semibold tracking-tight">{fact.value}</dd>
               {fact.note ? (
-                <dd className="mt-0.5 text-xs text-muted-foreground">{fact.note}</dd>
+                <dd className="mt-0.5 break-words text-xs text-muted-foreground">{fact.note}</dd>
               ) : null}
             </div>
           ))}
@@ -253,7 +253,7 @@ export function CrudReadPage({
                   <li key={event.id} className="flex gap-3">
                     <span
                       aria-hidden
-                      className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary"
+                      className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary border border-transparent"
                     />
                     <div className="min-w-0">
                       <p className="text-sm">{event.what}</p>

@@ -221,7 +221,7 @@ export function SetupWizard({
                           }`}
                         >
                           {selected ? (
-                            <span className="h-2 w-2 rounded-full bg-primary-foreground" />
+                            <span className="h-2 w-2 rounded-full bg-primary-foreground border border-transparent" />
                           ) : null}
                         </span>
                         <span className="min-w-0">

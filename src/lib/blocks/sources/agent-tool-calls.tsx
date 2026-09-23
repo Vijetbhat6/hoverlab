@@ -132,13 +132,18 @@ export function AgentToolCalls({
     <div className={`mx-auto w-full max-w-2xl p-6 ${className}`}>
       <div
         aria-busy={busy}
-        className="overflow-hidden rounded-2xl border border-border/60 bg-card"
+        className="overflow-y-hidden rounded-2xl border border-border/60 bg-card"
       >
         <div className="flex items-center gap-2 border-b border-border/60 px-4 py-2.5">
           <Terminal aria-hidden className="h-3.5 w-3.5 text-muted-foreground" />
-          <h3 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-            {heading}
-          </h3>
+          {heading ? (
+            <h3
+              data-stress-ignore
+              className="text-xs font-semibold uppercase tracking-wider text-muted-foreground"
+            >
+              {heading}
+            </h3>
+          ) : null}
         </div>
 
         <ul className="divide-y divide-border/40">
@@ -170,7 +175,7 @@ export function AgentToolCalls({
 
                   <code className="shrink-0 font-mono text-xs font-semibold">{call.name}</code>
 
-                  <span className="min-w-0 flex-1 truncate font-mono text-xs text-muted-foreground">
+                  <span className="min-w-0 flex-1 break-words font-mono text-xs text-muted-foreground">
                     {call.preview}
                   </span>
 

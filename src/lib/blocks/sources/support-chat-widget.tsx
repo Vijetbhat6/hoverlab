@@ -130,10 +130,10 @@ export function SupportChatWidget({
     >
       {/* Stand-in for the page the widget sits over. */}
       <div aria-hidden className="mx-auto max-w-2xl space-y-3">
-        <div className="h-7 w-48 rounded bg-muted" />
-        <div className="h-3 w-full rounded bg-muted" />
-        <div className="h-3 w-5/6 rounded bg-muted" />
-        <div className="h-3 w-2/3 rounded bg-muted" />
+        <div className="h-7 w-48 rounded bg-muted border border-transparent" />
+        <div className="h-3 w-full rounded bg-muted border border-transparent" />
+        <div className="h-3 w-5/6 rounded bg-muted border border-transparent" />
+        <div className="h-3 w-2/3 rounded bg-muted border border-transparent" />
       </div>
 
       {/* end-4, not right-4 — see the docblock. */}
@@ -154,7 +154,7 @@ export function SupportChatWidget({
                 <p className="mt-0.5 flex items-center gap-1.5 text-xs text-muted-foreground">
                   <span
                     aria-hidden
-                    className={`h-2 w-2 rounded-full ${
+                    className={`h-2 w-2 rounded-full border border-transparent ${
                       online ? 'bg-emerald-500' : 'bg-muted-foreground'
                     }`}
                   />

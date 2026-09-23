@@ -139,7 +139,7 @@ export function PromptInput({
         onChange={(event) => setText(event.target.value)}
         onKeyDown={handleKeyDown}
         aria-describedby={footer ? `${uid}-footer` : undefined}
-        className="block w-full resize-none bg-transparent px-2 py-1.5 text-sm leading-relaxed text-foreground outline-none placeholder:text-muted-foreground"
+        className="block w-full resize-none bg-transparent px-2 py-1.5 text-sm leading-relaxed text-foreground outline-none placeholder:text-muted-foreground border border-transparent"
       />
 
       <div className="flex items-end justify-between gap-2 pt-1">

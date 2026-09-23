@@ -138,15 +138,15 @@ export function IntegrationDepthSplit({
         <div className="rounded-xl border border-border bg-card p-6 shadow-sm">
           {media ?? (
             <div aria-hidden="true" className="space-y-3">
-              <div className="h-3 w-1/3 rounded bg-primary/30" />
-              <div className="h-24 rounded-lg bg-muted" />
+              <div className="h-3 w-1/3 rounded bg-primary/30 border border-transparent" />
+              <div className="h-24 rounded-lg bg-muted border border-transparent" />
               <div className="grid grid-cols-3 gap-3">
-                <div className="h-14 rounded-lg bg-muted" />
-                <div className="h-14 rounded-lg bg-muted" />
-                <div className="h-14 rounded-lg bg-muted" />
+                <div className="h-14 rounded-lg bg-muted border border-transparent" />
+                <div className="h-14 rounded-lg bg-muted border border-transparent" />
+                <div className="h-14 rounded-lg bg-muted border border-transparent" />
               </div>
-              <div className="h-3 w-2/3 rounded bg-muted" />
-              <div className="h-3 w-1/2 rounded bg-muted" />
+              <div className="h-3 w-2/3 rounded bg-muted border border-transparent" />
+              <div className="h-3 w-1/2 rounded bg-muted border border-transparent" />
             </div>
           )}
         </div>

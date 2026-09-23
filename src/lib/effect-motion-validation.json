@@ -1,0 +1,666 @@
+{
+ "note": "Written by scripts/validate-effect-motion.mts from Chromium layout-shift entries on the real /effect page. Re-checked against the current analysis by check-effect-motion.mts.",
+ "generatedAt": "2026-09-21",
+ "browser": "chromium (playwright)",
+ "positiveControl": 0.002,
+ "summary": {
+  "sample": 34,
+  "agreed": 29,
+  "truePositive": 11,
+  "trueNegative": 18,
+  "falsePositive": 5,
+  "falseNegative": 0
+ },
+ "effects": {
+  "accordion-photo-strip-15715": {
+   "static": "shifts",
+   "propertyClass": "layout",
+   "offending": [
+    "flex-grow"
+   ],
+   "measured": {
+    "cls": 0.001,
+    "entries": 21,
+    "windowSeconds": 7.6
+   },
+   "idleCls": 0,
+   "hoverCls": 0.001,
+   "triggers": [
+    "hover .fx-v14-av-accordion-15714",
+    "hover .fx-v14-av-accordion-15714 i"
+   ],
+   "occluded": 0,
+   "agree": true
+  },
+  "circuit-trace-board-15665": {
+   "static": "shifts",
+   "propertyClass": "layout",
+   "offending": [
+    "left",
+    "top"
+   ],
+   "measured": {
+    "cls": 0.0002,
+    "entries": 15,
+    "windowSeconds": 4
+   },
+   "idleCls": 0.0002,
+   "hoverCls": 0,
+   "triggers": [],
+   "occluded": 0,
+   "agree": true
+  },
+  "follow-toggle-pill-15333": {
+   "static": "shifts",
+   "propertyClass": "layout",
+   "offending": [
+    "width",
+    "background",
+    "color"
+   ],
+   "measured": {
+    "cls": 0,
+    "entries": 0,
+    "windowSeconds": 7.6
+   },
+   "idleCls": 0,
+   "hoverCls": 0,
+   "triggers": [
+    "hover .fx-v12-mi-follow-15332 .pill",
+    "check .fx-v12-mi-follow-15332 input"
+   ],
+   "occluded": 0,
+   "agree": false
+  },
+  "presence-toast-15187": {
+   "static": "shifts",
+   "propertyClass": "layout",
+   "offending": [
+    "margin-left",
+    "box-shadow"
+   ],
+   "measured": {
+    "cls": 0,
+    "entries": 4,
+    "windowSeconds": 5.8
+   },
+   "idleCls": 0,
+   "hoverCls": 0,
+   "triggers": [
+    "hover .fx-v12-al-presence-15186"
+   ],
+   "occluded": 0,
+   "agree": true
+  },
+  "avatar-stack-tag-15075": {
+   "static": "shifts",
+   "propertyClass": "layout",
+   "offending": [
+    "margin-right"
+   ],
+   "measured": {
+    "cls": 0,
+    "entries": 6,
+    "windowSeconds": 5.8
+   },
+   "idleCls": 0,
+   "hoverCls": 0,
+   "triggers": [
+    "hover .fx-v12-bdg-avatars-15074"
+   ],
+   "occluded": 0,
+   "agree": true
+  },
+  "ocean-blend-mode-headline-7855": {
+   "static": "shifts",
+   "propertyClass": "layout",
+   "offending": [
+    "letter-spacing",
+    "mix-blend-mode"
+   ],
+   "measured": {
+    "cls": 0,
+    "entries": 1,
+    "windowSeconds": 5.8
+   },
+   "idleCls": 0,
+   "hoverCls": 0,
+   "triggers": [
+    "hover .fx-fb-blendtype-ocean-7854"
+   ],
+   "occluded": 0,
+   "agree": true
+  },
+  "underline-box-button-14955": {
+   "static": "shifts",
+   "propertyClass": "layout",
+   "offending": [
+    "height",
+    "background"
+   ],
+   "measured": {
+    "cls": 0.0001,
+    "entries": 10,
+    "windowSeconds": 5.8
+   },
+   "idleCls": 0,
+   "hoverCls": 0.0001,
+   "triggers": [
+    "hover .fx-v11-btn-ubox-14954"
+   ],
+   "occluded": 0,
+   "agree": true
+  },
+  "blue-floating-label-md-1576": {
+   "static": "shifts",
+   "propertyClass": "layout",
+   "offending": [
+    "font-size",
+    "top",
+    "border-color",
+    "box-shadow"
+   ],
+   "measured": {
+    "cls": 0,
+    "entries": 5,
+    "windowSeconds": 5.8
+   },
+   "idleCls": 0,
+   "hoverCls": 0,
+   "triggers": [
+    "focus .fx-inp-fl-blue-md-1574 input"
+   ],
+   "occluded": 0,
+   "agree": true
+  },
+  "mixer-fader-bank-15781": {
+   "static": "shifts",
+   "propertyClass": "layout",
+   "offending": [
+    "bottom",
+    "height",
+    "box-shadow"
+   ],
+   "measured": {
+    "cls": 0.0002,
+    "entries": 13,
+    "windowSeconds": 5.8
+   },
+   "idleCls": 0,
+   "hoverCls": 0.0002,
+   "triggers": [
+    "hover .fx-v14-sl-mixer-15780"
+   ],
+   "occluded": 0,
+   "agree": true
+  },
+  "cassette-tape-card-15655": {
+   "static": "shifts",
+   "propertyClass": "layout",
+   "offending": [
+    "border-width"
+   ],
+   "measured": {
+    "cls": 0,
+    "entries": 0,
+    "windowSeconds": 4
+   },
+   "idleCls": 0,
+   "hoverCls": 0,
+   "triggers": [],
+   "occluded": 0,
+   "agree": false
+  },
+  "cookie-consent-overlay-15721": {
+   "static": "shifts",
+   "propertyClass": "layout",
+   "offending": [
+    "margin-top",
+    "max-height",
+    "background",
+    "border-color",
+    "box-shadow"
+   ],
+   "measured": {
+    "cls": 0.001,
+    "entries": 8,
+    "windowSeconds": 5.8
+   },
+   "idleCls": 0,
+   "hoverCls": 0.001,
+   "triggers": [
+    "hover .fx-v14-mo-consent-15720"
+   ],
+   "occluded": 0,
+   "agree": true
+  },
+  "focus-toolbar-textarea-15399": {
+   "static": "shifts",
+   "propertyClass": "layout",
+   "offending": [
+    "max-height",
+    "padding",
+    "background",
+    "border-color",
+    "box-shadow",
+    "color"
+   ],
+   "measured": {
+    "cls": 0.0004,
+    "entries": 9,
+    "windowSeconds": 7.6
+   },
+   "idleCls": 0,
+   "hoverCls": 0.0004,
+   "triggers": [
+    "hover .fx-v13-in-toolbar-15398 .t > *",
+    "focus .fx-v13-in-toolbar-15398"
+   ],
+   "occluded": 0,
+   "agree": true
+  },
+  "ocean-variable-weight-13503": {
+   "static": "shifts",
+   "propertyClass": "layout",
+   "offending": [
+    "font-weight",
+    "color"
+   ],
+   "measured": {
+    "cls": 0,
+    "entries": 0,
+    "windowSeconds": 5.8
+   },
+   "idleCls": 0,
+   "hoverCls": 0,
+   "triggers": [
+    "hover .fx-v9-text-weight-ocean-13502"
+   ],
+   "occluded": 0,
+   "agree": false
+  },
+  "horizontal-flex-accordion-15191": {
+   "static": "shifts",
+   "propertyClass": "layout",
+   "offending": [
+    "flex",
+    "background",
+    "color"
+   ],
+   "measured": {
+    "cls": 0.0003,
+    "entries": 12,
+    "windowSeconds": 5.8
+   },
+   "idleCls": 0,
+   "hoverCls": 0.0003,
+   "triggers": [
+    "hover .fx-v12-at-flexpanels-15190 .p"
+   ],
+   "occluded": 0,
+   "agree": true
+  },
+  "gradient-frame-mask-15243": {
+   "static": "shifts",
+   "propertyClass": "layout",
+   "offending": [
+    "padding",
+    "background-position"
+   ],
+   "measured": {
+    "cls": 0,
+    "entries": 0,
+    "windowSeconds": 5.8
+   },
+   "idleCls": 0,
+   "hoverCls": 0,
+   "triggers": [
+    "hover .fx-v12-mk-frame-15242"
+   ],
+   "occluded": 0,
+   "agree": false
+  },
+  "kebab-menu-popover-15101": {
+   "static": "shifts",
+   "propertyClass": "layout",
+   "offending": [
+    "padding-left",
+    "background",
+    "border-color",
+    "color"
+   ],
+   "measured": {
+    "cls": 0,
+    "entries": 0,
+    "windowSeconds": 9.4
+   },
+   "idleCls": 0,
+   "hoverCls": 0,
+   "triggers": [
+    "hover .fx-v12-tip-menu-15100 li",
+    "hover .fx-v12-tip-menu-15100 li.dg",
+    "hover .fx-v12-tip-menu-15100"
+   ],
+   "occluded": 0,
+   "agree": false
+  },
+  "ocean-power-button-13611": {
+   "static": "none",
+   "propertyClass": "paint",
+   "offending": [
+    "background",
+    "border-color",
+    "box-shadow"
+   ],
+   "measured": {
+    "cls": 0,
+    "entries": 0,
+    "windowSeconds": 5.8
+   },
+   "idleCls": 0,
+   "hoverCls": 0,
+   "triggers": [
+    "hover .fx-v9-toggle-power-ocean-13610"
+   ],
+   "occluded": 0,
+   "agree": true
+  },
+  "wallet-sleeve-card-15649": {
+   "static": "none",
+   "propertyClass": "paint",
+   "offending": [
+    "box-shadow"
+   ],
+   "measured": {
+    "cls": 0,
+    "entries": 0,
+    "windowSeconds": 5.8
+   },
+   "idleCls": 0,
+   "hoverCls": 0,
+   "triggers": [
+    "hover .fx-v14-card-sleeve-15648"
+   ],
+   "occluded": 0,
+   "agree": true
+  },
+  "ocean-add-to-cart-flight-13143": {
+   "static": "none",
+   "propertyClass": "paint",
+   "offending": [
+    "border-color"
+   ],
+   "measured": {
+    "cls": 0,
+    "entries": 0,
+    "windowSeconds": 7.6
+   },
+   "idleCls": 0,
+   "hoverCls": 0,
+   "triggers": [
+    "hover .fx-v9-micro-cart-ocean-13142 .add",
+    "hover .fx-v9-micro-cart-ocean-13142"
+   ],
+   "occluded": 0,
+   "agree": true
+  },
+  "ocean-form-skeleton-13383": {
+   "static": "none",
+   "propertyClass": "paint",
+   "offending": [
+    "background-position"
+   ],
+   "measured": {
+    "cls": 0,
+    "entries": 0,
+    "windowSeconds": 4
+   },
+   "idleCls": 0,
+   "hoverCls": 0,
+   "triggers": [],
+   "occluded": 0,
+   "agree": true
+  },
+  "ocean-scroll-rail-9651": {
+   "static": "none",
+   "propertyClass": "paint",
+   "offending": [
+    "color"
+   ],
+   "measured": {
+    "cls": 0,
+    "entries": 0,
+    "windowSeconds": 5.8
+   },
+   "idleCls": 0,
+   "hoverCls": 0,
+   "triggers": [
+    "hover .fx-v6-scroll-rail-ocean-9650 p"
+   ],
+   "occluded": 0,
+   "agree": true
+  },
+  "diamond-reveal-grid-15237": {
+   "static": "none",
+   "propertyClass": "paint",
+   "offending": [
+    "clip-path"
+   ],
+   "measured": {
+    "cls": 0,
+    "entries": 0,
+    "windowSeconds": 5.8
+   },
+   "idleCls": 0,
+   "hoverCls": 0,
+   "triggers": [
+    "hover .fx-v12-mk-diamond-15236"
+   ],
+   "occluded": 0,
+   "agree": true
+  },
+  "blue-underline-draw-link-5419": {
+   "static": "none",
+   "propertyClass": "paint",
+   "offending": [
+    "background-size",
+    "color"
+   ],
+   "measured": {
+    "cls": 0,
+    "entries": 0,
+    "windowSeconds": 7.6
+   },
+   "idleCls": 0,
+   "hoverCls": 0,
+   "triggers": [
+    "hover .fx-mt-underline-blue-5418",
+    "focus .fx-mt-underline-blue-5418"
+   ],
+   "occluded": 0,
+   "agree": true
+  },
+  "text-neon": {
+   "static": "none",
+   "propertyClass": "paint",
+   "offending": [
+    "text-shadow"
+   ],
+   "measured": {
+    "cls": 0,
+    "entries": 0,
+    "windowSeconds": 4
+   },
+   "idleCls": 0,
+   "hoverCls": 0,
+   "triggers": [],
+   "occluded": 0,
+   "agree": true
+  },
+  "firefly-field-15483": {
+   "static": "none",
+   "propertyClass": "compositor",
+   "offending": [],
+   "measured": {
+    "cls": 0,
+    "entries": 0,
+    "windowSeconds": 4
+   },
+   "idleCls": 0,
+   "hoverCls": 0,
+   "triggers": [],
+   "occluded": 0,
+   "agree": true
+  },
+  "ocean-card-deck-7991": {
+   "static": "none",
+   "propertyClass": "compositor",
+   "offending": [],
+   "measured": {
+    "cls": 0,
+    "entries": 0,
+    "windowSeconds": 5.8
+   },
+   "idleCls": 0,
+   "hoverCls": 0,
+   "triggers": [
+    "hover .fx-v5-card-deck-ocean-7990"
+   ],
+   "occluded": 0,
+   "agree": true
+  },
+  "ocean-speed-dial-11103": {
+   "static": "none",
+   "propertyClass": "compositor",
+   "offending": [],
+   "measured": {
+    "cls": 0,
+    "entries": 0,
+    "windowSeconds": 5.8
+   },
+   "idleCls": 0,
+   "hoverCls": 0,
+   "triggers": [
+    "hover .fx-v8-btn-dial-ocean-11102"
+   ],
+   "occluded": 0,
+   "agree": true
+  },
+  "ocean-price-tag-13891": {
+   "static": "none",
+   "propertyClass": "compositor",
+   "offending": [],
+   "measured": {
+    "cls": 0,
+    "entries": 0,
+    "windowSeconds": 5.8
+   },
+   "idleCls": 0,
+   "hoverCls": 0,
+   "triggers": [
+    "hover .fx-v10-badge-pricetag-ocean-13890"
+   ],
+   "occluded": 0,
+   "agree": true
+  },
+  "metro-line-steps-15513": {
+   "static": "none",
+   "propertyClass": "compositor",
+   "offending": [],
+   "measured": {
+    "cls": 0,
+    "entries": 0,
+    "windowSeconds": 5.8
+   },
+   "idleCls": 0,
+   "hoverCls": 0,
+   "triggers": [
+    "hover .fx-v13-tl-metro-15512 .st"
+   ],
+   "occluded": 0,
+   "agree": true
+  },
+  "ocean-glitch-split-7831": {
+   "static": "none",
+   "propertyClass": "compositor",
+   "offending": [],
+   "measured": {
+    "cls": 0,
+    "entries": 0,
+    "windowSeconds": 4
+   },
+   "idleCls": 0,
+   "hoverCls": 0,
+   "triggers": [],
+   "occluded": 0,
+   "agree": true
+  },
+  "gooey-merge-blobs-15355": {
+   "static": "none",
+   "propertyClass": "compositor",
+   "offending": [],
+   "measured": {
+    "cls": 0,
+    "entries": 0,
+    "windowSeconds": 5.8
+   },
+   "idleCls": 0,
+   "hoverCls": 0,
+   "triggers": [
+    "hover .fx-v12-fb-gooey-15354"
+   ],
+   "occluded": 0,
+   "agree": true
+  },
+  "ocean-zoom-tile-slate-1767": {
+   "static": "none",
+   "propertyClass": "compositor",
+   "offending": [],
+   "measured": {
+    "cls": 0,
+    "entries": 0,
+    "windowSeconds": 5.8
+   },
+   "idleCls": 0,
+   "hoverCls": 0,
+   "triggers": [
+    "hover .fx-hov-zoom-ocean-slate-1766"
+   ],
+   "occluded": 0,
+   "agree": true
+  },
+  "ocean-badged-divider-11383": {
+   "static": "none",
+   "propertyClass": "none",
+   "offending": [],
+   "measured": {
+    "cls": 0,
+    "entries": 0,
+    "windowSeconds": 4
+   },
+   "idleCls": 0,
+   "hoverCls": 0,
+   "triggers": [],
+   "occluded": 0,
+   "agree": true
+  },
+  "column-spotlight-grid-15281": {
+   "static": "none",
+   "propertyClass": "none",
+   "offending": [],
+   "measured": {
+    "cls": 0,
+    "entries": 0,
+    "windowSeconds": 7.6
+   },
+   "idleCls": 0,
+   "hoverCls": 0,
+   "triggers": [
+    "hover .fx-v12-tb-column-15280 td",
+    "hover .fx-v12-tb-column-15280 th"
+   ],
+   "occluded": 0,
+   "agree": true
+  }
+ }
+}

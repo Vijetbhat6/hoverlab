@@ -103,12 +103,12 @@ export function AgentTaskList({
     <div className={`mx-auto w-full max-w-2xl p-6 ${className}`}>
       <div
         aria-busy={active && !paused}
-        className="overflow-hidden rounded-2xl border border-border/60 bg-card"
+        className="overflow-y-hidden rounded-2xl border border-border/60 bg-card"
       >
         {/* -- Header ---------------------------------------------------- */}
         <div className="flex items-center gap-3 border-b border-border/60 px-4 py-3">
           <div className="min-w-0 flex-1">
-            <h3 className="truncate text-sm font-semibold">{heading}</h3>
+            {heading ? <h3 data-stress-ignore className="truncate text-sm font-semibold">{heading}</h3> : null}
 
             {/* The one place progress is announced. */}
             <p role="status" className="mt-0.5 text-xs text-muted-foreground">
@@ -153,7 +153,7 @@ export function AgentTaskList({
 
               <div className="min-w-0 flex-1">
                 <p
-                  className={`truncate text-sm ${
+                  className={`text-sm ${
                     task.state === 'queued' ? 'text-muted-foreground' : 'font-medium'
                   }`}
                 >

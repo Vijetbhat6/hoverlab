@@ -121,7 +121,7 @@ export function SegmentedControl({
       */}
       <span
         aria-hidden
-        className="absolute inset-y-1 z-0 rounded-md bg-background shadow-sm transition-[inset-inline-start] duration-200 ease-out motion-reduce:transition-none"
+        className="absolute inset-y-1 z-0 rounded-md bg-background shadow-sm transition-[inset-inline-start] duration-200 ease-out motion-reduce:transition-none border border-transparent"
         style={{
           insetInlineStart: `calc(${(index / options.length) * 100}% + 0.25rem)`,
           width: `calc(${100 / options.length}% - 0.5rem)`,

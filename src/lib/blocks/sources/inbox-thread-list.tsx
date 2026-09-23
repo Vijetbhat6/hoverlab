@@ -272,7 +272,7 @@ export function InboxThreadList({
                           className="h-2 w-2 shrink-0 fill-current text-primary"
                         />
                       ) : null}
-                      <span className="truncate">{thread.subject}</span>
+                      <span className="min-w-0 truncate">{thread.subject}</span>
                     </span>
 
                     <span className="mt-0.5 block truncate text-xs text-muted-foreground">

@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1216" height="564" viewBox="0 0 1216 564" id="Hoverlab — Identity">
+  <!--
+    Hoverlab — Identity. 2 controls, traced from the
+    rendered catalog. Drag this file onto a Figma canvas.
+
+    These are frames, not components: named, editable layers with real
+    geometry, colour and type. There are no variants, no auto-layout,
+    and no hover or motion — none of those exist in a static frame.
+
+    Every one of these is free to copy as code at https://hoverlab.dev/primitives
+  -->
+  <rect id="Background" x="0" y="0" width="1216" height="564" fill="#ffffff" />
+  <text id="Avatar Group label" x="64" y="84" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Avatar Group</text>
+  <text id="avatar-group id" x="64" y="98" font-family="ui-monospace, monospace" font-size="12" fill="#737373">avatar-group</text>
+  <g id="Avatar Group" transform="translate(64, 116)">
+    <rect id="container" x="0" y="0" width="1088" height="130" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="458" y="25" width="44" height="44" rx="22" fill="rgba(228, 40, 255, 0.149)" />
+      <text id="AL" x="471.05" y="52" fill="#a800b7" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">AL</text>
+      <rect id="container 3" x="490" y="25" width="44" height="44" rx="22" fill="rgba(0, 168, 248, 0.149)" />
+      <text id="AT" x="503.61" y="52" fill="#0069a8" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">AT</text>
+      <rect id="container 4" x="522" y="25" width="44" height="44" rx="22" fill="rgba(0, 188, 128, 0.149)" />
+      <text id="GH" x="533.88" y="52" fill="#007a55" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">GH</text>
+      <rect id="container 5" x="554" y="25" width="44" height="44" rx="22" fill="rgba(141, 81, 255, 0.149)" />
+      <text id="KJ" x="567.17" y="52" fill="#7008e7" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">KJ</text>
+      <rect id="container 6" x="586" y="25" width="44" height="44" rx="22" fill="#f3f2ee" />
+      <text id="+" x="599.53" y="52" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">+</text>
+      <text id="2" x="607.47" y="52" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">2</text>
+      <rect id="container 7" x="516" y="81" width="24" height="24" rx="12" fill="rgba(228, 40, 255, 0.149)" />
+      <text id="AL 2" x="521.59" y="96.5" fill="#a800b7" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" font-weight="600">AL</text>
+      <rect id="container 8" x="532" y="81" width="24" height="24" rx="12" fill="rgba(0, 168, 248, 0.149)" />
+      <text id="AT 2" x="538.02" y="96.5" fill="#0069a8" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" font-weight="600">AT</text>
+      <rect id="container 9" x="548" y="81" width="24" height="24" rx="12" fill="rgba(0, 188, 128, 0.149)" />
+      <text id="GH 2" x="552.77" y="96.5" fill="#007a55" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" font-weight="600">GH</text>
+  </g>
+  <text id="Featured Icon label" x="64" y="362" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Featured Icon</text>
+  <text id="featured-icon id" x="64" y="376" font-family="ui-monospace, monospace" font-size="12" fill="#737373">featured-icon</text>
+  <g id="Featured Icon" transform="translate(64, 394)">
+    <rect id="container" x="0" y="0" width="1088" height="106" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="438" y="33" width="40" height="40" rx="16" fill="rgba(0, 118, 49, 0.102)" />
+      <g id="icon rocket" transform="translate(448 43) scale(0.833 0.833)" fill="none" stroke="#00782e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z" />
+        <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z" />
+        <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" />
+        <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" />
+      </g>
+      <rect id="container 3" x="490" y="33" width="40" height="40" rx="16" fill="#009966" />
+      <g id="icon shield-check" transform="translate(500 43) scale(0.833 0.833)" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
+        <path d="m9 12 2 2 4-4" />
+      </g>
+      <rect id="container 4" x="542" y="33" width="40" height="40" rx="16" fill="none" stroke="rgba(252, 152, 0, 0.302)" stroke-width="1" />
+      <g id="icon sparkles" transform="translate(552 43) scale(0.833 0.833)" fill="none" stroke="#e17100" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z" />
+        <path d="M20 3v4" />
+        <path d="M22 5h-4" />
+        <path d="M4 17v2" />
+        <path d="M5 18H3" />
+      </g>
+      <rect id="container 5" x="594" y="25" width="56" height="56" rx="28" fill="rgba(0, 118, 49, 0.102)" />
+      <g id="icon rocket 2" transform="translate(608 39) scale(1.167 1.167)" fill="none" stroke="#00782e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z" />
+        <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z" />
+        <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" />
+        <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" />
+      </g>
+  </g>
+</svg>

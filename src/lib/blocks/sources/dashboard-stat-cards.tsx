@@ -77,19 +77,19 @@ export function DashboardStatCards({
             className="rounded-2xl border border-border/60 bg-card/80 p-5 backdrop-blur transition-shadow hover:shadow-md"
           >
             <div className="flex items-center justify-between gap-3">
-              <span className="text-sm font-medium text-muted-foreground">{stat.label}</span>
+              <span className="min-w-0 flex-1 truncate text-sm font-medium text-muted-foreground">{stat.label}</span>
               {stat.icon ? (
-                <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-muted text-muted-foreground">
+                <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-muted text-muted-foreground">
                   {stat.icon}
                 </span>
               ) : null}
             </div>
 
-            <div className="mt-3 text-3xl font-extrabold tracking-tight">{stat.value}</div>
+            <div className="mt-3 break-words text-3xl font-extrabold tracking-tight">{stat.value}</div>
 
             <div className="mt-2 flex items-center gap-1.5 text-xs">
               <span
-                className={`inline-flex items-center gap-0.5 font-semibold ${
+                className={`inline-flex shrink-0 items-center gap-0.5 font-semibold ${
                   good ? 'text-emerald-600 dark:text-emerald-400' : 'text-red-600 dark:text-red-400'
                 }`}
               >
@@ -101,7 +101,7 @@ export function DashboardStatCards({
                 {rising ? '+' : ''}
                 {stat.delta}%
               </span>
-              <span className="text-muted-foreground">
+              <span className="min-w-0 truncate text-muted-foreground">
                 vs {stat.comparedTo ?? 'last month'}
               </span>
             </div>

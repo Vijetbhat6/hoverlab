@@ -159,11 +159,11 @@ export function VideoPlayer({ src, poster, label, className = '' }: VideoPlayerP
             className="pointer-events-none absolute inset-x-0 top-1/2 h-1 -translate-y-1/2 rounded-full bg-white/20"
           >
             <span
-              className="absolute inset-y-0 start-0 rounded-full bg-white/30"
+              className="absolute inset-y-0 start-0 rounded-full bg-white/30 border border-transparent"
               style={{ width: `${loaded}%` }}
             />
             <span
-              className="absolute inset-y-0 start-0 rounded-full bg-white"
+              className="absolute inset-y-0 start-0 rounded-full bg-white border border-transparent"
               style={{ width: `${progress}%` }}
             />
           </span>

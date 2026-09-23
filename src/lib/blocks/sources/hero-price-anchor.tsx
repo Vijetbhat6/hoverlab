@@ -65,13 +65,13 @@ export function HeroPriceAnchor({
   return (
     <section className={`relative overflow-hidden ${className}`}>
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute -top-32 left-1/3 h-96 w-96 rounded-full bg-primary/20 blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 h-72 w-72 rounded-full bg-emerald-500/10 blur-3xl" />
+        <div className="absolute -top-32 left-1/3 h-96 w-96 rounded-full bg-primary/20 blur-3xl border border-transparent" />
+        <div className="absolute bottom-0 right-1/4 h-72 w-72 rounded-full bg-emerald-500/10 blur-3xl border border-transparent" />
       </div>
 
-      <div className="mx-auto grid w-full max-w-6xl items-center gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[1.15fr_1fr] lg:gap-16 lg:px-8 lg:py-24">
+      <div className="mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[1.15fr_1fr] lg:gap-16 lg:px-8 lg:py-24">
         {/* -- Copy ------------------------------------------------------ */}
-        <div className="max-w-xl">
+        <div className="min-w-0 max-w-xl">
           {eyebrow ? (
             <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
               {eyebrow}
@@ -99,11 +99,11 @@ export function HeroPriceAnchor({
         </div>
 
         {/* -- Price card ------------------------------------------------ */}
-        <div className="rounded-2xl border border-border/60 bg-card/70 p-7 text-center shadow-xl shadow-black/10 backdrop-blur sm:p-8">
-          <div className="flex items-end justify-center gap-2">
-            <span className="text-5xl font-extrabold tracking-tight sm:text-6xl">{price}</span>
+        <div className="min-w-0 rounded-2xl border border-border/60 bg-card/70 p-7 text-center shadow-xl shadow-black/10 backdrop-blur sm:p-8">
+          <div className="flex flex-wrap items-end justify-center gap-2">
+            <span className="min-w-0 break-words text-5xl font-extrabold tracking-tight sm:text-6xl">{price}</span>
             {originalPrice ? (
-              <s className="pb-2 text-lg font-medium text-muted-foreground">{originalPrice}</s>
+              <s className="min-w-0 break-words pb-2 text-lg font-medium text-muted-foreground">{originalPrice}</s>
             ) : null}
           </div>
 

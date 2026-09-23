@@ -160,7 +160,7 @@ export function CreditCardInput({
             onChange={(e) =>
               set({ number: e.target.value.replace(/\D/g, '').slice(0, maxDigits) })
             }
-            className="w-full bg-transparent font-mono text-sm tabular-nums text-foreground outline-none placeholder:text-muted-foreground"
+            className="w-full bg-transparent font-mono text-sm tabular-nums text-foreground outline-none placeholder:text-muted-foreground border border-transparent"
           />
           <BrandMark brand={brand} />
         </div>
@@ -253,9 +253,9 @@ function CardFace({
         </span>
       </div>
       <p className="font-mono text-base tabular-nums tracking-[0.12em]">{groups}</p>
-      <div className="flex items-end justify-between text-[10px] uppercase tracking-wide opacity-80">
-        <span className="truncate">{value.name || 'Your name'}</span>
-        <span className="font-mono tabular-nums">{value.expiry || 'MM/YY'}</span>
+      <div className="flex items-end justify-between gap-2 text-[10px] uppercase tracking-wide opacity-80">
+        <span className="min-w-0 flex-1 truncate">{value.name || 'Your name'}</span>
+        <span className="shrink-0 font-mono tabular-nums">{value.expiry || 'MM/YY'}</span>
       </div>
     </div>
   )

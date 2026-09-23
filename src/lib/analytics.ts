@@ -1,6 +1,7 @@
 'use client'
 
 import posthog from 'posthog-js'
+import { scrubSharedLinks } from '@/lib/analytics-scrub'
 import type { ArtifactLevel } from '@/lib/artifact-types'
 
 /**
@@ -126,14 +127,15 @@ export type AnalyticsEvent =
       }
     }
   // ---- accounts ----
-  | { name: 'signup_completed'; props: { method: 'email' } }
+  | { name: 'signup_completed'; props: { method: 'email' | 'google' } }
   /**
-   * `method` is the whole point of the event now that there are two doors.
-   * Passkey adoption is not observable any other way — the sign-in page
-   * cannot tell how many of its visitors have one — and the ratio is what
-   * decides whether the password form ever stops being the default.
+   * `method` is the whole point of the event now that there are three doors.
+   * Passkey and Google adoption are not observable any other way — the
+   * sign-in page cannot tell how many of its visitors have either — and the
+   * ratio is what decides whether the password form ever stops being the
+   * default.
    */
-  | { name: 'login_completed'; props: { method: 'email' | 'passkey' } }
+  | { name: 'login_completed'; props: { method: 'email' | 'passkey' | 'google' } }
   // ---- monetization funnel ----
   | { name: 'pricing_viewed'; props: Record<string, never> }
   /**
@@ -346,6 +348,10 @@ export function startAnalytics(): void {
       opt_out_capturing_persistence_type: 'localStorage',
       opt_out_persistence_by_default: true,
       respect_dnt: true,
+      // /c/<token> is a capability URL. Every event carries the page address
+      // and click capture carries link hrefs, so without this the secret would
+      // be copied into PostHog on the first consented visit. See analytics-scrub.ts.
+      before_send: (event) => scrubSharedLinks(event),
     })
     loaded = true
   }

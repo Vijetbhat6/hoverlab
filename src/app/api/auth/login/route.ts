@@ -17,10 +17,17 @@ import { adminAuth } from '@/lib/firebase/admin'
 import { ensureUserProfile } from '@/lib/firebase/users'
 import { FirebaseAuthError, signInWithPassword } from '@/lib/firebase/rest'
 import { buildSessionCookie, SESSION_MAX_AGE_SECONDS } from '@/lib/session'
+import { enforceRateLimit, RATE_LIMITS } from '@/lib/rate-limit'
 
 export const runtime = 'nodejs'
 
 async function handleLogin(req: Request) {
+  // Per-IP, and before anything reaches Firebase. Every sign-in is proxied
+  // through this server, so Firebase's own TOO_MANY_ATTEMPTS throttle would
+  // lock out EVERY user when one attacker trips it — see lib/rate-limit.ts.
+  const limited = await enforceRateLimit(req, RATE_LIMITS.login)
+  if (limited) return limited
+
   let body: unknown
   try {
     body = await req.json()

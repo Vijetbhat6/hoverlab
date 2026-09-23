@@ -70,9 +70,9 @@ export function BrowserFrame({
               every page that pastes this; the shape alone is what makes the
               frame read as a browser.
             */}
-            <span className="size-3 rounded-full bg-foreground/15" />
-            <span className="size-3 rounded-full bg-foreground/15" />
-            <span className="size-3 rounded-full bg-foreground/15" />
+            <span className="size-3 rounded-full bg-foreground/15 border border-transparent" />
+            <span className="size-3 rounded-full bg-foreground/15 border border-transparent" />
+            <span className="size-3 rounded-full bg-foreground/15 border border-transparent" />
           </div>
 
           {variant === 'chrome' ? (
@@ -80,7 +80,7 @@ export function BrowserFrame({
               aria-hidden
               className="hidden min-w-0 max-w-44 shrink items-center gap-2 rounded-t-md bg-background px-3 py-1 text-xs text-muted-foreground sm:flex"
             >
-              <span className="size-3 shrink-0 rounded-sm bg-foreground/15" />
+              <span className="size-3 shrink-0 rounded-sm bg-foreground/15 border border-transparent" />
               <span className="truncate">{title}</span>
             </div>
           ) : null}
@@ -109,7 +109,7 @@ export function BrowserFrame({
             }`}
           >
             <Lock aria-hidden className="size-3 shrink-0" />
-            <span className="truncate">{url}</span>
+            <span className="min-w-0 break-words">{url}</span>
           </div>
 
           {/*
@@ -123,7 +123,7 @@ export function BrowserFrame({
         </div>
       ) : null}
 
-      <div className={`${aspect} w-full overflow-hidden bg-background`}>{children}</div>
+      <div className={`${aspect} w-full overflow-hidden border border-transparent bg-background`}>{children}</div>
     </div>
   )
 

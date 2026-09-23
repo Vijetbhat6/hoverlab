@@ -225,11 +225,13 @@ export function GiftCardBalance({
             ) : null}
 
             {/* A number alone is an accusation; the history is the answer. */}
-            <h3 className="mt-5 text-sm font-semibold">Where it went</h3>
+            <h3 data-stress-ignore className="mt-5 text-sm font-semibold">
+              Where it went
+            </h3>
             <ul className="mt-2 divide-y divide-border/70">
               {result.transactions.map((tx) => (
                 <li key={tx.id} className="flex items-baseline justify-between gap-3 py-2 text-sm">
-                  <span className="min-w-0">
+                  <span className="min-w-0 flex-1">
                     <span className="block truncate">{tx.what}</span>
                     <span className="block text-xs text-muted-foreground">{tx.when}</span>
                   </span>

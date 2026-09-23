@@ -20,6 +20,7 @@ import { FirebaseAuthError } from '@/lib/firebase/rest'
 import { ensureUserProfile } from '@/lib/firebase/users'
 import { getPasskey, touchPasskey } from '@/lib/firebase/passkeys'
 import { adminAuth } from '@/lib/firebase/admin'
+import { enforceRateLimit, RATE_LIMITS } from '@/lib/rate-limit'
 import { buildSessionCookie, createSessionCookieForUid } from '@/lib/session'
 import {
   consumeChallenge,
@@ -38,6 +39,11 @@ export const runtime = 'nodejs'
 const REJECTED = 'That passkey was not accepted. Try again, or sign in with your password.'
 
 async function handle(req: Request) {
+  // Per-IP, before the challenge is consumed: a flood of bad assertions
+  // should not be able to burn other visitors' pending challenges either.
+  const limited = await enforceRateLimit(req, RATE_LIMITS.passkeyVerify)
+  if (limited) return limited
+
   let body: unknown
   try {
     body = await req.json()

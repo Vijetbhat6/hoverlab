@@ -186,7 +186,7 @@ export function ChatAttachmentTray({
                       className="mt-1.5 h-1 overflow-hidden rounded-full bg-muted"
                     >
                       <div
-                        className="h-full rounded-full bg-primary transition-[width] duration-300"
+                        className="h-full rounded-full bg-primary transition-[width] duration-300 border border-transparent"
                         style={{ width: `${file.progress ?? 0}%` }}
                       />
                     </div>
@@ -235,7 +235,7 @@ export function ChatAttachmentTray({
           </span>
           <span className="text-muted-foreground">{percent}%</span>
         </div>
-        <div className="mt-1.5 h-1 overflow-hidden rounded-full bg-muted">
+        <div className="mt-1.5 h-1 overflow-hidden rounded-full bg-muted border border-transparent">
           <div
             className={`h-full rounded-full transition-[width] duration-300 ${
               overBudget ? 'bg-destructive' : 'bg-primary'

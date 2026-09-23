@@ -28,6 +28,13 @@ export interface CatalogSearchFormProps {
    * Rendered as a hidden field — the form posts to the bare /browse URL.
    */
   level?: string
+  /**
+   * Further filters to keep across a new search (framework, accessibility,
+   * colour), as name to value. Rendered as hidden fields for the same reason
+   * `level` is: the form is a plain GET, and a search that silently dropped
+   * the filters you had chosen would read as the filters not working.
+   */
+  hidden?: Record<string, string>
   placeholder?: string
   /** `lg` for the landing hero, `md` for the /browse toolbar. */
   size?: 'md' | 'lg'
@@ -39,6 +46,7 @@ export interface CatalogSearchFormProps {
 export function CatalogSearchForm({
   defaultValue = '',
   level,
+  hidden,
   placeholder = 'pricing, glassmorphism, dashboard…',
   size = 'md',
   label = 'Search the catalog',
@@ -54,6 +62,11 @@ export function CatalogSearchForm({
       role="search"
     >
       {level ? <input type="hidden" name="level" value={level} /> : null}
+      {hidden
+        ? Object.entries(hidden).map(([name, value]) => (
+            <input key={name} type="hidden" name={name} value={value} />
+          ))
+        : null}
 
       <div className="relative flex-1">
         <Search

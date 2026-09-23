@@ -7,7 +7,7 @@
     geometry, colour and type. There are no variants, no auto-layout,
     and no hover or motion — none of those exist in a static frame.
 
-    Every section here is free to copy as code at https://hoverlab.dev/blocks
+    Every one of these is free to copy as code at https://hoverlab.dev/blocks
   -->
   <rect id="Background" x="0" y="0" width="1216" height="5205" fill="#ffffff" />
   <text id="Empty State With Illustration label" x="64" y="84" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Empty State With Illustration</text>
@@ -15,13 +15,30 @@
   <g id="Empty State With Illustration" transform="translate(64, 116)">
     <rect id="container" x="0" y="0" width="1088" height="378" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="container 2" x="1" y="1" width="1086" height="376" rx="16" fill="rgba(255, 255, 255, 0.4)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="No projects yet" x="544" y="196" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" font-weight="700" letter-spacing="-0.45" text-anchor="middle">No projects yet</text>
+      <g id="icon" transform="translate(480 58) scale(1.067 1.067)" fill="none" stroke="rgba(86, 89, 96, 0.302)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect rx="8" x="18" y="14" width="84" height="62" />
+        <path d="M18 32h84" />
+        <circle cx="28" cy="23" r="2.5" fill="rgba(86, 89, 96, 0.302)" stroke="none" />
+        <circle cx="37" cy="23" r="2.5" fill="rgba(86, 89, 96, 0.302)" stroke="none" />
+        <path d="M34 46h30M34 56h44M34 66h22" stroke="rgba(87, 92, 97, 0.4)" />
+        <circle cx="86" cy="60" r="12" stroke="rgba(0, 120, 45, 0.4)" />
+        <path d="M86 54v12M80 60h12" stroke="rgba(0, 120, 46, 0.502)" />
+      </g>
+      <text id="No projects yet" x="544" y="198" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" font-weight="700" letter-spacing="-0.45" text-anchor="middle">No projects yet</text>
       <text id="Projects hold your work and your team’s.…" x="544" y="229" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" text-anchor="middle">Projects hold your work and your team’s. Create one to get</text>
       <text id="started — it takes about ten seconds." x="544" y="249" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" text-anchor="middle">started — it takes about ten seconds.</text>
-      <rect id="button" x="391.13" y="279" width="137.09" height="40" rx="16" fill="#007f34" />
-      <text id="New project" x="459.67" y="293" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">New project</text>
+      <rect id="button" x="391.13" y="279" width="137.09" height="40" rx="16" fill="#00782e" />
+      <text id="New project" x="471.67" y="304" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">New project</text>
+      <g id="icon plus" transform="translate(407.125 291) scale(0.667 0.667)" fill="none" stroke="#fcfcfc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14" />
+        <path d="M12 5v14" />
+      </g>
       <rect id="button 2" x="540.22" y="278" width="156.64" height="42" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Read the guide" x="618.54" y="292" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Read the guide</text>
+      <text id="Read the guide" x="630.54" y="304" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Read the guide</text>
+      <g id="icon book-open" transform="translate(557.219 291) scale(0.667 0.667)" fill="none" stroke="#080c0f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 7v14" />
+        <path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" />
+      </g>
   </g>
   <text id="Error State With Retry label" x="64" y="610" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Error State With Retry</text>
   <text id="error-state-retry id" x="64" y="624" font-family="ui-monospace, monospace" font-size="12" fill="#737373">error-state-retry</text>
@@ -29,14 +46,29 @@
     <rect id="container" x="0" y="0" width="1088" height="390" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="alert" x="1" y="1" width="1086" height="388" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="container 2" x="520" y="50" width="48" height="48" rx="16" fill="rgba(226, 0, 10, 0.102)" />
-      <text id="We could not load this" x="543.99" y="136" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" font-weight="700" letter-spacing="-0.45" text-anchor="middle">We could not load this</text>
+      <g id="icon circle-alert" transform="translate(532 62) scale(1 1)" fill="none" stroke="#e7000b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10" />
+        <line x1="12" y1="8" x2="12" y2="12" />
+        <line x1="12" y1="16" x2="12.01" y2="16" />
+      </g>
+      <text id="We could not load this" x="543.99" y="138" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" font-weight="700" letter-spacing="-0.45" text-anchor="middle">We could not load this</text>
       <text id="The request failed before it finished. Y…" x="544" y="169" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" text-anchor="middle">The request failed before it finished. Your data is safe — nothing was</text>
       <text id="changed." x="544" y="189" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" text-anchor="middle">changed.</text>
-      <rect id="button" x="485.41" y="218" width="117.19" height="40" rx="16" fill="#007f34" />
-      <text id="Try again" x="544" y="232" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Try again</text>
+      <rect id="button" x="485.41" y="218" width="117.19" height="40" rx="16" fill="#00782e" />
+      <text id="Try again" x="556" y="243" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Try again</text>
+      <g id="icon refresh-cw" transform="translate(501.406 230) scale(0.667 0.667)" fill="none" stroke="#fcfcfc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8" />
+        <path d="M21 3v5h-5" />
+        <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16" />
+        <path d="M8 16H3v5" />
+      </g>
       <text id="Reference" x="461.4" y="293" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" text-anchor="middle">Reference</text>
       <rect id="container 3" x="497.3" y="279" width="127.2" height="20" rx="4" fill="#f3f2ee" />
-      <text id="err_7f3a92c4b81e" x="560.9" y="291" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12" text-anchor="middle">err_7f3a92c4b81e</text>
+      <text id="err_7f3a92c4b81e" x="560.9" y="293" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12" text-anchor="middle">err_7f3a92c4b81e</text>
+      <g id="icon copy" transform="translate(636.5 282) scale(0.583 0.583)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect rx="2" ry="2" x="8" y="8" width="14" height="14" />
+        <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+      </g>
       <text id="Technical details" x="544" y="336" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500" text-anchor="middle">Technical details</text>
       <rect id="container 4" x="288" y="352" width="512" height="72" rx="16" fill="rgba(243, 242, 238, 0.6)" />
       <text id="GET /api/v1/projects → 503 Service Unava…" x="300" y="376" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">GET /api/v1/projects → 503 Service Unavailable</text>
@@ -47,22 +79,46 @@
   <text id="not-found-404 id" x="64" y="1162" font-family="ui-monospace, monospace" font-size="12" fill="#737373">not-found-404</text>
   <g id="404 With Search &amp; Suggestions" transform="translate(64, 1180)">
     <rect id="container" x="0" y="0" width="1088" height="680" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="We could not find that page" x="543.99" y="207" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="30" font-weight="700" letter-spacing="-0.75" text-anchor="middle">We could not find that page</text>
+      <text id="We could not find that page" x="543.99" y="205" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="30" font-weight="700" letter-spacing="-0.75" text-anchor="middle">We could not find that page</text>
       <text id="The link may be out of date, or the page…" x="543.99" y="242" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" text-anchor="middle">The link may be out of date, or the page may have moved.</text>
       <text id="Here are a few ways forward." x="544" y="266" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" text-anchor="middle">Here are a few ways forward.</text>
+      <g id="icon search" transform="translate(332 318) scale(0.667 0.667)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m21 21-4.34-4.34" />
+        <circle cx="11" cy="11" r="8" />
+      </g>
       <rect id="field" x="320" y="305" width="360.61" height="42" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <rect id="button" x="688.61" y="305" width="79.39" height="42" rx="16" fill="#007f34" />
-      <text id="Search" x="728.3" y="319" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Search</text>
+      <rect id="button" x="688.61" y="305" width="79.39" height="42" rx="16" fill="#00782e" />
+      <text id="Search" x="728.3" y="331" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Search</text>
       <rect id="container 2" x="320" y="379" width="448" height="184" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Documentation" x="337" y="406" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Documentation</text>
+      <text id="Documentation" x="337" y="407" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Documentation</text>
       <text id="Guides and API reference" x="337" y="424" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Guides and API reference</text>
-      <text id="Dashboard" x="337" y="467" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Dashboard</text>
+      <g id="icon arrow-right" transform="translate(735 402) scale(0.667 0.667)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14" />
+        <path d="m12 5 7 7-7 7" />
+      </g>
+      <text id="Dashboard" x="337" y="468" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Dashboard</text>
       <text id="Your projects and settings" x="337" y="485" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Your projects and settings</text>
-      <text id="Status" x="337" y="528" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Status</text>
+      <g id="icon arrow-right 2" transform="translate(735 463) scale(0.667 0.667)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14" />
+        <path d="m12 5 7 7-7 7" />
+      </g>
+      <text id="Status" x="337" y="529" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Status</text>
       <text id="Current uptime and incidents" x="337" y="546" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Current uptime and incidents</text>
-      <text id="Back to home" x="469.91" y="609" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" text-anchor="middle">Back to home</text>
-      <text id="|" x="543.21" y="609" fill="#dbdee1" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" text-anchor="middle">|</text>
-      <text id="Previous page" x="617.3" y="609" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" text-anchor="middle">Previous page</text>
+      <g id="icon arrow-right 3" transform="translate(735 524) scale(0.667 0.667)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14" />
+        <path d="m12 5 7 7-7 7" />
+      </g>
+      <text id="Back to home" x="480.91" y="610" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" text-anchor="middle">Back to home</text>
+      <g id="icon house" transform="translate(414.453 597) scale(0.667 0.667)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" />
+        <path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+      </g>
+      <text id="|" x="543.21" y="610" fill="#dbdee1" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" text-anchor="middle">|</text>
+      <text id="Previous page" x="628.3" y="610" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" text-anchor="middle">Previous page</text>
+      <g id="icon arrow-left" transform="translate(561.063 597) scale(0.667 0.667)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m12 19-7-7 7-7" />
+        <path d="M19 12H5" />
+      </g>
   </g>
   <text id="Shimmer Skeleton List label" x="64" y="1976" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Shimmer Skeleton List</text>
   <text id="skeleton-list id" x="64" y="1990" font-family="ui-monospace, monospace" font-size="12" fill="#737373">skeleton-list</text>
@@ -95,28 +151,40 @@
   <g id="Permission Denied (403)" transform="translate(64, 2504)">
     <rect id="container" x="0" y="0" width="1088" height="746" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="container 2" x="520" y="81" width="48" height="48" rx="24" fill="#f3f2ee" />
+      <g id="icon lock" transform="translate(534 95) scale(0.833 0.833)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect rx="2" ry="2" x="3" y="11" width="18" height="11" />
+        <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+      </g>
       <text id="You do not have access to this" x="543.99" y="173" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="24" font-weight="700" letter-spacing="-0.6" text-anchor="middle">You do not have access to this</text>
       <text id="The page exists and you are signed in — …" x="544" y="208" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" text-anchor="middle">The page exists and you are signed in — your account</text>
       <text id="just is not on the list for it. Nothing …" x="543.99" y="228" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" text-anchor="middle">just is not on the list for it. Nothing has gone wrong,</text>
       <text id="and nothing you do here will change that…" x="543.99" y="248" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" text-anchor="middle">and nothing you do here will change that except asking.</text>
       <rect id="container 3" x="312" y="277" width="464" height="82" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
-      <text id="Resource" x="329" y="308" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Resource</text>
+      <text id="Resource" x="329" y="309" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Resource</text>
       <text id="northwind / billing-service" x="564.59" y="309" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">northwind / billing-service</text>
-      <text id="Signed in as" x="329" y="336" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Signed in as</text>
-      <text id="you@company.com" x="634.98" y="336" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">you@company.com</text>
+      <text id="Signed in as" x="329" y="337" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Signed in as</text>
+      <text id="you@company.com" x="634.98" y="337" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">you@company.com</text>
       <rect id="container 4" x="312" y="383" width="464" height="202" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
-      <text id="Who can let you in" x="329" y="414" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Who can let you in</text>
+      <text id="Who can let you in" x="329" y="415" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Who can let you in</text>
       <rect id="container 5" x="329" y="434" width="32" height="32" rx="16" fill="#f3f2ee" />
-      <text id="PR" x="329" y="446" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="600">PR</text>
-      <text id="Priya Raman" x="373" y="446" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Priya Raman</text>
+      <text id="PR" x="337" y="454" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="600">PR</text>
+      <text id="Priya Raman" x="373" y="447" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Priya Raman</text>
       <text id="Workspace admin" x="373" y="464" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Workspace admin</text>
       <rect id="container 6" x="329" y="482" width="32" height="32" rx="16" fill="#f3f2ee" />
-      <text id="TO" x="329" y="494" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="600">TO</text>
-      <text id="Tom Okafor" x="373" y="494" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Tom Okafor</text>
+      <text id="TO" x="337.16" y="502" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="600">TO</text>
+      <text id="Tom Okafor" x="373" y="495" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Tom Okafor</text>
       <text id="Project owner" x="373" y="512" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Project owner</text>
-      <rect id="link" x="329" y="532" width="430" height="36" rx="12" fill="#007f34" />
-      <text id="Request access" x="329" y="546" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Request access</text>
-      <text id="Back to where you were" x="544" y="619" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Back to where you were</text>
+      <rect id="link" x="329" y="532" width="430" height="36" rx="12" fill="#00782e" />
+      <text id="Request access" x="501.66" y="555" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Request access</text>
+      <g id="icon mail" transform="translate(479.656 542) scale(0.667 0.667)" fill="none" stroke="#fcfcfc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7" />
+        <rect rx="2" x="2" y="4" width="20" height="16" />
+      </g>
+      <text id="Back to where you were" x="555" y="620" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Back to where you were</text>
+      <g id="icon arrow-left" transform="translate(454.344 607) scale(0.667 0.667)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m12 19-7-7 7-7" />
+        <path d="M19 12H5" />
+      </g>
       <text id="If access was granted while this page wa…" x="543.99" y="661" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" text-anchor="middle">If access was granted while this page was open, reload to pick it up.</text>
   </g>
   <text id="Offline With Queued Changes label" x="64" y="3366" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Offline With Queued Changes</text>
@@ -125,20 +193,40 @@
     <rect id="container" x="0" y="0" width="1088" height="415.25" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="status" x="232" y="65" width="624" height="285.25" rx="16" fill="rgba(255, 157, 0, 0.051)" stroke="rgba(252, 152, 0, 0.4)" stroke-width="1" />
       <rect id="container 2" x="253" y="88" width="36" height="36" rx="12" fill="rgba(255, 154, 0, 0.149)" />
-      <text id="3 changes are saved on this device" x="301" y="102" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="600">3 changes are saved on this device</text>
+      <g id="icon wifi-off" transform="translate(262 97) scale(0.75 0.75)" fill="none" stroke="#bb4d00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 20h.01" />
+        <path d="M8.5 16.429a5 5 0 0 1 7 0" />
+        <path d="M5 12.859a10 10 0 0 1 5.17-2.69" />
+        <path d="M19 12.859a10 10 0 0 0-2.007-1.523" />
+        <path d="M2 8.82a15 15 0 0 1 4.177-2.643" />
+        <path d="M22 8.82a15 15 0 0 0-11.288-3.764" />
+        <path d="m2 2 20 20" />
+      </g>
+      <text id="3 changes are saved on this device" x="301" y="103" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="600">3 changes are saved on this device</text>
       <text id="You are offline. Keep working — edits ar…" x="301" y="130" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">You are offline. Keep working — edits are written locally and sent automatically the</text>
       <text id="moment the connection is back. Nothing i…" x="301" y="152.75" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">moment the connection is back. Nothing is lost by closing this tab, though it will not</text>
       <text id="send until you open it again." x="301" y="175.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">send until you open it again.</text>
       <rect id="button" x="301" y="194.25" width="103.17" height="32" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
-      <text id="Retry now" x="352.59" y="206.25" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500" text-anchor="middle">Retry now</text>
+      <text id="Retry now" x="362.59" y="214.25" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500" text-anchor="middle">Retry now</text>
+      <g id="icon refresh-cw" transform="translate(314 203.25) scale(0.583 0.583)" fill="none" stroke="#080c0f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8" />
+        <path d="M21 3v5h-5" />
+        <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16" />
+        <path d="M8 16H3v5" />
+      </g>
       <text id="Trying again in 8s · attempt 2" x="412.17" y="214.25" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Trying again in 8s · attempt 2</text>
       <rect id="container 3" x="233" y="246.25" width="622" height="103" fill="rgba(252, 252, 248, 0.4)" stroke="rgba(252, 152, 0, 0.302)" stroke-width="1" />
-      <text id="Not available until you reconnect" x="253" y="271.25" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Not available until you reconnect</text>
-      <text id="Searching across the workspace" x="253" y="293.25" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Searching across the workspace</text>
+      <text id="Not available until you reconnect" x="273" y="271.25" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Not available until you reconnect</text>
+      <g id="icon cloud-off" transform="translate(253 260.25) scale(0.583 0.583)" fill="none" stroke="#080c0f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m2 2 20 20" />
+        <path d="M5.782 5.782A7 7 0 0 0 9 19h8.5a4.5 4.5 0 0 0 1.307-.193" />
+        <path d="M21.532 16.5A4.5 4.5 0 0 0 17.5 10h-1.79A7.008 7.008 0 0 0 10 5.07" />
+      </g>
+      <text id="Searching across the workspace" x="263" y="293.25" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Searching across the workspace</text>
       <rect id="container 4" x="253" y="287.25" width="4" height="4" rx="2" fill="#575b60" />
-      <text id="Inviting people" x="253" y="313.25" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Inviting people</text>
+      <text id="Inviting people" x="263" y="313.25" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Inviting people</text>
       <rect id="container 5" x="253" y="307.25" width="4" height="4" rx="2" fill="#575b60" />
-      <text id="Publishing or sharing a link" x="253" y="333.25" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Publishing or sharing a link</text>
+      <text id="Publishing or sharing a link" x="263" y="333.25" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Publishing or sharing a link</text>
       <rect id="container 6" x="253" y="327.25" width="4" height="4" rx="2" fill="#575b60" />
   </g>
   <text id="Empty Because of Filters label" x="64" y="3929.25" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Empty Because of Filters</text>
@@ -147,7 +235,13 @@
     <rect id="container" x="0" y="0" width="1088" height="402" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="status" x="1" y="1" width="1086" height="400" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
       <rect id="container 2" x="520" y="50" width="48" height="48" rx="24" fill="#f3f2ee" />
-      <text id="No results match these filters" x="544" y="136" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" font-weight="600" text-anchor="middle">No results match these filters</text>
+      <g id="icon search-x" transform="translate(534 64) scale(0.833 0.833)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m13.5 8.5-5 5" />
+        <path d="m8.5 8.5 5 5" />
+        <circle cx="11" cy="11" r="8" />
+        <path d="m21 21-4.3-4.3" />
+      </g>
+      <text id="No results match these filters" x="543.99" y="138" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" font-weight="600" text-anchor="middle">No results match these filters</text>
       <text id="Nothing matched" x="382.98" y="169" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" text-anchor="middle">Nothing matched</text>
       <text id="with" x="518.33" y="169" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" text-anchor="middle">with</text>
       <text id="4" x="541.69" y="169" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" text-anchor="middle">4</text>
@@ -158,30 +252,55 @@
       <text id="in total." x="543.99" y="189" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" text-anchor="middle">in total.</text>
       <text id="“renewal”" x="471.35" y="169" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">“renewal”</text>
       <rect id="button" x="340.55" y="218" width="189.08" height="30" rx="15" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
-      <text id="Status:" x="376.43" y="237" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" text-anchor="middle">Status:</text>
-      <text id="Archived" x="434.12" y="237" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Archived</text>
+      <text id="Status:" x="376.43" y="238" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" text-anchor="middle">Status:</text>
+      <text id="Archived" x="434.12" y="238" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Archived</text>
       <text id="+148" x="481.77" y="237" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" text-anchor="middle">+148</text>
+      <g id="icon x" transform="translate(506.625 227) scale(0.5 0.5)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 6 6 18" />
+        <path d="m6 6 12 12" />
+      </g>
       <rect id="button 2" x="537.63" y="218" width="209.81" height="30" rx="15" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
-      <text id="Created:" x="578.07" y="237" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" text-anchor="middle">Created:</text>
-      <text id="Last 7 days" x="648.45" y="237" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Last 7 days</text>
+      <text id="Created:" x="578.07" y="238" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" text-anchor="middle">Created:</text>
+      <text id="Last 7 days" x="648.45" y="238" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Last 7 days</text>
       <text id="+96" x="701.91" y="237" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" text-anchor="middle">+96</text>
+      <g id="icon x 2" transform="translate(724.438 227) scale(0.5 0.5)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 6 6 18" />
+        <path d="m6 6 12 12" />
+      </g>
       <rect id="button 3" x="352" y="256" width="178.59" height="30" rx="15" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
-      <text id="Plan:" x="381.41" y="275" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" text-anchor="middle">Plan:</text>
-      <text id="Enterprise" x="437.37" y="275" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Enterprise</text>
+      <text id="Plan:" x="381.41" y="276" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" text-anchor="middle">Plan:</text>
+      <text id="Enterprise" x="437.37" y="276" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Enterprise</text>
       <text id="+31" x="486.26" y="275" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" text-anchor="middle">+31</text>
+      <g id="icon x 3" transform="translate(507.594 265) scale(0.5 0.5)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 6 6 18" />
+        <path d="m6 6 12 12" />
+      </g>
       <rect id="button 4" x="538.59" y="256" width="197.41" height="30" rx="15" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
-      <text id="Owner:" x="574.46" y="275" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" text-anchor="middle">Owner:</text>
-      <text id="Jordan Lee" x="639.85" y="275" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Jordan Lee</text>
+      <text id="Owner:" x="574.46" y="276" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" text-anchor="middle">Owner:</text>
+      <text id="Jordan Lee" x="639.85" y="276" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Jordan Lee</text>
       <text id="+12" x="691.69" y="275" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" text-anchor="middle">+12</text>
-      <rect id="button 5" x="299.42" y="315" width="325.73" height="36" rx="12" fill="#007f34" />
+      <g id="icon x 4" transform="translate(713 265) scale(0.5 0.5)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 6 6 18" />
+        <path d="m6 6 12 12" />
+      </g>
+      <rect id="button 5" x="299.42" y="315" width="325.73" height="36" rx="12" fill="#00782e" />
       <text id="Remove “" x="369.09" y="338" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Remove “</text>
       <text id="Status" x="422.89" y="338" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Status</text>
       <text id=":" x="448.83" y="338" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">:</text>
       <text id="Archived 2" x="482.31" y="338" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Archived</text>
       <text id="”" x="515.02" y="338" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">”</text>
-      <text id="— 148 results" x="566.6" y="337" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" text-anchor="middle">— 148 results</text>
+      <g id="icon funnel-x" transform="translate(315.422 325) scale(0.667 0.667)" fill="none" stroke="#fcfcfc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12.531 3H3a1 1 0 0 0-.742 1.67l7.225 7.989A2 2 0 0 1 10 14v6a1 1 0 0 0 .553.895l2 1A1 1 0 0 0 14 21v-7a2 2 0 0 1 .517-1.341l.427-.473" />
+        <path d="m16.5 3.5 5 5" />
+        <path d="m21.5 3.5-5 5" />
+      </g>
+      <text id="— 148 results" x="566.6" y="338" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" text-anchor="middle">— 148 results</text>
       <rect id="button 6" x="637.16" y="314" width="151.42" height="38" rx="12" fill="none" stroke="#dbdee1" stroke-width="1" />
-      <text id="Clear all filters" x="712.87" y="328" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Clear all filters</text>
+      <text id="Clear all filters" x="723.87" y="338" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Clear all filters</text>
+      <g id="icon rotate-ccw" transform="translate(654.156 325) scale(0.667 0.667)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+        <path d="M3 3v5h5" />
+      </g>
   </g>
   <text id="Scheduled Maintenance Window label" x="64" y="4479.25" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Scheduled Maintenance Window</text>
   <text id="maintenance-window-state id" x="64" y="4493.25" font-family="ui-monospace, monospace" font-size="12" fill="#737373">maintenance-window-state</text>
@@ -189,23 +308,34 @@
     <rect id="container" x="0" y="0" width="1088" height="630" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="section" x="256" y="1" width="576" height="628" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
       <rect id="container 2" x="520" y="50" width="48" height="48" rx="24" fill="rgba(245, 147, 0, 0.102)" />
+      <g id="icon wrench" transform="translate(534 64) scale(0.833 0.833)" fill="none" stroke="#e17100" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
+      </g>
       <text id="Scheduled maintenance in progress" x="544" y="142" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="24" font-weight="600" text-anchor="middle">Scheduled maintenance in progress</text>
       <text id="We are migrating the primary database. D…" x="544" y="177" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" text-anchor="middle">We are migrating the primary database. Dashboards, the CLI and sign-</text>
       <text id="in are unavailable until this finishes." x="543.99" y="197" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" text-anchor="middle">in are unavailable until this finishes.</text>
       <rect id="container 3" x="305" y="230" width="478" height="132" rx="16" fill="rgba(242, 242, 237, 0.4)" stroke="#dbdee1" stroke-width="1" />
       <text id="Expected back in" x="544" y="263" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500" letter-spacing="0.6" text-anchor="middle">Expected back in</text>
-      <text id="02:14:09" x="544" y="309" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="36" font-weight="700" text-anchor="middle">02:14:09</text>
-      <text id="Estimated finish at" x="544" y="335" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" text-anchor="middle">Estimated finish at</text>
+      <text id="02:14:09" x="544" y="306" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="36" font-weight="700" text-anchor="middle">02:14:09</text>
+      <text id="Estimated finish at" x="486.9" y="336" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" text-anchor="middle">Estimated finish at</text>
       <text id="10:00 GMT+5:30" x="605.16" y="336" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">10:00 GMT+5:30</text>
       <text id="Still working" x="305" y="402" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="600" letter-spacing="0.6">Still working</text>
-      <text id="Published sites stay online and serving" x="305" y="430" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Published sites stay online and serving</text>
+      <text id="Published sites stay online and serving" x="319" y="431" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Published sites stay online and serving</text>
       <rect id="container 4" x="305" y="422" width="6" height="6" rx="3" fill="#00bc7d" />
-      <text id="The public API continues to read from ca…" x="305" y="456" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">The public API continues to read from cache</text>
+      <text id="The public API continues to read from ca…" x="319" y="457" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">The public API continues to read from cache</text>
       <rect id="container 5" x="305" y="448" width="6" height="6" rx="3" fill="#00bc7d" />
-      <text id="Existing sessions are not signed out" x="305" y="482" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Existing sessions are not signed out</text>
+      <text id="Existing sessions are not signed out" x="319" y="483" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Existing sessions are not signed out</text>
       <rect id="container 6" x="305" y="474" width="6" height="6" rx="3" fill="#00bc7d" />
-      <rect id="link" x="470.36" y="516" width="147.27" height="36" rx="12" fill="#007f34" />
-      <text id="Live status" x="543.99" y="530" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Live status</text>
-      <text id="Hosted separately, so it stays up when t…" x="544" y="576" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" text-anchor="middle">Hosted separately, so it stays up when this does not.</text>
+      <rect id="link" x="470.36" y="516" width="147.27" height="36" rx="12" fill="#00782e" />
+      <text id="Live status" x="544.99" y="539" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Live status</text>
+      <g id="icon clock" transform="translate(486.359 526) scale(0.667 0.667)" fill="none" stroke="#fcfcfc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 6v6l4 2" />
+        <circle cx="12" cy="12" r="10" />
+      </g>
+      <g id="icon arrow-up-right" transform="translate(587.625 527) scale(0.583 0.583)" fill="none" stroke="#fcfcfc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M7 7h10v10" />
+        <path d="M7 17 17 7" />
+      </g>
+      <text id="Hosted separately, so it stays up when t…" x="543.99" y="576" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" text-anchor="middle">Hosted separately, so it stays up when this does not.</text>
   </g>
 </svg>

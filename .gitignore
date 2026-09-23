@@ -86,3 +86,6 @@ firebase-service-account.json
 # about bare patterns matching at any depth — here that is the intent.)
 *.vsix
 hoverlab-*.tgz
+
+# Stress-matrix screenshots (scripts/stress-matrix.mts): local evidence, not shipped.
+/.stress/

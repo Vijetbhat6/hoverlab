@@ -29,8 +29,12 @@
  * A static frame. Hover states, transitions and animation do not exist in
  * SVG and are not smuggled in — the same limit `/figma` already states about
  * `match_design`, and the same one `figma-svg.ts` states about effects. It
- * is also not a component import: what arrives is a group of rectangles and
- * text layers, not an instance with props.
+ * is also not a component import: what arrives is rectangles, text layers and
+ * icon groups of real vector paths, not an instance with props.
+ *
+ * Text is placed where the browser DREW it (a range over its text nodes, with
+ * the font's own ascent for the baseline), not at its element's box. Checked
+ * against an independent baseline probe: 0.00px error on 116 layers.
  *
  * ── FORMAT CONSTRAINTS, all load-bearing ────────────────────────────────
  *
@@ -83,7 +87,55 @@ export interface FrameText {
   anchor: 'start' | 'middle' | 'end'
 }
 
-export type FrameNode = FrameRect | FrameText
+/**
+ * One shape inside a traced icon. `attrs` carries geometry (`d`, `cx`, `points`,
+ * …) and only the paint that differs from the enclosing group, so a Lucide
+ * icon's four paths do not each restate `stroke-linecap="round"`.
+ */
+export interface FrameIconShape {
+  tag: string
+  attrs: Record<string, string>
+  children: FrameIconShape[]
+}
+
+/**
+ * An inline `<svg>` — in practice a Lucide icon — as real vector geometry.
+ *
+ * The walker used to see an `<svg>` as an element with no fill and no border
+ * and emit nothing, so every chevron, check mark and menu glyph in both kits
+ * was simply absent. This carries the shapes across instead of a bitmap or a
+ * placeholder box, which is what makes them recolourable and resizable once
+ * they land in Figma.
+ */
+export interface FrameIcon {
+  kind: 'icon'
+  name: string
+  /** Top-left of the LAYOUT box, before any CSS transform. */
+  x: number
+  y: number
+  width: number
+  height: number
+  /** The svg's own coordinate system; the shapes are written in these units. */
+  viewBox: { x: number; y: number; width: number; height: number }
+  /** `preserveAspectRatio="none"` stretches; everything else fits and centres. */
+  stretch: boolean
+  /**
+   * A CSS transform (`rotate-180` on an open chevron, an RTL flip) as the
+   * matrix `[a b c d e f]`, applied about the box centre as CSS does. Null
+   * when there is none, which is nearly always.
+   */
+  matrix: [number, number, number, number, number, number] | null
+  opacity: number
+  /** Already normalized; `'none'` rather than null so the group states it. */
+  fill: string
+  stroke: string
+  strokeWidth: number
+  strokeLinecap: string
+  strokeLinejoin: string
+  shapes: FrameIconShape[]
+}
+
+export type FrameNode = FrameRect | FrameText | FrameIcon
 
 export interface Frame {
   name: string
@@ -165,6 +217,83 @@ function textElement(node: FrameText, name: string): string {
   return `  <text ${attrs.join(' ')}>${escapeXml(node.text)}</text>`
 }
 
+/** Three decimals: a transform's scale is a ratio, and 0.667 vs 0.67 shows at 24px. */
+function round3(value: number): number {
+  return Math.round(value * 1000) / 1000
+}
+
+function shapeElement(shape: FrameIconShape, depth: number): string[] {
+  const pad = '  '.repeat(depth)
+  const attrs = Object.entries(shape.attrs)
+    .map(([key, value]) => ` ${key}="${escapeXml(value)}"`)
+    .join('')
+
+  if (shape.children.length === 0) return [`${pad}<${shape.tag}${attrs} />`]
+  return [
+    `${pad}<${shape.tag}${attrs}>`,
+    ...shape.children.flatMap((child) => shapeElement(child, depth + 1)),
+    `${pad}</${shape.tag}>`,
+  ]
+}
+
+/**
+ * The transform that places the icon's viewBox inside its layout box, then
+ * applies the element's own CSS transform about that box's centre.
+ *
+ * Right to left, a point in viewBox units is: scaled and centred into the
+ * box (`preserveAspectRatio`'s default, `xMidYMid meet`), moved to its place
+ * relative to the centre, transformed, and moved to the box's position in the
+ * frame. One `transform` attribute, so Figma imports one group.
+ */
+export function iconTransform(node: FrameIcon): string {
+  const { x, y, width, height, viewBox } = node
+  const sx = width / viewBox.width
+  const sy = height / viewBox.height
+  const fit = node.stretch ? { x: sx, y: sy } : { x: Math.min(sx, sy), y: Math.min(sx, sy) }
+  const offsetX = (width - viewBox.width * fit.x) / 2 - viewBox.x * fit.x
+  const offsetY = (height - viewBox.height * fit.y) / 2 - viewBox.y * fit.y
+
+  const parts = [`translate(${round3(x)} ${round3(y)})`]
+  if (node.matrix) {
+    const [a, b, c, d, e, f] = node.matrix.map(round3)
+    parts.push(
+      `translate(${round3(width / 2)} ${round3(height / 2)})`,
+      `matrix(${a} ${b} ${c} ${d} ${e} ${f})`,
+      `translate(${round3(-width / 2)} ${round3(-height / 2)})`,
+    )
+  }
+  // A square icon in a square box needs no centring; leave the no-op out.
+  if (Math.abs(offsetX) > 0.0005 || Math.abs(offsetY) > 0.0005) {
+    parts.push(`translate(${round3(offsetX)} ${round3(offsetY)})`)
+  }
+  parts.push(`scale(${round3(fit.x)} ${round3(fit.y)})`)
+  return parts.join(' ')
+}
+
+function iconElement(node: FrameIcon, name: string): string[] {
+  const attrs = [
+    `id="${escapeXml(name)}"`,
+    `transform="${iconTransform(node)}"`,
+    `fill="${node.fill}"`,
+    `stroke="${node.stroke}"`,
+  ]
+
+  if (node.stroke !== 'none') {
+    attrs.push(
+      `stroke-width="${round3(node.strokeWidth)}"`,
+      `stroke-linecap="${node.strokeLinecap}"`,
+      `stroke-linejoin="${node.strokeLinejoin}"`,
+    )
+  }
+  if (node.opacity < 1) attrs.push(`opacity="${round(node.opacity)}"`)
+
+  return [
+    `  <g ${attrs.join(' ')}>`,
+    ...node.shapes.flatMap((shape) => shapeElement(shape, 2)),
+    '  </g>',
+  ]
+}
+
 /**
  * One artboard's worth of SVG.
  *
@@ -177,8 +306,12 @@ function textElement(node: FrameText, name: string): string {
 export function serializeFrame(frame: Frame): string {
   const names = uniqueNames(frame.nodes)
 
-  const body = frame.nodes.map((node, i) =>
-    node.kind === 'rect' ? rectElement(node, names[i]) : textElement(node, names[i]),
+  const body = frame.nodes.flatMap((node, i) =>
+    node.kind === 'rect'
+      ? [rectElement(node, names[i])]
+      : node.kind === 'icon'
+        ? iconElement(node, names[i])
+        : [textElement(node, names[i])],
   )
 
   const background = frame.background
@@ -441,9 +574,317 @@ function ownTextLines(el: Element, budget: { left: number }): TextLine[] {
   return lines
 }
 
+/**
+ * Where the element's own text was actually drawn, as one box.
+ *
+ * ── WHY THE ELEMENT'S BOX IS THE WRONG ANCHOR ───────────────────────────
+ *
+ * Single-line text used to be placed at its element's box: `x = box.left`,
+ * `y = box.top + fontSize`. That is the text only when the element has no
+ * padding and no centring. A label in a `px-4` button is drawn 16px inside its
+ * box, and a `justify-center` label is drawn in the middle of it, so both
+ * pasted 16px or more to the left of where the browser showed them. It was
+ * the same error in every frame in both kits, and invisible in any check that
+ * did not overlay the frame on the page.
+ *
+ * ── HOW ─────────────────────────────────────────────────────────────────
+ *
+ * One `Range` per text node, not one per character: an element is a single
+ * measurement here, which is why this can run on every label without a
+ * budget. `getClientRects` rather than the bounding box, because collapsed
+ * whitespace produces empty rects that would drag the left edge to the box.
+ * Returns null for an element whose text has no geometry, and the caller
+ * falls back to the box it used before.
+ */
+function ownTextBox(el: Element): { left: number; top: number; width: number } | null {
+  const doc = el.ownerDocument
+  if (!doc) return null
+
+  const range = doc.createRange()
+  let left = Infinity
+  let right = -Infinity
+  let top = Infinity
+
+  for (const child of Array.from(el.childNodes)) {
+    if (child.nodeType !== 3 || !(child.textContent ?? '').trim()) continue
+    range.selectNodeContents(child)
+    for (const rect of Array.from(range.getClientRects())) {
+      if (rect.width === 0 && rect.height === 0) continue
+      left = Math.min(left, rect.left)
+      right = Math.max(right, rect.right)
+      top = Math.min(top, rect.top)
+    }
+  }
+
+  return Number.isFinite(left) ? { left, top, width: right - left } : null
+}
+
+/**
+ * Distance from the top of a text run's box to its baseline, in px.
+ *
+ * A `Range` reports the run's content box, whose top sits one font ascent
+ * above the baseline; SVG positions text by its baseline. The old
+ * approximation, `top + fontSize`, was fitted to an element box that included
+ * line-height leading and is only close for one font at one size. The canvas
+ * knows the real ascent of the font actually used, and asking it is one
+ * measurement per distinct font, cached for one walk — not longer, or a click
+ * before a web font loaded would keep the fallback metrics for the whole session.
+ */
+function fontAscent(
+  ctx: CanvasRenderingContext2D,
+  style: CSSStyleDeclaration,
+  fontSize: number,
+  cache: Map<string, number>,
+) {
+  const font = `${style.fontStyle} ${style.fontWeight} ${fontSize}px ${style.fontFamily}`
+  const cached = cache.get(font)
+  if (cached !== undefined) return cached
+
+  ctx.font = font
+  const ascent = ctx.measureText('Hg').fontBoundingBoxAscent
+  // A browser without the metric, or a font that has not loaded, reports 0 or
+  // undefined. Fall back to the shape of a typical sans rather than a baseline
+  // on the top edge.
+  const resolved = Number.isFinite(ascent) && ascent > 0 ? ascent : fontSize * 0.95
+  cache.set(font, resolved)
+  return resolved
+}
+
 function numeric(value: string): number {
   const parsed = Number.parseFloat(value)
   return Number.isFinite(parsed) ? parsed : 0
+}
+
+/* ------------------------------------------------------------------ *
+ *  Inline SVG — icons
+ * ------------------------------------------------------------------ */
+
+const SVG_NS = 'http://www.w3.org/2000/svg'
+
+/** Shape elements an icon may contain. Anything else means "not an icon". */
+const ICON_SHAPES = new Set(['path', 'circle', 'ellipse', 'line', 'polyline', 'polygon', 'rect', 'g'])
+
+/** Geometry that is copied verbatim; paint is resolved from computed style instead. */
+const GEOMETRY_ATTRS = [
+  'd',
+  'cx',
+  'cy',
+  'r',
+  'rx',
+  'ry',
+  'x',
+  'y',
+  'width',
+  'height',
+  'x1',
+  'y1',
+  'x2',
+  'y2',
+  'points',
+  'transform',
+]
+
+/** More than this and it is an illustration, not an icon; left to the browser. */
+const MAX_ICON_ELEMENTS = 64
+
+interface IconPaint {
+  fill: string
+  stroke: string
+  strokeWidth: number
+  strokeLinecap: string
+  strokeLinejoin: string
+}
+
+/**
+ * The layer name a designer expects: `icon chevron-down`.
+ *
+ * lucide-react writes both `lucide-chevron-down` and, in newer releases,
+ * `lucide-chevron-down-icon`. The unsuffixed one is the icon's name.
+ */
+function iconName(svg: Element): string {
+  const classes = (svg.getAttribute('class') ?? '').split(/\s+/)
+  const names = classes.filter((c) => c.startsWith('lucide-')).map((c) => c.slice(7))
+  const name = names.find((n) => !n.endsWith('-icon')) ?? names[0]?.replace(/-icon$/, '')
+  return name ? `icon ${name}` : 'icon'
+}
+
+/**
+ * A CSS transform on the svg element as one matrix, or null for none.
+ *
+ * Modern CSS spreads a transform over four properties — Tailwind v4's
+ * `rotate-180` sets `rotate`, not `transform` — so all of them are read, in
+ * the order the spec composes them: translate, rotate, scale, transform.
+ */
+function elementMatrix(style: CSSStyleDeclaration): DOMMatrix | null {
+  try {
+    let m = new DOMMatrix()
+    if (style.translate && style.translate !== 'none') {
+      const [tx, ty = '0px'] = style.translate.split(/\s+/)
+      m = m.multiply(new DOMMatrix(`translate(${tx}, ${ty})`))
+    }
+    if (style.rotate && style.rotate !== 'none') m = m.multiply(new DOMMatrix(`rotate(${style.rotate})`))
+    if (style.scale && style.scale !== 'none') {
+      const [sx, sy = sx] = style.scale.split(/\s+/)
+      m = m.multiply(new DOMMatrix(`scale(${sx}, ${sy})`))
+    }
+    if (style.transform && style.transform !== 'none') m = m.multiply(new DOMMatrix(style.transform))
+    return m.isIdentity ? null : m
+  } catch {
+    // A 3D rotation or a unit the constructor rejects: draw it untransformed
+    // rather than lose the icon.
+    return null
+  }
+}
+
+/**
+ * Trace an inline `<svg>` into vector layers, or return null to leave it alone.
+ *
+ * Fails closed. Anything this cannot reproduce faithfully — a gradient or
+ * pattern paint, a mask, a filter, `<use>`, `<text>`, an embedded image, a
+ * nested `<svg>` — makes the whole element ineligible and it stays untraced,
+ * which is the old behaviour rather than a wrong picture. Shapes are read
+ * from the browser's COMPUTED paint, so `stroke="currentColor"`, a Tailwind
+ * `text-primary` and a `stroke-[1.5]` all arrive as the colour and width the
+ * reader is looking at.
+ */
+function traceSvg(
+  svg: Element,
+  box: DOMRect,
+  style: CSSStyleDeclaration,
+  origin: DOMRect,
+  color: (value: string) => string | null,
+  opacity: number,
+): FrameIcon | null {
+  if (svg.namespaceURI !== SVG_NS || svg.localName !== 'svg') return null
+
+  const elements = svg.querySelectorAll('*')
+  if (elements.length === 0 || elements.length > MAX_ICON_ELEMENTS) return null
+
+  const viewBoxAttr = (svg.getAttribute('viewBox') ?? '').trim().split(/[\s,]+/).map(Number)
+  const [vx, vy, vw, vh] = viewBoxAttr
+  const hasViewBox = viewBoxAttr.length === 4 && viewBoxAttr.every(Number.isFinite) && vw > 0 && vh > 0
+
+  const layoutWidth = numeric(style.width) || box.width
+  const layoutHeight = numeric(style.height) || box.height
+
+  /*
+   * `vector-effect: non-scaling-stroke` keeps a line a fixed number of screen
+   * pixels however far its viewBox is stretched — how every sparkline and
+   * chart gridline here is drawn, under `preserveAspectRatio="none"`. Figma's
+   * importer has no such property, so the stroke would be scaled with the
+   * geometry: a 2px line becomes 2 x the horizontal factor on a steep segment.
+   * Under a UNIFORM scale that is correctable (divide the width by it). Under
+   * a stretch it is not, and the honest answer is to leave the svg untraced.
+   */
+  const fitX = layoutWidth / (hasViewBox ? vw : layoutWidth)
+  const fitY = layoutHeight / (hasViewBox ? vh : layoutHeight)
+  const stretch = (svg.getAttribute('preserveAspectRatio') ?? '').trim() === 'none'
+  const uniform = stretch ? Math.abs(fitX - fitY) <= 0.01 * Math.max(fitX, fitY) : true
+  const strokeScale = stretch ? fitX : Math.min(fitX, fitY)
+
+  const paintOf = (s: CSSStyleDeclaration): IconPaint | null => {
+    if (s.fill.includes('url(') || s.stroke.includes('url(')) return null
+    const nonScaling = s.vectorEffect === 'non-scaling-stroke'
+    if (nonScaling && !uniform) return null
+    return {
+      fill: color(s.fill) ?? 'none',
+      stroke: color(s.stroke) ?? 'none',
+      strokeWidth: nonScaling ? numeric(s.strokeWidth) / strokeScale : numeric(s.strokeWidth),
+      strokeLinecap: s.strokeLinecap || 'butt',
+      strokeLinejoin: s.strokeLinejoin || 'miter',
+    }
+  }
+
+  const rootPaint = paintOf(style)
+  if (!rootPaint) return null
+
+  let refused = false
+
+  const trace = (el: Element, inherited: IconPaint): FrameIconShape | null => {
+    const tag = el.localName
+    if (!ICON_SHAPES.has(tag)) {
+      // <title> and <desc> carry no pixels; everything else does or might.
+      if (tag === 'title' || tag === 'desc') return null
+      refused = true
+      return null
+    }
+
+    const s = getComputedStyle(el)
+    if (s.display === 'none' || s.visibility === 'hidden') return null
+    if (
+      (s.mask && s.mask !== 'none') ||
+      (s.filter && s.filter !== 'none') ||
+      (s.clipPath && s.clipPath !== 'none')
+    ) {
+      refused = true
+      return null
+    }
+
+    const paint = paintOf(s)
+    if (!paint) {
+      refused = true
+      return null
+    }
+
+    const attrs: Record<string, string> = {}
+    for (const name of GEOMETRY_ATTRS) {
+      const value = el.getAttribute(name)
+      if (value !== null) attrs[name] = value
+    }
+
+    // Only what differs from the enclosing group, so a four-path icon states
+    // its colour once. `opacity` is not inherited and is stated where it is.
+    if (paint.fill !== inherited.fill) attrs.fill = paint.fill
+    if (paint.stroke !== inherited.stroke) attrs.stroke = paint.stroke
+    if (paint.stroke !== 'none') {
+      if (paint.strokeWidth !== inherited.strokeWidth) attrs['stroke-width'] = String(round3(paint.strokeWidth))
+      if (paint.strokeLinecap !== inherited.strokeLinecap) attrs['stroke-linecap'] = paint.strokeLinecap
+      if (paint.strokeLinejoin !== inherited.strokeLinejoin) attrs['stroke-linejoin'] = paint.strokeLinejoin
+    }
+    const shapeOpacity = numeric(s.opacity || '1')
+    if (shapeOpacity < 1) attrs.opacity = String(round3(shapeOpacity))
+
+    const children: FrameIconShape[] = []
+    for (const child of Array.from(el.children)) {
+      const traced = trace(child, paint)
+      if (traced) children.push(traced)
+    }
+
+    return { tag, attrs, children }
+  }
+
+  const shapes: FrameIconShape[] = []
+  for (const child of Array.from(svg.children)) {
+    const traced = trace(child, rootPaint)
+    if (traced) shapes.push(traced)
+  }
+  if (refused || shapes.length === 0) return null
+
+  // With a transform, the bounding box is the TRANSFORMED extent. The layout
+  // box is the same shape centred on the same point, shifted by the
+  // matrix's own translation, so it is recovered from the centre.
+  const matrix = elementMatrix(style)
+  const shiftX = matrix?.e ?? 0
+  const shiftY = matrix?.f ?? 0
+  const centreX = box.left + box.width / 2 - shiftX
+  const centreY = box.top + box.height / 2 - shiftY
+
+  return {
+    kind: 'icon',
+    name: iconName(svg),
+    x: centreX - layoutWidth / 2 - origin.left,
+    y: centreY - layoutHeight / 2 - origin.top,
+    width: layoutWidth,
+    height: layoutHeight,
+    viewBox: hasViewBox
+      ? { x: vx, y: vy, width: vw, height: vh }
+      : { x: 0, y: 0, width: layoutWidth, height: layoutHeight },
+    stretch,
+    matrix: matrix ? [matrix.a, matrix.b, matrix.c, matrix.d, matrix.e, matrix.f] : null,
+    opacity,
+    ...rootPaint,
+    shapes,
+  }
 }
 
 /**
@@ -472,6 +913,34 @@ function trimFontStack(stack: string): string {
  * static frame: a child is emitted after its parent, so it lands on top,
  * which is what a designer expects from a pasted group.
  */
+/** A rectangle in viewport coordinates, for tracking what an ancestor clips. */
+interface ClipBox {
+  left: number
+  top: number
+  right: number
+  bottom: number
+}
+
+/** Whether two boxes share any area. Strict, so a zero-height clip contains nothing. */
+function overlaps(a: DOMRect, b: ClipBox): boolean {
+  return a.left < b.right && a.right > b.left && a.top < b.bottom && a.bottom > b.top
+}
+
+function intersect(clip: ClipBox | null, box: DOMRect): ClipBox {
+  if (!clip) return { left: box.left, top: box.top, right: box.right, bottom: box.bottom }
+  const left = Math.max(clip.left, box.left)
+  const top = Math.max(clip.top, box.top)
+  // Never inverted: an empty intersection is a zero-size box, which overlaps nothing.
+  return {
+    left,
+    top,
+    right: Math.max(left, Math.min(clip.right, box.right)),
+    bottom: Math.max(top, Math.min(clip.bottom, box.bottom)),
+  }
+}
+
+const CLIPPING = new Set(['hidden', 'clip'])
+
 export function collectFrameNodes(root: HTMLElement, options: CollectOptions = {}): Frame {
   const minSize = options.minSize ?? 2
   const maxNodes = options.maxNodes ?? 600
@@ -502,7 +971,19 @@ export function collectFrameNodes(root: HTMLElement, options: CollectOptions = {
   const rootStyle = getComputedStyle(root)
   const background = normalizeColor(rootStyle.backgroundColor, ctx)
 
-  const walk = (el: Element) => {
+  /*
+   * `normalizeColor` rasterizes a pixel per call. An icon reads fill and stroke
+   * for every shape, and the same two or three colours repeat down a page, so
+   * they are memoised for the length of one walk.
+   */
+  const ascents = new Map<string, number>()
+  const colors = new Map<string, string | null>()
+  const color = (value: string): string | null => {
+    if (!colors.has(value)) colors.set(value, normalizeColor(value, ctx))
+    return colors.get(value) ?? null
+  }
+
+  const walk = (el: Element, clip: ClipBox | null) => {
     if (nodes.length >= maxNodes) return
     if (SKIPPED_TAGS.has(el.tagName)) return
 
@@ -529,6 +1010,32 @@ export function collectFrameNodes(root: HTMLElement, options: CollectOptions = {
     if (style.filter && style.filter.includes('blur(')) return
 
     const box = el.getBoundingClientRect()
+
+    /*
+     * Content that `overflow: hidden` hides is not drawn.
+     *
+     * The walker used to read only `display`, `visibility`, opacity and blur, so
+     * a collapsed accordion panel — a zero-height `overflow-hidden` box whose
+     * text is still laid out at its natural height — was emitted in full and
+     * pasted as its own body copy piled on top of the headers beneath it. The
+     * browser never shows that text; the frame must not either.
+     *
+     * Only `hidden` and `clip`, on both axes. A scroll container (`auto`,
+     * `scroll`) really does contain content a designer may want to see, and
+     * changing what every scrolling block traces is a larger decision than this
+     * fix. Absolute and fixed elements are never dropped here: they can escape
+     * an ancestor's clip, and telling whether they do needs the containing
+     * block, which this walk does not track.
+     */
+    if (
+      clip &&
+      !overlaps(box, clip) &&
+      style.position !== 'absolute' &&
+      style.position !== 'fixed'
+    ) {
+      return
+    }
+
     const x = box.left - origin.left
     const y = box.top - origin.top
 
@@ -602,55 +1109,78 @@ export function collectFrameNodes(root: HTMLElement, options: CollectOptions = {
          * slower to spare the few headlines that actually wrap.
          */
         const lineHeight = numeric(style.lineHeight) || fontSize * 1.2
-        const lines =
+        const measured =
           box.height >= lineHeight * 1.7 ? ownTextLines(el, textBudget) : []
 
-        if (lines.length > 1) {
-          for (const line of lines) {
-            const lx = line.left - origin.left
-            const anchorX =
-              anchor === 'middle'
-                ? lx + line.width / 2
-                : anchor === 'end'
-                  ? lx + line.width
-                  : lx
-            nodes.push({
-              kind: 'text',
-              name: line.text.length > 40 ? `${line.text.slice(0, 40)}…` : line.text,
-              x: anchorX,
-              // Same baseline approximation as below, per line box.
-              y: line.top - origin.top + fontSize,
-              text: line.text,
-              ...shared,
-            })
-          }
-        } else {
-          /*
-           * SVG places text on its baseline; the DOM gives a box. Approximating
-           * the baseline as the box top plus the font size is close enough for
-           * a frame a designer will nudge anyway, and much closer than using
-           * the box top raw — which would float every label above its own
-           * button by most of a line.
-           */
+        /*
+         * Every text layer is positioned where the browser DREW it — the
+         * measured line box — never at its element's box. A wrapped block
+         * already was; a single line now is too, from one range over its text
+         * nodes. See `ownTextBox` for the 16px error this replaced.
+         *
+         * A tall box holding one line (a `h-10` button) measures as a single
+         * line above, so it takes the same path. The element's box is the
+         * fallback only for text with no geometry at all.
+         */
+        let placed: TextLine[] = measured
+        if (placed.length === 0) {
+          const drawn = ownTextBox(el)
+          placed = [
+            {
+              text,
+              left: drawn?.left ?? box.left,
+              top: drawn?.top ?? box.top,
+              width: drawn?.width ?? box.width,
+            },
+          ]
+        }
+
+        /*
+         * SVG places text on its baseline; a range gives the run's box, whose
+         * top is one font ascent above it. Adding the font's real ascent puts
+         * the baseline where the browser has it, per font and size, where the
+         * old `top + fontSize` was right for one font at one leading.
+         */
+        const ascent = fontAscent(ctx, style, fontSize, ascents)
+        const split = placed.length > 1
+
+        for (const line of placed) {
+          const lx = line.left - origin.left
           const anchorX =
-            anchor === 'middle' ? x + box.width / 2 : anchor === 'end' ? x + box.width : x
+            anchor === 'middle' ? lx + line.width / 2 : anchor === 'end' ? lx + line.width : lx
+          const label = split ? line.text : text
 
           nodes.push({
             kind: 'text',
-            name: text.length > 40 ? `${text.slice(0, 40)}…` : text,
+            name: label.length > 40 ? `${label.slice(0, 40)}…` : label,
             x: anchorX,
-            y: y + fontSize,
-            text,
+            y: line.top - origin.top + ascent,
+            text: split ? line.text : text,
             ...shared,
           })
         }
       }
     }
 
-    for (const child of Array.from(el.children)) walk(child)
+    /*
+     * An inline SVG is drawn, not descended into. `traceSvg` returns null for
+     * anything it cannot reproduce faithfully, and then the walk carries on
+     * exactly as it did before icons were traced.
+     */
+    if (el.namespaceURI === SVG_NS && el.localName === 'svg' && box.width >= minSize && box.height >= minSize) {
+      const icon = traceSvg(el, box, style, origin, color, opacity)
+      if (icon) {
+        nodes.push(icon)
+        return
+      }
+    }
+
+    const clipsBoth = CLIPPING.has(style.overflowX) && CLIPPING.has(style.overflowY)
+    const childClip = clipsBoth ? intersect(clip, box) : clip
+    for (const child of Array.from(el.children)) walk(child, childClip)
   }
 
-  for (const child of Array.from(root.children)) walk(child)
+  for (const child of Array.from(root.children)) walk(child, null)
 
   return {
     name: root.dataset.figmaFrameName || 'Frame',

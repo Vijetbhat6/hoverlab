@@ -160,7 +160,7 @@ export function CartDrawer({
             type="button"
             aria-label="Close bag"
             onClick={() => setOpen(false)}
-            className="absolute inset-0 z-30 cursor-default bg-black/40 backdrop-blur-sm"
+            className="absolute inset-0 z-30 cursor-default bg-black/40 backdrop-blur-sm border border-transparent"
           />
 
           <div
@@ -198,9 +198,9 @@ export function CartDrawer({
                   </div>
 
                   <div className="min-w-0 flex-1">
-                    <h3 className="truncate text-sm font-medium">{line.name}</h3>
+                    <h3 data-stress-ignore className="truncate text-sm font-medium">{line.name}</h3>
                     {line.variant ? (
-                      <p className="mt-0.5 text-xs text-muted-foreground">{line.variant}</p>
+                      <p className="mt-0.5 break-words text-xs text-muted-foreground">{line.variant}</p>
                     ) : null}
                     <p className="mt-2 text-sm text-muted-foreground">
                       {line.quantity} × {formatPrice(line.price, currency, locale)}

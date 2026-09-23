@@ -12,19 +12,43 @@
 
 import * as React from 'react'
 
+/**
+ * One request per artifact per page load, however many badges ask.
+ *
+ * An effect page renders this in more than one place (the spec card and the
+ * facts strip, at least), so the same `?id=` was fetched three times — three
+ * function calls and three Firestore reads for one number. Sharing the
+ * promise keeps the second and third from firing while the first is in
+ * flight, which is exactly when they mount. Failures are not kept, so a
+ * dropped request can be retried by the next mount.
+ */
+const recentByArtifact = new Map<string, Promise<number>>()
+
+function fetchRecent(id: string): Promise<number> {
+  let pending = recentByArtifact.get(id)
+  if (!pending) {
+    pending = fetch(`/api/usage?id=${encodeURIComponent(id)}`)
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data: { recent?: number } | null) =>
+        typeof data?.recent === 'number' ? data.recent : 0,
+      )
+      .catch(() => {
+        recentByArtifact.delete(id)
+        return 0
+      })
+    recentByArtifact.set(id, pending)
+  }
+  return pending
+}
+
 export function UsageBadge({ id }: { id: string }) {
   const [count, setCount] = React.useState<number | null>(null)
 
   React.useEffect(() => {
     let cancelled = false
-    fetch(`/api/usage?id=${encodeURIComponent(id)}`)
-      .then((res) => (res.ok ? res.json() : null))
-      .then((data: { recent?: number } | null) => {
-        if (!cancelled) setCount(typeof data?.recent === 'number' ? data.recent : 0)
-      })
-      .catch(() => {
-        if (!cancelled) setCount(0)
-      })
+    fetchRecent(id).then((recent) => {
+      if (!cancelled) setCount(recent)
+    })
     return () => {
       cancelled = true
     }

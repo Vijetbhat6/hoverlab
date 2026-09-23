@@ -136,7 +136,7 @@ export function SettingsNotificationMatrix({
     <section
       className={`rounded-2xl border border-border bg-card text-card-foreground ${className}`}
     >
-      <fieldset className="p-5 sm:p-6">
+      <fieldset className="min-w-0 p-5 sm:p-6">
         <legend className="text-base font-semibold">Notifications</legend>
         <p className="mt-1 text-sm text-muted-foreground">
           Choose where each kind of message goes. Changes save as you make them.

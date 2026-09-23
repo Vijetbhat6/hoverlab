@@ -14,14 +14,17 @@
  * renders on the server and the palette loads it on first open rather than
  * at mount.
  *
- * Ranking is deliberate rather than fuzzy. The palette's subsequence
- * matcher is right for a keystroke-at-a-time overlay where "btgr" should
- * find "Button Gradient"; a browse page is closer to a search engine, where
- * someone typing "pricing" expects the pricing *block* first and every
- * accidental subsequence match last. So: exact name, then name prefix, then
- * name substring, then category, then tag, then description — with a small
- * bonus for featured and for the higher tiers, which are hand-authored and
- * far more likely to be what someone means by a section-shaped word.
+ * Ranking is the shared engine in `@/lib/search/engine`: tokenised, weighted
+ * by field (name over tags and category over description), tolerant of a
+ * typo or two and expanded through a short curated synonym table. This
+ * module's own contribution is the small bonus for featured and for the
+ * higher tiers, which are hand-authored and far more likely to be what
+ * someone means by a section-shaped word — someone typing "pricing" wants
+ * the pricing *block* before the thirty effects whose description mentions
+ * it. (This header used to say ranking here was deliberately *not* fuzzy.
+ * That was true of substrings and it is why "buton" found nothing; the
+ * false-positive risk it was guarding against is handled inside the engine
+ * by never "correcting" a word that exists in the catalog.)
  */
 
 import { EFFECT_INDEX } from '@/lib/effect-index'
@@ -29,6 +32,14 @@ import { PRIMITIVE_INDEX } from '@/lib/primitives/primitive-index'
 import { BLOCK_INDEX } from '@/lib/blocks/block-index'
 import { PAGE_INDEX } from '@/lib/pages/page-index'
 import { TEMPLATE_INDEX } from '@/lib/templates/template-index'
+import {
+  createSearchIndex,
+  search,
+  type SearchDoc,
+  type SearchHit,
+  type SearchIndex,
+  type SearchOptions,
+} from '@/lib/search/engine'
 import {
   ARTIFACT_LEVELS,
   tierOf,
@@ -160,51 +171,82 @@ export const BROWSE_TOTAL = BROWSE_INDEX.length
  * "pricing" matches a pricing block, a pricing page and ~30 effects whose
  * description happens to contain the word. The block and the page are what
  * the word means to someone browsing a component catalog.
+ *
+ * On the engine's scale (a name-word match is worth ~4-10) these are
+ * tiebreaks, not overrides. The previous scorer's numbers (12/10/8/4) were
+ * sized against base scores of 15-100 and would have swamped the engine's;
+ * they are the same ordering at a quarter of the size.
  */
 const LEVEL_BONUS: Record<ArtifactLevel, number> = {
-  template: 12,
-  page: 10,
-  block: 8,
+  template: 3,
+  page: 2.5,
+  block: 2,
   /*
    * Above effects and below blocks. A search for "button" should reach the
    * primitive before it reaches four hundred button effects, and a search
    * for "pricing" should still reach the pricing block first — a primitive
    * is hand-authored like a block, but it answers a smaller question.
    */
-  primitive: 4,
+  primitive: 1,
   effect: 0,
 }
 
+/** Featured breaks ties inside a level. */
+const FEATURED_BONUS = 0.75
+
 /**
- * Score one hit against a lowercased query, or 0 for no match.
+ * The searchable form of `BROWSE_INDEX`, built on the first query.
  *
- * Fields are checked in descending authority and the best single field
- * wins, rather than summing — summing lets a description that repeats the
- * query three times outrank an exact name match, which is never right.
+ * The level's own name goes in as a tag, so "footer block" finds the footer
+ * blocks rather than every effect mentioning a footer — which is what the
+ * palette's old `keywords` string did by hand. Position `i` here is position
+ * `i` in `BROWSE_INDEX`, and `SearchHit.index` is how a caller gets back to
+ * it.
  */
-function score(hit: BrowseHit, q: string): number {
-  const name = hit.name.toLowerCase()
+let catalogIndex: SearchIndex<BrowseHit & SearchDoc> | null = null
 
-  let base = 0
-  if (name === q) base = 100
-  else if (name.startsWith(q)) base = 80
-  else if (name.includes(q)) base = 60
-  else if (hit.id.includes(q)) base = 55
-  else if (hit.category.toLowerCase().includes(q)) base = 40
-  else if (hit.tags.some((t) => t.toLowerCase().includes(q))) base = 30
-  else if (hit.description.toLowerCase().includes(q)) base = 15
-  else return 0
+function getCatalogIndex(): SearchIndex<BrowseHit & SearchDoc> {
+  catalogIndex ??= createSearchIndex(
+    BROWSE_INDEX.map((h) => ({
+      ...h,
+      tags: [...h.tags, h.level],
+      boost: LEVEL_BONUS[h.level] + (h.featured ? FEATURED_BONUS : 0),
+    })),
+  )
+  return catalogIndex
+}
 
-  return base + LEVEL_BONUS[hit.level] + (hit.featured ? 3 : 0)
+/**
+ * Rank the whole catalog against free text.
+ *
+ * Shared by `/browse` and the command palette, which used to rank
+ * differently on purpose (see the header). The palette keeps its own
+ * subsequence matcher for actions, tools and categories — a few dozen short
+ * labels, where "btgr" abbreviations are the point — but artifacts go
+ * through this, so a typo lands on the same result in both places.
+ */
+export function searchCatalog(
+  q: string,
+  options?: SearchOptions<BrowseHit & SearchDoc>,
+): SearchHit<BrowseHit & SearchDoc>[] {
+  return search(getCatalogIndex(), q, options)
 }
 
 export interface BrowseQuery {
   /** Free text. Empty or absent returns everything, featured first. */
   q?: string
-  /** Restrict to one rung. Absent means all four. */
+  /** Restrict to one rung. Absent means all five. */
   level?: ArtifactLevel
   /** Restrict to one category name, within the chosen level. */
   category?: string
+  /**
+   * Any further narrowing — framework, accessibility, colour. A predicate
+   * rather than three more parameters, so the facet definitions can live
+   * beside their data (`@/lib/search/facets`) without this module importing
+   * the accessibility report or the colour table, which are server-only and
+   * would otherwise ride along into the palette's chunk.
+   */
+  facet?: (hit: BrowseHit) => boolean
 }
 
 export interface BrowseResult {
@@ -219,25 +261,33 @@ export interface BrowseResult {
  *
  * `countsByLevel` deliberately ignores `level`: the rail has to be able to
  * say "Blocks (3)" while you are looking at Effects, which is the whole
- * reason a unified surface beats four separate ones. It does respect `q`
- * and `category`, because a count that ignores the query would send someone
- * to an empty tab.
+ * reason a unified surface beats four separate ones. It does respect `q`,
+ * `category` and the facets, because a count that ignores the query would
+ * send someone to an empty tab.
  */
-export function searchArtifacts({ q, level, category }: BrowseQuery): BrowseResult {
-  const needle = q?.trim().toLowerCase() ?? ''
+export function searchArtifacts({ q, level, category, facet }: BrowseQuery): BrowseResult {
+  const needle = q?.trim() ?? ''
 
-  const matched: Array<{ hit: BrowseHit; rank: number }> = []
-  for (const hit of BROWSE_INDEX) {
-    if (category && hit.category !== category) continue
-
-    if (!needle) {
-      // No query: everything, featured and higher tiers first.
-      matched.push({ hit, rank: LEVEL_BONUS[hit.level] + (hit.featured ? 3 : 0) })
-      continue
+  const matched: BrowseHit[] = []
+  if (needle) {
+    // The engine returns its own ranked order; nothing below re-sorts it.
+    for (const { index } of searchCatalog(needle)) {
+      const hit = BROWSE_INDEX[index]!
+      if (category && hit.category !== category) continue
+      if (facet && !facet(hit)) continue
+      matched.push(hit)
     }
-
-    const s = score(hit, needle)
-    if (s > 0) matched.push({ hit, rank: s })
+  } else {
+    // No query: everything, featured and higher tiers first, then catalog
+    // order — which is curated, and which a stable sort preserves.
+    const ranked: Array<{ hit: BrowseHit; rank: number; i: number }> = []
+    BROWSE_INDEX.forEach((hit, i) => {
+      if (category && hit.category !== category) return
+      if (facet && !facet(hit)) return
+      ranked.push({ hit, rank: LEVEL_BONUS[hit.level] + (hit.featured ? FEATURED_BONUS : 0), i })
+    })
+    ranked.sort((a, b) => b.rank - a.rank || a.i - b.i)
+    for (const r of ranked) matched.push(r.hit)
   }
 
   const countsByLevel = ARTIFACT_LEVELS.reduce(
@@ -247,19 +297,10 @@ export function searchArtifacts({ q, level, category }: BrowseQuery): BrowseResu
     },
     {} as Record<ArtifactLevel, number>,
   )
-  for (const { hit } of matched) countsByLevel[hit.level] += 1
+  for (const hit of matched) countsByLevel[hit.level] += 1
 
-  const filtered = level ? matched.filter((m) => m.hit.level === level) : matched
-
-  // Stable within a rank: catalog order, which is curated. `sort` is not
-  // guaranteed stable across engines for large arrays in older runtimes,
-  // so ties fall back to the index the hit came in at.
-  const ordered = filtered
-    .map((m, i) => ({ ...m, i }))
-    .sort((a, b) => b.rank - a.rank || a.i - b.i)
-    .map((m) => m.hit)
-
-  return { hits: ordered, countsByLevel, total: filtered.length }
+  const filtered = level ? matched.filter((h) => h.level === level) : matched
+  return { hits: filtered, countsByLevel, total: filtered.length }
 }
 
 /** Distinct categories present at a level, in first-seen (catalog) order. */

@@ -169,21 +169,21 @@ export function OrderSummaryPanel({
 
       {/* Figures */}
       <dl className="mt-5 space-y-2.5 border-t border-border/60 pt-5 text-sm">
-        <div className="flex justify-between gap-4">
-          <dt className="text-muted-foreground">Subtotal</dt>
+        <div className="flex flex-wrap justify-between gap-x-4 gap-y-0.5">
+          <dt className="min-w-0 break-words text-muted-foreground">Subtotal</dt>
           <dd className="tabular-nums">{formatPrice(subtotal, currency, locale)}</dd>
         </div>
 
         {applied ? (
-          <div className="flex justify-between gap-4 text-emerald-600 dark:text-emerald-400">
-            <dt>{applied.label}</dt>
+          <div className="flex flex-wrap justify-between gap-x-4 gap-y-0.5 text-emerald-600 dark:text-emerald-400">
+            <dt className="min-w-0 break-words">{applied.label}</dt>
             <dd className="tabular-nums">−{formatPrice(discount, currency, locale)}</dd>
           </div>
         ) : null}
 
-        <div className="flex justify-between gap-4">
-          <dt className="text-muted-foreground">Delivery</dt>
-          <dd className="tabular-nums">
+        <div className="flex flex-wrap justify-between gap-x-4 gap-y-0.5">
+          <dt className="min-w-0 break-words text-muted-foreground">Delivery</dt>
+          <dd className="min-w-0 break-words text-end tabular-nums">
             {shippingFree ? (
               <span className="font-medium text-emerald-600 dark:text-emerald-400">Free</span>
             ) : (
@@ -192,13 +192,13 @@ export function OrderSummaryPanel({
           </dd>
         </div>
 
-        <div className="flex justify-between gap-4 text-xs text-muted-foreground">
-          <dt>Includes VAT ({Math.round(taxRate * 100)}%)</dt>
+        <div className="flex flex-wrap justify-between gap-x-4 gap-y-0.5 text-xs text-muted-foreground">
+          <dt className="min-w-0 break-words">Includes VAT ({Math.round(taxRate * 100)}%)</dt>
           <dd className="tabular-nums">{formatPrice(taxIncluded, currency, locale)}</dd>
         </div>
 
-        <div className="flex justify-between gap-4 border-t border-border/60 pt-3 text-base font-bold">
-          <dt>Total</dt>
+        <div className="flex flex-wrap justify-between gap-x-4 gap-y-0.5 border-t border-border/60 pt-3 text-base font-bold">
+          <dt className="min-w-0 break-words">Total</dt>
           <dd className="tabular-nums">{formatPrice(total, currency, locale)}</dd>
         </div>
       </dl>

@@ -145,6 +145,31 @@ export const PRIMITIVE_CATALOG: PrimitiveRecord[] = [
     thumbHeight: 'h-36',
   },
 
+  {
+    id: 'switch',
+    name: 'Switch',
+    category: 'Form Controls',
+    description:
+      'An on/off setting that takes effect now, as role="switch" so a screen reader says "on" rather than "checked" — with the label and description in one row, a clickable label, and an off state dark enough to pass 3:1.',
+    tags: ['switch', 'toggle', 'setting', 'on off', 'preference'],
+    previewComponent: 'switch',
+    exportName: 'Switch',
+    deps: [],
+    thumbHeight: 'h-56',
+  },
+  {
+    id: 'range-slider',
+    name: 'Range Slider',
+    category: 'Form Controls',
+    description:
+      'Two thumbs on one track, built from two native range inputs so the keyboard, touch dragging and announced values come free — with the thumbs prevented from crossing and the min thumb still reachable at the far end.',
+    tags: ['slider', 'range', 'price', 'filter', 'dual thumb'],
+    previewComponent: 'range-slider',
+    exportName: 'RangeSlider',
+    deps: [],
+    thumbHeight: 'h-36',
+  },
+
   /* --------------------------- Selection --------------------------- */
   {
     id: 'combobox',
@@ -195,6 +220,20 @@ export const PRIMITIVE_CATALOG: PrimitiveRecord[] = [
     exportName: 'EmojiSelector',
     deps: ['lucide-react'],
     thumbHeight: 'h-40',
+  },
+
+  {
+    id: 'radio-card-group',
+    name: 'Radio Card Group',
+    category: 'Selection',
+    description:
+      'Plans and shipping methods as cards, built on real radio inputs so the arrow keys, "2 of 3" and form submission are the browser\'s — with selection drawn as a tick, not only a colour.',
+    tags: ['radio', 'cards', 'plan', 'picker', 'choice', 'fieldset'],
+    previewComponent: 'radio-card-group',
+    exportName: 'RadioCardGroup',
+    deps: [],
+    featured: true,
+    thumbHeight: 'h-64',
   },
 
   /* ------------------------ Status & Labels ------------------------ */
@@ -273,6 +312,110 @@ export const PRIMITIVE_CATALOG: PrimitiveRecord[] = [
     exportName: 'TreeView',
     deps: ['lucide-react'],
     thumbHeight: 'h-64',
+  },
+  {
+    id: 'tabs',
+    name: 'Tabs',
+    category: 'Navigation & Steps',
+    description:
+      'One tab stop for the whole list, arrow keys mapped through the reading direction, and a manual-activation mode so arrowing past five expensive panels does not fire four requests nobody asked for.',
+    tags: ['tabs', 'tablist', 'panels', 'keyboard', 'vertical'],
+    previewComponent: 'tabs',
+    exportName: 'Tabs',
+    deps: [],
+    featured: true,
+    thumbHeight: 'h-52',
+  },
+
+  {
+    id: 'breadcrumbs',
+    name: 'Breadcrumbs',
+    category: 'Navigation & Steps',
+    description:
+      'The trail back up, with the current page as text rather than a link to itself, and a long middle that collapses to a button that announces what it hides and hands focus to the first revealed crumb.',
+    tags: ['breadcrumb', 'trail', 'navigation', 'path', 'hierarchy'],
+    previewComponent: 'breadcrumbs',
+    exportName: 'Breadcrumbs',
+    deps: ['lucide-react'],
+    thumbHeight: 'h-32',
+  },
+  {
+    id: 'pagination',
+    name: 'Pagination',
+    category: 'Navigation & Steps',
+    description:
+      'A page window that keeps its width while you page and never draws an ellipsis for a single page — as real links when you pass getHref, so a listing stays crawlable and works without JavaScript.',
+    tags: ['pagination', 'pager', 'pages', 'next', 'previous', 'table'],
+    previewComponent: 'pagination',
+    exportName: 'Pagination',
+    deps: ['lucide-react'],
+    thumbHeight: 'h-28',
+  },
+  {
+    id: 'accordion',
+    name: 'Accordion',
+    category: 'Navigation & Steps',
+    description:
+      'Buttons inside real headings, with panels that stay mounted so aria-controls resolves and go inert when shut so Tab cannot walk into invisible content — animated by a grid-row transition, off under reduced motion.',
+    tags: ['accordion', 'disclosure', 'faq', 'collapse', 'expand'],
+    previewComponent: 'accordion',
+    exportName: 'Accordion',
+    deps: ['lucide-react'],
+    featured: true,
+    thumbHeight: 'h-64',
+  },
+
+  /* ------------------------ Overlays & Feedback -------------------- */
+  {
+    id: 'alert',
+    name: 'Alert',
+    category: 'Overlays & Feedback',
+    description:
+      'An inline message that is not a live region by default — an alert role interrupts a screen reader, which is wrong for a notice that is simply on the page — with a `live` switch for the ones that appear in response to something.',
+    tags: ['alert', 'callout', 'banner', 'notice', 'feedback', 'error'],
+    previewComponent: 'alert',
+    exportName: 'Alert',
+    deps: ['lucide-react'],
+    featured: true,
+    thumbHeight: 'h-72',
+  },
+  {
+    id: 'dropdown-menu',
+    name: 'Dropdown Menu',
+    category: 'Overlays & Feedback',
+    description:
+      'An action menu with the menu keyboard model in full: arrows, Home/End, typeahead, and Escape that returns focus to the trigger rather than dropping it on the page body. Its limits — no collision flip, no portal — are stated in the header.',
+    tags: ['menu', 'dropdown', 'actions', 'popover', 'keyboard', 'context'],
+    previewComponent: 'dropdown-menu',
+    exportName: 'DropdownMenu',
+    deps: [],
+    featured: true,
+    thumbHeight: 'h-72',
+  },
+  {
+    id: 'dialog',
+    name: 'Dialog',
+    category: 'Overlays & Feedback',
+    description:
+      'A modal on the native dialog element, which supplies the focus trap, inert background and top layer — plus the parts it does not: scroll lock that survives two dialogs, backdrop click, and an alertdialog that ignores it.',
+    tags: ['dialog', 'modal', 'alertdialog', 'overlay', 'confirm', 'focus trap'],
+    previewComponent: 'dialog',
+    exportName: 'Dialog',
+    deps: ['lucide-react'],
+    featured: true,
+    thumbHeight: 'h-32',
+  },
+  {
+    id: 'tooltip',
+    name: 'Tooltip',
+    category: 'Overlays & Feedback',
+    description:
+      'Dismissible with Escape, hoverable, and persistent — the three things WCAG 1.4.13 asks of content on hover — shown on keyboard focus rather than every click, and wired with aria-describedby so it is announced even when it is not drawn.',
+    tags: ['tooltip', 'hint', 'label', 'hover', 'a11y', 'icon button'],
+    previewComponent: 'tooltip',
+    exportName: 'Tooltip',
+    deps: [],
+    thumbHeight: 'h-40',
   },
 
   /* --------------------------- Identity ---------------------------- */

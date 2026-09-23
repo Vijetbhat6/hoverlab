@@ -10,6 +10,7 @@ import { artifactBreadcrumbLd, artifactLd } from '@/lib/structured-data'
 import { addedAt, formatAdded, updatedAt } from '@/lib/recency'
 import { relatedBlocks } from '@/lib/related'
 import { ArtifactFacts } from '@/components/artifact-facts'
+import { EffectMotionBadge } from '@/components/effect-motion-badge'
 import { StickyInstallBar } from '@/components/sticky-install-bar'
 import { CategoryProRail } from '@/components/category-pro-rail'
 import { VariationsRail } from '@/components/variations-rail'
@@ -232,7 +233,15 @@ export default async function EffectPage({ params }: PageProps) {
          * this rung has to say about what it costs to adopt. The component
          * prints "No runtime dependencies" from it.
          */
-        facts={<ArtifactFacts id={effect.id} level="effect" deps={[]} />}
+        facts={
+          <>
+            <ArtifactFacts id={effect.id} level="effect" deps={[]} />
+            {/* Motion safety: reduced-motion guard, property class, flash
+                rate and layout-shift category, from the generated profile.
+                Server-rendered beside the facts for the same reason. */}
+            <EffectMotionBadge id={effect.id} />
+          </>
+        }
         /*
          * `similarCount` is how many OTHER effects share the category, not
          * the six the sidebar rail shows — the rail's number is a shelf

@@ -81,7 +81,7 @@ export function AgentWorkingIndicator({
             <span
               key={cell}
               style={{ animationDelay: `${i * 70}ms` }}
-              className="h-1.5 w-1.5 rounded-[2px] bg-primary opacity-40 motion-safe:animate-[agent-pixel_1.4s_ease-in-out_infinite]"
+              className="h-1.5 w-1.5 rounded-[2px] bg-primary opacity-40 motion-safe:animate-[agent-pixel_1.4s_ease-in-out_infinite] border border-transparent"
             />
           ))}
         </div>
@@ -93,7 +93,7 @@ export function AgentWorkingIndicator({
             counter inside a live region floods a screen reader with numbers
             and drowns out the thing worth hearing.
           */}
-          <p role="status" className="truncate text-sm font-medium">
+          <p role="status" className="min-w-0 break-words text-sm font-medium">
             {stopped ? 'Stopped' : phase}
           </p>
 

@@ -79,13 +79,13 @@ export function ProductGrid({
             />
 
             {product.badge ? (
-              <span className="absolute start-3 top-3 rounded-full bg-foreground px-2.5 py-1 text-xs font-semibold text-background">
+              <span className="absolute start-3 top-3 max-w-[calc(100%-1.5rem)] break-words rounded-full bg-foreground px-2.5 py-1 text-xs font-semibold text-background">
                 {product.badge}
               </span>
             ) : null}
 
             {product.soldOut ? (
-              <span className="absolute inset-x-0 bottom-0 bg-background/90 py-2 text-center text-xs font-semibold backdrop-blur">
+              <span className="absolute inset-x-0 bottom-0 break-words bg-background/90 px-2 py-2 text-center text-xs font-semibold backdrop-blur">
                 Sold out
               </span>
             ) : null}
@@ -114,17 +114,17 @@ export function ProductGrid({
               <p className="mt-1 flex items-center gap-1 text-xs text-muted-foreground">
                 <Star aria-hidden className="h-3 w-3 fill-amber-400 text-amber-400" />
                 {product.rating}
-                <span className="text-muted-foreground/60">({product.reviewCount})</span>
+                <span className="text-muted-foreground/85">({product.reviewCount})</span>
               </p>
             ) : null}
 
-            <p className="mt-2 flex items-baseline gap-2">
-              <span className="text-sm font-semibold">
+            <p className="mt-2 flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
+              <span className="min-w-0 break-words text-sm font-semibold">
                 {formatPrice(product.price, currency, locale)}
               </span>
               {product.compareAt ? (
                 <>
-                  <span className="text-xs text-muted-foreground line-through">
+                  <span className="min-w-0 break-words text-xs text-muted-foreground line-through">
                     {formatPrice(product.compareAt, currency, locale)}
                   </span>
                   <span className="sr-only">

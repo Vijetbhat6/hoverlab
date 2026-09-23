@@ -7,7 +7,7 @@
     geometry, colour and type. There are no variants, no auto-layout,
     and no hover or motion — none of those exist in a static frame.
 
-    Every section here is free to copy as code at https://hoverlab.dev/blocks
+    Every one of these is free to copy as code at https://hoverlab.dev/blocks
   -->
   <rect id="Background" x="0" y="0" width="1216" height="5449" fill="#ffffff" />
   <text id="Plan &amp; Next Charge Summary label" x="64" y="84" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Plan &amp; Next Charge Summary</text>
@@ -15,158 +15,259 @@
   <g id="Plan &amp; Next Charge Summary" transform="translate(64, 116)">
     <rect id="container" x="0" y="0" width="1088" height="285" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="section" x="1" y="1" width="1086" height="283" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Billing" x="26" y="34" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="600" letter-spacing="-0.4">Billing</text>
-      <text id="Your plan, your next charge and how it i…" x="26" y="58" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Your plan, your next charge and how it is paid.</text>
+      <text id="Billing" x="26" y="35" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="600" letter-spacing="-0.4">Billing</text>
+      <text id="Your plan, your next charge and how it i…" x="26" y="59" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Your plan, your next charge and how it is paid.</text>
       <rect id="container 2" x="2" y="81" width="1084" height="202" fill="rgba(220, 222, 225, 0.6)" />
       <rect id="container 3" x="2" y="81" width="360.66" height="202" fill="#ffffff" />
       <text id="Current plan" x="26" y="117" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="700" letter-spacing="0.6">Current plan</text>
       <text id="Team" x="26" y="153" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="24" font-weight="800" letter-spacing="-0.6">Team</text>
-      <text id="$490/month" x="93.56" y="152" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">$490/month</text>
-      <text id="Up to 10 seats" x="26" y="189" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Up to 10 seats</text>
-      <rect id="container 4" x="26" y="183" width="4" height="4" rx="2" fill="#007f34" />
-      <text id="SSO and audit log" x="26" y="211" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">SSO and audit log</text>
-      <rect id="container 5" x="26" y="205" width="4" height="4" rx="2" fill="#007f34" />
-      <text id="Priority support" x="26" y="233" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Priority support</text>
-      <rect id="container 6" x="26" y="227" width="4" height="4" rx="2" fill="#007f34" />
-      <text id="Invoice billing" x="26" y="255" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Invoice billing</text>
-      <rect id="container 7" x="26" y="249" width="4" height="4" rx="2" fill="#007f34" />
+      <text id="$490/month" x="93.56" y="153" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">$490/month</text>
+      <text id="Up to 10 seats" x="38" y="189" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Up to 10 seats</text>
+      <rect id="container 4" x="26" y="183" width="4" height="4" rx="2" fill="#00782e" />
+      <text id="SSO and audit log" x="38" y="211" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">SSO and audit log</text>
+      <rect id="container 5" x="26" y="205" width="4" height="4" rx="2" fill="#00782e" />
+      <text id="Priority support" x="38" y="233" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Priority support</text>
+      <rect id="container 6" x="26" y="227" width="4" height="4" rx="2" fill="#00782e" />
+      <text id="Invoice billing" x="38" y="255" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Invoice billing</text>
+      <rect id="container 7" x="26" y="249" width="4" height="4" rx="2" fill="#00782e" />
       <rect id="container 8" x="363.66" y="81" width="360.67" height="202" fill="#ffffff" />
       <text id="Next charge" x="387.66" y="117" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="700" letter-spacing="0.6">Next charge</text>
       <text id="$490.00" x="387.66" y="153" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="24" font-weight="800" letter-spacing="-0.6">$490.00</text>
-      <text id="on 1 September 2026" x="387.66" y="179" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">on 1 September 2026</text>
+      <text id="on 1 September 2026" x="407.66" y="180" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">on 1 September 2026</text>
+      <g id="icon calendar-clock" transform="translate(387.656 168) scale(0.583 0.583)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M16 14v2.2l1.6 1" />
+        <path d="M16 2v4" />
+        <path d="M21 7.5V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3.5" />
+        <path d="M3 10h5" />
+        <path d="M8 2v4" />
+        <circle cx="16" cy="16" r="6" />
+      </g>
       <rect id="container 9" x="725.33" y="81" width="360.66" height="202" fill="#ffffff" />
       <text id="Payment method" x="749.33" y="117" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="700" letter-spacing="0.6">Payment method</text>
       <rect id="container 10" x="749.33" y="131" width="44" height="32" rx="10" fill="#f3f2ee" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Visa ending 4242" x="801.33" y="143" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Visa ending 4242</text>
+      <g id="icon credit-card" transform="translate(763.328 139) scale(0.667 0.667)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect rx="2" x="2" y="5" width="20" height="14" />
+        <line x1="2" y1="10" x2="22" y2="10" />
+      </g>
+      <text id="Visa ending 4242" x="801.33" y="144" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Visa ending 4242</text>
       <text id="Expires 09/28" x="801.33" y="161" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Expires 09/28</text>
-      <text id="Manage billing" x="749.33" y="195" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Manage billing</text>
+      <text id="Manage billing" x="749.33" y="196" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Manage billing</text>
+      <g id="icon arrow-right" transform="translate(851.344 184) scale(0.583 0.583)" fill="none" stroke="#080c0f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14" />
+        <path d="m12 5 7 7-7 7" />
+      </g>
   </g>
   <text id="Invoice History label" x="64" y="517" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Invoice History</text>
   <text id="invoice-history-table id" x="64" y="531" font-family="ui-monospace, monospace" font-size="12" fill="#737373">invoice-history-table</text>
   <g id="Invoice History" transform="translate(64, 549)">
     <rect id="container" x="0" y="0" width="1088" height="432" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="section" x="1" y="1" width="1086" height="430" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Invoice history" x="26" y="34" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="600" letter-spacing="-0.4">Invoice history</text>
-      <text id="Every charge on this account. PDFs are a…" x="26" y="58" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Every charge on this account. PDFs are available for seven years.</text>
-      <text id="Billing portal" x="959" y="45" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Billing portal</text>
+      <text id="Invoice history" x="26" y="35" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="600" letter-spacing="-0.4">Invoice history</text>
+      <text id="Every charge on this account. PDFs are a…" x="26" y="59" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Every charge on this account. PDFs are available for seven years.</text>
+      <text id="Billing portal" x="959" y="46" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Billing portal</text>
+      <g id="icon external-link" transform="translate(1048 34) scale(0.583 0.583)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M15 3h6v6" />
+        <path d="M10 14 21 3" />
+        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+      </g>
       <rect id="container 2" x="2" y="81" width="1084" height="44.5" fill="rgba(242, 238, 235, 0.302)" />
-      <text id="Invoice" x="2" y="95" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Invoice</text>
-      <text id="Date" x="297.08" y="95" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Date</text>
-      <text id="Status" x="538.2" y="95" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Status</text>
-      <text id="Amount" x="756.77" y="95" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Amount</text>
+      <text id="Invoice" x="26" y="108" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Invoice</text>
+      <text id="Date" x="321.08" y="108" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Date</text>
+      <text id="Status" x="562.2" y="108" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Status</text>
+      <text id="Amount" x="869.55" y="108" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Amount</text>
       <text id="INV-2026-0812" x="26" y="152" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12" font-weight="500">INV-2026-0812</text>
       <text id="Team plan — August" x="26" y="168" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Team plan — August</text>
       <text id="Aug 1, 2026" x="321.08" y="161" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Aug 1, 2026</text>
       <rect id="container 3" x="562.2" y="146.5" width="40.56" height="20" rx="10" fill="rgba(0, 188, 128, 0.149)" />
-      <text id="Paid" x="562.2" y="158.5" fill="#009966" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Paid</text>
-      <text id="$490.00" x="756.77" y="140" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">$490.00</text>
+      <text id="Paid" x="570.2" y="160.5" fill="#009966" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Paid</text>
+      <text id="$490.00" x="867.22" y="161" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">$490.00</text>
+      <g id="icon download" transform="translate(1040 148) scale(0.667 0.667)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 15V3" />
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+        <path d="m7 10 5 5 5-5" />
+      </g>
       <text id="INV-2026-0745" x="26" y="213" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12" font-weight="500">INV-2026-0745</text>
       <text id="Team plan — July" x="26" y="229" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Team plan — July</text>
       <text id="Jul 1, 2026" x="321.08" y="222" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Jul 1, 2026</text>
       <rect id="container 4" x="562.2" y="207.5" width="40.56" height="20" rx="10" fill="rgba(0, 188, 128, 0.149)" />
-      <text id="Paid 2" x="562.2" y="219.5" fill="#009966" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Paid</text>
-      <text id="$490.00 2" x="756.77" y="200.5" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">$490.00</text>
+      <text id="Paid 2" x="570.2" y="221.5" fill="#009966" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Paid</text>
+      <text id="$490.00 2" x="867.22" y="222" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">$490.00</text>
+      <g id="icon download 2" transform="translate(1040 209) scale(0.667 0.667)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 15V3" />
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+        <path d="m7 10 5 5 5-5" />
+      </g>
       <text id="INV-2026-0698" x="26" y="274" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12" font-weight="500">INV-2026-0698</text>
       <text id="Additional seats (3)" x="26" y="290" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Additional seats (3)</text>
       <text id="Jun 14, 2026" x="321.08" y="283" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Jun 14, 2026</text>
       <rect id="container 5" x="562.2" y="268.5" width="70.73" height="20" rx="10" fill="#f3f2ee" />
-      <text id="Refunded" x="562.2" y="280.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Refunded</text>
-      <text id="$147.00" x="756.77" y="261.5" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">$147.00</text>
+      <text id="Refunded" x="570.2" y="282.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Refunded</text>
+      <text id="$147.00" x="867.22" y="283" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">$147.00</text>
+      <g id="icon download 3" transform="translate(1040 270) scale(0.667 0.667)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 15V3" />
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+        <path d="m7 10 5 5 5-5" />
+      </g>
       <text id="INV-2026-0671" x="26" y="335" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12" font-weight="500">INV-2026-0671</text>
       <text id="Team plan — June" x="26" y="351" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Team plan — June</text>
       <text id="Jun 1, 2026" x="321.08" y="344" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Jun 1, 2026</text>
       <rect id="container 6" x="562.2" y="329.5" width="49.92" height="20" rx="10" fill="rgba(235, 0, 13, 0.149)" />
-      <text id="Failed" x="562.2" y="341.5" fill="#e7000b" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Failed</text>
-      <text id="$490.00 3" x="756.77" y="322.5" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">$490.00</text>
+      <text id="Failed" x="570.2" y="343.5" fill="#e7000b" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Failed</text>
+      <text id="$490.00 3" x="867.22" y="344" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">$490.00</text>
+      <g id="icon download 4" transform="translate(1040 331) scale(0.667 0.667)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 15V3" />
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+        <path d="m7 10 5 5 5-5" />
+      </g>
       <text id="INV-2026-0602" x="26" y="396" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12" font-weight="500">INV-2026-0602</text>
       <text id="Pro plan — May" x="26" y="412" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Pro plan — May</text>
       <text id="May 1, 2026" x="321.08" y="405" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">May 1, 2026</text>
       <rect id="container 7" x="562.2" y="390.5" width="40.56" height="20" rx="10" fill="rgba(0, 188, 128, 0.149)" />
-      <text id="Paid 3" x="562.2" y="402.5" fill="#009966" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Paid</text>
-      <text id="$190.00" x="756.77" y="383.5" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">$190.00</text>
+      <text id="Paid 3" x="570.2" y="404.5" fill="#009966" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Paid</text>
+      <text id="$190.00" x="867.22" y="405" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">$190.00</text>
+      <g id="icon download 5" transform="translate(1040 392) scale(0.667 0.667)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 15V3" />
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+        <path d="m7 10 5 5 5-5" />
+      </g>
   </g>
   <text id="Payment Methods On File label" x="64" y="1097" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Payment Methods On File</text>
   <text id="payment-method-card id" x="64" y="1111" font-family="ui-monospace, monospace" font-size="12" fill="#737373">payment-method-card</text>
   <g id="Payment Methods On File" transform="translate(64, 1129)">
     <rect id="container" x="0" y="0" width="1088" height="293" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="section" x="1" y="1" width="1086" height="291" rx="16" fill="#ffffff" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Payment methods" x="26" y="34" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="600" letter-spacing="-0.4">Payment methods</text>
-      <text id="Receipts and failed-payment notices go t…" x="26" y="58" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Receipts and failed-payment notices go to billing@acme.com.</text>
+      <text id="Payment methods" x="26" y="35" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="600" letter-spacing="-0.4">Payment methods</text>
+      <text id="Receipts and failed-payment notices go t…" x="26" y="59" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Receipts and failed-payment notices go to billing@acme.com.</text>
       <rect id="container 2" x="26" y="99" width="48" height="36" rx="10" fill="rgba(241, 241, 237, 0.502)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Visa •••• 4242" x="90" y="111" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Visa •••• 4242</text>
-      <rect id="container 3" x="186.19" y="97" width="73.13" height="20" rx="10" fill="rgba(0, 128, 49, 0.102)" />
-      <text id="Default" x="186.19" y="109" fill="#007f34" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Default</text>
-      <text id="Expires 11/2026 — update it before your …" x="90" y="131" fill="#e17100" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Expires 11/2026 — update it before your next renewal</text>
+      <g id="icon credit-card" transform="translate(42 109) scale(0.667 0.667)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect rx="2" x="2" y="5" width="20" height="14" />
+        <line x1="2" y1="10" x2="22" y2="10" />
+      </g>
+      <text id="Visa •••• 4242" x="90" y="112" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Visa •••• 4242</text>
+      <rect id="container 3" x="186.19" y="97" width="73.13" height="20" rx="10" fill="rgba(0, 118, 49, 0.102)" />
+      <text id="Default" x="210.19" y="111" fill="#00782e" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Default</text>
+      <g id="icon check" transform="translate(194.188 101) scale(0.5 0.5)" fill="none" stroke="#00782e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 6 9 17l-5-5" />
+      </g>
+      <text id="Expires 11/2026 — update it before your …" x="106" y="131" fill="#e17100" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Expires 11/2026 — update it before your next renewal</text>
+      <g id="icon triangle-alert" transform="translate(90 121) scale(0.5 0.5)" fill="none" stroke="#e17100" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3" />
+        <path d="M12 9v4" />
+        <path d="M12 17h.01" />
+      </g>
       <rect id="button" x="1034" y="103" width="28" height="28" rx="12" fill="none" stroke="#dbdee1" stroke-width="1" opacity="0.4" />
+      <g id="icon trash2" transform="translate(1041 110) scale(0.583 0.583)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 6h18" />
+        <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+        <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+        <line x1="10" y1="11" x2="10" y2="17" />
+        <line x1="14" y1="11" x2="14" y2="17" />
+      </g>
       <rect id="container 4" x="26" y="171" width="48" height="36" rx="10" fill="rgba(241, 241, 237, 0.502)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Mastercard •••• 5100" x="90" y="184" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Mastercard •••• 5100</text>
+      <g id="icon credit-card 2" transform="translate(42 181) scale(0.667 0.667)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect rx="2" x="2" y="5" width="20" height="14" />
+        <line x1="2" y1="10" x2="22" y2="10" />
+      </g>
+      <text id="Mastercard •••• 5100" x="90" y="185" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Mastercard •••• 5100</text>
       <text id="Expires 03/2029" x="90" y="204" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Expires 03/2029</text>
       <rect id="button 2" x="930.56" y="174" width="95.44" height="30" rx="12" fill="none" stroke="#dbdee1" stroke-width="1" />
-      <text id="Make default" x="978.28" y="186" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500" text-anchor="middle">Make default</text>
+      <text id="Make default" x="978.28" y="193" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500" text-anchor="middle">Make default</text>
       <rect id="button 3" x="1034" y="175" width="28" height="28" rx="12" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <g id="icon trash2 2" transform="translate(1041 182) scale(0.583 0.583)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 6h18" />
+        <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+        <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+        <line x1="10" y1="11" x2="10" y2="17" />
+        <line x1="14" y1="11" x2="14" y2="17" />
+      </g>
       <rect id="footer" x="2" y="224" width="1084" height="67" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="button 4" x="26" y="241" width="188.27" height="34" rx="12" fill="none" stroke="#dbdee1" stroke-width="1" />
-      <text id="Add payment method" x="120.13" y="255" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Add payment method</text>
+      <text id="Add payment method" x="131.13" y="263" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Add payment method</text>
+      <g id="icon plus" transform="translate(39 250) scale(0.667 0.667)" fill="none" stroke="#080c0f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14" />
+        <path d="M12 5v14" />
+      </g>
   </g>
   <text id="Subscription Cancel Flow label" x="64" y="1538" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Subscription Cancel Flow</text>
   <text id="subscription-cancel-flow id" x="64" y="1552" font-family="ui-monospace, monospace" font-size="12" fill="#737373">subscription-cancel-flow</text>
   <g id="Subscription Cancel Flow" transform="translate(64, 1570)">
     <rect id="container" x="0" y="0" width="1088" height="889" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="container 2" x="240" y="65" width="608" height="759" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
-      <text id="Cancel your Team plan" x="273" y="118" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="20" font-weight="700" letter-spacing="-0.5">Cancel your Team plan</text>
+      <text id="Cancel your Team plan" x="273" y="119" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="20" font-weight="700" letter-spacing="-0.5">Cancel your Team plan</text>
       <text id="You can do this yourself, right here, an…" x="273" y="149" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">You can do this yourself, right here, and it takes one click once you have read what</text>
       <text id="happens." x="273" y="169" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">happens.</text>
       <rect id="container 3" x="273" y="198" width="542" height="182" rx="16" fill="rgba(242, 238, 235, 0.302)" stroke="#dbdee1" stroke-width="1" />
-      <text id="What happens, and when" x="290" y="229" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">What happens, and when</text>
+      <text id="What happens, and when" x="314" y="230" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">What happens, and when</text>
+      <g id="icon calendar-clock" transform="translate(290 217) scale(0.667 0.667)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M16 14v2.2l1.6 1" />
+        <path d="M16 2v4" />
+        <path d="M21 7.5V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3.5" />
+        <path d="M3 10h5" />
+        <path d="M8 2v4" />
+        <circle cx="16" cy="16" r="6" />
+      </g>
       <text id="You keep" x="290" y="262" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">You keep</text>
       <text id="Team" x="351.34" y="262" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Team</text>
       <text id="until" x="385.81" y="262" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">until</text>
       <text id="— the period you have already paid for." x="530.84" y="262" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">— the period you have already paid for.</text>
       <text id="Nothing stops today." x="290" y="282" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Nothing stops today.</text>
       <text id="14 October 2026" x="420.72" y="262" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">14 October 2026</text>
-      <text id="You will not be charged again, and there…" x="290" y="309" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">You will not be charged again, and there is no cancellation fee.</text>
+      <text id="You will not be charged again, and there…" x="290" y="310" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">You will not be charged again, and there is no cancellation fee.</text>
       <text id="After that, your data is kept for" x="290" y="338" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">After that, your data is kept for</text>
       <text id="and restoring is one click. It is delete…" x="545.36" y="338" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">and restoring is one click. It is deleted</text>
       <text id="after that." x="290" y="358" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">after that.</text>
       <text id="30 days" x="489.47" y="338" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">30 days</text>
       <rect id="container 4" x="273" y="396" width="542" height="138" rx="16" fill="rgba(235, 0, 20, 0.051)" stroke="rgba(229, 0, 10, 0.302)" stroke-width="1" />
-      <text id="What breaks on 14 October 2026" x="290" y="427" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">What breaks on 14 October 2026</text>
-      <text id="API keys stop working, and any integrati…" x="290" y="459" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">API keys stop working, and any integration using them fails</text>
-      <text id="Team members lose access to shared proje…" x="290" y="485" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Team members lose access to shared projects</text>
-      <text id="Scheduled exports stop running" x="290" y="511" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Scheduled exports stop running</text>
+      <text id="What breaks on 14 October 2026" x="314" y="428" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">What breaks on 14 October 2026</text>
+      <g id="icon shield-alert" transform="translate(290 415) scale(0.667 0.667)" fill="none" stroke="#e7000b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
+        <path d="M12 8v4" />
+        <path d="M12 16h.01" />
+      </g>
+      <text id="API keys stop working, and any integrati…" x="310" y="460" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">API keys stop working, and any integration using them fails</text>
+      <text id="Team members lose access to shared proje…" x="310" y="486" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Team members lose access to shared projects</text>
+      <text id="Scheduled exports stop running" x="310" y="512" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Scheduled exports stop running</text>
       <text id="Why are you cancelling?" x="273" y="575" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Why are you cancelling?</text>
       <text id="— optional, and it does not change anyth…" x="435.16" y="575" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">— optional, and it does not change anything below</text>
       <rect id="field" x="273" y="590" width="542" height="36" rx="12" fill="#fdfcf8" stroke="#8d8f92" stroke-width="1" />
       <rect id="container 5" x="273" y="650" width="542" height="141" fill="none" stroke="#dbdee1" stroke-width="1" />
-      <text id="Type to confirm" x="273" y="689" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Type to confirm</text>
+      <text id="Type to confirm" x="273" y="690" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Type to confirm</text>
       <text id="cancel" x="307.59" y="690" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="14" font-weight="500">cancel</text>
       <rect id="field 2" x="273" y="703" width="192" height="36" rx="12" fill="#fdfcf8" stroke="#8d8f92" stroke-width="1" />
       <rect id="button" x="273" y="755" width="188.95" height="36" rx="12" fill="#e7000b" opacity="0.5" />
-      <text id="Cancel my subscription" x="367.48" y="769" fill="#ffffff" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Cancel my subscription</text>
-      <text id="Keep my plan" x="529.88" y="769" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Keep my plan</text>
+      <text id="Cancel my subscription" x="367.48" y="778" fill="#ffffff" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Cancel my subscription</text>
+      <text id="Keep my plan" x="529.88" y="778" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Keep my plan</text>
   </g>
   <text id="Overage Notice with Projection label" x="64" y="2575" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Overage Notice with Projection</text>
   <text id="usage-overage-notice id" x="64" y="2589" font-family="ui-monospace, monospace" font-size="12" fill="#737373">usage-overage-notice</text>
   <g id="Overage Notice with Projection" transform="translate(64, 2607)">
     <rect id="container" x="0" y="0" width="1088" height="661" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="container 2" x="240" y="65" width="608" height="531" rx="16" fill="rgba(255, 157, 0, 0.051)" stroke="rgba(252, 152, 0, 0.4)" stroke-width="1" />
-      <text id="You are past your included API requests" x="301" y="110" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="600">You are past your included API requests</text>
+      <g id="icon gauge" transform="translate(269 96) scale(0.833 0.833)" fill="none" stroke="#e17100" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m12 14 4-4" />
+        <path d="M3.34 19a10 10 0 1 1 17.32 0" />
+      </g>
+      <text id="You are past your included API requests" x="301" y="111" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="600">You are past your included API requests</text>
       <text id="Everything is still running. You are bei…" x="301" y="137" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Everything is still running. You are being billed for the overage, and this is what it</text>
       <text id="looks like so far." x="301" y="157" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">looks like so far.</text>
-      <text id="1,402,500 of 1,000,000 requests" x="269" y="196" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">1,402,500 of 1,000,000 requests</text>
-      <text id="140%" x="785.39" y="196" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="14" font-weight="500">140%</text>
+      <text id="1,402,500 of 1,000,000 requests" x="269" y="197" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">1,402,500 of 1,000,000 requests</text>
+      <text id="140%" x="785.39" y="197" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="14" font-weight="500">140%</text>
       <rect id="container 3" x="269" y="210" width="550" height="10" rx="5" fill="#f3f2ee" />
-      <rect id="container 4" x="269" y="210" width="392.16" height="10" fill="#007f34" />
+      <rect id="container 4" x="269" y="210" width="392.16" height="10" fill="#00782e" />
       <rect id="container 5" x="661.16" y="210" width="157.83" height="10" fill="#fe9a00" />
       <rect id="container 6" x="269" y="240" width="550" height="183" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
-      <text id="Over your allowance" x="286" y="265" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Over your allowance</text>
-      <text id="402,500 requests" x="667.58" y="265" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="14">402,500 requests</text>
-      <text id="Overage rate" x="286" y="306" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Overage rate</text>
-      <text id="$0.12 per 10,000" x="667.59" y="306" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="14">$0.12 per 10,000</text>
-      <text id="Charged so far" x="286" y="347" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Charged so far</text>
-      <text id="$4.83" x="760" y="347" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="14" font-weight="500">$4.83</text>
-      <text id="At this rate, by day 30" x="286" y="388" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">At this rate, by day 30</text>
-      <text id="$12.04" x="672.38" y="390" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="14" font-weight="600">$12.04</text>
+      <text id="Over your allowance" x="286" y="266" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Over your allowance</text>
+      <text id="402,500 requests" x="667.58" y="266" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="14">402,500 requests</text>
+      <text id="Overage rate" x="286" y="307" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Overage rate</text>
+      <text id="$0.12 per 10,000" x="667.59" y="307" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="14">$0.12 per 10,000</text>
+      <text id="Charged so far" x="286" y="348" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Charged so far</text>
+      <text id="$4.83" x="760" y="348" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="14" font-weight="500">$4.83</text>
+      <text id="At this rate, by day 30" x="306" y="389" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">At this rate, by day 30</text>
+      <g id="icon trending-up" transform="translate(286 377) scale(0.583 0.583)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M16 7h6v6" />
+        <path d="m22 7-8.5 8.5-5-5L2 17" />
+      </g>
+      <text id="$12.04" x="751.59" y="391" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="14" font-weight="600">$12.04</text>
       <text id="2,003,571 requests" x="672.38" y="408" fill="#575b60" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">2,003,571 requests</text>
       <text id="Projected from" x="269" y="447" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Projected from</text>
       <text id="66,786" x="353.31" y="447" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">66,786</text>
@@ -176,10 +277,18 @@
       <text id="days" x="517.83" y="447" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">days</text>
       <text id="so far. It is a straight line, not a for…" x="543.55" y="447" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">so far. It is a straight line, not a forecast — a quiet</text>
       <text id="week moves it." x="269" y="463" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">week moves it.</text>
-      <rect id="button" x="269" y="487" width="271.86" height="36" rx="12" fill="#007f34" />
-      <text id="Move to a plan that includes this" x="404.93" y="501" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Move to a plan that includes this</text>
+      <rect id="button" x="269" y="487" width="271.86" height="36" rx="12" fill="#00782e" />
+      <text id="Move to a plan that includes this" x="415.93" y="510" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Move to a plan that includes this</text>
+      <g id="icon arrow-up-right" transform="translate(285 497) scale(0.667 0.667)" fill="none" stroke="#fcfcfc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M7 7h10v10" />
+        <path d="M7 17 17 7" />
+      </g>
       <rect id="button 2" x="552.86" y="487" width="177.73" height="36" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
-      <text id="Cap usage instead" x="641.73" y="501" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Cap usage instead</text>
+      <text id="Cap usage instead" x="652.73" y="510" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Cap usage instead</text>
+      <g id="icon shield-check" transform="translate(569.859 497) scale(0.667 0.667)" fill="none" stroke="#080c0f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
+        <path d="m9 12 2 2 4-4" />
+      </g>
       <text id="Upgrading is usually cheaper than paying…" x="269" y="547" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Upgrading is usually cheaper than paying overage at this volume. Capping stops the charges and</text>
       <text id="starts returning 429s — some teams genui…" x="269" y="563" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">starts returning 429s — some teams genuinely prefer that, and it is a real option rather than a threat.</text>
   </g>
@@ -188,115 +297,159 @@
   <g id="Seat Count &amp; Proration" transform="translate(64, 3416)">
     <rect id="container" x="0" y="0" width="1088" height="451" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="container 2" x="232" y="65" width="624" height="321" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
-      <text id="Seats" x="257" y="106" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="600">Seats</text>
+      <text id="Seats" x="257" y="107" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="600">Seats</text>
       <text id="£12.00 per seat per month · renews 14 Se…" x="313.27" y="107" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">£12.00 per seat per month · renews 14 September</text>
       <rect id="button" x="257" y="134" width="36" height="36" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <g id="icon minus" transform="translate(267 144) scale(0.667 0.667)" fill="none" stroke="#080c0f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14" />
+      </g>
       <rect id="field" x="301" y="134" width="80" height="36" rx="12" fill="#fdfcf8" stroke="#8d8f92" stroke-width="1" />
       <rect id="button 2" x="389" y="134" width="36" height="36" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
-      <text id="9 of 12 seats are in use" x="441" y="156" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">9 of 12 seats are in use</text>
+      <g id="icon plus" transform="translate(399 144) scale(0.667 0.667)" fill="none" stroke="#080c0f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14" />
+        <path d="M12 5v14" />
+      </g>
+      <text id="9 of 12 seats are in use" x="461" y="156" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">9 of 12 seats are in use</text>
+      <g id="icon users" transform="translate(441 145) scale(0.583 0.583)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+        <path d="M16 3.128a4 4 0 0 1 0 7.744" />
+        <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+        <circle cx="9" cy="7" r="4" />
+      </g>
       <rect id="container 3" x="257" y="190" width="574" height="119" rx="16" fill="rgba(242, 242, 237, 0.4)" stroke="#dbdee1" stroke-width="1" />
-      <text id="2 extra seats for the 18 days left in th…" x="274" y="221" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">2 extra seats for the 18 days left in this period</text>
-      <text id="£14.40" x="767.02" y="221" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">£14.40</text>
+      <text id="2 extra seats for the 18 days left in th…" x="274" y="222" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">2 extra seats for the 18 days left in this period</text>
+      <text id="£14.40" x="767.02" y="222" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">£14.40</text>
       <rect id="container 4" x="274" y="235" width="540" height="29" fill="none" stroke="#dbdee1" stroke-width="1" />
-      <text id="From 14 September, every month" x="274" y="258" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">From 14 September, every month</text>
-      <text id="£168.00" x="758.27" y="258" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">£168.00</text>
-      <text id="The part-period charge is £12.00 × 2 × 1…" x="274" y="284" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">The part-period charge is £12.00 × 2 × 18/30 days. It goes on the card ending 4242 today.</text>
-      <rect id="button 3" x="257" y="325" width="175.61" height="36" rx="12" fill="#007f34" />
-      <text id="Add 2 and pay £14.40" x="344.8" y="339" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Add 2 and pay £14.40</text>
-      <text id="Cancel" x="475.39" y="339" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Cancel</text>
+      <text id="From 14 September, every month" x="274" y="259" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">From 14 September, every month</text>
+      <text id="£168.00" x="758.27" y="259" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">£168.00</text>
+      <text id="The part-period charge is £12.00 × 2 × 1…" x="274" y="288" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">The part-period charge is £12.00 × 2 × 18/30 days. It goes on the card ending 4242 today.</text>
+      <rect id="button 3" x="257" y="325" width="175.61" height="36" rx="12" fill="#00782e" />
+      <text id="Add 2 and pay £14.40" x="344.8" y="348" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Add 2 and pay £14.40</text>
+      <text id="Cancel" x="475.39" y="348" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Cancel</text>
   </g>
   <text id="Invoice Detail label" x="64" y="3983" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Invoice Detail</text>
   <text id="billing-invoice-detail id" x="64" y="3997" font-family="ui-monospace, monospace" font-size="12" fill="#737373">billing-invoice-detail</text>
   <g id="Invoice Detail" transform="translate(64, 4015)">
     <rect id="container" x="0" y="0" width="1088" height="657" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="section" x="1" y="1" width="1086" height="655" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
-      <text id="Invoice INV-2026-0841" x="50" y="42" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="600">Invoice INV-2026-0841</text>
+      <g id="icon file-text" transform="translate(26 30) scale(0.667 0.667)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+        <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+        <path d="M10 9H8" />
+        <path d="M16 13H8" />
+        <path d="M16 17H8" />
+      </g>
+      <text id="Invoice INV-2026-0841" x="50" y="43" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="600">Invoice INV-2026-0841</text>
       <rect id="container 2" x="236.78" y="27.75" width="37.88" height="20.5" rx="4" fill="rgba(0, 186, 118, 0.102)" />
-      <text id="paid" x="236.78" y="38.75" fill="#009966" font-family="Geist, &quot;Geist Fallback&quot;" font-size="11" font-weight="600" letter-spacing="0.28">paid</text>
-      <text id="Issued 31 August 2026 · Due 14 September…" x="26" y="68" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Issued 31 August 2026 · Due 14 September 2026</text>
+      <text id="paid" x="242.78" y="41.75" fill="#009966" font-family="Geist, &quot;Geist Fallback&quot;" font-size="11" font-weight="600" letter-spacing="0.28">paid</text>
+      <text id="Issued 31 August 2026 · Due 14 September…" x="26" y="69" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Issued 31 August 2026 · Due 14 September 2026</text>
       <rect id="link" x="919.75" y="26" width="142.25" height="34" rx="12" fill="none" stroke="#dbdee1" stroke-width="1" />
-      <text id="Download PDF" x="919.75" y="40" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Download PDF</text>
+      <text id="Download PDF" x="952.75" y="48" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Download PDF</text>
+      <g id="icon download" transform="translate(932.75 36) scale(0.583 0.583)" fill="none" stroke="#080c0f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 15V3" />
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+        <path d="m7 10 5 5 5-5" />
+      </g>
       <text id="Billed to" x="26" y="135" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="600" letter-spacing="0.6">Billed to</text>
-      <text id="Acme Corp" x="26" y="161" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Acme Corp</text>
-      <text id="14 Bridgewater Street" x="26" y="183.75" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">14 Bridgewater Street</text>
-      <text id="Manchester M1 5AN" x="26" y="206.5" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Manchester M1 5AN</text>
-      <text id="United Kingdom" x="26" y="229.25" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">United Kingdom</text>
-      <text id="Invoice number" x="556" y="137" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Invoice number</text>
-      <text id="INV-2026-0841" x="952.8" y="137" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="14">INV-2026-0841</text>
-      <text id="Tax registration" x="556" y="165" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Tax registration</text>
-      <text id="GB 123 4567 89" x="944.39" y="165" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="14">GB 123 4567 89</text>
-      <text id="Payment method" x="556" y="193" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Payment method</text>
-      <text id="Visa ending 4242" x="950.13" y="193" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Visa ending 4242</text>
-      <text id="Description" x="265.84" y="277" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Description</text>
-      <text id="Qty" x="529.67" y="277" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Qty</text>
-      <text id="Unit" x="666.09" y="277" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Unit</text>
-      <text id="Amount" x="847.52" y="277" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Amount</text>
-      <text id="Studio plan — 40 seats" x="265.84" y="317.5" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Studio plan — 40 seats</text>
-      <text id="1 Aug – 31 Aug 2026" x="265.84" y="350" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" text-anchor="middle">1 Aug – 31 Aug 2026</text>
-      <text id="40" x="529.67" y="317.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">40</text>
-      <text id="$12.00" x="666.09" y="317.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">$12.00</text>
-      <text id="$480.00" x="847.52" y="317.5" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">$480.00</text>
-      <text id="Unused time on Team plan" x="265.84" y="380.5" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Unused time on Team plan</text>
-      <text id="20 Aug – 31 Aug 2026" x="265.84" y="413" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" text-anchor="middle">20 Aug – 31 Aug 2026</text>
-      <text id="24" x="529.67" y="380.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">24</text>
-      <text id="$12.00 2" x="666.09" y="380.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">$12.00</text>
-      <text id="-$103.20" x="847.52" y="380.5" fill="#009966" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">-$103.20</text>
-      <text id="Remaining time on Studio plan" x="265.84" y="443.5" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Remaining time on Studio plan</text>
-      <text id="20 Aug – 31 Aug 2026 2" x="265.84" y="476" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" text-anchor="middle">20 Aug – 31 Aug 2026</text>
-      <text id="40 2" x="529.67" y="443.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">40</text>
-      <text id="$12.00 3" x="666.09" y="443.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">$12.00</text>
-      <text id="$172.00" x="847.52" y="443.5" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">$172.00</text>
-      <text id="AI credit pack — 2,000 credits" x="265.84" y="506.5" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">AI credit pack — 2,000 credits</text>
-      <text id="1" x="529.67" y="506.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">1</text>
-      <text id="$15.00" x="666.09" y="506.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">$15.00</text>
-      <text id="$15.00 2" x="847.52" y="506.5" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">$15.00</text>
-      <text id="Subtotal" x="2" y="551.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Subtotal</text>
-      <text id="$563.80" x="847.52" y="551.5" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">$563.80</text>
-      <text id="VAT (United Kingdom) at 20%" x="2" y="588" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">VAT (United Kingdom) at 20%</text>
-      <text id="$112.76" x="847.52" y="588" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">$112.76</text>
+      <text id="Acme Corp" x="26" y="163" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Acme Corp</text>
+      <text id="14 Bridgewater Street" x="26" y="185.75" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">14 Bridgewater Street</text>
+      <text id="Manchester M1 5AN" x="26" y="208.5" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Manchester M1 5AN</text>
+      <text id="United Kingdom" x="26" y="231.25" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">United Kingdom</text>
+      <text id="Invoice number" x="556" y="138" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Invoice number</text>
+      <text id="INV-2026-0841" x="952.8" y="138" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="14">INV-2026-0841</text>
+      <text id="Tax registration" x="556" y="166" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Tax registration</text>
+      <text id="GB 123 4567 89" x="944.39" y="166" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="14">GB 123 4567 89</text>
+      <text id="Payment method" x="556" y="194" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Payment method</text>
+      <text id="Visa ending 4242" x="950.13" y="194" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Visa ending 4242</text>
+      <text id="Description" x="265.84" y="288" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Description</text>
+      <text id="Qty" x="622" y="288" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Qty</text>
+      <text id="Unit" x="800.11" y="288" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Unit</text>
+      <text id="Amount" x="1009.5" y="288" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Amount</text>
+      <text id="Studio plan — 40 seats" x="265.83" y="331" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Studio plan — 40 seats</text>
+      <text id="1 Aug – 31 Aug 2026" x="265.83" y="350" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" text-anchor="middle">1 Aug – 31 Aug 2026</text>
+      <text id="40" x="629.28" y="340" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">40</text>
+      <text id="$12.00" x="782.28" y="340" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">$12.00</text>
+      <text id="$480.00" x="1008.38" y="340" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">$480.00</text>
+      <text id="Unused time on Team plan" x="265.84" y="394" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Unused time on Team plan</text>
+      <text id="20 Aug – 31 Aug 2026" x="265.83" y="413" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" text-anchor="middle">20 Aug – 31 Aug 2026</text>
+      <text id="24" x="629.28" y="403" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">24</text>
+      <text id="$12.00 2" x="782.28" y="403" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">$12.00</text>
+      <text id="-$103.20" x="1002.5" y="403" fill="#009966" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">-$103.20</text>
+      <text id="Remaining time on Studio plan" x="265.83" y="457" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Remaining time on Studio plan</text>
+      <text id="20 Aug – 31 Aug 2026 2" x="265.83" y="476" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" text-anchor="middle">20 Aug – 31 Aug 2026</text>
+      <text id="40 2" x="629.28" y="466" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">40</text>
+      <text id="$12.00 3" x="782.28" y="466" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">$12.00</text>
+      <text id="$172.00" x="1008.38" y="466" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">$172.00</text>
+      <text id="AI credit pack — 2,000 credits" x="265.84" y="520" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">AI credit pack — 2,000 credits</text>
+      <text id="1" x="637.69" y="520" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">1</text>
+      <text id="$15.00" x="782.28" y="520" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">$15.00</text>
+      <text id="$15.00 2" x="1016.77" y="520" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">$15.00</text>
+      <text id="Subtotal" x="769.27" y="569" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Subtotal</text>
+      <text id="$563.80" x="1008.38" y="569" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">$563.80</text>
+      <text id="VAT (United Kingdom) at 20%" x="637.78" y="595" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">VAT (United Kingdom) at 20%</text>
+      <text id="$112.76" x="1008.38" y="595" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">$112.76</text>
       <rect id="container 3" x="2" y="606.5" width="1084" height="48.5" fill="none" stroke="#dbdee1" stroke-width="1" />
-      <text id="Total" x="2" y="620.5" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Total</text>
-      <text id="$676.56" x="847.52" y="622.5" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="600">$676.56</text>
+      <text id="Total" x="790.39" y="636" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Total</text>
+      <text id="$676.56" x="997.97" y="636" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="600">$676.56</text>
   </g>
   <text id="Credit Balance and Expiry label" x="64" y="4788" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Credit Balance and Expiry</text>
   <text id="billing-credit-balance id" x="64" y="4802" font-family="ui-monospace, monospace" font-size="12" fill="#737373">billing-credit-balance</text>
   <g id="Credit Balance and Expiry" transform="translate(64, 4820)">
     <rect id="container" x="0" y="0" width="1088" height="564.58" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="section" x="1" y="1" width="1086" height="562.58" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
-      <text id="Credit balance" x="26" y="42" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="600">Credit balance</text>
-      <text id="2,110" x="26" y="84" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="30" font-weight="700">2,110</text>
+      <text id="Credit balance" x="50" y="43" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="600">Credit balance</text>
+      <g id="icon coins" transform="translate(26 30) scale(0.667 0.667)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="8" cy="8" r="6" />
+        <path d="M18.09 10.37A6 6 0 1 1 10.34 18" />
+        <path d="M7 6h1v4" />
+        <path d="m16.71 13.88.7.71-2.82 2.82" />
+      </g>
+      <text id="2,110" x="26" y="82" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="30" font-weight="700">2,110</text>
       <text id="credits available" x="115.41" y="82" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">credits available</text>
-      <rect id="button" x="940.48" y="26" width="121.52" height="32" rx="12" fill="#007f34" />
-      <text id="Buy credits" x="1001.24" y="40" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Buy credits</text>
+      <rect id="button" x="940.48" y="26" width="121.52" height="32" rx="12" fill="#00782e" />
+      <text id="Buy credits" x="1012.24" y="47" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600" text-anchor="middle">Buy credits</text>
+      <g id="icon plus" transform="translate(952.484 34) scale(0.667 0.667)" fill="none" stroke="#fcfcfc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14" />
+        <path d="M12 5v14" />
+      </g>
       <rect id="paragraph" x="2" y="115" width="1084" height="53" fill="rgba(245, 147, 0, 0.102)" />
-      <text id="320 credits from monthly allowance expir…" x="50" y="145" fill="#bb4d00" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">320 credits from monthly allowance expire in 1 days; 150 credits from launch bonus expire in 3 days. They are spent last, so use them before buying more.</text>
-      <text id="Monthly allowance" x="26" y="206" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Monthly allowance</text>
+      <g id="icon clock" transform="translate(26 133) scale(0.667 0.667)" fill="none" stroke="#bb4d00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 6v6l4 2" />
+        <circle cx="12" cy="12" r="10" />
+      </g>
+      <text id="320 credits from monthly allowance expir…" x="50" y="146" fill="#bb4d00" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">320 credits from monthly allowance expire in 1 days; 150 credits from launch bonus expire in 3 days. They are spent last, so use them before buying more.</text>
+      <text id="Monthly allowance" x="54" y="207" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Monthly allowance</text>
       <rect id="container 2" x="26" y="193.86" width="20" height="20" rx="10" fill="#f3f2ee" />
-      <text id="1" x="26" y="204.86" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="11" font-weight="700">1</text>
+      <text id="1" x="33.52" y="207" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="11" font-weight="700">1</text>
       <text id="320" x="996.84" y="207" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">320</text>
-      <text id="/ 500" x="1023.06" y="207" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">/ 500</text>
+      <text id="/ 500" x="1026.56" y="207" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">/ 500</text>
       <rect id="meter" x="26" y="223.86" width="1036" height="8" rx="4" fill="#f3f2ee" />
-      <rect id="container 3" x="26" y="223.86" width="663.03" height="8" rx="4" fill="#007f34" />
+      <rect id="container 3" x="26" y="223.86" width="663.03" height="8" rx="4" fill="#00782e" />
       <text id="Included with Pro+. Resets on the 1st an…" x="26" y="251.86" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Included with Pro+. Resets on the 1st and does not roll over. Expires .</text>
       <text id="September 1" x="396.45" y="251.86" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">September 1</text>
-      <text id="Credit pack — 2,000" x="26" y="318.86" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Credit pack — 2,000</text>
+      <text id="Credit pack — 2,000" x="54" y="319.86" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Credit pack — 2,000</text>
       <rect id="container 4" x="26" y="306.72" width="20" height="20" rx="10" fill="#f3f2ee" />
-      <text id="2" x="26" y="317.72" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="11" font-weight="700">2</text>
+      <text id="2" x="32.41" y="319.86" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="11" font-weight="700">2</text>
       <text id="1,640" x="973.73" y="319.86" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">1,640</text>
-      <text id="/ 2,000" x="1011.84" y="319.86" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">/ 2,000</text>
+      <text id="/ 2,000" x="1015.34" y="319.86" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">/ 2,000</text>
       <rect id="meter 2" x="26" y="336.72" width="1036" height="8" rx="4" fill="#f3f2ee" />
-      <rect id="container 5" x="26" y="336.72" width="849.52" height="8" rx="4" fill="#007f34" />
+      <rect id="container 5" x="26" y="336.72" width="849.52" height="8" rx="4" fill="#00782e" />
       <text id="Purchased 12 August 2026. Never expires." x="26" y="364.72" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Purchased 12 August 2026. Never expires.</text>
-      <text id="Launch bonus" x="26" y="431.72" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Launch bonus</text>
+      <text id="Launch bonus" x="54" y="432.72" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Launch bonus</text>
       <rect id="container 6" x="26" y="419.58" width="20" height="20" rx="10" fill="#f3f2ee" />
-      <text id="3" x="26" y="430.58" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="11" font-weight="700">3</text>
+      <text id="3" x="32.42" y="432.72" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="11" font-weight="700">3</text>
       <text id="150" x="996.84" y="432.72" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">150</text>
-      <text id="/ 250" x="1023.06" y="432.72" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">/ 250</text>
+      <text id="/ 250" x="1026.56" y="432.72" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">/ 250</text>
       <rect id="meter 3" x="26" y="449.58" width="1036" height="8" rx="4" fill="#f3f2ee" />
-      <rect id="container 7" x="26" y="449.58" width="621.59" height="8" rx="4" fill="#007f34" />
+      <rect id="container 7" x="26" y="449.58" width="621.59" height="8" rx="4" fill="#00782e" />
       <text id="Granted with your first purchase. Expire…" x="26" y="477.58" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Granted with your first purchase. Expires .</text>
       <text id="September 3" x="251.11" y="477.58" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">September 3</text>
       <rect id="paragraph 2" x="2" y="505.58" width="1084" height="57" fill="none" stroke="#dbdee1" stroke-width="1" />
-      <text id="Credits are spent from the top of this l…" x="2" y="517.58" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Credits are spent from the top of this list down, so the allowance included with your plan is used before anything you paid for.</text>
+      <text id="Credits are spent from the top of this l…" x="48" y="538.58" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Credits are spent from the top of this list down, so the allowance included with your plan is used before anything you paid for.</text>
+      <g id="icon info" transform="translate(26 528.578) scale(0.583 0.583)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10" />
+        <path d="M12 16v-4" />
+        <path d="M12 8h.01" />
+      </g>
   </g>
 </svg>

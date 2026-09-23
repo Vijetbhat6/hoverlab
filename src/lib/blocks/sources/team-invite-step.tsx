@@ -191,7 +191,7 @@ export function TeamInviteStep({
               onKeyDown={handleKeyDown}
               onBlur={() => commit(draft)}
               placeholder={emails.length ? 'Add another…' : 'name@company.com'}
-              className="h-8 min-w-[12rem] flex-1 bg-transparent px-1 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none"
+              className="h-8 min-w-[12rem] flex-1 bg-transparent px-1 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none border border-transparent"
             />
           </div>
 
@@ -250,9 +250,9 @@ export function TeamInviteStep({
 
         {/* The other way in, for anyone whose colleagues' addresses they do
             not actually know — which is most people in a large company. */}
-        <div className="mt-6 flex flex-wrap items-center gap-3 rounded-xl border border-dashed border-border px-4 py-3">
+        <div className="mt-6 flex items-center gap-3 rounded-xl border border-dashed border-border px-4 py-3">
           <Link2 aria-hidden className="h-4 w-4 shrink-0 text-muted-foreground" />
-          <p className="min-w-0 flex-1 truncate font-mono text-xs text-muted-foreground">
+          <p className="min-w-0 flex-1 break-all font-mono text-xs text-muted-foreground">
             {inviteLink}
           </p>
           <button

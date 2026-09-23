@@ -60,7 +60,8 @@ export function BundleDrawer({ open, onOpenChange }: BundleDrawerProps) {
   const { entries, remove, clear, count } = useBundle()
   const { entitlements } = useEntitlements()
   const canUsePro = entitlements?.canUseProFeatures ?? false
-  const { quota, claim } = useExportQuota()
+  // Read the meter when the drawer opens, not on every page it is mounted on.
+  const { quota, claim } = useExportQuota({ enabled: open })
   const [zipBusy, setZipBusy] = React.useState(false)
   /* Which framework the ZIP's per-effect sources are generated in. 'css'
    * keeps the archive byte-identical to what it has always produced. */

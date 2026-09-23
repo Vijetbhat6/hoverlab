@@ -36,6 +36,7 @@ import { notFound } from 'next/navigation'
 import { PrimitivePreview } from '@/components/primitives/primitive-preview'
 import { BlockPreview } from '@/components/blocks/block-preview'
 import { PagePreview } from '@/components/pages/page-preview'
+import { StressRuntime } from '@/components/stress-runtime'
 import { PRIMITIVES, getPrimitive } from '@/lib/primitives/primitives'
 import { BLOCKS, getBlock } from '@/lib/blocks/blocks'
 import { PAGES, getPage } from '@/lib/pages/pages'
@@ -114,6 +115,8 @@ export default async function ArtifactPreviewFrame({ params }: PageProps) {
      */
     <main suppressHydrationWarning className="min-h-screen bg-background text-foreground">
       <script dangerouslySetInnerHTML={{ __html: APPLY_DIR_FROM_QUERY }} />
+      {/* `?stress=<id>`: renders nothing, and does nothing without the query. */}
+      <StressRuntime />
       {level === 'primitive' ? (
         <PrimitivePreview componentKey={artifact.previewComponent} />
       ) : level === 'block' ? (

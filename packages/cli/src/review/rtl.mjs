@@ -260,6 +260,14 @@ export const ICONS = {
     ruling: 'mirror',
     why: 'an arrow leaving through a door, and the door is on the end edge.',
   },
+  PanelLeft: {
+    ruling: 'mirror',
+    why: 'a picture of the sidebar, drawn on the start edge. In an RTL layout the sidebar is on the right, so an unmirrored glyph shows a panel where there is none. Ruled with PanelRight, because mirroring one of a matched pair breaks the pair.',
+  },
+  PanelRight: {
+    ruling: 'mirror',
+    why: 'the inspector or detail panel, drawn on the end edge. The other half of the PanelLeft pair.',
+  },
 
   /* ── Not mirrored, each for its own reason ──────────────────────────── */
   CornerDownLeft: {

@@ -11,6 +11,7 @@ import { createRequire } from 'node:module'
 
 import {
   commandAdd,
+  commandAuditUrl,
   commandCategories,
   commandDna,
   commandDoctor,
@@ -37,11 +38,11 @@ const { version } = require('../package.json')
 /** Flags that take a value; everything else is boolean. */
 const VALUE_FLAGS = new Set([
   'framework', 'dir', 'category', 'limit', 'level', 'hue', 'sat', 'scale', 'speed',
-  'brand', 'out', 'base', 'format',
+  'brand', 'out', 'base', 'format', 'viewport', 'pages', 'wait', 'timeout',
 ])
 
 /** Flags parsed as numbers rather than strings. */
-const NUMERIC_FLAGS = new Set(['limit', 'hue', 'sat', 'scale', 'speed'])
+const NUMERIC_FLAGS = new Set(['limit', 'hue', 'sat', 'scale', 'speed', 'wait', 'timeout'])
 
 const ALIASES = {
   f: 'framework',
@@ -182,6 +183,10 @@ async function main() {
 
     case 'review':
       await commandReview(rest, flags)
+      return
+
+    case 'audit-url':
+      await commandAuditUrl(rest, flags)
       return
 
     case 'remove':

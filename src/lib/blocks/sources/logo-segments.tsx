@@ -112,9 +112,9 @@ export function LogoSegments({
         {segments.map((segment) => (
           <div
             key={segment.name}
-            className="grid gap-4 py-8 sm:grid-cols-[12rem_1fr] sm:gap-10"
+            className="grid gap-4 py-8 sm:grid-cols-[minmax(0,min(12rem,38%))_minmax(0,1fr)] sm:gap-10"
           >
-            <dt className="text-sm font-semibold tracking-tight text-foreground">
+            <dt className="min-w-0 break-words text-sm font-semibold tracking-tight text-foreground">
               {segment.name}
               {segment.count ? (
                 <span className="mt-1 block text-sm font-normal text-muted-foreground">
@@ -123,12 +123,12 @@ export function LogoSegments({
               ) : null}
             </dt>
 
-            <dd>
+            <dd className="min-w-0">
               <ul className="flex flex-wrap items-center gap-x-10 gap-y-4">
                 {segment.logos.map((logo, i) => (
                   <li
                     key={i}
-                    className="text-lg font-bold tracking-tight text-muted-foreground/70 transition-colors hover:text-foreground"
+                    className="text-lg font-bold tracking-tight text-muted-foreground/85 transition-colors hover:text-foreground"
                   >
                     {logo}
                   </li>

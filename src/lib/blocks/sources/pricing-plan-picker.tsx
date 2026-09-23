@@ -186,17 +186,17 @@ export function PricingPlanPicker({
                         ) : null}
                       </span>
 
-                      <span className="mt-1 block text-pretty text-sm leading-relaxed text-muted-foreground">
+                      <span className="mt-1 block break-words text-pretty text-sm leading-relaxed text-muted-foreground">
                         {plan.summary}
                       </span>
                     </span>
 
-                    <span className="shrink-0 text-end">
+                    <span className="max-w-[40%] shrink-0 text-end">
                       <span className="block text-lg font-bold tabular-nums text-foreground">
                         {plan.price}
                       </span>
                       {plan.cadence ? (
-                        <span className="mt-0.5 block text-xs leading-snug text-muted-foreground">
+                        <span className="mt-0.5 block break-words text-xs leading-snug text-muted-foreground">
                           {plan.cadence}
                         </span>
                       ) : null}

@@ -188,10 +188,10 @@ export function BillingCreditBalance({
                 aria-valuemax={bucket.total}
                 aria-valuetext={`${bucket.remaining.toLocaleString('en-US')} of ${bucket.total.toLocaleString('en-US')} credits remaining`}
                 aria-label={bucket.label}
-                className="mt-2.5 h-2 overflow-hidden rounded-full bg-muted"
+                className="mt-2.5 h-2 overflow-hidden rounded-full border border-transparent bg-muted"
               >
                 <div
-                  className="h-full rounded-full bg-primary transition-[width] duration-500"
+                  className="h-full rounded-full bg-primary transition-[width] duration-500 border border-transparent"
                   style={{ width: `${percent}%` }}
                 />
               </div>

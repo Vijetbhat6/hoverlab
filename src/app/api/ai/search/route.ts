@@ -2,30 +2,49 @@ import { NextResponse } from 'next/server'
 import { complete, isAiConfigured } from '@/lib/ai/claude'
 import { resolveRequestSubject } from '@/lib/billing/request-subject'
 import { consumeQuota, refundQuota, METERS } from '@/lib/billing/quota'
+import { EFFECT_INDEX } from '@/lib/effect-index'
+import { searchEffects } from '@/lib/search/effects'
+import { validateImage, MAX_IMAGE_BYTES, type ValidImage } from '@/lib/ai/search-image'
+import {
+  MAX_QUERY_LENGTH,
+  executeSearch,
+  prepareSearch,
+  type RetrievalDeps,
+  type SearchCandidate,
+} from '@/lib/ai/search-request'
 
 /**
- * AI-powered natural-language effect search.
+ * AI-powered natural-language effect search, with an optional screenshot.
  *
- * The client pre-filters the catalog (substring match on name + tags +
- * category + description) down to a candidate pool of at most ~80
- * effects, then sends that pool here alongside the user's natural-
- * language query. We ask the LLM to rank the candidates by semantic
- * relevance to the query and return a JSON array of effect IDs.
- *
- * Why pre-filter on the client?
- *  - Keeps the LLM prompt small (~80 effects × ~80 chars ≈ 6KB) so
- *    latency and cost stay low.
- *  - The client already has the full catalog in memory (it renders
- *    the grid), so it's the natural place to do cheap substring
- *    filtering.
- *  - The LLM's job is purely semantic ranking — its strength.
+ * The server chooses the candidates and the model ranks them. Candidate
+ * retrieval used to happen in the browser — a substring match capped at 80,
+ * with 80 featured effects as the fallback — which meant a conceptual query
+ * with no literal hit was ranked against eighty effects that had nothing to
+ * do with it. It now runs here, on the catalog, through the same
+ * typo-tolerant, synonym-aware engine as /library and the palette
+ * (`@/lib/search`), taking the best ~80 by score. The featured fallback
+ * survives only for a query the lexical score finds truly nothing for.
+ * Everything about *what* is asked and how the reply is read lives in
+ * `@/lib/ai/search-request` as pure functions; this file is the I/O.
  *
  * Request body:
- *   { query: string, candidates: Array<{ id, name, category, description }> }
+ *   { query?: string, image?: string }
+ *     query   free text, up to 300 characters
+ *     image   PNG / JPEG / WebP as a data URL or base64, up to 1.5 MB
+ *             decoded, checked by magic number rather than declared type
+ *   At least one is required. A stale client that still sends `candidates`
+ *   is served normally — the field is ignored, never trusted.
  *
  * Response:
- *   { ids: string[] }   // ranked effect IDs, most relevant first
- *                     // empty array if the LLM returned nothing usable
+ *   { ids: string[], source: 'lexical' | 'featured' }
+ *     ids     ranked effect IDs, most relevant first; empty if nothing usable
+ *     source  where the model's candidate pool came from
+ *
+ * GET answers `{ configured: boolean }` and nothing else, so the page can
+ * show an honest disabled state instead of learning by failing a search. It
+ * is cacheable at the edge, because a function call is a metered thing on
+ * this host and a status check that costs one per page view would be a
+ * strange thing to spend them on.
  *
  * METERED, and it was not. This route takes no credentials, calls a model
  * on every request and had no limit of any kind, which made it a free
@@ -37,24 +56,77 @@ import { consumeQuota, refundQuota, METERS } from '@/lib/billing/quota'
  * searches ten times to find it. The limit is a ceiling against abuse, not
  * a lever on the funnel — see METERS in `billing/quota-limits.ts`. Pro,
  * Studio, Team and Pro+ have no limit here at all.
+ *
+ * A screenshot search costs the same one search as a text one. Vision input
+ * costs more tokens per call, but the counter is a ceiling against abuse
+ * rather than a price, and a second unit would mean two charges and two
+ * refunds per request for a cost model this route does not have a place for.
+ * The size cap is what bounds it.
  */
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 
-interface Candidate {
-  id: string
-  name: string
-  category: string
-  description: string
-}
+/**
+ * Body ceiling, checked from the header before anything is read. The image
+ * is 4/3 larger as base64, and the rest of the body is a short string; a
+ * request claiming more than this is refused without being parsed.
+ */
+const MAX_BODY_BYTES = Math.ceil((MAX_IMAGE_BYTES * 4) / 3) + 4_096
 
 interface SearchRequestBody {
   query?: unknown
-  candidates?: unknown
+  image?: unknown
+}
+
+/** Featured effects as candidates — computed once, the index never changes. */
+const FEATURED: SearchCandidate[] = EFFECT_INDEX.filter((e) => e.featured).map((e) => ({
+  id: e.id,
+  name: e.name,
+  category: e.category,
+  description: e.description,
+}))
+
+/**
+ * `any` mode: a conceptual query only has to reach the pool, and a pool built
+ * from documents that match *most* of the words beats one that needs all of
+ * them. The model does the precise ranking.
+ */
+const RETRIEVAL: RetrievalDeps = {
+  search: (query, limit) =>
+    searchEffects(query, { mode: 'any', limit }).map(({ doc }) => ({
+      id: doc.id,
+      name: doc.name,
+      category: doc.category,
+      description: doc.description,
+    })),
+  featured: FEATURED,
+}
+
+/** Effect ids for a list of keywords, best first — the screenshot top-up. */
+function topUp(keywords: string[]): string[] {
+  return searchEffects(keywords.join(' '), { mode: 'any', limit: 30 }).map((h) => h.doc.id)
+}
+
+export async function GET() {
+  return NextResponse.json(
+    { configured: isAiConfigured() },
+    {
+      headers: {
+        // Short at the edge: an environment change should show up within
+        // minutes, and a status read must not cost a function call each time.
+        'Cache-Control': 'public, max-age=60, s-maxage=300',
+      },
+    },
+  )
 }
 
 export async function POST(request: Request) {
+  const declaredLength = Number(request.headers.get('content-length'))
+  if (Number.isFinite(declaredLength) && declaredLength > MAX_BODY_BYTES) {
+    return NextResponse.json({ error: 'Request is too large' }, { status: 413 })
+  }
+
   let body: SearchRequestBody
   try {
     body = (await request.json()) as SearchRequestBody
@@ -62,14 +134,20 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Invalid JSON body' }, { status: 400 })
   }
 
-  const query = typeof body.query === 'string' ? body.query.trim() : ''
-  const candidatesRaw = Array.isArray(body.candidates) ? body.candidates : []
+  const query =
+    typeof body.query === 'string' ? body.query.trim().slice(0, MAX_QUERY_LENGTH) : ''
 
-  if (!query) {
-    return NextResponse.json({ error: 'Query is required' }, { status: 400 })
+  let image: ValidImage | undefined
+  if (body.image !== undefined && body.image !== null && body.image !== '') {
+    const checked = validateImage(body.image)
+    if (!checked.ok) {
+      return NextResponse.json({ error: checked.message, reason: checked.reason }, { status: 400 })
+    }
+    image = checked
   }
-  if (candidatesRaw.length === 0) {
-    return NextResponse.json({ ids: [] })
+
+  if (!query && !image) {
+    return NextResponse.json({ error: 'Query is required' }, { status: 400 })
   }
 
   /*
@@ -87,6 +165,12 @@ export async function POST(request: Request) {
       { ids: [], error: 'AI search is not configured' },
       { status: 503, headers: { 'Cache-Control': 'private, no-store' } },
     )
+  }
+
+  // Built before the charge: a request with nothing to rank must cost nothing.
+  const prepared = prepareSearch(query, image, RETRIEVAL)
+  if (!prepared) {
+    return NextResponse.json({ ids: [] })
   }
 
   /*
@@ -115,78 +199,9 @@ export async function POST(request: Request) {
     )
   }
 
-  // Sanitize + cap candidates to keep the prompt bounded.
-  const candidates: Candidate[] = candidatesRaw
-    .slice(0, 80)
-    .map((c) => {
-      if (typeof c !== 'object' || c === null) return null
-      const obj = c as Record<string, unknown>
-      const id = typeof obj.id === 'string' ? obj.id : ''
-      const name = typeof obj.name === 'string' ? obj.name : ''
-      const category = typeof obj.category === 'string' ? obj.category : ''
-      const description =
-        typeof obj.description === 'string' ? obj.description : ''
-      if (!id) return null
-      return { id, name, category, description }
-    })
-    .filter((c): c is Candidate => c !== null && c.id !== '')
-
-  if (candidates.length === 0) {
-    return NextResponse.json({ ids: [] })
-  }
-
-  // Build a compact catalog for the prompt. Each effect on one line:
-  //   "btn-gradient | Buttons | Gradient Shift Button | Smooth hue-shift on hover"
-  const catalog = candidates
-    .map(
-      (c) =>
-        `${c.id} | ${c.category} | ${c.name} | ${c.description.slice(0, 120)}`,
-    )
-    .join('\n')
-
-  const systemPrompt = `You are an expert frontend developer helping a user find the right CSS effect in a library.
-
-You will receive:
-  1. A user's natural-language description of what they want (the "query").
-  2. A catalog of candidate effects, one per line, in the format:
-       <id> | <category> | <name> | <description>
-
-Your job: rank the candidates by how well they match the user's intent. Consider:
-  - Semantic match (e.g. "button that pulses" → effects with pulse/breathe animations on buttons)
-  - Category relevance (e.g. "loader" queries should prefer Loaders)
-  - Visual / interaction fit (e.g. "subtle" → prefer understated effects over flashy ones)
-
-Return ONLY a JSON object of this exact shape, no markdown, no explanation:
-  {"ids": ["effect-id-1", "effect-id-2", ...]}
-
-Rules:
-  - Return between 0 and 20 IDs, most relevant first.
-  - Only include IDs that appear in the candidate catalog.
-  - If nothing matches, return {"ids": []}.
-  - Do NOT include any text before or after the JSON.`
-
-  const userPrompt = `Query: ${query}
-
-Candidate catalog (${candidates.length} effects):
-${catalog}
-
-Return the ranked JSON now.`
-
   try {
-    // Lowest effort of the three AI routes, and the only one where latency
-    // is felt directly — someone is watching a search box. Ranking twenty
-    // ids out of eighty is the kind of work that does not improve with more
-    // deliberation, so paying for more would buy a slower search.
-    const raw = await complete({
-      system: systemPrompt,
-      user: userPrompt,
-      maxTokens: 8000,
-      effort: 'low',
-    })
-
-    const ids = parseIdsResponse(raw, candidates)
-
-    return NextResponse.json({ ids })
+    const ids = await executeSearch(prepared, complete, topUp)
+    return NextResponse.json({ ids, source: prepared.source })
   } catch (err) {
     // The search was charged before the call; an outage on our side must
     // not spend it. Same order, and the same reasoning, as the credit
@@ -197,47 +212,5 @@ Return the ranked JSON now.`
       { ids: [], error: 'AI search is temporarily unavailable' },
       { status: 502 },
     )
-  }
-}
-
-/**
- * Parse the LLM's response into a list of valid effect IDs.
- *
- * The LLM is instructed to return strict JSON, but we defensively
- * handle common failure modes:
- *  - JSON wrapped in markdown code fences
- *  - Trailing prose after the JSON
- *  - The IDs field missing or malformed
- *
- * We also filter the result against the candidate IDs so the LLM
- * can't hallucinate IDs that don't exist.
- */
-function parseIdsResponse(raw: string, candidates: Candidate[]): string[] {
-  const validIds = new Set(candidates.map((c) => c.id))
-  const trimmed = raw.trim()
-
-  // Strip markdown code fences if present (```json ... ``` or ``` ... ```).
-  const fenceMatch = trimmed.match(/```(?:json)?\s*([\s\S]*?)```/i)
-  const jsonText = fenceMatch ? fenceMatch[1].trim() : trimmed
-
-  // Find the first {...} block — tolerates trailing prose.
-  const braceStart = jsonText.indexOf('{')
-  const braceEnd = jsonText.lastIndexOf('}')
-  if (braceStart === -1 || braceEnd === -1 || braceEnd <= braceStart) {
-    return []
-  }
-
-  try {
-    const parsed = JSON.parse(
-      jsonText.slice(braceStart, braceEnd + 1),
-    ) as unknown
-    if (!parsed || typeof parsed !== 'object') return []
-    const idsField = (parsed as { ids?: unknown }).ids
-    if (!Array.isArray(idsField)) return []
-    return idsField
-      .filter((id): id is string => typeof id === 'string' && validIds.has(id))
-      .slice(0, 20)
-  } catch {
-    return []
   }
 }

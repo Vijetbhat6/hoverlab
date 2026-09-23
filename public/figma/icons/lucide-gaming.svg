@@ -1,0 +1,884 @@
+<!--
+ISC License
+
+Copyright (c) for portions of Lucide are held by Cole Bemis 2013-2022 as part of Feather (MIT). All other copyright (c) for Lucide are held by Lucide Contributors 2022.
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted, provided that the above
+copyright notice and this permission notice appear in all copies.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" width="784" height="264" viewBox="0 0 784 264" id="Lucide icons / Gaming" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <g id="amphora" transform="translate(0 0)">
+    <rect id="amphora bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M10 2v5.632c0 .424-.272.795-.653.982A6 6 0 0 0 6 14c.006 4 3 7 5 8" />
+    <path d="M10 5H8a2 2 0 0 0 0 4h.68" />
+    <path d="M14 2v5.632c0 .424.272.795.652.982A6 6 0 0 1 18 14c0 4-3 7-5 8" />
+    <path d="M14 5h2a2 2 0 0 1 0 4h-.68" />
+    <path d="M18 22H6" />
+    <path d="M9 2h6" />
+  </g>
+  <g id="anvil" transform="translate(40 0)">
+    <rect id="anvil bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M7 10H6a4 4 0 0 1-4-4 1 1 0 0 1 1-1h4" />
+    <path d="M7 5a1 1 0 0 1 1-1h13a1 1 0 0 1 1 1 7 7 0 0 1-7 7H8a1 1 0 0 1-1-1z" />
+    <path d="M9 12v5" />
+    <path d="M15 12v5" />
+    <path d="M5 20a3 3 0 0 1 3-3h8a3 3 0 0 1 3 3 1 1 0 0 1-1 1H6a1 1 0 0 1-1-1" />
+  </g>
+  <g id="arrow-big-down" transform="translate(80 0)">
+    <rect id="arrow-big-down bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M15 6v6h4l-7 7-7-7h4V6h6z" />
+  </g>
+  <g id="arrow-big-down-dash" transform="translate(120 0)">
+    <rect id="arrow-big-down-dash bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M15 5H9" />
+    <path d="M15 9v3h4l-7 7-7-7h4V9z" />
+  </g>
+  <g id="arrow-big-left" transform="translate(160 0)">
+    <rect id="arrow-big-left bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M18 15h-6v4l-7-7 7-7v4h6v6z" />
+  </g>
+  <g id="arrow-big-left-dash" transform="translate(200 0)">
+    <rect id="arrow-big-left-dash bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M19 15V9" />
+    <path d="M15 15h-3v4l-7-7 7-7v4h3v6z" />
+  </g>
+  <g id="arrow-big-right" transform="translate(240 0)">
+    <rect id="arrow-big-right bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M6 9h6V5l7 7-7 7v-4H6V9z" />
+  </g>
+  <g id="arrow-big-right-dash" transform="translate(280 0)">
+    <rect id="arrow-big-right-dash bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M5 9v6" />
+    <path d="M9 9h3V5l7 7-7 7v-4H9V9z" />
+  </g>
+  <g id="arrow-big-up" transform="translate(320 0)">
+    <rect id="arrow-big-up bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M9 18v-6H5l7-7 7 7h-4v6H9z" />
+  </g>
+  <g id="arrow-big-up-dash" transform="translate(360 0)">
+    <rect id="arrow-big-up-dash bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M9 19h6" />
+    <path d="M9 15v-3H5l7-7 7 7h-4v3H9z" />
+  </g>
+  <g id="award" transform="translate(400 0)">
+    <rect id="award bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526" />
+    <circle cx="12" cy="8" r="6" />
+  </g>
+  <g id="axe" transform="translate(440 0)">
+    <rect id="axe bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m14 12-8.381 8.38a1 1 0 0 1-3.001-3L11 9" />
+    <path d="M15 15.5a.5.5 0 0 0 .5.5A6.5 6.5 0 0 0 22 9.5a.5.5 0 0 0-.5-.5h-1.672a2 2 0 0 1-1.414-.586l-5.062-5.062a1.205 1.205 0 0 0-1.704 0L9.352 5.648a1.205 1.205 0 0 0 0 1.704l5.062 5.062A2 2 0 0 1 15 13.828z" />
+  </g>
+  <g id="backpack" transform="translate(480 0)">
+    <rect id="backpack bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M4 10a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z" />
+    <path d="M8 10h8" />
+    <path d="M8 18h8" />
+    <path d="M8 22v-6a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v6" />
+    <path d="M9 6V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2" />
+  </g>
+  <g id="beaker" transform="translate(520 0)">
+    <rect id="beaker bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M4.5 3h15" />
+    <path d="M6 3v16a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V3" />
+    <path d="M6 14h12" />
+  </g>
+  <g id="bone" transform="translate(560 0)">
+    <rect id="bone bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M17 10c.7-.7 1.69 0 2.5 0a2.5 2.5 0 1 0 0-5 .5.5 0 0 1-.5-.5 2.5 2.5 0 1 0-5 0c0 .81.7 1.8 0 2.5l-7 7c-.7.7-1.69 0-2.5 0a2.5 2.5 0 0 0 0 5c.28 0 .5.22.5.5a2.5 2.5 0 1 0 5 0c0-.81-.7-1.8 0-2.5Z" />
+  </g>
+  <g id="book" transform="translate(600 0)">
+    <rect id="book bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20" />
+  </g>
+  <g id="book-a" transform="translate(640 0)">
+    <rect id="book-a bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20" />
+    <path d="m8 13 4-7 4 7" />
+    <path d="M9.1 11h5.7" />
+  </g>
+  <g id="book-alert" transform="translate(680 0)">
+    <rect id="book-alert bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 13h.01" />
+    <path d="M12 6v3" />
+    <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20" />
+  </g>
+  <g id="book-check" transform="translate(720 0)">
+    <rect id="book-check bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20" />
+    <path d="m9 9.5 2 2 4-4" />
+  </g>
+  <g id="book-copy" transform="translate(760 0)">
+    <rect id="book-copy bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M2 16V4a2 2 0 0 1 2-2h11" />
+    <path d="M22 18H11a2 2 0 1 0 0 4h10.5a.5.5 0 0 0 .5-.5v-15a.5.5 0 0 0-.5-.5H11a2 2 0 0 0-2 2v12" />
+    <path d="M5 14H4a2 2 0 1 0 0 4h1" />
+  </g>
+  <g id="book-heart" transform="translate(0 40)">
+    <rect id="book-heart bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M16 8.2A2.22 2.22 0 0 0 13.8 6c-.8 0-1.4.3-1.8.9-.4-.6-1-.9-1.8-.9A2.22 2.22 0 0 0 8 8.2c0 .6.3 1.2.7 1.6A226.652 226.652 0 0 0 12 13a404 404 0 0 0 3.3-3.1 2.413 2.413 0 0 0 .7-1.7" />
+    <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20" />
+  </g>
+  <g id="book-key" transform="translate(40 40)">
+    <rect id="book-key bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m19 3 1 1" />
+    <path d="m20 2-4.5 4.5" />
+    <path d="M20 7.898V21a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20" />
+    <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2h7.844" />
+    <circle cx="14" cy="8" r="2" />
+  </g>
+  <g id="book-lock" transform="translate(80 40)">
+    <rect id="book-lock bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M18 6V4a2 2 0 1 0-4 0v2" />
+    <path d="M20 15v6a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20" />
+    <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H10" />
+    <rect x="12" y="6" width="8" height="5" rx="1" />
+  </g>
+  <g id="book-minus" transform="translate(120 40)">
+    <rect id="book-minus bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20" />
+    <path d="M9 10h6" />
+  </g>
+  <g id="book-open" transform="translate(160 40)">
+    <rect id="book-open bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 7v14" />
+    <path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" />
+  </g>
+  <g id="book-open-check" transform="translate(200 40)">
+    <rect id="book-open-check bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 21V7" />
+    <path d="m16 12 2 2 4-4" />
+    <path d="M22 6V4a1 1 0 0 0-1-1h-5a4 4 0 0 0-4 4 4 4 0 0 0-4-4H3a1 1 0 0 0-1 1v13a1 1 0 0 0 1 1h6a3 3 0 0 1 3 3 3 3 0 0 1 3-3h6a1 1 0 0 0 1-1v-1.3" />
+  </g>
+  <g id="book-plus" transform="translate(240 40)">
+    <rect id="book-plus bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 7v6" />
+    <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20" />
+    <path d="M9 10h6" />
+  </g>
+  <g id="book-text" transform="translate(280 40)">
+    <rect id="book-text bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20" />
+    <path d="M8 11h8" />
+    <path d="M8 7h6" />
+  </g>
+  <g id="book-type" transform="translate(320 40)">
+    <rect id="book-type bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M10 13h4" />
+    <path d="M12 6v7" />
+    <path d="M16 8V6H8v2" />
+    <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20" />
+  </g>
+  <g id="book-x" transform="translate(360 40)">
+    <rect id="book-x bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m14.5 7-5 5" />
+    <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20" />
+    <path d="m9.5 7 5 5" />
+  </g>
+  <g id="bow-arrow" transform="translate(400 40)">
+    <rect id="bow-arrow bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M17 3h4v4" />
+    <path d="M18.575 11.082a13 13 0 0 1 1.048 9.027 1.17 1.17 0 0 1-1.914.597L14 17" />
+    <path d="M7 10 3.29 6.29a1.17 1.17 0 0 1 .6-1.91 13 13 0 0 1 9.03 1.05" />
+    <path d="M7 14a1.7 1.7 0 0 0-1.207.5l-2.646 2.646A.5.5 0 0 0 3.5 18H5a1 1 0 0 1 1 1v1.5a.5.5 0 0 0 .854.354L9.5 18.207A1.7 1.7 0 0 0 10 17v-2a1 1 0 0 0-1-1z" />
+    <path d="M9.707 14.293 21 3" />
+  </g>
+  <g id="box" transform="translate(440 40)">
+    <rect id="box bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z" />
+    <path d="m3.3 7 8.7 5 8.7-5" />
+    <path d="M12 22V12" />
+  </g>
+  <g id="boxes" transform="translate(480 40)">
+    <rect id="boxes bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M2.97 12.92A2 2 0 0 0 2 14.63v3.24a2 2 0 0 0 .97 1.71l3 1.8a2 2 0 0 0 2.06 0L12 19v-5.5l-5-3-4.03 2.42Z" />
+    <path d="m7 16.5-4.74-2.85" />
+    <path d="m7 16.5 5-3" />
+    <path d="M7 16.5v5.17" />
+    <path d="M12 13.5V19l3.97 2.38a2 2 0 0 0 2.06 0l3-1.8a2 2 0 0 0 .97-1.71v-3.24a2 2 0 0 0-.97-1.71L17 10.5l-5 3Z" />
+    <path d="m17 16.5-5-3" />
+    <path d="m17 16.5 4.74-2.85" />
+    <path d="M17 16.5v5.17" />
+    <path d="M7.97 4.42A2 2 0 0 0 7 6.13v4.37l5 3 5-3V6.13a2 2 0 0 0-.97-1.71l-3-1.8a2 2 0 0 0-2.06 0l-3 1.8Z" />
+    <path d="M12 8 7.26 5.15" />
+    <path d="m12 8 4.74-2.85" />
+    <path d="M12 13.5V8" />
+  </g>
+  <g id="castle" transform="translate(520 40)">
+    <rect id="castle bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M22 20v-9H2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2Z" />
+    <path d="M18 11V4H6v7" />
+    <path d="M15 22v-4a3 3 0 0 0-3-3a3 3 0 0 0-3 3v4" />
+    <path d="M22 11V9" />
+    <path d="M2 11V9" />
+    <path d="M6 4V2" />
+    <path d="M18 4V2" />
+    <path d="M10 4V2" />
+    <path d="M14 4V2" />
+  </g>
+  <g id="chevron-down" transform="translate(560 40)">
+    <rect id="chevron-down bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m6 9 6 6 6-6" />
+  </g>
+  <g id="chevron-up" transform="translate(600 40)">
+    <rect id="chevron-up bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m18 15-6-6-6 6" />
+  </g>
+  <g id="chevrons-down" transform="translate(640 40)">
+    <rect id="chevrons-down bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m7 6 5 5 5-5" />
+    <path d="m7 13 5 5 5-5" />
+  </g>
+  <g id="chevrons-left" transform="translate(680 40)">
+    <rect id="chevrons-left bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m11 17-5-5 5-5" />
+    <path d="m18 17-5-5 5-5" />
+  </g>
+  <g id="chevrons-left-right-ellipsis" transform="translate(720 40)">
+    <rect id="chevrons-left-right-ellipsis bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 12h.01" />
+    <path d="M16 12h.01" />
+    <path d="m17 7 5 5-5 5" />
+    <path d="m7 7-5 5 5 5" />
+    <path d="M8 12h.01" />
+  </g>
+  <g id="chevrons-right" transform="translate(760 40)">
+    <rect id="chevrons-right bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m6 17 5-5-5-5" />
+    <path d="m13 17 5-5-5-5" />
+  </g>
+  <g id="chevrons-up" transform="translate(0 80)">
+    <rect id="chevrons-up bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m17 11-5-5-5 5" />
+    <path d="m17 18-5-5-5 5" />
+  </g>
+  <g id="circle-arrow-down" transform="translate(40 80)">
+    <rect id="circle-arrow-down bounds" width="24" height="24" fill="none" stroke="none" />
+    <circle cx="12" cy="12" r="10" />
+    <path d="M12 8v8" />
+    <path d="m8 12 4 4 4-4" />
+  </g>
+  <g id="circle-arrow-left" transform="translate(80 80)">
+    <rect id="circle-arrow-left bounds" width="24" height="24" fill="none" stroke="none" />
+    <circle cx="12" cy="12" r="10" />
+    <path d="m12 8-4 4 4 4" />
+    <path d="M16 12H8" />
+  </g>
+  <g id="circle-arrow-right" transform="translate(120 80)">
+    <rect id="circle-arrow-right bounds" width="24" height="24" fill="none" stroke="none" />
+    <circle cx="12" cy="12" r="10" />
+    <path d="m12 16 4-4-4-4" />
+    <path d="M8 12h8" />
+  </g>
+  <g id="circle-arrow-up" transform="translate(160 80)">
+    <rect id="circle-arrow-up bounds" width="24" height="24" fill="none" stroke="none" />
+    <circle cx="12" cy="12" r="10" />
+    <path d="m16 12-4-4-4 4" />
+    <path d="M12 16V8" />
+  </g>
+  <g id="circle-plus" transform="translate(200 80)">
+    <rect id="circle-plus bounds" width="24" height="24" fill="none" stroke="none" />
+    <circle cx="12" cy="12" r="10" />
+    <path d="M8 12h8" />
+    <path d="M12 8v8" />
+  </g>
+  <g id="clover" transform="translate(240 80)">
+    <rect id="clover bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M16.17 7.83 2 22" />
+    <path d="M4.02 12a2.827 2.827 0 1 1 3.81-4.17A2.827 2.827 0 1 1 12 4.02a2.827 2.827 0 1 1 4.17 3.81A2.827 2.827 0 1 1 19.98 12a2.827 2.827 0 1 1-3.81 4.17A2.827 2.827 0 1 1 12 19.98a2.827 2.827 0 1 1-4.17-3.81A1 1 0 1 1 4 12" />
+    <path d="m7.83 7.83 8.34 8.34" />
+  </g>
+  <g id="club" transform="translate(280 80)">
+    <rect id="club bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M17.28 9.05a5.5 5.5 0 1 0-10.56 0A5.5 5.5 0 1 0 12 17.66a5.5 5.5 0 1 0 5.28-8.6Z" />
+    <path d="M12 17.66L12 22" />
+  </g>
+  <g id="coins" transform="translate(320 80)">
+    <rect id="coins bounds" width="24" height="24" fill="none" stroke="none" />
+    <circle cx="8" cy="8" r="6" />
+    <path d="M18.09 10.37A6 6 0 1 1 10.34 18" />
+    <path d="M7 6h1v4" />
+    <path d="m16.71 13.88.7.71-2.82 2.82" />
+  </g>
+  <g id="computer" transform="translate(360 80)">
+    <rect id="computer bounds" width="24" height="24" fill="none" stroke="none" />
+    <rect width="14" height="8" x="5" y="2" rx="2" />
+    <rect width="20" height="8" x="2" y="14" rx="2" />
+    <path d="M6 18h2" />
+    <path d="M12 18h6" />
+  </g>
+  <g id="crown" transform="translate(400 80)">
+    <rect id="crown bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M11.562 3.266a.5.5 0 0 1 .876 0L15.39 8.87a1 1 0 0 0 1.516.294L21.183 5.5a.5.5 0 0 1 .798.519l-2.834 10.246a1 1 0 0 1-.956.734H5.81a1 1 0 0 1-.957-.734L2.02 6.02a.5.5 0 0 1 .798-.519l4.276 3.664a1 1 0 0 0 1.516-.294z" />
+    <path d="M5 21h14" />
+  </g>
+  <g id="diamond" transform="translate(440 80)">
+    <rect id="diamond bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M2.7 10.3a2.41 2.41 0 0 0 0 3.41l7.59 7.59a2.41 2.41 0 0 0 3.41 0l7.59-7.59a2.41 2.41 0 0 0 0-3.41l-7.59-7.59a2.41 2.41 0 0 0-3.41 0Z" />
+  </g>
+  <g id="dice-1" transform="translate(480 80)">
+    <rect id="dice-1 bounds" width="24" height="24" fill="none" stroke="none" />
+    <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
+    <path d="M12 12h.01" />
+  </g>
+  <g id="dice-2" transform="translate(520 80)">
+    <rect id="dice-2 bounds" width="24" height="24" fill="none" stroke="none" />
+    <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
+    <path d="M15 9h.01" />
+    <path d="M9 15h.01" />
+  </g>
+  <g id="dice-3" transform="translate(560 80)">
+    <rect id="dice-3 bounds" width="24" height="24" fill="none" stroke="none" />
+    <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
+    <path d="M16 8h.01" />
+    <path d="M12 12h.01" />
+    <path d="M8 16h.01" />
+  </g>
+  <g id="dice-4" transform="translate(600 80)">
+    <rect id="dice-4 bounds" width="24" height="24" fill="none" stroke="none" />
+    <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
+    <path d="M16 8h.01" />
+    <path d="M8 8h.01" />
+    <path d="M8 16h.01" />
+    <path d="M16 16h.01" />
+  </g>
+  <g id="dice-5" transform="translate(640 80)">
+    <rect id="dice-5 bounds" width="24" height="24" fill="none" stroke="none" />
+    <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
+    <path d="M16 8h.01" />
+    <path d="M8 8h.01" />
+    <path d="M8 16h.01" />
+    <path d="M16 16h.01" />
+    <path d="M12 12h.01" />
+  </g>
+  <g id="dice-6" transform="translate(680 80)">
+    <rect id="dice-6 bounds" width="24" height="24" fill="none" stroke="none" />
+    <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
+    <path d="M16 8h.01" />
+    <path d="M16 12h.01" />
+    <path d="M16 16h.01" />
+    <path d="M8 8h.01" />
+    <path d="M8 12h.01" />
+    <path d="M8 16h.01" />
+  </g>
+  <g id="dices" transform="translate(720 80)">
+    <rect id="dices bounds" width="24" height="24" fill="none" stroke="none" />
+    <rect width="12" height="12" x="2" y="10" rx="2" ry="2" />
+    <path d="m17.92 14 3.5-3.5a2.24 2.24 0 0 0 0-3l-5-4.92a2.24 2.24 0 0 0-3 0L10 6" />
+    <path d="M6 18h.01" />
+    <path d="M10 14h.01" />
+    <path d="M15 6h.01" />
+    <path d="M18 9h.01" />
+  </g>
+  <g id="droplet" transform="translate(760 80)">
+    <rect id="droplet bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z" />
+  </g>
+  <g id="droplet-off" transform="translate(0 120)">
+    <rect id="droplet-off bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M18.715 13.186C18.29 11.858 17.384 10.607 16 9.5c-2-1.6-3.5-4-4-6.5a10.7 10.7 0 0 1-.884 2.586" />
+    <path d="m2 2 20 20" />
+    <path d="M8.795 8.797A11 11 0 0 1 8 9.5C6 11.1 5 13 5 15a7 7 0 0 0 13.222 3.208" />
+  </g>
+  <g id="ethernet-port" transform="translate(40 120)">
+    <rect id="ethernet-port bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m15 20 3-3h2a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h2l3 3z" />
+    <path d="M6 8v1" />
+    <path d="M10 8v1" />
+    <path d="M14 8v1" />
+    <path d="M18 8v1" />
+  </g>
+  <g id="feather" transform="translate(80 120)">
+    <rect id="feather bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12.67 19a2 2 0 0 0 1.416-.588l6.154-6.172a6 6 0 0 0-8.49-8.49L5.586 9.914A2 2 0 0 0 5 11.328V18a1 1 0 0 0 1 1z" />
+    <path d="M16 8 2 22" />
+    <path d="M17.5 15H9" />
+  </g>
+  <g id="flame" transform="translate(120 120)">
+    <rect id="flame bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z" />
+  </g>
+  <g id="flame-kindling" transform="translate(160 120)">
+    <rect id="flame-kindling bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 2c1 3 2.5 3.5 3.5 4.5A5 5 0 0 1 17 10a5 5 0 1 1-10 0c0-.3 0-.6.1-.9a2 2 0 1 0 3.3-2C8 4.5 11 2 12 2Z" />
+    <path d="m5 22 14-4" />
+    <path d="m5 18 14 4" />
+  </g>
+  <g id="flask-conical" transform="translate(200 120)">
+    <rect id="flask-conical bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M14 2v6a2 2 0 0 0 .245.96l5.51 10.08A2 2 0 0 1 18 22H6a2 2 0 0 1-1.755-2.96l5.51-10.08A2 2 0 0 0 10 8V2" />
+    <path d="M6.453 15h11.094" />
+    <path d="M8.5 2h7" />
+  </g>
+  <g id="flask-conical-off" transform="translate(240 120)">
+    <rect id="flask-conical-off bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M10 2v2.343" />
+    <path d="M14 2v6.343" />
+    <path d="m2 2 20 20" />
+    <path d="M20 20a2 2 0 0 1-2 2H6a2 2 0 0 1-1.755-2.96l5.227-9.563" />
+    <path d="M6.453 15H15" />
+    <path d="M8.5 2h7" />
+  </g>
+  <g id="flask-round" transform="translate(280 120)">
+    <rect id="flask-round bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M10 2v6.292a7 7 0 1 0 4 0V2" />
+    <path d="M5 15h14" />
+    <path d="M8.5 2h7" />
+  </g>
+  <g id="flower" transform="translate(320 120)">
+    <rect id="flower bounds" width="24" height="24" fill="none" stroke="none" />
+    <circle cx="12" cy="12" r="3" />
+    <path d="M12 16.5A4.5 4.5 0 1 1 7.5 12 4.5 4.5 0 1 1 12 7.5a4.5 4.5 0 1 1 4.5 4.5 4.5 4.5 0 1 1-4.5 4.5" />
+    <path d="M12 7.5V9" />
+    <path d="M7.5 12H9" />
+    <path d="M16.5 12H15" />
+    <path d="M12 16.5V15" />
+    <path d="m8 8 1.88 1.88" />
+    <path d="M14.12 9.88 16 8" />
+    <path d="m8 16 1.88-1.88" />
+    <path d="M14.12 14.12 16 16" />
+  </g>
+  <g id="gamepad" transform="translate(360 120)">
+    <rect id="gamepad bounds" width="24" height="24" fill="none" stroke="none" />
+    <line x1="6" x2="10" y1="12" y2="12" />
+    <line x1="8" x2="8" y1="10" y2="14" />
+    <line x1="15" x2="15.01" y1="13" y2="13" />
+    <line x1="18" x2="18.01" y1="11" y2="11" />
+    <rect width="20" height="12" x="2" y="6" rx="2" />
+  </g>
+  <g id="gamepad-2" transform="translate(400 120)">
+    <rect id="gamepad-2 bounds" width="24" height="24" fill="none" stroke="none" />
+    <line x1="6" x2="10" y1="11" y2="11" />
+    <line x1="8" x2="8" y1="9" y2="13" />
+    <line x1="15" x2="15.01" y1="12" y2="12" />
+    <line x1="18" x2="18.01" y1="10" y2="10" />
+    <path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z" />
+  </g>
+  <g id="gem" transform="translate(440 120)">
+    <rect id="gem bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M6 3h12l4 6-10 13L2 9Z" />
+    <path d="M11 3 8 9l4 13 4-13-3-6" />
+    <path d="M2 9h20" />
+  </g>
+  <g id="ghost" transform="translate(480 120)">
+    <rect id="ghost bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M9 10h.01" />
+    <path d="M15 10h.01" />
+    <path d="M12 2a8 8 0 0 0-8 8v12l3-3 2.5 2.5L12 19l2.5 2.5L17 19l3 3V10a8 8 0 0 0-8-8z" />
+  </g>
+  <g id="gift" transform="translate(520 120)">
+    <rect id="gift bounds" width="24" height="24" fill="none" stroke="none" />
+    <rect x="3" y="8" width="18" height="4" rx="1" />
+    <path d="M12 8v13" />
+    <path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7" />
+    <path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5" />
+  </g>
+  <g id="goal" transform="translate(560 120)">
+    <rect id="goal bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 13V2l8 4-8 4" />
+    <path d="M20.561 10.222a9 9 0 1 1-12.55-5.29" />
+    <path d="M8.002 9.997a5 5 0 1 0 8.9 2.02" />
+  </g>
+  <g id="gpu" transform="translate(600 120)">
+    <rect id="gpu bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M2 21V3" />
+    <path d="M2 5h18a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2.26" />
+    <path d="M7 17v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1v-3" />
+    <circle cx="16" cy="11" r="2" />
+    <circle cx="8" cy="11" r="2" />
+  </g>
+  <g id="hdmi-port" transform="translate(640 120)">
+    <rect id="hdmi-port bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M22 9a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v4a1 1 0 0 0 1 1h1l2 2h12l2-2h1a1 1 0 0 0 1-1Z" />
+    <path d="M7.5 12h9" />
+  </g>
+  <g id="headphone-off" transform="translate(680 120)">
+    <rect id="headphone-off bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M21 14h-1.343" />
+    <path d="M9.128 3.47A9 9 0 0 1 21 12v3.343" />
+    <path d="m2 2 20 20" />
+    <path d="M20.414 20.414A2 2 0 0 1 19 21h-1a2 2 0 0 1-2-2v-3" />
+    <path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 2.636-6.364" />
+  </g>
+  <g id="headphones" transform="translate(720 120)">
+    <rect id="headphones bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3" />
+  </g>
+  <g id="headset" transform="translate(760 120)">
+    <rect id="headset bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M3 11h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-5Zm0 0a9 9 0 1 1 18 0m0 0v5a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3Z" />
+    <path d="M21 16v2a4 4 0 0 1-4 4h-5" />
+  </g>
+  <g id="heart" transform="translate(0 160)">
+    <rect id="heart bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
+  </g>
+  <g id="heart-minus" transform="translate(40 160)">
+    <rect id="heart-minus bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M13.5 19.5 12 21l-7-7c-1.5-1.45-3-3.2-3-5.5A5.5 5.5 0 0 1 7.5 3c1.76 0 3 .5 4.5 2 1.5-1.5 2.74-2 4.5-2a5.5 5.5 0 0 1 5.402 6.5" />
+    <path d="M15 15h6" />
+  </g>
+  <g id="heart-plus" transform="translate(80 160)">
+    <rect id="heart-plus bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M13.5 19.5 12 21l-7-7c-1.5-1.45-3-3.2-3-5.5A5.5 5.5 0 0 1 7.5 3c1.76 0 3 .5 4.5 2 1.5-1.5 2.74-2 4.5-2a5.5 5.5 0 0 1 5.402 6.5" />
+    <path d="M15 15h6" />
+    <path d="M18 12v6" />
+  </g>
+  <g id="hourglass" transform="translate(120 160)">
+    <rect id="hourglass bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M5 22h14" />
+    <path d="M5 2h14" />
+    <path d="M17 22v-4.172a2 2 0 0 0-.586-1.414L12 12l-4.414 4.414A2 2 0 0 0 7 17.828V22" />
+    <path d="M7 2v4.172a2 2 0 0 0 .586 1.414L12 12l4.414-4.414A2 2 0 0 0 17 6.172V2" />
+  </g>
+  <g id="joystick" transform="translate(160 160)">
+    <rect id="joystick bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M21 17a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-2Z" />
+    <path d="M6 15v-2" />
+    <path d="M12 15V9" />
+    <circle cx="12" cy="6" r="3" />
+  </g>
+  <g id="land-plot" transform="translate(200 160)">
+    <rect id="land-plot bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m12 8 6-3-6-3v10" />
+    <path d="m8 11.99-5.5 3.14a1 1 0 0 0 0 1.74l8.5 4.86a2 2 0 0 0 2 0l8.5-4.86a1 1 0 0 0 0-1.74L16 12" />
+    <path d="m6.49 12.85 11.02 6.3" />
+    <path d="M17.51 12.85 6.5 19.15" />
+  </g>
+  <g id="medal" transform="translate(240 160)">
+    <rect id="medal bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M7.21 15 2.66 7.14a2 2 0 0 1 .13-2.2L4.4 2.8A2 2 0 0 1 6 2h12a2 2 0 0 1 1.6.8l1.6 2.14a2 2 0 0 1 .14 2.2L16.79 15" />
+    <path d="M11 12 5.12 2.2" />
+    <path d="m13 12 5.88-9.8" />
+    <path d="M8 7h8" />
+    <circle cx="12" cy="17" r="5" />
+    <path d="M12 18v-2h-.5" />
+  </g>
+  <g id="memory-stick" transform="translate(280 160)">
+    <rect id="memory-stick bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M6 19v-3" />
+    <path d="M10 19v-3" />
+    <path d="M14 19v-3" />
+    <path d="M18 19v-3" />
+    <path d="M8 11V9" />
+    <path d="M16 11V9" />
+    <path d="M12 11V9" />
+    <path d="M2 15h20" />
+    <path d="M2 7a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v1.1a2 2 0 0 0 0 3.837V17a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-5.1a2 2 0 0 0 0-3.837Z" />
+  </g>
+  <g id="milestone" transform="translate(320 160)">
+    <rect id="milestone bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 13v8" />
+    <path d="M12 3v3" />
+    <path d="M4 6a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h13a2 2 0 0 0 1.152-.365l3.424-2.317a1 1 0 0 0 0-1.635l-3.424-2.318A2 2 0 0 0 17 6z" />
+  </g>
+  <g id="mountain" transform="translate(360 160)">
+    <rect id="mountain bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m8 3 4 8 5-5 5 15H2L8 3z" />
+  </g>
+  <g id="pc-case" transform="translate(400 160)">
+    <rect id="pc-case bounds" width="24" height="24" fill="none" stroke="none" />
+    <rect width="14" height="20" x="5" y="2" rx="2" />
+    <path d="M15 14h.01" />
+    <path d="M9 6h6" />
+    <path d="M9 10h6" />
+  </g>
+  <g id="pickaxe" transform="translate(440 160)">
+    <rect id="pickaxe bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M14.531 12.469 6.619 20.38a1 1 0 1 1-3-3l7.912-7.912" />
+    <path d="M15.686 4.314A12.5 12.5 0 0 0 5.461 2.958 1 1 0 0 0 5.58 4.71a22 22 0 0 1 6.318 3.393" />
+    <path d="M17.7 3.7a1 1 0 0 0-1.4 0l-4.6 4.6a1 1 0 0 0 0 1.4l2.6 2.6a1 1 0 0 0 1.4 0l4.6-4.6a1 1 0 0 0 0-1.4z" />
+    <path d="M19.686 8.314a12.501 12.501 0 0 1 1.356 10.225 1 1 0 0 1-1.751-.119 22 22 0 0 0-3.393-6.319" />
+  </g>
+  <g id="plus" transform="translate(480 160)">
+    <rect id="plus bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M5 12h14" />
+    <path d="M12 5v14" />
+  </g>
+  <g id="puzzle" transform="translate(520 160)">
+    <rect id="puzzle bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M15.39 4.39a1 1 0 0 0 1.68-.474 2.5 2.5 0 1 1 3.014 3.015 1 1 0 0 0-.474 1.68l1.683 1.682a2.414 2.414 0 0 1 0 3.414L19.61 15.39a1 1 0 0 1-1.68-.474 2.5 2.5 0 1 0-3.014 3.015 1 1 0 0 1 .474 1.68l-1.683 1.682a2.414 2.414 0 0 1-3.414 0L8.61 19.61a1 1 0 0 0-1.68.474 2.5 2.5 0 1 1-3.014-3.015 1 1 0 0 0 .474-1.68l-1.683-1.682a2.414 2.414 0 0 1 0-3.414L4.39 8.61a1 1 0 0 1 1.68.474 2.5 2.5 0 1 0 3.014-3.015 1 1 0 0 1-.474-1.68l1.683-1.682a2.414 2.414 0 0 1 3.414 0z" />
+  </g>
+  <g id="rectangle-goggles" transform="translate(560 160)">
+    <rect id="rectangle-goggles bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M20 6a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-4a2 2 0 0 1-1.6-.8l-1.6-2.13a1 1 0 0 0-1.6 0L9.6 17.2A2 2 0 0 1 8 18H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z" />
+  </g>
+  <g id="rocket" transform="translate(600 160)">
+    <rect id="rocket bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z" />
+    <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z" />
+    <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" />
+    <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" />
+  </g>
+  <g id="scan" transform="translate(640 160)">
+    <rect id="scan bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M3 7V5a2 2 0 0 1 2-2h2" />
+    <path d="M17 3h2a2 2 0 0 1 2 2v2" />
+    <path d="M21 17v2a2 2 0 0 1-2 2h-2" />
+    <path d="M7 21H5a2 2 0 0 1-2-2v-2" />
+  </g>
+  <g id="scroll" transform="translate(680 160)">
+    <rect id="scroll bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M19 17V5a2 2 0 0 0-2-2H4" />
+    <path d="M8 21h12a2 2 0 0 0 2-2v-1a1 1 0 0 0-1-1H11a1 1 0 0 0-1 1v1a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v2a1 1 0 0 0 1 1h3" />
+  </g>
+  <g id="scroll-text" transform="translate(720 160)">
+    <rect id="scroll-text bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M15 12h-5" />
+    <path d="M15 8h-5" />
+    <path d="M19 17V5a2 2 0 0 0-2-2H4" />
+    <path d="M8 21h12a2 2 0 0 0 2-2v-1a1 1 0 0 0-1-1H11a1 1 0 0 0-1 1v1a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v2a1 1 0 0 0 1 1h3" />
+  </g>
+  <g id="shapes" transform="translate(760 160)">
+    <rect id="shapes bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M8.3 10a.7.7 0 0 1-.626-1.079L11.4 3a.7.7 0 0 1 1.198-.043L16.3 8.9a.7.7 0 0 1-.572 1.1Z" />
+    <rect x="3" y="14" width="7" height="7" rx="1" />
+    <circle cx="17.5" cy="17.5" r="3.5" />
+  </g>
+  <g id="shield" transform="translate(0 200)">
+    <rect id="shield bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
+  </g>
+  <g id="shield-alert" transform="translate(40 200)">
+    <rect id="shield-alert bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
+    <path d="M12 8v4" />
+    <path d="M12 16h.01" />
+  </g>
+  <g id="shield-ban" transform="translate(80 200)">
+    <rect id="shield-ban bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
+    <path d="m4.243 5.21 14.39 12.472" />
+  </g>
+  <g id="shield-check" transform="translate(120 200)">
+    <rect id="shield-check bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
+    <path d="m9 12 2 2 4-4" />
+  </g>
+  <g id="shield-ellipsis" transform="translate(160 200)">
+    <rect id="shield-ellipsis bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
+    <path d="M8 12h.01" />
+    <path d="M12 12h.01" />
+    <path d="M16 12h.01" />
+  </g>
+  <g id="shield-half" transform="translate(200 200)">
+    <rect id="shield-half bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
+    <path d="M12 22V2" />
+  </g>
+  <g id="shield-minus" transform="translate(240 200)">
+    <rect id="shield-minus bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
+    <path d="M9 12h6" />
+  </g>
+  <g id="shield-off" transform="translate(280 200)">
+    <rect id="shield-off bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m2 2 20 20" />
+    <path d="M5 5a1 1 0 0 0-1 1v7c0 5 3.5 7.5 7.67 8.94a1 1 0 0 0 .67.01c2.35-.82 4.48-1.97 5.9-3.71" />
+    <path d="M9.309 3.652A12.252 12.252 0 0 0 11.24 2.28a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1v7a9.784 9.784 0 0 1-.08 1.264" />
+  </g>
+  <g id="shield-plus" transform="translate(320 200)">
+    <rect id="shield-plus bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
+    <path d="M9 12h6" />
+    <path d="M12 9v6" />
+  </g>
+  <g id="shield-question-mark" transform="translate(360 200)">
+    <rect id="shield-question-mark bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
+    <path d="M9.1 9a3 3 0 0 1 5.82 1c0 2-3 3-3 3" />
+    <path d="M12 17h.01" />
+  </g>
+  <g id="shield-x" transform="translate(400 200)">
+    <rect id="shield-x bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
+    <path d="m14.5 9.5-5 5" />
+    <path d="m9.5 9.5 5 5" />
+  </g>
+  <g id="shovel" transform="translate(440 200)">
+    <rect id="shovel bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M2 22v-5l5-5 5 5-5 5z" />
+    <path d="M9.5 14.5 16 8" />
+    <path d="m17 2 5 5-.5.5a3.53 3.53 0 0 1-5 0s0 0 0 0a3.53 3.53 0 0 1 0-5L17 2" />
+  </g>
+  <g id="signpost" transform="translate(480 200)">
+    <rect id="signpost bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 13v8" />
+    <path d="M12 3v3" />
+    <path d="M18 6a2 2 0 0 1 1.387.56l2.307 2.22a1 1 0 0 1 0 1.44l-2.307 2.22A2 2 0 0 1 18 13H6a2 2 0 0 1-1.387-.56l-2.306-2.22a1 1 0 0 1 0-1.44l2.306-2.22A2 2 0 0 1 6 6z" />
+  </g>
+  <g id="signpost-big" transform="translate(520 200)">
+    <rect id="signpost-big bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M10 9H4L2 7l2-2h6" />
+    <path d="M14 5h6l2 2-2 2h-6" />
+    <path d="M10 22V4a2 2 0 1 1 4 0v18" />
+    <path d="M8 22h8" />
+  </g>
+  <g id="skull" transform="translate(560 200)">
+    <rect id="skull bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m12.5 17-.5-1-.5 1h1z" />
+    <path d="M15 22a1 1 0 0 0 1-1v-1a2 2 0 0 0 1.56-3.25 8 8 0 1 0-11.12 0A2 2 0 0 0 8 20v1a1 1 0 0 0 1 1z" />
+    <circle cx="15" cy="12" r="1" />
+    <circle cx="9" cy="12" r="1" />
+  </g>
+  <g id="spade" transform="translate(600 200)">
+    <rect id="spade bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M5 9c-1.5 1.5-3 3.2-3 5.5A5.5 5.5 0 0 0 7.5 20c1.8 0 3-.5 4.5-2 1.5 1.5 2.7 2 4.5 2a5.5 5.5 0 0 0 5.5-5.5c0-2.3-1.5-4-3-5.5l-7-7-7 7Z" />
+    <path d="M12 18v4" />
+  </g>
+  <g id="sparkles" transform="translate(640 200)">
+    <rect id="sparkles bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z" />
+    <path d="M20 3v4" />
+    <path d="M22 5h-4" />
+    <path d="M4 17v2" />
+    <path d="M5 18H3" />
+  </g>
+  <g id="sprout" transform="translate(680 200)">
+    <rect id="sprout bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M7 20h10" />
+    <path d="M10 20c5.5-2.5.8-6.4 3-10" />
+    <path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z" />
+    <path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z" />
+  </g>
+  <g id="square-arrow-down" transform="translate(720 200)">
+    <rect id="square-arrow-down bounds" width="24" height="24" fill="none" stroke="none" />
+    <rect width="18" height="18" x="3" y="3" rx="2" />
+    <path d="M12 8v8" />
+    <path d="m8 12 4 4 4-4" />
+  </g>
+  <g id="square-arrow-down-left" transform="translate(760 200)">
+    <rect id="square-arrow-down-left bounds" width="24" height="24" fill="none" stroke="none" />
+    <rect width="18" height="18" x="3" y="3" rx="2" />
+    <path d="m16 8-8 8" />
+    <path d="M16 16H8V8" />
+  </g>
+  <g id="square-arrow-down-right" transform="translate(0 240)">
+    <rect id="square-arrow-down-right bounds" width="24" height="24" fill="none" stroke="none" />
+    <rect width="18" height="18" x="3" y="3" rx="2" />
+    <path d="m8 8 8 8" />
+    <path d="M16 8v8H8" />
+  </g>
+  <g id="star" transform="translate(40 240)">
+    <rect id="star bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+  </g>
+  <g id="sword" transform="translate(80 240)">
+    <rect id="sword bounds" width="24" height="24" fill="none" stroke="none" />
+    <polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5" />
+    <line x1="13" x2="19" y1="19" y2="13" />
+    <line x1="16" x2="20" y1="16" y2="20" />
+    <line x1="19" x2="21" y1="21" y2="19" />
+  </g>
+  <g id="swords" transform="translate(120 240)">
+    <rect id="swords bounds" width="24" height="24" fill="none" stroke="none" />
+    <polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5" />
+    <line x1="13" x2="19" y1="19" y2="13" />
+    <line x1="16" x2="20" y1="16" y2="20" />
+    <line x1="19" x2="21" y1="21" y2="19" />
+    <polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5" />
+    <line x1="5" x2="9" y1="14" y2="18" />
+    <line x1="7" x2="4" y1="17" y2="20" />
+    <line x1="3" x2="5" y1="19" y2="21" />
+  </g>
+  <g id="tally-1" transform="translate(160 240)">
+    <rect id="tally-1 bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M4 4v16" />
+  </g>
+  <g id="tally-2" transform="translate(200 240)">
+    <rect id="tally-2 bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M4 4v16" />
+    <path d="M9 4v16" />
+  </g>
+  <g id="tally-3" transform="translate(240 240)">
+    <rect id="tally-3 bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M4 4v16" />
+    <path d="M9 4v16" />
+    <path d="M14 4v16" />
+  </g>
+  <g id="tally-4" transform="translate(280 240)">
+    <rect id="tally-4 bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M4 4v16" />
+    <path d="M9 4v16" />
+    <path d="M14 4v16" />
+    <path d="M19 4v16" />
+  </g>
+  <g id="tally-5" transform="translate(320 240)">
+    <rect id="tally-5 bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M4 4v16" />
+    <path d="M9 4v16" />
+    <path d="M14 4v16" />
+    <path d="M19 4v16" />
+    <path d="M22 6 2 18" />
+  </g>
+  <g id="target" transform="translate(360 240)">
+    <rect id="target bounds" width="24" height="24" fill="none" stroke="none" />
+    <circle cx="12" cy="12" r="10" />
+    <circle cx="12" cy="12" r="6" />
+    <circle cx="12" cy="12" r="2" />
+  </g>
+  <g id="toy-brick" transform="translate(400 240)">
+    <rect id="toy-brick bounds" width="24" height="24" fill="none" stroke="none" />
+    <rect width="18" height="12" x="3" y="8" rx="1" />
+    <path d="M10 8V5c0-.6-.4-1-1-1H6a1 1 0 0 0-1 1v3" />
+    <path d="M19 8V5c0-.6-.4-1-1-1h-3a1 1 0 0 0-1 1v3" />
+  </g>
+  <g id="trophy" transform="translate(440 240)">
+    <rect id="trophy bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M10 14.66v1.626a2 2 0 0 1-.976 1.696A5 5 0 0 0 7 21.978" />
+    <path d="M14 14.66v1.626a2 2 0 0 0 .976 1.696A5 5 0 0 1 17 21.978" />
+    <path d="M18 9h1.5a1 1 0 0 0 0-5H18" />
+    <path d="M4 22h16" />
+    <path d="M6 9a6 6 0 0 0 12 0V3a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1z" />
+    <path d="M6 9H4.5a1 1 0 0 1 0-5H6" />
+  </g>
+  <g id="venetian-mask" transform="translate(480 240)">
+    <rect id="venetian-mask bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M18 11c-1.5 0-2.5.5-3 2" />
+    <path d="M4 6a2 2 0 0 0-2 2v4a5 5 0 0 0 5 5 8 8 0 0 1 5 2 8 8 0 0 1 5-2 5 5 0 0 0 5-5V8a2 2 0 0 0-2-2h-3a8 8 0 0 0-5 2 8 8 0 0 0-5-2z" />
+    <path d="M6 11c1.5 0 2.5.5 3 2" />
+  </g>
+  <g id="volleyball" transform="translate(520 240)">
+    <rect id="volleyball bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M11.1 7.1a16.55 16.55 0 0 1 10.9 4" />
+    <path d="M12 12a12.6 12.6 0 0 1-8.7 5" />
+    <path d="M16.8 13.6a16.55 16.55 0 0 1-9 7.5" />
+    <path d="M20.7 17a12.8 12.8 0 0 0-8.7-5 13.3 13.3 0 0 1 0-10" />
+    <path d="M6.3 3.8a16.55 16.55 0 0 0 1.9 11.5" />
+    <circle cx="12" cy="12" r="10" />
+  </g>
+  <g id="wand" transform="translate(560 240)">
+    <rect id="wand bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M15 4V2" />
+    <path d="M15 16v-2" />
+    <path d="M8 9h2" />
+    <path d="M20 9h2" />
+    <path d="M17.8 11.8 19 13" />
+    <path d="M15 9h.01" />
+    <path d="M17.8 6.2 19 5" />
+    <path d="m3 21 9-9" />
+    <path d="M12.2 6.2 11 5" />
+  </g>
+  <g id="wand-sparkles" transform="translate(600 240)">
+    <rect id="wand-sparkles bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m21.64 3.64-1.28-1.28a1.21 1.21 0 0 0-1.72 0L2.36 18.64a1.21 1.21 0 0 0 0 1.72l1.28 1.28a1.2 1.2 0 0 0 1.72 0L21.64 5.36a1.2 1.2 0 0 0 0-1.72" />
+    <path d="m14 7 3 3" />
+    <path d="M5 6v4" />
+    <path d="M19 14v4" />
+    <path d="M10 2v2" />
+    <path d="M7 8H3" />
+    <path d="M21 16h-4" />
+    <path d="M11 3H9" />
+  </g>
+</svg>

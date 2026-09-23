@@ -69,7 +69,7 @@ export function LogoStrip({
           {logos.map((logo, i) => (
             <li
               key={i}
-              className="text-lg font-bold tracking-tight text-muted-foreground/60 transition-colors hover:text-muted-foreground"
+              className="text-lg font-bold tracking-tight text-muted-foreground/85 transition-colors hover:text-muted-foreground"
             >
               {logo}
             </li>

@@ -46,11 +46,29 @@ export const AI_MODEL = 'claude-opus-5'
  */
 export type AiEffort = 'low' | 'medium' | 'high'
 
+/**
+ * An image to send alongside the request.
+ *
+ * `data` is base64 with no data-URL prefix. The type is the three the vision
+ * API takes and a canvas can produce; whether the bytes really are that type
+ * is the caller's job to have checked (`validateImage` in `./search-image`) —
+ * this file forwards what it is given.
+ */
+export interface AiImage {
+  mediaType: 'image/png' | 'image/jpeg' | 'image/webp'
+  data: string
+}
+
 export interface CompleteOptions {
   /** The brief: role, rules, output contract. */
   system: string
   /** The request itself. */
   user: string
+  /**
+   * Images to put in front of `user`, in order. Absent or empty is the
+   * plain-text request every existing caller makes, sent exactly as before.
+   */
+  images?: readonly AiImage[]
   /**
    * Ceiling on the response, thinking included.
    *
@@ -107,6 +125,53 @@ function getClient(): Anthropic {
 }
 
 /**
+ * How long one model call may take before this gives up, in milliseconds.
+ *
+ * The routes charge first and refund in a `catch`. That only works if the
+ * call ENDS with an error: the SDK's own ceiling is ten minutes, and a
+ * serverless host kills the function long before that — with nothing left
+ * running to refund anyone. So the deadline is ours and set below the host's
+ * limit, which turns "the platform killed us and the credits vanished" into
+ * "the call timed out and the credits came back".
+ *
+ * Set `AI_TIMEOUT_MS` to the host's function limit minus a few seconds
+ * (Netlify's is a plan setting this file cannot read). Retries are off for the
+ * same reason: a retry is a second full deadline, so two would double the
+ * time this is meant to bound.
+ */
+const DEFAULT_TIMEOUT_MS = 45_000
+
+function timeoutMs(): number {
+  const parsed = Number(process.env.AI_TIMEOUT_MS)
+  return Number.isFinite(parsed) && parsed >= 1_000 ? parsed : DEFAULT_TIMEOUT_MS
+}
+
+/**
+ * The user turn's content: the bare string when there are no images, so a
+ * text request is byte-for-byte what it was before images existed; otherwise
+ * the image blocks first and the text after them, which is the order the
+ * vision docs recommend (look, then read the question about it).
+ *
+ * Exported for the request-shape test, since `complete` itself cannot be
+ * called without a key.
+ */
+export function buildContent(
+  user: string,
+  images: readonly AiImage[] | undefined,
+): string | Anthropic.ContentBlockParam[] {
+  if (!images || images.length === 0) return user
+  return [
+    ...images.map(
+      (img): Anthropic.ImageBlockParam => ({
+        type: 'image',
+        source: { type: 'base64', media_type: img.mediaType, data: img.data },
+      }),
+    ),
+    { type: 'text', text: user },
+  ]
+}
+
+/**
  * Send one request, get the text back.
  *
  * Returns only the text blocks. The response also carries a `thinking`
@@ -123,16 +188,20 @@ function getClient(): Anthropic {
 export async function complete({
   system,
   user,
+  images,
   maxTokens,
   effort,
 }: CompleteOptions): Promise<string> {
-  const response = await getClient().messages.create({
-    model: AI_MODEL,
-    max_tokens: maxTokens,
-    system,
-    output_config: { effort },
-    messages: [{ role: 'user', content: user }],
-  })
+  const response = await getClient().messages.create(
+    {
+      model: AI_MODEL,
+      max_tokens: maxTokens,
+      system,
+      output_config: { effort },
+      messages: [{ role: 'user', content: buildContent(user, images) }],
+    },
+    { timeout: timeoutMs(), maxRetries: 0 },
+  )
 
   // A safety refusal arrives as a 200 with no usable content. Surfacing it
   // as an ordinary failure is right: the caller refunds and says try again,

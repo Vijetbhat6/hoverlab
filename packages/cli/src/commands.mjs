@@ -1608,6 +1608,85 @@ export async function commandReview(paths, flags) {
     process.exitCode = 1
   }
 }
+
+const AUDIT_FORMATS = ['terminal', 'markdown', 'md', 'json']
+
+/**
+ * Audit a deployed page in a real browser.
+ *
+ * The engine lives in `audit-url/` and is imported lazily: it pulls in a
+ * browser driver on demand, and nothing else in the CLI should pay for that.
+ *
+ * EXIT CODES
+ *
+ *   0  nothing that fails the run (advisories are printed and never fail it)
+ *   1  at least one violation; with --strict, at least one advisory too
+ *   2  the audit could not run: no browser driver, the URL did not load,
+ *      bad arguments. Distinct from 1 so CI can tell "the site has defects"
+ *      from "the check did not happen".
+ */
+export async function commandAuditUrl(args, flags) {
+  const [target] = args
+  const usage =
+    'Usage: hoverlab audit-url <url> [--viewport WxH|mobile|tablet|desktop] [--dir rtl] [--dark] [--pages /a,/b] [--json]'
+  const fail = (message) => {
+    process.stderr.write(`${message}\n`)
+    process.exitCode = 2
+  }
+
+  if (!target) return fail(usage)
+  if (flags.format && !AUDIT_FORMATS.includes(flags.format)) {
+    return fail(`Unknown --format "${flags.format}". Pick one of: ${AUDIT_FORMATS.join(', ')}.`)
+  }
+  if (flags.dir !== undefined && flags.dir !== 'rtl' && flags.dir !== 'ltr') {
+    return fail(`audit-url --dir takes rtl or ltr, got "${flags.dir}".`)
+  }
+
+  const audit = await import('./audit-url/index.mjs')
+  const view = await import('./audit-url/report.mjs')
+
+  let report
+  try {
+    report = await audit.runAudit({
+      url: target,
+      viewport: audit.parseViewport(flags.viewport),
+      rtl: flags.dir === 'rtl',
+      dark: flags.dark === true,
+      pages: typeof flags.pages === 'string' ? flags.pages : undefined,
+      wait: typeof flags.wait === 'number' ? flags.wait : undefined,
+      timeout: typeof flags.timeout === 'number' ? flags.timeout : undefined,
+      axe: flags['no-axe'] === true ? false : undefined,
+    })
+  } catch (error) {
+    if (error instanceof audit.AuditSetupError || error instanceof audit.AuditInputError) {
+      return fail(error.message)
+    }
+    throw error
+  }
+
+  const format = flags.json ? 'json' : flags.format
+  if (format === 'json') {
+    out(view.renderJson(report))
+  } else if (format === 'markdown' || format === 'md') {
+    out(view.renderMarkdown(report))
+  } else {
+    out(
+      view.renderTerminal(report, {
+        bold,
+        dim,
+        green,
+        yellow,
+        cyan,
+        width: process.stdout.columns,
+      }),
+    )
+  }
+
+  if (report.summary.violations > 0 || (flags.strict === true && report.summary.advisories > 0)) {
+    process.exitCode = 1
+  }
+}
+
 export function commandHelp() {
   out(`${bold('hoverlab')} — install UI from the Hoverlab catalog
 
@@ -1653,7 +1732,11 @@ ${bold('Commands')}
                        accessibility, right-to-left, reduced motion, and
                        layout escapes. With no paths, reviews what you have
                        changed. Runs entirely on your machine.
-  whoami               Show which key is in play, and where it came from
+  audit-url <url>      Audit a deployed page in a real browser — contrast,
+                       design-token drift, right-to-left breakage — and
+                       point each finding at the catalog fix. Needs
+                       Playwright, which is not installed with this CLI.
+  whoami              Show which key is in play, and where it came from
   help                 Show this message
 
 ${bold('Options')}
@@ -1680,7 +1763,17 @@ ${bold('Options')}
                        codemod. Nothing else is rewritten
       --format <f>     review: terminal (default) | github (annotations) |
                        markdown (a pull-request comment body) | json
-  -y, --yes            Answer yes: install the packages an add needs, confirm
+      --viewport <v>   audit-url: WIDTHxHEIGHT, or mobile | tablet | desktop
+                       (default 1280x800)
+      --dir rtl        audit-url: also load the page with dir=rtl and report
+                       what breaks
+      --dark           audit-url: emulate prefers-color-scheme: dark
+      --pages <a,b>    audit-url: more paths on the same origin, up to 10
+      --wait <ms>      audit-url: settle time after load (default 400)
+      --timeout <ms>   audit-url: navigation timeout (default 30000)
+      --no-axe         audit-url: skip axe-core even when it is installed
+      --strict         audit-url: advisories fail the run too
+  -y, --yes           Answer yes: install the packages an add needs, confirm
                        a remove. Without it, nothing is installed or deleted
                        unless a person at a terminal says so
       --no-install     add: print the install command, never run or ask
@@ -1759,6 +1852,28 @@ ${bold('Reviewing your own code')}
   Violations set a non-zero exit code. Advisories are questions the rules
   cannot close from source — is that glow lighting or layout? does that drag
   have a keyboard alternative? — and never fail a run.
+
+${bold('Auditing a deployed page')}
+  ${cyan('hoverlab audit-url')} loads a live URL in a real browser and reports what only
+  exists once a page is rendered:
+
+    contrast       WCAG ratios computed from the painted text colour and the
+                   background actually underneath it
+    drift          the site's own spacing grid, radii, type sizes, colours and
+                   shadows are inferred from what it renders, and values that
+                   break them are reported with counts
+    right-to-left  with ${dim('--dir rtl')}: overflow, clipped text, elements that
+                   stayed on one side, arrows that did not flip
+
+    npx hoverlab audit-url https://staging.example.com
+    npx hoverlab audit-url http://localhost:3000 --dir rtl --viewport mobile
+    npx hoverlab audit-url https://example.com --pages /pricing,/docs --json
+
+  Each finding names the closest catalog tool, primitive or command. Nothing is
+  uploaded; the page is loaded by a browser on your machine. It needs
+  Playwright in the project you run it from (${dim('npm i -D playwright')}), because the
+  CLI itself stays dependency-free. Exit codes: 0 clean, 1 violations found,
+  2 the audit could not run.
 
 ${bold('Editor integration')}
   Teach your agent the catalog, so it installs the right piece instead of

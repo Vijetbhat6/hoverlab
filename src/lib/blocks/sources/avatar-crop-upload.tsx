@@ -143,7 +143,7 @@ export function AvatarCropUpload({
         </h2>
         <p className="mt-1 max-w-prose text-sm text-muted-foreground">{description}</p>
 
-        <div className="mt-6 flex flex-col gap-8 sm:flex-row sm:items-start">
+        <div className="mt-6 flex flex-col gap-8 md:flex-row md:items-start">
           <div className="flex flex-col items-center gap-3">
             {/*
               The frame. `overflow-hidden` on the outer square clips the

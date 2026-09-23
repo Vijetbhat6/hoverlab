@@ -118,9 +118,14 @@ export function AiInsightCards({
     <div className={`mx-auto w-full max-w-xl p-6 ${className}`}>
       <div className="mb-3 flex items-center gap-2">
         <Sparkles aria-hidden className="h-3.5 w-3.5 text-primary" />
-        <h3 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-          {heading}
-        </h3>
+        {heading ? (
+          <h3
+            data-stress-ignore
+            className="text-xs font-bold uppercase tracking-wider text-muted-foreground"
+          >
+            {heading}
+          </h3>
+        ) : null}
         <span className="ms-auto font-mono text-xs text-muted-foreground">
           {live.length} {live.length === 1 ? 'finding' : 'findings'}
         </span>
@@ -129,7 +134,11 @@ export function AiInsightCards({
       <article className="overflow-hidden rounded-2xl border border-border/60 bg-card">
         <div className="px-5 py-4">
           <div className="flex items-start gap-3">
-            <h4 className="min-w-0 flex-1 text-sm font-semibold leading-snug">{insight.title}</h4>
+            {insight.title ? (
+              <h4 data-stress-ignore className="min-w-0 flex-1 text-sm font-semibold leading-snug">
+                {insight.title}
+              </h4>
+            ) : null}
 
             <button
               type="button"

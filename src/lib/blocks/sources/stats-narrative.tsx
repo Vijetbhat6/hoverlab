@@ -133,13 +133,13 @@ export function StatsNarrative({
             instead of each drawing one. */}
         <dl className="grid gap-px overflow-hidden rounded-2xl border border-border/60 bg-border/60 sm:grid-cols-2">
           {stats.map((stat) => (
-            <div key={stat.label} className="bg-card p-6 sm:p-8">
-              <dt className="text-4xl font-bold tracking-tight text-primary">{stat.value}</dt>
-              <dd className="mt-2 text-sm font-medium leading-snug text-foreground">
+            <div key={stat.label} className="min-w-0 bg-card p-6 sm:p-8">
+              <dt className="break-words text-4xl font-bold tracking-tight text-primary">{stat.value}</dt>
+              <dd className="mt-2 break-words text-sm font-medium leading-snug text-foreground">
                 {stat.label}
               </dd>
               {stat.source ? (
-                <dd className="mt-3 text-xs leading-snug text-muted-foreground">{stat.source}</dd>
+                <dd className="mt-3 break-words text-xs leading-snug text-muted-foreground">{stat.source}</dd>
               ) : null}
             </div>
           ))}

@@ -54,7 +54,7 @@ export function HeroCentered({
   return (
     <section className={`relative overflow-hidden ${className}`}>
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute -top-40 left-1/2 h-[32rem] w-[32rem] -translate-x-1/2 rounded-full bg-primary/20 blur-3xl" />
+        <div className="absolute -top-40 left-1/2 h-[32rem] w-[32rem] -translate-x-1/2 rounded-full bg-primary/20 blur-3xl border border-transparent" />
         {/* Grid wash, masked to fade out before it reaches the copy. */}
         <div className="absolute inset-x-0 top-0 h-96 bg-[linear-gradient(to_right,theme(colors.border/40)_1px,transparent_1px),linear-gradient(to_bottom,theme(colors.border/40)_1px,transparent_1px)] bg-[size:56px_56px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_60%,transparent_100%)]" />
       </div>
@@ -77,7 +77,7 @@ export function HeroCentered({
           </a>
         ) : null}
 
-        <h1 className="mt-6 text-balance bg-gradient-to-br from-foreground via-foreground to-foreground/60 bg-clip-text text-4xl font-extrabold tracking-tight text-transparent sm:text-6xl lg:text-7xl">
+        <h1 className="mt-6 text-balance break-words bg-gradient-to-br from-foreground via-foreground to-foreground/60 bg-clip-text text-4xl font-extrabold tracking-tight text-transparent sm:text-6xl lg:text-7xl">
           {heading}
         </h1>
 

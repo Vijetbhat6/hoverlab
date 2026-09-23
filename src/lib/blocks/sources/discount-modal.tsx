@@ -98,13 +98,13 @@ export function DiscountModal({
           open ? 'pointer-events-none opacity-40' : ''
         }`}
       >
-        <div className="h-8 w-52 rounded bg-muted" />
+        <div className="h-8 w-52 rounded bg-muted border border-transparent" />
         <div className="grid gap-3 sm:grid-cols-3">
           {[0, 1, 2].map((i) => (
             <div key={i} className="rounded-xl border border-border bg-card p-4">
-              <div className="h-20 rounded-lg bg-muted" />
-              <div className="mt-3 h-3 w-3/4 rounded bg-muted" />
-              <div className="mt-2 h-3 w-1/2 rounded bg-muted" />
+              <div className="h-20 rounded-lg bg-muted border border-transparent" />
+              <div className="mt-3 h-3 w-3/4 rounded bg-muted border border-transparent" />
+              <div className="mt-2 h-3 w-1/2 rounded bg-muted border border-transparent" />
             </div>
           ))}
         </div>
@@ -181,7 +181,7 @@ export function DiscountModal({
               <ul id={`${uid}-terms`} className="mt-3 space-y-1 text-xs text-muted-foreground">
                 {terms.map((term) => (
                   <li key={term} className="flex gap-1.5">
-                    <span aria-hidden className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-muted-foreground" />
+                    <span aria-hidden className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-muted-foreground border border-transparent" />
                     {term}
                   </li>
                 ))}

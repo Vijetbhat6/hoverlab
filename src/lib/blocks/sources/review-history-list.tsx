@@ -164,7 +164,7 @@ export function ReviewHistoryList({
 
         {pending.length > 0 ? (
           <section aria-labelledby={`${uid}-review-pending`} className="mt-6">
-            <h3 id={`${uid}-review-pending`} className="text-sm font-semibold">
+            <h3 id={`${uid}-review-pending`} data-stress-ignore className="text-sm font-semibold">
               Waiting on you
             </h3>
             <ul className="mt-3 space-y-2">
@@ -195,7 +195,7 @@ export function ReviewHistoryList({
         ) : null}
 
         <section aria-labelledby={`${uid}-review-written`} className="mt-8">
-          <h3 id={`${uid}-review-written`} className="text-sm font-semibold">
+          <h3 id={`${uid}-review-written`} data-stress-ignore className="text-sm font-semibold">
             Written
           </h3>
 
@@ -249,7 +249,9 @@ export function ReviewHistoryList({
                       </div>
                     </div>
 
-                    <h4 className="mt-3 text-sm font-semibold">{review.title}</h4>
+                    {review.title ? (
+                      <h4 data-stress-ignore className="mt-3 text-sm font-semibold">{review.title}</h4>
+                    ) : null}
                     <p className="mt-1 text-sm text-muted-foreground">{review.body}</p>
 
                     {/* Naming the rule is what makes this a policy rather than

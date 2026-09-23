@@ -54,7 +54,7 @@ const TONES: Record<IconTone, { soft: string; solid: string; outline: string; ha
   },
   danger: {
     soft: 'bg-destructive/10 text-destructive',
-    solid: 'bg-destructive text-white',
+    solid: 'bg-destructive text-destructive-foreground',
     outline: 'border border-destructive/30 text-destructive',
     halo: 'ring-destructive/10',
   },

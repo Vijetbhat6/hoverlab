@@ -45,16 +45,16 @@ const TABS: FeatureTab[] = [
     panel: (
       <div className="space-y-3">
         <div className="flex items-center justify-between rounded-lg border border-border/60 bg-background p-3">
-          <div className="h-2 w-2/5 rounded bg-foreground/30" />
-          <div className="h-5 w-16 rounded-full bg-emerald-500/20" />
+          <div className="h-2 w-2/5 rounded bg-foreground/30 border border-transparent" />
+          <div className="h-5 w-16 rounded-full bg-emerald-500/20 border border-transparent" />
         </div>
         <div className="flex items-center justify-between rounded-lg border border-border/60 bg-background p-3">
-          <div className="h-2 w-1/2 rounded bg-foreground/30" />
-          <div className="h-5 w-16 rounded-full bg-amber-500/20" />
+          <div className="h-2 w-1/2 rounded bg-foreground/30 border border-transparent" />
+          <div className="h-5 w-16 rounded-full bg-amber-500/20 border border-transparent" />
         </div>
         <div className="rounded-lg border border-primary/40 bg-primary/5 p-3">
-          <div className="h-2 w-1/3 rounded bg-primary/50" />
-          <div className="mt-2 h-2 w-3/4 rounded bg-muted-foreground/25" />
+          <div className="h-2 w-1/3 rounded bg-primary/50 border border-transparent" />
+          <div className="mt-2 h-2 w-3/4 rounded bg-muted-foreground/25 border border-transparent" />
         </div>
       </div>
     ),
@@ -72,10 +72,10 @@ const TABS: FeatureTab[] = [
     panel: (
       <div className="space-y-3">
         <div className="flex items-center gap-3 rounded-lg border border-destructive/40 bg-destructive/5 p-3">
-          <div className="h-8 w-8 shrink-0 rounded-full bg-destructive/20" />
+          <div className="h-8 w-8 shrink-0 rounded-full bg-destructive/20 border border-transparent" />
           <div className="flex-1 space-y-2">
-            <div className="h-2 w-1/2 rounded bg-destructive/40" />
-            <div className="h-2 w-3/4 rounded bg-muted-foreground/25" />
+            <div className="h-2 w-1/2 rounded bg-destructive/40 border border-transparent" />
+            <div className="h-2 w-3/4 rounded bg-muted-foreground/25 border border-transparent" />
           </div>
         </div>
         {['w-2/3', 'w-1/2'].map((w) => (
@@ -83,7 +83,7 @@ const TABS: FeatureTab[] = [
             key={w}
             className="flex items-center gap-3 rounded-lg border border-border/60 bg-background p-3 opacity-60"
           >
-            <div className="h-8 w-8 shrink-0 rounded-full bg-muted" />
+            <div className="h-8 w-8 shrink-0 rounded-full bg-muted border border-transparent" />
             <div className={`h-2 ${w} rounded bg-muted-foreground/25`} />
           </div>
         ))}
@@ -192,7 +192,7 @@ export function FeatureTabs({
         className="grid items-center gap-10 lg:grid-cols-2"
       >
         <div>
-          <h3 className="text-balance text-2xl font-bold tracking-tight">{tab.headline}</h3>
+          <h3 data-stress-ignore className="text-balance text-2xl font-bold tracking-tight">{tab.headline}</h3>
           <ul className="mt-6 space-y-4">
             {tab.points.map((point) => (
               <li key={point} className="flex items-start gap-3 text-sm leading-relaxed">

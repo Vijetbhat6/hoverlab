@@ -210,7 +210,7 @@ export function DatePicker({
           }}
           onBlur={commitText}
           onKeyDown={onInputKeyDown}
-          className="h-9 w-full min-w-0 bg-transparent text-sm text-foreground outline-none placeholder:text-muted-foreground"
+          className="h-9 w-full min-w-0 bg-transparent text-sm text-foreground outline-none placeholder:text-muted-foreground border border-transparent"
         />
         <button
           type="button"

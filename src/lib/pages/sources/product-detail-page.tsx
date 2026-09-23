@@ -47,11 +47,11 @@ export default function ProductDetailPage() {
           </ol>
         </nav>
 
-        <div className="grid gap-10 lg:grid-cols-2 lg:gap-14">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-14">
           <ProductGallery />
 
           {/* Sticky, so price and Add to bag survive a long scroll. */}
-          <div className="lg:sticky lg:top-6 lg:self-start">
+          <div className="min-w-0 lg:sticky lg:top-6 lg:self-start">
             <ProductBuyBox />
           </div>
         </div>

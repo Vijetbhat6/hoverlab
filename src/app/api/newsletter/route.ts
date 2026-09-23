@@ -1,6 +1,6 @@
 /**
- * POST /api/newsletter        body { email, source? } → { ok: true }
- * DELETE /api/newsletter      body { email }          → { ok: true }
+ * POST /api/newsletter        body { email, source?, website? } → { ok, confirmationEmail }
+ * DELETE /api/newsletter      body { email }                    → { ok: true }
  *
  * Where the newsletter band's email addresses actually go.
  *
@@ -15,17 +15,30 @@
  *
  * Storage is Firestore, through the Admin SDK this app already configures
  * for accounts and bundles. No new vendor, no new key, and it works the
- * moment this deploys. When a real sending platform is chosen, set
- * RESEND_API_KEY + RESEND_AUDIENCE_ID and each new address is mirrored
- * there too (see forwardToResend below) — the Firestore collection stays
- * the record of what was consented to and when.
+ * moment this deploys. The logic — states, tokens, the confirmation email —
+ * lives in `lib/firebase/subscribers.ts` and `lib/newsletter-state.ts`, and
+ * is shared with `/api/subscribe` so there is one list and one consent
+ * shape, not two.
  *
- * Document id is a SHA-256 of the normalised address, not the address
- * itself. Firestore document ids appear in paths, logs and index keys;
- * hashing keeps the plaintext to a single field, and makes re-subscribing
- * an idempotent write rather than a duplicate row.
+ * ── DOUBLE OPT-IN ──────────────────────────────────────────────────────
  *
- * The two promises in the band's copy are kept here rather than assumed:
+ * Submitting an address records it as PENDING and asks its owner to confirm
+ * (GET /api/newsletter/confirm?token=…). Only a confirmed address is ever
+ * mailed a digest or a sequence. That is what makes `consentedTo` true of
+ * the person on the row rather than of whoever typed their address.
+ *
+ * RESEND_API_KEY is unset in production today, so no confirmation email can
+ * be sent yet. The response says so through `confirmationEmail: false`, and
+ * the form must not say "check your inbox" when it is — see
+ * `components/landing/newsletter-signup.tsx`. The row is kept as pending
+ * with `confirmationSent: false`, and `scripts/send-pending-confirmations.mts`
+ * sends them the day a key exists.
+ *
+ * The answer is 200 with the SAME body whether the address is new, pending
+ * or already confirmed. A different answer would make this form an oracle
+ * for whether a given person is on the list.
+ *
+ * The promises in the band's copy are kept here rather than assumed:
  *
  *   "unsubscribe in one click"  Every subscriber gets an `unsubscribeToken`
  *                               at signup. GET /api/newsletter/unsubscribe
@@ -37,22 +50,33 @@
  *                               asks you to be able to show consent, not to
  *                               remember having asked for it.
  *
- * No IP address and no user agent are stored. Neither is needed to send an
- * email, and the least interesting way to fail a privacy notice is to
- * collect something you had no use for.
+ * No IP address and no user agent are stored on the subscriber row. Neither
+ * is needed to send an email, and the least interesting way to fail a
+ * privacy notice is to collect something you had no use for. The rate
+ * limiter that guards this route stores a salted hash of the address in a
+ * counter document, not on the row (lib/rate-limit.ts).
+ *
+ * `website` is a honeypot: a field no human sees and no browser autofills.
+ * A bot that fills it gets the same success answer and nothing is stored —
+ * telling it it was caught would only teach it to leave the field empty.
  */
 
 import { NextResponse } from 'next/server'
-import { createHash, randomBytes } from 'node:crypto'
-import { FieldValue } from 'firebase-admin/firestore'
 import { withJsonErrors } from '@/lib/route-errors'
 import { SIGNUP_SOURCES } from '@/lib/sequences'
 import { adminDb, isAdminConfigured } from '@/lib/firebase/admin'
+import {
+  CONFIRM_CLAUSE,
+  normalizeEmail,
+  subscribe,
+  subscriberId,
+  SUBSCRIBERS_COLLECTION,
+} from '@/lib/firebase/subscribers'
+import { isMailConfigured } from '@/lib/newsletter-mail'
+import { enforceRateLimit, RATE_LIMITS } from '@/lib/rate-limit'
+import { FieldValue } from 'firebase-admin/firestore'
 
 export const runtime = 'nodejs'
-
-/** Collection holding one document per address. */
-const COLLECTION = 'newsletterSubscribers'
 
 /**
  * The exact promise shown above the field, stored with every signup.
@@ -67,21 +91,27 @@ const COLLECTION = 'newsletterSubscribers'
  * against the first person is a false record of consent — and it is a false
  * record we would only discover when they replied to email three asking why
  * they were getting it.
+ *
+ * Each ends with the double opt-in sentence, because that is now part of
+ * what was agreed: nothing is sent until the address is confirmed.
  */
 const CONSENT_TEXT: Record<string, string> = {
   default:
     'Four emails over about a month — what is free, the four ways into the ' +
     'catalog, the one line in the licence that matters, and what has been ' +
     'added — then only mail when something is added. No spam, no promotions. ' +
-    'Unsubscribe in one click.',
+    'Unsubscribe in one click.' +
+    CONFIRM_CLAUSE,
   tools:
     'Three emails over about two weeks — how the tools connect to the catalog, ' +
     'the other nineteen tools, and where the one wall is — then only mail when ' +
-    'something is added. No spam, no promotions. Unsubscribe in one click.',
+    'something is added. No spam, no promotions. Unsubscribe in one click.' +
+    CONFIRM_CLAUSE,
   authors:
     'A five-email sequence over about two weeks about the licence, the catalog ' +
     'and how it is reached, then only mail when something is added. No spam, no ' +
-    'promotions. Unsubscribe in one click.',
+    'promotions. Unsubscribe in one click.' +
+    CONFIRM_CLAUSE,
 }
 
 /**
@@ -95,59 +125,12 @@ const CONSENT_TEXT: Record<string, string> = {
  */
 const SOURCES = new Set<string>(SIGNUP_SOURCES)
 
-/**
- * Deliberately loose.
- *
- * A regex strict enough to reject every invalid address also rejects valid
- * ones (plus-addressing, new TLDs, unicode domains), and the only real
- * validation of an email address is sending to it. This rejects what is
- * obviously not an address and lets the rest through.
- */
-function normalizeEmail(value: unknown): string | null {
-  if (typeof value !== 'string') return null
-  const email = value.trim().toLowerCase()
-  if (email.length < 3 || email.length > 254) return null
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return null
-  return email
-}
-
-function docId(email: string): string {
-  return createHash('sha256').update(email).digest('hex')
-}
-
-/**
- * Mirror a new subscriber into Resend's audience, when one is configured.
- *
- * Best effort on purpose: the address is already durably stored by the
- * time this runs, so a Resend outage must not turn into a failed signup
- * for the visitor. A failure is logged and swallowed.
- */
-async function forwardToResend(email: string): Promise<void> {
-  const key = process.env.RESEND_API_KEY
-  const audienceId = process.env.RESEND_AUDIENCE_ID
-  if (!key || !audienceId) return
-
-  try {
-    const res = await fetch(
-      `https://api.resend.com/audiences/${audienceId}/contacts`,
-      {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${key}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, unsubscribed: false }),
-      },
-    )
-    if (!res.ok) {
-      console.error('[newsletter] resend forward failed:', res.status)
-    }
-  } catch (err) {
-    console.error('[newsletter] resend forward threw:', err)
-  }
-}
-
 export const POST = withJsonErrors('newsletter', async (req: Request) => {
+  // Per-IP, first: this route writes a document for any address a stranger
+  // can type, and (with a transport) sends a message to it.
+  const limited = await enforceRateLimit(req, RATE_LIMITS.newsletter)
+  if (limited) return limited
+
   // Say so rather than accepting the address and dropping it — silently
   // succeeding is exactly the behaviour this route replaces.
   if (!isAdminConfigured()) {
@@ -164,6 +147,7 @@ export const POST = withJsonErrors('newsletter', async (req: Request) => {
   const body = (await req.json().catch(() => null)) as {
     email?: unknown
     source?: unknown
+    website?: unknown
   } | null
 
   const email = normalizeEmail(body?.email)
@@ -174,36 +158,23 @@ export const POST = withJsonErrors('newsletter', async (req: Request) => {
     )
   }
 
+  // Honeypot. Same answer as a real signup, nothing stored.
+  if (typeof body?.website === 'string' && body.website.trim() !== '') {
+    return NextResponse.json({ ok: true, confirmationEmail: isMailConfigured() })
+  }
+
   const source =
     typeof body?.source === 'string' && SOURCES.has(body.source)
       ? body.source
       : 'landing'
 
-  const ref = adminDb().collection(COLLECTION).doc(docId(email))
-  const existing = await ref.get()
+  const { mailConfigured } = await subscribe({
+    email,
+    source,
+    consentText: CONSENT_TEXT[source] ?? CONSENT_TEXT.default,
+  })
 
-  // A second signup from the same address re-subscribes rather than
-  // duplicating — including for someone who had unsubscribed and changed
-  // their mind. The original token is kept so any unsubscribe link already
-  // sitting in their inbox still works.
-  await ref.set(
-    {
-      email,
-      source,
-      status: 'subscribed',
-      consentedTo: CONSENT_TEXT[source] ?? CONSENT_TEXT.default,
-      consentedAt: FieldValue.serverTimestamp(),
-      unsubscribeToken:
-        (existing.data()?.unsubscribeToken as string | undefined) ??
-        randomBytes(24).toString('base64url'),
-      ...(existing.exists ? {} : { createdAt: FieldValue.serverTimestamp() }),
-    },
-    { merge: true },
-  )
-
-  await forwardToResend(email)
-
-  return NextResponse.json({ ok: true })
+  return NextResponse.json({ ok: true, confirmationEmail: mailConfigured })
 })
 
 /**
@@ -212,6 +183,9 @@ export const POST = withJsonErrors('newsletter', async (req: Request) => {
  * gets the same answer as one that was.
  */
 export const DELETE = withJsonErrors('newsletter', async (req: Request) => {
+  const limited = await enforceRateLimit(req, RATE_LIMITS.newsletter)
+  if (limited) return limited
+
   if (!isAdminConfigured()) {
     return NextResponse.json(
       { error: 'The mailing list is not configured on this deployment.' },
@@ -229,8 +203,8 @@ export const DELETE = withJsonErrors('newsletter', async (req: Request) => {
   }
 
   await adminDb()
-    .collection(COLLECTION)
-    .doc(docId(email))
+    .collection(SUBSCRIBERS_COLLECTION)
+    .doc(subscriberId(email))
     .set(
       { status: 'unsubscribed', unsubscribedAt: FieldValue.serverTimestamp() },
       { merge: true },

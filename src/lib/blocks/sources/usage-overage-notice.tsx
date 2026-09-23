@@ -147,11 +147,11 @@ export function UsageOverageNotice({
           <div className="mt-2 h-2.5 overflow-hidden rounded-full bg-muted">
             <div className="flex h-full">
               <div
-                className="h-full bg-primary"
+                className="h-full bg-primary border border-transparent"
                 style={{ width: `${(included / Math.max(used, included)) * 100}%` }}
               />
               <div
-                className="h-full bg-amber-500"
+                className="h-full bg-amber-500 border border-transparent"
                 style={{ width: `${(over / Math.max(used, included)) * 100}%` }}
               />
             </div>

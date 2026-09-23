@@ -120,18 +120,18 @@ export function PlanLimitsList({
                     isSelected ? 'bg-muted/40' : ''
                   }`}
                 >
-                  <span className="min-w-0">
+                  <span className="min-w-0 flex-1">
                     <span className="block truncate text-sm font-medium text-foreground">
                       {row.label}
                     </span>
                     {row.detail ? (
-                      <span className="mt-0.5 block truncate text-sm text-muted-foreground">
+                      <span className="mt-0.5 block text-sm text-muted-foreground">
                         {row.detail}
                       </span>
                     ) : null}
                   </span>
                   <span
-                    className={`shrink-0 rounded-full px-2.5 py-1 text-xs font-medium ${
+                    className={`max-w-[7rem] shrink-0 truncate rounded-full px-2.5 py-1 text-xs font-medium ${
                       TONE_CLASS[row.tone ?? 'neutral']
                     }`}
                   >

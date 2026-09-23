@@ -20,6 +20,9 @@ const EXPECTED_PATHS = [
   'tailwind-theme.v3.ts',
   'tokens.light.json',
   'tokens.dark.json',
+  'style-dictionary.config.mjs',
+  'figma-variables.json',
+  'push-figma-variables.mjs',
   'hoverlab.config.json',
   'README.md',
 ]

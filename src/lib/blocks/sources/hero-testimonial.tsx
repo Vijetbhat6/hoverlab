@@ -57,7 +57,7 @@ export function HeroTestimonial({
   return (
     <section className={`relative overflow-hidden ${className}`}>
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute -top-24 right-1/4 h-96 w-96 rounded-full bg-primary/15 blur-3xl" />
+        <div className="absolute -top-24 right-1/4 h-96 w-96 rounded-full bg-primary/15 blur-3xl border border-transparent" />
       </div>
 
       <div className="mx-auto grid w-full max-w-7xl items-center gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[1.1fr_1fr] lg:gap-16 lg:px-8 lg:py-24">
@@ -67,7 +67,7 @@ export function HeroTestimonial({
             <span className="inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-card/60 px-3 py-1 text-xs font-medium text-muted-foreground backdrop-blur">
               <span
                 aria-hidden
-                className="h-1.5 w-1.5 rounded-full bg-emerald-500 shadow-[0_0_0_3px] shadow-emerald-500/20"
+                className="h-1.5 w-1.5 rounded-full bg-emerald-500 shadow-[0_0_0_3px] shadow-emerald-500/20 border border-transparent"
               />
               {eyebrow}
             </span>

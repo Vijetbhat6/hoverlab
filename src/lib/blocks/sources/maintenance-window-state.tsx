@@ -201,7 +201,7 @@ export function MaintenanceWindowState({
               <li key={item} className="flex items-start gap-2 text-sm text-muted-foreground">
                 <span
                   aria-hidden
-                  className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-500"
+                  className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-500 border border-transparent"
                 />
                 {item}
               </li>

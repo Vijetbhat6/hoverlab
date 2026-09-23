@@ -16,7 +16,7 @@ Accessibility Act is met by conforming to.
 
 ## The proposed claim
 
-> Every one of the 417 components in this catalog is checked, on every build, against 10 WCAG 2.2 Level AA success criteria that can be decided from source.
+> Every one of the 433 components in this catalog is checked, on every build, against 10 WCAG 2.2 Level AA success criteria that can be decided from source.
 
 > This is a statement about each artifact's source — the exact text you copy — and not about a rendered page, a website, or the product you paste it into.
 >
@@ -29,9 +29,9 @@ Accessibility Act is met by conforming to.
 
 ## What the claim rests on
 
-- **417 artifacts** — 291 blocks, 126 pages.
+- **433 artifacts** — 307 blocks, 126 pages.
 - **18 rules** over **10 success criteria**: 1.1.1, 1.3.1, 1.4.2, 2.1.1, 2.4.3, 2.5.7, 2.5.8, 3.3.2, 3.3.8, 4.1.2.
-- **0 violations** and **0 advisories** at the time of writing.
+- **0 violations** and **1 advisories** at the time of writing.
 
 | Rule | SC | Level | Severity | Name |
 | --- | --- | --- | --- | --- |
@@ -77,6 +77,17 @@ decides one part of Focus Order — a positive `tabindex` fails it, always,
 from source. The rest of Focus Order needs a rendered tab sequence. The
 honest reading is "one failure mode ruled out", not "criterion met", and a
 reviewer should treat the row in the second table as the governing one.
+
+## Open advisories
+
+Not failures. Patterns where the criterion has an exception this method
+cannot evaluate, so a person decides. Listed because a claim that mentions
+only the clean result is not the whole result.
+
+- `components/sidebar-file-tree.tsx` — 4.1.2 expanded-controls: aria-expanded with no aria-controls: <li
+                key={node.id}
+                ref={(el) => {
+               
 
 ## What the review is being asked to decide
 

@@ -2,7 +2,13 @@ import { test, describe } from 'node:test'
 import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
-import { regionFromCountry, pricedCountries, PPP_BANDS } from './region'
+import {
+  regionFromCountry,
+  regionFromHeaders,
+  countryFromHeaders,
+  pricedCountries,
+  PPP_BANDS,
+} from './region'
 import { PLANS, priceForRegion, parsePlanId, type Region } from './plans'
 
 /**
@@ -110,5 +116,70 @@ describe('band prices', () => {
     for (const plan of SELLABLE) {
       assert.equal(priceForRegion(plan, 'default'), PLANS[plan].priceCents)
     }
+  })
+})
+
+describe('country headers are trusted only where the platform writes them', () => {
+  // The header is what decides a discount at checkout, so a visitor being able
+  // to write it is a pricing hole. These pin the behaviour that closed it.
+  const KEYS = ['VERCEL', 'TRUST_CF_IPCOUNTRY', 'DEV_PRICING_REGION'] as const
+  const saved: Record<string, string | undefined> = {}
+  const withEnv = (env: Partial<Record<(typeof KEYS)[number], string>>, fn: () => void) => {
+    for (const k of KEYS) {
+      saved[k] = process.env[k]
+      delete process.env[k]
+    }
+    Object.assign(process.env, env)
+    try {
+      fn()
+    } finally {
+      for (const k of KEYS) {
+        if (saved[k] === undefined) delete process.env[k]
+        else process.env[k] = saved[k]
+      }
+    }
+  }
+  const h = (name: string, value: string) => new Headers({ [name]: value })
+
+  test('a visitor-supplied x-vercel-ip-country is ignored off Vercel', () => {
+    withEnv({}, () => {
+      assert.equal(countryFromHeaders(h('x-vercel-ip-country', 'IN')), null)
+      assert.equal(regionFromHeaders(h('x-vercel-ip-country', 'IN')), 'default')
+    })
+  })
+
+  test('a visitor-supplied cf-ipcountry is ignored unless Cloudflare is declared', () => {
+    withEnv({}, () => {
+      assert.equal(countryFromHeaders(h('cf-ipcountry', 'IN')), null)
+      assert.equal(regionFromHeaders(h('cf-ipcountry', 'IN')), 'default')
+    })
+  })
+
+  test('x-vercel-ip-country is honoured on Vercel', () => {
+    withEnv({ VERCEL: '1' }, () => {
+      assert.equal(countryFromHeaders(h('x-vercel-ip-country', 'IN')), 'IN')
+      assert.equal(regionFromHeaders(h('x-vercel-ip-country', 'BR')), 'ppp-b')
+    })
+  })
+
+  test('cf-ipcountry is honoured only with TRUST_CF_IPCOUNTRY=1', () => {
+    withEnv({ TRUST_CF_IPCOUNTRY: '1' }, () => {
+      assert.equal(countryFromHeaders(h('cf-ipcountry', 'IN')), 'IN')
+    })
+    withEnv({ TRUST_CF_IPCOUNTRY: 'true' }, () => {
+      assert.equal(countryFromHeaders(h('cf-ipcountry', 'IN')), null)
+    })
+  })
+
+  test('Vercel does not fall back to a client-supplied cf-ipcountry', () => {
+    withEnv({ VERCEL: '1' }, () => {
+      assert.equal(countryFromHeaders(h('cf-ipcountry', 'IN')), null)
+    })
+  })
+
+  test('Vercel'+"'"+'s XX placeholder for an unplaceable address is still dropped', () => {
+    withEnv({ VERCEL: '1' }, () => {
+      assert.equal(countryFromHeaders(h('x-vercel-ip-country', 'XX')), null)
+    })
   })
 })

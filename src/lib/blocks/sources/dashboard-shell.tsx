@@ -95,7 +95,7 @@ export function DashboardShell({
               }`}
             >
               {item.icon}
-              <span className="flex-1 truncate">{item.label}</span>
+              <span className="min-w-0 flex-1 truncate">{item.label}</span>
               {item.badge ? (
                 <span className="rounded-full bg-muted px-1.5 py-0.5 text-xs text-muted-foreground">
                   {item.badge}
@@ -133,7 +133,7 @@ export function DashboardShell({
           <div
             aria-hidden
             onClick={() => setOpen(false)}
-            className="absolute inset-0 z-30 bg-black/40 backdrop-blur-sm lg:hidden"
+            className="absolute inset-0 z-30 bg-black/40 backdrop-blur-sm lg:hidden border border-transparent"
           />
           <aside
             id={`${uid}-nav-drawer`}
@@ -199,7 +199,7 @@ export function DashboardShell({
             <Bell aria-hidden className="h-4 w-4" />
             <span
               aria-hidden
-              className="absolute end-1.5 top-1.5 h-2 w-2 rounded-full bg-primary ring-2 ring-background"
+              className="absolute end-1.5 top-1.5 h-2 w-2 rounded-full bg-primary ring-2 ring-background border border-transparent"
             />
           </button>
         </header>

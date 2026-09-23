@@ -99,7 +99,9 @@ export function ChangelogTimeline({
             />
 
             <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-              <h3 className="text-lg font-bold tracking-tight">{entry.title}</h3>
+              {entry.title ? (
+                <h3 data-stress-ignore className="text-lg font-bold tracking-tight">{entry.title}</h3>
+              ) : null}
               <span className="rounded-md bg-muted px-2 py-0.5 font-mono text-xs font-semibold text-muted-foreground">
                 {entry.version}
               </span>

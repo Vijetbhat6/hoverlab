@@ -1,0 +1,433 @@
+<!--
+ISC License
+
+Copyright (c) for portions of Lucide are held by Cole Bemis 2013-2022 as part of Feather (MIT). All other copyright (c) for Lucide are held by Lucide Contributors 2022.
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted, provided that the above
+copyright notice and this permission notice appear in all copies.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" width="784" height="104" viewBox="0 0 784 104" id="Lucide icons / Time" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <g id="alarm-clock" transform="translate(0 0)">
+    <rect id="alarm-clock bounds" width="24" height="24" fill="none" stroke="none" />
+    <circle cx="12" cy="13" r="8" />
+    <path d="M12 9v4l2 2" />
+    <path d="M5 3 2 6" />
+    <path d="m22 6-3-3" />
+    <path d="M6.38 18.7 4 21" />
+    <path d="M17.64 18.67 20 21" />
+  </g>
+  <g id="alarm-clock-check" transform="translate(40 0)">
+    <rect id="alarm-clock-check bounds" width="24" height="24" fill="none" stroke="none" />
+    <circle cx="12" cy="13" r="8" />
+    <path d="M5 3 2 6" />
+    <path d="m22 6-3-3" />
+    <path d="M6.38 18.7 4 21" />
+    <path d="M17.64 18.67 20 21" />
+    <path d="m9 13 2 2 4-4" />
+  </g>
+  <g id="alarm-clock-minus" transform="translate(80 0)">
+    <rect id="alarm-clock-minus bounds" width="24" height="24" fill="none" stroke="none" />
+    <circle cx="12" cy="13" r="8" />
+    <path d="M5 3 2 6" />
+    <path d="m22 6-3-3" />
+    <path d="M6.38 18.7 4 21" />
+    <path d="M17.64 18.67 20 21" />
+    <path d="M9 13h6" />
+  </g>
+  <g id="alarm-clock-off" transform="translate(120 0)">
+    <rect id="alarm-clock-off bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M6.87 6.87a8 8 0 1 0 11.26 11.26" />
+    <path d="M19.9 14.25a8 8 0 0 0-9.15-9.15" />
+    <path d="m22 6-3-3" />
+    <path d="M6.26 18.67 4 21" />
+    <path d="m2 2 20 20" />
+    <path d="M4 4 2 6" />
+  </g>
+  <g id="alarm-clock-plus" transform="translate(160 0)">
+    <rect id="alarm-clock-plus bounds" width="24" height="24" fill="none" stroke="none" />
+    <circle cx="12" cy="13" r="8" />
+    <path d="M5 3 2 6" />
+    <path d="m22 6-3-3" />
+    <path d="M6.38 18.7 4 21" />
+    <path d="M17.64 18.67 20 21" />
+    <path d="M12 10v6" />
+    <path d="M9 13h6" />
+  </g>
+  <g id="calendar" transform="translate(200 0)">
+    <rect id="calendar bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M8 2v4" />
+    <path d="M16 2v4" />
+    <rect width="18" height="18" x="3" y="4" rx="2" />
+    <path d="M3 10h18" />
+  </g>
+  <g id="calendar-1" transform="translate(240 0)">
+    <rect id="calendar-1 bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M11 14h1v4" />
+    <path d="M16 2v4" />
+    <path d="M3 10h18" />
+    <path d="M8 2v4" />
+    <rect x="3" y="4" width="18" height="18" rx="2" />
+  </g>
+  <g id="calendar-arrow-down" transform="translate(280 0)">
+    <rect id="calendar-arrow-down bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m14 18 4 4 4-4" />
+    <path d="M16 2v4" />
+    <path d="M18 14v8" />
+    <path d="M21 11.354V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h7.343" />
+    <path d="M3 10h18" />
+    <path d="M8 2v4" />
+  </g>
+  <g id="calendar-arrow-up" transform="translate(320 0)">
+    <rect id="calendar-arrow-up bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m14 18 4-4 4 4" />
+    <path d="M16 2v4" />
+    <path d="M18 22v-8" />
+    <path d="M21 11.343V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h9" />
+    <path d="M3 10h18" />
+    <path d="M8 2v4" />
+  </g>
+  <g id="calendar-check" transform="translate(360 0)">
+    <rect id="calendar-check bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M8 2v4" />
+    <path d="M16 2v4" />
+    <rect width="18" height="18" x="3" y="4" rx="2" />
+    <path d="M3 10h18" />
+    <path d="m9 16 2 2 4-4" />
+  </g>
+  <g id="calendar-check-2" transform="translate(400 0)">
+    <rect id="calendar-check-2 bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M8 2v4" />
+    <path d="M16 2v4" />
+    <path d="M21 14V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h8" />
+    <path d="M3 10h18" />
+    <path d="m16 20 2 2 4-4" />
+  </g>
+  <g id="calendar-clock" transform="translate(440 0)">
+    <rect id="calendar-clock bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M16 14v2.2l1.6 1" />
+    <path d="M16 2v4" />
+    <path d="M21 7.5V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3.5" />
+    <path d="M3 10h5" />
+    <path d="M8 2v4" />
+    <circle cx="16" cy="16" r="6" />
+  </g>
+  <g id="calendar-cog" transform="translate(480 0)">
+    <rect id="calendar-cog bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m15.228 16.852-.923-.383" />
+    <path d="m15.228 19.148-.923.383" />
+    <path d="M16 2v4" />
+    <path d="m16.47 14.305.382.923" />
+    <path d="m16.852 20.772-.383.924" />
+    <path d="m19.148 15.228.383-.923" />
+    <path d="m19.53 21.696-.382-.924" />
+    <path d="m20.772 16.852.924-.383" />
+    <path d="m20.772 19.148.924.383" />
+    <path d="M21 11V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h6" />
+    <path d="M3 10h18" />
+    <path d="M8 2v4" />
+    <circle cx="18" cy="18" r="3" />
+  </g>
+  <g id="calendar-days" transform="translate(520 0)">
+    <rect id="calendar-days bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M8 2v4" />
+    <path d="M16 2v4" />
+    <rect width="18" height="18" x="3" y="4" rx="2" />
+    <path d="M3 10h18" />
+    <path d="M8 14h.01" />
+    <path d="M12 14h.01" />
+    <path d="M16 14h.01" />
+    <path d="M8 18h.01" />
+    <path d="M12 18h.01" />
+    <path d="M16 18h.01" />
+  </g>
+  <g id="calendar-fold" transform="translate(560 0)">
+    <rect id="calendar-fold bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M8 2v4" />
+    <path d="M16 2v4" />
+    <path d="M21 17V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11Z" />
+    <path d="M3 10h18" />
+    <path d="M15 22v-4a2 2 0 0 1 2-2h4" />
+  </g>
+  <g id="calendar-heart" transform="translate(600 0)">
+    <rect id="calendar-heart bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M3 10h18V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h7" />
+    <path d="M8 2v4" />
+    <path d="M16 2v4" />
+    <path d="M21.29 14.7a2.43 2.43 0 0 0-2.65-.52c-.3.12-.57.3-.8.53l-.34.34-.35-.34a2.43 2.43 0 0 0-2.65-.53c-.3.12-.56.3-.79.53-.95.94-1 2.53.2 3.74L17.5 22l3.6-3.55c1.2-1.21 1.14-2.8.19-3.74Z" />
+  </g>
+  <g id="calendar-minus" transform="translate(640 0)">
+    <rect id="calendar-minus bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M16 19h6" />
+    <path d="M16 2v4" />
+    <path d="M21 15V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h8.5" />
+    <path d="M3 10h18" />
+    <path d="M8 2v4" />
+  </g>
+  <g id="calendar-minus-2" transform="translate(680 0)">
+    <rect id="calendar-minus-2 bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M8 2v4" />
+    <path d="M16 2v4" />
+    <rect width="18" height="18" x="3" y="4" rx="2" />
+    <path d="M3 10h18" />
+    <path d="M10 16h4" />
+  </g>
+  <g id="calendar-off" transform="translate(720 0)">
+    <rect id="calendar-off bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M4.2 4.2A2 2 0 0 0 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 1.82-1.18" />
+    <path d="M21 15.5V6a2 2 0 0 0-2-2H9.5" />
+    <path d="M16 2v4" />
+    <path d="M3 10h7" />
+    <path d="M21 10h-5.5" />
+    <path d="m2 2 20 20" />
+  </g>
+  <g id="calendar-plus" transform="translate(760 0)">
+    <rect id="calendar-plus bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M16 19h6" />
+    <path d="M16 2v4" />
+    <path d="M19 16v6" />
+    <path d="M21 12.598V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h8.5" />
+    <path d="M3 10h18" />
+    <path d="M8 2v4" />
+  </g>
+  <g id="calendar-plus-2" transform="translate(0 40)">
+    <rect id="calendar-plus-2 bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M8 2v4" />
+    <path d="M16 2v4" />
+    <rect width="18" height="18" x="3" y="4" rx="2" />
+    <path d="M3 10h18" />
+    <path d="M10 16h4" />
+    <path d="M12 14v4" />
+  </g>
+  <g id="calendar-range" transform="translate(40 40)">
+    <rect id="calendar-range bounds" width="24" height="24" fill="none" stroke="none" />
+    <rect width="18" height="18" x="3" y="4" rx="2" />
+    <path d="M16 2v4" />
+    <path d="M3 10h18" />
+    <path d="M8 2v4" />
+    <path d="M17 14h-6" />
+    <path d="M13 18H7" />
+    <path d="M7 14h.01" />
+    <path d="M17 18h.01" />
+  </g>
+  <g id="calendar-search" transform="translate(80 40)">
+    <rect id="calendar-search bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M16 2v4" />
+    <path d="M21 11.75V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h7.25" />
+    <path d="m22 22-1.875-1.875" />
+    <path d="M3 10h18" />
+    <path d="M8 2v4" />
+    <circle cx="18" cy="18" r="3" />
+  </g>
+  <g id="calendar-sync" transform="translate(120 40)">
+    <rect id="calendar-sync bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M11 10v4h4" />
+    <path d="m11 14 1.535-1.605a5 5 0 0 1 8 1.5" />
+    <path d="M16 2v4" />
+    <path d="m21 18-1.535 1.605a5 5 0 0 1-8-1.5" />
+    <path d="M21 22v-4h-4" />
+    <path d="M21 8.5V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h4.3" />
+    <path d="M3 10h4" />
+    <path d="M8 2v4" />
+  </g>
+  <g id="calendar-x" transform="translate(160 40)">
+    <rect id="calendar-x bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M8 2v4" />
+    <path d="M16 2v4" />
+    <rect width="18" height="18" x="3" y="4" rx="2" />
+    <path d="M3 10h18" />
+    <path d="m14 14-4 4" />
+    <path d="m10 14 4 4" />
+  </g>
+  <g id="calendar-x-2" transform="translate(200 40)">
+    <rect id="calendar-x-2 bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M8 2v4" />
+    <path d="M16 2v4" />
+    <path d="M21 13V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h8" />
+    <path d="M3 10h18" />
+    <path d="m17 22 5-5" />
+    <path d="m17 17 5 5" />
+  </g>
+  <g id="chart-no-axes-gantt" transform="translate(240 40)">
+    <rect id="chart-no-axes-gantt bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M8 6h10" />
+    <path d="M6 12h9" />
+    <path d="M11 18h7" />
+  </g>
+  <g id="clock" transform="translate(280 40)">
+    <rect id="clock bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 6v6l4 2" />
+    <circle cx="12" cy="12" r="10" />
+  </g>
+  <g id="clock-1" transform="translate(320 40)">
+    <rect id="clock-1 bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 6v6l2-4" />
+    <circle cx="12" cy="12" r="10" />
+  </g>
+  <g id="clock-10" transform="translate(360 40)">
+    <rect id="clock-10 bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 6v6l-4-2" />
+    <circle cx="12" cy="12" r="10" />
+  </g>
+  <g id="clock-11" transform="translate(400 40)">
+    <rect id="clock-11 bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 6v6l-2-4" />
+    <circle cx="12" cy="12" r="10" />
+  </g>
+  <g id="clock-12" transform="translate(440 40)">
+    <rect id="clock-12 bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 6v6" />
+    <circle cx="12" cy="12" r="10" />
+  </g>
+  <g id="clock-2" transform="translate(480 40)">
+    <rect id="clock-2 bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 6v6l4-2" />
+    <circle cx="12" cy="12" r="10" />
+  </g>
+  <g id="clock-3" transform="translate(520 40)">
+    <rect id="clock-3 bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 6v6h4" />
+    <circle cx="12" cy="12" r="10" />
+  </g>
+  <g id="clock-4" transform="translate(560 40)">
+    <rect id="clock-4 bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 6v6l4 2" />
+    <circle cx="12" cy="12" r="10" />
+  </g>
+  <g id="clock-5" transform="translate(600 40)">
+    <rect id="clock-5 bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 6v6l2 4" />
+    <circle cx="12" cy="12" r="10" />
+  </g>
+  <g id="clock-6" transform="translate(640 40)">
+    <rect id="clock-6 bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 6v10" />
+    <circle cx="12" cy="12" r="10" />
+  </g>
+  <g id="clock-7" transform="translate(680 40)">
+    <rect id="clock-7 bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 6v6l-2 4" />
+    <circle cx="12" cy="12" r="10" />
+  </g>
+  <g id="clock-8" transform="translate(720 40)">
+    <rect id="clock-8 bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 6v6l-4 2" />
+    <circle cx="12" cy="12" r="10" />
+  </g>
+  <g id="clock-9" transform="translate(760 40)">
+    <rect id="clock-9 bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 6v6H8" />
+    <circle cx="12" cy="12" r="10" />
+  </g>
+  <g id="clock-alert" transform="translate(0 80)">
+    <rect id="clock-alert bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 6v6l4 2" />
+    <path d="M20 12v5" />
+    <path d="M20 21h.01" />
+    <path d="M21.25 8.2A10 10 0 1 0 16 21.16" />
+  </g>
+  <g id="clock-arrow-down" transform="translate(40 80)">
+    <rect id="clock-arrow-down bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 6v6l2 1" />
+    <path d="M12.337 21.994a10 10 0 1 1 9.588-8.767" />
+    <path d="m14 18 4 4 4-4" />
+    <path d="M18 14v8" />
+  </g>
+  <g id="clock-arrow-up" transform="translate(80 80)">
+    <rect id="clock-arrow-up bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 6v6l1.56.78" />
+    <path d="M13.227 21.925a10 10 0 1 1 8.767-9.588" />
+    <path d="m14 18 4-4 4 4" />
+    <path d="M18 22v-8" />
+  </g>
+  <g id="clock-fading" transform="translate(120 80)">
+    <rect id="clock-fading bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 2a10 10 0 0 1 7.38 16.75" />
+    <path d="M12 6v6l4 2" />
+    <path d="M2.5 8.875a10 10 0 0 0-.5 3" />
+    <path d="M2.83 16a10 10 0 0 0 2.43 3.4" />
+    <path d="M4.636 5.235a10 10 0 0 1 .891-.857" />
+    <path d="M8.644 21.42a10 10 0 0 0 7.631-.38" />
+  </g>
+  <g id="clock-plus" transform="translate(160 80)">
+    <rect id="clock-plus bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 6v6l3.644 1.822" />
+    <path d="M16 19h6" />
+    <path d="M19 16v6" />
+    <path d="M21.92 13.267a10 10 0 1 0-8.653 8.653" />
+  </g>
+  <g id="file-clock" transform="translate(200 80)">
+    <rect id="file-clock bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+    <path d="M16 22h2a2 2 0 0 0 2-2V7l-5-5H6a2 2 0 0 0-2 2v3" />
+    <path d="M8 14v2.2l1.6 1" />
+    <circle cx="8" cy="16" r="6" />
+  </g>
+  <g id="folder-clock" transform="translate(240 80)">
+    <rect id="folder-clock bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M16 14v2.2l1.6 1" />
+    <path d="M7 20H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H20a2 2 0 0 1 2 2" />
+    <circle cx="16" cy="16" r="6" />
+  </g>
+  <g id="hourglass" transform="translate(280 80)">
+    <rect id="hourglass bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M5 22h14" />
+    <path d="M5 2h14" />
+    <path d="M17 22v-4.172a2 2 0 0 0-.586-1.414L12 12l-4.414 4.414A2 2 0 0 0 7 17.828V22" />
+    <path d="M7 2v4.172a2 2 0 0 0 .586 1.414L12 12l4.414-4.414A2 2 0 0 0 17 6.172V2" />
+  </g>
+  <g id="square-chart-gantt" transform="translate(320 80)">
+    <rect id="square-chart-gantt bounds" width="24" height="24" fill="none" stroke="none" />
+    <rect width="18" height="18" x="3" y="3" rx="2" />
+    <path d="M9 8h7" />
+    <path d="M8 12h6" />
+    <path d="M11 16h5" />
+  </g>
+  <g id="sunrise" transform="translate(360 80)">
+    <rect id="sunrise bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 2v8" />
+    <path d="m4.93 10.93 1.41 1.41" />
+    <path d="M2 18h2" />
+    <path d="M20 18h2" />
+    <path d="m19.07 10.93-1.41 1.41" />
+    <path d="M22 22H2" />
+    <path d="m8 6 4-4 4 4" />
+    <path d="M16 18a4 4 0 0 0-8 0" />
+  </g>
+  <g id="timer" transform="translate(400 80)">
+    <rect id="timer bounds" width="24" height="24" fill="none" stroke="none" />
+    <line x1="10" x2="14" y1="2" y2="2" />
+    <line x1="12" x2="15" y1="14" y2="11" />
+    <circle cx="12" cy="14" r="8" />
+  </g>
+  <g id="timer-off" transform="translate(440 80)">
+    <rect id="timer-off bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M10 2h4" />
+    <path d="M4.6 11a8 8 0 0 0 1.7 8.7 8 8 0 0 0 8.7 1.7" />
+    <path d="M7.4 7.4a8 8 0 0 1 10.3 1 8 8 0 0 1 .9 10.2" />
+    <path d="m2 2 20 20" />
+    <path d="M12 12v-2" />
+  </g>
+  <g id="timer-reset" transform="translate(480 80)">
+    <rect id="timer-reset bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M10 2h4" />
+    <path d="M12 14v-4" />
+    <path d="M4 13a8 8 0 0 1 8-7 8 8 0 1 1-5.3 14L4 17.6" />
+    <path d="M9 17H4v5" />
+  </g>
+  <g id="watch" transform="translate(520 80)">
+    <rect id="watch bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 10v2.2l1.6 1" />
+    <path d="m16.13 7.66-.81-4.05a2 2 0 0 0-2-1.61h-2.68a2 2 0 0 0-2 1.61l-.78 4.05" />
+    <path d="m7.88 16.36.8 4a2 2 0 0 0 2 1.61h2.72a2 2 0 0 0 2-1.61l.81-4.05" />
+    <circle cx="12" cy="12" r="6" />
+  </g>
+</svg>

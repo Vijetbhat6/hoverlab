@@ -175,6 +175,88 @@ curl "${ORIGIN}/api/v1/effects?category=Buttons&featured=true"`}</Snippet>
         </p>
       </DocsSection>
 
+      <DocsSection id="motion-safety" title="Motion-safety profile">
+        <p>
+          Every effect response carries a <C>motion</C> object: four checks on
+          the effect&apos;s shipped CSS, computed for the whole catalog and
+          re-verified at build. It is the same data as the panel on the effect
+          page.
+        </p>
+
+        <Snippet label="terminal">{`curl "${ORIGIN}/api/v1/effects/btn-gradient" | jq .motion`}</Snippet>
+
+        <Snippet label="response">{`{
+  "applicable": true,
+  "animates": true,
+  "reducedMotion": "brief",
+  "propertyClass": "paint",
+  "offending": ["background-position", "box-shadow"],
+  "flash": { "verdict": "pass", "hz": null },
+  "layoutShift": "none"
+}`}</Snippet>
+
+        <DocsTable
+          head={['Field', 'Values']}
+          rows={[
+            [
+              <C key="r">reducedMotion</C>,
+              <>
+                <C>guarded</C> ships a <C>prefers-reduced-motion</C> block;{' '}
+                <C>brief</C> animates but does not loop, so no guard ships;{' '}
+                <C>unguarded</C> loops with no guard; <C>none</C> does not
+                animate. The same predicate the catalog&apos;s motion audit uses.
+              </>,
+            ],
+            [
+              <C key="p">propertyClass</C>,
+              <>
+                Worst wins: <C>compositor</C> (transform, opacity, filter),{' '}
+                <C>paint</C> (colour, background, shadow, clip-path),{' '}
+                <C>layout</C> (width, height, top/left, margin, padding),{' '}
+                <C>none</C>. <C>offending</C> lists the non-compositor
+                properties, layout ones first.
+              </>,
+            ],
+            [
+              <C key="f">flash</C>,
+              <>
+                <C>verdict</C> is <C>pass</C>, <C>caution</C> or <C>fail</C>{' '}
+                against WCAG 2.3.1 (three flashes a second). <C>hz</C> is the
+                highest estimated rate, or <C>null</C> when nothing alternates
+                brightness. <C>fail</C> needs a repeating change above 3 Hz that
+                is both strong and plainly large.
+              </>,
+            ],
+            [
+              <C key="l">layoutShift</C>,
+              <>
+                <C>shifts</C> when <C>propertyClass</C> is <C>layout</C>,
+                otherwise <C>none</C>. A category, not a number.
+              </>,
+            ],
+            [
+              <C key="m">measured</C>,
+              <>
+                Present only on the effects that were run in Chromium:{' '}
+                <C>cls</C>, <C>entries</C> and the <C>windowSeconds</C> it
+                covers. The only numeric layout-shift figure in the response.
+              </>,
+            ],
+          ]}
+        />
+
+        <Callout>
+          Everything but <C>measured</C> is a static estimate read from the CSS
+          text, not a rendering test. The flash rate is an upper bound from
+          duration, iterations and keyframe alternation, and it does not know
+          what is behind the effect. The profile describes the effect as
+          published; the <C>speed</C> knob retimes it, so recheck a customized
+          copy. Canvas and WebGL effects return{' '}
+          <C>{'{ "applicable": false, "reason": "…" }'}</C>, and effects that
+          are not in the catalog return <C>null</C>.
+        </Callout>
+      </DocsSection>
+
       <DocsSection id="block-html" title="Blocks outside React">
         <p>
           There is no <C>framework</C> param for blocks, and that is deliberate.

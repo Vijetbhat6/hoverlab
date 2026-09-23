@@ -1,0 +1,233 @@
+<!--
+ISC License
+
+Copyright (c) for portions of Lucide are held by Cole Bemis 2013-2022 as part of Feather (MIT). All other copyright (c) for Lucide are held by Lucide Contributors 2022.
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted, provided that the above
+copyright notice and this permission notice appear in all copies.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" width="784" height="64" viewBox="0 0 784 64" id="Lucide icons / Cursors" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <g id="circle-plus" transform="translate(0 0)">
+    <rect id="circle-plus bounds" width="24" height="24" fill="none" stroke="none" />
+    <circle cx="12" cy="12" r="10" />
+    <path d="M8 12h8" />
+    <path d="M12 8v8" />
+  </g>
+  <g id="hand" transform="translate(40 0)">
+    <rect id="hand bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2" />
+    <path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2" />
+    <path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8" />
+    <path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15" />
+  </g>
+  <g id="lasso" transform="translate(80 0)">
+    <rect id="lasso bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M7 22a5 5 0 0 1-2-4" />
+    <path d="M3.3 14A6.8 6.8 0 0 1 2 10c0-4.4 4.5-8 10-8s10 3.6 10 8-4.5 8-10 8a12 12 0 0 1-5-1" />
+    <path d="M5 18a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" />
+  </g>
+  <g id="lasso-select" transform="translate(120 0)">
+    <rect id="lasso-select bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M7 22a5 5 0 0 1-2-4" />
+    <path d="M7 16.93c.96.43 1.96.74 2.99.91" />
+    <path d="M3.34 14A6.8 6.8 0 0 1 2 10c0-4.42 4.48-8 10-8s10 3.58 10 8a7.19 7.19 0 0 1-.33 2" />
+    <path d="M5 18a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" />
+    <path d="M14.33 22h-.09a.35.35 0 0 1-.24-.32v-10a.34.34 0 0 1 .33-.34c.08 0 .15.03.21.08l7.34 6a.33.33 0 0 1-.21.59h-4.49l-2.57 3.85a.35.35 0 0 1-.28.14z" />
+  </g>
+  <g id="loader" transform="translate(160 0)">
+    <rect id="loader bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 2v4" />
+    <path d="m16.2 7.8 2.9-2.9" />
+    <path d="M18 12h4" />
+    <path d="m16.2 16.2 2.9 2.9" />
+    <path d="M12 18v4" />
+    <path d="m4.9 19.1 2.9-2.9" />
+    <path d="M2 12h4" />
+    <path d="m4.9 4.9 2.9 2.9" />
+  </g>
+  <g id="loader-circle" transform="translate(200 0)">
+    <rect id="loader-circle bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M21 12a9 9 0 1 1-6.219-8.56" />
+  </g>
+  <g id="loader-pinwheel" transform="translate(240 0)">
+    <rect id="loader-pinwheel bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M22 12a1 1 0 0 1-10 0 1 1 0 0 0-10 0" />
+    <path d="M7 20.7a1 1 0 1 1 5-8.7 1 1 0 1 0 5-8.6" />
+    <path d="M7 3.3a1 1 0 1 1 5 8.6 1 1 0 1 0 5 8.6" />
+    <circle cx="12" cy="12" r="10" />
+  </g>
+  <g id="mouse-pointer" transform="translate(280 0)">
+    <rect id="mouse-pointer bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12.586 12.586 19 19" />
+    <path d="M3.688 3.037a.497.497 0 0 0-.651.651l6.5 15.999a.501.501 0 0 0 .947-.062l1.569-6.083a2 2 0 0 1 1.448-1.479l6.124-1.579a.5.5 0 0 0 .063-.947z" />
+  </g>
+  <g id="mouse-pointer-2" transform="translate(320 0)">
+    <rect id="mouse-pointer-2 bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M4.037 4.688a.495.495 0 0 1 .651-.651l16 6.5a.5.5 0 0 1-.063.947l-6.124 1.58a2 2 0 0 0-1.438 1.435l-1.579 6.126a.5.5 0 0 1-.947.063z" />
+  </g>
+  <g id="mouse-pointer-ban" transform="translate(360 0)">
+    <rect id="mouse-pointer-ban bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M2.034 2.681a.498.498 0 0 1 .647-.647l9 3.5a.5.5 0 0 1-.033.944L8.204 7.545a1 1 0 0 0-.66.66l-1.066 3.443a.5.5 0 0 1-.944.033z" />
+    <circle cx="16" cy="16" r="6" />
+    <path d="m11.8 11.8 8.4 8.4" />
+  </g>
+  <g id="mouse-pointer-click" transform="translate(400 0)">
+    <rect id="mouse-pointer-click bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M14 4.1 12 6" />
+    <path d="m5.1 8-2.9-.8" />
+    <path d="m6 12-1.9 2" />
+    <path d="M7.2 2.2 8 5.1" />
+    <path d="M9.037 9.69a.498.498 0 0 1 .653-.653l11 4.5a.5.5 0 0 1-.074.949l-4.349 1.041a1 1 0 0 0-.74.739l-1.04 4.35a.5.5 0 0 1-.95.074z" />
+  </g>
+  <g id="move" transform="translate(440 0)">
+    <rect id="move bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 2v20" />
+    <path d="m15 19-3 3-3-3" />
+    <path d="m19 9 3 3-3 3" />
+    <path d="M2 12h20" />
+    <path d="m5 9-3 3 3 3" />
+    <path d="m9 5 3-3 3 3" />
+  </g>
+  <g id="move-diagonal" transform="translate(480 0)">
+    <rect id="move-diagonal bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M11 19H5v-6" />
+    <path d="M13 5h6v6" />
+    <path d="M19 5 5 19" />
+  </g>
+  <g id="move-diagonal-2" transform="translate(520 0)">
+    <rect id="move-diagonal-2 bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M19 13v6h-6" />
+    <path d="M5 11V5h6" />
+    <path d="m5 5 14 14" />
+  </g>
+  <g id="move-horizontal" transform="translate(560 0)">
+    <rect id="move-horizontal bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m18 8 4 4-4 4" />
+    <path d="M2 12h20" />
+    <path d="m6 8-4 4 4 4" />
+  </g>
+  <g id="move-vertical" transform="translate(600 0)">
+    <rect id="move-vertical bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 2v20" />
+    <path d="m8 18 4 4 4-4" />
+    <path d="m8 6 4-4 4 4" />
+  </g>
+  <g id="pen-tool" transform="translate(640 0)">
+    <rect id="pen-tool bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M15.707 21.293a1 1 0 0 1-1.414 0l-1.586-1.586a1 1 0 0 1 0-1.414l5.586-5.586a1 1 0 0 1 1.414 0l1.586 1.586a1 1 0 0 1 0 1.414z" />
+    <path d="m18 13-1.375-6.874a1 1 0 0 0-.746-.776L3.235 2.028a1 1 0 0 0-1.207 1.207L5.35 15.879a1 1 0 0 0 .776.746L13 18" />
+    <path d="m2.3 2.3 7.286 7.286" />
+    <circle cx="11" cy="11" r="2" />
+  </g>
+  <g id="pencil" transform="translate(680 0)">
+    <rect id="pencil bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" />
+    <path d="m15 5 4 4" />
+  </g>
+  <g id="pencil-off" transform="translate(720 0)">
+    <rect id="pencil-off bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m10 10-6.157 6.162a2 2 0 0 0-.5.833l-1.322 4.36a.5.5 0 0 0 .622.624l4.358-1.323a2 2 0 0 0 .83-.5L14 13.982" />
+    <path d="m12.829 7.172 4.359-4.346a1 1 0 1 1 3.986 3.986l-4.353 4.353" />
+    <path d="m15 5 4 4" />
+    <path d="m2 2 20 20" />
+  </g>
+  <g id="plus" transform="translate(760 0)">
+    <rect id="plus bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M5 12h14" />
+    <path d="M12 5v14" />
+  </g>
+  <g id="pointer" transform="translate(0 40)">
+    <rect id="pointer bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M22 14a8 8 0 0 1-8 8" />
+    <path d="M18 11v-1a2 2 0 0 0-2-2a2 2 0 0 0-2 2" />
+    <path d="M14 10V9a2 2 0 0 0-2-2a2 2 0 0 0-2 2v1" />
+    <path d="M10 9.5V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v10" />
+    <path d="M18 11a2 2 0 1 1 4 0v3a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15" />
+  </g>
+  <g id="pointer-off" transform="translate(40 40)">
+    <rect id="pointer-off bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M10 4.5V4a2 2 0 0 0-2.41-1.957" />
+    <path d="M13.9 8.4a2 2 0 0 0-1.26-1.295" />
+    <path d="M21.7 16.2A8 8 0 0 0 22 14v-3a2 2 0 1 0-4 0v-1a2 2 0 0 0-3.63-1.158" />
+    <path d="m7 15-1.8-1.8a2 2 0 0 0-2.79 2.86L6 19.7a7.74 7.74 0 0 0 6 2.3h2a8 8 0 0 0 5.657-2.343" />
+    <path d="M6 6v8" />
+    <path d="m2 2 20 20" />
+  </g>
+  <g id="sparkles" transform="translate(80 40)">
+    <rect id="sparkles bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z" />
+    <path d="M20 3v4" />
+    <path d="M22 5h-4" />
+    <path d="M4 17v2" />
+    <path d="M5 18H3" />
+  </g>
+  <g id="spline-pointer" transform="translate(120 40)">
+    <rect id="spline-pointer bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12.034 12.681a.498.498 0 0 1 .647-.647l9 3.5a.5.5 0 0 1-.033.943l-3.444 1.068a1 1 0 0 0-.66.66l-1.067 3.443a.5.5 0 0 1-.943.033z" />
+    <path d="M5 17A12 12 0 0 1 17 5" />
+    <circle cx="19" cy="5" r="2" />
+    <circle cx="5" cy="19" r="2" />
+  </g>
+  <g id="square-dashed-mouse-pointer" transform="translate(160 40)">
+    <rect id="square-dashed-mouse-pointer bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12.034 12.681a.498.498 0 0 1 .647-.647l9 3.5a.5.5 0 0 1-.033.943l-3.444 1.068a1 1 0 0 0-.66.66l-1.067 3.443a.5.5 0 0 1-.943.033z" />
+    <path d="M5 3a2 2 0 0 0-2 2" />
+    <path d="M19 3a2 2 0 0 1 2 2" />
+    <path d="M5 21a2 2 0 0 1-2-2" />
+    <path d="M9 3h1" />
+    <path d="M9 21h2" />
+    <path d="M14 3h1" />
+    <path d="M3 9v1" />
+    <path d="M21 9v2" />
+    <path d="M3 14v1" />
+  </g>
+  <g id="square-mouse-pointer" transform="translate(200 40)">
+    <rect id="square-mouse-pointer bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12.034 12.681a.498.498 0 0 1 .647-.647l9 3.5a.5.5 0 0 1-.033.943l-3.444 1.068a1 1 0 0 0-.66.66l-1.067 3.443a.5.5 0 0 1-.943.033z" />
+    <path d="M21 11V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h6" />
+  </g>
+  <g id="stamp" transform="translate(240 40)">
+    <rect id="stamp bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M14 13V8.5C14 7 15 7 15 5a3 3 0 0 0-6 0c0 2 1 2 1 3.5V13" />
+    <path d="M20 15.5a2.5 2.5 0 0 0-2.5-2.5h-11A2.5 2.5 0 0 0 4 15.5V17a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1z" />
+    <path d="M5 22h14" />
+  </g>
+  <g id="text-cursor" transform="translate(280 40)">
+    <rect id="text-cursor bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M17 22h-1a4 4 0 0 1-4-4V6a4 4 0 0 1 4-4h1" />
+    <path d="M7 22h1a4 4 0 0 0 4-4v-1" />
+    <path d="M7 2h1a4 4 0 0 1 4 4v1" />
+  </g>
+  <g id="wand" transform="translate(320 40)">
+    <rect id="wand bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M15 4V2" />
+    <path d="M15 16v-2" />
+    <path d="M8 9h2" />
+    <path d="M20 9h2" />
+    <path d="M17.8 11.8 19 13" />
+    <path d="M15 9h.01" />
+    <path d="M17.8 6.2 19 5" />
+    <path d="m3 21 9-9" />
+    <path d="M12.2 6.2 11 5" />
+  </g>
+  <g id="wand-sparkles" transform="translate(360 40)">
+    <rect id="wand-sparkles bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m21.64 3.64-1.28-1.28a1.21 1.21 0 0 0-1.72 0L2.36 18.64a1.21 1.21 0 0 0 0 1.72l1.28 1.28a1.2 1.2 0 0 0 1.72 0L21.64 5.36a1.2 1.2 0 0 0 0-1.72" />
+    <path d="m14 7 3 3" />
+    <path d="M5 6v4" />
+    <path d="M19 14v4" />
+    <path d="M10 2v2" />
+    <path d="M7 8H3" />
+    <path d="M21 16h-4" />
+    <path d="M11 3H9" />
+  </g>
+</svg>

@@ -120,7 +120,7 @@ export function ErrorStateRetry({
           <summary className="cursor-pointer list-none text-center text-xs font-medium text-muted-foreground transition-colors hover:text-foreground">
             Technical details
           </summary>
-          <pre className="mt-3 overflow-x-auto rounded-xl bg-muted/60 p-3 text-start font-mono text-xs text-muted-foreground">
+          <pre className="mt-3 whitespace-pre-wrap break-words rounded-xl bg-muted/60 p-3 text-start font-mono text-xs text-muted-foreground">
             {detail}
           </pre>
         </details>

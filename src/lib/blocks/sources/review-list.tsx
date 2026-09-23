@@ -207,7 +207,9 @@ export function ReviewList({
                 </time>
               </div>
 
-              <h3 className="mt-2.5 font-semibold">{review.title}</h3>
+              {review.title ? (
+                <h3 data-stress-ignore className="mt-2.5 font-semibold">{review.title}</h3>
+              ) : null}
 
               <p
                 id={`${uid}-${review.id}-body`}

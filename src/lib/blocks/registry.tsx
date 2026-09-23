@@ -155,6 +155,18 @@ import { AuthForgotPassword } from './sources/auth-forgot-password'
 import { AuthResetPassword } from './sources/auth-reset-password'
 import { AuthTwoFactor } from './sources/auth-two-factor'
 
+import { SidebarAppGrouped } from './sources/sidebar-app-grouped'
+import { SidebarCollapsible } from './sources/sidebar-collapsible'
+import { SidebarTwoPane } from './sources/sidebar-two-pane'
+import { SidebarNestedAccordion } from './sources/sidebar-nested-accordion'
+import { SidebarWorkspaceSwitcher } from './sources/sidebar-workspace-switcher'
+import { SidebarFloatingInset } from './sources/sidebar-floating-inset'
+import { SidebarResizable } from './sources/sidebar-resizable'
+import { SidebarDocsTree } from './sources/sidebar-docs-tree'
+import { SidebarThreadHistory } from './sources/sidebar-thread-history'
+import { SidebarMailFolders } from './sources/sidebar-mail-folders'
+import { SidebarFileTree } from './sources/sidebar-file-tree'
+
 import { DashboardShell } from './sources/dashboard-shell'
 import { DashboardStatCards } from './sources/dashboard-stat-cards'
 import { DashboardActivityFeed } from './sources/dashboard-activity-feed'
@@ -300,6 +312,11 @@ import { PricingValueSplit } from './sources/pricing-value-split'
 import { ProductSpecSplit } from './sources/product-spec-split'
 import { AuthMagicLinkForm } from './sources/auth-magic-link-form'
 import { SupportTicketForm } from './sources/support-ticket-form'
+import { EmailProductAnnouncement } from './sources/email-product-announcement'
+import { EmailNewsletterDigest } from './sources/email-newsletter-digest'
+import { EmailPromoOffer } from './sources/email-promo-offer'
+import { EmailWinback } from './sources/email-winback'
+import { CaseStudyGrid } from './sources/case-study-grid'
 import { BackInStockForm } from './sources/back-in-stock-form'
 import { OrderLookupForm } from './sources/order-lookup-form'
 import { ImportFromUrlForm } from './sources/import-from-url-form'
@@ -500,6 +517,18 @@ export const BLOCK_PREVIEWS: Record<string, React.ReactNode> = {
   'auth-two-factor': <AuthTwoFactor embedded />,
   'auth-sso-domain': <AuthSsoDomain />,
 
+  'sidebar-app-grouped': <SidebarAppGrouped />,
+  'sidebar-collapsible': <SidebarCollapsible />,
+  'sidebar-two-pane': <SidebarTwoPane />,
+  'sidebar-nested-accordion': <SidebarNestedAccordion />,
+  'sidebar-workspace-switcher': <SidebarWorkspaceSwitcher />,
+  'sidebar-floating-inset': <SidebarFloatingInset />,
+  'sidebar-resizable': <SidebarResizable />,
+  'sidebar-docs-tree': <SidebarDocsTree />,
+  'sidebar-thread-history': <SidebarThreadHistory />,
+  'sidebar-mail-folders': <SidebarMailFolders />,
+  'sidebar-file-tree': <SidebarFileTree />,
+
   'dashboard-shell': <DashboardShell />,
   'dashboard-stat-cards': <DashboardStatCards />,
   'dashboard-activity-feed': <DashboardActivityFeed />,
@@ -620,6 +649,11 @@ export const BLOCK_PREVIEWS: Record<string, React.ReactNode> = {
   'product-spec-split': <ProductSpecSplit />,
   'auth-magic-link-form': <AuthMagicLinkForm />,
   'support-ticket-form': <SupportTicketForm />,
+  'email-product-announcement': <EmailProductAnnouncement />,
+  'email-newsletter-digest': <EmailNewsletterDigest />,
+  'email-promo-offer': <EmailPromoOffer />,
+  'email-winback': <EmailWinback />,
+  'case-study-grid': <CaseStudyGrid />,
   'back-in-stock-form': <BackInStockForm />,
   'order-lookup-form': <OrderLookupForm />,
   'import-from-url-form': <ImportFromUrlForm />,

@@ -81,7 +81,7 @@ export function InputGroup({
         <input
           disabled={disabled}
           className={[
-            'w-full bg-transparent py-2 text-foreground outline-none',
+            'w-full border border-transparent bg-transparent py-2 text-foreground outline-none',
             'placeholder:text-muted-foreground disabled:cursor-not-allowed',
             iconStart ? 'ps-9' : 'ps-3',
             action ? 'pe-1' : 'pe-3',

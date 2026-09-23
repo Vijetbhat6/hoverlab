@@ -171,7 +171,7 @@ export function ChatArtifactCanvas({
 
   return (
     <section className={`mx-auto w-full max-w-5xl px-4 py-16 sm:px-6 ${className}`}>
-      <div className="overflow-hidden rounded-2xl border border-border bg-card">
+      <div className="overflow-y-hidden rounded-2xl border border-border bg-card">
         {/* Canvas first in the source order: on a phone the artifact is
             what the visitor came for, and the thread is the context. */}
         <div className="grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)]">

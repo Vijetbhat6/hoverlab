@@ -169,8 +169,8 @@ export function ContextChunkCards({
 
       {/* -- Header ------------------------------------------------------ */}
       <div className="mb-4 flex flex-wrap items-center gap-3">
-        <div className="min-w-0 flex-1">
-          <h3 className="text-sm font-semibold">{heading}</h3>
+        <div className="min-w-0 flex-auto">
+          {heading ? <h3 data-stress-ignore className="text-sm font-semibold">{heading}</h3> : null}
           {/* Wraps rather than truncates: "ranked by similarity" is the
               part that explains the order, and it was the part being cut. */}
           <p className="mt-0.5 text-xs text-muted-foreground">
@@ -226,7 +226,7 @@ export function ContextChunkCards({
               key={chunk.id}
               className="overflow-hidden rounded-2xl border border-border/60 bg-card"
             >
-              <div className="flex items-center gap-2.5 border-b border-border/60 px-4 py-2.5">
+              <div className="flex flex-wrap items-center gap-2.5 border-b border-border/60 px-4 py-2.5">
                 <span
                   aria-hidden
                   className="flex h-5 w-5 shrink-0 items-center justify-center rounded-md bg-muted font-mono text-[10px] font-bold text-muted-foreground"

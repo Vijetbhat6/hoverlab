@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1216" height="1854" viewBox="0 0 1216 1854" id="Hoverlab — Frames &amp; Mocks">
+  <!--
+    Hoverlab — Frames & Mocks. 4 controls, traced from the
+    rendered catalog. Drag this file onto a Figma canvas.
+
+    These are frames, not components: named, editable layers with real
+    geometry, colour and type. There are no variants, no auto-layout,
+    and no hover or motion — none of those exist in a static frame.
+
+    Every one of these is free to copy as code at https://hoverlab.dev/primitives
+  -->
+  <rect id="Background" x="0" y="0" width="1216" height="1854" fill="#ffffff" />
+  <text id="Browser Frame label" x="64" y="84" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Browser Frame</text>
+  <text id="browser-frame id" x="64" y="98" font-family="ui-monospace, monospace" font-size="12" fill="#737373">browser-frame</text>
+  <g id="Browser Frame" transform="translate(64, 116)">
+    <rect id="container" x="0" y="0" width="1088" height="375.75" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="320" y="25" width="448" height="325.75" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
+      <rect id="container 3" x="321" y="26" width="446" height="45" fill="rgba(243, 242, 238, 0.6)" />
+      <rect id="container 4" x="333" y="42" width="12" height="12" rx="6" fill="rgba(7, 13, 13, 0.149)" />
+      <rect id="container 5" x="351" y="42" width="12" height="12" rx="6" fill="rgba(7, 13, 13, 0.149)" />
+      <rect id="container 6" x="369" y="42" width="12" height="12" rx="6" fill="rgba(7, 13, 13, 0.149)" />
+      <rect id="container 7" x="393" y="36" width="296" height="24" rx="10" fill="#fdfcf8" />
+      <g id="icon lock" transform="translate(460.813 42) scale(0.5 0.5)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect rx="2" ry="2" x="3" y="11" width="18" height="11" />
+        <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+      </g>
+      <text id="acme.example/dashboard" x="478.81" y="52" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">acme.example/dashboard</text>
+      <rect id="container 8" x="321" y="71" width="446" height="278.75" fill="#fdfcf8" />
+      <rect id="container 9" x="333" y="79" width="16" height="16" rx="4" fill="rgba(0, 120, 46, 0.702)" />
+      <rect id="container 10" x="355" y="83" width="56" height="8" rx="4" fill="rgba(10, 10, 15, 0.2)" />
+      <rect id="container 11" x="731" y="83" width="24" height="8" rx="4" fill="rgba(7, 13, 13, 0.149)" />
+      <rect id="container 12" x="333" y="116" width="281.33" height="10" rx="5" fill="rgba(8, 12, 16, 0.251)" />
+      <rect id="container 13" x="333" y="134" width="211" height="8" rx="4" fill="rgba(7, 13, 13, 0.149)" />
+      <rect id="container 14" x="333" y="154" width="135.33" height="36" rx="10" fill="#f3f2ee" />
+      <rect id="container 15" x="476.33" y="154" width="135.33" height="36" rx="10" fill="#f3f2ee" />
+      <rect id="container 16" x="619.66" y="154" width="135.33" height="36" rx="10" fill="#f3f2ee" />
+  </g>
+  <text id="Phone &amp; Tablet Frame label" x="64" y="607.75" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Phone &amp; Tablet Frame</text>
+  <text id="phone-frame id" x="64" y="621.75" font-family="ui-monospace, monospace" font-size="12" fill="#737373">phone-frame</text>
+  <g id="Phone &amp; Tablet Frame" transform="translate(64, 639.75)">
+    <rect id="container" x="0" y="0" width="1088" height="322" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="399" y="73.95" width="3" height="16.31" rx="1.5" fill="rgba(8, 12, 16, 0.251)" />
+      <rect id="container 3" x="399" y="101.16" width="3" height="24.47" rx="1.5" fill="rgba(8, 12, 16, 0.251)" />
+      <rect id="container 4" x="534" y="90.27" width="3" height="32.63" fill="rgba(8, 12, 16, 0.251)" />
+      <rect id="container 5" x="402" y="25" width="132" height="272" rx="36" fill="rgba(8, 12, 15, 0.851)" stroke="rgba(8, 12, 15, 0.851)" stroke-width="6" />
+      <rect id="container 6" x="408" y="31" width="120" height="260" rx="28.8" fill="#fdfcf8" />
+      <text id="12:30" x="428" y="50" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" font-weight="500">12:30</text>
+      <rect id="container 7" x="479" y="46" width="2" height="4" rx="1" fill="#080c0f" />
+      <rect id="container 8" x="482.5" y="45" width="2" height="5" rx="1" fill="#080c0f" />
+      <rect id="container 9" x="486" y="43" width="2" height="7" rx="1" fill="#080c0f" />
+      <rect id="container 10" x="494" y="42.5" width="14" height="8" rx="3" fill="none" stroke="#080c0f" stroke-width="1" />
+      <rect id="container 11" x="496.5" y="45" width="6" height="3" rx="1" fill="#080c0f" />
+      <rect id="container 12" x="428" y="39" width="80" height="24" rx="12" fill="rgba(8, 12, 15, 0.851)" />
+      <rect id="container 13" x="420" y="75" width="16" height="16" rx="4" fill="rgba(0, 120, 46, 0.702)" />
+      <rect id="container 14" x="492" y="79" width="24" height="8" rx="4" fill="rgba(7, 13, 13, 0.149)" />
+      <rect id="container 15" x="420" y="112" width="64" height="10" rx="5" fill="rgba(8, 12, 16, 0.251)" />
+      <rect id="container 16" x="420" y="130" width="48" height="8" rx="4" fill="rgba(7, 13, 13, 0.149)" />
+      <rect id="container 17" x="420" y="150" width="96" height="36" rx="10" fill="#f3f2ee" />
+      <rect id="container 18" x="420" y="194" width="96" height="36" rx="10" fill="#f3f2ee" />
+      <rect id="container 19" x="420" y="238" width="96" height="36" rx="10" fill="#f3f2ee" />
+      <rect id="container 20" x="448.01" y="279" width="39.98" height="4" rx="2" fill="rgba(8, 12, 15, 0.4)" />
+      <rect id="container 21" x="551" y="73.95" width="3" height="16.31" rx="1.5" fill="rgba(8, 12, 16, 0.251)" />
+      <rect id="container 22" x="551" y="101.16" width="3" height="24.47" rx="1.5" fill="rgba(8, 12, 16, 0.251)" />
+      <rect id="container 23" x="686" y="90.27" width="3" height="32.63" fill="rgba(8, 12, 16, 0.251)" />
+      <rect id="container 24" x="554" y="25" width="132" height="272" rx="36" fill="rgba(8, 12, 15, 0.851)" stroke="rgba(8, 12, 15, 0.851)" stroke-width="6" />
+      <rect id="container 25" x="560" y="31" width="120" height="260" rx="28.8" fill="#fdfcf8" />
+      <text id="12:30 2" x="580" y="50" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" font-weight="500">12:30</text>
+      <rect id="container 26" x="631" y="46" width="2" height="4" rx="1" fill="#080c0f" />
+      <rect id="container 27" x="634.5" y="45" width="2" height="5" rx="1" fill="#080c0f" />
+      <rect id="container 28" x="638" y="43" width="2" height="7" rx="1" fill="#080c0f" />
+      <rect id="container 29" x="646" y="42.5" width="14" height="8" rx="3" fill="none" stroke="#080c0f" stroke-width="1" />
+      <rect id="container 30" x="648.5" y="45" width="6" height="3" rx="1" fill="#080c0f" />
+      <rect id="container 31" x="614" y="41" width="12" height="12" rx="6" fill="rgba(8, 12, 15, 0.851)" />
+      <rect id="container 32" x="572" y="75" width="16" height="16" rx="4" fill="rgba(0, 120, 46, 0.702)" />
+      <rect id="container 33" x="644" y="79" width="24" height="8" rx="4" fill="rgba(7, 13, 13, 0.149)" />
+      <rect id="container 34" x="572" y="112" width="64" height="10" rx="5" fill="rgba(8, 12, 16, 0.251)" />
+      <rect id="container 35" x="572" y="130" width="48" height="8" rx="4" fill="rgba(7, 13, 13, 0.149)" />
+      <rect id="container 36" x="572" y="150" width="96" height="36" rx="10" fill="#f3f2ee" />
+      <rect id="container 37" x="572" y="194" width="96" height="36" rx="10" fill="#f3f2ee" />
+      <rect id="container 38" x="572" y="238" width="96" height="36" rx="10" fill="#f3f2ee" />
+      <rect id="container 39" x="600.01" y="279" width="39.98" height="4" rx="2" fill="rgba(8, 12, 15, 0.4)" />
+  </g>
+  <text id="Laptop Frame label" x="64" y="1077.75" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Laptop Frame</text>
+  <text id="laptop-frame id" x="64" y="1091.75" font-family="ui-monospace, monospace" font-size="12" fill="#737373">laptop-frame</text>
+  <g id="Laptop Frame" transform="translate(64, 1109.75)">
+    <rect id="container" x="0" y="0" width="1088" height="261" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="394" y="25" width="300" height="199" rx="16" fill="rgba(8, 12, 15, 0.851)" stroke="rgba(8, 12, 15, 0.851)" stroke-width="10" />
+      <rect id="container 3" x="404" y="35" width="280" height="175" fill="#fdfcf8" />
+      <rect id="container 4" x="542" y="39" width="4" height="4" rx="2" fill="rgba(7, 10, 17, 0.302)" />
+      <rect id="container 5" x="416" y="43" width="16" height="16" rx="4" fill="rgba(0, 120, 46, 0.702)" />
+      <rect id="container 6" x="438" y="47" width="56" height="8" rx="4" fill="rgba(10, 10, 15, 0.2)" />
+      <rect id="container 7" x="648" y="47" width="24" height="8" rx="4" fill="rgba(7, 13, 13, 0.149)" />
+      <rect id="container 8" x="416" y="80" width="170.66" height="10" rx="5" fill="rgba(8, 12, 16, 0.251)" />
+      <rect id="container 9" x="416" y="98" width="128" height="8" rx="4" fill="rgba(7, 13, 13, 0.149)" />
+      <rect id="container 10" x="416" y="118" width="80" height="36" rx="10" fill="#f3f2ee" />
+      <rect id="container 11" x="504" y="118" width="80" height="36" rx="10" fill="#f3f2ee" />
+      <rect id="container 12" x="592" y="118" width="80" height="36" rx="10" fill="#f3f2ee" />
+      <rect id="container 13" x="394" y="224" width="336" height="12" fill="rgba(8, 12, 15, 0.851)" />
+      <rect id="container 14" x="530" y="224" width="64" height="4" fill="rgba(251, 251, 247, 0.251)" />
+  </g>
+  <text id="Device Showcase label" x="64" y="1486.75" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Device Showcase</text>
+  <text id="device-showcase id" x="64" y="1500.75" font-family="ui-monospace, monospace" font-size="12" fill="#737373">device-showcase</text>
+  <g id="Device Showcase" transform="translate(64, 1518.75)">
+    <rect id="container" x="0" y="0" width="1088" height="271" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="369" y="35" width="300" height="199" rx="16" fill="rgba(8, 12, 15, 0.851)" stroke="rgba(8, 12, 15, 0.851)" stroke-width="10" />
+      <rect id="container 3" x="379" y="45" width="280" height="175" fill="#fdfcf8" />
+      <rect id="container 4" x="517" y="49" width="4" height="4" rx="2" fill="rgba(7, 10, 17, 0.302)" />
+      <rect id="container 5" x="391" y="53" width="16" height="16" rx="4" fill="rgba(0, 120, 46, 0.702)" />
+      <rect id="container 6" x="413" y="57" width="56" height="8" rx="4" fill="rgba(10, 10, 15, 0.2)" />
+      <rect id="container 7" x="623" y="57" width="24" height="8" rx="4" fill="rgba(7, 13, 13, 0.149)" />
+      <rect id="container 8" x="391" y="90" width="170.66" height="10" rx="5" fill="rgba(8, 12, 16, 0.251)" />
+      <rect id="container 9" x="391" y="108" width="128" height="8" rx="4" fill="rgba(7, 13, 13, 0.149)" />
+      <rect id="container 10" x="391" y="128" width="80" height="36" rx="10" fill="#f3f2ee" />
+      <rect id="container 11" x="479" y="128" width="80" height="36" rx="10" fill="#f3f2ee" />
+      <rect id="container 12" x="567" y="128" width="80" height="36" rx="10" fill="#f3f2ee" />
+      <rect id="container 13" x="369" y="234" width="336" height="12" fill="rgba(8, 12, 15, 0.851)" />
+      <rect id="container 14" x="505" y="234" width="64" height="4" fill="rgba(251, 251, 247, 0.251)" />
+      <rect id="container 15" x="629" y="65" width="90" height="181" rx="36" fill="rgba(8, 12, 15, 0.851)" stroke="rgba(8, 12, 15, 0.851)" stroke-width="6" />
+      <rect id="container 16" x="635" y="71" width="78" height="169" rx="28.8" fill="#fdfcf8" />
+      <text id="12:30" x="655" y="90" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="10" font-weight="500">12:30</text>
+      <rect id="container 17" x="681.27" y="86" width="2" height="4" rx="1" fill="#080c0f" />
+      <rect id="container 18" x="684.77" y="85" width="2" height="5" rx="1" fill="#080c0f" />
+      <rect id="container 19" x="688.27" y="83" width="2" height="7" rx="1" fill="#080c0f" />
+      <rect id="container 20" x="696.27" y="82.5" width="14" height="8" rx="3" fill="none" stroke="#080c0f" stroke-width="1" />
+      <rect id="container 21" x="698.77" y="85" width="6" height="3" rx="1" fill="#080c0f" />
+      <rect id="container 22" x="634" y="79" width="80" height="24" rx="12" fill="rgba(8, 12, 15, 0.851)" />
+      <rect id="container 23" x="647" y="115" width="16" height="16" rx="4" fill="rgba(0, 120, 46, 0.702)" />
+      <rect id="container 24" x="677" y="119" width="24" height="8" rx="4" fill="rgba(7, 13, 13, 0.149)" />
+      <rect id="container 25" x="647" y="152" width="36" height="10" rx="5" fill="rgba(8, 12, 16, 0.251)" />
+      <rect id="container 26" x="647" y="170" width="27" height="8" rx="4" fill="rgba(7, 13, 13, 0.149)" />
+      <rect id="container 27" x="647" y="190" width="54" height="36" rx="10" fill="#f3f2ee" />
+      <rect id="container 28" x="647" y="234" width="54" height="36" rx="10" fill="#f3f2ee" />
+      <rect id="container 29" x="661.01" y="228" width="25.98" height="4" rx="2" fill="rgba(8, 12, 15, 0.4)" />
+  </g>
+</svg>

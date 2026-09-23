@@ -195,7 +195,7 @@ export function SelectionAiToolbar({
             aria-orientation="horizontal"
             onKeyDown={onKeyDown}
             style={{ top: position.top, left: position.left }}
-            className="absolute z-20 flex -translate-x-1/2 -translate-y-[calc(100%+8px)] items-center gap-0.5 rounded-xl border border-border/60 bg-card p-1 shadow-2xl"
+            className="absolute z-20 flex max-w-[calc(100%-1rem)] -translate-x-1/2 -translate-y-[calc(100%+8px)] flex-wrap items-center gap-0.5 rounded-xl border border-border/60 bg-card p-1 shadow-2xl"
           >
             {actions.map((action, i) => {
               const Icon = ACTION_ICON[action.icon]

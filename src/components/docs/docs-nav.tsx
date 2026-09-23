@@ -31,6 +31,7 @@ const SECTIONS: Array<{ href: string; label: string; blurb: string }> = [
   // this layout.
   { href: '/mcp', label: 'MCP', blurb: 'Editor agents & Figma' },
   { href: '/docs/registry', label: 'Registry', blurb: 'npx shadcn add @hoverlab' },
+  { href: '/docs/migrate', label: 'Migrate', blurb: 'Adopt, tokens, updates' },
   { href: '/docs/dna', label: 'Design DNA', blurb: 'Tokens and rules for AI tools' },
   { href: '/docs/skills', label: 'Skills', blurb: 'Teach your agent the catalog' },
 ]

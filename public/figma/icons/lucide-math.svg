@@ -1,0 +1,455 @@
+<!--
+ISC License
+
+Copyright (c) for portions of Lucide are held by Cole Bemis 2013-2022 as part of Feather (MIT). All other copyright (c) for Lucide are held by Lucide Contributors 2022.
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted, provided that the above
+copyright notice and this permission notice appear in all copies.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" width="784" height="144" viewBox="0 0 784 144" id="Lucide icons / Math" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <g id="asterisk" transform="translate(0 0)">
+    <rect id="asterisk bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 6v12" />
+    <path d="M17.196 9 6.804 15" />
+    <path d="m6.804 9 10.392 6" />
+  </g>
+  <g id="badge-percent" transform="translate(40 0)">
+    <rect id="badge-percent bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" />
+    <path d="m15 9-6 6" />
+    <path d="M9 9h.01" />
+    <path d="M15 15h.01" />
+  </g>
+  <g id="box" transform="translate(80 0)">
+    <rect id="box bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z" />
+    <path d="m3.3 7 8.7 5 8.7-5" />
+    <path d="M12 22V12" />
+  </g>
+  <g id="calculator" transform="translate(120 0)">
+    <rect id="calculator bounds" width="24" height="24" fill="none" stroke="none" />
+    <rect width="16" height="20" x="4" y="2" rx="2" />
+    <line x1="8" x2="16" y1="6" y2="6" />
+    <line x1="16" x2="16" y1="14" y2="18" />
+    <path d="M16 10h.01" />
+    <path d="M12 10h.01" />
+    <path d="M8 10h.01" />
+    <path d="M12 14h.01" />
+    <path d="M8 14h.01" />
+    <path d="M12 18h.01" />
+    <path d="M8 18h.01" />
+  </g>
+  <g id="chevron-right" transform="translate(160 0)">
+    <rect id="chevron-right bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m9 18 6-6-6-6" />
+  </g>
+  <g id="chevron-up" transform="translate(200 0)">
+    <rect id="chevron-up bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m18 15-6-6-6 6" />
+  </g>
+  <g id="circle-divide" transform="translate(240 0)">
+    <rect id="circle-divide bounds" width="24" height="24" fill="none" stroke="none" />
+    <line x1="8" x2="16" y1="12" y2="12" />
+    <line x1="12" x2="12" y1="16" y2="16" />
+    <line x1="12" x2="12" y1="8" y2="8" />
+    <circle cx="12" cy="12" r="10" />
+  </g>
+  <g id="circle-equal" transform="translate(280 0)">
+    <rect id="circle-equal bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M7 10h10" />
+    <path d="M7 14h10" />
+    <circle cx="12" cy="12" r="10" />
+  </g>
+  <g id="circle-minus" transform="translate(320 0)">
+    <rect id="circle-minus bounds" width="24" height="24" fill="none" stroke="none" />
+    <circle cx="12" cy="12" r="10" />
+    <path d="M8 12h8" />
+  </g>
+  <g id="circle-percent" transform="translate(360 0)">
+    <rect id="circle-percent bounds" width="24" height="24" fill="none" stroke="none" />
+    <circle cx="12" cy="12" r="10" />
+    <path d="m15 9-6 6" />
+    <path d="M9 9h.01" />
+    <path d="M15 15h.01" />
+  </g>
+  <g id="circle-plus" transform="translate(400 0)">
+    <rect id="circle-plus bounds" width="24" height="24" fill="none" stroke="none" />
+    <circle cx="12" cy="12" r="10" />
+    <path d="M8 12h8" />
+    <path d="M12 8v8" />
+  </g>
+  <g id="circle-slash" transform="translate(440 0)">
+    <rect id="circle-slash bounds" width="24" height="24" fill="none" stroke="none" />
+    <circle cx="12" cy="12" r="10" />
+    <line x1="9" x2="15" y1="15" y2="9" />
+  </g>
+  <g id="circle-slash-2" transform="translate(480 0)">
+    <rect id="circle-slash-2 bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M22 2 2 22" />
+    <circle cx="12" cy="12" r="10" />
+  </g>
+  <g id="circle-x" transform="translate(520 0)">
+    <rect id="circle-x bounds" width="24" height="24" fill="none" stroke="none" />
+    <circle cx="12" cy="12" r="10" />
+    <path d="m15 9-6 6" />
+    <path d="m9 9 6 6" />
+  </g>
+  <g id="cone" transform="translate(560 0)">
+    <rect id="cone bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m20.9 18.55-8-15.98a1 1 0 0 0-1.8 0l-8 15.98" />
+    <ellipse cx="12" cy="19" rx="9" ry="3" />
+  </g>
+  <g id="copy-minus" transform="translate(600 0)">
+    <rect id="copy-minus bounds" width="24" height="24" fill="none" stroke="none" />
+    <line x1="12" x2="18" y1="15" y2="15" />
+    <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+    <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+  </g>
+  <g id="copy-plus" transform="translate(640 0)">
+    <rect id="copy-plus bounds" width="24" height="24" fill="none" stroke="none" />
+    <line x1="15" x2="15" y1="12" y2="18" />
+    <line x1="12" x2="18" y1="15" y2="15" />
+    <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+    <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+  </g>
+  <g id="copy-slash" transform="translate(680 0)">
+    <rect id="copy-slash bounds" width="24" height="24" fill="none" stroke="none" />
+    <line x1="12" x2="18" y1="18" y2="12" />
+    <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+    <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+  </g>
+  <g id="copy-x" transform="translate(720 0)">
+    <rect id="copy-x bounds" width="24" height="24" fill="none" stroke="none" />
+    <line x1="12" x2="18" y1="12" y2="18" />
+    <line x1="12" x2="18" y1="18" y2="12" />
+    <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+    <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+  </g>
+  <g id="cuboid" transform="translate(760 0)">
+    <rect id="cuboid bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m21.12 6.4-6.05-4.06a2 2 0 0 0-2.17-.05L2.95 8.41a2 2 0 0 0-.95 1.7v5.82a2 2 0 0 0 .88 1.66l6.05 4.07a2 2 0 0 0 2.17.05l9.95-6.12a2 2 0 0 0 .95-1.7V8.06a2 2 0 0 0-.88-1.66Z" />
+    <path d="M10 22v-8L2.25 9.15" />
+    <path d="m10 14 11.77-6.87" />
+  </g>
+  <g id="cylinder" transform="translate(0 40)">
+    <rect id="cylinder bounds" width="24" height="24" fill="none" stroke="none" />
+    <ellipse cx="12" cy="5" rx="9" ry="3" />
+    <path d="M3 5v14a9 3 0 0 0 18 0V5" />
+  </g>
+  <g id="decimals-arrow-left" transform="translate(40 40)">
+    <rect id="decimals-arrow-left bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m13 21-3-3 3-3" />
+    <path d="M20 18H10" />
+    <path d="M3 11h.01" />
+    <rect x="6" y="3" width="5" height="8" rx="2.5" />
+  </g>
+  <g id="decimals-arrow-right" transform="translate(80 40)">
+    <rect id="decimals-arrow-right bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M10 18h10" />
+    <path d="m17 21 3-3-3-3" />
+    <path d="M3 11h.01" />
+    <rect x="15" y="3" width="5" height="8" rx="2.5" />
+    <rect x="6" y="3" width="5" height="8" rx="2.5" />
+  </g>
+  <g id="diameter" transform="translate(120 40)">
+    <rect id="diameter bounds" width="24" height="24" fill="none" stroke="none" />
+    <circle cx="19" cy="19" r="2" />
+    <circle cx="5" cy="5" r="2" />
+    <path d="M6.48 3.66a10 10 0 0 1 13.86 13.86" />
+    <path d="m6.41 6.41 11.18 11.18" />
+    <path d="M3.66 6.48a10 10 0 0 0 13.86 13.86" />
+  </g>
+  <g id="diamond-percent" transform="translate(160 40)">
+    <rect id="diamond-percent bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M2.7 10.3a2.41 2.41 0 0 0 0 3.41l7.59 7.59a2.41 2.41 0 0 0 3.41 0l7.59-7.59a2.41 2.41 0 0 0 0-3.41L13.7 2.71a2.41 2.41 0 0 0-3.41 0Z" />
+    <path d="M9.2 9.2h.01" />
+    <path d="m14.5 9.5-5 5" />
+    <path d="M14.7 14.8h.01" />
+  </g>
+  <g id="divide" transform="translate(200 40)">
+    <rect id="divide bounds" width="24" height="24" fill="none" stroke="none" />
+    <circle cx="12" cy="6" r="1" />
+    <line x1="5" x2="19" y1="12" y2="12" />
+    <circle cx="12" cy="18" r="1" />
+  </g>
+  <g id="drafting-compass" transform="translate(240 40)">
+    <rect id="drafting-compass bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m12.99 6.74 1.93 3.44" />
+    <path d="M19.136 12a10 10 0 0 1-14.271 0" />
+    <path d="m21 21-2.16-3.84" />
+    <path d="m3 21 8.02-14.26" />
+    <circle cx="12" cy="5" r="2" />
+  </g>
+  <g id="equal" transform="translate(280 40)">
+    <rect id="equal bounds" width="24" height="24" fill="none" stroke="none" />
+    <line x1="5" x2="19" y1="9" y2="9" />
+    <line x1="5" x2="19" y1="15" y2="15" />
+  </g>
+  <g id="equal-approximately" transform="translate(320 40)">
+    <rect id="equal-approximately bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M5 15a6.5 6.5 0 0 1 7 0 6.5 6.5 0 0 0 7 0" />
+    <path d="M5 9a6.5 6.5 0 0 1 7 0 6.5 6.5 0 0 0 7 0" />
+  </g>
+  <g id="equal-not" transform="translate(360 40)">
+    <rect id="equal-not bounds" width="24" height="24" fill="none" stroke="none" />
+    <line x1="5" x2="19" y1="9" y2="9" />
+    <line x1="5" x2="19" y1="15" y2="15" />
+    <line x1="19" x2="5" y1="5" y2="19" />
+  </g>
+  <g id="grid-2x2" transform="translate(400 40)">
+    <rect id="grid-2x2 bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 3v18" />
+    <path d="M3 12h18" />
+    <rect x="3" y="3" width="18" height="18" rx="2" />
+  </g>
+  <g id="grid-2x2-check" transform="translate(440 40)">
+    <rect id="grid-2x2-check bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 3v17a1 1 0 0 1-1 1H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v6a1 1 0 0 1-1 1H3" />
+    <path d="m16 19 2 2 4-4" />
+  </g>
+  <g id="grid-2x2-plus" transform="translate(480 40)">
+    <rect id="grid-2x2-plus bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 3v17a1 1 0 0 1-1 1H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v6a1 1 0 0 1-1 1H3" />
+    <path d="M16 19h6" />
+    <path d="M19 22v-6" />
+  </g>
+  <g id="grid-2x2-x" transform="translate(520 40)">
+    <rect id="grid-2x2-x bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M12 3v17a1 1 0 0 1-1 1H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v6a1 1 0 0 1-1 1H3" />
+    <path d="m16 16 5 5" />
+    <path d="m16 21 5-5" />
+  </g>
+  <g id="grid-3x2" transform="translate(560 40)">
+    <rect id="grid-3x2 bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M15 3v18" />
+    <path d="M3 12h18" />
+    <path d="M9 3v18" />
+    <rect x="3" y="3" width="18" height="18" rx="2" />
+  </g>
+  <g id="land-plot" transform="translate(600 40)">
+    <rect id="land-plot bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m12 8 6-3-6-3v10" />
+    <path d="m8 11.99-5.5 3.14a1 1 0 0 0 0 1.74l8.5 4.86a2 2 0 0 0 2 0l8.5-4.86a1 1 0 0 0 0-1.74L16 12" />
+    <path d="m6.49 12.85 11.02 6.3" />
+    <path d="M17.51 12.85 6.5 19.15" />
+  </g>
+  <g id="line-squiggle" transform="translate(640 40)">
+    <rect id="line-squiggle bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M7 3.5c5-2 7 2.5 3 4C1.5 10 2 15 5 16c5 2 9-10 14-7s.5 13.5-4 12c-5-2.5.5-11 6-2" />
+  </g>
+  <g id="minus" transform="translate(680 40)">
+    <rect id="minus bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M5 12h14" />
+  </g>
+  <g id="octagon-x" transform="translate(720 40)">
+    <rect id="octagon-x bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m15 9-6 6" />
+    <path d="M2.586 16.726A2 2 0 0 1 2 15.312V8.688a2 2 0 0 1 .586-1.414l4.688-4.688A2 2 0 0 1 8.688 2h6.624a2 2 0 0 1 1.414.586l4.688 4.688A2 2 0 0 1 22 8.688v6.624a2 2 0 0 1-.586 1.414l-4.688 4.688a2 2 0 0 1-1.414.586H8.688a2 2 0 0 1-1.414-.586z" />
+    <path d="m9 9 6 6" />
+  </g>
+  <g id="omega" transform="translate(760 40)">
+    <rect id="omega bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M3 20h4.5a.5.5 0 0 0 .5-.5v-.282a.52.52 0 0 0-.247-.437 8 8 0 1 1 8.494-.001.52.52 0 0 0-.247.438v.282a.5.5 0 0 0 .5.5H21" />
+  </g>
+  <g id="parentheses" transform="translate(0 80)">
+    <rect id="parentheses bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M8 21s-4-3-4-9 4-9 4-9" />
+    <path d="M16 3s4 3 4 9-4 9-4 9" />
+  </g>
+  <g id="percent" transform="translate(40 80)">
+    <rect id="percent bounds" width="24" height="24" fill="none" stroke="none" />
+    <line x1="19" x2="5" y1="5" y2="19" />
+    <circle cx="6.5" cy="6.5" r="2.5" />
+    <circle cx="17.5" cy="17.5" r="2.5" />
+  </g>
+  <g id="pi" transform="translate(80 80)">
+    <rect id="pi bounds" width="24" height="24" fill="none" stroke="none" />
+    <line x1="9" x2="9" y1="4" y2="20" />
+    <path d="M4 7c0-1.7 1.3-3 3-3h13" />
+    <path d="M18 20c-1.7 0-3-1.3-3-3V4" />
+  </g>
+  <g id="plus" transform="translate(120 80)">
+    <rect id="plus bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M5 12h14" />
+    <path d="M12 5v14" />
+  </g>
+  <g id="pyramid" transform="translate(160 80)">
+    <rect id="pyramid bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M2.5 16.88a1 1 0 0 1-.32-1.43l9-13.02a1 1 0 0 1 1.64 0l9 13.01a1 1 0 0 1-.32 1.44l-8.51 4.86a2 2 0 0 1-1.98 0Z" />
+    <path d="M12 2v20" />
+  </g>
+  <g id="radical" transform="translate(200 80)">
+    <rect id="radical bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M3 12h3.28a1 1 0 0 1 .948.684l2.298 7.934a.5.5 0 0 0 .96-.044L13.82 4.771A1 1 0 0 1 14.792 4H21" />
+  </g>
+  <g id="radius" transform="translate(240 80)">
+    <rect id="radius bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M20.34 17.52a10 10 0 1 0-2.82 2.82" />
+    <circle cx="19" cy="19" r="2" />
+    <path d="m13.41 13.41 4.18 4.18" />
+    <circle cx="12" cy="12" r="2" />
+  </g>
+  <g id="sigma" transform="translate(280 80)">
+    <rect id="sigma bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M18 7V5a1 1 0 0 0-1-1H6.5a.5.5 0 0 0-.4.8l4.5 6a2 2 0 0 1 0 2.4l-4.5 6a.5.5 0 0 0 .4.8H17a1 1 0 0 0 1-1v-2" />
+  </g>
+  <g id="slash" transform="translate(320 80)">
+    <rect id="slash bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M22 2 2 22" />
+  </g>
+  <g id="square-asterisk" transform="translate(360 80)">
+    <rect id="square-asterisk bounds" width="24" height="24" fill="none" stroke="none" />
+    <rect width="18" height="18" x="3" y="3" rx="2" />
+    <path d="M12 8v8" />
+    <path d="m8.5 14 7-4" />
+    <path d="m8.5 10 7 4" />
+  </g>
+  <g id="square-chevron-up" transform="translate(400 80)">
+    <rect id="square-chevron-up bounds" width="24" height="24" fill="none" stroke="none" />
+    <rect width="18" height="18" x="3" y="3" rx="2" />
+    <path d="m8 14 4-4 4 4" />
+  </g>
+  <g id="square-divide" transform="translate(440 80)">
+    <rect id="square-divide bounds" width="24" height="24" fill="none" stroke="none" />
+    <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
+    <line x1="8" x2="16" y1="12" y2="12" />
+    <line x1="12" x2="12" y1="16" y2="16" />
+    <line x1="12" x2="12" y1="8" y2="8" />
+  </g>
+  <g id="square-equal" transform="translate(480 80)">
+    <rect id="square-equal bounds" width="24" height="24" fill="none" stroke="none" />
+    <rect width="18" height="18" x="3" y="3" rx="2" />
+    <path d="M7 10h10" />
+    <path d="M7 14h10" />
+  </g>
+  <g id="square-function" transform="translate(520 80)">
+    <rect id="square-function bounds" width="24" height="24" fill="none" stroke="none" />
+    <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
+    <path d="M9 17c2 0 2.8-1 2.8-2.8V10c0-2 1-3.3 3.2-3" />
+    <path d="M9 11.2h5.7" />
+  </g>
+  <g id="square-minus" transform="translate(560 80)">
+    <rect id="square-minus bounds" width="24" height="24" fill="none" stroke="none" />
+    <rect width="18" height="18" x="3" y="3" rx="2" />
+    <path d="M8 12h8" />
+  </g>
+  <g id="square-percent" transform="translate(600 80)">
+    <rect id="square-percent bounds" width="24" height="24" fill="none" stroke="none" />
+    <rect width="18" height="18" x="3" y="3" rx="2" />
+    <path d="m15 9-6 6" />
+    <path d="M9 9h.01" />
+    <path d="M15 15h.01" />
+  </g>
+  <g id="square-pi" transform="translate(640 80)">
+    <rect id="square-pi bounds" width="24" height="24" fill="none" stroke="none" />
+    <rect width="18" height="18" x="3" y="3" rx="2" />
+    <path d="M7 7h10" />
+    <path d="M10 7v10" />
+    <path d="M16 17a2 2 0 0 1-2-2V7" />
+  </g>
+  <g id="square-plus" transform="translate(680 80)">
+    <rect id="square-plus bounds" width="24" height="24" fill="none" stroke="none" />
+    <rect width="18" height="18" x="3" y="3" rx="2" />
+    <path d="M8 12h8" />
+    <path d="M12 8v8" />
+  </g>
+  <g id="square-radical" transform="translate(720 80)">
+    <rect id="square-radical bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M7 12h2l2 5 2-10h4" />
+    <rect x="3" y="3" width="18" height="18" rx="2" />
+  </g>
+  <g id="square-sigma" transform="translate(760 80)">
+    <rect id="square-sigma bounds" width="24" height="24" fill="none" stroke="none" />
+    <rect width="18" height="18" x="3" y="3" rx="2" />
+    <path d="M16 8.9V7H8l4 5-4 5h8v-1.9" />
+  </g>
+  <g id="square-slash" transform="translate(0 120)">
+    <rect id="square-slash bounds" width="24" height="24" fill="none" stroke="none" />
+    <rect width="18" height="18" x="3" y="3" rx="2" />
+    <line x1="9" x2="15" y1="15" y2="9" />
+  </g>
+  <g id="square-x" transform="translate(40 120)">
+    <rect id="square-x bounds" width="24" height="24" fill="none" stroke="none" />
+    <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
+    <path d="m15 9-6 6" />
+    <path d="m9 9 6 6" />
+  </g>
+  <g id="tally-1" transform="translate(80 120)">
+    <rect id="tally-1 bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M4 4v16" />
+  </g>
+  <g id="tally-2" transform="translate(120 120)">
+    <rect id="tally-2 bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M4 4v16" />
+    <path d="M9 4v16" />
+  </g>
+  <g id="tally-3" transform="translate(160 120)">
+    <rect id="tally-3 bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M4 4v16" />
+    <path d="M9 4v16" />
+    <path d="M14 4v16" />
+  </g>
+  <g id="tally-4" transform="translate(200 120)">
+    <rect id="tally-4 bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M4 4v16" />
+    <path d="M9 4v16" />
+    <path d="M14 4v16" />
+    <path d="M19 4v16" />
+  </g>
+  <g id="tally-5" transform="translate(240 120)">
+    <rect id="tally-5 bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M4 4v16" />
+    <path d="M9 4v16" />
+    <path d="M14 4v16" />
+    <path d="M19 4v16" />
+    <path d="M22 6 2 18" />
+  </g>
+  <g id="tangent" transform="translate(280 120)">
+    <rect id="tangent bounds" width="24" height="24" fill="none" stroke="none" />
+    <circle cx="17" cy="4" r="2" />
+    <path d="M15.59 5.41 5.41 15.59" />
+    <circle cx="4" cy="17" r="2" />
+    <path d="M12 22s-4-9-1.5-11.5S22 12 22 12" />
+  </g>
+  <g id="triangle-right" transform="translate(320 120)">
+    <rect id="triangle-right bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M22 18a2 2 0 0 1-2 2H3c-1.1 0-1.3-.6-.4-1.3L20.4 4.3c.9-.7 1.6-.4 1.6.7Z" />
+  </g>
+  <g id="variable" transform="translate(360 120)">
+    <rect id="variable bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M8 21s-4-3-4-9 4-9 4-9" />
+    <path d="M16 3s4 3 4 9-4 9-4 9" />
+    <line x1="15" x2="9" y1="9" y2="15" />
+    <line x1="9" x2="15" y1="9" y2="15" />
+  </g>
+  <g id="vector-square" transform="translate(400 120)">
+    <rect id="vector-square bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M19.5 7a24 24 0 0 1 0 10" />
+    <path d="M4.5 7a24 24 0 0 0 0 10" />
+    <path d="M7 19.5a24 24 0 0 0 10 0" />
+    <path d="M7 4.5a24 24 0 0 1 10 0" />
+    <rect x="17" y="17" width="5" height="5" rx="1" />
+    <rect x="17" y="2" width="5" height="5" rx="1" />
+    <rect x="2" y="17" width="5" height="5" rx="1" />
+    <rect x="2" y="2" width="5" height="5" rx="1" />
+  </g>
+  <g id="weight" transform="translate(440 120)">
+    <rect id="weight bounds" width="24" height="24" fill="none" stroke="none" />
+    <circle cx="12" cy="5" r="3" />
+    <path d="M6.5 8a2 2 0 0 0-1.905 1.46L2.1 18.5A2 2 0 0 0 4 21h16a2 2 0 0 0 1.925-2.54L19.4 9.5A2 2 0 0 0 17.48 8Z" />
+  </g>
+  <g id="x" transform="translate(480 120)">
+    <rect id="x bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M18 6 6 18" />
+    <path d="m6 6 12 12" />
+  </g>
+</svg>

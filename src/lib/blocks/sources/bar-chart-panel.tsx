@@ -74,7 +74,7 @@ export function BarChartPanel({
         <div aria-hidden className="absolute inset-0 flex flex-col justify-between">
           {[1, 0.75, 0.5, 0.25, 0].map((fraction) => (
             <div key={fraction} className="flex items-center gap-2">
-              <span className="w-12 shrink-0 text-end text-[0.65rem] text-muted-foreground">
+              <span className="min-w-12 shrink-0 text-end text-[0.65rem] text-muted-foreground">
                 {format(Math.round(max * fraction))}
               </span>
               <span className="h-px flex-1 bg-border/50" />
@@ -85,17 +85,17 @@ export function BarChartPanel({
         {/* Bars, offset past the axis labels. */}
         <div aria-hidden className="relative ms-14 flex h-48 items-end gap-2">
           {bars.map((bar) => (
-            <div key={bar.label} className="group flex h-full flex-1 flex-col justify-end gap-1">
+            <div key={bar.label} className="group flex h-full min-w-0 flex-1 flex-col justify-end gap-1">
               <div className="relative flex h-full items-end justify-center gap-0.5">
                 {typeof bar.compare === 'number' ? (
                   <span
-                    className="w-1/3 rounded-t bg-muted-foreground/20 transition-all"
+                    className="w-1/3 rounded-t bg-muted-foreground/20 transition-all border border-transparent"
                     style={{ height: `${(bar.compare / max) * 100}%` }}
                   />
                 ) : null}
 
                 <span
-                  className="w-1/2 rounded-t bg-primary transition-all group-hover:bg-primary/80"
+                  className="w-1/2 rounded-t bg-primary transition-all group-hover:bg-primary/80 border border-transparent"
                   style={{ height: `${(bar.value / max) * 100}%` }}
                 />
 
@@ -105,7 +105,7 @@ export function BarChartPanel({
                 </span>
               </div>
 
-              <span className="text-center text-xs text-muted-foreground">{bar.label}</span>
+              <span className="truncate text-center text-xs text-muted-foreground">{bar.label}</span>
             </div>
           ))}
         </div>

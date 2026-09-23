@@ -24,6 +24,18 @@
  * lives only in a marketing tool drifts from the code with nothing to catch
  * it. Every factual claim below is a link to a page that states it.
  *
+ * WHO MAY RECEIVE IT — CONFIRMED SUBSCRIBERS ONLY
+ *
+ * The list is double opt-in. A `source` says which sequence an address WOULD
+ * get; it says nothing about whether the person behind it agreed to be
+ * mailed, and typing somebody else's address into a form is not agreement.
+ * Anything that walks the list and enrols people must go through
+ * `sequenceForSubscriber` in `lib/newsletter-state.ts`, which returns null
+ * unless the row is `confirmed`. `sequenceForSource` below is for the
+ * source-to-sequence mapping alone and must not be used to decide who is
+ * mailed. Rows with no status predate double opt-in and count as
+ * unconfirmed.
+ *
  * WHO THIS SEQUENCE IS FOR
  *
  * Envato's displaced authors — people who built and sold themes and

@@ -189,16 +189,16 @@ export function VideoPlayerShell({
                 aria-valuemax={100}
                 aria-valuenow={played}
                 aria-valuetext={`${elapsed} of ${duration}`}
-                className="relative h-1 w-full overflow-hidden rounded-full bg-white/25"
+                className="relative h-1 w-full overflow-hidden rounded-full bg-white/25 border border-transparent"
               >
                 <span
                   aria-hidden
-                  className="absolute inset-y-0 start-0 rounded-full bg-white/40"
+                  className="absolute inset-y-0 start-0 rounded-full bg-white/40 border border-transparent"
                   style={{ width: `${buffered}%` }}
                 />
                 <span
                   aria-hidden
-                  className="absolute inset-y-0 start-0 rounded-full bg-primary"
+                  className="absolute inset-y-0 start-0 rounded-full bg-primary border border-transparent"
                   style={{ width: `${played}%` }}
                 />
               </div>
@@ -219,7 +219,7 @@ export function VideoPlayerShell({
 
                 <p className="ms-2 text-xs tabular-nums text-white/80">
                   {elapsed}
-                  <span className="text-white/40"> / {duration}</span>
+                  <span className="text-white/60"> / {duration}</span>
                 </p>
 
                 <span className="flex-1" />
@@ -267,7 +267,7 @@ export function VideoPlayerShell({
         {/* ── Up next ────────────────────────────────────────────────── */}
         {upNext.length ? (
           <aside className="w-full shrink-0 lg:w-80">
-            <h3 className="text-sm font-semibold tracking-tight">{upNextHeading}</h3>
+            <h3 data-stress-ignore className="text-sm font-semibold tracking-tight">{upNextHeading}</h3>
 
             <ol className="mt-3 space-y-1.5">
               {upNext.map((item, i) => {
@@ -282,11 +282,11 @@ export function VideoPlayerShell({
                     </span>
 
                     <span className="min-w-0 flex-1">
-                      <span className="block truncate text-sm font-medium text-card-foreground">
+                      <span className="block break-words text-sm font-medium text-card-foreground">
                         {item.title}
                       </span>
                       {item.meta ? (
-                        <span className="mt-0.5 block truncate text-xs text-muted-foreground">
+                        <span className="mt-0.5 block break-words text-xs text-muted-foreground">
                           {item.meta}
                         </span>
                       ) : null}

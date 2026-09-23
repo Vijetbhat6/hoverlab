@@ -59,7 +59,7 @@ export function HeroScreenshot({
   return (
     <section className={`relative overflow-hidden ${className}`}>
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute -top-40 left-1/2 h-[30rem] w-[30rem] -translate-x-1/2 rounded-full bg-primary/20 blur-3xl" />
+        <div className="absolute -top-40 left-1/2 h-[30rem] w-[30rem] -translate-x-1/2 rounded-full bg-primary/20 blur-3xl border border-transparent" />
       </div>
 
       <div className="mx-auto w-full max-w-7xl px-4 pt-20 sm:px-6 lg:px-8 lg:pt-28">
@@ -115,9 +115,9 @@ export function HeroScreenshot({
             {/* Window chrome */}
             <div className="flex items-center gap-3 border-b border-border/60 px-4 py-3">
               <div aria-hidden className="flex gap-1.5">
-                <span className="h-2.5 w-2.5 rounded-full bg-rose-500/70" />
-                <span className="h-2.5 w-2.5 rounded-full bg-amber-500/70" />
-                <span className="h-2.5 w-2.5 rounded-full bg-emerald-500/70" />
+                <span className="h-2.5 w-2.5 rounded-full bg-rose-500/70 border border-transparent" />
+                <span className="h-2.5 w-2.5 rounded-full bg-amber-500/70 border border-transparent" />
+                <span className="h-2.5 w-2.5 rounded-full bg-emerald-500/70 border border-transparent" />
               </div>
               <div className="flex flex-1 items-center justify-center">
                 <span className="inline-flex items-center gap-1.5 rounded-md bg-background/80 px-3 py-1 text-[11px] text-muted-foreground">
@@ -147,12 +147,12 @@ function ScreenshotPlaceholder() {
     <div aria-hidden className="flex h-[26rem] bg-background/60">
       {/* Sidebar */}
       <div className="hidden w-52 shrink-0 border-e border-border/60 p-4 sm:block">
-        <div className="h-7 w-24 rounded-md bg-muted" />
+        <div className="h-7 w-24 rounded-md bg-muted border border-transparent" />
         <div className="mt-6 space-y-2">
           {[true, false, false, false, false].map((active, i) => (
             <div
               key={i}
-              className={`h-8 rounded-lg ${active ? 'bg-primary/15' : 'bg-muted/60'}`}
+              className={`h-8 rounded-lg border border-transparent ${active ? 'bg-primary/15' : 'bg-muted/60'}`}
             />
           ))}
         </div>
@@ -161,16 +161,16 @@ function ScreenshotPlaceholder() {
       {/* Content */}
       <div className="flex-1 space-y-4 p-5">
         <div className="flex items-center justify-between">
-          <div className="h-6 w-40 rounded-md bg-muted" />
-          <div className="h-8 w-24 rounded-lg bg-primary/20" />
+          <div className="h-6 w-40 rounded-md bg-muted border border-transparent" />
+          <div className="h-8 w-24 rounded-lg bg-primary/20 border border-transparent" />
         </div>
 
         <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
           {[0, 1, 2, 3].map((i) => (
             <div key={i} className="rounded-xl border border-border/60 p-3">
-              <div className="h-2.5 w-12 rounded bg-muted" />
-              <div className="mt-2.5 h-5 w-20 rounded bg-muted/80" />
-              <div className="mt-1.5 h-2 w-10 rounded bg-emerald-500/40" />
+              <div className="h-2.5 w-12 rounded bg-muted border border-transparent" />
+              <div className="mt-2.5 h-5 w-20 rounded bg-muted/80 border border-transparent" />
+              <div className="mt-1.5 h-2 w-10 rounded bg-emerald-500/40 border border-transparent" />
             </div>
           ))}
         </div>

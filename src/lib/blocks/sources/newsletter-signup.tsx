@@ -63,7 +63,7 @@ export function NewsletterSignup({
       <div className="relative overflow-hidden rounded-2xl border border-border/60 bg-card/80 p-8 text-center backdrop-blur sm:p-12">
         <div
           aria-hidden
-          className="pointer-events-none absolute -top-24 left-1/2 h-64 w-64 -translate-x-1/2 rounded-full bg-primary/10 blur-3xl"
+          className="pointer-events-none absolute -top-24 left-1/2 h-64 w-64 -translate-x-1/2 rounded-full bg-primary/10 blur-3xl border border-transparent"
         />
 
         <div className="relative">

@@ -7,16 +7,31 @@
     geometry, colour and type. There are no variants, no auto-layout,
     and no hover or motion — none of those exist in a static frame.
 
-    Every section here is free to copy as code at https://hoverlab.dev/blocks
+    Every one of these is free to copy as code at https://hoverlab.dev/blocks
   -->
   <rect id="Background" x="0" y="0" width="1216" height="4412" fill="#ffffff" />
   <text id="Masonry Testimonial Wall label" x="64" y="84" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Masonry Testimonial Wall</text>
   <text id="testimonial-grid id" x="64" y="98" font-family="ui-monospace, monospace" font-size="12" fill="#737373">testimonial-grid</text>
   <g id="Masonry Testimonial Wall" transform="translate(64, 116)">
     <rect id="container" x="0" y="0" width="1088" height="700.5" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="What people say" x="544" y="101" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="36" font-weight="700" letter-spacing="-0.9" text-anchor="middle">What people say</text>
-      <text id="From teams that ship on a deadline." x="544" y="133" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" text-anchor="middle">From teams that ship on a deadline.</text>
+      <text id="What people say" x="544" y="97" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="36" font-weight="700" letter-spacing="-0.9" text-anchor="middle">What people say</text>
+      <text id="From teams that ship on a deadline." x="543.99" y="134" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" text-anchor="middle">From teams that ship on a deadline.</text>
       <rect id="container 2" x="33" y="189" width="327.33" height="213.25" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <g id="icon star" transform="translate(58 214) scale(0.583 0.583)" fill="#ffb900" stroke="#ffb900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
+      <g id="icon star 2" transform="translate(74 214) scale(0.583 0.583)" fill="#ffb900" stroke="#ffb900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
+      <g id="icon star 3" transform="translate(90 214) scale(0.583 0.583)" fill="#ffb900" stroke="#ffb900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
+      <g id="icon star 4" transform="translate(106 214) scale(0.583 0.583)" fill="#ffb900" stroke="#ffb900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
+      <g id="icon star 5" transform="translate(122 214) scale(0.583 0.583)" fill="#ffb900" stroke="#ffb900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
       <text id="“" x="58" y="256" fill="rgba(8, 11, 16, 0.902)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">“</text>
       <text id="We replaced a week of design polish with" x="63.16" y="256" fill="rgba(8, 11, 16, 0.902)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">We replaced a week of design polish with</text>
       <text id="an afternoon. The parts that used to get…" x="58" y="278.75" fill="rgba(8, 11, 16, 0.902)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">an afternoon. The parts that used to get cut</text>
@@ -24,10 +39,25 @@
       <text id="”" x="228.83" y="301.5" fill="rgba(8, 11, 16, 0.902)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">”</text>
       <rect id="container 3" x="58" y="324.25" width="277.33" height="53" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="container 4" x="58" y="341.25" width="36" height="36" rx="18" fill="#f3f2ee" />
-      <text id="PR" x="58" y="353.25" fill="rgba(9, 11, 16, 0.702)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="700">PR</text>
-      <text id="Priya Raman" x="106" y="355.25" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Priya Raman</text>
+      <text id="PR" x="67.89" y="363.25" fill="rgba(9, 11, 16, 0.702)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="700">PR</text>
+      <text id="Priya Raman" x="106" y="356.25" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Priya Raman</text>
       <text id="Staff Engineer, Northwind" x="106" y="373.25" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Staff Engineer, Northwind</text>
       <rect id="container 5" x="33" y="422.25" width="327.33" height="213.25" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <g id="icon star 6" transform="translate(58 447.25) scale(0.583 0.583)" fill="#ffb900" stroke="#ffb900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
+      <g id="icon star 7" transform="translate(74 447.25) scale(0.583 0.583)" fill="#ffb900" stroke="#ffb900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
+      <g id="icon star 8" transform="translate(90 447.25) scale(0.583 0.583)" fill="#ffb900" stroke="#ffb900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
+      <g id="icon star 9" transform="translate(106 447.25) scale(0.583 0.583)" fill="#ffb900" stroke="#ffb900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
+      <g id="icon star 10" transform="translate(122 447.25) scale(0.583 0.583)" fill="#ffb900" stroke="#ffb900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
       <text id="“ 2" x="58" y="489.25" fill="rgba(8, 11, 16, 0.902)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">“</text>
       <text id="Dropped it in on a Friday and shipped" x="63.16" y="489.25" fill="rgba(8, 11, 16, 0.902)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Dropped it in on a Friday and shipped</text>
       <text id="Monday. No dependency argument with my" x="58" y="512" fill="rgba(8, 11, 16, 0.902)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Monday. No dependency argument with my</text>
@@ -35,10 +65,25 @@
       <text id="” 2" x="150.23" y="534.75" fill="rgba(8, 11, 16, 0.902)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">”</text>
       <rect id="container 6" x="58" y="557.5" width="277.33" height="53" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="container 7" x="58" y="574.5" width="36" height="36" rx="18" fill="#f3f2ee" />
-      <text id="MS" x="58" y="586.5" fill="rgba(9, 11, 16, 0.702)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="700">MS</text>
-      <text id="Marco Silva" x="106" y="588.5" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Marco Silva</text>
+      <text id="MS" x="66.52" y="596.5" fill="rgba(9, 11, 16, 0.702)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="700">MS</text>
+      <text id="Marco Silva" x="106" y="589.5" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Marco Silva</text>
       <text id="Founder, Ferrytale" x="106" y="606.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Founder, Ferrytale</text>
       <rect id="container 8" x="380.33" y="189" width="327.33" height="236" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <g id="icon star 11" transform="translate(405.328 214) scale(0.583 0.583)" fill="#ffb900" stroke="#ffb900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
+      <g id="icon star 12" transform="translate(421.328 214) scale(0.583 0.583)" fill="#ffb900" stroke="#ffb900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
+      <g id="icon star 13" transform="translate(437.328 214) scale(0.583 0.583)" fill="#ffb900" stroke="#ffb900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
+      <g id="icon star 14" transform="translate(453.328 214) scale(0.583 0.583)" fill="#ffb900" stroke="#ffb900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
+      <g id="icon star 15" transform="translate(469.328 214) scale(0.583 0.583)" fill="#ffb900" stroke="#ffb900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
       <text id="“ 3" x="405.33" y="256" fill="rgba(8, 11, 16, 0.902)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">“</text>
       <text id="The thing I did not expect: it made our" x="410.48" y="256" fill="rgba(8, 11, 16, 0.902)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">The thing I did not expect: it made our</text>
       <text id="junior engineers faster, because the" x="405.33" y="278.75" fill="rgba(8, 11, 16, 0.902)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">junior engineers faster, because the</text>
@@ -47,10 +92,25 @@
       <text id="” 3" x="475.89" y="324.25" fill="rgba(8, 11, 16, 0.902)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">”</text>
       <rect id="container 9" x="405.33" y="347" width="277.33" height="53" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="container 10" x="405.33" y="364" width="36" height="36" rx="18" fill="#f3f2ee" />
-      <text id="AC" x="405.33" y="376" fill="rgba(9, 11, 16, 0.702)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="700">AC</text>
-      <text id="Alex Chen" x="453.33" y="378" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Alex Chen</text>
+      <text id="AC" x="414.78" y="386" fill="rgba(9, 11, 16, 0.702)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="700">AC</text>
+      <text id="Alex Chen" x="453.33" y="379" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Alex Chen</text>
       <text id="Engineering Manager, Contoso" x="453.33" y="396" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Engineering Manager, Contoso</text>
       <rect id="container 11" x="727.67" y="189" width="327.33" height="213.25" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <g id="icon star 16" transform="translate(752.672 214) scale(0.583 0.583)" fill="#ffb900" stroke="#ffb900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
+      <g id="icon star 17" transform="translate(768.672 214) scale(0.583 0.583)" fill="#ffb900" stroke="#ffb900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
+      <g id="icon star 18" transform="translate(784.672 214) scale(0.583 0.583)" fill="#ffb900" stroke="#ffb900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
+      <g id="icon star 19" transform="translate(800.672 214) scale(0.583 0.583)" fill="#ffb900" stroke="#ffb900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
+      <g id="icon star 20" transform="translate(816.672 214) scale(0.583 0.583)" fill="none" stroke="rgba(86, 89, 96, 0.302)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
       <text id="“ 4" x="752.67" y="256" fill="rgba(8, 11, 16, 0.902)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">“</text>
       <text id="Our marketing site went from three weeks" x="757.83" y="256" fill="rgba(8, 11, 16, 0.902)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Our marketing site went from three weeks</text>
       <text id="to four days. Same designer, same" x="752.67" y="278.75" fill="rgba(8, 11, 16, 0.902)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">to four days. Same designer, same</text>
@@ -58,10 +118,25 @@
       <text id="” 4" x="824.03" y="301.5" fill="rgba(8, 11, 16, 0.902)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">”</text>
       <rect id="container 12" x="752.67" y="324.25" width="277.33" height="53" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="container 13" x="752.67" y="341.25" width="36" height="36" rx="18" fill="#f3f2ee" />
-      <text id="DW" x="752.67" y="353.25" fill="rgba(9, 11, 16, 0.702)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="700">DW</text>
-      <text id="Dana Whitfield" x="800.67" y="355.25" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Dana Whitfield</text>
+      <text id="DW" x="760.58" y="363.25" fill="rgba(9, 11, 16, 0.702)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="700">DW</text>
+      <text id="Dana Whitfield" x="800.67" y="356.25" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Dana Whitfield</text>
       <text id="Head of Design, Globex" x="800.67" y="373.25" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Head of Design, Globex</text>
       <rect id="container 14" x="727.67" y="422.25" width="327.33" height="213.25" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <g id="icon star 21" transform="translate(752.672 447.25) scale(0.583 0.583)" fill="#ffb900" stroke="#ffb900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
+      <g id="icon star 22" transform="translate(768.672 447.25) scale(0.583 0.583)" fill="#ffb900" stroke="#ffb900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
+      <g id="icon star 23" transform="translate(784.672 447.25) scale(0.583 0.583)" fill="#ffb900" stroke="#ffb900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
+      <g id="icon star 24" transform="translate(800.672 447.25) scale(0.583 0.583)" fill="#ffb900" stroke="#ffb900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
+      <g id="icon star 25" transform="translate(816.672 447.25) scale(0.583 0.583)" fill="#ffb900" stroke="#ffb900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
       <text id="“ 5" x="752.67" y="489.25" fill="rgba(8, 11, 16, 0.902)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">“</text>
       <text id="I stopped keeping a personal snippets fi…" x="757.83" y="489.25" fill="rgba(8, 11, 16, 0.902)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">I stopped keeping a personal snippets file.</text>
       <text id="That file had been following me between" x="752.67" y="512" fill="rgba(8, 11, 16, 0.902)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">That file had been following me between</text>
@@ -69,8 +144,8 @@
       <text id="” 5" x="863.73" y="534.75" fill="rgba(8, 11, 16, 0.902)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">”</text>
       <rect id="container 15" x="752.67" y="557.5" width="277.33" height="53" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="container 16" x="752.67" y="574.5" width="36" height="36" rx="18" fill="#f3f2ee" />
-      <text id="SH" x="752.67" y="586.5" fill="rgba(9, 11, 16, 0.702)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="700">SH</text>
-      <text id="Samir Haddad" x="800.67" y="588.5" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Samir Haddad</text>
+      <text id="SH" x="762.2" y="596.5" fill="rgba(9, 11, 16, 0.702)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="700">SH</text>
+      <text id="Samir Haddad" x="800.67" y="589.5" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Samir Haddad</text>
       <text id="Frontend Lead, Initech" x="800.67" y="606.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Frontend Lead, Initech</text>
   </g>
   <text id="Single-Quote Spotlight label" x="64" y="932.5" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Single-Quote Spotlight</text>
@@ -78,6 +153,10 @@
   <g id="Single-Quote Spotlight" transform="translate(64, 964.5)">
     <rect id="container" x="0" y="0" width="1088" height="623" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="container 2" x="33" y="65" width="1022" height="425" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <g id="icon quote" transform="translate(82 114) scale(1.333 1.333)" fill="none" stroke="rgba(0, 120, 45, 0.4)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M16 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z" />
+        <path d="M5 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z" />
+      </g>
       <text id="“" x="82" y="194" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="24" font-weight="500" letter-spacing="-0.6">“</text>
       <text id="We had tried two other tools and rolled …" x="90.98" y="194" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="24" font-weight="500" letter-spacing="-0.6">We had tried two other tools and rolled both</text>
       <text id="back. This one stuck because the agents" x="82" y="233" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="24" font-weight="500" letter-spacing="-0.6">back. This one stuck because the agents</text>
@@ -85,15 +164,15 @@
       <text id="the queue finally matched how support" x="82" y="311" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="24" font-weight="500" letter-spacing="-0.6">the queue finally matched how support</text>
       <text id="actually thinks about a bad morning." x="82" y="350" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="24" font-weight="500" letter-spacing="-0.6">actually thinks about a bad morning.</text>
       <text id="”" x="467.14" y="350" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="24" font-weight="500" letter-spacing="-0.6">”</text>
-      <rect id="container 3" x="82" y="393" width="48" height="48" rx="24" fill="rgba(0, 128, 49, 0.102)" />
-      <text id="IS" x="82" y="407" fill="#007f34" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="700">IS</text>
-      <text id="Ingrid Solheim" x="146" y="411" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Ingrid Solheim</text>
-      <text id="VP of Customer Experience, Meridian Logi…" x="146" y="431" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">VP of Customer Experience, Meridian Logistics</text>
-      <text id="48%" x="711.78" y="194.63" fill="#007f34" font-family="Geist, &quot;Geist Fallback&quot;" font-size="30" font-weight="700" letter-spacing="-0.75">48%</text>
+      <rect id="container 3" x="82" y="393" width="48" height="48" rx="24" fill="rgba(0, 118, 49, 0.102)" />
+      <text id="IS" x="99.23" y="422" fill="#00782e" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="700">IS</text>
+      <text id="Ingrid Solheim" x="146" y="412" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Ingrid Solheim</text>
+      <text id="VP of Customer Experience, Meridian Logi…" x="146" y="432" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">VP of Customer Experience, Meridian Logistics</text>
+      <text id="48%" x="711.78" y="192.63" fill="#00782e" font-family="Geist, &quot;Geist Fallback&quot;" font-size="30" font-weight="700" letter-spacing="-0.75">48%</text>
       <text id="fewer escalations to engineering" x="711.78" y="218.63" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">fewer escalations to engineering</text>
-      <text id="11 min" x="711.78" y="277.88" fill="#007f34" font-family="Geist, &quot;Geist Fallback&quot;" font-size="30" font-weight="700" letter-spacing="-0.75">11 min</text>
+      <text id="11 min" x="711.78" y="275.88" fill="#00782e" font-family="Geist, &quot;Geist Fallback&quot;" font-size="30" font-weight="700" letter-spacing="-0.75">11 min</text>
       <text id="median first-response time, down from 3.…" x="711.78" y="301.88" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">median first-response time, down from 3.2 hrs</text>
-      <text id="4 weeks" x="711.78" y="361.13" fill="#007f34" font-family="Geist, &quot;Geist Fallback&quot;" font-size="30" font-weight="700" letter-spacing="-0.75">4 weeks</text>
+      <text id="4 weeks" x="711.78" y="359.13" fill="#00782e" font-family="Geist, &quot;Geist Fallback&quot;" font-size="30" font-weight="700" letter-spacing="-0.75">4 weeks</text>
       <text id="from pilot to full support-team rollout" x="711.78" y="385.13" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">from pilot to full support-team rollout</text>
       <text id="Trusted by support teams at" x="218.89" y="548" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500" letter-spacing="0.6">Trusted by support teams at</text>
       <text id="Meridian" x="471.86" y="550" fill="rgba(87, 92, 97, 0.6)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" font-weight="700" letter-spacing="-0.45">Meridian</text>
@@ -105,50 +184,95 @@
   <g id="Aggregate Rating Breakdown" transform="translate(64, 1735.5)">
     <rect id="container" x="0" y="0" width="1088" height="447" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="container 2" x="33" y="65" width="1022" height="247" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Rated by the people paying for it" x="82" y="128" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" letter-spacing="0.7">Rated by the people paying for it</text>
-      <text id="4.8" x="82" y="198" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="48" font-weight="700" letter-spacing="-1.2">4.8</text>
-      <text id="out of 5" x="161.09" y="189" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18">out of 5</text>
-      <text id="from 2,298 verified reviews" x="82" y="257" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">from 2,298 verified reviews</text>
-      <text id="5 stars" x="483.2" y="132.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">5 stars</text>
+      <text id="Rated by the people paying for it" x="82" y="129" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" letter-spacing="0.7">Rated by the people paying for it</text>
+      <text id="4.8" x="82" y="191" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="48" font-weight="700" letter-spacing="-1.2">4.8</text>
+      <text id="out of 5" x="161.09" y="191" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18">out of 5</text>
+      <g id="icon star" transform="translate(82 211) scale(0.833 0.833)" fill="#00782e" stroke="#00782e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
+      <g id="icon star 2" transform="translate(106 211) scale(0.833 0.833)" fill="#00782e" stroke="#00782e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
+      <g id="icon star 3" transform="translate(130 211) scale(0.833 0.833)" fill="#00782e" stroke="#00782e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
+      <g id="icon star 4" transform="translate(154 211) scale(0.833 0.833)" fill="#00782e" stroke="#00782e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
+      <g id="icon star 5" transform="translate(178 211) scale(0.833 0.833)" fill="#00782e" stroke="#00782e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
+      <text id="from 2,298 verified reviews" x="82" y="258" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">from 2,298 verified reviews</text>
+      <text id="5 stars" x="483.2" y="133.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">5 stars</text>
       <rect id="container 3" x="563.2" y="124.5" width="370.8" height="8" rx="4" fill="#f3f2ee" />
-      <rect id="container 4" x="563.2" y="124.5" width="287.69" height="8" rx="4" fill="#007f34" />
-      <text id="1,783" x="950" y="132.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">1,783</text>
-      <text id="4 stars" x="483.2" y="162.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">4 stars</text>
+      <rect id="container 4" x="563.2" y="124.5" width="287.69" height="8" rx="4" fill="#00782e" />
+      <text id="1,783" x="969.58" y="133.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">1,783</text>
+      <text id="4 stars" x="483.2" y="163.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">4 stars</text>
       <rect id="container 5" x="563.2" y="154.5" width="370.8" height="8" rx="4" fill="#f3f2ee" />
-      <rect id="container 6" x="563.2" y="154.5" width="64.86" height="8" rx="4" fill="#007f34" />
-      <text id="402" x="950" y="162.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">402</text>
-      <text id="3 stars" x="483.2" y="192.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">3 stars</text>
+      <rect id="container 6" x="563.2" y="154.5" width="64.86" height="8" rx="4" fill="#00782e" />
+      <text id="402" x="980.8" y="163.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">402</text>
+      <text id="3 stars" x="483.2" y="193.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">3 stars</text>
       <rect id="container 7" x="563.2" y="184.5" width="370.8" height="8" rx="4" fill="#f3f2ee" />
-      <rect id="container 8" x="563.2" y="184.5" width="11.45" height="8" rx="4" fill="#007f34" />
-      <text id="71" x="950" y="192.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">71</text>
-      <text id="2 stars" x="483.2" y="222.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">2 stars</text>
+      <rect id="container 8" x="563.2" y="184.5" width="11.45" height="8" rx="4" fill="#00782e" />
+      <text id="71" x="989.19" y="193.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">71</text>
+      <text id="2 stars" x="483.2" y="223.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">2 stars</text>
       <rect id="container 9" x="563.2" y="214.5" width="370.8" height="8" rx="4" fill="#f3f2ee" />
-      <rect id="container 10" x="563.2" y="214.5" width="3.86" height="8" rx="1.93" fill="#007f34" />
-      <text id="24" x="950" y="222.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">24</text>
-      <text id="1 star" x="483.2" y="252.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">1 star</text>
+      <rect id="container 10" x="563.2" y="214.5" width="3.86" height="8" rx="1.93" fill="#00782e" />
+      <text id="24" x="989.19" y="223.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">24</text>
+      <text id="1 star" x="483.2" y="253.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">1 star</text>
       <rect id="container 11" x="563.2" y="244.5" width="370.8" height="8" rx="4" fill="#f3f2ee" />
-      <rect id="container 12" x="563.2" y="244.5" width="2.89" height="8" rx="1.45" fill="#007f34" />
-      <text id="18" x="950" y="252.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">18</text>
+      <rect id="container 12" x="563.2" y="244.5" width="2.89" height="8" rx="1.45" fill="#00782e" />
+      <text id="18" x="989.19" y="253.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">18</text>
       <rect id="container 13" x="296.98" y="344" width="123.17" height="38" rx="19" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="4.8 2" x="335.98" y="367" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">4.8</text>
-      <text id="on G2" x="365.16" y="367" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">on G2</text>
+      <g id="icon star 6" transform="translate(313.984 356) scale(0.583 0.583)" fill="#00782e" stroke="#00782e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
+      <text id="4.8 2" x="335.98" y="368" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">4.8</text>
+      <text id="on G2" x="365.16" y="368" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">on G2</text>
       <rect id="container 14" x="432.16" y="344" width="157.94" height="38" rx="19" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="4.7" x="471.16" y="367" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">4.7</text>
-      <text id="on Capterra" x="498.02" y="367" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">on Capterra</text>
+      <g id="icon star 7" transform="translate(449.156 356) scale(0.583 0.583)" fill="#00782e" stroke="#00782e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
+      <text id="4.7" x="471.16" y="368" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">4.7</text>
+      <text id="on Capterra" x="498.02" y="368" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">on Capterra</text>
       <rect id="container 15" x="602.09" y="344" width="188.92" height="38" rx="19" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="4.9" x="641.09" y="367" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">4.9</text>
-      <text id="on Product Hunt" x="669.91" y="367" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">on Product Hunt</text>
+      <g id="icon star 8" transform="translate(619.094 356) scale(0.583 0.583)" fill="#00782e" stroke="#00782e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
+      <text id="4.9" x="641.09" y="368" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">4.9</text>
+      <text id="on Product Hunt" x="669.91" y="368" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">on Product Hunt</text>
   </g>
   <text id="Scroll-Snap Quote Rail label" x="64" y="2298.5" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Scroll-Snap Quote Rail</text>
   <text id="testimonial-carousel id" x="64" y="2312.5" font-family="ui-monospace, monospace" font-size="12" fill="#737373">testimonial-carousel</text>
   <g id="Scroll-Snap Quote Rail" transform="translate(64, 2330.5)">
     <rect id="container" x="0" y="0" width="1088" height="589.5" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Customers" x="33" y="79" fill="#007f34" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" letter-spacing="0.7">Customers</text>
+      <text id="Customers" x="33" y="80" fill="#00782e" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" letter-spacing="0.7">Customers</text>
       <text id="Twenty months of people telling" x="33" y="129" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="36" font-weight="700" letter-spacing="-0.9">Twenty months of people telling</text>
       <text id="us what they actually thought" x="33" y="169" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="36" font-weight="700" letter-spacing="-0.9">us what they actually thought</text>
       <rect id="button" x="967" y="137" width="40" height="40" rx="20" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" opacity="0.4" />
+      <g id="icon chevron-left" transform="translate(977 147) scale(0.833 0.833)" fill="none" stroke="#080c0f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m15 18-6-6 6-6" />
+      </g>
       <rect id="button 2" x="1015" y="137" width="40" height="40" rx="20" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <g id="icon chevron-right" transform="translate(1025 147) scale(0.833 0.833)" fill="none" stroke="#080c0f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m9 18 6-6-6-6" />
+      </g>
       <rect id="list item" x="33" y="217" width="352" height="291.5" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <g id="icon star" transform="translate(58 242) scale(0.667 0.667)" fill="#00782e" stroke="#00782e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
+      <g id="icon star 2" transform="translate(76 242) scale(0.667 0.667)" fill="#00782e" stroke="#00782e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
+      <g id="icon star 3" transform="translate(94 242) scale(0.667 0.667)" fill="#00782e" stroke="#00782e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
+      <g id="icon star 4" transform="translate(112 242) scale(0.667 0.667)" fill="#00782e" stroke="#00782e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
+      <g id="icon star 5" transform="translate(130 242) scale(0.667 0.667)" fill="#00782e" stroke="#00782e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
       <text id="“" x="58" y="292" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">“</text>
       <text id="The migration took an afternoon, which I" x="63.89" y="292" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">The migration took an afternoon, which I</text>
       <text id="did not believe when sales said it." x="58" y="318" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">did not believe when sales said it.</text>
@@ -157,11 +281,26 @@
       <text id="schema rewrite." x="58" y="396" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">schema rewrite.</text>
       <text id="”" x="173.13" y="396" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">”</text>
       <rect id="container 2" x="58" y="428" width="302" height="55.5" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <rect id="container 3" x="58" y="446.25" width="36" height="36" rx="18" fill="rgba(0, 128, 49, 0.102)" />
-      <text id="DO" x="58" y="458.25" fill="#007f34" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="700">DO</text>
+      <rect id="container 3" x="58" y="446.25" width="36" height="36" rx="18" fill="rgba(0, 118, 49, 0.102)" />
+      <text id="DO" x="67.05" y="468.25" fill="#00782e" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="700">DO</text>
       <text id="Dara Okonkwo" x="106" y="459" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Dara Okonkwo</text>
       <text id="Staff Engineer, Northwind Freight" x="106" y="478.25" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Staff Engineer, Northwind Freight</text>
       <rect id="list item 2" x="409" y="217" width="352" height="291.5" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <g id="icon star 6" transform="translate(434 242) scale(0.667 0.667)" fill="#00782e" stroke="#00782e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
+      <g id="icon star 7" transform="translate(452 242) scale(0.667 0.667)" fill="#00782e" stroke="#00782e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
+      <g id="icon star 8" transform="translate(470 242) scale(0.667 0.667)" fill="#00782e" stroke="#00782e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
+      <g id="icon star 9" transform="translate(488 242) scale(0.667 0.667)" fill="#00782e" stroke="#00782e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
+      <g id="icon star 10" transform="translate(506 242) scale(0.667 0.667)" fill="#00782e" stroke="#00782e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
       <text id="“ 2" x="434" y="292" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">“</text>
       <text id="We bought it for one team and it spread" x="439.89" y="292" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">We bought it for one team and it spread</text>
       <text id="to four without anyone asking me to" x="434" y="318" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">to four without anyone asking me to</text>
@@ -169,71 +308,53 @@
       <text id="twice in nine years here." x="434" y="370" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">twice in nine years here.</text>
       <text id="” 2" x="610.19" y="370" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">”</text>
       <rect id="container 4" x="434" y="428" width="302" height="55.5" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <rect id="container 5" x="434" y="446.25" width="36" height="36" rx="18" fill="rgba(0, 128, 49, 0.102)" />
-      <text id="PR" x="434" y="458.25" fill="#007f34" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="700">PR</text>
+      <rect id="container 5" x="434" y="446.25" width="36" height="36" rx="18" fill="rgba(0, 118, 49, 0.102)" />
+      <text id="PR" x="443.89" y="468.25" fill="#00782e" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="700">PR</text>
       <text id="Priya Ramachandran" x="482" y="459" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Priya Ramachandran</text>
       <text id="Director of Platform, Alcove Health" x="482" y="478.25" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Director of Platform, Alcove Health</text>
       <rect id="list item 3" x="785" y="217" width="352" height="291.5" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <g id="icon star 11" transform="translate(810 242) scale(0.667 0.667)" fill="#00782e" stroke="#00782e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
+      <g id="icon star 12" transform="translate(828 242) scale(0.667 0.667)" fill="#00782e" stroke="#00782e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
+      <g id="icon star 13" transform="translate(846 242) scale(0.667 0.667)" fill="#00782e" stroke="#00782e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
+      <g id="icon star 14" transform="translate(864 242) scale(0.667 0.667)" fill="#00782e" stroke="#00782e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
+      <g id="icon star 15" transform="translate(882 242) scale(0.667 0.667)" fill="#00782e" stroke="#00782e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
       <text id="“ 3" x="810" y="292" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">“</text>
       <text id="Support answered a schema question at" x="815.89" y="292" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">Support answered a schema question at</text>
       <text id="2am our time with an actual query, not a" x="810" y="318" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">2am our time with an actual query, not a</text>
       <text id="docs link. I have kept the thread." x="810" y="344" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">docs link. I have kept the thread.</text>
       <text id="” 3" x="1045.75" y="344" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">”</text>
       <rect id="container 6" x="810" y="428" width="302" height="55.5" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <rect id="container 7" x="810" y="446.25" width="36" height="36" rx="18" fill="rgba(0, 128, 49, 0.102)" />
-      <text id="TL" x="810" y="458.25" fill="#007f34" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="700">TL</text>
+      <rect id="container 7" x="810" y="446.25" width="36" height="36" rx="18" fill="rgba(0, 118, 49, 0.102)" />
+      <text id="TL" x="821.03" y="468.25" fill="#00782e" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="700">TL</text>
       <text id="Tomas Lindqvist" x="858" y="459" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Tomas Lindqvist</text>
       <text id="Data Lead, Ravel Studio" x="858" y="478.25" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Data Lead, Ravel Studio</text>
-      <rect id="list item 4" x="1161" y="217" width="352" height="291.5" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="“ 4" x="1186" y="292" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">“</text>
-      <text id="It is not the cheapest thing we" x="1191.89" y="292" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">It is not the cheapest thing we</text>
-      <text id="evaluated. It is the only one where" x="1186" y="318" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">evaluated. It is the only one where</text>
-      <text id="the trial ended and nobody asked to" x="1186" y="344" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">the trial ended and nobody asked to</text>
-      <text id="go back." x="1186" y="370" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">go back.</text>
-      <text id="” 4" x="1247.73" y="370" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">”</text>
-      <rect id="container 8" x="1186" y="428" width="302" height="55.5" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <rect id="container 9" x="1186" y="446.25" width="36" height="36" rx="18" fill="rgba(0, 128, 49, 0.102)" />
-      <text id="AB" x="1186" y="458.25" fill="#007f34" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="700">AB</text>
-      <text id="Amara Belhadj" x="1234" y="459" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Amara Belhadj</text>
-      <text id="VP Engineering, Kestrel Systems" x="1234" y="478.25" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">VP Engineering, Kestrel Systems</text>
-      <rect id="list item 5" x="1537" y="217" width="352" height="291.5" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="“ 5" x="1562" y="292" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">“</text>
-      <text id="Our audit went from a three-week" x="1567.89" y="292" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">Our audit went from a three-week</text>
-      <text id="scramble to a report we generate. I know" x="1562" y="318" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">scramble to a report we generate. I know</text>
-      <text id="that sounds like copy off your own" x="1562" y="344" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">that sounds like copy off your own</text>
-      <text id="website. It is what happened." x="1562" y="370" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">website. It is what happened.</text>
-      <text id="” 5" x="1772.97" y="370" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">”</text>
-      <rect id="container 10" x="1562" y="428" width="302" height="55.5" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <rect id="container 11" x="1562" y="446.25" width="36" height="36" rx="18" fill="rgba(0, 128, 49, 0.102)" />
-      <text id="RM" x="1562" y="458.25" fill="#007f34" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="700">RM</text>
-      <text id="Ruth Mbeki" x="1610" y="459" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Ruth Mbeki</text>
-      <text id="Head of Compliance, Fieldstone Bank" x="1610" y="478.25" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Head of Compliance, Fieldstone Bank</text>
-      <rect id="list item 6" x="1913" y="217" width="352" height="291.5" rx="16" fill="rgba(255, 255, 255, 0.8)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="“ 6" x="1938" y="292" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">“</text>
-      <text id="The onboarding was rough and we" x="1943.89" y="292" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">The onboarding was rough and we</text>
-      <text id="nearly gave up in week one. Two releases" x="1938" y="318" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">nearly gave up in week one. Two releases</text>
-      <text id="later the thing we were stuck on is" x="1938" y="344" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">later the thing we were stuck on is</text>
-      <text id="a checkbox." x="1938" y="370" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">a checkbox.</text>
-      <text id="” 6" x="2024.52" y="370" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">”</text>
-      <rect id="container 12" x="1938" y="428" width="302" height="55.5" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <rect id="container 13" x="1938" y="446.25" width="36" height="36" rx="18" fill="rgba(0, 128, 49, 0.102)" />
-      <text id="JW" x="1938" y="458.25" fill="#007f34" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="700">JW</text>
-      <text id="Jonas Weber" x="1986" y="459" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Jonas Weber</text>
-      <text id="Principal Architect, Meridian Logistics" x="1986" y="478.25" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Principal Architect, Meridian Logistics</text>
   </g>
   <text id="Video Testimonial Cards label" x="64" y="3036" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Video Testimonial Cards</text>
   <text id="testimonial-video id" x="64" y="3050" font-family="ui-monospace, monospace" font-size="12" fill="#737373">testimonial-video</text>
   <g id="Video Testimonial Cards" transform="translate(64, 3068)">
     <rect id="container" x="0" y="0" width="1088" height="624.13" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="In their words" x="544" y="79" fill="#007f34" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" letter-spacing="0.7" text-anchor="middle">In their words</text>
-      <text id="Three customers, unscripted" x="544" y="133" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="36" font-weight="700" letter-spacing="-0.9" text-anchor="middle">Three customers, unscripted</text>
-      <text id="Recorded on their own time, edited only …" x="544" y="169" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" text-anchor="middle">Recorded on their own time, edited only for length. Transcripts on each page.</text>
+      <text id="In their words" x="544" y="80" fill="#00782e" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" letter-spacing="0.7" text-anchor="middle">In their words</text>
+      <text id="Three customers, unscripted" x="543.99" y="129" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="36" font-weight="700" letter-spacing="-0.9" text-anchor="middle">Three customers, unscripted</text>
+      <text id="Recorded on their own time, edited only …" x="543.99" y="171" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" text-anchor="middle">Recorded on their own time, edited only for length. Transcripts on each page.</text>
       <rect id="link" x="33" y="227" width="319.33" height="179.61" rx="16" fill="#f3f2ee" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="PR" x="34" y="264" fill="rgba(0, 128, 52, 0.4)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="36" font-weight="700" letter-spacing="-0.9">PR</text>
+      <text id="PR" x="169.28" y="328.8" fill="rgba(0, 120, 45, 0.4)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="36" font-weight="700" letter-spacing="-0.9">PR</text>
       <rect id="container 2" x="34" y="228" width="317.33" height="177.61" fill="rgba(10, 10, 20, 0.102)" />
       <rect id="container 3" x="164.66" y="288.8" width="56" height="56" rx="28" fill="rgba(253, 251, 247, 0.902)" />
+      <g id="icon play" transform="translate(181.656 304.797) scale(1 1)" fill="#00782e" stroke="#00782e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="6 3 20 12 6 21 6 3" />
+      </g>
       <rect id="container 4" x="297.67" y="369.61" width="41.66" height="24" rx="10" fill="rgba(253, 251, 247, 0.902)" />
-      <text id="1:48" x="297.67" y="381.61" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">1:48</text>
+      <text id="1:48" x="305.67" y="385.61" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">1:48</text>
       <text id="“" x="33" y="444.61" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">“</text>
       <text id="We replaced three internal tools with th…" x="38.89" y="444.61" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">We replaced three internal tools with this</text>
       <text id="and cut the on-call rota from nine peopl…" x="33" y="470.61" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">and cut the on-call rota from nine people</text>
@@ -242,11 +363,14 @@
       <text id="Priya Ramachandran" x="33" y="534.63" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Priya Ramachandran</text>
       <text id="Director of Platform, Alcove Health" x="33" y="553.88" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Director of Platform, Alcove Health</text>
       <rect id="link 2" x="384.33" y="227" width="319.33" height="179.61" rx="16" fill="#f3f2ee" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="DO" x="385.33" y="264" fill="rgba(0, 128, 52, 0.4)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="36" font-weight="700" letter-spacing="-0.9">DO</text>
+      <text id="DO" x="518.03" y="328.8" fill="rgba(0, 120, 45, 0.4)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="36" font-weight="700" letter-spacing="-0.9">DO</text>
       <rect id="container 5" x="385.33" y="228" width="317.33" height="177.61" fill="rgba(10, 10, 20, 0.102)" />
       <rect id="container 6" x="515.98" y="288.8" width="56" height="56" rx="28" fill="rgba(253, 251, 247, 0.902)" />
+      <g id="icon play 2" transform="translate(532.984 304.797) scale(1 1)" fill="#00782e" stroke="#00782e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="6 3 20 12 6 21 6 3" />
+      </g>
       <rect id="container 7" x="649" y="369.61" width="41.66" height="24" rx="10" fill="rgba(253, 251, 247, 0.902)" />
-      <text id="2:12" x="649" y="381.61" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">2:12</text>
+      <text id="2:12" x="657" y="385.61" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">2:12</text>
       <text id="“ 2" x="384.33" y="444.61" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">“</text>
       <text id="The part I tell other engineers about" x="390.22" y="444.61" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">The part I tell other engineers about</text>
       <text id="is the migration. One afternoon, no" x="384.33" y="470.61" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">is the migration. One afternoon, no</text>
@@ -255,11 +379,14 @@
       <text id="Dara Okonkwo" x="384.33" y="534.63" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Dara Okonkwo</text>
       <text id="Staff Engineer, Northwind Freight" x="384.33" y="553.88" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Staff Engineer, Northwind Freight</text>
       <rect id="link 3" x="735.66" y="227" width="319.34" height="179.63" rx="16" fill="#f3f2ee" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="RM" x="736.66" y="264" fill="rgba(0, 128, 52, 0.4)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="36" font-weight="700" letter-spacing="-0.9">RM</text>
+      <text id="RM" x="867.2" y="328.81" fill="rgba(0, 120, 45, 0.4)" font-family="Geist, &quot;Geist Fallback&quot;" font-size="36" font-weight="700" letter-spacing="-0.9">RM</text>
       <rect id="container 8" x="736.66" y="228" width="317.34" height="177.63" fill="rgba(10, 10, 20, 0.102)" />
       <rect id="container 9" x="867.33" y="288.81" width="56" height="56" rx="28" fill="rgba(253, 251, 247, 0.902)" />
+      <g id="icon play 3" transform="translate(884.328 304.813) scale(1 1)" fill="#00782e" stroke="#00782e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="6 3 20 12 6 21 6 3" />
+      </g>
       <rect id="container 10" x="1000.34" y="369.63" width="41.66" height="24" rx="10" fill="rgba(253, 251, 247, 0.902)" />
-      <text id="3:05" x="1000.34" y="381.63" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">3:05</text>
+      <text id="3:05" x="1008.34" y="385.63" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">3:05</text>
       <text id="“ 3" x="735.66" y="444.63" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">“</text>
       <text id="Audit used to be a three-week scramble" x="741.55" y="444.63" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">Audit used to be a three-week scramble</text>
       <text id="across four teams. It is a report we" x="735.66" y="470.63" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">across four teams. It is a report we</text>
@@ -273,30 +400,30 @@
   <g id="Customer Outcome Band" transform="translate(64, 3840.13)">
     <rect id="container" x="0" y="0" width="1088" height="508" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="section" x="1" y="1" width="1086" height="506" fill="#fdfcf8" />
-      <text id="Results" x="32" y="95" fill="#007f34" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Results</text>
-      <text id="What changed, and over how long" x="32" y="145" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="36" font-weight="600" letter-spacing="-0.9">What changed, and over how long</text>
+      <text id="Results" x="32" y="96" fill="#00782e" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Results</text>
+      <text id="What changed, and over how long" x="32" y="141" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="36" font-weight="600" letter-spacing="-0.9">What changed, and over how long</text>
       <text id="Most readers skip the quotes. What they …" x="32" y="178" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">Most readers skip the quotes. What they do not skip is a number with a time period attached</text>
       <text id="to it, and every figure here names the c…" x="32" y="202" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">to it, and every figure here names the company it came from and how long it took.</text>
       <rect id="container 2" x="32" y="249" width="1024" height="178" rx="16" fill="#dbdee1" stroke="#dbdee1" stroke-width="1" />
       <rect id="container 3" x="33" y="250" width="254.75" height="176" fill="#ffffff" />
-      <text id="Support replies" x="57" y="288" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Support replies</text>
-      <text id="-63%" x="57" y="332" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="30" font-weight="600" letter-spacing="-0.75">-63%</text>
+      <text id="Support replies" x="57" y="289" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Support replies</text>
+      <text id="-63%" x="57" y="330" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="30" font-weight="600" letter-spacing="-0.75">-63%</text>
       <text id="Median first-response time at" x="57" y="357" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Median first-response time at</text>
       <text id="Northwind, over one quarter." x="57" y="377" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Northwind, over one quarter.</text>
       <rect id="container 4" x="288.75" y="250" width="254.75" height="176" fill="#ffffff" />
-      <text id="Onboarding" x="312.75" y="288" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Onboarding</text>
-      <text id="9 days → 2" x="312.75" y="332" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="30" font-weight="600" letter-spacing="-0.75">9 days → 2</text>
+      <text id="Onboarding" x="312.75" y="289" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Onboarding</text>
+      <text id="9 days → 2" x="312.75" y="330" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="30" font-weight="600" letter-spacing="-0.75">9 days → 2</text>
       <text id="Time to a customer's first live" x="312.75" y="357" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Time to a customer's first live</text>
       <text id="workspace, at Arden." x="312.75" y="377" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">workspace, at Arden.</text>
       <rect id="container 5" x="544.5" y="250" width="254.75" height="176" fill="#ffffff" />
-      <text id="Manual reconciliation" x="568.5" y="288" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Manual reconciliation</text>
-      <text id="12 hrs/wk" x="568.5" y="332" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="30" font-weight="600" letter-spacing="-0.75">12 hrs/wk</text>
+      <text id="Manual reconciliation" x="568.5" y="289" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Manual reconciliation</text>
+      <text id="12 hrs/wk" x="568.5" y="330" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="30" font-weight="600" letter-spacing="-0.75">12 hrs/wk</text>
       <text id="Hours returned to one finance" x="568.5" y="357" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Hours returned to one finance</text>
       <text id="team of three, measured before" x="568.5" y="377" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">team of three, measured before</text>
       <text id="and after." x="568.5" y="397" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">and after.</text>
       <rect id="container 6" x="800.25" y="250" width="254.75" height="176" fill="#ffffff" />
-      <text id="Kept using it" x="824.25" y="288" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Kept using it</text>
-      <text id="94%" x="824.25" y="332" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="30" font-weight="600" letter-spacing="-0.75">94%</text>
+      <text id="Kept using it" x="824.25" y="289" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Kept using it</text>
+      <text id="94%" x="824.25" y="330" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="30" font-weight="600" letter-spacing="-0.75">94%</text>
       <text id="Of teams past 90 days, over the" x="824.25" y="357" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Of teams past 90 days, over the</text>
       <text id="last twelve months." x="824.25" y="377" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">last twelve months.</text>
   </g>

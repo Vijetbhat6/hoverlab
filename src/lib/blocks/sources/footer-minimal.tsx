@@ -68,13 +68,13 @@ export function FooterMinimal({
         </div>
 
         {/* Links */}
-        <nav aria-label="Footer">
+        <nav aria-label="Footer" className="min-w-0">
           <ul className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
             {links.map((link) => (
-              <li key={link.label}>
+              <li key={link.label} className="min-w-0 max-w-full">
                 <a
                   href={link.href}
-                  className="text-sm text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  className="break-words text-sm text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 >
                   {link.label}
                 </a>

@@ -14,6 +14,7 @@
 import { NextResponse } from 'next/server'
 import { withJsonErrors } from '@/lib/route-errors'
 import { FirebaseAuthError, sendPasswordResetEmail } from '@/lib/firebase/rest'
+import { enforceRateLimit, RATE_LIMITS } from '@/lib/rate-limit'
 
 export const runtime = 'nodejs'
 
@@ -23,6 +24,13 @@ const GENERIC_OK = {
 }
 
 async function handleForgotPassword(req: Request) {
+  // Per-IP, tighter than sign-in: each accepted request makes Google send an
+  // email to an address the caller chose, so this is also the ceiling on
+  // mail-bombing somebody's inbox through us. The 429 says nothing about
+  // whether any address is registered.
+  const limited = await enforceRateLimit(req, RATE_LIMITS.forgotPassword)
+  if (limited) return limited
+
   let body: unknown
   try {
     body = await req.json()

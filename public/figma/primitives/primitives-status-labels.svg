@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1216" height="1130" viewBox="0 0 1216 1130" id="Hoverlab — Status &amp; Labels">
+  <!--
+    Hoverlab — Status & Labels. 4 controls, traced from the
+    rendered catalog. Drag this file onto a Figma canvas.
+
+    These are frames, not components: named, editable layers with real
+    geometry, colour and type. There are no variants, no auto-layout,
+    and no hover or motion — none of those exist in a static frame.
+
+    Every one of these is free to copy as code at https://hoverlab.dev/primitives
+  -->
+  <rect id="Background" x="0" y="0" width="1216" height="1130" fill="#ffffff" />
+  <text id="Badge label" x="64" y="84" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Badge</text>
+  <text id="badge id" x="64" y="98" font-family="ui-monospace, monospace" font-size="12" fill="#737373">badge</text>
+  <g id="Badge" transform="translate(64, 116)">
+    <rect id="container" x="0" y="0" width="1088" height="110" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="417.59" y="25" width="35.09" height="24" rx="10" fill="rgba(0, 118, 49, 0.102)" />
+      <text id="Pro" x="425.59" y="41" fill="#00782e" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Pro</text>
+      <rect id="container 3" x="460.69" y="25" width="40.56" height="24" rx="10" fill="rgba(0, 186, 118, 0.102)" />
+      <text id="Paid" x="468.69" y="41" fill="#007a55" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Paid</text>
+      <rect id="container 4" x="509.25" y="25" width="39.64" height="24" rx="10" fill="rgba(245, 147, 0, 0.102)" />
+      <text id="Trial" x="517.25" y="41" fill="#bb4d00" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Trial</text>
+      <rect id="container 5" x="556.89" y="25" width="63.14" height="24" rx="10" fill="rgba(226, 0, 10, 0.102)" />
+      <text id="Overdue" x="564.89" y="41" fill="#e7000b" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Overdue</text>
+      <rect id="container 6" x="628.03" y="25" width="42.38" height="24" rx="10" fill="rgba(0, 167, 235, 0.102)" />
+      <text id="Beta" x="636.03" y="41" fill="#0069a8" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Beta</text>
+      <rect id="container 7" x="454.34" y="61" width="44.53" height="24" rx="10" fill="#00782e" />
+      <text id="Solid" x="462.34" y="77" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Solid</text>
+      <rect id="container 8" x="506.88" y="61" width="58.95" height="24" rx="10" fill="none" stroke="rgba(0, 120, 45, 0.4)" stroke-width="1" />
+      <text id="Outline" x="515.88" y="77" fill="#00782e" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Outline</text>
+      <rect id="container 9" x="573.83" y="61" width="59.83" height="24" rx="12" fill="#f3f2ee" />
+      <text id="Soft pill" x="581.83" y="77" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Soft pill</text>
+  </g>
+  <text id="Status Badge label" x="64" y="342" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Status Badge</text>
+  <text id="status-badge id" x="64" y="356" font-family="ui-monospace, monospace" font-size="12" fill="#737373">status-badge</text>
+  <g id="Status Badge" transform="translate(64, 374)">
+    <rect id="container" x="0" y="0" width="1088" height="94" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="427.66" y="25" width="66.25" height="20" rx="10" fill="rgba(0, 186, 118, 0.102)" />
+      <text id="Online" x="449.66" y="39" fill="#007a55" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Online</text>
+      <rect id="container 3" x="435.66" y="31" width="8" height="8" rx="4" fill="#00bc7d" />
+      <rect id="container 4" x="501.91" y="25" width="86.52" height="20" rx="10" fill="rgba(0, 167, 235, 0.102)" />
+      <text id="Deploying" x="523.91" y="39" fill="#0069a8" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Deploying</text>
+      <rect id="container 5" x="505.98" y="27.07" width="15.86" height="15.86" rx="7.93" fill="#00a6f4" opacity="0.01" />
+      <rect id="container 6" x="509.91" y="31" width="8" height="8" rx="4" fill="#00a6f4" />
+      <rect id="container 7" x="596.42" y="25" width="63.92" height="20" rx="10" fill="rgba(226, 0, 10, 0.102)" />
+      <text id="Failed" x="618.42" y="39" fill="#e7000b" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Failed</text>
+      <rect id="container 8" x="604.42" y="31" width="8" height="8" rx="4" fill="#e7000b" />
+      <text id="Away" x="476.67" y="67" fill="#bb4d00" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Away</text>
+      <rect id="container 9" x="462.67" y="59" width="8" height="8" rx="4" fill="#fe9a00" />
+      <text id="Offline" x="532.95" y="67" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Offline</text>
+      <rect id="container 10" x="518.95" y="59" width="8" height="8" rx="4" fill="#90a1b9" />
+      <text id="Draft" x="596.56" y="67" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Draft</text>
+      <rect id="container 11" x="582.56" y="59" width="8" height="8" rx="4" fill="#90a1b9" />
+  </g>
+  <text id="Tag Chip &amp; Input label" x="64" y="584" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Tag Chip &amp; Input</text>
+  <text id="tag-chip id" x="64" y="598" font-family="ui-monospace, monospace" font-size="12" fill="#737373">tag-chip</text>
+  <g id="Tag Chip &amp; Input" transform="translate(64, 616)">
+    <rect id="container" x="0" y="0" width="1088" height="118" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="352" y="25" width="384" height="68" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <rect id="container 3" x="359" y="32" width="71.63" height="24" rx="10" fill="rgba(243, 242, 238, 0.6)" stroke="#dbdee1" stroke-width="1" />
+      <text id="design" x="368" y="48" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">design</text>
+      <g id="icon x" transform="translate(411.625 38) scale(0.5 0.5)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 6 6 18" />
+        <path d="m6 6 12 12" />
+      </g>
+      <rect id="container 4" x="436.63" y="32" width="103.77" height="24" rx="10" fill="rgba(243, 242, 238, 0.6)" stroke="#dbdee1" stroke-width="1" />
+      <text id="accessibility" x="445.63" y="48" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">accessibility</text>
+      <g id="icon x 2" transform="translate(521.391 38) scale(0.5 0.5)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 6 6 18" />
+        <path d="m6 6 12 12" />
+      </g>
+      <rect id="container 5" x="546.39" y="32" width="78.94" height="24" rx="10" fill="rgba(243, 242, 238, 0.6)" stroke="#dbdee1" stroke-width="1" />
+      <text id="shipped" x="555.39" y="48" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">shipped</text>
+      <g id="icon x 3" transform="translate(606.328 38) scale(0.5 0.5)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 6 6 18" />
+        <path d="m6 6 12 12" />
+      </g>
+  </g>
+  <text id="Skeleton label" x="64" y="850" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Skeleton</text>
+  <text id="skeleton id" x="64" y="864" font-family="ui-monospace, monospace" font-size="12" fill="#737373">skeleton</text>
+  <g id="Skeleton" transform="translate(64, 882)">
+    <rect id="container" x="0" y="0" width="1088" height="184" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="352" y="25" width="40" height="40" rx="20" fill="rgba(242, 241, 238, 0.702)" opacity="0.68" />
+      <rect id="container 3" x="404" y="25" width="332" height="14" rx="4" fill="rgba(242, 241, 238, 0.702)" opacity="0.68" />
+      <rect id="container 4" x="404" y="47" width="332" height="14" rx="4" fill="rgba(242, 241, 238, 0.702)" opacity="0.68" />
+      <rect id="container 5" x="404" y="69" width="199.19" height="14" rx="4" fill="rgba(242, 241, 238, 0.702)" opacity="0.68" />
+      <rect id="container 6" x="352" y="95" width="64" height="64" rx="12" fill="rgba(242, 241, 238, 0.702)" opacity="0.68" />
+      <rect id="container 7" x="428" y="95" width="96" height="36" rx="12" fill="rgba(242, 241, 238, 0.702)" opacity="0.68" />
+  </g>
+</svg>

@@ -153,10 +153,10 @@ export function IntegrationGrid({
           return (
             <li
               key={item.name}
-              className="flex flex-col rounded-2xl border border-border/60 bg-card/60 p-5 transition-colors hover:border-border focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-primary"
+              className="flex min-w-0 flex-col rounded-2xl border border-border/60 bg-card/60 p-5 transition-colors hover:border-border focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-primary"
             >
-              <div className="flex items-start justify-between gap-3">
-                <div className="flex items-center gap-3">
+              <div className="flex min-w-0 flex-wrap items-start justify-between gap-3">
+                <div className="flex min-w-0 items-center gap-3">
                   <div
                     aria-hidden
                     className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-border/60 bg-background text-sm font-bold text-muted-foreground"
@@ -164,22 +164,24 @@ export function IntegrationGrid({
                     {item.logo ?? item.name.charAt(0)}
                   </div>
                   <div className="min-w-0">
-                    <h3 className="truncate font-semibold leading-tight">
-                      {item.href ? (
-                        <a
-                          href={item.href}
-                          // The ring lives on the cell via focus-within, so
-                          // the link itself does not draw a second one.
-                          className="outline-none hover:underline"
-                        >
-                          {item.name}
-                        </a>
-                      ) : (
-                        item.name
-                      )}
-                    </h3>
+                    {item.name ? (
+                      <h3 data-stress-ignore className="truncate font-semibold leading-tight">
+                        {item.href ? (
+                          <a
+                            href={item.href}
+                            // The ring lives on the cell via focus-within, so
+                            // the link itself does not draw a second one.
+                            className="outline-none hover:underline"
+                          >
+                            {item.name}
+                          </a>
+                        ) : (
+                          item.name
+                        )}
+                      </h3>
+                    ) : null}
                     {item.category ? (
-                      <p className="text-xs text-muted-foreground">
+                      <p className="break-words text-xs text-muted-foreground">
                         {item.category}
                       </p>
                     ) : null}
@@ -187,13 +189,13 @@ export function IntegrationGrid({
                 </div>
 
                 <span
-                  className={`shrink-0 rounded-full border px-2 py-0.5 text-xs font-medium ${status.klass}`}
+                  className={`min-w-0 max-w-full break-words rounded-full border px-2 py-0.5 text-xs font-medium ${status.klass}`}
                 >
                   {status.label}
                 </span>
               </div>
 
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+              <p className="mt-3 min-w-0 break-words text-sm leading-relaxed text-muted-foreground">
                 {item.description}
               </p>
             </li>

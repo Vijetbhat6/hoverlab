@@ -60,7 +60,7 @@ export function HeroMetrics({
   return (
     <section className={`relative overflow-hidden ${className}`}>
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute left-1/2 top-0 h-[26rem] w-[42rem] -translate-x-1/2 rounded-full bg-primary/15 blur-3xl" />
+        <div className="absolute left-1/2 top-0 h-[26rem] w-[42rem] -translate-x-1/2 rounded-full bg-primary/15 blur-3xl border border-transparent" />
         {/* Faint grid, masked so it fades out before the metric row. */}
         <div
           className="absolute inset-0 opacity-[0.06] [background-image:linear-gradient(to_right,currentColor_1px,transparent_1px),linear-gradient(to_bottom,currentColor_1px,transparent_1px)] [background-size:56px_56px] [mask-image:radial-gradient(ellipse_at_top,black,transparent_70%)]"
@@ -72,13 +72,13 @@ export function HeroMetrics({
           <span className="inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-card/60 px-3 py-1 text-xs font-medium text-muted-foreground backdrop-blur">
             <span
               aria-hidden
-              className="h-1.5 w-1.5 rounded-full bg-primary shadow-[0_0_0_3px] shadow-primary/20"
+              className="h-1.5 w-1.5 rounded-full bg-primary shadow-[0_0_0_3px] shadow-primary/20 border border-transparent"
             />
             {eyebrow}
           </span>
         ) : null}
 
-        <h1 className="mt-6 text-balance text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+        <h1 className="mt-6 text-balance break-words text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
           {heading}
         </h1>
 
@@ -105,10 +105,10 @@ export function HeroMetrics({
         {metrics.length > 0 ? (
           <dl className="mt-16 grid grid-cols-2 gap-x-6 gap-y-10 border-t border-border/60 pt-10 lg:grid-cols-4">
             {metrics.map((m) => (
-              <div key={m.label}>
+              <div key={m.label} className="min-w-0">
                 <dt className="sr-only">{m.label}</dt>
                 <dd>
-                  <span className="block text-3xl font-extrabold tracking-tight sm:text-4xl">
+                  <span className="block break-words text-3xl font-extrabold tracking-tight sm:text-4xl">
                     {m.value}
                   </span>
                   <span

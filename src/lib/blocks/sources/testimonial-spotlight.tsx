@@ -81,10 +81,10 @@ export function TestimonialSpotlight({
 
         <dl className="grid content-center gap-6 border-border/60 max-lg:border-t max-lg:pt-8 sm:max-lg:grid-cols-3 lg:min-w-52 lg:border-s lg:ps-16">
           {stats.map((stat) => (
-            <div key={stat.label}>
+            <div key={stat.label} className="min-w-0">
               <dt className="sr-only">{stat.label}</dt>
-              <dd className="text-3xl font-bold tracking-tight text-primary">{stat.value}</dd>
-              <dd className="mt-1 text-sm leading-snug text-muted-foreground">{stat.label}</dd>
+              <dd className="break-words text-3xl font-bold tracking-tight text-primary">{stat.value}</dd>
+              <dd className="mt-1 break-words text-sm leading-snug text-muted-foreground">{stat.label}</dd>
             </div>
           ))}
         </dl>
@@ -97,7 +97,7 @@ export function TestimonialSpotlight({
         <ul className="flex flex-wrap items-center justify-center gap-x-12 gap-y-4">
           {logos.map((logo) => (
             <li key={logo}>
-              <span className="text-lg font-bold tracking-tight text-muted-foreground/60">
+              <span className="text-lg font-bold tracking-tight text-muted-foreground/85">
                 {logo}
               </span>
             </li>

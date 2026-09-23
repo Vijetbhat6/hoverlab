@@ -101,6 +101,15 @@ export function NewsletterSignup({ source = 'landing' }: NewsletterSignupProps) 
     'idle',
   )
   const [error, setError] = React.useState('')
+  /*
+   * Whether the server can actually email a confirmation link. Taken from
+   * the response, never assumed: RESEND_API_KEY is unset in production, so
+   * on that deployment no email leaves the application and "check your
+   * inbox" would be a false statement made to a person who is waiting for it.
+   */
+  const [confirmationEmail, setConfirmationEmail] = React.useState(false)
+  /** Honeypot. A human never sees this field; a form-filling bot does. */
+  const [website, setWebsite] = React.useState('')
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -112,9 +121,12 @@ export function NewsletterSignup({ source = 'landing' }: NewsletterSignupProps) 
       const res = await fetch('/api/newsletter', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, source }),
+        body: JSON.stringify({ email, source, website }),
       })
-      const data = (await res.json().catch(() => ({}))) as { error?: string }
+      const data = (await res.json().catch(() => ({}))) as {
+        error?: string
+        confirmationEmail?: boolean
+      }
 
       if (!res.ok) {
         // Show the server's sentence when it has one — it says whether the
@@ -134,6 +146,7 @@ export function NewsletterSignup({ source = 'landing' }: NewsletterSignupProps) 
        * were added just now" — which is the only thing the reader cares
        * about, and the only thing we should tell an anonymous caller.
        */
+      setConfirmationEmail(data.confirmationEmail === true)
       setStatus('done')
       track('newsletter_subscribed', { source })
     } catch {
@@ -171,12 +184,27 @@ export function NewsletterSignup({ source = 'landing' }: NewsletterSignupProps) 
             </h2>
             <p className="mx-auto mt-3 max-w-md text-sm text-muted-foreground">
               {COPY[source].body}
+              {/* Part of the recorded consent text — see CONFIRM_CLAUSE in
+                  lib/firebase/subscribers.ts. */}
+              {' '}
+              We email a confirmation link first and send nothing until you follow it.
             </p>
 
             {status === 'done' ? (
-              <div className="mx-auto mt-6 inline-flex items-center gap-2 rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-4 py-3 text-sm font-medium text-emerald-600 dark:text-emerald-400">
-                <Check className="h-4 w-4" />
-                You&apos;re in. Talk soon.
+              /*
+               * role="status" so the change is announced. The two sentences
+               * are exactly what is true in each case: with a transport the
+               * link is on its way; without one it is not, and saying
+               * "check your inbox" would be a promise nothing can keep.
+               */
+              <div
+                role="status"
+                className="mx-auto mt-6 inline-flex max-w-md items-start gap-2 rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-4 py-3 text-start text-sm font-medium text-emerald-700 dark:text-emerald-400"
+              >
+                <Check aria-hidden className="mt-0.5 h-4 w-4 shrink-0" />
+                {confirmationEmail
+                  ? "Almost there. Check your inbox for a confirmation link — we won't send anything until you follow it."
+                  : "You're on the list. We'll email a confirmation link before we send anything."}
               </div>
             ) : (
               <form
@@ -194,6 +222,18 @@ export function NewsletterSignup({ source = 'landing' }: NewsletterSignupProps) 
                   aria-describedby={status === 'error' ? 'newsletter-error' : undefined}
                   className="fx-newsletter-input flex-1 rounded-xl border border-border/60 bg-background/80 px-4 py-3 text-sm placeholder:text-muted-foreground/60 focus:border-primary/40 focus:outline-none disabled:opacity-50"
                   aria-label="Email address"
+                />
+                {/* Honeypot: zero-size, out of the tab order and hidden from
+                    assistive tech. Only a bot fills it. */}
+                <input
+                  type="text"
+                  name="website"
+                  value={website}
+                  onChange={(e) => setWebsite(e.target.value)}
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden="true"
+                  className="pointer-events-none absolute h-0 w-0 opacity-0"
                 />
                 <button
                   type="submit"

@@ -14,8 +14,9 @@
  * Every control here is a URL, so the whole surface works before
  * JavaScript, is shareable, and costs one server render.
  *
- * `?level=` and `?category=` are filters, not new documents — the canonical
- * for every variant is `/browse`. The sitemap lists the bare URL only, for
+ * `?level=` (or its alias `?tier=`), `?category=`, `?fw=`, `?a11y=` and
+ * `?color=` are filters, not new documents — the canonical for every
+ * variant is `/browse`. The sitemap lists the bare URL only, for
  * the same reason it points at `/category/<slug>` instead of
  * `/library?filter=`: query-string URLs make weak canonicals, and the real
  * indexable landing pages for these terms are the tier hubs.
@@ -39,6 +40,15 @@ import {
 } from '@/lib/browse'
 import { ARTIFACT_LEVELS, LEVEL_LABEL, type ArtifactLevel } from '@/lib/artifact-types'
 import { absoluteUrl } from '@/lib/site'
+import {
+  FRAMEWORK_FACETS,
+  facetParams,
+  facetPredicate,
+  parseFacets,
+  type Facets,
+} from '@/lib/search/facets'
+import { COLOR_BUCKETS, COLOR_LABEL } from '@/lib/search/color'
+import { colorCounts, effectsByColor } from '@/lib/search/colors-data'
 
 const TITLE = `Browse all ${BROWSE_TOTAL.toLocaleString('en-US')} components — Hoverlab`
 const DESCRIPTION =
@@ -79,15 +89,30 @@ const PREVIEW_LIMIT: Record<ArtifactLevel, number> = {
 const LEVEL_LIMIT = 24
 
 interface BrowsePageProps {
-  searchParams: Promise<{ q?: string; level?: string; category?: string }>
+  searchParams: Promise<{
+    q?: string
+    level?: string
+    /** Alias of `level`, for links written against the tier vocabulary. */
+    tier?: string
+    category?: string
+    fw?: string
+    a11y?: string
+    color?: string
+  }>
 }
 
 /** Build a /browse URL, dropping empty params so the bare URL stays clean. */
-function browseHref(params: { q?: string; level?: string; category?: string }): string {
+function browseHref(
+  params: { q?: string; level?: string; category?: string } & Record<string, string | undefined>,
+): string {
   const search = new URLSearchParams()
   if (params.q) search.set('q', params.q)
   if (params.level) search.set('level', params.level)
   if (params.category) search.set('category', params.category)
+  for (const key of ['fw', 'a11y', 'color']) {
+    const value = params[key]
+    if (value) search.set(key, value)
+  }
   const qs = search.toString()
   return qs ? `/browse?${qs}` : '/browse'
 }
@@ -95,12 +120,22 @@ function browseHref(params: { q?: string; level?: string; category?: string }): 
 export default async function BrowsePage({ searchParams }: BrowsePageProps) {
   const params = await searchParams
   const q = params.q?.trim() ?? ''
-  const level = parseLevel(params.level)
+  const level = parseLevel(params.level ?? params.tier)
+  const facets = parseFacets(params)
+  const fp = facetParams(facets)
+  // The audit report is ~270 KB, so it is only read when someone asks to
+  // filter by it.
+  const audited = facets.a11y
+    ? (await import('@/lib/search/audit-facet')).auditedKeys()
+    : new Set<string>()
+  const facet = facetPredicate(facets, { audited, effectsByColor })
   // A category is only meaningful within a level — "Pricing" names a block
   // category and an effect category, and they are different taxonomies.
   const category = level ? params.category : undefined
 
-  const { hits, countsByLevel, total } = searchArtifacts({ q, level, category })
+  const { hits, countsByLevel, total } = searchArtifacts({ q, level, category, facet })
+  // Counts on the rail are only the unfiltered totals when nothing narrows.
+  const narrowed = Boolean(q) || facet !== undefined
 
   const grouped = level ? null : groupByLevel(hits)
   const shown = level ? hits.slice(0, LEVEL_LIMIT) : (grouped ?? []).flatMap((g) => g.items)
@@ -134,23 +169,24 @@ export default async function BrowsePage({ searchParams }: BrowsePageProps) {
         <CatalogSearchForm
           defaultValue={q}
           level={level}
+          hidden={fp}
           className="mx-auto mt-8 max-w-xl"
         />
 
         {/* -- Level rail ------------------------------------------------ */}
         <nav aria-label="Filter by tier" className="mt-6 flex flex-wrap justify-center gap-2">
           <LevelChip
-            href={browseHref({ q })}
+            href={browseHref({ q, ...fp })}
             label="All"
-            count={q ? total + otherLevels(countsByLevel, level) : BROWSE_TOTAL}
+            count={narrowed ? total + otherLevels(countsByLevel, level) : BROWSE_TOTAL}
             active={!level}
           />
           {ARTIFACT_LEVELS.map((l) => (
             <LevelChip
               key={l}
-              href={browseHref({ q, level: l })}
+              href={browseHref({ q, level: l, ...fp })}
               label={LEVEL_LABEL[l].many}
-              count={q ? countsByLevel[l] : LEVEL_TOTALS[l]}
+              count={narrowed ? countsByLevel[l] : LEVEL_TOTALS[l]}
               active={level === l}
             />
           ))}
@@ -161,7 +197,7 @@ export default async function BrowsePage({ searchParams }: BrowsePageProps) {
             told us what they want, and a strip of unrelated popular items
             above their results is an interruption. Renders nothing until
             the counters have data. */}
-        {!q ? <TrendingRail level={level ?? undefined} className="mt-6" /> : null}
+        {!q && !facet ? <TrendingRail level={level ?? undefined} className="mt-6" /> : null}
 
         {/* -- Category rail, scoped to the chosen level ----------------- */}
         {level ? (
@@ -170,20 +206,31 @@ export default async function BrowsePage({ searchParams }: BrowsePageProps) {
             className="mt-4 flex flex-wrap justify-center gap-1.5"
           >
             <CategoryChip
-              href={browseHref({ q, level })}
+              href={browseHref({ q, level, ...fp })}
               label="All categories"
               active={!category}
             />
             {categoriesAtLevel(level).map((c) => (
               <CategoryChip
                 key={c}
-                href={browseHref({ q, level, category: c })}
+                href={browseHref({ q, level, category: c, ...fp })}
                 label={c}
                 active={category === c}
               />
             ))}
           </nav>
         ) : null}
+
+        {/* -- Facets ----------------------------------------------------
+            Framework, accessibility and colour. Plain links, like every
+            other control on this page, so a filtered view is a URL you can
+            send. Each chip keeps every other filter and the search. */}
+        <FacetPanel
+          facets={facets}
+          hrefFor={(over) =>
+            browseHref({ q, level, category, ...facetParams({ ...facets, ...over }) })
+          }
+        />
 
         {/* -- Result summary ------------------------------------------- */}
         <p className="mt-8 flex items-center justify-center gap-1.5 text-sm text-muted-foreground">
@@ -243,7 +290,7 @@ export default async function BrowsePage({ searchParams }: BrowsePageProps) {
                     </span>
                   </h2>
                   <Link
-                    href={browseHref({ q, level: group.level })}
+                    href={browseHref({ q, level: group.level, ...fp })}
                     className="shrink-0 text-sm font-semibold text-primary hover:underline"
                   >
                     See all →
@@ -348,12 +395,149 @@ function CategoryChip({
   )
 }
 
+/**
+ * The three facet rows, and the sentence under them that says what each one
+ * leaves out.
+ *
+ * That sentence is the point. Choosing a colour removes every block, page and
+ * template, because colour is read from an effect's stylesheet and the others
+ * are styled with tokens the buyer supplies; choosing the accessibility audit
+ * removes every effect, primitive and template, because only blocks and pages
+ * were audited. A filter that silently emptied four tiers would look broken.
+ * Saying "effects only" turns a surprising result into an explained one.
+ */
+function FacetPanel({
+  facets,
+  hrefFor,
+}: {
+  facets: Facets
+  hrefFor: (over: Partial<Facets>) => string
+}) {
+  const counts = colorCounts()
+  return (
+    <div className="mx-auto mt-6 max-w-3xl space-y-2.5 text-xs">
+      <FacetRow label="Works in">
+        <FacetChip href={hrefFor({ fw: undefined })} active={!facets.fw}>
+          Any
+        </FacetChip>
+        {FRAMEWORK_FACETS.map((f) => (
+          <FacetChip key={f.id} href={hrefFor({ fw: f.id })} active={facets.fw === f.id}>
+            {f.label}
+          </FacetChip>
+        ))}
+      </FacetRow>
+
+      <FacetRow label="Accessibility">
+        <FacetChip href={hrefFor({ a11y: undefined })} active={!facets.a11y}>
+          Any
+        </FacetChip>
+        <FacetChip href={hrefFor({ a11y: 'audited' })} active={facets.a11y === 'audited'}>
+          Passed the static audit
+        </FacetChip>
+      </FacetRow>
+
+      <FacetRow label="Colour">
+        <FacetChip href={hrefFor({ color: undefined })} active={!facets.color}>
+          Any
+        </FacetChip>
+        {COLOR_BUCKETS.map((bucket) => {
+          const { name, swatch } = COLOR_LABEL[bucket]
+          const active = facets.color === bucket
+          return (
+            <Link
+              key={bucket}
+              href={hrefFor({ color: bucket })}
+              aria-current={active ? 'page' : undefined}
+              aria-label={`${name}, ${counts[bucket]} effects`}
+              title={`${name} · ${counts[bucket]}`}
+              className={`h-6 w-6 rounded-full border-2 transition-transform focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
+                active
+                  ? 'scale-110 border-foreground'
+                  : 'border-border/60 hover:scale-105 hover:border-foreground/50'
+              }`}
+              style={{ backgroundColor: swatch }}
+            />
+          )
+        })}
+      </FacetRow>
+
+      {facets.fw || facets.a11y || facets.color ? (
+        <ul className="space-y-1 text-center text-muted-foreground">
+          {facets.fw ? (
+            <li>
+              Primitives and templates ship as React source and only match React; effects, blocks
+              and pages follow the{' '}
+              <Link href="/frameworks" className="underline underline-offset-4 hover:text-foreground">
+                framework matrix
+              </Link>
+              .
+            </li>
+          ) : null}
+          {facets.a11y ? (
+            <li>
+              Blocks and pages only — the tiers the audit covers. This is the result of a static
+              check of the source, not a claim that anything conforms to WCAG; see{' '}
+              <Link href="/accessibility" className="underline underline-offset-4 hover:text-foreground">
+                what it checks and what it cannot
+              </Link>
+              .
+            </li>
+          ) : null}
+          {facets.color ? (
+            <li>
+              Effects only — colour is read from each effect&apos;s stylesheet, and an effect whose
+              colour it does not spell out is left out.
+            </li>
+          ) : null}
+        </ul>
+      ) : null}
+    </div>
+  )
+}
+
+function FacetRow({ label, children }: { label: string; children: React.ReactNode }) {
+  return (
+    <div className="flex flex-wrap items-center justify-center gap-1.5">
+      <span className="me-1 font-semibold text-foreground">{label}</span>
+      {children}
+    </div>
+  )
+}
+
+function FacetChip({
+  href,
+  active,
+  children,
+}: {
+  href: string
+  active: boolean
+  children: React.ReactNode
+}) {
+  return (
+    <Link
+      href={href}
+      aria-current={active ? 'page' : undefined}
+      className={`rounded-full border px-3 py-1 font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+        active
+          ? 'border-primary/40 bg-primary/10 text-foreground'
+          : 'border-border/60 text-muted-foreground hover:bg-card hover:text-foreground'
+      }`}
+    >
+      {children}
+    </Link>
+  )
+}
+
 function EmptyState({ q }: { q: string }) {
   return (
     <div className="mx-auto mt-12 max-w-md rounded-2xl border border-dashed border-border/60 p-10 text-center">
-      <p className="font-semibold">Nothing matched “{q}”.</p>
+      <p className="font-semibold">
+        {q ? <>Nothing matched “{q}”.</> : 'Nothing matches those filters.'}
+      </p>
       <p className="mt-2 text-sm text-muted-foreground">
-        Try a shorter term, or browse a tier directly.
+        {q
+          ? 'Try a shorter term, loosen a filter, or browse a tier directly.'
+          : 'Loosen a filter, or browse a tier directly.'}
       </p>
       <div className="mt-5 flex flex-wrap justify-center gap-2">
         {ARTIFACT_LEVELS.map((l) => (

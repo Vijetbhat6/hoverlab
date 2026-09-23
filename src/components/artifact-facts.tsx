@@ -4,6 +4,7 @@ import { Check, FileCode, Package, ShieldCheck, Terminal } from 'lucide-react'
 import type { ArtifactFile, ArtifactLevel } from '@/lib/artifact-types'
 import { PLANS, formatPrice } from '@/lib/billing/plans'
 import { UsageBadge } from '@/components/usage-badge'
+import { ArtifactFeedback } from '@/components/feedback/artifact-feedback'
 
 /**
  * The facts a buyer checks before taking something — stated on the page
@@ -158,6 +159,14 @@ export function ArtifactFacts({
           nothing to upgrade.{' '}
           <UsageBadge id={id} />
         </p>
+      </div>
+
+      {/* ---- Feedback --------------------------------------------- */}
+      {/* A client island that makes no request until somebody presses
+          something, so it leaves the statically generated detail pages
+          static. See components/feedback/artifact-feedback.tsx. */}
+      <div className="sm:col-span-2 border-t border-border/60 pt-4">
+        <ArtifactFeedback level={level} id={id} />
       </div>
     </section>
   )

@@ -153,10 +153,10 @@ export default function PropertyDetailPage() {
 
         {/* Gallery and enquiry panel side by side — the commerce shape,
             with viewing slots where the variants would be. */}
-        <div className="mx-auto mt-8 grid w-full max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-[minmax(0,1fr)_22rem] lg:px-8">
+        <div className="mx-auto mt-8 grid w-full max-w-7xl grid-cols-1 gap-8 px-4 sm:px-6 lg:grid-cols-[minmax(0,1fr)_22rem] lg:px-8">
           <ProductGallery />
 
-          <div id="pd-viewing">
+          <div id="pd-viewing" className="min-w-0">
             <ProductBuyBox
               name="Hampton Road, Redland"
               price={615000}

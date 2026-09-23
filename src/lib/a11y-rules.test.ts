@@ -189,6 +189,62 @@ describe('heading-order (1.3.1)', () => {
   })
 })
 
+describe('table-headers (1.3.1)', () => {
+  it('reports a real data table with no <th> cells at all', () => {
+    const found = run('table-headers', '<table><tbody><tr><td>Row</td></tr></tbody></table>')
+    assert.equal(found.length, 1)
+    assert.match(found[0]!, /no <th>/)
+  })
+
+  it('reports <th> cells with no scope', () => {
+    const found = run(
+      'table-headers',
+      '<table><thead><tr><th>Name</th></tr></thead></table>',
+    )
+    assert.equal(found.length, 1)
+    assert.match(found[0]!, /scope/)
+  })
+
+  it('accepts a real table with scoped headers', () => {
+    assert.deepEqual(
+      run('table-headers', '<table><thead><tr><th scope="col">Name</th></tr></thead></table>'),
+      [],
+    )
+  })
+
+  it('accepts role="presentation" with no headers — the email-markup case', () => {
+    // Nested layout tables are how HTML email survives a rendering engine
+    // that ignores flexbox. role="presentation" strips the table's native
+    // semantics, header association included, so a screen reader is told
+    // this is not a data table and never asks it for one.
+    const found = run(
+      'table-headers',
+      '<table role="presentation"><tbody><tr><td>Logo</td></tr></tbody></table>',
+    )
+    assert.deepEqual(found, [])
+  })
+
+  it("accepts role=\"none\", presentation's ARIA 1.1 synonym", () => {
+    assert.deepEqual(
+      run('table-headers', '<table role="none"><tbody><tr><td>Logo</td></tr></tbody></table>'),
+      [],
+    )
+  })
+
+  it('a real data table beside a presentational one still gets checked', () => {
+    // One exempt table in a file must not exempt a second, unrelated one.
+    const source = `
+      <table role="presentation"><tbody><tr><td>Header art</td></tr></tbody></table>
+      <table><tbody><tr><td>Row</td></tr></tbody></table>
+    `
+    assert.equal(run('table-headers', source).length, 1)
+  })
+
+  it('says nothing when there is no table at all', () => {
+    assert.deepEqual(run('table-headers', '<div className="grid grid-cols-3" />'), [])
+  })
+})
+
 describe('the rule table itself', () => {
   it('gives every rule a criterion, a level and a severity', () => {
     for (const r of RULES) {

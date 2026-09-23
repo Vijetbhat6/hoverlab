@@ -88,21 +88,23 @@ export function RetrievalEmptyState({
           <FileQuestion aria-hidden className="h-5 w-5" />
         </span>
 
-        <h3 className="mt-4 text-balance text-base font-semibold">{headline}</h3>
+        {headline ? (
+          <h3 data-stress-ignore className="mt-4 text-balance text-base font-semibold">{headline}</h3>
+        ) : null}
 
         <p className="mx-auto mt-2 max-w-sm text-pretty text-sm leading-relaxed text-muted-foreground">
           {body}
         </p>
 
-        <p className="mt-3 inline-flex max-w-full items-center gap-2 rounded-full border border-border/60 bg-muted/40 px-3 py-1.5">
+        <p className="mt-3 inline-flex max-w-full items-center gap-1.5 rounded-full border border-border/60 bg-muted/40 px-2.5 py-1.5">
           <Search aria-hidden className="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
-          <span className="truncate font-mono text-xs text-muted-foreground">{query}</span>
+          <span className="min-w-0 truncate font-mono text-xs text-muted-foreground">{query}</span>
         </p>
       </div>
 
       {/* -- Where it looked --------------------------------------------- */}
       <div className="mt-6">
-        <h4 className="mb-2 text-xs font-bold uppercase tracking-wider text-muted-foreground">
+        <h4 data-stress-ignore className="mb-2 text-xs font-bold uppercase tracking-wider text-muted-foreground">
           Searched
         </h4>
         <ul className="space-y-1.5">
@@ -114,7 +116,7 @@ export function RetrievalEmptyState({
                 className="flex items-center gap-2.5 rounded-xl border border-border/60 px-3 py-2 text-xs"
               >
                 <Icon aria-hidden className="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
-                <span className="truncate font-medium">{scope.label}</span>
+                <span className="min-w-0 flex-1 truncate font-medium">{scope.label}</span>
                 <span className="ms-auto shrink-0 text-muted-foreground">{scope.detail}</span>
                 <span className="shrink-0 text-muted-foreground">· 0 matches</span>
               </li>
@@ -126,7 +128,7 @@ export function RetrievalEmptyState({
       {/* -- Near misses -------------------------------------------------- */}
       {nearMisses.length > 0 ? (
         <div className="mt-5">
-          <h4 className="mb-2 text-xs font-bold uppercase tracking-wider text-muted-foreground">
+          <h4 data-stress-ignore className="mb-2 text-xs font-bold uppercase tracking-wider text-muted-foreground">
             Closest, but below the threshold
           </h4>
           <ul className="space-y-1.5">

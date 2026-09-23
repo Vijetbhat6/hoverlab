@@ -136,7 +136,7 @@ export function AuthSignupSplit({
                   >
                     <span
                       aria-hidden
-                      className={`flex h-4 w-4 shrink-0 items-center justify-center rounded-full transition-colors ${
+                      className={`flex h-4 w-4 shrink-0 items-center justify-center rounded-full border border-transparent transition-colors ${
                         passed[i] ? 'bg-emerald-500/15' : 'bg-muted'
                       }`}
                     >
@@ -178,7 +178,7 @@ export function AuthSignupSplit({
       <div className="relative hidden items-center justify-center overflow-hidden border-s border-border/60 bg-gradient-to-br from-primary/10 via-card to-emerald-500/5 p-10 lg:flex">
         <div
           aria-hidden
-          className="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full bg-primary/20 blur-3xl"
+          className="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full bg-primary/20 blur-3xl border border-transparent"
         />
 
         <figure className="relative max-w-sm">

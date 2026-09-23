@@ -151,7 +151,7 @@ export function Stepper({
         onKeyDown={onKeyDown}
         aria-label={label}
         className={[
-          'w-12 bg-transparent text-center text-sm font-medium tabular-nums',
+          'w-12 border border-transparent bg-transparent text-center text-sm font-medium tabular-nums',
           'text-foreground outline-none disabled:cursor-not-allowed',
         ].join(' ')}
       />

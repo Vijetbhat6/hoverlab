@@ -126,14 +126,27 @@ function Flag({ flag }: { flag: string | null }) {
   )
 }
 
+/**
+ * Whether this build can geolocate a visitor at all.
+ *
+ * Set by next.config.ts from the same conditions `lib/billing/region.ts` uses
+ * to trust a country header. Where it is false the endpoint can only answer
+ * "no offer", so asking is a function invocation per page view for nothing.
+ */
+const GEO_PRICING = process.env.NEXT_PUBLIC_GEO_PRICING === '1'
+
 export function RegionalOfferBanner() {
-  const { offer, region, country } = usePricing()
   const pathname = usePathname()
   const chromeless = CHROMELESS_PREFIXES.some(
     (prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`),
   )
   const [dismissed, setDismissed] = React.useState(true)
   const [copied, setCopied] = React.useState(false)
+  // `dismissed` starts true and is cleared on mount (see below), so nothing is
+  // requested until it is known that the bar could actually appear.
+  const { offer, region, country } = usePricing({
+    enabled: GEO_PRICING && !chromeless && !dismissed,
+  })
 
   /*
     Starts dismissed and is un-dismissed on mount.

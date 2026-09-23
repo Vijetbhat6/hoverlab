@@ -7,7 +7,7 @@
     geometry, colour and type. There are no variants, no auto-layout,
     and no hover or motion — none of those exist in a static frame.
 
-    Every section here is free to copy as code at https://hoverlab.dev/blocks
+    Every one of these is free to copy as code at https://hoverlab.dev/blocks
   -->
   <rect id="Background" x="0" y="0" width="1216" height="5453" fill="#ffffff" />
   <text id="Order Confirmation label" x="64" y="84" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Order Confirmation</text>
@@ -15,59 +15,80 @@
   <g id="Order Confirmation" transform="translate(64, 116)">
     <rect id="container" x="0" y="0" width="1088" height="1016.75" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="container 2" x="516" y="49" width="56" height="56" rx="16" fill="rgba(0, 188, 128, 0.149)" />
-      <text id="Thanks — your order is confirmed" x="544" y="155" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="30" font-weight="800" letter-spacing="-0.75" text-anchor="middle">Thanks — your order is confirmed</text>
-      <text id="A confirmation is on its way to" x="544" y="187" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" text-anchor="middle">A confirmation is on its way to</text>
-      <text id="you@example.com" x="653.81" y="187" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">you@example.com</text>
+      <g id="icon circle-check" transform="translate(530 63) scale(1.167 1.167)" fill="none" stroke="#009966" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10" />
+        <path d="m9 12 2 2 4-4" />
+      </g>
+      <text id="Thanks — your order is confirmed" x="543.99" y="153" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="30" font-weight="800" letter-spacing="-0.75" text-anchor="middle">Thanks — your order is confirmed</text>
+      <text id="A confirmation is on its way to" x="490.34" y="188" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" text-anchor="middle">A confirmation is on its way to</text>
+      <g id="icon mail" transform="translate(372.516 175) scale(0.667 0.667)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7" />
+        <rect rx="2" x="2" y="4" width="20" height="16" />
+      </g>
+      <text id="you@example.com" x="653.81" y="188" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">you@example.com</text>
       <rect id="paragraph" x="459.72" y="213" width="168.56" height="66" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Order number" x="544" y="236" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" text-anchor="middle">Order number</text>
+      <text id="Order number" x="543.99" y="236" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" text-anchor="middle">Order number</text>
       <text id="ORD-4821-9930" x="544" y="260" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="18" font-weight="600" letter-spacing="-0.45" text-anchor="middle">ORD-4821-9930</text>
       <rect id="container 3" x="232" y="311" width="624" height="116" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Estimated delivery" x="285" y="348" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="500">Estimated delivery</text>
-      <text id="–" x="285" y="372" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">–</text>
+      <g id="icon truck" transform="translate(253 334) scale(0.833 0.833)" fill="none" stroke="#00782e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2" />
+        <path d="M15 18H9" />
+        <path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14" />
+        <circle cx="17" cy="18" r="2" />
+        <circle cx="7" cy="18" r="2" />
+      </g>
+      <text id="Estimated delivery" x="285" y="349" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="500">Estimated delivery</text>
+      <text id="–" x="367.41" y="373" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">–</text>
       <text id="Fri 14 August" x="285" y="373" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Fri 14 August</text>
       <text id="Tue 18 August" x="382.69" y="373" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Tue 18 August</text>
-      <text id="We will email a tracking link as soon as…" x="285" y="400" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">We will email a tracking link as soon as it ships.</text>
+      <text id="We will email a tracking link as soon as…" x="285" y="401" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">We will email a tracking link as soon as it ships.</text>
       <rect id="section" x="232" y="451" width="300" height="183.75" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Delivering to" x="253" y="486" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Delivering to</text>
-      <text id="Ada Lovelace" x="253" y="514" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Ada Lovelace</text>
-      <text id="12 Marchmont Street" x="253" y="536.75" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">12 Marchmont Street</text>
-      <text id="London" x="253" y="559.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">London</text>
-      <text id="WC1N 1AG" x="253" y="582.25" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">WC1N 1AG</text>
-      <text id="United Kingdom" x="253" y="605" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">United Kingdom</text>
+      <text id="Delivering to" x="277" y="487" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Delivering to</text>
+      <g id="icon package" transform="translate(253 474) scale(0.667 0.667)" fill="none" stroke="#080c0f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z" />
+        <path d="M12 22V12" />
+        <polyline points="3.29 7 12 12 20.71 7" />
+        <path d="m7.5 4.27 9 5.15" />
+      </g>
+      <text id="Ada Lovelace" x="253" y="516" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Ada Lovelace</text>
+      <text id="12 Marchmont Street" x="253" y="538.75" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">12 Marchmont Street</text>
+      <text id="London" x="253" y="561.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">London</text>
+      <text id="WC1N 1AG" x="253" y="584.25" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">WC1N 1AG</text>
+      <text id="United Kingdom" x="253" y="607" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">United Kingdom</text>
       <rect id="section 2" x="556" y="451" width="300" height="183.75" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Payment" x="577" y="486" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Payment</text>
-      <text id="Subtotal" x="577" y="514" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Subtotal</text>
-      <text id="£219.00" x="781.63" y="514" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">£219.00</text>
-      <text id="Discount" x="577" y="540" fill="#009966" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Discount</text>
-      <text id="−£21.90" x="782.75" y="540" fill="#009966" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">−£21.90</text>
-      <text id="Delivery" x="577" y="566" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Delivery</text>
-      <text id="Free" x="806.84" y="566" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Free</text>
+      <text id="Payment" x="577" y="487" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Payment</text>
+      <text id="Subtotal" x="577" y="515" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Subtotal</text>
+      <text id="£219.00" x="781.63" y="515" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">£219.00</text>
+      <text id="Discount" x="577" y="541" fill="#009966" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Discount</text>
+      <text id="−£21.90" x="782.75" y="541" fill="#009966" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">−£21.90</text>
+      <text id="Delivery" x="577" y="567" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Delivery</text>
+      <text id="Free" x="806.84" y="567" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Free</text>
       <rect id="container 4" x="577" y="578" width="258" height="27" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Total" x="577" y="599" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="700">Total</text>
-      <text id="£197.10" x="778.11" y="599" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="700">£197.10</text>
+      <text id="Total" x="577" y="600" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="700">Total</text>
+      <text id="£197.10" x="778.11" y="600" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="700">£197.10</text>
       <rect id="section 3" x="232" y="658.75" width="624" height="235" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="2 items" x="253" y="693.75" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">2 items</text>
+      <text id="2 items" x="253" y="694.75" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">2 items</text>
       <rect id="container 5" x="253" y="723.75" width="44" height="56" rx="12" fill="#f3f2ee" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Merino Crew Sweater" x="309" y="747.75" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Merino Crew Sweater</text>
+      <text id="Merino Crew Sweater" x="309" y="748.75" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Merino Crew Sweater</text>
       <text id="Stone · M" x="309" y="765.75" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Stone · M</text>
-      <text id="×1" x="730.58" y="755.75" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">×1</text>
-      <text id="£89.00" x="755" y="755.75" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">£89.00</text>
+      <text id="×1" x="730.58" y="756.75" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">×1</text>
+      <text id="£89.00" x="789.02" y="756.75" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">£89.00</text>
       <rect id="container 6" x="253" y="804.75" width="44" height="56" rx="12" fill="#f3f2ee" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Cotton Oxford Shirt" x="309" y="828.75" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Cotton Oxford Shirt</text>
+      <text id="Cotton Oxford Shirt" x="309" y="829.75" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Cotton Oxford Shirt</text>
       <text id="Sky · L" x="309" y="846.75" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Sky · L</text>
-      <text id="×2" x="727.3" y="836.75" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">×2</text>
-      <text id="£130.00" x="755" y="836.75" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">£130.00</text>
-      <rect id="link" x="382.69" y="925.75" width="145.52" height="42" rx="16" fill="#007f34" />
-      <text id="Track this order" x="382.69" y="939.75" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Track this order</text>
+      <text id="×2" x="727.3" y="837.75" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">×2</text>
+      <text id="£130.00" x="780.45" y="837.75" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">£130.00</text>
+      <rect id="link" x="382.69" y="925.75" width="145.52" height="42" rx="16" fill="#00782e" />
+      <text id="Track this order" x="402.69" y="950.75" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">Track this order</text>
       <rect id="link 2" x="540.2" y="925.75" width="165.09" height="42" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Continue shopping" x="540.2" y="939.75" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Continue shopping</text>
+      <text id="Continue shopping" x="561.2" y="951.75" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Continue shopping</text>
   </g>
   <text id="Order History label" x="64" y="1248.75" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Order History</text>
   <text id="order-history-list id" x="64" y="1262.75" font-family="ui-monospace, monospace" font-size="12" fill="#737373">order-history-list</text>
   <g id="Order History" transform="translate(64, 1280.75)">
     <rect id="container" x="0" y="0" width="1088" height="442" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Order history" x="1" y="19" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" font-weight="700" letter-spacing="-0.45">Order history</text>
-      <text id="Everything you have ordered, newest firs…" x="1" y="45" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Everything you have ordered, newest first.</text>
+      <text id="Order history" x="1" y="21" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" font-weight="700" letter-spacing="-0.45">Order history</text>
+      <text id="Everything you have ordered, newest firs…" x="1" y="46" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Everything you have ordered, newest first.</text>
       <rect id="link" x="1" y="71" width="1086" height="88" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="container 2" x="18" y="91" width="40" height="48" rx="12" fill="none" stroke="#fdfcf8" stroke-width="2" />
       <rect id="container 3" x="46" y="91" width="40" height="48" rx="12" fill="none" stroke="#fdfcf8" stroke-width="2" />
@@ -76,24 +97,48 @@
       <text id="8 Aug 2026" x="142.73" y="118" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">8 Aug 2026</text>
       <text id="Arriving Friday" x="102" y="138" fill="#e17100" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Arriving Friday</text>
       <rect id="container 4" x="843.5" y="103" width="98.5" height="24" rx="12" fill="rgba(255, 154, 0, 0.149)" />
-      <text id="On its way" x="843.5" y="115" fill="#e17100" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">On its way</text>
-      <text id="£197.10" x="958" y="119" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">£197.10</text>
+      <text id="On its way" x="873.5" y="119" fill="#e17100" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">On its way</text>
+      <g id="icon truck" transform="translate(853.5 108) scale(0.583 0.583)" fill="none" stroke="#e17100" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2" />
+        <path d="M15 18H9" />
+        <path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14" />
+        <circle cx="17" cy="18" r="2" />
+        <circle cx="7" cy="18" r="2" />
+      </g>
+      <text id="£197.10" x="982.27" y="120" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">£197.10</text>
+      <g id="icon chevron-right" transform="translate(1054 107) scale(0.667 0.667)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m9 18 6-6-6-6" />
+      </g>
       <rect id="link 2" x="1" y="171" width="1086" height="82" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="container 5" x="18" y="188" width="40" height="48" rx="12" fill="none" stroke="#fdfcf8" stroke-width="2" />
       <text id="ORD-4712-1184" x="74" y="207" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12" font-weight="500">ORD-4712-1184</text>
       <text id="Placed · 1 item" x="74" y="225" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Placed · 1 item</text>
       <text id="2 Jul 2026" x="114.73" y="225" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">2 Jul 2026</text>
       <rect id="container 6" x="848.83" y="200" width="93.17" height="24" rx="12" fill="rgba(0, 188, 128, 0.149)" />
-      <text id="Delivered" x="848.83" y="212" fill="#009966" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Delivered</text>
-      <text id="£89.00" x="958" y="216" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">£89.00</text>
+      <text id="Delivered" x="878.83" y="216" fill="#009966" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Delivered</text>
+      <g id="icon circle-check" transform="translate(858.828 205) scale(0.583 0.583)" fill="none" stroke="#009966" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10" />
+        <path d="m9 12 2 2 4-4" />
+      </g>
+      <text id="£89.00" x="991.02" y="217" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">£89.00</text>
+      <g id="icon chevron-right 2" transform="translate(1054 204) scale(0.667 0.667)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m9 18 6-6-6-6" />
+      </g>
       <rect id="link 3" x="1" y="265" width="1086" height="82" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="container 7" x="18" y="282" width="40" height="48" rx="12" fill="none" stroke="#fdfcf8" stroke-width="2" />
       <text id="ORD-4655-3027" x="74" y="301" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12" font-weight="500">ORD-4655-3027</text>
       <text id="Placed · 1 item 2" x="74" y="319" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Placed · 1 item</text>
       <text id="19 Jun 2026" x="114.73" y="319" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">19 Jun 2026</text>
       <rect id="container 8" x="847.27" y="294" width="94.73" height="24" rx="12" fill="#f3f2ee" />
-      <text id="Refunded" x="847.27" y="306" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Refunded</text>
-      <text id="£32.00" x="958" y="310" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">£32.00</text>
+      <text id="Refunded" x="877.27" y="310" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Refunded</text>
+      <g id="icon rotate-ccw" transform="translate(857.266 299) scale(0.583 0.583)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+        <path d="M3 3v5h5" />
+      </g>
+      <text id="£32.00" x="991.02" y="311" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">£32.00</text>
+      <g id="icon chevron-right 3" transform="translate(1054 298) scale(0.667 0.667)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m9 18 6-6-6-6" />
+      </g>
       <rect id="link 4" x="1" y="359" width="1086" height="82" rx="16" fill="rgba(255, 255, 255, 0.6)" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="container 9" x="18" y="376" width="40" height="48" rx="12" fill="none" stroke="#fdfcf8" stroke-width="2" />
       <rect id="container 10" x="46" y="376" width="40" height="48" rx="12" fill="none" stroke="#fdfcf8" stroke-width="2" />
@@ -102,52 +147,147 @@
       <text id="Placed · 3 items" x="130" y="413" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Placed · 3 items</text>
       <text id="30 May 2026" x="170.73" y="413" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">30 May 2026</text>
       <rect id="container 12" x="848.83" y="388" width="93.17" height="24" rx="12" fill="rgba(0, 188, 128, 0.149)" />
-      <text id="Delivered 2" x="848.83" y="400" fill="#009966" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Delivered</text>
-      <text id="£244.00" x="958" y="404" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">£244.00</text>
+      <text id="Delivered 2" x="878.83" y="404" fill="#009966" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Delivered</text>
+      <g id="icon circle-check 2" transform="translate(858.828 393) scale(0.583 0.583)" fill="none" stroke="#009966" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10" />
+        <path d="m9 12 2 2 4-4" />
+      </g>
+      <text id="£244.00" x="982.27" y="405" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="600">£244.00</text>
+      <g id="icon chevron-right 4" transform="translate(1054 392) scale(0.667 0.667)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m9 18 6-6-6-6" />
+      </g>
   </g>
   <text id="Customer Reviews label" x="64" y="1838.75" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Customer Reviews</text>
   <text id="review-list id" x="64" y="1852.75" font-family="ui-monospace, monospace" font-size="12" fill="#737373">review-list</text>
   <g id="Customer Reviews" transform="translate(64, 1870.75)">
     <rect id="container" x="0" y="0" width="1088" height="778.75" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="4 reviews" x="1" y="22" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" font-weight="700" letter-spacing="-0.45">4 reviews</text>
-      <text id="Sort" x="923.86" y="22" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Sort</text>
+      <text id="4 reviews" x="1" y="24" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" font-weight="700" letter-spacing="-0.45">4 reviews</text>
+      <text id="Sort" x="923.86" y="23" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Sort</text>
       <rect id="field" x="959" y="1" width="128" height="34" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Hannah T." x="91" y="90" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Hannah T.</text>
-      <text id="Verified purchase" x="165.97" y="90" fill="#009966" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Verified purchase</text>
+      <g id="icon star" transform="translate(1 79) scale(0.583 0.583)" fill="#ffb900" stroke="#ffb900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
+      <g id="icon star 2" transform="translate(17 79) scale(0.583 0.583)" fill="#ffb900" stroke="#ffb900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
+      <g id="icon star 3" transform="translate(33 79) scale(0.583 0.583)" fill="#ffb900" stroke="#ffb900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
+      <g id="icon star 4" transform="translate(49 79) scale(0.583 0.583)" fill="#ffb900" stroke="#ffb900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
+      <g id="icon star 5" transform="translate(65 79) scale(0.583 0.583)" fill="#ffb900" stroke="#ffb900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
+      <text id="Hannah T." x="91" y="91" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Hannah T.</text>
+      <text id="Verified purchase" x="183.97" y="90" fill="#009966" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Verified purchase</text>
+      <g id="icon badge-check" transform="translate(165.969 79) scale(0.583 0.583)" fill="none" stroke="#009966" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" />
+        <path d="m9 12 2 2 4-4" />
+      </g>
       <text id="28 July 2026" x="1012.97" y="90" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">28 July 2026</text>
-      <text id="Better than the price suggests" x="1" y="122" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="600">Better than the price suggests</text>
+      <text id="Better than the price suggests" x="1" y="123" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="600">Better than the price suggests</text>
       <text id="I bought this expecting to return it and…" x="1" y="152" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">I bought this expecting to return it and it has become the thing I reach for three days a week. The knit is dense without being heavy, and after four washes there is no</text>
       <text id="pilling at the cuffs where I would expec…" x="1" y="174.75" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">pilling at the cuffs where I would expect it first. Sizing is honest — I am usually a medium and the medium fits with room for a shirt underneath.</text>
       <text id="Read more" x="31.74" y="199.5" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="600" text-anchor="middle">Read more</text>
       <rect id="container 2" x="1" y="219.5" width="134.02" height="24" rx="12" fill="#f3f2ee" />
-      <text id="Bought M · usually M" x="1" y="231.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Bought M · usually M</text>
+      <text id="Bought M · usually M" x="11" y="235.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Bought M · usually M</text>
       <rect id="button" x="151.02" y="218.5" width="102.3" height="26" rx="13" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Helpful" x="202.16" y="230.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" text-anchor="middle">Helpful</text>
+      <text id="Helpful" x="201.96" y="235.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" text-anchor="middle">Helpful</text>
+      <g id="icon thumbs-up" transform="translate(162.016 224.5) scale(0.583 0.583)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M7 10v12" />
+        <path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z" />
+      </g>
       <text id="34" x="235.11" y="235.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" text-anchor="middle">34</text>
-      <text id="Sam K." x="91" y="307.5" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Sam K.</text>
+      <g id="icon star 6" transform="translate(1 296.5) scale(0.583 0.583)" fill="#ffb900" stroke="#ffb900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
+      <g id="icon star 7" transform="translate(17 296.5) scale(0.583 0.583)" fill="#ffb900" stroke="#ffb900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
+      <g id="icon star 8" transform="translate(33 296.5) scale(0.583 0.583)" fill="#ffb900" stroke="#ffb900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
+      <g id="icon star 9" transform="translate(49 296.5) scale(0.583 0.583)" fill="none" stroke="rgba(86, 89, 96, 0.302)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
+      <g id="icon star 10" transform="translate(65 296.5) scale(0.583 0.583)" fill="none" stroke="rgba(86, 89, 96, 0.302)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
+      <text id="Sam K." x="91" y="308.5" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Sam K.</text>
       <text id="11 June 2026" x="1014.7" y="307.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">11 June 2026</text>
-      <text id="Nice but the colour is off" x="1" y="339.5" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="600">Nice but the colour is off</text>
-      <text id="The stone reads much warmer in person th…" x="1" y="367.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">The stone reads much warmer in person than on screen — closer to a light camel. Lovely sweater, just not the colour I was picturing.</text>
+      <text id="Nice but the colour is off" x="1" y="340.5" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="600">Nice but the colour is off</text>
+      <text id="The stone reads much warmer in person th…" x="1" y="369.5" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">The stone reads much warmer in person than on screen — closer to a light camel. Lovely sweater, just not the colour I was picturing.</text>
       <rect id="button 2" x="1" y="388.25" width="102.3" height="26" rx="13" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Helpful 2" x="52.15" y="400.25" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" text-anchor="middle">Helpful</text>
+      <text id="Helpful 2" x="51.95" y="405.25" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" text-anchor="middle">Helpful</text>
+      <g id="icon thumbs-up 2" transform="translate(12 394.25) scale(0.583 0.583)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M7 10v12" />
+        <path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z" />
+      </g>
       <text id="21" x="85.09" y="405.25" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" text-anchor="middle">21</text>
-      <text id="Devin R." x="91" y="477.25" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Devin R.</text>
-      <text id="Verified purchase 2" x="156.22" y="477.25" fill="#009966" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Verified purchase</text>
+      <g id="icon star 11" transform="translate(1 466.25) scale(0.583 0.583)" fill="#ffb900" stroke="#ffb900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
+      <g id="icon star 12" transform="translate(17 466.25) scale(0.583 0.583)" fill="#ffb900" stroke="#ffb900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
+      <g id="icon star 13" transform="translate(33 466.25) scale(0.583 0.583)" fill="#ffb900" stroke="#ffb900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
+      <g id="icon star 14" transform="translate(49 466.25) scale(0.583 0.583)" fill="#ffb900" stroke="#ffb900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
+      <g id="icon star 15" transform="translate(65 466.25) scale(0.583 0.583)" fill="none" stroke="rgba(86, 89, 96, 0.302)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
+      <text id="Devin R." x="91" y="478.25" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Devin R.</text>
+      <text id="Verified purchase 2" x="174.22" y="477.25" fill="#009966" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Verified purchase</text>
+      <g id="icon badge-check 2" transform="translate(156.219 466.25) scale(0.583 0.583)" fill="none" stroke="#009966" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" />
+        <path d="m9 12 2 2 4-4" />
+      </g>
       <text id="14 July 2026" x="1015.89" y="477.25" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">14 July 2026</text>
-      <text id="Great, but runs slightly long" x="1" y="509.25" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="600">Great, but runs slightly long</text>
-      <text id="No complaints about the material at all.…" x="1" y="537.25" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">No complaints about the material at all. The body is about an inch longer than I expected, which is fine untucked but worth knowing if you are between sizes.</text>
+      <text id="Great, but runs slightly long" x="1" y="510.25" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="600">Great, but runs slightly long</text>
+      <text id="No complaints about the material at all.…" x="1" y="539.25" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">No complaints about the material at all. The body is about an inch longer than I expected, which is fine untucked but worth knowing if you are between sizes.</text>
       <rect id="container 3" x="1" y="559" width="126.89" height="24" rx="12" fill="#f3f2ee" />
-      <text id="Bought L · usually L" x="1" y="571" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Bought L · usually L</text>
+      <text id="Bought L · usually L" x="11" y="575" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Bought L · usually L</text>
       <rect id="button 3" x="143.89" y="558" width="102.3" height="26" rx="13" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Helpful 3" x="195.04" y="570" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" text-anchor="middle">Helpful</text>
+      <text id="Helpful 3" x="194.84" y="575" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" text-anchor="middle">Helpful</text>
+      <g id="icon thumbs-up 3" transform="translate(154.891 564) scale(0.583 0.583)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M7 10v12" />
+        <path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z" />
+      </g>
       <text id="12" x="227.98" y="575" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" text-anchor="middle">12</text>
-      <text id="Priya M." x="91" y="647" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Priya M.</text>
-      <text id="Verified purchase 3" x="154.81" y="647" fill="#009966" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Verified purchase</text>
+      <g id="icon star 16" transform="translate(1 636) scale(0.583 0.583)" fill="#ffb900" stroke="#ffb900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
+      <g id="icon star 17" transform="translate(17 636) scale(0.583 0.583)" fill="#ffb900" stroke="#ffb900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
+      <g id="icon star 18" transform="translate(33 636) scale(0.583 0.583)" fill="#ffb900" stroke="#ffb900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
+      <g id="icon star 19" transform="translate(49 636) scale(0.583 0.583)" fill="#ffb900" stroke="#ffb900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
+      <g id="icon star 20" transform="translate(65 636) scale(0.583 0.583)" fill="#ffb900" stroke="#ffb900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
+      <text id="Priya M." x="91" y="648" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Priya M.</text>
+      <text id="Verified purchase 3" x="172.81" y="647" fill="#009966" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Verified purchase</text>
+      <g id="icon badge-check 3" transform="translate(154.813 636) scale(0.583 0.583)" fill="none" stroke="#009966" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" />
+        <path d="m9 12 2 2 4-4" />
+      </g>
       <text id="30 June 2026" x="1008.13" y="647" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">30 June 2026</text>
-      <text id="Third one I have bought" x="1" y="679" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="600">Third one I have bought</text>
-      <text id="Two in stone, one in navy. They hold the…" x="1" y="707" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Two in stone, one in navy. They hold their shape better than anything else I own at twice the price.</text>
+      <text id="Third one I have bought" x="1" y="680" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16" font-weight="600">Third one I have bought</text>
+      <text id="Two in stone, one in navy. They hold the…" x="1" y="709" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Two in stone, one in navy. They hold their shape better than anything else I own at twice the price.</text>
       <rect id="button 4" x="1" y="727.75" width="95.09" height="26" rx="13" fill="none" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
-      <text id="Helpful 4" x="48.55" y="739.75" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" text-anchor="middle">Helpful</text>
+      <text id="Helpful 4" x="51.95" y="744.75" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" text-anchor="middle">Helpful</text>
+      <g id="icon thumbs-up 4" transform="translate(12 733.75) scale(0.583 0.583)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M7 10v12" />
+        <path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z" />
+      </g>
       <text id="8" x="81.49" y="744.75" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" text-anchor="middle">8</text>
   </g>
   <text id="Order Tracking Timeline label" x="64" y="2765.5" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Order Tracking Timeline</text>
@@ -156,27 +296,63 @@
     <rect id="container" x="0" y="0" width="1088" height="657" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="container 2" x="240" y="65" width="608" height="527" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
       <text id="Order NW-84213" x="265" y="98" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="600" letter-spacing="0.6">Order NW-84213</text>
-      <text id="Arriving Thursday 4 – Friday 5 September" x="265" y="124" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" font-weight="600">Arriving Thursday 4 – Friday 5 September</text>
-      <text id="Evri" x="265" y="161" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Evri</text>
+      <text id="Arriving Thursday 4 – Friday 5 September" x="265" y="126" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" font-weight="600">Arriving Thursday 4 – Friday 5 September</text>
+      <text id="Evri" x="287" y="162" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Evri</text>
+      <g id="icon map-pin" transform="translate(265 149) scale(0.667 0.667)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
+        <circle cx="12" cy="10" r="3" />
+      </g>
       <text id="H00 4471 9928 3310" x="326.64" y="161" fill="#080c0f" font-family="&quot;JetBrains Mono&quot;, &quot;JetBrains Mono Fallback&quot;" font-size="12">H00 4471 9928 3310</text>
-      <rect id="container 3" x="265" y="209" width="28" height="28" rx="14" fill="rgba(0, 128, 54, 0.149)" />
-      <text id="Order placed" x="309" y="225" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Order placed</text>
+      <g id="icon copy" transform="translate(466.25 150) scale(0.583 0.583)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect rx="2" ry="2" x="8" y="8" width="14" height="14" />
+        <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+      </g>
+      <rect id="container 3" x="265" y="209" width="28" height="28" rx="14" fill="rgba(0, 121, 47, 0.149)" />
+      <g id="icon check" transform="translate(272 216) scale(0.583 0.583)" fill="none" stroke="#00782e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 6 9 17l-5-5" />
+      </g>
+      <text id="Order placed" x="309" y="226" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Order placed</text>
       <text id="Online · 29 Aug, 14:02" x="309" y="245" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Online · 29 Aug, 14:02</text>
-      <rect id="container 4" x="265" y="273" width="28" height="28" rx="14" fill="rgba(0, 128, 54, 0.149)" />
-      <text id="Packed" x="309" y="289" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Packed</text>
+      <rect id="container 4" x="265" y="273" width="28" height="28" rx="14" fill="rgba(0, 121, 47, 0.149)" />
+      <g id="icon check 2" transform="translate(272 280) scale(0.583 0.583)" fill="none" stroke="#00782e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 6 9 17l-5-5" />
+      </g>
+      <text id="Packed" x="309" y="290" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Packed</text>
       <text id="Peterborough fulfilment centre · 30 Aug,…" x="309" y="309" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Peterborough fulfilment centre · 30 Aug, 08:41</text>
-      <rect id="container 5" x="265" y="337" width="28" height="28" rx="14" fill="rgba(0, 128, 54, 0.149)" />
-      <text id="Collected by carrier" x="309" y="353" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Collected by carrier</text>
+      <rect id="container 5" x="265" y="337" width="28" height="28" rx="14" fill="rgba(0, 121, 47, 0.149)" />
+      <g id="icon check 3" transform="translate(272 344) scale(0.583 0.583)" fill="none" stroke="#00782e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 6 9 17l-5-5" />
+      </g>
+      <text id="Collected by carrier" x="309" y="354" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Collected by carrier</text>
       <text id="Peterborough · 30 Aug, 17:15" x="309" y="373" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Peterborough · 30 Aug, 17:15</text>
-      <rect id="container 6" x="265" y="401" width="28" height="28" rx="14" fill="#007f34" />
-      <text id="In transit" x="309" y="417" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">In transit</text>
+      <rect id="container 6" x="265" y="401" width="28" height="28" rx="14" fill="#00782e" />
+      <g id="icon truck" transform="translate(272 408) scale(0.583 0.583)" fill="none" stroke="#fcfcfc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2" />
+        <path d="M15 18H9" />
+        <path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14" />
+        <circle cx="17" cy="18" r="2" />
+        <circle cx="7" cy="18" r="2" />
+      </g>
+      <text id="In transit" x="309" y="418" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">In transit</text>
       <text id="Warrington hub · 31 Aug, 03:22" x="309" y="437" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Warrington hub · 31 Aug, 03:22</text>
-      <text id="Scanned at the sorting hub. The next sca…" x="309" y="461" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Scanned at the sorting hub. The next scan is usually the local depot.</text>
+      <text id="Scanned at the sorting hub. The next sca…" x="309" y="462" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Scanned at the sorting hub. The next scan is usually the local depot.</text>
       <rect id="container 7" x="265" y="491" width="28" height="28" rx="14" fill="#f3f2ee" />
-      <text id="Out for delivery" x="309" y="507" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Out for delivery</text>
+      <g id="icon package" transform="translate(272 498) scale(0.583 0.583)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z" />
+        <path d="M12 22V12" />
+        <polyline points="3.29 7 12 12 20.71 7" />
+        <path d="m7.5 4.27 9 5.15" />
+      </g>
+      <text id="Out for delivery" x="309" y="508" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Out for delivery</text>
       <text id="— not yet" x="410.66" y="508" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">— not yet</text>
       <rect id="container 8" x="265" y="543" width="28" height="28" rx="14" fill="#f3f2ee" />
-      <text id="Delivered" x="309" y="559" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Delivered</text>
+      <g id="icon package 2" transform="translate(272 550) scale(0.583 0.583)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z" />
+        <path d="M12 22V12" />
+        <polyline points="3.29 7 12 12 20.71 7" />
+        <path d="m7.5 4.27 9 5.15" />
+      </g>
+      <text id="Delivered" x="309" y="560" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Delivered</text>
       <text id="— not yet 2" x="371.03" y="560" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">— not yet</text>
   </g>
   <text id="Write a Review label" x="64" y="3570.5" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Write a Review</text>
@@ -184,14 +360,29 @@
   <g id="Write a Review" transform="translate(64, 3602.5)">
     <rect id="container" x="0" y="0" width="1088" height="398" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="container 2" x="288" y="65" width="512" height="268" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
-      <text id="Review your Aeropress Go" x="321" y="116" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" font-weight="600">Review your Aeropress Go</text>
+      <text id="Review your Aeropress Go" x="321" y="118" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="18" font-weight="600">Review your Aeropress Go</text>
       <text id="This will be public, shown as" x="321" y="147" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">This will be public, shown as</text>
       <text id=", marked as a verified" x="586.56" y="147" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">, marked as a verified</text>
       <text id="purchase" x="321" y="167" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">purchase</text>
       <text id=". You can edit or delete it later." x="380.11" y="167" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">. You can edit or delete it later.</text>
       <text id="Priya Raman" x="504.5" y="147" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Priya Raman</text>
-      <text id="How many stars?" x="321" y="210" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">How many stars?</text>
-      <text id="Pick a rating and the rest of the form a…" x="321" y="294" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Pick a rating and the rest of the form appears.</text>
+      <text id="How many stars?" x="321" y="211" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">How many stars?</text>
+      <g id="icon star" transform="translate(325 228) scale(1.167 1.167)" fill="none" stroke="rgba(86, 92, 96, 0.502)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
+      <g id="icon star 2" transform="translate(365 228) scale(1.167 1.167)" fill="none" stroke="rgba(86, 92, 96, 0.502)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
+      <g id="icon star 3" transform="translate(405 228) scale(1.167 1.167)" fill="none" stroke="rgba(86, 92, 96, 0.502)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
+      <g id="icon star 4" transform="translate(445 228) scale(1.167 1.167)" fill="none" stroke="rgba(86, 92, 96, 0.502)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
+      <g id="icon star 5" transform="translate(485 228) scale(1.167 1.167)" fill="none" stroke="rgba(86, 92, 96, 0.502)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+      </g>
+      <text id="Pick a rating and the rest of the form a…" x="321" y="295" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Pick a rating and the rest of the form appears.</text>
   </g>
   <text id="Order Lookup Form label" x="64" y="4116.5" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Order Lookup Form</text>
   <text id="order-lookup-form id" x="64" y="4130.5" font-family="ui-monospace, monospace" font-size="12" fill="#737373">order-lookup-form</text>
@@ -199,48 +390,48 @@
     <rect id="container" x="0" y="0" width="1088" height="604" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="section" x="1" y="1" width="1086" height="602" fill="#fdfcf8" />
       <rect id="container 2" x="320" y="65" width="448" height="474" rx="16" fill="#ffffff" stroke="#dbdee1" stroke-width="1" />
-      <text id="Find your order" x="353" y="118" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="20" font-weight="600" letter-spacing="-0.5">Find your order</text>
+      <text id="Find your order" x="353" y="119" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="20" font-weight="600" letter-spacing="-0.5">Find your order</text>
       <text id="Guest checkout is the majority of orders…" x="353" y="149" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Guest checkout is the majority of orders on most</text>
       <text id="storefronts, and the usual tracking page…" x="353" y="169" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">storefronts, and the usual tracking page asks those buyers</text>
       <text id="to sign in to an account they were never…" x="353" y="189" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">to sign in to an account they were never offered.</text>
-      <text id="Order number" x="353" y="232" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Order number</text>
+      <text id="Order number" x="353" y="233" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Order number</text>
       <rect id="field" x="353" y="244" width="382" height="38" rx="10" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
       <text id="On the confirmation email, top right. St…" x="353" y="298" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">On the confirmation email, top right. Starts with a #.</text>
-      <text id="Email used at checkout" x="353" y="332" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Email used at checkout</text>
+      <text id="Email used at checkout" x="353" y="333" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Email used at checkout</text>
       <rect id="field 2" x="353" y="344" width="382" height="38" rx="10" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
       <text id="Both have to match. It is what stops an …" x="353" y="398" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">Both have to match. It is what stops an order number being a lookup</text>
       <text id="key for anyone." x="353" y="414" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12">key for anyone.</text>
-      <rect id="button" x="353" y="434" width="382" height="36" rx="10" fill="#007f34" />
-      <text id="Find it" x="544" y="448" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Find it</text>
+      <rect id="button" x="353" y="434" width="382" height="36" rx="10" fill="#00782e" />
+      <text id="Find it" x="543.99" y="457" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Find it</text>
   </g>
   <text id="Review Distribution Band label" x="64" y="4868.5" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Review Distribution Band</text>
   <text id="review-distribution-band id" x="64" y="4882.5" font-family="ui-monospace, monospace" font-size="12" fill="#737373">review-distribution-band</text>
   <g id="Review Distribution Band" transform="translate(64, 4900.5)">
     <rect id="container" x="0" y="0" width="1088" height="488" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
       <rect id="section" x="1" y="1" width="1086" height="486" fill="#fdfcf8" />
-      <text id="Reviews" x="32" y="95" fill="#007f34" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Reviews</text>
-      <text id="4.6, and the numbers behind it" x="32" y="145" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="36" font-weight="600" letter-spacing="-0.9">4.6, and the numbers behind it</text>
+      <text id="Reviews" x="32" y="96" fill="#00782e" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Reviews</text>
+      <text id="4.6, and the numbers behind it" x="32" y="141" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="36" font-weight="600" letter-spacing="-0.9">4.6, and the numbers behind it</text>
       <text id="An average with nothing beside it is unr…" x="32" y="178" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">An average with nothing beside it is unreadable: 4.6 from nine reviews and 4.6 from nine</text>
       <text id="hundred are different facts. These are w…" x="32" y="202" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">hundred are different facts. These are what make the first number mean something.</text>
       <rect id="container 2" x="32" y="249" width="1024" height="158" rx="16" fill="#dbdee1" stroke="#dbdee1" stroke-width="1" />
       <rect id="container 3" x="33" y="250" width="254.75" height="156" fill="#ffffff" />
-      <text id="Average" x="57" y="288" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Average</text>
-      <text id="4.6" x="57" y="332" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="30" font-weight="600" letter-spacing="-0.75">4.6</text>
+      <text id="Average" x="57" y="289" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Average</text>
+      <text id="4.6" x="57" y="330" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="30" font-weight="600" letter-spacing="-0.75">4.6</text>
       <text id="Across every review, including" x="57" y="357" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Across every review, including</text>
       <text id="the ones left after a return." x="57" y="377" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">the ones left after a return.</text>
       <rect id="container 4" x="288.75" y="250" width="254.75" height="156" fill="#ffffff" />
-      <text id="Reviews 2" x="312.75" y="288" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Reviews</text>
-      <text id="1,284" x="312.75" y="332" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="30" font-weight="600" letter-spacing="-0.75">1,284</text>
+      <text id="Reviews 2" x="312.75" y="289" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Reviews</text>
+      <text id="1,284" x="312.75" y="330" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="30" font-weight="600" letter-spacing="-0.75">1,284</text>
       <text id="Unfiltered. Nothing is hidden for" x="312.75" y="357" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Unfiltered. Nothing is hidden for</text>
       <text id="being low." x="312.75" y="377" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">being low.</text>
       <rect id="container 5" x="544.5" y="250" width="254.75" height="156" fill="#ffffff" />
-      <text id="Verified purchase" x="568.5" y="288" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Verified purchase</text>
-      <text id="91%" x="568.5" y="332" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="30" font-weight="600" letter-spacing="-0.75">91%</text>
+      <text id="Verified purchase" x="568.5" y="289" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Verified purchase</text>
+      <text id="91%" x="568.5" y="330" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="30" font-weight="600" letter-spacing="-0.75">91%</text>
       <text id="Matched to an order. The other" x="568.5" y="357" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Matched to an order. The other</text>
       <text id="9% are labelled as such." x="568.5" y="377" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">9% are labelled as such.</text>
       <rect id="container 6" x="800.25" y="250" width="254.75" height="156" fill="#ffffff" />
-      <text id="One and two star" x="824.25" y="288" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">One and two star</text>
-      <text id="6%" x="824.25" y="332" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="30" font-weight="600" letter-spacing="-0.75">6%</text>
+      <text id="One and two star" x="824.25" y="289" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">One and two star</text>
+      <text id="6%" x="824.25" y="330" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="30" font-weight="600" letter-spacing="-0.75">6%</text>
       <text id="Shown, and sorted to the top" x="824.25" y="357" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Shown, and sorted to the top</text>
       <text id="when you filter by lowest." x="824.25" y="377" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">when you filter by lowest.</text>
   </g>

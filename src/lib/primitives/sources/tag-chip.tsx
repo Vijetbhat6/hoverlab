@@ -158,7 +158,7 @@ export function TagInput({
           }
         }}
         onBlur={() => add(draft)}
-        className="h-6 min-w-[8rem] flex-1 bg-transparent px-1 text-sm text-foreground outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed"
+        className="h-6 min-w-[8rem] flex-1 bg-transparent px-1 text-sm text-foreground outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed border border-transparent"
       />
     </div>
   )

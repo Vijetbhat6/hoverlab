@@ -191,7 +191,7 @@ export function ActivityHeatmap({
               <span
                 key={day.date}
                 title={`${day.count} ${noun}${day.count === 1 ? '' : 's'} on ${day.date}`}
-                className={`h-3 w-3 rounded-[2px] ${LEVEL_CLASSES[level(day.count)]}`}
+                className={`h-3 w-3 rounded-[2px] border border-transparent ${LEVEL_CLASSES[level(day.count)]}`}
               />
             ))}
           </div>
@@ -200,7 +200,7 @@ export function ActivityHeatmap({
         <div className="mt-4 flex items-center justify-end gap-2 text-xs text-muted-foreground">
           <span>Less</span>
           {LEVEL_CLASSES.map((cls, i) => (
-            <span key={cls} className={`h-3 w-3 rounded-[2px] ${cls}`}>
+            <span key={cls} className={`h-3 w-3 rounded-[2px] border border-transparent ${cls}`}>
               <span className="sr-only">Level {i}</span>
             </span>
           ))}

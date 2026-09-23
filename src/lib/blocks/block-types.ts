@@ -37,9 +37,24 @@ export type BlockCategory =
   | 'Footers'
   | 'Content & Blog'
   | 'Contact & Forms'
+  /* HTML email — nested tables and inline styles, not flexbox, because it
+   * is read by a rendering engine (Outlook via Word, Gmail's stripped
+   * <style>) that the rest of this catalog never has to answer to. Its own
+   * category rather than a corner of Content & Blog, because the markup
+   * discipline and the CAN-SPAM/GDPR footer obligations are unique to this
+   * one artifact shape and would be a surprising exception buried in a
+   * category about web pages. /tools/email covers the four TRANSACTIONAL
+   * sends (welcome, verify, reset, receipt); these are the ones sent to a
+   * whole list on purpose. */
+  | 'Email Templates'
   /* -- Product: what a visitor needs to build an app ---------------- */
   | 'Authentication'
   | 'Dashboards'
+  /* App navigation as its own surface: grouped, collapsible, nested,
+   * resizable. Kept apart from Dashboards because the shell around a sidebar
+   * is the easy part; collapse state, roving focus in a tree and a drag
+   * handle a keyboard can move are problems a dashboard never has. */
+  | 'Sidebars'
   | 'Data Tables'
   /* The create/read/update/delete family, in all three surfaces. Its own
    * category rather than a corner of Data Tables or Modals & Drawers,
@@ -101,8 +116,10 @@ export const BLOCK_CATEGORIES: BlockCategory[] = [
   'Footers',
   'Content & Blog',
   'Contact & Forms',
+  'Email Templates',
   'Authentication',
   'Dashboards',
+  'Sidebars',
   'Data Tables',
   'CRUD',
   'Charts & Metrics',
@@ -155,8 +172,10 @@ export const GROUP_OF: Record<BlockCategory, BlockGroup> = {
   Footers: 'Marketing',
   'Content & Blog': 'Marketing',
   'Contact & Forms': 'Marketing',
+  'Email Templates': 'Marketing',
   Authentication: 'Product',
   Dashboards: 'Product',
+  Sidebars: 'Product',
   'Data Tables': 'Product',
   CRUD: 'Product',
   'Charts & Metrics': 'Product',

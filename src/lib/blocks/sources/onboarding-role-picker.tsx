@@ -118,7 +118,7 @@ export function OnboardingRolePicker({
         */}
         <fieldset className="mt-6">
           <legend className="sr-only">Choose the description that fits you best</legend>
-          <div className="grid gap-3 sm:grid-cols-2">
+          <div className="grid gap-3 md:grid-cols-2">
             {roles.map((r) => {
               const Icon = r.icon
               const selected = role === r.id
@@ -144,9 +144,9 @@ export function OnboardingRolePicker({
                     */
                     className="mt-0.5 h-4 w-4 shrink-0 border-field accent-primary focus:outline-none"
                   />
-                  <span className="min-w-0">
+                  <span className="min-w-0 flex-1">
                     <span className="flex items-center gap-1.5 text-sm font-medium text-foreground">
-                      <Icon aria-hidden className="h-4 w-4 text-muted-foreground" />
+                      <Icon aria-hidden className="h-4 w-4 shrink-0 text-muted-foreground" />
                       {r.label}
                     </span>
                     {/* The consequence, not a restatement of the label. */}

@@ -80,7 +80,7 @@ export function RoadmapColumns({
             <div key={col.status}>
               <div className="mb-4 flex items-center gap-2">
                 <span className={col.accent}>{col.icon}</span>
-                <h3 className="font-semibold tracking-tight">{col.label}</h3>
+                <h3 data-stress-ignore className="font-semibold tracking-tight">{col.label}</h3>
                 <span className="ms-auto rounded-full bg-muted px-2 py-0.5 text-xs font-medium text-muted-foreground">
                   {columnItems.length}
                 </span>
@@ -93,9 +93,9 @@ export function RoadmapColumns({
                     className="rounded-xl border border-border/60 bg-card/80 p-4 backdrop-blur transition-all hover:-translate-y-0.5 hover:shadow-md"
                   >
                     <div className="flex items-start justify-between gap-2">
-                      <span className="font-medium leading-snug">{item.title}</span>
+                      <span className="min-w-0 break-words font-medium leading-snug">{item.title}</span>
                       {item.eta ? (
-                        <span className="shrink-0 rounded-md bg-muted px-1.5 py-0.5 text-[0.65rem] font-semibold text-muted-foreground">
+                        <span className="max-w-[6rem] shrink-0 truncate rounded-md bg-muted px-1.5 py-0.5 text-[0.65rem] font-semibold text-muted-foreground">
                           {item.eta}
                         </span>
                       ) : null}

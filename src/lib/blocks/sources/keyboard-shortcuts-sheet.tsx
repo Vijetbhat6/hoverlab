@@ -204,9 +204,14 @@ export function KeyboardShortcutsSheet({
           <div className="grid gap-6 sm:grid-cols-2">
             {filtered.map((group) => (
               <section key={group.title}>
-                <h3 className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-                  {group.title}
-                </h3>
+                {group.title ? (
+                  <h3
+                    data-stress-ignore
+                    className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground"
+                  >
+                    {group.title}
+                  </h3>
+                ) : null}
                 <dl className="space-y-1">
                   {group.shortcuts.map((shortcut) => (
                     <div

@@ -142,20 +142,20 @@ export function TestimonialRatings({
             const share = total === 0 ? 0 : (band.count / total) * 100
             return (
               <div key={band.stars} className="flex items-center gap-4">
-                <dt className="w-16 shrink-0 text-sm text-muted-foreground">
+                <dt className="w-16 shrink-0 break-words text-sm text-muted-foreground">
                   {band.stars} star{band.stars === 1 ? '' : 's'}
                 </dt>
-                <dd className="flex flex-1 items-center gap-4">
+                <dd className="flex min-w-0 flex-1 items-center gap-4">
                   <span
                     aria-hidden
-                    className="h-2 flex-1 overflow-hidden rounded-full bg-muted"
+                    className="h-2 min-w-0 flex-1 overflow-hidden rounded-full bg-muted"
                   >
                     <span
-                      className="block h-full rounded-full bg-primary"
+                      className="block h-full rounded-full bg-primary border border-transparent"
                       style={{ width: `${share}%` }}
                     />
                   </span>
-                  <span className="w-14 shrink-0 text-end text-sm tabular-nums text-muted-foreground">
+                  <span className="min-w-14 shrink-0 text-end text-sm tabular-nums text-muted-foreground">
                     {band.count.toLocaleString()}
                   </span>
                 </dd>

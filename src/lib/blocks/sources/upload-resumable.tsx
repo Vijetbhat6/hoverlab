@@ -167,10 +167,10 @@ export function UploadResumable({
           aria-valuenow={Math.floor(pct)}
           /* Announced in the unit that means something, not a bare number. */
           aria-valuetext={`${size(sent)} of ${size(totalBytes)}, ${Math.floor(pct)} per cent`}
-          className="mt-4 h-2 w-full overflow-hidden rounded-full bg-muted"
+          className="mt-4 h-2 w-full overflow-hidden rounded-full border border-transparent bg-muted"
         >
           <div
-            className={`h-full rounded-full transition-[width] duration-500 ${
+            className={`h-full rounded-full border border-transparent transition-[width] duration-500 ${
               state === 'retrying' ? 'bg-amber-500' : 'bg-primary'
             }`}
             style={{ width: `${pct}%` }}

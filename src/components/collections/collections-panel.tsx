@@ -31,6 +31,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { useCollections } from '@/hooks/use-collections'
+import { ShareControl } from '@/components/collections/share-control'
 import { COLLECTION_LIMITS, type Collection } from '@/lib/collections'
 import { artifactHref, LEVEL_LABEL, levelOf } from '@/lib/artifact-types'
 import { cn } from '@/lib/utils'
@@ -237,6 +238,10 @@ function CollectionCard({
           </div>
         </div>
       </CardHeader>
+
+      {/* Public share link. Collapsed and inert until pressed — see
+          share-control.tsx for why it fetches nothing on load. */}
+      <ShareControl collectionId={collection.id} collectionName={collection.name} />
 
       {collection.items.length > 0 ? (
         <CardContent>

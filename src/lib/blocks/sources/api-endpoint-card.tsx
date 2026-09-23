@@ -167,7 +167,9 @@ export function ApiEndpointCard({
 
       <p className="mt-2 text-sm text-muted-foreground">{description}</p>
 
-      <h3 className="mt-6 text-sm font-semibold tracking-tight">Parameters</h3>
+      <h3 data-stress-ignore className="mt-6 text-sm font-semibold tracking-tight">
+        Parameters
+      </h3>
       <div className="mt-2 overflow-x-auto rounded-xl border border-border/60">
         <table className="w-full text-start text-sm">
           <thead>
@@ -210,7 +212,7 @@ export function ApiEndpointCard({
       <div className="mt-6 grid gap-4 lg:grid-cols-2">
         <div className="min-w-0 overflow-hidden rounded-xl border border-border/60 bg-zinc-950">
           <div className="flex items-center border-b border-white/10 px-4 py-2.5">
-            <span className="font-mono text-xs text-white/40">Request</span>
+            <span className="font-mono text-xs text-white/60">Request</span>
           </div>
           <pre className="overflow-x-auto p-4 text-xs leading-relaxed">
             <code className="font-mono text-zinc-300">{requestExample}</code>
@@ -219,7 +221,7 @@ export function ApiEndpointCard({
 
         <div className="min-w-0 overflow-hidden rounded-xl border border-border/60 bg-zinc-950">
           <div className="flex items-center justify-between border-b border-white/10 px-4 py-2.5">
-            <span className="font-mono text-xs text-white/40">Response</span>
+            <span className="font-mono text-xs text-white/60">Response</span>
             <span className="rounded-md bg-emerald-500/15 px-1.5 py-0.5 font-mono text-xs font-medium text-emerald-400">
               {responseStatus}
             </span>

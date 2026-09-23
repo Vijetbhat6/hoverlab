@@ -62,19 +62,55 @@
  *
  *   npm run dev
  *   npm run build:figma            # BASE=http://localhost:3007 to override
+ *   npm run build:figma-primitives # the controls, into public/figma/primitives/
+ *
+ * The same crawler serves both, selected by `--primitives`: a primitive's detail
+ * page carries the same traceable frame and the same button, so a second script
+ * would have been a second copy of every fix in here.
  */
 
 import { mkdirSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
-import { chromium } from 'playwright'
+import { chromium, type Locator } from 'playwright'
 
 import { BLOCK_INDEX } from '../src/lib/blocks/block-index.ts'
 import { blockCategorySlug, type BlockCategory } from '../src/lib/blocks/block-types.ts'
+import { PRIMITIVE_INDEX } from '../src/lib/primitives/primitive-index.ts'
+import { primitiveCategorySlug, type PrimitiveCategory } from '../src/lib/primitives/primitive-types.ts'
 
 const BASE = process.env.BASE ?? 'http://localhost:3007'
 /** Trace only the first N blocks. For checking the harness, not for shipping. */
 const LIMIT = process.env.LIMIT ? Number(process.env.LIMIT) : Infinity
-const OUT_DIR = join(process.cwd(), 'public', 'figma')
+/** What is being crawled. Everything that differs between the two kits is here. */
+const PRIMITIVES = process.argv.includes('--primitives')
+const KIND: {
+  path: string
+  prefix: string
+  noun: string
+  home: string
+  dir: string[]
+  index: readonly { id: string; name: string; category: string }[]
+  slugOf: (category: string) => string
+} = PRIMITIVES
+  ? {
+      path: 'primitive',
+      prefix: 'primitives',
+      noun: 'controls',
+      home: 'https://hoverlab.dev/primitives',
+      dir: ['public', 'figma', 'primitives'],
+      index: PRIMITIVE_INDEX,
+      slugOf: (c) => primitiveCategorySlug(c as PrimitiveCategory),
+    }
+  : {
+      path: 'block',
+      prefix: 'blocks',
+      noun: 'sections',
+      home: 'https://hoverlab.dev/blocks',
+      dir: ['public', 'figma'],
+      index: BLOCK_INDEX,
+      slugOf: (c) => blockCategorySlug(c as BlockCategory),
+    }
+const OUT_DIR = join(process.cwd(), ...KIND.dir)
 
 /** Gap between stacked frames, and the room left for each frame's label. */
 const GAP = 96
@@ -85,7 +121,7 @@ const MARGIN = 64
 interface Traced {
   id: string
   name: string
-  category: BlockCategory
+  category: string
   width: number
   height: number
   /** The inner layers, with the wrapping <svg> removed. */
@@ -128,7 +164,7 @@ function indent(body: string): string {
  * direction comfortably and because the order then matches `/blocks`, which
  * is the page the designer was just looking at.
  */
-function stitch(category: BlockCategory, frames: Traced[]): string {
+function stitch(category: string, frames: Traced[]): string {
   const width = Math.max(...frames.map((f) => f.width)) + MARGIN * 2
   let y = MARGIN
 
@@ -165,14 +201,14 @@ function stitch(category: BlockCategory, frames: Traced[]): string {
       `height="${Math.round(height)}" viewBox="0 0 ${Math.round(width)} ${Math.round(height)}" ` +
       `id="Hoverlab — ${escapeXml(category)}">`,
     `  <!--`,
-    `    Hoverlab — ${category}. ${frames.length} sections, traced from the`,
+    `    Hoverlab — ${category}. ${frames.length} ${KIND.noun}, traced from the`,
     `    rendered catalog. Drag this file onto a Figma canvas.`,
     ``,
     `    These are frames, not components: named, editable layers with real`,
     `    geometry, colour and type. There are no variants, no auto-layout,`,
     `    and no hover or motion — none of those exist in a static frame.`,
     ``,
-    `    Every section here is free to copy as code at https://hoverlab.dev/blocks`,
+    `    Every one of these is free to copy as code at ${KIND.home}`,
     `  -->`,
     `  <rect id="Background" x="0" y="0" width="${Math.round(width)}" height="${Math.round(height)}" fill="#ffffff" />`,
     ...parts,
@@ -213,6 +249,20 @@ const traced: Traced[] = []
 const failed: string[] = []
 
 /**
+ * Activate the Figma button WITHOUT a real pointer press.
+ *
+ * A mouse click fires `pointerdown` before `click`, and every popover in the
+ * catalog (menus, switchers, tooltips) closes on a press outside itself.
+ * Pressing "Copy for Figma" IS outside them, so a real click closed the open
+ * menu it was about to trace, and the kit shipped a dropdown frame with no
+ * menu in it. `element.click()` dispatches only the click, which is all the
+ * button's own handler listens for, and leaves the page as it was.
+ */
+async function press(button: Locator): Promise<void> {
+  await button.evaluate((el) => (el as HTMLElement).click())
+}
+
+/**
  * Trace one block, or throw.
  *
  * NOT `waitUntil: 'networkidle'`, which is what the first version used and
@@ -221,8 +271,8 @@ const failed: string[] = []
  * navigation burns its full timeout before failing. The real signal is the
  * thing being traced: the preview element, and the button that traces it.
  */
-async function trace(block: (typeof BLOCK_INDEX)[number]): Promise<Traced> {
-  await page.goto(`${BASE}/block/${block.id}`, {
+async function trace(block: { id: string; name: string; category: string }): Promise<Traced> {
+  await page.goto(`${BASE}/${KIND.path}/${block.id}`, {
     waitUntil: 'domcontentloaded',
     timeout: 45_000,
   })
@@ -233,7 +283,7 @@ async function trace(block: (typeof BLOCK_INDEX)[number]): Promise<Traced> {
   // The walker measures laid-out geometry, so it has to run after layout has
   // settled rather than merely after the button exists.
   await page.waitForTimeout(500)
-  await button.click()
+  await press(button)
 
   /*
    * Poll the clipboard rather than sleeping a fixed interval. The click
@@ -242,13 +292,23 @@ async function trace(block: (typeof BLOCK_INDEX)[number]): Promise<Traced> {
    * short for the big ones or wasted on all 250.
    */
   let svg = ''
-  for (let attempt = 0; attempt < 40; attempt++) {
+  for (let attempt = 0; attempt < 150; attempt++) {
     svg = await page.evaluate(() => navigator.clipboard.readText())
     if (svg.startsWith('<svg')) break
+    /*
+     * One re-click at 5s. The button is server-rendered and visible before
+     * React hydrates, so on a cold dev route the first click can land on
+     * inert markup and do nothing. Copying twice is harmless; waiting for a
+     * copy that never started is not.
+     */
+    if (attempt === 50) await press(button)
     await page.waitForTimeout(100)
   }
 
-  if (!svg.startsWith('<svg')) throw new Error('clipboard held no SVG after 4s')
+  // 15s, not 4s: the overlay blocks (bottom sheet, unsaved-changes modal,
+  // coachmark tour) legitimately take ~3s to walk on an idle server and
+  // more than 4s under a 300-page crawl. They failed deterministically at 4s.
+  if (!svg.startsWith('<svg')) throw new Error('clipboard held no SVG after 15s')
 
   // The clipboard persists across navigations, so a block whose click failed
   // would otherwise be recorded as a duplicate of the previous one.
@@ -264,7 +324,7 @@ async function trace(block: (typeof BLOCK_INDEX)[number]): Promise<Traced> {
   }
 }
 
-const targets = BLOCK_INDEX.slice(0, LIMIT)
+const targets = KIND.index.slice(0, LIMIT)
 
 for (const [i, block] of targets.entries()) {
   try {
@@ -303,7 +363,7 @@ if (failed.length) {
 
 if (traced.length === 0) {
   throw new Error(
-    `build-figma-kit: traced nothing out of ${BLOCK_INDEX.length}. ` +
+    `build-figma-kit: traced nothing out of ${KIND.index.length}. ` +
       `The reasons are above. Is the dev server up at ${BASE}?`,
   )
 }
@@ -332,7 +392,7 @@ const allowPartial = process.argv.includes('--allow-partial') || Number.isFinite
 if (partial && !allowPartial) {
   throw new Error(
     [
-      `build-figma-kit: ${traced.length} of ${targets.length} blocks traced — refusing to`,
+      `build-figma-kit: ${traced.length} of ${targets.length} ${KIND.noun} traced — refusing to`,
       `write a kit that is missing ${targets.length - traced.length}.`,
       ``,
       `  The existing kit in public/figma/ is untouched. The reasons are above;`,
@@ -349,7 +409,7 @@ if (partial && !allowPartial) {
 
 mkdirSync(OUT_DIR, { recursive: true })
 
-const byCategory = new Map<BlockCategory, Traced[]>()
+const byCategory = new Map<string, Traced[]>()
 for (const f of traced) {
   const list = byCategory.get(f.category) ?? []
   list.push(f)
@@ -366,9 +426,9 @@ const files: {
 }[] = []
 
 for (const [category, frames] of byCategory) {
-  const slug = blockCategorySlug(category)
+  const slug = KIND.slugOf(category)
   const svg = stitch(category, frames)
-  const file = `blocks-${slug}.svg`
+  const file = `${KIND.prefix}-${slug}.svg`
   writeFileSync(join(OUT_DIR, file), svg)
   files.push({
     category,
@@ -399,7 +459,7 @@ writeFileSync(
 
 const totalBytes = files.reduce((n, f) => n + f.bytes, 0)
 console.log(
-  `build-figma-kit: ${traced.length} sections in ${files.length} files, ` +
+  `build-figma-kit${PRIMITIVES ? ' (primitives)' : ''}: ${traced.length} ${KIND.noun} in ${files.length} files, ` +
     `${(totalBytes / 1024 / 1024).toFixed(2)} MB total`,
 )
 

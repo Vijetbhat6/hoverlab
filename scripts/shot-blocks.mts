@@ -53,10 +53,22 @@ for (const theme of ['light', 'dark'] as const) {
   const context = await browser.newContext({ viewport: { width: 1280, height: 1100 } })
   // Both first-visit modals pre-dismissed. Clicking "Skip" works too, but it
   // races the hydration that renders it and fails about one run in five.
+  //
+  // An init script runs in every document a context loads, including a
+  // block's own `<iframe sandbox="">` previews (the email templates use one
+  // so the preview cannot inherit the catalog page's styles). Such a frame
+  // has an opaque origin with no `allow-same-origin`, so `window.localStorage`
+  // itself throws there — caught, not worked around: the block never reads
+  // that storage, so the failure is expected and the only thing worth
+  // reporting is a REAL page turning up with no storage access.
   await context.addInitScript(
     ([t]: string[]) => {
-      window.localStorage.setItem('theme', t)
-      window.localStorage.setItem('hoverlab:ladder-tour-seen', '1')
+      try {
+        window.localStorage.setItem('theme', t)
+        window.localStorage.setItem('hoverlab:ladder-tour-seen', '1')
+      } catch {
+        /* A sandboxed iframe with no allow-same-origin. Not this frame's tour. */
+      }
     },
     [theme],
   )

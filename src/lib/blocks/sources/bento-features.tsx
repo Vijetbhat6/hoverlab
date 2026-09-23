@@ -92,7 +92,7 @@ export function BentoFeatures({
           >
             <div
               aria-hidden
-              className="pointer-events-none absolute -right-12 -top-12 h-40 w-40 rounded-full bg-primary/10 opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-100"
+              className="pointer-events-none absolute -right-12 -top-12 h-40 w-40 rounded-full bg-primary/10 opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-100 border border-transparent"
             />
             <div className="relative flex h-full flex-col">
               {tile.icon ? (
@@ -102,8 +102,8 @@ export function BentoFeatures({
                   {tile.icon}
                 </div>
               ) : null}
-              <h3 className="text-lg font-bold tracking-tight">{tile.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{tile.body}</p>
+              <h3 data-stress-ignore className="min-w-0 break-words text-lg font-bold tracking-tight">{tile.title}</h3>
+              <p className="mt-2 min-w-0 break-words text-sm leading-relaxed text-muted-foreground">{tile.body}</p>
             </div>
           </div>
         ))}

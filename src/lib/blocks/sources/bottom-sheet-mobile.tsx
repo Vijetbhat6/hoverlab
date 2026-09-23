@@ -131,11 +131,11 @@ export function BottomSheetMobile({
       */}
       <div className="relative h-[520px] overflow-hidden rounded-[2rem] border border-border bg-background shadow-sm">
         <div className="space-y-3 p-5">
-          <div className="h-3 w-24 rounded-full bg-muted" />
-          <div className="h-3 w-40 rounded-full bg-muted" />
-          <div className="h-28 rounded-xl bg-muted/60" />
-          <div className="h-3 w-32 rounded-full bg-muted" />
-          <div className="h-28 rounded-xl bg-muted/60" />
+          <div className="h-3 w-24 rounded-full bg-muted border border-transparent" />
+          <div className="h-3 w-40 rounded-full bg-muted border border-transparent" />
+          <div className="h-28 rounded-xl bg-muted/60 border border-transparent" />
+          <div className="h-3 w-32 rounded-full bg-muted border border-transparent" />
+          <div className="h-28 rounded-xl bg-muted/60 border border-transparent" />
           <button
             ref={triggerRef}
             type="button"
@@ -152,7 +152,7 @@ export function BottomSheetMobile({
               type="button"
               aria-label="Close"
               onClick={() => setOpen(false)}
-              className="absolute inset-0 bg-foreground/40 motion-safe:animate-in motion-safe:fade-in"
+              className="absolute inset-0 bg-foreground/40 motion-safe:animate-in motion-safe:fade-in border border-transparent"
             />
 
             <div
@@ -175,7 +175,7 @@ export function BottomSheetMobile({
               >
                 <span
                   aria-hidden
-                  className="h-1 w-10 rounded-full bg-muted-foreground/40 transition group-hover:bg-muted-foreground/70"
+                  className="h-1 w-10 rounded-full bg-muted-foreground/40 transition group-hover:bg-muted-foreground/70 border border-transparent"
                 />
                 <span className="sr-only">
                   {expanded ? 'Collapse the sheet to half height' : 'Expand the sheet to full height'}

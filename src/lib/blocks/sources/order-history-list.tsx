@@ -144,17 +144,17 @@ export function OrderHistoryList({
                   {order.swatches.slice(0, 3).map((swatch, i) => (
                     <span
                       key={i}
-                      className={`h-12 w-10 overflow-hidden rounded-lg border-2 border-background bg-gradient-to-br ${swatch}`}
+                      className={`h-[48px] w-[40px] overflow-hidden rounded-lg border-2 border-background bg-gradient-to-br ${swatch}`}
                     />
                   ))}
                   {order.swatches.length > 3 ? (
-                    <span className="flex h-12 w-10 items-center justify-center rounded-lg border-2 border-background bg-muted text-xs font-medium text-muted-foreground">
+                    <span className="flex h-[48px] w-[40px] items-center justify-center rounded-lg border-2 border-background bg-muted text-xs font-medium text-muted-foreground">
                       +{order.swatches.length - 3}
                     </span>
                   ) : null}
                 </div>
 
-                <div className="min-w-0 flex-1">
+                <div className="min-w-[10rem] flex-1">
                   <p className="font-mono text-xs font-medium">{order.number}</p>
                   <p className="mt-0.5 text-xs text-muted-foreground">
                     Placed <time dateTime={order.placed}>{formatDate(order.placed, locale)}</time>
@@ -176,7 +176,7 @@ export function OrderHistoryList({
                   {status.label}
                 </span>
 
-                <p className="w-20 shrink-0 text-end text-sm font-semibold tabular-nums">
+                <p className="min-w-20 shrink-0 text-end text-sm font-semibold tabular-nums">
                   {formatPrice(order.total, currency, locale)}
                 </p>
 

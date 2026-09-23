@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import Link from 'next/link'
-import { Search, Sparkles, Heart, Star, ChevronLeft, ChevronRight, Shuffle, ArrowDownUp, Loader2, Plus, Minus, TrendingUp, Clock, Waves } from 'lucide-react'
+import { Search, Sparkles, Heart, Star, ChevronLeft, ChevronRight, Shuffle, ArrowDownUp, Loader2, Plus, Minus, TrendingUp, Clock, Waves, ImagePlus, X } from 'lucide-react'
 import { toast } from 'sonner'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
@@ -25,6 +25,11 @@ import { LibraryProTile } from '@/components/library-pro-tile'
 import { cn } from '@/lib/utils'
 import { isTypingTarget } from '@/lib/tray-events'
 import { isShaderRenderer } from '@/lib/shaders/shader-types'
+import { searchEffects } from '@/lib/search/effects'
+import { COLOR_BUCKETS, COLOR_LABEL, isColorBucket, type ColorBucket } from '@/lib/search/color'
+import { preloadEffectColors, useEffectColors } from '@/lib/search/use-effect-colors'
+import { ACCEPTED_IMAGE_TYPES, isImageFile, prepareScreenshot } from '@/lib/search/image-client'
+import { LEVEL_LABEL, type ArtifactLevel } from '@/lib/artifact-types'
 
 type Filter = 'All' | 'Featured' | 'Favorites' | 'Shaders' | EffectCategory
 type Sort = 'default' | 'az' | 'za' | 'featured' | 'trending' | 'recent' | 'random'
@@ -48,6 +53,22 @@ const SHADER_TOTAL = EFFECTS.filter((e) => isShaderRenderer(e.renderer)).length
  * which is the one thing the page exists to show.
  */
 const VISIBLE_CATEGORY_CHIPS = 8
+
+/** The tiers this page is not. The Effects tier is the page itself. */
+const OTHER_TIERS: readonly ArtifactLevel[] = ['primitive', 'block', 'page', 'template']
+
+/**
+ * A /browse link that keeps the search. `level` is that page's name for the
+ * tier; absent means all of them.
+ */
+function browseTierHref(level: ArtifactLevel | undefined, query: string): string {
+  const params = new URLSearchParams()
+  const q = query.trim()
+  if (q) params.set('q', q)
+  if (level) params.set('level', level)
+  const qs = params.toString()
+  return qs ? `/browse?${qs}` : '/browse'
+}
 
 /**
  * Validate that a string is a recognized filter value. Used when reading
@@ -133,18 +154,39 @@ export default function Home() {
   const surpriseRef = React.useRef<() => void>(() => {})
 
   /* ---------------- AI search mode ----------------
-   * When aiMode is ON, the search bar switches from substring matching
-   * to natural-language semantic search via /api/ai/search. The client
-   * pre-filters the catalog down to a candidate pool (substring match
-   * across name + tags + category + description, capped at 80) and
-   * sends that pool + the query to the API. The LLM ranks the
-   * candidates and returns a JSON array of IDs; we display those
+   * When aiMode is ON, the search bar switches from keyword matching to
+   * natural-language semantic search via /api/ai/search. This page sends
+   * only the query (and a screenshot, if there is one): the SERVER picks
+   * the candidate pool from the whole catalog with the shared search engine
+   * and the model ranks it, returning a JSON array of IDs. We display those
    * effects in ranked order, ignoring the normal sort + pagination.
    */
   const [aiMode, setAiMode] = React.useState(false)
   const [aiLoading, setAiLoading] = React.useState(false)
   const [aiRankedIds, setAiRankedIds] = React.useState<string[] | null>(null)
   const aiRequestIdRef = React.useRef(0)
+
+  /* ---------------- Screenshot search ----------------
+   * A screenshot rides the same request as the words: it is what AI search
+   * is *given*, not a separate mode, so attaching one switches AI search on.
+   * `aiConfigured` is null until the server has been asked, then whatever it
+   * said — learned lazily (see the effect below) so an ordinary visit to
+   * this page never spends a function call finding out.
+   */
+  const [screenshot, setScreenshot] = React.useState<string | null>(null)
+  const [imageBusy, setImageBusy] = React.useState(false)
+  const [dragging, setDragging] = React.useState(false)
+  const [aiConfigured, setAiConfigured] = React.useState<boolean | null>(null)
+  const fileInputRef = React.useRef<HTMLInputElement>(null)
+  const aiConfiguredRequestedRef = React.useRef(false)
+
+  /* ---------------- Colour filter ----------------
+   * A main colour read off each effect's own source at build time (see
+   * `@/lib/search/color` for what "main" means and what is left untagged).
+   * The table is its own chunk, so the filter costs the first load nothing.
+   */
+  const [colorFilter, setColorFilter] = React.useState<ColorBucket | null>(null)
+  const { colors: effectColors, failed: colorsFailed } = useEffectColors(colorFilter !== null)
 
   /* ---------------- Trending sort ----------------
    * Fetched lazily, once, the first time someone picks the Trending sort.
@@ -169,6 +211,8 @@ export default function Home() {
     if (f && f !== 'All') setFilter(f)
     const q = params.get('q')
     if (q) setQuery(q)
+    const c = params.get('color')
+    if (isColorBucket(c)) setColorFilter(c)
     const s = parseSort(params.get('sort'))
     if (s !== 'default') setSort(s)
     // A shuffled grid reopens in the same order it was linked in. A
@@ -193,6 +237,11 @@ export default function Home() {
     } else {
       params.delete('q')
     }
+    if (colorFilter) {
+      params.set('color', colorFilter)
+    } else {
+      params.delete('color')
+    }
     if (sort === 'default') {
       params.delete('sort')
     } else {
@@ -208,7 +257,7 @@ export default function Home() {
     const qs = params.toString()
     const url = qs ? `/library?${qs}` : '/library'
     window.history.replaceState(null, '', url)
-  }, [filter, query, sort, seed])
+  }, [filter, query, sort, seed, colorFilter])
 
   /**
    * Shortcuts that only exist on this page: `/` to focus search, and Escape
@@ -270,8 +319,23 @@ export default function Home() {
       .finally(() => setTrendingLoading(false))
   }, [sort])
 
+  /*
+   * The colour set, or null when no colour is chosen. While the table is
+   * still loading it is also null, so `colorPending` is what stops a deep
+   * link to `?color=blue` flashing the whole catalog before it narrows.
+   */
+  const colorSet = colorFilter && effectColors ? effectColors.ids(colorFilter) : null
+  const colorPending = colorFilter !== null && !effectColors && !colorsFailed
+
   const filtered = React.useMemo(() => {
-    const q = query.trim().toLowerCase()
+    /*
+     * The shared engine (`@/lib/search`): tokenised, typo-tolerant, weighted
+     * by field, expanded through a short curated synonym table. Every other
+     * filter below still narrows its result. `scores` doubles as the ranking
+     * when the sort is left on its default.
+     */
+    const q = query.trim()
+    const scores = q ? new Map(searchEffects(q).map((h) => [h.doc.id, h.score])) : null
     const matched = EFFECTS.filter((e) => {
       const matchesCategory =
         filter === 'All' ||
@@ -292,25 +356,28 @@ export default function Home() {
        */
       const matchesShaders =
         filter !== 'Shaders' || isShaderRenderer(e.renderer)
-      const matchesQuery =
-        !q ||
-        e.name.toLowerCase().includes(q) ||
-        e.description.toLowerCase().includes(q) ||
-        e.id.toLowerCase().includes(q) ||
-        e.category.toLowerCase().includes(q) ||
-        (e.tags ?? []).some((t) => t.toLowerCase().includes(q))
+      const matchesQuery = !scores || scores.has(e.id)
+      // Untagged effects are excluded while a colour is chosen: the source
+      // does not say what colour they are, and "no" is the honest answer to
+      // "is this one blue?" when the honest answer is "unknown".
+      const matchesColor = !colorSet || colorSet.has(e.id)
       return (
         matchesCategory &&
         matchesFavorites &&
         matchesFeatured &&
         matchesShaders &&
-        matchesQuery
+        matchesQuery &&
+        matchesColor
       )
     })
 
     // Apply sort. 'default' preserves the original EFFECTS order (which is
-    // grouped by category in the source file — a deliberate curation choice).
-    if (sort === 'az') {
+    // grouped by category in the source file — a deliberate curation choice)
+    // — except while searching, where best match first is what the box
+    // promised. The sort is stable, so equal scores keep curated order.
+    if (sort === 'default' && scores) {
+      matched.sort((a, b) => (scores.get(b.id) ?? 0) - (scores.get(a.id) ?? 0))
+    } else if (sort === 'az') {
       matched.sort((a, b) => a.name.localeCompare(b.name))
     } else if (sort === 'za') {
       matched.sort((a, b) => b.name.localeCompare(a.name))
@@ -354,7 +421,7 @@ export default function Home() {
       })
     }
     return matched
-  }, [query, filter, sort, favorites, trendingRank, seed])
+  }, [query, filter, sort, favorites, trendingRank, seed, colorSet])
 
   /*
    * Reset to the first page whenever the result set changes.
@@ -369,7 +436,7 @@ export default function Home() {
   const favoritesFilterSize = filter === 'Favorites' ? favorites.size : 0
   React.useEffect(() => {
     setPage(1)
-  }, [query, filter, sort, favoritesFilterSize])
+  }, [query, filter, sort, favoritesFilterSize, colorFilter])
 
   /* Track non-AI searches, debounced so a single query isn't recorded once
    * per keystroke. Queries that return nothing are the useful half of this
@@ -383,20 +450,46 @@ export default function Home() {
     return () => clearTimeout(timer)
   }, [query, aiMode, filtered.length])
 
+  /* ---------------- Is AI search switched on? ----------------
+   * Asked once, and only when someone reaches for it — turning AI search on
+   * or hovering the screenshot button — never on an ordinary visit. The
+   * answer is what makes "not configured" an honest disabled state instead
+   * of a search that fails after the user has typed and waited.
+   */
+  const checkAiConfigured = React.useCallback(() => {
+    if (aiConfiguredRequestedRef.current) return
+    aiConfiguredRequestedRef.current = true
+    fetch('/api/ai/search')
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data: { configured?: boolean } | null) => {
+        if (data && typeof data.configured === 'boolean') setAiConfigured(data.configured)
+        else aiConfiguredRequestedRef.current = false
+      })
+      .catch(() => {
+        aiConfiguredRequestedRef.current = false
+      })
+  }, [])
+
+  React.useEffect(() => {
+    if (aiMode) checkAiConfigured()
+  }, [aiMode, checkAiConfigured])
+
   /* ---------------- AI search fetch ----------------
-   * When AI mode is ON and the user types, debounce 400ms then call
-   * /api/ai/search with the query + a client-side candidate pool.
+   * When AI mode is ON and the user types (or attaches a screenshot),
+   * debounce 400ms then call /api/ai/search with the query and, if there is
+   * one, the image. The SERVER picks the candidates — with the same
+   * typo-tolerant engine as this page's own search, over the whole catalog —
+   * so this sends no candidate list at all. It used to send ~80
+   * substring-matched effects, which is why a query with no literal hit
+   * ranked 80 featured effects that had nothing to do with it.
    * Race-condition guard: each request gets an incrementing ID; only
    * the response matching the latest ID is applied to state.
    */
   React.useEffect(() => {
-    if (!aiMode) {
-      setAiRankedIds(null)
-      setAiLoading(false)
-      return
-    }
     const q = query.trim()
-    if (!q) {
+    // A server that has said it has no model gets no requests: they would
+    // fail, and the keyword results below are already the right answer.
+    if (!aiMode || (!q && !screenshot) || aiConfigured === false) {
       setAiRankedIds(null)
       setAiLoading(false)
       return
@@ -406,48 +499,27 @@ export default function Home() {
     const requestId = ++aiRequestIdRef.current
     const startedAt = performance.now()
     const timer = setTimeout(async () => {
-      // Build a candidate pool: substring match across name, id, category,
-      // description, tags — same fields the normal search uses. Cap at 80
-      // to keep the LLM prompt bounded.
-      const ql = q.toLowerCase()
-      const candidates = EFFECTS.filter(
-        (e) =>
-          e.name.toLowerCase().includes(ql) ||
-          e.id.toLowerCase().includes(ql) ||
-          e.category.toLowerCase().includes(ql) ||
-          e.description.toLowerCase().includes(ql) ||
-          (e.tags ?? []).some((t) => t.toLowerCase().includes(ql)),
-      )
-        .slice(0, 80)
-        .map((e) => ({
-          id: e.id,
-          name: e.name,
-          category: e.category,
-          description: e.description,
-        }))
-
-      // If no substring candidates, send the full pool of featured effects
-      // as a fallback so the LLM still has something semantic to work with.
-      const pool =
-        candidates.length > 0
-          ? candidates
-          : EFFECTS.filter((e) => e.featured)
-              .slice(0, 80)
-              .map((e) => ({
-                id: e.id,
-                name: e.name,
-                category: e.category,
-                description: e.description,
-              }))
-
       try {
         const res = await fetch('/api/ai/search', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ query: q, candidates: pool }),
+          body: JSON.stringify({ query: q, ...(screenshot ? { image: screenshot } : {}) }),
         })
+        if (res.status === 503) {
+          // "Not configured" — remember it, and fall back to keyword results
+          // quietly. The banner explains; a toast per keystroke would nag.
+          if (requestId === aiRequestIdRef.current) {
+            setAiConfigured(false)
+            setAiRankedIds(null)
+            setAiLoading(false)
+          }
+          return
+        }
         if (!res.ok) {
-          throw new Error(`HTTP ${res.status}`)
+          // The limit and validation errors carry a sentence meant for the
+          // person; show it rather than "HTTP 429".
+          const detail = (await res.json().catch(() => null)) as { error?: string } | null
+          throw new Error(detail?.error ?? `HTTP ${res.status}`)
         }
         const data = (await res.json()) as { ids?: string[] }
         // Only apply if this is still the latest request.
@@ -469,14 +541,45 @@ export default function Home() {
           setAiRankedIds([])
           setAiLoading(false)
           toast.error('AI search failed', {
-            description: 'Falling back to regular search — try again.',
+            description:
+              err instanceof Error && !err.message.startsWith('HTTP')
+                ? err.message
+                : 'Falling back to regular search — try again.',
           })
         }
       }
     }, 400)
 
     return () => clearTimeout(timer)
-  }, [aiMode, query])
+  }, [aiMode, query, screenshot, aiConfigured])
+
+  /* ---------------- Attaching a screenshot ----------------
+   * Paste into the box, drop on it, or pick a file. All three end up here,
+   * and the picture is scaled and re-encoded in the browser first so a
+   * retina screenshot does not fail the server's size limit.
+   */
+  const attachScreenshot = React.useCallback(
+    async (file: Blob) => {
+      setImageBusy(true)
+      const result = await prepareScreenshot(file)
+      setImageBusy(false)
+      if (!result.ok) {
+        toast.error('Could not use that image', { description: result.message })
+        return
+      }
+      setScreenshot(result.dataUrl)
+      setAiMode(true)
+      searchInputRef.current?.focus()
+    },
+    [],
+  )
+
+  const onSearchPaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
+    const file = Array.from(e.clipboardData.files).find(isImageFile)
+    if (!file) return // plain text: let the input have it
+    e.preventDefault()
+    void attachScreenshot(file)
+  }
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE))
   const safePage = Math.min(page, totalPages)
@@ -503,6 +606,13 @@ export default function Home() {
   }, [aiMode, aiRankedIds])
 
   const displayList = aiDisplay ?? paged
+  /**
+   * AI search is *doing something* — it has words or a picture to work from.
+   * Turning the toggle on with an empty box changes nothing yet, and the
+   * banner, the missing sort control and the missing pagination should not
+   * appear until it does.
+   */
+  const aiActive = aiMode && (query.trim() !== '' || screenshot !== null)
   const displayTotal = aiDisplay ? aiDisplay.length : filtered.length
 
   /* ---------------- Category chip row ----------------
@@ -700,19 +810,42 @@ export default function Home() {
 
         {/* Search + Surprise me */}
         <div className="mx-auto mt-8 flex max-w-2xl items-center gap-2">
-          <div className="relative flex-1">
-            <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+          <div
+            className={cn(
+              'relative flex-1 rounded-full',
+              dragging && 'ring-2 ring-primary/60 ring-offset-2 ring-offset-background',
+            )}
+            // A picture dropped on the box searches by that picture.
+            onDragOver={(e) => {
+              if (Array.from(e.dataTransfer.items).some((i) => i.kind === 'file')) {
+                e.preventDefault()
+                setDragging(true)
+              }
+            }}
+            onDragLeave={() => setDragging(false)}
+            onDrop={(e) => {
+              setDragging(false)
+              const file = Array.from(e.dataTransfer.files).find(isImageFile)
+              if (!file) return
+              e.preventDefault()
+              void attachScreenshot(file)
+            }}
+          >
+            <Search className="pointer-events-none absolute start-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
             <Input
               ref={searchInputRef}
               value={query}
               onChange={(e) => setQuery(e.target.value)}
+              onPaste={onSearchPaste}
               placeholder={
-                aiMode
-                  ? 'Describe what you want… e.g. "button that pulses red"'
-                  : 'Search by name, category, tag, or keyword…'
+                screenshot
+                  ? 'Add a few words to steer it (optional)…'
+                  : aiMode
+                    ? 'Describe what you want… e.g. "button that pulses red"'
+                    : 'Search by name, category, tag, or keyword…'
               }
               className={cn(
-                'h-12 rounded-full border-border/60 bg-background/70 pl-11 pr-12 text-base shadow-sm backdrop-blur',
+                'h-12 rounded-full border-border/60 bg-background/70 ps-11 pe-12 text-base shadow-sm backdrop-blur',
                 aiMode && 'border-primary/50 ring-1 ring-primary/20',
               )}
             />
@@ -730,6 +863,9 @@ export default function Home() {
                 <button
                   type="button"
                   onClick={() => {
+                    // A screenshot only means something to AI search, so
+                    // leaving that mode takes it with it.
+                    if (aiMode) setScreenshot(null)
                     setAiMode((v) => !v)
                     // Focus the input so the user can immediately type their
                     // natural-language query after enabling AI mode.
@@ -738,7 +874,7 @@ export default function Home() {
                   aria-pressed={aiMode}
                   aria-label={aiMode ? 'Turn off AI search' : 'Turn on AI search'}
                   className={cn(
-                    'absolute right-2 top-1/2 inline-flex h-8 -translate-y-1/2 items-center gap-1.5 rounded-full px-2.5 text-xs font-medium transition-all',
+                    'absolute end-2 top-1/2 inline-flex h-8 -translate-y-1/2 items-center gap-1.5 rounded-full px-2.5 text-xs font-medium transition-all',
                     aiMode
                       ? 'bg-primary text-primary-foreground shadow-sm'
                       : 'text-muted-foreground hover:bg-muted hover:text-foreground',
@@ -755,6 +891,58 @@ export default function Home() {
               </TooltipContent>
             </Tooltip>
           </div>
+          {/*
+            Search by screenshot. Sits beside the box rather than inside it
+            because the box already carries the AI toggle, and a second
+            control jammed into a pill that narrow would be unreadable at
+            phone width. The picker is a real file input behind the button;
+            paste and drop reach the same handler.
+
+            Honest about the one way it cannot work: if the server has said
+            it has no model, the button is disabled and says why, rather
+            than accepting a picture it will never look at.
+          */}
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept={ACCEPTED_IMAGE_TYPES}
+            tabIndex={-1}
+            aria-hidden="true"
+            className="sr-only"
+            onChange={(e) => {
+              const file = e.target.files?.[0]
+              e.target.value = ''
+              if (file) void attachScreenshot(file)
+            }}
+          />
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <span className="inline-flex">
+                <Button
+                  type="button"
+                  size="sm"
+                  variant="outline"
+                  onClick={() => fileInputRef.current?.click()}
+                  onPointerEnter={checkAiConfigured}
+                  onFocus={checkAiConfigured}
+                  disabled={imageBusy || aiConfigured === false}
+                  aria-label="Search by screenshot"
+                  className="h-12 w-12 rounded-full p-0 shadow-sm"
+                >
+                  {imageBusy ? (
+                    <Loader2 aria-hidden className="h-4 w-4 animate-spin" />
+                  ) : (
+                    <ImagePlus aria-hidden className="h-4 w-4" />
+                  )}
+                </Button>
+              </span>
+            </TooltipTrigger>
+            <TooltipContent side="bottom" className="max-w-64">
+              {aiConfigured === false
+                ? "Screenshot search needs AI search, which isn't switched on for this site."
+                : 'Find effects that look like a screenshot. Choose an image, or paste or drop one on the search box.'}
+            </TooltipContent>
+          </Tooltip>
           <Button
             type="button"
             size="sm"
@@ -772,6 +960,118 @@ export default function Home() {
             </span>
           </Button>
         </div>
+
+        {/* The screenshot being searched with. Always removable, and says so
+            when it is not being used. */}
+        {screenshot ? (
+          <div className="mx-auto mt-3 flex max-w-2xl items-center gap-3 rounded-2xl border border-primary/30 bg-primary/5 p-2 pe-3">
+            {/* A data: URL the visitor just chose; next/image has nothing to optimise. */}
+            <img
+              src={screenshot}
+              alt="The screenshot you are searching with"
+              className="h-14 w-20 shrink-0 rounded-lg border border-border/60 bg-muted object-cover"
+            />
+            <p className="min-w-0 flex-1 text-xs text-muted-foreground">
+              {aiConfigured === false
+                ? "Screenshot search needs AI search, which isn't switched on for this site — the picture is not being used."
+                : 'Finding effects that look like this. Add a few words in the box to steer it.'}
+            </p>
+            <button
+              type="button"
+              onClick={() => setScreenshot(null)}
+              aria-label="Remove screenshot"
+              className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            >
+              <X aria-hidden className="h-4 w-4" />
+            </button>
+          </div>
+        ) : null}
+
+        {/* Tier: this page is the effects tier. The others are one link away
+            and carry the search with them, so a query typed here is not lost
+            on the way to a block. */}
+        <nav
+          aria-label="Search another tier"
+          className="mt-5 flex flex-wrap items-center justify-center gap-1.5 text-xs"
+        >
+          <span className="me-1 font-semibold text-foreground">Tier</span>
+          <Link
+            href={browseTierHref(undefined, query)}
+            className="rounded-full border border-border/60 px-3 py-1 text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          >
+            All
+          </Link>
+          <span
+            aria-current="page"
+            className="rounded-full border border-primary/40 bg-primary/10 px-3 py-1 font-medium text-foreground"
+          >
+            {LEVEL_LABEL.effect.many}
+          </span>
+          {OTHER_TIERS.map((level) => (
+            <Link
+              key={level}
+              href={browseTierHref(level, query)}
+              className="rounded-full border border-border/60 px-3 py-1 text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            >
+              {LEVEL_LABEL[level].many}
+            </Link>
+          ))}
+        </nav>
+
+        {/* Colour: the effect's own main colour, read from its source. */}
+        <div
+          role="group"
+          aria-label="Filter by main colour"
+          className="mt-3 flex flex-wrap items-center justify-center gap-2"
+        >
+          <span className="me-1 text-xs font-semibold text-foreground">Colour</span>
+          {COLOR_BUCKETS.map((bucket) => {
+            const { name, swatch } = COLOR_LABEL[bucket]
+            const count = effectColors?.counts[bucket]
+            const active = colorFilter === bucket
+            return (
+              <button
+                key={bucket}
+                type="button"
+                onClick={() => setColorFilter(active ? null : bucket)}
+                onPointerEnter={preloadEffectColors}
+                onFocus={preloadEffectColors}
+                aria-pressed={active}
+                aria-label={count === undefined ? name : `${name}, ${count} effects`}
+                title={count === undefined ? name : `${name} · ${count}`}
+                className={cn(
+                  'h-7 w-7 rounded-full border-2 transition-transform focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background',
+                  active
+                    ? 'scale-110 border-foreground'
+                    : 'border-border/60 hover:scale-105 hover:border-foreground/50',
+                )}
+                style={{ backgroundColor: swatch }}
+              />
+            )
+          })}
+          {colorFilter ? (
+            <button
+              type="button"
+              onClick={() => setColorFilter(null)}
+              className="inline-flex items-center gap-1 rounded-full border border-dashed border-border/70 px-2.5 py-1 text-xs font-medium text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground"
+            >
+              <X aria-hidden className="h-3 w-3" />
+              Clear colour
+            </button>
+          ) : null}
+        </div>
+        {colorFilter ? (
+          <p
+            className="mx-auto mt-2 max-w-2xl text-center text-xs text-muted-foreground"
+            aria-live="polite"
+          >
+            {colorsFailed
+              ? 'The colour data could not be loaded — try again in a moment.'
+              : effectColors
+                ? `Effects where ${COLOR_LABEL[colorFilter].name.toLowerCase()} is a main colour in the stylesheet. ${effectColors.tagged.toLocaleString('en-US')} of ${EFFECTS.length.toLocaleString('en-US')} effects have a colour the source spells out; the rest are left out while a colour is chosen.`
+                : 'Loading colour data…'}
+          </p>
+        ) : null}
 
         {/* Filter chips */}
         <p className="mt-7 text-center text-xs text-muted-foreground">
@@ -858,10 +1158,15 @@ export default function Home() {
             searching, so it doesn't compete with focused result sets. */}
         {filter === 'All' && !query.trim() ? <RecentlyViewedRail /> : null}
 
-        {displayTotal === 0 && !aiLoading ? (
+        {colorPending && displayTotal === 0 ? (
+          <div className="mx-auto mt-16 flex max-w-md items-center justify-center gap-2 text-sm text-muted-foreground">
+            <Loader2 aria-hidden className="h-4 w-4 animate-spin" />
+            Loading colour data…
+          </div>
+        ) : displayTotal === 0 && !aiLoading ? (
           <div className="mx-auto mt-16 max-w-md text-center">
             <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-muted">
-              {aiMode ? (
+              {aiMode && aiConfigured !== false ? (
                 <Sparkles className="h-5 w-5 text-primary" />
               ) : filter === 'Favorites' ? (
                 <Heart className="h-5 w-5 text-muted-foreground" />
@@ -872,18 +1177,22 @@ export default function Home() {
               )}
             </div>
             <h3 className="text-lg font-semibold">
-              {aiMode
+              {aiMode && aiConfigured !== false
                 ? 'No AI matches'
-                : filter === 'Favorites'
+                : colorFilter
+                  ? `No ${COLOR_LABEL[colorFilter].name.toLowerCase()} effects match`
+                  : filter === 'Favorites'
                   ? 'No favorites yet'
                   : filter === 'Featured'
                     ? 'No featured effects match'
                     : 'No effects found'}
             </h3>
             <p className="mt-1 text-sm text-muted-foreground">
-              {aiMode
+              {aiMode && aiConfigured !== false
                 ? 'Try rephrasing your query, or toggle AI search off to use keyword matching.'
-                : filter === 'Favorites'
+                : colorFilter
+                  ? 'Only effects whose stylesheet spells out that colour are matched. Try another colour, or clear it.'
+                  : filter === 'Favorites'
                   ? 'Tap the heart on any effect to save it here for quick access.'
                   : filter === 'Featured'
                     ? 'Try a different keyword or clear the search.'
@@ -896,6 +1205,8 @@ export default function Home() {
               onClick={() => {
                 setQuery('')
                 setFilter('All')
+                setColorFilter(null)
+                setScreenshot(null)
               }}
             >
               Reset
@@ -904,7 +1215,7 @@ export default function Home() {
         ) : (
           <>
             {/* AI mode banner — shown when AI search is active */}
-            {aiMode && query.trim() ? (
+            {aiActive ? (
               <div className="mb-5 flex items-center gap-2 rounded-xl border border-primary/30 bg-primary/5 px-4 py-2.5 text-sm">
                 {aiLoading ? (
                   <Loader2 className="h-4 w-4 animate-spin text-primary" />
@@ -912,18 +1223,26 @@ export default function Home() {
                   <Sparkles className="h-4 w-4 text-primary" />
                 )}
                 <span className="text-foreground">
-                  {aiLoading
-                    ? 'Asking the AI to rank matches…'
-                    : `AI-ranked results (${displayTotal.toLocaleString('en-US')})`}
+                  {aiConfigured === false
+                    ? "AI search isn't switched on for this site — showing keyword matches"
+                    : aiLoading
+                      ? screenshot
+                        ? 'Looking at your screenshot and ranking matches…'
+                        : 'Asking the AI to rank matches…'
+                      : `AI-ranked results (${displayTotal.toLocaleString('en-US')})`}
                 </span>
-                <span className="hidden text-xs text-muted-foreground sm:inline">
-                  — semantic relevance, not just keywords
-                </span>
+                {aiConfigured === false ? null : (
+                  <span className="hidden text-xs text-muted-foreground sm:inline">
+                    {screenshot
+                      ? '— by how closely an effect would reproduce the look'
+                      : '— semantic relevance, not just keywords'}
+                  </span>
+                )}
               </div>
             ) : null}
 
             {/* Result meta + sort control (hidden in AI mode — sort is semantic) */}
-            {!(aiMode && query.trim()) ? (
+            {!aiActive ? (
               <div ref={gridTopRef} className="mb-5 flex flex-wrap items-center gap-3 scroll-mt-20">
                 <h2 className="text-xl font-bold tracking-tight">
                   {filter === 'All' ? 'All effects' : filter}
@@ -977,7 +1296,7 @@ export default function Home() {
                   <SelectContent>
                     <SelectItem value="default">
                       Curated order
-                      <span className="ml-1.5 text-muted-foreground">· as catalogued</span>
+                      <span className="ml-1.5 text-muted-foreground">· best match when searching</span>
                     </SelectItem>
                     <SelectItem value="featured">
                       Featured first
@@ -1006,7 +1325,7 @@ export default function Home() {
                 measured sorts get a note — "A → Z" explains itself, and a
                 measured order that cannot be read off the cards has to say
                 where it came from or it is just a shuffle. */}
-            {!(aiMode && query.trim()) &&
+            {!aiActive &&
             (sort === 'trending' || sort === 'recent' || sort === 'random') ? (
               <SortNote
                 loading={sort === 'trending' && trendingLoading}

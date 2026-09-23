@@ -100,7 +100,7 @@ export function PersonaCards({
             >
               <div
                 aria-hidden
-                className="pointer-events-none absolute -right-12 -top-12 h-40 w-40 rounded-full bg-primary/10 opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-100"
+                className="pointer-events-none absolute -right-12 -top-12 h-40 w-40 rounded-full bg-primary/10 opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-100 border border-transparent"
               />
               <div className="relative">
                 {p.icon ? (
@@ -110,8 +110,8 @@ export function PersonaCards({
                     {p.icon}
                   </div>
                 ) : null}
-                <h3 className="text-lg font-bold tracking-tight">{p.name}</h3>
-                <p className="mt-1 text-sm font-medium text-foreground/80">{p.headline}</p>
+                <h3 data-stress-ignore className="break-words text-lg font-bold tracking-tight">{p.name}</h3>
+                <p className="mt-1 break-words text-sm font-medium text-foreground/80">{p.headline}</p>
 
                 <ul className="mt-4 space-y-2">
                   {p.bullets.map((b) => (
@@ -120,7 +120,7 @@ export function PersonaCards({
                         aria-hidden
                         className={`mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full ${accent.replace('text-', 'bg-')}`}
                       />
-                      <span>{b}</span>
+                      <span className="min-w-0 break-words">{b}</span>
                     </li>
                   ))}
                 </ul>

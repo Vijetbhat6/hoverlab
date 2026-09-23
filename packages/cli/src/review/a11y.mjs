@@ -261,7 +261,25 @@ export const RULES = [
     severity: 'violation',
     name: 'Info and relationships',
     check: (source) => {
-      if (!/<table[\s>]/.test(source)) return []
+      /*
+        A `role="presentation"` (or `role="none"`, its ARIA 1.1 synonym) table
+        is exempt, and correctly so rather than as a loophole: that role is
+        the documented way to strip a table's native semantics, INCLUDING the
+        header/cell association `<th>` exists to create. A screen reader is
+        told this is not a data table at all, so asking it for header cells
+        is asking the wrong question — same as requiring `alt` text on an
+        `aria-hidden` image. This is the layout-table case HTML email markup
+        needs: nested `<table>`s for a rendering engine that ignores flexbox,
+        marked so assistive tech reads past them to the content inside.
+
+        Scoped per table, not per source: one file can reasonably hold both a
+        real data table and a presentational one, and a single global regex
+        would let the second exempt the first.
+      */
+      const tables = openingTags(source, 'table').filter(
+        (tag) => !/\brole\s*=\s*["'](?:presentation|none)["']/.test(tag),
+      )
+      if (tables.length === 0) return []
       const findings = []
       if (!/<th[\s>]/.test(source)) findings.push('<table> with no <th> header cells')
       else if (!/<th[^>]*\bscope\s*=/.test(source)) {

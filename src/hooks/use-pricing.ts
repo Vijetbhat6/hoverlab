@@ -134,12 +134,26 @@ export interface UsePricing {
   purchasableFor: (id: PlanId) => boolean | null
 }
 
-export function usePricing(): UsePricing {
+export interface UsePricingOptions {
+  /**
+   * Whether to ask the server at all. Defaults to true.
+   *
+   * The regional banner lives in the root layout and passes false whenever it
+   * cannot show anything — the deployment has no trusted country header, the
+   * visitor dismissed it, or the page is a chromeless preview. Everything
+   * that actually sells (the tiers, the upgrade panel) leaves it on, because
+   * it needs `purchasable` regardless of region.
+   */
+  enabled?: boolean
+}
+
+export function usePricing({ enabled = true }: UsePricingOptions = {}): UsePricing {
   const [pricing, setPricing] = React.useState<PricingResponse | null>(null)
   // null = the visitor hasn't chosen, so fall back to the regional default.
   const [currency, setCurrency] = React.useState<Currency | null>(null)
 
   React.useEffect(() => {
+    if (!enabled) return
     let cancelled = false
     // Leave `pricing` null on failure: list prices stay on screen, the paid
     // CTAs stay disabled and the banner renders nothing. Better than offering
@@ -150,7 +164,7 @@ export function usePricing(): UsePricing {
     return () => {
       cancelled = true
     }
-  }, [])
+  }, [enabled])
 
   // Restore a previous choice. Read on mount rather than in useState's
   // initializer so the server and first client render agree — reading

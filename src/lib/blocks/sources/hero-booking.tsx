@@ -76,8 +76,8 @@ export function HeroBooking({
   return (
     <section className={`relative overflow-hidden ${className}`}>
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute -top-24 right-0 h-80 w-80 rounded-full bg-amber-500/15 blur-3xl" />
-        <div className="absolute bottom-0 left-1/4 h-72 w-72 rounded-full bg-primary/15 blur-3xl" />
+        <div className="absolute -top-24 right-0 h-80 w-80 rounded-full bg-amber-500/15 blur-3xl border border-transparent" />
+        <div className="absolute bottom-0 left-1/4 h-72 w-72 rounded-full bg-primary/15 blur-3xl border border-transparent" />
       </div>
 
       <div className="mx-auto grid w-full max-w-7xl items-center gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[1.05fr_1fr] lg:gap-16 lg:px-8 lg:py-24">
@@ -121,7 +121,7 @@ export function HeroBooking({
                 const id = `${uid}-hero-booking-day-${d.day}`
 
                 return (
-                  <div key={d.day}>
+                  <div key={d.day} className="min-w-0">
                     <input
                       type="radio"
                       id={id}
@@ -136,11 +136,11 @@ export function HeroBooking({
                       htmlFor={id}
                       className="flex cursor-pointer flex-col items-center gap-0.5 rounded-xl border border-border/60 px-1 py-3 text-center transition-colors hover:border-primary/40 peer-checked:border-primary peer-checked:bg-primary/10 peer-disabled:cursor-not-allowed peer-disabled:opacity-40 peer-disabled:hover:border-border/60 peer-focus-visible:ring-2 peer-focus-visible:ring-ring peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-background"
                     >
-                      <span className="text-[10px] uppercase tracking-wide text-muted-foreground">
+                      <span className="block w-full truncate text-[10px] uppercase tracking-wide text-muted-foreground">
                         {d.weekday}
                       </span>
                       <span className="text-lg font-bold tracking-tight">{d.day}</span>
-                      <span className="text-[10px] text-muted-foreground">
+                      <span className="block w-full truncate text-[10px] text-muted-foreground">
                         {unavailable ? 'Full' : `${d.slots} left`}
                       </span>
                     </label>

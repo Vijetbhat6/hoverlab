@@ -1,0 +1,388 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="10432" height="1392" viewBox="0 0 10432 1392" id="Hoverlab states - Status &amp; Labels">
+  <!--
+    Hoverlab primitive states - Status & Labels. 4 primitives, one row each,
+    states across, traced from the rendered catalog.
+
+    These are variant-READY frames named Property=Value (State=Hover, State=Focus ...).
+    They are NOT variants: an SVG import cannot create components. To get variants,
+    in Figma convert each frame to a component, select the row of components, and
+    choose Combine as Variants. Figma reads the State=... names into a State property.
+
+    Hover, focus and active are forced on every control at once. Loading is only
+    shown where a component's CSS keys on aria-busy or data-loading. Slots marked
+    n/a had nothing to force the state on. Tracer limits carry over: single-line
+    text can sit offset and lucide icons are not traced.
+
+    Every primitive here is free to copy as code at https://hoverlab.dev/primitives
+  -->
+  <rect id="Background" x="0" y="0" width="10432" height="1392" fill="#ffffff" />
+  <text id="Badge title" x="64" y="86" font-family="Inter, system-ui, sans-serif" font-size="20" font-weight="700" fill="#0a0a0a">Badge</text>
+  <text id="badge id" x="64" y="104" font-family="ui-monospace, monospace" font-size="12" fill="#737373">badge</text>
+  <text id="State=Default label badge" x="64" y="138" font-family="ui-monospace, monospace" font-size="13" font-weight="600" fill="#0a0a0a">State=Default</text>
+  <g id="State=Default" transform="translate(64, 148)">
+    <rect id="container" x="0" y="0" width="1088" height="110" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="417.59" y="25" width="35.09" height="24" rx="10" fill="rgba(0, 118, 49, 0.102)" />
+      <text id="Pro" x="425.59" y="41" fill="#00782e" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Pro</text>
+      <rect id="container 3" x="460.69" y="25" width="40.56" height="24" rx="10" fill="rgba(0, 186, 118, 0.102)" />
+      <text id="Paid" x="468.69" y="41" fill="#007a55" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Paid</text>
+      <rect id="container 4" x="509.25" y="25" width="39.64" height="24" rx="10" fill="rgba(245, 147, 0, 0.102)" />
+      <text id="Trial" x="517.25" y="41" fill="#bb4d00" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Trial</text>
+      <rect id="container 5" x="556.89" y="25" width="63.14" height="24" rx="10" fill="rgba(226, 0, 10, 0.102)" />
+      <text id="Overdue" x="564.89" y="41" fill="#e7000b" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Overdue</text>
+      <rect id="container 6" x="628.03" y="25" width="42.38" height="24" rx="10" fill="rgba(0, 167, 235, 0.102)" />
+      <text id="Beta" x="636.03" y="41" fill="#0069a8" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Beta</text>
+      <rect id="container 7" x="454.34" y="61" width="44.53" height="24" rx="10" fill="#00782e" />
+      <text id="Solid" x="462.34" y="77" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Solid</text>
+      <rect id="container 8" x="506.88" y="61" width="58.95" height="24" rx="10" fill="none" stroke="rgba(0, 120, 45, 0.4)" stroke-width="1" />
+      <text id="Outline" x="515.88" y="77" fill="#00782e" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Outline</text>
+      <rect id="container 9" x="573.83" y="61" width="59.83" height="24" rx="12" fill="#f3f2ee" />
+      <text id="Soft pill" x="581.83" y="77" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Soft pill</text>
+  </g>
+  <text id="State=Hover label badge" x="1216" y="138" font-family="ui-monospace, monospace" font-size="13" font-weight="600" fill="#0a0a0a">State=Hover</text>
+  <text id="State=Hover note badge" x="1216" y="164" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#737373">n/a: no interactive element</text>
+  <text id="State=Focus label badge" x="1600" y="138" font-family="ui-monospace, monospace" font-size="13" font-weight="600" fill="#0a0a0a">State=Focus</text>
+  <text id="State=Focus note badge" x="1600" y="164" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#737373">n/a: no interactive element</text>
+  <text id="State=Active label badge" x="1984" y="138" font-family="ui-monospace, monospace" font-size="13" font-weight="600" fill="#0a0a0a">State=Active</text>
+  <text id="State=Active note badge" x="1984" y="164" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#737373">n/a: no interactive element</text>
+  <text id="State=Disabled label badge" x="2368" y="138" font-family="ui-monospace, monospace" font-size="13" font-weight="600" fill="#0a0a0a">State=Disabled</text>
+  <text id="State=Disabled note badge" x="2368" y="164" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#737373">n/a: no interactive element</text>
+  <text id="State=Loading label badge" x="2752" y="138" font-family="ui-monospace, monospace" font-size="13" font-weight="600" fill="#0a0a0a">State=Loading</text>
+  <text id="State=Loading note badge" x="2752" y="164" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#737373">n/a: no interactive element</text>
+  <text id="State=Error label badge" x="3136" y="138" font-family="ui-monospace, monospace" font-size="13" font-weight="600" fill="#0a0a0a">State=Error</text>
+  <text id="State=Error note badge" x="3136" y="164" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#737373">n/a: no form control</text>
+  <text id="State=Empty label badge" x="3520" y="138" font-family="ui-monospace, monospace" font-size="13" font-weight="600" fill="#0a0a0a">State=Empty</text>
+  <g id="State=Empty" transform="translate(3520, 148)">
+    <rect id="container" x="0" y="0" width="1088" height="110" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="488" y="25" width="16" height="24" rx="8" fill="rgba(0, 118, 49, 0.102)" />
+      <rect id="container 3" x="512" y="25" width="16" height="24" rx="8" fill="rgba(0, 186, 118, 0.102)" />
+      <rect id="container 4" x="536" y="25" width="16" height="24" rx="8" fill="rgba(245, 147, 0, 0.102)" />
+      <rect id="container 5" x="560" y="25" width="16" height="24" rx="8" fill="rgba(226, 0, 10, 0.102)" />
+      <rect id="container 6" x="584" y="25" width="16" height="24" rx="8" fill="rgba(0, 167, 235, 0.102)" />
+      <rect id="container 7" x="511" y="61" width="16" height="24" rx="8" fill="#00782e" />
+      <rect id="container 8" x="535" y="61" width="18" height="24" rx="9" fill="none" stroke="rgba(0, 120, 45, 0.4)" stroke-width="1" />
+      <rect id="container 9" x="561" y="61" width="16" height="24" rx="8" fill="#f3f2ee" />
+  </g>
+  <text id="State=Long text label badge" x="4672" y="138" font-family="ui-monospace, monospace" font-size="13" font-weight="600" fill="#0a0a0a">State=Long text</text>
+  <g id="State=Long text" transform="translate(4672, 148)">
+    <rect id="container" x="0" y="0" width="1088" height="142" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="156.63" y="25" width="249.58" height="24" rx="10" fill="rgba(0, 118, 49, 0.102)" />
+      <text id="Pro Wolfeschlegelsteinhausenbergerdorff" x="164.63" y="41" fill="#00782e" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Pro Wolfeschlegelsteinhausenbergerdorff</text>
+      <rect id="container 3" x="414.2" y="25" width="255.05" height="24" rx="10" fill="rgba(0, 186, 118, 0.102)" />
+      <text id="Paid Wolfeschlegelsteinhausenbergerdorff" x="422.2" y="41" fill="#007a55" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Paid Wolfeschlegelsteinhausenbergerdorff</text>
+      <rect id="container 4" x="677.25" y="25" width="254.13" height="24" rx="10" fill="rgba(245, 147, 0, 0.102)" />
+      <text id="Trial Wolfeschlegelsteinhausenbergerdorf…" x="685.25" y="41" fill="#bb4d00" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Trial Wolfeschlegelsteinhausenbergerdorff</text>
+      <rect id="container 5" x="272.75" y="57" width="277.63" height="24" rx="10" fill="rgba(226, 0, 10, 0.102)" />
+      <text id="Overdue Wolfeschlegelsteinhausenbergerdo…" x="280.75" y="73" fill="#e7000b" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Overdue Wolfeschlegelsteinhausenbergerdorff</text>
+      <rect id="container 6" x="558.38" y="57" width="256.86" height="24" rx="10" fill="rgba(0, 167, 235, 0.102)" />
+      <text id="Beta Wolfeschlegelsteinhausenbergerdorff" x="566.38" y="73" fill="#0069a8" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Beta Wolfeschlegelsteinhausenbergerdorff</text>
+      <rect id="container 7" x="132.61" y="93" width="259.02" height="24" rx="10" fill="#00782e" />
+      <text id="Solid Wolfeschlegelsteinhausenbergerdorf…" x="140.61" y="109" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Solid Wolfeschlegelsteinhausenbergerdorff</text>
+      <rect id="container 8" x="399.63" y="93" width="273.44" height="24" rx="10" fill="none" stroke="rgba(0, 120, 45, 0.4)" stroke-width="1" />
+      <text id="Outline Wolfeschlegelsteinhausenbergerdo…" x="408.63" y="109" fill="#00782e" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Outline Wolfeschlegelsteinhausenbergerdorff</text>
+      <rect id="container 9" x="681.06" y="93" width="274.31" height="24" rx="12" fill="#f3f2ee" />
+      <text id="Soft pill Wolfeschlegelsteinhausenberger…" x="689.06" y="109" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Soft pill Wolfeschlegelsteinhausenbergerdorff</text>
+  </g>
+  <text id="Status Badge title" x="64" y="432" font-family="Inter, system-ui, sans-serif" font-size="20" font-weight="700" fill="#0a0a0a">Status Badge</text>
+  <text id="status-badge id" x="64" y="450" font-family="ui-monospace, monospace" font-size="12" fill="#737373">status-badge</text>
+  <text id="State=Default label status-badge" x="64" y="484" font-family="ui-monospace, monospace" font-size="13" font-weight="600" fill="#0a0a0a">State=Default</text>
+  <g id="State=Default" transform="translate(64, 494)">
+    <rect id="container" x="0" y="0" width="1088" height="94" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="427.66" y="25" width="66.25" height="20" rx="10" fill="rgba(0, 186, 118, 0.102)" />
+      <text id="Online" x="449.66" y="39" fill="#007a55" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Online</text>
+      <rect id="container 3" x="435.66" y="31" width="8" height="8" rx="4" fill="#00bc7d" />
+      <rect id="container 4" x="501.91" y="25" width="86.52" height="20" rx="10" fill="rgba(0, 167, 235, 0.102)" />
+      <text id="Deploying" x="523.91" y="39" fill="#0069a8" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Deploying</text>
+      <rect id="container 5" x="509.91" y="31" width="8" height="8" rx="4" fill="#00a6f4" />
+      <rect id="container 6" x="596.42" y="25" width="63.92" height="20" rx="10" fill="rgba(226, 0, 10, 0.102)" />
+      <text id="Failed" x="618.42" y="39" fill="#e7000b" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Failed</text>
+      <rect id="container 7" x="604.42" y="31" width="8" height="8" rx="4" fill="#e7000b" />
+      <text id="Away" x="476.67" y="67" fill="#bb4d00" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Away</text>
+      <rect id="container 8" x="462.67" y="59" width="8" height="8" rx="4" fill="#fe9a00" />
+      <text id="Offline" x="532.95" y="67" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Offline</text>
+      <rect id="container 9" x="518.95" y="59" width="8" height="8" rx="4" fill="#90a1b9" />
+      <text id="Draft" x="596.56" y="67" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Draft</text>
+      <rect id="container 10" x="582.56" y="59" width="8" height="8" rx="4" fill="#90a1b9" />
+  </g>
+  <text id="State=Hover label status-badge" x="1216" y="484" font-family="ui-monospace, monospace" font-size="13" font-weight="600" fill="#0a0a0a">State=Hover</text>
+  <text id="State=Hover note status-badge" x="1216" y="510" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#737373">n/a: no interactive element</text>
+  <text id="State=Focus label status-badge" x="1600" y="484" font-family="ui-monospace, monospace" font-size="13" font-weight="600" fill="#0a0a0a">State=Focus</text>
+  <text id="State=Focus note status-badge" x="1600" y="510" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#737373">n/a: no interactive element</text>
+  <text id="State=Active label status-badge" x="1984" y="484" font-family="ui-monospace, monospace" font-size="13" font-weight="600" fill="#0a0a0a">State=Active</text>
+  <text id="State=Active note status-badge" x="1984" y="510" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#737373">n/a: no interactive element</text>
+  <text id="State=Disabled label status-badge" x="2368" y="484" font-family="ui-monospace, monospace" font-size="13" font-weight="600" fill="#0a0a0a">State=Disabled</text>
+  <text id="State=Disabled note status-badge" x="2368" y="510" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#737373">n/a: no interactive element</text>
+  <text id="State=Loading label status-badge" x="2752" y="484" font-family="ui-monospace, monospace" font-size="13" font-weight="600" fill="#0a0a0a">State=Loading</text>
+  <text id="State=Loading note status-badge" x="2752" y="510" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#737373">n/a: no interactive element</text>
+  <text id="State=Error label status-badge" x="3136" y="484" font-family="ui-monospace, monospace" font-size="13" font-weight="600" fill="#0a0a0a">State=Error</text>
+  <text id="State=Error note status-badge" x="3136" y="510" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#737373">n/a: no form control</text>
+  <text id="State=Empty label status-badge" x="3520" y="484" font-family="ui-monospace, monospace" font-size="13" font-weight="600" fill="#0a0a0a">State=Empty</text>
+  <g id="State=Empty" transform="translate(3520, 494)">
+    <rect id="container" x="0" y="0" width="1088" height="86" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="500" y="25" width="24" height="16" rx="8" fill="rgba(0, 186, 118, 0.102)" />
+      <rect id="container 3" x="508" y="29" width="8" height="8" rx="4" fill="#00bc7d" />
+      <rect id="container 4" x="532" y="25" width="24" height="16" rx="8" fill="rgba(0, 167, 235, 0.102)" />
+      <rect id="container 5" x="540" y="29" width="8" height="8" rx="4" fill="#00a6f4" />
+      <rect id="container 6" x="564" y="25" width="24" height="16" rx="8" fill="rgba(226, 0, 10, 0.102)" />
+      <rect id="container 7" x="572" y="29" width="8" height="8" rx="4" fill="#e7000b" />
+      <rect id="container 8" x="520" y="53" width="8" height="8" rx="4" fill="#fe9a00" />
+      <rect id="container 9" x="540" y="53" width="8" height="8" rx="4" fill="#90a1b9" />
+      <rect id="container 10" x="560" y="53" width="8" height="8" rx="4" fill="#90a1b9" />
+  </g>
+  <text id="State=Long text label status-badge" x="4672" y="484" font-family="ui-monospace, monospace" font-size="13" font-weight="600" fill="#0a0a0a">State=Long text</text>
+  <g id="State=Long text" transform="translate(4672, 494)">
+    <rect id="container" x="0" y="0" width="1088" height="94" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="105.92" y="25" width="280.73" height="20" rx="10" fill="rgba(0, 186, 118, 0.102)" />
+      <text id="Online Wolfeschlegelsteinhausenbergerdor…" x="127.92" y="39" fill="#007a55" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Online Wolfeschlegelsteinhausenbergerdorff</text>
+      <rect id="container 3" x="113.92" y="31" width="8" height="8" rx="4" fill="#00bc7d" />
+      <rect id="container 4" x="394.66" y="25" width="301" height="20" rx="10" fill="rgba(0, 167, 235, 0.102)" />
+      <text id="Deploying Wolfeschlegelsteinhausenberger…" x="416.66" y="39" fill="#0069a8" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Deploying Wolfeschlegelsteinhausenbergerdorff</text>
+      <rect id="container 5" x="401.55" y="29.89" width="10.22" height="10.22" rx="5.11" fill="#00a6f4" opacity="0.43" />
+      <rect id="container 6" x="402.66" y="31" width="8" height="8" rx="4" fill="#00a6f4" />
+      <rect id="container 7" x="703.66" y="25" width="278.41" height="20" rx="10" fill="rgba(226, 0, 10, 0.102)" />
+      <text id="Failed Wolfeschlegelsteinhausenbergerdor…" x="725.66" y="39" fill="#e7000b" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Failed Wolfeschlegelsteinhausenbergerdorff</text>
+      <rect id="container 8" x="711.66" y="31" width="8" height="8" rx="4" fill="#e7000b" />
+      <text id="Away Wolfeschlegelsteinhausenbergerdorff" x="154.95" y="67" fill="#bb4d00" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Away Wolfeschlegelsteinhausenbergerdorff</text>
+      <rect id="container 9" x="140.95" y="59" width="8" height="8" rx="4" fill="#fe9a00" />
+      <text id="Offline Wolfeschlegelsteinhausenbergerdo…" x="425.72" y="67" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Offline Wolfeschlegelsteinhausenbergerdorff</text>
+      <rect id="container 10" x="411.72" y="59" width="8" height="8" rx="4" fill="#90a1b9" />
+      <text id="Draft Wolfeschlegelsteinhausenbergerdorf…" x="703.81" y="67" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">Draft Wolfeschlegelsteinhausenbergerdorff</text>
+      <rect id="container 11" x="689.81" y="59" width="8" height="8" rx="4" fill="#90a1b9" />
+  </g>
+  <text id="Tag Chip &amp; Input title" x="64" y="730" font-family="Inter, system-ui, sans-serif" font-size="20" font-weight="700" fill="#0a0a0a">Tag Chip &amp; Input</text>
+  <text id="tag-chip id" x="64" y="748" font-family="ui-monospace, monospace" font-size="12" fill="#737373">tag-chip</text>
+  <text id="State=Default label tag-chip" x="64" y="782" font-family="ui-monospace, monospace" font-size="13" font-weight="600" fill="#0a0a0a">State=Default</text>
+  <g id="State=Default" transform="translate(64, 792)">
+    <rect id="container" x="0" y="0" width="1088" height="118" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="352" y="25" width="384" height="68" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <rect id="container 3" x="359" y="32" width="71.63" height="24" rx="10" fill="rgba(243, 242, 238, 0.6)" stroke="#dbdee1" stroke-width="1" />
+      <text id="design" x="368" y="48" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">design</text>
+      <g id="icon x" transform="translate(411.625 38) scale(0.5 0.5)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 6 6 18" />
+        <path d="m6 6 12 12" />
+      </g>
+      <rect id="container 4" x="436.63" y="32" width="103.77" height="24" rx="10" fill="rgba(243, 242, 238, 0.6)" stroke="#dbdee1" stroke-width="1" />
+      <text id="accessibility" x="445.63" y="48" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">accessibility</text>
+      <g id="icon x 2" transform="translate(521.391 38) scale(0.5 0.5)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 6 6 18" />
+        <path d="m6 6 12 12" />
+      </g>
+      <rect id="container 5" x="546.39" y="32" width="78.94" height="24" rx="10" fill="rgba(243, 242, 238, 0.6)" stroke="#dbdee1" stroke-width="1" />
+      <text id="shipped" x="555.39" y="48" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">shipped</text>
+      <g id="icon x 3" transform="translate(606.328 38) scale(0.5 0.5)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 6 6 18" />
+        <path d="m6 6 12 12" />
+      </g>
+  </g>
+  <text id="State=Hover label tag-chip" x="1216" y="782" font-family="ui-monospace, monospace" font-size="13" font-weight="600" fill="#0a0a0a">State=Hover</text>
+  <g id="State=Hover" transform="translate(1216, 792)">
+    <rect id="container" x="0" y="0" width="1088" height="118" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="352" y="25" width="384" height="68" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <rect id="container 3" x="359" y="32" width="71.63" height="24" rx="10" fill="rgba(243, 242, 238, 0.6)" stroke="#dbdee1" stroke-width="1" />
+      <text id="design" x="368" y="48" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">design</text>
+      <rect id="button" x="409.63" y="36" width="16" height="16" rx="4" fill="rgba(10, 10, 20, 0.102)" />
+      <g id="icon x" transform="translate(411.625 38) scale(0.5 0.5)" fill="none" stroke="#080c0f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 6 6 18" />
+        <path d="m6 6 12 12" />
+      </g>
+      <rect id="container 4" x="436.63" y="32" width="103.77" height="24" rx="10" fill="rgba(243, 242, 238, 0.6)" stroke="#dbdee1" stroke-width="1" />
+      <text id="accessibility" x="445.63" y="48" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">accessibility</text>
+      <rect id="button 2" x="519.39" y="36" width="16" height="16" rx="4" fill="rgba(10, 10, 20, 0.102)" />
+      <g id="icon x 2" transform="translate(521.391 38) scale(0.5 0.5)" fill="none" stroke="#080c0f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 6 6 18" />
+        <path d="m6 6 12 12" />
+      </g>
+      <rect id="container 5" x="546.39" y="32" width="78.94" height="24" rx="10" fill="rgba(243, 242, 238, 0.6)" stroke="#dbdee1" stroke-width="1" />
+      <text id="shipped" x="555.39" y="48" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">shipped</text>
+      <rect id="button 3" x="604.33" y="36" width="16" height="16" rx="4" fill="rgba(10, 10, 20, 0.102)" />
+      <g id="icon x 3" transform="translate(606.328 38) scale(0.5 0.5)" fill="none" stroke="#080c0f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 6 6 18" />
+        <path d="m6 6 12 12" />
+      </g>
+  </g>
+  <text id="State=Focus label tag-chip" x="2368" y="782" font-family="ui-monospace, monospace" font-size="13" font-weight="600" fill="#0a0a0a">State=Focus</text>
+  <g id="State=Focus" transform="translate(2368, 792)">
+    <rect id="container" x="0" y="0" width="1088" height="118" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="352" y="25" width="384" height="68" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <rect id="container 3" x="359" y="32" width="71.63" height="24" rx="10" fill="rgba(243, 242, 238, 0.6)" stroke="#dbdee1" stroke-width="1" />
+      <text id="design" x="368" y="48" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">design</text>
+      <g id="icon x" transform="translate(411.625 38) scale(0.5 0.5)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 6 6 18" />
+        <path d="m6 6 12 12" />
+      </g>
+      <rect id="container 4" x="436.63" y="32" width="103.77" height="24" rx="10" fill="rgba(243, 242, 238, 0.6)" stroke="#dbdee1" stroke-width="1" />
+      <text id="accessibility" x="445.63" y="48" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">accessibility</text>
+      <g id="icon x 2" transform="translate(521.391 38) scale(0.5 0.5)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 6 6 18" />
+        <path d="m6 6 12 12" />
+      </g>
+      <rect id="container 5" x="546.39" y="32" width="78.94" height="24" rx="10" fill="rgba(243, 242, 238, 0.6)" stroke="#dbdee1" stroke-width="1" />
+      <text id="shipped" x="555.39" y="48" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">shipped</text>
+      <g id="icon x 3" transform="translate(606.328 38) scale(0.5 0.5)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 6 6 18" />
+        <path d="m6 6 12 12" />
+      </g>
+  </g>
+  <text id="State=Active label tag-chip" x="3520" y="782" font-family="ui-monospace, monospace" font-size="13" font-weight="600" fill="#0a0a0a">State=Active</text>
+  <g id="State=Active" transform="translate(3520, 792)">
+    <rect id="container" x="0" y="0" width="1088" height="118" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="352" y="25" width="384" height="68" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <rect id="container 3" x="359" y="32" width="71.63" height="24" rx="10" fill="rgba(243, 242, 238, 0.6)" stroke="#dbdee1" stroke-width="1" />
+      <text id="design" x="368" y="48" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">design</text>
+      <g id="icon x" transform="translate(411.625 38) scale(0.5 0.5)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 6 6 18" />
+        <path d="m6 6 12 12" />
+      </g>
+      <rect id="container 4" x="436.63" y="32" width="103.77" height="24" rx="10" fill="rgba(243, 242, 238, 0.6)" stroke="#dbdee1" stroke-width="1" />
+      <text id="accessibility" x="445.63" y="48" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">accessibility</text>
+      <g id="icon x 2" transform="translate(521.391 38) scale(0.5 0.5)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 6 6 18" />
+        <path d="m6 6 12 12" />
+      </g>
+      <rect id="container 5" x="546.39" y="32" width="78.94" height="24" rx="10" fill="rgba(243, 242, 238, 0.6)" stroke="#dbdee1" stroke-width="1" />
+      <text id="shipped" x="555.39" y="48" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">shipped</text>
+      <g id="icon x 3" transform="translate(606.328 38) scale(0.5 0.5)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 6 6 18" />
+        <path d="m6 6 12 12" />
+      </g>
+  </g>
+  <text id="State=Disabled label tag-chip" x="4672" y="782" font-family="ui-monospace, monospace" font-size="13" font-weight="600" fill="#0a0a0a">State=Disabled</text>
+  <g id="State=Disabled" transform="translate(4672, 792)">
+    <rect id="container" x="0" y="0" width="1088" height="118" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="352" y="25" width="384" height="68" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <rect id="container 3" x="359" y="32" width="71.63" height="24" rx="10" fill="rgba(243, 242, 238, 0.6)" stroke="#dbdee1" stroke-width="1" />
+      <text id="design" x="368" y="48" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">design</text>
+      <g id="icon x" transform="translate(411.625 38) scale(0.5 0.5)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 6 6 18" />
+        <path d="m6 6 12 12" />
+      </g>
+      <rect id="container 4" x="436.63" y="32" width="103.77" height="24" rx="10" fill="rgba(243, 242, 238, 0.6)" stroke="#dbdee1" stroke-width="1" />
+      <text id="accessibility" x="445.63" y="48" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">accessibility</text>
+      <g id="icon x 2" transform="translate(521.391 38) scale(0.5 0.5)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 6 6 18" />
+        <path d="m6 6 12 12" />
+      </g>
+      <rect id="container 5" x="546.39" y="32" width="78.94" height="24" rx="10" fill="rgba(243, 242, 238, 0.6)" stroke="#dbdee1" stroke-width="1" />
+      <text id="shipped" x="555.39" y="48" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">shipped</text>
+      <g id="icon x 3" transform="translate(606.328 38) scale(0.5 0.5)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 6 6 18" />
+        <path d="m6 6 12 12" />
+      </g>
+  </g>
+  <text id="State=Loading label tag-chip" x="5824" y="782" font-family="ui-monospace, monospace" font-size="13" font-weight="600" fill="#0a0a0a">State=Loading</text>
+  <g id="State=Loading" transform="translate(5824, 792)">
+    <rect id="container" x="0" y="0" width="1088" height="118" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="352" y="25" width="384" height="68" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <rect id="container 3" x="359" y="32" width="71.63" height="24" rx="10" fill="rgba(243, 242, 238, 0.6)" stroke="#dbdee1" stroke-width="1" />
+      <text id="design" x="368" y="48" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">design</text>
+      <g id="icon x" transform="translate(411.625 38) scale(0.5 0.5)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 6 6 18" />
+        <path d="m6 6 12 12" />
+      </g>
+      <rect id="container 4" x="436.63" y="32" width="103.77" height="24" rx="10" fill="rgba(243, 242, 238, 0.6)" stroke="#dbdee1" stroke-width="1" />
+      <text id="accessibility" x="445.63" y="48" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">accessibility</text>
+      <g id="icon x 2" transform="translate(521.391 38) scale(0.5 0.5)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 6 6 18" />
+        <path d="m6 6 12 12" />
+      </g>
+      <rect id="container 5" x="546.39" y="32" width="78.94" height="24" rx="10" fill="rgba(243, 242, 238, 0.6)" stroke="#dbdee1" stroke-width="1" />
+      <text id="shipped" x="555.39" y="48" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">shipped</text>
+      <g id="icon x 3" transform="translate(606.328 38) scale(0.5 0.5)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 6 6 18" />
+        <path d="m6 6 12 12" />
+      </g>
+  </g>
+  <text id="State=Error label tag-chip" x="6976" y="782" font-family="ui-monospace, monospace" font-size="13" font-weight="600" fill="#0a0a0a">State=Error</text>
+  <g id="State=Error" transform="translate(6976, 792)">
+    <rect id="container" x="0" y="0" width="1088" height="118" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="352" y="25" width="384" height="68" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <rect id="container 3" x="359" y="32" width="71.63" height="24" rx="10" fill="rgba(243, 242, 238, 0.6)" stroke="#dbdee1" stroke-width="1" />
+      <text id="design" x="368" y="48" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">design</text>
+      <g id="icon x" transform="translate(411.625 38) scale(0.5 0.5)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 6 6 18" />
+        <path d="m6 6 12 12" />
+      </g>
+      <rect id="container 4" x="436.63" y="32" width="103.77" height="24" rx="10" fill="rgba(243, 242, 238, 0.6)" stroke="#dbdee1" stroke-width="1" />
+      <text id="accessibility" x="445.63" y="48" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">accessibility</text>
+      <g id="icon x 2" transform="translate(521.391 38) scale(0.5 0.5)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 6 6 18" />
+        <path d="m6 6 12 12" />
+      </g>
+      <rect id="container 5" x="546.39" y="32" width="78.94" height="24" rx="10" fill="rgba(243, 242, 238, 0.6)" stroke="#dbdee1" stroke-width="1" />
+      <text id="shipped" x="555.39" y="48" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">shipped</text>
+      <g id="icon x 3" transform="translate(606.328 38) scale(0.5 0.5)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 6 6 18" />
+        <path d="m6 6 12 12" />
+      </g>
+  </g>
+  <text id="State=Empty label tag-chip" x="8128" y="782" font-family="ui-monospace, monospace" font-size="13" font-weight="600" fill="#0a0a0a">State=Empty</text>
+  <g id="State=Empty" transform="translate(8128, 792)">
+    <rect id="container" x="0" y="0" width="1088" height="88" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="352" y="25" width="384" height="38" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <rect id="container 3" x="359" y="32" width="34" height="24" rx="10" fill="rgba(243, 242, 238, 0.6)" stroke="#dbdee1" stroke-width="1" />
+      <g id="icon x" transform="translate(374 38) scale(0.5 0.5)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 6 6 18" />
+        <path d="m6 6 12 12" />
+      </g>
+      <rect id="container 4" x="399" y="32" width="34" height="24" rx="10" fill="rgba(243, 242, 238, 0.6)" stroke="#dbdee1" stroke-width="1" />
+      <g id="icon x 2" transform="translate(414 38) scale(0.5 0.5)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 6 6 18" />
+        <path d="m6 6 12 12" />
+      </g>
+      <rect id="container 5" x="439" y="32" width="34" height="24" rx="10" fill="rgba(243, 242, 238, 0.6)" stroke="#dbdee1" stroke-width="1" />
+      <g id="icon x 3" transform="translate(454 38) scale(0.5 0.5)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 6 6 18" />
+        <path d="m6 6 12 12" />
+      </g>
+  </g>
+  <text id="State=Long text label tag-chip" x="9280" y="782" font-family="ui-monospace, monospace" font-size="13" font-weight="600" fill="#0a0a0a">State=Long text</text>
+  <g id="State=Long text" transform="translate(9280, 792)">
+    <rect id="container" x="0" y="0" width="1088" height="148" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="352" y="25" width="384" height="98" rx="12" fill="#fdfcf8" stroke="#dbdee1" stroke-width="1" />
+      <rect id="container 3" x="359" y="32" width="226" height="24" rx="10" fill="rgba(243, 242, 238, 0.6)" stroke="#dbdee1" stroke-width="1" />
+      <text id="design Wolfeschlegelsteinhausenbergerdor…" x="368" y="48" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">design Wolfeschlegelsteinhausenbergerdorff</text>
+      <g id="icon x" transform="translate(566 38) scale(0.5 0.5)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 6 6 18" />
+        <path d="m6 6 12 12" />
+      </g>
+      <rect id="container 4" x="359" y="62" width="226" height="24" rx="10" fill="rgba(243, 242, 238, 0.6)" stroke="#dbdee1" stroke-width="1" />
+      <text id="accessibility Wolfeschlegelsteinhausenbe…" x="368" y="78" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">accessibility Wolfeschlegelsteinhausenbergerdorff</text>
+      <g id="icon x 2" transform="translate(566 68) scale(0.5 0.5)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 6 6 18" />
+        <path d="m6 6 12 12" />
+      </g>
+      <rect id="container 5" x="359" y="92" width="226" height="24" rx="10" fill="rgba(243, 242, 238, 0.6)" stroke="#dbdee1" stroke-width="1" />
+      <text id="shipped Wolfeschlegelsteinhausenbergerdo…" x="368" y="108" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500">shipped Wolfeschlegelsteinhausenbergerdorff</text>
+      <g id="icon x 3" transform="translate(566 98) scale(0.5 0.5)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 6 6 18" />
+        <path d="m6 6 12 12" />
+      </g>
+  </g>
+  <text id="Skeleton title" x="64" y="1082" font-family="Inter, system-ui, sans-serif" font-size="20" font-weight="700" fill="#0a0a0a">Skeleton</text>
+  <text id="skeleton id" x="64" y="1100" font-family="ui-monospace, monospace" font-size="12" fill="#737373">skeleton</text>
+  <text id="State=Default label skeleton" x="64" y="1134" font-family="ui-monospace, monospace" font-size="13" font-weight="600" fill="#0a0a0a">State=Default</text>
+  <g id="State=Default" transform="translate(64, 1144)">
+    <rect id="container" x="0" y="0" width="1088" height="184" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="352" y="25" width="40" height="40" rx="20" fill="rgba(242, 241, 238, 0.702)" opacity="0.5" />
+      <rect id="container 3" x="404" y="25" width="332" height="14" rx="4" fill="rgba(242, 241, 238, 0.702)" opacity="0.5" />
+      <rect id="container 4" x="404" y="47" width="332" height="14" rx="4" fill="rgba(242, 241, 238, 0.702)" opacity="0.5" />
+      <rect id="container 5" x="404" y="69" width="199.19" height="14" rx="4" fill="rgba(242, 241, 238, 0.702)" opacity="0.5" />
+      <rect id="container 6" x="352" y="95" width="64" height="64" rx="12" fill="rgba(242, 241, 238, 0.702)" opacity="0.5" />
+      <rect id="container 7" x="428" y="95" width="96" height="36" rx="12" fill="rgba(242, 241, 238, 0.702)" opacity="0.5" />
+  </g>
+  <text id="State=Hover label skeleton" x="1216" y="1134" font-family="ui-monospace, monospace" font-size="13" font-weight="600" fill="#0a0a0a">State=Hover</text>
+  <text id="State=Hover note skeleton" x="1216" y="1160" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#737373">n/a: no interactive element</text>
+  <text id="State=Focus label skeleton" x="1600" y="1134" font-family="ui-monospace, monospace" font-size="13" font-weight="600" fill="#0a0a0a">State=Focus</text>
+  <text id="State=Focus note skeleton" x="1600" y="1160" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#737373">n/a: no interactive element</text>
+  <text id="State=Active label skeleton" x="1984" y="1134" font-family="ui-monospace, monospace" font-size="13" font-weight="600" fill="#0a0a0a">State=Active</text>
+  <text id="State=Active note skeleton" x="1984" y="1160" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#737373">n/a: no interactive element</text>
+  <text id="State=Disabled label skeleton" x="2368" y="1134" font-family="ui-monospace, monospace" font-size="13" font-weight="600" fill="#0a0a0a">State=Disabled</text>
+  <text id="State=Disabled note skeleton" x="2368" y="1160" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#737373">n/a: no interactive element</text>
+  <text id="State=Loading label skeleton" x="2752" y="1134" font-family="ui-monospace, monospace" font-size="13" font-weight="600" fill="#0a0a0a">State=Loading</text>
+  <text id="State=Loading note skeleton" x="2752" y="1160" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#737373">n/a: no interactive element</text>
+  <text id="State=Error label skeleton" x="3136" y="1134" font-family="ui-monospace, monospace" font-size="13" font-weight="600" fill="#0a0a0a">State=Error</text>
+  <text id="State=Error note skeleton" x="3136" y="1160" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#737373">n/a: no form control</text>
+  <text id="State=Empty label skeleton" x="3520" y="1134" font-family="ui-monospace, monospace" font-size="13" font-weight="600" fill="#0a0a0a">State=Empty</text>
+  <text id="State=Empty note skeleton" x="3520" y="1160" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#737373">n/a: no text or input</text>
+  <text id="State=Long text label skeleton" x="3904" y="1134" font-family="ui-monospace, monospace" font-size="13" font-weight="600" fill="#0a0a0a">State=Long text</text>
+  <text id="State=Long text note skeleton" x="3904" y="1160" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#737373">n/a: no text or input</text>
+</svg>

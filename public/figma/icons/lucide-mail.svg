@@ -1,0 +1,178 @@
+<!--
+ISC License
+
+Copyright (c) for portions of Lucide are held by Cole Bemis 2013-2022 as part of Feather (MIT). All other copyright (c) for Lucide are held by Lucide Contributors 2022.
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted, provided that the above
+copyright notice and this permission notice appear in all copies.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" width="784" height="64" viewBox="0 0 784 64" id="Lucide icons / Mail" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <g id="archive" transform="translate(0 0)">
+    <rect id="archive bounds" width="24" height="24" fill="none" stroke="none" />
+    <rect width="20" height="5" x="2" y="3" rx="1" />
+    <path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8" />
+    <path d="M10 12h4" />
+  </g>
+  <g id="archive-restore" transform="translate(40 0)">
+    <rect id="archive-restore bounds" width="24" height="24" fill="none" stroke="none" />
+    <rect width="20" height="5" x="2" y="3" rx="1" />
+    <path d="M4 8v11a2 2 0 0 0 2 2h2" />
+    <path d="M20 8v11a2 2 0 0 1-2 2h-2" />
+    <path d="m9 15 3-3 3 3" />
+    <path d="M12 12v9" />
+  </g>
+  <g id="archive-x" transform="translate(80 0)">
+    <rect id="archive-x bounds" width="24" height="24" fill="none" stroke="none" />
+    <rect width="20" height="5" x="2" y="3" rx="1" />
+    <path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8" />
+    <path d="m9.5 17 5-5" />
+    <path d="m9.5 12 5 5" />
+  </g>
+  <g id="arrows-up-from-line" transform="translate(120 0)">
+    <rect id="arrows-up-from-line bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m4 6 3-3 3 3" />
+    <path d="M7 17V3" />
+    <path d="m14 6 3-3 3 3" />
+    <path d="M17 17V3" />
+    <path d="M4 21h16" />
+  </g>
+  <g id="container" transform="translate(160 0)">
+    <rect id="container bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M22 7.7c0-.6-.4-1.2-.8-1.5l-6.3-3.9a1.72 1.72 0 0 0-1.7 0l-10.3 6c-.5.2-.9.8-.9 1.4v6.6c0 .5.4 1.2.8 1.5l6.3 3.9a1.72 1.72 0 0 0 1.7 0l10.3-6c.5-.3.9-1 .9-1.5Z" />
+    <path d="M10 21.9V14L2.1 9.1" />
+    <path d="m10 14 11.9-6.9" />
+    <path d="M14 19.8v-8.1" />
+    <path d="M18 17.5V9.4" />
+  </g>
+  <g id="forward" transform="translate(200 0)">
+    <rect id="forward bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m15 17 5-5-5-5" />
+    <path d="M4 18v-2a4 4 0 0 1 4-4h12" />
+  </g>
+  <g id="inbox" transform="translate(240 0)">
+    <rect id="inbox bounds" width="24" height="24" fill="none" stroke="none" />
+    <polyline points="22 12 16 12 14 15 10 15 8 12 2 12" />
+    <path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z" />
+  </g>
+  <g id="mail" transform="translate(280 0)">
+    <rect id="mail bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7" />
+    <rect x="2" y="4" width="20" height="16" rx="2" />
+  </g>
+  <g id="mail-check" transform="translate(320 0)">
+    <rect id="mail-check bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M22 13V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v12c0 1.1.9 2 2 2h8" />
+    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+    <path d="m16 19 2 2 4-4" />
+  </g>
+  <g id="mail-minus" transform="translate(360 0)">
+    <rect id="mail-minus bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M22 15V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v12c0 1.1.9 2 2 2h8" />
+    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+    <path d="M16 19h6" />
+  </g>
+  <g id="mail-open" transform="translate(400 0)">
+    <rect id="mail-open bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M21.2 8.4c.5.38.8.97.8 1.6v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V10a2 2 0 0 1 .8-1.6l8-6a2 2 0 0 1 2.4 0l8 6Z" />
+    <path d="m22 10-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 10" />
+  </g>
+  <g id="mail-plus" transform="translate(440 0)">
+    <rect id="mail-plus bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M22 13V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v12c0 1.1.9 2 2 2h8" />
+    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+    <path d="M19 16v6" />
+    <path d="M16 19h6" />
+  </g>
+  <g id="mail-question-mark" transform="translate(480 0)">
+    <rect id="mail-question-mark bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M22 10.5V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v12c0 1.1.9 2 2 2h12.5" />
+    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+    <path d="M18 15.28c.2-.4.5-.8.9-1a2.1 2.1 0 0 1 2.6.4c.3.4.5.8.5 1.3 0 1.3-2 2-2 2" />
+    <path d="M20 22v.01" />
+  </g>
+  <g id="mail-search" transform="translate(520 0)">
+    <rect id="mail-search bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M22 12.5V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v12c0 1.1.9 2 2 2h7.5" />
+    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+    <path d="M18 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+    <circle cx="18" cy="18" r="3" />
+    <path d="m22 22-1.5-1.5" />
+  </g>
+  <g id="mail-warning" transform="translate(560 0)">
+    <rect id="mail-warning bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M22 10.5V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v12c0 1.1.9 2 2 2h12.5" />
+    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+    <path d="M20 14v4" />
+    <path d="M20 22v.01" />
+  </g>
+  <g id="mail-x" transform="translate(600 0)">
+    <rect id="mail-x bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M22 13V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v12c0 1.1.9 2 2 2h9" />
+    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+    <path d="m17 17 4 4" />
+    <path d="m21 17-4 4" />
+  </g>
+  <g id="mailbox" transform="translate(640 0)">
+    <rect id="mailbox bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M22 17a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9.5C2 7 4 5 6.5 5H18c2.2 0 4 1.8 4 4v8Z" />
+    <polyline points="15,9 18,9 18,11" />
+    <path d="M6.5 5C9 5 11 7 11 9.5V17a2 2 0 0 1-2 2" />
+    <line x1="6" x2="7" y1="10" y2="10" />
+  </g>
+  <g id="mails" transform="translate(680 0)">
+    <rect id="mails bounds" width="24" height="24" fill="none" stroke="none" />
+    <rect width="16" height="13" x="6" y="4" rx="2" />
+    <path d="m22 7-7.1 3.78c-.57.3-1.23.3-1.8 0L6 7" />
+    <path d="M2 8v11c0 1.1.9 2 2 2h14" />
+  </g>
+  <g id="paperclip" transform="translate(720 0)">
+    <rect id="paperclip bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m16 6-8.414 8.586a2 2 0 0 0 2.829 2.829l8.414-8.586a4 4 0 1 0-5.657-5.657l-8.379 8.551a6 6 0 1 0 8.485 8.485l8.379-8.551" />
+  </g>
+  <g id="reply" transform="translate(760 0)">
+    <rect id="reply bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M20 18v-2a4 4 0 0 0-4-4H4" />
+    <path d="m9 17-5-5 5-5" />
+  </g>
+  <g id="reply-all" transform="translate(0 40)">
+    <rect id="reply-all bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="m12 17-5-5 5-5" />
+    <path d="M22 18v-2a4 4 0 0 0-4-4H7" />
+    <path d="m7 17-5-5 5-5" />
+  </g>
+  <g id="send" transform="translate(40 40)">
+    <rect id="send bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z" />
+    <path d="m21.854 2.147-10.94 10.939" />
+  </g>
+  <g id="send-horizontal" transform="translate(80 40)">
+    <rect id="send-horizontal bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M3.714 3.048a.498.498 0 0 0-.683.627l2.843 7.627a2 2 0 0 1 0 1.396l-2.842 7.627a.498.498 0 0 0 .682.627l18-8.5a.5.5 0 0 0 0-.904z" />
+    <path d="M6 12h16" />
+  </g>
+  <g id="shredder" transform="translate(120 40)">
+    <rect id="shredder bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M10 22v-5" />
+    <path d="M14 19v-2" />
+    <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+    <path d="M18 20v-3" />
+    <path d="M2 13h20" />
+    <path d="M20 13V7l-5-5H6a2 2 0 0 0-2 2v9" />
+    <path d="M6 20v-3" />
+  </g>
+  <g id="trash" transform="translate(160 40)">
+    <rect id="trash bounds" width="24" height="24" fill="none" stroke="none" />
+    <path d="M3 6h18" />
+    <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+    <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+  </g>
+</svg>

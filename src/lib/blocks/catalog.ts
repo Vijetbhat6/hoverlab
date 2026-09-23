@@ -373,6 +373,53 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     previewComponent: 'support-ticket-form',
     deps: [],
   },
+  /* ---------------------------- Email Templates --------------------- *
+   * Nested tables, inline styles, a physical postal address and an
+   * unsubscribe link — the discipline `/tools/email` argues for, applied to
+   * the emails a team sends to a whole list on purpose rather than to one
+   * account at a time. See `sources/email-product-announcement.tsx` for the
+   * long version of why this is not just another Content & Blog block. */
+  {
+    id: 'email-product-announcement',
+    name: 'Feature Launch Email',
+    category: 'Email Templates',
+    description:
+      'A feature-announcement email as HTML that survives Outlook — nested tables, inline styles and a hidden preheader, previewed in a sandboxed iframe so the styles cannot leak onto the page around it.',
+    tags: ['email', 'newsletter', 'marketing', 'html email', 'announcement'],
+    previewComponent: 'email-product-announcement',
+    deps: [],
+    featured: true,
+  },
+  {
+    id: 'email-newsletter-digest',
+    name: 'Newsletter Digest Email',
+    category: 'Email Templates',
+    description:
+      'A periodic roundup of several stories in one email, each reduced to a kicker, a headline and one line — the shape a reader can scan in order instead of a wall of paragraphs.',
+    tags: ['email', 'newsletter', 'digest', 'html email', 'roundup'],
+    previewComponent: 'email-newsletter-digest',
+    deps: [],
+  },
+  {
+    id: 'email-promo-offer',
+    name: 'Promotional Offer Email',
+    category: 'Email Templates',
+    description:
+      'A time-boxed discount email that leads with the number, states a deadline rather than a live countdown email cannot run, and letter-spaces the code so it survives being copied out of an inbox.',
+    tags: ['email', 'promo', 'discount', 'sale', 'html email'],
+    previewComponent: 'email-promo-offer',
+    deps: [],
+  },
+  {
+    id: 'email-winback',
+    name: 'Re-Engagement Email',
+    category: 'Email Templates',
+    description:
+      'A win-back email to a dormant account that opens with a fact about their own data, not a feature list, and asks for one tap instead of a click back into a product they stopped opening.',
+    tags: ['email', 'winback', 're-engagement', 'churn', 'html email'],
+    previewComponent: 'email-winback',
+    deps: [],
+  },
   /* ---------------------------- Modals & Drawers ------------------- */
   {
     id: 'confirm-dialog',
@@ -1066,6 +1113,17 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     featured: true,
   },
   {
+    id: 'case-study-grid',
+    name: 'Case Study Card Grid',
+    category: 'Content & Blog',
+    description:
+      'A grid of case-study cards that lead with the metric rather than the company name, each one linking out to the full write-up — the block a customer-stories section or a home page needed and only had a full case-study page for.',
+    tags: ['case study', 'customers', 'testimonials', 'results', 'proof'],
+    previewComponent: 'case-study-grid',
+    deps: ['lucide-react'],
+    featured: true,
+  },
+  {
     id: 'article-header',
     name: 'Article Header & Byline',
     category: 'Content & Blog',
@@ -1316,6 +1374,123 @@ export const BLOCK_CATALOG: BlockRecord[] = [
     tags: ["sso", "saml", "scim", "enterprise", "auth"],
     previewComponent: 'sso-enterprise-split',
     deps: [],
+  },
+
+  /* ----------------------------- Sidebars ------------------------- */
+  {
+    id: 'sidebar-app-grouped',
+    name: 'Grouped App Sidebar',
+    category: 'Sidebars',
+    description:
+      'Brand header, search trigger, labelled link groups and a user row, with each group announced as a list and the active link marked aria-current.',
+    tags: ['sidebar', 'navigation', 'app', 'groups', 'admin'],
+    previewComponent: 'sidebar-app-grouped',
+    deps: ['lucide-react'],
+    featured: true,
+  },
+  {
+    id: 'sidebar-collapsible',
+    name: 'Collapsible Icon-Rail Sidebar',
+    category: 'Sidebars',
+    description:
+      'Folds between a full list and an icon rail without losing any accessible names, with a Ctrl/Cmd+B shortcut and tooltips that show on keyboard focus too.',
+    tags: ['sidebar', 'collapse', 'rail', 'icons', 'shortcut'],
+    previewComponent: 'sidebar-collapsible',
+    deps: ['lucide-react'],
+    featured: true,
+  },
+  {
+    id: 'sidebar-two-pane',
+    name: 'Rail Plus Secondary Panel',
+    category: 'Sidebars',
+    description:
+      'A narrow rail of labelled sections beside a panel that lists the pages inside the chosen one, for products with more destinations than one list can hold.',
+    tags: ['sidebar', 'two-pane', 'rail', 'sections', 'navigation'],
+    previewComponent: 'sidebar-two-pane',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'sidebar-nested-accordion',
+    name: 'Nested Accordion Sidebar',
+    category: 'Sidebars',
+    description:
+      'Groups that fold open to child pages, starting with the group that owns the current page already open and every aria-controls resolving.',
+    tags: ['sidebar', 'accordion', 'nested', 'disclosure', 'tree'],
+    previewComponent: 'sidebar-nested-accordion',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'sidebar-workspace-switcher',
+    name: 'Sidebar With Workspace Switcher',
+    category: 'Sidebars',
+    description:
+      'A header that opens a real menu of workspaces: arrow keys, Home/End, Escape returning focus to the trigger, and checked state announced as a radio choice.',
+    tags: ['sidebar', 'workspace', 'switcher', 'menu', 'multi-tenant'],
+    previewComponent: 'sidebar-workspace-switcher',
+    deps: ['lucide-react'],
+    featured: true,
+  },
+  {
+    id: 'sidebar-floating-inset',
+    name: 'Floating Inset Sidebar',
+    category: 'Sidebars',
+    description:
+      'A floating card on a tinted canvas beside an inset content surface, with a labelled usage meter and an upgrade card that is one skippable Tab stop.',
+    tags: ['sidebar', 'floating', 'inset', 'card', 'upgrade'],
+    previewComponent: 'sidebar-floating-inset',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'sidebar-resizable',
+    name: 'Resizable Sidebar With Splitter',
+    category: 'Sidebars',
+    description:
+      'A drag handle that is also a keyboard-operable separator, with arrow keys that swap in RTL, pointer capture for touch and pen, and double-click to reset.',
+    tags: ['sidebar', 'resizable', 'splitter', 'drag', 'separator'],
+    previewComponent: 'sidebar-resizable',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'sidebar-docs-tree',
+    name: 'Docs Sidebar With Filter',
+    category: 'Sidebars',
+    description:
+      'Version picker, a labelled filter that announces its match count, and sections that vanish rather than leave a heading over an empty list.',
+    tags: ['sidebar', 'docs', 'filter', 'versions', 'documentation'],
+    previewComponent: 'sidebar-docs-tree',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'sidebar-thread-history',
+    name: 'Chat History Sidebar',
+    category: 'Sidebars',
+    description:
+      'Conversations grouped by recency with a per-row pin toggle that announces itself, and a hover control that stays reachable by keyboard and on touch.',
+    tags: ['sidebar', 'chat', 'history', 'threads', 'ai'],
+    previewComponent: 'sidebar-thread-history',
+    deps: ['lucide-react'],
+    featured: true,
+  },
+  {
+    id: 'sidebar-mail-folders',
+    name: 'Mail Folders Sidebar',
+    category: 'Sidebars',
+    description:
+      'Compose button, folders whose unread counts are spoken, colour labels that never rely on colour alone, and a storage meter with a text warning.',
+    tags: ['sidebar', 'mail', 'folders', 'labels', 'unread'],
+    previewComponent: 'sidebar-mail-folders',
+    deps: ['lucide-react'],
+  },
+  {
+    id: 'sidebar-file-tree',
+    name: 'File Explorer Tree Sidebar',
+    category: 'Sidebars',
+    description:
+      'A real ARIA tree with roving focus, arrow-key expand and collapse, type-ahead and one tab stop, drawn flat so a screen reader is told the structure.',
+    tags: ['sidebar', 'file-tree', 'explorer', 'tree', 'keyboard'],
+    previewComponent: 'sidebar-file-tree',
+    deps: ['lucide-react'],
+    featured: true,
   },
 
   /* ---------------------------- Dashboards ------------------------ */

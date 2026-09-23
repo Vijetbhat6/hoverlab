@@ -131,10 +131,10 @@ export function CheckoutExpressPayment({
                   onClick={() => setFilledBy(wallet.label)}
                   /* Says what it does and for how much, not just a wordmark. */
                   aria-label={`Pay with ${wallet.label}, ${total}`}
-                  className="inline-flex h-11 items-center justify-center gap-1.5 rounded-lg border border-border bg-background text-sm font-semibold text-foreground transition hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                  className="min-w-0 inline-flex min-h-11 items-center justify-center gap-1.5 rounded-lg border border-border bg-background text-sm font-semibold text-foreground transition hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 >
-                  <Wallet aria-hidden className="h-4 w-4" />
-                  {wallet.label}
+                  <Wallet aria-hidden className="h-4 w-4 shrink-0" />
+                  <span className="min-w-0 break-words">{wallet.label}</span>
                 </button>
               ))}
             </div>
@@ -194,8 +194,8 @@ export function CheckoutExpressPayment({
           ))}
 
           <div className="grid grid-cols-2 gap-3">
-            <div>
-              <label htmlFor={`${uid}-ep-city`} className="block text-sm font-medium text-foreground">
+            <div className="min-w-0">
+              <label htmlFor={`${uid}-ep-city`} className="block truncate text-sm font-medium text-foreground">
                 City
               </label>
               <input
@@ -207,8 +207,8 @@ export function CheckoutExpressPayment({
                 className="mt-1.5 h-10 w-full rounded-lg border border-field bg-background px-3 text-sm text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               />
             </div>
-            <div>
-              <label htmlFor={`${uid}-ep-postcode`} className="block text-sm font-medium text-foreground">
+            <div className="min-w-0">
+              <label htmlFor={`${uid}-ep-postcode`} className="block truncate text-sm font-medium text-foreground">
                 Postcode
               </label>
               <input

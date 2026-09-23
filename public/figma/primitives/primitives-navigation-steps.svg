@@ -1,0 +1,156 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1216" height="1858" viewBox="0 0 1216 1858" id="Hoverlab — Navigation &amp; Steps">
+  <!--
+    Hoverlab — Navigation & Steps. 6 controls, traced from the
+    rendered catalog. Drag this file onto a Figma canvas.
+
+    These are frames, not components: named, editable layers with real
+    geometry, colour and type. There are no variants, no auto-layout,
+    and no hover or motion — none of those exist in a static frame.
+
+    Every one of these is free to copy as code at https://hoverlab.dev/primitives
+  -->
+  <rect id="Background" x="0" y="0" width="1216" height="1858" fill="#ffffff" />
+  <text id="Progress Steps label" x="64" y="84" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Progress Steps</text>
+  <text id="progress-steps id" x="64" y="98" font-family="ui-monospace, monospace" font-size="12" fill="#737373">progress-steps</text>
+  <g id="Progress Steps" transform="translate(64, 116)">
+    <rect id="container" x="0" y="0" width="1088" height="110" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="320" y="25" width="32" height="32" rx="16" fill="#00782e" stroke="#00782e" stroke-width="2" />
+      <g id="icon check" transform="translate(328 33) scale(0.667 0.667)" fill="none" stroke="#fcfcfc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 6 9 17l-5-5" />
+      </g>
+      <rect id="container 3" x="360" y="40" width="93.92" height="2" rx="1" fill="#00782e" />
+      <text id="Cart" x="320" y="80" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Cart</text>
+      <rect id="container 4" x="453.92" y="25" width="32" height="32" rx="16" fill="#00782e" stroke="#00782e" stroke-width="2" />
+      <g id="icon check 2" transform="translate(461.922 33) scale(0.667 0.667)" fill="none" stroke="#fcfcfc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 6 9 17l-5-5" />
+      </g>
+      <rect id="container 5" x="493.92" y="40" width="93.92" height="2" rx="1" fill="#00782e" />
+      <text id="Delivery" x="453.92" y="80" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Delivery</text>
+      <rect id="container 6" x="587.84" y="25" width="32" height="32" rx="16" fill="#fdfcf8" stroke="#00782e" stroke-width="2" />
+      <text id="3" x="600.02" y="45" fill="#00782e" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="600">3</text>
+      <rect id="container 7" x="627.84" y="40" width="93.92" height="2" rx="1" fill="#dbdee1" />
+      <text id="Payment" x="587.84" y="80" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Payment</text>
+      <rect id="container 8" x="721.77" y="25" width="32" height="32" rx="16" fill="#fdfcf8" stroke="#dbdee1" stroke-width="2" />
+      <text id="4" x="733.91" y="45" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="600">4</text>
+      <text id="Done" x="721.77" y="80" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Done</text>
+  </g>
+  <text id="Tree View label" x="64" y="342" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Tree View</text>
+  <text id="tree-view id" x="64" y="356" font-family="ui-monospace, monospace" font-size="12" fill="#737373">tree-view</text>
+  <g id="Tree View" transform="translate(64, 374)">
+    <rect id="container" x="0" y="0" width="1088" height="218" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <g id="icon chevron-right" transform="translate(392 32) translate(7 7) matrix(0 1 -1 0 0 0) translate(-7 -7) scale(0.583 0.583)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m9 18 6-6-6-6" />
+      </g>
+      <g id="icon folder-open" transform="translate(412 31) scale(0.667 0.667)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2" />
+      </g>
+      <text id="src" x="434" y="44" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">src</text>
+      <g id="icon chevron-right 2" transform="translate(410 60) translate(7 7) matrix(0 1 -1 0 0 0) translate(-7 -7) scale(0.583 0.583)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m9 18 6-6-6-6" />
+      </g>
+      <g id="icon folder-open 2" transform="translate(430 59) scale(0.667 0.667)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2" />
+      </g>
+      <text id="components" x="452" y="72" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">components</text>
+      <rect id="treeitem" x="384" y="81" width="320" height="28" rx="10" fill="rgba(0, 118, 49, 0.102)" />
+      <g id="icon file" transform="translate(448 87) scale(0.667 0.667)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+        <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+      </g>
+      <text id="button.tsx" x="470" y="100" fill="#00782e" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">button.tsx</text>
+      <g id="icon file 2" transform="translate(448 115) scale(0.667 0.667)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+        <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+      </g>
+      <text id="field.tsx" x="470" y="128" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">field.tsx</text>
+      <g id="icon file 3" transform="translate(430 143) scale(0.667 0.667)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+        <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+      </g>
+      <text id="app.tsx" x="452" y="156" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">app.tsx</text>
+      <g id="icon file 4" transform="translate(412 171) scale(0.667 0.667)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+        <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+      </g>
+      <text id="package.json" x="434" y="184" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">package.json</text>
+  </g>
+  <text id="Tabs label" x="64" y="708" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Tabs</text>
+  <text id="tabs id" x="64" y="722" font-family="ui-monospace, monospace" font-size="12" fill="#737373">tabs</text>
+  <g id="Tabs" transform="translate(64, 740)">
+    <rect id="container" x="0" y="0" width="1088" height="164" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Overview" x="366.65" y="50" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Overview</text>
+      <text id="Activity" x="454.27" y="50" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Activity</text>
+      <rect id="container 2" x="487.23" y="35" width="26.7" height="20" rx="10" fill="#f3f2ee" />
+      <text id="12" x="500.59" y="49" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="12" font-weight="500" text-anchor="middle">12</text>
+      <text id="Billing" x="566.39" y="50" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Billing</text>
+      <text id="Settings" x="646.18" y="50" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">Settings</text>
+      <text id="Three deploys this week, none rolled bac…" x="320" y="98" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Three deploys this week, none rolled back. The last one shipped at</text>
+      <text id="09:42." x="320" y="118" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">09:42.</text>
+  </g>
+  <text id="Breadcrumbs label" x="64" y="1020" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Breadcrumbs</text>
+  <text id="breadcrumbs id" x="64" y="1034" font-family="ui-monospace, monospace" font-size="12" fill="#737373">breadcrumbs</text>
+  <g id="Breadcrumbs" transform="translate(64, 1052)">
+    <rect id="container" x="0" y="0" width="1088" height="106" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <text id="Home" x="320" y="40" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Home</text>
+      <g id="icon chevron-right" transform="translate(363.703 28) scale(0.583 0.583)" fill="none" stroke="rgba(87, 91, 95, 0.702)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m9 18 6-6-6-6" />
+      </g>
+      <text id="Settings" x="383.7" y="40" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Settings</text>
+      <g id="icon chevron-right 2" transform="translate(442.703 28) scale(0.583 0.583)" fill="none" stroke="rgba(87, 91, 95, 0.702)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m9 18 6-6-6-6" />
+      </g>
+      <text id="Billing" x="462.7" y="40" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Billing</text>
+      <text id="Home 2" x="320" y="76" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Home</text>
+      <g id="icon chevron-right 3" transform="translate(363.703 64) scale(0.583 0.583)" fill="none" stroke="rgba(87, 91, 95, 0.702)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m9 18 6-6-6-6" />
+      </g>
+      <text id="…" x="391.7" y="76" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" text-anchor="middle">…</text>
+      <g id="icon chevron-right 4" transform="translate(405.703 64) scale(0.583 0.583)" fill="none" stroke="rgba(87, 91, 95, 0.702)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m9 18 6-6-6-6" />
+      </g>
+      <text id="Headphones" x="425.7" y="76" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Headphones</text>
+      <g id="icon chevron-right 5" transform="translate(512.5 64) scale(0.583 0.583)" fill="none" stroke="rgba(87, 91, 95, 0.702)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m9 18 6-6-6-6" />
+      </g>
+      <text id="Aurora X2" x="532.5" y="76" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Aurora X2</text>
+  </g>
+  <text id="Pagination label" x="64" y="1274" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Pagination</text>
+  <text id="pagination id" x="64" y="1288" font-family="ui-monospace, monospace" font-size="12" fill="#737373">pagination</text>
+  <g id="Pagination" transform="translate(64, 1306)">
+    <rect id="container" x="0" y="0" width="1088" height="86" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <g id="icon chevron-left" transform="translate(394.297 35) scale(0.667 0.667)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m15 18-6-6 6-6" />
+      </g>
+      <text id="1" x="442.3" y="48" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">1</text>
+      <text id="…" x="468.3" y="48" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">…</text>
+      <text id="6" x="503.44" y="48" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">6</text>
+      <rect id="button" x="525.44" y="25" width="36" height="36" rx="12" fill="#00782e" />
+      <text id="7" x="543.44" y="48" fill="#fcfcfc" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">7</text>
+      <text id="8" x="583.44" y="48" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">8</text>
+      <text id="… 2" x="609.44" y="48" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="16">…</text>
+      <text id="24" x="645.14" y="48" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500" text-anchor="middle">24</text>
+      <g id="icon chevron-right" transform="translate(677.703 35) scale(0.667 0.667)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m9 18 6-6-6-6" />
+      </g>
+  </g>
+  <text id="Accordion label" x="64" y="1508" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#0a0a0a">Accordion</text>
+  <text id="accordion id" x="64" y="1522" font-family="ui-monospace, monospace" font-size="12" fill="#737373">accordion</text>
+  <g id="Accordion" transform="translate(64, 1540)">
+    <rect id="container" x="0" y="0" width="1088" height="254" rx="16" fill="#fdfcf8" stroke="rgba(220, 222, 225, 0.6)" stroke-width="1" />
+      <rect id="container 2" x="320" y="25" width="448" height="204" rx="16" fill="none" stroke="#dbdee1" stroke-width="1" />
+      <text id="How long does shipping take?" x="337" y="55" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">How long does shipping take?</text>
+      <g id="icon chevron-down" transform="translate(735 42) translate(8 8) matrix(-1 0 0 -1 0 0) translate(-8 -8) scale(0.667 0.667)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m6 9 6 6 6-6" />
+      </g>
+      <text id="Most orders leave the warehouse within a…" x="337" y="89" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">Most orders leave the warehouse within a day and arrive in three</text>
+      <text id="to five working days." x="337" y="109" fill="#575b60" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14">to five working days.</text>
+      <text id="Can I return an order?" x="337" y="160" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">Can I return an order?</text>
+      <g id="icon chevron-down 2" transform="translate(735 147) scale(0.667 0.667)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m6 9 6 6 6-6" />
+      </g>
+      <text id="What does the warranty cover?" x="337" y="209" fill="#080c0f" font-family="Geist, &quot;Geist Fallback&quot;" font-size="14" font-weight="500">What does the warranty cover?</text>
+      <g id="icon chevron-down 3" transform="translate(735 196) scale(0.667 0.667)" fill="none" stroke="#575b60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m6 9 6 6 6-6" />
+      </g>
+  </g>
+</svg>

@@ -156,9 +156,14 @@ export function PricingCredits({
               </span>
             ) : null}
 
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
-              {pack.credits}
-            </h3>
+            {pack.credits ? (
+              <h3
+                data-stress-ignore
+                className="break-words text-sm font-semibold uppercase tracking-wider text-muted-foreground"
+              >
+                {pack.credits}
+              </h3>
+            ) : null}
 
             {/* Wraps: a long price and a saving pill together are wider than
                 the card once the grid is three across. */}
@@ -173,10 +178,10 @@ export function PricingCredits({
               ) : null}
             </p>
 
-            <p className="mt-2 text-sm tabular-nums text-muted-foreground">{pack.unit}</p>
+            <p className="mt-2 break-words text-sm tabular-nums text-muted-foreground">{pack.unit}</p>
 
             {pack.note ? (
-              <p className="mt-4 flex-1 text-pretty text-sm leading-relaxed text-muted-foreground">
+              <p className="mt-4 flex-1 break-words text-pretty text-sm leading-relaxed text-muted-foreground">
                 {pack.note}
               </p>
             ) : (

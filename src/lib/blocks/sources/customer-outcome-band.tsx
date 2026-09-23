@@ -103,9 +103,9 @@ export function CustomerOutcomeBand({
         */}
         <dl className="mt-10 grid grid-cols-1 gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
           {metrics.map((metric) => (
-            <div key={metric.label} className="bg-card p-6">
-              <dt className="text-sm font-medium text-muted-foreground">{metric.label}</dt>
-              <dd className="mt-2 text-3xl font-semibold tabular-nums tracking-tight text-foreground">
+            <div key={metric.label} className="min-w-0 bg-card p-6">
+              <dt className="truncate text-sm font-medium text-muted-foreground">{metric.label}</dt>
+              <dd className="mt-2 break-words text-3xl font-semibold tabular-nums tracking-tight text-foreground">
                 {metric.value}
               </dd>
               {metric.detail ? (

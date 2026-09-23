@@ -137,10 +137,10 @@ export function UsageMeterPanel({
                     aria-valuemin={0}
                     aria-valuemax={100}
                     aria-label={`${quota.label} usage`}
-                    className="relative mt-2 h-2 overflow-hidden rounded-full bg-muted"
+                    className="relative mt-2 h-2 overflow-hidden rounded-full bg-muted border border-transparent"
                   >
                     <span
-                      className={`block h-full rounded-full transition-all ${tone}`}
+                      className={`block h-full rounded-full border border-transparent transition-all ${tone}`}
                       style={{ width: `${Math.min(100, fraction * 100)}%` }}
                     />
                   </div>

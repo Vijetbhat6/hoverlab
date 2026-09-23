@@ -125,10 +125,10 @@ export function BlogPostGrid({
           className="relative min-h-48 bg-gradient-to-br from-primary/25 via-primary/10 to-muted md:min-h-full"
         >
           <div className="absolute inset-x-8 bottom-0 top-10 rounded-t-xl border border-b-0 border-border/60 bg-background/80 p-4">
-            <div className="h-2 w-1/3 rounded bg-primary/40" />
-            <div className="mt-3 h-2 w-3/4 rounded bg-muted-foreground/25" />
-            <div className="mt-2 h-2 w-2/3 rounded bg-muted-foreground/25" />
-            <div className="mt-2 h-2 w-1/2 rounded bg-muted-foreground/15" />
+            <div className="h-2 w-1/3 rounded bg-primary/40 border border-transparent" />
+            <div className="mt-3 h-2 w-3/4 rounded bg-muted-foreground/25 border border-transparent" />
+            <div className="mt-2 h-2 w-2/3 rounded bg-muted-foreground/25 border border-transparent" />
+            <div className="mt-2 h-2 w-1/2 rounded bg-muted-foreground/15 border border-transparent" />
           </div>
         </div>
         <div className="flex flex-col p-6 sm:p-8">
@@ -138,7 +138,7 @@ export function BlogPostGrid({
           <h3 className="mt-4 text-balance text-2xl font-bold tracking-tight transition-colors group-hover:text-primary sm:text-3xl">
             {featured.title}
           </h3>
-          <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{featured.excerpt}</p>
+          <p className="mt-3 break-words text-sm leading-relaxed text-muted-foreground">{featured.excerpt}</p>
           <PostMeta post={featured} className="mt-auto pt-6" />
         </div>
       </a>
@@ -153,10 +153,10 @@ export function BlogPostGrid({
               <span className="w-fit rounded-full bg-muted px-2.5 py-0.5 text-xs font-semibold text-muted-foreground">
                 {post.category}
               </span>
-              <h3 className="mt-3 text-balance font-bold tracking-tight transition-colors group-hover:text-primary">
+              <h3 className="mt-3 break-words text-balance font-bold tracking-tight transition-colors group-hover:text-primary">
                 {post.title}
               </h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{post.excerpt}</p>
+              <p className="mt-2 break-words text-sm leading-relaxed text-muted-foreground">{post.excerpt}</p>
               <PostMeta post={post} className="mt-auto pt-4" />
             </a>
           </li>

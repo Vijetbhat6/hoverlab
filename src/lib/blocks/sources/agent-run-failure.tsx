@@ -192,7 +192,7 @@ export function AgentRunFailure({
                         className="h-3.5 w-3.5 text-primary motion-safe:animate-spin"
                       />
                     ) : (
-                      <span aria-hidden className={`h-2 w-2 rounded-full ${style.dot}`} />
+                      <span aria-hidden className={`h-2 w-2 rounded-full border border-transparent ${style.dot}`} />
                     )}
                   </span>
                   <div className="min-w-0 flex-1">
@@ -288,7 +288,7 @@ export function AgentRunFailure({
                   </button>
                 </div>
                 <pre className="mt-1 overflow-x-auto rounded-lg border border-border bg-background px-3 py-2 font-mono text-xs leading-relaxed text-foreground">
-                  {failed.rawError}
+                  <code>{failed.rawError}</code>
                 </pre>
               </div>
             ) : null}

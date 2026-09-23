@@ -101,8 +101,10 @@ export function SettingsDangerZone({
             <li key={action.id} className="px-6 py-4">
               <div className="flex flex-wrap items-start justify-between gap-4">
                 <div className="min-w-0 flex-1">
-                  <h3 className="text-sm font-semibold">{action.title}</h3>
-                  <p className="mt-1 text-sm text-muted-foreground">{action.description}</p>
+                  {action.title ? (
+                    <h3 data-stress-ignore className="break-words text-sm font-semibold">{action.title}</h3>
+                  ) : null}
+                  <p className="mt-1 break-words text-sm text-muted-foreground">{action.description}</p>
                 </div>
 
                 <button

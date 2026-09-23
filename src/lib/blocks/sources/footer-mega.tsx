@@ -196,10 +196,10 @@ export function FooterMega({
           {/* -- Link columns ------------------------------------------ */}
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-4 lg:col-span-8">
             {columns.map((column) => (
-              <nav key={column.heading} aria-labelledby={headingId(brand, tagline, column.heading)}>
+              <nav key={column.heading} className="min-w-0" aria-labelledby={headingId(brand, tagline, column.heading)}>
                 <h2
                   id={headingId(brand, tagline, column.heading)}
-                  className="text-xs font-semibold uppercase tracking-wider text-foreground"
+                  className="truncate text-xs font-semibold uppercase tracking-wider text-foreground"
                 >
                   {column.heading}
                 </h2>
@@ -208,11 +208,11 @@ export function FooterMega({
                     <li key={link.label}>
                       <a
                         href={link.href}
-                        className="inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                        className="inline-flex max-w-full items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                       >
-                        {link.label}
+                        <span className="min-w-0 truncate">{link.label}</span>
                         {link.badge ? (
-                          <span className="rounded-full bg-primary/15 px-1.5 py-0.5 text-[10px] font-semibold text-primary">
+                          <span className="shrink-0 rounded-full bg-primary/15 px-1.5 py-0.5 text-[10px] font-semibold text-primary">
                             {link.badge}
                           </span>
                         ) : null}
@@ -232,8 +232,8 @@ export function FooterMega({
             className="inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           >
             <span aria-hidden className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-500/60" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+              <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-500/60 border border-transparent" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500 border border-transparent" />
             </span>
             {statusLabel}
           </a>

@@ -131,15 +131,15 @@ export function FooterNewsletter({
     <footer className={`border-t border-border/60 bg-card/30 pt-10 ${className}`}>
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* -- Raised CTA band ----------------------------------------- */}
-        <div className="-mt-10 grid gap-6 rounded-2xl border border-border/60 bg-background/90 p-6 shadow-xl shadow-black/10 backdrop-blur sm:p-8 lg:grid-cols-2 lg:items-center">
-          <div>
+        <div className="-mt-10 grid grid-cols-1 gap-6 rounded-2xl border border-border/60 bg-background/90 p-6 shadow-xl shadow-black/10 backdrop-blur sm:p-8 lg:grid-cols-2 lg:items-center">
+          <div className="min-w-0">
             <h2 className="text-balance text-xl font-bold tracking-tight sm:text-2xl">
               {heading}
             </h2>
             <p className="mt-2 text-sm text-muted-foreground">{subheading}</p>
           </div>
 
-          <div className="lg:justify-self-end" aria-live="polite">
+          <div className="max-w-full lg:justify-self-end" aria-live="polite">
             {status === 'done' ? (
               <p className="inline-flex items-center gap-2 rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-4 py-3 text-sm font-medium text-emerald-600 dark:text-emerald-400">
                 <Check aria-hidden className="h-4 w-4" />
@@ -160,7 +160,7 @@ export function FooterNewsletter({
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder={placeholder}
                     disabled={status === 'pending'}
-                    className="h-11 rounded-xl border border-border/60 bg-card/60 px-4 text-sm placeholder:text-muted-foreground focus:border-primary/50 focus:outline-none focus:ring-2 focus:ring-ring/30 disabled:opacity-60 sm:w-64"
+                    className="h-11 min-w-0 rounded-xl border border-border/60 bg-card/60 px-4 text-sm placeholder:text-muted-foreground focus:border-primary/50 focus:outline-none focus:ring-2 focus:ring-ring/30 disabled:opacity-60 sm:w-[256px] sm:shrink"
                   />
                   <button
                     type="submit"
@@ -193,23 +193,23 @@ export function FooterNewsletter({
 
         {/* -- Links --------------------------------------------------- */}
         <div className="grid grid-cols-2 gap-8 py-12 sm:grid-cols-4">
-          <div className="col-span-2 sm:col-span-1">
-            <a href="#" className="inline-flex items-center gap-2.5">
+          <div className="col-span-2 min-w-0 sm:col-span-1">
+            <a href="#" className="flex min-w-0 items-center gap-2.5">
               <span
                 aria-hidden
-                className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-emerald-600 text-xs font-black text-primary-foreground"
+                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-emerald-600 text-xs font-black text-primary-foreground"
               >
                 {brand.slice(0, 1)}
               </span>
-              <span className="font-bold tracking-tight">{brand}</span>
+              <span className="min-w-0 truncate font-bold tracking-tight">{brand}</span>
             </a>
           </div>
 
           {columns.map((column) => (
-            <nav key={column.heading} aria-labelledby={headingId(column.heading)}>
+            <nav key={column.heading} className="min-w-0" aria-labelledby={headingId(column.heading)}>
               <h2
                 id={headingId(column.heading)}
-                className="text-xs font-semibold uppercase tracking-wider"
+                className="truncate text-xs font-semibold uppercase tracking-wider"
               >
                 {column.heading}
               </h2>
@@ -218,7 +218,7 @@ export function FooterNewsletter({
                   <li key={link.label}>
                     <a
                       href={link.href}
-                      className="text-sm text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                      className="block truncate text-sm text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                     >
                       {link.label}
                     </a>

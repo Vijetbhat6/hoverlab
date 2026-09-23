@@ -23,10 +23,16 @@
  *   Cmd+K   toggle (when closed, opens; when open, closes — standard behavior)
  *
  * Implementation notes:
- *   - Search is a tiny in-memory fuzzy matcher (subsequence + word-boundary
- *     bonus). The catalog is small enough to scan on every keystroke
- *     without a debounce. `/browse` deliberately ranks differently — see
- *     the note in `@/lib/browse`.
+ *   - Artifacts are ranked by the shared engine in `@/lib/search` — the same
+ *     one behind /library and /browse — so a typo ("buton", "glasmorphism")
+ *     lands on the same result in all three places. Actions, tools and
+ *     categories are a few dozen short labels, where a subsequence matcher
+ *     (subsequence + word-boundary bonus) is right: "btgr" should find
+ *     "Button Gradient". It also remains the last resort for an artifact
+ *     query the engine finds nothing for.
+ *   - The last six searches that led somewhere are remembered in this
+ *     browser (localStorage, try/catch throughout) and offered when the box
+ *     is empty, with one control to clear them.
  *   - The palette is mounted once per page (in the same spots the ShortcutsHelp
  *     button is mounted) so the global key listener is always live.
  *   - We deliberately DON'T use a portal library like cmdk because we already
@@ -62,11 +68,14 @@ import {
   Component,
   LayoutTemplate,
   Layers,
+  Clock,
   type LucideIcon,
 } from 'lucide-react'
 import { CATEGORIES, type EffectCategory } from '@/lib/effect-types'
 import { DESIGNER_TOOLS } from '@/lib/designer-tools'
-import type { BrowseHit } from '@/lib/browse'
+import type { BrowseHit, searchCatalog } from '@/lib/browse'
+import { matchedIndices as engineMatchedIndices } from '@/lib/search/engine'
+import { clearRecent, readRecent, rememberSearch } from '@/lib/search/recent'
 import { LEVEL_LABEL, type ArtifactLevel } from '@/lib/artifact-types'
 import { cn } from '@/lib/utils'
 
@@ -136,6 +145,7 @@ function fuzzyMatch(query: string, text: string): FuzzyResult | null {
  * were invisible here in the first place.
  */
 type ItemKind =
+  | 'recent'
   | 'action'
   | 'tool'
   | 'category'
@@ -172,7 +182,22 @@ interface BaseItem {
   keywords?: string
   /** Action to run when this item is selected. */
   run: () => void
+  /**
+   * Leave the palette open when this is chosen. A recent search puts its
+   * text back in the box; closing the dialog on it would make it a
+   * bookmark to nothing.
+   */
+  keepOpen?: boolean
 }
+
+/** Kinds that mean "I found what I was searching for" — worth remembering. */
+const ARTIFACT_KINDS: ReadonlySet<ItemKind> = new Set([
+  'template',
+  'page',
+  'block',
+  'primitive',
+  'effect',
+])
 
 interface ScoredItem {
   item: BaseItem
@@ -225,7 +250,14 @@ export function CommandPalette() {
    * keyboard at all.
    */
   const [catalog, setCatalog] = React.useState<BrowseHit[]>([])
+  // The ranking function arrives with the catalog, from the same chunk.
+  // Wrapped in an object because a function is not a valid state value to
+  // set directly — React would call it as an updater.
+  const [catalogSearch, setCatalogSearch] = React.useState<{ run: typeof searchCatalog } | null>(
+    null,
+  )
   const [loadingIndex, setLoadingIndex] = React.useState(false)
+  const [recent, setRecent] = React.useState<string[]>([])
   const requestedRef = React.useRef(false)
 
   React.useEffect(() => {
@@ -233,7 +265,10 @@ export function CommandPalette() {
     requestedRef.current = true
     setLoadingIndex(true)
     import('@/lib/browse')
-      .then((m) => setCatalog(m.BROWSE_INDEX))
+      .then((m) => {
+        setCatalog(m.BROWSE_INDEX)
+        setCatalogSearch({ run: m.searchCatalog })
+      })
       .catch(() => {
         // Leave the palette usable with actions + categories rather than
         // failing the whole dialog over a chunk that didn't load.
@@ -273,6 +308,9 @@ export function CommandPalette() {
     if (open) {
       setQuery('')
       setActiveIndex(0)
+      // Read on open, not during render: storage is a browser-only thing and
+      // reading it while rendering is how a server and a client disagree.
+      setRecent(readRecent())
       // Focus the input on the next tick so the dialog has time to mount.
       requestAnimationFrame(() => inputRef.current?.focus())
     }
@@ -444,18 +482,38 @@ export function CommandPalette() {
         label: a.name,
         hint: `${a.category} · ${a.description}`,
         icon: LEVEL_ICON[a.level],
-        // The level's own name is a keyword, so "footer block" finds the
-        // footer blocks rather than every effect mentioning a footer.
-        keywords: `${a.category} ${a.id} ${a.tags.join(' ')} ${LEVEL_LABEL[a.level].one}`,
+        // No `keywords`: the engine ranks these from the catalog record
+        // itself (name, tags, category, description and the level's own name,
+        // so "footer block" still finds the footer blocks), and the position
+        // of an item here is its position in the catalog.
         run: () => router.push(a.href),
       })),
     [router, catalog],
   )
 
+  /* ----- Recent searches ----- */
+  const recentItems: BaseItem[] = React.useMemo(
+    () =>
+      recent.map((text) => ({
+        id: `recent:${text}`,
+        kind: 'recent' as const,
+        label: text,
+        icon: Clock,
+        keepOpen: true,
+        run: () => {
+          setQuery(text)
+          setActiveIndex(0)
+          requestAnimationFrame(() => inputRef.current?.focus())
+        },
+      })),
+    [recent],
+  )
+
   /* ----- Search ----- */
-  const allItems = React.useMemo(
-    () => [...actions, ...toolItems, ...categoryItems, ...artifactItems],
-    [actions, toolItems, categoryItems, artifactItems],
+  // Only the small lists go through the subsequence matcher.
+  const smallItems = React.useMemo(
+    () => [...actions, ...toolItems, ...categoryItems],
+    [actions, toolItems, categoryItems],
   )
 
   const results = React.useMemo<ScoredItem[]>(() => {
@@ -473,6 +531,7 @@ export function CommandPalette() {
             .map(({ item }) => ({ item, score: 1, matchedIndices: [] as number[] })),
       )
       return [
+        ...recentItems.map((item) => ({ item, score: 3, matchedIndices: [] as number[] })),
         ...actions.map((item) => ({ item, score: 2, matchedIndices: [] as number[] })),
         // A few tools so the section is discoverable before anyone types.
         ...toolItems
@@ -488,7 +547,7 @@ export function CommandPalette() {
     }
 
     const scored: ScoredItem[] = []
-    for (const item of allItems) {
+    for (const item of smallItems) {
       const haystacks = [item.label, item.hint ?? '', item.keywords ?? '']
       let best: FuzzyResult | null = null
       for (const h of haystacks) {
@@ -499,6 +558,37 @@ export function CommandPalette() {
         scored.push({ item, score: best.score, matchedIndices: best.matchedIndices })
       }
     }
+
+    // Artifacts: the shared engine, best first. Its scores are on a different
+    // scale from the fuzzy matcher, which does not matter: results are
+    // grouped by kind, so a score is only ever compared within its own list.
+    let artifactHits = 0
+    let effectsKept = 0
+    if (catalogSearch) {
+      for (const hit of catalogSearch.run(q)) {
+        const item = artifactItems[hit.index]
+        if (!item) continue
+        // Hits arrive best first, so the first 40 effects are the best 40 —
+        // and a word like "button" matches hundreds, none of which need a
+        // highlight computed for a row that will never be shown.
+        if (item.kind === 'effect' && effectsKept++ >= 40) continue
+        artifactHits++
+        scored.push({
+          item,
+          score: hit.score,
+          matchedIndices: engineMatchedIndices(item.label, q),
+        })
+      }
+    }
+    // Last resort: a query the engine cannot place at all ("btgr") still gets
+    // the old subsequence match on names, so an abbreviation keeps working.
+    if (catalogSearch && artifactHits === 0 && q.length >= 3) {
+      for (const item of artifactItems) {
+        const r = fuzzyMatch(q, item.label)
+        if (r) scored.push({ item, score: r.score, matchedIndices: r.matchedIndices })
+      }
+    }
+    // Stable, so the ranked order survives among equal scores.
     scored.sort((a, b) => b.score - a.score)
 
     /**
@@ -513,7 +603,7 @@ export function CommandPalette() {
     const upper = scored.filter((s) => s.item.kind !== 'effect')
     const effectHits = scored.filter((s) => s.item.kind === 'effect').slice(0, 40)
     return [...upper, ...effectHits]
-  }, [query, allItems, actions, toolItems, categoryItems, artifactItems, catalog])
+  }, [query, smallItems, actions, toolItems, categoryItems, artifactItems, catalog, catalogSearch, recentItems])
 
   // Clamp activeIndex when results change.
   React.useEffect(() => {
@@ -534,6 +624,15 @@ export function CommandPalette() {
   function activate(index: number) {
     const r = flatResults[index]
     if (!r) return
+    if (r.item.keepOpen) {
+      r.item.run()
+      return
+    }
+    // Remember what was typed once it led somewhere. Only artifact picks
+    // count: choosing "Toggle theme" says nothing about what was searched for.
+    if (ARTIFACT_KINDS.has(r.item.kind) && query.trim().length >= 2) {
+      setRecent(rememberSearch(query))
+    }
     setOpen(false)
     // Defer the action so the dialog has time to close (cleaner visual).
     setTimeout(() => r.item.run(), 0)
@@ -547,6 +646,8 @@ export function CommandPalette() {
       e.preventDefault()
       setActiveIndex((i) => (i - 1 + flatResults.length) % Math.max(1, flatResults.length))
     } else if (e.key === 'Enter') {
+      // Enter on the Clear button clears; it must not also open a result.
+      if ((e.target as HTMLElement).closest('[data-cp-clear]')) return
       e.preventDefault()
       activate(activeIndex)
     }
@@ -560,6 +661,7 @@ export function CommandPalette() {
    */
   const { groups, flatResults } = React.useMemo(() => {
     const g: Record<ItemKind, ScoredItem[]> = {
+      recent: [],
       action: [],
       tool: [],
       category: [],
@@ -576,12 +678,16 @@ export function CommandPalette() {
     // the hand-authored tiers are more often what a section-shaped word
     // means, and they are the ones that lose a flat ranking.
     const flat = [
+      ...g.recent,
       ...g.action,
       ...g.tool,
       ...g.category,
       ...g.template,
       ...g.page,
       ...g.block,
+      // Was missing: primitives were rendered as a section but left out of
+      // this list, so every row below them activated the wrong result.
+      ...g.primitive,
       ...g.effect,
     ]
     return { groups: g, flatResults: flat }
@@ -656,6 +762,41 @@ export function CommandPalette() {
             </div>
           ) : (
             <>
+              {groups.recent.length > 0 ? (
+                <Group
+                  label="Recent searches"
+                  action={
+                    <button
+                      type="button"
+                      data-cp-clear
+                      onClick={() => {
+                        clearRecent()
+                        setRecent([])
+                        inputRef.current?.focus()
+                      }}
+                      className="rounded px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    >
+                      Clear
+                      <span className="sr-only"> recent searches</span>
+                    </button>
+                  }
+                >
+                  {groups.recent.map((r) => {
+                    const idx = runningIndex++
+                    return (
+                      <PaletteRow
+                        key={r.item.id}
+                        item={r.item}
+                        index={idx}
+                        activeIndex={activeIndex}
+                        onActivate={activate}
+                        onHover={setActiveIndex}
+                      />
+                    )
+                  })}
+                </Group>
+              ) : null}
+
               {groups.action.length > 0 ? (
                 <Group label="Actions">
                   {groups.action.map((r) => {
@@ -735,11 +876,7 @@ export function CommandPalette() {
                           activeIndex={activeIndex}
                           onActivate={activate}
                           onHover={setActiveIndex}
-                          matchedIndices={
-                            query.trim()
-                              ? fuzzyMatch(query.trim(), r.item.label)?.matchedIndices ?? []
-                              : []
-                          }
+                          matchedIndices={r.matchedIndices}
                         />
                       )
                     })}
@@ -786,11 +923,21 @@ export function CommandPalette() {
  *  Sub-components
  * ========================================================== */
 
-function Group({ label, children }: { label: string; children: React.ReactNode }) {
+function Group({
+  label,
+  action,
+  children,
+}: {
+  label: string
+  /** A control at the far end of the heading, e.g. Clear. */
+  action?: React.ReactNode
+  children: React.ReactNode
+}) {
   return (
     <div className="px-2">
-      <div className="px-2 pb-1 pt-2 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
-        {label}
+      <div className="flex items-center justify-between px-2 pb-1 pt-2 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+        <span>{label}</span>
+        {action}
       </div>
       {children}
     </div>

@@ -140,9 +140,14 @@ export function SearchResultsPanel({
       <div className="mt-6 space-y-6">
         {groups.map((group) => (
           <div key={group.section}>
-            <h3 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-              {group.section}
-            </h3>
+            {group.section ? (
+              <h3
+                data-stress-ignore
+                className="text-xs font-semibold uppercase tracking-wide text-muted-foreground"
+              >
+                {group.section}
+              </h3>
+            ) : null}
             <ul className="mt-2 divide-y divide-border/60 overflow-hidden rounded-xl border border-border/60 bg-card/60">
               {group.results.map((result) => (
                 <li key={result.title}>

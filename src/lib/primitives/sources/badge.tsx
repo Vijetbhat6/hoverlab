@@ -39,7 +39,7 @@ const TONES: Record<BadgeTone, Record<BadgeShape, string>> = {
     outline: 'border border-amber-500/40 text-amber-700 dark:text-amber-400',
   },
   danger: {
-    solid: 'bg-destructive text-white',
+    solid: 'bg-destructive text-destructive-foreground',
     soft: 'bg-destructive/10 text-destructive',
     outline: 'border border-destructive/40 text-destructive',
   },

@@ -161,7 +161,7 @@ export function ProductFilterSidebar({
                         onChange={() => toggle(facet.id, option.value)}
                         className="sr-only"
                       />
-                      <span aria-hidden className={`h-3.5 w-3.5 rounded-full ring-1 ring-border ${option.swatch}`} />
+                      <span aria-hidden className={`h-3.5 w-3.5 rounded-full border border-transparent ring-1 ring-border ${option.swatch}`} />
                       {/* The name, not just the colour. */}
                       {option.label}
                     </label>

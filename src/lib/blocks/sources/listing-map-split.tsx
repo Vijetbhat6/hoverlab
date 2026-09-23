@@ -239,7 +239,7 @@ function ListingCard({ listing }: { listing: MapListing }) {
             request, a licence or a layout shift. */}
         <div
           aria-hidden
-          className="hidden h-24 w-32 shrink-0 rounded-lg bg-gradient-to-br from-muted to-muted/40 ring-1 ring-inset ring-border/50 sm:block"
+          className="hidden h-[96px] w-[128px] shrink-0 rounded-lg bg-gradient-to-br from-muted to-muted/40 ring-1 ring-inset ring-border/50 sm:block"
         />
 
         <div className="min-w-0 flex-1">
@@ -258,9 +258,9 @@ function ListingCard({ listing }: { listing: MapListing }) {
             {listing.title}
           </p>
 
-          <p className="mt-0.5 inline-flex items-center gap-1 text-xs text-muted-foreground">
+          <p className="mt-0.5 inline-flex min-w-0 items-center gap-1 text-xs text-muted-foreground">
             <MapPin aria-hidden className="h-3 w-3 shrink-0" />
-            <span className="truncate">{listing.address}</span>
+            <span className="min-w-0 truncate">{listing.address}</span>
           </p>
 
           <p className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted-foreground">

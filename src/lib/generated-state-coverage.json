@@ -1,0 +1,217 @@
+{
+  "generatedAt": "2026-09-22",
+  "states": [
+    "hover",
+    "focus",
+    "active",
+    "disabled",
+    "loading",
+    "error",
+    "empty",
+    "long-text"
+  ],
+  "primitives": 20,
+  "coverage": {
+    "badge": {
+      "hover": "n/a",
+      "focus": "n/a",
+      "active": "n/a",
+      "disabled": "n/a",
+      "loading": "n/a",
+      "error": "n/a",
+      "empty": "styled",
+      "long-text": "styled"
+    },
+    "button": {
+      "hover": "styled",
+      "focus": "styled",
+      "active": "not-styled",
+      "disabled": "styled",
+      "loading": "not-styled",
+      "error": "n/a",
+      "empty": "styled",
+      "long-text": "styled"
+    },
+    "button-group": {
+      "hover": "styled",
+      "focus": "styled",
+      "active": "not-styled",
+      "disabled": "styled",
+      "loading": "not-styled",
+      "error": "n/a",
+      "empty": "styled",
+      "long-text": "styled"
+    },
+    "combobox": {
+      "hover": "not-styled",
+      "focus": "styled",
+      "active": "not-styled",
+      "disabled": "not-styled",
+      "loading": "not-styled",
+      "error": "not-styled",
+      "empty": "styled",
+      "long-text": "styled"
+    },
+    "emoji-selector": {
+      "hover": "styled",
+      "focus": "styled",
+      "active": "not-styled",
+      "disabled": "not-styled",
+      "loading": "not-styled",
+      "error": "n/a",
+      "empty": "styled",
+      "long-text": "styled"
+    },
+    "field": {
+      "hover": "not-styled",
+      "focus": "styled",
+      "active": "not-styled",
+      "disabled": "not-styled",
+      "loading": "not-styled",
+      "error": "not-styled",
+      "empty": "styled",
+      "long-text": "styled"
+    },
+    "input-group": {
+      "hover": "not-styled",
+      "focus": "styled",
+      "active": "not-styled",
+      "disabled": "not-styled",
+      "loading": "not-styled",
+      "error": "not-styled",
+      "empty": "styled",
+      "long-text": "not-styled"
+    },
+    "kbd": {
+      "hover": "n/a",
+      "focus": "n/a",
+      "active": "n/a",
+      "disabled": "n/a",
+      "loading": "n/a",
+      "error": "n/a",
+      "empty": "styled",
+      "long-text": "styled"
+    },
+    "progress-steps": {
+      "hover": "n/a",
+      "focus": "n/a",
+      "active": "n/a",
+      "disabled": "n/a",
+      "loading": "n/a",
+      "error": "n/a",
+      "empty": "styled",
+      "long-text": "not-styled"
+    },
+    "radio-card-group": {
+      "hover": "not-styled",
+      "focus": "styled",
+      "active": "not-styled",
+      "disabled": "styled",
+      "loading": "not-styled",
+      "error": "not-styled",
+      "empty": "styled",
+      "long-text": "not-styled"
+    },
+    "range-slider": {
+      "hover": "not-styled",
+      "focus": "styled",
+      "active": "not-styled",
+      "disabled": "not-styled",
+      "loading": "not-styled",
+      "error": "not-styled",
+      "empty": "styled",
+      "long-text": "styled"
+    },
+    "rating": {
+      "hover": "not-styled",
+      "focus": "styled",
+      "active": "not-styled",
+      "disabled": "not-styled",
+      "loading": "not-styled",
+      "error": "not-styled",
+      "empty": "styled",
+      "long-text": "styled"
+    },
+    "segmented-control": {
+      "hover": "styled",
+      "focus": "styled",
+      "active": "not-styled",
+      "disabled": "styled",
+      "loading": "not-styled",
+      "error": "not-styled",
+      "empty": "styled",
+      "long-text": "styled"
+    },
+    "skeleton": {
+      "hover": "n/a",
+      "focus": "n/a",
+      "active": "n/a",
+      "disabled": "n/a",
+      "loading": "n/a",
+      "error": "n/a",
+      "empty": "n/a",
+      "long-text": "n/a"
+    },
+    "social-buttons": {
+      "hover": "styled",
+      "focus": "styled",
+      "active": "not-styled",
+      "disabled": "styled",
+      "loading": "not-styled",
+      "error": "n/a",
+      "empty": "styled",
+      "long-text": "styled"
+    },
+    "status-badge": {
+      "hover": "n/a",
+      "focus": "n/a",
+      "active": "n/a",
+      "disabled": "n/a",
+      "loading": "n/a",
+      "error": "n/a",
+      "empty": "styled",
+      "long-text": "styled"
+    },
+    "stepper": {
+      "hover": "styled",
+      "focus": "styled",
+      "active": "not-styled",
+      "disabled": "styled",
+      "loading": "not-styled",
+      "error": "not-styled",
+      "empty": "styled",
+      "long-text": "styled"
+    },
+    "switch": {
+      "hover": "not-styled",
+      "focus": "styled",
+      "active": "not-styled",
+      "disabled": "not-styled",
+      "loading": "not-styled",
+      "error": "not-styled",
+      "empty": "styled",
+      "long-text": "styled"
+    },
+    "tag-chip": {
+      "hover": "styled",
+      "focus": "styled",
+      "active": "not-styled",
+      "disabled": "not-styled",
+      "loading": "not-styled",
+      "error": "not-styled",
+      "empty": "styled",
+      "long-text": "styled"
+    },
+    "verification-code-input": {
+      "hover": "not-styled",
+      "focus": "styled",
+      "active": "not-styled",
+      "disabled": "styled",
+      "loading": "not-styled",
+      "error": "not-styled",
+      "empty": "styled",
+      "long-text": "styled"
+    }
+  },
+  "focusDefects": {}
+}

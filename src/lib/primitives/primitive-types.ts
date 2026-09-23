@@ -53,6 +53,18 @@ export type PrimitiveCategory =
   | 'Status & Labels'
   /** Progress through something that has steps. */
   | 'Navigation & Steps'
+  /**
+   * The things that appear over or beside the page and must be dismissed:
+   * dialogs, menus, tooltips and inline alerts.
+   *
+   * Its own group because every one of them shares the same hard problem and
+   * none of the other groups has it: focus. Where it goes when the thing
+   * opens, where it comes back to when it closes, and what Escape does. A
+   * menu that drops focus on the document body when it closes is the bug this
+   * category exists to keep out of a project, and it is invisible to anyone
+   * who uses a mouse.
+   */
+  | 'Overlays & Feedback'
   /** People, and the ways they are drawn. */
   | 'Identity'
   /** Colour, image and media, where the control has to show its value. */
@@ -106,6 +118,7 @@ export const PRIMITIVE_CATEGORIES: PrimitiveCategory[] = [
   'Selection',
   'Status & Labels',
   'Navigation & Steps',
+  'Overlays & Feedback',
   'Identity',
   'Pickers & Media',
   'Date & Time',
